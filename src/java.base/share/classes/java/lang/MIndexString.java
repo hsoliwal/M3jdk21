@@ -97,7 +97,7 @@ final class MIndexString {
             totalLength += partLength;
             resultCoder |= part.coder();
 
-            MIndexString storage = part.m3Storage();
+            MIndexString storage = part.mindex();
             int additional = storage == null ? 1 : storage.segments.length;
             if (segmentCount > MAX_SEGMENTS - additional) {
                 return null;
@@ -119,7 +119,7 @@ final class MIndexString {
             if (part.isEmpty()) {
                 continue;
             }
-            MIndexString storage = part.m3Storage();
+            MIndexString storage = part.mindex();
             if (storage == null) {
                 resultSegments[segment] = part;
                 resultOffsets[segment] = 0;
@@ -149,7 +149,7 @@ final class MIndexString {
         if (sliceLength == 0) {
             return null;
         }
-        MIndexString storage = source.m3Storage();
+        MIndexString storage = source.mindex();
         if (storage != null) {
             return storage.slice(beginIndex, endIndex);
         }
