@@ -53,7 +53,19 @@
     },
     "src/java.base/share/classes/java/lang/StringConcatHelper.java": {
       "before_git_blob": "139181af0963efe5caaa25a03960d30e14b65c41",
-      "after_git_blob": "9908fe686c420b9995f3e23234c657e33410b883"
+      "after_git_blob": "f4fd2616fd82af0cd1ebd4105231986432986ff1"
+    },
+    "src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java": {
+      "before_git_blob": "babc1940e78358082bd2231f5516d3265d3145e2",
+      "after_git_blob": "072f08aeabcc5873cb13104467a1dcfed5b44d86"
+    },
+    "src/java.base/share/classes/java/lang/System.java": {
+      "before_git_blob": "9d9dbf886e6b3fcc61ad5371c662b15a8be52193",
+      "after_git_blob": "914ed37f25d975be7f9b814d3285ce2b29c1b3b6"
+    },
+    "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java": {
+      "before_git_blob": "6fa79baccb98d1949c72adf9731c60eee102ad3d",
+      "after_git_blob": "e3d41cb655eb8067a92765b4bfdbdf5a5e39476d"
     }
   }
 }
