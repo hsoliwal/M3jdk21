@@ -3609,8 +3609,7 @@ public final class String
         // A singleton with no affixes already owns immutable contiguous backing.
         // Preserve a fresh result object and its default hash/dedup state.
         if (size == 1 && prefix.isEmpty() && suffix.isEmpty()) {
-            String element = elements[0];
-            return new String(element.value, element.coder());
+            return new String(elements[0]);
         }
         int icoder = prefix.coder() | suffix.coder();
         long len = (long) prefix.length() + suffix.length();
@@ -3627,6 +3626,24 @@ public final class String
             icoder |= el.coder();
         }
         byte coder = (byte) icoder;
+        if (M3_JOINED_STRINGS) {
+            int pieceCount = size == 0 ? 2 : size * 2 + 1;
+            String[] pieces = new String[pieceCount];
+            int piece = 0;
+            pieces[piece++] = prefix;
+            if (size > 0) {
+                pieces[piece++] = elements[0];
+                for (int i = 1; i < size; i++) {
+                    pieces[piece++] = delimiter;
+                    pieces[piece++] = elements[i];
+                }
+            }
+            pieces[piece] = suffix;
+            M3StringStorage storage = M3StringStorage.join(pieces);
+            if (storage != null) {
+                return new String(storage);
+            }
+        }
         // long len overflow check, char -> byte length, int len overflow check
         if (len < 0L || (len <<= coder) != (int) len) {
             throw new OutOfMemoryError("Requested string length exceeds VM limit");
