@@ -54,7 +54,7 @@ class java_lang_Object : AllStatic {
 class java_lang_String : AllStatic {
  private:
   static int _value_offset;
-  static int _m3Storage_offset;
+  static int _mindex_offset;
   static int _hash_offset;
   static int _hashIsZero_offset;
   static int _coder_offset;
@@ -104,7 +104,7 @@ class java_lang_String : AllStatic {
   static void set_m3_joined_strings(bool value);
 
   static int value_offset() { CHECK_INIT(_value_offset); }
-  static int m3_storage_offset() { CHECK_INIT(_m3Storage_offset); }
+  static int m3_storage_offset() { CHECK_INIT(_mindex_offset); }
   static int coder_offset() { CHECK_INIT(_coder_offset); }
 
   static inline void set_value_raw(oop string, typeArrayOop buffer);
@@ -205,11 +205,11 @@ class java_lang_String : AllStatic {
 };
 
 /**
- * VM access to java.lang.M3StringStorage.  The Java object owns the GC-visible
+ * VM access to java.lang.MIndexString.  The Java object owns the GC-visible
  * segment references; HotSpot reads the immutable coordinate arrays directly
  * for JNI/StringTable/debug paths that cannot assume contiguous String.value.
  */
-class java_lang_M3StringStorage : AllStatic {
+class java_lang_MIndexString : AllStatic {
  private:
   static int _segments_offset;
   static int _offsets_offset;
