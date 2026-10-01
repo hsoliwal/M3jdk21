@@ -3042,8 +3042,9 @@ public final class String
      */
     public String replace(char oldChar, char newChar) {
         if (oldChar != newChar) {
-            String ret = isLatin1() ? StringLatin1.replace(value, oldChar, newChar)
-                                    : StringUTF16.replace(value, oldChar, newChar);
+            byte[] currentValue = value();
+            String ret = isLatin1() ? StringLatin1.replace(currentValue, oldChar, newChar)
+                                    : StringUTF16.replace(currentValue, oldChar, newChar);
             if (ret != null) {
                 return ret;
             }
@@ -3209,10 +3210,10 @@ public final class String
             boolean trgtIsLatin1 = trgtStr.isLatin1();
             boolean replIsLatin1 = replStr.isLatin1();
             String ret = (thisIsLatin1 && trgtIsLatin1 && replIsLatin1)
-                    ? StringLatin1.replace(value, thisLen,
+                    ? StringLatin1.replace(value(), thisLen,
                                            trgtStr.value(), trgtLen,
                                            replStr.value(), replLen)
-                    : StringUTF16.replace(value, thisLen, thisIsLatin1,
+                    : StringUTF16.replace(value(), thisLen, thisIsLatin1,
                                           trgtStr.value(), trgtLen, trgtIsLatin1,
                                           replStr.value(), replLen, replIsLatin1);
             if (ret != null) {
