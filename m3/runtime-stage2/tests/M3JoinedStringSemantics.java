@@ -45,6 +45,16 @@ public class M3JoinedStringSemantics {
         String repeated = new String(new char[] {'q', 'r'}).repeat(8);
         eq("qrqrqrqrqrqrqrqr", repeated, "repeat");
 
+        Object nullToString = new Object() {
+            @Override public String toString() { return null; }
+        };
+        int number = 42;
+        String plus = high + low + ":" + number + ":" + nullToString;
+        eq("x😀y:42:null", plus, "invokedynamic + contents");
+        if (enabled) {
+            check(STORAGE.get(plus) != null, "ordinary + should use segmented backing");
+        }
+
         String copied = new String(seam);
         check(copied != seam, "copy identity");
         eq(seam, copied, "copy contents");
