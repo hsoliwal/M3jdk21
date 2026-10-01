@@ -1,0 +1,34 @@
+# Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+name: M3 foundation contracts
+on:
+  pull_request:
+    paths: ['m3/**', '.github/workflows/m3-foundation.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  foundation:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Prepare isolated pinned compiler
+        shell: bash
+        run: |
+          curl --fail --location --retry 3 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21%2B35/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz' -o "$RUNNER_TEMP/jdk21.tar.gz"
+          printf '%s  %s\n' '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6' "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -
+          tar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"
+          echo "M3_JDK=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
+      - name: Verify deterministic source-bound recipe
+        run: |
+          python3 m3/recipes/apply.py --check
+          python3 m3/recipes/test_recipe.py
+      - name: Build and exercise immutable foundation
+        run: ./m3/build.sh
+      - name: Compare pinned Synexia content and range contract
+        run: python3 m3/compatibility/check-synexia.py
+      - name: Verify two-process read-only image mapping
+        run: python3 m3/verify-shared-mapping.py
