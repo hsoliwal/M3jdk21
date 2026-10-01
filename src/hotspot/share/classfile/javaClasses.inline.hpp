@@ -163,6 +163,18 @@ bool java_lang_String::is_instance(oop obj) {
 
 // java.lang.MIndexString accessors
 
+jbyte java_lang_MIndexString::storage_kind(oop storage) {
+  return storage->byte_field(_storageKind_offset);
+}
+
+typeArrayOop java_lang_MIndexString::local_value(oop storage) {
+  return (typeArrayOop)storage->obj_field(_localValue_offset);
+}
+
+jlong java_lang_MIndexString::mapped_address(oop storage) {
+  return storage->long_field(_mappedAddress_offset);
+}
+
 objArrayOop java_lang_MIndexString::segments(oop storage) {
   return (objArrayOop)storage->obj_field(_segments_offset);
 }
@@ -183,33 +195,58 @@ jbyte java_lang_MIndexString::coder(oop storage) {
   return storage->byte_field(_coder_offset);
 }
 
+jint java_lang_MIndexString::java_hash(oop storage) {
+  return storage->int_field(_javaHash_offset);
+}
+
 jchar java_lang_MIndexString::char_at(oop storage, int index) {
   const int storage_length = length(storage);
   assert(index >= 0 && index < storage_length, "String index out of bounds");
 
-  objArrayOop segment_array = segments(storage);
-  typeArrayOop offset_array = offsets(storage);
-  typeArrayOop end_array = ends(storage);
-
-  int low = 0;
-  int high = end_array->length() - 1;
-  const int key = index + 1;
-  while (low <= high) {
-    const int mid = (low + high) >> 1;
-    const int segment_end = end_array->int_at(mid);
-    if (segment_end < key) {
-      low = mid + 1;
-      continue;
+  const jbyte kind = storage_kind(storage);
+  if (kind == LOCAL) {
+    typeArrayOop value = local_value(storage);
+    if (coder(storage) == java_lang_String::CODER_LATIN1) {
+      return ((jchar)value->byte_at(index)) & 0xff;
     }
-    if (mid > 0 && end_array->int_at(mid - 1) >= key) {
-      high = mid - 1;
-      continue;
-    }
-    const int previous = mid == 0 ? 0 : end_array->int_at(mid - 1);
-    oop leaf = segment_array->obj_at(mid);
-    const int leaf_index = offset_array->int_at(mid) + index - previous;
-    return java_lang_String::char_at(leaf, leaf_index);
+    return value->char_at(index);
   }
+
+  if (kind == LEXICON) {
+    const jlong address = mapped_address(storage);
+    assert(address != 0, "mapped MIndexString atom must have an address");
+    const uint8_t* bytes = reinterpret_cast<const uint8_t*>((uintptr_t)address);
+    const size_t at = (size_t)index << 1;
+    return (jchar)(((uint16_t)bytes[at]) | ((uint16_t)bytes[at + 1] << 8));
+  }
+
+  if (kind == JOINED) {
+    objArrayOop segment_array = segments(storage);
+    typeArrayOop offset_array = offsets(storage);
+    typeArrayOop end_array = ends(storage);
+
+    int low = 0;
+    int high = end_array->length() - 1;
+    const int key = index + 1;
+    while (low <= high) {
+      const int mid = (low + high) >> 1;
+      const int segment_end = end_array->int_at(mid);
+      if (segment_end < key) {
+        low = mid + 1;
+        continue;
+      }
+      if (mid > 0 && end_array->int_at(mid - 1) >= key) {
+        high = mid - 1;
+        continue;
+      }
+      const int previous = mid == 0 ? 0 : end_array->int_at(mid - 1);
+      oop atom = segment_array->obj_at(mid);
+      const int atom_index = offset_array->int_at(mid) + index - previous;
+      return java_lang_MIndexString::char_at(atom, atom_index);
+    }
+    ShouldNotReachHere();
+  }
+
   ShouldNotReachHere();
   return 0;
 }
