@@ -421,6 +421,12 @@ public interface JavaLangAccess {
      */
     long stringConcatMix(long lengthCoder, String constant);
 
+    /**
+     * Returns true when ordinary String concatenation should preserve M3
+     * segmented storage rather than eagerly materializing one byte array.
+     */
+    boolean stringConcatUsesM3Storage();
+
    /**
     * Get the coder for the supplied character.
     */
