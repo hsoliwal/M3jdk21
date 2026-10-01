@@ -1604,6 +1604,17 @@ public final class String
      * @since      1.5
      */
     public int codePointAt(int index) {
+        if (m3Storage != null) {
+            checkIndex(index, length());
+            char first = charAt(index);
+            if (Character.isHighSurrogate(first) && index + 1 < length()) {
+                char second = charAt(index + 1);
+                if (Character.isLowSurrogate(second)) {
+                    return Character.toCodePoint(first, second);
+                }
+            }
+            return first;
+        }
         if (isLatin1()) {
             checkIndex(index, value.length);
             return value[index] & 0xff;
@@ -1638,6 +1649,16 @@ public final class String
     public int codePointBefore(int index) {
         int i = index - 1;
         checkIndex(i, length());
+        if (m3Storage != null) {
+            char second = charAt(i);
+            if (Character.isLowSurrogate(second) && i > 0) {
+                char first = charAt(i - 1);
+                if (Character.isHighSurrogate(first)) {
+                    return Character.toCodePoint(first, second);
+                }
+            }
+            return second;
+        }
         if (isLatin1()) {
             return (value[i] & 0xff);
         }
@@ -1667,6 +1688,17 @@ public final class String
      */
     public int codePointCount(int beginIndex, int endIndex) {
         Objects.checkFromToIndex(beginIndex, endIndex, length());
+        if (m3Storage != null) {
+            int count = 0;
+            for (int index = beginIndex; index < endIndex; count++) {
+                char first = charAt(index++);
+                if (Character.isHighSurrogate(first) && index < endIndex
+                        && Character.isLowSurrogate(charAt(index))) {
+                    index++;
+                }
+            }
+            return count;
+        }
         if (isLatin1()) {
             return endIndex - beginIndex;
         }
@@ -1788,7 +1820,11 @@ public final class String
         checkBoundsBeginEnd(srcBegin, srcEnd, length());
         Objects.requireNonNull(dst);
         checkBoundsOffCount(dstBegin, srcEnd - srcBegin, dst.length);
-        if (isLatin1()) {
+        if (m3Storage != null) {
+            for (int src = srcBegin, dstIndex = dstBegin; src < srcEnd; src++, dstIndex++) {
+                dst[dstIndex] = (byte) charAt(src);
+            }
+        } else if (isLatin1()) {
             StringLatin1.getBytes(value, srcBegin, srcEnd, dst, dstBegin);
         } else {
             StringUTF16.getBytes(value, srcBegin, srcEnd, dst, dstBegin);
@@ -1817,7 +1853,7 @@ public final class String
      */
     public byte[] getBytes(String charsetName)
             throws UnsupportedEncodingException {
-        return encode(lookupCharset(charsetName), coder(), value);
+        return encode(lookupCharset(charsetName), coder(), value());
     }
 
     /**
@@ -1840,7 +1876,7 @@ public final class String
      */
     public byte[] getBytes(Charset charset) {
         if (charset == null) throw new NullPointerException();
-        return encode(charset, coder(), value);
+        return encode(charset, coder(), value());
      }
 
     /**
@@ -1858,7 +1894,7 @@ public final class String
      * @since      1.1
      */
     public byte[] getBytes() {
-        return encode(Charset.defaultCharset(), coder(), value);
+        return encode(Charset.defaultCharset(), coder(), value());
     }
 
     /**
