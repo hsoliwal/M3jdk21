@@ -5006,7 +5006,7 @@ public final class String
                 && M3_JOINED_STRINGS
                 && MIndexString.ready()
                 && value.length != 0) {
-            storage = MIndexString.admit(value, coder());
+            storage = MIndexString.admit(value, rawCoder());
             mindex = storage;
         }
         return storage;
@@ -5028,8 +5028,13 @@ public final class String
         return storage == null ? null : new String(storage);
     }
 
-    byte coder() {
+    private byte rawCoder() {
         return COMPACT_STRINGS ? coder : UTF16;
+    }
+
+    byte coder() {
+        MIndexString storage = mindex;
+        return storage == null ? rawCoder() : storage.coder();
     }
 
     byte[] value() {
@@ -5038,7 +5043,7 @@ public final class String
     }
 
     boolean isLatin1() {
-        return COMPACT_STRINGS && coder == LATIN1;
+        return COMPACT_STRINGS && coder() == LATIN1;
     }
 
     @Native static final byte LATIN1 = 0;
