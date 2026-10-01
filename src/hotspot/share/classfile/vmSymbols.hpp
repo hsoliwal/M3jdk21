@@ -59,7 +59,7 @@
   template(java_lang_Package,                         "java/lang/Package")                        \
   template(java_lang_Module,                          "java/lang/Module")                         \
   template(java_lang_String,                          "java/lang/String")                         \
-  template(java_lang_M3StringStorage,                 "java/lang/M3StringStorage")                \
+  template(java_lang_MIndexString,                 "java/lang/MIndexString")                \
   template(java_lang_StringLatin1,                    "java/lang/StringLatin1")                   \
   template(java_lang_StringUTF16,                     "java/lang/StringUTF16")                    \
   template(java_lang_Thread,                          "java/lang/Thread")                         \
@@ -654,7 +654,7 @@
   template(object_array_signature,                    "[Ljava/lang/Object;")                                      \
   template(class_signature,                           "Ljava/lang/Class;")                                        \
   template(string_signature,                          "Ljava/lang/String;")                                       \
-  template(m3_string_storage_signature,               "Ljava/lang/M3StringStorage;")                              \
+  template(m3_string_storage_signature,               "Ljava/lang/MIndexString;")                              \
   template(string_array_signature,                    "[Ljava/lang/String;")                                      \
   template(reference_signature,                       "Ljava/lang/ref/Reference;")                                \
   template(referencequeue_signature,                  "Ljava/lang/ref/ReferenceQueue;")                           \
