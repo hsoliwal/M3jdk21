@@ -547,9 +547,8 @@ inline unsigned int java_lang_String::hash_code_impl(oop java_string, bool updat
   unsigned int hash = 0;
   if (length > 0) {
     if (java_lang_String::is_m3_joined(java_string)) {
-      for (int index = 0; index < length; index++) {
-        hash = 31 * hash + (unsigned int)java_lang_String::char_at(java_string, index);
-      }
+      oop storage = java_lang_String::m3_storage(java_string);
+      hash = (unsigned int)java_lang_MIndexString::java_hash(storage);
     } else if (is_latin1) {
       hash = java_lang_String::hash_code(value->byte_at_addr(0), length);
     } else {
