@@ -359,16 +359,10 @@ final class MIndexStringPool {
                     }
                     offsets[row] = offset;
                     lengths[row] = length;
-                    int computedHash = javaHash(mapped, (int) payload, offset, length);
-                    if (version == 2) {
-                        int storedHash = mapped.getInt(entry + 8);
-                        if (storedHash != computedHash) {
-                            throw new IOException("invalid MIndex lexicon Java hash");
-                        }
-                        javaHashes[row] = storedHash;
-                    } else {
-                        javaHashes[row] = computedHash;
-                    }
+                    javaHashes[row] =
+                            version == 2
+                                    ? mapped.getInt(entry + 8)
+                                    : javaHash(mapped, (int) payload, offset, length);
                     if (row > 0
                             && compareRecords(
                                             mapped,
