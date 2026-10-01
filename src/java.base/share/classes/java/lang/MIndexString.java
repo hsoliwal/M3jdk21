@@ -43,6 +43,7 @@ final class MIndexString {
     private static final int MAX_RETENTION_RATIO = 8;
     private static final byte[] EMPTY_BYTES = new byte[0];
     private static final Unsafe UNSAFE = Unsafe.getUnsafe();
+    private static volatile boolean ready;
 
     private static final MIndexString EMPTY_STORAGE =
             new MIndexString(
@@ -106,8 +107,21 @@ final class MIndexString {
         this.structuralHash64 = structuralHash64;
     }
 
-    static void initializeLexicon(String file) {
-        MIndexStringPool.initializeLexicon(file);
+    static void activate(String lexiconFile) {
+        if (ready) {
+            return;
+        }
+        synchronized (MIndexString.class) {
+            if (ready) {
+                return;
+            }
+            MIndexStringPool.initializeLexicon(lexiconFile);
+            ready = true;
+        }
+    }
+
+    static boolean ready() {
+        return ready;
     }
 
     static MIndexString admit(byte[] value, byte coder) {
