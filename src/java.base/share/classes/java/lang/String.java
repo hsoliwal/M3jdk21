@@ -1959,7 +1959,15 @@ public final class String
         if (len != sb.length()) {
             return false;
         }
-        byte[] v1 = value;
+        if (m3Storage != null) {
+            for (int index = 0; index < len; index++) {
+                if (charAt(index) != sb.charAt(index)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        byte[] v1 = value();
         byte[] v2 = sb.getValue();
         byte coder = coder();
         if (coder == sb.getCoder()) {
@@ -2011,7 +2019,15 @@ public final class String
         if (n != length()) {
             return false;
         }
-        byte[] val = this.value;
+        if (m3Storage != null) {
+            for (int i = 0; i < n; i++) {
+                if (charAt(i) != cs.charAt(i)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        byte[] val = value();
         if (isLatin1()) {
             for (int i = 0; i < n; i++) {
                 if ((val[i] & 0xff) != cs.charAt(i)) {
@@ -2107,8 +2123,20 @@ public final class String
      *          lexicographically greater than the string argument.
      */
     public int compareTo(String anotherString) {
-        byte[] v1 = value;
-        byte[] v2 = anotherString.value;
+        if (m3Storage != null || anotherString.m3Storage != null) {
+            int length1 = length();
+            int length2 = anotherString.length();
+            int limit = Math.min(length1, length2);
+            for (int index = 0; index < limit; index++) {
+                int difference = charAt(index) - anotherString.charAt(index);
+                if (difference != 0) {
+                    return difference;
+                }
+            }
+            return length1 - length2;
+        }
+        byte[] v1 = value();
+        byte[] v2 = anotherString.value();
         byte coder = coder();
         if (coder == anotherString.coder()) {
             return coder == LATIN1 ? StringLatin1.compareTo(v1, v2)
@@ -2143,8 +2171,8 @@ public final class String
         private static final long serialVersionUID = 8575799808933029326L;
 
         public int compare(String s1, String s2) {
-            byte[] v1 = s1.value;
-            byte[] v2 = s2.value;
+            byte[] v1 = s1.value();
+            byte[] v2 = s2.value();
             byte coder = s1.coder();
             if (coder == s2.coder()) {
                 return coder == LATIN1 ? StringLatin1.compareToCI(v1, v2)
@@ -2225,8 +2253,8 @@ public final class String
              (ooffset > (long)other.length() - len)) {
             return false;
         }
-        byte[] tv = value;
-        byte[] ov = other.value;
+        byte[] tv = value();
+        byte[] ov = other.value();
         byte coder = coder();
         if (coder == other.coder()) {
             if (coder == UTF16) {
@@ -2315,8 +2343,8 @@ public final class String
                 || (ooffset > (long)other.length() - len)) {
             return false;
         }
-        byte[] tv = value;
-        byte[] ov = other.value;
+        byte[] tv = value();
+        byte[] ov = other.value();
         byte coder = coder();
         if (coder == other.coder()) {
             return coder == LATIN1
@@ -2350,8 +2378,8 @@ public final class String
         if (toffset < 0 || toffset > length() - prefix.length()) {
             return false;
         }
-        byte[] ta = value;
-        byte[] pa = prefix.value;
+        byte[] ta = value();
+        byte[] pa = prefix.value();
         int po = 0;
         int pc = pa.length;
         byte coder = coder();
@@ -2525,8 +2553,8 @@ public final class String
      * {@code fromIndex} were larger than the string length, or were negative.
      */
     public int indexOf(int ch, int fromIndex) {
-        return isLatin1() ? StringLatin1.indexOf(value, ch, fromIndex, length())
-                : StringUTF16.indexOf(value, ch, fromIndex, length());
+        return isLatin1() ? StringLatin1.indexOf(value(), ch, fromIndex, length())
+                : StringUTF16.indexOf(value(), ch, fromIndex, length());
     }
 
     /**
@@ -2571,8 +2599,8 @@ public final class String
      */
     public int indexOf(int ch, int beginIndex, int endIndex) {
         checkBoundsBeginEnd(beginIndex, endIndex, length());
-        return isLatin1() ? StringLatin1.indexOf(value, ch, beginIndex, endIndex)
-                : StringUTF16.indexOf(value, ch, beginIndex, endIndex);
+        return isLatin1() ? StringLatin1.indexOf(value(), ch, beginIndex, endIndex)
+                : StringUTF16.indexOf(value(), ch, beginIndex, endIndex);
     }
 
     /**
@@ -2637,8 +2665,8 @@ public final class String
      *          if the character does not occur before that point.
      */
     public int lastIndexOf(int ch, int fromIndex) {
-        return isLatin1() ? StringLatin1.lastIndexOf(value, ch, fromIndex)
-                          : StringUTF16.lastIndexOf(value, ch, fromIndex);
+        return isLatin1() ? StringLatin1.lastIndexOf(value(), ch, fromIndex)
+                          : StringUTF16.lastIndexOf(value(), ch, fromIndex);
     }
 
     /**
@@ -2658,13 +2686,13 @@ public final class String
     public int indexOf(String str) {
         byte coder = coder();
         if (coder == str.coder()) {
-            return isLatin1() ? StringLatin1.indexOf(value, str.value)
-                              : StringUTF16.indexOf(value, str.value);
+            return isLatin1() ? StringLatin1.indexOf(value(), str.value())
+                              : StringUTF16.indexOf(value(), str.value());
         }
         if (coder == LATIN1) {  // str.coder == UTF16
             return -1;
         }
-        return StringUTF16.indexOfLatin1(value, str.value);
+        return StringUTF16.indexOfLatin1(value(), str.value());
     }
 
     /**
@@ -2698,7 +2726,7 @@ public final class String
      *          or {@code -1} if there is no such occurrence.
      */
     public int indexOf(String str, int fromIndex) {
-        return indexOf(value, coder(), length(), str, fromIndex);
+        return indexOf(value(), coder(), length(), str, fromIndex);
     }
 
     /**
@@ -2731,7 +2759,7 @@ public final class String
             return indexOf(str.charAt(0), beginIndex, endIndex);
         }
         checkBoundsBeginEnd(beginIndex, endIndex, length());
-        return indexOf(value, coder(), endIndex, str, beginIndex);
+        return indexOf(value(), coder(), endIndex, str, beginIndex);
     }
 
     /**
@@ -2756,7 +2784,7 @@ public final class String
             return fromIndex;
         }
 
-        byte[] tgt = tgtStr.value;
+        byte[] tgt = tgtStr.value();
         byte tgtCoder = tgtStr.coder();
         if (srcCoder == tgtCoder) {
             return srcCoder == LATIN1
@@ -2807,7 +2835,7 @@ public final class String
      *          or {@code -1} if there is no such occurrence.
      */
     public int lastIndexOf(String str, int fromIndex) {
-        return lastIndexOf(value, coder(), length(), str, fromIndex);
+        return lastIndexOf(value(), coder(), length(), str, fromIndex);
     }
 
     /**
@@ -2823,7 +2851,7 @@ public final class String
      */
     static int lastIndexOf(byte[] src, byte srcCoder, int srcCount,
                            String tgtStr, int fromIndex) {
-        byte[] tgt = tgtStr.value;
+        byte[] tgt = tgtStr.value();
         byte tgtCoder = tgtStr.coder();
         int tgtCount = tgtStr.length();
         /*
@@ -3182,11 +3210,11 @@ public final class String
             boolean replIsLatin1 = replStr.isLatin1();
             String ret = (thisIsLatin1 && trgtIsLatin1 && replIsLatin1)
                     ? StringLatin1.replace(value, thisLen,
-                                           trgtStr.value, trgtLen,
-                                           replStr.value, replLen)
+                                           trgtStr.value(), trgtLen,
+                                           replStr.value(), replLen)
                     : StringUTF16.replace(value, thisLen, thisIsLatin1,
-                                          trgtStr.value, trgtLen, trgtIsLatin1,
-                                          replStr.value, replLen, replIsLatin1);
+                                          trgtStr.value(), trgtLen, trgtIsLatin1,
+                                          replStr.value(), replLen, replIsLatin1);
             if (ret != null) {
                 return ret;
             }
