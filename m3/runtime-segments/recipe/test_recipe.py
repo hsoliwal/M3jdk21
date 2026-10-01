@@ -10,7 +10,10 @@ class RecipeTest(unittest.TestCase):
     def seed(self,target):
         for name in m['files']:
             p=target/name;p.parent.mkdir(parents=True,exist_ok=True)
-            p.write_bytes(subprocess.check_output(['git','show',m['base_commit']+':'+name],cwd=ROOT))
+            shutil.copy2(ROOT/name,p)
+        # Reconstruct and verify exact preimages from the sealed postimage/patch.
+        # Works in shallow checkouts and exported trees without Git history.
+        self.assertEqual('before',recipe.apply(target,reverse=True))
     def test_replay_reverse_idempotence(self):
         with tempfile.TemporaryDirectory() as tmp:
             target=Path(tmp);self.seed(target)
@@ -34,7 +37,10 @@ class RecipeTest(unittest.TestCase):
                 p=target/name
                 if not p.exists():
                     p.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(ROOT/name,p)
-            names=subprocess.check_output(['git','ls-tree','-r','--name-only',m['base_commit'],'m3'],cwd=ROOT,text=True).splitlines()
+            p0=json.loads((ROOT/'m3/recipes/manifest.json').read_text())
+            names=[*p0['new_files'],'m3/recipes/manifest.json']
+            names += [str(p.relative_to(ROOT)) for p in (ROOT/'m3/runtime-stage1').rglob('*')
+                      if p.is_file() and '__pycache__' not in p.parts]
             for name in names:
                 p=target/name;p.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(ROOT/name,p)
             subprocess.run(['python3',str(target/'m3/runtime-stage1/test_recipe.py')],check=True)
