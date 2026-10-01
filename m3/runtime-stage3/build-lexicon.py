@@ -22,13 +22,18 @@ def main() -> int:
 
     encoded = [word.encode("utf-16le", "surrogatepass") for word in words]
     units = sum(len(value) // 2 for value in encoded)
-    payload = HEADER + 8 * len(words)
+    payload = HEADER + 12 * len(words)
     image = bytearray(payload + 2 * units)
 
-    struct.pack_into(">QIIQQ", image, 0, MAGIC, 1, len(words), payload, units)
+    struct.pack_into(">QIIQQ", image, 0, MAGIC, 2, len(words), payload, units)
     cursor = 0
     for row, value in enumerate(encoded):
-        struct.pack_into(">II", image, HEADER + 8 * row, cursor, len(value) // 2)
+        java_hash = 0
+        for at in range(0, len(value), 2):
+            unit = value[at] | (value[at + 1] << 8)
+            java_hash = (31 * java_hash + unit) & 0xFFFFFFFF
+        struct.pack_into(
+            ">III", image, HEADER + 12 * row, cursor, len(value) // 2, java_hash)
         begin = payload + 2 * cursor
         image[begin:begin + len(value)] = value
         cursor += len(value) // 2
