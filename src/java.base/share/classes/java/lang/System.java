@@ -2526,6 +2526,10 @@ public final class System {
                 return StringConcatHelper.mix(lengthCoder, constant);
             }
 
+            public boolean stringConcatUsesM3Storage() {
+                return String.m3JoinedStringsEnabled();
+            }
+
             @PreviewFeature(feature=PreviewFeature.Feature.STRING_TEMPLATES)
             public long stringConcatCoder(char value) {
                 return StringConcatHelper.coder(value);
