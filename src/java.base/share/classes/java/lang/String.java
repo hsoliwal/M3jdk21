@@ -4810,21 +4810,31 @@ public final class String
         if (count == 1) {
             return this;
         }
-        final int len = value.length;
-        if (len == 0 || count == 0) {
+        final int charLength = length();
+        if (charLength == 0 || count == 0) {
             return "";
         }
-        if (Integer.MAX_VALUE / count < len) {
+        if (Integer.MAX_VALUE / count < charLength) {
             throw new OutOfMemoryError("Required length exceeds implementation limit");
         }
+        if (M3_JOINED_STRINGS && count <= 256) {
+            String[] pieces = new String[count];
+            Arrays.fill(pieces, this);
+            M3StringStorage storage = M3StringStorage.join(pieces);
+            if (storage != null) {
+                return new String(storage);
+            }
+        }
+        byte[] currentValue = value();
+        final int len = currentValue.length;
         if (len == 1) {
             final byte[] single = new byte[count];
-            Arrays.fill(single, value[0]);
+            Arrays.fill(single, currentValue[0]);
             return new String(single, coder);
         }
         final int limit = len * count;
         final byte[] multiple = new byte[limit];
-        System.arraycopy(value, 0, multiple, 0, len);
+        System.arraycopy(currentValue, 0, multiple, 0, len);
         repeatCopyRest(multiple, 0, limit, len);
         return new String(multiple, coder);
     }
