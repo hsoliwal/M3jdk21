@@ -600,9 +600,9 @@ static size_t literal_size(oop obj) {
     if (java_lang_String::is_m3_joined(obj)) {
       oop storage = java_lang_String::m3_storage(obj);
       word_size += storage->size();
-      word_size += java_lang_M3StringStorage::segments(storage)->size();
-      word_size += java_lang_M3StringStorage::offsets(storage)->size();
-      word_size += java_lang_M3StringStorage::ends(storage)->size();
+      word_size += java_lang_MIndexString::segments(storage)->size();
+      word_size += java_lang_MIndexString::offsets(storage)->size();
+      word_size += java_lang_MIndexString::ends(storage)->size();
     } else {
       // This may overcount if String.value arrays are shared.
       word_size += java_lang_String::value(obj)->size();
