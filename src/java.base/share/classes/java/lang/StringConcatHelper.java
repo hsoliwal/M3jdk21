@@ -447,6 +447,28 @@ final class StringConcatHelper {
     }
 
     /**
+     * Correctness-first fallback for invokedynamic concat shapes that would
+     * otherwise allocate one flat byte array. Primitive arguments arrive boxed
+     * by MethodHandle adaptation; stringOf preserves the JLS null/toString rules.
+     */
+    static String m3Concat(String[] constants, Object[] args) {
+        String[] pieces = new String[args.length * 2 + 1];
+        int piece = 0;
+        for (int index = 0; index < args.length; index++) {
+            String constant = constants[index];
+            if (constant != null) {
+                pieces[piece++] = constant;
+            }
+            pieces[piece++] = stringOf(args[index]);
+        }
+        String suffix = constants[args.length];
+        if (suffix != null) {
+            pieces[piece++] = suffix;
+        }
+        return String.join("", "", "", pieces, piece);
+    }
+
+    /**
      * Produce a String from a concatenation of single argument, which we
      * end up using for trivial concatenations like {@code "" + arg}.
      *
