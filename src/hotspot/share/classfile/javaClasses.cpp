@@ -216,7 +216,7 @@ bool java_lang_String::test_and_set_flag(oop java_string, uint8_t flag_mask) {
 
 #define STRING_FIELDS_DO(macro) \
   macro(_value_offset, k, vmSymbols::value_name(), byte_array_signature, false); \
-  macro(_mindex_offset, k, "mindex",          m3_string_storage_signature, false); \
+  macro(_mindex_offset, k, "mindex",          mindex_string_signature, false); \
   macro(_hash_offset,  k, "hash",                  int_signature,        false); \
   macro(_hashIsZero_offset, k, "hashIsZero",       bool_signature,       false); \
   macro(_coder_offset, k, "coder",                 byte_signature,       false);
@@ -893,27 +893,35 @@ void java_lang_String::print(oop java_string, outputStream* st) {
 
 // java_lang_MIndexString
 
+int java_lang_MIndexString::_storageKind_offset;
+int java_lang_MIndexString::_localValue_offset;
+int java_lang_MIndexString::_mappedAddress_offset;
 int java_lang_MIndexString::_segments_offset;
 int java_lang_MIndexString::_offsets_offset;
 int java_lang_MIndexString::_ends_offset;
 int java_lang_MIndexString::_length_offset;
 int java_lang_MIndexString::_coder_offset;
+int java_lang_MIndexString::_javaHash_offset;
 
-#define M3_STRING_STORAGE_FIELDS_DO(macro) \
-  macro(_segments_offset, k, "segments", string_array_signature, false); \
-  macro(_offsets_offset,  k, "offsets",  int_array_signature,    false); \
-  macro(_ends_offset,     k, "ends",     int_array_signature,    false); \
-  macro(_length_offset,   k, "length",   int_signature,          false); \
-  macro(_coder_offset,    k, "coder",    byte_signature,         false);
+#define MINDEX_STRING_FIELDS_DO(macro) \
+  macro(_storageKind_offset,  k, "storageKind",  byte_signature,                false); \
+  macro(_localValue_offset,   k, "localValue",   byte_array_signature,          false); \
+  macro(_mappedAddress_offset,k, "mappedAddress",long_signature,                false); \
+  macro(_segments_offset,     k, "segments",     mindex_string_array_signature, false); \
+  macro(_offsets_offset,      k, "offsets",      int_array_signature,           false); \
+  macro(_ends_offset,         k, "ends",         int_array_signature,           false); \
+  macro(_length_offset,       k, "length",       int_signature,                 false); \
+  macro(_coder_offset,        k, "coder",        byte_signature,                false); \
+  macro(_javaHash_offset,     k, "javaHash",     int_signature,                 false);
 
 void java_lang_MIndexString::compute_offsets() {
   InstanceKlass* k = vmClasses::MIndexString_klass();
-  M3_STRING_STORAGE_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+  MINDEX_STRING_FIELDS_DO(FIELD_COMPUTE_OFFSET);
 }
 
 #if INCLUDE_CDS
 void java_lang_MIndexString::serialize_offsets(SerializeClosure* f) {
-  M3_STRING_STORAGE_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+  MINDEX_STRING_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
 }
 #endif
 
