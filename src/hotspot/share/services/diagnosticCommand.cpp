@@ -967,8 +967,8 @@ DumpSharedArchiveDCmd::DumpSharedArchiveDCmd(outputStream* output, bool heap) :
 }
 
 void DumpSharedArchiveDCmd::execute(DCmdSource source, TRAPS) {
-  if (UseM3SegmentedStrings) {
-    output()->print_cr("CDS archive operations are unsupported with UseM3SegmentedStrings");
+  if (UseM3StringStorage) {
+    output()->print_cr("CDS archive operations are unsupported with UseM3StringStorage");
     return;
   }
   jboolean is_static;

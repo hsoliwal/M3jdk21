@@ -32,8 +32,8 @@
 #include "oops/instanceKlass.inline.hpp"
 #include "oops/method.hpp"
 #include "oops/oop.inline.hpp"
-#include "oops/objArrayOop.inline.hpp"
 #include "oops/oopsHierarchy.hpp"
+#include "oops/objArrayOop.inline.hpp"
 #include "oops/typeArrayOop.inline.hpp"
 
 void java_lang_String::set_coder(oop string, jbyte coder) {
@@ -55,8 +55,7 @@ bool java_lang_String::hash_is_set(oop java_string) {
 // Accessors
 bool java_lang_String::value_equals(typeArrayOop str_value1, typeArrayOop str_value2) {
   return ((str_value1 == str_value2) ||
-          (str_value1 != nullptr && str_value2 != nullptr &&
-           str_value1->length() == str_value2->length() &&
+          (str_value1->length() == str_value2->length() &&
            (!memcmp(str_value1->base(T_BYTE),
                     str_value2->base(T_BYTE),
                     str_value2->length() * sizeof(jbyte)))));
@@ -72,34 +71,38 @@ typeArrayOop java_lang_String::value_no_keepalive(oop java_string) {
   return (typeArrayOop) java_string->obj_field_access<AS_NO_KEEPALIVE>(_value_offset);
 }
 
-bool java_lang_String::is_segmented(oop java_string) {
-  return java_string->obj_field_access<AS_NO_KEEPALIVE>(_m3Parts_offset) != nullptr;
+oop java_lang_String::m3_storage(oop java_string) {
+  assert(is_instance(java_string), "must be java_string");
+  return java_string->obj_field_acquire(_mindex_offset);
+}
+
+oop java_lang_String::m3_storage_no_keepalive(oop java_string) {
+  assert(is_instance(java_string), "must be java_string");
+  return java_string->obj_field_access<AS_NO_KEEPALIVE | MO_ACQUIRE>(_mindex_offset);
+}
+
+bool java_lang_String::is_m3_joined(oop java_string) {
+  return m3_storage_no_keepalive(java_string) != nullptr;
 }
 
 jchar java_lang_String::char_at(oop java_string, int index) {
-  assert(index >= 0 && index < length(java_string), "String index");
-  objArrayOop parts = (objArrayOop)java_string->obj_field(_m3Parts_offset);
-  if (parts != nullptr) {
-    typeArrayOop ranges = (typeArrayOop)java_string->obj_field(_m3Ranges_offset);
-    int lo = 0, hi = parts->length() - 1;
-    while (lo < hi) {
-      int mid = lo + (hi - lo) / 2;
-      if (index < ranges->int_at(2 * mid + 1)) hi = mid;
-      else lo = mid + 1;
-    }
-    int previous_end = lo == 0 ? 0 : ranges->int_at(2 * lo - 1);
-    index = ranges->int_at(2 * lo) + index - previous_end;
-    java_string = parts->obj_at(lo);
-    assert(!is_segmented(java_string), "M3 leaves must be flat");
+  oop storage = m3_storage(java_string);
+  if (storage != nullptr) {
+    return java_lang_MIndexString::char_at(storage, index);
   }
-  typeArrayOop bytes = value(java_string);
-  return is_latin1(java_string) ? (jchar)(bytes->byte_at(index) & 0xff)
-                                : bytes->char_at(index);
+  typeArrayOop string_value = value(java_string);
+  if (is_latin1(java_string)) {
+    return ((jchar)string_value->byte_at(index)) & 0xff;
+  }
+  return string_value->char_at(index);
 }
 
 bool java_lang_String::is_latin1(oop java_string) {
   assert(is_instance(java_string), "must be java_string");
-  jbyte coder = java_string->byte_field(_coder_offset);
+  oop storage = m3_storage_no_keepalive(java_string);
+  jbyte coder = storage == nullptr
+      ? java_string->byte_field(_coder_offset)
+      : java_lang_MIndexString::coder(storage);
   assert(CompactStrings || coder == CODER_UTF16, "Must be UTF16 without CompactStrings");
   return coder == CODER_LATIN1;
 }
@@ -133,11 +136,12 @@ bool java_lang_String::test_and_set_deduplication_requested(oop java_string) {
 int java_lang_String::length(oop java_string, typeArrayOop value) {
   assert(_initialized, "Must be initialized");
   assert(is_instance(java_string), "must be java_string");
+  oop storage = m3_storage_no_keepalive(java_string);
+  if (storage != nullptr) {
+    return java_lang_MIndexString::length(storage);
+  }
   assert(value_equals(value, java_lang_String::value(java_string)),
          "value must be equal to java_lang_String::value(java_string)");
-  if (is_segmented(java_string)) {
-    return java_string->int_field(_m3Length_offset);
-  }
   if (value == nullptr) {
     return 0;
   }
@@ -158,6 +162,97 @@ int java_lang_String::length(oop java_string) {
 
 bool java_lang_String::is_instance(oop obj) {
   return obj != nullptr && obj->klass() == vmClasses::String_klass();
+}
+
+// java.lang.MIndexString accessors
+
+jbyte java_lang_MIndexString::storage_kind(oop storage) {
+  return storage->byte_field(_storageKind_offset);
+}
+
+typeArrayOop java_lang_MIndexString::local_value(oop storage) {
+  return (typeArrayOop)storage->obj_field(_localValue_offset);
+}
+
+jlong java_lang_MIndexString::mapped_address(oop storage) {
+  return storage->long_field(_mappedAddress_offset);
+}
+
+objArrayOop java_lang_MIndexString::segments(oop storage) {
+  return (objArrayOop)storage->obj_field(_segments_offset);
+}
+
+typeArrayOop java_lang_MIndexString::offsets(oop storage) {
+  return (typeArrayOop)storage->obj_field(_offsets_offset);
+}
+
+typeArrayOop java_lang_MIndexString::ends(oop storage) {
+  return (typeArrayOop)storage->obj_field(_ends_offset);
+}
+
+int java_lang_MIndexString::length(oop storage) {
+  return storage->int_field(_length_offset);
+}
+
+jbyte java_lang_MIndexString::coder(oop storage) {
+  return storage->byte_field(_coder_offset);
+}
+
+jint java_lang_MIndexString::java_hash(oop storage) {
+  return storage->int_field(_javaHash_offset);
+}
+
+jchar java_lang_MIndexString::char_at(oop storage, int index) {
+  const int storage_length = length(storage);
+  assert(index >= 0 && index < storage_length, "String index out of bounds");
+
+  const jbyte kind = storage_kind(storage);
+  if (kind == LOCAL) {
+    typeArrayOop value = local_value(storage);
+    if (coder(storage) == java_lang_String::CODER_LATIN1) {
+      return ((jchar)value->byte_at(index)) & 0xff;
+    }
+    return value->char_at(index);
+  }
+
+  if (kind == LEXICON || kind == 4 /* SYNARR01 UTF16BE */) {
+    const jlong address = mapped_address(storage);
+    assert(address != 0, "mapped MIndexString atom must have an address");
+    const uint8_t* bytes = reinterpret_cast<const uint8_t*>((uintptr_t)address);
+    const size_t at = (size_t)index << 1;
+    return kind == 4 ? (jchar)(((uint16_t)bytes[at] << 8) | bytes[at + 1])
+                     : (jchar)(((uint16_t)bytes[at]) | ((uint16_t)bytes[at + 1] << 8));
+  }
+
+  if (kind == JOINED) {
+    objArrayOop segment_array = segments(storage);
+    typeArrayOop offset_array = offsets(storage);
+    typeArrayOop end_array = ends(storage);
+
+    int low = 0;
+    int high = end_array->length() - 1;
+    const int key = index + 1;
+    while (low <= high) {
+      const int mid = (low + high) >> 1;
+      const int segment_end = end_array->int_at(mid);
+      if (segment_end < key) {
+        low = mid + 1;
+        continue;
+      }
+      if (mid > 0 && end_array->int_at(mid - 1) >= key) {
+        high = mid - 1;
+        continue;
+      }
+      const int previous = mid == 0 ? 0 : end_array->int_at(mid - 1);
+      oop atom = segment_array->obj_at(mid);
+      const int atom_index = offset_array->int_at(mid) + index - previous;
+      return java_lang_MIndexString::char_at(atom, atom_index);
+    }
+    ShouldNotReachHere();
+  }
+
+  ShouldNotReachHere();
+  return 0;
 }
 
 // Accessors

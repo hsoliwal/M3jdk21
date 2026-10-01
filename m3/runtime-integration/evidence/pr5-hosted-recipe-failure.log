@@ -1,0 +1,75 @@
+2026-10-01T19:14:59.9807667Z ##[group]Run python3 m3/runtime-segments/recipe/apply.py --check
+2026-10-01T19:14:59.9808182Z [36;1mpython3 m3/runtime-segments/recipe/apply.py --check[0m
+2026-10-01T19:14:59.9808565Z [36;1mpython3 m3/runtime-segments/recipe/test_recipe.py[0m
+2026-10-01T19:14:59.9848521Z shell: /usr/bin/bash -e {0}
+2026-10-01T19:14:59.9848776Z env:
+2026-10-01T19:14:59.9849001Z   M3_JDK: /home/runner/work/_temp/jdk-21+35
+2026-10-01T19:14:59.9849271Z ##[endgroup]
+2026-10-01T19:15:00.0215304Z SEGMENTED_RECIPE_PASS state=after
+2026-10-01T19:15:00.0717405Z fatal: path 'src/hotspot/share/classfile/javaClasses.cpp' exists on disk, but not in '69f18626583dee553ba1ed6623d13af492c1b709'
+2026-10-01T19:15:00.1070452Z Efatal: path 'src/hotspot/share/classfile/javaClasses.cpp' exists on disk, but not in '69f18626583dee553ba1ed6623d13af492c1b709'
+2026-10-01T19:15:00.1092475Z Efatal: path 'src/hotspot/share/classfile/javaClasses.cpp' exists on disk, but not in '69f18626583dee553ba1ed6623d13af492c1b709'
+2026-10-01T19:15:00.1112684Z Efatal: path 'src/hotspot/share/classfile/javaClasses.cpp' exists on disk, but not in '69f18626583dee553ba1ed6623d13af492c1b709'
+2026-10-01T19:15:00.1116852Z E
+2026-10-01T19:15:00.1117257Z ======================================================================
+2026-10-01T19:15:00.1118030Z ERROR: test_each_preimage_drift_refused_before_any_writes (__main__.RecipeTest)
+2026-10-01T19:15:00.1119322Z ----------------------------------------------------------------------
+2026-10-01T19:15:00.1120458Z Traceback (most recent call last):
+2026-10-01T19:15:00.1122134Z   File "/home/runner/work/M3jdk21/M3jdk21/m3/runtime-segments/recipe/test_recipe.py", line 21, in test_each_preimage_drift_refused_before_any_writes
+2026-10-01T19:15:00.1123268Z     target=Path(tmp);self.seed(target);names=list(m['files'])
+2026-10-01T19:15:00.1124108Z   File "/home/runner/work/M3jdk21/M3jdk21/m3/runtime-segments/recipe/test_recipe.py", line 13, in seed
+2026-10-01T19:15:00.1125197Z     p.write_bytes(subprocess.check_output(['git','show',m['base_commit']+':'+name],cwd=ROOT))
+2026-10-01T19:15:00.1126053Z   File "/usr/lib/python3.10/subprocess.py", line 421, in check_output
+2026-10-01T19:15:00.1126755Z     return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+2026-10-01T19:15:00.1127397Z   File "/usr/lib/python3.10/subprocess.py", line 526, in run
+2026-10-01T19:15:00.1127962Z     raise CalledProcessError(retcode, process.args,
+2026-10-01T19:15:00.1129236Z subprocess.CalledProcessError: Command '['git', 'show', '69f18626583dee553ba1ed6623d13af492c1b709:src/hotspot/share/classfile/javaClasses.cpp']' returned non-zero exit status 128.
+2026-10-01T19:15:00.1130518Z 
+2026-10-01T19:15:00.1130720Z ======================================================================
+2026-10-01T19:15:00.1131337Z ERROR: test_mixed_state_and_symlink_refused (__main__.RecipeTest)
+2026-10-01T19:15:00.1131984Z ----------------------------------------------------------------------
+2026-10-01T19:15:00.1132519Z Traceback (most recent call last):
+2026-10-01T19:15:00.1133427Z   File "/home/runner/work/M3jdk21/M3jdk21/m3/runtime-segments/recipe/test_recipe.py", line 43, in test_mixed_state_and_symlink_refused
+2026-10-01T19:15:00.1134987Z     target=Path(tmp);self.seed(target);name=next(iter(m['files']));before=(target/name).read_bytes()
+2026-10-01T19:15:00.1136072Z   File "/home/runner/work/M3jdk21/M3jdk21/m3/runtime-segments/recipe/test_recipe.py", line 13, in seed
+2026-10-01T19:15:00.1137324Z     p.write_bytes(subprocess.check_output(['git','show',m['base_commit']+':'+name],cwd=ROOT))
+2026-10-01T19:15:00.1138551Z   File "/usr/lib/python3.10/subprocess.py", line 421, in check_output
+2026-10-01T19:15:00.1139562Z     return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+2026-10-01T19:15:00.1140894Z   File "/usr/lib/python3.10/subprocess.py", line 526, in run
+2026-10-01T19:15:00.1142042Z     raise CalledProcessError(retcode, process.args,
+2026-10-01T19:15:00.1143768Z subprocess.CalledProcessError: Command '['git', 'show', '69f18626583dee553ba1ed6623d13af492c1b709:src/hotspot/share/classfile/javaClasses.cpp']' returned non-zero exit status 128.
+2026-10-01T19:15:00.1145307Z 
+2026-10-01T19:15:00.1145518Z ======================================================================
+2026-10-01T19:15:00.1146266Z ERROR: test_prior_recipes_on_exact_prior_runtime (__main__.RecipeTest)
+2026-10-01T19:15:00.1147018Z ----------------------------------------------------------------------
+2026-10-01T19:15:00.1147635Z Traceback (most recent call last):
+2026-10-01T19:15:00.1148689Z   File "/home/runner/work/M3jdk21/M3jdk21/m3/runtime-segments/recipe/test_recipe.py", line 31, in test_prior_recipes_on_exact_prior_runtime
+2026-10-01T19:15:00.1149805Z     target=Path(tmp);self.seed(target)
+2026-10-01T19:15:00.1150785Z   File "/home/runner/work/M3jdk21/M3jdk21/m3/runtime-segments/recipe/test_recipe.py", line 13, in seed
+2026-10-01T19:15:00.1151888Z     p.write_bytes(subprocess.check_output(['git','show',m['base_commit']+':'+name],cwd=ROOT))
+2026-10-01T19:15:00.1152790Z   File "/usr/lib/python3.10/subprocess.py", line 421, in check_output
+2026-10-01T19:15:00.1153677Z     return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+2026-10-01T19:15:00.1154556Z   File "/usr/lib/python3.10/subprocess.py", line 526, in run
+2026-10-01T19:15:00.1155449Z     raise CalledProcessError(retcode, process.args,
+2026-10-01T19:15:00.1157057Z subprocess.CalledProcessError: Command '['git', 'show', '69f18626583dee553ba1ed6623d13af492c1b709:src/hotspot/share/classfile/javaClasses.cpp']' returned non-zero exit status 128.
+2026-10-01T19:15:00.1158280Z 
+2026-10-01T19:15:00.1158493Z ======================================================================
+2026-10-01T19:15:00.1159132Z ERROR: test_replay_reverse_idempotence (__main__.RecipeTest)
+2026-10-01T19:15:00.1159817Z ----------------------------------------------------------------------
+2026-10-01T19:15:00.1160625Z Traceback (most recent call last):
+2026-10-01T19:15:00.1161526Z   File "/home/runner/work/M3jdk21/M3jdk21/m3/runtime-segments/recipe/test_recipe.py", line 16, in test_replay_reverse_idempotence
+2026-10-01T19:15:00.1162473Z     target=Path(tmp);self.seed(target)
+2026-10-01T19:15:00.1163237Z   File "/home/runner/work/M3jdk21/M3jdk21/m3/runtime-segments/recipe/test_recipe.py", line 13, in seed
+2026-10-01T19:15:00.1164271Z     p.write_bytes(subprocess.check_output(['git','show',m['base_commit']+':'+name],cwd=ROOT))
+2026-10-01T19:15:00.1165140Z   File "/usr/lib/python3.10/subprocess.py", line 421, in check_output
+2026-10-01T19:15:00.1165879Z     return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+2026-10-01T19:15:00.1166562Z   File "/usr/lib/python3.10/subprocess.py", line 526, in run
+2026-10-01T19:15:00.1167154Z     raise CalledProcessError(retcode, process.args,
+2026-10-01T19:15:00.1168464Z subprocess.CalledProcessError: Command '['git', 'show', '69f18626583dee553ba1ed6623d13af492c1b709:src/hotspot/share/classfile/javaClasses.cpp']' returned non-zero exit status 128.
+2026-10-01T19:15:00.1169625Z 
+2026-10-01T19:15:00.1169876Z ----------------------------------------------------------------------
+2026-10-01T19:15:00.1170559Z Ran 4 tests in 0.043s
+2026-10-01T19:15:00.1171013Z 
+2026-10-01T19:15:00.1171153Z FAILED (errors=4)
+2026-10-01T19:15:00.1213918Z ##[error]Process completed with exit code 1.
+

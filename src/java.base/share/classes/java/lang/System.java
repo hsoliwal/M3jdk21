@@ -2234,6 +2234,13 @@ public final class System {
         // module system initialized
         VM.initLevel(2);
 
+        // MIndex String storage is activated only after java.base/module bootstrap has completed.
+        // Until this point String keeps the stock flat representation, avoiding recursive class
+        // initialization through the local interner or optional mapped lexicon loader.
+        if (String.m3StorageRequested()) {
+            MIndexString.activate(props.getProperty("jdk.mindex.lexicon"));
+        }
+
         return 0; // JNI_OK
     }
 
@@ -2524,6 +2531,10 @@ public final class System {
 
             public long stringConcatMix(long lengthCoder, String constant) {
                 return StringConcatHelper.mix(lengthCoder, constant);
+            }
+
+            public boolean stringConcatUsesM3Storage() {
+                return String.m3JoinedStringsEnabled();
             }
 
             @PreviewFeature(feature=PreviewFeature.Feature.STRING_TEMPLATES)

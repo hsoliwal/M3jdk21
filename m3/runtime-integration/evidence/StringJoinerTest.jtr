@@ -1,0 +1,271 @@
+#Test Results (version 2)
+#Thu Oct 01 20:37:05 UTC 2026
+#-----testdescription-----
+$file=/workspace/M3jdk21/test/jdk/java/util/StringJoiner/StringJoinerTest.java
+$root=/workspace/M3jdk21/test/jdk
+author=Jim Gish
+keywords=bug5015163 bug7172553 bug8249258 othervm testng
+modules=java.base/jdk.internal.util
+requires=vm.bits \=\= "64" & os.maxMemory > 4G
+run=USER_SPECIFIED testng/othervm -Xmx4g -XX\:+CompactStrings StringJoinerTest\n
+source=StringJoinerTest.java
+title=tests StringJoinerTest
+
+#-----environment-----
+
+#-----testresult-----
+description=file\:/workspace/M3jdk21/test/jdk/java/util/StringJoiner/StringJoinerTest.java
+elapsed=163785 0\:02\:43.785
+end=Thu Oct 01 20\:37\:05 UTC 2026
+environment=regtest
+execStatus=Failed. Execution failed\: `main' threw exception\: java.lang.Exception\: config failures\: 0, test failures\: 2
+harnessLoaderMode=Classpath Loader
+harnessVariety=Full Bundle
+hostname=8e7e6cde5817
+javatestOS=Linux 6.18.44 (amd64)
+javatestVersion=6.0-ea+b24-1970-01-25-${BUILT_FROM_COMMIT}
+jtregVersion=jtreg 7.5.2 src 1
+modules=java.base/jdk.internal.util
+script=com.sun.javatest.regtest.exec.RegressionScript
+sections=script_messages build compile testng
+start=Thu Oct 01 20\:34\:21 UTC 2026
+test=java/util/StringJoiner/StringJoinerTest.java
+testJDK=/workspace/M3jdk21/build/linux-x86_64-server-fastdebug/images/jdk
+testJDK_OS=[name\:Linux,arch\:amd64,version\:6.18.44,family\:linux,simple_arch\:x64,simple_version\:6.18,processors\:5,maxMemory\:17179869184,maxSwap\:0]
+testJDK_os.arch=amd64
+testJDK_os.name=Linux
+testJDK_os.version=6.18.44
+totalTime=163786
+user.name=agent
+work=/workspace/m3-integration-final-jtreg/jtreg-enabled-work/java/util/StringJoiner
+
+#section:script_messages
+----------messages:(4/297)----------
+JDK under test: /workspace/M3jdk21/build/linux-x86_64-server-fastdebug/images/jdk
+openjdk version "21-internal" 2023-09-19
+OpenJDK Runtime Environment (fastdebug build 21-internal-adhoc.agent.M3jdk21)
+OpenJDK 64-Bit Server VM (fastdebug build 21-internal-adhoc.agent.M3jdk21, mixed mode, sharing)
+
+#section:build
+----------messages:(7/222)----------
+command: build StringJoinerTest
+reason: Named class compiled on demand
+started: Thu Oct 01 20:34:21 UTC 2026
+Test directory:
+  compile: StringJoinerTest
+finished: Thu Oct 01 20:34:24 UTC 2026
+elapsed time (seconds): 2.819
+result: Passed. Build successful
+
+#section:compile
+----------messages:(8/392)----------
+command: compile /workspace/M3jdk21/test/jdk/java/util/StringJoiner/StringJoinerTest.java
+reason: .class file out of date or does not exist
+started: Thu Oct 01 20:34:21 UTC 2026
+Additional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.util=ALL-UNNAMED
+Mode: othervm
+Process id: 238637
+finished: Thu Oct 01 20:34:24 UTC 2026
+elapsed time (seconds): 2.819
+----------configuration:(12/761)----------
+javac compilation environment
+  add modules: java.base                   
+  add exports: java.base/jdk.internal.util ALL-UNNAMED
+  source path: /workspace/M3jdk21/test/jdk/java/util/StringJoiner 
+  class path:  /workspace/M3jdk21/test/jdk/java/util/StringJoiner 
+               /workspace/m3-integration-final-jtreg/jtreg-enabled-work/classes/0/java/util/StringJoiner/StringJoinerTest.d 
+               /workspace/m3-jtreg/root/usr/share/jtreg/lib/testng.jar 
+               /workspace/m3-jtreg/root/usr/share/jtreg/lib/guice.jar 
+               /workspace/m3-jtreg/root/usr/share/jtreg/lib/jcommander.jar 
+               /workspace/m3-jtreg/root/usr/share/jtreg/lib/slf4j-simple.jar 
+               /workspace/m3-jtreg/root/usr/share/jtreg/lib/slf4j-api.jar 
+
+----------rerun:(26/1768)*----------
+cd /workspace/m3-integration-final-jtreg/jtreg-enabled-work/scratch/1 && \\
+HOME=/home/agent \\
+JTREG_JAR=/workspace/m3-jtreg/root/usr/share/jtreg/lib/jtreg.jar \\
+LANG=C.UTF-8 \\
+LC_ALL=C.UTF-8 \\
+LC_CTYPE=C.UTF-8 \\
+PATH=/bin:/usr/bin:/usr/sbin \\
+    /workspace/M3jdk21/build/linux-x86_64-server-fastdebug/images/jdk/bin/javac \\
+        -J-Dtest.vm.opts= \\
+        -J-Dtest.tool.vm.opts= \\
+        -J-Dtest.compiler.opts= \\
+        -J-Dtest.java.opts='-XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CreateCoredumpOnCrash' \\
+        -J-Dtest.jdk=/workspace/M3jdk21/build/linux-x86_64-server-fastdebug/images/jdk \\
+        -J-Dcompile.jdk=/workspace/M3jdk21/build/linux-x86_64-server-fastdebug/images/jdk \\
+        -J-Dtest.timeout.factor=4.0 \\
+        -J-Dtest.nativepath=/workspace/M3jdk21/build/linux-x86_64-server-fastdebug/support/test/jdk/jtreg/native/lib \\
+        -J-Dtest.root=/workspace/M3jdk21/test/jdk \\
+        -J-Dtest.name=java/util/StringJoiner/StringJoinerTest.java \\
+        -J-Dtest.file=/workspace/M3jdk21/test/jdk/java/util/StringJoiner/StringJoinerTest.java \\
+        -J-Dtest.main.class=StringJoinerTest \\
+        -J-Dtest.src=/workspace/M3jdk21/test/jdk/java/util/StringJoiner \\
+        -J-Dtest.src.path=/workspace/M3jdk21/test/jdk/java/util/StringJoiner \\
+        -J-Dtest.classes=/workspace/m3-integration-final-jtreg/jtreg-enabled-work/classes/0/java/util/StringJoiner/StringJoinerTest.d \\
+        -J-Dtest.class.path=/workspace/m3-integration-final-jtreg/jtreg-enabled-work/classes/0/java/util/StringJoiner/StringJoinerTest.d \\
+        -J-Dtest.modules=java.base/jdk.internal.util \\
+        @/workspace/m3-integration-final-jtreg/jtreg-enabled-work/java/util/StringJoiner/StringJoinerTest.d/compile.0.jta
+----------System.out:(0/0)----------
+----------System.err:(0/0)----------
+result: Passed. Compilation successful
+
+#section:testng
+----------messages:(8/430)----------
+command: testng -Xmx4g -XX:+CompactStrings StringJoinerTest
+reason: User specified action: run testng/othervm -Xmx4g -XX:+CompactStrings StringJoinerTest 
+started: Thu Oct 01 20:34:24 UTC 2026
+Mode: othervm [/othervm specified]
+Additional options from @modules: --add-modules java.base --add-exports java.base/jdk.internal.util=ALL-UNNAMED
+Process id: 238661
+finished: Thu Oct 01 20:37:05 UTC 2026
+elapsed time (seconds): 160.965
+----------configuration:(4/111)----------
+Boot Layer
+  add modules: java.base                   
+  add exports: java.base/jdk.internal.util ALL-UNNAMED
+
+----------System.out:(89/5738)----------
+test StringJoinerTest.OOM1(): success [15ms]
+test StringJoinerTest.OOM2(): failure [7ms]
+java.lang.AssertionError: Should have thrown OutOfMemoryError
+	at org.testng.Assert.fail(Assert.java:110)
+	at StringJoinerTest.OOM2(StringJoinerTest.java:342)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:136)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:658)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:219)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:923)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:192)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:808)
+	at org.testng.TestRunner.run(TestRunner.java:603)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:429)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:423)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:383)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:326)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1249)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1169)
+	at org.testng.TestNG.runSuites(TestNG.java:1092)
+	at org.testng.TestNG.run(TestNG.java:1060)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:107)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:63)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainTask.run(MainWrapper.java:138)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+test StringJoinerTest.OOM3(): failure [2ms]
+java.lang.AssertionError: Should have thrown OutOfMemoryError
+	at org.testng.Assert.fail(Assert.java:110)
+	at StringJoinerTest.OOM3(StringJoinerTest.java:351)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:136)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:658)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:219)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:50)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:923)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:192)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:146)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:128)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at org.testng.TestRunner.privateRun(TestRunner.java:808)
+	at org.testng.TestRunner.run(TestRunner.java:603)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:429)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:423)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:383)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:326)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1249)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1169)
+	at org.testng.TestNG.runSuites(TestNG.java:1092)
+	at org.testng.TestNG.run(TestNG.java:1060)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:107)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:63)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainTask.run(MainWrapper.java:138)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+test StringJoinerTest.OOM4(): success [0ms]
+test StringJoinerTest.addAddAll(): success [1ms]
+test StringJoinerTest.addAlladdAll(): success [1ms]
+test StringJoinerTest.addCharSequence(): success [0ms]
+test StringJoinerTest.addCharSequenceWithEmptyValue(): success [0ms]
+test StringJoinerTest.addString(): success [0ms]
+test StringJoinerTest.lengthWithCustomEmptyValue(): success [0ms]
+test StringJoinerTest.noAddAndEmptyValue(): success [0ms]
+test StringJoinerTest.setDelimiterNull(): success [0ms]
+test StringJoinerTest.setEmptyValueNull(): success [0ms]
+test StringJoinerTest.setPrefixNull(): success [0ms]
+test StringJoinerTest.setSuffixNull(): success [0ms]
+test StringJoinerTest.stringFromtoString(): success [0ms]
+test StringJoinerTest.stringFromtoStringWithEmptyValue(): success [0ms]
+test StringJoinerTest.testDelimiterCombinations(): success [22ms]
+test StringJoinerTest.toStringWithCustomEmptyValue(): success [0ms]
+
+===============================================
+java/util/StringJoiner/StringJoinerTest.java
+Total tests run: 19, Passes: 17, Failures: 2, Skips: 0
+===============================================
+
+----------System.err:(12/746)----------
+java.lang.Exception: config failures: 0, test failures: 2
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:111)
+	at com.sun.javatest.regtest.agent.TestNGRunner.main(TestNGRunner.java:63)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.sun.javatest.regtest.agent.MainWrapper$MainTask.run(MainWrapper.java:138)
+	at java.base/java.lang.Thread.run(Thread.java:1583)
+
+JavaTest Message: Test threw exception: java.lang.Exception: config failures: 0, test failures: 2
+JavaTest Message: shutting down test
+
+STATUS:Failed.`main' threw exception: java.lang.Exception: config failures: 0, test failures: 2
+----------rerun:(35/2806)*----------
+cd /workspace/m3-integration-final-jtreg/jtreg-enabled-work/scratch/1 && \\
+HOME=/home/agent \\
+JTREG_JAR=/workspace/m3-jtreg/root/usr/share/jtreg/lib/jtreg.jar \\
+LANG=C.UTF-8 \\
+LC_ALL=C.UTF-8 \\
+LC_CTYPE=C.UTF-8 \\
+PATH=/bin:/usr/bin:/usr/sbin \\
+CLASSPATH=/workspace/m3-integration-final-jtreg/jtreg-enabled-work/classes/0/java/util/StringJoiner/StringJoinerTest.d:/workspace/M3jdk21/test/jdk/java/util/StringJoiner:/workspace/m3-jtreg/root/usr/share/jtreg/lib/testng.jar:/workspace/m3-jtreg/root/usr/share/jtreg/lib/guice.jar:/workspace/m3-jtreg/root/usr/share/jtreg/lib/jcommander.jar:/workspace/m3-jtreg/root/usr/share/jtreg/lib/slf4j-simple.jar:/workspace/m3-jtreg/root/usr/share/jtreg/lib/slf4j-api.jar:/workspace/m3-jtreg/root/usr/share/jtreg/lib/javatest.jar:/workspace/m3-jtreg/root/usr/share/jtreg/lib/jtreg.jar \\
+    /workspace/M3jdk21/build/linux-x86_64-server-fastdebug/images/jdk/bin/java \\
+        -Dtest.vm.opts= \\
+        -Dtest.tool.vm.opts= \\
+        -Dtest.compiler.opts= \\
+        -Dtest.java.opts='-XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CreateCoredumpOnCrash' \\
+        -Dtest.jdk=/workspace/M3jdk21/build/linux-x86_64-server-fastdebug/images/jdk \\
+        -Dcompile.jdk=/workspace/M3jdk21/build/linux-x86_64-server-fastdebug/images/jdk \\
+        -Dtest.timeout.factor=4.0 \\
+        -Dtest.nativepath=/workspace/M3jdk21/build/linux-x86_64-server-fastdebug/support/test/jdk/jtreg/native/lib \\
+        -Dtest.root=/workspace/M3jdk21/test/jdk \\
+        -Dtest.name=java/util/StringJoiner/StringJoinerTest.java \\
+        -Dtest.file=/workspace/M3jdk21/test/jdk/java/util/StringJoiner/StringJoinerTest.java \\
+        -Dtest.main.class=StringJoinerTest \\
+        -Dtest.src=/workspace/M3jdk21/test/jdk/java/util/StringJoiner \\
+        -Dtest.src.path=/workspace/M3jdk21/test/jdk/java/util/StringJoiner \\
+        -Dtest.classes=/workspace/m3-integration-final-jtreg/jtreg-enabled-work/classes/0/java/util/StringJoiner/StringJoinerTest.d \\
+        -Dtest.class.path=/workspace/m3-integration-final-jtreg/jtreg-enabled-work/classes/0/java/util/StringJoiner/StringJoinerTest.d \\
+        -Dtest.modules=java.base/jdk.internal.util \\
+        --add-modules java.base \\
+        --add-exports java.base/jdk.internal.util=ALL-UNNAMED \\
+        -XX:+UnlockExperimentalVMOptions \\
+        -XX:+UseM3StringStorage \\
+        -XX:-CreateCoredumpOnCrash \\
+        -Djava.library.path=/workspace/M3jdk21/build/linux-x86_64-server-fastdebug/support/test/jdk/jtreg/native/lib \\
+        -Xmx4g \\
+        -XX:+CompactStrings \\
+        com.sun.javatest.regtest.agent.MainWrapper /workspace/m3-integration-final-jtreg/jtreg-enabled-work/java/util/StringJoiner/StringJoinerTest.d/testng.1.jta java/util/StringJoiner/StringJoinerTest.java false StringJoinerTest
+result: Failed. Execution failed: `main' threw exception: java.lang.Exception: config failures: 0, test failures: 2
+
+
+test result: Failed. Execution failed: `main' threw exception: java.lang.Exception: config failures: 0, test failures: 2

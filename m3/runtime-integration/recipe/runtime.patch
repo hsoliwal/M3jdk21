@@ -1,0 +1,3654 @@
+diff --git a/src/hotspot/share/classfile/javaClasses.cpp b/src/hotspot/share/classfile/javaClasses.cpp
+index 78d9281ac..5c65dfaec 100644
+--- a/src/hotspot/share/classfile/javaClasses.cpp
++++ b/src/hotspot/share/classfile/javaClasses.cpp
+@@ -193,9 +193,7 @@ void JavaClasses::compute_offset(int& dest_offset, InstanceKlass* ik,
+ // java_lang_String
+ 
+ int java_lang_String::_value_offset;
+-int java_lang_String::_m3Parts_offset;
+-int java_lang_String::_m3Ranges_offset;
+-int java_lang_String::_m3Length_offset;
++int java_lang_String::_mindex_offset;
+ int java_lang_String::_hash_offset;
+ int java_lang_String::_hashIsZero_offset;
+ int java_lang_String::_coder_offset;
+@@ -217,10 +215,8 @@ bool java_lang_String::test_and_set_flag(oop java_string, uint8_t flag_mask) {
+ }
+ 
+ #define STRING_FIELDS_DO(macro) \
+-  macro(_m3Parts_offset, k, "m3Parts", string_array_signature, false); \
+-  macro(_m3Ranges_offset, k, "m3Ranges", int_array_signature, false); \
+-  macro(_m3Length_offset, k, "m3Length", int_signature, false); \
+   macro(_value_offset, k, vmSymbols::value_name(), byte_array_signature, false); \
++  macro(_mindex_offset, k, "mindex",          mindex_string_signature, false); \
+   macro(_hash_offset,  k, "hash",                  int_signature,        false); \
+   macro(_hashIsZero_offset, k, "hashIsZero",       bool_signature,       false); \
+   macro(_coder_offset, k, "coder",                 byte_signature,       false);
+@@ -267,12 +263,15 @@ void java_lang_String::set_compact_strings(bool value) {
+   vmClasses::String_klass()->do_local_static_fields(&fix);
+ }
+ 
+-class M3SegmentedStringsFixup : public FieldClosure {
++class M3JoinedStringsFixup : public FieldClosure {
++private:
+   bool _value;
++
+ public:
+-  M3SegmentedStringsFixup(bool value) : _value(value) {}
++  M3JoinedStringsFixup(bool value) : _value(value) {}
++
+   void do_field(fieldDescriptor* fd) {
+-    if (fd->name()->equals("M3_SEGMENTS")) {
++    if (fd->name() == vmSymbols::m3_joined_strings_name()) {
+       oop mirror = fd->field_holder()->java_mirror();
+       assert(fd->field_holder() == vmClasses::String_klass(), "Should be String");
+       assert(mirror != nullptr, "String must have mirror already");
+@@ -281,8 +280,8 @@ public:
+   }
+ };
+ 
+-void java_lang_String::set_m3_segmented_strings(bool value) {
+-  M3SegmentedStringsFixup fix(value);
++void java_lang_String::set_m3_joined_strings(bool value) {
++  M3JoinedStringsFixup fix(value);
+   vmClasses::String_klass()->do_local_static_fields(&fix);
+ }
+ 
+@@ -504,7 +503,7 @@ jchar* java_lang_String::as_unicode_string(oop java_string, int& length, TRAPS)
+ }
+ 
+ jchar* java_lang_String::as_unicode_string_or_null(oop java_string, int& length) {
+-  if (is_segmented(java_string)) {
++  if (is_m3_joined(java_string)) {
+     length = java_lang_String::length(java_string);
+     jchar* result = NEW_RESOURCE_ARRAY_RETURN_NULL(jchar, length);
+     if (result != nullptr) {
+@@ -573,8 +572,8 @@ inline unsigned int java_lang_String::hash_code_impl(oop java_string, bool updat
+   bool     is_latin1 = java_lang_String::is_latin1(java_string);
+ 
+   unsigned int hash = 0;
+-  if (is_segmented(java_string)) {
+-    for (int i = 0; i < length; i++) hash = 31 * hash + char_at(java_string, i);
++  if (is_m3_joined(java_string)) {
++    hash = (unsigned int) java_lang_MIndexString::java_hash(m3_storage(java_string));
+   } else if (length > 0) {
+     if (is_latin1) {
+       hash = java_lang_String::hash_code(value->byte_at_addr(0), length);
+@@ -603,7 +602,7 @@ unsigned int java_lang_String::hash_code_noupdate(oop java_string) {
+ 
+ 
+ char* java_lang_String::as_quoted_ascii(oop java_string) {
+-  if (is_segmented(java_string)) {
++  if (is_m3_joined(java_string)) {
+     int len = length(java_string);
+     if (len == 0) return nullptr;
+     jchar* chars = m3_unicode_range(java_string, 0, len);
+@@ -638,7 +637,7 @@ char* java_lang_String::as_quoted_ascii(oop java_string) {
+ }
+ 
+ Symbol* java_lang_String::as_symbol(oop java_string) {
+-  if (is_segmented(java_string)) {
++  if (is_m3_joined(java_string)) {
+     ResourceMark rm;
+     int len = length(java_string);
+     return SymbolTable::new_symbol(m3_unicode_range(java_string, 0, len), len);
+@@ -661,7 +660,7 @@ Symbol* java_lang_String::as_symbol(oop java_string) {
+ }
+ 
+ Symbol* java_lang_String::as_symbol_or_null(oop java_string) {
+-  if (is_segmented(java_string)) {
++  if (is_m3_joined(java_string)) {
+     ResourceMark rm;
+     int len = length(java_string);
+     return SymbolTable::probe_unicode(m3_unicode_range(java_string, 0, len), len);
+@@ -682,7 +681,7 @@ Symbol* java_lang_String::as_symbol_or_null(oop java_string) {
+ }
+ 
+ int java_lang_String::utf8_length(oop java_string, typeArrayOop value) {
+-  if (is_segmented(java_string)) {
++  if (is_m3_joined(java_string)) {
+     int result = 0;
+     int len = length(java_string);
+     for (int i = 0; i < len; i++) result += UNICODE::utf8_size(char_at(java_string, i));
+@@ -713,7 +712,7 @@ char* java_lang_String::as_utf8_string(oop java_string) {
+ }
+ 
+ char* java_lang_String::as_utf8_string(oop java_string, int& length) {
+-  if (is_segmented(java_string)) {
++  if (is_m3_joined(java_string)) {
+     int units = java_lang_String::length(java_string);
+     length = utf8_length(java_string);
+     char* result = NEW_RESOURCE_ARRAY(char, length + 1);
+@@ -735,7 +734,7 @@ char* java_lang_String::as_utf8_string(oop java_string, int& length) {
+ // Uses a provided buffer if it's sufficiently large, otherwise allocates
+ // a resource array to fit
+ char* java_lang_String::as_utf8_string_full(oop java_string, char* buf, int buflen, int& utf8_len) {
+-  if (is_segmented(java_string)) {
++  if (is_m3_joined(java_string)) {
+     int len = length(java_string);
+     utf8_len = utf8_length(java_string);
+     if (utf8_len >= buflen) buf = NEW_RESOURCE_ARRAY(char, utf8_len + 1);
+@@ -763,7 +762,7 @@ char* java_lang_String::as_utf8_string_full(oop java_string, char* buf, int bufl
+ }
+ 
+ char* java_lang_String::as_utf8_string(oop java_string, typeArrayOop value, char* buf, int buflen) {
+-  if (is_segmented(java_string)) {
++  if (is_m3_joined(java_string)) {
+     int len = length(java_string);
+     return m3_utf8_range(java_string, 0, len, buf, buflen);
+   }
+@@ -787,7 +786,7 @@ char* java_lang_String::as_utf8_string(oop java_string, char* buf, int buflen) {
+ }
+ 
+ char* java_lang_String::as_utf8_string(oop java_string, int start, int len) {
+-  if (is_segmented(java_string)) {
++  if (is_m3_joined(java_string)) {
+     assert(start >= 0 && len >= 0 && start <= length(java_string) - len, "String range");
+     int bytes = 0;
+     for (int i = 0; i < len; i++) bytes += UNICODE::utf8_size(char_at(java_string, start + i));
+@@ -808,7 +807,7 @@ char* java_lang_String::as_utf8_string(oop java_string, int start, int len) {
+ }
+ 
+ char* java_lang_String::as_utf8_string(oop java_string, typeArrayOop value, int start, int len, char* buf, int buflen) {
+-  if (is_segmented(java_string)) {
++  if (is_m3_joined(java_string)) {
+     assert(start >= 0 && len >= 0 && start <= length(java_string) - len, "String range");
+     return m3_utf8_range(java_string, start, len, buf, buflen);
+   }
+@@ -827,7 +826,7 @@ char* java_lang_String::as_utf8_string(oop java_string, typeArrayOop value, int
+ }
+ 
+ bool java_lang_String::equals(oop java_string, const jchar* chars, int len) {
+-  if (is_segmented(java_string)) {
++  if (is_m3_joined(java_string)) {
+     if (length(java_string) != len) return false;
+     for (int i = 0; i < len; i++) if (char_at(java_string, i) != chars[i]) return false;
+     return true;
+@@ -858,7 +857,7 @@ bool java_lang_String::equals(oop java_string, const jchar* chars, int len) {
+ }
+ 
+ bool java_lang_String::equals(oop str1, oop str2) {
+-  if (is_segmented(str1) || is_segmented(str2)) {
++  if (is_m3_joined(str1) || is_m3_joined(str2)) {
+     int len = length(str1);
+     if (length(str2) != len) return false;
+     for (int i = 0; i < len; i++) if (char_at(str1, i) != char_at(str2, i)) return false;
+@@ -885,7 +884,7 @@ void java_lang_String::print(oop java_string, outputStream* st) {
+   assert(java_string->klass() == vmClasses::String_klass(), "must be java_string");
+   typeArrayOop value  = java_lang_String::value_no_keepalive(java_string);
+ 
+-  if (value == nullptr && !is_segmented(java_string)) {
++  if (value == nullptr && !is_m3_joined(java_string)) {
+     // This can happen if, e.g., printing a String
+     // object before its initializer has been called
+     st->print("nullptr");
+@@ -906,6 +905,40 @@ void java_lang_String::print(oop java_string, outputStream* st) {
+   st->print("\"");
+ }
+ 
++// java_lang_MIndexString
++
++int java_lang_MIndexString::_storageKind_offset;
++int java_lang_MIndexString::_localValue_offset;
++int java_lang_MIndexString::_mappedAddress_offset;
++int java_lang_MIndexString::_segments_offset;
++int java_lang_MIndexString::_offsets_offset;
++int java_lang_MIndexString::_ends_offset;
++int java_lang_MIndexString::_length_offset;
++int java_lang_MIndexString::_coder_offset;
++int java_lang_MIndexString::_javaHash_offset;
++
++#define MINDEX_STRING_FIELDS_DO(macro) \
++  macro(_storageKind_offset,  k, "storageKind",  byte_signature,                false); \
++  macro(_localValue_offset,   k, "localValue",   byte_array_signature,          false); \
++  macro(_mappedAddress_offset,k, "mappedAddress",long_signature,                false); \
++  macro(_segments_offset,     k, "segments",     mindex_string_array_signature, false); \
++  macro(_offsets_offset,      k, "offsets",      int_array_signature,           false); \
++  macro(_ends_offset,         k, "ends",         int_array_signature,           false); \
++  macro(_length_offset,       k, "length",       int_signature,                 false); \
++  macro(_coder_offset,        k, "coder",        byte_signature,                false); \
++  macro(_javaHash_offset,     k, "javaHash",     int_signature,                 false);
++
++void java_lang_MIndexString::compute_offsets() {
++  InstanceKlass* k = vmClasses::MIndexString_klass();
++  MINDEX_STRING_FIELDS_DO(FIELD_COMPUTE_OFFSET);
++}
++
++#if INCLUDE_CDS
++void java_lang_MIndexString::serialize_offsets(SerializeClosure* f) {
++  MINDEX_STRING_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
++}
++#endif
++
+ // java_lang_Class
+ 
+ int java_lang_Class::_klass_offset;
+@@ -5326,6 +5359,7 @@ void java_lang_InternalError::serialize_offsets(SerializeClosure* f) {
+   //end
+ 
+ #define BASIC_JAVA_CLASSES_DO_PART2(f) \
++  f(java_lang_MIndexString) \
+   f(java_lang_System) \
+   f(java_lang_ClassLoader) \
+   f(java_lang_Throwable) \
+@@ -5409,6 +5443,13 @@ void JavaClasses::serialize_offsets(SerializeClosure* soc) {
+ bool JavaClasses::is_supported_for_archiving(oop obj) {
+   Klass* klass = obj->klass();
+ 
++  if ((klass == vmClasses::String_klass() && java_lang_String::is_m3_joined(obj)) ||
++      klass == vmClasses::MIndexString_klass()) {
++    // Stage-2 M3 strings are rebuilt at runtime. Archiving their segment graph
++    // is intentionally deferred until explicit CDS relocation support exists.
++    return false;
++  }
++
+   if (klass == vmClasses::ClassLoader_klass() ||  // ClassLoader::loader_data is malloc'ed.
+       // The next 3 classes are used to implement java.lang.invoke, and are not used directly in
+       // regular Java code. The implementation of java.lang.invoke uses generated hidden classes
+diff --git a/src/hotspot/share/classfile/javaClasses.hpp b/src/hotspot/share/classfile/javaClasses.hpp
+index 0077c5cee..709b649fb 100644
+--- a/src/hotspot/share/classfile/javaClasses.hpp
++++ b/src/hotspot/share/classfile/javaClasses.hpp
+@@ -54,9 +54,7 @@ class java_lang_Object : AllStatic {
+ class java_lang_String : AllStatic {
+  private:
+   static int _value_offset;
+-  static int _m3Parts_offset;
+-  static int _m3Ranges_offset;
+-  static int _m3Length_offset;
++  static int _mindex_offset;
+   static int _hash_offset;
+   static int _hashIsZero_offset;
+   static int _coder_offset;
+@@ -103,9 +101,10 @@ class java_lang_String : AllStatic {
+   static Handle create_from_platform_dependent_str(const char* str, TRAPS);
+ 
+   static void set_compact_strings(bool value);
+-  static void set_m3_segmented_strings(bool value);
++  static void set_m3_joined_strings(bool value);
+ 
+   static int value_offset() { CHECK_INIT(_value_offset); }
++  static int m3_storage_offset() { CHECK_INIT(_mindex_offset); }
+   static int coder_offset() { CHECK_INIT(_coder_offset); }
+ 
+   static inline void set_value_raw(oop string, typeArrayOop buffer);
+@@ -125,11 +124,12 @@ class java_lang_String : AllStatic {
+   static inline bool test_and_set_deduplication_requested(oop java_string);
+ 
+   // Accessors
+-  // These readers never allocate Java objects or safepoint.
+-  static inline bool is_segmented(oop java_string);
+-  static inline jchar char_at(oop java_string, int index);
+   static inline typeArrayOop value(oop java_string);
+   static inline typeArrayOop value_no_keepalive(oop java_string);
++  static inline oop m3_storage(oop java_string);
++  static inline oop m3_storage_no_keepalive(oop java_string);
++  static inline bool is_m3_joined(oop java_string);
++  static inline jchar char_at(oop java_string, int index);
+   static inline bool hash_is_set(oop string);
+   static inline bool is_latin1(oop java_string);
+   static inline bool deduplication_forbidden(oop java_string);
+@@ -204,6 +204,46 @@ class java_lang_String : AllStatic {
+   friend class StringTable;
+ };
+ 
++/**
++ * VM access to java.lang.MIndexString.  The Java object owns the GC-visible
++ * segment references; HotSpot reads the immutable coordinate arrays directly
++ * for JNI/StringTable/debug paths that cannot assume contiguous String.value.
++ */
++class java_lang_MIndexString : AllStatic {
++ private:
++  static int _storageKind_offset;
++  static int _localValue_offset;
++  static int _mappedAddress_offset;
++  static int _segments_offset;
++  static int _offsets_offset;
++  static int _ends_offset;
++  static int _length_offset;
++  static int _coder_offset;
++  static int _javaHash_offset;
++
++ public:
++  enum StorageKind {
++    EMPTY = 0,
++    LOCAL = 1,
++    LEXICON = 2,
++    JOINED = 3
++  };
++
++  static void compute_offsets();
++  static void serialize_offsets(SerializeClosure* f) NOT_CDS_RETURN;
++
++  static inline jbyte storage_kind(oop storage);
++  static inline typeArrayOop local_value(oop storage);
++  static inline jlong mapped_address(oop storage);
++  static inline objArrayOop segments(oop storage);
++  static inline typeArrayOop offsets(oop storage);
++  static inline typeArrayOop ends(oop storage);
++  static inline int length(oop storage);
++  static inline jbyte coder(oop storage);
++  static inline jint java_hash(oop storage);
++  static inline jchar char_at(oop storage, int index);
++};
++
+ 
+ // Interface to java.lang.Class objects
+ 
+diff --git a/src/hotspot/share/classfile/javaClasses.inline.hpp b/src/hotspot/share/classfile/javaClasses.inline.hpp
+index 6121f7da1..7de437788 100644
+--- a/src/hotspot/share/classfile/javaClasses.inline.hpp
++++ b/src/hotspot/share/classfile/javaClasses.inline.hpp
+@@ -32,8 +32,8 @@
+ #include "oops/instanceKlass.inline.hpp"
+ #include "oops/method.hpp"
+ #include "oops/oop.inline.hpp"
+-#include "oops/objArrayOop.inline.hpp"
+ #include "oops/oopsHierarchy.hpp"
++#include "oops/objArrayOop.inline.hpp"
+ #include "oops/typeArrayOop.inline.hpp"
+ 
+ void java_lang_String::set_coder(oop string, jbyte coder) {
+@@ -55,8 +55,7 @@ bool java_lang_String::hash_is_set(oop java_string) {
+ // Accessors
+ bool java_lang_String::value_equals(typeArrayOop str_value1, typeArrayOop str_value2) {
+   return ((str_value1 == str_value2) ||
+-          (str_value1 != nullptr && str_value2 != nullptr &&
+-           str_value1->length() == str_value2->length() &&
++          (str_value1->length() == str_value2->length() &&
+            (!memcmp(str_value1->base(T_BYTE),
+                     str_value2->base(T_BYTE),
+                     str_value2->length() * sizeof(jbyte)))));
+@@ -72,34 +71,38 @@ typeArrayOop java_lang_String::value_no_keepalive(oop java_string) {
+   return (typeArrayOop) java_string->obj_field_access<AS_NO_KEEPALIVE>(_value_offset);
+ }
+ 
+-bool java_lang_String::is_segmented(oop java_string) {
+-  return java_string->obj_field_access<AS_NO_KEEPALIVE>(_m3Parts_offset) != nullptr;
++oop java_lang_String::m3_storage(oop java_string) {
++  assert(is_instance(java_string), "must be java_string");
++  return java_string->obj_field_acquire(_mindex_offset);
++}
++
++oop java_lang_String::m3_storage_no_keepalive(oop java_string) {
++  assert(is_instance(java_string), "must be java_string");
++  return java_string->obj_field_access<AS_NO_KEEPALIVE | MO_ACQUIRE>(_mindex_offset);
++}
++
++bool java_lang_String::is_m3_joined(oop java_string) {
++  return m3_storage_no_keepalive(java_string) != nullptr;
+ }
+ 
+ jchar java_lang_String::char_at(oop java_string, int index) {
+-  assert(index >= 0 && index < length(java_string), "String index");
+-  objArrayOop parts = (objArrayOop)java_string->obj_field(_m3Parts_offset);
+-  if (parts != nullptr) {
+-    typeArrayOop ranges = (typeArrayOop)java_string->obj_field(_m3Ranges_offset);
+-    int lo = 0, hi = parts->length() - 1;
+-    while (lo < hi) {
+-      int mid = lo + (hi - lo) / 2;
+-      if (index < ranges->int_at(2 * mid + 1)) hi = mid;
+-      else lo = mid + 1;
+-    }
+-    int previous_end = lo == 0 ? 0 : ranges->int_at(2 * lo - 1);
+-    index = ranges->int_at(2 * lo) + index - previous_end;
+-    java_string = parts->obj_at(lo);
+-    assert(!is_segmented(java_string), "M3 leaves must be flat");
++  oop storage = m3_storage(java_string);
++  if (storage != nullptr) {
++    return java_lang_MIndexString::char_at(storage, index);
+   }
+-  typeArrayOop bytes = value(java_string);
+-  return is_latin1(java_string) ? (jchar)(bytes->byte_at(index) & 0xff)
+-                                : bytes->char_at(index);
++  typeArrayOop string_value = value(java_string);
++  if (is_latin1(java_string)) {
++    return ((jchar)string_value->byte_at(index)) & 0xff;
++  }
++  return string_value->char_at(index);
+ }
+ 
+ bool java_lang_String::is_latin1(oop java_string) {
+   assert(is_instance(java_string), "must be java_string");
+-  jbyte coder = java_string->byte_field(_coder_offset);
++  oop storage = m3_storage_no_keepalive(java_string);
++  jbyte coder = storage == nullptr
++      ? java_string->byte_field(_coder_offset)
++      : java_lang_MIndexString::coder(storage);
+   assert(CompactStrings || coder == CODER_UTF16, "Must be UTF16 without CompactStrings");
+   return coder == CODER_LATIN1;
+ }
+@@ -133,11 +136,12 @@ bool java_lang_String::test_and_set_deduplication_requested(oop java_string) {
+ int java_lang_String::length(oop java_string, typeArrayOop value) {
+   assert(_initialized, "Must be initialized");
+   assert(is_instance(java_string), "must be java_string");
++  oop storage = m3_storage_no_keepalive(java_string);
++  if (storage != nullptr) {
++    return java_lang_MIndexString::length(storage);
++  }
+   assert(value_equals(value, java_lang_String::value(java_string)),
+          "value must be equal to java_lang_String::value(java_string)");
+-  if (is_segmented(java_string)) {
+-    return java_string->int_field(_m3Length_offset);
+-  }
+   if (value == nullptr) {
+     return 0;
+   }
+@@ -160,6 +164,97 @@ bool java_lang_String::is_instance(oop obj) {
+   return obj != nullptr && obj->klass() == vmClasses::String_klass();
+ }
+ 
++// java.lang.MIndexString accessors
++
++jbyte java_lang_MIndexString::storage_kind(oop storage) {
++  return storage->byte_field(_storageKind_offset);
++}
++
++typeArrayOop java_lang_MIndexString::local_value(oop storage) {
++  return (typeArrayOop)storage->obj_field(_localValue_offset);
++}
++
++jlong java_lang_MIndexString::mapped_address(oop storage) {
++  return storage->long_field(_mappedAddress_offset);
++}
++
++objArrayOop java_lang_MIndexString::segments(oop storage) {
++  return (objArrayOop)storage->obj_field(_segments_offset);
++}
++
++typeArrayOop java_lang_MIndexString::offsets(oop storage) {
++  return (typeArrayOop)storage->obj_field(_offsets_offset);
++}
++
++typeArrayOop java_lang_MIndexString::ends(oop storage) {
++  return (typeArrayOop)storage->obj_field(_ends_offset);
++}
++
++int java_lang_MIndexString::length(oop storage) {
++  return storage->int_field(_length_offset);
++}
++
++jbyte java_lang_MIndexString::coder(oop storage) {
++  return storage->byte_field(_coder_offset);
++}
++
++jint java_lang_MIndexString::java_hash(oop storage) {
++  return storage->int_field(_javaHash_offset);
++}
++
++jchar java_lang_MIndexString::char_at(oop storage, int index) {
++  const int storage_length = length(storage);
++  assert(index >= 0 && index < storage_length, "String index out of bounds");
++
++  const jbyte kind = storage_kind(storage);
++  if (kind == LOCAL) {
++    typeArrayOop value = local_value(storage);
++    if (coder(storage) == java_lang_String::CODER_LATIN1) {
++      return ((jchar)value->byte_at(index)) & 0xff;
++    }
++    return value->char_at(index);
++  }
++
++  if (kind == LEXICON || kind == 4 /* SYNARR01 UTF16BE */) {
++    const jlong address = mapped_address(storage);
++    assert(address != 0, "mapped MIndexString atom must have an address");
++    const uint8_t* bytes = reinterpret_cast<const uint8_t*>((uintptr_t)address);
++    const size_t at = (size_t)index << 1;
++    return kind == 4 ? (jchar)(((uint16_t)bytes[at] << 8) | bytes[at + 1])
++                     : (jchar)(((uint16_t)bytes[at]) | ((uint16_t)bytes[at + 1] << 8));
++  }
++
++  if (kind == JOINED) {
++    objArrayOop segment_array = segments(storage);
++    typeArrayOop offset_array = offsets(storage);
++    typeArrayOop end_array = ends(storage);
++
++    int low = 0;
++    int high = end_array->length() - 1;
++    const int key = index + 1;
++    while (low <= high) {
++      const int mid = (low + high) >> 1;
++      const int segment_end = end_array->int_at(mid);
++      if (segment_end < key) {
++        low = mid + 1;
++        continue;
++      }
++      if (mid > 0 && end_array->int_at(mid - 1) >= key) {
++        high = mid - 1;
++        continue;
++      }
++      const int previous = mid == 0 ? 0 : end_array->int_at(mid - 1);
++      oop atom = segment_array->obj_at(mid);
++      const int atom_index = offset_array->int_at(mid) + index - previous;
++      return java_lang_MIndexString::char_at(atom, atom_index);
++    }
++    ShouldNotReachHere();
++  }
++
++  ShouldNotReachHere();
++  return 0;
++}
++
+ // Accessors
+ 
+ oop java_lang_ref_Reference::weak_referent_no_keepalive(oop ref) {
+diff --git a/src/hotspot/share/classfile/vmClassMacros.hpp b/src/hotspot/share/classfile/vmClassMacros.hpp
+index bb2babff2..d8a6f969c 100644
+--- a/src/hotspot/share/classfile/vmClassMacros.hpp
++++ b/src/hotspot/share/classfile/vmClassMacros.hpp
+@@ -52,6 +52,7 @@
+   do_klass(Object_klass,                                java_lang_Object                                      ) \
+   do_klass(String_klass,                                java_lang_String                                      ) \
+   do_klass(Class_klass,                                 java_lang_Class                                       ) \
++  do_klass(MIndexString_klass,                       java_lang_MIndexString                             ) \
+   do_klass(Cloneable_klass,                             java_lang_Cloneable                                   ) \
+   do_klass(ClassLoader_klass,                           java_lang_ClassLoader                                 ) \
+   do_klass(Serializable_klass,                          java_io_Serializable                                  ) \
+diff --git a/src/hotspot/share/classfile/vmIntrinsics.cpp b/src/hotspot/share/classfile/vmIntrinsics.cpp
+index 578b171a5..5b4b5eaa7 100644
+--- a/src/hotspot/share/classfile/vmIntrinsics.cpp
++++ b/src/hotspot/share/classfile/vmIntrinsics.cpp
+@@ -203,6 +203,54 @@ int vmIntrinsics::predicates_needed(vmIntrinsics::ID id) {
+ bool vmIntrinsics::disabled_by_jvm_flags(vmIntrinsics::ID id) {
+   assert(id != vmIntrinsics::_none, "must be a VM intrinsic");
+ 
++  // Stage-2 M3 Strings may carry segmented backing while String.value is only
++  // a compatibility sentinel. Until each String intrinsic has a segment-aware
++  // lowering, fail closed and execute the Java implementations.
++  if (UseM3StringStorage) {
++    switch (id) {
++    case vmIntrinsics::_String_String:
++    case vmIntrinsics::_compressStringC:
++    case vmIntrinsics::_compressStringB:
++    case vmIntrinsics::_inflateStringC:
++    case vmIntrinsics::_inflateStringB:
++    case vmIntrinsics::_toBytesStringU:
++    case vmIntrinsics::_getCharsStringU:
++    case vmIntrinsics::_getCharStringU:
++    case vmIntrinsics::_putCharStringU:
++    case vmIntrinsics::_compareToL:
++    case vmIntrinsics::_compareToU:
++    case vmIntrinsics::_compareToLU:
++    case vmIntrinsics::_compareToUL:
++    case vmIntrinsics::_indexOfL:
++    case vmIntrinsics::_indexOfU:
++    case vmIntrinsics::_indexOfUL:
++    case vmIntrinsics::_indexOfIL:
++    case vmIntrinsics::_indexOfIU:
++    case vmIntrinsics::_indexOfIUL:
++    case vmIntrinsics::_indexOfU_char:
++    case vmIntrinsics::_indexOfL_char:
++    case vmIntrinsics::_equalsL:
++    case vmIntrinsics::_equalsU:
++    case vmIntrinsics::_StringBuilder_void:
++    case vmIntrinsics::_StringBuilder_int:
++    case vmIntrinsics::_StringBuilder_String:
++    case vmIntrinsics::_StringBuilder_append_char:
++    case vmIntrinsics::_StringBuilder_append_int:
++    case vmIntrinsics::_StringBuilder_append_String:
++    case vmIntrinsics::_StringBuilder_toString:
++    case vmIntrinsics::_StringBuffer_void:
++    case vmIntrinsics::_StringBuffer_int:
++    case vmIntrinsics::_StringBuffer_String:
++    case vmIntrinsics::_StringBuffer_append_char:
++    case vmIntrinsics::_StringBuffer_append_int:
++    case vmIntrinsics::_StringBuffer_append_String:
++    case vmIntrinsics::_StringBuffer_toString:
++      return true;
++    default:
++      break;
++    }
++  }
++
+   // -XX:-InlineNatives disables nearly all intrinsics except the ones listed in
+   // the following switch statement.
+   if (!InlineNatives) {
+diff --git a/src/hotspot/share/classfile/vmSymbols.hpp b/src/hotspot/share/classfile/vmSymbols.hpp
+index 1677597e7..a2bc7e829 100644
+--- a/src/hotspot/share/classfile/vmSymbols.hpp
++++ b/src/hotspot/share/classfile/vmSymbols.hpp
+@@ -59,6 +59,7 @@
+   template(java_lang_Package,                         "java/lang/Package")                        \
+   template(java_lang_Module,                          "java/lang/Module")                         \
+   template(java_lang_String,                          "java/lang/String")                         \
++  template(java_lang_MIndexString,                 "java/lang/MIndexString")                \
+   template(java_lang_StringLatin1,                    "java/lang/StringLatin1")                   \
+   template(java_lang_StringUTF16,                     "java/lang/StringUTF16")                    \
+   template(java_lang_Thread,                          "java/lang/Thread")                         \
+@@ -473,6 +474,7 @@
+   template(cache_field_name,                          "cache")                                    \
+   template(value_name,                                "value")                                    \
+   template(compact_strings_name,                      "COMPACT_STRINGS")                          \
++  template(m3_joined_strings_name,                    "M3_JOINED_STRINGS")                       \
+   template(numberOfLeadingZeros_name,                 "numberOfLeadingZeros")                     \
+   template(numberOfTrailingZeros_name,                "numberOfTrailingZeros")                    \
+   template(bitCount_name,                             "bitCount")                                 \
+@@ -652,6 +654,8 @@
+   template(object_array_signature,                    "[Ljava/lang/Object;")                                      \
+   template(class_signature,                           "Ljava/lang/Class;")                                        \
+   template(string_signature,                          "Ljava/lang/String;")                                       \
++  template(mindex_string_signature,                   "Ljava/lang/MIndexString;")                              \
++  template(mindex_string_array_signature,             "[Ljava/lang/MIndexString;")                             \
+   template(string_array_signature,                    "[Ljava/lang/String;")                                      \
+   template(reference_signature,                       "Ljava/lang/ref/Reference;")                                \
+   template(referencequeue_signature,                  "Ljava/lang/ref/ReferenceQueue;")                           \
+diff --git a/src/hotspot/share/gc/shared/stringdedup/stringDedup.cpp b/src/hotspot/share/gc/shared/stringdedup/stringDedup.cpp
+index 7c37d6428..ec6b8bb70 100644
+--- a/src/hotspot/share/gc/shared/stringdedup/stringDedup.cpp
++++ b/src/hotspot/share/gc/shared/stringdedup/stringDedup.cpp
+@@ -118,6 +118,11 @@ void StringDedup::notify_intern(oop java_string) {
+   // string to the pending requests.  Triggering request processing is left
+   // to the next GC.
+   forbid_deduplication(java_string);
++  if (java_lang_String::is_m3_joined(java_string)) {
++    // The canonical content is the immutable segment graph, not String.value.
++    // Never enqueue the empty compatibility sentinel for byte-array deduplication.
++    return;
++  }
+   StorageUse* requests = Processor::storage_for_requests();
+   oop* ref = requests->storage()->allocate();
+   if (ref != nullptr) {
+@@ -170,6 +175,7 @@ bool StringDedup::Requests::refill_buffer() {
+ 
+ void StringDedup::Requests::add(oop java_string) {
+   assert(is_enabled(), "StringDedup not enabled");
++  if (java_lang_String::is_m3_joined(java_string)) return;
+   if ((_index == 0) && !refill_buffer()) return;
+   // Store the string in the next pre-allocated storage entry.
+   oop* ref = _buffer[--_index];
+diff --git a/src/hotspot/share/jfr/recorder/jfrRecorder.cpp b/src/hotspot/share/jfr/recorder/jfrRecorder.cpp
+index f7732020b..2e7fb16cf 100644
+--- a/src/hotspot/share/jfr/recorder/jfrRecorder.cpp
++++ b/src/hotspot/share/jfr/recorder/jfrRecorder.cpp
+@@ -56,7 +56,7 @@
+ 
+ bool JfrRecorder::is_disabled() {
+   // Also prevent recordings requested dynamically through jcmd or Java APIs.
+-  if (UseM3SegmentedStrings) {
++  if (UseM3StringStorage) {
+     return true;
+   }
+   // True if -XX:-FlightRecorder has been explicitly set on the
+@@ -243,7 +243,7 @@ static bool _created = false;
+ bool JfrRecorder::create(bool simulate_failure) {
+   // Java's dynamic Recording API can reach this entry even when recording is
+   // disabled. Return failure to its existing IllegalStateException path.
+-  if (UseM3SegmentedStrings) return false;
++  if (UseM3StringStorage) return false;
+   assert(!is_disabled(), "invariant");
+   assert(!is_created(), "invariant");
+   if (!is_enabled()) {
+diff --git a/src/hotspot/share/oops/instanceKlass.cpp b/src/hotspot/share/oops/instanceKlass.cpp
+index 18ac24f19..565c13643 100644
+--- a/src/hotspot/share/oops/instanceKlass.cpp
++++ b/src/hotspot/share/oops/instanceKlass.cpp
+@@ -3644,9 +3644,9 @@ void InstanceKlass::oop_print_on(oop obj, outputStream* st) {
+   if (this == vmClasses::String_klass()) {
+     typeArrayOop value  = java_lang_String::value(obj);
+     juint        length = java_lang_String::length(obj);
+-    if (java_lang_String::is_segmented(obj) ||
+-        (value != nullptr && value->is_typeArray() &&
+-         length <= (juint) value->length())) {
++    if (value != nullptr &&
++        value->is_typeArray() &&
++        length <= (juint) value->length()) {
+       st->print(BULLET"string: ");
+       java_lang_String::print(obj, st);
+       st->cr();
+@@ -3688,7 +3688,7 @@ void InstanceKlass::oop_print_value_on(oop obj, outputStream* st) {
+   name()->print_value_on(st);
+   obj->print_address_on(st);
+   if (this == vmClasses::String_klass()
+-      && (java_lang_String::value(obj) != nullptr || java_lang_String::is_segmented(obj))) {
++      && java_lang_String::value(obj) != nullptr) {
+     ResourceMark rm;
+     int len = java_lang_String::length(obj);
+     int plen = (len < 24 ? len : 12);
+diff --git a/src/hotspot/share/prims/jni.cpp b/src/hotspot/share/prims/jni.cpp
+index f901b647b..b32db3c3d 100644
+--- a/src/hotspot/share/prims/jni.cpp
++++ b/src/hotspot/share/prims/jni.cpp
+@@ -2160,14 +2160,14 @@ JNI_ENTRY_NO_PRESERVE(const jchar*, jni_GetStringChars(
+   jchar* buf = nullptr;
+   oop s = JNIHandles::resolve_non_null(string);
+   typeArrayOop s_value = java_lang_String::value(s);
+-  if (s_value != nullptr || java_lang_String::is_segmented(s)) {
++  if (s_value != nullptr || java_lang_String::is_m3_joined(s)) {
+     int s_len = java_lang_String::length(s, s_value);
+     bool is_latin1 = java_lang_String::is_latin1(s);
+     buf = NEW_C_HEAP_ARRAY_RETURN_NULL(jchar, s_len + 1, mtInternal);  // add one for zero termination
+     /* JNI Specification states return null on OOM */
+     if (buf != nullptr) {
+       if (s_len > 0) {
+-        if (!is_latin1 && !java_lang_String::is_segmented(s)) {
++        if (!is_latin1 && !java_lang_String::is_m3_joined(s)) {
+           ArrayAccess<>::arraycopy_to_native(s_value, (size_t) typeArrayOopDesc::element_offset<jchar>(0),
+                                              buf, s_len);
+         } else {
+@@ -2230,7 +2230,7 @@ JNI_ENTRY(const char*, jni_GetStringUTFChars(JNIEnv *env, jstring string, jboole
+   char* result = nullptr;
+   oop java_string = JNIHandles::resolve_non_null(string);
+   typeArrayOop s_value = java_lang_String::value(java_string);
+-  if (s_value != nullptr || java_lang_String::is_segmented(java_string)) {
++  if (s_value != nullptr || java_lang_String::is_m3_joined(java_string)) {
+     size_t length = java_lang_String::utf8_length(java_string, s_value);
+     /* JNI Specification states return null on OOM */
+     result = AllocateHeap(length + 1, mtInternal, AllocFailStrategy::RETURN_NULL);
+@@ -2756,7 +2756,7 @@ JNI_ENTRY(void, jni_GetStringRegion(JNIEnv *env, jstring string, jsize start, js
+   } else {
+     if (len > 0) {
+       bool is_latin1 = java_lang_String::is_latin1(s);
+-      if (!is_latin1 && !java_lang_String::is_segmented(s)) {
++      if (!is_latin1 && !java_lang_String::is_m3_joined(s)) {
+         ArrayAccess<>::arraycopy_to_native(s_value, typeArrayOopDesc::element_offset<jchar>(start),
+                                            buf, len);
+       } else {
+@@ -2824,7 +2824,7 @@ JNI_ENTRY(const jchar*, jni_GetStringCritical(JNIEnv *env, jstring string, jbool
+   HOTSPOT_JNI_GETSTRINGCRITICAL_ENTRY(env, string, (uintptr_t *) isCopy);
+   oop s = JNIHandles::resolve_non_null(string);
+   jchar* ret;
+-  if (!java_lang_String::is_latin1(s) && !java_lang_String::is_segmented(s)) {
++  if (!UseM3StringStorage && !java_lang_String::is_latin1(s)) {
+     typeArrayHandle s_value(thread, java_lang_String::value(s));
+ 
+     // Pin value array
+@@ -2856,7 +2856,7 @@ JNI_ENTRY(void, jni_ReleaseStringCritical(JNIEnv *env, jstring str, const jchar
+   oop s = JNIHandles::resolve_non_null(str);
+   bool is_latin1 = java_lang_String::is_latin1(s);
+ 
+-  if (is_latin1 || java_lang_String::is_segmented(s)) {
++  if (UseM3StringStorage || is_latin1) {
+     // Latin1 and segmented Strings return a native copy from GetStringCritical.
+     // This assumes that ReleaseStringCritical bookends GetStringCritical.
+     FREE_C_HEAP_ARRAY(jchar, chars);
+diff --git a/src/hotspot/share/prims/jvmtiTagMap.cpp b/src/hotspot/share/prims/jvmtiTagMap.cpp
+index c4c9a7304..4078de10a 100644
+--- a/src/hotspot/share/prims/jvmtiTagMap.cpp
++++ b/src/hotspot/share/prims/jvmtiTagMap.cpp
+@@ -662,7 +662,7 @@ static jint invoke_string_value_callback(jvmtiStringPrimitiveValueCallback cb,
+ 
+   // JDK-6584008: the value field may be null if a String instance is
+   // partially constructed.
+-  bool segmented = java_lang_String::is_segmented(str);
++  bool segmented = java_lang_String::is_m3_joined(str);
+   if (s_value == nullptr && !segmented) {
+     return 0;
+   }
+diff --git a/src/hotspot/share/runtime/arguments.cpp b/src/hotspot/share/runtime/arguments.cpp
+index 44f90b44a..fa1437ba3 100644
+--- a/src/hotspot/share/runtime/arguments.cpp
++++ b/src/hotspot/share/runtime/arguments.cpp
+@@ -3028,17 +3028,17 @@ jint Arguments::finalize_vm_init_args(bool patch_mod_javabase) {
+   // This representation is not yet supported by optimizing compilers, CDS,
+   // string deduplication or JFR. Enforce the experiment boundary after option
+   // parsing, regardless of command-line ordering (including a trailing -Xcomp).
+-  if (UseM3SegmentedStrings) {
++  if (UseM3StringStorage) {
+ #if INCLUDE_JVMCI
+     if (EnableJVMCI || UseJVMCICompiler) {
+       jio_fprintf(defaultStream::error_stream(),
+-                  "UseM3SegmentedStrings does not support JVMCI\n");
++                  "UseM3StringStorage does not support JVMCI\n");
+       return JNI_ERR;
+     }
+ #endif
+     if (UseStringDeduplication) {
+       jio_fprintf(defaultStream::error_stream(),
+-                  "UseM3SegmentedStrings does not support UseStringDeduplication\n");
++                  "UseM3StringStorage does not support UseStringDeduplication\n");
+       return JNI_ERR;
+     }
+ #if INCLUDE_CDS
+@@ -3046,7 +3046,7 @@ jint Arguments::finalize_vm_init_args(bool patch_mod_javabase) {
+         ArchiveClassesAtExit != nullptr || RecordDynamicDumpInfo ||
+         AutoCreateSharedArchive) {
+       jio_fprintf(defaultStream::error_stream(),
+-                  "UseM3SegmentedStrings does not support CDS archive operations\n");
++                  "UseM3StringStorage does not support CDS archive operations\n");
+       return JNI_ERR;
+     }
+     UseSharedSpaces = false;
+@@ -3055,7 +3055,7 @@ jint Arguments::finalize_vm_init_args(bool patch_mod_javabase) {
+     if (FlightRecorder || StartFlightRecording != nullptr ||
+         FlightRecorderOptions != nullptr) {
+       jio_fprintf(defaultStream::error_stream(),
+-                  "UseM3SegmentedStrings does not support Flight Recorder\n");
++                  "UseM3StringStorage does not support Flight Recorder\n");
+       return JNI_ERR;
+     }
+ #endif
+diff --git a/src/hotspot/share/runtime/globals.hpp b/src/hotspot/share/runtime/globals.hpp
+index f1050fdee..cb3ed3f04 100644
+--- a/src/hotspot/share/runtime/globals.hpp
++++ b/src/hotspot/share/runtime/globals.hpp
+@@ -1100,12 +1100,12 @@ const int ObjectAlignmentInBytes = 8;
+           /* Note:  This value is zero mod 1<<13 for a cheap sparc set. */  \
+           "Inline allocations larger than this in doublewords must go slow")\
+                                                                             \
+-  product(bool, UseM3SegmentedStrings, false, EXPERIMENTAL,                  \
+-          "Enable interpreter-only experimental segmented String storage")  \
+-                                                                            \
+   product_pd(bool, CompactStrings,                                          \
+           "Enable Strings to use single byte chars in backing store")       \
+                                                                             \
++  product(bool, UseM3StringStorage, false, EXPERIMENTAL,                    \
++          "Use immutable joined backing for selected java.lang.String operations") \
++                                                                            \
+   product_pd(uint, TypeProfileLevel,                                        \
+           "=XYZ, with Z: Type profiling of arguments at call; "             \
+                      "Y: Type profiling of return value at call; "          \
+diff --git a/src/hotspot/share/runtime/threads.cpp b/src/hotspot/share/runtime/threads.cpp
+index 3f93c313f..dc5b46f18 100644
+--- a/src/hotspot/share/runtime/threads.cpp
++++ b/src/hotspot/share/runtime/threads.cpp
+@@ -336,9 +336,10 @@ void Threads::initialize_java_lang_classes(JavaThread* main_thread, TRAPS) {
+ 
+   initialize_class(vmSymbols::java_lang_String(), CHECK);
+ 
+-  // Inject CompactStrings value after the static initializers for String ran.
++  // Inject VM-selected String representation features after String's static
++  // initializer ran, before application-visible String construction begins.
+   java_lang_String::set_compact_strings(CompactStrings);
+-  java_lang_String::set_m3_segmented_strings(UseM3SegmentedStrings);
++  java_lang_String::set_m3_joined_strings(UseM3StringStorage);
+ 
+   // Initialize java_lang.System (needed before creating the thread)
+   initialize_class(vmSymbols::java_lang_System(), CHECK);
+diff --git a/src/hotspot/share/services/diagnosticCommand.cpp b/src/hotspot/share/services/diagnosticCommand.cpp
+index 706625812..e1be3fb5e 100644
+--- a/src/hotspot/share/services/diagnosticCommand.cpp
++++ b/src/hotspot/share/services/diagnosticCommand.cpp
+@@ -967,8 +967,8 @@ DumpSharedArchiveDCmd::DumpSharedArchiveDCmd(outputStream* output, bool heap) :
+ }
+ 
+ void DumpSharedArchiveDCmd::execute(DCmdSource source, TRAPS) {
+-  if (UseM3SegmentedStrings) {
+-    output()->print_cr("CDS archive operations are unsupported with UseM3SegmentedStrings");
++  if (UseM3StringStorage) {
++    output()->print_cr("CDS archive operations are unsupported with UseM3StringStorage");
+     return;
+   }
+   jboolean is_static;
+diff --git a/src/hotspot/share/services/finalizerService.cpp b/src/hotspot/share/services/finalizerService.cpp
+index aad06bfd4..561ef1e86 100644
+--- a/src/hotspot/share/services/finalizerService.cpp
++++ b/src/hotspot/share/services/finalizerService.cpp
+@@ -44,7 +44,7 @@
+ static const char* allocate(oop string) {
+   char* str = nullptr;
+   const typeArrayOop value = java_lang_String::value(string);
+-  if (value != nullptr || java_lang_String::is_segmented(string)) {
++  if (value != nullptr || java_lang_String::is_m3_joined(string)) {
+     const int length = java_lang_String::utf8_length(string, value);
+     str = NEW_C_HEAP_ARRAY(char, length + 1, mtServiceability);
+     java_lang_String::as_utf8_string(string, value, str, length + 1);
+diff --git a/src/java.base/share/classes/java/lang/MIndexString.java b/src/java.base/share/classes/java/lang/MIndexString.java
+new file mode 100644
+index 000000000..520e6fa96
+--- /dev/null
++++ b/src/java.base/share/classes/java/lang/MIndexString.java
+@@ -0,0 +1,685 @@
++/*
++ * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.
++ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
++ *
++ * This code is free software; you can redistribute it and/or modify it
++ * under the terms of the GNU General Public License version 2 only, as
++ * published by the Free Software Foundation.  Oracle designates this
++ * particular file as subject to the "Classpath" exception as provided
++ * by Oracle in the LICENSE file that accompanied this code.
++ */
++
++package java.lang;
++
++import java.util.Objects;
++import jdk.internal.misc.Unsafe;
++
++/**
++ * JDK-internal MIndexString storage engine for ordinary {@link String} values.
++ *
++ * <p>The absolute representation invariant is:</p>
++ *
++ * <pre>
++ * String wrapper
++ *      -> canonical MIndexString storage
++ *          -> OS-shared lexicon atom
++ *          -> VM-local interned atom
++ *          -> immutable tuple/range composition of those atoms
++ * </pre>
++ *
++ * <p>Java arrays never resize. Logical concatenation/slicing/repeat changes only immutable
++ * atom/range geometry. A contiguous Compact-String {@code byte[]} is a compatibility projection,
++ * allocated only when a legacy Java/VM/JNI boundary requires it. Local scalar atoms can expose
++ * their already-canonical Compact-String byte array directly; mapped lexicon atoms and joined
++ * values materialize lazily.</p>
++ */
++final class MIndexString {
++    static final byte EMPTY = 0;
++    static final byte LOCAL = 1;
++    static final byte LEXICON = 2;
++    static final byte JOINED = 3;
++    static final byte SHARED_LEXICON = 4; // Existing Synexia SYNARR01 UTF-16BE atoms
++
++    private static final byte[] EMPTY_BYTES = new byte[0];
++    private static final Unsafe UNSAFE = Unsafe.getUnsafe();
++    private static volatile boolean ready;
++    private static final ThreadLocal<Boolean> ADMITTING = new ThreadLocal<>();
++
++    static boolean admissionEnabled() {
++        return ready && ADMITTING.get() != Boolean.TRUE;
++    }
++
++    static void enterAdmission() { ADMITTING.set(Boolean.TRUE); }
++    static void leaveAdmission() { ADMITTING.remove(); }
++
++    private static final MIndexString EMPTY_STORAGE =
++            new MIndexString(
++                    EMPTY,
++                    null,
++                    null,
++                    0L,
++                    null,
++                    new int[0],
++                    new int[0],
++                    0,
++                    String.COMPACT_STRINGS ? String.LATIN1 : String.UTF16,
++                    0L,
++                    0,
++                    MIndexStringPool.mix64(0L));
++
++    /*
++     * These field names/types are part of the M3JDK VM/JDK private contract.
++     * HotSpot resolves them in java_lang_MIndexString.
++     */
++    private final byte storageKind;
++    private final byte[] localValue;
++    private final Object mappedOwner;
++    private final long mappedAddress;
++    private final MIndexString[] segments;
++    private final int[] offsets;
++    private final int[] ends;
++    private final int length;
++    private final byte coder;
++    private final long canonicalId;
++    private final int javaHash;
++    private final long structuralHash64;
++
++    /** Compatibility projection for non-local storage only. */
++    private volatile byte[] materialized;
++
++    private MIndexString(
++            byte storageKind,
++            byte[] localValue,
++            Object mappedOwner,
++            long mappedAddress,
++            MIndexString[] segments,
++            int[] offsets,
++            int[] ends,
++            int length,
++            byte coder,
++            long canonicalId,
++            int javaHash,
++            long structuralHash64) {
++        this.storageKind = storageKind;
++        this.localValue = localValue;
++        this.mappedOwner = mappedOwner;
++        this.mappedAddress = mappedAddress;
++        this.segments = segments;
++        this.offsets = offsets;
++        this.ends = ends;
++        this.length = length;
++        this.coder = coder;
++        this.canonicalId = canonicalId;
++        this.javaHash = javaHash;
++        this.structuralHash64 = structuralHash64;
++    }
++
++    static void activate(String lexiconFile) {
++        if (ready) {
++            return;
++        }
++        synchronized (MIndexString.class) {
++            if (ready) {
++                return;
++            }
++            ADMITTING.set(Boolean.TRUE);
++            MIndexStringPool.initializeLexicon(lexiconFile);
++            // Resolve allocation/class initialization before constructor admission.
++            MIndexStringPool.internScalar(new byte[] {65}, String.LATIN1);
++            ADMITTING.remove();
++            ready = true;
++        }
++    }
++
++    static boolean ready() {
++        return ready;
++    }
++
++    static MIndexString admit(byte[] value, byte coder) {
++        Objects.requireNonNull(value, "value");
++        if (coder != String.LATIN1 && coder != String.UTF16) {
++            throw new IllegalArgumentException("invalid String coder");
++        }
++        if ((value.length >> coder << coder) != value.length) {
++            throw new IllegalArgumentException("misaligned String payload");
++        }
++        enterAdmission();
++        try {
++            return MIndexStringPool.internScalar(value, coder);
++        } finally {
++            leaveAdmission();
++        }
++    }
++
++    static MIndexString emptyStorage() {
++        return EMPTY_STORAGE;
++    }
++
++    static MIndexString localScalar(
++            byte[] canonicalValue, byte coder, long canonicalId, long structuralHash64) {
++        Objects.requireNonNull(canonicalValue, "canonicalValue");
++        int length = canonicalValue.length >> coder;
++        int hash =
++                coder == String.LATIN1
++                        ? StringLatin1.hashCode(canonicalValue)
++                        : StringUTF16.hashCode(canonicalValue);
++        return new MIndexString(
++                LOCAL,
++                canonicalValue,
++                null,
++                0L,
++                null,
++                null,
++                null,
++                length,
++                coder,
++                canonicalId,
++                hash,
++                structuralHash64);
++    }
++
++    static MIndexString lexiconScalar(
++            Object mappedOwner,
++            long mappedAddress,
++            int length,
++            int javaHash,
++            long canonicalId,
++            long structuralHash64, boolean bigEndian) {
++        if (mappedAddress == 0L || length < 0) {
++            throw new IllegalArgumentException("invalid mapped MIndex atom");
++        }
++        return new MIndexString(
++                bigEndian ? SHARED_LEXICON : LEXICON,
++                null,
++                Objects.requireNonNull(mappedOwner, "mappedOwner"),
++                mappedAddress,
++                null,
++                null,
++                null,
++                length,
++                String.COMPACT_STRINGS && mappedLatin1(mappedAddress, length, bigEndian) ? String.LATIN1 : String.UTF16,
++                canonicalId,
++                javaHash,
++                structuralHash64);
++    }
++
++    static MIndexString joinedCanonical(
++            MIndexString[] segments,
++            int[] offsets,
++            int[] lengths,
++            byte coder,
++            int logicalLength,
++            long canonicalId,
++            long structuralHash64) {
++        Objects.requireNonNull(segments, "segments");
++        Objects.requireNonNull(offsets, "offsets");
++        Objects.requireNonNull(lengths, "lengths");
++        if (segments.length != offsets.length || segments.length != lengths.length) {
++            throw new IllegalArgumentException("MIndex tuple lane lengths differ");
++        }
++        int[] ends = new int[segments.length];
++        int total = 0;
++        for (int index = 0; index < segments.length; index++) {
++            MIndexString atom = Objects.requireNonNull(segments[index], "segment");
++            if (!atom.isScalar()) {
++                throw new IllegalArgumentException("joined MIndex pieces must be scalar atoms");
++            }
++            Objects.checkFromIndexSize(offsets[index], lengths[index], atom.length);
++            if (lengths[index] <= 0) {
++                throw new IllegalArgumentException("empty MIndex joined segment");
++            }
++            total = Math.addExact(total, lengths[index]);
++            ends[index] = total;
++        }
++        if (total != logicalLength) {
++            throw new IllegalArgumentException("MIndex joined length mismatch");
++        }
++        MIndexString provisional =
++                new MIndexString(
++                        JOINED,
++                        null,
++                        null,
++                        0L,
++                        segments,
++                        offsets,
++                        ends,
++                        logicalLength,
++                        coder,
++                        canonicalId,
++                        0,
++                        structuralHash64);
++        int hash = provisional.computeJavaHash();
++        return new MIndexString(
++                JOINED,
++                null,
++                null,
++                0L,
++                segments,
++                offsets,
++                ends,
++                logicalLength,
++                coder,
++                canonicalId,
++                hash,
++                structuralHash64);
++    }
++
++    static MIndexString join(String first, String second) {
++        return join(new String[] {first, second});
++    }
++
++    static MIndexString join(String[] parts) {
++        Objects.requireNonNull(parts, "parts");
++        int capacity = 0;
++        int totalLength = 0;
++        byte resultCoder = String.LATIN1;
++
++        for (String part : parts) {
++            Objects.requireNonNull(part, "part");
++            MIndexString storage = part.mindex();
++            if (storage == null || storage.length == 0) {
++                continue;
++            }
++            if ((long)totalLength + storage.length > Integer.MAX_VALUE) {
++                throw new OutOfMemoryError("Required String length exceeds implementation limit");
++            }
++            totalLength += storage.length;
++            resultCoder |= storage.coder;
++            capacity = Math.addExact(capacity, storage.storageKind == JOINED
++                    ? storage.segments.length : 1);
++        }
++
++        if (totalLength == 0) {
++            return EMPTY_STORAGE;
++        }
++
++        MIndexString[] atoms = new MIndexString[capacity];
++        int[] atomOffsets = new int[capacity];
++        int[] atomLengths = new int[capacity];
++        int count = 0;
++
++        for (String part : parts) {
++            MIndexString storage = part.mindex();
++            if (storage == null || storage.length == 0) {
++                continue;
++            }
++            if (storage.storageKind == JOINED) {
++                for (int index = 0; index < storage.segments.length; index++) {
++                    int previous = index == 0 ? 0 : storage.ends[index - 1];
++                    int take = storage.ends[index] - previous;
++                    count = addNormalized(
++                            atoms,
++                            atomOffsets,
++                            atomLengths,
++                            count,
++                            storage.segments[index],
++                            storage.offsets[index],
++                            take);
++                }
++            } else {
++                count = addNormalized(
++                        atoms,
++                        atomOffsets,
++                        atomLengths,
++                        count,
++                        storage,
++                        0,
++                        storage.length);
++            }
++        }
++
++        if (count == 1
++                && atomOffsets[0] == 0
++                && atomLengths[0] == atoms[0].length) {
++            return atoms[0];
++        }
++
++        if (count != capacity) {
++            atoms = java.util.Arrays.copyOf(atoms, count);
++            atomOffsets = java.util.Arrays.copyOf(atomOffsets, count);
++            atomLengths = java.util.Arrays.copyOf(atomLengths, count);
++        }
++        return MIndexStringPool.internJoin(
++                atoms, atomOffsets, atomLengths, resultCoder, totalLength);
++    }
++
++    static MIndexString sliceOf(String source, int beginIndex, int endIndex) {
++        Objects.requireNonNull(source, "source");
++        MIndexString storage = source.mindex();
++        if (storage == null) {
++            return null;
++        }
++        return storage.slice(beginIndex, endIndex);
++    }
++
++    MIndexString slice(int beginIndex, int endIndex) {
++        Objects.checkFromToIndex(beginIndex, endIndex, length);
++        if (beginIndex == 0 && endIndex == length) {
++            return this;
++        }
++        int newLength = endIndex - beginIndex;
++        if (newLength == 0) {
++            return EMPTY_STORAGE;
++        }
++
++        if (isScalar()) {
++            return MIndexStringPool.internJoin(
++                    new MIndexString[] {this},
++                    new int[] {beginIndex},
++                    new int[] {newLength},
++                    rangeCoder(beginIndex, endIndex),
++                    newLength);
++        }
++
++        int first = segmentAt(beginIndex);
++        int last = segmentAt(endIndex - 1);
++        int capacity = last - first + 1;
++        MIndexString[] atoms = new MIndexString[capacity];
++        int[] atomOffsets = new int[capacity];
++        int[] atomLengths = new int[capacity];
++        int count = 0;
++        byte resultCoder = String.LATIN1;
++
++        for (int segment = first; segment <= last; segment++) {
++            int segmentStart = segment == 0 ? 0 : ends[segment - 1];
++            int logicalStart = Math.max(beginIndex, segmentStart);
++            int logicalEnd = Math.min(endIndex, ends[segment]);
++            int take = logicalEnd - logicalStart;
++            MIndexString atom = segments[segment];
++            int atomOffset = offsets[segment] + logicalStart - segmentStart;
++            resultCoder |= atom.coder;
++            count = addNormalized(
++                    atoms, atomOffsets, atomLengths, count, atom, atomOffset, take);
++        }
++
++        if (count == 1
++                && atomOffsets[0] == 0
++                && atomLengths[0] == atoms[0].length) {
++            return atoms[0];
++        }
++        if (count != capacity) {
++            atoms = java.util.Arrays.copyOf(atoms, count);
++            atomOffsets = java.util.Arrays.copyOf(atomOffsets, count);
++            atomLengths = java.util.Arrays.copyOf(atomLengths, count);
++        }
++        return MIndexStringPool.internJoin(
++                atoms, atomOffsets, atomLengths, rangeCoder(beginIndex, endIndex), newLength);
++    }
++
++    MIndexString repeat(int count) {
++        if (count < 0) {
++            throw new IllegalArgumentException("count is negative: " + count);
++        }
++        if (count == 0 || length == 0) {
++            return EMPTY_STORAGE;
++        }
++        if (count == 1) {
++            return this;
++        }
++        int resultLength = Math.multiplyExact(length, count);
++        int leafCount = storageKind == JOINED ? segments.length : 1;
++        int capacity = Math.multiplyExact(leafCount, count);
++        MIndexString[] atoms = new MIndexString[capacity];
++        int[] atomOffsets = new int[capacity];
++        int[] atomLengths = new int[capacity];
++        int at = 0;
++        for (int repetition = 0; repetition < count; repetition++) {
++            if (storageKind == JOINED) {
++                for (int segment = 0; segment < segments.length; segment++) {
++                    int previous = segment == 0 ? 0 : ends[segment - 1];
++                    at = addNormalized(
++                            atoms,
++                            atomOffsets,
++                            atomLengths,
++                            at,
++                            segments[segment],
++                            offsets[segment],
++                            ends[segment] - previous);
++                }
++            } else {
++                at = addNormalized(atoms, atomOffsets, atomLengths, at, this, 0, length);
++            }
++        }
++        if (at != capacity) {
++            atoms = java.util.Arrays.copyOf(atoms, at);
++            atomOffsets = java.util.Arrays.copyOf(atomOffsets, at);
++            atomLengths = java.util.Arrays.copyOf(atomLengths, at);
++        }
++        return MIndexStringPool.internJoin(
++                atoms, atomOffsets, atomLengths, coder, resultLength);
++    }
++
++    private byte rangeCoder(int begin, int end) {
++        if (!String.COMPACT_STRINGS) return String.UTF16;
++        for (int i = begin; i < end; i++) if (charAt(i) > 255) return String.UTF16;
++        return String.LATIN1;
++    }
++
++    int length() {
++        return length;
++    }
++
++    byte coder() {
++        return coder;
++    }
++
++    byte storageKind() {
++        return storageKind;
++    }
++
++    long canonicalId() {
++        return canonicalId;
++    }
++
++    long structuralHash64() {
++        return structuralHash64;
++    }
++
++    boolean isScalar() {
++        return storageKind != JOINED;
++    }
++
++    boolean isContiguousLocal() {
++        return storageKind == LOCAL || storageKind == EMPTY;
++    }
++
++    byte[] compatibilityValue() {
++        return storageKind == LOCAL ? localValue : EMPTY_BYTES;
++    }
++
++    char charAt(int index) {
++        Objects.checkIndex(index, length);
++        return switch (storageKind) {
++            case EMPTY -> throw new StringIndexOutOfBoundsException(index);
++            case LOCAL -> coder == String.LATIN1
++                    ? StringLatin1.charAt(localValue, index)
++                    : StringUTF16.charAt(localValue, index);
++            case LEXICON, SHARED_LEXICON -> mappedChar(index);
++            case JOINED -> {
++                int segment = segmentAt(index);
++                int previous = segment == 0 ? 0 : ends[segment - 1];
++                yield segments[segment].charAt(offsets[segment] + index - previous);
++            }
++            default -> throw new InternalError("invalid MIndex storage kind");
++        };
++    }
++
++    int hashCodeValue() {
++        return javaHash;
++    }
++
++    boolean contentEquals(String other) {
++        Objects.requireNonNull(other, "other");
++        MIndexString that = other.mindex();
++        if (that == this) {
++            return true;
++        }
++        if (other.length() != length) {
++            return false;
++        }
++        for (int index = 0; index < length; index++) {
++            if (charAt(index) != other.charAt(index)) {
++                return false;
++            }
++        }
++        return true;
++    }
++
++    void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
++        String.checkBoundsBeginEnd(srcBegin, srcEnd, length);
++        Objects.checkFromIndexSize(dstBegin, srcEnd - srcBegin, dst.length);
++        for (int source = srcBegin, target = dstBegin; source < srcEnd; source++, target++) {
++            dst[target] = charAt(source);
++        }
++    }
++
++    void getBytes(byte[] dst, int srcPos, int dstBegin, byte dstCoder, int count) {
++        Objects.checkFromIndexSize(srcPos, count, length);
++        Objects.checkFromIndexSize(dstBegin << dstCoder, count << dstCoder, dst.length);
++        if (storageKind == LOCAL && coder == dstCoder) {
++            System.arraycopy(
++                    localValue,
++                    srcPos << coder,
++                    dst,
++                    dstBegin << dstCoder,
++                    count << coder);
++            return;
++        }
++        for (int index = 0; index < count; index++) {
++            char value = charAt(srcPos + index);
++            if (dstCoder == String.LATIN1) {
++                dst[dstBegin + index] = (byte) value;
++            } else {
++                StringUTF16.putChar(dst, dstBegin + index, value);
++            }
++        }
++    }
++
++    byte[] materialize() {
++        if (storageKind == LOCAL) {
++            return localValue;
++        }
++        if (storageKind == EMPTY) {
++            return EMPTY_BYTES;
++        }
++        byte[] cached = materialized;
++        if (cached != null) {
++            return cached;
++        }
++        int byteLength = length << coder;
++        if ((byteLength >> coder) != length) {
++            throw new OutOfMemoryError("Required length exceeds implementation limit");
++        }
++        byte[] created = new byte[byteLength];
++        getBytes(created, 0, 0, coder, length);
++        materialized = created;
++        return created;
++    }
++
++    boolean localContentEquals(byte[] value, byte valueCoder) {
++        if (storageKind != LOCAL
++                || coder != valueCoder
++                || localValue.length != value.length) {
++            return false;
++        }
++        return java.util.Arrays.equals(localValue, value);
++    }
++
++    boolean joinGeometryEquals(
++            MIndexString[] atoms, int[] atomOffsets, int[] atomLengths, byte expectedCoder) {
++        if (storageKind != JOINED
++                || coder != expectedCoder
++                || segments.length != atoms.length) {
++            return false;
++        }
++        for (int index = 0; index < segments.length; index++) {
++            int previous = index == 0 ? 0 : ends[index - 1];
++            if (segments[index] != atoms[index]
++                    || offsets[index] != atomOffsets[index]
++                    || ends[index] - previous != atomLengths[index]) {
++                return false;
++            }
++        }
++        return true;
++    }
++
++    private int computeJavaHash() {
++        int hash = 0, previous = 0;
++        for (int piece = 0; piece < segments.length; piece++) {
++            MIndexString atom = segments[piece];
++            int count = ends[piece] - previous;
++            int atomHash = atom.javaHash;
++            if (offsets[piece] != 0 || count != atom.length) {
++                atomHash = 0;
++                for (int i = 0; i < count; i++) atomHash = 31 * atomHash + atom.charAt(offsets[piece] + i);
++            }
++            int power = 1, base = 31;
++            for (int remaining = count; remaining != 0; remaining >>>= 1) {
++                if ((remaining & 1) != 0) power *= base;
++                base *= base;
++            }
++            hash = hash * power + atomHash;
++            previous = ends[piece];
++        }
++        return hash;
++    }
++
++    private static boolean mappedLatin1(long address, int length, boolean bigEndian) {
++        for (int i = 0; i < length; i++) if (UNSAFE.getByte(address + ((long)i << 1) + (bigEndian ? 0 : 1)) != 0) return false;
++        return true;
++    }
++
++    private char mappedChar(int index) {
++        long address = mappedAddress + ((long) index << 1);
++        int low = UNSAFE.getByte(address) & 0xff;
++        int high = UNSAFE.getByte(address + 1L) & 0xff;
++        return storageKind == SHARED_LEXICON ? (char)((low << 8) | high) : (char)(low | (high << 8));
++    }
++
++    private int segmentAt(int logicalIndex) {
++        int low = 0;
++        int high = ends.length - 1;
++        int key = logicalIndex + 1;
++        while (low <= high) {
++            int middle = (low + high) >>> 1;
++            int end = ends[middle];
++            if (end < key) {
++                low = middle + 1;
++            } else if (middle > 0 && ends[middle - 1] >= key) {
++                high = middle - 1;
++            } else {
++                return middle;
++            }
++        }
++        throw new InternalError("invalid MIndexString segment coordinate");
++    }
++
++    private static int addNormalized(
++            MIndexString[] atoms,
++            int[] offsets,
++            int[] lengths,
++            int count,
++            MIndexString atom,
++            int offset,
++            int length) {
++        if (length == 0) {
++            return count;
++        }
++        if (!atom.isScalar()) {
++            throw new IllegalArgumentException("MIndex join atom must be scalar");
++        }
++        Objects.checkFromIndexSize(offset, length, atom.length);
++        if (count > 0
++                && atoms[count - 1] == atom
++                && offsets[count - 1] + lengths[count - 1] == offset) {
++            lengths[count - 1] = Math.addExact(lengths[count - 1], length);
++            return count;
++        }
++        atoms[count] = atom;
++        offsets[count] = offset;
++        lengths[count] = length;
++        return count + 1;
++    }
++
++
++}
+diff --git a/src/java.base/share/classes/java/lang/MIndexStringPool.java b/src/java.base/share/classes/java/lang/MIndexStringPool.java
+new file mode 100644
+index 000000000..61b3f3d88
+--- /dev/null
++++ b/src/java.base/share/classes/java/lang/MIndexStringPool.java
+@@ -0,0 +1,597 @@
++/*
++ * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.
++ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
++ *
++ * This code is free software; you can redistribute it and/or modify it
++ * under the terms of the GNU General Public License version 2 only, as
++ * published by the Free Software Foundation.  Oracle designates this
++ * particular file as subject to the "Classpath" exception as provided
++ * by Oracle in the LICENSE file that accompanied this code.
++ */
++package java.lang;
++
++import java.io.IOException;
++import java.lang.ref.ReferenceQueue;
++import java.lang.ref.WeakReference;
++import java.nio.ByteBuffer;
++import java.nio.ByteOrder;
++import java.nio.MappedByteBuffer;
++import java.nio.channels.FileChannel;
++import java.nio.file.Path;
++import java.nio.file.StandardOpenOption;
++import java.security.MessageDigest;
++import java.security.NoSuchAlgorithmException;
++import java.util.ArrayList;
++import java.util.HexFormat;
++import java.util.Iterator;
++import java.util.zip.CRC32C;
++import java.util.Objects;
++import java.util.concurrent.ConcurrentHashMap;
++import java.util.concurrent.atomic.AtomicLong;
++import sun.nio.ch.DirectBuffer;
++
++/**
++ * Canonical atom/tuple owner for the experimental MIndex-backed String runtime.
++ *
++ * <p>There is one content plane with two admission sources:</p>
++ * <ul>
++ *   <li>pre-materialized UTF-16 lexicon records in one immutable read-only mapped image; and</li>
++ *   <li>VM-local immutable Compact-String payloads for content absent from that image.</li>
++ * </ul>
++ *
++ * <p>Both sources produce canonical {@link MIndexString} scalar atoms. Joined values are weakly
++ * interned tuples of scalar atom/range coordinates. A Java String wrapper is never the identity of
++ * payload storage. String identity therefore remains ordinary Java object identity while equal live
++ * payload atoms and equal live tuple compositions share the same storage objects.</p>
++ */
++final class MIndexStringPool {
++    private static final long LEXICON_MAGIC = 0x4d334c4558303031L; // M3LEX001
++    private static final int LEXICON_HEADER = 64;
++    private static final int MAX_LEXICON_BYTES = 1 << 30;
++    private static final AtomicLong NEXT_LOCAL_ID = new AtomicLong(1L);
++    private static final AtomicLong NEXT_JOIN_ID = new AtomicLong(1L << 40);
++
++    private static final ConcurrentHashMap<Fingerprint, LocalBucket> LOCAL =
++            new ConcurrentHashMap<>();
++    private static final ConcurrentHashMap<Long, JoinBucket> JOINS =
++            new ConcurrentHashMap<>();
++    private static final ReferenceQueue<MIndexString> LOCAL_QUEUE = new ReferenceQueue<>();
++    private static final ReferenceQueue<MIndexString> JOIN_QUEUE = new ReferenceQueue<>();
++
++    private static volatile Lexicon lexicon;
++
++    private MIndexStringPool() {}
++
++    static void initializeLexicon(String file) {
++        if (file == null || file.isEmpty() || lexicon != null) {
++            return;
++        }
++        synchronized (MIndexStringPool.class) {
++            if (lexicon != null) {
++                return;
++            }
++            try {
++                lexicon = Lexicon.open(Path.of(file));
++            } catch (IOException | RuntimeException failure) {
++                // Experimental storage fails closed to the VM-local interner. String semantics
++                // must not depend on an optional external lexicon being present.
++                lexicon = Lexicon.unavailable();
++            }
++        }
++    }
++
++    static MIndexString internScalar(byte[] value, byte coder) {
++        Objects.requireNonNull(value, "value");
++        if (value.length == 0) {
++            return MIndexString.emptyStorage();
++        }
++
++        Lexicon active = lexicon;
++        if (active != null && active.available()) {
++            int row = active.find(value, coder);
++            if (row >= 0) {
++                return active.atom(row);
++            }
++        }
++        return internLocal(value, coder);
++    }
++
++    private static MIndexString internLocal(byte[] value, byte coder) {
++        expungeLocal();
++        long hash64 = contentHash64(value, coder);
++        Fingerprint fingerprint = new Fingerprint(coder, value.length, hash64);
++        for (;;) {
++            LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
++            synchronized (bucket) {
++                if (bucket.retired) {
++                    continue;
++                }
++                for (Iterator<LocalRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
++                    LocalRef reference = iterator.next();
++                    MIndexString existing = reference.get();
++                    if (existing == null) {
++                        iterator.remove();
++                    } else if (existing.localContentEquals(value, coder)) {
++                        return existing;
++                    }
++                }
++                long id = nextId(NEXT_LOCAL_ID, "local MIndex atom ID");
++                MIndexString created =
++                        MIndexString.localScalar(value, coder, id, hash64);
++                bucket.values.add(new LocalRef(created, fingerprint, bucket));
++                return created;
++            }
++        }
++    }
++
++    static MIndexString internJoin(
++            MIndexString[] atoms,
++            int[] offsets,
++            int[] lengths,
++            byte coder,
++            int logicalLength) {
++        MIndexString.enterAdmission();
++        try {
++            return internJoinGuarded(atoms, offsets, lengths, coder, logicalLength);
++        } finally {
++            MIndexString.leaveAdmission();
++        }
++    }
++
++    private static MIndexString internJoinGuarded(MIndexString[] atoms, int[] offsets,
++            int[] lengths, byte coder, int logicalLength) {
++        expungeJoins();
++        long hash64 = tupleHash64(atoms, offsets, lengths, coder, logicalLength);
++        for (;;) {
++            JoinBucket bucket = JOINS.computeIfAbsent(hash64, ignored -> new JoinBucket());
++            synchronized (bucket) {
++                if (bucket.retired) {
++                    continue;
++                }
++                for (Iterator<JoinRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
++                    JoinRef reference = iterator.next();
++                    MIndexString existing = reference.get();
++                    if (existing == null) {
++                        iterator.remove();
++                    } else if (existing.joinGeometryEquals(atoms, offsets, lengths, coder)) {
++                        return existing;
++                    }
++                }
++                long id = nextId(NEXT_JOIN_ID, "joined MIndex tuple ID");
++                MIndexString created =
++                        MIndexString.joinedCanonical(
++                                atoms, offsets, lengths, coder, logicalLength, id, hash64);
++                bucket.values.add(new JoinRef(created, hash64, bucket));
++                return created;
++            }
++        }
++    }
++
++    private static void expungeLocal() {
++        LocalRef reference;
++        while ((reference = (LocalRef) LOCAL_QUEUE.poll()) != null) {
++            LocalBucket bucket = reference.bucket;
++            synchronized (bucket) {
++                bucket.values.remove(reference);
++                if (bucket.values.isEmpty()
++                        && LOCAL.remove(reference.fingerprint, bucket)) {
++                    bucket.retired = true;
++                }
++            }
++        }
++    }
++
++    private static void expungeJoins() {
++        JoinRef reference;
++        while ((reference = (JoinRef) JOIN_QUEUE.poll()) != null) {
++            JoinBucket bucket = reference.bucket;
++            synchronized (bucket) {
++                bucket.values.remove(reference);
++                if (bucket.values.isEmpty()
++                        && JOINS.remove(reference.hash64, bucket)) {
++                    bucket.retired = true;
++                }
++            }
++        }
++    }
++
++    private static long nextId(AtomicLong sequence, String label) {
++        long id = sequence.getAndIncrement();
++        if (id <= 0L) {
++            throw new IllegalStateException(label + " exhausted");
++        }
++        return id;
++    }
++
++    private static long contentHash64(byte[] value, byte coder) {
++        long hash = mix64(0x9e3779b97f4a7c15L ^ coder ^ Integer.toUnsignedLong(value.length));
++        for (byte element : value) {
++            hash = mix64(hash ^ (element & 0xffL));
++        }
++        return hash;
++    }
++
++    private static long tupleHash64(
++            MIndexString[] atoms,
++            int[] offsets,
++            int[] lengths,
++            byte coder,
++            int logicalLength) {
++        long hash =
++                mix64(0x517cc1b727220a95L
++                        ^ coder
++                        ^ Integer.toUnsignedLong(logicalLength)
++                        ^ Integer.toUnsignedLong(atoms.length));
++        for (int index = 0; index < atoms.length; index++) {
++            hash = mix64(hash ^ atoms[index].canonicalId());
++            hash = mix64(hash ^ Integer.toUnsignedLong(offsets[index]));
++            hash = mix64(hash ^ Integer.toUnsignedLong(lengths[index]));
++        }
++        return hash;
++    }
++
++    static long mix64(long value) {
++        long mixed = value;
++        mixed ^= mixed >>> 30;
++        mixed *= 0xbf58476d1ce4e5b9L;
++        mixed ^= mixed >>> 27;
++        mixed *= 0x94d049bb133111ebL;
++        return mixed ^ (mixed >>> 31);
++    }
++
++    private static final class Fingerprint {
++        final byte coder;
++        final int byteLength;
++        final long hash64;
++        Fingerprint(byte coder, int byteLength, long hash64) {
++            this.coder = coder; this.byteLength = byteLength; this.hash64 = hash64;
++        }
++        public int hashCode() { return (int)(hash64 ^ (hash64 >>> 32)) ^ byteLength ^ coder; }
++        public boolean equals(Object other) {
++            return other instanceof Fingerprint f && coder == f.coder
++                && byteLength == f.byteLength && hash64 == f.hash64;
++        }
++    }
++
++    private static final class LocalBucket {
++        final ArrayList<LocalRef> values = new ArrayList<>();
++        boolean retired;
++    }
++
++    private static final class JoinBucket {
++        final ArrayList<JoinRef> values = new ArrayList<>();
++        boolean retired;
++    }
++
++    private static final class LocalRef extends WeakReference<MIndexString> {
++        final Fingerprint fingerprint;
++        final LocalBucket bucket;
++
++        LocalRef(MIndexString value, Fingerprint fingerprint, LocalBucket bucket) {
++            super(value, LOCAL_QUEUE);
++            this.fingerprint = fingerprint;
++            this.bucket = bucket;
++        }
++    }
++
++    private static final class JoinRef extends WeakReference<MIndexString> {
++        final long hash64;
++        final JoinBucket bucket;
++
++        JoinRef(MIndexString value, long hash64, JoinBucket bucket) {
++            super(value, JOIN_QUEUE);
++            this.hash64 = hash64;
++            this.bucket = bucket;
++        }
++    }
++
++    /**
++     * Read-only lexicon image. Records are UTF-16LE and must be sorted by Java UTF-16 lexical
++     * order. The mapping itself owns payload lifetime; scalar atoms retain the mapping object.
++     */
++    private static final class Lexicon {
++        private final MappedByteBuffer mapping;
++        private final long baseAddress;
++        private final int payloadOffset;
++        private final int[] offsets;
++        private final int[] lengths;
++        private final int[] javaHashes;
++        private final MIndexString[] atoms;
++        private final long generation64;
++        private final boolean available;
++        private boolean bigEndian;
++        private long namespaceHigh, namespaceLow;
++        private int[] recordOffsets;
++
++        private Lexicon() {
++            mapping = null;
++            baseAddress = 0L;
++            payloadOffset = 0;
++            offsets = lengths = javaHashes = new int[0];
++            atoms = new MIndexString[0];
++            generation64 = 0L;
++            available = false;
++        }
++
++        private Lexicon(
++                MappedByteBuffer mapping,
++                int payloadOffset,
++                int[] offsets,
++                int[] lengths,
++                int[] javaHashes,
++                long generation64) {
++            this.mapping = mapping;
++            this.baseAddress = ((DirectBuffer) mapping).address();
++            this.payloadOffset = payloadOffset;
++            this.offsets = offsets;
++            this.lengths = lengths;
++            this.javaHashes = javaHashes;
++            this.atoms = new MIndexString[offsets.length];
++            this.generation64 = generation64;
++            this.available = true;
++        }
++
++        static Lexicon unavailable() {
++            return new Lexicon();
++        }
++
++        boolean available() {
++            return available;
++        }
++
++        static Lexicon open(Path path) throws IOException {
++            try (FileChannel channel = FileChannel.open(path, StandardOpenOption.READ)) {
++                long size = channel.size();
++                if (size < LEXICON_HEADER || size > MAX_LEXICON_BYTES) {
++                    throw new IOException("MIndex lexicon image size out of bounds");
++                }
++                MappedByteBuffer mapped =
++                        channel.map(FileChannel.MapMode.READ_ONLY, 0, size);
++                mapped.order(ByteOrder.BIG_ENDIAN);
++                if (mapped.getLong(0) == 0x53594e4152523031L) {
++                    return openSharedArena(mapped);
++                }
++                if (mapped.getLong(0) != LEXICON_MAGIC) {
++                    throw new IOException("unsupported MIndex lexicon image");
++                }
++                int version = mapped.getInt(8);
++                if (version != 1 && version != 2) {
++                    throw new IOException("unsupported MIndex lexicon version");
++                }
++                int count = mapped.getInt(12);
++                int directoryBytes = version == 1 ? 8 : 12;
++                long payload = mapped.getLong(16);
++                long units = mapped.getLong(24);
++                if (count < 0
++                        || payload != LEXICON_HEADER + (long) directoryBytes * count
++                        || units < 0
++                        || payload + 2L * units != size) {
++                    throw new IOException("invalid MIndex lexicon dimensions");
++                }
++
++                byte[] expected = new byte[32];
++                mapped.get(32, expected);
++                byte[] actual = digestImage(mapped);
++                if (!MessageDigest.isEqual(expected, actual)) {
++                    throw new IOException("MIndex lexicon checksum mismatch");
++                }
++
++                int[] offsets = new int[count];
++                int[] lengths = new int[count];
++                int[] javaHashes = new int[count];
++                for (int row = 0; row < count; row++) {
++                    int entry = LEXICON_HEADER + row * directoryBytes;
++                    int offset = mapped.getInt(entry);
++                    int length = mapped.getInt(entry + 4);
++                    if (offset < 0 || length < 0 || (long) offset + length > units) {
++                        throw new IOException("invalid MIndex lexicon record");
++                    }
++                    offsets[row] = offset;
++                    lengths[row] = length;
++                    javaHashes[row] =
++                            version == 2
++                                    ? mapped.getInt(entry + 8)
++                                    : javaHash(mapped, (int) payload, offset, length);
++                    if (javaHashes[row] != javaHash(mapped, (int) payload, offset, length)) {
++                        throw new IOException("MIndex lexicon Java hash mismatch");
++                    }
++                    if (row > 0
++                            && compareRecords(
++                                            mapped,
++                                            (int) payload,
++                                            offsets[row - 1],
++                                            lengths[row - 1],
++                                            offset,
++                                            length)
++                                    >= 0) {
++                        throw new IOException("MIndex lexicon must be UTF-16 sorted");
++                    }
++                }
++                long generation64 = ByteBuffer.wrap(actual).getLong();
++                return new Lexicon(
++                        mapped, (int) payload, offsets, lengths, javaHashes, generation64);
++            }
++        }
++
++        int find(byte[] value, byte coder) {
++            int logicalLength = value.length >> coder;
++            int low = 0;
++            int high = offsets.length - 1;
++            while (low <= high) {
++                int middle = (low + high) >>> 1;
++                int comparison =
++                        compareInput(value, coder, logicalLength, offsets[middle], lengths[middle]);
++                if (comparison == 0) {
++                    return middle;
++                }
++                if (comparison < 0) {
++                    high = middle - 1;
++                } else {
++                    low = middle + 1;
++                }
++            }
++            return -1;
++        }
++
++        MIndexString atom(int row) {
++            MIndexString result = atoms[row];
++            if (result != null) {
++                return result;
++            }
++            synchronized (this) {
++                result = atoms[row];
++                if (result == null) {
++                    long address = baseAddress + payloadOffset + (bigEndian ? offsets[row] : ((long) offsets[row] << 1));
++                    long id = Long.MIN_VALUE
++                            | (generation64 & 0x3fff_ffff_0000_0000L)
++                            | Integer.toUnsignedLong(row + 1);
++                    result =
++                            MIndexString.lexiconScalar(
++                                    mapping,
++                                    address,
++                                    lengths[row],
++                                    javaHashes[row],
++                                    id,
++                                    MIndexStringPool.mix64(id ^ lengths[row]), bigEndian);
++                    atoms[row] = result;
++                }
++                return result;
++            }
++        }
++
++        private int compareInput(
++                byte[] value, byte coder, int logicalLength, int offset, int length) {
++            int common = Math.min(logicalLength, length);
++            for (int index = 0; index < common; index++) {
++                char left =
++                        coder == String.LATIN1
++                                ? (char) (value[index] & 0xff)
++                                : StringUTF16.charAt(value, index);
++                char right = mappedUnit(offset, index);
++                if (left != right) {
++                    return left - right;
++                }
++            }
++            return logicalLength - length;
++        }
++
++        private char mappedUnit(int offset, int index) {
++            int at = bigEndian ? offset + (index << 1) : payloadOffset + ((offset + index) << 1);
++            int a = mapping.get(at) & 255, b = mapping.get(at + 1) & 255;
++            return bigEndian ? (char)((a << 8) | b) : (char)(a | (b << 8));
++        }
++
++        /** Read the existing owner format without creating another arena or copying payloads.
++         * Publication contract matches SharedArrayPool: trusted directory, immutable committed
++         * records, no external truncation or mutation. This is a fixed snapshot, not a writer.
++         * Only language-0 UTF16 scalar records enter ordinary String's language-neutral plane.
++         */
++        private static Lexicon openSharedArena(MappedByteBuffer map) throws IOException {
++            CRC32C crc = new CRC32C();
++            crc.update(map.asReadOnlyBuffer().slice(0, 56));
++            if (map.getInt(8) != 1 || map.getLong(56) != crc.getValue()
++                    || map.getLong(32) < map.limit() || map.getInt(40) < 0) {
++                throw new IOException("invalid SYNARR01 header");
++            }
++            ArrayList<int[]> records = new ArrayList<>();
++            java.util.HashMap<Long, int[]> prior = new java.util.HashMap<>();
++            int position = 64, count = 0;
++            while (position < map.limit()) {
++                if (map.limit() - position < 88) throw new IOException("incomplete SYNARR01 record");
++                int total = map.getInt(position+4), width = map.getInt(position+8);
++                int language = map.getInt(position+12), units = map.getInt(position+16);
++                int parts = map.getInt(position+20), payload = map.getInt(position+28);
++                long expected = parts < 0 ? (long)width * units : (long)parts * 16;
++                if (map.getInt(position) != 0x41525231 || (width != 1 && width != 2)
++                        || units < 0 || parts < -1 || payload < 0 || payload > 64*1024*1024
++                        || expected != payload || 88L+payload != total || total > map.limit()-position
++                        || map.getLong(position+72) != 0 || (width == 1 && language != 0)
++                        || ++count > map.getInt(40)
++                        || map.getLong(position+total-8) != (0x434f4d4d49543031L ^ position ^ total)) {
++                    throw new IOException("invalid SYNARR01 record");
++                }
++                crc.reset();crc.update(map.asReadOnlyBuffer().slice(position,64));
++                crc.update(map.asReadOnlyBuffer().slice(position+80,payload));
++                if (crc.getValue() != map.getLong(position+64)) throw new IOException("SYNARR01 CRC mismatch");
++                if (parts >= 0) {
++                    long length = 0;
++                    for (int i=0;i<parts;i++) {
++                        int at=position+80+i*16;int[] atom=prior.get(map.getLong(at));
++                        int start=map.getInt(at+8), size=map.getInt(at+12);
++                        if(atom==null || atom[0]!=width || atom[2]!=-1 || start<0 || size<=0
++                                || (long)start+size>atom[1]) throw new IOException("invalid SYNARR01 tuple");
++                        length += size;
++                    }
++                    if(length!=units)throw new IOException("invalid SYNARR01 tuple length");
++                } else if (width==2 && language==0 && units>0) {
++                    int hash=0;for(int i=0;i<units;i++)hash=31*hash+(map.getChar(position+80+i*2)&65535);
++                    if(hash!=map.getInt(position+24))throw new IOException("SYNARR01 hash mismatch");
++                    records.add(new int[]{position+80,units,hash,position});
++                }
++                prior.put((long)position,new int[]{width,units,parts});position+=total;
++            }
++            records.sort((a,b)->{
++                int common=Math.min(a[1],b[1]);
++                for(int i=0;i<common;i++){int diff=map.getChar(a[0]+i*2)-map.getChar(b[0]+i*2);if(diff!=0)return diff;}
++                return Integer.compare(a[1],b[1]);
++            });
++            int n=records.size();int[] offsets=new int[n],lengths=new int[n],hashes=new int[n],ids=new int[n];
++            for(int i=0;i<n;i++){int[] r=records.get(i);offsets[i]=r[0];lengths[i]=r[1];hashes[i]=r[2];ids[i]=r[3];}
++            Lexicon result=new Lexicon(map,0,offsets,lengths,hashes,map.getLong(16)^map.getLong(24));
++            result.bigEndian=true;result.namespaceHigh=map.getLong(16);result.namespaceLow=map.getLong(24);
++            result.recordOffsets=ids;return result;
++        }
++
++        private static int compareRecords(
++                ByteBuffer mapped,
++                int payloadOffset,
++                int leftOffset,
++                int leftLength,
++                int rightOffset,
++                int rightLength) {
++            int common = Math.min(leftLength, rightLength);
++            for (int index = 0; index < common; index++) {
++                char left = mappedChar(mapped, payloadOffset, leftOffset + index);
++                char right = mappedChar(mapped, payloadOffset, rightOffset + index);
++                if (left != right) {
++                    return left - right;
++                }
++            }
++            return leftLength - rightLength;
++        }
++
++        private static int javaHash(
++                ByteBuffer mapped, int payloadOffset, int offset, int length) {
++            int hash = 0;
++            for (int index = 0; index < length; index++) {
++                hash = 31 * hash + mappedChar(mapped, payloadOffset, offset + index);
++            }
++            return hash;
++        }
++
++        private static char mappedChar(ByteBuffer mapped, int payloadOffset, int unit) {
++            int at = payloadOffset + (unit << 1);
++            int low = mapped.get(at) & 0xff;
++            int high = mapped.get(at + 1) & 0xff;
++            return (char) (low | (high << 8));
++        }
++
++        private static byte[] digestImage(ByteBuffer bytes) {
++            try {
++                MessageDigest digest = MessageDigest.getInstance("SHA-256");
++                digest.update(bytes.asReadOnlyBuffer().slice(0, 32));
++                digest.update(
++                        bytes.asReadOnlyBuffer()
++                                .slice(LEXICON_HEADER, bytes.limit() - LEXICON_HEADER));
++                return digest.digest();
++            } catch (NoSuchAlgorithmException impossible) {
++                throw new AssertionError(impossible);
++            }
++        }
++
++        @SuppressWarnings("unused")
++        String generation() {
++            return HexFormat.of().toHexDigits(generation64);
++        }
++    }
++}
+diff --git a/src/java.base/share/classes/java/lang/String.java b/src/java.base/share/classes/java/lang/String.java
+index 0db81d31c..6af1bc8be 100644
+--- a/src/java.base/share/classes/java/lang/String.java
++++ b/src/java.base/share/classes/java/lang/String.java
+@@ -152,26 +152,18 @@ public final class String
+      *
+      * Additionally, it is marked with {@link Stable} to trust the contents
+      * of the array. No other facility in JDK provides this functionality (yet).
+-     * Flat Strings have a non-null value. In the opt-in M3 experiment only,
+-     * segmented Strings have a permanently null value and immutable leaf
+-     * directories; their separately published m3Flat cache is not @Stable.
++     * {@link Stable} is safe here, because value is never null.
+      */
+     @Stable
+     private final byte[] value;
+ 
+-    // Experimental segmented representation. Directory arrays never escape and
+-    // contain only flat immutable String leaves. Ranges are UTF16 code units:
+-    // [leaf start, cumulative logical end] for each leaf.
+-    private final String[] m3Parts;
+-    private final int[] m3Ranges;
+-    private final int m3Length;
+-    private volatile byte[] m3Flat;
+-
+-    // HotSpot replaces this value before String initialization completes.
+-    static final boolean M3_SEGMENTS;
+-    static {
+-        M3_SEGMENTS = true;
+-    }
++    /**
++     * Optional immutable segmented backing used by M3JDK Strings. Ordinary
++     * contiguous Strings keep this null and retain the stock Compact Strings
++     * representation. Joined/sliced Strings keep {@code value} as the empty
++     * sentinel and resolve their logical content through this descriptor.
++     */
++    private volatile MIndexString mindex;
+ 
+     /**
+      * The identifier of the encoding used to encode the bytes in
+@@ -238,8 +230,15 @@ public final class String
+      */
+     static final boolean COMPACT_STRINGS;
+ 
++    /**
++     * Enables M3 segmented String production. The actual value is injected by
++     * HotSpot after String class initialization, exactly like COMPACT_STRINGS.
++     */
++    static final boolean M3_JOINED_STRINGS;
++
+     static {
+         COMPACT_STRINGS = true;
++        M3_JOINED_STRINGS = false;
+     }
+ 
+     /**
+@@ -259,11 +258,9 @@ public final class String
+      * unnecessary since Strings are immutable.
+      */
+     public String() {
+-        this.m3Parts = null;
+-        this.m3Ranges = null;
+-        this.m3Length = 0;
+         this.value = "".value;
+         this.coder = "".coder;
++        this.mindex = null;
+     }
+ 
+     /**
+@@ -278,15 +275,12 @@ public final class String
+      */
+     @IntrinsicCandidate
+     public String(String original) {
+-        this.m3Ranges = original.m3Ranges;
+-        this.m3Length = original.m3Length;
+-        this.m3Flat = original.m3Flat;
+-        this.value = original.value;
+-        this.coder = original.coder;
++        MIndexString storage = original.mindex();
++        this.value = storage == null ? original.value : storage.compatibilityValue();
++        this.coder = storage == null ? original.coder : storage.coder();
++        this.mindex = storage;
+         this.hash = original.hash;
+         this.hashIsZero = original.hashIsZero;
+-        // Publish the VM's initialized-directory discriminator last.
+-        this.m3Parts = original.m3Parts;
+     }
+ 
+     /**
+@@ -361,25 +355,28 @@ public final class String
+      * @since  1.5
+      */
+     public String(int[] codePoints, int offset, int count) {
+-        this.m3Parts = null;
+-        this.m3Ranges = null;
+-        this.m3Length = 0;
+         checkBoundsOffCount(offset, count, codePoints.length);
+         if (count == 0) {
+             this.value = "".value;
+             this.coder = "".coder;
++            this.mindex = null;
+             return;
+         }
++        byte[] candidate = null;
++        byte candidateCoder = UTF16;
+         if (COMPACT_STRINGS) {
+-            byte[] val = StringLatin1.toBytes(codePoints, offset, count);
+-            if (val != null) {
+-                this.coder = LATIN1;
+-                this.value = val;
+-                return;
++            candidate = StringLatin1.toBytes(codePoints, offset, count);
++            if (candidate != null) {
++                candidateCoder = LATIN1;
+             }
+         }
+-        this.coder = UTF16;
+-        this.value = StringUTF16.toBytes(codePoints, offset, count);
++        if (candidate == null) {
++            candidate = StringUTF16.toBytes(codePoints, offset, count);
++        }
++        MIndexString storage = maybeAdmit(candidate, candidateCoder);
++        this.value = storage == null ? candidate : storage.compatibilityValue();
++        this.coder = storage == null ? candidateCoder : storage.coder();
++        this.mindex = storage;
+     }
+ 
+     /**
+@@ -423,27 +420,30 @@ public final class String
+      */
+     @Deprecated(since="1.1")
+     public String(byte[] ascii, int hibyte, int offset, int count) {
+-        this.m3Parts = null;
+-        this.m3Ranges = null;
+-        this.m3Length = 0;
+         checkBoundsOffCount(offset, count, ascii.length);
+         if (count == 0) {
+             this.value = "".value;
+             this.coder = "".coder;
++            this.mindex = null;
+             return;
+         }
++        byte[] candidate;
++        byte candidateCoder;
+         if (COMPACT_STRINGS && (byte)hibyte == 0) {
+-            this.value = Arrays.copyOfRange(ascii, offset, offset + count);
+-            this.coder = LATIN1;
++            candidate = Arrays.copyOfRange(ascii, offset, offset + count);
++            candidateCoder = LATIN1;
+         } else {
+             hibyte <<= 8;
+-            byte[] val = StringUTF16.newBytesFor(count);
++            candidate = StringUTF16.newBytesFor(count);
+             for (int i = 0; i < count; i++) {
+-                StringUTF16.putChar(val, i, hibyte | (ascii[offset++] & 0xff));
++                StringUTF16.putChar(candidate, i, hibyte | (ascii[offset++] & 0xff));
+             }
+-            this.value = val;
+-            this.coder = UTF16;
++            candidateCoder = UTF16;
+         }
++        MIndexString storage = maybeAdmit(candidate, candidateCoder);
++        this.value = storage == null ? candidate : storage.compatibilityValue();
++        this.coder = storage == null ? candidateCoder : storage.coder();
++        this.mindex = storage;
+     }
+ 
+     /**
+@@ -560,19 +560,38 @@ public final class String
+      */
+     @SuppressWarnings("removal")
+     private String(Charset charset, byte[] bytes, int offset, int length) {
+-        this.m3Parts = null;
+-        this.m3Ranges = null;
+-        this.m3Length = 0;
++        this(decodeForMIndexConstruction(charset, bytes, offset, length));
++    }
++
++    private String(MIndexConstruction construction) {
++        MIndexString storage = maybeAdmit(construction.value, construction.coder);
++        this.value = storage == null ? construction.value : storage.compatibilityValue();
++        this.coder = storage == null ? construction.coder : storage.coder();
++        this.mindex = storage;
++    }
++
++    private static final class MIndexConstruction {
++        final byte[] value;
++        final byte coder;
++
++        MIndexConstruction(byte[] value, byte coder) {
++            this.value = value;
++            this.coder = coder;
++        }
++    }
++
++    @SuppressWarnings("removal")
++    private static MIndexConstruction decodeForMIndexConstruction(
++            Charset charset, byte[] bytes, int offset, int length) {
+         if (length == 0) {
+-            this.value = "".value;
+-            this.coder = "".coder;
+-        } else if (charset == UTF_8.INSTANCE) {
++            return new MIndexConstruction("".value, "".coder);
++        }
++        if (charset == UTF_8.INSTANCE) {
+             if (COMPACT_STRINGS) {
+                 int dp = StringCoding.countPositives(bytes, offset, length);
+                 if (dp == length) {
+-                    this.value = Arrays.copyOfRange(bytes, offset, offset + length);
+-                    this.coder = LATIN1;
+-                    return;
++                    return new MIndexConstruction(
++                            Arrays.copyOfRange(bytes, offset, offset + length), LATIN1);
+                 }
+                 int sl = offset + length;
+                 byte[] dst = new byte[length];
+@@ -586,16 +605,14 @@ public final class String
+                         dst[dp++] = (byte)b1;
+                         continue;
+                     }
+-                    if ((b1 & 0xfe) == 0xc2 && offset < sl) { // b1 either 0xc2 or 0xc3
++                    if ((b1 & 0xfe) == 0xc2 && offset < sl) {
+                         int b2 = bytes[offset];
+-                        if (b2 < -64) { // continuation bytes are always negative values in the range -128 to -65
++                        if (b2 < -64) {
+                             dst[dp++] = (byte)decode2(b1, b2);
+                             offset++;
+                             continue;
+                         }
+                     }
+-                    // anything not a latin1, including the REPL
+-                    // we have to go with the utf16
+                     offset--;
+                     break;
+                 }
+@@ -603,9 +620,7 @@ public final class String
+                     if (dp != dst.length) {
+                         dst = Arrays.copyOf(dst, dp);
+                     }
+-                    this.value = dst;
+-                    this.coder = LATIN1;
+-                    return;
++                    return new MIndexConstruction(dst, LATIN1);
+                 }
+                 byte[] buf = new byte[length << 1];
+                 StringLatin1.inflate(dst, 0, buf, 0, dp);
+@@ -614,119 +629,91 @@ public final class String
+                 if (dp != length) {
+                     dst = Arrays.copyOf(dst, dp << 1);
+                 }
+-                this.value = dst;
+-                this.coder = UTF16;
+-            } else { // !COMPACT_STRINGS
+-                byte[] dst = new byte[length << 1];
+-                int dp = decodeUTF8_UTF16(bytes, offset, offset + length, dst, 0, true);
+-                if (dp != length) {
+-                    dst = Arrays.copyOf(dst, dp << 1);
+-                }
+-                this.value = dst;
+-                this.coder = UTF16;
++                return new MIndexConstruction(dst, UTF16);
+             }
+-        } else if (charset == ISO_8859_1.INSTANCE) {
+-            if (COMPACT_STRINGS) {
+-                this.value = Arrays.copyOfRange(bytes, offset, offset + length);
+-                this.coder = LATIN1;
+-            } else {
+-                this.value = StringLatin1.inflate(bytes, offset, length);
+-                this.coder = UTF16;
++            byte[] dst = new byte[length << 1];
++            int dp = decodeUTF8_UTF16(bytes, offset, offset + length, dst, 0, true);
++            if (dp != length) {
++                dst = Arrays.copyOf(dst, dp << 1);
+             }
+-        } else if (charset == US_ASCII.INSTANCE) {
++            return new MIndexConstruction(dst, UTF16);
++        }
++
++        if (charset == ISO_8859_1.INSTANCE) {
++            return COMPACT_STRINGS
++                    ? new MIndexConstruction(
++                            Arrays.copyOfRange(bytes, offset, offset + length), LATIN1)
++                    : new MIndexConstruction(
++                            StringLatin1.inflate(bytes, offset, length), UTF16);
++        }
++
++        if (charset == US_ASCII.INSTANCE) {
+             if (COMPACT_STRINGS && !StringCoding.hasNegatives(bytes, offset, length)) {
+-                this.value = Arrays.copyOfRange(bytes, offset, offset + length);
+-                this.coder = LATIN1;
+-            } else {
+-                byte[] dst = new byte[length << 1];
+-                int dp = 0;
+-                while (dp < length) {
+-                    int b = bytes[offset++];
+-                    StringUTF16.putChar(dst, dp++, (b >= 0) ? (char) b : REPL);
+-                }
+-                this.value = dst;
+-                this.coder = UTF16;
++                return new MIndexConstruction(
++                        Arrays.copyOfRange(bytes, offset, offset + length), LATIN1);
+             }
+-        } else {
+-            // (1)We never cache the "external" cs, the only benefit of creating
+-            // an additional StringDe/Encoder object to wrap it is to share the
+-            // de/encode() method. These SD/E objects are short-lived, the young-gen
+-            // gc should be able to take care of them well. But the best approach
+-            // is still not to generate them if not really necessary.
+-            // (2)The defensive copy of the input byte/char[] has a big performance
+-            // impact, as well as the outgoing result byte/char[]. Need to do the
+-            // optimization check of (sm==null && classLoader0==null) for both.
+-            CharsetDecoder cd = charset.newDecoder();
+-            // ArrayDecoder fastpaths
+-            if (cd instanceof ArrayDecoder ad) {
+-                // ascii
+-                if (ad.isASCIICompatible() && !StringCoding.hasNegatives(bytes, offset, length)) {
+-                    if (COMPACT_STRINGS) {
+-                        this.value = Arrays.copyOfRange(bytes, offset, offset + length);
+-                        this.coder = LATIN1;
+-                        return;
+-                    }
+-                    this.value = StringLatin1.inflate(bytes, offset, length);
+-                    this.coder = UTF16;
+-                    return;
+-                }
++            byte[] dst = new byte[length << 1];
++            int dp = 0;
++            while (dp < length) {
++                int b = bytes[offset++];
++                StringUTF16.putChar(dst, dp++, (b >= 0) ? (char)b : REPL);
++            }
++            return new MIndexConstruction(dst, UTF16);
++        }
+ 
+-                // fastpath for always Latin1 decodable single byte
+-                if (COMPACT_STRINGS && ad.isLatin1Decodable()) {
+-                    byte[] dst = new byte[length];
+-                    ad.decodeToLatin1(bytes, offset, length, dst);
+-                    this.value = dst;
+-                    this.coder = LATIN1;
+-                    return;
+-                }
++        CharsetDecoder cd = charset.newDecoder();
++        if (cd instanceof ArrayDecoder ad) {
++            if (ad.isASCIICompatible() && !StringCoding.hasNegatives(bytes, offset, length)) {
++                return COMPACT_STRINGS
++                        ? new MIndexConstruction(
++                                Arrays.copyOfRange(bytes, offset, offset + length), LATIN1)
++                        : new MIndexConstruction(
++                                StringLatin1.inflate(bytes, offset, length), UTF16);
++            }
+ 
+-                int en = scale(length, cd.maxCharsPerByte());
+-                cd.onMalformedInput(CodingErrorAction.REPLACE)
+-                        .onUnmappableCharacter(CodingErrorAction.REPLACE);
+-                char[] ca = new char[en];
+-                int clen = ad.decode(bytes, offset, length, ca);
+-                if (COMPACT_STRINGS) {
+-                    byte[] bs = StringUTF16.compress(ca, 0, clen);
+-                    if (bs != null) {
+-                        value = bs;
+-                        coder = LATIN1;
+-                        return;
+-                    }
+-                }
+-                coder = UTF16;
+-                value = StringUTF16.toBytes(ca, 0, clen);
+-                return;
++            if (COMPACT_STRINGS && ad.isLatin1Decodable()) {
++                byte[] dst = new byte[length];
++                ad.decodeToLatin1(bytes, offset, length, dst);
++                return new MIndexConstruction(dst, LATIN1);
+             }
+ 
+-            // decode using CharsetDecoder
+             int en = scale(length, cd.maxCharsPerByte());
+             cd.onMalformedInput(CodingErrorAction.REPLACE)
+                     .onUnmappableCharacter(CodingErrorAction.REPLACE);
+             char[] ca = new char[en];
+-            if (charset.getClass().getClassLoader0() != null &&
+-                    System.getSecurityManager() != null) {
+-                bytes = Arrays.copyOfRange(bytes, offset, offset + length);
+-                offset = 0;
+-            }
+-
+-            int caLen;
+-            try {
+-                caLen = decodeWithDecoder(cd, ca, bytes, offset, length);
+-            } catch (CharacterCodingException x) {
+-                // Substitution is enabled, so this shouldn't happen
+-                throw new Error(x);
+-            }
++            int clen = ad.decode(bytes, offset, length, ca);
+             if (COMPACT_STRINGS) {
+-                byte[] bs = StringUTF16.compress(ca, 0, caLen);
++                byte[] bs = StringUTF16.compress(ca, 0, clen);
+                 if (bs != null) {
+-                    value = bs;
+-                    coder = LATIN1;
+-                    return;
++                    return new MIndexConstruction(bs, LATIN1);
+                 }
+             }
+-            coder = UTF16;
+-            value = StringUTF16.toBytes(ca, 0, caLen);
++            return new MIndexConstruction(StringUTF16.toBytes(ca, 0, clen), UTF16);
++        }
++
++        int en = scale(length, cd.maxCharsPerByte());
++        cd.onMalformedInput(CodingErrorAction.REPLACE)
++                .onUnmappableCharacter(CodingErrorAction.REPLACE);
++        char[] ca = new char[en];
++        if (charset.getClass().getClassLoader0() != null
++                && System.getSecurityManager() != null) {
++            bytes = Arrays.copyOfRange(bytes, offset, offset + length);
++            offset = 0;
++        }
++
++        int caLen;
++        try {
++            caLen = decodeWithDecoder(cd, ca, bytes, offset, length);
++        } catch (CharacterCodingException failure) {
++            throw new Error(failure);
++        }
++        if (COMPACT_STRINGS) {
++            byte[] bs = StringUTF16.compress(ca, 0, caLen);
++            if (bs != null) {
++                return new MIndexConstruction(bs, LATIN1);
++            }
+         }
++        return new MIndexConstruction(StringUTF16.toBytes(ca, 0, caLen), UTF16);
+     }
+ 
+     /*
+@@ -1549,7 +1536,8 @@ public final class String
+      *          object.
+      */
+     public int length() {
+-        return m3Parts == null ? value.length >> coder() : m3Length;
++        MIndexString storage = mindex();
++        return storage == null ? value.length >> coder() : storage.length();
+     }
+ 
+     /**
+@@ -1562,7 +1550,8 @@ public final class String
+      */
+     @Override
+     public boolean isEmpty() {
+-        return m3Parts == null ? value.length == 0 : m3Length == 0;
++        MIndexString storage = mindex();
++        return storage == null ? value.length == 0 : storage.length() == 0;
+     }
+ 
+     /**
+@@ -1584,9 +1573,9 @@ public final class String
+      *             string.
+      */
+     public char charAt(int index) {
+-        if (m3Parts != null) {
+-            checkIndex(index, m3Length);
+-            return m3CharAt(index);
++        MIndexString storage = mindex();
++        if (storage != null) {
++            return storage.charAt(index);
+         }
+         if (isLatin1()) {
+             return StringLatin1.charAt(value, index);
+@@ -1618,13 +1607,24 @@ public final class String
+      * @since      1.5
+      */
+     public int codePointAt(int index) {
++        if (mindex() != null) {
++            checkIndex(index, length());
++            char first = charAt(index);
++            if (Character.isHighSurrogate(first) && index + 1 < length()) {
++                char second = charAt(index + 1);
++                if (Character.isLowSurrogate(second)) {
++                    return Character.toCodePoint(first, second);
++                }
++            }
++            return first;
++        }
+         if (isLatin1()) {
+-            checkIndex(index, value().length);
+-            return value()[index] & 0xff;
++            checkIndex(index, value.length);
++            return value[index] & 0xff;
+         }
+-        int length = value().length >> 1;
++        int length = value.length >> 1;
+         checkIndex(index, length);
+-        return StringUTF16.codePointAt(value(), index, length);
++        return StringUTF16.codePointAt(value, index, length);
+     }
+ 
+     /**
+@@ -1652,10 +1652,20 @@ public final class String
+     public int codePointBefore(int index) {
+         int i = index - 1;
+         checkIndex(i, length());
++        if (mindex() != null) {
++            char second = charAt(i);
++            if (Character.isLowSurrogate(second) && i > 0) {
++                char first = charAt(i - 1);
++                if (Character.isHighSurrogate(first)) {
++                    return Character.toCodePoint(first, second);
++                }
++            }
++            return second;
++        }
+         if (isLatin1()) {
+-            return (value()[i] & 0xff);
++            return (value[i] & 0xff);
+         }
+-        return StringUTF16.codePointBefore(value(), index);
++        return StringUTF16.codePointBefore(value, index);
+     }
+ 
+     /**
+@@ -1681,10 +1691,21 @@ public final class String
+      */
+     public int codePointCount(int beginIndex, int endIndex) {
+         Objects.checkFromToIndex(beginIndex, endIndex, length());
++        if (mindex() != null) {
++            int count = 0;
++            for (int index = beginIndex; index < endIndex; count++) {
++                char first = charAt(index++);
++                if (Character.isHighSurrogate(first) && index < endIndex
++                        && Character.isLowSurrogate(charAt(index))) {
++                    index++;
++                }
++            }
++            return count;
++        }
+         if (isLatin1()) {
+             return endIndex - beginIndex;
+         }
+-        return StringUTF16.codePointCount(value(), beginIndex, endIndex);
++        return StringUTF16.codePointCount(value, beginIndex, endIndex);
+     }
+ 
+     /**
+@@ -1744,10 +1765,13 @@ public final class String
+     public void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
+         checkBoundsBeginEnd(srcBegin, srcEnd, length());
+         checkBoundsOffCount(dstBegin, srcEnd - srcBegin, dst.length);
+-        if (isLatin1()) {
+-            StringLatin1.getChars(value(), srcBegin, srcEnd, dst, dstBegin);
++        MIndexString storage = mindex();
++        if (storage != null) {
++            storage.getChars(srcBegin, srcEnd, dst, dstBegin);
++        } else if (isLatin1()) {
++            StringLatin1.getChars(value, srcBegin, srcEnd, dst, dstBegin);
+         } else {
+-            StringUTF16.getChars(value(), srcBegin, srcEnd, dst, dstBegin);
++            StringUTF16.getChars(value, srcBegin, srcEnd, dst, dstBegin);
+         }
+     }
+ 
+@@ -1800,10 +1824,14 @@ public final class String
+         checkBoundsBeginEnd(srcBegin, srcEnd, length());
+         Objects.requireNonNull(dst);
+         checkBoundsOffCount(dstBegin, srcEnd - srcBegin, dst.length);
+-        if (isLatin1()) {
+-            StringLatin1.getBytes(value(), srcBegin, srcEnd, dst, dstBegin);
++        if (mindex() != null) {
++            for (int src = srcBegin, dstIndex = dstBegin; src < srcEnd; src++, dstIndex++) {
++                dst[dstIndex] = (byte) charAt(src);
++            }
++        } else if (isLatin1()) {
++            StringLatin1.getBytes(value, srcBegin, srcEnd, dst, dstBegin);
+         } else {
+-            StringUTF16.getBytes(value(), srcBegin, srcEnd, dst, dstBegin);
++            StringUTF16.getBytes(value, srcBegin, srcEnd, dst, dstBegin);
+         }
+     }
+ 
+@@ -1895,16 +1923,18 @@ public final class String
+         if (this == anObject) {
+             return true;
+         }
+-        if (anObject instanceof String other && (m3Parts != null || other.m3Parts != null)) {
+-            int n = length();
+-            if (n != other.length()) return false;
+-            for (int i = 0; i < n; i++) {
+-                if (charAt(i) != other.charAt(i)) return false;
+-            }
+-            return true;
++        if (!(anObject instanceof String aString)) {
++            return false;
++        }
++        MIndexString leftStorage = mindex();
++        MIndexString rightStorage = aString.mindex();
++        if (leftStorage != null) {
++            return leftStorage.contentEquals(aString);
++        }
++        if (rightStorage != null) {
++            return rightStorage.contentEquals(this);
+         }
+-        return (anObject instanceof String aString)
+-                && (!COMPACT_STRINGS || this.coder == aString.coder)
++        return (!COMPACT_STRINGS || this.coder == aString.coder)
+                 && StringLatin1.equals(value, aString.value);
+     }
+ 
+@@ -1935,6 +1965,14 @@ public final class String
+         if (len != sb.length()) {
+             return false;
+         }
++        if (mindex() != null) {
++            for (int index = 0; index < len; index++) {
++                if (charAt(index) != sb.charAt(index)) {
++                    return false;
++                }
++            }
++            return true;
++        }
+         byte[] v1 = value();
+         byte[] v2 = sb.getValue();
+         byte coder = coder();
+@@ -1987,7 +2025,15 @@ public final class String
+         if (n != length()) {
+             return false;
+         }
+-        byte[] val = this.value();
++        if (mindex() != null) {
++            for (int i = 0; i < n; i++) {
++                if (charAt(i) != cs.charAt(i)) {
++                    return false;
++                }
++            }
++            return true;
++        }
++        byte[] val = value();
+         if (isLatin1()) {
+             for (int i = 0; i < n; i++) {
+                 if ((val[i] & 0xff) != cs.charAt(i)) {
+@@ -2083,6 +2129,18 @@ public final class String
+      *          lexicographically greater than the string argument.
+      */
+     public int compareTo(String anotherString) {
++        if (mindex() != null || anotherString.mindex() != null) {
++            int length1 = length();
++            int length2 = anotherString.length();
++            int limit = Math.min(length1, length2);
++            for (int index = 0; index < limit; index++) {
++                int difference = charAt(index) - anotherString.charAt(index);
++                if (difference != 0) {
++                    return difference;
++                }
++            }
++            return length1 - length2;
++        }
+         byte[] v1 = value();
+         byte[] v2 = anotherString.value();
+         byte coder = coder();
+@@ -2407,12 +2465,11 @@ public final class String
+         // from immutable state
+         int h = hash;
+         if (h == 0 && !hashIsZero) {
+-            if (m3Parts != null) {
+-                for (int i = 0; i < m3Length; i++) h = 31 * h + m3CharAt(i);
+-            } else {
+-                h = isLatin1() ? StringLatin1.hashCode(value)
+-                              : StringUTF16.hashCode(value);
+-            }
++            MIndexString storage = mindex();
++            h = storage != null
++                    ? storage.hashCodeValue()
++                    : (isLatin1() ? StringLatin1.hashCode(value)
++                                  : StringUTF16.hashCode(value));
+             if (h == 0) {
+                 hashIsZero = true;
+             } else {
+@@ -2881,11 +2938,19 @@ public final class String
+             return this;
+         }
+         int subLen = endIndex - beginIndex;
+-        if (m3Enabled() && subLen != 0) {
+-            return m3Slice(beginIndex, endIndex);
++        if (subLen == 0) {
++            return "";
++        }
++        if (m3JoinedStringsEnabled()) {
++            MIndexString storage =
++                    MIndexString.sliceOf(this, beginIndex, endIndex);
++            if (storage != null) {
++                return new String(storage);
++            }
+         }
+-        return isLatin1() ? StringLatin1.newString(value(), beginIndex, subLen)
+-                          : StringUTF16.newString(value(), beginIndex, subLen);
++        byte[] currentValue = value();
++        return isLatin1() ? StringLatin1.newString(currentValue, beginIndex, subLen)
++                          : StringUTF16.newString(currentValue, beginIndex, subLen);
+     }
+ 
+     /**
+@@ -2944,6 +3009,12 @@ public final class String
+         if (str.isEmpty()) {
+             return this;
+         }
++        if (M3_JOINED_STRINGS) {
++            String joined = m3Concat(this, str);
++            if (joined != null) {
++                return joined;
++            }
++        }
+         return StringConcatHelper.simpleConcat(this, str);
+     }
+ 
+@@ -2978,8 +3049,9 @@ public final class String
+      */
+     public String replace(char oldChar, char newChar) {
+         if (oldChar != newChar) {
+-            String ret = isLatin1() ? StringLatin1.replace(value(), oldChar, newChar)
+-                                    : StringUTF16.replace(value(), oldChar, newChar);
++            byte[] currentValue = value();
++            String ret = isLatin1() ? StringLatin1.replace(currentValue, oldChar, newChar)
++                                    : StringUTF16.replace(currentValue, oldChar, newChar);
+             if (ret != null) {
+                 return ret;
+             }
+@@ -3544,8 +3616,7 @@ public final class String
+         // A singleton with no affixes already owns immutable contiguous backing.
+         // Preserve a fresh result object and its default hash/dedup state.
+         if (size == 1 && prefix.isEmpty() && suffix.isEmpty()) {
+-            String element = elements[0];
+-            return new String(element.value(), element.coder());
++            return new String(elements[0]);
+         }
+         int icoder = prefix.coder() | suffix.coder();
+         long len = (long) prefix.length() + suffix.length();
+@@ -3562,6 +3633,24 @@ public final class String
+             icoder |= el.coder();
+         }
+         byte coder = (byte) icoder;
++        if (m3JoinedStringsEnabled() && size <= 127) {
++            int pieceCount = size == 0 ? 2 : size * 2 + 1;
++            String[] pieces = new String[pieceCount];
++            int piece = 0;
++            pieces[piece++] = prefix;
++            if (size > 0) {
++                pieces[piece++] = elements[0];
++                for (int i = 1; i < size; i++) {
++                    pieces[piece++] = delimiter;
++                    pieces[piece++] = elements[i];
++                }
++            }
++            pieces[piece] = suffix;
++            MIndexString storage = MIndexString.join(pieces);
++            if (storage != null) {
++                return new String(storage);
++            }
++        }
+         // long len overflow check, char -> byte length, int len overflow check
+         if (len < 0L || (len <<= coder) != (int) len) {
+             throw new OutOfMemoryError("Requested string length exceeds VM limit");
+@@ -3690,8 +3779,9 @@ public final class String
+      * @since   1.1
+      */
+     public String toLowerCase(Locale locale) {
+-        return isLatin1() ? StringLatin1.toLowerCase(this, value(), locale)
+-                          : StringUTF16.toLowerCase(this, value(), locale);
++        byte[] currentValue = value();
++        return isLatin1() ? StringLatin1.toLowerCase(this, currentValue, locale)
++                          : StringUTF16.toLowerCase(this, currentValue, locale);
+     }
+ 
+     /**
+@@ -3770,8 +3860,9 @@ public final class String
+      * @since   1.1
+      */
+     public String toUpperCase(Locale locale) {
+-        return isLatin1() ? StringLatin1.toUpperCase(this, value(), locale)
+-                          : StringUTF16.toUpperCase(this, value(), locale);
++        byte[] currentValue = value();
++        return isLatin1() ? StringLatin1.toUpperCase(this, currentValue, locale)
++                          : StringUTF16.toUpperCase(this, currentValue, locale);
+     }
+ 
+     /**
+@@ -3830,8 +3921,9 @@ public final class String
+      *          has no leading or trailing space.
+      */
+     public String trim() {
+-        String ret = isLatin1() ? StringLatin1.trim(value())
+-                                : StringUTF16.trim(value());
++        byte[] currentValue = value();
++        String ret = isLatin1() ? StringLatin1.trim(currentValue)
++                                : StringUTF16.trim(currentValue);
+         return ret == null ? this : ret;
+     }
+ 
+@@ -3862,8 +3954,9 @@ public final class String
+      * @since 11
+      */
+     public String strip() {
+-        String ret = isLatin1() ? StringLatin1.strip(value())
+-                                : StringUTF16.strip(value());
++        byte[] currentValue = value();
++        String ret = isLatin1() ? StringLatin1.strip(currentValue)
++                                : StringUTF16.strip(currentValue);
+         return ret == null ? this : ret;
+     }
+ 
+@@ -3892,8 +3985,9 @@ public final class String
+      * @since 11
+      */
+     public String stripLeading() {
+-        String ret = isLatin1() ? StringLatin1.stripLeading(value())
+-                                : StringUTF16.stripLeading(value());
++        byte[] currentValue = value();
++        String ret = isLatin1() ? StringLatin1.stripLeading(currentValue)
++                                : StringUTF16.stripLeading(currentValue);
+         return ret == null ? this : ret;
+     }
+ 
+@@ -3922,8 +4016,9 @@ public final class String
+      * @since 11
+      */
+     public String stripTrailing() {
+-        String ret = isLatin1() ? StringLatin1.stripTrailing(value())
+-                                : StringUTF16.stripTrailing(value());
++        byte[] currentValue = value();
++        String ret = isLatin1() ? StringLatin1.stripTrailing(currentValue)
++                                : StringUTF16.stripTrailing(currentValue);
+         return ret == null ? this : ret;
+     }
+ 
+@@ -3975,7 +4070,8 @@ public final class String
+      * @since 11
+      */
+     public Stream<String> lines() {
+-        return isLatin1() ? StringLatin1.lines(value()) : StringUTF16.lines(value());
++        byte[] currentValue = value();
++        return isLatin1() ? StringLatin1.lines(currentValue) : StringUTF16.lines(currentValue);
+     }
+ 
+     /**
+@@ -4031,13 +4127,15 @@ public final class String
+     }
+ 
+     private int indexOfNonWhitespace() {
+-        return isLatin1() ? StringLatin1.indexOfNonWhitespace(value())
+-                          : StringUTF16.indexOfNonWhitespace(value());
++        byte[] currentValue = value();
++        return isLatin1() ? StringLatin1.indexOfNonWhitespace(currentValue)
++                          : StringUTF16.indexOfNonWhitespace(currentValue);
+     }
+ 
+     private int lastIndexOfNonWhitespace() {
+-        return isLatin1() ? StringLatin1.lastIndexOfNonWhitespace(value())
+-                          : StringUTF16.lastIndexOfNonWhitespace(value());
++        byte[] currentValue = value();
++        return isLatin1() ? StringLatin1.lastIndexOfNonWhitespace(currentValue)
++                          : StringUTF16.lastIndexOfNonWhitespace(currentValue);
+     }
+ 
+     /**
+@@ -4399,8 +4497,15 @@ public final class String
+      *          the character sequence represented by this string.
+      */
+     public char[] toCharArray() {
+-        return isLatin1() ? StringLatin1.toChars(value())
+-                          : StringUTF16.toChars(value());
++        MIndexString storage = mindex();
++        if (storage != null) {
++            char[] result = new char[storage.length()];
++            storage.getChars(0, result.length, result, 0);
++            return result;
++        }
++        byte[] currentValue = value();
++        return isLatin1() ? StringLatin1.toChars(currentValue)
++                          : StringUTF16.toChars(currentValue);
+     }
+ 
+     /**
+@@ -4718,21 +4823,34 @@ public final class String
+         if (count == 1) {
+             return this;
+         }
+-        final int len = value().length;
+-        if (len == 0 || count == 0) {
++        final int charLength = length();
++        if (charLength == 0 || count == 0) {
+             return "";
+         }
++        if (Integer.MAX_VALUE / count < charLength) {
++            throw new OutOfMemoryError("Required length exceeds implementation limit");
++        }
++        if (m3JoinedStringsEnabled() && count <= 256) {
++            String[] pieces = new String[count];
++            Arrays.fill(pieces, this);
++            MIndexString storage = MIndexString.join(pieces);
++            if (storage != null) {
++                return new String(storage);
++            }
++        }
++        byte[] currentValue = value();
++        final int len = currentValue.length;
+         if (Integer.MAX_VALUE / count < len) {
+             throw new OutOfMemoryError("Required length exceeds implementation limit");
+         }
+         if (len == 1) {
+             final byte[] single = new byte[count];
+-            Arrays.fill(single, value()[0]);
++            Arrays.fill(single, currentValue[0]);
+             return new String(single, coder);
+         }
+         final int limit = len * count;
+         final byte[] multiple = new byte[limit];
+-        System.arraycopy(value(), 0, multiple, 0, len);
++        System.arraycopy(currentValue, 0, multiple, 0, len);
+         repeatCopyRest(multiple, 0, limit, len);
+         return new String(multiple, coder);
+     }
+@@ -4776,10 +4894,13 @@ public final class String
+      * @param coder     the coder of dst[]
+      */
+     void getBytes(byte[] dst, int dstBegin, byte coder) {
+-        if (coder() == coder) {
+-            System.arraycopy(value(), 0, dst, dstBegin << coder, value().length);
++        MIndexString storage = mindex();
++        if (storage != null) {
++            storage.getBytes(dst, 0, dstBegin, coder, length());
++        } else if (coder() == coder) {
++            System.arraycopy(value, 0, dst, dstBegin << coder, value.length);
+         } else {    // this.coder == LATIN && coder == UTF16
+-            StringLatin1.inflate(value(), 0, dst, dstBegin, value().length);
++            StringLatin1.inflate(value, 0, dst, dstBegin, value.length);
+         }
+     }
+ 
+@@ -4796,10 +4917,13 @@ public final class String
+      * @param length    the amount of copied chars
+      */
+     void getBytes(byte[] dst, int srcPos, int dstBegin, byte coder, int length) {
+-        if (coder() == coder) {
+-            System.arraycopy(value(), srcPos << coder, dst, dstBegin << coder, length << coder);
++        MIndexString storage = mindex();
++        if (storage != null) {
++            storage.getBytes(dst, srcPos, dstBegin, coder, length);
++        } else if (coder() == coder) {
++            System.arraycopy(value, srcPos << coder, dst, dstBegin << coder, length << coder);
+         } else {    // this.coder == LATIN && coder == UTF16
+-            StringLatin1.inflate(value(), srcPos, dst, dstBegin, length);
++            StringLatin1.inflate(value, srcPos, dst, dstBegin, length);
+         }
+     }
+ 
+@@ -4813,24 +4937,21 @@ public final class String
+      * characters in their byte sequences defined by the {@code StringUTF16}.
+      */
+     String(char[] value, int off, int len, Void sig) {
+-        this.m3Parts = null;
+-        this.m3Ranges = null;
+-        this.m3Length = 0;
+         if (len == 0) {
+             this.value = "".value;
+             this.coder = "".coder;
++            this.mindex = null;
+             return;
+         }
+-        if (COMPACT_STRINGS) {
+-            byte[] val = StringUTF16.compress(value, off, len);
+-            if (val != null) {
+-                this.value = val;
+-                this.coder = LATIN1;
+-                return;
+-            }
++        byte[] candidate = COMPACT_STRINGS ? StringUTF16.compress(value, off, len) : null;
++        byte candidateCoder = candidate == null ? UTF16 : LATIN1;
++        if (candidate == null) {
++            candidate = StringUTF16.toBytes(value, off, len);
+         }
+-        this.coder = UTF16;
+-        this.value = StringUTF16.toBytes(value, off, len);
++        MIndexString storage = maybeAdmit(candidate, candidateCoder);
++        this.value = storage == null ? candidate : storage.compatibilityValue();
++        this.coder = storage == null ? candidateCoder : storage.coder();
++        this.mindex = storage;
+     }
+ 
+     /*
+@@ -4838,160 +4959,98 @@ public final class String
+      * disambiguating it against other (public) constructors.
+      */
+     String(AbstractStringBuilder asb, Void sig) {
+-        this.m3Parts = null;
+-        this.m3Ranges = null;
+-        this.m3Length = 0;
+         byte[] val = asb.getValue();
+         int length = asb.length();
++        byte[] candidate;
++        byte candidateCoder;
+         if (asb.isLatin1()) {
+-            this.coder = LATIN1;
+-            this.value = Arrays.copyOfRange(val, 0, length);
++            candidate = Arrays.copyOfRange(val, 0, length);
++            candidateCoder = LATIN1;
+         } else {
+-            // only try to compress val if some characters were deleted.
+-            if (COMPACT_STRINGS && asb.maybeLatin1) {
+-                byte[] buf = StringUTF16.compress(val, 0, length);
+-                if (buf != null) {
+-                    this.coder = LATIN1;
+-                    this.value = buf;
+-                    return;
+-                }
++            candidate = COMPACT_STRINGS && asb.maybeLatin1
++                    ? StringUTF16.compress(val, 0, length)
++                    : null;
++            if (candidate != null) {
++                candidateCoder = LATIN1;
++            } else {
++                candidate = Arrays.copyOfRange(val, 0, length << 1);
++                candidateCoder = UTF16;
+             }
+-            this.coder = UTF16;
+-            this.value = Arrays.copyOfRange(val, 0, length << 1);
+         }
++        MIndexString storage = maybeAdmit(candidate, candidateCoder);
++        this.value = storage == null ? candidate : storage.compatibilityValue();
++        this.coder = storage == null ? candidateCoder : storage.coder();
++        this.mindex = storage;
+     }
+ 
+    /*
+     * Package private constructor which shares value array for speed.
+     */
+     String(byte[] value, byte coder) {
+-        this.m3Parts = null;
+-        this.m3Ranges = null;
+-        this.m3Length = 0;
+-        this.value = value;
+-        this.coder = coder;
++        MIndexString storage = maybeAdmit(value, coder);
++        this.value = storage == null ? value : storage.compatibilityValue();
++        this.coder = storage == null ? coder : storage.coder();
++        this.mindex = storage;
++    }
++
++    private static MIndexString maybeAdmit(byte[] value, byte coder) {
++        return M3_JOINED_STRINGS && jdk.internal.misc.VM.isBooted() && MIndexString.admissionEnabled() && value.length != 0
++                ? MIndexString.admit(value, coder)
++                : null;
++    }
++
++    /** Trusted constructor for one canonical MIndexString storage body. */
++    String(MIndexString storage) {
++        MIndexString checked = Objects.requireNonNull(storage, "storage");
++        this.value = checked.compatibilityValue();
++        this.coder = checked.coder();
++        this.mindex = checked;
++    }
++
++    MIndexString mindex() {
++        MIndexString storage = mindex;
++        if (storage == null
++                && M3_JOINED_STRINGS
++                && jdk.internal.misc.VM.isBooted() && MIndexString.admissionEnabled()
++                && value.length != 0) {
++            storage = MIndexString.admit(value, rawCoder());
++            mindex = storage;
++        }
++        return storage;
+     }
+ 
+-    byte coder() {
+-        return COMPACT_STRINGS ? coder : UTF16;
++    static boolean m3StorageRequested() {
++        return M3_JOINED_STRINGS;
+     }
+ 
+-    byte[] value() {
+-        if (value != null) return value;
+-        byte[] flat = m3Flat;
+-        if (flat == null) {
+-            flat = (coder() == LATIN1) ? new byte[m3Length] : StringUTF16.newBytesFor(m3Length);
+-            for (int i = 0; i < m3Length; i++) {
+-                char c = m3CharAt(i);
+-                if (coder() == LATIN1) flat[i] = (byte)c;
+-                else StringUTF16.putChar(flat, i, c);
+-            }
+-            // Duplicate races are harmless: each fully populated array is
+-            // immutable, and the volatile store publishes its contents.
+-            m3Flat = flat;
+-        }
+-        return flat;
++    static boolean m3JoinedStringsEnabled() {
++        return M3_JOINED_STRINGS && jdk.internal.misc.VM.isBooted() && MIndexString.admissionEnabled();
+     }
+ 
+-    static boolean m3Enabled() {
+-        return M3_SEGMENTS && jdk.internal.misc.VM.isBooted();
++    static String m3Concat(String first, String second) {
++        if (!m3JoinedStringsEnabled()) {
++            return null;
++        }
++        MIndexString storage = MIndexString.join(first, second);
++        return storage == null ? null : new String(storage);
+     }
+ 
+-    private String(String[] parts, int[] ranges, int length, byte coder) {
+-        this.value = null;
+-        this.coder = coder;
+-        this.m3Ranges = ranges;
+-        this.m3Length = length;
+-        // Publish the VM's initialized-directory discriminator last.
+-        this.m3Parts = parts;
++    private byte rawCoder() {
++        return COMPACT_STRINGS ? coder : UTF16;
+     }
+ 
+-    private char m3CharAt(int index) {
+-        int lo = 0, hi = m3Parts.length - 1;
+-        while (lo < hi) {
+-            int mid = (lo + hi) >>> 1;
+-            if (index < m3Ranges[2 * mid + 1]) hi = mid;
+-            else lo = mid + 1;
+-        }
+-        int preceding = lo == 0 ? 0 : m3Ranges[2 * lo - 1];
+-        String leaf = m3Parts[lo];
+-        int source = m3Ranges[2 * lo] + index - preceding;
+-        return leaf.isLatin1() ? StringLatin1.charAt(leaf.value, source)
+-                              : StringUTF16.charAt(leaf.value, source);
++    byte coder() {
++        MIndexString storage = mindex;
++        return storage == null ? rawCoder() : storage.coder();
+     }
+ 
+-    // null means the bounded directory would overflow; caller uses the stock
+-    // contiguous concat path. No canonical pool or mutable input is involved.
+-    static String m3Concat(String left, String right) {
+-        if (!m3Enabled()) return null;
+-        int count = (left.m3Parts == null ? 1 : left.m3Parts.length)
+-                  + (right.m3Parts == null ? 1 : right.m3Parts.length);
+-        if (count > 256) return null;
+-        long length = (long)left.length() + right.length();
+-        if (length > (Integer.MAX_VALUE >> (left.coder() | right.coder()))) {
+-            throw new OutOfMemoryError("Requested string length exceeds VM limit");
+-        }
+-        String[] parts = new String[count];
+-        int[] ranges = new int[2 * count];
+-        int at = left.m3Append(parts, ranges, 0, 0);
+-        right.m3Append(parts, ranges, at, left.length());
+-        return new String(parts, ranges, (int)length, (byte)(left.coder() | right.coder()));
+-    }
+-
+-    private int m3Append(String[] parts, int[] ranges, int at, int preceding) {
+-        if (m3Parts == null) {
+-            parts[at] = this;
+-            ranges[2 * at] = 0;
+-            ranges[2 * at + 1] = preceding + length();
+-            return at + 1;
+-        }
+-        for (int i = 0; i < m3Parts.length; i++, at++) {
+-            parts[at] = m3Parts[i];
+-            ranges[2 * at] = m3Ranges[2 * i];
+-            ranges[2 * at + 1] = preceding + m3Ranges[2 * i + 1];
+-        }
+-        return at;
+-    }
+-
+-    private String m3Slice(int begin, int end) {
+-        int first = 0, last = 0;
+-        if (m3Parts != null) {
+-            while (begin >= m3Ranges[2 * first + 1]) first++;
+-            last = first;
+-            while (end > m3Ranges[2 * last + 1]) last++;
+-        }
+-        int count = last - first + 1;
+-        String[] parts = new String[count];
+-        int[] ranges = new int[2 * count];
+-        if (m3Parts == null) {
+-            parts[0] = this;
+-            ranges[0] = begin;
+-            ranges[1] = end - begin;
+-        } else {
+-            int written = 0;
+-            for (int i = first; i <= last; i++) {
+-                int previous = i == 0 ? 0 : m3Ranges[2 * i - 1];
+-                int start = Math.max(begin, previous);
+-                int stop = Math.min(end, m3Ranges[2 * i + 1]);
+-                int dest = i - first;
+-                parts[dest] = m3Parts[i];
+-                ranges[2 * dest] = m3Ranges[2 * i] + start - previous;
+-                written += stop - start;
+-                ranges[2 * dest + 1] = written;
+-            }
+-        }
+-        byte resultCoder = coder();
+-        if (COMPACT_STRINGS && resultCoder == UTF16) {
+-            resultCoder = LATIN1;
+-            for (int i = begin; i < end; i++) {
+-                if (charAt(i) > 255) { resultCoder = UTF16; break; }
+-            }
+-        }
+-        return new String(parts, ranges, end - begin, resultCoder);
++    byte[] value() {
++        MIndexString storage = mindex();
++        return storage == null ? value : storage.materialize();
+     }
+ 
+     boolean isLatin1() {
+-        return COMPACT_STRINGS && coder == LATIN1;
++        return COMPACT_STRINGS && coder() == LATIN1;
+     }
+ 
+     @Native static final byte LATIN1 = 0;
+diff --git a/src/java.base/share/classes/java/lang/StringConcatHelper.java b/src/java.base/share/classes/java/lang/StringConcatHelper.java
+index 8b0a21722..f4fd2616f 100644
+--- a/src/java.base/share/classes/java/lang/StringConcatHelper.java
++++ b/src/java.base/share/classes/java/lang/StringConcatHelper.java
+@@ -428,8 +428,12 @@ final class StringConcatHelper {
+             // newly created string required, see JLS 15.18.1
+             return new String(s1);
+         }
+-        String segmented = String.m3Concat(s1, s2);
+-        if (segmented != null) return segmented;
++        if (String.m3JoinedStringsEnabled()) {
++            String joined = String.m3Concat(s1, s2);
++            if (joined != null) {
++                return joined;
++            }
++        }
+         // start "mixing" in length and coder or arguments, order is not
+         // important
+         long indexCoder = mix(initialCoder(), s1);
+@@ -442,6 +446,28 @@ final class StringConcatHelper {
+         return newString(buf, indexCoder);
+     }
+ 
++    /**
++     * Correctness-first fallback for invokedynamic concat shapes that would
++     * otherwise allocate one flat byte array. Primitive arguments arrive boxed
++     * by MethodHandle adaptation; stringOf preserves the JLS null/toString rules.
++     */
++    static String m3Concat(String[] constants, Object[] args) {
++        String[] pieces = new String[args.length * 2 + 1];
++        int piece = 0;
++        for (int index = 0; index < args.length; index++) {
++            String constant = constants[index];
++            if (constant != null) {
++                pieces[piece++] = constant;
++            }
++            pieces[piece++] = stringOf(args[index]);
++        }
++        String suffix = constants[args.length];
++        if (suffix != null) {
++            pieces[piece++] = suffix;
++        }
++        return String.join("", "", "", pieces, piece);
++    }
++
+     /**
+      * Produce a String from a concatenation of single argument, which we
+      * end up using for trivial concatenations like {@code "" + arg}.
+diff --git a/src/java.base/share/classes/java/lang/System.java b/src/java.base/share/classes/java/lang/System.java
+index 9d9dbf886..faf19aa2e 100644
+--- a/src/java.base/share/classes/java/lang/System.java
++++ b/src/java.base/share/classes/java/lang/System.java
+@@ -2234,6 +2234,13 @@ public final class System {
+         // module system initialized
+         VM.initLevel(2);
+ 
++        // MIndex String storage is activated only after java.base/module bootstrap has completed.
++        // Until this point String keeps the stock flat representation, avoiding recursive class
++        // initialization through the local interner or optional mapped lexicon loader.
++        if (String.m3StorageRequested()) {
++            MIndexString.activate(props.getProperty("jdk.mindex.lexicon"));
++        }
++
+         return 0; // JNI_OK
+     }
+ 
+@@ -2526,6 +2533,10 @@ public final class System {
+                 return StringConcatHelper.mix(lengthCoder, constant);
+             }
+ 
++            public boolean stringConcatUsesM3Storage() {
++                return String.m3JoinedStringsEnabled();
++            }
++
+             @PreviewFeature(feature=PreviewFeature.Feature.STRING_TEMPLATES)
+             public long stringConcatCoder(char value) {
+                 return StringConcatHelper.coder(value);
+diff --git a/src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java b/src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java
+index 6fa79bacc..e3d41cb65 100644
+--- a/src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java
++++ b/src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java
+@@ -485,7 +485,14 @@ public final class StringConcatFactory {
+             // Two reference arguments, no surrounding constants
+             return simpleConcat();
+         }
+-        // else... fall-through to slow-path
++        // Correctness-first segmented fallback. The existing fast paths above
++        // remain allocation-minimal; complex indy shapes avoid the flat byte[]
++        // builder while M3 storage is enabled. Specialized segment combinators
++        // can replace this collector without changing the call-site contract.
++        if (JLA.stringConcatUsesM3Storage()) {
++            return generateM3Concat(mt, constants);
++        }
++        // else... fall-through to stock inline-copy slow-path
+ 
+         // Create filters and obtain filtered parameter types. Filters would be used in the beginning
+         // to convert the incoming arguments into the arguments we can process (e.g. Objects -> Strings).
+@@ -602,6 +609,12 @@ public final class StringConcatFactory {
+         return mh;
+     }
+ 
++    private static MethodHandle generateM3Concat(MethodType mt, String[] constants) {
++        MethodHandle mh = MethodHandles.insertArguments(m3Concat(), 0, (Object) constants);
++        mh = mh.asCollector(Object[].class, mt.parameterCount());
++        return mh.asType(mt.changeReturnType(String.class));
++    }
++
+     // We need one prepender per argument, but also need to fold in constants. We do so by greedily
+     // creating prependers that fold in surrounding constants into the argument prepender. This reduces
+     // the number of unique MH combinator tree shapes we'll create in an application.
+@@ -866,6 +879,17 @@ public final class StringConcatFactory {
+         return mh;
+     }
+ 
++    private @Stable static MethodHandle M3_CONCAT;
++    private static MethodHandle m3Concat() {
++        MethodHandle mh = M3_CONCAT;
++        if (mh == null) {
++            MethodHandle concat = JLA.stringConcatHelper("m3Concat",
++                    methodType(String.class, String[].class, Object[].class));
++            M3_CONCAT = mh = concat.rebind();
++        }
++        return mh;
++    }
++
+     private @Stable static MethodHandle NEW_STRING;
+     private static MethodHandle newString() {
+         MethodHandle mh = NEW_STRING;
+diff --git a/src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java b/src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java
+index babc1940e..072f08aea 100644
+--- a/src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java
++++ b/src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java
+@@ -421,6 +421,12 @@ public interface JavaLangAccess {
+      */
+     long stringConcatMix(long lengthCoder, String constant);
+ 
++    /**
++     * Returns true when ordinary String concatenation should preserve M3
++     * segmented storage rather than eagerly materializing one byte array.
++     */
++    boolean stringConcatUsesM3Storage();
++
+    /**
+     * Get the coder for the supplied character.
+     */
+diff --git a/src/java.base/share/native/libjava/jni_util.c b/src/java.base/share/native/libjava/jni_util.c
+index aa46e12c1..3552e9ade 100644
+--- a/src/java.base/share/native/libjava/jni_util.c
++++ b/src/java.base/share/native/libjava/jni_util.c
+@@ -669,7 +669,7 @@ static jmethodID String_getBytes_ID;    /* String.getBytes(Charset) */
+ /* Cached field IDs */
+ static jfieldID String_coder_ID;        /* String.coder */
+ static jfieldID String_value_ID;        /* String.value */
+-static jfieldID String_m3Parts_ID;      /* immutable experimental segment directory */
++static jfieldID String_mindex_ID;      /* immutable experimental segment directory */
+ 
+ /* Create a new string by converting str to a heap-allocated byte array and
+  * calling the appropriate String constructor.
+@@ -815,8 +815,8 @@ InitializeEncoding(JNIEnv *env, const char *encname)
+     CHECK_NULL(String_coder_ID);
+     String_value_ID = (*env)->GetFieldID(env, strClazz, "value", "[B");
+     CHECK_NULL(String_value_ID);
+-    String_m3Parts_ID = (*env)->GetFieldID(env, strClazz, "m3Parts", "[Ljava/lang/String;");
+-    CHECK_NULL(String_m3Parts_ID);
++    String_mindex_ID = (*env)->GetFieldID(env, strClazz, "mindex", "Ljava/lang/MIndexString;");
++    CHECK_NULL(String_mindex_ID);
+ }
+ 
+ JNIEXPORT jstring JNICALL
+@@ -906,16 +906,14 @@ getStringUTF8(JNIEnv *env, jstring jstr, jboolean strict)
+         return NULL;
+     }
+     value = (*env)->GetObjectField(env, jstr, String_value_ID);
+-    if (value == NULL) {
+-        jobject parts = (*env)->GetObjectField(env, jstr, String_m3Parts_ID);
+-        if (parts != NULL) {
+-            (*env)->DeleteLocalRef(env, parts);
+-            // Platform conversion is an explicit Java materialization boundary.
+-            // No primitive array or critical pointer has been acquired here.
+-            return getStringBytes(env, jstr, strict);
+-        }
+-        return NULL;
++    jobject storage = (*env)->GetObjectField(env, jstr, String_mindex_ID);
++    if (storage != NULL) {
++        (*env)->DeleteLocalRef(env, storage);
++        if (value != NULL) (*env)->DeleteLocalRef(env, value);
++        // Explicit charset boundary, before acquiring any critical pointer.
++        return getStringBytes(env, jstr, strict);
+     }
++    if (value == NULL) return NULL;
+     len = (*env)->GetArrayLength(env, value);
+     str = (*env)->GetPrimitiveArrayCritical(env, value, NULL);
+     if (str == NULL) {
+diff --git a/src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/OopUtilities.java b/src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/OopUtilities.java
+index deb2bd8a7..996cd6f71 100644
+--- a/src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/OopUtilities.java
++++ b/src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/OopUtilities.java
+@@ -145,25 +145,14 @@ public class OopUtilities {
+ 
+   public static String stringOopToString(Oop stringOop) {
+     InstanceKlass k = (InstanceKlass) stringOop.getKlass();
+-    // The experimental M3 layout retains flat String leaves. Decode without
+-    // requiring the target VM to allocate or populate its lazy Java cache.
+-    OopField partsField = (OopField) k.findField("m3Parts", "[Ljava/lang/String;");
+-    if (partsField != null) {
+-      ObjArray parts = (ObjArray) partsField.getValue(stringOop);
+-      if (parts != null) {
+-        OopField rangesField = (OopField) k.findField("m3Ranges", "[I");
+-        TypeArray ranges = (TypeArray) rangesField.getValue(stringOop);
+-        StringBuilder result = new StringBuilder();
+-        int previousEnd = 0;
+-        for (int i = 0; i < parts.getLength(); i++) {
+-          int start = ranges.getIntAt(2 * i);
+-          int end = ranges.getIntAt(2 * i + 1);
+-          String leaf = stringOopToString(parts.getObjAt(i));
+-          result.append(leaf, start, start + end - previousEnd);
+-          previousEnd = end;
+-        }
+-        return result.toString();
+-      }
++    OopField mindexField = (OopField) k.findField("mindex", "Ljava/lang/MIndexString;");
++    if (mindexField != null && mindexField.getValue(stringOop) != null) {
++      Oop storage = mindexField.getValue(stringOop);
++      InstanceKlass sk = (InstanceKlass) storage.getKlass();
++      int length = ((IntField) sk.findField("length", "I")).getValue(storage);
++      StringBuilder result = new StringBuilder(length);
++      for (int i = 0; i < length; i++) result.append(mindexCharAt(storage, i));
++      return result.toString();
+     }
+     coderField  = (ByteField) k.findField("coder", "B");
+     valueField  = (OopField) k.findField("value",  "[B");
+@@ -174,6 +163,33 @@ public class OopUtilities {
+     return byteArrayToString((TypeArray) valueField.getValue(stringOop), coderField.getValue(stringOop));
+   }
+ 
++  private static char mindexCharAt(Oop storage, int index) {
++    InstanceKlass k = (InstanceKlass) storage.getKlass();
++    int kind = ((ByteField) k.findField("storageKind", "B")).getValue(storage);
++    if (kind == 1) {
++      TypeArray bytes = (TypeArray) ((OopField) k.findField("localValue", "[B")).getValue(storage);
++      byte coder = ((ByteField) k.findField("coder", "B")).getValue(storage);
++      return coder == 0 ? (char)(bytes.getByteAt(index) & 255) : bytes.getCharAt(index);
++    }
++    if (kind == 2 || kind == 4) {
++      long raw = ((LongField) k.findField("mappedAddress", "J")).getValue(storage);
++      Address address = VM.getVM().getDebugger().newAddress(raw);
++      int a = address.getJByteAt((long)index * 2) & 255;
++      int b = address.getJByteAt((long)index * 2 + 1) & 255;
++      return kind == 4 ? (char)((a << 8) | b) : (char)(a | (b << 8));
++    }
++    ObjArray parts = (ObjArray) ((OopField) k.findField("segments", "[Ljava/lang/MIndexString;")).getValue(storage);
++    TypeArray starts = (TypeArray) ((OopField) k.findField("offsets", "[I")).getValue(storage);
++    TypeArray ends = (TypeArray) ((OopField) k.findField("ends", "[I")).getValue(storage);
++    int previous = 0;
++    for (int i = 0; i < parts.getLength(); i++) {
++      int end = ends.getIntAt(i);
++      if (index < end) return mindexCharAt(parts.getObjAt(i), starts.getIntAt(i) + index - previous);
++      previous = end;
++    }
++    throw new IllegalStateException("invalid MIndexString geometry");
++  }
++
+   public static String stringOopToEscapedString(Oop stringOop) {
+     return escapeString(stringOopToString(stringOop));
+   }

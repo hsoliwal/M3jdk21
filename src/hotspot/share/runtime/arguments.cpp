@@ -3028,17 +3028,17 @@ jint Arguments::finalize_vm_init_args(bool patch_mod_javabase) {
   // This representation is not yet supported by optimizing compilers, CDS,
   // string deduplication or JFR. Enforce the experiment boundary after option
   // parsing, regardless of command-line ordering (including a trailing -Xcomp).
-  if (UseM3SegmentedStrings) {
+  if (UseM3StringStorage) {
 #if INCLUDE_JVMCI
     if (EnableJVMCI || UseJVMCICompiler) {
       jio_fprintf(defaultStream::error_stream(),
-                  "UseM3SegmentedStrings does not support JVMCI\n");
+                  "UseM3StringStorage does not support JVMCI\n");
       return JNI_ERR;
     }
 #endif
     if (UseStringDeduplication) {
       jio_fprintf(defaultStream::error_stream(),
-                  "UseM3SegmentedStrings does not support UseStringDeduplication\n");
+                  "UseM3StringStorage does not support UseStringDeduplication\n");
       return JNI_ERR;
     }
 #if INCLUDE_CDS
@@ -3046,7 +3046,7 @@ jint Arguments::finalize_vm_init_args(bool patch_mod_javabase) {
         ArchiveClassesAtExit != nullptr || RecordDynamicDumpInfo ||
         AutoCreateSharedArchive) {
       jio_fprintf(defaultStream::error_stream(),
-                  "UseM3SegmentedStrings does not support CDS archive operations\n");
+                  "UseM3StringStorage does not support CDS archive operations\n");
       return JNI_ERR;
     }
     UseSharedSpaces = false;
@@ -3055,7 +3055,7 @@ jint Arguments::finalize_vm_init_args(bool patch_mod_javabase) {
     if (FlightRecorder || StartFlightRecording != nullptr ||
         FlightRecorderOptions != nullptr) {
       jio_fprintf(defaultStream::error_stream(),
-                  "UseM3SegmentedStrings does not support Flight Recorder\n");
+                  "UseM3StringStorage does not support Flight Recorder\n");
       return JNI_ERR;
     }
 #endif
