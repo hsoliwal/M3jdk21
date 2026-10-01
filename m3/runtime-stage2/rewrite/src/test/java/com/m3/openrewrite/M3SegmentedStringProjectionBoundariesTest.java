@@ -77,6 +77,38 @@ class M3SegmentedStringProjectionBoundariesTest implements RewriteTest {
     }
 
     @Test
+    void rewritesComplexIndyConcatToSegmentedFallback() {
+        rewriteRun(
+            text(
+                """
+                if (paramCount == 2 && !mt.hasPrimitives() && suffix == null
+                        && constants[0] == null && constants[1] == null) {
+                    // Two reference arguments, no surrounding constants
+                    return simpleConcat();
+                }
+                // else... fall-through to slow-path
+                """,
+                """
+                if (paramCount == 2 && !mt.hasPrimitives() && suffix == null
+                        && constants[0] == null && constants[1] == null) {
+                    // Two reference arguments, no surrounding constants
+                    return simpleConcat();
+                }
+                // Correctness-first segmented fallback. The existing fast paths above
+                // remain allocation-minimal; complex indy shapes avoid the flat byte[]
+                // builder while M3 storage is enabled. Specialized segment combinators
+                // can replace this collector without changing the call-site contract.
+                if (JLA.stringConcatUsesM3Storage()) {
+                    return generateM3Concat(mt, constants);
+                }
+                // else... fall-through to stock inline-copy slow-path
+                """,
+                source -> source.path("src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java")
+            )
+        );
+    }
+
+    @Test
     void rewritesJniProjectionToSegmentTraversal() {
         rewriteRun(
             text(
