@@ -322,14 +322,19 @@ final class MIndexStringPool {
                 MappedByteBuffer mapped =
                         channel.map(FileChannel.MapMode.READ_ONLY, 0, size);
                 mapped.order(ByteOrder.BIG_ENDIAN);
-                if (mapped.getLong(0) != LEXICON_MAGIC || mapped.getInt(8) != 1) {
+                if (mapped.getLong(0) != LEXICON_MAGIC) {
                     throw new IOException("unsupported MIndex lexicon image");
                 }
+                int version = mapped.getInt(8);
+                if (version != 1 && version != 2) {
+                    throw new IOException("unsupported MIndex lexicon version");
+                }
                 int count = mapped.getInt(12);
+                int directoryBytes = version == 1 ? 8 : 12;
                 long payload = mapped.getLong(16);
                 long units = mapped.getLong(24);
                 if (count < 0
-                        || payload != LEXICON_HEADER + 8L * count
+                        || payload != LEXICON_HEADER + (long) directoryBytes * count
                         || units < 0
                         || payload + 2L * units != size) {
                     throw new IOException("invalid MIndex lexicon dimensions");
@@ -346,14 +351,24 @@ final class MIndexStringPool {
                 int[] lengths = new int[count];
                 int[] javaHashes = new int[count];
                 for (int row = 0; row < count; row++) {
-                    int offset = mapped.getInt(LEXICON_HEADER + row * 8);
-                    int length = mapped.getInt(LEXICON_HEADER + row * 8 + 4);
+                    int entry = LEXICON_HEADER + row * directoryBytes;
+                    int offset = mapped.getInt(entry);
+                    int length = mapped.getInt(entry + 4);
                     if (offset < 0 || length < 0 || (long) offset + length > units) {
                         throw new IOException("invalid MIndex lexicon record");
                     }
                     offsets[row] = offset;
                     lengths[row] = length;
-                    javaHashes[row] = javaHash(mapped, (int) payload, offset, length);
+                    int computedHash = javaHash(mapped, (int) payload, offset, length);
+                    if (version == 2) {
+                        int storedHash = mapped.getInt(entry + 8);
+                        if (storedHash != computedHash) {
+                            throw new IOException("invalid MIndex lexicon Java hash");
+                        }
+                        javaHashes[row] = storedHash;
+                    } else {
+                        javaHashes[row] = computedHash;
+                    }
                     if (row > 0
                             && compareRecords(
                                             mapped,
