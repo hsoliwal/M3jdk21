@@ -3772,8 +3772,9 @@ public final class String
      * @since   1.1
      */
     public String toLowerCase(Locale locale) {
-        return isLatin1() ? StringLatin1.toLowerCase(this, value, locale)
-                          : StringUTF16.toLowerCase(this, value, locale);
+        byte[] currentValue = value();
+        return isLatin1() ? StringLatin1.toLowerCase(this, currentValue, locale)
+                          : StringUTF16.toLowerCase(this, currentValue, locale);
     }
 
     /**
@@ -3852,8 +3853,9 @@ public final class String
      * @since   1.1
      */
     public String toUpperCase(Locale locale) {
-        return isLatin1() ? StringLatin1.toUpperCase(this, value, locale)
-                          : StringUTF16.toUpperCase(this, value, locale);
+        byte[] currentValue = value();
+        return isLatin1() ? StringLatin1.toUpperCase(this, currentValue, locale)
+                          : StringUTF16.toUpperCase(this, currentValue, locale);
     }
 
     /**
@@ -3912,8 +3914,9 @@ public final class String
      *          has no leading or trailing space.
      */
     public String trim() {
-        String ret = isLatin1() ? StringLatin1.trim(value)
-                                : StringUTF16.trim(value);
+        byte[] currentValue = value();
+        String ret = isLatin1() ? StringLatin1.trim(currentValue)
+                                : StringUTF16.trim(currentValue);
         return ret == null ? this : ret;
     }
 
@@ -3944,8 +3947,9 @@ public final class String
      * @since 11
      */
     public String strip() {
-        String ret = isLatin1() ? StringLatin1.strip(value)
-                                : StringUTF16.strip(value);
+        byte[] currentValue = value();
+        String ret = isLatin1() ? StringLatin1.strip(currentValue)
+                                : StringUTF16.strip(currentValue);
         return ret == null ? this : ret;
     }
 
@@ -3974,8 +3978,9 @@ public final class String
      * @since 11
      */
     public String stripLeading() {
-        String ret = isLatin1() ? StringLatin1.stripLeading(value)
-                                : StringUTF16.stripLeading(value);
+        byte[] currentValue = value();
+        String ret = isLatin1() ? StringLatin1.stripLeading(currentValue)
+                                : StringUTF16.stripLeading(currentValue);
         return ret == null ? this : ret;
     }
 
@@ -4004,8 +4009,9 @@ public final class String
      * @since 11
      */
     public String stripTrailing() {
-        String ret = isLatin1() ? StringLatin1.stripTrailing(value)
-                                : StringUTF16.stripTrailing(value);
+        byte[] currentValue = value();
+        String ret = isLatin1() ? StringLatin1.stripTrailing(currentValue)
+                                : StringUTF16.stripTrailing(currentValue);
         return ret == null ? this : ret;
     }
 
@@ -4057,7 +4063,8 @@ public final class String
      * @since 11
      */
     public Stream<String> lines() {
-        return isLatin1() ? StringLatin1.lines(value) : StringUTF16.lines(value);
+        byte[] currentValue = value();
+        return isLatin1() ? StringLatin1.lines(currentValue) : StringUTF16.lines(currentValue);
     }
 
     /**
@@ -4113,13 +4120,15 @@ public final class String
     }
 
     private int indexOfNonWhitespace() {
-        return isLatin1() ? StringLatin1.indexOfNonWhitespace(value)
-                          : StringUTF16.indexOfNonWhitespace(value);
+        byte[] currentValue = value();
+        return isLatin1() ? StringLatin1.indexOfNonWhitespace(currentValue)
+                          : StringUTF16.indexOfNonWhitespace(currentValue);
     }
 
     private int lastIndexOfNonWhitespace() {
-        return isLatin1() ? StringLatin1.lastIndexOfNonWhitespace(value)
-                          : StringUTF16.lastIndexOfNonWhitespace(value);
+        byte[] currentValue = value();
+        return isLatin1() ? StringLatin1.lastIndexOfNonWhitespace(currentValue)
+                          : StringUTF16.lastIndexOfNonWhitespace(currentValue);
     }
 
     /**
@@ -4448,8 +4457,8 @@ public final class String
     @Override
     public IntStream chars() {
         return StreamSupport.intStream(
-            isLatin1() ? new StringLatin1.CharsSpliterator(value, Spliterator.IMMUTABLE)
-                       : new StringUTF16.CharsSpliterator(value, Spliterator.IMMUTABLE),
+            isLatin1() ? new StringLatin1.CharsSpliterator(value(), Spliterator.IMMUTABLE)
+                       : new StringUTF16.CharsSpliterator(value(), Spliterator.IMMUTABLE),
             false);
     }
 
@@ -4468,8 +4477,8 @@ public final class String
     @Override
     public IntStream codePoints() {
         return StreamSupport.intStream(
-            isLatin1() ? new StringLatin1.CharsSpliterator(value, Spliterator.IMMUTABLE)
-                       : new StringUTF16.CodePointsSpliterator(value, Spliterator.IMMUTABLE),
+            isLatin1() ? new StringLatin1.CharsSpliterator(value(), Spliterator.IMMUTABLE)
+                       : new StringUTF16.CodePointsSpliterator(value(), Spliterator.IMMUTABLE),
             false);
     }
 
@@ -4481,8 +4490,9 @@ public final class String
      *          the character sequence represented by this string.
      */
     public char[] toCharArray() {
-        return isLatin1() ? StringLatin1.toChars(value)
-                          : StringUTF16.toChars(value);
+        byte[] currentValue = value();
+        return isLatin1() ? StringLatin1.toChars(currentValue)
+                          : StringUTF16.toChars(currentValue);
     }
 
     /**
