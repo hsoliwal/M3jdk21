@@ -654,7 +654,8 @@
   template(object_array_signature,                    "[Ljava/lang/Object;")                                      \
   template(class_signature,                           "Ljava/lang/Class;")                                        \
   template(string_signature,                          "Ljava/lang/String;")                                       \
-  template(m3_string_storage_signature,               "Ljava/lang/MIndexString;")                              \
+  template(mindex_string_signature,                   "Ljava/lang/MIndexString;")                              \
+  template(mindex_string_array_signature,             "[Ljava/lang/MIndexString;")                             \
   template(string_array_signature,                    "[Ljava/lang/String;")                                      \
   template(reference_signature,                       "Ljava/lang/ref/Reference;")                                \
   template(referencequeue_signature,                  "Ljava/lang/ref/ReferenceQueue;")                           \
