@@ -693,9 +693,7 @@ char* java_lang_String::as_utf8_string(oop java_string, int& length) {
   if (java_lang_String::is_m3_joined(java_string)) {
     int unicode_length = 0;
     jchar* unicode = java_lang_String::as_unicode_string_or_null(java_string, unicode_length);
-    char* result = UNICODE::as_utf8(unicode, unicode_length);
-    length = (int)strlen(result);
-    return result;
+    return UNICODE::as_utf8(unicode, unicode_length);
   }
   if (!is_latin1) {
     jchar* position = (length == 0) ? nullptr : value->char_at_addr(0);
