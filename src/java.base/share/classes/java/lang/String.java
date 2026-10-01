@@ -355,23 +355,28 @@ public final class String
      * @since  1.5
      */
     public String(int[] codePoints, int offset, int count) {
-        this.mindex = null;
         checkBoundsOffCount(offset, count, codePoints.length);
         if (count == 0) {
             this.value = "".value;
             this.coder = "".coder;
+            this.mindex = null;
             return;
         }
+        byte[] candidate = null;
+        byte candidateCoder = UTF16;
         if (COMPACT_STRINGS) {
-            byte[] val = StringLatin1.toBytes(codePoints, offset, count);
-            if (val != null) {
-                this.coder = LATIN1;
-                this.value = val;
-                return;
+            candidate = StringLatin1.toBytes(codePoints, offset, count);
+            if (candidate != null) {
+                candidateCoder = LATIN1;
             }
         }
-        this.coder = UTF16;
-        this.value = StringUTF16.toBytes(codePoints, offset, count);
+        if (candidate == null) {
+            candidate = StringUTF16.toBytes(codePoints, offset, count);
+        }
+        MIndexString storage = maybeAdmit(candidate, candidateCoder);
+        this.value = storage == null ? candidate : storage.compatibilityValue();
+        this.coder = storage == null ? candidateCoder : storage.coder();
+        this.mindex = storage;
     }
 
     /**
@@ -415,25 +420,30 @@ public final class String
      */
     @Deprecated(since="1.1")
     public String(byte[] ascii, int hibyte, int offset, int count) {
-        this.mindex = null;
         checkBoundsOffCount(offset, count, ascii.length);
         if (count == 0) {
             this.value = "".value;
             this.coder = "".coder;
+            this.mindex = null;
             return;
         }
+        byte[] candidate;
+        byte candidateCoder;
         if (COMPACT_STRINGS && (byte)hibyte == 0) {
-            this.value = Arrays.copyOfRange(ascii, offset, offset + count);
-            this.coder = LATIN1;
+            candidate = Arrays.copyOfRange(ascii, offset, offset + count);
+            candidateCoder = LATIN1;
         } else {
             hibyte <<= 8;
-            byte[] val = StringUTF16.newBytesFor(count);
+            candidate = StringUTF16.newBytesFor(count);
             for (int i = 0; i < count; i++) {
-                StringUTF16.putChar(val, i, hibyte | (ascii[offset++] & 0xff));
+                StringUTF16.putChar(candidate, i, hibyte | (ascii[offset++] & 0xff));
             }
-            this.value = val;
-            this.coder = UTF16;
+            candidateCoder = UTF16;
         }
+        MIndexString storage = maybeAdmit(candidate, candidateCoder);
+        this.value = storage == null ? candidate : storage.compatibilityValue();
+        this.coder = storage == null ? candidateCoder : storage.coder();
+        this.mindex = storage;
     }
 
     /**
@@ -4932,22 +4942,21 @@ public final class String
      * characters in their byte sequences defined by the {@code StringUTF16}.
      */
     String(char[] value, int off, int len, Void sig) {
-        this.mindex = null;
         if (len == 0) {
             this.value = "".value;
             this.coder = "".coder;
+            this.mindex = null;
             return;
         }
-        if (COMPACT_STRINGS) {
-            byte[] val = StringUTF16.compress(value, off, len);
-            if (val != null) {
-                this.value = val;
-                this.coder = LATIN1;
-                return;
-            }
+        byte[] candidate = COMPACT_STRINGS ? StringUTF16.compress(value, off, len) : null;
+        byte candidateCoder = candidate == null ? UTF16 : LATIN1;
+        if (candidate == null) {
+            candidate = StringUTF16.toBytes(value, off, len);
         }
-        this.coder = UTF16;
-        this.value = StringUTF16.toBytes(value, off, len);
+        MIndexString storage = maybeAdmit(candidate, candidateCoder);
+        this.value = storage == null ? candidate : storage.compatibilityValue();
+        this.coder = storage == null ? candidateCoder : storage.coder();
+        this.mindex = storage;
     }
 
     /*
@@ -4955,41 +4964,44 @@ public final class String
      * disambiguating it against other (public) constructors.
      */
     String(AbstractStringBuilder asb, Void sig) {
-        this.mindex = null;
         byte[] val = asb.getValue();
         int length = asb.length();
+        byte[] candidate;
+        byte candidateCoder;
         if (asb.isLatin1()) {
-            this.coder = LATIN1;
-            this.value = Arrays.copyOfRange(val, 0, length);
+            candidate = Arrays.copyOfRange(val, 0, length);
+            candidateCoder = LATIN1;
         } else {
-            // only try to compress val if some characters were deleted.
-            if (COMPACT_STRINGS && asb.maybeLatin1) {
-                byte[] buf = StringUTF16.compress(val, 0, length);
-                if (buf != null) {
-                    this.coder = LATIN1;
-                    this.value = buf;
-                    return;
-                }
+            candidate = COMPACT_STRINGS && asb.maybeLatin1
+                    ? StringUTF16.compress(val, 0, length)
+                    : null;
+            if (candidate != null) {
+                candidateCoder = LATIN1;
+            } else {
+                candidate = Arrays.copyOfRange(val, 0, length << 1);
+                candidateCoder = UTF16;
             }
-            this.coder = UTF16;
-            this.value = Arrays.copyOfRange(val, 0, length << 1);
         }
+        MIndexString storage = maybeAdmit(candidate, candidateCoder);
+        this.value = storage == null ? candidate : storage.compatibilityValue();
+        this.coder = storage == null ? candidateCoder : storage.coder();
+        this.mindex = storage;
     }
 
    /*
     * Package private constructor which shares value array for speed.
     */
     String(byte[] value, byte coder) {
-        if (M3_JOINED_STRINGS && MIndexString.ready() && value.length != 0) {
-            MIndexString storage = MIndexString.admit(value, coder);
-            this.value = storage.compatibilityValue();
-            this.coder = storage.coder();
-            this.mindex = storage;
-        } else {
-            this.value = value;
-            this.coder = coder;
-            this.mindex = null;
-        }
+        MIndexString storage = maybeAdmit(value, coder);
+        this.value = storage == null ? value : storage.compatibilityValue();
+        this.coder = storage == null ? coder : storage.coder();
+        this.mindex = storage;
+    }
+
+    private static MIndexString maybeAdmit(byte[] value, byte coder) {
+        return M3_JOINED_STRINGS && MIndexString.ready() && value.length != 0
+                ? MIndexString.admit(value, coder)
+                : null;
     }
 
     /** Trusted constructor for one canonical MIndexString storage body. */
