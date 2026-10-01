@@ -73,12 +73,12 @@ typeArrayOop java_lang_String::value_no_keepalive(oop java_string) {
 
 oop java_lang_String::m3_storage(oop java_string) {
   assert(is_instance(java_string), "must be java_string");
-  return java_string->obj_field(_m3Storage_offset);
+  return java_string->obj_field(_mindex_offset);
 }
 
 oop java_lang_String::m3_storage_no_keepalive(oop java_string) {
   assert(is_instance(java_string), "must be java_string");
-  return java_string->obj_field_access<AS_NO_KEEPALIVE>(_m3Storage_offset);
+  return java_string->obj_field_access<AS_NO_KEEPALIVE>(_mindex_offset);
 }
 
 bool java_lang_String::is_m3_joined(oop java_string) {
@@ -88,7 +88,7 @@ bool java_lang_String::is_m3_joined(oop java_string) {
 jchar java_lang_String::char_at(oop java_string, int index) {
   oop storage = m3_storage(java_string);
   if (storage != nullptr) {
-    return java_lang_M3StringStorage::char_at(storage, index);
+    return java_lang_MIndexString::char_at(storage, index);
   }
   typeArrayOop string_value = value(java_string);
   if (is_latin1(java_string)) {
@@ -135,7 +135,7 @@ int java_lang_String::length(oop java_string, typeArrayOop value) {
   assert(is_instance(java_string), "must be java_string");
   oop storage = m3_storage_no_keepalive(java_string);
   if (storage != nullptr) {
-    return java_lang_M3StringStorage::length(storage);
+    return java_lang_MIndexString::length(storage);
   }
   assert(value_equals(value, java_lang_String::value(java_string)),
          "value must be equal to java_lang_String::value(java_string)");
@@ -161,29 +161,29 @@ bool java_lang_String::is_instance(oop obj) {
   return obj != nullptr && obj->klass() == vmClasses::String_klass();
 }
 
-// java.lang.M3StringStorage accessors
+// java.lang.MIndexString accessors
 
-objArrayOop java_lang_M3StringStorage::segments(oop storage) {
+objArrayOop java_lang_MIndexString::segments(oop storage) {
   return (objArrayOop)storage->obj_field(_segments_offset);
 }
 
-typeArrayOop java_lang_M3StringStorage::offsets(oop storage) {
+typeArrayOop java_lang_MIndexString::offsets(oop storage) {
   return (typeArrayOop)storage->obj_field(_offsets_offset);
 }
 
-typeArrayOop java_lang_M3StringStorage::ends(oop storage) {
+typeArrayOop java_lang_MIndexString::ends(oop storage) {
   return (typeArrayOop)storage->obj_field(_ends_offset);
 }
 
-int java_lang_M3StringStorage::length(oop storage) {
+int java_lang_MIndexString::length(oop storage) {
   return storage->int_field(_length_offset);
 }
 
-jbyte java_lang_M3StringStorage::coder(oop storage) {
+jbyte java_lang_MIndexString::coder(oop storage) {
   return storage->byte_field(_coder_offset);
 }
 
-jchar java_lang_M3StringStorage::char_at(oop storage, int index) {
+jchar java_lang_MIndexString::char_at(oop storage, int index) {
   const int storage_length = length(storage);
   assert(index >= 0 && index < storage_length, "String index out of bounds");
 
