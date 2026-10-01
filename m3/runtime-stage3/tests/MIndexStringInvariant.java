@@ -34,6 +34,10 @@ public final class MIndexStringInvariant {
         if (expectLexicon) {
             check(MAPPED_ADDRESS.getLong(alphaStorage1) != 0L, "lexicon atom address");
             check(LOCAL_VALUE.get(alphaStorage1) == null, "lexicon atom must not retain heap bytes");
+            eq(0, ((byte[]) STRING_VALUE.get(alpha1)).length,
+                    "lexicon-backed constructor discards temporary Compact-String bytes");
+            eq(0, ((byte[]) STRING_VALUE.get(alpha2)).length,
+                    "equal lexicon-backed constructor also keeps only compatibility sentinel");
         }
 
         String miss1 = new String(new char[] {'g','a','m','m','a'});
@@ -44,8 +48,13 @@ public final class MIndexStringInvariant {
         Object missStorage2 = storage(miss2);
         same(missStorage1, missStorage2, "VM-local miss shares scalar storage");
         eq(LOCAL, kind(missStorage1), "miss storage kind");
-        same(LOCAL_VALUE.get(missStorage1), LOCAL_VALUE.get(missStorage2),
+        Object missBytes = LOCAL_VALUE.get(missStorage1);
+        same(missBytes, LOCAL_VALUE.get(missStorage2),
                 "VM-local miss shares exact canonical byte[]");
+        same(missBytes, STRING_VALUE.get(miss1),
+                "String.value is the canonical local atom byte[]");
+        same(missBytes, STRING_VALUE.get(miss2),
+                "equal String wrapper reuses the same canonical local atom byte[]");
 
         String joined1 = alpha1.concat(miss1);
         String joined2 = alpha2.concat(miss2);
