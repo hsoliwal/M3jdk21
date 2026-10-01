@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "base_ref": "m3/segmented-string-runtime-p2-20261001",
+  "head_ref": "m3/mindexstring-string-runtime-p3-20261001",
+  "files": {
+    "src/java.base/share/classes/java/lang/String.java": {
+      "before_git_blob": "813fbaf85d3647a5bd5b2364fbe0f76233f8bd06",
+      "after_git_blob": "64b31561a2972b8220271d19f72773839a22779c"
+    },
+    "src/java.base/share/classes/java/lang/System.java": {
+      "before_git_blob": "914ed37f25d975be7f9b814d3285ce2b29c1b3b6",
+      "after_git_blob": "faf19aa2e29027be37f0157497fa11c34c11609d"
+    },
+    "src/java.base/share/classes/java/lang/M3StringStorage.java": {
+      "before_git_blob": "2d81dc1f9e6af3e6ccd14d8df7e427d205dd9a71",
+      "after_git_blob": null
+    },
+    "src/java.base/share/classes/java/lang/MIndexString.java": {
+      "before_git_blob": null,
+      "after_git_blob": "e2909ff38ab2a5e2cd99921f1071471450ba835b"
+    },
+    "src/java.base/share/classes/java/lang/MIndexStringPool.java": {
+      "before_git_blob": null,
+      "after_git_blob": "089c1a6298349053f76dd36aab4bec2772259ecf"
+    },
+    "src/hotspot/share/classfile/javaClasses.cpp": {
+      "before_git_blob": "800d9eb447b06f429338c762d0e4bda708e872cf",
+      "after_git_blob": "2ae10691bbeba151ade9f026b2a5055e097f17f2"
+    },
+    "src/hotspot/share/classfile/javaClasses.hpp": {
+      "before_git_blob": "b15867cbd14a38aacce6ea890ae1720880735854",
+      "after_git_blob": "709b649fbba86abcbc95e0edb139b41243ea15e9"
+    },
+    "src/hotspot/share/classfile/javaClasses.inline.hpp": {
+      "before_git_blob": "06f6fb167ea24fa016a661210073e962a8c8a469",
+      "after_git_blob": "5c6d3d0f4966bd0faabc4d6d7038695ae3444eef"
+    },
+    "src/hotspot/share/classfile/vmSymbols.hpp": {
+      "before_git_blob": "21d94ea3b32ef3f058f140aa3e4c0697d17a92e5",
+      "after_git_blob": "a2bc7e829e6830b5820ebb885be0fb41fa33f5e5"
+    }
+  }
+}
