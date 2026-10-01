@@ -193,7 +193,7 @@ void JavaClasses::compute_offset(int& dest_offset, InstanceKlass* ik,
 // java_lang_String
 
 int java_lang_String::_value_offset;
-int java_lang_String::_m3Storage_offset;
+int java_lang_String::_mindex_offset;
 int java_lang_String::_hash_offset;
 int java_lang_String::_hashIsZero_offset;
 int java_lang_String::_coder_offset;
@@ -216,7 +216,7 @@ bool java_lang_String::test_and_set_flag(oop java_string, uint8_t flag_mask) {
 
 #define STRING_FIELDS_DO(macro) \
   macro(_value_offset, k, vmSymbols::value_name(), byte_array_signature, false); \
-  macro(_m3Storage_offset, k, "m3Storage",          m3_string_storage_signature, false); \
+  macro(_mindex_offset, k, "mindex",          m3_string_storage_signature, false); \
   macro(_hash_offset,  k, "hash",                  int_signature,        false); \
   macro(_hashIsZero_offset, k, "hashIsZero",       bool_signature,       false); \
   macro(_coder_offset, k, "coder",                 byte_signature,       false);
@@ -891,13 +891,13 @@ void java_lang_String::print(oop java_string, outputStream* st) {
   st->print("\"");
 }
 
-// java_lang_M3StringStorage
+// java_lang_MIndexString
 
-int java_lang_M3StringStorage::_segments_offset;
-int java_lang_M3StringStorage::_offsets_offset;
-int java_lang_M3StringStorage::_ends_offset;
-int java_lang_M3StringStorage::_length_offset;
-int java_lang_M3StringStorage::_coder_offset;
+int java_lang_MIndexString::_segments_offset;
+int java_lang_MIndexString::_offsets_offset;
+int java_lang_MIndexString::_ends_offset;
+int java_lang_MIndexString::_length_offset;
+int java_lang_MIndexString::_coder_offset;
 
 #define M3_STRING_STORAGE_FIELDS_DO(macro) \
   macro(_segments_offset, k, "segments", string_array_signature, false); \
@@ -906,13 +906,13 @@ int java_lang_M3StringStorage::_coder_offset;
   macro(_length_offset,   k, "length",   int_signature,          false); \
   macro(_coder_offset,    k, "coder",    byte_signature,         false);
 
-void java_lang_M3StringStorage::compute_offsets() {
-  InstanceKlass* k = vmClasses::M3StringStorage_klass();
+void java_lang_MIndexString::compute_offsets() {
+  InstanceKlass* k = vmClasses::MIndexString_klass();
   M3_STRING_STORAGE_FIELDS_DO(FIELD_COMPUTE_OFFSET);
 }
 
 #if INCLUDE_CDS
-void java_lang_M3StringStorage::serialize_offsets(SerializeClosure* f) {
+void java_lang_MIndexString::serialize_offsets(SerializeClosure* f) {
   M3_STRING_STORAGE_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
 }
 #endif
@@ -5337,7 +5337,7 @@ void java_lang_InternalError::serialize_offsets(SerializeClosure* f) {
   //end
 
 #define BASIC_JAVA_CLASSES_DO_PART2(f) \
-  f(java_lang_M3StringStorage) \
+  f(java_lang_MIndexString) \
   f(java_lang_System) \
   f(java_lang_ClassLoader) \
   f(java_lang_Throwable) \
@@ -5422,7 +5422,7 @@ bool JavaClasses::is_supported_for_archiving(oop obj) {
   Klass* klass = obj->klass();
 
   if ((klass == vmClasses::String_klass() && java_lang_String::is_m3_joined(obj)) ||
-      klass == vmClasses::M3StringStorage_klass()) {
+      klass == vmClasses::MIndexString_klass()) {
     // Stage-2 M3 strings are rebuilt at runtime. Archiving their segment graph
     // is intentionally deferred until explicit CDS relocation support exists.
     return false;
