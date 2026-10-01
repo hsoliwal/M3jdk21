@@ -3489,6 +3489,12 @@ public final class String
      */
     @ForceInline
     static String join(String prefix, String suffix, String delimiter, String[] elements, int size) {
+        // A singleton with no affixes already owns immutable contiguous backing.
+        // Preserve a fresh result object and its default hash/dedup state.
+        if (size == 1 && prefix.isEmpty() && suffix.isEmpty()) {
+            String element = elements[0];
+            return new String(element.value, element.coder());
+        }
         int icoder = prefix.coder() | suffix.coder();
         long len = (long) prefix.length() + suffix.length();
         if (size > 1) { // when there are more than one element, size - 1 delimiters will be emitted

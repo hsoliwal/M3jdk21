@@ -1,0 +1,24 @@
+SINGLETON_JOIN_PASS checks=1966509 concurrent_joins=80000 patched=false
+JOIN_JNI_PASS calls=327701
+SINGLETON_JOIN_PASS checks=1966509 concurrent_joins=80000 patched=false
+JOIN_JNI_PASS calls=327701
+SINGLETON_JOIN_PASS checks=1966509 concurrent_joins=80000 patched=false
+JOIN_JNI_PASS calls=327701
+SINGLETON_JOIN_PASS checks=1966509 concurrent_joins=80000 patched=false
+JOIN_JNI_PASS calls=327701
+SINGLETON_JOIN_PASS checks=1704321 concurrent_joins=80000 patched=false
+SINGLETON_JOIN_PASS checks=1704321 concurrent_joins=80000 patched=false
+SINGLETON_JOIN_PASS checks=1704321 concurrent_joins=80000 patched=false
+SINGLETON_JOIN_PASS checks=1704321 concurrent_joins=80000 patched=false
+SINGLETON_JOIN_PASS checks=1966509 concurrent_joins=80000 patched=true
+JOIN_JNI_PASS calls=327701
+SINGLETON_JOIN_PASS checks=1966509 concurrent_joins=80000 patched=true
+JOIN_JNI_PASS calls=327701
+SINGLETON_JOIN_PASS checks=1966509 concurrent_joins=80000 patched=true
+JOIN_JNI_PASS calls=327701
+SINGLETON_JOIN_PASS checks=1966509 concurrent_joins=80000 patched=true
+JOIN_JNI_PASS calls=327701
+SINGLETON_JOIN_PASS checks=1704321 concurrent_joins=80000 patched=true
+SINGLETON_JOIN_PASS checks=1704321 concurrent_joins=80000 patched=true
+SINGLETON_JOIN_PASS checks=1704321 concurrent_joins=80000 patched=true
+SINGLETON_JOIN_PASS checks=1704321 concurrent_joins=80000 patched=true

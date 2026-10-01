@@ -3,7 +3,7 @@
 name: M3 foundation contracts
 on:
   pull_request:
-    paths: ['m3/**', '.github/workflows/m3-foundation.yml']
+    paths: ['m3/**', 'src/java.base/share/classes/java/lang/String.java', '.github/workflows/m3-foundation.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -24,8 +24,8 @@ jobs:
           echo "M3_JDK=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
       - name: Verify deterministic source-bound recipe
         run: |
-          python3 m3/recipes/apply.py --check
-          python3 m3/recipes/test_recipe.py
+          python3 m3/runtime-stage1/apply.py --check
+          python3 m3/runtime-stage1/test_recipe.py
       - name: Build and exercise immutable foundation
         run: ./m3/build.sh
       - name: Compare pinned Synexia content and range contract
