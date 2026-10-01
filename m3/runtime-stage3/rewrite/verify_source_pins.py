@@ -10,7 +10,7 @@ import subprocess
 import sys
 
 HERE = Path(__file__).resolve().parent
-ROOT = HERE.parents[3]
+ROOT = HERE.parents[2]
 PINS = json.loads((HERE / "source-pins.json").read_text(encoding="utf-8"))
 
 def blob(path: Path) -> str:
