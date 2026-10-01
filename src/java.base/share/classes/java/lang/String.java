@@ -163,7 +163,7 @@ public final class String
      * representation. Joined/sliced Strings keep {@code value} as the empty
      * sentinel and resolve their logical content through this descriptor.
      */
-    private final MIndexString mindex;
+    private volatile MIndexString mindex;
 
     /**
      * The identifier of the encoding used to encode the bytes in
@@ -4970,27 +4970,50 @@ public final class String
     * Package private constructor which shares value array for speed.
     */
     String(byte[] value, byte coder) {
-        this.value = value;
-        this.coder = coder;
-        this.mindex = null;
+        if (M3_JOINED_STRINGS && MIndexString.ready() && value.length != 0) {
+            MIndexString storage = MIndexString.admit(value, coder);
+            this.value = storage.compatibilityValue();
+            this.coder = storage.coder();
+            this.mindex = storage;
+        } else {
+            this.value = value;
+            this.coder = coder;
+            this.mindex = null;
+        }
     }
 
-    /** Trusted constructor for an immutable M3 segmented String body. */
+    /** Trusted constructor for one canonical MIndexString storage body. */
     String(MIndexString storage) {
-        this.value = "".value;
-        this.coder = storage.coder();
-        this.mindex = storage;
+        MIndexString checked = Objects.requireNonNull(storage, "storage");
+        this.value = checked.compatibilityValue();
+        this.coder = checked.coder();
+        this.mindex = checked;
     }
 
     MIndexString mindex() {
-        return mindex;
+        MIndexString storage = mindex;
+        if (storage == null
+                && M3_JOINED_STRINGS
+                && MIndexString.ready()
+                && value.length != 0) {
+            storage = MIndexString.admit(value, coder());
+            mindex = storage;
+        }
+        return storage;
     }
 
-    static boolean m3JoinedStringsEnabled() {
+    static boolean m3StorageRequested() {
         return M3_JOINED_STRINGS;
     }
 
+    static boolean m3JoinedStringsEnabled() {
+        return M3_JOINED_STRINGS && MIndexString.ready();
+    }
+
     static String m3Concat(String first, String second) {
+        if (!m3JoinedStringsEnabled()) {
+            return null;
+        }
         MIndexString storage = MIndexString.join(first, second);
         return storage == null ? null : new String(storage);
     }
@@ -5000,7 +5023,8 @@ public final class String
     }
 
     byte[] value() {
-        return mindex == null ? value : mindex.materialize();
+        MIndexString storage = mindex();
+        return storage == null ? value : storage.materialize();
     }
 
     boolean isLatin1() {
