@@ -275,9 +275,10 @@ public final class String
      */
     @IntrinsicCandidate
     public String(String original) {
-        this.value = original.value;
-        this.coder = original.coder;
-        this.mindex = original.mindex;
+        MIndexString storage = original.mindex();
+        this.value = storage == null ? original.value : storage.compatibilityValue();
+        this.coder = storage == null ? original.coder : storage.coder();
+        this.mindex = storage;
         this.hash = original.hash;
         this.hashIsZero = original.hashIsZero;
     }
@@ -2025,7 +2026,7 @@ public final class String
         if (n != length()) {
             return false;
         }
-        if (mindex != null) {
+        if (mindex() != null) {
             for (int i = 0; i < n; i++) {
                 if (charAt(i) != cs.charAt(i)) {
                     return false;
@@ -2941,7 +2942,7 @@ public final class String
         if (subLen == 0) {
             return "";
         }
-        if (M3_JOINED_STRINGS) {
+        if (m3JoinedStringsEnabled()) {
             MIndexString storage =
                     MIndexString.sliceOf(this, beginIndex, endIndex);
             if (storage != null) {
@@ -3633,7 +3634,7 @@ public final class String
             icoder |= el.coder();
         }
         byte coder = (byte) icoder;
-        if (M3_JOINED_STRINGS && size <= 127) {
+        if (m3JoinedStringsEnabled() && size <= 127) {
             int pieceCount = size == 0 ? 2 : size * 2 + 1;
             String[] pieces = new String[pieceCount];
             int piece = 0;
@@ -4824,7 +4825,7 @@ public final class String
         if (Integer.MAX_VALUE / count < charLength) {
             throw new OutOfMemoryError("Required length exceeds implementation limit");
         }
-        if (M3_JOINED_STRINGS && count <= 256) {
+        if (m3JoinedStringsEnabled() && count <= 256) {
             String[] pieces = new String[count];
             Arrays.fill(pieces, this);
             MIndexString storage = MIndexString.join(pieces);
