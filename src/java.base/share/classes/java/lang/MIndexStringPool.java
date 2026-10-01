@@ -401,8 +401,9 @@ final class MIndexStringPool {
                 result = atoms[row];
                 if (result == null) {
                     long address = baseAddress + payloadOffset + ((long) offsets[row] << 1);
-                    long id = (generation64 & 0x3fff_ffff_0000_0000L)
-                            ^ Integer.toUnsignedLong(row + 1);
+                    long id = Long.MIN_VALUE
+                            | (generation64 & 0x3fff_ffff_0000_0000L)
+                            | Integer.toUnsignedLong(row + 1);
                     result =
                             MIndexString.lexiconScalar(
                                     mapping,
