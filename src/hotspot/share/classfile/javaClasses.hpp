@@ -211,21 +211,36 @@ class java_lang_String : AllStatic {
  */
 class java_lang_MIndexString : AllStatic {
  private:
+  static int _storageKind_offset;
+  static int _localValue_offset;
+  static int _mappedAddress_offset;
   static int _segments_offset;
   static int _offsets_offset;
   static int _ends_offset;
   static int _length_offset;
   static int _coder_offset;
+  static int _javaHash_offset;
 
  public:
+  enum StorageKind {
+    EMPTY = 0,
+    LOCAL = 1,
+    LEXICON = 2,
+    JOINED = 3
+  };
+
   static void compute_offsets();
   static void serialize_offsets(SerializeClosure* f) NOT_CDS_RETURN;
 
+  static inline jbyte storage_kind(oop storage);
+  static inline typeArrayOop local_value(oop storage);
+  static inline jlong mapped_address(oop storage);
   static inline objArrayOop segments(oop storage);
   static inline typeArrayOop offsets(oop storage);
   static inline typeArrayOop ends(oop storage);
   static inline int length(oop storage);
   static inline jbyte coder(oop storage);
+  static inline jint java_hash(oop storage);
   static inline jchar char_at(oop storage, int index);
 };
 
