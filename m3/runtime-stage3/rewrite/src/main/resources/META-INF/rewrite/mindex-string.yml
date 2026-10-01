@@ -1,0 +1,24 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.openrewrite.MIndexStringStorageInvariant
+displayName: Converge segmented String consumers on MIndexString
+description: >
+  Applies the mechanical naming/signature portion of the stage-2 to stage-3 transition:
+  java.lang.String remains the public facade while MIndexString becomes the canonical private
+  storage engine. File replacement and VM layout are source-pin gated separately.
+recipeList:
+  - org.openrewrite.text.FindAndReplace:
+      find: M3StringStorage
+      replace: MIndexString
+      caseSensitive: true
+      filePattern: '{src/java.base/share/classes/java/lang/String.java,src/hotspot/share/classfile/javaClasses.cpp,src/hotspot/share/classfile/javaClasses.hpp,src/hotspot/share/classfile/javaClasses.inline.hpp,src/hotspot/share/classfile/stringTable.cpp,src/hotspot/share/classfile/vmClassMacros.hpp,src/hotspot/share/classfile/vmSymbols.hpp}'
+  - org.openrewrite.text.FindAndReplace:
+      find: m3Storage
+      replace: mindex
+      caseSensitive: true
+      filePattern: 'src/java.base/share/classes/java/lang/String.java'
+  - org.openrewrite.text.FindAndReplace:
+      find: m3_string_storage_signature
+      replace: mindex_string_signature
+      caseSensitive: true
+      filePattern: '{src/hotspot/share/classfile/javaClasses.cpp,src/hotspot/share/classfile/vmSymbols.hpp}'
