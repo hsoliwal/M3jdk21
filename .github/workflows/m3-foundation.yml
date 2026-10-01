@@ -3,7 +3,17 @@
 name: M3 foundation contracts
 on:
   pull_request:
-    paths: ['m3/**', 'src/java.base/share/classes/java/lang/String.java', '.github/workflows/m3-foundation.yml']
+    paths:
+      - 'm3/**'
+      - 'src/java.base/share/classes/java/lang/String.java'
+      - 'src/java.base/share/classes/java/lang/MIndexString.java'
+      - 'src/java.base/share/classes/java/lang/MIndexStringPool.java'
+      - 'src/java.base/share/classes/java/lang/System.java'
+      - 'src/hotspot/share/classfile/javaClasses.*'
+      - 'src/hotspot/share/classfile/stringTable.cpp'
+      - 'src/hotspot/share/classfile/vmClassMacros.hpp'
+      - 'src/hotspot/share/classfile/vmSymbols.hpp'
+      - '.github/workflows/m3-foundation.yml'
   workflow_dispatch:
 permissions:
   contents: read
@@ -26,10 +36,12 @@ jobs:
         run: |
           python3 m3/runtime-stage1/apply.py --check
           python3 m3/runtime-stage1/test_recipe.py
-      - name: Verify stage-2 OpenRewrite projection recipe
+      - name: Verify stage-2 recipe remains reusable
+        run: mvn -q -f m3/runtime-stage2/rewrite/pom.xml test
+      - name: Verify stage-3 MIndexString recipe and exact source state
         run: |
-          python3 m3/runtime-stage2/rewrite/verify_source_pins.py
-          mvn -q -f m3/runtime-stage2/rewrite/pom.xml test
+          python3 m3/runtime-stage3/rewrite/verify_source_pins.py
+          mvn -q -f m3/runtime-stage3/rewrite/pom.xml test
       - name: Build and exercise immutable foundation
         run: ./m3/build.sh
       - name: Compare pinned Synexia content and range contract
