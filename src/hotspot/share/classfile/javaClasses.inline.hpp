@@ -99,7 +99,10 @@ jchar java_lang_String::char_at(oop java_string, int index) {
 
 bool java_lang_String::is_latin1(oop java_string) {
   assert(is_instance(java_string), "must be java_string");
-  jbyte coder = java_string->byte_field(_coder_offset);
+  oop storage = m3_storage_no_keepalive(java_string);
+  jbyte coder = storage == nullptr
+      ? java_string->byte_field(_coder_offset)
+      : java_lang_MIndexString::coder(storage);
   assert(CompactStrings || coder == CODER_UTF16, "Must be UTF16 without CompactStrings");
   return coder == CODER_LATIN1;
 }
