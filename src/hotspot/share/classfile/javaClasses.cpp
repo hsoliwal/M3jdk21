@@ -193,6 +193,7 @@ void JavaClasses::compute_offset(int& dest_offset, InstanceKlass* ik,
 // java_lang_String
 
 int java_lang_String::_value_offset;
+int java_lang_String::_m3Storage_offset;
 int java_lang_String::_hash_offset;
 int java_lang_String::_hashIsZero_offset;
 int java_lang_String::_coder_offset;
@@ -215,6 +216,7 @@ bool java_lang_String::test_and_set_flag(oop java_string, uint8_t flag_mask) {
 
 #define STRING_FIELDS_DO(macro) \
   macro(_value_offset, k, vmSymbols::value_name(), byte_array_signature, false); \
+  macro(_m3Storage_offset, k, "m3Storage",          m3_string_storage_signature, false); \
   macro(_hash_offset,  k, "hash",                  int_signature,        false); \
   macro(_hashIsZero_offset, k, "hashIsZero",       bool_signature,       false); \
   macro(_coder_offset, k, "coder",                 byte_signature,       false);
@@ -258,6 +260,28 @@ public:
 
 void java_lang_String::set_compact_strings(bool value) {
   CompactStringsFixup fix(value);
+  vmClasses::String_klass()->do_local_static_fields(&fix);
+}
+
+class M3JoinedStringsFixup : public FieldClosure {
+private:
+  bool _value;
+
+public:
+  M3JoinedStringsFixup(bool value) : _value(value) {}
+
+  void do_field(fieldDescriptor* fd) {
+    if (fd->name() == vmSymbols::m3_joined_strings_name()) {
+      oop mirror = fd->field_holder()->java_mirror();
+      assert(fd->field_holder() == vmClasses::String_klass(), "Should be String");
+      assert(mirror != nullptr, "String must have mirror already");
+      mirror->bool_field_put(fd->offset(), _value);
+    }
+  }
+};
+
+void java_lang_String::set_m3_joined_strings(bool value) {
+  M3JoinedStringsFixup fix(value);
   vmClasses::String_klass()->do_local_static_fields(&fix);
 }
 
@@ -775,6 +799,32 @@ void java_lang_String::print(oop java_string, outputStream* st) {
   }
   st->print("\"");
 }
+
+// java_lang_M3StringStorage
+
+int java_lang_M3StringStorage::_segments_offset;
+int java_lang_M3StringStorage::_offsets_offset;
+int java_lang_M3StringStorage::_ends_offset;
+int java_lang_M3StringStorage::_length_offset;
+int java_lang_M3StringStorage::_coder_offset;
+
+#define M3_STRING_STORAGE_FIELDS_DO(macro) \
+  macro(_segments_offset, k, "segments", string_array_signature, false); \
+  macro(_offsets_offset,  k, "offsets",  int_array_signature,    false); \
+  macro(_ends_offset,     k, "ends",     int_array_signature,    false); \
+  macro(_length_offset,   k, "length",   int_signature,          false); \
+  macro(_coder_offset,    k, "coder",    byte_signature,         false);
+
+void java_lang_M3StringStorage::compute_offsets() {
+  InstanceKlass* k = vmClasses::M3StringStorage_klass();
+  M3_STRING_STORAGE_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+}
+
+#if INCLUDE_CDS
+void java_lang_M3StringStorage::serialize_offsets(SerializeClosure* f) {
+  M3_STRING_STORAGE_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+}
+#endif
 
 // java_lang_Class
 
@@ -5196,6 +5246,7 @@ void java_lang_InternalError::serialize_offsets(SerializeClosure* f) {
   //end
 
 #define BASIC_JAVA_CLASSES_DO_PART2(f) \
+  f(java_lang_M3StringStorage) \
   f(java_lang_System) \
   f(java_lang_ClassLoader) \
   f(java_lang_Throwable) \
