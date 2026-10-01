@@ -5,7 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 public class M3JoinedStringSemantics {
-    private static final Field STORAGE = field("m3Storage");
+    private static final Field STORAGE = field("mindex");
     private static final Field VALUE = field("value");
 
     public static void main(String[] args) throws Exception {
