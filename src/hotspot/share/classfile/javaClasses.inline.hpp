@@ -33,6 +33,7 @@
 #include "oops/method.hpp"
 #include "oops/oop.inline.hpp"
 #include "oops/oopsHierarchy.hpp"
+#include "oops/objArrayOop.inline.hpp"
 #include "oops/typeArrayOop.inline.hpp"
 
 void java_lang_String::set_coder(oop string, jbyte coder) {
@@ -68,6 +69,32 @@ typeArrayOop java_lang_String::value(oop java_string) {
 typeArrayOop java_lang_String::value_no_keepalive(oop java_string) {
   assert(is_instance(java_string), "must be java_string");
   return (typeArrayOop) java_string->obj_field_access<AS_NO_KEEPALIVE>(_value_offset);
+}
+
+oop java_lang_String::m3_storage(oop java_string) {
+  assert(is_instance(java_string), "must be java_string");
+  return java_string->obj_field(_m3Storage_offset);
+}
+
+oop java_lang_String::m3_storage_no_keepalive(oop java_string) {
+  assert(is_instance(java_string), "must be java_string");
+  return java_string->obj_field_access<AS_NO_KEEPALIVE>(_m3Storage_offset);
+}
+
+bool java_lang_String::is_m3_joined(oop java_string) {
+  return m3_storage_no_keepalive(java_string) != nullptr;
+}
+
+jchar java_lang_String::char_at(oop java_string, int index) {
+  oop storage = m3_storage(java_string);
+  if (storage != nullptr) {
+    return java_lang_M3StringStorage::char_at(storage, index);
+  }
+  typeArrayOop string_value = value(java_string);
+  if (is_latin1(java_string)) {
+    return ((jchar)string_value->byte_at(index)) & 0xff;
+  }
+  return string_value->char_at(index);
 }
 
 bool java_lang_String::is_latin1(oop java_string) {
@@ -106,6 +133,10 @@ bool java_lang_String::test_and_set_deduplication_requested(oop java_string) {
 int java_lang_String::length(oop java_string, typeArrayOop value) {
   assert(_initialized, "Must be initialized");
   assert(is_instance(java_string), "must be java_string");
+  oop storage = m3_storage_no_keepalive(java_string);
+  if (storage != nullptr) {
+    return java_lang_M3StringStorage::length(storage);
+  }
   assert(value_equals(value, java_lang_String::value(java_string)),
          "value must be equal to java_lang_String::value(java_string)");
   if (value == nullptr) {
@@ -128,6 +159,59 @@ int java_lang_String::length(oop java_string) {
 
 bool java_lang_String::is_instance(oop obj) {
   return obj != nullptr && obj->klass() == vmClasses::String_klass();
+}
+
+// java.lang.M3StringStorage accessors
+
+objArrayOop java_lang_M3StringStorage::segments(oop storage) {
+  return (objArrayOop)storage->obj_field(_segments_offset);
+}
+
+typeArrayOop java_lang_M3StringStorage::offsets(oop storage) {
+  return (typeArrayOop)storage->obj_field(_offsets_offset);
+}
+
+typeArrayOop java_lang_M3StringStorage::ends(oop storage) {
+  return (typeArrayOop)storage->obj_field(_ends_offset);
+}
+
+int java_lang_M3StringStorage::length(oop storage) {
+  return storage->int_field(_length_offset);
+}
+
+jbyte java_lang_M3StringStorage::coder(oop storage) {
+  return storage->byte_field(_coder_offset);
+}
+
+jchar java_lang_M3StringStorage::char_at(oop storage, int index) {
+  const int storage_length = length(storage);
+  assert(index >= 0 && index < storage_length, "String index out of bounds");
+
+  objArrayOop segment_array = segments(storage);
+  typeArrayOop offset_array = offsets(storage);
+  typeArrayOop end_array = ends(storage);
+
+  int low = 0;
+  int high = end_array->length() - 1;
+  const int key = index + 1;
+  while (low <= high) {
+    const int mid = (low + high) >> 1;
+    const int segment_end = end_array->int_at(mid);
+    if (segment_end < key) {
+      low = mid + 1;
+      continue;
+    }
+    if (mid > 0 && end_array->int_at(mid - 1) >= key) {
+      high = mid - 1;
+      continue;
+    }
+    const int previous = mid == 0 ? 0 : end_array->int_at(mid - 1);
+    oop leaf = segment_array->obj_at(mid);
+    const int leaf_index = offset_array->int_at(mid) + index - previous;
+    return java_lang_String::char_at(leaf, leaf_index);
+  }
+  ShouldNotReachHere();
+  return 0;
 }
 
 // Accessors
