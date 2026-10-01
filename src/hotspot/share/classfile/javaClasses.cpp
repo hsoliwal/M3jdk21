@@ -509,7 +509,11 @@ jchar* java_lang_String::as_unicode_string_or_null(oop java_string, int& length)
 
   jchar* result = NEW_RESOURCE_ARRAY_RETURN_NULL(jchar, length);
   if (result != nullptr) {
-    if (!is_latin1) {
+    if (java_lang_String::is_m3_joined(java_string)) {
+      for (int index = 0; index < length; index++) {
+        result[index] = java_lang_String::char_at(java_string, index);
+      }
+    } else if (!is_latin1) {
       for (int index = 0; index < length; index++) {
         result[index] = value->char_at(index);
       }
@@ -542,7 +546,11 @@ inline unsigned int java_lang_String::hash_code_impl(oop java_string, bool updat
 
   unsigned int hash = 0;
   if (length > 0) {
-    if (is_latin1) {
+    if (java_lang_String::is_m3_joined(java_string)) {
+      for (int index = 0; index < length; index++) {
+        hash = 31 * hash + (unsigned int)java_lang_String::char_at(java_string, index);
+      }
+    } else if (is_latin1) {
       hash = java_lang_String::hash_code(value->byte_at_addr(0), length);
     } else {
       hash = java_lang_String::hash_code(value->char_at_addr(0), length);
@@ -574,6 +582,17 @@ char* java_lang_String::as_quoted_ascii(oop java_string) {
   bool      is_latin1 = java_lang_String::is_latin1(java_string);
 
   if (length == 0) return nullptr;
+  if (java_lang_String::is_m3_joined(java_string)) {
+    int unicode_length = 0;
+    jchar* unicode = java_lang_String::as_unicode_string_or_null(java_string, unicode_length);
+    if (unicode == nullptr) {
+      return nullptr;
+    }
+    int result_length = UNICODE::quoted_ascii_length(unicode, unicode_length) + 1;
+    char* result = NEW_RESOURCE_ARRAY(char, result_length);
+    UNICODE::as_quoted_ascii(unicode, unicode_length, result, result_length);
+    return result;
+  }
 
   char* result;
   int result_length;
@@ -597,6 +616,11 @@ Symbol* java_lang_String::as_symbol(oop java_string) {
   typeArrayOop value  = java_lang_String::value(java_string);
   int          length = java_lang_String::length(java_string, value);
   bool      is_latin1 = java_lang_String::is_latin1(java_string);
+  if (java_lang_String::is_m3_joined(java_string)) {
+    int unicode_length = 0;
+    jchar* unicode = java_lang_String::as_unicode_string_or_null(java_string, unicode_length);
+    return SymbolTable::new_symbol(unicode, unicode_length);
+  }
   if (!is_latin1) {
     jchar* base = (length == 0) ? nullptr : value->char_at_addr(0);
     Symbol* sym = SymbolTable::new_symbol(base, length);
@@ -614,6 +638,14 @@ Symbol* java_lang_String::as_symbol_or_null(oop java_string) {
   typeArrayOop value  = java_lang_String::value(java_string);
   int          length = java_lang_String::length(java_string, value);
   bool      is_latin1 = java_lang_String::is_latin1(java_string);
+  if (java_lang_String::is_m3_joined(java_string)) {
+    int unicode_length = 0;
+    jchar* unicode = java_lang_String::as_unicode_string_or_null(java_string, unicode_length);
+    if (unicode == nullptr && unicode_length != 0) {
+      return nullptr;
+    }
+    return SymbolTable::probe_unicode(unicode, unicode_length);
+  }
   if (!is_latin1) {
     jchar* base = (length == 0) ? nullptr : value->char_at_addr(0);
     return SymbolTable::probe_unicode(base, length);
@@ -631,6 +663,11 @@ int java_lang_String::utf8_length(oop java_string, typeArrayOop value) {
   int length = java_lang_String::length(java_string, value);
   if (length == 0) {
     return 0;
+  }
+  if (java_lang_String::is_m3_joined(java_string)) {
+    int unicode_length = 0;
+    jchar* unicode = java_lang_String::as_unicode_string_or_null(java_string, unicode_length);
+    return UNICODE::utf8_length(unicode, unicode_length);
   }
   if (!java_lang_String::is_latin1(java_string)) {
     return UNICODE::utf8_length(value->char_at_addr(0), length);
@@ -653,6 +690,13 @@ char* java_lang_String::as_utf8_string(oop java_string, int& length) {
   typeArrayOop value = java_lang_String::value(java_string);
   length             = java_lang_String::length(java_string, value);
   bool     is_latin1 = java_lang_String::is_latin1(java_string);
+  if (java_lang_String::is_m3_joined(java_string)) {
+    int unicode_length = 0;
+    jchar* unicode = java_lang_String::as_unicode_string_or_null(java_string, unicode_length);
+    char* result = UNICODE::as_utf8(unicode, unicode_length);
+    length = (int)strlen(result);
+    return result;
+  }
   if (!is_latin1) {
     jchar* position = (length == 0) ? nullptr : value->char_at_addr(0);
     return UNICODE::as_utf8(position, length);
@@ -668,6 +712,15 @@ char* java_lang_String::as_utf8_string_full(oop java_string, char* buf, int bufl
   typeArrayOop value = java_lang_String::value(java_string);
   int            len = java_lang_String::length(java_string, value);
   bool     is_latin1 = java_lang_String::is_latin1(java_string);
+  if (java_lang_String::is_m3_joined(java_string)) {
+    int unicode_length = 0;
+    jchar* unicode = java_lang_String::as_unicode_string_or_null(java_string, unicode_length);
+    utf8_len = UNICODE::utf8_length(unicode, unicode_length);
+    if (utf8_len >= buflen) {
+      buf = NEW_RESOURCE_ARRAY(char, utf8_len + 1);
+    }
+    return UNICODE::as_utf8(unicode, unicode_length, buf, utf8_len + 1);
+  }
   if (!is_latin1) {
     jchar *position = (len == 0) ? nullptr : value->char_at_addr(0);
     utf8_len = UNICODE::utf8_length(position, len);
@@ -690,6 +743,11 @@ char* java_lang_String::as_utf8_string(oop java_string, typeArrayOop value, char
          "value must be same as java_lang_String::value(java_string)");
   int     length = java_lang_String::length(java_string, value);
   bool is_latin1 = java_lang_String::is_latin1(java_string);
+  if (java_lang_String::is_m3_joined(java_string)) {
+    int unicode_length = 0;
+    jchar* unicode = java_lang_String::as_unicode_string_or_null(java_string, unicode_length);
+    return UNICODE::as_utf8(unicode, unicode_length, buf, buflen);
+  }
   if (!is_latin1) {
     jchar* position = (length == 0) ? nullptr : value->char_at_addr(0);
     return UNICODE::as_utf8(position, length, buf, buflen);
@@ -708,6 +766,13 @@ char* java_lang_String::as_utf8_string(oop java_string, int start, int len) {
   typeArrayOop value  = java_lang_String::value(java_string);
   bool      is_latin1 = java_lang_String::is_latin1(java_string);
   assert(start + len <= java_lang_String::length(java_string), "just checking");
+  if (java_lang_String::is_m3_joined(java_string)) {
+    jchar* unicode = NEW_RESOURCE_ARRAY(jchar, len);
+    for (int index = 0; index < len; index++) {
+      unicode[index] = java_lang_String::char_at(java_string, start + index);
+    }
+    return UNICODE::as_utf8(unicode, len);
+  }
   if (!is_latin1) {
     jchar* position = value->char_at_addr(start);
     return UNICODE::as_utf8(position, len);
@@ -722,6 +787,13 @@ char* java_lang_String::as_utf8_string(oop java_string, typeArrayOop value, int 
          "value must be same as java_lang_String::value(java_string)");
   assert(start + len <= java_lang_String::length(java_string), "just checking");
   bool is_latin1 = java_lang_String::is_latin1(java_string);
+  if (java_lang_String::is_m3_joined(java_string)) {
+    jchar* unicode = NEW_RESOURCE_ARRAY(jchar, len);
+    for (int index = 0; index < len; index++) {
+      unicode[index] = java_lang_String::char_at(java_string, start + index);
+    }
+    return UNICODE::as_utf8(unicode, len, buf, buflen);
+  }
   if (!is_latin1) {
     jchar* position = value->char_at_addr(start);
     return UNICODE::as_utf8(position, len, buf, buflen);
@@ -740,7 +812,13 @@ bool java_lang_String::equals(oop java_string, const jchar* chars, int len) {
     return false;
   }
   bool is_latin1 = java_lang_String::is_latin1(java_string);
-  if (!is_latin1) {
+  if (java_lang_String::is_m3_joined(java_string)) {
+    for (int i = 0; i < len; i++) {
+      if (java_lang_String::char_at(java_string, i) != chars[i]) {
+        return false;
+      }
+    }
+  } else if (!is_latin1) {
     for (int i = 0; i < len; i++) {
       if (value->char_at(i) != chars[i]) {
         return false;
@@ -770,6 +848,19 @@ bool java_lang_String::equals(oop str1, oop str2) {
     // Strings with different coders are never equal.
     return false;
   }
+  if (java_lang_String::is_m3_joined(str1) || java_lang_String::is_m3_joined(str2)) {
+    int length1 = java_lang_String::length(str1, value1);
+    int length2 = java_lang_String::length(str2, value2);
+    if (length1 != length2) {
+      return false;
+    }
+    for (int index = 0; index < length1; index++) {
+      if (java_lang_String::char_at(str1, index) != java_lang_String::char_at(str2, index)) {
+        return false;
+      }
+    }
+    return true;
+  }
   return value_equals(value1, value2);
 }
 
@@ -786,11 +877,13 @@ void java_lang_String::print(oop java_string, outputStream* st) {
 
   int length = java_lang_String::length(java_string, value);
   bool is_latin1 = java_lang_String::is_latin1(java_string);
+  bool is_m3 = java_lang_String::is_m3_joined(java_string);
 
   st->print("\"");
   for (int index = 0; index < length; index++) {
-    jchar c = (!is_latin1) ?  value->char_at(index) :
-                             ((jchar) value->byte_at(index)) & 0xff;
+    jchar c = is_m3 ? java_lang_String::char_at(java_string, index) :
+              ((!is_latin1) ? value->char_at(index) :
+                              ((jchar)value->byte_at(index)) & 0xff);
     if (c < ' ') {
       st->print("\\x%02X", c); // print control characters e.g. \x0A
     } else {
