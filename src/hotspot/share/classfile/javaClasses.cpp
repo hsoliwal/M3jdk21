@@ -5421,6 +5421,13 @@ void JavaClasses::serialize_offsets(SerializeClosure* soc) {
 bool JavaClasses::is_supported_for_archiving(oop obj) {
   Klass* klass = obj->klass();
 
+  if ((klass == vmClasses::String_klass() && java_lang_String::is_m3_joined(obj)) ||
+      klass == vmClasses::M3StringStorage_klass()) {
+    // Stage-2 M3 strings are rebuilt at runtime. Archiving their segment graph
+    // is intentionally deferred until explicit CDS relocation support exists.
+    return false;
+  }
+
   if (klass == vmClasses::ClassLoader_klass() ||  // ClassLoader::loader_data is malloc'ed.
       // The next 3 classes are used to implement java.lang.invoke, and are not used directly in
       // regular Java code. The implementation of java.lang.invoke uses generated hidden classes
