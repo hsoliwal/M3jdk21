@@ -2167,7 +2167,11 @@ JNI_ENTRY_NO_PRESERVE(const jchar*, jni_GetStringChars(
     /* JNI Specification states return null on OOM */
     if (buf != nullptr) {
       if (s_len > 0) {
-        if (!is_latin1) {
+        if (java_lang_String::is_m3_joined(s)) {
+          for (int i = 0; i < s_len; i++) {
+            buf[i] = java_lang_String::char_at(s, i);
+          }
+        } else if (!is_latin1) {
           ArrayAccess<>::arraycopy_to_native(s_value, (size_t) typeArrayOopDesc::element_offset<jchar>(0),
                                              buf, s_len);
         } else {
@@ -2756,7 +2760,11 @@ JNI_ENTRY(void, jni_GetStringRegion(JNIEnv *env, jstring string, jsize start, js
   } else {
     if (len > 0) {
       bool is_latin1 = java_lang_String::is_latin1(s);
-      if (!is_latin1) {
+      if (java_lang_String::is_m3_joined(s)) {
+        for (int i = 0; i < len; i++) {
+          buf[i] = java_lang_String::char_at(s, start + i);
+        }
+      } else if (!is_latin1) {
         ArrayAccess<>::arraycopy_to_native(s_value, typeArrayOopDesc::element_offset<jchar>(start),
                                            buf, len);
       } else {
@@ -2824,7 +2832,17 @@ JNI_ENTRY(const jchar*, jni_GetStringCritical(JNIEnv *env, jstring string, jbool
   HOTSPOT_JNI_GETSTRINGCRITICAL_ENTRY(env, string, (uintptr_t *) isCopy);
   oop s = JNIHandles::resolve_non_null(string);
   jchar* ret;
-  if (!java_lang_String::is_latin1(s)) {
+  if (java_lang_String::is_m3_joined(s)) {
+    int s_len = java_lang_String::length(s);
+    ret = NEW_C_HEAP_ARRAY_RETURN_NULL(jchar, s_len + 1, mtInternal);
+    if (ret != nullptr) {
+      for (int i = 0; i < s_len; i++) {
+        ret[i] = java_lang_String::char_at(s, i);
+      }
+      ret[s_len] = 0;
+    }
+    if (isCopy != nullptr) *isCopy = JNI_TRUE;
+  } else if (!java_lang_String::is_latin1(s)) {
     typeArrayHandle s_value(thread, java_lang_String::value(s));
 
     // Pin value array
@@ -2855,9 +2873,10 @@ JNI_ENTRY(void, jni_ReleaseStringCritical(JNIEnv *env, jstring str, const jchar 
   HOTSPOT_JNI_RELEASESTRINGCRITICAL_ENTRY(env, str, (uint16_t *) chars);
   oop s = JNIHandles::resolve_non_null(str);
   bool is_latin1 = java_lang_String::is_latin1(s);
+  bool is_m3 = java_lang_String::is_m3_joined(s);
 
-  if (is_latin1) {
-    // For latin1 string, free jchar array allocated by earlier call to GetStringCritical.
+  if (is_latin1 || is_m3) {
+    // For Latin1 and segmented strings, free the UTF16 copy allocated by GetStringCritical.
     // This assumes that ReleaseStringCritical bookends GetStringCritical.
     FREE_C_HEAP_ARRAY(jchar, chars);
   } else {
