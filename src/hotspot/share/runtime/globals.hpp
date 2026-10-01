@@ -1100,6 +1100,9 @@ const int ObjectAlignmentInBytes = 8;
           /* Note:  This value is zero mod 1<<13 for a cheap sparc set. */  \
           "Inline allocations larger than this in doublewords must go slow")\
                                                                             \
+  product(bool, UseM3SegmentedStrings, false, EXPERIMENTAL,                  \
+          "Enable interpreter-only experimental segmented String storage")  \
+                                                                            \
   product_pd(bool, CompactStrings,                                          \
           "Enable Strings to use single byte chars in backing store")       \
                                                                             \

@@ -193,6 +193,9 @@ void JavaClasses::compute_offset(int& dest_offset, InstanceKlass* ik,
 // java_lang_String
 
 int java_lang_String::_value_offset;
+int java_lang_String::_m3Parts_offset;
+int java_lang_String::_m3Ranges_offset;
+int java_lang_String::_m3Length_offset;
 int java_lang_String::_hash_offset;
 int java_lang_String::_hashIsZero_offset;
 int java_lang_String::_coder_offset;
@@ -214,6 +217,9 @@ bool java_lang_String::test_and_set_flag(oop java_string, uint8_t flag_mask) {
 }
 
 #define STRING_FIELDS_DO(macro) \
+  macro(_m3Parts_offset, k, "m3Parts", string_array_signature, false); \
+  macro(_m3Ranges_offset, k, "m3Ranges", int_array_signature, false); \
+  macro(_m3Length_offset, k, "m3Length", int_signature, false); \
   macro(_value_offset, k, vmSymbols::value_name(), byte_array_signature, false); \
   macro(_hash_offset,  k, "hash",                  int_signature,        false); \
   macro(_hashIsZero_offset, k, "hashIsZero",       bool_signature,       false); \
@@ -258,6 +264,25 @@ public:
 
 void java_lang_String::set_compact_strings(bool value) {
   CompactStringsFixup fix(value);
+  vmClasses::String_klass()->do_local_static_fields(&fix);
+}
+
+class M3SegmentedStringsFixup : public FieldClosure {
+  bool _value;
+public:
+  M3SegmentedStringsFixup(bool value) : _value(value) {}
+  void do_field(fieldDescriptor* fd) {
+    if (fd->name()->equals("M3_SEGMENTS")) {
+      oop mirror = fd->field_holder()->java_mirror();
+      assert(fd->field_holder() == vmClasses::String_klass(), "Should be String");
+      assert(mirror != nullptr, "String must have mirror already");
+      mirror->bool_field_put(fd->offset(), _value);
+    }
+  }
+};
+
+void java_lang_String::set_m3_segmented_strings(bool value) {
+  M3SegmentedStringsFixup fix(value);
   vmClasses::String_klass()->do_local_static_fields(&fix);
 }
 
@@ -479,6 +504,15 @@ jchar* java_lang_String::as_unicode_string(oop java_string, int& length, TRAPS) 
 }
 
 jchar* java_lang_String::as_unicode_string_or_null(oop java_string, int& length) {
+  if (is_segmented(java_string)) {
+    length = java_lang_String::length(java_string);
+    jchar* result = NEW_RESOURCE_ARRAY_RETURN_NULL(jchar, length);
+    if (result != nullptr) {
+      for (int i = 0; i < length; i++) result[i] = char_at(java_string, i);
+    }
+    return result;
+  }
+
   typeArrayOop value  = java_lang_String::value(java_string);
                length = java_lang_String::length(java_string, value);
   bool      is_latin1 = java_lang_String::is_latin1(java_string);
@@ -496,6 +530,28 @@ jchar* java_lang_String::as_unicode_string_or_null(oop java_string, int& length)
     }
   }
   return result;
+}
+// Native scratch storage only: safe for callers that cannot safepoint.
+static jchar* m3_unicode_range(oop string, int start, int len) {
+  jchar* chars = NEW_RESOURCE_ARRAY(jchar, len);
+  for (int i = 0; i < len; i++) chars[i] = java_lang_String::char_at(string, start + i);
+  return chars;
+}
+
+// Buffer conversions must not allocate scratch space: JNI callers may have no ResourceMark.
+static char* m3_utf8_range(oop string, int start, int len, char* buf, int buflen) {
+  assert(buflen > 0, "zero length output buffer");
+  char* out = buf;
+  for (int i = 0; i < len; i++) {
+    jchar c = java_lang_String::char_at(string, start + i);
+    int size = UNICODE::utf8_size(c);
+    if (size >= buflen) break;
+    UNICODE::as_utf8(&c, 1, out, buflen);
+    out += size;
+    buflen -= size;
+  }
+  *out = '\0';
+  return buf;
 }
 
 inline unsigned int java_lang_String::hash_code_impl(oop java_string, bool update) {
@@ -517,7 +573,9 @@ inline unsigned int java_lang_String::hash_code_impl(oop java_string, bool updat
   bool     is_latin1 = java_lang_String::is_latin1(java_string);
 
   unsigned int hash = 0;
-  if (length > 0) {
+  if (is_segmented(java_string)) {
+    for (int i = 0; i < length; i++) hash = 31 * hash + char_at(java_string, i);
+  } else if (length > 0) {
     if (is_latin1) {
       hash = java_lang_String::hash_code(value->byte_at_addr(0), length);
     } else {
@@ -545,6 +603,16 @@ unsigned int java_lang_String::hash_code_noupdate(oop java_string) {
 
 
 char* java_lang_String::as_quoted_ascii(oop java_string) {
+  if (is_segmented(java_string)) {
+    int len = length(java_string);
+    if (len == 0) return nullptr;
+    jchar* chars = m3_unicode_range(java_string, 0, len);
+    int size = UNICODE::quoted_ascii_length(chars, len) + 1;
+    char* result = NEW_RESOURCE_ARRAY(char, size);
+    UNICODE::as_quoted_ascii(chars, len, result, size);
+    return result;
+  }
+
   typeArrayOop value  = java_lang_String::value(java_string);
   int          length = java_lang_String::length(java_string, value);
   bool      is_latin1 = java_lang_String::is_latin1(java_string);
@@ -570,6 +638,12 @@ char* java_lang_String::as_quoted_ascii(oop java_string) {
 }
 
 Symbol* java_lang_String::as_symbol(oop java_string) {
+  if (is_segmented(java_string)) {
+    ResourceMark rm;
+    int len = length(java_string);
+    return SymbolTable::new_symbol(m3_unicode_range(java_string, 0, len), len);
+  }
+
   typeArrayOop value  = java_lang_String::value(java_string);
   int          length = java_lang_String::length(java_string, value);
   bool      is_latin1 = java_lang_String::is_latin1(java_string);
@@ -587,6 +661,12 @@ Symbol* java_lang_String::as_symbol(oop java_string) {
 }
 
 Symbol* java_lang_String::as_symbol_or_null(oop java_string) {
+  if (is_segmented(java_string)) {
+    ResourceMark rm;
+    int len = length(java_string);
+    return SymbolTable::probe_unicode(m3_unicode_range(java_string, 0, len), len);
+  }
+
   typeArrayOop value  = java_lang_String::value(java_string);
   int          length = java_lang_String::length(java_string, value);
   bool      is_latin1 = java_lang_String::is_latin1(java_string);
@@ -602,6 +682,13 @@ Symbol* java_lang_String::as_symbol_or_null(oop java_string) {
 }
 
 int java_lang_String::utf8_length(oop java_string, typeArrayOop value) {
+  if (is_segmented(java_string)) {
+    int result = 0;
+    int len = length(java_string);
+    for (int i = 0; i < len; i++) result += UNICODE::utf8_size(char_at(java_string, i));
+    return result;
+  }
+
   assert(value_equals(value, java_lang_String::value(java_string)),
          "value must be same as java_lang_String::value(java_string)");
   int length = java_lang_String::length(java_string, value);
@@ -626,6 +713,13 @@ char* java_lang_String::as_utf8_string(oop java_string) {
 }
 
 char* java_lang_String::as_utf8_string(oop java_string, int& length) {
+  if (is_segmented(java_string)) {
+    int units = java_lang_String::length(java_string);
+    length = utf8_length(java_string);
+    char* result = NEW_RESOURCE_ARRAY(char, length + 1);
+    return m3_utf8_range(java_string, 0, units, result, length + 1);
+  }
+
   typeArrayOop value = java_lang_String::value(java_string);
   length             = java_lang_String::length(java_string, value);
   bool     is_latin1 = java_lang_String::is_latin1(java_string);
@@ -641,6 +735,13 @@ char* java_lang_String::as_utf8_string(oop java_string, int& length) {
 // Uses a provided buffer if it's sufficiently large, otherwise allocates
 // a resource array to fit
 char* java_lang_String::as_utf8_string_full(oop java_string, char* buf, int buflen, int& utf8_len) {
+  if (is_segmented(java_string)) {
+    int len = length(java_string);
+    utf8_len = utf8_length(java_string);
+    if (utf8_len >= buflen) buf = NEW_RESOURCE_ARRAY(char, utf8_len + 1);
+    return m3_utf8_range(java_string, 0, len, buf, utf8_len + 1);
+  }
+
   typeArrayOop value = java_lang_String::value(java_string);
   int            len = java_lang_String::length(java_string, value);
   bool     is_latin1 = java_lang_String::is_latin1(java_string);
@@ -662,6 +763,11 @@ char* java_lang_String::as_utf8_string_full(oop java_string, char* buf, int bufl
 }
 
 char* java_lang_String::as_utf8_string(oop java_string, typeArrayOop value, char* buf, int buflen) {
+  if (is_segmented(java_string)) {
+    int len = length(java_string);
+    return m3_utf8_range(java_string, 0, len, buf, buflen);
+  }
+
   assert(value_equals(value, java_lang_String::value(java_string)),
          "value must be same as java_lang_String::value(java_string)");
   int     length = java_lang_String::length(java_string, value);
@@ -681,6 +787,14 @@ char* java_lang_String::as_utf8_string(oop java_string, char* buf, int buflen) {
 }
 
 char* java_lang_String::as_utf8_string(oop java_string, int start, int len) {
+  if (is_segmented(java_string)) {
+    assert(start >= 0 && len >= 0 && start <= length(java_string) - len, "String range");
+    int bytes = 0;
+    for (int i = 0; i < len; i++) bytes += UNICODE::utf8_size(char_at(java_string, start + i));
+    char* result = NEW_RESOURCE_ARRAY(char, bytes + 1);
+    return m3_utf8_range(java_string, start, len, result, bytes + 1);
+  }
+
   typeArrayOop value  = java_lang_String::value(java_string);
   bool      is_latin1 = java_lang_String::is_latin1(java_string);
   assert(start + len <= java_lang_String::length(java_string), "just checking");
@@ -694,6 +808,11 @@ char* java_lang_String::as_utf8_string(oop java_string, int start, int len) {
 }
 
 char* java_lang_String::as_utf8_string(oop java_string, typeArrayOop value, int start, int len, char* buf, int buflen) {
+  if (is_segmented(java_string)) {
+    assert(start >= 0 && len >= 0 && start <= length(java_string) - len, "String range");
+    return m3_utf8_range(java_string, start, len, buf, buflen);
+  }
+
   assert(value_equals(value, java_lang_String::value(java_string)),
          "value must be same as java_lang_String::value(java_string)");
   assert(start + len <= java_lang_String::length(java_string), "just checking");
@@ -708,6 +827,12 @@ char* java_lang_String::as_utf8_string(oop java_string, typeArrayOop value, int 
 }
 
 bool java_lang_String::equals(oop java_string, const jchar* chars, int len) {
+  if (is_segmented(java_string)) {
+    if (length(java_string) != len) return false;
+    for (int i = 0; i < len; i++) if (char_at(java_string, i) != chars[i]) return false;
+    return true;
+  }
+
   assert(java_string->klass() == vmClasses::String_klass(),
          "must be java_string");
   typeArrayOop value = java_lang_String::value_no_keepalive(java_string);
@@ -733,6 +858,13 @@ bool java_lang_String::equals(oop java_string, const jchar* chars, int len) {
 }
 
 bool java_lang_String::equals(oop str1, oop str2) {
+  if (is_segmented(str1) || is_segmented(str2)) {
+    int len = length(str1);
+    if (length(str2) != len) return false;
+    for (int i = 0; i < len; i++) if (char_at(str1, i) != char_at(str2, i)) return false;
+    return true;
+  }
+
   assert(str1->klass() == vmClasses::String_klass(),
          "must be java String");
   assert(str2->klass() == vmClasses::String_klass(),
@@ -753,7 +885,7 @@ void java_lang_String::print(oop java_string, outputStream* st) {
   assert(java_string->klass() == vmClasses::String_klass(), "must be java_string");
   typeArrayOop value  = java_lang_String::value_no_keepalive(java_string);
 
-  if (value == nullptr) {
+  if (value == nullptr && !is_segmented(java_string)) {
     // This can happen if, e.g., printing a String
     // object before its initializer has been called
     st->print("nullptr");
@@ -761,12 +893,10 @@ void java_lang_String::print(oop java_string, outputStream* st) {
   }
 
   int length = java_lang_String::length(java_string, value);
-  bool is_latin1 = java_lang_String::is_latin1(java_string);
 
   st->print("\"");
   for (int index = 0; index < length; index++) {
-    jchar c = (!is_latin1) ?  value->char_at(index) :
-                             ((jchar) value->byte_at(index)) & 0xff;
+    jchar c = char_at(java_string, index);
     if (c < ' ') {
       st->print("\\x%02X", c); // print control characters e.g. \x0A
     } else {

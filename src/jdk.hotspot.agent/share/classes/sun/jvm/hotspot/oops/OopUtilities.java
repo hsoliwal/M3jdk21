@@ -145,6 +145,26 @@ public class OopUtilities {
 
   public static String stringOopToString(Oop stringOop) {
     InstanceKlass k = (InstanceKlass) stringOop.getKlass();
+    // The experimental M3 layout retains flat String leaves. Decode without
+    // requiring the target VM to allocate or populate its lazy Java cache.
+    OopField partsField = (OopField) k.findField("m3Parts", "[Ljava/lang/String;");
+    if (partsField != null) {
+      ObjArray parts = (ObjArray) partsField.getValue(stringOop);
+      if (parts != null) {
+        OopField rangesField = (OopField) k.findField("m3Ranges", "[I");
+        TypeArray ranges = (TypeArray) rangesField.getValue(stringOop);
+        StringBuilder result = new StringBuilder();
+        int previousEnd = 0;
+        for (int i = 0; i < parts.getLength(); i++) {
+          int start = ranges.getIntAt(2 * i);
+          int end = ranges.getIntAt(2 * i + 1);
+          String leaf = stringOopToString(parts.getObjAt(i));
+          result.append(leaf, start, start + end - previousEnd);
+          previousEnd = end;
+        }
+        return result.toString();
+      }
+    }
     coderField  = (ByteField) k.findField("coder", "B");
     valueField  = (OopField) k.findField("value",  "[B");
     if (Assert.ASSERTS_ENABLED) {

@@ -338,6 +338,7 @@ void Threads::initialize_java_lang_classes(JavaThread* main_thread, TRAPS) {
 
   // Inject CompactStrings value after the static initializers for String ran.
   java_lang_String::set_compact_strings(CompactStrings);
+  java_lang_String::set_m3_segmented_strings(UseM3SegmentedStrings);
 
   // Initialize java_lang.System (needed before creating the thread)
   initialize_class(vmSymbols::java_lang_System(), CHECK);

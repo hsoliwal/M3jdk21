@@ -1,0 +1,23 @@
+Building target 'images' in configuration 'linux-x86_64-server-fastdebug'
+Updating support/modules_libs/java.base/libjava.so due to 1 file(s)
+Creating java.instrument.jmod
+Creating java.management.jmod
+Creating java.desktop.jmod
+Creating java.prefs.jmod
+Creating java.rmi.jmod
+Creating jdk.attach.jmod
+Creating jdk.jdwp.agent.jmod
+Creating interim java.base.jmod
+Creating jdk.jpackage.jmod
+Creating jdk.management.jmod
+Creating jdk.management.agent.jmod
+Creating jdk.net.jmod
+Creating jdk.sctp.jmod
+Creating jdk.security.auth.jmod
+Creating interim jimage
+Creating jdk.jlink.jmod
+Creating java.base.jmod
+Creating jdk image
+Creating CDS archive for jdk image for server
+Creating CDS-NOCOOPS archive for jdk image for server
+Finished building target 'images' in configuration 'linux-x86_64-server-fastdebug'

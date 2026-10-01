@@ -55,6 +55,10 @@
 #endif
 
 bool JfrRecorder::is_disabled() {
+  // Also prevent recordings requested dynamically through jcmd or Java APIs.
+  if (UseM3SegmentedStrings) {
+    return true;
+  }
   // True if -XX:-FlightRecorder has been explicitly set on the
   // command line
   return FLAG_IS_CMDLINE(FlightRecorder) ? !FlightRecorder : false;
@@ -237,6 +241,9 @@ static bool _created = false;
 // Non-protected initializations assume single-threaded setup.
 //
 bool JfrRecorder::create(bool simulate_failure) {
+  // Java's dynamic Recording API can reach this entry even when recording is
+  // disabled. Return failure to its existing IllegalStateException path.
+  if (UseM3SegmentedStrings) return false;
   assert(!is_disabled(), "invariant");
   assert(!is_created(), "invariant");
   if (!is_enabled()) {
