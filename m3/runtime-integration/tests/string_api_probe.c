@@ -1,6 +1,7 @@
 /* Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
  * SPDX-License-Identifier: Apache-2.0 */
 #include <jni.h>
+#include <stdint.h>
 #include <stdlib.h>
 
 JNIEXPORT jstring JNICALL Java_StringApiProbe_roundTrip(
@@ -34,7 +35,7 @@ JNIEXPORT jstring JNICALL Java_StringApiProbe_regionRoundTrip(
     jstring result;
     (void) cls;
 
-    if (length < 0) return NULL;
+    if (length < 0 || (size_t) length > SIZE_MAX / sizeof(jchar)) return NULL;
     if (length != 0) {
         chars = (jchar *) malloc((size_t) length * sizeof(jchar));
         if (chars == NULL) return NULL;
