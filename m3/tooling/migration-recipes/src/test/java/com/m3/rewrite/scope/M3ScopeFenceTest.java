@@ -14,9 +14,10 @@ class M3ScopeFenceTest {
   @Test
   void scopeOrderOnlyBroadensExplicitly() {
     assertTrue(M3EditScope.FILE.canContain(M3EditScope.FILE));
-    assertTrue(M3EditScope.PACKAGE.canContain(M3EditScope.FILE));
-    assertTrue(M3EditScope.LIBRARY_API.canContain(M3EditScope.MULTI_MODULE));
-    assertFalse(M3EditScope.FILE.canContain(M3EditScope.PACKAGE));
+    assertTrue(M3EditScope.VISIBILITY.canContain(M3EditScope.FILE));
+    assertTrue(M3EditScope.PACKAGE.canContain(M3EditScope.VISIBILITY));
+    assertTrue(M3EditScope.LIBRARY.canContain(M3EditScope.MULTI_MODULE));
+    assertFalse(M3EditScope.FILE.canContain(M3EditScope.VISIBILITY));
     assertEquals(
         M3EditScope.MODULE, M3EditScope.max(M3EditScope.PACKAGE, M3EditScope.MODULE));
     assertEquals(
@@ -53,9 +54,14 @@ class M3ScopeFenceTest {
     assertTrue(multi.allows("m3/collections/pom.xml"));
     assertFalse(multi.allows("src/java.base/share/classes/java/lang/String.java"));
 
+    M3ScopeFence visibility = M3ScopeFence.visibility("m3/core/src/Owner.java");
+    assertEquals(M3EditScope.VISIBILITY, visibility.scope());
+    assertTrue(visibility.allows("m3/core/src/Owner.java"));
+    assertFalse(visibility.allows("m3/core/src/Peer.java"));
+
     M3ScopeFence library =
-        M3ScopeFence.libraryApi(List.of("src/java.base", "src/java.compiler", "m3"));
-    assertEquals(M3EditScope.LIBRARY_API, library.scope());
+        M3ScopeFence.library(List.of("src/java.base", "src/java.compiler", "m3"));
+    assertEquals(M3EditScope.LIBRARY, library.scope());
     assertTrue(library.allows("src/java.base/share/classes/java/lang/String.java"));
     assertTrue(library.allows("m3/docs/whole-jdk-m3-architecture.md"));
   }
@@ -68,6 +74,9 @@ class M3ScopeFenceTest {
     assertThrows(
         IllegalArgumentException.class,
         () -> new M3ScopeFence(M3EditScope.FILE, List.of("a.java", "b.java")));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> new M3ScopeFence(M3EditScope.VISIBILITY, List.of("a.java", "b.java")));
     assertThrows(
         IllegalArgumentException.class,
         () -> new M3ScopeFence(M3EditScope.MULTI_MODULE, List.of("m3/core")));
