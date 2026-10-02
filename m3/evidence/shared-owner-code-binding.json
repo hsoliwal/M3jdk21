@@ -22,7 +22,8 @@
     "m3/tooling/compiler-lowering/evidence/shared-owner-jdk21-20261002.json": "6337ea436a3d2a15b79b48cf9ddadc1fad49eff70a7d5448213752cb58c9c710",
     "m3/tooling/migration-recipes/evidence/shared-owner-jdk21-20261002.json": "1f98ddc5403bffaa6c7609a047adc294723e3758e2061ee49cd22c51d8657090",
     "m3/recipes/evidence/shared-owner-receipts.json": "aa79bf803f8fccfecae92067bf50992557114b035cea7d69e2875922ab49332d",
-    "m3/evidence/selected-public-abi-20261002.json": "b80a8a9b18db8ae8ccd537c50c2d19d0bdd712356ba0cc16080eb6c6bfbaa759"
+    "m3/evidence/selected-public-abi-20261002.json": "b80a8a9b18db8ae8ccd537c50c2d19d0bdd712356ba0cc16080eb6c6bfbaa759",
+    "m3/evidence/shared-owner-benchmark-20261002.json": "443b72d05b022c75424d9b1592f1da184a60d181c4fd6587f85b10fa9d7c755e"
   },
   "scope": "Exact selected shared-owner Java closure and opt-in compiler admission. Historical f07 selected-code-binding remains unchanged. Whole-family, general compiler, native ABI and complete JDK conformance remain open."
 }

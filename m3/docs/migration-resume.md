@@ -19,7 +19,7 @@ and a new master-based runtime restoration candidate have separate receipts.
 The current selected Java implementation is committed at
 `ef33a8cceff4848551f32ec302f8940ec6609591`, tree
 `01e5fef884fa06eb655ebe628acc8c26786ef6b2`. `shared-owner-code-binding.json`
-binds twelve target bodies and six actual receipts to that code. The historical
+binds twelve target bodies and seven actual receipts to that code. The historical
 `selected-code-binding.json` remains bound to the earlier f07 implementation.
 The integration incorporates master `45f546ff5bcb06a1b2604f14baf998785d98d9a1`,
 preserves its schema-1 authority and all 25 incoming migration records, and adds
@@ -88,11 +88,15 @@ For an enhancement:
    coverage in the same reviewable change. Refresh recipe hashes after review,
    then verify replay again. Keep unresolved conflicts and exclusions visible.
 
-Current diagnostic measurements show smaller allocation for a retained long
-two-atom join and worse time/allocation for tiny slices than stock String. Warm
-admission still scans input for exact hash/content lookup. The three-fork benchmark
-does not provide latency percentiles, complete retained heap headers, cache-pressure
-distributions or precomputation amortization. Those are next performance gates.
+Fresh ef33 raw-Git source/class-bound diagnostic measurements are in
+`shared-owner-benchmark-20261002.json`. Three new forks report about 160 bytes
+per retained long two-atom join versus 16,424 for stock concat; tiny retained slices
+allocate 248 bytes versus stock 96 and run slower in this fixture. A one-unit slice
+retains 8,192 owner payload bytes; explicit compaction leaves two. Warm admission
+still scans input for exact hash/content lookup. These are load-dependent local
+diagnostics, without JMH, latency percentiles, complete retained heap headers,
+cache-pressure distributions, native/mapped bounds or precomputation amortization.
+Those remain performance gates; no general speedup is admitted.
 
 Infrastructure notes: anonymous raw GitHub fetches of private source return 404.
 Authorized exact Git fixtures can be used in ignored private scratch; do not copy

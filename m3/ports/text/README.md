@@ -81,3 +81,10 @@ that long two-atom join uses about
 160 allocated bytes per operation versus 16,424 for stock concatenation, while
 tiny retained slices allocate more metadata and take longer than stock slices.
 These local measurements do not establish a general throughput improvement.
+
+Fresh raw-Git source/class-bound ef33 measurements are recorded in
+`m3/evidence/shared-owner-benchmark-20261002.json`. Three forks show about 160
+allocated bytes per long retained join versus 16,424 for stock concat, while tiny
+retained slices allocate 248 versus 96 and take longer. A one-unit retained slice
+holds 8,192 owner payload bytes; explicit compaction leaves two. These preserve
+raw diagnostic outputs and do not establish full heap retention or general speedup.
