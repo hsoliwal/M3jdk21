@@ -10,6 +10,7 @@ public record M3IndexDbSemanticNode(
         String semanticKey,
         String sourcePath,
         String symbol,
+        String patternRole,
         M3IndexDbSemanticFingerprint fingerprint) {
 
     public M3IndexDbSemanticNode {
@@ -18,6 +19,7 @@ public record M3IndexDbSemanticNode(
         semanticKey = token(semanticKey, "semanticKey");
         sourcePath = Objects.requireNonNull(sourcePath, "sourcePath");
         symbol = token(symbol, "symbol");
+        patternRole = token(patternRole, "patternRole");
         fingerprint = Objects.requireNonNull(fingerprint, "fingerprint");
         if (!nodeId.equals(M3IndexDbSemanticIndex.nodeId(kind, semanticKey))) {
             throw new IllegalArgumentException("nodeId does not match semantic identity");
@@ -31,7 +33,25 @@ public record M3IndexDbSemanticNode(
                 semanticKey,
                 sourcePath,
                 symbol,
+                patternRole,
                 replacement);
+    }
+
+    public M3IndexDbSemanticNode(
+            String nodeId,
+            M3IndexDbSemanticKind kind,
+            String semanticKey,
+            String sourcePath,
+            String symbol,
+            M3IndexDbSemanticFingerprint fingerprint) {
+        this(
+                nodeId,
+                kind,
+                semanticKey,
+                sourcePath,
+                symbol,
+                "M3:" + Objects.requireNonNull(kind, "kind").name(),
+                fingerprint);
     }
 
     private static String requireSha(String value, String field) {
