@@ -28,6 +28,27 @@ class InventoryTest(unittest.TestCase):
     def setUp(self) -> None:
         self.inv = load_inventory_module()
 
+    def test_released_denominator_constants_are_complete(self) -> None:
+        self.assertEqual(
+            {
+                22: 2384,
+                23: 2355,
+                24: 2562,
+                25: 2678,
+                26: 2611,
+                27: 2358,
+            },
+            self.inv.EXPECTED_GA_COMMIT_COUNTS,
+        )
+        self.assertEqual(14948, self.inv.EXPECTED_GA_COMMIT_TOTAL)
+        self.assertEqual(
+            "BACKPORT_IF_JAVA21_COMPATIBLE", self.inv.BACKPORT_POLICY
+        )
+        self.assertEqual(
+            "PENDING_COMPATIBILITY_PROOF",
+            self.inv.PENDING_COMPATIBILITY_PROOF,
+        )
+
     @staticmethod
     def git(repo: Path, *args: str) -> None:
         subprocess.run(
@@ -38,7 +59,7 @@ class InventoryTest(unittest.TestCase):
             text=True,
         )
 
-    def test_tool_and_language_classification(self) -> None:
+    def test_all_changes_remain_in_compatibility_queue(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             repo = Path(temp)
             subprocess.run(("git", "init", "-q", str(repo)), check=True)
@@ -87,14 +108,21 @@ class InventoryTest(unittest.TestCase):
             self.assertEqual(2, len(changes))
             self.assertEqual("review-tool", changes[0].disposition)
             self.assertEqual(("JDK-8357439",), changes[0].jbs_ids)
-            self.assertEqual("hold-language", changes[1].disposition)
+
+            # A parser/javac touch is language-sensitive, but path classification
+            # cannot prove that the actual fix is incompatible with Java 21.
+            self.assertEqual(
+                "review-javac-language-sensitive", changes[1].disposition
+            )
             self.assertTrue(changes[1].grammar_touch)
 
             output = io.StringIO()
             self.inv.write_tsv(changes, output)
             text = output.getvalue()
             self.assertIn("JDK-8357439", text)
-            self.assertIn("hold-language", text)
+            self.assertIn("review-javac-language-sensitive", text)
+            self.assertIn(self.inv.BACKPORT_POLICY, text)
+            self.assertIn(self.inv.PENDING_COMPATIBILITY_PROOF, text)
 
 
 if __name__ == "__main__":
