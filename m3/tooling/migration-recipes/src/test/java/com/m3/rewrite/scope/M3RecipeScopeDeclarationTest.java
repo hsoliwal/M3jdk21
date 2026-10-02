@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.m3.rewrite.InstallIndexStringCompatibility;
 import com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe;
+import com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates;
 import com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe;
 import com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe;
 import com.synexia.rewrite.M3SegmentedLaneNativeRecipe;
@@ -17,12 +18,13 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(5, M3RecipeScopeRegistry.size());
+        assertEquals(6, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(InstallIndexStringCompatibility.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3HashPinnedJavaSnapshotRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3AtomizePureIntReturnRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3InventoryPureIntAtomCandidates.class.getName()));
         assertFalse(M3RecipeScopeRegistry.registered(null));
         assertFalse(M3RecipeScopeRegistry.registered("missing.Recipe"));
         assertThrows(NullPointerException.class, () -> M3RecipeScopeRegistry.require((Class<?>) null));
@@ -47,6 +49,10 @@ final class M3RecipeScopeDeclarationTest {
         assertEquals(M3EditScope.FILE, atomPolicy.resolve(List.of("src/main/java/a/A.java")));
         assertTrue(atomPolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
 
+        var inventoryPolicy = M3RecipeScopeRegistry.require(M3InventoryPureIntAtomCandidates.class);
+        assertEquals(M3EditScope.FILE, inventoryPolicy.resolve(List.of("src/main/java/a/A.java")));
+        assertTrue(inventoryPolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
+
         var inferredPolicy = M3RecipeScopeRegistry.require(M3HashPinnedJavaSnapshotRecipe.class);
         assertEquals(
                 M3EditScope.FILE,
@@ -70,7 +76,8 @@ final class M3RecipeScopeDeclarationTest {
                 M3SegmentedLaneNativeRecipe.class,
                 InstallIndexStringCompatibility.class,
                 M3HashPinnedJavaSnapshotRecipe.class,
-                M3AtomizePureIntReturnRecipe.class)) {
+                M3AtomizePureIntReturnRecipe.class,
+                M3InventoryPureIntAtomCandidates.class)) {
             assertEquals(
                     M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING,
                     M3RecipeScopeRegistry.require(recipe).contractMode());
