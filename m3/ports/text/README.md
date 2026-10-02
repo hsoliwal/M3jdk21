@@ -5,6 +5,9 @@ owners. Their original `com.synexia.indexstring` names remain available. This is
 an application module on stock Java 21; it is outside `java.base` and String
 bootstrap. The older `m3/core` byte-format prototype remains experimental and is
 not this facade's storage owner. Structural atom/AST/DAG owners are not renamed.
+The seven physical owners reside only in `m3/ports/indexstring/src/main/java`.
+The incoming `com.m3.text.compat.M3Text` facade uses that same closure; no duplicate
+owner classes are required on the classpath.
 
 ```java
 M3StringArena arena = new M3StringArena(4096, 8 * 1024 * 1024);
@@ -58,16 +61,23 @@ Mutable outputs are independent; I/O traverses segment cursors. No alternate
 regex engine, GPU acceleration, JNI, compiler correctness, mapped lifetime,
 transparent String integration or speedup is admitted by these tests.
 
-Provenance, original licenses, exact donor hashes and target adaptations are in
-`provenance.json`, `LICENSE`, `THIRD_PARTY_NOTICES.md` and the existing M3 naming
-map. `python m3/recipes/text-port.py --source-root <private-source> --replay-to
+Current provenance, original licenses, exact donor hashes and target adaptations
+are in `provenance-consolidated.json`, `LICENSE`, `THIRD_PARTY_NOTICES.md` and the
+existing M3 naming map. `provenance.json` and `donor-adaptations.patch` preserve the
+historical f07 closure; current replay uses `donor-consolidation.patch`.
+`python m3/recipes/text-port.py --source-root <private-source> --replay-to
 <empty-or-identical-target>` replays only the declared donor closure after hash
 and drift checks. General enhancement replay and rollback use the existing
 `m3/recipes/apply.py` with an explicit synchronized baseline.
+The v2 installer and `m3/ports/indexstring/consolidation/recipe.json` also preserve
+both public facade contracts. Fresh shared-owner receipts and selected public
+descriptor/original-bytecode evidence are in `m3/evidence/`. Their code binding is
+`shared-owner-code-binding.json`; full-family compatibility remains a separate gate.
 
 The generated String surface/acceptance matrix and selected migration coverage
 are under `m3/docs/`. Diagnostic three-fork results are in
-`m3/evidence/retained-text-benchmark.json`: this long two-atom join uses about
+`m3/evidence/retained-text-benchmark.json`, bound to the historical f07 source:
+that long two-atom join uses about
 160 allocated bytes per operation versus 16,424 for stock concatenation, while
 tiny retained slices allocate more metadata and take longer than stock slices.
 These local measurements do not establish a general throughput improvement.

@@ -20,13 +20,19 @@ compiler admission recipe. Its source pin and adaptation hashes differ.
 
 Master advanced to `45f546ff5bcb06a1b2604f14baf998785d98d9a1` and merged
 PRs #19 and #20 during this verification. The current integration preserves their
-files and historical receipts. The physical-owner consolidation remains open.
-They must not be put on one classpath with duplicate `com.synexia.indexstring`
-classes. The next consolidation must compare their pinned source baselines and
-target deltas, select one physical Frozen/Joined closure, retain both public API
-contracts through adapters where needed, and execute both differential corpora
-plus replay/rollback tests. No blind overwrite or prefix rename is authorized by
-this overlap. Each independent candidate's receipt remains bound to its own code.
+files and historical receipts. Code commit
+`ef33a8cceff4848551f32ec302f8940ec6609591` consolidates the seven physical owners
+in the established `m3/ports/indexstring/src/main/java` module and removes the
+duplicate text-module copies. It retains both facades and the additive concat,
+copy, uncached compaction and UTF16-fact contracts. The original surface corpus
+passes 502,762 checks with an identical baseline/candidate digest; M3Text passes
+1,014,911 checks in both modes and M3String passes 64,450 checks in four modes.
+The baseline recipe proves upgrade, refusal, idempotence and reverse replay; the
+v2 installer and original-source donor replay emit the same single owner closure.
+Public descriptor comparisons and unchanged baseline test bytecode also pass
+against the candidate. `shared-owner-code-binding.json` records exact code and
+receipt hashes. Each earlier receipt remains bound to its original code; scoped
+consolidation does not prove complete family, compiler, native or String parity.
 
 [PR #20](https://github.com/hsoliwal/M3jdk21/pull/20) records a history audit
 which distinguishes preserved ancestry from preserved runtime contents. Its
@@ -45,5 +51,8 @@ and remaining VM gates remain separate obligations.
 [Draft #24](https://github.com/hsoliwal/M3jdk21/pull/24) contains this selected
 text/compiler candidate; [draft #23](https://github.com/hsoliwal/M3jdk21/pull/23)
 contains the separately tested runtime restoration. Publication leaves the
-continual optimization goal active. No published receipt proves the latest
-combined master tree until its own build and tests execute.
+continual optimization goal active. The exact combined master/runtime source at
+`06c2ee74dfd6d243e305e4c12e67f44862b3904e` failed the warning-as-error compilation
+gate on the inherited AutoCloseable close contract. The narrow interface fix is
+frozen at `ebdafc4876717eb7e43e21827b260e50f63b6a00`; its matched image rebuild
+and acceptance remain pending. The previous image remains bound to 696.

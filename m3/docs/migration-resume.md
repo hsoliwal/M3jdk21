@@ -16,26 +16,44 @@ target baseline `8bb6215372e07712f1fdf5a0cb912af495007b19`. PR ancestry alone di
 not integrate the runtime production tree into master. Exact PR #6 reproduction
 and a new master-based runtime restoration candidate have separate receipts.
 
-The selected Java implementation is committed at
-`f07a02a890720c6b25b5b8fafb0903ba9b2bf088`; `selected-code-binding.json` binds
-all eleven target bodies and the actual test receipts to that commit. The local
-integration incorporates master `45f546ff5bcb06a1b2604f14baf998785d98d9a1`,
-preserves its schema-1 naming authority and all 25 migration records, and adds
-eleven selected records. Its recipe includes the existing migration validator
-and prefix-Z module. Read `concurrent-owner-reconciliation.md` before combining
-this closure with merged PR #19; consolidate its duplicate physical owners first.
+The current selected Java implementation is committed at
+`ef33a8cceff4848551f32ec302f8940ec6609591`, tree
+`01e5fef884fa06eb655ebe628acc8c26786ef6b2`. `shared-owner-code-binding.json`
+binds twelve target bodies and six actual receipts to that code. The historical
+`selected-code-binding.json` remains bound to the earlier f07 implementation.
+The integration incorporates master `45f546ff5bcb06a1b2604f14baf998785d98d9a1`,
+preserves its schema-1 authority and all 25 incoming migration records, and adds
+twelve selected records. The seven physical Frozen/Joined owners now reside only
+in `m3/ports/indexstring/src/main/java`; both M3Text and M3String consume them.
+The v2 installer, donor replay and baseline consolidation recipe reproduce this
+closure. Historical v1 templates and receipts retain their original identities.
 
 The private inventory lives at
 `synexia-mindex/repository-inventory/docs/migration/`: `source-snapshot.json`
 records pinned Git discovery, and `mindex-to-m3.json` records every disposition.
 Do not publish the entire private catalogue in the public JDK. Selected authorized
-text source hashes and adaptations are public under `m3/ports/text/provenance.json`.
+text source hashes and current adaptations are public under
+`m3/ports/text/provenance-consolidated.json`; the older provenance is historical.
+The private artifact commit is `edc04489dc46d4ff810517e74bf9162f83a2b15c`,
+distinct from its original source pin 6df. Integration commit
+`1702b78729dc84c06aaebd9fff3ebb596479bfd6` is published in private draft #7696.
+The hash-bound census covers 29,056 items: 29,037 pending and 19 visibly excluded;
+16,250 Java files parsed and 93 original syntax failures remain blocked. It records
+31,706 symbols and 153,692 public/protected contracts. Eighteen inventory
+discriminators pass. Whole-source admission remains FAILED, and the private
+wrapper's mechanical split into small modules is a separate maintainability task.
 
 Implemented and tested here: the seven-file immutable Frozen/Joined closure,
 three additive explicit-view types, exact UTF16 admission, retained join/ranges,
 canonical-owner projection, deliberate uncached compaction, owner-local UTF16
 facts, literal cursor search, stock regex/whole-input encoding, source-bound
 replay and reviewed reverse replay. Four stock modes each pass 64,450 checks.
+The consolidated closure also passes M3Text's 1,014,911 checks in default and
+interpreter modes, 30,000 concurrency iterations and the original 502,762-check
+surface corpus. Public JVM descriptors are preserved for both pinned baselines;
+four executions of unchanged baseline-compiled test bytecode pass on candidate
+classes. This scoped binary evidence does not admit every source, constant,
+serialization or native ABI contract.
 The existing foundation passes four modes of 70,462 checks and its private
 content/range oracle passes 786,432 checks. Linux two-process image mapping is
 existing-foundation evidence, not lexicon admission for the new facade.
@@ -85,8 +103,17 @@ JVM native-allocation failures were recorded separately; bounded test heaps do
 not turn a failed invocation into evidence. Installed JDKs remain unchanged.
 
 Published review surfaces: [draft #24](https://github.com/hsoliwal/M3jdk21/pull/24)
-for selected text/compiler/recipes and [draft #23](https://github.com/hsoliwal/M3jdk21/pull/23)
-for the separate runtime restoration. PRs #19 and #20 have merged into master.
-The immediate optimization gates are one physical Frozen/Joined owner with both
-facades, full private shard coverage despite original syntax failures, and a new
-complete native image built from the exact master45/runtime combined commit.
+for selected text/compiler/recipes, [draft #23](https://github.com/hsoliwal/M3jdk21/pull/23)
+for the separate runtime restoration, and private
+[draft #7696](https://github.com/hsoliwal/com.synexia/pull/7696) for the source census.
+PRs #19 and #20 have merged into master. The exact combined-runtime code at
+`06c2ee74dfd6d243e305e4c12e67f44862b3904e` failed compilation because its
+AutoCloseable backing interface inherited a checked close contract and triggered
+the JDK's warning-as-error gate. Candidate
+`ebdafc4876717eb7e43e21827b260e50f63b6a00` explicitly declares unchecked close;
+its own complete image build and acceptance remain pending. The older matched
+696 image's 86 default/16 enabled scoped passes do not qualify either new commit.
+The two original 4 GiB StringJoiner gates remain pending; historical failures are
+preserved. Continue with the matched image, private maintainability and canonical
+source-obligation reconciliation, full family/VM/compiler gates, and fresh
+performance and lifetime measurements. The continual goal remains active.

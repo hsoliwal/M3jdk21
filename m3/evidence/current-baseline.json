@@ -198,8 +198,27 @@
   },
   "observed_target_tip_after_pr19_pr20_merges": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
   "current_work": {
-    "private_source_inventory": "module-sharded facts and mapping coverage; original syntax errors remain gates",
-    "merged_owner_consolidation": "plan and differential corpora pending; two physical closures remain isolated",
-    "runtime_master45_image": "separate exact combined-source build pending; never relabel696"
+    "private_source_inventory": "Published complete hash-bound census; mechanical helper split and canonical obligation reconciliation pending; 93 original syntax failures remain blocked",
+    "merged_owner_consolidation": "Seven physical owners in indexstring only; both facades and pinned baseline surface/descriptor/bytecode corpora pass on exact ef33",
+    "runtime_master45_image": "Exact06c warning-as-error failure preserved; unchecked-close candidate ebd has its own rebuild/acceptance pending; never relabel696"
+  },
+  "current_shared_owner_milestone": {
+    "code_commit": "ef33a8cceff4848551f32ec302f8940ec6609591",
+    "tree": "01e5fef884fa06eb655ebe628acc8c26786ef6b2",
+    "binding": "m3/evidence/shared-owner-code-binding.json",
+    "single_physical_owner": true,
+    "selected_records": 12,
+    "preserved_incoming_records": 25,
+    "selected_public_descriptor_gate": "PASS; both raw pinned baselines and unchanged original test bytecode",
+    "private_inventory_artifact_commit": "edc04489dc46d4ff810517e74bf9162f83a2b15c",
+    "private_inventory_integration_commit": "1702b78729dc84c06aaebd9fff3ebb596479bfd6",
+    "private_inventory_pr": "https://github.com/hsoliwal/com.synexia/pull/7696",
+    "source_admission": "FAILED; 93 original Java syntax files blocked",
+    "combined_runtime_failed_code_commit": "06c2ee74dfd6d243e305e4c12e67f44862b3904e",
+    "combined_runtime_fix_code_commit": "ebdafc4876717eb7e43e21827b260e50f63b6a00",
+    "combined_runtime_fixed_image_acceptance": "PENDING",
+    "whole_family_accepted": false,
+    "continual_goal_status": "active",
+    "historical_fields": "Earlier fields and receipts describe the original observations and are not new candidate acceptance."
   }
 }

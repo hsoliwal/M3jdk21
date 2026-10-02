@@ -1,0 +1,3933 @@
+{
+  "schema": 1,
+  "scope": "Selected seven owner types and incoming M3Text only",
+  "candidate": {
+    "repository": "hsoliwal/M3jdk21",
+    "commit": "ef33a8cceff4848551f32ec302f8940ec6609591",
+    "tree": "01e5fef884fa06eb655ebe628acc8c26786ef6b2"
+  },
+  "generated_utc": "2026-10-02T04:24:21.297168+00:00",
+  "environment": {
+    "os": "Windows-11-10.0.26300-SP0",
+    "architecture": "AMD64",
+    "jdk_home": "C:\\Program Files\\Java\\jdk-21",
+    "java_version": "java version \"21.0.9\" 2025-10-21 LTS\nJava(TM) SE Runtime Environment (build 21.0.9+7-LTS-338)\nJava HotSpot(TM) 64-Bit Server VM (build 21.0.9+7-LTS-338, mixed mode, sharing)"
+  },
+  "input_artifacts": [
+    {
+      "scope": "candidate",
+      "repository": "C:\\worktrees\\M3jdk21-mindex-migration-20261002",
+      "commit": "ef33a8cceff4848551f32ec302f8940ec6609591",
+      "path": "m3/ports/indexstring/src/main/java/com/m3/text/compat/M3Text.java",
+      "sha256": "2f1c52feaa5c81462a469c84d847448840cfa75db5a0f1d40c72241718417653",
+      "git_blob_sha1": "46aecc2fb0b1e5f516c1db8b5e93476eb70444f2"
+    },
+    {
+      "scope": "candidate",
+      "repository": "C:\\worktrees\\M3jdk21-mindex-migration-20261002",
+      "commit": "ef33a8cceff4848551f32ec302f8940ec6609591",
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenByteInterner.java",
+      "sha256": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414",
+      "git_blob_sha1": "acf85e02d76672ec2e79f277998cb97933d08d4b"
+    },
+    {
+      "scope": "candidate",
+      "repository": "C:\\worktrees\\M3jdk21-mindex-migration-20261002",
+      "commit": "ef33a8cceff4848551f32ec302f8940ec6609591",
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java",
+      "sha256": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf",
+      "git_blob_sha1": "eb52455866c8c4fd26e72f07aae17ecc36835aee"
+    },
+    {
+      "scope": "candidate",
+      "repository": "C:\\worktrees\\M3jdk21-mindex-migration-20261002",
+      "commit": "ef33a8cceff4848551f32ec302f8940ec6609591",
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java",
+      "sha256": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46",
+      "git_blob_sha1": "58cf5a0d61d3e6f6b852fd8573996bf65897d8d4"
+    },
+    {
+      "scope": "candidate",
+      "repository": "C:\\worktrees\\M3jdk21-mindex-migration-20261002",
+      "commit": "ef33a8cceff4848551f32ec302f8940ec6609591",
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedBytes.java",
+      "sha256": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+      "git_blob_sha1": "9db0c6363480ccb0f38bba7b2218e151dd75ee68"
+    },
+    {
+      "scope": "candidate",
+      "repository": "C:\\worktrees\\M3jdk21-mindex-migration-20261002",
+      "commit": "ef33a8cceff4848551f32ec302f8940ec6609591",
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedChars.java",
+      "sha256": "d93729835dcffe0a9a9be1fe54ab9f0f4af9848a562cce2ae80bffff781bead0",
+      "git_blob_sha1": "b6e478d7ad4142628d09b87dab0381a63dc3be16"
+    },
+    {
+      "scope": "candidate",
+      "repository": "C:\\worktrees\\M3jdk21-mindex-migration-20261002",
+      "commit": "ef33a8cceff4848551f32ec302f8940ec6609591",
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStorageIntern.java",
+      "sha256": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7",
+      "git_blob_sha1": "57396522fcf96fe011a7b32da50d18b717797f22"
+    },
+    {
+      "scope": "candidate",
+      "repository": "C:\\worktrees\\M3jdk21-mindex-migration-20261002",
+      "commit": "ef33a8cceff4848551f32ec302f8940ec6609591",
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStreams.java",
+      "sha256": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
+      "git_blob_sha1": "6f350a84b954b2f80929252254a007652fc1d0d0"
+    },
+    {
+      "scope": "candidate",
+      "repository": "C:\\worktrees\\M3jdk21-mindex-migration-20261002",
+      "commit": "ef33a8cceff4848551f32ec302f8940ec6609591",
+      "path": "m3/ports/text/src/com/m3/indexstring/M3String.java",
+      "sha256": "aaf2f5868fb26f1a8d80f13ae13885885ec7f2eb31c4676f4924d037315fe61c",
+      "git_blob_sha1": "cc7029ca483fc47322fe119301f6171648c9b7fa"
+    },
+    {
+      "scope": "candidate",
+      "repository": "C:\\worktrees\\M3jdk21-mindex-migration-20261002",
+      "commit": "ef33a8cceff4848551f32ec302f8940ec6609591",
+      "path": "m3/ports/text/src/com/m3/indexstring/M3StringArena.java",
+      "sha256": "94eda684ee599ed6cbfd9ed8fd58a571ca5f831a368da332345999255919639a",
+      "git_blob_sha1": "609041172b10a0efc6c23628ef5b777f9f9a7351"
+    },
+    {
+      "scope": "candidate",
+      "repository": "C:\\worktrees\\M3jdk21-mindex-migration-20261002",
+      "commit": "ef33a8cceff4848551f32ec302f8940ec6609591",
+      "path": "m3/ports/text/src/com/m3/indexstring/M3Utf16Cursor.java",
+      "sha256": "ba2c75331207feacfdb2fdd225c1b2b2d6aba9c753d9865a7e00e9baafdaea98",
+      "git_blob_sha1": "79612d2c77a2898366f37195a03b69889b8da96a"
+    },
+    {
+      "scope": "private6df9",
+      "repository": "C:\\worktrees\\com.synexia-m3-migration-20261002",
+      "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java",
+      "sha256": "cb50139594817d5cb2477c4d67148d4aed2174299f05cff9a3b24416139bc6b4",
+      "git_blob_sha1": "b624dc8dbb23eac6b3147ea888ac69df60f971e1"
+    },
+    {
+      "scope": "private6df9",
+      "repository": "C:\\worktrees\\com.synexia-m3-migration-20261002",
+      "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java",
+      "sha256": "0c03ca0ed8b42212fa92e4d5f9325ba864f8d11928cd6a0b030b861f668f0657",
+      "git_blob_sha1": "a8f016a1764aea6e970bc60e38f345804e82a84e"
+    },
+    {
+      "scope": "private6df9",
+      "repository": "C:\\worktrees\\com.synexia-m3-migration-20261002",
+      "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenByteInterner.java",
+      "sha256": "8f350411381abdf7069f8fab1ee239b4cfce05faa5d1f73204e98e377cad82ea",
+      "git_blob_sha1": "de41c8915a5b98b4d34802a9280332587dbf2978"
+    },
+    {
+      "scope": "private6df9",
+      "repository": "C:\\worktrees\\com.synexia-m3-migration-20261002",
+      "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedBytes.java",
+      "sha256": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+      "git_blob_sha1": "9db0c6363480ccb0f38bba7b2218e151dd75ee68"
+    },
+    {
+      "scope": "private6df9",
+      "repository": "C:\\worktrees\\com.synexia-m3-migration-20261002",
+      "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedChars.java",
+      "sha256": "712c1c795ff1e0d6dea099eaec8fa6e64803adfc12bad6f31970b722c659d396",
+      "git_blob_sha1": "d9ec1832d1b9381cf0243dfd132e089797f0a2d8"
+    },
+    {
+      "scope": "private6df9",
+      "repository": "C:\\worktrees\\com.synexia-m3-migration-20261002",
+      "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStorageIntern.java",
+      "sha256": "f42c548a4fd47d3dac43283082125232e04d5f13f28b63521832493394176337",
+      "git_blob_sha1": "95a576da9e60fb830a443034d6403e84740233e8"
+    },
+    {
+      "scope": "private6df9",
+      "repository": "C:\\worktrees\\com.synexia-m3-migration-20261002",
+      "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStreams.java",
+      "sha256": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
+      "git_blob_sha1": "6f350a84b954b2f80929252254a007652fc1d0d0"
+    },
+    {
+      "scope": "private6df9:test",
+      "repository": "C:\\worktrees\\M3jdk21-mindex-migration-20261002",
+      "commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+      "path": "m3/ports/indexstring/src/test/java/ExistingSurfaceTest.java",
+      "sha256": "5d1126d8e65572e28da4218dedcb458843d7c7d6b0f6a51e020188f55ed73869",
+      "git_blob_sha1": "d660ec518b35c944280b6165adf6138e7fff6b36"
+    },
+    {
+      "scope": "publicmaster45",
+      "repository": "C:\\worktrees\\M3jdk21-mindex-migration-20261002",
+      "commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java",
+      "sha256": "cb50139594817d5cb2477c4d67148d4aed2174299f05cff9a3b24416139bc6b4",
+      "git_blob_sha1": "b624dc8dbb23eac6b3147ea888ac69df60f971e1"
+    },
+    {
+      "scope": "publicmaster45",
+      "repository": "C:\\worktrees\\M3jdk21-mindex-migration-20261002",
+      "commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java",
+      "sha256": "0c03ca0ed8b42212fa92e4d5f9325ba864f8d11928cd6a0b030b861f668f0657",
+      "git_blob_sha1": "a8f016a1764aea6e970bc60e38f345804e82a84e"
+    },
+    {
+      "scope": "publicmaster45",
+      "repository": "C:\\worktrees\\M3jdk21-mindex-migration-20261002",
+      "commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedBytes.java",
+      "sha256": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+      "git_blob_sha1": "9db0c6363480ccb0f38bba7b2218e151dd75ee68"
+    },
+    {
+      "scope": "publicmaster45",
+      "repository": "C:\\worktrees\\M3jdk21-mindex-migration-20261002",
+      "commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedChars.java",
+      "sha256": "964f0fc3611f259562adca7f7a9ec581d149f16b4dfcc9a3c775a2a8ca53f864",
+      "git_blob_sha1": "6d7d06cc24c7c42c0aa2e6d21b82a53c9b4e1566"
+    },
+    {
+      "scope": "publicmaster45",
+      "repository": "C:\\worktrees\\M3jdk21-mindex-migration-20261002",
+      "commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStorageIntern.java",
+      "sha256": "f42c548a4fd47d3dac43283082125232e04d5f13f28b63521832493394176337",
+      "git_blob_sha1": "95a576da9e60fb830a443034d6403e84740233e8"
+    },
+    {
+      "scope": "publicmaster45",
+      "repository": "C:\\worktrees\\M3jdk21-mindex-migration-20261002",
+      "commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStreams.java",
+      "sha256": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
+      "git_blob_sha1": "6f350a84b954b2f80929252254a007652fc1d0d0"
+    },
+    {
+      "scope": "publicmaster45",
+      "repository": "C:\\worktrees\\M3jdk21-mindex-migration-20261002",
+      "commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+      "path": "m3/ports/indexstring/src/main/java/com/m3/text/compat/M3Text.java",
+      "sha256": "2f1c52feaa5c81462a469c84d847448840cfa75db5a0f1d40c72241718417653",
+      "git_blob_sha1": "46aecc2fb0b1e5f516c1db8b5e93476eb70444f2"
+    },
+    {
+      "scope": "publicmaster45:test",
+      "repository": "C:\\worktrees\\M3jdk21-mindex-migration-20261002",
+      "commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+      "path": "m3/ports/indexstring/src/test/java/ExistingSurfaceTest.java",
+      "sha256": "5d1126d8e65572e28da4218dedcb458843d7c7d6b0f6a51e020188f55ed73869",
+      "git_blob_sha1": "d660ec518b35c944280b6165adf6138e7fff6b36"
+    }
+  ],
+  "commands": [
+    {
+      "id": "java-version",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-version"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "java version \"21.0.9\" 2025-10-21 LTS\nJava(TM) SE Runtime Environment (build 21.0.9+7-LTS-338)\nJava HotSpot(TM) 64-Bit Server VM (build 21.0.9+7-LTS-338, mixed mode, sharing)\n",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "dd16383aa442f242596bdd750cb64d30a0934204a5e5a8adc7eb318f6632197a"
+    },
+    {
+      "id": "candidate:compile",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javac",
+        "-J-Xmx256m",
+        "-J-XX:ActiveProcessorCount=2",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\classes",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\src\\m3\\ports\\indexstring\\src\\main\\java\\com\\m3\\text\\compat\\M3Text.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\src\\m3\\ports\\indexstring\\src\\main\\java\\com\\synexia\\indexstring\\FrozenByteInterner.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\src\\m3\\ports\\indexstring\\src\\main\\java\\com\\synexia\\indexstring\\FrozenBytes.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\src\\m3\\ports\\indexstring\\src\\main\\java\\com\\synexia\\indexstring\\FrozenChars.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\src\\m3\\ports\\indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexJoinedBytes.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\src\\m3\\ports\\indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexJoinedChars.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\src\\m3\\ports\\indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexJoinedStorageIntern.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\src\\m3\\ports\\indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexJoinedStreams.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\src\\m3\\ports\\text\\src\\com\\m3\\indexstring\\M3String.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\src\\m3\\ports\\text\\src\\com\\m3\\indexstring\\M3StringArena.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\src\\m3\\ports\\text\\src\\com\\m3\\indexstring\\M3Utf16Cursor.java"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "candidate:javap:com.synexia.indexstring.FrozenBytes",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\classes",
+        "com.synexia.indexstring.FrozenBytes"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"FrozenBytes.java\"\npublic final class com.synexia.indexstring.FrozenBytes {\n  public static com.synexia.indexstring.FrozenBytes copyOf(byte[]);\n    descriptor: ([B)Lcom/synexia/indexstring/FrozenBytes;\n\n  public int length();\n    descriptor: ()I\n\n  public int retainedBytes();\n    descriptor: ()I\n\n  public boolean isDirect();\n    descriptor: ()Z\n\n  public com.synexia.indexstring.FrozenBytes compact();\n    descriptor: ()Lcom/synexia/indexstring/FrozenBytes;\n\n  public int hash32();\n    descriptor: ()I\n\n  public byte byteAt(int);\n    descriptor: (I)B\n\n  public byte[] copy();\n    descriptor: ()[B\n\n  public com.synexia.indexstring.FrozenBytes slice(int, int);\n    descriptor: (II)Lcom/synexia/indexstring/FrozenBytes;\n\n  public void copyTo(int, byte[], int, int);\n    descriptor: (I[BII)V\n\n  public java.nio.ByteBuffer asReadOnlyBuffer();\n    descriptor: ()Ljava/nio/ByteBuffer;\n}\n",
+      "stderr": "",
+      "stdout_sha256": "926ca1fa3a827659499ece63f91838a09edbec8e178c3cb8d66de2912897e6d8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "candidate:javap:com.synexia.indexstring.FrozenChars",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\classes",
+        "com.synexia.indexstring.FrozenChars"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"FrozenChars.java\"\npublic final class com.synexia.indexstring.FrozenChars implements java.lang.CharSequence {\n  public static com.synexia.indexstring.FrozenChars copyOf(char[]);\n    descriptor: ([C)Lcom/synexia/indexstring/FrozenChars;\n\n  public static com.synexia.indexstring.FrozenChars fromUtf16Bytes(com.synexia.indexstring.FrozenBytes);\n    descriptor: (Lcom/synexia/indexstring/FrozenBytes;)Lcom/synexia/indexstring/FrozenChars;\n\n  public int hash32();\n    descriptor: ()I\n\n  public boolean isDirect();\n    descriptor: ()Z\n\n  public boolean sharesStorageWith(com.synexia.indexstring.FrozenChars);\n    descriptor: (Lcom/synexia/indexstring/FrozenChars;)Z\n\n  public boolean adjacentTo(com.synexia.indexstring.FrozenChars);\n    descriptor: (Lcom/synexia/indexstring/FrozenChars;)Z\n\n  public com.synexia.indexstring.FrozenChars coalesce(com.synexia.indexstring.FrozenChars);\n    descriptor: (Lcom/synexia/indexstring/FrozenChars;)Lcom/synexia/indexstring/FrozenChars;\n\n  public long retainedBytes();\n    descriptor: ()J\n\n  public int length();\n    descriptor: ()I\n\n  public char charAt(int);\n    descriptor: (I)C\n\n  public com.synexia.indexstring.FrozenChars subSequence(int, int);\n    descriptor: (II)Lcom/synexia/indexstring/FrozenChars;\n\n  public char[] copy();\n    descriptor: ()[C\n\n  public void copyTo(int, char[], int, int);\n    descriptor: (I[CII)V\n\n  public java.nio.CharBuffer asReadOnlyBuffer();\n    descriptor: ()Ljava/nio/CharBuffer;\n\n  public java.nio.ByteBuffer directUtf16Bytes();\n    descriptor: ()Ljava/nio/ByteBuffer;\n\n  public java.lang.String toString();\n    descriptor: ()Ljava/lang/String;\n\n  public java.lang.CharSequence subSequence(int, int);\n    descriptor: (II)Ljava/lang/CharSequence;\n}\n",
+      "stderr": "",
+      "stdout_sha256": "8431d96286d8567db326765321eb3addc32f67810a2f55340cfb6417a0ecf090",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "candidate:javap:com.synexia.indexstring.FrozenByteInterner",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\classes",
+        "com.synexia.indexstring.FrozenByteInterner"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"FrozenByteInterner.java\"\npublic final class com.synexia.indexstring.FrozenByteInterner {\n  public com.synexia.indexstring.FrozenByteInterner(int, long);\n    descriptor: (IJ)V\n\n  public synchronized com.synexia.indexstring.FrozenBytes intern(byte[]);\n    descriptor: ([B)Lcom/synexia/indexstring/FrozenBytes;\n\n  public synchronized com.synexia.indexstring.FrozenBytes internFrozen(com.synexia.indexstring.FrozenBytes);\n    descriptor: (Lcom/synexia/indexstring/FrozenBytes;)Lcom/synexia/indexstring/FrozenBytes;\n\n  public synchronized com.synexia.indexstring.FrozenBytes intern(java.lang.String, java.nio.charset.Charset);\n    descriptor: (Ljava/lang/String;Ljava/nio/charset/Charset;)Lcom/synexia/indexstring/FrozenBytes;\n\n  public synchronized long payloadBytes();\n    descriptor: ()J\n\n  public synchronized int size();\n    descriptor: ()I\n\n  public synchronized com.synexia.indexstring.FrozenBytes internUtf16(java.lang.String);\n    descriptor: (Ljava/lang/String;)Lcom/synexia/indexstring/FrozenBytes;\n\n  public synchronized void clear();\n    descriptor: ()V\n}\n",
+      "stderr": "",
+      "stdout_sha256": "1e13b82a34cbb6b3c8e824fafb25724fe9e0aa539a61cca34bebe82e6f5d7040",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "candidate:javap:com.synexia.indexstring.MIndexJoinedBytes",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\classes",
+        "com.synexia.indexstring.MIndexJoinedBytes"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"MIndexJoinedBytes.java\"\npublic final class com.synexia.indexstring.MIndexJoinedBytes {\n  public static com.synexia.indexstring.MIndexJoinedBytes of(com.synexia.indexstring.FrozenBytes...);\n    descriptor: ([Lcom/synexia/indexstring/FrozenBytes;)Lcom/synexia/indexstring/MIndexJoinedBytes;\n\n  public long canonicalBackingId();\n    descriptor: ()J\n\n  public boolean sharesBackingWith(com.synexia.indexstring.MIndexJoinedBytes);\n    descriptor: (Lcom/synexia/indexstring/MIndexJoinedBytes;)Z\n\n  public int length();\n    descriptor: ()I\n\n  public byte byteAt(int);\n    descriptor: (I)B\n\n  public com.synexia.indexstring.MIndexJoinedBytes slice(int, int);\n    descriptor: (II)Lcom/synexia/indexstring/MIndexJoinedBytes;\n\n  public byte[] copy();\n    descriptor: ()[B\n\n  public com.synexia.indexstring.FrozenBytes detach();\n    descriptor: ()Lcom/synexia/indexstring/FrozenBytes;\n\n  public java.nio.ByteBuffer[] asReadOnlyBuffers();\n    descriptor: ()[Ljava/nio/ByteBuffer;\n\n  public java.io.InputStream asInputStream();\n    descriptor: ()Ljava/io/InputStream;\n}\n",
+      "stderr": "",
+      "stdout_sha256": "4ba74aac3901b8d462f10669ec6e2ad0d4523efce3184dcf3bb1b8c3985684c5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "candidate:javap:com.synexia.indexstring.MIndexJoinedChars",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\classes",
+        "com.synexia.indexstring.MIndexJoinedChars"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"MIndexJoinedChars.java\"\npublic final class com.synexia.indexstring.MIndexJoinedChars implements java.lang.CharSequence {\n  public static com.synexia.indexstring.MIndexJoinedChars of(com.synexia.indexstring.FrozenChars...);\n    descriptor: ([Lcom/synexia/indexstring/FrozenChars;)Lcom/synexia/indexstring/MIndexJoinedChars;\n\n  public static com.synexia.indexstring.MIndexJoinedChars ofUncached(com.synexia.indexstring.FrozenChars...);\n    descriptor: ([Lcom/synexia/indexstring/FrozenChars;)Lcom/synexia/indexstring/MIndexJoinedChars;\n\n  public long canonicalBackingId();\n    descriptor: ()J\n\n  public boolean sharesBackingWith(com.synexia.indexstring.MIndexJoinedChars);\n    descriptor: (Lcom/synexia/indexstring/MIndexJoinedChars;)Z\n\n  public com.synexia.indexstring.FrozenChars[] frozenSegments();\n    descriptor: ()[Lcom/synexia/indexstring/FrozenChars;\n\n  public int length();\n    descriptor: ()I\n\n  public char charAt(int);\n    descriptor: (I)C\n\n  public com.synexia.indexstring.MIndexJoinedChars subSequence(int, int);\n    descriptor: (II)Lcom/synexia/indexstring/MIndexJoinedChars;\n\n  public int codePointAt(int);\n    descriptor: (I)I\n\n  public int codePointCount();\n    descriptor: ()I\n\n  public char[] copy();\n    descriptor: ()[C\n\n  public com.synexia.indexstring.MIndexJoinedChars concat(com.synexia.indexstring.MIndexJoinedChars);\n    descriptor: (Lcom/synexia/indexstring/MIndexJoinedChars;)Lcom/synexia/indexstring/MIndexJoinedChars;\n\n  public void copyTo(int, char[], int, int);\n    descriptor: (I[CII)V\n\n  public com.synexia.indexstring.FrozenChars detach();\n    descriptor: ()Lcom/synexia/indexstring/FrozenChars;\n\n  public com.synexia.indexstring.FrozenBytes encode(java.nio.charset.Charset);\n    descriptor: (Ljava/nio/charset/Charset;)Lcom/synexia/indexstring/FrozenBytes;\n\n  public byte[] copyEncoded(java.nio.charset.Charset);\n    descriptor: (Ljava/nio/charset/Charset;)[B\n\n  public java.nio.CharBuffer[] asReadOnlyBuffers();\n    descriptor: ()[Ljava/nio/CharBuffer;\n\n  public java.nio.ByteBuffer[] directUtf16Buffers();\n    descriptor: ()[Ljava/nio/ByteBuffer;\n\n  public java.lang.String toString();\n    descriptor: ()Ljava/lang/String;\n\n  public java.io.Reader asReader();\n    descriptor: ()Ljava/io/Reader;\n\n  public java.lang.CharSequence subSequence(int, int);\n    descriptor: (II)Ljava/lang/CharSequence;\n}\n",
+      "stderr": "",
+      "stdout_sha256": "58f46524ca1c2d18f54197d6c91689070c0835add8d7654c380e8dbbcfb48d40",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "candidate:javap:com.synexia.indexstring.MIndexJoinedStorageIntern",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\classes",
+        "com.synexia.indexstring.MIndexJoinedStorageIntern"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"MIndexJoinedStorageIntern.java\"\nfinal class com.synexia.indexstring.MIndexJoinedStorageIntern {\n}\n",
+      "stderr": "",
+      "stdout_sha256": "d16bb573ad4a02e20b186e18dabff208cfe3a1b83cc34f1eb9bdbf82eb8fe027",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "candidate:javap:com.synexia.indexstring.MIndexJoinedStreams",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\classes",
+        "com.synexia.indexstring.MIndexJoinedStreams"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"MIndexJoinedStreams.java\"\nfinal class com.synexia.indexstring.MIndexJoinedStreams {\n}\n",
+      "stderr": "",
+      "stdout_sha256": "7016a0f98a57cee35a7d431c7039fedac4a3b385f630f8ca1b763cc8383e4192",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "candidate:javap:com.m3.text.compat.M3Text",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\classes",
+        "com.m3.text.compat.M3Text"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"M3Text.java\"\npublic final class com.m3.text.compat.M3Text implements java.lang.CharSequence, java.lang.Comparable<com.m3.text.compat.M3Text> {\n  public static com.m3.text.compat.M3Text fromJoined(com.synexia.indexstring.MIndexJoinedChars);\n    descriptor: (Lcom/synexia/indexstring/MIndexJoinedChars;)Lcom/m3/text/compat/M3Text;\n\n  public static com.m3.text.compat.M3Text fromFrozen(com.synexia.indexstring.FrozenChars...);\n    descriptor: ([Lcom/synexia/indexstring/FrozenChars;)Lcom/m3/text/compat/M3Text;\n\n  public static com.m3.text.compat.M3Text fromString(java.lang.String, java.util.function.Function<java.lang.String, com.synexia.indexstring.MIndexJoinedChars>);\n    descriptor: (Ljava/lang/String;Ljava/util/function/Function;)Lcom/m3/text/compat/M3Text;\n\n  public com.synexia.indexstring.MIndexJoinedChars storage();\n    descriptor: ()Lcom/synexia/indexstring/MIndexJoinedChars;\n\n  public int length();\n    descriptor: ()I\n\n  public boolean isEmpty();\n    descriptor: ()Z\n\n  public char charAt(int);\n    descriptor: (I)C\n\n  public com.m3.text.compat.M3Text subSequence(int, int);\n    descriptor: (II)Lcom/m3/text/compat/M3Text;\n\n  public com.m3.text.compat.M3Text substring(int, int);\n    descriptor: (II)Lcom/m3/text/compat/M3Text;\n\n  public com.m3.text.compat.M3Text substring(int);\n    descriptor: (I)Lcom/m3/text/compat/M3Text;\n\n  public com.m3.text.compat.M3Text concat(com.m3.text.compat.M3Text);\n    descriptor: (Lcom/m3/text/compat/M3Text;)Lcom/m3/text/compat/M3Text;\n\n  public char[] toCharArray();\n    descriptor: ()[C\n\n  public void getChars(int, int, char[], int);\n    descriptor: (II[CI)V\n\n  public java.io.Reader asReader();\n    descriptor: ()Ljava/io/Reader;\n\n  public java.lang.String asString();\n    descriptor: ()Ljava/lang/String;\n\n  public java.lang.String toString();\n    descriptor: ()Ljava/lang/String;\n\n  public boolean contentEquals(java.lang.CharSequence);\n    descriptor: (Ljava/lang/CharSequence;)Z\n\n  public boolean equals(java.lang.Object);\n    descriptor: (Ljava/lang/Object;)Z\n\n  public int hashCode();\n    descriptor: ()I\n\n  public int compareTo(com.m3.text.compat.M3Text);\n    descriptor: (Lcom/m3/text/compat/M3Text;)I\n\n  public int codePointAt(int);\n    descriptor: (I)I\n\n  public int codePointBefore(int);\n    descriptor: (I)I\n\n  public int codePointCount(int, int);\n    descriptor: (II)I\n\n  public java.util.stream.IntStream chars();\n    descriptor: ()Ljava/util/stream/IntStream;\n\n  public java.util.stream.IntStream codePoints();\n    descriptor: ()Ljava/util/stream/IntStream;\n\n  public int indexOf(java.lang.String);\n    descriptor: (Ljava/lang/String;)I\n\n  public int indexOf(java.lang.String, int);\n    descriptor: (Ljava/lang/String;I)I\n\n  public int lastIndexOf(java.lang.String);\n    descriptor: (Ljava/lang/String;)I\n\n  public int lastIndexOf(java.lang.String, int);\n    descriptor: (Ljava/lang/String;I)I\n\n  public boolean contains(java.lang.String);\n    descriptor: (Ljava/lang/String;)Z\n\n  public boolean startsWith(java.lang.String);\n    descriptor: (Ljava/lang/String;)Z\n\n  public boolean endsWith(java.lang.String);\n    descriptor: (Ljava/lang/String;)Z\n\n  public java.util.regex.Matcher matcher(java.util.regex.Pattern);\n    descriptor: (Ljava/util/regex/Pattern;)Ljava/util/regex/Matcher;\n\n  public boolean matches(java.lang.String);\n    descriptor: (Ljava/lang/String;)Z\n\n  public java.lang.String replaceAll(java.lang.String, java.lang.String);\n    descriptor: (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;\n\n  public java.lang.String[] split(java.lang.String, int);\n    descriptor: (Ljava/lang/String;I)[Ljava/lang/String;\n\n  public java.nio.ByteBuffer encode(java.nio.charset.Charset, java.nio.charset.CodingErrorAction, java.nio.charset.CodingErrorAction) throws java.nio.charset.CharacterCodingException;\n    descriptor: (Ljava/nio/charset/Charset;Ljava/nio/charset/CodingErrorAction;Ljava/nio/charset/CodingErrorAction;)Ljava/nio/ByteBuffer;\n\n  public void writeTo(java.lang.Appendable) throws java.io.IOException;\n    descriptor: (Ljava/lang/Appendable;)V\n\n  public java.lang.CharSequence subSequence(int, int);\n    descriptor: (II)Ljava/lang/CharSequence;\n\n  public int compareTo(java.lang.Object);\n    descriptor: (Ljava/lang/Object;)I\n}\n",
+      "stderr": "",
+      "stdout_sha256": "83044220666d841c3bd9e054954bfd237c609b3c8d23c26443809d26b94cad2f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "private6df9:compile-baseline-with-original-test",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javac",
+        "-J-Xmx256m",
+        "-J-XX:ActiveProcessorCount=2",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\private6df9\\classes",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\private6df9\\src\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\FrozenBytes.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\private6df9\\src\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\FrozenChars.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\private6df9\\src\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\FrozenByteInterner.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\private6df9\\src\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexJoinedBytes.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\private6df9\\src\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexJoinedChars.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\private6df9\\src\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexJoinedStorageIntern.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\private6df9\\src\\synexia-indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexJoinedStreams.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\private6df9\\test\\ExistingSurfaceTest.java"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "private6df9:javap:com.synexia.indexstring.FrozenBytes",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\private6df9\\classes",
+        "com.synexia.indexstring.FrozenBytes"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"FrozenBytes.java\"\npublic final class com.synexia.indexstring.FrozenBytes {\n  public static com.synexia.indexstring.FrozenBytes copyOf(byte[]);\n    descriptor: ([B)Lcom/synexia/indexstring/FrozenBytes;\n\n  public int length();\n    descriptor: ()I\n\n  public int retainedBytes();\n    descriptor: ()I\n\n  public boolean isDirect();\n    descriptor: ()Z\n\n  public com.synexia.indexstring.FrozenBytes compact();\n    descriptor: ()Lcom/synexia/indexstring/FrozenBytes;\n\n  public int hash32();\n    descriptor: ()I\n\n  public byte byteAt(int);\n    descriptor: (I)B\n\n  public byte[] copy();\n    descriptor: ()[B\n\n  public com.synexia.indexstring.FrozenBytes slice(int, int);\n    descriptor: (II)Lcom/synexia/indexstring/FrozenBytes;\n\n  public void copyTo(int, byte[], int, int);\n    descriptor: (I[BII)V\n\n  public java.nio.ByteBuffer asReadOnlyBuffer();\n    descriptor: ()Ljava/nio/ByteBuffer;\n}\n",
+      "stderr": "",
+      "stdout_sha256": "926ca1fa3a827659499ece63f91838a09edbec8e178c3cb8d66de2912897e6d8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "private6df9:javap:com.synexia.indexstring.FrozenChars",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\private6df9\\classes",
+        "com.synexia.indexstring.FrozenChars"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"FrozenChars.java\"\npublic final class com.synexia.indexstring.FrozenChars implements java.lang.CharSequence {\n  public static com.synexia.indexstring.FrozenChars copyOf(char[]);\n    descriptor: ([C)Lcom/synexia/indexstring/FrozenChars;\n\n  public int hash32();\n    descriptor: ()I\n\n  public boolean isDirect();\n    descriptor: ()Z\n\n  public int length();\n    descriptor: ()I\n\n  public char charAt(int);\n    descriptor: (I)C\n\n  public com.synexia.indexstring.FrozenChars subSequence(int, int);\n    descriptor: (II)Lcom/synexia/indexstring/FrozenChars;\n\n  public char[] copy();\n    descriptor: ()[C\n\n  public void copyTo(int, char[], int, int);\n    descriptor: (I[CII)V\n\n  public java.nio.CharBuffer asReadOnlyBuffer();\n    descriptor: ()Ljava/nio/CharBuffer;\n\n  public java.nio.ByteBuffer directUtf16Bytes();\n    descriptor: ()Ljava/nio/ByteBuffer;\n\n  public java.lang.String toString();\n    descriptor: ()Ljava/lang/String;\n\n  public java.lang.CharSequence subSequence(int, int);\n    descriptor: (II)Ljava/lang/CharSequence;\n}\n",
+      "stderr": "",
+      "stdout_sha256": "54e38bbb804b335fc7bbf281a94d527fad21ac259d0aff07722a1fc38da5043d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "private6df9:javap:com.synexia.indexstring.FrozenByteInterner",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\private6df9\\classes",
+        "com.synexia.indexstring.FrozenByteInterner"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"FrozenByteInterner.java\"\npublic final class com.synexia.indexstring.FrozenByteInterner {\n  public com.synexia.indexstring.FrozenByteInterner(int, long);\n    descriptor: (IJ)V\n\n  public synchronized com.synexia.indexstring.FrozenBytes intern(byte[]);\n    descriptor: ([B)Lcom/synexia/indexstring/FrozenBytes;\n\n  public synchronized com.synexia.indexstring.FrozenBytes internFrozen(com.synexia.indexstring.FrozenBytes);\n    descriptor: (Lcom/synexia/indexstring/FrozenBytes;)Lcom/synexia/indexstring/FrozenBytes;\n\n  public synchronized com.synexia.indexstring.FrozenBytes intern(java.lang.String, java.nio.charset.Charset);\n    descriptor: (Ljava/lang/String;Ljava/nio/charset/Charset;)Lcom/synexia/indexstring/FrozenBytes;\n\n  public synchronized long payloadBytes();\n    descriptor: ()J\n\n  public synchronized int size();\n    descriptor: ()I\n}\n",
+      "stderr": "",
+      "stdout_sha256": "012b1ba26a31a0f87c3632c0d8407b6c7e95b36630b421fe5a0f16e7c96ff854",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "private6df9:javap:com.synexia.indexstring.MIndexJoinedBytes",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\private6df9\\classes",
+        "com.synexia.indexstring.MIndexJoinedBytes"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"MIndexJoinedBytes.java\"\npublic final class com.synexia.indexstring.MIndexJoinedBytes {\n  public static com.synexia.indexstring.MIndexJoinedBytes of(com.synexia.indexstring.FrozenBytes...);\n    descriptor: ([Lcom/synexia/indexstring/FrozenBytes;)Lcom/synexia/indexstring/MIndexJoinedBytes;\n\n  public long canonicalBackingId();\n    descriptor: ()J\n\n  public boolean sharesBackingWith(com.synexia.indexstring.MIndexJoinedBytes);\n    descriptor: (Lcom/synexia/indexstring/MIndexJoinedBytes;)Z\n\n  public int length();\n    descriptor: ()I\n\n  public byte byteAt(int);\n    descriptor: (I)B\n\n  public com.synexia.indexstring.MIndexJoinedBytes slice(int, int);\n    descriptor: (II)Lcom/synexia/indexstring/MIndexJoinedBytes;\n\n  public byte[] copy();\n    descriptor: ()[B\n\n  public com.synexia.indexstring.FrozenBytes detach();\n    descriptor: ()Lcom/synexia/indexstring/FrozenBytes;\n\n  public java.nio.ByteBuffer[] asReadOnlyBuffers();\n    descriptor: ()[Ljava/nio/ByteBuffer;\n\n  public java.io.InputStream asInputStream();\n    descriptor: ()Ljava/io/InputStream;\n}\n",
+      "stderr": "",
+      "stdout_sha256": "4ba74aac3901b8d462f10669ec6e2ad0d4523efce3184dcf3bb1b8c3985684c5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "private6df9:javap:com.synexia.indexstring.MIndexJoinedChars",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\private6df9\\classes",
+        "com.synexia.indexstring.MIndexJoinedChars"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"MIndexJoinedChars.java\"\npublic final class com.synexia.indexstring.MIndexJoinedChars implements java.lang.CharSequence {\n  public static com.synexia.indexstring.MIndexJoinedChars of(com.synexia.indexstring.FrozenChars...);\n    descriptor: ([Lcom/synexia/indexstring/FrozenChars;)Lcom/synexia/indexstring/MIndexJoinedChars;\n\n  public long canonicalBackingId();\n    descriptor: ()J\n\n  public boolean sharesBackingWith(com.synexia.indexstring.MIndexJoinedChars);\n    descriptor: (Lcom/synexia/indexstring/MIndexJoinedChars;)Z\n\n  public int length();\n    descriptor: ()I\n\n  public char charAt(int);\n    descriptor: (I)C\n\n  public com.synexia.indexstring.MIndexJoinedChars subSequence(int, int);\n    descriptor: (II)Lcom/synexia/indexstring/MIndexJoinedChars;\n\n  public int codePointAt(int);\n    descriptor: (I)I\n\n  public int codePointCount();\n    descriptor: ()I\n\n  public char[] copy();\n    descriptor: ()[C\n\n  public com.synexia.indexstring.FrozenChars detach();\n    descriptor: ()Lcom/synexia/indexstring/FrozenChars;\n\n  public com.synexia.indexstring.FrozenBytes encode(java.nio.charset.Charset);\n    descriptor: (Ljava/nio/charset/Charset;)Lcom/synexia/indexstring/FrozenBytes;\n\n  public java.nio.CharBuffer[] asReadOnlyBuffers();\n    descriptor: ()[Ljava/nio/CharBuffer;\n\n  public java.nio.ByteBuffer[] directUtf16Buffers();\n    descriptor: ()[Ljava/nio/ByteBuffer;\n\n  public java.lang.String toString();\n    descriptor: ()Ljava/lang/String;\n\n  public java.io.Reader asReader();\n    descriptor: ()Ljava/io/Reader;\n\n  public java.lang.CharSequence subSequence(int, int);\n    descriptor: (II)Ljava/lang/CharSequence;\n}\n",
+      "stderr": "",
+      "stdout_sha256": "bdfd9ab6f28db7707a13e51174a14906c9a55dfd882fe19d5c60416d7e161860",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "private6df9:javap:com.synexia.indexstring.MIndexJoinedStorageIntern",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\private6df9\\classes",
+        "com.synexia.indexstring.MIndexJoinedStorageIntern"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"MIndexJoinedStorageIntern.java\"\nfinal class com.synexia.indexstring.MIndexJoinedStorageIntern {\n}\n",
+      "stderr": "",
+      "stdout_sha256": "d16bb573ad4a02e20b186e18dabff208cfe3a1b83cc34f1eb9bdbf82eb8fe027",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "private6df9:javap:com.synexia.indexstring.MIndexJoinedStreams",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\private6df9\\classes",
+        "com.synexia.indexstring.MIndexJoinedStreams"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"MIndexJoinedStreams.java\"\nfinal class com.synexia.indexstring.MIndexJoinedStreams {\n}\n",
+      "stderr": "",
+      "stdout_sha256": "7016a0f98a57cee35a7d431c7039fedac4a3b385f630f8ca1b763cc8383e4192",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "private6df9:baseline:default",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-Xms32m",
+        "-Xmx256m",
+        "-XX:ActiveProcessorCount=2",
+        "-ea",
+        "-cp",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\private6df9\\classes",
+        "com.synexia.indexstring.ExistingSurfaceTest"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "EXISTING_SURFACE_PASS checks=502762 digest=e74d393ffda5aeeb154e70568fc659575c0511803c80847152b4c6740c5a2af1\n",
+      "stderr": "",
+      "stdout_sha256": "679dabfb77ac433556e64228b8f8ad62e9af62c4b37e8821b2368103b3b065fb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "private6df9:candidate-existing-bytecode:default",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-Xms32m",
+        "-Xmx256m",
+        "-XX:ActiveProcessorCount=2",
+        "-ea",
+        "-cp",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\private6df9\\test-bytecode;S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\classes",
+        "com.synexia.indexstring.ExistingSurfaceTest"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "EXISTING_SURFACE_PASS checks=502762 digest=e74d393ffda5aeeb154e70568fc659575c0511803c80847152b4c6740c5a2af1\n",
+      "stderr": "",
+      "stdout_sha256": "679dabfb77ac433556e64228b8f8ad62e9af62c4b37e8821b2368103b3b065fb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "private6df9:baseline:interpreter",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-Xms32m",
+        "-Xmx256m",
+        "-XX:ActiveProcessorCount=2",
+        "-ea",
+        "-Xint",
+        "-cp",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\private6df9\\classes",
+        "com.synexia.indexstring.ExistingSurfaceTest"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "EXISTING_SURFACE_PASS checks=502762 digest=e74d393ffda5aeeb154e70568fc659575c0511803c80847152b4c6740c5a2af1\n",
+      "stderr": "",
+      "stdout_sha256": "679dabfb77ac433556e64228b8f8ad62e9af62c4b37e8821b2368103b3b065fb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "private6df9:candidate-existing-bytecode:interpreter",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-Xms32m",
+        "-Xmx256m",
+        "-XX:ActiveProcessorCount=2",
+        "-ea",
+        "-Xint",
+        "-cp",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\private6df9\\test-bytecode;S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\classes",
+        "com.synexia.indexstring.ExistingSurfaceTest"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "EXISTING_SURFACE_PASS checks=502762 digest=e74d393ffda5aeeb154e70568fc659575c0511803c80847152b4c6740c5a2af1\n",
+      "stderr": "",
+      "stdout_sha256": "679dabfb77ac433556e64228b8f8ad62e9af62c4b37e8821b2368103b3b065fb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "publicmaster45:compile-baseline-with-original-test",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javac",
+        "-J-Xmx256m",
+        "-J-XX:ActiveProcessorCount=2",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\publicmaster45\\classes",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\publicmaster45\\src\\m3\\ports\\indexstring\\src\\main\\java\\com\\synexia\\indexstring\\FrozenBytes.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\publicmaster45\\src\\m3\\ports\\indexstring\\src\\main\\java\\com\\synexia\\indexstring\\FrozenChars.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\publicmaster45\\src\\m3\\ports\\indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexJoinedBytes.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\publicmaster45\\src\\m3\\ports\\indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexJoinedChars.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\publicmaster45\\src\\m3\\ports\\indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexJoinedStorageIntern.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\publicmaster45\\src\\m3\\ports\\indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexJoinedStreams.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\publicmaster45\\src\\m3\\ports\\indexstring\\src\\main\\java\\com\\m3\\text\\compat\\M3Text.java",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\publicmaster45\\test\\ExistingSurfaceTest.java"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": "",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "publicmaster45:javap:com.synexia.indexstring.FrozenBytes",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\publicmaster45\\classes",
+        "com.synexia.indexstring.FrozenBytes"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"FrozenBytes.java\"\npublic final class com.synexia.indexstring.FrozenBytes {\n  public static com.synexia.indexstring.FrozenBytes copyOf(byte[]);\n    descriptor: ([B)Lcom/synexia/indexstring/FrozenBytes;\n\n  public int length();\n    descriptor: ()I\n\n  public int retainedBytes();\n    descriptor: ()I\n\n  public boolean isDirect();\n    descriptor: ()Z\n\n  public com.synexia.indexstring.FrozenBytes compact();\n    descriptor: ()Lcom/synexia/indexstring/FrozenBytes;\n\n  public int hash32();\n    descriptor: ()I\n\n  public byte byteAt(int);\n    descriptor: (I)B\n\n  public byte[] copy();\n    descriptor: ()[B\n\n  public com.synexia.indexstring.FrozenBytes slice(int, int);\n    descriptor: (II)Lcom/synexia/indexstring/FrozenBytes;\n\n  public void copyTo(int, byte[], int, int);\n    descriptor: (I[BII)V\n\n  public java.nio.ByteBuffer asReadOnlyBuffer();\n    descriptor: ()Ljava/nio/ByteBuffer;\n}\n",
+      "stderr": "",
+      "stdout_sha256": "926ca1fa3a827659499ece63f91838a09edbec8e178c3cb8d66de2912897e6d8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "publicmaster45:javap:com.synexia.indexstring.FrozenChars",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\publicmaster45\\classes",
+        "com.synexia.indexstring.FrozenChars"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"FrozenChars.java\"\npublic final class com.synexia.indexstring.FrozenChars implements java.lang.CharSequence {\n  public static com.synexia.indexstring.FrozenChars copyOf(char[]);\n    descriptor: ([C)Lcom/synexia/indexstring/FrozenChars;\n\n  public int hash32();\n    descriptor: ()I\n\n  public boolean isDirect();\n    descriptor: ()Z\n\n  public int length();\n    descriptor: ()I\n\n  public char charAt(int);\n    descriptor: (I)C\n\n  public com.synexia.indexstring.FrozenChars subSequence(int, int);\n    descriptor: (II)Lcom/synexia/indexstring/FrozenChars;\n\n  public char[] copy();\n    descriptor: ()[C\n\n  public void copyTo(int, char[], int, int);\n    descriptor: (I[CII)V\n\n  public java.nio.CharBuffer asReadOnlyBuffer();\n    descriptor: ()Ljava/nio/CharBuffer;\n\n  public java.nio.ByteBuffer directUtf16Bytes();\n    descriptor: ()Ljava/nio/ByteBuffer;\n\n  public java.lang.String toString();\n    descriptor: ()Ljava/lang/String;\n\n  public java.lang.CharSequence subSequence(int, int);\n    descriptor: (II)Ljava/lang/CharSequence;\n}\n",
+      "stderr": "",
+      "stdout_sha256": "54e38bbb804b335fc7bbf281a94d527fad21ac259d0aff07722a1fc38da5043d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "publicmaster45:javap:com.synexia.indexstring.MIndexJoinedBytes",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\publicmaster45\\classes",
+        "com.synexia.indexstring.MIndexJoinedBytes"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"MIndexJoinedBytes.java\"\npublic final class com.synexia.indexstring.MIndexJoinedBytes {\n  public static com.synexia.indexstring.MIndexJoinedBytes of(com.synexia.indexstring.FrozenBytes...);\n    descriptor: ([Lcom/synexia/indexstring/FrozenBytes;)Lcom/synexia/indexstring/MIndexJoinedBytes;\n\n  public long canonicalBackingId();\n    descriptor: ()J\n\n  public boolean sharesBackingWith(com.synexia.indexstring.MIndexJoinedBytes);\n    descriptor: (Lcom/synexia/indexstring/MIndexJoinedBytes;)Z\n\n  public int length();\n    descriptor: ()I\n\n  public byte byteAt(int);\n    descriptor: (I)B\n\n  public com.synexia.indexstring.MIndexJoinedBytes slice(int, int);\n    descriptor: (II)Lcom/synexia/indexstring/MIndexJoinedBytes;\n\n  public byte[] copy();\n    descriptor: ()[B\n\n  public com.synexia.indexstring.FrozenBytes detach();\n    descriptor: ()Lcom/synexia/indexstring/FrozenBytes;\n\n  public java.nio.ByteBuffer[] asReadOnlyBuffers();\n    descriptor: ()[Ljava/nio/ByteBuffer;\n\n  public java.io.InputStream asInputStream();\n    descriptor: ()Ljava/io/InputStream;\n}\n",
+      "stderr": "",
+      "stdout_sha256": "4ba74aac3901b8d462f10669ec6e2ad0d4523efce3184dcf3bb1b8c3985684c5",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "publicmaster45:javap:com.synexia.indexstring.MIndexJoinedChars",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\publicmaster45\\classes",
+        "com.synexia.indexstring.MIndexJoinedChars"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"MIndexJoinedChars.java\"\npublic final class com.synexia.indexstring.MIndexJoinedChars implements java.lang.CharSequence {\n  public static com.synexia.indexstring.MIndexJoinedChars of(com.synexia.indexstring.FrozenChars...);\n    descriptor: ([Lcom/synexia/indexstring/FrozenChars;)Lcom/synexia/indexstring/MIndexJoinedChars;\n\n  public long canonicalBackingId();\n    descriptor: ()J\n\n  public boolean sharesBackingWith(com.synexia.indexstring.MIndexJoinedChars);\n    descriptor: (Lcom/synexia/indexstring/MIndexJoinedChars;)Z\n\n  public int length();\n    descriptor: ()I\n\n  public char charAt(int);\n    descriptor: (I)C\n\n  public com.synexia.indexstring.MIndexJoinedChars subSequence(int, int);\n    descriptor: (II)Lcom/synexia/indexstring/MIndexJoinedChars;\n\n  public int codePointAt(int);\n    descriptor: (I)I\n\n  public int codePointCount();\n    descriptor: ()I\n\n  public char[] copy();\n    descriptor: ()[C\n\n  public com.synexia.indexstring.MIndexJoinedChars concat(com.synexia.indexstring.MIndexJoinedChars);\n    descriptor: (Lcom/synexia/indexstring/MIndexJoinedChars;)Lcom/synexia/indexstring/MIndexJoinedChars;\n\n  public void copyTo(int, char[], int, int);\n    descriptor: (I[CII)V\n\n  public com.synexia.indexstring.FrozenChars detach();\n    descriptor: ()Lcom/synexia/indexstring/FrozenChars;\n\n  public com.synexia.indexstring.FrozenBytes encode(java.nio.charset.Charset);\n    descriptor: (Ljava/nio/charset/Charset;)Lcom/synexia/indexstring/FrozenBytes;\n\n  public java.nio.CharBuffer[] asReadOnlyBuffers();\n    descriptor: ()[Ljava/nio/CharBuffer;\n\n  public java.nio.ByteBuffer[] directUtf16Buffers();\n    descriptor: ()[Ljava/nio/ByteBuffer;\n\n  public java.lang.String toString();\n    descriptor: ()Ljava/lang/String;\n\n  public java.io.Reader asReader();\n    descriptor: ()Ljava/io/Reader;\n\n  public java.lang.CharSequence subSequence(int, int);\n    descriptor: (II)Ljava/lang/CharSequence;\n}\n",
+      "stderr": "",
+      "stdout_sha256": "345c98c403383ab888b3ef6ab8af01155b44c0cc736bbd4bbf6c5d15d4449135",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "publicmaster45:javap:com.synexia.indexstring.MIndexJoinedStorageIntern",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\publicmaster45\\classes",
+        "com.synexia.indexstring.MIndexJoinedStorageIntern"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"MIndexJoinedStorageIntern.java\"\nfinal class com.synexia.indexstring.MIndexJoinedStorageIntern {\n}\n",
+      "stderr": "",
+      "stdout_sha256": "d16bb573ad4a02e20b186e18dabff208cfe3a1b83cc34f1eb9bdbf82eb8fe027",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "publicmaster45:javap:com.synexia.indexstring.MIndexJoinedStreams",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\publicmaster45\\classes",
+        "com.synexia.indexstring.MIndexJoinedStreams"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"MIndexJoinedStreams.java\"\nfinal class com.synexia.indexstring.MIndexJoinedStreams {\n}\n",
+      "stderr": "",
+      "stdout_sha256": "7016a0f98a57cee35a7d431c7039fedac4a3b385f630f8ca1b763cc8383e4192",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "publicmaster45:javap:com.m3.text.compat.M3Text",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javap",
+        "-public",
+        "-s",
+        "-classpath",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\publicmaster45\\classes",
+        "com.m3.text.compat.M3Text"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "Compiled from \"M3Text.java\"\npublic final class com.m3.text.compat.M3Text implements java.lang.CharSequence, java.lang.Comparable<com.m3.text.compat.M3Text> {\n  public static com.m3.text.compat.M3Text fromJoined(com.synexia.indexstring.MIndexJoinedChars);\n    descriptor: (Lcom/synexia/indexstring/MIndexJoinedChars;)Lcom/m3/text/compat/M3Text;\n\n  public static com.m3.text.compat.M3Text fromFrozen(com.synexia.indexstring.FrozenChars...);\n    descriptor: ([Lcom/synexia/indexstring/FrozenChars;)Lcom/m3/text/compat/M3Text;\n\n  public static com.m3.text.compat.M3Text fromString(java.lang.String, java.util.function.Function<java.lang.String, com.synexia.indexstring.MIndexJoinedChars>);\n    descriptor: (Ljava/lang/String;Ljava/util/function/Function;)Lcom/m3/text/compat/M3Text;\n\n  public com.synexia.indexstring.MIndexJoinedChars storage();\n    descriptor: ()Lcom/synexia/indexstring/MIndexJoinedChars;\n\n  public int length();\n    descriptor: ()I\n\n  public boolean isEmpty();\n    descriptor: ()Z\n\n  public char charAt(int);\n    descriptor: (I)C\n\n  public com.m3.text.compat.M3Text subSequence(int, int);\n    descriptor: (II)Lcom/m3/text/compat/M3Text;\n\n  public com.m3.text.compat.M3Text substring(int, int);\n    descriptor: (II)Lcom/m3/text/compat/M3Text;\n\n  public com.m3.text.compat.M3Text substring(int);\n    descriptor: (I)Lcom/m3/text/compat/M3Text;\n\n  public com.m3.text.compat.M3Text concat(com.m3.text.compat.M3Text);\n    descriptor: (Lcom/m3/text/compat/M3Text;)Lcom/m3/text/compat/M3Text;\n\n  public char[] toCharArray();\n    descriptor: ()[C\n\n  public void getChars(int, int, char[], int);\n    descriptor: (II[CI)V\n\n  public java.io.Reader asReader();\n    descriptor: ()Ljava/io/Reader;\n\n  public java.lang.String asString();\n    descriptor: ()Ljava/lang/String;\n\n  public java.lang.String toString();\n    descriptor: ()Ljava/lang/String;\n\n  public boolean contentEquals(java.lang.CharSequence);\n    descriptor: (Ljava/lang/CharSequence;)Z\n\n  public boolean equals(java.lang.Object);\n    descriptor: (Ljava/lang/Object;)Z\n\n  public int hashCode();\n    descriptor: ()I\n\n  public int compareTo(com.m3.text.compat.M3Text);\n    descriptor: (Lcom/m3/text/compat/M3Text;)I\n\n  public int codePointAt(int);\n    descriptor: (I)I\n\n  public int codePointBefore(int);\n    descriptor: (I)I\n\n  public int codePointCount(int, int);\n    descriptor: (II)I\n\n  public java.util.stream.IntStream chars();\n    descriptor: ()Ljava/util/stream/IntStream;\n\n  public java.util.stream.IntStream codePoints();\n    descriptor: ()Ljava/util/stream/IntStream;\n\n  public int indexOf(java.lang.String);\n    descriptor: (Ljava/lang/String;)I\n\n  public int indexOf(java.lang.String, int);\n    descriptor: (Ljava/lang/String;I)I\n\n  public int lastIndexOf(java.lang.String);\n    descriptor: (Ljava/lang/String;)I\n\n  public int lastIndexOf(java.lang.String, int);\n    descriptor: (Ljava/lang/String;I)I\n\n  public boolean contains(java.lang.String);\n    descriptor: (Ljava/lang/String;)Z\n\n  public boolean startsWith(java.lang.String);\n    descriptor: (Ljava/lang/String;)Z\n\n  public boolean endsWith(java.lang.String);\n    descriptor: (Ljava/lang/String;)Z\n\n  public java.util.regex.Matcher matcher(java.util.regex.Pattern);\n    descriptor: (Ljava/util/regex/Pattern;)Ljava/util/regex/Matcher;\n\n  public boolean matches(java.lang.String);\n    descriptor: (Ljava/lang/String;)Z\n\n  public java.lang.String replaceAll(java.lang.String, java.lang.String);\n    descriptor: (Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;\n\n  public java.lang.String[] split(java.lang.String, int);\n    descriptor: (Ljava/lang/String;I)[Ljava/lang/String;\n\n  public java.nio.ByteBuffer encode(java.nio.charset.Charset, java.nio.charset.CodingErrorAction, java.nio.charset.CodingErrorAction) throws java.nio.charset.CharacterCodingException;\n    descriptor: (Ljava/nio/charset/Charset;Ljava/nio/charset/CodingErrorAction;Ljava/nio/charset/CodingErrorAction;)Ljava/nio/ByteBuffer;\n\n  public void writeTo(java.lang.Appendable) throws java.io.IOException;\n    descriptor: (Ljava/lang/Appendable;)V\n\n  public java.lang.CharSequence subSequence(int, int);\n    descriptor: (II)Ljava/lang/CharSequence;\n\n  public int compareTo(java.lang.Object);\n    descriptor: (Ljava/lang/Object;)I\n}\n",
+      "stderr": "",
+      "stdout_sha256": "83044220666d841c3bd9e054954bfd237c609b3c8d23c26443809d26b94cad2f",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "publicmaster45:baseline:default",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-Xms32m",
+        "-Xmx256m",
+        "-XX:ActiveProcessorCount=2",
+        "-ea",
+        "-cp",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\publicmaster45\\classes",
+        "com.synexia.indexstring.ExistingSurfaceTest"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "EXISTING_SURFACE_PASS checks=502762 digest=e74d393ffda5aeeb154e70568fc659575c0511803c80847152b4c6740c5a2af1\n",
+      "stderr": "",
+      "stdout_sha256": "679dabfb77ac433556e64228b8f8ad62e9af62c4b37e8821b2368103b3b065fb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "publicmaster45:candidate-existing-bytecode:default",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-Xms32m",
+        "-Xmx256m",
+        "-XX:ActiveProcessorCount=2",
+        "-ea",
+        "-cp",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\publicmaster45\\test-bytecode;S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\classes",
+        "com.synexia.indexstring.ExistingSurfaceTest"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "EXISTING_SURFACE_PASS checks=502762 digest=e74d393ffda5aeeb154e70568fc659575c0511803c80847152b4c6740c5a2af1\n",
+      "stderr": "",
+      "stdout_sha256": "679dabfb77ac433556e64228b8f8ad62e9af62c4b37e8821b2368103b3b065fb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "publicmaster45:baseline:interpreter",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-Xms32m",
+        "-Xmx256m",
+        "-XX:ActiveProcessorCount=2",
+        "-ea",
+        "-Xint",
+        "-cp",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\publicmaster45\\classes",
+        "com.synexia.indexstring.ExistingSurfaceTest"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "EXISTING_SURFACE_PASS checks=502762 digest=e74d393ffda5aeeb154e70568fc659575c0511803c80847152b4c6740c5a2af1\n",
+      "stderr": "",
+      "stdout_sha256": "679dabfb77ac433556e64228b8f8ad62e9af62c4b37e8821b2368103b3b065fb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "id": "publicmaster45:candidate-existing-bytecode:interpreter",
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-Xms32m",
+        "-Xmx256m",
+        "-XX:ActiveProcessorCount=2",
+        "-ea",
+        "-Xint",
+        "-cp",
+        "S:\\codex-scratch\\m3-selected-public-abi-20261002\\publicmaster45\\test-bytecode;S:\\codex-scratch\\m3-selected-public-abi-20261002\\candidate\\classes",
+        "com.synexia.indexstring.ExistingSurfaceTest"
+      ],
+      "cwd": "S:\\codex-scratch\\m3-selected-public-abi-20261002",
+      "exit_code": 0,
+      "stdout": "EXISTING_SURFACE_PASS checks=502762 digest=e74d393ffda5aeeb154e70568fc659575c0511803c80847152b4c6740c5a2af1\n",
+      "stderr": "",
+      "stdout_sha256": "679dabfb77ac433556e64228b8f8ad62e9af62c4b37e8821b2368103b3b065fb",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "comparisons": [
+    {
+      "baseline": "private6df9",
+      "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "symbol": "com.synexia.indexstring.FrozenBytes",
+      "baseline_surface": {
+        "symbol": "com.synexia.indexstring.FrozenBytes",
+        "class_header": "public final class com.synexia.indexstring.FrozenBytes {",
+        "members": [
+          {
+            "kind": "method",
+            "name": "copyOf",
+            "descriptor": "([B)Lcom/synexia/indexstring/FrozenBytes;",
+            "static": true,
+            "declaration": "public static com.synexia.indexstring.FrozenBytes copyOf(byte[]);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "length",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int length();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "retainedBytes",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int retainedBytes();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "isDirect",
+            "descriptor": "()Z",
+            "static": false,
+            "declaration": "public boolean isDirect();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "compact",
+            "descriptor": "()Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenBytes compact();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "hash32",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int hash32();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "byteAt",
+            "descriptor": "(I)B",
+            "static": false,
+            "declaration": "public byte byteAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copy",
+            "descriptor": "()[B",
+            "static": false,
+            "declaration": "public byte[] copy();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "slice",
+            "descriptor": "(II)Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenBytes slice(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copyTo",
+            "descriptor": "(I[BII)V",
+            "static": false,
+            "declaration": "public void copyTo(int, byte[], int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReadOnlyBuffer",
+            "descriptor": "()Ljava/nio/ByteBuffer;",
+            "static": false,
+            "declaration": "public java.nio.ByteBuffer asReadOnlyBuffer();",
+            "throws": []
+          }
+        ]
+      },
+      "candidate_surface": {
+        "symbol": "com.synexia.indexstring.FrozenBytes",
+        "class_header": "public final class com.synexia.indexstring.FrozenBytes {",
+        "members": [
+          {
+            "kind": "method",
+            "name": "copyOf",
+            "descriptor": "([B)Lcom/synexia/indexstring/FrozenBytes;",
+            "static": true,
+            "declaration": "public static com.synexia.indexstring.FrozenBytes copyOf(byte[]);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "length",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int length();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "retainedBytes",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int retainedBytes();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "isDirect",
+            "descriptor": "()Z",
+            "static": false,
+            "declaration": "public boolean isDirect();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "compact",
+            "descriptor": "()Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenBytes compact();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "hash32",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int hash32();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "byteAt",
+            "descriptor": "(I)B",
+            "static": false,
+            "declaration": "public byte byteAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copy",
+            "descriptor": "()[B",
+            "static": false,
+            "declaration": "public byte[] copy();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "slice",
+            "descriptor": "(II)Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenBytes slice(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copyTo",
+            "descriptor": "(I[BII)V",
+            "static": false,
+            "declaration": "public void copyTo(int, byte[], int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReadOnlyBuffer",
+            "descriptor": "()Ljava/nio/ByteBuffer;",
+            "static": false,
+            "declaration": "public java.nio.ByteBuffer asReadOnlyBuffer();",
+            "throws": []
+          }
+        ]
+      },
+      "removed_or_changed_descriptors": [],
+      "additive_members": [],
+      "source_declaration_differences": [],
+      "class_header_unchanged": true
+    },
+    {
+      "baseline": "private6df9",
+      "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "symbol": "com.synexia.indexstring.FrozenChars",
+      "baseline_surface": {
+        "symbol": "com.synexia.indexstring.FrozenChars",
+        "class_header": "public final class com.synexia.indexstring.FrozenChars implements java.lang.CharSequence {",
+        "members": [
+          {
+            "kind": "method",
+            "name": "copyOf",
+            "descriptor": "([C)Lcom/synexia/indexstring/FrozenChars;",
+            "static": true,
+            "declaration": "public static com.synexia.indexstring.FrozenChars copyOf(char[]);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "hash32",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int hash32();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "isDirect",
+            "descriptor": "()Z",
+            "static": false,
+            "declaration": "public boolean isDirect();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "length",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int length();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "charAt",
+            "descriptor": "(I)C",
+            "static": false,
+            "declaration": "public char charAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "subSequence",
+            "descriptor": "(II)Lcom/synexia/indexstring/FrozenChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenChars subSequence(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copy",
+            "descriptor": "()[C",
+            "static": false,
+            "declaration": "public char[] copy();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copyTo",
+            "descriptor": "(I[CII)V",
+            "static": false,
+            "declaration": "public void copyTo(int, char[], int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReadOnlyBuffer",
+            "descriptor": "()Ljava/nio/CharBuffer;",
+            "static": false,
+            "declaration": "public java.nio.CharBuffer asReadOnlyBuffer();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "directUtf16Bytes",
+            "descriptor": "()Ljava/nio/ByteBuffer;",
+            "static": false,
+            "declaration": "public java.nio.ByteBuffer directUtf16Bytes();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "static": false,
+            "declaration": "public java.lang.String toString();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "subSequence",
+            "descriptor": "(II)Ljava/lang/CharSequence;",
+            "static": false,
+            "declaration": "public java.lang.CharSequence subSequence(int, int);",
+            "throws": []
+          }
+        ]
+      },
+      "candidate_surface": {
+        "symbol": "com.synexia.indexstring.FrozenChars",
+        "class_header": "public final class com.synexia.indexstring.FrozenChars implements java.lang.CharSequence {",
+        "members": [
+          {
+            "kind": "method",
+            "name": "copyOf",
+            "descriptor": "([C)Lcom/synexia/indexstring/FrozenChars;",
+            "static": true,
+            "declaration": "public static com.synexia.indexstring.FrozenChars copyOf(char[]);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "fromUtf16Bytes",
+            "descriptor": "(Lcom/synexia/indexstring/FrozenBytes;)Lcom/synexia/indexstring/FrozenChars;",
+            "static": true,
+            "declaration": "public static com.synexia.indexstring.FrozenChars fromUtf16Bytes(com.synexia.indexstring.FrozenBytes);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "hash32",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int hash32();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "isDirect",
+            "descriptor": "()Z",
+            "static": false,
+            "declaration": "public boolean isDirect();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "sharesStorageWith",
+            "descriptor": "(Lcom/synexia/indexstring/FrozenChars;)Z",
+            "static": false,
+            "declaration": "public boolean sharesStorageWith(com.synexia.indexstring.FrozenChars);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "adjacentTo",
+            "descriptor": "(Lcom/synexia/indexstring/FrozenChars;)Z",
+            "static": false,
+            "declaration": "public boolean adjacentTo(com.synexia.indexstring.FrozenChars);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "coalesce",
+            "descriptor": "(Lcom/synexia/indexstring/FrozenChars;)Lcom/synexia/indexstring/FrozenChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenChars coalesce(com.synexia.indexstring.FrozenChars);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "retainedBytes",
+            "descriptor": "()J",
+            "static": false,
+            "declaration": "public long retainedBytes();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "length",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int length();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "charAt",
+            "descriptor": "(I)C",
+            "static": false,
+            "declaration": "public char charAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "subSequence",
+            "descriptor": "(II)Lcom/synexia/indexstring/FrozenChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenChars subSequence(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copy",
+            "descriptor": "()[C",
+            "static": false,
+            "declaration": "public char[] copy();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copyTo",
+            "descriptor": "(I[CII)V",
+            "static": false,
+            "declaration": "public void copyTo(int, char[], int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReadOnlyBuffer",
+            "descriptor": "()Ljava/nio/CharBuffer;",
+            "static": false,
+            "declaration": "public java.nio.CharBuffer asReadOnlyBuffer();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "directUtf16Bytes",
+            "descriptor": "()Ljava/nio/ByteBuffer;",
+            "static": false,
+            "declaration": "public java.nio.ByteBuffer directUtf16Bytes();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "static": false,
+            "declaration": "public java.lang.String toString();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "subSequence",
+            "descriptor": "(II)Ljava/lang/CharSequence;",
+            "static": false,
+            "declaration": "public java.lang.CharSequence subSequence(int, int);",
+            "throws": []
+          }
+        ]
+      },
+      "removed_or_changed_descriptors": [],
+      "additive_members": [
+        {
+          "kind": "method",
+          "name": "adjacentTo",
+          "descriptor": "(Lcom/synexia/indexstring/FrozenChars;)Z",
+          "static": false,
+          "declaration": "public boolean adjacentTo(com.synexia.indexstring.FrozenChars);",
+          "throws": []
+        },
+        {
+          "kind": "method",
+          "name": "coalesce",
+          "descriptor": "(Lcom/synexia/indexstring/FrozenChars;)Lcom/synexia/indexstring/FrozenChars;",
+          "static": false,
+          "declaration": "public com.synexia.indexstring.FrozenChars coalesce(com.synexia.indexstring.FrozenChars);",
+          "throws": []
+        },
+        {
+          "kind": "method",
+          "name": "fromUtf16Bytes",
+          "descriptor": "(Lcom/synexia/indexstring/FrozenBytes;)Lcom/synexia/indexstring/FrozenChars;",
+          "static": true,
+          "declaration": "public static com.synexia.indexstring.FrozenChars fromUtf16Bytes(com.synexia.indexstring.FrozenBytes);",
+          "throws": []
+        },
+        {
+          "kind": "method",
+          "name": "retainedBytes",
+          "descriptor": "()J",
+          "static": false,
+          "declaration": "public long retainedBytes();",
+          "throws": []
+        },
+        {
+          "kind": "method",
+          "name": "sharesStorageWith",
+          "descriptor": "(Lcom/synexia/indexstring/FrozenChars;)Z",
+          "static": false,
+          "declaration": "public boolean sharesStorageWith(com.synexia.indexstring.FrozenChars);",
+          "throws": []
+        }
+      ],
+      "source_declaration_differences": [],
+      "class_header_unchanged": true
+    },
+    {
+      "baseline": "private6df9",
+      "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "symbol": "com.synexia.indexstring.FrozenByteInterner",
+      "baseline_surface": {
+        "symbol": "com.synexia.indexstring.FrozenByteInterner",
+        "class_header": "public final class com.synexia.indexstring.FrozenByteInterner {",
+        "members": [
+          {
+            "kind": "method",
+            "name": "<init>",
+            "descriptor": "(IJ)V",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenByteInterner(int, long);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "intern",
+            "descriptor": "([B)Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public synchronized com.synexia.indexstring.FrozenBytes intern(byte[]);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "internFrozen",
+            "descriptor": "(Lcom/synexia/indexstring/FrozenBytes;)Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public synchronized com.synexia.indexstring.FrozenBytes internFrozen(com.synexia.indexstring.FrozenBytes);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "intern",
+            "descriptor": "(Ljava/lang/String;Ljava/nio/charset/Charset;)Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public synchronized com.synexia.indexstring.FrozenBytes intern(java.lang.String, java.nio.charset.Charset);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "payloadBytes",
+            "descriptor": "()J",
+            "static": false,
+            "declaration": "public synchronized long payloadBytes();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "size",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public synchronized int size();",
+            "throws": []
+          }
+        ]
+      },
+      "candidate_surface": {
+        "symbol": "com.synexia.indexstring.FrozenByteInterner",
+        "class_header": "public final class com.synexia.indexstring.FrozenByteInterner {",
+        "members": [
+          {
+            "kind": "method",
+            "name": "<init>",
+            "descriptor": "(IJ)V",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenByteInterner(int, long);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "intern",
+            "descriptor": "([B)Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public synchronized com.synexia.indexstring.FrozenBytes intern(byte[]);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "internFrozen",
+            "descriptor": "(Lcom/synexia/indexstring/FrozenBytes;)Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public synchronized com.synexia.indexstring.FrozenBytes internFrozen(com.synexia.indexstring.FrozenBytes);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "intern",
+            "descriptor": "(Ljava/lang/String;Ljava/nio/charset/Charset;)Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public synchronized com.synexia.indexstring.FrozenBytes intern(java.lang.String, java.nio.charset.Charset);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "payloadBytes",
+            "descriptor": "()J",
+            "static": false,
+            "declaration": "public synchronized long payloadBytes();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "size",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public synchronized int size();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "internUtf16",
+            "descriptor": "(Ljava/lang/String;)Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public synchronized com.synexia.indexstring.FrozenBytes internUtf16(java.lang.String);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "clear",
+            "descriptor": "()V",
+            "static": false,
+            "declaration": "public synchronized void clear();",
+            "throws": []
+          }
+        ]
+      },
+      "removed_or_changed_descriptors": [],
+      "additive_members": [
+        {
+          "kind": "method",
+          "name": "clear",
+          "descriptor": "()V",
+          "static": false,
+          "declaration": "public synchronized void clear();",
+          "throws": []
+        },
+        {
+          "kind": "method",
+          "name": "internUtf16",
+          "descriptor": "(Ljava/lang/String;)Lcom/synexia/indexstring/FrozenBytes;",
+          "static": false,
+          "declaration": "public synchronized com.synexia.indexstring.FrozenBytes internUtf16(java.lang.String);",
+          "throws": []
+        }
+      ],
+      "source_declaration_differences": [],
+      "class_header_unchanged": true
+    },
+    {
+      "baseline": "private6df9",
+      "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "symbol": "com.synexia.indexstring.MIndexJoinedBytes",
+      "baseline_surface": {
+        "symbol": "com.synexia.indexstring.MIndexJoinedBytes",
+        "class_header": "public final class com.synexia.indexstring.MIndexJoinedBytes {",
+        "members": [
+          {
+            "kind": "method",
+            "name": "of",
+            "descriptor": "([Lcom/synexia/indexstring/FrozenBytes;)Lcom/synexia/indexstring/MIndexJoinedBytes;",
+            "static": true,
+            "declaration": "public static com.synexia.indexstring.MIndexJoinedBytes of(com.synexia.indexstring.FrozenBytes...);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "canonicalBackingId",
+            "descriptor": "()J",
+            "static": false,
+            "declaration": "public long canonicalBackingId();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "sharesBackingWith",
+            "descriptor": "(Lcom/synexia/indexstring/MIndexJoinedBytes;)Z",
+            "static": false,
+            "declaration": "public boolean sharesBackingWith(com.synexia.indexstring.MIndexJoinedBytes);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "length",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int length();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "byteAt",
+            "descriptor": "(I)B",
+            "static": false,
+            "declaration": "public byte byteAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "slice",
+            "descriptor": "(II)Lcom/synexia/indexstring/MIndexJoinedBytes;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.MIndexJoinedBytes slice(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copy",
+            "descriptor": "()[B",
+            "static": false,
+            "declaration": "public byte[] copy();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "detach",
+            "descriptor": "()Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenBytes detach();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReadOnlyBuffers",
+            "descriptor": "()[Ljava/nio/ByteBuffer;",
+            "static": false,
+            "declaration": "public java.nio.ByteBuffer[] asReadOnlyBuffers();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asInputStream",
+            "descriptor": "()Ljava/io/InputStream;",
+            "static": false,
+            "declaration": "public java.io.InputStream asInputStream();",
+            "throws": []
+          }
+        ]
+      },
+      "candidate_surface": {
+        "symbol": "com.synexia.indexstring.MIndexJoinedBytes",
+        "class_header": "public final class com.synexia.indexstring.MIndexJoinedBytes {",
+        "members": [
+          {
+            "kind": "method",
+            "name": "of",
+            "descriptor": "([Lcom/synexia/indexstring/FrozenBytes;)Lcom/synexia/indexstring/MIndexJoinedBytes;",
+            "static": true,
+            "declaration": "public static com.synexia.indexstring.MIndexJoinedBytes of(com.synexia.indexstring.FrozenBytes...);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "canonicalBackingId",
+            "descriptor": "()J",
+            "static": false,
+            "declaration": "public long canonicalBackingId();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "sharesBackingWith",
+            "descriptor": "(Lcom/synexia/indexstring/MIndexJoinedBytes;)Z",
+            "static": false,
+            "declaration": "public boolean sharesBackingWith(com.synexia.indexstring.MIndexJoinedBytes);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "length",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int length();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "byteAt",
+            "descriptor": "(I)B",
+            "static": false,
+            "declaration": "public byte byteAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "slice",
+            "descriptor": "(II)Lcom/synexia/indexstring/MIndexJoinedBytes;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.MIndexJoinedBytes slice(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copy",
+            "descriptor": "()[B",
+            "static": false,
+            "declaration": "public byte[] copy();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "detach",
+            "descriptor": "()Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenBytes detach();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReadOnlyBuffers",
+            "descriptor": "()[Ljava/nio/ByteBuffer;",
+            "static": false,
+            "declaration": "public java.nio.ByteBuffer[] asReadOnlyBuffers();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asInputStream",
+            "descriptor": "()Ljava/io/InputStream;",
+            "static": false,
+            "declaration": "public java.io.InputStream asInputStream();",
+            "throws": []
+          }
+        ]
+      },
+      "removed_or_changed_descriptors": [],
+      "additive_members": [],
+      "source_declaration_differences": [],
+      "class_header_unchanged": true
+    },
+    {
+      "baseline": "private6df9",
+      "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "symbol": "com.synexia.indexstring.MIndexJoinedChars",
+      "baseline_surface": {
+        "symbol": "com.synexia.indexstring.MIndexJoinedChars",
+        "class_header": "public final class com.synexia.indexstring.MIndexJoinedChars implements java.lang.CharSequence {",
+        "members": [
+          {
+            "kind": "method",
+            "name": "of",
+            "descriptor": "([Lcom/synexia/indexstring/FrozenChars;)Lcom/synexia/indexstring/MIndexJoinedChars;",
+            "static": true,
+            "declaration": "public static com.synexia.indexstring.MIndexJoinedChars of(com.synexia.indexstring.FrozenChars...);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "canonicalBackingId",
+            "descriptor": "()J",
+            "static": false,
+            "declaration": "public long canonicalBackingId();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "sharesBackingWith",
+            "descriptor": "(Lcom/synexia/indexstring/MIndexJoinedChars;)Z",
+            "static": false,
+            "declaration": "public boolean sharesBackingWith(com.synexia.indexstring.MIndexJoinedChars);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "length",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int length();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "charAt",
+            "descriptor": "(I)C",
+            "static": false,
+            "declaration": "public char charAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "subSequence",
+            "descriptor": "(II)Lcom/synexia/indexstring/MIndexJoinedChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.MIndexJoinedChars subSequence(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "codePointAt",
+            "descriptor": "(I)I",
+            "static": false,
+            "declaration": "public int codePointAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "codePointCount",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int codePointCount();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copy",
+            "descriptor": "()[C",
+            "static": false,
+            "declaration": "public char[] copy();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "detach",
+            "descriptor": "()Lcom/synexia/indexstring/FrozenChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenChars detach();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "encode",
+            "descriptor": "(Ljava/nio/charset/Charset;)Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenBytes encode(java.nio.charset.Charset);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReadOnlyBuffers",
+            "descriptor": "()[Ljava/nio/CharBuffer;",
+            "static": false,
+            "declaration": "public java.nio.CharBuffer[] asReadOnlyBuffers();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "directUtf16Buffers",
+            "descriptor": "()[Ljava/nio/ByteBuffer;",
+            "static": false,
+            "declaration": "public java.nio.ByteBuffer[] directUtf16Buffers();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "static": false,
+            "declaration": "public java.lang.String toString();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReader",
+            "descriptor": "()Ljava/io/Reader;",
+            "static": false,
+            "declaration": "public java.io.Reader asReader();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "subSequence",
+            "descriptor": "(II)Ljava/lang/CharSequence;",
+            "static": false,
+            "declaration": "public java.lang.CharSequence subSequence(int, int);",
+            "throws": []
+          }
+        ]
+      },
+      "candidate_surface": {
+        "symbol": "com.synexia.indexstring.MIndexJoinedChars",
+        "class_header": "public final class com.synexia.indexstring.MIndexJoinedChars implements java.lang.CharSequence {",
+        "members": [
+          {
+            "kind": "method",
+            "name": "of",
+            "descriptor": "([Lcom/synexia/indexstring/FrozenChars;)Lcom/synexia/indexstring/MIndexJoinedChars;",
+            "static": true,
+            "declaration": "public static com.synexia.indexstring.MIndexJoinedChars of(com.synexia.indexstring.FrozenChars...);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "ofUncached",
+            "descriptor": "([Lcom/synexia/indexstring/FrozenChars;)Lcom/synexia/indexstring/MIndexJoinedChars;",
+            "static": true,
+            "declaration": "public static com.synexia.indexstring.MIndexJoinedChars ofUncached(com.synexia.indexstring.FrozenChars...);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "canonicalBackingId",
+            "descriptor": "()J",
+            "static": false,
+            "declaration": "public long canonicalBackingId();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "sharesBackingWith",
+            "descriptor": "(Lcom/synexia/indexstring/MIndexJoinedChars;)Z",
+            "static": false,
+            "declaration": "public boolean sharesBackingWith(com.synexia.indexstring.MIndexJoinedChars);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "frozenSegments",
+            "descriptor": "()[Lcom/synexia/indexstring/FrozenChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenChars[] frozenSegments();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "length",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int length();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "charAt",
+            "descriptor": "(I)C",
+            "static": false,
+            "declaration": "public char charAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "subSequence",
+            "descriptor": "(II)Lcom/synexia/indexstring/MIndexJoinedChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.MIndexJoinedChars subSequence(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "codePointAt",
+            "descriptor": "(I)I",
+            "static": false,
+            "declaration": "public int codePointAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "codePointCount",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int codePointCount();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copy",
+            "descriptor": "()[C",
+            "static": false,
+            "declaration": "public char[] copy();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "concat",
+            "descriptor": "(Lcom/synexia/indexstring/MIndexJoinedChars;)Lcom/synexia/indexstring/MIndexJoinedChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.MIndexJoinedChars concat(com.synexia.indexstring.MIndexJoinedChars);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copyTo",
+            "descriptor": "(I[CII)V",
+            "static": false,
+            "declaration": "public void copyTo(int, char[], int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "detach",
+            "descriptor": "()Lcom/synexia/indexstring/FrozenChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenChars detach();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "encode",
+            "descriptor": "(Ljava/nio/charset/Charset;)Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenBytes encode(java.nio.charset.Charset);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copyEncoded",
+            "descriptor": "(Ljava/nio/charset/Charset;)[B",
+            "static": false,
+            "declaration": "public byte[] copyEncoded(java.nio.charset.Charset);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReadOnlyBuffers",
+            "descriptor": "()[Ljava/nio/CharBuffer;",
+            "static": false,
+            "declaration": "public java.nio.CharBuffer[] asReadOnlyBuffers();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "directUtf16Buffers",
+            "descriptor": "()[Ljava/nio/ByteBuffer;",
+            "static": false,
+            "declaration": "public java.nio.ByteBuffer[] directUtf16Buffers();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "static": false,
+            "declaration": "public java.lang.String toString();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReader",
+            "descriptor": "()Ljava/io/Reader;",
+            "static": false,
+            "declaration": "public java.io.Reader asReader();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "subSequence",
+            "descriptor": "(II)Ljava/lang/CharSequence;",
+            "static": false,
+            "declaration": "public java.lang.CharSequence subSequence(int, int);",
+            "throws": []
+          }
+        ]
+      },
+      "removed_or_changed_descriptors": [],
+      "additive_members": [
+        {
+          "kind": "method",
+          "name": "concat",
+          "descriptor": "(Lcom/synexia/indexstring/MIndexJoinedChars;)Lcom/synexia/indexstring/MIndexJoinedChars;",
+          "static": false,
+          "declaration": "public com.synexia.indexstring.MIndexJoinedChars concat(com.synexia.indexstring.MIndexJoinedChars);",
+          "throws": []
+        },
+        {
+          "kind": "method",
+          "name": "copyEncoded",
+          "descriptor": "(Ljava/nio/charset/Charset;)[B",
+          "static": false,
+          "declaration": "public byte[] copyEncoded(java.nio.charset.Charset);",
+          "throws": []
+        },
+        {
+          "kind": "method",
+          "name": "copyTo",
+          "descriptor": "(I[CII)V",
+          "static": false,
+          "declaration": "public void copyTo(int, char[], int, int);",
+          "throws": []
+        },
+        {
+          "kind": "method",
+          "name": "frozenSegments",
+          "descriptor": "()[Lcom/synexia/indexstring/FrozenChars;",
+          "static": false,
+          "declaration": "public com.synexia.indexstring.FrozenChars[] frozenSegments();",
+          "throws": []
+        },
+        {
+          "kind": "method",
+          "name": "ofUncached",
+          "descriptor": "([Lcom/synexia/indexstring/FrozenChars;)Lcom/synexia/indexstring/MIndexJoinedChars;",
+          "static": true,
+          "declaration": "public static com.synexia.indexstring.MIndexJoinedChars ofUncached(com.synexia.indexstring.FrozenChars...);",
+          "throws": []
+        }
+      ],
+      "source_declaration_differences": [],
+      "class_header_unchanged": true
+    },
+    {
+      "baseline": "private6df9",
+      "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "symbol": "com.synexia.indexstring.MIndexJoinedStorageIntern",
+      "baseline_surface": {
+        "symbol": "com.synexia.indexstring.MIndexJoinedStorageIntern",
+        "class_header": "final class com.synexia.indexstring.MIndexJoinedStorageIntern {",
+        "members": []
+      },
+      "candidate_surface": {
+        "symbol": "com.synexia.indexstring.MIndexJoinedStorageIntern",
+        "class_header": "final class com.synexia.indexstring.MIndexJoinedStorageIntern {",
+        "members": []
+      },
+      "removed_or_changed_descriptors": [],
+      "additive_members": [],
+      "source_declaration_differences": [],
+      "class_header_unchanged": true
+    },
+    {
+      "baseline": "private6df9",
+      "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "symbol": "com.synexia.indexstring.MIndexJoinedStreams",
+      "baseline_surface": {
+        "symbol": "com.synexia.indexstring.MIndexJoinedStreams",
+        "class_header": "final class com.synexia.indexstring.MIndexJoinedStreams {",
+        "members": []
+      },
+      "candidate_surface": {
+        "symbol": "com.synexia.indexstring.MIndexJoinedStreams",
+        "class_header": "final class com.synexia.indexstring.MIndexJoinedStreams {",
+        "members": []
+      },
+      "removed_or_changed_descriptors": [],
+      "additive_members": [],
+      "source_declaration_differences": [],
+      "class_header_unchanged": true
+    },
+    {
+      "baseline": "publicmaster45",
+      "commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+      "symbol": "com.synexia.indexstring.FrozenBytes",
+      "baseline_surface": {
+        "symbol": "com.synexia.indexstring.FrozenBytes",
+        "class_header": "public final class com.synexia.indexstring.FrozenBytes {",
+        "members": [
+          {
+            "kind": "method",
+            "name": "copyOf",
+            "descriptor": "([B)Lcom/synexia/indexstring/FrozenBytes;",
+            "static": true,
+            "declaration": "public static com.synexia.indexstring.FrozenBytes copyOf(byte[]);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "length",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int length();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "retainedBytes",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int retainedBytes();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "isDirect",
+            "descriptor": "()Z",
+            "static": false,
+            "declaration": "public boolean isDirect();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "compact",
+            "descriptor": "()Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenBytes compact();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "hash32",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int hash32();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "byteAt",
+            "descriptor": "(I)B",
+            "static": false,
+            "declaration": "public byte byteAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copy",
+            "descriptor": "()[B",
+            "static": false,
+            "declaration": "public byte[] copy();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "slice",
+            "descriptor": "(II)Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenBytes slice(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copyTo",
+            "descriptor": "(I[BII)V",
+            "static": false,
+            "declaration": "public void copyTo(int, byte[], int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReadOnlyBuffer",
+            "descriptor": "()Ljava/nio/ByteBuffer;",
+            "static": false,
+            "declaration": "public java.nio.ByteBuffer asReadOnlyBuffer();",
+            "throws": []
+          }
+        ]
+      },
+      "candidate_surface": {
+        "symbol": "com.synexia.indexstring.FrozenBytes",
+        "class_header": "public final class com.synexia.indexstring.FrozenBytes {",
+        "members": [
+          {
+            "kind": "method",
+            "name": "copyOf",
+            "descriptor": "([B)Lcom/synexia/indexstring/FrozenBytes;",
+            "static": true,
+            "declaration": "public static com.synexia.indexstring.FrozenBytes copyOf(byte[]);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "length",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int length();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "retainedBytes",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int retainedBytes();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "isDirect",
+            "descriptor": "()Z",
+            "static": false,
+            "declaration": "public boolean isDirect();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "compact",
+            "descriptor": "()Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenBytes compact();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "hash32",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int hash32();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "byteAt",
+            "descriptor": "(I)B",
+            "static": false,
+            "declaration": "public byte byteAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copy",
+            "descriptor": "()[B",
+            "static": false,
+            "declaration": "public byte[] copy();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "slice",
+            "descriptor": "(II)Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenBytes slice(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copyTo",
+            "descriptor": "(I[BII)V",
+            "static": false,
+            "declaration": "public void copyTo(int, byte[], int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReadOnlyBuffer",
+            "descriptor": "()Ljava/nio/ByteBuffer;",
+            "static": false,
+            "declaration": "public java.nio.ByteBuffer asReadOnlyBuffer();",
+            "throws": []
+          }
+        ]
+      },
+      "removed_or_changed_descriptors": [],
+      "additive_members": [],
+      "source_declaration_differences": [],
+      "class_header_unchanged": true
+    },
+    {
+      "baseline": "publicmaster45",
+      "commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+      "symbol": "com.synexia.indexstring.FrozenChars",
+      "baseline_surface": {
+        "symbol": "com.synexia.indexstring.FrozenChars",
+        "class_header": "public final class com.synexia.indexstring.FrozenChars implements java.lang.CharSequence {",
+        "members": [
+          {
+            "kind": "method",
+            "name": "copyOf",
+            "descriptor": "([C)Lcom/synexia/indexstring/FrozenChars;",
+            "static": true,
+            "declaration": "public static com.synexia.indexstring.FrozenChars copyOf(char[]);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "hash32",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int hash32();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "isDirect",
+            "descriptor": "()Z",
+            "static": false,
+            "declaration": "public boolean isDirect();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "length",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int length();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "charAt",
+            "descriptor": "(I)C",
+            "static": false,
+            "declaration": "public char charAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "subSequence",
+            "descriptor": "(II)Lcom/synexia/indexstring/FrozenChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenChars subSequence(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copy",
+            "descriptor": "()[C",
+            "static": false,
+            "declaration": "public char[] copy();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copyTo",
+            "descriptor": "(I[CII)V",
+            "static": false,
+            "declaration": "public void copyTo(int, char[], int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReadOnlyBuffer",
+            "descriptor": "()Ljava/nio/CharBuffer;",
+            "static": false,
+            "declaration": "public java.nio.CharBuffer asReadOnlyBuffer();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "directUtf16Bytes",
+            "descriptor": "()Ljava/nio/ByteBuffer;",
+            "static": false,
+            "declaration": "public java.nio.ByteBuffer directUtf16Bytes();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "static": false,
+            "declaration": "public java.lang.String toString();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "subSequence",
+            "descriptor": "(II)Ljava/lang/CharSequence;",
+            "static": false,
+            "declaration": "public java.lang.CharSequence subSequence(int, int);",
+            "throws": []
+          }
+        ]
+      },
+      "candidate_surface": {
+        "symbol": "com.synexia.indexstring.FrozenChars",
+        "class_header": "public final class com.synexia.indexstring.FrozenChars implements java.lang.CharSequence {",
+        "members": [
+          {
+            "kind": "method",
+            "name": "copyOf",
+            "descriptor": "([C)Lcom/synexia/indexstring/FrozenChars;",
+            "static": true,
+            "declaration": "public static com.synexia.indexstring.FrozenChars copyOf(char[]);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "fromUtf16Bytes",
+            "descriptor": "(Lcom/synexia/indexstring/FrozenBytes;)Lcom/synexia/indexstring/FrozenChars;",
+            "static": true,
+            "declaration": "public static com.synexia.indexstring.FrozenChars fromUtf16Bytes(com.synexia.indexstring.FrozenBytes);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "hash32",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int hash32();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "isDirect",
+            "descriptor": "()Z",
+            "static": false,
+            "declaration": "public boolean isDirect();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "sharesStorageWith",
+            "descriptor": "(Lcom/synexia/indexstring/FrozenChars;)Z",
+            "static": false,
+            "declaration": "public boolean sharesStorageWith(com.synexia.indexstring.FrozenChars);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "adjacentTo",
+            "descriptor": "(Lcom/synexia/indexstring/FrozenChars;)Z",
+            "static": false,
+            "declaration": "public boolean adjacentTo(com.synexia.indexstring.FrozenChars);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "coalesce",
+            "descriptor": "(Lcom/synexia/indexstring/FrozenChars;)Lcom/synexia/indexstring/FrozenChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenChars coalesce(com.synexia.indexstring.FrozenChars);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "retainedBytes",
+            "descriptor": "()J",
+            "static": false,
+            "declaration": "public long retainedBytes();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "length",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int length();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "charAt",
+            "descriptor": "(I)C",
+            "static": false,
+            "declaration": "public char charAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "subSequence",
+            "descriptor": "(II)Lcom/synexia/indexstring/FrozenChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenChars subSequence(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copy",
+            "descriptor": "()[C",
+            "static": false,
+            "declaration": "public char[] copy();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copyTo",
+            "descriptor": "(I[CII)V",
+            "static": false,
+            "declaration": "public void copyTo(int, char[], int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReadOnlyBuffer",
+            "descriptor": "()Ljava/nio/CharBuffer;",
+            "static": false,
+            "declaration": "public java.nio.CharBuffer asReadOnlyBuffer();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "directUtf16Bytes",
+            "descriptor": "()Ljava/nio/ByteBuffer;",
+            "static": false,
+            "declaration": "public java.nio.ByteBuffer directUtf16Bytes();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "static": false,
+            "declaration": "public java.lang.String toString();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "subSequence",
+            "descriptor": "(II)Ljava/lang/CharSequence;",
+            "static": false,
+            "declaration": "public java.lang.CharSequence subSequence(int, int);",
+            "throws": []
+          }
+        ]
+      },
+      "removed_or_changed_descriptors": [],
+      "additive_members": [
+        {
+          "kind": "method",
+          "name": "adjacentTo",
+          "descriptor": "(Lcom/synexia/indexstring/FrozenChars;)Z",
+          "static": false,
+          "declaration": "public boolean adjacentTo(com.synexia.indexstring.FrozenChars);",
+          "throws": []
+        },
+        {
+          "kind": "method",
+          "name": "coalesce",
+          "descriptor": "(Lcom/synexia/indexstring/FrozenChars;)Lcom/synexia/indexstring/FrozenChars;",
+          "static": false,
+          "declaration": "public com.synexia.indexstring.FrozenChars coalesce(com.synexia.indexstring.FrozenChars);",
+          "throws": []
+        },
+        {
+          "kind": "method",
+          "name": "fromUtf16Bytes",
+          "descriptor": "(Lcom/synexia/indexstring/FrozenBytes;)Lcom/synexia/indexstring/FrozenChars;",
+          "static": true,
+          "declaration": "public static com.synexia.indexstring.FrozenChars fromUtf16Bytes(com.synexia.indexstring.FrozenBytes);",
+          "throws": []
+        },
+        {
+          "kind": "method",
+          "name": "retainedBytes",
+          "descriptor": "()J",
+          "static": false,
+          "declaration": "public long retainedBytes();",
+          "throws": []
+        },
+        {
+          "kind": "method",
+          "name": "sharesStorageWith",
+          "descriptor": "(Lcom/synexia/indexstring/FrozenChars;)Z",
+          "static": false,
+          "declaration": "public boolean sharesStorageWith(com.synexia.indexstring.FrozenChars);",
+          "throws": []
+        }
+      ],
+      "source_declaration_differences": [],
+      "class_header_unchanged": true
+    },
+    {
+      "baseline": "publicmaster45",
+      "commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+      "symbol": "com.synexia.indexstring.MIndexJoinedBytes",
+      "baseline_surface": {
+        "symbol": "com.synexia.indexstring.MIndexJoinedBytes",
+        "class_header": "public final class com.synexia.indexstring.MIndexJoinedBytes {",
+        "members": [
+          {
+            "kind": "method",
+            "name": "of",
+            "descriptor": "([Lcom/synexia/indexstring/FrozenBytes;)Lcom/synexia/indexstring/MIndexJoinedBytes;",
+            "static": true,
+            "declaration": "public static com.synexia.indexstring.MIndexJoinedBytes of(com.synexia.indexstring.FrozenBytes...);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "canonicalBackingId",
+            "descriptor": "()J",
+            "static": false,
+            "declaration": "public long canonicalBackingId();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "sharesBackingWith",
+            "descriptor": "(Lcom/synexia/indexstring/MIndexJoinedBytes;)Z",
+            "static": false,
+            "declaration": "public boolean sharesBackingWith(com.synexia.indexstring.MIndexJoinedBytes);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "length",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int length();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "byteAt",
+            "descriptor": "(I)B",
+            "static": false,
+            "declaration": "public byte byteAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "slice",
+            "descriptor": "(II)Lcom/synexia/indexstring/MIndexJoinedBytes;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.MIndexJoinedBytes slice(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copy",
+            "descriptor": "()[B",
+            "static": false,
+            "declaration": "public byte[] copy();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "detach",
+            "descriptor": "()Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenBytes detach();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReadOnlyBuffers",
+            "descriptor": "()[Ljava/nio/ByteBuffer;",
+            "static": false,
+            "declaration": "public java.nio.ByteBuffer[] asReadOnlyBuffers();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asInputStream",
+            "descriptor": "()Ljava/io/InputStream;",
+            "static": false,
+            "declaration": "public java.io.InputStream asInputStream();",
+            "throws": []
+          }
+        ]
+      },
+      "candidate_surface": {
+        "symbol": "com.synexia.indexstring.MIndexJoinedBytes",
+        "class_header": "public final class com.synexia.indexstring.MIndexJoinedBytes {",
+        "members": [
+          {
+            "kind": "method",
+            "name": "of",
+            "descriptor": "([Lcom/synexia/indexstring/FrozenBytes;)Lcom/synexia/indexstring/MIndexJoinedBytes;",
+            "static": true,
+            "declaration": "public static com.synexia.indexstring.MIndexJoinedBytes of(com.synexia.indexstring.FrozenBytes...);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "canonicalBackingId",
+            "descriptor": "()J",
+            "static": false,
+            "declaration": "public long canonicalBackingId();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "sharesBackingWith",
+            "descriptor": "(Lcom/synexia/indexstring/MIndexJoinedBytes;)Z",
+            "static": false,
+            "declaration": "public boolean sharesBackingWith(com.synexia.indexstring.MIndexJoinedBytes);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "length",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int length();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "byteAt",
+            "descriptor": "(I)B",
+            "static": false,
+            "declaration": "public byte byteAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "slice",
+            "descriptor": "(II)Lcom/synexia/indexstring/MIndexJoinedBytes;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.MIndexJoinedBytes slice(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copy",
+            "descriptor": "()[B",
+            "static": false,
+            "declaration": "public byte[] copy();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "detach",
+            "descriptor": "()Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenBytes detach();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReadOnlyBuffers",
+            "descriptor": "()[Ljava/nio/ByteBuffer;",
+            "static": false,
+            "declaration": "public java.nio.ByteBuffer[] asReadOnlyBuffers();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asInputStream",
+            "descriptor": "()Ljava/io/InputStream;",
+            "static": false,
+            "declaration": "public java.io.InputStream asInputStream();",
+            "throws": []
+          }
+        ]
+      },
+      "removed_or_changed_descriptors": [],
+      "additive_members": [],
+      "source_declaration_differences": [],
+      "class_header_unchanged": true
+    },
+    {
+      "baseline": "publicmaster45",
+      "commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+      "symbol": "com.synexia.indexstring.MIndexJoinedChars",
+      "baseline_surface": {
+        "symbol": "com.synexia.indexstring.MIndexJoinedChars",
+        "class_header": "public final class com.synexia.indexstring.MIndexJoinedChars implements java.lang.CharSequence {",
+        "members": [
+          {
+            "kind": "method",
+            "name": "of",
+            "descriptor": "([Lcom/synexia/indexstring/FrozenChars;)Lcom/synexia/indexstring/MIndexJoinedChars;",
+            "static": true,
+            "declaration": "public static com.synexia.indexstring.MIndexJoinedChars of(com.synexia.indexstring.FrozenChars...);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "canonicalBackingId",
+            "descriptor": "()J",
+            "static": false,
+            "declaration": "public long canonicalBackingId();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "sharesBackingWith",
+            "descriptor": "(Lcom/synexia/indexstring/MIndexJoinedChars;)Z",
+            "static": false,
+            "declaration": "public boolean sharesBackingWith(com.synexia.indexstring.MIndexJoinedChars);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "length",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int length();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "charAt",
+            "descriptor": "(I)C",
+            "static": false,
+            "declaration": "public char charAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "subSequence",
+            "descriptor": "(II)Lcom/synexia/indexstring/MIndexJoinedChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.MIndexJoinedChars subSequence(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "codePointAt",
+            "descriptor": "(I)I",
+            "static": false,
+            "declaration": "public int codePointAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "codePointCount",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int codePointCount();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copy",
+            "descriptor": "()[C",
+            "static": false,
+            "declaration": "public char[] copy();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "concat",
+            "descriptor": "(Lcom/synexia/indexstring/MIndexJoinedChars;)Lcom/synexia/indexstring/MIndexJoinedChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.MIndexJoinedChars concat(com.synexia.indexstring.MIndexJoinedChars);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copyTo",
+            "descriptor": "(I[CII)V",
+            "static": false,
+            "declaration": "public void copyTo(int, char[], int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "detach",
+            "descriptor": "()Lcom/synexia/indexstring/FrozenChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenChars detach();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "encode",
+            "descriptor": "(Ljava/nio/charset/Charset;)Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenBytes encode(java.nio.charset.Charset);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReadOnlyBuffers",
+            "descriptor": "()[Ljava/nio/CharBuffer;",
+            "static": false,
+            "declaration": "public java.nio.CharBuffer[] asReadOnlyBuffers();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "directUtf16Buffers",
+            "descriptor": "()[Ljava/nio/ByteBuffer;",
+            "static": false,
+            "declaration": "public java.nio.ByteBuffer[] directUtf16Buffers();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "static": false,
+            "declaration": "public java.lang.String toString();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReader",
+            "descriptor": "()Ljava/io/Reader;",
+            "static": false,
+            "declaration": "public java.io.Reader asReader();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "subSequence",
+            "descriptor": "(II)Ljava/lang/CharSequence;",
+            "static": false,
+            "declaration": "public java.lang.CharSequence subSequence(int, int);",
+            "throws": []
+          }
+        ]
+      },
+      "candidate_surface": {
+        "symbol": "com.synexia.indexstring.MIndexJoinedChars",
+        "class_header": "public final class com.synexia.indexstring.MIndexJoinedChars implements java.lang.CharSequence {",
+        "members": [
+          {
+            "kind": "method",
+            "name": "of",
+            "descriptor": "([Lcom/synexia/indexstring/FrozenChars;)Lcom/synexia/indexstring/MIndexJoinedChars;",
+            "static": true,
+            "declaration": "public static com.synexia.indexstring.MIndexJoinedChars of(com.synexia.indexstring.FrozenChars...);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "ofUncached",
+            "descriptor": "([Lcom/synexia/indexstring/FrozenChars;)Lcom/synexia/indexstring/MIndexJoinedChars;",
+            "static": true,
+            "declaration": "public static com.synexia.indexstring.MIndexJoinedChars ofUncached(com.synexia.indexstring.FrozenChars...);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "canonicalBackingId",
+            "descriptor": "()J",
+            "static": false,
+            "declaration": "public long canonicalBackingId();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "sharesBackingWith",
+            "descriptor": "(Lcom/synexia/indexstring/MIndexJoinedChars;)Z",
+            "static": false,
+            "declaration": "public boolean sharesBackingWith(com.synexia.indexstring.MIndexJoinedChars);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "frozenSegments",
+            "descriptor": "()[Lcom/synexia/indexstring/FrozenChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenChars[] frozenSegments();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "length",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int length();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "charAt",
+            "descriptor": "(I)C",
+            "static": false,
+            "declaration": "public char charAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "subSequence",
+            "descriptor": "(II)Lcom/synexia/indexstring/MIndexJoinedChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.MIndexJoinedChars subSequence(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "codePointAt",
+            "descriptor": "(I)I",
+            "static": false,
+            "declaration": "public int codePointAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "codePointCount",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int codePointCount();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copy",
+            "descriptor": "()[C",
+            "static": false,
+            "declaration": "public char[] copy();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "concat",
+            "descriptor": "(Lcom/synexia/indexstring/MIndexJoinedChars;)Lcom/synexia/indexstring/MIndexJoinedChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.MIndexJoinedChars concat(com.synexia.indexstring.MIndexJoinedChars);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copyTo",
+            "descriptor": "(I[CII)V",
+            "static": false,
+            "declaration": "public void copyTo(int, char[], int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "detach",
+            "descriptor": "()Lcom/synexia/indexstring/FrozenChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenChars detach();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "encode",
+            "descriptor": "(Ljava/nio/charset/Charset;)Lcom/synexia/indexstring/FrozenBytes;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.FrozenBytes encode(java.nio.charset.Charset);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "copyEncoded",
+            "descriptor": "(Ljava/nio/charset/Charset;)[B",
+            "static": false,
+            "declaration": "public byte[] copyEncoded(java.nio.charset.Charset);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReadOnlyBuffers",
+            "descriptor": "()[Ljava/nio/CharBuffer;",
+            "static": false,
+            "declaration": "public java.nio.CharBuffer[] asReadOnlyBuffers();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "directUtf16Buffers",
+            "descriptor": "()[Ljava/nio/ByteBuffer;",
+            "static": false,
+            "declaration": "public java.nio.ByteBuffer[] directUtf16Buffers();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "static": false,
+            "declaration": "public java.lang.String toString();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReader",
+            "descriptor": "()Ljava/io/Reader;",
+            "static": false,
+            "declaration": "public java.io.Reader asReader();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "subSequence",
+            "descriptor": "(II)Ljava/lang/CharSequence;",
+            "static": false,
+            "declaration": "public java.lang.CharSequence subSequence(int, int);",
+            "throws": []
+          }
+        ]
+      },
+      "removed_or_changed_descriptors": [],
+      "additive_members": [
+        {
+          "kind": "method",
+          "name": "copyEncoded",
+          "descriptor": "(Ljava/nio/charset/Charset;)[B",
+          "static": false,
+          "declaration": "public byte[] copyEncoded(java.nio.charset.Charset);",
+          "throws": []
+        },
+        {
+          "kind": "method",
+          "name": "frozenSegments",
+          "descriptor": "()[Lcom/synexia/indexstring/FrozenChars;",
+          "static": false,
+          "declaration": "public com.synexia.indexstring.FrozenChars[] frozenSegments();",
+          "throws": []
+        },
+        {
+          "kind": "method",
+          "name": "ofUncached",
+          "descriptor": "([Lcom/synexia/indexstring/FrozenChars;)Lcom/synexia/indexstring/MIndexJoinedChars;",
+          "static": true,
+          "declaration": "public static com.synexia.indexstring.MIndexJoinedChars ofUncached(com.synexia.indexstring.FrozenChars...);",
+          "throws": []
+        }
+      ],
+      "source_declaration_differences": [],
+      "class_header_unchanged": true
+    },
+    {
+      "baseline": "publicmaster45",
+      "commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+      "symbol": "com.synexia.indexstring.MIndexJoinedStorageIntern",
+      "baseline_surface": {
+        "symbol": "com.synexia.indexstring.MIndexJoinedStorageIntern",
+        "class_header": "final class com.synexia.indexstring.MIndexJoinedStorageIntern {",
+        "members": []
+      },
+      "candidate_surface": {
+        "symbol": "com.synexia.indexstring.MIndexJoinedStorageIntern",
+        "class_header": "final class com.synexia.indexstring.MIndexJoinedStorageIntern {",
+        "members": []
+      },
+      "removed_or_changed_descriptors": [],
+      "additive_members": [],
+      "source_declaration_differences": [],
+      "class_header_unchanged": true
+    },
+    {
+      "baseline": "publicmaster45",
+      "commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+      "symbol": "com.synexia.indexstring.MIndexJoinedStreams",
+      "baseline_surface": {
+        "symbol": "com.synexia.indexstring.MIndexJoinedStreams",
+        "class_header": "final class com.synexia.indexstring.MIndexJoinedStreams {",
+        "members": []
+      },
+      "candidate_surface": {
+        "symbol": "com.synexia.indexstring.MIndexJoinedStreams",
+        "class_header": "final class com.synexia.indexstring.MIndexJoinedStreams {",
+        "members": []
+      },
+      "removed_or_changed_descriptors": [],
+      "additive_members": [],
+      "source_declaration_differences": [],
+      "class_header_unchanged": true
+    },
+    {
+      "baseline": "publicmaster45",
+      "commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+      "symbol": "com.m3.text.compat.M3Text",
+      "baseline_surface": {
+        "symbol": "com.m3.text.compat.M3Text",
+        "class_header": "public final class com.m3.text.compat.M3Text implements java.lang.CharSequence, java.lang.Comparable<com.m3.text.compat.M3Text> {",
+        "members": [
+          {
+            "kind": "method",
+            "name": "fromJoined",
+            "descriptor": "(Lcom/synexia/indexstring/MIndexJoinedChars;)Lcom/m3/text/compat/M3Text;",
+            "static": true,
+            "declaration": "public static com.m3.text.compat.M3Text fromJoined(com.synexia.indexstring.MIndexJoinedChars);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "fromFrozen",
+            "descriptor": "([Lcom/synexia/indexstring/FrozenChars;)Lcom/m3/text/compat/M3Text;",
+            "static": true,
+            "declaration": "public static com.m3.text.compat.M3Text fromFrozen(com.synexia.indexstring.FrozenChars...);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "fromString",
+            "descriptor": "(Ljava/lang/String;Ljava/util/function/Function;)Lcom/m3/text/compat/M3Text;",
+            "static": true,
+            "declaration": "public static com.m3.text.compat.M3Text fromString(java.lang.String, java.util.function.Function<java.lang.String, com.synexia.indexstring.MIndexJoinedChars>);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "storage",
+            "descriptor": "()Lcom/synexia/indexstring/MIndexJoinedChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.MIndexJoinedChars storage();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "length",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int length();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "isEmpty",
+            "descriptor": "()Z",
+            "static": false,
+            "declaration": "public boolean isEmpty();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "charAt",
+            "descriptor": "(I)C",
+            "static": false,
+            "declaration": "public char charAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "subSequence",
+            "descriptor": "(II)Lcom/m3/text/compat/M3Text;",
+            "static": false,
+            "declaration": "public com.m3.text.compat.M3Text subSequence(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "substring",
+            "descriptor": "(II)Lcom/m3/text/compat/M3Text;",
+            "static": false,
+            "declaration": "public com.m3.text.compat.M3Text substring(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "substring",
+            "descriptor": "(I)Lcom/m3/text/compat/M3Text;",
+            "static": false,
+            "declaration": "public com.m3.text.compat.M3Text substring(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "concat",
+            "descriptor": "(Lcom/m3/text/compat/M3Text;)Lcom/m3/text/compat/M3Text;",
+            "static": false,
+            "declaration": "public com.m3.text.compat.M3Text concat(com.m3.text.compat.M3Text);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "toCharArray",
+            "descriptor": "()[C",
+            "static": false,
+            "declaration": "public char[] toCharArray();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "getChars",
+            "descriptor": "(II[CI)V",
+            "static": false,
+            "declaration": "public void getChars(int, int, char[], int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReader",
+            "descriptor": "()Ljava/io/Reader;",
+            "static": false,
+            "declaration": "public java.io.Reader asReader();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asString",
+            "descriptor": "()Ljava/lang/String;",
+            "static": false,
+            "declaration": "public java.lang.String asString();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "static": false,
+            "declaration": "public java.lang.String toString();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "contentEquals",
+            "descriptor": "(Ljava/lang/CharSequence;)Z",
+            "static": false,
+            "declaration": "public boolean contentEquals(java.lang.CharSequence);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "static": false,
+            "declaration": "public boolean equals(java.lang.Object);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "hashCode",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int hashCode();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "compareTo",
+            "descriptor": "(Lcom/m3/text/compat/M3Text;)I",
+            "static": false,
+            "declaration": "public int compareTo(com.m3.text.compat.M3Text);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "codePointAt",
+            "descriptor": "(I)I",
+            "static": false,
+            "declaration": "public int codePointAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "codePointBefore",
+            "descriptor": "(I)I",
+            "static": false,
+            "declaration": "public int codePointBefore(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "codePointCount",
+            "descriptor": "(II)I",
+            "static": false,
+            "declaration": "public int codePointCount(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "chars",
+            "descriptor": "()Ljava/util/stream/IntStream;",
+            "static": false,
+            "declaration": "public java.util.stream.IntStream chars();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "codePoints",
+            "descriptor": "()Ljava/util/stream/IntStream;",
+            "static": false,
+            "declaration": "public java.util.stream.IntStream codePoints();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "indexOf",
+            "descriptor": "(Ljava/lang/String;)I",
+            "static": false,
+            "declaration": "public int indexOf(java.lang.String);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "indexOf",
+            "descriptor": "(Ljava/lang/String;I)I",
+            "static": false,
+            "declaration": "public int indexOf(java.lang.String, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "lastIndexOf",
+            "descriptor": "(Ljava/lang/String;)I",
+            "static": false,
+            "declaration": "public int lastIndexOf(java.lang.String);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "lastIndexOf",
+            "descriptor": "(Ljava/lang/String;I)I",
+            "static": false,
+            "declaration": "public int lastIndexOf(java.lang.String, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "contains",
+            "descriptor": "(Ljava/lang/String;)Z",
+            "static": false,
+            "declaration": "public boolean contains(java.lang.String);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "startsWith",
+            "descriptor": "(Ljava/lang/String;)Z",
+            "static": false,
+            "declaration": "public boolean startsWith(java.lang.String);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "endsWith",
+            "descriptor": "(Ljava/lang/String;)Z",
+            "static": false,
+            "declaration": "public boolean endsWith(java.lang.String);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "matcher",
+            "descriptor": "(Ljava/util/regex/Pattern;)Ljava/util/regex/Matcher;",
+            "static": false,
+            "declaration": "public java.util.regex.Matcher matcher(java.util.regex.Pattern);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "matches",
+            "descriptor": "(Ljava/lang/String;)Z",
+            "static": false,
+            "declaration": "public boolean matches(java.lang.String);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "replaceAll",
+            "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+            "static": false,
+            "declaration": "public java.lang.String replaceAll(java.lang.String, java.lang.String);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "split",
+            "descriptor": "(Ljava/lang/String;I)[Ljava/lang/String;",
+            "static": false,
+            "declaration": "public java.lang.String[] split(java.lang.String, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "encode",
+            "descriptor": "(Ljava/nio/charset/Charset;Ljava/nio/charset/CodingErrorAction;Ljava/nio/charset/CodingErrorAction;)Ljava/nio/ByteBuffer;",
+            "static": false,
+            "declaration": "public java.nio.ByteBuffer encode(java.nio.charset.Charset, java.nio.charset.CodingErrorAction, java.nio.charset.CodingErrorAction) throws java.nio.charset.CharacterCodingException;",
+            "throws": [
+              "java.nio.charset.CharacterCodingException"
+            ]
+          },
+          {
+            "kind": "method",
+            "name": "writeTo",
+            "descriptor": "(Ljava/lang/Appendable;)V",
+            "static": false,
+            "declaration": "public void writeTo(java.lang.Appendable) throws java.io.IOException;",
+            "throws": [
+              "java.io.IOException"
+            ]
+          },
+          {
+            "kind": "method",
+            "name": "subSequence",
+            "descriptor": "(II)Ljava/lang/CharSequence;",
+            "static": false,
+            "declaration": "public java.lang.CharSequence subSequence(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "compareTo",
+            "descriptor": "(Ljava/lang/Object;)I",
+            "static": false,
+            "declaration": "public int compareTo(java.lang.Object);",
+            "throws": []
+          }
+        ]
+      },
+      "candidate_surface": {
+        "symbol": "com.m3.text.compat.M3Text",
+        "class_header": "public final class com.m3.text.compat.M3Text implements java.lang.CharSequence, java.lang.Comparable<com.m3.text.compat.M3Text> {",
+        "members": [
+          {
+            "kind": "method",
+            "name": "fromJoined",
+            "descriptor": "(Lcom/synexia/indexstring/MIndexJoinedChars;)Lcom/m3/text/compat/M3Text;",
+            "static": true,
+            "declaration": "public static com.m3.text.compat.M3Text fromJoined(com.synexia.indexstring.MIndexJoinedChars);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "fromFrozen",
+            "descriptor": "([Lcom/synexia/indexstring/FrozenChars;)Lcom/m3/text/compat/M3Text;",
+            "static": true,
+            "declaration": "public static com.m3.text.compat.M3Text fromFrozen(com.synexia.indexstring.FrozenChars...);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "fromString",
+            "descriptor": "(Ljava/lang/String;Ljava/util/function/Function;)Lcom/m3/text/compat/M3Text;",
+            "static": true,
+            "declaration": "public static com.m3.text.compat.M3Text fromString(java.lang.String, java.util.function.Function<java.lang.String, com.synexia.indexstring.MIndexJoinedChars>);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "storage",
+            "descriptor": "()Lcom/synexia/indexstring/MIndexJoinedChars;",
+            "static": false,
+            "declaration": "public com.synexia.indexstring.MIndexJoinedChars storage();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "length",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int length();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "isEmpty",
+            "descriptor": "()Z",
+            "static": false,
+            "declaration": "public boolean isEmpty();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "charAt",
+            "descriptor": "(I)C",
+            "static": false,
+            "declaration": "public char charAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "subSequence",
+            "descriptor": "(II)Lcom/m3/text/compat/M3Text;",
+            "static": false,
+            "declaration": "public com.m3.text.compat.M3Text subSequence(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "substring",
+            "descriptor": "(II)Lcom/m3/text/compat/M3Text;",
+            "static": false,
+            "declaration": "public com.m3.text.compat.M3Text substring(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "substring",
+            "descriptor": "(I)Lcom/m3/text/compat/M3Text;",
+            "static": false,
+            "declaration": "public com.m3.text.compat.M3Text substring(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "concat",
+            "descriptor": "(Lcom/m3/text/compat/M3Text;)Lcom/m3/text/compat/M3Text;",
+            "static": false,
+            "declaration": "public com.m3.text.compat.M3Text concat(com.m3.text.compat.M3Text);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "toCharArray",
+            "descriptor": "()[C",
+            "static": false,
+            "declaration": "public char[] toCharArray();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "getChars",
+            "descriptor": "(II[CI)V",
+            "static": false,
+            "declaration": "public void getChars(int, int, char[], int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asReader",
+            "descriptor": "()Ljava/io/Reader;",
+            "static": false,
+            "declaration": "public java.io.Reader asReader();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "asString",
+            "descriptor": "()Ljava/lang/String;",
+            "static": false,
+            "declaration": "public java.lang.String asString();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "toString",
+            "descriptor": "()Ljava/lang/String;",
+            "static": false,
+            "declaration": "public java.lang.String toString();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "contentEquals",
+            "descriptor": "(Ljava/lang/CharSequence;)Z",
+            "static": false,
+            "declaration": "public boolean contentEquals(java.lang.CharSequence);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "equals",
+            "descriptor": "(Ljava/lang/Object;)Z",
+            "static": false,
+            "declaration": "public boolean equals(java.lang.Object);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "hashCode",
+            "descriptor": "()I",
+            "static": false,
+            "declaration": "public int hashCode();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "compareTo",
+            "descriptor": "(Lcom/m3/text/compat/M3Text;)I",
+            "static": false,
+            "declaration": "public int compareTo(com.m3.text.compat.M3Text);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "codePointAt",
+            "descriptor": "(I)I",
+            "static": false,
+            "declaration": "public int codePointAt(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "codePointBefore",
+            "descriptor": "(I)I",
+            "static": false,
+            "declaration": "public int codePointBefore(int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "codePointCount",
+            "descriptor": "(II)I",
+            "static": false,
+            "declaration": "public int codePointCount(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "chars",
+            "descriptor": "()Ljava/util/stream/IntStream;",
+            "static": false,
+            "declaration": "public java.util.stream.IntStream chars();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "codePoints",
+            "descriptor": "()Ljava/util/stream/IntStream;",
+            "static": false,
+            "declaration": "public java.util.stream.IntStream codePoints();",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "indexOf",
+            "descriptor": "(Ljava/lang/String;)I",
+            "static": false,
+            "declaration": "public int indexOf(java.lang.String);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "indexOf",
+            "descriptor": "(Ljava/lang/String;I)I",
+            "static": false,
+            "declaration": "public int indexOf(java.lang.String, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "lastIndexOf",
+            "descriptor": "(Ljava/lang/String;)I",
+            "static": false,
+            "declaration": "public int lastIndexOf(java.lang.String);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "lastIndexOf",
+            "descriptor": "(Ljava/lang/String;I)I",
+            "static": false,
+            "declaration": "public int lastIndexOf(java.lang.String, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "contains",
+            "descriptor": "(Ljava/lang/String;)Z",
+            "static": false,
+            "declaration": "public boolean contains(java.lang.String);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "startsWith",
+            "descriptor": "(Ljava/lang/String;)Z",
+            "static": false,
+            "declaration": "public boolean startsWith(java.lang.String);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "endsWith",
+            "descriptor": "(Ljava/lang/String;)Z",
+            "static": false,
+            "declaration": "public boolean endsWith(java.lang.String);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "matcher",
+            "descriptor": "(Ljava/util/regex/Pattern;)Ljava/util/regex/Matcher;",
+            "static": false,
+            "declaration": "public java.util.regex.Matcher matcher(java.util.regex.Pattern);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "matches",
+            "descriptor": "(Ljava/lang/String;)Z",
+            "static": false,
+            "declaration": "public boolean matches(java.lang.String);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "replaceAll",
+            "descriptor": "(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+            "static": false,
+            "declaration": "public java.lang.String replaceAll(java.lang.String, java.lang.String);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "split",
+            "descriptor": "(Ljava/lang/String;I)[Ljava/lang/String;",
+            "static": false,
+            "declaration": "public java.lang.String[] split(java.lang.String, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "encode",
+            "descriptor": "(Ljava/nio/charset/Charset;Ljava/nio/charset/CodingErrorAction;Ljava/nio/charset/CodingErrorAction;)Ljava/nio/ByteBuffer;",
+            "static": false,
+            "declaration": "public java.nio.ByteBuffer encode(java.nio.charset.Charset, java.nio.charset.CodingErrorAction, java.nio.charset.CodingErrorAction) throws java.nio.charset.CharacterCodingException;",
+            "throws": [
+              "java.nio.charset.CharacterCodingException"
+            ]
+          },
+          {
+            "kind": "method",
+            "name": "writeTo",
+            "descriptor": "(Ljava/lang/Appendable;)V",
+            "static": false,
+            "declaration": "public void writeTo(java.lang.Appendable) throws java.io.IOException;",
+            "throws": [
+              "java.io.IOException"
+            ]
+          },
+          {
+            "kind": "method",
+            "name": "subSequence",
+            "descriptor": "(II)Ljava/lang/CharSequence;",
+            "static": false,
+            "declaration": "public java.lang.CharSequence subSequence(int, int);",
+            "throws": []
+          },
+          {
+            "kind": "method",
+            "name": "compareTo",
+            "descriptor": "(Ljava/lang/Object;)I",
+            "static": false,
+            "declaration": "public int compareTo(java.lang.Object);",
+            "throws": []
+          }
+        ]
+      },
+      "removed_or_changed_descriptors": [],
+      "additive_members": [],
+      "source_declaration_differences": [],
+      "class_header_unchanged": true
+    }
+  ],
+  "binary_linkage": [
+    {
+      "baseline": "private6df9",
+      "mode": "default",
+      "original_class_hashes": {
+        "ExistingSurfaceTest.class": "e642b06f926268a9400e2b6be298b85416b24f0b6e513116aefd67a79975facc"
+      },
+      "candidate_run_class_hashes": {
+        "ExistingSurfaceTest.class": "e642b06f926268a9400e2b6be298b85416b24f0b6e513116aefd67a79975facc"
+      },
+      "test_recompiled_for_candidate": false,
+      "baseline_owner_classes_on_candidate_classpath": false,
+      "baseline_command_id": "private6df9:baseline:default",
+      "candidate_command_id": "private6df9:candidate-existing-bytecode:default",
+      "stdout": "EXISTING_SURFACE_PASS checks=502762 digest=e74d393ffda5aeeb154e70568fc659575c0511803c80847152b4c6740c5a2af1\n",
+      "identical_output": true
+    },
+    {
+      "baseline": "private6df9",
+      "mode": "interpreter",
+      "original_class_hashes": {
+        "ExistingSurfaceTest.class": "e642b06f926268a9400e2b6be298b85416b24f0b6e513116aefd67a79975facc"
+      },
+      "candidate_run_class_hashes": {
+        "ExistingSurfaceTest.class": "e642b06f926268a9400e2b6be298b85416b24f0b6e513116aefd67a79975facc"
+      },
+      "test_recompiled_for_candidate": false,
+      "baseline_owner_classes_on_candidate_classpath": false,
+      "baseline_command_id": "private6df9:baseline:interpreter",
+      "candidate_command_id": "private6df9:candidate-existing-bytecode:interpreter",
+      "stdout": "EXISTING_SURFACE_PASS checks=502762 digest=e74d393ffda5aeeb154e70568fc659575c0511803c80847152b4c6740c5a2af1\n",
+      "identical_output": true
+    },
+    {
+      "baseline": "publicmaster45",
+      "mode": "default",
+      "original_class_hashes": {
+        "ExistingSurfaceTest.class": "e642b06f926268a9400e2b6be298b85416b24f0b6e513116aefd67a79975facc"
+      },
+      "candidate_run_class_hashes": {
+        "ExistingSurfaceTest.class": "e642b06f926268a9400e2b6be298b85416b24f0b6e513116aefd67a79975facc"
+      },
+      "test_recompiled_for_candidate": false,
+      "baseline_owner_classes_on_candidate_classpath": false,
+      "baseline_command_id": "publicmaster45:baseline:default",
+      "candidate_command_id": "publicmaster45:candidate-existing-bytecode:default",
+      "stdout": "EXISTING_SURFACE_PASS checks=502762 digest=e74d393ffda5aeeb154e70568fc659575c0511803c80847152b4c6740c5a2af1\n",
+      "identical_output": true
+    },
+    {
+      "baseline": "publicmaster45",
+      "mode": "interpreter",
+      "original_class_hashes": {
+        "ExistingSurfaceTest.class": "e642b06f926268a9400e2b6be298b85416b24f0b6e513116aefd67a79975facc"
+      },
+      "candidate_run_class_hashes": {
+        "ExistingSurfaceTest.class": "e642b06f926268a9400e2b6be298b85416b24f0b6e513116aefd67a79975facc"
+      },
+      "test_recompiled_for_candidate": false,
+      "baseline_owner_classes_on_candidate_classpath": false,
+      "baseline_command_id": "publicmaster45:baseline:interpreter",
+      "candidate_command_id": "publicmaster45:candidate-existing-bytecode:interpreter",
+      "stdout": "EXISTING_SURFACE_PASS checks=502762 digest=e74d393ffda5aeeb154e70568fc659575c0511803c80847152b4c6740c5a2af1\n",
+      "identical_output": true
+    }
+  ],
+  "limitations": [
+    "Public declared JVM method/field descriptors and static kind only; inherited surfaces follow unchanged class headers.",
+    "Checked throws and generic/source declarations are reported separately from binary descriptors.",
+    "No general behavioral equivalence, constant-value compatibility, serialization, full-family, String, native or modified-JDK ABI acceptance."
+  ],
+  "verification_helper": {
+    "path": "S:\\codex-scratch\\m3-selected-public-abi-20261002\\verify_public_abi.py",
+    "sha256": "7be8feaeb14e4487b1afdc5e2a6ab71c7d0e2b75be7c3e13df39faba90ef055f"
+  },
+  "summary": {
+    "baseline_type_comparisons": 14,
+    "removed_or_changed_baseline_descriptors": 0,
+    "additive_members": 20,
+    "source_declaration_differences": 0,
+    "original_bytecode_linkage_runs": 4,
+    "by_baseline": {
+      "private6df9": {
+        "type_comparisons": 7,
+        "baseline_public_members": 55,
+        "removed_or_changed_descriptors": 0,
+        "additive_members": 12,
+        "source_declaration_differences": 0
+      },
+      "publicmaster45": {
+        "type_comparisons": 7,
+        "baseline_public_members": 91,
+        "removed_or_changed_descriptors": 0,
+        "additive_members": 8,
+        "source_declaration_differences": 0
+      }
+    },
+    "distinct_additive_member_descriptors": 12
+  },
+  "status": "PASS",
+  "additive_types_within_compared_scope": {
+    "private6df9": [
+      "com.m3.text.compat.M3Text"
+    ],
+    "publicmaster45": [
+      "com.synexia.indexstring.FrozenByteInterner"
+    ]
+  },
+  "scope_excludes_additional_facade_ABI": "M3String, M3StringArena and M3Utf16Cursor were compiled as candidate dependencies, but have no pinned baseline in this descriptor gate.",
+  "metadata_derivation": "Summary/environment fields project the embedded actual javap and java-version command outputs; compile/link command records remain unchanged."
+}
