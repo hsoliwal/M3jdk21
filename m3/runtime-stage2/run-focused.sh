@@ -31,7 +31,10 @@ for storage in flat joined; do
       > "$result/$storage-$mode-semantics.log" 2>&1
     "$M3_TEST_JDK/bin/java" -Xcheck:jni "${common[@]}" -Dm3.jni="$result/libm3joinedprobe.so" \
       -cp "$result/classes" M3JoinedStringJni > "$result/$storage-$mode-jni.log" 2>&1
-    cat "$result/$storage-$mode-semantics.log" "$result/$storage-$mode-jni.log"
+    "$M3_TEST_JDK/bin/java" "${common[@]}" -cp "$result/classes" M3JoinedStringRegex \
+      > "$result/$storage-$mode-regex.log" 2>&1
+    cat "$result/$storage-$mode-semantics.log" "$result/$storage-$mode-jni.log" \
+        "$result/$storage-$mode-regex.log"
   done
 
   "$M3_TEST_JDK/bin/java" -ea "${storage_opts[@]}" -Dm3.enabled=$enabled \
