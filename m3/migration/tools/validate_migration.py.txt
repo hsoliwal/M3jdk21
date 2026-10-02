@@ -1,0 +1,67 @@
+#!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+"""Read-only validator for the checked-in migration snapshots."""
+import csv
+import json
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+REQUIRED_MAPPING = {
+    "id", "source", "destination", "mapping_kind", "canonical_owner", "identity",
+    "contract", "format_abi", "dependencies", "materialization_boundaries", "recipe",
+    "tests", "provenance", "sync", "port_direction", "status"
+}
+REQUIRED_INVENTORY = {
+    "inventory_id", "source_commit", "module", "path", "git_blob_sha1",
+    "artifact_kind", "fully_qualified_symbol", "classification",
+    "migration_disposition", "reason"
+}
+
+
+def main():
+    baseline = json.loads((ROOT / "baseline.json").read_text())
+    mappings = json.loads((ROOT / "migration-mappings-v1.json").read_text())
+    if mappings["source_baseline"] != baseline["source"]["commit"]:
+        raise SystemExit("source baseline drift")
+    if mappings["target_baseline"] != baseline["target"]["commit"]:
+        raise SystemExit("target baseline drift")
+
+    seen = set()
+    for item in mappings["mappings"]:
+        missing = REQUIRED_MAPPING - set(item)
+        if missing:
+            raise SystemExit(f"mapping {item.get('id')} missing {sorted(missing)}")
+        if item["id"] in seen:
+            raise SystemExit("duplicate mapping id " + item["id"])
+        seen.add(item["id"])
+        source = item["source"]
+        if not source.get("repository") or not source.get("commit") or not source.get("path"):
+            raise SystemExit(item["id"] + " has unpinned source location")
+        source_hash = source.get("content_hash", {}).get("value")
+        if not source_hash:
+            raise SystemExit(item["id"] + " has unpinned source hash")
+
+    rows = 0
+    for path in sorted((ROOT / "inventory").glob("*.tsv")):
+        with path.open(newline="") as handle:
+            reader = csv.DictReader(handle, delimiter="\t")
+            if set(reader.fieldnames or []) != REQUIRED_INVENTORY:
+                raise SystemExit(path.name + " column drift")
+            ids = set()
+            for row in reader:
+                rows += 1
+                if not row["inventory_id"] or row["inventory_id"] in ids:
+                    raise SystemExit(path.name + " duplicate/empty inventory id")
+                ids.add(row["inventory_id"])
+                if len(row["source_commit"]) != 40 or len(row["git_blob_sha1"]) != 40:
+                    raise SystemExit(path.name + " unpinned row")
+                if not row["migration_disposition"] or not row["reason"]:
+                    raise SystemExit(path.name + " undisposed row")
+
+    if rows == 0:
+        raise SystemExit("no inventory rows")
+    print(f"MIGRATION_VALIDATION_PASS mappings={len(seen)} inventory_rows={rows}")
+
+
+if __name__ == "__main__":
+    main()
