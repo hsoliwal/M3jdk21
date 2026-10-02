@@ -5,6 +5,7 @@ import com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe;
 import com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe;
 import com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates;
 import com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe;
+import com.m3.rewrite.hash.M3SemanticHashRecipe;
 import java.util.List;
 import org.openrewrite.Recipe;
 
@@ -22,6 +23,11 @@ public final class M3Java21RecipePipeline {
                     M3RecipeStage.INVENTORY,
                     0,
                     M3InventoryPureIntAtomCandidates.class),
+            new M3RecipeRegistration(
+                    "m3.java21.semantic-hash.file",
+                    M3RecipeStage.SEMANTIC_HASH,
+                    5,
+                    M3SemanticHashRecipe.class),
             new M3RecipeRegistration(
                     "m3.java21.atomize.pure-int",
                     M3RecipeStage.ATOMIZATION,
@@ -47,6 +53,7 @@ public final class M3Java21RecipePipeline {
     public static List<Recipe> instantiate() {
         return List.of(
                 new M3InventoryPureIntAtomCandidates(),
+                new M3SemanticHashRecipe(),
                 new M3AtomizePureIntReturnRecipe(),
                 new M3PatternizePureIntAtomRecipe(),
                 new M3DocumentPureIntAtomRecipe());
