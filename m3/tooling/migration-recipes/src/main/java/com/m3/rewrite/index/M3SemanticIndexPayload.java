@@ -43,6 +43,7 @@ public final class M3SemanticIndexPayload {
                             row.semanticKey(),
                             row.sourcePath(),
                             row.symbol(),
+                            row.patternRole(),
                             new M3IndexDbSemanticFingerprint(
                                     row.exactSha256(),
                                     row.structuralSha256(),
