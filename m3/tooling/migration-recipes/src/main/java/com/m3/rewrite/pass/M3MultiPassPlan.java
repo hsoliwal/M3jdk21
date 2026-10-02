@@ -29,6 +29,7 @@ public final class M3MultiPassPlan {
                         M3EditScope.FILE,
                         false,
                         List.of(
+                                "com.m3.rewrite.verbatim.M3Jdk21SourceFingerprintRecipe",
                                 "com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates",
                                 "com.m3.rewrite.index.M3SemanticIndexRecipe"),
                         "inventory rows stable for unchanged file preimages"),
