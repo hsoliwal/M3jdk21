@@ -1689,6 +1689,9 @@ public final class String
     public int codePointCount(int beginIndex, int endIndex) {
         Objects.checkFromToIndex(beginIndex, endIndex, length());
         if (m3Storage != null) {
+            if (beginIndex == 0 && endIndex == length()) {
+                return m3Storage.codePointCount();
+            }
             int count = 0;
             for (int index = beginIndex; index < endIndex; count++) {
                 char first = charAt(index++);
@@ -4057,7 +4060,9 @@ public final class String
      * @since 11
      */
     public boolean isBlank() {
-        return indexOfNonWhitespace() == length();
+        return m3Storage != null
+                ? (m3Storage.characterFlags() & jdk.internal.util.M3StringFacts.BLANK) != 0
+                : indexOfNonWhitespace() == length();
     }
 
     /**
@@ -4148,12 +4153,28 @@ public final class String
     }
 
     private int indexOfNonWhitespace() {
+        if (m3Storage != null) {
+            for (int index = 0; index < length(); index++) {
+                if (!Character.isWhitespace(charAt(index))) {
+                    return index;
+                }
+            }
+            return length();
+        }
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.indexOfNonWhitespace(currentValue)
                           : StringUTF16.indexOfNonWhitespace(currentValue);
     }
 
     private int lastIndexOfNonWhitespace() {
+        if (m3Storage != null) {
+            for (int index = length() - 1; index >= 0; index--) {
+                if (!Character.isWhitespace(charAt(index))) {
+                    return index;
+                }
+            }
+            return -1;
+        }
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.lastIndexOfNonWhitespace(currentValue)
                           : StringUTF16.lastIndexOfNonWhitespace(currentValue);
