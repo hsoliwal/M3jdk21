@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.synexia.rewrite;
 
+import com.m3.rewrite.scope.M3ScopeFence;
+import com.m3.rewrite.scope.M3ScopedRecipe;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -23,7 +25,8 @@ import org.openrewrite.java.tree.J;
 
 /** Exact-source owner extension, not a compiler-lowering or semantic-equivalence oracle. */
 public final class M3MIndexJoinedCharsViewRecipe
-    extends ScanningRecipe<M3MIndexJoinedCharsViewRecipe.State> {
+    extends ScanningRecipe<M3MIndexJoinedCharsViewRecipe.State> implements M3ScopedRecipe {
+  private static final M3ScopeFence EDIT_SCOPE = M3ScopeFence.module("synexia-indexstring");
   private static final String ROOT = "/com/synexia/rewrite/m3port/";
   private static final String OWNER = "MIndexJoinedChars.java";
   private static final String PREFIX = "src/main/java/com/synexia/indexstring/";
@@ -35,6 +38,7 @@ public final class M3MIndexJoinedCharsViewRecipe
     final Map<String, String> paths = new HashMap<>();
     final Properties plan = properties();
   }
+  @Override public M3ScopeFence editScope() { return EDIT_SCOPE; }
   @Override public String getDisplayName() { return "Extend the pinned retained IndexString view"; }
   @Override public String getDescription() {
     return "Require the exact six-file owner closure, add retained concat and direct copy, and refuse source/dependency drift.";
