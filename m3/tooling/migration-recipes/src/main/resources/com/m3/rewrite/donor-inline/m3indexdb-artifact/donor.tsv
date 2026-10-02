@@ -1,0 +1,3 @@
+# SPDX-License-Identifier: Apache-2.0
+capability_id	repository	revision	source_path	source_sha256	license	target_namespace	dag_id
+m3indexdb-artifact	https://github.com/hsoliwal/com.synexia	bade19f37311f367101cc44ae44491476f2865ca	synexia-mindex/db/src/main/java/com/synexia/mindex/db/MIndexDbArtifact.java	391e7d92fb077b909967a9dcb5aa2823dd1a73be487ebc9a7e09044d7103a605	Apache-2.0	com.m3.indexdb	donor-inline
