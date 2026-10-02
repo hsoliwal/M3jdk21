@@ -213,6 +213,6 @@ public final class M3InstallPrimitiveCollectionsRecipe
             map.put(prefix + name + ".java", name + ".java");
         }
         map.put("m3/collections/src/module-info.java", "module-info.java");
-        return Map.copyOf(map);
+        return java.util.Collections.unmodifiableMap(map);
     }
 }
