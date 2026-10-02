@@ -2253,8 +2253,11 @@ public final class String
              (ooffset > (long)other.length() - len)) {
             return false;
         }
-        byte[] tv = value();
-        byte[] ov = other.value();
+        if (m3Storage != null || other.m3Storage != null) {
+            return M3StringSearch.regionEquals(this, toffset, other, ooffset, len);
+        }
+        byte[] tv = value;
+        byte[] ov = other.value;
         byte coder = coder();
         if (coder == other.coder()) {
             if (coder == UTF16) {
@@ -2378,8 +2381,11 @@ public final class String
         if (toffset < 0 || toffset > length() - prefix.length()) {
             return false;
         }
-        byte[] ta = value();
-        byte[] pa = prefix.value();
+        if (m3Storage != null || prefix.m3Storage != null) {
+            return M3StringSearch.regionEquals(this, toffset, prefix, 0, prefix.length());
+        }
+        byte[] ta = value;
+        byte[] pa = prefix.value;
         int po = 0;
         int pc = pa.length;
         byte coder = coder();
@@ -2553,8 +2559,11 @@ public final class String
      * {@code fromIndex} were larger than the string length, or were negative.
      */
     public int indexOf(int ch, int fromIndex) {
-        return isLatin1() ? StringLatin1.indexOf(value(), ch, fromIndex, length())
-                : StringUTF16.indexOf(value(), ch, fromIndex, length());
+        if (m3Storage != null) {
+            return M3StringSearch.indexOf(this, ch, fromIndex, length());
+        }
+        return isLatin1() ? StringLatin1.indexOf(value, ch, fromIndex, length())
+                : StringUTF16.indexOf(value, ch, fromIndex, length());
     }
 
     /**
@@ -2599,8 +2608,11 @@ public final class String
      */
     public int indexOf(int ch, int beginIndex, int endIndex) {
         checkBoundsBeginEnd(beginIndex, endIndex, length());
-        return isLatin1() ? StringLatin1.indexOf(value(), ch, beginIndex, endIndex)
-                : StringUTF16.indexOf(value(), ch, beginIndex, endIndex);
+        if (m3Storage != null) {
+            return M3StringSearch.indexOf(this, ch, beginIndex, endIndex);
+        }
+        return isLatin1() ? StringLatin1.indexOf(value, ch, beginIndex, endIndex)
+                : StringUTF16.indexOf(value, ch, beginIndex, endIndex);
     }
 
     /**
@@ -2665,8 +2677,11 @@ public final class String
      *          if the character does not occur before that point.
      */
     public int lastIndexOf(int ch, int fromIndex) {
-        return isLatin1() ? StringLatin1.lastIndexOf(value(), ch, fromIndex)
-                          : StringUTF16.lastIndexOf(value(), ch, fromIndex);
+        if (m3Storage != null) {
+            return M3StringSearch.lastIndexOf(this, ch, fromIndex);
+        }
+        return isLatin1() ? StringLatin1.lastIndexOf(value, ch, fromIndex)
+                          : StringUTF16.lastIndexOf(value, ch, fromIndex);
     }
 
     /**
@@ -2684,6 +2699,9 @@ public final class String
      *          or {@code -1} if there is no such occurrence.
      */
     public int indexOf(String str) {
+        if (m3Storage != null || str.m3Storage != null) {
+            return M3StringSearch.indexOf(this, str, 0, length());
+        }
         byte coder = coder();
         if (coder == str.coder()) {
             return isLatin1() ? StringLatin1.indexOf(value(), str.value())
@@ -2726,7 +2744,11 @@ public final class String
      *          or {@code -1} if there is no such occurrence.
      */
     public int indexOf(String str, int fromIndex) {
-        return indexOf(value(), coder(), length(), str, fromIndex);
+        if (m3Storage != null || str.m3Storage != null) {
+            int from = Math.clamp(fromIndex, 0, length());
+            return M3StringSearch.indexOf(this, str, from, length());
+        }
+        return indexOf(value, coder(), length(), str, fromIndex);
     }
 
     /**
@@ -2759,7 +2781,10 @@ public final class String
             return indexOf(str.charAt(0), beginIndex, endIndex);
         }
         checkBoundsBeginEnd(beginIndex, endIndex, length());
-        return indexOf(value(), coder(), endIndex, str, beginIndex);
+        if (m3Storage != null || str.m3Storage != null) {
+            return M3StringSearch.indexOf(this, str, beginIndex, endIndex);
+        }
+        return indexOf(value, coder(), endIndex, str, beginIndex);
     }
 
     /**
@@ -2835,7 +2860,10 @@ public final class String
      *          or {@code -1} if there is no such occurrence.
      */
     public int lastIndexOf(String str, int fromIndex) {
-        return lastIndexOf(value(), coder(), length(), str, fromIndex);
+        if (m3Storage != null || str.m3Storage != null) {
+            return M3StringSearch.lastIndexOf(this, str, fromIndex);
+        }
+        return lastIndexOf(value, coder(), length(), str, fromIndex);
     }
 
     /**
