@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.m3</groupId>
+  <artifactId>m3-jdk21-tooling-reactor</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>M3JDK21 external tooling reactor</name>
+  <description>
+    Maven orchestration for M3 authoring, OpenRewrite recipes, tests, evidence and candidate
+    modules. This reactor is intentionally not the OpenJDK product build.
+  </description>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <profiles>
+    <profile>
+      <id>m3-recipes</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <modules>
+        <module>tooling/migration-recipes</module>
+      </modules>
+    </profile>
+
+    <profile>
+      <id>m3-admission</id>
+      <modules>
+        <module>backports</module>
+        <module>history</module>
+        <module>migration</module>
+      </modules>
+    </profile>
+
+    <profile>
+      <id>m3-candidates</id>
+      <modules>
+        <module>ports/indexstring</module>
+        <module>collections</module>
+        <module>collections/recipe</module>
+      </modules>
+    </profile>
+
+    <profile>
+      <id>m3-all</id>
+      <modules>
+        <module>tooling/migration-recipes</module>
+        <module>backports</module>
+        <module>history</module>
+        <module>migration</module>
+        <module>ports/indexstring</module>
+        <module>collections</module>
+        <module>collections/recipe</module>
+      </modules>
+    </profile>
+  </profiles>
+</project>
