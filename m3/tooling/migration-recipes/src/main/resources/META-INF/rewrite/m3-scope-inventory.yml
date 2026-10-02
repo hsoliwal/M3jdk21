@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.M3ScopeInventory
+displayName: Inventory M3 visibility and package boundaries
+description: >-
+  Non-mutating scope evidence for VISIBILITY and PACKAGE passes. Inventories Java declaration
+  visibility and deterministic package/protected boundary roots before any broader refactor.
+recipeList:
+  - com.m3.rewrite.scope.M3VisibilityInventoryRecipe
+  - com.m3.rewrite.scope.M3PackageBoundaryRecipe
