@@ -22,6 +22,14 @@ public enum M3VisibilityLevel {
         return PACKAGE;
     }
 
+    public static M3VisibilityLevel ofMember(
+            List<J.Modifier> modifiers,
+            boolean interfaceOwner) {
+        M3VisibilityLevel explicit = of(modifiers);
+        if (explicit == PACKAGE && interfaceOwner) return PUBLIC;
+        return explicit;
+    }
+
     public boolean escapesFile() {
         return this != PRIVATE;
     }
