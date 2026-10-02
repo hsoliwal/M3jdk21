@@ -6,14 +6,16 @@
 
 Read, in order:
 
-1. ../../docs/whole-jdk-migration-scope.md — program scope, coverage denominator and architecture overview.
-2. ARCHITECTURE.md — canonical layer boundaries and compatibility laws.
-3. COVERAGE.md — current whole-JDK coverage framework plus retained MIndex/MatIndex mapping slice.
-4. COLLECTIONS.md — detailed java.util / java.util.concurrent collection replacement contracts.
-5. WORK_PACKETS.md — dependency-aware work packets for the remaining JDK/HotSpot subsystems.
-6. ACCEPTANCE.md — universal and subsystem-specific promotion gates.
-7. ../../docs/name-mapping.json — existing machine-readable operational capability authority.
-8. ../../docs/mindex-migration-handoff.md — retained deep MIndex/MatIndex slice handoff.
+1. ../../docs/whole-jdk-migration-scope.md — program scope and coverage denominator.
+2. ../../docs/whole-jdk-subsystem-matrix.md — canonical module/source-root planning dispositions.
+3. ARCHITECTURE.md — shared layer boundaries and compatibility laws.
+4. ../../docs/whole-jdk-collections-replacement.md — canonical detailed java.util / java.util.concurrent replacement design.
+5. COLLECTIONS.md — collection migration execution overlay: mapping packets, routes and stop gates.
+6. COVERAGE.md — current whole-JDK migration/evidence projection plus retained MIndex/MatIndex slice.
+7. WORK_PACKETS.md — dependency-aware work packets for remaining JDK/HotSpot subsystems.
+8. ACCEPTANCE.md — universal and subsystem-specific promotion gates.
+9. ../../docs/name-mapping.json — existing machine-readable operational capability authority.
+10. ../../docs/mindex-migration-handoff.md — retained deep MIndex/MatIndex slice handoff.
 
 Documentation PR #25 uses branch docs/whole-jdk-m3-scope-20261002 and is based on target master 45f546ff5bcb06a1b2604f14baf998785d98d9a1. The Synexia develop tip observed during this documentation update was 3db24805d640c72ab1bd637d83561696d99561a0. Those are inspection pins, not permission to rewrite historical capability pins. Re-pin only within a separately reviewed implementation/mapping update after reconciling source and target drift.
 
