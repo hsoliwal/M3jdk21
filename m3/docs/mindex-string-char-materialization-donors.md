@@ -16,6 +16,7 @@ The reviewed donor projects reinforce the same separation:
 | Abseil `Cord` | share chunks/external memory; cheap sub-ranges; explicit copy-to-string/span boundary | storage/lifetime reference; keep GC-visible MIndex ownership semantics |
 | Netty `CompositeByteBuf` | indexed component composition; bulk copy only at explicit boundary | direct analogue for segment-wise MIndex materialization |
 | Chronicle Bytes | mapped/off-heap access with explicit resource ownership | lifetime/view reference for mapped MIndex atoms |
+| Apache Spark `UTF8String` | base-object + address/offset/length text descriptor, cached facts, explicit copy boundary | addressed-text reference; preserve MIndex UTF-16 semantics instead of Spark code-point semantics |
 | OpenJDK String/StringUTF16/StringConcatHelper/JNI | exact Java UTF-16, Compact String and JNI materialization contract | semantic authority for the modified-JDK route |
 
 Exact repository commits and licenses are recorded in
