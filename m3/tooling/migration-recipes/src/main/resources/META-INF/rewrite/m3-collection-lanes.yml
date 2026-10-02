@@ -1,0 +1,15 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3CollectionLanes
+displayName: M3 independent collection lane module
+description: Exact Java LST candidates for sparse bulk operations, CAS lanes and primitive streams.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-collection-lanes
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.rewrite.M3SegmentedLaneNative
+displayName: M3 optional segmented bitmap JNI
+description: Separately fenced new C candidate, requiring compiler and Java parity gates.
+recipeList:
+  - com.synexia.rewrite.M3SegmentedLaneNativeRecipe
