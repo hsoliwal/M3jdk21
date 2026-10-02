@@ -24,8 +24,8 @@ jobs:
           echo "M3_JDK=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
       - name: Verify deterministic source-bound recipe
         run: |
-          python3 m3/runtime-stage1/apply.py --check
-          python3 m3/runtime-stage1/test_recipe.py
+          python3 m3/runtime-segments/recipe/apply.py --check
+          python3 m3/runtime-segments/recipe/test_recipe.py
       - name: Build and exercise immutable foundation
         run: ./m3/build.sh
       - name: Compare pinned Synexia content and range contract

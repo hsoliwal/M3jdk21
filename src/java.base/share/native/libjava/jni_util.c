@@ -669,6 +669,7 @@ static jmethodID String_getBytes_ID;    /* String.getBytes(Charset) */
 /* Cached field IDs */
 static jfieldID String_coder_ID;        /* String.coder */
 static jfieldID String_value_ID;        /* String.value */
+static jfieldID String_m3Parts_ID;      /* immutable experimental segment directory */
 
 /* Create a new string by converting str to a heap-allocated byte array and
  * calling the appropriate String constructor.
@@ -814,6 +815,8 @@ InitializeEncoding(JNIEnv *env, const char *encname)
     CHECK_NULL(String_coder_ID);
     String_value_ID = (*env)->GetFieldID(env, strClazz, "value", "[B");
     CHECK_NULL(String_value_ID);
+    String_m3Parts_ID = (*env)->GetFieldID(env, strClazz, "m3Parts", "[Ljava/lang/String;");
+    CHECK_NULL(String_m3Parts_ID);
 }
 
 JNIEXPORT jstring JNICALL
@@ -903,8 +906,16 @@ getStringUTF8(JNIEnv *env, jstring jstr, jboolean strict)
         return NULL;
     }
     value = (*env)->GetObjectField(env, jstr, String_value_ID);
-    if (value == NULL)
+    if (value == NULL) {
+        jobject parts = (*env)->GetObjectField(env, jstr, String_m3Parts_ID);
+        if (parts != NULL) {
+            (*env)->DeleteLocalRef(env, parts);
+            // Platform conversion is an explicit Java materialization boundary.
+            // No primitive array or critical pointer has been acquired here.
+            return getStringBytes(env, jstr, strict);
+        }
         return NULL;
+    }
     len = (*env)->GetArrayLength(env, value);
     str = (*env)->GetPrimitiveArrayCritical(env, value, NULL);
     if (str == NULL) {

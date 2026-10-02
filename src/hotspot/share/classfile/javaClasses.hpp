@@ -54,6 +54,9 @@ class java_lang_Object : AllStatic {
 class java_lang_String : AllStatic {
  private:
   static int _value_offset;
+  static int _m3Parts_offset;
+  static int _m3Ranges_offset;
+  static int _m3Length_offset;
   static int _hash_offset;
   static int _hashIsZero_offset;
   static int _coder_offset;
@@ -100,6 +103,7 @@ class java_lang_String : AllStatic {
   static Handle create_from_platform_dependent_str(const char* str, TRAPS);
 
   static void set_compact_strings(bool value);
+  static void set_m3_segmented_strings(bool value);
 
   static int value_offset() { CHECK_INIT(_value_offset); }
   static int coder_offset() { CHECK_INIT(_coder_offset); }
@@ -121,6 +125,9 @@ class java_lang_String : AllStatic {
   static inline bool test_and_set_deduplication_requested(oop java_string);
 
   // Accessors
+  // These readers never allocate Java objects or safepoint.
+  static inline bool is_segmented(oop java_string);
+  static inline jchar char_at(oop java_string, int index);
   static inline typeArrayOop value(oop java_string);
   static inline typeArrayOop value_no_keepalive(oop java_string);
   static inline bool hash_is_set(oop string);

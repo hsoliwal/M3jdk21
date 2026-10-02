@@ -428,6 +428,8 @@ final class StringConcatHelper {
             // newly created string required, see JLS 15.18.1
             return new String(s1);
         }
+        String segmented = String.m3Concat(s1, s2);
+        if (segmented != null) return segmented;
         // start "mixing" in length and coder or arguments, order is not
         // important
         long indexCoder = mix(initialCoder(), s1);

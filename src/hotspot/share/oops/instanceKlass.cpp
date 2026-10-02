@@ -3644,9 +3644,9 @@ void InstanceKlass::oop_print_on(oop obj, outputStream* st) {
   if (this == vmClasses::String_klass()) {
     typeArrayOop value  = java_lang_String::value(obj);
     juint        length = java_lang_String::length(obj);
-    if (value != nullptr &&
-        value->is_typeArray() &&
-        length <= (juint) value->length()) {
+    if (java_lang_String::is_segmented(obj) ||
+        (value != nullptr && value->is_typeArray() &&
+         length <= (juint) value->length())) {
       st->print(BULLET"string: ");
       java_lang_String::print(obj, st);
       st->cr();
@@ -3688,7 +3688,7 @@ void InstanceKlass::oop_print_value_on(oop obj, outputStream* st) {
   name()->print_value_on(st);
   obj->print_address_on(st);
   if (this == vmClasses::String_klass()
-      && java_lang_String::value(obj) != nullptr) {
+      && (java_lang_String::value(obj) != nullptr || java_lang_String::is_segmented(obj))) {
     ResourceMark rm;
     int len = java_lang_String::length(obj);
     int plen = (len < 24 ? len : 12);

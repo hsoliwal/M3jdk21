@@ -32,6 +32,7 @@
 #include "oops/instanceKlass.inline.hpp"
 #include "oops/method.hpp"
 #include "oops/oop.inline.hpp"
+#include "oops/objArrayOop.inline.hpp"
 #include "oops/oopsHierarchy.hpp"
 #include "oops/typeArrayOop.inline.hpp"
 
@@ -54,7 +55,8 @@ bool java_lang_String::hash_is_set(oop java_string) {
 // Accessors
 bool java_lang_String::value_equals(typeArrayOop str_value1, typeArrayOop str_value2) {
   return ((str_value1 == str_value2) ||
-          (str_value1->length() == str_value2->length() &&
+          (str_value1 != nullptr && str_value2 != nullptr &&
+           str_value1->length() == str_value2->length() &&
            (!memcmp(str_value1->base(T_BYTE),
                     str_value2->base(T_BYTE),
                     str_value2->length() * sizeof(jbyte)))));
@@ -68,6 +70,31 @@ typeArrayOop java_lang_String::value(oop java_string) {
 typeArrayOop java_lang_String::value_no_keepalive(oop java_string) {
   assert(is_instance(java_string), "must be java_string");
   return (typeArrayOop) java_string->obj_field_access<AS_NO_KEEPALIVE>(_value_offset);
+}
+
+bool java_lang_String::is_segmented(oop java_string) {
+  return java_string->obj_field_access<AS_NO_KEEPALIVE>(_m3Parts_offset) != nullptr;
+}
+
+jchar java_lang_String::char_at(oop java_string, int index) {
+  assert(index >= 0 && index < length(java_string), "String index");
+  objArrayOop parts = (objArrayOop)java_string->obj_field(_m3Parts_offset);
+  if (parts != nullptr) {
+    typeArrayOop ranges = (typeArrayOop)java_string->obj_field(_m3Ranges_offset);
+    int lo = 0, hi = parts->length() - 1;
+    while (lo < hi) {
+      int mid = lo + (hi - lo) / 2;
+      if (index < ranges->int_at(2 * mid + 1)) hi = mid;
+      else lo = mid + 1;
+    }
+    int previous_end = lo == 0 ? 0 : ranges->int_at(2 * lo - 1);
+    index = ranges->int_at(2 * lo) + index - previous_end;
+    java_string = parts->obj_at(lo);
+    assert(!is_segmented(java_string), "M3 leaves must be flat");
+  }
+  typeArrayOop bytes = value(java_string);
+  return is_latin1(java_string) ? (jchar)(bytes->byte_at(index) & 0xff)
+                                : bytes->char_at(index);
 }
 
 bool java_lang_String::is_latin1(oop java_string) {
@@ -108,6 +135,9 @@ int java_lang_String::length(oop java_string, typeArrayOop value) {
   assert(is_instance(java_string), "must be java_string");
   assert(value_equals(value, java_lang_String::value(java_string)),
          "value must be equal to java_lang_String::value(java_string)");
+  if (is_segmented(java_string)) {
+    return java_string->int_field(_m3Length_offset);
+  }
   if (value == nullptr) {
     return 0;
   }

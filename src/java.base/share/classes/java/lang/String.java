@@ -152,10 +152,26 @@ public final class String
      *
      * Additionally, it is marked with {@link Stable} to trust the contents
      * of the array. No other facility in JDK provides this functionality (yet).
-     * {@link Stable} is safe here, because value is never null.
+     * Flat Strings have a non-null value. In the opt-in M3 experiment only,
+     * segmented Strings have a permanently null value and immutable leaf
+     * directories; their separately published m3Flat cache is not @Stable.
      */
     @Stable
     private final byte[] value;
+
+    // Experimental segmented representation. Directory arrays never escape and
+    // contain only flat immutable String leaves. Ranges are UTF16 code units:
+    // [leaf start, cumulative logical end] for each leaf.
+    private final String[] m3Parts;
+    private final int[] m3Ranges;
+    private final int m3Length;
+    private volatile byte[] m3Flat;
+
+    // HotSpot replaces this value before String initialization completes.
+    static final boolean M3_SEGMENTS;
+    static {
+        M3_SEGMENTS = true;
+    }
 
     /**
      * The identifier of the encoding used to encode the bytes in
@@ -243,6 +259,9 @@ public final class String
      * unnecessary since Strings are immutable.
      */
     public String() {
+        this.m3Parts = null;
+        this.m3Ranges = null;
+        this.m3Length = 0;
         this.value = "".value;
         this.coder = "".coder;
     }
@@ -259,10 +278,15 @@ public final class String
      */
     @IntrinsicCandidate
     public String(String original) {
+        this.m3Ranges = original.m3Ranges;
+        this.m3Length = original.m3Length;
+        this.m3Flat = original.m3Flat;
         this.value = original.value;
         this.coder = original.coder;
         this.hash = original.hash;
         this.hashIsZero = original.hashIsZero;
+        // Publish the VM's initialized-directory discriminator last.
+        this.m3Parts = original.m3Parts;
     }
 
     /**
@@ -337,6 +361,9 @@ public final class String
      * @since  1.5
      */
     public String(int[] codePoints, int offset, int count) {
+        this.m3Parts = null;
+        this.m3Ranges = null;
+        this.m3Length = 0;
         checkBoundsOffCount(offset, count, codePoints.length);
         if (count == 0) {
             this.value = "".value;
@@ -396,6 +423,9 @@ public final class String
      */
     @Deprecated(since="1.1")
     public String(byte[] ascii, int hibyte, int offset, int count) {
+        this.m3Parts = null;
+        this.m3Ranges = null;
+        this.m3Length = 0;
         checkBoundsOffCount(offset, count, ascii.length);
         if (count == 0) {
             this.value = "".value;
@@ -530,6 +560,9 @@ public final class String
      */
     @SuppressWarnings("removal")
     private String(Charset charset, byte[] bytes, int offset, int length) {
+        this.m3Parts = null;
+        this.m3Ranges = null;
+        this.m3Length = 0;
         if (length == 0) {
             this.value = "".value;
             this.coder = "".coder;
@@ -1516,7 +1549,7 @@ public final class String
      *          object.
      */
     public int length() {
-        return value.length >> coder();
+        return m3Parts == null ? value.length >> coder() : m3Length;
     }
 
     /**
@@ -1529,7 +1562,7 @@ public final class String
      */
     @Override
     public boolean isEmpty() {
-        return value.length == 0;
+        return m3Parts == null ? value.length == 0 : m3Length == 0;
     }
 
     /**
@@ -1551,6 +1584,10 @@ public final class String
      *             string.
      */
     public char charAt(int index) {
+        if (m3Parts != null) {
+            checkIndex(index, m3Length);
+            return m3CharAt(index);
+        }
         if (isLatin1()) {
             return StringLatin1.charAt(value, index);
         } else {
@@ -1582,12 +1619,12 @@ public final class String
      */
     public int codePointAt(int index) {
         if (isLatin1()) {
-            checkIndex(index, value.length);
-            return value[index] & 0xff;
+            checkIndex(index, value().length);
+            return value()[index] & 0xff;
         }
-        int length = value.length >> 1;
+        int length = value().length >> 1;
         checkIndex(index, length);
-        return StringUTF16.codePointAt(value, index, length);
+        return StringUTF16.codePointAt(value(), index, length);
     }
 
     /**
@@ -1616,9 +1653,9 @@ public final class String
         int i = index - 1;
         checkIndex(i, length());
         if (isLatin1()) {
-            return (value[i] & 0xff);
+            return (value()[i] & 0xff);
         }
-        return StringUTF16.codePointBefore(value, index);
+        return StringUTF16.codePointBefore(value(), index);
     }
 
     /**
@@ -1647,7 +1684,7 @@ public final class String
         if (isLatin1()) {
             return endIndex - beginIndex;
         }
-        return StringUTF16.codePointCount(value, beginIndex, endIndex);
+        return StringUTF16.codePointCount(value(), beginIndex, endIndex);
     }
 
     /**
@@ -1708,9 +1745,9 @@ public final class String
         checkBoundsBeginEnd(srcBegin, srcEnd, length());
         checkBoundsOffCount(dstBegin, srcEnd - srcBegin, dst.length);
         if (isLatin1()) {
-            StringLatin1.getChars(value, srcBegin, srcEnd, dst, dstBegin);
+            StringLatin1.getChars(value(), srcBegin, srcEnd, dst, dstBegin);
         } else {
-            StringUTF16.getChars(value, srcBegin, srcEnd, dst, dstBegin);
+            StringUTF16.getChars(value(), srcBegin, srcEnd, dst, dstBegin);
         }
     }
 
@@ -1764,9 +1801,9 @@ public final class String
         Objects.requireNonNull(dst);
         checkBoundsOffCount(dstBegin, srcEnd - srcBegin, dst.length);
         if (isLatin1()) {
-            StringLatin1.getBytes(value, srcBegin, srcEnd, dst, dstBegin);
+            StringLatin1.getBytes(value(), srcBegin, srcEnd, dst, dstBegin);
         } else {
-            StringUTF16.getBytes(value, srcBegin, srcEnd, dst, dstBegin);
+            StringUTF16.getBytes(value(), srcBegin, srcEnd, dst, dstBegin);
         }
     }
 
@@ -1792,7 +1829,7 @@ public final class String
      */
     public byte[] getBytes(String charsetName)
             throws UnsupportedEncodingException {
-        return encode(lookupCharset(charsetName), coder(), value);
+        return encode(lookupCharset(charsetName), coder(), value());
     }
 
     /**
@@ -1815,7 +1852,7 @@ public final class String
      */
     public byte[] getBytes(Charset charset) {
         if (charset == null) throw new NullPointerException();
-        return encode(charset, coder(), value);
+        return encode(charset, coder(), value());
      }
 
     /**
@@ -1833,7 +1870,7 @@ public final class String
      * @since      1.1
      */
     public byte[] getBytes() {
-        return encode(Charset.defaultCharset(), coder(), value);
+        return encode(Charset.defaultCharset(), coder(), value());
     }
 
     /**
@@ -1856,6 +1893,14 @@ public final class String
      */
     public boolean equals(Object anObject) {
         if (this == anObject) {
+            return true;
+        }
+        if (anObject instanceof String other && (m3Parts != null || other.m3Parts != null)) {
+            int n = length();
+            if (n != other.length()) return false;
+            for (int i = 0; i < n; i++) {
+                if (charAt(i) != other.charAt(i)) return false;
+            }
             return true;
         }
         return (anObject instanceof String aString)
@@ -1890,7 +1935,7 @@ public final class String
         if (len != sb.length()) {
             return false;
         }
-        byte[] v1 = value;
+        byte[] v1 = value();
         byte[] v2 = sb.getValue();
         byte coder = coder();
         if (coder == sb.getCoder()) {
@@ -1942,7 +1987,7 @@ public final class String
         if (n != length()) {
             return false;
         }
-        byte[] val = this.value;
+        byte[] val = this.value();
         if (isLatin1()) {
             for (int i = 0; i < n; i++) {
                 if ((val[i] & 0xff) != cs.charAt(i)) {
@@ -2038,8 +2083,8 @@ public final class String
      *          lexicographically greater than the string argument.
      */
     public int compareTo(String anotherString) {
-        byte[] v1 = value;
-        byte[] v2 = anotherString.value;
+        byte[] v1 = value();
+        byte[] v2 = anotherString.value();
         byte coder = coder();
         if (coder == anotherString.coder()) {
             return coder == LATIN1 ? StringLatin1.compareTo(v1, v2)
@@ -2074,8 +2119,8 @@ public final class String
         private static final long serialVersionUID = 8575799808933029326L;
 
         public int compare(String s1, String s2) {
-            byte[] v1 = s1.value;
-            byte[] v2 = s2.value;
+            byte[] v1 = s1.value();
+            byte[] v2 = s2.value();
             byte coder = s1.coder();
             if (coder == s2.coder()) {
                 return coder == LATIN1 ? StringLatin1.compareToCI(v1, v2)
@@ -2156,8 +2201,8 @@ public final class String
              (ooffset > (long)other.length() - len)) {
             return false;
         }
-        byte[] tv = value;
-        byte[] ov = other.value;
+        byte[] tv = value();
+        byte[] ov = other.value();
         byte coder = coder();
         if (coder == other.coder()) {
             if (coder == UTF16) {
@@ -2246,8 +2291,8 @@ public final class String
                 || (ooffset > (long)other.length() - len)) {
             return false;
         }
-        byte[] tv = value;
-        byte[] ov = other.value;
+        byte[] tv = value();
+        byte[] ov = other.value();
         byte coder = coder();
         if (coder == other.coder()) {
             return coder == LATIN1
@@ -2281,8 +2326,8 @@ public final class String
         if (toffset < 0 || toffset > length() - prefix.length()) {
             return false;
         }
-        byte[] ta = value;
-        byte[] pa = prefix.value;
+        byte[] ta = value();
+        byte[] pa = prefix.value();
         int po = 0;
         int pc = pa.length;
         byte coder = coder();
@@ -2362,8 +2407,12 @@ public final class String
         // from immutable state
         int h = hash;
         if (h == 0 && !hashIsZero) {
-            h = isLatin1() ? StringLatin1.hashCode(value)
-                           : StringUTF16.hashCode(value);
+            if (m3Parts != null) {
+                for (int i = 0; i < m3Length; i++) h = 31 * h + m3CharAt(i);
+            } else {
+                h = isLatin1() ? StringLatin1.hashCode(value)
+                              : StringUTF16.hashCode(value);
+            }
             if (h == 0) {
                 hashIsZero = true;
             } else {
@@ -2454,8 +2503,8 @@ public final class String
      * {@code fromIndex} were larger than the string length, or were negative.
      */
     public int indexOf(int ch, int fromIndex) {
-        return isLatin1() ? StringLatin1.indexOf(value, ch, fromIndex, length())
-                : StringUTF16.indexOf(value, ch, fromIndex, length());
+        return isLatin1() ? StringLatin1.indexOf(value(), ch, fromIndex, length())
+                : StringUTF16.indexOf(value(), ch, fromIndex, length());
     }
 
     /**
@@ -2500,8 +2549,8 @@ public final class String
      */
     public int indexOf(int ch, int beginIndex, int endIndex) {
         checkBoundsBeginEnd(beginIndex, endIndex, length());
-        return isLatin1() ? StringLatin1.indexOf(value, ch, beginIndex, endIndex)
-                : StringUTF16.indexOf(value, ch, beginIndex, endIndex);
+        return isLatin1() ? StringLatin1.indexOf(value(), ch, beginIndex, endIndex)
+                : StringUTF16.indexOf(value(), ch, beginIndex, endIndex);
     }
 
     /**
@@ -2566,8 +2615,8 @@ public final class String
      *          if the character does not occur before that point.
      */
     public int lastIndexOf(int ch, int fromIndex) {
-        return isLatin1() ? StringLatin1.lastIndexOf(value, ch, fromIndex)
-                          : StringUTF16.lastIndexOf(value, ch, fromIndex);
+        return isLatin1() ? StringLatin1.lastIndexOf(value(), ch, fromIndex)
+                          : StringUTF16.lastIndexOf(value(), ch, fromIndex);
     }
 
     /**
@@ -2587,13 +2636,13 @@ public final class String
     public int indexOf(String str) {
         byte coder = coder();
         if (coder == str.coder()) {
-            return isLatin1() ? StringLatin1.indexOf(value, str.value)
-                              : StringUTF16.indexOf(value, str.value);
+            return isLatin1() ? StringLatin1.indexOf(value(), str.value())
+                              : StringUTF16.indexOf(value(), str.value());
         }
         if (coder == LATIN1) {  // str.coder == UTF16
             return -1;
         }
-        return StringUTF16.indexOfLatin1(value, str.value);
+        return StringUTF16.indexOfLatin1(value(), str.value());
     }
 
     /**
@@ -2627,7 +2676,7 @@ public final class String
      *          or {@code -1} if there is no such occurrence.
      */
     public int indexOf(String str, int fromIndex) {
-        return indexOf(value, coder(), length(), str, fromIndex);
+        return indexOf(value(), coder(), length(), str, fromIndex);
     }
 
     /**
@@ -2660,7 +2709,7 @@ public final class String
             return indexOf(str.charAt(0), beginIndex, endIndex);
         }
         checkBoundsBeginEnd(beginIndex, endIndex, length());
-        return indexOf(value, coder(), endIndex, str, beginIndex);
+        return indexOf(value(), coder(), endIndex, str, beginIndex);
     }
 
     /**
@@ -2685,7 +2734,7 @@ public final class String
             return fromIndex;
         }
 
-        byte[] tgt = tgtStr.value;
+        byte[] tgt = tgtStr.value();
         byte tgtCoder = tgtStr.coder();
         if (srcCoder == tgtCoder) {
             return srcCoder == LATIN1
@@ -2736,7 +2785,7 @@ public final class String
      *          or {@code -1} if there is no such occurrence.
      */
     public int lastIndexOf(String str, int fromIndex) {
-        return lastIndexOf(value, coder(), length(), str, fromIndex);
+        return lastIndexOf(value(), coder(), length(), str, fromIndex);
     }
 
     /**
@@ -2752,7 +2801,7 @@ public final class String
      */
     static int lastIndexOf(byte[] src, byte srcCoder, int srcCount,
                            String tgtStr, int fromIndex) {
-        byte[] tgt = tgtStr.value;
+        byte[] tgt = tgtStr.value();
         byte tgtCoder = tgtStr.coder();
         int tgtCount = tgtStr.length();
         /*
@@ -2832,8 +2881,11 @@ public final class String
             return this;
         }
         int subLen = endIndex - beginIndex;
-        return isLatin1() ? StringLatin1.newString(value, beginIndex, subLen)
-                          : StringUTF16.newString(value, beginIndex, subLen);
+        if (m3Enabled() && subLen != 0) {
+            return m3Slice(beginIndex, endIndex);
+        }
+        return isLatin1() ? StringLatin1.newString(value(), beginIndex, subLen)
+                          : StringUTF16.newString(value(), beginIndex, subLen);
     }
 
     /**
@@ -2926,8 +2978,8 @@ public final class String
      */
     public String replace(char oldChar, char newChar) {
         if (oldChar != newChar) {
-            String ret = isLatin1() ? StringLatin1.replace(value, oldChar, newChar)
-                                    : StringUTF16.replace(value, oldChar, newChar);
+            String ret = isLatin1() ? StringLatin1.replace(value(), oldChar, newChar)
+                                    : StringUTF16.replace(value(), oldChar, newChar);
             if (ret != null) {
                 return ret;
             }
@@ -3093,12 +3145,12 @@ public final class String
             boolean trgtIsLatin1 = trgtStr.isLatin1();
             boolean replIsLatin1 = replStr.isLatin1();
             String ret = (thisIsLatin1 && trgtIsLatin1 && replIsLatin1)
-                    ? StringLatin1.replace(value, thisLen,
-                                           trgtStr.value, trgtLen,
-                                           replStr.value, replLen)
-                    : StringUTF16.replace(value, thisLen, thisIsLatin1,
-                                          trgtStr.value, trgtLen, trgtIsLatin1,
-                                          replStr.value, replLen, replIsLatin1);
+                    ? StringLatin1.replace(value(), thisLen,
+                                           trgtStr.value(), trgtLen,
+                                           replStr.value(), replLen)
+                    : StringUTF16.replace(value(), thisLen, thisIsLatin1,
+                                          trgtStr.value(), trgtLen, trgtIsLatin1,
+                                          replStr.value(), replLen, replIsLatin1);
             if (ret != null) {
                 return ret;
             }
@@ -3493,7 +3545,7 @@ public final class String
         // Preserve a fresh result object and its default hash/dedup state.
         if (size == 1 && prefix.isEmpty() && suffix.isEmpty()) {
             String element = elements[0];
-            return new String(element.value, element.coder());
+            return new String(element.value(), element.coder());
         }
         int icoder = prefix.coder() | suffix.coder();
         long len = (long) prefix.length() + suffix.length();
@@ -3638,8 +3690,8 @@ public final class String
      * @since   1.1
      */
     public String toLowerCase(Locale locale) {
-        return isLatin1() ? StringLatin1.toLowerCase(this, value, locale)
-                          : StringUTF16.toLowerCase(this, value, locale);
+        return isLatin1() ? StringLatin1.toLowerCase(this, value(), locale)
+                          : StringUTF16.toLowerCase(this, value(), locale);
     }
 
     /**
@@ -3718,8 +3770,8 @@ public final class String
      * @since   1.1
      */
     public String toUpperCase(Locale locale) {
-        return isLatin1() ? StringLatin1.toUpperCase(this, value, locale)
-                          : StringUTF16.toUpperCase(this, value, locale);
+        return isLatin1() ? StringLatin1.toUpperCase(this, value(), locale)
+                          : StringUTF16.toUpperCase(this, value(), locale);
     }
 
     /**
@@ -3778,8 +3830,8 @@ public final class String
      *          has no leading or trailing space.
      */
     public String trim() {
-        String ret = isLatin1() ? StringLatin1.trim(value)
-                                : StringUTF16.trim(value);
+        String ret = isLatin1() ? StringLatin1.trim(value())
+                                : StringUTF16.trim(value());
         return ret == null ? this : ret;
     }
 
@@ -3810,8 +3862,8 @@ public final class String
      * @since 11
      */
     public String strip() {
-        String ret = isLatin1() ? StringLatin1.strip(value)
-                                : StringUTF16.strip(value);
+        String ret = isLatin1() ? StringLatin1.strip(value())
+                                : StringUTF16.strip(value());
         return ret == null ? this : ret;
     }
 
@@ -3840,8 +3892,8 @@ public final class String
      * @since 11
      */
     public String stripLeading() {
-        String ret = isLatin1() ? StringLatin1.stripLeading(value)
-                                : StringUTF16.stripLeading(value);
+        String ret = isLatin1() ? StringLatin1.stripLeading(value())
+                                : StringUTF16.stripLeading(value());
         return ret == null ? this : ret;
     }
 
@@ -3870,8 +3922,8 @@ public final class String
      * @since 11
      */
     public String stripTrailing() {
-        String ret = isLatin1() ? StringLatin1.stripTrailing(value)
-                                : StringUTF16.stripTrailing(value);
+        String ret = isLatin1() ? StringLatin1.stripTrailing(value())
+                                : StringUTF16.stripTrailing(value());
         return ret == null ? this : ret;
     }
 
@@ -3923,7 +3975,7 @@ public final class String
      * @since 11
      */
     public Stream<String> lines() {
-        return isLatin1() ? StringLatin1.lines(value) : StringUTF16.lines(value);
+        return isLatin1() ? StringLatin1.lines(value()) : StringUTF16.lines(value());
     }
 
     /**
@@ -3979,13 +4031,13 @@ public final class String
     }
 
     private int indexOfNonWhitespace() {
-        return isLatin1() ? StringLatin1.indexOfNonWhitespace(value)
-                          : StringUTF16.indexOfNonWhitespace(value);
+        return isLatin1() ? StringLatin1.indexOfNonWhitespace(value())
+                          : StringUTF16.indexOfNonWhitespace(value());
     }
 
     private int lastIndexOfNonWhitespace() {
-        return isLatin1() ? StringLatin1.lastIndexOfNonWhitespace(value)
-                          : StringUTF16.lastIndexOfNonWhitespace(value);
+        return isLatin1() ? StringLatin1.lastIndexOfNonWhitespace(value())
+                          : StringUTF16.lastIndexOfNonWhitespace(value());
     }
 
     /**
@@ -4314,8 +4366,8 @@ public final class String
     @Override
     public IntStream chars() {
         return StreamSupport.intStream(
-            isLatin1() ? new StringLatin1.CharsSpliterator(value, Spliterator.IMMUTABLE)
-                       : new StringUTF16.CharsSpliterator(value, Spliterator.IMMUTABLE),
+            isLatin1() ? new StringLatin1.CharsSpliterator(value(), Spliterator.IMMUTABLE)
+                       : new StringUTF16.CharsSpliterator(value(), Spliterator.IMMUTABLE),
             false);
     }
 
@@ -4334,8 +4386,8 @@ public final class String
     @Override
     public IntStream codePoints() {
         return StreamSupport.intStream(
-            isLatin1() ? new StringLatin1.CharsSpliterator(value, Spliterator.IMMUTABLE)
-                       : new StringUTF16.CodePointsSpliterator(value, Spliterator.IMMUTABLE),
+            isLatin1() ? new StringLatin1.CharsSpliterator(value(), Spliterator.IMMUTABLE)
+                       : new StringUTF16.CodePointsSpliterator(value(), Spliterator.IMMUTABLE),
             false);
     }
 
@@ -4347,8 +4399,8 @@ public final class String
      *          the character sequence represented by this string.
      */
     public char[] toCharArray() {
-        return isLatin1() ? StringLatin1.toChars(value)
-                          : StringUTF16.toChars(value);
+        return isLatin1() ? StringLatin1.toChars(value())
+                          : StringUTF16.toChars(value());
     }
 
     /**
@@ -4666,7 +4718,7 @@ public final class String
         if (count == 1) {
             return this;
         }
-        final int len = value.length;
+        final int len = value().length;
         if (len == 0 || count == 0) {
             return "";
         }
@@ -4675,12 +4727,12 @@ public final class String
         }
         if (len == 1) {
             final byte[] single = new byte[count];
-            Arrays.fill(single, value[0]);
+            Arrays.fill(single, value()[0]);
             return new String(single, coder);
         }
         final int limit = len * count;
         final byte[] multiple = new byte[limit];
-        System.arraycopy(value, 0, multiple, 0, len);
+        System.arraycopy(value(), 0, multiple, 0, len);
         repeatCopyRest(multiple, 0, limit, len);
         return new String(multiple, coder);
     }
@@ -4725,9 +4777,9 @@ public final class String
      */
     void getBytes(byte[] dst, int dstBegin, byte coder) {
         if (coder() == coder) {
-            System.arraycopy(value, 0, dst, dstBegin << coder, value.length);
+            System.arraycopy(value(), 0, dst, dstBegin << coder, value().length);
         } else {    // this.coder == LATIN && coder == UTF16
-            StringLatin1.inflate(value, 0, dst, dstBegin, value.length);
+            StringLatin1.inflate(value(), 0, dst, dstBegin, value().length);
         }
     }
 
@@ -4745,9 +4797,9 @@ public final class String
      */
     void getBytes(byte[] dst, int srcPos, int dstBegin, byte coder, int length) {
         if (coder() == coder) {
-            System.arraycopy(value, srcPos << coder, dst, dstBegin << coder, length << coder);
+            System.arraycopy(value(), srcPos << coder, dst, dstBegin << coder, length << coder);
         } else {    // this.coder == LATIN && coder == UTF16
-            StringLatin1.inflate(value, srcPos, dst, dstBegin, length);
+            StringLatin1.inflate(value(), srcPos, dst, dstBegin, length);
         }
     }
 
@@ -4761,6 +4813,9 @@ public final class String
      * characters in their byte sequences defined by the {@code StringUTF16}.
      */
     String(char[] value, int off, int len, Void sig) {
+        this.m3Parts = null;
+        this.m3Ranges = null;
+        this.m3Length = 0;
         if (len == 0) {
             this.value = "".value;
             this.coder = "".coder;
@@ -4783,6 +4838,9 @@ public final class String
      * disambiguating it against other (public) constructors.
      */
     String(AbstractStringBuilder asb, Void sig) {
+        this.m3Parts = null;
+        this.m3Ranges = null;
+        this.m3Length = 0;
         byte[] val = asb.getValue();
         int length = asb.length();
         if (asb.isLatin1()) {
@@ -4807,6 +4865,9 @@ public final class String
     * Package private constructor which shares value array for speed.
     */
     String(byte[] value, byte coder) {
+        this.m3Parts = null;
+        this.m3Ranges = null;
+        this.m3Length = 0;
         this.value = value;
         this.coder = coder;
     }
@@ -4816,7 +4877,117 @@ public final class String
     }
 
     byte[] value() {
-        return value;
+        if (value != null) return value;
+        byte[] flat = m3Flat;
+        if (flat == null) {
+            flat = (coder() == LATIN1) ? new byte[m3Length] : StringUTF16.newBytesFor(m3Length);
+            for (int i = 0; i < m3Length; i++) {
+                char c = m3CharAt(i);
+                if (coder() == LATIN1) flat[i] = (byte)c;
+                else StringUTF16.putChar(flat, i, c);
+            }
+            // Duplicate races are harmless: each fully populated array is
+            // immutable, and the volatile store publishes its contents.
+            m3Flat = flat;
+        }
+        return flat;
+    }
+
+    static boolean m3Enabled() {
+        return M3_SEGMENTS && jdk.internal.misc.VM.isBooted();
+    }
+
+    private String(String[] parts, int[] ranges, int length, byte coder) {
+        this.value = null;
+        this.coder = coder;
+        this.m3Ranges = ranges;
+        this.m3Length = length;
+        // Publish the VM's initialized-directory discriminator last.
+        this.m3Parts = parts;
+    }
+
+    private char m3CharAt(int index) {
+        int lo = 0, hi = m3Parts.length - 1;
+        while (lo < hi) {
+            int mid = (lo + hi) >>> 1;
+            if (index < m3Ranges[2 * mid + 1]) hi = mid;
+            else lo = mid + 1;
+        }
+        int preceding = lo == 0 ? 0 : m3Ranges[2 * lo - 1];
+        String leaf = m3Parts[lo];
+        int source = m3Ranges[2 * lo] + index - preceding;
+        return leaf.isLatin1() ? StringLatin1.charAt(leaf.value, source)
+                              : StringUTF16.charAt(leaf.value, source);
+    }
+
+    // null means the bounded directory would overflow; caller uses the stock
+    // contiguous concat path. No canonical pool or mutable input is involved.
+    static String m3Concat(String left, String right) {
+        if (!m3Enabled()) return null;
+        int count = (left.m3Parts == null ? 1 : left.m3Parts.length)
+                  + (right.m3Parts == null ? 1 : right.m3Parts.length);
+        if (count > 256) return null;
+        long length = (long)left.length() + right.length();
+        if (length > (Integer.MAX_VALUE >> (left.coder() | right.coder()))) {
+            throw new OutOfMemoryError("Requested string length exceeds VM limit");
+        }
+        String[] parts = new String[count];
+        int[] ranges = new int[2 * count];
+        int at = left.m3Append(parts, ranges, 0, 0);
+        right.m3Append(parts, ranges, at, left.length());
+        return new String(parts, ranges, (int)length, (byte)(left.coder() | right.coder()));
+    }
+
+    private int m3Append(String[] parts, int[] ranges, int at, int preceding) {
+        if (m3Parts == null) {
+            parts[at] = this;
+            ranges[2 * at] = 0;
+            ranges[2 * at + 1] = preceding + length();
+            return at + 1;
+        }
+        for (int i = 0; i < m3Parts.length; i++, at++) {
+            parts[at] = m3Parts[i];
+            ranges[2 * at] = m3Ranges[2 * i];
+            ranges[2 * at + 1] = preceding + m3Ranges[2 * i + 1];
+        }
+        return at;
+    }
+
+    private String m3Slice(int begin, int end) {
+        int first = 0, last = 0;
+        if (m3Parts != null) {
+            while (begin >= m3Ranges[2 * first + 1]) first++;
+            last = first;
+            while (end > m3Ranges[2 * last + 1]) last++;
+        }
+        int count = last - first + 1;
+        String[] parts = new String[count];
+        int[] ranges = new int[2 * count];
+        if (m3Parts == null) {
+            parts[0] = this;
+            ranges[0] = begin;
+            ranges[1] = end - begin;
+        } else {
+            int written = 0;
+            for (int i = first; i <= last; i++) {
+                int previous = i == 0 ? 0 : m3Ranges[2 * i - 1];
+                int start = Math.max(begin, previous);
+                int stop = Math.min(end, m3Ranges[2 * i + 1]);
+                int dest = i - first;
+                parts[dest] = m3Parts[i];
+                ranges[2 * dest] = m3Ranges[2 * i] + start - previous;
+                written += stop - start;
+                ranges[2 * dest + 1] = written;
+            }
+        }
+        byte resultCoder = coder();
+        if (COMPACT_STRINGS && resultCoder == UTF16) {
+            resultCoder = LATIN1;
+            for (int i = begin; i < end; i++) {
+                if (charAt(i) > 255) { resultCoder = UTF16; break; }
+            }
+        }
+        return new String(parts, ranges, end - begin, resultCoder);
     }
 
     boolean isLatin1() {

@@ -2160,19 +2160,19 @@ JNI_ENTRY_NO_PRESERVE(const jchar*, jni_GetStringChars(
   jchar* buf = nullptr;
   oop s = JNIHandles::resolve_non_null(string);
   typeArrayOop s_value = java_lang_String::value(s);
-  if (s_value != nullptr) {
+  if (s_value != nullptr || java_lang_String::is_segmented(s)) {
     int s_len = java_lang_String::length(s, s_value);
     bool is_latin1 = java_lang_String::is_latin1(s);
     buf = NEW_C_HEAP_ARRAY_RETURN_NULL(jchar, s_len + 1, mtInternal);  // add one for zero termination
     /* JNI Specification states return null on OOM */
     if (buf != nullptr) {
       if (s_len > 0) {
-        if (!is_latin1) {
+        if (!is_latin1 && !java_lang_String::is_segmented(s)) {
           ArrayAccess<>::arraycopy_to_native(s_value, (size_t) typeArrayOopDesc::element_offset<jchar>(0),
                                              buf, s_len);
         } else {
           for (int i = 0; i < s_len; i++) {
-            buf[i] = ((jchar) s_value->byte_at(i)) & 0xff;
+            buf[i] = java_lang_String::char_at(s, i);
           }
         }
       }
@@ -2230,7 +2230,7 @@ JNI_ENTRY(const char*, jni_GetStringUTFChars(JNIEnv *env, jstring string, jboole
   char* result = nullptr;
   oop java_string = JNIHandles::resolve_non_null(string);
   typeArrayOop s_value = java_lang_String::value(java_string);
-  if (s_value != nullptr) {
+  if (s_value != nullptr || java_lang_String::is_segmented(java_string)) {
     size_t length = java_lang_String::utf8_length(java_string, s_value);
     /* JNI Specification states return null on OOM */
     result = AllocateHeap(length + 1, mtInternal, AllocFailStrategy::RETURN_NULL);
@@ -2756,12 +2756,12 @@ JNI_ENTRY(void, jni_GetStringRegion(JNIEnv *env, jstring string, jsize start, js
   } else {
     if (len > 0) {
       bool is_latin1 = java_lang_String::is_latin1(s);
-      if (!is_latin1) {
+      if (!is_latin1 && !java_lang_String::is_segmented(s)) {
         ArrayAccess<>::arraycopy_to_native(s_value, typeArrayOopDesc::element_offset<jchar>(start),
                                            buf, len);
       } else {
         for (int i = 0; i < len; i++) {
-          buf[i] = ((jchar) s_value->byte_at(i + start)) & 0xff;
+          buf[i] = java_lang_String::char_at(s, i + start);
         }
       }
     }
@@ -2824,7 +2824,7 @@ JNI_ENTRY(const jchar*, jni_GetStringCritical(JNIEnv *env, jstring string, jbool
   HOTSPOT_JNI_GETSTRINGCRITICAL_ENTRY(env, string, (uintptr_t *) isCopy);
   oop s = JNIHandles::resolve_non_null(string);
   jchar* ret;
-  if (!java_lang_String::is_latin1(s)) {
+  if (!java_lang_String::is_latin1(s) && !java_lang_String::is_segmented(s)) {
     typeArrayHandle s_value(thread, java_lang_String::value(s));
 
     // Pin value array
@@ -2833,14 +2833,14 @@ JNI_ENTRY(const jchar*, jni_GetStringCritical(JNIEnv *env, jstring string, jbool
     ret = (jchar*) s_value->base(T_CHAR);
     if (isCopy != nullptr) *isCopy = JNI_FALSE;
   } else {
-    // Inflate latin1 encoded string to UTF16
+    // Copy segmented content or inflate latin1 to UTF16; never expose leaf arrays.
     typeArrayOop s_value = java_lang_String::value(s);
     int s_len = java_lang_String::length(s, s_value);
     ret = NEW_C_HEAP_ARRAY_RETURN_NULL(jchar, s_len + 1, mtInternal);  // add one for zero termination
     /* JNI Specification states return null on OOM */
     if (ret != nullptr) {
       for (int i = 0; i < s_len; i++) {
-        ret[i] = ((jchar) s_value->byte_at(i)) & 0xff;
+        ret[i] = java_lang_String::char_at(s, i);
       }
       ret[s_len] = 0;
     }
@@ -2856,8 +2856,8 @@ JNI_ENTRY(void, jni_ReleaseStringCritical(JNIEnv *env, jstring str, const jchar 
   oop s = JNIHandles::resolve_non_null(str);
   bool is_latin1 = java_lang_String::is_latin1(s);
 
-  if (is_latin1) {
-    // For latin1 string, free jchar array allocated by earlier call to GetStringCritical.
+  if (is_latin1 || java_lang_String::is_segmented(s)) {
+    // Latin1 and segmented Strings return a native copy from GetStringCritical.
     // This assumes that ReleaseStringCritical bookends GetStringCritical.
     FREE_C_HEAP_ARRAY(jchar, chars);
   } else {
