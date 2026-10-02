@@ -1,0 +1,5 @@
+key	value
+baseline_commit	7a3f9c49d71a62c5ee2a398f4607d446dce518b8
+baseline_kind	immutable-branch-merge-base
+product_roots	src,test,make,doc
+comparison	byte-exact-sha256
