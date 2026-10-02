@@ -249,17 +249,25 @@ public final class M3IndexDbSemanticIndex {
 
     private static List<M3IndexDbSemanticEdge> canonicalEdges(
             Collection<M3IndexDbSemanticEdge> rows) {
-        ArrayList<M3IndexDbSemanticEdge> edges = new ArrayList<>(rows.size());
+        ArrayList<M3IndexDbSemanticEdge> sorted = new ArrayList<>(rows.size());
         for (M3IndexDbSemanticEdge edge : rows) {
-            M3IndexDbSemanticEdge checked = Objects.requireNonNull(edge, "edge");
-            if (!edges.contains(checked)) edges.add(checked);
+            sorted.add(Objects.requireNonNull(edge, "edge"));
         }
-        edges.sort(
+        sorted.sort(
                 Comparator.comparing(M3IndexDbSemanticEdge::parentId)
                         .thenComparing(M3IndexDbSemanticEdge::role)
                         .thenComparing(M3IndexDbSemanticEdge::childId)
                         .thenComparingInt(M3IndexDbSemanticEdge::ordinal));
-        return List.copyOf(edges);
+
+        ArrayList<M3IndexDbSemanticEdge> unique = new ArrayList<>(sorted.size());
+        M3IndexDbSemanticEdge previous = null;
+        for (M3IndexDbSemanticEdge edge : sorted) {
+            if (!edge.equals(previous)) {
+                unique.add(edge);
+                previous = edge;
+            }
+        }
+        return List.copyOf(unique);
     }
 
     private static void validateEdges(
@@ -317,10 +325,14 @@ public final class M3IndexDbSemanticIndex {
         mutable.forEach((key, values) -> {
             values.sort(byParent
                     ? Comparator.comparing(M3IndexDbSemanticEdge::role)
-                            .thenComparing(edge -> nodes.get(edge.childId()).semanticKey())
+                            .thenComparing(
+                                    (M3IndexDbSemanticEdge edge) ->
+                                            nodes.get(edge.childId()).semanticKey())
                             .thenComparingInt(M3IndexDbSemanticEdge::ordinal)
                             .thenComparing(M3IndexDbSemanticEdge::childId)
-                    : Comparator.comparing(edge -> nodes.get(edge.parentId()).semanticKey())
+                    : Comparator.comparing(
+                                    (M3IndexDbSemanticEdge edge) ->
+                                            nodes.get(edge.parentId()).semanticKey())
                             .thenComparing(M3IndexDbSemanticEdge::role)
                             .thenComparingInt(M3IndexDbSemanticEdge::ordinal)
                             .thenComparing(M3IndexDbSemanticEdge::parentId));
