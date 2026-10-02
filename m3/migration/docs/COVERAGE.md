@@ -13,7 +13,7 @@ This is a framework plus verified directory census, not a completed symbol/ABI/d
 | Subsystem | Current planning disposition | Primary dependency / evidence need |
 | --- | --- | --- |
 | String, Unicode, charset, regex | replace/adapt candidates; incomplete | Deep text specs, exact UTF-16 differential tests, materialization, regex/encoding seams, VM/JNI/CDS/JIT gates |
-| Collections, maps, sets, queues/deques | mixed replace/adapt/reuse; incomplete | COLLECTIONS.md per-family contract, views/serialization/subclass/boxing evidence |
+| Collections, maps, sets, queues/deques | mixed replace/adapt/reuse; incomplete | [whole-JDK collection contract](../../docs/whole-jdk-collections-replacement.md): per-family views/serialization/subclass/boxing evidence |
 | Concurrent collections and atomics | retain-pending-evidence / research candidates | JMM, linearization, progress, GC/reclamation, contention/resize tests |
 | Streams, iterators, spliterators, bulk algorithms | adapt/specialize candidates | Encounter order, callback/evaluation semantics, parallel behavior, precompute amortization |
 | I/O, NIO, buffers, files, networking, serialization | mixed adapt/reuse/platform-specific | Contiguous-array/native ownership, close/error behavior, mapped-file/platform and serialized-form tests |
@@ -27,7 +27,7 @@ This is a framework plus verified directory census, not a completed symbol/ABI/d
 | Higher java.* / jdk.* modules | per-module review required | Package/symbol/resource/native inventory and dependency-ordered dispositions |
 | Build/image/package/distribution | retain/adapt | OpenJDK build compatibility, exact image, feature rollback and release provenance |
 
-Per-subsystem implementation packets and dependency order are in WORK_PACKETS.md. No row above is an operational capability status change.
+Per-subsystem implementation packets and dependency order are in [../../docs/whole-jdk-work-packets.md](../../docs/whole-jdk-work-packets.md). No row above is an operational capability status change.
 
 ## Required inventory row shape
 
