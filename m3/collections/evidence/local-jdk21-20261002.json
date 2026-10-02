@@ -14,10 +14,10 @@
     "os": "Linux x86_64 container"
   },
   "files": {
-    "README.md": "cfcd83507df15862188397895d6f72decaf328c48173df99582d0c617480d773",
+    "README.md": "f4666cb8fed300c857e549a0f5366a22f040e66861faa1769737c6d2c5d6ed7d",
     "build.sh": "c4f155b81011831498afb19b2ad2f8323930077435e34170ca137b5aaec568ad",
     "recipe/apply.py": "00f69ff5a5b00d6b06540751e2af555c8a61d81ba9ca7c0b504f690ebf3f58f0",
-    "recipe/manifest.json": "300d11ab42048a1293851b348b2284cb215a05bce93b038088dfddaff20b81f5",
+    "recipe/manifest.json": "14315df45dc70d2fd9536365747082b5a89d0e8c596669f3b15b623451f4269a",
     "recipe/test_recipe.py": "f28a661592926b052755a082a097bddfe29f15ad28d697e61bd5255e70e7a2be",
     "src/com/m3/collections/M3LongCollection.java": "8161ac3d6cf68a3c7eade8236bd630fc694b2cb1af68dfc9293c48fbfb4dd4f1",
     "src/com/m3/collections/M3LongDeque.java": "221c184d8577fa0eaaed9d27b7fb92498bb6f98cffb8467fbfcaaa48eb42f57b",
@@ -52,6 +52,7 @@
     "jar_reproducible": "PASS",
     "jar_sha256": "bbba8e0fbb8328f6fb1b8c54b9422dcaf70f78176fefe1c0a3917122c814ce60",
     "normal_checks": 1006642,
+    "openrewrite_execution": "AUTHORED_UNEXECUTED_MAVEN_UNAVAILABLE",
     "recipe_unit_tests": 2,
     "strict_compile": "PASS"
   },
