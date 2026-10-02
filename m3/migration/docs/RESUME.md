@@ -97,6 +97,8 @@ This creates a review output and refuses modified existing output. Install only 
 
 ## Next dependency-ready work
 
+Before launching a fresh whole-source scan, reconcile the private draft source census #7696 described in [COVERAGE.md](COVERAGE.md). It is branch-scoped evidence rather than canonical target state, but it already records a broader pinned source denominator and retained syntax failures. Re-run or extend the scanner only for source-pin drift, missing dependency domains or required evidence that the existing census does not cover; never fork a second inventory authority merely because its private mapping rows are not yet admitted here.
+
 Run the existing `com.synexia.m3.inventory.M3InventoryMain` / `InventoryWriter` on authorized full source checkouts at the baseline and each relevant unmerged PR head. Preserve every row, including non-MIndex dependencies. Record producer revision, repository, commit, tracking ref, TSV SHA-256 and truthful scope completeness. Do not move a private checkout into the public repository to repair CI downloads.
 
 Feed those receipts to `migration.py reconcile --inventory ... --inventory-receipt ...`. Reconcile every unmapped row; an empty result from partial search is not absence. The tool emits review decisions, not permission to mutate or a CI completeness pass. Next inspect the actual structural owner bodies, bridge adapters and the two conflicting `SubMIndexString` implementations. Preserve each public contract and identify the Java String UTF-16 route separately.
