@@ -1,3 +1,7 @@
 recipe_id	class	scope	contract	status	verification
 m3-file-local-pure-int-atom	com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe	FILE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
 m3-file-local-pure-int-inventory	com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates	FILE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
+m3-donor-inline	com.m3.rewrite.donor.M3PinnedDonorInlineRecipe	MODULE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
+m3-fuzzy-recipe-dag	com.m3.rewrite.dag.M3RecipeDagPlannerRecipe	MULTI_MODULE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
+m3-semantic-index	com.m3.rewrite.index.M3SemanticIndexRecipe	FILE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
+m3-semantic-index-m3db	com.m3.rewrite.index.M3SemanticIndexM3DbBridgeRecipe	MULTI_MODULE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
