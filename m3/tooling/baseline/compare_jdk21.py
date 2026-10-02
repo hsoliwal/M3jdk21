@@ -53,6 +53,16 @@ def compare(baseline: Path, current: Path) -> list[tuple[str, str, str, str, str
     return rows
 
 
+def tree_hash(rows: list[tuple[str, str, str, str, str]], hash_index: int) -> str:
+    digest = hashlib.sha256()
+    for row in rows:
+        digest.update(row[0].encode("utf-8"))
+        digest.update(b"\0")
+        digest.update(row[hash_index].encode("ascii"))
+        digest.update(b"\n")
+    return digest.hexdigest()
+
+
 def write_ledger(rows: list[tuple[str, str, str, str, str]], output: Path) -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open("w", encoding="utf-8", newline="") as handle:
@@ -74,6 +84,8 @@ def main() -> int:
     for _, _, _, status, _ in rows:
         counts[status] = counts.get(status, 0) + 1
     print(f"baseline_commit={BASELINE_COMMIT}")
+    print(f"baseline_tree_sha256={tree_hash(rows, 1)}")
+    print(f"current_tree_sha256={tree_hash(rows, 2)}")
     for status in sorted(counts):
         print(f"{status}={counts[status]}")
     print(f"ledger={args.output}")
