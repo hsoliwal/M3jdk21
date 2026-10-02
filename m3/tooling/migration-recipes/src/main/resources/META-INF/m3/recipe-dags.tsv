@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+dag_id	capability_tokens	maximum_scope	recipe_chain	mutation_authority
+atom-file-fixed-point	atomize,patternize,iop,file,behavior,contract,fixed,point	FILE	com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates>com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe	false
+donor-inline	foss,donor,inline,transpile,source,pin,hash,license,namespace	MODULE	com.m3.rewrite.donor.M3PinnedDonorInlineRecipe	false
+m3indexdb-semantic-index	m3indexdb,mindexdb,atom,semantic,index,logic,structure,simhash,dag,database	MODULE	com.m3.rewrite.index.M3SemanticIndexRecipe>com.m3.rewrite.index.M3SemanticIndexM3DbBridgeRecipe	false
+package-promotion	visibility,package,refactor,contract,promotion	PACKAGE	com.m3.rewrite.scope.M3RecipeDagPlannerRecipe	false
+whole-jdk-backport	jdk,jep,backport,tooling,compatibility,java21	MULTI_MODULE	com.m3.rewrite.scope.M3RecipeDagPlannerRecipe	false
