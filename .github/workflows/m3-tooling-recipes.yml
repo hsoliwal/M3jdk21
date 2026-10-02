@@ -86,6 +86,12 @@ jobs:
           mvn -version
           mvn -B -f "$REPO/m3/pom.xml" -P m3-recipes verify
 
+      - name: Verify JDK-8357439 Bash completion payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash "$REPO/m3/backports/recipes/verify-JDK-8357439.sh"             "$REPO/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/jdk-8357439-jcmd-completion/jcmd.txt"
+
       - name: Byte-exact JDK21 product-tree gate
         shell: bash
         run: |
