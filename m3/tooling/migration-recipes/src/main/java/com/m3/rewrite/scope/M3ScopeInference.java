@@ -8,8 +8,10 @@ import java.util.Objects;
 /**
  * Conservative locality inference for module-relative Java source paths.
  *
- * <p>This helper intentionally stops at MODULE. MULTI_MODULE and LIBRARY_API are orchestration
- * decisions and must be declared explicitly by the coordinating recipe or task packet.
+ * <p>This helper intentionally infers only physical target locality. VISIBILITY cannot be
+ * inferred from paths and must be declared explicitly by a recipe that changes declaration
+ * visibility. MULTI_MODULE and LIBRARY_API are orchestration decisions and must also be declared
+ * explicitly by the coordinating recipe or task packet.
  */
 public final class M3ScopeInference {
     private static final String MAIN = "src/main/java/";
@@ -39,7 +41,7 @@ public final class M3ScopeInference {
                 samePackageBoundary = false;
             }
         }
-        return samePackageBoundary ? M3EditScope.PACKAGE_VISIBILITY : M3EditScope.MODULE;
+        return samePackageBoundary ? M3EditScope.PACKAGE : M3EditScope.MODULE;
     }
 
     private static String normalizedJavaPath(String value) {
