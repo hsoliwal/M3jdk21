@@ -20,7 +20,9 @@ public final class M3RecipeScopeRegistry {
             "com.m3.rewrite.InstallIndexStringCompatibility",
             fixed(M3EditScope.MODULE),
             "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
-            inferred());
+            inferred(),
+            "com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe",
+            fixed(M3EditScope.FILE));
 
     private M3RecipeScopeRegistry() {}
 
