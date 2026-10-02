@@ -4,6 +4,7 @@ package com.m3.rewrite.pipeline;
 /** Ordered semantic stages in the Java 21 M3 OpenRewrite convergence pipeline. */
 public enum M3RecipeStage {
     INVENTORY(0, false),
+    SEMANTIC_HASH(5, false),
     ATOMIZATION(10, true),
     PATTERNIZATION_IOP(20, true),
     DOCUMENTATION(30, true);
