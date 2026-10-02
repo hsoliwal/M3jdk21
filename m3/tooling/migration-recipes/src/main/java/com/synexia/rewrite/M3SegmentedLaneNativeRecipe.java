@@ -2,6 +2,7 @@
  * SPDX-License-Identifier: Apache-2.0 */
 package com.synexia.rewrite;
 
+import com.m3.rewrite.scope.M3FileScopedRecipe;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
@@ -18,7 +19,7 @@ import org.openrewrite.TreeVisitor;
 import org.openrewrite.text.PlainText;
 
 /** Exact new-file JNI candidate installer. Existing divergent C is never replaced. */
-public final class M3SegmentedLaneNativeRecipe extends ScanningRecipe<M3SegmentedLaneNativeRecipe.State> {
+public final class M3SegmentedLaneNativeRecipe extends ScanningRecipe<M3SegmentedLaneNativeRecipe.State> implements M3FileScopedRecipe {
     public static final String TARGET = "src/main/native/collections/segmented_bit_lane.c";
     private static final String RESOURCE = "/com/synexia/rewrite/segmented-lane-native/segmented_bit_lane.c.txt";
     private static final String SHA = "4ff7fb4557c58cc59de7fbb24498f3df2a197083a5cd467670dc24b9441f1210";
@@ -30,6 +31,7 @@ public final class M3SegmentedLaneNativeRecipe extends ScanningRecipe<M3Segmente
         private State(String text) { this.text = text; }
     }
 
+    @Override public String targetPath() { return TARGET; }
     @Override public String getDisplayName() { return "M3 segmented bitmap JNI candidate"; }
     @Override public String getDescription() {
         return "Adds a sealed JNI bitmap counter only when its target is absent or already identical.";
