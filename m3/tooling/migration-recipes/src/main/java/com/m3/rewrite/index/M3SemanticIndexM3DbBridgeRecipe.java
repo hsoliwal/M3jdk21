@@ -78,9 +78,9 @@ public final class M3SemanticIndexM3DbBridgeRecipe extends Recipe {
             edges = edgeRows.toList();
         }
 
-        byte[] payload = M3SemanticIndexPayload.encode(nodes, edges);
+        var semanticIndex = M3SemanticIndexPayload.toIndex(nodes, edges);
         try (M3IndexDB database = M3IndexDB.open(Path.of(outputDirectory))) {
-            database.putArtifact("semantic-index", "m3.semantic-index", 1, payload);
+            semanticIndex.store(database, "semantic-index");
         } catch (IOException failure) {
             throw new IllegalStateException("cannot persist semantic index into M3IndexDB", failure);
         }
