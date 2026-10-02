@@ -30,6 +30,12 @@ final class M3RecipeDagCatalogueTest {
         assertEquals(
                 com.m3.rewrite.scope.M3EditScope.MULTI_MODULE,
                 semantic.getFirst().entry().maximumScope());
+        assertEquals(
+                List.of(
+                        "com.m3.rewrite.index.M3SemanticIndexRecipe",
+                        "com.m3.rewrite.index.M3TypeRelationRecipe",
+                        "com.m3.rewrite.index.M3SemanticIndexM3DbBridgeRecipe"),
+                semantic.getFirst().entry().recipeClasses());
 
         assertTrue(catalogue.entries().stream().allMatch(entry -> !entry.mutationAuthority()));
         assertTrue(catalogue.entries().stream()
