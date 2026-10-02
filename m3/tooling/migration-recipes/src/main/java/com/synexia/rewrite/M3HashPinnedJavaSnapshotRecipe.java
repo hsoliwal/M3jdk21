@@ -68,7 +68,6 @@ public final class M3HashPinnedJavaSnapshotRecipe
         this.crateName = crateName;
     }
 
-
     @Override public String getDisplayName() {
         return "M3 hash-pinned Java snapshot candidate";
     }
