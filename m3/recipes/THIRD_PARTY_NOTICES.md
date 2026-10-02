@@ -19,4 +19,3 @@ as runtime fences; their upstream licenses and notices remain unchanged.
 `mapping-check.py` wraps the installed `jsonschema.Draft202012Validator` (MIT,
 https://github.com/python-jsonschema/jsonschema). No implementation source is
 copied. This is a maintainer/CI dependency and is outside the runtime kernel.
-

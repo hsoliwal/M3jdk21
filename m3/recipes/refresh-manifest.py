@@ -8,7 +8,7 @@ root=Path(__file__).resolve().parents[2]
 runtime=['src/java.base/share/classes/java/lang/'+n+'.java' for n in ['String','StringLatin1','StringUTF16','StringCoding']]
 runtime += ['src/hotspot/share/'+n for n in ['classfile/javaClasses.hpp','classfile/javaClasses.inline.hpp','opto/library_call.cpp','prims/jni.cpp']]
 files=[]
-for folder in ['m3/core','m3/docs','m3/lexicon','m3/compatibility','m3/ports','m3/recipes','m3/tooling','m3/evidence']:
+for folder in ['m3/core','m3/docs','m3/lexicon','m3/compatibility','m3/ports','m3/recipes','m3/tooling','m3/evidence','m3/migration','m3/algorithms']:
     files += [p.relative_to(root).as_posix() for p in (root/folder).rglob('*')
               if p.is_file() and not {'build','target','__pycache__'}.intersection(p.relative_to(root).parts)
               and p.suffix != '.pyc' and not any(fnmatch.fnmatch(p.name, pattern) for pattern in ['hs_err_pid*.log','replay_pid*.log'])

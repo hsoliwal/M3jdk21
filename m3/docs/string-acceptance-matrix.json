@@ -164,19 +164,15 @@
     },
     {
       "jdk21_signature": "public void getBytes(int, int, byte[], int);",
-      "status": "partial_route_a",
-      "evidence": [
-        "m3/evidence/retained-text-result.json"
-      ],
-      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+      "status": "pending_exact_overload_gate",
+      "evidence": [],
+      "limitation": "This actual String overload is not admitted by the facade method with the same name."
     },
     {
       "jdk21_signature": "public byte[] getBytes(java.lang.String) throws java.io.UnsupportedEncodingException;",
-      "status": "partial_route_a",
-      "evidence": [
-        "m3/evidence/retained-text-result.json"
-      ],
-      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+      "status": "pending_exact_overload_gate",
+      "evidence": [],
+      "limitation": "This actual String overload is not admitted by the facade method with the same name."
     },
     {
       "jdk21_signature": "public byte[] getBytes(java.nio.charset.Charset);",
@@ -188,11 +184,9 @@
     },
     {
       "jdk21_signature": "public byte[] getBytes();",
-      "status": "partial_route_a",
-      "evidence": [
-        "m3/evidence/retained-text-result.json"
-      ],
-      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+      "status": "pending_exact_overload_gate",
+      "evidence": [],
+      "limitation": "This actual String overload is not admitted by the facade method with the same name."
     },
     {
       "jdk21_signature": "public boolean equals(java.lang.Object);",
@@ -204,11 +198,9 @@
     },
     {
       "jdk21_signature": "public boolean contentEquals(java.lang.StringBuffer);",
-      "status": "implemented_tested_route_a_subset",
-      "evidence": [
-        "m3/evidence/retained-text-result.json"
-      ],
-      "limitation": "Explicit M3String equivalent tested; receiver/type/null/identity differences remain separate compatibility obligations."
+      "status": "pending_exact_overload_gate",
+      "evidence": [],
+      "limitation": "This actual String overload is not admitted by the facade method with the same name."
     },
     {
       "jdk21_signature": "public boolean contentEquals(java.lang.CharSequence);",
@@ -278,43 +270,33 @@
     },
     {
       "jdk21_signature": "public int indexOf(int);",
-      "status": "partial_route_a",
-      "evidence": [
-        "m3/evidence/retained-text-result.json"
-      ],
-      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+      "status": "pending_exact_overload_gate",
+      "evidence": [],
+      "limitation": "This actual String overload is not admitted by the facade method with the same name."
     },
     {
       "jdk21_signature": "public int indexOf(int, int);",
-      "status": "partial_route_a",
-      "evidence": [
-        "m3/evidence/retained-text-result.json"
-      ],
-      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+      "status": "pending_exact_overload_gate",
+      "evidence": [],
+      "limitation": "This actual String overload is not admitted by the facade method with the same name."
     },
     {
       "jdk21_signature": "public int indexOf(int, int, int);",
-      "status": "partial_route_a",
-      "evidence": [
-        "m3/evidence/retained-text-result.json"
-      ],
-      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+      "status": "pending_exact_overload_gate",
+      "evidence": [],
+      "limitation": "This actual String overload is not admitted by the facade method with the same name."
     },
     {
       "jdk21_signature": "public int lastIndexOf(int);",
-      "status": "partial_route_a",
-      "evidence": [
-        "m3/evidence/retained-text-result.json"
-      ],
-      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+      "status": "pending_exact_overload_gate",
+      "evidence": [],
+      "limitation": "This actual String overload is not admitted by the facade method with the same name."
     },
     {
       "jdk21_signature": "public int lastIndexOf(int, int);",
-      "status": "partial_route_a",
-      "evidence": [
-        "m3/evidence/retained-text-result.json"
-      ],
-      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+      "status": "pending_exact_overload_gate",
+      "evidence": [],
+      "limitation": "This actual String overload is not admitted by the facade method with the same name."
     },
     {
       "jdk21_signature": "public int indexOf(java.lang.String);",
@@ -334,11 +316,9 @@
     },
     {
       "jdk21_signature": "public int indexOf(java.lang.String, int, int);",
-      "status": "partial_route_a",
-      "evidence": [
-        "m3/evidence/retained-text-result.json"
-      ],
-      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+      "status": "pending_exact_overload_gate",
+      "evidence": [],
+      "limitation": "The facade has no three-argument String search overload; begin/end bounds and exception order are unverified."
     },
     {
       "jdk21_signature": "public int lastIndexOf(java.lang.String);",

@@ -1,0 +1,2 @@
+# Unified patch context uses a literal space for an empty context line.
+donor-adaptations.patch whitespace=-blank-at-eol

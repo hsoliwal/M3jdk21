@@ -1,0 +1,271 @@
+{
+  "schema": 1,
+  "scope": "Selected Route A and opt-in explicit-view Route B only",
+  "runs": [
+    {
+      "id": "retained-text-0",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javac",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\m3\\indexstring\\M3String.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\m3\\indexstring\\M3StringArena.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\m3\\indexstring\\M3Utf16Cursor.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\synexia\\indexstring\\FrozenByteInterner.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\synexia\\indexstring\\FrozenBytes.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\synexia\\indexstring\\FrozenChars.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedBytes.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedChars.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedStorageIntern.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedStreams.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\test\\M3StringTest.java"
+      ],
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "inputs": {
+        "m3/ports/text/src/com/m3/indexstring/M3String.java": "aaf2f5868fb26f1a8d80f13ae13885885ec7f2eb31c4676f4924d037315fe61c",
+        "m3/ports/text/src/com/m3/indexstring/M3StringArena.java": "94eda684ee599ed6cbfd9ed8fd58a571ca5f831a368da332345999255919639a",
+        "m3/ports/text/src/com/m3/indexstring/M3Utf16Cursor.java": "ba2c75331207feacfdb2fdd225c1b2b2d6aba9c753d9865a7e00e9baafdaea98",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenByteInterner.java": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenBytes.java": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenChars.java": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedBytes.java": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedChars.java": "2cdb10d20f7ed9c80143471deb22350fdc44d9c7899975402313cb85fd50c3c4",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStorageIntern.java": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStreams.java": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80"
+      },
+      "stdout": "",
+      "output_kind": "raw child stdout",
+      "derived_from": {
+        "receipt": "m3/evidence/retained-text-result.json",
+        "sha256": "b0f161ac9fd8cf341711b94c998aa3ff80969e26ce1f2a98a2115987508ed645",
+        "record_index": 0
+      }
+    },
+    {
+      "id": "retained-text-1",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-ea",
+        "-cp",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+        "M3StringTest"
+      ],
+      "stdout_sha256": "775092af706119f7dbf38fb512b3b304a3d906faeab35483507be483cd2fefd7",
+      "inputs": {
+        "m3/ports/text/src/com/m3/indexstring/M3String.java": "aaf2f5868fb26f1a8d80f13ae13885885ec7f2eb31c4676f4924d037315fe61c",
+        "m3/ports/text/src/com/m3/indexstring/M3StringArena.java": "94eda684ee599ed6cbfd9ed8fd58a571ca5f831a368da332345999255919639a",
+        "m3/ports/text/src/com/m3/indexstring/M3Utf16Cursor.java": "ba2c75331207feacfdb2fdd225c1b2b2d6aba9c753d9865a7e00e9baafdaea98",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenByteInterner.java": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenBytes.java": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenChars.java": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedBytes.java": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedChars.java": "2cdb10d20f7ed9c80143471deb22350fdc44d9c7899975402313cb85fd50c3c4",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStorageIntern.java": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStreams.java": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80"
+      },
+      "stdout": "M3_RETAINED_TEXT_PASS checks=64450\n",
+      "output_kind": "raw child stdout",
+      "derived_from": {
+        "receipt": "m3/evidence/retained-text-result.json",
+        "sha256": "b0f161ac9fd8cf341711b94c998aa3ff80969e26ce1f2a98a2115987508ed645",
+        "record_index": 1
+      }
+    },
+    {
+      "id": "retained-text-2",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-ea",
+        "-Xint",
+        "-cp",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+        "M3StringTest"
+      ],
+      "stdout_sha256": "775092af706119f7dbf38fb512b3b304a3d906faeab35483507be483cd2fefd7",
+      "inputs": {
+        "m3/ports/text/src/com/m3/indexstring/M3String.java": "aaf2f5868fb26f1a8d80f13ae13885885ec7f2eb31c4676f4924d037315fe61c",
+        "m3/ports/text/src/com/m3/indexstring/M3StringArena.java": "94eda684ee599ed6cbfd9ed8fd58a571ca5f831a368da332345999255919639a",
+        "m3/ports/text/src/com/m3/indexstring/M3Utf16Cursor.java": "ba2c75331207feacfdb2fdd225c1b2b2d6aba9c753d9865a7e00e9baafdaea98",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenByteInterner.java": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenBytes.java": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenChars.java": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedBytes.java": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedChars.java": "2cdb10d20f7ed9c80143471deb22350fdc44d9c7899975402313cb85fd50c3c4",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStorageIntern.java": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStreams.java": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80"
+      },
+      "stdout": "M3_RETAINED_TEXT_PASS checks=64450\n",
+      "output_kind": "raw child stdout",
+      "derived_from": {
+        "receipt": "m3/evidence/retained-text-result.json",
+        "sha256": "b0f161ac9fd8cf341711b94c998aa3ff80969e26ce1f2a98a2115987508ed645",
+        "record_index": 2
+      }
+    },
+    {
+      "id": "retained-text-3",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-ea",
+        "-XX:-CompactStrings",
+        "-cp",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+        "M3StringTest"
+      ],
+      "stdout_sha256": "775092af706119f7dbf38fb512b3b304a3d906faeab35483507be483cd2fefd7",
+      "inputs": {
+        "m3/ports/text/src/com/m3/indexstring/M3String.java": "aaf2f5868fb26f1a8d80f13ae13885885ec7f2eb31c4676f4924d037315fe61c",
+        "m3/ports/text/src/com/m3/indexstring/M3StringArena.java": "94eda684ee599ed6cbfd9ed8fd58a571ca5f831a368da332345999255919639a",
+        "m3/ports/text/src/com/m3/indexstring/M3Utf16Cursor.java": "ba2c75331207feacfdb2fdd225c1b2b2d6aba9c753d9865a7e00e9baafdaea98",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenByteInterner.java": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenBytes.java": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenChars.java": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedBytes.java": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedChars.java": "2cdb10d20f7ed9c80143471deb22350fdc44d9c7899975402313cb85fd50c3c4",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStorageIntern.java": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStreams.java": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80"
+      },
+      "stdout": "M3_RETAINED_TEXT_PASS checks=64450\n",
+      "output_kind": "raw child stdout",
+      "derived_from": {
+        "receipt": "m3/evidence/retained-text-result.json",
+        "sha256": "b0f161ac9fd8cf341711b94c998aa3ff80969e26ce1f2a98a2115987508ed645",
+        "record_index": 3
+      }
+    },
+    {
+      "id": "retained-text-4",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-ea",
+        "-Xbatch",
+        "-XX:-TieredCompilation",
+        "-cp",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+        "M3StringTest"
+      ],
+      "stdout_sha256": "775092af706119f7dbf38fb512b3b304a3d906faeab35483507be483cd2fefd7",
+      "inputs": {
+        "m3/ports/text/src/com/m3/indexstring/M3String.java": "aaf2f5868fb26f1a8d80f13ae13885885ec7f2eb31c4676f4924d037315fe61c",
+        "m3/ports/text/src/com/m3/indexstring/M3StringArena.java": "94eda684ee599ed6cbfd9ed8fd58a571ca5f831a368da332345999255919639a",
+        "m3/ports/text/src/com/m3/indexstring/M3Utf16Cursor.java": "ba2c75331207feacfdb2fdd225c1b2b2d6aba9c753d9865a7e00e9baafdaea98",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenByteInterner.java": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenBytes.java": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenChars.java": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedBytes.java": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedChars.java": "2cdb10d20f7ed9c80143471deb22350fdc44d9c7899975402313cb85fd50c3c4",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStorageIntern.java": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStreams.java": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80"
+      },
+      "stdout": "M3_RETAINED_TEXT_PASS checks=64450\n",
+      "output_kind": "raw child stdout",
+      "derived_from": {
+        "receipt": "m3/evidence/retained-text-result.json",
+        "sha256": "b0f161ac9fd8cf341711b94c998aa3ff80969e26ce1f2a98a2115987508ed645",
+        "record_index": 4
+      }
+    },
+    {
+      "id": "explicit-concat-2",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xms16m",
+        "-Xmx64m",
+        "-XX:ActiveProcessorCount=2",
+        "-ea",
+        "-cp",
+        "C:\\Users\\hsoliwal\\AppData\\Local\\Temp\\junit8843087113925547644\\before",
+        "Behavior"
+      ],
+      "stdout_sha256": "5aceeb148ebeb1e59677487a5b8ef769156677b2edf30cd42d291b908381cba4",
+      "inputs": {
+        "m3/ports/text/src/com/m3/indexstring/M3String.java": "aaf2f5868fb26f1a8d80f13ae13885885ec7f2eb31c4676f4924d037315fe61c",
+        "m3/ports/text/src/com/m3/indexstring/M3StringArena.java": "94eda684ee599ed6cbfd9ed8fd58a571ca5f831a368da332345999255919639a",
+        "m3/ports/text/src/com/m3/indexstring/M3Utf16Cursor.java": "ba2c75331207feacfdb2fdd225c1b2b2d6aba9c753d9865a7e00e9baafdaea98",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenByteInterner.java": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenBytes.java": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenChars.java": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedBytes.java": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedChars.java": "2cdb10d20f7ed9c80143471deb22350fdc44d9c7899975402313cb85fd50c3c4",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStorageIntern.java": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStreams.java": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
+        "m3/tooling/compiler-lowering/pom.xml": "92102968f46316b700e75d34ed8a86f898417748f17757fdf114dede9d0a935d",
+        "m3/tooling/compiler-lowering/src/main/java/com/m3/tooling/ExplicitViewConcatRecipe.java": "1d23add29fae044a7a9d87bb3c16680632f810bbf2e14d99cefa729469045481",
+        "m3/tooling/compiler-lowering/src/test/java/com/m3/tooling/ExplicitViewConcatRecipeTest.java": "cc226477ff85806fa087079286bac4b40287e36231056804a36caf210b4ad423"
+      },
+      "stdout": "leftnull|SLR\nright|SLR\nleft|SL\nselect|S\nnullnull|SLR\n",
+      "output_kind": "raw child stdout",
+      "derived_from": {
+        "receipt": "m3/tooling/compiler-lowering/evidence/local-jdk21.json",
+        "sha256": "a5557587f30a54b7cd3113735c3c0c7ea06fe757714d99fe7f13fcf125341312",
+        "record_index": 2
+      }
+    },
+    {
+      "id": "explicit-concat-4",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xms16m",
+        "-Xmx64m",
+        "-XX:ActiveProcessorCount=2",
+        "-ea",
+        "-cp",
+        "C:\\Users\\hsoliwal\\AppData\\Local\\Temp\\junit8843087113925547644\\after",
+        "Behavior"
+      ],
+      "stdout_sha256": "5aceeb148ebeb1e59677487a5b8ef769156677b2edf30cd42d291b908381cba4",
+      "inputs": {
+        "m3/ports/text/src/com/m3/indexstring/M3String.java": "aaf2f5868fb26f1a8d80f13ae13885885ec7f2eb31c4676f4924d037315fe61c",
+        "m3/ports/text/src/com/m3/indexstring/M3StringArena.java": "94eda684ee599ed6cbfd9ed8fd58a571ca5f831a368da332345999255919639a",
+        "m3/ports/text/src/com/m3/indexstring/M3Utf16Cursor.java": "ba2c75331207feacfdb2fdd225c1b2b2d6aba9c753d9865a7e00e9baafdaea98",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenByteInterner.java": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenBytes.java": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf",
+        "m3/ports/text/src/com/synexia/indexstring/FrozenChars.java": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedBytes.java": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedChars.java": "2cdb10d20f7ed9c80143471deb22350fdc44d9c7899975402313cb85fd50c3c4",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStorageIntern.java": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7",
+        "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStreams.java": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
+        "m3/tooling/compiler-lowering/pom.xml": "92102968f46316b700e75d34ed8a86f898417748f17757fdf114dede9d0a935d",
+        "m3/tooling/compiler-lowering/src/main/java/com/m3/tooling/ExplicitViewConcatRecipe.java": "1d23add29fae044a7a9d87bb3c16680632f810bbf2e14d99cefa729469045481",
+        "m3/tooling/compiler-lowering/src/test/java/com/m3/tooling/ExplicitViewConcatRecipeTest.java": "cc226477ff85806fa087079286bac4b40287e36231056804a36caf210b4ad423"
+      },
+      "stdout": "leftnull|SLR\nright|SLR\nleft|SL\nselect|S\nnullnull|SLR\n",
+      "output_kind": "raw child stdout",
+      "derived_from": {
+        "receipt": "m3/tooling/compiler-lowering/evidence/local-jdk21.json",
+        "sha256": "a5557587f30a54b7cd3113735c3c0c7ea06fe757714d99fe7f13fcf125341312",
+        "record_index": 4
+      }
+    }
+  ],
+  "projections": [
+    {
+      "path": "m3/evidence/retained-text-result.json",
+      "sha256": "b0f161ac9fd8cf341711b94c998aa3ff80969e26ce1f2a98a2115987508ed645",
+      "meaning": "Mechanical projection of actual executed exit, argv and output evidence into the existing naming authority receipt schema."
+    },
+    {
+      "path": "m3/tooling/compiler-lowering/evidence/local-jdk21.json",
+      "sha256": "a5557587f30a54b7cd3113735c3c0c7ea06fe757714d99fe7f13fcf125341312",
+      "meaning": "Mechanical projection of actual executed exit, argv and output evidence into the existing naming authority receipt schema."
+    }
+  ]
+}

@@ -27,12 +27,12 @@ Generated from the installed stock Java 21 `javap -public java.lang.String` surf
 | `public int codePointCount(int, int);` | implemented_tested_route_a_subset |
 | `public int offsetByCodePoints(int, int);` | pending |
 | `public void getChars(int, int, char[], int);` | implemented_tested_route_a_subset |
-| `public void getBytes(int, int, byte[], int);` | partial_route_a |
-| `public byte[] getBytes(java.lang.String) throws java.io.UnsupportedEncodingException;` | partial_route_a |
+| `public void getBytes(int, int, byte[], int);` | pending_exact_overload_gate |
+| `public byte[] getBytes(java.lang.String) throws java.io.UnsupportedEncodingException;` | pending_exact_overload_gate |
 | `public byte[] getBytes(java.nio.charset.Charset);` | partial_route_a |
-| `public byte[] getBytes();` | partial_route_a |
+| `public byte[] getBytes();` | pending_exact_overload_gate |
 | `public boolean equals(java.lang.Object);` | implemented_tested_route_a_subset |
-| `public boolean contentEquals(java.lang.StringBuffer);` | implemented_tested_route_a_subset |
+| `public boolean contentEquals(java.lang.StringBuffer);` | pending_exact_overload_gate |
 | `public boolean contentEquals(java.lang.CharSequence);` | implemented_tested_route_a_subset |
 | `public boolean equalsIgnoreCase(java.lang.String);` | pending |
 | `public int compareTo(java.lang.String);` | partial_route_a |
@@ -43,14 +43,14 @@ Generated from the installed stock Java 21 `javap -public java.lang.String` surf
 | `public boolean startsWith(java.lang.String);` | pending |
 | `public boolean endsWith(java.lang.String);` | pending |
 | `public int hashCode();` | implemented_tested_route_a_subset |
-| `public int indexOf(int);` | partial_route_a |
-| `public int indexOf(int, int);` | partial_route_a |
-| `public int indexOf(int, int, int);` | partial_route_a |
-| `public int lastIndexOf(int);` | partial_route_a |
-| `public int lastIndexOf(int, int);` | partial_route_a |
+| `public int indexOf(int);` | pending_exact_overload_gate |
+| `public int indexOf(int, int);` | pending_exact_overload_gate |
+| `public int indexOf(int, int, int);` | pending_exact_overload_gate |
+| `public int lastIndexOf(int);` | pending_exact_overload_gate |
+| `public int lastIndexOf(int, int);` | pending_exact_overload_gate |
 | `public int indexOf(java.lang.String);` | partial_route_a |
 | `public int indexOf(java.lang.String, int);` | partial_route_a |
-| `public int indexOf(java.lang.String, int, int);` | partial_route_a |
+| `public int indexOf(java.lang.String, int, int);` | pending_exact_overload_gate |
 | `public int lastIndexOf(java.lang.String);` | partial_route_a |
 | `public int lastIndexOf(java.lang.String, int);` | partial_route_a |
 | `public java.lang.String substring(int);` | implemented_tested_route_a_subset |

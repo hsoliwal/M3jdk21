@@ -1,5 +1,6 @@
 # Copyright 2026 Hitesh Soliwal; SPDX-License-Identifier: Apache-2.0
 import difflib
+import copy
 import hashlib
 import importlib.util
 import json
@@ -36,13 +37,26 @@ class TextPortTest(unittest.TestCase):
         self.provenance = {'source_commit': revision, 'adapter_patch': self.patchpath,
                            'adapter_patch_sha256': sha(patch), 'files': [{'source_path':'Leaf.java',
                            'target_path':self.path, 'sha256':sha(self.before), 'target_sha256':sha(self.after)}]}
-        self.mapping = {'schema':2, 'mapping_schema':'mindex-to-m3/v2', 'mappings':[{'mapping_id':'fixture',
-                        'sources':[{'sha256':sha(self.before), 'commit':revision}],
-                        'destinations':[{'path':self.path, 'sha256':sha(self.after)}],
-                        'tests':{'evidence':[self.proof]}, 'recipe':{'rollback':'reverse'}}]}
+        authority = port.load(port.ROOT, 'm3/docs/name-mapping.json')
+        record = copy.deepcopy(authority['migration']['records'][-1])
+        self.mapping = {'schema':1, 'mappings':[], 'migration':copy.deepcopy(authority['migration'])}
+        self.mapping['migration']['source']['baseline_commit'] = revision
+        self.mapping['migration']['records'] = [record]
+        record.update(id='fixture', owner='Leaf', dependencies=[],
+                      tests=[{'id':'fixture-proof', 'receipt':self.proof}])
+        artifact = {'repo':'fixture', 'commit':revision, 'module':'fixture', 'path':'Leaf.java',
+                    'symbol':'Leaf', 'signatures':['class Leaf'], 'sha256':sha(self.before),
+                    'git_blob_sha1':None, 'fingerprint':None, 'revision_role':'pinned'}
+        record['sources'] = [artifact]
+        record['targets'] = [dict(artifact, commit=None, path=self.path, sha256=sha(self.after),
+                                 revision_role='candidate')]
+        record['recipe'].update(path=None, sha256=None, rollback='reverse')
         self.write_json('m3/ports/text/provenance.json', self.provenance)
         self.write_json('m3/docs/name-mapping.json', self.mapping)
-        self.write_json(self.proof, {'source_hashes':{'src/Leaf.java':sha(self.after)}, 'records':[{'exit':0}]})
+        self.proof_data = {'runs':[{'id':'fixture-proof', 'status':'passed', 'exit_code':0,
+                            'command':['schema-fixture'], 'stdout_sha256':sha(b'PASS\n'),
+                            'inputs':{self.path:sha(self.after)}}]}
+        self.write_json(self.proof, self.proof_data)
     def write_json(self, path, value):
         destination = self.target / path; destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_text(json.dumps(value), encoding='utf-8')
@@ -62,19 +76,20 @@ class TextPortTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'patch drift'): port.validate(self.target, self.source)
         self.assertFalse(self.output.exists())
     def test_missing_or_forged_evidence_refuses(self):
-        self.write_json(self.proof, {'source_hashes':{}, 'records':[{'exit':0}]})
-        with self.assertRaisesRegex(ValueError, 'unbound candidate'): port.validate(self.target)
+        self.proof_data['runs'][0]['inputs'] = {}
+        self.write_json(self.proof, self.proof_data)
+        with self.assertRaisesRegex(ValueError, 'evidence'): port.validate(self.target)
     def test_target_drift_refuses(self):
         (self.target / self.path).write_bytes(b'changed')
-        with self.assertRaisesRegex(ValueError, 'target divergence'): port.validate(self.target)
+        with self.assertRaisesRegex(ValueError, 'hash drift'): port.validate(self.target)
     def test_unmapped_and_duplicate_refuse(self):
-        self.mapping['mappings'] *= 2; self.write_json('m3/docs/name-mapping.json', self.mapping)
+        self.mapping['migration']['records'] *= 2; self.write_json('m3/docs/name-mapping.json', self.mapping)
         with self.assertRaisesRegex(ValueError, 'duplicate'): port.validate(self.target)
-        self.mapping['mappings'] = []; self.write_json('m3/docs/name-mapping.json', self.mapping)
+        self.mapping['migration']['records'] = []; self.write_json('m3/docs/name-mapping.json', self.mapping)
         with self.assertRaisesRegex(ValueError, 'unmapped'): port.validate(self.target)
     def test_source_pin_drift_refuses(self):
         self.provenance['files'][0]['sha256'] = '0' * 64
-        self.mapping['mappings'][0]['sources'][0]['sha256'] = '0' * 64
+        self.mapping['migration']['records'][0]['sources'][0]['sha256'] = '0' * 64
         self.write_json('m3/ports/text/provenance.json', self.provenance)
         self.write_json('m3/docs/name-mapping.json', self.mapping)
         with self.assertRaisesRegex(ValueError, 'donor source drift'): port.validate(self.target, self.source)

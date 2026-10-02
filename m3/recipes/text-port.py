@@ -3,6 +3,7 @@
 """Validate/replay the selected private donor closure using raw Git pins and existing safety."""
 import argparse
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 import subprocess
@@ -11,39 +12,37 @@ import apply as recipe
 
 ROOT = Path(__file__).resolve().parents[2]
 PORT = 'm3/ports/text'
+owner_spec = importlib.util.spec_from_file_location('migration_owner', ROOT / 'm3/migration/migration.py')
+owner = importlib.util.module_from_spec(owner_spec)
+owner_spec.loader.exec_module(owner)
 def sha(data): return hashlib.sha256(data).hexdigest()
-def load(root, path): return json.loads(recipe.safe_path(root, path).read_text(encoding='utf-8'))
+def load(root, path): return owner.load_json(recipe.safe_path(root, path))
 
 def validate(root=ROOT, source=None):
     provenance = load(root, PORT + '/provenance.json')
     mappings = load(root, 'm3/docs/name-mapping.json')
-    if mappings.get('schema') != 2 or mappings.get('mapping_schema') != 'mindex-to-m3/v2':
-        raise ValueError('mapping schema drift')
+    errors = owner.validate(mappings, root)
+    if errors: raise ValueError('migration authority: ' + '; '.join(errors))
     patch = recipe.safe_path(root, provenance['adapter_patch']).read_bytes()
     if sha(patch) != provenance['adapter_patch_sha256']: raise ValueError('adapter patch drift')
-    ids = [row['mapping_id'] for row in mappings['mappings']]
+    records = mappings['migration']['records']
+    ids = [row['id'] for row in records]
     if len(set(ids)) != len(ids): raise ValueError('duplicate mapping identity')
-    mapped = {endpoint['path']: (row, endpoint) for row in mappings['mappings']
-              for endpoint in row['destinations']}
+    mapped = {endpoint['path']: (row, endpoint) for row in records
+              for endpoint in row['targets']}
     blobs = {}
     for row in provenance['files']:
         path = row['target_path']
         if path not in mapped: raise ValueError('unmapped selected port: ' + path)
         mapping, endpoint = mapped[path]
-        if not mapping['tests']['evidence'] or not mapping['recipe']['rollback']:
+        if not mapping['tests'] or not mapping['recipe']['rollback']:
             raise ValueError('port without evidence/rollback: ' + path)
-        for evidence in mapping['tests']['evidence']:
-            if not recipe.safe_path(root, evidence).is_file(): raise ValueError('missing evidence: ' + evidence)
-            proof = load(root, evidence)
-            relative = path.removeprefix(PORT + '/')
-            if (proof.get('source_hashes', {}).get(relative) != row['target_sha256'] or
-                    not proof.get('records') or any(run.get('exit') != 0 for run in proof['records'])):
-                raise ValueError('unbound candidate evidence: ' + path)
         actual = recipe.safe_path(root, path).read_bytes()
         if sha(actual) != row['target_sha256'] or sha(actual) != endpoint['sha256']:
             raise ValueError('target divergence: ' + path)
-        if (mapping['sources'][0]['sha256'] != row['sha256'] or
-                mapping['sources'][0]['commit'] != provenance['source_commit']):
+        if not any(endpoint['sha256'] == row['sha256'] and
+                   endpoint['commit'] == provenance['source_commit'] and
+                   endpoint['path'] == row['source_path'] for endpoint in mapping['sources']):
             raise ValueError('source mapping drift: ' + path)
         if source is not None:
             blob = subprocess.check_output(['git', '-C', str(source), 'show',

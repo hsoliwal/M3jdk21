@@ -13,8 +13,15 @@
     "branch": "codex/mindex-migration-20261002",
     "runtime_candidate_is_ancestor": true,
     "runtime_candidate_content_present": false,
-    "runtime_dirs_absent": ["m3/runtime-stage1", "m3/runtime-segments", "m3/runtime-integration"],
-    "runtime_owner_paths_absent": ["src/java.base/share/classes/java/lang/MIndexString.java", "src/java.base/share/classes/java/lang/MIndexStringPool.java"]
+    "runtime_dirs_absent": [
+      "m3/runtime-stage1",
+      "m3/runtime-segments",
+      "m3/runtime-integration"
+    ],
+    "runtime_owner_paths_absent": [
+      "src/java.base/share/classes/java/lang/MIndexString.java",
+      "src/java.base/share/classes/java/lang/MIndexStringPool.java"
+    ]
   },
   "source": {
     "repository": "https://github.com/hsoliwal/com.synexia",
@@ -24,15 +31,62 @@
     "pin_method": "authenticated git ls-remote; family source content audit separate"
   },
   "prs": {
-    "M3jdk21/7": {"state": "MERGED", "head": "1210d76ce80263003981c8c6ba5bb4175524358a", "merge": "3029cff40e927aefcca444a6ef759a562204579c", "role": "proposed design documentation"},
-    "M3jdk21/6": {"state": "MERGED", "head": "3776d6e674d6c9b04539ca24aca2504aa88d4a57", "merge": "305dc277139b0e7cff1f4e284e7019a381480153", "base": "m3/segmented-string-experiment", "role": "historical runtime candidate"},
-    "M3jdk21/10": {"state": "MERGED", "head": "3776d6e674d6c9b04539ca24aca2504aa88d4a57", "merge": "67876a03d823f5ff5ca92ca1545a026d757c4b12", "base": "master", "tree_integrated_runtime": false},
-    "com.synexia/7498": {"state": "OPEN", "draft": true, "head": "a01cbe66fa53a0fe782573ac66bfc090f02415d9", "base": "dfcdf79d6dad85a50d731973e614ac684dfb43a1"},
-    "com.synexia/7521": {"state": "OPEN", "draft": true, "head": "86ea0a90c611f493f7eee8f130b7865912fcea67", "base": "d2ce7a3bd27afc7d9caf501be03496f061761ac5"},
-    "com.synexia/7523": {"state": "OPEN", "draft": true, "head": "5a49543056c8d3dab80c8a5c0fb24100e577ddad", "base": "86ea0a90c611f493f7eee8f130b7865912fcea67"},
-    "com.synexia/7525": {"state": "OPEN", "draft": true, "head": "06b23493bb68f63d5aed4d340a776eb9d2828023", "base": "5a49543056c8d3dab80c8a5c0fb24100e577ddad"},
-    "com.synexia/7526": {"state": "OPEN", "draft": true, "head": "73978088621dc70f5021befafa443f7e622b517e", "base": "06b23493bb68f63d5aed4d340a776eb9d2828023"},
-    "com.synexia/7528": {"state": "OPEN", "draft": false, "head": "c75ca5f6ad97d049cc179c647702ac738e890ad3", "base": "deda6293cee7cbe9c1e4113ad3912dbe304dc9d9"}
+    "M3jdk21/7": {
+      "state": "MERGED",
+      "head": "1210d76ce80263003981c8c6ba5bb4175524358a",
+      "merge": "3029cff40e927aefcca444a6ef759a562204579c",
+      "role": "proposed design documentation"
+    },
+    "M3jdk21/6": {
+      "state": "MERGED",
+      "head": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+      "merge": "305dc277139b0e7cff1f4e284e7019a381480153",
+      "base": "m3/segmented-string-experiment",
+      "role": "historical runtime candidate"
+    },
+    "M3jdk21/10": {
+      "state": "MERGED",
+      "head": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+      "merge": "67876a03d823f5ff5ca92ca1545a026d757c4b12",
+      "base": "master",
+      "tree_integrated_runtime": false
+    },
+    "com.synexia/7498": {
+      "state": "OPEN",
+      "draft": true,
+      "head": "a01cbe66fa53a0fe782573ac66bfc090f02415d9",
+      "base": "dfcdf79d6dad85a50d731973e614ac684dfb43a1"
+    },
+    "com.synexia/7521": {
+      "state": "OPEN",
+      "draft": true,
+      "head": "86ea0a90c611f493f7eee8f130b7865912fcea67",
+      "base": "d2ce7a3bd27afc7d9caf501be03496f061761ac5"
+    },
+    "com.synexia/7523": {
+      "state": "OPEN",
+      "draft": true,
+      "head": "5a49543056c8d3dab80c8a5c0fb24100e577ddad",
+      "base": "86ea0a90c611f493f7eee8f130b7865912fcea67"
+    },
+    "com.synexia/7525": {
+      "state": "OPEN",
+      "draft": true,
+      "head": "06b23493bb68f63d5aed4d340a776eb9d2828023",
+      "base": "5a49543056c8d3dab80c8a5c0fb24100e577ddad"
+    },
+    "com.synexia/7526": {
+      "state": "OPEN",
+      "draft": true,
+      "head": "73978088621dc70f5021befafa443f7e622b517e",
+      "base": "06b23493bb68f63d5aed4d340a776eb9d2828023"
+    },
+    "com.synexia/7528": {
+      "state": "OPEN",
+      "draft": false,
+      "head": "c75ca5f6ad97d049cc179c647702ac738e890ad3",
+      "base": "deda6293cee7cbe9c1e4113ad3912dbe304dc9d9"
+    }
   },
   "historical_candidate": {
     "commit": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
@@ -40,9 +94,18 @@
     "receipt_path": "m3/runtime-integration/evidence/results.json",
     "receipt_executed_in_this_session": false,
     "reported_build_exit": 0,
-    "reported_flag_off": {"passed": 86, "failed": 0},
-    "reported_enabled_interpreter": {"passed": 16, "failed": 2},
-    "known_failures": ["StringJoinerOomUtf16Test: 4 OOME expectations", "StringJoinerTest: 2 OOME expectations"],
+    "reported_flag_off": {
+      "passed": 86,
+      "failed": 0
+    },
+    "reported_enabled_interpreter": {
+      "passed": 16,
+      "failed": 2
+    },
+    "known_failures": [
+      "StringJoinerOomUtf16Test: 4 OOME expectations",
+      "StringJoinerTest: 2 OOME expectations"
+    ],
     "full_jtreg": false,
     "compiled_enabled_acceptance": false
   },
@@ -94,5 +157,26 @@
     "Exact candidate recipe replay and new complete image acceptance remain pending",
     "Source family inventory, mapping completeness and all three routes are separate work",
     "REST API rate limit exhausted; authenticated GraphQL and Git reads available"
-  ]
+  ],
+  "observed_target_tip_during_consolidation": "4a81f3b3050fa5572ec1ff9368e2c383231db2e6",
+  "concurrent_drafts": [
+    {
+      "pr": 19,
+      "head": "584932a5f631bf8eb40b9525d18184085be1a404",
+      "role": "overlapping explicitview closure; consolidation pending"
+    },
+    {
+      "pr": 20,
+      "head": "ffe4e25aaf361c77687758c91e16c9d3905356c1",
+      "role": "history/evidence audit"
+    }
+  ],
+  "runtime_candidate_build": {
+    "commit": "69667e3f1ce673aaded2ad93e4ae2ecf6c59668b",
+    "tree": "406f4bd973d40c5c8ce1782e01745307aab008ff",
+    "build_exit": 0,
+    "scope": "Matched complete fastdebug image, separate runtime branch; focused acceptance does not close all VM gates",
+    "receipt": "m3/runtime-integration/evidence/20261002-candidate-696/acceptance.json",
+    "upstream_jtreg": "in-progress; historical2failures remain open"
+  }
 }

@@ -1,13 +1,14 @@
 # Generated migration coverage
 
-Scope: selected Route A closure. Whole-family acceptance remains open.
+Scope: selected Route A closure and bounded opt-in Route B. Whole-family acceptance remains open.
 
 | Measure | Count |
 | --- | ---: |
-| Covered target Java files | 10 |
-| Permanent selected mappings | 10 |
+| Covered selected target Java files | 11 |
+| Permanent selected migration records | 11 |
+| All records in the naming authority | 36 |
 | Private inventory items still pending | 29037 |
 
-Source pin: `6df9df8d8f42111239013ee941723ec37f97ba6e`.
+Historical selected source pin: `6df9df8d8f42111239013ee941723ec37f97ba6e`.
 
-The private inventory remains authoritative for undispatched families and exclusions. This validator checks selected endpoints, hashes, schema, lineage references and candidate receipts; it does not prove ABI parity or runtime/compiler acceptance.
+The existing `m3/migration/migration.py` remains the schema, artifact and receipt validator for all migration records. This wrapper adds selected endpoint declarations, coverage and historical source pin checks; it does not prove complete ABI parity or runtime/compiler acceptance. The private inventory remains authoritative for undispatched families and exclusions.

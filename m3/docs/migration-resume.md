@@ -16,6 +16,15 @@ target baseline `8bb6215372e07712f1fdf5a0cb912af495007b19`. PR ancestry alone di
 not integrate the runtime production tree into master. Exact PR #6 reproduction
 and a new master-based runtime restoration candidate have separate receipts.
 
+The selected Java implementation is committed at
+`f07a02a890720c6b25b5b8fafb0903ba9b2bf088`; `selected-code-binding.json` binds
+all eleven target bodies and the actual test receipts to that commit. The local
+integration incorporates master `4a81f3b3050fa5572ec1ff9368e2c383231db2e6`,
+preserves its schema-1 naming authority and all 25 migration records, and adds
+eleven selected records. Its recipe includes the existing migration validator
+and prefix-Z module. Read `concurrent-owner-reconciliation.md` before combining
+this closure with draft PR #19; consolidate its duplicate physical owners first.
+
 The private inventory lives at
 `synexia-mindex/repository-inventory/docs/migration/`: `source-snapshot.json`
 records pinned Git discovery, and `mindex-to-m3.json` records every disposition.
@@ -70,6 +79,7 @@ distributions or precomputation amortization. Those are next performance gates.
 Infrastructure notes: anonymous raw GitHub fetches of private source return 404.
 Authorized exact Git fixtures can be used in ignored private scratch; do not copy
 them into the public tree to make hosted CI pass. E: space was measured tight;
-current task checkouts/scratch use C: and native builds use WSL `/var/tmp`.
+current public checkouts use C:, the private source checkout is an S: junction,
+private parser scratch uses S:, and native builds use WSL `/var/tmp`.
 JVM native-allocation failures were recorded separately; bounded test heaps do
 not turn a failed invocation into evidence. Installed JDKs remain unchanged.

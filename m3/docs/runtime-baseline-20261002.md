@@ -45,3 +45,24 @@ The exact #6 candidate was restored in a separate checkout at `C:/worktrees/M3jd
 Native staging encountered a WSL restart that cleared `/tmp`; durable scratch now lives under `/var/tmp/m3-runtime-migration-20261002`. A first configure detected the upstream WSL default Windows target and missing zip. The documented Linux flags in OpenJDK `doc/building.md:247-251` are `--build=x86_64-unknown-linux-gnu --openjdk-target=x86_64-unknown-linux-gnu`. With those flags and 39 Ubuntu development/runtime packages extracted into private scratch, configure exited 0 and a complete fastdebug `make images JOBS=4` was started. No system package or installed JDK was replaced. A successful configure is not a successful image build or acceptance run.
 
 Receipts remain at the separate checkout's `m3/runtime-integration/evidence/20261002-rerun`: `recipe-check.log`, `master-replay-preflight.json`, `configure-linux-private-deps.log`, dependency hashes and the live native build log. Next executable work: finish the matched image build, then rerun flag-off and opt-in tests while keeping the two known failing StringJoiner gates visible. A current success claim requires the resulting candidate/tree/image identities and commands in `m3/evidence/current-baseline.json` or its exact-candidate successor.
+
+## Matched restoration candidate
+
+The new master-based restoration is code commit
+`69667e3f1ce673aaded2ad93e4ae2ecf6c59668b`, tree
+`406f4bd973d40c5c8ce1782e01745307aab008ff`. Its complete incremental fastdebug
+image build exited 0; focused/API/JNI/JVMTI/GC/mapping/rejection/allocation gates
+have independent receipts under `evidence/20261002-candidate-696`. The unchanged
+selected upstream scope now passes 86 flag-off tests and 16 enabled tests.
+
+Both original 4 GiB StringJoiner cases remain pending on this candidate because
+the host had insufficient virtual-memory headroom; the donor's two historical
+failures remain open. Cancellation/interruption and resumed subcases are recorded
+separately. Enabled execution remains interpreter-only. Full jtreg/JCK, enabled
+JIT and the remaining VM/platform gates have not passed.
+
+New master `4a81f3b3050fa5572ec1ff9368e2c383231db2e6` preserves the relevant
+String/HotSpot production paths; the clean merge result was checked without
+relabeling the 696 image as that merge tree's build. The task-owned private source
+clone has moved to S: with its C: logical path preserved. Current disk and memory
+failures are measured new observations; the historical C: claim remains corrected.
