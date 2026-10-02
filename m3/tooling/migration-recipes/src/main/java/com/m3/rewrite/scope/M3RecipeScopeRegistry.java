@@ -30,6 +30,8 @@ public final class M3RecipeScopeRegistry {
             "com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe",
             fixed(M3EditScope.FILE),
             "com.m3.rewrite.atom.M3PureIntConvergenceRecipe",
+            fixed(M3EditScope.FILE),
+            "com.m3.rewrite.M3Java21ConvergenceRecipe",
             fixed(M3EditScope.FILE));
 
     private M3RecipeScopeRegistry() {}
