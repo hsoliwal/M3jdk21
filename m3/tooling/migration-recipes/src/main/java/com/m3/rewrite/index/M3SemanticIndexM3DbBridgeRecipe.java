@@ -26,6 +26,7 @@ public final class M3SemanticIndexM3DbBridgeRecipe extends Recipe {
     private final String outputDirectory;
 
     private final transient M3SemanticIndexRecipe semanticIndex = new M3SemanticIndexRecipe();
+    private final transient M3TypeRelationRecipe typeRelations = new M3TypeRelationRecipe();
 
     public M3SemanticIndexM3DbBridgeRecipe() {
         this("target/m3indexdb");
@@ -68,7 +69,7 @@ public final class M3SemanticIndexM3DbBridgeRecipe extends Recipe {
 
     @Override
     public List<Recipe> getRecipeList() {
-        return List.of(semanticIndex);
+        return List.of(semanticIndex, typeRelations);
     }
 
     @Override
