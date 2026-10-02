@@ -81,6 +81,14 @@ public final class MIndexStringInvariant {
         check(MATERIALIZED.get(joinedStorage1) == null, "hash does not materialize");
         check(Arrays.equals(joined1.toCharArray(), "alphagamma".toCharArray()), "char[] projection");
         check(MATERIALIZED.get(joinedStorage1) == null, "char[] projection traverses atoms");
+
+        char[] ranged = new char[] {'#', '#', '#', '#', '#', '#', '#'};
+        joined1.getChars(3, 8, ranged, 1);
+        check(Arrays.equals(ranged, new char[] {'#', 'h', 'a', 'g', 'a', 'm', '#'}),
+                "range projection crosses canonical atom boundary");
+        check(MATERIALIZED.get(joinedStorage1) == null,
+                "range projection does not flatten joined storage");
+
         byte[] bytes = joined1.getBytes(java.nio.charset.StandardCharsets.UTF_8);
         check(Arrays.equals(bytes, "alphagamma".getBytes(java.nio.charset.StandardCharsets.UTF_8)),
                 "UTF-8 projection");
@@ -88,6 +96,9 @@ public final class MIndexStringInvariant {
         String repeated = joined1.repeat(2);
         eq("alphagammaalphagamma", repeated, "repeat contents");
         eq(JOINED, kind(storage(repeated)), "repeat remains MIndex tuple");
+        check(Arrays.equals(
+                        repeated.toCharArray(), "alphagammaalphagamma".toCharArray()),
+                "multi-segment repeat char[] projection");
 
         System.out.println("M_INDEX_STRING_INVARIANT_PASS lexicon=" + expectLexicon
                 + " alphaKind=" + kind(alphaStorage1)
