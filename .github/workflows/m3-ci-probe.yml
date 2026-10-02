@@ -1,0 +1,23 @@
+name: M3 CI probe
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/m3-ci-probe.yml"
+      - "m3/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Runner probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          printf 'M3_CI_PROBE=PASS\n'
+          java -version
+          mvn -version

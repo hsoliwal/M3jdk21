@@ -14,7 +14,7 @@ import java.util.Objects;
 public final class M3RecipeScopeRegistry {
     private static final Map<String, M3RecipeScopePolicy> POLICIES = Map.of(
             "com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe",
-            fixed(M3EditScope.FILE),
+            fixed(M3EditScope.MODULE),
             "com.synexia.rewrite.M3SegmentedLaneNativeRecipe",
             fixed(M3EditScope.FILE),
             "com.m3.rewrite.InstallIndexStringCompatibility",
@@ -24,6 +24,12 @@ public final class M3RecipeScopeRegistry {
             "com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe",
             fixed(M3EditScope.FILE),
             "com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates",
+            fixed(M3EditScope.FILE),
+            "com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe",
+            fixed(M3EditScope.FILE),
+            "com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe",
+            fixed(M3EditScope.FILE),
+            "com.m3.rewrite.atom.M3PureIntConvergenceRecipe",
             fixed(M3EditScope.FILE));
 
     private M3RecipeScopeRegistry() {}

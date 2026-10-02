@@ -42,6 +42,50 @@ final class M3PureIntAtomEligibility {
         return pureIntNodes(returned.getExpression(), parameters, 0) >= 3;
     }
 
+
+    static boolean atomized(J.MethodDeclaration candidate) {
+        if (!candidate.hasModifier(J.Modifier.Type.Private)
+                || !candidate.hasModifier(J.Modifier.Type.Static)
+                || candidate.getBody() == null
+                || candidate.getBody().getStatements().size() != 2
+                || candidate.getReturnTypeExpression() == null
+                || candidate.getReturnTypeExpression().getType() != JavaType.Primitive.Int) {
+            return false;
+        }
+
+        if (!(candidate.getBody().getStatements().getFirst() instanceof J.VariableDeclarations declarations)
+                || declarations.getTypeExpression() == null
+                || declarations.getTypeExpression().getType() != JavaType.Primitive.Int
+                || declarations.getVariables().size() != 1) {
+            return false;
+        }
+
+        J.VariableDeclarations.NamedVariable atom = declarations.getVariables().getFirst();
+        if (!ATOM_NAME.equals(atom.getSimpleName()) || atom.getInitializer() == null) {
+            return false;
+        }
+
+        Set<String> parameters = intParameters(candidate);
+        if (parameters == null
+                || parameters.contains(ATOM_NAME)
+                || pureIntNodes(atom.getInitializer(), parameters, 0) < 3) {
+            return false;
+        }
+
+        if (!(candidate.getBody().getStatements().get(1) instanceof J.Return returned)
+                || !(returned.getExpression() instanceof J.Identifier identifier)) {
+            return false;
+        }
+        return ATOM_NAME.equals(identifier.getSimpleName());
+    }
+
+    static J.VariableDeclarations atomizedVariable(J.MethodDeclaration candidate) {
+        if (!atomized(candidate)) {
+            throw new IllegalArgumentException("method is not an admitted atomized pure-int FILE leaf");
+        }
+        return (J.VariableDeclarations) candidate.getBody().getStatements().getFirst();
+    }
+
     static Expression returnedExpression(J.MethodDeclaration candidate) {
         if (!eligible(candidate)) {
             throw new IllegalArgumentException("method is not an admitted pure-int FILE atom");
