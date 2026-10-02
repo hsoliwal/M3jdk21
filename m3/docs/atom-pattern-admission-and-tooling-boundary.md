@@ -120,3 +120,47 @@ For an applied product change, evidence progresses in M3 order:
 
 A passing recipe unit test proves the recipe transformation mechanics. It does not by itself prove
 the resulting JDK subsystem complete.
+
+## Single-build OpenRewrite convergence DAG
+
+For an admitted FILE-local semantic domain, convergence is expressed as one ordered OpenRewrite
+recipe DAG rather than repeated hand edits:
+
+```text
+inventory
+  -> atomize
+  -> patternize / assign IOP role
+  -> converge Javadoc semantic memory
+  -> rerun to fixed point
+  -> diff
+  -> lint/static analysis
+  -> Java 21 compile
+  -> JUnit recipe/corpus tests
+  -> JaCoCo gate
+  -> serial promotion
+```
+
+The first retained Java 21 proof domain is the private static pure-`int` expression leaf. Its
+composite recipe is `com.m3.rewrite.atom.M3PureIntConvergenceRecipe`.
+
+The composite is FILE scoped and behavior-and-contract preserving. Its child recipes are ordered and
+independently testable:
+
+1. `M3AtomizePureIntReturnRecipe` — materialize the named behavioral leaf.
+2. `M3PatternizePureIntAtomRecipe` — ensure the admitted M3-IOP role marker.
+3. `M3DocumentPureIntAtomRecipe` — ensure Javadoc semantic memory for the atom/pattern/IOP contract.
+
+A composite recipe is not trusted merely because every child is deterministic. JUnit must prove the
+ordered composition, fixed point, negative/non-matching behavior, and representative Java 21 corpus
+compilation/execution. The exact recipe commit remains CANDIDATE until that CI proof is green.
+
+The CI proof command is:
+
+```bash
+mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
+```
+
+Repository-wide application remains a later, separately admitted step. CI first proves the recipe
+DAG; after proof, candidate discovery and FILE-sharded application may fan out while canonical
+promotion remains serial.
+
