@@ -43,7 +43,10 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import jdk.internal.access.JavaLangAccess;
+import jdk.internal.access.SharedSecrets;
 import jdk.internal.util.ArraysSupport;
+import jdk.internal.util.M3StringFacts;
 import jdk.internal.util.regex.Grapheme;
 
 /**
@@ -803,6 +806,7 @@ import jdk.internal.util.regex.Grapheme;
 public final class Pattern
     implements java.io.Serializable
 {
+    private static final JavaLangAccess JLA = SharedSecrets.getJavaLangAccess();
 
     /*
      * Regular expression modifier values.  Instead of being passed as
@@ -1087,6 +1091,12 @@ public final class Pattern
      * (2) There is complement node of a "family" CharProperty
      */
     private transient boolean hasSupplementary;
+
+    /**
+     * Necessary-condition MIndex-compatible presence signal for an exact
+     * case-sensitive literal root. Zero means no safe prefilter is available.
+     */
+    private transient long m3RequiredPresence64;
 
     /**
      * Compiles the given regular expression into a pattern.
@@ -1541,6 +1551,7 @@ public final class Pattern
         if (pattern.isEmpty()) {
             root = new Start(lastAccept);
             matchRoot = lastAccept;
+            m3RequiredPresence64 = 0L;
             compiled = true;
         }
     }
@@ -1967,6 +1978,8 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
             root = hasSupplementary ? new StartS(matchRoot) : new Start(matchRoot);
         }
 
+        m3RequiredPresence64 = m3RequiredPresence64(matchRoot);
+
         // Optimize the greedy Loop to prevent exponential backtracking, IF there
         // is no group ref in this pattern. With a non-negative localTCNCount value,
         // the greedy type Loop, Curly will skip the backtracking for any starting
@@ -1987,6 +2000,38 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
         patternLength = 0;
         compiled = true;
         topClosureNodes = null;
+    }
+
+    private static long m3RequiredPresence64(Node node) {
+        if (node == null) {
+            return 0L;
+        }
+        // Only exact case-sensitive literal slices are safe. Case-insensitive
+        // slices are deliberately excluded: their Unicode folding semantics
+        // cannot be represented by the ASCII-folded necessary-condition signal.
+        if (node.getClass() != Slice.class && node.getClass() != SliceS.class) {
+            return 0L;
+        }
+        int[] units = ((SliceNode) node).buffer;
+        long signal = 0L;
+        for (int value : units) {
+            if (value <= Character.MAX_VALUE) {
+                signal = M3StringFacts.addSignal(signal, (char) value);
+            } else {
+                signal = M3StringFacts.addSignal(signal, Character.highSurrogate(value));
+                signal = M3StringFacts.addSignal(signal, Character.lowSurrogate(value));
+            }
+        }
+        return signal;
+    }
+
+    boolean m3MayMatch(CharSequence input) {
+        long required = m3RequiredPresence64;
+        if (required == 0L || !(input instanceof String value)
+                || !JLA.stringHasM3Storage(value)) {
+            return true;
+        }
+        return M3StringFacts.mayContain(JLA.stringM3BitSignal64(value), required);
     }
 
     private Map<String, Integer> namedGroupsMap() {
