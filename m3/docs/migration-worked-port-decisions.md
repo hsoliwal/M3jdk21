@@ -11,6 +11,19 @@ Inspection snapshot: 2026-10-02 02:52 UTC.
 - [#13 at 84c2711c7ff24d11ba46478a11584194c425553b](https://github.com/hsoliwal/M3jdk21/pull/13) has a nine-file exact-source recipe/tooling closure in its changed-file list. Its broader title or companion description does not establish that a retained-view implementation or maintained migration manifest is present in that exact tree.
 - The JSON Schema/example under m3/docs are pedagogical. They are not a second operational mapping registry and must not be populated as a competing authority.
 
+### Retained-content and mapping reconciliation (2026-10-02 03:45 UTC)
+
+This bounded update is pinned to master **45f546ff5bcb06a1b2604f14baf998785d98d9a1**, including #19 merge **43cf5ed4b97bc9a2832f10a332eb6500ca73ca04**. Keep the 02:52 observations above as history, not current file-presence claims.
+
+- [The retained name map](https://github.com/hsoliwal/M3jdk21/blob/43cf5ed4b97bc9a2832f10a332eb6500ca73ca04/m3/docs/name-mapping.json) now includes migration.records from #16, with IDs such as m3.prefix-z and synexia.frozen-chars. It is not merely the old provisional mappings array. The former is recorded implemented-tested within its scoped algorithm claim; the latter remains pending with targets=[].
+- [#19's content comparison](https://github.com/hsoliwal/M3jdk21/compare/4a81f3b3050fa5572ec1ff9368e2c383231db2e6...43cf5ed4b97bc9a2832f10a332eb6500ca73ca04) retains 60 added files, including m3/ports/indexstring and m3/migration tooling. The [FrozenChars target source](https://github.com/hsoliwal/M3jdk21/blob/43cf5ed4b97bc9a2832f10a332eb6500ca73ca04/m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java) exists despite the map's empty target list. Reconcile that lag with exact target/provenance/recipe/evidence entries in a separately reviewed implementation change; file presence alone must not promote acceptance.
+- [The retained compatibility README](https://github.com/hsoliwal/M3jdk21/blob/43cf5ed4b97bc9a2832f10a332eb6500ca73ca04/m3/ports/indexstring/README.md) names **com.m3.text.compat.M3Text**, a partial stock-JVM facade, and warns against placing its preserved original Synexia classes together with the originals in one loader/module path. Preserve that classpath-collision boundary. Its link to ../../migration/REPORT.md resolves to m3/migration/REPORT.md, which returned 404 at this update's pin; do not cite that missing report as evidence.
+- m3/migration/manifest.json also returned 404 at this master pin. Thus “m3/migration tooling exists” and “#12's manifest is retained” are different claims. The #12 fields/IDs used below remain a pinned candidate crosswalk, while current name-mapping.json migration.records uses its own records/targets/sync model. Do not combine these by field-name substitution or create a third registry.
+- [#18's merge comparison](https://github.com/hsoliwal/M3jdk21/compare/f18b9d6b2d43dcec36adc46dc915e623333e613c...4a81f3b3050fa5572ec1ff9368e2c383231db2e6) has an empty file delta: ancestry retention did not retain that candidate's content. Its **com.m3.indexstring.M3Text** and local receipts at 8960a30facefab70b726757b0df6c0ec4fdef9c1 are a distinct candidate, not the retained #19 facade or proof for it.
+- [#20's successful hosted history audit](https://github.com/hsoliwal/M3jdk21/actions/runs/36960619006/job/110693271645) validates the selected frozen graph. Its [snapshot](https://github.com/hsoliwal/M3jdk21/blob/6fd29e220520e59c633ec7dfa56a60a18c62e20a/m3/history/snapshot.json) targets f18b9d6b2d43dcec36adc46dc915e623333e613c with PR numbers 1–17, and the workflow selects that snapshot. It is not an audit of subsequent #18/#19 integration or runtime/JDK acceptance. Keep a successful graph audit distinct from compilation, behavioral conformance and source-retention checks on a later tree.
+
+The actionable next step is one reviewed reconciliation of the retained mapping records against retained source, while preserving each candidate's receipts and unresolved scope. This documentation changes no map, source, recipe, generated coverage or gate, and asserts no full migration/runtime acceptance.
+
 Before implementation, select and reconcile the operational manifest, validator and generated coverage into the intended target branch through its own reviewed change. Keep stable mapping IDs. Do not copy the illustrative schema over the operational schema merely because the names look similar.
 
 The examples below use real IDs from the inspected #12 manifest:
@@ -197,3 +210,66 @@ This batch supplies worked examples and review decisions. It does not:
 - change licenses or export private source payloads
 
 Implementation contributors can now bind each scenario to the selected operational records and fill exact-head evidence without treating these examples as completed work.
+
+
+## 11. Whole-JDK programme crosswalk
+
+The worked examples above now feed the broader whole-JDK packets in
+[whole-jdk-work-packets-and-resume.md](whole-jdk-work-packets-and-resume.md).
+The architecture and subsystem matrix deliberately reuse the same mapping lifecycle rather than
+creating a JDK-specific registry.
+
+A concrete JDK packet starts with the current public owner and its exact contract, then links the
+relevant Synexia owner only after semantic review. For example, a primitive packed hash map is a
+candidate storage donor for internal map lanes; it is not by itself a replacement for generic
+`HashMap<K,V>`, whose null, equality, view, callback, iteration, serialization and collision
+contracts remain separately mapped.
+
+## 12. Case F: identity-sensitive collection backend
+
+Hypothesis: a compact indexed key store can canonicalize equal text keys.
+
+For ordinary `HashMap`, equality is value/equality based. For `IdentityHashMap`, key comparison
+is reference identity. Reusing a canonical text atom as the key identity for both would collapse
+distinct references and change behavior.
+
+The mapping must therefore keep separate capabilities and identity rules. A compact
+`IdentityHashMap` may use primitive occupancy/hash metadata, but it must retain the original key
+references and compare them by reference identity.
+
+Required evidence: equal-but-distinct references, null, resize, removal, entry views and
+serialization/compatibility scope. “Same content” is not an admissible shortcut.
+
+## 13. Case G: concurrent memory win fails a semantic gate
+
+Hypothesis: a compact concurrent map candidate reduces retained heap substantially and passes
+single-threaded API tests, but stress testing observes a retrieval that can miss a completed
+same-key update because publication ordering is insufficient.
+
+Disposition:
+
+- retain the memory result as diagnostic evidence for that exact candidate;
+- mark the candidate blocked;
+- do not advance its behavior evidence to accepted;
+- identify the missing happens-before/linearization requirement;
+- produce a new candidate and rerun both correctness and memory measurements.
+
+Performance never waives the Java Memory Model.
+
+## 14. Case H: AST/DAG storage consolidation
+
+Hypothesis: two source owners use similar primitive child/edge lanes and appear mergeable.
+
+Before consolidation, prove:
+
+- AST child order remains significant;
+- source positions/attribution remain bound to the correct node/generation;
+- DAG edge direction, kind, multiplicity and payload are preserved;
+- cycle policy is explicit;
+- numeric node IDs are namespace/generation qualified.
+
+If those contracts differ, retain separate semantic owners over shared lower-level primitive storage
+rather than creating one universal graph object.
+
+Required evidence: ordered AST round trip, attribution/source-range tests, parallel-edge cases,
+cycle/malformed input, generation/stale-handle rejection and deterministic traversal where promised.
