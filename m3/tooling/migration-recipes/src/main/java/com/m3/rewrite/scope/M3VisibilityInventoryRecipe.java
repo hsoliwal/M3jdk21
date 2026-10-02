@@ -76,7 +76,9 @@ public final class M3VisibilityInventoryRecipe extends Recipe {
                             ownerName(owner),
                             "METHOD",
                             signature(value),
-                            M3VisibilityLevel.of(value.getModifiers()));
+                            M3VisibilityLevel.ofMember(
+                                    value.getModifiers(),
+                                    owner.getKind() == J.ClassDeclaration.Kind.Type.Interface));
                 }
                 return value;
             }
@@ -94,7 +96,9 @@ public final class M3VisibilityInventoryRecipe extends Recipe {
                         getCursor().firstEnclosing(J.ClassDeclaration.class);
                 if (owner == null) return value;
 
-                M3VisibilityLevel level = M3VisibilityLevel.of(value.getModifiers());
+                M3VisibilityLevel level = M3VisibilityLevel.ofMember(
+                        value.getModifiers(),
+                        owner.getKind() == J.ClassDeclaration.Kind.Type.Interface);
                 for (J.VariableDeclarations.NamedVariable variable : value.getVariables()) {
                     emit(
                             ctx,
