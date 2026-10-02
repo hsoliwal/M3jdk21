@@ -49,7 +49,7 @@
     },
     "src/java.base/share/classes/java/lang/String.java": {
       "before_git_blob": "3e51175df9dd1424a0a91eaaad60d6cd5dd78dfa",
-      "after_git_blob": "813fbaf85d3647a5bd5b2364fbe0f76233f8bd06"
+      "after_git_blob": "dfa619521160530918e595db72b49c6dcd67e473"
     },
     "src/java.base/share/classes/java/lang/StringConcatHelper.java": {
       "before_git_blob": "139181af0963efe5caaa25a03960d30e14b65c41",
@@ -57,15 +57,23 @@
     },
     "src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java": {
       "before_git_blob": "babc1940e78358082bd2231f5516d3265d3145e2",
-      "after_git_blob": "072f08aeabcc5873cb13104467a1dcfed5b44d86"
+      "after_git_blob": "48ecde6d23a71bf6fb19e4a9074b295d4e525d51"
     },
     "src/java.base/share/classes/java/lang/System.java": {
       "before_git_blob": "9d9dbf886e6b3fcc61ad5371c662b15a8be52193",
-      "after_git_blob": "914ed37f25d975be7f9b814d3285ce2b29c1b3b6"
+      "after_git_blob": "a0542c55ecc4d1f5a71bb4f18bd1e9803d71f6b2"
     },
     "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java": {
       "before_git_blob": "6fa79baccb98d1949c72adf9731c60eee102ad3d",
       "after_git_blob": "e3d41cb655eb8067a92765b4bfdbdf5a5e39476d"
+    }
+  },
+  "created_files": {
+    "src/java.base/share/classes/java/lang/M3StringStorage.java": {
+      "after_git_blob": "768ccd0174c664040ecfd67732ec036052080d9b"
+    },
+    "src/java.base/share/classes/jdk/internal/util/M3StringFacts.java": {
+      "after_git_blob": "5432d8cec4173776c9232a35add5e8bc8afcb748"
     }
   }
 }
