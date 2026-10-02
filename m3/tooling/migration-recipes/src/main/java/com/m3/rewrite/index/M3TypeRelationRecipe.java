@@ -183,6 +183,7 @@ public final class M3TypeRelationRecipe
     private static M3IndexDbSemanticKind semanticKind(
             J.ClassDeclaration.Kind.Type kind) {
         return kind == J.ClassDeclaration.Kind.Type.Interface
+                        || kind == J.ClassDeclaration.Kind.Type.Annotation
                 ? M3IndexDbSemanticKind.INTERFACE
                 : M3IndexDbSemanticKind.IMPLEMENTATION;
     }
