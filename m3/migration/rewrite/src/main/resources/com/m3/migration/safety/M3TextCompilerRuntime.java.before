@@ -26,9 +26,7 @@ public final class M3TextCompilerRuntime {
         Objects.requireNonNull(values, "values");
         M3Text result = M3Text.empty();
         for (Object value : values) {
-            String converted = String.valueOf(value);
-            // Java concatenation treats a null returned by toString as the four characters "null".
-            result = result.concat(M3Text.fromString(converted == null ? "null" : converted));
+            result = result.concat(M3Text.fromString(String.valueOf(value)));
         }
         return result;
     }

@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "id": "M3-RetainedAdmissionSafety",
+  "version": "1.0.0",
+  "targetBase": "d543255294ae85e4c8015812a3c8a97aaf498354",
+  "entries": [
+    {
+      "path": "m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+      "before": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
+      "after": "fe7b4aee4e9b1c8f53cbcc254b9a881668f8d65f376007380abe51379ff155f8",
+      "preimage": "JoinedM3StringPiece.java.before",
+      "postimage": "JoinedM3StringPiece.java.after"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/LocalM3StringPiece.java",
+      "before": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
+      "after": "83ca042b4f7e41620c5198a179ca876481a81bb0852d82e0c8858df6577d0fba",
+      "preimage": "LocalM3StringPiece.java.before",
+      "postimage": "LocalM3StringPiece.java.after"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3PieceCursor.java",
+      "before": null,
+      "after": "4b274752fbcff86f64049b152a4fa1fa73fc14b2e092011a37be9a586868e07a",
+      "preimage": null,
+      "postimage": "M3PieceCursor.java.after"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3StringPiece.java",
+      "before": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
+      "after": "cdf6fc984bfae2648e31d9e74c4c9919862efdfd7aa4ed79c248ab4c591831dc",
+      "preimage": "M3StringPiece.java.before",
+      "postimage": "M3StringPiece.java.after"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3Text.java",
+      "before": "6085d74e8f7d170c90382bcac2461a9bf8571c3cd5c1e4959621b4cf219d036a",
+      "after": "acc51c980afed7db24a5eba1b1b7aa6e44877286fd90c70b34914e3fe051ff4c",
+      "preimage": "M3Text.java.before",
+      "postimage": "M3Text.java.after"
+    },
+    {
+      "path": "m3/core/src/com/m3/text/M3TextCompilerRuntime.java",
+      "before": "17aa8f162a9bbdf97de3e98b6ddf45ad5da507798dcde3992ef58e8045a757f9",
+      "after": "61d8412ef06e89666323e7218902172590831150873a3c8ee7a201e5e5e25a32",
+      "preimage": "M3TextCompilerRuntime.java.before",
+      "postimage": "M3TextCompilerRuntime.java.after"
+    },
+    {
+      "path": "m3/recipes/manifest.json",
+      "before": "15b96d363bd24cc27484e8f8250b071a71a3b4f15554e662d4ce516721e4790c",
+      "after": "ce4b88cd0af96e39207bb003f17d8396a0ea88531c23070548c88c3d7e20ebd6",
+      "preimage": "foundation-manifest.json.before",
+      "postimage": "foundation-manifest.json.after"
+    }
+  ],
+  "declarationPolicy": "Existing public declarations must remain byte-identical under javap -public.",
+  "limits": [
+    "Route A local immutable storage only; no mapped admission added.",
+    "Flat directories remain O(S) per join. No JIT/VM/native conformance claim.",
+    "Private-source porting gate publication was blocked by the connector; it remains in source PR #7634 and is not included in this public recipe."
+  ]
+}

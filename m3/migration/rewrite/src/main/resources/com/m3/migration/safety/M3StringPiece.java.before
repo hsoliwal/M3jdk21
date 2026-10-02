@@ -10,8 +10,7 @@ public sealed interface M3StringPiece extends CharSequence
 
     default String flatten() {
         char[] result = new char[length()];
-        M3PieceCursor cursor = new M3PieceCursor(this, 0, length());
-        for (int i = 0; cursor.hasNext(); i++) result[i] = cursor.next();
+        for (int i = 0; i < result.length; i++) result[i] = charAt(i);
         return new String(result);
     }
 

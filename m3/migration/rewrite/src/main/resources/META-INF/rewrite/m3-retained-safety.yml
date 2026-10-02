@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.openrewrite.M3RetainedAdmissionSafety
+displayName: Repair exact-source M3 retained admission
+description: Source-bound closure for existing immutable pieces; not a generic compiler lowering pass.
+recipeList:
+  - com.m3.openrewrite.M3RetainedAdmissionSafetyRecipe
