@@ -3,7 +3,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.m3.tooling</groupId><artifactId>migration-recipes</artifactId><version>0.1.0-SNAPSHOT</version>
-  <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><rewrite.version>8.17.1</rewrite.version></properties>
+  <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><rewrite.version>8.17.1</rewrite.version><jacoco.version>0.8.15</jacoco.version></properties>
   <dependencies>
     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java</artifactId><version>${rewrite.version}</version></dependency>
     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java-21</artifactId><version>${rewrite.version}</version><scope>runtime</scope></dependency>
@@ -14,5 +14,44 @@
     <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version></plugin>
     <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version><configuration><useModulePath>false</useModulePath><failIfNoTests>true</failIfNoTests></configuration></plugin>
     <plugin><groupId>org.openrewrite.maven</groupId><artifactId>rewrite-maven-plugin</artifactId><version>5.23.1</version></plugin>
+    <plugin>
+      <groupId>org.jacoco</groupId>
+      <artifactId>jacoco-maven-plugin</artifactId>
+      <version>${jacoco.version}</version>
+      <executions>
+        <execution>
+          <id>m3-coverage-agent</id>
+          <goals><goal>prepare-agent</goal></goals>
+        </execution>
+        <execution>
+          <id>m3-coverage-report</id>
+          <phase>verify</phase>
+          <goals><goal>report</goal></goals>
+        </execution>
+        <execution>
+          <id>m3-coverage-check</id>
+          <phase>verify</phase>
+          <goals><goal>check</goal></goals>
+          <configuration>
+            <rules>
+              <rule>
+                <element>BUNDLE</element>
+                <includes>
+                  <include>com/m3/rewrite/scope/*</include>
+                  <include>com/m3/rewrite/atom/*</include>
+                </includes>
+                <limits>
+                  <limit>
+                    <counter>LINE</counter>
+                    <value>COVEREDRATIO</value>
+                    <minimum>0.99</minimum>
+                  </limit>
+                </limits>
+              </rule>
+            </rules>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
   </plugins></build>
 </project>
