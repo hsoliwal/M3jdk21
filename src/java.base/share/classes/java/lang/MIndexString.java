@@ -525,11 +525,60 @@ final class MIndexString {
         return true;
     }
 
+    /**
+     * Copy one UTF-16 range into the caller-owned compatibility array without flattening the
+     * canonical MIndex representation first.
+     *
+     * <p>Joined values resolve their first owning segment once and then advance sequentially
+     * through overlapping atom ranges. This keeps {@link String#toCharArray()} and
+     * {@link String#getChars(int, int, char[], int)} as one-allocation materialization boundaries
+     * without paying one joined-segment binary search per UTF-16 code unit.</p>
+     */
     void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
         String.checkBoundsBeginEnd(srcBegin, srcEnd, length);
-        Objects.checkFromIndexSize(dstBegin, srcEnd - srcBegin, dst.length);
-        for (int source = srcBegin, target = dstBegin; source < srcEnd; source++, target++) {
-            dst[target] = charAt(source);
+        int count = srcEnd - srcBegin;
+        Objects.checkFromIndexSize(dstBegin, count, dst.length);
+        if (count == 0) {
+            return;
+        }
+
+        switch (storageKind) {
+            case LOCAL -> {
+                if (coder == String.LATIN1) {
+                    StringLatin1.getChars(localValue, srcBegin, srcEnd, dst, dstBegin);
+                } else {
+                    StringUTF16.getChars(localValue, srcBegin, srcEnd, dst, dstBegin);
+                }
+            }
+            case LEXICON, SHARED_LEXICON -> {
+                long address = mappedAddress + ((long) srcBegin << 1);
+                int target = dstBegin;
+                for (int remaining = count; remaining > 0; remaining--, target++, address += 2L) {
+                    int low = UNSAFE.getByte(address) & 0xff;
+                    int high = UNSAFE.getByte(address + 1L) & 0xff;
+                    dst[target] = storageKind == SHARED_LEXICON
+                            ? (char) ((low << 8) | high)
+                            : (char) (low | (high << 8));
+                }
+            }
+            case JOINED -> {
+                int logical = srcBegin;
+                int target = dstBegin;
+                int segment = segmentAt(logical);
+                while (logical < srcEnd) {
+                    int previous = segment == 0 ? 0 : ends[segment - 1];
+                    int segmentEnd = ends[segment];
+                    int take = Math.min(srcEnd, segmentEnd) - logical;
+                    int atomBegin = offsets[segment] + logical - previous;
+                    segments[segment].getChars(
+                            atomBegin, atomBegin + take, dst, target);
+                    logical += take;
+                    target += take;
+                    segment++;
+                }
+            }
+            case EMPTY -> throw new InternalError("non-empty range on empty MIndexString");
+            default -> throw new InternalError("invalid MIndex storage kind");
         }
     }
 
