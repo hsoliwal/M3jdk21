@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.InstallPrimitiveCollections
+displayName: Install M3 primitive collections foundation
+description: Generate the exact reviewed primitive collection foundation without modifying java.util.
+recipeList:
+  - com.m3.rewrite.M3InstallPrimitiveCollectionsRecipe
