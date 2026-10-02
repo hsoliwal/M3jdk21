@@ -2,6 +2,8 @@
 
 Status: all items below are **requirements/open work** unless an exact-head receipt is attached by a later implementation PR. Source existence, a filename census and historical candidate receipts are not acceptance.
 
+See the [worked text trace and not-run planning receipt](migration-worked-text-trace.md) and [family decision cards/port conflicts](migration-worked-port-decisions.md) for concrete scenarios behind this matrix. They add no passed gates or operational mapping records.
+
 ## Evidence notation
 
 For every gate record:
