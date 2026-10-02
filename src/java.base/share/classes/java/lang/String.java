@@ -2918,8 +2918,7 @@ public final class String
         }
         int subLen = endIndex - beginIndex;
         if (isMIndexBacked()) {
-            return MIndexStrings.backing().materialize(
-                    mindexId).substring(beginIndex, endIndex);
+            return MIndexStrings.backing().materializeRange(mindexId, beginIndex, subLen);
         }
         return isLatin1() ? StringLatin1.newString(value, beginIndex, subLen)
                           : StringUTF16.newString(value, beginIndex, subLen);
