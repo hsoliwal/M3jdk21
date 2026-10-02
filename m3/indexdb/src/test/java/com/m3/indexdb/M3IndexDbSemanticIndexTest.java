@@ -169,6 +169,111 @@ final class M3IndexDbSemanticIndexTest {
     }
 
     @Test
+    void unorderedMembershipReordersConvergeButOrderedAtomsDoNot() {
+        M3IndexDbSemanticNode methodA = leaf(
+                M3IndexDbSemanticKind.METHOD,
+                "order/type#method/a",
+                "src/A.java",
+                "a()",
+                "METHOD_A");
+        M3IndexDbSemanticNode methodB = leaf(
+                M3IndexDbSemanticKind.METHOD,
+                "order/type#method/b",
+                "src/A.java",
+                "b()",
+                "METHOD_B");
+        M3IndexDbSemanticNode type = leaf(
+                M3IndexDbSemanticKind.IMPLEMENTATION,
+                "order/type",
+                "src/A.java",
+                "order.Type",
+                "TYPE");
+
+        M3IndexDbSemanticIndex methodsFirst = M3IndexDbSemanticIndex.of(
+                List.of(type, methodA, methodB),
+                List.of(
+                        new M3IndexDbSemanticEdge(type.nodeId(), methodA.nodeId(), "METHOD", 0),
+                        new M3IndexDbSemanticEdge(type.nodeId(), methodB.nodeId(), "METHOD", 1)));
+        M3IndexDbSemanticIndex methodsReordered = M3IndexDbSemanticIndex.of(
+                List.of(methodB, type, methodA),
+                List.of(
+                        new M3IndexDbSemanticEdge(type.nodeId(), methodB.nodeId(), "METHOD", 0),
+                        new M3IndexDbSemanticEdge(type.nodeId(), methodA.nodeId(), "METHOD", 1)));
+
+        assertArrayEquals(methodsFirst.encode(), methodsReordered.encode());
+        assertEquals(
+                methodsFirst.require(type.nodeId()).fingerprint(),
+                methodsReordered.require(type.nodeId()).fingerprint());
+
+        M3IndexDbSemanticNode atomA = leaf(
+                M3IndexDbSemanticKind.ATOM,
+                "order/method#atom/a",
+                "src/A.java",
+                "A",
+                "ATOM_A");
+        M3IndexDbSemanticNode atomB = leaf(
+                M3IndexDbSemanticKind.ATOM,
+                "order/method#atom/b",
+                "src/A.java",
+                "B",
+                "ATOM_B");
+        M3IndexDbSemanticNode method = leaf(
+                M3IndexDbSemanticKind.METHOD,
+                "order/method",
+                "src/A.java",
+                "ordered()",
+                "METHOD");
+
+        M3IndexDbSemanticIndex atomsFirst = M3IndexDbSemanticIndex.of(
+                List.of(method, atomA, atomB),
+                List.of(
+                        new M3IndexDbSemanticEdge(method.nodeId(), atomA.nodeId(), "ATOM", 0),
+                        new M3IndexDbSemanticEdge(method.nodeId(), atomB.nodeId(), "ATOM", 1)));
+        M3IndexDbSemanticIndex atomsReordered = M3IndexDbSemanticIndex.of(
+                List.of(method, atomA, atomB),
+                List.of(
+                        new M3IndexDbSemanticEdge(method.nodeId(), atomB.nodeId(), "ATOM", 0),
+                        new M3IndexDbSemanticEdge(method.nodeId(), atomA.nodeId(), "ATOM", 1)));
+
+        assertNotEquals(
+                atomsFirst.require(method.nodeId()).fingerprint().logicSha256(),
+                atomsReordered.require(method.nodeId()).fingerprint().logicSha256());
+        assertFalse(java.util.Arrays.equals(atomsFirst.encode(), atomsReordered.encode()));
+    }
+
+    @Test
+    void orderedRoleRejectsTwoDifferentChildrenAtTheSameOrdinal() {
+        M3IndexDbSemanticNode fieldA = leaf(
+                M3IndexDbSemanticKind.FIELD,
+                "fields/A",
+                "src/A.java",
+                "A",
+                "FIELD_A");
+        M3IndexDbSemanticNode fieldB = leaf(
+                M3IndexDbSemanticKind.FIELD,
+                "fields/B",
+                "src/A.java",
+                "B",
+                "FIELD_B");
+        M3IndexDbSemanticNode type = leaf(
+                M3IndexDbSemanticKind.IMPLEMENTATION,
+                "fields/Type",
+                "src/A.java",
+                "Type",
+                "TYPE");
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> M3IndexDbSemanticIndex.of(
+                        List.of(type, fieldA, fieldB),
+                        List.of(
+                                new M3IndexDbSemanticEdge(
+                                        type.nodeId(), fieldA.nodeId(), "FIELD", 0),
+                                new M3IndexDbSemanticEdge(
+                                        type.nodeId(), fieldB.nodeId(), "FIELD", 0))));
+    }
+
+    @Test
     void codecIsByteStableAndFailClosedOnCorruption() {
         Fixture fixture = fixture("Addition");
         M3IndexDbSemanticIndex index =
