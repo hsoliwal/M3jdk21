@@ -27,6 +27,10 @@ public final class M3SemanticIndexM3DbBridgeRecipe extends Recipe {
 
     private final transient M3SemanticIndexRecipe semanticIndex = new M3SemanticIndexRecipe();
 
+    public M3SemanticIndexM3DbBridgeRecipe() {
+        this("target/m3indexdb");
+    }
+
     public M3SemanticIndexM3DbBridgeRecipe(String outputDirectory) {
         String checked = Objects.requireNonNull(outputDirectory, "outputDirectory").strip();
         if (checked.isEmpty() || checked.indexOf('\0') >= 0) {
