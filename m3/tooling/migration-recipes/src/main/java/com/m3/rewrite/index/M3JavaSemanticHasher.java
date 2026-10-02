@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.rewrite.index;
 
+import com.m3.indexdb.M3IndexDbSemanticFingerprint;
 import java.util.ArrayList;
 import java.util.List;
 import org.openrewrite.java.JavaIsoVisitor;
@@ -11,7 +12,7 @@ import org.openrewrite.java.tree.JavaType;
 final class M3JavaSemanticHasher {
     private M3JavaSemanticHasher() {}
 
-    static M3SemanticFingerprint fingerprint(String domain, J tree) {
+    static M3IndexDbSemanticFingerprint fingerprint(String domain, J tree) {
         Collector collector = new Collector();
         new JavaIsoVisitor<Collector>() {
             @Override
@@ -70,7 +71,7 @@ final class M3JavaSemanticHasher {
 
         @SuppressWarnings("deprecation")
         String exact = tree.printTrimmed();
-        return M3SemanticFingerprint.leaf(domain, collector.structure, collector.logic, exact);
+        return M3IndexDbSemanticFingerprint.leaf(domain, collector.structure, collector.logic, exact);
     }
 
     private static String typeToken(JavaType type) {
