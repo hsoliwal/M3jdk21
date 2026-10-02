@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "required_mapping_fields": ["id", "source", "destination", "mapping_kind", "canonical_owner", "identity", "contract", "format_abi", "dependencies", "materialization_boundaries", "recipe", "tests", "provenance", "sync", "port_direction", "status"],
+  "mapping_kinds": ["direct_port", "rename", "adapter", "consolidation", "specialization", "dependency_reuse", "pending", "excluded"],
+  "statuses": ["implemented_tested", "implemented_unverified", "proposed", "blocked", "intentionally_excluded", "partial"]
+}
