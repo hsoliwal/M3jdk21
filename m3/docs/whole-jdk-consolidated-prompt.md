@@ -55,6 +55,39 @@ Reuse stable IDs and existing source/target, contract, identity, format/ABI/boot
 
 Map all relevant symbols, overloads, formats, serialized names, native entry points, VM layouts/intrinsics, module/service descriptors, resources/generators and test obligations. Track many-to-many adapters/splits/consolidations and reverse consumers. Future enhancements compare pinned source/target baselines, account for every change, preserve target adaptations, use deterministic recipes with drift/idempotence/partial-state/rollback gates and advance synchronization only after explicit dispositions.
 
+## Required documentation topology
+
+Use the existing target documents as one connected specification rather than creating parallel authorities:
+
+- m3/docs/whole-jdk-migration-scope.md — whole-program overview and denominator
+- m3/migration/docs/ARCHITECTURE.md — shared architecture and compatibility laws
+- m3/migration/docs/COVERAGE.md — human-readable coverage framework
+- m3/migration/docs/COLLECTIONS.md — detailed collection replacement specification
+- m3/migration/docs/WORK_PACKETS.md — dependency-aware implementation packets
+- m3/migration/docs/ACCEPTANCE.md — promotion gates
+- m3/migration/docs/RESUME.md — durable continuation guide
+- m3/docs/name-mapping.json — operational capability/mapping authority
+- m3/docs/mindex-migration-handoff.md and the existing String documents — deep retained slice specifications
+
+Do not duplicate operational state in Markdown tables. Planning documents describe scope, disposition candidates, contracts and required evidence; mapping status changes belong to a separately reviewed operational update.
+
+## Required dependency-aware passes
+
+Organize execution and handoff through these ten passes:
+
+1. pin target/source trees and inventory the whole JDK plus relevant Synexia owners;
+2. build subsystem, dependency and bootstrap maps;
+3. reconcile the canonical mapping authority and assign a disposition to every selected capability;
+4. specify minimal primitive storage, identity, ownership and lifetime foundations;
+5. specify String and collections deeply, including semantic counterexamples;
+6. extend the design across the remaining JDK without forcing one backend everywhere;
+7. define independent Route A explicit-API, Route B compiler-lowering and Route C custom-JDK packets;
+8. define reusable transformations, differential/concurrency/runtime tests and rollback;
+9. measure allocation, retained/peak memory, CPU, throughput, latency, contention and precomputation;
+10. audit the full denominator for omissions, duplicate owners, stale mappings, contradictions and unsupported completion claims.
+
+Include concrete worked examples for shared text joins/slices, compact generic maps and boxing boundaries, immutable sharing versus mutable identity, backed views, identity-sensitive keys and collisions, concurrent linearization/visibility, AST/DAG semantic identity, source rename/split/conflict ports and failed gates that block promotion.
+
 ## Deliverable and verification
 
 Provide a coherent scope/architecture document, module/subsystem coverage taxonomy, detailed collection compatibility and performance plan, dependency-led acceptance stages and mapping/porting guidance, plus this reusable consolidated prompt. Link related documents rather than duplicating operational truth.
