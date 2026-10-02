@@ -1,0 +1,3 @@
+recipe_id	class	scope	contract	status	verification
+m3-file-local-pure-int-atom	com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe	FILE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
+m3-file-local-pure-int-inventory	com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates	FILE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
