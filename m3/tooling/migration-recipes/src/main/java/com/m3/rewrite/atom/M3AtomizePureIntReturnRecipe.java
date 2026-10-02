@@ -52,9 +52,9 @@ public final class M3AtomizePureIntReturnRecipe extends Recipe {
     public TreeVisitor<?, ExecutionContext> getVisitor() {
         return new JavaIsoVisitor<ExecutionContext>() {
             private final JavaTemplate atomize = JavaTemplate.builder(
-                            "{ /* M3-IOP: PURE_INT_EXPRESSION */ "
+                            "/* M3-IOP: PURE_INT_EXPRESSION */ "
                                     + "int " + ATOM_NAME + " = #{any(int)}; "
-                                    + "return " + ATOM_NAME + "; }")
+                                    + "return " + ATOM_NAME + ";")
                     .contextSensitive()
                     .build();
 
@@ -88,7 +88,7 @@ public final class M3AtomizePureIntReturnRecipe extends Recipe {
 
                 return atomize.apply(
                         updateCursor(candidate),
-                        candidate.getBody().getCoordinates().replace(),
+                        candidate.getCoordinates().replaceBody(),
                         expression);
             }
         };
