@@ -24,10 +24,6 @@ final class MIndexJoinedStorageIntern {
   private static final ReferenceQueue<CharBody> CHAR_QUEUE = new ReferenceQueue<>();
   private static final ReferenceQueue<ByteBody> BYTE_QUEUE = new ReferenceQueue<>();
   private MIndexJoinedStorageIntern() {}
-  /** Explicit detachment must not be substituted with an older canonical owner. */
-  static CharBody detachedChars(FrozenChars[] parts) {
-    return new CharBody(parts, charFingerprint(parts), nextId(NEXT_CHAR_BODY_ID));
-  }
 
   static CharBody internChars(FrozenChars[] parts) {
     FrozenChars[] checked = Objects.requireNonNull(parts, "parts");

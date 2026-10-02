@@ -1,0 +1,142 @@
+{
+  "schema": "m3.sealed-install/1",
+  "recipe_id": "m3-single-frozen-joined-owner/1",
+  "target_base_commit": "6f6bca8e52f2f55adcab89676632f3da9ddc56d1",
+  "outputs": [
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java",
+      "before": {
+        "resource": "canonical-FrozenBytes.before.java.txt",
+        "sha256": "cb50139594817d5cb2477c4d67148d4aed2174299f05cff9a3b24416139bc6b4"
+      },
+      "after": {
+        "resource": "canonical-FrozenBytes.after.java.txt",
+        "sha256": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf"
+      }
+    },
+    {
+      "path": "m3/ports/text/src/com/synexia/indexstring/FrozenBytes.java",
+      "before": {
+        "resource": "duplicate-FrozenBytes.before.java.txt",
+        "sha256": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf"
+      },
+      "after": null
+    },
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java",
+      "before": {
+        "resource": "canonical-FrozenChars.before.java.txt",
+        "sha256": "0c03ca0ed8b42212fa92e4d5f9325ba864f8d11928cd6a0b030b861f668f0657"
+      },
+      "after": {
+        "resource": "canonical-FrozenChars.after.java.txt",
+        "sha256": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46"
+      }
+    },
+    {
+      "path": "m3/ports/text/src/com/synexia/indexstring/FrozenChars.java",
+      "before": {
+        "resource": "duplicate-FrozenChars.before.java.txt",
+        "sha256": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46"
+      },
+      "after": null
+    },
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenByteInterner.java",
+      "before": null,
+      "after": {
+        "resource": "canonical-FrozenByteInterner.after.java.txt",
+        "sha256": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414"
+      }
+    },
+    {
+      "path": "m3/ports/text/src/com/synexia/indexstring/FrozenByteInterner.java",
+      "before": {
+        "resource": "duplicate-FrozenByteInterner.before.java.txt",
+        "sha256": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414"
+      },
+      "after": null
+    },
+    {
+      "path": "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedBytes.java",
+      "before": {
+        "resource": "duplicate-MIndexJoinedBytes.before.java.txt",
+        "sha256": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b"
+      },
+      "after": null
+    },
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedChars.java",
+      "before": {
+        "resource": "canonical-MIndexJoinedChars.before.java.txt",
+        "sha256": "964f0fc3611f259562adca7f7a9ec581d149f16b4dfcc9a3c775a2a8ca53f864"
+      },
+      "after": {
+        "resource": "canonical-MIndexJoinedChars.after.java.txt",
+        "sha256": "d93729835dcffe0a9a9be1fe54ab9f0f4af9848a562cce2ae80bffff781bead0"
+      }
+    },
+    {
+      "path": "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedChars.java",
+      "before": {
+        "resource": "duplicate-MIndexJoinedChars.before.java.txt",
+        "sha256": "2cdb10d20f7ed9c80143471deb22350fdc44d9c7899975402313cb85fd50c3c4"
+      },
+      "after": null
+    },
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStorageIntern.java",
+      "before": {
+        "resource": "canonical-MIndexJoinedStorageIntern.before.java.txt",
+        "sha256": "f42c548a4fd47d3dac43283082125232e04d5f13f28b63521832493394176337"
+      },
+      "after": {
+        "resource": "canonical-MIndexJoinedStorageIntern.after.java.txt",
+        "sha256": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7"
+      }
+    },
+    {
+      "path": "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStorageIntern.java",
+      "before": {
+        "resource": "duplicate-MIndexJoinedStorageIntern.before.java.txt",
+        "sha256": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7"
+      },
+      "after": null
+    },
+    {
+      "path": "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStreams.java",
+      "before": {
+        "resource": "duplicate-MIndexJoinedStreams.before.java.txt",
+        "sha256": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80"
+      },
+      "after": null
+    }
+  ],
+  "guards": [
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedBytes.java",
+      "sha256": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b"
+    },
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStreams.java",
+      "sha256": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80"
+    },
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/m3/text/compat/M3Text.java",
+      "sha256": "2f1c52feaa5c81462a469c84d847448840cfa75db5a0f1d40c72241718417653"
+    },
+    {
+      "path": "m3/ports/text/src/com/m3/indexstring/M3String.java",
+      "sha256": "aaf2f5868fb26f1a8d80f13ae13885885ec7f2eb31c4676f4924d037315fe61c"
+    },
+    {
+      "path": "m3/ports/text/src/com/m3/indexstring/M3StringArena.java",
+      "sha256": "94eda684ee599ed6cbfd9ed8fd58a571ca5f831a368da332345999255919639a"
+    },
+    {
+      "path": "m3/ports/text/src/com/m3/indexstring/M3Utf16Cursor.java",
+      "sha256": "ba2c75331207feacfdb2fdd225c1b2b2d6aba9c753d9865a7e00e9baafdaea98"
+    }
+  ],
+  "plan_sha256": "ca17f865997c2901210a2b9e9ece66cffe708a765e1c0c9a211e561507910c67"
+}

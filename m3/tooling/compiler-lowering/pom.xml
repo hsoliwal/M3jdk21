@@ -28,7 +28,10 @@
         <groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.5.2</version>
         <configuration>
           <argLine>-Xms32m -Xmx512m -XX:ActiveProcessorCount=2</argLine>
-          <systemPropertyVariables><m3.text.sourceRoot>${project.basedir}/../../ports/text/src</m3.text.sourceRoot></systemPropertyVariables>
+          <systemPropertyVariables>
+            <m3.text.sourceRoot>${project.basedir}/../../ports/text/src</m3.text.sourceRoot>
+            <m3.text.sharedSourceRoot>${project.basedir}/../../ports/indexstring/src/main/java</m3.text.sharedSourceRoot>
+          </systemPropertyVariables>
         </configuration>
       </plugin>
       <plugin>

@@ -1,0 +1,123 @@
+{
+  "route": "A-stock-JVM",
+  "records": [
+    {
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\javac",
+        "-J-Xmx256m",
+        "-J-XX:ActiveProcessorCount=2",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\indexstring\\src\\main\\java\\com\\m3\\text\\compat\\M3Text.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\indexstring\\src\\main\\java\\com\\synexia\\indexstring\\FrozenByteInterner.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\indexstring\\src\\main\\java\\com\\synexia\\indexstring\\FrozenBytes.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\indexstring\\src\\main\\java\\com\\synexia\\indexstring\\FrozenChars.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexJoinedBytes.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexJoinedChars.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexJoinedStorageIntern.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\indexstring\\src\\main\\java\\com\\synexia\\indexstring\\MIndexJoinedStreams.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\m3\\indexstring\\M3String.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\m3\\indexstring\\M3StringArena.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\m3\\indexstring\\M3Utf16Cursor.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\test\\M3StringTest.java"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-Xms32m",
+        "-Xmx256m",
+        "-XX:ActiveProcessorCount=2",
+        "-ea",
+        "-cp",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+        "M3StringTest"
+      ],
+      "exit": 0,
+      "stdout": "M3_RETAINED_TEXT_PASS checks=64450\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-Xms32m",
+        "-Xmx256m",
+        "-XX:ActiveProcessorCount=2",
+        "-ea",
+        "-Xint",
+        "-cp",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+        "M3StringTest"
+      ],
+      "exit": 0,
+      "stdout": "M3_RETAINED_TEXT_PASS checks=64450\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-Xms32m",
+        "-Xmx256m",
+        "-XX:ActiveProcessorCount=2",
+        "-ea",
+        "-XX:-CompactStrings",
+        "-cp",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+        "M3StringTest"
+      ],
+      "exit": 0,
+      "stdout": "M3_RETAINED_TEXT_PASS checks=64450\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-Xms32m",
+        "-Xmx256m",
+        "-XX:ActiveProcessorCount=2",
+        "-ea",
+        "-Xbatch",
+        "-XX:-TieredCompilation",
+        "-cp",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+        "M3StringTest"
+      ],
+      "exit": 0,
+      "stdout": "M3_RETAINED_TEXT_PASS checks=64450\n",
+      "stderr": ""
+    }
+  ],
+  "os": "Windows-11-10.0.26300-SP0",
+  "jdk": {
+    "argv": [
+      "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+      "-version"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "java version \"21.0.9\" 2025-10-21 LTS\nJava(TM) SE Runtime Environment (build 21.0.9+7-LTS-338)\nJava HotSpot(TM) 64-Bit Server VM (build 21.0.9+7-LTS-338, mixed mode, sharing)\n"
+  },
+  "source_root": "repository-relative; shared indexstring owners and explicit facade",
+  "source_hashes": {
+    "m3/ports/indexstring/src/main/java/com/m3/text/compat/M3Text.java": "2f1c52feaa5c81462a469c84d847448840cfa75db5a0f1d40c72241718417653",
+    "m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenByteInterner.java": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414",
+    "m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf",
+    "m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46",
+    "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedBytes.java": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+    "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedChars.java": "d93729835dcffe0a9a9be1fe54ab9f0f4af9848a562cce2ae80bffff781bead0",
+    "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStorageIntern.java": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7",
+    "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStreams.java": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
+    "m3/ports/text/src/com/m3/indexstring/M3String.java": "aaf2f5868fb26f1a8d80f13ae13885885ec7f2eb31c4676f4924d037315fe61c",
+    "m3/ports/text/src/com/m3/indexstring/M3StringArena.java": "94eda684ee599ed6cbfd9ed8fd58a571ca5f831a368da332345999255919639a",
+    "m3/ports/text/src/com/m3/indexstring/M3Utf16Cursor.java": "ba2c75331207feacfdb2fdd225c1b2b2d6aba9c753d9865a7e00e9baafdaea98",
+    "m3/ports/text/test/M3StringTest.java": "7f01b1ad4182d6ae807d282283fef57af51e5dceb98c2bdb8ccc31a461b06fb5",
+    "m3/ports/text/test.py": "f187bacf3da9024efb4a467dbc7018cb9cd2fec29deb3a7f23377f6424accdd5"
+  }
+}

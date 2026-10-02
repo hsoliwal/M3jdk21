@@ -55,7 +55,12 @@ public final class RetainedViewTest {
     Object body = field(value, "body");
     for (FrozenChars atom : (FrozenChars[]) field(body, "segments")) {
       Object data = field(atom, "data");
-      result.add(data != null ? data : field(field(atom, "utf16"), "mapped"));
+      if (data != null) result.add(data);
+      else {
+        Object bytes = field(atom, "utf16");
+        Object heap = field(bytes, "heap");
+        result.add(heap != null ? heap : field(bytes, "mapped"));
+      }
     }
     return result;
   }
@@ -89,6 +94,19 @@ public final class RetainedViewTest {
     }
   }
   public static void main(String[] args) throws Exception {
+    FrozenByteInterner arena = new FrozenByteInterner(8, 1024);
+    FrozenBytes heapAdmitted = arena.internUtf16("shared-owner-\uD800-\u0000");
+    FrozenChars projected = FrozenChars.fromUtf16Bytes(heapAdmitted);
+    check(projected == FrozenChars.fromUtf16Bytes(heapAdmitted));
+    check(!projected.isDirect());
+    MIndexJoinedChars byteBacked = MIndexJoinedChars.of(projected);
+    M3Text borrowed = M3Text.fromJoined(byteBacked);
+    check(borrowed.storage() == byteBacked);
+    check(payloads(byteBacked).contains(field(heapAdmitted, "heap")));
+    check(borrowed.toString().equals("shared-owner-\uD800-\u0000"));
+    expect(IllegalStateException.class, byteBacked::directUtf16Buffers);
+    arena.clear();
+    check(borrowed.toString().equals("shared-owner-\uD800-\u0000"));
     MIndexJoinedChars first = MIndexJoinedChars.of(atom("unique-A-\u1234\u4321"));
     MIndexJoinedChars second = MIndexJoinedChars.of(atom("unique-B-\u5763\u9876"));
     Set<Object> before = payloads(first); before.addAll(payloads(second));

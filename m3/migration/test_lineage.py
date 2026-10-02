@@ -3,6 +3,7 @@ import copy
 import unittest
 from pathlib import Path
 import tempfile
+import importlib.util
 from lineage import check, classify, closure, plan
 from recipe import Refusal, digest, canonical
 
@@ -105,5 +106,37 @@ class LineageTests(unittest.TestCase):
     def test_schema_version(self):
         m=fixture();m['migration']['schema']='future'
         with self.assertRaises(Refusal):check(m)
+
+class AuthorityLineageTests(unittest.TestCase):
+    def setUp(self):
+        spec = importlib.util.spec_from_file_location('authority_fixture',
+                Path(__file__).parent / 'test/test_migration.py')
+        module = importlib.util.module_from_spec(spec); spec.loader.exec_module(module)
+        self.fixture = module.MigrationTest(); self.fixture.setUp()
+        self.addCleanup(self.fixture.doCleanups)
+
+    def test_current_authority_is_partial_and_artifact_checked(self):
+        result = check(self.fixture.doc, self.fixture.root)
+        self.assertEqual(result['completion'], 'NOT_COMPLETE')
+        self.fixture.output.write_bytes(b'drift')
+        with self.assertRaisesRegex(Refusal, 'hash drift'):
+            check(self.fixture.doc, self.fixture.root)
+
+    def test_current_completion_and_inventory_refuse(self):
+        with self.assertRaisesRegex(Refusal, 'completion refused'):
+            check(self.fixture.doc, self.fixture.root, complete=True)
+        with self.assertRaisesRegex(Refusal, 'unmapped'):
+            check(self.fixture.doc, self.fixture.root,
+                  inventory={'commit':'a'*40,'candidate_paths':['unmapped.java']})
+
+    def test_current_planner_uses_historical_target_for_candidate(self):
+        row = self.fixture.record
+        previous = dict(row['targets'][0], commit='b'*40, revision_role='pinned', sha256='2'*64)
+        row['lineage']['previous_targets'] = [previous]
+        result = plan(self.fixture.doc, {'m3.prefix-z:0':{
+            'source_sha256':row['sources'][0]['sha256'], 'target_sha256':row['targets'][0]['sha256']}})
+        self.assertEqual(result['decisions'][0]['decision'], 'target-only-review')
+        self.assertEqual(result['writes'], 0)
+
 
 if __name__=='__main__':unittest.main()

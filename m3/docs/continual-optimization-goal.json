@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "goal_id": "01a0fa3c-18d0-7940-b8c1-f90c2aecae42",
+  "status_last_verified": "active",
+  "verified_at_utc": "2026-10-02 03:59:14 UTC",
+  "authority": "Native goal in the originating Codex thread; this file is a durable discovery and resume pointer.",
+  "objective": "Continuously implement, verify, and optimize the complete MIndex*/MatIndex*/SubMIndex* migration from hsoliwal/com.synexia to hsoliwal/M3jdk21 and its java.lang.String integration. Follow the user's twelve-pass specification and borrow-first doctrine; preserve source contracts and durable source-to-target mappings; advance Route A, safe compiler lowering (Route B), and matched complete-JDK integration (Route C) independently; measure performance and heap/native/mapped retention; fix evidenced defects; maintain recipes, coverage, exact-candidate receipts, draft PRs, TODO and resume records. Keep the continual optimization goal active across milestones; never treat a partial port, passing explicit-view tests, a manifest, or a draft PR as completion of the complete migration or ongoing optimization.",
+  "token_budget": null,
+  "resume": "m3/docs/migration-resume.md",
+  "backlog": "~/.codex/TODO.md",
+  "review_surfaces": [
+    "https://github.com/hsoliwal/M3jdk21/pull/24",
+    "https://github.com/hsoliwal/M3jdk21/pull/23"
+  ],
+  "next_gates": [
+    "Consolidate one physical Frozen/Joined owner with both public facades and both executed corpora.",
+    "Finish private source shard validation and review despite the 93 blocked original Java syntax files.",
+    "Build and verify the exact latest master/runtime combined complete image; preserve earlier receipt identities.",
+    "Advance the full twelve-pass family, compiler, VM, performance and lifetime obligations."
+  ],
+  "milestones_do_not_complete_goal": [
+    "Selected port or manifest",
+    "Passing explicit-view tests",
+    "Scoped runtime acceptance",
+    "Draft PR publication"
+  ]
+}

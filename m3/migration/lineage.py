@@ -8,6 +8,7 @@ import json
 from pathlib import Path
 import re
 from recipe import Refusal, checked_path, canonical, digest
+import migration as authority
 
 KINDS = {'direct-port', 'rename', 'adapter', 'consolidation', 'specialization',
          'dependency-reuse', 'pending', 'excluded', 'target-adaptation', 'tombstone'}
@@ -45,6 +46,10 @@ def classify(base_source, now_source, base_target, now_target) -> str:
 
 def check(manifest: dict, root: Path | None = None, inventory: dict | None = None,
           expected_source: str | None = None, complete: bool = False) -> dict:
+    if manifest.get('migration', {}).get('version') == 1:
+        return check_authority(manifest, root, inventory, expected_source, complete)
+    # Historical sealed m3.migration/1 packets remain readable; current public
+    # records and schema are owned only by migration.py.
     m = manifest.get('migration')
     if not isinstance(m, dict) or m.get('schema') != 'm3.migration/1': raise Refusal('incompatible migration schema')
     for name in ('source_baseline', 'target_baseline'):
@@ -114,8 +119,51 @@ def check(manifest: dict, root: Path | None = None, inventory: dict | None = Non
             'inventory_exhaustive': m['inventory_exhaustive'], 'open_gates': open_gates,
             'completion': 'NOT_COMPLETE' if pending or open_gates or not m['inventory_exhaustive'] else 'ELIGIBLE_FOR_REVIEW'}
 
+def current_entries(manifest: dict) -> list[dict]:
+    """Transient planner projection of the established authority; never persisted."""
+    entries = []
+    for row in manifest['migration']['records']:
+        targets = row['targets']
+        previous = row['lineage']['previous_targets']
+        baseline = previous[-1:] if previous and any(t.get('revision_role') == 'candidate' for t in targets) else targets
+        entries.append({'id': row['id'], 'sources': row['sources'], 'destinations': targets,
+                        'dependencies': [d['id'] for d in row['dependencies']],
+                        'last_sync': {'target_hashes': [t.get('sha256') for t in baseline]}})
+    return entries
+
+
+def check_authority(manifest: dict, root: Path | None, inventory: dict | None,
+                    expected_source: str | None, complete: bool) -> dict:
+    root = root if root is not None else Path(__file__).resolve().parents[2]
+    errors = authority.validate(manifest, root)
+    if errors: raise Refusal('migration authority: ' + '; '.join(errors))
+    m = manifest['migration']
+    selected = manifest.get('selected_ports', {})
+    selected_inventory = selected.get('source_inventory_ref', {})
+    pins = {m['source']['baseline_commit']}
+    if selected_inventory.get('commit'): pins.add(selected_inventory['commit'])
+    if expected_source is not None and expected_source not in pins: raise Refusal('stale source pin')
+    if inventory is not None:
+        pin = inventory.get('commit')
+        if pin not in pins: raise Refusal('inventory source pin differs')
+        paths = {s['path'] for row in m['records'] for s in row['sources'] if s['commit'] == pin}
+        missing = set(inventory.get('candidate_paths', [])) - paths
+        if missing: raise Refusal('unmapped candidate additions: ' + ','.join(sorted(missing)))
+    pending = [row['id'] for row in m['records'] if row['status'] not in ('implemented-tested', 'excluded', 'tombstone')]
+    open_gates = sorted(g['id'] for g in m['gates'] if g['status'] != 'passed')
+    exhaustive = all(m['coverage'][name] for name in ('source_tree_complete', 'dependency_closure_complete'))
+    if complete and (pending or open_gates or not exhaustive):
+        raise Refusal('completion refused: unresolved mappings, inventory or acceptance gates')
+    return {'schema': 'name-mapping.schema.json/1', 'mappings': len(m['records']),
+            'pending': pending, 'inventory_exhaustive': exhaustive, 'open_gates': open_gates,
+            'source_baseline': m['source']['baseline_commit'],
+            'historical_selected_source': selected_inventory.get('commit'),
+            'completion': 'NOT_COMPLETE' if pending or open_gates or not exhaustive else 'ELIGIBLE_FOR_REVIEW'}
+
+
 def plan(manifest: dict, observations: dict) -> dict:
-    entries = manifest['migration']['entries']; decisions = []
+    entries = current_entries(manifest) if manifest['migration'].get('version') == 1 else manifest['migration']['entries']
+    decisions = []
     for e in entries:
         for index, endpoint in enumerate(e['sources']):
             key = e['id'] + ':' + str(index)

@@ -12,6 +12,7 @@ import apply as recipe
 
 ROOT = Path(__file__).resolve().parents[2]
 PORT = 'm3/ports/text'
+PROVENANCE = PORT + '/provenance-consolidated.json'
 owner_spec = importlib.util.spec_from_file_location('migration_owner', ROOT / 'm3/migration/migration.py')
 owner = importlib.util.module_from_spec(owner_spec)
 owner_spec.loader.exec_module(owner)
@@ -19,7 +20,7 @@ def sha(data): return hashlib.sha256(data).hexdigest()
 def load(root, path): return owner.load_json(recipe.safe_path(root, path))
 
 def validate(root=ROOT, source=None):
-    provenance = load(root, PORT + '/provenance.json')
+    provenance = load(root, PROVENANCE)
     mappings = load(root, 'm3/docs/name-mapping.json')
     errors = owner.validate(mappings, root)
     if errors: raise ValueError('migration authority: ' + '; '.join(errors))

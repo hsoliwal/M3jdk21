@@ -24,27 +24,10 @@ public final class MIndexJoinedChars implements CharSequence {
   public static MIndexJoinedChars of(FrozenChars... parts) {
     return MIndexJoinedStorageIntern.internChars(Objects.requireNonNull(parts, "parts")).canonicalView();
   }
-  /** New descriptor body, preserving deliberately compacted owners without interning. */
-  public static MIndexJoinedChars ofUncached(FrozenChars... parts) {
-    return MIndexJoinedStorageIntern.detachedChars(Objects.requireNonNull(parts, "parts").clone()).canonicalView();
-  }
   /** Process-local identity of the canonical segment tuple, not an OS or sliced-value ID. */
   public long canonicalBackingId() { return body.canonicalId; }
   public boolean sharesBackingWith(MIndexJoinedChars other) {
     return body == Objects.requireNonNull(other, "other").body;
-  }
-
-  /** Snapshot immutable participating owners, using the canonical body's actual ranges. */
-  public FrozenChars[] frozenSegments() {
-    if (length == 0) return new FrozenChars[0];
-    int first = segmentAt(start), last = segmentAt(start + length - 1);
-    FrozenChars[] result = new FrozenChars[last - first + 1];
-    for (int segment = first; segment <= last; segment++) {
-      int previous = segment == 0 ? 0 : body.ends[segment - 1];
-      result[segment - first] = body.segments[segment].subSequence(
-          Math.max(start, previous) - previous, Math.min(start + length, body.ends[segment]) - previous);
-    }
-    return result;
   }
 
   @Override public int length() { return length; }
@@ -123,16 +106,12 @@ public final class MIndexJoinedChars implements CharSequence {
   public FrozenChars detach() { return FrozenChars.owned(copy()); }
   /** One logical charset operation preserves encoder state and cross-segment surrogate pairs. */
   public FrozenBytes encode(Charset charset) {
-    return FrozenBytes.owned(copyEncoded(charset));
-  }
-  /** Independent mutable encoding output without an intermediate immutable-byte copy. */
-  public byte[] copyEncoded(Charset charset) {
     var encoder = Objects.requireNonNull(charset, "charset").newEncoder()
         .onMalformedInput(CodingErrorAction.REPLACE).onUnmappableCharacter(CodingErrorAction.REPLACE);
     try {
       var encoded = encoder.encode(CharBuffer.wrap(this));
       byte[] result = new byte[encoded.remaining()]; encoded.get(result);
-      return result;
+      return FrozenBytes.owned(result);
     } catch (CharacterCodingException impossible) {
       throw new IllegalStateException("replacement encoder failed", impossible);
     }

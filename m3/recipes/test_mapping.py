@@ -19,7 +19,7 @@ class MappingTests(unittest.TestCase):
         self.scratch = tempfile.TemporaryDirectory()
         self.addCleanup(self.scratch.cleanup)
         self.root = Path(self.scratch.name)
-        for folder in ['m3/docs', 'm3/ports/text', 'm3/evidence',
+        for folder in ['m3/docs', 'm3/ports/text', 'm3/ports/indexstring', 'm3/evidence',
                        'm3/recipes', 'm3/tooling/compiler-lowering']:
             shutil.copytree(ROOT / folder, self.root / folder,
                             ignore=shutil.ignore_patterns('build', 'target', '__pycache__'))
@@ -52,7 +52,7 @@ class MappingTests(unittest.TestCase):
 
     def test_candidate_and_scope(self):
         result = checker.validate(self.root)
-        self.assertEqual(11, result['covered_java_files'])
+        self.assertEqual(12, result['covered_java_files'])
         self.assertEqual(checker.SCOPE, result['scope'])
         self.assertGreater(result['all_migration_records'], result['mapping_count'])
         self.assertGreater(result['whole_family_pending'], 0)

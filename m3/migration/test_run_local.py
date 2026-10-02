@@ -38,6 +38,13 @@ class InputScopeTests(unittest.TestCase):
         (evidence / 'receipt.json').write_text('{}')
         self.assertEqual(run_local.input_snapshot(), {})
 
+    def test_generated_outputs_are_not_inputs(self):
+        for folder in ('build', 'target', '__pycache__'):
+            generated = self.port / folder / 'generated.json'
+            generated.parent.mkdir()
+            generated.write_text('{}')
+        self.assertEqual(run_local.input_snapshot(), {})
+
     def test_symlink_input_is_refused(self):
         outside = self.root / 'outside.java'
         outside.write_text('outside')

@@ -176,9 +176,11 @@ final class ExplicitViewConcatRecipeTest {
         Path fixture = directory.resolve("Behavior.java");
         Files.writeString(fixture, source, StandardCharsets.UTF_8);
         List<String> arguments = new ArrayList<>(List.of("--release", "21", "-d", directory.toString()));
-        try (var paths = Files.walk(Path.of(System.getProperty("m3.text.sourceRoot")))) {
-            paths.filter(path -> path.toString().endsWith(".java")).sorted()
-                    .map(Path::toString).forEach(arguments::add);
+        for (String property : List.of("m3.text.sharedSourceRoot", "m3.text.sourceRoot")) {
+            try (var paths = Files.walk(Path.of(System.getProperty(property)))) {
+                paths.filter(path -> path.toString().endsWith(".java")).sorted()
+                        .map(Path::toString).forEach(arguments::add);
+            }
         }
         arguments.add(fixture.toString());
         var errors = new ByteArrayOutputStream();

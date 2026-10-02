@@ -18,15 +18,16 @@ from recipe import canonical, digest, execute
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
 PORT = ROOT / 'm3/ports/indexstring'
+ACTIVE_PLAN = 'recipe-consolidated.json'
 
 def input_snapshot() -> dict[str, str]:
     """Hash only declared migration inputs, not unrelated OpenJDK source trees."""
     inputs = {}
-    for area in (PORT, HERE, ROOT / 'm3/tooling/migration-recipes'):
+    for area in (PORT, HERE, ROOT / 'm3/tooling/migration-recipes', ROOT / 'm3/ports/text'):
         for path in sorted(area.rglob('*')):
             if path.is_symlink(): raise RuntimeError('symlink input refused: ' + str(path))
             if (path.is_file() and path.suffix in ('.java', '.c', '.py', '.xml', '.json', '.txt')
-                    and '__pycache__' not in path.parts and 'evidence' not in path.parts):
+                    and not {'__pycache__', 'evidence', 'target', 'build'}.intersection(path.parts)):
                 if path.stat().st_size > 16 * 1024 * 1024:
                     raise RuntimeError('migration input exceeds 16 MiB budget: ' + str(path))
                 inputs[path.relative_to(ROOT).as_posix()] = digest(path.read_bytes())
@@ -45,7 +46,8 @@ def main() -> int:
                                 stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=120)
         (out / (name + '.log')).write_text(result.stdout, encoding='utf-8')
         commands.append({'id':name,'argv':[str(x) for x in command], 'cwd':str(cwd),
-                         'exit_code':result.returncode,'output_sha256':digest(result.stdout.encode())})
+                         'exit_code':result.returncode,'stdout':result.stdout,
+                         'output_sha256':digest(result.stdout.encode())})
         if result.returncode:
             raise RuntimeError(name + ' failed; see ' + str(out / (name + '.log')))
         print(name + ': PASS', flush=True)
@@ -62,7 +64,8 @@ def main() -> int:
         pinned_inputs = input_snapshot()
         for pom in ROOT.glob('m3/**/pom.xml'): ET.parse(pom)
         for script in HERE.glob('*.py'): compile(script.read_bytes(), str(script), 'exec')
-        receipt['recipe_state'] = execute(PORT/'recipe.json',ROOT,'check')
+        receipt['recipe_state'] = execute(PORT/ACTIVE_PLAN,ROOT,'check')
+        receipt['consolidation_state'] = execute(PORT/'consolidation/recipe.json',ROOT,'check')
         run('python-tests',[sys.executable,'-m','unittest','discover','-s',HERE,'-p','test_*.py','-v'])
         with tempfile.TemporaryDirectory(prefix='m3-closure-') as temporary:
             temp=Path(temporary); before=temp/'before'; after=temp/'after'
@@ -76,15 +79,20 @@ def main() -> int:
                 path=baseline/name;path.write_bytes(data);baseline_java.append(path)
             run('compile-baseline',[javac,'--release','21','-Xlint:all','-Werror','-d',before,*baseline_java,PORT/'src/test/java/ExistingSurfaceTest.java'])
             main_sources=sorted((PORT/'src/main/java').rglob('*.java'))
-            planned = {row['path'] for row in json.loads((PORT/'recipe.json').read_text())['outputs']}
+            planned = {row['path'] for row in json.loads((PORT/ACTIVE_PLAN).read_text())['outputs']}
             if {p.relative_to(ROOT).as_posix() for p in main_sources} != planned:
                 raise RuntimeError('unmapped/missing compatibility Java source')
             tests=sorted((PORT/'src/test/java').glob('*.java'))
-            run('compile-candidate',[javac,'--release','21','-Xlint:all','-Werror','-d',after,*main_sources,*tests,HERE/'SurfaceInventory.java',PORT/'native-test/NativeBoundaryTest.java'])
-            baseline_result=run('existing-baseline',[java,'-cp',before,'com.synexia.indexstring.ExistingSurfaceTest'])
-            candidate_result=run('existing-candidate',[java,'-cp',after,'com.synexia.indexstring.ExistingSurfaceTest'])
-            if baseline_result!=candidate_result: raise RuntimeError('existing-surface differential mismatch')
-            run('retained-view',[java,'-Xmx512m','-cp',after,'com.synexia.indexstring.RetainedViewTest'])
+            text=ROOT/'m3/ports/text'
+            facades=sorted((text/'src').rglob('*.java'))
+            run('compile-candidate',[javac,'-J-Xmx256m','-J-XX:ActiveProcessorCount=2','--release','21','-Xlint:all','-Werror','-d',after,*main_sources,*facades,*tests,text/'test/M3StringTest.java',HERE/'SurfaceInventory.java',PORT/'native-test/NativeBoundaryTest.java'])
+            for mode, flags in (('default', []), ('interpreter', ['-Xint'])):
+                options=[java,'-Xms32m','-Xmx256m','-XX:ActiveProcessorCount=2','-ea',*flags]
+                baseline_result=run('existing-baseline-'+mode,[*options,'-cp',before,'com.synexia.indexstring.ExistingSurfaceTest'])
+                candidate_result=run('existing-candidate-'+mode,[*options,'-cp',after,'com.synexia.indexstring.ExistingSurfaceTest'])
+                if baseline_result!=candidate_result: raise RuntimeError('existing-surface differential mismatch')
+                run('retained-view-'+mode,[*options,'-cp',after,'com.synexia.indexstring.RetainedViewTest'])
+                run('explicit-facade-'+mode,[*options,'-cp',after,'M3StringTest'])
             include=Path(javac).resolve().parents[1]/'include'
             library=temp/'libm3-boundary.so'
             run('compile-jni',[gcc,'-std=c11','-Wall','-Wextra','-Werror','-fPIC','-shared','-fsanitize=undefined','-fno-sanitize-recover=all','-I'+str(include),'-I'+str(include/'linux'),PORT/'native-test/boundary.c','-o',library])

@@ -2168,9 +2168,9 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
-            "module": "m3/ports/text",
-            "path": "m3/ports/text/src/com/synexia/indexstring/FrozenChars.java",
+            "commit": null,
+            "module": "m3/ports/indexstring",
+            "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java",
             "symbol": "com.synexia.indexstring.FrozenChars",
             "signatures": [
               "class FrozenChars"
@@ -2178,8 +2178,8 @@
             "sha256": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46",
             "git_blob_sha1": null,
             "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": null
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/codex/mindex-migration-20261002"
           }
         ],
         "owner": "com.synexia.indexstring.FrozenChars",
@@ -2197,7 +2197,7 @@
           ],
           "compatibility_obligations": [
             "source: original names retained, only additive APIs",
-            "binary: no existing member removed; packaging is separate, do not put both owners on one classpath",
+            "binary: no existing member removed; one physical indexstring owner closure serves both public facades",
             "serialization: no new persistent IDs or image-format claim",
             "native_abi: no ABI changes; direct pointer borrowing only original owner boundary",
             "Downstream consumers: com.m3.indexstring.M3String",
@@ -2223,7 +2223,7 @@
           "id": "m3-selected-text-port",
           "version": "1",
           "path": "m3/recipes/text-port.py",
-          "sha256": "26ccbedde4dc051ef4d7b6a529bf2c4a8b8a3faabdc4df12918862ac1a9823e4",
+          "sha256": "915ec7f9b738a7419e81eac4a48714d2998b241d8ab5a91c9fd29bd4012401ff",
           "preconditions": [
             "exact raw Git source hashes",
             "exact adapter patch SHA256",
@@ -2235,19 +2235,27 @@
         "tests": [
           {
             "id": "retained-text-1",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-2",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-3",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-4",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-default",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-interpreter",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           }
         ],
         "provenance": {
@@ -2257,7 +2265,7 @@
         },
         "sync": {
           "source_revision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
-          "target_revision": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+          "target_revision": null,
           "direction": "source-to-target",
           "target_adaptations": [
             "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
@@ -2274,11 +2282,27 @@
         },
         "lineage": {
           "previous_sources": [],
-          "previous_targets": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+              "module": "m3/ports/text",
+              "path": "m3/ports/text/src/com/synexia/indexstring/FrozenChars.java",
+              "symbol": "com.synexia.indexstring.FrozenChars",
+              "signatures": [
+                "class FrozenChars"
+              ],
+              "sha256": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46",
+              "git_blob_sha1": null,
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": null
+            }
+          ],
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Historical selected donor pin 6df9df8d is explicit; it is not relabeled as the current default branch or exhaustive source acceptance."
+        "observation": "Shared-owner working-tree candidate based on 6f6bca8e52f2f55adcab89676632f3da9ddc56d1; exact raw bytes and fresh receipts, Git pin pending root freeze."
       },
       {
         "id": "source:61e1e799dfff8a821db084921c35072e5031955345619ee9180816ba810aa2e4",
@@ -2305,9 +2329,9 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
-            "module": "m3/ports/text",
-            "path": "m3/ports/text/src/com/synexia/indexstring/FrozenBytes.java",
+            "commit": null,
+            "module": "m3/ports/indexstring",
+            "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java",
             "symbol": "com.synexia.indexstring.FrozenBytes",
             "signatures": [
               "class FrozenBytes"
@@ -2315,8 +2339,8 @@
             "sha256": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf",
             "git_blob_sha1": null,
             "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": null
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/codex/mindex-migration-20261002"
           }
         ],
         "owner": "com.synexia.indexstring.FrozenBytes",
@@ -2328,7 +2352,7 @@
           "differences": [],
           "compatibility_obligations": [
             "source: original names retained, only additive APIs",
-            "binary: no existing member removed; packaging is separate, do not put both owners on one classpath",
+            "binary: no existing member removed; one physical indexstring owner closure serves both public facades",
             "serialization: no new persistent IDs or image-format claim",
             "native_abi: no ABI changes; direct pointer borrowing only original owner boundary",
             "Downstream consumers: com.m3.indexstring.M3String",
@@ -2354,7 +2378,7 @@
           "id": "m3-selected-text-port",
           "version": "1",
           "path": "m3/recipes/text-port.py",
-          "sha256": "26ccbedde4dc051ef4d7b6a529bf2c4a8b8a3faabdc4df12918862ac1a9823e4",
+          "sha256": "915ec7f9b738a7419e81eac4a48714d2998b241d8ab5a91c9fd29bd4012401ff",
           "preconditions": [
             "exact raw Git source hashes",
             "exact adapter patch SHA256",
@@ -2366,19 +2390,27 @@
         "tests": [
           {
             "id": "retained-text-1",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-2",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-3",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-4",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-default",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-interpreter",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           }
         ],
         "provenance": {
@@ -2388,7 +2420,7 @@
         },
         "sync": {
           "source_revision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
-          "target_revision": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+          "target_revision": null,
           "direction": "source-to-target",
           "target_adaptations": [
             "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
@@ -2405,11 +2437,27 @@
         },
         "lineage": {
           "previous_sources": [],
-          "previous_targets": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+              "module": "m3/ports/text",
+              "path": "m3/ports/text/src/com/synexia/indexstring/FrozenBytes.java",
+              "symbol": "com.synexia.indexstring.FrozenBytes",
+              "signatures": [
+                "class FrozenBytes"
+              ],
+              "sha256": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf",
+              "git_blob_sha1": null,
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": null
+            }
+          ],
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Historical selected donor pin 6df9df8d is explicit; it is not relabeled as the current default branch or exhaustive source acceptance."
+        "observation": "Shared-owner working-tree candidate based on 6f6bca8e52f2f55adcab89676632f3da9ddc56d1; exact raw bytes and fresh receipts, Git pin pending root freeze."
       },
       {
         "id": "source:cfbe43ec93eca2c5c892c31e03d7fa1eec809402dec20f512783bf3a5885ff68",
@@ -2436,9 +2484,9 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
-            "module": "m3/ports/text",
-            "path": "m3/ports/text/src/com/synexia/indexstring/FrozenByteInterner.java",
+            "commit": null,
+            "module": "m3/ports/indexstring",
+            "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenByteInterner.java",
             "symbol": "com.synexia.indexstring.FrozenByteInterner",
             "signatures": [
               "class FrozenByteInterner"
@@ -2446,8 +2494,8 @@
             "sha256": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414",
             "git_blob_sha1": null,
             "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": null
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/codex/mindex-migration-20261002"
           }
         ],
         "owner": "com.synexia.indexstring.FrozenByteInterner",
@@ -2465,7 +2513,7 @@
           ],
           "compatibility_obligations": [
             "source: original names retained, only additive APIs",
-            "binary: no existing member removed; packaging is separate, do not put both owners on one classpath",
+            "binary: no existing member removed; one physical indexstring owner closure serves both public facades",
             "serialization: no new persistent IDs or image-format claim",
             "native_abi: no ABI changes; direct pointer borrowing only original owner boundary",
             "Downstream consumers: com.m3.indexstring.M3String",
@@ -2491,7 +2539,7 @@
           "id": "m3-selected-text-port",
           "version": "1",
           "path": "m3/recipes/text-port.py",
-          "sha256": "26ccbedde4dc051ef4d7b6a529bf2c4a8b8a3faabdc4df12918862ac1a9823e4",
+          "sha256": "915ec7f9b738a7419e81eac4a48714d2998b241d8ab5a91c9fd29bd4012401ff",
           "preconditions": [
             "exact raw Git source hashes",
             "exact adapter patch SHA256",
@@ -2503,19 +2551,27 @@
         "tests": [
           {
             "id": "retained-text-1",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-2",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-3",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-4",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-default",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-interpreter",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           }
         ],
         "provenance": {
@@ -2525,7 +2581,7 @@
         },
         "sync": {
           "source_revision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
-          "target_revision": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+          "target_revision": null,
           "direction": "source-to-target",
           "target_adaptations": [
             "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
@@ -2542,11 +2598,27 @@
         },
         "lineage": {
           "previous_sources": [],
-          "previous_targets": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+              "module": "m3/ports/text",
+              "path": "m3/ports/text/src/com/synexia/indexstring/FrozenByteInterner.java",
+              "symbol": "com.synexia.indexstring.FrozenByteInterner",
+              "signatures": [
+                "class FrozenByteInterner"
+              ],
+              "sha256": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414",
+              "git_blob_sha1": null,
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": null
+            }
+          ],
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Historical selected donor pin 6df9df8d is explicit; it is not relabeled as the current default branch or exhaustive source acceptance."
+        "observation": "Shared-owner working-tree candidate based on 6f6bca8e52f2f55adcab89676632f3da9ddc56d1; exact raw bytes and fresh receipts, Git pin pending root freeze."
       },
       {
         "id": "source:9035acf23c18b9dce54945c3b0da582782c9f94f1d85260ab0b8571969464c80",
@@ -2573,18 +2645,18 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
-            "module": "m3/ports/text",
-            "path": "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedChars.java",
+            "commit": null,
+            "module": "m3/ports/indexstring",
+            "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedChars.java",
             "symbol": "com.synexia.indexstring.MIndexJoinedChars",
             "signatures": [
               "class MIndexJoinedChars"
             ],
-            "sha256": "2cdb10d20f7ed9c80143471deb22350fdc44d9c7899975402313cb85fd50c3c4",
+            "sha256": "d93729835dcffe0a9a9be1fe54ab9f0f4af9848a562cce2ae80bffff781bead0",
             "git_blob_sha1": null,
             "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": null
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/codex/mindex-migration-20261002"
           }
         ],
         "owner": "com.synexia.indexstring.MIndexJoinedChars",
@@ -2602,7 +2674,7 @@
           ],
           "compatibility_obligations": [
             "source: original names retained, only additive APIs",
-            "binary: no existing member removed; packaging is separate, do not put both owners on one classpath",
+            "binary: no existing member removed; one physical indexstring owner closure serves both public facades",
             "serialization: no new persistent IDs or image-format claim",
             "native_abi: no ABI changes; direct pointer borrowing only original owner boundary",
             "Downstream consumers: com.m3.indexstring.M3String",
@@ -2628,7 +2700,7 @@
           "id": "m3-selected-text-port",
           "version": "1",
           "path": "m3/recipes/text-port.py",
-          "sha256": "26ccbedde4dc051ef4d7b6a529bf2c4a8b8a3faabdc4df12918862ac1a9823e4",
+          "sha256": "915ec7f9b738a7419e81eac4a48714d2998b241d8ab5a91c9fd29bd4012401ff",
           "preconditions": [
             "exact raw Git source hashes",
             "exact adapter patch SHA256",
@@ -2640,19 +2712,27 @@
         "tests": [
           {
             "id": "retained-text-1",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-2",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-3",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-4",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-default",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-interpreter",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           }
         ],
         "provenance": {
@@ -2662,7 +2742,7 @@
         },
         "sync": {
           "source_revision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
-          "target_revision": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+          "target_revision": null,
           "direction": "source-to-target",
           "target_adaptations": [
             "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
@@ -2679,11 +2759,27 @@
         },
         "lineage": {
           "previous_sources": [],
-          "previous_targets": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+              "module": "m3/ports/text",
+              "path": "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedChars.java",
+              "symbol": "com.synexia.indexstring.MIndexJoinedChars",
+              "signatures": [
+                "class MIndexJoinedChars"
+              ],
+              "sha256": "2cdb10d20f7ed9c80143471deb22350fdc44d9c7899975402313cb85fd50c3c4",
+              "git_blob_sha1": null,
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": null
+            }
+          ],
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Historical selected donor pin 6df9df8d is explicit; it is not relabeled as the current default branch or exhaustive source acceptance."
+        "observation": "Shared-owner working-tree candidate based on 6f6bca8e52f2f55adcab89676632f3da9ddc56d1; exact raw bytes and fresh receipts, Git pin pending root freeze."
       },
       {
         "id": "source:a75488529e2d8c4a0abeb9910eb47da2c7cf7b9e6d9233af457fe66d9c297fc2",
@@ -2710,9 +2806,9 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
-            "module": "m3/ports/text",
-            "path": "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedBytes.java",
+            "commit": null,
+            "module": "m3/ports/indexstring",
+            "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedBytes.java",
             "symbol": "com.synexia.indexstring.MIndexJoinedBytes",
             "signatures": [
               "class MIndexJoinedBytes"
@@ -2720,8 +2816,8 @@
             "sha256": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
             "git_blob_sha1": null,
             "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": null
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/codex/mindex-migration-20261002"
           }
         ],
         "owner": "com.synexia.indexstring.MIndexJoinedBytes",
@@ -2733,7 +2829,7 @@
           "differences": [],
           "compatibility_obligations": [
             "source: original names retained, only additive APIs",
-            "binary: no existing member removed; packaging is separate, do not put both owners on one classpath",
+            "binary: no existing member removed; one physical indexstring owner closure serves both public facades",
             "serialization: no new persistent IDs or image-format claim",
             "native_abi: no ABI changes; direct pointer borrowing only original owner boundary",
             "Downstream consumers: com.m3.indexstring.M3String",
@@ -2759,7 +2855,7 @@
           "id": "m3-selected-text-port",
           "version": "1",
           "path": "m3/recipes/text-port.py",
-          "sha256": "26ccbedde4dc051ef4d7b6a529bf2c4a8b8a3faabdc4df12918862ac1a9823e4",
+          "sha256": "915ec7f9b738a7419e81eac4a48714d2998b241d8ab5a91c9fd29bd4012401ff",
           "preconditions": [
             "exact raw Git source hashes",
             "exact adapter patch SHA256",
@@ -2771,19 +2867,27 @@
         "tests": [
           {
             "id": "retained-text-1",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-2",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-3",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-4",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-default",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-interpreter",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           }
         ],
         "provenance": {
@@ -2793,7 +2897,7 @@
         },
         "sync": {
           "source_revision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
-          "target_revision": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+          "target_revision": null,
           "direction": "source-to-target",
           "target_adaptations": [],
           "pending": [
@@ -2803,11 +2907,27 @@
         },
         "lineage": {
           "previous_sources": [],
-          "previous_targets": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+              "module": "m3/ports/text",
+              "path": "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedBytes.java",
+              "symbol": "com.synexia.indexstring.MIndexJoinedBytes",
+              "signatures": [
+                "class MIndexJoinedBytes"
+              ],
+              "sha256": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+              "git_blob_sha1": null,
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": null
+            }
+          ],
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Historical selected donor pin 6df9df8d is explicit; it is not relabeled as the current default branch or exhaustive source acceptance."
+        "observation": "Shared-owner working-tree candidate based on 6f6bca8e52f2f55adcab89676632f3da9ddc56d1; exact raw bytes and fresh receipts, Git pin pending root freeze."
       },
       {
         "id": "source:a7d5b18679d90a323159e05b54d0be6bf784d23deb928bf6f5b499ffd4e87648",
@@ -2834,9 +2954,9 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
-            "module": "m3/ports/text",
-            "path": "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStorageIntern.java",
+            "commit": null,
+            "module": "m3/ports/indexstring",
+            "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStorageIntern.java",
             "symbol": "com.synexia.indexstring.MIndexJoinedStorageIntern",
             "signatures": [
               "class MIndexJoinedStorageIntern"
@@ -2844,8 +2964,8 @@
             "sha256": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7",
             "git_blob_sha1": null,
             "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": null
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/codex/mindex-migration-20261002"
           }
         ],
         "owner": "com.synexia.indexstring.MIndexJoinedStorageIntern",
@@ -2863,7 +2983,7 @@
           ],
           "compatibility_obligations": [
             "source: original names retained, only additive APIs",
-            "binary: no existing member removed; packaging is separate, do not put both owners on one classpath",
+            "binary: no existing member removed; one physical indexstring owner closure serves both public facades",
             "serialization: no new persistent IDs or image-format claim",
             "native_abi: no ABI changes; direct pointer borrowing only original owner boundary",
             "Downstream consumers: com.m3.indexstring.M3String",
@@ -2889,7 +3009,7 @@
           "id": "m3-selected-text-port",
           "version": "1",
           "path": "m3/recipes/text-port.py",
-          "sha256": "26ccbedde4dc051ef4d7b6a529bf2c4a8b8a3faabdc4df12918862ac1a9823e4",
+          "sha256": "915ec7f9b738a7419e81eac4a48714d2998b241d8ab5a91c9fd29bd4012401ff",
           "preconditions": [
             "exact raw Git source hashes",
             "exact adapter patch SHA256",
@@ -2901,19 +3021,27 @@
         "tests": [
           {
             "id": "retained-text-1",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-2",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-3",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-4",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-default",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-interpreter",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           }
         ],
         "provenance": {
@@ -2923,7 +3051,7 @@
         },
         "sync": {
           "source_revision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
-          "target_revision": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+          "target_revision": null,
           "direction": "source-to-target",
           "target_adaptations": [
             "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
@@ -2940,11 +3068,27 @@
         },
         "lineage": {
           "previous_sources": [],
-          "previous_targets": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+              "module": "m3/ports/text",
+              "path": "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStorageIntern.java",
+              "symbol": "com.synexia.indexstring.MIndexJoinedStorageIntern",
+              "signatures": [
+                "class MIndexJoinedStorageIntern"
+              ],
+              "sha256": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7",
+              "git_blob_sha1": null,
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": null
+            }
+          ],
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Historical selected donor pin 6df9df8d is explicit; it is not relabeled as the current default branch or exhaustive source acceptance."
+        "observation": "Shared-owner working-tree candidate based on 6f6bca8e52f2f55adcab89676632f3da9ddc56d1; exact raw bytes and fresh receipts, Git pin pending root freeze."
       },
       {
         "id": "source:66a22803b37ed047b0f483eb4f8c045b03fe87c2c3928c6195617ab8410d2ac9",
@@ -2971,9 +3115,9 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
-            "module": "m3/ports/text",
-            "path": "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStreams.java",
+            "commit": null,
+            "module": "m3/ports/indexstring",
+            "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStreams.java",
             "symbol": "com.synexia.indexstring.MIndexJoinedStreams",
             "signatures": [
               "class MIndexJoinedStreams"
@@ -2981,8 +3125,8 @@
             "sha256": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
             "git_blob_sha1": null,
             "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": null
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/codex/mindex-migration-20261002"
           }
         ],
         "owner": "com.synexia.indexstring.MIndexJoinedStreams",
@@ -2994,7 +3138,7 @@
           "differences": [],
           "compatibility_obligations": [
             "source: original names retained, only additive APIs",
-            "binary: no existing member removed; packaging is separate, do not put both owners on one classpath",
+            "binary: no existing member removed; one physical indexstring owner closure serves both public facades",
             "serialization: no new persistent IDs or image-format claim",
             "native_abi: no ABI changes; direct pointer borrowing only original owner boundary",
             "Downstream consumers: com.m3.indexstring.M3String",
@@ -3020,7 +3164,7 @@
           "id": "m3-selected-text-port",
           "version": "1",
           "path": "m3/recipes/text-port.py",
-          "sha256": "26ccbedde4dc051ef4d7b6a529bf2c4a8b8a3faabdc4df12918862ac1a9823e4",
+          "sha256": "915ec7f9b738a7419e81eac4a48714d2998b241d8ab5a91c9fd29bd4012401ff",
           "preconditions": [
             "exact raw Git source hashes",
             "exact adapter patch SHA256",
@@ -3032,19 +3176,27 @@
         "tests": [
           {
             "id": "retained-text-1",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-2",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-3",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-4",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-default",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-interpreter",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           }
         ],
         "provenance": {
@@ -3054,7 +3206,7 @@
         },
         "sync": {
           "source_revision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
-          "target_revision": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+          "target_revision": null,
           "direction": "source-to-target",
           "target_adaptations": [],
           "pending": [
@@ -3064,11 +3216,27 @@
         },
         "lineage": {
           "previous_sources": [],
-          "previous_targets": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+              "module": "m3/ports/text",
+              "path": "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStreams.java",
+              "symbol": "com.synexia.indexstring.MIndexJoinedStreams",
+              "signatures": [
+                "class MIndexJoinedStreams"
+              ],
+              "sha256": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
+              "git_blob_sha1": null,
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": null
+            }
+          ],
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Historical selected donor pin 6df9df8d is explicit; it is not relabeled as the current default branch or exhaustive source acceptance."
+        "observation": "Shared-owner working-tree candidate based on 6f6bca8e52f2f55adcab89676632f3da9ddc56d1; exact raw bytes and fresh receipts, Git pin pending root freeze."
       },
       {
         "id": "target:910531d6cc8c645f51f4d3be2bffb6fc7cec8e4c74f7ddbe355c4d464f25a5cb",
@@ -3095,7 +3263,7 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+            "commit": null,
             "module": "m3/ports/text",
             "path": "m3/ports/text/src/com/m3/indexstring/M3String.java",
             "symbol": "com.m3.indexstring.M3String",
@@ -3105,8 +3273,8 @@
             "sha256": "aaf2f5868fb26f1a8d80f13ae13885885ec7f2eb31c4676f4924d037315fe61c",
             "git_blob_sha1": null,
             "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": null
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/codex/mindex-migration-20261002"
           }
         ],
         "owner": "com.synexia.indexstring.MIndexJoinedChars",
@@ -3198,19 +3366,27 @@
         "tests": [
           {
             "id": "retained-text-1",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-2",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-3",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-4",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-default",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-interpreter",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           }
         ],
         "provenance": {
@@ -3220,7 +3396,7 @@
         },
         "sync": {
           "source_revision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
-          "target_revision": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+          "target_revision": null,
           "direction": "source-to-target",
           "target_adaptations": [
             "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
@@ -3237,11 +3413,27 @@
         },
         "lineage": {
           "previous_sources": [],
-          "previous_targets": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+              "module": "m3/ports/text",
+              "path": "m3/ports/text/src/com/m3/indexstring/M3String.java",
+              "symbol": "com.m3.indexstring.M3String",
+              "signatures": [
+                "class M3String"
+              ],
+              "sha256": "aaf2f5868fb26f1a8d80f13ae13885885ec7f2eb31c4676f4924d037315fe61c",
+              "git_blob_sha1": null,
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": null
+            }
+          ],
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Historical selected donor pin 6df9df8d is explicit; it is not relabeled as the current default branch or exhaustive source acceptance."
+        "observation": "Shared-owner working-tree candidate based on 6f6bca8e52f2f55adcab89676632f3da9ddc56d1; exact raw bytes and fresh receipts, Git pin pending root freeze."
       },
       {
         "id": "target:58387cd3389d5bc8addcad092ba58a18ffbf3fde19abeaee16e7efdb617aa368",
@@ -3268,7 +3460,7 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+            "commit": null,
             "module": "m3/ports/text",
             "path": "m3/ports/text/src/com/m3/indexstring/M3StringArena.java",
             "symbol": "com.m3.indexstring.M3StringArena",
@@ -3278,8 +3470,8 @@
             "sha256": "94eda684ee599ed6cbfd9ed8fd58a571ca5f831a368da332345999255919639a",
             "git_blob_sha1": null,
             "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": null
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/codex/mindex-migration-20261002"
           }
         ],
         "owner": "com.synexia.indexstring.MIndexJoinedChars",
@@ -3371,19 +3563,27 @@
         "tests": [
           {
             "id": "retained-text-1",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-2",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-3",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-4",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-default",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-interpreter",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           }
         ],
         "provenance": {
@@ -3393,7 +3593,7 @@
         },
         "sync": {
           "source_revision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
-          "target_revision": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+          "target_revision": null,
           "direction": "source-to-target",
           "target_adaptations": [
             "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
@@ -3410,11 +3610,27 @@
         },
         "lineage": {
           "previous_sources": [],
-          "previous_targets": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+              "module": "m3/ports/text",
+              "path": "m3/ports/text/src/com/m3/indexstring/M3StringArena.java",
+              "symbol": "com.m3.indexstring.M3StringArena",
+              "signatures": [
+                "class M3StringArena"
+              ],
+              "sha256": "94eda684ee599ed6cbfd9ed8fd58a571ca5f831a368da332345999255919639a",
+              "git_blob_sha1": null,
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": null
+            }
+          ],
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Historical selected donor pin 6df9df8d is explicit; it is not relabeled as the current default branch or exhaustive source acceptance."
+        "observation": "Shared-owner working-tree candidate based on 6f6bca8e52f2f55adcab89676632f3da9ddc56d1; exact raw bytes and fresh receipts, Git pin pending root freeze."
       },
       {
         "id": "target:45e42e1887bc26ce9b613fcb50679176a23a67d35f1e9522c63c5d7526ce886b",
@@ -3441,7 +3657,7 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+            "commit": null,
             "module": "m3/ports/text",
             "path": "m3/ports/text/src/com/m3/indexstring/M3Utf16Cursor.java",
             "symbol": "com.m3.indexstring.M3Utf16Cursor",
@@ -3451,8 +3667,8 @@
             "sha256": "ba2c75331207feacfdb2fdd225c1b2b2d6aba9c753d9865a7e00e9baafdaea98",
             "git_blob_sha1": null,
             "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": null
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/codex/mindex-migration-20261002"
           }
         ],
         "owner": "com.synexia.indexstring.MIndexJoinedChars",
@@ -3544,19 +3760,27 @@
         "tests": [
           {
             "id": "retained-text-1",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-2",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-3",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
             "id": "retained-text-4",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-default",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-interpreter",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           }
         ],
         "provenance": {
@@ -3566,7 +3790,7 @@
         },
         "sync": {
           "source_revision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
-          "target_revision": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+          "target_revision": null,
           "direction": "source-to-target",
           "target_adaptations": [
             "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
@@ -3583,11 +3807,184 @@
         },
         "lineage": {
           "previous_sources": [],
-          "previous_targets": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+              "module": "m3/ports/text",
+              "path": "m3/ports/text/src/com/m3/indexstring/M3Utf16Cursor.java",
+              "symbol": "com.m3.indexstring.M3Utf16Cursor",
+              "signatures": [
+                "class M3Utf16Cursor"
+              ],
+              "sha256": "ba2c75331207feacfdb2fdd225c1b2b2d6aba9c753d9865a7e00e9baafdaea98",
+              "git_blob_sha1": null,
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": null
+            }
+          ],
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Historical selected donor pin 6df9df8d is explicit; it is not relabeled as the current default branch or exhaustive source acceptance."
+        "observation": "Shared-owner working-tree candidate based on 6f6bca8e52f2f55adcab89676632f3da9ddc56d1; exact raw bytes and fresh receipts, Git pin pending root freeze."
+      },
+      {
+        "id": "target:826fac74bdfbcd4a28fd2bc3087d55d039dc187d1501da9261489d958b9a4d29",
+        "kind": "specialization",
+        "status": "implemented-tested",
+        "reason": "Preserve the incoming explicit-policy retained M3Text facade over the same canonical owners used by M3String.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+            "module": "synexia-indexstring",
+            "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedChars.java",
+            "symbol": "com.synexia.indexstring.MIndexJoinedChars",
+            "signatures": [
+              "class MIndexJoinedChars"
+            ],
+            "sha256": "712c1c795ff1e0d6dea099eaec8fa6e64803adfc12bad6f31970b722c659d396",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "historical-selected:6df9df8d"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+            "module": "m3/ports/indexstring",
+            "path": "m3/ports/indexstring/src/main/java/com/m3/text/compat/M3Text.java",
+            "symbol": "com.m3.text.compat.M3Text",
+            "signatures": [
+              "class M3Text"
+            ],
+            "sha256": "2f1c52feaa5c81462a469c84d847448840cfa75db5a0f1d40c72241718417653",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "historical-integrated:45f546ff"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "m3/ports/indexstring",
+            "path": "m3/ports/indexstring/src/main/java/com/m3/text/compat/M3Text.java",
+            "symbol": "com.m3.text.compat.M3Text",
+            "signatures": [
+              "class M3Text"
+            ],
+            "sha256": "2f1c52feaa5c81462a469c84d847448840cfa75db5a0f1d40c72241718417653",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/codex/mindex-migration-20261002"
+          }
+        ],
+        "owner": "com.m3.text.compat.M3Text",
+        "identity": {
+          "namespace": "Immutable payload owners; process-local weak composition IDs; no resolver/structural numeric IDs ported",
+          "generation": "Existing process-local owner lifetime; no persistent namespace or resolver numeric ID translation."
+        },
+        "contract": {
+          "differences": [
+            "Retain M3Text admission policy, supplied storage identity, bounded prefix-search policy, equality and charset/error contracts."
+          ],
+          "compatibility_obligations": [
+            "Both public facade packages compile against one physical seven-owner closure."
+          ],
+          "public_surface": [
+            "class M3Text"
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": "Raw UTF16BE code units; existing direct descriptor ABI only, no shared-image ABI claim.",
+          "bootstrap": "application module only; no network or String constructor hook; no Maven/recipe runtime dependencies"
+        },
+        "dependencies": [
+          {
+            "id": "source:9035acf23c18b9dce54945c3b0da582782c9f94f1d85260ab0b8571969464c80",
+            "resolution": "resolved",
+            "reason": "Same canonical joined owner; supplied storage identity is retained."
+          }
+        ],
+        "materialization": {
+          "admission": "Defensive mutable-input copy or exact immutable raw UTF16BE atom admission through established FrozenByteInterner.",
+          "joins": "Borrow existing immutable atoms and flatten the descriptor directory; no eager combined text payload.",
+          "outputs": "ordinary String conversion; mutable arrays and encoding outputs",
+          "cached_facts": "Frozen/Joined owners; optional bounded atom lookups, weak tuple registry"
+        },
+        "recipe": {
+          "id": "com.m3.rewrite.InstallIndexStringCompatibility",
+          "version": "2",
+          "path": "m3/ports/indexstring/recipe-consolidated.json",
+          "sha256": "c79480bfa17eb366d23b03c590f0b4ab2b50f2985f26e371b1f5ad5342e257ab",
+          "preconditions": [
+            "exact raw Git source hashes",
+            "exact adapter patch SHA256",
+            "all destinations absent or identical",
+            "Exact source preimages are sources[].sha256; expected target postimages are targets[].sha256 and the selected donor patch provenance."
+          ],
+          "rollback": "reviewed three-way reverse replay against the last synchronized baseline"
+        },
+        "tests": [
+          {
+            "id": "retained-view-default",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          },
+          {
+            "id": "retained-view-interpreter",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0",
+          "publication": "selected user-authorized dependency closure; source repository private",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "target_revision": null,
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
+            "FrozenChars: retain immutable byte atoms, safe adjacent coalescing and owner retention",
+            "MIndexJoinedChars: canonical-owner projection, direct mutable encoding output, explicit uncached body",
+            "MIndexJoinedStorageIntern: explicit detached body bypasses content canonicalization",
+            "M3String facade: exact value/search/cursor API outside java.base; known String surface gaps tracked",
+            "FrozenBytes: owner-local lazy immutable UTF16 view/hash fact; no extra payload"
+          ],
+          "pending": [
+            "full family/source ABI compatibility remains separate"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "6f6bca8e52f2f55adcab89676632f3da9ddc56d1",
+              "module": "m3/ports/indexstring",
+              "path": "m3/ports/indexstring/src/main/java/com/m3/text/compat/M3Text.java",
+              "symbol": "com.m3.text.compat.M3Text",
+              "signatures": [
+                "class M3Text"
+              ],
+              "sha256": "2f1c52feaa5c81462a469c84d847448840cfa75db5a0f1d40c72241718417653",
+              "git_blob_sha1": null,
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": null
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "partial",
+        "observation": "Shared-owner working-tree candidate based on 6f6bca8e52f2f55adcab89676632f3da9ddc56d1; exact raw bytes and fresh receipts, Git pin pending root freeze."
       },
       {
         "id": "target:8b0161927e9b9ab8b60abac1e8ad5b7d112d1544f19ada9c114c8af61310a375",
@@ -3629,7 +4026,7 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+            "commit": null,
             "module": "m3/tooling/compiler-lowering",
             "path": "m3/tooling/compiler-lowering/src/main/java/com/m3/tooling/ExplicitViewConcatRecipe.java",
             "symbol": "com.m3.tooling.ExplicitViewConcatRecipe",
@@ -3640,8 +4037,8 @@
             "sha256": "1d23add29fae044a7a9d87bb3c16680632f810bbf2e14d99cefa729469045481",
             "git_blob_sha1": null,
             "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": null
+            "revision_role": "candidate",
+            "tracking_ref": "refs/heads/codex/mindex-migration-20261002"
           }
         ],
         "owner": "com.m3.tooling.ExplicitViewConcatRecipe; Frozen/Joined owners retain payload",
@@ -3695,12 +4092,12 @@
         },
         "tests": [
           {
-            "id": "explicit-concat-2",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "id": "compiler-before",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           },
           {
-            "id": "explicit-concat-4",
-            "receipt": "m3/recipes/evidence/selected-receipts.json"
+            "id": "compiler-after",
+            "receipt": "m3/recipes/evidence/shared-owner-receipts.json"
           }
         ],
         "provenance": {
@@ -3710,7 +4107,7 @@
         },
         "sync": {
           "source_revision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
-          "target_revision": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+          "target_revision": null,
           "direction": "source-to-target",
           "target_adaptations": [
             "Exact typed eligibility with explicit opt-in and helper ABI guards."
@@ -3723,11 +4120,28 @@
         },
         "lineage": {
           "previous_sources": [],
-          "previous_targets": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "f07a02a890720c6b25b5b8fafb0903ba9b2bf088",
+              "module": "m3/tooling/compiler-lowering",
+              "path": "m3/tooling/compiler-lowering/src/main/java/com/m3/tooling/ExplicitViewConcatRecipe.java",
+              "symbol": "com.m3.tooling.ExplicitViewConcatRecipe",
+              "signatures": [
+                "class ExplicitViewConcatRecipe",
+                "ExplicitViewConcatRecipe(Boolean enabled)"
+              ],
+              "sha256": "1d23add29fae044a7a9d87bb3c16680632f810bbf2e14d99cefa729469045481",
+              "git_blob_sha1": null,
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": null
+            }
+          ],
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "13 stock-JDK21 tests and exact compiled before/after covered cases passed; runtime/JVM migration acceptance is independent."
+        "observation": "Shared-owner working-tree candidate based on 6f6bca8e52f2f55adcab89676632f3da9ddc56d1; exact raw bytes and fresh receipts, Git pin pending root freeze."
       }
     ]
   },
@@ -3744,9 +4158,11 @@
       "target:910531d6cc8c645f51f4d3be2bffb6fc7cec8e4c74f7ddbe355c4d464f25a5cb",
       "target:58387cd3389d5bc8addcad092ba58a18ffbf3fde19abeaee16e7efdb617aa368",
       "target:45e42e1887bc26ce9b613fcb50679176a23a67d35f1e9522c63c5d7526ce886b",
+      "target:826fac74bdfbcd4a28fd2bc3087d55d039dc187d1501da9261489d958b9a4d29",
       "target:8b0161927e9b9ab8b60abac1e8ad5b7d112d1544f19ada9c114c8af61310a375"
     ],
     "coverage_roots": [
+      "m3/ports/indexstring/src/main/java",
       "m3/ports/text/src",
       "m3/tooling/compiler-lowering/src/main/java"
     ],
@@ -3761,6 +4177,7 @@
     "historical_target_baseline": "8bb6215372e07712f1fdf5a0cb912af495007b19",
     "integrated_master_baseline": "4a81f3b3050fa5572ec1ff9368e2c383231db2e6",
     "scope": "Selected Route A closure and bounded opt-in Route B; all other migration records and acceptance gates remain independently authoritative.",
-    "integrated_master_commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1"
+    "integrated_master_commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+    "candidate_base_commit": "6f6bca8e52f2f55adcab89676632f3da9ddc56d1"
   }
 }

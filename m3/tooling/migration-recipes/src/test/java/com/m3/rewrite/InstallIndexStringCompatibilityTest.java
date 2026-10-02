@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 /** Actual Java parser/generation checks; source recipe tests separately run the full scheduler. */
 class InstallIndexStringCompatibilityTest {
   private static String read(String name) {
-    try (InputStream in = InstallIndexStringCompatibilityTest.class.getResourceAsStream("/com/m3/rewrite/port/" + name)) {
+    try (InputStream in = InstallIndexStringCompatibilityTest.class.getResourceAsStream("/com/m3/rewrite/port-v2/" + name)) {
       if (in == null) throw new IllegalStateException(name);
       return new String(in.readAllBytes(), StandardCharsets.UTF_8);
     } catch (IOException error) { throw new IllegalStateException(error); }
@@ -23,10 +23,10 @@ class InstallIndexStringCompatibilityTest {
       InMemoryExecutionContext ctx, String path, String text) {
     recipe.getScanner(state).visit(PlainText.builder().sourcePath(Path.of(path)).text(text).build(), ctx);
   }
-  @Test void generateSevenAndReachFixedPoint() {
+  @Test void generateEightAndReachFixedPoint() {
     var recipe = new InstallIndexStringCompatibility(); var ctx = new InMemoryExecutionContext();
     var state = recipe.getInitialValue(ctx); add(recipe, state, ctx, "pom.xml", read("pom.xml.txt"));
-    var generated = recipe.generate(state, ctx); assertEquals(7, generated.size());
+    var generated = recipe.generate(state, ctx); assertEquals(8, generated.size());
     for (var file : generated) recipe.getScanner(state).visit(file, ctx);
     assertEquals(0, recipe.generate(state, ctx).size());
   }

@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "scope": "Actual OpenRewrite eight-source installation and historical exact-source scheduler fixtures",
+  "candidate_binding": "raw working-tree input hashes; Git commit pending root freeze",
+  "generated_utc": "2026-10-02T04:09:55.867925+00:00",
+  "os": "Windows 11 amd64",
+  "jdk": "Oracle21.0.9",
+  "maven": "3.9.14",
+  "argv": [
+    "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd",
+    "-B",
+    "-o",
+    "test"
+  ],
+  "cwd": "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\migration-recipes",
+  "environment": {
+    "JAVA_HOME": "C:\\Program Files\\Java\\jdk-21",
+    "MAVEN_OPTS": "-Xms32m -Xmx512m -XX:ActiveProcessorCount=2"
+  },
+  "exit_code": 0,
+  "tests": 7,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "source_hashes": {
+    "m3/tooling/migration-recipes/pom.xml": "a1ccab23917386feeeb38d4a838e57da21a8c0d69463696d510edffbb7592588",
+    "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/InstallIndexStringCompatibility.java": "494381b6d848bac33f6631bd49ffc976377ea56017a24746bcbf53bb4e3941f7",
+    "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3MIndexJoinedCharsViewRecipe.java": "834fbe2272bfa8ea660c65f2d8744e164d0b2e94d925d81350be76508bdfc979",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port/FrozenBytes.java.txt": "cb50139594817d5cb2477c4d67148d4aed2174299f05cff9a3b24416139bc6b4",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port/FrozenChars.java.txt": "0c03ca0ed8b42212fa92e4d5f9325ba864f8d11928cd6a0b030b861f668f0657",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port/M3Text.java.txt": "2f1c52feaa5c81462a469c84d847448840cfa75db5a0f1d40c72241718417653",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port/MIndexJoinedBytes.java.txt": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port/MIndexJoinedChars.java.txt": "964f0fc3611f259562adca7f7a9ec581d149f16b4dfcc9a3c775a2a8ca53f864",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port/MIndexJoinedStorageIntern.java.txt": "f42c548a4fd47d3dac43283082125232e04d5f13f28b63521832493394176337",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port/MIndexJoinedStreams.java.txt": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port/pom.xml.txt": "122d60c6df640b25c2665e68819cae4571cb9ffbe54c710edbdc7f73419e9f93",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port/port.properties": "430fb58f5bef30e3777214885cbff3dd8aa423d68c80f0a6b12147749db02e1f",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port-v2/FrozenByteInterner.java.txt": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port-v2/FrozenBytes.java.txt": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port-v2/FrozenChars.java.txt": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port-v2/M3Text.java.txt": "2f1c52feaa5c81462a469c84d847448840cfa75db5a0f1d40c72241718417653",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port-v2/MIndexJoinedBytes.java.txt": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port-v2/MIndexJoinedChars.java.txt": "d93729835dcffe0a9a9be1fe54ab9f0f4af9848a562cce2ae80bffff781bead0",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port-v2/MIndexJoinedStorageIntern.java.txt": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port-v2/MIndexJoinedStreams.java.txt": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port-v2/pom.xml.txt": "122d60c6df640b25c2665e68819cae4571cb9ffbe54c710edbdc7f73419e9f93",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/port-v2/port.properties": "58d05ef88f7e1745d1093b4695f857b40f38ee17f91e499c2339368c5e98a1f8",
+    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/m3port/FrozenBytes.java.before.txt": "cb50139594817d5cb2477c4d67148d4aed2174299f05cff9a3b24416139bc6b4",
+    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/m3port/FrozenChars.java.before.txt": "0c03ca0ed8b42212fa92e4d5f9325ba864f8d11928cd6a0b030b861f668f0657",
+    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/m3port/MIndexJoinedBytes.java.before.txt": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/m3port/MIndexJoinedChars.java.after.txt": "964f0fc3611f259562adca7f7a9ec581d149f16b4dfcc9a3c775a2a8ca53f864",
+    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/m3port/MIndexJoinedChars.java.before.txt": "712c1c795ff1e0d6dea099eaec8fa6e64803adfc12bad6f31970b722c659d396",
+    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/m3port/MIndexJoinedStorageIntern.java.before.txt": "f42c548a4fd47d3dac43283082125232e04d5f13f28b63521832493394176337",
+    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/m3port/MIndexJoinedStreams.java.before.txt": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
+    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/m3port/source.properties": "5a3e0171a9483794ef27e45a7f04b6218e38cbf302f1715a0e5e06fd8bcb76d9",
+    "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-migration.yml": "a105b584e8268a4625f8c8ca972ceefdb3da2ac8730c8d307bd71fada0f7cc4c",
+    "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/InstallIndexStringCompatibilityTest.java": "55713f19f55538712bd2b707c016eb2da74fcd4469c03d48ae25665849fcc2be",
+    "m3/tooling/migration-recipes/src/test/java/com/synexia/rewrite/M3MIndexJoinedCharsViewRecipeTest.java": "e5acfb1f06a4c80dc880acbf47963d44e8566eaa4dd5a113f37916379b599b95"
+  },
+  "suites": [
+    {
+      "name": "com.m3.rewrite.InstallIndexStringCompatibilityTest",
+      "tests": "3",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "1.301"
+    },
+    {
+      "name": "com.synexia.rewrite.M3MIndexJoinedCharsViewRecipeTest",
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "0.879"
+    }
+  ]
+}

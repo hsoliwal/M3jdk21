@@ -1,0 +1,76 @@
+{
+  "schema": "m3.sealed-install/1",
+  "recipe_id": "com.m3.rewrite.InstallIndexStringCompatibility/2",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_base_commit": "75fb1abaecb56969bea2914520bbe819f130632b",
+  "source_change_plan_sha256": "f7ecc5f3a6496c2c7c1e08bea2c242f35e3d9a50e5d2ddc76f218805250aacbe",
+  "target_base_commit": "6f6bca8e52f2f55adcab89676632f3da9ddc56d1",
+  "historical_install_plan": "m3/ports/indexstring/recipe.json",
+  "outputs": [
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/m3/text/compat/M3Text.java",
+      "before": null,
+      "after": {
+        "resource": "templates-v2/M3Text.java.txt",
+        "sha256": "2f1c52feaa5c81462a469c84d847448840cfa75db5a0f1d40c72241718417653"
+      }
+    },
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenByteInterner.java",
+      "before": null,
+      "after": {
+        "resource": "templates-v2/FrozenByteInterner.java.txt",
+        "sha256": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414"
+      }
+    },
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java",
+      "before": null,
+      "after": {
+        "resource": "templates-v2/FrozenBytes.java.txt",
+        "sha256": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf"
+      }
+    },
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java",
+      "before": null,
+      "after": {
+        "resource": "templates-v2/FrozenChars.java.txt",
+        "sha256": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46"
+      }
+    },
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedBytes.java",
+      "before": null,
+      "after": {
+        "resource": "templates-v2/MIndexJoinedBytes.java.txt",
+        "sha256": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b"
+      }
+    },
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedChars.java",
+      "before": null,
+      "after": {
+        "resource": "templates-v2/MIndexJoinedChars.java.txt",
+        "sha256": "d93729835dcffe0a9a9be1fe54ab9f0f4af9848a562cce2ae80bffff781bead0"
+      }
+    },
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStorageIntern.java",
+      "before": null,
+      "after": {
+        "resource": "templates-v2/MIndexJoinedStorageIntern.java.txt",
+        "sha256": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7"
+      }
+    },
+    {
+      "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStreams.java",
+      "before": null,
+      "after": {
+        "resource": "templates-v2/MIndexJoinedStreams.java.txt",
+        "sha256": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80"
+      }
+    }
+  ],
+  "plan_sha256": "2a70433ebdf180e7012fc20aba8c737c3a40f687295995607b4709930c6406f8"
+}

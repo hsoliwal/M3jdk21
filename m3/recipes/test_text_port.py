@@ -51,7 +51,7 @@ class TextPortTest(unittest.TestCase):
         record['targets'] = [dict(artifact, commit=None, path=self.path, sha256=sha(self.after),
                                  revision_role='candidate')]
         record['recipe'].update(path=None, sha256=None, rollback='reverse')
-        self.write_json('m3/ports/text/provenance.json', self.provenance)
+        self.write_json(port.PROVENANCE, self.provenance)
         self.write_json('m3/docs/name-mapping.json', self.mapping)
         self.proof_data = {'runs':[{'id':'fixture-proof', 'status':'passed', 'exit_code':0,
                             'command':['schema-fixture'], 'stdout_sha256':sha(b'PASS\n'),
@@ -90,7 +90,7 @@ class TextPortTest(unittest.TestCase):
     def test_source_pin_drift_refuses(self):
         self.provenance['files'][0]['sha256'] = '0' * 64
         self.mapping['migration']['records'][0]['sources'][0]['sha256'] = '0' * 64
-        self.write_json('m3/ports/text/provenance.json', self.provenance)
+        self.write_json(port.PROVENANCE, self.provenance)
         self.write_json('m3/docs/name-mapping.json', self.mapping)
         with self.assertRaisesRegex(ValueError, 'donor source drift'): port.validate(self.target, self.source)
 

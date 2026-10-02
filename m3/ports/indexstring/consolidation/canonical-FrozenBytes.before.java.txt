@@ -13,12 +13,6 @@ public final class FrozenBytes {
   private final int length;
   private final int retainedBytes;
   private final int hash32;
-  private volatile FrozenChars utf16View;
-  /** One owner-local immutable projection/fact; its lifetime follows this atom. */
-  synchronized FrozenChars utf16View() {
-    if (utf16View == null) utf16View = FrozenChars.projectUtf16Bytes(this);
-    return utf16View;
-  }
 
   private FrozenBytes(byte[] heap, ByteBuffer mapped, int offset, int length,
       int retainedBytes, int hash) {
