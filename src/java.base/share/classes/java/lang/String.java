@@ -4986,6 +4986,22 @@ public final class String
         return m3Storage;
     }
 
+    boolean hasM3Storage() {
+        return m3Storage != null;
+    }
+
+    long m3BitSignal64() {
+        return m3Storage != null
+                ? m3Storage.bitSignal64()
+                : jdk.internal.util.M3StringFacts.bitSignal64(this);
+    }
+
+    int m3CharacterFlags() {
+        return m3Storage != null
+                ? m3Storage.characterFlags()
+                : jdk.internal.util.M3StringFacts.characterFlags(this);
+    }
+
     static boolean m3JoinedStringsEnabled() {
         return M3_JOINED_STRINGS;
     }
