@@ -43,6 +43,22 @@ Use the existing `m3/docs/name-mapping.json` / `name-mapping.schema.json` line a
 
 A manifest present on another PR/branch is evidence about that branch only. Reconcile it explicitly before adopting any records. File presence in a merged ancestor and current-tree retention are separate facts.
 
+## Atomize → patternize → map resume rule
+
+Resume work at the **smallest sealed contract boundary whose mapping is incomplete**. Do not resume by opening the largest file or by repeating a textual search-and-replace.
+
+For that boundary:
+
+1. **Atomize** — enumerate the semantic atoms, their typed dependencies and reverse consumers. Preserve one compound atom for any unresolved dependency cycle so the published atom graph remains a DAG.
+2. **Patternize** — match each atom to an existing reviewed pattern/version when semantic preconditions fit. If the same transformation is appearing repeatedly, improve the reusable Maven/OpenRewrite recipe (or source-pinned native/VM transform) instead of editing each occurrence manually.
+3. **Map** — bind source atom(s) → pattern/version → recipe receipt → target atom(s) → target symbol(s), under the existing stable capability mapping ID.
+4. **Verify** — run atom-local tests first, then boundary-level differential/concurrency/runtime gates on the exact composed candidate.
+5. **Promote serially** — independent atoms may be analyzed or transformed in parallel, but the containing capability advances only after all required atoms, pattern dispositions and mapping edges are reconciled.
+
+Do not create atom IDs merely from line numbers or files. An atom is defined by behavior and contract. Do not generalize a pattern merely from structural or hash similarity. Do not advance mapping synchronization because a pattern matched; advance it only after the exact target behavior is verified.
+
+Packet-local atom/pattern stage labels are evidence metadata, not new operational mapping status values.
+
 ## Resume algorithm
 
 For each work session:
@@ -53,28 +69,33 @@ For each work session:
    - compare current tips to the last pinned observations;
    - list relevant open/merged PRs and mapping-owner changes.
    - reconcile the existing branch-scoped source census before rerunning or extending inventory; refresh only for source-pin drift or uncovered dependency domains.
-2. **select one leaf capability**
+2. **select one leaf capability and seal its contract boundary**
    - resolve its stable mapping ID;
    - enumerate exact source and target symbols/files/native/resources/tests;
    - identify semantic owner and reverse consumers.
-3. **read before modifying**
+3. **atomize, patternize and map before modifying**
+   - enumerate source atoms and the typed dependency DAG;
+   - reuse or define reviewed pattern IDs with explicit preconditions/refusals;
+   - map source atoms through pattern/recipe versions to target atoms;
+   - record unmapped atoms as blockers rather than silently dropping them.
+4. **read before modifying**
    - fully read high-risk target files and relevant owner docs/source;
    - inspect existing recipes/tests/evidence;
    - do not create a duplicate owner because discovery was incomplete.
-4. **record contracts**
+5. **record contracts**
    - API/ABI/signatures;
    - equality/identity/order/null/mutation/lifetime;
    - serialization/format/native/build/bootstrap contracts;
    - concurrency/JMM properties where applicable.
-5. **write/update documentation first**
+6. **write/update documentation first**
    - proposed representation and refusal cases;
    - mapping and dependency impact;
    - exact acceptance/rollback plan.
-6. **prepare deterministic transformation**
+7. **prepare deterministic transformation**
    - prefer an existing Maven/OpenRewrite recipe crate for Java/source changes;
    - extend or create a reusable recipe only when no owner exists;
    - native/VM/build changes use source-pinned deterministic mechanisms appropriate to those files.
-7. **verify in fixed order**
+8. **verify in fixed order**
    - diff;
    - lint/static validation;
    - compile/build;
@@ -82,17 +103,17 @@ For each work session:
    - runtime/exact-image tests;
    - deterministic replay/idempotence;
    - integrity/mapping/evidence audit.
-8. **record artifacts**
+9. **record artifacts**
    - pre/post hashes of every changed file;
    - commands/environment;
    - logs and failures;
    - candidate commit/tree/image;
    - mapping/evidence state.
-9. **promote only what passed**
+10. **promote only what passed**
    - never transfer a historical receipt automatically;
    - never call a skipped gate PASS;
    - keep blockers/open questions in the mapping/work packet.
-10. **resume from last verified stage**
+11. **resume from last verified stage**
     - do not replay hidden earlier work or infer equivalence from memory.
 
 ## Mapping update procedure for future Synexia enhancements
