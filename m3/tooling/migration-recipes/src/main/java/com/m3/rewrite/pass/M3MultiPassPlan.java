@@ -71,6 +71,7 @@ public final class M3MultiPassPlan {
                         M3EditScope.MULTI_MODULE,
                         false,
                         List.of(
+                                "com.m3.rewrite.index.M3WholeSemanticHashRecipe",
                                 "com.m3.rewrite.index.M3SemanticIndexM3DbBridgeRecipe",
                                 "com.m3.rewrite.dag.M3RecipeDagPlannerRecipe"),
                         "canonical M3IndexDB content hash is stable across repeated fan-in"),
