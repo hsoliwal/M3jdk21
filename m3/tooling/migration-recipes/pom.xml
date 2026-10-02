@@ -47,6 +47,7 @@
               <include>com/m3/rewrite/index/*</include>
               <include>com/m3/rewrite/pass/*</include>
               <include>com/m3/rewrite/dag/*</include>
+              <include>com/m3/rewrite/verbatim/*</include>
             </includes>
             <rules>
               <rule>
