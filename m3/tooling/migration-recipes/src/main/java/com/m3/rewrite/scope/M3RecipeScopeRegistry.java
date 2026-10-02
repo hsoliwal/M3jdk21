@@ -29,6 +29,8 @@ public final class M3RecipeScopeRegistry {
             fixed(M3EditScope.MODULE),
             "com.m3.rewrite.index.M3SemanticIndexRecipe",
             fixed(M3EditScope.FILE),
+            "com.m3.rewrite.index.M3TypeRelationRecipe",
+            fixed(M3EditScope.MODULE),
             "com.m3.rewrite.index.M3SemanticIndexM3DbBridgeRecipe",
             fixed(M3EditScope.MULTI_MODULE));
 
