@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.rewrite.index;
 
+import com.m3.indexdb.M3IndexDbSemanticFingerprint;
+import com.m3.indexdb.M3IndexDbSemanticIndex;
+import com.m3.indexdb.M3IndexDbSemanticKind;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,24 +93,24 @@ public final class M3SemanticIndexRecipe extends Recipe {
         String packageName = packageName(unit);
         String moduleName = moduleName(sourcePath);
 
-        Node repositoryNode = scope(M3SemanticKind.REPOSITORY, repository, repository, "");
+        Node repositoryNode = scope(M3IndexDbSemanticKind.REPOSITORY, repository, repository, "");
         Node projectNode = scope(
-                M3SemanticKind.PROJECT,
+                M3IndexDbSemanticKind.PROJECT,
                 repository + "/project/" + project,
                 project,
                 "");
         Node libraryNode = scope(
-                M3SemanticKind.LIBRARY,
+                M3IndexDbSemanticKind.LIBRARY,
                 repository + "/project/" + project + "/library/" + library,
                 library,
                 "");
         Node moduleNode = scope(
-                M3SemanticKind.MODULE,
+                M3IndexDbSemanticKind.MODULE,
                 repository + "/project/" + project + "/library/" + library + "/module/" + moduleName,
                 moduleName,
                 "");
         Node packageNode = scope(
-                M3SemanticKind.PACKAGE,
+                M3IndexDbSemanticKind.PACKAGE,
                 moduleNode.semanticKey() + "/package/" + packageName,
                 packageName,
                 "");
@@ -127,13 +130,13 @@ public final class M3SemanticIndexRecipe extends Recipe {
 
         List<String> comments = comments(unit);
         if (!comments.isEmpty()) {
-            M3SemanticFingerprint docsFingerprint = M3SemanticFingerprint.leaf(
+            M3IndexDbSemanticFingerprint docsFingerprint = M3IndexDbSemanticFingerprint.leaf(
                     "DOCUMENTATION",
                     List.of("COMMENT_COUNT:" + comments.size()),
                     comments,
                     String.join("\n", comments));
             Node docs = node(
-                    M3SemanticKind.DOCUMENTATION,
+                    M3IndexDbSemanticKind.DOCUMENTATION,
                     fileKey + "#docs",
                     sourcePath,
                     "documentation",
@@ -148,12 +151,9 @@ public final class M3SemanticIndexRecipe extends Recipe {
             fileChildren.add(type);
         }
 
-        M3SemanticFingerprint fileFingerprint = fileChildren.isEmpty()
-                ? M3JavaSemanticHasher.fingerprint("FILE", unit)
-                : M3SemanticFingerprint.compose(
-                        "FILE",
-                        fileChildren.stream().map(Node::fingerprint).toList());
-        Node file = node(M3SemanticKind.FILE, fileKey, sourcePath, sourcePath, fileFingerprint);
+        M3IndexDbSemanticFingerprint fileFingerprint =
+                M3JavaSemanticHasher.fingerprint("FILE", unit);
+        Node file = node(M3IndexDbSemanticKind.FILE, fileKey, sourcePath, sourcePath, fileFingerprint);
         emitNode(file, ctx);
         emitEdge(packageNode, file, "FILE", 0, ctx);
         for (int ordinal = 0; ordinal < fileChildren.size(); ordinal++) {
@@ -167,9 +167,9 @@ public final class M3SemanticIndexRecipe extends Recipe {
             J.ClassDeclaration declaration,
             int typeOrdinal,
             ExecutionContext ctx) {
-        M3SemanticKind kind = declaration.getKind() == J.ClassDeclaration.Kind.Type.Interface
-                ? M3SemanticKind.INTERFACE
-                : M3SemanticKind.IMPLEMENTATION;
+        M3IndexDbSemanticKind kind = declaration.getKind() == J.ClassDeclaration.Kind.Type.Interface
+                ? M3IndexDbSemanticKind.INTERFACE
+                : M3IndexDbSemanticKind.IMPLEMENTATION;
         String typeKey = fileKey + "#type/" + typeOrdinal + "/" + declaration.getSimpleName();
         List<Node> children = new ArrayList<>();
 
@@ -206,11 +206,8 @@ public final class M3SemanticIndexRecipe extends Recipe {
             }
         }
 
-        M3SemanticFingerprint fingerprint = children.isEmpty()
-                ? M3JavaSemanticHasher.fingerprint(kind.name(), declaration)
-                : M3SemanticFingerprint.compose(
-                        kind.name() + ":" + declaration.getSimpleName(),
-                        children.stream().map(Node::fingerprint).toList());
+        M3IndexDbSemanticFingerprint fingerprint =
+                M3JavaSemanticHasher.fingerprint(kind.name(), declaration);
         Node type = node(kind, typeKey, sourcePath, declaration.getSimpleName(), fingerprint);
         emitNode(type, ctx);
         for (int ordinal = 0; ordinal < children.size(); ordinal++) {
@@ -229,10 +226,10 @@ public final class M3SemanticIndexRecipe extends Recipe {
         List<Node> atoms = new ArrayList<>();
         Expression initializer = variable.getInitializer();
         if (initializer != null) {
-            M3SemanticFingerprint atomFingerprint =
+            M3IndexDbSemanticFingerprint atomFingerprint =
                     M3JavaSemanticHasher.fingerprint("FIELD_INITIALIZER", initializer);
             Node atom = node(
-                    M3SemanticKind.ATOM,
+                    M3IndexDbSemanticKind.ATOM,
                     fieldKey + "#atom/initializer",
                     sourcePath,
                     "FIELD_INITIALIZER",
@@ -241,13 +238,10 @@ public final class M3SemanticIndexRecipe extends Recipe {
             atoms.add(atom);
         }
 
-        M3SemanticFingerprint fieldFingerprint = atoms.isEmpty()
-                ? M3JavaSemanticHasher.fingerprint("FIELD", variable)
-                : M3SemanticFingerprint.compose(
-                        "FIELD:" + variable.getSimpleName(),
-                        atoms.stream().map(Node::fingerprint).toList());
+        M3IndexDbSemanticFingerprint fieldFingerprint =
+                M3JavaSemanticHasher.fingerprint("FIELD", variable);
         Node field = node(
-                M3SemanticKind.FIELD,
+                M3IndexDbSemanticKind.FIELD,
                 fieldKey,
                 sourcePath,
                 variable.getSimpleName(),
@@ -271,10 +265,10 @@ public final class M3SemanticIndexRecipe extends Recipe {
         if (method.getBody() != null) {
             int atomOrdinal = 0;
             for (J statement : method.getBody().getStatements()) {
-                M3SemanticFingerprint atomFingerprint =
+                M3IndexDbSemanticFingerprint atomFingerprint =
                         M3JavaSemanticHasher.fingerprint("METHOD_ATOM", statement);
                 Node atom = node(
-                        M3SemanticKind.ATOM,
+                        M3IndexDbSemanticKind.ATOM,
                         methodKey + "#atom/" + atomOrdinal,
                         sourcePath,
                         statement.getClass().getSimpleName(),
@@ -285,13 +279,10 @@ public final class M3SemanticIndexRecipe extends Recipe {
             }
         }
 
-        M3SemanticFingerprint methodFingerprint = atoms.isEmpty()
-                ? M3JavaSemanticHasher.fingerprint("METHOD", method)
-                : M3SemanticFingerprint.compose(
-                        "METHOD:" + signature,
-                        atoms.stream().map(Node::fingerprint).toList());
+        M3IndexDbSemanticFingerprint methodFingerprint =
+                M3JavaSemanticHasher.fingerprint("METHOD", method);
         Node methodNode =
-                node(M3SemanticKind.METHOD, methodKey, sourcePath, signature, methodFingerprint);
+                node(M3IndexDbSemanticKind.METHOD, methodKey, sourcePath, signature, methodFingerprint);
         emitNode(methodNode, ctx);
         for (int index = 0; index < atoms.size(); index++) {
             emitEdge(methodNode, atoms.get(index), "ATOM", index, ctx);
@@ -316,11 +307,11 @@ public final class M3SemanticIndexRecipe extends Recipe {
     }
 
     private static Node scope(
-            M3SemanticKind kind,
+            M3IndexDbSemanticKind kind,
             String semanticKey,
             String symbol,
             String sourcePath) {
-        M3SemanticFingerprint fingerprint = M3SemanticFingerprint.leaf(
+        M3IndexDbSemanticFingerprint fingerprint = M3IndexDbSemanticFingerprint.leaf(
                 "SCOPE_IDENTITY:" + kind,
                 List.of(kind.name()),
                 List.of(semanticKey),
@@ -329,13 +320,13 @@ public final class M3SemanticIndexRecipe extends Recipe {
     }
 
     private static Node node(
-            M3SemanticKind kind,
+            M3IndexDbSemanticKind kind,
             String semanticKey,
             String sourcePath,
             String symbol,
-            M3SemanticFingerprint fingerprint) {
+            M3IndexDbSemanticFingerprint fingerprint) {
         return new Node(
-                M3SemanticIds.node(kind, semanticKey),
+                M3IndexDbSemanticIndex.nodeId(kind, semanticKey),
                 kind,
                 semanticKey,
                 sourcePath,
@@ -407,9 +398,9 @@ public final class M3SemanticIndexRecipe extends Recipe {
 
     private record Node(
             String id,
-            M3SemanticKind kind,
+            M3IndexDbSemanticKind kind,
             String semanticKey,
             String sourcePath,
             String symbol,
-            M3SemanticFingerprint fingerprint) {}
+            M3IndexDbSemanticFingerprint fingerprint) {}
 }
