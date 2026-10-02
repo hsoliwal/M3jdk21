@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2026 Hitesh Soliwal. SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId><artifactId>history-audit-recipe</artifactId><version>0.1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <description>Read-only PSE/CCPS recipe; no OpenJDK bootstrap dependency and no source apply mode.</description>
+  <properties>
+    <m3.repo>${project.basedir}/../..</m3.repo>
+    <m3.snapshot>${project.basedir}/snapshot.json</m3.snapshot>
+    <m3.output>${java.io.tmpdir}/m3-history-audit</m3.output>
+    <m3.python>python3</m3.python>
+  </properties>
+  <build><plugins><plugin>
+    <groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.6.4</version>
+    <executions>
+      <execution><id>history-contract-tests</id><phase>test</phase><goals><goal>exec</goal></goals>
+        <configuration><executable>${m3.python}</executable><arguments>
+          <argument>-B</argument><argument>-m</argument><argument>unittest</argument><argument>discover</argument>
+          <argument>-s</argument><argument>${project.basedir}</argument><argument>-p</argument><argument>test_*.py</argument>
+        </arguments></configuration>
+      </execution>
+      <execution><id>read-only-history-recipe</id><phase>verify</phase><goals><goal>exec</goal></goals>
+        <configuration><executable>${m3.python}</executable><arguments>
+          <argument>-B</argument><argument>${project.basedir}/audit.py</argument>
+          <argument>--repo</argument><argument>${m3.repo}</argument>
+          <argument>--snapshot</argument><argument>${m3.snapshot}</argument>
+          <argument>--output</argument><argument>${m3.output}</argument>
+        </arguments></configuration>
+      </execution>
+    </executions>
+  </plugin></plugins></build>
+</project>

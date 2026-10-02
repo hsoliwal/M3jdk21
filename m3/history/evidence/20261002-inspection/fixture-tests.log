@@ -1,0 +1,36 @@
+test_bad_repository_refused_before_network (test_audit.CollectorContractTest.test_bad_repository_refused_before_network) ... ok
+test_missing_metadata_fails_closed (test_audit.CollectorContractTest.test_missing_metadata_fails_closed) ... ok
+test_pagination_and_selected_ids (test_audit.CollectorContractTest.test_pagination_and_selected_ids) ... ok
+test_redirect_never_leaks_authorization (test_audit.CollectorContractTest.test_redirect_never_leaks_authorization) ... ok
+test_all_parent_edges_and_forward_reverse (test_audit.HistoryContractTest.test_all_parent_edges_and_forward_reverse) ... ok
+test_ancestry_is_not_content (test_audit.HistoryContractTest.test_ancestry_is_not_content) ... ok
+test_deleted_then_reintroduced_is_preserved_in_edges (test_audit.HistoryContractTest.test_deleted_then_reintroduced_is_preserved_in_edges) ... ok
+test_detects_ref_movement (test_audit.HistoryContractTest.test_detects_ref_movement) ... ok
+test_determinism_across_process_hash_seeds (test_audit.HistoryContractTest.test_determinism_across_process_hash_seeds) ... ok
+test_octopus_parent_is_not_dropped (test_audit.HistoryContractTest.test_octopus_parent_is_not_dropped) ... ok
+test_odd_paths_binary_patches_and_hashes (test_audit.HistoryContractTest.test_odd_paths_binary_patches_and_hashes) ... ok
+test_pr_head_outside_snapshot_is_visible (test_audit.HistoryContractTest.test_pr_head_outside_snapshot_is_visible) ... ok
+test_pr_witness_separate_from_proof (test_audit.HistoryContractTest.test_pr_witness_separate_from_proof) ... ok
+test_real_content_merge_not_flagged_ancestry_only (test_audit.HistoryContractTest.test_real_content_merge_not_flagged_ancestry_only) ... ok
+test_refuses_bad_id_and_missing_commit (test_audit.HistoryContractTest.test_refuses_bad_id_and_missing_commit) ... ok
+test_refuses_bad_tree (test_audit.HistoryContractTest.test_refuses_bad_tree) ... ok
+test_refuses_budget_and_leaves_incomplete (test_audit.HistoryContractTest.test_refuses_budget_and_leaves_incomplete) ... ok
+test_refuses_commit_limit (test_audit.HistoryContractTest.test_refuses_commit_limit) ... ok
+test_refuses_existing_output (test_audit.HistoryContractTest.test_refuses_existing_output) ... ok
+test_refuses_incomplete_pr_witness (test_audit.HistoryContractTest.test_refuses_incomplete_pr_witness) ... ok
+test_refuses_output_in_git_admin (test_audit.HistoryContractTest.test_refuses_output_in_git_admin) ... ok
+test_refuses_output_in_worktree (test_audit.HistoryContractTest.test_refuses_output_in_worktree) ... ok
+test_refuses_shallow_repository (test_audit.HistoryContractTest.test_refuses_shallow_repository) ... ok
+test_refuses_symlink_output (test_audit.HistoryContractTest.test_refuses_symlink_output) ... ok
+test_refuses_unrelated_history (test_audit.HistoryContractTest.test_refuses_unrelated_history) ... ok
+test_repeat_is_deterministic_and_source_unchanged (test_audit.HistoryContractTest.test_repeat_is_deterministic_and_source_unchanged) ... ok
+test_exact_entry_is_not_semantic_equivalence (test_audit.PureContractTest.test_exact_entry_is_not_semantic_equivalence) ... ok
+test_oid_widths (test_audit.PureContractTest.test_oid_widths) ... ok
+test_path_bytes_roundtrip (test_audit.PureContractTest.test_path_bytes_roundtrip) ... ok
+test_raw_diff_refuses_truncated_or_rename (test_audit.PureContractTest.test_raw_diff_refuses_truncated_or_rename) ... ok
+test_topology_tie_breaks_and_cycle_refusal (test_audit.PureContractTest.test_topology_tie_breaks_and_cycle_refusal) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 2.971s
+
+OK
