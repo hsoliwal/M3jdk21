@@ -110,6 +110,7 @@ final class M3Java21RecipePipelineTest {
             String yaml = new String(stream.readAllBytes(), StandardCharsets.UTF_8);
 
             assertTrue(yaml.contains("name: com.m3.java21.Inventory"));
+            assertTrue(yaml.contains("name: com.m3.java21.SemanticHash"));
             assertTrue(yaml.contains("name: com.m3.java21.Atomization"));
             assertTrue(yaml.contains("name: com.m3.java21.PatternizationIOP"));
             assertTrue(yaml.contains("name: com.m3.java21.Documentation"));
@@ -127,10 +128,12 @@ final class M3Java21RecipePipelineTest {
     @Test
     void stageOrderEncodesInventoryThenAtomizeThenPatternizeThenDocument() {
         assertEquals(0, M3RecipeStage.INVENTORY.order());
+        assertEquals(5, M3RecipeStage.SEMANTIC_HASH.order());
         assertEquals(10, M3RecipeStage.ATOMIZATION.order());
         assertEquals(20, M3RecipeStage.PATTERNIZATION_IOP.order());
         assertEquals(30, M3RecipeStage.DOCUMENTATION.order());
         assertFalse(M3RecipeStage.INVENTORY.mutating());
+        assertFalse(M3RecipeStage.SEMANTIC_HASH.mutating());
         assertTrue(M3RecipeStage.ATOMIZATION.mutating());
         assertTrue(M3RecipeStage.PATTERNIZATION_IOP.mutating());
         assertTrue(M3RecipeStage.DOCUMENTATION.mutating());
