@@ -80,7 +80,7 @@ Differential Java String/Unicode/regex tests, malformed input, exact-image runti
 
 ## WP3 — collections and maps
 
-Detailed spec: COLLECTIONS.md.
+Canonical detailed spec: [../../docs/whole-jdk-collections-replacement.md](../../docs/whole-jdk-collections-replacement.md). Execution overlay: [COLLECTIONS.md](COLLECTIONS.md).
 
 Scope:
 List, Set, Map, Queue, Deque, sorted/navigable/sequenced families, wrappers, views, iterators, spliterators, utilities, immutable factories and legacy collections.
