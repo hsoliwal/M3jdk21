@@ -1,5 +1,7 @@
 # MIndex-to-M3 first reproducible port implementation plan
 
+> **Scope note:** this is the retained first reproducible MIndex/prefix implementation tranche, not the whole-JDK implementation plan. The dependency-aware whole-JDK plan is [WORK_PACKETS.md](WORK_PACKETS.md), with detailed collection work in [COLLECTIONS.md](COLLECTIONS.md). The checkboxes below describe only this historical bounded tranche and must not be read as whole-JDK completion.
+
 **Goal:** Establish repeatable pinned porting and one independently testable prefix-facts specialization, without changing the existing text owners or the installed JDK.
 **Architecture:** Retain the canonical naming authority at m3/docs/name-mapping.json; extend its history with versioned capability records. A dependency-free Java source-bound recipe verifies input/output closure and fails closed on drift. A separate algorithm module consumes the existing sealed M3StringPiece view. Python with tooling-only jsonschema 4.26.0 validation follows the target's existing recipe tooling convention and does not enter java.base.
 **Tech stack:** Java 21; Maven tooling descriptor; Python 3 and jsonschema 4.26.0 for manifest validation; standard-library packaging. Native OpenJDK build remains unchanged.
