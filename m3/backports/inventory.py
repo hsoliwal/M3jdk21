@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 # Copyright (c) 2026 Hitesh Soliwal.
 # SPDX-License-Identifier: Apache-2.0
-"""Deterministically inventory upstream OpenJDK changes between GA tags.
+"""Deterministically inventory every upstream OpenJDK change between released GA tags.
 
-This is an admission inventory, not a backport executor. It never mutates the
-upstream checkout. Output is a TSV sorted by release and upstream commit order.
+This is the complete donor denominator for M3JDK21, not a release-note sample and not a
+backport executor. It never mutates the upstream checkout. Every commit is preserved in
+the output and enters compatibility review; path classification chooses a review lane,
+never semantic rejection. Output is sorted by release and upstream commit order.
 """
 
 from __future__ import annotations
@@ -26,6 +28,18 @@ INTERVALS: tuple[tuple[int, str, str], ...] = (
     (26, "jdk-25+36", "jdk-26+35"),
     (27, "jdk-26+35", "jdk-27+35"),
 )
+
+EXPECTED_GA_COMMIT_COUNTS = {
+    22: 2384,
+    23: 2355,
+    24: 2562,
+    25: 2678,
+    26: 2611,
+    27: 2358,
+}
+EXPECTED_GA_COMMIT_TOTAL = sum(EXPECTED_GA_COMMIT_COUNTS.values())
+BACKPORT_POLICY = "BACKPORT_IF_JAVA21_COMPATIBLE"
+PENDING_COMPATIBILITY_PROOF = "PENDING_COMPATIBILITY_PROOF"
 
 JBS_RE = re.compile(r"\bJDK-\d{7}\b")
 COMPAT_SIGNAL_RE = re.compile(
@@ -167,18 +181,25 @@ def _classify(subject: str, paths: Sequence[str]) -> tuple[str, bool, bool, bool
     )
     compatibility_signal = bool(COMPAT_SIGNAL_RE.search(subject))
 
+    # Paths select the review lane; they do not prove semantic incompatibility.
+    # A javac/parser/attribution fix may still be a valid Java 21 bug fix or tooling
+    # improvement. Only the later compatibility proof may exclude it.
     if grammar_touch:
-        disposition = "hold-language"
+        disposition = "review-javac-language-sensitive"
     elif javac_touch:
-        disposition = "hold-javac"
+        disposition = "review-javac"
     elif compatibility_signal:
-        disposition = "hold-compat"
+        disposition = "review-compat"
     elif hotspot_compiler_touch:
         disposition = "review-hotspot-compiler"
     elif any(path.startswith("src/hotspot/") for path in paths):
         disposition = "review-hotspot"
     elif any(path.startswith(TOOL_PREFIXES) for path in paths):
         disposition = "review-tool"
+    elif paths and all(path.startswith("test/") for path in paths):
+        disposition = "review-test"
+    elif any(path.startswith(("make/", "build/", ".github/")) for path in paths):
+        disposition = "review-build"
     else:
         disposition = "review"
 
@@ -255,6 +276,8 @@ def write_tsv(changes: Sequence[Change], out) -> None:
             "hotspot_compiler_touch",
             "compatibility_signal",
             "disposition",
+            "backport_policy",
+            "compatibility_state",
             "paths",
         )
     )
@@ -273,6 +296,8 @@ def write_tsv(changes: Sequence[Change], out) -> None:
                 str(change.hotspot_compiler_touch).lower(),
                 str(change.compatibility_signal).lower(),
                 change.disposition,
+                BACKPORT_POLICY,
+                PENDING_COMPATIBILITY_PROOF,
                 ",".join(change.paths),
             )
         )
