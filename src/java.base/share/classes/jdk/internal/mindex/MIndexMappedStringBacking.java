@@ -48,7 +48,7 @@ import java.util.zip.CRC32;
  * It exists so a later java.lang.String/HotSpot patch can consume the canonical storage contract
  * without coupling String semantics to one transport.</p>
  */
-public final class MIndexMappedStringBacking implements AutoCloseable {
+public final class MIndexMappedStringBacking implements MIndexStringBacking {
     private static final int TEXT_MAGIC = 0x4d49584d; // MIXM
     private static final int TEXT_VERSION = 3;
     private static final int TEXT_HEADER_BYTES = 64;
