@@ -27,6 +27,9 @@ final class M3RecipeDagCatalogueTest {
         var semantic = catalogue.fuzzy(
                 "m3indexdb semantic atom logic structure simhash dag database", 3);
         assertEquals("m3indexdb-semantic-index", semantic.getFirst().entry().dagId());
+        assertEquals(
+                com.m3.rewrite.scope.M3EditScope.MULTI_MODULE,
+                semantic.getFirst().entry().maximumScope());
 
         assertTrue(catalogue.entries().stream().allMatch(entry -> !entry.mutationAuthority()));
         assertTrue(catalogue.entries().stream()
