@@ -65,6 +65,17 @@ For atomization and patternization recipes, the target is at least 99% meaningfu
 coverage of the recipe/atom/pattern implementation, with 100% coverage of declared contract and IOP
 role invariants. Coverage is evidence, not a substitute for contract tests.
 
+## Exact FILE replay primitive
+
+`com.m3.rewrite.file.M3ExactFileRefactorRecipe` is the first concrete FILE execution primitive.
+It binds one target path to an exact before-source hash and exact postimage, and carries atom,
+pattern and IOP-role identifiers as recipe metadata. It refuses a changed preimage, leaves every
+non-target file unchanged, and reaches a fixed point when the postimage is already present.
+
+The primitive deliberately does not claim semantic equivalence. The JUnit fixture for each
+atomization/patternization recipe is what proves the intended behavior-preserving transformation;
+the exact-file recipe makes that reviewed transformation deterministic and massively replayable.
+
 ## Scope promotion examples
 
 A private pure-expression extraction that changes only one file is FILE.
