@@ -51,6 +51,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import jdk.internal.mindex.MIndexStrings;
 import jdk.internal.util.ArraysSupport;
 import jdk.internal.util.Preconditions;
 import jdk.internal.vm.annotation.ForceInline;
@@ -179,6 +180,15 @@ public final class String
      */
     private boolean hashIsZero; // Default to false;
 
+    /**
+     * Experimental canonical MIndex backing ID.
+     *
+     * <p>Zero means the String is ordinary array-backed. During the shadow phase, a non-zero ID
+     * coexists with the ordinary value[] payload so unported VM/JDK paths retain the historical
+     * representation as a correctness oracle.</p>
+     */
+    private long mindexId;
+
     /** use serialVersionUID from JDK 1.0.2 for interoperability */
     @java.io.Serial
     private static final long serialVersionUID = -6849794470754667710L;
@@ -263,6 +273,7 @@ public final class String
         this.coder = original.coder;
         this.hash = original.hash;
         this.hashIsZero = original.hashIsZero;
+        this.mindexId = original.mindexId;
     }
 
     /**
@@ -1516,7 +1527,8 @@ public final class String
      *          object.
      */
     public int length() {
-        return value.length >> coder();
+        return isMIndexBacked() ? MIndexStrings.backing().length(mindexId)
+                                : value.length >> coder();
     }
 
     /**
@@ -1529,7 +1541,8 @@ public final class String
      */
     @Override
     public boolean isEmpty() {
-        return value.length == 0;
+        return isMIndexBacked() ? MIndexStrings.backing().length(mindexId) == 0
+                                : value.length == 0;
     }
 
     /**
@@ -1551,6 +1564,9 @@ public final class String
      *             string.
      */
     public char charAt(int index) {
+        if (isMIndexBacked()) {
+            return MIndexStrings.backing().charAt(mindexId, index);
+        }
         if (isLatin1()) {
             return StringLatin1.charAt(value, index);
         } else {
@@ -1581,6 +1597,18 @@ public final class String
      * @since      1.5
      */
     public int codePointAt(int index) {
+        if (isMIndexBacked()) {
+            int length = length();
+            checkIndex(index, length);
+            char first = MIndexStrings.backing().charAt(mindexId, index);
+            if (Character.isHighSurrogate(first) && index + 1 < length) {
+                char second = MIndexStrings.backing().charAt(mindexId, index + 1);
+                if (Character.isLowSurrogate(second)) {
+                    return Character.toCodePoint(first, second);
+                }
+            }
+            return first;
+        }
         if (isLatin1()) {
             checkIndex(index, value.length);
             return value[index] & 0xff;
@@ -1615,6 +1643,16 @@ public final class String
     public int codePointBefore(int index) {
         int i = index - 1;
         checkIndex(i, length());
+        if (isMIndexBacked()) {
+            char second = MIndexStrings.backing().charAt(mindexId, i);
+            if (Character.isLowSurrogate(second) && i > 0) {
+                char first = MIndexStrings.backing().charAt(mindexId, i - 1);
+                if (Character.isHighSurrogate(first)) {
+                    return Character.toCodePoint(first, second);
+                }
+            }
+            return second;
+        }
         if (isLatin1()) {
             return (value[i] & 0xff);
         }
@@ -1643,7 +1681,14 @@ public final class String
      * @since  1.5
      */
     public int codePointCount(int beginIndex, int endIndex) {
-        Objects.checkFromToIndex(beginIndex, endIndex, length());
+        int length = length();
+        Objects.checkFromToIndex(beginIndex, endIndex, length);
+        if (isMIndexBacked()) {
+            if (beginIndex == 0 && endIndex == length) {
+                return MIndexStrings.backing().codePointCount(mindexId);
+            }
+            return Character.codePointCount(this, beginIndex, endIndex);
+        }
         if (isLatin1()) {
             return endIndex - beginIndex;
         }
@@ -1815,6 +1860,12 @@ public final class String
      */
     public byte[] getBytes(Charset charset) {
         if (charset == null) throw new NullPointerException();
+        if (isMIndexBacked() && charset == UTF_8.INSTANCE) {
+            ByteBuffer source = MIndexStrings.backing().utf8View(mindexId);
+            byte[] result = new byte[source.remaining()];
+            source.get(result);
+            return result;
+        }
         return encode(charset, coder(), value);
      }
 
@@ -1833,7 +1884,7 @@ public final class String
      * @since      1.1
      */
     public byte[] getBytes() {
-        return encode(Charset.defaultCharset(), coder(), value);
+        return getBytes(Charset.defaultCharset());
     }
 
     /**
@@ -1858,8 +1909,27 @@ public final class String
         if (this == anObject) {
             return true;
         }
-        return (anObject instanceof String aString)
-                && (!COMPACT_STRINGS || this.coder == aString.coder)
+        if (!(anObject instanceof String aString)) {
+            return false;
+        }
+        if (isMIndexBacked() || aString.isMIndexBacked()) {
+            if (isMIndexBacked()
+                    && aString.isMIndexBacked()
+                    && mindexId == aString.mindexId) {
+                return true;
+            }
+            int length = length();
+            if (length != aString.length()) {
+                return false;
+            }
+            for (int index = 0; index < length; index++) {
+                if (charAt(index) != aString.charAt(index)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        return (!COMPACT_STRINGS || this.coder == aString.coder)
                 && StringLatin1.equals(value, aString.value);
     }
 
@@ -2038,6 +2108,19 @@ public final class String
      *          lexicographically greater than the string argument.
      */
     public int compareTo(String anotherString) {
+        if (isMIndexBacked() || anotherString.isMIndexBacked()) {
+            int leftLength = length();
+            int rightLength = anotherString.length();
+            int common = Math.min(leftLength, rightLength);
+            for (int index = 0; index < common; index++) {
+                char left = charAt(index);
+                char right = anotherString.charAt(index);
+                if (left != right) {
+                    return left - right;
+                }
+            }
+            return leftLength - rightLength;
+        }
         byte[] v1 = value;
         byte[] v2 = anotherString.value;
         byte coder = coder();
@@ -2362,8 +2445,10 @@ public final class String
         // from immutable state
         int h = hash;
         if (h == 0 && !hashIsZero) {
-            h = isLatin1() ? StringLatin1.hashCode(value)
-                           : StringUTF16.hashCode(value);
+            h = isMIndexBacked()
+                    ? MIndexStrings.backing().hashCode(mindexId)
+                    : isLatin1() ? StringLatin1.hashCode(value)
+                                 : StringUTF16.hashCode(value);
             if (h == 0) {
                 hashIsZero = true;
             } else {
@@ -2832,6 +2917,9 @@ public final class String
             return this;
         }
         int subLen = endIndex - beginIndex;
+        if (isMIndexBacked()) {
+            return MIndexStrings.backing().materializeRange(mindexId, beginIndex, subLen);
+        }
         return isLatin1() ? StringLatin1.newString(value, beginIndex, subLen)
                           : StringUTF16.newString(value, beginIndex, subLen);
     }
@@ -4803,6 +4891,32 @@ public final class String
     String(byte[] value, byte coder) {
         this.value = value;
         this.coder = coder;
+    }
+
+    private String(String fallback, long mindexId) {
+        this.value = fallback.value;
+        this.coder = fallback.coder;
+        this.hash = fallback.hash;
+        this.hashIsZero = fallback.hashIsZero;
+        this.mindexId = mindexId;
+    }
+
+    static String newMIndexString(long id) {
+        var backing = MIndexStrings.backing();
+        String fallback = backing.materialize(id);
+        if (backing.length(id) != fallback.length()
+                || backing.hashCode(id) != fallback.hashCode()) {
+            throw new InternalError("MIndex String backing parity failure");
+        }
+        return new String(fallback, id);
+    }
+
+    boolean isMIndexBacked() {
+        return mindexId != 0L;
+    }
+
+    long mindexId() {
+        return mindexId;
     }
 
     byte coder() {

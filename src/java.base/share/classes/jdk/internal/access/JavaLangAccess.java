@@ -182,6 +182,18 @@ public interface JavaLangAccess {
     String fastUUID(long lsb, long msb);
 
     /**
+     * Creates a String whose logical content is attached to the installed MIndex backing.
+     * The current transition keeps an ordinary byte[] fallback for VM compatibility.
+     */
+    String newMIndexString(long id);
+
+    /** Returns whether the String carries an experimental MIndex backing ID. */
+    boolean isMIndexString(String value);
+
+    /** Returns the String's MIndex ID, or zero for an ordinary array-backed String. */
+    long mindexStringId(String value);
+
+    /**
      * Record the non-exported packages of the modules in the given layer
      */
     void addNonExportedPackages(ModuleLayer layer);

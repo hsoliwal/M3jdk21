@@ -212,7 +212,9 @@ public final class MIndexMappedStringBacking implements MIndexStringBacking {
         return utf16View(id).toString();
     }
 
-    String materialize(long id, int start, int length) {
+    @Override
+    public String materializeRange(long id, int start, int length) {
+        Objects.checkFromIndexSize(start, length, length(id));
         CharBuffer source = utf16View(id);
         source.position(start);
         source.limit(start + length);
@@ -436,7 +438,7 @@ public final class MIndexMappedStringBacking implements MIndexStringBacking {
 
         @Override
         public String toString() {
-            return backing.materialize(id, start, length);
+            return backing.materializeRange(id, start, length);
         }
     }
 

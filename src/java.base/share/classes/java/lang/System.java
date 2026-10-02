@@ -2398,6 +2398,15 @@ public final class System {
             public String fastUUID(long lsb, long msb) {
                 return Long.fastUUID(lsb, msb);
             }
+            public String newMIndexString(long id) {
+                return String.newMIndexString(id);
+            }
+            public boolean isMIndexString(String value) {
+                return value.isMIndexBacked();
+            }
+            public long mindexStringId(String value) {
+                return value.mindexId();
+            }
             @SuppressWarnings("removal")
             public void addNonExportedPackages(ModuleLayer layer) {
                 SecurityManager.addNonExportedPackages(layer);
