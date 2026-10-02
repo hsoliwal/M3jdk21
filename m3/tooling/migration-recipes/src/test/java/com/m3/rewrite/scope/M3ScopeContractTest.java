@@ -20,8 +20,9 @@ final class M3ScopeContractTest {
             }
         }
 
-        assertEquals(M3EditScope.PACKAGE_VISIBILITY, M3EditScope.FILE.next());
-        assertEquals(M3EditScope.MODULE, M3EditScope.PACKAGE_VISIBILITY.next());
+        assertEquals(M3EditScope.VISIBILITY, M3EditScope.FILE.next());
+        assertEquals(M3EditScope.PACKAGE, M3EditScope.VISIBILITY.next());
+        assertEquals(M3EditScope.MODULE, M3EditScope.PACKAGE.next());
         assertEquals(M3EditScope.MULTI_MODULE, M3EditScope.MODULE.next());
         assertEquals(M3EditScope.LIBRARY_API, M3EditScope.MULTI_MODULE.next());
         assertEquals(M3EditScope.LIBRARY_API, M3EditScope.LIBRARY_API.next());
@@ -86,6 +87,14 @@ final class M3ScopeContractTest {
                 inferred.resolve(List.of(
                         "src/main/java/a/A.java",
                         "src/main/java/b/B.java")));
+
+        var visibilityFloor = new M3RecipeScopePolicy(
+                M3EditScope.VISIBILITY,
+                M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING,
+                true);
+        assertEquals(
+                M3EditScope.VISIBILITY,
+                visibilityFloor.resolve(List.of("src/main/java/a/A.java")));
 
         var moduleFloor = new M3RecipeScopePolicy(
                 M3EditScope.MODULE,
