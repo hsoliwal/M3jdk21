@@ -1,6 +1,47 @@
-# M3 migration architecture and compatibility decisions
+# M3 whole-JDK migration architecture and compatibility decisions
 
-## Scope and authority
+## Whole-JDK authority and document topology
+
+This document is the detailed implementation architecture for the whole-JDK M3 program. The overview and coverage denominator live in ../../docs/whole-jdk-migration-scope.md. Deep collection contracts live in COLLECTIONS.md. Dependency-ordered implementation packets live in WORK_PACKETS.md. Existing String/text architecture remains in ../../docs/shared-atom-concatenation.md, ../../docs/mindex-migration-handoff.md and ../../../doc/mindex-string-backing.md.
+
+The machine-readable operational authority remains ../../docs/name-mapping.json plus the existing validated migration tooling. None of these Markdown files is a replacement registry. Planning rows may propose dispositions; only a separately reviewed operational update may change capability state, synchronized pins or evidence bindings.
+
+The whole-JDK goal is selective backend replacement and reuse under preserved Java/JVM contracts, not uniform representation. Every inventoried surface receives one disposition: replace-backend, adapt, reuse, retain-pending-evidence, platform-specific, blocked or deferred. Whole-JDK coverage is not complete until every denominator entry has a reviewed disposition and every claimed replacement closes its applicable gates.
+
+## Architecture layers
+
+1. Canonical data and lifetime ownership: immutable atoms, mutable owners, reference lanes, primitive lanes, namespaces, generations and publication.
+2. Storage and indexing: arrays, segmented ranges, compact tables, trees, bitmaps, CSR relations, dictionaries and mapped images.
+3. Algorithms and precomputation: exact reusable facts, filters, sorting/searching/bulk kernels and bounded caches with validity domains.
+4. Public Java compatibility: ordinary API objects, views, adapters, boxing/materialization boundaries, serialization and reflection.
+5. Compiler transformation: attributed Route B lowering with fail-closed semantic preconditions and source-pinned recipes.
+6. VM/native integration: object layout, GC/barriers, interpreter/JIT/intrinsics, JNI/JVMTI/CDS/JFR/serviceability and OS/CPU variants.
+7. Diagnostics and evidence: exact pins, mapping lineage, build/image identity, differential/concurrency/runtime tests and performance/memory receipts.
+
+Dependencies flow downward wherever possible. Tooling, Maven/OpenRewrite, application frameworks, UI and network services stay outside early java.base bootstrap. A higher-level owner may project onto a lower-level M3 substrate; the substrate must not recursively depend on that higher layer.
+
+## Cross-cutting semantic laws
+
+- Immutable sharing is permitted only inside a declared immutable identity/lifetime domain.
+- Mutable public objects remain independently observable; equal mutable collections are never silently value-interned together.
+- Java object identity, value equality, comparator equivalence, canonical atom identity, arena handles and persistent image coordinates remain distinct.
+- Hashes, similarity scores and precomputed signals can reject candidates or accelerate lookups; they do not replace exact equality unless the canonical identity contract itself proves exact payload identity.
+- GC must see every live heap reference. Off-heap/native IDs cannot replace references without reviewed rooting/barrier/lifetime integration.
+- Java arrays remain fixed-size contiguous Java objects. Segmented or native layouts require explicit descriptors/adapters and materialization where a contiguous array is required.
+- Precomputation has admission, invalidation, eviction, concurrency and amortization costs. A local allocation saving cannot justify an unbounded process-global cache.
+- A passing Route A experiment does not certify compiler lowering or a matched custom JDK.
+
+## First-class replacement workstreams
+
+String/text and collections are the first deep vertical slices because they exercise immutable sharing, mutable identity, views, generic boundaries, JNI/VM integration and performance measurement in different ways.
+
+String retains exact UTF-16 semantics, shared-lexicon plus VM-local ownership, reference-only joins/slices, explicit materialization and independent text/atom/composition/object identity. Route C must coordinate StringLatin1/StringUTF16/concat, StringTable, GC dedup, CDS, JNI/JVMTI, interpreter/JIT and serviceability.
+
+Collections use the family-by-family contract in COLLECTIONS.md. Candidate primitive/indexed/segmented forms do not automatically eliminate boxing or node objects at public generic boundaries. IdentityHashMap reference identity, weak-reference families, live views, serialization, subclass hooks and concurrent JMM guarantees are explicit stop gates.
+
+All remaining JDK/HotSpot work is decomposed in WORK_PACKETS.md and advances in dependency order rather than by filename similarity.
+
+## Existing MIndex/MatIndex slice authority
 
 This document consolidates the requirements relevant to the first implementation tranche. The broader three-route design remains `m3/docs/shared-atom-concatenation.md`; none of its proposed runtime contracts becomes accepted merely by being restated here. The machine-readable source-to-target authority is the existing `m3/docs/name-mapping.json`, extended rather than replaced. Every observed item remains visible with a disposition; the current observations are incomplete.
 
