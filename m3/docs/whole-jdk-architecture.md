@@ -34,6 +34,56 @@ For each proposed reuse, record its actual qualified source owner, source pin, d
 
 The source-side inventory adapter remains the inventory entry point. The retained migration tooling remains the target receipt/reconciliation entry point. OpenRewrite and narrowly source-pinned recipes remain transformation machinery, not runtime dependencies.
 
+### 2.1 Source-first consolidation is a prerequisite, not just donor selection
+
+The required sequence is **the best of Synexia consolidated into Synexia itself, then the best verified Synexia capabilities contributed to M3jdk21**. Do not leave Synexia fragmented while building a separately cleaned collection of its scattered PR variants inside the JDK. The source-side [atomization, patternization and repeated-pass invariant proposal](https://github.com/hsoliwal/com.synexia/blob/ac8adc40986f54a3762b43db093ab420d882d8ea/AGENTS.md#synexia-first-m3jdk21-second) extends the existing agent policy in [private companion #7725](https://github.com/hsoliwal/com.synexia/pull/7725). That documentation commit is not a source implementation/acceptance checkpoint.
+
+Two independently verified stages govern the existing execution packets:
+
+```text
+Synexia current owners + competing variants + relevant historical capabilities
+    -> repeated contract / atomization / patternization / recipe passes
+    -> real Synexia consumer convergence and source verification
+    -> pinned integrated Synexia capability checkpoint
+    -> reviewed minimal dependency closure and JDK-specific adaptation
+    -> repeated target compatibility / integration / measurement passes
+    -> accepted M3jdk21 contribution for its explicit route and scope
+```
+
+This is an explanatory workflow, not a new executor or implemented gate. Target inventory and exploratory design can run while source consolidation proceeds; they do not bypass source readiness. Each exported capability must first have a retained, verified Synexia owner and the required dependency/consumer closure. Capability-sized checkpoints make progress finite without claiming the whole repository is finished. An unmerged source exploration can supply evidence, but is not labelled a consolidated upstream implementation. Existing target experiments remain recorded with their actual state rather than being deleted or retroactively declared accepted.
+
+### 2.2 Atomization and patternization invariants
+
+**Atomization fixes the contract while making the implementation replaceable.** A cohesive behavioral atom has explicit inputs, outputs, dependencies, effects and ownership. Preserve enclosing API behavior, evaluation/exception order, null/bounds/overflow, mutation/aliasing, identity, synchronization/publication and lifetime. Refine recursively only when the required semantic facts are available. A partial AST does not prove unobserved types/effects. Do not equate smaller files or extra helpers with success, widen visibility for convenience, introduce unmeasured boxing/indirection, or separate operations that require one verified mutation/VM boundary.
+
+**Patternization consolidates compatible behavior into reusable families used by real consumers.** Compare contracts before extracting shared mechanics. Prefer the existing canonical owner with explicit policies, primitive specializations and adapters. Pattern labels or a catalogue of duplicate implementations are not consumer convergence. Preserve distinct comparator/null/callback/ownership/concurrency policies; do not make a universal abstraction by erasing their differences. Retain useful workload-specific strategies and compatibility facades when justified. Semantic capability preservation does not require keeping redundant active implementation bodies forever, but any retirement needs an explicit recipe, consumer/compatibility proof and preserved lineage/history.
+
+The two invariants apply to all relevant Synexia modules, including the consolidator, inventories, recipes, indexes and verifier themselves. They also apply to JDK adaptation; they do not transfer source proof across a new generic API, native boundary or VM layout.
+
+### 2.3 Repasses must converge through evidence
+
+Repeat the existing source pass cycle: pin and inventory; capture contracts; atomize; compare pattern families; reuse/compose existing owners; improve recipes and refusal tests; generate candidates; verify source behavior and costs; converge consumers; ratify serially; re-inventory affected scopes. Revisit file, package, module, reactor and external-API boundaries because lower-level convergence can expose higher-level common behavior. Review history backward for lost capabilities and forward through relevant merge parents for present retention and interactions; preserve newer fixes when recovering historical candidates. Never rebase develop or substitute ancestry preservation for content verification.
+
+Use existing indexed facts, exact hashes, structural/logic fingerprints and similarity signals to discover candidates and avoid repeating unchanged acquisition. None proves semantic equivalence. Every accepted change invalidates its affected caller/dependency/format/runtime-consumer closure and applicable receipts. Tool, recipe, catalogue, contract or environment changes can invalidate evidence even when a source file is unchanged. Incremental scheduling must retain whole-scope coverage audits; it is not permission to skip unknown consumers.
+
+FLLDCIM leaves remain isolated under exclusive ownership. Independent work fans out aggressively within resource budgets; results return through coordinated fan-in and serial canonical ratification. Recheck changed files before proceeding with dependent work. This is a tooling execution discipline, not a global runtime lock. The core remains deterministic and does not require an LLM.
+
+Each pass records scope/input pins, changed atoms/consumers, recipe decisions, exact outputs, actual tests, regressions, rejected/deferred candidates, blockers and the next invalidated closure in the existing evidence owners. A scope reaches a review checkpoint when there are no new admissible changes under its pinned inputs/policy, or remaining blockers are explicit. A zero-diff recipe replay proves only that recipe's fixed point; it is not proof of global optimality, full coverage or programme completion. New source or evidence reopens the relevant passes.
+
+### 2.4 Best means verified capability and workload fit
+
+Correctness, compatibility, ownership and required source-quality gates precede performance selection. Compare complete costs over declared small/large, cold/warm, adversarial, mutation-heavy and concurrent workloads, including admission, precomputation, retained heap/native/mapped memory, code/dependency overhead and regressions. A newer PR, fewer lines, extra atom classes or one faster benchmark is not sufficient. Keep the best compatible capability superset and measured specializations under coherent ownership rather than force one global winner. Unknown cost remains an open measurement obligation.
+
+Configured precomputed capabilities must complete required load/validation at the established safe startup or view-admission boundary before being exposed as ready; their first operation must not secretly rebuild promised precomputation. Preserve the bootstrap budget below, existing owners, validity/invalidation and resource limits. An explicit not-ready or reviewed fallback state is not precomputed readiness.
+
+Illustration, not an implementation claim: one variant may improve ordered-batch search while another fixes overflow and a third preserves callback-failure semantics. The Synexia consolidation must first retain the compatible combination in its actual owner and consumers, with combined tests and workload evidence. Only that source checkpoint becomes a JDK donor. JDK adaptation must independently preserve its generic/object, view, exception and runtime contracts; a primitive source success is not that proof.
+
+### 2.5 Preserve both lineage hops and return reusable findings upstream
+
+Extend existing mappings and receipts to retain **original variants -> consolidated Synexia owner/checkpoint -> adapted M3jdk21 capability**. Both hops need exact pins/blobs, stable identities, contracts, dependencies, recipes, provenance, target-only changes/conflicts and their own evidence. Source inspected, consolidation candidate, source retained, source verified, target adapted and target verified are distinct questions. This documentation does not invent another schema or mark records accepted.
+
+Portable shared improvements discovered during JDK work return through reviewed Synexia consolidation before the shared capability is refreshed downstream. Genuinely VM/JDK-specific adapters, layout and intrinsic work remain owned by the JDK; record non-applicability rather than inject those dependencies upstream. Preserve target-only adaptations during later three-way replay. No old receipt automatically certifies a changed source owner, target adaptation or combined tree. These additions define required work; no consolidation, implementation tests, automated enforcement, source publication or merge was performed by this documentation change.
+
 ## 3. Seven layers and dependency rules
 
 | Layer | Owns | Must not own |
