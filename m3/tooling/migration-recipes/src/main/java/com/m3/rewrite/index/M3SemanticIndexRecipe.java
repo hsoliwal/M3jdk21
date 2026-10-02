@@ -157,7 +157,8 @@ public final class M3SemanticIndexRecipe extends Recipe {
         emitNode(file, ctx);
         emitEdge(packageNode, file, "FILE", 0, ctx);
         for (int ordinal = 0; ordinal < fileChildren.size(); ordinal++) {
-            emitEdge(file, fileChildren.get(ordinal), "CONTAINS", ordinal, ctx);
+            Node child = fileChildren.get(ordinal);
+            emitEdge(file, child, child.kind().name(), ordinal, ctx);
         }
     }
 
