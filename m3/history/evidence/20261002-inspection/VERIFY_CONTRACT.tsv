@@ -1,0 +1,10 @@
+order	gate	result	evidence
+1	proposed-addition diff	PASS	diff.log; local publication fixture only
+2	tabnanny lexical lint	PASS	lint.log
+3	Python byte compilation	PASS	compile.log
+4	Git fixture regression tests	PASS	fixture-tests.log: 31 tests
+5	full real-repository graph	NOT_RUN_LOCALLY	requires complete clone/hosted workflow
+6	Maven lifecycle	NOT_RUN	Maven unavailable
+7	JDK build/jtreg/JCK/runtime	NOT_RUN	not delegated to history fixtures
+8	hosted audit attempt	NO_JOBS_EXECUTED	run 36959929426: failure, total_count=0
+9	published Python blobs vs locally tested bytes	PASS	Git blob IDs compared; exact test-file whitespace synchronized and retested
