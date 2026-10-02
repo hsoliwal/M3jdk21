@@ -59,6 +59,7 @@ final class M3IndexDbSemanticCodec {
                     out.writeInt(strings.id(node.semanticKey()));
                     out.writeInt(strings.id(node.sourcePath()));
                     out.writeInt(strings.id(node.symbol()));
+                    out.writeInt(strings.id(node.patternRole()));
 
                     M3IndexDbSemanticFingerprint fingerprint = node.fingerprint();
                     writeSha(out, fingerprint.exactSha256());
@@ -129,6 +130,7 @@ final class M3IndexDbSemanticCodec {
                 String semanticKey = string(strings, in.readInt());
                 String sourcePath = string(strings, in.readInt());
                 String symbol = string(strings, in.readInt());
+                String patternRole = string(strings, in.readInt());
                 String exact = readSha(in);
                 String structural = readSha(in);
                 String logic = readSha(in);
@@ -144,6 +146,7 @@ final class M3IndexDbSemanticCodec {
                                 semanticKey,
                                 sourcePath,
                                 symbol,
+                                patternRole,
                                 new M3IndexDbSemanticFingerprint(
                                         exact,
                                         structural,
@@ -194,6 +197,7 @@ final class M3IndexDbSemanticCodec {
             unique.add(node.semanticKey());
             unique.add(node.sourcePath());
             unique.add(node.symbol());
+            unique.add(node.patternRole());
             unique.add(node.fingerprint().normalizedComposition());
         }
         for (M3IndexDbSemanticEdge edge : edges) unique.add(edge.role());
