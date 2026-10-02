@@ -1,0 +1,129 @@
+name: M3 JDK21 backport admission
+
+on:
+  push:
+    branches:
+      - aix/jdk22-27-backports-20261002
+    paths:
+      - "m3/backports/**"
+      - "make/modules/jdk.jcmd/Copy.gmk"
+      - "src/jdk.jcmd/share/conf/bash-completion/jcmd"
+      - ".github/workflows/m3-jdk21-backports.yml"
+  pull_request:
+    paths:
+      - "m3/backports/**"
+      - "make/modules/jdk.jcmd/Copy.gmk"
+      - "src/jdk.jcmd/share/conf/bash-completion/jcmd"
+      - ".github/workflows/m3-jdk21-backports.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Lint backport artifacts
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import csv
+          from pathlib import Path
+
+          paths = (
+              "m3/backports/README.md",
+              "m3/backports/JEP_CATALOGUE.tsv",
+              "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv",
+              "m3/backports/inventory.py",
+              "m3/backports/pom.xml",
+              "m3/backports/recipes/jdk-8357439/manifest.tsv",
+              "m3/backports/test_inventory.py",
+              "m3/backports/verify.py",
+              "make/modules/jdk.jcmd/Copy.gmk",
+              "src/jdk.jcmd/share/conf/bash-completion/jcmd",
+          )
+
+          for name in paths:
+              path = Path(name)
+              data = path.read_bytes()
+              if b"\r" in data:
+                  raise SystemExit(f"{name}: CR byte")
+              if b"\0" in data:
+                  raise SystemExit(f"{name}: NUL byte")
+
+              text = data.decode("utf-8")
+              if path.suffix == ".tsv":
+                  rows = list(csv.reader(text.splitlines(), delimiter="\t"))
+                  if not rows:
+                      raise SystemExit(f"{name}: empty TSV")
+                  width = len(rows[0])
+                  for line_no, row in enumerate(rows, 1):
+                      if len(row) != width:
+                          raise SystemExit(
+                              f"{name}:{line_no}: expected {width} fields, found {len(row)}"
+                          )
+                      for field in row:
+                          if field != field.strip(" "):
+                              raise SystemExit(
+                                  f"{name}:{line_no}: field has edge spaces"
+                              )
+              else:
+                  for line_no, line in enumerate(text.splitlines(), 1):
+                      if line.rstrip(" \t") != line:
+                          raise SystemExit(f"{name}:{line_no}: trailing whitespace")
+
+          print("PASS: lint")
+          PY
+
+      - name: Compile and syntax checks
+        shell: bash
+        run: |
+          python3 -m py_compile             m3/backports/inventory.py             m3/backports/test_inventory.py             m3/backports/verify.py
+          python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+          ET.parse("m3/backports/pom.xml")
+          print("PASS: pom.xml")
+          PY
+          bash -n src/jdk.jcmd/share/conf/bash-completion/jcmd
+          echo "PASS: compile/syntax"
+
+      - name: Tests and Maven recipe crate
+        shell: bash
+        run: |
+          python3 -m unittest -v m3/backports/test_inventory.py
+          python3 m3/backports/verify.py --root .
+          mvn -B -f m3/backports/pom.xml test
+
+      - name: jcmd completion runtime smoke
+        shell: bash
+        run: |
+          tmp="$(mktemp -d)"
+          trap 'rm -rf "$tmp"' EXIT
+          cat > "$tmp/jcmd" <<'EOF'
+          #!/usr/bin/env bash
+          if [[ "${1:-}" == "-l" ]]; then
+            printf '%s\n' '123 app.Main' '456 other.Main'
+          elif [[ "${2:-}" == "help" ]]; then
+            printf '%s\n'               'The following commands are available:'               'VM.info'               'GC.heap_info'               'For more information about a specific command use help <command>.'
+          fi
+          EOF
+          chmod +x "$tmp/jcmd"
+          export PATH="$tmp:$PATH"
+
+          source src/jdk.jcmd/share/conf/bash-completion/jcmd
+
+          COMP_WORDS=(jcmd 12)
+          COMP_CWORD=1
+          _jcmd_completion
+          [[ " ${COMPREPLY[*]} " == *" 123 "* ]]
+
+          COMP_WORDS=(jcmd 123 VM.)
+          COMP_CWORD=2
+          _jcmd_completion
+          [[ " ${COMPREPLY[*]} " == *" VM.info "* ]]
+
+          echo "PASS: jcmd completion runtime smoke"
