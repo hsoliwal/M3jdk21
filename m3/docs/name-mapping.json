@@ -536,6 +536,860 @@
         "lineage": {"previous_sources": [], "previous_targets": [], "supersedes": []},
         "source_state": "uninspected",
         "observation": "Discovery is not proof of implementation or conformance."
+      },
+      {
+        "id": "m3.collections.primitive-foundation",
+        "kind": "specialization",
+        "status": "implemented-tested",
+        "reason": "Dependency-minimal primitive collection contracts and scalar/storage atoms were adapted into an explicit M3 module and tested as a Route-A foundation; this is not a java.util replacement.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "3db24805d640c72ab1bd637d83561696d99561a0",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/LongCollection.java",
+            "symbol": "com.synexia.common.collections.LongCollection",
+            "signatures": [
+              "int size()",
+              "boolean contains(long)",
+              "void clear()",
+              "LongIterator iterator()",
+              "long[] toArray()",
+              "boolean isEmpty()",
+              "void forEachLong(LongConsumer)"
+            ],
+            "sha256": "49deec89a6d16002c9fe7c084644251b1401bf64f9a60a4f7b047208dba8492a",
+            "git_blob_sha1": "278e3a750bad82c3ea70a175c74ada5a6af64bd1",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "3db24805d640c72ab1bd637d83561696d99561a0",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/LongIterator.java",
+            "symbol": "com.synexia.common.collections.LongIterator",
+            "signatures": [
+              "boolean hasNext()",
+              "long nextLong()",
+              "void forEachRemaining(LongConsumer)"
+            ],
+            "sha256": "8e912f0302b4082583f731e274a245cf9f98fda1e5e53adfccaef03f5da08cb0",
+            "git_blob_sha1": "de7f337c6ae0fa3ce740dc18362367d66992da1b",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "3db24805d640c72ab1bd637d83561696d99561a0",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/LongQueue.java",
+            "symbol": "com.synexia.common.collections.LongQueue",
+            "signatures": [
+              "boolean offer(long)",
+              "long peek()",
+              "long poll()",
+              "int capacity()",
+              "boolean tryPoll(long[],int)",
+              "long pollReserved()",
+              "int offerBatch(long[],int,int)",
+              "int drainTo(long[],int,int)"
+            ],
+            "sha256": "649ceb108c0aade057a137b07b95f77ce446d3285244f8515ee2a386a0e200d4",
+            "git_blob_sha1": "fde82af25504c10f7edf3129438977673085103c",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "3db24805d640c72ab1bd637d83561696d99561a0",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/LongDeque.java",
+            "symbol": "com.synexia.common.collections.LongDeque",
+            "signatures": [
+              "void addFirst(long)",
+              "void addLast(long)",
+              "boolean addLastIf(long,LongPredicate)",
+              "long first()",
+              "long last()",
+              "long removeFirst()",
+              "long removeLast()",
+              "long get(int)",
+              "int filterInPlace(LongPredicate)"
+            ],
+            "sha256": "f2e5465fc296ff76ed97efd1547ee31b3ef0756a5489f0b276dff5a2eddc2e48",
+            "git_blob_sha1": "0d6f5179c74896ced20bfcdccf9d126eb32e38e3",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "3db24805d640c72ab1bd637d83561696d99561a0",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongLongMap.java",
+            "symbol": "com.synexia.common.collections.PackedLongLongMap",
+            "signatures": [
+              "boolean put(long,long)",
+              "boolean containsKey(long)",
+              "long getOrDefault(long,long)",
+              "long getOrThrow(long)",
+              "boolean remove(long)",
+              "int filterInPlace(LongLongPredicate)",
+              "void forEach(LongLongConsumer)",
+              "int size()",
+              "boolean isEmpty()",
+              "int capacity()",
+              "void clear()",
+              "void trimToSize()",
+              "long[] keysToArray()",
+              "long[] valuesToArray()"
+            ],
+            "sha256": "3aed176c88fd0603ddb417ea5983ec14cf659c4e51932a25d560588d443a70ec",
+            "git_blob_sha1": "50d7b4c139fd74cf8bc6744a68df0abfe99e5ab1",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "3db24805d640c72ab1bd637d83561696d99561a0",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/LongLongConsumer.java",
+            "symbol": "com.synexia.common.collections.LongLongConsumer",
+            "signatures": [
+              "void accept(long,long)"
+            ],
+            "sha256": "0454de65168e8935d7add09b9092597b62f4fc38fab6ab4df69a8a02e42d5fa2",
+            "git_blob_sha1": "cd7ed4a37e0e2122a7a39713ec78865f1ad3c46c",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "3db24805d640c72ab1bd637d83561696d99561a0",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/LongLongPredicate.java",
+            "symbol": "com.synexia.common.collections.LongLongPredicate",
+            "signatures": [
+              "boolean test(long,long)"
+            ],
+            "sha256": "71a6209f7d197209a15f7e897f9a3a7d30351556fc7d8c1f9f01f6ac048b1525",
+            "git_blob_sha1": "d394f720b82d61e8270e67b5f7fa6880aa590285",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "3db24805d640c72ab1bd637d83561696d99561a0",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedSupport.java",
+            "symbol": "com.synexia.common.collections.PackedSupport",
+            "signatures": [
+              "tableSizeForExpected",
+              "nextTableCapacity",
+              "growArrayCapacity",
+              "mix",
+              "checkIndex"
+            ],
+            "sha256": "ba18323df281922ccad50b7e5adc93e69e609d46ef06e2f226b4cd0f6492fe9d",
+            "git_blob_sha1": "a7135d8123a41a949b15e5f969e78a1053c3e4c8",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "3db24805d640c72ab1bd637d83561696d99561a0",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedFlatArrays.java",
+            "symbol": "com.synexia.common.collections.PackedFlatArrays",
+            "signatures": [
+              "powerOfTwoCapacity",
+              "growPowerOfTwo",
+              "copyLogicalRing"
+            ],
+            "sha256": "f8a3a16bcb9a9d9e367ef9ee7732ed1143d283395942f4dcde4e332027c18c23",
+            "git_blob_sha1": "2a3044cf9659ad3102ed4f99c7efbe7676ddc5a8",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "3db24805d640c72ab1bd637d83561696d99561a0",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedHashAtoms.java",
+            "symbol": "com.synexia.common.collections.PackedHashAtoms",
+            "signatures": [
+              "threshold",
+              "pressure",
+              "capacityAfterPressure",
+              "findIndex",
+              "findOrInsertionIndex",
+              "rehashInsertionIndex",
+              "compactTombstones"
+            ],
+            "sha256": "c0e30a2b8dd1eb3d2188d4f27036c68dcd709158886fbc12378aa0d9e8c2478b",
+            "git_blob_sha1": "0edbe377c993eda1b2395db4e68138ed24b899ef",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "8fa47689547a1efeabbb35d2caf1683d902a87e4",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedRingAtoms.java",
+            "symbol": "com.synexia.common.collections.PackedRingAtoms",
+            "signatures": [
+              "powerOfTwoIndex",
+              "powerOfTwoPrevious",
+              "powerOfTwoNext",
+              "normalizeHeadAfterRemoval"
+            ],
+            "sha256": "36a703f468b33769cc033dc9196bfcde8d36bef43989006459535127d51b42d5",
+            "git_blob_sha1": "c68a230f25260cbf5a1dd96ae130755a0ec36698",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/lean-collection-ring-atoms-v2-20261002"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "module": "m3/collections",
+            "path": "m3/collections/src/com/m3/collections/M3LongCollection.java",
+            "symbol": "com.m3.collections.M3LongCollection",
+            "signatures": [
+              "int size()",
+              "boolean contains(long)",
+              "void clear()",
+              "M3LongIterator iterator()",
+              "long[] toArray()",
+              "boolean isEmpty()",
+              "void forEachLong(LongConsumer)"
+            ],
+            "sha256": "8161ac3d6cf68a3c7eade8236bd630fc694b2cb1af68dfc9293c48fbfb4dd4f1",
+            "git_blob_sha1": "f4992010f5a4798e3fec22315ea90981e9f1b28a",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/m3/collections-foundation-20261002"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "module": "m3/collections",
+            "path": "m3/collections/src/com/m3/collections/M3LongIterator.java",
+            "symbol": "com.m3.collections.M3LongIterator",
+            "signatures": [
+              "boolean hasNext()",
+              "long nextLong()",
+              "void forEachRemaining(LongConsumer)"
+            ],
+            "sha256": "264a5cd22ed734c7c86e059091d6e63670f2b4f0ac8a0aaa30fa7dac0e9e0107",
+            "git_blob_sha1": "b052dbb5ff3ed14c79a08d27dabadaa25ea6fff5",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/m3/collections-foundation-20261002"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "module": "m3/collections",
+            "path": "m3/collections/src/com/m3/collections/M3LongQueue.java",
+            "symbol": "com.m3.collections.M3LongQueue",
+            "signatures": [
+              "boolean offer(long)",
+              "long peek()",
+              "long poll()",
+              "int capacity()",
+              "boolean tryPoll(long[],int)",
+              "long pollReserved()",
+              "int offerBatch(long[],int,int)",
+              "int drainTo(long[],int,int)"
+            ],
+            "sha256": "3f0c2bf1561526e1079ea70f0a143a22373c8342df4c678dfd68009793e53d39",
+            "git_blob_sha1": "474890f19e98f2c12fa19409ec19a2df101f9143",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/m3/collections-foundation-20261002"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "module": "m3/collections",
+            "path": "m3/collections/src/com/m3/collections/M3LongDeque.java",
+            "symbol": "com.m3.collections.M3LongDeque",
+            "signatures": [
+              "void addFirst(long)",
+              "void addLast(long)",
+              "boolean addLastIf(long,LongPredicate)",
+              "long first()",
+              "long last()",
+              "long removeFirst()",
+              "long removeLast()",
+              "long get(int)",
+              "int filterInPlace(LongPredicate)"
+            ],
+            "sha256": "221c184d8577fa0eaaed9d27b7fb92498bb6f98cffb8467fbfcaaa48eb42f57b",
+            "git_blob_sha1": "df6e11c07b0ad14b400fe9c0eefe60d85bf82c6e",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/m3/collections-foundation-20261002"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "module": "m3/collections",
+            "path": "m3/collections/src/com/m3/collections/M3LongLongMap.java",
+            "symbol": "com.m3.collections.M3LongLongMap",
+            "signatures": [
+              "boolean put(long,long)",
+              "boolean containsKey(long)",
+              "long getOrDefault(long,long)",
+              "long getOrThrow(long)",
+              "boolean remove(long)",
+              "int filterInPlace(M3LongLongPredicate)",
+              "void forEach(M3LongLongConsumer)",
+              "int size()",
+              "boolean isEmpty()",
+              "int capacity()",
+              "void clear()",
+              "void trimToSize()",
+              "long[] keysToArray()",
+              "long[] valuesToArray()"
+            ],
+            "sha256": "8eb5de0978192054236c838f6a160bb16877a11b415fe6630fae66adcf9d8dc7",
+            "git_blob_sha1": "2dd1cda6403a600772a6ca105accd8eb298dddfe",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/m3/collections-foundation-20261002"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "module": "m3/collections",
+            "path": "m3/collections/src/com/m3/collections/M3LongLongConsumer.java",
+            "symbol": "com.m3.collections.M3LongLongConsumer",
+            "signatures": [
+              "void accept(long,long)"
+            ],
+            "sha256": "7733dd8dc94fe0cb7c58039c269091c9bdcb054e3d9cba04799c973fc655ea34",
+            "git_blob_sha1": "b4ad7dd8cadd050c2b3859638cbdf51f078a6d4c",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/m3/collections-foundation-20261002"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "module": "m3/collections",
+            "path": "m3/collections/src/com/m3/collections/M3LongLongPredicate.java",
+            "symbol": "com.m3.collections.M3LongLongPredicate",
+            "signatures": [
+              "boolean test(long,long)"
+            ],
+            "sha256": "4c89d40f648f98fb27453860b46585b7845ffc51348bd79d7a28fd3fb17e01cc",
+            "git_blob_sha1": "5b5e4f645b1dd056f6d1312c9daf52d0e9585d1d",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/m3/collections-foundation-20261002"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "module": "m3/collections",
+            "path": "m3/collections/src/com/m3/collections/M3PackedSupport.java",
+            "symbol": "com.m3.collections.M3PackedSupport",
+            "signatures": [
+              "tableSizeForExpected",
+              "nextTableCapacity",
+              "growArrayCapacity",
+              "mix",
+              "checkIndex"
+            ],
+            "sha256": "26a6c32f09c9a9f5cf1509e8a65286ef7a7be0d12322444bee5abc2046011ff3",
+            "git_blob_sha1": "43b598f4a4b98395d2bf98188ea1555cf41b8ea0",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/m3/collections-foundation-20261002"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "module": "m3/collections",
+            "path": "m3/collections/src/com/m3/collections/M3PackedArrays.java",
+            "symbol": "com.m3.collections.M3PackedArrays",
+            "signatures": [
+              "powerOfTwoCapacity",
+              "growPowerOfTwo",
+              "copyLogicalRing"
+            ],
+            "sha256": "2a520040b22594e0bdd7273f6bbf7b5aff9474ebbff6751cf1844a85549e53ec",
+            "git_blob_sha1": "61da400f9df0a27ee5757152c5ce8dcf51510b9a",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/m3/collections-foundation-20261002"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "module": "m3/collections",
+            "path": "m3/collections/src/com/m3/collections/M3PackedHashAtoms.java",
+            "symbol": "com.m3.collections.M3PackedHashAtoms",
+            "signatures": [
+              "threshold",
+              "pressure",
+              "capacityAfterPressure",
+              "findIndex",
+              "findOrInsertionIndex",
+              "rehashInsertionIndex",
+              "compactTombstones"
+            ],
+            "sha256": "bb5b5a917efdc77c9a12f46495ab8d61bd1480b7d115f1770b340075d82a0320",
+            "git_blob_sha1": "4b23e9e8df2032ac618b117752ab5025c3ad067d",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/m3/collections-foundation-20261002"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "module": "m3/collections",
+            "path": "m3/collections/src/com/m3/collections/M3PackedRingAtoms.java",
+            "symbol": "com.m3.collections.M3PackedRingAtoms",
+            "signatures": [
+              "powerOfTwoIndex",
+              "powerOfTwoPrevious",
+              "powerOfTwoNext",
+              "normalizeHeadAfterRemoval"
+            ],
+            "sha256": "ebf47297df08c2c749a1a5680e1669c832fc2e786e31c9b4ff1f0f6a968417db",
+            "git_blob_sha1": "8f34696ffb9fe5683d8b74b18a5764613b2632a6",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/m3/collections-foundation-20261002"
+          }
+        ],
+        "owner": "com.m3.collections primitive contracts and package-private packed arithmetic; java.util remains unchanged",
+        "identity": {
+          "namespace": "Primitive values and instance-local mutable owners; no global object/content canonicalization.",
+          "generation": "Helpers mint no portable IDs. Mutable collection state belongs to one Java owner instance."
+        },
+        "contract": {
+          "differences": [
+            "Package/type names are adapted from com.synexia.common.collections to com.m3.collections.",
+            "M3PackedSupport and M3PackedArrays retain only the dependency-minimal operations required by this selected closure.",
+            "M3PackedRingAtoms selects the power-of-two ring operations from Synexia PR #7675; that source branch is pinned explicitly and is not asserted merged into develop.",
+            "The explicit M3 module makes no concurrent collection or Java Memory Model guarantee."
+          ],
+          "compatibility_obligations": [
+            "Primitive value/order/capacity/bounds behavior of the selected APIs.",
+            "No per-element Long or Map.Entry retention inside the primitive owners.",
+            "Generic java.util boxing, views, serialization and subclass contracts remain outside this record."
+          ],
+          "public_surface": [
+            "M3LongCollection",
+            "M3LongIterator",
+            "M3LongQueue",
+            "M3LongDeque",
+            "M3LongLongMap",
+            "M3LongLongConsumer",
+            "M3LongLongPredicate"
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Separate explicit module outside java.base. Bootstrap inclusion remains a later reviewed Route-C decision."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Primitive values are written directly into owner-local primitive arrays.",
+          "joins": "No collection joins.",
+          "outputs": "toArray allocates independent primitive arrays; iterator allocates an iterator object but no boxed element per step.",
+          "cached_facts": "No global cache or derived fact store."
+        },
+        "recipe": {
+          "id": "m3.collections.primitive-foundation.port.v1",
+          "version": "1",
+          "path": "m3/collections/recipe/manifest.json",
+          "sha256": "300d11ab42048a1293851b348b2284cb215a05bce93b038088dfddaff20b81f5",
+          "preconditions": [
+            "Exact selected postimage hashes.",
+            "Pinned ArrayDeque.java and HashMap.java remain unchanged guards.",
+            "Absent or byte-identical m3/collections destinations."
+          ],
+          "rollback": "Delete only exact packet-owned additions or revert the packet commit; never edit java.util."
+        },
+        "tests": [
+          {
+            "id": "m3-collections-foundation-jit",
+            "receipt": "m3/collections/evidence/local-jdk21-20261002.json"
+          },
+          {
+            "id": "m3-collections-foundation-interpreter",
+            "receipt": "m3/collections/evidence/local-jdk21-20261002.json"
+          },
+          {
+            "id": "m3-collections-source-recipe-unit",
+            "receipt": "m3/collections/evidence/local-jdk21-20261002.json"
+          }
+        ],
+        "provenance": {
+          "license": "Adapted from user-authorized Apache-2.0 Synexia sources with per-file lineage. OpenJDK sources are oracle/guard inputs and remain under their existing license.",
+          "publication": "Only selected source-derived implementation logic and hashes are published; unrelated private Synexia source is not copied.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "3db24805d640c72ab1bd637d83561696d99561a0",
+          "target_revision": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "M3 namespace",
+            "dependency-minimal helper subset",
+            "separate explicit Java module"
+          ],
+          "pending": [
+            "Maven/OpenRewrite recipe execution is unexecuted because Maven is unavailable in the local execution environment.",
+            "Whole-JDK collection inventory and java.util owner migration remain open."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "pinned develop sources plus separately pinned PR #7675 ring atom candidate",
+        "observation": "Strict Java 21 compilation and the explicit foundation differential suite passed 1,006,642 checks in normal and -Xint modes; the receipt is scoped to this module and does not certify java.util compatibility."
+      },
+      {
+        "id": "m3.collections.long-deque-route-a",
+        "kind": "specialization",
+        "status": "implemented-tested",
+        "reason": "Explicit primitive long deque adapted from the pinned Synexia owner and checked against ArrayDeque<Long> for overlapping FIFO/deque semantics without claiming generic collection equivalence.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "3db24805d640c72ab1bd637d83561696d99561a0",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongDeque.java",
+            "symbol": "com.synexia.common.collections.PackedLongDeque",
+            "signatures": [
+              "PackedLongDeque()",
+              "PackedLongDeque(int)",
+              "void addFirst(long)",
+              "void addLast(long)",
+              "long removeFirst()",
+              "long removeLast()",
+              "long get(int)",
+              "int filterInPlace(LongPredicate)",
+              "long[] toArray()"
+            ],
+            "sha256": "9aafeb23a39c7fbb2e0f699d623a9938672ed3ae48e311d6a4eeb911177cfe45",
+            "git_blob_sha1": "6fcc23c00a6b5ad4596078a4c9d296cb49543b70",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "module": "m3/collections",
+            "path": "m3/collections/src/com/m3/collections/M3PackedLongDeque.java",
+            "symbol": "com.m3.collections.M3PackedLongDeque",
+            "signatures": [
+              "M3PackedLongDeque()",
+              "M3PackedLongDeque(int)",
+              "void addFirst(long)",
+              "void addLast(long)",
+              "long removeFirst()",
+              "long removeLast()",
+              "long get(int)",
+              "int filterInPlace(LongPredicate)",
+              "long[] toArray()"
+            ],
+            "sha256": "e8c6dfc966fe31b18da11b269c276ba48d957d5d1227656a3bc3ce62491c4ef0",
+            "git_blob_sha1": "887534923fef6946648d8e4430bbee7aaaddba95",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/m3/collections-foundation-20261002"
+          }
+        ],
+        "owner": "com.m3.collections.M3PackedLongDeque",
+        "identity": {
+          "namespace": "Primitive long sequence inside one mutable deque owner.",
+          "generation": "No stable element IDs or shared mutable backing are exposed."
+        },
+        "contract": {
+          "differences": [
+            "Renamed/adapted into the M3 module and routed through the selected M3PackedRingAtoms helper.",
+            "No null concept or Collection<Long>/Deque<Long> API is exposed."
+          ],
+          "compatibility_obligations": [
+            "Preserve selected primitive deque order, bounds, empty failures, growth and copying behavior.",
+            "Do not infer ArrayDeque iterator/fail-fast/serialization/null contracts from the differential oracle."
+          ],
+          "public_surface": [
+            "M3PackedLongDeque()",
+            "M3PackedLongDeque(int)",
+            "void addFirst(long)",
+            "void addLast(long)",
+            "long removeFirst()",
+            "long removeLast()",
+            "long get(int)",
+            "int filterInPlace(LongPredicate)",
+            "long[] toArray()"
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Explicit Route-A module; no java.base integration."
+        },
+        "dependencies": [
+          {
+            "id": "m3.collections.primitive-foundation",
+            "resolution": "resolved",
+            "reason": "Uses the mapped primitive contracts, packed array capacity/copy logic and ring arithmetic."
+          }
+        ],
+        "materialization": {
+          "admission": "Direct primitive writes.",
+          "joins": "None.",
+          "outputs": "toArray copies the logical ring; iterator returns primitive long values.",
+          "cached_facts": "None."
+        },
+        "recipe": {
+          "id": "m3.collections.primitive-foundation.port.v1",
+          "version": "1",
+          "path": "m3/collections/recipe/manifest.json",
+          "sha256": "300d11ab42048a1293851b348b2284cb215a05bce93b038088dfddaff20b81f5",
+          "preconditions": [
+            "Foundation recipe preconditions."
+          ],
+          "rollback": "Foundation packet rollback."
+        },
+        "tests": [
+          {
+            "id": "m3-collections-foundation-jit",
+            "receipt": "m3/collections/evidence/local-jdk21-20261002.json"
+          },
+          {
+            "id": "m3-collections-foundation-interpreter",
+            "receipt": "m3/collections/evidence/local-jdk21-20261002.json"
+          },
+          {
+            "id": "m3-collections-source-recipe-unit",
+            "receipt": "m3/collections/evidence/local-jdk21-20261002.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0 Synexia adaptation; ArrayDeque is used only as a behavioral oracle for overlapping operations.",
+          "publication": "Selected owner only; no unrelated private source.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "3db24805d640c72ab1bd637d83561696d99561a0",
+          "target_revision": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "M3 names",
+            "PR #7675 ring atom use"
+          ],
+          "pending": [
+            "java.util.ArrayDeque replacement packet requires its own public API, iterator, serialization, null and VM/bootstrap gates."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "pinned develop owner with separately pinned ring-atom candidate",
+        "observation": "Randomized differential execution is evidence for overlapping primitive deque semantics only."
+      },
+      {
+        "id": "m3.collections.long-long-hash-map-route-a",
+        "kind": "specialization",
+        "status": "implemented-tested",
+        "reason": "Explicit primitive long-to-long open-address map adapted from the pinned Synexia owner and checked against HashMap<Long,Long> for overlapping key/value behavior; generic Map contracts are not claimed.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "3db24805d640c72ab1bd637d83561696d99561a0",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongLongHashMap.java",
+            "symbol": "com.synexia.common.collections.PackedLongLongHashMap",
+            "signatures": [
+              "PackedLongLongHashMap()",
+              "PackedLongLongHashMap(int)",
+              "boolean put(long,long)",
+              "boolean containsKey(long)",
+              "long getOrDefault(long,long)",
+              "long getOrThrow(long)",
+              "boolean replace(long,long,long)",
+              "long computeIfAbsent(long,LongUnaryOperator)",
+              "long addTo(long,long,long)",
+              "boolean remove(long)",
+              "boolean remove(long,long)",
+              "int filterInPlace(LongLongPredicate)",
+              "void forEach(LongLongConsumer)",
+              "void trimToSize()",
+              "long[] keysToArray()",
+              "long[] valuesToArray()"
+            ],
+            "sha256": "26cc78b9c4d3ba29d8f94dffee0b7f1ed488812176812d0f37957b7df99abe5d",
+            "git_blob_sha1": "09e57f1cafe467945b1c777d5eef0bbd7f08cf99",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "module": "m3/collections",
+            "path": "m3/collections/src/com/m3/collections/M3PackedLongLongHashMap.java",
+            "symbol": "com.m3.collections.M3PackedLongLongHashMap",
+            "signatures": [
+              "M3PackedLongLongHashMap()",
+              "M3PackedLongLongHashMap(int)",
+              "boolean put(long,long)",
+              "boolean containsKey(long)",
+              "long getOrDefault(long,long)",
+              "long getOrThrow(long)",
+              "boolean replace(long,long,long)",
+              "long computeIfAbsent(long,LongUnaryOperator)",
+              "long addTo(long,long,long)",
+              "boolean remove(long)",
+              "boolean remove(long,long)",
+              "int filterInPlace(M3LongLongPredicate)",
+              "void forEach(M3LongLongConsumer)",
+              "void trimToSize()",
+              "long[] keysToArray()",
+              "long[] valuesToArray()"
+            ],
+            "sha256": "d35450dfcf877ca3a2a093e33364f55435e3f1c673cfeaee0d37e2ee0b209a55",
+            "git_blob_sha1": "aededcb3715e540b6c102730ba1add2e8e9d0a4a",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/m3/collections-foundation-20261002"
+          }
+        ],
+        "owner": "com.m3.collections.M3PackedLongLongHashMap",
+        "identity": {
+          "namespace": "Primitive long key equality by numeric value inside one mutable map owner.",
+          "generation": "No object identity, weak-reference identity or portable row IDs are minted."
+        },
+        "contract": {
+          "differences": [
+            "Renamed/adapted into the M3 module and uses M3 primitive callback types.",
+            "It is not Map<Long,Long>: nulls, Map.Entry views, boxed boundaries, fail-fast iteration, serialization and subclass behavior are outside this API."
+          ],
+          "compatibility_obligations": [
+            "Preserve selected primitive put/get/remove/replace/compute/add/filter behavior, open-address collision correctness, tombstone compaction and independent output arrays.",
+            "Any future HashMap backend must separately preserve generic equality/null/view/callback/collision/serialization semantics."
+          ],
+          "public_surface": [
+            "M3PackedLongLongHashMap()",
+            "M3PackedLongLongHashMap(int)",
+            "boolean put(long,long)",
+            "boolean containsKey(long)",
+            "long getOrDefault(long,long)",
+            "long getOrThrow(long)",
+            "boolean replace(long,long,long)",
+            "long computeIfAbsent(long,LongUnaryOperator)",
+            "long addTo(long,long,long)",
+            "boolean remove(long)",
+            "boolean remove(long,long)",
+            "int filterInPlace(M3LongLongPredicate)",
+            "void forEach(M3LongLongConsumer)",
+            "void trimToSize()",
+            "long[] keysToArray()",
+            "long[] valuesToArray()"
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Explicit Route-A module; no java.base integration."
+        },
+        "dependencies": [
+          {
+            "id": "m3.collections.primitive-foundation",
+            "resolution": "resolved",
+            "reason": "Uses mapped primitive map contract, hash probe/state arithmetic and capacity helpers."
+          }
+        ],
+        "materialization": {
+          "admission": "Primitive keys/values are stored directly in long[] lanes with a byte[] state lane.",
+          "joins": "None.",
+          "outputs": "keysToArray/valuesToArray allocate independent primitive arrays in the same slot-scan order.",
+          "cached_facts": "No global cache."
+        },
+        "recipe": {
+          "id": "m3.collections.primitive-foundation.port.v1",
+          "version": "1",
+          "path": "m3/collections/recipe/manifest.json",
+          "sha256": "300d11ab42048a1293851b348b2284cb215a05bce93b038088dfddaff20b81f5",
+          "preconditions": [
+            "Foundation recipe preconditions."
+          ],
+          "rollback": "Foundation packet rollback."
+        },
+        "tests": [
+          {
+            "id": "m3-collections-foundation-jit",
+            "receipt": "m3/collections/evidence/local-jdk21-20261002.json"
+          },
+          {
+            "id": "m3-collections-foundation-interpreter",
+            "receipt": "m3/collections/evidence/local-jdk21-20261002.json"
+          },
+          {
+            "id": "m3-collections-source-recipe-unit",
+            "receipt": "m3/collections/evidence/local-jdk21-20261002.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0 Synexia adaptation; HashMap is used only as a behavioral oracle for overlapping operations.",
+          "publication": "Selected owner only; no unrelated private source.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "3db24805d640c72ab1bd637d83561696d99561a0",
+          "target_revision": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "M3 names",
+            "explicit primitive callback types"
+          ],
+          "pending": [
+            "java.util.HashMap replacement packet requires separate generic/null/view/iterator/serialization/adversarial-collision gates.",
+            "No concurrency/JMM claim."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "pinned develop owner",
+        "observation": "Randomized differential execution is evidence for overlapping primitive map semantics only; it is not a HashMap compatibility claim."
       }
     ]
   }
