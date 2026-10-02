@@ -23,6 +23,30 @@ Operational mapping reconciliation must support many-to-many relations:
 
 Use stable mapping IDs independent of filenames. Never reuse a retired ID for a different contract.
 
+## Atom and pattern lineage within the capability map
+
+The stable capability mapping remains the outer identity. Atomization and patternization add **sub-capability lineage**, not a second registry.
+
+For each sealed behavior/contract boundary, retain or reference:
+
+```text
+capability mapping ID
+  -> source atom DAG
+  -> pattern/version applications
+  -> deterministic recipe/adaptation receipts
+  -> target atom DAG
+  -> target symbols
+  -> exact evidence
+```
+
+The source and target atom DAGs are semantic decompositions, not file trees. If a dependency cycle cannot yet be separated safely, represent the strongly connected component as one compound atom. This keeps the published dependency graph deterministic and prevents an incomplete decomposition from masquerading as full atom coverage.
+
+Every required source atom must have one explicit disposition: mapped one-to-one, split across target atoms, consolidated with other compatible atoms, retained dependency, deferred/blocked, or not applicable with a reason. Target-only bootstrap, VM, GC, native or compatibility atoms remain visible even when they have no direct donor atom.
+
+A pattern record/version is reusable only when its semantic preconditions and required context match. It identifies refusal cases, transformation/adaptation semantics, recipe/patch identity, postconditions and evidence template. Reusing a pattern never transfers acceptance from a previous owner/candidate automatically.
+
+Until the operational mapping schema/tooling explicitly supports atom/pattern fields, keep these identities in reviewed receipts referenced from the existing capability record. Do not create a parallel atom registry or silently add status semantics.
+
 ## Record shape
 
 [migration-mapping.schema.json](migration-mapping.schema.json) is a proposed JSON Schema, not a deployed validator. [migration-mapping.example.json](migration-mapping.example.json) contains one explicitly illustrative record with null target commit and no evidence of implementation.
@@ -67,14 +91,14 @@ A source commit can affect multiple mappings. A target change can depend on seve
 
 1. Select a source comparison range from each mapping's last reviewed commit to the chosen new source pin. Do not diff against a moving develop tip during replay.
 2. Enumerate changed paths, renamed files, API signatures, image formats, native entry points, generated resources, tests and dependency versions.
-3. Resolve every changed source item to mapping IDs. Unmapped affected items become inventory work; never silently ignore them.
-4. Classify each change: bug fix, feature, performance-only change, contract change, format evolution, dependency/security update, test/oracle update or irrelevant to this target.
+3. Resolve every changed source item to mapping IDs and affected semantic atoms. Unmapped affected items/atoms become inventory work; never silently ignore them.
+4. Re-evaluate patternization for changed atoms: reuse a reviewed pattern/version only when its semantic preconditions still hold; otherwise version/refuse it or record a one-off. Then classify each change: bug fix, feature, performance-only change, contract change, format evolution, dependency/security update, test/oracle update or irrelevant to this target.
 5. Record target applicability and route A/B/C impact. “Not applicable” needs a reason and review, not an empty target.
 6. Check source prerequisites and known defects. A new upstream test is evidence to port and execute, not proof the target passes.
-7. Prepare a source-pinned recipe or reviewed manual port. Preserve target-specific changes; do not overwrite a whole file merely because its name maps.
+7. Prepare or improve the source-pinned reusable recipe/pattern implementation. Preserve target-specific changes; do not overwrite a whole file merely because its name maps. Record source-atom → pattern/version → target-atom edges and target-only adaptation atoms.
 8. Run drift, repeated-application, partial-state and rollback checks, then behavior/integration gates for the exact candidate.
 9. Attach the target commit, PR, generated output hashes, command/environment and results to the enhancement record.
-10. Advance lastReviewedSourceCommit only after every relevant change in the range has an explicit disposition. Deferred work remains visible.
+10. Advance lastReviewedSourceCommit only after every relevant change **and every affected required atom** in the range has an explicit disposition. Deferred work remains visible. Pattern coverage and mapping coverage remain separate from behavioral acceptance.
 
 Do not promise automatic ongoing monitoring merely because this procedure exists. Contributors maintain these records as part of future enhancement PRs; any bot, webhook or CI enforcement is separate implementation work.
 
