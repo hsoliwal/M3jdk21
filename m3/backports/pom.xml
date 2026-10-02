@@ -46,8 +46,10 @@
               <arguments>
                 <argument>-m</argument>
                 <argument>unittest</argument>
+                <argument>discover</argument>
                 <argument>-v</argument>
-                <argument>test_inventory.py</argument>
+                <argument>-p</argument>
+                <argument>test_*.py</argument>
               </arguments>
             </configuration>
           </execution>
