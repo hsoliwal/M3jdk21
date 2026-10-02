@@ -88,12 +88,83 @@ public final class MIndexStringInvariant {
         String repeated = joined1.repeat(2);
         eq("alphagammaalphagamma", repeated, "repeat contents");
         eq(JOINED, kind(storage(repeated)), "repeat remains MIndex tuple");
+        verifySegmentedArrays();
 
         System.out.println("M_INDEX_STRING_INVARIANT_PASS lexicon=" + expectLexicon
                 + " alphaKind=" + kind(alphaStorage1)
                 + " missKind=" + kind(missStorage1)
                 + " joinKind=" + kind(joinedStorage1)
                 + " jni=not-required");
+    }
+
+    private static void verifySegmentedArrays() throws Exception {
+        // String.join accepts CharSequence; each mutable char[] first becomes an immutable atom.
+        char[][] inputs = new char[127][];
+        String[] parts = new String[inputs.length];
+        int expectedLength = 0;
+        for (int index = 0; index < inputs.length; index++) {
+            inputs[index] = switch (index % 11) {
+                case 0 -> new char[0];
+                case 1 -> new char[] {'\ud83d'};
+                case 2 -> new char[] {'\ude00'};
+                case 3 -> new char[] {'\u0100'};
+                case 4 -> new char[] {'\u0000', 'X'};
+                default -> new char[] {(char) ('a' + index % 26)};
+            };
+            expectedLength += inputs[index].length;
+            parts[index] = new String(inputs[index]);
+        }
+        char[] expected = new char[expectedLength];
+        int position = 0;
+        for (char[] input : inputs) {
+            System.arraycopy(input, 0, expected, position, input.length);
+            position += input.length;
+        }
+        String joined = String.join("", parts);
+        Object joinedStorage = storage(joined);
+        eq(JOINED, kind(joinedStorage), "dynamic array join stays MIndex-backed");
+        same(joinedStorage, storage(String.join("", parts.clone())),
+                "equal dynamic array joins reuse their canonical tuple");
+        for (char[] input : inputs) {
+            Arrays.fill(input, '!');
+        }
+        check(Arrays.equals(expected, joined.toCharArray()), "mutating sources cannot change join");
+        char[] padded = new char[expectedLength + 6];
+        Arrays.fill(padded, '\uffff');
+        joined.getChars(0, expectedLength, padded, 3);
+        for (int index = 0; index < expectedLength; index++) {
+            check(expected[index] == padded[index + 3], "full getChars range " + index);
+        }
+        check(padded[0] == '\uffff' && padded[expectedLength + 3] == '\uffff',
+                "getChars preserves destination outside range");
+        joined.getChars(1, 1, padded, 2);
+        check(padded[2] == '\uffff', "empty getChars range");
+        int middle = expectedLength / 2;
+        char[] middleChars = new char[9];
+        joined.getChars(middle - 3, middle + 4, middleChars, 1);
+        check(Arrays.equals(Arrays.copyOfRange(middleChars, 1, 8),
+                Arrays.copyOfRange(expected, middle - 3, middle + 4)),
+                "getChars spanning atom boundaries");
+        String slice = joined.substring(1, expectedLength - 1);
+        check(Arrays.equals(Arrays.copyOfRange(expected, 1, expectedLength - 1),
+                slice.toCharArray()), "slice projects atom ranges");
+        // The bounded String.join path is not the only composition entry:
+        // repeated concat remains segmented beyond its 127-element threshold.
+        String extended = joined;
+        char[] extendedExpected = Arrays.copyOf(expected, expectedLength + 130);
+        for (int index = 0; index < 130; index++) {
+            char next = (char) ('A' + index % 26);
+            extendedExpected[expectedLength + index] = next;
+            extended = extended.concat(new String(new char[] {next}));
+        }
+        Object extendedStorage = storage(extended);
+        eq(JOINED, kind(extendedStorage), "more than 127 arrays stay segmented");
+        check(Arrays.equals(extendedExpected, extended.toCharArray()),
+                "extended dynamic array projection");
+        check(MATERIALIZED.get(extendedStorage) == null,
+                "extended projection does not allocate a byte cache");
+        check(MATERIALIZED.get(joinedStorage) == null,
+                "char[] projections leave the joined byte cache unallocated");
     }
 
     private static Object storage(String value) throws IllegalAccessException {
