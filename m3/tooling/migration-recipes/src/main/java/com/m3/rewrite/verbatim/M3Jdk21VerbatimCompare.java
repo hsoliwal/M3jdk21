@@ -5,6 +5,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,11 +34,21 @@ public final class M3Jdk21VerbatimCompare {
     private M3Jdk21VerbatimCompare() {}
 
     public static void main(String[] args) throws Exception {
+        int exit = run(args, System.out, System.err);
+        if (exit != 0) {
+            throw new IllegalStateException("M3 JDK21 verbatim gate failed with exit " + exit);
+        }
+    }
+
+    static int run(String[] args, PrintStream out, PrintStream err) throws IOException {
+        Objects.requireNonNull(args, "args");
+        Objects.requireNonNull(out, "out");
+        Objects.requireNonNull(err, "err");
         if (args.length != 4) {
-            System.err.println(
+            err.println(
                     "usage: M3Jdk21VerbatimCompare "
                             + "<baseline-root> <candidate-root> <approved-tsv> <output-tsv>");
-            System.exit(64);
+            return 64;
         }
 
         Summary summary = compare(
@@ -45,10 +56,8 @@ public final class M3Jdk21VerbatimCompare {
                 Path.of(args[1]),
                 Path.of(args[2]),
                 Path.of(args[3]));
-        System.out.println(summary);
-        if (summary.unapproved() != 0) {
-            System.exit(2);
-        }
+        out.println(summary);
+        return summary.unapproved() == 0 ? 0 : 2;
     }
 
     public static Summary compare(
