@@ -1,0 +1,17 @@
+field	value
+identity	JDK-8357439
+title	Add Bash Autocompletion for jcmd
+upstream_repository	https://github.com/openjdk/jdk
+upstream_commit	8549d1896054dd230ba3038c83bce23b10dcda22
+target_baseline	7a3f9c49d71a62c5ee2a398f4607d446dce518b8
+required_scope	MODULE
+recipe_class	com.m3.rewrite.backport.M3Jdk8357439JcmdCompletionRecipe
+recipe_crate	jdk-8357439-jcmd-completion
+target_1	make/modules/jdk.jcmd/Copy.gmk
+target_1_before	ABSENT
+target_1_after_sha256	1bbb24c3149246ccddf02cdb983a2a9661b66593f11a3b289d7b1d2b2392c301
+target_2	src/jdk.jcmd/share/conf/bash-completion/jcmd
+target_2_before	ABSENT
+target_2_after_sha256	53d3f723c159589c72d53dd2c9c4540af527a6d8a8a130ada5c12fe39bf3e644
+product_apply	NOT_APPLIED
+verification	CANDIDATE_UNVERIFIED
