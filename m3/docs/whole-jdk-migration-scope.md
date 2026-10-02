@@ -2,6 +2,20 @@
 
 Status: documentation-only planning contract, 2026-10-02. Inspected default branch: `master` at `45f546ff5bcb06a1b2604f14baf998785d98d9a1`. No implementation or operational mapping is added or promoted here.
 
+## Documentation topology and authority
+
+This file is the whole-program overview and inventory denominator. It is not a second operational mapping registry.
+
+- [../migration/docs/ARCHITECTURE.md](../migration/docs/ARCHITECTURE.md) contains the shared architecture and semantic laws.
+- [../migration/docs/COVERAGE.md](../migration/docs/COVERAGE.md) is the human-readable coverage framework; operational capability state remains in [name-mapping.json](name-mapping.json).
+- [../migration/docs/COLLECTIONS.md](../migration/docs/COLLECTIONS.md) is the deep collections replacement specification.
+- [../migration/docs/WORK_PACKETS.md](../migration/docs/WORK_PACKETS.md) decomposes the whole JDK into dependency-aware implementation packets.
+- [../migration/docs/ACCEPTANCE.md](../migration/docs/ACCEPTANCE.md) defines universal and subsystem promotion gates.
+- [../migration/docs/RESUME.md](../migration/docs/RESUME.md) is the durable contributor continuation guide.
+- [mindex-migration-handoff.md](mindex-migration-handoff.md), [shared-atom-concatenation.md](shared-atom-concatenation.md) and [../../doc/mindex-string-backing.md](../../doc/mindex-string-backing.md) remain the deep String/MIndex slice documents.
+
+Historical receipts, branch-specific manifests and dated evidence remain pinned historical records. They are not silently upgraded by this planning document.
+
 ## Scope decision
 
 The migration program covers **all JDK parts**, including the collections framework, concurrent collections and JVM/runtime integration. String, shared text atoms and MIndex-family ports are one vertical slice of that program, not its outer boundary. The goal is to replace redundant representations and operations with reviewed M3 owners/backends wherever compatibility and measured benefit justify the design.
