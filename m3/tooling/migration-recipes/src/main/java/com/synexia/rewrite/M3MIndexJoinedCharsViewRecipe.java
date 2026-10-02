@@ -12,6 +12,9 @@ import java.util.HexFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import com.m3.rewrite.scope.M3ContractMode;
+import com.m3.rewrite.scope.M3EditScope;
+import com.m3.rewrite.scope.M3ScopedRecipe;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.ScanningRecipe;
 import org.openrewrite.SourceFile;
@@ -23,7 +26,7 @@ import org.openrewrite.java.tree.J;
 
 /** Exact-source owner extension, not a compiler-lowering or semantic-equivalence oracle. */
 public final class M3MIndexJoinedCharsViewRecipe
-    extends ScanningRecipe<M3MIndexJoinedCharsViewRecipe.State> {
+    extends ScanningRecipe<M3MIndexJoinedCharsViewRecipe.State> implements M3ScopedRecipe {
   private static final String ROOT = "/com/synexia/rewrite/m3port/";
   private static final String OWNER = "MIndexJoinedChars.java";
   private static final String PREFIX = "src/main/java/com/synexia/indexstring/";
@@ -35,6 +38,8 @@ public final class M3MIndexJoinedCharsViewRecipe
     final Map<String, String> paths = new HashMap<>();
     final Properties plan = properties();
   }
+  @Override public M3EditScope requiredScope() { return M3EditScope.FILE; }
+  @Override public M3ContractMode contractMode() { return M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING; }
   @Override public String getDisplayName() { return "Extend the pinned retained IndexString view"; }
   @Override public String getDescription() {
     return "Require the exact six-file owner closure, add retained concat and direct copy, and refuse source/dependency drift.";
