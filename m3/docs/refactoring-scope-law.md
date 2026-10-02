@@ -17,10 +17,11 @@ recipe gains broader authority only when the transformation actually crosses a b
 The required edit authority is strictly ordered:
 
 1. FILE — private/file-local implementation only.
-2. PACKAGE — visibility or package participant relationships cross file boundaries.
-3. MODULE — module descriptor, exported package, service or module-owned contract changes.
-4. MULTI_MODULE — reactor/dependency edges or coordinated changes span modules.
-5. LIBRARY_API — public/protected API or library-level observable contract is intentionally in scope.
+2. VISIBILITY — a member/type visibility contract changes, even when only one source file is written.
+3. PACKAGE — package participant relationships or package-owned contracts cross file boundaries.
+4. MODULE — module descriptor, exported package, service or module-owned contract changes.
+5. MULTI_MODULE — reactor/dependency edges or coordinated changes span modules.
+6. LIBRARY — a library-wide externally consumed contract is intentionally in scope.
 
 Do not promote a FILE transformation merely because a broader scope is convenient. Do not execute a
 broader transformation under a narrower scope.
@@ -87,8 +88,8 @@ least MODULE.
 
 Changing Maven/reactor dependencies across two modules is MULTI_MODULE.
 
-Changing a public/protected Java API, serialization contract or externally consumed library contract
-is LIBRARY_API.
+Changing a visibility modifier is at least VISIBILITY; changing an externally consumed library
+contract is LIBRARY.
 
 ## Enforcement substrate
 
