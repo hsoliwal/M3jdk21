@@ -21,6 +21,8 @@
 
 package java.lang;
 
+import jdk.internal.util.M3StringFacts;
+
 /**
  * Immutable segmented backing for M3JDK {@link String} values.
  *
@@ -55,6 +57,8 @@ final class M3StringStorage {
      * publication and never returned to application code.
      */
     private volatile byte[] materialized;
+    private volatile long bitSignal64;
+    private volatile int characterFlags = -1;
 
     private M3StringStorage(String[] segments, int[] offsets, int[] ends,
                             int length, byte coder) {
@@ -162,6 +166,31 @@ final class M3StringStorage {
 
     byte coder() {
         return coder;
+    }
+
+    long bitSignal64() {
+        long signal = bitSignal64;
+        if (signal != 0L) {
+            return signal;
+        }
+        for (int index = 0; index < length; index++) {
+            signal = M3StringFacts.addSignal(signal, charAt(index));
+        }
+        bitSignal64 = signal;
+        return signal;
+    }
+
+    int characterFlags() {
+        int flags = characterFlags;
+        if (flags >= 0) {
+            return flags;
+        }
+        flags = M3StringFacts.initialFlags(length);
+        for (int index = 0; index < length; index++) {
+            flags = M3StringFacts.addFlags(flags, charAt(index));
+        }
+        characterFlags = flags;
+        return flags;
     }
 
     int segmentCount() {
