@@ -63,11 +63,11 @@ Use the existing target documents as one connected specification rather than cre
 - m3/docs/whole-jdk-subsystem-matrix.md — canonical module/source-root planning dispositions
 - m3/migration/docs/ARCHITECTURE.md — shared architecture and compatibility laws
 - m3/docs/whole-jdk-collections-replacement.md — canonical detailed collection replacement specification
-- m3/migration/docs/COLLECTIONS.md — collection migration execution overlay, not a second family matrix
+- m3/docs/whole-jdk-work-packets.md — ten-pass dependency-aware implementation plan and work-packet/evidence schema
+- m3/docs/whole-jdk-worked-examples.md — concrete semantic examples and counterexamples
 - m3/migration/docs/COVERAGE.md — human-readable migration/evidence projection
-- m3/migration/docs/WORK_PACKETS.md — dependency-aware implementation packets
-- m3/migration/docs/ACCEPTANCE.md — promotion gates
-- m3/migration/docs/RESUME.md — durable continuation guide
+- m3/migration/docs/ACCEPTANCE.md — promotion gates and retained historical evidence
+- m3/docs/whole-jdk-resume.md — durable whole-JDK continuation guide
 - m3/docs/name-mapping.json — operational capability/mapping authority
 - m3/docs/mindex-migration-handoff.md and the existing String documents — deep retained slice specifications
 
