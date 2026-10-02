@@ -1,0 +1,54 @@
+# Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+name: M3 JDK21 verbatim oracle
+on:
+  pull_request:
+    paths:
+      - 'src/**'
+      - 'test/**'
+      - 'make/**'
+      - 'm3/tooling/baseline/**'
+      - 'm3/docs/jdk21-verbatim-baseline.md'
+      - '.github/workflows/m3-jdk21-verbatim.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verbatim-oracle:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - name: Checkout M3JDK21 candidate
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          path: candidate
+
+      - name: Prove comparator
+        run: python3 candidate/m3/tooling/baseline/test_compare_jdk21.py
+
+      - name: Checkout pinned OpenJDK 21 GA oracle
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          repository: openjdk/jdk
+          ref: 890adb6410dab4606a4f26a942aed02fb2f55387
+          persist-credentials: false
+          path: baseline
+          fetch-depth: 1
+
+      - name: Generate verbatim file and whole-tree proof
+        run: |
+          mkdir -p evidence
+          python3 candidate/m3/tooling/baseline/compare_jdk21.py \
+            --baseline baseline \
+            --current candidate \
+            --output evidence/jdk21-verbatim.tsv \
+            | tee evidence/jdk21-verbatim-summary.txt
+          sha256sum evidence/jdk21-verbatim.tsv > evidence/jdk21-verbatim.tsv.sha256
+
+      - name: Upload verbatim proof
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-jdk21-verbatim-oracle
+          path: evidence/
+          if-no-files-found: error
