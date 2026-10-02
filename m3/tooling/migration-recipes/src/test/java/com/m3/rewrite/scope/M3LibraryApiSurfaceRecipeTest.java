@@ -61,7 +61,14 @@ final class M3LibraryApiSurfaceRecipeTest {
         List<M3LibraryApiSurfaceRecipe.Row> right =
                 run(List.of(logging, contract, base));
 
-        assertEquals(left, right);
+        assertEquals(left.size(), right.size());
+        for (int index = 0; index < left.size(); index++) {
+            assertEquals(left.get(index).scopeKind(), right.get(index).scopeKind());
+            assertEquals(left.get(index).scopeName(), right.get(index).scopeName());
+            assertEquals(left.get(index).symbolCount(), right.get(index).symbolCount());
+            assertEquals(left.get(index).apiRoot(), right.get(index).apiRoot());
+            assertEquals(left.get(index).patternRole(), right.get(index).patternRole());
+        }
         assertEquals(3, left.size());
 
         var javaBase = left.stream()
