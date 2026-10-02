@@ -1,6 +1,16 @@
 name: M3 OpenRewrite recipe proof
 
 on:
+  push:
+    branches:
+      - master
+      - "m3/**"
+    paths:
+      - "m3/tooling/migration-recipes/**"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - "m3/tooling/emit-java21-convergence-proof.py"
+      - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
+      - ".github/workflows/m3-tooling-recipes.yml"
   pull_request:
     paths:
       - "m3/tooling/migration-recipes/**"
@@ -18,7 +28,7 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 20
     steps:
-      - name: Fetch exact PR head without reusable actions
+      - name: Fetch exact workflow head without reusable actions
         shell: bash
         env:
           HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
