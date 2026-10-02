@@ -22,9 +22,35 @@ Source leaves can be inspected and candidate transformations produced in paralle
 
 ## 2. Work-packet contract
 
-Every implementation packet must name an accountable owner, exact source and target pins, existing semantic owners, prerequisites, affected capability IDs, actual symbols/files, route, public/native/format contracts, recipe and provenance, tests, measurement cases, rollback and unresolved decisions. New named reviewers are not assigned by this document; assignment remains open until recorded by the project. Packet labels below are documentary, not new registry IDs.
+Every implementation packet must name an accountable owner, exact source and target pins, existing semantic owners, prerequisites, affected capability IDs, sealed contract boundaries, source/target atom-DAG roots, pattern IDs/versions, source-atom → pattern/recipe → target-atom edges, actual symbols/files, route, public/native/format contracts, recipe and provenance, tests, measurement cases, rollback and unresolved decisions. New named reviewers are not assigned by this document; assignment remains open until recorded by the project. Packet labels below are documentary, not new registry IDs.
 
 A packet can investigate alternatives without enabling them. Promotion requires the combined dependency closure, including views and runtime consumers. Keep candidate generation separate from accepted canonical changes. Preserve the original implementation where no proposed candidate passes the gates.
+
+### Atom → pattern → mapping packet invariant
+
+Every packet seals one behavior/contract boundary before transformation and carries three distinct completeness dimensions:
+
+1. **Atom coverage** — every required source behavior/storage/ABI/test atom is inventoried, its typed dependencies are known, and unresolved cycles are represented as compound atoms/SCCs so the published atom graph is a deterministic DAG.
+2. **Pattern coverage** — every recurring transformation is bound to a reviewed pattern ID/version with semantic preconditions, required context, refusal cases, deterministic recipe/patch identity, postconditions and evidence template, or is explicitly justified as a one-off.
+3. **Mapping coverage** — every required source atom has an explicit many-to-many path through pattern/adaptation to target atom(s), target symbol(s) and exact candidate evidence under the stable capability mapping ID.
+
+The required lineage is:
+
+```text
+capability ID
+  -> sealed contract
+  -> source atom DAG
+  -> pattern/version
+  -> recipe/adaptation receipt
+  -> target atom DAG
+  -> target symbol(s)
+  -> exact evidence
+```
+
+Hashes, structural/logic fingerprints and similarity signals may discover candidate atoms/patterns; they do not establish semantic equivalence. Independent atom discovery, candidate generation and focused testing may run in parallel under exclusive ownership. Promotion is serial at the sealed boundary and is blocked by any unmapped required atom, unresolved pattern conflict, stale recipe precondition or failed target evidence.
+
+Repeated manual edits are a patternization failure signal. Improve the reusable Maven/OpenRewrite recipe for appropriate Java/source work, or the equivalent source-pinned native/VM/build transform, rather than repeating per-file edits.
+
 
 | Packet | Dependencies and scope | Deliverable and decisive acceptance |
 |---|---|---|
@@ -67,17 +93,17 @@ The existing mapping-lifecycle addendum records an important concrete gap: sourc
 
 ### Required field semantics
 
-Extend the existing schema through a separate tested implementation change only where necessary. This documentation does not add these as operative JSON fields. Records must be able to express stable capability identity; source and target repository/commit/blob/raw-content identities; fully qualified declarations; ownership and namespace; dependencies and consumers; API/ABI/format/serialization contracts; route and adaptation; recipe/version/preconditions; provenance/license review; acceptance requirements and exact evidence; unresolved conflicts; and last fully reviewed/synchronized source revision.
+Extend the existing schema through a separate tested implementation change only where necessary. This documentation does not add these as operative JSON fields. Records must be able to express stable capability identity; source and target repository/commit/blob/raw-content identities; fully qualified declarations; ownership and namespace; sealed contract boundary; source/target atom-DAG identities or referenced receipts; pattern IDs/versions and coverage; explicit source-atom → pattern/recipe → target-atom lineage; dependencies and consumers; API/ABI/format/serialization contracts; route and adaptation; recipe/version/preconditions/refusal cases; provenance/license review; acceptance requirements and exact evidence; unresolved conflicts; and last fully reviewed/synchronized source revision.
 
 Keep at least these independent evidence questions: was source inspected; was a port produced; is that code retained in the selected target tree; was behavior verified for this owner/route/configuration; was performance measured; and was promotion accepted? A merged PR, matching filename or equal structural signal does not answer them all. Historical receipts remain pinned and cannot move automatically to a different owner, renamed facade, combined tree or changed dependency.
 
 ### Enhancement replay procedure
 
 1. Freeze `S0`, the mapping's last reviewed source, and `S1`, the chosen new source revision. Freeze `T0`, the recorded target adaptation, and `T1`, the actual candidate target baseline. Pin the recipe, tools, options and dependency versions independently.
-2. Diff source and target separately. Detect added/changed/deleted/renamed paths, declarations, resources, generated inputs, native entries, formats, tests and dependencies. Resolve all affected items to source obligations and capability IDs; unclassified items become visible work.
-3. Distinguish compatible enhancement, source bug fix, performance-only change, API/format evolution, target-only improvement, conflict, deferred work and non-applicability with a reason. Do not treat a rename as proof of unchanged semantics or a disappearing discovery row as proof of deleted source.
+2. Diff source and target separately. Detect added/changed/deleted/renamed paths, declarations, resources, generated inputs, native entries, formats, tests and dependencies. Resolve all affected items to source obligations, capability IDs and affected semantic atoms; unclassified items/atoms become visible work.
+3. Re-evaluate patternization for the changed atoms. Reuse an existing pattern/version only when its semantic preconditions still hold; otherwise version/refuse the pattern or record a one-off. Then distinguish compatible enhancement, source bug fix, performance-only change, API/format evolution, target-only improvement, conflict, deferred work and non-applicability with a reason. Do not treat a rename as proof of unchanged semantics or a disappearing discovery row as proof of deleted source.
 4. Compute the affected dependency/runtime-consumer closure. Compare the target's current hashes and semantic adaptation with `T0`; preserve target-only fixes. A whole-file donor postimage must refuse unexpected target drift.
-5. Reuse/improve the appropriate recipe, tests and provenance decision. Perform exact confirmation after structural/logic hashes or similarity signals suggest a match. Parallel candidate generation does not authorize parallel conflicting publication.
+5. Reuse/improve the appropriate pattern/recipe, tests and provenance decision. Record the resulting source-atom → pattern/version → target-atom edges and preserve target-only atoms/adaptations. Perform exact confirmation after structural/logic hashes or similarity signals suggest a match. Parallel candidate generation does not authorize parallel conflicting publication.
 6. Test the exact combined candidate: deterministic replay, idempotence, drift/refusal, partial/mixed state, contract tests, relevant module/build/runtime gates and rollback. No borrowed receipt from another branch or donor head.
 7. Update mappings and evidence with the implementation change. Advance the synchronized revision only when every relevant source delta has a disposition. Deferred/blocked obligations remain visible. Preserve retired IDs, aliases and tombstones with reasons.
 8. Review reverse/backport work independently. A forward adaptation is not automatically valid in the reverse direction, and a historical rollback does not delete unrelated later changes.
@@ -95,7 +121,7 @@ Prefer the existing Maven/OpenRewrite recipe machinery for appropriate Java tran
 | Gate | Evidence required before the corresponding promotion |
 |---|---|
 | G0 Scope and provenance | Complete affected inventory, owner, dependencies, raw source pin, applicable notices/license review and authorized publication boundary. |
-| G1 Mapping and baseline | Stable IDs, source/target adaptations and exact candidate/tree identified; conflicts and unresolved consumers visible. |
+| G1 Atom/pattern/mapping closure | Stable capability IDs; sealed boundary; complete required atom dispositions; pattern IDs/versions with preconditions/refusals; source→target atom lineage; source/target adaptations and exact candidate/tree identified; conflicts and unresolved consumers visible. |
 | G2 Deterministic transformation | Recipe/tool/version/options, guarded preimages, absent-before policy for additions, exact outputs, idempotence, drift refusal and owned rollback. |
 | G3 Build/static quality | Applicable formatting, source compile, attribution, module/native build, static checks and existing project checks on the candidate. Stubs/extraction are separately labelled. |
 | G4 Public behavior | Differential API and state-machine tests, null/type/bounds/overflow, identity, views, callback effects, Unicode/order/comparator/collision and serialization/subclass/reflection support. |
