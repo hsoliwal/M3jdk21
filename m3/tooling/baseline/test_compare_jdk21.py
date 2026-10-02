@@ -36,6 +36,9 @@ class CompareJdk21Test(unittest.TestCase):
             self.assertEqual("MODIFIED", rows["changed.txt"][3])
             self.assertEqual("ADDED", rows["added.txt"][3])
             self.assertEqual("DELETED", rows["deleted.txt"][3])
+            ordered = [rows[key] for key in sorted(rows)]
+            self.assertEqual(MODULE.tree_hash(ordered, 1), MODULE.tree_hash(ordered, 1))
+            self.assertNotEqual(MODULE.tree_hash(ordered, 1), MODULE.tree_hash(ordered, 2))
 
     def test_m3_and_git_are_excluded_from_baseline_oracle(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
