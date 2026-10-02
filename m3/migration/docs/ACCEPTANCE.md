@@ -21,6 +21,18 @@ Every applicable replacement requires:
 
 A benchmark gain cannot waive a semantic failure. A semantic pass without measurement cannot support a speed/memory claim.
 
+## Atom/pattern/mapping promotion gate
+
+Before any capability can be promoted, its selected sealed contract boundary must satisfy all three coverage gates:
+
+1. **Atom coverage** — every required semantic atom has an owner, exact source/target location, dependency disposition and test obligation. Unresolved cycles are represented as compound atoms/SCCs rather than omitted.
+2. **Pattern coverage** — every repeated transformation is bound to an accepted pattern/version with semantic preconditions, refusal cases, deterministic recipe/patch identity and evidence template, or is explicitly justified as a one-off.
+3. **Mapping coverage** — every required source atom has an explicit many-to-many path through pattern/adaptation to target atom(s), target symbol(s) and exact candidate evidence under the existing capability mapping ID.
+
+These are separate from runtime acceptance. Closing atom/pattern/mapping coverage proves traceability and completeness of the selected migration boundary; it does not prove semantic compatibility until the applicable differential, JMM, VM/native, serialization, build and performance gates pass.
+
+Independent atoms may be analyzed and tested in parallel. Promotion is serial: one unmapped required atom, unresolved pattern conflict, stale recipe precondition or failed target-atom gate blocks the containing capability.
+
 ## Subsystem gate matrix
 
 | Subsystem | Additional mandatory gates before promotion |
