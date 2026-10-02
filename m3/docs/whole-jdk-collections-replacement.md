@@ -43,17 +43,26 @@ The inspected Synexia estate has already started decomposing collection mechanic
 
 | Source lineage | State at inspection | Mechanical responsibility | JDK boundary that remains separate |
 | --- | --- | --- | --- |
-| [#7653](https://github.com/hsoliwal/com.synexia/pull/7653) `PackedFlatArrays` | merged | checked primitive growth and logical ring copy | concurrent rings, segmented/native storage and generic JDK semantics |
-| [#7658](https://github.com/hsoliwal/com.synexia/pull/7658) `PrimitiveScalarCodec` | merged | eight-primitive scalar/raw-bit encoding | generic boxing/null/identity and concurrent owner semantics |
-| [#7675](https://github.com/hsoliwal/com.synexia/pull/7675) `PackedRingAtoms` | draft | ring/deque index arithmetic | concurrent sequencing, blocking and publication |
-| [#7679](https://github.com/hsoliwal/com.synexia/pull/7679) `PackedHeapAtoms` | draft | binary-heap index geometry | comparator behavior, ties, payload movement and publication |
-| [#7687](https://github.com/hsoliwal/com.synexia/pull/7687) probe atoms | draft | quadratic, Robin-Hood and Swiss probe/control geometry | payload mutation, deletion, views and public map/set contracts |
-| [#7695](https://github.com/hsoliwal/com.synexia/pull/7695) `PackedSlotLinkAtoms` | draft | stable-slot predecessor/successor mechanics | Java 21 sequenced/reversed, modCount, null and subclass behavior |
-| [#7698](https://github.com/hsoliwal/com.synexia/pull/7698) `PackedBitAtoms` | draft | word/mask/capacity geometry | growable, concurrent, bounded and segmented owner semantics |
-| [#7702](https://github.com/hsoliwal/com.synexia/pull/7702) `PackedSortedAtoms` | draft | search/navigation, stable shifts and sorted dedup/merge | Comparator/object collections and paged/gapped layouts |
-| [#7701](https://github.com/hsoliwal/com.synexia/pull/7701) adaptive reuse | draft | exact-bound and natural-run reuse in existing primitive owners | focused source tests/measurements are not full reactor, JNI parity or JDK acceptance |
+| [#7653](https://github.com/hsoliwal/com.synexia/pull/7653) `PackedFlatArrays` | merged; base `develop` | checked primitive growth and logical ring copy | concurrent rings, segmented/native storage and generic JDK semantics |
+| [#7658](https://github.com/hsoliwal/com.synexia/pull/7658) `PrimitiveScalarCodec` | merged; base `develop` | eight-primitive scalar/raw-bit encoding | generic boxing/null/identity and concurrent owner semantics |
+| [#7662](https://github.com/hsoliwal/com.synexia/pull/7662) ring-address atom | merged on stacked feature base | primitive ring addressing | default-branch retention must be verified separately; no generic/concurrent semantics inferred |
+| [#7667](https://github.com/hsoliwal/com.synexia/pull/7667) stateful hash-probe atom | merged on stacked feature base | stateful linear hash probing | default-branch retention must be verified separately; equality/deletion/views remain owner-level semantics |
+| [#7675](https://github.com/hsoliwal/com.synexia/pull/7675) `PackedRingAtoms` | draft/open | ring/deque index arithmetic | concurrent sequencing, blocking and publication |
+| [#7679](https://github.com/hsoliwal/com.synexia/pull/7679) `PackedHeapAtoms` | draft/open | binary-heap index geometry | comparator behavior, ties, payload movement and publication |
+| [#7687](https://github.com/hsoliwal/com.synexia/pull/7687) probe atoms | draft/open | quadratic, Robin-Hood and Swiss probe/control geometry | payload mutation, deletion, views and public map/set contracts |
+| [#7695](https://github.com/hsoliwal/com.synexia/pull/7695) `PackedSlotLinkAtoms` | draft/open | stable-slot predecessor/successor mechanics | Java 21 sequenced/reversed, modCount, null and subclass behavior |
+| [#7698](https://github.com/hsoliwal/com.synexia/pull/7698) `PackedBitAtoms` | draft/open | word/mask/capacity geometry | growable, concurrent, bounded and segmented owner semantics |
+| [#7700](https://github.com/hsoliwal/com.synexia/pull/7700) concurrent BooleanQueue repair | draft/open | primitive concurrent adapter defect repair | evidence that adapter correctness is independent of the underlying primitive lane; no broad concurrency claim |
+| [#7701](https://github.com/hsoliwal/com.synexia/pull/7701) adaptive reuse | draft/open | exact-bound and natural-run reuse in existing primitive owners | focused source tests/measurements are not full reactor, JNI parity or JDK acceptance |
+| [#7702](https://github.com/hsoliwal/com.synexia/pull/7702) `PackedSortedAtoms` | draft/open | search/navigation, stable shifts and sorted dedup/merge | Comparator/object collections and paged/gapped layouts |
+| [#7705](https://github.com/hsoliwal/com.synexia/pull/7705) segmented bulk/CAS/stream work | draft/open | segmented bulk operations, concurrent int/long lanes, primitive streams and JNI/native lane support | must reconcile JMM/linearization, reference-lane GC reachability, JNI ownership and recipe evidence before any JDK concurrency reuse |
+| [#7707](https://github.com/hsoliwal/com.synexia/pull/7707) paged-sorted atoms | draft/open; stacked on #7702 | paged sorted geometry | comparator/range/view semantics remain outside the mechanical atom |
+| [#7709](https://github.com/hsoliwal/com.synexia/pull/7709) sparse sorted-block atoms | draft/open; stacked on #7702 | sparse sorted block geometry | occupancy/layout choice must not change sorted-map/set contracts |
+| [#7713](https://github.com/hsoliwal/com.synexia/pull/7713) inclusive-range atoms | draft/open | inclusive range mechanics | JDK Navigable inclusive/exclusive endpoints and live-view behavior require independent adaptation |
 
 Selection still requires the exact source pin, owner/dependency closure, license review, bootstrap-safe extraction, target mapping, differential contract tests and route-specific evidence. Keep semantic owners separate even when they share a mechanical atom.
+
+GitHub merge state is not default-branch retention proof. In particular, #7662 and #7667 were merged against stacked feature bases rather than directly against `develop`; contributors must inspect the selected source tree before treating those atoms as retained. The open draft rows above are based on or stacked from the inspected `develop` line and remain branch-scoped candidates. Their test/evidence files, where present, stay attached to those exact heads and are not JDK receipts.
 
 ## 3. Shared compatibility checklist
 
