@@ -48,6 +48,9 @@
               <include>com/m3/rewrite/pass/*</include>
               <include>com/m3/rewrite/dag/*</include>
               <include>com/m3/rewrite/verbatim/*</include>
+              <include>com/m3/rewrite/backport/*</include>
+              <include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe*</include>
+              <include>com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe*</include>
             </includes>
             <rules>
               <rule>
