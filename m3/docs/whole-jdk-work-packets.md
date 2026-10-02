@@ -1,6 +1,6 @@
 # Whole-JDK M3 work packets, ten-pass migration and evidence plan
 
-Status: **documentation-only whole-program planning contract**. This file owns the ten-pass programme, subsystem packet schema and evidence model; it does not implement a JDK change or advance operational migration status. [../migration/docs/WORK_PACKETS.md](../migration/docs/WORK_PACKETS.md) is the bounded migration execution overlay for the retained tranche and must remain consistent with this programme. Operational capability state remains in the existing mapping authority.
+Status: **documentation-only whole-program execution plan**. This file owns the ten-pass programme, subsystem packet schema and evidence model; it does not implement a JDK change or advance operational migration status. Operational capability state remains in the existing mapping authority.
 
 Target planning pin: `hsoliwal/M3jdk21@45f546ff5bcb06a1b2604f14baf998785d98d9a1`.
 Synexia owner-inspection pin: `hsoliwal/com.synexia@3db24805d640c72ab1bd637d83561696d99561a0`.
