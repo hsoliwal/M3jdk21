@@ -14,6 +14,7 @@ import com.m3.rewrite.donor.M3PinnedDonorInlineRecipe;
 import com.m3.rewrite.index.M3SemanticIndexM3DbBridgeRecipe;
 import com.m3.rewrite.index.M3SemanticIndexRecipe;
 import com.m3.rewrite.index.M3TypeRelationRecipe;
+import com.m3.rewrite.index.M3WholeSemanticHashRecipe;
 import com.m3.rewrite.pass.M3MultiPassPlannerRecipe;
 import com.m3.rewrite.pass.M3VerificationPlanRecipe;
 import com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe;
@@ -25,7 +26,7 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(16, M3RecipeScopeRegistry.size());
+        assertEquals(17, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(InstallIndexStringCompatibility.class.getName()));
@@ -38,6 +39,7 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3PackageBoundaryRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3LibraryApiSurfaceRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3TypeRelationRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3WholeSemanticHashRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SemanticIndexM3DbBridgeRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3RecipeDagPlannerRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3MultiPassPlannerRecipe.class.getName()));
@@ -94,6 +96,10 @@ final class M3RecipeScopeDeclarationTest {
         assertEquals(M3EditScope.MODULE, typeRelationPolicy.resolve(List.of("src/main/java/a/A.java")));
         assertFalse(typeRelationPolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
 
+        var wholeHashPolicy = M3RecipeScopeRegistry.require(M3WholeSemanticHashRecipe.class);
+        assertEquals(M3EditScope.MULTI_MODULE, wholeHashPolicy.resolve(List.of("src/main/java/a/A.java")));
+        assertFalse(wholeHashPolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
+
         var semanticDbPolicy = M3RecipeScopeRegistry.require(M3SemanticIndexM3DbBridgeRecipe.class);
         assertEquals(M3EditScope.MULTI_MODULE, semanticDbPolicy.resolve(List.of("src/main/java/a/A.java")));
         assertFalse(semanticDbPolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
@@ -141,6 +147,7 @@ final class M3RecipeScopeDeclarationTest {
                 M3PackageBoundaryRecipe.class,
                 M3LibraryApiSurfaceRecipe.class,
                 M3TypeRelationRecipe.class,
+                M3WholeSemanticHashRecipe.class,
                 M3SemanticIndexM3DbBridgeRecipe.class,
                 M3RecipeDagPlannerRecipe.class,
                 M3MultiPassPlannerRecipe.class,
