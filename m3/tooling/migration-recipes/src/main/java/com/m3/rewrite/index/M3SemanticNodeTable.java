@@ -24,8 +24,10 @@ public final class M3SemanticNodeTable extends DataTable<M3SemanticNodeTable.Row
         private final String semanticKey;
         @Column(displayName = "Source path", description = "Source path when the node has a direct source owner.")
         private final String sourcePath;
-        @Column(displayName = "Symbol", description = "Human-readable symbol or semantic role.")
+        @Column(displayName = "Symbol", description = "Human-readable symbol.")
         private final String symbol;
+        @Column(displayName = "Pattern role", description = "First-class M3/IOP participant role.")
+        private final String patternRole;
         @Column(displayName = "Exact SHA-256", description = "Exact UTF-16 content/preimage fingerprint.")
         private final String exactSha256;
         @Column(displayName = "Structural SHA-256", description = "Normalized structural fingerprint.")
@@ -47,12 +49,14 @@ public final class M3SemanticNodeTable extends DataTable<M3SemanticNodeTable.Row
                 String semanticKey,
                 String sourcePath,
                 String symbol,
+                String patternRole,
                 M3IndexDbSemanticFingerprint fingerprint) {
             this.nodeId = nodeId;
             this.kind = kind;
             this.semanticKey = semanticKey;
             this.sourcePath = sourcePath;
             this.symbol = symbol;
+            this.patternRole = patternRole;
             this.exactSha256 = fingerprint.exactSha256();
             this.structuralSha256 = fingerprint.structuralSha256();
             this.logicSha256 = fingerprint.logicSha256();
@@ -67,6 +71,7 @@ public final class M3SemanticNodeTable extends DataTable<M3SemanticNodeTable.Row
         public String semanticKey() { return semanticKey; }
         public String sourcePath() { return sourcePath; }
         public String symbol() { return symbol; }
+        public String patternRole() { return patternRole; }
         public String exactSha256() { return exactSha256; }
         public String structuralSha256() { return structuralSha256; }
         public String logicSha256() { return logicSha256; }
