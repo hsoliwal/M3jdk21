@@ -10,9 +10,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Collection;
 import java.util.HexFormat;
 import java.util.List;
-import com.m3.rewrite.scope.M3ContractMode;
-import com.m3.rewrite.scope.M3EditScope;
-import com.m3.rewrite.scope.M3ScopedRecipe;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.ScanningRecipe;
 import org.openrewrite.SourceFile;
@@ -21,7 +18,7 @@ import org.openrewrite.TreeVisitor;
 import org.openrewrite.text.PlainText;
 
 /** Exact new-file JNI candidate installer. Existing divergent C is never replaced. */
-public final class M3SegmentedLaneNativeRecipe extends ScanningRecipe<M3SegmentedLaneNativeRecipe.State> implements M3ScopedRecipe {
+public final class M3SegmentedLaneNativeRecipe extends ScanningRecipe<M3SegmentedLaneNativeRecipe.State> {
     public static final String TARGET = "src/main/native/collections/segmented_bit_lane.c";
     private static final String RESOURCE = "/com/synexia/rewrite/segmented-lane-native/segmented_bit_lane.c.txt";
     private static final String SHA = "4ff7fb4557c58cc59de7fbb24498f3df2a197083a5cd467670dc24b9441f1210";
@@ -32,9 +29,6 @@ public final class M3SegmentedLaneNativeRecipe extends ScanningRecipe<M3Segmente
         private boolean conflict;
         private State(String text) { this.text = text; }
     }
-
-    @Override public M3EditScope requiredScope() { return M3EditScope.FILE; }
-    @Override public M3ContractMode contractMode() { return M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING; }
     @Override public String getDisplayName() { return "M3 segmented bitmap JNI candidate"; }
     @Override public String getDescription() {
         return "Adds a sealed JNI bitmap counter only when its target is absent or already identical.";
