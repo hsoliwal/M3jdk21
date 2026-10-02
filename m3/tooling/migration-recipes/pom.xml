@@ -16,7 +16,12 @@
       <configuration><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs></configuration>
     </plugin>
     <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version><configuration><useModulePath>false</useModulePath><failIfNoTests>true</failIfNoTests></configuration></plugin>
-    <plugin><groupId>org.openrewrite.maven</groupId><artifactId>rewrite-maven-plugin</artifactId><version>5.23.1</version></plugin>
+    <plugin><groupId>org.openrewrite.maven</groupId><artifactId>rewrite-maven-plugin</artifactId><version>5.23.1</version>
+      <configuration>
+        <exportDatatables>true</exportDatatables>
+        <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
+      </configuration>
+    </plugin>
     <plugin>
       <groupId>org.jacoco</groupId>
       <artifactId>jacoco-maven-plugin</artifactId>
