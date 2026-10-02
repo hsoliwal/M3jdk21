@@ -1,6 +1,16 @@
 name: M3 OpenRewrite recipe proof
 
 on:
+  push:
+    branches:
+      - master
+      - "m3/**"
+    paths:
+      - "m3/tooling/migration-recipes/**"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - "m3/tooling/openrewrite-pipeline.tsv"
+      - "m3/tooling/OPENREWRITE_PIPELINE.md"
+      - ".github/workflows/m3-tooling-recipes.yml"
   pull_request:
     paths:
       - "m3/tooling/migration-recipes/**"
