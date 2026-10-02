@@ -18,10 +18,6 @@ import java.util.HexFormat;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import com.m3.rewrite.scope.M3ContractMode;
-import com.m3.rewrite.scope.M3EditScope;
-import com.m3.rewrite.scope.M3ScopeInference;
-import com.m3.rewrite.scope.M3ScopedRecipe;
 import org.openrewrite.ExecutionContext;
 import org.openrewrite.Option;
 import org.openrewrite.Parser;
@@ -42,7 +38,7 @@ import org.openrewrite.java.tree.J;
  * syntax; the sealed M3 contract, coverage, compiler, test and runtime gates remain authoritative.
  */
 public final class M3HashPinnedJavaSnapshotRecipe
-        extends ScanningRecipe<M3HashPinnedJavaSnapshotRecipe.Inventory> implements M3ScopedRecipe {
+        extends ScanningRecipe<M3HashPinnedJavaSnapshotRecipe.Inventory> {
     private static final String RESOURCE_ROOT = "/com/synexia/rewrite/hash-pinned-java/";
 
     @Option(
@@ -72,13 +68,6 @@ public final class M3HashPinnedJavaSnapshotRecipe
         this.crateName = crateName;
     }
 
-    @Override public M3EditScope requiredScope() {
-        return M3ScopeInference.forJavaPaths(targets().stream().map(Target::path).toList());
-    }
-
-    @Override public M3ContractMode contractMode() {
-        return M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING;
-    }
 
     @Override public String getDisplayName() {
         return "M3 hash-pinned Java snapshot candidate";
