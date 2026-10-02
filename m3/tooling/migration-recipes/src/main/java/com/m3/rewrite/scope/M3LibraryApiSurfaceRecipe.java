@@ -5,7 +5,6 @@ import com.m3.indexdb.M3IndexDbSemanticFingerprint;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,13 +18,14 @@ import org.openrewrite.SourceFile;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.tree.J;
+import org.openrewrite.java.tree.JavaType;
 
 /**
  * LIBRARY_API-scope non-mutating API surface inventory.
  *
- * <p>Only public/protected declarations whose direct owning type is itself public/protected are
- * admitted. Package/private owners keep their members out of the exported surface. The result is a
- * deterministic module and library API root used before any exported-contract mutation.</p>
+ * <p>Public/protected declarations are admitted only when every owning type in the nesting chain is
+ * itself exported. A public member inside a package-private outer type therefore cannot leak into
+ * the library surface. Module and library roots are deterministic and source-order independent.</p>
  */
 public final class M3LibraryApiSurfaceRecipe
         extends ScanningRecipe<M3LibraryApiSurfaceRecipe.Accumulator> {
@@ -67,10 +67,20 @@ public final class M3LibraryApiSurfaceRecipe
                     ExecutionContext ctx) {
                 J.ClassDeclaration value =
                         super.visitClassDeclaration(declaration, ctx);
+                JavaType.FullyQualified type = value.getType();
+                if (type == null) return value;
+
                 M3VisibilityLevel level = M3VisibilityLevel.of(value.getModifiers());
+                String fqn = type.getFullyQualifiedName();
                 if (level.librarySurface()) {
-                    add(
-                            "TYPE|" + ownerName(value) + "|" + level);
+                    accumulator.exportedTypes.add(fqn);
+                }
+                if (level.librarySurface()) {
+                    accumulator.candidates.add(
+                            new Candidate(
+                                    module(),
+                                    ownerChain(type),
+                                    "TYPE|" + fqn + "|" + level));
                 }
                 return value;
             }
@@ -83,15 +93,18 @@ public final class M3LibraryApiSurfaceRecipe
                         super.visitMethodDeclaration(method, ctx);
                 J.ClassDeclaration owner =
                         getCursor().firstEnclosing(J.ClassDeclaration.class);
-                if (owner == null || !ownerVisible(owner)) return value;
+                if (owner == null || owner.getType() == null) return value;
 
                 M3VisibilityLevel level = M3VisibilityLevel.ofMember(
                         value.getModifiers(),
                         owner.getKind() == J.ClassDeclaration.Kind.Type.Interface);
                 if (level.librarySurface()) {
-                    add(
-                            "METHOD|" + ownerName(owner) + "|"
-                                    + signature(value) + "|" + level);
+                    accumulator.candidates.add(
+                            new Candidate(
+                                    module(),
+                                    ownerChain(owner.getType()),
+                                    "METHOD|" + owner.getType().getFullyQualifiedName() + "|"
+                                            + signature(value) + "|" + level));
                 }
                 return value;
             }
@@ -107,30 +120,32 @@ public final class M3LibraryApiSurfaceRecipe
                 }
                 J.ClassDeclaration owner =
                         getCursor().firstEnclosing(J.ClassDeclaration.class);
-                if (owner == null || !ownerVisible(owner)) return value;
+                if (owner == null || owner.getType() == null) return value;
 
                 M3VisibilityLevel level = M3VisibilityLevel.ofMember(
                         value.getModifiers(),
                         owner.getKind() == J.ClassDeclaration.Kind.Type.Interface);
                 if (level.librarySurface()) {
+                    List<String> chain = ownerChain(owner.getType());
                     for (J.VariableDeclarations.NamedVariable variable : value.getVariables()) {
-                        add(
-                                "FIELD|" + ownerName(owner) + "|"
-                                        + variable.getSimpleName() + "|" + level);
+                        accumulator.candidates.add(
+                                new Candidate(
+                                        module(),
+                                        chain,
+                                        "FIELD|" + owner.getType().getFullyQualifiedName() + "|"
+                                                + variable.getSimpleName() + "|" + level));
                     }
                 }
                 return value;
             }
 
-            private void add(String declaration) {
+            private String module() {
                 J.CompilationUnit unit =
                         getCursor().firstEnclosing(J.CompilationUnit.class);
                 if (unit == null) {
                     throw new IllegalStateException("API declaration without compilation unit");
                 }
-                String module = moduleName(unit.getSourcePath());
-                accumulator.modules.computeIfAbsent(module, ignored -> new TreeSet<>())
-                        .add(declaration);
+                return moduleName(unit.getSourcePath());
             }
         };
     }
@@ -139,8 +154,17 @@ public final class M3LibraryApiSurfaceRecipe
     public Collection<SourceFile> generate(
             Accumulator accumulator,
             ExecutionContext ctx) {
+        Map<String, TreeSet<String>> modules = new HashMap<>();
+        for (Candidate candidate : accumulator.candidates) {
+            if (candidate.ownerChain().stream()
+                    .allMatch(accumulator.exportedTypes::contains)) {
+                modules.computeIfAbsent(candidate.module(), ignored -> new TreeSet<>())
+                        .add(candidate.declaration());
+            }
+        }
+
         ArrayList<String> libraryComponents = new ArrayList<>();
-        accumulator.modules.entrySet().stream()
+        modules.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
                 .forEach(entry -> {
                     List<String> declarations = List.copyOf(entry.getValue());
@@ -159,9 +183,7 @@ public final class M3LibraryApiSurfaceRecipe
                 });
 
         String libraryRoot = surfaceRoot("LIBRARY_API", libraryComponents);
-        int symbols = accumulator.modules.values().stream()
-                .mapToInt(Set::size)
-                .sum();
+        int symbols = modules.values().stream().mapToInt(Set::size).sum();
         surfaces.insertRow(
                 ctx,
                 new Row(
@@ -182,14 +204,14 @@ public final class M3LibraryApiSurfaceRecipe
                 .logicSha256();
     }
 
-    private static boolean ownerVisible(J.ClassDeclaration owner) {
-        return M3VisibilityLevel.of(owner.getModifiers()).librarySurface();
-    }
-
-    private static String ownerName(J.ClassDeclaration declaration) {
-        return declaration.getType() == null
-                ? declaration.getSimpleName()
-                : declaration.getType().getFullyQualifiedName();
+    private static List<String> ownerChain(JavaType.FullyQualified type) {
+        ArrayList<String> chain = new ArrayList<>();
+        for (JavaType.FullyQualified current = type;
+                current != null;
+                current = current.getOwningClass()) {
+            chain.add(current.getFullyQualifiedName());
+        }
+        return List.copyOf(chain);
     }
 
     private static String signature(J.MethodDeclaration method) {
@@ -223,7 +245,17 @@ public final class M3LibraryApiSurfaceRecipe
     }
 
     static final class Accumulator {
-        private final Map<String, TreeSet<String>> modules = new HashMap<>();
+        private final TreeSet<String> exportedTypes = new TreeSet<>();
+        private final List<Candidate> candidates = new ArrayList<>();
+    }
+
+    private record Candidate(
+            String module,
+            List<String> ownerChain,
+            String declaration) {
+        private Candidate {
+            ownerChain = List.copyOf(ownerChain);
+        }
     }
 
     public static final class ApiSurfaceTable extends DataTable<Row> {
