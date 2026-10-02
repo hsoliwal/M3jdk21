@@ -6,9 +6,9 @@ This document expands the collection workstream in [whole-jdk-migration-scope.md
 
 ## Canonical role and execution overlay
 
-This is the canonical detailed collection design for the whole-JDK documentation set. The implementation-oriented companion [../migration/docs/COLLECTIONS.md](../migration/docs/COLLECTIONS.md) deliberately does not repeat the family matrix; it turns this specification into bounded mapping, recipe and evidence packets. [whole-jdk-subsystem-matrix.md](whole-jdk-subsystem-matrix.md) owns module-level planning dispositions, while operational capability state remains in [name-mapping.json](name-mapping.json).
+This is the canonical detailed collection design for the whole-JDK documentation set. [whole-jdk-work-packets.md](whole-jdk-work-packets.md) owns dependency-aware execution sequencing and packet structure, [whole-jdk-subsystem-matrix.md](whole-jdk-subsystem-matrix.md) owns module-level planning dispositions, and operational capability state remains in [name-mapping.json](name-mapping.json).
 
-Do not create a second collection design by copying these tables into migration status documents. Extend this document for collection contract/design changes and update the execution overlay only when migration procedure or gates change.
+Do not create a second collection design by copying these tables into migration status documents. Extend this document for collection contract/design changes; update the work-packet plan only when sequencing, evidence or promotion procedure changes.
 
 ## 1. Design rule
 
