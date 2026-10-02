@@ -30,6 +30,7 @@ public final class M3IndexDbSemanticIndex {
     private final Map<String, List<M3IndexDbSemanticNode>> exact;
     private final Map<String, List<M3IndexDbSemanticNode>> structure;
     private final Map<String, List<M3IndexDbSemanticNode>> logic;
+    private final Map<String, List<M3IndexDbSemanticNode>> patternRoles;
     private final Map<String, List<M3IndexDbSemanticEdge>> children;
     private final Map<String, List<M3IndexDbSemanticEdge>> parents;
 
@@ -42,6 +43,7 @@ public final class M3IndexDbSemanticIndex {
         this.exact = indexByHash(this.nodes, HashKind.EXACT);
         this.structure = indexByHash(this.nodes, HashKind.STRUCTURE);
         this.logic = indexByHash(this.nodes, HashKind.LOGIC);
+        this.patternRoles = indexByPatternRole(this.nodes);
         this.children = edgeIndex(this.edges, true, this.byId);
         this.parents = edgeIndex(this.edges, false, this.byId);
     }
@@ -113,6 +115,12 @@ public final class M3IndexDbSemanticIndex {
 
     public List<M3IndexDbSemanticNode> logicSha256(String sha256) {
         return logic.getOrDefault(requireSha(sha256), List.of());
+    }
+
+    public List<M3IndexDbSemanticNode> patternRole(String patternRole) {
+        String checked = Objects.requireNonNull(patternRole, "patternRole").strip();
+        if (checked.isEmpty()) throw new IllegalArgumentException("patternRole");
+        return patternRoles.getOrDefault(checked, List.of());
     }
 
     public List<M3IndexDbSemanticNode> structuralHash64(long hash) {
@@ -342,6 +350,20 @@ public final class M3IndexDbSemanticIndex {
             List<M3IndexDbSemanticNode> nodes) {
         LinkedHashMap<String, M3IndexDbSemanticNode> result = new LinkedHashMap<>();
         for (M3IndexDbSemanticNode node : nodes) result.put(node.nodeId(), node);
+        return Map.copyOf(result);
+    }
+
+    private static Map<String, List<M3IndexDbSemanticNode>> indexByPatternRole(
+            List<M3IndexDbSemanticNode> nodes) {
+        HashMap<String, ArrayList<M3IndexDbSemanticNode>> mutable = new HashMap<>();
+        for (M3IndexDbSemanticNode node : nodes) {
+            mutable.computeIfAbsent(node.patternRole(), ignored -> new ArrayList<>()).add(node);
+        }
+        HashMap<String, List<M3IndexDbSemanticNode>> result = new HashMap<>();
+        mutable.forEach((role, values) -> {
+            values.sort(Comparator.comparing(M3IndexDbSemanticNode::semanticKey));
+            result.put(role, List.copyOf(values));
+        });
         return Map.copyOf(result);
     }
 
