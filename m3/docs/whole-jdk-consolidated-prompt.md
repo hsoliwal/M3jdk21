@@ -53,6 +53,25 @@ Require pinned environment/image/flags, warmup/forks, latency/throughput/CPU, al
 
 Stage the program through inventory/contracts, independent owners, java.base/bootstrap closure, collection/compiler vertical slices, matched-runtime integration, remaining modules/distribution and ongoing source-port review. Show dependency cycles and blocking prerequisites. Keep earlier text-stage numbering and historical receipts intact.
 
+## Atomization, patternization and mapping invariant
+
+For every selected behavior/contract boundary, decompose implementation into semantic atoms before proposing replacements. An atom is the smallest independently understandable/testable unit that preserves the sealed external contract; it may be a method behavior, storage lane, view rule, serialization/native/VM assumption, compiler rewrite fragment or test obligation. Atoms are not arbitrary files or lines. Collapse unresolved cyclic dependencies into one compound atom/SCC so the published dependency graph is a deterministic DAG.
+
+Patternize only after atom contracts are explicit. A reusable pattern must have a stable ID/version, semantic preconditions, required context, transformation/adaptation shape, refusal cases, postconditions, recipe/patch identity, evidence template and cost model. Text/hash/structural similarity can discover candidates but never proves semantic compatibility.
+
+Maintain explicit many-to-many lineage:
+
+```text
+source capability → source symbols → source atoms → pattern/version
+→ deterministic recipe/adaptation → target atoms → target symbols → exact evidence
+```
+
+Independent atom work may be parallel, but capability promotion is serial. Do not advance a mapping while any required source atom is unmapped, any pattern application lacks explicit preconditions/refusals, any target atom lacks verification, or a target-only adaptation/conflict is unresolved.
+
+Repeated manual edits are a recipe smell. For Java/source work, improve a reusable Maven/OpenRewrite recipe rather than editing each file separately; use equivalent source-pinned deterministic transformations for native/VM/build files. Preserve drift refusal, idempotence, mixed-state handling and rollback.
+
+The existing capability mapping authority remains authoritative. Atom IDs, atom-DAG roots, pattern IDs/versions, coverage receipts and recipe evidence are attached/referenced through reviewed mapping/tooling evolution; do not invent a parallel registry or silently add schema/status fields.
+
 ## One mapping authority and future-port procedure
 
 Inspect actual authorities first. At the cited base, m3/docs/name-mapping.json contains legacy mapping directions plus 25 migration.records; m3/migration/migration.py consumes m3/docs/name-mapping.schema.json. m3/recipes/manifest.json is a recipe/hash authority. The illustrative migration-mapping schema/example is not an operational replacement. A manifest on draft #12's feature stack is not evidence that m3/migration/manifest.json exists on master.
