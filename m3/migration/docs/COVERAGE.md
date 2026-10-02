@@ -47,6 +47,22 @@ For every module/package/public-or-relevant-internal symbol, native ABI, format,
 
 One-to-many, many-to-one, rename, split, consolidation, deletion and target-only adaptations are first-class. Source inspected, source ported, target retained and behavior verified are separate facts.
 
+## Branch-scoped Synexia source-census evidence
+
+A newer private Synexia census exists on draft [hsoliwal/com.synexia#7696](https://github.com/hsoliwal/com.synexia/pull/7696), head `1702b78729dc84c06aaebd9fff3ebb596479bfd6`, based on `develop@3db24805d640c72ab1bd637d83561696d99561a0`. Its recorded input source is `6df9df8d8f42111239013ee941723ec37f97ba6e`; the inventory artifact code/records are separately frozen at `edc04489dc46d4ff810517e74bf9162f83a2b15c`.
+
+That branch reports **29,056 source obligations**, **16,343 supplied Java files**, **16,250 parser records**, **31,706 declared symbols** and **153,692 public/protected contract references**, with **93 real source syntax failures** kept visible. It is materially broader than the older filename-only MIndex slice and should be reconciled before anyone creates or reruns another source scanner.
+
+This evidence does **not** close the operational `source-inventory` gate here:
+
+- it is branch-scoped private evidence, not the target's canonical `name-mapping.json` state;
+- its private schema-2 mapping rows still require reviewed reconciliation with the target schema/validator;
+- source syntax admission is failed for the 93 recorded diagnostics;
+- dependency/semantic ownership, target applicability and exact JDK reverse consumers remain open;
+- raw private inventory/source artifacts must stay private.
+
+WP0 should therefore consume/reconcile that census first, refresh it only where the selected source pin or required scope differs, and advance canonical coverage only through a separate reviewed mapping/validator update.
+
 ## MIndex/MatIndex slice coverage
 
 This is the current observed MIndex/MatIndex mapping coverage, not an exhaustive source inventory.
