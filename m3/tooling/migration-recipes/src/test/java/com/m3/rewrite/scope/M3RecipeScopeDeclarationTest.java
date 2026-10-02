@@ -12,6 +12,7 @@ import com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates;
 import com.m3.rewrite.donor.M3PinnedDonorInlineRecipe;
 import com.m3.rewrite.index.M3SemanticIndexM3DbBridgeRecipe;
 import com.m3.rewrite.index.M3SemanticIndexRecipe;
+import com.m3.rewrite.index.M3TypeRelationRecipe;
 import com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe;
 import com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe;
 import com.synexia.rewrite.M3SegmentedLaneNativeRecipe;
@@ -21,7 +22,7 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(9, M3RecipeScopeRegistry.size());
+        assertEquals(10, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(InstallIndexStringCompatibility.class.getName()));
@@ -30,6 +31,7 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3InventoryPureIntAtomCandidates.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3PinnedDonorInlineRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SemanticIndexRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3TypeRelationRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SemanticIndexM3DbBridgeRecipe.class.getName()));
         assertFalse(M3RecipeScopeRegistry.registered(null));
         assertFalse(M3RecipeScopeRegistry.registered("missing.Recipe"));
@@ -67,6 +69,10 @@ final class M3RecipeScopeDeclarationTest {
         assertEquals(M3EditScope.FILE, semanticPolicy.resolve(List.of("src/main/java/a/A.java")));
         assertTrue(semanticPolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
 
+        var typeRelationPolicy = M3RecipeScopeRegistry.require(M3TypeRelationRecipe.class);
+        assertEquals(M3EditScope.MODULE, typeRelationPolicy.resolve(List.of("src/main/java/a/A.java")));
+        assertFalse(typeRelationPolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
+
         var semanticDbPolicy = M3RecipeScopeRegistry.require(M3SemanticIndexM3DbBridgeRecipe.class);
         assertEquals(M3EditScope.MULTI_MODULE, semanticDbPolicy.resolve(List.of("src/main/java/a/A.java")));
         assertFalse(semanticDbPolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
@@ -98,6 +104,7 @@ final class M3RecipeScopeDeclarationTest {
                 M3InventoryPureIntAtomCandidates.class,
                 M3PinnedDonorInlineRecipe.class,
                 M3SemanticIndexRecipe.class,
+                M3TypeRelationRecipe.class,
                 M3SemanticIndexM3DbBridgeRecipe.class)) {
             assertEquals(
                     M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING,
