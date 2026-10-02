@@ -24,7 +24,7 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(14, M3RecipeScopeRegistry.size());
+        assertEquals(15, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(InstallIndexStringCompatibility.class.getName()));
@@ -35,6 +35,7 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3SemanticIndexRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3VisibilityInventoryRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3PackageBoundaryRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3LibraryApiSurfaceRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3TypeRelationRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SemanticIndexM3DbBridgeRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3RecipeDagPlannerRecipe.class.getName()));
@@ -83,6 +84,10 @@ final class M3RecipeScopeDeclarationTest {
         assertEquals(M3EditScope.PACKAGE, packagePolicy.resolve(List.of("src/main/java/a/A.java")));
         assertFalse(packagePolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
 
+        var apiPolicy = M3RecipeScopeRegistry.require(M3LibraryApiSurfaceRecipe.class);
+        assertEquals(M3EditScope.LIBRARY_API, apiPolicy.resolve(List.of("src/main/java/a/A.java")));
+        assertFalse(apiPolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
+
         var typeRelationPolicy = M3RecipeScopeRegistry.require(M3TypeRelationRecipe.class);
         assertEquals(M3EditScope.MODULE, typeRelationPolicy.resolve(List.of("src/main/java/a/A.java")));
         assertFalse(typeRelationPolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
@@ -128,6 +133,7 @@ final class M3RecipeScopeDeclarationTest {
                 M3SemanticIndexRecipe.class,
                 M3VisibilityInventoryRecipe.class,
                 M3PackageBoundaryRecipe.class,
+                M3LibraryApiSurfaceRecipe.class,
                 M3TypeRelationRecipe.class,
                 M3SemanticIndexM3DbBridgeRecipe.class,
                 M3RecipeDagPlannerRecipe.class,
