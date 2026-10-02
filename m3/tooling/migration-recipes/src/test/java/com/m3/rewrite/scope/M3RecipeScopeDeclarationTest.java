@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.m3.rewrite.InstallIndexStringCompatibility;
+import com.m3.rewrite.M3Java21ConvergenceRecipe;
 import com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe;
 import com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates;
 import com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe;
@@ -21,7 +22,7 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(9, M3RecipeScopeRegistry.size());
+        assertEquals(10, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(InstallIndexStringCompatibility.class.getName()));
@@ -31,6 +32,7 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3PatternizePureIntAtomRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3DocumentPureIntAtomRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3PureIntConvergenceRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3Java21ConvergenceRecipe.class.getName()));
         assertFalse(M3RecipeScopeRegistry.registered(null));
         assertFalse(M3RecipeScopeRegistry.registered("missing.Recipe"));
         assertThrows(NullPointerException.class, () -> M3RecipeScopeRegistry.require((Class<?>) null));
@@ -62,7 +64,8 @@ final class M3RecipeScopeDeclarationTest {
         for (Class<?> recipe : List.of(
                 M3PatternizePureIntAtomRecipe.class,
                 M3DocumentPureIntAtomRecipe.class,
-                M3PureIntConvergenceRecipe.class)) {
+                M3PureIntConvergenceRecipe.class,
+                M3Java21ConvergenceRecipe.class)) {
             var policy = M3RecipeScopeRegistry.require(recipe);
             assertEquals(M3EditScope.FILE, policy.resolve(List.of("src/main/java/a/A.java")));
             assertTrue(policy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
@@ -95,7 +98,8 @@ final class M3RecipeScopeDeclarationTest {
                 M3InventoryPureIntAtomCandidates.class,
                 M3PatternizePureIntAtomRecipe.class,
                 M3DocumentPureIntAtomRecipe.class,
-                M3PureIntConvergenceRecipe.class)) {
+                M3PureIntConvergenceRecipe.class,
+                M3Java21ConvergenceRecipe.class)) {
             assertEquals(
                     M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING,
                     M3RecipeScopeRegistry.require(recipe).contractMode());
