@@ -87,7 +87,7 @@ Materialization caches are optional and budgeted. Cache exhaustion must change p
 
 ## Characters and bytes
 
-UTF-16 code units are the canonical Java text semantics. Preserve NUL, supplementary characters and unpaired surrogates. Do not normalize text implicitly.
+UTF-16 code units are the canonical Java text semantics. Preserve NUL, supplementary characters and unpaired surrogates. Do not normalize text implicitly or insert word separators that are absent from the source.
 
 A character atom may have cached byte representations, but their identity includes charset, byte order where applicable and malformed/unmappable-input policy. Raw binary bytes are not automatically text.
 
@@ -97,6 +97,7 @@ Encoding separately cached fragments and concatenating their bytes is valid only
 
 The [JNI functions specification](https://docs.oracle.com/en/java/javase/21/docs/specs/jni/functions.html) defines primitive-array access and direct-buffer operations.
 
+- JNI String UTF functions use modified UTF-8; do not substitute ordinary UTF-8 encoding or decoding
 - GetCharArrayElements may copy. Its pointer must not be retained after the corresponding release
 - A global JNI reference preserves reachability; it does not permanently pin an array's address
 - NewDirectByteBuffer describes one contiguous address range. It cannot describe two arbitrary disjoint ranges and does not own arbitrary native memory automatically
