@@ -12,27 +12,43 @@ import java.util.Objects;
  * is broader than its evidence.
  */
 public final class M3RecipeScopeRegistry {
-    private static final Map<String, M3RecipeScopePolicy> POLICIES = Map.of(
-            "com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe",
-            fixed(M3EditScope.FILE),
-            "com.synexia.rewrite.M3SegmentedLaneNativeRecipe",
-            fixed(M3EditScope.FILE),
-            "com.m3.rewrite.InstallIndexStringCompatibility",
-            fixed(M3EditScope.MODULE),
-            "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
-            inferred(),
-            "com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe",
-            fixed(M3EditScope.FILE),
-            "com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates",
-            fixed(M3EditScope.FILE),
-            "com.m3.rewrite.donor.M3PinnedDonorInlineRecipe",
-            fixed(M3EditScope.MODULE),
-            "com.m3.rewrite.index.M3SemanticIndexRecipe",
-            fixed(M3EditScope.FILE),
-            "com.m3.rewrite.index.M3TypeRelationRecipe",
-            fixed(M3EditScope.MODULE),
-            "com.m3.rewrite.index.M3SemanticIndexM3DbBridgeRecipe",
-            fixed(M3EditScope.MULTI_MODULE));
+    private static final Map<String, M3RecipeScopePolicy> POLICIES = Map.ofEntries(
+            Map.entry(
+                    "com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe",
+                    fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.synexia.rewrite.M3SegmentedLaneNativeRecipe",
+                    fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.m3.rewrite.InstallIndexStringCompatibility",
+                    fixed(M3EditScope.MODULE)),
+            Map.entry(
+                    "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+                    inferred()),
+            Map.entry(
+                    "com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe",
+                    fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates",
+                    fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.m3.rewrite.donor.M3PinnedDonorInlineRecipe",
+                    fixed(M3EditScope.MODULE)),
+            Map.entry(
+                    "com.m3.rewrite.index.M3SemanticIndexRecipe",
+                    fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.m3.rewrite.index.M3TypeRelationRecipe",
+                    fixed(M3EditScope.MODULE)),
+            Map.entry(
+                    "com.m3.rewrite.index.M3SemanticIndexM3DbBridgeRecipe",
+                    fixed(M3EditScope.MULTI_MODULE)),
+            Map.entry(
+                    "com.m3.rewrite.dag.M3RecipeDagPlannerRecipe",
+                    fixed(M3EditScope.MULTI_MODULE)),
+            Map.entry(
+                    "com.m3.rewrite.pass.M3MultiPassPlannerRecipe",
+                    fixed(M3EditScope.MULTI_MODULE)));
 
     private M3RecipeScopeRegistry() {}
 
