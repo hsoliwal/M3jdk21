@@ -1,0 +1,96 @@
+source_type	release	identity	title	domain	disposition	current_pass	action	required_scope	risk	dependency_or_commit	reason
+JEP	22	JEP-423	Region Pinning for G1	gc	candidate	2	INVESTIGATE_DEPENDENCY_CLOSURE	MULTI_MODULE	NORMAL		Runtime/GC change; no Java source grammar change.
+JEP	22	JEP-447	Statements before super(...) (Preview)	language	reject-language	1	EXCLUDE_LANGUAGE	LIBRARY_API	INCOMPATIBLE		Requires Java grammar/javac semantic changes.
+JEP	22	JEP-454	Foreign Function & Memory API	library-runtime-native	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MULTI_MODULE	HIGH		Final API; requires java.base/native/runtime dependency audit.
+JEP	22	JEP-456	Unnamed Variables & Patterns	language	reject-language	1	EXCLUDE_LANGUAGE	LIBRARY_API	INCOMPATIBLE		Requires Java grammar/javac semantic changes.
+JEP	22	JEP-457	Class-File API (Preview)	library	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	484	Use final JEP 484 instead of preview.
+JEP	22	JEP-458	Launch Multi-File Source-Code Programs	tool-launcher	candidate	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	NORMAL		Tool/source-launcher behavior over existing Java grammar; verify javac/launcher dependency closure.
+JEP	22	JEP-459	String Templates (Second Preview)	language	reject-language	1	EXCLUDE_LANGUAGE	LIBRARY_API	INCOMPATIBLE		Requires Java grammar/javac changes and was later withdrawn.
+JEP	22	JEP-460	Vector API (Seventh Incubator)	library-hotspot-compiler	hold-jit	2	HOLD_DEPENDENCY_OR_POLICY	MULTI_MODULE	HOLD	537	Incubator lineage depends on HotSpot/JIT vector support; do not backport as a simple library.
+JEP	22	JEP-461	Stream Gatherers (Preview)	library	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	485	Use final JEP 485 instead of preview.
+JEP	22	JEP-462	Structured Concurrency (Second Preview)	library-runtime	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	533	Use latest/final lineage only; JDK 27 remains preview.
+JEP	22	JEP-463	Implicitly Declared Classes and Instance Main Methods (Second Preview)	language	reject-language	1	EXCLUDE_LANGUAGE	LIBRARY_API	INCOMPATIBLE		Requires Java grammar/javac/source-launcher language semantics.
+JEP	22	JEP-464	Scoped Values (Second Preview)	library-runtime	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	506	Use final JEP 506.
+JEP	23	JEP-455	Primitive Types in Patterns, instanceof, and switch (Preview)	language	reject-language	1	EXCLUDE_LANGUAGE	LIBRARY_API	INCOMPATIBLE		Requires Java grammar/javac semantic changes.
+JEP	23	JEP-466	Class-File API (Second Preview)	library	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	484	Use final JEP 484.
+JEP	23	JEP-467	Markdown Documentation Comments	tool-javadoc-javac-doc	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	HIGH		Tool/documentation parsing enhancement; no Java language grammar change, but touches compiler doc-comment internals.
+JEP	23	JEP-469	Vector API (Eighth Incubator)	library-hotspot-compiler	hold-jit	2	HOLD_DEPENDENCY_OR_POLICY	MULTI_MODULE	HOLD	537	Incubator/JIT-dependent lineage; evaluate separately.
+JEP	23	JEP-471	Deprecate the Memory-Access Methods in sun.misc.Unsafe for Removal	compatibility	hold-compat	2	HOLD_DEPENDENCY_OR_POLICY	LIBRARY_API	HOLD		Intentional deprecation/removal pressure changes compatibility posture.
+JEP	23	JEP-473	Stream Gatherers (Second Preview)	library	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	485	Use final JEP 485.
+JEP	23	JEP-474	ZGC: Generational Mode by Default	gc-runtime	candidate	2	INVESTIGATE_DEPENDENCY_CLOSURE	MULTI_MODULE	NORMAL		Runtime/GC policy change; JDK 21 already contains Generational ZGC lineage, verify defaults and tests.
+JEP	23	JEP-476	Module Import Declarations (Preview)	language	reject-language	1	EXCLUDE_LANGUAGE	LIBRARY_API	INCOMPATIBLE		Requires Java grammar/javac semantic changes.
+JEP	23	JEP-477	Implicitly Declared Classes and Instance Main Methods (Third Preview)	language	reject-language	1	EXCLUDE_LANGUAGE	LIBRARY_API	INCOMPATIBLE		Requires Java grammar/javac/source-launcher language semantics.
+JEP	23	JEP-480	Structured Concurrency (Third Preview)	library-runtime	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	533	Use latest lineage only; JDK 27 remains preview.
+JEP	23	JEP-481	Scoped Values (Third Preview)	library-runtime	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	506	Use final JEP 506.
+JEP	23	JEP-482	Flexible Constructor Bodies (Second Preview)	language	reject-language	1	EXCLUDE_LANGUAGE	LIBRARY_API	INCOMPATIBLE		Requires Java grammar/javac semantic changes.
+JEP	24	JEP-450	Compact Object Headers (Experimental)	vm-gc-runtime	superseded-high-risk	1	REDIRECT_SUPERSEDED	MULTI_MODULE	SUPERSEDED	534	Use cumulative product/default lineage JEP 519/534 rather than experimental revision.
+JEP	24	JEP-472	Prepare to Restrict the Use of JNI	compatibility-native	hold-compat	2	HOLD_DEPENDENCY_OR_POLICY	LIBRARY_API	HOLD		Adds restriction/warning policy; not a transparent enhancement.
+JEP	24	JEP-475	Late Barrier Expansion for G1	gc-hotspot-compiler	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MULTI_MODULE	HIGH		GC optimization touching C2/HotSpot compiler pipeline; separate VM/JIT lane.
+JEP	24	JEP-478	Key Derivation Function API (Preview)	security-library	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	510	Use final JEP 510.
+JEP	24	JEP-479	Remove the Windows 32-bit x86 Port	removal	reject-compat	1	EXCLUDE_COMPAT	LIBRARY_API	INCOMPATIBLE		Removal conflicts with JDK 21 compatibility preservation.
+JEP	24	JEP-484	Class-File API	library	candidate	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	NORMAL		Final library API; no Java grammar change, but requires classfile/version compatibility audit.
+JEP	24	JEP-485	Stream Gatherers	library	candidate	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	NORMAL		Final library API; no Java grammar change.
+JEP	24	JEP-486	Permanently Disable the Security Manager	compatibility-security	reject-compat	1	EXCLUDE_COMPAT	LIBRARY_API	INCOMPATIBLE		Intentional behavioral incompatibility with JDK 21.
+JEP	24	JEP-487	Scoped Values (Fourth Preview)	library-runtime	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	506	Use final JEP 506.
+JEP	24	JEP-488	Primitive Types in Patterns, instanceof, and switch (Second Preview)	language	reject-language	1	EXCLUDE_LANGUAGE	LIBRARY_API	INCOMPATIBLE		Requires Java grammar/javac semantic changes.
+JEP	24	JEP-489	Vector API (Ninth Incubator)	library-hotspot-compiler	hold-jit	2	HOLD_DEPENDENCY_OR_POLICY	MULTI_MODULE	HOLD	537	Incubator/JIT-dependent lineage; evaluate separately.
+JEP	24	JEP-490	ZGC: Remove the Non-Generational Mode	removal-gc	reject-compat	1	EXCLUDE_COMPAT	LIBRARY_API	INCOMPATIBLE		Removal narrows JDK 21 runtime behavior.
+JEP	24	JEP-491	Synchronize Virtual Threads without Pinning	runtime-threads	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	HIGH		Runtime/continuation/monitor change; no Java grammar change.
+JEP	24	JEP-492	Flexible Constructor Bodies (Third Preview)	language	reject-language	1	EXCLUDE_LANGUAGE	LIBRARY_API	INCOMPATIBLE		Requires Java grammar/javac semantic changes.
+JEP	24	JEP-493	Linking Run-Time Images without JMODs	tool-jlink-runtime-image	candidate	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	NORMAL		Tool/build/runtime-image enhancement; no Java grammar change.
+JEP	24	JEP-494	Module Import Declarations (Second Preview)	language	reject-language	1	EXCLUDE_LANGUAGE	LIBRARY_API	INCOMPATIBLE		Requires Java grammar/javac semantic changes.
+JEP	24	JEP-495	Simple Source Files and Instance Main Methods (Fourth Preview)	language	reject-language	1	EXCLUDE_LANGUAGE	LIBRARY_API	INCOMPATIBLE		Requires Java grammar/javac/source-launcher language semantics.
+JEP	24	JEP-496	Quantum-Resistant Module-Lattice-Based Key Encapsulation Mechanism	security-library	candidate	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	NORMAL		Security provider/library enhancement; verify provider and test vectors.
+JEP	24	JEP-497	Quantum-Resistant Module-Lattice-Based Digital Signature Algorithm	security-library	candidate	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	NORMAL		Security provider/library enhancement; verify provider and test vectors.
+JEP	24	JEP-498	Warn upon Use of Memory-Access Methods in sun.misc.Unsafe	compatibility	hold-compat	2	HOLD_DEPENDENCY_OR_POLICY	LIBRARY_API	HOLD		Warning/policy change rather than transparent enhancement.
+JEP	24	JEP-499	Structured Concurrency (Fourth Preview)	library-runtime	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	533	Use latest lineage only; JDK 27 remains preview.
+JEP	24	JEP-501	Deprecate the 32-bit x86 Port for Removal	compatibility	hold-compat	2	HOLD_DEPENDENCY_OR_POLICY	LIBRARY_API	HOLD		Deprecation/removal policy conflicts with preservation default.
+JEP	25	JEP-470	PEM Encodings of Cryptographic Objects (Preview)	security-library	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	538	Use latest preview lineage JEP 538 until final.
+JEP	25	JEP-502	Stable Values (Preview)	library-vm	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	531	Renamed/evolved into Lazy Constants; use latest lineage JEP 531.
+JEP	25	JEP-503	Remove the 32-bit x86 Port	removal	reject-compat	1	EXCLUDE_COMPAT	LIBRARY_API	INCOMPATIBLE		Removal conflicts with JDK 21 compatibility preservation.
+JEP	25	JEP-505	Structured Concurrency (Fifth Preview)	library-runtime	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	533	Use latest lineage only; JDK 27 remains preview.
+JEP	25	JEP-506	Scoped Values	library-runtime	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	HIGH		Final API; requires virtual-thread/runtime integration audit.
+JEP	25	JEP-507	Primitive Types in Patterns, instanceof, and switch (Third Preview)	language	reject-language	1	EXCLUDE_LANGUAGE	LIBRARY_API	INCOMPATIBLE		Requires Java grammar/javac semantic changes.
+JEP	25	JEP-508	Vector API (Tenth Incubator)	library-hotspot-compiler	hold-jit	2	HOLD_DEPENDENCY_OR_POLICY	MULTI_MODULE	HOLD	537	Incubator/JIT-dependent lineage; evaluate separately.
+JEP	25	JEP-509	JFR CPU-Time Profiling (Experimental)	monitoring-jfr-native	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MULTI_MODULE	HIGH		JFR/native monitoring enhancement; Linux/platform gates required.
+JEP	25	JEP-510	Key Derivation Function API	security-library	candidate	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	NORMAL		Final security library API; no Java grammar change.
+JEP	25	JEP-511	Module Import Declarations	language	reject-language	1	EXCLUDE_LANGUAGE	LIBRARY_API	INCOMPATIBLE		Permanent Java language feature; requires javac/parser/type-system changes.
+JEP	25	JEP-512	Compact Source Files and Instance Main Methods	language	reject-language	1	EXCLUDE_LANGUAGE	LIBRARY_API	INCOMPATIBLE		Permanent Java language/source-launcher feature; requires javac changes.
+JEP	25	JEP-513	Flexible Constructor Bodies	language	reject-language	1	EXCLUDE_LANGUAGE	LIBRARY_API	INCOMPATIBLE		Permanent Java language feature; requires javac semantic changes.
+JEP	25	JEP-514	Ahead-of-Time Command-Line Ergonomics	tool-runtime-aot	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MULTI_MODULE	HIGH		Tool/runtime enhancement; depends on AOT infrastructure not present in stock JDK 21.
+JEP	25	JEP-515	Ahead-of-Time Method Profiling	runtime-hotspot	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MULTI_MODULE	HIGH		HotSpot/AOT/JIT runtime enhancement; dependency-gated.
+JEP	25	JEP-518	JFR Cooperative Sampling	monitoring-jfr-runtime	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	HIGH		JFR/runtime safepoint sampling enhancement; requires VM acceptance.
+JEP	25	JEP-519	Compact Object Headers	vm-gc-runtime	superseded-high-risk	1	REDIRECT_SUPERSEDED	MULTI_MODULE	SUPERSEDED	534	Use cumulative JEP 534 lineage for default-ready implementation.
+JEP	25	JEP-520	JFR Method Timing & Tracing	monitoring-jfr	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	HIGH		JFR + bytecode instrumentation enhancement; requires agent/instrumentation compatibility tests.
+JEP	26	JEP-500	Prepare to Make Final Mean Final	compatibility-reflection	hold-compat	2	HOLD_DEPENDENCY_OR_POLICY	LIBRARY_API	HOLD		Adds warnings/restriction preparation; changes compatibility posture.
+JEP	26	JEP-504	Remove the Applet API	removal	reject-compat	1	EXCLUDE_COMPAT	LIBRARY_API	INCOMPATIBLE		Removal conflicts with JDK 21 API compatibility.
+JEP	26	JEP-516	Ahead-of-Time Object Caching with Any GC	runtime-aot-gc	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MULTI_MODULE	HIGH		AOT/GC runtime enhancement; depends on post-21 AOT infrastructure.
+JEP	26	JEP-517	HTTP/3 for the HTTP Client API	library-network	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	HIGH		Library/network enhancement; substantial QUIC/TLS/native/platform dependency audit.
+JEP	26	JEP-522	G1 GC: Improve Throughput by Reducing Synchronization	gc-runtime	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MULTI_MODULE	HIGH		Runtime/GC optimization; no Java grammar change.
+JEP	26	JEP-524	PEM Encodings of Cryptographic Objects (Second Preview)	security-library	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	538	Use latest preview JEP 538 until final.
+JEP	26	JEP-525	Structured Concurrency (Sixth Preview)	library-runtime	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	533	Use latest JEP 533; still preview in JDK 27.
+JEP	26	JEP-526	Lazy Constants (Second Preview)	library-vm	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	531	Use latest JEP 531; still preview in JDK 27.
+JEP	26	JEP-529	Vector API (Eleventh Incubator)	library-hotspot-compiler	superseded-jit	1	REDIRECT_SUPERSEDED	MULTI_MODULE	SUPERSEDED	537	Use latest incubator JEP 537 for evaluation.
+JEP	26	JEP-530	Primitive Types in Patterns, instanceof, and switch (Fourth Preview)	language	reject-language	1	EXCLUDE_LANGUAGE	LIBRARY_API	INCOMPATIBLE		Requires Java grammar/javac semantic changes.
+JBS	27	JDK-8284315	Make DocTrees.getElement consistent with javax.lang.model	tools/javac	hold-javac	2	HOLD_DEPENDENCY_OR_POLICY	MODULE	HOLD		Compiler-tree API behavioral correction touches javac; locked compiler lane requires explicit review.
+JBS	27	JDK-8347112	Make javadoc copy doc-files subdirectories by default	tools/javadoc	candidate	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	NORMAL		Tool behavior improvement; no Java grammar change; default-output compatibility test required.
+JBS	27	JDK-8347938	Support latest ML-KEM and ML-DSA private-key encodings	security-libs/java.security	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	HIGH		Changes generated-key default encoding; decode compatibility and post-quantum provider lineage required.
+JBS	27	JDK-8357439	Add Bash Autocompletion for jcmd	core-svc/tools	admitted	5	VERIFY_MATERIALIZED	MODULE	ADMITTED_UNVERIFIED	8549d1896054dd230ba3038c83bce23b10dcda22	Additive tool files only; target paths absent; upstream commit pinned.
+JBS	27	JDK-8359706	Report current open file descriptors in VM.info and hs_err_pid	hotspot/svc	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MULTI_MODULE	HIGH		Diagnostics improvement; platform-specific OS support and fatal-error path tests required.
+JBS	27	JDK-8364182	Add jcmd VM.security_properties	hotspot/svc	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MULTI_MODULE	HIGH		Serviceability improvement; inspect runtime/security-property dependencies.
+JBS	27	JDK-8367584	Add help and redaction controls for -XX:FlightRecorderOptions	hotspot/jfr	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MULTI_MODULE	HIGH		Help portion may be separable; redaction controls depend on JEP 536.
+JBS	27	JDK-8368692	Add jdk.security.password.allowSystemIn security property	security-libs/java.security	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	HIGH		Default preserves current behavior but adds policy surface; compatibility/security review required.
+JBS	27	JDK-8371683	Reject TYPE_USE annotations on var lambda parameters	tools/javac	hold-javac	2	HOLD_DEPENDENCY_OR_POLICY	MODULE	HOLD		Changes javac source acceptance/type checking; excluded by locked compiler/source-semantics rule.
+JBS	27	JDK-8371873	Reject characters after ASCII SUB in source files	tools/javac	hold-javac	2	HOLD_DEPENDENCY_OR_POLICY	MODULE	HOLD		Changes javac source acceptance; excluded by locked compiler/source-semantics rule.
+JBS	27	JDK-8374348	Add -XX:AOTMode=required alias for -XX:AOTMode=on	hotspot/runtime	hold-dependency	2	HOLD_DEPENDENCY_OR_POLICY	MULTI_MODULE	HOLD		JDK 21 lacks the later AOT mode infrastructure.
+JBS	27	JDK-8374808	Add KeyStore creation-date Instant methods	security-libs/java.security	candidate	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	NORMAL		Additive API; requires CSR/API compatibility and provider tests.
+JBS	27	JDK-8378559	Allow Execution State Initialization Before Foreign Function Downcalls	core-libs/java.lang.foreign	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	HIGH		FFM API/runtime/native dependency closure required.
+JEP	27	JEP-523	Make G1 the Default Garbage Collector in All Environments	gc-runtime-config	candidate	2	INVESTIGATE_DEPENDENCY_CLOSURE	MULTI_MODULE	NORMAL		Runtime default-policy enhancement; verify platform/resource-constrained behavior.
+JEP	27	JEP-527	Post-Quantum Hybrid Key Exchange for TLS 1.3	security-library	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	HIGH		Security/TLS enhancement; depends on post-quantum primitives and provider support.
+JEP	27	JEP-531	Lazy Constants (Third Preview)	library-vm	hold-preview	2	HOLD_DEPENDENCY_OR_POLICY	MODULE	HOLD		Latest preview API plus JVM optimization semantics; do not stabilize silently in JDK 21.
+JEP	27	JEP-532	Primitive Types in Patterns, instanceof, and switch (Fifth Preview)	language	reject-language	1	EXCLUDE_LANGUAGE	LIBRARY_API	INCOMPATIBLE		Requires Java grammar/javac semantic changes.
+JEP	27	JEP-533	Structured Concurrency (Seventh Preview)	library-runtime	hold-preview	2	HOLD_DEPENDENCY_OR_POLICY	MODULE	HOLD		Latest preview API; retain as research candidate until final.
+JEP	27	JEP-534	Compact Object Headers by Default	vm-gc-runtime	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MULTI_MODULE	HIGH		Cumulative VM/object-layout/GC/JIT change; no Java grammar change but requires full VM/JNI/JFR/CDS/JVMTI acceptance.
+JEP	27	JEP-536	JFR In-Process Data Redaction	monitoring-jfr-security	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	HIGH		Monitoring/security enhancement; requires JFR/runtime tests and compatibility review.
+JEP	27	JEP-537	Vector API (Twelfth Incubator)	library-hotspot-compiler	hold-jit	2	HOLD_DEPENDENCY_OR_POLICY	MULTI_MODULE	HOLD		Latest incubator; requires extensive HotSpot/JIT support.
+JEP	27	JEP-538	PEM Encodings of Cryptographic Objects (Third Preview)	security-library	hold-preview	2	HOLD_DEPENDENCY_OR_POLICY	MODULE	HOLD		Latest preview API; do not freeze preview contract into JDK 21.
