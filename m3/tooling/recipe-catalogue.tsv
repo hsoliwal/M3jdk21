@@ -13,3 +13,5 @@ m3-library-api-surface	com.m3.rewrite.scope.M3LibraryApiSurfaceRecipe	LIBRARY_AP
 m3-verification-plan	com.m3.rewrite.pass.M3VerificationPlanRecipe	LIBRARY_API	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
 m3-whole-semantic-hash	com.m3.rewrite.index.M3WholeSemanticHashRecipe	MULTI_MODULE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
 m3-jdk21-source-preimage	com.m3.rewrite.verbatim.M3Jdk21SourceFingerprintRecipe	FILE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
+m3-hash-pinned-text	com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe	TARGET_INFERRED	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
+jdk-8357439-jcmd-completion	com.m3.rewrite.backport.M3Jdk8357439JcmdCompletionRecipe	MODULE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
