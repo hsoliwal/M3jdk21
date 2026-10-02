@@ -26,6 +26,7 @@
         <activeByDefault>true</activeByDefault>
       </activation>
       <modules>
+        <module>indexdb</module>
         <module>tooling/migration-recipes</module>
       </modules>
     </profile>
@@ -42,6 +43,7 @@
     <profile>
       <id>m3-candidates</id>
       <modules>
+        <module>indexdb</module>
         <module>ports/indexstring</module>
         <module>collections</module>
         <module>collections/recipe</module>
@@ -51,6 +53,7 @@
     <profile>
       <id>m3-all</id>
       <modules>
+        <module>indexdb</module>
         <module>tooling/migration-recipes</module>
         <module>backports</module>
         <module>history</module>
