@@ -37,6 +37,7 @@
             <includes>
               <include>com/m3/rewrite/scope/*</include>
               <include>com/m3/rewrite/atom/*</include>
+              <include>com/m3/rewrite/index/*</include>
             </includes>
             <rules>
               <rule>
