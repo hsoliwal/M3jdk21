@@ -26,6 +26,12 @@ public final class M3RecipeScopeRegistry {
                     "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
                     inferred()),
             Map.entry(
+                    "com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe",
+                    inferred()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3Jdk8357439JcmdCompletionRecipe",
+                    fixed(M3EditScope.MODULE)),
+            Map.entry(
                     "com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe",
                     fixed(M3EditScope.FILE)),
             Map.entry(
