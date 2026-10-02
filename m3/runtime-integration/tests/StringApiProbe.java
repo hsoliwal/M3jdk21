@@ -12,6 +12,7 @@ public class StringApiProbe {
  static final Field VALUE; static final MessageDigest DIGEST; static int checks;
  static {try {VALUE=String.class.getDeclaredField("value"); VALUE.setAccessible(true); DIGEST=MessageDigest.getInstance("SHA-256");}catch(Exception e){throw new ExceptionInInitializerError(e);}}
  static native String roundTrip(String s);
+ static native String regionRoundTrip(String s,int start,int len);
  static byte[] backing(String s)throws Exception{return (byte[])VALUE.get(s);}
  static void check(boolean b){checks++;if(!b)throw new AssertionError("check "+checks);}
  static void record(String s){for(char c:s.toCharArray()){DIGEST.update((byte)(c>>8));DIGEST.update((byte)c);}DIGEST.update((byte)255);}
@@ -20,7 +21,8 @@ public class StringApiProbe {
  static void exercise(char[] chars)throws Exception{
   char[] mutable=chars.clone();String s=new String(mutable),copy=new String(chars);Arrays.fill(mutable,'x');
   check(Arrays.equals(s.toCharArray(),chars));check(s!=copy&&s.equals(copy));check(s.compareTo(copy)==0);check(s.hashCode()==copy.hashCode());check(s.intern()==copy.intern());check(backing(s)==backing(new String(s)));
-  check(new String(chars,0,chars.length).equals(s));check(new StringBuilder(s).toString().equals(s));check(new StringBuffer(s).toString().equals(s));check(roundTrip(s).equals(s));
+  check(new String(chars,0,chars.length).equals(s));check(new StringBuilder(s).toString().equals(s));check(new StringBuffer(s).toString().equals(s));check(roundTrip(s).equals(s));check(regionRoundTrip(s,0,s.length()).equals(s));
+  int regionStart=s.length()/3,regionEnd=s.length()-(s.length()/4);check(regionRoundTrip(s,regionStart,regionEnd-regionStart).equals(s.substring(regionStart,regionEnd)));
   record(s);record(s.hashCode());record(s.codePointCount(0,s.length()));record(s+":"+copy);record(s.concat(copy));record(s.repeat(2));
   for(int i=0;i<s.length();i++){check(s.charAt(i)==chars[i]);record(s.codePointAt(i));record(s.codePointBefore(i+1));}
   for(int i=0;i<=s.length();i++){record(s.substring(i));record(s.substring(0,i));}

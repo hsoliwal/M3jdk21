@@ -130,6 +130,7 @@ class java_lang_String : AllStatic {
   static inline oop m3_storage_no_keepalive(oop java_string);
   static inline bool is_m3_joined(oop java_string);
   static inline jchar char_at(oop java_string, int index);
+  static void copy_chars(oop java_string, int start, int len, jchar* destination);
   static inline bool hash_is_set(oop string);
   static inline bool is_latin1(oop java_string);
   static inline bool deduplication_forbidden(oop java_string);
@@ -226,7 +227,8 @@ class java_lang_MIndexString : AllStatic {
     EMPTY = 0,
     LOCAL = 1,
     LEXICON = 2,
-    JOINED = 3
+    JOINED = 3,
+    SHARED_LEXICON = 4
   };
 
   static void compute_offsets();
@@ -242,6 +244,7 @@ class java_lang_MIndexString : AllStatic {
   static inline jbyte coder(oop storage);
   static inline jint java_hash(oop storage);
   static inline jchar char_at(oop storage, int index);
+  static void copy_chars(oop storage, int start, int len, jchar* destination);
 };
 
 
