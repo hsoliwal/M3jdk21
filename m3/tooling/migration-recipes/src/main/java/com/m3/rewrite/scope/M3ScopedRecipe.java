@@ -5,7 +5,7 @@ package com.m3.rewrite.scope;
  * M3 recipe contract: every mutating recipe declares the highest edit scope it requires.
  *
  * <p>A recipe must not write outside this fence. Scope promotion is explicit; a FILE recipe never
- * acquires PACKAGE, MODULE, MULTI_MODULE or LIBRARY_API authority implicitly.
+ * acquires VISIBILITY, PACKAGE, MODULE, MULTI_MODULE or LIBRARY authority implicitly.
  */
 @FunctionalInterface
 public interface M3ScopedRecipe {
