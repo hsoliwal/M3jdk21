@@ -33,16 +33,21 @@
           <phase>verify</phase>
           <goals><goal>check</goal></goals>
           <configuration>
+            <includes>
+              <include>com/m3/rewrite/scope/*</include>
+              <include>com/m3/rewrite/atom/*</include>
+            </includes>
             <rules>
               <rule>
                 <element>BUNDLE</element>
-                <includes>
-                  <include>com/m3/rewrite/scope/*</include>
-                  <include>com/m3/rewrite/atom/*</include>
-                </includes>
                 <limits>
                   <limit>
                     <counter>LINE</counter>
+                    <value>COVEREDRATIO</value>
+                    <minimum>0.99</minimum>
+                  </limit>
+                  <limit>
+                    <counter>BRANCH</counter>
                     <value>COVEREDRATIO</value>
                     <minimum>0.99</minimum>
                   </limit>
