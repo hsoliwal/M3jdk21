@@ -7,3 +7,13 @@ description: >-
   their ordered composition edges, and exact/structural/logic/SimHash fingerprints.
 recipeList:
   - com.m3.rewrite.index.M3SemanticIndexRecipe
+
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.M3SemanticIndexPersist
+displayName: Persist M3 semantic atom index into M3IndexDB
+description: >-
+  Runs non-mutating semantic extraction and stores the canonical fan-in under
+  target/m3indexdb using the M3IndexDB content-addressed store.
+recipeList:
+  - com.m3.rewrite.index.M3SemanticIndexM3DbBridgeRecipe
