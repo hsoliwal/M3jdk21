@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.openrewrite.M3StringLoweringReview
+displayName: Review typed String operations before M3 lowering
+description: Candidate-only typed inventory; no call is rewritten without a later proof-gated recipe.
+recipeList:
+  - com.m3.openrewrite.M3StringLoweringCandidateRecipe

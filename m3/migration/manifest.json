@@ -1,0 +1,1379 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-02T01:42:00Z",
+  "inventoryScope": {
+    "statement": "Source-grounded seeded inventory from exact known owners and active PR/file evidence; not yet exhaustive because the available private-repository connector did not provide complete directory/code-index enumeration.",
+    "completionRule": "No migration may be called complete until private-source enumeration closes this explicit inventory gap."
+  },
+  "baselines": {
+    "source": {
+      "repository": "hsoliwal/com.synexia",
+      "ref": "develop",
+      "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "visibility": "private"
+    },
+    "targetMaster": {
+      "repository": "hsoliwal/M3jdk21",
+      "ref": "master",
+      "commit": "8bb6215372e07712f1fdf5a0cb912af495007b19",
+      "visibility": "public"
+    },
+    "targetRuntimeCandidate": {
+      "repository": "hsoliwal/M3jdk21",
+      "ref": "m3/mindex-integrated-runtime",
+      "commit": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+      "visibility": "public"
+    }
+  },
+  "mappings": [
+    {
+      "identityRules": [
+        "Exact UTF-16 equality, backing identity, wrapper identity and String.intern identity remain separate",
+        "VM-local canonical wrapper reuse is weak and process-local"
+      ],
+      "contractDifferences": [
+        "Initial target is an additive stock-JVM facade, not binary compatible with Synexia MIndexString",
+        "Route A currently admits through LocalM3Arena rather than direct SYNARR01/M3LEX mapped lookup"
+      ],
+      "compatibilityObligations": [
+        "Preserve Java UTF-16 code-unit semantics including unpaired surrogates",
+        "Do not replace arbitrary equals with =="
+      ],
+      "formats": [],
+      "bootstrapConstraints": [],
+      "dependencies": [],
+      "downstreamConsumers": [],
+      "materializationBoundaries": [
+        "asString",
+        "toCharArray",
+        "getBytes(Charset)"
+      ],
+      "cachedFactOwnership": [
+        "Exact Java hash belongs to the immutable logical value; encoded bytes are not retained"
+      ],
+      "recipe": {
+        "id": "M3TextRouteAAdditive",
+        "version": "1",
+        "preconditions": [
+          "M3StringPiece foundation at runtime base",
+          "target files absent"
+        ],
+        "beforeHash": null,
+        "afterHash": "41761fba7892301d14aead89d7dddae97cbf73a0ebabbac8a57a844924640461",
+        "rollback": "Delete additive M3Text files"
+      },
+      "tests": [
+        {
+          "id": "M3TextRouteTest",
+          "status": "passed",
+          "candidate": "local-content-sha256:41761fba7892301d14aead89d7dddae97cbf73a0ebabbac8a57a844924640461",
+          "evidence": "JDK 21.0.11 javac --release 21 -Xlint:all -Werror; M3_TEXT_ROUTE_PASS checks=48"
+        }
+      ],
+      "licenseProvenance": [
+        "Source header Apache-2.0; preserve destination/upstream notices"
+      ],
+      "lastSynchronizedSourceRevision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "lastSynchronizedTargetRevision": null,
+      "targetAdaptations": [],
+      "conflicts": [],
+      "portDirection": "source-to-target",
+      "id": "M3-TEXT-EXPLICIT-001",
+      "capability": "Route A explicit immutable String-shaped value",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexString.java",
+          "symbol": "com.synexia.indexstring.MIndexString",
+          "signature": "public final class MIndexString implements IndexStringText, Comparable<MIndexString>",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "8a8fd19b6dd0b35f2ce5b3fb924db3e90aaa07ac"
+          }
+        }
+      ],
+      "destinations": [
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": null,
+          "candidateBranch": "m3/mindex-family-migration-20261002",
+          "module": "com.m3.text",
+          "path": "m3/core/src/com/m3/text/M3Text.java",
+          "symbol": "com.m3.text.M3Text",
+          "signature": "public final class M3Text implements CharSequence, Comparable<M3Text>",
+          "contentHash": {
+            "algorithm": "sha256",
+            "value": "41761fba7892301d14aead89d7dddae97cbf73a0ebabbac8a57a844924640461"
+          }
+        }
+      ],
+      "mappingKind": "adapter",
+      "canonicalOwner": "M3Text over M3StringPiece for stock-JVM Route A",
+      "status": "implemented-unverified",
+      "rationale": "Executable stock-JVM route retaining immutable payload references for concat/slice/repeat."
+    },
+    {
+      "identityRules": [
+        "Ranges are UTF-16 code-unit coordinates"
+      ],
+      "contractDifferences": [
+        "Historical com.synexia.mindex subView is code-point-safe while indexstring range views allow arbitrary UTF-16; they must remain explicit separate compatibility surfaces"
+      ],
+      "compatibilityObligations": [
+        "java.lang.String-compatible substring permits splitting surrogate pairs",
+        "Preserve stricter historical view via a separately named adapter before consolidation"
+      ],
+      "formats": [],
+      "bootstrapConstraints": [],
+      "dependencies": [
+        "M3-TEXT-EXPLICIT-001"
+      ],
+      "downstreamConsumers": [],
+      "materializationBoundaries": [],
+      "cachedFactOwnership": [],
+      "recipe": {
+        "id": null,
+        "version": null,
+        "preconditions": [
+          "mapping review required"
+        ],
+        "beforeHash": null,
+        "afterHash": null,
+        "rollback": "No automatic target mutation"
+      },
+      "tests": [
+        {
+          "id": "M3TextRouteTest.substring",
+          "status": "passed",
+          "candidate": "local-content-sha256:41761fba7892301d14aead89d7dddae97cbf73a0ebabbac8a57a844924640461",
+          "evidence": "All ranges of a supplementary-character seam matched java.lang.String substring/hash"
+        }
+      ],
+      "licenseProvenance": [
+        "Source header Apache-2.0; preserve destination/upstream notices"
+      ],
+      "lastSynchronizedSourceRevision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "lastSynchronizedTargetRevision": null,
+      "targetAdaptations": [],
+      "conflicts": [],
+      "portDirection": "source-to-target",
+      "id": "M3-TEXT-SLICE-001",
+      "capability": "UTF-16 range view and substring contract reconciliation",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/SubMIndexString.java",
+          "symbol": "com.synexia.indexstring.SubMIndexString",
+          "signature": "public final class SubMIndexString implements CharSequence",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "1f6c1ae0bfdeeae4b7aec49549f05866ce46bd45"
+          }
+        },
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-mindex/runtime",
+          "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/SubMIndexString.java",
+          "symbol": "com.synexia.mindex.SubMIndexString",
+          "signature": "public final class SubMIndexString",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "79a2db574db23445b2d56d5da9571c65003a8cbf"
+          }
+        }
+      ],
+      "destinations": [
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": null,
+          "candidateBranch": "m3/mindex-family-migration-20261002",
+          "module": "com.m3.text",
+          "path": "m3/core/src/com/m3/text/M3Text.java",
+          "symbol": "com.m3.text.M3Text#substring",
+          "signature": "public M3Text substring(int,int)",
+          "contentHash": {
+            "algorithm": "sha256",
+            "value": "41761fba7892301d14aead89d7dddae97cbf73a0ebabbac8a57a844924640461"
+          }
+        }
+      ],
+      "mappingKind": "consolidation",
+      "canonicalOwner": "M3Text UTF-16 range over immutable piece owner",
+      "status": "implemented-unverified",
+      "rationale": "Resolve the real source conflict by contract, not by blind class renaming."
+    },
+    {
+      "identityRules": [
+        "Tuple identity is owner/resolver scoped",
+        "Equal text under different segmentation must retain equal Java value/hash semantics"
+      ],
+      "contractDifferences": [
+        "Route A weakly canonicalizes logical wrappers; Route C owns VM-private atom/range tuple geometry",
+        "Source native tuple descriptor ABI is not imported into Route A"
+      ],
+      "compatibilityObligations": [],
+      "formats": [],
+      "bootstrapConstraints": [],
+      "dependencies": [
+        "M3-TEXT-EXPLICIT-001"
+      ],
+      "downstreamConsumers": [],
+      "materializationBoundaries": [
+        "legacy token-array exports remain explicit source boundary"
+      ],
+      "cachedFactOwnership": [],
+      "recipe": {
+        "id": null,
+        "version": null,
+        "preconditions": [
+          "mapping review required"
+        ],
+        "beforeHash": null,
+        "afterHash": null,
+        "rollback": "No automatic target mutation"
+      },
+      "tests": [
+        {
+          "id": "RouteA-canonical-live",
+          "status": "passed",
+          "candidate": "local-content-sha256:41761fba7892301d14aead89d7dddae97cbf73a0ebabbac8a57a844924640461",
+          "evidence": "Equal live admitted values and repeated joins reuse one M3Text wrapper"
+        },
+        {
+          "id": "PR6-tuples",
+          "status": "historical-pass",
+          "candidate": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+          "evidence": "PR #6 evidence records canonical mapped/local tuple behavior"
+        }
+      ],
+      "licenseProvenance": [
+        "Source header Apache-2.0; preserve destination/upstream notices"
+      ],
+      "lastSynchronizedSourceRevision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "lastSynchronizedTargetRevision": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+      "targetAdaptations": [],
+      "conflicts": [],
+      "portDirection": "source-to-target",
+      "id": "M3-TEXT-TUPLE-001",
+      "capability": "Canonical tuple bodies and resolver-scoped interning",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStringIntern.java",
+          "symbol": "com.synexia.indexstring.MIndexStringIntern",
+          "signature": "public final class MIndexStringIntern",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "12ca2ac848e609cee29f502ab8ce89e7548dc284"
+          }
+        },
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexStringTuple.java",
+          "symbol": "com.synexia.indexstring.IndexStringTuple",
+          "signature": "public final class IndexStringTuple implements Comparable<IndexStringTuple>",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "296ca174cbc3c51ca038ddc0a6b55671a093cbe1"
+          }
+        }
+      ],
+      "destinations": [
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": null,
+          "candidateBranch": "m3/mindex-family-migration-20261002",
+          "module": "com.m3.text",
+          "path": "m3/core/src/com/m3/text/M3Text.java",
+          "symbol": "com.m3.text.M3Text.WeakInterner",
+          "signature": "private weak wrapper canonicalization",
+          "contentHash": {
+            "algorithm": "sha256",
+            "value": "41761fba7892301d14aead89d7dddae97cbf73a0ebabbac8a57a844924640461"
+          }
+        },
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+          "candidateBranch": null,
+          "module": "java.base",
+          "path": "src/java.base/share/classes/java/lang/MIndexString.java",
+          "symbol": "java.lang.MIndexString",
+          "signature": "JDK-private atom/range tuple owner",
+          "contentHash": null
+        }
+      ],
+      "mappingKind": "specialization",
+      "canonicalOwner": "Route-specific descriptor owner; never raw numeric ID alone",
+      "status": "partial",
+      "rationale": "Preserve owner-scoped canonical tuple semantics while keeping Route A and Route C implementations distinct."
+    },
+    {
+      "identityRules": [],
+      "contractDifferences": [
+        "Runtime helper exists; general javac/invokedynamic source lowering is not yet authorized"
+      ],
+      "compatibilityObligations": [
+        "Preserve operand evaluation order, side effects, null behavior, exceptions, overload resolution, constants and identity-sensitive boundaries",
+        "Unresolved types refuse lowering"
+      ],
+      "formats": [],
+      "bootstrapConstraints": [],
+      "dependencies": [
+        "M3-TEXT-EXPLICIT-001"
+      ],
+      "downstreamConsumers": [
+        "m3/migration/rewrite candidate inventory"
+      ],
+      "materializationBoundaries": [],
+      "cachedFactOwnership": [],
+      "recipe": {
+        "id": "com.m3.openrewrite.M3StringLoweringReview",
+        "version": "1",
+        "preconditions": [
+          "typed java.lang.String receiver",
+          "candidate-only until semantic gates pass"
+        ],
+        "beforeHash": null,
+        "afterHash": null,
+        "rollback": "Candidate recipe is non-mutating"
+      },
+      "tests": [
+        {
+          "id": "M3TextRouteTest.compiler-order",
+          "status": "passed",
+          "candidate": "local-content-sha256:f943772f5f1d3a777274ab0c100bc92130e507433c16db89e37df84a36174af4",
+          "evidence": "Left-to-right conversion/null behavior tested"
+        },
+        {
+          "id": "OpenRewrite-crate",
+          "status": "not-run",
+          "candidate": null,
+          "evidence": "Maven unavailable in execution container; crate is present but unverified"
+        }
+      ],
+      "licenseProvenance": [
+        "Source header Apache-2.0; preserve destination/upstream notices"
+      ],
+      "lastSynchronizedSourceRevision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "lastSynchronizedTargetRevision": null,
+      "targetAdaptations": [],
+      "conflicts": [],
+      "portDirection": "source-to-target",
+      "id": "M3-COMPILER-001",
+      "capability": "Route B compiler-lowering contract target",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStringCompilerRuntime.java",
+          "symbol": "com.synexia.indexstring.MIndexStringCompilerRuntime",
+          "signature": "public final class MIndexStringCompilerRuntime",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "8a0a0d073d9f8964a89404eae845995cdb4ddebe"
+          }
+        }
+      ],
+      "destinations": [
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": null,
+          "candidateBranch": "m3/mindex-family-migration-20261002",
+          "module": "com.m3.text",
+          "path": "m3/core/src/com/m3/text/M3TextCompilerRuntime.java",
+          "symbol": "com.m3.text.M3TextCompilerRuntime",
+          "signature": "public final class M3TextCompilerRuntime",
+          "contentHash": {
+            "algorithm": "sha256",
+            "value": "f943772f5f1d3a777274ab0c100bc92130e507433c16db89e37df84a36174af4"
+          }
+        }
+      ],
+      "mappingKind": "adapter",
+      "canonicalOwner": "M3Text; lowering remains typed and proof-gated",
+      "status": "partial",
+      "rationale": "Establish a single target without pretending a helper proves arbitrary compiler lowering."
+    },
+    {
+      "identityRules": [
+        "String object identity, descriptor identity, mapped atom ID and Synexia resolver/native IDs are separate"
+      ],
+      "contractDifferences": [
+        "Candidate supports M3LEX001 and language-0 SYNARR01 scalar records but not current full Synexia ID/tuple/native spaces",
+        "Enabled execution is interpreter-only"
+      ],
+      "compatibilityObligations": [
+        "Use a complete matched JDK image",
+        "Preserve HotSpot, JNI, JVMTI, StringTable, GC and serviceability contracts",
+        "Never transplant String.class into a stock JDK"
+      ],
+      "formats": [
+        "M3LEX001 UTF-16LE",
+        "SYNARR01 language-0 UTF-16BE scalar records"
+      ],
+      "bootstrapConstraints": [
+        "activation after safe bootstrap",
+        "experimental flag",
+        "no network"
+      ],
+      "dependencies": [],
+      "downstreamConsumers": [
+        "HotSpot",
+        "JNI",
+        "JVMTI",
+        "StringTable",
+        "SA"
+      ],
+      "materializationBoundaries": [
+        "documented contiguous APIs and fallback concat/repeat paths"
+      ],
+      "cachedFactOwnership": [
+        "per-atom Java hash",
+        "per-composition Java hash"
+      ],
+      "recipe": {
+        "id": "m3/runtime-integration/recipe",
+        "version": "1",
+        "preconditions": [
+          "base 3dbb233235d5e3d539ed2cce645e6e2b2952576c",
+          "sealed 25-file preimages"
+        ],
+        "beforeHash": "0fd2e3a53d240d88360eb0906bd7a5f8ed383ab35e8a6306d757247f8ad62124",
+        "afterHash": null,
+        "rollback": "Reverse sealed runtime patch and rebuild complete image or select preserved original JAVA_HOME"
+      },
+      "tests": [
+        {
+          "id": "PR6-exact-candidate",
+          "status": "historical-pass",
+          "candidate": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+          "evidence": "Complete fastdebug image; 86 selected flag-off pass; enabled 16 pass/2 fail; focused/API/JNI/JVMTI/two-process receipts"
+        },
+        {
+          "id": "StringJoiner-OOME",
+          "status": "failed",
+          "candidate": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+          "evidence": "Two enabled upstream test files still fail six OOME expectations"
+        }
+      ],
+      "licenseProvenance": [
+        "Source header Apache-2.0; preserve destination/upstream notices"
+      ],
+      "lastSynchronizedSourceRevision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "lastSynchronizedTargetRevision": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+      "targetAdaptations": [],
+      "conflicts": [
+        "Current Synexia source advanced after the runtime pin",
+        "StringJoiner OOME failures remain",
+        "compiled segmented/JIT mode, full jtreg/JCK and live SA attach unverified"
+      ],
+      "portDirection": "source-to-target",
+      "id": "M3-RUNTIME-STRING-001",
+      "capability": "Route C modified complete JDK String storage",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexString.java",
+          "symbol": "com.synexia.indexstring.MIndexString",
+          "signature": "String-shaped indexed owner",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "8a8fd19b6dd0b35f2ce5b3fb924db3e90aaa07ac"
+          }
+        },
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/shared/SharedArrayPool.java",
+          "symbol": "com.synexia.indexstring.shared.SharedArrayPool",
+          "signature": "shared immutable arena owner",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "7fa4e27699a1ce15dbbdc4fe037f99c24d4fadd6"
+          }
+        }
+      ],
+      "destinations": [
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+          "candidateBranch": null,
+          "module": "java.base",
+          "path": "src/java.base/share/classes/java/lang/MIndexString.java",
+          "symbol": "java.lang.MIndexString",
+          "signature": "JDK-private canonical storage",
+          "contentHash": null
+        },
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+          "candidateBranch": null,
+          "module": "java.base",
+          "path": "src/java.base/share/classes/java/lang/String.java",
+          "symbol": "java.lang.String",
+          "signature": "public final class String",
+          "contentHash": null
+        }
+      ],
+      "mappingKind": "specialization",
+      "canonicalOwner": "java.lang.MIndexString under opt-in UseM3StringStorage",
+      "status": "partial",
+      "rationale": "Keep exact historical Route-C evidence visible while synchronizing later source deltas separately."
+    },
+    {
+      "identityRules": [
+        "Atom IDs are store/domain scoped"
+      ],
+      "contractDifferences": [],
+      "compatibilityObligations": [
+        "Keep parser/application dependencies outside java.base"
+      ],
+      "formats": [],
+      "bootstrapConstraints": [],
+      "dependencies": [
+        "IndexResolver",
+        "MIndexStringCompilerRuntime"
+      ],
+      "downstreamConsumers": [
+        "MIndexAst",
+        "MIndexDag"
+      ],
+      "materializationBoundaries": [],
+      "cachedFactOwnership": [
+        "content hash",
+        "structure hash",
+        "subtree size",
+        "depth"
+      ],
+      "recipe": {
+        "id": null,
+        "version": null,
+        "preconditions": [
+          "mapping review required"
+        ],
+        "beforeHash": null,
+        "afterHash": null,
+        "rollback": "No automatic target mutation"
+      },
+      "tests": [],
+      "licenseProvenance": [
+        "Source header Apache-2.0; preserve destination/upstream notices"
+      ],
+      "lastSynchronizedSourceRevision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "lastSynchronizedTargetRevision": null,
+      "targetAdaptations": [],
+      "conflicts": [],
+      "portDirection": "source-to-target",
+      "id": "M3-STRUCT-ATOM-001",
+      "capability": "Primitive canonical atom store for structural domains",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexAtomStore.java",
+          "symbol": "com.synexia.indexstring.MIndexAtomStore",
+          "signature": "public final class MIndexAtomStore",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "6e6ad697f4ce55e7c1a9069b1ccd4c0148778e74"
+          }
+        }
+      ],
+      "destinations": [],
+      "mappingKind": "pending",
+      "canonicalOwner": "Source owner retained until a dependency-minimal M3 structural module exists",
+      "status": "proposed",
+      "rationale": "Do not invent an implementation merely from the class name."
+    },
+    {
+      "identityRules": [
+        "Root belongs to AST atom domain"
+      ],
+      "contractDifferences": [],
+      "compatibilityObligations": [
+        "Preserve parser-neutral NodeAdapter",
+        "Do not retain donor node objects per atom"
+      ],
+      "formats": [],
+      "bootstrapConstraints": [],
+      "dependencies": [
+        "M3-STRUCT-ATOM-001"
+      ],
+      "downstreamConsumers": [],
+      "materializationBoundaries": [],
+      "cachedFactOwnership": [],
+      "recipe": {
+        "id": null,
+        "version": null,
+        "preconditions": [
+          "mapping review required"
+        ],
+        "beforeHash": null,
+        "afterHash": null,
+        "rollback": "No automatic target mutation"
+      },
+      "tests": [],
+      "licenseProvenance": [
+        "Source header Apache-2.0; preserve destination/upstream notices"
+      ],
+      "lastSynchronizedSourceRevision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "lastSynchronizedTargetRevision": null,
+      "targetAdaptations": [],
+      "conflicts": [
+        "Blocked by atom-store/resolver layering"
+      ],
+      "portDirection": "source-to-target",
+      "id": "M3-STRUCT-AST-001",
+      "capability": "Parser-neutral immutable AST over canonical atoms",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexAst.java",
+          "symbol": "com.synexia.indexstring.MIndexAst",
+          "signature": "public final class MIndexAst",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "051d7d17fbaf01fa47f89dcbf1df67cf06c5f035"
+          }
+        }
+      ],
+      "destinations": [],
+      "mappingKind": "pending",
+      "canonicalOwner": "MIndexAst until structural atom owner is ported",
+      "status": "blocked",
+      "rationale": "Port after the canonical structural atom store."
+    },
+    {
+      "identityRules": [
+        "Enum-domain index identity; not text identity"
+      ],
+      "contractDifferences": [],
+      "compatibilityObligations": [
+        "Preserve deterministic table completeness and O(1) indexed lookup"
+      ],
+      "formats": [],
+      "bootstrapConstraints": [],
+      "dependencies": [],
+      "downstreamConsumers": [
+        "MIndexDag"
+      ],
+      "materializationBoundaries": [],
+      "cachedFactOwnership": [
+        "static classification table"
+      ],
+      "recipe": {
+        "id": null,
+        "version": null,
+        "preconditions": [
+          "mapping review required"
+        ],
+        "beforeHash": null,
+        "afterHash": null,
+        "rollback": "No automatic target mutation"
+      },
+      "tests": [],
+      "licenseProvenance": [
+        "Source header Apache-2.0; preserve destination/upstream notices"
+      ],
+      "lastSynchronizedSourceRevision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "lastSynchronizedTargetRevision": null,
+      "targetAdaptations": [],
+      "conflicts": [],
+      "portDirection": "source-to-target",
+      "id": "M3-INTERACTION-001",
+      "capability": "Precomputed role x role x mode interaction classifier",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexInteraction.java",
+          "symbol": "com.synexia.indexstring.MIndexInteraction",
+          "signature": "public final class MIndexInteraction",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "9190365c35419b2941f261f820c0f91d7cd84471"
+          }
+        }
+      ],
+      "destinations": [],
+      "mappingKind": "pending",
+      "canonicalOwner": "Source owner retained",
+      "status": "proposed",
+      "rationale": "Port with its enum domain rather than blind prefix replacement."
+    },
+    {
+      "identityRules": [
+        "Node/edge IDs remain graph/store scoped"
+      ],
+      "contractDifferences": [],
+      "compatibilityObligations": [
+        "Preserve deterministic topological order and primitive adjacency indexes"
+      ],
+      "formats": [],
+      "bootstrapConstraints": [],
+      "dependencies": [
+        "M3-STRUCT-ATOM-001",
+        "M3-INTERACTION-001"
+      ],
+      "downstreamConsumers": [],
+      "materializationBoundaries": [],
+      "cachedFactOwnership": [
+        "topological order",
+        "incoming/outgoing CSR"
+      ],
+      "recipe": {
+        "id": null,
+        "version": null,
+        "preconditions": [
+          "mapping review required"
+        ],
+        "beforeHash": null,
+        "afterHash": null,
+        "rollback": "No automatic target mutation"
+      },
+      "tests": [],
+      "licenseProvenance": [
+        "Source header Apache-2.0; preserve destination/upstream notices"
+      ],
+      "lastSynchronizedSourceRevision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "lastSynchronizedTargetRevision": null,
+      "targetAdaptations": [],
+      "conflicts": [
+        "Blocked by atom-store layering"
+      ],
+      "portDirection": "source-to-target",
+      "id": "M3-STRUCT-DAG-001",
+      "capability": "Immutable indexed DAG over canonical atoms",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexDag.java",
+          "symbol": "com.synexia.indexstring.MIndexDag",
+          "signature": "public final class MIndexDag",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "2a142d90a47cd876d2730d650d91591c2b08344e"
+          }
+        }
+      ],
+      "destinations": [],
+      "mappingKind": "pending",
+      "canonicalOwner": "MIndexDag until structural target exists",
+      "status": "blocked",
+      "rationale": "Keep DAG outside java.base and share the structural atom owner."
+    },
+    {
+      "identityRules": [
+        "Handle identity is pool-scoped"
+      ],
+      "contractDifferences": [],
+      "compatibilityObligations": [
+        "Do not collapse pooled handle identity into M3Text wrapper identity",
+        "Preserve mixed-language fail-closed behavior where applicable"
+      ],
+      "formats": [],
+      "bootstrapConstraints": [],
+      "dependencies": [
+        "MatIndexStringPool",
+        "MatIndexUtf16View",
+        "MatIndexRe2Pattern"
+      ],
+      "downstreamConsumers": [],
+      "materializationBoundaries": [],
+      "cachedFactOwnership": [],
+      "recipe": {
+        "id": null,
+        "version": null,
+        "preconditions": [
+          "mapping review required"
+        ],
+        "beforeHash": null,
+        "afterHash": null,
+        "rollback": "No automatic target mutation"
+      },
+      "tests": [],
+      "licenseProvenance": [
+        "Source header Apache-2.0; preserve destination/upstream notices"
+      ],
+      "lastSynchronizedSourceRevision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "lastSynchronizedTargetRevision": null,
+      "targetAdaptations": [],
+      "conflicts": [
+        "Full MatIndex dependency closure not enumerable through current private-repo code index"
+      ],
+      "portDirection": "source-to-target",
+      "id": "M3-MATINDEX-001",
+      "capability": "Whole-string MatIndex pool/handle and prepared views",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MatIndexString.java",
+          "symbol": "com.synexia.indexstring.MatIndexString",
+          "signature": "public final class MatIndexString implements IndexStringText, Comparable<MatIndexString>",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "3f1a75dd6e8d76b258976e035b9273d4cee54eb5"
+          }
+        }
+      ],
+      "destinations": [],
+      "mappingKind": "pending",
+      "canonicalOwner": "Source MatIndex pool retained pending full family inventory",
+      "status": "proposed",
+      "rationale": "Keep MatIndex a visible distinct owner until its complete contract is mapped."
+    },
+    {
+      "identityRules": [
+        "Resolver/language/namespace/generation scope is part of identity",
+        "Shared arena offsets are not portable packed dictionary IDs"
+      ],
+      "contractDifferences": [
+        "Route A lacks frozen-first dictionary resolution and uses only VM-local immutable admission"
+      ],
+      "compatibilityObligations": [
+        "Verify exact UTF-16 spelling after any normalized dictionary lookup",
+        "Never publish arbitrary application text into persistent shared dictionaries automatically"
+      ],
+      "formats": [],
+      "bootstrapConstraints": [],
+      "dependencies": [],
+      "downstreamConsumers": [],
+      "materializationBoundaries": [],
+      "cachedFactOwnership": [],
+      "recipe": {
+        "id": null,
+        "version": null,
+        "preconditions": [
+          "mapping review required"
+        ],
+        "beforeHash": null,
+        "afterHash": null,
+        "rollback": "No automatic target mutation"
+      },
+      "tests": [],
+      "licenseProvenance": [
+        "Source header Apache-2.0; preserve destination/upstream notices"
+      ],
+      "lastSynchronizedSourceRevision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "lastSynchronizedTargetRevision": null,
+      "targetAdaptations": [],
+      "conflicts": [
+        "Frozen-first/shared resolver integration into Route A pending"
+      ],
+      "portDirection": "source-to-target",
+      "id": "M3-RESOLVER-001",
+      "capability": "Frozen-first resolver, exact local novelty and encoder admission",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/HierarchicalIndexResolver.java",
+          "symbol": "com.synexia.indexstring.HierarchicalIndexResolver",
+          "signature": "resolver",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "7ec4578ef3477e33997ccb1ade2dd02a25c07ed1"
+          }
+        },
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/HybridIndexEncoder.java",
+          "symbol": "com.synexia.indexstring.HybridIndexEncoder",
+          "signature": "encoder",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "ae6bceff0839bb6d2e09eb88eabb676dd49f78c6"
+          }
+        },
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexInternedLiteralNamespace.java",
+          "symbol": "com.synexia.indexstring.IndexInternedLiteralNamespace",
+          "signature": "VM-local exact namespace",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "6fc2ed127d7a54f6925877612031ce7650b3f9f5"
+          }
+        },
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/SharedArrayIndexResolver.java",
+          "symbol": "com.synexia.indexstring.SharedArrayIndexResolver",
+          "signature": "shared-array resolver",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "3649f236e4822a12bd33796ba42858b18990cd46"
+          }
+        }
+      ],
+      "destinations": [
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": null,
+          "candidateBranch": "m3/mindex-family-migration-20261002",
+          "module": "com.m3.text",
+          "path": "m3/core/src/com/m3/text/M3Text.java",
+          "symbol": "com.m3.text.M3Text admission",
+          "signature": "stock-JVM local admission",
+          "contentHash": {
+            "algorithm": "sha256",
+            "value": "41761fba7892301d14aead89d7dddae97cbf73a0ebabbac8a57a844924640461"
+          }
+        }
+      ],
+      "mappingKind": "specialization",
+      "canonicalOwner": "Source resolver namespaces remain authoritative; Route A local admission is not yet a full resolver port",
+      "status": "partial",
+      "rationale": "Prevent local admission convenience from being mistaken for source resolver equivalence."
+    },
+    {
+      "identityRules": [
+        "Generation + namespace + record/range required; row number alone is insufficient"
+      ],
+      "contractDifferences": [
+        "Route C supports bounded M3LEX001 and language-0 SYNARR01 subset; source mapped dictionary/precompute formats are richer"
+      ],
+      "compatibilityObligations": [
+        "Immutable publication; validate dimensions/checksums; old live generations must not be retargeted"
+      ],
+      "formats": [
+        "source mapped dictionary/array generations",
+        "M3LEX001",
+        "SYNARR01 subset"
+      ],
+      "bootstrapConstraints": [],
+      "dependencies": [],
+      "downstreamConsumers": [],
+      "materializationBoundaries": [],
+      "cachedFactOwnership": [],
+      "recipe": {
+        "id": null,
+        "version": null,
+        "preconditions": [
+          "mapping review required"
+        ],
+        "beforeHash": null,
+        "afterHash": null,
+        "rollback": "No automatic target mutation"
+      },
+      "tests": [],
+      "licenseProvenance": [
+        "Source header Apache-2.0; preserve destination/upstream notices"
+      ],
+      "lastSynchronizedSourceRevision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "lastSynchronizedTargetRevision": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+      "targetAdaptations": [],
+      "conflicts": [],
+      "portDirection": "source-to-target",
+      "id": "M3-DICTIONARY-001",
+      "capability": "Packed/mapped dictionary and immutable mapped payload generations",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/PackedIndexLexicon.java",
+          "symbol": "com.synexia.indexstring.PackedIndexLexicon",
+          "signature": "lexicon abstraction",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "73ded918aef2a97889e06d1056e0ee5698e57b33"
+          }
+        },
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexDictionary.java",
+          "symbol": "com.synexia.indexstring.IndexDictionary",
+          "signature": "dictionary",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "2e90cf3ae7a8e396a40ad55f83807e462040a875"
+          }
+        },
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MappedIndexDictionary.java",
+          "symbol": "com.synexia.indexstring.MappedIndexDictionary",
+          "signature": "mapped dictionary",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "ac201eac87837052c366ef1c5f76be700c251d8c"
+          }
+        },
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexMappedArrays.java",
+          "symbol": "com.synexia.indexstring.MIndexMappedArrays",
+          "signature": "mapped payload generation",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "12e9b7acb918d7e62a3ae9cd88fd62e21c1ff379"
+          }
+        },
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexMappedPrecomputation.java",
+          "symbol": "com.synexia.indexstring.MIndexMappedPrecomputation",
+          "signature": "mapped precompute plane",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "2e3cfaf428ccc4b6d7982e40facbc38132ab6d22"
+          }
+        }
+      ],
+      "destinations": [
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+          "candidateBranch": null,
+          "module": "java.base",
+          "path": "src/java.base/share/classes/java/lang/MIndexStringPool.java",
+          "symbol": "java.lang.MIndexStringPool mapped reader",
+          "signature": "runtime mapped lexicon owner",
+          "contentHash": null
+        }
+      ],
+      "mappingKind": "specialization",
+      "canonicalOwner": "Format-specific immutable generation owner",
+      "status": "partial",
+      "rationale": "Track mapped formats as explicit specializations instead of treating all numeric IDs as one namespace."
+    },
+    {
+      "identityRules": [
+        "Equal text with different segmentation compares by exact content",
+        "Descriptor identity is process/owner scoped"
+      ],
+      "contractDifferences": [
+        "M3 foundation lacks source byte/direct/native joined API surface"
+      ],
+      "compatibilityObligations": [
+        "Do not claim API equivalence",
+        "Stateful encoding must span character seams correctly"
+      ],
+      "formats": [],
+      "bootstrapConstraints": [],
+      "dependencies": [],
+      "downstreamConsumers": [],
+      "materializationBoundaries": [
+        "flatten/readout only"
+      ],
+      "cachedFactOwnership": [
+        "cumulative segment ends"
+      ],
+      "recipe": {
+        "id": null,
+        "version": null,
+        "preconditions": [
+          "mapping review required"
+        ],
+        "beforeHash": null,
+        "afterHash": null,
+        "rollback": "No automatic target mutation"
+      },
+      "tests": [],
+      "licenseProvenance": [
+        "Source header Apache-2.0; preserve destination/upstream notices"
+      ],
+      "lastSynchronizedSourceRevision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "lastSynchronizedTargetRevision": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+      "targetAdaptations": [],
+      "conflicts": [],
+      "portDirection": "source-to-target",
+      "id": "M3-JOINED-001",
+      "capability": "Joined immutable chars/bytes, frozen ranges and descriptor canonicalization",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java",
+          "symbol": "com.synexia.indexstring.FrozenChars",
+          "signature": "immutable char range",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "a8f016a1764aea6e970bc60e38f345804e82a84e"
+          }
+        },
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java",
+          "symbol": "com.synexia.indexstring.FrozenBytes",
+          "signature": "immutable byte range",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "b624dc8dbb23eac6b3147ea888ac69df60f971e1"
+          }
+        },
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedChars.java",
+          "symbol": "com.synexia.indexstring.MIndexJoinedChars",
+          "signature": "joined chars",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "d9ec1832d1b9381cf0243dfd132e089797f0a2d8"
+          }
+        },
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedBytes.java",
+          "symbol": "com.synexia.indexstring.MIndexJoinedBytes",
+          "signature": "joined bytes",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "9db0c6363480ccb0f38bba7b2218e151dd75ee68"
+          }
+        },
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStorageIntern.java",
+          "symbol": "com.synexia.indexstring.MIndexJoinedStorageIntern",
+          "signature": "joined descriptor interner",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "95a576da9e60fb830a443034d6403e84740233e8"
+          }
+        }
+      ],
+      "destinations": [
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+          "candidateBranch": null,
+          "module": "com.m3.text",
+          "path": "m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+          "symbol": "com.m3.text.JoinedM3StringPiece",
+          "signature": "flat immutable char-piece directory",
+          "contentHash": null
+        }
+      ],
+      "mappingKind": "dependency-reuse",
+      "canonicalOwner": "Route A M3StringPiece; Route C java.lang.MIndexString tuples",
+      "status": "partial",
+      "rationale": "Reuse established target reference-only composition while keeping richer source capabilities visible."
+    },
+    {
+      "identityRules": [
+        "Java hash, cryptographic digest and approximate similarity are distinct"
+      ],
+      "contractDifferences": [
+        "Route C ports exact Java hash composition, not the current complete source fact/search plane"
+      ],
+      "compatibilityObligations": [
+        "Filters may reject impossible candidates but approximate signals cannot prove a match",
+        "Cache eviction must not alter results",
+        "Charset facts include charset/order/error policy"
+      ],
+      "formats": [],
+      "bootstrapConstraints": [],
+      "dependencies": [],
+      "downstreamConsumers": [],
+      "materializationBoundaries": [],
+      "cachedFactOwnership": [],
+      "recipe": {
+        "id": null,
+        "version": null,
+        "preconditions": [
+          "mapping review required"
+        ],
+        "beforeHash": null,
+        "afterHash": null,
+        "rollback": "No automatic target mutation"
+      },
+      "tests": [],
+      "licenseProvenance": [
+        "Source header Apache-2.0; preserve destination/upstream notices"
+      ],
+      "lastSynchronizedSourceRevision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "lastSynchronizedTargetRevision": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+      "targetAdaptations": [],
+      "conflicts": [
+        "Current word/pattern/precompute PRs postdate Route-C pin"
+      ],
+      "portDirection": "source-to-target",
+      "id": "M3-PRECOMPUTE-001",
+      "capability": "Derived String facts, shared text index and prepared joined search",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStringPrecomputation.java",
+          "symbol": "com.synexia.indexstring.MIndexStringPrecomputation",
+          "signature": "precomputation owner",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "eef72b7457202c8301e291025419bc8bb6e41443"
+          }
+        },
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/SharedArrayTextIndex.java",
+          "symbol": "com.synexia.indexstring.SharedArrayTextIndex",
+          "signature": "shared text index",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "8c3cc728dbf982488ad36538d16e63af7972b961"
+          }
+        },
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedNativeSearch.java",
+          "symbol": "com.synexia.indexstring.MIndexJoinedNativeSearch",
+          "signature": "prepared joined search",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "b13f892204de4459b4121bf7805d68265f62674e"
+          }
+        }
+      ],
+      "destinations": [
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+          "candidateBranch": null,
+          "module": "java.base",
+          "path": "src/java.base/share/classes/java/lang/MIndexString.java",
+          "symbol": "java.lang.MIndexString hash facts",
+          "signature": "runtime exact hash subset",
+          "contentHash": null
+        }
+      ],
+      "mappingKind": "specialization",
+      "canonicalOwner": "Fact owner depends on atom/composition/pattern/context scope",
+      "status": "partial",
+      "rationale": "Port facts only with validity scope and exact differential gates."
+    },
+    {
+      "identityRules": [
+        "Native handles are process-local and owner-scoped"
+      ],
+      "contractDifferences": [
+        "Route C uses HotSpot/JNI directly and does not import Synexia native arena ABI"
+      ],
+      "compatibilityObligations": [
+        "Preserve JNI modified UTF-8 and acquisition/release semantics",
+        "Never persist raw process pointers",
+        "Fallback/required modes must be explicit"
+      ],
+      "formats": [],
+      "bootstrapConstraints": [
+        "No custom JNI library is required for canonical Route-C storage"
+      ],
+      "dependencies": [],
+      "downstreamConsumers": [],
+      "materializationBoundaries": [],
+      "cachedFactOwnership": [],
+      "recipe": {
+        "id": null,
+        "version": null,
+        "preconditions": [
+          "mapping review required"
+        ],
+        "beforeHash": null,
+        "afterHash": null,
+        "rollback": "No automatic target mutation"
+      },
+      "tests": [
+        {
+          "id": "PR6-JNI",
+          "status": "historical-pass",
+          "candidate": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+          "evidence": "Route-C checked JNI/JVMTI tests passed; this does not certify Synexia native ABI"
+        }
+      ],
+      "licenseProvenance": [
+        "Source header Apache-2.0; preserve destination/upstream notices"
+      ],
+      "lastSynchronizedSourceRevision": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+      "lastSynchronizedTargetRevision": null,
+      "targetAdaptations": [],
+      "conflicts": [
+        "Active source branches contain incompatible ABI-v3 symbol supersets; numeric ABI alone is insufficient"
+      ],
+      "portDirection": "source-to-target",
+      "id": "M3-NATIVE-001",
+      "capability": "JNI/native resolver and descriptor acceleration",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/nativebridge/MIndexNativeIntern.java",
+          "symbol": "com.synexia.indexstring.nativebridge.MIndexNativeIntern",
+          "signature": "native bridge",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "7861957b9b839e96a29bc5ce362eb927a6b26fff"
+          }
+        },
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexNativeResolver.java",
+          "symbol": "com.synexia.indexstring.MIndexNativeResolver",
+          "signature": "native-backed resolver",
+          "contentHash": {
+            "algorithm": "git-blob-sha1",
+            "value": "c89e1ca5cd20c797f40bb68e8157aed93e7a1081"
+          }
+        }
+      ],
+      "destinations": [],
+      "mappingKind": "pending",
+      "canonicalOwner": "JNI is optional acceleration, never logical identity authority",
+      "status": "proposed",
+      "rationale": "Reconcile Java declarations and C exports together before porting any native acceleration."
+    }
+  ]
+}
