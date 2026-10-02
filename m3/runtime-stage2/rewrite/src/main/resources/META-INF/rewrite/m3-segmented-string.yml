@@ -92,3 +92,18 @@ recipeList:
         // else... fall-through to stock inline-copy slow-path
       caseSensitive: true
       filePattern: 'src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java'
+  - org.openrewrite.text.FindAndReplace:
+      find: |-
+        acceptMode = NOANCHOR;
+        boolean result = parentPattern.root.match(this, from, text);
+      replace: |-
+        acceptMode = NOANCHOR;
+        if (!parentPattern.m3MayMatch(text)) {
+            this.first = -1;
+            this.oldLast = this.last;
+            this.modCount++;
+            return false;
+        }
+        boolean result = parentPattern.root.match(this, from, text);
+      caseSensitive: true
+      filePattern: 'src/java.base/share/classes/java/util/regex/Matcher.java'
