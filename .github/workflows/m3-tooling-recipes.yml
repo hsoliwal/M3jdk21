@@ -1,0 +1,27 @@
+name: M3 OpenRewrite recipe proof
+
+on:
+  pull_request:
+    paths:
+      - "m3/tooling/migration-recipes/**"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
+      - ".github/workflows/m3-tooling-recipes.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-recipes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: Maven JUnit OpenRewrite proof
+        run: mvn -B -f m3/tooling/migration-recipes/pom.xml verify
