@@ -1,6 +1,6 @@
 # Whole-JDK M3 work packets, ten-pass migration and evidence plan
 
-Status: **documentation-only execution plan**. This file defines work decomposition and acceptance criteria; it does not implement a JDK change or advance migration status.
+Status: **documentation-only planning annex**. This file defines the ten-pass programme, subsystem packet schema and evidence model; it does not implement a JDK change or advance migration status. The implementation-packet execution owner is [../migration/docs/WORK_PACKETS.md](../migration/docs/WORK_PACKETS.md); this annex supplies the broader pass/evidence structure and must not become a parallel operational registry.
 
 Target planning pin: `hsoliwal/M3jdk21@45f546ff5bcb06a1b2604f14baf998785d98d9a1`.
 Synexia owner-inspection pin: `hsoliwal/com.synexia@3db24805d640c72ab1bd637d83561696d99561a0`.
