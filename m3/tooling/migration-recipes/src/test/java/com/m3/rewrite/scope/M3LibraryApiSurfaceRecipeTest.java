@@ -107,6 +107,11 @@ final class M3LibraryApiSurfaceRecipeTest {
                     protected int protectedField;
                     public void method() {}
                     protected void protectedMethod() {}
+
+                    public static class NestedPublic {
+                        public int nestedField;
+                        public void nestedMethod() {}
+                    }
                 }
                 """);
 
