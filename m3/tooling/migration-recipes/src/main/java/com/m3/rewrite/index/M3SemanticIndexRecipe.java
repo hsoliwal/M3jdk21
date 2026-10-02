@@ -170,9 +170,11 @@ public final class M3SemanticIndexRecipe extends Recipe {
             String qualifiedName,
             J.ClassDeclaration declaration,
             ExecutionContext ctx) {
-        M3IndexDbSemanticKind kind = declaration.getKind() == J.ClassDeclaration.Kind.Type.Interface
-                ? M3IndexDbSemanticKind.INTERFACE
-                : M3IndexDbSemanticKind.IMPLEMENTATION;
+        M3IndexDbSemanticKind kind =
+                declaration.getKind() == J.ClassDeclaration.Kind.Type.Interface
+                                || declaration.getKind() == J.ClassDeclaration.Kind.Type.Annotation
+                        ? M3IndexDbSemanticKind.INTERFACE
+                        : M3IndexDbSemanticKind.IMPLEMENTATION;
         String typeKey = repository + "/type/" + qualifiedName;
         List<Node> children = new ArrayList<>();
 
