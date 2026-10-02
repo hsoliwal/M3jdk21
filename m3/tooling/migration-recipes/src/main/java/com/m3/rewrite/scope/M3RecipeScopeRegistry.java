@@ -24,7 +24,9 @@ public final class M3RecipeScopeRegistry {
             "com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe",
             fixed(M3EditScope.FILE),
             "com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates",
-            fixed(M3EditScope.FILE));
+            fixed(M3EditScope.FILE),
+            "com.m3.rewrite.donor.M3PinnedDonorInlineRecipe",
+            fixed(M3EditScope.MODULE));
 
     private M3RecipeScopeRegistry() {}
 
