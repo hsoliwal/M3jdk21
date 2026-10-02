@@ -68,6 +68,24 @@ crosses the current boundary.
 FILE-local behavior-and-contract-preserving work may fan out independently across all files.
 Canonical promotion remains serial/evidence-gated.
 
+### FILE fixed-point execution law
+
+A FILE pass is not "run a recipe once and hope". The external tooling executor supplies exactly one
+source file to one FILE-admitted OpenRewrite recipe and repeatedly applies that recipe until its
+printed source reaches a fixed point.
+
+The FILE executor must fail closed if a recipe:
+
+- creates or deletes a source file;
+- renames the source path;
+- requires VISIBILITY or any broader authority;
+- does not converge within the bounded pass limit.
+
+This makes repeated atomization/patternization mechanically scalable: independent files may execute
+in parallel, while each file's transformation remains isolated and deterministic. A broader
+relationship is not solved by letting a FILE worker see more files; it is promoted to the next
+declared scope.
+
 ## Recipe-first law
 
 A recurring mechanical transformation must be expressed as a reusable OpenRewrite recipe (or a
