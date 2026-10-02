@@ -43,24 +43,24 @@ final class M3InventoryPureIntAtomCandidatesTest implements RewriteTest {
                                     row.recipeClass());
                         }),
                 java(
-                                """
-                                package example;
+                        """
+                        package example;
 
-                                final class Sample {
-                                    private static int compute(int a, int b) {
-                                        return (a + b) * 31;
-                                    }
+                        final class Sample {
+                            private static int compute(int a, int b) {
+                                return (a + b) * 31;
+                            }
 
-                                    public static int notFileLocal(int a, int b) {
-                                        return a + b;
-                                    }
+                            public static int notFileLocal(int a, int b) {
+                                return a + b;
+                            }
 
-                                    private static int mayThrow(int a, int b) {
-                                        return a / b;
-                                    }
-                                }
-                                """)
-                        .path("src/main/java/example/Sample.java"));
+                            private static int mayThrow(int a, int b) {
+                                return a / b;
+                            }
+                        }
+                        """,
+                        source -> source.path("src/main/java/example/Sample.java")));
     }
 
     @Test

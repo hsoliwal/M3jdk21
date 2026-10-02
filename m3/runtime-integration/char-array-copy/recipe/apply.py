@@ -9,7 +9,6 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[3]
 ENGINE = "src/java.base/share/classes/java/lang/MIndexString.java"
 TEST = "m3/runtime-integration/tests/MIndexStringInvariant.java"
-WORKFLOW = ".github/workflows/m3-foundation.yml"
 
 OLD_COPY = """    void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
         String.checkBoundsBeginEnd(srcBegin, srcEnd, length);
@@ -141,28 +140,9 @@ NEW_HELPER = """    private static void verifySegmentedArrays() throws Exception
     private static Object storage(String value) throws IllegalAccessException {
 """
 
-OLD_WORKFLOW = """      - name: Verify deterministic source-bound recipe
-        run: |
-          python3 m3/runtime-integration/recipe/apply.py --check
-          python3 m3/runtime-integration/recipe/test_recipe.py
-"""
-NEW_WORKFLOW = """      - name: Verify layered source-bound recipes
-        run: |
-          python3 m3/runtime-integration/char-array-copy/recipe/apply.py --check
-          python3 m3/runtime-integration/char-array-copy/recipe/test_recipe.py
-          python3 m3/runtime-integration/char-array-copy/recipe/apply.py --reverse
-          trap 'python3 m3/runtime-integration/char-array-copy/recipe/apply.py >/dev/null' EXIT
-          python3 m3/runtime-integration/recipe/apply.py --check
-          python3 m3/runtime-integration/recipe/test_recipe.py
-          python3 m3/runtime-integration/char-array-copy/recipe/apply.py
-          trap - EXIT
-          python3 m3/runtime-integration/char-array-copy/recipe/apply.py --check
-"""
-
 REPLACEMENTS = {
     ENGINE: ((OLD_COPY, NEW_COPY),),
     TEST: ((OLD_CALL, NEW_CALL), (OLD_HELPER, NEW_HELPER)),
-    WORKFLOW: ((OLD_WORKFLOW, NEW_WORKFLOW),),
 }
 
 

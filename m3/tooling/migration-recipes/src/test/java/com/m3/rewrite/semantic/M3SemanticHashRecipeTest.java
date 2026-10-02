@@ -83,7 +83,7 @@ final class M3SemanticHashRecipeTest implements RewriteTest {
                         assertEquals(64, row.wholeHash().length());
                     });
                 }),
-                java(BEFORE).path("src/main/java/example/Sample.java"));
+                java(BEFORE, source -> source.path("src/main/java/example/Sample.java")));
     }
 
     private static String methodOnly(String source) {
