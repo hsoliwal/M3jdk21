@@ -1,0 +1,8 @@
+package p;
+
+final class A {
+    private int value() {
+        int m3$atom = 1;
+        return m3$atom;
+    }
+}
