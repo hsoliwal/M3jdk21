@@ -806,7 +806,6 @@ import jdk.internal.util.regex.Grapheme;
 public final class Pattern
     implements java.io.Serializable
 {
-    private static final JavaLangAccess JLA = SharedSecrets.getJavaLangAccess();
 
     /*
      * Regular expression modifier values.  Instead of being passed as
@@ -2027,11 +2026,16 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     boolean m3MayMatch(CharSequence input) {
         long required = m3RequiredPresence64;
-        if (required == 0L || !(input instanceof String value)
-                || !JLA.stringHasM3Storage(value)) {
+        if (required == 0L || !(input instanceof String value)) {
             return true;
         }
-        return M3StringFacts.mayContain(JLA.stringM3BitSignal64(value), required);
+        JavaLangAccess access = SharedSecrets.getJavaLangAccess();
+        if (access == null || !access.stringHasM3Storage(value)) {
+            // Regex can be initialized during java.base bootstrap before
+            // System publishes JavaLangAccess. Optimization must fail open.
+            return true;
+        }
+        return M3StringFacts.mayContain(access.stringM3BitSignal64(value), required);
     }
 
     private Map<String, Integer> namedGroupsMap() {
