@@ -1,29 +1,6 @@
-# Resume the whole-JDK M3 migration
+# Resume the MIndex-to-M3 migration
 
-**Whole-JDK status: INCOMPLETE.** The whole-JDK directory denominator and architecture are documented, but the complete symbol/ABI/dependency inventory, collection replacements, remaining subsystem migrations and exact-candidate JDK acceptance are not complete. This document does not promote any production implementation or operational mapping state.
-
-## Start here for whole-JDK work
-
-Read, in order:
-
-1. ../../docs/whole-jdk-migration-scope.md — program scope and coverage denominator.
-2. ../../docs/whole-jdk-subsystem-matrix.md — canonical module/source-root planning dispositions.
-3. ARCHITECTURE.md — shared layer boundaries and compatibility laws.
-4. ../../docs/whole-jdk-collections-replacement.md — canonical detailed java.util / java.util.concurrent replacement design.
-5. COLLECTIONS.md — collection migration execution overlay: mapping packets, routes and stop gates.
-6. COVERAGE.md — current whole-JDK migration/evidence projection plus retained MIndex/MatIndex slice.
-7. WORK_PACKETS.md — dependency-aware work packets for remaining JDK/HotSpot subsystems.
-8. ACCEPTANCE.md — universal and subsystem-specific promotion gates.
-9. ../../docs/name-mapping.json — existing machine-readable operational capability authority.
-10. ../../docs/mindex-migration-handoff.md — retained deep MIndex/MatIndex slice handoff.
-
-Documentation PR #25 uses branch docs/whole-jdk-m3-scope-20261002 and is based on target master 45f546ff5bcb06a1b2604f14baf998785d98d9a1. The Synexia develop tip observed during this documentation update was 3db24805d640c72ab1bd637d83561696d99561a0. Those are inspection pins, not permission to rewrite historical capability pins. Re-pin only within a separately reviewed implementation/mapping update after reconciling source and target drift.
-
-The next implementation sequence is WP0 first: complete the selected source/module/symbol/native/resource/test census, dependency and bootstrap graph, and mapping reconciliation. Then choose bounded vertical slices whose owners and contracts are understood. Collections begin with the nonconcurrent families in the canonical [../../docs/whole-jdk-collections-replacement.md](../../docs/whole-jdk-collections-replacement.md) design and use [COLLECTIONS.md](COLLECTIONS.md) for execution packets; concurrent families remain blocked behind JMM/GC/runtime proofs. String continues under the existing text specifications and its independent Route A/B/C gates.
-
-No contributor should infer implementation from a planning row, filename, merged documentation PR or matching class name. Keep source inspected, source ported, target retained, behavior verified and exact-candidate accepted as separate states.
-
-## Retained MIndex tranche history
+> **Whole-JDK scope note:** this file is the retained bounded MIndex/prefix tranche resume and preserves its dated evidence. For the current whole-JDK programme, start with [../../docs/whole-jdk-resume.md](../../docs/whole-jdk-resume.md), [../../docs/whole-jdk-work-packets.md](../../docs/whole-jdk-work-packets.md), and [../../docs/whole-jdk-subsystem-matrix.md](../../docs/whole-jdk-subsystem-matrix.md). Do not read the historical checklist below as whole-JDK completion.
 
 **Status: INCOMPLETE. One algorithm specialization is implemented and locally tested. The whole MIndex family has not been inventoried or migrated. No complete JDK image was built in this tranche.**
 
@@ -96,8 +73,6 @@ python m3/migration/migration.py extend --base m3/migration/recipes/baselines/na
 This creates a review output and refuses modified existing output. Install only a reviewed diff; preserve target adaptations. The foundation recipe manifest's naming-file hash must stay synchronized.
 
 ## Next dependency-ready work
-
-Before launching a fresh whole-source scan, reconcile the private draft source census #7696 described in [COVERAGE.md](COVERAGE.md). It is branch-scoped evidence rather than canonical target state, but it already records a broader pinned source denominator and retained syntax failures. Re-run or extend the scanner only for source-pin drift, missing dependency domains or required evidence that the existing census does not cover; never fork a second inventory authority merely because its private mapping rows are not yet admitted here.
 
 Run the existing `com.synexia.m3.inventory.M3InventoryMain` / `InventoryWriter` on authorized full source checkouts at the baseline and each relevant unmerged PR head. Preserve every row, including non-MIndex dependencies. Record producer revision, repository, commit, tracking ref, TSV SHA-256 and truthful scope completeness. Do not move a private checkout into the public repository to repair CI downloads.
 
