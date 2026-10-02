@@ -4,6 +4,7 @@ package com.m3.rewrite.pipeline;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.m3.rewrite.M3Java21ConvergenceRecipe;
@@ -48,6 +49,33 @@ final class M3Java21RecipePipelineTest {
     }
 
     @Test
+    void registrationDescriptorsFailClosed() {
+        assertThrows(
+                NullPointerException.class,
+                () -> new M3RecipeRegistration(
+                        null, M3RecipeStage.INVENTORY, 0, M3Java21ConvergenceRecipe.class));
+        assertThrows(
+                NullPointerException.class,
+                () -> new M3RecipeRegistration(
+                        "m3.valid", null, 0, M3Java21ConvergenceRecipe.class));
+        assertThrows(
+                NullPointerException.class,
+                () -> new M3RecipeRegistration(
+                        "m3.valid", M3RecipeStage.INVENTORY, 0, null));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new M3RecipeRegistration(
+                        "BAD ID!", M3RecipeStage.INVENTORY, 0, M3Java21ConvergenceRecipe.class));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new M3RecipeRegistration(
+                        "m3.valid",
+                        M3RecipeStage.DOCUMENTATION,
+                        29,
+                        M3Java21ConvergenceRecipe.class));
+    }
+
+    @Test
     void everyMutatingStageIsFileLocalAndContractPreserving() {
         for (var registration : M3Java21RecipePipeline.registrations()) {
             var policy = M3RecipeScopeRegistry.require(registration.recipeType());
@@ -63,6 +91,8 @@ final class M3Java21RecipePipelineTest {
     @Test
     void topLevelRecipeUsesExactlyTheCanonicalPipeline() {
         var top = new M3Java21ConvergenceRecipe();
+        assertTrue(top.getDisplayName().contains("Java 21"));
+        assertTrue(top.getDescription().contains("OpenRewrite DAG"));
         var expected = M3Java21RecipePipeline.registrations();
         var actual = top.getRecipeList();
 
