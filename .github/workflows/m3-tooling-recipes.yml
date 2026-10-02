@@ -44,6 +44,17 @@ jobs:
           tar -xzf "$RUNNER_TEMP/repo.tar.gz" -C "$RUNNER_TEMP/repo" --strip-components=1
           printf 'REPO=%s\n' "$RUNNER_TEMP/repo" >> "$GITHUB_ENV"
 
+      - name: Fetch immutable JDK21 verbatim baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASELINE_SHA="$(awk -F '\t' '$1 == "baseline_commit" { print $2 }' "$REPO/m3/tooling/verbatim/JDK21_BASELINE.tsv")"
+          test "$BASELINE_SHA" = "7a3f9c49d71a62c5ee2a398f4607d446dce518b8"
+          curl --fail --location --retry 3             "https://codeload.github.com/${GITHUB_REPOSITORY}/tar.gz/${BASELINE_SHA}"             -o "$RUNNER_TEMP/jdk21-baseline.tar.gz"
+          mkdir -p "$RUNNER_TEMP/jdk21-baseline"
+          tar -xzf "$RUNNER_TEMP/jdk21-baseline.tar.gz"             -C "$RUNNER_TEMP/jdk21-baseline" --strip-components=1
+          printf 'JDK21_BASELINE=%s\n' "$RUNNER_TEMP/jdk21-baseline" >> "$GITHUB_ENV"
+
       - name: Prepare isolated pinned JDK 21
         shell: bash
         run: |
@@ -74,3 +85,12 @@ jobs:
           java -version
           mvn -version
           mvn -B -f "$REPO/m3/pom.xml" -P m3-recipes verify
+
+      - name: Byte-exact JDK21 product-tree gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-verbatim"
+          java -cp "$REPO/m3/tooling/migration-recipes/target/classes"             com.m3.rewrite.verbatim.M3Jdk21VerbatimCompare             "$JDK21_BASELINE"             "$REPO"             "$REPO/m3/tooling/verbatim/approved-product-delta.tsv"             "$RUNNER_TEMP/m3-verbatim/JDK21_VERBATIM_DIFF.tsv"
+          test -s "$RUNNER_TEMP/m3-verbatim/JDK21_VERBATIM_DIFF.tsv"
+          awk -F '\t' 'NR == 1 || $2 != "SAME"'             "$RUNNER_TEMP/m3-verbatim/JDK21_VERBATIM_DIFF.tsv"
