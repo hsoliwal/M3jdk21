@@ -294,6 +294,7 @@ public final class M3SemanticIndexRecipe extends Recipe {
                         node.semanticKey(),
                         node.sourcePath(),
                         node.symbol(),
+                        node.patternRole(),
                         node.fingerprint()));
     }
 
@@ -326,7 +327,16 @@ public final class M3SemanticIndexRecipe extends Recipe {
                 semanticKey,
                 sourcePath,
                 symbol,
+                patternRole(kind, symbol),
                 fingerprint);
+    }
+
+    private static String patternRole(
+            M3IndexDbSemanticKind kind,
+            String symbol) {
+        return kind == M3IndexDbSemanticKind.ATOM
+                ? "M3:ATOM:" + symbol
+                : "M3:" + kind.name();
     }
 
     private static String qualifiedName(String packageName, String simpleName) {
@@ -403,5 +413,6 @@ public final class M3SemanticIndexRecipe extends Recipe {
             String semanticKey,
             String sourcePath,
             String symbol,
+            String patternRole,
             M3IndexDbSemanticFingerprint fingerprint) {}
 }
