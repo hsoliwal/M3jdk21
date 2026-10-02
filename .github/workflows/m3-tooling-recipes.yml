@@ -35,7 +35,7 @@ jobs:
       - name: Fetch exact PR head without reusable actions
         shell: bash
         env:
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
           set -euo pipefail
           test -n "$HEAD_SHA"
