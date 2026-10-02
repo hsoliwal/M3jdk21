@@ -17,6 +17,7 @@ import com.m3.rewrite.index.M3TypeRelationRecipe;
 import com.m3.rewrite.index.M3WholeSemanticHashRecipe;
 import com.m3.rewrite.pass.M3MultiPassPlannerRecipe;
 import com.m3.rewrite.pass.M3VerificationPlanRecipe;
+import com.m3.rewrite.verbatim.M3Jdk21SourceFingerprintRecipe;
 import com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe;
 import com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe;
 import com.synexia.rewrite.M3SegmentedLaneNativeRecipe;
@@ -26,7 +27,7 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(17, M3RecipeScopeRegistry.size());
+        assertEquals(18, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(InstallIndexStringCompatibility.class.getName()));
@@ -35,6 +36,7 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3InventoryPureIntAtomCandidates.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3PinnedDonorInlineRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SemanticIndexRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3Jdk21SourceFingerprintRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3VisibilityInventoryRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3PackageBoundaryRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3LibraryApiSurfaceRecipe.class.getName()));
@@ -79,6 +81,10 @@ final class M3RecipeScopeDeclarationTest {
         var semanticPolicy = M3RecipeScopeRegistry.require(M3SemanticIndexRecipe.class);
         assertEquals(M3EditScope.FILE, semanticPolicy.resolve(List.of("src/main/java/a/A.java")));
         assertTrue(semanticPolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
+
+        var preimagePolicy = M3RecipeScopeRegistry.require(M3Jdk21SourceFingerprintRecipe.class);
+        assertEquals(M3EditScope.FILE, preimagePolicy.resolve(List.of("src/java.base/share/classes/a/A.java")));
+        assertTrue(preimagePolicy.fileLocalMechanical(List.of("src/java.base/share/classes/a/A.java")));
 
         var visibilityPolicy = M3RecipeScopeRegistry.require(M3VisibilityInventoryRecipe.class);
         assertEquals(M3EditScope.VISIBILITY, visibilityPolicy.resolve(List.of("src/main/java/a/A.java")));
@@ -143,6 +149,7 @@ final class M3RecipeScopeDeclarationTest {
                 M3InventoryPureIntAtomCandidates.class,
                 M3PinnedDonorInlineRecipe.class,
                 M3SemanticIndexRecipe.class,
+                M3Jdk21SourceFingerprintRecipe.class,
                 M3VisibilityInventoryRecipe.class,
                 M3PackageBoundaryRecipe.class,
                 M3LibraryApiSurfaceRecipe.class,
