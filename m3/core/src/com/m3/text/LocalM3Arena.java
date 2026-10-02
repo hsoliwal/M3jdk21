@@ -39,6 +39,18 @@ public final class LocalM3Arena {
         return owned(bytes, LocalM3StringPiece.Encoding.UTF16_LE);
     }
 
+    /** Package-local immutable String admission avoids an intermediate char[] copy. */
+    LocalM3StringPiece copyStringUtf16(String input) {
+        Objects.requireNonNull(input);
+        byte[] bytes = new byte[Math.multiplyExact(input.length(), 2)];
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            bytes[i * 2] = (byte)c;
+            bytes[i * 2 + 1] = (byte)(c >>> 8);
+        }
+        return owned(bytes, LocalM3StringPiece.Encoding.UTF16_LE);
+    }
+
     /** Copies Latin1 bytes; no charset guessing or decoding replacement policy. */
     public LocalM3StringPiece copyLatin1(byte[] input) {
         return owned(Objects.requireNonNull(input).clone(), LocalM3StringPiece.Encoding.LATIN1);
