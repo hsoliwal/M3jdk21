@@ -76,6 +76,7 @@ public final class M3SemanticIndexPayload {
             strings.add(node.semanticKey());
             strings.add(node.sourcePath());
             strings.add(node.symbol());
+            strings.add(node.patternRole());
             strings.add(node.fingerprint().normalizedComposition());
         }
         for (M3IndexDbSemanticEdge edge : index.edges()) strings.add(edge.role());
