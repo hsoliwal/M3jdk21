@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.rewrite.dag;
 
-import com.m3.rewrite.index.M3SemanticFingerprint;
+import com.m3.indexdb.M3IndexDbSemanticFingerprint;
 import com.m3.rewrite.scope.M3EditScope;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -101,7 +101,7 @@ public final class M3RecipeDagCatalogue {
         int[] votes = new int[Long.SIZE];
         for (String token : tokens) {
             long value = Long.parseUnsignedLong(
-                    M3SemanticFingerprint.sha256Utf16("DAG_TOKEN|" + token).substring(0, 16), 16);
+                    M3IndexDbSemanticFingerprint.sha256Utf16("DAG_TOKEN|" + token).substring(0, 16), 16);
             for (int bit = 0; bit < Long.SIZE; bit++) {
                 votes[bit] += ((value >>> bit) & 1L) == 0L ? -1 : 1;
             }
