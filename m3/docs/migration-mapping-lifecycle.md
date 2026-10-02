@@ -4,13 +4,17 @@ Status: proposed review protocol. The example files beside this document are exp
 
 ## Operational authority before using these examples
 
-The illustrative schema/example in this directory must not become a competing migration registry. At the 2026-10-02 02:52 inspection, the verified operational candidate is [#12's m3/migration/manifest.json at d543255294ae85e4c8015812a3c8a97aaf498354](https://github.com/hsoliwal/M3jdk21/blob/d543255294ae85e4c8015812a3c8a97aaf498354/m3/migration/manifest.json), on its feature-stack line. That directory is not present in master 26c442d3f1400e01eeb11a44e803b63e1874735e. Reconcile the selected manifest/validator into the intended branch through a reviewed change. [Worked port decisions](migration-worked-port-decisions.md) maps these concepts to its existing fields and stable IDs, with rename/split/conflict examples. No operational mapping is changed by this documentation.
+The illustrative schema/example in this directory must not become a competing migration registry. At the 2026-10-02 02:52 inspection, the verified operational candidate is [#12's m3/migration/manifest.json at d543255294ae85e4c8015812a3c8a97aaf498354](https://github.com/hsoliwal/M3jdk21/blob/d543255294ae85e4c8015812a3c8a97aaf498354/m3/migration/manifest.json), on its feature-stack line. That directory is not present in master 26c442d3f1400e01eeb11a44e803b63e1874735e. Reconcile the selected manifest/validator into the intended branch through a reviewed change. [Worked port decisions](migration-worked-port-decisions.md) maps these concepts to its existing fields and stable IDs, with rename/split/conflict examples. No operational mapping is changed by this documentation. This paragraph is the historical 02:52 snapshot; the retained records and newer source-presence facts immediately below supersede any inference that master still lacks all migration tooling.
 
-## Why the old name map is not enough
+## Retained mapping records and remaining reconciliation
 
-[name-mapping.json](name-mapping.json) deliberately records only early provisional directions. Preserve it as historical input. A type name alone cannot express source ownership, multiple targets, merged/split classes, per-operation compatibility or which later enhancement has been ported.
+The top-level mappings array in [name-mapping.json](name-mapping.json) preserves early provisional directions, but the file is no longer only that historical map. At master 45f546ff5bcb06a1b2604f14baf998785d98d9a1 (same map blob as #19 merge 43cf5ed4b97bc9a2832f10a332eb6500ca73ca04), its migration.records contains actual records including m3.prefix-z and synexia.frozen-chars. Preserve their stable IDs, exact pins, target adaptations, sync fields and qualified evidence. The documentation schema/example remains illustrative and must not replace those records.
 
-The next mapping must support many-to-many relations:
+Retained source and mapping completeness are separate: synexia.frozen-chars is still pending with targets=[] in that pinned map, while #19 retains FrozenChars under m3/ports/indexstring. This is a mapping-reconciliation gap, not evidence that the file is absent or that its acceptance is complete. The #12 m3/migration/manifest.json candidate remains separate; that exact path returns 404 on the current master pin despite other m3/migration tooling now being present. See [the dated retained-content reconciliation](migration-worked-port-decisions.md#retained-content-and-mapping-reconciliation-2026-10-02-0345-utc) for concrete paths and proof boundaries. This documentation does not populate, promote or merge operational records.
+
+A type name alone cannot express source ownership, multiple targets, merged/split classes, per-operation compatibility or which later enhancement has been ported.
+
+Operational mapping reconciliation must support many-to-many relations:
 - One source owner can have a storage target, public facade and native adapter
 - Several source types can consolidate only after their contracts are reconciled
 - An unchanged source type may remain a dependency instead of moving
