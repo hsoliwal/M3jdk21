@@ -58,7 +58,7 @@ final class M3RecipeScopeDeclarationTest {
                 M3EditScope.FILE,
                 inferredPolicy.resolve(List.of("src/main/java/a/A.java")));
         assertEquals(
-                M3EditScope.PACKAGE_VISIBILITY,
+                M3EditScope.PACKAGE,
                 inferredPolicy.resolve(List.of(
                         "src/main/java/a/A.java",
                         "src/main/java/a/B.java")));
