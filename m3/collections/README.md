@@ -65,7 +65,6 @@ This packet deliberately does not yet:
 The next collection packet can use these atoms while separately proving the exact contract of a
 specific JDK owner.
 
-
 ## Reusable transformation recipes
 
 The executable source-bound installer is `recipe/apply.py` with exact postimage hashes and pinned
