@@ -1,0 +1,62 @@
+{
+  "status": "diagnostic-only",
+  "warmup_iterations": 2000,
+  "measurement_iterations": 2000,
+  "input": "4096 Latin1 a + 4096 UTF16 U+0100, retained operands",
+  "records": [
+    {
+      "fork": 0,
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-Xms256m",
+        "-Xmx256m",
+        "-XX:+UseG1GC",
+        "-cp",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+        "TextBenchmark",
+        "2000"
+      ],
+      "stdout": "operation\tns_per_op\tallocated_bytes_per_op\nstock_concat\t4987.9\t16424.0\nm3_concat\t1563.9\t160.3\nm3_warm_admission\t11539.0\t171.1\nm3_cold_admission\t28830.6\t8672.0\nstock_slice\t106.3\t96.0\nm3_slice\t565.2\t248.0\nm3_copy_output\t6975.1\t16983.4\njoined_segments\t2\njoined_owner_payload_bytes\t16384\ntiny_slice_owner_payload_bytes\t8192\ntiny_compact_owner_payload_bytes\t2\ncache_payload_bytes\t16384\nnative_payload_bytes\t0\nmapped_payload_bytes\t0\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "fork": 1,
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-Xms256m",
+        "-Xmx256m",
+        "-XX:+UseG1GC",
+        "-cp",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+        "TextBenchmark",
+        "2000"
+      ],
+      "stdout": "operation\tns_per_op\tallocated_bytes_per_op\nstock_concat\t4063.9\t16424.0\nm3_concat\t1387.3\t160.4\nm3_warm_admission\t10240.6\t160.0\nm3_cold_admission\t35331.2\t8621.8\nstock_slice\t130.6\t96.0\nm3_slice\t648.1\t248.0\nm3_copy_output\t7830.3\t17072.0\njoined_segments\t2\njoined_owner_payload_bytes\t16384\ntiny_slice_owner_payload_bytes\t8192\ntiny_compact_owner_payload_bytes\t2\ncache_payload_bytes\t16384\nnative_payload_bytes\t0\nmapped_payload_bytes\t0\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "fork": 2,
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-Xms256m",
+        "-Xmx256m",
+        "-XX:+UseG1GC",
+        "-cp",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+        "TextBenchmark",
+        "2000"
+      ],
+      "stdout": "operation\tns_per_op\tallocated_bytes_per_op\nstock_concat\t5045.0\t16424.0\nm3_concat\t1519.0\t160.3\nm3_warm_admission\t24482.6\t166.6\nm3_cold_admission\t36839.7\t8615.0\nstock_slice\t93.8\t96.0\nm3_slice\t524.9\t248.0\nm3_copy_output\t10505.1\t17072.0\njoined_segments\t2\njoined_owner_payload_bytes\t16384\ntiny_slice_owner_payload_bytes\t8192\ntiny_compact_owner_payload_bytes\t2\ncache_payload_bytes\t16384\nnative_payload_bytes\t0\nmapped_payload_bytes\t0\n",
+      "stderr": "",
+      "exit": 0
+    }
+  ],
+  "limitations": [
+    "not JMH, no general speedup claim",
+    "no latency percentile distribution",
+    "payload accounting excludes descriptor/key/map headers and JVM retained heap",
+    "no native/mapped backend or precomputation amortization experiment"
+  ]
+}

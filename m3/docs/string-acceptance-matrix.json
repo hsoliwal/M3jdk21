@@ -1,0 +1,725 @@
+{
+  "schema": 1,
+  "scope": "actual public Java21 String methods and constructors from javap, including bridge methods",
+  "command": [
+    "C:\\Program Files\\Java\\jdk-21\\bin\\javap.exe",
+    "-public",
+    "java.lang.String"
+  ],
+  "jdk": "java version \"21.0.9\" 2025-10-21 LTS\nJava(TM) SE Runtime Environment (build 21.0.9+7-LTS-338)\nJava HotSpot(TM) 64-Bit Server VM (build 21.0.9+7-LTS-338, mixed mode, sharing)",
+  "surface_sha256": "a37e3e760242a4f435cfa2b92c2fe4ee58f3e761d13f268530dee72dfbcddb3c",
+  "route_a_scope": "Immutable CharSequence facade, not drop-in String",
+  "route_b": "Bounded explicit admission rewrite in separate compiler module; invokedynamic/mixed call graphs pending",
+  "route_c": "Historical PR6 reproduction is separate from new master-based candidate acceptance",
+  "methods": [
+    {
+      "jdk21_signature": "public java.lang.String();",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "String construction/VM identity/constant linkage remains an ordinary-String boundary; no facade equivalence claim."
+    },
+    {
+      "jdk21_signature": "public java.lang.String(java.lang.String);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "String construction/VM identity/constant linkage remains an ordinary-String boundary; no facade equivalence claim."
+    },
+    {
+      "jdk21_signature": "public java.lang.String(char[]);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "String construction/VM identity/constant linkage remains an ordinary-String boundary; no facade equivalence claim."
+    },
+    {
+      "jdk21_signature": "public java.lang.String(char[], int, int);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "String construction/VM identity/constant linkage remains an ordinary-String boundary; no facade equivalence claim."
+    },
+    {
+      "jdk21_signature": "public java.lang.String(int[], int, int);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "String construction/VM identity/constant linkage remains an ordinary-String boundary; no facade equivalence claim."
+    },
+    {
+      "jdk21_signature": "public java.lang.String(byte[], int, int, int);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "String construction/VM identity/constant linkage remains an ordinary-String boundary; no facade equivalence claim."
+    },
+    {
+      "jdk21_signature": "public java.lang.String(byte[], int);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "String construction/VM identity/constant linkage remains an ordinary-String boundary; no facade equivalence claim."
+    },
+    {
+      "jdk21_signature": "public java.lang.String(byte[], int, int, java.lang.String) throws java.io.UnsupportedEncodingException;",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "String construction/VM identity/constant linkage remains an ordinary-String boundary; no facade equivalence claim."
+    },
+    {
+      "jdk21_signature": "public java.lang.String(byte[], int, int, java.nio.charset.Charset);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "String construction/VM identity/constant linkage remains an ordinary-String boundary; no facade equivalence claim."
+    },
+    {
+      "jdk21_signature": "public java.lang.String(byte[], java.lang.String) throws java.io.UnsupportedEncodingException;",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "String construction/VM identity/constant linkage remains an ordinary-String boundary; no facade equivalence claim."
+    },
+    {
+      "jdk21_signature": "public java.lang.String(byte[], java.nio.charset.Charset);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "String construction/VM identity/constant linkage remains an ordinary-String boundary; no facade equivalence claim."
+    },
+    {
+      "jdk21_signature": "public java.lang.String(byte[], int, int);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "String construction/VM identity/constant linkage remains an ordinary-String boundary; no facade equivalence claim."
+    },
+    {
+      "jdk21_signature": "public java.lang.String(byte[]);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "String construction/VM identity/constant linkage remains an ordinary-String boundary; no facade equivalence claim."
+    },
+    {
+      "jdk21_signature": "public java.lang.String(java.lang.StringBuffer);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "String construction/VM identity/constant linkage remains an ordinary-String boundary; no facade equivalence claim."
+    },
+    {
+      "jdk21_signature": "public java.lang.String(java.lang.StringBuilder);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "String construction/VM identity/constant linkage remains an ordinary-String boundary; no facade equivalence claim."
+    },
+    {
+      "jdk21_signature": "public int length();",
+      "status": "implemented_tested_route_a_subset",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Explicit M3String equivalent tested; receiver/type/null/identity differences remain separate compatibility obligations."
+    },
+    {
+      "jdk21_signature": "public boolean isEmpty();",
+      "status": "implemented_tested_route_a_subset",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Explicit M3String equivalent tested; receiver/type/null/identity differences remain separate compatibility obligations."
+    },
+    {
+      "jdk21_signature": "public char charAt(int);",
+      "status": "implemented_tested_route_a_subset",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Explicit M3String equivalent tested; receiver/type/null/identity differences remain separate compatibility obligations."
+    },
+    {
+      "jdk21_signature": "public int codePointAt(int);",
+      "status": "implemented_tested_route_a_subset",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Explicit M3String equivalent tested; receiver/type/null/identity differences remain separate compatibility obligations."
+    },
+    {
+      "jdk21_signature": "public int codePointBefore(int);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public int codePointCount(int, int);",
+      "status": "implemented_tested_route_a_subset",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Explicit M3String equivalent tested; receiver/type/null/identity differences remain separate compatibility obligations."
+    },
+    {
+      "jdk21_signature": "public int offsetByCodePoints(int, int);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public void getChars(int, int, char[], int);",
+      "status": "implemented_tested_route_a_subset",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Explicit M3String equivalent tested; receiver/type/null/identity differences remain separate compatibility obligations."
+    },
+    {
+      "jdk21_signature": "public void getBytes(int, int, byte[], int);",
+      "status": "partial_route_a",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+    },
+    {
+      "jdk21_signature": "public byte[] getBytes(java.lang.String) throws java.io.UnsupportedEncodingException;",
+      "status": "partial_route_a",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+    },
+    {
+      "jdk21_signature": "public byte[] getBytes(java.nio.charset.Charset);",
+      "status": "partial_route_a",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+    },
+    {
+      "jdk21_signature": "public byte[] getBytes();",
+      "status": "partial_route_a",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+    },
+    {
+      "jdk21_signature": "public boolean equals(java.lang.Object);",
+      "status": "implemented_tested_route_a_subset",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Explicit M3String equivalent tested; receiver/type/null/identity differences remain separate compatibility obligations."
+    },
+    {
+      "jdk21_signature": "public boolean contentEquals(java.lang.StringBuffer);",
+      "status": "implemented_tested_route_a_subset",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Explicit M3String equivalent tested; receiver/type/null/identity differences remain separate compatibility obligations."
+    },
+    {
+      "jdk21_signature": "public boolean contentEquals(java.lang.CharSequence);",
+      "status": "implemented_tested_route_a_subset",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Explicit M3String equivalent tested; receiver/type/null/identity differences remain separate compatibility obligations."
+    },
+    {
+      "jdk21_signature": "public boolean equalsIgnoreCase(java.lang.String);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public int compareTo(java.lang.String);",
+      "status": "partial_route_a",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+    },
+    {
+      "jdk21_signature": "public int compareToIgnoreCase(java.lang.String);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public boolean regionMatches(int, java.lang.String, int, int);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public boolean regionMatches(boolean, int, java.lang.String, int, int);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public boolean startsWith(java.lang.String, int);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public boolean startsWith(java.lang.String);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public boolean endsWith(java.lang.String);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public int hashCode();",
+      "status": "implemented_tested_route_a_subset",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Explicit M3String equivalent tested; receiver/type/null/identity differences remain separate compatibility obligations."
+    },
+    {
+      "jdk21_signature": "public int indexOf(int);",
+      "status": "partial_route_a",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+    },
+    {
+      "jdk21_signature": "public int indexOf(int, int);",
+      "status": "partial_route_a",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+    },
+    {
+      "jdk21_signature": "public int indexOf(int, int, int);",
+      "status": "partial_route_a",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+    },
+    {
+      "jdk21_signature": "public int lastIndexOf(int);",
+      "status": "partial_route_a",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+    },
+    {
+      "jdk21_signature": "public int lastIndexOf(int, int);",
+      "status": "partial_route_a",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+    },
+    {
+      "jdk21_signature": "public int indexOf(java.lang.String);",
+      "status": "partial_route_a",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+    },
+    {
+      "jdk21_signature": "public int indexOf(java.lang.String, int);",
+      "status": "partial_route_a",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+    },
+    {
+      "jdk21_signature": "public int indexOf(java.lang.String, int, int);",
+      "status": "partial_route_a",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+    },
+    {
+      "jdk21_signature": "public int lastIndexOf(java.lang.String);",
+      "status": "partial_route_a",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+    },
+    {
+      "jdk21_signature": "public int lastIndexOf(java.lang.String, int);",
+      "status": "partial_route_a",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+    },
+    {
+      "jdk21_signature": "public java.lang.String substring(int);",
+      "status": "implemented_tested_route_a_subset",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Explicit M3String equivalent tested; receiver/type/null/identity differences remain separate compatibility obligations."
+    },
+    {
+      "jdk21_signature": "public java.lang.String substring(int, int);",
+      "status": "implemented_tested_route_a_subset",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Explicit M3String equivalent tested; receiver/type/null/identity differences remain separate compatibility obligations."
+    },
+    {
+      "jdk21_signature": "public java.lang.CharSequence subSequence(int, int);",
+      "status": "implemented_tested_route_a_subset",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Explicit M3String equivalent tested; receiver/type/null/identity differences remain separate compatibility obligations."
+    },
+    {
+      "jdk21_signature": "public java.lang.String concat(java.lang.String);",
+      "status": "partial_route_a",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+    },
+    {
+      "jdk21_signature": "public java.lang.String replace(char, char);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public boolean matches(java.lang.String);",
+      "status": "partial_route_a",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+    },
+    {
+      "jdk21_signature": "public boolean contains(java.lang.CharSequence);",
+      "status": "partial_route_a",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+    },
+    {
+      "jdk21_signature": "public java.lang.String replaceFirst(java.lang.String, java.lang.String);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public java.lang.String replaceAll(java.lang.String, java.lang.String);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public java.lang.String replace(java.lang.CharSequence, java.lang.CharSequence);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public java.lang.String[] split(java.lang.String, int);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public java.lang.String[] splitWithDelimiters(java.lang.String, int);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public java.lang.String[] split(java.lang.String);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public static java.lang.String join(java.lang.CharSequence, java.lang.CharSequence...);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public static java.lang.String join(java.lang.CharSequence, java.lang.Iterable<? extends java.lang.CharSequence>);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public java.lang.String toLowerCase(java.util.Locale);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public java.lang.String toLowerCase();",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public java.lang.String toUpperCase(java.util.Locale);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public java.lang.String toUpperCase();",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public java.lang.String trim();",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public java.lang.String strip();",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public java.lang.String stripLeading();",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public java.lang.String stripTrailing();",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public boolean isBlank();",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public java.util.stream.Stream<java.lang.String> lines();",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public java.lang.String indent(int);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public java.lang.String stripIndent();",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public java.lang.String translateEscapes();",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public <R> R transform(java.util.function.Function<? super java.lang.String, ? extends R>);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public java.lang.String toString();",
+      "status": "implemented_tested_route_a_subset",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Explicit M3String equivalent tested; receiver/type/null/identity differences remain separate compatibility obligations."
+    },
+    {
+      "jdk21_signature": "public java.util.stream.IntStream chars();",
+      "status": "implemented_tested_route_a_subset",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Explicit M3String equivalent tested; receiver/type/null/identity differences remain separate compatibility obligations."
+    },
+    {
+      "jdk21_signature": "public java.util.stream.IntStream codePoints();",
+      "status": "implemented_tested_route_a_subset",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Explicit M3String equivalent tested; receiver/type/null/identity differences remain separate compatibility obligations."
+    },
+    {
+      "jdk21_signature": "public char[] toCharArray();",
+      "status": "implemented_tested_route_a_subset",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Explicit M3String equivalent tested; receiver/type/null/identity differences remain separate compatibility obligations."
+    },
+    {
+      "jdk21_signature": "public static java.lang.String format(java.lang.String, java.lang.Object...);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public static java.lang.String format(java.util.Locale, java.lang.String, java.lang.Object...);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public java.lang.String formatted(java.lang.Object...);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public static java.lang.String valueOf(java.lang.Object);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public static java.lang.String valueOf(char[]);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public static java.lang.String valueOf(char[], int, int);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public static java.lang.String copyValueOf(char[], int, int);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public static java.lang.String copyValueOf(char[]);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public static java.lang.String valueOf(boolean);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public static java.lang.String valueOf(char);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public static java.lang.String valueOf(int);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public static java.lang.String valueOf(long);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public static java.lang.String valueOf(float);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public static java.lang.String valueOf(double);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public native java.lang.String intern();",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "String construction/VM identity/constant linkage remains an ordinary-String boundary; no facade equivalence claim."
+    },
+    {
+      "jdk21_signature": "public java.lang.String repeat(int);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "No facade port or differential gate admitted."
+    },
+    {
+      "jdk21_signature": "public java.util.Optional<java.lang.String> describeConstable();",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "String construction/VM identity/constant linkage remains an ordinary-String boundary; no facade equivalence claim."
+    },
+    {
+      "jdk21_signature": "public java.lang.String resolveConstantDesc(java.lang.invoke.MethodHandles$Lookup);",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "String construction/VM identity/constant linkage remains an ordinary-String boundary; no facade equivalence claim."
+    },
+    {
+      "jdk21_signature": "public int compareTo(java.lang.Object);",
+      "status": "partial_route_a",
+      "evidence": [
+        "m3/evidence/retained-text-result.json"
+      ],
+      "limitation": "Only documented facade overloads; no blanket parity for this overload."
+    },
+    {
+      "jdk21_signature": "public java.lang.Object resolveConstantDesc(java.lang.invoke.MethodHandles$Lookup) throws java.lang.ReflectiveOperationException;",
+      "status": "pending",
+      "evidence": [],
+      "limitation": "String construction/VM identity/constant linkage remains an ordinary-String boundary; no facade equivalence claim."
+    }
+  ],
+  "native_vm_gates": {
+    "interpreter": "pending_exact_candidate_acceptance",
+    "StringTable_intern": "pending_exact_candidate_acceptance",
+    "GC": "pending_exact_candidate_acceptance",
+    "C1_C2_intrinsics": "pending_exact_candidate_acceptance",
+    "JNI_modified_UTF8": "pending_exact_candidate_acceptance",
+    "JVMTI": "pending_exact_candidate_acceptance",
+    "CDS": "pending_exact_candidate_acceptance",
+    "deduplication": "pending_exact_candidate_acceptance",
+    "serialization": "pending_exact_candidate_acceptance",
+    "reflection": "pending_exact_candidate_acceptance",
+    "serviceability": "pending_exact_candidate_acceptance"
+  },
+  "contract_conflicts": [
+    {
+      "source": "indexstring.SubMIndexString",
+      "contract": "arbitrary UTF16 code-unit ranges",
+      "status": "preserve through facade; source public adapter pending"
+    },
+    {
+      "source": "runtime.SubMIndexString",
+      "contract": "reject surrogate splitting; may materialize parent",
+      "status": "separate adapter pending; cannot rename into exact String range semantics"
+    }
+  ]
+}

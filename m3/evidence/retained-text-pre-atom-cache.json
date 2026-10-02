@@ -1,0 +1,97 @@
+{
+    "route":  "A-stock-JVM",
+    "records":  [
+                    {
+                        "argv":  [
+                                     "C:\\Program Files\\Java\\jdk-21\\bin\\javac",
+                                     "--release",
+                                     "21",
+                                     "-Xlint:all",
+                                     "-Werror",
+                                     "-d",
+                                     "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+                                     "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\m3\\indexstring\\M3String.java",
+                                     "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\m3\\indexstring\\M3StringArena.java",
+                                     "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\m3\\indexstring\\M3Utf16Cursor.java",
+                                     "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\synexia\\indexstring\\FrozenByteInterner.java",
+                                     "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\synexia\\indexstring\\FrozenBytes.java",
+                                     "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\synexia\\indexstring\\FrozenChars.java",
+                                     "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedBytes.java",
+                                     "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedChars.java",
+                                     "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedStorageIntern.java",
+                                     "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedStreams.java",
+                                     "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\test\\M3StringTest.java"
+                                 ],
+                        "exit":  0,
+                        "stdout":  "",
+                        "stderr":  ""
+                    },
+                    {
+                        "argv":  [
+                                     "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+                                     "-ea",
+                                     "-cp",
+                                     "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+                                     "M3StringTest"
+                                 ],
+                        "exit":  0,
+                        "stdout":  "M3_RETAINED_TEXT_PASS checks=64449\n",
+                        "stderr":  ""
+                    },
+                    {
+                        "argv":  [
+                                     "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+                                     "-ea",
+                                     "-Xint",
+                                     "-cp",
+                                     "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+                                     "M3StringTest"
+                                 ],
+                        "exit":  0,
+                        "stdout":  "M3_RETAINED_TEXT_PASS checks=64449\n",
+                        "stderr":  ""
+                    },
+                    {
+                        "argv":  [
+                                     "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+                                     "-ea",
+                                     "-XX:-CompactStrings",
+                                     "-cp",
+                                     "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+                                     "M3StringTest"
+                                 ],
+                        "exit":  0,
+                        "stdout":  "M3_RETAINED_TEXT_PASS checks=64449\n",
+                        "stderr":  ""
+                    },
+                    {
+                        "argv":  [
+                                     "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+                                     "-ea",
+                                     "-Xbatch",
+                                     "-XX:-TieredCompilation",
+                                     "-cp",
+                                     "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+                                     "M3StringTest"
+                                 ],
+                        "exit":  0,
+                        "stdout":  "M3_RETAINED_TEXT_PASS checks=64449\n",
+                        "stderr":  ""
+                    }
+                ],
+    "source_hashes":  {
+                          "src/com/m3/indexstring/M3String.java":  "aaf2f5868fb26f1a8d80f13ae13885885ec7f2eb31c4676f4924d037315fe61c",
+                          "src/com/m3/indexstring/M3StringArena.java":  "94eda684ee599ed6cbfd9ed8fd58a571ca5f831a368da332345999255919639a",
+                          "src/com/m3/indexstring/M3Utf16Cursor.java":  "ba2c75331207feacfdb2fdd225c1b2b2d6aba9c753d9865a7e00e9baafdaea98",
+                          "src/com/synexia/indexstring/FrozenByteInterner.java":  "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414",
+                          "src/com/synexia/indexstring/FrozenBytes.java":  "cb50139594817d5cb2477c4d67148d4aed2174299f05cff9a3b24416139bc6b4",
+                          "src/com/synexia/indexstring/FrozenChars.java":  "a7769b3999ad65cb8ee9040c674c94a705a78eb7c956e52e1a474e42a42d5139",
+                          "src/com/synexia/indexstring/MIndexJoinedBytes.java":  "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+                          "src/com/synexia/indexstring/MIndexJoinedChars.java":  "2cdb10d20f7ed9c80143471deb22350fdc44d9c7899975402313cb85fd50c3c4",
+                          "src/com/synexia/indexstring/MIndexJoinedStorageIntern.java":  "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7",
+                          "src/com/synexia/indexstring/MIndexJoinedStreams.java":  "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80"
+                      },
+    "source_commit":  "6df9df8d8f42111239013ee941723ec37f97ba6e",
+    "target_baseline":  "8bb6215372e07712f1fdf5a0cb912af495007b19",
+    "subject":  "Exact production file hashes, stock Route A only; final commit binding pending"
+}

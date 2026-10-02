@@ -1,0 +1,77 @@
+{
+  "status": "diagnostic-only",
+  "warmup_iterations": 2000,
+  "measurement_iterations": 2000,
+  "input": "4096 Latin1 a + 4096 UTF16 U+0100, retained operands",
+  "records": [
+    {
+      "fork": 0,
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-Xms256m",
+        "-Xmx256m",
+        "-XX:+UseG1GC",
+        "-cp",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+        "TextBenchmark",
+        "2000"
+      ],
+      "stdout": "operation\tns_per_op\tallocated_bytes_per_op\nstock_concat\t5238.4\t16424.0\nm3_concat\t1444.8\t160.3\nm3_warm_admission\t35697.8\t167.0\nm3_cold_admission\t48680.8\t8613.1\nstock_slice\t173.2\t96.0\nm3_slice\t534.5\t248.0\nm3_copy_output\t23214.3\t17072.0\njoined_segments\t2\njoined_owner_payload_bytes\t16384\ntiny_slice_owner_payload_bytes\t8192\ntiny_compact_owner_payload_bytes\t2\ncache_payload_bytes\t16384\nnative_payload_bytes\t0\nmapped_payload_bytes\t0\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "fork": 1,
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-Xms256m",
+        "-Xmx256m",
+        "-XX:+UseG1GC",
+        "-cp",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+        "TextBenchmark",
+        "2000"
+      ],
+      "stdout": "operation\tns_per_op\tallocated_bytes_per_op\nstock_concat\t7450.6\t16424.0\nm3_concat\t3089.2\t160.4\nm3_warm_admission\t38292.1\t173.0\nm3_cold_admission\t43966.5\t8619.9\nstock_slice\t239.5\t96.0\nm3_slice\t809.8\t248.0\nm3_copy_output\t11394.8\t17072.0\njoined_segments\t2\njoined_owner_payload_bytes\t16384\ntiny_slice_owner_payload_bytes\t8192\ntiny_compact_owner_payload_bytes\t2\ncache_payload_bytes\t16384\nnative_payload_bytes\t0\nmapped_payload_bytes\t0\n",
+      "stderr": "",
+      "exit": 0
+    },
+    {
+      "fork": 2,
+      "argv": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java",
+        "-Xms256m",
+        "-Xmx256m",
+        "-XX:+UseG1GC",
+        "-cp",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\ports\\text\\build",
+        "TextBenchmark",
+        "2000"
+      ],
+      "stdout": "operation\tns_per_op\tallocated_bytes_per_op\nstock_concat\t6420.6\t16424.0\nm3_concat\t1900.8\t160.3\nm3_warm_admission\t28887.5\t172.4\nm3_cold_admission\t42276.6\t8612.0\nstock_slice\t173.8\t96.0\nm3_slice\t994.7\t248.0\nm3_copy_output\t22304.1\t17072.0\njoined_segments\t2\njoined_owner_payload_bytes\t16384\ntiny_slice_owner_payload_bytes\t8192\ntiny_compact_owner_payload_bytes\t2\ncache_payload_bytes\t16384\nnative_payload_bytes\t0\nmapped_payload_bytes\t0\n",
+      "stderr": "",
+      "exit": 0
+    }
+  ],
+  "platform": "Windows-11-10.0.26300-SP0",
+  "jdk_version": "java version \"21.0.9\" 2025-10-21 LTS\nJava(TM) SE Runtime Environment (build 21.0.9+7-LTS-338)\nJava HotSpot(TM) 64-Bit Server VM (build 21.0.9+7-LTS-338, mixed mode, sharing)\n",
+  "source_hashes": {
+    "src/com/m3/indexstring/M3String.java": "aaf2f5868fb26f1a8d80f13ae13885885ec7f2eb31c4676f4924d037315fe61c",
+    "src/com/m3/indexstring/M3StringArena.java": "94eda684ee599ed6cbfd9ed8fd58a571ca5f831a368da332345999255919639a",
+    "src/com/m3/indexstring/M3Utf16Cursor.java": "ba2c75331207feacfdb2fdd225c1b2b2d6aba9c753d9865a7e00e9baafdaea98",
+    "src/com/synexia/indexstring/FrozenByteInterner.java": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414",
+    "src/com/synexia/indexstring/FrozenBytes.java": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf",
+    "src/com/synexia/indexstring/FrozenChars.java": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46",
+    "src/com/synexia/indexstring/MIndexJoinedBytes.java": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+    "src/com/synexia/indexstring/MIndexJoinedChars.java": "2cdb10d20f7ed9c80143471deb22350fdc44d9c7899975402313cb85fd50c3c4",
+    "src/com/synexia/indexstring/MIndexJoinedStorageIntern.java": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7",
+    "src/com/synexia/indexstring/MIndexJoinedStreams.java": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
+    "test/TextBenchmark.java": "1e881c1d223dd30e23be1a2ef8f4b12dd9b42956613b850e9f73838dde54bf26"
+  },
+  "limitations": [
+    "not JMH, no general speedup claim",
+    "no latency percentile distribution",
+    "payload accounting excludes descriptor/key/map headers and JVM retained heap",
+    "no native/mapped backend or precomputation amortization experiment"
+  ]
+}

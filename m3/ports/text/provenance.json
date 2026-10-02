@@ -1,0 +1,76 @@
+{
+  "publication": "user-authorized selected text dependency closure only",
+  "source_repository": "hsoliwal/com.synexia",
+  "files": [
+    {
+      "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java",
+      "sha256": "0c03ca0ed8b42212fa92e4d5f9325ba864f8d11928cd6a0b030b861f668f0657",
+      "target_path": "m3/ports/text/src/com/synexia/indexstring/FrozenChars.java",
+      "source_symbol": "com.synexia.indexstring.FrozenChars",
+      "kind": "adapter",
+      "target_sha256": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46"
+    },
+    {
+      "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java",
+      "sha256": "cb50139594817d5cb2477c4d67148d4aed2174299f05cff9a3b24416139bc6b4",
+      "target_path": "m3/ports/text/src/com/synexia/indexstring/FrozenBytes.java",
+      "source_symbol": "com.synexia.indexstring.FrozenBytes",
+      "kind": "adapter",
+      "target_sha256": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf"
+    },
+    {
+      "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenByteInterner.java",
+      "sha256": "8f350411381abdf7069f8fab1ee239b4cfce05faa5d1f73204e98e377cad82ea",
+      "target_path": "m3/ports/text/src/com/synexia/indexstring/FrozenByteInterner.java",
+      "source_symbol": "com.synexia.indexstring.FrozenByteInterner",
+      "kind": "adapter",
+      "target_sha256": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414"
+    },
+    {
+      "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedChars.java",
+      "sha256": "712c1c795ff1e0d6dea099eaec8fa6e64803adfc12bad6f31970b722c659d396",
+      "target_path": "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedChars.java",
+      "source_symbol": "com.synexia.indexstring.MIndexJoinedChars",
+      "kind": "adapter",
+      "target_sha256": "2cdb10d20f7ed9c80143471deb22350fdc44d9c7899975402313cb85fd50c3c4"
+    },
+    {
+      "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedBytes.java",
+      "sha256": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+      "target_path": "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedBytes.java",
+      "source_symbol": "com.synexia.indexstring.MIndexJoinedBytes",
+      "kind": "direct_port",
+      "target_sha256": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b"
+    },
+    {
+      "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStorageIntern.java",
+      "sha256": "f42c548a4fd47d3dac43283082125232e04d5f13f28b63521832493394176337",
+      "target_path": "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStorageIntern.java",
+      "source_symbol": "com.synexia.indexstring.MIndexJoinedStorageIntern",
+      "kind": "adapter",
+      "target_sha256": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7"
+    },
+    {
+      "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStreams.java",
+      "sha256": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
+      "target_path": "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStreams.java",
+      "source_symbol": "com.synexia.indexstring.MIndexJoinedStreams",
+      "kind": "direct_port",
+      "target_sha256": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80"
+    }
+  ],
+  "schema": 1,
+  "acceptance": "Route A tested on stock21; other routes separate gates",
+  "target_baseline": "8bb6215372e07712f1fdf5a0cb912af495007b19",
+  "adaptations": [
+    "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
+    "FrozenChars: retain immutable byte atoms, safe adjacent coalescing and owner retention",
+    "MIndexJoinedChars: canonical-owner projection, direct mutable encoding output, explicit uncached body",
+    "MIndexJoinedStorageIntern: explicit detached body bypasses content canonicalization",
+    "M3String facade: exact value/search/cursor API outside java.base; known String surface gaps tracked",
+    "FrozenBytes: owner-local lazy immutable UTF16 view/hash fact; no extra payload"
+  ],
+  "source_commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+  "adapter_patch": "m3/ports/text/donor-adaptations.patch",
+  "adapter_patch_sha256": "b0a5160c3f706a207818198422190592b8c9cc9822224b7f03f6caf27b745a7b"
+}

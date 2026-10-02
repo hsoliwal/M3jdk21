@@ -1,0 +1,25 @@
+{
+  "same_inode": "562949961399252",
+  "image": "english-demo-a8670c2ba673d3ab3bd4a0c9806e8623aad1f6eddff8e51d5da552fb532e4c98.m3lex",
+  "processes": [
+    {
+      "pid": 413,
+      "report": "pid=413 image=ddbcebdb3d203b691376e28bd92e6d80276325b39d68e0c5153b7a573ee41275 records=13 bytes=298",
+      "maps": [
+        "7467a6166000-7467a6167000 r--s 00000000 00:4a 562949961399252            /mnt/c/worktrees/M3jdk21-mindex-migration-20261002/m3/build/english-demo-a8670c2ba673d3ab3bd4a0c9806e8623aad1f6eddff8e51d5da552fb532e4c98.m3lex"
+      ]
+    },
+    {
+      "pid": 432,
+      "report": "pid=432 image=ddbcebdb3d203b691376e28bd92e6d80276325b39d68e0c5153b7a573ee41275 records=13 bytes=298",
+      "maps": [
+        "7f204b566000-7f204b567000 r--s 00000000 00:4a 562949961399252            /mnt/c/worktrees/M3jdk21-mindex-migration-20261002/m3/build/english-demo-a8670c2ba673d3ab3bd4a0c9806e8623aad1f6eddff8e51d5da552fb532e4c98.m3lex"
+      ]
+    }
+  ],
+  "claim": "same read-only shared file mapping; not a measured PSS or memory-savings claim",
+  "platform": "WSL Linux Ubuntu24.04 stockJDK21.0.12.1",
+  "scope": "existing foundation image; not new facade lexicon admission or modified-JDK acceptance",
+  "stock_java_sha256": "635baf419576ec4ad4f785014283fb93f1be1103e6d02252f7a00517f0e2a245",
+  "stock_libjvm_sha256": "14dbe1be464180979bd74545cf9418967f9141f3f14b6e80a0d0ab37d3fbbda1"
+}

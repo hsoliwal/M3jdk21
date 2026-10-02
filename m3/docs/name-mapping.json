@@ -1,7 +1,1124 @@
 {
-  "schema": 1,
+  "schema": 2,
+  "mapping_schema": "mindex-to-m3/v2",
   "policy": "additive; no blind renames or unverified compatibility claims",
+  "source_inventory_ref": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+    "path": "synexia-mindex/repository-inventory/docs/migration/mindex-to-m3.json",
+    "visibility": "private",
+    "status": "generation-in-progress",
+    "pending_item_count": 29037
+  },
   "mappings": [
+    {
+      "mapping_id": "source:fd1d97eb412cf2b0332ea8616311eedc29fd0f0cc6858388a376ec2a4a5c158b",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java",
+          "symbol": "com.synexia.indexstring.FrozenChars",
+          "signature": "class FrozenChars",
+          "sha256": "0c03ca0ed8b42212fa92e4d5f9325ba864f8d11928cd6a0b030b861f668f0657",
+          "fingerprint": null
+        }
+      ],
+      "destinations": [
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": "8bb6215372e07712f1fdf5a0cb912af495007b19",
+          "module": "m3/ports/text",
+          "path": "m3/ports/text/src/com/synexia/indexstring/FrozenChars.java",
+          "symbol": "com.synexia.indexstring.FrozenChars",
+          "signature": "class FrozenChars",
+          "sha256": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46",
+          "fingerprint": null,
+          "revision_kind": "baseline_with_candidate_hash"
+        }
+      ],
+      "mapping_kind": "adapter",
+      "canonical_owner": "com.synexia.indexstring.FrozenChars",
+      "identity_rules": "Immutable payload owners; process-local weak composition IDs; no resolver/structural numeric IDs ported",
+      "contract_differences": [
+        "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
+        "FrozenChars: retain immutable byte atoms, safe adjacent coalescing and owner retention",
+        "MIndexJoinedChars: canonical-owner projection, direct mutable encoding output, explicit uncached body",
+        "MIndexJoinedStorageIntern: explicit detached body bypasses content canonicalization",
+        "M3String facade: exact value/search/cursor API outside java.base; known String surface gaps tracked"
+      ],
+      "compatibility_obligations": {
+        "source": "original names retained, only additive APIs",
+        "binary": "no existing member removed; packaging is separate, do not put both owners on one classpath",
+        "serialization": "no new persistent IDs or image-format claim",
+        "native_abi": "no ABI changes; direct pointer borrowing only original owner boundary"
+      },
+      "format_abi": {
+        "raw_utf16": "BE code units; no charset normalization",
+        "shared_format": null,
+        "version": null
+      },
+      "bootstrap_constraints": [
+        "application module only",
+        "no network or String constructor hook",
+        "no Maven/recipe runtime dependencies"
+      ],
+      "dependencies": [],
+      "downstream_consumers": [
+        "com.m3.indexstring.M3String"
+      ],
+      "materialization_boundaries": [
+        "ordinary String conversion",
+        "mutable arrays and encoding outputs"
+      ],
+      "cached_fact_owner": "Frozen/Joined owners; optional bounded atom lookups, weak tuple registry",
+      "recipe": {
+        "id": "m3-selected-text-port",
+        "version": 1,
+        "preconditions": [
+          "exact raw Git source hashes",
+          "exact adapter patch SHA256",
+          "all destinations absent or identical"
+        ],
+        "before_hashes": {
+          "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java": "0c03ca0ed8b42212fa92e4d5f9325ba864f8d11928cd6a0b030b861f668f0657"
+        },
+        "after_hashes": {
+          "m3/ports/text/src/com/synexia/indexstring/FrozenChars.java": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46"
+        },
+        "rollback": "reviewed three-way reverse replay against the last synchronized baseline"
+      },
+      "tests": {
+        "differential": [
+          "M3StringTest"
+        ],
+        "acceptance": [
+          "Route A stock JDK21 four modes"
+        ],
+        "evidence": [
+          "m3/evidence/retained-text-result.json"
+        ]
+      },
+      "license_provenance": {
+        "license": "Apache-2.0",
+        "notice": "m3/ports/text/THIRD_PARTY_NOTICES.md",
+        "publication": "selected user-authorized dependency closure; source repository private"
+      },
+      "last_synchronized": {
+        "source": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+        "target": "8bb6215372e07712f1fdf5a0cb912af495007b19"
+      },
+      "target_adaptations": [
+        "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
+        "FrozenChars: retain immutable byte atoms, safe adjacent coalescing and owner retention",
+        "MIndexJoinedChars: canonical-owner projection, direct mutable encoding output, explicit uncached body",
+        "MIndexJoinedStorageIntern: explicit detached body bypasses content canonicalization",
+        "M3String facade: exact value/search/cursor API outside java.base; known String surface gaps tracked",
+        "FrozenBytes: owner-local lazy immutable UTF16 view/hash fact; no extra payload"
+      ],
+      "conflicts": [],
+      "pending_changes": [
+        "pin destination acceptance commit after code commit",
+        "full family/source ABI compatibility remains separate"
+      ],
+      "rationale": "Dependency-minimal reuse of established immutable storage; no blind prefix rename",
+      "port_direction": "source_to_target",
+      "status": "implemented_tested_route_a"
+    },
+    {
+      "mapping_id": "source:61e1e799dfff8a821db084921c35072e5031955345619ee9180816ba810aa2e4",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java",
+          "symbol": "com.synexia.indexstring.FrozenBytes",
+          "signature": "class FrozenBytes",
+          "sha256": "cb50139594817d5cb2477c4d67148d4aed2174299f05cff9a3b24416139bc6b4",
+          "fingerprint": null
+        }
+      ],
+      "destinations": [
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": "8bb6215372e07712f1fdf5a0cb912af495007b19",
+          "module": "m3/ports/text",
+          "path": "m3/ports/text/src/com/synexia/indexstring/FrozenBytes.java",
+          "symbol": "com.synexia.indexstring.FrozenBytes",
+          "signature": "class FrozenBytes",
+          "sha256": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf",
+          "fingerprint": null,
+          "revision_kind": "baseline_with_candidate_hash"
+        }
+      ],
+      "mapping_kind": "adapter",
+      "canonical_owner": "com.synexia.indexstring.FrozenBytes",
+      "identity_rules": "Immutable payload owners; process-local weak composition IDs; no resolver/structural numeric IDs ported",
+      "contract_differences": [],
+      "compatibility_obligations": {
+        "source": "original names retained, only additive APIs",
+        "binary": "no existing member removed; packaging is separate, do not put both owners on one classpath",
+        "serialization": "no new persistent IDs or image-format claim",
+        "native_abi": "no ABI changes; direct pointer borrowing only original owner boundary"
+      },
+      "format_abi": {
+        "raw_utf16": "BE code units; no charset normalization",
+        "shared_format": null,
+        "version": null
+      },
+      "bootstrap_constraints": [
+        "application module only",
+        "no network or String constructor hook",
+        "no Maven/recipe runtime dependencies"
+      ],
+      "dependencies": [],
+      "downstream_consumers": [
+        "com.m3.indexstring.M3String"
+      ],
+      "materialization_boundaries": [
+        "ordinary String conversion",
+        "mutable arrays and encoding outputs"
+      ],
+      "cached_fact_owner": "Frozen/Joined owners; optional bounded atom lookups, weak tuple registry",
+      "recipe": {
+        "id": "m3-selected-text-port",
+        "version": 1,
+        "preconditions": [
+          "exact raw Git source hashes",
+          "exact adapter patch SHA256",
+          "all destinations absent or identical"
+        ],
+        "before_hashes": {
+          "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java": "cb50139594817d5cb2477c4d67148d4aed2174299f05cff9a3b24416139bc6b4"
+        },
+        "after_hashes": {
+          "m3/ports/text/src/com/synexia/indexstring/FrozenBytes.java": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf"
+        },
+        "rollback": "reviewed three-way reverse replay against the last synchronized baseline"
+      },
+      "tests": {
+        "differential": [
+          "M3StringTest"
+        ],
+        "acceptance": [
+          "Route A stock JDK21 four modes"
+        ],
+        "evidence": [
+          "m3/evidence/retained-text-result.json"
+        ]
+      },
+      "license_provenance": {
+        "license": "Apache-2.0",
+        "notice": "m3/ports/text/THIRD_PARTY_NOTICES.md",
+        "publication": "selected user-authorized dependency closure; source repository private"
+      },
+      "last_synchronized": {
+        "source": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+        "target": "8bb6215372e07712f1fdf5a0cb912af495007b19"
+      },
+      "target_adaptations": [
+        "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
+        "FrozenChars: retain immutable byte atoms, safe adjacent coalescing and owner retention",
+        "MIndexJoinedChars: canonical-owner projection, direct mutable encoding output, explicit uncached body",
+        "MIndexJoinedStorageIntern: explicit detached body bypasses content canonicalization",
+        "M3String facade: exact value/search/cursor API outside java.base; known String surface gaps tracked",
+        "FrozenBytes: owner-local lazy immutable UTF16 view/hash fact; no extra payload"
+      ],
+      "conflicts": [],
+      "pending_changes": [
+        "pin destination acceptance commit after code commit",
+        "full family/source ABI compatibility remains separate"
+      ],
+      "rationale": "Dependency-minimal reuse of established immutable storage; no blind prefix rename",
+      "port_direction": "source_to_target",
+      "status": "implemented_tested_route_a"
+    },
+    {
+      "mapping_id": "source:cfbe43ec93eca2c5c892c31e03d7fa1eec809402dec20f512783bf3a5885ff68",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenByteInterner.java",
+          "symbol": "com.synexia.indexstring.FrozenByteInterner",
+          "signature": "class FrozenByteInterner",
+          "sha256": "8f350411381abdf7069f8fab1ee239b4cfce05faa5d1f73204e98e377cad82ea",
+          "fingerprint": null
+        }
+      ],
+      "destinations": [
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": "8bb6215372e07712f1fdf5a0cb912af495007b19",
+          "module": "m3/ports/text",
+          "path": "m3/ports/text/src/com/synexia/indexstring/FrozenByteInterner.java",
+          "symbol": "com.synexia.indexstring.FrozenByteInterner",
+          "signature": "class FrozenByteInterner",
+          "sha256": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414",
+          "fingerprint": null,
+          "revision_kind": "baseline_with_candidate_hash"
+        }
+      ],
+      "mapping_kind": "adapter",
+      "canonical_owner": "com.synexia.indexstring.FrozenByteInterner",
+      "identity_rules": "Immutable payload owners; process-local weak composition IDs; no resolver/structural numeric IDs ported",
+      "contract_differences": [
+        "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
+        "FrozenChars: retain immutable byte atoms, safe adjacent coalescing and owner retention",
+        "MIndexJoinedChars: canonical-owner projection, direct mutable encoding output, explicit uncached body",
+        "MIndexJoinedStorageIntern: explicit detached body bypasses content canonicalization",
+        "M3String facade: exact value/search/cursor API outside java.base; known String surface gaps tracked"
+      ],
+      "compatibility_obligations": {
+        "source": "original names retained, only additive APIs",
+        "binary": "no existing member removed; packaging is separate, do not put both owners on one classpath",
+        "serialization": "no new persistent IDs or image-format claim",
+        "native_abi": "no ABI changes; direct pointer borrowing only original owner boundary"
+      },
+      "format_abi": {
+        "raw_utf16": "BE code units; no charset normalization",
+        "shared_format": null,
+        "version": null
+      },
+      "bootstrap_constraints": [
+        "application module only",
+        "no network or String constructor hook",
+        "no Maven/recipe runtime dependencies"
+      ],
+      "dependencies": [],
+      "downstream_consumers": [
+        "com.m3.indexstring.M3String"
+      ],
+      "materialization_boundaries": [
+        "ordinary String conversion",
+        "mutable arrays and encoding outputs"
+      ],
+      "cached_fact_owner": "Frozen/Joined owners; optional bounded atom lookups, weak tuple registry",
+      "recipe": {
+        "id": "m3-selected-text-port",
+        "version": 1,
+        "preconditions": [
+          "exact raw Git source hashes",
+          "exact adapter patch SHA256",
+          "all destinations absent or identical"
+        ],
+        "before_hashes": {
+          "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenByteInterner.java": "8f350411381abdf7069f8fab1ee239b4cfce05faa5d1f73204e98e377cad82ea"
+        },
+        "after_hashes": {
+          "m3/ports/text/src/com/synexia/indexstring/FrozenByteInterner.java": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414"
+        },
+        "rollback": "reviewed three-way reverse replay against the last synchronized baseline"
+      },
+      "tests": {
+        "differential": [
+          "M3StringTest"
+        ],
+        "acceptance": [
+          "Route A stock JDK21 four modes"
+        ],
+        "evidence": [
+          "m3/evidence/retained-text-result.json"
+        ]
+      },
+      "license_provenance": {
+        "license": "Apache-2.0",
+        "notice": "m3/ports/text/THIRD_PARTY_NOTICES.md",
+        "publication": "selected user-authorized dependency closure; source repository private"
+      },
+      "last_synchronized": {
+        "source": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+        "target": "8bb6215372e07712f1fdf5a0cb912af495007b19"
+      },
+      "target_adaptations": [
+        "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
+        "FrozenChars: retain immutable byte atoms, safe adjacent coalescing and owner retention",
+        "MIndexJoinedChars: canonical-owner projection, direct mutable encoding output, explicit uncached body",
+        "MIndexJoinedStorageIntern: explicit detached body bypasses content canonicalization",
+        "M3String facade: exact value/search/cursor API outside java.base; known String surface gaps tracked",
+        "FrozenBytes: owner-local lazy immutable UTF16 view/hash fact; no extra payload"
+      ],
+      "conflicts": [],
+      "pending_changes": [
+        "pin destination acceptance commit after code commit",
+        "full family/source ABI compatibility remains separate"
+      ],
+      "rationale": "Dependency-minimal reuse of established immutable storage; no blind prefix rename",
+      "port_direction": "source_to_target",
+      "status": "implemented_tested_route_a"
+    },
+    {
+      "mapping_id": "source:9035acf23c18b9dce54945c3b0da582782c9f94f1d85260ab0b8571969464c80",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedChars.java",
+          "symbol": "com.synexia.indexstring.MIndexJoinedChars",
+          "signature": "class MIndexJoinedChars",
+          "sha256": "712c1c795ff1e0d6dea099eaec8fa6e64803adfc12bad6f31970b722c659d396",
+          "fingerprint": null
+        }
+      ],
+      "destinations": [
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": "8bb6215372e07712f1fdf5a0cb912af495007b19",
+          "module": "m3/ports/text",
+          "path": "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedChars.java",
+          "symbol": "com.synexia.indexstring.MIndexJoinedChars",
+          "signature": "class MIndexJoinedChars",
+          "sha256": "2cdb10d20f7ed9c80143471deb22350fdc44d9c7899975402313cb85fd50c3c4",
+          "fingerprint": null,
+          "revision_kind": "baseline_with_candidate_hash"
+        }
+      ],
+      "mapping_kind": "adapter",
+      "canonical_owner": "com.synexia.indexstring.MIndexJoinedChars",
+      "identity_rules": "Immutable payload owners; process-local weak composition IDs; no resolver/structural numeric IDs ported",
+      "contract_differences": [
+        "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
+        "FrozenChars: retain immutable byte atoms, safe adjacent coalescing and owner retention",
+        "MIndexJoinedChars: canonical-owner projection, direct mutable encoding output, explicit uncached body",
+        "MIndexJoinedStorageIntern: explicit detached body bypasses content canonicalization",
+        "M3String facade: exact value/search/cursor API outside java.base; known String surface gaps tracked"
+      ],
+      "compatibility_obligations": {
+        "source": "original names retained, only additive APIs",
+        "binary": "no existing member removed; packaging is separate, do not put both owners on one classpath",
+        "serialization": "no new persistent IDs or image-format claim",
+        "native_abi": "no ABI changes; direct pointer borrowing only original owner boundary"
+      },
+      "format_abi": {
+        "raw_utf16": "BE code units; no charset normalization",
+        "shared_format": null,
+        "version": null
+      },
+      "bootstrap_constraints": [
+        "application module only",
+        "no network or String constructor hook",
+        "no Maven/recipe runtime dependencies"
+      ],
+      "dependencies": [],
+      "downstream_consumers": [
+        "com.m3.indexstring.M3String"
+      ],
+      "materialization_boundaries": [
+        "ordinary String conversion",
+        "mutable arrays and encoding outputs"
+      ],
+      "cached_fact_owner": "Frozen/Joined owners; optional bounded atom lookups, weak tuple registry",
+      "recipe": {
+        "id": "m3-selected-text-port",
+        "version": 1,
+        "preconditions": [
+          "exact raw Git source hashes",
+          "exact adapter patch SHA256",
+          "all destinations absent or identical"
+        ],
+        "before_hashes": {
+          "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedChars.java": "712c1c795ff1e0d6dea099eaec8fa6e64803adfc12bad6f31970b722c659d396"
+        },
+        "after_hashes": {
+          "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedChars.java": "2cdb10d20f7ed9c80143471deb22350fdc44d9c7899975402313cb85fd50c3c4"
+        },
+        "rollback": "reviewed three-way reverse replay against the last synchronized baseline"
+      },
+      "tests": {
+        "differential": [
+          "M3StringTest"
+        ],
+        "acceptance": [
+          "Route A stock JDK21 four modes"
+        ],
+        "evidence": [
+          "m3/evidence/retained-text-result.json"
+        ]
+      },
+      "license_provenance": {
+        "license": "Apache-2.0",
+        "notice": "m3/ports/text/THIRD_PARTY_NOTICES.md",
+        "publication": "selected user-authorized dependency closure; source repository private"
+      },
+      "last_synchronized": {
+        "source": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+        "target": "8bb6215372e07712f1fdf5a0cb912af495007b19"
+      },
+      "target_adaptations": [
+        "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
+        "FrozenChars: retain immutable byte atoms, safe adjacent coalescing and owner retention",
+        "MIndexJoinedChars: canonical-owner projection, direct mutable encoding output, explicit uncached body",
+        "MIndexJoinedStorageIntern: explicit detached body bypasses content canonicalization",
+        "M3String facade: exact value/search/cursor API outside java.base; known String surface gaps tracked",
+        "FrozenBytes: owner-local lazy immutable UTF16 view/hash fact; no extra payload"
+      ],
+      "conflicts": [],
+      "pending_changes": [
+        "pin destination acceptance commit after code commit",
+        "full family/source ABI compatibility remains separate"
+      ],
+      "rationale": "Dependency-minimal reuse of established immutable storage; no blind prefix rename",
+      "port_direction": "source_to_target",
+      "status": "implemented_tested_route_a"
+    },
+    {
+      "mapping_id": "source:a75488529e2d8c4a0abeb9910eb47da2c7cf7b9e6d9233af457fe66d9c297fc2",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedBytes.java",
+          "symbol": "com.synexia.indexstring.MIndexJoinedBytes",
+          "signature": "class MIndexJoinedBytes",
+          "sha256": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+          "fingerprint": null
+        }
+      ],
+      "destinations": [
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": "8bb6215372e07712f1fdf5a0cb912af495007b19",
+          "module": "m3/ports/text",
+          "path": "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedBytes.java",
+          "symbol": "com.synexia.indexstring.MIndexJoinedBytes",
+          "signature": "class MIndexJoinedBytes",
+          "sha256": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+          "fingerprint": null,
+          "revision_kind": "baseline_with_candidate_hash"
+        }
+      ],
+      "mapping_kind": "direct_port",
+      "canonical_owner": "com.synexia.indexstring.MIndexJoinedBytes",
+      "identity_rules": "Immutable payload owners; process-local weak composition IDs; no resolver/structural numeric IDs ported",
+      "contract_differences": [],
+      "compatibility_obligations": {
+        "source": "original names retained, only additive APIs",
+        "binary": "no existing member removed; packaging is separate, do not put both owners on one classpath",
+        "serialization": "no new persistent IDs or image-format claim",
+        "native_abi": "no ABI changes; direct pointer borrowing only original owner boundary"
+      },
+      "format_abi": {
+        "raw_utf16": "BE code units; no charset normalization",
+        "shared_format": null,
+        "version": null
+      },
+      "bootstrap_constraints": [
+        "application module only",
+        "no network or String constructor hook",
+        "no Maven/recipe runtime dependencies"
+      ],
+      "dependencies": [],
+      "downstream_consumers": [
+        "com.m3.indexstring.M3String"
+      ],
+      "materialization_boundaries": [
+        "ordinary String conversion",
+        "mutable arrays and encoding outputs"
+      ],
+      "cached_fact_owner": "Frozen/Joined owners; optional bounded atom lookups, weak tuple registry",
+      "recipe": {
+        "id": "m3-selected-text-port",
+        "version": 1,
+        "preconditions": [
+          "exact raw Git source hashes",
+          "exact adapter patch SHA256",
+          "all destinations absent or identical"
+        ],
+        "before_hashes": {
+          "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedBytes.java": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b"
+        },
+        "after_hashes": {
+          "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedBytes.java": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b"
+        },
+        "rollback": "reviewed three-way reverse replay against the last synchronized baseline"
+      },
+      "tests": {
+        "differential": [
+          "M3StringTest"
+        ],
+        "acceptance": [
+          "Route A stock JDK21 four modes"
+        ],
+        "evidence": [
+          "m3/evidence/retained-text-result.json"
+        ]
+      },
+      "license_provenance": {
+        "license": "Apache-2.0",
+        "notice": "m3/ports/text/THIRD_PARTY_NOTICES.md",
+        "publication": "selected user-authorized dependency closure; source repository private"
+      },
+      "last_synchronized": {
+        "source": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+        "target": "8bb6215372e07712f1fdf5a0cb912af495007b19"
+      },
+      "target_adaptations": [],
+      "conflicts": [],
+      "pending_changes": [
+        "pin destination acceptance commit after code commit",
+        "full family/source ABI compatibility remains separate"
+      ],
+      "rationale": "Dependency-minimal reuse of established immutable storage; no blind prefix rename",
+      "port_direction": "source_to_target",
+      "status": "implemented_tested_route_a"
+    },
+    {
+      "mapping_id": "source:a7d5b18679d90a323159e05b54d0be6bf784d23deb928bf6f5b499ffd4e87648",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStorageIntern.java",
+          "symbol": "com.synexia.indexstring.MIndexJoinedStorageIntern",
+          "signature": "class MIndexJoinedStorageIntern",
+          "sha256": "f42c548a4fd47d3dac43283082125232e04d5f13f28b63521832493394176337",
+          "fingerprint": null
+        }
+      ],
+      "destinations": [
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": "8bb6215372e07712f1fdf5a0cb912af495007b19",
+          "module": "m3/ports/text",
+          "path": "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStorageIntern.java",
+          "symbol": "com.synexia.indexstring.MIndexJoinedStorageIntern",
+          "signature": "class MIndexJoinedStorageIntern",
+          "sha256": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7",
+          "fingerprint": null,
+          "revision_kind": "baseline_with_candidate_hash"
+        }
+      ],
+      "mapping_kind": "adapter",
+      "canonical_owner": "com.synexia.indexstring.MIndexJoinedStorageIntern",
+      "identity_rules": "Immutable payload owners; process-local weak composition IDs; no resolver/structural numeric IDs ported",
+      "contract_differences": [
+        "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
+        "FrozenChars: retain immutable byte atoms, safe adjacent coalescing and owner retention",
+        "MIndexJoinedChars: canonical-owner projection, direct mutable encoding output, explicit uncached body",
+        "MIndexJoinedStorageIntern: explicit detached body bypasses content canonicalization",
+        "M3String facade: exact value/search/cursor API outside java.base; known String surface gaps tracked"
+      ],
+      "compatibility_obligations": {
+        "source": "original names retained, only additive APIs",
+        "binary": "no existing member removed; packaging is separate, do not put both owners on one classpath",
+        "serialization": "no new persistent IDs or image-format claim",
+        "native_abi": "no ABI changes; direct pointer borrowing only original owner boundary"
+      },
+      "format_abi": {
+        "raw_utf16": "BE code units; no charset normalization",
+        "shared_format": null,
+        "version": null
+      },
+      "bootstrap_constraints": [
+        "application module only",
+        "no network or String constructor hook",
+        "no Maven/recipe runtime dependencies"
+      ],
+      "dependencies": [],
+      "downstream_consumers": [
+        "com.m3.indexstring.M3String"
+      ],
+      "materialization_boundaries": [
+        "ordinary String conversion",
+        "mutable arrays and encoding outputs"
+      ],
+      "cached_fact_owner": "Frozen/Joined owners; optional bounded atom lookups, weak tuple registry",
+      "recipe": {
+        "id": "m3-selected-text-port",
+        "version": 1,
+        "preconditions": [
+          "exact raw Git source hashes",
+          "exact adapter patch SHA256",
+          "all destinations absent or identical"
+        ],
+        "before_hashes": {
+          "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStorageIntern.java": "f42c548a4fd47d3dac43283082125232e04d5f13f28b63521832493394176337"
+        },
+        "after_hashes": {
+          "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStorageIntern.java": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7"
+        },
+        "rollback": "reviewed three-way reverse replay against the last synchronized baseline"
+      },
+      "tests": {
+        "differential": [
+          "M3StringTest"
+        ],
+        "acceptance": [
+          "Route A stock JDK21 four modes"
+        ],
+        "evidence": [
+          "m3/evidence/retained-text-result.json"
+        ]
+      },
+      "license_provenance": {
+        "license": "Apache-2.0",
+        "notice": "m3/ports/text/THIRD_PARTY_NOTICES.md",
+        "publication": "selected user-authorized dependency closure; source repository private"
+      },
+      "last_synchronized": {
+        "source": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+        "target": "8bb6215372e07712f1fdf5a0cb912af495007b19"
+      },
+      "target_adaptations": [
+        "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
+        "FrozenChars: retain immutable byte atoms, safe adjacent coalescing and owner retention",
+        "MIndexJoinedChars: canonical-owner projection, direct mutable encoding output, explicit uncached body",
+        "MIndexJoinedStorageIntern: explicit detached body bypasses content canonicalization",
+        "M3String facade: exact value/search/cursor API outside java.base; known String surface gaps tracked",
+        "FrozenBytes: owner-local lazy immutable UTF16 view/hash fact; no extra payload"
+      ],
+      "conflicts": [],
+      "pending_changes": [
+        "pin destination acceptance commit after code commit",
+        "full family/source ABI compatibility remains separate"
+      ],
+      "rationale": "Dependency-minimal reuse of established immutable storage; no blind prefix rename",
+      "port_direction": "source_to_target",
+      "status": "implemented_tested_route_a"
+    },
+    {
+      "mapping_id": "source:66a22803b37ed047b0f483eb4f8c045b03fe87c2c3928c6195617ab8410d2ac9",
+      "sources": [
+        {
+          "repository": "hsoliwal/com.synexia",
+          "commit": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+          "module": "synexia-indexstring",
+          "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStreams.java",
+          "symbol": "com.synexia.indexstring.MIndexJoinedStreams",
+          "signature": "class MIndexJoinedStreams",
+          "sha256": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
+          "fingerprint": null
+        }
+      ],
+      "destinations": [
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": "8bb6215372e07712f1fdf5a0cb912af495007b19",
+          "module": "m3/ports/text",
+          "path": "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStreams.java",
+          "symbol": "com.synexia.indexstring.MIndexJoinedStreams",
+          "signature": "class MIndexJoinedStreams",
+          "sha256": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
+          "fingerprint": null,
+          "revision_kind": "baseline_with_candidate_hash"
+        }
+      ],
+      "mapping_kind": "direct_port",
+      "canonical_owner": "com.synexia.indexstring.MIndexJoinedStreams",
+      "identity_rules": "Immutable payload owners; process-local weak composition IDs; no resolver/structural numeric IDs ported",
+      "contract_differences": [],
+      "compatibility_obligations": {
+        "source": "original names retained, only additive APIs",
+        "binary": "no existing member removed; packaging is separate, do not put both owners on one classpath",
+        "serialization": "no new persistent IDs or image-format claim",
+        "native_abi": "no ABI changes; direct pointer borrowing only original owner boundary"
+      },
+      "format_abi": {
+        "raw_utf16": "BE code units; no charset normalization",
+        "shared_format": null,
+        "version": null
+      },
+      "bootstrap_constraints": [
+        "application module only",
+        "no network or String constructor hook",
+        "no Maven/recipe runtime dependencies"
+      ],
+      "dependencies": [],
+      "downstream_consumers": [
+        "com.m3.indexstring.M3String"
+      ],
+      "materialization_boundaries": [
+        "ordinary String conversion",
+        "mutable arrays and encoding outputs"
+      ],
+      "cached_fact_owner": "Frozen/Joined owners; optional bounded atom lookups, weak tuple registry",
+      "recipe": {
+        "id": "m3-selected-text-port",
+        "version": 1,
+        "preconditions": [
+          "exact raw Git source hashes",
+          "exact adapter patch SHA256",
+          "all destinations absent or identical"
+        ],
+        "before_hashes": {
+          "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStreams.java": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80"
+        },
+        "after_hashes": {
+          "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStreams.java": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80"
+        },
+        "rollback": "reviewed three-way reverse replay against the last synchronized baseline"
+      },
+      "tests": {
+        "differential": [
+          "M3StringTest"
+        ],
+        "acceptance": [
+          "Route A stock JDK21 four modes"
+        ],
+        "evidence": [
+          "m3/evidence/retained-text-result.json"
+        ]
+      },
+      "license_provenance": {
+        "license": "Apache-2.0",
+        "notice": "m3/ports/text/THIRD_PARTY_NOTICES.md",
+        "publication": "selected user-authorized dependency closure; source repository private"
+      },
+      "last_synchronized": {
+        "source": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+        "target": "8bb6215372e07712f1fdf5a0cb912af495007b19"
+      },
+      "target_adaptations": [],
+      "conflicts": [],
+      "pending_changes": [
+        "pin destination acceptance commit after code commit",
+        "full family/source ABI compatibility remains separate"
+      ],
+      "rationale": "Dependency-minimal reuse of established immutable storage; no blind prefix rename",
+      "port_direction": "source_to_target",
+      "status": "implemented_tested_route_a"
+    },
+    {
+      "mapping_id": "target:910531d6cc8c645f51f4d3be2bffb6fc7cec8e4c74f7ddbe355c4d464f25a5cb",
+      "sources": [],
+      "destinations": [
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": "8bb6215372e07712f1fdf5a0cb912af495007b19",
+          "module": "m3/ports/text",
+          "path": "m3/ports/text/src/com/m3/indexstring/M3String.java",
+          "symbol": "com.m3.indexstring.M3String",
+          "signature": "class M3String",
+          "sha256": "aaf2f5868fb26f1a8d80f13ae13885885ec7f2eb31c4676f4924d037315fe61c",
+          "fingerprint": null,
+          "revision_kind": "baseline_with_candidate_hash"
+        }
+      ],
+      "mapping_kind": "specialization",
+      "canonical_owner": "com.synexia.indexstring.MIndexJoinedChars",
+      "identity_rules": "Immutable payload owners; process-local weak composition IDs; no resolver/structural numeric IDs ported",
+      "contract_differences": [
+        "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
+        "FrozenChars: retain immutable byte atoms, safe adjacent coalescing and owner retention",
+        "MIndexJoinedChars: canonical-owner projection, direct mutable encoding output, explicit uncached body",
+        "MIndexJoinedStorageIntern: explicit detached body bypasses content canonicalization",
+        "M3String facade: exact value/search/cursor API outside java.base; known String surface gaps tracked"
+      ],
+      "compatibility_obligations": {
+        "source": "New explicit API; no source family renamed",
+        "binary": "No existing public API removed; stock java.lang.String untouched",
+        "serialization": "no new persistent IDs or image-format claim",
+        "native_abi": "no ABI changes; direct pointer borrowing only original owner boundary"
+      },
+      "format_abi": {
+        "raw_utf16": "BE code units; no charset normalization",
+        "shared_format": null,
+        "version": null
+      },
+      "bootstrap_constraints": [
+        "application module only",
+        "no network or String constructor hook",
+        "no Maven/recipe runtime dependencies"
+      ],
+      "dependencies": [],
+      "downstream_consumers": [
+        "com.m3.indexstring.M3String"
+      ],
+      "materialization_boundaries": [
+        "ordinary String conversion",
+        "mutable arrays and encoding outputs"
+      ],
+      "cached_fact_owner": "Frozen/Joined owners; optional bounded atom lookups, weak tuple registry",
+      "recipe": {
+        "id": "m3-foundation-source-replay",
+        "version": 1,
+        "preconditions": [
+          "exact raw Git source hashes",
+          "exact adapter patch SHA256",
+          "all destinations absent or identical"
+        ],
+        "before_hashes": {},
+        "after_hashes": {
+          "m3/ports/text/src/com/m3/indexstring/M3String.java": "aaf2f5868fb26f1a8d80f13ae13885885ec7f2eb31c4676f4924d037315fe61c"
+        },
+        "rollback": "reviewed three-way reverse replay against the last synchronized baseline"
+      },
+      "tests": {
+        "differential": [
+          "M3StringTest"
+        ],
+        "acceptance": [
+          "Route A stock JDK21 four modes"
+        ],
+        "evidence": [
+          "m3/evidence/retained-text-result.json"
+        ]
+      },
+      "license_provenance": {
+        "license": "Apache-2.0",
+        "notice": "m3/ports/text/THIRD_PARTY_NOTICES.md",
+        "publication": "selected user-authorized dependency closure; source repository private"
+      },
+      "last_synchronized": {
+        "source": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+        "target": "8bb6215372e07712f1fdf5a0cb912af495007b19"
+      },
+      "target_adaptations": [
+        "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
+        "FrozenChars: retain immutable byte atoms, safe adjacent coalescing and owner retention",
+        "MIndexJoinedChars: canonical-owner projection, direct mutable encoding output, explicit uncached body",
+        "MIndexJoinedStorageIntern: explicit detached body bypasses content canonicalization",
+        "M3String facade: exact value/search/cursor API outside java.base; known String surface gaps tracked",
+        "FrozenBytes: owner-local lazy immutable UTF16 view/hash fact; no extra payload"
+      ],
+      "conflicts": [],
+      "pending_changes": [
+        "pin destination acceptance commit after code commit",
+        "full family/source ABI compatibility remains separate"
+      ],
+      "rationale": "Additive explicit immutable text facade composes the established source owners; ordinary String remains a materialization boundary.",
+      "port_direction": "target_specialization",
+      "status": "implemented_tested_route_a",
+      "upstream_mapping_ids": [
+        "source:fd1d97eb412cf2b0332ea8616311eedc29fd0f0cc6858388a376ec2a4a5c158b",
+        "source:61e1e799dfff8a821db084921c35072e5031955345619ee9180816ba810aa2e4",
+        "source:cfbe43ec93eca2c5c892c31e03d7fa1eec809402dec20f512783bf3a5885ff68",
+        "source:9035acf23c18b9dce54945c3b0da582782c9f94f1d85260ab0b8571969464c80",
+        "source:a75488529e2d8c4a0abeb9910eb47da2c7cf7b9e6d9233af457fe66d9c297fc2",
+        "source:a7d5b18679d90a323159e05b54d0be6bf784d23deb928bf6f5b499ffd4e87648",
+        "source:66a22803b37ed047b0f483eb4f8c045b03fe87c2c3928c6195617ab8410d2ac9"
+      ]
+    },
+    {
+      "mapping_id": "target:58387cd3389d5bc8addcad092ba58a18ffbf3fde19abeaee16e7efdb617aa368",
+      "sources": [],
+      "destinations": [
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": "8bb6215372e07712f1fdf5a0cb912af495007b19",
+          "module": "m3/ports/text",
+          "path": "m3/ports/text/src/com/m3/indexstring/M3StringArena.java",
+          "symbol": "com.m3.indexstring.M3StringArena",
+          "signature": "class M3StringArena",
+          "sha256": "94eda684ee599ed6cbfd9ed8fd58a571ca5f831a368da332345999255919639a",
+          "fingerprint": null,
+          "revision_kind": "baseline_with_candidate_hash"
+        }
+      ],
+      "mapping_kind": "specialization",
+      "canonical_owner": "com.synexia.indexstring.MIndexJoinedChars",
+      "identity_rules": "Immutable payload owners; process-local weak composition IDs; no resolver/structural numeric IDs ported",
+      "contract_differences": [
+        "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
+        "FrozenChars: retain immutable byte atoms, safe adjacent coalescing and owner retention",
+        "MIndexJoinedChars: canonical-owner projection, direct mutable encoding output, explicit uncached body",
+        "MIndexJoinedStorageIntern: explicit detached body bypasses content canonicalization",
+        "M3String facade: exact value/search/cursor API outside java.base; known String surface gaps tracked"
+      ],
+      "compatibility_obligations": {
+        "source": "New explicit API; no source family renamed",
+        "binary": "No existing public API removed; stock java.lang.String untouched",
+        "serialization": "no new persistent IDs or image-format claim",
+        "native_abi": "no ABI changes; direct pointer borrowing only original owner boundary"
+      },
+      "format_abi": {
+        "raw_utf16": "BE code units; no charset normalization",
+        "shared_format": null,
+        "version": null
+      },
+      "bootstrap_constraints": [
+        "application module only",
+        "no network or String constructor hook",
+        "no Maven/recipe runtime dependencies"
+      ],
+      "dependencies": [],
+      "downstream_consumers": [
+        "com.m3.indexstring.M3String"
+      ],
+      "materialization_boundaries": [
+        "ordinary String conversion",
+        "mutable arrays and encoding outputs"
+      ],
+      "cached_fact_owner": "Frozen/Joined owners; optional bounded atom lookups, weak tuple registry",
+      "recipe": {
+        "id": "m3-foundation-source-replay",
+        "version": 1,
+        "preconditions": [
+          "exact raw Git source hashes",
+          "exact adapter patch SHA256",
+          "all destinations absent or identical"
+        ],
+        "before_hashes": {},
+        "after_hashes": {
+          "m3/ports/text/src/com/m3/indexstring/M3StringArena.java": "94eda684ee599ed6cbfd9ed8fd58a571ca5f831a368da332345999255919639a"
+        },
+        "rollback": "reviewed three-way reverse replay against the last synchronized baseline"
+      },
+      "tests": {
+        "differential": [
+          "M3StringTest"
+        ],
+        "acceptance": [
+          "Route A stock JDK21 four modes"
+        ],
+        "evidence": [
+          "m3/evidence/retained-text-result.json"
+        ]
+      },
+      "license_provenance": {
+        "license": "Apache-2.0",
+        "notice": "m3/ports/text/THIRD_PARTY_NOTICES.md",
+        "publication": "selected user-authorized dependency closure; source repository private"
+      },
+      "last_synchronized": {
+        "source": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+        "target": "8bb6215372e07712f1fdf5a0cb912af495007b19"
+      },
+      "target_adaptations": [
+        "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
+        "FrozenChars: retain immutable byte atoms, safe adjacent coalescing and owner retention",
+        "MIndexJoinedChars: canonical-owner projection, direct mutable encoding output, explicit uncached body",
+        "MIndexJoinedStorageIntern: explicit detached body bypasses content canonicalization",
+        "M3String facade: exact value/search/cursor API outside java.base; known String surface gaps tracked",
+        "FrozenBytes: owner-local lazy immutable UTF16 view/hash fact; no extra payload"
+      ],
+      "conflicts": [],
+      "pending_changes": [
+        "pin destination acceptance commit after code commit",
+        "full family/source ABI compatibility remains separate"
+      ],
+      "rationale": "Additive explicit immutable text facade composes the established source owners; ordinary String remains a materialization boundary.",
+      "port_direction": "target_specialization",
+      "status": "implemented_tested_route_a",
+      "upstream_mapping_ids": [
+        "source:fd1d97eb412cf2b0332ea8616311eedc29fd0f0cc6858388a376ec2a4a5c158b",
+        "source:61e1e799dfff8a821db084921c35072e5031955345619ee9180816ba810aa2e4",
+        "source:cfbe43ec93eca2c5c892c31e03d7fa1eec809402dec20f512783bf3a5885ff68",
+        "source:9035acf23c18b9dce54945c3b0da582782c9f94f1d85260ab0b8571969464c80",
+        "source:a75488529e2d8c4a0abeb9910eb47da2c7cf7b9e6d9233af457fe66d9c297fc2",
+        "source:a7d5b18679d90a323159e05b54d0be6bf784d23deb928bf6f5b499ffd4e87648",
+        "source:66a22803b37ed047b0f483eb4f8c045b03fe87c2c3928c6195617ab8410d2ac9"
+      ]
+    },
+    {
+      "mapping_id": "target:45e42e1887bc26ce9b613fcb50679176a23a67d35f1e9522c63c5d7526ce886b",
+      "sources": [],
+      "destinations": [
+        {
+          "repository": "hsoliwal/M3jdk21",
+          "commit": "8bb6215372e07712f1fdf5a0cb912af495007b19",
+          "module": "m3/ports/text",
+          "path": "m3/ports/text/src/com/m3/indexstring/M3Utf16Cursor.java",
+          "symbol": "com.m3.indexstring.M3Utf16Cursor",
+          "signature": "class M3Utf16Cursor",
+          "sha256": "ba2c75331207feacfdb2fdd225c1b2b2d6aba9c753d9865a7e00e9baafdaea98",
+          "fingerprint": null,
+          "revision_kind": "baseline_with_candidate_hash"
+        }
+      ],
+      "mapping_kind": "specialization",
+      "canonical_owner": "com.synexia.indexstring.MIndexJoinedChars",
+      "identity_rules": "Immutable payload owners; process-local weak composition IDs; no resolver/structural numeric IDs ported",
+      "contract_differences": [
+        "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
+        "FrozenChars: retain immutable byte atoms, safe adjacent coalescing and owner retention",
+        "MIndexJoinedChars: canonical-owner projection, direct mutable encoding output, explicit uncached body",
+        "MIndexJoinedStorageIntern: explicit detached body bypasses content canonicalization",
+        "M3String facade: exact value/search/cursor API outside java.base; known String surface gaps tracked"
+      ],
+      "compatibility_obligations": {
+        "source": "New explicit API; no source family renamed",
+        "binary": "No existing public API removed; stock java.lang.String untouched",
+        "serialization": "no new persistent IDs or image-format claim",
+        "native_abi": "no ABI changes; direct pointer borrowing only original owner boundary"
+      },
+      "format_abi": {
+        "raw_utf16": "BE code units; no charset normalization",
+        "shared_format": null,
+        "version": null
+      },
+      "bootstrap_constraints": [
+        "application module only",
+        "no network or String constructor hook",
+        "no Maven/recipe runtime dependencies"
+      ],
+      "dependencies": [],
+      "downstream_consumers": [
+        "com.m3.indexstring.M3String"
+      ],
+      "materialization_boundaries": [
+        "ordinary String conversion",
+        "mutable arrays and encoding outputs"
+      ],
+      "cached_fact_owner": "Frozen/Joined owners; optional bounded atom lookups, weak tuple registry",
+      "recipe": {
+        "id": "m3-foundation-source-replay",
+        "version": 1,
+        "preconditions": [
+          "exact raw Git source hashes",
+          "exact adapter patch SHA256",
+          "all destinations absent or identical"
+        ],
+        "before_hashes": {},
+        "after_hashes": {
+          "m3/ports/text/src/com/m3/indexstring/M3Utf16Cursor.java": "ba2c75331207feacfdb2fdd225c1b2b2d6aba9c753d9865a7e00e9baafdaea98"
+        },
+        "rollback": "reviewed three-way reverse replay against the last synchronized baseline"
+      },
+      "tests": {
+        "differential": [
+          "M3StringTest"
+        ],
+        "acceptance": [
+          "Route A stock JDK21 four modes"
+        ],
+        "evidence": [
+          "m3/evidence/retained-text-result.json"
+        ]
+      },
+      "license_provenance": {
+        "license": "Apache-2.0",
+        "notice": "m3/ports/text/THIRD_PARTY_NOTICES.md",
+        "publication": "selected user-authorized dependency closure; source repository private"
+      },
+      "last_synchronized": {
+        "source": "6df9df8d8f42111239013ee941723ec37f97ba6e",
+        "target": "8bb6215372e07712f1fdf5a0cb912af495007b19"
+      },
+      "target_adaptations": [
+        "FrozenByteInterner: raw UTF16BE immutable String probes; explicit lookup clearing",
+        "FrozenChars: retain immutable byte atoms, safe adjacent coalescing and owner retention",
+        "MIndexJoinedChars: canonical-owner projection, direct mutable encoding output, explicit uncached body",
+        "MIndexJoinedStorageIntern: explicit detached body bypasses content canonicalization",
+        "M3String facade: exact value/search/cursor API outside java.base; known String surface gaps tracked",
+        "FrozenBytes: owner-local lazy immutable UTF16 view/hash fact; no extra payload"
+      ],
+      "conflicts": [],
+      "pending_changes": [
+        "pin destination acceptance commit after code commit",
+        "full family/source ABI compatibility remains separate"
+      ],
+      "rationale": "Additive explicit immutable text facade composes the established source owners; ordinary String remains a materialization boundary.",
+      "port_direction": "target_specialization",
+      "status": "implemented_tested_route_a",
+      "upstream_mapping_ids": [
+        "source:fd1d97eb412cf2b0332ea8616311eedc29fd0f0cc6858388a376ec2a4a5c158b",
+        "source:61e1e799dfff8a821db084921c35072e5031955345619ee9180816ba810aa2e4",
+        "source:cfbe43ec93eca2c5c892c31e03d7fa1eec809402dec20f512783bf3a5885ff68",
+        "source:9035acf23c18b9dce54945c3b0da582782c9f94f1d85260ab0b8571969464c80",
+        "source:a75488529e2d8c4a0abeb9910eb47da2c7cf7b9e6d9233af457fe66d9c297fc2",
+        "source:a7d5b18679d90a323159e05b54d0be6bf784d23deb928bf6f5b499ffd4e87648",
+        "source:66a22803b37ed047b0f483eb4f8c045b03fe87c2c3928c6195617ab8410d2ac9"
+      ]
+    }
+  ],
+  "legacy_mappings": [
     {
       "source": "com.synexia.indexstring.LocalM3StringPiece",
       "source_commit": "9c36c18a7778e6096148a3bbee8f2af7575138b4",
@@ -29,7 +1146,24 @@
       "source_commit": null
     }
   ],
-  "imported_donor_sources": [],
-  "reviewed_synexia_commit": "9c36c18a7778e6096148a3bbee8f2af7575138b4",
-  "reviewed_contracts": "synexia-reconciliation.md"
+  "capability_gates": [
+    {
+      "route": "A",
+      "status": "partial",
+      "detail": "text closure implemented; full String surface and mapped lexicon remain pending"
+    },
+    {
+      "route": "B",
+      "status": "partial",
+      "detail": "typed opt-in lowering under independent gate; general Java/invokedynamic lowering remains pending"
+    },
+    {
+      "route": "C",
+      "status": "unverified",
+      "detail": "current master tree stock; exact runtime candidate isolated for native build; two historical StringJoiner failures not waived"
+    }
+  ],
+  "coverage_roots": [
+    "m3/ports/text/src"
+  ]
 }

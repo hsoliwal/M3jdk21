@@ -1,0 +1,247 @@
+{
+  "schema": 1,
+  "scope": "opt-in explicit-view concat boundary only",
+  "generated_utc": "2026-10-02T03:26:28.497948+00:00",
+  "candidate_binding": "raw working-tree bytes in source_hashes; final Git commit is not yet assigned",
+  "source_hashes": {
+    "m3/ports/text/src/com/m3/indexstring/M3String.java": "aaf2f5868fb26f1a8d80f13ae13885885ec7f2eb31c4676f4924d037315fe61c",
+    "src/com/m3/indexstring/M3String.java": "aaf2f5868fb26f1a8d80f13ae13885885ec7f2eb31c4676f4924d037315fe61c",
+    "m3/ports/text/src/com/m3/indexstring/M3StringArena.java": "94eda684ee599ed6cbfd9ed8fd58a571ca5f831a368da332345999255919639a",
+    "src/com/m3/indexstring/M3StringArena.java": "94eda684ee599ed6cbfd9ed8fd58a571ca5f831a368da332345999255919639a",
+    "m3/ports/text/src/com/m3/indexstring/M3Utf16Cursor.java": "ba2c75331207feacfdb2fdd225c1b2b2d6aba9c753d9865a7e00e9baafdaea98",
+    "src/com/m3/indexstring/M3Utf16Cursor.java": "ba2c75331207feacfdb2fdd225c1b2b2d6aba9c753d9865a7e00e9baafdaea98",
+    "m3/ports/text/src/com/synexia/indexstring/FrozenByteInterner.java": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414",
+    "src/com/synexia/indexstring/FrozenByteInterner.java": "5250089bd1c2b50abedc08fc4dee3c8ddc043ef0d755a8dbbf587d5a7a9fc414",
+    "m3/ports/text/src/com/synexia/indexstring/FrozenBytes.java": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf",
+    "src/com/synexia/indexstring/FrozenBytes.java": "b12da50c960440068c2f3bcd761c3d64363613eece9e93087f99480ba1601daf",
+    "m3/ports/text/src/com/synexia/indexstring/FrozenChars.java": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46",
+    "src/com/synexia/indexstring/FrozenChars.java": "a6e013710ea5673f78149d4d312432c11bbaab6be5be76e49ee4162001e83a46",
+    "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedBytes.java": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+    "src/com/synexia/indexstring/MIndexJoinedBytes.java": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+    "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedChars.java": "2cdb10d20f7ed9c80143471deb22350fdc44d9c7899975402313cb85fd50c3c4",
+    "src/com/synexia/indexstring/MIndexJoinedChars.java": "2cdb10d20f7ed9c80143471deb22350fdc44d9c7899975402313cb85fd50c3c4",
+    "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStorageIntern.java": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7",
+    "src/com/synexia/indexstring/MIndexJoinedStorageIntern.java": "2c8fc66dede73084996e2516e624fd4eea79d1dd2b33b2703fe56f577f5e7fa7",
+    "m3/ports/text/src/com/synexia/indexstring/MIndexJoinedStreams.java": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
+    "src/com/synexia/indexstring/MIndexJoinedStreams.java": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
+    "m3/tooling/compiler-lowering/pom.xml": "92102968f46316b700e75d34ed8a86f898417748f17757fdf114dede9d0a935d",
+    "pom.xml": "92102968f46316b700e75d34ed8a86f898417748f17757fdf114dede9d0a935d",
+    "m3/tooling/compiler-lowering/src/main/java/com/m3/tooling/ExplicitViewConcatRecipe.java": "1d23add29fae044a7a9d87bb3c16680632f810bbf2e14d99cefa729469045481",
+    "src/main/java/com/m3/tooling/ExplicitViewConcatRecipe.java": "1d23add29fae044a7a9d87bb3c16680632f810bbf2e14d99cefa729469045481",
+    "m3/tooling/compiler-lowering/src/test/java/com/m3/tooling/ExplicitViewConcatRecipeTest.java": "cc226477ff85806fa087079286bac4b40287e36231056804a36caf210b4ad423",
+    "src/test/java/com/m3/tooling/ExplicitViewConcatRecipeTest.java": "cc226477ff85806fa087079286bac4b40287e36231056804a36caf210b4ad423"
+  },
+  "environment": {
+    "java.version": "21.0.9",
+    "java.vendor": "Oracle Corporation",
+    "java.home": "C:\\Program Files\\Java\\jdk-21",
+    "os.name": "Windows 11",
+    "os.arch": "amd64"
+  },
+  "maven": {
+    "version": "3.9.14",
+    "executable": "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd"
+  },
+  "records": [
+    {
+      "kind": "maven-test",
+      "cwd": "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering",
+      "args": [
+        "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\mvn.cmd",
+        "-B",
+        "-o",
+        "test"
+      ],
+      "environment": {
+        "JAVA_HOME": "C:\\Program Files\\Java\\jdk-21",
+        "MAVEN_OPTS": "-Xms32m -Xmx512m -XX:ActiveProcessorCount=2"
+      },
+      "exit": 0,
+      "tests": 13,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 6.258
+    },
+    {
+      "kind": "java-toolprovider-compile",
+      "candidate": "before",
+      "api": "javax.tools.ToolProvider.getSystemJavaCompiler().run",
+      "args": [
+        "--release",
+        "21",
+        "-d",
+        "C:\\Users\\hsoliwal\\AppData\\Local\\Temp\\junit8843087113925547644\\before",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\m3\\indexstring\\M3String.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\m3\\indexstring\\M3StringArena.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\m3\\indexstring\\M3Utf16Cursor.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\FrozenByteInterner.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\FrozenBytes.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\FrozenChars.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedBytes.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedChars.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedStorageIntern.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedStreams.java",
+        "C:\\Users\\hsoliwal\\AppData\\Local\\Temp\\junit8843087113925547644\\before\\Behavior.java"
+      ],
+      "exit": 0
+    },
+    {
+      "kind": "java-run",
+      "candidate": "before",
+      "args": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xms16m",
+        "-Xmx64m",
+        "-XX:ActiveProcessorCount=2",
+        "-ea",
+        "-cp",
+        "C:\\Users\\hsoliwal\\AppData\\Local\\Temp\\junit8843087113925547644\\before",
+        "Behavior"
+      ],
+      "exit": 0,
+      "stdout": "leftnull|SLR\nright|SLR\nleft|SL\nselect|S\nnullnull|SLR\n"
+    },
+    {
+      "kind": "java-toolprovider-compile",
+      "candidate": "after",
+      "api": "javax.tools.ToolProvider.getSystemJavaCompiler().run",
+      "args": [
+        "--release",
+        "21",
+        "-d",
+        "C:\\Users\\hsoliwal\\AppData\\Local\\Temp\\junit8843087113925547644\\after",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\m3\\indexstring\\M3String.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\m3\\indexstring\\M3StringArena.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\m3\\indexstring\\M3Utf16Cursor.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\FrozenByteInterner.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\FrozenBytes.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\FrozenChars.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedBytes.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedChars.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedStorageIntern.java",
+        "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedStreams.java",
+        "C:\\Users\\hsoliwal\\AppData\\Local\\Temp\\junit8843087113925547644\\after\\Behavior.java"
+      ],
+      "exit": 0
+    },
+    {
+      "kind": "java-run",
+      "candidate": "after",
+      "args": [
+        "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+        "-Xms16m",
+        "-Xmx64m",
+        "-XX:ActiveProcessorCount=2",
+        "-ea",
+        "-cp",
+        "C:\\Users\\hsoliwal\\AppData\\Local\\Temp\\junit8843087113925547644\\after",
+        "Behavior"
+      ],
+      "exit": 0,
+      "stdout": "leftnull|SLR\nright|SLR\nleft|SL\nselect|S\nnullnull|SLR\n"
+    }
+  ],
+  "surefire_report": {
+    "path": "m3/tooling/compiler-lowering/target/surefire-reports/TEST-com.m3.tooling.ExplicitViewConcatRecipeTest.xml",
+    "sha256": "dc16d902b16f847391dc1d58842cd1907647e76d3560dbaa3a8127d9fba1d2f5",
+    "test_cases": [
+      "preservesStaticQualifierExpression",
+      "helperImplementationCannotRewriteItself",
+      "exactCompiledBeforeAfterPreserveQualifierOrderNullAndRightFailure",
+      "actualRecipeLifecycleProducesOneValidatedChange",
+      "noArgumentConstructorAndNullOptionStayDisabled",
+      "constantsAndFinalStringAliasesRefuse",
+      "defaultDisabledPreservesInput",
+      "commentsAndStaticImportedSitesRefuse",
+      "unresolvedOperandsRefuseWithoutEdits",
+      "unrelatedOwnerAndOrdinaryPublicConcatenationStayUntouched",
+      "typedTwoStringBoundaryReplaysIdempotently",
+      "nonStringAndLiteralNullOperandsRefuse",
+      "missingDestinationAbiRefuses"
+    ]
+  },
+  "compiled_before_after": [
+    {
+      "candidate": "before",
+      "compile": {
+        "api": "javax.tools.ToolProvider.getSystemJavaCompiler().run",
+        "args": [
+          "--release",
+          "21",
+          "-d",
+          "C:\\Users\\hsoliwal\\AppData\\Local\\Temp\\junit8843087113925547644\\before",
+          "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\m3\\indexstring\\M3String.java",
+          "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\m3\\indexstring\\M3StringArena.java",
+          "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\m3\\indexstring\\M3Utf16Cursor.java",
+          "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\FrozenByteInterner.java",
+          "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\FrozenBytes.java",
+          "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\FrozenChars.java",
+          "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedBytes.java",
+          "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedChars.java",
+          "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedStorageIntern.java",
+          "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedStreams.java",
+          "C:\\Users\\hsoliwal\\AppData\\Local\\Temp\\junit8843087113925547644\\before\\Behavior.java"
+        ],
+        "exit": 0
+      },
+      "run": {
+        "args": [
+          "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+          "-Xms16m",
+          "-Xmx64m",
+          "-XX:ActiveProcessorCount=2",
+          "-ea",
+          "-cp",
+          "C:\\Users\\hsoliwal\\AppData\\Local\\Temp\\junit8843087113925547644\\before",
+          "Behavior"
+        ],
+        "exit": 0,
+        "stdout": "leftnull|SLR\nright|SLR\nleft|SL\nselect|S\nnullnull|SLR\n"
+      }
+    },
+    {
+      "candidate": "after",
+      "compile": {
+        "api": "javax.tools.ToolProvider.getSystemJavaCompiler().run",
+        "args": [
+          "--release",
+          "21",
+          "-d",
+          "C:\\Users\\hsoliwal\\AppData\\Local\\Temp\\junit8843087113925547644\\after",
+          "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\m3\\indexstring\\M3String.java",
+          "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\m3\\indexstring\\M3StringArena.java",
+          "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\m3\\indexstring\\M3Utf16Cursor.java",
+          "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\FrozenByteInterner.java",
+          "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\FrozenBytes.java",
+          "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\FrozenChars.java",
+          "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedBytes.java",
+          "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedChars.java",
+          "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedStorageIntern.java",
+          "C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\tooling\\compiler-lowering\\..\\..\\ports\\text\\src\\com\\synexia\\indexstring\\MIndexJoinedStreams.java",
+          "C:\\Users\\hsoliwal\\AppData\\Local\\Temp\\junit8843087113925547644\\after\\Behavior.java"
+        ],
+        "exit": 0
+      },
+      "run": {
+        "args": [
+          "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+          "-Xms16m",
+          "-Xmx64m",
+          "-XX:ActiveProcessorCount=2",
+          "-ea",
+          "-cp",
+          "C:\\Users\\hsoliwal\\AppData\\Local\\Temp\\junit8843087113925547644\\after",
+          "Behavior"
+        ],
+        "exit": 0,
+        "stdout": "leftnull|SLR\nright|SLR\nleft|SL\nselect|S\nnullnull|SLR\n"
+      }
+    }
+  ],
+  "limitations": [
+    "Windows stock JDK 21.0.9 only; Linux full-JDK runtime integration is separate.",
+    "Covered output/null/qualifier-and-operand exceptions only. Allocation, OOME, oversized concat, linkage and allocation-sensitive identity remain unproven.",
+    "This receipt does not establish general String compiler lowering or whole-family migration."
+  ]
+}

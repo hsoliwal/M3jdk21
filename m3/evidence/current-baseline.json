@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "recorded_date": "2026-10-02",
+  "record_kind": "executed_git_baseline_and_inspected_historical_receipts",
+  "target": {
+    "repository": "https://github.com/hsoliwal/M3jdk21",
+    "visibility": "PUBLIC",
+    "default_branch": "master",
+    "commit": "8bb6215372e07712f1fdf5a0cb912af495007b19",
+    "tree": "26554d002cf158c97dd4ffbb06b3885b647c0a17",
+    "checkout": "C:/worktrees/M3jdk21-mindex-migration-20261002",
+    "logical_checkout": "E:/worktrees/M3jdk21-mindex-migration-20261002",
+    "branch": "codex/mindex-migration-20261002",
+    "runtime_candidate_is_ancestor": true,
+    "runtime_candidate_content_present": false,
+    "runtime_dirs_absent": ["m3/runtime-stage1", "m3/runtime-segments", "m3/runtime-integration"],
+    "runtime_owner_paths_absent": ["src/java.base/share/classes/java/lang/MIndexString.java", "src/java.base/share/classes/java/lang/MIndexStringPool.java"]
+  },
+  "source": {
+    "repository": "https://github.com/hsoliwal/com.synexia",
+    "visibility": "PRIVATE",
+    "default_branch": "develop",
+    "commit": "785dba96acef7588ba8920f8e455a0d0ddcfaff1",
+    "pin_method": "authenticated git ls-remote; family source content audit separate"
+  },
+  "prs": {
+    "M3jdk21/7": {"state": "MERGED", "head": "1210d76ce80263003981c8c6ba5bb4175524358a", "merge": "3029cff40e927aefcca444a6ef759a562204579c", "role": "proposed design documentation"},
+    "M3jdk21/6": {"state": "MERGED", "head": "3776d6e674d6c9b04539ca24aca2504aa88d4a57", "merge": "305dc277139b0e7cff1f4e284e7019a381480153", "base": "m3/segmented-string-experiment", "role": "historical runtime candidate"},
+    "M3jdk21/10": {"state": "MERGED", "head": "3776d6e674d6c9b04539ca24aca2504aa88d4a57", "merge": "67876a03d823f5ff5ca92ca1545a026d757c4b12", "base": "master", "tree_integrated_runtime": false},
+    "com.synexia/7498": {"state": "OPEN", "draft": true, "head": "a01cbe66fa53a0fe782573ac66bfc090f02415d9", "base": "dfcdf79d6dad85a50d731973e614ac684dfb43a1"},
+    "com.synexia/7521": {"state": "OPEN", "draft": true, "head": "86ea0a90c611f493f7eee8f130b7865912fcea67", "base": "d2ce7a3bd27afc7d9caf501be03496f061761ac5"},
+    "com.synexia/7523": {"state": "OPEN", "draft": true, "head": "5a49543056c8d3dab80c8a5c0fb24100e577ddad", "base": "86ea0a90c611f493f7eee8f130b7865912fcea67"},
+    "com.synexia/7525": {"state": "OPEN", "draft": true, "head": "06b23493bb68f63d5aed4d340a776eb9d2828023", "base": "5a49543056c8d3dab80c8a5c0fb24100e577ddad"},
+    "com.synexia/7526": {"state": "OPEN", "draft": true, "head": "73978088621dc70f5021befafa443f7e622b517e", "base": "06b23493bb68f63d5aed4d340a776eb9d2828023"},
+    "com.synexia/7528": {"state": "OPEN", "draft": false, "head": "c75ca5f6ad97d049cc179c647702ac738e890ad3", "base": "deda6293cee7cbe9c1e4113ad3912dbe304dc9d9"}
+  },
+  "historical_candidate": {
+    "commit": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+    "shared_owner_source": "c6cb340d33323348fab94e8157842455e9b72bc2",
+    "receipt_path": "m3/runtime-integration/evidence/results.json",
+    "receipt_executed_in_this_session": false,
+    "reported_build_exit": 0,
+    "reported_flag_off": {"passed": 86, "failed": 0},
+    "reported_enabled_interpreter": {"passed": 16, "failed": 2},
+    "known_failures": ["StringJoinerOomUtf16Test: 4 OOME expectations", "StringJoinerTest: 2 OOME expectations"],
+    "full_jtreg": false,
+    "compiled_enabled_acceptance": false
+  },
+  "executed_inspection_commands": [
+    "gh repo view hsoliwal/M3jdk21 --json nameWithOwner,url,visibility,defaultBranchRef",
+    "gh repo view hsoliwal/com.synexia --json nameWithOwner,url,visibility,defaultBranchRef",
+    "gh pr view <number> --repo <repository> --json number,url,title,state,isDraft,baseRefName,baseRefOid,headRefName,headRefOid,mergeCommit,mergedAt,files,statusCheckRollup,body",
+    "git ls-remote https://github.com/hsoliwal/M3jdk21.git HEAD refs/heads/master",
+    "git ls-remote https://github.com/hsoliwal/com.synexia.git HEAD refs/heads/develop",
+    "git cat-file -p 67876a03d823f5ff5ca92ca1545a026d757c4b12",
+    "git ls-tree --name-only <commit>:m3",
+    "git merge-base --is-ancestor 3776d6e674d6c9b04539ca24aca2504aa88d4a57 8bb6215372e07712f1fdf5a0cb912af495007b19",
+    "git diff --name-status 8bb6215372e07712f1fdf5a0cb912af495007b19 3776d6e674d6c9b04539ca24aca2504aa88d4a57 -- src m3"
+  ],
+  "environment": {
+    "windows_java": "Oracle 21.0.9+7-LTS-338",
+    "windows_jdk": "C:/Program Files/Java/jdk-21",
+    "wsl_distro": "Ubuntu-24.04",
+    "wsl_architecture": "x86_64",
+    "wsl_java": "OpenJDK 21.0.12.1+1-1-24.04.4-Ubuntu",
+    "wsl_gcc": "13.3.0",
+    "wsl_autoconf": "2.71",
+    "wsl_free_space_observed": "935 GiB",
+    "native_build_this_session": "running; configure exit 0; make images JOBS=4",
+    "durable_native_scratch": "/var/tmp/m3-runtime-migration-20261002/source-native",
+    "private_extracted_dependency_packages": 39,
+    "installed_jdk_replaced": false
+  },
+  "current_recipe_execution": {
+    "candidate_commit": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+    "candidate_tree": "1a1d13646d4255231ae2e18aafb73684e3c88b23",
+    "integration_check": "PASS state=after",
+    "tests_passed": 16,
+    "master_serial_replay_paths": 37,
+    "master_serial_replay_matches_candidate": true,
+    "reverse_replay_restores_master_bytes": true,
+    "root_runtime_modified": false,
+    "receipt_directory": "C:/worktrees/M3jdk21-runtime-migration-20261002/m3/runtime-integration/evidence/20261002-rerun"
+  },
+  "publication": {
+    "private_source_to_public_target": true,
+    "authorized_scope": "relevant MIndex-family migration requested by the user",
+    "unrelated_private_data_allowed": false,
+    "upstream_openjdk_license_preserved": true,
+    "published_this_session": false
+  },
+  "gaps": [
+    "Master has runtime candidate ancestry without runtime content",
+    "Exact candidate recipe replay and new complete image acceptance remain pending",
+    "Source family inventory, mapping completeness and all three routes are separate work",
+    "REST API rate limit exhausted; authenticated GraphQL and Git reads available"
+  ]
+}

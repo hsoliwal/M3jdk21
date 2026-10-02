@@ -1,5 +1,13 @@
 # M3 immutable text foundation — stage P0
 
+The source-bound migration now also includes a stock-JVM retained-text facade in
+[`ports/text`](ports/text/README.md), reusing Synexia's existing Frozen/Joined
+owners, and three-way enhancement replay in [`recipes`](recipes/README.md).
+Their separate tests do not admit transparent String/HotSpot integration.
+The permanent naming map is `docs/name-mapping.json`; read the migration resume
+document and the private source inventory before future ports. The continual
+optimization goal remains active across milestones.
+
 This draft adds an independently built Apache-2.0 module alongside the pinned OpenJDK 21 tree. It does **not** modify `java.lang.String`, HotSpot, the installed JDK, or existing MIndex/MatIndex code. It is an additive storage substrate, not a String replacement or a compatibility facade.
 
 Original contributions: Hitesh Soliwal <hsoliwal@gmail.com>. OpenJDK retains its existing licenses; see `NOTICE` and `LICENSE` for this separate subtree. No unresolved-license donor sources or external dictionary were imported.

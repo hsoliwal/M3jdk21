@@ -1,0 +1,48 @@
+{
+  "scope": "unchanged existing foundation and pinned private FrozenChars content/range comparison",
+  "target_baseline": "8bb6215372e07712f1fdf5a0cb912af495007b19",
+  "source_compatibility_pin": "9c36c18a7778e6096148a3bbee8f2af7575138b4",
+  "source_fixture_sha256": "42ce1c8ac4dc83a850b900b3c5a0b60de98410495c7da0145ff99cc9d19e950f",
+  "fixture_acquisition": "authorized raw Git object, ignored private scratch; anonymous rawHTTP404 remains an infrastructure failure",
+  "logs": {
+    "test-c2.log": {
+      "sha256": "34c707843013f7d9e083895651a586ed2e34445e652e577e61d91a0954ca41da",
+      "stdout": "FOUNDATION_PASS checks=70462\n"
+    },
+    "test-int.log": {
+      "sha256": "34c707843013f7d9e083895651a586ed2e34445e652e577e61d91a0954ca41da",
+      "stdout": "FOUNDATION_PASS checks=70462\n"
+    },
+    "test-jit.log": {
+      "sha256": "34c707843013f7d9e083895651a586ed2e34445e652e577e61d91a0954ca41da",
+      "stdout": "FOUNDATION_PASS checks=70462\n"
+    },
+    "test-nocompact.log": {
+      "sha256": "34c707843013f7d9e083895651a586ed2e34445e652e577e61d91a0954ca41da",
+      "stdout": "FOUNDATION_PASS checks=70462\n"
+    }
+  },
+  "artifacts": {
+    "m3/build/com.m3.text.jar": "bdad0210c203b8075d7eacef8f3dd155d4bb30980c07fbe30641d601229d1d84"
+  },
+  "compatibility": {
+    "argv": [
+      "python",
+      "m3/compatibility/check-synexia.py"
+    ],
+    "M3_JDK": "C:\\Program Files\\Java\\jdk-21",
+    "exit": 0,
+    "stdout": "SYNEXIA_CONTENT_RANGE_PASS checks=786432 allUtf16Units=65536 apiCompatibilityClaim=false"
+  },
+  "unchanged_source_hashes": {
+    "m3/core/src/com/m3/text/JoinedM3StringPiece.java": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
+    "m3/core/src/com/m3/text/LexiconTool.java": "8f86470619da33cf79ce3f8c6b99e7b6a4815f1c0053c7a07985a6ea4010563a",
+    "m3/core/src/com/m3/text/LocalM3Arena.java": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
+    "m3/core/src/com/m3/text/LocalM3StringPiece.java": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
+    "m3/core/src/com/m3/text/M3StringPiece.java": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
+    "m3/core/src/com/m3/text/SharedLexiconImage.java": "d0c1f57d9d7d2808309a1531b00f006fe28cf1e0cbe0b4804b69676590acf9df",
+    "m3/core/src/com/m3/text/StorageIdentity.java": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
+    "m3/core/src/module-info.java": "2b6c29db60f536419e3755cdf1a83d21388a2e2bd602838d8cebe516f940964c",
+    "m3/core/test/FoundationTest.java": "07bb7e0af2c713ab30aa9c2b429032ab2857465316f2ae9a8b7d3656a7cdfbf5"
+  }
+}

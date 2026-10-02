@@ -22,10 +22,23 @@ jobs:
           printf '%s  %s\n' '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6' "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -
           tar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"
           echo "M3_JDK=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
+          echo "JAVA_HOME=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
+          echo "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
       - name: Verify deterministic source-bound recipe
         run: |
           python3 m3/recipes/apply.py --check
           python3 m3/recipes/test_recipe.py
+      - name: Verify selected text mappings and replay refusal
+        run: |
+          python3 -m pip install 'jsonschema==4.26.0'
+          python3 m3/recipes/text-port.py
+          python3 m3/recipes/test_text_port.py
+          python3 m3/recipes/mapping-check.py
+          python3 m3/recipes/test_mapping.py
+      - name: Exercise retained text on stock Java 21
+        run: python3 m3/ports/text/test.py
+      - name: Verify opt-in compiler recipe
+        run: mvn --batch-mode --file m3/tooling/compiler-lowering/pom.xml test
       - name: Build and exercise immutable foundation
         run: ./m3/build.sh
       - name: Compare pinned Synexia content and range contract
