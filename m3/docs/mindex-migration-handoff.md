@@ -179,6 +179,33 @@ At source pin bc49cd7610bf5974f6baa31ba64e6885f4117528, synexia-indexstring/pom.
 
 Source [PR #7554](https://github.com/hsoliwal/com.synexia/pull/7554), head 4574363a63c74c52183eb2deae134163d409816f, is a separate sidecar/geometry candidate. Do not adopt its geometry export merely because it claims no payload copying: the inspected copyLiteralGeometryPage method's languages output parameter shadows the stored language lane, so its language assignment reads the caller output array at the source-row index. That can return incorrect metadata or go out of bounds on later pages. This source-level defect is documented, not fixed or runtime-tested here. Require a separately reviewed fix and tests for nonzero start rows, skipped descriptor rows, small output buffers and distinct language values before porting.
 
+## 7a. Follow-on evidence reconciliation (2026-10-02 02:32 UTC)
+
+The original source census and claims above remain bound to their original pins. This update records later observations without silently moving that baseline.
+
+### Runtime branch and retained landmarks
+
+PR #6's actual base branch is **m3/segmented-string-experiment**, not master. Its merged state therefore does not establish a retained master runtime. At master 8bb6215372e07712f1fdf5a0cb912af495007b19:
+- src/java.base/share/classes/java/lang/MIndexString.java returned 404
+- src/java.base/share/classes/java/lang/M3StringStorage.java returned 404
+- The fetched java/lang/String.java contained neither the inspected mindex marker nor M3StringStorage marker
+
+At #6's pinned head 3776d6e674d6c9b04539ca24aca2504aa88d4a57, String.java does contain the mindex marker. These concrete landmarks strengthen the requirement to reconcile the actual trees; they are not an exhaustive VM audit or a new build result. Convergence PR titles/history do not substitute for retained-file verification.
+
+### Source build profile correction
+
+At newer source develop snapshot 8830a34a042d79e2d1b89b850d177c3038bf975e, synexia-indexstring/pom.xml contains **one** m3-mindex-native-string-admission profile. The duplicate-profile observation at the earlier census pin remains historical. The configuration defect is source-corrected at the newer pin; Maven model validation, compilation and tests were not executed by this documentation review. Do not continue to describe the duplicate as an established blocker on that newer snapshot.
+
+### Companion work for implementers to reconcile
+
+- [Synexia #7584](https://github.com/hsoliwal/com.synexia/pull/7584), inspected head 6d1aece6d1685d22a8f788c16c76ad56c0e56212, supplies a three-route contract candidate. Its documented distinction is explicit source-wrapper-retaining view versus compiler-style owning/canonical substring versus ordinary String in the modified-JDK route. It also documents primitive source/range coordinates, split-surrogate substring behavior and exact exception-class requirements. Reconcile this candidate's actual source and tests before porting; its PR description is not an exact-head hosted pass. Preserve the distinction between zero-copy payload reuse and whether the source wrapper itself is retained.
+- [Synexia #7606](https://github.com/hsoliwal/com.synexia/pull/7606), implementation head 35305ee40d2302cc8efc3567c4cc3a6553323278, provides an inventory-workflow companion at source pin 75fb1abaecb56969bea2914520bbe819f130632b. It uses the existing scanner and private-repository execution path. Workflow publication or a tracked-tree listing does not establish full semantic/dependency coverage; inspect the actual artifacts and keep private implementation payloads private.
+- [Synexia #7607](https://github.com/hsoliwal/com.synexia/pull/7607), implementation head 2cf305306e1bdf871680b709e5bb13e1b4135b4d, describes a six-file retained-concat/copy closure and pinned recipe. Its reported local differential/facade/JNI checks are scoped receipts, not full-reactor, OpenRewrite scheduler or modified-JDK/JIT acceptance. This is a partial owner increment, not all-family migration.
+- [M3jdk21 #12](https://github.com/hsoliwal/M3jdk21/pull/12) has a [hosted log](https://github.com/hsoliwal/M3jdk21/actions/runs/36953420865/job/110671088585) showing 15 valid mappings and six passing validator cases, then generated m3/migration/COVERAGE.md drift and exit 1 **before Java compilation**. Preserve the generator-consistency gate and reconcile its output; do not weaken the gate, remove the non-exhaustive caveat or report these validator results as Java/runtime acceptance.
+- [M3jdk21 #13](https://github.com/hsoliwal/M3jdk21/pull/13) is the target companion referenced by the source inventory/port-lineage work. Reconcile its maintained migration manifest and procedures before introducing another operational mapping authority. The schema/example in this documentation remain illustrative and do not supersede a reviewed implementation manifest.
+
+PR #7554's language-output shadowing observation remains pinned to 4574363a63c74c52183eb2deae134163d409816f. No fix or new execution evidence for that defect is claimed here.
+
 ## 8. Implementation handoff
 
 Contributors should fill the mapping and acceptance evidence, not infer implementation from this document.
