@@ -83,6 +83,16 @@ class M3ScopeFenceTest {
   }
 
   @Test
+  void fileScopedRecipeDerivesAnExactSingleFileFence() {
+    M3FileScopedRecipe recipe = () -> "m3/example/Foo.java";
+    assertEquals(M3EditScope.FILE, recipe.editScope().scope());
+    assertEquals(List.of("m3/example/Foo.java"), recipe.editScope().roots());
+    assertDoesNotThrow(() -> recipe.requireWritable("m3/example/Foo.java"));
+    assertThrows(
+        IllegalStateException.class, () -> recipe.requireWritable("m3/example/Other.java"));
+  }
+
+  @Test
   void scopedRecipeRejectsWritesOutsideItsFence() {
     M3ScopedRecipe recipe = () -> M3ScopeFence.file("m3/example/Foo.java");
     assertDoesNotThrow(() -> recipe.requireWritable("m3/example/Foo.java"));
