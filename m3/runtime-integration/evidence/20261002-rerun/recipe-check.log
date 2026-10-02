@@ -1,0 +1,42 @@
+CANDIDATE=3776d6e674d6c9b04539ca24aca2504aa88d4a57
+TREE=1a1d13646d4255231ae2e18aafb73684e3c88b23
+MINDEX_INTEGRATION_RECIPE_PASS state=after
+warning: src/java.base/share/classes/java/lang/MIndexStringPool.java has type 100755, expected 100644
+warning: src/java.base/share/classes/java/lang/MIndexString.java has type 100755, expected 100644
+warning: src/java.base/share/classes/java/lang/MIndexStringPool.java has type 100755, expected 100644
+warning: src/java.base/share/classes/java/lang/MIndexString.java has type 100755, expected 100644
+SEGMENTED_RECIPE_PASS state=after
+...SOURCE_BOUND_RECIPE_PASS files=29 check_only=True
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.054s
+
+OK
+...
+----------------------------------------------------------------------
+Ran 4 tests in 0.338s
+
+OK
+..
+----------------------------------------------------------------------
+Ran 4 tests in 0.760s
+
+OK
+.warning: src/java.base/share/classes/java/lang/MIndexStringPool.java has type 100755, expected 100644
+warning: src/java.base/share/classes/java/lang/MIndexString.java has type 100755, expected 100644
+warning: src/java.base/share/classes/java/lang/MIndexStringPool.java has type 100755, expected 100644
+warning: src/java.base/share/classes/java/lang/MIndexString.java has type 100755, expected 100644
+.warning: src/java.base/share/classes/java/lang/MIndexStringPool.java has type 100755, expected 100644
+warning: src/java.base/share/classes/java/lang/MIndexString.java has type 100755, expected 100644
+warning: src/java.base/share/classes/java/lang/MIndexStringPool.java has type 100755, expected 100644
+warning: src/java.base/share/classes/java/lang/MIndexString.java has type 100755, expected 100644
+.warning: src/java.base/share/classes/java/lang/MIndexStringPool.java has type 100755, expected 100644
+warning: src/java.base/share/classes/java/lang/MIndexString.java has type 100755, expected 100644
+warning: src/java.base/share/classes/java/lang/MIndexStringPool.java has type 100755, expected 100644
+warning: src/java.base/share/classes/java/lang/MIndexString.java has type 100755, expected 100644
+.
+----------------------------------------------------------------------
+Ran 4 tests in 7.312s
+
+OK
+RECIPE_CHECK_EXIT=0

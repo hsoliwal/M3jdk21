@@ -1,0 +1,563 @@
+{
+  "schema": 1,
+  "source_commit": "69667e3f1ce673aaded2ad93e4ae2ecf6c59668b",
+  "source_tree": "406f4bd973d40c5c8ce1782e01745307aab008ff",
+  "scope": "existing String/StringJoiner default86 scope; enabled16 smaller cases only; enabled4GiB cases remain pending",
+  "default_resume_exit": 0,
+  "enabled_initial_exit": 143,
+  "enabled_short_resume_exit": 0,
+  "enabled_cancellation": {
+    "kind": "infrastructure_resource_cancellation",
+    "own_jtreg_pid": 1187,
+    "observed_windows_virtual_free_kib": 2065952,
+    "action": "stop own enabled harness/children before4GiB testcase admission; preserve completed13cases and resume only smaller pending cases"
+  },
+  "pending_enabled_tests": [
+    {
+      "path": "test/jdk/java/util/StringJoiner/StringJoinerTest.java",
+      "explicit_heap": "-Xmx4g",
+      "historical_status": "failed in donor#6; expectation unchanged"
+    },
+    {
+      "path": "test/jdk/java/util/StringJoiner/StringJoinerOomUtf16Test.java",
+      "explicit_heap": "-Xmx4g",
+      "historical_status": "failed in donor#6; expectation unchanged"
+    }
+  ],
+  "harness_heap": "JAVA_TOOL_OPTIONS=-Xms16m -Xmx256m; explicit testcase heap requests retained",
+  "assertions_changed": false,
+  "full_enabled_gate_passed": false,
+  "runs": {
+    "jtreg-final-default": {
+      "counts": {
+        "Passed": 86,
+        "Failed": 0,
+        "Error": 0,
+        "unknown": 0
+      },
+      "results": [
+        {
+          "test": "java/lang/String/CaseConvertSameInstance.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "48937f72b7c01cbc73d6ce481efe847959b253ac9075eb9d6bd4768de90608f4"
+        },
+        {
+          "test": "java/lang/String/CaseInsensitiveComparator.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "0f31bff341d755203799e6722e34417bfd7af510fdf0a7193225a0fd422049d1"
+        },
+        {
+          "test": "java/lang/String/Chars.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "121b72954ae9fe6e5e5ab8f727f9b311da896be0012c6a10c616e9fd989c5bbd"
+        },
+        {
+          "test": "java/lang/String/CompactString/CharAt.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "59a7365996f47eda6ef6ab06a060892e7375555e990d1495d161c8ab857ec5d8"
+        },
+        {
+          "test": "java/lang/String/CompactString/CodePointAt.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "776bfa82ab89bdce24e1be4bb620450a2ba80048c5696b7629a448e4fc85e319"
+        },
+        {
+          "test": "java/lang/String/CompactString/CodePointBefore.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "7fde7bb8d46d8f13299cbecc9581b1673cf42e83bf6a0f2727d9420e634ce626"
+        },
+        {
+          "test": "java/lang/String/CompactString/CodePointCount.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "90a428d1db19e006c53819ee3959b9b91fdcb2aad891675c1403c57e7eac8a22"
+        },
+        {
+          "test": "java/lang/String/CompactString/CompareTo.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "ba1ea8e1590b0b0cc5986041b9b4fc2e254412c24dd9a917849fa556301183e8"
+        },
+        {
+          "test": "java/lang/String/CompactString/CompareToIgnoreCase.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "4c426a7b881479af356b386de16d2705dd10df6c6f366e0e7aea09e9932c3079"
+        },
+        {
+          "test": "java/lang/String/CompactString/Concat.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "5c2d123584f7a032757ec8e7bc0bf3a6bb1c584b4ec4cd6dc08f82b482d653c4"
+        },
+        {
+          "test": "java/lang/String/CompactString/Contains.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "9c9962be68c6a9084c8d7c83b340ce39b7cfac45a6bd9800b13f38270a47d3a5"
+        },
+        {
+          "test": "java/lang/String/CompactString/EndsWith.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "9c0f92e6ebbb6aaefb30090aa851e9171c0cd9900d4995731b95b584f0953715"
+        },
+        {
+          "test": "java/lang/String/CompactString/Equals.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "4491592ec4f39edc9c02b8a0a253d109130f0d99975e404fa1168508f1351156"
+        },
+        {
+          "test": "java/lang/String/CompactString/EqualsIgnoreCase.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "33313dbb9742f087355bf1162fc256544a9d9f6a4c9082ac4812902ba6359665"
+        },
+        {
+          "test": "java/lang/String/CompactString/GetChars.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "2a8bc9c83f5f13bfe3a2962eb93ecfe86c7352586ad0a191167215b11a66228c"
+        },
+        {
+          "test": "java/lang/String/CompactString/IndexOf.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "7b1efa4167d7e1df702f632713e132b567cf7cfdeb0f29b61a5d03823cfee3f8"
+        },
+        {
+          "test": "java/lang/String/CompactString/Intern.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "bdd7772993aaba523ee1fa760669a133fbdd9a47f01e74439fa4ad1f31aa240c"
+        },
+        {
+          "test": "java/lang/String/CompactString/LastIndexOf.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "9d74aa24384163b68acc0634973ad6c00d5e6def5b4db201c210ab3df2901a50"
+        },
+        {
+          "test": "java/lang/String/CompactString/Length.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "7eac7847b711bb1e91b51ecaca16e5909e57b0680fe8cbdbdcc11f8e8ad1d0fe"
+        },
+        {
+          "test": "java/lang/String/CompactString/Numbers.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "0c890f16edca8d1e6baf41b63ac81d257254196d0350d5fe053378f5a724ff29"
+        },
+        {
+          "test": "java/lang/String/CompactString/OffsetByCodePoints.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "cc5d5bbe17c46f428a32dad75baf7bb9c236daf6fa79699b73299d9169fe0675"
+        },
+        {
+          "test": "java/lang/String/CompactString/RegionMatches.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "950a0e81dc44e87f646ecb9b7fe4eabcb89f7b4728a2cf83b39a9e96fba5324b"
+        },
+        {
+          "test": "java/lang/String/CompactString/Replace.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "c03b25138b183b0657e2d11047cab3ac59f7e6fb22f19f3784b87a598011425c"
+        },
+        {
+          "test": "java/lang/String/CompactString/SerializationTest.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "e216274d9d304e25b9020161cdcb9f26d287b157db459220ba4219c24cd14ec5"
+        },
+        {
+          "test": "java/lang/String/CompactString/Split.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "7d0f6bf6a7cc829eb47b8f9d5014618b7ee327a2fdc0b0d27489b43f147652f8"
+        },
+        {
+          "test": "java/lang/String/CompactString/StartsWith.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "e142bc6609894fa8c26653664d08a4e71f46b359a19437c11f4e593c606a75d3"
+        },
+        {
+          "test": "java/lang/String/CompactString/SubString.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "0a817edb0593c8cbc2d7d2dfd4e0e3251d5c32daed139aa6132eeeb9e46c6ec3"
+        },
+        {
+          "test": "java/lang/String/CompactString/ToCharArray.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "1e9a249fa721a062f9c2a1e29a16355f2a047f32ec9323b6de049432ef0b8924"
+        },
+        {
+          "test": "java/lang/String/CompactString/ToLowerCase.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "29c2cffed0c30def7ea9bdeecfda3ce1a86b3708ce1023811eb3c7c8022780c4"
+        },
+        {
+          "test": "java/lang/String/CompactString/ToUpperCase.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "3ecf4a82b89cef4b273be079829637f003d43a0b06ea49018fd4f423f4686d0a"
+        },
+        {
+          "test": "java/lang/String/CompactString/Trim.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "bf47fa37a5e9108d30e25aab126bb4e7c9d39255895fb4451b46391e23e7e9dd"
+        },
+        {
+          "test": "java/lang/String/CompactString/VMOptionsTest.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "fba8a2e3a06ae86f38bcfd0adeff6d8d55e7e62504960af553a1b89618152c2a"
+        },
+        {
+          "test": "java/lang/String/CompactString/ValueOf.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "9829d4b4aca5d5ad3db518cabf00de209ed993f886888a9e1d2ec92e9ee833de"
+        },
+        {
+          "test": "java/lang/String/CompareIC.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "4820557bf9492ba8ea94dbd0386fdd347dc88241ba21c8350a6fb1da18a6b8a7"
+        },
+        {
+          "test": "java/lang/String/ContentEquals.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "aa39d7b9ebf56c425b9020aafc6724ec212dab2b9b7ec887b04c480a72b71c62"
+        },
+        {
+          "test": "java/lang/String/Encodings.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "c6ac6d6a9e3631cc201cefc85f31925ec9e905bae80ecccd2c89974580440fe3"
+        },
+        {
+          "test": "java/lang/String/EqualsIgnoreCase.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "9f0500df41df28a0dda049a5af0f850b5e11236a1f99f4d2c1b3deecef023c0a"
+        },
+        {
+          "test": "java/lang/String/Exceptions.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "94095302b089732d94dc78a363162cbe4f138fa4210cd1a917b5b1e2ea5582d9"
+        },
+        {
+          "test": "java/lang/String/Formatted.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "1baae32fe46b8ebc6cad432dcca52b9011246537d2e85e3f2e797aebc5b9b564"
+        },
+        {
+          "test": "java/lang/String/HashCode.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "43edf7df92e79a8e8435bfbcbcd45e82734e846c8f8bff4a7f19c948f7333c3f"
+        },
+        {
+          "test": "java/lang/String/ICCBasher.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "86a0c624b81f6cd808a3da8422036a7caacd4a8d7bbbfe713d696601e44a1f29"
+        },
+        {
+          "test": "java/lang/String/Indent.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "a06eb576bc74eb0e9b95a808a6ff144ab7c1bd063a468b0adad0cefcd66a91f0"
+        },
+        {
+          "test": "java/lang/String/IndexOfBeginEnd.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "eb557b134bfd88d53e80a634fd99c58e5381270a1005ed1d7310267a97bbf584"
+        },
+        {
+          "test": "java/lang/String/IndexOfEmptyInEmpty.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "35167c7970b65730eeeb076415cc5ad9325dbf47fc05095571ee9f9dc45ba90f"
+        },
+        {
+          "test": "java/lang/String/IsBlank.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "68a1fb631fa7cbab4720cf29f7c42e2c9d345699f9a30f67fc9d1591d4e3a410"
+        },
+        {
+          "test": "java/lang/String/IsEmpty.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "9b198ae187ebe7dfbf2e180458f2102652535fdf9724576fe5b7728f78c21876"
+        },
+        {
+          "test": "java/lang/String/Lines.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "73c3048b0eabcffdca1bbba11eb7ed70ae7c6bfc39bdaf3a49f99383d7612724"
+        },
+        {
+          "test": "java/lang/String/LiteralReplace.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "eb269a1958035a17408c5b79090c6bf6edfbedeb3c2b9d232868dc65d77092e2"
+        },
+        {
+          "test": "java/lang/String/NoReplTest.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "3825352bbb120f8e3695dec9719922f3e65aea9bd86021ee0e969dfc049f5359"
+        },
+        {
+          "test": "java/lang/String/NonCharacterMapping.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "2d5218f7228430d5e8e276ad063238b5f094a1c8c11a492407b7282e81e33f8b"
+        },
+        {
+          "test": "java/lang/String/Regex.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "223fae446142f64bf464917b7ebc7952d243dcfecce5c1fbfc361fe595e494d0"
+        },
+        {
+          "test": "java/lang/String/RegionMatches.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "5ff9f70b89a44a20995ac5fe7fd1b3c8f394e762ee6565c2fb5336a7492d2848"
+        },
+        {
+          "test": "java/lang/String/SBConstructor.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "df81918a0b53de8d5ef934f1777e12d66e2cae73491e94e01b462072ac54c2ac"
+        },
+        {
+          "test": "java/lang/String/SpecialCasingTest.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "455771e3c4a72a8597dc98a13610acbe6f77841da047ac16609f25d307f60910"
+        },
+        {
+          "test": "java/lang/String/Split.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "9cdd06290bd1fa823815cfa55beb364d11e89c88c202943dd2354500a23975ef"
+        },
+        {
+          "test": "java/lang/String/StringContentEqualsBug.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "5925dc6b259ae494a238624dba9abf8609973b9e64ba3e67419928d15134cad3"
+        },
+        {
+          "test": "java/lang/String/StringJoinTest.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "e36f9f9948b4585d211bb3517e6922931540595ace08ac16091760c21935e90c"
+        },
+        {
+          "test": "java/lang/String/StringRepeat_id0.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "2489a900d70b20f186f84af07a82482c2d13702379af6610d9d32d4e2e47bf06"
+        },
+        {
+          "test": "java/lang/String/StringRepeat_id1.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "3ccb8b5b4b85b3bfcf176e13abdeefc82e64ebafc147b1289f544c18a8f25120"
+        },
+        {
+          "test": "java/lang/String/Strip.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "dd23648bc2838496d7336f8132efec5bac3484102257a0b9c5c5cc941a1251ff"
+        },
+        {
+          "test": "java/lang/String/StripIndent.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "500297dea73db5f9a34d63f4678cf15f3562dea0b901e28ca02699d76edb6c2f"
+        },
+        {
+          "test": "java/lang/String/Supplementary.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "3bd2b857f075f7477a350b40903ed54ae6d2b0e3aa12815b97d1c271044d5988"
+        },
+        {
+          "test": "java/lang/String/ToLowerCase.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "86fda45bb453d1dadeb9d6bfc41dd22e9c73a08c18b4f8764f77a11b41414da3"
+        },
+        {
+          "test": "java/lang/String/ToUpperCase.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "7dcbf799454c4de753a19a6e5f5c84b16d0101371a4ee607f668e4e503c0a627"
+        },
+        {
+          "test": "java/lang/String/Transform.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "a5c1114f722a004d39891656a16dde12dade2715d8faa32b1384c3e30befb3e9"
+        },
+        {
+          "test": "java/lang/String/TranslateEscapes.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "01eacff38f983d736728b67e2f2b2fc840174a368d43e63d7553f4efb054d929"
+        },
+        {
+          "test": "java/lang/String/UnicodeCasingTest.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "3fb4ef894fdcac0be8bef41352fc1025ce020f701a7223990f30ba1bd62b343a"
+        },
+        {
+          "test": "java/lang/String/concat/CompactStringsInitialCoder.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "fef00465c809d03dbbb3d22bcef56c9d6c483afea82ac9167ddb293eb822f704"
+        },
+        {
+          "test": "java/lang/String/concat/ImplicitStringConcat.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "40d95a021c2a552a66023063b80c66adafcf6ecdfd30db7a83d377f1609b6140"
+        },
+        {
+          "test": "java/lang/String/concat/ImplicitStringConcatArgCount.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "4e09649a22938eb64492bd171494307d7edd6365257ea88de719dc980f023f5c"
+        },
+        {
+          "test": "java/lang/String/concat/ImplicitStringConcatAssignLHS.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "c7d8d88fabca860ae20fdb5aa1114dc8209ad75bfb72d6c32962a3cb7fbd0105"
+        },
+        {
+          "test": "java/lang/String/concat/ImplicitStringConcatBoundaries.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "5dbc52f6307209e3939d857fe04ea28fa827c3274bd67172352f97abcf1e15f3"
+        },
+        {
+          "test": "java/lang/String/concat/ImplicitStringConcatMany.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "cf39d9ca634d8efb66a5ab5d3c2267ee8fde43d2c4b00af3cac80df90f737a6f"
+        },
+        {
+          "test": "java/lang/String/concat/ImplicitStringConcatManyLongs.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "95d26b8a84f638ddaa67d28d2c828eeb624978b08de5addeb6afdef5c616dfaa"
+        },
+        {
+          "test": "java/lang/String/concat/ImplicitStringConcatOOME.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "350d6f218aa452b094edaddc203f77a057694f42d4422167ea6dabb58a686050"
+        },
+        {
+          "test": "java/lang/String/concat/ImplicitStringConcatOrder.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "ccab25a157b0e3794ef1837d883d906c4c37c40f6e0a2ac9ab4fbb60c55ee720"
+        },
+        {
+          "test": "java/lang/String/concat/ImplicitStringConcatShapes.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "e6c336699082dfa5e04c8e0d27c482d24d42d5540b753186b4d199724253d9f5"
+        },
+        {
+          "test": "java/lang/String/concat/IntegerMinValue.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "e018f7e075b56f925737ced9f29bde8db102f7d6c80436825603d4a362aee6a3"
+        },
+        {
+          "test": "java/lang/String/concat/MakeConcatWithTemplate.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "53807d697295d81e6c05bfee05f151bcd7557fc2def0bf8043c821dadb76694c"
+        },
+        {
+          "test": "java/lang/String/concat/StringConcatFactoryInvariants.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "db5017a542e3d5673f0541ac8a9417b44cfc6bb1c23467cea2e2b0e2a77106f6"
+        },
+        {
+          "test": "java/lang/String/concat/StringConcatFactoryRepeatedConstants.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "9fcf777382097c1cad689437d19137589732b9634842e22bac8f63b1c7b91d83"
+        },
+        {
+          "test": "java/lang/String/concat/WithSecurityManager.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "dde78945efc583db7038c11167453370e07bcd993f42edbb40cd564f5e8f20a6"
+        },
+        {
+          "test": "java/lang/String/nativeEncoding/StringPlatformChars.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "f698d2190d96b8df3ba8e732d0fbe3ddc154845c93b491735e9803a86748bf70"
+        },
+        {
+          "test": "java/util/StringJoiner/MergeTest.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "b71240b5c36b1f43824a76b74f29fbcb4c5796c1dc3a3efdbe629f301c313ddc"
+        },
+        {
+          "test": "java/util/StringJoiner/StringJoinerOomUtf16Test.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "355c8690245157562576bdc7d0463740aadaebf57024744f094f940197ea363e"
+        },
+        {
+          "test": "java/util/StringJoiner/StringJoinerTest.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "722d852b2442c181fe5095b018061029089969b401ad68f928fb74b0bbedaae4"
+        }
+      ]
+    },
+    "jtreg-enabled": {
+      "counts": {
+        "Passed": 16,
+        "Failed": 0,
+        "Error": 0,
+        "unknown": 0
+      },
+      "results": [
+        {
+          "test": "java/lang/String/CompactString/Concat.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "da1a279fae650588048e0fc0ddbea99019f6d5761d9c20517be3916cf8464906"
+        },
+        {
+          "test": "java/lang/String/CompactString/Intern.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "630c9f10553685f2d9469a9cbafbc74b3f6f02f52ae71e0a5eeb771836c02734"
+        },
+        {
+          "test": "java/lang/String/CompactString/SubString.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "5203469b69bbfdb066af7a310deefb2cdbec87b95402a7a81cdc0c7c786d76db"
+        },
+        {
+          "test": "java/lang/String/ContentEquals.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "1f5a6a974708bcd054e208cfc32a2431d5b18ec8cbd74588a91d212ec18e29b5"
+        },
+        {
+          "test": "java/lang/String/Encodings.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "65f296ce1d44fa400fa18eb511c2b29e4bd0359ee500e07cab16ac91b373729a"
+        },
+        {
+          "test": "java/lang/String/Exceptions.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "e58689f6e82b8774b685148457def5a7b74b6edfeba4720af6961ac961142f4a"
+        },
+        {
+          "test": "java/lang/String/HashCode.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "aa362df61737bb958d19921bae34269442c6d97d44d39a57c263ba6a597d2372"
+        },
+        {
+          "test": "java/lang/String/Regex.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "b087114d7a376be96bc9713a0ed3c6697a96e60d9e7f3d28c70ad3e92d86e139"
+        },
+        {
+          "test": "java/lang/String/RegionMatches.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "c65ebd55049baf3bee24363cdc6379c8bdb3e54bc2d4b328c36c00a0516dfdd0"
+        },
+        {
+          "test": "java/lang/String/SBConstructor.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "2faf55651e91c3ca2c88cc933f758859404029b841faaef7400f5bb9a40f8dc8"
+        },
+        {
+          "test": "java/lang/String/StringJoinTest.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "4e680d8ef7a653634f7b3069642233e1022dd6ae4a74697a020e172b139b4b02"
+        },
+        {
+          "test": "java/lang/String/StringRepeat_id0.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "d9000b3dc5ffc6c24c18c9deb6c527fe3e7dcf157f059dc4b68340f9576079c2"
+        },
+        {
+          "test": "java/lang/String/StringRepeat_id1.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "14ec914b70b9ee4759c2772cb0a7ee781a6e3660cc60f80ec4976b81d3c87832"
+        },
+        {
+          "test": "java/lang/String/Supplementary.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "55de71b6c3bab71e0246cf999d287cd00635a0ffae10494cb4c24f794db451ab"
+        },
+        {
+          "test": "java/lang/String/nativeEncoding/StringPlatformChars.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "bd61df8ff67732bfba03f69fd806768b3776602721fb3353c29117ea993173b0"
+        },
+        {
+          "test": "java/util/StringJoiner/MergeTest.jtr",
+          "result": "Passed. Execution successful",
+          "sha256": "ae06c5fd0ff0c712e8d3b2cda93295d386fba42f09e24f2f904413d52a7ac54e"
+        }
+      ]
+    }
+  },
+  "finished_utc": "2026-10-02T03:45:14.875254+00:00"
+}

@@ -1,0 +1,64 @@
+RESUME_START_UTC=2026-10-02T03:29:49Z
+PRIOR_COMPLETED_FOCUSED_SUBCASES_VERIFIED count=11
+STAGE=gc-UseG1GC COMMAND=timeout 240 /var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/images/jdk/bin/java -ea -esa -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CreateCoredumpOnCrash --add-opens java.base/java.lang=ALL-UNNAMED -cp /mnt/c/worktrees/M3jdk21-runtime-migration-20261002/m3/runtime-integration/evidence/20261002-candidate-696/tests/classes -Xmx256m -XX:+UnlockDiagnosticVMOptions -XX:+VerifyBeforeGC -XX:+VerifyAfterGC -XX:+UseG1GC SegmentedConcurrent 
+STAGE=gc-UseG1GC EXIT=0
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+SEGMENTED_CONCURRENT_PASS iterations=40000
+STAGE=gc-UseSerialGC COMMAND=timeout 240 /var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/images/jdk/bin/java -ea -esa -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CreateCoredumpOnCrash --add-opens java.base/java.lang=ALL-UNNAMED -cp /mnt/c/worktrees/M3jdk21-runtime-migration-20261002/m3/runtime-integration/evidence/20261002-candidate-696/tests/classes -Xmx256m -XX:+UnlockDiagnosticVMOptions -XX:+VerifyBeforeGC -XX:+VerifyAfterGC -XX:+UseSerialGC SegmentedConcurrent 
+STAGE=gc-UseSerialGC EXIT=0
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+SEGMENTED_CONCURRENT_PASS iterations=40000
+STAGE=gc-UseZGC COMMAND=timeout 240 /var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/images/jdk/bin/java -ea -esa -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CreateCoredumpOnCrash --add-opens java.base/java.lang=ALL-UNNAMED -cp /mnt/c/worktrees/M3jdk21-runtime-migration-20261002/m3/runtime-integration/evidence/20261002-candidate-696/tests/classes -Xmx256m -XX:+UnlockDiagnosticVMOptions -XX:+VerifyBeforeGC -XX:+VerifyAfterGC -XX:+UseZGC SegmentedConcurrent 
+STAGE=gc-UseZGC EXIT=0
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+SEGMENTED_CONCURRENT_PASS iterations=40000
+STAGE=gc-UseShenandoahGC COMMAND=timeout 240 /var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/images/jdk/bin/java -ea -esa -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CreateCoredumpOnCrash --add-opens java.base/java.lang=ALL-UNNAMED -cp /mnt/c/worktrees/M3jdk21-runtime-migration-20261002/m3/runtime-integration/evidence/20261002-candidate-696/tests/classes -Xmx256m -XX:+UnlockDiagnosticVMOptions -XX:+VerifyBeforeGC -XX:+VerifyAfterGC -XX:+UseShenandoahGC SegmentedConcurrent 
+STAGE=gc-UseShenandoahGC EXIT=0
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+SEGMENTED_CONCURRENT_PASS iterations=40000
+STAGE=mapped-native COMMAND=timeout 60 /var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/images/jdk/bin/java -ea -esa -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CreateCoredumpOnCrash --add-opens java.base/java.lang=ALL-UNNAMED -cp /mnt/c/worktrees/M3jdk21-runtime-migration-20261002/m3/runtime-integration/evidence/20261002-candidate-696/tests/classes -Xcheck:jni -Djdk.mindex.lexicon=/mnt/c/worktrees/M3jdk21-runtime-migration-20261002/m3/runtime-integration/evidence/20261002-candidate-696/tests/shared-owner/arena.bin -agentpath:/mnt/c/worktrees/M3jdk21-runtime-migration-20261002/m3/runtime-integration/evidence/20261002-candidate-696/tests/libsegmentsjvmti.so -Dm3.jni=/mnt/c/worktrees/M3jdk21-runtime-migration-20261002/m3/runtime-integration/evidence/20261002-candidate-696/tests/libjoinprobe.so MappedNativeProbe 
+STAGE=mapped-native EXIT=0
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+MAPPED_NATIVE_PASS jni=75 jvmti=15 no_java_flatten=true
+STAGE=weak-admission COMMAND=timeout 60 /var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/images/jdk/bin/java -ea -esa -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CreateCoredumpOnCrash --add-opens java.base/java.lang=ALL-UNNAMED -cp /mnt/c/worktrees/M3jdk21-runtime-migration-20261002/m3/runtime-integration/evidence/20261002-candidate-696/tests/classes -Xmx128m WeakAdmissionProbe 
+STAGE=weak-admission EXIT=0
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+WEAK_ADMISSION_PASS atom_collected=true
+STAGE=api COMMAND=bash m3/runtime-integration/run-api.sh 
+STAGE=api EXIT=0
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+SEMANTICS checks=808685 digest=30e36ec204f5aec8e0d672ff5be675d3f8ac1677164481ec82a335b2540da499
+SEMANTICS checks=808685 digest=30e36ec204f5aec8e0d672ff5be675d3f8ac1677164481ec82a335b2540da499
+SEMANTICS checks=808685 digest=30e36ec204f5aec8e0d672ff5be675d3f8ac1677164481ec82a335b2540da499
+SEMANTICS checks=808685 digest=30e36ec204f5aec8e0d672ff5be675d3f8ac1677164481ec82a335b2540da499
+SEMANTICS checks=808685 digest=30e36ec204f5aec8e0d672ff5be675d3f8ac1677164481ec82a335b2540da499
+STAGE=startup-dynamic-gates COMMAND=python3 m3/runtime-integration/test-gates.py 
+STAGE=startup-dynamic-gates EXIT=0
+SEGMENTED_STARTUP_DYNAMIC_GATES_PASS cases=13
+STAGE=protocol COMMAND=python3 m3/runtime-integration/protocol-tests.py 
+STAGE=protocol EXIT=0
+MINDEX_PROTOCOL_PASS cases=5
+STAGE=two-process COMMAND=python3 m3/runtime-integration/two-process.py 
+STAGE=two-process EXIT=0
+MINDEX_TWO_PROCESS_PASS same_inode=7036874419164714 same_atom_id=-6459248878922235902 unlink_gc_retained=true
+STAGE=allocation COMMAND=bash m3/runtime-integration/run-allocation.sh 
+STAGE=allocation EXIT=0
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+{"segmented":false,"joins":2000,"allocated_bytes":65632176,"operation_ns":680057860,"retained_leaf_arrays":2000,"leaf_payload_bytes":65536000}
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+{"segmented":true,"joins":2000,"allocated_bytes":433056,"operation_ns":9960806,"retained_leaf_arrays":2,"leaf_payload_bytes":24576}
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+{"segmented":false,"joins":2000,"allocated_bytes":65632176,"operation_ns":618622905,"retained_leaf_arrays":2000,"leaf_payload_bytes":65536000}
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+{"segmented":true,"joins":2000,"allocated_bytes":433056,"operation_ns":10289333,"retained_leaf_arrays":2,"leaf_payload_bytes":24576}
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+{"segmented":false,"joins":2000,"allocated_bytes":65632176,"operation_ns":638620492,"retained_leaf_arrays":2000,"leaf_payload_bytes":65536000}
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+{"segmented":true,"joins":2000,"allocated_bytes":433056,"operation_ns":10067714,"retained_leaf_arrays":2,"leaf_payload_bytes":24576}
+/var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/images/jdk/release: OK
+/var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/images/jdk/bin/java: OK
+/var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/images/jdk/lib/modules: OK
+/var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/images/jdk/lib/server/libjvm.so: OK
+/var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/images/jdk/lib/libjava.so: OK
+CANDIDATE_RECEIPT source=69667e3f1ce673aaded2ad93e4ae2ecf6c59668b stages={'allocation': 0, 'api': 0, 'gc-UseG1GC': 0, 'gc-UseSerialGC': 0, 'gc-UseShenandoahGC': 0, 'gc-UseZGC': 0, 'mapped-native': 0, 'protocol': 0, 'startup-dynamic-gates': 0, 'two-process': 0, 'weak-admission': 0}
