@@ -4,6 +4,12 @@ Status: **proposed documentation-only design**. No JDK collection implementation
 
 This document expands the collection workstream in [whole-jdk-migration-scope.md](whole-jdk-migration-scope.md). It is not a new mapping authority. Any implementation must be represented in the existing stable mapping system and pass the route-specific gates.
 
+## Canonical role and execution overlay
+
+This is the canonical detailed collection design for the whole-JDK documentation set. The implementation-oriented companion [../migration/docs/COLLECTIONS.md](../migration/docs/COLLECTIONS.md) deliberately does not repeat the family matrix; it turns this specification into bounded mapping, recipe and evidence packets. [whole-jdk-subsystem-matrix.md](whole-jdk-subsystem-matrix.md) owns module-level planning dispositions, while operational capability state remains in [name-mapping.json](name-mapping.json).
+
+Do not create a second collection design by copying these tables into migration status documents. Extend this document for collection contract/design changes and update the execution overlay only when migration procedure or gates change.
+
 ## 1. Design rule
 
 The Java collection contract is the semantic skeleton. Storage is replaceable only when all observable behavior remains valid for the exact class, operation and route.
