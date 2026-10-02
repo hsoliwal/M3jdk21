@@ -256,3 +256,85 @@ The compiler may lower an internal loop over a proven nonescaping primitive-spec
 An ordinary JDK list implementation may use a specialized internal lane only if its runtime representation can still satisfy arbitrary `Integer`/null/reference behavior for that concrete object and all VM/library consumers. This is much stronger than Route A evidence.
 
 The three routes can share algorithms and storage concepts; acceptance evidence remains route-scoped.
+
+## 11. Atomization → patternization → mapping example
+
+Suppose a target class contains three responsibilities in one file:
+
+```text
+CompactMap
+  - lookup/insert/remove over key/value storage
+  - keySet/values/entrySet backed-view behavior
+  - serialization read/write compatibility
+```
+
+The file is **not** one migration atom merely because it is one source file. Seal the public Map contract, then decompose:
+
+```text
+A1 storage.lookup
+A2 storage.insert-remove-resize
+A3 equality-hash-collision-confirmation
+A4 keySet-backed-view
+A5 values-backed-view
+A6 entrySet-backed-view-and-setValue
+A7 iterator-modification-detection
+A8 serialization-write
+A9 serialization-read-validation
+```
+
+Typed dependencies might be:
+
+```text
+A1 -> A3
+A2 -> A3
+A4 -> A2
+A5 -> A2
+A6 -> A2
+A7 -> A2
+A8 -> A1,A2
+A9 -> A2,A3
+```
+
+If A2 and A7 depend cyclically because iterator state is embedded directly in the resize/modification mechanism, keep them temporarily as compound atom `A2_7` rather than pretending the graph is acyclic. Refactor only through a separately reviewed step, then republish the DAG.
+
+Patternization may identify:
+
+```text
+P-flat-reference-lanes/v2
+  applies to A1,A2
+  requires GC-visible Object reference lanes and checked capacity arithmetic
+
+P-collision-safe-hash/v1
+  applies to A3
+  requires exact equals confirmation after hash candidate filtering
+
+P-live-backed-view/v3
+  applies to A4,A5,A6
+  requires owner retention, bidirectional mutation and exact view exceptions
+
+P-serialized-form-adapter/v1
+  applies to A8,A9
+  requires old-stream compatibility and validation
+```
+
+Each pattern names its preconditions, refusal cases, recipe/patch version and tests. If `P-flat-reference-lanes/v2` requires immutable keys but the Java Map contract permits mutable keys, that pattern is rejected for A1/A2 even if the generated code would compile.
+
+The mapping then records:
+
+```text
+source HashMap.lookup atoms
+  -> P-flat-reference-lanes/v2
+  -> target CompactMap A1
+
+source HashMap entry/view atoms
+  -> P-live-backed-view/v3
+  -> target CompactMap A4/A5/A6
+
+source serialization atoms
+  -> P-serialized-form-adapter/v1
+  -> target CompactMap A8/A9
+```
+
+Target-specific bootstrap or GC atoms can exist with no direct Synexia source atom. They remain target-only adaptations under the same capability lineage.
+
+Promotion is blocked if, for example, A1/A2/A3 pass differential tests but A6 fails `Map.Entry.setValue` write-through. The storage pattern may be valid and reusable elsewhere; the containing Map capability is still not accepted. This is why atom acceptance, pattern acceptance and capability mapping/acceptance remain distinct.
