@@ -26,6 +26,8 @@ The migration program covers **all JDK parts**, including the collections framew
 
 The [consolidated copy-ready assignment](whole-jdk-consolidated-prompt.md) requests documentation and explanation only. Other contributors implement through separately authorized, source-pinned changes.
 
+Downstream reuse from Synexia is additionally gated by [synexia-canonical-intake.md](synexia-canonical-intake.md): Synexia must first converge and emit a complete, capability-scoped canonical export receipt. M3jdk21 then performs its own mapping, adaptation and route-specific acceptance; branch-local Synexia code is not a direct port authority.
+
 This scope supersedes String-only framing for future planning. Preserve [shared-atom-concatenation.md](shared-atom-concatenation.md), [stages.md](stages.md), the [MIndex handoff](mindex-migration-handoff.md) and historical receipts as dated slice-specific evidence. This document does not rewrite their pinned history or turn historical passes into current acceptance.
 
 ## 1. Coverage denominator and taxonomy
