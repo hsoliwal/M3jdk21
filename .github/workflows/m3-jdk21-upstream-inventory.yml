@@ -1,6 +1,15 @@
 name: M3 JDK21 upstream inventory
 
 on:
+  push:
+    branches:
+      - master
+      - "m3/**"
+    paths:
+      - ".github/workflows/m3-jdk21-upstream-inventory.yml"
+      - "m3/backports/inventory.py"
+      - "m3/backports/test_inventory.py"
+      - "m3/backports/COMPATIBILITY_ADMISSION.md"
   pull_request:
     paths:
       - ".github/workflows/m3-jdk21-upstream-inventory.yml"
@@ -88,6 +97,21 @@ jobs:
               raise SystemExit(
                   f"release commit counts differ: {dict(sorted(by_release.items()))}"
               )
+          expected_total = sum(expected_release_counts.values())
+          if len(rows) != expected_total:
+              raise SystemExit(
+                  f"expected complete released denominator {expected_total}, found {len(rows)}"
+              )
+          for row in rows:
+              if row["backport_policy"] != "BACKPORT_IF_JAVA21_COMPATIBLE":
+                  raise SystemExit(
+                      f"{row['commit']}: missing complete backport policy"
+                  )
+              if row["compatibility_state"] != "PENDING_COMPATIBILITY_PROOF":
+                  raise SystemExit(
+                      f"{row['commit']}: unexpected initial compatibility state "
+                      f"{row['compatibility_state']}"
+                  )
 
           commits = [row["commit"] for row in rows]
           if len(commits) != len(set(commits)):
@@ -105,6 +129,8 @@ jobs:
                   "27": ["jdk-26+35", "jdk-27+35"],
               },
               "total_commits": len(rows),
+              "backport_policy": "BACKPORT_IF_JAVA21_COMPATIBLE",
+              "initial_compatibility_state": "PENDING_COMPATIBILITY_PROOF",
               "rows_with_jbs_id": jbs_rows,
               "by_release": dict(sorted(by_release.items())),
               "by_disposition": dict(sorted(by_disposition.items())),
