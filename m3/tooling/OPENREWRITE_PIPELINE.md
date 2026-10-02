@@ -12,6 +12,7 @@ The execution order is:
 
 ```text
 inventory
+  -> semantic hash
   -> atomization
   -> patternization / IOP
   -> documentation
@@ -24,6 +25,10 @@ inventory
 ## Admission law
 
 The pipeline is not populated by scanning the classpath.
+
+Before mutation, the semantic-hash stage emits a versioned whole-file fingerprint with separate
+exact, token-structural and pattern/IOP planes. Hash equality is a clustering/index signal only;
+it never auto-promotes semantic equivalence.
 
 A recipe enters the DAG only when all of the following are true:
 
