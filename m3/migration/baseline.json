@@ -1,0 +1,136 @@
+{
+  "schema": 1,
+  "captured_at_utc": "2026-10-02T01:50:00Z",
+  "source": {
+    "repository": "hsoliwal/com.synexia",
+    "default_branch": "develop",
+    "commit": "75fb1abaecb56969bea2914520bbe819f130632b",
+    "tree": "e913612cc037497b85a4c416d88e2bd7a37dffba"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "default_branch": "master",
+    "commit": "3029cff40e927aefcca444a6ef759a562204579c",
+    "tree": "26554d002cf158c97dd4ffbb06b3885b647c0a17"
+  },
+  "design_contract": {
+    "path": "m3/docs/shared-atom-concatenation.md",
+    "inspected_revision": "1210d76ce80263003981c8c6ba5bb4175524358a",
+    "pull_request": 7,
+    "merge_commit": "3029cff40e927aefcca444a6ef759a562204579c",
+    "status": "merged_documentation_contract_not_runtime_acceptance"
+  },
+  "modified_jdk_candidate": {
+    "pull_request": 6,
+    "state": "open",
+    "draft": true,
+    "head": "3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+    "historical_receipt": "m3/runtime-integration/evidence/results.json",
+    "historical_default_jtreg": {
+      "passed": 86,
+      "failed": 0
+    },
+    "historical_enabled_jtreg": {
+      "passed": 16,
+      "failed": 2
+    },
+    "mandatory_open_gates": [
+      "StringJoiner enabled-mode OOME expectations",
+      "compiled segmented mode",
+      "full jtreg/JCK",
+      "live SA attach",
+      "rebuild/retest exact current candidate after later source reconciliation"
+    ]
+  },
+  "source_pull_requests": [
+    [
+      7498,
+      "a01cbe66fa53a0fe782573ac66bfc090f02415d9",
+      "open",
+      "shared lexicon compiler sessions with VM-local misses"
+    ],
+    [
+      7521,
+      "86ea0a90c611f493f7eee8f130b7865912fcea67",
+      "open",
+      "canonical mapped lexicon handles"
+    ],
+    [
+      7523,
+      "5a49543056c8d3dab80c8a5c0fb24100e577ddad",
+      "open",
+      "descriptor-backed composite precomputation"
+    ],
+    [
+      7525,
+      "06b23493bb68f63d5aed4d340a776eb9d2828023",
+      "open",
+      "exact-source atom gate"
+    ],
+    [
+      7526,
+      "73978088621dc70f5021befafa443f7e622b517e",
+      "open",
+      "search catalogue and precomputed facts"
+    ],
+    [
+      7528,
+      "c75ca5f6ad97d049cc179c647702ac738e890ad3",
+      "open",
+      "recipe-first serial atom donor review"
+    ],
+    [
+      7529,
+      "cbad662ba840f8b0950375f3d63eb909d0f78d33",
+      "merged",
+      "documentation-only consolidated architecture"
+    ],
+    [
+      7531,
+      "64eb6f1cbd6c592b55e78415196fbd3a7f68a482",
+      "open",
+      "storage/precomputation proof-gate docs"
+    ],
+    [
+      7532,
+      "33ebec8fa64c215bf8bfa0dc4ec66085f5500a52",
+      "open",
+      "search regex JNI donor catalogue"
+    ],
+    [
+      7543,
+      "0240a0f8fcd881efba3e71cbf37b150b5e722c2c",
+      "open",
+      "bind fast search to canonical atom storage"
+    ],
+    [
+      7552,
+      "a7d75fe2dff3c5f3ed8353b0699f797ea4d4fe1f",
+      "open",
+      "two-JVM mapped lexicon proof"
+    ],
+    [
+      7559,
+      "20f97a503ddd3964bc931f52a3fd443a096f6803",
+      "open",
+      "bound token admission to precomputed word rows"
+    ],
+    [
+      7568,
+      "59b1",
+      "open",
+      "compiler return adapters; exact head must be refreshed before replay"
+    ],
+    [
+      7570,
+      "dbbe689",
+      "open",
+      "native joined UTF16 composition; exact head must be refreshed before replay"
+    ]
+  ],
+  "notes": [
+    "Historical receipts are evidence only for the exact revisions that produced them.",
+    "Open source PRs are not treated as merged source baseline.",
+    "The full repository recursive tree is truncated by GitHub; inventory therefore uses explicit active module tree pins and records excluded/pending roots."
+  ]
+}
