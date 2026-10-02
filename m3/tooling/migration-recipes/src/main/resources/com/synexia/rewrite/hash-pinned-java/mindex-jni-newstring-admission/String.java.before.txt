@@ -5019,17 +5019,6 @@ public final class String
         return storage;
     }
 
-    /**
-     * VM-private JNI ingress hook. The VM calls this only after module initialization; the normal
-     * MIndex admission gates still decide whether the supplied String should attach canonical
-     * storage. Bootstrap-created Strings therefore retain the stock representation.
-     */
-    static byte[] m3AdmitNative(String value) {
-        String checked = Objects.requireNonNull(value, "value");
-        MIndexString storage = checked.mindex();
-        return storage == null ? checked.value : storage.compatibilityValue();
-    }
-
     static boolean m3StorageRequested() {
         return M3_JOINED_STRINGS;
     }

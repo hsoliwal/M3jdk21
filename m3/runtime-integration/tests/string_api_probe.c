@@ -4,6 +4,12 @@
 #include <stdint.h>
 #include <stdlib.h>
 
+JNIEXPORT jstring JNICALL Java_StringApiProbe_utfLiteral(
+        JNIEnv *env, jclass cls) {
+    (void) cls;
+    return (*env)->NewStringUTF(env, "jni-utf");
+}
+
 JNIEXPORT jstring JNICALL Java_StringApiProbe_roundTrip(
         JNIEnv *env, jclass cls, jstring s) {
     jsize n;

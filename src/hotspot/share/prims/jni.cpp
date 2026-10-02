@@ -2131,6 +2131,34 @@ DEFINE_SETSTATICFIELD(jdouble,  double, Double,  JVM_SIGNATURE_DOUBLE, d
 
 // Unicode Interface
 
+// JNI String constructors first honor the ordinary java.lang.String allocation contract.
+// Once module initialization (and therefore optional MIndex activation) has completed, attach the
+// same canonical MIndex storage that Java constructors use. Bootstrap JNI Strings remain flat.
+static void m3_admit_jni_string(Handle string, TRAPS) {
+  if (!UseM3StringStorage || !Universe::is_module_initialized()) {
+    return;
+  }
+  InstanceKlass* storage_klass = vmClasses::MIndexString_klass();
+  if (!storage_klass->is_initialized()) {
+    return;
+  }
+  JavaValue compatibility(T_OBJECT);
+  JavaCalls::call_static(&compatibility,
+                         vmClasses::String_klass(),
+                         vmSymbols::m3AdmitNative_name(),
+                         vmSymbols::string_byte_array_signature(),
+                         string,
+                         CHECK);
+  oop compatible_value = compatibility.get_oop();
+  if (compatible_value != nullptr) {
+    assert(compatible_value->is_typeArray(), "MIndex compatibility value must be byte[]");
+    typeArrayOop byte_value = (typeArrayOop) compatible_value;
+    assert(TypeArrayKlass::cast(byte_value->klass())->element_type() == T_BYTE,
+           "MIndex compatibility value must be byte[]");
+    java_lang_String::set_value(string(), byte_value);
+  }
+}
+
 DT_RETURN_MARK_DECL(NewString, jstring
                     , HOTSPOT_JNI_NEWSTRING_RETURN(_ret_ref));
 
@@ -2138,8 +2166,10 @@ JNI_ENTRY(jstring, jni_NewString(JNIEnv *env, const jchar *unicodeChars, jsize l
  HOTSPOT_JNI_NEWSTRING_ENTRY(env, (uint16_t *) unicodeChars, len);
   jstring ret = nullptr;
   DT_RETURN_MARK(NewString, jstring, (const jstring&)ret);
-  oop string=java_lang_String::create_oop_from_unicode((jchar*) unicodeChars, len, CHECK_NULL);
-  ret = (jstring) JNIHandles::make_local(THREAD, string);
+  Handle string(THREAD,
+                java_lang_String::create_oop_from_unicode((jchar*) unicodeChars, len, CHECK_NULL));
+  m3_admit_jni_string(string, CHECK_NULL);
+  ret = (jstring) JNIHandles::make_local(THREAD, string());
   return ret;
 JNI_END
 
@@ -2199,8 +2229,9 @@ JNI_ENTRY(jstring, jni_NewStringUTF(JNIEnv *env, const char *bytes))
   jstring ret;
   DT_RETURN_MARK(NewStringUTF, jstring, (const jstring&)ret);
 
-  oop result = java_lang_String::create_oop_from_str((char*) bytes, CHECK_NULL);
-  ret = (jstring) JNIHandles::make_local(THREAD, result);
+  Handle result(THREAD, java_lang_String::create_oop_from_str((char*) bytes, CHECK_NULL));
+  m3_admit_jni_string(result, CHECK_NULL);
+  ret = (jstring) JNIHandles::make_local(THREAD, result());
   return ret;
 JNI_END
 
