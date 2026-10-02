@@ -57,7 +57,10 @@ public final class M3RecipeScopeRegistry {
                     fixed(M3EditScope.MULTI_MODULE)),
             Map.entry(
                     "com.m3.rewrite.pass.M3MultiPassPlannerRecipe",
-                    fixed(M3EditScope.MULTI_MODULE)));
+                    fixed(M3EditScope.MULTI_MODULE)),
+            Map.entry(
+                    "com.m3.rewrite.pass.M3VerificationPlanRecipe",
+                    fixed(M3EditScope.LIBRARY_API)));
 
     private M3RecipeScopeRegistry() {}
 
