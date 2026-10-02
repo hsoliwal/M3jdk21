@@ -30,6 +30,56 @@ Downstream reuse from Synexia is additionally gated by [synexia-canonical-intake
 
 This scope supersedes String-only framing for future planning. Preserve [shared-atom-concatenation.md](shared-atom-concatenation.md), [stages.md](stages.md), the [MIndex handoff](mindex-migration-handoff.md) and historical receipts as dated slice-specific evidence. This document does not rewrite their pinned history or turn historical passes into current acceptance.
 
+## Core invariant: atomize → patternize → map
+
+Every whole-JDK migration packet follows one semantic pipeline:
+
+```text
+sealed behavior / contract boundary
+  -> semantic atoms
+  -> typed dependency DAG
+  -> recurring transformation patterns
+  -> reusable source-pinned recipe(s)
+  -> stable source-atom → pattern → target-atom mapping
+  -> exact candidate evidence
+  -> serial promotion
+```
+
+**Atomization** means decomposing a bounded implementation into the smallest units that can be understood, transformed and tested independently **without changing the sealed external contract**. An atom may be a method behavior, storage lane, view rule, serialization field group, native entry point, VM layout assumption, compiler rewrite fragment or test obligation. Atoms are semantic units, not arbitrary lines or files. When dependencies form a cycle, collapse the strongly connected component into one compound atom until a reviewed refactor can break the cycle; the published dependency structure must remain a deterministic DAG.
+
+Each atom records its owner, exact source location/revision, contract boundary, inputs/outputs, identity/lifetime assumptions, typed dependencies, side effects, failure behavior, applicable routes and tests. File-local atom analysis/transformation may run independently or in parallel. Promotion remains serial because compatibility and mapping evidence must be reviewed against one exact candidate.
+
+**Patternization** happens after atomization. Repeated atom shapes become named reusable patterns only when their semantic preconditions match, not merely because the source text or class names look alike. A pattern records stable pattern identity, contract preconditions, transformation shape, required context, refusal cases, postconditions, recipe/version, evidence template and cost model. Examples include immutable range views, compact reference lanes, primitive-ID projections, backed-view adapters, collision-safe lookup, source-pinned rename/split ports, and JNI/native projection boundaries. Hashes, structural similarity and learned signals may discover pattern candidates; they do not establish semantic equivalence.
+
+**Mapping** binds the exact lineage:
+
+```text
+source capability
+  -> source symbol(s)
+  -> source atom(s)
+  -> applicable pattern(s)
+  -> recipe / adaptation
+  -> target atom(s)
+  -> target symbol(s)
+  -> tests / evidence
+  -> synchronized source + verified target
+```
+
+This relation is many-to-many. Renames, splits, consolidation, retained target adaptations, target-only improvements and deletions remain explicit. A class/file mapping is never enough when only some atoms are portable. Conversely, several source atoms may intentionally consolidate into one target atom only after their contracts are proven compatible.
+
+The existing `m3/docs/name-mapping.json` line remains the operational capability authority. Atom roots, pattern roots, coverage receipts and recipe evidence are attached to or referenced from that authority through separately reviewed schema/tooling work; this documentation does not silently add new status values or a parallel registry.
+
+### Atom/pattern promotion laws
+
+- No atom crosses a contract boundary implicitly.
+- No pattern is generalized from one example without explicit preconditions and refusal cases.
+- Repeated manual edits are a signal to improve a reusable Maven/OpenRewrite recipe for Java/source work, or an equivalent source-pinned transform for native/VM/build files.
+- Pattern application is deterministic and idempotent, and refuses source drift or unresolved semantic context.
+- Atom and pattern coverage are measured separately: “all files visited” is not “all behavior atoms mapped,” and “all atoms mapped” is not “all patterns accepted.”
+- Exact behavior tests outrank hashes, similarity and performance signals.
+- Historical atom/pattern evidence remains pinned to its original owner/revision and is never transferred automatically after a split, merge or ownership change.
+- A failed atom gate blocks promotion of the containing capability even when other atoms or benchmarks pass.
+
 ## 1. Coverage denominator and taxonomy
 
 The [source root at the inspected commit](https://github.com/hsoliwal/M3jdk21/tree/45f546ff5bcb06a1b2604f14baf998785d98d9a1/src) contains the following **70 java.* / jdk.* source directories**. This is a directory census, not proof that all are built, shipped, supported on every platform, or contain a completed semantic inventory:
