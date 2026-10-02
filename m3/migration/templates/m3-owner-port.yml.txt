@@ -1,0 +1,39 @@
+# Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+name: M3 owner-port exact-head acceptance
+on:
+  pull_request:
+    paths: ['m3/migration/**', 'm3/ports/**', 'm3/docs/name-mapping.json', '.github/workflows/m3-owner-port.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  owner-port:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - name: Prepare isolated pinned compiler (existing foundation pin)
+        shell: bash
+        run: |
+          curl --fail --location --retry 3 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21%2B35/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz' -o "$RUNNER_TEMP/jdk21.tar.gz"
+          printf '%s  %s\n' '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6' "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -
+          tar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"
+          echo "JAVA_HOME=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
+          echo "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
+      - name: Record exact candidate and run the port acceptance slice
+        shell: bash
+        run: |
+          git rev-parse HEAD 'HEAD^{tree}'
+          java -version
+          java -Djava.io.tmpdir="$RUNNER_TEMP" m3/migration/Verify.java .
+          gzip --test m3/migration/*-closure-inventory.json.gz
+      - name: Verify Maven entrypoint independently
+        run: mvn --batch-mode -f m3/migration/pom.xml verify
+      - name: Retain command-level evidence in job log
+        if: always()
+        shell: bash
+        run: find "$RUNNER_TEMP" -maxdepth 2 -name commands-and-results.txt -type f -exec cat '{}' \;

@@ -1,0 +1,119 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "name-mapping.schema.json",
+  "type": "object",
+  "required": [
+    "schema",
+    "mappings",
+    "migration"
+  ],
+  "properties": {
+    "schema": {
+      "const": 1
+    },
+    "migration": {
+      "type": "object",
+      "required": [
+        "schema_version",
+        "source_commit",
+        "target_base_commit",
+        "completion"
+      ],
+      "properties": {
+        "schema_version": {
+          "const": 1
+        },
+        "source_commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "target_base_commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        }
+      }
+    },
+    "mappings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "type": "string",
+            "minLength": 1
+          },
+          "source_refs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/reference"
+            }
+          },
+          "target_refs": {
+            "type": "array",
+            "items": {
+              "$ref": "#/$defs/reference"
+            }
+          },
+          "lineage": {
+            "type": "array",
+            "description": "Optional split/merge/move/delete/tombstone events; preserve previous mapping IDs."
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "required": [
+                "recipe"
+              ]
+            },
+            "then": {
+              "required": [
+                "source_refs",
+                "target_refs",
+                "mapping_kind",
+                "canonical_owner",
+                "identity_rules",
+                "compatibility",
+                "bootstrap",
+                "dependencies",
+                "recipe",
+                "evidence",
+                "port_direction"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "$defs": {
+    "reference": {
+      "type": "object",
+      "required": [
+        "repository",
+        "path",
+        "symbol",
+        "signature",
+        "sha256"
+      ],
+      "properties": {
+        "sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

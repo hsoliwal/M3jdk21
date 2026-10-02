@@ -1,0 +1,32 @@
+{
+  "operations": [
+    {
+      "before": "  static CharBody internChars(FrozenChars[] parts) {\n    FrozenChars[] checked = Objects.requireNonNull(parts, \"parts\");\n",
+      "after": "  static CharBody internChars(FrozenChars[] parts) {\n    return internChars(parts, false);\n  }\n  private static CharBody internChars(FrozenChars[] parts, boolean retained) {\n    FrozenChars[] checked = Objects.requireNonNull(parts, \"parts\");\n"
+    },
+    {
+      "before": "    Fingerprint fingerprint = charFingerprint(checked);\n",
+      "after": "    Fingerprint base = charFingerprint(checked);\n    Fingerprint fingerprint = retained\n        ? new Fingerprint(base.segmentCount(), base.totalLength(), base.hash32(), base.hash64(), true)\n        : base;\n"
+    },
+    {
+      "before": "          CharBody body = reference.get();\n          if (body == null) iterator.remove();\n          else if (body.matches(checked)) return body;\n",
+      "after": "          CharBody body = reference.get();\n          if (body == null) iterator.remove();\n          else if (retained ? body.matchesRetained(checked) : body.matches(checked)) return body;\n"
+    },
+    {
+      "before": "  static ByteBody internBytes(FrozenBytes[] parts) {\n",
+      "after": "  static CharBody internRetainedChars(FrozenChars[] parts) {\n    Objects.requireNonNull(parts, \"parts\");\n    charFingerprint(parts); // Check logical length before allocating the normalized directory.\n    FrozenChars[] snapshot = parts.clone();\n    charFingerprint(snapshot);\n    ArrayList<FrozenChars> normalized = new ArrayList<>();\n    for (FrozenChars part : snapshot) {\n      if (part.length() == 0) continue;\n      if (!normalized.isEmpty()) {\n        int last = normalized.size() - 1;\n        FrozenChars merged = normalized.get(last).coalesceAdjacent(part);\n        if (merged != null) { normalized.set(last, merged); continue; }\n      }\n      normalized.add(part);\n    }\n    return internChars(normalized.toArray(FrozenChars[]::new), true);\n  }\n  static ByteBody internBytes(FrozenBytes[] parts) {\n"
+    },
+    {
+      "before": "    long id = sequence.getAndIncrement();\n",
+      "after": "    long id = sequence.getAndUpdate(current -> current > 0L && current < Long.MAX_VALUE ? current + 1L : 0L);\n"
+    },
+    {
+      "before": "  private record Fingerprint(int segmentCount, int totalLength, int hash32, long hash64) {}\n",
+      "after": "  private record Fingerprint(int segmentCount, int totalLength, int hash32, long hash64, boolean retained) {\n    Fingerprint(int segmentCount, int totalLength, int hash32, long hash64) {\n      this(segmentCount, totalLength, hash32, hash64, false);\n    }\n  }\n"
+    },
+    {
+      "before": "    MIndexJoinedChars canonicalView() {\n",
+      "after": "    boolean matchesRetained(FrozenChars[] parts) {\n      int segment = 0;\n      for (FrozenChars part : parts) {\n        if (part.length() == 0) continue;\n        if (segment >= segments.length || !segments[segment].sameOwnerAndRange(part)) return false;\n        segment++;\n      }\n      return segment == segments.length;\n    }\n    MIndexJoinedChars canonicalView() {\n"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "operations": [
+    {
+      "before": "  static FrozenChars owned(char[] chars) {\n",
+      "after": "  /** One defensive UTF-16 admission copy; avoids an ambiguous copyOf overload. */\n  public static FrozenChars fromString(String text) {\n    return owned(Objects.requireNonNull(text, \"text\").toCharArray());\n  }\n  // M3 projection: owner identity is process-local backing plus exact range.\n  boolean sameOwnerAndRange(FrozenChars other) {\n    return sameOwner(other) && offset == other.offset && length == other.length;\n  }\n  private boolean sameOwner(FrozenChars other) {\n    return data != null ? data == other.data : utf16 == other.utf16;\n  }\n  FrozenChars coalesceAdjacent(FrozenChars other) {\n    if (!sameOwner(other) || offset + length != other.offset) return null;\n    int combined = Math.addExact(length, other.length);\n    return new FrozenChars(data, utf16, offset, combined,\n        hash32 * power31(other.length) + other.hash32);\n  }\n  static int power31(int exponent) {\n    int result = 1, factor = 31;\n    while (exponent != 0) {\n      if ((exponent & 1) != 0) result *= factor;\n      factor *= factor; exponent >>>= 1;\n    }\n    return result;\n  }\n  static FrozenChars owned(char[] chars) {\n"
+    }
+  ]
+}
