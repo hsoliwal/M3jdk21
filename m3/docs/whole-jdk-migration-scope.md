@@ -7,8 +7,10 @@ Status: documentation-only planning contract, 2026-10-02. Inspected default bran
 This file is the whole-program overview and inventory denominator. It is not a second operational mapping registry.
 
 - [../migration/docs/ARCHITECTURE.md](../migration/docs/ARCHITECTURE.md) contains the shared architecture and semantic laws.
-- [../migration/docs/COVERAGE.md](../migration/docs/COVERAGE.md) is the human-readable coverage framework; operational capability state remains in [name-mapping.json](name-mapping.json).
-- [../migration/docs/COLLECTIONS.md](../migration/docs/COLLECTIONS.md) is the deep collections replacement specification.
+- [whole-jdk-subsystem-matrix.md](whole-jdk-subsystem-matrix.md) is the canonical module/source-root planning disposition matrix.
+- [../migration/docs/COVERAGE.md](../migration/docs/COVERAGE.md) is the human-readable migration/evidence projection; operational capability state remains in [name-mapping.json](name-mapping.json).
+- [whole-jdk-collections-replacement.md](whole-jdk-collections-replacement.md) is the canonical detailed collections replacement specification.
+- [../migration/docs/COLLECTIONS.md](../migration/docs/COLLECTIONS.md) is the collection migration execution overlay and does not duplicate the canonical family matrix.
 - [../migration/docs/WORK_PACKETS.md](../migration/docs/WORK_PACKETS.md) decomposes the whole JDK into dependency-aware implementation packets.
 - [../migration/docs/ACCEPTANCE.md](../migration/docs/ACCEPTANCE.md) defines universal and subsystem promotion gates.
 - [../migration/docs/RESUME.md](../migration/docs/RESUME.md) is the durable contributor continuation guide.
