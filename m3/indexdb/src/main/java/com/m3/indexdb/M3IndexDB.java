@@ -216,6 +216,7 @@ public final class M3IndexDB implements AutoCloseable {
     }
 
     private static final class SizeFailure extends RuntimeException {
+        private static final long serialVersionUID = 1L;
         private final IOException cause;
 
         private SizeFailure(IOException cause) {
