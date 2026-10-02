@@ -176,29 +176,13 @@ public final class M3IndexDbSemanticIndex {
 
     public M3IndexDbArtifact store(M3IndexDB database, String artifactName) throws IOException {
         return Objects.requireNonNull(database, "database")
-                .putArtifact(
-                        artifactName,
-                        ARTIFACT_KIND,
-                        FORMAT_VERSION,
-                        encode());
+                .putSemanticIndex(artifactName, this);
     }
 
     public static M3IndexDbSemanticIndex load(M3IndexDB database, String artifactName)
             throws IOException {
-        M3IndexDbArtifact artifact = Objects.requireNonNull(database, "database")
-                .requireArtifact(artifactName);
-        if (!ARTIFACT_KIND.equals(artifact.kind())) {
-            throw new IOException("M3 semantic index kind mismatch: " + artifact.kind());
-        }
-        if (artifact.formatVersion() != FORMAT_VERSION) {
-            throw new IOException(
-                    "M3 semantic index format mismatch: " + artifact.formatVersion());
-        }
-        try {
-            return decode(artifact.payload());
-        } catch (IllegalArgumentException corrupt) {
-            throw new IOException("M3 semantic index payload is invalid", corrupt);
-        }
+        return Objects.requireNonNull(database, "database")
+                .requireSemanticIndex(artifactName);
     }
 
     public record Similarity(M3IndexDbSemanticNode node, int hammingDistance) {
