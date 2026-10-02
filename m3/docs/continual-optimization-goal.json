@@ -2,7 +2,7 @@
   "schema": 1,
   "goal_id": "01a0fa3c-18d0-7940-b8c1-f90c2aecae42",
   "status_last_verified": "active",
-  "verified_at_utc": "2026-10-02 04:27:51 UTC",
+  "verified_at_utc": "2026-10-02 04:46:31 UTC",
   "authority": "Native goal in the originating Codex thread; this file is a durable discovery and resume pointer.",
   "objective": "Continuously implement, verify, and optimize the complete MIndex*/MatIndex*/SubMIndex* migration from hsoliwal/com.synexia to hsoliwal/M3jdk21 and its java.lang.String integration. Follow the user's twelve-pass specification and borrow-first doctrine; preserve source contracts and durable source-to-target mappings; advance Route A, safe compiler lowering (Route B), and matched complete-JDK integration (Route C) independently; measure performance and heap/native/mapped retention; fix evidenced defects; maintain recipes, coverage, exact-candidate receipts, draft PRs, TODO and resume records. Keep the continual optimization goal active across milestones; never treat a partial port, passing explicit-view tests, a manifest, or a draft PR as completion of the complete migration or ongoing optimization.",
   "token_budget": null,
@@ -14,10 +14,9 @@
     "https://github.com/hsoliwal/com.synexia/pull/7696"
   ],
   "next_gates": [
-    "Finish exact fixed combined-runtime image build and its own acceptance without relabeling the older 696 image.",
-    "Mechanically split the published private inventory wrapper, preserving frozen census facts and 93 original Java syntax failures.",
-    "Reconcile private source obligations with the canonical public naming authority and advance undispatched families/bridges.",
-    "Advance the full twelve-pass compiler, String/VM, performance and heap/native/mapped lifetime obligations."
+    "Resume existing task-owned runtime relocation inventory, recover WSL startup if possible, then build/test the exact fixed combined-runtime image.",
+    "Advance private owner/type/build and canonical target-obligation reconciliation while retaining all 93 original Java syntax failures.",
+    "Advance undispatched families/bridges and the full twelve-pass compiler, String/VM, performance and heap/native/mapped lifetime obligations."
   ],
   "milestones_do_not_complete_goal": [
     "Selected port or manifest",
@@ -26,5 +25,6 @@
     "Draft PR publication"
   ],
   "latest_scoped_code_commit": "ef33a8cceff4848551f32ec302f8940ec6609591",
-  "latest_scoped_binding": "m3/evidence/shared-owner-code-binding.json"
+  "latest_scoped_binding": "m3/evidence/shared-owner-code-binding.json",
+  "private_inventory_helper_commit": "3a5e8d14856e77990c4036ff76a23451fc5dfe2a"
 }

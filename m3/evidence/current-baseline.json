@@ -198,9 +198,9 @@
   },
   "observed_target_tip_after_pr19_pr20_merges": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
   "current_work": {
-    "private_source_inventory": "Published complete hash-bound census; mechanical helper split and canonical obligation reconciliation pending; 93 original syntax failures remain blocked",
+    "private_source_inventory": "Published complete hash-bound census and verified small-module helper refactor3a5; selected7 source/76 syntax links resolve; canonical obligation/owner/type/build gates and93 original syntax failures remain open",
     "merged_owner_consolidation": "Seven physical owners in indexstring only; both facades and pinned baseline surface/descriptor/bytecode corpora pass on exact ef33",
-    "runtime_master45_image": "Exact06c warning-as-error failure preserved; unchecked-close candidate ebd has its own rebuild/acceptance pending; never relabel696"
+    "runtime_master45_image": "Exact06c compiler failure preserved; ebd rebuild launch encountered WSL I/O before make. Existing task-owned relocation inventory must resume without restart; new image acceptance pending."
   },
   "current_shared_owner_milestone": {
     "code_commit": "ef33a8cceff4848551f32ec302f8940ec6609591",
@@ -219,6 +219,7 @@
     "combined_runtime_fixed_image_acceptance": "PENDING",
     "whole_family_accepted": false,
     "continual_goal_status": "active",
-    "historical_fields": "Earlier fields and receipts describe the original observations and are not new candidate acceptance."
+    "historical_fields": "Earlier fields and receipts describe the original observations and are not new candidate acceptance.",
+    "private_inventory_helper_commit": "3a5e8d14856e77990c4036ff76a23451fc5dfe2a"
   }
 }

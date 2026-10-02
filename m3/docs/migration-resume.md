@@ -41,7 +41,13 @@ The hash-bound census covers 29,056 items: 29,037 pending and 19 visibly exclude
 16,250 Java files parsed and 93 original syntax failures remain blocked. It records
 31,706 symbols and 153,692 public/protected contracts. Eighteen inventory
 discriminators pass. Whole-source admission remains FAILED, and the private
-wrapper's mechanical split into small modules is a separate maintainability task.
+wrapper's mechanical split is published at
+`3a5e8d14856e77990c4036ff76a23451fc5dfe2a`: 18 modules, maximum 147 lines,
+40-line compatibility shim, all 28 signatures preserved, 18 discriminators and
+950 exact regenerated index/shard comparisons pass. Facade monkeypatching no longer
+replaces a leaf's internal globals; that compatibility boundary is explicit.
+The selected seven source IDs/raw blobs and 76 syntax contracts resolve to
+the frozen census; their private pending dispositions remain unchanged.
 
 Implemented and tested here: the seven-file immutable Frozen/Joined closure,
 three additive explicit-view types, exact UTF16 admission, retained join/ranges,
@@ -118,6 +124,11 @@ the JDK's warning-as-error gate. Candidate
 its own complete image build and acceptance remain pending. The older matched
 696 image's 86 default/16 enabled scoped passes do not qualify either new commit.
 The two original 4 GiB StringJoiner gates remain pending; historical failures are
-preserved. Continue with the matched image, private maintainability and canonical
-source-obligation reconciliation, full family/VM/compiler gates, and fresh
+preserved. The fixed-image launch encountered WSL startup I/O errors before make; no new
+image pass exists. Task-owned runtime checkout relocation is in progress with
+a saved raw inventory and resume state at
+`S:/m3-runtime-transfer-20261002/runtime-relocation-state.json`. Resume the
+existing worker; do not restart its walk or infer the startup error cause.
+Continue with the matched image and canonical source-obligation reconciliation,
+full family/VM/compiler gates, and fresh
 performance and lifetime measurements. The continual goal remains active.

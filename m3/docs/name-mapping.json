@@ -2159,7 +2159,7 @@
               "class FrozenChars"
             ],
             "sha256": "0c03ca0ed8b42212fa92e4d5f9325ba864f8d11928cd6a0b030b861f668f0657",
-            "git_blob_sha1": null,
+            "git_blob_sha1": "a8f016a1764aea6e970bc60e38f345804e82a84e",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "historical-selected:6df9df8d"
@@ -2320,7 +2320,7 @@
               "class FrozenBytes"
             ],
             "sha256": "cb50139594817d5cb2477c4d67148d4aed2174299f05cff9a3b24416139bc6b4",
-            "git_blob_sha1": null,
+            "git_blob_sha1": "b624dc8dbb23eac6b3147ea888ac69df60f971e1",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "historical-selected:6df9df8d"
@@ -2475,7 +2475,7 @@
               "class FrozenByteInterner"
             ],
             "sha256": "8f350411381abdf7069f8fab1ee239b4cfce05faa5d1f73204e98e377cad82ea",
-            "git_blob_sha1": null,
+            "git_blob_sha1": "de41c8915a5b98b4d34802a9280332587dbf2978",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "historical-selected:6df9df8d"
@@ -2636,7 +2636,7 @@
               "class MIndexJoinedChars"
             ],
             "sha256": "712c1c795ff1e0d6dea099eaec8fa6e64803adfc12bad6f31970b722c659d396",
-            "git_blob_sha1": null,
+            "git_blob_sha1": "d9ec1832d1b9381cf0243dfd132e089797f0a2d8",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "historical-selected:6df9df8d"
@@ -2797,7 +2797,7 @@
               "class MIndexJoinedBytes"
             ],
             "sha256": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
-            "git_blob_sha1": null,
+            "git_blob_sha1": "9db0c6363480ccb0f38bba7b2218e151dd75ee68",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "historical-selected:6df9df8d"
@@ -2945,7 +2945,7 @@
               "class MIndexJoinedStorageIntern"
             ],
             "sha256": "f42c548a4fd47d3dac43283082125232e04d5f13f28b63521832493394176337",
-            "git_blob_sha1": null,
+            "git_blob_sha1": "95a576da9e60fb830a443034d6403e84740233e8",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "historical-selected:6df9df8d"
@@ -3106,7 +3106,7 @@
               "class MIndexJoinedStreams"
             ],
             "sha256": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
-            "git_blob_sha1": null,
+            "git_blob_sha1": "6f350a84b954b2f80929252254a007652fc1d0d0",
             "fingerprint": null,
             "revision_role": "pinned",
             "tracking_ref": "historical-selected:6df9df8d"
@@ -4185,7 +4185,73 @@
       "declared_symbol_count": 31706,
       "public_protected_contract_count": 153692,
       "source_admission": "FAILED",
-      "review_url": "https://github.com/hsoliwal/com.synexia/pull/7696"
+      "review_url": "https://github.com/hsoliwal/com.synexia/pull/7696",
+      "inventory_helper_commit": "3a5e8d14856e77990c4036ff76a23451fc5dfe2a",
+      "selected_source_contract_links": [
+        {
+          "record_id": "source:fd1d97eb412cf2b0332ea8616311eedc29fd0f0cc6858388a376ec2a4a5c158b",
+          "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java",
+          "source_git_blob_sha1": "a8f016a1764aea6e970bc60e38f345804e82a84e",
+          "contracts_ref": "synexia-mindex/repository-inventory/docs/migration/source-snapshot.json#/items/11637/public_contracts",
+          "syntax_contract_count": 12,
+          "parser_status": "PARSED_SYNTAX_ONLY",
+          "private_disposition_unchanged": "pending"
+        },
+        {
+          "record_id": "source:61e1e799dfff8a821db084921c35072e5031955345619ee9180816ba810aa2e4",
+          "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java",
+          "source_git_blob_sha1": "b624dc8dbb23eac6b3147ea888ac69df60f971e1",
+          "contracts_ref": "synexia-mindex/repository-inventory/docs/migration/source-snapshot.json#/items/11636/public_contracts",
+          "syntax_contract_count": 12,
+          "parser_status": "PARSED_SYNTAX_ONLY",
+          "private_disposition_unchanged": "pending"
+        },
+        {
+          "record_id": "source:cfbe43ec93eca2c5c892c31e03d7fa1eec809402dec20f512783bf3a5885ff68",
+          "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenByteInterner.java",
+          "source_git_blob_sha1": "de41c8915a5b98b4d34802a9280332587dbf2978",
+          "contracts_ref": "synexia-mindex/repository-inventory/docs/migration/source-snapshot.json#/items/11635/public_contracts",
+          "syntax_contract_count": 9,
+          "parser_status": "PARSED_SYNTAX_ONLY",
+          "private_disposition_unchanged": "pending"
+        },
+        {
+          "record_id": "source:9035acf23c18b9dce54945c3b0da582782c9f94f1d85260ab0b8571969464c80",
+          "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedChars.java",
+          "source_git_blob_sha1": "d9ec1832d1b9381cf0243dfd132e089797f0a2d8",
+          "contracts_ref": "synexia-mindex/repository-inventory/docs/migration/source-snapshot.json#/items/12001/public_contracts",
+          "syntax_contract_count": 16,
+          "parser_status": "PARSED_SYNTAX_ONLY",
+          "private_disposition_unchanged": "pending"
+        },
+        {
+          "record_id": "source:a75488529e2d8c4a0abeb9910eb47da2c7cf7b9e6d9233af457fe66d9c297fc2",
+          "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedBytes.java",
+          "source_git_blob_sha1": "9db0c6363480ccb0f38bba7b2218e151dd75ee68",
+          "contracts_ref": "synexia-mindex/repository-inventory/docs/migration/source-snapshot.json#/items/12000/public_contracts",
+          "syntax_contract_count": 11,
+          "parser_status": "PARSED_SYNTAX_ONLY",
+          "private_disposition_unchanged": "pending"
+        },
+        {
+          "record_id": "source:a7d5b18679d90a323159e05b54d0be6bf784d23deb928bf6f5b499ffd4e87648",
+          "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStorageIntern.java",
+          "source_git_blob_sha1": "95a576da9e60fb830a443034d6403e84740233e8",
+          "contracts_ref": "synexia-mindex/repository-inventory/docs/migration/source-snapshot.json#/items/12003/public_contracts",
+          "syntax_contract_count": 0,
+          "parser_status": "PARSED_SYNTAX_ONLY",
+          "private_disposition_unchanged": "pending"
+        },
+        {
+          "record_id": "source:66a22803b37ed047b0f483eb4f8c045b03fe87c2c3928c6195617ab8410d2ac9",
+          "source_path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStreams.java",
+          "source_git_blob_sha1": "6f350a84b954b2f80929252254a007652fc1d0d0",
+          "contracts_ref": "synexia-mindex/repository-inventory/docs/migration/source-snapshot.json#/items/12004/public_contracts",
+          "syntax_contract_count": 16,
+          "parser_status": "PARSED_SYNTAX_ONLY",
+          "private_disposition_unchanged": "pending"
+        }
+      ]
     },
     "historical_target_baseline": "8bb6215372e07712f1fdf5a0cb912af495007b19",
     "integrated_master_baseline": "4a81f3b3050fa5572ec1ff9368e2c383231db2e6",
