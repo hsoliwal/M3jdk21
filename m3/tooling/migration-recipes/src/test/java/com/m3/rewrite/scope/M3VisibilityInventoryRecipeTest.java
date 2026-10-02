@@ -48,6 +48,16 @@ final class M3VisibilityInventoryRecipeTest implements RewriteTest {
                                             && row.declarationKind().equals("FIELD")
                                             && row.symbol().equals("VALUE")
                                             && row.visibility().equals("PUBLIC")));
+                            assertTrue(rows.stream().anyMatch(row ->
+                                    row.owner().equals("p.Marker")
+                                            && row.declarationKind().equals("METHOD")
+                                            && row.symbol().equals("value()")
+                                            && row.visibility().equals("PUBLIC")));
+                            assertTrue(rows.stream().anyMatch(row ->
+                                    row.owner().equals("p.Marker")
+                                            && row.declarationKind().equals("FIELD")
+                                            && row.symbol().equals("CODE")
+                                            && row.visibility().equals("PUBLIC")));
                             assertTrue(rows.stream().allMatch(row ->
                                     row.patternRole().equals(
                                             "M3:VISIBILITY:" + row.visibility())));
@@ -73,7 +83,16 @@ final class M3VisibilityInventoryRecipeTest implements RewriteTest {
                                     private int helper() { return 1; }
                                 }
                                 """)
-                        .path("src/java.base/share/classes/p/Sample.java"));
+                        .path("src/java.base/share/classes/p/Sample.java"),
+                java(
+                                """
+                                package p;
+                                public @interface Marker {
+                                    int CODE = 7;
+                                    String value();
+                                }
+                                """)
+                        .path("src/java.base/share/classes/p/Marker.java"));
     }
 
     @Test
