@@ -6,7 +6,9 @@ import com.m3.indexdb.M3IndexDbSemanticIndex;
 import com.m3.indexdb.M3IndexDbSemanticKind;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import org.openrewrite.ExecutionContext;
@@ -222,16 +224,7 @@ public final class M3SemanticIndexRecipe extends Recipe {
         List<Node> atoms = new ArrayList<>();
         Expression initializer = variable.getInitializer();
         if (initializer != null) {
-            M3IndexDbSemanticFingerprint atomFingerprint =
-                    M3JavaSemanticHasher.fingerprint("FIELD_INITIALIZER", initializer);
-            Node atom = node(
-                    M3IndexDbSemanticKind.ATOM,
-                    fieldKey + "#atom/initializer",
-                    sourcePath,
-                    "FIELD_INITIALIZER",
-                    atomFingerprint);
-            emitNode(atom, ctx);
-            atoms.add(atom);
+            atoms.addAll(emitAtoms(fieldKey, sourcePath, initializer, ctx));
         }
 
         M3IndexDbSemanticFingerprint fieldFingerprint =
@@ -256,23 +249,9 @@ public final class M3SemanticIndexRecipe extends Recipe {
             ExecutionContext ctx) {
         String signature = methodSignature(method);
         String methodKey = typeKey + "#method/" + signature;
-        List<Node> atoms = new ArrayList<>();
-        if (method.getBody() != null) {
-            int atomOrdinal = 0;
-            for (J statement : method.getBody().getStatements()) {
-                M3IndexDbSemanticFingerprint atomFingerprint =
-                        M3JavaSemanticHasher.fingerprint("METHOD_ATOM", statement);
-                Node atom = node(
-                        M3IndexDbSemanticKind.ATOM,
-                        methodKey + "#atom/" + atomOrdinal,
-                        sourcePath,
-                        statement.getClass().getSimpleName(),
-                        atomFingerprint);
-                emitNode(atom, ctx);
-                atoms.add(atom);
-                atomOrdinal++;
-            }
-        }
+        List<Node> atoms = method.getBody() == null
+                ? List.of()
+                : emitAtoms(methodKey, sourcePath, method.getBody(), ctx);
 
         M3IndexDbSemanticFingerprint methodFingerprint =
                 M3JavaSemanticHasher.fingerprint("METHOD", method);
@@ -283,6 +262,31 @@ public final class M3SemanticIndexRecipe extends Recipe {
             emitEdge(methodNode, atoms.get(index), "ATOM", index, ctx);
         }
         return methodNode;
+    }
+
+    private List<Node> emitAtoms(
+            String parentKey,
+            String sourcePath,
+            J tree,
+            ExecutionContext ctx) {
+        List<M3JavaAtomExtractor.Atom> extracted = M3JavaAtomExtractor.atoms(tree);
+        ArrayList<Node> atoms = new ArrayList<>(extracted.size());
+        Map<String, Integer> occurrences = new HashMap<>();
+        for (M3JavaAtomExtractor.Atom extractedAtom : extracted) {
+            String semanticIdentity = extractedAtom.role()
+                    + "/"
+                    + extractedAtom.fingerprint().logicSha256().substring(0, 16);
+            int occurrence = occurrences.merge(semanticIdentity, 1, Integer::sum) - 1;
+            Node atom = node(
+                    M3IndexDbSemanticKind.ATOM,
+                    parentKey + "#atom/" + semanticIdentity + "/" + occurrence,
+                    sourcePath,
+                    extractedAtom.role(),
+                    extractedAtom.fingerprint());
+            emitNode(atom, ctx);
+            atoms.add(atom);
+        }
+        return List.copyOf(atoms);
     }
 
     private void emitNode(Node node, ExecutionContext ctx) {
