@@ -9,3 +9,4 @@ m3-type-relations	com.m3.rewrite.index.M3TypeRelationRecipe	MODULE	BEHAVIOR_AND_
 m3-multipass-plan	com.m3.rewrite.pass.M3MultiPassPlannerRecipe	MULTI_MODULE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
 m3-visibility-inventory	com.m3.rewrite.scope.M3VisibilityInventoryRecipe	VISIBILITY	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
 m3-package-boundary	com.m3.rewrite.scope.M3PackageBoundaryRecipe	PACKAGE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
+m3-library-api-surface	com.m3.rewrite.scope.M3LibraryApiSurfaceRecipe	LIBRARY_API	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
