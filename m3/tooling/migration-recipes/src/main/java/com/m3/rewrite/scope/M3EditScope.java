@@ -5,14 +5,17 @@ package com.m3.rewrite.scope;
  * Maximum mutation boundary required by an M3 refactoring recipe.
  *
  * <p>Scope promotion is monotonic. A recipe that can be proven at FILE scope must not request a
- * broader boundary merely for convenience.
+ * broader boundary merely for convenience. Visibility and package authority are intentionally
+ * separate: changing one declaration's visibility is not the same authority as coordinating
+ * multiple files in a package.
  */
 public enum M3EditScope {
     FILE(0),
-    PACKAGE_VISIBILITY(1),
-    MODULE(2),
-    MULTI_MODULE(3),
-    LIBRARY_API(4);
+    VISIBILITY(1),
+    PACKAGE(2),
+    MODULE(3),
+    MULTI_MODULE(4),
+    LIBRARY_API(5);
 
     private final int level;
 
@@ -33,8 +36,9 @@ public enum M3EditScope {
     /** Returns the immediately broader boundary, or LIBRARY_API at the top. */
     public M3EditScope next() {
         return switch (this) {
-            case FILE -> PACKAGE_VISIBILITY;
-            case PACKAGE_VISIBILITY -> MODULE;
+            case FILE -> VISIBILITY;
+            case VISIBILITY -> PACKAGE;
+            case PACKAGE -> MODULE;
             case MODULE -> MULTI_MODULE;
             case MULTI_MODULE, LIBRARY_API -> LIBRARY_API;
         };
