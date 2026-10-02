@@ -117,15 +117,18 @@ The pinned `src/` directory has 70 `java.*` / `jdk.*` module directories plus `h
 Before a planning row can become an implementation mapping, record at least:
 
 1. stable capability/mapping ID;
-2. exact target module/package/symbol/native/resource/build surface;
-3. current semantic and physical owner;
-4. reverse consumers and dependency edges;
-5. public/internal API, ABI, serialization/format and service contracts;
-6. identity, mutability, lifetime, GC/JMM and bootstrap requirements;
-7. proposed Synexia owner or explicit reason to retain JDK ownership;
-8. eligible routes A/B/C and refusal cases;
-9. deterministic recipe/source transformation identity where applicable;
-10. differential, build, runtime, performance and rollback gates.
+2. sealed contract boundary and source/target atom DAG roots;
+3. atom IDs, typed dependencies, reverse consumers and unresolved SCC/compound atoms;
+4. applicable pattern IDs/versions, preconditions/refusals and atom/pattern coverage receipts;
+5. explicit source-atom → pattern/recipe → target-atom mapping edges;
+6. exact target module/package/symbol/native/resource/build surface;
+7. current semantic and physical owner;
+8. public/internal API, ABI, serialization/format and service contracts;
+9. identity, mutability, lifetime, GC/JMM and bootstrap requirements;
+10. proposed Synexia owner or explicit reason to retain JDK ownership;
+11. eligible routes A/B/C and refusal cases;
+12. deterministic recipe/source transformation identity where applicable;
+13. differential, build, runtime, performance and rollback gates.
 
 ## Known existing Synexia owners to evaluate before inventing new foundations
 
