@@ -74,7 +74,9 @@ class M3ScopeFenceTest {
     assertThrows(
         IllegalArgumentException.class,
         () -> new M3ScopeFence(M3EditScope.MODULE, List.of("m3/core", "m3/core")));
+    assertThrows(IllegalArgumentException.class, () -> M3ScopeFence.file(""));
     assertThrows(IllegalArgumentException.class, () -> M3ScopeFence.file("../escape.java"));
+    assertThrows(IllegalArgumentException.class, () -> M3ScopeFence.file("a/./b.java"));
     assertThrows(IllegalArgumentException.class, () -> M3ScopeFence.file("/absolute.java"));
     assertThrows(IllegalArgumentException.class, () -> M3ScopeFence.file("C:/absolute.java"));
     assertThrows(IllegalArgumentException.class, () -> M3ScopeFence.file("a//b.java"));
