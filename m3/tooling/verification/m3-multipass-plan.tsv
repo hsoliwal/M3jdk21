@@ -1,0 +1,2 @@
+recipe_id	class	exact_commit	java21	maven_local	github_actions	status	note
+m3-multipass-plan	com.m3.rewrite.pass.M3MultiPassPlannerRecipe	5d58ef52379c4bbd53034e42a7bb19281139bb32	PASS	UNAVAILABLE	NO_RUN	CANDIDATE_UNVERIFIED	Saved; promote only after exact-commit Maven/JUnit/JaCoCo verification passes.
