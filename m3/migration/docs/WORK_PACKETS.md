@@ -2,7 +2,7 @@
 
 Status: documentation-only planning artifact. Target pin: hsoliwal/M3jdk21@45f546ff5bcb06a1b2604f14baf998785d98d9a1. Synexia pin: hsoliwal/com.synexia@3db24805d640c72ab1bd637d83561696d99561a0.
 
-This file turns the whole-JDK scope into bounded implementation packets. It is not a status registry. Operational capability IDs and synchronization state remain in ../../docs/name-mapping.json and its validated tooling.
+This file turns the whole-JDK scope into bounded implementation packets for the migration execution layer. The canonical ten-pass programme, packet schema and evidence model live in [../../docs/whole-jdk-work-packets.md](../../docs/whole-jdk-work-packets.md); this file is an execution decomposition that must remain consistent with that owner. It is not a status registry. Operational capability IDs and synchronization state remain in ../../docs/name-mapping.json and its validated tooling.
 
 ## Packet state vocabulary
 
