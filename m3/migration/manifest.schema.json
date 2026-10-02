@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/hsoliwal/M3jdk21/m3/migration/manifest.schema.json",
+  "title": "MIndex to M3 migration manifest",
+  "type": "object",
+  "required": ["schemaVersion", "baselines", "mappings"],
+  "properties": {
+    "schemaVersion": {"const": 1},
+    "inventoryScope": {"type": "object"},
+    "baselines": {
+      "type": "object",
+      "required": ["source", "targetMaster", "targetRuntimeCandidate"]
+    },
+    "mappings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id","capability","sources","destinations","mappingKind","canonicalOwner",
+          "identityRules","contractDifferences","compatibilityObligations","formats",
+          "bootstrapConstraints","dependencies","downstreamConsumers",
+          "materializationBoundaries","cachedFactOwnership","recipe","tests",
+          "licenseProvenance","lastSynchronizedSourceRevision",
+          "lastSynchronizedTargetRevision","targetAdaptations","conflicts",
+          "rationale","portDirection","status"
+        ]
+      }
+    }
+  }
+}
