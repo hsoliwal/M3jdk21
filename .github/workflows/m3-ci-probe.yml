@@ -1,6 +1,12 @@
 name: M3 CI probe
 
 on:
+  push:
+    branches:
+      - "m3/java21-convergence-ci-proof-20261002"
+    paths:
+      - ".github/workflows/m3-ci-probe.yml"
+      - "m3/**"
   pull_request:
     paths:
       - ".github/workflows/m3-ci-probe.yml"
