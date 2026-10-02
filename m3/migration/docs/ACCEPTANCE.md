@@ -1,6 +1,49 @@
-# Feature and acceptance matrix
+# Whole-JDK feature and acceptance matrix
 
 **INCOMPLETE.** Passing focused view tests is not compiler or modified-JDK acceptance. The actual stock Java 21 String public surface captured by `javap -public -s java.lang.String` is in `../evidence/local-20261002-final/stock-string-surface.log`; it includes constructor and method descriptors beyond this grouped matrix. Capturing the API does not test it.
+
+## Whole-JDK universal acceptance rules
+
+A backend replacement is accepted only for the named API surface, route, build mode, platform and exact candidate. Evidence does not automatically transfer across branches, merged ancestry, representation changes or routes.
+
+Every applicable replacement requires:
+
+1. complete scoped inventory and dependency/reverse-consumer closure;
+2. API, binary, serialization, format/native and identity contract review;
+3. differential normal/boundary/malformed/overflow/allocation-failure tests;
+4. lifetime/GC/owner-close/eviction and leak/retention checks;
+5. concurrency/JMM stress where shared mutable state exists;
+6. recipe/lowering drift refusal, idempotence, partial-state and rollback tests where transformation is used;
+7. clean exact-candidate build/image plus applicable runtime/platform modes;
+8. performance/memory results with cold admission, precomputation, conversion and cleanup charged;
+9. provenance/license review;
+10. mapping/evidence updates bound to the same candidate.
+
+A benchmark gain cannot waive a semantic failure. A semantic pass without measurement cannot support a speed/memory claim.
+
+## Subsystem gate matrix
+
+| Subsystem | Additional mandatory gates before promotion |
+| --- | --- |
+| String/text | exhaustive UTF-16/content/hash/comparison/range/Unicode/encoding behavior; StringTable/intern; GC dedup; JNI/JVMTI; CDS; interpreter/JIT/intrinsics; materialization and shared-generation lifetime |
+| Collections | per-family null/duplicates/equality/order; live views and Map.Entry mutation; iterator/spliterator/stream traits; serialization/clone/subclass/reflection; boxing boundaries; adversarial collisions; retained memory |
+| Concurrent collections/atomics | explicit happens-before/publication and linearization arguments; progress/fairness where promised; contention/resize/callback/cancellation/timeout stress; ABA/reclamation/GC proof |
+| I/O/NIO/native buffers | close/error/interruption paths; contiguous ABI boundaries; mapped-file corruption/truncation/replacement; direct/native lifetime; platform tests |
+| Reflection/class loading/modules | loader/module identity; access checks; initialization order; hidden/dynamic classes; MH/VH descriptors; service loading |
+| Compiler/lowering | compile original and transformed; evaluation/side-effect/exception/overload/identity/ABI parity; strict refusal on unresolved unsafe cases |
+| HotSpot/GC/JIT | all affected VM readers/writers; selected GCs; interpreter/C1/C2; intrinsics on/off; deopt; serviceability; OOME and reference processing |
+| Security/crypto | provider compatibility, official vectors, key-material lifetime, native provider and security/side-channel review |
+| Distribution | clean build, module image/package, supported platform matrix, flag-off/rollback and exact release provenance |
+
+The detailed collection gates are in COLLECTIONS.md and dependency staging is in WORK_PACKETS.md.
+
+## Failed-gate promotion example
+
+Suppose a compact HashMap candidate reduces retained bytes and passes lookup microbenchmarks but its entrySet view fails to reflect setValue into the backing map, or a collision stress case loses a distinct key. Promotion stops. The performance result remains useful evidence, but the candidate is not a compatible HashMap backend until the semantic failure is corrected and the exact new candidate is retested.
+
+Likewise, a String candidate with lower allocation cannot reinterpret a historical StringJoiner OOME expectation failure as success. The failed oracle remains a failed gate until the specification and implementation are reconciled through an independently reviewed change.
+
+## Retained String/MIndex candidate evidence
 
 | Capability / gate | This candidate | Evidence / remaining work |
 |---|---|---|
