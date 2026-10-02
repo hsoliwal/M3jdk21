@@ -1,0 +1,10 @@
+key	value
+repository	hsoliwal/M3jdk21
+base	master
+branch	m3/openrewrite-convergence-dag-java21-20261002
+pull_request	36
+contract_mode	BEHAVIOR_AND_CONTRACT_PRESERVING
+edit_scope	FILE for convergence DAG
+java_release	21
+recipe_module	m3/tooling/migration-recipes
+verify_command	mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
