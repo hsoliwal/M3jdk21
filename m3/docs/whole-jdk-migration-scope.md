@@ -10,10 +10,10 @@ This file is the whole-program overview and inventory denominator. It is not a s
 - [whole-jdk-subsystem-matrix.md](whole-jdk-subsystem-matrix.md) is the canonical module/source-root planning disposition matrix.
 - [../migration/docs/COVERAGE.md](../migration/docs/COVERAGE.md) is the human-readable migration/evidence projection; operational capability state remains in [name-mapping.json](name-mapping.json).
 - [whole-jdk-collections-replacement.md](whole-jdk-collections-replacement.md) is the canonical detailed collections replacement specification.
-- [../migration/docs/COLLECTIONS.md](../migration/docs/COLLECTIONS.md) is the collection migration execution overlay and does not duplicate the canonical family matrix.
-- [../migration/docs/WORK_PACKETS.md](../migration/docs/WORK_PACKETS.md) decomposes the whole JDK into dependency-aware implementation packets.
-- [../migration/docs/ACCEPTANCE.md](../migration/docs/ACCEPTANCE.md) defines universal and subsystem promotion gates.
-- [../migration/docs/RESUME.md](../migration/docs/RESUME.md) is the durable contributor continuation guide.
+- [whole-jdk-work-packets.md](whole-jdk-work-packets.md) owns the ten-pass dependency-aware implementation plan and work-packet/evidence schema.
+- [whole-jdk-worked-examples.md](whole-jdk-worked-examples.md) owns the concrete semantic examples and counterexamples.
+- [../migration/docs/ACCEPTANCE.md](../migration/docs/ACCEPTANCE.md) defines universal and subsystem promotion gates while retaining historical evidence.
+- [whole-jdk-resume.md](whole-jdk-resume.md) is the durable whole-JDK contributor continuation guide.
 - [mindex-migration-handoff.md](mindex-migration-handoff.md), [shared-atom-concatenation.md](shared-atom-concatenation.md) and [../../doc/mindex-string-backing.md](../../doc/mindex-string-backing.md) remain the deep String/MIndex slice documents.
 
 Historical receipts, branch-specific manifests and dated evidence remain pinned historical records. They are not silently upgraded by this planning document.
