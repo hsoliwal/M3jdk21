@@ -60,6 +60,10 @@ final class M3StringStorage {
     private volatile byte[] materialized;
     private volatile long bitSignal64;
     private volatile int characterFlags = -1;
+    private volatile int javaHash;
+    private volatile boolean javaHashIsZero;
+    private volatile int codePointCount = -1;
+    private volatile int hotSegment;
 
     private M3StringStorage(String[] segments, int[] offsets, int[] ends,
                             int length, byte coder) {
@@ -206,6 +210,10 @@ final class M3StringStorage {
     }
 
     int hashCodeValue() {
+        int cached = javaHash;
+        if (cached != 0 || javaHashIsZero) {
+            return cached;
+        }
         int hash = 0;
         int previous = 0;
         for (int segment = 0; segment < segments.length; segment++) {
@@ -217,7 +225,29 @@ final class M3StringStorage {
             }
             previous = ends[segment];
         }
+        if (hash == 0) {
+            javaHashIsZero = true;
+        } else {
+            javaHash = hash;
+        }
         return hash;
+    }
+
+    int codePointCount() {
+        int cached = codePointCount;
+        if (cached >= 0) {
+            return cached;
+        }
+        int count = 0;
+        for (int index = 0; index < length; count++) {
+            char first = charAt(index++);
+            if (Character.isHighSurrogate(first) && index < length
+                    && Character.isLowSurrogate(charAt(index))) {
+                index++;
+            }
+        }
+        codePointCount = count;
+        return count;
     }
 
     boolean contentEquals(String other) {
@@ -340,6 +370,14 @@ final class M3StringStorage {
     }
 
     private int segmentAt(int logicalIndex) {
+        int cached = hotSegment;
+        if (cached >= 0 && cached < ends.length) {
+            int begin = cached == 0 ? 0 : ends[cached - 1];
+            if (logicalIndex >= begin && logicalIndex < ends[cached]) {
+                return cached;
+            }
+        }
+
         int low = 0;
         int high = ends.length - 1;
         int key = logicalIndex + 1;
@@ -351,6 +389,7 @@ final class M3StringStorage {
             } else if (mid > 0 && ends[mid - 1] >= key) {
                 high = mid - 1;
             } else {
+                hotSegment = mid;
                 return mid;
             }
         }
