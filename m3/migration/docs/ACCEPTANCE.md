@@ -35,7 +35,7 @@ A benchmark gain cannot waive a semantic failure. A semantic pass without measur
 | Security/crypto | provider compatibility, official vectors, key-material lifetime, native provider and security/side-channel review |
 | Distribution | clean build, module image/package, supported platform matrix, flag-off/rollback and exact release provenance |
 
-The detailed collection gates are in COLLECTIONS.md and dependency staging is in WORK_PACKETS.md.
+The detailed collection gates are in [../../docs/whole-jdk-collections-replacement.md](../../docs/whole-jdk-collections-replacement.md) and dependency staging is in [../../docs/whole-jdk-work-packets.md](../../docs/whole-jdk-work-packets.md).
 
 ## Failed-gate promotion example
 
