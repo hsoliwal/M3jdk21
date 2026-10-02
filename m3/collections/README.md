@@ -64,3 +64,22 @@ This packet deliberately does not yet:
 
 The next collection packet can use these atoms while separately proving the exact contract of a
 specific JDK owner.
+
+
+## Reusable transformation recipes
+
+The executable source-bound installer is `recipe/apply.py` with exact postimage hashes and pinned
+`ArrayDeque.java` / `HashMap.java` no-change guards. Its focused Python unit tests were executed.
+
+A Maven/OpenRewrite equivalent is authored under `openrewrite/`:
+
+- `M3InstallPrimitiveCollectionsRecipe`
+- exact Java postimage resources for the complete production module
+- guard/refusal/fixed-point tests
+- a declarative `META-INF/rewrite` recipe
+
+The OpenRewrite recipe is deliberately reported as **authored but unexecuted** in this packet because
+Maven was unavailable in the execution environment. Its existence is not counted as a passed Maven
+or OpenRewrite gate. A later environment with Maven should execute `mvn test` in
+`m3/collections/openrewrite` and bind that result to the exact recipe/postimage hashes before
+advancing that gate.
