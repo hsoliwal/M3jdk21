@@ -60,9 +60,11 @@ Map all relevant symbols, overloads, formats, serialized names, native entry poi
 Use the existing target documents as one connected specification rather than creating parallel authorities:
 
 - m3/docs/whole-jdk-migration-scope.md — whole-program overview and denominator
+- m3/docs/whole-jdk-subsystem-matrix.md — canonical module/source-root planning dispositions
 - m3/migration/docs/ARCHITECTURE.md — shared architecture and compatibility laws
-- m3/migration/docs/COVERAGE.md — human-readable coverage framework
-- m3/migration/docs/COLLECTIONS.md — detailed collection replacement specification
+- m3/docs/whole-jdk-collections-replacement.md — canonical detailed collection replacement specification
+- m3/migration/docs/COLLECTIONS.md — collection migration execution overlay, not a second family matrix
+- m3/migration/docs/COVERAGE.md — human-readable migration/evidence projection
 - m3/migration/docs/WORK_PACKETS.md — dependency-aware implementation packets
 - m3/migration/docs/ACCEPTANCE.md — promotion gates
 - m3/migration/docs/RESUME.md — durable continuation guide
