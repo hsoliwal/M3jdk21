@@ -145,9 +145,9 @@ public final class M3SemanticIndexRecipe extends Recipe {
             fileChildren.add(docs);
         }
 
-        int typeOrdinal = 0;
         for (J.ClassDeclaration declaration : unit.getClasses()) {
-            Node type = emitType(fileKey, sourcePath, declaration, typeOrdinal++, ctx);
+            String qualifiedName = qualifiedName(packageName, declaration.getSimpleName());
+            Node type = emitType(fileKey, sourcePath, qualifiedName, declaration, ctx);
             fileChildren.add(type);
         }
 
@@ -164,18 +164,16 @@ public final class M3SemanticIndexRecipe extends Recipe {
     private Node emitType(
             String fileKey,
             String sourcePath,
+            String qualifiedName,
             J.ClassDeclaration declaration,
-            int typeOrdinal,
             ExecutionContext ctx) {
         M3IndexDbSemanticKind kind = declaration.getKind() == J.ClassDeclaration.Kind.Type.Interface
                 ? M3IndexDbSemanticKind.INTERFACE
                 : M3IndexDbSemanticKind.IMPLEMENTATION;
-        String typeKey = fileKey + "#type/" + typeOrdinal + "/" + declaration.getSimpleName();
+        String typeKey = repository + "/type/" + qualifiedName;
         List<Node> children = new ArrayList<>();
 
-        int fieldOrdinal = 0;
-        int methodOrdinal = 0;
-        int nestedOrdinal = 0;
+
         for (J statement : declaration.getBody().getStatements()) {
             if (statement instanceof J.VariableDeclarations fields) {
                 for (J.VariableDeclarations.NamedVariable variable : fields.getVariables()) {
@@ -183,7 +181,6 @@ public final class M3SemanticIndexRecipe extends Recipe {
                             typeKey,
                             sourcePath,
                             variable,
-                            fieldOrdinal++,
                             ctx);
                     children.add(field);
                 }
@@ -192,15 +189,14 @@ public final class M3SemanticIndexRecipe extends Recipe {
                         typeKey,
                         sourcePath,
                         method,
-                        methodOrdinal++,
                         ctx);
                 children.add(methodNode);
             } else if (statement instanceof J.ClassDeclaration nested) {
                 Node nestedNode = emitType(
-                        typeKey,
+                        fileKey,
                         sourcePath,
+                        qualifiedName + "$" + nested.getSimpleName(),
                         nested,
-                        nestedOrdinal++,
                         ctx);
                 children.add(nestedNode);
             }
@@ -208,7 +204,7 @@ public final class M3SemanticIndexRecipe extends Recipe {
 
         M3IndexDbSemanticFingerprint fingerprint =
                 M3JavaSemanticHasher.fingerprint(kind.name(), declaration);
-        Node type = node(kind, typeKey, sourcePath, declaration.getSimpleName(), fingerprint);
+        Node type = node(kind, typeKey, sourcePath, qualifiedName, fingerprint);
         emitNode(type, ctx);
         for (int ordinal = 0; ordinal < children.size(); ordinal++) {
             emitEdge(type, children.get(ordinal), children.get(ordinal).kind().name(), ordinal, ctx);
@@ -220,9 +216,8 @@ public final class M3SemanticIndexRecipe extends Recipe {
             String typeKey,
             String sourcePath,
             J.VariableDeclarations.NamedVariable variable,
-            int ordinal,
             ExecutionContext ctx) {
-        String fieldKey = typeKey + "#field/" + ordinal + "/" + variable.getSimpleName();
+        String fieldKey = typeKey + "#field/" + variable.getSimpleName();
         List<Node> atoms = new ArrayList<>();
         Expression initializer = variable.getInitializer();
         if (initializer != null) {
@@ -257,10 +252,9 @@ public final class M3SemanticIndexRecipe extends Recipe {
             String typeKey,
             String sourcePath,
             J.MethodDeclaration method,
-            int ordinal,
             ExecutionContext ctx) {
         String signature = methodSignature(method);
-        String methodKey = typeKey + "#method/" + ordinal + "/" + signature;
+        String methodKey = typeKey + "#method/" + signature;
         List<Node> atoms = new ArrayList<>();
         if (method.getBody() != null) {
             int atomOrdinal = 0;
@@ -332,6 +326,12 @@ public final class M3SemanticIndexRecipe extends Recipe {
                 sourcePath,
                 symbol,
                 fingerprint);
+    }
+
+    private static String qualifiedName(String packageName, String simpleName) {
+        return "<default>".equals(packageName)
+                ? simpleName
+                : packageName + "." + simpleName;
     }
 
     private static String methodSignature(J.MethodDeclaration method) {
