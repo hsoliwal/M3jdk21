@@ -1,0 +1,9 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.M3SemanticIndexInventory
+displayName: Inventory M3 semantic atoms and compositions
+description: >-
+  Non-mutating FILE-local analysis that emits atom, field, method, file, interface,
+  implementation, documentation, package, module, library, project, repository nodes,
+  their ordered composition edges, and exact/structural/logic/SimHash fingerprints.
+recipeList:
+  - com.m3.rewrite.index.M3SemanticIndexRecipe
