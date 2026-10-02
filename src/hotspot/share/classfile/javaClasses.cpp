@@ -503,37 +503,137 @@ jchar* java_lang_String::as_unicode_string(oop java_string, int& length, TRAPS) 
 }
 
 jchar* java_lang_String::as_unicode_string_or_null(oop java_string, int& length) {
-  if (is_m3_joined(java_string)) {
-    length = java_lang_String::length(java_string);
-    jchar* result = NEW_RESOURCE_ARRAY_RETURN_NULL(jchar, length);
-    if (result != nullptr) {
-      for (int i = 0; i < length; i++) result[i] = char_at(java_string, i);
-    }
-    return result;
-  }
-
-  typeArrayOop value  = java_lang_String::value(java_string);
-               length = java_lang_String::length(java_string, value);
-  bool      is_latin1 = java_lang_String::is_latin1(java_string);
-
+  length = java_lang_String::length(java_string);
   jchar* result = NEW_RESOURCE_ARRAY_RETURN_NULL(jchar, length);
-  if (result != nullptr) {
-    if (!is_latin1) {
-      for (int index = 0; index < length; index++) {
-        result[index] = value->char_at(index);
-      }
-    } else {
-      for (int index = 0; index < length; index++) {
-        result[index] = ((jchar) value->byte_at(index)) & 0xff;
-      }
-    }
+  if (result != nullptr && length != 0) {
+    copy_chars(java_string, 0, length, result);
   }
   return result;
 }
+
+void java_lang_MIndexString::copy_chars(
+    oop storage, int start, int len, jchar* destination) {
+  assert(storage != nullptr, "MIndexString storage is required");
+  assert(destination != nullptr || len == 0, "destination is required for non-empty copy");
+  const int storage_length = length(storage);
+  assert(start >= 0 && len >= 0 && start <= storage_length - len,
+         "MIndexString copy range out of bounds");
+  if (len == 0) {
+    return;
+  }
+
+  const jbyte kind = storage_kind(storage);
+  if (kind == LOCAL) {
+    typeArrayOop value = local_value(storage);
+    if (coder(storage) == java_lang_String::CODER_LATIN1) {
+      for (int i = 0; i < len; i++) {
+        destination[i] = ((jchar)value->byte_at(start + i)) & 0xff;
+      }
+    } else {
+      ArrayAccess<>::arraycopy_to_native(
+          value,
+          (size_t)typeArrayOopDesc::element_offset<jchar>(start),
+          destination,
+          len);
+    }
+    return;
+  }
+
+  if (kind == LEXICON || kind == SHARED_LEXICON) {
+    const jlong address = mapped_address(storage);
+    assert(address != 0, "mapped MIndexString atom must have an address");
+    const uint8_t* bytes = reinterpret_cast<const uint8_t*>((uintptr_t)address);
+    size_t at = (size_t)start << 1;
+    for (int i = 0; i < len; i++, at += 2) {
+      const uint16_t first = bytes[at];
+      const uint16_t second = bytes[at + 1];
+      destination[i] = kind == SHARED_LEXICON
+          ? (jchar)((first << 8) | second)
+          : (jchar)(first | (second << 8));
+    }
+    return;
+  }
+
+  if (kind == JOINED) {
+    objArrayOop segment_array = segments(storage);
+    typeArrayOop offset_array = offsets(storage);
+    typeArrayOop end_array = ends(storage);
+
+    int low = 0;
+    int high = end_array->length() - 1;
+    const int key = start + 1;
+    int segment = -1;
+    while (low <= high) {
+      const int mid = (low + high) >> 1;
+      const int segment_end = end_array->int_at(mid);
+      if (segment_end < key) {
+        low = mid + 1;
+      } else if (mid > 0 && end_array->int_at(mid - 1) >= key) {
+        high = mid - 1;
+      } else {
+        segment = mid;
+        break;
+      }
+    }
+    assert(segment >= 0, "joined MIndexString segment must exist");
+
+    const int logical_end = start + len;
+    int logical = start;
+    int written = 0;
+    while (logical < logical_end) {
+      const int previous = segment == 0 ? 0 : end_array->int_at(segment - 1);
+      const int segment_end = end_array->int_at(segment);
+      const int take = MIN2(logical_end, segment_end) - logical;
+      oop atom = segment_array->obj_at(segment);
+      const int atom_begin =
+          offset_array->int_at(segment) + logical - previous;
+      java_lang_MIndexString::copy_chars(
+          atom, atom_begin, take, destination + written);
+      logical += take;
+      written += take;
+      segment++;
+    }
+    return;
+  }
+
+  ShouldNotReachHere();
+}
+
+void java_lang_String::copy_chars(
+    oop java_string, int start, int len, jchar* destination) {
+  assert(is_instance(java_string), "must be java.lang.String");
+  assert(destination != nullptr || len == 0, "destination is required for non-empty copy");
+  const int string_length = length(java_string);
+  assert(start >= 0 && len >= 0 && start <= string_length - len,
+         "String copy range out of bounds");
+  if (len == 0) {
+    return;
+  }
+
+  oop storage = m3_storage(java_string);
+  if (storage != nullptr) {
+    java_lang_MIndexString::copy_chars(storage, start, len, destination);
+    return;
+  }
+
+  typeArrayOop value = java_lang_String::value(java_string);
+  if (is_latin1(java_string)) {
+    for (int i = 0; i < len; i++) {
+      destination[i] = ((jchar)value->byte_at(start + i)) & 0xff;
+    }
+  } else {
+    ArrayAccess<>::arraycopy_to_native(
+        value,
+        (size_t)typeArrayOopDesc::element_offset<jchar>(start),
+        destination,
+        len);
+  }
+}
+
 // Native scratch storage only: safe for callers that cannot safepoint.
 static jchar* m3_unicode_range(oop string, int start, int len) {
   jchar* chars = NEW_RESOURCE_ARRAY(jchar, len);
-  for (int i = 0; i < len; i++) chars[i] = java_lang_String::char_at(string, start + i);
+  java_lang_String::copy_chars(string, start, len, chars);
   return chars;
 }
 
