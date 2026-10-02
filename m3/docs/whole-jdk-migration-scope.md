@@ -221,7 +221,13 @@ Future-port procedure: pin source and target baselines; compare against last rev
 
 Repository/PR ancestry, source presence, mapped target presence, executed tests and accepted integration are separate facts. Re-fetch selected tips before implementation, reconcile concurrent owner proposals, and never borrow another branch's receipts. Preserve license notices and private-source publication boundaries.
 
-## 8. Acceptance and this document's verification limit
+## 8. Concurrent public runtime candidates
+
+M3 [draft #23](https://github.com/hsoliwal/M3jdk21/pull/23) contains a separately tested runtime restoration; [draft #24](https://github.com/hsoliwal/M3jdk21/pull/24) evolves text-owner consolidation. The [reconciliation document inspected at commit prefix 7a0d549e](https://github.com/hsoliwal/M3jdk21/blob/7a0d549e/m3/docs/concurrent-owner-reconciliation.md) binds seven-owner consolidation to code `ef33a8cceff4848551f32ec302f8940ec6609591` and runtime receipts to candidate `69667e3f1ce673aaded2ad93e4ae2ecf6c59668b`. It records a combined-source warning-as-error failure and a subsequent narrow fix whose matched rebuild/acceptance is pending in that snapshot. Do not infer that no runtime candidate exists from the earlier master snapshot, or that the combined candidate is accepted from separate passes.
+
+Re-fetch selected candidates before work, inspect actual retained bytes and keep each receipt bound to its exact source/image. This snapshot does not promote any mapping or prescribe blind cherry-picks.
+
+## 9. Acceptance and this document's verification limit
 
 A replacement is accepted only for its named APIs, routes, build modes and platforms after required compatibility, dependency, provenance, replay, build/conformance and performance gates are met. Failed/skipped/unrun gates remain explicit; do not change an oracle or remove a test to manufacture acceptance.
 
