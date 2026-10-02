@@ -1,0 +1,7 @@
+artifact	present
+STATUS.tsv	yes
+FINAL_REPORT.md	yes
+RUN_CONTEXT.tsv	yes
+PROVENANCE.tsv	yes
+VERIFY_CONTRACT.tsv	yes
+OUTPUT_CONTRACT.tsv	yes
