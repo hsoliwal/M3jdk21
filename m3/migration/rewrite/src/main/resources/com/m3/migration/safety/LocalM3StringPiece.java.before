@@ -21,23 +21,14 @@ public final class LocalM3StringPiece implements M3StringPiece {
     private final StorageIdentity identity;
     private final int codeUnitOffset;
     private final int codeUnitLength;
-    // This immutable lifetime link keeps the full canonical atom discoverable while any slice lives.
-    // It does not copy or expose the backing payload. A root points to itself and is GC-collectible.
-    private final LocalM3StringPiece root;
 
     LocalM3StringPiece(byte[] owned, Encoding encoding, StorageIdentity identity,
                        int offset, int length) {
-        this(owned, encoding, identity, offset, length, null);
-    }
-
-    private LocalM3StringPiece(byte[] owned, Encoding encoding, StorageIdentity identity,
-                              int offset, int length, LocalM3StringPiece root) {
         this.backing = owned;
         this.encoding = encoding;
         this.identity = identity;
         this.codeUnitOffset = offset;
         this.codeUnitLength = length;
-        this.root = root == null ? this : root;
     }
 
     public StorageIdentity storageIdentity() { return identity; }
@@ -54,18 +45,7 @@ public final class LocalM3StringPiece implements M3StringPiece {
     }
     @Override public LocalM3StringPiece subSequence(int start, int end) {
         Objects.checkFromToIndex(start, end, codeUnitLength);
-        return new LocalM3StringPiece(backing, encoding, identity, codeUnitOffset + start, end - start, root);
+        return new LocalM3StringPiece(backing, encoding, identity, codeUnitOffset + start, end - start);
     }
-    boolean adjacentTo(LocalM3StringPiece next) {
-        return backing == next.backing && encoding == next.encoding
-                && root == next.root && codeUnitOffset + codeUnitLength == next.codeUnitOffset;
-    }
-
-    LocalM3StringPiece coalesce(LocalM3StringPiece next) {
-        if (!adjacentTo(next)) throw new IllegalArgumentException("different or nonadjacent atom ranges");
-        return new LocalM3StringPiece(backing, encoding, identity, codeUnitOffset,
-                Math.addExact(codeUnitLength, next.codeUnitLength), root);
-    }
-
     @Override public String toString() { return flatten(); }
 }

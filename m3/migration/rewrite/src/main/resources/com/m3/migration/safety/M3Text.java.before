@@ -5,7 +5,6 @@ package com.m3.text;
 
 import java.lang.ref.ReferenceQueue;
 import java.lang.ref.WeakReference;
-import java.nio.CharBuffer;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -55,28 +54,27 @@ public final class M3Text implements CharSequence, Comparable<M3Text> {
     public static M3Text fromString(String value) {
         Objects.requireNonNull(value, "value");
         if (value.isEmpty()) return EMPTY;
-        return INTERNER.admit(value, value.hashCode(), null);
+        int hash = value.hashCode();
+        M3Text existing = INTERNER.find(value, hash);
+        if (existing != null) return existing;
+        char[] chars = value.toCharArray();
+        M3StringPiece piece = LOCAL_ARENA.copyUtf16(chars);
+        return INTERNER.intern(piece, hash);
     }
 
-    /**
-     * Captures the caller once, then hashes and interns that same immutable snapshot.
-     * Concurrent unsynchronized mutation is not an atomic snapshot guarantee; a failing read
-     * publishes nothing. No caller-controlled charAt/toString executes under the interner lock.
-     */
+    /** Exact admission from a CharSequence without retaining the caller's mutable representation. */
     public static M3Text from(CharSequence value) {
         Objects.requireNonNull(value, "value");
         if (value instanceof M3Text text) return text;
         if (value instanceof String string) return fromString(string);
         int length = value.length();
         if (length == 0) return EMPTY;
+        int hash = hashOf(value);
+        M3Text existing = INTERNER.find(value, hash);
+        if (existing != null) return existing;
         char[] snapshot = new char[length];
-        int hash = 0;
-        for (int i = 0; i < length; i++) {
-            char unit = value.charAt(i);
-            snapshot[i] = unit;
-            hash = 31 * hash + unit;
-        }
-        return INTERNER.admit(CharBuffer.wrap(snapshot), hash, snapshot);
+        for (int i = 0; i < length; i++) snapshot[i] = value.charAt(i);
+        return INTERNER.intern(LOCAL_ARENA.copyUtf16(snapshot), hash);
     }
 
     @Override
@@ -193,8 +191,7 @@ public final class M3Text implements CharSequence, Comparable<M3Text> {
         Objects.requireNonNull(dst, "dst");
         Objects.checkFromToIndex(srcBegin, srcEnd, length());
         Objects.checkFromIndexSize(dstBegin, srcEnd - srcBegin, dst.length);
-        M3PieceCursor cursor = new M3PieceCursor(piece, srcBegin, srcEnd);
-        for (int j = dstBegin; cursor.hasNext(); j++) dst[j] = cursor.next();
+        for (int i = srcBegin, j = dstBegin; i < srcEnd; i++, j++) dst[j] = charAt(i);
     }
 
     /** Explicit mutable-array materialization boundary. */
@@ -211,8 +208,7 @@ public final class M3Text implements CharSequence, Comparable<M3Text> {
 
     /** Explicit encoded-byte materialization boundary. */
     public byte[] getBytes(Charset charset) {
-        Objects.requireNonNull(charset, "charset");
-        return asString().getBytes(charset);
+        return asString().getBytes(Objects.requireNonNull(charset, "charset"));
     }
 
     @Override
@@ -232,10 +228,8 @@ public final class M3Text implements CharSequence, Comparable<M3Text> {
     public int compareTo(M3Text other) {
         Objects.requireNonNull(other, "other");
         int common = Math.min(length(), other.length());
-        M3PieceCursor left = new M3PieceCursor(piece, 0, common);
-        M3PieceCursor right = new M3PieceCursor(other.piece, 0, common);
         for (int i = 0; i < common; i++) {
-            int delta = left.next() - right.next();
+            int delta = charAt(i) - other.charAt(i);
             if (delta != 0) return delta;
         }
         return length() - other.length();
@@ -264,12 +258,7 @@ public final class M3Text implements CharSequence, Comparable<M3Text> {
 
     private static int hashOf(CharSequence value) {
         int result = 0;
-        M3PieceCursor cursor = cursor(value, 0, value.length());
-        if (cursor != null) {
-            while (cursor.hasNext()) result = 31 * result + cursor.next();
-        } else {
-            for (int i = 0; i < value.length(); i++) result = 31 * result + value.charAt(i);
-        }
+        for (int i = 0; i < value.length(); i++) result = 31 * result + value.charAt(i);
         return result;
     }
 
@@ -280,50 +269,16 @@ public final class M3Text implements CharSequence, Comparable<M3Text> {
 
     private static boolean regionEquals(
             CharSequence left, int leftStart, CharSequence right, int rightStart, int count) {
-        M3PieceCursor a = cursor(left, leftStart, leftStart + count);
-        M3PieceCursor b = cursor(right, rightStart, rightStart + count);
         for (int i = 0; i < count; i++) {
-            char x = a == null ? left.charAt(leftStart + i) : a.next();
-            char y = b == null ? right.charAt(rightStart + i) : b.next();
-            if (x != y) return false;
+            if (left.charAt(leftStart + i) != right.charAt(rightStart + i)) return false;
         }
         return true;
-    }
-
-    private static M3PieceCursor cursor(CharSequence value, int start, int end) {
-        if (value instanceof M3Text text) return new M3PieceCursor(text.piece, start, end);
-        if (value instanceof M3StringPiece piece) return new M3PieceCursor(piece, start, end);
-        return null;
     }
 
     /** Weak content interner that never retains a caller String as a map key. */
     private static final class WeakInterner {
         private final Map<Integer, List<Entry>> buckets = new HashMap<>();
         private final ReferenceQueue<M3Text> queue = new ReferenceQueue<>();
-        // Separate identity domains inside the same admission owner. A range retains its root
-        // LocalM3StringPiece, so a collected facade does not cause duplicate live atom payloads.
-        private final Map<Integer, List<AtomEntry>> atoms = new HashMap<>();
-        private final ReferenceQueue<LocalM3StringPiece> atomQueue = new ReferenceQueue<>();
-
-        synchronized M3Text admit(CharSequence stable, int hash, char[] snapshot) {
-            M3Text existing = find(stable, hash);
-            if (existing != null) return existing;
-            List<AtomEntry> bucket = atoms.get(hash);
-            if (bucket != null) {
-                for (Iterator<AtomEntry> it = bucket.iterator(); it.hasNext();) {
-                    LocalM3StringPiece atom = it.next().get();
-                    if (atom == null) it.remove();
-                    else if (contentEquals(atom, stable)) return intern(atom, hash);
-                }
-                if (bucket.isEmpty()) atoms.remove(hash);
-            }
-            // Only immutable String or a private char snapshot reaches this method.
-            char[] units = snapshot == null ? ((String) stable).toCharArray() : snapshot;
-            LocalM3StringPiece atom = LOCAL_ARENA.copyUtf16(units);
-            atoms.computeIfAbsent(hash, ignored -> new ArrayList<>())
-                    .add(new AtomEntry(atom, atomQueue, hash));
-            return intern(atom, hash);
-        }
 
         synchronized M3Text find(CharSequence value, int hash) {
             drainQueue();
@@ -356,14 +311,6 @@ public final class M3Text implements CharSequence, Comparable<M3Text> {
         }
 
         private void drainQueue() {
-            AtomEntry deadAtom;
-            while ((deadAtom = (AtomEntry) atomQueue.poll()) != null) {
-                List<AtomEntry> bucket = atoms.get(deadAtom.hash);
-                if (bucket != null) {
-                    bucket.remove(deadAtom);
-                    if (bucket.isEmpty()) atoms.remove(deadAtom.hash);
-                }
-            }
             Entry stale;
             while ((stale = (Entry) queue.poll()) != null) {
                 List<Entry> bucket = buckets.get(stale.hash);
@@ -372,15 +319,6 @@ public final class M3Text implements CharSequence, Comparable<M3Text> {
                     if (bucket.isEmpty()) buckets.remove(stale.hash);
                 }
             }
-        }
-    }
-
-    private static final class AtomEntry extends WeakReference<LocalM3StringPiece> {
-        private final int hash;
-
-        AtomEntry(LocalM3StringPiece atom, ReferenceQueue<LocalM3StringPiece> queue, int hash) {
-            super(atom, queue);
-            this.hash = hash;
         }
     }
 
