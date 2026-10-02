@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.M3FileLocalAtomInventory
+displayName: Inventory M3 FILE-local atomization candidates
+description: >-
+  Emits structured candidate rows for mechanically proven FILE-local atomization and
+  patternization opportunities without modifying source.
+recipeList:
+  - com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates
