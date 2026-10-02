@@ -8,12 +8,17 @@ on:
     paths:
       - ".github/workflows/m3-jdk21-upstream-inventory.yml"
       - "m3/backports/inventory.py"
+      - "m3/backports/file_delta_inventory.py"
       - "m3/backports/test_inventory.py"
+      - "m3/backports/test_file_delta_inventory.py"
       - "m3/backports/COMPATIBILITY_ADMISSION.md"
   pull_request:
     paths:
       - ".github/workflows/m3-jdk21-upstream-inventory.yml"
       - "m3/backports/inventory.py"
+      - "m3/backports/file_delta_inventory.py"
+      - "m3/backports/test_inventory.py"
+      - "m3/backports/test_file_delta_inventory.py"
   workflow_dispatch:
 
 permissions:
@@ -64,6 +69,13 @@ jobs:
         run: |
           mkdir -p inventory-output
           python3 m3/backports/inventory.py             --repo upstream-jdk             --out inventory-output/UPSTREAM_CHANGES.tsv
+
+      - name: Materialize verbatim JDK21-to-donor file comparisons
+        shell: bash
+        run: |
+          python3 m3/backports/file_delta_inventory.py \
+            --repo upstream-jdk \
+            --out inventory-output/JDK21_FILE_DELTAS.tsv
 
       - name: Verify and summarize inventory
         shell: bash
@@ -142,9 +154,39 @@ jobs:
               json.dumps(summary, indent=2, sort_keys=True) + "\n",
               encoding="utf-8",
           )
+
+          file_path = Path("inventory-output/JDK21_FILE_DELTAS.tsv")
+          file_data = file_path.read_bytes()
+          with file_path.open("r", encoding="utf-8", newline="") as handle:
+              file_rows = list(csv.DictReader(handle, delimiter="\t"))
+          file_status = Counter(row["status"] for row in file_rows)
+          file_lanes = Counter(row["recipe_lane"] for row in file_rows)
+          file_summary = {
+              "schema": 1,
+              "baseline": "jdk-21+35",
+              "donors": {
+                  "22": "jdk-22+36",
+                  "23": "jdk-23+37",
+                  "24": "jdk-24+36",
+                  "25": "jdk-25+36",
+                  "26": "jdk-26+35",
+                  "27": "jdk-27+35",
+              },
+              "rows": len(file_rows),
+              "status": dict(sorted(file_status.items())),
+              "recipe_lanes": dict(sorted(file_lanes.items())),
+              "sha256": hashlib.sha256(file_data).hexdigest(),
+              "bytes": len(file_data),
+          }
+          Path("inventory-output/JDK21_FILE_DELTAS.summary.json").write_text(
+              json.dumps(file_summary, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
           print(json.dumps(summary, sort_keys=True))
+          print(json.dumps(file_summary, sort_keys=True))
           PY
           gzip -9 -k inventory-output/UPSTREAM_CHANGES.tsv
+          gzip -9 -k inventory-output/JDK21_FILE_DELTAS.tsv
 
       - name: Upload complete upstream inventory
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
