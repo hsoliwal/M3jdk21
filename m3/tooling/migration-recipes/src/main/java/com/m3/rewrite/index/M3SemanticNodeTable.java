@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.rewrite.index;
 
+import com.m3.indexdb.M3IndexDbSemanticFingerprint;
 import org.openrewrite.Column;
 import org.openrewrite.DataTable;
 import org.openrewrite.Recipe;
@@ -46,7 +47,7 @@ public final class M3SemanticNodeTable extends DataTable<M3SemanticNodeTable.Row
                 String semanticKey,
                 String sourcePath,
                 String symbol,
-                M3SemanticFingerprint fingerprint) {
+                M3IndexDbSemanticFingerprint fingerprint) {
             this.nodeId = nodeId;
             this.kind = kind;
             this.semanticKey = semanticKey;
