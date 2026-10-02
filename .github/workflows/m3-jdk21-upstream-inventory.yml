@@ -1,11 +1,10 @@
 name: M3 JDK21 upstream inventory
 
 on:
-  push:
-    branches:
-      - aix/jdk22-27-backports-20261002
+  pull_request:
     paths:
       - ".github/workflows/m3-jdk21-upstream-inventory.yml"
+      - "m3/backports/inventory.py"
   workflow_dispatch:
 
 permissions:
