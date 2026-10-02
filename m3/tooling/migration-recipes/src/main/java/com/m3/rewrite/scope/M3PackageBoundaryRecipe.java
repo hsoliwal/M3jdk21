@@ -79,7 +79,9 @@ public final class M3PackageBoundaryRecipe
                     ExecutionContext ctx) {
                 J.ClassDeclaration value =
                         super.visitClassDeclaration(declaration, ctx);
-                M3VisibilityLevel level = M3VisibilityLevel.of(value.getModifiers());
+                M3VisibilityLevel level = M3VisibilityLevel.ofMember(
+                        value.getModifiers(),
+                        owner.getKind() == J.ClassDeclaration.Kind.Type.Interface);
                 if (level == M3VisibilityLevel.PACKAGE
                         || level == M3VisibilityLevel.PROTECTED) {
                     surface().declarations.add(
@@ -98,12 +100,14 @@ public final class M3PackageBoundaryRecipe
                         getCursor().firstEnclosing(J.ClassDeclaration.class);
                 if (owner == null) return value;
 
-                M3VisibilityLevel level = M3VisibilityLevel.of(value.getModifiers());
+                M3VisibilityLevel level = M3VisibilityLevel.ofMember(
+                        value.getModifiers(),
+                        owner.getKind() == J.ClassDeclaration.Kind.Type.Interface);
                 if (level == M3VisibilityLevel.PACKAGE
                         || level == M3VisibilityLevel.PROTECTED) {
                     surface().declarations.add(
                             "METHOD|" + ownerName(owner) + "|"
-                                    + value.getSimpleName() + "|" + level);
+                                    + methodSignature(value) + "|" + level);
                 }
                 return value;
             }
@@ -177,6 +181,21 @@ public final class M3PackageBoundaryRecipe
         @SuppressWarnings("deprecation")
         String value = unit.getPackageDeclaration().getExpression().printTrimmed();
         return value.isBlank() ? "<default>" : value;
+    }
+
+    private static String methodSignature(J.MethodDeclaration method) {
+        ArrayList<String> parameters = new ArrayList<>();
+        for (J parameter : method.getParameters()) {
+            if (parameter instanceof J.VariableDeclarations declarations
+                    && declarations.getTypeExpression() != null) {
+                @SuppressWarnings("deprecation")
+                String type = declarations.getTypeExpression().printTrimmed();
+                parameters.add(type);
+            } else {
+                parameters.add("?");
+            }
+        }
+        return method.getSimpleName() + "(" + String.join(",", parameters) + ")";
     }
 
     private static String ownerName(J.ClassDeclaration declaration) {
