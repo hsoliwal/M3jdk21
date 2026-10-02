@@ -8,6 +8,7 @@ Status: **documentation-only durable whole-JDK handoff**. This file is the curre
 - Inspected target baseline: `45f546ff5bcb06a1b2604f14baf998785d98d9a1`
 - Source-owner repository: `hsoliwal/com.synexia`
 - Inspected source-owner baseline: `3db24805d640c72ab1bd637d83561696d99561a0`
+- Source census evidence: private draft #7696, head `1702b78729dc84c06aaebd9fff3ebb596479bfd6`, records the broader branch-scoped census described in `../migration/docs/COVERAGE.md`; reconcile it before creating another scanner or advancing canonical coverage.
 - Documentation owner branch: `docs/whole-jdk-m3-scope-20261002`
 - Documentation owner PR: #25, `docs: consolidate whole-JDK M3 replacement scope including collections`
 
@@ -51,6 +52,7 @@ For each work session:
    - fetch this PR/branch if still open;
    - compare current tips to the last pinned observations;
    - list relevant open/merged PRs and mapping-owner changes.
+   - reconcile the existing branch-scoped source census before rerunning or extending inventory; refresh only for source-pin drift or uncovered dependency domains.
 2. **select one leaf capability**
    - resolve its stable mapping ID;
    - enumerate exact source and target symbols/files/native/resources/tests;
