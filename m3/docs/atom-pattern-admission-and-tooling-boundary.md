@@ -56,10 +56,11 @@ Atomization and patternization are orthogonal and both are required admission di
 Every refactoring recipe must operate at the narrowest sufficient authority:
 
 1. FILE — private/file-local implementation only;
-2. PACKAGE_VISIBILITY — package/default/protected visibility relationships;
-3. MODULE — one JDK/module boundary;
-4. MULTI_MODULE — reactor/multiple modules;
-5. LIBRARY_API — exported/public/API or cross-library contract.
+2. VISIBILITY — a declaration's accessibility changes, without assuming package-wide authority;
+3. PACKAGE — coordinated package/default/protected relationships across files in one package;
+4. MODULE — one JDK/module boundary;
+5. MULTI_MODULE — reactor/multiple modules;
+6. LIBRARY_API — exported/public/API or cross-library contract.
 
 Do not promote scope because it is convenient. Promote only when proof shows the transformation
 crosses the current boundary.
