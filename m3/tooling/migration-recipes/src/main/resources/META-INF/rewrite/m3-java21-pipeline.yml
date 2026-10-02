@@ -1,0 +1,39 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.java21.Inventory
+displayName: M3 Java 21 inventory
+description: Inventory Java 21 FILE-local candidates admitted for mechanical M3 convergence.
+recipeList:
+  - com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates
+
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.java21.Atomization
+displayName: M3 Java 21 atomization
+description: Apply only JUnit-proven behavior-and-contract-preserving FILE-local atomization recipes.
+recipeList:
+  - com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe
+
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.java21.PatternizationIOP
+displayName: M3 Java 21 patternization and IOP
+description: Apply only JUnit-proven FILE-local pattern and IOP semantic-role recipes.
+recipeList:
+  - com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe
+
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.java21.Documentation
+displayName: M3 Java 21 documentation convergence
+description: Materialize semantic memory through idempotent Javadoc/documentation recipes.
+recipeList:
+  - com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe
+
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.java21.Convergence
+displayName: M3 Java 21 full FILE-local convergence
+description: Inventory, atomize, patternize/IOP-type and document admitted Java 21 leaves to a fixed point.
+recipeList:
+  - com.m3.rewrite.M3Java21ConvergenceRecipe
