@@ -2,7 +2,7 @@
 
 ## Whole-JDK authority and document topology
 
-This document is the detailed implementation architecture for the whole-JDK M3 program. The overview and coverage denominator live in ../../docs/whole-jdk-migration-scope.md. Deep collection contracts live in COLLECTIONS.md. Dependency-ordered implementation packets live in WORK_PACKETS.md. Existing String/text architecture remains in ../../docs/shared-atom-concatenation.md, ../../docs/mindex-migration-handoff.md and ../../../doc/mindex-string-backing.md.
+This document is the detailed implementation architecture for the whole-JDK M3 program. The overview and coverage denominator live in ../../docs/whole-jdk-migration-scope.md. Module-level planning dispositions live in ../../docs/whole-jdk-subsystem-matrix.md. The canonical detailed collection contract lives in ../../docs/whole-jdk-collections-replacement.md; COLLECTIONS.md is only its migration execution overlay. Dependency-ordered implementation packets live in WORK_PACKETS.md. Existing String/text architecture remains in ../../docs/shared-atom-concatenation.md, ../../docs/mindex-migration-handoff.md and ../../../doc/mindex-string-backing.md.
 
 The machine-readable operational authority remains ../../docs/name-mapping.json plus the existing validated migration tooling. None of these Markdown files is a replacement registry. Planning rows may propose dispositions; only a separately reviewed operational update may change capability state, synchronized pins or evidence bindings.
 
