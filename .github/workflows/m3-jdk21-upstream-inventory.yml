@@ -16,7 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
 
       - name: Fetch pinned OpenJDK GA history without blobs
         shell: bash
@@ -24,14 +26,32 @@ jobs:
           mkdir upstream-jdk
           git -C upstream-jdk init -q
           git -C upstream-jdk remote add origin https://github.com/openjdk/jdk.git
-          git -C upstream-jdk -c protocol.version=2 fetch             --filter=blob:none             --no-tags             origin             "refs/tags/jdk-21+35:refs/tags/jdk-21+35"             "refs/tags/jdk-22+36:refs/tags/jdk-22+36"             "refs/tags/jdk-23+37:refs/tags/jdk-23+37"             "refs/tags/jdk-24+36:refs/tags/jdk-24+36"             "refs/tags/jdk-25+36:refs/tags/jdk-25+36"             "refs/tags/jdk-26+35:refs/tags/jdk-26+35"             "refs/tags/jdk-27+35:refs/tags/jdk-27+35"
 
-          for tag in             jdk-21+35 jdk-22+36 jdk-23+37 jdk-24+36             jdk-25+36 jdk-26+35 jdk-27+35
-          do
+          refs=(
+            "refs/tags/jdk-21+35:refs/tags/jdk-21+35"
+            "refs/tags/jdk-22+36:refs/tags/jdk-22+36"
+            "refs/tags/jdk-23+37:refs/tags/jdk-23+37"
+            "refs/tags/jdk-24+36:refs/tags/jdk-24+36"
+            "refs/tags/jdk-25+36:refs/tags/jdk-25+36"
+            "refs/tags/jdk-26+35:refs/tags/jdk-26+35"
+            "refs/tags/jdk-27+35:refs/tags/jdk-27+35"
+          )
+          git -C upstream-jdk -c protocol.version=2 fetch             --filter=blob:none             --no-tags             origin             "${refs[@]}"
+
+          tags=(
+            jdk-21+35
+            jdk-22+36
+            jdk-23+37
+            jdk-24+36
+            jdk-25+36
+            jdk-26+35
+            jdk-27+35
+          )
+          for tag in "${tags[@]}"; do
             git -C upstream-jdk rev-parse --verify "$tag^{commit}"
           done
 
-      - name: Materialize complete commit/JBS/path denominator
+      - name: Materialize complete commit JBS path denominator
         shell: bash
         run: |
           mkdir -p inventory-output
@@ -102,7 +122,7 @@ jobs:
           gzip -9 -k inventory-output/UPSTREAM_CHANGES.tsv
 
       - name: Upload complete upstream inventory
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: jdk22-27-upstream-change-inventory
           path: inventory-output/
