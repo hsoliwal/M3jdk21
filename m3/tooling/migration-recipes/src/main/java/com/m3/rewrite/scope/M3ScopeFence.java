@@ -26,8 +26,9 @@ public record M3ScopeFence(M3EditScope scope, List<String> roots) {
     if (unique.size() != normalized.size()) {
       throw new IllegalArgumentException("M3_SCOPE_ROOTS_DUPLICATE");
     }
-    if (scope == M3EditScope.FILE && normalized.size() != 1) {
-      throw new IllegalArgumentException("M3_FILE_SCOPE_REQUIRES_ONE_FILE");
+    if ((scope == M3EditScope.FILE || scope == M3EditScope.VISIBILITY)
+        && normalized.size() != 1) {
+      throw new IllegalArgumentException("M3_SINGLE_FILE_SCOPE_REQUIRES_ONE_FILE");
     }
     if (scope == M3EditScope.MULTI_MODULE && normalized.size() < 2) {
       throw new IllegalArgumentException("M3_MULTI_MODULE_SCOPE_REQUIRES_MULTIPLE_ROOTS");
@@ -37,6 +38,10 @@ public record M3ScopeFence(M3EditScope scope, List<String> roots) {
 
   public static M3ScopeFence file(String path) {
     return new M3ScopeFence(M3EditScope.FILE, List.of(path));
+  }
+
+  public static M3ScopeFence visibility(String path) {
+    return new M3ScopeFence(M3EditScope.VISIBILITY, List.of(path));
   }
 
   public static M3ScopeFence packageScope(String root) {
@@ -57,14 +62,14 @@ public record M3ScopeFence(M3EditScope scope, List<String> roots) {
     return new M3ScopeFence(M3EditScope.MULTI_MODULE, roots);
   }
 
-  public static M3ScopeFence libraryApi(List<String> roots) {
-    return new M3ScopeFence(M3EditScope.LIBRARY_API, roots);
+  public static M3ScopeFence library(List<String> roots) {
+    return new M3ScopeFence(M3EditScope.LIBRARY, roots);
   }
 
   /** Returns true only when the path is inside the declared write fence. */
   public boolean allows(String candidatePath) {
     String candidate = normalize(candidatePath);
-    if (scope == M3EditScope.FILE) {
+    if (scope == M3EditScope.FILE || scope == M3EditScope.VISIBILITY) {
       return roots.getFirst().equals(candidate);
     }
     return roots.stream()
