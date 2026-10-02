@@ -2,7 +2,7 @@
 
 ## Whole-JDK authority and document topology
 
-This document is the detailed implementation architecture for the whole-JDK M3 program. The overview and coverage denominator live in ../../docs/whole-jdk-migration-scope.md. Module-level planning dispositions live in ../../docs/whole-jdk-subsystem-matrix.md. The canonical detailed collection contract lives in ../../docs/whole-jdk-collections-replacement.md; COLLECTIONS.md is only its migration execution overlay. Dependency-ordered implementation packets live in WORK_PACKETS.md. Existing String/text architecture remains in ../../docs/shared-atom-concatenation.md, ../../docs/mindex-migration-handoff.md and ../../../doc/mindex-string-backing.md.
+This document is the detailed implementation architecture for the whole-JDK M3 program. The overview and coverage denominator live in ../../docs/whole-jdk-migration-scope.md. Module-level planning dispositions live in ../../docs/whole-jdk-subsystem-matrix.md. The canonical detailed collection contract lives in ../../docs/whole-jdk-collections-replacement.md. Dependency-ordered implementation packets and the ten-pass programme live in ../../docs/whole-jdk-work-packets.md, with concrete semantic examples in ../../docs/whole-jdk-worked-examples.md and the durable continuation guide in ../../docs/whole-jdk-resume.md. Existing String/text architecture remains in ../../docs/shared-atom-concatenation.md, ../../docs/mindex-migration-handoff.md and ../../../doc/mindex-string-backing.md.
 
 The machine-readable operational authority remains ../../docs/name-mapping.json plus the existing validated migration tooling. None of these Markdown files is a replacement registry. Planning rows may propose dispositions; only a separately reviewed operational update may change capability state, synchronized pins or evidence bindings.
 
@@ -37,7 +37,7 @@ String/text and collections are the first deep vertical slices because they exer
 
 String retains exact UTF-16 semantics, shared-lexicon plus VM-local ownership, reference-only joins/slices, explicit materialization and independent text/atom/composition/object identity. Route C must coordinate StringLatin1/StringUTF16/concat, StringTable, GC dedup, CDS, JNI/JVMTI, interpreter/JIT and serviceability.
 
-Collections use the canonical family-by-family contract in [../../docs/whole-jdk-collections-replacement.md](../../docs/whole-jdk-collections-replacement.md); [COLLECTIONS.md](COLLECTIONS.md) is the migration execution overlay. Candidate primitive/indexed/segmented forms do not automatically eliminate boxing or node objects at public generic boundaries. IdentityHashMap reference identity, weak-reference families, live views, serialization, subclass hooks and concurrent JMM guarantees are explicit stop gates.
+Collections use the canonical family-by-family contract in [../../docs/whole-jdk-collections-replacement.md](../../docs/whole-jdk-collections-replacement.md), with sequencing and evidence packets in [../../docs/whole-jdk-work-packets.md](../../docs/whole-jdk-work-packets.md). Candidate primitive/indexed/segmented forms do not automatically eliminate boxing or node objects at public generic boundaries. IdentityHashMap reference identity, weak-reference families, live views, serialization, subclass hooks and concurrent JMM guarantees are explicit stop gates.
 
 All remaining JDK/HotSpot work is decomposed in WORK_PACKETS.md and advances in dependency order rather than by filename similarity.
 

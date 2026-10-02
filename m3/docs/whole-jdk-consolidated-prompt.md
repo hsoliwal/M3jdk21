@@ -27,6 +27,12 @@ Explain three routes across all eligible families:
 
 Evidence for one route does not certify another.
 
+## Architecture layers and retained String specification
+
+Separate canonical data/lifetime ownership, storage/indexing, algorithms/precomputation, public Java compatibility, compiler transformations, VM/native integration, and diagnostics/evidence. Select shared components by compatible semantics rather than names. Tooling, Maven/OpenRewrite and application frameworks must not enter early `java.base` bootstrap.
+
+Carry forward the complete String contract from the existing text documents: shared immutable lexicon plus VM-local misses, exact UTF-16 semantics, reference-only joins/slices where legal, bounded descriptors, seam-aware encoding and regex, explicit materialization boundaries, and separate text/atom/composition/Java-object identity. Preserve current exceptions, failed gates and unimplemented paths rather than converting them into completion claims.
+
 ## Collections are a first-class replacement workstream
 
 Cover List, Map, Set, Queue, Deque, sorted/navigable and Java 21 sequenced families; concrete and abstract implementations; immutable/fixed-size/unmodifiable/synchronized/checked wrappers; legacy collections; views, iterators, spliterators, Arrays/Collections utilities, comparators, streams and collectors. Include concurrent maps/sets/queues, blocking/transfer/delay/priority and copy-on-write variants, atomics/VarHandles and connected synchronization owners.
@@ -63,11 +69,11 @@ Use the existing target documents as one connected specification rather than cre
 - m3/docs/whole-jdk-subsystem-matrix.md — canonical module/source-root planning dispositions
 - m3/migration/docs/ARCHITECTURE.md — shared architecture and compatibility laws
 - m3/docs/whole-jdk-collections-replacement.md — canonical detailed collection replacement specification
-- m3/migration/docs/COLLECTIONS.md — collection migration execution overlay, not a second family matrix
+- m3/docs/whole-jdk-work-packets.md — ten-pass dependency-aware implementation plan and work-packet/evidence schema
+- m3/docs/whole-jdk-worked-examples.md — concrete semantic examples and counterexamples
 - m3/migration/docs/COVERAGE.md — human-readable migration/evidence projection
-- m3/migration/docs/WORK_PACKETS.md — dependency-aware implementation packets
-- m3/migration/docs/ACCEPTANCE.md — promotion gates
-- m3/migration/docs/RESUME.md — durable continuation guide
+- m3/migration/docs/ACCEPTANCE.md — promotion gates and retained historical evidence
+- m3/docs/whole-jdk-resume.md — durable whole-JDK continuation guide
 - m3/docs/name-mapping.json — operational capability/mapping authority
 - m3/docs/mindex-migration-handoff.md and the existing String documents — deep retained slice specifications
 
@@ -89,6 +95,12 @@ Organize execution and handoff through these ten passes:
 10. audit the full denominator for omissions, duplicate owners, stale mappings, contradictions and unsupported completion claims.
 
 Include concrete worked examples for shared text joins/slices, compact generic maps and boxing boundaries, immutable sharing versus mutable identity, backed views, identity-sensitive keys and collisions, concurrent linearization/visibility, AST/DAG semantic identity, source rename/split/conflict ports and failed gates that block promotion.
+
+## Provenance, licensing and rollout
+
+Pin every donor/source revision and record whether it is reference-only, adapted or copied. Preserve OpenJDK and donor license/notice obligations and private-source publication boundaries. Challenge/problem catalogues are discovery evidence, not automatic production-source permission.
+
+Keep implemented, retained, tested, proposed, blocked and deferred states distinct. Route C replacements require explicit enablement/default-off and rollback plans until exact compatibility, runtime and performance gates justify promotion. Historical receipts remain bound to their exact candidates and never transfer automatically.
 
 ## Deliverable and verification
 

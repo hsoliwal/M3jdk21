@@ -6,9 +6,9 @@ This document expands the collection workstream in [whole-jdk-migration-scope.md
 
 ## Canonical role and execution overlay
 
-This is the canonical detailed collection design for the whole-JDK documentation set. The implementation-oriented companion [../migration/docs/COLLECTIONS.md](../migration/docs/COLLECTIONS.md) deliberately does not repeat the family matrix; it turns this specification into bounded mapping, recipe and evidence packets. [whole-jdk-subsystem-matrix.md](whole-jdk-subsystem-matrix.md) owns module-level planning dispositions, while operational capability state remains in [name-mapping.json](name-mapping.json).
+This is the canonical detailed collection design for the whole-JDK documentation set. [whole-jdk-work-packets.md](whole-jdk-work-packets.md) owns dependency-aware execution sequencing and packet structure, [whole-jdk-subsystem-matrix.md](whole-jdk-subsystem-matrix.md) owns module-level planning dispositions, and operational capability state remains in [name-mapping.json](name-mapping.json).
 
-Do not create a second collection design by copying these tables into migration status documents. Extend this document for collection contract/design changes and update the execution overlay only when migration procedure or gates change.
+Do not create a second collection design by copying these tables into migration status documents. Extend this document for collection contract/design changes; update the work-packet plan only when sequencing, evidence or promotion procedure changes.
 
 ## 1. Design rule
 
@@ -36,6 +36,26 @@ The following are observed existing owners/reference implementations, not automa
 | `synexia-openrewrite-recipes` | reusable recipe crates | tooling route only; never early `java.base` dependency |
 
 A JDK implementation must not simply depend on these Maven modules. First isolate a minimal bootstrap-safe algorithm/storage contract; then source-pin, license-review, adapt and verify any selected implementation through a separately authorized work packet.
+
+### Current lean mechanical-atom lineage to reconcile
+
+The inspected Synexia estate has already started decomposing collection mechanics into package-private, zero-entry-object atoms. These are **source-side reuse candidates only**; source merge/draft status does not admit them into a JDK target or transfer their receipts.
+
+| Source lineage | State at inspection | Mechanical responsibility | JDK boundary that remains separate |
+| --- | --- | --- | --- |
+| [#7653](https://github.com/hsoliwal/com.synexia/pull/7653) `PackedFlatArrays` | merged | checked primitive growth and logical ring copy | concurrent rings, segmented/native storage and generic JDK semantics |
+| [#7658](https://github.com/hsoliwal/com.synexia/pull/7658) `PrimitiveScalarCodec` | merged | eight-primitive scalar/raw-bit encoding | generic boxing/null/identity and concurrent owner semantics |
+| [#7675](https://github.com/hsoliwal/com.synexia/pull/7675) `PackedRingAtoms` | draft | ring/deque index arithmetic | concurrent sequencing, blocking and publication |
+| [#7679](https://github.com/hsoliwal/com.synexia/pull/7679) `PackedHeapAtoms` | draft | binary-heap index geometry | comparator behavior, ties, payload movement and publication |
+| [#7687](https://github.com/hsoliwal/com.synexia/pull/7687) probe atoms | draft | quadratic, Robin-Hood and Swiss probe/control geometry | payload mutation, deletion, views and public map/set contracts |
+| [#7695](https://github.com/hsoliwal/com.synexia/pull/7695) `PackedSlotLinkAtoms` | draft | stable-slot predecessor/successor mechanics | Java 21 sequenced/reversed, modCount, null and subclass behavior |
+| [#7698](https://github.com/hsoliwal/com.synexia/pull/7698) `PackedBitAtoms` | draft | word/mask/capacity geometry | growable, concurrent, bounded and segmented owner semantics |
+| [#7702](https://github.com/hsoliwal/com.synexia/pull/7702) `PackedSortedAtoms` | draft | search/navigation, stable shifts and sorted dedup/merge | Comparator/object collections and paged/gapped layouts |
+| [#7701](https://github.com/hsoliwal/com.synexia/pull/7701) adaptive reuse | draft | exact-bound and natural-run reuse in existing primitive owners | focused source tests/measurements are not full reactor, JNI parity or JDK acceptance |
+
+Selection still requires the exact source pin, owner/dependency closure, license review, bootstrap-safe extraction, target mapping, differential contract tests and route-specific evidence. Keep semantic owners separate even when they share a mechanical atom.
+
+The lineage table is retained from parent documentation snapshot `b548fdb4c123b5dd76494218fa04b43b27db6c55`. Its PR-state descriptions are historical observations, not reverified current status or substitutes for selected source commit pins in this contract review.
 
 ## 3. Shared compatibility checklist
 

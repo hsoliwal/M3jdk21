@@ -8,7 +8,7 @@ This document supplies the whole-JDK coverage denominator requested by [whole-jd
 
 This is the canonical module/source-root planning disposition matrix for the whole-JDK documentation set. It answers “what must be reviewed and what is the initial disposition?” It does not answer “what has been implemented or verified?”
 
-Use [../migration/docs/COVERAGE.md](../migration/docs/COVERAGE.md) for the human-readable migration/evidence projection, [../migration/docs/WORK_PACKETS.md](../migration/docs/WORK_PACKETS.md) for dependency-ordered execution packets, and [name-mapping.json](name-mapping.json) for operational capability state. Do not copy this matrix into a second status registry.
+Use [../migration/docs/COVERAGE.md](../migration/docs/COVERAGE.md) for the human-readable migration/evidence projection, [whole-jdk-work-packets.md](whole-jdk-work-packets.md) for dependency-ordered execution packets, and [name-mapping.json](name-mapping.json) for operational capability state. Do not copy this matrix into a second status registry.
 
 ## Disposition vocabulary
 
