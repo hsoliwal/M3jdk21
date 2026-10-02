@@ -1,0 +1,35 @@
+{
+  "recipe_id": "m3-route-a-string-v1",
+  "version": 1,
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base_commit": "3029cff40e927aefcca444a6ef759a562204579c",
+  "deterministic": true,
+  "idempotent": true,
+  "rollback": true,
+  "operations": [
+    {
+      "kind": "replace",
+      "path": "m3/core/src/com/m3/text/LocalM3Arena.java",
+      "preimage": "m3/migration/recipes/route-a-v1/preimage/LocalM3Arena.txt",
+      "before_sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
+      "postimage": "m3/core/src/com/m3/text/LocalM3Arena.java",
+      "after_sha256": "5aed2cfe367140d33b10200c10fcdc58708afc0242371f24ccd552cec66e9274"
+    },
+    {
+      "kind": "add",
+      "path": "m3/core/src/com/m3/text/LocalM3Interner.java",
+      "postimage": "m3/core/src/com/m3/text/LocalM3Interner.java",
+      "after_sha256": "9b4b711463c9d3583ef0fc43694c427db234f0abe17fd331abe4449445713a2d"
+    },
+    {
+      "kind": "add",
+      "path": "m3/core/src/com/m3/text/M3String.java",
+      "postimage": "m3/core/src/com/m3/text/M3String.java",
+      "after_sha256": "5fc45516afff55977852f6f98ca6ba5e48cc4a482b56ef5de9b4156c36e42418"
+    }
+  ],
+  "acceptance": [
+    "m3/migration/tests/RouteAStringTest.java",
+    "local JDK 21 source-closure proof: 15536 checks in default, -Xint, -XX:-CompactStrings and C2-only modes"
+  ]
+}
