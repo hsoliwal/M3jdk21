@@ -38,6 +38,12 @@ public final class M3RecipeScopeRegistry {
                     "com.m3.rewrite.index.M3SemanticIndexRecipe",
                     fixed(M3EditScope.FILE)),
             Map.entry(
+                    "com.m3.rewrite.scope.M3VisibilityInventoryRecipe",
+                    fixed(M3EditScope.VISIBILITY)),
+            Map.entry(
+                    "com.m3.rewrite.scope.M3PackageBoundaryRecipe",
+                    fixed(M3EditScope.PACKAGE)),
+            Map.entry(
                     "com.m3.rewrite.index.M3TypeRelationRecipe",
                     fixed(M3EditScope.MODULE)),
             Map.entry(
