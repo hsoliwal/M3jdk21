@@ -27,6 +27,7 @@ package jdk.internal.mindex;
 
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
+import java.util.Objects;
 
 /**
  * Transport-neutral JDK contract for immutable canonical MIndex String backing.
@@ -53,6 +54,15 @@ public interface MIndexStringBacking extends AutoCloseable {
     ByteBuffer utf8View(long id);
 
     String materialize(long id);
+
+    /**
+     * Materializes one UTF-16 range. start/length are code-unit coordinates and may split a
+     * surrogate pair, exactly like String.substring.
+     */
+    default String materializeRange(long id, int start, int length) {
+        Objects.checkFromIndexSize(start, length, length(id));
+        return materialize(id).substring(start, start + length);
+    }
 
     default boolean contentEquals(long id, CharSequence other) {
         if (other == null || length(id) != other.length()) {
