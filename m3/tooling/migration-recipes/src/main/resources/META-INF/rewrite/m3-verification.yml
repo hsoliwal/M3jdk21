@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.M3VerificationContract
+displayName: Emit M3 verification contract
+description: >-
+  Emits the mandatory diff -> lint -> compile -> tests -> runtime proof order.
+  This recipe records requirements only and never claims that verification was executed.
+recipeList:
+  - com.m3.rewrite.pass.M3VerificationPlanRecipe
