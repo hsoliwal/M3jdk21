@@ -19,6 +19,34 @@ The next mapping must support many-to-many relations:
 
 Use stable mapping IDs independent of filenames. Never reuse a retired ID for a different contract.
 
+## Atom and pattern lineage inside a mapping
+
+A capability mapping is the durable outer identity. Inside that capability, keep finer-grained atom and pattern lineage so a future port does not have to treat an entire file/class as one indivisible change.
+
+The intended relation is:
+
+```text
+mapping capability ID
+  -> sealed contract boundary
+  -> source atom DAG
+  -> pattern/version applications
+  -> recipe/adaptation receipts
+  -> target atom DAG
+  -> target symbols
+  -> exact evidence
+```
+
+Atom IDs and pattern IDs do not replace the capability ID. They are subordinate evidence/lineage identities. Store them in the established operational record or referenced receipts only after separately reviewed schema/validator support; until then, documentation and evidence artifacts may describe them without inventing a parallel registry.
+
+For every required source atom, the mapping review must be able to answer:
+- which target atom(s) carry its behavior;
+- which pattern/version and recipe/adaptation produced or justified that relationship;
+- whether the edge is one-to-one, split, consolidation, retained dependency, target-only adaptation, deferred or not applicable;
+- which exact tests/evidence verify the target behavior;
+- which source and target revisions the edge belongs to.
+
+Pattern reuse never licenses automatic evidence reuse. The same pattern applied to a different owner or target needs candidate-bound verification.
+
 ## Record shape
 
 [migration-mapping.schema.json](migration-mapping.schema.json) is a proposed JSON Schema, not a deployed validator. [migration-mapping.example.json](migration-mapping.example.json) contains one explicitly illustrative record with null target commit and no evidence of implementation.
@@ -63,11 +91,11 @@ A source commit can affect multiple mappings. A target change can depend on seve
 
 1. Select a source comparison range from each mapping's last reviewed commit to the chosen new source pin. Do not diff against a moving develop tip during replay.
 2. Enumerate changed paths, renamed files, API signatures, image formats, native entry points, generated resources, tests and dependency versions.
-3. Resolve every changed source item to mapping IDs. Unmapped affected items become inventory work; never silently ignore them.
-4. Classify each change: bug fix, feature, performance-only change, contract change, format evolution, dependency/security update, test/oracle update or irrelevant to this target.
+3. Resolve every changed source item to mapping IDs, then to the affected sealed contract boundary and source atom(s). Unmapped affected items or atoms become inventory work; never silently ignore them.
+4. Resolve recurring atom changes to reviewed pattern/version candidates, record explicit refusal/one-off cases, then classify each change: bug fix, feature, performance-only change, contract change, format evolution, dependency/security update, test/oracle update or irrelevant to this target.
 5. Record target applicability and route A/B/C impact. “Not applicable” needs a reason and review, not an empty target.
 6. Check source prerequisites and known defects. A new upstream test is evidence to port and execute, not proof the target passes.
-7. Prepare a source-pinned recipe or reviewed manual port. Preserve target-specific changes; do not overwrite a whole file merely because its name maps.
+7. Prepare or improve the source-pinned reusable recipe/pattern implementation. Preserve target-specific changes; do not overwrite a whole file merely because its name maps. Record source-atom → pattern/version → target-atom edges for every applied transformation.
 8. Run drift, repeated-application, partial-state and rollback checks, then behavior/integration gates for the exact candidate.
 9. Attach the target commit, PR, generated output hashes, command/environment and results to the enhancement record.
 10. Advance lastReviewedSourceCommit only after every relevant change in the range has an explicit disposition. Deferred work remains visible.
