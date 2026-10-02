@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "incoming_master": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+  "scope": "Unmodified incoming PR19 Python migration inventory/lineage/replay/input-scope tests; no combined Java/JDK acceptance",
+  "input_hashes": {
+    "m3/migration/inventory.py": "c258794d343159993d4731fc28b7577686525f3af5f5b817a114ac17a5d2e470",
+    "m3/migration/lineage.py": "9b54d2b90a7ee8ce8f575213d54dfc15a0f1d3b1569a1c3d57b087b68b64609a",
+    "m3/migration/migration.py": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+    "m3/migration/recipe.py": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628",
+    "m3/migration/run-tests.py": "98dceb71a2a83e431d2417a613a23f825967718ae4a540585ab860e8ee2f33a9",
+    "m3/migration/run_local.py": "2ebbdcf2de012a0f91aff0df5acbff0eb91439ead515aa06df6ff8424508f854",
+    "m3/migration/test_inventory.py": "afc1cfb022fba96d3bd91c54bf513b39d72a00ec1cba42acbbab538c9bf62675",
+    "m3/migration/test_lineage.py": "f199c2fee47083db7aff923364ab69fdaeb3fbd31e8dcf02e6487dbbf429ba59",
+    "m3/migration/test_recipe.py": "8b0785cc9d50384d8613ea4deb34a530fdd1f1fe0b75f98e3a64425ab6c39d77",
+    "m3/migration/test_run_local.py": "1b2715cd550d269a0fbcb18b7d04279ed7b8d82edba6aa53a326d0ca20f095a1"
+  },
+  "records": [
+    {
+      "argv": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu-24.04",
+        "--exec",
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/mnt/c/worktrees/M3jdk21-mindex-migration-20261002/m3/migration",
+        "-p",
+        "test_*.py",
+        "-v"
+      ],
+      "chunk_id": "a94bdd",
+      "wall_time_seconds": 4.7414863,
+      "exit_code": 0,
+      "original_token_count": 1354,
+      "output": "test_exact_pin_required (test_inventory.InventoryTests.test_exact_pin_required) ... ok\ntest_names_behavior_and_resources (test_inventory.InventoryTests.test_names_behavior_and_resources) ... ok\ntest_replay_is_deterministic (test_inventory.InventoryTests.test_replay_is_deterministic) ... ok\ntest_symlink_not_followed (test_inventory.InventoryTests.test_symlink_not_followed) ... ok\ntest_worktree_changes_do_not_change_pin (test_inventory.InventoryTests.test_worktree_changes_do_not_change_pin) ... ok\ntest_borrowed_evidence (test_lineage.LineageTests.test_borrowed_evidence) ... ok\ntest_claim_requires_pin (test_lineage.LineageTests.test_claim_requires_pin) ... ok\ntest_claim_requires_signature (test_lineage.LineageTests.test_claim_requires_signature) ... ok\ntest_complete_fails_closed (test_lineage.LineageTests.test_complete_fails_closed) ... ok\ntest_cycles_and_many_to_one_closure (test_lineage.LineageTests.test_cycles_and_many_to_one_closure) ... ok\ntest_dependency_covered (test_lineage.LineageTests.test_dependency_covered) ... ok\ntest_destination_evidence_and_scope_hashes (test_lineage.LineageTests.test_destination_evidence_and_scope_hashes) ... ok\ntest_exclusion_needs_reason (test_lineage.LineageTests.test_exclusion_needs_reason) ... ok\ntest_failed_evidence (test_lineage.LineageTests.test_failed_evidence) ... ok\ntest_mapping_ids_unique (test_lineage.LineageTests.test_mapping_ids_unique) ... ok\ntest_missing_destination (test_lineage.LineageTests.test_missing_destination) ... ok\ntest_missing_evidence (test_lineage.LineageTests.test_missing_evidence) ... ok\ntest_multi_endpoint_is_not_guessed (test_lineage.LineageTests.test_multi_endpoint_is_not_guessed) ... ok\ntest_new_unmapped (test_lineage.LineageTests.test_new_unmapped) ... ok\ntest_no_automatic_reverse (test_lineage.LineageTests.test_no_automatic_reverse) ... ok\ntest_no_missing_fields (test_lineage.LineageTests.test_no_missing_fields) ... ok\ntest_old_inventory (test_lineage.LineageTests.test_old_inventory) ... ok\ntest_partial_is_visible (test_lineage.LineageTests.test_partial_is_visible) ... ok\ntest_pin_drift (test_lineage.LineageTests.test_pin_drift) ... ok\ntest_planner_never_writes (test_lineage.LineageTests.test_planner_never_writes) ... ok\ntest_schema_version (test_lineage.LineageTests.test_schema_version) ... ok\ntest_scope_drift (test_lineage.LineageTests.test_scope_drift) ... ok\ntest_three_way_states (test_lineage.LineageTests.test_three_way_states) ... ok\ntest_tombstone_needs_lineage (test_lineage.LineageTests.test_tombstone_needs_lineage) ... ok\ntest_unsafe_path (test_lineage.LineageTests.test_unsafe_path) ... ok\ntest_apply_idempotent_rollback_replay (test_recipe.RecipeTests.test_apply_idempotent_rollback_replay) ... ok\ntest_check_no_write (test_recipe.RecipeTests.test_check_no_write) ... ok\ntest_dependency_guard (test_recipe.RecipeTests.test_dependency_guard) ... ok\ntest_duplicate_json_key (test_recipe.RecipeTests.test_duplicate_json_key) ... ok\ntest_duplicate_output (test_recipe.RecipeTests.test_duplicate_output) ... ok\ntest_empty_file_not_absent (test_recipe.RecipeTests.test_empty_file_not_absent) ... ok\ntest_explicit_crash_recovery (test_recipe.RecipeTests.test_explicit_crash_recovery) ... ok\ntest_guard_missing (test_recipe.RecipeTests.test_guard_missing) ... ok\ntest_guard_overlap (test_recipe.RecipeTests.test_guard_overlap) ... ok\ntest_interrupted_write_rolls_back (test_recipe.RecipeTests.test_interrupted_write_rolls_back) ... ok\ntest_invalid_recovery_state (test_recipe.RecipeTests.test_invalid_recovery_state) ... ok\ntest_lock_only_recovery (test_recipe.RecipeTests.test_lock_only_recovery) ... ok\ntest_lock_refusal (test_recipe.RecipeTests.test_lock_refusal) ... ok\ntest_missing_required_preimage (test_recipe.RecipeTests.test_missing_required_preimage) ... ok\ntest_mixed_state_refused (test_recipe.RecipeTests.test_mixed_state_refused) ... ok\ntest_mode_preserved (test_recipe.RecipeTests.test_mode_preserved) ... ok\ntest_noop_output (test_recipe.RecipeTests.test_noop_output) ... ok\ntest_output_directory (test_recipe.RecipeTests.test_output_directory) ... ok\ntest_plan_seal_drift (test_recipe.RecipeTests.test_plan_seal_drift) ... ok\ntest_postimage_drift_refuses_rollback (test_recipe.RecipeTests.test_postimage_drift_refuses_rollback) ... ok\ntest_preimage_drift_preserves_other_outputs (test_recipe.RecipeTests.test_preimage_drift_preserves_other_outputs) ... ok\ntest_recovery_foreign_plan (test_recipe.RecipeTests.test_recovery_foreign_plan) ... ok\ntest_recovery_preserves_foreign_edits (test_recipe.RecipeTests.test_recovery_preserves_foreign_edits) ... ok\ntest_resource_drift (test_recipe.RecipeTests.test_resource_drift) ... ok\ntest_resource_escape (test_recipe.RecipeTests.test_resource_escape) ... ok\ntest_symlink_file (test_recipe.RecipeTests.test_symlink_file) ... ok\ntest_symlink_parent (test_recipe.RecipeTests.test_symlink_parent) ... ok\ntest_unsafe_destinations (test_recipe.RecipeTests.test_unsafe_destinations) ... ok\ntest_evidence_outputs_do_not_self_hash (test_run_local.InputScopeTests.test_evidence_outputs_do_not_self_hash) ... ok\ntest_symlink_input_is_refused (test_run_local.InputScopeTests.test_symlink_input_is_refused) ... ok\ntest_unrelated_jdk_sources_are_not_receipt_inputs (test_run_local.InputScopeTests.test_unrelated_jdk_sources_are_not_receipt_inputs) ... ok\n\n----------------------------------------------------------------------\nRan 61 tests in 0.585s\n\nOK\n"
+    },
+    {
+      "argv": [
+        "python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "m3/migration",
+        "-p",
+        "test_recipe.py",
+        "-k",
+        "test_mode_preserved",
+        "-v"
+      ],
+      "chunk_id": "6c3d52",
+      "wall_time_seconds": 0.3599753,
+      "exit_code": 1,
+      "original_token_count": 171,
+      "output": "test_mode_preserved (test_recipe.RecipeTests.test_mode_preserved) ... FAIL\r\n\r\n======================================================================\r\nFAIL: test_mode_preserved (test_recipe.RecipeTests.test_mode_preserved)\r\n----------------------------------------------------------------------\r\nTraceback (most recent call last):\r\n  File \"C:\\worktrees\\M3jdk21-mindex-migration-20261002\\m3\\migration\\test_recipe.py\", line 149, in test_mode_preserved\r\n    self.assertEqual((self.workspace/\"existing.txt\").stat().st_mode & 0o777,0o755)\r\nAssertionError: 438 != 493\r\n\r\n----------------------------------------------------------------------\r\nRan 1 test in 0.018s\r\n\r\nFAILED (failures=1)\r\n"
+    }
+  ],
+  "conclusion": "61 POSIX tests PASS. Windows POSIX-mode assertion FAIL preserved: Python Windows stat reports 0666 rather than requested 0755. No weakened test or inferred Windows mode guarantee."
+}

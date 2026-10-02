@@ -66,3 +66,13 @@ String/HotSpot production paths; the clean merge result was checked without
 relabeling the 696 image as that merge tree's build. The task-owned private source
 clone has moved to S: with its C: logical path preserved. Current disk and memory
 failures are measured new observations; the historical C: claim remains corrected.
+
+## Published runtime draft and next combined image
+
+[Draft #23](https://github.com/hsoliwal/M3jdk21/pull/23) has evidence-only head
+`d7e6780744c80e188297008dd5e5540a9fe1f2cf`; its tested native source remains
+`69667e3f1ce673aaded2ad93e4ae2ecf6c59668b`. Master subsequently reached
+`45f546ff5bcb06a1b2604f14baf998785d98d9a1`, including the mapped backing
+classes and merged text/history ports. A separate locally merged runtime
+candidate and matched image build are next. The 696 receipts retain their
+original source/image identities and cannot certify that combined tree.

@@ -150,7 +150,22 @@
     "authorized_scope": "relevant MIndex-family migration requested by the user",
     "unrelated_private_data_allowed": false,
     "upstream_openjdk_license_preserved": true,
-    "published_this_session": false
+    "published_this_session": true,
+    "draft_prs": [
+      {
+        "number": 24,
+        "url": "https://github.com/hsoliwal/M3jdk21/pull/24",
+        "head": "d797ea139e80980fc057f2d370ea0dafeff9be7b",
+        "scope": "selected Route A and bounded Route B"
+      },
+      {
+        "number": 23,
+        "url": "https://github.com/hsoliwal/M3jdk21/pull/23",
+        "head": "d7e6780744c80e188297008dd5e5540a9fe1f2cf",
+        "tested_source": "69667e3f1ce673aaded2ad93e4ae2ecf6c59668b",
+        "scope": "matched restoration image and scoped Route C acceptance"
+      }
+    ]
   },
   "gaps": [
     "Master has runtime candidate ancestry without runtime content",
@@ -163,12 +178,14 @@
     {
       "pr": 19,
       "head": "584932a5f631bf8eb40b9525d18184085be1a404",
-      "role": "overlapping explicitview closure; consolidation pending"
+      "role": "overlapping explicitview closure; consolidation pending",
+      "current_state": "MERGED"
     },
     {
       "pr": 20,
       "head": "ffe4e25aaf361c77687758c91e16c9d3905356c1",
-      "role": "history/evidence audit"
+      "role": "history/evidence audit",
+      "current_state": "MERGED"
     }
   ],
   "runtime_candidate_build": {
@@ -177,6 +194,12 @@
     "build_exit": 0,
     "scope": "Matched complete fastdebug image, separate runtime branch; focused acceptance does not close all VM gates",
     "receipt": "m3/runtime-integration/evidence/20261002-candidate-696/acceptance.json",
-    "upstream_jtreg": "in-progress; historical2failures remain open"
+    "upstream_jtreg": "86 selected default and 16 selected enabled PASS; two original 4GiB StringJoiner pending, historical failures retained"
+  },
+  "observed_target_tip_after_pr19_pr20_merges": "45f546ff5bcb06a1b2604f14baf998785d98d9a1",
+  "current_work": {
+    "private_source_inventory": "module-sharded facts and mapping coverage; original syntax errors remain gates",
+    "merged_owner_consolidation": "plan and differential corpora pending; two physical closures remain isolated",
+    "runtime_master45_image": "separate exact combined-source build pending; never relabel696"
   }
 }

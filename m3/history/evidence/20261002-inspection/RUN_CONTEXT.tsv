@@ -1,0 +1,18 @@
+key	value
+mode	dry-run
+target	hsoliwal/M3jdk21
+target_commit	f18b9d6b2d43dcec36adc46dc915e623333e613c
+target_tree	8b82b91c3be3af7dfad2f3c1d2541ae9167b930d
+candidate	3776d6e674d6c9b04539ca24aca2504aa88d4a57
+upstream	890adb6410dab4606a4f26a942aed02fb2f55387
+workers	1
+distributed_execution	none
+git	git version 2.47.3
+local_checkout	publication fixture, NOT M3jdk21 checkout
+Maven	unavailable
+remote_desktop	no connected devices
+direct_network	DNS resolution unavailable; connector functional
+newer_observed_master	4a81f3b3050fa5572ec1ff9368e2c383231db2e6
+newer_master_tree	8b82b91c3be3af7dfad2f3c1d2541ae9167b930d
+publication_PR	20
+code_commit	ffe4e25aaf361c77687758c91e16c9d3905356c1

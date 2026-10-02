@@ -3760,6 +3760,7 @@
     },
     "historical_target_baseline": "8bb6215372e07712f1fdf5a0cb912af495007b19",
     "integrated_master_baseline": "4a81f3b3050fa5572ec1ff9368e2c383231db2e6",
-    "scope": "Selected Route A closure and bounded opt-in Route B; all other migration records and acceptance gates remain independently authoritative."
+    "scope": "Selected Route A closure and bounded opt-in Route B; all other migration records and acceptance gates remain independently authoritative.",
+    "integrated_master_commit": "45f546ff5bcb06a1b2604f14baf998785d98d9a1"
   }
 }

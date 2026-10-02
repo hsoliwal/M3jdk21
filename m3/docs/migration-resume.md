@@ -19,11 +19,11 @@ and a new master-based runtime restoration candidate have separate receipts.
 The selected Java implementation is committed at
 `f07a02a890720c6b25b5b8fafb0903ba9b2bf088`; `selected-code-binding.json` binds
 all eleven target bodies and the actual test receipts to that commit. The local
-integration incorporates master `4a81f3b3050fa5572ec1ff9368e2c383231db2e6`,
+integration incorporates master `45f546ff5bcb06a1b2604f14baf998785d98d9a1`,
 preserves its schema-1 naming authority and all 25 migration records, and adds
 eleven selected records. Its recipe includes the existing migration validator
 and prefix-Z module. Read `concurrent-owner-reconciliation.md` before combining
-this closure with draft PR #19; consolidate its duplicate physical owners first.
+this closure with merged PR #19; consolidate its duplicate physical owners first.
 
 The private inventory lives at
 `synexia-mindex/repository-inventory/docs/migration/`: `source-snapshot.json`
@@ -83,3 +83,10 @@ current public checkouts use C:, the private source checkout is an S: junction,
 private parser scratch uses S:, and native builds use WSL `/var/tmp`.
 JVM native-allocation failures were recorded separately; bounded test heaps do
 not turn a failed invocation into evidence. Installed JDKs remain unchanged.
+
+Published review surfaces: [draft #24](https://github.com/hsoliwal/M3jdk21/pull/24)
+for selected text/compiler/recipes and [draft #23](https://github.com/hsoliwal/M3jdk21/pull/23)
+for the separate runtime restoration. PRs #19 and #20 have merged into master.
+The immediate optimization gates are one physical Frozen/Joined owner with both
+facades, full private shard coverage despite original syntax failures, and a new
+complete native image built from the exact master45/runtime combined commit.
