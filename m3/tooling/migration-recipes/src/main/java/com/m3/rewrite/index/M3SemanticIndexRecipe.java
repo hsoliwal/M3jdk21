@@ -11,6 +11,7 @@ import org.openrewrite.Recipe;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.tree.Comment;
+import org.openrewrite.java.tree.Expression;
 import org.openrewrite.java.tree.J;
 
 /**
@@ -226,7 +227,8 @@ public final class M3SemanticIndexRecipe extends Recipe {
             ExecutionContext ctx) {
         String fieldKey = typeKey + "#field/" + ordinal + "/" + variable.getSimpleName();
         List<Node> atoms = new ArrayList<>();
-        if (variable.getInitializer() instanceof J initializer) {
+        Expression initializer = variable.getInitializer();
+        if (initializer != null) {
             M3SemanticFingerprint atomFingerprint =
                     M3JavaSemanticHasher.fingerprint("FIELD_INITIALIZER", initializer);
             Node atom = node(
