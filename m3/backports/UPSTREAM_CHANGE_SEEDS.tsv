@@ -1,0 +1,14 @@
+release	jbs	title	component	disposition	reason	upstream_commit
+27	JDK-8378559	Allow Execution State Initialization Before Foreign Function Downcalls	core-libs/java.lang.foreign	candidate-high-risk	FFM API/runtime/native dependency closure required.	
+27	JDK-8357439	Add Bash Autocompletion for jcmd	core-svc/tools	admitted	Additive tool files only; target paths absent; upstream commit pinned.	8549d1896054dd230ba3038c83bce23b10dcda22
+27	JDK-8367584	Add help and redaction controls for -XX:FlightRecorderOptions	hotspot/jfr	candidate-high-risk	Help portion may be separable; redaction controls depend on JEP 536.	
+27	JDK-8374348	Add -XX:AOTMode=required alias for -XX:AOTMode=on	hotspot/runtime	hold-dependency	JDK 21 lacks the later AOT mode infrastructure.	
+27	JDK-8364182	Add jcmd VM.security_properties	hotspot/svc	candidate-high-risk	Serviceability improvement; inspect runtime/security-property dependencies.	
+27	JDK-8359706	Report current open file descriptors in VM.info and hs_err_pid	hotspot/svc	candidate-high-risk	Diagnostics improvement; platform-specific OS support and fatal-error path tests required.	
+27	JDK-8368692	Add jdk.security.password.allowSystemIn security property	security-libs/java.security	candidate-high-risk	Default preserves current behavior but adds policy surface; compatibility/security review required.	
+27	JDK-8374808	Add KeyStore creation-date Instant methods	security-libs/java.security	candidate	Additive API; requires CSR/API compatibility and provider tests.	
+27	JDK-8347938	Support latest ML-KEM and ML-DSA private-key encodings	security-libs/java.security	candidate-high-risk	Changes generated-key default encoding; decode compatibility and post-quantum provider lineage required.	
+27	JDK-8347112	Make javadoc copy doc-files subdirectories by default	tools/javadoc	candidate	Tool behavior improvement; no Java grammar change; default-output compatibility test required.	
+27	JDK-8284315	Make DocTrees.getElement consistent with javax.lang.model	tools/javac	hold-javac	Compiler-tree API behavioral correction touches javac; locked compiler lane requires explicit review.	
+27	JDK-8371873	Reject characters after ASCII SUB in source files	tools/javac	hold-javac	Changes javac source acceptance; excluded by locked compiler/source-semantics rule.	
+27	JDK-8371683	Reject TYPE_USE annotations on var lambda parameters	tools/javac	hold-javac	Changes javac source acceptance/type checking; excluded by locked compiler/source-semantics rule.	
