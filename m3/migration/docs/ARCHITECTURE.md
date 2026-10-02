@@ -31,6 +31,16 @@ Dependencies flow downward wherever possible. Tooling, Maven/OpenRewrite, applic
 - Precomputation has admission, invalidation, eviction, concurrency and amortization costs. A local allocation saving cannot justify an unbounded process-global cache.
 - A passing Route A experiment does not certify compiler lowering or a matched custom JDK.
 
+### Atomization → patternization → mapping
+
+Every replacement starts with a sealed semantic boundary. Decompose only inside that boundary into semantic atoms, record typed dependencies, and collapse unresolved cycles into compound atoms so the review graph is a deterministic DAG. An atom can be smaller than a class or span several tightly coupled methods/fields when their behavior cannot yet be separated safely.
+
+Recurring atom transformations become patterns only after their contracts match. Pattern identity includes semantic preconditions, required attribution/context, refusal cases, postconditions, recipe/patch version, evidence obligations and cost model. Structural/hash similarity is discovery evidence, not an equivalence decision.
+
+Lineage is maintained as source capability → source atom(s) → pattern/version → deterministic recipe/adaptation → target atom(s) → target symbol(s) → evidence. Relationships may split, merge or retain target-only adaptations. The existing capability mapping remains authoritative; atom/pattern metadata supplements it and must not become a parallel status registry.
+
+Independent atom analysis and local recipe work can proceed in parallel. Promotion is serial at the sealed contract boundary and is blocked by any unmapped required atom, unresolved pattern conflict or failed target evidence.
+
 ## First-class replacement workstreams
 
 String/text and collections are the first deep vertical slices because they exercise immutable sharing, mutable identity, views, generic boundaries, JNI/VM integration and performance measurement in different ways.
