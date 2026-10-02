@@ -210,3 +210,66 @@ This batch supplies worked examples and review decisions. It does not:
 - change licenses or export private source payloads
 
 Implementation contributors can now bind each scenario to the selected operational records and fill exact-head evidence without treating these examples as completed work.
+
+
+## 11. Whole-JDK programme crosswalk
+
+The worked examples above now feed the broader whole-JDK packets in
+[whole-jdk-work-packets-and-resume.md](whole-jdk-work-packets-and-resume.md).
+The architecture and subsystem matrix deliberately reuse the same mapping lifecycle rather than
+creating a JDK-specific registry.
+
+A concrete JDK packet starts with the current public owner and its exact contract, then links the
+relevant Synexia owner only after semantic review. For example, a primitive packed hash map is a
+candidate storage donor for internal map lanes; it is not by itself a replacement for generic
+`HashMap<K,V>`, whose null, equality, view, callback, iteration, serialization and collision
+contracts remain separately mapped.
+
+## 12. Case F: identity-sensitive collection backend
+
+Hypothesis: a compact indexed key store can canonicalize equal text keys.
+
+For ordinary `HashMap`, equality is value/equality based. For `IdentityHashMap`, key comparison
+is reference identity. Reusing a canonical text atom as the key identity for both would collapse
+distinct references and change behavior.
+
+The mapping must therefore keep separate capabilities and identity rules. A compact
+`IdentityHashMap` may use primitive occupancy/hash metadata, but it must retain the original key
+references and compare them by reference identity.
+
+Required evidence: equal-but-distinct references, null, resize, removal, entry views and
+serialization/compatibility scope. “Same content” is not an admissible shortcut.
+
+## 13. Case G: concurrent memory win fails a semantic gate
+
+Hypothesis: a compact concurrent map candidate reduces retained heap substantially and passes
+single-threaded API tests, but stress testing observes a retrieval that can miss a completed
+same-key update because publication ordering is insufficient.
+
+Disposition:
+
+- retain the memory result as diagnostic evidence for that exact candidate;
+- mark the candidate blocked;
+- do not advance its behavior evidence to accepted;
+- identify the missing happens-before/linearization requirement;
+- produce a new candidate and rerun both correctness and memory measurements.
+
+Performance never waives the Java Memory Model.
+
+## 14. Case H: AST/DAG storage consolidation
+
+Hypothesis: two source owners use similar primitive child/edge lanes and appear mergeable.
+
+Before consolidation, prove:
+
+- AST child order remains significant;
+- source positions/attribution remain bound to the correct node/generation;
+- DAG edge direction, kind, multiplicity and payload are preserved;
+- cycle policy is explicit;
+- numeric node IDs are namespace/generation qualified.
+
+If those contracts differ, retain separate semantic owners over shared lower-level primitive storage
+rather than creating one universal graph object.
+
+Required evidence: ordered AST round trip, attribution/source-range tests, parallel-edge cases,
+cycle/malformed input, generation/stale-handle rejection and deterministic traversal where promised.

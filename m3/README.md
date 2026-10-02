@@ -26,3 +26,29 @@ The image writer uses CREATE_NEW and never overwrites a mapped file. Build outpu
 The newly available Synexia PR 7388 is reconciled in `docs/synexia-reconciliation.md`; its existing Frozen/Joined/pool owners remain authoritative for Synexia. P0 types are provisional format experiments, not competing replacement APIs.
 
 See `docs/stages.md`, `docs/name-mapping.json`, and `evidence/constructor-pool-retirement.md`. No speedup, complete compatibility, or full jtreg pass is claimed.
+
+
+## Whole-JDK M3 programme documentation
+
+Stage P0 above remains a bounded implemented foundation milestone. It is not the scope boundary for
+the broader M3 JDK programme.
+
+The documentation-only whole-JDK handoff is:
+
+- [Whole-JDK architecture and migration specification](docs/whole-jdk-m3-architecture.md)
+- [Inventory framework and subsystem migration matrix](docs/jdk-subsystem-migration-matrix.md)
+- [Collections replacement specification](docs/collections-replacement-spec.md)
+- [String and text replacement specification](docs/string-text-replacement-spec.md)
+- [Implementation work packets, measurement plan and durable resume guide](docs/whole-jdk-work-packets-and-resume.md)
+- [Durable mapping lifecycle](docs/migration-mapping-lifecycle.md)
+- [Worked enhancement-port decisions](docs/migration-worked-port-decisions.md)
+
+The programme covers the complete JDK/runtime, including collections, compiler, VM, GC, JIT,
+native boundaries and serviceability. The documents do not claim those subsystems are already
+implemented or accepted. The current operational public mapping authority remains
+`docs/name-mapping.json`; implementation PRs reconcile new capabilities there instead of creating
+a competing registry.
+
+Branch-scoped migration manifests, runtime candidates and test receipts remain bound to their exact
+branches/commits until explicitly reconciled. Production source, recipes, generated coverage,
+acceptance evidence and installed JDKs are not changed by the documentation handoff.

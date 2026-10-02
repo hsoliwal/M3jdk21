@@ -107,3 +107,34 @@ For compiler transformations, include the source map and semantic preconditions.
 ## Required follow-on tooling, not included here
 
 Implementers may add a schema validator, source/target existence checks, dangling dependency detection, reciprocal enhancement links, hash verification and a CI rule preventing unsupported promotion. That tooling must have its own tests. This documentation PR neither installs nor runs it.
+
+
+## Whole-JDK programme extension (2026-10-02)
+
+The whole-JDK programme is specified by:
+
+- [Whole-JDK M3 architecture](whole-jdk-m3-architecture.md)
+- [JDK subsystem migration matrix](jdk-subsystem-migration-matrix.md)
+- [Collections replacement specification](collections-replacement-spec.md)
+- [String/text replacement specification](string-text-replacement-spec.md)
+- [Work packets and durable resume guide](whole-jdk-work-packets-and-resume.md)
+
+These documents extend the scope of migration review; they do **not** establish a new operational registry. Future implementation PRs must reconcile new JDK capabilities into the existing `name-mapping.json` `migration.records` authority and its selected validator/tooling. Do not pre-populate invented “accepted” records merely to make the architecture matrix look complete.
+
+For whole-JDK work, each source inventory row must resolve to a stable capability mapping or an explicit reviewed disposition: replace backend, adapt, reuse, retain pending evidence, platform-specific, blocked, deferred or excluded custody/archive material. A package-level disposition cannot hide symbol-specific JNI, serialization, reflection, subclass, generated-source or VM obligations.
+
+The existing many-to-many mapping rule becomes especially important for JDK work. One public class may project several storage/runtime owners; one M3 primitive may support several public owners; compiler lowering and VM/native consumers may be separate destinations for one source capability. Keep these relationships explicit rather than treating similar class names as a one-to-one rename.
+
+A whole-JDK migration record should additionally identify, when applicable:
+
+- JDK module and bootstrap phase;
+- Java public/internal owner;
+- HotSpot/GC/JIT consumers;
+- JNI/JVMTI/FFM/native consumers;
+- generated-source/build producer;
+- serialization/reflection/service surfaces;
+- Route A/B/C applicability;
+- memory-model/linearization obligations;
+- exact platform/collector scope.
+
+Promotion still requires exact candidate evidence. An inventory row, a retained file, a successful recipe replay, a compiling tree, a benchmark win and an accepted runtime are distinct states.
