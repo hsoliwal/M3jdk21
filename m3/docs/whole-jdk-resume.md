@@ -165,6 +165,8 @@ Preserve:
 
 These are intentionally not resolved by the docs-only PR:
 
+Current Synexia collection heads are branch-scoped evidence only. Re-fetch their exact head/base before implementation; do not transfer focused tests, JNI receipts or recipe evidence into the JDK mapping without executing the target-side gates.
+
 - complete package/symbol/native/resource/test census under each of the 70 JDK modules and HotSpot;
 - exact minimal M3 substrate eligible for early `java.base`;
 - which `synexia-common`, MIndex or MAT collection engines are semantic matches versus reference/donor material;
@@ -177,6 +179,10 @@ These are intentionally not resolved by the docs-only PR:
 - per-platform native/CPU coverage;
 - measured break-even points for each proposed layout;
 - whether any candidate is beneficial enough to enable by default.
+- whether GitHub-merged stacked collection atoms #7662/#7667 are retained on the selected Synexia default-branch source pin; merge state alone is insufficient.
+- how draft #7705's segmented CAS lanes, primitive streams and JNI/native path relate to existing concurrent collection owners, and which linearization/JMM/GC/JNI obligations remain unsatisfied for JDK use.
+- how draft sorted/range branches #7702/#7707/#7709/#7713 reconcile before any TreeMap/TreeSet/Navigable owner is selected.
+- whether the draft concurrent BooleanQueue repair #7700 exposes a wider adapter-family defect; audit the exact adapter family instead of extrapolating from primitive storage tests.
 
 Treat “retain current JDK owner” as a valid outcome when evidence does not justify replacement.
 
