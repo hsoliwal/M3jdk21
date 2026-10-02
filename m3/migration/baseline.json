@@ -10,8 +10,11 @@
   "target": {
     "repository": "hsoliwal/M3jdk21",
     "default_branch": "master",
-    "commit": "3029cff40e927aefcca444a6ef759a562204579c",
-    "tree": "26554d002cf158c97dd4ffbb06b3885b647c0a17"
+    "commit": "8bb6215372e07712f1fdf5a0cb912af495007b19",
+    "tree": "26554d002cf158c97dd4ffbb06b3885b647c0a17",
+    "initial_inspected_commit": "3029cff40e927aefcca444a6ef759a562204579c",
+    "branch_implementation_base": "8bb6215372e07712f1fdf5a0cb912af495007b19",
+    "initial_and_implementation_base_same_tree": true
   },
   "design_contract": {
     "path": "m3/docs/shared-atom-concatenation.md",
@@ -131,6 +134,7 @@
   "notes": [
     "Historical receipts are evidence only for the exact revisions that produced them.",
     "Open source PRs are not treated as merged source baseline.",
-    "The full repository recursive tree is truncated by GitHub; inventory therefore uses explicit active module tree pins and records excluded/pending roots."
+    "The full repository recursive tree is truncated by GitHub; inventory therefore uses explicit active module tree pins and records excluded/pending roots.",
+    "The implementation branch was created after master advanced to 8bb6215372e07712f1fdf5a0cb912af495007b19; that commit has the same tree 26554d002cf158c97dd4ffbb06b3885b647c0a17 as the initially inspected 3029cff40e927aefcca444a6ef759a562204579c."
   ]
 }
