@@ -92,7 +92,7 @@ public final class M3SemanticIndexPayload {
                 in.readNBytes(length);
             }
             int nodeCount = positiveOrZero(in.readInt(), "nodeCount");
-            long nodeBytes = Math.multiplyExact((long) nodeCount, 12L * Integer.BYTES + 3L * Long.BYTES);
+            long nodeBytes = Math.multiplyExact((long) nodeCount, 9L * Integer.BYTES + 3L * Long.BYTES);
             if (nodeBytes > in.available()) throw new IllegalArgumentException("node payload");
             in.skipNBytes(nodeBytes);
             int edgeCount = positiveOrZero(in.readInt(), "edgeCount");
