@@ -76,6 +76,36 @@ public final class M3IndexDB implements AutoCloseable {
         return artifact;
     }
 
+    public synchronized M3IndexDbArtifact putSemanticIndex(
+            String name,
+            M3IndexDbSemanticIndex index) throws IOException {
+        ensureOpen();
+        M3IndexDbSemanticIndex checked = Objects.requireNonNull(index, "index");
+        return putArtifact(
+                name,
+                M3IndexDbSemanticIndex.ARTIFACT_KIND,
+                M3IndexDbSemanticIndex.FORMAT_VERSION,
+                checked.encode());
+    }
+
+    public synchronized M3IndexDbSemanticIndex requireSemanticIndex(String name)
+            throws IOException {
+        ensureOpen();
+        M3IndexDbArtifact artifact = requireArtifact(name);
+        if (!M3IndexDbSemanticIndex.ARTIFACT_KIND.equals(artifact.kind())) {
+            throw new IOException("M3 semantic index kind mismatch: " + artifact.kind());
+        }
+        if (artifact.formatVersion() != M3IndexDbSemanticIndex.FORMAT_VERSION) {
+            throw new IOException(
+                    "M3 semantic index format mismatch: " + artifact.formatVersion());
+        }
+        try {
+            return M3IndexDbSemanticIndex.decode(artifact.payload());
+        } catch (IllegalArgumentException corrupt) {
+            throw new IOException("M3 semantic index payload is invalid", corrupt);
+        }
+    }
+
     public synchronized boolean containsArtifact(String name) {
         ensureOpen();
         return Files.isRegularFile(refPath(name));
