@@ -26,6 +26,8 @@ jobs:
         run: |
           python3 m3/runtime-integration/recipe/apply.py --check
           python3 m3/runtime-integration/recipe/test_recipe.py
+      - name: Verify scoped OpenRewrite recipe contracts
+        run: mvn -B -f m3/tooling/migration-recipes/pom.xml verify
       - name: Build and exercise immutable foundation
         run: ./m3/build.sh
       - name: Compare pinned Synexia content and range contract
