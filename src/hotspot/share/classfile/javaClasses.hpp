@@ -54,9 +54,7 @@ class java_lang_Object : AllStatic {
 class java_lang_String : AllStatic {
  private:
   static int _value_offset;
-  static int _m3Parts_offset;
-  static int _m3Ranges_offset;
-  static int _m3Length_offset;
+  static int _mindex_offset;
   static int _hash_offset;
   static int _hashIsZero_offset;
   static int _coder_offset;
@@ -103,9 +101,10 @@ class java_lang_String : AllStatic {
   static Handle create_from_platform_dependent_str(const char* str, TRAPS);
 
   static void set_compact_strings(bool value);
-  static void set_m3_segmented_strings(bool value);
+  static void set_m3_joined_strings(bool value);
 
   static int value_offset() { CHECK_INIT(_value_offset); }
+  static int m3_storage_offset() { CHECK_INIT(_mindex_offset); }
   static int coder_offset() { CHECK_INIT(_coder_offset); }
 
   static inline void set_value_raw(oop string, typeArrayOop buffer);
@@ -125,11 +124,12 @@ class java_lang_String : AllStatic {
   static inline bool test_and_set_deduplication_requested(oop java_string);
 
   // Accessors
-  // These readers never allocate Java objects or safepoint.
-  static inline bool is_segmented(oop java_string);
-  static inline jchar char_at(oop java_string, int index);
   static inline typeArrayOop value(oop java_string);
   static inline typeArrayOop value_no_keepalive(oop java_string);
+  static inline oop m3_storage(oop java_string);
+  static inline oop m3_storage_no_keepalive(oop java_string);
+  static inline bool is_m3_joined(oop java_string);
+  static inline jchar char_at(oop java_string, int index);
   static inline bool hash_is_set(oop string);
   static inline bool is_latin1(oop java_string);
   static inline bool deduplication_forbidden(oop java_string);
@@ -202,6 +202,46 @@ class java_lang_String : AllStatic {
   static void print(oop java_string, outputStream* st);
   friend class JavaClasses;
   friend class StringTable;
+};
+
+/**
+ * VM access to java.lang.MIndexString.  The Java object owns the GC-visible
+ * segment references; HotSpot reads the immutable coordinate arrays directly
+ * for JNI/StringTable/debug paths that cannot assume contiguous String.value.
+ */
+class java_lang_MIndexString : AllStatic {
+ private:
+  static int _storageKind_offset;
+  static int _localValue_offset;
+  static int _mappedAddress_offset;
+  static int _segments_offset;
+  static int _offsets_offset;
+  static int _ends_offset;
+  static int _length_offset;
+  static int _coder_offset;
+  static int _javaHash_offset;
+
+ public:
+  enum StorageKind {
+    EMPTY = 0,
+    LOCAL = 1,
+    LEXICON = 2,
+    JOINED = 3
+  };
+
+  static void compute_offsets();
+  static void serialize_offsets(SerializeClosure* f) NOT_CDS_RETURN;
+
+  static inline jbyte storage_kind(oop storage);
+  static inline typeArrayOop local_value(oop storage);
+  static inline jlong mapped_address(oop storage);
+  static inline objArrayOop segments(oop storage);
+  static inline typeArrayOop offsets(oop storage);
+  static inline typeArrayOop ends(oop storage);
+  static inline int length(oop storage);
+  static inline jbyte coder(oop storage);
+  static inline jint java_hash(oop storage);
+  static inline jchar char_at(oop storage, int index);
 };
 
 

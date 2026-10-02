@@ -662,7 +662,7 @@ static jint invoke_string_value_callback(jvmtiStringPrimitiveValueCallback cb,
 
   // JDK-6584008: the value field may be null if a String instance is
   // partially constructed.
-  bool segmented = java_lang_String::is_segmented(str);
+  bool segmented = java_lang_String::is_m3_joined(str);
   if (s_value == nullptr && !segmented) {
     return 0;
   }

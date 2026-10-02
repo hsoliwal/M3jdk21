@@ -2160,14 +2160,14 @@ JNI_ENTRY_NO_PRESERVE(const jchar*, jni_GetStringChars(
   jchar* buf = nullptr;
   oop s = JNIHandles::resolve_non_null(string);
   typeArrayOop s_value = java_lang_String::value(s);
-  if (s_value != nullptr || java_lang_String::is_segmented(s)) {
+  if (s_value != nullptr || java_lang_String::is_m3_joined(s)) {
     int s_len = java_lang_String::length(s, s_value);
     bool is_latin1 = java_lang_String::is_latin1(s);
     buf = NEW_C_HEAP_ARRAY_RETURN_NULL(jchar, s_len + 1, mtInternal);  // add one for zero termination
     /* JNI Specification states return null on OOM */
     if (buf != nullptr) {
       if (s_len > 0) {
-        if (!is_latin1 && !java_lang_String::is_segmented(s)) {
+        if (!is_latin1 && !java_lang_String::is_m3_joined(s)) {
           ArrayAccess<>::arraycopy_to_native(s_value, (size_t) typeArrayOopDesc::element_offset<jchar>(0),
                                              buf, s_len);
         } else {
@@ -2230,7 +2230,7 @@ JNI_ENTRY(const char*, jni_GetStringUTFChars(JNIEnv *env, jstring string, jboole
   char* result = nullptr;
   oop java_string = JNIHandles::resolve_non_null(string);
   typeArrayOop s_value = java_lang_String::value(java_string);
-  if (s_value != nullptr || java_lang_String::is_segmented(java_string)) {
+  if (s_value != nullptr || java_lang_String::is_m3_joined(java_string)) {
     size_t length = java_lang_String::utf8_length(java_string, s_value);
     /* JNI Specification states return null on OOM */
     result = AllocateHeap(length + 1, mtInternal, AllocFailStrategy::RETURN_NULL);
@@ -2756,7 +2756,7 @@ JNI_ENTRY(void, jni_GetStringRegion(JNIEnv *env, jstring string, jsize start, js
   } else {
     if (len > 0) {
       bool is_latin1 = java_lang_String::is_latin1(s);
-      if (!is_latin1 && !java_lang_String::is_segmented(s)) {
+      if (!is_latin1 && !java_lang_String::is_m3_joined(s)) {
         ArrayAccess<>::arraycopy_to_native(s_value, typeArrayOopDesc::element_offset<jchar>(start),
                                            buf, len);
       } else {
@@ -2824,7 +2824,7 @@ JNI_ENTRY(const jchar*, jni_GetStringCritical(JNIEnv *env, jstring string, jbool
   HOTSPOT_JNI_GETSTRINGCRITICAL_ENTRY(env, string, (uintptr_t *) isCopy);
   oop s = JNIHandles::resolve_non_null(string);
   jchar* ret;
-  if (!java_lang_String::is_latin1(s) && !java_lang_String::is_segmented(s)) {
+  if (!UseM3StringStorage && !java_lang_String::is_latin1(s)) {
     typeArrayHandle s_value(thread, java_lang_String::value(s));
 
     // Pin value array
@@ -2856,7 +2856,7 @@ JNI_ENTRY(void, jni_ReleaseStringCritical(JNIEnv *env, jstring str, const jchar 
   oop s = JNIHandles::resolve_non_null(str);
   bool is_latin1 = java_lang_String::is_latin1(s);
 
-  if (is_latin1 || java_lang_String::is_segmented(s)) {
+  if (UseM3StringStorage || is_latin1) {
     // Latin1 and segmented Strings return a native copy from GetStringCritical.
     // This assumes that ReleaseStringCritical bookends GetStringCritical.
     FREE_C_HEAP_ARRAY(jchar, chars);
