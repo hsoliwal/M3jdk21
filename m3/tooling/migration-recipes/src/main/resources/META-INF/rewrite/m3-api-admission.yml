@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.M3LibraryApiAdmission
+displayName: Inventory M3 library API admission surface
+description: >-
+  Non-mutating LIBRARY_API pass that computes deterministic public/protected module and
+  library surface roots before any exported contract change can be considered.
+recipeList:
+  - com.m3.rewrite.scope.M3LibraryApiSurfaceRecipe
