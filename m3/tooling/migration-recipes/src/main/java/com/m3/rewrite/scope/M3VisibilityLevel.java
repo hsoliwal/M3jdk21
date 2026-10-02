@@ -24,9 +24,13 @@ public enum M3VisibilityLevel {
 
     public static M3VisibilityLevel ofMember(
             List<J.Modifier> modifiers,
-            boolean interfaceOwner) {
+            J.ClassDeclaration.Kind.Type ownerKind) {
         M3VisibilityLevel explicit = of(modifiers);
-        if (explicit == PACKAGE && interfaceOwner) return PUBLIC;
+        if (explicit == PACKAGE
+                && (ownerKind == J.ClassDeclaration.Kind.Type.Interface
+                        || ownerKind == J.ClassDeclaration.Kind.Type.Annotation)) {
+            return PUBLIC;
+        }
         return explicit;
     }
 
