@@ -50,6 +50,9 @@ public final class M3RecipeScopeRegistry {
                     "com.m3.rewrite.index.M3TypeRelationRecipe",
                     fixed(M3EditScope.MODULE)),
             Map.entry(
+                    "com.m3.rewrite.index.M3WholeSemanticHashRecipe",
+                    fixed(M3EditScope.MULTI_MODULE)),
+            Map.entry(
                     "com.m3.rewrite.index.M3SemanticIndexM3DbBridgeRecipe",
                     fixed(M3EditScope.MULTI_MODULE)),
             Map.entry(
