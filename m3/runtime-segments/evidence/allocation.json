@@ -1,0 +1,53 @@
+{
+  "method": "Same matched image, -Xint both modes, G1 256MiB, dedup off; 200 warmup joins, 2000 measured joins of two prebuilt 8192-unit Strings, one LATIN1 and one UTF16; output array escapes; metadata+object allocations counted by ThreadMXBean; payload identity inspected outside timing. Other verification processes were active; wall times are not isolated throughput results.",
+  "forks": [
+    {
+      "segmented": false,
+      "joins": 2000,
+      "allocated_bytes": 65648192,
+      "operation_ns": 771429065,
+      "retained_leaf_arrays": 2000,
+      "leaf_payload_bytes": 65536000
+    },
+    {
+      "segmented": true,
+      "joins": 2000,
+      "allocated_bytes": 192208,
+      "operation_ns": 2219617,
+      "retained_leaf_arrays": 2,
+      "leaf_payload_bytes": 24576
+    },
+    {
+      "segmented": false,
+      "joins": 2000,
+      "allocated_bytes": 65648192,
+      "operation_ns": 827832546,
+      "retained_leaf_arrays": 2000,
+      "leaf_payload_bytes": 65536000
+    },
+    {
+      "segmented": true,
+      "joins": 2000,
+      "allocated_bytes": 192208,
+      "operation_ns": 2099429,
+      "retained_leaf_arrays": 2,
+      "leaf_payload_bytes": 24576
+    },
+    {
+      "segmented": false,
+      "joins": 2000,
+      "allocated_bytes": 65648192,
+      "operation_ns": 803436315,
+      "retained_leaf_arrays": 2000,
+      "leaf_payload_bytes": 65536000
+    },
+    {
+      "segmented": true,
+      "joins": 2000,
+      "allocated_bytes": 192208,
+      "operation_ns": 2392654,
+      "retained_leaf_arrays": 2,
+      "leaf_payload_bytes": 24576
+    }
+  ]
+}

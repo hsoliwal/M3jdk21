@@ -145,6 +145,15 @@ public class OopUtilities {
 
   public static String stringOopToString(Oop stringOop) {
     InstanceKlass k = (InstanceKlass) stringOop.getKlass();
+    OopField mindexField = (OopField) k.findField("mindex", "Ljava/lang/MIndexString;");
+    if (mindexField != null && mindexField.getValue(stringOop) != null) {
+      Oop storage = mindexField.getValue(stringOop);
+      InstanceKlass sk = (InstanceKlass) storage.getKlass();
+      int length = ((IntField) sk.findField("length", "I")).getValue(storage);
+      StringBuilder result = new StringBuilder(length);
+      for (int i = 0; i < length; i++) result.append(mindexCharAt(storage, i));
+      return result.toString();
+    }
     coderField  = (ByteField) k.findField("coder", "B");
     valueField  = (OopField) k.findField("value",  "[B");
     if (Assert.ASSERTS_ENABLED) {
@@ -152,6 +161,33 @@ public class OopUtilities {
        Assert.that(valueField != null, "Field \'value\' of java.lang.String not found");
     }
     return byteArrayToString((TypeArray) valueField.getValue(stringOop), coderField.getValue(stringOop));
+  }
+
+  private static char mindexCharAt(Oop storage, int index) {
+    InstanceKlass k = (InstanceKlass) storage.getKlass();
+    int kind = ((ByteField) k.findField("storageKind", "B")).getValue(storage);
+    if (kind == 1) {
+      TypeArray bytes = (TypeArray) ((OopField) k.findField("localValue", "[B")).getValue(storage);
+      byte coder = ((ByteField) k.findField("coder", "B")).getValue(storage);
+      return coder == 0 ? (char)(bytes.getByteAt(index) & 255) : bytes.getCharAt(index);
+    }
+    if (kind == 2 || kind == 4) {
+      long raw = ((LongField) k.findField("mappedAddress", "J")).getValue(storage);
+      Address address = VM.getVM().getDebugger().newAddress(raw);
+      int a = address.getJByteAt((long)index * 2) & 255;
+      int b = address.getJByteAt((long)index * 2 + 1) & 255;
+      return kind == 4 ? (char)((a << 8) | b) : (char)(a | (b << 8));
+    }
+    ObjArray parts = (ObjArray) ((OopField) k.findField("segments", "[Ljava/lang/MIndexString;")).getValue(storage);
+    TypeArray starts = (TypeArray) ((OopField) k.findField("offsets", "[I")).getValue(storage);
+    TypeArray ends = (TypeArray) ((OopField) k.findField("ends", "[I")).getValue(storage);
+    int previous = 0;
+    for (int i = 0; i < parts.getLength(); i++) {
+      int end = ends.getIntAt(i);
+      if (index < end) return mindexCharAt(parts.getObjAt(i), starts.getIntAt(i) + index - previous);
+      previous = end;
+    }
+    throw new IllegalStateException("invalid MIndexString geometry");
   }
 
   public static String stringOopToEscapedString(Oop stringOop) {

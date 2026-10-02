@@ -1,0 +1,14 @@
+make images JOBS=5 exit=0
+Full build log SHA256 3881d09699fe5948bb8af3c607ee5ee075e893a6fd6fa500ca5c335bd1630284
+/workspace/M3jdk21/src/hotspot/share/gc/z/zArray.inline.hpp:99:21: warning: template-id not allowed for destructor in C++20 [-Wtemplate-id-cdtor]
+   99 | ZActivatedArray<T>::~ZActivatedArray<T>() {
+      |                     ^
+/workspace/M3jdk21/src/hotspot/share/gc/z/zArray.inline.hpp:99:21: note: remove the '< >'
+Creating interim java.base.jmod
+Creating interim jimage
+Creating jdk.jlink.jmod
+Creating java.base.jmod
+Creating jdk image
+Creating CDS archive for jdk image for server
+Creating CDS-NOCOOPS archive for jdk image for server
+Finished building target 'images' in configuration 'linux-x86_64-server-fastdebug'

@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "tested_candidate_commit": "69667e3f1ce673aaded2ad93e4ae2ecf6c59668b",
+  "manual_owner_review": {
+    "production_changes_relative_to_donor": 0,
+    "portability_files": 5,
+    "checks": [
+      "git -c core.autocrlf=false keeps pinned raw-byte postimages on Windows",
+      "sys.executable preserves the actual Python interpreter in nested tests",
+      "all original recipe assertions and source preconditions preserved",
+      "25production raw files equal donor#6",
+      "read-only latest-master merge preserves incoming files"
+    ],
+    "accepted_actionable_findings": [],
+    "scope": "restoration equivalence plus five real portability edits; does not certify unsupported runtime gates"
+  },
+  "structured_review": {
+    "command": "python C:/Users/hsoliwal/.codex/skills/autoreview/scripts/autoreview --mode branch --base 3776d6e674d6c9b04539ca24aca2504aa88d4a57",
+    "exit": 1,
+    "engine_invoked": false,
+    "failure": "MemoryError in source_tree_snapshot/source_file_fingerprint at os.read(descriptor, 1024 * 1024)",
+    "passed": false
+  },
+  "integration_ready": false
+}

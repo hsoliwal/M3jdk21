@@ -1,0 +1,13 @@
+ENABLED_SHORT_RESUME_EXIT=0
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+Picked up JAVA_TOOL_OPTIONS: -Xms16m -Xmx256m
+Test results: passed: 3; did not match prior status: 13
+Report written to /var/tmp/m3-runtime-migration-20261002/jtreg-candidate-696/jtreg-enabled-report/html/report.html
+Results written to /var/tmp/m3-runtime-migration-20261002/jtreg-candidate-696/jtreg-enabled-work
+JTREG_MATCHED_RESULTS {'jtreg-final-default': {'Passed': 86, 'Failed': 0, 'Error': 0, 'unknown': 0}, 'jtreg-enabled': {'Passed': 16, 'Failed': 0, 'Error': 0, 'unknown': 0}}
+/var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/images/jdk/release: OK
+/var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/images/jdk/bin/java: OK
+/var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/images/jdk/lib/modules: OK
+/var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/images/jdk/lib/server/libjvm.so: OK
+/var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/images/jdk/lib/libjava.so: OK

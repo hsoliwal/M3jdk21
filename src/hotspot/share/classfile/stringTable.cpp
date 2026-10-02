@@ -598,7 +598,9 @@ static size_t literal_size(oop obj) {
 
   if (obj->klass() == vmClasses::String_klass()) {
     // This may overcount if String.value arrays are shared.
-    word_size += java_lang_String::value(obj)->size();
+    typeArrayOop bytes = java_lang_String::value(obj);
+    if (bytes != nullptr) word_size += bytes->size();
+    // Segmented descendants are shared and intentionally excluded here.
   }
 
   return word_size * HeapWordSize;
@@ -687,25 +689,13 @@ size_t StringTable::verify_and_compare_entries() {
 }
 
 static void print_string(Thread* current, outputStream* st, oop s) {
-  typeArrayOop value     = java_lang_String::value_no_keepalive(s);
-  int          length    = java_lang_String::length(s);
-  bool         is_latin1 = java_lang_String::is_latin1(s);
-
+  int length = java_lang_String::length(s);
   if (length <= 0) {
     st->print("%d: ", length);
   } else {
     ResourceMark rm(current);
-    int utf8_length = length;
-    char* utf8_string;
-
-    if (!is_latin1) {
-      jchar* chars = value->char_at_addr(0);
-      utf8_string = UNICODE::as_utf8(chars, utf8_length);
-    } else {
-      jbyte* bytes = value->byte_at_addr(0);
-      utf8_string = UNICODE::as_utf8(bytes, utf8_length);
-    }
-
+    int utf8_length;
+    char* utf8_string = java_lang_String::as_utf8_string(s, utf8_length);
     st->print("%d: ", utf8_length);
     HashtableTextDump::put_utf8(st, utf8_string, utf8_length);
   }

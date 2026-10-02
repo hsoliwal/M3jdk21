@@ -20,7 +20,7 @@
     "m3/build-openjdk.sh": "f46a09e0039dd2fcf6b1cbf4a16d31d6d77a42cde926c4c5273b04b4b3eac236",
     "m3/build.sh": "9a59939aac3cc78d8efc77c26041184563b233aefa1e5bfcd6c710363f316dd3",
     "m3/compatibility/SynexiaContractTest.java": "6c96a7b72da88a7fb43a05dbb9ab99a6ca8861468731d885a3f7177b1b1b6589",
-    "m3/compatibility/check-synexia.py": "d69e824b261e86f81a346ecc364aa3c825241f63394d7696a8cbf3fff82e56af",
+    "m3/compatibility/check-synexia.py": "049b2315457668cc754dcbf505d4f0019d43c3a5a5146ad1ccfc336b5b59c92f",
     "m3/core/src/com/m3/text/JoinedM3StringPiece.java": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
     "m3/core/src/com/m3/text/LexiconTool.java": "8f86470619da33cf79ce3f8c6b99e7b6a4815f1c0053c7a07985a6ea4010563a",
     "m3/core/src/com/m3/text/LocalM3Arena.java": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",

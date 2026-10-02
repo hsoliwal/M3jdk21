@@ -1,0 +1,24 @@
+Error occurred during initialization of VM
+java.lang.ExceptionInInitializerError
+	at java.lang.MIndexString.<clinit>(java.base/MIndexString.java:47)
+	at java.lang.String.mindex(java.base/String.java:5008)
+	at java.lang.String.equals(java.base/String.java:1929)
+	at java.util.ImmutableCollections$Set12.<init>(java.base/ImmutableCollections.java:797)
+	at java.util.Set.of(java.base/Set.java:487)
+	at jdk.internal.reflect.Reflection.<clinit>(java.base/Reflection.java:58)
+	at java.security.AccessController.doPrivileged(java.base/AccessController.java:319)
+	at java.lang.reflect.AccessibleObject.<clinit>(java.base/AccessibleObject.java:529)
+Caused by: java.lang.NullPointerException
+	at java.lang.System.getProperty(java.base/System.java:969)
+	at sun.security.action.GetPropertyAction.privilegedGetProperty(java.base/GetPropertyAction.java:108)
+	at java.lang.ThreadLocal.traceVirtualThreadLocals(java.base/ThreadLocal.java:808)
+	at java.lang.ThreadLocal.<clinit>(java.base/ThreadLocal.java:82)
+	at java.lang.MIndexString.<clinit>(java.base/MIndexString.java:47)
+	at java.lang.String.mindex(java.base/String.java:5008)
+	at java.lang.String.equals(java.base/String.java:1929)
+	at java.util.ImmutableCollections$Set12.<init>(java.base/ImmutableCollections.java:797)
+	at java.util.Set.of(java.base/Set.java:487)
+	at jdk.internal.reflect.Reflection.<clinit>(java.base/Reflection.java:58)
+	at java.security.AccessController.doPrivileged(java.base/AccessController.java:319)
+	at java.lang.reflect.AccessibleObject.<clinit>(java.base/AccessibleObject.java:529)
+
