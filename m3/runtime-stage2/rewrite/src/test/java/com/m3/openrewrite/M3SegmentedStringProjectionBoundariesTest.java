@@ -109,6 +109,29 @@ class M3SegmentedStringProjectionBoundariesTest implements RewriteTest {
     }
 
     @Test
+    void rewritesRegexSearchToUseNecessaryConditionPrefilter() {
+        rewriteRun(
+            text(
+                """
+                acceptMode = NOANCHOR;
+                boolean result = parentPattern.root.match(this, from, text);
+                """,
+                """
+                acceptMode = NOANCHOR;
+                if (!parentPattern.m3MayMatch(text)) {
+                    this.first = -1;
+                    this.oldLast = this.last;
+                    this.modCount++;
+                    return false;
+                }
+                boolean result = parentPattern.root.match(this, from, text);
+                """,
+                source -> source.path("src/java.base/share/classes/java/util/regex/Matcher.java")
+            )
+        );
+    }
+
+    @Test
     void rewritesJniProjectionToSegmentTraversal() {
         rewriteRun(
             text(
