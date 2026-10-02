@@ -1,5 +1,15 @@
 # Resume the MIndex-to-M3 migration
 
+## Whole-JDK documentation extension — 2026-10-02
+
+The programme scope is the entire JDK, explicitly including collections; String is one subsystem. Read the [whole-JDK architecture](../../docs/whole-jdk-architecture.md), [source-root inventory and dispositions](../../docs/whole-jdk-inventory.md), [collection replacement specification](../../docs/whole-jdk-collections.md), [text operation specification](../../docs/whole-jdk-text-operations.md), and [execution, mapping, evidence and rollout plan](../../docs/whole-jdk-execution.md). These extend the existing handoff and shared-atom contract rather than create another capability authority.
+
+At target `45f546ff5bcb06a1b2604f14baf998785d98d9a1`, all 73 immediate `src` directories are accounted for in the documentary matrix. Complete recursive file/package/symbol/native/build-consumer coverage remains OPEN. The documentation does not implement replacements, populate/promote operational mappings, run runtime tests or replace an installed JDK.
+
+Preserve the existing `m3/docs/name-mapping.json` authority and read the [retained-source/mapping reconciliation](../../docs/migration-mapping-lifecycle.md) before interpreting old counts. Current source inventories, branch-scoped manifests and #23/#24 runtime/text candidates need explicit joins and their own exact-tree evidence. The historical prefix-tranche section below is retained unchanged as its original evidence record; its status, counts and commands do not describe every later repository change or certify a combined tree.
+
+## Historical prefix tranche — original evidence retained
+
 **Status: INCOMPLETE. One algorithm specialization is implemented and locally tested. The whole MIndex family has not been inventoried or migrated. No complete JDK image was built in this tranche.**
 
 Read `m3/docs/name-mapping.json`, this document, `COVERAGE.md`, and `ACCEPTANCE.md` before changing code. The existing naming map is the sole capability authority; reports are generated projections. Never infer implementation from a merged documentation PR or a placeholder mapping.
@@ -13,7 +23,7 @@ Read `m3/docs/name-mapping.json`, this document, `COVERAGE.md`, and `ACCEPTANCE.
 | Prefix donor PR #7526 | `73978088621dc70f5021befafa443f7e622b517e` | Source body actually inspected |
 | Target master baseline | `d6390ea3bb348f0c22afdba0819ca4ec0e97970f` | Public repository; no PR #6 runtime code on this baseline |
 | Prefix implementation commit | `3a8e21dcea32b97e869f3bdbb5817e1f9927ca4f` | Exact algorithm, tests and reviewed postimage |
-| Tooling implementation commit | `35c2787e2222e9ce894f6255ca9a9c1c44c5a6c0` | Recipe, schema, validator, tests and local runner |
+| Tooling implementation commit | `35c2787e2222e9ce894f6255ca9a9c1c44c5a6c5c0` | Recipe, schema, validator, tests and local runner |
 
 Target master was observed at `aceb243be751f327c8d59f6d2ebcbeb126db531b` when PR #16 was created. The candidate remains pinned to d639. Reconcile that drift before merge; do not overwrite newer work.
 
@@ -57,7 +67,7 @@ Exact source-bound prefix replay requires an authorized source checkout at the p
 ```sh
 java m3/migration/src/com/m3/migration/ExactFileRecipe.java check SOURCE_ROOT TARGET_ROOT m3/migration/recipes/prefix-z-v1.tsv
 java m3/migration/src/com/m3/migration/ExactFileRecipe.java apply SOURCE_ROOT TARGET_ROOT m3/migration/recipes/prefix-z-v1.tsv
-java m3/migration/src/com/m3/migration/ExactFileRecipe.java rollback TARGET_ROOT m3/migration/recipes/prefix-z-v1.tsv
+java m3/migration/src/com/m3/migration/ExactFileRecipe.java rollback TARGET_ROOT TARGET_ROOT m3/migration/recipes/prefix-z-v1.tsv
 ```
 
 Rollback deletes only equal additions owned by that plan receipt. A preexisting equal file is not acquired for deletion. Missing or modified receipt-owned files cause refusal. Review stale locks after a crash; do not automatically delete another invocation's lock.
