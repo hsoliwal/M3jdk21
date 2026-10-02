@@ -336,8 +336,10 @@ void Threads::initialize_java_lang_classes(JavaThread* main_thread, TRAPS) {
 
   initialize_class(vmSymbols::java_lang_String(), CHECK);
 
-  // Inject CompactStrings value after the static initializers for String ran.
+  // Inject VM-selected String representation features after String's static
+  // initializer ran, before application-visible String construction begins.
   java_lang_String::set_compact_strings(CompactStrings);
+  java_lang_String::set_m3_joined_strings(UseM3StringStorage);
 
   // Initialize java_lang.System (needed before creating the thread)
   initialize_class(vmSymbols::java_lang_System(), CHECK);

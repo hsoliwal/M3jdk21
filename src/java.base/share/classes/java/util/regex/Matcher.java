@@ -1735,6 +1735,12 @@ public final class Matcher implements MatchResult {
                 localsPos[i].clear();
         }
         acceptMode = NOANCHOR;
+        if (!parentPattern.m3MayMatch(text)) {
+            this.first = -1;
+            this.oldLast = this.last;
+            this.modCount++;
+            return false;
+        }
         boolean result = parentPattern.root.match(this, from, text);
         if (!result)
             this.first = -1;
@@ -1762,6 +1768,12 @@ public final class Matcher implements MatchResult {
                 localsPos[i].clear();
         }
         acceptMode = anchor;
+        if (!parentPattern.m3MayMatch(text)) {
+            this.first = -1;
+            this.oldLast = this.last;
+            this.modCount++;
+            return false;
+        }
         boolean result = parentPattern.matchRoot.match(this, from, text);
         if (!result)
             this.first = -1;

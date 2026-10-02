@@ -485,7 +485,14 @@ public final class StringConcatFactory {
             // Two reference arguments, no surrounding constants
             return simpleConcat();
         }
-        // else... fall-through to slow-path
+        // Correctness-first segmented fallback. The existing fast paths above
+        // remain allocation-minimal; complex indy shapes avoid the flat byte[]
+        // builder while M3 storage is enabled. Specialized segment combinators
+        // can replace this collector without changing the call-site contract.
+        if (JLA.stringConcatUsesM3Storage()) {
+            return generateM3Concat(mt, constants);
+        }
+        // else... fall-through to stock inline-copy slow-path
 
         // Create filters and obtain filtered parameter types. Filters would be used in the beginning
         // to convert the incoming arguments into the arguments we can process (e.g. Objects -> Strings).
@@ -600,6 +607,12 @@ public final class StringConcatFactory {
         }
 
         return mh;
+    }
+
+    private static MethodHandle generateM3Concat(MethodType mt, String[] constants) {
+        MethodHandle mh = MethodHandles.insertArguments(m3Concat(), 0, (Object) constants);
+        mh = mh.asCollector(Object[].class, mt.parameterCount());
+        return mh.asType(mt.changeReturnType(String.class));
     }
 
     // We need one prepender per argument, but also need to fold in constants. We do so by greedily
@@ -862,6 +875,17 @@ public final class StringConcatFactory {
             MethodHandle simpleConcat = JLA.stringConcatHelper("simpleConcat",
                     methodType(String.class, Object.class, Object.class));
             SIMPLE_CONCAT = mh = simpleConcat.rebind();
+        }
+        return mh;
+    }
+
+    private @Stable static MethodHandle M3_CONCAT;
+    private static MethodHandle m3Concat() {
+        MethodHandle mh = M3_CONCAT;
+        if (mh == null) {
+            MethodHandle concat = JLA.stringConcatHelper("m3Concat",
+                    methodType(String.class, String[].class, Object[].class));
+            M3_CONCAT = mh = concat.rebind();
         }
         return mh;
     }

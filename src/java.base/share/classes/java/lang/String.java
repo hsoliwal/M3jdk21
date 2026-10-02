@@ -158,6 +158,14 @@ public final class String
     private final byte[] value;
 
     /**
+     * Optional immutable segmented backing used by M3JDK Strings. Ordinary
+     * contiguous Strings keep this null and retain the stock Compact Strings
+     * representation. Joined/sliced Strings keep {@code value} as the empty
+     * sentinel and resolve their logical content through this descriptor.
+     */
+    private final M3StringStorage m3Storage;
+
+    /**
      * The identifier of the encoding used to encode the bytes in
      * {@code value}. The supported values in this implementation are
      *
@@ -222,8 +230,15 @@ public final class String
      */
     static final boolean COMPACT_STRINGS;
 
+    /**
+     * Enables M3 segmented String production. The actual value is injected by
+     * HotSpot after String class initialization, exactly like COMPACT_STRINGS.
+     */
+    static final boolean M3_JOINED_STRINGS;
+
     static {
         COMPACT_STRINGS = true;
+        M3_JOINED_STRINGS = false;
     }
 
     /**
@@ -245,6 +260,7 @@ public final class String
     public String() {
         this.value = "".value;
         this.coder = "".coder;
+        this.m3Storage = null;
     }
 
     /**
@@ -261,6 +277,7 @@ public final class String
     public String(String original) {
         this.value = original.value;
         this.coder = original.coder;
+        this.m3Storage = original.m3Storage;
         this.hash = original.hash;
         this.hashIsZero = original.hashIsZero;
     }
@@ -337,6 +354,7 @@ public final class String
      * @since  1.5
      */
     public String(int[] codePoints, int offset, int count) {
+        this.m3Storage = null;
         checkBoundsOffCount(offset, count, codePoints.length);
         if (count == 0) {
             this.value = "".value;
@@ -396,6 +414,7 @@ public final class String
      */
     @Deprecated(since="1.1")
     public String(byte[] ascii, int hibyte, int offset, int count) {
+        this.m3Storage = null;
         checkBoundsOffCount(offset, count, ascii.length);
         if (count == 0) {
             this.value = "".value;
@@ -530,6 +549,7 @@ public final class String
      */
     @SuppressWarnings("removal")
     private String(Charset charset, byte[] bytes, int offset, int length) {
+        this.m3Storage = null;
         if (length == 0) {
             this.value = "".value;
             this.coder = "".coder;
@@ -1516,7 +1536,7 @@ public final class String
      *          object.
      */
     public int length() {
-        return value.length >> coder();
+        return m3Storage == null ? value.length >> coder() : m3Storage.length();
     }
 
     /**
@@ -1529,7 +1549,7 @@ public final class String
      */
     @Override
     public boolean isEmpty() {
-        return value.length == 0;
+        return m3Storage == null ? value.length == 0 : m3Storage.length() == 0;
     }
 
     /**
@@ -1551,6 +1571,9 @@ public final class String
      *             string.
      */
     public char charAt(int index) {
+        if (m3Storage != null) {
+            return m3Storage.charAt(index);
+        }
         if (isLatin1()) {
             return StringLatin1.charAt(value, index);
         } else {
@@ -1581,6 +1604,17 @@ public final class String
      * @since      1.5
      */
     public int codePointAt(int index) {
+        if (m3Storage != null) {
+            checkIndex(index, length());
+            char first = charAt(index);
+            if (Character.isHighSurrogate(first) && index + 1 < length()) {
+                char second = charAt(index + 1);
+                if (Character.isLowSurrogate(second)) {
+                    return Character.toCodePoint(first, second);
+                }
+            }
+            return first;
+        }
         if (isLatin1()) {
             checkIndex(index, value.length);
             return value[index] & 0xff;
@@ -1615,6 +1649,16 @@ public final class String
     public int codePointBefore(int index) {
         int i = index - 1;
         checkIndex(i, length());
+        if (m3Storage != null) {
+            char second = charAt(i);
+            if (Character.isLowSurrogate(second) && i > 0) {
+                char first = charAt(i - 1);
+                if (Character.isHighSurrogate(first)) {
+                    return Character.toCodePoint(first, second);
+                }
+            }
+            return second;
+        }
         if (isLatin1()) {
             return (value[i] & 0xff);
         }
@@ -1644,6 +1688,20 @@ public final class String
      */
     public int codePointCount(int beginIndex, int endIndex) {
         Objects.checkFromToIndex(beginIndex, endIndex, length());
+        if (m3Storage != null) {
+            if (beginIndex == 0 && endIndex == length()) {
+                return m3Storage.codePointCount();
+            }
+            int count = 0;
+            for (int index = beginIndex; index < endIndex; count++) {
+                char first = charAt(index++);
+                if (Character.isHighSurrogate(first) && index < endIndex
+                        && Character.isLowSurrogate(charAt(index))) {
+                    index++;
+                }
+            }
+            return count;
+        }
         if (isLatin1()) {
             return endIndex - beginIndex;
         }
@@ -1707,7 +1765,9 @@ public final class String
     public void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
         checkBoundsBeginEnd(srcBegin, srcEnd, length());
         checkBoundsOffCount(dstBegin, srcEnd - srcBegin, dst.length);
-        if (isLatin1()) {
+        if (m3Storage != null) {
+            m3Storage.getChars(srcBegin, srcEnd, dst, dstBegin);
+        } else if (isLatin1()) {
             StringLatin1.getChars(value, srcBegin, srcEnd, dst, dstBegin);
         } else {
             StringUTF16.getChars(value, srcBegin, srcEnd, dst, dstBegin);
@@ -1763,7 +1823,11 @@ public final class String
         checkBoundsBeginEnd(srcBegin, srcEnd, length());
         Objects.requireNonNull(dst);
         checkBoundsOffCount(dstBegin, srcEnd - srcBegin, dst.length);
-        if (isLatin1()) {
+        if (m3Storage != null) {
+            for (int src = srcBegin, dstIndex = dstBegin; src < srcEnd; src++, dstIndex++) {
+                dst[dstIndex] = (byte) charAt(src);
+            }
+        } else if (isLatin1()) {
             StringLatin1.getBytes(value, srcBegin, srcEnd, dst, dstBegin);
         } else {
             StringUTF16.getBytes(value, srcBegin, srcEnd, dst, dstBegin);
@@ -1792,7 +1856,7 @@ public final class String
      */
     public byte[] getBytes(String charsetName)
             throws UnsupportedEncodingException {
-        return encode(lookupCharset(charsetName), coder(), value);
+        return encode(lookupCharset(charsetName), coder(), value());
     }
 
     /**
@@ -1815,7 +1879,7 @@ public final class String
      */
     public byte[] getBytes(Charset charset) {
         if (charset == null) throw new NullPointerException();
-        return encode(charset, coder(), value);
+        return encode(charset, coder(), value());
      }
 
     /**
@@ -1833,7 +1897,7 @@ public final class String
      * @since      1.1
      */
     public byte[] getBytes() {
-        return encode(Charset.defaultCharset(), coder(), value);
+        return encode(Charset.defaultCharset(), coder(), value());
     }
 
     /**
@@ -1858,8 +1922,16 @@ public final class String
         if (this == anObject) {
             return true;
         }
-        return (anObject instanceof String aString)
-                && (!COMPACT_STRINGS || this.coder == aString.coder)
+        if (!(anObject instanceof String aString)) {
+            return false;
+        }
+        if (m3Storage != null) {
+            return m3Storage.contentEquals(aString);
+        }
+        if (aString.m3Storage != null) {
+            return aString.m3Storage.contentEquals(this);
+        }
+        return (!COMPACT_STRINGS || this.coder == aString.coder)
                 && StringLatin1.equals(value, aString.value);
     }
 
@@ -1890,7 +1962,15 @@ public final class String
         if (len != sb.length()) {
             return false;
         }
-        byte[] v1 = value;
+        if (m3Storage != null) {
+            for (int index = 0; index < len; index++) {
+                if (charAt(index) != sb.charAt(index)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        byte[] v1 = value();
         byte[] v2 = sb.getValue();
         byte coder = coder();
         if (coder == sb.getCoder()) {
@@ -1942,7 +2022,15 @@ public final class String
         if (n != length()) {
             return false;
         }
-        byte[] val = this.value;
+        if (m3Storage != null) {
+            for (int i = 0; i < n; i++) {
+                if (charAt(i) != cs.charAt(i)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        byte[] val = value();
         if (isLatin1()) {
             for (int i = 0; i < n; i++) {
                 if ((val[i] & 0xff) != cs.charAt(i)) {
@@ -2038,8 +2126,20 @@ public final class String
      *          lexicographically greater than the string argument.
      */
     public int compareTo(String anotherString) {
-        byte[] v1 = value;
-        byte[] v2 = anotherString.value;
+        if (m3Storage != null || anotherString.m3Storage != null) {
+            int length1 = length();
+            int length2 = anotherString.length();
+            int limit = Math.min(length1, length2);
+            for (int index = 0; index < limit; index++) {
+                int difference = charAt(index) - anotherString.charAt(index);
+                if (difference != 0) {
+                    return difference;
+                }
+            }
+            return length1 - length2;
+        }
+        byte[] v1 = value();
+        byte[] v2 = anotherString.value();
         byte coder = coder();
         if (coder == anotherString.coder()) {
             return coder == LATIN1 ? StringLatin1.compareTo(v1, v2)
@@ -2074,8 +2174,8 @@ public final class String
         private static final long serialVersionUID = 8575799808933029326L;
 
         public int compare(String s1, String s2) {
-            byte[] v1 = s1.value;
-            byte[] v2 = s2.value;
+            byte[] v1 = s1.value();
+            byte[] v2 = s2.value();
             byte coder = s1.coder();
             if (coder == s2.coder()) {
                 return coder == LATIN1 ? StringLatin1.compareToCI(v1, v2)
@@ -2155,6 +2255,9 @@ public final class String
              (toffset > (long)length() - len) ||
              (ooffset > (long)other.length() - len)) {
             return false;
+        }
+        if (m3Storage != null || other.m3Storage != null) {
+            return M3StringSearch.regionEquals(this, toffset, other, ooffset, len);
         }
         byte[] tv = value;
         byte[] ov = other.value;
@@ -2246,8 +2349,8 @@ public final class String
                 || (ooffset > (long)other.length() - len)) {
             return false;
         }
-        byte[] tv = value;
-        byte[] ov = other.value;
+        byte[] tv = value();
+        byte[] ov = other.value();
         byte coder = coder();
         if (coder == other.coder()) {
             return coder == LATIN1
@@ -2280,6 +2383,9 @@ public final class String
         // Note: toffset might be near -1>>>1.
         if (toffset < 0 || toffset > length() - prefix.length()) {
             return false;
+        }
+        if (m3Storage != null || prefix.m3Storage != null) {
+            return M3StringSearch.regionEquals(this, toffset, prefix, 0, prefix.length());
         }
         byte[] ta = value;
         byte[] pa = prefix.value;
@@ -2362,8 +2468,10 @@ public final class String
         // from immutable state
         int h = hash;
         if (h == 0 && !hashIsZero) {
-            h = isLatin1() ? StringLatin1.hashCode(value)
-                           : StringUTF16.hashCode(value);
+            h = m3Storage != null
+                    ? m3Storage.hashCodeValue()
+                    : (isLatin1() ? StringLatin1.hashCode(value)
+                                  : StringUTF16.hashCode(value));
             if (h == 0) {
                 hashIsZero = true;
             } else {
@@ -2454,6 +2562,9 @@ public final class String
      * {@code fromIndex} were larger than the string length, or were negative.
      */
     public int indexOf(int ch, int fromIndex) {
+        if (m3Storage != null) {
+            return M3StringSearch.indexOf(this, ch, fromIndex, length());
+        }
         return isLatin1() ? StringLatin1.indexOf(value, ch, fromIndex, length())
                 : StringUTF16.indexOf(value, ch, fromIndex, length());
     }
@@ -2500,6 +2611,9 @@ public final class String
      */
     public int indexOf(int ch, int beginIndex, int endIndex) {
         checkBoundsBeginEnd(beginIndex, endIndex, length());
+        if (m3Storage != null) {
+            return M3StringSearch.indexOf(this, ch, beginIndex, endIndex);
+        }
         return isLatin1() ? StringLatin1.indexOf(value, ch, beginIndex, endIndex)
                 : StringUTF16.indexOf(value, ch, beginIndex, endIndex);
     }
@@ -2566,6 +2680,9 @@ public final class String
      *          if the character does not occur before that point.
      */
     public int lastIndexOf(int ch, int fromIndex) {
+        if (m3Storage != null) {
+            return M3StringSearch.lastIndexOf(this, ch, fromIndex);
+        }
         return isLatin1() ? StringLatin1.lastIndexOf(value, ch, fromIndex)
                           : StringUTF16.lastIndexOf(value, ch, fromIndex);
     }
@@ -2585,15 +2702,18 @@ public final class String
      *          or {@code -1} if there is no such occurrence.
      */
     public int indexOf(String str) {
+        if (m3Storage != null || str.m3Storage != null) {
+            return M3StringSearch.indexOf(this, str, 0, length());
+        }
         byte coder = coder();
         if (coder == str.coder()) {
-            return isLatin1() ? StringLatin1.indexOf(value, str.value)
-                              : StringUTF16.indexOf(value, str.value);
+            return isLatin1() ? StringLatin1.indexOf(value(), str.value())
+                              : StringUTF16.indexOf(value(), str.value());
         }
         if (coder == LATIN1) {  // str.coder == UTF16
             return -1;
         }
-        return StringUTF16.indexOfLatin1(value, str.value);
+        return StringUTF16.indexOfLatin1(value(), str.value());
     }
 
     /**
@@ -2627,6 +2747,10 @@ public final class String
      *          or {@code -1} if there is no such occurrence.
      */
     public int indexOf(String str, int fromIndex) {
+        if (m3Storage != null || str.m3Storage != null) {
+            int from = Math.clamp(fromIndex, 0, length());
+            return M3StringSearch.indexOf(this, str, from, length());
+        }
         return indexOf(value, coder(), length(), str, fromIndex);
     }
 
@@ -2660,6 +2784,9 @@ public final class String
             return indexOf(str.charAt(0), beginIndex, endIndex);
         }
         checkBoundsBeginEnd(beginIndex, endIndex, length());
+        if (m3Storage != null || str.m3Storage != null) {
+            return M3StringSearch.indexOf(this, str, beginIndex, endIndex);
+        }
         return indexOf(value, coder(), endIndex, str, beginIndex);
     }
 
@@ -2685,7 +2812,7 @@ public final class String
             return fromIndex;
         }
 
-        byte[] tgt = tgtStr.value;
+        byte[] tgt = tgtStr.value();
         byte tgtCoder = tgtStr.coder();
         if (srcCoder == tgtCoder) {
             return srcCoder == LATIN1
@@ -2736,6 +2863,9 @@ public final class String
      *          or {@code -1} if there is no such occurrence.
      */
     public int lastIndexOf(String str, int fromIndex) {
+        if (m3Storage != null || str.m3Storage != null) {
+            return M3StringSearch.lastIndexOf(this, str, fromIndex);
+        }
         return lastIndexOf(value, coder(), length(), str, fromIndex);
     }
 
@@ -2752,7 +2882,7 @@ public final class String
      */
     static int lastIndexOf(byte[] src, byte srcCoder, int srcCount,
                            String tgtStr, int fromIndex) {
-        byte[] tgt = tgtStr.value;
+        byte[] tgt = tgtStr.value();
         byte tgtCoder = tgtStr.coder();
         int tgtCount = tgtStr.length();
         /*
@@ -2832,8 +2962,19 @@ public final class String
             return this;
         }
         int subLen = endIndex - beginIndex;
-        return isLatin1() ? StringLatin1.newString(value, beginIndex, subLen)
-                          : StringUTF16.newString(value, beginIndex, subLen);
+        if (subLen == 0) {
+            return "";
+        }
+        if (M3_JOINED_STRINGS) {
+            M3StringStorage storage =
+                    M3StringStorage.sliceOf(this, beginIndex, endIndex);
+            if (storage != null) {
+                return new String(storage);
+            }
+        }
+        byte[] currentValue = value();
+        return isLatin1() ? StringLatin1.newString(currentValue, beginIndex, subLen)
+                          : StringUTF16.newString(currentValue, beginIndex, subLen);
     }
 
     /**
@@ -2892,6 +3033,12 @@ public final class String
         if (str.isEmpty()) {
             return this;
         }
+        if (M3_JOINED_STRINGS) {
+            String joined = m3Concat(this, str);
+            if (joined != null) {
+                return joined;
+            }
+        }
         return StringConcatHelper.simpleConcat(this, str);
     }
 
@@ -2926,8 +3073,9 @@ public final class String
      */
     public String replace(char oldChar, char newChar) {
         if (oldChar != newChar) {
-            String ret = isLatin1() ? StringLatin1.replace(value, oldChar, newChar)
-                                    : StringUTF16.replace(value, oldChar, newChar);
+            byte[] currentValue = value();
+            String ret = isLatin1() ? StringLatin1.replace(currentValue, oldChar, newChar)
+                                    : StringUTF16.replace(currentValue, oldChar, newChar);
             if (ret != null) {
                 return ret;
             }
@@ -3093,12 +3241,12 @@ public final class String
             boolean trgtIsLatin1 = trgtStr.isLatin1();
             boolean replIsLatin1 = replStr.isLatin1();
             String ret = (thisIsLatin1 && trgtIsLatin1 && replIsLatin1)
-                    ? StringLatin1.replace(value, thisLen,
-                                           trgtStr.value, trgtLen,
-                                           replStr.value, replLen)
-                    : StringUTF16.replace(value, thisLen, thisIsLatin1,
-                                          trgtStr.value, trgtLen, trgtIsLatin1,
-                                          replStr.value, replLen, replIsLatin1);
+                    ? StringLatin1.replace(value(), thisLen,
+                                           trgtStr.value(), trgtLen,
+                                           replStr.value(), replLen)
+                    : StringUTF16.replace(value(), thisLen, thisIsLatin1,
+                                          trgtStr.value(), trgtLen, trgtIsLatin1,
+                                          replStr.value(), replLen, replIsLatin1);
             if (ret != null) {
                 return ret;
             }
@@ -3492,8 +3640,7 @@ public final class String
         // A singleton with no affixes already owns immutable contiguous backing.
         // Preserve a fresh result object and its default hash/dedup state.
         if (size == 1 && prefix.isEmpty() && suffix.isEmpty()) {
-            String element = elements[0];
-            return new String(element.value, element.coder());
+            return new String(elements[0]);
         }
         int icoder = prefix.coder() | suffix.coder();
         long len = (long) prefix.length() + suffix.length();
@@ -3510,6 +3657,24 @@ public final class String
             icoder |= el.coder();
         }
         byte coder = (byte) icoder;
+        if (M3_JOINED_STRINGS && size <= 127) {
+            int pieceCount = size == 0 ? 2 : size * 2 + 1;
+            String[] pieces = new String[pieceCount];
+            int piece = 0;
+            pieces[piece++] = prefix;
+            if (size > 0) {
+                pieces[piece++] = elements[0];
+                for (int i = 1; i < size; i++) {
+                    pieces[piece++] = delimiter;
+                    pieces[piece++] = elements[i];
+                }
+            }
+            pieces[piece] = suffix;
+            M3StringStorage storage = M3StringStorage.join(pieces);
+            if (storage != null) {
+                return new String(storage);
+            }
+        }
         // long len overflow check, char -> byte length, int len overflow check
         if (len < 0L || (len <<= coder) != (int) len) {
             throw new OutOfMemoryError("Requested string length exceeds VM limit");
@@ -3638,8 +3803,9 @@ public final class String
      * @since   1.1
      */
     public String toLowerCase(Locale locale) {
-        return isLatin1() ? StringLatin1.toLowerCase(this, value, locale)
-                          : StringUTF16.toLowerCase(this, value, locale);
+        byte[] currentValue = value();
+        return isLatin1() ? StringLatin1.toLowerCase(this, currentValue, locale)
+                          : StringUTF16.toLowerCase(this, currentValue, locale);
     }
 
     /**
@@ -3718,8 +3884,9 @@ public final class String
      * @since   1.1
      */
     public String toUpperCase(Locale locale) {
-        return isLatin1() ? StringLatin1.toUpperCase(this, value, locale)
-                          : StringUTF16.toUpperCase(this, value, locale);
+        byte[] currentValue = value();
+        return isLatin1() ? StringLatin1.toUpperCase(this, currentValue, locale)
+                          : StringUTF16.toUpperCase(this, currentValue, locale);
     }
 
     /**
@@ -3778,8 +3945,9 @@ public final class String
      *          has no leading or trailing space.
      */
     public String trim() {
-        String ret = isLatin1() ? StringLatin1.trim(value)
-                                : StringUTF16.trim(value);
+        byte[] currentValue = value();
+        String ret = isLatin1() ? StringLatin1.trim(currentValue)
+                                : StringUTF16.trim(currentValue);
         return ret == null ? this : ret;
     }
 
@@ -3810,8 +3978,9 @@ public final class String
      * @since 11
      */
     public String strip() {
-        String ret = isLatin1() ? StringLatin1.strip(value)
-                                : StringUTF16.strip(value);
+        byte[] currentValue = value();
+        String ret = isLatin1() ? StringLatin1.strip(currentValue)
+                                : StringUTF16.strip(currentValue);
         return ret == null ? this : ret;
     }
 
@@ -3840,8 +4009,9 @@ public final class String
      * @since 11
      */
     public String stripLeading() {
-        String ret = isLatin1() ? StringLatin1.stripLeading(value)
-                                : StringUTF16.stripLeading(value);
+        byte[] currentValue = value();
+        String ret = isLatin1() ? StringLatin1.stripLeading(currentValue)
+                                : StringUTF16.stripLeading(currentValue);
         return ret == null ? this : ret;
     }
 
@@ -3870,8 +4040,9 @@ public final class String
      * @since 11
      */
     public String stripTrailing() {
-        String ret = isLatin1() ? StringLatin1.stripTrailing(value)
-                                : StringUTF16.stripTrailing(value);
+        byte[] currentValue = value();
+        String ret = isLatin1() ? StringLatin1.stripTrailing(currentValue)
+                                : StringUTF16.stripTrailing(currentValue);
         return ret == null ? this : ret;
     }
 
@@ -3889,7 +4060,9 @@ public final class String
      * @since 11
      */
     public boolean isBlank() {
-        return indexOfNonWhitespace() == length();
+        return m3Storage != null
+                ? (m3Storage.characterFlags() & jdk.internal.util.M3StringFacts.BLANK) != 0
+                : indexOfNonWhitespace() == length();
     }
 
     /**
@@ -3923,7 +4096,8 @@ public final class String
      * @since 11
      */
     public Stream<String> lines() {
-        return isLatin1() ? StringLatin1.lines(value) : StringUTF16.lines(value);
+        byte[] currentValue = value();
+        return isLatin1() ? StringLatin1.lines(currentValue) : StringUTF16.lines(currentValue);
     }
 
     /**
@@ -3979,13 +4153,31 @@ public final class String
     }
 
     private int indexOfNonWhitespace() {
-        return isLatin1() ? StringLatin1.indexOfNonWhitespace(value)
-                          : StringUTF16.indexOfNonWhitespace(value);
+        if (m3Storage != null) {
+            for (int index = 0; index < length(); index++) {
+                if (!Character.isWhitespace(charAt(index))) {
+                    return index;
+                }
+            }
+            return length();
+        }
+        byte[] currentValue = value();
+        return isLatin1() ? StringLatin1.indexOfNonWhitespace(currentValue)
+                          : StringUTF16.indexOfNonWhitespace(currentValue);
     }
 
     private int lastIndexOfNonWhitespace() {
-        return isLatin1() ? StringLatin1.lastIndexOfNonWhitespace(value)
-                          : StringUTF16.lastIndexOfNonWhitespace(value);
+        if (m3Storage != null) {
+            for (int index = length() - 1; index >= 0; index--) {
+                if (!Character.isWhitespace(charAt(index))) {
+                    return index;
+                }
+            }
+            return -1;
+        }
+        byte[] currentValue = value();
+        return isLatin1() ? StringLatin1.lastIndexOfNonWhitespace(currentValue)
+                          : StringUTF16.lastIndexOfNonWhitespace(currentValue);
     }
 
     /**
@@ -4314,8 +4506,8 @@ public final class String
     @Override
     public IntStream chars() {
         return StreamSupport.intStream(
-            isLatin1() ? new StringLatin1.CharsSpliterator(value, Spliterator.IMMUTABLE)
-                       : new StringUTF16.CharsSpliterator(value, Spliterator.IMMUTABLE),
+            isLatin1() ? new StringLatin1.CharsSpliterator(value(), Spliterator.IMMUTABLE)
+                       : new StringUTF16.CharsSpliterator(value(), Spliterator.IMMUTABLE),
             false);
     }
 
@@ -4334,8 +4526,8 @@ public final class String
     @Override
     public IntStream codePoints() {
         return StreamSupport.intStream(
-            isLatin1() ? new StringLatin1.CharsSpliterator(value, Spliterator.IMMUTABLE)
-                       : new StringUTF16.CodePointsSpliterator(value, Spliterator.IMMUTABLE),
+            isLatin1() ? new StringLatin1.CharsSpliterator(value(), Spliterator.IMMUTABLE)
+                       : new StringUTF16.CodePointsSpliterator(value(), Spliterator.IMMUTABLE),
             false);
     }
 
@@ -4347,8 +4539,9 @@ public final class String
      *          the character sequence represented by this string.
      */
     public char[] toCharArray() {
-        return isLatin1() ? StringLatin1.toChars(value)
-                          : StringUTF16.toChars(value);
+        byte[] currentValue = value();
+        return isLatin1() ? StringLatin1.toChars(currentValue)
+                          : StringUTF16.toChars(currentValue);
     }
 
     /**
@@ -4666,21 +4859,34 @@ public final class String
         if (count == 1) {
             return this;
         }
-        final int len = value.length;
-        if (len == 0 || count == 0) {
+        final int charLength = length();
+        if (charLength == 0 || count == 0) {
             return "";
         }
+        if (Integer.MAX_VALUE / count < charLength) {
+            throw new OutOfMemoryError("Required length exceeds implementation limit");
+        }
+        if (M3_JOINED_STRINGS && count <= 256) {
+            String[] pieces = new String[count];
+            Arrays.fill(pieces, this);
+            M3StringStorage storage = M3StringStorage.join(pieces);
+            if (storage != null) {
+                return new String(storage);
+            }
+        }
+        byte[] currentValue = value();
+        final int len = currentValue.length;
         if (Integer.MAX_VALUE / count < len) {
             throw new OutOfMemoryError("Required length exceeds implementation limit");
         }
         if (len == 1) {
             final byte[] single = new byte[count];
-            Arrays.fill(single, value[0]);
+            Arrays.fill(single, currentValue[0]);
             return new String(single, coder);
         }
         final int limit = len * count;
         final byte[] multiple = new byte[limit];
-        System.arraycopy(value, 0, multiple, 0, len);
+        System.arraycopy(currentValue, 0, multiple, 0, len);
         repeatCopyRest(multiple, 0, limit, len);
         return new String(multiple, coder);
     }
@@ -4724,7 +4930,9 @@ public final class String
      * @param coder     the coder of dst[]
      */
     void getBytes(byte[] dst, int dstBegin, byte coder) {
-        if (coder() == coder) {
+        if (m3Storage != null) {
+            m3Storage.getBytes(dst, 0, dstBegin, coder, length());
+        } else if (coder() == coder) {
             System.arraycopy(value, 0, dst, dstBegin << coder, value.length);
         } else {    // this.coder == LATIN && coder == UTF16
             StringLatin1.inflate(value, 0, dst, dstBegin, value.length);
@@ -4744,7 +4952,9 @@ public final class String
      * @param length    the amount of copied chars
      */
     void getBytes(byte[] dst, int srcPos, int dstBegin, byte coder, int length) {
-        if (coder() == coder) {
+        if (m3Storage != null) {
+            m3Storage.getBytes(dst, srcPos, dstBegin, coder, length);
+        } else if (coder() == coder) {
             System.arraycopy(value, srcPos << coder, dst, dstBegin << coder, length << coder);
         } else {    // this.coder == LATIN && coder == UTF16
             StringLatin1.inflate(value, srcPos, dst, dstBegin, length);
@@ -4761,6 +4971,7 @@ public final class String
      * characters in their byte sequences defined by the {@code StringUTF16}.
      */
     String(char[] value, int off, int len, Void sig) {
+        this.m3Storage = null;
         if (len == 0) {
             this.value = "".value;
             this.coder = "".coder;
@@ -4783,6 +4994,7 @@ public final class String
      * disambiguating it against other (public) constructors.
      */
     String(AbstractStringBuilder asb, Void sig) {
+        this.m3Storage = null;
         byte[] val = asb.getValue();
         int length = asb.length();
         if (asb.isLatin1()) {
@@ -4809,6 +5021,43 @@ public final class String
     String(byte[] value, byte coder) {
         this.value = value;
         this.coder = coder;
+        this.m3Storage = null;
+    }
+
+    /** Trusted constructor for an immutable M3 segmented String body. */
+    String(M3StringStorage storage) {
+        this.value = "".value;
+        this.coder = storage.coder();
+        this.m3Storage = storage;
+    }
+
+    M3StringStorage m3Storage() {
+        return m3Storage;
+    }
+
+    boolean hasM3Storage() {
+        return m3Storage != null;
+    }
+
+    long m3BitSignal64() {
+        return m3Storage != null
+                ? m3Storage.bitSignal64()
+                : jdk.internal.util.M3StringFacts.bitSignal64(this);
+    }
+
+    int m3CharacterFlags() {
+        return m3Storage != null
+                ? m3Storage.characterFlags()
+                : jdk.internal.util.M3StringFacts.characterFlags(this);
+    }
+
+    static boolean m3JoinedStringsEnabled() {
+        return M3_JOINED_STRINGS;
+    }
+
+    static String m3Concat(String first, String second) {
+        M3StringStorage storage = M3StringStorage.join(first, second);
+        return storage == null ? null : new String(storage);
     }
 
     byte coder() {
@@ -4816,7 +5065,7 @@ public final class String
     }
 
     byte[] value() {
-        return value;
+        return m3Storage == null ? value : m3Storage.materialize();
     }
 
     boolean isLatin1() {

@@ -151,6 +151,9 @@ public:
     if (java_string == nullptr) {
       // String became unreachable before we got a chance to process it.
       _cur_stat.inc_skipped_dead();
+    } else if (java_lang_String::is_m3_joined(java_string)) {
+      // A request may have been queued before a String acquired segmented
+      // storage. Never pass its compatibility sentinel to byte-array dedup.
     } else if (java_lang_String::value(java_string) == nullptr) {
       // Request during String construction, before its value array has
       // been initialized.

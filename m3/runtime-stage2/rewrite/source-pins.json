@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "base_ref": "m3/safe-storage-foundation",
+  "head_ref": "m3/segmented-string-runtime-p2-20261001",
+  "files": {
+    "src/hotspot/share/classfile/javaClasses.cpp": {
+      "before_git_blob": "a7582e535e6e50988eddcf639309e6f32880c9f7",
+      "after_git_blob": "800d9eb447b06f429338c762d0e4bda708e872cf"
+    },
+    "src/hotspot/share/classfile/javaClasses.hpp": {
+      "before_git_blob": "84ce35ba7672d91c83c56af4b8865cf3af3ee680",
+      "after_git_blob": "b15867cbd14a38aacce6ea890ae1720880735854"
+    },
+    "src/hotspot/share/classfile/javaClasses.inline.hpp": {
+      "before_git_blob": "960d5d224c5bb333e5a2a63efe9365331f771719",
+      "after_git_blob": "06f6fb167ea24fa016a661210073e962a8c8a469"
+    },
+    "src/hotspot/share/classfile/stringTable.cpp": {
+      "before_git_blob": "89381b1a785f1a0f2dad55588b08abdbf1648a58",
+      "after_git_blob": "d9e9a0ce2b0246a0f3100534f28b59c328fb5eba"
+    },
+    "src/hotspot/share/classfile/vmClassMacros.hpp": {
+      "before_git_blob": "bb2babff25a298e28c96bd840fd17e316ff9d44a",
+      "after_git_blob": "14a1eeae12fe71d077a00d60aaa024cbff474c88"
+    },
+    "src/hotspot/share/classfile/vmIntrinsics.cpp": {
+      "before_git_blob": "578b171a5528b4d84176466a62be8b8e1382a5dc",
+      "after_git_blob": "5b4b5eaa797e9dd18cc93ce9e9d7629b07b4ff22"
+    },
+    "src/hotspot/share/classfile/vmSymbols.hpp": {
+      "before_git_blob": "1677597e72b694e1a0da1fb3bf7053e6a3394f25",
+      "after_git_blob": "21d94ea3b32ef3f058f140aa3e4c0697d17a92e5"
+    },
+    "src/hotspot/share/gc/shared/stringdedup/stringDedup.cpp": {
+      "before_git_blob": "7c37d642836d3874212ec0377184fc9e6a78d2f5",
+      "after_git_blob": "ec6b8bb709d5675d90654c47492abdb6a38d85c8"
+    },
+    "src/hotspot/share/prims/jni.cpp": {
+      "before_git_blob": "9b8c97249b1e8149ce8d25f99220bd08f2bd7dc1",
+      "after_git_blob": "af29c51fa740679313bf8d82b07b077792b32c95"
+    },
+    "src/hotspot/share/runtime/globals.hpp": {
+      "before_git_blob": "5b609f858b7e31624a30d3ff358f676709a910c6",
+      "after_git_blob": "cb3ed3f04401c48a3012b3d2eea5f61096f37fde"
+    },
+    "src/hotspot/share/runtime/threads.cpp": {
+      "before_git_blob": "302c3672ce063a58b90f25641ca9ac6db7764b37",
+      "after_git_blob": "dc5b46f18124635d9beed4800ab2de55aaf751fe"
+    },
+    "src/java.base/share/classes/java/lang/String.java": {
+      "before_git_blob": "3e51175df9dd1424a0a91eaaad60d6cd5dd78dfa",
+      "after_git_blob": "83c4e63c357b05732e41b11dbf66363c1eddfffe"
+    },
+    "src/java.base/share/classes/java/lang/StringConcatHelper.java": {
+      "before_git_blob": "139181af0963efe5caaa25a03960d30e14b65c41",
+      "after_git_blob": "f4fd2616fd82af0cd1ebd4105231986432986ff1"
+    },
+    "src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java": {
+      "before_git_blob": "babc1940e78358082bd2231f5516d3265d3145e2",
+      "after_git_blob": "48ecde6d23a71bf6fb19e4a9074b295d4e525d51"
+    },
+    "src/java.base/share/classes/java/lang/System.java": {
+      "before_git_blob": "9d9dbf886e6b3fcc61ad5371c662b15a8be52193",
+      "after_git_blob": "a0542c55ecc4d1f5a71bb4f18bd1e9803d71f6b2"
+    },
+    "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java": {
+      "before_git_blob": "6fa79baccb98d1949c72adf9731c60eee102ad3d",
+      "after_git_blob": "e3d41cb655eb8067a92765b4bfdbdf5a5e39476d"
+    },
+    "src/java.base/share/classes/java/util/regex/Pattern.java": {
+      "before_git_blob": "45c48ddab542f4f0b31884de84ffd862a29519f1",
+      "after_git_blob": "7967f75c2f6b5e15656dc0140ea09278f0ac02a4"
+    },
+    "src/java.base/share/classes/java/util/regex/Matcher.java": {
+      "before_git_blob": "54fe63c4f4ba41306253998fd96ebff46080d236",
+      "after_git_blob": "89080fd49541cb4c6ac229490b0bf5091a77a4c8"
+    }
+  },
+  "created_files": {
+    "src/java.base/share/classes/java/lang/M3StringStorage.java": {
+      "after_git_blob": "51f194ef0bf6a058b6759690e68ed01c5c24b71e"
+    },
+    "src/java.base/share/classes/jdk/internal/util/M3StringFacts.java": {
+      "after_git_blob": "5432d8cec4173776c9232a35add5e8bc8afcb748"
+    }
+  }
+}

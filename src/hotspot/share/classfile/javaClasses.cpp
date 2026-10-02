@@ -193,6 +193,7 @@ void JavaClasses::compute_offset(int& dest_offset, InstanceKlass* ik,
 // java_lang_String
 
 int java_lang_String::_value_offset;
+int java_lang_String::_m3Storage_offset;
 int java_lang_String::_hash_offset;
 int java_lang_String::_hashIsZero_offset;
 int java_lang_String::_coder_offset;
@@ -215,6 +216,7 @@ bool java_lang_String::test_and_set_flag(oop java_string, uint8_t flag_mask) {
 
 #define STRING_FIELDS_DO(macro) \
   macro(_value_offset, k, vmSymbols::value_name(), byte_array_signature, false); \
+  macro(_m3Storage_offset, k, "m3Storage",          m3_string_storage_signature, false); \
   macro(_hash_offset,  k, "hash",                  int_signature,        false); \
   macro(_hashIsZero_offset, k, "hashIsZero",       bool_signature,       false); \
   macro(_coder_offset, k, "coder",                 byte_signature,       false);
@@ -258,6 +260,28 @@ public:
 
 void java_lang_String::set_compact_strings(bool value) {
   CompactStringsFixup fix(value);
+  vmClasses::String_klass()->do_local_static_fields(&fix);
+}
+
+class M3JoinedStringsFixup : public FieldClosure {
+private:
+  bool _value;
+
+public:
+  M3JoinedStringsFixup(bool value) : _value(value) {}
+
+  void do_field(fieldDescriptor* fd) {
+    if (fd->name() == vmSymbols::m3_joined_strings_name()) {
+      oop mirror = fd->field_holder()->java_mirror();
+      assert(fd->field_holder() == vmClasses::String_klass(), "Should be String");
+      assert(mirror != nullptr, "String must have mirror already");
+      mirror->bool_field_put(fd->offset(), _value);
+    }
+  }
+};
+
+void java_lang_String::set_m3_joined_strings(bool value) {
+  M3JoinedStringsFixup fix(value);
   vmClasses::String_klass()->do_local_static_fields(&fix);
 }
 
@@ -485,7 +509,11 @@ jchar* java_lang_String::as_unicode_string_or_null(oop java_string, int& length)
 
   jchar* result = NEW_RESOURCE_ARRAY_RETURN_NULL(jchar, length);
   if (result != nullptr) {
-    if (!is_latin1) {
+    if (java_lang_String::is_m3_joined(java_string)) {
+      for (int index = 0; index < length; index++) {
+        result[index] = java_lang_String::char_at(java_string, index);
+      }
+    } else if (!is_latin1) {
       for (int index = 0; index < length; index++) {
         result[index] = value->char_at(index);
       }
@@ -518,7 +546,11 @@ inline unsigned int java_lang_String::hash_code_impl(oop java_string, bool updat
 
   unsigned int hash = 0;
   if (length > 0) {
-    if (is_latin1) {
+    if (java_lang_String::is_m3_joined(java_string)) {
+      for (int index = 0; index < length; index++) {
+        hash = 31 * hash + (unsigned int)java_lang_String::char_at(java_string, index);
+      }
+    } else if (is_latin1) {
       hash = java_lang_String::hash_code(value->byte_at_addr(0), length);
     } else {
       hash = java_lang_String::hash_code(value->char_at_addr(0), length);
@@ -550,6 +582,17 @@ char* java_lang_String::as_quoted_ascii(oop java_string) {
   bool      is_latin1 = java_lang_String::is_latin1(java_string);
 
   if (length == 0) return nullptr;
+  if (java_lang_String::is_m3_joined(java_string)) {
+    int unicode_length = 0;
+    jchar* unicode = java_lang_String::as_unicode_string_or_null(java_string, unicode_length);
+    if (unicode == nullptr) {
+      return nullptr;
+    }
+    int result_length = UNICODE::quoted_ascii_length(unicode, unicode_length) + 1;
+    char* result = NEW_RESOURCE_ARRAY(char, result_length);
+    UNICODE::as_quoted_ascii(unicode, unicode_length, result, result_length);
+    return result;
+  }
 
   char* result;
   int result_length;
@@ -573,6 +616,11 @@ Symbol* java_lang_String::as_symbol(oop java_string) {
   typeArrayOop value  = java_lang_String::value(java_string);
   int          length = java_lang_String::length(java_string, value);
   bool      is_latin1 = java_lang_String::is_latin1(java_string);
+  if (java_lang_String::is_m3_joined(java_string)) {
+    int unicode_length = 0;
+    jchar* unicode = java_lang_String::as_unicode_string_or_null(java_string, unicode_length);
+    return SymbolTable::new_symbol(unicode, unicode_length);
+  }
   if (!is_latin1) {
     jchar* base = (length == 0) ? nullptr : value->char_at_addr(0);
     Symbol* sym = SymbolTable::new_symbol(base, length);
@@ -590,6 +638,14 @@ Symbol* java_lang_String::as_symbol_or_null(oop java_string) {
   typeArrayOop value  = java_lang_String::value(java_string);
   int          length = java_lang_String::length(java_string, value);
   bool      is_latin1 = java_lang_String::is_latin1(java_string);
+  if (java_lang_String::is_m3_joined(java_string)) {
+    int unicode_length = 0;
+    jchar* unicode = java_lang_String::as_unicode_string_or_null(java_string, unicode_length);
+    if (unicode == nullptr && unicode_length != 0) {
+      return nullptr;
+    }
+    return SymbolTable::probe_unicode(unicode, unicode_length);
+  }
   if (!is_latin1) {
     jchar* base = (length == 0) ? nullptr : value->char_at_addr(0);
     return SymbolTable::probe_unicode(base, length);
@@ -607,6 +663,11 @@ int java_lang_String::utf8_length(oop java_string, typeArrayOop value) {
   int length = java_lang_String::length(java_string, value);
   if (length == 0) {
     return 0;
+  }
+  if (java_lang_String::is_m3_joined(java_string)) {
+    int unicode_length = 0;
+    jchar* unicode = java_lang_String::as_unicode_string_or_null(java_string, unicode_length);
+    return UNICODE::utf8_length(unicode, unicode_length);
   }
   if (!java_lang_String::is_latin1(java_string)) {
     return UNICODE::utf8_length(value->char_at_addr(0), length);
@@ -629,6 +690,11 @@ char* java_lang_String::as_utf8_string(oop java_string, int& length) {
   typeArrayOop value = java_lang_String::value(java_string);
   length             = java_lang_String::length(java_string, value);
   bool     is_latin1 = java_lang_String::is_latin1(java_string);
+  if (java_lang_String::is_m3_joined(java_string)) {
+    int unicode_length = 0;
+    jchar* unicode = java_lang_String::as_unicode_string_or_null(java_string, unicode_length);
+    return UNICODE::as_utf8(unicode, unicode_length);
+  }
   if (!is_latin1) {
     jchar* position = (length == 0) ? nullptr : value->char_at_addr(0);
     return UNICODE::as_utf8(position, length);
@@ -644,6 +710,15 @@ char* java_lang_String::as_utf8_string_full(oop java_string, char* buf, int bufl
   typeArrayOop value = java_lang_String::value(java_string);
   int            len = java_lang_String::length(java_string, value);
   bool     is_latin1 = java_lang_String::is_latin1(java_string);
+  if (java_lang_String::is_m3_joined(java_string)) {
+    int unicode_length = 0;
+    jchar* unicode = java_lang_String::as_unicode_string_or_null(java_string, unicode_length);
+    utf8_len = UNICODE::utf8_length(unicode, unicode_length);
+    if (utf8_len >= buflen) {
+      buf = NEW_RESOURCE_ARRAY(char, utf8_len + 1);
+    }
+    return UNICODE::as_utf8(unicode, unicode_length, buf, utf8_len + 1);
+  }
   if (!is_latin1) {
     jchar *position = (len == 0) ? nullptr : value->char_at_addr(0);
     utf8_len = UNICODE::utf8_length(position, len);
@@ -666,6 +741,11 @@ char* java_lang_String::as_utf8_string(oop java_string, typeArrayOop value, char
          "value must be same as java_lang_String::value(java_string)");
   int     length = java_lang_String::length(java_string, value);
   bool is_latin1 = java_lang_String::is_latin1(java_string);
+  if (java_lang_String::is_m3_joined(java_string)) {
+    int unicode_length = 0;
+    jchar* unicode = java_lang_String::as_unicode_string_or_null(java_string, unicode_length);
+    return UNICODE::as_utf8(unicode, unicode_length, buf, buflen);
+  }
   if (!is_latin1) {
     jchar* position = (length == 0) ? nullptr : value->char_at_addr(0);
     return UNICODE::as_utf8(position, length, buf, buflen);
@@ -684,6 +764,13 @@ char* java_lang_String::as_utf8_string(oop java_string, int start, int len) {
   typeArrayOop value  = java_lang_String::value(java_string);
   bool      is_latin1 = java_lang_String::is_latin1(java_string);
   assert(start + len <= java_lang_String::length(java_string), "just checking");
+  if (java_lang_String::is_m3_joined(java_string)) {
+    jchar* unicode = NEW_RESOURCE_ARRAY(jchar, len);
+    for (int index = 0; index < len; index++) {
+      unicode[index] = java_lang_String::char_at(java_string, start + index);
+    }
+    return UNICODE::as_utf8(unicode, len);
+  }
   if (!is_latin1) {
     jchar* position = value->char_at_addr(start);
     return UNICODE::as_utf8(position, len);
@@ -698,6 +785,13 @@ char* java_lang_String::as_utf8_string(oop java_string, typeArrayOop value, int 
          "value must be same as java_lang_String::value(java_string)");
   assert(start + len <= java_lang_String::length(java_string), "just checking");
   bool is_latin1 = java_lang_String::is_latin1(java_string);
+  if (java_lang_String::is_m3_joined(java_string)) {
+    jchar* unicode = NEW_RESOURCE_ARRAY(jchar, len);
+    for (int index = 0; index < len; index++) {
+      unicode[index] = java_lang_String::char_at(java_string, start + index);
+    }
+    return UNICODE::as_utf8(unicode, len, buf, buflen);
+  }
   if (!is_latin1) {
     jchar* position = value->char_at_addr(start);
     return UNICODE::as_utf8(position, len, buf, buflen);
@@ -716,7 +810,13 @@ bool java_lang_String::equals(oop java_string, const jchar* chars, int len) {
     return false;
   }
   bool is_latin1 = java_lang_String::is_latin1(java_string);
-  if (!is_latin1) {
+  if (java_lang_String::is_m3_joined(java_string)) {
+    for (int i = 0; i < len; i++) {
+      if (java_lang_String::char_at(java_string, i) != chars[i]) {
+        return false;
+      }
+    }
+  } else if (!is_latin1) {
     for (int i = 0; i < len; i++) {
       if (value->char_at(i) != chars[i]) {
         return false;
@@ -746,6 +846,19 @@ bool java_lang_String::equals(oop str1, oop str2) {
     // Strings with different coders are never equal.
     return false;
   }
+  if (java_lang_String::is_m3_joined(str1) || java_lang_String::is_m3_joined(str2)) {
+    int length1 = java_lang_String::length(str1, value1);
+    int length2 = java_lang_String::length(str2, value2);
+    if (length1 != length2) {
+      return false;
+    }
+    for (int index = 0; index < length1; index++) {
+      if (java_lang_String::char_at(str1, index) != java_lang_String::char_at(str2, index)) {
+        return false;
+      }
+    }
+    return true;
+  }
   return value_equals(value1, value2);
 }
 
@@ -762,11 +875,13 @@ void java_lang_String::print(oop java_string, outputStream* st) {
 
   int length = java_lang_String::length(java_string, value);
   bool is_latin1 = java_lang_String::is_latin1(java_string);
+  bool is_m3 = java_lang_String::is_m3_joined(java_string);
 
   st->print("\"");
   for (int index = 0; index < length; index++) {
-    jchar c = (!is_latin1) ?  value->char_at(index) :
-                             ((jchar) value->byte_at(index)) & 0xff;
+    jchar c = is_m3 ? java_lang_String::char_at(java_string, index) :
+              ((!is_latin1) ? value->char_at(index) :
+                              ((jchar)value->byte_at(index)) & 0xff);
     if (c < ' ') {
       st->print("\\x%02X", c); // print control characters e.g. \x0A
     } else {
@@ -775,6 +890,32 @@ void java_lang_String::print(oop java_string, outputStream* st) {
   }
   st->print("\"");
 }
+
+// java_lang_M3StringStorage
+
+int java_lang_M3StringStorage::_segments_offset;
+int java_lang_M3StringStorage::_offsets_offset;
+int java_lang_M3StringStorage::_ends_offset;
+int java_lang_M3StringStorage::_length_offset;
+int java_lang_M3StringStorage::_coder_offset;
+
+#define M3_STRING_STORAGE_FIELDS_DO(macro) \
+  macro(_segments_offset, k, "segments", string_array_signature, false); \
+  macro(_offsets_offset,  k, "offsets",  int_array_signature,    false); \
+  macro(_ends_offset,     k, "ends",     int_array_signature,    false); \
+  macro(_length_offset,   k, "length",   int_signature,          false); \
+  macro(_coder_offset,    k, "coder",    byte_signature,         false);
+
+void java_lang_M3StringStorage::compute_offsets() {
+  InstanceKlass* k = vmClasses::M3StringStorage_klass();
+  M3_STRING_STORAGE_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+}
+
+#if INCLUDE_CDS
+void java_lang_M3StringStorage::serialize_offsets(SerializeClosure* f) {
+  M3_STRING_STORAGE_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+}
+#endif
 
 // java_lang_Class
 
@@ -5196,6 +5337,7 @@ void java_lang_InternalError::serialize_offsets(SerializeClosure* f) {
   //end
 
 #define BASIC_JAVA_CLASSES_DO_PART2(f) \
+  f(java_lang_M3StringStorage) \
   f(java_lang_System) \
   f(java_lang_ClassLoader) \
   f(java_lang_Throwable) \
@@ -5278,6 +5420,13 @@ void JavaClasses::serialize_offsets(SerializeClosure* soc) {
 #if INCLUDE_CDS_JAVA_HEAP
 bool JavaClasses::is_supported_for_archiving(oop obj) {
   Klass* klass = obj->klass();
+
+  if ((klass == vmClasses::String_klass() && java_lang_String::is_m3_joined(obj)) ||
+      klass == vmClasses::M3StringStorage_klass()) {
+    // Stage-2 M3 strings are rebuilt at runtime. Archiving their segment graph
+    // is intentionally deferred until explicit CDS relocation support exists.
+    return false;
+  }
 
   if (klass == vmClasses::ClassLoader_klass() ||  // ClassLoader::loader_data is malloc'ed.
       // The next 3 classes are used to implement java.lang.invoke, and are not used directly in

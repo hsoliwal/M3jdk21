@@ -421,6 +421,21 @@ public interface JavaLangAccess {
      */
     long stringConcatMix(long lengthCoder, String constant);
 
+    /**
+     * Returns true when ordinary String concatenation should preserve M3
+     * segmented storage rather than eagerly materializing one byte array.
+     */
+    boolean stringConcatUsesM3Storage();
+
+    /** Whether this String currently uses segmented M3 storage. */
+    boolean stringHasM3Storage(String value);
+
+    /** MIndex-compatible necessary-condition UTF-16 presence signal. */
+    long stringM3BitSignal64(String value);
+
+    /** MIndex-compatible precomputed character-class facts. */
+    int stringM3CharacterFlags(String value);
+
    /**
     * Get the coder for the supplied character.
     */

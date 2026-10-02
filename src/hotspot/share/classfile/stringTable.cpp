@@ -597,8 +597,16 @@ static size_t literal_size(oop obj) {
   size_t word_size = obj->size();
 
   if (obj->klass() == vmClasses::String_klass()) {
-    // This may overcount if String.value arrays are shared.
-    word_size += java_lang_String::value(obj)->size();
+    if (java_lang_String::is_m3_joined(obj)) {
+      oop storage = java_lang_String::m3_storage(obj);
+      word_size += storage->size();
+      word_size += java_lang_M3StringStorage::segments(storage)->size();
+      word_size += java_lang_M3StringStorage::offsets(storage)->size();
+      word_size += java_lang_M3StringStorage::ends(storage)->size();
+    } else {
+      // This may overcount if String.value arrays are shared.
+      word_size += java_lang_String::value(obj)->size();
+    }
   }
 
   return word_size * HeapWordSize;
@@ -698,7 +706,9 @@ static void print_string(Thread* current, outputStream* st, oop s) {
     int utf8_length = length;
     char* utf8_string;
 
-    if (!is_latin1) {
+    if (java_lang_String::is_m3_joined(s)) {
+      utf8_string = java_lang_String::as_utf8_string(s);
+    } else if (!is_latin1) {
       jchar* chars = value->char_at_addr(0);
       utf8_string = UNICODE::as_utf8(chars, utf8_length);
     } else {

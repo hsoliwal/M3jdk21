@@ -610,6 +610,11 @@ bool StringDedup::Table::deduplicate_if_permitted(oop java_string,
 void StringDedup::Table::deduplicate(oop java_string) {
   assert(java_lang_String::is_instance(java_string), "precondition");
   _cur_stat.inc_inspected();
+  if (java_lang_String::is_m3_joined(java_string)) {
+    // M3 content is owned by the immutable segment graph. String.value is only
+    // a compatibility sentinel and must never enter the byte-array dedup table.
+    return;
+  }
   if ((StringTable::shared_entry_count() > 0) &&
       try_deduplicate_shared(java_string)) {
     return;                     // Done if deduplicated against shared StringTable.
