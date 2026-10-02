@@ -88,7 +88,7 @@ public final class M3MultiPassPlan {
                         M3PassMode.VERIFY,
                         M3EditScope.LIBRARY_API,
                         false,
-                        List.of(),
+                        List.of("com.m3.rewrite.pass.M3VerificationPlanRecipe"),
                         "diff -> lint -> compile -> tests -> runtime gates satisfy task packet")));
     }
 
