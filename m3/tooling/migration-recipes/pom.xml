@@ -37,6 +37,8 @@
               <include>com/m3/rewrite/scope/*</include>
               <include>com/m3/rewrite/atom/*</include>
               <include>com/m3/rewrite/pipeline/*</include>
+              <include>com/m3/rewrite/hash/*</include>
+              <include>com/m3/rewrite/backport/*</include>
               <include>com/m3/rewrite/M3Java21ConvergenceRecipe*</include>
             </includes>
             <rules>
