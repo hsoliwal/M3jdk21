@@ -26,3 +26,7 @@ The image writer uses CREATE_NEW and never overwrites a mapped file. Build outpu
 The newly available Synexia PR 7388 is reconciled in `docs/synexia-reconciliation.md`; its existing Frozen/Joined/pool owners remain authoritative for Synexia. P0 types are provisional format experiments, not competing replacement APIs.
 
 See `docs/stages.md`, `docs/name-mapping.json`, and `evidence/constructor-pool-retirement.md`. No speedup, complete compatibility, or full jtreg pass is claimed.
+
+## MIndex / MatIndex migration handoff
+
+See [the migration specification](docs/mindex-migration-handoff.md), [mapping lifecycle](docs/migration-mapping-lifecycle.md), and [acceptance work packets](docs/migration-acceptance-matrix.md). These are documentation-only proposals for contributors, with a bounded source filename census and clearly illustrative mapping schema/example. The handoff distinguishes historical candidate receipts from current master acceptance; it does not certify a completed migration.
