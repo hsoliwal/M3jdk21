@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.M3Jdk21SourcePreimages
+displayName: Inventory exact JDK21 Java source preimages
+description: >-
+  Emits one non-mutating FILE-local SHA-256 preimage row for every parsed Java compilation unit.
+  Use together with the byte-exact whole-tree comparator and hash-pinned recipe crates.
+recipeList:
+  - com.m3.rewrite.verbatim.M3Jdk21SourceFingerprintRecipe
