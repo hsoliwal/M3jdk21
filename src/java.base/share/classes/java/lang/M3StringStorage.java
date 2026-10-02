@@ -40,6 +40,7 @@ final class M3StringStorage {
     private static final int MAX_SEGMENTS = 256;
     private static final int LARGE_LEAF = 4096;
     private static final int MAX_RETENTION_RATIO = 8;
+    private static final int MAX_CACHED_MATERIALIZED_BYTES = 64 * 1024;
 
     /*
      * These field names and types are part of the M3JDK VM/JDK private
@@ -294,7 +295,9 @@ final class M3StringStorage {
 
         byte[] created = new byte[byteLength];
         getBytes(created, 0, 0, coder, length);
-        materialized = created;
+        if (byteLength <= MAX_CACHED_MATERIALIZED_BYTES) {
+            materialized = created;
+        }
         return created;
     }
 
