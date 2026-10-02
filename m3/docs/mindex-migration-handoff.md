@@ -6,7 +6,7 @@ Target documentation base: `hsoliwal/M3jdk21@8bb6215372e07712f1fdf5a0cb912af4950
 
 ## Whole-JDK scope relationship
 
-This handoff is the deep MIndex/MatIndex slice of the larger JDK program; it no longer defines the outer migration scope. Use [whole-jdk-migration-scope.md](whole-jdk-migration-scope.md) as the program overview, [../migration/docs/ARCHITECTURE.md](../migration/docs/ARCHITECTURE.md) for shared architecture, [../migration/docs/COLLECTIONS.md](../migration/docs/COLLECTIONS.md) for the first-class collection replacement workstream, and [../migration/docs/WORK_PACKETS.md](../migration/docs/WORK_PACKETS.md) for dependency-ordered subsystem packets.
+This handoff is the deep MIndex/MatIndex slice of the larger JDK program; it no longer defines the outer migration scope. Use [whole-jdk-migration-scope.md](whole-jdk-migration-scope.md) as the program overview, [whole-jdk-subsystem-matrix.md](whole-jdk-subsystem-matrix.md) for module-level planning dispositions, [../migration/docs/ARCHITECTURE.md](../migration/docs/ARCHITECTURE.md) for shared architecture, [whole-jdk-collections-replacement.md](whole-jdk-collections-replacement.md) for the canonical collection design, [../migration/docs/COLLECTIONS.md](../migration/docs/COLLECTIONS.md) for its execution overlay, and [../migration/docs/WORK_PACKETS.md](../migration/docs/WORK_PACKETS.md) for dependency-ordered subsystem packets.
 
 Its dated source census, ownership distinctions, String/structure contracts and evidence limitations remain valid only for the exact scope and pins stated below. Do not reinterpret this slice as whole-JDK completion or as permission to collapse unrelated JDK subsystems into MIndex text representations.
 
