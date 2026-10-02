@@ -10,6 +10,8 @@ import csv
 import hashlib
 from pathlib import Path
 
+import plan as backport_plan
+
 EXPECTED_RELEASE_COUNTS = {22: 12, 23: 12, 24: 22, 25: 17, 26: 10, 27: 9}
 EXPECTED_TOTAL = sum(EXPECTED_RELEASE_COUNTS.values())
 
@@ -71,6 +73,36 @@ def verify_seed(root: Path) -> None:
             raise AssertionError(f"invalid JBS ID: {row['jbs']}")
 
 
+def verify_work_queue(root: Path) -> None:
+    expected = backport_plan.render(backport_plan.build(root))
+    actual_path = root / "m3/backports/BACKPORT_WORK_QUEUE.tsv"
+    actual = actual_path.read_text(encoding="utf-8")
+    if actual != expected:
+        raise AssertionError(
+            "BACKPORT_WORK_QUEUE.tsv differs from deterministic regeneration"
+        )
+
+    rows = read_tsv(actual_path)
+    if len(rows) != 95:
+        raise AssertionError(f"expected 95 backport work rows, found {len(rows)}")
+    identities = [row["identity"] for row in rows]
+    if len(identities) != len(set(identities)):
+        raise AssertionError("duplicate identity in backport work queue")
+
+
+def verify_passes(root: Path) -> None:
+    rows = read_tsv(root / "m3/backports/BACKPORT_PASSES.tsv")
+    if len(rows) != 7:
+        raise AssertionError(f"expected 7 backport passes, found {len(rows)}")
+    for ordinal, row in enumerate(rows):
+        if int(row["ordinal"]) != ordinal:
+            raise AssertionError(
+                f"backport pass ordinal drift at {ordinal}: {row['ordinal']}"
+            )
+        if not row["pass_id"].strip() or not row["stop_condition"].strip():
+            raise AssertionError(f"incomplete backport pass row: {row}")
+
+
 def verify_jcmd_backport(root: Path) -> None:
     manifest = read_tsv(root / "m3/backports/recipes/jdk-8357439/manifest.tsv")
     if len(manifest) != 2:
@@ -105,10 +137,12 @@ def main() -> int:
     root = args.root.resolve()
     verify_jeps(root)
     verify_seed(root)
+    verify_work_queue(root)
+    verify_passes(root)
     verify_jcmd_backport(root)
     print(
-        "PASS: 82 JEP rows, non-JEP seed uniqueness, "
-        "and exact JDK-8357439 donor blobs"
+        "PASS: 82 JEP rows, 95 deterministic work items, 7 backport passes, "
+        "non-JEP seed uniqueness, and exact JDK-8357439 donor blobs"
     )
     return 0
 
