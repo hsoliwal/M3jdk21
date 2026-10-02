@@ -1,8 +1,55 @@
-# MIndex-to-M3 migration coverage
+# Whole-JDK M3 migration coverage
 
 **INCOMPLETE**
 
-This is the current observed mapping coverage, not an exhaustive source inventory.
+Whole-JDK directory scope is established, but the complete symbol/ABI/dependency inventory and implementation migration are not complete.
+
+## Whole-JDK coverage denominator
+
+The inspected target baseline is hsoliwal/M3jdk21@45f546ff5bcb06a1b2604f14baf998785d98d9a1. Its src root contains 70 java.* / jdk.* source directories plus hotspot, demo and utils. The denominator also includes make/configure, native/platform sources, resources, generated sources and generators, tests, launchers, image/package tooling and bundled licensing surfaces. The complete directory list and taxonomy are in ../../docs/whole-jdk-migration-scope.md.
+
+This is a framework plus verified directory census, not a completed symbol/ABI/dependency inventory. Missing semantic inspection is recorded as open work rather than inferred absence.
+
+| Subsystem | Current planning disposition | Primary dependency / evidence need |
+| --- | --- | --- |
+| String, Unicode, charset, regex | replace/adapt candidates; incomplete | Deep text specs, exact UTF-16 differential tests, materialization, regex/encoding seams, VM/JNI/CDS/JIT gates |
+| Collections, maps, sets, queues/deques | mixed replace/adapt/reuse; incomplete | COLLECTIONS.md per-family contract, views/serialization/subclass/boxing evidence |
+| Concurrent collections and atomics | retain-pending-evidence / research candidates | JMM, linearization, progress, GC/reclamation, contention/resize tests |
+| Streams, iterators, spliterators, bulk algorithms | adapt/specialize candidates | Encounter order, callback/evaluation semantics, parallel behavior, precompute amortization |
+| I/O, NIO, buffers, files, networking, serialization | mixed adapt/reuse/platform-specific | Contiguous-array/native ownership, close/error behavior, mapped-file/platform and serialized-form tests |
+| Numeric, math, time and value APIs | mostly reuse pending measured specialization | Exact arithmetic/rounding/value contracts, caches/identity, serialization and benchmark evidence |
+| Reflection, method handles, class loading, modules/services | retain/adapt candidates | Loader identity, descriptors, access/init order, bootstrap dependency closure |
+| javac/compiler transformation | adapt + Route B tooling | Attributed semantic oracle, refusal corpus, deterministic recipes and replay |
+| HotSpot allocation/object layout/GC/references | blocked until exact candidate needs VM change | Oop layout, roots/barriers, all selected GCs, OOME/reference processing |
+| Interpreter/C1/C2/intrinsics/JVMCI | blocked behind library/layout candidates | -Xint/tiered/intrinsic/deopt and CPU-specific evidence |
+| JNI/native/platform/serviceability | platform-specific, cross-cutting | JNI contracts, native lifetime, JVMTI/JFR/SA/attach and OS/CPU matrix |
+| Security/crypto/providers | retain-pending-evidence by default | Provider/vector/side-channel/key-lifetime/security review |
+| Higher java.* / jdk.* modules | per-module review required | Package/symbol/resource/native inventory and dependency-ordered dispositions |
+| Build/image/package/distribution | retain/adapt | OpenJDK build compatibility, exact image, feature rollback and release provenance |
+
+Per-subsystem implementation packets and dependency order are in WORK_PACKETS.md. No row above is an operational capability status change.
+
+## Required inventory row shape
+
+For every module/package/public-or-relevant-internal symbol, native ABI, format, resource/generator and test obligation record:
+
+- stable capability/mapping ID or explicit pending-ID decision;
+- source and target commit plus fully qualified symbol/path;
+- semantic/storage owner and lifetime/identity domain;
+- dependencies and reverse consumers;
+- Route A/B/C eligibility and bootstrap phase;
+- current representation and proposed/retained disposition;
+- API/binary/serialization/native/format contracts;
+- recipe/transformation applicability;
+- required differential/concurrency/runtime/performance evidence;
+- provenance/license obligations;
+- status and unresolved conflicts.
+
+One-to-many, many-to-one, rename, split, consolidation, deletion and target-only adaptations are first-class. Source inspected, source ported, target retained and behavior verified are separate facts.
+
+## MIndex/MatIndex slice coverage
+
+This is the current observed MIndex/MatIndex mapping coverage, not an exhaustive source inventory.
 
 Source baseline: `75fb1abaecb56969bea2914520bbe819f130632b`.
 Target baseline: `d6390ea3bb348f0c22afdba0819ca4ec0e97970f`.
