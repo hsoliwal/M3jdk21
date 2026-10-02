@@ -37,7 +37,7 @@ final class M3ScopeContractTest {
                 M3EditScope.FILE,
                 M3ScopeInference.forJavaPaths(List.of("src\\test\\java\\com\\acme\\FooTest.java")));
         assertEquals(
-                M3EditScope.PACKAGE_VISIBILITY,
+                M3EditScope.PACKAGE,
                 M3ScopeInference.forJavaPaths(List.of(
                         "src/main/java/com/acme/Foo.java",
                         "src/main/java/com/acme/Bar.java")));
@@ -78,7 +78,7 @@ final class M3ScopeContractTest {
                 M3EditScope.FILE,
                 inferred.resolve(List.of("src/main/java/a/A.java")));
         assertEquals(
-                M3EditScope.PACKAGE_VISIBILITY,
+                M3EditScope.PACKAGE,
                 inferred.resolve(List.of(
                         "src/main/java/a/A.java",
                         "src/main/java/a/B.java")));

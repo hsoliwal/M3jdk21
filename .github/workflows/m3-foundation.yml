@@ -33,6 +33,8 @@ jobs:
           python3 m3/runtime-integration/char-array-copy/recipe/apply.py
           trap - EXIT
           python3 m3/runtime-integration/char-array-copy/recipe/apply.py --check
+      - name: Verify OpenRewrite convergence DAG
+        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
       - name: Build and exercise immutable foundation
         run: ./m3/build.sh
       - name: Compare pinned Synexia content and range contract
