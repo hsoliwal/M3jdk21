@@ -85,11 +85,15 @@ Exit: exact-image acceptance for every advertised mode; historical interpreter-o
 
 ## Known source issues must not be hidden by migration
 
-- Duplicate m3-mindex-native-string-admission profiles occur in synexia-indexstring/pom.xml at the documented source pin. Keep build-configuration remediation separate and rerun the real build after it is resolved
+- Duplicate m3-mindex-native-string-admission profiles occur at the original census pin. At newer source 8830a34a042d79e2d1b89b850d177c3038bf975e the POM has one such profile: source-corrected, but Maven/build acceptance is not verified. Preserve both pin-qualified observations
 - Runtime SubMIndexString rejects a split surrogate endpoint while the general code-unit slicing contract permits it. This requires a compatibility decision, not a blind class rename
 - PR #7554 at 4574363a63c74c52183eb2deae134163d409816f has an output languages parameter shadowing the stored lane in copyLiteralGeometryPage. The assignment reads the output buffer at the source-row index; wrong metadata or out-of-bounds access is possible. Documented by source inspection, not fixed/tested here. Require nonzero-page and mixed-language regression tests before reuse
 - Source CI/source download authentication failures are not semantic test passes and do not authorize public export of private implementation files
 - #6's two enabled StringJoiner test failures remain failures even if reduced allocation explains the OOME expectation difference. Resolve the contract and tests through review; do not remove them to claim green
+
+## Companion evidence qualification
+
+See the handoff's follow-on reconciliation for #7584's three-route/owning-substring distinction, #7606's private inventory workflow and #7607's six-file retained-view closure. None establishes exhaustive family coverage. Target #12's hosted gate passed 15 mapping validations and six validator cases, then failed generated COVERAGE.md drift before Java compilation. Preserve that gate and require the later compilation/runtime receipts. This document's illustrative mapping schema must not compete with the reviewed operational manifest in the companion target work.
 
 ## Performance acceptance
 
