@@ -29,6 +29,7 @@ public final class M3SegmentedLaneNativeRecipe extends ScanningRecipe<M3Segmente
         private boolean conflict;
         private State(String text) { this.text = text; }
     }
+
     @Override public String getDisplayName() { return "M3 segmented bitmap JNI candidate"; }
     @Override public String getDescription() {
         return "Adds a sealed JNI bitmap counter only when its target is absent or already identical.";
