@@ -1,5 +1,6 @@
 order	stage	recipe_id	class	scope	contract	status	proof
 0	INVENTORY	m3.java21.inventory.pure-int	com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates	FILE	BEHAVIOR_AND_CONTRACT_PRESERVING	ADMITTED_BY_CODE	JUnit + top-level Maven verify
+5	SEMANTIC_HASH	m3.java21.semantic-hash.file	com.m3.rewrite.hash.M3SemanticHashRecipe	FILE	BEHAVIOR_AND_CONTRACT_PRESERVING	ADMITTED_BY_CODE	JUnit + non-mutating DataTable + versioned multi-plane hash
 10	ATOMIZATION	m3.java21.atomize.pure-int	com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe	FILE	BEHAVIOR_AND_CONTRACT_PRESERVING	ADMITTED_BY_CODE	JUnit + Java21 compile/runtime + fixed point
 20	PATTERNIZATION_IOP	m3.java21.patternize-iop.pure-int	com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe	FILE	BEHAVIOR_AND_CONTRACT_PRESERVING	ADMITTED_BY_CODE	JUnit + fixed point
 30	DOCUMENTATION	m3.java21.document.pure-int	com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe	FILE	BEHAVIOR_AND_CONTRACT_PRESERVING	ADMITTED_BY_CODE	JUnit + fixed point
