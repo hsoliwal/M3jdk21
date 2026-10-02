@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.rewrite;
 
+import com.m3.rewrite.scope.M3ScopeFence;
+import com.m3.rewrite.scope.M3ScopedRecipe;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -23,12 +25,14 @@ import org.openrewrite.java.JavaParser;
 import org.openrewrite.java.tree.J;
 
 /** Explicit additive compatibility installation, not java.base or automatic caller lowering. */
-public final class InstallIndexStringCompatibility extends ScanningRecipe<InstallIndexStringCompatibility.State> {
+public final class InstallIndexStringCompatibility extends ScanningRecipe<InstallIndexStringCompatibility.State> implements M3ScopedRecipe {
+  private static final M3ScopeFence EDIT_SCOPE = M3ScopeFence.module("m3/ports/indexstring");
   private static final String ROOT = "/com/m3/rewrite/port/";
   private static final String MODULE = "m3/ports/indexstring/";
   private static final String[] NAMES = {"FrozenBytes.java", "FrozenChars.java", "MIndexJoinedBytes.java",
       "MIndexJoinedChars.java", "MIndexJoinedStorageIntern.java", "MIndexJoinedStreams.java", "M3Text.java"};
   public static final class State { final Map<String, SourceFile> files = new HashMap<>(); }
+  @Override public M3ScopeFence editScope() { return EDIT_SCOPE; }
   @Override public String getDisplayName() { return "Install the pinned IndexString compatibility port"; }
   @Override public String getDescription() {
     return "Require the exact standalone POM, generate all seven sources, and refuse partial or divergent target state.";
