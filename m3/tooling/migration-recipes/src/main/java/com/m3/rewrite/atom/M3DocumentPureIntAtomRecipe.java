@@ -10,6 +10,7 @@ import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaIsoVisitor;
 import org.openrewrite.java.tree.Comment;
 import org.openrewrite.java.tree.J;
+import org.openrewrite.java.tree.Javadoc;
 import org.openrewrite.java.tree.TextComment;
 import org.openrewrite.marker.Markers;
 
@@ -56,9 +57,19 @@ public final class M3DocumentPureIntAtomRecipe extends Recipe {
     }
 
     private static boolean hasDocumentation(J.MethodDeclaration method) {
-        return method.getComments().stream()
-                .filter(TextComment.class::isInstance)
-                .map(TextComment.class::cast)
-                .anyMatch(comment -> comment.getText().contains(DOC_ID));
+        for (Comment comment : method.getComments()) {
+            if (comment instanceof TextComment textComment
+                    && textComment.getText().contains(DOC_ID)) {
+                return true;
+            }
+            if (comment instanceof Javadoc.DocComment docComment
+                    && docComment.getBody().stream()
+                            .filter(Javadoc.Text.class::isInstance)
+                            .map(Javadoc.Text.class::cast)
+                            .anyMatch(text -> text.getText().contains(DOC_ID))) {
+                return true;
+            }
+        }
+        return false;
     }
 }
