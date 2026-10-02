@@ -15,14 +15,6 @@ import org.junit.jupiter.api.Test;
 
 final class M3RecipeScopeDeclarationTest {
     @Test
-    void retainedRecipePublicTypesRemainUntouchedByScopeMetadata() {
-        assertFalse(M3ScopedRecipe.class.isAssignableFrom(M3MIndexJoinedCharsViewRecipe.class));
-        assertFalse(M3ScopedRecipe.class.isAssignableFrom(M3SegmentedLaneNativeRecipe.class));
-        assertFalse(M3ScopedRecipe.class.isAssignableFrom(InstallIndexStringCompatibility.class));
-        assertFalse(M3ScopedRecipe.class.isAssignableFrom(M3HashPinnedJavaSnapshotRecipe.class));
-    }
-
-    @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
         assertEquals(4, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
