@@ -40,7 +40,74 @@ Before subsystem-specific backends are proposed, resolve whether an existing Syn
 
 When two components have similar names but incompatible lifetime/equality/order semantics, keep them separate and write an adapter or explicit consolidation decision. No “M3 universal store” is created by default.
 
-## 3. Ten dependency-aware passes
+## 3. Atomization, patternization and mapping discipline
+
+The unit of migration is a **sealed semantic atom**, not a file and not a class name. A packet first chooses the external behavior/contract boundary that must remain stable, then decomposes the current implementation inside that boundary.
+
+### Atom record
+
+Each source and target atom should identify:
+
+- stable packet-local atom ID plus owning capability ID;
+- repository, commit, path and qualified symbol/range;
+- sealed contract boundary and observable behavior;
+- inputs, outputs, side effects and failure/exception behavior;
+- identity, mutability, lifetime, serialization/native/bootstrap/JMM assumptions;
+- typed dependencies and reverse consumers;
+- Route A/B/C applicability;
+- exact tests/evidence required for replacement;
+- structural/logic/content hashes as discovery and drift evidence, never semantic proof.
+
+Atoms with cyclic semantic dependencies are kept as one compound atom or collapsed as a strongly connected component. The resulting published atom graph is a deterministic DAG. This prevents a claimed “atomization” from hiding an unresolved cycle.
+
+### Pattern record
+
+Patternization occurs only after the atom contract is known. A reusable pattern contains:
+
+- stable pattern ID and version;
+- atom roles and required dependency shape;
+- semantic preconditions and required attribution/context;
+- transformation/adaptation algorithm;
+- explicit refusal cases;
+- target postconditions and preserved contracts;
+- recipe/patch identity and source preimage rules;
+- differential/concurrency/runtime evidence template;
+- complexity, allocation and precomputation cost model;
+- known incompatible examples.
+
+One pattern may apply to many source atoms, and one source atom may require several composed patterns. Composition order is explicit and deterministic. If two patterns interfere, record the conflict instead of relying on invocation order by accident.
+
+### Mapping edges
+
+Every applied pattern produces traceable edges:
+
+```text
+source symbol
+  -> source atom
+  -> pattern/version
+  -> recipe application receipt
+  -> target atom
+  -> target symbol
+  -> evidence
+```
+
+Mapping is many-to-many. A rename, split, merge, retained target adaptation or target-only improvement remains visible rather than being flattened into a filename replacement. Atom/pattern identities are subordinate to the existing capability mapping authority; they do not create a second registry.
+
+### Parallel work, serial promotion
+
+Independent atom discovery, analysis, recipe synthesis and focused testing may run in parallel after the contract boundary is sealed. Promotion of a capability is serial:
+
+1. close atom coverage for the selected boundary;
+2. close pattern coverage or mark explicit one-off atoms;
+3. reconcile all source→target mapping edges;
+4. replay the deterministic recipe/patch on the exact target;
+5. run the candidate-bound acceptance gates;
+6. update mapping/evidence together;
+7. only then promote the capability.
+
+A single failed or unmapped required atom blocks promotion of the containing capability.
+
+## 4. Ten dependency-aware passes
 
 These are the programme passes for whole-JDK migration. They supplement existing text-specific P0/P1/etc. history; they do not rewrite or renumber historical receipts.
 
@@ -49,8 +116,9 @@ These are the programme passes for whole-JDK migration. They supplement existing
 - Pin target JDK tree and every source-owner tree used for planning.
 - Inventory the entire JDK denominator: modules, packages, symbols, nested/public/protected/internal surfaces, native boundaries, formats/resources, services, generators, build surfaces and tests.
 - Inventory MIndex/MatIndex/Synexia candidate owners and competing implementations.
+- Seal behavior/contract boundaries, atomize each selected boundary and collapse dependency cycles into explicit compound atoms/SCCs.
 - Record missing/unavailable/private surfaces as explicit gaps.
-- Output: source census, owner census, reverse-consumer edges, immutable commit/blob identities.
+- Output: source census, owner census, atom DAG roots, reverse-consumer edges, immutable commit/blob identities.
 - Stop gate: no “complete” claim while any denominator bucket is unenumerated.
 
 ### Pass 2 — subsystem/dependency/bootstrap map
@@ -66,8 +134,9 @@ These are the programme passes for whole-JDK migration. They supplement existing
 - Reconcile the established mapping authority and branch-scoped historical manifests.
 - Extend stable capability IDs rather than introducing a parallel registry.
 - Assign each inventoried surface one disposition: replace backend, adapt, reuse, retain pending evidence, platform-specific, blocked/deferred.
-- Record many-to-many split/consolidation/adapters explicitly.
-- Stop gate: no target mapping promoted without source/target pins and contract owner.
+- Patternize repeated atom transformations and bind accepted pattern IDs/versions to reusable recipes or equivalent source-pinned patches.
+- Record source-atom → pattern → target-atom many-to-many edges, including split/consolidation/adapters explicitly.
+- Stop gate: no target mapping promoted without source/target pins, sealed contract owner, complete required atom coverage and explicit pattern dispositions.
 
 ### Pass 4 — minimal storage/ownership/identity foundations
 
@@ -154,7 +223,7 @@ Audit:
 
 Publish one consolidated resume state pointing to authoritative mappings and evidence. Historical receipts remain pinned and are not rewritten to match a newer owner.
 
-## 4. Common work-packet schema
+## 5. Common work-packet schema
 
 Every subsystem implementation packet should carry:
 
@@ -164,6 +233,11 @@ status
 target_repo + target_commit
 source_owner_repo + source_commit
 mapping_ids
+sealed_contract_boundary
+source_atom_ids + source_atom_dag_root
+pattern_ids + pattern_versions + pattern_coverage
+target_atom_ids + target_atom_dag_root
+source_atom_pattern_target_edges
 target_modules/packages/symbols
 native/resource/build/test surfaces
 current_semantic_owner
@@ -176,6 +250,8 @@ route_A_scope
 route_B_scope_and_refusals
 route_C_scope_and_vm_consumers
 recipe_or_patch_identity
+pattern_preconditions + refusal_cases
+atom_coverage_receipt + pattern_coverage_receipt
 pre_hashes
 post_hashes
 differential_tests
@@ -192,7 +268,7 @@ last_verified_target
 
 No field may be inferred from a PR title. “Source inspected”, “source ported”, “target retained”, “candidate tested”, “accepted”, and “merged” are distinct facts.
 
-## 5. Subsystem packets and acceptance criteria
+## 6. Subsystem packets and acceptance criteria
 
 ### WP-TEXT — String, chars, Unicode, charset, regex
 
@@ -343,7 +419,7 @@ Acceptance:
 - supported cross-build/platform matrix;
 - tools remain outside runtime bootstrap unless already required.
 
-## 6. Evidence and “bloat” measurement model
+## 7. Evidence and “bloat” measurement model
 
 Measure categories separately:
 
@@ -373,7 +449,7 @@ Precomputation documents:
 - concurrency/publication;
 - amortization/break-even.
 
-## 7. Verification suites
+## 8. Verification suites
 
 Per affected subsystem select and pin:
 - API differential tests against stock JDK;
@@ -388,7 +464,7 @@ Per affected subsystem select and pin:
 
 A benchmark PASS cannot override a semantic FAIL. A historical PASS belongs to its exact source/target/environment hashes only.
 
-## 8. Provenance and licensing
+## 9. Provenance and licensing
 
 For every imported or adapted donor:
 - pin repository, commit/tag and exact files;
@@ -400,7 +476,7 @@ For every imported or adapted donor:
 
 OpenJDK files retain their upstream license headers and applicable Assembly Exception. Separate Apache-2.0 Synexia code cannot be dropped into GPLv2+Classpath/OpenJDK files without a reviewed licensing decision.
 
-## 9. Rollout and rollback
+## 10. Rollout and rollback
 
 Every Route C replacement starts default-off unless compatibility policy explicitly says otherwise and evidence justifies default enablement.
 
@@ -418,7 +494,7 @@ Rollback:
 - retained persistent formats must have version/fallback policy;
 - a failed runtime gate blocks promotion and returns the subsystem to the last verified stage.
 
-## 10. Completion semantics
+## 11. Completion semantics
 
 The programme is not complete when:
 - a facade compiles;
