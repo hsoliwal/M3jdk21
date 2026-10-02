@@ -74,6 +74,9 @@ final class M3SemanticIndexPersistenceTest {
             assertEquals(1, index.nodesOfKind(M3IndexDbSemanticKind.REPOSITORY).size());
 
             var atom = index.nodesOfKind(M3IndexDbSemanticKind.ATOM).getFirst();
+            assertTrue(atom.patternRole().startsWith("M3:ATOM:"));
+            assertTrue(index.patternRole(atom.patternRole()).contains(atom));
+            assertFalse(index.patternRole("M3:METHOD").isEmpty());
             assertTrue(index.logicSha256(atom.fingerprint().logicSha256()).contains(atom));
             assertTrue(index.structuralSha256(atom.fingerprint().structuralSha256()).contains(atom));
             assertTrue(index.nearSimHash(atom.fingerprint().simHash64(), 0)
