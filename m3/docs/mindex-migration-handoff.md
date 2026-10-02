@@ -4,6 +4,12 @@ Status: **proposed migration specification, not an implementation or compatibili
 Snapshot: 2026-10-02. Source discovery pin: `hsoliwal/com.synexia@bc49cd7610bf5974f6baa31ba64e6885f4117528`.
 Target documentation base: `hsoliwal/M3jdk21@8bb6215372e07712f1fdf5a0cb912af495007b19`.
 
+## Whole-JDK scope relationship
+
+This handoff is the deep MIndex/MatIndex slice of the larger JDK program; it no longer defines the outer migration scope. Use [whole-jdk-migration-scope.md](whole-jdk-migration-scope.md) as the program overview, [../migration/docs/ARCHITECTURE.md](../migration/docs/ARCHITECTURE.md) for shared architecture, [../migration/docs/COLLECTIONS.md](../migration/docs/COLLECTIONS.md) for the first-class collection replacement workstream, and [../migration/docs/WORK_PACKETS.md](../migration/docs/WORK_PACKETS.md) for dependency-ordered subsystem packets.
+
+Its dated source census, ownership distinctions, String/structure contracts and evidence limitations remain valid only for the exact scope and pins stated below. Do not reinterpret this slice as whole-JDK completion or as permission to collapse unrelated JDK subsystems into MIndex text representations.
+
 ## Read this first
 
 The requested outcome is one coherent M3 architecture with a durable source-to-target map so future Synexia enhancements can be ported deliberately. It is not a global search-and-replace of MIndex or MatIndex, and it is not a promise that all indexed values become java.lang.String.
