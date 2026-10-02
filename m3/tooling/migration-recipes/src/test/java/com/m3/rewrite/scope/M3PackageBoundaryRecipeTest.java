@@ -55,7 +55,7 @@ final class M3PackageBoundaryRecipeTest {
         var row = left.getFirst();
         assertEquals("p", row.packageName());
         assertEquals(2, row.fileCount());
-        assertEquals(5, row.declarationCount());
+        assertEquals(6, row.declarationCount());
         assertEquals(64, row.boundaryRoot().length());
         assertEquals("M3:PACKAGE_BOUNDARY", row.patternRole());
     }
