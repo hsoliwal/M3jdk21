@@ -39,6 +39,7 @@ import java.util.Arrays;
 import java.util.zip.CRC32;
 
 import jdk.internal.mindex.MIndexMappedStringBacking;
+import jdk.internal.mindex.MIndexStrings;
 
 public class MIndexMappedStringBackingTest {
     private static final int TEXT_MAGIC = 0x4d49584d;
@@ -122,6 +123,57 @@ public class MIndexMappedStringBackingTest {
 
             check(backing.compare(defaultId, languageAliasId) == 0, "cross-language compare");
 
+            MIndexStrings.install(backing);
+            String backed = MIndexStrings.fromId(defaultId);
+            String aliasBacked = MIndexStrings.fromId(languageAliasId);
+
+            check(MIndexStrings.isBacked(backed), "String MIndex marker");
+            check(MIndexStrings.id(backed) == defaultId, "String MIndex ID");
+            check(backed.length() == logical.length(), "String length through MIndex");
+            check(!backed.isEmpty(), "String isEmpty through MIndex");
+            check(backed.hashCode() == logical.hashCode(), "String hash through MIndex");
+            check(backed.equals(logical), "backed -> ordinary equality");
+            check(logical.equals(backed), "ordinary -> backed equality");
+            check(backed.equals(aliasBacked), "cross-language backed equality");
+            check(backed.compareTo(logical) == 0, "backed compare ordinary");
+            check(logical.compareTo(backed) == 0, "ordinary compare backed");
+            check(backed.compareTo(aliasBacked) == 0, "backed compare alias");
+
+            for (int index = 0; index < logical.length(); index++) {
+                check(backed.charAt(index) == logical.charAt(index),
+                        "String charAt through MIndex " + index);
+            }
+            int emojiCodePoint = logical.indexOf("\uD83D\uDE00");
+            check(backed.codePointAt(emojiCodePoint) == logical.codePointAt(emojiCodePoint),
+                    "String codePointAt through MIndex");
+            check(backed.codePointBefore(emojiCodePoint + 2)
+                            == logical.codePointBefore(emojiCodePoint + 2),
+                    "String codePointBefore through MIndex");
+            check(backed.codePointCount(0, backed.length())
+                            == logical.codePointCount(0, logical.length()),
+                    "String codePointCount through MIndex");
+
+            check(Arrays.equals(
+                            backed.getBytes(StandardCharsets.UTF_8),
+                            logical.getBytes(StandardCharsets.UTF_8)),
+                    "String UTF-8 getBytes through canonical byte backing");
+            check(Arrays.equals(backed.getBytes(), logical.getBytes()),
+                    "String default getBytes parity");
+
+            String copied = new String(backed);
+            check(MIndexStrings.isBacked(copied), "copy constructor keeps MIndex attachment");
+            check(MIndexStrings.id(copied) == defaultId, "copy constructor keeps MIndex ID");
+            check(copied.equals(logical), "copy constructor content");
+
+            String splitHigh = backed.substring(emojiCodePoint, emojiCodePoint + 1);
+            String splitLow = backed.substring(emojiCodePoint + 1, emojiCodePoint + 2);
+            check(splitHigh.equals(logical.substring(emojiCodePoint, emojiCodePoint + 1)),
+                    "backed String high-surrogate substring");
+            check(splitLow.equals(logical.substring(emojiCodePoint + 1, emojiCodePoint + 2)),
+                    "backed String low-surrogate substring");
+            check(!MIndexStrings.isBacked(splitHigh),
+                    "substring materializes ordinary fallback during shadow phase");
+
             boolean rejected = false;
             try {
                 backing.length(id(8, 1));
@@ -132,7 +184,7 @@ public class MIndexMappedStringBackingTest {
         }
 
         System.out.println(
-                "MINDEX_JDK_MAPPED_BACKING_PASS|utf16=1|utf8=1|alias=1|substring=1|jni=0");
+                "MINDEX_JDK_MAPPED_BACKING_PASS|utf16=1|utf8=1|alias=1|substring=1|string=shadow|jni=0");
     }
 
     private static void writeFixture(Path textPath, String logical) throws Exception {
