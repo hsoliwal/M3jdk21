@@ -5,3 +5,4 @@ m3-donor-inline	com.m3.rewrite.donor.M3PinnedDonorInlineRecipe	MODULE	BEHAVIOR_A
 m3-fuzzy-recipe-dag	com.m3.rewrite.dag.M3RecipeDagPlannerRecipe	MULTI_MODULE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
 m3-semantic-index	com.m3.rewrite.index.M3SemanticIndexRecipe	FILE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
 m3-semantic-index-m3db	com.m3.rewrite.index.M3SemanticIndexM3DbBridgeRecipe	MULTI_MODULE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
+m3-type-relations	com.m3.rewrite.index.M3TypeRelationRecipe	MODULE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
