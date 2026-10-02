@@ -150,10 +150,15 @@ It extracts:
 
 It may fan out independently across files.
 
-M3SemanticIndexM3DbBridgeRecipe is a broader fan-in recipe. It reads the DataTables, asks M3IndexDB
-to normalize/recompose them, and persists the canonical content-addressed artifact.
+M3TypeRelationRecipe is the explicit MODULE-scope promotion. It scans attributed source types and
+adds IMPLEMENTS/EXTENDS edges only when both source and target types are present in the scanned
+module. External or unresolved targets are not guessed.
 
-The bridge is not allowed to become a second hash or binary-format owner.
+M3SemanticIndexM3DbBridgeRecipe is the MULTI_MODULE fan-in recipe. It runs FILE extraction plus
+MODULE relationship resolution, reads their DataTables, asks M3IndexDB to normalize/recompose them,
+and persists the canonical content-addressed artifact.
+
+The resolver and bridge are not allowed to become second hash or binary-format owners.
 
 ## Scope expansion
 
@@ -173,7 +178,7 @@ Examples:
 - private method atomization: FILE;
 - accessibility change: VISIBILITY;
 - package-private participant reconciliation: PACKAGE;
-- implements/extends resolution across source files: MODULE;
+- implements/extends resolution across source files: MODULE (implemented by M3TypeRelationRecipe);
 - reactor-wide framework/pattern graph: MULTI_MODULE;
 - exported public contract change: LIBRARY_API.
 
