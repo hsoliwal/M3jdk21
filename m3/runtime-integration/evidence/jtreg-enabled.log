@@ -1,0 +1,6 @@
+Directory "/workspace/m3-integration-final-jtreg/jtreg-enabled-work" not found: creating
+Directory "/workspace/m3-integration-final-jtreg/jtreg-enabled-report" not found: creating
+Test results: passed: 16; failed: 2
+Report written to /workspace/m3-integration-final-jtreg/jtreg-enabled-report/html/report.html
+Results written to /workspace/m3-integration-final-jtreg/jtreg-enabled-work
+Error: Some tests failed or other problems occurred.

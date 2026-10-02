@@ -203,6 +203,54 @@ int vmIntrinsics::predicates_needed(vmIntrinsics::ID id) {
 bool vmIntrinsics::disabled_by_jvm_flags(vmIntrinsics::ID id) {
   assert(id != vmIntrinsics::_none, "must be a VM intrinsic");
 
+  // Stage-2 M3 Strings may carry segmented backing while String.value is only
+  // a compatibility sentinel. Until each String intrinsic has a segment-aware
+  // lowering, fail closed and execute the Java implementations.
+  if (UseM3StringStorage) {
+    switch (id) {
+    case vmIntrinsics::_String_String:
+    case vmIntrinsics::_compressStringC:
+    case vmIntrinsics::_compressStringB:
+    case vmIntrinsics::_inflateStringC:
+    case vmIntrinsics::_inflateStringB:
+    case vmIntrinsics::_toBytesStringU:
+    case vmIntrinsics::_getCharsStringU:
+    case vmIntrinsics::_getCharStringU:
+    case vmIntrinsics::_putCharStringU:
+    case vmIntrinsics::_compareToL:
+    case vmIntrinsics::_compareToU:
+    case vmIntrinsics::_compareToLU:
+    case vmIntrinsics::_compareToUL:
+    case vmIntrinsics::_indexOfL:
+    case vmIntrinsics::_indexOfU:
+    case vmIntrinsics::_indexOfUL:
+    case vmIntrinsics::_indexOfIL:
+    case vmIntrinsics::_indexOfIU:
+    case vmIntrinsics::_indexOfIUL:
+    case vmIntrinsics::_indexOfU_char:
+    case vmIntrinsics::_indexOfL_char:
+    case vmIntrinsics::_equalsL:
+    case vmIntrinsics::_equalsU:
+    case vmIntrinsics::_StringBuilder_void:
+    case vmIntrinsics::_StringBuilder_int:
+    case vmIntrinsics::_StringBuilder_String:
+    case vmIntrinsics::_StringBuilder_append_char:
+    case vmIntrinsics::_StringBuilder_append_int:
+    case vmIntrinsics::_StringBuilder_append_String:
+    case vmIntrinsics::_StringBuilder_toString:
+    case vmIntrinsics::_StringBuffer_void:
+    case vmIntrinsics::_StringBuffer_int:
+    case vmIntrinsics::_StringBuffer_String:
+    case vmIntrinsics::_StringBuffer_append_char:
+    case vmIntrinsics::_StringBuffer_append_int:
+    case vmIntrinsics::_StringBuffer_append_String:
+    case vmIntrinsics::_StringBuffer_toString:
+      return true;
+    default:
+      break;
+    }
+  }
+
   // -XX:-InlineNatives disables nearly all intrinsics except the ones listed in
   // the following switch statement.
   if (!InlineNatives) {

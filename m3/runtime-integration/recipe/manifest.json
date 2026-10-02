@@ -1,0 +1,108 @@
+{
+  "base_commit": "3dbb233235d5e3d539ed2cce645e6e2b2952576c",
+  "pr4_source": "fbe45aec581d992af6192756f9e1358eec587582",
+  "upstream_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
+  "patch_sha256": "0fd2e3a53d240d88360eb0906bd7a5f8ed383ab35e8a6306d757247f8ad62124",
+  "files": {
+    "src/hotspot/share/classfile/javaClasses.cpp": {
+      "before": "ff253deee4139f38f05c8630d46f58a48fe8dcc41bccf7ded917f425224a96b4",
+      "after": "8f23cb683cb34fba46b0eadcfeb39898d42e267dcb7ae6e348c48bfd470b9936"
+    },
+    "src/hotspot/share/classfile/javaClasses.hpp": {
+      "before": "447d78f56780f1130b9d4c80691cb1f25456a2d9562b7817fab7d023fe5f380c",
+      "after": "c72e2f6fcec1665b2daadd4d288dd98b349d3955e38e8f17ef0476f66e3b5f02"
+    },
+    "src/hotspot/share/classfile/javaClasses.inline.hpp": {
+      "before": "cd3cd7eda9b081c174cd26ca26198e53ef79e7528d1634b29049fe246f5d13f9",
+      "after": "edbc37d89f16f55064dd9ecaa9656bdd6b99d28b9a7570dac95c91d8357aafae"
+    },
+    "src/hotspot/share/classfile/vmClassMacros.hpp": {
+      "before": "26a9809aec481374f463c0c36857b939b17c360d0c828d7cd3f731a5e450933b",
+      "after": "517ff68a8161e1c59dec99bae75133f6c463811bd11bd96bb295ec11c081eb85"
+    },
+    "src/hotspot/share/classfile/vmIntrinsics.cpp": {
+      "before": "44609d2bfe3053e1c6e330de440cbb9473bdb499fc4d03a31ab1e3da0f9c6aa3",
+      "after": "eaa4cf151155de4a31cf47a5147ce842872ea453ef0a798954e05ea32200c5b9"
+    },
+    "src/hotspot/share/classfile/vmSymbols.hpp": {
+      "before": "2f669bd835fc7c1696926f9e34e88e872a56c200b2511a537f1ec7344f3f1279",
+      "after": "093f375f1883f66b672bd3eba0b4d50be86925fd92de1ae348fae1101ed6823e"
+    },
+    "src/hotspot/share/gc/shared/stringdedup/stringDedup.cpp": {
+      "before": "23b3aa46e740e746f05b483e371c627a6ec629026638b53085af8f4cb82cb333",
+      "after": "15cb52369aa1a879ccb2902adb94d5055647d4b82cf54e7409939fc6ba804377"
+    },
+    "src/hotspot/share/jfr/recorder/jfrRecorder.cpp": {
+      "before": "09057d94bcd0b2a310ff5c7442124e2b7abc4e1cd65d8d0d1bf7246bc854b4f2",
+      "after": "98555ee5b3f195a468461f43428c1f2db535d2a85b38d239d220f3494c3ed6ec"
+    },
+    "src/hotspot/share/oops/instanceKlass.cpp": {
+      "before": "f60aa4f5285205586ab42d1deecbc6117619cbbea426039db90ce769a339c09e",
+      "after": "39810481d6e0352e163f0714ef41109ed1464fd0bb814eda317ef9fbd3aae870"
+    },
+    "src/hotspot/share/prims/jni.cpp": {
+      "before": "e809d78f4eec22f6140fa057a13f1b7787c137bceda9db242fa1cd083ed5f9a9",
+      "after": "82eec22a87598470669a05f2fc2581191f738ea3bafe6448c5ce43c39ab7c66b"
+    },
+    "src/hotspot/share/prims/jvmtiTagMap.cpp": {
+      "before": "90c0d0142bed7c19c936979be1121cf85e80bb220a73afc5b6215427849621a2",
+      "after": "477ba6e96bc62f5f315c3290e9c7f544bac6395731dda6bc4615103b714ddb13"
+    },
+    "src/hotspot/share/runtime/arguments.cpp": {
+      "before": "d6d28df8bb0ada2877a99fb5dae51957ae5077f0db5b119ab0d211de704ad2b4",
+      "after": "cde11381b3d49642dee5988d0188e6f3ffc0dcd3a7789b3abec12a00eb832dc5"
+    },
+    "src/hotspot/share/runtime/globals.hpp": {
+      "before": "2da4945529eb14ea5140486994b9113f385c172a050706fb2de4d3758de1d28d",
+      "after": "cb97b8978fa8f94ad5c1088b1616f4aef14fef9b6f454f21bd96449a2a3e0fc3"
+    },
+    "src/hotspot/share/runtime/threads.cpp": {
+      "before": "d0eefd246e5d755f96fcd0d817976182f567821d05e93d678d6614809a465a99",
+      "after": "d715f6bc169184ebb6e06b0ace2e8dd21f50077e1cdbfebc04b0fae73d7a0531"
+    },
+    "src/hotspot/share/services/diagnosticCommand.cpp": {
+      "before": "d1f20b59d79da2633ff7e7318e3df9cd5553f0a069dfd16d144a88477e3aef6b",
+      "after": "b0e5a34c68f8a8d8160358164eddcb1699d67246831095a28045c54fa94c7e52"
+    },
+    "src/hotspot/share/services/finalizerService.cpp": {
+      "before": "8f3a66cdde9a8456ea6d2c6a03e87fc277a347a2c0b3890db91aac7a4521f4ac",
+      "after": "2438cc3588b1f937175e62e229feb1090a59c5aa18657fe03d64cd2a937029dc"
+    },
+    "src/java.base/share/classes/java/lang/MIndexString.java": {
+      "before": null,
+      "after": "21e373dbe450c7cd7b85ede587209f88b4546b1833a75c83370b213aa66d97d0"
+    },
+    "src/java.base/share/classes/java/lang/MIndexStringPool.java": {
+      "before": null,
+      "after": "6d2ef8a907cb6cc604ed1c6700415f0886fd5229d3d92060fe93e235d3ecdd31"
+    },
+    "src/java.base/share/classes/java/lang/String.java": {
+      "before": "d1c20848c0c15235e9eb9dd7d30ddc80f8c042e6b53255a4552ac19ec40e6625",
+      "after": "068cc68a4968c1f8aed45d7ff73a9bfca8dc19723015cd739728cbd56d90150d"
+    },
+    "src/java.base/share/classes/java/lang/StringConcatHelper.java": {
+      "before": "98e7d9baa0f0c2b25213b45a291564aefab82b8944e458b54ec08c2419c98695",
+      "after": "9e247659c7af6834e5aab378e98a61a843fc5c21497decd2e85bab445cc4da34"
+    },
+    "src/java.base/share/classes/java/lang/System.java": {
+      "before": "c51b88b6dc193b6447441769e24e89ebdbc3482796889a7506064bf07a7a8020",
+      "after": "b1df6179cf686d9ed7e7329f99be503fc1d484662d98f717633fdec5e8d8c8fd"
+    },
+    "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java": {
+      "before": "847d49e8b3b8de4183c4551c0965d9919ab942c0bef996d787f1f36174579010",
+      "after": "efe0c96211a13aa34f0fbc55f4bd4190287846c329b2f25c3cbcf97185a709de"
+    },
+    "src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java": {
+      "before": "ccb649b92546459692c48b40ca75e960643e7ad234c8e1f43e1188504d3af29c",
+      "after": "b096377681dbc135d90f26abc972769557ae7c271d48ad59d241e149658438e3"
+    },
+    "src/java.base/share/native/libjava/jni_util.c": {
+      "before": "cadc373b6611e5fb64ca28f3ea9bd69c417b76c5258e1b4ed21339c64f2b59f2",
+      "after": "f19521f723ecf9a4cdf639a04b93c0dece27e37f5877d756f007adbdc16d6a16"
+    },
+    "src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/OopUtilities.java": {
+      "before": "b8d7ee670153c3b7d110ecb74437aa71556e73828f2e28320b3e0becf3e45ad2",
+      "after": "5c76caf1c717e4f05c0f2f8adf87265422c0a0e3571dc5e852f8ceaa476c90ba"
+    }
+  }
+}

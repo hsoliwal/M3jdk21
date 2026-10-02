@@ -1,0 +1,14 @@
+{
+  "repository": "hsoliwal/com.synexia",
+  "commit": "c6cb340d33323348fab94e8157842455e9b72bc2",
+  "files": {
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/shared/ArrayHandle.java": "e9962d8db43277db6647fdeac883ac90ca460e6a4d2ab20efebd98244d04b18d",
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/shared/SharedArray.java": "7353559e1610fbf5710e75b52bae72388de992d531a01cb18baf361dc697672f",
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/shared/SharedArrayConversions.java": "a86f1ff2efa5198fc4ea83e7267f014f04881bb785873d9aeafd0a6a0fc5c5e7",
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/shared/SharedArrayNative.java": "d575460f08480dfd664b47d1d7eedc41ae940a48a29536027ece36954219174d",
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/shared/SharedArrayPool.java": "21365d2b3206a53229d9eecd7a8a4669bdaed4dad3251e510f04dc7ac2a5758d",
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/shared/SharedBytes.java": "0bd4f04e73150314cd303459d4140883e651f7876e85d33e59ea702a0df83ec2",
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/shared/SharedChars.java": "93b37dabf36abd875c0fbd2c28e31902b2fce2b203b884262480a4408de1741e",
+    "synexia-indexstring/src/main/java/com/synexia/indexstring/shared/SharedSegments.java": "a7535ba87077f100d21ba780c023ebaa8e388effd95349e5f0216cab6f4c4946"
+  }
+}
