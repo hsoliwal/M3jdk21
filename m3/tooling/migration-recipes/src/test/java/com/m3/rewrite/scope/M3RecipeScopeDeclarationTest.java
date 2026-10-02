@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.m3.rewrite.InstallIndexStringCompatibility;
 import com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe;
 import com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates;
+import com.m3.rewrite.backport.M3Jdk8357439JcmdCompletionRecipe;
 import com.m3.rewrite.dag.M3RecipeDagPlannerRecipe;
 import com.m3.rewrite.donor.M3PinnedDonorInlineRecipe;
 import com.m3.rewrite.index.M3SemanticIndexM3DbBridgeRecipe;
@@ -19,6 +20,7 @@ import com.m3.rewrite.pass.M3MultiPassPlannerRecipe;
 import com.m3.rewrite.pass.M3VerificationPlanRecipe;
 import com.m3.rewrite.verbatim.M3Jdk21SourceFingerprintRecipe;
 import com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe;
+import com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe;
 import com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe;
 import com.synexia.rewrite.M3SegmentedLaneNativeRecipe;
 import java.util.List;
@@ -27,11 +29,13 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(18, M3RecipeScopeRegistry.size());
+        assertEquals(20, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(InstallIndexStringCompatibility.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3HashPinnedJavaSnapshotRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3HashPinnedTextSnapshotRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3Jdk8357439JcmdCompletionRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3AtomizePureIntReturnRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3InventoryPureIntAtomCandidates.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3PinnedDonorInlineRecipe.class.getName()));
@@ -65,6 +69,19 @@ final class M3RecipeScopeDeclarationTest {
         var modulePolicy = M3RecipeScopeRegistry.require(InstallIndexStringCompatibility.class);
         assertEquals(M3EditScope.MODULE, modulePolicy.resolve(List.of("src/main/java/a/A.java")));
         assertFalse(modulePolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
+
+        var textSnapshotPolicy = M3RecipeScopeRegistry.require(M3HashPinnedTextSnapshotRecipe.class);
+        assertEquals(M3EditScope.FILE, textSnapshotPolicy.resolve(List.of("src/java.base/share/conf/example")));
+        assertTrue(textSnapshotPolicy.fileLocalMechanical(List.of("src/java.base/share/conf/example")));
+        assertEquals(
+                M3EditScope.MODULE,
+                textSnapshotPolicy.resolve(List.of(
+                        "make/modules/jdk.jcmd/Copy.gmk",
+                        "src/jdk.jcmd/share/conf/bash-completion/jcmd")));
+
+        var jcmdBackportPolicy = M3RecipeScopeRegistry.require(M3Jdk8357439JcmdCompletionRecipe.class);
+        assertEquals(M3EditScope.MODULE, jcmdBackportPolicy.resolve(List.of("src/jdk.jcmd/share/conf/bash-completion/jcmd")));
+        assertFalse(jcmdBackportPolicy.fileLocalMechanical(List.of("src/jdk.jcmd/share/conf/bash-completion/jcmd")));
 
         var atomPolicy = M3RecipeScopeRegistry.require(M3AtomizePureIntReturnRecipe.class);
         assertEquals(M3EditScope.FILE, atomPolicy.resolve(List.of("src/main/java/a/A.java")));
@@ -145,6 +162,8 @@ final class M3RecipeScopeDeclarationTest {
                 M3SegmentedLaneNativeRecipe.class,
                 InstallIndexStringCompatibility.class,
                 M3HashPinnedJavaSnapshotRecipe.class,
+                M3HashPinnedTextSnapshotRecipe.class,
+                M3Jdk8357439JcmdCompletionRecipe.class,
                 M3AtomizePureIntReturnRecipe.class,
                 M3InventoryPureIntAtomCandidates.class,
                 M3PinnedDonorInlineRecipe.class,
