@@ -1,6 +1,18 @@
 name: M3 OpenRewrite recipe proof
 
 on:
+  push:
+    branches:
+      - "m3/**"
+    paths:
+      - "m3/pom.xml"
+      - "m3/indexdb/**"
+      - "m3/tooling/migration-recipes/**"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - "m3/tooling/verification/**"
+      - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
+      - "m3/docs/m3indexdb-semantic-atom-index.md"
+      - ".github/workflows/m3-tooling-recipes.yml"
   pull_request:
     paths:
       - "m3/pom.xml"
