@@ -1,0 +1,129 @@
+name: M3 JDK21 upstream inventory
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/m3-jdk21-upstream-inventory.yml"
+      - "m3/backports/inventory.py"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Fetch pinned OpenJDK GA history without blobs
+        shell: bash
+        run: |
+          mkdir upstream-jdk
+          git -C upstream-jdk init -q
+          git -C upstream-jdk remote add origin https://github.com/openjdk/jdk.git
+
+          refs=(
+            "refs/tags/jdk-21+35:refs/tags/jdk-21+35"
+            "refs/tags/jdk-22+36:refs/tags/jdk-22+36"
+            "refs/tags/jdk-23+37:refs/tags/jdk-23+37"
+            "refs/tags/jdk-24+36:refs/tags/jdk-24+36"
+            "refs/tags/jdk-25+36:refs/tags/jdk-25+36"
+            "refs/tags/jdk-26+35:refs/tags/jdk-26+35"
+            "refs/tags/jdk-27+35:refs/tags/jdk-27+35"
+          )
+          git -C upstream-jdk -c protocol.version=2 fetch             --filter=blob:none             --no-tags             origin             "${refs[@]}"
+
+          tags=(
+            jdk-21+35
+            jdk-22+36
+            jdk-23+37
+            jdk-24+36
+            jdk-25+36
+            jdk-26+35
+            jdk-27+35
+          )
+          for tag in "${tags[@]}"; do
+            git -C upstream-jdk rev-parse --verify "$tag^{commit}"
+          done
+
+      - name: Materialize complete commit JBS path denominator
+        shell: bash
+        run: |
+          mkdir -p inventory-output
+          python3 m3/backports/inventory.py             --repo upstream-jdk             --out inventory-output/UPSTREAM_CHANGES.tsv
+
+      - name: Verify and summarize inventory
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import csv
+          import hashlib
+          import json
+          from collections import Counter
+          from pathlib import Path
+
+          path = Path("inventory-output/UPSTREAM_CHANGES.tsv")
+          data = path.read_bytes()
+          with path.open("r", encoding="utf-8", newline="") as handle:
+              rows = list(csv.DictReader(handle, delimiter="\t"))
+
+          by_release = Counter(int(row["release"]) for row in rows)
+          by_disposition = Counter(row["disposition"] for row in rows)
+          by_domain = Counter(row["domain"] for row in rows)
+          jbs_rows = sum(bool(row["jbs_ids"]) for row in rows)
+
+          expected_release_counts = {
+              22: 2384,
+              23: 2355,
+              24: 2562,
+              25: 2678,
+              26: 2611,
+              27: 2358,
+          }
+          if dict(sorted(by_release.items())) != expected_release_counts:
+              raise SystemExit(
+                  f"release commit counts differ: {dict(sorted(by_release.items()))}"
+              )
+
+          commits = [row["commit"] for row in rows]
+          if len(commits) != len(set(commits)):
+              raise SystemExit("duplicate commit across GA interval inventory")
+
+          summary = {
+              "schema": 1,
+              "source_repo": "openjdk/jdk",
+              "ga_intervals": {
+                  "22": ["jdk-21+35", "jdk-22+36"],
+                  "23": ["jdk-22+36", "jdk-23+37"],
+                  "24": ["jdk-23+37", "jdk-24+36"],
+                  "25": ["jdk-24+36", "jdk-25+36"],
+                  "26": ["jdk-25+36", "jdk-26+35"],
+                  "27": ["jdk-26+35", "jdk-27+35"],
+              },
+              "total_commits": len(rows),
+              "rows_with_jbs_id": jbs_rows,
+              "by_release": dict(sorted(by_release.items())),
+              "by_disposition": dict(sorted(by_disposition.items())),
+              "by_domain": dict(sorted(by_domain.items())),
+              "sha256": hashlib.sha256(data).hexdigest(),
+              "bytes": len(data),
+          }
+          Path("inventory-output/UPSTREAM_CHANGES.summary.json").write_text(
+              json.dumps(summary, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          print(json.dumps(summary, sort_keys=True))
+          PY
+          gzip -9 -k inventory-output/UPSTREAM_CHANGES.tsv
+
+      - name: Upload complete upstream inventory
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: jdk22-27-upstream-change-inventory
+          path: inventory-output/
+          if-no-files-found: error
+          retention-days: 7

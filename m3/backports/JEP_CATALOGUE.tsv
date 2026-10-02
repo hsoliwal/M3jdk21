@@ -1,0 +1,83 @@
+release	jep	title	domain	disposition	reason	superseded_by
+22	423	Region Pinning for G1	gc	candidate	Runtime/GC change; no Java source grammar change.	
+22	447	Statements before super(...) (Preview)	language	reject-language	Requires Java grammar/javac semantic changes.	
+22	454	Foreign Function & Memory API	library-runtime-native	candidate-high-risk	Final API; requires java.base/native/runtime dependency audit.	
+22	456	Unnamed Variables & Patterns	language	reject-language	Requires Java grammar/javac semantic changes.	
+22	457	Class-File API (Preview)	library	superseded	Use final JEP 484 instead of preview.	484
+22	458	Launch Multi-File Source-Code Programs	tool-launcher	candidate	Tool/source-launcher behavior over existing Java grammar; verify javac/launcher dependency closure.	
+22	459	String Templates (Second Preview)	language	reject-language	Requires Java grammar/javac changes and was later withdrawn.	
+22	460	Vector API (Seventh Incubator)	library-hotspot-compiler	hold-jit	Incubator lineage depends on HotSpot/JIT vector support; do not backport as a simple library.	537
+22	461	Stream Gatherers (Preview)	library	superseded	Use final JEP 485 instead of preview.	485
+22	462	Structured Concurrency (Second Preview)	library-runtime	superseded	Use latest/final lineage only; JDK 27 remains preview.	533
+22	463	Implicitly Declared Classes and Instance Main Methods (Second Preview)	language	reject-language	Requires Java grammar/javac/source-launcher language semantics.	
+22	464	Scoped Values (Second Preview)	library-runtime	superseded	Use final JEP 506.	506
+23	455	Primitive Types in Patterns, instanceof, and switch (Preview)	language	reject-language	Requires Java grammar/javac semantic changes.	
+23	466	Class-File API (Second Preview)	library	superseded	Use final JEP 484.	484
+23	467	Markdown Documentation Comments	tool-javadoc-javac-doc	candidate-high-risk	Tool/documentation parsing enhancement; no Java language grammar change, but touches compiler doc-comment internals.	
+23	469	Vector API (Eighth Incubator)	library-hotspot-compiler	hold-jit	Incubator/JIT-dependent lineage; evaluate separately.	537
+23	471	Deprecate the Memory-Access Methods in sun.misc.Unsafe for Removal	compatibility	hold-compat	Intentional deprecation/removal pressure changes compatibility posture.	
+23	473	Stream Gatherers (Second Preview)	library	superseded	Use final JEP 485.	485
+23	474	ZGC: Generational Mode by Default	gc-runtime	candidate	Runtime/GC policy change; JDK 21 already contains Generational ZGC lineage, verify defaults and tests.	
+23	476	Module Import Declarations (Preview)	language	reject-language	Requires Java grammar/javac semantic changes.	
+23	477	Implicitly Declared Classes and Instance Main Methods (Third Preview)	language	reject-language	Requires Java grammar/javac/source-launcher language semantics.	
+23	480	Structured Concurrency (Third Preview)	library-runtime	superseded	Use latest lineage only; JDK 27 remains preview.	533
+23	481	Scoped Values (Third Preview)	library-runtime	superseded	Use final JEP 506.	506
+23	482	Flexible Constructor Bodies (Second Preview)	language	reject-language	Requires Java grammar/javac semantic changes.	
+24	450	Compact Object Headers (Experimental)	vm-gc-runtime	superseded-high-risk	Use cumulative product/default lineage JEP 519/534 rather than experimental revision.	534
+24	472	Prepare to Restrict the Use of JNI	compatibility-native	hold-compat	Adds restriction/warning policy; not a transparent enhancement.	
+24	475	Late Barrier Expansion for G1	gc-hotspot-compiler	candidate-high-risk	GC optimization touching C2/HotSpot compiler pipeline; separate VM/JIT lane.	
+24	478	Key Derivation Function API (Preview)	security-library	superseded	Use final JEP 510.	510
+24	479	Remove the Windows 32-bit x86 Port	removal	reject-compat	Removal conflicts with JDK 21 compatibility preservation.	
+24	484	Class-File API	library	candidate	Final library API; no Java grammar change, but requires classfile/version compatibility audit.	
+24	485	Stream Gatherers	library	candidate	Final library API; no Java grammar change.	
+24	486	Permanently Disable the Security Manager	compatibility-security	reject-compat	Intentional behavioral incompatibility with JDK 21.	
+24	487	Scoped Values (Fourth Preview)	library-runtime	superseded	Use final JEP 506.	506
+24	488	Primitive Types in Patterns, instanceof, and switch (Second Preview)	language	reject-language	Requires Java grammar/javac semantic changes.	
+24	489	Vector API (Ninth Incubator)	library-hotspot-compiler	hold-jit	Incubator/JIT-dependent lineage; evaluate separately.	537
+24	490	ZGC: Remove the Non-Generational Mode	removal-gc	reject-compat	Removal narrows JDK 21 runtime behavior.	
+24	491	Synchronize Virtual Threads without Pinning	runtime-threads	candidate-high-risk	Runtime/continuation/monitor change; no Java grammar change.	
+24	492	Flexible Constructor Bodies (Third Preview)	language	reject-language	Requires Java grammar/javac semantic changes.	
+24	493	Linking Run-Time Images without JMODs	tool-jlink-runtime-image	candidate	Tool/build/runtime-image enhancement; no Java grammar change.	
+24	494	Module Import Declarations (Second Preview)	language	reject-language	Requires Java grammar/javac semantic changes.	
+24	495	Simple Source Files and Instance Main Methods (Fourth Preview)	language	reject-language	Requires Java grammar/javac/source-launcher language semantics.	
+24	496	Quantum-Resistant Module-Lattice-Based Key Encapsulation Mechanism	security-library	candidate	Security provider/library enhancement; verify provider and test vectors.	
+24	497	Quantum-Resistant Module-Lattice-Based Digital Signature Algorithm	security-library	candidate	Security provider/library enhancement; verify provider and test vectors.	
+24	498	Warn upon Use of Memory-Access Methods in sun.misc.Unsafe	compatibility	hold-compat	Warning/policy change rather than transparent enhancement.	
+24	499	Structured Concurrency (Fourth Preview)	library-runtime	superseded	Use latest lineage only; JDK 27 remains preview.	533
+24	501	Deprecate the 32-bit x86 Port for Removal	compatibility	hold-compat	Deprecation/removal policy conflicts with preservation default.	
+25	470	PEM Encodings of Cryptographic Objects (Preview)	security-library	superseded	Use latest preview lineage JEP 538 until final.	538
+25	502	Stable Values (Preview)	library-vm	superseded	Renamed/evolved into Lazy Constants; use latest lineage JEP 531.	531
+25	503	Remove the 32-bit x86 Port	removal	reject-compat	Removal conflicts with JDK 21 compatibility preservation.	
+25	505	Structured Concurrency (Fifth Preview)	library-runtime	superseded	Use latest lineage only; JDK 27 remains preview.	533
+25	506	Scoped Values	library-runtime	candidate-high-risk	Final API; requires virtual-thread/runtime integration audit.	
+25	507	Primitive Types in Patterns, instanceof, and switch (Third Preview)	language	reject-language	Requires Java grammar/javac semantic changes.	
+25	508	Vector API (Tenth Incubator)	library-hotspot-compiler	hold-jit	Incubator/JIT-dependent lineage; evaluate separately.	537
+25	509	JFR CPU-Time Profiling (Experimental)	monitoring-jfr-native	candidate-high-risk	JFR/native monitoring enhancement; Linux/platform gates required.	
+25	510	Key Derivation Function API	security-library	candidate	Final security library API; no Java grammar change.	
+25	511	Module Import Declarations	language	reject-language	Permanent Java language feature; requires javac/parser/type-system changes.	
+25	512	Compact Source Files and Instance Main Methods	language	reject-language	Permanent Java language/source-launcher feature; requires javac changes.	
+25	513	Flexible Constructor Bodies	language	reject-language	Permanent Java language feature; requires javac semantic changes.	
+25	514	Ahead-of-Time Command-Line Ergonomics	tool-runtime-aot	candidate-high-risk	Tool/runtime enhancement; depends on AOT infrastructure not present in stock JDK 21.	
+25	515	Ahead-of-Time Method Profiling	runtime-hotspot	candidate-high-risk	HotSpot/AOT/JIT runtime enhancement; dependency-gated.	
+25	518	JFR Cooperative Sampling	monitoring-jfr-runtime	candidate-high-risk	JFR/runtime safepoint sampling enhancement; requires VM acceptance.	
+25	519	Compact Object Headers	vm-gc-runtime	superseded-high-risk	Use cumulative JEP 534 lineage for default-ready implementation.	534
+25	520	JFR Method Timing & Tracing	monitoring-jfr	candidate-high-risk	JFR + bytecode instrumentation enhancement; requires agent/instrumentation compatibility tests.	
+26	500	Prepare to Make Final Mean Final	compatibility-reflection	hold-compat	Adds warnings/restriction preparation; changes compatibility posture.	
+26	504	Remove the Applet API	removal	reject-compat	Removal conflicts with JDK 21 API compatibility.	
+26	516	Ahead-of-Time Object Caching with Any GC	runtime-aot-gc	candidate-high-risk	AOT/GC runtime enhancement; depends on post-21 AOT infrastructure.	
+26	517	HTTP/3 for the HTTP Client API	library-network	candidate-high-risk	Library/network enhancement; substantial QUIC/TLS/native/platform dependency audit.	
+26	522	G1 GC: Improve Throughput by Reducing Synchronization	gc-runtime	candidate-high-risk	Runtime/GC optimization; no Java grammar change.	
+26	524	PEM Encodings of Cryptographic Objects (Second Preview)	security-library	superseded	Use latest preview JEP 538 until final.	538
+26	525	Structured Concurrency (Sixth Preview)	library-runtime	superseded	Use latest JEP 533; still preview in JDK 27.	533
+26	526	Lazy Constants (Second Preview)	library-vm	superseded	Use latest JEP 531; still preview in JDK 27.	531
+26	529	Vector API (Eleventh Incubator)	library-hotspot-compiler	superseded-jit	Use latest incubator JEP 537 for evaluation.	537
+26	530	Primitive Types in Patterns, instanceof, and switch (Fourth Preview)	language	reject-language	Requires Java grammar/javac semantic changes.	
+27	523	Make G1 the Default Garbage Collector in All Environments	gc-runtime-config	candidate	Runtime default-policy enhancement; verify platform/resource-constrained behavior.	
+27	527	Post-Quantum Hybrid Key Exchange for TLS 1.3	security-library	candidate-high-risk	Security/TLS enhancement; depends on post-quantum primitives and provider support.	
+27	531	Lazy Constants (Third Preview)	library-vm	hold-preview	Latest preview API plus JVM optimization semantics; do not stabilize silently in JDK 21.	
+27	532	Primitive Types in Patterns, instanceof, and switch (Fifth Preview)	language	reject-language	Requires Java grammar/javac semantic changes.	
+27	533	Structured Concurrency (Seventh Preview)	library-runtime	hold-preview	Latest preview API; retain as research candidate until final.	
+27	534	Compact Object Headers by Default	vm-gc-runtime	candidate-high-risk	Cumulative VM/object-layout/GC/JIT change; no Java grammar change but requires full VM/JNI/JFR/CDS/JVMTI acceptance.	
+27	536	JFR In-Process Data Redaction	monitoring-jfr-security	candidate-high-risk	Monitoring/security enhancement; requires JFR/runtime tests and compatibility review.	
+27	537	Vector API (Twelfth Incubator)	library-hotspot-compiler	hold-jit	Latest incubator; requires extensive HotSpot/JIT support.	
+27	538	PEM Encodings of Cryptographic Objects (Third Preview)	security-library	hold-preview	Latest preview API; do not freeze preview contract into JDK 21.	
