@@ -1,0 +1,3 @@
+# path	before	after	template
+src/main/java/com/m3/indexdb/M3IndexDbArtifact.java	ABSENT	be4cb521cd9b0154b8b30bd0719304ae349e7d50c54c2e1d1ca8817e7df4a545	M3IndexDbArtifact.java.txt
+src/test/java/com/m3/indexdb/M3IndexDbArtifactTest.java	ABSENT	de888eb129200648df390bfd4694c7a326a092a50aecdfd31902625c35e4f159	M3IndexDbArtifactTest.java.txt
