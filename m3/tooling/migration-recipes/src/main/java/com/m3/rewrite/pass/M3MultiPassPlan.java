@@ -80,8 +80,8 @@ public final class M3MultiPassPlan {
                         M3PassMode.ADMISSION,
                         M3EditScope.LIBRARY_API,
                         false,
-                        List.of(),
-                        "all remaining library/API deltas are explicitly approved or typed exclusions"),
+                        List.of("com.m3.rewrite.scope.M3LibraryApiSurfaceRecipe"),
+                        "library API roots are stable and all requested exported-contract deltas are explicitly approved or typed exclusions"),
                 new Pass(
                         7,
                         "proof",
