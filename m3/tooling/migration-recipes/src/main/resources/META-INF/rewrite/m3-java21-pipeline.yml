@@ -8,6 +8,14 @@ recipeList:
 
 ---
 type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.java21.SemanticHash
+displayName: M3 Java 21 semantic hashes
+description: Emit non-mutating exact, token-structural, pattern/IOP and composite semantic hashes.
+recipeList:
+  - com.m3.rewrite.hash.M3SemanticHashRecipe
+
+---
+type: specs.openrewrite.org/v1beta/recipe
 name: com.m3.java21.Atomization
 displayName: M3 Java 21 atomization
 description: Apply only JUnit-proven behavior-and-contract-preserving FILE-local atomization recipes.
@@ -34,6 +42,6 @@ recipeList:
 type: specs.openrewrite.org/v1beta/recipe
 name: com.m3.java21.Convergence
 displayName: M3 Java 21 full FILE-local convergence
-description: Inventory, atomize, patternize/IOP-type and document admitted Java 21 leaves to a fixed point.
+description: Inventory, semantic-hash, atomize, patternize/IOP-type and document admitted Java 21 leaves to a fixed point.
 recipeList:
   - com.m3.rewrite.M3Java21ConvergenceRecipe
