@@ -29,11 +29,29 @@ This is a framework plus verified directory census, not a completed symbol/ABI/d
 
 Per-subsystem implementation packets and dependency order are in [../../docs/whole-jdk-work-packets.md](../../docs/whole-jdk-work-packets.md). No row above is an operational capability status change.
 
+## Atom, pattern and mapping coverage
+
+Whole-JDK coverage is tracked at three different granularities and must not be collapsed into one percentage.
+
+| Coverage dimension | Question | Completion blocker |
+| --- | --- | --- |
+| Atom coverage | Has every required behavior/storage/ABI/test atom inside the selected sealed contract been inventoried and given a target disposition? | Missing atom, unresolved dependency cycle/SCC, unknown reverse consumer or unsealed contract |
+| Pattern coverage | Has every recurring transformation been assigned an accepted pattern/version with preconditions, refusal cases, recipe/patch identity and evidence template, or explicitly marked one-off? | Ad-hoc repeated edits, ambiguous pattern match, unreviewed composition order or missing refusal case |
+| Mapping coverage | Does every required source atom map through its pattern/adaptation to target atom(s), target symbol(s) and exact evidence under the existing capability ID? | Unmapped edge, split/merge conflict, target-only divergence not reconciled, stale source/target pin or missing evidence |
+
+A visited file can still have incomplete atom coverage. Complete atom coverage can still have incomplete pattern coverage. Complete pattern matching can still have incomplete target mapping or failed acceptance. Report these states separately.
+
+For inventory outputs, retain or reference atom-DAG roots, pattern roots/versions, atom-coverage receipts and pattern-coverage receipts alongside the existing capability mapping. These are evidence dimensions; operational status remains in the established mapping authority and is not redefined here.
+
 ## Required inventory row shape
 
 For every module/package/public-or-relevant-internal symbol, native ABI, format, resource/generator and test obligation record:
 
 - stable capability/mapping ID or explicit pending-ID decision;
+- sealed contract boundary;
+- source atom IDs/root, target atom IDs/root and typed dependency-DAG identity;
+- applicable pattern IDs/versions plus atom/pattern coverage receipts;
+- explicit source-atom → pattern/recipe → target-atom edges;
 - source and target commit plus fully qualified symbol/path;
 - semantic/storage owner and lifetime/identity domain;
 - dependencies and reverse consumers;
