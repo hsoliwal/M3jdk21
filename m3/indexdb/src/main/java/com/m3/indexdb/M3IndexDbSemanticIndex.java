@@ -64,6 +64,7 @@ public final class M3IndexDbSemanticIndex {
 
         List<M3IndexDbSemanticEdge> edges = canonicalEdges(edgeRows);
         validateEdges(unique, edges);
+        edges = normalizeOrdinals(unique, edges);
         Map<String, List<M3IndexDbSemanticEdge>> children = edgeIndex(edges, true, unique);
         TreeMap<String, M3IndexDbSemanticNode> recomposed = new TreeMap<>();
         HashMap<String, VisitState> state = new HashMap<>();
@@ -270,6 +271,74 @@ public final class M3IndexDbSemanticIndex {
         return List.copyOf(unique);
     }
 
+    private static List<M3IndexDbSemanticEdge> normalizeOrdinals(
+            Map<String, M3IndexDbSemanticNode> nodes,
+            List<M3IndexDbSemanticEdge> edges) {
+        ArrayList<M3IndexDbSemanticEdge> sorted = new ArrayList<>(edges);
+        sorted.sort((left, right) -> compareForComposition(left, right, nodes));
+
+        ArrayList<M3IndexDbSemanticEdge> normalized = new ArrayList<>(sorted.size());
+        String priorParent = null;
+        String priorRole = null;
+        int canonicalOrdinal = 0;
+        int priorOrderedOrdinal = -1;
+        for (M3IndexDbSemanticEdge edge : sorted) {
+            boolean newGroup = !edge.parentId().equals(priorParent)
+                    || !edge.role().equals(priorRole);
+            if (newGroup) {
+                canonicalOrdinal = 0;
+                priorOrderedOrdinal = -1;
+                priorParent = edge.parentId();
+                priorRole = edge.role();
+            }
+
+            if (orderedRole(edge.role())) {
+                if (edge.ordinal() == priorOrderedOrdinal) {
+                    throw new IllegalArgumentException(
+                            "conflicting ordered semantic ordinal at "
+                                    + edge.parentId() + "/" + edge.role() + "#" + edge.ordinal());
+                }
+                normalized.add(edge);
+                priorOrderedOrdinal = edge.ordinal();
+            } else {
+                normalized.add(
+                        new M3IndexDbSemanticEdge(
+                                edge.parentId(),
+                                edge.childId(),
+                                edge.role(),
+                                canonicalOrdinal++));
+            }
+        }
+        return List.copyOf(normalized);
+    }
+
+    private static int compareForComposition(
+            M3IndexDbSemanticEdge left,
+            M3IndexDbSemanticEdge right,
+            Map<String, M3IndexDbSemanticNode> nodes) {
+        int compared = left.parentId().compareTo(right.parentId());
+        if (compared != 0) return compared;
+        compared = left.role().compareTo(right.role());
+        if (compared != 0) return compared;
+
+        if (orderedRole(left.role())) {
+            compared = Integer.compare(left.ordinal(), right.ordinal());
+            if (compared != 0) return compared;
+        }
+
+        compared = nodes.get(left.childId())
+                .semanticKey()
+                .compareTo(nodes.get(right.childId()).semanticKey());
+        if (compared != 0) return compared;
+        return left.childId().compareTo(right.childId());
+    }
+
+    private static boolean orderedRole(String role) {
+        return "ATOM".equals(role)
+                || "FIELD".equals(role)
+                || role.startsWith("ORDERED:");
+    }
+
     private static void validateEdges(
             Map<String, M3IndexDbSemanticNode> nodes,
             List<M3IndexDbSemanticEdge> edges) {
@@ -324,12 +393,7 @@ public final class M3IndexDbSemanticIndex {
         HashMap<String, List<M3IndexDbSemanticEdge>> result = new HashMap<>();
         mutable.forEach((key, values) -> {
             values.sort(byParent
-                    ? Comparator.comparing(M3IndexDbSemanticEdge::role)
-                            .thenComparing(
-                                    (M3IndexDbSemanticEdge edge) ->
-                                            nodes.get(edge.childId()).semanticKey())
-                            .thenComparingInt(M3IndexDbSemanticEdge::ordinal)
-                            .thenComparing(M3IndexDbSemanticEdge::childId)
+                    ? (left, right) -> compareForComposition(left, right, nodes)
                     : Comparator.comparing(
                                     (M3IndexDbSemanticEdge edge) ->
                                             nodes.get(edge.parentId()).semanticKey())
