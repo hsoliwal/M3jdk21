@@ -1,6 +1,6 @@
 # Whole-JDK M3 contributor and resume guide
 
-Status: **documentation-only companion checklist** for resuming the whole-JDK migration programme. The durable execution-resume owner is [../migration/docs/RESUME.md](../migration/docs/RESUME.md); this file adds cross-program inventory, mapping and verification mechanics without replacing that authority. It does not certify an implementation.
+Status: **documentation-only durable whole-JDK handoff**. This file is the current whole-program resume guide and adds cross-program inventory, mapping and verification mechanics. [../migration/docs/RESUME.md](../migration/docs/RESUME.md) remains the retained bounded MIndex/prefix tranche history and explicitly defers whole-JDK continuation here. This file does not certify an implementation.
 
 ## Pinned observations for this handoff
 
