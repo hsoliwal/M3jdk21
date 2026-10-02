@@ -11,10 +11,11 @@ import java.util.Objects;
  */
 public enum M3EditScope {
   FILE,
+  VISIBILITY,
   PACKAGE,
   MODULE,
   MULTI_MODULE,
-  LIBRARY_API;
+  LIBRARY;
 
   /** Returns true when this scope is broad enough to contain the required scope. */
   public boolean canContain(M3EditScope required) {
