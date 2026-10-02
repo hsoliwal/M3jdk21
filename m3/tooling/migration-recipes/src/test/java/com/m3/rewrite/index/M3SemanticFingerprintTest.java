@@ -13,7 +13,7 @@ import org.openrewrite.Parser;
 import org.openrewrite.java.JavaParser;
 import org.openrewrite.java.tree.J;
 
-final class M3IndexDbSemanticFingerprintTest {
+final class M3SemanticFingerprintTest {
     @Test
     void normalizedLogicIgnoresLocalIdentifierSpellingButExactHashDoesNot() {
         J.MethodDeclaration left = method(
