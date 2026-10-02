@@ -1,0 +1,7 @@
+$ ['/workspace/scratch/b37f6ba1283f/synexia-continuation/toolchain/jdk-21.0.12.1+1/bin/jar', '--describe-module', '--file', '/workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/target/m3-collections.jar']
+com.m3.collections jar:file:///workspace/scratch/8d1d6779abbf/collection-lanes/jdk-repo/m3/collections/target/m3-collections.jar!/module-info.class
+exports com.m3.collections
+requires java.base mandated
+
+
+EXIT=0
