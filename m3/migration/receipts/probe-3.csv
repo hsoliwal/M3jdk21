@@ -1,0 +1,6 @@
+string_concat_8192_utf16,20000,2018.513,16424.000
+m3_concat_2_retained_segments,20000,725.079,240.000
+string_toCharArray_8192,20000,1938.651,16400.000
+m3_toCharArray_8192,20000,2222.597,16400.000
+string_slice_1,20000,31.285,48.000
+m3_slice_1_retains_full_body,20000,19.445,48.000

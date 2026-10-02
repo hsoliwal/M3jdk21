@@ -1,0 +1,28 @@
+JSON 16 cases passed
+ADD out/Example.java
+APPLY 1 files; 0 preserved; source verification=file-hashes-only
+FIXED_POINT 1 outputs; journal preserved
+CHECK 1 exact outputs; source checkout and runtime acceptance not implied
+EXTRACT 1 hash-verified production preimages; no repository ancestry claim
+ROLLBACK 1 recipe-owned outputs; pre-existing and unrelated files preserved
+ROLLBACK_FIXED_POINT
+APPLY 0 files; 1 preserved; source verification=file-hashes-only
+ROLLBACK 0 recipe-owned outputs; pre-existing and unrelated files preserved
+PORT_RECIPE 20 checks passed
+SOURCE_INVENTORY 5 checks passed
+MANIFEST_TOOLS 14 checks passed
+CHECK 9 exact outputs; source checkout and runtime acceptance not implied
+LEGACY checks=442487 fingerprint=b67432def8656cab
+REQUIRED_API 5 additive APIs present
+M3_TEXT checks=275094
+EXTRACT 6 hash-verified production preimages; no repository ancestry claim
+LEGACY checks=442487 fingerprint=b67432def8656cab
+APPLY 9 files; 0 preserved; source verification=file-hashes-only
+FIXED_POINT 9 outputs; journal preserved
+CHECK 9 exact outputs; source checkout and runtime acceptance not implied
+ROLLBACK 9 recipe-owned outputs; pre-existing and unrelated files preserved
+NAMED_MODULE consumer passed
+RESULT pass: exact local file-set acceptance only; not full JDK, compiler route, native, repository-wide or hosted CI acceptance.
+VERIFICATION_LOG /tmp/m3-verification-14608740905511495798/commands-and-results.txt
+
+WALL_SECONDS 12.36 EXIT 0

@@ -1,0 +1,7 @@
+Exception in thread "main" java.lang.AssertionError: Missing required additive API: com.synexia.indexstring.FrozenChars.fromString
+	at com.synexia.indexstring.RequiredApiTest.require(RequiredApiTest.java:18)
+	at com.synexia.indexstring.RequiredApiTest.main(RequiredApiTest.java:8)
+Caused by: java.lang.NoSuchMethodException: com.synexia.indexstring.FrozenChars.fromString(java.lang.String)
+	at java.base/java.lang.Class.getMethod(Class.java:2397)
+	at com.synexia.indexstring.RequiredApiTest.require(RequiredApiTest.java:16)
+	... 1 more

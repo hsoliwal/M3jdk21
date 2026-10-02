@@ -1,0 +1,2 @@
+Exception in thread "main" java.lang.AssertionError: object serialization must sort keys for cross-JVM plan identity
+	at com.m3.migration.JsonTest.main(JsonTest.java:25)

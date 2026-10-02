@@ -1,0 +1,63 @@
+{
+  "schema": 1,
+  "result": "pass",
+  "scope": "local exact production/tool/test file-set; not a full checkout or hosted PR-head/full-JDK build",
+  "source_commit": "75fb1abaecb56969bea2914520bbe819f130632b",
+  "target_baseline": "3029cff40e927aefcca444a6ef759a562204579c",
+  "target_hashes": {
+    "m3/ports/indexstring/src/com/synexia/indexstring/FrozenBytes.java": "cb50139594817d5cb2477c4d67148d4aed2174299f05cff9a3b24416139bc6b4",
+    "m3/ports/indexstring/src/com/synexia/indexstring/FrozenChars.java": "698dfd31eea109a4e0951e1fb6e8d3e57627b13960cbf5aa2d6f64f05febdfcc",
+    "m3/ports/indexstring/src/com/synexia/indexstring/MIndexJoinedBytes.java": "206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b",
+    "m3/ports/indexstring/src/com/synexia/indexstring/MIndexJoinedChars.java": "06551e7a183923f95998dd211711f33c0b76d6ddc655244608dece2de4dfdf08",
+    "m3/ports/indexstring/src/com/synexia/indexstring/MIndexJoinedStorageIntern.java": "578d15df810095bcf444a0b0ee249148aaebbdf75d4bf0651da5a54729d60ed7",
+    "m3/ports/indexstring/src/com/synexia/indexstring/MIndexJoinedStreams.java": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
+    "m3/ports/indexstring/src/com/m3/indexstring/M3Text.java": "264c50d726fab79fb9f6931b299b501c4e8b2f03cd5efa0b74506107dbcc0053",
+    "m3/ports/indexstring/src/module-info.java": "859a602aa9209cf7bc46f82435368e0c3849c5436abbe8e02218f8b1560810a1"
+  },
+  "tool_and_test_hashes": {
+    "m3/migration/Verify.java": "484c75c1e972ef1ff954023bd9f4f0c7946fc44b402bae4d665e6063f1dc2ba9",
+    "m3/migration/bench/AllocationProbe.java": "fea39cca7309663bec16dacdeb998e6792fee2f783ba5047765b2158b7420564",
+    "m3/migration/src/com/m3/migration/EnhancementPlan.java": "6d60a02a752dd1e8a93e43e8461bbce8f15bfaf9ab1dc8b59d2a3566deacbb5b",
+    "m3/migration/src/com/m3/migration/Json.java": "415d3ef5cf12e4700c5a69f3a4c9c16048991b07bf2f9b59093708c3de067175",
+    "m3/migration/src/com/m3/migration/M3PortRecipe.java": "f360c887038485695c027ff95fa13d7a65701c4cc318d6534085139156456e11",
+    "m3/migration/src/com/m3/migration/ManifestValidator.java": "00fee7084e691d9841291f46b0163019b9305006688a4bfff9a7be43abfe142c",
+    "m3/migration/src/com/m3/migration/SourceInventory.java": "58144466eaa3f41ef994793c215946900f392e8287bf8056019cf5bb2e126e02",
+    "m3/migration/tests/com/synexia/indexstring/LegacyContractTest.java": "175605fa95925a9b9ce1b93e60e21c4a4e5eb3acf965f97acf3cbe7d7e23dec1",
+    "m3/migration/tests/com/synexia/indexstring/M3TextTest.java": "9d10848420298ed04ea4ebd93f11527c4485236176afaf3a2ca97476bcb73082",
+    "m3/migration/tests/com/synexia/indexstring/RequiredApiTest.java": "2db65b0da8f193dddb7f637e533bcdfa9d8433b312c35651d1da04ca20e3aa27",
+    "m3/migration/tests-tool/com/m3/migration/JsonTest.java": "f658e9324ad8f12aae3fc4693e901a4da0cd90905c0622db71fecb31b681aa1d",
+    "m3/migration/tests-tool/com/m3/migration/ManifestValidatorTest.java": "0960a6c96d7ef96cdd05c3f8d72a7313d7a0dfc8080857573f00a9f99936c7f7",
+    "m3/migration/tests-tool/com/m3/migration/PortRecipeTest.java": "bdbe5e117ca8afea219e7ddd1a0d756857b9896d399b9fc456e80db902e6a206",
+    "m3/migration/tests-tool/com/m3/migration/SourceInventoryTest.java": "9f5155708c14390e40267f99ff9ad9238c5a0fce4d799cb94d83614bf9173a14"
+  },
+  "environment": {
+    "os": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "architecture": "x86_64",
+    "java": "openjdk version \"21.0.11\" 2026-04-21\nOpenJDK Runtime Environment (build 21.0.11+10-1-deb13u2-Debian)\nOpenJDK 64-Bit Server VM (build 21.0.11+10-1-deb13u2-Debian, mixed mode, sharing)",
+    "maven": "not installed"
+  },
+  "command": "java m3/migration/Verify.java .",
+  "checks": {
+    "legacy_source": 442487,
+    "legacy_port": 442487,
+    "legacy_fingerprint": "b67432def8656cab",
+    "m3_text": 275094,
+    "required_api": 5,
+    "json": 16,
+    "recipe": 20,
+    "manifest_tools": 14,
+    "source_inventory": 5,
+    "named_module": "pass",
+    "exact_recipe_replay_rollback": "pass",
+    "exact_recipe_outputs": 9,
+    "completed_process_exit": 0
+  },
+  "limitations": [
+    "Check counts include looped/generated assertions, not independent named test methods.",
+    "Production preimages reconstructed and matched to authenticated-source hashes; full source reactor not built.",
+    "This receipt does not certify its own enclosing commit or metadata documents.",
+    "Maven, OpenRewrite integration, Windows/native/OS-sharing, full JDK and performance acceptance gates remain unexecuted."
+  ],
+  "production_commit": "c68411504e9bf0fbefd1adc582f075d05bbd83e4",
+  "command_log": "verify-green.txt"
+}
