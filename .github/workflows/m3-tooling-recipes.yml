@@ -3,9 +3,12 @@ name: M3 OpenRewrite recipe proof
 on:
   pull_request:
     paths:
+      - "m3/pom.xml"
+      - "m3/indexdb/**"
       - "m3/tooling/migration-recipes/**"
       - "m3/tooling/recipe-catalogue.tsv"
       - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
+      - "m3/docs/m3indexdb-semantic-atom-index.md"
       - ".github/workflows/m3-tooling-recipes.yml"
   workflow_dispatch:
 
@@ -45,4 +48,4 @@ jobs:
           set -euo pipefail
           java -version
           mvn -version
-          mvn -B -f "$REPO/m3/tooling/migration-recipes/pom.xml" verify
+          mvn -B -f "$REPO/m3/pom.xml" -P m3-recipes verify
