@@ -31,8 +31,9 @@ import org.openrewrite.java.tree.J;
 /**
  * Reusable, candidate-only Java migration from an exact source snapshot to reviewed Java LSTs.
  *
- * <p>Each crate supplies a manifest and UTF-8 templates as classpath resources. All target
- * preimages and all output templates are admitted before any output is produced. Hashes cover
+ * <p>Each crate supplies a manifest and UTF-8 templates as classpath resources. Maven-style
+ * source paths and real OpenJDK product/test Java paths are both admitted. All target preimages
+ * and all output templates are admitted before any output is produced. Hashes cover
  * rendered Java text encoded as UTF-8, not the original on-disk byte encoding. Replacements
  * preserve the input charset and BOM flag and discard its obsolete checksum. This recipe checks source identity and
  * syntax; the sealed M3 contract, coverage, compiler, test and runtime gates remain authoritative.
@@ -233,7 +234,12 @@ public final class M3HashPinnedJavaSnapshotRecipe
     }
 
     private static boolean javaPath(String value) {
-        if (!(value.startsWith("src/main/java/") || value.startsWith("src/test/java/"))
+        boolean admittedRoot =
+                value.startsWith("src/main/java/")
+                        || value.startsWith("src/test/java/")
+                        || value.startsWith("src/")
+                        || value.startsWith("test/");
+        if (!admittedRoot
                 || !value.endsWith(".java") || value.indexOf('\\') >= 0
                 || value.length() > 4096) {
             return false;
