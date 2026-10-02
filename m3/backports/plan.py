@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import sys
 from dataclasses import dataclass
 from io import StringIO
 from pathlib import Path
@@ -176,7 +177,7 @@ def _parse_args(argv: Sequence[str]) -> argparse.Namespace:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    args = _parse_args([] if argv is None else argv)
+    args = _parse_args(sys.argv[1:] if argv is None else argv)
     root = args.root.resolve()
     text = render(build(root))
     if args.out is None:
@@ -189,6 +190,4 @@ def main(argv: Sequence[str] | None = None) -> int:
 
 
 if __name__ == "__main__":
-    import sys
-
-    raise SystemExit(main(sys.argv[1:]))
+    raise SystemExit(main())
