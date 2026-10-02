@@ -20,7 +20,7 @@ jobs:
       - name: Fetch exact PR head without reusable actions
         shell: bash
         env:
-          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
         run: |
           set -euo pipefail
           test -n "$HEAD_SHA"
@@ -45,4 +45,4 @@ jobs:
           set -euo pipefail
           java -version
           mvn -version
-          mvn -B -f "$REPO/m3/tooling/migration-recipes/pom.xml" verify
+          mvn -B -ntp -f "$REPO/m3/tooling/migration-recipes/pom.xml" clean verify
