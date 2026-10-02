@@ -763,7 +763,7 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "commit": "baea39f7629abda59b5f584602589feca42bac58",
             "module": "m3/collections",
             "path": "m3/collections/src/com/m3/collections/M3LongCollection.java",
             "symbol": "com.m3.collections.M3LongCollection",
@@ -784,7 +784,7 @@
           },
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "commit": "baea39f7629abda59b5f584602589feca42bac58",
             "module": "m3/collections",
             "path": "m3/collections/src/com/m3/collections/M3LongIterator.java",
             "symbol": "com.m3.collections.M3LongIterator",
@@ -801,7 +801,7 @@
           },
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "commit": "baea39f7629abda59b5f584602589feca42bac58",
             "module": "m3/collections",
             "path": "m3/collections/src/com/m3/collections/M3LongQueue.java",
             "symbol": "com.m3.collections.M3LongQueue",
@@ -823,7 +823,7 @@
           },
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "commit": "baea39f7629abda59b5f584602589feca42bac58",
             "module": "m3/collections",
             "path": "m3/collections/src/com/m3/collections/M3LongDeque.java",
             "symbol": "com.m3.collections.M3LongDeque",
@@ -846,7 +846,7 @@
           },
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "commit": "baea39f7629abda59b5f584602589feca42bac58",
             "module": "m3/collections",
             "path": "m3/collections/src/com/m3/collections/M3LongLongMap.java",
             "symbol": "com.m3.collections.M3LongLongMap",
@@ -874,7 +874,7 @@
           },
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "commit": "baea39f7629abda59b5f584602589feca42bac58",
             "module": "m3/collections",
             "path": "m3/collections/src/com/m3/collections/M3LongLongConsumer.java",
             "symbol": "com.m3.collections.M3LongLongConsumer",
@@ -889,7 +889,7 @@
           },
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "commit": "baea39f7629abda59b5f584602589feca42bac58",
             "module": "m3/collections",
             "path": "m3/collections/src/com/m3/collections/M3LongLongPredicate.java",
             "symbol": "com.m3.collections.M3LongLongPredicate",
@@ -904,7 +904,7 @@
           },
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "commit": "baea39f7629abda59b5f584602589feca42bac58",
             "module": "m3/collections",
             "path": "m3/collections/src/com/m3/collections/M3PackedSupport.java",
             "symbol": "com.m3.collections.M3PackedSupport",
@@ -923,7 +923,7 @@
           },
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "commit": "baea39f7629abda59b5f584602589feca42bac58",
             "module": "m3/collections",
             "path": "m3/collections/src/com/m3/collections/M3PackedArrays.java",
             "symbol": "com.m3.collections.M3PackedArrays",
@@ -940,7 +940,7 @@
           },
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "commit": "baea39f7629abda59b5f584602589feca42bac58",
             "module": "m3/collections",
             "path": "m3/collections/src/com/m3/collections/M3PackedHashAtoms.java",
             "symbol": "com.m3.collections.M3PackedHashAtoms",
@@ -961,7 +961,7 @@
           },
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "commit": "baea39f7629abda59b5f584602589feca42bac58",
             "module": "m3/collections",
             "path": "m3/collections/src/com/m3/collections/M3PackedRingAtoms.java",
             "symbol": "com.m3.collections.M3PackedRingAtoms",
@@ -1021,7 +1021,7 @@
           "id": "m3.collections.primitive-foundation.port.v1",
           "version": "1",
           "path": "m3/collections/recipe/manifest.json",
-          "sha256": "300d11ab42048a1293851b348b2284cb215a05bce93b038088dfddaff20b81f5",
+          "sha256": "14315df45dc70d2fd9536365747082b5a89d0e8c596669f3b15b623451f4269a",
           "preconditions": [
             "Exact selected postimage hashes.",
             "Pinned ArrayDeque.java and HashMap.java remain unchanged guards.",
@@ -1050,7 +1050,7 @@
         },
         "sync": {
           "source_revision": "3db24805d640c72ab1bd637d83561696d99561a0",
-          "target_revision": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+          "target_revision": "baea39f7629abda59b5f584602589feca42bac58",
           "direction": "source-to-target",
           "target_adaptations": [
             "M3 namespace",
@@ -1104,7 +1104,7 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "commit": "baea39f7629abda59b5f584602589feca42bac58",
             "module": "m3/collections",
             "path": "m3/collections/src/com/m3/collections/M3PackedLongDeque.java",
             "symbol": "com.m3.collections.M3PackedLongDeque",
@@ -1174,7 +1174,7 @@
           "id": "m3.collections.primitive-foundation.port.v1",
           "version": "1",
           "path": "m3/collections/recipe/manifest.json",
-          "sha256": "300d11ab42048a1293851b348b2284cb215a05bce93b038088dfddaff20b81f5",
+          "sha256": "14315df45dc70d2fd9536365747082b5a89d0e8c596669f3b15b623451f4269a",
           "preconditions": [
             "Foundation recipe preconditions."
           ],
@@ -1201,7 +1201,7 @@
         },
         "sync": {
           "source_revision": "3db24805d640c72ab1bd637d83561696d99561a0",
-          "target_revision": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+          "target_revision": "baea39f7629abda59b5f584602589feca42bac58",
           "direction": "source-to-target",
           "target_adaptations": [
             "M3 names",
@@ -1260,7 +1260,7 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+            "commit": "baea39f7629abda59b5f584602589feca42bac58",
             "module": "m3/collections",
             "path": "m3/collections/src/com/m3/collections/M3PackedLongLongHashMap.java",
             "symbol": "com.m3.collections.M3PackedLongLongHashMap",
@@ -1344,7 +1344,7 @@
           "id": "m3.collections.primitive-foundation.port.v1",
           "version": "1",
           "path": "m3/collections/recipe/manifest.json",
-          "sha256": "300d11ab42048a1293851b348b2284cb215a05bce93b038088dfddaff20b81f5",
+          "sha256": "14315df45dc70d2fd9536365747082b5a89d0e8c596669f3b15b623451f4269a",
           "preconditions": [
             "Foundation recipe preconditions."
           ],
@@ -1371,7 +1371,7 @@
         },
         "sync": {
           "source_revision": "3db24805d640c72ab1bd637d83561696d99561a0",
-          "target_revision": "0567a4eeb610cd28d0d01fb073ad9ddd2e336714",
+          "target_revision": "baea39f7629abda59b5f584602589feca42bac58",
           "direction": "source-to-target",
           "target_adaptations": [
             "M3 names",
