@@ -9,10 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.m3.rewrite.InstallIndexStringCompatibility;
 import com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe;
 import com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates;
+import com.m3.rewrite.dag.M3RecipeDagPlannerRecipe;
 import com.m3.rewrite.donor.M3PinnedDonorInlineRecipe;
 import com.m3.rewrite.index.M3SemanticIndexM3DbBridgeRecipe;
 import com.m3.rewrite.index.M3SemanticIndexRecipe;
 import com.m3.rewrite.index.M3TypeRelationRecipe;
+import com.m3.rewrite.pass.M3MultiPassPlannerRecipe;
 import com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe;
 import com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe;
 import com.synexia.rewrite.M3SegmentedLaneNativeRecipe;
@@ -22,7 +24,7 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(10, M3RecipeScopeRegistry.size());
+        assertEquals(12, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(InstallIndexStringCompatibility.class.getName()));
@@ -33,6 +35,8 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3SemanticIndexRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3TypeRelationRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SemanticIndexM3DbBridgeRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3RecipeDagPlannerRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3MultiPassPlannerRecipe.class.getName()));
         assertFalse(M3RecipeScopeRegistry.registered(null));
         assertFalse(M3RecipeScopeRegistry.registered("missing.Recipe"));
         assertThrows(NullPointerException.class, () -> M3RecipeScopeRegistry.require((Class<?>) null));
@@ -77,6 +81,14 @@ final class M3RecipeScopeDeclarationTest {
         assertEquals(M3EditScope.MULTI_MODULE, semanticDbPolicy.resolve(List.of("src/main/java/a/A.java")));
         assertFalse(semanticDbPolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
 
+        var dagPolicy = M3RecipeScopeRegistry.require(M3RecipeDagPlannerRecipe.class);
+        assertEquals(M3EditScope.MULTI_MODULE, dagPolicy.resolve(List.of("src/main/java/a/A.java")));
+        assertFalse(dagPolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
+
+        var multiPassPolicy = M3RecipeScopeRegistry.require(M3MultiPassPlannerRecipe.class);
+        assertEquals(M3EditScope.MULTI_MODULE, multiPassPolicy.resolve(List.of("src/main/java/a/A.java")));
+        assertFalse(multiPassPolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
+
         var inferredPolicy = M3RecipeScopeRegistry.require(M3HashPinnedJavaSnapshotRecipe.class);
         assertEquals(
                 M3EditScope.FILE,
@@ -105,7 +117,9 @@ final class M3RecipeScopeDeclarationTest {
                 M3PinnedDonorInlineRecipe.class,
                 M3SemanticIndexRecipe.class,
                 M3TypeRelationRecipe.class,
-                M3SemanticIndexM3DbBridgeRecipe.class)) {
+                M3SemanticIndexM3DbBridgeRecipe.class,
+                M3RecipeDagPlannerRecipe.class,
+                M3MultiPassPlannerRecipe.class)) {
             assertEquals(
                     M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING,
                     M3RecipeScopeRegistry.require(recipe).contractMode());
