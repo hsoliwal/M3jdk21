@@ -2,6 +2,10 @@
 
 Status: proposed review protocol. The example files beside this document are explanatory artifacts, not an implemented migration database, runtime feature or validated port.
 
+## Operational authority before using these examples
+
+The illustrative schema/example in this directory must not become a competing migration registry. At the 2026-10-02 02:52 inspection, the verified operational candidate is [#12's m3/migration/manifest.json at d543255294ae85e4c8015812a3c8a97aaf498354](https://github.com/hsoliwal/M3jdk21/blob/d543255294ae85e4c8015812a3c8a97aaf498354/m3/migration/manifest.json), on its feature-stack line. That directory is not present in master 26c442d3f1400e01eeb11a44e803b63e1874735e. Reconcile the selected manifest/validator into the intended branch through a reviewed change. [Worked port decisions](migration-worked-port-decisions.md) maps these concepts to its existing fields and stable IDs, with rename/split/conflict examples. No operational mapping is changed by this documentation.
+
 ## Why the old name map is not enough
 
 [name-mapping.json](name-mapping.json) deliberately records only early provisional directions. Preserve it as historical input. A type name alone cannot express source ownership, multiple targets, merged/split classes, per-operation compatibility or which later enhancement has been ported.
