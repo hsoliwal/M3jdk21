@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.synexia.rewrite;
 
+import com.m3.rewrite.scope.M3EditScope;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -10,7 +11,10 @@ import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.test.RewriteTest;
 import org.openrewrite.test.SourceSpecs;
 import org.openrewrite.text.PlainText;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.openrewrite.java.Assertions.java;
 
 /** Actual OpenRewrite scheduler tests; no disabled type validation or stubs. */
@@ -36,6 +40,13 @@ class M3MIndexJoinedCharsViewRecipeTest implements RewriteTest {
     }
     return files;
   }
+  @Test void declaresModuleScopeAndKeepsManagedPathsInsideFence() {
+    var scope = new M3MIndexJoinedCharsViewRecipe().editScope();
+    assertEquals(M3EditScope.MODULE, scope.scope());
+    for (String name : NAMES) assertTrue(scope.allows(PREFIX + name));
+    assertFalse(scope.allows("another-module/src/main/java/Other.java"));
+  }
+
   @Test void actualSchedulerReplayAndFixedPoint() {
     rewriteRun(spec -> spec.recipe(new M3MIndexJoinedCharsViewRecipe()).cycles(2)
         .expectedCyclesThatMakeChanges(1), sources(false));
