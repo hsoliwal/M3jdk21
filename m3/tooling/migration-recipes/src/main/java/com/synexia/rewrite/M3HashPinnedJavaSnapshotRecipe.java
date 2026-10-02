@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.synexia.rewrite;
 
+import com.m3.rewrite.scope.M3ScopeFence;
+import com.m3.rewrite.scope.M3ScopedRecipe;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.io.IOException;
@@ -38,7 +40,8 @@ import org.openrewrite.java.tree.J;
  * syntax; the sealed M3 contract, coverage, compiler, test and runtime gates remain authoritative.
  */
 public final class M3HashPinnedJavaSnapshotRecipe
-        extends ScanningRecipe<M3HashPinnedJavaSnapshotRecipe.Inventory> {
+        extends ScanningRecipe<M3HashPinnedJavaSnapshotRecipe.Inventory> implements M3ScopedRecipe {
+    private static final M3ScopeFence EDIT_SCOPE = M3ScopeFence.module("src");
     private static final String RESOURCE_ROOT = "/com/synexia/rewrite/hash-pinned-java/";
 
     @Option(
@@ -67,6 +70,8 @@ public final class M3HashPinnedJavaSnapshotRecipe
         }
         this.crateName = crateName;
     }
+
+    @Override public M3ScopeFence editScope() { return EDIT_SCOPE; }
 
     @Override public String getDisplayName() {
         return "M3 hash-pinned Java snapshot candidate";
