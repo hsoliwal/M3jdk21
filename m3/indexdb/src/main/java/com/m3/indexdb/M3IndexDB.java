@@ -156,6 +156,7 @@ public final class M3IndexDB implements AutoCloseable {
             Files.write(
                     temporary,
                     bytes,
+                    StandardOpenOption.WRITE,
                     StandardOpenOption.TRUNCATE_EXISTING);
             try {
                 Files.move(
