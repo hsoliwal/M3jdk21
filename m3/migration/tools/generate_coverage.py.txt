@@ -1,0 +1,20 @@
+#!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+"""Generate the inventory-count section for COVERAGE.md from checked-in TSV shards."""
+import csv
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+rows = []
+total = 0
+for path in sorted((ROOT / "inventory").glob("*.tsv")):
+    with path.open(newline="") as handle:
+        count = sum(1 for _ in csv.DictReader(handle, delimiter="\t"))
+    rows.append((path.stem, count))
+    total += count
+
+print("| Source module | Rows |")
+print("| --- | ---: |")
+for module, count in rows:
+    print(f"| {module} | {count:,} |")
+print(f"\nTotal committed rows: **{total:,}**.")
