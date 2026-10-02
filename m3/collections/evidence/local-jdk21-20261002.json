@@ -1,0 +1,66 @@
+{
+  "commands": [
+    "javac --release 21 -Xlint:all,-module -Werror <module sources>",
+    "javac --release 21 -Xlint:all -Werror --module-path <module> --add-modules com.m3.collections M3CollectionsFoundationTest.java",
+    "java -ea -esa ... M3CollectionsFoundationTest",
+    "java -ea -esa -Xint ... M3CollectionsFoundationTest",
+    "python m3/collections/recipe/test_recipe.py",
+    "two consecutive m3/collections/build.sh runs with pinned jar timestamp"
+  ],
+  "date": "2026-10-02",
+  "environment": {
+    "java": "OpenJDK 21.0.11",
+    "javac": "javac 21.0.11",
+    "os": "Linux x86_64 container"
+  },
+  "files": {
+    "README.md": "cfcd83507df15862188397895d6f72decaf328c48173df99582d0c617480d773",
+    "build.sh": "c4f155b81011831498afb19b2ad2f8323930077435e34170ca137b5aaec568ad",
+    "recipe/apply.py": "00f69ff5a5b00d6b06540751e2af555c8a61d81ba9ca7c0b504f690ebf3f58f0",
+    "recipe/manifest.json": "300d11ab42048a1293851b348b2284cb215a05bce93b038088dfddaff20b81f5",
+    "recipe/test_recipe.py": "f28a661592926b052755a082a097bddfe29f15ad28d697e61bd5255e70e7a2be",
+    "src/com/m3/collections/M3LongCollection.java": "8161ac3d6cf68a3c7eade8236bd630fc694b2cb1af68dfc9293c48fbfb4dd4f1",
+    "src/com/m3/collections/M3LongDeque.java": "221c184d8577fa0eaaed9d27b7fb92498bb6f98cffb8467fbfcaaa48eb42f57b",
+    "src/com/m3/collections/M3LongIterator.java": "264a5cd22ed734c7c86e059091d6e63670f2b4f0ac8a0aaa30fa7dac0e9e0107",
+    "src/com/m3/collections/M3LongLongConsumer.java": "7733dd8dc94fe0cb7c58039c269091c9bdcb054e3d9cba04799c973fc655ea34",
+    "src/com/m3/collections/M3LongLongMap.java": "8eb5de0978192054236c838f6a160bb16877a11b415fe6630fae66adcf9d8dc7",
+    "src/com/m3/collections/M3LongLongPredicate.java": "4c89d40f648f98fb27453860b46585b7845ffc51348bd79d7a28fd3fb17e01cc",
+    "src/com/m3/collections/M3LongQueue.java": "3f0c2bf1561526e1079ea70f0a143a22373c8342df4c678dfd68009793e53d39",
+    "src/com/m3/collections/M3PackedArrays.java": "2a520040b22594e0bdd7273f6bbf7b5aff9474ebbff6751cf1844a85549e53ec",
+    "src/com/m3/collections/M3PackedHashAtoms.java": "bb5b5a917efdc77c9a12f46495ab8d61bd1480b7d115f1770b340075d82a0320",
+    "src/com/m3/collections/M3PackedLongDeque.java": "e8c6dfc966fe31b18da11b269c276ba48d957d5d1227656a3bc3ce62491c4ef0",
+    "src/com/m3/collections/M3PackedLongLongHashMap.java": "d35450dfcf877ca3a2a093e33364f55435e3f1c673cfeaee0d37e2ee0b209a55",
+    "src/com/m3/collections/M3PackedRingAtoms.java": "ebf47297df08c2c749a1a5680e1669c832fc2e786e31c9b4ff1f0f6a968417db",
+    "src/com/m3/collections/M3PackedSupport.java": "26a6c32f09c9a9f5cf1509e8a65286ef7a7be0d12322444bee5abc2046011ff3",
+    "src/module-info.java": "362035230cb2c91cc1b5d4ce708e69a4cd2c16bf1d96e74d8aa9a1264265a47b",
+    "test/M3CollectionsFoundationTest.java": "9c7551fa878d31df0eaa01b3c01a0408888fbc03e1dbff3bd18644f269c72b97"
+  },
+  "jdk_guards": {
+    "ArrayDeque.java": "9574f633c3dd2002ca2cc29740eae7ffc8c9aede9b9f1ab88578abfe2251140e",
+    "HashMap.java": "71c8d82247c2736e9fbe3769f366e9bd250bc73ecf390749998e830201aaabf2"
+  },
+  "nonclaims": [
+    "No java.util class is replaced.",
+    "No generic Map<Long,Long> or Collection<Long> boxing-elimination claim.",
+    "No serialization/view/subclass compatibility claim.",
+    "No concurrency/JMM claim.",
+    "No throughput or whole-heap benchmark claim.",
+    "No Maven/OpenRewrite execution claim."
+  ],
+  "results": {
+    "interpreter_checks": 1006642,
+    "jar_reproducible": "PASS",
+    "jar_sha256": "bbba8e0fbb8328f6fb1b8c54b9422dcaf70f78176fefe1c0a3917122c814ce60",
+    "normal_checks": 1006642,
+    "recipe_unit_tests": 2,
+    "strict_compile": "PASS"
+  },
+  "schema": "m3.collections.evidence/1",
+  "scope": "explicit Route-A primitive collection foundation only; no java.base replacement",
+  "source_pins": {
+    "ring_atom_candidate": "8fa47689547a1efeabbb35d2caf1683d902a87e4",
+    "synexia_develop": "3db24805d640c72ab1bd637d83561696d99561a0",
+    "target_docs_baseline": "5b2f8ad79557cd448caa1c8e5b3e5a953ec48a24"
+  },
+  "status": "PASS"
+}
