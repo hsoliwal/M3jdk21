@@ -883,3 +883,46 @@ This documentation handoff is useful when an implementation contributor can:
 - resume after interruption without asking for the user to list obvious omissions.
 
 Implementation completion remains a separate, evidence-gated programme.
+
+
+## 43. Migration progress: primitive collections seed (2026-10-02)
+
+The first dependency-ready collection implementation packet is now represented by these operational
+mapping IDs:
+
+- `m3.collections.primitive-foundation`
+- `m3.collections.long-deque-route-a`
+- `m3.collections.long-long-hash-map-route-a`
+
+Exact tested packet candidate: `baea39f7629abda59b5f584602589feca42bac58`.
+
+Implemented scope:
+
+- separate `com.m3.collections` Route-A module outside `java.base`;
+- primitive long collection/deque contracts and a packed circular `long[]` deque;
+- primitive long-to-long contract and open-addressed `long[]/long[]/byte[]` map;
+- shared capacity, ring and hash-probe atoms;
+- exact-postimage source-bound installer with unchanged `ArrayDeque.java` and `HashMap.java` guards;
+- Maven/OpenRewrite installer authored with exact postimage resources and refusal/fixed-point tests.
+
+Executed evidence:
+
+- strict Java 21 compile;
+- 1,006,642 differential/focused checks in normal mode;
+- 1,006,642 checks under `-Xint`;
+- two source-bound recipe unit tests after the final documentation/manifest rebind;
+- deterministic module jar hash with a pinned archive timestamp.
+
+Open gates remain explicit:
+
+- Maven/OpenRewrite execution is unexecuted because Maven was unavailable;
+- no `java.util` implementation has been replaced;
+- no generic boxing/view/serialization/subclass compatibility is claimed;
+- no concurrent collection/JMM claim exists;
+- no throughput or whole-heap benchmark has been accepted.
+
+The next JDK-facing collection packet should start from `ArrayDeque`: inventory every public,
+iterator/spliterator, clone/serialization, null, growth and overflow obligation, then adapt the
+accepted ring/storage atoms behind a candidate without weakening the ordinary Java API. `HashMap`
+follows only after its larger equality/view/callback/collision/serialization contract is fully
+mapped.
