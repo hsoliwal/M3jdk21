@@ -1,0 +1,17 @@
+{
+  "base_commit": "e28f41df0d18cc1e651eebcd71cc6cf951b0759b",
+  "files": {
+    ".github/workflows/m3-foundation.yml": {
+      "before": "2d51585e8df572ff44d5e6e57d344e9c87e247d7551c80422eab1eb305c3fc60",
+      "after": "4e2943b64b0b82b7efaa8d820474c4bfdeb516688df5d48bbfb50a4e559693ca"
+    },
+    "src/java.base/share/classes/java/lang/MIndexString.java": {
+      "before": "21e373dbe450c7cd7b85ede587209f88b4546b1833a75c83370b213aa66d97d0",
+      "after": "88f4d3b3b04e41c34f171a38f30a320af91561ba72fa89a35750e1da7b9854c1"
+    },
+    "m3/runtime-integration/tests/MIndexStringInvariant.java": {
+      "before": "c4623ce4627dffb0b70c9b7d8cc8e429c50300a4fa6ec90ea5c7d1f6bbc4aee1",
+      "after": "776524fc479ba0da70095e76fd0f323e9acdcd8b5aa324c1d6f1d357532064d8"
+    }
+  }
+}

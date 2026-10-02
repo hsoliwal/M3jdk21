@@ -528,8 +528,37 @@ final class MIndexString {
     void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
         String.checkBoundsBeginEnd(srcBegin, srcEnd, length);
         Objects.checkFromIndexSize(dstBegin, srcEnd - srcBegin, dst.length);
-        for (int source = srcBegin, target = dstBegin; source < srcEnd; source++, target++) {
-            dst[target] = charAt(source);
+        if (srcBegin == srcEnd) {
+            return;
+        }
+        switch (storageKind) {
+            case LOCAL -> {
+                if (coder == String.LATIN1) {
+                    StringLatin1.getChars(localValue, srcBegin, srcEnd, dst, dstBegin);
+                } else {
+                    StringUTF16.getChars(localValue, srcBegin, srcEnd, dst, dstBegin);
+                }
+            }
+            case LEXICON, SHARED_LEXICON -> {
+                for (int source = srcBegin, target = dstBegin; source < srcEnd; source++, target++) {
+                    dst[target] = mappedChar(source);
+                }
+            }
+            case JOINED -> {
+                int segment = segmentAt(srcBegin);
+                int segmentStart = segment == 0 ? 0 : ends[segment - 1];
+                int source = srcBegin;
+                int target = dstBegin;
+                while (source < srcEnd) {
+                    int limit = Math.min(srcEnd, ends[segment]);
+                    int atomStart = offsets[segment] + source - segmentStart;
+                    segments[segment].getChars(atomStart, atomStart + limit - source, dst, target);
+                    target += limit - source;
+                    source = limit;
+                    segmentStart = ends[segment++];
+                }
+            }
+            default -> throw new InternalError("invalid MIndex storage kind");
         }
     }
 
