@@ -8,6 +8,7 @@ import com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe;
 import com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe;
 import com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates;
 import com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe;
+import com.m3.rewrite.hash.M3SemanticHashRecipe;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -27,11 +28,12 @@ final class M3Java21ConvergenceRecipeTest {
         var recipe = new M3Java21ConvergenceRecipe();
         List<Recipe> children = recipe.getRecipeList();
 
-        assertEquals(4, children.size());
+        assertEquals(5, children.size());
         assertEquals(M3InventoryPureIntAtomCandidates.class, children.get(0).getClass());
-        assertEquals(M3AtomizePureIntReturnRecipe.class, children.get(1).getClass());
-        assertEquals(M3PatternizePureIntAtomRecipe.class, children.get(2).getClass());
-        assertEquals(M3DocumentPureIntAtomRecipe.class, children.get(3).getClass());
+        assertEquals(M3SemanticHashRecipe.class, children.get(1).getClass());
+        assertEquals(M3AtomizePureIntReturnRecipe.class, children.get(2).getClass());
+        assertEquals(M3PatternizePureIntAtomRecipe.class, children.get(3).getClass());
+        assertEquals(M3DocumentPureIntAtomRecipe.class, children.get(4).getClass());
 
         assertTrue(recipe.getTags().contains("multi-pass"));
         assertTrue(recipe.getTags().contains("java21"));
