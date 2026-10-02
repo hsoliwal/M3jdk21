@@ -2530,6 +2530,18 @@ public final class System {
                 return String.m3JoinedStringsEnabled();
             }
 
+            public boolean stringHasM3Storage(String value) {
+                return value.hasM3Storage();
+            }
+
+            public long stringM3BitSignal64(String value) {
+                return value.m3BitSignal64();
+            }
+
+            public int stringM3CharacterFlags(String value) {
+                return value.m3CharacterFlags();
+            }
+
             @PreviewFeature(feature=PreviewFeature.Feature.STRING_TEMPLATES)
             public long stringConcatCoder(char value) {
                 return StringConcatHelper.coder(value);
