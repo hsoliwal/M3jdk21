@@ -39,7 +39,7 @@ String retains exact UTF-16 semantics, shared-lexicon plus VM-local ownership, r
 
 Collections use the canonical family-by-family contract in [../../docs/whole-jdk-collections-replacement.md](../../docs/whole-jdk-collections-replacement.md), with sequencing and evidence packets in [../../docs/whole-jdk-work-packets.md](../../docs/whole-jdk-work-packets.md). Candidate primitive/indexed/segmented forms do not automatically eliminate boxing or node objects at public generic boundaries. IdentityHashMap reference identity, weak-reference families, live views, serialization, subclass hooks and concurrent JMM guarantees are explicit stop gates.
 
-All remaining JDK/HotSpot work is decomposed in WORK_PACKETS.md and advances in dependency order rather than by filename similarity.
+All remaining JDK/HotSpot work is decomposed in [../../docs/whole-jdk-work-packets.md](../../docs/whole-jdk-work-packets.md) and advances in dependency order rather than by filename similarity.
 
 ## Existing MIndex/MatIndex slice authority
 
