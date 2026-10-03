@@ -123,31 +123,6 @@ hash-pinned OpenRewrite candidate crates. The generator:
 
 This is the bridge from whole-release inventory to per-file mechanical recipe work.
 
-
-## Recipe DAG control plane
-
-Backport execution is composed from small immutable recipe/work atoms through the framework-neutral
-DAG in `m3/tooling/backport-dag`.
-
-The canonical authority is `m3-backport-dag.tsv` plus the Java validator `M3RecipeDag`.
-Camel, Airflow and Drools files are orchestration/admission projections only; they do not gain
-authority to change dependencies, compatibility decisions, edit scope or promotion order.
-
-The locked scope ladder remains:
-
-`FILE -> VISIBILITY -> PACKAGE -> MODULE -> MULTI_MODULE -> LIBRARY_API`
-
-Independent FILE recipe atoms may share one parallel DAG layer. Any broader mutating node must carry
-explicit scope-promotion approval. Canonical promotion is one serial terminal node after recipe
-JUnit, diff, lint, compile, jtreg and runtime gates.
-
-The Maven control entry point is:
-
-`mvn -B -ntp -f m3/pom.xml clean verify`
-
-This verifies the OpenRewrite recipe substrate, the 99%-gated DAG semantic kernel and the backport
-inventory/admission module without replacing OpenJDK's native configure/make build.
-
 ## Backport packet
 
 Each actual backport must record:
@@ -196,21 +171,23 @@ retains Java 21's accepted `-docfilessubdirs` option processing. The packet is o
 `M3Jdk8347112BackportRecipe` and remains `candidate-adapted` until focused javadoc build/jtreg and
 recipe fixed-point CI pass. See `recipes/jdk-8347112/`.
 
-## Next adapted serviceability candidate
+## Adapted cross-platform diagnostics candidate
 
-JDK-8364182, **Add jcmd VM.security_properties command**, is materialized from upstream commit
+JDK-8359706, **open file descriptor diagnostics for VM.info / error reports**, is materialized from
 
-`f2f8828188f45d16344c82adfbf951f7409b8825`.
+`openjdk/jdk@b0831572e2cd9dbff9ee2abcdf81a493ddcecc7e`
 
-The packet is additive: the existing Java 21 `VM.system_properties` command remains present and
-visible. M3JDK21 adds the new security-property command, the internal SharedSecrets/VMSupport bridge,
-the HotSpot diagnostic command registration and the upstream focused jtreg test. The only mechanical
-source adaptation is the older JDK21 `DCmdFactoryImpl(export, enabled, hidden)` constructor.
+together with required follow-up JDK-8380236:
 
-The packet is owned by `M3Jdk8364182BackportRecipe` as separate Java-LST and HotSpot-text atoms.
-It remains `candidate-adapted` until focused image build, both
-`SecurityPropertiesTest.java` and existing `SystemPropertiesTest.java`, recipe fixed point and
-backport verification pass. See `recipes/jdk-8364182/`.
+`openjdk/jdk@3a109f49feb19f313632be6a2aa24ba7d9b7269b`.
+
+M3JDK21 treats them as one dependency-closed packet. Linux uses bounded `/proc/self/fd`
+enumeration, macOS uses bounded `proc_pidinfo`, AIX/Windows retain stubs, and VM.info/fatal error
+reporting gains the new diagnostic. The packet is owned by `M3Jdk8359706BackportRecipe` as one
+Java test atom plus one seven-file HotSpot text atom.
+
+Status remains `candidate-adapted` until Linux and macOS build/test evidence, recipe fixed point,
+backport verification and platform compatibility gates pass. See `recipes/jdk-8359706/`.
 
 ## Completion boundary
 
