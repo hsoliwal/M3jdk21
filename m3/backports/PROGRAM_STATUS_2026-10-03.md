@@ -47,14 +47,19 @@ At the baseline used to generate this snapshot:
 
 - `jdk-8357439` — jcmd bash completion
 - `jdk-8347112` — adapted javadoc doc-files behavior
+- `jdk-8364182` — adapted VM.security_properties serviceability packet
 
 Open work outside that baseline must not be counted as merged merely because a branch or PR exists.
 
-Current review lanes created on 2026-10-03 include:
+Merged on 2026-10-03:
 
 - PR #45 — JDK-8364182 security-properties diagnostic command
 - PR #46 — M3JDK21 recipe DAG/Maven/Camel-Airflow-Drools control plane
 - PR #47 — JDK-8359706 open-file-descriptor diagnostics
+
+Current review lane:
+
+- PR #48 — JDK-8374808 KeyStore creation Instant compatibility leaf
 
 ## Completion boundary
 

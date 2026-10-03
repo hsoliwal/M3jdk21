@@ -235,6 +235,88 @@ def verify_security_properties_8364182_backport(root: Path) -> None:
         raise AssertionError("security properties serialization bridge missing")
 
 
+
+JDK_8374808_COMMIT = "264fdc5b4ed5f4e35168048533196e670c3dda6c"
+
+
+def verify_keystore_instant_8374808_backport(root: Path) -> None:
+    rows = read_tsv(root / "m3/backports/recipes/jdk-8374808/adaptation.tsv")
+    if len(rows) != 3:
+        raise AssertionError(
+            f"expected 3 JDK-8374808 adaptation rows, found {len(rows)}"
+        )
+
+    by_target = {row["target_path"]: row for row in rows}
+    if len(by_target) != len(rows):
+        raise AssertionError("duplicate JDK-8374808 target path")
+
+    for row in rows:
+        if row["upstream_commit"] != JDK_8374808_COMMIT:
+            raise AssertionError(
+                f"unexpected JDK-8374808 donor commit for {row['target_path']}"
+            )
+        path = root / row["target_path"]
+        if not path.is_file():
+            raise AssertionError(
+                f"missing JDK-8374808 target: {row['target_path']}"
+            )
+        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        if actual != row["target_sha256"]:
+            raise AssertionError(
+                f"JDK-8374808 target drift for {row['target_path']}: "
+                f"expected {row['target_sha256']}, actual {actual}"
+            )
+        baseline = row["baseline_sha256"]
+        if baseline != "ABSENT" and baseline == row["target_sha256"]:
+            raise AssertionError(
+                f"JDK-8374808 row has no delta: {row['target_path']}"
+            )
+
+    seeds = read_tsv(root / "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv")
+    seed = next((row for row in seeds if row["jbs"] == "JDK-8374808"), None)
+    if seed is None:
+        raise AssertionError("JDK-8374808 missing from upstream seed")
+    if seed["upstream_commit"] != JDK_8374808_COMMIT:
+        raise AssertionError("JDK-8374808 seed donor commit drift")
+    if seed["disposition"] != "candidate-adapted":
+        raise AssertionError(
+            f"JDK-8374808 unexpected disposition: {seed['disposition']}"
+        )
+
+    key_store = (
+        root / "src/java.base/share/classes/java/security/KeyStore.java"
+    ).read_text(encoding="utf-8")
+    if "public final Instant getCreationInstant(String alias)" not in key_store:
+        raise AssertionError("KeyStore.getCreationInstant API missing")
+    if "public final Date getCreationDate(String alias)" not in key_store:
+        raise AssertionError("legacy KeyStore.getCreationDate API was removed")
+
+    spi = (
+        root / "src/java.base/share/classes/java/security/KeyStoreSpi.java"
+    ).read_text(encoding="utf-8")
+    if "public Instant engineGetCreationInstant(String alias)" not in spi:
+        raise AssertionError("KeyStoreSpi.engineGetCreationInstant API missing")
+    if "return date == null ? null : date.toInstant();" not in spi:
+        raise AssertionError("legacy Date-to-Instant SPI adapter missing")
+    if "public abstract Date engineGetCreationDate(String alias);" not in spi:
+        raise AssertionError("legacy KeyStoreSpi creation-date API was removed")
+
+    test = (
+        root / "test/jdk/java/security/KeyStore/CreationInstant.java"
+    ).read_text(encoding="utf-8")
+    if "LegacyDateSpi" not in test or "getCreationInstant" not in test:
+        raise AssertionError("focused KeyStore Instant compatibility test missing")
+
+    for forbidden in (
+        "src/java.base/share/classes/sun/security/provider/JavaKeyStore.java",
+        "src/java.base/share/classes/com/sun/crypto/provider/JceKeyStore.java",
+        "src/java.base/share/classes/sun/security/pkcs12/PKCS12KeyStore.java",
+    ):
+        if forbidden in by_target:
+            raise AssertionError(
+                f"provider-storage rewrite escaped compatibility leaf: {forbidden}"
+            )
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -254,9 +336,11 @@ def main() -> int:
     verify_jcmd_backport(root)
     verify_javadoc_8347112_backport(root)
     verify_security_properties_8364182_backport(root)
+    verify_keystore_instant_8374808_backport(root)
     print(
         "PASS: 82 JEP rows, non-JEP seed uniqueness, exact JDK-8357439 donor blobs, "
-        "JDK-8347112 javadoc adaptation, and JDK-8364182 serviceability adaptation"
+        "JDK-8347112 javadoc adaptation, JDK-8364182 serviceability adaptation, "
+        "and JDK-8374808 KeyStore Instant compatibility leaf"
     )
     return 0
 
