@@ -52,3 +52,17 @@ a competing registry.
 Branch-scoped migration manifests, runtime candidates and test receipts remain bound to their exact
 branches/commits until explicitly reconciled. Production source, recipes, generated coverage,
 acceptance evidence and installed JDKs are not changed by the documentation handoff.
+
+
+## M3JDK21 Maven control plane
+
+The OpenJDK configure/make build remains authoritative for the JDK itself. M3 uses Maven for its
+independent recipe, admission, inventory and proof substrate.
+
+Run:
+
+`mvn -B -ntp -f m3/pom.xml clean verify`
+
+The default reactor verifies migration/OpenRewrite recipes, the scope-aware backport recipe DAG and
+backport inventory/admission. The DAG is framework-neutral; Camel, Airflow and Drools are projections
+over the same canonical dependency/scope graph rather than separate sources of truth.
