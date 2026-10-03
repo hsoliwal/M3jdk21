@@ -4,6 +4,7 @@ package com.m3.tooling.dag;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.m3.rewrite.scope.M3EditScope;
@@ -39,15 +40,16 @@ final class M3DagProjectorTest {
                                 M3DagProjectionFormat.AIRFLOW_PYTHON)
                         .content();
 
-        assertTrue(source.contains("file_delta >> packet_java"));
-        assertTrue(source.contains("file_delta >> packet_text"));
-        assertTrue(source.contains("packet_java >> packet_join"));
-        assertTrue(source.contains("packet_text >> packet_join"));
-        assertTrue(source.contains("packet_join >> recipe_junit"));
-        assertTrue(source.contains("runtime >> promote"));
-        assertFalse(source.contains("packet_java >> packet_text"));
-        assertFalse(source.contains("packet_text >> packet_java"));
+        assertTrue(source.contains("n_file_delta >> n_packet_java"));
+        assertTrue(source.contains("n_file_delta >> n_packet_text"));
+        assertTrue(source.contains("n_packet_java >> n_packet_join"));
+        assertTrue(source.contains("n_packet_text >> n_packet_join"));
+        assertTrue(source.contains("n_packet_join >> n_recipe_junit"));
+        assertTrue(source.contains("n_runtime >> n_promote"));
+        assertFalse(source.contains("n_packet_java >> n_packet_text"));
+        assertFalse(source.contains("n_packet_text >> n_packet_java"));
         assertTrue(source.contains("'serial_promotion': True"));
+        assertTrue(source.contains("'scope_promotion_approved': True"));
         assertTrue(source.contains("'scope': 'PACKAGE'"));
     }
 
@@ -73,6 +75,7 @@ final class M3DagProjectorTest {
         assertTrue(promoteNode > joinNode);
         assertTrue(source.contains(".multicast().parallelProcessing().stopOnException()"));
         assertTrue(source.contains(".setHeader(\"M3SerialPromotion\").constant(true)"));
+        assertTrue(source.contains(".setHeader(\"M3ScopePromotionApproved\").constant(true)"));
         assertTrue(source.contains(".to(\"direct:m3-dispatch\")"));
     }
 
@@ -161,8 +164,7 @@ final class M3DagProjectorTest {
 
         assertTrue(camel.contains("recipe.\\\"Quoted\\\"\\\\Path"));
         assertTrue(airflow.contains("recipe.\"Quoted\"\\\\Path"));
-        assertTrue(drools.contains("recipe.\\\"Quoted\\\"\\\\Path")
-                || !drools.contains("recipe."));
+        assertTrue(drools.contains("workRef=recipe.\"Quoted\"\\Path"));
         assertEquals(
                 M3DagSemanticRoot.of(dag),
                 M3DagProjector.project(
@@ -170,6 +172,49 @@ final class M3DagProjectorTest {
                                 "jdk-escape",
                                 M3DagProjectionFormat.CAMEL_JAVA)
                         .dagRoot());
+    }
+
+
+    @Test
+    void invalidProjectionInputsFailClosed() {
+        M3RecipeDag dag = sampleDag();
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> M3DagProjector.project(
+                        dag, "bad id!", M3DagProjectionFormat.AIRFLOW_PYTHON));
+        assertThrows(
+                NullPointerException.class,
+                () -> M3DagProjector.project(
+                        null, "jdk-sample", M3DagProjectionFormat.AIRFLOW_PYTHON));
+        assertThrows(
+                NullPointerException.class,
+                () -> M3DagProjector.project(dag, "jdk-sample", null));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new M3DagProjection(
+                        M3DagProjectionFormat.CAMEL_JAVA,
+                        "not-a-root",
+                        "content"));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new M3DagProjection(
+                        M3DagProjectionFormat.CAMEL_JAVA,
+                        "0".repeat(64),
+                        "   "));
+    }
+
+    @Test
+    void projectionFileNamesAreStable() {
+        assertEquals(
+                "M3BackportRoutes.java",
+                M3DagProjectionFormat.CAMEL_JAVA.fileName());
+        assertEquals(
+                "m3_backport_dag.py",
+                M3DagProjectionFormat.AIRFLOW_PYTHON.fileName());
+        assertEquals(
+                "m3_backport_rules.drl",
+                M3DagProjectionFormat.DROOLS_DRL.fileName());
     }
 
     private static M3RecipeDag sampleDag() {
