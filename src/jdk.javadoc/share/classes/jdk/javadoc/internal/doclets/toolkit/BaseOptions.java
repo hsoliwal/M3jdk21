@@ -66,7 +66,7 @@ import static javax.tools.Diagnostic.Kind.ERROR;
  * returned by {@link BaseOptions#getSupportedOptions()}.
  *
  * <p>Some of the methods used to access the values of options
- * have names that begin with a verb, such as {@link #copyDocfileSubdirs}
+ * have names that begin with a verb, such as {@link #linkSource()}
  * or {@link #showVersion}. Unless otherwise stated,
  * these methods should all be taken as just accessing the value
  * of the associated option.
@@ -80,12 +80,6 @@ public abstract class BaseOptions {
      * Allow JavaScript in doc comments.
      */
     private boolean allowScriptInComments = false;
-
-    /**
-     * Argument for command-line option {@code -docfilessubdirs}.
-     * True if we should recursively copy the doc-file subdirectories
-     */
-    private boolean copyDocfileSubdirs = false;
 
     /**
      * Arguments for command-line option {@code -tag} and {@code -taglet}.
@@ -403,7 +397,7 @@ public abstract class BaseOptions {
                 new Option(resources, "-docfilessubdirs") {
                     @Override
                     public boolean process(String opt, List<String> args) {
-                        copyDocfileSubdirs = true;
+                        messages.notice("doclet.docfilessubdirs_specified");
                         return true;
                     }
                 },
@@ -791,14 +785,6 @@ public abstract class BaseOptions {
      */
     boolean allowScriptInComments() {
         return allowScriptInComments;
-    }
-
-    /**
-     * Argument for command-line option {@code -docfilessubdirs}.
-     * True if we should recursively copy the doc-file subdirectories
-     */
-    public boolean copyDocfileSubdirs() {
-        return copyDocfileSubdirs;
     }
 
     /**
