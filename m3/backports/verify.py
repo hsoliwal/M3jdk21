@@ -164,6 +164,77 @@ def verify_javadoc_8347112_backport(root: Path) -> None:
     if '"-docfilessubdirs"' not in test:
         raise AssertionError("legacy -docfilessubdirs regression coverage was lost")
 
+
+JDK_8364182_COMMIT = "f2f8828188f45d16344c82adfbf951f7409b8825"
+
+
+def verify_security_properties_8364182_backport(root: Path) -> None:
+    rows = read_tsv(root / "m3/backports/recipes/jdk-8364182/adaptation.tsv")
+    if len(rows) != 7:
+        raise AssertionError(
+            f"expected 7 JDK-8364182 adaptation rows, found {len(rows)}"
+        )
+
+    by_target = {row["target_path"]: row for row in rows}
+    if len(by_target) != len(rows):
+        raise AssertionError("duplicate JDK-8364182 target path")
+
+    for row in rows:
+        if row["upstream_commit"] != JDK_8364182_COMMIT:
+            raise AssertionError(
+                f"unexpected JDK-8364182 donor commit for {row['target_path']}"
+            )
+        path = root / row["target_path"]
+        if not path.is_file():
+            raise AssertionError(
+                f"missing JDK-8364182 target: {row['target_path']}"
+            )
+        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        if actual != row["target_sha256"]:
+            raise AssertionError(
+                f"JDK-8364182 target drift for {row['target_path']}: "
+                f"expected {row['target_sha256']}, actual {actual}"
+            )
+        baseline = row["baseline_sha256"]
+        if baseline != "ABSENT" and baseline == row["target_sha256"]:
+            raise AssertionError(
+                f"JDK-8364182 row has no delta: {row['target_path']}"
+            )
+
+    seeds = read_tsv(root / "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv")
+    seed = next((row for row in seeds if row["jbs"] == "JDK-8364182"), None)
+    if seed is None:
+        raise AssertionError("JDK-8364182 missing from upstream seed")
+    if seed["upstream_commit"] != JDK_8364182_COMMIT:
+        raise AssertionError("JDK-8364182 seed donor commit drift")
+    if seed["disposition"] != "candidate-adapted":
+        raise AssertionError(
+            f"JDK-8364182 unexpected disposition: {seed['disposition']}"
+        )
+
+    header = (
+        root / "src/hotspot/share/services/diagnosticCommand.hpp"
+    ).read_text(encoding="utf-8")
+    if 'name() { return "VM.security_properties"; }' not in header:
+        raise AssertionError("VM.security_properties command declaration missing")
+    if 'name() { return "VM.system_properties"; }' not in header:
+        raise AssertionError("VM.system_properties compatibility command missing")
+
+    implementation = (
+        root / "src/hotspot/share/services/diagnosticCommand.cpp"
+    ).read_text(encoding="utf-8")
+    if "PrintSecurityPropertiesDCmd" not in implementation:
+        raise AssertionError("VM.security_properties registration/execute path missing")
+    if "PrintSystemPropertiesDCmd" not in implementation:
+        raise AssertionError("VM.system_properties implementation path missing")
+
+    support = (
+        root / "src/java.base/share/classes/jdk/internal/vm/VMSupport.java"
+    ).read_text(encoding="utf-8")
+    if "serializeSecurityPropertiesToByteArray" not in support:
+        raise AssertionError("security properties serialization bridge missing")
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -182,9 +253,10 @@ def main() -> int:
     verify_seed(root)
     verify_jcmd_backport(root)
     verify_javadoc_8347112_backport(root)
+    verify_security_properties_8364182_backport(root)
     print(
         "PASS: 82 JEP rows, non-JEP seed uniqueness, exact JDK-8357439 donor blobs, "
-        "and JDK-8347112 Java21-compatible adaptation"
+        "JDK-8347112 javadoc adaptation, and JDK-8364182 serviceability adaptation"
     )
     return 0
 
