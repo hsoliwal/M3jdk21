@@ -89,6 +89,8 @@
 # include <pthread.h>
 # include <signal.h>
 # include <endian.h>
+# include <ctype.h>
+# include <dirent.h>
 # include <errno.h>
 # include <dlfcn.h>
 # include <stdio.h>
@@ -105,6 +107,7 @@
 # include <fcntl.h>
 # include <string.h>
 # include <syscall.h>
+# include <time.h>
 # include <sys/sysinfo.h>
 # include <sys/ipc.h>
 # include <sys/shm.h>
@@ -1962,6 +1965,8 @@ void os::print_os_info(outputStream* st) {
   os::Linux::print_libversion_info(st);
 
   os::Posix::print_rlimit_info(st);
+
+  os::print_open_file_descriptors(st);
 
   os::Posix::print_load_average(st);
   st->cr();
@@ -5514,6 +5519,39 @@ int os::Linux::malloc_info(FILE* stream) {
   return g_malloc_info(0, stream);
 }
 #endif // __GLIBC__
+
+
+void os::print_open_file_descriptors(outputStream* st) {
+  DIR* dirp = opendir("/proc/self/fd");
+  if (dirp == nullptr) {
+    st->print_cr("Open File Descriptors: unknown");
+    return;
+  }
+
+  int fds = 0;
+  struct dirent* dentp;
+  const jlong TIMEOUT_NS = 50000000L;  // 50 ms in nanoseconds
+  bool timed_out = false;
+
+  // Limit proc file read to 50 ms.
+  jlong start = os::javaTimeNanos();
+  while ((dentp = readdir(dirp)) != nullptr && !timed_out) {
+    if (isdigit(dentp->d_name[0])) fds++;
+    if (fds % 100 == 0) {
+      jlong now = os::javaTimeNanos();
+      if ((now - start) > TIMEOUT_NS) {
+        timed_out = true;
+      }
+    }
+  }
+
+  closedir(dirp);
+  if (timed_out) {
+    st->print_cr("Open File Descriptors: > %d", fds);
+  } else {
+    st->print_cr("Open File Descriptors: %d", fds);
+  }
+}
 
 bool os::trim_native_heap(os::size_change_t* rss_change) {
 #ifdef __GLIBC__
