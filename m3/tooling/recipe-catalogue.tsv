@@ -6,3 +6,4 @@ m3-file-local-pure-int-document	com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe	
 m3-file-local-pure-int-convergence	com.m3.rewrite.atom.M3PureIntConvergenceRecipe	FILE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
 m3-java21-file-convergence	com.m3.rewrite.M3Java21ConvergenceRecipe	FILE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
 m3-jdk8347112-javadoc-docfiles	com.m3.rewrite.backport.M3Jdk8347112BackportRecipe	MODULE	JAVA21_COMPATIBLE_ADDITIVE_TOOL_BEHAVIOR	CANDIDATE_UNVERIFIED	PENDING_CI
+m3-jdk8359706-open-fd-diagnostics	com.m3.rewrite.backport.M3Jdk8359706BackportRecipe	MULTI_MODULE	JAVA21_COMPATIBLE_ADDITIVE_SERVICEABILITY	CANDIDATE_UNVERIFIED	PENDING_CROSS_PLATFORM_CI
