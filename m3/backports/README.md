@@ -78,6 +78,51 @@ review lane. Path classification never proves incompatibility.
 The complete inventory must be used to generate the mechanical backport queue. Release-note curation
 or a JEP-only list is never considered the complete denominator.
 
+## Mechanical compatibility queue
+
+The complete upstream denominator is converted into an ordered proof queue by
+`compatibility_queue.py`.
+
+The queue never admits or rejects a change from path heuristics. Every row remains:
+
+`PENDING_COMPATIBILITY_PROOF`
+
+but receives deterministic planning fields:
+
+- risk class;
+- physical scope floor;
+- proof lane;
+- recipe strategy;
+- numeric priority;
+- next mechanical action.
+
+The early passes prioritize low-risk build/tool/test changes, followed by libraries, security,
+runtime/HotSpot, javac, and finally language/compatibility-sensitive review. This is scheduling,
+not semantic authority.
+
+The upstream-inventory workflow exports:
+
+- `UPSTREAM_CHANGES.tsv`;
+- `UPSTREAM_CHANGES.summary.json`;
+- `COMPATIBILITY_QUEUE.tsv`;
+- `COMPATIBILITY_QUEUE.summary.json`.
+
+## Exact JDK21 ↔ donor file deltas and recipe crates
+
+`file_delta_inventory.py` compares the entire JDK 21 GA tree verbatim against each released donor
+GA tree and records SAME / MODIFIED / ADDED / REMOVED for the full path union.
+
+For changed Java source, `generate_recipe_crates.py` can create bounded <=256-target,
+hash-pinned OpenRewrite candidate crates. The generator:
+
+- reads exact baseline/donor bytes from Git;
+- requires strict UTF-8 round-trip for Java source;
+- records SHA-256 preimages and postimages;
+- emits typed exclusions rather than silently deleting/removing;
+- keeps generated crates `CANDIDATE_UNVERIFIED` until Java-21 compatibility proof succeeds.
+
+This is the bridge from whole-release inventory to per-file mechanical recipe work.
+
 ## Backport packet
 
 Each actual backport must record:
