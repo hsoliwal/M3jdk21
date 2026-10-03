@@ -123,6 +123,31 @@ hash-pinned OpenRewrite candidate crates. The generator:
 
 This is the bridge from whole-release inventory to per-file mechanical recipe work.
 
+
+## Recipe DAG control plane
+
+Backport execution is composed from small immutable recipe/work atoms through the framework-neutral
+DAG in `m3/tooling/backport-dag`.
+
+The canonical authority is `m3-backport-dag.tsv` plus the Java validator `M3RecipeDag`.
+Camel, Airflow and Drools files are orchestration/admission projections only; they do not gain
+authority to change dependencies, compatibility decisions, edit scope or promotion order.
+
+The locked scope ladder remains:
+
+`FILE -> VISIBILITY -> PACKAGE -> MODULE -> MULTI_MODULE -> LIBRARY_API`
+
+Independent FILE recipe atoms may share one parallel DAG layer. Any broader mutating node must carry
+explicit scope-promotion approval. Canonical promotion is one serial terminal node after recipe
+JUnit, diff, lint, compile, jtreg and runtime gates.
+
+The Maven control entry point is:
+
+`mvn -B -ntp -f m3/pom.xml clean verify`
+
+This verifies the OpenRewrite recipe substrate, the 99%-gated DAG semantic kernel and the backport
+inventory/admission module without replacing OpenJDK's native configure/make build.
+
 ## Backport packet
 
 Each actual backport must record:
