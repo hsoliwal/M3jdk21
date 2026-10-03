@@ -1,0 +1,4 @@
+packet_id	atom_id	contract_ref	documentation_ref	pattern	iop_role	junit_proof_ref	fixed_point_required
+jdk-example	java-leaf	contract/java21-behavior	docs/example-java-leaf.md	Strategy	ConcreteStrategy.Java	ExampleJavaLeafRecipeTest	true
+jdk-example	text-leaf	contract/tool-text	docs/example-text-leaf.md	Adapter	Adapter.Text	ExampleTextLeafRecipeTest	true
+jdk-example	package-join	contract/package-coordination	docs/example-package-join.md	Composite	Dag.PackageJoin	ExamplePackageJoinRecipeTest	true
