@@ -51,7 +51,10 @@ public final class M3RecipeScopeRegistry {
                     inferred()),
             Map.entry(
                     "com.m3.rewrite.backport.M3VerbatimJavaPairRecipe",
-                    fixed(M3EditScope.FILE)));
+                    fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3Jep458BackportRecipe",
+                    fixed(M3EditScope.MULTI_MODULE)));
 
     private M3RecipeScopeRegistry() {}
 
