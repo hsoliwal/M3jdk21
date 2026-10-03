@@ -1,0 +1,97 @@
+name: M3 JDK21 OpenRewrite crate generation
+
+on:
+  push:
+    branches:
+      - "m3/jdk21-complete-compatible-backports-20261002"
+    paths:
+      - "m3/backports/file_delta_inventory.py"
+      - "m3/backports/generate_recipe_crates.py"
+      - "m3/backports/test_file_delta_inventory.py"
+      - "m3/backports/test_generate_recipe_crates.py"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/**"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/hash/**"
+      - ".github/workflows/m3-jdk21-recipe-crates.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - release: 22
+            tag: jdk-22+36
+          - release: 23
+            tag: jdk-23+37
+          - release: 24
+            tag: jdk-24+36
+          - release: 25
+            tag: jdk-25+36
+          - release: 26
+            tag: jdk-26+35
+          - release: 27
+            tag: jdk-27+35
+    runs-on: ubuntu-22.04
+    timeout-minutes: 40
+    steps:
+      - name: Fetch exact M3JDK21 commit
+        shell: bash
+        env:
+          HEAD_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 "https://codeload.github.com/${GITHUB_REPOSITORY}/tar.gz/${HEAD_SHA}" -o "$RUNNER_TEMP/m3jdk21.tar.gz"
+          mkdir -p "$RUNNER_TEMP/m3jdk21"
+          tar -xzf "$RUNNER_TEMP/m3jdk21.tar.gz" -C "$RUNNER_TEMP/m3jdk21" --strip-components=1
+          printf 'M3ROOT=%s\n' "$RUNNER_TEMP/m3jdk21" >> "$GITHUB_ENV"
+
+      - name: Fetch JDK21 baseline and donor tag
+        shell: bash
+        env:
+          DONOR_TAG: ${{ matrix.tag }}
+        run: |
+          set -euo pipefail
+          mkdir "$RUNNER_TEMP/upstream-jdk"
+          git -C "$RUNNER_TEMP/upstream-jdk" init -q
+          git -C "$RUNNER_TEMP/upstream-jdk" remote add origin https://github.com/openjdk/jdk.git
+          git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch             --filter=blob:none             --no-tags             origin             "refs/tags/jdk-21+35:refs/tags/jdk-21+35"             "refs/tags/${DONOR_TAG}:refs/tags/${DONOR_TAG}"
+          git -C "$RUNNER_TEMP/upstream-jdk" rev-parse --verify 'jdk-21+35^{commit}'
+          git -C "$RUNNER_TEMP/upstream-jdk" rev-parse --verify "${DONOR_TAG}^{commit}"
+          printf 'UPSTREAM=%s\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
+
+      - name: Unit-test comparator and crate generator
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "$M3ROOT/m3/backports"
+          python3 -m unittest -v test_file_delta_inventory.py test_generate_recipe_crates.py
+
+      - name: Generate exact file comparison and OpenRewrite candidate crates
+        shell: bash
+        env:
+          RELEASE: ${{ matrix.release }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/output"
+          python3 "$M3ROOT/m3/backports/file_delta_inventory.py"             --repo "$UPSTREAM"             --release "$RELEASE"             --out "$RUNNER_TEMP/output/JDK21_FILE_DELTAS.tsv"
+          python3 "$M3ROOT/m3/backports/generate_recipe_crates.py"             --repo "$UPSTREAM"             --release "$RELEASE"             --all-candidates             --out "$RUNNER_TEMP/output/openrewrite-bundle"
+          gzip -9 -k "$RUNNER_TEMP/output/JDK21_FILE_DELTAS.tsv"
+          cat "$RUNNER_TEMP/output/openrewrite-bundle/CRATES.tsv"
+
+      - name: Prove OpenRewrite recipe substrate on Java 21
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f "$M3ROOT/m3/tooling/migration-recipes/pom.xml" clean verify
+
+      - name: Upload candidate bundle
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-jdk21-openrewrite-jdk${{ matrix.release }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/output
+          if-no-files-found: error
+          retention-days: 7
