@@ -27,13 +27,13 @@ class ProgramStatusTest(unittest.TestCase):
         with self.assertRaises(ValueError):
             program_status.classify_seed("mystery")
 
-    def test_repository_snapshot_has_locked_denominators(self):
+    def test_repository_snapshot_has_locked_jep_denominator_and_growing_seed(self):
         root = Path(__file__).resolve().parents[2]
         data = program_status.snapshot(root)
         self.assertEqual(82, data["jep_rows"])
         self.assertEqual(82, sum(data["jep_states"].values()))
-        self.assertEqual(13, data["seed_rows"])
-        self.assertEqual(13, sum(data["seed_states"].values()))
+        self.assertGreaterEqual(data["seed_rows"], 14)
+        self.assertEqual(data["seed_rows"], sum(data["seed_states"].values()))
         self.assertFalse(data["completion_claim"])
         self.assertGreaterEqual(data["materialized_packet_count"], 2)
 
