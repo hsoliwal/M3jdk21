@@ -6052,6 +6052,10 @@ void os::jfr_report_memory_info() {
 #endif // INCLUDE_JFR
 
 
+void os::print_open_file_descriptors(outputStream* st) {
+  // File descriptor counting not supported on Windows.
+}
+
 // File conventions
 const char* os::file_separator() { return "\\"; }
 const char* os::line_separator() { return "\r\n"; }
