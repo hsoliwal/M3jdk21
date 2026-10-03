@@ -39,18 +39,28 @@ final class M3Jdk8367584JfrOptionsHelpBackportRecipeTest {
         assertEquals(
                 "39de79eae23410e335d2d1ced8fe3b4d7937a541",
                 M3Jdk8367584JfrOptionsHelpBackportRecipe.UPSTREAM_COMMIT);
-        assertEquals(2, recipe.getRecipeList().size());
+        assertEquals(4, recipe.getRecipeList().size());
 
-        var textRecipe =
+        var dcmdCpp =
                 assertInstanceOf(
                         M3Jdk21HashPinnedTextSnapshotRecipe.class,
                         recipe.getRecipeList().get(0));
+        var dcmdHpp =
+                assertInstanceOf(
+                        M3Jdk21HashPinnedTextSnapshotRecipe.class,
+                        recipe.getRecipeList().get(1));
+        var optionSet =
+                assertInstanceOf(
+                        M3Jdk21HashPinnedTextSnapshotRecipe.class,
+                        recipe.getRecipeList().get(2));
         var javaRecipe =
                 assertInstanceOf(
                         M3Jdk21HashPinnedSnapshotRecipe.class,
-                        recipe.getRecipeList().get(1));
+                        recipe.getRecipeList().get(3));
 
-        assertEquals("jdk27-jfr-options-help-8367584-text", textRecipe.getCrateName());
+        assertEquals("jdk27-jfr-options-help-8367584-dcmd-cpp", dcmdCpp.getCrateName());
+        assertEquals("jdk27-jfr-options-help-8367584-dcmd-hpp", dcmdHpp.getCrateName());
+        assertEquals("jdk27-jfr-options-help-8367584-option-set", optionSet.getCrateName());
         assertEquals("jdk27-jfr-options-help-8367584-java", javaRecipe.getCrateName());
         assertEquals(1, recipe.maxCycles());
         assertTrue(recipe.getTags().contains("compatibility-split"));
