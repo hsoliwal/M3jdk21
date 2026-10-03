@@ -13,6 +13,9 @@ import com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates;
 import com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe;
 import com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe;
 import com.m3.rewrite.atom.M3PureIntConvergenceRecipe;
+import com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe;
+import com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe;
+import com.m3.rewrite.backport.M3VerbatimJavaPairRecipe;
 import com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe;
 import com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe;
 import com.synexia.rewrite.M3SegmentedLaneNativeRecipe;
@@ -22,7 +25,7 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(10, M3RecipeScopeRegistry.size());
+        assertEquals(13, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(InstallIndexStringCompatibility.class.getName()));
@@ -33,6 +36,9 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3DocumentPureIntAtomRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3PureIntConvergenceRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Java21ConvergenceRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3Jdk21HashPinnedSnapshotRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3Jdk21HashPinnedTextSnapshotRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3VerbatimJavaPairRecipe.class.getName()));
         assertFalse(M3RecipeScopeRegistry.registered(null));
         assertFalse(M3RecipeScopeRegistry.registered("missing.Recipe"));
         assertThrows(NullPointerException.class, () -> M3RecipeScopeRegistry.require((Class<?>) null));
@@ -65,11 +71,37 @@ final class M3RecipeScopeDeclarationTest {
                 M3PatternizePureIntAtomRecipe.class,
                 M3DocumentPureIntAtomRecipe.class,
                 M3PureIntConvergenceRecipe.class,
-                M3Java21ConvergenceRecipe.class)) {
+                M3Java21ConvergenceRecipe.class,
+                M3Jdk21HashPinnedSnapshotRecipe.class,
+                M3Jdk21HashPinnedTextSnapshotRecipe.class,
+                M3VerbatimJavaPairRecipe.class)) {
             var policy = M3RecipeScopeRegistry.require(recipe);
             assertEquals(M3EditScope.FILE, policy.resolve(List.of("src/main/java/a/A.java")));
             assertTrue(policy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
         }
+
+        var jdkJavaPolicy = M3RecipeScopeRegistry.require(M3Jdk21HashPinnedSnapshotRecipe.class);
+        assertEquals(
+                M3EditScope.FILE,
+                jdkJavaPolicy.resolve(List.of(
+                        "src/jdk.javadoc/share/classes/jdk/javadoc/internal/Foo.java")));
+        assertEquals(
+                M3EditScope.PACKAGE,
+                jdkJavaPolicy.resolve(List.of(
+                        "src/jdk.javadoc/share/classes/jdk/javadoc/internal/A.java",
+                        "src/jdk.javadoc/share/classes/jdk/javadoc/internal/B.java")));
+        assertEquals(
+                M3EditScope.MULTI_MODULE,
+                jdkJavaPolicy.resolve(List.of(
+                        "src/java.base/share/classes/java/lang/A.java",
+                        "src/jdk.javadoc/share/classes/jdk/javadoc/B.java")));
+
+        var jdkTextPolicy = M3RecipeScopeRegistry.require(M3Jdk21HashPinnedTextSnapshotRecipe.class);
+        assertEquals(
+                M3EditScope.MODULE,
+                jdkTextPolicy.resolve(List.of(
+                        "src/jdk.javadoc/share/classes/jdk/javadoc/internal/resources/standard.properties",
+                        "src/jdk.javadoc/share/man/javadoc.md")));
 
         var inferredPolicy = M3RecipeScopeRegistry.require(M3HashPinnedJavaSnapshotRecipe.class);
         assertEquals(
