@@ -162,8 +162,7 @@ public class DocFilesHandlerImpl implements DocFilesHandler {
                     }
                 }
             } else if (srcfile.isDirectory()) {
-                if (options.copyDocfileSubdirs()
-                        && !configuration.shouldExcludeDocFileDir(srcfile.getName())) {
+                if (!configuration.shouldExcludeDocFileDir(srcfile.getName())) {
                     DocPath dirDocPath = dstDocPath.resolve(srcfile.getName());
                     copyDirectory(srcfile, dirDocPath, first);
                 }
