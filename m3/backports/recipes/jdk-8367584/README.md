@@ -23,14 +23,21 @@ GC policy, or JIT contract is changed.
 
 ## Recipe atoms
 
-`M3Jdk8367584JfrOptionsHelpBackportRecipe` composes exactly two source-sealed atoms:
+`M3Jdk8367584JfrOptionsHelpBackportRecipe` composes four source-sealed FILE atoms:
 
-1. `M3Jdk21HashPinnedTextSnapshotRecipe(jdk27-jfr-options-help-8367584-text)`
+1. `M3Jdk21HashPinnedTextSnapshotRecipe(jdk27-jfr-options-help-8367584-dcmd-cpp)`
    - `src/hotspot/share/jfr/dcmd/jfrDcmds.cpp`
+2. `M3Jdk21HashPinnedTextSnapshotRecipe(jdk27-jfr-options-help-8367584-dcmd-hpp)`
    - `src/hotspot/share/jfr/dcmd/jfrDcmds.hpp`
+3. `M3Jdk21HashPinnedTextSnapshotRecipe(jdk27-jfr-options-help-8367584-option-set)`
    - `src/hotspot/share/jfr/recorder/service/jfrOptionSet.cpp`
-2. `M3Jdk21HashPinnedSnapshotRecipe(jdk27-jfr-options-help-8367584-java)`
+4. `M3Jdk21HashPinnedSnapshotRecipe(jdk27-jfr-options-help-8367584-java)`
    - additive `test/jdk/jdk/jfr/startupargs/TestOptionsHelp.java`
+
+`packet.tsv` keeps those four leaves independent so orchestration may execute them in one parallel
+FILE layer. A fifth `module-join` atom depends on all four and explicitly promotes authority to
+MODULE for the semantic JFR feature join. Camel, Airflow and Drools projections are generated from
+that same packet DAG and share one semantic SHA-256 root.
 
 All existing targets are bound to exact current-master SHA-256 preimages. The jtreg has an explicit
 `ABSENT` preimage. Recipe JUnit proves exact replay, redaction exclusion, stale-preimage refusal and
