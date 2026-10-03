@@ -158,6 +158,56 @@ final class M3PacketDagComposerTest {
         assertTrue(dag.require("promote").serialPromotion());
     }
 
+    @Test
+    void evidenceBoundCompositionRequiresCompleteSemanticProof() {
+        M3BackportPacket packet =
+                new M3BackportPacket(
+                        "jdk-evidence",
+                        List.of(
+                                atom(
+                                        "java",
+                                        M3EditScope.FILE,
+                                        false,
+                                        "recipe.Java",
+                                        List.of())));
+        M3BackportPacketEvidence evidence =
+                new M3BackportPacketEvidence(
+                        "jdk-evidence",
+                        List.of(
+                                new M3RecipeAtomEvidence(
+                                        "java",
+                                        "contract/java",
+                                        "docs/java.md",
+                                        "Strategy",
+                                        "ConcreteStrategy.Java",
+                                        "JavaRecipeTest",
+                                        true)));
+
+        assertEquals(
+                "packet-java",
+                M3PacketDagComposer.compose(packet, evidence)
+                        .layers().get(4).getFirst().id());
+
+        M3BackportPacketEvidence missing =
+                new M3BackportPacketEvidence(
+                        "jdk-evidence",
+                        List.of(
+                                new M3RecipeAtomEvidence(
+                                        "other",
+                                        "contract/other",
+                                        "docs/other.md",
+                                        "Adapter",
+                                        "Adapter.Other",
+                                        "OtherRecipeTest",
+                                        true)));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> M3PacketDagComposer.compose(packet, missing));
+        assertThrows(
+                NullPointerException.class,
+                () -> M3PacketDagComposer.compose(packet, null));
+    }
+
     private static M3RecipeAtom atom(
             String id,
             M3EditScope scope,
