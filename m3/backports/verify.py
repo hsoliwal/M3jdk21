@@ -165,74 +165,93 @@ def verify_javadoc_8347112_backport(root: Path) -> None:
         raise AssertionError("legacy -docfilessubdirs regression coverage was lost")
 
 
-JDK_8364182_COMMIT = "f2f8828188f45d16344c82adfbf951f7409b8825"
+JDK_8359706_COMMIT = "b0831572e2cd9dbff9ee2abcdf81a493ddcecc7e"
+JDK_8380236_COMMIT = "3a109f49feb19f313632be6a2aa24ba7d9b7269b"
 
 
-def verify_security_properties_8364182_backport(root: Path) -> None:
-    rows = read_tsv(root / "m3/backports/recipes/jdk-8364182/adaptation.tsv")
-    if len(rows) != 7:
+def verify_open_fd_8359706_backport(root: Path) -> None:
+    rows = read_tsv(root / "m3/backports/recipes/jdk-8359706/adaptation.tsv")
+    if len(rows) != 8:
         raise AssertionError(
-            f"expected 7 JDK-8364182 adaptation rows, found {len(rows)}"
+            f"expected 8 JDK-8359706 adaptation rows, found {len(rows)}"
         )
-
     by_target = {row["target_path"]: row for row in rows}
     if len(by_target) != len(rows):
-        raise AssertionError("duplicate JDK-8364182 target path")
+        raise AssertionError("duplicate JDK-8359706 target path")
 
     for row in rows:
-        if row["upstream_commit"] != JDK_8364182_COMMIT:
+        if row["primary_commit"] != JDK_8359706_COMMIT:
             raise AssertionError(
-                f"unexpected JDK-8364182 donor commit for {row['target_path']}"
+                f"unexpected JDK-8359706 donor for {row['target_path']}"
             )
         path = root / row["target_path"]
         if not path.is_file():
             raise AssertionError(
-                f"missing JDK-8364182 target: {row['target_path']}"
+                f"missing JDK-8359706 target: {row['target_path']}"
             )
         actual = hashlib.sha256(path.read_bytes()).hexdigest()
         if actual != row["target_sha256"]:
             raise AssertionError(
-                f"JDK-8364182 target drift for {row['target_path']}: "
+                f"JDK-8359706 target drift for {row['target_path']}: "
                 f"expected {row['target_sha256']}, actual {actual}"
             )
-        baseline = row["baseline_sha256"]
-        if baseline != "ABSENT" and baseline == row["target_sha256"]:
+        if row["baseline_sha256"] == row["target_sha256"]:
             raise AssertionError(
-                f"JDK-8364182 row has no delta: {row['target_path']}"
+                f"JDK-8359706 row has no delta: {row['target_path']}"
             )
 
+    bsd = by_target["src/hotspot/os/bsd/os_bsd.cpp"]
+    if bsd["followup_commit"] != JDK_8380236_COMMIT:
+        raise AssertionError("JDK-8359706 BSD row lost required macOS follow-up")
+    if any(
+        row["followup_commit"]
+        for path, row in by_target.items()
+        if path != "src/hotspot/os/bsd/os_bsd.cpp"
+    ):
+        raise AssertionError("JDK-8380236 should bind only the BSD implementation row")
+
     seeds = read_tsv(root / "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv")
-    seed = next((row for row in seeds if row["jbs"] == "JDK-8364182"), None)
-    if seed is None:
-        raise AssertionError("JDK-8364182 missing from upstream seed")
-    if seed["upstream_commit"] != JDK_8364182_COMMIT:
-        raise AssertionError("JDK-8364182 seed donor commit drift")
-    if seed["disposition"] != "candidate-adapted":
+    primary = next((row for row in seeds if row["jbs"] == "JDK-8359706"), None)
+    followup = next((row for row in seeds if row["jbs"] == "JDK-8380236"), None)
+    if primary is None or followup is None:
+        raise AssertionError("JDK-8359706 dependency-closed seed rows missing")
+    if primary["upstream_commit"] != JDK_8359706_COMMIT:
+        raise AssertionError("JDK-8359706 seed donor commit drift")
+    if primary["disposition"] != "candidate-adapted":
         raise AssertionError(
-            f"JDK-8364182 unexpected disposition: {seed['disposition']}"
+            f"JDK-8359706 unexpected disposition: {primary['disposition']}"
+        )
+    if followup["upstream_commit"] != JDK_8380236_COMMIT:
+        raise AssertionError("JDK-8380236 seed donor commit drift")
+    if followup["disposition"] != "absorbed-dependency":
+        raise AssertionError(
+            f"JDK-8380236 unexpected disposition: {followup['disposition']}"
         )
 
-    header = (
-        root / "src/hotspot/share/services/diagnosticCommand.hpp"
-    ).read_text(encoding="utf-8")
-    if 'name() { return "VM.security_properties"; }' not in header:
-        raise AssertionError("VM.security_properties command declaration missing")
-    if 'name() { return "VM.system_properties"; }' not in header:
-        raise AssertionError("VM.system_properties compatibility command missing")
+    linux = (root / "src/hotspot/os/linux/os_linux.cpp").read_text(encoding="utf-8")
+    if 'opendir("/proc/self/fd")' not in linux or "TIMEOUT_NS = 50000000L" not in linux:
+        raise AssertionError("bounded Linux open descriptor diagnostic missing")
 
-    implementation = (
-        root / "src/hotspot/share/services/diagnosticCommand.cpp"
-    ).read_text(encoding="utf-8")
-    if "PrintSecurityPropertiesDCmd" not in implementation:
-        raise AssertionError("VM.security_properties registration/execute path missing")
-    if "PrintSystemPropertiesDCmd" not in implementation:
-        raise AssertionError("VM.system_properties implementation path missing")
+    bsd_text = (root / "src/hotspot/os/bsd/os_bsd.cpp").read_text(encoding="utf-8")
+    if "PROC_PIDLISTFDS" not in bsd_text:
+        raise AssertionError("macOS proc_pidinfo descriptor diagnostic missing")
+    if "precond(buflen >= sizeof(struct proc_fdinfo))" not in bsd_text:
+        raise AssertionError("required JDK-8380236 product-build fix missing")
 
-    support = (
-        root / "src/java.base/share/classes/jdk/internal/vm/VMSupport.java"
-    ).read_text(encoding="utf-8")
-    if "serializeSecurityPropertiesToByteArray" not in support:
-        raise AssertionError("security properties serialization bridge missing")
+    aix = (root / "src/hotspot/os/aix/os_aix.cpp").read_text(encoding="utf-8")
+    windows = (root / "src/hotspot/os/windows/os_windows.cpp").read_text(encoding="utf-8")
+    if "File descriptor counting not implemented on AIX" not in aix:
+        raise AssertionError("AIX compatibility stub missing")
+    if "File descriptor counting not supported on Windows" not in windows:
+        raise AssertionError("Windows compatibility stub missing")
+
+    vm_error = (root / "src/hotspot/share/utilities/vmError.cpp").read_text(encoding="utf-8")
+    if "os::print_open_file_descriptors(st)" not in vm_error:
+        raise AssertionError("VM.info/error diagnostic integration missing")
+
+    test = (root / "test/jdk/sun/tools/jcmd/TestJcmdSanity.java").read_text(encoding="utf-8")
+    if 'output.shouldMatch("Open File Descriptors: \\\\d+")' not in test:
+        raise AssertionError("JDK-8359706 jcmd regression assertion missing")
 
 
 def parse_args() -> argparse.Namespace:
@@ -253,10 +272,10 @@ def main() -> int:
     verify_seed(root)
     verify_jcmd_backport(root)
     verify_javadoc_8347112_backport(root)
-    verify_security_properties_8364182_backport(root)
+    verify_open_fd_8359706_backport(root)
     print(
         "PASS: 82 JEP rows, non-JEP seed uniqueness, exact JDK-8357439 donor blobs, "
-        "JDK-8347112 javadoc adaptation, and JDK-8364182 serviceability adaptation"
+        "JDK-8347112 javadoc adaptation, and dependency-closed JDK-8359706 diagnostics"
     )
     return 0
 
