@@ -148,6 +148,31 @@ The Maven control entry point is:
 This verifies the OpenRewrite recipe substrate, the 99%-gated DAG semantic kernel and the backport
 inventory/admission module without replacing OpenJDK's native configure/make build.
 
+For one concrete packet TSV, all three framework projections are generated from the validated
+composed DAG with one shared semantic SHA-256 root:
+
+```bash
+mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+  -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain \
+  -Dexec.args="m3/backports/recipes/<packet>/packet.tsv target/m3-orchestration/<packet>" \
+  exec:java
+```
+
+The output directory contains:
+
+- `M3BackportRoutes.java` — Apache Camel Java DSL using parallel topological layers. Layer
+  barriers may conservatively add ordering but never remove a dependency.
+- `m3_backport_dag.py` — Apache Airflow DAG with every canonical direct dependency represented
+  by one `>>` edge.
+- `m3_backport_rules.drl` — Drools admission rules; a node becomes `READY` only after all of its
+  canonical direct dependencies are `DONE`.
+- `projection.tsv` — packet id, semantic DAG root and node count.
+
+These generated artifacts do not execute OpenRewrite by themselves and do not gain mutation or
+promotion authority. A framework-specific runner must bind the emitted node metadata back to the
+existing Maven/OpenRewrite work reference, and the canonical M3 verification tail remains
+authoritative.
+
 ## Backport packet
 
 Each actual backport must record:
