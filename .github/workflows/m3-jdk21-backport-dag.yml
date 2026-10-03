@@ -39,3 +39,17 @@ jobs:
       - name: Execute canonical DAG parser
         run: |
           mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=com.m3.tooling.dag.M3BackportDagMain             exec:java
+
+      - name: Emit backport programme status
+        run: |
+          mvn -B -ntp -f m3/backports/pom.xml verify
+
+      - name: Upload backport status artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3jdk21-backport-status-${{ github.run_id }}
+          path: |
+            m3/backports/target/program-status.json
+            m3/backports/target/program-status.tsv
+          if-no-files-found: error
+          retention-days: 14
