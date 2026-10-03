@@ -53,7 +53,11 @@ public final class M3Jdk8367584JfrOptionsHelpBackportRecipe extends Recipe {
     public List<Recipe> getRecipeList() {
         return List.of(
                 new M3Jdk21HashPinnedTextSnapshotRecipe(
-                        "jdk27-jfr-options-help-8367584-text"),
+                        "jdk27-jfr-options-help-8367584-dcmd-cpp"),
+                new M3Jdk21HashPinnedTextSnapshotRecipe(
+                        "jdk27-jfr-options-help-8367584-dcmd-hpp"),
+                new M3Jdk21HashPinnedTextSnapshotRecipe(
+                        "jdk27-jfr-options-help-8367584-option-set"),
                 new M3Jdk21HashPinnedSnapshotRecipe(
                         "jdk27-jfr-options-help-8367584-java"));
     }
