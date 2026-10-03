@@ -62,7 +62,8 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
 
     @JsonCreator
     public M3Jdk21HashPinnedSnapshotRecipe(@JsonProperty("crateName") String crateName) {
-        if (crateName == null || !crateName.matches("jdk(?:22|23|24|25|26|27)-[0-9]{4}")) {
+        if (crateName == null
+                || !crateName.matches("jdk(?:22|23|24|25|26|27)-[a-z0-9][a-z0-9-]{0,63}")) {
             throw new IllegalArgumentException("invalid M3JDK21 backport crate");
         }
         this.crateName = crateName;
