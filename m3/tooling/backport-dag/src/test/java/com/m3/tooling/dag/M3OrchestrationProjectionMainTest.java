@@ -46,4 +46,48 @@ final class M3OrchestrationProjectionMainTest {
                                 M3DagProjectionFormat.AIRFLOW_PYTHON)
                         .dagRoot());
     }
+    @Test
+    void cliBindsProjectionToCompleteAtomEvidence(@TempDir Path evidenceTemp) throws Exception {
+        Path packet = evidenceTemp.resolve("packet.tsv");
+        Files.writeString(
+                packet,
+                M3BackportPacketLoader.HEADER
+                        + "\n"
+                        + "jdk-evidence\tjava\tFILE\tfalse\trecipe.Java\t\n"
+                        + "jdk-evidence\ttext\tFILE\tfalse\trecipe.Text\t\n");
+        Path evidence = evidenceTemp.resolve("evidence.tsv");
+        Files.writeString(
+                evidence,
+                M3BackportPacketEvidenceLoader.HEADER
+                        + "\n"
+                        + "jdk-evidence\tjava\tcontract/java\tdocs/java.md\tStrategy\tConcreteStrategy.Java\tJavaRecipeTest\ttrue\n"
+                        + "jdk-evidence\ttext\tcontract/text\tdocs/text.md\tAdapter\tAdapter.Text\tTextRecipeTest\ttrue\n");
+        Path output = evidenceTemp.resolve("projection");
+
+        M3OrchestrationProjectionMain.main(
+                new String[] {
+                    packet.toString(),
+                    output.toString(),
+                    evidence.toString()
+                });
+
+        Path receipt = output.resolve("atom-evidence.tsv");
+        assertTrue(Files.isRegularFile(receipt));
+        String[] rows = Files.readString(receipt).lines().toArray(String[]::new);
+        assertEquals("packet_id\tevidence_root\tatoms", rows[0]);
+        String[] fields = rows[1].split("\t");
+        assertEquals("jdk-evidence", fields[0]);
+        assertTrue(fields[1].matches("[0-9a-f]{64}"));
+        assertEquals("2", fields[2]);
+
+        M3BackportPacket parsedPacket =
+                M3BackportPacketLoader.parse(Files.readString(packet));
+        M3BackportPacketEvidence parsedEvidence =
+                M3BackportPacketEvidenceLoader.parse(Files.readString(evidence));
+        assertEquals(
+                M3AtomEvidenceRoot.of(parsedPacket, parsedEvidence),
+                fields[1]);
+    }
+
+
 }
