@@ -15,8 +15,9 @@ public final class M3BackportPacketMain {
     private M3BackportPacketMain() {}
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 1) {
-            throw new IllegalArgumentException("usage: M3BackportPacketMain <packet.tsv>");
+        if (args.length < 1 || args.length > 2) {
+            throw new IllegalArgumentException(
+                    "usage: M3BackportPacketMain <packet.tsv> [atom-evidence.tsv]");
         }
         Path path = Path.of(args[0]).normalize();
         if (!Files.isRegularFile(path)) {
@@ -25,7 +26,20 @@ public final class M3BackportPacketMain {
 
         M3BackportPacket packet =
                 M3BackportPacketLoader.parse(Files.readString(path));
-        M3RecipeDag dag = M3PacketDagComposer.compose(packet);
+        M3BackportPacketEvidence evidence = null;
+        M3RecipeDag dag;
+        if (args.length == 2) {
+            Path evidencePath = Path.of(args[1]).normalize();
+            if (!Files.isRegularFile(evidencePath)) {
+                throw new IllegalArgumentException(
+                        "atom evidence file not found: " + evidencePath);
+            }
+            evidence =
+                    M3BackportPacketEvidenceLoader.parse(Files.readString(evidencePath));
+            dag = M3PacketDagComposer.compose(packet, evidence);
+        } else {
+            dag = M3PacketDagComposer.compose(packet);
+        }
 
         System.out.println(
                 "M3_BACKPORT_PACKET_OK packet="
@@ -35,7 +49,10 @@ public final class M3BackportPacketMain {
                         + " scope="
                         + packet.maximumScope()
                         + " dagNodes="
-                        + dag.size());
+                        + dag.size()
+                        + (evidence == null
+                                ? ""
+                                : " evidenceRoot=" + M3AtomEvidenceRoot.of(packet, evidence)));
         int ordinal = 0;
         for (List<M3DagNode> layer : dag.layers()) {
             System.out.println(
