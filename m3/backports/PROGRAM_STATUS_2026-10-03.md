@@ -57,9 +57,30 @@ Merged on 2026-10-03:
 - PR #46 — M3JDK21 recipe DAG/Maven/Camel-Airflow-Drools control plane
 - PR #47 — JDK-8359706 open-file-descriptor diagnostics
 
-Current review lane:
+Additional merged on 2026-10-03:
 
 - PR #48 — JDK-8374808 KeyStore creation Instant compatibility leaf
+- PR #49 — JDK-8368692 password System.in compatibility policy
+- PR #50 — scoped recipe-atom packet DAG composition
+- PR #51 — community capability / optional module-pack admission model
+- PR #52 — Camel, Airflow and Drools projections of the canonical recipe DAG
+- PR #53 — current-master recovery of JDK-8359706
+- PR #54 — current-master recovery of JDK-8368692
+
+Current review lanes:
+
+- PR #55 — JDK-8367584 JFR help compatibility leaf (draft)
+- PR #56 — module-pack tooling and diagnostics-image proof (draft)
+
+Current-tree recovery queue:
+
+- JEP 458 / multi-file source launcher has an implementation branch
+  `m3/backport-jep458-multifile-source-launcher-20261003`, but that branch is currently 9 commits
+  ahead of its historical base and 54 commits behind current `master`. It is therefore evidence,
+  not a promotable current-tree patch. Replay must be recipe-first against current master without
+  rebasing or rewriting history.
+- Older diverged implementation branches for already merged packets are retained as provenance and
+  must not be counted as additional pending implementations.
 
 ## Completion boundary
 

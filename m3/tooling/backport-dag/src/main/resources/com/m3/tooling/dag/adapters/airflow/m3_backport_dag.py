@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
+# M3-DAG-ROOT: f802b8d1d50a5e13d3afea162ce5132f546827539f6410a94200279e6ca46e05
 """Airflow projection of the canonical M3JDK21 backport DAG."""
 
 from airflow import DAG

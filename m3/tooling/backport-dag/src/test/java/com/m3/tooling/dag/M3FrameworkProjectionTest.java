@@ -50,6 +50,15 @@ final class M3FrameworkProjectionTest {
         assertTrue(drl.contains("promotionRequested == true"));
     }
 
+    @Test
+    void runnableAdaptersArePinnedToTheCanonicalDagSemanticRoot() {
+        String root = M3DagSemanticRoot.of(M3RecipeDag.canonical());
+        String marker = "M3-DAG-ROOT: " + root;
+        assertTrue(resource("adapters/camel/m3-backport-route.yaml").contains(marker));
+        assertTrue(resource("adapters/airflow/m3_backport_dag.py").contains(marker));
+        assertTrue(resource("adapters/drools/m3-backport-admission.drl").contains(marker));
+    }
+
     private static String resource(String name) {
         try (var input =
                 M3FrameworkProjectionTest.class.getResourceAsStream(

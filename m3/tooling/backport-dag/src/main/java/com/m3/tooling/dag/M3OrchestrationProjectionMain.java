@@ -15,9 +15,9 @@ public final class M3OrchestrationProjectionMain {
     private M3OrchestrationProjectionMain() {}
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 2) {
+        if (args.length < 2 || args.length > 3) {
             throw new IllegalArgumentException(
-                    "usage: M3OrchestrationProjectionMain <packet.tsv> <output-dir>");
+                    "usage: M3OrchestrationProjectionMain <packet.tsv> <output-dir> [atom-evidence.tsv]");
         }
         Path packetPath = Path.of(args[0]).normalize();
         Path output = Path.of(args[1]).normalize();
@@ -27,7 +27,20 @@ public final class M3OrchestrationProjectionMain {
 
         M3BackportPacket packet =
                 M3BackportPacketLoader.parse(Files.readString(packetPath));
-        M3RecipeDag dag = M3PacketDagComposer.compose(packet);
+        M3BackportPacketEvidence evidence = null;
+        M3RecipeDag dag;
+        if (args.length == 3) {
+            Path evidencePath = Path.of(args[2]).normalize();
+            if (!Files.isRegularFile(evidencePath)) {
+                throw new IllegalArgumentException(
+                        "atom evidence file not found: " + evidencePath);
+            }
+            evidence =
+                    M3BackportPacketEvidenceLoader.parse(Files.readString(evidencePath));
+            dag = M3PacketDagComposer.compose(packet, evidence);
+        } else {
+            dag = M3PacketDagComposer.compose(packet);
+        }
         Map<M3DagProjectionFormat, M3DagProjection> projections =
                 M3DagProjector.all(dag, packet.packetId());
 
@@ -45,6 +58,17 @@ public final class M3OrchestrationProjectionMain {
                         + "\t"
                         + dag.size()
                         + "\n");
+        if (evidence != null) {
+            Files.writeString(
+                    output.resolve("atom-evidence.tsv"),
+                    "packet_id\tevidence_root\tatoms\n"
+                            + packet.packetId()
+                            + "\t"
+                            + M3AtomEvidenceRoot.of(packet, evidence)
+                            + "\t"
+                            + packet.atoms().size()
+                            + "\n");
+        }
 
         System.out.println(
                 "M3_ORCHESTRATION_PROJECTIONS_OK packet="
