@@ -488,6 +488,7 @@
   template(vmtarget_name,                             "vmtarget")                                 \
   template(vmholder_name,                             "vmholder")                                 \
   template(method_name,                               "method")                                   \
+  template(m3AdmitNative_name,                        "m3AdmitNative")                            \
   template(vmindex_name,                              "vmindex")                                  \
   template(vmcount_name,                              "vmcount")                                  \
   template(flags_name,                                "flags")                                    \

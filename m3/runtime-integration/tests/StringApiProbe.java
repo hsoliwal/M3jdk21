@@ -9,11 +9,14 @@ import java.util.*;
 import java.util.concurrent.*;
 import java.util.regex.*;
 public class StringApiProbe {
- static final Field VALUE; static final MessageDigest DIGEST; static int checks;
- static {try {VALUE=String.class.getDeclaredField("value"); VALUE.setAccessible(true); DIGEST=MessageDigest.getInstance("SHA-256");}catch(Exception e){throw new ExceptionInInitializerError(e);}}
+ static final Field VALUE; static final Field MINDEX; static final Field M3_ENABLED; static final MessageDigest DIGEST; static int checks;
+ static {try {VALUE=String.class.getDeclaredField("value"); VALUE.setAccessible(true); MINDEX=String.class.getDeclaredField("mindex"); MINDEX.setAccessible(true); M3_ENABLED=String.class.getDeclaredField("M3_JOINED_STRINGS"); M3_ENABLED.setAccessible(true); DIGEST=MessageDigest.getInstance("SHA-256");}catch(Exception e){throw new ExceptionInInitializerError(e);}}
  static native String roundTrip(String s);
  static native String regionRoundTrip(String s,int start,int len);
+ static native String utfLiteral();
  static byte[] backing(String s)throws Exception{return (byte[])VALUE.get(s);}
+ static void requireImmediateMIndex(String s,boolean nonEmpty)throws Exception{if(M3_ENABLED.getBoolean(null)&&nonEmpty&&MINDEX.get(s)==null)throw new AssertionError("JNI String did not attach MIndex before Java access");}
+ static void requireCanonicalBacking(String s,String source,boolean nonEmpty)throws Exception{if(M3_ENABLED.getBoolean(null)&&nonEmpty&&VALUE.get(s)!=VALUE.get(source))throw new AssertionError("JNI String did not reuse canonical MIndex backing");}
  static void check(boolean b){checks++;if(!b)throw new AssertionError("check "+checks);}
  static void record(String s){for(char c:s.toCharArray()){DIGEST.update((byte)(c>>8));DIGEST.update((byte)c);}DIGEST.update((byte)255);}
  static void record(int i){record(Integer.toString(i));}
@@ -21,8 +24,10 @@ public class StringApiProbe {
  static void exercise(char[] chars)throws Exception{
   char[] mutable=chars.clone();String s=new String(mutable),copy=new String(chars);Arrays.fill(mutable,'x');
   check(Arrays.equals(s.toCharArray(),chars));check(s!=copy&&s.equals(copy));check(s.compareTo(copy)==0);check(s.hashCode()==copy.hashCode());check(s.intern()==copy.intern());check(backing(s)==backing(new String(s)));
-  check(new String(chars,0,chars.length).equals(s));check(new StringBuilder(s).toString().equals(s));check(new StringBuffer(s).toString().equals(s));check(roundTrip(s).equals(s));check(regionRoundTrip(s,0,s.length()).equals(s));
-  int regionStart=s.length()/3,regionEnd=s.length()-(s.length()/4);check(regionRoundTrip(s,regionStart,regionEnd-regionStart).equals(s.substring(regionStart,regionEnd)));
+  check(new String(chars,0,chars.length).equals(s));check(new StringBuilder(s).toString().equals(s));check(new StringBuffer(s).toString().equals(s));
+  String nativeRoundTrip=roundTrip(s);requireImmediateMIndex(nativeRoundTrip,chars.length!=0);requireCanonicalBacking(nativeRoundTrip,s,chars.length!=0);check(nativeRoundTrip.equals(s));
+  String nativeWholeRegion=regionRoundTrip(s,0,s.length());requireImmediateMIndex(nativeWholeRegion,chars.length!=0);requireCanonicalBacking(nativeWholeRegion,s,chars.length!=0);check(nativeWholeRegion.equals(s));
+  int regionStart=s.length()/3,regionEnd=s.length()-(s.length()/4);String nativeRegion=regionRoundTrip(s,regionStart,regionEnd-regionStart);requireImmediateMIndex(nativeRegion,regionEnd!=regionStart);check(nativeRegion.equals(s.substring(regionStart,regionEnd)));
   record(s);record(s.hashCode());record(s.codePointCount(0,s.length()));record(s+":"+copy);record(s.concat(copy));record(s.repeat(2));
   for(int i=0;i<s.length();i++){check(s.charAt(i)==chars[i]);record(s.codePointAt(i));record(s.codePointBefore(i+1));}
   for(int i=0;i<=s.length();i++){record(s.substring(i));record(s.substring(0,i));}
@@ -34,6 +39,7 @@ public class StringApiProbe {
   ByteArrayOutputStream bytes=new ByteArrayOutputStream();try(ObjectOutputStream out=new ObjectOutputStream(bytes)){out.writeObject(s);}try(ObjectInputStream in=new ObjectInputStream(new ByteArrayInputStream(bytes.toByteArray()))){check(s.equals(in.readObject()));}
  }
  static void semantics()throws Exception{
+  String nativeUtfLiteral=utfLiteral();requireImmediateMIndex(nativeUtfLiteral,true);if(!nativeUtfLiteral.equals("jni-utf"))throw new AssertionError("NewStringUTF literal mismatch");
   for(String s:new String[]{"","abc","Aa","BB","\0\0","\u00ff","\u0100","\uffff","a\ud800z","\udc00","\ud800\ud800","\udc00\ud800","\ud83d\ude00","\u0130\u00df\u03a3","  x\n\t"})exercise(s.toCharArray());
   Random rng=new Random(210035);for(int j=0;j<300;j++){char[] c=new char[rng.nextInt(25)];for(int k=0;k<c.length;k++)c[k]=(char)rng.nextInt(j%2==0?256:65536);exercise(c);}
   for(int n:new int[]{127,128,129,255,256,257,2048}){char[] c=new char[n];Arrays.fill(c,'q');String s=new String(c);check(s.length()==n);check(Arrays.equals(c,s.toCharArray()));record(s);}
