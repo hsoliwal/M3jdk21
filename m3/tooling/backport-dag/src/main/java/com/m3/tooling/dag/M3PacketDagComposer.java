@@ -24,6 +24,18 @@ public final class M3PacketDagComposer {
         return compose(M3RecipeDag.canonical(), packet);
     }
 
+    /**
+     * Composes only after every packet atom has complete contract/documentation/pattern/IOP/JUnit
+     * evidence and an explicit fixed-point requirement.
+     */
+    public static M3RecipeDag compose(
+            M3BackportPacket packet,
+            M3BackportPacketEvidence evidence) {
+        M3BackportPacket checkedPacket = Objects.requireNonNull(packet, "packet");
+        Objects.requireNonNull(evidence, "evidence").requireComplete(checkedPacket);
+        return compose(checkedPacket);
+    }
+
     static M3RecipeDag compose(M3RecipeDag canonical, M3BackportPacket packet) {
         M3RecipeDag checkedDag = Objects.requireNonNull(canonical, "canonical");
         M3BackportPacket checkedPacket = Objects.requireNonNull(packet, "packet");
