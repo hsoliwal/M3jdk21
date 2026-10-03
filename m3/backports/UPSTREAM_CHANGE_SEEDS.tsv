@@ -1,7 +1,7 @@
 release	jbs	title	component	disposition	reason	upstream_commit
 27	JDK-8378559	Allow Execution State Initialization Before Foreign Function Downcalls	core-libs/java.lang.foreign	candidate-high-risk	FFM API/runtime/native dependency closure required.	
 27	JDK-8357439	Add Bash Autocompletion for jcmd	core-svc/tools	admitted	Additive tool files only; target paths absent; upstream commit pinned.	8549d1896054dd230ba3038c83bce23b10dcda22
-27	JDK-8367584	Add help and redaction controls for -XX:FlightRecorderOptions	hotspot/jfr	candidate-high-risk	Help portion may be separable; redaction controls depend on JEP 536.	
+27	JDK-8367584	Add help and redaction controls for -XX:FlightRecorderOptions	hotspot/jfr	candidate-adapted	Java21-compatible FlightRecorderOptions:help leaf implemented; JEP 536 redaction controls deliberately excluded; focused HotSpot/JFR image and jtreg proof pending.	39de79eae23410e335d2d1ced8fe3b4d7937a541
 27	JDK-8374348	Add -XX:AOTMode=required alias for -XX:AOTMode=on	hotspot/runtime	hold-dependency	JDK 21 lacks the later AOT mode infrastructure.	
 27	JDK-8364182	Add jcmd VM.security_properties	hotspot/svc	candidate-adapted	Java21-compatible additive serviceability packet implemented; VM.system_properties preserved; JDK21 DCmd registration signature adapted; focused build/jtreg proof pending.	f2f8828188f45d16344c82adfbf951f7409b8825
 27	JDK-8359706	Report current open file descriptors in VM.info and hs_err_pid	hotspot/svc	candidate-high-risk	Diagnostics improvement; platform-specific OS support and fatal-error path tests required.	
