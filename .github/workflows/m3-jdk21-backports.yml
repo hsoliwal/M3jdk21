@@ -185,11 +185,11 @@ jobs:
             --with-jvm-variants=server \
             --disable-warnings-as-errors
 
-      - name: Build jdk.javadoc
+      - name: Build jdk.javadoc module and launcher
         shell: bash
         run: |
           set -euo pipefail
-          make JOBS=2 jdk.javadoc
+          make JOBS=2 jdk.javadoc-java jdk.javadoc-launchers
 
       - name: Run focused javadoc jtreg proof
         shell: bash
