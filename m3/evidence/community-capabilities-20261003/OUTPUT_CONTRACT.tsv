@@ -1,0 +1,9 @@
+artifact	purpose
+m3/docs/community-capability-admission.md	Proposed distribution/backport/module rules
+m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv	Demand overlay without admission authority
+m3/evidence/community-capabilities-20261003/RUN_CONTEXT.tsv	Exact scope and base
+m3/evidence/community-capabilities-20261003/STATUS.tsv	Executed and pending states
+m3/evidence/community-capabilities-20261003/PROVENANCE.tsv	Evidence lookup
+m3/evidence/community-capabilities-20261003/VERIFY_CONTRACT.tsv	Validation limits
+m3/evidence/community-capabilities-20261003/OUTPUT_CONTRACT.tsv	Artifact inventory
+m3/evidence/community-capabilities-20261003/FINAL_REPORT.md	Bounded handoff and remaining work
