@@ -12,6 +12,10 @@ import org.openrewrite.Recipe;
  * This packet imports only {@code -XX:FlightRecorderOptions:help}: startup help dispatch,
  * formatting of options already present in JDK 21, and the focused jtreg test. JEP 536 redaction
  * filters/events/options are deliberately excluded from this compatibility leaf.</p>
+ *
+ * <p>The composite is intentionally made from file-local replay atoms. Those leaves can execute in
+ * parallel through the M3 backport DAG; the composite recipe is the MODULE-scope semantic join and
+ * becomes a fixed point after the leaves have materialized.</p>
  */
 public final class M3Jdk8367584JfrOptionsHelpBackportRecipe extends Recipe {
     public static final String UPSTREAM_COMMIT =
@@ -24,8 +28,8 @@ public final class M3Jdk8367584JfrOptionsHelpBackportRecipe extends Recipe {
 
     @Override
     public String getDescription() {
-        return "Replays the Java-21-compatible FlightRecorderOptions:help leaf from exact JDK21 "
-                + "preimages while excluding the JEP 536 redaction runtime.";
+        return "Composes four file-local hash-pinned replay atoms for the Java-21-compatible "
+                + "FlightRecorderOptions:help leaf while excluding the JEP 536 redaction runtime.";
     }
 
     @Override
@@ -40,6 +44,8 @@ public final class M3Jdk8367584JfrOptionsHelpBackportRecipe extends Recipe {
                 "help",
                 "hash-pinned",
                 "compatibility-split",
+                "file-atoms",
+                "dag-composable",
                 "module-scope",
                 "candidate-only");
     }
@@ -53,7 +59,11 @@ public final class M3Jdk8367584JfrOptionsHelpBackportRecipe extends Recipe {
     public List<Recipe> getRecipeList() {
         return List.of(
                 new M3Jdk21HashPinnedTextSnapshotRecipe(
-                        "jdk27-jfr-options-help-8367584-text"),
+                        "jdk27-jfr-options-help-8367584-dcmd-cpp"),
+                new M3Jdk21HashPinnedTextSnapshotRecipe(
+                        "jdk27-jfr-options-help-8367584-dcmd-hpp"),
+                new M3Jdk21HashPinnedTextSnapshotRecipe(
+                        "jdk27-jfr-options-help-8367584-option-set"),
                 new M3Jdk21HashPinnedSnapshotRecipe(
                         "jdk27-jfr-options-help-8367584-java"));
     }
