@@ -44,9 +44,6 @@ public record M3BackportPacketEvidence(
         for (M3RecipeAtomEvidence evidence : atoms) {
             checked.require(evidence.atomId());
         }
-        if (atoms.size() != checked.atoms().size()) {
-            throw new IllegalArgumentException("atom evidence cardinality mismatch");
-        }
     }
 
     public M3RecipeAtomEvidence require(String atomId) {
