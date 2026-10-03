@@ -89,6 +89,81 @@ def verify_jcmd_backport(root: Path) -> None:
             )
 
 
+
+JDK_8347112_COMMIT = "b221cb6ba138672802644f37eebf368521a0a6f4"
+
+
+def verify_javadoc_8347112_backport(root: Path) -> None:
+    rows = read_tsv(root / "m3/backports/recipes/jdk-8347112/adaptation.tsv")
+    if len(rows) != 5:
+        raise AssertionError(f"expected 5 JDK-8347112 adaptation rows, found {len(rows)}")
+
+    by_target = {row["target_path"]: row for row in rows}
+    if len(by_target) != len(rows):
+        raise AssertionError("duplicate JDK-8347112 target path")
+
+    for row in rows:
+        if row["upstream_commit"] != JDK_8347112_COMMIT:
+            raise AssertionError(
+                f"unexpected JDK-8347112 donor commit for {row['target_path']}"
+            )
+        path = root / row["target_path"]
+        if not path.is_file():
+            raise AssertionError(f"missing JDK-8347112 target: {row['target_path']}")
+        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        if actual != row["target_sha256"]:
+            raise AssertionError(
+                f"JDK-8347112 target drift for {row['target_path']}: "
+                f"expected {row['target_sha256']}, actual {actual}"
+            )
+        if row["baseline_sha256"] == row["target_sha256"]:
+            raise AssertionError(f"JDK-8347112 row has no delta: {row['target_path']}")
+
+    seeds = read_tsv(root / "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv")
+    seed = next((row for row in seeds if row["jbs"] == "JDK-8347112"), None)
+    if seed is None:
+        raise AssertionError("JDK-8347112 missing from upstream seed")
+    if seed["upstream_commit"] != JDK_8347112_COMMIT:
+        raise AssertionError("JDK-8347112 seed donor commit drift")
+    if seed["disposition"] != "candidate-adapted":
+        raise AssertionError(
+            f"JDK-8347112 unexpected disposition: {seed['disposition']}"
+        )
+
+    handler = (
+        root
+        / "src/jdk.javadoc/share/classes/jdk/javadoc/internal/doclets/formats/html/"
+        "DocFilesHandlerImpl.java"
+    ).read_text(encoding="utf-8")
+    if "options.copyDocfileSubdirs()" in handler:
+        raise AssertionError("JDK-8347112 recursive copy still gated by legacy option")
+    if "if (!configuration.shouldExcludeDocFileDir(srcfile.getName()))" not in handler:
+        raise AssertionError("JDK-8347112 default-recursion leaf missing")
+
+    base_options = (
+        root
+        / "src/jdk.javadoc/share/classes/jdk/javadoc/internal/doclets/toolkit/"
+        "BaseOptions.java"
+    ).read_text(encoding="utf-8")
+    if "copyDocfileSubdirs" not in base_options or '"-docfilessubdirs"' not in base_options:
+        raise AssertionError("Java 21 -docfilessubdirs compatibility contract was removed")
+
+    config = (
+        root
+        / "src/jdk.javadoc/share/classes/jdk/javadoc/internal/doclets/toolkit/"
+        "BaseConfiguration.java"
+    ).read_text(encoding="utf-8")
+    if 'excludedDocFileDirs.contains("*")' not in config:
+        raise AssertionError("JDK-8347112 wildcard exclusion leaf missing")
+
+    test = (
+        root / "test/langtools/jdk/javadoc/doclet/testCopyFiles/TestCopyFiles.java"
+    ).read_text(encoding="utf-8")
+    if "testDocFilesInPackagesWithWildcardExclusion" not in test:
+        raise AssertionError("JDK-8347112 wildcard regression test missing")
+    if '"-docfilessubdirs"' not in test:
+        raise AssertionError("legacy -docfilessubdirs regression coverage was lost")
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -106,9 +181,10 @@ def main() -> int:
     verify_jeps(root)
     verify_seed(root)
     verify_jcmd_backport(root)
+    verify_javadoc_8347112_backport(root)
     print(
-        "PASS: 82 JEP rows, non-JEP seed uniqueness, "
-        "and exact JDK-8357439 donor blobs"
+        "PASS: 82 JEP rows, non-JEP seed uniqueness, exact JDK-8357439 donor blobs, "
+        "and JDK-8347112 Java21-compatible adaptation"
     )
     return 0
 

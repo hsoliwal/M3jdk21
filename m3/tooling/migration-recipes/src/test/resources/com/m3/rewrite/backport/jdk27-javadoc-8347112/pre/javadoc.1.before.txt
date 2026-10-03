@@ -582,11 +582,14 @@ javadoc -docencoding \[dq]iso-8859-1\[dq] mypackage
 .RE
 .TP
 \f[V]-docfilessubdirs\f[R]
-This option is retained for compatibility.
-The \f[V]javadoc\f[R] tool recursively copies subdirectories of
-\f[V]doc-files\f[R] directories by default.
-Use \f[B]\f[VB]-excludedocfilessubdir\f[B]\f[R] to restrict the
-subdirectories to be copied.
+Recursively copies doc-file subdirectories.
+Enables deep copying of doc-files directories.
+Subdirectories and all contents are recursively copied to the
+destination.
+For example, the directory \f[V]doc-files/example/images\f[R] and all of
+its contents are copied.
+The \f[B]\f[VB]-excludedocfilessubdir\f[B]\f[R] option can be used to
+exclude specific subdirectories.
 .TP
 \f[V]-doctitle\f[R] \f[I]html-code\f[R]
 Specifies the title to place near the top of the overview summary file.
@@ -602,8 +605,7 @@ For example,
 \f[V]-excludedocfilessubdir\f[R] \f[I]name1\f[R]\f[V],\f[R]\f[I]name2...\f[R]
 Excludes any subdirectories with the given names when recursively
 copying doc-file subdirectories.
-Use \f[V]*\f[R] to exclude all subdirectories; quote or escape it in the
-shell.
+See \f[B]\f[VB]-docfilessubdirs\f[B]\f[R].
 For historical reasons, \f[V]:\f[R] can be used anywhere in the argument
 as a separator instead of \f[V],\f[R].
 .TP

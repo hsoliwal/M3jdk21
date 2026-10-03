@@ -23,7 +23,7 @@
 
 /*
  * @test
- * @bug  8157349 8185985 8194953 8214738 8347112
+ * @bug  8157349 8185985 8194953 8214738
  * @summary  test copy of doc-files, and its contents for HTML meta content.
  * @library  ../../lib
  * @modules jdk.javadoc/jdk.javadoc.internal.tool
@@ -74,10 +74,6 @@ public class TestCopyFiles extends JavadocTester {
                 // check footer
                 "phi-BOTTOM-phi"
         );
-        checkOutput("acme.mdle/p/doc-files/sub-dir/SubReadme.html", true,
-                "SubReadme.html at second level of doc-file directory for acme.module.");
-        checkOutput("acme.mdle/p/doc-files/sub-dir/sub-dir-1/SubSubReadme.html", true,
-                "SubSubReadme.html at third level of doc-file directory.");
     }
 
     @Test
@@ -174,9 +170,6 @@ public class TestCopyFiles extends JavadocTester {
         checkOutput("p1/doc-files/inpackage.html", true,
                 "A named package in an unnamed module"
         );
-        checkOutput("p1/doc-files/sub-dir/SubReadme.html", true,
-                "<title>SubReadme</title>",
-                "SubReadme.html at second level of doc-file directory.");
     }
 
     @Test
@@ -209,20 +202,6 @@ public class TestCopyFiles extends JavadocTester {
         checkOutput("p1/doc-files/inpackage.html", true,
                 "A named package in an unnamed module"
         );
-    }
-
-
-    @Test
-    public void testDocFilesInPackagesWithWildcardExclusion() {
-        javadoc("-d", "packages-out-wildcard-exclusion",
-                "-excludedocfilessubdir", "*",
-                "-sourcepath", testSrc("packages"),
-                "p1");
-        checkExit(Exit.OK);
-
-        checkOutput("p1/doc-files/inpackage.html", true,
-                "A named package in an unnamed module");
-        checkFiles(false, "p1/doc-files/sub-dir");
     }
 
     @Test
