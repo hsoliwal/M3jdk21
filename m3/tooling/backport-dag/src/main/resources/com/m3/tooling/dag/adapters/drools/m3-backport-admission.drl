@@ -1,0 +1,40 @@
+// SPDX-License-Identifier: Apache-2.0
+// Projection only. M3AdmissionFact.promotable() and M3RecipeDag remain authoritative.
+package com.m3.tooling.dag.adapters
+
+import com.m3.tooling.dag.M3AdmissionFact;
+
+rule "Block promotion without compatibility proof"
+when
+    $fact : M3AdmissionFact(promotionRequested == true, compatibilityProven == false)
+then
+    throw new IllegalStateException("M3 promotion blocked: compatibility proof missing for " + $fact.packetId());
+end
+
+rule "Block promotion without recipe proof"
+when
+    $fact : M3AdmissionFact(promotionRequested == true, recipeTestsPassed == false)
+then
+    throw new IllegalStateException("M3 promotion blocked: recipe tests missing for " + $fact.packetId());
+end
+
+rule "Block promotion without compile or tests"
+when
+    $fact : M3AdmissionFact(promotionRequested == true, compilePassed == false || testsPassed == false)
+then
+    throw new IllegalStateException("M3 promotion blocked: compile/test gate missing for " + $fact.packetId());
+end
+
+rule "Block unapproved scope"
+when
+    $fact : M3AdmissionFact(promotionRequested == true, scopeApproved == false)
+then
+    throw new IllegalStateException("M3 promotion blocked: scope approval missing for " + $fact.packetId());
+end
+
+rule "Block required benchmark"
+when
+    $fact : M3AdmissionFact(promotionRequested == true, benchmarkRequired == true, benchmarkPassed == false)
+then
+    throw new IllegalStateException("M3 promotion blocked: benchmark missing for " + $fact.packetId());
+end

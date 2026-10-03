@@ -1,0 +1,55 @@
+name: M3JDK21 Backport Recipe DAG
+
+on:
+  push:
+    branches:
+      - "m3/jdk21-backport-dag-control-20261003"
+    paths:
+      - "m3/pom.xml"
+      - "m3/tooling/backport-dag/**"
+      - "m3/tooling/migration-recipes/**"
+      - ".github/workflows/m3-jdk21-backport-dag.yml"
+  pull_request:
+    paths:
+      - "m3/pom.xml"
+      - "m3/tooling/backport-dag/**"
+      - "m3/tooling/migration-recipes/**"
+      - ".github/workflows/m3-jdk21-backport-dag.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dag-proof:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Verify recipe substrate and DAG semantic kernel
+        run: |
+          mvn -B -ntp -f m3/pom.xml -pl tooling/backport-dag -am clean verify
+
+      - name: Execute canonical DAG parser
+        run: |
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=com.m3.tooling.dag.M3BackportDagMain             exec:java
+
+      - name: Emit backport programme status
+        run: |
+          mvn -B -ntp -f m3/backports/pom.xml verify
+
+      - name: Upload backport status artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3jdk21-backport-status-${{ github.run_id }}
+          path: |
+            m3/backports/target/program-status.json
+            m3/backports/target/program-status.tsv
+          if-no-files-found: error
+          retention-days: 14
