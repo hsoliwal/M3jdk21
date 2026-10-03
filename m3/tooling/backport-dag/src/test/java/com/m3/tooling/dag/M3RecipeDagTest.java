@@ -53,6 +53,9 @@ final class M3RecipeDagTest {
 
     @Test
     void structuralErrorsFailClosed() {
+        assertThrows(NullPointerException.class, () -> new M3RecipeDag(null));
+        assertThrows(IllegalArgumentException.class, () -> new M3RecipeDag(List.of()));
+
         M3DagNode a = node("a", M3DagKind.RECIPE, M3EditScope.FILE, true, false, false, "recipe.A", List.of());
         assertThrows(IllegalArgumentException.class, () -> new M3RecipeDag(List.of(a, a)));
         assertThrows(
@@ -95,6 +98,18 @@ final class M3RecipeDagTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> node("x", M3DagKind.PROMOTION, M3EditScope.FILE, false, false, false, "serial", List.of()));
+        assertThrows(
+                NullPointerException.class,
+                () -> new M3DagNode("x", null, M3EditScope.FILE, false, false, false, "", List.of()));
+        assertThrows(
+                NullPointerException.class,
+                () -> new M3DagNode("x", M3DagKind.VERIFICATION, null, false, false, false, "", List.of()));
+        assertThrows(
+                NullPointerException.class,
+                () -> new M3DagNode("x", M3DagKind.VERIFICATION, M3EditScope.FILE, false, false, false, "", null));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new M3AdmissionFact(null, true, true, true, true, false, false, true, true));
 
         assertThrows(
                 IllegalArgumentException.class,
