@@ -23,7 +23,7 @@
 
 /*
  * @test
- * @bug  8157349 8185985 8194953 8214738
+ * @bug  8157349 8185985 8194953 8214738 8347112
  * @summary  test copy of doc-files, and its contents for HTML meta content.
  * @library  ../../lib
  * @modules jdk.javadoc/jdk.javadoc.internal.tool
@@ -74,6 +74,11 @@ public class TestCopyFiles extends JavadocTester {
                 // check footer
                 "phi-BOTTOM-phi"
         );
+
+        checkOutput("acme.mdle/p/doc-files/sub-dir/SubReadme.html", true,
+                "SubReadme.html at second level of doc-file directory for acme.module.");
+        checkOutput("acme.mdle/p/doc-files/sub-dir/sub-dir-1/SubSubReadme.html", true,
+                "SubSubReadme.html at third level of doc-file directory.");
     }
 
     @Test
@@ -88,6 +93,8 @@ public class TestCopyFiles extends JavadocTester {
                 "--module-source-path", testSrc("modules"),
                 "--module", "acme.mdle,acme2.mdle");
         checkExit(Exit.OK);
+        checkOutput(Output.OUT, true,
+                "The -docfilessubdirs option is no longer required");
         checkOrder("acme.mdle/p/doc-files/inpackage.html",
                 """
                     "Hello World" (phi-WINDOW-TITLE-phi)""",
@@ -150,7 +157,6 @@ public class TestCopyFiles extends JavadocTester {
     @Test
     public void testDocFilesInModulePackagesWithRecursiveCopyWithExclusion() {
         javadoc("-d", "modules-out-recursive-with-exclusion",
-                "-docfilessubdirs",
                 "-excludedocfilessubdir", "sub-dir",
                 "--module-source-path", testSrc("modules"),
                 "--module", "acme.mdle");
@@ -159,6 +165,19 @@ public class TestCopyFiles extends JavadocTester {
                 """
                     In a named module acme.module and named package <a href="../package-summary.html"><code>p</code></a>."""
         );
+        checkFiles(false, "acme.mdle/p/doc-files/sub-dir");
+    }
+
+    @Test
+    public void testDocFilesInModulePackagesWithWildcardExclusion() {
+        javadoc("-d", "modules-out-wildcard-exclusion",
+                "-excludedocfilessubdir", "*",
+                "--module-source-path", testSrc("modules"),
+                "--module", "acme.mdle");
+        checkExit(Exit.OK);
+        checkOutput("acme.mdle/p/doc-files/inpackage.html", true,
+                "In a named module acme.module");
+        checkFiles(false, "acme.mdle/p/doc-files/sub-dir");
     }
 
     @Test
@@ -169,6 +188,10 @@ public class TestCopyFiles extends JavadocTester {
         checkExit(Exit.OK);
         checkOutput("p1/doc-files/inpackage.html", true,
                 "A named package in an unnamed module"
+        );
+        checkOutput("p1/doc-files/sub-dir/SubReadme.html", true,
+                "<title>SubReadme</title>",
+                "SubReadme.html at second level of doc-file directory."
         );
     }
 
@@ -193,7 +216,6 @@ public class TestCopyFiles extends JavadocTester {
     @Test
     public void testDocFilesInPackagesWithRecursiveCopyWithExclusion() {
         javadoc("-d", "packages-out-recursive-with-exclusion",
-                "-docfilessubdirs",
                 "-excludedocfilessubdir", "sub-dir",
                 "-sourcepath", testSrc("packages"),
                 "p1");
@@ -202,6 +224,7 @@ public class TestCopyFiles extends JavadocTester {
         checkOutput("p1/doc-files/inpackage.html", true,
                 "A named package in an unnamed module"
         );
+        checkFiles(false, "p1/doc-files/sub-dir");
     }
 
     @Test
@@ -217,6 +240,12 @@ public class TestCopyFiles extends JavadocTester {
                     <title>(phi-WINDOW-TITLE-phi)</title>
                     """,
                 "In an unnamed package"
+        );
+        checkOutput("doc-files/doc-file/SubReadme.html", true,
+                """
+                    <title>Beep Beep (phi-WINDOW-TITLE-phi)</title>
+                    """,
+                "SubReadme.html at second level of doc-file directory for unnamed package."
         );
     }
 
