@@ -1,0 +1,5 @@
+packet_id	atom_id	scope	scope_promotion_approved	work_ref	depends_on
+jdk-8316885-codeheap-analytics	cpp	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:jdk22-codeheap-analytics-8316885-cpp	
+jdk-8316885-codeheap-analytics	hpp	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:jdk22-codeheap-analytics-8316885-hpp	
+jdk-8316885-codeheap-analytics	jtreg	FILE	false	M3Jdk21HashPinnedSnapshotRecipe:jdk22-codeheap-analytics-8316885-java	
+jdk-8316885-codeheap-analytics	module-join	MODULE	true	com.m3.rewrite.backport.M3Jdk8316885CodeHeapAnalyticsBackportRecipe	cpp,hpp,jtreg
