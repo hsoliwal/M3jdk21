@@ -65,6 +65,10 @@
                 <include>com/m3/tooling/dag/M3RecipeDag*</include>
                 <include>com/m3/tooling/dag/M3DagNode*</include>
                 <include>com/m3/tooling/dag/M3AdmissionFact*</include>
+                <include>com/m3/tooling/dag/M3RecipeAtom*</include>
+                <include>com/m3/tooling/dag/M3BackportPacket.class</include>
+                <include>com/m3/tooling/dag/M3BackportPacketLoader*</include>
+                <include>com/m3/tooling/dag/M3PacketDagComposer*</include>
               </includes>
               <rules><rule><element>BUNDLE</element><limits>
                 <limit><counter>LINE</counter><value>COVEREDRATIO</value><minimum>0.99</minimum></limit>
