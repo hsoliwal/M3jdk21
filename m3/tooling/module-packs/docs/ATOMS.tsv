@@ -1,0 +1,12 @@
+atom	owner	pattern	iop_role	contract	proof
+ARTIFACT_VALUE	M3ModuleArtifact	VALUE_OBJECT	ImmutableInventory	Observed identity and immutable facts	M3ModuleInspectorTest
+ARCHIVE_VIEW	M3ModuleInspector.inspect	ADAPTER	ArchiveObserver	Java21 effective view without class loading	M3ModuleInspectorTest
+CLASS_BOUNDARY	M3ModuleInspector.classVersion	PREDICATE	VersionGuard	No newer/preview bytecode admission	M3ModuleInspectorTest
+CONTENT_IDENTITY	M3ModuleInspector.sha256	STRATEGY	DigestEvidence	Identity not authenticity or behavior proof	M3ModuleInspectorTest
+MODULE_CLOSURE	M3ModuleClosure.resolve	VALIDATOR	DependencyClosure	No missing non-static edges, duplicate names or reachable split packages	M3ModuleClosureTest
+LOCK_ADMISSION	M3PackTool.verify	VALIDATOR	ArtifactLock	Exact bytes, descriptor identity and contained paths	M3PackToolTest
+STAGE_COPY	M3PackTool.stage	ADAPTER	VerifiedInputPublication	New directory only, copied bytes reverified	M3PackToolTest
+RECIPE_OBSERVATION	M3InventoryModulePackRecipe	ADAPTER	ReadOnlyOpenRewrite	No source mutation; exact lock text fence	M3InventoryModulePackRecipeTest
+IMAGE_ASSEMBLY	assemble.sh	PIPELINE	JdkToolOrchestration	Matching JDK21 tools, scoped new output, recorded receipts	test-images.sh
+NATIVE_PACKAGING	src/it/native	NATIVE_SHADOW	PackagingFixture	Real JNI invocation from linked JMOD payload	test-images.sh
+DESKTOP_PROBE	JavaFxSmoke	APPLICATION_PROBE	NativeDesktopProof	Control snapshot on actual JavaFX21 toolkit	test-javafx.sh

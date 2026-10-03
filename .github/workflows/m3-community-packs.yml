@@ -1,0 +1,77 @@
+name: M3 community module packs
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/module-packs/**'
+      - '.github/workflows/m3-community-packs.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Diff and source lint
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+          python3 - <<'PY'
+          from pathlib import Path
+          import csv, xml.etree.ElementTree as ET
+          root = Path('m3/tooling/module-packs')
+          for path in root.rglob('*'):
+              if not path.is_file() or 'target' in path.parts: continue
+              text = path.read_text(encoding='utf-8')
+              assert '\0' not in text and '\r' not in text, path
+              assert all(line.rstrip() == line for line in text.splitlines()), path
+              if path.suffix == '.tsv':
+                  rows = list(csv.reader(text.splitlines(), delimiter='\t'))
+                  assert all(len(row) == len(rows[0]) for row in rows), path
+          ET.parse(root / 'pom.xml')
+          PY
+          bash -n m3/tooling/module-packs/*.sh
+      - name: Record exact JavaFX candidate before execution
+        shell: bash
+        run: bash m3/tooling/module-packs/test-javafx.sh --inventory-only
+      - name: Maven recipe JUnit and 99 percent coverage
+        shell: bash
+        run: mvn -B -ntp -f m3/tooling/module-packs/pom.xml clean verify
+      - name: Diagnostics and JNI JMOD image proof
+        shell: bash
+        run: bash m3/tooling/module-packs/test-images.sh
+      - name: Native desktop prerequisites
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends xvfb xauth libgtk-3-0 libgl1
+      - name: Pinned JavaFX JMOD native desktop proof
+        shell: bash
+        run: bash m3/tooling/module-packs/test-javafx.sh
+      - name: Preserve exact-head evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-community-pack-evidence-${{ github.sha }}
+          if-no-files-found: warn
+          path: |
+            m3/tooling/module-packs/target/surefire-reports/
+            m3/tooling/module-packs/target/site/jacoco/
+            m3/tooling/module-packs/target/**/ACQUISITION.tsv
+            m3/tooling/module-packs/target/**/IMAGE_PROOF.tsv
+            m3/tooling/module-packs/target/**/JAVAFX_PROOF.tsv
+            m3/tooling/module-packs/target/**/NATIVE_LAUNCH.txt
+            m3/tooling/module-packs/target/**/DESCRIPTORS.txt
+            m3/tooling/module-packs/target/**/LEGAL_ENTRIES.txt
+            m3/tooling/module-packs/target/**/INVENTORY.tsv
+            m3/tooling/module-packs/target/**/STATUS.tsv
+            m3/tooling/module-packs/target/**/PROVENANCE.tsv
+            m3/tooling/module-packs/target/**/jlink.log

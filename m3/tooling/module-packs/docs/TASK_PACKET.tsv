@@ -1,0 +1,17 @@
+key	value
+task_packet	active
+source_doc	m3/docs/community-capability-admission.md
+invariant_id	COMMUNITY-1;COMMUNITY-2;COMMUNITY-4;M3_RECIPE_FIRST
+run.mode	apply
+run.profile	local-linux-java21-and-focused-ci
+run.workers	1
+shard_count	1
+shard_index	0
+targets.modules	m3/tooling/module-packs
+additional_targets	m3/pom.xml;.github/workflows/m3-community-packs.yml;m3/backports/test_generate_recipe_crates.py;.github/workflows/m3-jdk21-backports.yml
+invariant_locks	EXISTING_PUBLIC_API;EXISTING_EXTERNAL_BEHAVIOR;CANONICAL_BRANCH_HISTORY
+allowed_delta	Add external pack tooling/recipes/tests;repair observed test and build prerequisite defects
+forbidden	Merge;rebase;force-push;installed JDK writes;unverified release admission
+verify_order	diff;lint;compile;tests;image/native runtime
+stop_conditions	Any failed gate leaves packet unadmitted; no coverage or test weakening
+output_contract	STATUS.tsv;FINAL_REPORT.md;RUN_CONTEXT.tsv;PROVENANCE.tsv;VERIFY_CONTRACT.tsv;OUTPUT_CONTRACT.tsv
