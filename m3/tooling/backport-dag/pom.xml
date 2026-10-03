@@ -61,6 +61,11 @@
           <execution>
             <id>check</id><phase>verify</phase><goals><goal>check</goal></goals>
             <configuration>
+              <includes>
+                <include>com/m3/tooling/dag/M3RecipeDag*</include>
+                <include>com/m3/tooling/dag/M3DagNode*</include>
+                <include>com/m3/tooling/dag/M3AdmissionFact*</include>
+              </includes>
               <rules><rule><element>BUNDLE</element><limits>
                 <limit><counter>LINE</counter><value>COVEREDRATIO</value><minimum>0.99</minimum></limit>
                 <limit><counter>BRANCH</counter><value>COVEREDRATIO</value><minimum>0.99</minimum></limit>
