@@ -18,7 +18,7 @@ public record M3RecipeScopePolicy(
     /** Resolve the exact authority required for one invocation without changing the recipe type. */
     public M3EditScope resolve(Collection<String> moduleRelativeJavaTargets) {
         M3EditScope resolved = inferFromTargets
-                ? M3ScopeInference.forJavaPaths(moduleRelativeJavaTargets)
+                ? M3ScopeInference.forPaths(moduleRelativeJavaTargets)
                 : minimumScope;
         return minimumScope.promote(resolved);
     }
