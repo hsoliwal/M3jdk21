@@ -5,6 +5,8 @@ on:
     paths:
       - ".github/workflows/m3-jdk21-upstream-inventory.yml"
       - "m3/backports/inventory.py"
+      - "m3/backports/compatibility_queue.py"
+      - "m3/backports/test_compatibility_queue.py"
   workflow_dispatch:
 
 permissions:
@@ -55,6 +57,42 @@ jobs:
         run: |
           mkdir -p inventory-output
           python3 m3/backports/inventory.py             --repo upstream-jdk             --out inventory-output/UPSTREAM_CHANGES.tsv
+
+      - name: Build deterministic compatibility proof queue
+        shell: bash
+        run: |
+          python3 m3/backports/compatibility_queue.py \
+            --inventory inventory-output/UPSTREAM_CHANGES.tsv \
+            --out inventory-output/COMPATIBILITY_QUEUE.tsv
+          python3 - <<'PY'
+          import csv
+          import json
+          from collections import Counter
+          from pathlib import Path
+
+          path = Path("inventory-output/COMPATIBILITY_QUEUE.tsv")
+          with path.open("r", encoding="utf-8", newline="") as handle:
+              rows = list(csv.DictReader(handle, delimiter="\t"))
+
+          if not rows:
+              raise SystemExit("compatibility queue is empty")
+          if any(row["compatibility_state"] != "PENDING_COMPATIBILITY_PROOF" for row in rows):
+              raise SystemExit("queue heuristics must not auto-admit/reject compatibility")
+
+          summary = {
+              "schema": 1,
+              "rows": len(rows),
+              "by_risk": dict(sorted(Counter(row["risk"] for row in rows).items())),
+              "by_proof_lane": dict(sorted(Counter(row["proof_lane"] for row in rows).items())),
+              "by_recipe_strategy": dict(sorted(Counter(row["recipe_strategy"] for row in rows).items())),
+              "by_scope_floor": dict(sorted(Counter(row["scope_floor"] for row in rows).items())),
+          }
+          Path("inventory-output/COMPATIBILITY_QUEUE.summary.json").write_text(
+              json.dumps(summary, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          print(json.dumps(summary, sort_keys=True))
+          PY
 
       - name: Verify and summarize inventory
         shell: bash
