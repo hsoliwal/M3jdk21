@@ -317,6 +317,105 @@ def verify_keystore_instant_8374808_backport(root: Path) -> None:
                 f"provider-storage rewrite escaped compatibility leaf: {forbidden}"
             )
 
+
+JDK_8316885_COMMIT = "1230aed61d286fe9c09f46e2bab626d0e8fe0273"
+
+
+def verify_codeheap_8316885_backport(root: Path) -> None:
+    rows = read_tsv(root / "m3/backports/recipes/jdk-8316885/adaptation.tsv")
+    if len(rows) != 3:
+        raise AssertionError(
+            f"expected 3 JDK-8316885 adaptation rows, found {len(rows)}"
+        )
+
+    by_target = {row["target_path"]: row for row in rows}
+    if len(by_target) != len(rows):
+        raise AssertionError("duplicate JDK-8316885 target path")
+
+    product_targets = {
+        "src/hotspot/share/code/codeHeapState.cpp":
+            "48c8410ac47fcd22031dbbb9e117f977f54a08dc",
+        "src/hotspot/share/code/codeHeapState.hpp":
+            "ad3b03d1303c4f6e2283d6677fea7d5691e8f821",
+    }
+    for row in rows:
+        if row["upstream_commit"] != JDK_8316885_COMMIT:
+            raise AssertionError(
+                f"unexpected JDK-8316885 donor commit for {row['target_path']}"
+            )
+        path = root / row["target_path"]
+        if not path.is_file():
+            raise AssertionError(
+                f"missing JDK-8316885 target: {row['target_path']}"
+            )
+        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        if actual != row["target_sha256"]:
+            raise AssertionError(
+                f"JDK-8316885 target drift for {row['target_path']}: "
+                f"expected {row['target_sha256']}, actual {actual}"
+            )
+        baseline = row["baseline_sha256"]
+        if baseline != "ABSENT" and baseline == row["target_sha256"]:
+            raise AssertionError(
+                f"JDK-8316885 row has no delta: {row['target_path']}"
+            )
+        expected_blob = product_targets.get(row["target_path"])
+        if expected_blob is not None:
+            actual_blob = git_blob_sha1(path.read_bytes())
+            if actual_blob != expected_blob or row["upstream_git_blob"] != expected_blob:
+                raise AssertionError(
+                    f"JDK-8316885 donor-identity drift for {row['target_path']}"
+                )
+
+    seeds = read_tsv(root / "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv")
+    seed = next((row for row in seeds if row["jbs"] == "JDK-8316885"), None)
+    if seed is None:
+        raise AssertionError("JDK-8316885 missing from upstream seed")
+    if seed["upstream_commit"] != JDK_8316885_COMMIT:
+        raise AssertionError("JDK-8316885 seed donor commit drift")
+    if seed["disposition"] != "candidate-adapted":
+        raise AssertionError(
+            f"JDK-8316885 unexpected disposition: {seed['disposition']}"
+        )
+
+    implementation = (
+        root / "src/hotspot/share/code/codeHeapState.cpp"
+    ).read_text(encoding="utf-8")
+    header = (
+        root / "src/hotspot/share/code/codeHeapState.hpp"
+    ).read_text(encoding="utf-8")
+    test = (
+        root
+        / "test/hotspot/jtreg/serviceability/dcmd/compiler/"
+        "CodeHeapAnalyticsMissingAggregate.java"
+    ).read_text(encoding="utf-8")
+
+    generic = "No aggregated code heap data available. Run function aggregate first."
+    named = "No aggregated data available for heap %s. Run function aggregate first."
+    if generic not in implementation or named not in implementation:
+        raise AssertionError("JDK-8316885 diagnostic text missing")
+    if implementation.count("print_aggregate_missing(") < 13:
+        raise AssertionError("JDK-8316885 does not cover every silent detail-return path")
+    if "static void print_aggregate_missing(outputStream* out, const char* heapName);" not in header:
+        raise AssertionError("JDK-8316885 helper declaration missing")
+    for function in (
+        "UsedSpace",
+        "FreeSpace",
+        "MethodCount",
+        "MethodSpace",
+        "MethodAge",
+        "MethodNames",
+    ):
+        if f'"{function}"' not in test:
+            raise AssertionError(
+                f"JDK-8316885 focused jtreg missing function {function}"
+            )
+    if "Compiler.CodeHeap_Analytics aggregate" not in test:
+        raise AssertionError("JDK-8316885 focused jtreg missing aggregate transition")
+    if "shouldNotContain(MISSING)" not in test:
+        raise AssertionError("JDK-8316885 focused jtreg missing post-aggregate assertion")
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -337,10 +436,12 @@ def main() -> int:
     verify_javadoc_8347112_backport(root)
     verify_security_properties_8364182_backport(root)
     verify_keystore_instant_8374808_backport(root)
+    verify_codeheap_8316885_backport(root)
     print(
         "PASS: 82 JEP rows, non-JEP seed uniqueness, exact JDK-8357439 donor blobs, "
         "JDK-8347112 javadoc adaptation, JDK-8364182 serviceability adaptation, "
-        "and JDK-8374808 KeyStore Instant compatibility leaf"
+        "JDK-8374808 KeyStore Instant compatibility leaf, and "
+        "JDK-8316885 CodeHeap analytics diagnostic leaf"
     )
     return 0
 
