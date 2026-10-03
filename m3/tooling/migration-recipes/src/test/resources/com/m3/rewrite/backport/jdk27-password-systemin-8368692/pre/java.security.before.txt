@@ -1515,22 +1515,3 @@ jdk.tls.alpnCharset=ISO_8859_1
 #
 # [1] https://docs.microsoft.com/en-us/openspecs/windows_protocols/ms-sfu/bde93b0e-f3c9-4ddf-9f44-e1453be7af5a
 #jdk.security.krb5.s4u2proxy.acceptNonForwardableServiceTicket=false
-
-#
-# Policy for reading passwords from System.in
-#
-# When Java needs to read a password, whether through a tool such as keytool or
-# kinit, or by an API such as PasswordCallback with echo off, it normally reads
-# directly from the console. If the console is not available, Java falls back
-# to reading from the standard input stream ("System.in"), which commonly
-# represents redirected input or an inter-process pipe.
-#
-# This security property determines whether passwords can be read from the
-# standard input stream when a console is not available. The value can be
-# either "true" or "false". If set to "false", attempting to read an echo-off
-# password from System.in without a console throws an exception.
-#
-# The default is "true" to preserve JDK 21 behavior. A system property of the
-# same name supersedes the security property.
-#
-#jdk.security.password.allowSystemIn = true
