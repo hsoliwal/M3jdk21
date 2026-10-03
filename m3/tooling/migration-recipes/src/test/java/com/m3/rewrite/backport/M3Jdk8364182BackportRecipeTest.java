@@ -93,7 +93,7 @@ final class M3Jdk8364182BackportRecipeTest {
         assertChangedContains(
                 changes,
                 DCMD_CPP,
-                "VM.security_properties");
+                "PrintSecurityPropertiesDCmd");
         assertChangedContains(
                 changes,
                 TEST,
