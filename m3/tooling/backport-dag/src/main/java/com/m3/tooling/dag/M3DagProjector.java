@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.tooling.dag;
 
-import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -108,6 +107,9 @@ public final class M3DagProjector {
                     .append("                .setHeader(\"M3SerialPromotion\").constant(")
                     .append(node.serialPromotion())
                     .append(")\n")
+                    .append("                .setHeader(\"M3ScopePromotionApproved\").constant(")
+                    .append(node.scopePromotionApproved())
+                    .append(")\n")
                     .append("                .setHeader(\"M3WorkRef\").constant(\"")
                     .append(javaString(node.workRef()))
                     .append("\")\n")
@@ -161,6 +163,9 @@ public final class M3DagProjector {
                     .append("            'serial_promotion': ")
                     .append(pythonBoolean(node.serialPromotion()))
                     .append(",\n")
+                    .append("            'scope_promotion_approved': ")
+                    .append(pythonBoolean(node.scopePromotionApproved()))
+                    .append(",\n")
                     .append("            'work_ref': '")
                     .append(pythonString(node.workRef()))
                     .append("',\n")
@@ -197,7 +202,20 @@ public final class M3DagProjector {
                 .append("end\n\n");
 
         for (M3DagNode node : dag.topologicalOrder()) {
-            out.append("rule \"ready-")
+            out.append("// node=")
+                    .append(drlComment(node.id()))
+                    .append(" kind=")
+                    .append(node.kind().name())
+                    .append(" scope=")
+                    .append(node.scope().name())
+                    .append(" mutating=")
+                    .append(node.mutating())
+                    .append(" scopePromotionApproved=")
+                    .append(node.scopePromotionApproved())
+                    .append(" workRef=")
+                    .append(drlComment(node.workRef()))
+                    .append("\n")
+                    .append("rule \"ready-")
                     .append(drlString(node.id()))
                     .append("\"\n")
                     .append("when\n")
@@ -235,19 +253,15 @@ public final class M3DagProjector {
     }
 
     private static String pythonIdentifier(String value) {
-        String normalized = value.replaceAll("[^A-Za-z0-9_]", "_");
-        if (normalized.isEmpty() || Character.isDigit(normalized.charAt(0))) {
-            normalized = "n_" + normalized;
-        }
-        return normalized;
+        return "n_" + value.replaceAll("[^A-Za-z0-9_]", "_");
     }
 
     private static String javaString(String value) {
-        return escape(value, true);
+        return escape(value);
     }
 
     private static String drlString(String value) {
-        return escape(value, true);
+        return escape(value);
     }
 
     private static String drlComment(String value) {
@@ -265,11 +279,11 @@ public final class M3DagProjector {
         return value ? "True" : "False";
     }
 
-    private static String escape(String value, boolean escapeQuotes) {
-        String escaped = value.replace("\\", "\\\\")
+    private static String escape(String value) {
+        return value.replace("\\", "\\\\")
                 .replace("\n", "\\n")
                 .replace("\r", "\\r")
-                .replace("\t", "\\t");
-        return escapeQuotes ? escaped.replace("\"", "\\\"") : escaped;
+                .replace("\t", "\\t")
+                .replace("\"", "\\\"");
     }
 }
