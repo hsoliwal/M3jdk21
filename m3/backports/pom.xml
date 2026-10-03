@@ -37,6 +37,24 @@
             </configuration>
           </execution>
           <execution>
+            <id>emit-backport-program-status</id>
+            <phase>verify</phase>
+            <goals><goal>exec</goal></goals>
+            <configuration>
+              <executable>${python.executable}</executable>
+              <workingDirectory>${project.basedir}</workingDirectory>
+              <arguments>
+                <argument>program_status.py</argument>
+                <argument>--root</argument>
+                <argument>${project.basedir}/../..</argument>
+                <argument>--json-out</argument>
+                <argument>${project.build.directory}/program-status.json</argument>
+                <argument>--tsv-out</argument>
+                <argument>${project.build.directory}/program-status.tsv</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
             <id>test-backport-inventory</id>
             <phase>test</phase>
             <goals><goal>exec</goal></goals>
