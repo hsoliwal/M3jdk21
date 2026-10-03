@@ -1,0 +1,7 @@
+gate	packet_requirement	status
+scope	Only the eight declared documentation/ledger files	PENDING_DIFF_READBACK
+ledger_parse	Unique IDs; fixed columns; known planes; valid evidence refs; all unselected	PASS
+upstream_admission	No replacement of existing compatibility or naming authority	DESIGN_REVIEWED
+compile_and_tests	Required in later implementation packets	NOT_RUN
+module_readiness	Real artifact descriptors and full dependency closure	NOT_RUN
+product_acceptance	JDK build; jtreg; image/native/application proof	NOT_RUN
