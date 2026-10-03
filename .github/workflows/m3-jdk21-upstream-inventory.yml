@@ -58,6 +58,11 @@ jobs:
           mkdir -p inventory-output
           python3 m3/backports/inventory.py             --repo upstream-jdk             --out inventory-output/UPSTREAM_CHANGES.tsv
 
+      - name: Unit-test compatibility queue
+        shell: bash
+        run: |
+          python3 -m unittest -v m3/backports/test_compatibility_queue.py
+
       - name: Build deterministic compatibility proof queue
         shell: bash
         run: |
