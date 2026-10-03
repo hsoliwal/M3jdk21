@@ -231,6 +231,7 @@ module java.base {
         java.instrument,
         java.management.rmi,
         jdk.jartool,
+        jdk.compiler,
         jdk.jfr,
         jdk.jlink,
         jdk.jpackage;
