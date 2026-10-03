@@ -1,0 +1,85 @@
+name: M3 JDK-8359706 recovery proof
+
+on:
+  pull_request:
+    paths:
+      - "m3/backports/recipes/jdk-8359706/**"
+      - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk8359706BackportRecipe.java"
+      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk27-open-fd-8359706-java/**"
+      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-open-fd-8359706-text/**"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jdk8359706BackportRecipeTest.java"
+      - "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jdk27-open-fd-8359706/**"
+      - "src/hotspot/os/aix/os_aix.cpp"
+      - "src/hotspot/os/bsd/os_bsd.cpp"
+      - "src/hotspot/os/bsd/os_bsd.hpp"
+      - "src/hotspot/os/linux/os_linux.cpp"
+      - "src/hotspot/os/windows/os_windows.cpp"
+      - "src/hotspot/share/runtime/os.hpp"
+      - "src/hotspot/share/utilities/vmError.cpp"
+      - "test/jdk/sun/tools/jcmd/TestJcmdSanity.java"
+      - ".github/workflows/m3-jdk8359706-recovery.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recipe-and-static-proof:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: Verify packet hashes and lineage
+        run: python3 m3/backports/recipes/jdk-8359706/verify_recovery.py
+      - name: Prove OpenRewrite recipe replay
+        run: |
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+            -Dtest=M3Jdk8359706BackportRecipeTest test
+
+  linux-image-and-jtreg:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Install OpenJDK build prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends autoconf make gcc g++ zip unzip \
+            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
+            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
+      - name: Configure
+        run: bash configure --with-boot-jdk="$JAVA_HOME" --with-debug-level=release --with-jvm-variants=server --disable-warnings-as-errors
+      - name: Build image
+        run: make JOBS=2 images
+      - name: Run jcmd sanity
+        run: make JOBS=2 test TEST="test/jdk/sun/tools/jcmd/TestJcmdSanity.java"
+
+  macos-image-and-jtreg:
+    runs-on: macos-14
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Ensure configure prerequisites
+        run: |
+          command -v autoconf >/dev/null || brew install autoconf
+          command -v make >/dev/null
+      - name: Configure
+        run: bash configure --with-boot-jdk="$JAVA_HOME" --with-debug-level=release --with-jvm-variants=server --disable-warnings-as-errors
+      - name: Build image
+        run: make JOBS=2 images
+      - name: Run jcmd sanity
+        run: make JOBS=2 test TEST="test/jdk/sun/tools/jcmd/TestJcmdSanity.java"
