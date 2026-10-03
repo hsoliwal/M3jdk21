@@ -18,18 +18,19 @@ on:
       - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-javadoc-8347112-text/**"
       - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jdk8347112BackportRecipeTest.java"
       - "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jdk27-javadoc-8347112/**"
-      - "src/hotspot/share/classfile/vmSymbols.hpp"
-      - "src/hotspot/share/services/diagnosticCommand.cpp"
-      - "src/hotspot/share/services/diagnosticCommand.hpp"
-      - "src/java.base/share/classes/java/security/Security.java"
-      - "src/java.base/share/classes/jdk/internal/access/JavaSecurityPropertiesAccess.java"
-      - "src/java.base/share/classes/jdk/internal/vm/VMSupport.java"
-      - "test/hotspot/jtreg/serviceability/dcmd/vm/SecurityPropertiesTest.java"
-      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk8364182BackportRecipe.java"
-      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk27-security-properties-8364182-java/**"
-      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-security-properties-8364182-text/**"
-      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jdk8364182BackportRecipeTest.java"
-      - "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jdk27-security-properties-8364182/**"
+      - "src/hotspot/os/aix/os_aix.cpp"
+      - "src/hotspot/os/bsd/os_bsd.cpp"
+      - "src/hotspot/os/bsd/os_bsd.hpp"
+      - "src/hotspot/os/linux/os_linux.cpp"
+      - "src/hotspot/os/windows/os_windows.cpp"
+      - "src/hotspot/share/runtime/os.hpp"
+      - "src/hotspot/share/utilities/vmError.cpp"
+      - "test/jdk/sun/tools/jcmd/TestJcmdSanity.java"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk8359706BackportRecipe.java"
+      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk27-open-fd-8359706-java/**"
+      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-open-fd-8359706-text/**"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jdk8359706BackportRecipeTest.java"
+      - "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jdk27-open-fd-8359706/**"
       - "m3/tooling/recipe-catalogue.tsv"
       - ".github/workflows/m3-jdk21-backports.yml"
   pull_request:
@@ -47,18 +48,19 @@ on:
       - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-javadoc-8347112-text/**"
       - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jdk8347112BackportRecipeTest.java"
       - "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jdk27-javadoc-8347112/**"
-      - "src/hotspot/share/classfile/vmSymbols.hpp"
-      - "src/hotspot/share/services/diagnosticCommand.cpp"
-      - "src/hotspot/share/services/diagnosticCommand.hpp"
-      - "src/java.base/share/classes/java/security/Security.java"
-      - "src/java.base/share/classes/jdk/internal/access/JavaSecurityPropertiesAccess.java"
-      - "src/java.base/share/classes/jdk/internal/vm/VMSupport.java"
-      - "test/hotspot/jtreg/serviceability/dcmd/vm/SecurityPropertiesTest.java"
-      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk8364182BackportRecipe.java"
-      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk27-security-properties-8364182-java/**"
-      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-security-properties-8364182-text/**"
-      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jdk8364182BackportRecipeTest.java"
-      - "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jdk27-security-properties-8364182/**"
+      - "src/hotspot/os/aix/os_aix.cpp"
+      - "src/hotspot/os/bsd/os_bsd.cpp"
+      - "src/hotspot/os/bsd/os_bsd.hpp"
+      - "src/hotspot/os/linux/os_linux.cpp"
+      - "src/hotspot/os/windows/os_windows.cpp"
+      - "src/hotspot/share/runtime/os.hpp"
+      - "src/hotspot/share/utilities/vmError.cpp"
+      - "test/jdk/sun/tools/jcmd/TestJcmdSanity.java"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk8359706BackportRecipe.java"
+      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk27-open-fd-8359706-java/**"
+      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-open-fd-8359706-text/**"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jdk8359706BackportRecipeTest.java"
+      - "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jdk27-open-fd-8359706/**"
       - "m3/tooling/recipe-catalogue.tsv"
       - ".github/workflows/m3-jdk21-backports.yml"
   workflow_dispatch:
@@ -89,8 +91,8 @@ jobs:
               "m3/backports/recipes/jdk-8357439/manifest.tsv",
               "m3/backports/recipes/jdk-8347112/adaptation.tsv",
               "m3/backports/recipes/jdk-8347112/README.md",
-              "m3/backports/recipes/jdk-8364182/adaptation.tsv",
-              "m3/backports/recipes/jdk-8364182/README.md",
+              "m3/backports/recipes/jdk-8359706/adaptation.tsv",
+              "m3/backports/recipes/jdk-8359706/README.md",
               "m3/backports/test_inventory.py",
               "m3/backports/verify.py",
               "make/modules/jdk.jcmd/Copy.gmk",
@@ -148,7 +150,7 @@ jobs:
           python3 m3/backports/verify.py --root .
           mvn -B -f m3/backports/pom.xml test
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
-            -Dtest=M3Jdk8347112BackportRecipeTest,M3Jdk8364182BackportRecipeTest test
+            -Dtest=M3Jdk8347112BackportRecipeTest,M3Jdk8359706BackportRecipeTest test
 
       - name: jcmd completion runtime smoke
         shell: bash
@@ -223,7 +225,7 @@ jobs:
           set -euo pipefail
           make JOBS=2 test TEST="test/langtools/jdk/javadoc/doclet/testCopyFiles/TestCopyFiles.java"
 
-  security-properties-8364182:
+  open-fd-8359706-linux:
     runs-on: ubuntu-22.04
     timeout-minutes: 70
     steps:
@@ -234,7 +236,7 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      - name: Install focused OpenJDK build prerequisites
+      - name: Install OpenJDK build prerequisites
         shell: bash
         run: |
           set -euo pipefail
@@ -244,7 +246,7 @@ jobs:
             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
             libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
 
-      - name: Configure Java 21-compatible JDK
+      - name: Configure Linux Java 21-compatible JDK
         shell: bash
         run: |
           set -euo pipefail
@@ -254,20 +256,54 @@ jobs:
             --with-jvm-variants=server \
             --disable-warnings-as-errors
 
-      - name: Build JDK image with serviceability backport
+      - name: Build Linux JDK image
         shell: bash
         run: |
           set -euo pipefail
           make JOBS=2 images
 
-      - name: Run VM.security_properties jtreg proof
+      - name: Run Linux VM.info descriptor proof
         shell: bash
         run: |
           set -euo pipefail
-          make JOBS=2 test TEST="test/hotspot/jtreg/serviceability/dcmd/vm/SecurityPropertiesTest.java"
+          make JOBS=2 test TEST="test/jdk/sun/tools/jcmd/TestJcmdSanity.java"
 
-      - name: Preserve VM.system_properties compatibility
+  open-fd-8359706-macos:
+    runs-on: macos-14
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Ensure configure prerequisites
         shell: bash
         run: |
           set -euo pipefail
-          make JOBS=2 test TEST="test/hotspot/jtreg/serviceability/dcmd/vm/SystemPropertiesTest.java"
+          command -v autoconf >/dev/null || brew install autoconf
+          command -v make >/dev/null
+
+      - name: Configure macOS Java 21-compatible JDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash configure \
+            --with-boot-jdk="$JAVA_HOME" \
+            --with-debug-level=release \
+            --with-jvm-variants=server \
+            --disable-warnings-as-errors
+
+      - name: Build macOS JDK image
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 images
+
+      - name: Run macOS VM.info descriptor proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 test TEST="test/jdk/sun/tools/jcmd/TestJcmdSanity.java"
