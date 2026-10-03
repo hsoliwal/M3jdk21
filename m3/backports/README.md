@@ -171,6 +171,22 @@ retains Java 21's accepted `-docfilessubdirs` option processing. The packet is o
 `M3Jdk8347112BackportRecipe` and remains `candidate-adapted` until focused javadoc build/jtreg and
 recipe fixed-point CI pass. See `recipes/jdk-8347112/`.
 
+## Next adapted serviceability candidate
+
+JDK-8364182, **Add jcmd VM.security_properties command**, is materialized from upstream commit
+
+`f2f8828188f45d16344c82adfbf951f7409b8825`.
+
+The packet is additive: the existing Java 21 `VM.system_properties` command remains present and
+visible. M3JDK21 adds the new security-property command, the internal SharedSecrets/VMSupport bridge,
+the HotSpot diagnostic command registration and the upstream focused jtreg test. The only mechanical
+source adaptation is the older JDK21 `DCmdFactoryImpl(export, enabled, hidden)` constructor.
+
+The packet is owned by `M3Jdk8364182BackportRecipe` as separate Java-LST and HotSpot-text atoms.
+It remains `candidate-adapted` until focused image build, both
+`SecurityPropertiesTest.java` and existing `SystemPropertiesTest.java`, recipe fixed point and
+backport verification pass. See `recipes/jdk-8364182/`.
+
 ## Completion boundary
 
 M3JDK21 backport convergence is complete only when:
