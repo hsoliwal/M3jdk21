@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "version": "21.0.12",
+  "os": "linux",
+  "arch": "x86_64",
+  "artifacts": [
+    {
+      "module": "javafx.base",
+      "file": "reviewed-jmods/javafx.base.jmod",
+      "sha256": "REPLACE_WITH_REVIEWED_SHA256",
+      "license": "RECORD_EXACT_UPSTREAM_LICENSE_AND_NOTICES",
+      "source": "RECORD_IMMUTABLE_SOURCE_AND_BINARY_RELEASE"
+    },
+    {
+      "module": "javafx.controls",
+      "file": "reviewed-jmods/javafx.controls.jmod",
+      "sha256": "REPLACE_WITH_REVIEWED_SHA256",
+      "license": "RECORD_EXACT_UPSTREAM_LICENSE_AND_NOTICES",
+      "source": "RECORD_IMMUTABLE_SOURCE_AND_BINARY_RELEASE"
+    },
+    {
+      "module": "javafx.graphics",
+      "file": "reviewed-jmods/javafx.graphics.jmod",
+      "sha256": "REPLACE_WITH_REVIEWED_SHA256",
+      "license": "RECORD_EXACT_UPSTREAM_LICENSE_AND_NOTICES",
+      "source": "RECORD_IMMUTABLE_SOURCE_AND_BINARY_RELEASE"
+    }
+  ]
+}

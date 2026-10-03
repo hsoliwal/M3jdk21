@@ -1,0 +1,12 @@
+id	kind	source	identity	interpretation
+P1	USER_LOCKED_CANON	M3Scale(20261002-062112).txt	5ec31d51207bda02d2f1f9a7fcd940f2ae5e1bfc9f0ef9358139fe62b47f393b	Docs/inventory/contract/evidence law
+P2	REPOSITORY_POLICY	m3/docs/community-capability-admission.md	700d4414169164c71807b43fd4d93bf6d50ceeed	COMMUNITY-1/2/4 implementation scope
+P3	REPOSITORY_VERSIONS	m3/tooling/migration-recipes/pom.xml	700d4414169164c71807b43fd4d93bf6d50ceeed	Existing dependency pins reused; not claimed latest
+P4	PRIMARY_TOOL_DOC	https://docs.oracle.com/en/java/javase/21/docs/specs/man/jmod.html	Java21	JMOD is link-time not runtime plugin
+P5	PRIMARY_TOOL_DOC	https://docs.oracle.com/en/java/javase/21/docs/specs/man/jlink.html	Java21	Image assembly and closure
+P6	UPSTREAM_API_REVIEW	openrewrite/rewrite:rewrite-core/src/main/java/org/openrewrite/ScanningRecipe.java	v8.17.1:c9e8ac9a6d8d6c3df8977604097365c67b52d442	API review only; no donor source copied
+P7	UPSTREAM_API_REVIEW	openrewrite/rewrite:rewrite-core/src/main/java/org/openrewrite/SourceFile.java	v8.17.1:5c7b4c5dc59ada1a303bd6f80a3c2f9aee2dca41	API review only
+P8	UPSTREAM_API_REVIEW	openrewrite/rewrite:rewrite-core/src/main/java/org/openrewrite/DataTable.java	v8.17.1:37c7f0ac1310509fd0f14fc330a3e02cb645c0c2	Five-argument explicit Row constructor reviewed
+P9	RUNTIME_INPUT	Installed Debian OpenJDK21 JMODs	MODULES.tsv	Runtime byte fingerprints; not fork acceptance
+P10	OPTIONAL_ARTIFACT_REFERENCE	https://gluonhq.com/products/javafx/	JavaFX21.0.12 reference only	No binary acquired/admitted; invalid placeholders remain
+P11	LICENSE	m3/LICENSE	d645695673349e3947e8e5ae42332d0ac3164cd7	Original tooling Apache2; upstream retained

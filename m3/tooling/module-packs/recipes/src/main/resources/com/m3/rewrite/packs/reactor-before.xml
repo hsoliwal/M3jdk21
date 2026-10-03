@@ -14,7 +14,6 @@
     <module>tooling/migration-recipes</module>
     <module>tooling/backport-dag</module>
     <module>backports</module>
-    <module>tooling/module-packs</module>
   </modules>
 
   <profiles>

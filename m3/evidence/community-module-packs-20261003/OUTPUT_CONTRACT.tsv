@@ -1,0 +1,20 @@
+artifact	purpose	status
+STATUS.tsv	Typed completion/noncompletion state	PRESENT
+FINAL_REPORT.md	Exact changes, proof, blockers, reproduction	PRESENT
+RUN_CONTEXT.tsv	Pinned scope/baseline/toolchain	PRESENT
+PROVENANCE.tsv	Source/API/artifact origin	PRESENT
+VERIFY_CONTRACT.tsv	Separate actual and pending gates	PRESENT
+OUTPUT_CONTRACT.tsv	Required artifact contract	PRESENT
+SOURCE_SHA256.tsv	Source byte identities	PRESENT
+INVENTORY.tsv	Changed subset; not full repo	PRESENT
+CLUSTERS_EXACT.tsv	Byte comparisons only; retain snapshots	PRESENT
+CLUSTERS_NORMALIZED.tsv	Similarity candidates only	PRESENT
+ACTION_QUEUE.tsv	Persistent pending tasks	PRESENT
+SUMMARY.tsv	Scoped counters	PRESENT
+MODULES.tsv	Actual selected runtime module facts	PRESENT
+ARTIFACT_SHA256.tsv	Two-build JMOD comparisons	PRESENT
+IMAGE_SHA256.tsv	Tested runtime file hashes; image not committed	PRESENT
+KERNEL_RECEIPT.json	Direct Java/Python run receipt	PRESENT
+IMAGE_RECEIPT.json	Local image proof, not M3 product acceptance	PRESENT
+JDK_RELEASE.txt	Exact runtime build facts	PRESENT
+logs/	Raw successful and blocked command outputs	PRESENT

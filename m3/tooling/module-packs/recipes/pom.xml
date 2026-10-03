@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent><groupId>com.m3.tooling</groupId><artifactId>module-packs</artifactId><version>0.1.0-SNAPSHOT</version></parent>
+  <artifactId>module-pack-recipes</artifactId>
+  <dependencies>
+    <dependency><groupId>com.m3.tooling</groupId><artifactId>module-pack-kernel</artifactId><version>${project.version}</version></dependency>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-xml</artifactId><version>${rewrite.version}</version></dependency>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-test</artifactId><version>${rewrite.version}</version><scope>test</scope></dependency>
+    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><scope>test</scope></dependency>
+  </dependencies>
+  <build><plugins><plugin><groupId>org.openrewrite.maven</groupId><artifactId>rewrite-maven-plugin</artifactId><version>5.23.1</version>
+    <configuration><failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes><exportDatatables>true</exportDatatables></configuration>
+  </plugin></plugins></build>
+</project>
