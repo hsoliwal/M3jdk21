@@ -171,6 +171,24 @@ retains Java 21's accepted `-docfilessubdirs` option processing. The packet is o
 `M3Jdk8347112BackportRecipe` and remains `candidate-adapted` until focused javadoc build/jtreg and
 recipe fixed-point CI pass. See `recipes/jdk-8347112/`.
 
+## Adapted cross-platform diagnostics candidate
+
+JDK-8359706, **open file descriptor diagnostics for VM.info / error reports**, is materialized from
+
+`openjdk/jdk@b0831572e2cd9dbff9ee2abcdf81a493ddcecc7e`
+
+together with required follow-up JDK-8380236:
+
+`openjdk/jdk@3a109f49feb19f313632be6a2aa24ba7d9b7269b`.
+
+M3JDK21 treats them as one dependency-closed packet. Linux uses bounded `/proc/self/fd`
+enumeration, macOS uses bounded `proc_pidinfo`, AIX/Windows retain stubs, and VM.info/fatal error
+reporting gains the new diagnostic. The packet is owned by `M3Jdk8359706BackportRecipe` as one
+Java test atom plus one seven-file HotSpot text atom.
+
+Status remains `candidate-adapted` until Linux and macOS build/test evidence, recipe fixed point,
+backport verification and platform compatibility gates pass. See `recipes/jdk-8359706/`.
+
 ## Completion boundary
 
 M3JDK21 backport convergence is complete only when:
