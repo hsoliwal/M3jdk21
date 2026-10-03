@@ -73,7 +73,7 @@ class GenerateRecipeCratesTest(unittest.TestCase):
             candidates, exclusions = self.mod.candidates(
                 repo, 22, selected=None, all_candidates=True
             )
-            self.assertEqual([added, modified], [row.path for row in candidates])
+            self.assertEqual(sorted([added, modified]), [row.path for row in candidates])
             self.assertEqual(
                 [(removed, "TYPED_EXCLUSION_AUTOMATIC_REMOVAL")],
                 exclusions,
