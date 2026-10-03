@@ -12,27 +12,46 @@ import java.util.Objects;
  * is broader than its evidence.
  */
 public final class M3RecipeScopeRegistry {
-    private static final Map<String, M3RecipeScopePolicy> POLICIES = Map.of(
-            "com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe",
-            fixed(M3EditScope.MODULE),
-            "com.synexia.rewrite.M3SegmentedLaneNativeRecipe",
-            fixed(M3EditScope.FILE),
-            "com.m3.rewrite.InstallIndexStringCompatibility",
-            fixed(M3EditScope.MODULE),
-            "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
-            inferred(),
-            "com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe",
-            fixed(M3EditScope.FILE),
-            "com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates",
-            fixed(M3EditScope.FILE),
-            "com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe",
-            fixed(M3EditScope.FILE),
-            "com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe",
-            fixed(M3EditScope.FILE),
-            "com.m3.rewrite.atom.M3PureIntConvergenceRecipe",
-            fixed(M3EditScope.FILE),
-            "com.m3.rewrite.M3Java21ConvergenceRecipe",
-            fixed(M3EditScope.FILE));
+    private static final Map<String, M3RecipeScopePolicy> POLICIES = Map.ofEntries(
+            Map.entry(
+                    "com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe",
+                    fixed(M3EditScope.MODULE)),
+            Map.entry(
+                    "com.synexia.rewrite.M3SegmentedLaneNativeRecipe",
+                    fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.m3.rewrite.InstallIndexStringCompatibility",
+                    fixed(M3EditScope.MODULE)),
+            Map.entry(
+                    "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+                    inferred()),
+            Map.entry(
+                    "com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe",
+                    fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates",
+                    fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe",
+                    fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe",
+                    fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.m3.rewrite.atom.M3PureIntConvergenceRecipe",
+                    fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.m3.rewrite.M3Java21ConvergenceRecipe",
+                    fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe",
+                    inferred()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
+                    inferred()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3VerbatimJavaPairRecipe",
+                    fixed(M3EditScope.FILE)));
 
     private M3RecipeScopeRegistry() {}
 
