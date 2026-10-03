@@ -160,6 +160,17 @@ Its two paths are additive in the inspected JDK 21 target:
 The target preimage for both paths is absent. The change does not alter Java grammar, javac, class
 files or JVM execution semantics. Build/runtime acceptance remains required before promotion.
 
+## Next adapted tooling candidate
+
+JDK-8347112, **Copy nested directories in doc-files by default**, is materialized as a
+Java-21-compatible split candidate from upstream commit
+`b221cb6ba138672802644f37eebf368521a0a6f4`.
+
+The M3 adaptation imports recursive copying by default and wildcard exclusion, but deliberately
+retains Java 21's accepted `-docfilessubdirs` option processing. The packet is owned by
+`M3Jdk8347112BackportRecipe` and remains `candidate-adapted` until focused javadoc build/jtreg and
+recipe fixed-point CI pass. See `recipes/jdk-8347112/`.
+
 ## Completion boundary
 
 M3JDK21 backport convergence is complete only when:
