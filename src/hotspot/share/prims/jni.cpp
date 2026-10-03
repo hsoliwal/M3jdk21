@@ -2159,28 +2159,17 @@ JNI_ENTRY_NO_PRESERVE(const jchar*, jni_GetStringChars(
  HOTSPOT_JNI_GETSTRINGCHARS_ENTRY(env, string, (uintptr_t *) isCopy);
   jchar* buf = nullptr;
   oop s = JNIHandles::resolve_non_null(string);
-  typeArrayOop s_value = java_lang_String::value(s);
-  if (s_value != nullptr || java_lang_String::is_m3_joined(s)) {
-    int s_len = java_lang_String::length(s, s_value);
-    bool is_latin1 = java_lang_String::is_latin1(s);
-    buf = NEW_C_HEAP_ARRAY_RETURN_NULL(jchar, s_len + 1, mtInternal);  // add one for zero termination
-    /* JNI Specification states return null on OOM */
-    if (buf != nullptr) {
-      if (s_len > 0) {
-        if (!is_latin1 && !java_lang_String::is_m3_joined(s)) {
-          ArrayAccess<>::arraycopy_to_native(s_value, (size_t) typeArrayOopDesc::element_offset<jchar>(0),
-                                             buf, s_len);
-        } else {
-          for (int i = 0; i < s_len; i++) {
-            buf[i] = java_lang_String::char_at(s, i);
-          }
-        }
-      }
-      buf[s_len] = 0;
-      //%note jni_5
-      if (isCopy != nullptr) {
-        *isCopy = JNI_TRUE;
-      }
+  int s_len = java_lang_String::length(s);
+  buf = NEW_C_HEAP_ARRAY_RETURN_NULL(jchar, s_len + 1, mtInternal);  // add one for zero termination
+  /* JNI Specification states return null on OOM */
+  if (buf != nullptr) {
+    if (s_len > 0) {
+      java_lang_String::copy_chars(s, 0, s_len, buf);
+    }
+    buf[s_len] = 0;
+    //%note jni_5
+    if (isCopy != nullptr) {
+      *isCopy = JNI_TRUE;
     }
   }
   HOTSPOT_JNI_GETSTRINGCHARS_RETURN(buf);
@@ -2749,22 +2738,11 @@ JNI_ENTRY(void, jni_GetStringRegion(JNIEnv *env, jstring string, jsize start, js
  HOTSPOT_JNI_GETSTRINGREGION_ENTRY(env, string, start, len, buf);
   DT_VOID_RETURN_MARK(GetStringRegion);
   oop s = JNIHandles::resolve_non_null(string);
-  typeArrayOop s_value = java_lang_String::value(s);
-  int s_len = java_lang_String::length(s, s_value);
+  int s_len = java_lang_String::length(s);
   if (start < 0 || len < 0 || start > s_len - len) {
     THROW(vmSymbols::java_lang_StringIndexOutOfBoundsException());
-  } else {
-    if (len > 0) {
-      bool is_latin1 = java_lang_String::is_latin1(s);
-      if (!is_latin1 && !java_lang_String::is_m3_joined(s)) {
-        ArrayAccess<>::arraycopy_to_native(s_value, typeArrayOopDesc::element_offset<jchar>(start),
-                                           buf, len);
-      } else {
-        for (int i = 0; i < len; i++) {
-          buf[i] = java_lang_String::char_at(s, i + start);
-        }
-      }
-    }
+  } else if (len > 0) {
+    java_lang_String::copy_chars(s, start, len, buf);
   }
 JNI_END
 
