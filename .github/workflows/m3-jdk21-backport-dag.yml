@@ -40,6 +40,31 @@ jobs:
         run: |
           mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=com.m3.tooling.dag.M3BackportDagMain             exec:java
 
+      - name: Project sample packet to Camel Airflow and Drools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/m3-projection-smoke
+          cat > target/m3-projection-smoke/packet.tsv <<'EOF'
+          packet_id	atom_id	scope	scope_promotion_approved	work_ref	depends_on
+          ci-projection	java	FILE	false	com.m3.rewrite.SampleJava	
+          ci-projection	text	FILE	false	com.m3.rewrite.SampleText	
+          ci-projection	join	PACKAGE	true	com.m3.rewrite.SampleJoin	java,text
+          EOF
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+            -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain \
+            -Dexec.args="$PWD/target/m3-projection-smoke/packet.tsv $PWD/target/m3-projection-smoke/out" \
+            exec:java
+          test -s target/m3-projection-smoke/out/M3BackportRoutes.java
+          test -s target/m3-projection-smoke/out/m3_backport_dag.py
+          test -s target/m3-projection-smoke/out/m3_backport_rules.drl
+          test -s target/m3-projection-smoke/out/projection.tsv
+          DAG_ROOT="$(tail -n 1 target/m3-projection-smoke/out/projection.tsv | cut -f2)"
+          test "${#DAG_ROOT}" -eq 64
+          grep -F "$DAG_ROOT" target/m3-projection-smoke/out/M3BackportRoutes.java
+          grep -F "$DAG_ROOT" target/m3-projection-smoke/out/m3_backport_dag.py
+          grep -F "$DAG_ROOT" target/m3-projection-smoke/out/m3_backport_rules.drl
+
       - name: Emit backport programme status
         run: |
           mvn -B -ntp -f m3/backports/pom.xml verify
@@ -51,5 +76,6 @@ jobs:
           path: |
             m3/backports/target/program-status.json
             m3/backports/target/program-status.tsv
+            target/m3-projection-smoke/out/**
           if-no-files-found: error
           retention-days: 14
