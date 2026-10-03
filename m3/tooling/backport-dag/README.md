@@ -48,6 +48,49 @@ The default reactor verifies:
 
 Use `-Pm3-extended` to include independently built M3 collection lanes.
 
+## Recipe atom evidence
+
+Mutation scope alone is not enough to admit an M3 recipe atom. A strict packet also supplies a
+companion evidence TSV with one row per atom:
+
+```text
+packet_id
+atom_id
+contract_ref
+documentation_ref
+pattern
+iop_role
+junit_proof_ref
+fixed_point_required
+```
+
+`fixed_point_required` must be `true`. Missing, extra, duplicate or mixed-packet evidence fails
+closed. The evidence manifest receives its own SHA-256 semantic root through
+`M3AtomEvidenceRoot`.
+
+This makes the M3 requirement executable:
+
+```text
+recipe atom
+  -> documented contract
+  -> pattern / IOP role
+  -> JUnit recipe proof
+  -> fixed point
+  -> DAG execution
+```
+
+The legacy one-file packet CLI remains useful for structural inspection. The evidence-bound form is:
+
+```bash
+mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+  exec:java \
+  -Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketMain \
+  -Dexec.args="packet.tsv atom-evidence.tsv"
+```
+
+`M3OrchestrationProjectionMain` also accepts the evidence TSV as an optional third argument and
+emits `atom-evidence.tsv` beside the framework projections.
+
 ## Framework projections
 
 - `adapters/camel/m3-backport-route.yaml`: Camel route projection.
