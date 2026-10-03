@@ -212,6 +212,22 @@ It remains `candidate-adapted` until focused image build, both
 `SecurityPropertiesTest.java` and existing `SystemPropertiesTest.java`, recipe fixed point and
 backport verification pass. See `recipes/jdk-8364182/`.
 
+## Next adapted security-library candidate
+
+JDK-8374808, **Add KeyStore creation-date Instant methods**, is split from upstream commit
+
+`264fdc5b4ed5f4e35168048533196e670c3dda6c`.
+
+M3JDK21 imports only the Java-21-compatible additive API leaf:
+`KeyStore.getCreationInstant(String)` and the default
+`KeyStoreSpi.engineGetCreationInstant(String)` adapter. Existing provider implementations keep
+their Java 21 `Date` storage and persistent-format behavior; the broader upstream provider
+Date-to-Instant storage rewrite is explicitly outside this packet.
+
+The packet is owned by `M3Jdk8374808BackportRecipe` and remains `candidate-adapted` until
+focused `java.base` build, `CreationInstant.java` jtreg, existing KeyStore compatibility tests,
+recipe JUnit and fixed-point verification pass. See `recipes/jdk-8374808/`.
+
 ## Completion boundary
 
 M3JDK21 backport convergence is complete only when:
