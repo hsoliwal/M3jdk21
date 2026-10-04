@@ -1,0 +1,11 @@
+field	value
+repository	hsoliwal/M3jdk21
+base	c7a47ead1ea406ff79e5feca0d7c59005ba8d511
+base_tree	55548e15b13da792900ab71143cd862bafd967b0
+mode	candidate-apply
+workers	1
+shards	1
+local_java	Debian OpenJDK 21.0.11
+maven	absent
+canonical_writes	false
+whole_repository_execution	false

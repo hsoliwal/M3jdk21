@@ -1,0 +1,10 @@
+id	status	exit
+TYPE_FRAMEWORK	PENDING	Exact-head full migration-recipes clean verify and real MetaTest plus original repair tests
+TYPE_COVERAGE	PENDING	Actual unchanged JaCoCo gate and reports
+JNI_CONSTRUCTORS	OPEN	Full-read existing jni.cpp; reuse Handle helpers; build and JNI tests without nested CHECK macro
+BACKING_CLOSE	OPEN	Review all implementers/consumers before any close-contract change; no warning suppression
+JDK_BUILD_JTREG	OPEN	Full modified JDK with original build system and real jtreg
+BACKPORT_UNIVERSE	OPEN	Existing authoritative JEP/JBS/non-JEP catalogue with compatible residue proven closed
+A3	OPEN	Original-build normalization and atom/pattern/IOP/doc convergence, not inventory-only success
+PACKS	OPEN	Actual JMOD/application dependency and native/UI acceptance
+NEBULA	HOLD	Existing donor pipeline needs its own real Maven/Tycho/dependency/source/UI proof

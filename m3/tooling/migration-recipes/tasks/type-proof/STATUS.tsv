@@ -1,0 +1,11 @@
+gate	status	detail
+source_inventory	PASS	Pinned PR89 c7a47ead1ea406ff79e5feca0d7c59005ba8d511; existing typed-assignment donor reused
+source_diff	PASS	Four source lines changed; no setter removed or reordered
+java_syntax	PASS	Two sources parsed by actual JDK21 compiler tree API; not type-linked
+resource_seals	PASS	14 candidate files; YAML/manifests/postimages/whitespace checked
+maven_availability	BLOCKED	mvn absent; invocation exit 127
+production_framework_compile	NOT_RUN	Actual OpenRewrite dependency graph required
+junit_scheduler	NOT_RUN	Four new tests and two existing parent tests are required by workflow
+jacoco	NOT_RUN	Existing thresholds/includes untouched; no 99-percent claim
+hosted_workflow	PENDING	Must inspect exact published head and executed jobs
+full_jdk_programme	OPEN	This prerequisite is not whole-JDK completion

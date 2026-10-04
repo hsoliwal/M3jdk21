@@ -1,0 +1,7 @@
+owner	identity	role
+PR89	c7a47ead1ea406ff79e5feca0d7c59005ba8d511	Immutable parent
+M3Jdk21HashPinnedSnapshotRecipe	d2b546e03bc181a244978c1c3d58bc4a93faaad4	Existing target
+M3HashPinnedJavaSnapshotRecipe	1c960db1d2f2f3cbf9acdfb9162e265597dfa03c	Existing typed assignment and installer reused
+M3Jdk21HashPinnedTextSnapshotRecipe	a2e8c916208b563517e51b738744a05357e633aa	Existing workflow/document installer reused
+m3-tooling-recipes.yml	d95c969805dff1f489472fb89b1c4564b3beeb5b	Existing full-module verification owner
+OpenRewrite	8.17.1	Actual Tree and SourceFile generic method contracts inspected

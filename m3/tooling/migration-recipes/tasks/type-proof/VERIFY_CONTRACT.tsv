@@ -1,0 +1,7 @@
+order	gate	authority
+1	diff and source/resource identities	Required
+2	lint/syntax	Required; syntax alone not full lint
+3	actual Maven dependency compilation	Required; blocked locally
+4	actual JUnit/OpenRewrite scheduler and existing JaCoCo	Required; no exclusions added
+5	modified JDK/native/jtreg and dependent packets	Required separately
+6	serial reviewed promotion	No automatic authority from this candidate

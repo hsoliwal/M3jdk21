@@ -1,0 +1,10 @@
+path	role
+README.md	Docs-first design and scope
+STATUS.tsv	Measured/not-run gates
+FINAL_REPORT.md	Exact implementation and limits
+RUN_CONTEXT.tsv	Pinned input and execution context
+PROVENANCE.tsv	Existing owners and source pins
+VERIFY_CONTRACT.tsv	Ordered proof obligations
+OUTPUT_CONTRACT.tsv	Artifact custody
+ACTION_QUEUE.tsv	Unfinished programme exits
+TASK_PACKET.json	Mutation scope and locks

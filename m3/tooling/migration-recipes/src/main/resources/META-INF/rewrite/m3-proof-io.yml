@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.ProofIO
+displayName: Retain exact source input and real recipe reports
+description: Source-sealed workflow and task documentation only. Execute from the repository root. Source archives are inputs, not proof, and no verification threshold is lowered.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: type-proof

@@ -1,0 +1,127 @@
+name: M3 OpenRewrite recipe proof
+
+on:
+  push:
+    branches:
+      - master
+      - "m3/**"
+    paths:
+      - "m3/tooling/migration-recipes/**"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - "m3/tooling/emit-java21-convergence-proof.py"
+      - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
+      - ".github/workflows/m3-tooling-recipes.yml"
+  pull_request:
+    paths:
+      - "m3/tooling/migration-recipes/**"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - "m3/tooling/emit-java21-convergence-proof.py"
+      - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
+      - ".github/workflows/m3-tooling-recipes.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-recipes:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - name: Fetch exact workflow head without reusable actions
+        shell: bash
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          test -n "$HEAD_SHA"
+          curl --fail --location --retry 3 \
+            "https://codeload.github.com/${GITHUB_REPOSITORY}/tar.gz/${HEAD_SHA}" \
+            -o "$RUNNER_TEMP/repo.tar.gz"
+          mkdir -p "$RUNNER_TEMP/repo"
+          tar -xzf "$RUNNER_TEMP/repo.tar.gz" -C "$RUNNER_TEMP/repo" --strip-components=1
+          printf 'REPO=%s\n' "$RUNNER_TEMP/repo" >> "$GITHUB_ENV"
+
+      - name: Seal source input for reproducible continuation
+        shell: bash
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          mkdir "$RUNNER_TEMP/m3-source-input"
+          cp "$RUNNER_TEMP/repo.tar.gz" "$RUNNER_TEMP/m3-source-input/source.tar.gz"
+          printf 'source_head=%s\nclassification=INPUT_NOT_PROOF\n' "$HEAD_SHA" > "$RUNNER_TEMP/m3-source-input/INPUT.txt"
+          (cd "$RUNNER_TEMP/m3-source-input" && sha256sum source.tar.gz > source.sha256)
+
+      - name: Save exact source input
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-jdk-source-${{ github.run_id }}
+          path: ${{ runner.temp }}/m3-source-input
+          if-no-files-found: error
+          retention-days: 7
+
+      - name: Prepare isolated pinned JDK 21
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 \
+            'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21%2B35/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz' \
+            -o "$RUNNER_TEMP/jdk21.tar.gz"
+          printf '%s  %s\n' \
+            '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6' \
+            "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -
+          tar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"
+          printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
+          printf '%s\n' "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
+
+      - name: Maven JUnit OpenRewrite proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -version
+          mvn -version
+          mvn -B -ntp -f "$REPO/m3/tooling/migration-recipes/pom.xml" clean verify
+
+      - name: Require executed metadata and repair tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - "$REPO" <<'PY_TESTS'
+          import pathlib, sys, xml.etree.ElementTree as ET
+          reports = pathlib.Path(sys.argv[1]) / "m3/tooling/migration-recipes/target/surefire-reports"
+          for name, count in (("MetaTest", 4), ("M3Jdk21HashPinnedSnapshotCompileRepairRecipeTest", 2)):
+              result = ET.parse(reports / ("TEST-com.m3.rewrite.backport." + name + ".xml")).getroot()
+              if int(result.get("tests", "0")) < count or any(int(result.get(key, "0")) for key in ("errors", "failures", "skipped")):
+                  raise SystemExit("Missing or nonpassing proof: " + name)
+          print("M3_TYPE_PROOF_TESTS_PASS")
+          PY_TESTS
+
+      - name: Emit M3 convergence proof artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 "$REPO/m3/tooling/emit-java21-convergence-proof.py" \
+            --repo "$REPO" \
+            --out "$RUNNER_TEMP/m3-java21-convergence-proof"
+          cat "$RUNNER_TEMP/m3-java21-convergence-proof/FINAL_REPORT.md" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload M3 convergence proof
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-java21-convergence-proof-${{ github.run_id }}
+          path: ${{ runner.temp }}/m3-java21-convergence-proof
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Save actual test and coverage outputs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-recipe-outputs-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/repo/m3/tooling/migration-recipes/target/surefire-reports
+            ${{ runner.temp }}/repo/m3/tooling/migration-recipes/target/site/jacoco
+            ${{ runner.temp }}/repo/m3/tooling/migration-recipes/target/jacoco.exec
+          if-no-files-found: warn
+          retention-days: 14
