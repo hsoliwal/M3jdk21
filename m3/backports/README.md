@@ -169,6 +169,33 @@ semantics, so they require a separately reviewed native/Git/build-file mechanism
 fake PlainText success.
 
 
+## Released-change content-addressed FILE atoms
+
+The complete 14,948-commit compatibility queue can also be projected into reusable exact FILE
+atoms without duplicating identical transformations across upstream commits.
+
+`released_change_atom_planner.py` consumes `COMPATIBILITY_QUEUE.tsv` and:
+
+- preserves every row as `PENDING_COMPATIBILITY_PROOF`;
+- selects explicit risk cohorts without reordering the canonical queue;
+- compares JDK21 directly to the final GA tree for each selected release;
+- computes exact Java/text preimage and postimage hashes;
+- creates one content-addressed FILE atom per unique
+  `path + kind + beforeSHA + afterSHA`;
+- emits commit -> atom edges, so the same exact transformation can serve multiple upstream commits;
+- records mode/encoding/removal exclusions;
+- records transient upstream paths that exist in neither JDK21 nor the final GA tree;
+- records final-GA no-delta paths instead of fabricating work.
+
+The default proof workflow projects only `LOW` and `LOW_MEDIUM` rows first (build, test and
+tooling-oriented early candidates). The planner supports explicit MEDIUM/HIGH/CRITICAL cohorts,
+but those remain separate passes so VM/compiler/security/compatibility work is not accidentally
+treated as low-risk mechanical replay.
+
+A selected atom can later be materialized into the existing exact one-file OpenRewrite crate with
+`--materialize-release --materialize-path --materialize-out`. Materialization still grants no
+compatibility or promotion authority.
+
 ## Recipe DAG control plane
 
 Backport execution is composed from small immutable recipe/work atoms through the framework-neutral
