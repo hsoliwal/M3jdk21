@@ -19,6 +19,8 @@ from pathlib import Path
 import re
 from typing import Iterable, Mapping, Sequence
 
+import release_jep_authority
+
 SCHEMA = "m3jdk21-backport-recipe-dag/v1"
 DAG_ID = "m3jdk21-backport-queue"
 VALID_SCOPES = {
@@ -391,11 +393,18 @@ def parse_args() -> argparse.Namespace:
         "--root-output", type=Path, default=Path("m3/backports/BACKPORT_RECIPE_DAG_ROOT.txt")
     )
     parser.add_argument("--check", action="store_true")
+    parser.add_argument(
+        "--authority-root",
+        type=Path,
+        help="verify canonical RELEASE_JEP_AUTHORITY/catalogue/queue before exporting",
+    )
     return parser.parse_args()
 
 
 def main() -> None:
     args = parse_args()
+    if args.authority_root is not None:
+        release_jep_authority.verify_repository_authority(args.authority_root.resolve())
     text, receipt = build(args.queue, args.passes, args.catalogue)
     write_or_check(args.output, text, args.check)
     write_or_check(args.root_output, receipt, args.check)
