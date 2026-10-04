@@ -1,11 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.rewrite.convergence;
 
-import com.m3.rewrite.M3Java21ConvergenceRecipe;
-import com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe;
-import com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe;
-import com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates;
-import com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -125,49 +120,42 @@ public final class M3Jdk21SourceConvergenceMain {
                 return hold(checkedPath, beforeHash, parsed.message());
             }
 
-            Stage inventory =
-                    apply(
-                            new M3InventoryPureIntAtomCandidates(),
-                            parsed.source(),
-                            1);
-            if (inventory.hold()) {
-                return hold(checkedPath, beforeHash, inventory.message());
-            }
-            if (inventory.changed()) {
-                return hold(checkedPath, beforeHash, "inventory recipe mutated source");
-            }
+            SourceFile current = parsed.source();
+            boolean atomizationChanged = false;
+            boolean patternizationChanged = false;
+            boolean documentationChanged = false;
 
-            Stage atomized =
-                    apply(
-                            new M3AtomizePureIntReturnRecipe(),
-                            inventory.source(),
-                            1);
-            if (atomized.hold()) {
-                return hold(checkedPath, beforeHash, atomized.message());
-            }
-
-            Stage patternized =
-                    apply(
-                            new M3PatternizePureIntAtomRecipe(),
-                            atomized.source(),
-                            1);
-            if (patternized.hold()) {
-                return hold(checkedPath, beforeHash, patternized.message());
-            }
-
-            Stage documented =
-                    apply(
-                            new M3DocumentPureIntAtomRecipe(),
-                            patternized.source(),
-                            1);
-            if (documented.hold()) {
-                return hold(checkedPath, beforeHash, documented.message());
+            for (M3FileConvergenceRecipeDag.Atom atom : M3FileConvergenceRecipeDag.atoms()) {
+                Stage stage = apply(atom.recipe(), current, 1);
+                if (stage.hold()) {
+                    return hold(
+                            checkedPath,
+                            beforeHash,
+                            atom.id() + ": " + stage.message());
+                }
+                if (atom.phase() == M3FileConvergenceRecipeDag.Phase.INVENTORY
+                        && stage.changed()) {
+                    return hold(
+                            checkedPath,
+                            beforeHash,
+                            atom.id() + ": inventory recipe mutated source");
+                }
+                if (stage.changed()) {
+                    switch (atom.phase()) {
+                        case INVENTORY -> throw new IllegalStateException(
+                                "inventory mutation escaped fail-closed gate");
+                        case ATOMIZATION -> atomizationChanged = true;
+                        case PATTERNIZATION -> patternizationChanged = true;
+                        case DOCUMENTATION -> documentationChanged = true;
+                    }
+                }
+                current = stage.source();
             }
 
             Stage fixedPoint =
                     apply(
-                            new M3Java21ConvergenceRecipe(),
-                            documented.source(),
+                            M3FileConvergenceRecipeDag.fixedPointRecipe(),
+                            current,
                             8);
             if (fixedPoint.hold()) {
                 return hold(checkedPath, beforeHash, fixedPoint.message());
@@ -179,15 +167,15 @@ public final class M3Jdk21SourceConvergenceMain {
                         "composite convergence changed the staged postimage");
             }
 
-            String after = documented.source().printAll();
+            String after = current.printAll();
             boolean changed = !before.equals(after);
             return new FileReceipt(
                     checkedPath,
                     beforeHash,
                     sha256(after),
-                    atomized.changed(),
-                    patternized.changed(),
-                    documented.changed(),
+                    atomizationChanged,
+                    patternizationChanged,
+                    documentationChanged,
                     true,
                     changed ? "CONVERGED_CHANGED" : "CONVERGED_UNCHANGED",
                     "",
