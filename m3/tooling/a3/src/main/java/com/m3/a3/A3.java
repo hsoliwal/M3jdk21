@@ -25,6 +25,10 @@ public final class A3 {
                     A3Inv.write(
                             options.root(),
                             options.out("m3/build/a3/inventory.tsv"));
+            case "cat" ->
+                    A3Cat.write(
+                            options.root(),
+                            options.out("m3/build/a3/catalogue.tsv"));
             case "plan" ->
                     A3Plan.write(
                             options.root(),
@@ -44,7 +48,7 @@ public final class A3 {
 
     private static void usage() {
         System.err.println(
-                "A3: inv|plan|apply [--root PATH] [--out PATH] "
+                "A3: inv|cat|plan|apply [--root PATH] [--out PATH] "
                         + "[--file PATH ...] [--list PATH]");
     }
 

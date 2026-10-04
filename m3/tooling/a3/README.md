@@ -16,6 +16,16 @@ From this module directory:
       -Dexec.mainClass=com.m3.a3.A3 \
       -Dexec.args="inv --root ../../.. --out m3/build/a3/inventory.tsv"
 
+## Recipe catalogue
+
+    mvn -B -ntp exec:java \
+      -Dexec.mainClass=com.m3.a3.A3 \
+      -Dexec.args="cat --root ../../.. --out m3/build/a3/catalogue.tsv"
+
+A3Cat freezes the executable M3 recipe DAG and official OpenRewrite recipe/donor evidence before
+source transformation. Catalogue membership never implies activation. Source-available donors are
+mechanically restricted to REFERENCE_ONLY.
+
 ## Plan
 
     mvn -B -ntp exec:java \
