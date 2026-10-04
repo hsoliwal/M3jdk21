@@ -112,16 +112,61 @@ The upstream-inventory workflow exports:
 `file_delta_inventory.py` compares the entire JDK 21 GA tree verbatim against each released donor
 GA tree and records SAME / MODIFIED / ADDED / REMOVED for the full path union.
 
-For changed Java source, `generate_recipe_crates.py` can create bounded <=256-target,
-hash-pinned OpenRewrite candidate crates. The generator:
+For changed Java source, `generate_recipe_crates.py` creates bounded hash-pinned
+OpenRewrite candidate crates. The generator:
 
 - reads exact baseline/donor bytes from Git;
 - requires strict UTF-8 round-trip for Java source;
 - records SHA-256 preimages and postimages;
 - emits typed exclusions rather than silently deleting/removing;
+- accepts `--crate-size 1..256`;
 - keeps generated crates `CANDIDATE_UNVERIFIED` until Java-21 compatibility proof succeeds.
 
-This is the bridge from whole-release inventory to per-file mechanical recipe work.
+Use `--crate-size 1` when each selected file is independently behavior/contract preserving and
+therefore qualifies as a true FILE-scope recipe atom. Those one-file crates can occupy the same
+parallel DAG layer.
+
+Do **not** force one-file crates for a semantically coupled feature merely to increase apparent
+parallelism. If compatibility or contract correctness depends on coordinated files, keep the
+smallest honest composite crate and declare the resulting PACKAGE/MODULE/MULTI_MODULE promotion in
+the packet DAG.
+
+Example file-atomic generation:
+
+```bash
+python3 m3/backports/generate_recipe_crates.py \
+  --repo . \
+  --release 27 \
+  --paths-file target/selected-java-paths.txt \
+  --crate-size 1 \
+  --out target/file-atomic-crates
+```
+
+This is the bridge from whole-release inventory to genuinely per-file mechanical recipe work while
+preserving honest scope for coupled changes.
+
+For JDK tooling/build/resource changes that are not Java compilation units, opt into strict UTF-8
+text candidates:
+
+```bash
+python3 m3/backports/generate_recipe_crates.py \
+  --repo . \
+  --release 24 \
+  --paths-file target/selected-jdk24-paths.txt \
+  --crate-size 1 \
+  --include-text \
+  --out target/file-atomic-crates
+```
+
+With `--include-text`, the generator keeps Java targets under
+`M3Jdk21HashPinnedSnapshotRecipe` and emits non-Java UTF-8 targets under the existing
+`M3Jdk21HashPinnedTextSnapshotRecipe`. Mixed runs use separate deterministic Java/text crate
+names and compose them under one generated candidate recipe.
+
+The text lane fails closed into `EXCLUSIONS.tsv` for non-UTF-8 payloads, removals, executable or
+other file-mode changes. OpenRewrite byte replay cannot truthfully preserve those filesystem
+semantics, so they require a separately reviewed native/Git/build-file mechanism rather than a
+fake PlainText success.
 
 
 ## Recipe DAG control plane

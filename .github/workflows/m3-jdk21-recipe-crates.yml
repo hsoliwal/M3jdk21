@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "m3/jdk21-compatible-backport-convergence-20261003"
+      - "m3/file-atomic-recipe-generator-20261004"
     paths:
       - "m3/backports/file_delta_inventory.py"
       - "m3/backports/generate_recipe_crates.py"
