@@ -171,8 +171,8 @@ public final class M3A3CatalogueRecipe extends ScanningRecipe<M3A3CatalogueRecip
                     return tree;
                 }
                 SourceFile postimage = inventory.postimages.get(path);
-                return postimage.withId(source.getId())
-                        .withSourcePath(source.getSourcePath())
+                SourceFile replacement = (SourceFile) postimage.withId(source.getId());
+                return replacement.withSourcePath(source.getSourcePath())
                         .withMarkers(source.getMarkers())
                         .withFileAttributes(source.getFileAttributes())
                         .withCharset(source.getCharset())
