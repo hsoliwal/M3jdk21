@@ -85,6 +85,24 @@ Backport `apply` may consume a Java target only when the target's current preima
 non-HOLD SOURCE_CONVERGENCE row with `fixedPoint=true`. The product delta is still separately
 reviewed and verified; baseline convergence is a prerequisite, not semantic equivalence proof.
 
+The convergence receipt may then be materialized into a detached worktree with:
+
+    python3 m3/backports/materialize_source_convergence.py \
+      . \
+      m3/tooling/migration-recipes/target/m3-jdk-source-convergence/SOURCE_CONVERGENCE.tsv \
+      /tmp/m3-normalized-jdk \
+      --copy
+
+Only fixed-point rows are admitted. Changed Java candidates replace their exact preimages in the
+detached worktree; unchanged files retain the canonical bytes. The tool writes
+`m3-normalized-baseline.tsv` plus a semantic root. Canonical source remains untouched.
+
+For absorption, the same Java-21 convergence executor can be run against a newer-JDK donor checkout.
+A donor Java file that parses and converges under the Java-21 recipe set is eligible for normalized
+comparison. A file that requires post-21 syntax/type-system semantics becomes HOLD and remains in the
+language/incompatible review lane. Thus normalization may simplify compatible donor/target diffs
+without pretending incompatible language features are Java-21 compatible.
+
 ## Atomization and patternization
 
 The FILE semantic inventory produces nested behavioral atoms for admitted Java constructs such as:
