@@ -1,0 +1,8 @@
+# path	kind	beforeGitBlob	afterGitBlob	resource
+m3/docs/a3.md	TEXT	fd701b718e33b7ae4e4b09362029ff090e0bdc67	dd7cdbdb054728372ca2d51b99c35156904f203a	a3.md.after
+m3/docs/openrewrite-recipe-catalogue.md	TEXT	ABSENT	06c3f31f9fdad38ce882ee6a65508dff87736aa7	openrewrite-recipe-catalogue.md.after
+m3/tooling/a3/README.md	TEXT	9c382c6b66289a8241b9ff65805240f315d2147e	91468745170c01f4ecbce3a9351ff14b56184fcd	README.md.after
+m3/tooling/a3/src/main/java/com/m3/a3/A3.java	JAVA	cc8473795b7023cce15a604b3c7164531f0e49fc	0c11a3eaf84c6aba7cc78ce38776af49c6dbdab7	A3.java.after
+m3/tooling/a3/src/main/java/com/m3/a3/A3Cat.java	JAVA	ABSENT	be75e870072fe803513d085c4ba04a9783a72f50	A3Cat.java.after
+m3/tooling/a3/src/main/resources/com/m3/a3/OPENREWRITE_RECIPES.tsv	TEXT	ABSENT	6d75b139a20304c4faf91deae1c9bcd4cf36ef9e	OPENREWRITE_RECIPES.tsv.after
+m3/tooling/a3/src/test/java/com/m3/a3/A3CatTest.java	JAVA	ABSENT	c3cd305a33a5f17574310919a7cbfcce4a1e40bd	A3CatTest.java.after

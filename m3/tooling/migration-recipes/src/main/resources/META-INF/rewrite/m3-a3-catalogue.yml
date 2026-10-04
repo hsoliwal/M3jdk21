@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.M3A3OpenRewriteCatalogue
+displayName: M3 A3 OpenRewrite recipe catalogue
+description: >-
+  Installs the source-sealed A3 recipe/provenance catalogue, documentation and focused proof.
+recipeList:
+  - com.m3.rewrite.M3A3CatalogueRecipe
