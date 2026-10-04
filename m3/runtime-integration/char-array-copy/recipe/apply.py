@@ -178,12 +178,16 @@ def apply(target=ROOT, reverse=False, check=False):
             states.add("before")
         elif actual == hashes["after"]:
             states.add("after")
+        elif actual in hashes.get("superseded", []):
+            states.add("superseded")
         else:
             raise ValueError("source drift: " + name)
         files[name] = (path, data)
     if len(states) != 1 or set(files) != set(REPLACEMENTS):
         raise ValueError("mixed source state")
     state = states.pop()
+    if state == "superseded":
+        return state
     desired = "before" if reverse else "after"
     if state == desired or check:
         return state
