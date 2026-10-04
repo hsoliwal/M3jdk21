@@ -21,6 +21,7 @@ import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.Parser;
 import org.openrewrite.Result;
 import org.openrewrite.SourceFile;
+import org.openrewrite.config.Environment;
 import org.openrewrite.internal.InMemoryLargeSourceSet;
 import org.openrewrite.java.JavaParser;
 
@@ -66,6 +67,18 @@ final class M3Jep485StreamGatherersBackportRecipeTest {
         assertEquals(M3ContractMode.EXPLICIT_CONTRACT_CHANGE, policy.contractMode());
         assertEquals(1, recipe.maxCycles());
         assertTrue(recipe.getTags().contains("jdk24-ga"));
+    }
+
+    @Test
+    void namedRecipeIsDiscoverable() {
+        var activated =
+                Environment.builder()
+                        .scanRuntimeClasspath("com.m3.rewrite")
+                        .build()
+                        .activateRecipes("com.m3.jdk21.Jep485StreamGatherers");
+        assertEquals(
+                "com.m3.jdk21.Jep485StreamGatherers",
+                activated.getRecipeList().getFirst().getName());
     }
 
     @Test
