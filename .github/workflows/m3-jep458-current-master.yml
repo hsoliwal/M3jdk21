@@ -90,7 +90,7 @@ jobs:
         run: |
           set -euo pipefail
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends             autoconf make gcc g++ zip unzip             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev             libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
+          sudo apt-get install -y --no-install-recommends             autoconf make gcc g++ zip unzip             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev             libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
 
       - name: Configure Java 21-compatible JDK
         shell: bash
