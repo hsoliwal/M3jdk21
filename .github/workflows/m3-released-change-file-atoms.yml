@@ -28,6 +28,17 @@ on:
       - "m3/backports/test_file_delta_inventory.py"
       - ".github/workflows/m3-released-change-file-atoms.yml"
   workflow_dispatch:
+    inputs:
+      risks:
+        description: "Comma-separated risk cohorts: LOW,LOW_MEDIUM,MEDIUM,HIGH,CRITICAL"
+        required: false
+        default: "LOW,LOW_MEDIUM"
+        type: string
+      max_items:
+        description: "Optional bounded eligible queue prefix; empty means all selected-risk rows"
+        required: false
+        default: ""
+        type: string
 
 permissions:
   contents: read
@@ -71,12 +82,29 @@ jobs:
           python3 m3/backports/inventory.py             --repo "$UPSTREAM"             --out target/released-change-atoms/UPSTREAM_CHANGES.tsv
           python3 m3/backports/compatibility_queue.py             --inventory target/released-change-atoms/UPSTREAM_CHANGES.tsv             --out target/released-change-atoms/COMPATIBILITY_QUEUE.tsv
 
-      - name: Project LOW and LOW_MEDIUM queue rows into reusable FILE atoms
+      - name: Project selected risk cohorts into reusable FILE atoms
         shell: bash
+        env:
+          DISPATCH_RISKS: ${{ inputs.risks }}
+          DISPATCH_MAX_ITEMS: ${{ inputs.max_items }}
         run: |
           set -euo pipefail
-          python3 m3/backports/released_change_atom_planner.py             --repo "$UPSTREAM"             --queue target/released-change-atoms/COMPATIBILITY_QUEUE.tsv             --risk LOW             --risk LOW_MEDIUM             --out target/released-change-atoms/low-risk
-          cat target/released-change-atoms/low-risk/SUMMARY.tsv
+          risk_spec="${DISPATCH_RISKS:-LOW,LOW_MEDIUM}"
+          IFS=',' read -r -a risk_values <<< "$risk_spec"
+          args=()
+          for risk in "${risk_values[@]}"; do
+            test -n "$risk"
+            args+=(--risk "$risk")
+          done
+          if [[ -n "${DISPATCH_MAX_ITEMS:-}" ]]; then
+            args+=(--max-items "$DISPATCH_MAX_ITEMS")
+          fi
+          python3 m3/backports/released_change_atom_planner.py \
+            --repo "$UPSTREAM" \
+            --queue target/released-change-atoms/COMPATIBILITY_QUEUE.tsv \
+            "${args[@]}" \
+            --out target/released-change-atoms/selected
+          cat target/released-change-atoms/selected/SUMMARY.tsv
 
       - name: Prove denominator and authority remain intact
         shell: bash
@@ -92,12 +120,12 @@ jobs:
               delimiter="\t",
           ))
           status = list(csv.DictReader(
-              Path("target/released-change-atoms/low-risk/PACKET_STATUS.tsv")
+              Path("target/released-change-atoms/selected/PACKET_STATUS.tsv")
                   .open(encoding="utf-8", newline=""),
               delimiter="\t",
           ))
           atoms = list(csv.DictReader(
-              Path("target/released-change-atoms/low-risk/FILE_ATOMS.tsv")
+              Path("target/released-change-atoms/selected/FILE_ATOMS.tsv")
                   .open(encoding="utf-8", newline=""),
               delimiter="\t",
           ))
@@ -134,7 +162,7 @@ jobs:
       - name: Upload released-change FILE-atom census
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: m3-released-change-low-risk-file-atoms-${{ github.run_id }}
+          name: m3-released-change-file-atoms-${{ github.run_id }}
           path: target/released-change-atoms
           if-no-files-found: error
           retention-days: 30
