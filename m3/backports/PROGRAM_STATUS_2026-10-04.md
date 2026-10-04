@@ -9,8 +9,10 @@ Regenerate repository-owned counts with:
 
 ## Released JEP denominator
 
-The JDK 22–27 catalogue contains **82 JEP rows**. The catalogue is an admission/review denominator,
+The JDK 22–27 catalogue contains **85 JEP rows**. The catalogue is an admission/review denominator,
 not implementation evidence.
+
+A release-authority cross-check on 2026-10-04 found and restored three omitted released JEPs: JEP 404 and JEP 483 from JDK 24, plus JEP 521 from JDK 25. `RELEASE_JEP_AUTHORITY.tsv` is now the fail-closed release-feature denominator for JDK 22–26; JDK 27 remains an explicitly mutable in-development snapshot.
 
 Language/source-semantics removals and incompatible API/runtime removals remain explicit rejects or
 holds. Final/additive tooling, library, serviceability, runtime and VM changes remain candidates
