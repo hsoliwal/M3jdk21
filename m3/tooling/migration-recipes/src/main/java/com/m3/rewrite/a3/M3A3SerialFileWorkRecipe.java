@@ -93,7 +93,6 @@ public final class M3A3SerialFileWorkRecipe
     @Override
     public Collection<? extends SourceFile> generate(
             Inventory inventory,
-            Collection<SourceFile> generatedInThisCycle,
             ExecutionContext context) {
         if (!inventory.active) return List.of();
         requireAdmissible(inventory);
