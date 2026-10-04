@@ -317,6 +317,91 @@ def verify_keystore_instant_8374808_backport(root: Path) -> None:
                 f"provider-storage rewrite escaped compatibility leaf: {forbidden}"
             )
 
+
+JDK_8359706_COMMIT = "b0831572e2cd9dbff9ee2abcdf81a493ddcecc7e"
+JDK_8380236_COMMIT = "3a109f49feb19f313632be6a2aa24ba7d9b7269b"
+
+
+def verify_open_fd_count_8359706_backport(root: Path) -> None:
+    rows = read_tsv(root / "m3/backports/recipes/jdk-8359706/adaptation.tsv")
+    if len(rows) != 8:
+        raise AssertionError(
+            f"expected 8 JDK-8359706 adaptation rows, found {len(rows)}"
+        )
+
+    by_target = {row["target_path"]: row for row in rows}
+    if len(by_target) != len(rows):
+        raise AssertionError("duplicate JDK-8359706 target path")
+
+    for row in rows:
+        if row["upstream_commit"] != JDK_8359706_COMMIT:
+            raise AssertionError(
+                f"unexpected JDK-8359706 donor commit for {row['target_path']}"
+            )
+        path = root / row["target_path"]
+        if not path.is_file():
+            raise AssertionError(
+                f"missing JDK-8359706 target: {row['target_path']}"
+            )
+        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        if actual != row["target_sha256"]:
+            raise AssertionError(
+                f"JDK-8359706 target drift for {row['target_path']}: "
+                f"expected {row['target_sha256']}, actual {actual}"
+            )
+        if row["baseline_sha256"] == row["target_sha256"]:
+            raise AssertionError(
+                f"JDK-8359706 row has no delta: {row['target_path']}"
+            )
+
+    seeds = read_tsv(root / "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv")
+    seed = next((row for row in seeds if row["jbs"] == "JDK-8359706"), None)
+    if seed is None:
+        raise AssertionError("JDK-8359706 missing from upstream seed")
+    if seed["upstream_commit"] != JDK_8359706_COMMIT:
+        raise AssertionError("JDK-8359706 seed donor commit drift")
+    if seed["disposition"] != "candidate-adapted":
+        raise AssertionError(
+            f"JDK-8359706 unexpected disposition: {seed['disposition']}"
+        )
+
+    linux = (root / "src/hotspot/os/linux/os_linux.cpp").read_text(encoding="utf-8")
+    bsd = (root / "src/hotspot/os/bsd/os_bsd.cpp").read_text(encoding="utf-8")
+    bsd_hpp = (root / "src/hotspot/os/bsd/os_bsd.hpp").read_text(encoding="utf-8")
+    aix = (root / "src/hotspot/os/aix/os_aix.cpp").read_text(encoding="utf-8")
+    windows = (root / "src/hotspot/os/windows/os_windows.cpp").read_text(encoding="utf-8")
+    os_hpp = (root / "src/hotspot/share/runtime/os.hpp").read_text(encoding="utf-8")
+    vm_error = (root / "src/hotspot/share/utilities/vmError.cpp").read_text(encoding="utf-8")
+    test = (root / "test/jdk/sun/tools/jcmd/TestJcmdSanity.java").read_text(encoding="utf-8")
+    packet_readme = (
+        root / "m3/backports/recipes/jdk-8359706/README.md"
+    ).read_text(encoding="utf-8")
+
+    if 'opendir("/proc/self/fd")' not in linux:
+        raise AssertionError("Linux descriptor counter missing")
+    if "Open File Descriptors: unknown" not in linux:
+        raise AssertionError("Linux procfs fallback missing")
+    if "#include <libproc.h>" not in bsd or "proc_pidinfo(" not in bsd:
+        raise AssertionError("macOS libproc descriptor counter missing")
+    if "precond(buflen >= sizeof(struct proc_fdinfo))" not in bsd:
+        raise AssertionError("JDK-8380236 macOS build repair missing")
+    if "print_open_file_descriptors" not in bsd_hpp:
+        raise AssertionError("macOS scratch-buffer contract missing")
+    if "File descriptor counting not implemented on AIX" not in aix:
+        raise AssertionError("AIX compatibility stub missing")
+    if "File descriptor counting not supported on Windows" not in windows:
+        raise AssertionError("Windows compatibility stub missing")
+    if "static void print_open_file_descriptors(outputStream* st);" not in os_hpp:
+        raise AssertionError("shared OS diagnostic contract missing")
+    if vm_error.count("print_open_file_descriptors") < 2:
+        raise AssertionError("VM.info/hs_err descriptor output join missing")
+    if "8359706 8380236" not in test or "Open File Descriptors:" not in test:
+        raise AssertionError("focused jcmd regression proof missing")
+    if JDK_8380236_COMMIT not in packet_readme:
+        raise AssertionError("macOS follow-up provenance missing")
+
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -337,10 +422,11 @@ def main() -> int:
     verify_javadoc_8347112_backport(root)
     verify_security_properties_8364182_backport(root)
     verify_keystore_instant_8374808_backport(root)
+    verify_open_fd_count_8359706_backport(root)
     print(
         "PASS: 82 JEP rows, non-JEP seed uniqueness, exact JDK-8357439 donor blobs, "
         "JDK-8347112 javadoc adaptation, JDK-8364182 serviceability adaptation, "
-        "and JDK-8374808 KeyStore Instant compatibility leaf"
+        "JDK-8374808 KeyStore Instant compatibility leaf, and JDK-8359706 open-FD diagnostics"
     )
     return 0
 
