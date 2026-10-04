@@ -265,6 +265,84 @@ class GenerateRecipeCratesTest(unittest.TestCase):
             self.assertIn("crateName: jdk24-java-0001", yaml)
             self.assertIn("crateName: jdk24-text-0001", yaml)
 
+    def test_native_jni_candidates_have_first_class_source_sealed_lane(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            repo = root / "repo"
+            out = root / "out"
+            subprocess.run(("git", "init", "-q", str(repo)), check=True)
+            self.git(repo, "config", "user.email", "fixture@example.invalid")
+            self.git(repo, "config", "user.name", "Fixture")
+
+            cpp_path = "src/hotspot/share/runtime/a3.cpp"
+            header_path = "src/java.base/share/native/libjava/a3.h"
+            self.write(repo, cpp_path, "int a3() { return 21; }\n")
+            self.write(repo, header_path, "#define A3 21\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk21")
+            self.git(repo, "tag", "jdk-21+35")
+
+            self.write(repo, cpp_path, "int a3() { return 24; }\n")
+            self.write(repo, header_path, "#define A3 24\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk24")
+            self.git(repo, "tag", "jdk-24+36")
+
+            candidates, exclusions = self.mod.candidates(
+                repo,
+                24,
+                selected=None,
+                all_candidates=True,
+                include_native=True,
+            )
+            self.assertEqual([], exclusions)
+            self.assertEqual([cpp_path, header_path], [row.path for row in candidates])
+            self.assertEqual(["NATIVE", "NATIVE"], [row.kind for row in candidates])
+
+            crates = self.mod.materialize(
+                out,
+                24,
+                candidates,
+                exclusions,
+                crate_size=1,
+            )
+            self.assertEqual(
+                ["jdk24-native-0001", "jdk24-native-0002"],
+                crates,
+            )
+            native_root = out / self.mod.TEXT_RESOURCE_ROOT
+            for ordinal, expected_path in enumerate([cpp_path, header_path], 1):
+                crate = native_root / f"jdk24-native-{ordinal:04d}"
+                with (crate / "manifest.tsv").open(
+                    "r", encoding="utf-8", newline=""
+                ) as handle:
+                    rows = list(csv.reader(handle, delimiter="\t"))
+                self.assertEqual(1, len(rows))
+                self.assertEqual(expected_path, rows[0][0])
+                self.assertTrue((crate / "0001.txt").is_file())
+
+            yaml = (
+                out
+                / self.mod.YAML_ROOT
+                / "m3-jdk24-candidate-backports.yml"
+            ).read_text(encoding="utf-8")
+            self.assertIn(
+                "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
+                yaml,
+            )
+            self.assertIn("crateName: jdk24-native-0001", yaml)
+            self.assertIn("crateName: jdk24-native-0002", yaml)
+
+            legacy, legacy_exclusions = self.mod.candidates(
+                repo,
+                24,
+                selected=None,
+                all_candidates=True,
+                include_text=True,
+            )
+            self.assertEqual([], legacy_exclusions)
+            self.assertEqual(["TEXT", "TEXT"], [row.kind for row in legacy])
+
     def test_text_candidates_remain_opt_in_for_backward_compatibility(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

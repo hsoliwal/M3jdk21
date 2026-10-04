@@ -5,7 +5,9 @@
 
 Git blob identity is the first oracle: equal blob OIDs mean equal file bytes. The output
 contains the full union of paths so SAME files are explicit evidence, not silently skipped.
-Changed Java files are marked for OpenRewrite semantic analysis/recipe generation.
+Changed Java files are marked for OpenRewrite semantic analysis/recipe generation. Native/JNI
+files are classified separately so A3 can emit source-sealed FILE atoms without pretending
+PlainText is a C/C++ semantic parser.
 """
 
 from __future__ import annotations
@@ -48,6 +50,7 @@ class FileDelta:
     baseline_oid: str
     donor_oid: str
     java_source: bool
+    native_source: bool
     recipe_lane: str
 
 
@@ -100,6 +103,23 @@ def _status(base: TreeEntry | None, donor: TreeEntry | None) -> str:
     return "MODIFIED"
 
 
+def _native_source(path: str) -> bool:
+    name = path.lower()
+    return name.endswith(
+        (
+            ".c",
+            ".cc",
+            ".cpp",
+            ".cxx",
+            ".h",
+            ".hh",
+            ".hpp",
+            ".s",
+            ".asm",
+        )
+    )
+
+
 def _lane(path: str, status: str) -> str:
     if status == "SAME":
         return "NO_RECIPE"
@@ -109,6 +129,12 @@ def _lane(path: str, status: str) -> str:
         if status == "REMOVED":
             return "REVIEW_REMOVAL"
         return "OPENREWRITE_JAVA_PAIR"
+    if _native_source(path):
+        if status == "ADDED":
+            return "SOURCE_SEALED_ADD_NATIVE"
+        if status == "REMOVED":
+            return "REVIEW_REMOVAL"
+        return "SOURCE_SEALED_NATIVE_PAIR"
     if status == "ADDED":
         return "VERBATIM_ADD_RESOURCE"
     if status == "REMOVED":
@@ -151,6 +177,7 @@ def compare(
                     baseline_oid="" if before is None else before.oid,
                     donor_oid="" if after is None else after.oid,
                     java_source=path.endswith(".java"),
+                    native_source=_native_source(path),
                     recipe_lane=_lane(path, status),
                 )
             )
@@ -172,6 +199,7 @@ def write_tsv(rows: Sequence[FileDelta], out) -> None:
             "donor_oid",
             "java_source",
             "recipe_lane",
+            "native_source",
         )
     )
     for row in rows:
@@ -188,6 +216,7 @@ def write_tsv(rows: Sequence[FileDelta], out) -> None:
                 row.donor_oid,
                 str(row.java_source).lower(),
                 row.recipe_lane,
+                str(row.native_source).lower(),
             )
         )
 
