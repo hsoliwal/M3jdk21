@@ -187,9 +187,9 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
                         return tree;
                     }
                     SourceFile parsed = inventory.candidates.get(target.path());
-                    SourceFile replacement = parsed.withId(file.getId())
+                    SourceFile replacement = parsed.<SourceFile>withId(file.getId())
                             .withSourcePath(file.getSourcePath())
-                            .withMarkers(file.getMarkers())
+                            .<SourceFile>withMarkers(file.getMarkers())
                             .withFileAttributes(file.getFileAttributes())
                             .withCharset(file.getCharset())
                             .withCharsetBomMarked(file.isCharsetBomMarked());
