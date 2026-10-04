@@ -30,8 +30,9 @@ class ProgramStatusTest(unittest.TestCase):
     def test_repository_snapshot_has_locked_denominators(self):
         root = Path(__file__).resolve().parents[2]
         data = program_status.snapshot(root)
-        self.assertEqual(82, data["jep_rows"])
-        self.assertEqual(82, sum(data["jep_states"].values()))
+        self.assertEqual(85, data["jep_rows"])
+        self.assertEqual(85, sum(data["jep_states"].values()))
+        self.assertEqual({"22": 12, "23": 12, "24": 24, "25": 18, "26": 10, "27": 9}, data["release_jep_denominator"])
         self.assertEqual(13, data["seed_rows"])
         self.assertEqual(13, sum(data["seed_states"].values()))
         self.assertFalse(data["completion_claim"])
@@ -44,7 +45,7 @@ class ProgramStatusTest(unittest.TestCase):
         second = program_status.render_tsv(data)
         self.assertEqual(first, second)
         self.assertTrue(first.startswith("kind\tstate\tcount\n"))
-        self.assertIn("jep\ttotal\t82\n", first)
+        self.assertIn("jep\ttotal\t85\n", first)
 
 if __name__ == "__main__":
     unittest.main()
