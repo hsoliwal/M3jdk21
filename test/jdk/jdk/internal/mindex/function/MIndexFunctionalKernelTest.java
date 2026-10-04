@@ -9,26 +9,40 @@
  */
 
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Spliterator;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.DoubleUnaryOperator;
 import java.util.function.IntPredicate;
+import java.util.function.Predicate;
 import java.util.function.IntUnaryOperator;
 import java.util.function.LongUnaryOperator;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
 import java.util.stream.LongStream;
+import java.util.stream.StreamSupport;
 
+import jdk.internal.mindex.function.MIndexBiConsumer;
+import jdk.internal.mindex.function.MIndexBiFunction;
+import jdk.internal.mindex.function.MIndexComparator;
+import jdk.internal.mindex.function.MIndexConsumer;
+import jdk.internal.mindex.function.MIndexDoubleBinaryOperator;
 import jdk.internal.mindex.function.MIndexDoublePipeline;
 import jdk.internal.mindex.function.MIndexDoublePredicate;
 import jdk.internal.mindex.function.MIndexDoubleUnaryOperator;
+import jdk.internal.mindex.function.MIndexFunction;
 import jdk.internal.mindex.function.MIndexFunctionalSupport;
+import jdk.internal.mindex.function.MIndexIntBinaryOperator;
 import jdk.internal.mindex.function.MIndexIntPipeline;
 import jdk.internal.mindex.function.MIndexIntPredicate;
 import jdk.internal.mindex.function.MIndexIntUnaryOperator;
+import jdk.internal.mindex.function.MIndexLongBinaryOperator;
 import jdk.internal.mindex.function.MIndexLongPipeline;
 import jdk.internal.mindex.function.MIndexLongPredicate;
 import jdk.internal.mindex.function.MIndexLongUnaryOperator;
+import jdk.internal.mindex.function.MIndexPredicate;
+import jdk.internal.mindex.function.MIndexPrimitiveSpliterators;
 
 public class MIndexFunctionalKernelTest {
     private static long checks;
@@ -40,6 +54,9 @@ public class MIndexFunctionalKernelTest {
         longPipeline();
         doublePipeline();
         functionalSupport();
+        genericFunctionalContracts();
+        binaryAndComparatorPlans();
+        primitiveSpliterators();
         ordinaryFallbacks();
         concurrentReuse();
         System.out.println("MIndexFunctionalKernelTest checks=" + checks);
@@ -217,6 +234,141 @@ public class MIndexFunctionalKernelTest {
                 24L,
                 MIndexFunctionalSupport.fold(
                         new long[] {1, 2, 3, 4}, 1L, (left, right) -> left * right));
+    }
+
+    private static void genericFunctionalContracts() {
+        MIndexFunction<String, Integer> function =
+                MIndexFunction.of(String::trim)
+                        .andThen(String::length)
+                        .andThen(value -> value * 2);
+        checkEquals(8, function.apply("  abcd  "));
+        checkEquals(3, function.stageCount());
+
+        MIndexFunction<String, Integer> parsed =
+                MIndexFunction.<Integer, Integer>of(value -> value + 1)
+                        .compose(Integer::parseInt);
+        checkEquals(6, parsed.apply("5"));
+        checkEquals(2, parsed.stageCount());
+
+        int[] calls = {0};
+        Predicate<String> nonEmpty =
+                MIndexPredicate.<String>of(value -> {
+                    calls[0]++;
+                    return !value.isEmpty();
+                });
+        Predicate<String> beginsWithA =
+                MIndexPredicate.<String>of(value -> {
+                    calls[0] += 10;
+                    return value.charAt(0) == 'a';
+                });
+        Predicate<String> combined = nonEmpty.and(beginsWithA);
+        check(!combined.test(""));
+        checkEquals(1, calls[0]);
+        calls[0] = 0;
+        check(combined.test("abc"));
+        checkEquals(11, calls[0]);
+
+        Predicate<String> shortCircuitOr =
+                MIndexPredicate.<String>of(value -> true)
+                        .or(value -> {
+                            throw new AssertionError("OR did not short-circuit");
+                        });
+        check(shortCircuitOr.test("anything"));
+
+        StringBuilder consumerText = new StringBuilder();
+        MIndexConsumer<String> consumer =
+                MIndexConsumer.<String>of(consumerText::append)
+                        .andThen(value -> consumerText.append(':').append(value.length()));
+        consumer.accept("xy");
+        checkEquals(2, consumer.stageCount());
+        check("xy:2".contentEquals(consumerText));
+
+        MIndexBiFunction<Integer, Integer, Integer> biFunction =
+                MIndexBiFunction.<Integer, Integer, Integer>of(Integer::sum)
+                        .andThen(value -> value * 3);
+        checkEquals(18, biFunction.apply(2, 4));
+        checkEquals(1, biFunction.tailStageCount());
+
+        StringBuilder biText = new StringBuilder();
+        MIndexBiConsumer<String, Integer> biConsumer =
+                MIndexBiConsumer.<String, Integer>of(
+                                (text, value) -> biText.append(text).append(value))
+                        .andThen((text, value) -> biText.append('/').append(value + 1));
+        biConsumer.accept("v", 4);
+        checkEquals(2, biConsumer.stageCount());
+        check("v4/5".contentEquals(biText));
+    }
+
+    private static void binaryAndComparatorPlans() {
+        checkEquals(7, MIndexIntBinaryOperator.add().applyAsInt(3, 4));
+        checkEquals(12L, MIndexLongBinaryOperator.multiply().applyAsLong(3L, 4L));
+        checkEquals(
+                Double.doubleToRawLongBits(-0.0d),
+                Double.doubleToRawLongBits(
+                        MIndexDoubleBinaryOperator.min().applyAsDouble(+0.0d, -0.0d)));
+
+        record Person(String name, int age) {}
+        MIndexComparator<Person> comparator =
+                MIndexComparator.comparingInt(Person::age)
+                        .thenComparing(
+                                MIndexComparator.<Person, String>comparing(
+                                        Person::name, Comparator.naturalOrder()));
+        checkEquals(2, comparator.stageCount());
+
+        Person amy20 = new Person("Amy", 20);
+        Person zoe20 = new Person("Zoe", 20);
+        Person bob30 = new Person("Bob", 30);
+        check(comparator.compare(amy20, zoe20) < 0);
+        check(comparator.compare(bob30, zoe20) > 0);
+
+        Comparator<Person> reversed = comparator.reversed();
+        check(reversed.compare(amy20, zoe20) > 0);
+        check(reversed.compare(bob30, zoe20) < 0);
+    }
+
+    private static void primitiveSpliterators() {
+        int[] ranged =
+                StreamSupport.intStream(
+                                MIndexPrimitiveSpliterators.range(1, 11, 2), false)
+                        .toArray();
+        checkArrayEquals(new int[] {1, 3, 5, 7, 9}, ranged);
+
+        Spliterator.OfInt remainder =
+                MIndexPrimitiveSpliterators.range(0, 10, 1);
+        Spliterator.OfInt prefix = remainder.trySplit();
+        check(prefix != null);
+        int[] first = StreamSupport.intStream(prefix, false).toArray();
+        int[] second = StreamSupport.intStream(remainder, false).toArray();
+        int[] joined = Arrays.copyOf(first, first.length + second.length);
+        System.arraycopy(second, 0, joined, first.length, second.length);
+        checkArrayEquals(IntStream.range(0, 10).toArray(), joined);
+
+        int[] iterated =
+                StreamSupport.intStream(
+                                MIndexPrimitiveSpliterators.iterate(
+                                        1, MIndexIntUnaryOperator.multiply(2), 5),
+                                false)
+                        .toArray();
+        checkArrayEquals(new int[] {1, 2, 4, 8, 16}, iterated);
+
+        long[] longIterated =
+                StreamSupport.longStream(
+                                MIndexPrimitiveSpliterators.iterate(
+                                        3L, MIndexLongUnaryOperator.add(2L), 4),
+                                false)
+                        .toArray();
+        checkArrayEquals(new long[] {3L, 5L, 7L, 9L}, longIterated);
+
+        double[] doubleIterated =
+                StreamSupport.doubleStream(
+                                MIndexPrimitiveSpliterators.iterate(
+                                        1.0d, MIndexDoubleUnaryOperator.multiply(0.5d), 4),
+                                false)
+                        .toArray();
+        checkEquals(4, doubleIterated.length);
+        checkEquals(
+                Double.doubleToLongBits(0.125d),
+                Double.doubleToLongBits(doubleIterated[3]));
     }
 
     private static void ordinaryFallbacks() {
