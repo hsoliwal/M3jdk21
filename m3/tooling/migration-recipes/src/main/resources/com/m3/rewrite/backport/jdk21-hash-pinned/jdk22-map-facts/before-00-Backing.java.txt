@@ -32,10 +32,6 @@ import java.nio.ByteOrder;
 import java.nio.CharBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
-import java.nio.charset.CharsetEncoder;
-import java.nio.charset.CoderResult;
-import java.nio.charset.CodingErrorAction;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Objects;
@@ -68,7 +64,6 @@ public final class MIndexMappedStringBacking implements MIndexStringBacking {
     private static final int COMMIT_SLOT_0 = 16;
     private static final int COMMIT_SLOT_1 = 40;
     private static final int MAP_PAGE_BYTES = 256 * 1024 * 1024;
-    private static final int UTF8_BUFFER_BYTES = 4096;
 
     private final Path textPath;
     private final FileChannel textChannel;
@@ -273,10 +268,6 @@ public final class MIndexMappedStringBacking implements MIndexStringBacking {
     }
 
     private void parseTextRows(Commit commit) {
-        CharsetEncoder encoder = StandardCharsets.UTF_8.newEncoder()
-                .onMalformedInput(CodingErrorAction.REPLACE)
-                .onUnmappableCharacter(CodingErrorAction.REPLACE);
-        ByteBuffer scratch = ByteBuffer.allocate(UTF8_BUFFER_BYTES);
         long cursor = TEXT_HEADER_BYTES;
         int row = 0;
         while (row < commit.rowCount()) {
@@ -322,8 +313,10 @@ public final class MIndexMappedStringBacking implements MIndexStringBacking {
                     throw corrupt("text record size at " + cursor);
                 }
                 charOffset = cursor + TEXT_RECORD_HEADER_BYTES;
-                verifyTextPayload(cursor, charOffset, utf16Length);
-                verifyTextUtf8(cursor, charOffset, utf16Length, utf8Handle, encoder, scratch);
+                int expectedCrc = textPages.getInt(cursor + 56L);
+                if (charCrc(textPages, charOffset, utf16Length) != expectedCrc) {
+                    throw corrupt("text record CRC at " + cursor);
+                }
             } else {
                 int owner = payloadRef - 1;
                 if (owner < 0 || owner >= row || recordBytes != TEXT_RECORD_HEADER_BYTES) {
@@ -331,12 +324,7 @@ public final class MIndexMappedStringBacking implements MIndexStringBacking {
                 }
                 if (utf16Lengths[owner] != utf16Length
                         || utf8Lengths[owner] != utf8Length
-                        || codePointCounts[owner] != textPages.getInt(cursor + 20L)
-                        || unpairedSurrogates[owner] != textPages.getInt(cursor + 24L)
                         || javaHashes[owner] != textPages.getInt(cursor + 28L)
-                        || hash31Powers[owner] != textPages.getInt(cursor + 32L)
-                        || firstUnits[owner] != textPages.getInt(cursor + 36L)
-                        || lastUnits[owner] != textPages.getInt(cursor + 40L)
                         || utf8Handles[owner] != utf8Handle) {
                     throw corrupt("text payload alias facts at " + cursor);
                 }
@@ -643,97 +631,13 @@ public final class MIndexMappedStringBacking implements MIndexStringBacking {
         return (int) crc.getValue();
     }
 
-    /**
-     * Bind the byte projection to the canonical UTF16 scalar with the existing Java UTF8 codec.
-     * Scratch space is bounded and reused for this open; aliases reuse the admitted scalar.
-     * Unpaired units use the codec replacement, while the original UTF16 stays unchanged.
-     */
-    private void verifyTextUtf8(
-            long record, long offset, int length, long handle,
-            CharsetEncoder encoder, ByteBuffer scratch) {
-        CharBuffer chars = textPages.slice(offset, Math.multiplyExact(length, Character.BYTES))
-                .order(ByteOrder.BIG_ENDIAN).asCharBuffer();
-        ByteBuffer actual = byteStore.view(handle);
-        encoder.reset();
-        CoderResult result;
-        do {
-            scratch.clear();
-            result = encoder.encode(chars, scratch, true);
-            if (result.isError()) {
-                throw corrupt("text UTF-8 encoding at " + record);
-            }
-            scratch.flip();
-            matchUtf8(record, scratch, actual);
-        } while (result.isOverflow());
-        do {
-            scratch.clear();
-            result = encoder.flush(scratch);
-            if (result.isError()) {
-                throw corrupt("text UTF-8 encoding at " + record);
-            }
-            scratch.flip();
-            matchUtf8(record, scratch, actual);
-        } while (result.isOverflow());
-        if (actual.hasRemaining()) {
-            throw corrupt("text UTF-8 payload at " + record);
-        }
-    }
-
-    /** Compare one bounded encoder output without copying the mapped byte payload. */
-    private static void matchUtf8(long record, ByteBuffer expected, ByteBuffer actual) {
-        if (expected.remaining() > actual.remaining()) {
-            throw corrupt("text UTF-8 payload at " + record);
-        }
-        while (expected.hasRemaining()) {
-            if (expected.get() != actual.get()) {
-                throw corrupt("text UTF-8 payload at " + record);
-            }
-        }
-    }
-
-    /** Verify CRC and String facts in the same scalar-payload pass before publishing a row. */
-    private void verifyTextPayload(long record, long offset, int length) {
+    private static int charCrc(Pages pages, long offset, int utf16Length) {
         CRC32 crc = new CRC32();
-        int codePoints = length;
-        int unpaired = 0;
-        int hash = 0;
-        int power = 1;
-        int first = -1;
-        int last = -1;
-        boolean previousHigh = false;
-        for (int index = 0; index < length; index++) {
-            long position = offset + ((long) index << 1);
-            int high = textPages.getByte(position) & 0xff;
-            int low = textPages.getByte(position + 1L) & 0xff;
-            crc.update(high);
-            crc.update(low);
-            char unit = (char) ((high << 8) | low);
-            if (index == 0) {
-                first = unit;
-            }
-            last = unit;
-            // Intentional int wraparound: the String hash and power-of-31 contract.
-            hash = 31 * hash + unit;
-            power *= 31;
-            if (Character.isLowSurrogate(unit) && previousHigh) {
-                codePoints--;
-                unpaired--; // The preceding high unit was provisionally counted.
-            } else if (Character.isSurrogate(unit)) {
-                unpaired++;
-            }
-            previousHigh = Character.isHighSurrogate(unit);
+        long bytes = Math.multiplyExact((long) utf16Length, Character.BYTES);
+        for (long index = 0; index < bytes; index++) {
+            crc.update(pages.getByte(offset + index));
         }
-        if ((int) crc.getValue() != textPages.getInt(record + 56L)) {
-            throw corrupt("text record CRC at " + record);
-        }
-        if (codePoints != textPages.getInt(record + 20L)
-                || unpaired != textPages.getInt(record + 24L)
-                || hash != textPages.getInt(record + 28L)
-                || power != textPages.getInt(record + 32L)
-                || first != textPages.getInt(record + 36L)
-                || last != textPages.getInt(record + 40L)) {
-            throw corrupt("text record facts at " + record);
-        }
+        return (int) crc.getValue();
     }
 
     private static void readFully(FileChannel channel, ByteBuffer target, long offset)
