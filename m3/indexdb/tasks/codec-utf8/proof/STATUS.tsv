@@ -1,0 +1,7 @@
+item	state	evidence
+original_pr_run	FAILED_NO_JOB	37179958840; no JUnit verdict inferred
+workflow_allowlist	ONE_EXACT_BRANCH_ADDED	Jobs, permissions and commands unchanged
+static_verification	PASS	Byte reversal and parsed YAML job/permission identity
+OpenRewrite_recipe	AUTHORED_NOT_EXECUTED	Existing text recipe; three new JUnit cases
+new_push_run	PENDING	Actual result must be attached to tested commit
+coverage99	UNCHANGED	Do not admit from JUnit success alone

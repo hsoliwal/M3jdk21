@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.CodecProof
+displayName: Enable exact-branch database proof
+description: Add one exact push branch without changing jobs, permissions, commands or coverage; execute from repository root.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: codec-proof

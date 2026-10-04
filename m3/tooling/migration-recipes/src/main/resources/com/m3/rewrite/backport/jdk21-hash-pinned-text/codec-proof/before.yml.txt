@@ -2,7 +2,7 @@
 name: M3 database contract proof
 on:
   push:
-    branches: ['m3/indexdb-contract-proof-20261004', 'm3/codec-utf8-20261004-9d9c']
+    branches: ['m3/indexdb-contract-proof-20261004']
   pull_request:
     paths:
       - 'm3/indexdb/**'

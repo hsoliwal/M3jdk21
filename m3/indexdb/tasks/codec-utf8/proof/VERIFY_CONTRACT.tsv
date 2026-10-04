@@ -1,0 +1,8 @@
+gate	state	detail
+source read	PASS	Full pinned workflow inspected
+diff	PASS	Only one exact push allowlist element
+YAML and byte guard	PASS	Job and permission trees unchanged; reversal equals exact preimage
+recipe resource hashes	PASS	Manifest pins exact UTF-8 before and after
+Java/JUnit/OpenRewrite	PENDING	New tests authored, not executed locally
+database JUnit and99percent	PENDING	Existing clean verify command unchanged
+merge and publication	NOT_ADMITTED	Draft remains until required gates

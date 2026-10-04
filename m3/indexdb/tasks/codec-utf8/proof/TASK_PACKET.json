@@ -1,0 +1,57 @@
+{
+  "task_packet": "active",
+  "source_doc": "m3/indexdb/tasks/codec-utf8/proof/DESIGN.md",
+  "invariant_id": "EXACT_HEAD_PROOF",
+  "base_commit": "83288e6458408a1a182d8c99624418a82f670a3d",
+  "run": {
+    "mode": "apply",
+    "profile": "bounded",
+    "workers": 1,
+    "shard_count": 1,
+    "shard_index": 0
+  },
+  "targets": [
+    ".github/workflows/m3-indexdb-boundary-proof.yml",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/codec-proof/**",
+    "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/codec-proof.yml",
+    "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/ProofTest.java",
+    "m3/indexdb/tasks/codec-utf8/proof/**"
+  ],
+  "invariant_locks": {
+    "PRODUCTION_SOURCE": "LOCKED",
+    "EXISTING_TESTS": "LOCKED",
+    "POMS_COVERAGE": "LOCKED",
+    "WORKFLOW_JOBS_PERMISSIONS_COMMANDS": "LOCKED",
+    "CANONICAL_BRANCHES": "READ_ONLY"
+  },
+  "allowed_delta": [
+    "one exact push branch",
+    "existing recipe crate, tests, docs and evidence"
+  ],
+  "forbidden": [
+    "wildcard branch expansion",
+    "skipped test or coverage gate",
+    "fake JUnit verdict",
+    "force push"
+  ],
+  "verify_order": [
+    "diff",
+    "static",
+    "compile",
+    "tests",
+    "runtime"
+  ],
+  "output_contract": [
+    "STATUS.tsv",
+    "FINAL_REPORT.md",
+    "RUN_CONTEXT.tsv",
+    "PROVENANCE.tsv",
+    "VERIFY_CONTRACT.tsv",
+    "OUTPUT_CONTRACT.tsv"
+  ],
+  "stop_conditions": [
+    "job body drift",
+    "test failure",
+    "dependency failure"
+  ]
+}

@@ -1,0 +1,9 @@
+artifact	purpose
+DESIGN.md	Observed blocker and bounded execution route
+TASK_PACKET.json	Scope, locks and allowed delta
+STATUS.tsv	Historical pending/observed states
+FINAL_REPORT.md	Executed and unexecuted boundaries
+RUN_CONTEXT.tsv	Pinned head and execution branch
+PROVENANCE.tsv	Unchanged owners and identity
+VERIFY_CONTRACT.tsv	No weakening of proof
+OUTPUT_CONTRACT.tsv	Required artifact list

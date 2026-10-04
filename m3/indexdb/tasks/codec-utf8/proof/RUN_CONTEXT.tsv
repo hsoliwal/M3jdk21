@@ -1,0 +1,9 @@
+key	value
+base_commit	83288e6458408a1a182d8c99624418a82f670a3d
+branch	m3/codec-utf8-20261004-9d9c
+pr	82
+before_workflow_blob	b0bae800a226f93d7b7677087ddcb558bcc04cc5
+original_run	37179958840
+scope	workflow allowlist; no product/test/POM mutation
+workers	1
+canonical_promotion	NOT_PERFORMED
