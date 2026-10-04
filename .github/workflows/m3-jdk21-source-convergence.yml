@@ -50,7 +50,7 @@ jobs:
           set -euo pipefail
           mvn -B -ntp -f m3/pom.xml \
             -pl tooling/migration-recipes -am \
-            -Dtest='M3Jdk21SourceConvergenceMainTest,M3Java21ConvergenceRecipeTest,M3PureIntConvergenceRecipeTest,M3MultiPassPlanTest' \
+            -Dtest='M3FileConvergenceRecipeDagTest,M3Jdk21SourceConvergenceMainTest,M3Java21ConvergenceRecipeTest,M3PureIntConvergenceRecipeTest,M3MultiPassPlanTest,M3PassLedgerTest,M3RecipeDagTest,M3PacketDagComposerTest,M3DagProjectorTest,M3FrameworkProjectionTest' \
             -Dsurefire.failIfNoSpecifiedTests=false \
             test
           python3 -m unittest discover \
