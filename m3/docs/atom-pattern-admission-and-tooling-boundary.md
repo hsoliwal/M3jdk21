@@ -112,6 +112,26 @@ This does not make MIndexAST a downstream dependency of the JDK product. Any MIn
 selected for the final JDK must be ported/implemented into the appropriate JDK-owned layer and
 validated there.
 
+## A3 absorption preparation law
+
+For whole-JDK absorption, use A3 = Atomize -> Patternize -> Absorb.
+
+A3 does not change the scope-promotion law. It prepares the source so compatible leaves become
+smaller and easier to compare, replace, backport, or prove. It does not turn API/VM/JNI/GC/JIT
+changes into FILE-local work.
+
+A3 virtual-Mavenizes the existing checkout only in the tool plane:
+
+- inventory real src/ and test/ paths by JDK module/area;
+- run retained OpenRewrite convergence on explicit FILE candidates;
+- emit candidates/receipts under m3/build only;
+- preserve all JEP/JBS/community admission decisions in the A3 plan;
+- hand wider-scope residue to the existing backport/recipe DAG and native OpenJDK build.
+
+New non-JDK M3 tooling names should define a short pattern term and then use its acronym. Avoid
+long framework-style API names in the JDK product or its adjacent tooling.
+
+A3Apply has no source-root write authority. Promotion remains a separate evidence-gated action.
 ## Verification order
 
 For an applied product change, evidence progresses in M3 order:
