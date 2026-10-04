@@ -1,4 +1,4 @@
 packet_id	atom_id	scope	scope_promotion_approved	work_ref	depends_on
 jep-458-multifile-source-launcher	java-graph	MULTI_MODULE	false	M3Jdk21HashPinnedSnapshotRecipe:jdk22-jep458-multifile-java	
 jep-458-multifile-source-launcher	text-native-graph	MULTI_MODULE	false	M3Jdk21HashPinnedTextSnapshotRecipe:jdk22-jep458-multifile-text	
-jep-458-multifile-source-launcher	feature-join	MULTI_MODULE	false	com.m3.rewrite.backport.M3Jep458BackportRecipe	java-graph,text-native-graph
+jep-458-multifile-source-launcher	feature-join	LIBRARY_API	true	com.m3.rewrite.backport.M3Jep458BackportRecipe	java-graph,text-native-graph
