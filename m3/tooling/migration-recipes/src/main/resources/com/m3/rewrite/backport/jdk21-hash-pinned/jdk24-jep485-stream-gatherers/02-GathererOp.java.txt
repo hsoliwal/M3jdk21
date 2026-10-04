@@ -47,6 +47,18 @@ import java.util.stream.Gatherer.Integrator;
  * @since 24
  */
 final class GathererOp<T, A, R> extends ReferencePipeline<T, R> {
+    /**
+     * Java 21 local substitute for the post-21 jdk.internal.invoke.MhUtil helper.
+     */
+    private static VarHandle findVarHandle(
+            MethodHandles.Lookup lookup, String name, Class<?> type) {
+        try {
+            return lookup.findVarHandle(lookup.lookupClass(), name, type);
+        } catch (ReflectiveOperationException failure) {
+            throw new InternalError(failure);
+        }
+    }
+
     @SuppressWarnings("unchecked")
     static <P_IN, P_OUT extends T, T, A, R> Stream<R> of(
             ReferencePipeline<P_IN, P_OUT> upstream,
