@@ -63,6 +63,14 @@ Recipe JUnit must prove:
 - second-pass zero-change fixed point;
 - declared MULTI_MODULE scope.
 
+
+## Recipe bootstrap boundary
+
+The recipe implementation class and its JUnit are the minimal bootstrap atoms: a recipe cannot
+materialize the class required to execute itself. They are reviewed/tested as FILE atoms and enter
+the packet through the recipe-proof join. The recipe catalogue and named OpenRewrite descriptor,
+plus every downstream control-plane target, are themselves owned by the replay recipe.
+
 ## Orchestration
 
 packet.tsv is the canonical framework-neutral DAG. CI may project it to Camel Java DSL,
