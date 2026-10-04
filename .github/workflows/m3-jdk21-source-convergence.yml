@@ -55,7 +55,7 @@ jobs:
             test
           python3 -m unittest discover \
             -s m3/backports \
-            -p 'test_source_convergence_gate.py' \
+            -p 'test_*source_convergence*.py' \
             -v
 
       - name: Mavenize and converge the original JDK Java tree
@@ -70,6 +70,17 @@ jobs:
             -Djacoco.skip=true \
             verify
           cat m3/tooling/migration-recipes/target/m3-jdk-source-convergence/SOURCE_CONVERGENCE.summary.tsv
+
+      - name: Materialize detached normalized Java 21 worktree
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/materialize_source_convergence.py \
+            . \
+            m3/tooling/migration-recipes/target/m3-jdk-source-convergence/SOURCE_CONVERGENCE.tsv \
+            "$RUNNER_TEMP/m3-normalized-jdk" \
+            --copy
+          cat "$RUNNER_TEMP/m3-normalized-jdk/m3-normalized-baseline.root"
 
       - name: Require baseline convergence for active Java backport targets
         shell: bash
@@ -87,6 +98,34 @@ jobs:
             . \
             m3/tooling/migration-recipes/target/m3-jdk-source-convergence/SOURCE_CONVERGENCE.tsv \
             "$RUNNER_TEMP/java-backport-targets.txt"
+          python3 - "$RUNNER_TEMP/m3-normalized-jdk" "$RUNNER_TEMP/java-backport-targets.txt" <<'PY'
+          import csv
+          import hashlib
+          import pathlib
+          import sys
+
+          root = pathlib.Path(sys.argv[1])
+          targets = [
+              line.strip()
+              for line in pathlib.Path(sys.argv[2]).read_text(encoding="utf-8").splitlines()
+              if line.strip()
+          ]
+          rows = {
+              row["path"]: row
+              for row in csv.DictReader(
+                  (root / "m3-normalized-baseline.tsv").open(
+                      "r", encoding="utf-8", newline=""
+                  ),
+                  delimiter="\t",
+              )
+          }
+          for target in targets:
+              row = rows[target]
+              actual = hashlib.sha256((root / target).read_bytes()).hexdigest()
+              if actual != row["effectiveSha256"]:
+                  raise SystemExit(f"normalized target drift: {target}")
+          print("PASS: active Java backport targets resolve on normalized baseline")
+          PY
 
       - name: Upload source convergence receipts and candidates
         uses: actions/upload-artifact@v4
