@@ -1,0 +1,12 @@
+artifact	purpose
+DESIGN.md	Before-code contract and scope
+TASK_PACKET.json	Explicit permissions, targets and stop gates
+STATUS.tsv	Executed versus pending states
+FINAL_REPORT.md	Bounded delivery and reproduction
+RUN_CONTEXT.tsv	Pinned input, actual local runtime
+PROVENANCE.tsv	Original and API lineage
+VERIFY_CONTRACT.tsv	Separate verification gates
+OUTPUT_CONTRACT.tsv	Delivery inventory
+INVENTORY.tsv	Changed-source exact identities
+ACTION_QUEUE.tsv	Remaining integration obligations
+LOCAL_PROBES.json	Actual before/after outputs and exit codes

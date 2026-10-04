@@ -1,0 +1,21 @@
+{
+  "task_packet": "active",
+  "source_doc": "m3/indexdb/tasks/codec-utf8/DESIGN.md",
+  "invariant_id": "LOSSLESS_UTF8_BOUNDED_CODEC",
+  "base_commit": "9d9c9370e4cebbd6a87cb6ac60bf2917c4ea6f64",
+  "run": {"mode": "apply", "profile": "bounded", "workers": 1, "shard_count": 1, "shard_index": 0},
+  "targets": [
+    "m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticCodec.java",
+    "m3/indexdb/src/test/java/com/m3/indexdb/Codec*.java",
+    "m3/indexdb/tasks/codec-utf8/**",
+    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/codec-utf8/**",
+    "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/codec-utf8.yml",
+    "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/CodecRecipeTest.java"
+  ],
+  "invariant_locks": {"EXISTING_SIGNATURES": "LOCKED", "VALID_V1_BYTES": "LOCKED", "POMS_COVERAGE": "LOCKED", "EXISTING_TESTS": "LOCKED", "JDK_PRODUCT_SOURCE": "LOCKED", "CANONICAL_BRANCHES": "READ_ONLY"},
+  "allowed_delta": ["MODULE reviewed malformed-input refusal", "private standard-JDK charset adapters", "payload-relative bounds", "recipe plus tests/docs/evidence"],
+  "forbidden": ["Unicode normalization", "new database/parser", "hidden replacement characters", "silencing OOM", "coverage exclusions", "history rewrite", "unexecuted test claims"],
+  "verify_order": ["diff", "syntax/static", "javac21", "tests", "persistence and constrained-heap processes"],
+  "output_contract": ["STATUS.tsv", "FINAL_REPORT.md", "RUN_CONTEXT.tsv", "PROVENANCE.tsv", "VERIFY_CONTRACT.tsv", "OUTPUT_CONTRACT.tsv"],
+  "stop_conditions": ["valid V1-byte mismatch", "unexpected production delta", "test failure"]
+}

@@ -1,0 +1,9 @@
+item	state	evidence
+original_defects	REPRODUCED	2 silent text-loss cases; 3 fabricated-count OOM probes
+local_javac	PASS	Java21 --release21 -Xlint:all -Werror against real sources
+fixed_probes	PASS	Both text-loss cases rejected; all 3 constrained-heap probes rejected without OOM
+valid_v1_bytes	PASS_128	Original/new byte comparisons; golden corpus d972971c21142f82252f5cb912f7c17fee34af248767df251175228aa402c594
+JUnit	PENDING_CI	29 inherited tests plus11 new tests; no local test engine
+OpenRewrite	AUTHORED_PENDING_EXECUTION	Existing Java-LST snapshot recipe; no replacement engine
+coverage99	UNCHANGED_PENDING_CI	No threshold change or exclusion; parent artifact has651/672 lines and232/239 branches
+whole_JDK_framework	NOT_COMPLETE	This fixes the semantic snapshot codec, not javac/SQL/partial-AST integration

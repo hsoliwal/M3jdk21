@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.CodecUtf8
+displayName: Preserve semantic text and bound codec allocations
+description: Apply the reviewed MODULE-scope invalid-input repair at the m3/indexdb execution root; valid V1 bytes and existing public signatures remain unchanged.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: codec-utf8

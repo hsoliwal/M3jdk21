@@ -1,0 +1,11 @@
+path	bytes	git_blob	sha256	role
+m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticCodec.java	13760	f086806b7d2554828cd9286de2004b58426b69d1	a4083e1fc84724c99da77d493acb07fb30408910cd8f69ec9e52fd4c5f214f8d	MODIFIED
+m3/indexdb/src/test/java/com/m3/indexdb/CodecProbe.java	4285	8e51d2d53190a6c590dfdbfd483aa47fd7b615b1	459efd33fe7c8c1faab5c90972ae98bb43796e10e7b1627e1176b3deb508c387	ADDED
+m3/indexdb/src/test/java/com/m3/indexdb/CodecTest.java	9799	aec5cde4ac08f05ad3bc17c4770e00907d36e3e3	43d678da338ef67086cb242a43fc3c38a102d1d9df683094ff52c17ec7ab3197	ADDED
+m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/codec-utf8.yml	444	6387a5231f911d4976c892dc25f5efde9dfdc13d	676b5be275c976df9b22dda188c9975151082f363d13886e9b4644e29ec0527f	ADDED
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/codec-utf8/00-codec.java.txt	13760	f086806b7d2554828cd9286de2004b58426b69d1	a4083e1fc84724c99da77d493acb07fb30408910cd8f69ec9e52fd4c5f214f8d	ADDED
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/codec-utf8/01-probe.java.txt	4285	8e51d2d53190a6c590dfdbfd483aa47fd7b615b1	459efd33fe7c8c1faab5c90972ae98bb43796e10e7b1627e1176b3deb508c387	ADDED
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/codec-utf8/02-test.java.txt	9799	aec5cde4ac08f05ad3bc17c4770e00907d36e3e3	43d678da338ef67086cb242a43fc3c38a102d1d9df683094ff52c17ec7ab3197	ADDED
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/codec-utf8/before-00-codec.java.txt	10912	316c3824409a29a0acc0d15fccca23132b317d36	f54c493da12252965a6697c5bf71b96881068d168cd03666dfce4ccda7d66f0a	ADDED
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/codec-utf8/manifest.tsv	473	03081ca3ac37c8a15e9c6ae7325e71bf5dad09c6	3c29eb2febcc1ac72821309348a10ff9b1ad0eb6e83749e38a833cc71b020276	ADDED
+m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/CodecRecipeTest.java	5341	eda8e616b0318dade7094ffa5c2fa29cb42747f4	900eb59d04f92794543405889dcdc3bf8e88b5d22423a17157702a589e814dc5	ADDED
