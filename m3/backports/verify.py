@@ -10,8 +10,7 @@ import csv
 import hashlib
 from pathlib import Path
 
-EXPECTED_RELEASE_COUNTS = {22: 12, 23: 12, 24: 22, 25: 17, 26: 10, 27: 9}
-EXPECTED_TOTAL = sum(EXPECTED_RELEASE_COUNTS.values())
+from release_jep_authority import verify_repository_authority
 
 
 def git_blob_sha1(data: bytes) -> str:
@@ -28,12 +27,15 @@ def read_tsv(path: Path) -> list[dict[str, str]]:
 
 
 def verify_jeps(root: Path) -> None:
+    authority = verify_repository_authority(root)
+    expected_release_counts = {release: len(ids) for release, ids in authority.items()}
+    expected_total = sum(expected_release_counts.values())
     rows = read_tsv(root / "m3/backports/JEP_CATALOGUE.tsv")
-    if len(rows) != EXPECTED_TOTAL:
-        raise AssertionError(f"expected {EXPECTED_TOTAL} JEP rows, found {len(rows)}")
+    if len(rows) != expected_total:
+        raise AssertionError(f"expected {expected_total} JEP rows, found {len(rows)}")
 
     seen: set[int] = set()
-    counts = {release: 0 for release in EXPECTED_RELEASE_COUNTS}
+    counts = {release: 0 for release in expected_release_counts}
     catalog_numbers: set[int] = set()
 
     for row in rows:
@@ -50,7 +52,7 @@ def verify_jeps(root: Path) -> None:
         if row["domain"] == "language" and row["disposition"] != "reject-language":
             raise AssertionError(f"language JEP {jep} is not reject-language")
 
-    if counts != EXPECTED_RELEASE_COUNTS:
+    if counts != expected_release_counts:
         raise AssertionError(f"release counts differ: {counts}")
 
     for row in rows:
@@ -317,6 +319,229 @@ def verify_keystore_instant_8374808_backport(root: Path) -> None:
                 f"provider-storage rewrite escaped compatibility leaf: {forbidden}"
             )
 
+
+def verify_passes_and_work_queue(root: Path) -> None:
+    passes = read_tsv(root / "m3/backports/BACKPORT_PASSES.tsv")
+    if [int(row["ordinal"]) for row in passes] != list(range(len(passes))):
+        raise AssertionError("backport pass ordinals are not contiguous")
+    pass_ids = [row["pass_id"] for row in passes]
+    if len(pass_ids) != len(set(pass_ids)):
+        raise AssertionError("duplicate backport pass id")
+    for row in passes:
+        if not row["stop_condition"].strip():
+            raise AssertionError(f"empty stop condition for pass {row['pass_id']}")
+        mutation = row["mutation_authority"].strip().lower()
+        if mutation not in {"true", "false"}:
+            raise AssertionError(f"invalid mutation_authority for pass {row['pass_id']}")
+    mutating = [row["pass_id"] for row in passes if row["mutation_authority"] == "true"]
+    if mutating != ["apply"]:
+        raise AssertionError(f"only apply may mutate, found {mutating}")
+
+    queue = read_tsv(root / "m3/backports/BACKPORT_WORK_QUEUE.tsv")
+    keys = [(row["source_type"], row["identity"]) for row in queue]
+    if len(keys) != len(set(keys)):
+        raise AssertionError("duplicate backport work-queue identity")
+
+    expected_jeps = {
+        f"JEP-{row['jep']}" for row in read_tsv(root / "m3/backports/JEP_CATALOGUE.tsv")
+    }
+    queued_jeps = {row["identity"] for row in queue if row["source_type"] == "JEP"}
+    if queued_jeps != expected_jeps:
+        missing = sorted(expected_jeps - queued_jeps)
+        extra = sorted(queued_jeps - expected_jeps)
+        raise AssertionError(f"JEP queue mismatch missing={missing} extra={extra}")
+
+    expected_jbs = {
+        row["jbs"] for row in read_tsv(root / "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv")
+    }
+    queued_jbs = {row["identity"] for row in queue if row["source_type"] == "JBS"}
+    if not expected_jbs.issubset(queued_jbs):
+        raise AssertionError(
+            f"JBS queue missing seeded items: {sorted(expected_jbs - queued_jbs)}"
+        )
+
+    allowed_scopes = {
+        "FILE",
+        "VISIBILITY",
+        "PACKAGE",
+        "MODULE",
+        "MULTI_MODULE",
+        "LIBRARY_API",
+    }
+    for row in queue:
+        current_pass = int(row["current_pass"])
+        if current_pass < 0 or current_pass >= len(passes):
+            raise AssertionError(
+                f"invalid current_pass {current_pass} for {row['identity']}"
+            )
+        if row["required_scope"] not in allowed_scopes:
+            raise AssertionError(
+                f"invalid required_scope {row['required_scope']} for {row['identity']}"
+            )
+        disposition = row["disposition"]
+        action = row["action"]
+        if disposition.startswith("reject-") and not action.startswith("EXCLUDE_"):
+            raise AssertionError(f"rejected item is not excluded: {row['identity']}")
+        if disposition.startswith("superseded") and action != "REDIRECT_SUPERSEDED":
+            raise AssertionError(f"superseded item is not redirected: {row['identity']}")
+
+    for identity in {
+        "JDK-8347112",
+        "JDK-8364182",
+        "JDK-8367584",
+        "JDK-8368692",
+        "JDK-8374808",
+    }:
+        row = next((item for item in queue if item["identity"] == identity), None)
+        if row is None:
+            raise AssertionError(f"materialized backport missing from work queue: {identity}")
+        if int(row["current_pass"]) < 5 or row["action"] != "VERIFY_HASH_PINNED_RECIPE":
+            raise AssertionError(f"materialized backport not in verification pass: {identity}")
+        if row["required_scope"] != "LIBRARY_API":
+            raise AssertionError(f"public/tool contract backport lacks LIBRARY_API authority: {identity}")
+
+
+JDK_8367584_COMMIT = "39de79eae23410e335d2d1ced8fe3b4d7937a541"
+
+
+def verify_jfr_options_help_8367584_backport(root: Path) -> None:
+    rows = read_tsv(root / "m3/backports/recipes/jdk-8367584/adaptation.tsv")
+    if len(rows) != 4:
+        raise AssertionError(
+            f"expected 4 JDK-8367584 adaptation rows, found {len(rows)}"
+        )
+    by_target = {row["target_path"]: row for row in rows}
+    if len(by_target) != len(rows):
+        raise AssertionError("duplicate JDK-8367584 target path")
+    for row in rows:
+        if row["upstream_commit"] != JDK_8367584_COMMIT:
+            raise AssertionError(
+                f"unexpected JDK-8367584 donor commit for {row['target_path']}"
+            )
+        path = root / row["target_path"]
+        if not path.is_file():
+            raise AssertionError(f"missing JDK-8367584 target: {row['target_path']}")
+        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        if actual != row["target_sha256"]:
+            raise AssertionError(
+                f"JDK-8367584 target drift for {row['target_path']}: "
+                f"expected {row['target_sha256']}, actual {actual}"
+            )
+        baseline = row["baseline_sha256"]
+        if baseline != "ABSENT" and baseline == row["target_sha256"]:
+            raise AssertionError(f"JDK-8367584 row has no delta: {row['target_path']}")
+
+    seed = next(
+        (
+            row
+            for row in read_tsv(root / "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv")
+            if row["jbs"] == "JDK-8367584"
+        ),
+        None,
+    )
+    if seed is None or seed["upstream_commit"] != JDK_8367584_COMMIT:
+        raise AssertionError("JDK-8367584 seed donor commit drift")
+    if seed["disposition"] != "candidate-adapted":
+        raise AssertionError(
+            f"JDK-8367584 unexpected disposition: {seed['disposition']}"
+        )
+
+    option_set = (
+        root / "src/hotspot/share/jfr/recorder/service/jfrOptionSet.cpp"
+    ).read_text(encoding="utf-8")
+    if 'strcmp(FlightRecorderOptions, "help") == 0' not in option_set:
+        raise AssertionError("FlightRecorderOptions help dispatch missing")
+    if "JfrConfigureFlightRecorderDCmd::print_help(tty, true);" not in option_set:
+        raise AssertionError("FlightRecorderOptions startup help renderer missing")
+
+    dcmd = (
+        root / "src/hotspot/share/jfr/dcmd/jfrDcmds.cpp"
+    ).read_text(encoding="utf-8")
+    if "Syntax : -XX:FlightRecorderOptions:[options]" not in dcmd:
+        raise AssertionError("FlightRecorderOptions help syntax missing")
+    if "redact" in dcmd.lower() or "redact" in option_set.lower():
+        raise AssertionError("JEP 536 redaction semantics escaped the help-only leaf")
+
+    test = (
+        root / "test/jdk/jdk/jfr/startupargs/TestOptionsHelp.java"
+    ).read_text(encoding="utf-8")
+    if '"-XX:FlightRecorderOptions:help"' not in test:
+        raise AssertionError("focused FlightRecorderOptions help jtreg missing")
+
+
+JDK_8368692_COMMIT = "9131c72d63cac7d2a0e845952cee0e3c7edbfc93"
+
+
+def verify_password_systemin_8368692_backport(root: Path) -> None:
+    rows = read_tsv(root / "m3/backports/recipes/jdk-8368692/adaptation.tsv")
+    if len(rows) != 3:
+        raise AssertionError(
+            f"expected 3 JDK-8368692 adaptation rows, found {len(rows)}"
+        )
+    by_target = {row["target_path"]: row for row in rows}
+    if len(by_target) != len(rows):
+        raise AssertionError("duplicate JDK-8368692 target path")
+    for row in rows:
+        if row["upstream_commit"] != JDK_8368692_COMMIT:
+            raise AssertionError(
+                f"unexpected JDK-8368692 donor commit for {row['target_path']}"
+            )
+        path = root / row["target_path"]
+        if not path.is_file():
+            raise AssertionError(f"missing JDK-8368692 target: {row['target_path']}")
+        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        if actual != row["target_sha256"]:
+            raise AssertionError(
+                f"JDK-8368692 target drift for {row['target_path']}: "
+                f"expected {row['target_sha256']}, actual {actual}"
+            )
+        baseline = row["baseline_sha256"]
+        if baseline != "ABSENT" and baseline == row["target_sha256"]:
+            raise AssertionError(f"JDK-8368692 row has no delta: {row['target_path']}")
+
+    seed = next(
+        (
+            row
+            for row in read_tsv(root / "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv")
+            if row["jbs"] == "JDK-8368692"
+        ),
+        None,
+    )
+    if seed is None or seed["upstream_commit"] != JDK_8368692_COMMIT:
+        raise AssertionError("JDK-8368692 seed donor commit drift")
+    if seed["disposition"] != "candidate-adapted":
+        raise AssertionError(
+            f"JDK-8368692 unexpected disposition: {seed['disposition']}"
+        )
+
+    password = (
+        root / "src/java.base/share/classes/sun/security/util/Password.java"
+    ).read_text(encoding="utf-8")
+    required = (
+        'SecurityProperties.privilegedGetOverridable(\n'
+        '                "jdk.security.password.allowSystemIn")',
+        'if (value == null || value.equalsIgnoreCase("true"))',
+        'if (value.equalsIgnoreCase("false"))',
+        "if (!isEchoOn && in == System.in && !ALLOW_STDIN)",
+    )
+    for snippet in required:
+        if snippet not in password:
+            raise AssertionError(f"JDK-8368692 password policy leaf missing: {snippet}")
+
+    security = (
+        root / "src/java.base/share/conf/security/java.security"
+    ).read_text(encoding="utf-8")
+    if "#jdk.security.password.allowSystemIn = true" not in security:
+        raise AssertionError("JDK-8368692 compatibility-preserving default missing")
+
+    test = (
+        root / "test/jdk/sun/security/tools/keytool/AllowSystemIn.java"
+    ).read_text(encoding="utf-8")
+    for mode in ("succeed", "fail", "invalid"):
+        if mode not in test:
+            raise AssertionError(f"JDK-8368692 focused jtreg mode missing: {mode}")
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -331,16 +556,21 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     root = args.root.resolve()
+    authority = verify_repository_authority(root)
     verify_jeps(root)
     verify_seed(root)
     verify_jcmd_backport(root)
     verify_javadoc_8347112_backport(root)
     verify_security_properties_8364182_backport(root)
     verify_keystore_instant_8374808_backport(root)
+    verify_jfr_options_help_8367584_backport(root)
+    verify_password_systemin_8368692_backport(root)
+    verify_passes_and_work_queue(root)
     print(
-        "PASS: 82 JEP rows, non-JEP seed uniqueness, exact JDK-8357439 donor blobs, "
+        f"PASS: {sum(len(ids) for ids in authority.values())} authority-locked JEP rows, non-JEP seed uniqueness, exact JDK-8357439 donor blobs, "
         "JDK-8347112 javadoc adaptation, JDK-8364182 serviceability adaptation, "
-        "and JDK-8374808 KeyStore Instant compatibility leaf"
+        "JDK-8374808 KeyStore Instant leaf, JDK-8367584 JFR help leaf, "
+        "JDK-8368692 password policy leaf, and resumable pass/work queue"
     )
     return 0
 
