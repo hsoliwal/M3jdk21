@@ -35,6 +35,7 @@ final class M3FrameworkProjectionTest {
             previous = at;
         }
         assertTrue(python.contains("inventory >> compatibility >> dependency"));
+        assertTrue(python.contains("delta >> baseline >> recipe"));
         assertTrue(python.contains("runtime >> promote"));
     }
 
