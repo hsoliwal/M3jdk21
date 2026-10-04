@@ -8,12 +8,14 @@ on:
       - "m3/pom.xml"
       - "m3/tooling/backport-dag/**"
       - "m3/tooling/migration-recipes/**"
+      - "m3/backports/recipes/jdk-8359706/**"
       - ".github/workflows/m3-jdk21-backport-dag.yml"
   pull_request:
     paths:
       - "m3/pom.xml"
       - "m3/tooling/backport-dag/**"
       - "m3/tooling/migration-recipes/**"
+      - "m3/backports/recipes/jdk-8359706/**"
       - ".github/workflows/m3-jdk21-backport-dag.yml"
   workflow_dispatch:
 
@@ -65,6 +67,27 @@ jobs:
           grep -F "$DAG_ROOT" target/m3-projection-smoke/out/m3_backport_dag.py
           grep -F "$DAG_ROOT" target/m3-projection-smoke/out/m3_backport_rules.drl
 
+      - name: Project JDK-8359706 evidence-bound packet
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/jdk-8359706-projections
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+            -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain \
+            -Dexec.args="$PWD/m3/backports/recipes/jdk-8359706/packet.tsv $PWD/target/jdk-8359706-projections $PWD/m3/backports/recipes/jdk-8359706/atom-evidence.tsv" \
+            exec:java
+          test -s target/jdk-8359706-projections/M3BackportRoutes.java
+          test -s target/jdk-8359706-projections/m3_backport_dag.py
+          test -s target/jdk-8359706-projections/m3_backport_rules.drl
+          test -s target/jdk-8359706-projections/projection.tsv
+          test -s target/jdk-8359706-projections/atom-evidence.tsv
+          test "$(tail -n 1 target/jdk-8359706-projections/atom-evidence.tsv | cut -f3)" -eq 9
+          ROOT="$(tail -n 1 target/jdk-8359706-projections/projection.tsv | cut -f2)"
+          test "${#ROOT}" -eq 64
+          grep -F "$ROOT" target/jdk-8359706-projections/M3BackportRoutes.java
+          grep -F "$ROOT" target/jdk-8359706-projections/m3_backport_dag.py
+          grep -F "$ROOT" target/jdk-8359706-projections/m3_backport_rules.drl
+
       - name: Emit backport programme status
         run: |
           mvn -B -ntp -f m3/backports/pom.xml verify
@@ -77,5 +100,6 @@ jobs:
             m3/backports/target/program-status.json
             m3/backports/target/program-status.tsv
             target/m3-projection-smoke/out/**
+            target/jdk-8359706-projections/**
           if-no-files-found: error
           retention-days: 14
