@@ -21,20 +21,20 @@ final class M3PacketDagComposerTest {
 
         M3RecipeDag dag = M3PacketDagComposer.compose(packet);
 
-        assertEquals(13, dag.size());
+        assertEquals(14, dag.size());
         assertThrows(IllegalArgumentException.class, () -> dag.require("recipe-crate"));
         assertEquals(
-                List.of("file-delta"),
+                List.of("baseline-convergence"),
                 dag.require("packet-java").dependsOn());
         assertEquals(
-                List.of("file-delta"),
+                List.of("baseline-convergence"),
                 dag.require("packet-text").dependsOn());
         assertEquals(
                 List.of("packet-java", "packet-text"),
                 dag.require("recipe-junit").dependsOn());
         assertEquals(
                 List.of("packet-java", "packet-text"),
-                dag.layers().get(4).stream().map(M3DagNode::id).toList());
+                dag.layers().get(5).stream().map(M3DagNode::id).toList());
         assertEquals("promote", dag.topologicalOrder().getLast().id());
         assertEquals(M3EditScope.FILE, dag.require("promote").scope());
     }
@@ -61,7 +61,7 @@ final class M3PacketDagComposerTest {
                 dag.layers().get(4).stream().map(M3DagNode::id).toList());
         assertEquals(
                 List.of("packet-join"),
-                dag.layers().get(5).stream().map(M3DagNode::id).toList());
+                dag.layers().get(6).stream().map(M3DagNode::id).toList());
         assertEquals(
                 List.of("packet-join"),
                 dag.require("recipe-junit").dependsOn());
@@ -186,7 +186,7 @@ final class M3PacketDagComposerTest {
         assertEquals(
                 "packet-java",
                 M3PacketDagComposer.compose(packet, evidence)
-                        .layers().get(4).getFirst().id());
+                        .layers().get(5).getFirst().id());
 
         M3BackportPacketEvidence missing =
                 new M3BackportPacketEvidence(
