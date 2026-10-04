@@ -1,4 +1,4 @@
 packet_id	atom_id	contract_ref	documentation_ref	pattern	iop_role	junit_proof_ref	fixed_point_required
 jep-458-multifile-source-launcher	java-graph	jep458/java21-compatible-java-graph	m3/backports/recipes/jep-458-current/README.md	Composite	Backport.JavaGraph	M3Jep458BackportRecipeTest	true
 jep-458-multifile-source-launcher	text-native-graph	jep458/java21-compatible-text-native-graph	m3/backports/recipes/jep-458-current/README.md	Adapter	Backport.NativeAndResourceGraph	M3Jep458BackportRecipeTest	true
-jep-458-multifile-source-launcher	feature-join	jep458/multimodule-feature-contract	m3/backports/recipes/jep-458-current/COMPATIBILITY_SPLIT.tsv	Composite	Backport.MultiModuleJoin	M3Jep458BackportRecipeTest	true
+jep-458-multifile-source-launcher	feature-join	jep458/library-api-feature-contract	m3/backports/recipes/jep-458-current/COMPATIBILITY_SPLIT.tsv	Composite	Backport.LibraryApiJoin	M3Jep458BackportRecipeTest	true
