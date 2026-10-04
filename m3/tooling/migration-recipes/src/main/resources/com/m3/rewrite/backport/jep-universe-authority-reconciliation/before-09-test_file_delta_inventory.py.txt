@@ -110,41 +110,19 @@ class FileDeltaInventoryTest(unittest.TestCase):
             self.assertIn("donor_oid", text)
             self.assertIn("OPENREWRITE_JAVA_PAIR", text)
 
-    def test_fixed_jdk21_baseline_and_authority_defined_donors_are_used(self) -> None:
+    def test_fixed_jdk21_baseline_is_used_for_every_donor(self) -> None:
         self.assertEqual((21, "jdk-21+35"), self.mod.BASELINE)
-        donors = self.mod.default_donors()
-        self.assertEqual("jdk-22+36", donors[22])
-        self.assertEqual("jdk-26+35", donors[26])
         self.assertEqual(
-            "f3701c80216900f3ded26f9de1befe43813be95c",
-            donors[27],
+            (
+                (22, "jdk-22+36"),
+                (23, "jdk-23+37"),
+                (24, "jdk-24+36"),
+                (25, "jdk-25+36"),
+                (26, "jdk-26+35"),
+                (27, "jdk-27+35"),
+            ),
+            self.mod.DONORS,
         )
-        self.assertFalse(donors[27].startswith("jdk-27+"))
-
-    def test_compare_accepts_commit_pinned_snapshot_ref(self) -> None:
-        with tempfile.TemporaryDirectory() as temp:
-            repo = Path(temp)
-            subprocess.run(("git", "init", "-q", str(repo)), check=True)
-            self.git(repo, "config", "user.email", "fixture@example.invalid")
-            self.git(repo, "config", "user.name", "Fixture")
-            self.write(repo, "src/A.java", "final class A { int v = 21; }\n")
-            self.git(repo, "add", ".")
-            self.git(repo, "commit", "-q", "-m", "jdk21")
-            self.git(repo, "tag", "jdk-21+35")
-            self.write(repo, "src/A.java", "final class A { int v = 27; }\n")
-            self.git(repo, "add", ".")
-            self.git(repo, "commit", "-q", "-m", "snapshot")
-            snapshot = subprocess.run(
-                ("git", "-C", str(repo), "rev-parse", "HEAD"),
-                check=True,
-                stdout=subprocess.PIPE,
-                text=True,
-            ).stdout.strip()
-
-            rows = self.mod.compare(repo, (27,), {27: snapshot})
-            self.assertEqual(1, len(rows))
-            self.assertEqual(snapshot, rows[0].donor_ref)
-            self.assertEqual("MODIFIED", rows[0].status)
 
 
 if __name__ == "__main__":

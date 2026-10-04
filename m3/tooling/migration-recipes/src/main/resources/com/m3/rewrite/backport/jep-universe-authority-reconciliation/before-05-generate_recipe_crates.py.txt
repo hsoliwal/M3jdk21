@@ -3,11 +3,9 @@
 # SPDX-License-Identifier: Apache-2.0
 """Generate candidate hash-pinned OpenRewrite crates from exact JDK21/donor file pairs.
 
-The generator never admits compatibility. By default it preserves the historical Java-only
-behavior and turns selected exact Java deltas into deterministic resources consumed by
-M3Jdk21HashPinnedSnapshotRecipe. With --include-text it also emits strict UTF-8 build/tool/resource
-deltas through M3Jdk21HashPinnedTextSnapshotRecipe. Generated crates remain CANDIDATE_UNVERIFIED
-until recipe JUnit, compile/test/runtime and compatibility gates pass.
+The generator never admits compatibility. It turns selected exact Java deltas into deterministic
+resources consumed by M3Jdk21HashPinnedSnapshotRecipe. Generated crates remain CANDIDATE_UNVERIFIED
+until Java-21 parse, recipe JUnit, compile/test/runtime and compatibility gates pass.
 """
 
 from __future__ import annotations
@@ -20,14 +18,11 @@ import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, Mapping, Sequence
+from typing import Iterable, Sequence
 
 CRATE_LIMIT = 256
 RESOURCE_ROOT = Path(
     "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned"
-)
-TEXT_RESOURCE_ROOT = Path(
-    "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text"
 )
 YAML_ROOT = Path("src/main/resources/META-INF/rewrite")
 
@@ -53,8 +48,6 @@ class Candidate:
     before_sha256: str
     after_sha256: str
     after_text: str
-    kind: str = "JAVA"
-    donor_ref: str = ""
 
 
 def _git_bytes(repo: Path, ref: str, path: str) -> bytes:
@@ -76,7 +69,7 @@ def _utf8(data: bytes, label: str) -> str:
     try:
         text = data.decode("utf-8", "strict")
     except UnicodeDecodeError as failure:
-        raise ValueError(f"{label}: source is not UTF-8") from failure
+        raise ValueError(f"{label}: Java source is not UTF-8") from failure
     if text.encode("utf-8") != data:
         raise ValueError(f"{label}: UTF-8 round-trip drift")
     return text
@@ -104,13 +97,11 @@ def candidates(
     release: int,
     selected: set[str] | None,
     all_candidates: bool,
-    include_text: bool = False,
-    donor_refs: Mapping[int, str] | None = None,
 ) -> tuple[list[Candidate], list[tuple[str, str]]]:
     if selected is None and not all_candidates:
         raise ValueError("select --paths-file or explicitly request --all-candidates")
 
-    rows = DELTA.compare(repo, (release,), donor_refs)
+    rows = DELTA.compare(repo, (release,))
     by_path = {row.path: row for row in rows}
     if selected is not None:
         missing = sorted(selected - set(by_path))
@@ -122,27 +113,13 @@ def candidates(
     for row in rows:
         if selected is not None and row.path not in selected:
             continue
-        if row.status == "SAME":
-            continue
-        if not row.java_source and not include_text:
+        if not row.java_source or row.status == "SAME":
             continue
         if row.status == "REMOVED":
             exclusions.append((row.path, "TYPED_EXCLUSION_AUTOMATIC_REMOVAL"))
             continue
         if row.status not in {"MODIFIED", "ADDED"}:
             exclusions.append((row.path, "TYPED_EXCLUSION_UNKNOWN_STATUS"))
-            continue
-
-        if row.donor_mode != "100644" or (
-            row.status == "MODIFIED" and row.baseline_mode != row.donor_mode
-        ):
-            exclusions.append(
-                (
-                    row.path,
-                    "TYPED_EXCLUSION_FILE_MODE:"
-                    f"{row.baseline_mode or 'ABSENT'}->{row.donor_mode or 'ABSENT'}",
-                )
-            )
             continue
 
         try:
@@ -172,8 +149,6 @@ def candidates(
                 before_sha256=before_hash,
                 after_sha256=after_hash,
                 after_text=after_text,
-                kind="JAVA" if row.java_source else "TEXT",
-                donor_ref=row.donor_ref,
             )
         )
 
@@ -192,99 +167,56 @@ def materialize(
     release: int,
     candidates_: Sequence[Candidate],
     exclusions: Sequence[tuple[str, str]],
-    crate_size: int = CRATE_LIMIT,
 ) -> list[str]:
-    if crate_size < 1 or crate_size > CRATE_LIMIT:
-        raise ValueError(f"crate_size must be between 1 and {CRATE_LIMIT}")
-
+    resource_root = out / RESOURCE_ROOT
     yaml_root = out / YAML_ROOT
+    resource_root.mkdir(parents=True, exist_ok=True)
     yaml_root.mkdir(parents=True, exist_ok=True)
 
-    kinds = {candidate.kind for candidate in candidates_}
-    if not kinds.issubset({"JAVA", "TEXT"}):
-        raise ValueError(f"unsupported candidate kind(s): {sorted(kinds)}")
-
-    donor_values = {candidate.donor_ref for candidate in candidates_ if candidate.donor_ref}
-    if len(donor_values) > 1:
-        raise ValueError(f"mixed donor refs in one release crate set: {sorted(donor_values)}")
-    donor_ref = next(iter(donor_values), DELTA.default_donors()[release])
-
-    mixed = "TEXT" in kinds
-    lanes: list[tuple[str, list[Candidate], Path, str, str]] = []
-    java_candidates = [candidate for candidate in candidates_ if candidate.kind == "JAVA"]
-    text_candidates = [candidate for candidate in candidates_ if candidate.kind == "TEXT"]
-    if java_candidates:
-        lanes.append(
-            (
-                "java",
-                java_candidates,
-                RESOURCE_ROOT,
-                "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe",
-                ".java.txt",
-            )
-        )
-    if text_candidates:
-        lanes.append(
-            (
-                "text",
-                text_candidates,
-                TEXT_RESOURCE_ROOT,
-                "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
-                ".txt",
-            )
-        )
-
     crate_names: list[str] = []
-    crate_types: dict[str, str] = {}
     crate_rows: list[tuple[str, ...]] = []
-    for lane_name, lane_candidates, resource_root_path, recipe_class, suffix in lanes:
-        resource_root = out / resource_root_path
-        resource_root.mkdir(parents=True, exist_ok=True)
-        for crate_index, chunk in enumerate(_chunks(lane_candidates, crate_size), 1):
-            if mixed:
-                crate_name = f"jdk{release}-{lane_name}-{crate_index:04d}"
-            else:
-                crate_name = f"jdk{release}-{crate_index:04d}"
-            crate_names.append(crate_name)
-            crate_types[crate_name] = recipe_class
-            crate_dir = resource_root / crate_name
-            crate_dir.mkdir(parents=True, exist_ok=True)
+    for crate_index, chunk in enumerate(_chunks(candidates_, CRATE_LIMIT), 1):
+        crate_name = f"jdk{release}-{crate_index:04d}"
+        crate_names.append(crate_name)
+        crate_dir = resource_root / crate_name
+        crate_dir.mkdir(parents=True, exist_ok=True)
 
-            manifest_rows: list[tuple[str, str, str, str]] = []
-            for resource_index, candidate in enumerate(chunk, 1):
-                resource_name = f"{resource_index:04d}{suffix}"
-                (crate_dir / resource_name).write_text(
-                    candidate.after_text,
-                    encoding="utf-8",
-                    newline="",
-                )
-                manifest_rows.append(
-                    (
-                        candidate.path,
-                        candidate.before_sha256,
-                        candidate.after_sha256,
-                        resource_name,
-                    )
-                )
-
-            with (crate_dir / "manifest.tsv").open(
-                "w", encoding="utf-8", newline=""
-            ) as handle:
-                writer = csv.writer(handle, delimiter="\t", lineterminator="\n")
-                writer.writerows(manifest_rows)
-
-            crate_rows.append(
+        manifest_rows: list[tuple[str, str, str, str]] = []
+        for resource_index, candidate in enumerate(chunk, 1):
+            resource_name = f"{resource_index:04d}.java.txt"
+            (crate_dir / resource_name).write_text(
+                candidate.after_text,
+                encoding="utf-8",
+                newline="",
+            )
+            manifest_rows.append(
                 (
-                    crate_name,
-                    str(release),
-                    "jdk-21+35",
-                    donor_ref,
-                    str(len(chunk)),
-                    chunk[0].path,
-                    chunk[-1].path,
-                    "CANDIDATE_UNVERIFIED",
+                    candidate.path,
+                    candidate.before_sha256,
+                    candidate.after_sha256,
+                    resource_name,
                 )
             )
+
+        with (crate_dir / "manifest.tsv").open(
+            "w", encoding="utf-8", newline=""
+        ) as handle:
+            writer = csv.writer(handle, delimiter="\t", lineterminator="\n")
+            writer.writerows(manifest_rows)
+
+        crate_rows.append(
+            (
+                crate_name,
+                str(release),
+                "jdk-21+35",
+                f"jdk-{release}+"
+                + {22: "36", 23: "37", 24: "36", 25: "36", 26: "35", 27: "35"}[release],
+                str(len(chunk)),
+                chunk[0].path,
+                chunk[-1].path,
+                "CANDIDATE_UNVERIFIED",
+            )
+        )
 
     with (out / "CRATES.tsv").open("w", encoding="utf-8", newline="") as handle:
         writer = csv.writer(handle, delimiter="\t", lineterminator="\n")
@@ -318,7 +250,7 @@ def materialize(
                 f"displayName: M3JDK21 candidate crate {crate_name}",
                 "description: Exact hash-pinned candidate; compatibility proof required before admission.",
                 "recipeList:",
-                f"  - {crate_types[crate_name]}:",
+                "  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:",
                 f"      crateName: {crate_name}",
                 "",
             ]
@@ -351,32 +283,8 @@ def _parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--repo", type=Path, required=True)
     parser.add_argument("--release", type=int, choices=range(22, 28), required=True)
     parser.add_argument("--out", type=Path, required=True)
-    parser.add_argument(
-        "--donor-refs",
-        type=Path,
-        default=Path(__file__).with_name("RELEASE_DONOR_REFS.tsv"),
-        help="immutable release/snapshot donor-ref authority",
-    )
     parser.add_argument("--paths-file", type=Path)
     parser.add_argument("--all-candidates", action="store_true")
-    parser.add_argument(
-        "--include-text",
-        action="store_true",
-        help=(
-            "also emit strict UTF-8 non-Java build/tool/resource candidates through "
-            "M3Jdk21HashPinnedTextSnapshotRecipe; default remains Java-only"
-        ),
-    )
-    parser.add_argument(
-        "--crate-size",
-        type=int,
-        default=CRATE_LIMIT,
-        choices=range(1, CRATE_LIMIT + 1),
-        help=(
-            "maximum targets per generated crate; use 1 for true FILE-scope recipe atoms "
-            "before explicit DAG promotion"
-        ),
-    )
     return parser.parse_args(argv)
 
 
@@ -385,27 +293,18 @@ def main(argv: Sequence[str] | None = None) -> int:
     repo = args.repo.resolve()
     out = args.out.resolve()
     selected = _selected_paths(args.paths_file)
-    donor_refs = DELTA.release_donor_refs.read(args.donor_refs.resolve())
     candidate_rows, exclusions = candidates(
         repo,
         args.release,
         selected,
         args.all_candidates,
-        include_text=args.include_text,
-        donor_refs=donor_refs,
     )
     if not candidate_rows:
-        raise SystemExit("no donor candidates selected")
-    crates = materialize(
-        out,
-        args.release,
-        candidate_rows,
-        exclusions,
-        crate_size=args.crate_size,
-    )
+        raise SystemExit("no Java donor candidates selected")
+    crates = materialize(out, args.release, candidate_rows, exclusions)
     print(
-        f"generated {len(crates)} crate(s) at max {args.crate_size} target(s)/crate, "
-        f"{len(candidate_rows)} candidate(s), "
+        f"generated {len(crates)} crate(s), "
+        f"{len(candidate_rows)} Java candidate(s), "
         f"{len(exclusions)} typed exclusion(s)"
     )
     return 0

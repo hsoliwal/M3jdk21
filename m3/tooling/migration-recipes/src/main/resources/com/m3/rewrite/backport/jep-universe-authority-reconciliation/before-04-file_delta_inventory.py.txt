@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # Copyright (c) 2026 Hitesh Soliwal.
 # SPDX-License-Identifier: Apache-2.0
-"""Compare the pinned JDK 21 GA tree against immutable released/snapshot donor trees.
+"""Compare every released donor tree verbatim against the pinned JDK 21 GA tree.
 
-Git blob identity is the first oracle: equal blob OIDs mean equal file bytes. Released JDK
-22..26 donors are exact GA tags. JDK 27 is an explicitly pinned in-development snapshot commit
-from RELEASE_DONOR_REFS.tsv; it is never represented as a GA tag by this tool.
+Git blob identity is the first oracle: equal blob OIDs mean equal file bytes. The output
+contains the full union of paths so SAME files are explicit evidence, not silently skipped.
+Changed Java files are marked for OpenRewrite semantic analysis/recipe generation.
 """
 
 from __future__ import annotations
@@ -16,11 +16,17 @@ import subprocess
 import sys
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, Mapping, Sequence
-
-import release_donor_refs
+from typing import Iterable, Sequence
 
 BASELINE = (21, "jdk-21+35")
+DONORS: tuple[tuple[int, str], ...] = (
+    (22, "jdk-22+36"),
+    (23, "jdk-23+37"),
+    (24, "jdk-24+36"),
+    (25, "jdk-25+36"),
+    (26, "jdk-26+35"),
+    (27, "jdk-27+35"),
+)
 
 
 @dataclass(frozen=True)
@@ -43,10 +49,6 @@ class FileDelta:
     donor_oid: str
     java_source: bool
     recipe_lane: str
-
-
-def default_donors() -> dict[int, str]:
-    return release_donor_refs.read(Path(__file__).with_name("RELEASE_DONOR_REFS.tsv"))
 
 
 def _git(repo: Path, *args: str, text: bool = True):
@@ -117,11 +119,10 @@ def _lane(path: str, status: str) -> str:
 def compare(
     repo: Path,
     donor_releases: Iterable[int] = range(22, 28),
-    donor_refs: Mapping[int, str] | None = None,
 ) -> list[FileDelta]:
-    refs = dict(default_donors() if donor_refs is None else donor_refs)
     selected = frozenset(donor_releases)
-    unknown = selected - set(refs)
+    known = {release for release, _ref in DONORS}
+    unknown = selected - known
     if unknown:
         raise ValueError(f"unsupported donor release(s): {sorted(unknown)}")
 
@@ -130,8 +131,9 @@ def compare(
     baseline = _tree(repo, baseline_ref)
     rows: list[FileDelta] = []
 
-    for release in sorted(selected):
-        donor_ref = refs[release]
+    for release, donor_ref in DONORS:
+        if release not in selected:
+            continue
         donor = _tree(repo, donor_ref)
         for path in sorted(set(baseline) | set(donor)):
             before = baseline.get(path)
@@ -198,13 +200,7 @@ def _parse_args(argv: Sequence[str]) -> argparse.Namespace:
         type=int,
         action="append",
         choices=range(22, 28),
-        help="donor release; repeatable; default is authority-defined releases 22..27",
-    )
-    parser.add_argument(
-        "--donor-refs",
-        type=Path,
-        default=Path(__file__).with_name("RELEASE_DONOR_REFS.tsv"),
-        help="immutable release/snapshot donor-ref authority",
+        help="donor release; repeatable; default is all released donors 22..27",
     )
     parser.add_argument("--out", type=Path)
     return parser.parse_args(argv)
@@ -213,11 +209,9 @@ def _parse_args(argv: Sequence[str]) -> argparse.Namespace:
 def main(argv: Sequence[str] | None = None) -> int:
     args = _parse_args(sys.argv[1:] if argv is None else argv)
     repo = args.repo.resolve()
-    donors = release_donor_refs.read(args.donor_refs.resolve())
-    releases = tuple(args.release or sorted(donors))
-    selected_refs = [donors[release] for release in releases]
-    _verify(repo, (BASELINE[1], *selected_refs))
-    rows = compare(repo, releases, donors)
+    releases = tuple(args.release or range(22, 28))
+    _verify(repo, (BASELINE[1], *(ref for _release, ref in DONORS)))
+    rows = compare(repo, releases)
     if args.out is None:
         write_tsv(rows, sys.stdout)
     else:

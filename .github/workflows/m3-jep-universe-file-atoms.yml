@@ -1,0 +1,160 @@
+name: M3 JEP universe authority and file-atom planning
+
+on:
+  push:
+    branches:
+      - "m3/jep-universe-authority-reconciled-20261004"
+    paths:
+      - "m3/backports/RELEASE_JEP_AUTHORITY.tsv"
+      - "m3/backports/RELEASE_DONOR_REFS.tsv"
+      - "m3/backports/JEP_CATALOGUE.tsv"
+      - "m3/backports/BACKPORT_WORK_QUEUE.tsv"
+      - "m3/backports/release_jep_authority.py"
+      - "m3/backports/release_donor_refs.py"
+      - "m3/backports/jep_upstream_inventory.py"
+      - "m3/backports/jep_seed_packet_planner.py"
+      - "m3/backports/generate_recipe_crates.py"
+      - "m3/backports/file_delta_inventory.py"
+      - "m3/backports/test_*.py"
+      - ".github/workflows/m3-jep-universe-file-atoms.yml"
+  pull_request:
+    paths:
+      - "m3/backports/**"
+      - ".github/workflows/m3-jep-universe-file-atoms.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Verify 85-JEP release and immutable donor authorities
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd m3/backports
+          python3 -m unittest -v             test_release_jep_authority.py             test_release_donor_refs.py
+
+      - name: Unit-test file delta crate and JEP planners
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd m3/backports
+          python3 -m unittest -v             test_file_delta_inventory.py             test_generate_recipe_crates.py             test_jep_upstream_inventory.py             test_jep_seed_packet_planner.py
+
+      - name: Fetch JDK21 baseline released donors and pinned JDK27 snapshot
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir "$RUNNER_TEMP/upstream-jdk"
+          git -C "$RUNNER_TEMP/upstream-jdk" init -q
+          git -C "$RUNNER_TEMP/upstream-jdk" remote add origin https://github.com/openjdk/jdk.git
+          git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch             --filter=blob:none --no-tags origin             "refs/tags/jdk-21+35:refs/tags/jdk-21+35"             "refs/tags/jdk-22+36:refs/tags/jdk-22+36"             "refs/tags/jdk-23+37:refs/tags/jdk-23+37"             "refs/tags/jdk-24+36:refs/tags/jdk-24+36"             "refs/tags/jdk-25+36:refs/tags/jdk-25+36"             "refs/tags/jdk-26+35:refs/tags/jdk-26+35"
+          git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch             --filter=blob:none --no-tags origin             f3701c80216900f3ded26f9de1befe43813be95c
+          git -C "$RUNNER_TEMP/upstream-jdk" rev-parse --verify 'jdk-21+35^{commit}'
+          git -C "$RUNNER_TEMP/upstream-jdk" rev-parse --verify 'f3701c80216900f3ded26f9de1befe43813be95c^{commit}'
+          printf 'UPSTREAM=%s\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
+
+      - name: Discover authority-bound JEP commit seeds and touched paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/jep-universe
+          python3 m3/backports/jep_upstream_inventory.py             --repo "$UPSTREAM"             --catalogue m3/backports/JEP_CATALOGUE.tsv             --donor-refs m3/backports/RELEASE_DONOR_REFS.tsv             --authority-root .             --out target/jep-universe/inventory
+          cat target/jep-universe/inventory/SUMMARY.tsv
+
+      - name: Project discovery seeds into candidate FILE atoms
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/jep_seed_packet_planner.py             --repo "$UPSTREAM"             --queue target/jep-universe/inventory/JEP_PACKET_QUEUE.tsv             --paths-root target/jep-universe/inventory/paths             --donor-refs m3/backports/RELEASE_DONOR_REFS.tsv             --out target/jep-universe/seed-packets
+          cat target/jep-universe/seed-packets/JEP_SEED_PACKET_STATUS.tsv
+
+      - name: Prove complete 85-row planning remains non-authoritative
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv
+          from pathlib import Path
+
+          queue = list(csv.DictReader(
+              Path("target/jep-universe/inventory/JEP_PACKET_QUEUE.tsv")
+                  .open(encoding="utf-8", newline=""),
+              delimiter="\t",
+          ))
+          packets = list(csv.DictReader(
+              Path("target/jep-universe/seed-packets/JEP_SEED_PACKET_STATUS.tsv")
+                  .open(encoding="utf-8", newline=""),
+              delimiter="\t",
+          ))
+
+          if len(queue) != 85 or len(packets) != 85:
+              raise SystemExit(
+                  f"expected 85 JEP rows, queue={len(queue)} packets={len(packets)}"
+              )
+          if any(
+              row["authority"]
+              != "INVENTORY_ONLY_NO_COMPATIBILITY_OR_MUTATION_AUTHORITY"
+              for row in queue + packets
+          ):
+              raise SystemExit("JEP planning gained semantic authority")
+
+          jdk27 = [row for row in queue if row["release"] == "27"]
+          expected = "f3701c80216900f3ded26f9de1befe43813be95c"
+          if not jdk27 or any(row["donor_ref"] != expected for row in jdk27):
+              raise SystemExit("JDK27 queue is not bound to the reviewed snapshot commit")
+          if any(row["donor_ref"].startswith("jdk-27+") for row in jdk27):
+              raise SystemExit("JDK27 was falsely represented as a GA tag")
+
+          print("PASS: 85 JEP rows remain inventory-only with immutable donor refs")
+          PY
+
+      - name: Prove reconciliation OpenRewrite replay and fixed point
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+            -Dtest=M3JepUniverseAuthorityReconciliationRecipeTest \
+            test
+
+      - name: Validate packet and emit Camel Airflow Drools projections
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/jep-universe/orchestration
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+            -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain \
+            -Dexec.args="$PWD/m3/backports/recipes/jep-universe-authority-reconciliation/packet.tsv $PWD/target/jep-universe/orchestration $PWD/m3/backports/recipes/jep-universe-authority-reconciliation/atom-evidence.tsv" \
+            exec:java
+          test -s target/jep-universe/orchestration/M3BackportRoutes.java
+          test -s target/jep-universe/orchestration/m3_backport_dag.py
+          test -s target/jep-universe/orchestration/m3_backport_rules.drl
+          cat target/jep-universe/orchestration/projection.tsv
+          cat target/jep-universe/orchestration/atom-evidence.tsv
+
+      - name: Verify canonical backport catalogue
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/backports/pom.xml verify
+
+      - name: Upload complete JEP seed/file-atom census
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-jep-universe-file-atoms-${{ github.run_id }}
+          path: target/jep-universe
+          if-no-files-found: error
+          retention-days: 30

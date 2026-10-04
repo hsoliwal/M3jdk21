@@ -1,0 +1,25 @@
+packet_id	atom_id	scope	scope_promotion_approved	work_ref	depends_on
+jep-universe-authority-reconciliation	file-release-donor-refs	FILE	false	control-file:m3/backports/RELEASE_DONOR_REFS.tsv	
+jep-universe-authority-reconciliation	file-release-donor-validator	FILE	false	control-file:m3/backports/release_donor_refs.py	
+jep-universe-authority-reconciliation	file-release-donor-test	FILE	false	control-file:m3/backports/test_release_donor_refs.py	
+jep-universe-authority-reconciliation	donor-authority	MODULE	true	composition:donor-authority	file-release-donor-refs,file-release-donor-validator,file-release-donor-test
+jep-universe-authority-reconciliation	file-delta-inventory	FILE	false	control-file:m3/backports/file_delta_inventory.py	donor-authority
+jep-universe-authority-reconciliation	file-delta-test	FILE	false	control-file:m3/backports/test_file_delta_inventory.py	file-delta-inventory
+jep-universe-authority-reconciliation	file-crate-generator	FILE	false	control-file:m3/backports/generate_recipe_crates.py	file-delta-inventory
+jep-universe-authority-reconciliation	file-crate-generator-test	FILE	false	control-file:m3/backports/test_generate_recipe_crates.py	file-crate-generator
+jep-universe-authority-reconciliation	file-atom-mechanics	MODULE	true	composition:file-atom-mechanics	file-delta-test,file-crate-generator-test
+jep-universe-authority-reconciliation	file-jep-inventory	FILE	false	control-file:m3/backports/jep_upstream_inventory.py	donor-authority
+jep-universe-authority-reconciliation	file-jep-inventory-test	FILE	false	control-file:m3/backports/test_jep_upstream_inventory.py	file-jep-inventory
+jep-universe-authority-reconciliation	file-jep-planner	FILE	false	control-file:m3/backports/jep_seed_packet_planner.py	file-atom-mechanics,file-jep-inventory
+jep-universe-authority-reconciliation	file-jep-planner-test	FILE	false	control-file:m3/backports/test_jep_seed_packet_planner.py	file-jep-planner
+jep-universe-authority-reconciliation	jep-planning	MODULE	true	composition:jep-planning	file-jep-inventory-test,file-jep-planner-test
+jep-universe-authority-reconciliation	file-jep-universe-ci	FILE	false	control-file:.github/workflows/m3-jep-universe-file-atoms.yml	jep-planning
+jep-universe-authority-reconciliation	file-crate-ci	FILE	false	control-file:.github/workflows/m3-jdk21-recipe-crates.yml	file-atom-mechanics
+jep-universe-authority-reconciliation	file-readme	FILE	false	control-file:m3/backports/README.md	donor-authority,jep-planning
+jep-universe-authority-reconciliation	ci-proof	MULTI_MODULE	true	composition:ci-proof	file-jep-universe-ci,file-crate-ci
+jep-universe-authority-reconciliation	file-reconciliation-recipe	FILE	false	bootstrap-file:m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3JepUniverseAuthorityReconciliationRecipe.java	
+jep-universe-authority-reconciliation	file-reconciliation-recipe-test	FILE	false	bootstrap-file:m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3JepUniverseAuthorityReconciliationRecipeTest.java	file-reconciliation-recipe
+jep-universe-authority-reconciliation	file-recipe-catalogue	FILE	false	control-file:m3/tooling/recipe-catalogue.tsv	file-reconciliation-recipe-test
+jep-universe-authority-reconciliation	file-recipe-registry	FILE	false	control-file:m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jep-universe-authority-reconciliation.yml	file-reconciliation-recipe-test
+jep-universe-authority-reconciliation	recipe-proof	MODULE	true	composition:recipe-proof	file-reconciliation-recipe-test,file-recipe-catalogue,file-recipe-registry
+jep-universe-authority-reconciliation	control-join	MULTI_MODULE	true	composition:jep-universe-authority-reconciliation	donor-authority,file-atom-mechanics,jep-planning,ci-proof,file-readme,recipe-proof
