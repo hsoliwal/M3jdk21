@@ -16,6 +16,7 @@ import com.m3.rewrite.atom.M3PureIntConvergenceRecipe;
 import com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe;
 import com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe;
 import com.m3.rewrite.backport.M3VerbatimJavaPairRecipe;
+import com.m3.rewrite.function.M3MIndexFunctionalKernelRecipe;
 import com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe;
 import com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe;
 import com.synexia.rewrite.M3SegmentedLaneNativeRecipe;
@@ -25,7 +26,7 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(13, M3RecipeScopeRegistry.size());
+        assertEquals(14, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(InstallIndexStringCompatibility.class.getName()));
@@ -39,6 +40,7 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3Jdk21HashPinnedSnapshotRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jdk21HashPinnedTextSnapshotRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3VerbatimJavaPairRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3MIndexFunctionalKernelRecipe.class.getName()));
         assertFalse(M3RecipeScopeRegistry.registered(null));
         assertFalse(M3RecipeScopeRegistry.registered("missing.Recipe"));
         assertThrows(NullPointerException.class, () -> M3RecipeScopeRegistry.require((Class<?>) null));
@@ -58,6 +60,12 @@ final class M3RecipeScopeDeclarationTest {
         var modulePolicy = M3RecipeScopeRegistry.require(InstallIndexStringCompatibility.class);
         assertEquals(M3EditScope.MODULE, modulePolicy.resolve(List.of("src/main/java/a/A.java")));
         assertFalse(modulePolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
+
+        var functionalPolicy = M3RecipeScopeRegistry.require(M3MIndexFunctionalKernelRecipe.class);
+        assertEquals(M3EditScope.MODULE, functionalPolicy.resolve(List.of(
+                "src/java.base/share/classes/jdk/internal/mindex/function/MIndexIntPipeline.java")));
+        assertFalse(functionalPolicy.fileLocalMechanical(List.of(
+                "src/java.base/share/classes/jdk/internal/mindex/function/MIndexIntPipeline.java")));
 
         var atomPolicy = M3RecipeScopeRegistry.require(M3AtomizePureIntReturnRecipe.class);
         assertEquals(M3EditScope.FILE, atomPolicy.resolve(List.of("src/main/java/a/A.java")));
@@ -131,7 +139,8 @@ final class M3RecipeScopeDeclarationTest {
                 M3PatternizePureIntAtomRecipe.class,
                 M3DocumentPureIntAtomRecipe.class,
                 M3PureIntConvergenceRecipe.class,
-                M3Java21ConvergenceRecipe.class)) {
+                M3Java21ConvergenceRecipe.class,
+                M3MIndexFunctionalKernelRecipe.class)) {
             assertEquals(
                     M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING,
                     M3RecipeScopeRegistry.require(recipe).contractMode());

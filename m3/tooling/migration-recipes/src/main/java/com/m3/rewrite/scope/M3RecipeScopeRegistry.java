@@ -44,6 +44,9 @@ public final class M3RecipeScopeRegistry {
                     "com.m3.rewrite.M3Java21ConvergenceRecipe",
                     fixed(M3EditScope.FILE)),
             Map.entry(
+                    "com.m3.rewrite.function.M3MIndexFunctionalKernelRecipe",
+                    fixed(M3EditScope.MODULE)),
+            Map.entry(
                     "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe",
                     inferred()),
             Map.entry(
