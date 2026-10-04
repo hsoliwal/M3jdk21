@@ -58,7 +58,7 @@ final class M3PacketDagComposerTest {
 
         assertEquals(
                 List.of("packet-a", "packet-b"),
-                dag.layers().get(4).stream().map(M3DagNode::id).toList());
+                dag.layers().get(5).stream().map(M3DagNode::id).toList());
         assertEquals(
                 List.of("packet-join"),
                 dag.layers().get(6).stream().map(M3DagNode::id).toList());
