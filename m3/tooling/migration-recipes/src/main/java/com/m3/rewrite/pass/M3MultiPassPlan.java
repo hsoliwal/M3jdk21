@@ -10,8 +10,9 @@ import java.util.Objects;
  * Canonical bounded multi-pass convergence plan for M3JDK21 tooling.
  *
  * <p>Passes are monotonic in authority. A later pass may see a broader scope, but no pass may
- * retroactively grant broader authority to an earlier recipe. FILE mutation reaches its own fixed
- * point before VISIBILITY/PACKAGE/MODULE work is admitted.
+ * retroactively grant broader authority to an earlier recipe. The complete FILE frontier is:
+ * inventory -> atomization -> patternization/IOP -> documentation -> fixed point. Only after the
+ * fixed-point dry-run is unchanged may VISIBILITY/PACKAGE/MODULE work be admitted.
  */
 public final class M3MultiPassPlan {
     private final List<Pass> passes;
@@ -35,14 +36,38 @@ public final class M3MultiPassPlan {
                         "inventory rows stable for unchanged file preimages"),
                 new Pass(
                         1,
-                        "file-fixed-point",
+                        "file-atomization",
                         M3PassMode.TRANSFORM,
                         M3EditScope.FILE,
                         true,
                         List.of("com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe"),
-                        "every admitted FILE recipe returns no further source change"),
+                        "every admitted atomization leaf is unchanged on immediate replay"),
                 new Pass(
                         2,
+                        "file-patternization",
+                        M3PassMode.TRANSFORM,
+                        M3EditScope.FILE,
+                        true,
+                        List.of("com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe"),
+                        "every admitted pattern/IOP role is unchanged on immediate replay"),
+                new Pass(
+                        3,
+                        "file-documentation",
+                        M3PassMode.TRANSFORM,
+                        M3EditScope.FILE,
+                        true,
+                        List.of("com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe"),
+                        "derived semantic documentation is unchanged on immediate replay"),
+                new Pass(
+                        4,
+                        "file-fixed-point",
+                        M3PassMode.VERIFY,
+                        M3EditScope.FILE,
+                        false,
+                        List.of("com.m3.rewrite.M3Java21ConvergenceRecipe"),
+                        "complete FILE convergence dry-run yields zero source changes"),
+                new Pass(
+                        5,
                         "visibility",
                         M3PassMode.TRANSFORM,
                         M3EditScope.VISIBILITY,
@@ -50,7 +75,7 @@ public final class M3MultiPassPlan {
                         List.of("com.m3.rewrite.scope.M3VisibilityInventoryRecipe"),
                         "visibility inventory is stable and every requested accessibility delta is explicitly classified"),
                 new Pass(
-                        3,
+                        6,
                         "package",
                         M3PassMode.RELATION,
                         M3EditScope.PACKAGE,
@@ -58,7 +83,7 @@ public final class M3MultiPassPlan {
                         List.of("com.m3.rewrite.scope.M3PackageBoundaryRecipe"),
                         "package boundary roots are stable and package/protected relations have no unresolved package-local target"),
                 new Pass(
-                        4,
+                        7,
                         "module",
                         M3PassMode.RELATION,
                         M3EditScope.MODULE,
@@ -66,7 +91,7 @@ public final class M3MultiPassPlan {
                         List.of("com.m3.rewrite.index.M3TypeRelationRecipe"),
                         "module-local source type relations have no unresolved in-module target"),
                 new Pass(
-                        5,
+                        8,
                         "multi-module-fan-in",
                         M3PassMode.FAN_IN,
                         M3EditScope.MULTI_MODULE,
@@ -77,7 +102,7 @@ public final class M3MultiPassPlan {
                                 "com.m3.rewrite.dag.M3RecipeDagPlannerRecipe"),
                         "canonical M3IndexDB content hash is stable across repeated fan-in"),
                 new Pass(
-                        6,
+                        9,
                         "library-api-admission",
                         M3PassMode.ADMISSION,
                         M3EditScope.LIBRARY_API,
@@ -85,7 +110,7 @@ public final class M3MultiPassPlan {
                         List.of("com.m3.rewrite.scope.M3LibraryApiSurfaceRecipe"),
                         "library API roots are stable and all requested exported-contract deltas are explicitly approved or typed exclusions"),
                 new Pass(
-                        7,
+                        10,
                         "proof",
                         M3PassMode.VERIFY,
                         M3EditScope.LIBRARY_API,
@@ -96,6 +121,10 @@ public final class M3MultiPassPlan {
 
     public List<Pass> passes() {
         return passes;
+    }
+
+    public List<Pass> fileConvergencePasses() {
+        return passes.subList(0, 5);
     }
 
     public Pass pass(int ordinal) {
@@ -143,8 +172,7 @@ public final class M3MultiPassPlan {
                 throw new IllegalArgumentException("recipeClasses");
             }
             stopCondition = token(stopCondition, "stopCondition");
-            if (mutationAuthority
-                    && mode != M3PassMode.TRANSFORM) {
+            if (mutationAuthority && mode != M3PassMode.TRANSFORM) {
                 throw new IllegalArgumentException(
                         "only TRANSFORM passes may carry mutation authority");
             }
