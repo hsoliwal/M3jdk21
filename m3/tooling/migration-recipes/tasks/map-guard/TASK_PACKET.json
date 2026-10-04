@@ -1,0 +1,67 @@
+{
+  "task_packet": "active",
+  "source_doc": "m3/tooling/migration-recipes/tasks/map-guard/DESIGN.md",
+  "invariant_id": "M3_MAP_ADMISSION",
+  "base_commit": "7ead93addf4a7b9614d4ad34c8dd02f4b93b9c36",
+  "run": {
+    "mode": "apply",
+    "profile": "bounded-local",
+    "workers": 1,
+    "shard_count": 1,
+    "shard_index": 0
+  },
+  "targets": {
+    "files": [
+      "src/java.base/share/classes/jdk/internal/mindex/MIndexMappedStringBacking.java",
+      "test/jdk/java/lang/String/MapGuardTest.java",
+      "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/MapGuardRecipeTest.java",
+      "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-map-guard/**",
+      "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/map-guard.yml",
+      "m3/tooling/migration-recipes/tasks/map-guard/**",
+      ".github/workflows/mindex-string-backing.yml",
+      "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/map-guard/**"
+    ]
+  },
+  "invariant_locks": {
+    "PUBLIC_API": "LOCKED",
+    "VALID_FORMAT": "LOCKED",
+    "EXISTING_TESTS": "LOCKED",
+    "POM_COVERAGE": "LOCKED",
+    "CANONICAL_BRANCHES": "READ_ONLY"
+  },
+  "allowed_delta": [
+    "private constructor/commit geometry repair",
+    "additive tests",
+    "existing recipe configuration/templates",
+    "docs/evidence",
+    "retain existing workflow and add the new jtreg test to its paths and test selection"
+  ],
+  "forbidden": [
+    "replace parser/storage owners",
+    "unchecked promotion",
+    "discard original tests",
+    "Maven or coverage exclusions",
+    "history rewrite"
+  ],
+  "verify_order": [
+    "diff",
+    "static/lint",
+    "compile",
+    "tests",
+    "runtime"
+  ],
+  "output_contract": [
+    "STATUS.tsv",
+    "FINAL_REPORT.md",
+    "RUN_CONTEXT.tsv",
+    "PROVENANCE.tsv",
+    "VERIFY_CONTRACT.tsv",
+    "OUTPUT_CONTRACT.tsv"
+  ],
+  "stop_conditions": [
+    "baseline drift",
+    "API drift",
+    "valid-file regression",
+    "missing dependency or rejected permission"
+  ]
+}
