@@ -1,0 +1,131 @@
+name: M3 JEP universe file-atom planning
+
+on:
+  push:
+    branches:
+      - "m3/jep-universe-file-atom-planner-20261004"
+    paths:
+      - "m3/backports/JEP_CATALOGUE.tsv"
+      - "m3/backports/jep_upstream_inventory.py"
+      - "m3/backports/jep_seed_packet_planner.py"
+      - "m3/backports/generate_recipe_crates.py"
+      - "m3/backports/file_delta_inventory.py"
+      - "m3/backports/test_jep_upstream_inventory.py"
+      - "m3/backports/test_jep_seed_packet_planner.py"
+      - "m3/backports/test_generate_recipe_crates.py"
+      - "m3/backports/test_file_delta_inventory.py"
+      - ".github/workflows/m3-jep-universe-file-atoms.yml"
+  pull_request:
+    paths:
+      - "m3/backports/JEP_CATALOGUE.tsv"
+      - "m3/backports/jep_upstream_inventory.py"
+      - "m3/backports/jep_seed_packet_planner.py"
+      - "m3/backports/generate_recipe_crates.py"
+      - "m3/backports/file_delta_inventory.py"
+      - "m3/backports/test_jep_upstream_inventory.py"
+      - "m3/backports/test_jep_seed_packet_planner.py"
+      - "m3/backports/test_generate_recipe_crates.py"
+      - "m3/backports/test_file_delta_inventory.py"
+      - ".github/workflows/m3-jep-universe-file-atoms.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Unit-test JEP inventory and file-atom planners
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd m3/backports
+          python3 -m unittest -v             test_file_delta_inventory.py             test_generate_recipe_crates.py             test_jep_upstream_inventory.py             test_jep_seed_packet_planner.py
+
+      - name: Fetch complete released OpenJDK GA tag set
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir "$RUNNER_TEMP/upstream-jdk"
+          git -C "$RUNNER_TEMP/upstream-jdk" init -q
+          git -C "$RUNNER_TEMP/upstream-jdk" remote add origin https://github.com/openjdk/jdk.git
+          git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch             --filter=blob:none --no-tags origin             "refs/tags/jdk-21+35:refs/tags/jdk-21+35"             "refs/tags/jdk-22+36:refs/tags/jdk-22+36"             "refs/tags/jdk-23+37:refs/tags/jdk-23+37"             "refs/tags/jdk-24+36:refs/tags/jdk-24+36"             "refs/tags/jdk-25+36:refs/tags/jdk-25+36"             "refs/tags/jdk-26+35:refs/tags/jdk-26+35"             "refs/tags/jdk-27+35:refs/tags/jdk-27+35"
+          printf 'UPSTREAM=%s\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
+
+      - name: Discover JEP-numbered upstream commit seeds and touched paths
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/jep-universe
+          python3 m3/backports/jep_upstream_inventory.py             --repo "$UPSTREAM"             --catalogue m3/backports/JEP_CATALOGUE.tsv             --out target/jep-universe/inventory
+          cat target/jep-universe/inventory/SUMMARY.tsv
+
+      - name: Project discovery seeds into final-GA candidate FILE atoms
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/jep_seed_packet_planner.py             --repo "$UPSTREAM"             --queue target/jep-universe/inventory/JEP_PACKET_QUEUE.tsv             --paths-root target/jep-universe/inventory/paths             --out target/jep-universe/seed-packets
+          cat target/jep-universe/seed-packets/JEP_SEED_PACKET_STATUS.tsv
+
+      - name: Prove planner never promotes seed evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv
+          from pathlib import Path
+
+          queue = list(csv.DictReader(
+              Path("target/jep-universe/inventory/JEP_PACKET_QUEUE.tsv")
+                  .open(encoding="utf-8", newline=""),
+              delimiter="\t",
+          ))
+          packets = list(csv.DictReader(
+              Path("target/jep-universe/seed-packets/JEP_SEED_PACKET_STATUS.tsv")
+                  .open(encoding="utf-8", newline=""),
+              delimiter="\t",
+          ))
+
+          if len(queue) != 82 or len(packets) != 82:
+              raise SystemExit(
+                  f"expected 82 JEP rows, queue={len(queue)} packets={len(packets)}"
+              )
+          if any(
+              row["authority"]
+              != "INVENTORY_ONLY_NO_COMPATIBILITY_OR_MUTATION_AUTHORITY"
+              for row in queue
+          ):
+              raise SystemExit("JEP queue gained semantic authority")
+          if any(
+              row["authority"]
+              != "INVENTORY_ONLY_NO_COMPATIBILITY_OR_MUTATION_AUTHORITY"
+              for row in packets
+          ):
+              raise SystemExit("JEP seed packet gained semantic authority")
+          print("PASS: 82 JEP rows remain inventory-only")
+          PY
+
+      - name: Verify canonical backport catalogue
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/backports/pom.xml verify
+
+      - name: Upload complete JEP seed/file-atom census
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-jep-universe-file-atoms-${{ github.run_id }}
+          path: target/jep-universe
+          if-no-files-found: error
+          retention-days: 30
