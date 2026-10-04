@@ -10,17 +10,17 @@ authority revision.
 from __future__ import annotations
 
 import argparse
-import csv
 import subprocess
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Callable, Sequence
 
 import release_donor_refs
+import m3_dna_id
 
 
 @dataclass(frozen=True)
-class DonorRun:
+class Run:
     release: int
     revision: str
     donor_root: Path
@@ -63,7 +63,7 @@ def resolved_ref(donor_root: Path, revision: str) -> str:
     return process.stdout.strip()
 
 
-def verify_checkout(control_root: Path, donor_root: Path, release: int) -> DonorRun:
+def verify_checkout(control_root: Path, donor_root: Path, release: int) -> Run:
     control = control_root.resolve()
     donor = donor_root.resolve()
     if not (donor / "src").is_dir():
@@ -75,7 +75,7 @@ def verify_checkout(control_root: Path, donor_root: Path, release: int) -> Donor
         raise ValueError(
             f"donor checkout drift for JDK {release}: HEAD {actual} != {revision} {expected}"
         )
-    return DonorRun(release, revision, donor, Path())
+    return Run(release, revision, donor, Path())
 
 
 def maven_command(
@@ -109,22 +109,16 @@ def maven_command(
     )
 
 
-def verify_identity(output: Path, revision: str) -> str:
-    identity = output.resolve() / "SOURCE_CONVERGENCE.image.tsv"
+def verify_id(output: Path, revision: str) -> str:
+    identity = output.resolve() / "M3_DNA.tsv"
     manifest = output.resolve() / "SOURCE_CONVERGENCE.tsv"
     if not identity.is_file() or not manifest.is_file():
-        raise ValueError("donor convergence output missing manifest/identity")
-    with identity.open("r", encoding="utf-8", newline="") as handle:
-        rows = list(csv.DictReader(handle, delimiter="\t"))
-    if len(rows) != 1:
-        raise ValueError("donor convergence identity row count")
-    row = rows[0]
-    if row.get("role") != "DONOR" or row.get("revision") != revision:
-        raise ValueError("donor convergence identity mismatch")
-    root = row.get("semanticRoot", "")
-    if len(root) != 64 or any(ch not in "0123456789abcdef" for ch in root):
-        raise ValueError("invalid donor convergence semantic root")
-    return root
+        raise ValueError("DNA output missing manifest/identity")
+    return m3_dna_id.load(
+        identity,
+        expected_role="DONOR",
+        expected_revision=revision,
+    ).semantic_root
 
 
 def run(
@@ -145,7 +139,7 @@ def run(
     )
     execute = runner or _run
     execute(command)
-    return verify_identity(output, revision)
+    return verify_id(output, revision)
 
 
 def _run(command: Sequence[str]) -> None:
@@ -168,7 +162,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         args.output,
         threads=args.threads,
     )
-    print(f"M3_DONOR_CONVERGENCE\tPASS\tJDK{args.release}\t{root}")
+    print(f"M3_DNA\tPASS\tJDK{args.release}\t{root}")
     return 0
 
 
