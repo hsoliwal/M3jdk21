@@ -161,8 +161,7 @@ def generate(
     with (out / "NORMALIZED_PAIR.tsv").open(
         "w", encoding="utf-8", newline=""
     ) as handle:
-        writer = csv.writer(handle, delimiter="	", lineterminator="
-")
+        writer = csv.writer(handle, delimiter="	", lineterminator="\\n")
         writer.writerow(
             (
                 "release",
@@ -193,8 +192,7 @@ def generate(
     with (out / "CRATE_NORMALIZATION.tsv").open(
         "w", encoding="utf-8", newline=""
     ) as handle:
-        writer = csv.writer(handle, delimiter="	", lineterminator="
-")
+        writer = csv.writer(handle, delimiter="	", lineterminator="\\n")
         writer.writerow(("crate_name", "release", "donor_ref", "pair_root", "status"))
         for crate in crates:
             writer.writerow(
