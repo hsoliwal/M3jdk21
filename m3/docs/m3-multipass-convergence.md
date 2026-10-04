@@ -25,22 +25,32 @@ content-addressed receipts.
 
 | Pass | ID | Maximum scope | Mutation | Main evidence |
 | ---: | --- | --- | --- | --- |
-| 0 | inventory | FILE | no | atom candidates + semantic index |
-| 1 | file-fixed-point | FILE | yes | tested FILE recipes until no change |
-| 2 | visibility | VISIBILITY | no by default | declaration visibility inventory |
-| 3 | package | PACKAGE | no by default | deterministic package boundary roots |
-| 4 | module | MODULE | no by default | attributed source type relationships |
-| 5 | multi-module-fan-in | MULTI_MODULE | no | canonical M3IndexDB graph + recipe DAG evidence |
-| 6 | library-api-admission | LIBRARY_API | no by default | deterministic exported API roots |
-| 7 | proof | LIBRARY_API | no | diff -> lint -> compile -> tests -> runtime contract |
+| 0 | inventory | FILE | no | fingerprints + atom candidates + semantic index |
+| 1 | file-atomization | FILE | yes | independently tested atomization recipes |
+| 2 | file-patternization | FILE | yes | admitted pattern/IOP role recipes |
+| 3 | file-documentation | FILE | yes | derivable semantic/Javadoc recipes |
+| 4 | file-fixed-point | FILE | no | complete convergence DAG dry-run yields zero changes |
+| 5 | visibility | VISIBILITY | no by default | declaration visibility inventory |
+| 6 | package | PACKAGE | no by default | deterministic package boundary roots |
+| 7 | module | MODULE | no by default | attributed source type relationships |
+| 8 | multi-module-fan-in | MULTI_MODULE | no | canonical M3IndexDB graph + recipe DAG evidence |
+| 9 | library-api-admission | LIBRARY_API | no by default | deterministic exported API roots |
+| 10 | proof | LIBRARY_API | no | diff -> lint -> compile -> tests -> runtime contract |
 
 A later pass does not retroactively widen an earlier recipe's authority.
 
 ## FILE fixed point
 
-A FILE transformation is supplied exactly one source file and one FILE-admitted recipe.
+The FILE frontier is explicit and ordered:
 
-The FILE executor repeats the recipe until:
+    inventory
+      -> atomization
+      -> patternization / IOP
+      -> documentation
+      -> fixed-point dry-run
+
+Each mutating leaf is independently JUnit-proven. The final dry-run executes the trusted composite
+recipe from the staged postimage and must produce no source change:
 
     T(file) = file
 
@@ -52,6 +62,28 @@ or fails closed because the recipe:
 - violates the declared behavior/contract mode.
 
 A repository may execute many independent FILE fixed points concurrently.
+
+## Mavenized whole-JDK bootstrap
+
+OpenJDK's configure/make build remains the product build. Maven is the M3 control shell.
+
+The opt-in profile:
+
+    mvn -B -ntp -f m3/pom.xml \
+      -pl tooling/migration-recipes -am \
+      -Pm3-jdk-source-convergence verify
+
+walks the original `src/**/*.java` tree and processes every file independently. It never writes
+`src/`. Changed postimages and receipts are emitted under the migration-recipes Maven
+`target/m3-jdk-source-convergence` directory.
+
+The receipt records pre/post SHA-256, whether atomization/patternization/documentation changed the
+file, fixed-point status, HOLD reason and candidate path. Rows are sorted before a semantic root is
+computed, so parallel scheduling cannot change the receipt identity.
+
+Backport `apply` may consume a Java target only when the target's current preimage matches a
+non-HOLD SOURCE_CONVERGENCE row with `fixedPoint=true`. The product delta is still separately
+reviewed and verified; baseline convergence is a prerequisite, not semantic equivalence proof.
 
 ## Atomization and patternization
 
@@ -204,7 +236,8 @@ Do not weaken coverage gates to promote a recipe. Improve the atomization/tests/
 
 The same convergence fabric applies to JDK 22–27 assimilation:
 
-    inventory
+    baseline FILE convergence
+      -> inventory
       -> classify
       -> dependency closure
       -> materialize patch/recipe
