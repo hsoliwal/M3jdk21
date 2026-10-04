@@ -237,10 +237,11 @@ class ExportRecipeDagTest(unittest.TestCase):
         self.assertEqual(dag.dag_root(first), dag.dag_root(second))
 
     def test_repository_queue_exports_every_item_as_one_seven_pass_chain(self):
-        root = Path(__file__).resolve().parents[2]
-        queue = dag.read_tsv(root / "backports/BACKPORT_WORK_QUEUE.tsv", dag.QUEUE_FIELDS)
-        passes = dag.read_passes(root / "backports/BACKPORT_PASSES.tsv")
-        recipes = dag.recipe_bindings(root / "tooling/recipe-catalogue.tsv")
+        backports = Path(__file__).resolve().parent
+        m3 = backports.parent
+        queue = dag.read_tsv(backports / "BACKPORT_WORK_QUEUE.tsv", dag.QUEUE_FIELDS)
+        passes = dag.read_passes(backports / "BACKPORT_PASSES.tsv")
+        recipes = dag.recipe_bindings(m3 / "tooling/recipe-catalogue.tsv")
         rows = dag.export_rows(queue, passes, recipes)
 
         self.assertEqual(len(queue) * 7, len(rows))
