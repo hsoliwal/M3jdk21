@@ -107,6 +107,25 @@ The upstream-inventory workflow exports:
 - `COMPATIBILITY_QUEUE.tsv`;
 - `COMPATIBILITY_QUEUE.summary.json`.
 
+## Java 21 baseline normalization before absorption
+
+Before a Java backport recipe mutates a target file, M3 may run the checked-in Java 21
+OpenRewrite convergence DAG across the original JDK tree:
+
+`inventory -> atomization -> patternization/IOP -> documentation -> fixed point`.
+
+The Maven control profile writes candidate postimages and `SOURCE_CONVERGENCE.tsv` under
+`target/`; it never edits canonical OpenJDK source. A detached normalized worktree is then
+materialized from only non-HOLD fixed-point rows. The backport DAG contains a mandatory
+`baseline-convergence` node between `file-delta` and every recipe atom.
+
+Camel, Airflow and Drools projections inherit that edge mechanically. They cannot bypass the
+receipt, reinterpret Java compatibility or promote source.
+
+The same convergence tool may be applied to a donor checkout using the Java 21 parser. Compatible
+donor Java reaches a comparable normalized form; post-21 syntax or other unsupported Java-21
+semantics becomes explicit HOLD evidence.
+
 ## Exact JDK21 ↔ donor file deltas and recipe crates
 
 `file_delta_inventory.py` compares the entire JDK 21 GA tree verbatim against each released donor
