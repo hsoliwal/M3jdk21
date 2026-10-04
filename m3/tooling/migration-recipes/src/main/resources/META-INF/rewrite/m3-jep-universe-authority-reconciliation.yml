@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.backport.M3JepUniverseAuthorityReconciliation
+displayName: Reconcile M3JDK21 JEP authority and FILE-atom planning
+description: Exact source-sealed replay of the 85-row JEP denominator, immutable donor refs, file-atom mechanics and planning proof.
+recipeList:
+  - com.m3.rewrite.backport.M3JepUniverseAuthorityReconciliationRecipe
