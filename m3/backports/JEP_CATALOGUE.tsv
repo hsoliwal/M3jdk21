@@ -13,7 +13,7 @@ release	jep	title	domain	disposition	reason	superseded_by
 22	464	Scoped Values (Second Preview)	library-runtime	superseded	Use final JEP 506.	506
 23	455	Primitive Types in Patterns, instanceof, and switch (Preview)	language	reject-language	Requires Java grammar/javac semantic changes.	
 23	466	Class-File API (Second Preview)	library	superseded	Use final JEP 484.	484
-23	467	Markdown Documentation Comments	tool-javadoc-javac-doc	candidate-high-risk	Tool/documentation parsing enhancement; no Java language grammar change, but touches compiler doc-comment internals.	
+23	467	Markdown Documentation Comments	tool-javadoc-javac-doc	candidate-high-risk	No Java source grammar change; implementation spans javac/javadoc, additive compiler/doc-tree API, build wiring, and a new private Markdown module, so LIBRARY_API compatibility review is required.	
 23	469	Vector API (Eighth Incubator)	library-hotspot-compiler	hold-jit	Incubator/JIT-dependent lineage; evaluate separately.	537
 23	471	Deprecate the Memory-Access Methods in sun.misc.Unsafe for Removal	compatibility	hold-compat	Intentional deprecation/removal pressure changes compatibility posture.	
 23	473	Stream Gatherers (Second Preview)	library	superseded	Use final JEP 485.	485
