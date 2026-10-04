@@ -46,7 +46,7 @@ final class M3Jep458BackportRecipeTest {
         assertEquals("jdk22-jep458-multifile-text", textRecipe.getCrateName());
         assertEquals(
                 M3EditScope.MULTI_MODULE,
-                M3RecipeScopeRegistry.require(M3Jep458BackportRecipe.class).declaredScope());
+                M3RecipeScopeRegistry.require(M3Jep458BackportRecipe.class).minimumScope());
         assertTrue(recipe.getTags().contains("multi-module"));
         assertTrue(recipe.getTags().contains("hash-pinned"));
     }
