@@ -169,6 +169,42 @@ semantics, so they require a separately reviewed native/Git/build-file mechanism
 fake PlainText success.
 
 
+## JEP-wide upstream seed and FILE-atom planning
+
+The 82-row JEP catalogue is projected mechanically by two evidence-only stages:
+
+1. `jep_upstream_inventory.py`
+   - scans the pinned JDK21 -> delivered-release GA history for commit messages naming each JEP;
+   - records exact seed commits and every touched path, including both sides of renames/copies;
+   - emits `paths/jep-<number>.txt`;
+   - marks every result as
+     `DISCOVERY_SEED_ONLY_NOT_DEPENDENCY_CLOSURE`.
+
+2. `jep_seed_packet_planner.py`
+   - takes those seed path lists;
+   - compares the final delivered GA tree against JDK21;
+   - uses the existing Java/text generator with `--crate-size 1 --include-text`;
+   - records generated FILE atoms, typed exclusions, final-GA no-delta cases and missing path lists;
+   - retains
+     `INVENTORY_ONLY_NO_COMPATIBILITY_OR_MUTATION_AUTHORITY`.
+
+This is intentionally conservative. A commit merely mentioning a JEP is not assumed to be the
+complete implementation lineage. Follow-up fixes, dependencies, preview-to-final changes, build
+requirements and target-side adaptations still require dependency-closure review.
+
+The workflow `M3 JEP universe file-atom planning` processes all released JDK22..27 GA tags in
+one run and uploads:
+
+- `JEP_UPSTREAM_COMMITS.tsv`;
+- `JEP_UPSTREAM_PATHS.tsv`;
+- `JEP_PACKET_QUEUE.tsv`;
+- one sorted seed-path list per discovered JEP;
+- one candidate Java/text FILE-atom bundle per eligible JEP seed set;
+- `JEP_SEED_PACKET_STATUS.tsv`.
+
+This removes manual discovery work while preserving the M3 rule that compatibility, mutation and
+promotion authority come only from later explicit passes.
+
 ## Recipe DAG control plane
 
 Backport execution is composed from small immutable recipe/work atoms through the framework-neutral
