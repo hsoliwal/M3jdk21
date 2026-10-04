@@ -52,12 +52,18 @@ jobs:
             -pl tooling/migration-recipes -am \
             -Dtest='M3FileConvergenceRecipeDagTest,M3Jdk21SourceConvergenceMainTest,M3Java21ConvergenceRecipeTest,M3PureIntConvergenceRecipeTest,M3MultiPassPlanTest,M3PassLedgerTest' \
             -Dsurefire.failIfNoSpecifiedTests=false \
+            -DfailIfNoTests=false \
             test
+          test -f m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.file.M3FileConvergenceRecipeDagTest.xml
+          test -f m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.file.M3Jdk21SourceConvergenceMainTest.xml
           mvn -B -ntp -f m3/pom.xml \
             -pl tooling/backport-dag -am \
             -Dtest='M3RecipeDagTest,M3BackportDagLoaderTest,M3PacketDagComposerTest,M3DagProjectorTest,M3FrameworkProjectionTest' \
             -Dsurefire.failIfNoSpecifiedTests=false \
+            -DfailIfNoTests=false \
             test
+          test -f m3/tooling/backport-dag/target/surefire-reports/TEST-com.m3.tooling.dag.M3RecipeDagTest.xml
+          test -f m3/tooling/backport-dag/target/surefire-reports/TEST-com.m3.tooling.dag.M3PacketDagComposerTest.xml
           python3 -m unittest discover \
             -s m3/backports \
             -p 'test_*source_convergence*.py' \
