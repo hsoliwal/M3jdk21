@@ -189,7 +189,7 @@ jobs:
           python3 m3/backports/verify.py --root .
           mvn -B -f m3/backports/pom.xml test
           mvn -B -ntp -f m3/pom.xml -pl tooling/migration-recipes -am \
-            -Dtest=M3Jdk8347112BackportRecipeTest,M3Jdk8364182BackportRecipeTest,M3Jdk8374808BackportRecipeTest,M3Jdk8367584JfrOptionsHelpBackportRecipeTest,M3Jdk8368692PasswordSystemInBackportRecipeTest \
+            -Dtest=M3Jdk8347112BackportRecipeTest,M3Jdk8364182BackportRecipeTest,M3Jdk8374808BackportRecipeTest,M3Jdk8367584JfrOptionsHelpBackportRecipeTest,M3Jdk8368692PasswordSystemInBackportRecipeTest,M3BackportRecipeDagExportRecipeTest \
             -Dsurefire.failIfNoSpecifiedTests=false test
 
       - name: Export candidate-only backport recipe DAG
