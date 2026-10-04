@@ -1,0 +1,5 @@
+PASS: source diff recorded before final test execution
+PASS: Python syntax; task JSON; ordered three-target manifest; pre/post bytes
+PASS: 4 baseline Git blobs matched pinned fetched sources
+PASS: 12 existing test cases' source files unchanged
+OpenRewrite/JUnit engine execution: NOT RUN

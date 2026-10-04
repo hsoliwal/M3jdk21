@@ -1,0 +1,13 @@
+key	value
+repository	hsoliwal/M3jdk21
+base_commit	0c22ffcd4fc40ac68c06cd5659bb2e40a58fd1a7
+base_branch	m3/jdk21-final-convergence-20261004
+base_pr	61
+base_tree	f679c65a8e6955439db1523e5f30d5084c3c4473
+canonical_master_observed	7aaeca8683b8bb0958e02906a180a4a5ed95c036
+scope	MODULE tooling repair; existing runtime/public API locked
+execution	serial local worker=1; no distributed execution
+tests	/usr/bin/python3 -m unittest test_source_convergence_gate test_materialize_source_convergence test_convergence_preflight -v
+maven_owner	m3/backports/pom.xml already discovers test_*.py; no POM change
+publication	candidate-only draft; no canonical branch update
+copy_semantics	per-file atomic replacement; not a multi-file transaction or hostile filesystem sandbox

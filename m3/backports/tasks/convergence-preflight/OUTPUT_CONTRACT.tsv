@@ -1,0 +1,20 @@
+artifact	purpose
+DESIGN.md	Contract, semantic roles and limits
+TASK_PACKET.json	Pinned base, scope, locks, ordered gates
+STATUS.tsv	Actual executed and blocked states
+FINAL_REPORT.md	Changes, proof, limitations and reproduction
+RUN_CONTEXT.tsv	Branch/tooling/execution scope
+PROVENANCE.tsv	Exact source and owner identities
+VERIFY_CONTRACT.tsv	Separate positive and unexecuted gates
+ACTION_QUEUE.tsv	All discussed workstreams; existing owners retain authority
+INVENTORY.tsv	Bounded source/fixture inventory, not whole repo
+baseline-failures.json	Four defects reproduced in fixtures
+repaired-reproduction.json	Same probes no longer reproduce
+reproduce.py	Standalone original/repaired probe, temporary files only
+unit-tests.log	42 actual Python unittest cases
+static-check.log	Actual structural checks
+toolchain.log	Actual tool availability
+connectivity.log	Actual resolution failures
+CLUSTERS_EXACT.tsv	Intentional byte-identical recipe snapshots; retain
+CLUSTERS_NORMALIZED.tsv	No semantic dedup claim
+SUMMARY.tsv	Scoped counters; zero new product backports claimed

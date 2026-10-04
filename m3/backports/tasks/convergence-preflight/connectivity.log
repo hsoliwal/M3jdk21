@@ -1,0 +1,6 @@
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0curl: (6) Could not resolve host: repo.maven.apache.org
+CURL_EXIT:6
+fatal: unable to access 'https://github.com/hsoliwal/M3jdk21.git/': Could not resolve host: github.com
+GIT_EXIT:128
