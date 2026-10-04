@@ -122,6 +122,29 @@ jobs:
           print("PASS: 85 JEP rows remain inventory-only with immutable donor refs")
           PY
 
+      - name: Prove reconciliation OpenRewrite replay and fixed point
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+            -Dtest=M3JepUniverseAuthorityReconciliationRecipeTest \
+            test
+
+      - name: Validate packet and emit Camel Airflow Drools projections
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/jep-universe/orchestration
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+            -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain \
+            -Dexec.args="$PWD/m3/backports/recipes/jep-universe-authority-reconciliation/packet.tsv $PWD/target/jep-universe/orchestration $PWD/m3/backports/recipes/jep-universe-authority-reconciliation/atom-evidence.tsv" \
+            exec:java
+          test -s target/jep-universe/orchestration/M3BackportRoutes.java
+          test -s target/jep-universe/orchestration/m3_backport_dag.py
+          test -s target/jep-universe/orchestration/m3_backport_rules.drl
+          cat target/jep-universe/orchestration/projection.tsv
+          cat target/jep-universe/orchestration/atom-evidence.tsv
+
       - name: Verify canonical backport catalogue
         shell: bash
         run: |
