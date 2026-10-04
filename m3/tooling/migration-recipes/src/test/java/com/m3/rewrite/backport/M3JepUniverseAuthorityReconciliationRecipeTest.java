@@ -55,7 +55,11 @@ final class M3JepUniverseAuthorityReconciliationRecipeTest {
             additive("m3/backports/recipes/jep-universe-authority-reconciliation/atom-evidence.tsv",
                     "16-atom-evidence.tsv.txt"),
             additive("m3/backports/recipes/jep-universe-authority-reconciliation/COMPOSITION_PLAN.tsv",
-                    "17-COMPOSITION_PLAN.tsv.txt"));
+                    "17-COMPOSITION_PLAN.tsv.txt"),
+            existing("m3/tooling/recipe-catalogue.tsv",
+                    "18-recipe-catalogue.tsv.txt"),
+            additive("m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jep-universe-authority-reconciliation.yml",
+                    "19-recipe-registry.yml.txt"));
 
     @Test
     void exactBatchReplaysThenReachesFixedPoint() {
