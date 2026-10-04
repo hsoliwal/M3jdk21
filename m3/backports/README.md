@@ -107,6 +107,13 @@ The upstream-inventory workflow exports:
 - `COMPATIBILITY_QUEUE.tsv`;
 - `COMPATIBILITY_QUEUE.summary.json`.
 
+## Algorithm evidence catalogue
+
+A3 algorithm evidence lives in ALGORITHM_CATALOGUE.tsv. One row is one JDK-owned/adapted algorithm
+shape, not copied challenge solution source. The catalogue records tri-platform problem evidence,
+target-owner/scope, GitHub lineage/license/reuse policy and the next proof. A3Alg validates it and
+A3Plan includes validated rows as ALG work.
+
 ## A3 absorption preparation
 
 A3 (Atomize -> Patternize -> Absorb) is the front-door preparation plane for current-tree
