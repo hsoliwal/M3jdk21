@@ -17,9 +17,9 @@ import stat
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
-import csv
 
 from source_convergence_gate import Row, load_manifest, regular_file, require_converged
+import source_convergence_identity
 
 
 def _hash(payload: bytes) -> str:
@@ -48,46 +48,6 @@ class _Edit:
     candidate: Path | None
     current_hash: str
     mode: int
-
-@dataclass(frozen=True)
-class ImageIdentity:
-    role: str
-    revision: str
-    semantic_root: str
-    files: int
-    changed: int
-    holds: int
-
-
-def _load_identity(path: Path, expected_role: str) -> ImageIdentity:
-    with path.open("r", encoding="utf-8", newline="") as handle:
-        rows = list(csv.DictReader(handle, delimiter="\t"))
-    if len(rows) != 1:
-        raise ValueError("source convergence image identity must contain exactly one row")
-    row = rows[0]
-    required = {"role", "revision", "semanticRoot", "files", "changed", "holds"}
-    if not required.issubset(row):
-        raise ValueError("source convergence image identity header mismatch")
-    role = row["role"].strip().upper()
-    if role != expected_role.upper():
-        raise ValueError(f"source convergence image role mismatch: {role} != {expected_role}")
-    revision = row["revision"].strip()
-    semantic_root = row["semanticRoot"].strip()
-    if not revision or any(ch in revision for ch in "\t\r\n\x00"):
-        raise ValueError("invalid source convergence image revision")
-    if len(semantic_root) != 64 or any(ch not in "0123456789abcdef" for ch in semantic_root):
-        raise ValueError("invalid source convergence semantic root")
-    try:
-        files = int(row["files"])
-        changed = int(row["changed"])
-        holds = int(row["holds"])
-    except ValueError as failure:
-        raise ValueError("invalid source convergence image counts") from failure
-    if min(files, changed, holds) < 0 or changed + holds > files:
-        raise ValueError("invalid source convergence image counts")
-    return ImageIdentity(role, revision, semantic_root, files, changed, holds)
-
-
 
 def _disjoint(source: Path, destination: Path) -> None:
     if source.is_relative_to(destination) or destination.is_relative_to(source):
@@ -118,7 +78,7 @@ def _plan(source: Path, manifest: Path, worktree: Path, rows: list[Row]) -> list
 def _receipts(
     rows: list[Row],
     image_kind: str,
-    identity: ImageIdentity | None,
+    identity: source_convergence_identity.ImageIdentity | None,
 ) -> tuple[str, dict[str, bytes], str]:
     """Preserve baseline V1 identity and add a revision-bound donor identity."""
     evidence = [
@@ -218,7 +178,9 @@ def materialize(
     kind = image_kind.strip().lower()
     identity = None
     if identity_path is not None:
-        identity = _load_identity(identity_path.resolve(), kind.upper())
+        identity = source_convergence_identity.load(
+            identity_path.resolve(), expected_role=kind.upper()
+        )
     if kind == "donor" and identity is None:
         raise ValueError("donor materialization requires --identity")
     rows = load(manifest)
