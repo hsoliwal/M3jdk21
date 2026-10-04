@@ -128,11 +128,6 @@ Competitive-programming code is not copied into the JDK. A selected algorithm is
 
 OpenRewrite covers Java structure. JNI/HotSpot/native absorption stays in the same A3 plan but uses native-aware deterministic transformers or source-sealed replay when OpenRewrite is not the truthful parser.
 
-The first native bridge is documented in [A3 native/JNI file atoms](a3-native-jni.md). Native
-deltas are classified separately and can be emitted as one-file hash-pinned source-sealed recipe
-atoms with `--include-native --crate-size 1`. That byte-custody lane is preparation only; deeper
-function-level native atomization requires a truthful C/C++ parser such as admitted clang tooling.
-
 The Java/native join is never FILE-local merely because each side can be edited separately. JNI signature, layout, lifetime, GC, safepoint and error semantics determine actual authority.
 
 ## Completion rule

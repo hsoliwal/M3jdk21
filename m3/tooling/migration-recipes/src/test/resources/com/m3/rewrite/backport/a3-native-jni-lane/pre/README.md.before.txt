@@ -191,25 +191,6 @@ other file-mode changes. OpenRewrite byte replay cannot truthfully preserve thos
 semantics, so they require a separately reviewed native/Git/build-file mechanism rather than a
 fake PlainText success.
 
-For native/HotSpot/JNI source with unchanged regular-file mode, use the explicit native lane:
-
-```bash
-python3 m3/backports/generate_recipe_crates.py \
-  --repo . \
-  --release 27 \
-  --paths-file target/selected-native-paths.txt \
-  --crate-size 1 \
-  --include-native \
-  --out target/a3-native-crates
-```
-
-The inventory marks C/C++/header/assembly rows with `native_source=true` and native-specific
-`SOURCE_SEALED_*_NATIVE` recipe lanes. The generator emits deterministic
-`jdk<release>-native-<ordinal>` one-file crates through
-`M3Jdk21HashPinnedTextSnapshotRecipe`. This is exact preimage/postimage custody only; it does not
-pretend OpenRewrite PlainText is a C/C++ AST. Native build, JNI/HotSpot semantics and scope-join proof
-remain mandatory. See `m3/docs/a3-native-jni.md`.
-
 
 ## Recipe DAG control plane
 

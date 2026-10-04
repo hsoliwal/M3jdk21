@@ -54,8 +54,6 @@ class FileDeltaInventoryTest(unittest.TestCase):
             self.write(repo, "src/A.java", "final class A {}\n")
             self.write(repo, "src/B.java", "final class B { int x() { return 1; } }\n")
             self.write(repo, "conf/same.txt", "same\n")
-            self.write(repo, "src/hotspot/share/runtime/a3.cpp", "int a3() { return 21; }\n")
-            self.write(repo, "src/java.base/share/native/libjava/a3.h", "#define A3 21\n")
             self.write(repo, "remove.txt", "remove\n")
             self.git(repo, "add", ".")
             self.git(repo, "commit", "-q", "-m", "jdk21")
@@ -63,8 +61,6 @@ class FileDeltaInventoryTest(unittest.TestCase):
 
             self.write(repo, "src/B.java", "final class B { int x() { return 2; } }\n")
             self.write(repo, "src/C.java", "final class C {}\n")
-            self.write(repo, "src/hotspot/share/runtime/a3.cpp", "int a3() { return 22; }\n")
-            self.write(repo, "src/java.base/share/native/libjava/a3.h", "#define A3 22\n")
             (repo / "remove.txt").unlink()
             self.git(repo, "add", "-A")
             self.git(repo, "commit", "-q", "-m", "jdk22")
@@ -97,18 +93,6 @@ class FileDeltaInventoryTest(unittest.TestCase):
             self.assertEqual("OPENREWRITE_ADD_JAVA", by_path["src/C.java"].recipe_lane)
             self.assertEqual("", by_path["src/C.java"].baseline_oid)
 
-            self.assertTrue(by_path["src/hotspot/share/runtime/a3.cpp"].native_source)
-            self.assertFalse(by_path["src/hotspot/share/runtime/a3.cpp"].java_source)
-            self.assertEqual(
-                "SOURCE_SEALED_NATIVE_PAIR",
-                by_path["src/hotspot/share/runtime/a3.cpp"].recipe_lane,
-            )
-            self.assertTrue(by_path["src/java.base/share/native/libjava/a3.h"].native_source)
-            self.assertEqual(
-                "SOURCE_SEALED_NATIVE_PAIR",
-                by_path["src/java.base/share/native/libjava/a3.h"].recipe_lane,
-            )
-
             self.assertEqual("REMOVED", by_path["remove.txt"].status)
             self.assertEqual("REVIEW_REMOVAL", by_path["remove.txt"].recipe_lane)
             self.assertEqual("", by_path["remove.txt"].donor_oid)
@@ -125,8 +109,6 @@ class FileDeltaInventoryTest(unittest.TestCase):
             self.assertIn("baseline_oid", text)
             self.assertIn("donor_oid", text)
             self.assertIn("OPENREWRITE_JAVA_PAIR", text)
-            self.assertIn("SOURCE_SEALED_NATIVE_PAIR", text)
-            self.assertIn("native_source", text)
 
     def test_fixed_jdk21_baseline_is_used_for_every_donor(self) -> None:
         self.assertEqual((21, "jdk-21+35"), self.mod.BASELINE)

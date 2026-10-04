@@ -5,11 +5,9 @@
 
 The generator never admits compatibility. By default it preserves the historical Java-only
 behavior and turns selected exact Java deltas into deterministic resources consumed by
-M3Jdk21HashPinnedSnapshotRecipe. Native/JNI C/C++ deltas can be selected explicitly with
---include-native and are emitted through M3Jdk21HashPinnedTextSnapshotRecipe as source-sealed FILE
-atoms; PlainText replay is byte custody, not a C/C++ semantic parser. The historical --include-text
-mode remains a broader opt-in for strict UTF-8 non-Java deltas. Generated crates remain
-CANDIDATE_UNVERIFIED until recipe JUnit, native/JDK build, jtreg/runtime and compatibility gates pass.
+M3Jdk21HashPinnedSnapshotRecipe. With --include-text it also emits strict UTF-8 build/tool/resource
+deltas through M3Jdk21HashPinnedTextSnapshotRecipe. Generated crates remain CANDIDATE_UNVERIFIED
+until recipe JUnit, compile/test/runtime and compatibility gates pass.
 """
 
 from __future__ import annotations
@@ -106,7 +104,6 @@ def candidates(
     selected: set[str] | None,
     all_candidates: bool,
     include_text: bool = False,
-    include_native: bool = False,
 ) -> tuple[list[Candidate], list[tuple[str, str]]]:
     if selected is None and not all_candidates:
         raise ValueError("select --paths-file or explicitly request --all-candidates")
@@ -125,12 +122,8 @@ def candidates(
             continue
         if row.status == "SAME":
             continue
-        if not row.java_source:
-            if row.native_source:
-                if not (include_native or include_text):
-                    continue
-            elif not include_text:
-                continue
+        if not row.java_source and not include_text:
+            continue
         if row.status == "REMOVED":
             exclusions.append((row.path, "TYPED_EXCLUSION_AUTOMATIC_REMOVAL"))
             continue
@@ -177,13 +170,7 @@ def candidates(
                 before_sha256=before_hash,
                 after_sha256=after_hash,
                 after_text=after_text,
-                kind=(
-                    "JAVA"
-                    if row.java_source
-                    else "NATIVE"
-                    if row.native_source and include_native
-                    else "TEXT"
-                ),
+                kind="JAVA" if row.java_source else "TEXT",
             )
         )
 
@@ -211,13 +198,12 @@ def materialize(
     yaml_root.mkdir(parents=True, exist_ok=True)
 
     kinds = {candidate.kind for candidate in candidates_}
-    if not kinds.issubset({"JAVA", "NATIVE", "TEXT"}):
+    if not kinds.issubset({"JAVA", "TEXT"}):
         raise ValueError(f"unsupported candidate kind(s): {sorted(kinds)}")
 
-    qualified_names = len(kinds) > 1 or "NATIVE" in kinds
+    mixed = "TEXT" in kinds
     lanes: list[tuple[str, list[Candidate], Path, str, str]] = []
     java_candidates = [candidate for candidate in candidates_ if candidate.kind == "JAVA"]
-    native_candidates = [candidate for candidate in candidates_ if candidate.kind == "NATIVE"]
     text_candidates = [candidate for candidate in candidates_ if candidate.kind == "TEXT"]
     if java_candidates:
         lanes.append(
@@ -227,16 +213,6 @@ def materialize(
                 RESOURCE_ROOT,
                 "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe",
                 ".java.txt",
-            )
-        )
-    if native_candidates:
-        lanes.append(
-            (
-                "native",
-                native_candidates,
-                TEXT_RESOURCE_ROOT,
-                "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
-                ".txt",
             )
         )
     if text_candidates:
@@ -257,7 +233,7 @@ def materialize(
         resource_root = out / resource_root_path
         resource_root.mkdir(parents=True, exist_ok=True)
         for crate_index, chunk in enumerate(_chunks(lane_candidates, crate_size), 1):
-            if qualified_names:
+            if mixed:
                 crate_name = f"jdk{release}-{lane_name}-{crate_index:04d}"
             else:
                 crate_name = f"jdk{release}-{crate_index:04d}"
@@ -374,16 +350,8 @@ def _parse_args(argv: Sequence[str]) -> argparse.Namespace:
         "--include-text",
         action="store_true",
         help=(
-            "legacy broad opt-in: emit strict UTF-8 non-Java candidates through "
+            "also emit strict UTF-8 non-Java build/tool/resource candidates through "
             "M3Jdk21HashPinnedTextSnapshotRecipe; default remains Java-only"
-        ),
-    )
-    parser.add_argument(
-        "--include-native",
-        action="store_true",
-        help=(
-            "emit C/C++/header/assembly deltas as explicit NATIVE source-sealed FILE atoms "
-            "through M3Jdk21HashPinnedTextSnapshotRecipe"
         ),
     )
     parser.add_argument(
@@ -410,7 +378,6 @@ def main(argv: Sequence[str] | None = None) -> int:
         selected,
         args.all_candidates,
         include_text=args.include_text,
-        include_native=args.include_native,
     )
     if not candidate_rows:
         raise SystemExit("no donor candidates selected")
