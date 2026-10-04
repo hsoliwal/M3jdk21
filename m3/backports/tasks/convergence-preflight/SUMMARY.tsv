@@ -1,0 +1,11 @@
+metric	value
+modified_existing_production_owners	2
+added_python_test_cases	30
+unchanged_existing_test_cases	12
+passed_python_tests	42
+baseline_defects_reproduced	4
+post_repair_defects_reproduced	0
+recipe_targets	3
+new_JEPs_implemented	0
+JUnit_engine_runs	0
+whole_programme_complete	false

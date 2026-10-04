@@ -1,0 +1,6 @@
+{
+  "canonical_original_mutated_through_hardlink": false,
+  "earlier_target_written_before_later_failure": false,
+  "inconsistent_unchanged_accepted": false,
+  "successful_workspace_replay_rejected": false
+}

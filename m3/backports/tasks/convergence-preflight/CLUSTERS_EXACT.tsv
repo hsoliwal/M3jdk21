@@ -1,0 +1,7 @@
+sha256	path	comparison	decision
+26af575c0a7ab15245120afd176a41964aa4daa36b883e21c820c0d0c74e2556	m3/backports/source_convergence_gate.py	BYTE_IDENTICAL	RETAIN_RECIPE_POSTIMAGE; no merge/delete authority
+26af575c0a7ab15245120afd176a41964aa4daa36b883e21c820c0d0c74e2556	m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/convergence-preflight/01-gate.py.txt	BYTE_IDENTICAL	RETAIN_RECIPE_POSTIMAGE; no merge/delete authority
+d3d5b86af63fe54ddcc70fb72b6907b77aa7f1ea41a8dc88adef89671c84ba8f	m3/backports/test_convergence_preflight.py	BYTE_IDENTICAL	RETAIN_RECIPE_POSTIMAGE; no merge/delete authority
+d3d5b86af63fe54ddcc70fb72b6907b77aa7f1ea41a8dc88adef89671c84ba8f	m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/convergence-preflight/02-tests.py.txt	BYTE_IDENTICAL	RETAIN_RECIPE_POSTIMAGE; no merge/delete authority
+e84b4444d20a3647740aa486c7e81b2c9249c973f1c3dc4e177362cd0d422e8d	m3/backports/materialize_source_convergence.py	BYTE_IDENTICAL	RETAIN_RECIPE_POSTIMAGE; no merge/delete authority
+e84b4444d20a3647740aa486c7e81b2c9249c973f1c3dc4e177362cd0d422e8d	m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/convergence-preflight/00-materialize.py.txt	BYTE_IDENTICAL	RETAIN_RECIPE_POSTIMAGE; no merge/delete authority

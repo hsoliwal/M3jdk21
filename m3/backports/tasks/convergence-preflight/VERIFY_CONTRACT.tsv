@@ -1,0 +1,13 @@
+gate	result	evidence
+full target reads	PASS	Both existing scripts and original tests read and byte-hashed
+source diff before final tests	PASS	final-source.diff in delivery bundle
+Python syntax and task JSON	PASS	static-check.log
+pre/post template hashes and ordering	PASS	manifest.tsv
+original baseline defect probes	PASS_4_REPRODUCED	baseline-failures.json
+post-repair probes	PASS_0_REPRODUCED	repaired-reproduction.json
+Python unit tests	PASS_42	unit-tests.log
+replay V1 roots and no-write file identity	PASS	test_replay_has_same_root_receipts_and_file_identity;test_valid_v1_roots_remain_exact
+hardlink/symlink/failure injection	PASS	unit-tests.log
+OpenRewrite/JUnit execution	NOT_RUN	toolchain.log;connectivity.log
+JaCoCo99	NOT_MEASURED	No claim or exclusion
+native/JDK/jtreg	NOT_RUN	No release acceptance

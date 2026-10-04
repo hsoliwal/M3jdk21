@@ -1,0 +1,9 @@
+mvn -version
+exit=127
+
+Java compiler
+javac 21.0.11
+
+Python
+Python 3.13.5
+bash: line 1: mvn: command not found

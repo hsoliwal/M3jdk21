@@ -1,0 +1,11 @@
+source	ref_or_blob	role	authority
+m3/backports/source_convergence_gate.py	18b231b46c813170b654a154785d7e46a527c089	Original source	Pinned preimage
+m3/backports/materialize_source_convergence.py	31b8be270e3495b97e21fba690ec907b624ee318	Original source	Pinned preimage
+m3/backports/test_source_convergence_gate.py	31168d66804ecaddb47eee801254ae92ffa5f32b	Original 6 tests unchanged	Independent regression
+m3/backports/test_materialize_source_convergence.py	c6f8502d81f76188649380fe55d48a9b3ae2d5bc	Original 6 tests unchanged	Independent regression
+M3Jdk21HashPinnedTextSnapshotRecipe.java	a2e8c916208b563517e51b738744a05357e633aa	Existing recipe implementation	Reuse; not replaced
+m3/backports/pom.xml	41af049a920b271b051a5ac9e2b69495f411c5b8	Existing Maven unittest discovery	Unchanged
+m3/backports/COMPATIBILITY_ADMISSION.md	24ccd2b9c5068511cb83d2bfea5a7c23afba5b96	Complete compatible-backport admission	Unchanged canonical policy
+m3/backports/PROGRAM_STATUS_2026-10-04.md	ff989b99595db1baad5bf501d495677baa9637c3	Existing project status	Read; counts not independently recomputed
+M3Scale(20261002-062112).txt	5ec31d51207bda02d2f1f9a7fcd940f2ae5e1bfc9f0ef9358139fe62b47f393b	User canon	Docs/inventory/scope/proof
+Original repair/glue/tests	Apache-2.0	No external donor body imported	Existing upstream licenses untouched

@@ -1,0 +1,17 @@
+track	owner	observed_or_work_state	required_exit
+entire compatible JEP and non-JEP/tooling inventory	m3/backports/BACKPORT_WORK_QUEUE.tsv;COMPATIBILITY_ADMISSION.md	OPEN; existing queue authority retained	Every released change classified; compatible implementation or proven-equivalent; exact-head build/tests; zero compatible residue
+release denominator reconciliation	PR61 and its release-authority correction branch	OPEN; historical status says82 rows but PR61 notes85 correction	Reconcile official release authority and full commit interval inventory; do not count prose as proof
+JEP458 multi-file source launch	PR59	Existing status: verify-stage candidate	Recipe tests plus actual Java21 product build/jtreg/runtime
+JEP485 Stream Gatherers	PR63	Existing status: 15-target adapted candidate; verify pending	Intentional additive API admission; stream jtreg/regression and built-runtime smoke
+JEP493 runtime-image linking	PR64 stacked onPR60	Existing status:47-path inventory/materialization; not product-applied	Review generated atoms/dependency closure then apply/build/jtreg/JMOD regression
+other materialized tool/API leaves	Existing BACKPORT_WORK_QUEUE and PR62	Existing status: source presence does not equal accepted verification	Exact recipe, source, native/runtime and test receipts per packet
+Maven-normalize donors and JDK before absorption	PR61 convergence DAG plus this repair	This repair has42 local Python tests; whole-tree execution pending	Execute real OpenRewrite recipe/unit/whole-tree passes; validate complete authority/receipt coverage
+semantic atomization and patternization/IOP	PR61 M3FileConvergenceRecipeDag and semantic-index owners	Existing scoped pipeline; not all source patterns proved	Generalize tested eligibility without weakening scope; bounded fixed point or typed residue per target
+documentation and provenance	Existing canonical docs plus this task packet	This packet documented; full product convergence remains open	Source/test/recipe/docs mappings remain current at admitted commits
+99percent meaningful JUnit coverage	Existing Maven/JaCoCo owners	NOT_MEASURED in this environment	Actual atom/role/contract/JUnit and coverage receipts, no skipped gates
+MIndex-to-M3 and String storage integration	m3/docs/name-mapping.json;existing Synexia payload owners	Not modified or certified by this repair	Contract/regression/GC/JIT/JNI/CDS proof; preserve canonical payload/lifetime and upstream licenses
+optional JMOD and JavaFX packs	Existing module-packs owner; PR56	Repository status reports merged tooling; actual JavaFX acceptance still pending	Real pinned artifacts, native/display launch and per-platform image proof
+Spring-style framework and useful templates	hsoliwal/com.synexia; framework lane	Separate from optional JDK; not replaced or completed by this repair	Real generated application, Spring/Lucene, recipe and coverage gates on ordinaryJava21
+other fork donor additions and mixed licensing	Existing donor/source/license catalogues	Survey/selection candidates, not automatic absorption	Pinned source, legal/build closure, Maven baseline, normalized comparison, contract and workload tests
+whole JDK and platforms	OpenJDK configure/make + jtreg/native suites	NOT_RUN by this packet	Build modified fork, relevant suites and platform/ABI matrix; no installed-JDK substitution
+git promotion	master/develop append-only canonical histories	No promotion performed	Source-content reconciliation and serial reviewed merges; ancestry-only preservation is not delivery

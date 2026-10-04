@@ -1,0 +1,11 @@
+item	status	evidence	qualification
+normalization-materializer-repair	IMPLEMENTED_TESTED_PYTHON	unit-tests.log	Candidate awaiting OpenRewrite/JUnit/reactor admission
+known-baseline-defects	REPRODUCED_4	baseline-failures.json	Temporary fixtures only; no original JDK mutated
+repaired-defects	ZERO_REPRODUCED	repaired-reproduction.json	Same probes on repaired exact source
+unit-tests	PASS_42	unit-tests.log	12 original tests retained plus 30 new Python unittest cases
+recipe	AUTHORED_NOT_EXECUTED	convergence-preflight/manifest.tsv	Reuse existing M3Jdk21HashPinnedTextSnapshotRecipe
+JUnit-OpenRewrite	NOT_RUN_BLOCKED	toolchain.log;connectivity.log	Maven absent and dependency hosts unresolved
+coverage99	NOT_MEASURED	TASK_PACKET.json	No lowered gate or invented coverage percentage
+JDK-product-build-jtreg	NOT_RUN	ACTION_QUEUE.tsv	No java.base/HotSpot product edit or completed JEP claim
+whole-programme	NOT_COMPLETE	ACTION_QUEUE.tsv	All other admission gates remain owned by existing queues
+canonical-promotion	NOT_PERFORMED	TASK_PACKET.json	Stacked draft PR only

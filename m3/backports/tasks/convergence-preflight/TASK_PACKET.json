@@ -1,0 +1,61 @@
+{
+  "task_packet": "active",
+  "source_doc": "m3/backports/tasks/convergence-preflight/DESIGN.md",
+  "invariant_id": "NORMALIZE_BEFORE_ABSORB_PREFLIGHT",
+  "base_commit": "0c22ffcd4fc40ac68c06cd5659bb2e40a58fd1a7",
+  "run": {
+    "mode": "apply",
+    "profile": "bounded-local",
+    "workers": 1,
+    "shard_count": 1,
+    "shard_index": 0
+  },
+  "targets": [
+    "m3/backports/source_convergence_gate.py",
+    "m3/backports/materialize_source_convergence.py",
+    "m3/backports/test_convergence_preflight.py",
+    "m3/backports/tasks/convergence-preflight/**",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/convergence-preflight/**",
+    "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/convergence-preflight.yml",
+    "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3ConvergencePreflightRecipeTest.java"
+  ],
+  "allowed_delta": [
+    "invalid-evidence refusal",
+    "complete preflight before target mutation",
+    "safe detached-worktree replacement",
+    "idempotent verified replay",
+    "recipe-owned repair plus tests, docs and evidence"
+  ],
+  "invariant_locks": {
+    "JDK_PRODUCT_SOURCE": "LOCKED",
+    "JAVA_PUBLIC_API": "LOCKED",
+    "CANONICAL_BRANCH": "READ_ONLY"
+  },
+  "forbidden": [
+    "root writes",
+    "history rewrite",
+    "CI weakening",
+    "false full-programme completion"
+  ],
+  "verify_order": [
+    "diff",
+    "syntax/static checks",
+    "compile when applicable",
+    "unit tests",
+    "runtime fixtures"
+  ],
+  "output_contract": [
+    "STATUS.tsv",
+    "FINAL_REPORT.md",
+    "RUN_CONTEXT.tsv",
+    "PROVENANCE.tsv",
+    "VERIFY_CONTRACT.tsv",
+    "OUTPUT_CONTRACT.tsv"
+  ],
+  "stop_conditions": [
+    "preimage drift",
+    "test failure",
+    "unapproved target",
+    "unavailable dependency"
+  ]
+}

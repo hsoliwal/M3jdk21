@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.ConvergencePreflight
+displayName: Repair normalized-worktree preflight and replay
+description: Replay the reviewed MODULE-scope convergence tooling repair without changing JDK product source.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: convergence-preflight
