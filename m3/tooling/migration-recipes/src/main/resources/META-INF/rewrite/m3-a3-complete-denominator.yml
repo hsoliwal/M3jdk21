@@ -1,0 +1,10 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.a3.CompleteDenominator
+displayName: M3 A3 complete released-change denominator
+description: >-
+  Source-sealed A3 upgrade that joins every supplied released upstream commit and
+  reference-only challenge/search taxonomy into the existing JEP/JBS/community
+  absorption plan without product-source or promotion authority.
+recipeList:
+  - com.m3.rewrite.a3.M3A3CompleteDenominatorRecipe
