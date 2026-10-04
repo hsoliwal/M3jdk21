@@ -20,7 +20,7 @@ final class M3PassLedgerTest {
     private static final String FOUR = "4".repeat(64);
 
     @Test
-    void repeatedFileIterationsAdvanceOnlyAfterFixedPoint() {
+    void fileSemanticPassesAdvanceSeriallyBeforeFixedPointPromotion() {
         M3PassLedger ledger = M3PassLedger.empty();
         assertEquals(0, ledger.nextPassOrdinal());
         assertEquals(0, ledger.nextIteration());
@@ -29,17 +29,23 @@ final class M3PassLedgerTest {
 
         ledger = ledger.append(receipt(0, 0, "inventory", ZERO, ZERO, false, true));
         assertEquals(1, ledger.nextPassOrdinal());
-        assertEquals(0, ledger.nextIteration());
 
-        ledger = ledger.append(receipt(1, 0, "file-fixed-point", ZERO, ONE, true, false));
-        assertEquals(1, ledger.nextPassOrdinal());
-        assertEquals(1, ledger.nextIteration());
-        assertEquals(ONE, ledger.currentStateRoot());
-
-        ledger = ledger.append(receipt(1, 1, "file-fixed-point", ONE, ONE, false, true));
+        ledger = ledger.append(receipt(1, 0, "file-atomization", ZERO, ONE, true, true));
         assertEquals(2, ledger.nextPassOrdinal());
-        assertEquals(0, ledger.nextIteration());
         assertEquals(ONE, ledger.currentStateRoot());
+
+        ledger = ledger.append(receipt(2, 0, "file-patternization", ONE, TWO, true, true));
+        assertEquals(3, ledger.nextPassOrdinal());
+        assertEquals(TWO, ledger.currentStateRoot());
+
+        ledger = ledger.append(receipt(3, 0, "file-documentation", TWO, THREE, true, true));
+        assertEquals(4, ledger.nextPassOrdinal());
+        assertEquals(THREE, ledger.currentStateRoot());
+
+        ledger = ledger.append(receipt(4, 0, "file-fixed-point", THREE, THREE, false, true));
+        assertEquals(5, ledger.nextPassOrdinal());
+        assertEquals(0, ledger.nextIteration());
+        assertEquals(THREE, ledger.currentStateRoot());
     }
 
     @Test
@@ -48,7 +54,7 @@ final class M3PassLedgerTest {
 
         assertThrows(
                 IllegalArgumentException.class,
-                () -> ledger.append(receipt(1, 0, "file-fixed-point", ZERO, ONE, true, false)));
+                () -> ledger.append(receipt(1, 0, "file-atomization", ZERO, ONE, true, false)));
         assertThrows(
                 IllegalArgumentException.class,
                 () -> ledger.append(receipt(0, 1, "inventory", ZERO, ZERO, false, true)));
@@ -61,7 +67,7 @@ final class M3PassLedgerTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> afterInventory.append(
-                        receipt(1, 0, "file-fixed-point", TWO, THREE, true, false)));
+                        receipt(1, 0, "file-atomization", TWO, THREE, true, false)));
     }
 
     @Test
@@ -117,7 +123,7 @@ final class M3PassLedgerTest {
         M3PassReceipt blocked = M3PassReceipt.create(
                 1,
                 0,
-                "file-fixed-point",
+                "file-atomization",
                 ZERO,
                 ZERO,
                 TWO,
@@ -132,7 +138,7 @@ final class M3PassLedgerTest {
         M3PassReceipt failed = M3PassReceipt.create(
                 1,
                 0,
-                "file-fixed-point",
+                "file-atomization",
                 ZERO,
                 ZERO,
                 TWO,
@@ -149,7 +155,7 @@ final class M3PassLedgerTest {
     void completedLedgerRoundTripsAndReopensFromM3IndexDb() throws Exception {
         M3PassLedger ledger = completeLedger();
         assertTrue(ledger.complete());
-        assertEquals(8, ledger.nextPassOrdinal());
+        assertEquals(11, ledger.nextPassOrdinal());
 
         byte[] bytes = ledger.encode();
         M3PassLedger decoded = M3PassLedger.decode(bytes);
@@ -166,7 +172,7 @@ final class M3PassLedgerTest {
             assertThrows(
                     IllegalStateException.class,
                     () -> loaded.append(receipt(
-                            7, 1, "proof", loaded.currentStateRoot(),
+                            10, 1, "proof", loaded.currentStateRoot(),
                             loaded.currentStateRoot(), false, true)));
         }
 
@@ -197,8 +203,14 @@ final class M3PassLedgerTest {
         M3PassLedger ledger = M3PassLedger.empty();
         String state = ZERO;
         for (M3MultiPassPlan.Pass pass : M3MultiPassPlan.canonical().passes()) {
-            boolean changed = pass.ordinal() == 1;
-            String output = changed ? ONE : state;
+            boolean changed = pass.ordinal() >= 1 && pass.ordinal() <= 3;
+            String output =
+                    switch (pass.ordinal()) {
+                        case 1 -> ONE;
+                        case 2 -> TWO;
+                        case 3 -> THREE;
+                        default -> state;
+                    };
             ledger = ledger.append(M3PassReceipt.create(
                     pass.ordinal(),
                     0,
