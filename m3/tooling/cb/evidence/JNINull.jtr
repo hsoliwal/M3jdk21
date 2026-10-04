@@ -1,0 +1,212 @@
+#Test Results (version 2)
+#Sun Oct 04 11:49:02 EEST 2026
+#-----testdescription-----
+$file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/JNINull.java
+$root=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk
+keywords=othervm native
+library=/jdk/internal/mindex/cb
+run=USER_SPECIFIED main/othervm/native com.m3.cb.JNINull\nUSER_SPECIFIED main/othervm/native -Xint -XX\:+UnlockExperimentalVMOptions -XX\:+UseM3StringStorage com.m3.cb.JNINull\n
+source=JNINull.java
+title=Preserve NewStringUTF null-input behavior with M3 string admission enabled
+
+#-----environment-----
+
+#-----testresult-----
+description=file\:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/JNINull.java
+elapsed=1356 0\:00\:01.356
+end=Sun Oct 04 11\:49\:02 EEST 2026
+environment=regtest
+execStatus=Passed. Execution successful
+harnessLoaderMode=Classpath Loader
+harnessVariety=Full Bundle
+hostname=76f3766ea6d6
+javatestOS=Linux 6.18.44 (amd64)
+javatestVersion=6.0-ea+b24-2026-09-11-${BUILT_FROM_COMMIT}
+jtregVersion=jtreg 7.5.2 dev 1
+script=com.sun.javatest.regtest.exec.RegressionScript
+sections=script_messages build compile main build main
+start=Sun Oct 04 11\:49\:01 EEST 2026
+test=jdk/internal/mindex/cb/com/m3/cb/JNINull.java
+testJDK=/workspace/scratch/18b9e6a1dfc0/full-jdk/build/linux-x86_64-server-fastdebug/images/jdk
+testJDK_OS=[name\:Linux,arch\:amd64,version\:6.18.44,family\:linux,simple_arch\:x64,simple_version\:6.18,processors\:8,maxMemory\:8589934592,maxSwap\:0]
+testJDK_os.arch=amd64
+testJDK_os.name=Linux
+testJDK_os.version=6.18.44
+totalTime=1356
+user.name=root
+work=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/jdk/internal/mindex/cb/com/m3/cb
+
+#section:script_messages
+----------messages:(7/591)----------
+JDK under test: /workspace/scratch/18b9e6a1dfc0/full-jdk/build/linux-x86_64-server-fastdebug/images/jdk
+openjdk version "21-internal" 2023-09-19
+OpenJDK Runtime Environment (fastdebug build 21-internal-adhoc.root.full-jdk)
+OpenJDK 64-Bit Server VM (fastdebug build 21-internal-adhoc.root.full-jdk, mixed mode, sharing)
+Library /jdk/internal/mindex/cb; kind: packages
+   source directory: /workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb
+   class directory: /workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb
+
+#section:build
+----------messages:(7/226)----------
+command: build com.m3.cb.JNINull
+reason: Named class compiled on demand
+started: Sun Oct 04 11:49:01 EEST 2026
+Test directory:
+  compile: com.m3.cb.JNINull
+finished: Sun Oct 04 11:49:02 EEST 2026
+elapsed time (seconds): 1.009
+result: Passed. Build successful
+
+#section:compile
+----------messages:(7/302)----------
+command: compile /workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/JNINull.java
+reason: .class file out of date or does not exist
+started: Sun Oct 04 11:49:01 EEST 2026
+Mode: othervm
+Process id: 388
+finished: Sun Oct 04 11:49:02 EEST 2026
+elapsed time (seconds): 1.008
+----------configuration:(7/585)----------
+javac compilation environment
+  source path: /workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb
+               /workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb
+  class path:  /workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb
+               /workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb/com/m3/cb/JNINull.d
+               /workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb
+
+----------rerun:(27/2612)*----------
+cd /workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/scratch && \\
+HOME=/root \\
+LANG=C.UTF-8 \\
+LC_ALL=C.UTF-8 \\
+LC_CTYPE=C.UTF-8 \\
+PATH=/bin:/usr/bin:/usr/sbin \\
+TZ=Asia/Nicosia \\
+    /workspace/scratch/18b9e6a1dfc0/full-jdk/build/linux-x86_64-server-fastdebug/images/jdk/bin/javac \\
+        -J-Dtest.vm.opts= \\
+        -J-Dtest.tool.vm.opts= \\
+        -J-Dtest.compiler.opts= \\
+        -J-Dtest.java.opts= \\
+        -J-Dtest.jdk=/workspace/scratch/18b9e6a1dfc0/full-jdk/build/linux-x86_64-server-fastdebug/images/jdk \\
+        -J-Dcompile.jdk=/workspace/scratch/18b9e6a1dfc0/full-jdk/build/linux-x86_64-server-fastdebug/images/jdk \\
+        -J-Dtest.timeout.factor=4.0 \\
+        -J-Dtest.nativepath=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image \\
+        -J-Dtest.root=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk \\
+        -J-Dtest.name=jdk/internal/mindex/cb/com/m3/cb/JNINull.java \\
+        -J-Dtest.file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/JNINull.java \\
+        -J-Dtest.main.class=com.m3.cb.JNINull \\
+        -J-Dtest.src=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb \\
+        -J-Dtest.src.path=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb \\
+        -J-Dtest.classes=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb/com/m3/cb/JNINull.d \\
+        -J-Dtest.class.path=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb/com/m3/cb/JNINull.d:/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb \\
+        -d /workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb/com/m3/cb/JNINull.d \\
+        -sourcepath /workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb \\
+        -classpath /workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb:/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb/com/m3/cb/JNINull.d:/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb /workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/JNINull.java
+----------System.out:(0/0)----------
+----------System.err:(0/0)----------
+result: Passed. Compilation successful
+
+#section:main
+----------messages:(7/266)----------
+command: main com.m3.cb.JNINull
+reason: User specified action: run main/othervm/native com.m3.cb.JNINull 
+started: Sun Oct 04 11:49:02 EEST 2026
+Mode: othervm [/othervm specified]
+Process id: 413
+finished: Sun Oct 04 11:49:02 EEST 2026
+elapsed time (seconds): 0.136
+----------configuration:(0/0)----------
+----------System.out:(1/31)----------
+PASS JNI null-input calls=1000
+----------System.err:(1/15)----------
+STATUS:Passed.
+----------rerun:(28/2750)*----------
+cd /workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/scratch && \\
+HOME=/root \\
+LANG=C.UTF-8 \\
+LC_ALL=C.UTF-8 \\
+LC_CTYPE=C.UTF-8 \\
+PATH=/bin:/usr/bin:/usr/sbin \\
+TZ=Asia/Nicosia \\
+LD_LIBRARY_PATH=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image \\
+CLASSPATH=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb/com/m3/cb/JNINull.d:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb:/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb:/workspace/scratch/18b9e6a1dfc0/build-tools/jtreg-dist/jtreg/lib/javatest.jar:/workspace/scratch/18b9e6a1dfc0/build-tools/jtreg-dist/jtreg/lib/jtreg.jar \\
+    /workspace/scratch/18b9e6a1dfc0/full-jdk/build/linux-x86_64-server-fastdebug/images/jdk/bin/java \\
+        -Dtest.vm.opts= \\
+        -Dtest.tool.vm.opts= \\
+        -Dtest.compiler.opts= \\
+        -Dtest.java.opts= \\
+        -Dtest.jdk=/workspace/scratch/18b9e6a1dfc0/full-jdk/build/linux-x86_64-server-fastdebug/images/jdk \\
+        -Dcompile.jdk=/workspace/scratch/18b9e6a1dfc0/full-jdk/build/linux-x86_64-server-fastdebug/images/jdk \\
+        -Dtest.timeout.factor=4.0 \\
+        -Dtest.nativepath=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image \\
+        -Dtest.root=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk \\
+        -Dtest.name=jdk/internal/mindex/cb/com/m3/cb/JNINull.java \\
+        -Dtest.file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/JNINull.java \\
+        -Dtest.main.class=com.m3.cb.JNINull \\
+        -Dtest.src=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb \\
+        -Dtest.src.path=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb \\
+        -Dtest.classes=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb/com/m3/cb/JNINull.d \\
+        -Dtest.class.path=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb/com/m3/cb/JNINull.d:/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb \\
+        -Djava.library.path=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image \\
+        com.sun.javatest.regtest.agent.MainWrapper /workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/jdk/internal/mindex/cb/com/m3/cb/JNINull.d/main.0.jta
+result: Passed. Execution successful
+
+#section:build
+----------messages:(5/179)----------
+command: build com.m3.cb.JNINull
+reason: Named class compiled on demand
+started: Sun Oct 04 11:49:02 EEST 2026
+finished: Sun Oct 04 11:49:02 EEST 2026
+elapsed time (seconds): 0.0
+result: Passed. All files up to date
+
+#section:main
+----------messages:(7/392)----------
+command: main -Xint -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage com.m3.cb.JNINull
+reason: User specified action: run main/othervm/native -Xint -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage com.m3.cb.JNINull 
+started: Sun Oct 04 11:49:02 EEST 2026
+Mode: othervm [/othervm specified]
+Process id: 434
+finished: Sun Oct 04 11:49:02 EEST 2026
+elapsed time (seconds): 0.209
+----------configuration:(0/0)----------
+----------System.out:(1/31)----------
+PASS JNI null-input calls=1000
+----------System.err:(1/15)----------
+STATUS:Passed.
+----------rerun:(31/2846)*----------
+cd /workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/scratch && \\
+HOME=/root \\
+LANG=C.UTF-8 \\
+LC_ALL=C.UTF-8 \\
+LC_CTYPE=C.UTF-8 \\
+PATH=/bin:/usr/bin:/usr/sbin \\
+TZ=Asia/Nicosia \\
+LD_LIBRARY_PATH=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image \\
+CLASSPATH=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb/com/m3/cb/JNINull.d:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb:/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb:/workspace/scratch/18b9e6a1dfc0/build-tools/jtreg-dist/jtreg/lib/javatest.jar:/workspace/scratch/18b9e6a1dfc0/build-tools/jtreg-dist/jtreg/lib/jtreg.jar \\
+    /workspace/scratch/18b9e6a1dfc0/full-jdk/build/linux-x86_64-server-fastdebug/images/jdk/bin/java \\
+        -Dtest.vm.opts= \\
+        -Dtest.tool.vm.opts= \\
+        -Dtest.compiler.opts= \\
+        -Dtest.java.opts= \\
+        -Dtest.jdk=/workspace/scratch/18b9e6a1dfc0/full-jdk/build/linux-x86_64-server-fastdebug/images/jdk \\
+        -Dcompile.jdk=/workspace/scratch/18b9e6a1dfc0/full-jdk/build/linux-x86_64-server-fastdebug/images/jdk \\
+        -Dtest.timeout.factor=4.0 \\
+        -Dtest.nativepath=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image \\
+        -Dtest.root=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk \\
+        -Dtest.name=jdk/internal/mindex/cb/com/m3/cb/JNINull.java \\
+        -Dtest.file=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb/JNINull.java \\
+        -Dtest.main.class=com.m3.cb.JNINull \\
+        -Dtest.src=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb \\
+        -Dtest.src.path=/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb/com/m3/cb:/workspace/scratch/18b9e6a1dfc0/full-jdk/test/jdk/jdk/internal/mindex/cb \\
+        -Dtest.classes=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb/com/m3/cb/JNINull.d \\
+        -Dtest.class.path=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb/com/m3/cb/JNINull.d:/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/classes/jdk/internal/mindex/cb \\
+        -Djava.library.path=/workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image \\
+        -Xint \\
+        -XX:+UnlockExperimentalVMOptions \\
+        -XX:+UseM3StringStorage \\
+        com.sun.javatest.regtest.agent.MainWrapper /workspace/scratch/18b9e6a1dfc0/full-jdk/m3/tooling/cb/target/image/jtreg-work/jdk/internal/mindex/cb/com/m3/cb/JNINull.d/main.1.jta
+result: Passed. Execution successful
+
+
+test result: Passed. Execution successful

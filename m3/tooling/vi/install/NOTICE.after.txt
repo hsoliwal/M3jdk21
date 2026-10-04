@@ -6,7 +6,6 @@ Apache License 2.0. The original P0 foundation did not import MatIndex/MIndex do
 Later imports are individually pinned and attributed in their scoped notices.
 OpenJDK files outside m3/ retain their existing notices and licenses.
 The original separately built foundation has its own integration scope.
-Synexia VI/Release and Class bridge ports are attributed in m3/tooling/vi,
-m3/tooling/cb and
+Synexia VI/Release ports are attributed in m3/tooling/vi and
 src/java.base/share/legal/synexia.md. This notice does not relicense OpenJDK
 or authorize incompatible donor imports.

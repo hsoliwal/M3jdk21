@@ -2135,7 +2135,7 @@ DEFINE_SETSTATICFIELD(jdouble,  double, Double,  JVM_SIGNATURE_DOUBLE, d
 // Once module initialization (and therefore optional MIndex activation) has completed, attach the
 // same canonical MIndex storage that Java constructors use. Bootstrap JNI Strings remain flat.
 static void m3_admit_jni_string(Handle string, TRAPS) {
-  if (string.is_null() || !UseM3StringStorage || !Universe::is_module_initialized()) {
+  if (!UseM3StringStorage || !Universe::is_module_initialized()) {
     return;
   }
   InstanceKlass* storage_klass = vmClasses::MIndexString_klass();
@@ -2166,7 +2166,8 @@ JNI_ENTRY(jstring, jni_NewString(JNIEnv *env, const jchar *unicodeChars, jsize l
  HOTSPOT_JNI_NEWSTRING_ENTRY(env, (uint16_t *) unicodeChars, len);
   jstring ret = nullptr;
   DT_RETURN_MARK(NewString, jstring, (const jstring&)ret);
-  Handle string = java_lang_String::create_from_unicode(unicodeChars, len, CHECK_NULL);
+  Handle string(THREAD,
+                java_lang_String::create_oop_from_unicode((jchar*) unicodeChars, len, CHECK_NULL));
   m3_admit_jni_string(string, CHECK_NULL);
   ret = (jstring) JNIHandles::make_local(THREAD, string());
   return ret;
@@ -2225,10 +2226,10 @@ DT_RETURN_MARK_DECL(NewStringUTF, jstring
 
 JNI_ENTRY(jstring, jni_NewStringUTF(JNIEnv *env, const char *bytes))
   HOTSPOT_JNI_NEWSTRINGUTF_ENTRY(env, (char *) bytes);
-  jstring ret = nullptr;
+  jstring ret;
   DT_RETURN_MARK(NewStringUTF, jstring, (const jstring&)ret);
 
-  Handle result = java_lang_String::create_from_str(bytes, CHECK_NULL);
+  Handle result(THREAD, java_lang_String::create_oop_from_str((char*) bytes, CHECK_NULL));
   m3_admit_jni_string(result, CHECK_NULL);
   ret = (jstring) JNIHandles::make_local(THREAD, result());
   return ret;

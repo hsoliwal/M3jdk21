@@ -1,0 +1,70 @@
+{
+  "schema": 1,
+  "source_commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
+  "kind": "bounded-filename-census",
+  "canonical_mapping": "m3/docs/name-mapping.json",
+  "source_tree_complete": false,
+  "selection": "MIndex*.java and MatIndex*.java under src/main/java in listed subtrees",
+  "trees": [
+    {
+      "module": "synexia-index-precompute",
+      "git_tree": "527faec803802de6ee9ae737dd46b734293e6727",
+      "matched_files": 43,
+      "truncated": false
+    },
+    {
+      "module": "synexia-index-precompute-adapters",
+      "git_tree": "731d84521b5027b3c03b5b21b5329b943234a661",
+      "matched_files": 4,
+      "truncated": false
+    },
+    {
+      "module": "synexia-indexstring",
+      "git_tree": "5fbbee10e45f4b8d61906bb3af7702a94cdf95d1",
+      "matched_files": 1062,
+      "truncated": false
+    },
+    {
+      "module": "synexia-mat-collections",
+      "git_tree": "a8d3c7bb2e416a3cc0df349f76ebb2948d0b4a8f",
+      "matched_files": 0,
+      "truncated": false
+    },
+    {
+      "module": "synexia-mat-index-string",
+      "git_tree": "993fa6caae8aa436ce800ee4571c79ae3bc240b6",
+      "matched_files": 0,
+      "truncated": false
+    },
+    {
+      "module": "synexia-mat-value",
+      "git_tree": "f40f817770495f97142c57d5a09334a8fbcca588",
+      "matched_files": 0,
+      "truncated": false
+    },
+    {
+      "module": "synexia-mindex",
+      "git_tree": "dbbe93603291c91118cbb77c9cb8f16885302867",
+      "matched_files": 1371,
+      "truncated": false
+    },
+    {
+      "module": "synexia-mindex-indexstring-bridge",
+      "git_tree": "8751dd015c5f992636bb804d0d034bf222937e4f",
+      "matched_files": 14,
+      "truncated": false
+    }
+  ],
+  "matched_files": 2494,
+  "not_covered": [
+    "other modules",
+    "nested declarations",
+    "non-prefix dependencies",
+    "generated sources",
+    "native symbols",
+    "tests/resources",
+    "semantic contracts"
+  ],
+  "census_sha256": "342fd106c99861d7a484950ae9e0b2b28a65fd0d78a1e143974683346fc608ad",
+  "mutation_authority": false
+}
