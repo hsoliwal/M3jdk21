@@ -1,10 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.rewrite;
 
-import com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe;
-import com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe;
-import com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates;
-import com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe;
+import com.m3.rewrite.convergence.M3FileConvergenceRecipeDag;
 import java.util.List;
 import java.util.Set;
 import org.openrewrite.Recipe;
@@ -47,10 +44,8 @@ public final class M3Java21ConvergenceRecipe extends Recipe {
 
     @Override
     public List<Recipe> getRecipeList() {
-        return List.of(
-                new M3InventoryPureIntAtomCandidates(),
-                new M3AtomizePureIntReturnRecipe(),
-                new M3PatternizePureIntAtomRecipe(),
-                new M3DocumentPureIntAtomRecipe());
+        return M3FileConvergenceRecipeDag.atoms().stream()
+                .map(M3FileConvergenceRecipeDag.Atom::recipe)
+                .toList();
     }
 }
