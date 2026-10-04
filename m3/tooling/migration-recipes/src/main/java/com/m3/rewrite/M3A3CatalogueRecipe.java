@@ -172,12 +172,12 @@ public final class M3A3CatalogueRecipe extends ScanningRecipe<M3A3CatalogueRecip
                 }
                 SourceFile postimage = inventory.postimages.get(path);
                 SourceFile replacement = (SourceFile) postimage.withId(source.getId());
-                return replacement.withSourcePath(source.getSourcePath())
-                        .withMarkers(source.getMarkers())
-                        .withFileAttributes(source.getFileAttributes())
-                        .withCharset(source.getCharset())
-                        .withCharsetBomMarked(source.isCharsetBomMarked())
-                        .withChecksum(null);
+                replacement = replacement.withSourcePath(source.getSourcePath());
+                replacement = (SourceFile) replacement.withMarkers(source.getMarkers());
+                replacement = replacement.withFileAttributes(source.getFileAttributes());
+                replacement = replacement.withCharset(source.getCharset());
+                replacement = replacement.withCharsetBomMarked(source.isCharsetBomMarked());
+                return replacement.withChecksum(null);
             }
         };
     }

@@ -188,11 +188,11 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
                     }
                     SourceFile parsed = inventory.candidates.get(target.path());
                     SourceFile replacement = (SourceFile) parsed.withId(file.getId());
-                    replacement = replacement.withSourcePath(file.getSourcePath())
-                            .withMarkers(file.getMarkers())
-                            .withFileAttributes(file.getFileAttributes())
-                            .withCharset(file.getCharset())
-                            .withCharsetBomMarked(file.isCharsetBomMarked());
+                    replacement = replacement.withSourcePath(file.getSourcePath());
+                    replacement = (SourceFile) replacement.withMarkers(file.getMarkers());
+                    replacement = replacement.withFileAttributes(file.getFileAttributes());
+                    replacement = replacement.withCharset(file.getCharset());
+                    replacement = replacement.withCharsetBomMarked(file.isCharsetBomMarked());
                     return replacement.withChecksum(null);
                 }
                 return tree;
