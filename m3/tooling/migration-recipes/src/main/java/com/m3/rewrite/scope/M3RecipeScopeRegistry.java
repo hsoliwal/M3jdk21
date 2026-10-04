@@ -7,9 +7,10 @@ import java.util.Objects;
 /**
  * External scope authority for retained OpenRewrite recipes.
  *
- * <p>The registry deliberately does not modify recipe classes. Existing recipe public contracts
- * remain sealed while orchestration can still reject an invocation whose requested write boundary
- * is broader than its evidence.
+ * <p>FILE-local contract-preserving recipes remain independently executable. Authority escalates
+ * only when the actual edit/contract boundary requires VISIBILITY, PACKAGE, MODULE, MULTI_MODULE
+ * or LIBRARY_API. Public JDK/tool/API additions are explicit contract changes even when their
+ * implementation happens to live in one module.
  */
 public final class M3RecipeScopeRegistry {
     private static final Map<String, M3RecipeScopePolicy> POLICIES = Map.ofEntries(
@@ -51,7 +52,40 @@ public final class M3RecipeScopeRegistry {
                     inferred()),
             Map.entry(
                     "com.m3.rewrite.backport.M3VerbatimJavaPairRecipe",
-                    fixed(M3EditScope.FILE)));
+                    fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.m3.rewrite.index.M3SemanticIndexRecipe",
+                    fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.m3.rewrite.index.M3TypeRelationRecipe",
+                    fixed(M3EditScope.MODULE)),
+            Map.entry(
+                    "com.m3.rewrite.index.M3WholeSemanticHashRecipe",
+                    fixed(M3EditScope.MULTI_MODULE)),
+            Map.entry(
+                    "com.m3.rewrite.index.M3SemanticIndexM3DbBridgeRecipe",
+                    fixed(M3EditScope.MULTI_MODULE)),
+            Map.entry(
+                    "com.m3.rewrite.pass.M3MultiPassPlannerRecipe",
+                    fixed(M3EditScope.MULTI_MODULE)),
+            Map.entry(
+                    "com.m3.rewrite.pass.M3VerificationPlanRecipe",
+                    fixed(M3EditScope.LIBRARY_API)),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3Jdk8347112BackportRecipe",
+                    explicitChange()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3Jdk8364182BackportRecipe",
+                    explicitChange()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3Jdk8374808BackportRecipe",
+                    explicitChange()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3Jdk8368692PasswordSystemInBackportRecipe",
+                    explicitChange()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3Jdk8367584JfrOptionsHelpBackportRecipe",
+                    explicitChange()));
 
     private M3RecipeScopeRegistry() {}
 
@@ -89,5 +123,12 @@ public final class M3RecipeScopeRegistry {
                 M3EditScope.FILE,
                 M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING,
                 true);
+    }
+
+    private static M3RecipeScopePolicy explicitChange() {
+        return new M3RecipeScopePolicy(
+                M3EditScope.LIBRARY_API,
+                M3ContractMode.EXPLICIT_CONTRACT_CHANGE,
+                false);
     }
 }
