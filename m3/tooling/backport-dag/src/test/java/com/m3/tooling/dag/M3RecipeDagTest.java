@@ -15,8 +15,17 @@ final class M3RecipeDagTest {
     @Test
     void canonicalDagIsDeterministicAndPromotionIsLast() {
         M3RecipeDag dag = M3RecipeDag.canonical();
-        assertEquals(12, dag.size());
+        assertEquals(13, dag.size());
         assertEquals("inventory", dag.topologicalOrder().getFirst().id());
+        assertEquals(
+                List.of("file-delta"),
+                dag.require("baseline-convergence").dependsOn());
+        assertEquals(
+                "m3/backports/source_convergence_gate.py",
+                dag.require("baseline-convergence").workRef());
+        assertEquals(
+                List.of("baseline-convergence"),
+                dag.require("recipe-crate").dependsOn());
         assertEquals("promote", dag.topologicalOrder().getLast().id());
         assertTrue(dag.require("promote").serialPromotion());
         assertThrows(IllegalArgumentException.class, () -> dag.require("missing"));
