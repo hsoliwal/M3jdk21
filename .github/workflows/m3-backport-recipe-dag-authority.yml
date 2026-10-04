@@ -1,0 +1,112 @@
+name: M3 authority-reconciled backport recipe DAG export
+
+on:
+  push:
+    branches:
+      - "m3/backport-recipe-dag-authority-reconciled-20261004"
+    paths:
+      - "m3/backports/BACKPORT_WORK_QUEUE.tsv"
+      - "m3/backports/BACKPORT_PASSES.tsv"
+      - "m3/backports/RELEASE_JEP_AUTHORITY.tsv"
+      - "m3/backports/JEP_CATALOGUE.tsv"
+      - "m3/backports/release_jep_authority.py"
+      - "m3/backports/export_recipe_dag.py"
+      - "m3/backports/test_export_recipe_dag.py"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3BackportRecipeDagAuthorityExportRecipe.java"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-backport-recipe-dag-authority-export.yml"
+      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/backport-recipe-dag-authority-export/**"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3BackportRecipeDagAuthorityExportRecipeTest.java"
+      - "m3/docs/backport-recipe-dag-orchestration.md"
+      - ".github/workflows/m3-backport-recipe-dag-authority.yml"
+  pull_request:
+    paths:
+      - "m3/backports/**"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/**"
+      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/**"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/**"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/**"
+      - "m3/docs/backport-recipe-dag-orchestration.md"
+      - ".github/workflows/m3-backport-recipe-dag-authority.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  export:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Prove release denominator and queue exporter
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd m3/backports
+          python3 -m unittest -v test_release_jep_authority.py test_export_recipe_dag.py
+
+      - name: Export authority-bound 85-item seven-pass DAG
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/backport-recipe-dag
+          python3 m3/backports/export_recipe_dag.py \
+            --authority-root . \
+            --output target/backport-recipe-dag/BACKPORT_RECIPE_DAG.tsv \
+            --root-output target/backport-recipe-dag/BACKPORT_RECIPE_DAG_ROOT.txt
+          python3 - <<'PY'
+          import csv
+          from pathlib import Path
+
+          path = Path("target/backport-recipe-dag/BACKPORT_RECIPE_DAG.tsv")
+          with path.open(encoding="utf-8", newline="") as stream:
+              rows = list(csv.DictReader(stream, delimiter="\t"))
+
+          items = {row["item_key"] for row in rows}
+          apply = [row for row in rows if row["pass_id"] == "apply"]
+          if len(items) != 85 or len(rows) != 595 or len(apply) != 85:
+              raise SystemExit(
+                  f"denominator drift items={len(items)} nodes={len(rows)} apply={len(apply)}"
+              )
+          if any(row["manifest_mutation_authority"] != "false" for row in rows):
+              raise SystemExit("queue export acquired mutation authority")
+          if any(row["promotion_authority"] != "false" for row in rows):
+              raise SystemExit("queue export acquired promotion authority")
+          if any(row["declared_source_changing"] != "true" for row in apply):
+              raise SystemExit("apply source-changing contract drift")
+          invalid_ready = [
+              row["identity"]
+              for row in apply
+              if row["execution_ready"] == "true"
+              and row["proof_status"] not in {"VERIFIED", "PASS", "GREEN"}
+          ]
+          if invalid_ready:
+              raise SystemExit(f"unverified execution-ready nodes: {invalid_ready}")
+          print("PASS: authority-bound queue DAG items=85 nodes=595")
+          PY
+          cat target/backport-recipe-dag/BACKPORT_RECIPE_DAG_ROOT.txt
+
+      - name: Prove exporter OpenRewrite replay and fixed point
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+            -Dtest=M3BackportRecipeDagAuthorityExportRecipeTest \
+            test
+
+      - name: Upload queue DAG evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-backport-recipe-dag-authority-${{ github.run_id }}
+          path: target/backport-recipe-dag
+          if-no-files-found: error
+          retention-days: 30
