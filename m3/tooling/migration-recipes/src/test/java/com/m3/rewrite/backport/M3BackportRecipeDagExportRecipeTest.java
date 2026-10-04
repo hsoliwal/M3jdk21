@@ -21,6 +21,7 @@ import org.openrewrite.text.PlainText;
 
 final class M3BackportRecipeDagExportRecipeTest {
     private static final String WORKFLOW = ".github/workflows/m3-jdk21-backports.yml";
+    private static final String CATALOGUE = "m3/tooling/recipe-catalogue.tsv";
 
     @Test
     void wrapperOwnsOneHashPinnedTextCrateAndNoProductAuthority() {
@@ -47,10 +48,14 @@ final class M3BackportRecipeDagExportRecipeTest {
                                 PlainText.builder()
                                         .sourcePath(Path.of(WORKFLOW))
                                         .text(resource("pre-workflow.yml.txt"))
+                                        .build(),
+                                PlainText.builder()
+                                        .sourcePath(Path.of(CATALOGUE))
+                                        .text(resource("pre-recipe-catalogue.tsv.txt"))
                                         .build()));
 
         assertTrue(first.errors().isEmpty(), first.errors().toString());
-        assertEquals(4, first.results().size());
+        assertEquals(5, first.results().size());
         assertTrue(
                 first.results().stream()
                         .allMatch(result -> result.getAfter() instanceof PlainText));
@@ -76,6 +81,16 @@ final class M3BackportRecipeDagExportRecipeTest {
                                                 && "m3/docs/backport-recipe-dag-orchestration.md"
                                                         .equals(normalized(result.getAfter()))));
 
+        assertTrue(
+                first.results().stream()
+                        .anyMatch(
+                                result ->
+                                        result.getAfter() != null
+                                                && CATALOGUE.equals(normalized(result.getAfter()))
+                                                && result.getAfter()
+                                                        .printAll()
+                                                        .contains("m3-backport-recipe-dag-export")));
+
         Replay second =
                 run(
                         new M3BackportRecipeDagExportRecipe(),
@@ -93,6 +108,10 @@ final class M3BackportRecipeDagExportRecipeTest {
                                 PlainText.builder()
                                         .sourcePath(Path.of(WORKFLOW))
                                         .text("# drift\n")
+                                        .build(),
+                                PlainText.builder()
+                                        .sourcePath(Path.of(CATALOGUE))
+                                        .text(resourceUnchecked("pre-recipe-catalogue.tsv.txt"))
                                         .build()));
 
         assertFalse(replay.errors().isEmpty());
@@ -126,6 +145,14 @@ final class M3BackportRecipeDagExportRecipeTest {
 
     private static String normalized(SourceFile source) {
         return source.getSourcePath().normalize().toString().replace('\\', '/');
+    }
+
+    private static String resourceUnchecked(String name) {
+        try {
+            return resource(name);
+        } catch (IOException failure) {
+            throw new IllegalStateException(failure);
+        }
     }
 
     private static String resource(String name) throws IOException {
