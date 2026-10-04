@@ -1,0 +1,30 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.M3SemanticIndexInventory
+displayName: Inventory M3 semantic atoms and compositions
+description: >-
+  Non-mutating FILE-local analysis that emits atom, field, method, file, interface,
+  implementation, documentation, package, module, library, project, repository nodes,
+  their ordered composition edges, and exact/structural/logic/SimHash fingerprints.
+recipeList:
+  - com.m3.rewrite.index.M3SemanticIndexRecipe
+
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.M3SemanticIndexPersist
+displayName: Persist M3 semantic atom index into M3IndexDB
+description: >-
+  Runs non-mutating semantic extraction and stores the canonical fan-in under
+  target/m3indexdb using the M3IndexDB content-addressed store.
+recipeList:
+  - com.m3.rewrite.index.M3SemanticIndexM3DbBridgeRecipe
+
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.M3WholeSemanticHash
+displayName: Generate whole M3 semantic hash
+description: >-
+  Runs FILE semantic extraction plus MODULE type-relation discovery, then asks M3IndexDB
+  to recompute canonical child-first exact/structural/logic/SimHash identities from ATOM
+  through REPOSITORY and exports the resulting hash tables without mutating source.
+recipeList:
+  - com.m3.rewrite.index.M3WholeSemanticHashRecipe
