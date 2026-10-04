@@ -1,0 +1,11 @@
+id	state	exit
+FRAMEWORK	BLOCKED	Real Maven/OpenRewrite/JUnit/JaCoCo and lint/reactor green on this exact head
+OFFLINE_MIRROR	BLOCKED	Approved pinned dependency/artifact mirror available
+JDK_BUILD	PENDING	Modified JDK configure/build and jtreg acceptance
+BACKPORT_DENOMINATOR	PENDING	All repository catalogue and complete upstream non-JEP inventory decisions/proofs
+JAVA_FX	PENDING	Reviewed real JMOD locks and native UI runtime proof
+SPRING_SYNEXIA_PACKS	PENDING	Actual applications and complete dependency closures
+M3_NAMES	PENDING	Contract-tested mapping and source reconciliation
+ATOMS_PATTERNS_DOCS	PENDING	Repository-wide semantic normalization and proof
+CROSS_PLATFORM	PENDING	Windows/macOS/native platform tests
+NEBULA	HOLD	Use existing donor-assimilation recipe; baseline/transform/fixedpoint/dependency/source coverage/UI before promotion
