@@ -126,6 +126,11 @@ public final class M3ModuleInspector {
         return ((JarFile) zip).versionedStream().toList();
     }
 
+    /**
+     * ClassVersionAdmission atom of the ArchiveAdapter (JVMS 21 section 4.1).
+     * Major 45..55 admits any u2 minor; later supported majors require minor zero
+     * for this non-preview pack policy. This header check is not bytecode verification.
+     */
     private static void validateClass(InputStream source, String name) throws IOException {
         DataInputStream in = new DataInputStream(source);
         if (in.readInt() != 0xcafebabe) {
@@ -133,7 +138,7 @@ public final class M3ModuleInspector {
         }
         int minor = in.readUnsignedShort();
         int major = in.readUnsignedShort();
-        if (major > 65 || minor == 65535) {
+        if (major < 45 || major > 65 || (major >= 56 && minor != 0)) {
             throw new IllegalArgumentException("NOT_JAVA21_NONPREVIEW: " + name);
         }
     }
