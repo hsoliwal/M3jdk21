@@ -16,3 +16,4 @@ m3-whole-semantic-hash	com.m3.rewrite.index.M3WholeSemanticHashRecipe	MULTI_MODU
 m3-semantic-index-m3db	com.m3.rewrite.index.M3SemanticIndexM3DbBridgeRecipe	MULTI_MODULE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
 m3-multipass-plan	com.m3.rewrite.pass.M3MultiPassPlannerRecipe	MULTI_MODULE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
 m3-verification-plan	com.m3.rewrite.pass.M3VerificationPlanRecipe	LIBRARY_API	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
+m3-release-jep-denominator	com.m3.rewrite.backport.M3ReleaseJepDenominatorRecipe	MODULE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
