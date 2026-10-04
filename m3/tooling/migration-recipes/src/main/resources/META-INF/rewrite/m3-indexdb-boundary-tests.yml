@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.IndexDbBoundaryTests
+displayName: Add M3IndexDB boundary contract tests
+description: Generate hash-pinned Java LST test candidates with m3/indexdb as the execution root; no production change or coverage override.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: indexdb-boundary-contracts
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.IndexDbBoundaryProofWorkflow
+displayName: Add focused M3IndexDB proof workflow
+description: Generate the exact reviewed workflow from repository root; retain failed coverage reports without weakening admission.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: indexdb-boundary-proof
