@@ -30,12 +30,18 @@ The locked Java 21 contract requires these explicit adaptations:
 
 ## Atom/DAG model
 
-Every concrete file create/modify is a FILE recipe atom. Files that form the javac launcher package
-rejoin at an explicitly approved PACKAGE node. The complete feature re-enters the verification tail
-through an explicitly approved MULTI_MODULE join.
+The current replay authority is deliberately represented by the granularity actually implemented:
 
-This is intentional: mechanical replay can fan out per file, but feature admission cannot pretend
-that a java.base + jdk.compiler + native launcher change is file-local.
+- `java-graph` — the hash-pinned structured-Java crate;
+- `text-native-graph` — the hash-pinned build/resource/native-text crate;
+- `feature-join` — the composite JEP 458 recipe joining both graphs.
+
+All three require `MULTI_MODULE` authority because the existing crates each coordinate targets
+across module/build/test boundaries. The packet does **not** misreport these crates as FILE recipes.
+
+The file-delta inventory remains per-file evidence, and future recipe generation may split a graph
+into smaller FILE atoms only when each resulting recipe is independently replayable and
+contract-preserving. Feature admission still rejoins through the explicit MULTI_MODULE node.
 
 ## Verification boundary
 
