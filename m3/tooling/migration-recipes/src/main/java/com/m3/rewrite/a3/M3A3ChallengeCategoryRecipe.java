@@ -186,9 +186,7 @@ public final class M3A3ChallengeCategoryRecipe
 
     @Override
     public Collection<? extends SourceFile> generate(
-            Inventory inventory,
-            Collection<SourceFile> generatedInThisCycle,
-            ExecutionContext context) {
+            Inventory inventory, ExecutionContext context) {
         inventory.requireAdmissible();
         List<SourceFile> generated = new ArrayList<>();
         for (Map.Entry<String, Target> entry : TARGETS.entrySet()) {
