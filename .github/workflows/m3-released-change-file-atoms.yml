@@ -1,0 +1,140 @@
+name: M3 released-change reusable FILE atoms
+
+on:
+  push:
+    branches:
+      - "m3/released-change-file-atom-planner-20261004"
+    paths:
+      - "m3/backports/inventory.py"
+      - "m3/backports/compatibility_queue.py"
+      - "m3/backports/file_delta_inventory.py"
+      - "m3/backports/generate_recipe_crates.py"
+      - "m3/backports/released_change_atom_planner.py"
+      - "m3/backports/test_released_change_atom_planner.py"
+      - "m3/backports/test_compatibility_queue.py"
+      - "m3/backports/test_generate_recipe_crates.py"
+      - "m3/backports/test_file_delta_inventory.py"
+      - ".github/workflows/m3-released-change-file-atoms.yml"
+  pull_request:
+    paths:
+      - "m3/backports/inventory.py"
+      - "m3/backports/compatibility_queue.py"
+      - "m3/backports/file_delta_inventory.py"
+      - "m3/backports/generate_recipe_crates.py"
+      - "m3/backports/released_change_atom_planner.py"
+      - "m3/backports/test_released_change_atom_planner.py"
+      - "m3/backports/test_compatibility_queue.py"
+      - "m3/backports/test_generate_recipe_crates.py"
+      - "m3/backports/test_file_delta_inventory.py"
+      - ".github/workflows/m3-released-change-file-atoms.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  low-risk-plan:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Unit-test released-change planners
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd m3/backports
+          python3 -m unittest -v             test_file_delta_inventory.py             test_generate_recipe_crates.py             test_compatibility_queue.py             test_released_change_atom_planner.py
+
+      - name: Fetch pinned OpenJDK GA history
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir "$RUNNER_TEMP/upstream-jdk"
+          git -C "$RUNNER_TEMP/upstream-jdk" init -q
+          git -C "$RUNNER_TEMP/upstream-jdk" remote add origin https://github.com/openjdk/jdk.git
+          git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch             --filter=blob:none --no-tags origin             "refs/tags/jdk-21+35:refs/tags/jdk-21+35"             "refs/tags/jdk-22+36:refs/tags/jdk-22+36"             "refs/tags/jdk-23+37:refs/tags/jdk-23+37"             "refs/tags/jdk-24+36:refs/tags/jdk-24+36"             "refs/tags/jdk-25+36:refs/tags/jdk-25+36"             "refs/tags/jdk-26+35:refs/tags/jdk-26+35"             "refs/tags/jdk-27+35:refs/tags/jdk-27+35"
+          printf 'UPSTREAM=%s\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
+
+      - name: Materialize complete 14,948-commit inventory and proof queue
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/released-change-atoms
+          python3 m3/backports/inventory.py             --repo "$UPSTREAM"             --out target/released-change-atoms/UPSTREAM_CHANGES.tsv
+          python3 m3/backports/compatibility_queue.py             --inventory target/released-change-atoms/UPSTREAM_CHANGES.tsv             --out target/released-change-atoms/COMPATIBILITY_QUEUE.tsv
+
+      - name: Project LOW and LOW_MEDIUM queue rows into reusable FILE atoms
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/released_change_atom_planner.py             --repo "$UPSTREAM"             --queue target/released-change-atoms/COMPATIBILITY_QUEUE.tsv             --risk LOW             --risk LOW_MEDIUM             --out target/released-change-atoms/low-risk
+          cat target/released-change-atoms/low-risk/SUMMARY.tsv
+
+      - name: Prove denominator and authority remain intact
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv
+          from pathlib import Path
+
+          queue = list(csv.DictReader(
+              Path("target/released-change-atoms/COMPATIBILITY_QUEUE.tsv")
+                  .open(encoding="utf-8", newline=""),
+              delimiter="\t",
+          ))
+          status = list(csv.DictReader(
+              Path("target/released-change-atoms/low-risk/PACKET_STATUS.tsv")
+                  .open(encoding="utf-8", newline=""),
+              delimiter="\t",
+          ))
+          atoms = list(csv.DictReader(
+              Path("target/released-change-atoms/low-risk/FILE_ATOMS.tsv")
+                  .open(encoding="utf-8", newline=""),
+              delimiter="\t",
+          ))
+
+          if len(queue) != 14948 or len(status) != 14948:
+              raise SystemExit(
+                  f"denominator drift: queue={len(queue)} status={len(status)}"
+              )
+          if any(
+              row["compatibility_state"] != "PENDING_COMPATIBILITY_PROOF"
+              for row in queue
+          ):
+              raise SystemExit("compatibility queue auto-decided a row")
+          expected = "INVENTORY_ONLY_NO_COMPATIBILITY_OR_MUTATION_AUTHORITY"
+          if any(row["authority"] != expected for row in status):
+              raise SystemExit("packet status gained semantic authority")
+          if any(row["authority"] != expected for row in atoms):
+              raise SystemExit("FILE atom gained semantic authority")
+          atom_ids = [row["atom_id"] for row in atoms]
+          if len(atom_ids) != len(set(atom_ids)):
+              raise SystemExit("content-addressed FILE atom table contains duplicates")
+          print(
+              f"PASS: denominator={len(queue)} unique_file_atoms={len(atoms)} "
+              "authority=inventory-only"
+          )
+          PY
+
+      - name: Verify canonical backport controls
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/backports/pom.xml verify
+
+      - name: Upload released-change FILE-atom census
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-released-change-low-risk-file-atoms-${{ github.run_id }}
+          path: target/released-change-atoms
+          if-no-files-found: error
+          retention-days: 30
