@@ -88,6 +88,60 @@ final class DbRecipeTest {
         assertTrue(results.stream().noneMatch(result -> result.getBefore() == unrelated));
     }
 
+    @Test
+    void fullRecoveryAndIndividualRepairsComposeToAStableModule() {
+        var restore = new M3HashPinnedJavaSnapshotRecipe("db-java");
+        var results = restore.run(new InMemoryLargeSourceSet(List.of()), context(), 1)
+                .getChangeset().getAllResults();
+        assertEquals(18, results.size());
+        List<SourceFile> after = results.stream().map(result -> result.getAfter()).toList();
+        after.forEach(file -> assertInstanceOf(J.CompilationUnit.class, file));
+        assertTrue(restore.run(new InMemoryLargeSourceSet(after), context(), 1)
+                .getChangeset().getAllResults().isEmpty());
+        for (String crate : List.of("db-parse", "db-check")) {
+            assertTrue(new M3HashPinnedJavaSnapshotRecipe(crate)
+                    .run(new InMemoryLargeSourceSet(after), context(), 1)
+                    .getChangeset().getAllResults().isEmpty());
+        }
+    }
+
+    @Test
+    void staleParentExpectationHasAnExactIndependentRepair() {
+        String root = "/com/synexia/rewrite/hash-pinned-java/db-check/";
+        String path = "src/test/java/com/m3/indexdb/M3IndexDbSemanticFailClosedTest.java";
+        var before = JavaParser.fromJavaVersion().build().parseInputs(
+                List.of(Parser.Input.fromString(Path.of(path), resourceAt(root + "before-Test.java.txt"))),
+                null, context()).toList();
+        var recipe = new M3HashPinnedJavaSnapshotRecipe("db-check");
+        var results = recipe.run(new InMemoryLargeSourceSet(before), context(), 1)
+                .getChangeset().getAllResults();
+        assertEquals(1, results.size());
+        SourceFile after = results.getFirst().getAfter();
+        assertNotNull(after);
+        assertEquals(resourceAt(root + "00-Test.java.txt"), after.printAll());
+        assertTrue(recipe.run(new InMemoryLargeSourceSet(List.of(after)), context(), 1)
+                .getChangeset().getAllResults().isEmpty());
+    }
+
+    @Test
+    void metadataRecoveryPreservesTheReactorAndRejectsUnreviewedPoms() {
+        String root = "/com/m3/rewrite/backport/jdk21-hash-pinned-text/db-meta/";
+        var before = PlainText.builder().sourcePath(Path.of("m3/pom.xml"))
+                .text(resourceAt(root + "before-pom.xml.txt")).build();
+        var recipe = new M3Jdk21HashPinnedTextSnapshotRecipe("db-meta");
+        var results = recipe.run(new InMemoryLargeSourceSet(List.of(before)), context(), 1)
+                .getChangeset().getAllResults();
+        assertEquals(5, results.size());
+        List<SourceFile> after = results.stream().map(result -> result.getAfter()).toList();
+        after.forEach(file -> assertInstanceOf(PlainText.class, file));
+        assertTrue(recipe.run(new InMemoryLargeSourceSet(after), context(), 1)
+                .getChangeset().getAllResults().isEmpty());
+        var drift = before.withText(before.getText() + "<!-- drift -->");
+        assertThrows(RuntimeException.class, () -> recipe.run(
+                new InMemoryLargeSourceSet(List.of(drift)), context(), 1)
+                .getChangeset().getAllResults());
+    }
+
     private static List<SourceFile> before() {
         return JavaParser.fromJavaVersion().build().parseInputs(
                 List.of(Parser.Input.fromString(Path.of(CODEC),
@@ -99,7 +153,11 @@ final class DbRecipeTest {
     }
 
     private static String resource(String name) {
-        try (var input = DbRecipeTest.class.getResourceAsStream(ROOT + name)) {
+        return resourceAt(ROOT + name);
+    }
+
+    private static String resourceAt(String name) {
+        try (var input = DbRecipeTest.class.getResourceAsStream(name)) {
             assertNotNull(input, name);
             return new String(input.readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException failure) {

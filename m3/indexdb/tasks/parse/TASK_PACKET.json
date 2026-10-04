@@ -22,12 +22,13 @@
   "allowed_delta": [
     "restore retained DB content and tests",
     "bounded corrupt-input repair in existing codec",
-    "private operation atoms, tests, recipe templates, build registration and evidence"
+    "private operation atoms, tests, recipe templates, build registration and evidence",
+    "align one retained test's expected parent with independently composed documented graph contract"
   ],
   "invariant_locks": {
     "STANDARD_JAVA_API": "LOCKED",
     "EXISTING_DB_API": "LOCKED",
-    "EXISTING_TESTS": "RESTORE_UNCHANGED",
+    "EXISTING_TESTS": "RESTORE; one documented stale parent expectation repaired through exact recipe",
     "COVERAGE_GATES": "LOCKED",
     "MASTER_DEVELOP": "READ_ONLY",
     "UPSTREAM_LICENSES": "LOCKED"

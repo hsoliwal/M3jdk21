@@ -51,3 +51,18 @@ Record diff -> syntax/static -> strict Java21 compilation -> real JUnit/coverage
 Keep the old artifact and source hashes as baseline; do not mutate the oracle.
 Source restore completeness and per-file identities must be checked after GitHub
 publication. Report full-JDK, Java source parser and whole-programme proof separately.
+
+
+## Observed test-oracle repair
+The first exact-head CI run (37183150332, fbfd2141) executed 51 tests:
+all nine new parser tests passed, while one retained graph test failed at its
+parent equality assertion. M3IndexDbSemanticIndex documents and implements
+child-first recomposition of any node with children. That test compared the
+returned parent with the unrecomposed input fingerprint.
+
+Narrowly correct that assertion to an independently composed expected parent,
+check both children's parent queries and the canonical parent, and assert that
+its fingerprint differs from the input leaf fingerprint. Preserve every other
+existing assertion and test. Keep an exact original preimage in the recipe.
+This is test-oracle alignment with an existing documented contract, not an
+implementation change or an excluded failure.

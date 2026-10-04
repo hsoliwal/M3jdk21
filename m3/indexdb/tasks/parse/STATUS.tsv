@@ -1,0 +1,10 @@
+item	status	evidence
+retained_db_owner	RESTORED_CANDIDATE	Explicit source tree and reactor entry, not ancestry-only merge
+local_compile	PASS	8 real production classes with --release21 -Xlint:all -Werror
+bounded_probes	PASS_4	Three count headers plus malformed UTF8; originals fail
+first_CI	51_TESTS_1_FAILURE	Run37183150332; all9 parser tests pass, retained parent assertion fails
+parent_expectation	REPAIR_CANDIDATE	Independent child-first expected fingerprint; no graph implementation change
+recipe_replay	PENDING	Existing Java and text snapshot engines; DbRecipeTest
+coverage99	PENDING	Unchanged DB line/branch gates; never inferred from test count
+Java_source_parser	NOT_CHANGED	This packet repairs a DB wire decoder only
+whole_JDK	NOT_COMPLETE	Existing backport and integration owners retain obligations

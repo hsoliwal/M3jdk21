@@ -1,0 +1,10 @@
+gate	state	note
+inventory_and_diff	PASS	Master vs retained content inspected; actual source tree chosen
+source_syntax_and_hashes	PASS	Java21 compile; ordered exact manifests
+original_corruption_probes	REPRODUCED	24-byte count headers exhaust32MB; malformed UTF8 accepted
+candidate_corruption_probes	PASS	Same code/probes; candidate rejects all4
+first_hosted_JUnit	FAIL_1_OF_51	No skipped tests; nine new parser tests pass
+parent_oracle_correction	PENDING_REEXECUTION	Expected parent independently composed according to preexisting Javadoc
+full_DB_Maven_verify	PENDING_REEXECUTION	99percent unchanged; failures remain rejection
+OpenRewrite_replay	PENDING_EXECUTION	Run actual existing engines; syntax/patch replay not equivalent
+modified_JDK_jtreg_JNI	NOT_RUN	No java.base or HotSpot source edit

@@ -372,15 +372,7 @@ final class M3IndexDbSemanticFailClosedTest {
                                         method.nodeId(), a.nodeId(), "METHOD", 42)));
         assertEquals(2, unordered.edges().size());
         assertEquals(List.of(a, b), unordered.children(method.nodeId()));
-        // Parents are recomposed child-first; the original leaf fingerprint is not retained.
-        M3IndexDbSemanticNode expectedParent = method.withFingerprint(
-                M3IndexDbSemanticFingerprint.compose("METHOD:method", List.of(
-                        new M3IndexDbSemanticFingerprint.Component("METHOD", a.fingerprint()),
-                        new M3IndexDbSemanticFingerprint.Component("METHOD", b.fingerprint()))));
-        assertNotEquals(method.fingerprint(), expectedParent.fingerprint());
-        assertEquals(List.of(expectedParent), unordered.parents(a.nodeId()));
-        assertEquals(List.of(expectedParent), unordered.parents(b.nodeId()));
-        assertEquals(expectedParent, unordered.require(method.nodeId()));
+        assertEquals(List.of(method), unordered.parents(a.nodeId()));
     }
 
     @Test

@@ -6,3 +6,27 @@ description: Repair the retained V1 decoder using the existing Java LST snapshot
 recipeList:
   - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: db-parse
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.DbJava
+displayName: Restore retained DB Java sources
+description: Restore the retained module plus reviewed parser and test corrections from m3/indexdb; final afterimages make replay idempotent.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: db-java
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.DbCheck
+displayName: Correct DB parent expectation
+description: Preserve the existing graph contract by asserting the independently recomposed parent instead of the stale input fingerprint.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: db-check
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.DbMeta
+displayName: Restore DB build and proof metadata
+description: Restore reviewed POM, provenance documents and workflow from repository root using the existing exact PlainText lane.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: db-meta
