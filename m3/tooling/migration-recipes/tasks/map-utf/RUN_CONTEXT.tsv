@@ -1,0 +1,8 @@
+key	value
+base	3a433416ae7981301844682896e5aefc6f0f8901
+master_observed	7ead93addf4a7b9614d4ad34c8dd02f4b93b9c36
+branch	m3/text-parity-20261004
+java	Debian OpenJDK21.0.11
+workers	1
+source_scope	exact partial export; not full checkout
+product_vm	NOT_BUILT

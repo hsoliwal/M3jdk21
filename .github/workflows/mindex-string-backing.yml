@@ -5,6 +5,8 @@ on:
       - 'src/java.base/share/classes/jdk/internal/mindex/**'
       - 'test/jdk/java/lang/String/MIndexMappedStringBackingTest.java'
       - 'test/jdk/java/lang/String/MapGuardTest.java'
+      - 'test/jdk/java/lang/String/MapFactsTest.java'
+      - 'test/jdk/java/lang/String/MapUtfTest.java'
       - 'doc/mindex-string-backing.md'
       - '.github/workflows/mindex-string-backing.yml'
   workflow_dispatch:
@@ -28,4 +30,4 @@ jobs:
       - name: Build java.base
         run: make java.base-java-only
       - name: Run MIndex String backing jtreg
-        run: make test TEST="test/jdk/java/lang/String/MIndexMappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java"
+        run: make test TEST="test/jdk/java/lang/String/MIndexMappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java"
