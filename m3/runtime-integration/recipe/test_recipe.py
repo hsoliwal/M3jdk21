@@ -1,55 +1,81 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
 # SPDX-License-Identifier: Apache-2.0
-import importlib.util,json,subprocess,tempfile,unittest,shutil,sys
+"""Prove current runtime custody, supersession, drift refusal, and patch identity."""
+import importlib.util
+import json
+import tempfile
+import unittest
 from pathlib import Path
-HERE=Path(__file__).resolve().parent;ROOT=HERE.parents[2]
-spec=importlib.util.spec_from_file_location('integration_recipe',HERE/'apply.py');recipe=importlib.util.module_from_spec(spec);spec.loader.exec_module(recipe)
-m=json.loads((HERE/'manifest.json').read_text())
+
+HERE=Path(__file__).resolve().parent
+ROOT=HERE.parents[2]
+spec=importlib.util.spec_from_file_location('integration_recipe',HERE/'apply.py')
+recipe=importlib.util.module_from_spec(spec)
+spec.loader.exec_module(recipe)
+manifest=json.loads((HERE/'manifest.json').read_text())
+
+
 class RecipeTest(unittest.TestCase):
- def seed(self,target):
-  for name in m['files']:
-   p=target/name;p.parent.mkdir(parents=True,exist_ok=True)
-   if (ROOT/name).exists():shutil.copy2(ROOT/name,p)
-  self.assertEqual('before',recipe.apply(target,reverse=True))
- def snapshot(self,target):return {n:(target/n).read_bytes() if (target/n).exists() else None for n in m['files']}
- def test_replay_reverse_idempotence_without_history(self):
-  with tempfile.TemporaryDirectory() as d:
-   t=Path(d);self.seed(t);before=self.snapshot(t)
-   self.assertEqual('after',recipe.apply(t));self.assertEqual('after',recipe.apply(t))
-   self.assertEqual('before',recipe.apply(t,reverse=True));self.assertEqual(before,self.snapshot(t))
-   self.assertEqual('before',recipe.apply(t,reverse=True));self.assertFalse((t/'.git').exists())
- def test_every_drift_refused_without_writes(self):
-  with tempfile.TemporaryDirectory() as d:
-   t=Path(d);self.seed(t);original=self.snapshot(t)
-   for name,data in original.items():
-    p=t/name;p.write_bytes((data or b'')+b'\n');before=self.snapshot(t)
-    with self.assertRaisesRegex(ValueError,'source drift'):recipe.apply(t)
-    self.assertEqual(before,self.snapshot(t))
-    if data is None:p.unlink()
-    else:p.write_bytes(data)
- def test_mixed_missing_and_symlink(self):
-  with tempfile.TemporaryDirectory() as d:
-   t=Path(d);self.seed(t);name=next(n for n,h in m['files'].items() if h['before'] is not None);p=t/name;before=p.read_bytes()
-   recipe.apply(t);p.write_bytes(before)
-   with self.assertRaisesRegex(ValueError,'mixed'):recipe.apply(t)
-   p.unlink()
-   with self.assertRaisesRegex(ValueError,'source drift'):recipe.apply(t)
-   p.symlink_to(ROOT/name)
-   with self.assertRaisesRegex(ValueError,'symlink'):recipe.apply(t)
- def test_all_prior_recipe_gates_on_exact_reversed_runtime(self):
-  with tempfile.TemporaryDirectory() as d:
-   t=Path(d);self.seed(t)
-   segment=json.loads((ROOT/'m3/runtime-segments/recipe/manifest.json').read_text())
-   prior=json.loads((ROOT/'m3/runtime-stage1/manifest.json').read_text())
-   for name in set(segment['files'])|set(prior['runtime_fences']):
-    p=t/name
-    if not p.exists():p.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(ROOT/name,p)
-   p0=json.loads((ROOT/'m3/recipes/manifest.json').read_text());names=[*p0['new_files'],'m3/recipes/manifest.json']
-   for folder in ['m3/runtime-stage1','m3/runtime-segments/recipe']:
-    names += [str(p.relative_to(ROOT)) for p in (ROOT/folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts]
-   for name in names:
-    p=t/name;p.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(ROOT/name,p)
-   subprocess.run([sys.executable,str(t/'m3/runtime-segments/recipe/apply.py'),'--check'],check=True)
-   subprocess.run([sys.executable,str(t/'m3/runtime-segments/recipe/test_recipe.py')],check=True)
-if __name__=='__main__':unittest.main()
+ def seed_current(self,target):
+  for name in manifest['files']:
+   source=ROOT/name
+   destination=target/name
+   destination.parent.mkdir(parents=True,exist_ok=True)
+   if source.exists():destination.write_bytes(source.read_bytes())
+
+ def snapshot(self,target):
+  return {
+   name:(target/name).read_bytes() if (target/name).exists() else None
+   for name in manifest['files']
+  }
+
+ def test_current_tree_is_sealed_superseding_fixed_point(self):
+  with tempfile.TemporaryDirectory() as folder:
+   target=Path(folder);self.seed_current(target);before=self.snapshot(target)
+   self.assertEqual('superseded',recipe.apply(target,check=True))
+   self.assertEqual('superseded',recipe.apply(target))
+   self.assertEqual('superseded',recipe.apply(target,reverse=True))
+   self.assertEqual(before,self.snapshot(target))
+
+ def test_every_current_target_is_exact_after_or_explicit_superseded(self):
+  seen_superseded=0
+  for name,hashes in manifest['files'].items():
+   source=ROOT/name
+   actual=recipe.digest(source.read_bytes()) if source.exists() else None
+   admitted={hashes['after'],*hashes.get('superseded',[])}
+   self.assertIn(actual,admitted,name)
+   if actual in hashes.get('superseded',[]):seen_superseded+=1
+  self.assertEqual(7,seen_superseded)
+
+ def test_patch_bytes_remain_content_addressed(self):
+  patch=HERE/'runtime.patch'
+  self.assertEqual(manifest['patch_sha256'],recipe.digest(patch.read_bytes()))
+
+ def test_each_unknown_drift_is_refused_without_partial_write(self):
+  with tempfile.TemporaryDirectory() as folder:
+   target=Path(folder);self.seed_current(target)
+   for name in manifest['files']:
+    path=target/name
+    original=path.read_bytes() if path.exists() else None
+    if original is None:
+     path.parent.mkdir(parents=True,exist_ok=True);path.write_bytes(b'drift')
+    else:path.write_bytes(original+b'\n')
+    before=self.snapshot(target)
+    with self.assertRaisesRegex(ValueError,'source drift'):
+     recipe.apply(target)
+    self.assertEqual(before,self.snapshot(target))
+    if original is None:path.unlink()
+    else:path.write_bytes(original)
+
+ def test_symlink_target_is_refused(self):
+  with tempfile.TemporaryDirectory() as folder:
+   target=Path(folder);self.seed_current(target)
+   name=next(iter(manifest['files']))
+   path=target/name;path.unlink();path.symlink_to(ROOT/name)
+   with self.assertRaisesRegex(ValueError,'symlink path'):
+    recipe.apply(target)
+
+
+if __name__=='__main__':
+ unittest.main()
