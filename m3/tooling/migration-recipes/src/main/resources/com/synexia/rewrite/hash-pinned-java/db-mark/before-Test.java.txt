@@ -13,9 +13,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.TreeMap;
-import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.Parser;
@@ -23,8 +21,6 @@ import org.openrewrite.SourceFile;
 import org.openrewrite.internal.InMemoryLargeSourceSet;
 import org.openrewrite.java.JavaParser;
 import org.openrewrite.java.tree.J;
-import org.openrewrite.marker.BuildMetadata;
-import org.openrewrite.marker.RecipesThatMadeChanges;
 import org.openrewrite.text.PlainText;
 
 /** Actual existing recipe execution; DB runtime and coverage are independent gates. */
@@ -180,9 +176,6 @@ final class DbRecipeTest {
         SourceFile input = jdkInput();
         input = input.withCharset(StandardCharsets.UTF_16LE);
         input = input.withCharsetBomMarked(true);
-        var inherited = new BuildMetadata(UUID.fromString("943b06a2-e2df-4805-9b36-63f8a7616254"),
-                Map.of("owner", "db-build", "contract", "metadata-copy"));
-        input = input.withMarkers(input.getMarkers().add(inherited));
         var recipe = new M3Jdk21HashPinnedSnapshotRecipe("jdk27-db-build");
         var results = recipe.run(new InMemoryLargeSourceSet(List.of(input)), context(), 1)
                 .getChangeset().getAllResults();
@@ -193,15 +186,7 @@ final class DbRecipeTest {
         assertEquals("package p;\nfinal class P { int n() { return 2; } }\n", output.printAll());
         assertEquals(input.getId(), output.getId());
         assertEquals(input.getSourcePath(), output.getSourcePath());
-        assertEquals(input.getMarkers().getId(), output.getMarkers().getId());
-        assertEquals(input.getMarkers().getMarkers(), output.getMarkers().getMarkers().stream()
-                .filter(marker -> !(marker instanceof RecipesThatMadeChanges)).toList());
-        var retained = output.getMarkers().findFirst(BuildMetadata.class).orElseThrow();
-        assertEquals(inherited.getId(), retained.getId());
-        assertEquals(inherited.getMetadata(), retained.getMetadata());
-        var provenance = output.getMarkers().findAll(RecipesThatMadeChanges.class);
-        assertEquals(1, provenance.size());
-        assertEquals(List.of(List.of(recipe)), new ArrayList<>(provenance.getFirst().getRecipes()));
+        assertEquals(input.getMarkers(), output.getMarkers());
         assertEquals(input.getFileAttributes(), output.getFileAttributes());
         assertEquals(StandardCharsets.UTF_16LE, output.getCharset());
         assertTrue(output.isCharsetBomMarked());
@@ -267,27 +252,6 @@ final class DbRecipeTest {
                     .run(new InMemoryLargeSourceSet(full), context(), 1)
                     .getChangeset().getAllResults().isEmpty(), name);
         }
-    }
-
-    @Test
-    void markerExpectationRepairReplaysCurrentSourceAndReachesFixedPoint() {
-        String root = "/com/synexia/rewrite/hash-pinned-java/db-mark/";
-        String path = "src/test/java/com/m3/rewrite/backport/DbRecipeTest.java";
-        var input = JavaParser.fromJavaVersion().build().parseInputs(
-                List.of(Parser.Input.fromString(Path.of(path), resourceAt(root + "before-Test.java.txt"))),
-                null, context()).toList();
-        var recipe = new M3HashPinnedJavaSnapshotRecipe("db-mark");
-        var results = recipe.run(new InMemoryLargeSourceSet(input), context(), 1)
-                .getChangeset().getAllResults();
-        assertEquals(1, results.size());
-        SourceFile output = results.getFirst().getAfter();
-        assertNotNull(output);
-        assertInstanceOf(J.CompilationUnit.class, output);
-        assertEquals(resourceAt(root + "00-Test.java.txt"), output.printAll());
-        assertTrue(recipe.run(new InMemoryLargeSourceSet(List.of(output)), context(), 1)
-                .getChangeset().getAllResults().isEmpty());
-        assertThrows(RuntimeException.class, () -> recipe.run(
-                new InMemoryLargeSourceSet(List.of()), context(), 1).getChangeset().getAllResults());
     }
 
     private static SourceFile jdkInput() {
