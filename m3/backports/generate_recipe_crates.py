@@ -167,7 +167,11 @@ def materialize(
     release: int,
     candidates_: Sequence[Candidate],
     exclusions: Sequence[tuple[str, str]],
+    crate_size: int = CRATE_LIMIT,
 ) -> list[str]:
+    if crate_size < 1 or crate_size > CRATE_LIMIT:
+        raise ValueError(f"crate_size must be between 1 and {CRATE_LIMIT}")
+
     resource_root = out / RESOURCE_ROOT
     yaml_root = out / YAML_ROOT
     resource_root.mkdir(parents=True, exist_ok=True)
@@ -175,7 +179,7 @@ def materialize(
 
     crate_names: list[str] = []
     crate_rows: list[tuple[str, ...]] = []
-    for crate_index, chunk in enumerate(_chunks(candidates_, CRATE_LIMIT), 1):
+    for crate_index, chunk in enumerate(_chunks(candidates_, crate_size), 1):
         crate_name = f"jdk{release}-{crate_index:04d}"
         crate_names.append(crate_name)
         crate_dir = resource_root / crate_name
@@ -285,6 +289,16 @@ def _parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--paths-file", type=Path)
     parser.add_argument("--all-candidates", action="store_true")
+    parser.add_argument(
+        "--crate-size",
+        type=int,
+        default=CRATE_LIMIT,
+        choices=range(1, CRATE_LIMIT + 1),
+        help=(
+            "maximum targets per generated crate; use 1 for true FILE-scope recipe atoms "
+            "before explicit DAG promotion"
+        ),
+    )
     return parser.parse_args(argv)
 
 
@@ -301,9 +315,15 @@ def main(argv: Sequence[str] | None = None) -> int:
     )
     if not candidate_rows:
         raise SystemExit("no Java donor candidates selected")
-    crates = materialize(out, args.release, candidate_rows, exclusions)
+    crates = materialize(
+        out,
+        args.release,
+        candidate_rows,
+        exclusions,
+        crate_size=args.crate_size,
+    )
     print(
-        f"generated {len(crates)} crate(s), "
+        f"generated {len(crates)} crate(s) at max {args.crate_size} target(s)/crate, "
         f"{len(candidate_rows)} Java candidate(s), "
         f"{len(exclusions)} typed exclusion(s)"
     )

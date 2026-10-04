@@ -138,5 +138,78 @@ class GenerateRecipeCratesTest(unittest.TestCase):
                 )
 
 
+    def test_crate_size_one_emits_true_file_atomic_crates(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            out = Path(temp) / "out"
+            first_text = "final class A {}\n"
+            second_text = "final class B {}\n"
+            candidates = [
+                self.mod.Candidate(
+                    path="src/java.base/share/classes/p/A.java",
+                    status="MODIFIED",
+                    before_sha256=self.mod._sha256_text("final class A { int x; }\n"),
+                    after_sha256=self.mod._sha256_text(first_text),
+                    after_text=first_text,
+                ),
+                self.mod.Candidate(
+                    path="src/java.base/share/classes/p/B.java",
+                    status="ADDED",
+                    before_sha256="ABSENT",
+                    after_sha256=self.mod._sha256_text(second_text),
+                    after_text=second_text,
+                ),
+            ]
+
+            crates = self.mod.materialize(
+                out,
+                22,
+                candidates,
+                exclusions=[],
+                crate_size=1,
+            )
+
+            self.assertEqual(["jdk22-0001", "jdk22-0002"], crates)
+            for ordinal, expected_path in enumerate(
+                [candidate.path for candidate in candidates], 1
+            ):
+                crate = out / self.mod.RESOURCE_ROOT / f"jdk22-{ordinal:04d}"
+                with (crate / "manifest.tsv").open(
+                    "r", encoding="utf-8", newline=""
+                ) as handle:
+                    rows = list(csv.reader(handle, delimiter="\t"))
+                self.assertEqual(1, len(rows))
+                self.assertEqual(expected_path, rows[0][0])
+
+            yaml = (
+                out
+                / self.mod.YAML_ROOT
+                / "m3-jdk22-candidate-backports.yml"
+            ).read_text(encoding="utf-8")
+            self.assertIn("com.m3.generated.jdk22_0001", yaml)
+            self.assertIn("com.m3.generated.jdk22_0002", yaml)
+
+    def test_crate_size_rejects_zero_and_above_budget(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            out = Path(temp) / "out"
+            candidate = self.mod.Candidate(
+                path="src/java.base/share/classes/p/A.java",
+                status="ADDED",
+                before_sha256="ABSENT",
+                after_sha256=self.mod._sha256_text("final class A {}\n"),
+                after_text="final class A {}\n",
+            )
+            with self.assertRaises(ValueError):
+                self.mod.materialize(out, 22, [candidate], [], crate_size=0)
+            with self.assertRaises(ValueError):
+                self.mod.materialize(
+                    out,
+                    22,
+                    [candidate],
+                    [],
+                    crate_size=self.mod.CRATE_LIMIT + 1,
+                )
+
+
+
 if __name__ == "__main__":
     unittest.main()
