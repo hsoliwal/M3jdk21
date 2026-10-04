@@ -28,6 +28,7 @@ public final class A3 {
             case "plan" ->
                     A3Plan.write(
                             options.root(),
+                            options.upstreamInventory(),
                             options.out("m3/build/a3/plan.tsv"));
             case "apply" ->
                     A3Apply.run(
@@ -45,18 +46,21 @@ public final class A3 {
     private static void usage() {
         System.err.println(
                 "A3: inv|plan|apply [--root PATH] [--out PATH] "
+                        + "[--upstream-inventory PATH] "
                         + "[--file PATH ...] [--list PATH]");
     }
 
     private record Args(
             Path root,
             Path out,
+            Path upstreamInventory,
             List<String> files,
             Path list) {
 
         static Args parse(String[] args) {
             Path root = Path.of(".");
             Path out = null;
+            Path upstreamInventory = null;
             Path list = null;
             ArrayList<String> files = new ArrayList<>();
 
@@ -68,6 +72,9 @@ public final class A3 {
                     root = Path.of(requireValue(args, ++index, key));
                 } else if ("--out".equals(key)) {
                     out = Path.of(requireValue(args, ++index, key));
+                } else if ("--upstream-inventory".equals(key)) {
+                    upstreamInventory =
+                            Path.of(requireValue(args, ++index, key));
                 } else if ("--list".equals(key)) {
                     list = Path.of(requireValue(args, ++index, key));
                 } else {
@@ -75,11 +82,23 @@ public final class A3 {
                             "unknown A3 option: " + key);
                 }
             }
-            return new Args(root, out, List.copyOf(files), list);
+            return new Args(
+                    root,
+                    out,
+                    upstreamInventory,
+                    List.copyOf(files),
+                    list);
         }
 
         Path out(String fallback) {
             return out == null ? Path.of(fallback) : out;
+        }
+
+        Path upstreamInventory() {
+            if (upstreamInventory == null) {
+                return null;
+            }
+            return A3Fs.source(A3Fs.root(root), upstreamInventory);
         }
 
         List<String> sources() throws Exception {
