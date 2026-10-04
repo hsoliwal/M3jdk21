@@ -1,0 +1,9 @@
+ordinal	atom_id	scope	mutation	depends_on	stop_condition
+0	inventory-upstream	FILE	false		all 47 JEP493 implementation paths pinned to commit and JDK24 GA
+1	generate-file-atoms	FILE	false	inventory-upstream	every selected path is candidate, typed exclusion, or already equivalent
+2	dependency-review	MODULE	false	generate-file-atoms	all post-21 dependencies are reused, locally adapted, or explicitly blocked
+3	compose-jlink-packet	MULTI_MODULE	true	dependency-review	smallest honest Java/text packet is materialized from exact preimages
+4	build-jlink	MULTI_MODULE	false	compose-jlink-packet	jdk.jlink and full JDK image compile on Java21 baseline
+5	runtime-image-jtreg	MULTI_MODULE	false	build-jlink	JEP493 runtimeImage tests and existing JMOD jlink regressions pass
+6	fixed-point	MULTI_MODULE	false	runtime-image-jtreg	recipe replay produces no further delta
+7	promotion	LIBRARY_API	false	fixed-point	exact verified receipt is serially admitted or candidate remains unpromoted
