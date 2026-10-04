@@ -1,0 +1,7 @@
+packet_id	atom_id	scope	scope_promotion_approved	work_ref	depends_on
+backport-queue-dag-export-v2	exporter	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:queue-dag-export-script	
+backport-queue-dag-export-v2	exporter-test	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:queue-dag-export-test	exporter
+backport-queue-dag-export-v2	documentation	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:queue-dag-export-doc	exporter
+backport-queue-dag-export-v2	workflow	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:queue-dag-export-workflow	exporter,exporter-test
+backport-queue-dag-export-v2	catalogue	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:queue-dag-export-catalogue	exporter
+backport-queue-dag-export-v2	module-join	MULTI_MODULE	true	com.m3.rewrite.backport.M3BackportRecipeDagExportRecipe	exporter,exporter-test,documentation,workflow,catalogue
