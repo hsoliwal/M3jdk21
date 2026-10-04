@@ -1,176 +1,186 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
-"""Overlay fixed-point M3 Java convergence candidates onto a detached worktree copy."""
+"""Preflight and safely overlay convergence candidates onto an isolated worktree.
+
+Validation failures precede source writes. Each replacement is atomic, but the
+whole worktree is not a filesystem transaction. Exclusive workspace ownership and
+immutable input/evidence during execution are required.
+"""
 
 from __future__ import annotations
 
 import argparse
-import csv
 import hashlib
+import os
 import shutil
+import stat
+import tempfile
 from dataclasses import dataclass
 from pathlib import Path
 
-
-_ALLOWED = {"CONVERGED_CHANGED", "CONVERGED_UNCHANGED"}
-
-
-@dataclass(frozen=True)
-class Row:
-    path: str
-    pre_sha256: str
-    post_sha256: str
-    fixed_point: bool
-    status: str
-    candidate: str
-
-    @property
-    def effective_sha256(self) -> str:
-        return self.post_sha256 if self.status == "CONVERGED_CHANGED" else self.pre_sha256
+from source_convergence_gate import Row, load_manifest, regular_file, require_converged
 
 
 def _hash(payload: bytes) -> str:
     return hashlib.sha256(payload).hexdigest()
 
 
-def _sha(value: str) -> bool:
-    return len(value) == 64 and all(char in "0123456789abcdef" for char in value)
-
-
-def _path(value: str) -> str:
-    path = value.strip().replace("\\", "/")
-    if (
-        not path.startswith("src/")
-        or not path.endswith(".java")
-        or "/../" in path
-        or "/./" in path
-        or "\x00" in path
-    ):
-        raise ValueError(f"invalid Java path: {value!r}")
-    return path
-
-
 def load(path: Path) -> list[Row]:
-    with path.open("r", encoding="utf-8", newline="") as handle:
-        reader = csv.DictReader(handle, delimiter="\t")
-        required = {
-            "path",
-            "preSha256",
-            "postSha256",
-            "fixedPoint",
-            "status",
-            "candidate",
-        }
-        if reader.fieldnames is None or not required.issubset(reader.fieldnames):
-            raise ValueError("SOURCE_CONVERGENCE manifest header mismatch")
-        result: list[Row] = []
-        seen: set[str] = set()
-        for raw in reader:
-            target = _path(raw["path"])
-            if target in seen:
-                raise ValueError(f"duplicate convergence row: {target}")
-            seen.add(target)
-            pre = raw["preSha256"].strip()
-            post = raw["postSha256"].strip()
-            if not _sha(pre) or not _sha(post):
-                raise ValueError(f"invalid convergence hash: {target}")
-            fixed = raw["fixedPoint"].strip().lower() == "true"
-            status = raw["status"].strip()
-            if status not in _ALLOWED or not fixed:
-                raise ValueError(f"unresolved convergence row: {target}: {status}/{fixed}")
-            candidate = raw["candidate"].strip().replace("\\", "/")
-            if status == "CONVERGED_CHANGED" and not candidate:
-                raise ValueError(f"changed row has no candidate: {target}")
-            if status == "CONVERGED_UNCHANGED" and candidate:
-                raise ValueError(f"unchanged row has candidate: {target}")
-            result.append(Row(target, pre, post, fixed, status, candidate))
-        return sorted(result, key=lambda row: row.path)
+    """Reuse the manifest Recognizer and reject every unresolved selected row."""
+    rows = sorted(load_manifest(path).values(), key=lambda row: row.path)
+    if not rows:
+        raise ValueError("empty convergence manifest cannot materialize a baseline")
+    for row in rows:
+        try:
+            require_converged(row)
+        except ValueError as failure:
+            raise ValueError(f"unresolved convergence row: {row.path}") from failure
+    return rows
+
+
+@dataclass(frozen=True)
+class _Edit:
+    """Per-file plan; payload is staged one file at a time, not retained for the tree."""
+    row: Row
+    canonical: Path
+    target: Path
+    candidate: Path | None
+    current_hash: str
+    mode: int
+
+
+def _disjoint(source: Path, destination: Path) -> None:
+    if source.is_relative_to(destination) or destination.is_relative_to(source):
+        raise ValueError("normalized worktree must be disjoint from canonical source root")
+
+
+def _plan(source: Path, manifest: Path, worktree: Path, rows: list[Row]) -> list[_Edit]:
+    """Validate the complete write frontier before staging or replacing any target."""
+    edits: list[_Edit] = []
+    for row in rows:
+        canonical = regular_file(source, row.path)
+        target = regular_file(worktree, row.path)
+        if _hash(canonical.read_bytes()) != row.pre_sha256:
+            raise ValueError(f"canonical preimage drift: {row.path}")
+        current = _hash(target.read_bytes())
+        if current not in {row.pre_sha256, row.post_sha256}:
+            raise ValueError(f"worktree preimage drift: {row.path}")
+        candidate = None
+        if row.status == "CONVERGED_CHANGED":
+            candidate = regular_file(manifest.parent, row.candidate)
+            if _hash(candidate.read_bytes()) != row.post_sha256:
+                raise ValueError(f"candidate postimage drift: {row.path}")
+        edits.append(_Edit(row, canonical, target, candidate, current,
+                           stat.S_IMODE(target.stat().st_mode)))
+    return edits
+
+
+def _receipts(rows: list[Row]) -> tuple[str, dict[str, bytes]]:
+    """Preserve V1 roots/receipt format for valid inputs; sort is established by load."""
+    evidence = [
+        "\x1f".join((r.path, r.pre_sha256, r.post_sha256, r.status, r.effective_sha256))
+        for r in rows
+    ]
+    root = _hash(("M3_NORMALIZED_JDK21_BASELINE_V1\n"
+                  + "\n".join(evidence) + "\n").encode("utf-8"))
+    tsv = "path\tpreSha256\tpostSha256\tstatus\teffectiveSha256\n" + "\n".join(
+        "\t".join((r.path, r.pre_sha256, r.post_sha256, r.status, r.effective_sha256))
+        for r in rows
+    ) + "\n"
+    return root, {"m3-normalized-baseline.tsv": tsv.encode("utf-8"),
+                  "m3-normalized-baseline.root": (root + "\n").encode("utf-8")}
+
+
+def _admit_receipts(worktree: Path, receipts: dict[str, bytes], edits: list[_Edit]) -> None:
+    """Never overwrite conflicting metadata or bless a stale existing success marker."""
+    for name, payload in receipts.items():
+        path = worktree / name
+        if path.is_symlink():
+            raise ValueError(f"receipt symlink: {name}")
+        if path.exists() and (not path.is_file() or path.read_bytes() != payload):
+            raise ValueError(f"receipt drift: {name}")
+    if (worktree / "m3-normalized-baseline.root").exists():
+        if any(e.current_hash != e.row.post_sha256 for e in edits):
+            raise ValueError("existing success marker does not describe current worktree")
+
+
+def _stage(target: Path, payload: bytes, mode: int) -> Path:
+    """Create a private sibling; never truncate an inode shared with the original."""
+    temporary: Path | None = None
+    try:
+        with tempfile.NamedTemporaryFile(prefix=".m3-convergence-", dir=target.parent,
+                                         delete=False) as handle:
+            temporary = Path(handle.name)
+            handle.write(payload)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.chmod(temporary, mode)
+        return temporary
+    except BaseException:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
+        raise
 
 
 def materialize(source_root: Path, manifest: Path, worktree_root: Path) -> str:
     source_root = source_root.resolve()
     worktree_root = worktree_root.resolve()
     manifest = manifest.resolve()
-    if source_root == worktree_root:
-        raise ValueError("normalized worktree must differ from canonical source root")
+    _disjoint(source_root, worktree_root)
     if not (worktree_root / "src").is_dir():
         raise ValueError("normalized worktree must already contain an OpenJDK src tree")
 
     rows = load(manifest)
-    evidence: list[str] = []
-    for row in rows:
-        canonical = (source_root / row.path).resolve()
-        target = (worktree_root / row.path).resolve()
-        if (
-            not canonical.is_file()
-            or not canonical.is_relative_to(source_root)
-            or not target.is_file()
-            or not target.is_relative_to(worktree_root)
-        ):
-            raise ValueError(f"source/worktree path missing or escaped: {row.path}")
+    edits = _plan(source_root, manifest, worktree_root, rows)
+    root, receipts = _receipts(rows)
+    _admit_receipts(worktree_root, receipts, edits)
+    staged: list[tuple[Path, Path]] = []
+    try:
+        for edit in edits:
+            if edit.current_hash == edit.row.post_sha256:
+                continue
+            if edit.candidate is None:
+                raise ValueError(f"missing planned candidate: {edit.row.path}")
+            payload = edit.candidate.read_bytes()
+            if _hash(payload) != edit.row.post_sha256:
+                raise ValueError(f"candidate changed during staging: {edit.row.path}")
+            staged.append((edit.target, _stage(edit.target, payload, edit.mode)))
 
-        canonical_hash = _hash(canonical.read_bytes())
-        if canonical_hash != row.pre_sha256:
-            raise ValueError(
-                f"canonical preimage drift: {row.path}: "
-                f"{canonical_hash} != {row.pre_sha256}"
-            )
-        if _hash(target.read_bytes()) != row.pre_sha256:
-            raise ValueError(f"worktree preimage drift: {row.path}")
+        # Staging is not promotion: recheck all inputs, aliases and targets first.
+        if edits != _plan(source_root, manifest, worktree_root, rows):
+            raise ValueError("worktree changed during staging")
+        if rows != load(manifest):
+            raise ValueError("convergence manifest changed during staging")
+        _admit_receipts(worktree_root, receipts, edits)
+        for target, temporary in staged:
+            os.replace(temporary, target)
 
-        if row.status == "CONVERGED_CHANGED":
-            candidate = (manifest.parent / row.candidate).resolve()
-            if not candidate.is_file() or not candidate.is_relative_to(manifest.parent):
-                raise ValueError(f"candidate missing or escaped: {row.path}")
-            payload = candidate.read_bytes()
-            if _hash(payload) != row.post_sha256:
-                raise ValueError(f"candidate postimage drift: {row.path}")
-            target.write_bytes(payload)
+        for edit in edits:
+            if _hash(regular_file(source_root, edit.row.path).read_bytes()) != edit.row.pre_sha256:
+                raise ValueError(f"canonical source changed during apply: {edit.row.path}")
+            if _hash(regular_file(worktree_root, edit.row.path).read_bytes()) != edit.row.post_sha256:
+                raise ValueError(f"normalized worktree drift: {edit.row.path}")
 
-        effective = _hash(target.read_bytes())
-        if effective != row.effective_sha256:
-            raise ValueError(f"normalized worktree drift: {row.path}")
-        evidence.append(
-            "\x1f".join(
-                (
-                    row.path,
-                    row.pre_sha256,
-                    row.post_sha256,
-                    row.status,
-                    effective,
-                )
-            )
-        )
-
-    payload = "M3_NORMALIZED_JDK21_BASELINE_V1\n" + "\n".join(evidence) + "\n"
-    root = hashlib.sha256(payload.encode("utf-8")).hexdigest()
-    receipt = worktree_root / "m3-normalized-baseline.tsv"
-    receipt.write_text(
-        "path\tpreSha256\tpostSha256\tstatus\teffectiveSha256\n"
-        + "\n".join(
-            "\t".join(
-                (
-                    row.path,
-                    row.pre_sha256,
-                    row.post_sha256,
-                    row.status,
-                    row.effective_sha256,
-                )
-            )
-            for row in rows
-        )
-        + "\n",
-        encoding="utf-8",
-    )
-    (worktree_root / "m3-normalized-baseline.root").write_text(root + "\n", encoding="utf-8")
-    return root
+        # Publish .root last; a failure earlier cannot publish a completion marker.
+        for name, payload in receipts.items():
+            path = worktree_root / name
+            if path.exists() and path.read_bytes() == payload:
+                continue
+            temporary = _stage(path, payload, 0o644)
+            staged.append((path, temporary))
+            os.replace(temporary, path)
+        return root
+    finally:
+        for _, temporary in staged:
+            temporary.unlink(missing_ok=True)
 
 
 def copy_tree(source: Path, destination: Path) -> None:
+    if destination.exists() or destination.is_symlink():
+        raise ValueError(f"destination already exists: {destination}")
     source = source.resolve()
     destination = destination.resolve()
-    if destination.exists():
-        raise ValueError(f"destination already exists: {destination}")
+    _disjoint(source, destination)
     shutil.copytree(
         source,
         destination,
@@ -184,13 +194,9 @@ def main() -> int:
     parser.add_argument("source_root", type=Path)
     parser.add_argument("manifest", type=Path)
     parser.add_argument("worktree_root", type=Path)
-    parser.add_argument(
-        "--copy",
-        action="store_true",
-        help="copy source_root to worktree_root before overlay; otherwise require an existing detached worktree",
-    )
+    parser.add_argument("--copy", action="store_true",
+                        help="copy source_root before overlay; otherwise use an isolated worktree")
     args = parser.parse_args()
-
     if args.copy:
         copy_tree(args.source_root, args.worktree_root)
     root = materialize(args.source_root, args.manifest, args.worktree_root)
