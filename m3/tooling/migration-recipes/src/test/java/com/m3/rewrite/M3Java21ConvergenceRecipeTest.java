@@ -8,6 +8,8 @@ import com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe;
 import com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe;
 import com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates;
 import com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -37,6 +39,18 @@ final class M3Java21ConvergenceRecipeTest {
         assertTrue(recipe.getTags().contains("java21"));
         assertTrue(recipe.getTags().contains("file-local"));
         assertTrue(recipe.getTags().contains("behavior-contract-preserving"));
+    }
+
+    @Test
+    void namedAbsorptionRecipeIsSavedAsTheSameTrustedDag() throws IOException {
+        try (var input =
+                M3Java21ConvergenceRecipeTest.class.getResourceAsStream(
+                        "/META-INF/rewrite/m3-absorption.yml")) {
+            assertTrue(input != null);
+            String recipe = new String(input.readAllBytes(), StandardCharsets.UTF_8);
+            assertTrue(recipe.contains("name: com.m3.rewrite.M3Jdk21AbsorptionFirst"));
+            assertTrue(recipe.contains("- com.m3.rewrite.M3Java21ConvergenceRecipe"));
+        }
     }
 
     @Test

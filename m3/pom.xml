@@ -25,6 +25,12 @@
         <module>collections</module>
       </modules>
     </profile>
+    <profile>
+      <id>m3-jdk-absorption</id>
+      <properties>
+        <m3.absorption.control-plane>true</m3.absorption.control-plane>
+      </properties>
+    </profile>
   </profiles>
 
   <build>
