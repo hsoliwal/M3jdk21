@@ -317,6 +317,88 @@ def verify_keystore_instant_8374808_backport(root: Path) -> None:
                 f"provider-storage rewrite escaped compatibility leaf: {forbidden}"
             )
 
+
+def verify_passes_and_work_queue(root: Path) -> None:
+    passes = read_tsv(root / "m3/backports/BACKPORT_PASSES.tsv")
+    if [int(row["ordinal"]) for row in passes] != list(range(len(passes))):
+        raise AssertionError("backport pass ordinals are not contiguous")
+    pass_ids = [row["pass_id"] for row in passes]
+    if len(pass_ids) != len(set(pass_ids)):
+        raise AssertionError("duplicate backport pass id")
+    for row in passes:
+        if not row["stop_condition"].strip():
+            raise AssertionError(f"empty stop condition for pass {row['pass_id']}")
+        mutation = row["mutation_authority"].strip().lower()
+        if mutation not in {"true", "false"}:
+            raise AssertionError(f"invalid mutation_authority for pass {row['pass_id']}")
+    mutating = [row["pass_id"] for row in passes if row["mutation_authority"] == "true"]
+    if mutating != ["apply"]:
+        raise AssertionError(f"only apply may mutate, found {mutating}")
+
+    queue = read_tsv(root / "m3/backports/BACKPORT_WORK_QUEUE.tsv")
+    keys = [(row["source_type"], row["identity"]) for row in queue]
+    if len(keys) != len(set(keys)):
+        raise AssertionError("duplicate backport work-queue identity")
+
+    expected_jeps = {
+        f"JEP-{row['jep']}" for row in read_tsv(root / "m3/backports/JEP_CATALOGUE.tsv")
+    }
+    queued_jeps = {row["identity"] for row in queue if row["source_type"] == "JEP"}
+    if queued_jeps != expected_jeps:
+        missing = sorted(expected_jeps - queued_jeps)
+        extra = sorted(queued_jeps - expected_jeps)
+        raise AssertionError(f"JEP queue mismatch missing={missing} extra={extra}")
+
+    expected_jbs = {
+        row["jbs"] for row in read_tsv(root / "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv")
+    }
+    queued_jbs = {row["identity"] for row in queue if row["source_type"] == "JBS"}
+    if not expected_jbs.issubset(queued_jbs):
+        raise AssertionError(
+            f"JBS queue missing seeded items: {sorted(expected_jbs - queued_jbs)}"
+        )
+
+    allowed_scopes = {
+        "FILE",
+        "VISIBILITY",
+        "PACKAGE",
+        "MODULE",
+        "MULTI_MODULE",
+        "LIBRARY_API",
+    }
+    for row in queue:
+        current_pass = int(row["current_pass"])
+        if current_pass < 0 or current_pass >= len(passes):
+            raise AssertionError(
+                f"invalid current_pass {current_pass} for {row['identity']}"
+            )
+        if row["required_scope"] not in allowed_scopes:
+            raise AssertionError(
+                f"invalid required_scope {row['required_scope']} for {row['identity']}"
+            )
+        disposition = row["disposition"]
+        action = row["action"]
+        if disposition.startswith("reject-") and not action.startswith("EXCLUDE_"):
+            raise AssertionError(f"rejected item is not excluded: {row['identity']}")
+        if disposition.startswith("superseded") and action != "REDIRECT_SUPERSEDED":
+            raise AssertionError(f"superseded item is not redirected: {row['identity']}")
+
+    for identity in {
+        "JDK-8347112",
+        "JDK-8364182",
+        "JDK-8367584",
+        "JDK-8368692",
+        "JDK-8374808",
+    }:
+        row = next((item for item in queue if item["identity"] == identity), None)
+        if row is None:
+            raise AssertionError(f"materialized backport missing from work queue: {identity}")
+        if int(row["current_pass"]) < 5 or row["action"] != "VERIFY_HASH_PINNED_RECIPE":
+            raise AssertionError(f"materialized backport not in verification pass: {identity}")
+        if row["required_scope"] != "LIBRARY_API":
+            raise AssertionError(f"public/tool contract backport lacks LIBRARY_API authority: {identity}")
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -337,10 +419,11 @@ def main() -> int:
     verify_javadoc_8347112_backport(root)
     verify_security_properties_8364182_backport(root)
     verify_keystore_instant_8374808_backport(root)
+    verify_passes_and_work_queue(root)
     print(
         "PASS: 82 JEP rows, non-JEP seed uniqueness, exact JDK-8357439 donor blobs, "
         "JDK-8347112 javadoc adaptation, JDK-8364182 serviceability adaptation, "
-        "and JDK-8374808 KeyStore Instant compatibility leaf"
+        "JDK-8374808 KeyStore Instant compatibility leaf, and resumable pass/work queue"
     )
     return 0
 
