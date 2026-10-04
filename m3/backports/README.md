@@ -112,16 +112,38 @@ The upstream-inventory workflow exports:
 `file_delta_inventory.py` compares the entire JDK 21 GA tree verbatim against each released donor
 GA tree and records SAME / MODIFIED / ADDED / REMOVED for the full path union.
 
-For changed Java source, `generate_recipe_crates.py` can create bounded <=256-target,
-hash-pinned OpenRewrite candidate crates. The generator:
+For changed Java source, `generate_recipe_crates.py` creates bounded hash-pinned
+OpenRewrite candidate crates. The generator:
 
 - reads exact baseline/donor bytes from Git;
 - requires strict UTF-8 round-trip for Java source;
 - records SHA-256 preimages and postimages;
 - emits typed exclusions rather than silently deleting/removing;
+- accepts `--crate-size 1..256`;
 - keeps generated crates `CANDIDATE_UNVERIFIED` until Java-21 compatibility proof succeeds.
 
-This is the bridge from whole-release inventory to per-file mechanical recipe work.
+Use `--crate-size 1` when each selected file is independently behavior/contract preserving and
+therefore qualifies as a true FILE-scope recipe atom. Those one-file crates can occupy the same
+parallel DAG layer.
+
+Do **not** force one-file crates for a semantically coupled feature merely to increase apparent
+parallelism. If compatibility or contract correctness depends on coordinated files, keep the
+smallest honest composite crate and declare the resulting PACKAGE/MODULE/MULTI_MODULE promotion in
+the packet DAG.
+
+Example file-atomic generation:
+
+```bash
+python3 m3/backports/generate_recipe_crates.py \
+  --repo . \
+  --release 27 \
+  --paths-file target/selected-java-paths.txt \
+  --crate-size 1 \
+  --out target/file-atomic-crates
+```
+
+This is the bridge from whole-release inventory to genuinely per-file mechanical recipe work while
+preserving honest scope for coupled changes.
 
 
 ## Recipe DAG control plane
