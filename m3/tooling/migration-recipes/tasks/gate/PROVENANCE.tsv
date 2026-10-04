@@ -1,0 +1,10 @@
+source	identity	role
+M3 locked canon	5ec31d51207bda02d2f1f9a7fcd940f2ae5e1bfc9f0ef9358139fe62b47f393b	Use attached canon directly; digest not relied upon by code
+repository recipe module source	1f6442214c7ae6ce7016f25641a81a563813f85d	Full directory content confirmed before mutation
+repository recipe module POM	86f223907bbb053f4792e6bf771c3c0882e1751b	Existing dependency and coverage authority retained
+original full recipe run	37186615413/job111389766807	77 tests and12 failures; not all infrastructure errors
+OpenRewrite RecipeIntrospectionUtils	v8.17.1/a3cc7e156d39849db3a531f2ba1fabf9152187f6	Unconfigured String constructor arguments are null
+OpenRewrite SourceSpec	v8.17.1/45a5a6567b6c5f8b45a474ab3916f5a7ab2edbd6	Existing noTrim operation; no new source wrapper
+OpenRewrite RecipeSpec	v8.17.1/b00d6f6c4b8cd3805256e7a6b52d95cefaf81f44	Existing configured composition DSL
+OpenRewrite RecipeSerializer	v8.17.1/aa74fef6cf2942cd0b620a5eaa793e7a35181d4f	Independent real roundtrip checks
+JEP458 retained donor	517b1788198fc325961df61161f9b365c7b2524e	All26 target pre/post identities preserved

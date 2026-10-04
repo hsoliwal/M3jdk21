@@ -11,6 +11,7 @@
   <name>M3JDK21 Maven control reactor</name>
 
   <modules>
+    <module>indexdb</module>
     <module>tooling/migration-recipes</module>
     <module>tooling/a3</module>
     <module>tooling/backport-dag</module>

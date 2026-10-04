@@ -1,0 +1,9 @@
+item	status	qualification
+gate_repair	CANDIDATE	Seven test sources and five metadata targets owned by existing snapshot recipes
+baseline	VERIFIED	Complete migration-recipes/src tree matches 1f6442214c7ae6ce7016f25641a81a563813f85d
+diff_static	PASS	39 declared files before execution evidence; 27 active manifests and 124 output hashes checked
+Java21_syntax	PASS	Seven actual sources parsed; syntax is not attribution or JUnit
+product_sources	UNCHANGED	All recipe production sources, DB source/tests and POMs retained
+JUnit_OpenRewrite	PENDING	Actual owning Maven workflow required; no fake dependencies or disabled validation
+coverage	PENDING	Existing thresholds and denominator unchanged
+whole_JDK	NOT_COMPLETE	Modified product build, jtreg, all backports and broader discussion tasks remain separate

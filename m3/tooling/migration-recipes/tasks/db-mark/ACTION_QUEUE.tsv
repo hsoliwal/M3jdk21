@@ -1,0 +1,8 @@
+priority	owner	failures	state	detail
+P0	DbRecipeTest	1	PATCH_CANDIDATE	Inherited markers plus scheduler provenance; current correction unverified
+P1	M3Jep458BackportRecipeTest	3	OPEN	JDK JavaParser symbol attribution abort in importJavaLang
+P1	M3VerbatimJavaPairRecipeTest	1	OPEN	ExecutionContext wraps drift exception; inspect cause contract
+P1	M3RecipeScopeDeclarationTest	1	OPEN	Expected13 declarations versus14; inventory authority before correction
+P1	M3MIndexStringBulkCharBoundaryRecipeTest	2	OPEN	Recipe introspection supplies invalid crate argument
+P1	M3MIndexJniNewStringAdmissionRecipeTest	2	OPEN	Recipe introspection supplies invalid crate argument
+P1	M3MIndexJoinedCharsViewRecipeTest	2	OPEN	FrozenBytes.java fixture/dependency hash drift; guard remains
