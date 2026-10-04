@@ -93,6 +93,30 @@ jobs:
           test "$CAP_ROWS" -ge 10
           printf 'A3 plan: JEP=%s JBS=%s CAP=%s\n' "$JEP_ROWS" "$JBS_ROWS" "$CAP_ROWS" >> "$GITHUB_STEP_SUMMARY"
 
+      - name: Expand real tree paths into serial FILE work atoms
+        shell: bash
+        run: |
+          set -euo pipefail
+          QUEUE="$REPO/m3/build/a3/work-queue.tsv"
+          WORK="$REPO/m3/build/a3/work.tsv"
+          cat > "$QUEUE" <<'TSV'
+          order	release	commit	jbs_ids	subject	domain	inventory_disposition	risk	scope_floor	proof_lane	recipe_strategy	priority	compatibility_state	next_action	paths
+          0	27	1111111111111111111111111111111111111111	JDK-A3-WORK	A3 serial work integration	core-libs	candidate	HIGH	MULTI_MODULE	CORE_LIBRARY	MIXED_PACKET_OPENREWRITE_PLUS_VERBATIM	35	PENDING_COMPATIBILITY_PROOF	PROVE_CORE_LIBRARY_BACKPORT	src/java.base/share/classes/java/lang/String.java,src/hotspot/share/runtime/os.cpp,make/autoconf/flags.m4
+          TSV
+
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java \
+            -Dexec.mainClass=com.m3.a3.A3 \
+            -Dexec.args="work --root $REPO --inventory m3/build/a3/inventory.tsv --queue m3/build/a3/work-queue.tsv --out m3/build/a3/work.tsv"
+
+          test -s "$WORK"
+          grep -F $'src/java.base/share/classes/java/lang/String.java\tPRESENT\tJAVA\t' "$WORK"
+          grep -F $'\tA3_JAVA_ATOMIZE_PATTERNIZE\tFILE' "$WORK"
+          grep -F $'src/hotspot/share/runtime/os.cpp\tPRESENT\tNATIVE\t' "$WORK"
+          grep -F $'\tNATIVE_ATOM_REVIEW\tFILE' "$WORK"
+          grep -F $'make/autoconf/flags.m4\tOUTSIDE_A3\tOTHER\tUNSCANNED\tOUTSIDE_A3_REVIEW\tFILE' "$WORK"
+          grep -F $'\tMULTI_MODULE\t' "$WORK"
+          printf 'A3 serial FILE work rows=%s\n' "$(($(wc -l < "$WORK") - 1))" >> "$GITHUB_STEP_SUMMARY"
+
       - name: Prove guarded fixed-point candidate application
         shell: bash
         run: |
@@ -127,6 +151,7 @@ jobs:
           path: |
             ${{ env.REPO }}/m3/build/a3/inventory.tsv
             ${{ env.REPO }}/m3/build/a3/plan.tsv
+            ${{ env.REPO }}/m3/build/a3/work.tsv
             ${{ env.REPO }}/m3/build/a3/apply-receipt.tsv
           if-no-files-found: error
           retention-days: 30

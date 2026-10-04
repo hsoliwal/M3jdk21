@@ -29,12 +29,6 @@ public final class A3 {
                     A3Plan.write(
                             options.root(),
                             options.out("m3/build/a3/plan.tsv"));
-            case "work" ->
-                    A3Work.write(
-                            options.root(),
-                            options.inventory(),
-                            options.queue(),
-                            options.out("m3/build/a3/work.tsv"));
             case "apply" ->
                     A3Apply.run(
                             options.root(),
@@ -50,24 +44,19 @@ public final class A3 {
 
     private static void usage() {
         System.err.println(
-                "A3: inv|plan|work|apply [--root PATH] [--out PATH] "
-                        + "[--inventory PATH] [--queue PATH] "
+                "A3: inv|plan|apply [--root PATH] [--out PATH] "
                         + "[--file PATH ...] [--list PATH]");
     }
 
     private record Args(
             Path root,
             Path out,
-            Path inventory,
-            Path queue,
             List<String> files,
             Path list) {
 
         static Args parse(String[] args) {
             Path root = Path.of(".");
             Path out = null;
-            Path inventory = Path.of("m3/build/a3/inventory.tsv");
-            Path queue = Path.of("m3/build/backports/COMPATIBILITY_QUEUE.tsv");
             Path list = null;
             ArrayList<String> files = new ArrayList<>();
 
@@ -79,10 +68,6 @@ public final class A3 {
                     root = Path.of(requireValue(args, ++index, key));
                 } else if ("--out".equals(key)) {
                     out = Path.of(requireValue(args, ++index, key));
-                } else if ("--inventory".equals(key)) {
-                    inventory = Path.of(requireValue(args, ++index, key));
-                } else if ("--queue".equals(key)) {
-                    queue = Path.of(requireValue(args, ++index, key));
                 } else if ("--list".equals(key)) {
                     list = Path.of(requireValue(args, ++index, key));
                 } else {
@@ -90,13 +75,7 @@ public final class A3 {
                             "unknown A3 option: " + key);
                 }
             }
-            return new Args(
-                    root,
-                    out,
-                    inventory,
-                    queue,
-                    List.copyOf(files),
-                    list);
+            return new Args(root, out, List.copyOf(files), list);
         }
 
         Path out(String fallback) {
