@@ -1,0 +1,8 @@
+field	value
+repository	hsoliwal/M3jdk21
+base	32af0afc4029b4b20378a964e4b2c3c033ca4477
+workers	1
+mode	feature-candidate
+platform	Linux x86_64
+jdk	Debian OpenJDK21.0.11
+source_scope	m3/tooling/module-packs/kernel
