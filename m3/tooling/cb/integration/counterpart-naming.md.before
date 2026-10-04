@@ -16,10 +16,10 @@ Do not shorten arbitrary words into unexplained initials.
 | --- | --- | --- | --- |
 | `MIndexVersionTable` | `jdk.internal.mindex.M3VI` | VI = Version Index; java.base | Inlined, recipe-generated internal kernel; local module tests passed |
 | `MIndexLibraryRelease` | `jdk.internal.mindex.M3Release` | Release provenance; java.base | Inlined, recipe-generated internal value; local module tests passed |
-| `MIndexVmSession` | `jdk.internal.mindex.M3CB` | CB = Class Bridge | Inlined caller-owned bridge; explicit lifecycle invalidation |
-| `MIndexClassIndex` | `jdk.internal.mindex.M3CI` | CI = Class Index | Inlined reflection snapshot, primitive lanes and weak defining-loader boundary |
-| `MIndexClass` | `jdk.internal.mindex.M3Class` | Indexed class view | Inlined owner/row view; public type remains `java.lang.Class` |
-| `MIndexVmPrecomputeKey` | `jdk.internal.mindex.M3PC` | PC = Precompute Context | Inlined VM-local immutable context; ordered dependency equality |
+| `MIndexVmSession` | `jdk.internal.mindex.M3CB` | CB = Class Bridge | Reserved mapping; no target implementation yet |
+| `MIndexClassIndex` | `jdk.internal.mindex.M3CI` | CI = Class Index | Reserved mapping; weak defining-loader boundary and metadata closure required |
+| `MIndexClass` | `jdk.internal.mindex.M3Class` | Indexed class view | Reserved mapping; never a replacement name for `java.lang.Class` |
+| `MIndexVmPrecomputeKey` | `jdk.internal.mindex.M3PC` | PC = Precompute Context | Reserved mapping; stable owner/generation and exact context admission required |
 | `com.synexia.mindex.ast.MIndexAST` | `jdk.internal.mindex.M3AST` | AST = Abstract Syntax Tree | Reserved mapping; root-package facade must be reconciled separately |
 | `MIndexASTPrecompute` | `jdk.internal.mindex.M3ASTPC` | AST precompute context | Reserved mapping; dependency/format review pending |
 | `MIndexCompilerASTPrecompute` | `com.sun.tools.javac.m3.M3ASTPC` | Compiler-specific context, jdk.compiler | Reserved mapping; must not pull compiler dependencies into java.base |
@@ -57,11 +57,7 @@ owner generations invalidate affected reuse before publication. Hash hits discov
 they do not bypass verification, linking, class initialization, JNI lifetime or JIT deoptimization.
 
 Integration uses explicit OFF / OBSERVE / ENABLED modes, with the original JDK operation as the
-fallback. Version-index queries and caller-owned Class bridge operations are active.
-`M3CB.effectiveVersion(Class<?>)` resolves a declared release through that exact Class's
-counterpart row; `effective` also returns the current context and epoch. Neither API
-authenticates post-transform class bytes. Lifecycle owners must invalidate before definition
-or access-context changes. Automatic Class/AST dispatch,
+fallback. Version-index queries are active code in this increment; automatic Class/AST dispatch,
 loader attachment, native code installation and a universal EV API are **not implemented**.
 There is no new VM-wide class registry. Existing `Class.getName`, class identity, module resolution,
 `java.version` and class-file formats are unchanged.
@@ -87,8 +83,8 @@ and proof tooling. No Synexia application artifact may become a product dependen
 
 ## License and tests
 
-The VI/Release kernels and fourteen Class bridge owners retain Apache-2.0. Exact source originals,
-license and NOTICE snapshots live in `m3/tooling/vi/donor` and `m3/tooling/cb/donor`; the java.base distribution notice is
+The two inlined Synexia kernels and their adaptations retain Apache-2.0. Exact source originals,
+license and NOTICE snapshots live in `m3/tooling/vi/donor`; the java.base distribution notice is
 `src/java.base/share/legal/synexia.md`. Existing OpenJDK and third-party notices remain authoritative
 for their respective code. The user requested Apache-2.0 for relevant Synexia code; this does not
 relicense unrelated donors or the JDK.
@@ -99,16 +95,8 @@ the independent JPMS oracle, including raw-label preservation, equal-precedence 
 budgets and revision drift. Library release identity is exact, not precedence equality. The source
 and target have explicit String/progress-boundary adaptations, not a drop-in binary ABI claim.
 
-The matching Linux x86_64 fastdebug JDK image build and bounded jtreg tests pass. Class
-bridge tests pass in interpreter, mixed, C1-only and non-tiered C2 modes. Automatic runtime
-consumers, lifecycle/access changes, agents/redefinition, expanded CDS/JVMTI/GC coverage and
-other architectures remain open; see the exact evidence receipt for the tested boundary.
+A complete matching JDK build, jtreg integration and runtime consumers remain open. Class bridge
+promotion additionally needs loader isolation/unloading, reflection/initialization, module access,
+agents/redefinition, CDS, JNI/JVMTI, GC, interpreter/C1/C2 and architecture-specific evidence.
 AST promotion needs exact source/bytecode provenance and compiler regression tests. Radical
 class-file/linkage/identity changes remain a separately reviewed experimental JVM project.
-
-The CB packet runs 4,515 assertions per stock patch-module interpreter/mixed mode and
-4,525 per matching image mode (reflection exposes additional M3 String metadata). These cover
-metadata parity, defining-loader
-identity, hidden/bootstrap/primitive/array classes, unloading, declared releases and invalidation.
-The jtreg sources are generated by the same recipe. Exact executed modes and remaining gates are
-recorded in `m3/tooling/cb/evidence/receipt.json`; patch-module evidence alone is not a fork-image pass.

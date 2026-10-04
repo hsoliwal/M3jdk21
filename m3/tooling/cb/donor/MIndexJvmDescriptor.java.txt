@@ -1,0 +1,61 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.mindex.classindex;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.RecordComponent;
+import java.util.Objects;
+
+/** Dependency-free JVM descriptor encoder used at the reflection admission boundary. */
+public final class MIndexJvmDescriptor {
+    private MIndexJvmDescriptor() {
+    }
+
+    public static String type(Class<?> type) {
+        Class<?> checked = Objects.requireNonNull(type, "type");
+        if (checked.isPrimitive()) {
+            if (checked == void.class) return "V";
+            if (checked == boolean.class) return "Z";
+            if (checked == byte.class) return "B";
+            if (checked == char.class) return "C";
+            if (checked == short.class) return "S";
+            if (checked == int.class) return "I";
+            if (checked == long.class) return "J";
+            if (checked == float.class) return "F";
+            if (checked == double.class) return "D";
+            throw new AssertionError("unknown primitive type: " + checked);
+        }
+        if (checked.isArray()) {
+            return checked.getName().replace('.', '/');
+        }
+        return "L" + checked.getName().replace('.', '/') + ";";
+    }
+
+    public static String field(Field field) {
+        return type(Objects.requireNonNull(field, "field").getType());
+    }
+
+    public static String method(Method method) {
+        Method checked = Objects.requireNonNull(method, "method");
+        return executable(checked.getParameterTypes(), checked.getReturnType());
+    }
+
+    public static String constructor(Constructor<?> constructor) {
+        Constructor<?> checked = Objects.requireNonNull(constructor, "constructor");
+        return executable(checked.getParameterTypes(), void.class);
+    }
+
+    public static String recordComponent(RecordComponent component) {
+        return type(Objects.requireNonNull(component, "component").getType());
+    }
+
+    private static String executable(Class<?>[] parameters, Class<?> returnType) {
+        StringBuilder descriptor = new StringBuilder(16 + parameters.length * 8);
+        descriptor.append('(');
+        for (Class<?> parameter : parameters) {
+            descriptor.append(type(parameter));
+        }
+        return descriptor.append(')').append(type(returnType)).toString();
+    }
+}

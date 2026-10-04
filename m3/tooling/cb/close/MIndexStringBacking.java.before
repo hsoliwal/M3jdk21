@@ -36,10 +36,6 @@ import java.nio.CharBuffer;
  * java.lang.String semantics.</p>
  */
 public interface MIndexStringBacking extends AutoCloseable {
-    /** Releases backing resources without a checked interruption contract. */
-    @Override
-    void close();
-
     int length(long id);
 
     int utf8Length(long id);

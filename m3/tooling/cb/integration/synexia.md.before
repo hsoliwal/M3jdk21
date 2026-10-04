@@ -1,15 +1,3 @@
-## Synexia Class bridge additions
-
-Apache-2.0 also applies to these adapted Synexia owners in jdk.internal.mindex, including nested types:
-M3Boundary, M3CB, M3CI, M3Class, M3ClassFlags, M3Constructor, M3Descriptor, M3Field, M3Member, M3MemberFlags, M3MemberKind, M3Method, M3PC, M3RecordComponent.
-Copyright 2026 Hitesh Soliwal and contributors.
-
-Source originals, LICENSE, NOTICE and hashes: m3/tooling/cb/donor and pins.json.
-Modifications: JDK package/names; existing String references and local primitive symbol lanes;
-M3VI progress boundary; exact text fingerprints; effective declared-release lookup and immutable
-String-based precompute inputs. M3CI includes the int-lane lowerBound/upperBound bodies from
-MIndexAlgorithm. Other source algorithms, OpenJDK code and notices retain their existing scope.
-
 ## Synexia VI and release metadata
 
 These independently authored Synexia components are distributed under Apache License 2.0:
