@@ -15,6 +15,7 @@ import com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe;
 import com.m3.rewrite.atom.M3PureIntConvergenceRecipe;
 import com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe;
 import com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe;
+import com.m3.rewrite.backport.M3Jep485StreamGatherersBackportRecipe;
 import com.m3.rewrite.backport.M3VerbatimJavaPairRecipe;
 import com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe;
 import com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe;
@@ -25,7 +26,7 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(13, M3RecipeScopeRegistry.size());
+        assertEquals(14, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(InstallIndexStringCompatibility.class.getName()));
@@ -39,6 +40,8 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3Jdk21HashPinnedSnapshotRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jdk21HashPinnedTextSnapshotRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3VerbatimJavaPairRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(
+                M3Jep485StreamGatherersBackportRecipe.class.getName()));
         assertFalse(M3RecipeScopeRegistry.registered(null));
         assertFalse(M3RecipeScopeRegistry.registered("missing.Recipe"));
         assertThrows(NullPointerException.class, () -> M3RecipeScopeRegistry.require((Class<?>) null));
@@ -117,6 +120,17 @@ final class M3RecipeScopeDeclarationTest {
                 inferredPolicy.resolve(List.of(
                         "src/main/java/a/A.java",
                         "src/main/java/b/B.java")));
+    }
+
+    @Test
+    void publicApiBackportRequiresExplicitLibraryAuthority() {
+        var policy =
+                M3RecipeScopeRegistry.require(M3Jep485StreamGatherersBackportRecipe.class);
+        assertEquals(M3EditScope.LIBRARY_API, policy.minimumScope());
+        assertEquals(M3ContractMode.EXPLICIT_CONTRACT_CHANGE, policy.contractMode());
+        assertFalse(policy.inferFromTargets());
+        assertFalse(policy.fileLocalMechanical(
+                List.of("src/java.base/share/classes/java/util/stream/Stream.java")));
     }
 
     @Test
