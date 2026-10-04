@@ -3,4 +3,5 @@ donor-authority	MODULE	3	Lock released GA tags and immutable JDK27 snapshot dono
 file-atom-mechanics	MODULE	4	Compare exact trees and emit one-file Java/text recipe atoms	false
 jep-planning	MODULE	4	Discover JEP seeds and project them to donor-fenced FILE candidates	false
 ci-proof	MULTI_MODULE	2	Run exact-head authority/planner/crate proof	false
-control-join	MULTI_MODULE	17	Compose the corrected JEP planning control plane	false
+recipe-proof	MODULE	4	Bootstrap recipe implementation/test and replay-owned registry artifacts	false
+control-join	MULTI_MODULE	21	Compose the corrected JEP planning control plane	false
