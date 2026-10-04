@@ -1,0 +1,135 @@
+Compiled from "MIndexMappedStringBacking.java"
+public final class jdk.internal.mindex.MIndexMappedStringBacking implements jdk.internal.mindex.MIndexStringBacking {
+  public static jdk.internal.mindex.MIndexMappedStringBacking open(java.nio.file.Path);
+    descriptor: (Ljava/nio/file/Path;)Ljdk/internal/mindex/MIndexMappedStringBacking;
+
+  public java.nio.file.Path path();
+    descriptor: ()Ljava/nio/file/Path;
+
+  public int size();
+    descriptor: ()I
+
+  public int languageId(long);
+    descriptor: (J)I
+
+  public int length(long);
+    descriptor: (J)I
+
+  public int utf8Length(long);
+    descriptor: (J)I
+
+  public int codePointCount(long);
+    descriptor: (J)I
+
+  public int unpairedSurrogateCount(long);
+    descriptor: (J)I
+
+  public int hashCode(long);
+    descriptor: (J)I
+
+  public int hash31Power(long);
+    descriptor: (J)I
+
+  public int firstUtf16Unit(long);
+    descriptor: (J)I
+
+  public int lastUtf16Unit(long);
+    descriptor: (J)I
+
+  public long utf8Handle(long);
+    descriptor: (J)J
+
+  public char charAt(long, int);
+    descriptor: (JI)C
+
+  public java.nio.CharBuffer utf16View(long);
+    descriptor: (J)Ljava/nio/CharBuffer;
+
+  public java.nio.ByteBuffer utf8View(long);
+    descriptor: (J)Ljava/nio/ByteBuffer;
+
+  public jdk.internal.mindex.MIndexMappedStringBacking$View view(long, int, int);
+    descriptor: (JII)Ljdk/internal/mindex/MIndexMappedStringBacking$View;
+
+  public jdk.internal.mindex.MIndexMappedStringBacking$View view(long);
+    descriptor: (J)Ljdk/internal/mindex/MIndexMappedStringBacking$View;
+
+  public java.lang.String materialize(long);
+    descriptor: (J)Ljava/lang/String;
+
+  public int compare(long, long);
+    descriptor: (JJ)I
+
+  public boolean contentEquals(long, java.lang.CharSequence);
+    descriptor: (JLjava/lang/CharSequence;)Z
+
+  public void close();
+    descriptor: ()V
+}
+Compiled from "MIndexMappedStringBacking.java"
+public final class jdk.internal.mindex.MIndexMappedStringBacking$View implements java.lang.CharSequence {
+  public long id();
+    descriptor: ()J
+
+  public int start();
+    descriptor: ()I
+
+  public int length();
+    descriptor: ()I
+
+  public char charAt(int);
+    descriptor: (I)C
+
+  public jdk.internal.mindex.MIndexMappedStringBacking$View subSequence(int, int);
+    descriptor: (II)Ljdk/internal/mindex/MIndexMappedStringBacking$View;
+
+  public int codePointCount();
+    descriptor: ()I
+
+  public int hashCode();
+    descriptor: ()I
+
+  public java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+
+  public java.lang.CharSequence subSequence(int, int);
+    descriptor: (II)Ljava/lang/CharSequence;
+}
+Compiled from "MIndexStringBacking.java"
+public interface jdk.internal.mindex.MIndexStringBacking extends java.lang.AutoCloseable {
+  public abstract void close();
+    descriptor: ()V
+
+  public abstract int length(long);
+    descriptor: (J)I
+
+  public abstract int utf8Length(long);
+    descriptor: (J)I
+
+  public abstract int codePointCount(long);
+    descriptor: (J)I
+
+  public abstract int unpairedSurrogateCount(long);
+    descriptor: (J)I
+
+  public abstract int hashCode(long);
+    descriptor: (J)I
+
+  public abstract char charAt(long, int);
+    descriptor: (JI)C
+
+  public abstract java.nio.CharBuffer utf16View(long);
+    descriptor: (J)Ljava/nio/CharBuffer;
+
+  public abstract java.nio.ByteBuffer utf8View(long);
+    descriptor: (J)Ljava/nio/ByteBuffer;
+
+  public abstract java.lang.String materialize(long);
+    descriptor: (J)Ljava/lang/String;
+
+  public default boolean contentEquals(long, java.lang.CharSequence);
+    descriptor: (JLjava/lang/CharSequence;)Z
+
+  public default int compare(long, long);
+    descriptor: (JJ)I
+}

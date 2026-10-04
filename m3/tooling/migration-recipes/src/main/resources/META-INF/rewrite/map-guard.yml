@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.MapGuard
+displayName: Bound mapped-store admission and failed-open resources
+description: Exact internal Java21 repair preserving valid format and public API; constructor and commit-recognition roles remain in their existing owner.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk22-map-guard
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.MapGuardWorkflow
+displayName: Include mapped admission in the existing jtreg workflow
+description: Exact additive test selection preserving the original workflow and all build and permission settings.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: map-guard
