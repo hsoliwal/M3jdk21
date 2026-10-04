@@ -107,6 +107,36 @@ class SourcePairConvergenceGateTest(unittest.TestCase):
             )
 
     @patch("source_pair_convergence_gate.release_donor_refs.verify_with_release_authority")
+    def test_added_donor_file_is_admitted_when_baseline_is_truly_absent(self, authority) -> None:
+        authority.return_value = {22: "jdk-22+36"}
+        added = "src/java.base/share/classes/p/Added.java"
+        donor_bytes = b"package p; final class Added {}\n"
+        donor_file = self.donor / added
+        donor_file.parent.mkdir(parents=True, exist_ok=True)
+        donor_file.write_bytes(donor_bytes)
+        digest = sha(donor_bytes)
+        with self.donor_manifest.open("a", encoding="utf-8") as handle:
+            handle.write(
+                f"{added}\t{digest}\t{digest}\ttrue\tCONVERGED_UNCHANGED\t\n"
+            )
+        self.targets.write_text(added + "\n", encoding="utf-8")
+
+        root = pair.verify(
+            self.control, self.baseline, self.baseline_manifest, self.baseline_identity,
+            self.donor, self.donor_manifest, self.donor_identity, 22, self.targets
+        )
+        self.assertRegex(root, r"^[0-9a-f]{64}$")
+
+        baseline_file = self.baseline / added
+        baseline_file.parent.mkdir(parents=True, exist_ok=True)
+        baseline_file.write_bytes(b"unexpected\n")
+        with self.assertRaisesRegex(ValueError, "exists without SOURCE_CONVERGENCE row"):
+            pair.verify(
+                self.control, self.baseline, self.baseline_manifest, self.baseline_identity,
+                self.donor, self.donor_manifest, self.donor_identity, 22, self.targets
+            )
+
+    @patch("source_pair_convergence_gate.release_donor_refs.verify_with_release_authority")
     def test_hold_and_missing_target_fail_closed(self, authority) -> None:
         authority.return_value = {22: "jdk-22+36"}
         text = self.donor_manifest.read_text(encoding="utf-8")
@@ -127,7 +157,7 @@ class SourcePairConvergenceGateTest(unittest.TestCase):
             "src/java.base/share/classes/p/Missing.java\n",
             encoding="utf-8",
         )
-        with self.assertRaisesRegex(ValueError, "missing SOURCE_CONVERGENCE row"):
+        with self.assertRaisesRegex(ValueError, "missing donor SOURCE_CONVERGENCE row"):
             pair.verify(
                 self.control, self.baseline, self.baseline_manifest, self.baseline_identity,
                 self.donor, self.donor_manifest, self.donor_identity, 22, self.targets
