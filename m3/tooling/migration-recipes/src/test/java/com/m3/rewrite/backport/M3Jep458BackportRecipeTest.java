@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.m3.rewrite.scope.M3ContractMode;
 import com.m3.rewrite.scope.M3EditScope;
 import com.m3.rewrite.scope.M3RecipeScopeRegistry;
 import java.io.IOException;
@@ -59,7 +60,7 @@ final class M3Jep458BackportRecipeTest {
                     "03-jdk-compiler-launcher.properties.before.txt"));
 
     @Test
-    void compositeRecipePinsDonorCratesAndMultiModuleScope() {
+    void compositeRecipePinsDonorCratesAndPublicContractAuthority() {
         Recipe recipe = new M3Jep458BackportRecipe();
 
         assertEquals(
@@ -75,8 +76,11 @@ final class M3Jep458BackportRecipeTest {
         assertEquals("jdk22-jep458-multifile-java", javaRecipe.getCrateName());
         assertEquals("jdk22-jep458-multifile-text", textRecipe.getCrateName());
         assertEquals(
-                M3EditScope.MULTI_MODULE,
+                M3EditScope.LIBRARY_API,
                 M3RecipeScopeRegistry.require(M3Jep458BackportRecipe.class).minimumScope());
+        assertEquals(
+                M3ContractMode.EXPLICIT_CONTRACT_CHANGE,
+                M3RecipeScopeRegistry.require(M3Jep458BackportRecipe.class).contractMode());
         assertEquals(1, recipe.maxCycles());
         assertTrue(recipe.getTags().contains("multi-module"));
         assertTrue(recipe.getTags().contains("hash-pinned"));
