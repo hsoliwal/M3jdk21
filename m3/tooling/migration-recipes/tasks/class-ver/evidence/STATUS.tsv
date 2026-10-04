@@ -1,0 +1,13 @@
+gate	status	detail
+source_identity	PASS	Three postimages match saved candidate; five compiled kernel sources and existing builder matched reviewed Git blobs
+local_compile	PASS	Java21 --release21 -Xlint:all -Werror for kernel and shared behavioral checks
+local_archive_vm	PASS	639 assertions in JIT and 639 in interpreter mode
+existing_kernel_checks	PASS	41 standalone checks; not JUnit
+python_tests	PASS	11 existing tests
+local_diagnostics	PASS	Actual JMOD/jlink image; JFR and native jcmd under -Xcheck:jni
+workflow_syntax	PASS	YAML parsed and every shell run block passed bash -n
+ClassVerTest	NOT_RUN	Three real OpenRewrite/JUnit tests authored; no framework stub
+maven_coverage	BLOCKED	Local mvn missing exit127; Maven Central DNS exit6
+PR95_framework	FAILED_BEFORE_JOBS	Run37190317862 returned zero jobs; cause not disclosed by available metadata
+modified_JDK_build_jtreg	NOT_RUN	Installed OpenJDK21 is not rebuilt M3JDK21
+programme	NOT_COMPLETE	See ACTION_QUEUE.tsv
