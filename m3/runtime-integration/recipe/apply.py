@@ -21,9 +21,14 @@ def apply(target,reverse=False,check=False):
         actual=digest(p.read_bytes()) if p.exists() else None
         if actual==hashes['before']:states.add('before')
         elif actual==hashes['after']:states.add('after')
+        elif actual in hashes.get('superseded',[]):states.add('superseded')
         else:raise ValueError('source drift: '+name)
-    if len(states)!=1:raise ValueError('mixed runtime patch state')
-    current=states.pop();desired='before' if reverse else 'after'
+    if states=={'before'}:current='before'
+    elif states and states.issubset({'after','superseded'}):
+        current='superseded' if 'superseded' in states else 'after'
+    else:raise ValueError('mixed runtime patch state')
+    if current=='superseded':return current
+    desired='before' if reverse else 'after'
     if current==desired or check:return current
     cmd=['git','-c','core.autocrlf=false','apply']+(['--reverse'] if reverse else [])
     subprocess.run(cmd+['--check',str(patch)],cwd=target,check=True)
