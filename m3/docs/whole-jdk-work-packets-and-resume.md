@@ -6,14 +6,15 @@ Status: documentation-only execution handoff. This file organizes implementation
 
 Before implementing a packet, read:
 
-1. `m3/docs/whole-jdk-m3-architecture.md`
-2. `m3/docs/jdk-subsystem-migration-matrix.md`
-3. `m3/docs/collections-replacement-spec.md` when collections are in scope
-4. `m3/docs/string-text-replacement-spec.md` when text is in scope
-5. `m3/docs/name-mapping.json`
-6. `m3/docs/migration-mapping-lifecycle.md`
-7. `m3/docs/migration-worked-port-decisions.md`
-8. the exact branch/commit-specific evidence for the packet
+1. `m3/docs/a3.md`
+2. `m3/docs/whole-jdk-m3-architecture.md`
+3. `m3/docs/jdk-subsystem-migration-matrix.md`
+4. `m3/docs/collections-replacement-spec.md` when collections are in scope
+5. `m3/docs/string-text-replacement-spec.md` when text is in scope
+6. `m3/docs/name-mapping.json`
+7. `m3/docs/migration-mapping-lifecycle.md`
+8. `m3/docs/migration-worked-port-decisions.md`
+9. the exact branch/commit-specific evidence for the packet
 
 Do not treat a branch-only manifest or receipt as current master authority merely because it is newer or more detailed.
 
@@ -92,6 +93,8 @@ A packet that cannot name its exact owner and contract stays at inventory/contra
 ### Goal
 
 Produce a pinned, repeatable inventory of the entire JDK fork and relevant Synexia MIndex/MatIndex families.
+
+Use A3Inv as the deterministic JDK src/test content inventory front door. It does not replace the broader dependency/public/native graph work required by this packet.
 
 ### Inputs
 

@@ -107,6 +107,29 @@ The upstream-inventory workflow exports:
 - `COMPATIBILITY_QUEUE.tsv`;
 - `COMPATIBILITY_QUEUE.summary.json`.
 
+## A3 absorption preparation
+
+A3 (Atomize -> Patternize -> Absorb) is the front-door preparation plane for current-tree
+backport work. It does not replace this catalogue, compatibility queue, recipe crates, scope
+DAG or OpenJDK build.
+
+A3Inv inventories the actual src/ and test/ trees by module/area/path/hash. A3Plan joins every
+current JEP row, inspected JBS seed and community capability row while preserving the original
+disposition. A3Apply can run the retained FILE-local Java convergence DAG on explicit source
+files and writes candidate copies only under m3/build.
+
+The intended join is:
+
+    A3Inv/A3Plan
+      -> compatible leaf discovery
+      -> FILE atomize/patternize candidate
+      -> file_delta_inventory / source-sealed recipe crate
+      -> canonical backport DAG
+      -> configure/make/jtreg/runtime proof
+
+A3 makes source absorption mechanically smaller. It does not grant wider-scope compatibility
+or promotion authority.
+
 ## Exact JDK21 ↔ donor file deltas and recipe crates
 
 `file_delta_inventory.py` compares the entire JDK 21 GA tree verbatim against each released donor
