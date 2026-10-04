@@ -3,6 +3,6 @@ ordinal	pass_id	mutation_authority	stop_condition
 1	compatibility-classify	false	each item is candidate, hold, redirect or explicit exclusion under Java 21 locks
 2	dependency-closure	false	all required upstream dependencies and target preimages are accounted for
 3	materialize	false	an exact patch, source-bound recipe, or deterministic donor-copy unit exists
-4	apply	true	candidate delta is applied only inside its declared target scope
+4	apply	true	candidate delta is applied only inside its declared target scope and every touched Java preimage has a matching FILE fixed-point SOURCE_CONVERGENCE receipt
 5	verify	false	diff -> lint/static checks -> build/compile -> tests -> runtime gates pass as applicable
 6	promote	false	exact verified receipt is serially admitted or the item remains candidate/hold
