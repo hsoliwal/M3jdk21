@@ -23,22 +23,63 @@ class Row:
     status: str
     candidate: str
 
+    @property
+    def effective_sha256(self) -> str:
+        """Normalized content identity; valid converged rows have consistent hashes."""
+        return self.post_sha256
+
 
 def _sha256_bytes(payload: bytes) -> str:
     return hashlib.sha256(payload).hexdigest()
 
 
-def _canonical_path(value: str) -> str:
-    text = value.strip().replace("\\", "/")
+def _relative_path(value: str) -> str:
+    """One portable path identity: no traversal, aliases, controls or Git metadata."""
+    if not isinstance(value, str):
+        raise ValueError("path must be text")
+    text = value.replace("\\", "/")
+    parts = text.split("/")
     if (
-        not text.startswith("src/")
-        or not text.endswith(".java")
-        or "/../" in text
-        or "/./" in text
-        or "\x00" in text
+        text != text.strip()
+        or ":" in text
+        or any(ord(char) < 32 or ord(char) == 127 for char in text)
+        or any(part in {"", ".", ".."} or part.lower() == ".git" for part in parts)
     ):
+        raise ValueError(f"invalid relative path: {value!r}")
+    return text
+
+
+def _canonical_path(value: str) -> str:
+    text = _relative_path(value)
+    if not text.startswith("src/") or not text.endswith(".java"):
         raise ValueError(f"invalid Java target path: {value!r}")
     return text
+
+
+def regular_file(root: Path, relative: str) -> Path:
+    """Resolve a selected file without following any symlink below the admitted root."""
+    path = root
+    for part in _relative_path(relative).split("/"):
+        path = path / part
+        if path.is_symlink():
+            raise ValueError(f"symlink in selected path: {relative}")
+    if not path.is_file() or not path.resolve().is_relative_to(root):
+        raise ValueError(f"selected file missing or escaped root: {relative}")
+    return path
+
+
+def require_converged(row: Row) -> None:
+    """A fixed-point declaration requires internally consistent source evidence."""
+    if row.status not in _ALLOWED or not row.fixed_point:
+        raise ValueError(
+            f"Java target is not at FILE fixed point: {row.path}: "
+            f"{row.status}/{row.fixed_point}"
+        )
+    changed = row.status == "CONVERGED_CHANGED"
+    if changed != (row.pre_sha256 != row.post_sha256):
+        raise ValueError(f"inconsistent convergence hashes: {row.path}")
+    if changed != bool(row.candidate):
+        raise ValueError(f"inconsistent convergence candidate: {row.path}")
 
 
 def load_manifest(path: Path) -> dict[str, Row]:
@@ -52,11 +93,15 @@ def load_manifest(path: Path) -> dict[str, Row]:
             "status",
             "candidate",
         }
-        if reader.fieldnames is None or not required.issubset(reader.fieldnames):
+        if (reader.fieldnames is None
+                or len(set(reader.fieldnames)) != len(reader.fieldnames)
+                or not required.issubset(reader.fieldnames)):
             raise ValueError("SOURCE_CONVERGENCE manifest header mismatch")
 
         rows: dict[str, Row] = {}
         for raw in reader:
+            if None in raw or any(value is None for value in raw.values()):
+                raise ValueError("SOURCE_CONVERGENCE manifest row width mismatch")
             target = _canonical_path(raw["path"])
             if target in rows:
                 raise ValueError(f"duplicate convergence row: {target}")
@@ -64,10 +109,16 @@ def load_manifest(path: Path) -> dict[str, Row]:
             post = raw["postSha256"].strip()
             if not _hash(pre) or not _hash(post):
                 raise ValueError(f"invalid convergence hash: {target}")
-            fixed = raw["fixedPoint"].strip().lower() == "true"
+            fixed_text = raw["fixedPoint"].strip().lower()
+            if fixed_text not in {"true", "false"}:
+                raise ValueError(f"invalid fixedPoint value: {target}")
+            fixed = fixed_text == "true"
             status = raw["status"].strip()
-            candidate = raw["candidate"].strip().replace("\\", "/")
-            rows[target] = Row(target, pre, post, fixed, status, candidate)
+            candidate = _relative_path(raw["candidate"]) if raw["candidate"] else ""
+            row = Row(target, pre, post, fixed, status, candidate)
+            if status in _ALLOWED:
+                require_converged(row)
+            rows[target] = row
         return rows
 
 
@@ -97,15 +148,8 @@ def verify(root: Path, manifest: Path, targets_file: Path) -> str:
         row = rows.get(target)
         if row is None:
             raise ValueError(f"missing SOURCE_CONVERGENCE row: {target}")
-        if row.status not in _ALLOWED or not row.fixed_point:
-            raise ValueError(
-                f"Java target is not at FILE fixed point: {target}: "
-                f"{row.status}/{row.fixed_point}"
-            )
-
-        source = (root / target).resolve()
-        if not source.is_file() or not source.is_relative_to(root):
-            raise ValueError(f"Java target missing or escaped root: {target}")
+        require_converged(row)
+        source = regular_file(root, target)
         current = _sha256_bytes(source.read_bytes())
         if current != row.pre_sha256:
             raise ValueError(
@@ -114,19 +158,13 @@ def verify(root: Path, manifest: Path, targets_file: Path) -> str:
             )
 
         if row.status == "CONVERGED_CHANGED":
-            if not row.candidate:
-                raise ValueError(f"changed convergence row has no candidate: {target}")
-            candidate = (manifest.parent / row.candidate).resolve()
-            if not candidate.is_file() or not candidate.is_relative_to(manifest.parent):
-                raise ValueError(f"candidate missing or escaped manifest root: {target}")
+            candidate = regular_file(manifest.parent, row.candidate)
             actual_post = _sha256_bytes(candidate.read_bytes())
             if actual_post != row.post_sha256:
                 raise ValueError(
                     f"candidate postimage drift: {target}: "
                     f"{actual_post} != {row.post_sha256}"
                 )
-        elif row.candidate:
-            raise ValueError(f"unchanged convergence row unexpectedly has candidate: {target}")
 
         evidence.append(
             "\x1f".join(
