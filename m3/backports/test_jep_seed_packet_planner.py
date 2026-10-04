@@ -116,7 +116,7 @@ class JepSeedPacketPlannerTest(unittest.TestCase):
                 (jep493 / self.mod.GEN.TEXT_RESOURCE_ROOT / "jdk24-text-0001").is_dir()
             )
 
-            self.assertEqual("NO_FINAL_GA_DELTA", by_jep[494][7])
+            self.assertEqual("NO_DONOR_TREE_DELTA", by_jep[494][7])
             self.assertEqual("0", by_jep[494][5])
             self.assertEqual("0", by_jep[494][6])
 
@@ -144,6 +144,22 @@ class JepSeedPacketPlannerTest(unittest.TestCase):
                 "INVENTORY_ONLY_NO_COMPATIBILITY_OR_MUTATION_AUTHORITY",
                 written[0]["authority"],
             )
+
+    def test_queue_donor_ref_drift_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            repo = self.fixture(root)
+            queue = root / "queue.tsv"
+            paths = root / "paths"
+            out = root / "out"
+            paths.mkdir()
+            self.queue(queue)
+            text = queue.read_text(encoding="utf-8").replace(
+                "jdk-24+36", "wrong-ref", 1
+            )
+            queue.write_text(text, encoding="utf-8")
+            with self.assertRaises(ValueError):
+                self.mod.plan(repo, queue, paths, out, {24: "jdk-24+36"})
 
     def test_empty_queue_and_empty_path_list_fail_closed(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
