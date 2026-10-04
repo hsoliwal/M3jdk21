@@ -1,0 +1,11 @@
+id	status	exit
+TYPE_FIX	IMPLEMENTED_UNVERIFIED_FRAMEWORK	Actual TypeTest and full recipe verify pass
+JNI_CONSTRUCTION	PENDING	Reuse existing Handle-returning String helpers; real HotSpot build/JNI regression
+BACKING_CLOSE	CONTRACT_REVIEW	No silent narrowing of inherited checked exceptions or warning suppression
+CLASS_VERSION	SAVED_CANDIDATE	Publish matching saved source and run actual recipe/JUnit gates
+M3JDK_BUILD	PENDING	Full modified build and jtreg; keep installed JAVA_HOME read-only
+JEP_NONJEP_INTAKE	PENDING	Every catalogued change classified and every compatible packet verified
+ATOM_PATTERN_DOCS	PENDING	Existing recipe convergence and documented effects/IOP roles
+M3_STRING_NAMES	PENDING	Coordinated Java/HotSpot/JNI/GC tests and stable migration mapping
+MODULE_PACKS	PENDING	Real JavaFX/application/native platform locks and runtime tests
+NEBULA	CONDITIONAL	Only after actual donor recipe/Tycho/source/native/UI acceptance

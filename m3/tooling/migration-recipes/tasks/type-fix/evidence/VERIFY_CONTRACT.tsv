@@ -1,0 +1,7 @@
+order	gate	state
+1	diff and exact source seals	PASS
+2	local syntax and structure	PASS
+3	actual Maven type-linking	PENDING
+4	five real JUnit/parser/scheduler cases	PENDING
+5	full module tests and existing coverage gates	PENDING
+6	modified JDK build/jtreg/native acceptance	PENDING

@@ -1,0 +1,1 @@
+package fixture; class Thing { int value() { return 2; } }

@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.TypeFix
+displayName: Preserve SourceFile typing in snapshot metadata replay
+description: Repair generic receiver inference in the existing Java snapshot recipe. Execute with the migration-recipes module as root; no product API changes.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk22-type-fix

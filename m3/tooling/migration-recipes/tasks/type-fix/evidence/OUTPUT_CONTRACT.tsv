@@ -1,0 +1,8 @@
+artifact	purpose
+STATUS.tsv	Actual gate states
+FINAL_REPORT.md	Scope, work and limits
+RUN_CONTEXT.tsv	Pinned local execution context
+PROVENANCE.tsv	Existing source and API ownership
+VERIFY_CONTRACT.tsv	Unwaived promotion gates
+OUTPUT_CONTRACT.tsv	Report custody
+ACTION_QUEUE.tsv	Outstanding JDK programme

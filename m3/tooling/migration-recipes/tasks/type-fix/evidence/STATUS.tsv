@@ -1,0 +1,8 @@
+gate	status	detail
+source_identity	PASS	Original Git blob 828724689638268574c2b599b1bfcef7921a2f90 matched current master
+syntax_shape	PASS	Fresh local check: 3 sources, 22 declarations, 140 calls, exactly 2 added type witnesses
+framework_type_linking	PENDING	Actual Maven dependencies unavailable locally; hosted job required
+openrewrite_junit	PENDING	Five real parser/scheduler tests authored; not represented as executed
+module_coverage	PENDING	Existing complete verify lifecycle and configured gates retained
+modified_jdk_build	PENDING	JNI CHECK_NULL and backing-close boundary remain separate obligations
+programme	INCOMPLETE	No full JDK or all-backports completion claim

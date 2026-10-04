@@ -1,0 +1,7 @@
+field	value
+base	81f1aeb9b88408a763601982806f9c46f917ba82
+source	Saved TypeFix export verified against current Git blob
+java_local	OpenJDK 21.0.11 Debian
+workers	1
+scope	FILE implementation; MODULE recipe/tests; explicit CI gate
+canonical_writes	false

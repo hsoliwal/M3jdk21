@@ -1,0 +1,2 @@
+src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java	629d17076fa5c5e399da6e1d0138f2f6cc2d99755977c194d082ee72d4665efc	a1e1984d9b59ef07639df5c89b8ed3b03944bdbbefbac656865561d1689acb27	after.java.txt
+src/test/java/com/m3/rewrite/backport/TypeTest.java	ABSENT	1b768c35d0f0f35b44bb112d13be6cfdde5b12bd4e77758c1b6aa6759c3b9915	TypeTest.java.txt
