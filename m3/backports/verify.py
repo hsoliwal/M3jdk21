@@ -399,6 +399,147 @@ def verify_passes_and_work_queue(root: Path) -> None:
             raise AssertionError(f"public/tool contract backport lacks LIBRARY_API authority: {identity}")
 
 
+JDK_8367584_COMMIT = "39de79eae23410e335d2d1ced8fe3b4d7937a541"
+
+
+def verify_jfr_options_help_8367584_backport(root: Path) -> None:
+    rows = read_tsv(root / "m3/backports/recipes/jdk-8367584/adaptation.tsv")
+    if len(rows) != 4:
+        raise AssertionError(
+            f"expected 4 JDK-8367584 adaptation rows, found {len(rows)}"
+        )
+    by_target = {row["target_path"]: row for row in rows}
+    if len(by_target) != len(rows):
+        raise AssertionError("duplicate JDK-8367584 target path")
+    for row in rows:
+        if row["upstream_commit"] != JDK_8367584_COMMIT:
+            raise AssertionError(
+                f"unexpected JDK-8367584 donor commit for {row['target_path']}"
+            )
+        path = root / row["target_path"]
+        if not path.is_file():
+            raise AssertionError(f"missing JDK-8367584 target: {row['target_path']}")
+        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        if actual != row["target_sha256"]:
+            raise AssertionError(
+                f"JDK-8367584 target drift for {row['target_path']}: "
+                f"expected {row['target_sha256']}, actual {actual}"
+            )
+        baseline = row["baseline_sha256"]
+        if baseline != "ABSENT" and baseline == row["target_sha256"]:
+            raise AssertionError(f"JDK-8367584 row has no delta: {row['target_path']}")
+
+    seed = next(
+        (
+            row
+            for row in read_tsv(root / "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv")
+            if row["jbs"] == "JDK-8367584"
+        ),
+        None,
+    )
+    if seed is None or seed["upstream_commit"] != JDK_8367584_COMMIT:
+        raise AssertionError("JDK-8367584 seed donor commit drift")
+    if seed["disposition"] != "candidate-adapted":
+        raise AssertionError(
+            f"JDK-8367584 unexpected disposition: {seed['disposition']}"
+        )
+
+    option_set = (
+        root / "src/hotspot/share/jfr/recorder/service/jfrOptionSet.cpp"
+    ).read_text(encoding="utf-8")
+    if 'strcmp(FlightRecorderOptions, "help") == 0' not in option_set:
+        raise AssertionError("FlightRecorderOptions help dispatch missing")
+    if "JfrConfigureFlightRecorderDCmd::print_help(tty, true);" not in option_set:
+        raise AssertionError("FlightRecorderOptions startup help renderer missing")
+
+    dcmd = (
+        root / "src/hotspot/share/jfr/dcmd/jfrDcmds.cpp"
+    ).read_text(encoding="utf-8")
+    if "Syntax : -XX:FlightRecorderOptions:[options]" not in dcmd:
+        raise AssertionError("FlightRecorderOptions help syntax missing")
+    if "redact" in dcmd.lower() or "redact" in option_set.lower():
+        raise AssertionError("JEP 536 redaction semantics escaped the help-only leaf")
+
+    test = (
+        root / "test/jdk/jdk/jfr/startupargs/TestOptionsHelp.java"
+    ).read_text(encoding="utf-8")
+    if '"-XX:FlightRecorderOptions:help"' not in test:
+        raise AssertionError("focused FlightRecorderOptions help jtreg missing")
+
+
+JDK_8368692_COMMIT = "9131c72d63cac7d2a0e845952cee0e3c7edbfc93"
+
+
+def verify_password_systemin_8368692_backport(root: Path) -> None:
+    rows = read_tsv(root / "m3/backports/recipes/jdk-8368692/adaptation.tsv")
+    if len(rows) != 3:
+        raise AssertionError(
+            f"expected 3 JDK-8368692 adaptation rows, found {len(rows)}"
+        )
+    by_target = {row["target_path"]: row for row in rows}
+    if len(by_target) != len(rows):
+        raise AssertionError("duplicate JDK-8368692 target path")
+    for row in rows:
+        if row["upstream_commit"] != JDK_8368692_COMMIT:
+            raise AssertionError(
+                f"unexpected JDK-8368692 donor commit for {row['target_path']}"
+            )
+        path = root / row["target_path"]
+        if not path.is_file():
+            raise AssertionError(f"missing JDK-8368692 target: {row['target_path']}")
+        actual = hashlib.sha256(path.read_bytes()).hexdigest()
+        if actual != row["target_sha256"]:
+            raise AssertionError(
+                f"JDK-8368692 target drift for {row['target_path']}: "
+                f"expected {row['target_sha256']}, actual {actual}"
+            )
+        baseline = row["baseline_sha256"]
+        if baseline != "ABSENT" and baseline == row["target_sha256"]:
+            raise AssertionError(f"JDK-8368692 row has no delta: {row['target_path']}")
+
+    seed = next(
+        (
+            row
+            for row in read_tsv(root / "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv")
+            if row["jbs"] == "JDK-8368692"
+        ),
+        None,
+    )
+    if seed is None or seed["upstream_commit"] != JDK_8368692_COMMIT:
+        raise AssertionError("JDK-8368692 seed donor commit drift")
+    if seed["disposition"] != "candidate-adapted":
+        raise AssertionError(
+            f"JDK-8368692 unexpected disposition: {seed['disposition']}"
+        )
+
+    password = (
+        root / "src/java.base/share/classes/sun/security/util/Password.java"
+    ).read_text(encoding="utf-8")
+    required = (
+        'SecurityProperties.privilegedGetOverridable(\n'
+        '                "jdk.security.password.allowSystemIn")',
+        'if (value == null || value.equalsIgnoreCase("true"))',
+        'if (value.equalsIgnoreCase("false"))',
+        "if (!isEchoOn && in == System.in && !ALLOW_STDIN)",
+    )
+    for snippet in required:
+        if snippet not in password:
+            raise AssertionError(f"JDK-8368692 password policy leaf missing: {snippet}")
+
+    security = (
+        root / "src/java.base/share/conf/security/java.security"
+    ).read_text(encoding="utf-8")
+    if "#jdk.security.password.allowSystemIn = true" not in security:
+        raise AssertionError("JDK-8368692 compatibility-preserving default missing")
+
+    test = (
+        root / "test/jdk/sun/security/tools/keytool/AllowSystemIn.java"
+    ).read_text(encoding="utf-8")
+    for mode in ("succeed", "fail", "invalid"):
+        if mode not in test:
+            raise AssertionError(f"JDK-8368692 focused jtreg mode missing: {mode}")
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -419,11 +560,14 @@ def main() -> int:
     verify_javadoc_8347112_backport(root)
     verify_security_properties_8364182_backport(root)
     verify_keystore_instant_8374808_backport(root)
+    verify_jfr_options_help_8367584_backport(root)
+    verify_password_systemin_8368692_backport(root)
     verify_passes_and_work_queue(root)
     print(
         "PASS: 82 JEP rows, non-JEP seed uniqueness, exact JDK-8357439 donor blobs, "
         "JDK-8347112 javadoc adaptation, JDK-8364182 serviceability adaptation, "
-        "JDK-8374808 KeyStore Instant compatibility leaf, and resumable pass/work queue"
+        "JDK-8374808 KeyStore Instant leaf, JDK-8367584 JFR help leaf, "
+        "JDK-8368692 password policy leaf, and resumable pass/work queue"
     )
     return 0
 
