@@ -19,10 +19,9 @@ serial-promotion semantics.
 
 The canonical path is:
 
-`inventory -> compatibility-proof -> dependency-closure -> file-delta -> recipe-crate ->
-recipe-junit -> diff -> lint -> compile -> jtreg -> runtime -> promote`
+`inventory -> compatibility-proof -> dependency-closure -> file-delta -> baseline-convergence ->\nrecipe-crate -> recipe-junit -> diff -> lint -> compile -> jtreg -> runtime -> promote`
 
-Independent FILE recipes derived from one work packet may fan out in the same topological layer.
+`baseline-convergence` verifies the exact touched Java preimages against the Maven-generated\n`SOURCE_CONVERGENCE.tsv` FILE fixed-point receipt before any recipe node can mutate them. Non-Java\npacket atoms inherit the same barrier but are ignored by the Java-target gate.\n\nIndependent FILE recipes derived from one work packet may fan out in the same topological layer.
 Canonical promotion is one serial terminal node.
 
 ## Scope law
@@ -97,7 +96,7 @@ emits `atom-evidence.tsv` beside the framework projections.
 - `adapters/airflow/m3_backport_dag.py`: Airflow scheduling projection.
 - `adapters/drools/m3-backport-admission.drl`: Drools promotion-policy projection.
 
-These files intentionally have no authority to accept a backport by themselves.
+Generated Camel/Airflow/Drools projections inherit the canonical `baseline-convergence` dependency.\nThey intentionally have no authority to bypass the receipt gate or accept a backport by themselves.
 
 ## Coverage
 
