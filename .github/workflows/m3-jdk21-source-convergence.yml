@@ -1,0 +1,97 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 JDK21 source convergence
+
+on:
+  push:
+    branches:
+      - "m3/jdk21-*"
+    paths:
+      - "m3/tooling/migration-recipes/**"
+      - "m3/backports/source_convergence_gate.py"
+      - "m3/backports/test_source_convergence_gate.py"
+      - "m3/backports/BACKPORT_PASSES.tsv"
+      - "m3/docs/m3-multipass-convergence.md"
+      - "src/**/*.java"
+      - ".github/workflows/m3-jdk21-source-convergence.yml"
+  pull_request:
+    paths:
+      - "m3/tooling/migration-recipes/**"
+      - "m3/backports/source_convergence_gate.py"
+      - "m3/backports/test_source_convergence_gate.py"
+      - "m3/backports/BACKPORT_PASSES.tsv"
+      - "m3/docs/m3-multipass-convergence.md"
+      - "src/**/*.java"
+      - ".github/workflows/m3-jdk21-source-convergence.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  converge:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Diff hygiene
+        shell: bash
+        run: git diff --check
+
+      - name: Prove recipe atoms and multipass contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/pom.xml \
+            -pl tooling/migration-recipes -am \
+            -Dtest='M3Jdk21SourceConvergenceMainTest,M3Java21ConvergenceRecipeTest,M3PureIntConvergenceRecipeTest,M3MultiPassPlanTest' \
+            -Dsurefire.failIfNoSpecifiedTests=false \
+            test
+          python3 -m unittest discover \
+            -s m3/backports \
+            -p 'test_source_convergence_gate.py' \
+            -v
+
+      - name: Mavenize and converge the original JDK Java tree
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/pom.xml \
+            -pl tooling/migration-recipes -am \
+            -Pm3-jdk-source-convergence \
+            -Dm3.convergence.threads=4 \
+            -DskipTests=true \
+            -Djacoco.skip=true \
+            verify
+          cat m3/tooling/migration-recipes/target/m3-jdk-source-convergence/SOURCE_CONVERGENCE.summary.tsv
+
+      - name: Require baseline convergence for active Java backport targets
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > "$RUNNER_TEMP/java-backport-targets.txt" <<'EOF'
+          src/java.base/share/classes/java/security/KeyStore.java
+          src/java.base/share/classes/java/security/KeyStoreSpi.java
+          src/java.base/share/classes/java/security/Security.java
+          src/java.base/share/classes/jdk/internal/vm/VMSupport.java
+          src/java.base/share/classes/sun/security/util/Password.java
+          src/jdk.javadoc/share/classes/jdk/javadoc/internal/doclets/toolkit/BaseConfiguration.java
+          EOF
+          python3 m3/backports/source_convergence_gate.py \
+            . \
+            m3/tooling/migration-recipes/target/m3-jdk-source-convergence/SOURCE_CONVERGENCE.tsv \
+            "$RUNNER_TEMP/java-backport-targets.txt"
+
+      - name: Upload source convergence receipts and candidates
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-jdk21-source-convergence-${{ github.run_id }}
+          path: m3/tooling/migration-recipes/target/m3-jdk-source-convergence
+          if-no-files-found: error
+          retention-days: 30
