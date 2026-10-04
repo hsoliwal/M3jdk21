@@ -38,7 +38,7 @@ final class M3A3SerialFileWorkManifest {
                 "src/main/java/com/m3/a3/A3Work.java",
                 new Target(
                         "ABSENT",
-                        "210b73b14fe3b3d06bd2cdcb6c950c79f23cf577",
+                        "cd48192a3b3529e1e835748b73b14dd706a0b175",
                         null,
                         "after/A3Work.java",
                         false));
@@ -54,7 +54,7 @@ final class M3A3SerialFileWorkManifest {
                 "src/main/java/com/m3/a3/A3WorkValues.java",
                 new Target(
                         "ABSENT",
-                        "c64a61241d443d0822986118a297041fe3a532fe",
+                        "ad604457bd85a9019c7ee1e6634fd79c3fb3aafe",
                         null,
                         "after/A3WorkValues.java",
                         false));
@@ -62,7 +62,7 @@ final class M3A3SerialFileWorkManifest {
                 "src/test/java/com/m3/a3/A3WorkTest.java",
                 new Target(
                         "ABSENT",
-                        "b2472eec623ec981570336564d98886f7b68bbcf",
+                        "eb8c919bfa4690829b1162e8c03251f4f17b813b",
                         null,
                         "after/A3WorkTest.java",
                         false));

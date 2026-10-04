@@ -12,47 +12,43 @@ final class A3WorkValues {
 
     private A3WorkValues() {}
 
-    static void validate(
-            int featureOrder,
-            int fileOrder,
-            int release,
-            String commit,
-            String jbsIds,
-            String subject,
-            String domain,
-            String risk,
-            String joinScope,
-            String proofLane,
-            String recipeStrategy,
-            int priority,
-            String compatibilityState,
-            String nextAction,
-            String path,
-            A3Work.TargetState targetState,
-            A3Inv.Kind kind,
-            String targetSha256,
-            A3Work.PrepareLane prepareLane,
-            String atomScope) {
-        if (featureOrder < 0 || fileOrder < 0 || release < 22 || priority < 0) {
-            throw new IllegalArgumentException("numeric work coordinate");
+    static String fileScope(String value) {
+        String checked = scope(value);
+        if (!"FILE".equals(checked)) {
+            throw new IllegalArgumentException(
+                    "A3 work atoms must remain FILE-local");
         }
-        gitSha(commit);
-        clean(jbsIds);
-        text(subject, "subject");
-        text(domain, "domain");
-        text(risk, "risk");
-        scope(joinScope);
-        text(proofLane, "proofLane");
-        text(recipeStrategy, "recipeStrategy");
-        text(compatibilityState, "compatibilityState");
-        text(nextAction, "nextAction");
-        Objects.requireNonNull(targetState, "targetState");
-        Objects.requireNonNull(kind, "kind");
-        Objects.requireNonNull(prepareLane, "prepareLane");
-        if (!"FILE".equals(scope(atomScope))) {
-            throw new IllegalArgumentException("A3 work atoms must remain FILE-local");
+        return checked;
+    }
+
+    static String targetPath(String value, A3Work.TargetState state) {
+        Objects.requireNonNull(state, "state");
+        if (state == A3Work.TargetState.FEATURE) {
+            String checked = Objects.toString(value, "");
+            if (!checked.isEmpty()) {
+                throw new IllegalArgumentException("feature residue target");
+            }
+            return "";
         }
-        validateTarget(path, targetState, targetSha256);
+        return sourcePath(value);
+    }
+
+    static String targetSha256(String value, A3Work.TargetState state) {
+        Objects.requireNonNull(state, "state");
+        if (state == A3Work.TargetState.PRESENT) {
+            return sha256(value);
+        }
+        String expected =
+                switch (state) {
+                    case ABSENT -> "ABSENT";
+                    case OUTSIDE_A3 -> "UNSCANNED";
+                    case FEATURE -> "FEATURE";
+                    case PRESENT -> throw new AssertionError();
+                };
+        if (!expected.equals(value)) {
+            throw new IllegalArgumentException("targetSha256");
+        }
+        return expected;
     }
 
     static String sourcePath(String value) {
@@ -131,25 +127,4 @@ final class A3WorkValues {
         return checked;
     }
 
-    private static void validateTarget(
-            String path,
-            A3Work.TargetState targetState,
-            String targetSha256) {
-        if (targetState == A3Work.TargetState.FEATURE) {
-            if (!path.isEmpty() || !"FEATURE".equals(targetSha256)) {
-                throw new IllegalArgumentException("feature residue target");
-            }
-            return;
-        }
-        sourcePath(path);
-        if (targetState == A3Work.TargetState.PRESENT) {
-            sha256(targetSha256);
-            return;
-        }
-        String expected =
-                targetState == A3Work.TargetState.ABSENT ? "ABSENT" : "UNSCANNED";
-        if (!expected.equals(targetSha256)) {
-            throw new IllegalArgumentException("targetSha256");
-        }
-    }
 }

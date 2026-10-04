@@ -58,27 +58,27 @@ public final class A3Work {
             String atomScope) {
 
         public Row {
-            A3WorkValues.validate(
-                    featureOrder,
-                    fileOrder,
-                    release,
-                    commit,
-                    jbsIds,
-                    subject,
-                    domain,
-                    risk,
-                    joinScope,
-                    proofLane,
-                    recipeStrategy,
-                    priority,
-                    compatibilityState,
-                    nextAction,
-                    path,
-                    targetState,
-                    kind,
-                    targetSha256,
-                    prepareLane,
-                    atomScope);
+            if (featureOrder < 0 || fileOrder < 0 || release < 22 || priority < 0) {
+                throw new IllegalArgumentException("numeric work coordinate");
+            }
+            commit = A3WorkValues.gitSha(commit);
+            jbsIds = A3WorkValues.clean(jbsIds);
+            subject = A3WorkValues.text(subject, "subject");
+            domain = A3WorkValues.text(domain, "domain");
+            risk = A3WorkValues.text(risk, "risk");
+            joinScope = A3WorkValues.scope(joinScope);
+            proofLane = A3WorkValues.text(proofLane, "proofLane");
+            recipeStrategy = A3WorkValues.text(recipeStrategy, "recipeStrategy");
+            compatibilityState =
+                    A3WorkValues.text(compatibilityState, "compatibilityState");
+            nextAction = A3WorkValues.text(nextAction, "nextAction");
+            targetState = Objects.requireNonNull(targetState, "targetState");
+            kind = Objects.requireNonNull(kind, "kind");
+            prepareLane = Objects.requireNonNull(prepareLane, "prepareLane");
+            atomScope = A3WorkValues.fileScope(atomScope);
+            path = A3WorkValues.targetPath(path, targetState);
+            targetSha256 =
+                    A3WorkValues.targetSha256(targetSha256, targetState);
         }
     }
 

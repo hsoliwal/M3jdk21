@@ -105,6 +105,38 @@ class A3WorkTest {
     }
 
     @Test
+    void directRowsCanonicalizeEvidenceCoordinates() {
+        A3Work.Row row =
+                new A3Work.Row(
+                        3,
+                        2,
+                        27,
+                        "A".repeat(40),
+                        " JDK-1 ",
+                        " Subject ",
+                        " core-libs ",
+                        " MEDIUM ",
+                        "MULTI_MODULE",
+                        " CORE_LIBRARY ",
+                        " OPENREWRITE_OR_HASH_PINNED_JAVA ",
+                        35,
+                        " PENDING_COMPATIBILITY_PROOF ",
+                        " PROVE ",
+                        "src\\java.base\\share\\classes\\A.java",
+                        A3Work.TargetState.PRESENT,
+                        A3Inv.Kind.JAVA,
+                        "B".repeat(64),
+                        A3Work.PrepareLane.A3_JAVA_ATOMIZE_PATTERNIZE,
+                        "FILE");
+
+        assertEquals("a".repeat(40), row.commit());
+        assertEquals("src/java.base/share/classes/A.java", row.path());
+        assertEquals("b".repeat(64), row.targetSha256());
+        assertEquals("JDK-1", row.jbsIds());
+        assertEquals("Subject", row.subject());
+    }
+
+    @Test
     void queueDriftAndDuplicatePathsFailClosed() throws Exception {
         Path inventory = writeInventory();
         Path duplicateQueue = writeQueue(true);
