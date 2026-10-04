@@ -1,0 +1,10 @@
+packet_id	atom_id	contract_ref	documentation_ref	pattern	iop_role	junit_proof_ref	fixed_point_required
+jdk-8359706-open-fd-count	aix-stub	OpenFdDiagnostics.UnsupportedPlatform	m3/backports/recipes/jdk-8359706/README.md	Adapter	Platform.AixStub	com.m3.rewrite.backport.M3Jdk8359706OpenFdCountBackportRecipeTest	true
+jdk-8359706-open-fd-count	bsd-cpp	OpenFdDiagnostics.MacCounter	m3/backports/recipes/jdk-8359706/README.md	Strategy	Platform.MacCounter	com.m3.rewrite.backport.M3Jdk8359706OpenFdCountBackportRecipeTest	true
+jdk-8359706-open-fd-count	bsd-hpp	OpenFdDiagnostics.MacScratchContract	m3/backports/recipes/jdk-8359706/README.md	Facade	Platform.MacContract	com.m3.rewrite.backport.M3Jdk8359706OpenFdCountBackportRecipeTest	true
+jdk-8359706-open-fd-count	linux-counter	OpenFdDiagnostics.LinuxCounter	m3/backports/recipes/jdk-8359706/README.md	Strategy	Platform.LinuxCounter	com.m3.rewrite.backport.M3Jdk8359706OpenFdCountBackportRecipeTest	true
+jdk-8359706-open-fd-count	windows-stub	OpenFdDiagnostics.UnsupportedPlatform	m3/backports/recipes/jdk-8359706/README.md	Adapter	Platform.WindowsStub	com.m3.rewrite.backport.M3Jdk8359706OpenFdCountBackportRecipeTest	true
+jdk-8359706-open-fd-count	os-contract	OpenFdDiagnostics.InternalOsContract	m3/backports/recipes/jdk-8359706/README.md	Facade	Runtime.OsContract	com.m3.rewrite.backport.M3Jdk8359706OpenFdCountBackportRecipeTest	true
+jdk-8359706-open-fd-count	vmerror-output	OpenFdDiagnostics.Output	m3/backports/recipes/jdk-8359706/README.md	Composite	Serviceability.OutputJoin	com.m3.rewrite.backport.M3Jdk8359706OpenFdCountBackportRecipeTest	true
+jdk-8359706-open-fd-count	jtreg	OpenFdDiagnostics.VmInfoContract	m3/backports/recipes/jdk-8359706/README.md	Oracle	Proof.Jtreg	com.m3.rewrite.backport.M3Jdk8359706OpenFdCountBackportRecipeTest	true
+jdk-8359706-open-fd-count	module-join	OpenFdDiagnostics.Module	m3/backports/recipes/jdk-8359706/README.md	Composite	Dag.ModuleJoin	com.m3.rewrite.backport.M3Jdk8359706OpenFdCountBackportRecipeTest	true
