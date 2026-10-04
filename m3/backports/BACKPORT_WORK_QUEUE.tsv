@@ -23,11 +23,13 @@ JEP	23	JEP-477	Implicitly Declared Classes and Instance Main Methods (Third Prev
 JEP	23	JEP-480	Structured Concurrency (Third Preview)	library-runtime	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	533	Use latest lineage only; JDK 27 remains preview.
 JEP	23	JEP-481	Scoped Values (Third Preview)	library-runtime	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	506	Use final JEP 506.
 JEP	23	JEP-482	Flexible Constructor Bodies (Second Preview)	language	reject-language	1	EXCLUDE_LANGUAGE	LIBRARY_API	INCOMPATIBLE		Requires Java grammar/javac semantic changes.
+JEP	24	JEP-404	Generational Shenandoah (Experimental)	gc-runtime	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MULTI_MODULE	HIGH		Base generational Shenandoah implementation; requires GC/runtime/platform dependency closure; JEP-521 later removes experimental gating.
 JEP	24	JEP-450	Compact Object Headers (Experimental)	vm-gc-runtime	superseded-high-risk	1	REDIRECT_SUPERSEDED	MULTI_MODULE	SUPERSEDED	534	Use cumulative product/default lineage JEP 519/534 rather than experimental revision.
 JEP	24	JEP-472	Prepare to Restrict the Use of JNI	compatibility-native	hold-compat	2	HOLD_DEPENDENCY_OR_POLICY	LIBRARY_API	HOLD		Adds restriction/warning policy; not a transparent enhancement.
 JEP	24	JEP-475	Late Barrier Expansion for G1	gc-hotspot-compiler	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MULTI_MODULE	HIGH		GC optimization touching C2/HotSpot compiler pipeline; separate VM/JIT lane.
 JEP	24	JEP-478	Key Derivation Function API (Preview)	security-library	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	510	Use final JEP 510.
 JEP	24	JEP-479	Remove the Windows 32-bit x86 Port	removal	reject-compat	1	EXCLUDE_COMPAT	LIBRARY_API	INCOMPATIBLE		Removal conflicts with JDK 21 compatibility preservation.
+JEP	24	JEP-483	Ahead-of-Time Class Loading & Linking	runtime-aot-cds	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MULTI_MODULE	HIGH		Leyden/CDS runtime foundation for JEP-514/JEP-515/JEP-516; stock JDK21 dependency closure required before materialization.
 JEP	24	JEP-484	Class-File API	library	candidate	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	NORMAL		Final library API; no Java grammar change, but requires classfile/version compatibility audit.
 JEP	24	JEP-485	Stream Gatherers	library	candidate-adapted	5	VERIFY_EXACT_HEAD_RECIPE_AND_JTREG	LIBRARY_API	NORMAL	PR#63	JDK24-GA source-sealed Java21 adaptation exists in draft PR #63; exact-head recipe/JDK build/jtreg/runtime proof remains pending.
 JEP	24	JEP-486	Permanently Disable the Security Manager	compatibility-security	reject-compat	1	EXCLUDE_COMPAT	LIBRARY_API	INCOMPATIBLE		Intentional behavioral incompatibility with JDK 21.
@@ -62,6 +64,7 @@ JEP	25	JEP-515	Ahead-of-Time Method Profiling	runtime-hotspot	candidate-high-ris
 JEP	25	JEP-518	JFR Cooperative Sampling	monitoring-jfr-runtime	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	HIGH		JFR/runtime safepoint sampling enhancement; requires VM acceptance.
 JEP	25	JEP-519	Compact Object Headers	vm-gc-runtime	superseded-high-risk	1	REDIRECT_SUPERSEDED	MULTI_MODULE	SUPERSEDED	534	Use cumulative JEP 534 lineage for default-ready implementation.
 JEP	25	JEP-520	JFR Method Timing & Tracing	monitoring-jfr	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	HIGH		JFR + bytecode instrumentation enhancement; requires agent/instrumentation compatibility tests.
+JEP	25	JEP-521	Generational Shenandoah	gc-runtime	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MULTI_MODULE	HIGH	JEP-404	Makes JEP-404 generational mode non-experimental; cannot be admitted without the underlying collector lineage.
 JEP	26	JEP-500	Prepare to Make Final Mean Final	compatibility-reflection	hold-compat	2	HOLD_DEPENDENCY_OR_POLICY	LIBRARY_API	HOLD		Adds warnings/restriction preparation; changes compatibility posture.
 JEP	26	JEP-504	Remove the Applet API	removal	reject-compat	1	EXCLUDE_COMPAT	LIBRARY_API	INCOMPATIBLE		Removal conflicts with JDK 21 API compatibility.
 JEP	26	JEP-516	Ahead-of-Time Object Caching with Any GC	runtime-aot-gc	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MULTI_MODULE	HIGH		AOT/GC runtime enhancement; depends on post-21 AOT infrastructure.
