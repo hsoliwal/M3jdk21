@@ -41,6 +41,7 @@ The documentation-only whole-JDK handoff is:
 - [String and text replacement specification](docs/string-text-replacement-spec.md)
 - [Implementation work packets, measurement plan and durable resume guide](docs/whole-jdk-work-packets-and-resume.md)
 - [A3 — Atomize, Patternize, Absorb](docs/a3.md)
+- [A3 complete released-change denominator](docs/a3-complete-denominator.md)
 - [Durable mapping lifecycle](docs/migration-mapping-lifecycle.md)
 - [Worked enhancement-port decisions](docs/migration-worked-port-decisions.md)
 

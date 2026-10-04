@@ -11,7 +11,10 @@ on:
       - "m3/backports/JEP_CATALOGUE.tsv"
       - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
       - "m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"
+      - "m3/backports/CHALLENGE_SEARCH_TAXONOMY.tsv"
+      - "m3/backports/inventory.py"
       - "m3/docs/a3.md"
+      - "m3/docs/a3-complete-denominator.md"
       - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
       - "m3/pom.xml"
       - ".github/workflows/m3-a3.yml"
@@ -22,7 +25,10 @@ on:
       - "m3/backports/JEP_CATALOGUE.tsv"
       - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
       - "m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"
+      - "m3/backports/CHALLENGE_SEARCH_TAXONOMY.tsv"
+      - "m3/backports/inventory.py"
       - "m3/docs/a3.md"
+      - "m3/docs/a3-complete-denominator.md"
       - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
       - "m3/pom.xml"
       - ".github/workflows/m3-a3.yml"
@@ -34,7 +40,7 @@ permissions:
 jobs:
   a3-proof:
     runs-on: ubuntu-22.04
-    timeout-minutes: 35
+    timeout-minutes: 50
     steps:
       - name: Fetch exact workflow head
         shell: bash
@@ -43,17 +49,24 @@ jobs:
         run: |
           set -euo pipefail
           test -n "$HEAD_SHA"
-          curl --fail --location --retry 3             "https://codeload.github.com/${GITHUB_REPOSITORY}/tar.gz/${HEAD_SHA}"             -o "$RUNNER_TEMP/repo.tar.gz"
+          curl --fail --location --retry 3 \
+            "https://codeload.github.com/${GITHUB_REPOSITORY}/tar.gz/${HEAD_SHA}" \
+            -o "$RUNNER_TEMP/repo.tar.gz"
           mkdir -p "$RUNNER_TEMP/repo"
-          tar -xzf "$RUNNER_TEMP/repo.tar.gz" -C "$RUNNER_TEMP/repo" --strip-components=1
+          tar -xzf "$RUNNER_TEMP/repo.tar.gz" \
+            -C "$RUNNER_TEMP/repo" --strip-components=1
           printf 'REPO=%s\n' "$RUNNER_TEMP/repo" >> "$GITHUB_ENV"
 
       - name: Prepare pinned JDK 21
         shell: bash
         run: |
           set -euo pipefail
-          curl --fail --location --retry 3             'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21%2B35/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz'             -o "$RUNNER_TEMP/jdk21.tar.gz"
-          printf '%s  %s\n'             '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6'             "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -
+          curl --fail --location --retry 3 \
+            'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21%2B35/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz' \
+            -o "$RUNNER_TEMP/jdk21.tar.gz"
+          printf '%s  %s\n' \
+            '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6' \
+            "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -
           tar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"
           printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
           printf '%s\n' "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
@@ -64,34 +77,92 @@ jobs:
           set -euo pipefail
           java -version
           mvn -version
-          mvn -B -ntp -f "$REPO/m3/pom.xml"             -pl tooling/a3 -am clean verify
+          mvn -B -ntp -f "$REPO/m3/pom.xml" \
+            -pl tooling/a3 -am clean verify
+
+      - name: Prove source-sealed complete-denominator recipe
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp \
+            -f "$REPO/m3/tooling/migration-recipes/pom.xml" \
+            -Dtest=com.m3.rewrite.a3.M3A3CompleteDenominatorRecipeTest \
+            -Dsurefire.failIfNoSpecifiedTests=false test
 
       - name: Inventory whole JDK source and test corpus
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="inv --root $REPO --out m3/build/a3/inventory.tsv"
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java \
+            -Dexec.mainClass=com.m3.a3.A3 \
+            -Dexec.args="inv --root $REPO --out m3/build/a3/inventory.tsv"
           test -s "$REPO/m3/build/a3/inventory.tsv"
           JAVA_ROWS="$(awk -F '\t' 'NR > 1 && $5 == "JAVA" {n++} END {print n+0}' "$REPO/m3/build/a3/inventory.tsv")"
           NATIVE_ROWS="$(awk -F '\t' 'NR > 1 && $5 == "NATIVE" {n++} END {print n+0}' "$REPO/m3/build/a3/inventory.tsv")"
           test "$JAVA_ROWS" -gt 1000
           test "$NATIVE_ROWS" -gt 100
-          printf 'A3 inventory: Java=%s Native=%s\n' "$JAVA_ROWS" "$NATIVE_ROWS" >> "$GITHUB_STEP_SUMMARY"
+          printf 'A3 inventory: Java=%s Native=%s\n' \
+            "$JAVA_ROWS" "$NATIVE_ROWS" >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Plan every current JEP JBS and community row
+      - name: Fetch pinned OpenJDK 22 through 27 GA history
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="plan --root $REPO --out m3/build/a3/plan.tsv"
+          UPSTREAM="$RUNNER_TEMP/upstream-jdk"
+          git -C "$RUNNER_TEMP" init -q upstream-jdk
+          git -C "$UPSTREAM" remote add origin https://github.com/openjdk/jdk.git
+
+          refs=(
+            "refs/tags/jdk-21+35:refs/tags/jdk-21+35"
+            "refs/tags/jdk-22+36:refs/tags/jdk-22+36"
+            "refs/tags/jdk-23+37:refs/tags/jdk-23+37"
+            "refs/tags/jdk-24+36:refs/tags/jdk-24+36"
+            "refs/tags/jdk-25+36:refs/tags/jdk-25+36"
+            "refs/tags/jdk-26+35:refs/tags/jdk-26+35"
+            "refs/tags/jdk-27+35:refs/tags/jdk-27+35"
+          )
+          git -C "$UPSTREAM" -c protocol.version=2 fetch \
+            --filter=blob:none --no-tags origin "${refs[@]}"
+          printf 'UPSTREAM_JDK=%s\n' "$UPSTREAM" >> "$GITHUB_ENV"
+
+      - name: Materialize all 14948 released upstream changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          OUT="$REPO/m3/build/a3/upstream/UPSTREAM_CHANGES.tsv"
+          mkdir -p "$(dirname "$OUT")"
+          python3 "$REPO/m3/backports/inventory.py" \
+            --repo "$UPSTREAM_JDK" \
+            --out "$OUT"
+          test -s "$OUT"
+          ROWS="$(awk 'END {print NR-1}' "$OUT")"
+          test "$ROWS" -eq 14948
+          sha256sum "$OUT" > "$REPO/m3/build/a3/upstream/UPSTREAM_CHANGES.sha256"
+          printf 'A3 upstream denominator: %s released commits\n' \
+            "$ROWS" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Plan every JEP seed upstream community and challenge row
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java \
+            -Dexec.mainClass=com.m3.a3.A3 \
+            -Dexec.args="plan --root $REPO --upstream-inventory m3/build/a3/upstream/UPSTREAM_CHANGES.tsv --out m3/build/a3/plan.tsv"
           PLAN="$REPO/m3/build/a3/plan.tsv"
           test -s "$PLAN"
           JEP_ROWS="$(awk -F '\t' 'NR > 1 && $1 == "JEP" {n++} END {print n+0}' "$PLAN")"
           JBS_ROWS="$(awk -F '\t' 'NR > 1 && $1 == "JBS" {n++} END {print n+0}' "$PLAN")"
+          UPSTREAM_ROWS="$(awk -F '\t' 'NR > 1 && $1 == "UPSTREAM" {n++} END {print n+0}' "$PLAN")"
           CAP_ROWS="$(awk -F '\t' 'NR > 1 && $1 == "CAP" {n++} END {print n+0}' "$PLAN")"
+          ALGO_ROWS="$(awk -F '\t' 'NR > 1 && $1 == "ALGO" {n++} END {print n+0}' "$PLAN")"
           test "$JEP_ROWS" -ge 82
           test "$JBS_ROWS" -ge 13
+          test "$UPSTREAM_ROWS" -eq 14948
           test "$CAP_ROWS" -ge 10
-          printf 'A3 plan: JEP=%s JBS=%s CAP=%s\n' "$JEP_ROWS" "$JBS_ROWS" "$CAP_ROWS" >> "$GITHUB_STEP_SUMMARY"
+          test "$ALGO_ROWS" -ge 10
+          printf 'A3 plan: JEP=%s JBS=%s UPSTREAM=%s CAP=%s ALGO=%s\n' \
+            "$JEP_ROWS" "$JBS_ROWS" "$UPSTREAM_ROWS" "$CAP_ROWS" "$ALGO_ROWS" \
+            >> "$GITHUB_STEP_SUMMARY"
 
       - name: Prove guarded fixed-point candidate application
         shell: bash
@@ -110,7 +181,9 @@ jobs:
           JAVA
           cp "$SRC" "$RUNNER_TEMP/Sample.before"
 
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="apply --root $FIX --out m3/build/a3/apply --file src/java.base/share/classes/example/Sample.java"
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java \
+            -Dexec.mainClass=com.m3.a3.A3 \
+            -Dexec.args="apply --root $FIX --out m3/build/a3/apply --file src/java.base/share/classes/example/Sample.java"
 
           cmp "$SRC" "$RUNNER_TEMP/Sample.before"
           CANDIDATE="$FIX/m3/build/a3/apply/candidate/src/java.base/share/classes/example/Sample.java"
@@ -126,6 +199,8 @@ jobs:
           name: m3-a3-proof-${{ github.run_id }}
           path: |
             ${{ env.REPO }}/m3/build/a3/inventory.tsv
+            ${{ env.REPO }}/m3/build/a3/upstream/UPSTREAM_CHANGES.tsv
+            ${{ env.REPO }}/m3/build/a3/upstream/UPSTREAM_CHANGES.sha256
             ${{ env.REPO }}/m3/build/a3/plan.tsv
             ${{ env.REPO }}/m3/build/a3/apply-receipt.tsv
           if-no-files-found: error

@@ -115,8 +115,12 @@ DAG or OpenJDK build.
 
 A3Inv inventories the actual src/ and test/ trees by module/area/path/hash. A3Plan joins every
 current JEP row, inspected JBS seed and community capability row while preserving the original
-disposition. A3Apply can run the retained FILE-local Java convergence DAG on explicit source
-files and writes candidate copies only under m3/build.
+disposition. When supplied with the generated `inventory.py` TSV it additionally emits one
+`UPSTREAM` row for every released commit in the pinned JDK 22..27 GA intervals (14,948 rows).
+It also carries authority-free `ALGO` taxonomy rows from
+`CHALLENGE_SEARCH_TAXONOMY.tsv`; challenge-platform bodies are never implementation donors.
+A3Apply can run the retained FILE-local Java convergence DAG on explicit source files and writes
+candidate copies only under m3/build.
 
 The intended join is:
 
