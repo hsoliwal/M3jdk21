@@ -53,7 +53,8 @@
       "before": "e809d78f4eec22f6140fa057a13f1b7787c137bceda9db242fa1cd083ed5f9a9",
       "after": "82eec22a87598470669a05f2fc2581191f738ea3bafe6448c5ce43c39ab7c66b",
       "superseded": [
-        "95f131c664bf993f457d3ea53bdfe0850f842d82c5a42644a979d724580522f4"
+        "95f131c664bf993f457d3ea53bdfe0850f842d82c5a42644a979d724580522f4",
+        "d158ac4b4dc8d3e4b1354ffc906b257ec457aca22eb5f6f863128803c724eb69"
       ]
     },
     "src/hotspot/share/prims/jvmtiTagMap.cpp": {
