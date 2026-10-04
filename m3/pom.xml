@@ -11,6 +11,7 @@
   <name>M3JDK21 Maven control reactor</name>
 
   <modules>
+    <module>indexdb</module>
     <module>tooling/migration-recipes</module>
     <module>tooling/backport-dag</module>
     <module>backports</module>
@@ -23,6 +24,12 @@
       <modules>
         <module>collections</module>
       </modules>
+    </profile>
+    <profile>
+      <id>m3-jdk-absorption</id>
+      <properties>
+        <m3.absorption.control-plane>true</m3.absorption.control-plane>
+      </properties>
     </profile>
   </profiles>
 
