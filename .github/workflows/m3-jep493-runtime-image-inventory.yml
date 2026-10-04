@@ -132,6 +132,27 @@ jobs:
           mvn -B -ntp -f m3/backports/pom.xml verify
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3RecipeScopeDeclarationTest test
 
+      - name: Validate JEP493 composition DAG
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+            -Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketMain \
+            -Dexec.args="$PWD/m3/backports/recipes/jep-493-runtime-image/packet.tsv $PWD/m3/backports/recipes/jep-493-runtime-image/atom-evidence.tsv" \
+            exec:java
+
+      - name: Project JEP493 DAG to Camel Airflow and Drools
+        run: |
+          set -euo pipefail
+          mkdir -p target/jep493/projections
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+            -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain \
+            -Dexec.args="$PWD/m3/backports/recipes/jep-493-runtime-image/packet.tsv $PWD/target/jep493/projections $PWD/m3/backports/recipes/jep-493-runtime-image/atom-evidence.tsv" \
+            exec:java
+          test -s target/jep493/projections/M3BackportRoutes.java
+          test -s target/jep493/projections/m3_backport_dag.py
+          test -s target/jep493/projections/m3_backport_rules.drl
+          test -s target/jep493/projections/projection.tsv
+
       - name: Upload file-atom inventory
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
