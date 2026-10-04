@@ -155,7 +155,7 @@ jobs:
           UPSTREAM_ROWS="$(awk -F '\t' 'NR > 1 && $1 == "UPSTREAM" {n++} END {print n+0}' "$PLAN")"
           CAP_ROWS="$(awk -F '\t' 'NR > 1 && $1 == "CAP" {n++} END {print n+0}' "$PLAN")"
           ALGO_ROWS="$(awk -F '\t' 'NR > 1 && $1 == "ALGO" {n++} END {print n+0}' "$PLAN")"
-          test "$JEP_ROWS" -ge 82
+          test "$JEP_ROWS" -eq 85
           test "$JBS_ROWS" -ge 13
           test "$UPSTREAM_ROWS" -eq 14948
           test "$CAP_ROWS" -ge 10
