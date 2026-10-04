@@ -1,0 +1,10 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotCompileRepair
+displayName: Repair M3JDK21 hash-pinned snapshot metadata chain
+description: >-
+  Exact one-file repair that keeps SourceFile-specific metadata operations before the final
+  Tree.withId call so the retained OpenRewrite API compiles without changing replay semantics.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-jdk21-hash-pinned-sourcefile-chain
