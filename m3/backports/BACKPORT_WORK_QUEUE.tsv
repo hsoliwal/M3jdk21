@@ -13,7 +13,7 @@ JEP	22	JEP-463	Implicitly Declared Classes and Instance Main Methods (Second Pre
 JEP	22	JEP-464	Scoped Values (Second Preview)	library-runtime	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	506	Use final JEP 506.
 JEP	23	JEP-455	Primitive Types in Patterns, instanceof, and switch (Preview)	language	reject-language	1	EXCLUDE_LANGUAGE	LIBRARY_API	INCOMPATIBLE		Requires Java grammar/javac semantic changes.
 JEP	23	JEP-466	Class-File API (Second Preview)	library	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	484	Use final JEP 484.
-JEP	23	JEP-467	Markdown Documentation Comments	tool-javadoc-javac-doc	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	MODULE	HIGH		Tool/documentation parsing enhancement; no Java language grammar change, but touches compiler doc-comment internals.
+JEP	23	JEP-467	Markdown Documentation Comments	tool-javadoc-javac-doc	candidate-high-risk	2	INVESTIGATE_DEPENDENCY_CLOSURE	LIBRARY_API	HIGH		No Java source grammar change, but the implementation adds/changes compiler-model and doc-tree API plus a new private Markdown module; explicit LIBRARY_API contract review is required.
 JEP	23	JEP-469	Vector API (Eighth Incubator)	library-hotspot-compiler	hold-jit	2	HOLD_DEPENDENCY_OR_POLICY	MULTI_MODULE	HOLD	537	Incubator/JIT-dependent lineage; evaluate separately.
 JEP	23	JEP-471	Deprecate the Memory-Access Methods in sun.misc.Unsafe for Removal	compatibility	hold-compat	2	HOLD_DEPENDENCY_OR_POLICY	LIBRARY_API	HOLD		Intentional deprecation/removal pressure changes compatibility posture.
 JEP	23	JEP-473	Stream Gatherers (Second Preview)	library	superseded	1	REDIRECT_SUPERSEDED	MODULE	SUPERSEDED	485	Use final JEP 485.
