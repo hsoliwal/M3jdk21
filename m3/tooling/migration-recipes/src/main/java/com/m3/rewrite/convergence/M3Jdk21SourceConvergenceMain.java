@@ -120,62 +120,70 @@ public final class M3Jdk21SourceConvergenceMain {
         String beforeHash = sha256(before);
 
         try {
-                    Stage inventory = apply(new M3InventoryPureIntAtomCandidates(), checkedPath, before, 1);
-                    if (inventory.hold()) {
-                        return hold(checkedPath, beforeHash, inventory.message());
-                    }
-                    if (inventory.changed()) {
-                        return hold(checkedPath, beforeHash, "inventory recipe mutated source");
-                    }
-            
-                    Stage atomized =
-                            apply(new M3AtomizePureIntReturnRecipe(), checkedPath, before, 1);
-                    if (atomized.hold()) return hold(checkedPath, beforeHash, atomized.message());
-            
-                    Stage patternized =
-                            apply(
-                                    new M3PatternizePureIntAtomRecipe(),
-                                    checkedPath,
-                                    atomized.source(),
-                                    1);
-                    if (patternized.hold()) return hold(checkedPath, beforeHash, patternized.message());
-            
-                    Stage documented =
-                            apply(
-                                    new M3DocumentPureIntAtomRecipe(),
-                                    checkedPath,
-                                    patternized.source(),
-                                    1);
-                    if (documented.hold()) return hold(checkedPath, beforeHash, documented.message());
-            
-                    Stage fixedPoint =
-                            apply(
-                                    new M3Java21ConvergenceRecipe(),
-                                    checkedPath,
-                                    documented.source(),
-                                    8);
-                    if (fixedPoint.hold()) return hold(checkedPath, beforeHash, fixedPoint.message());
-                    if (fixedPoint.changed()) {
-                        return hold(
-                                checkedPath,
-                                beforeHash,
-                                "composite convergence changed the staged postimage");
-                    }
-            
-                    String after = documented.source();
-                    boolean changed = !before.equals(after);
-                    return new FileReceipt(
+            Stage inventory =
+                    apply(new M3InventoryPureIntAtomCandidates(), checkedPath, before, 1);
+            if (inventory.hold()) {
+                return hold(checkedPath, beforeHash, inventory.message());
+            }
+            if (inventory.changed()) {
+                return hold(checkedPath, beforeHash, "inventory recipe mutated source");
+            }
+
+            Stage atomized =
+                    apply(new M3AtomizePureIntReturnRecipe(), checkedPath, before, 1);
+            if (atomized.hold()) {
+                return hold(checkedPath, beforeHash, atomized.message());
+            }
+
+            Stage patternized =
+                    apply(
+                            new M3PatternizePureIntAtomRecipe(),
                             checkedPath,
-                            beforeHash,
-                            sha256(after),
-                            atomized.changed(),
-                            patternized.changed(),
-                            documented.changed(),
-                            true,
-                            changed ? "CONVERGED_CHANGED" : "CONVERGED_UNCHANGED",
-                            "",
-                            changed ? after : "");
-            
+                            atomized.source(),
+                            1);
+            if (patternized.hold()) {
+                return hold(checkedPath, beforeHash, patternized.message());
+            }
+
+            Stage documented =
+                    apply(
+                            new M3DocumentPureIntAtomRecipe(),
+                            checkedPath,
+                            patternized.source(),
+                            1);
+            if (documented.hold()) {
+                return hold(checkedPath, beforeHash, documented.message());
+            }
+
+            Stage fixedPoint =
+                    apply(
+                            new M3Java21ConvergenceRecipe(),
+                            checkedPath,
+                            documented.source(),
+                            8);
+            if (fixedPoint.hold()) {
+                return hold(checkedPath, beforeHash, fixedPoint.message());
+            }
+            if (fixedPoint.changed()) {
+                return hold(
+                        checkedPath,
+                        beforeHash,
+                        "composite convergence changed the staged postimage");
+            }
+
+            String after = documented.source();
+            boolean changed = !before.equals(after);
+            return new FileReceipt(
+                    checkedPath,
+                    beforeHash,
+                    sha256(after),
+                    atomized.changed(),
+                    patternized.changed(),
+                    documented.changed(),
+                    true,
+                    changed ? "CONVERGED_CHANGED" : "CONVERGED_UNCHANGED",
+                    "",
+                    changed ? after : "");
         } catch (RuntimeException failure) {
             return hold(
                     checkedPath,
