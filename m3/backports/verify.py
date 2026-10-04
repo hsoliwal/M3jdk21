@@ -10,8 +10,7 @@ import csv
 import hashlib
 from pathlib import Path
 
-EXPECTED_RELEASE_COUNTS = {22: 12, 23: 12, 24: 22, 25: 17, 26: 10, 27: 9}
-EXPECTED_TOTAL = sum(EXPECTED_RELEASE_COUNTS.values())
+from release_jep_authority import verify_repository_authority
 
 
 def git_blob_sha1(data: bytes) -> str:
@@ -28,12 +27,15 @@ def read_tsv(path: Path) -> list[dict[str, str]]:
 
 
 def verify_jeps(root: Path) -> None:
+    authority = verify_repository_authority(root)
+    expected_release_counts = {release: len(ids) for release, ids in authority.items()}
+    expected_total = sum(expected_release_counts.values())
     rows = read_tsv(root / "m3/backports/JEP_CATALOGUE.tsv")
-    if len(rows) != EXPECTED_TOTAL:
-        raise AssertionError(f"expected {EXPECTED_TOTAL} JEP rows, found {len(rows)}")
+    if len(rows) != expected_total:
+        raise AssertionError(f"expected {expected_total} JEP rows, found {len(rows)}")
 
     seen: set[int] = set()
-    counts = {release: 0 for release in EXPECTED_RELEASE_COUNTS}
+    counts = {release: 0 for release in expected_release_counts}
     catalog_numbers: set[int] = set()
 
     for row in rows:
@@ -50,7 +52,7 @@ def verify_jeps(root: Path) -> None:
         if row["domain"] == "language" and row["disposition"] != "reject-language":
             raise AssertionError(f"language JEP {jep} is not reject-language")
 
-    if counts != EXPECTED_RELEASE_COUNTS:
+    if counts != expected_release_counts:
         raise AssertionError(f"release counts differ: {counts}")
 
     for row in rows:
@@ -554,6 +556,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     root = args.root.resolve()
+    authority = verify_repository_authority(root)
     verify_jeps(root)
     verify_seed(root)
     verify_jcmd_backport(root)
@@ -564,7 +567,7 @@ def main() -> int:
     verify_password_systemin_8368692_backport(root)
     verify_passes_and_work_queue(root)
     print(
-        "PASS: 82 JEP rows, non-JEP seed uniqueness, exact JDK-8357439 donor blobs, "
+        f"PASS: {sum(len(ids) for ids in authority.values())} authority-locked JEP rows, non-JEP seed uniqueness, exact JDK-8357439 donor blobs, "
         "JDK-8347112 javadoc adaptation, JDK-8364182 serviceability adaptation, "
         "JDK-8374808 KeyStore Instant leaf, JDK-8367584 JFR help leaf, "
         "JDK-8368692 password policy leaf, and resumable pass/work queue"
