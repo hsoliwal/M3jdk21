@@ -13,6 +13,9 @@
   <properties>
     <python.executable>python3</python.executable>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <m3.absorption.skip>true</m3.absorption.skip>
+    <m3.absorption.output>${project.build.directory}/m3-jdk-absorption</m3.absorption.output>
+    <m3.source.convergence>${project.basedir}/../tooling/migration-recipes/target/m3-jdk-source-convergence/SOURCE_CONVERGENCE.tsv</m3.source.convergence>
   </properties>
 
   <build>
@@ -73,8 +76,84 @@
               </arguments>
             </configuration>
           </execution>
+          <execution>
+            <id>m3-absorption-upstream-inventory</id>
+            <phase>generate-resources</phase>
+            <goals><goal>exec</goal></goals>
+            <configuration>
+              <skip>${m3.absorption.skip}</skip>
+              <executable>${python.executable}</executable>
+              <workingDirectory>${project.basedir}</workingDirectory>
+              <arguments>
+                <argument>inventory.py</argument>
+                <argument>--repo</argument>
+                <argument>${m3.upstream.jdk.root}</argument>
+                <argument>--out</argument>
+                <argument>${m3.absorption.output}/UPSTREAM_CHANGES.tsv</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>m3-absorption-compatibility-queue</id>
+            <phase>process-resources</phase>
+            <goals><goal>exec</goal></goals>
+            <configuration>
+              <skip>${m3.absorption.skip}</skip>
+              <executable>${python.executable}</executable>
+              <workingDirectory>${project.basedir}</workingDirectory>
+              <arguments>
+                <argument>compatibility_queue.py</argument>
+                <argument>--inventory</argument>
+                <argument>${m3.absorption.output}/UPSTREAM_CHANGES.tsv</argument>
+                <argument>--out</argument>
+                <argument>${m3.absorption.output}/COMPATIBILITY_QUEUE.tsv</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>m3-absorption-plan</id>
+            <phase>verify</phase>
+            <goals><goal>exec</goal></goals>
+            <configuration>
+              <skip>${m3.absorption.skip}</skip>
+              <executable>${python.executable}</executable>
+              <workingDirectory>${project.basedir}</workingDirectory>
+              <arguments>
+                <argument>absorption_plan.py</argument>
+                <argument>--source-convergence</argument>
+                <argument>${m3.source.convergence}</argument>
+                <argument>--feature-queue</argument>
+                <argument>${project.basedir}/BACKPORT_WORK_QUEUE.tsv</argument>
+                <argument>--commit-queue</argument>
+                <argument>${m3.absorption.output}/COMPATIBILITY_QUEUE.tsv</argument>
+                <argument>--out</argument>
+                <argument>${m3.absorption.output}/ABSORPTION_PLAN.tsv</argument>
+                <argument>--summary-out</argument>
+                <argument>${m3.absorption.output}/ABSORPTION_PLAN.summary.json</argument>
+                <argument>--root-out</argument>
+                <argument>${m3.absorption.output}/ABSORPTION_PLAN.sha256</argument>
+              </arguments>
+            </configuration>
+          </execution>
         </executions>
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>m3-jdk-absorption</id>
+      <properties><m3.absorption.skip>false</m3.absorption.skip></properties>
+      <build><plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>3.5.0</version>
+          <executions><execution><id>m3-absorption-inputs</id><phase>validate</phase><goals><goal>enforce</goal></goals>
+            <configuration><rules><requireProperty><property>m3.upstream.jdk.root</property><regex>.+</regex><message>Pin a complete openjdk/jdk checkout with -Dm3.upstream.jdk.root=...</message></requireProperty></rules></configuration>
+          </execution></executions>
+        </plugin>
+      </plugins></build>
+    </profile>
+  </profiles>
 </project>
