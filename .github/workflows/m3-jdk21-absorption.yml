@@ -1,0 +1,120 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 absorption-first plan
+
+on:
+  push:
+    branches:
+      - "m3/jdk21-*"
+    paths:
+      - "m3/tooling/migration-recipes/**"
+      - "m3/backports/absorption_plan.py"
+      - "m3/backports/test_absorption_plan.py"
+      - "m3/backports/inventory.py"
+      - "m3/backports/compatibility_queue.py"
+      - "m3/backports/BACKPORT_WORK_QUEUE.tsv"
+      - "m3/backports/pom.xml"
+      - "m3/docs/m3jdk21-absorption-first.md"
+      - ".github/workflows/m3-jdk21-absorption.yml"
+      - "src/**/*.java"
+      - "test/**/*.java"
+  pull_request:
+    paths:
+      - "m3/tooling/migration-recipes/**"
+      - "m3/backports/absorption_plan.py"
+      - "m3/backports/test_absorption_plan.py"
+      - "m3/backports/inventory.py"
+      - "m3/backports/compatibility_queue.py"
+      - "m3/backports/BACKPORT_WORK_QUEUE.tsv"
+      - "m3/backports/pom.xml"
+      - "m3/docs/m3jdk21-absorption-first.md"
+      - ".github/workflows/m3-jdk21-absorption.yml"
+      - "src/**/*.java"
+      - "test/**/*.java"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  absorption:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Diff hygiene
+        shell: bash
+        run: git diff --check
+
+      - name: Fetch pinned released OpenJDK history
+        shell: bash
+        run: |
+          set -euo pipefail
+          upstream="$RUNNER_TEMP/openjdk-jdk"
+          git -C "$RUNNER_TEMP" init -q openjdk-jdk
+          git -C "$upstream" remote add origin https://github.com/openjdk/jdk.git
+          refs=(
+            "refs/tags/jdk-21+35:refs/tags/jdk-21+35"
+            "refs/tags/jdk-22+36:refs/tags/jdk-22+36"
+            "refs/tags/jdk-23+37:refs/tags/jdk-23+37"
+            "refs/tags/jdk-24+36:refs/tags/jdk-24+36"
+            "refs/tags/jdk-25+36:refs/tags/jdk-25+36"
+            "refs/tags/jdk-26+35:refs/tags/jdk-26+35"
+            "refs/tags/jdk-27+35:refs/tags/jdk-27+35"
+          )
+          git -C "$upstream" -c protocol.version=2 fetch \
+            --filter=blob:none \
+            --no-tags \
+            origin \
+            "${refs[@]}"
+
+      - name: Prove absorption join unit contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest discover \
+            -s m3/backports \
+            -p 'test_absorption_plan.py' \
+            -v
+
+      - name: Mavenize, atomize, patternize, and build absorption plan
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/pom.xml \
+            -Pm3-jdk-absorption \
+            -Dm3.upstream.jdk.root="$RUNNER_TEMP/openjdk-jdk" \
+            -Dm3.convergence.threads=4 \
+            verify
+
+      - name: Verify produced evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          convergence="m3/tooling/migration-recipes/target/m3-jdk-source-convergence"
+          absorption="m3/backports/target/m3-jdk-absorption"
+          test -s "$convergence/SOURCE_CONVERGENCE.tsv"
+          test -s "$convergence/SOURCE_CONVERGENCE.summary.tsv"
+          test -s "$absorption/UPSTREAM_CHANGES.tsv"
+          test -s "$absorption/COMPATIBILITY_QUEUE.tsv"
+          test -s "$absorption/ABSORPTION_PLAN.tsv"
+          test -s "$absorption/ABSORPTION_PLAN.summary.json"
+          test -s "$absorption/ABSORPTION_PLAN.sha256"
+          cat "$convergence/SOURCE_CONVERGENCE.summary.tsv"
+          cat "$absorption/ABSORPTION_PLAN.summary.json"
+
+      - name: Upload absorption evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-jdk21-absorption-${{ github.run_id }}
+          path: |
+            m3/tooling/migration-recipes/target/m3-jdk-source-convergence/
+            m3/backports/target/m3-jdk-absorption/
+          if-no-files-found: error
+          retention-days: 30

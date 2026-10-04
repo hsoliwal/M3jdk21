@@ -40,7 +40,7 @@ def _sha(value: str) -> bool:
 def _path(value: str) -> str:
     path = value.strip().replace("\\", "/")
     if (
-        not path.startswith("src/")
+        not (path.startswith("src/") or path.startswith("test/"))
         or not path.endswith(".java")
         or "/../" in path
         or "/./" in path

@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.M3Jdk21AbsorptionFirst
+displayName: Normalize M3JDK21 before donor absorption
+description: >-
+  Runs the trusted Java-21 FILE-local inventory, atomization, patternization/IOP and
+  documentation convergence DAG to fixed point before JEP/JBS/commit absorption.
+recipeList:
+  - com.m3.rewrite.M3Java21ConvergenceRecipe

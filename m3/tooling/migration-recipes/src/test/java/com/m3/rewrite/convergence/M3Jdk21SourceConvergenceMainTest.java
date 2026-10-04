@@ -128,6 +128,34 @@ final class M3Jdk21SourceConvergenceMainTest {
     }
 
     @Test
+    void testTreeIsConvergedByTheSameFileLocalDag() throws Exception {
+        Path root = Files.createTempDirectory("m3-jdk-root-test-");
+        Files.createDirectories(root.resolve("src"));
+        Path testSource =
+                root.resolve("test/jdk/example/TestSample.java");
+        Files.createDirectories(testSource.getParent());
+        Files.writeString(
+                testSource,
+                """
+                package example;
+                final class TestSample {
+                    private static int compute(int a, int b) {
+                        return a + b;
+                    }
+                }
+                """);
+        Path output = root.resolve("m3/target/test-source-convergence");
+
+        var summary = M3Jdk21SourceConvergenceMain.convergeTree(root, output, 1);
+
+        assertEquals(1, summary.files());
+        assertEquals(1, summary.changed());
+        assertTrue(
+                Files.exists(
+                        output.resolve("candidates/test/jdk/example/TestSample.java")));
+    }
+
+    @Test
     void outputFenceRejectsSourceTreeAndInvalidThreadCount() throws Exception {
         Path root = Files.createTempDirectory("m3-jdk-root-");
         Files.createDirectories(root.resolve("src"));
@@ -137,6 +165,12 @@ final class M3Jdk21SourceConvergenceMainTest {
                 () ->
                         M3Jdk21SourceConvergenceMain.convergeTree(
                                 root, root.resolve("src/generated"), 1));
+        Files.createDirectories(root.resolve("test"));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        M3Jdk21SourceConvergenceMain.convergeTree(
+                                root, root.resolve("test/generated"), 1));
         assertThrows(
                 IllegalArgumentException.class,
                 () ->

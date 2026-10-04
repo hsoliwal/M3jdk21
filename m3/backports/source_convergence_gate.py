@@ -31,7 +31,7 @@ def _sha256_bytes(payload: bytes) -> str:
 def _canonical_path(value: str) -> str:
     text = value.strip().replace("\\", "/")
     if (
-        not text.startswith("src/")
+        not (text.startswith("src/") or text.startswith("test/"))
         or not text.endswith(".java")
         or "/../" in text
         or "/./" in text

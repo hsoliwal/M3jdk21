@@ -83,6 +83,23 @@ class SourceConvergenceGateTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "candidate postimage drift"):
             gate.verify(self.root, self.manifest, self.targets)
 
+    def test_test_tree_java_target_is_admitted(self) -> None:
+        path = "test/jdk/example/TestA.java"
+        source = self.root / path
+        source.parent.mkdir(parents=True)
+        before = b"package example; final class TestA {}\n"
+        source.write_bytes(before)
+        with self.manifest.open("a", encoding="utf-8") as handle:
+            handle.write(
+                f"{path}\t{sha(before)}\t{sha(before)}\tfalse\tfalse\tfalse\t"
+                "true\tCONVERGED_UNCHANGED\t\t\n"
+            )
+        self.targets.write_text(path + "\n", encoding="utf-8")
+
+        root = gate.verify(self.root, self.manifest, self.targets)
+
+        self.assertRegex(root, r"^[0-9a-f]{64}$")
+
     def test_duplicate_manifest_row_fails(self) -> None:
         text = self.manifest.read_text(encoding="utf-8")
         line = text.splitlines()[1]
