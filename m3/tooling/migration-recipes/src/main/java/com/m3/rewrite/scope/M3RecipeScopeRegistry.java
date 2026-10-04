@@ -72,6 +72,9 @@ public final class M3RecipeScopeRegistry {
                     "com.m3.rewrite.pass.M3VerificationPlanRecipe",
                     fixed(M3EditScope.LIBRARY_API)),
             Map.entry(
+                    "com.m3.rewrite.backport.M3ReleaseJepDenominatorRecipe",
+                    fixed(M3EditScope.MODULE)),
+            Map.entry(
                     "com.m3.rewrite.backport.M3Jdk8347112BackportRecipe",
                     explicitChange()),
             Map.entry(
