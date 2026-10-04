@@ -2,7 +2,8 @@ type: specs.openrewrite.org/v1beta/recipe
 name: com.m3.rewrite.M3CanonicalMultiPassPlan
 displayName: Plan canonical M3 multi-pass convergence
 description: >-
-  Emits the bounded inventory -> FILE fixed point -> VISIBILITY -> PACKAGE -> MODULE ->
+  Emits the bounded inventory -> FILE atomization -> FILE patternization/IOP ->
+  FILE documentation -> FILE fixed point -> VISIBILITY -> PACKAGE -> MODULE ->
   MULTI_MODULE -> LIBRARY_API -> proof sequence with explicit stop conditions and no
   planning-time mutation authority.
 recipeList:
