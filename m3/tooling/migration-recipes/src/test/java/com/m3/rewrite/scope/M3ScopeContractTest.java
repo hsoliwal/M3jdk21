@@ -66,6 +66,14 @@ final class M3ScopeContractTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> M3ScopeInference.forJavaPaths(List.of("src/main/java/com/acme/../Foo.java")));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        M3ScopeInference.forJavaPaths(
+                                List.of("src/main/java/com/acme/" + (char) 0 + "Foo.java")));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> M3ScopeInference.forJavaPaths(List.of("C:\\src\\Foo.java")));
     }
 
     @Test
