@@ -34,7 +34,7 @@ final class M3MIndexFunctionalKernelRecipeTest {
         Recipe recipe = new M3MIndexFunctionalKernelRecipe();
         var first = recipe.run(new InMemoryLargeSourceSet(List.of()), context(), 1);
         List<Result> changes = first.getChangeset().getAllResults();
-        assertEquals(13, changes.size());
+        assertEquals(23, changes.size());
 
         List<SourceFile> after = changes.stream().map(result -> {
             assertNull(result.getBefore());

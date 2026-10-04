@@ -9,7 +9,9 @@ Spliterator or compiler contracts.
 
 ## Implemented constructs
 
-- immutable int/long/double unary plans implementing JDK primitive functional interfaces;
+- immutable int/long/double unary and binary plans implementing JDK primitive functional interfaces;
+- flat generic Function, BiFunction, Predicate, Consumer and BiConsumer compositions;
+- flat Comparator plans with per-stage reversal state;
 - postfix primitive predicates implementing IntPredicate, LongPredicate and DoublePredicate;
 - plan-to-plan compose/andThen/and/or/negate fusion;
 - ordinary JDK lambda/method-reference fallback when one side is not an MIndex plan;
@@ -18,6 +20,7 @@ Spliterator or compiler contracts.
 - count, sum, reduce, match, forEach and find-first terminals;
 - encoded allocation-free int find-first plus caller-owned long/double result lanes;
 - primitive range, iterate, scan and fold constructs;
+- bounded primitive Spliterator.OfInt/OfLong/OfDouble factories;
 - compensated sequential double summation.
 
 ## Recipe ownership
@@ -25,7 +28,7 @@ Spliterator or compiler contracts.
 `M3MIndexFunctionalKernelRecipe` is the MODULE join. Its child is the existing
 `M3HashPinnedJavaSnapshotRecipe` with crate `mindex-functional-kernel`.
 
-The crate owns 13 independent Java FILE atoms, each admitted only as
+The crate owns 23 independent Java FILE atoms, each admitted only as
 `ABSENT -> exact SHA-256 reviewed postimage`. A second replay over the reviewed
 postimage is a zero-change fixed point.
 
