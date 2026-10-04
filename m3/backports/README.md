@@ -253,6 +253,23 @@ The packet is owned by `M3Jdk8374808BackportRecipe` and remains `candidate-adapt
 focused `java.base` build, `CreationInstant.java` jtreg, existing KeyStore compatibility tests,
 recipe JUnit and fixed-point verification pass. See `recipes/jdk-8374808/`.
 
+## Next adapted serviceability diagnostics candidate
+
+JDK-8359706, **Add file descriptor count to VM.info**, is materialized from primary donor commit
+
+`b0831572e2cd9dbff9ee2abcdf81a493ddcecc7e`
+
+with the required macOS build repair JDK-8380236 from
+
+`3a109f49feb19f313632be6a2aa24ba7d9b7269b`.
+
+The Java-21 adaptation adds open-file-descriptor diagnostics to `VM.info` and fatal-error output
+without changing Java grammar, class files, public APIs or native ABIs. Eight independent FILE
+atoms cover AIX, BSD/macOS, Linux, Windows, the shared OS contract, VMError output and jtreg; one
+explicit MODULE join composes them. The evidence-bound packet can be projected to Camel, Airflow
+and Drools from the same semantic DAG root. Linux/macOS image and focused jtreg gates remain
+required before promotion. See `recipes/jdk-8359706/`.
+
 ## Completion boundary
 
 M3JDK21 backport convergence is complete only when:
