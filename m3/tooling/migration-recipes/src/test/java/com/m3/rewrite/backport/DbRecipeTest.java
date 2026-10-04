@@ -208,6 +208,52 @@ final class DbRecipeTest {
         }
     }
 
+    @Test
+    void privateAtomsRepairExactlyAndComposeWithFinalRecovery() {
+        String root = "/com/synexia/rewrite/hash-pinned-java/db-atom/";
+        String store = "src/main/java/com/m3/indexdb/M3IndexDB.java";
+        var input = JavaParser.fromJavaVersion().build().parseInputs(List.of(
+                Parser.Input.fromString(Path.of(store), resourceAt(root + "before-00-M3IndexDB.java.txt")),
+                Parser.Input.fromString(Path.of(CODEC), resourceAt(root + "before-01-M3IndexDbSemanticCodec.java.txt"))),
+                null, context()).toList();
+        var recipe = new M3HashPinnedJavaSnapshotRecipe("db-atom");
+        var results = recipe.run(new InMemoryLargeSourceSet(input), context(), 1)
+                .getChangeset().getAllResults();
+        assertEquals(4, results.size());
+        var after = new TreeMap<String, SourceFile>();
+        results.forEach(result -> {
+            SourceFile file = result.getAfter();
+            assertNotNull(file);
+            assertInstanceOf(J.CompilationUnit.class, file);
+            after.put(file.getSourcePath().toString().replace('\\', '/'), file);
+        });
+        String[] names = {"00-M3IndexDB.java.txt", "01-M3IndexDbSemanticCodec.java.txt",
+                "02-DbAtomTest.java.txt", "03-DbDigest.java.txt"};
+        String[] paths = {store, CODEC, "src/test/java/com/m3/indexdb/DbAtomTest.java",
+                "src/test/java/com/m3/indexdb/DbDigest.java"};
+        for (int i = 0; i < paths.length; i++) {
+            assertEquals(resourceAt(root + names[i]), after.get(paths[i]).printAll());
+        }
+        assertTrue(recipe.run(new InMemoryLargeSourceSet(new ArrayList<>(after.values())), context(), 1)
+                .getChangeset().getAllResults().isEmpty());
+        assertThrows(RuntimeException.class, () -> recipe.run(
+                new InMemoryLargeSourceSet(List.of()), context(), 1).getChangeset().getAllResults());
+        var recovered = new M3HashPinnedJavaSnapshotRecipe("db-java")
+                .run(new InMemoryLargeSourceSet(List.of()), context(), 1)
+                .getChangeset().getAllResults().stream().map(result -> result.getAfter()).toList();
+        List<SourceFile> full = new ArrayList<>(recovered);
+        var generated = recipe.run(new InMemoryLargeSourceSet(full), context(), 1)
+                .getChangeset().getAllResults();
+        assertEquals(2, generated.size());
+        generated.forEach(result -> full.add(result.getAfter()));
+        assertEquals(20, full.size());
+        for (String name : List.of("db-java", "db-parse", "db-check", "db-atom")) {
+            assertTrue(new M3HashPinnedJavaSnapshotRecipe(name)
+                    .run(new InMemoryLargeSourceSet(full), context(), 1)
+                    .getChangeset().getAllResults().isEmpty(), name);
+        }
+    }
+
     private static SourceFile jdkInput() {
         return JavaParser.fromJavaVersion().build().parseInputs(
                 List.of(Parser.Input.fromString(Path.of("src/java.base/share/classes/p/P.java"),

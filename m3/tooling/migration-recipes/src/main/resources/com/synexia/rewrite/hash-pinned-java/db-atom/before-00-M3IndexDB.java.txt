@@ -12,7 +12,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HexFormat;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Stream;
 
 /**
  * M3-owned native content-addressed artifact store.
@@ -152,13 +151,8 @@ public final class M3IndexDB implements AutoCloseable {
 
     public synchronized long blobBytes() throws IOException {
         ensureOpen();
-        return bytes(Files.list(blobs).filter(Files::isRegularFile));
-    }
-
-    /** Size-fold atom; owns the filtered stream and unwraps after resource cleanup. */
-    private static long bytes(Stream<Path> paths) throws IOException {
-        try (var stream = paths) {
-            return stream.mapToLong(path -> {
+        try (var stream = Files.list(blobs)) {
+            return stream.filter(Files::isRegularFile).mapToLong(path -> {
                 try {
                     return Files.size(path);
                 } catch (IOException failure) {
@@ -194,23 +188,18 @@ public final class M3IndexDB implements AutoCloseable {
                     bytes,
                     StandardOpenOption.WRITE,
                     StandardOpenOption.TRUNCATE_EXISTING);
-            move(temporary, target);
+            try {
+                Files.move(
+                        temporary,
+                        target,
+                        StandardCopyOption.ATOMIC_MOVE,
+                        StandardCopyOption.REPLACE_EXISTING);
+            } catch (java.nio.file.AtomicMoveNotSupportedException unsupported) {
+                Files.move(temporary, target, StandardCopyOption.REPLACE_EXISTING);
+            }
             published = true;
         } finally {
             if (!published) Files.deleteIfExists(temporary);
-        }
-    }
-
-    /** Publication adapter; falls back only when atomic movement is unsupported. */
-    private static void move(Path temporary, Path target) throws IOException {
-        try {
-            Files.move(
-                    temporary,
-                    target,
-                    StandardCopyOption.ATOMIC_MOVE,
-                    StandardCopyOption.REPLACE_EXISTING);
-        } catch (java.nio.file.AtomicMoveNotSupportedException unsupported) {
-            Files.move(temporary, target, StandardCopyOption.REPLACE_EXISTING);
         }
     }
 

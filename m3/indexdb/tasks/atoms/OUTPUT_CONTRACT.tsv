@@ -1,0 +1,9 @@
+artifact	purpose
+DESIGN.md	Operation contracts and fault environments
+TASK_PACKET.json	Scope, locks and stop conditions
+STATUS.tsv	Observed versus pending claims
+RUN_CONTEXT.tsv	Pinned identities and runtime
+PROVENANCE.tsv	Original source/evidence identifiers
+VERIFY_CONTRACT.tsv	Distinct verification gates
+OUTPUT_CONTRACT.tsv	This manifest
+FINAL_REPORT.md	Bounded outcome and blockers

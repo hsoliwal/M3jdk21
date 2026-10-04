@@ -1,0 +1,8 @@
+gate	state	qualification
+diff/static	PASS	Four extraction blocks plus private unit contracts; no guard removed
+Java21_compile	PASS	DB main and dependency-free probes only
+API	PASS	Exact public/protected descriptors before/after
+JUnit	PENDING	Expected61 DB cases; expectation is not execution
+OpenRewrite	PENDING	Expected10 focused cases; no stub proof
+coverage	PENDING	All classes included and both0.99 gates unchanged
+full_reactor_and_JDK	NOT_RUN	Must be verified separately

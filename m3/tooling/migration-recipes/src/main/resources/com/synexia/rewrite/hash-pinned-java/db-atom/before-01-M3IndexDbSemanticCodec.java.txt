@@ -83,27 +83,21 @@ final class M3IndexDbSemanticCodec {
                 }
 
                 for (M3IndexDbSemanticEdge edge : edges) {
-                    edge(out, edge, nodeOrdinals, strings);
+                    Integer parent = nodeOrdinals.get(edge.parentId());
+                    Integer child = nodeOrdinals.get(edge.childId());
+                    if (parent == null || child == null) {
+                        throw new IllegalStateException("semantic edge references absent node");
+                    }
+                    out.writeInt(parent);
+                    out.writeInt(child);
+                    out.writeInt(strings.id(edge.role()));
+                    out.writeInt(edge.ordinal());
                 }
             }
             return bytes.toByteArray();
         } catch (IOException impossible) {
             throw new AssertionError(impossible);
         }
-    }
-
-    /** Edge-emission atom; validates both references before writing any edge bytes. */
-    private static void edge(DataOutputStream out, M3IndexDbSemanticEdge edge,
-            Map<String, Integer> nodeOrdinals, StringTable strings) throws IOException {
-        Integer parent = nodeOrdinals.get(edge.parentId());
-        Integer child = nodeOrdinals.get(edge.childId());
-        if (parent == null || child == null) {
-            throw new IllegalStateException("semantic edge references absent node");
-        }
-        out.writeInt(parent);
-        out.writeInt(child);
-        out.writeInt(strings.id(edge.role()));
-        out.writeInt(edge.ordinal());
     }
 
     static M3IndexDbSemanticIndex decode(byte[] payload) {
@@ -126,7 +120,14 @@ final class M3IndexDbSemanticCodec {
 
             ArrayList<String> strings = new ArrayList<>(stringCount);
             for (int index = 0; index < stringCount; index++) {
-                strings.add(text(in));
+                int length = in.readInt();
+                if (length < 0 || length > MAX_STRING_BYTES || length > in.available()) {
+                    throw new IllegalArgumentException(
+                            "invalid M3IndexDB semantic string length: " + length);
+                }
+                byte[] utf8 = in.readNBytes(length);
+                if (utf8.length != length) throw new EOFException("truncated semantic string");
+                strings.add(text(utf8));
             }
 
             ArrayList<M3IndexDbSemanticNode> nodes = new ArrayList<>(nodeCount);
@@ -210,18 +211,6 @@ final class M3IndexDbSemanticCodec {
         if (minimum > available) {
             throw new IllegalArgumentException("semantic row counts exceed payload");
         }
-    }
-
-    /** Length-prefixed text atom; validates the frame before decoding its UTF-8 body. */
-    private static String text(DataInputStream in) throws IOException {
-        int length = in.readInt();
-        if (length < 0 || length > MAX_STRING_BYTES || length > in.available()) {
-            throw new IllegalArgumentException(
-                    "invalid M3IndexDB semantic string length: " + length);
-        }
-        byte[] utf8 = in.readNBytes(length);
-        if (utf8.length != length) throw new EOFException("truncated semantic string");
-        return text(utf8);
     }
 
     /** Text-decoding atom. Each invocation owns its non-thread-safe JDK decoder. */
