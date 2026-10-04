@@ -1,0 +1,10 @@
+packet_id	atom_id	scope	scope_promotion_approved	work_ref	depends_on
+jdk-8359706-open-fd-count	aix-stub	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:jdk27-open-fd-8359706-aix	
+jdk-8359706-open-fd-count	bsd-cpp	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:jdk27-open-fd-8359706-bsd-cpp	
+jdk-8359706-open-fd-count	bsd-hpp	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:jdk27-open-fd-8359706-bsd-hpp	
+jdk-8359706-open-fd-count	linux-counter	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:jdk27-open-fd-8359706-linux	
+jdk-8359706-open-fd-count	windows-stub	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:jdk27-open-fd-8359706-windows	
+jdk-8359706-open-fd-count	os-contract	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:jdk27-open-fd-8359706-os-hpp	
+jdk-8359706-open-fd-count	vmerror-output	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:jdk27-open-fd-8359706-vmerror	
+jdk-8359706-open-fd-count	jtreg	FILE	false	M3Jdk21HashPinnedSnapshotRecipe:jdk27-open-fd-8359706-jtreg	
+jdk-8359706-open-fd-count	module-join	MODULE	true	com.m3.rewrite.backport.M3Jdk8359706OpenFdCountBackportRecipe	aix-stub,bsd-cpp,bsd-hpp,linux-counter,windows-stub,os-contract,vmerror-output,jtreg
