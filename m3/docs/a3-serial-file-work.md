@@ -153,3 +153,23 @@ The product oracle remains:
 ```text
 configure -> make -> jtreg -> runtime/JNI/HotSpot proof -> benchmark when claimed
 ```
+
+## Compatibility-queue TSV codec
+
+`COMPATIBILITY_QUEUE.tsv` is produced by Python `csv.writer(..., delimiter="\t")`. A3Work must
+therefore consume the producer's quoting rules rather than assuming every physical tab separates a
+column.
+
+The A3 codec supports the bounded subset used by the queue:
+
+- tab delimiter;
+- double-quoted fields;
+- doubled quotes inside quoted fields;
+- strict refusal of unterminated quotes or characters after a closing quote;
+- one physical line per queue record.
+
+Display/evidence text is canonicalized to a single TSV cell by replacing embedded tab/CR/LF
+characters with spaces. Paths, hashes, scopes and identifiers remain strict structural values and
+are never repaired by textual substitution.
+
+This keeps the complete upstream denominator readable without weakening path or identity checks.
