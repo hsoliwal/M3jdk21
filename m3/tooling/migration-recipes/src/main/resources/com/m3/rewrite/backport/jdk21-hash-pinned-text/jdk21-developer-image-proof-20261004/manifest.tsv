@@ -1,0 +1,6 @@
+m3/tooling/module-packs/DEVELOPER_PROFILE.md	ABSENT	8546f36bedda510ee12be8b810b9b9a2ea6a6921a4627cffe19bbfb3395c3e57	00-DEVELOPER_PROFILE.md.txt
+m3/tooling/module-packs/build_pack.py	db892f845bf41bd0129473c1ef0a43f4ac96679fdc47a6a6355c2e44ccfaee24	836e45bea57b2dfe42d41d6ff82e97c65ccbe240841de5dcb0033135e6560193	01-build_pack.py.txt
+m3/tooling/module-packs/developer_tools.py	ABSENT	fe1ea49f5b84775ef568e353a64738ab1d99dd656597dc086bc08542c6128d0d	02-developer_tools.py.txt
+m3/tooling/module-packs/test_developer.py	ABSENT	42cf48177320ad9aa6494c37862f8090343ae57a9c96b954e9a516c4344da0a1	03-test_developer.py.txt
+m3/tooling/module-packs/verification/jdk-execution/pom.xml	ABSENT	3f14a05c25ce177329d13ce5e104185685d3e0bee0a36b72b4fa69909e35f2c1	04-pom.xml.txt
+m3/tooling/module-packs/verify_backport.py	ABSENT	fc85449b4736b728b5820f9e47a14d64bfebadd40267d7a44c765d0b0ea1dd3b	05-verify_backport.py.txt
