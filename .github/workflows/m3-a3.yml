@@ -11,6 +11,7 @@ on:
       - "m3/backports/JEP_CATALOGUE.tsv"
       - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
       - "m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"
+      - "m3/backports/CHALLENGE_CATEGORY_EVIDENCE.tsv"
       - "m3/docs/a3.md"
       - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
       - "m3/pom.xml"
@@ -22,6 +23,7 @@ on:
       - "m3/backports/JEP_CATALOGUE.tsv"
       - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
       - "m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"
+      - "m3/backports/CHALLENGE_CATEGORY_EVIDENCE.tsv"
       - "m3/docs/a3.md"
       - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
       - "m3/pom.xml"
@@ -78,7 +80,7 @@ jobs:
           test "$NATIVE_ROWS" -gt 100
           printf 'A3 inventory: Java=%s Native=%s\n' "$JAVA_ROWS" "$NATIVE_ROWS" >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Plan every current JEP JBS and community row
+      - name: Plan every current JEP JBS community and challenge-category row
         shell: bash
         run: |
           set -euo pipefail
@@ -88,10 +90,14 @@ jobs:
           JEP_ROWS="$(awk -F '\t' 'NR > 1 && $1 == "JEP" {n++} END {print n+0}' "$PLAN")"
           JBS_ROWS="$(awk -F '\t' 'NR > 1 && $1 == "JBS" {n++} END {print n+0}' "$PLAN")"
           CAP_ROWS="$(awk -F '\t' 'NR > 1 && $1 == "CAP" {n++} END {print n+0}' "$PLAN")"
+          CAT_ROWS="$(awk -F '\t' 'NR > 1 && $1 == "CAT" {n++} END {print n+0}' "$PLAN")"
+          CAT_NON_REVIEW="$(awk -F '\t' 'NR > 1 && $1 == "CAT" && $7 != "REVIEW" {n++} END {print n+0}' "$PLAN")"
           test "$JEP_ROWS" -ge 82
           test "$JBS_ROWS" -ge 13
           test "$CAP_ROWS" -ge 10
-          printf 'A3 plan: JEP=%s JBS=%s CAP=%s\n' "$JEP_ROWS" "$JBS_ROWS" "$CAP_ROWS" >> "$GITHUB_STEP_SUMMARY"
+          test "$CAT_ROWS" -ge 60
+          test "$CAT_NON_REVIEW" -eq 0
+          printf 'A3 plan: JEP=%s JBS=%s CAP=%s CAT=%s\n' "$JEP_ROWS" "$JBS_ROWS" "$CAP_ROWS" "$CAT_ROWS" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Prove guarded fixed-point candidate application
         shell: bash

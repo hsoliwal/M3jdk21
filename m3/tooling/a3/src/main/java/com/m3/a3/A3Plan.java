@@ -11,13 +11,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-/** Preserves every current JEP/JBS/capability decision while assigning an A3 absorption lane. */
+/** Preserves every current JEP/JBS/capability decision and challenge taxonomy as A3 evidence. */
 public final class A3Plan {
 
     public enum Kind {
         JEP,
         JBS,
-        CAP
+        CAP,
+        CAT
     }
 
     public enum Lane {
@@ -70,6 +71,10 @@ public final class A3Plan {
         loadCap(
                 checkedRoot.resolve(
                         "m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"),
+                rows);
+        loadChallengeCategories(
+                checkedRoot.resolve(
+                        "m3/backports/CHALLENGE_CATEGORY_EVIDENCE.tsv"),
                 rows);
         rows.sort(
                 Comparator.comparing((Row row) -> row.kind().ordinal())
@@ -151,6 +156,66 @@ public final class A3Plan {
                             fields[5],
                             fields[9]));
         }
+    }
+
+    private static void loadChallengeCategories(Path path, List<Row> rows)
+            throws IOException {
+        for (String[] fields : data(path, 9)) {
+            String category = text(fields[0], "category");
+            String source = text(fields[1], "source");
+            int reviewOrder = reviewOrder(source, fields[2]);
+            int problemCount;
+            try {
+                problemCount = Integer.parseInt(fields[3]);
+            } catch (NumberFormatException failure) {
+                throw new IOException("invalid challenge problem count in " + path, failure);
+            }
+            if (problemCount < 1
+                    || !"true".equals(fields[5])
+                    || fields[4].isBlank()
+                    || fields[6].isBlank()
+                    || fields[7].isBlank()
+                    || !fields[8].matches("[0-9a-f]{40}")) {
+                throw new IOException("invalid challenge category evidence row in " + path);
+            }
+            rows.add(
+                    new Row(
+                            Kind.CAT,
+                            "",
+                            "CAT-" + category + "-" + reviewOrder + "-" + source,
+                            category + " challenge evidence",
+                            "algorithm-taxonomy",
+                            "evidence-only",
+                            Lane.REVIEW,
+                            fields[6] + "@" + fields[8] + ":" + fields[7],
+                            "order="
+                                    + reviewOrder
+                                    + "; count="
+                                    + problemCount
+                                    + "; ids="
+                                    + fields[4]));
+        }
+    }
+
+    private static int reviewOrder(String source, String value) throws IOException {
+        int expected =
+                switch (source) {
+                    case "LEETCODE" -> 1;
+                    case "HACKERRANK" -> 2;
+                    case "GEEKSFORGEEKS" -> 3;
+                    default -> throw new IOException("unknown challenge source: " + source);
+                };
+        int actual;
+        try {
+            actual = Integer.parseInt(value);
+        } catch (NumberFormatException failure) {
+            throw new IOException("invalid challenge review order: " + value, failure);
+        }
+        if (actual != expected) {
+            throw new IOException(
+                    "challenge review order must be LeetCode -> HackerRank -> GeeksforGeeks");
+        }
+        return actual;
     }
 
     private static List<String[]> data(Path path, int minimumColumns)
