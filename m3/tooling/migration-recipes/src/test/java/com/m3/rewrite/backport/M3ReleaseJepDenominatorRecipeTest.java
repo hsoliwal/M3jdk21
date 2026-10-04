@@ -36,19 +36,22 @@ final class M3ReleaseJepDenominatorRecipeTest {
                     "release-jep-denominator-status-test.txt"),
             new Existing(
                     "m3/backports/verify.py",
-                    "release-jep-denominator-verifier.txt"));
+                    "release-jep-denominator-verifier.txt"),
+            new Existing(
+                    "m3/backports/README.md",
+                    "release-jep-denominator-readme.txt"));
 
     @Test
-    void tenFileAtomsJoinAtFixedPointFromCurrentMaster() {
+    void elevenFileAtomsJoinAtFixedPointFromCurrentMaster() {
         var recipe = new M3ReleaseJepDenominatorRecipe();
         assertEquals(85, M3ReleaseJepDenominatorRecipe.JEP_DENOMINATOR);
-        assertEquals(10, recipe.getRecipeList().size());
+        assertEquals(11, recipe.getRecipeList().size());
         recipe.getRecipeList().forEach(child ->
                 assertInstanceOf(M3Jdk21HashPinnedTextSnapshotRecipe.class, child));
 
         var first = recipe.run(new InMemoryLargeSourceSet(baseline()), context(), 1);
         List<Result> changes = first.getChangeset().getAllResults();
-        assertEquals(10, changes.size());
+        assertEquals(11, changes.size());
         assertTrue(changes.stream().anyMatch(result ->
                 result.getAfter().printAll().contains("24\t404\tGenerational Shenandoah")));
         assertTrue(changes.stream().anyMatch(result ->
