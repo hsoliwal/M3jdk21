@@ -7,6 +7,7 @@ on:
       - "m3/backports/BACKPORT_WORK_QUEUE.tsv"
       - "m3/backports/export_recipe_dag.py"
       - "m3/backports/test_export_recipe_dag.py"
+      - "m3/backports/recipes/backport-queue-dag-export-v2/**"
       - "m3/docs/backport-recipe-dag-orchestration.md"
       - "m3/tooling/recipe-catalogue.tsv"
       - "m3/tooling/migration-recipes/**"
@@ -19,7 +20,7 @@ permissions:
 jobs:
   queue-dag:
     runs-on: ubuntu-22.04
-    timeout-minutes: 25
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
 
@@ -41,17 +42,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          (
-            cd m3/backports
-            python3 -m unittest -v test_export_recipe_dag.py
-          )
+          (cd m3/backports && python3 -m unittest -v test_export_recipe_dag.py)
 
       - name: 3 - Export complete candidate DAG
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p target/backport-queue-dag
-          python3 m3/backports/export_recipe_dag.py             --output target/backport-queue-dag/BACKPORT_RECIPE_DAG.tsv             --root-output target/backport-queue-dag/BACKPORT_RECIPE_DAG_ROOT.txt
+          python3 m3/backports/export_recipe_dag.py --output target/backport-queue-dag/BACKPORT_RECIPE_DAG.tsv --root-output target/backport-queue-dag/BACKPORT_RECIPE_DAG_ROOT.txt
           python3 - <<'PY'
           import csv
           from pathlib import Path
@@ -91,9 +89,32 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/pom.xml             -pl tooling/migration-recipes -am             -Dtest=M3BackportRecipeDagExportRecipeTest,M3RecipeScopeDeclarationTest             -Dsurefire.failIfNoSpecifiedTests=false             test
+          mvn -B -ntp -f m3/pom.xml -pl tooling/migration-recipes -am -Dtest=M3BackportRecipeDagExportRecipeTest,M3RecipeScopeDeclarationTest -Dsurefire.failIfNoSpecifiedTests=false test
 
-      - name: 5 - Upload queue DAG evidence
+      - name: 5 - Build canonical DAG control plane
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/pom.xml -pl tooling/backport-dag -am -DskipTests install
+
+      - name: 6 - Validate exporter recipe packet
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml -Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketMain -Dexec.args="$PWD/m3/backports/recipes/backport-queue-dag-export-v2/packet.tsv $PWD/m3/backports/recipes/backport-queue-dag-export-v2/atom-evidence.tsv" exec:java
+
+      - name: 7 - Project exporter packet to Camel Airflow and Drools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/backport-queue-dag/orchestration
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain -Dexec.args="$PWD/m3/backports/recipes/backport-queue-dag-export-v2/packet.tsv $PWD/target/backport-queue-dag/orchestration $PWD/m3/backports/recipes/backport-queue-dag-export-v2/atom-evidence.tsv" exec:java
+          test -s target/backport-queue-dag/orchestration/M3BackportRoutes.java
+          test -s target/backport-queue-dag/orchestration/m3_backport_dag.py
+          test -s target/backport-queue-dag/orchestration/m3_backport_rules.drl
+          test -s target/backport-queue-dag/orchestration/projection.tsv
+
+      - name: 8 - Upload queue DAG evidence
         uses: actions/upload-artifact@v4
         with:
           name: m3jdk21-complete-backport-queue-dag
