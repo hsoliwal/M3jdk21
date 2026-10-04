@@ -145,6 +145,29 @@ python3 m3/backports/generate_recipe_crates.py \
 This is the bridge from whole-release inventory to genuinely per-file mechanical recipe work while
 preserving honest scope for coupled changes.
 
+For JDK tooling/build/resource changes that are not Java compilation units, opt into strict UTF-8
+text candidates:
+
+```bash
+python3 m3/backports/generate_recipe_crates.py \
+  --repo . \
+  --release 24 \
+  --paths-file target/selected-jdk24-paths.txt \
+  --crate-size 1 \
+  --include-text \
+  --out target/file-atomic-crates
+```
+
+With `--include-text`, the generator keeps Java targets under
+`M3Jdk21HashPinnedSnapshotRecipe` and emits non-Java UTF-8 targets under the existing
+`M3Jdk21HashPinnedTextSnapshotRecipe`. Mixed runs use separate deterministic Java/text crate
+names and compose them under one generated candidate recipe.
+
+The text lane fails closed into `EXCLUSIONS.tsv` for non-UTF-8 payloads, removals, executable or
+other file-mode changes. OpenRewrite byte replay cannot truthfully preserve those filesystem
+semantics, so they require a separately reviewed native/Git/build-file mechanism rather than a
+fake PlainText success.
+
 
 ## Recipe DAG control plane
 
