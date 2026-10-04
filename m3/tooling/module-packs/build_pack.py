@@ -86,8 +86,11 @@ def main(argv=None):
     parser.add_argument("--jdk", type=Path, required=True)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--javafx-lock", type=Path)
+    parser.add_argument("--profile", choices=("diagnostics", "developer"), default="diagnostics")
     args = parser.parse_args(argv)
     home = java_home(args.jdk)
+    if args.profile == "developer" and platform.system() != "Linux":
+        raise ValueError("Developer image/native launcher proof is Linux-only in this packet")
     output = args.out.absolute()
     if output.resolve().is_relative_to(home):
         raise ValueError("Output inside JAVA_HOME is forbidden")
@@ -118,6 +121,9 @@ def main(argv=None):
     command([home / "bin/jmod", "create", "--date", STAMP, "--class-path", smoke_classes,
              "--legal-notices", source / "legal", jmods / "com.m3pack.diagnostics.jmod"], log / "diagnostics-jmod.log")
     roots = ["com.m3tooling.modulepack", "com.m3pack.diagnostics", "jdk.jcmd", "jdk.jdeps"]
+    if args.profile == "developer":
+        from developer_tools import DEVELOPER_ROOTS
+        roots = sorted(set(roots).union(DEVELOPER_ROOTS))
     if fx_lock:
         fx_classes = output / "javafx-classes"
         compile_module(home, source / "fixtures/javafx", fx_classes,
@@ -152,10 +158,16 @@ def main(argv=None):
                       "com.m3pack.fx/com.m3.pack.fx.M3FxSmoke"], log / "javafx-run.log", 60)
         if "M3_JAVAFX_PASS" not in fx:
             raise ValueError("Missing JavaFX native/toolkit proof")
+    developer = None
+    if args.profile == "developer":
+        from developer_tools import copy_link_inputs, verify_developer_tools, verify_link_pins
+        copied = copy_link_inputs(home, output)
+        verify_link_pins(first, copied, home)
+        developer = verify_developer_tools(image, output, output / "link-inputs")
     release = (home / "release").read_text()
     (output / "JDK_RELEASE.txt").write_text(release)
     receipt = {"status": "LOCAL_IMAGE_PROVEN", "jdk_release_sha256": digest(home / "release"),
-               "javafx": fx_lock, "roots": roots, "m3jdk21_product_acceptance": False,
+               "javafx": fx_lock, "roots": roots, "profile": args.profile, "developer": developer, "m3jdk21_product_acceptance": False,
                "maven_junit_jacoco": "NOT_EXECUTED_BY_THIS_SCRIPT"}
     (output / "RECEIPT.json").write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n")
     files = sorted(path for path in image.rglob("*") if path.is_file())
