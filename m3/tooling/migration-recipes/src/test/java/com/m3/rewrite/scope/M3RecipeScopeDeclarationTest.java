@@ -20,6 +20,7 @@ import com.m3.rewrite.backport.M3Jdk8364182BackportRecipe;
 import com.m3.rewrite.backport.M3Jdk8367584JfrOptionsHelpBackportRecipe;
 import com.m3.rewrite.backport.M3Jdk8368692PasswordSystemInBackportRecipe;
 import com.m3.rewrite.backport.M3Jdk8374808BackportRecipe;
+import com.m3.rewrite.backport.M3ReleaseJepDenominatorRecipe;
 import com.m3.rewrite.backport.M3VerbatimJavaPairRecipe;
 import com.m3.rewrite.index.M3SemanticIndexM3DbBridgeRecipe;
 import com.m3.rewrite.index.M3SemanticIndexRecipe;
@@ -36,7 +37,7 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(24, M3RecipeScopeRegistry.size());
+        assertEquals(25, M3RecipeScopeRegistry.size());
         for (Class<?> recipe : allRecipes()) {
             assertTrue(
                     M3RecipeScopeRegistry.registered(recipe.getName()),
@@ -89,6 +90,10 @@ final class M3RecipeScopeDeclarationTest {
                 M3EditScope.LIBRARY_API,
                 M3RecipeScopeRegistry.require(M3VerificationPlanRecipe.class)
                         .resolve(List.of("src/main/java/a/A.java")));
+        assertEquals(
+                M3EditScope.MODULE,
+                M3RecipeScopeRegistry.require(M3ReleaseJepDenominatorRecipe.class)
+                        .resolve(List.of("m3/backports/JEP_CATALOGUE.tsv")));
 
         var jdkJavaPolicy =
                 M3RecipeScopeRegistry.require(M3Jdk21HashPinnedSnapshotRecipe.class);
@@ -181,6 +186,7 @@ final class M3RecipeScopeDeclarationTest {
                 M3SemanticIndexM3DbBridgeRecipe.class,
                 M3MultiPassPlannerRecipe.class,
                 M3VerificationPlanRecipe.class,
+                M3ReleaseJepDenominatorRecipe.class,
                 M3Jdk8347112BackportRecipe.class,
                 M3Jdk8364182BackportRecipe.class,
                 M3Jdk8374808BackportRecipe.class,
