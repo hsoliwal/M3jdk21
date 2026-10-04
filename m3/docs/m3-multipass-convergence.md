@@ -63,6 +63,31 @@ or fails closed because the recipe:
 
 A repository may execute many independent FILE fixed points concurrently.
 
+## Normalize first, absorb second
+
+The original Java tree is Maven-orchestrated through the trusted OpenRewrite convergence DAG before
+donor/JEP absorption. The product OpenJDK build remains configure/make; Maven owns deterministic
+inventory, recipe execution, proof receipts and fixed-point convergence.
+
+The required order is:
+
+    original Java 21 source
+      -> Maven/OpenRewrite FILE inventory
+      -> atomization
+      -> patternization / IOP
+      -> derivable documentation
+      -> FILE fixed point
+      -> normalized baseline receipt
+      -> donor/JEP normalization with the same Java-21 recipe set
+      -> structural/semantic diff
+      -> scoped backport recipe
+      -> proof
+      -> promotion
+
+This makes absorption compare normalized atoms and patterns rather than irregular whole files.
+Incompatible newer-language syntax or type-system requirements remain HOLD; normalization never
+converts incompatibility into compatibility.
+
 ## Mavenized whole-JDK bootstrap
 
 OpenJDK's configure/make build remains the product build. Maven is the M3 control shell.
