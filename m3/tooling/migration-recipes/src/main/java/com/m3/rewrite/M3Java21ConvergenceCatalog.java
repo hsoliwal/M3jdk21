@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.rewrite;
 
-import org.openrewrite.Environment;
+import org.openrewrite.config.Environment;
 import org.openrewrite.Recipe;
 
 /** Canonical activation boundary for the distributed declarative A3 Java-21 convergence DAG. */
