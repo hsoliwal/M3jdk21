@@ -23,6 +23,8 @@ final class M3A3NativeJniLaneRecipeTest {
 
     private static final Map<String, String> PREIMAGES =
             Map.of(
+                    "m3/backports/README.md",
+                    "README.md.before.txt",
                     "m3/backports/file_delta_inventory.py",
                     "file_delta_inventory.py.before.txt",
                     "m3/backports/generate_recipe_crates.py",
@@ -30,7 +32,9 @@ final class M3A3NativeJniLaneRecipeTest {
                     "m3/backports/test_file_delta_inventory.py",
                     "test_file_delta_inventory.py.before.txt",
                     "m3/backports/test_generate_recipe_crates.py",
-                    "test_generate_recipe_crates.py.before.txt");
+                    "test_generate_recipe_crates.py.before.txt",
+                    "m3/docs/a3.md",
+                    "a3.md.before.txt");
 
     @Test
     void exactToolingPreimagesConvergeThenReachFixedPoint() {
@@ -52,7 +56,7 @@ final class M3A3NativeJniLaneRecipeTest {
                         context(),
                         1);
         var results = first.getChangeset().getAllResults();
-        assertEquals(5, results.size());
+        assertEquals(7, results.size());
 
         Map<String, SourceFile> after = new LinkedHashMap<>();
         for (var result : results) {
@@ -74,6 +78,14 @@ final class M3A3NativeJniLaneRecipeTest {
                         .printAll()
                         .contains("jdk24-native-0001"));
         assertTrue(after.containsKey("m3/docs/a3-native-jni.md"));
+        assertTrue(
+                after.get("m3/backports/README.md")
+                        .printAll()
+                        .contains("--include-native"));
+        assertTrue(
+                after.get("m3/docs/a3.md")
+                        .printAll()
+                        .contains("a3-native-jni.md"));
 
         var second =
                 recipe.run(
