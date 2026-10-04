@@ -20,7 +20,7 @@ JDK 27 is a released line as of September 2026; it is not treated as an in-devel
 
 ## Recipe atoms
 
-Ten source-sealed FILE atoms own authority, catalogue, pass ledger, work queue, verifier and status
+Eleven source-sealed FILE atoms own authority, catalogue, pass ledger, work queue, verifier and status
 surfaces. Only `module-join` is allowed to promote to MODULE scope. Repository size does not widen
 the child atom authority.
 
