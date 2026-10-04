@@ -1,0 +1,2 @@
+package p;
+final class P { int n() { return 2; } }
