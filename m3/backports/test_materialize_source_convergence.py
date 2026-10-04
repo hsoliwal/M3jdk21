@@ -96,6 +96,79 @@ class MaterializeSourceConvergenceTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "unresolved convergence row"):
             materializer.materialize(self.source, self.manifest, self.worktree)
 
+    def _identity(self, role: str, revision: str, semantic_root: str | None = None) -> Path:
+        identity = self.output / f"{role.lower()}-{revision.replace('/', '_')}.tsv"
+        identity.write_text(
+            "role\trevision\tsemanticRoot\tfiles\tchanged\tholds\n"
+            f"{role}\t{revision}\t{semantic_root or ('1' * 64)}\t2\t1\t0\n",
+            encoding="utf-8",
+        )
+        return identity
+
+    def test_donor_requires_typed_identity_and_uses_separate_receipts(self) -> None:
+        with self.assertRaisesRegex(ValueError, "requires --identity"):
+            materializer.materialize(
+                self.source,
+                self.manifest,
+                self.worktree,
+                image_kind="donor",
+            )
+
+        identity = self._identity("DONOR", "jdk-22+36")
+        root = materializer.materialize(
+            self.source,
+            self.manifest,
+            self.worktree,
+            image_kind="donor",
+            identity_path=identity,
+        )
+
+        self.assertRegex(root, r"^[0-9a-f]{64}$")
+        self.assertFalse((self.worktree / "m3-normalized-baseline.root").exists())
+        self.assertEqual(
+            root,
+            (self.worktree / "m3-normalized-donor.root")
+            .read_text(encoding="utf-8")
+            .strip(),
+        )
+        image = (self.worktree / "m3-normalized-donor.image.tsv").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("DONOR\tjdk-22+36\t", image)
+        self.assertIn(root, image)
+
+    def test_donor_revision_and_semantic_root_bind_normalized_identity(self) -> None:
+        first_worktree = Path(self.temp.name) / "donor-a"
+        second_worktree = Path(self.temp.name) / "donor-b"
+        materializer.copy_tree(self.source, first_worktree)
+        materializer.copy_tree(self.source, second_worktree)
+
+        first = materializer.materialize(
+            self.source,
+            self.manifest,
+            first_worktree,
+            image_kind="donor",
+            identity_path=self._identity("DONOR", "jdk-22+36", "2" * 64),
+        )
+        second = materializer.materialize(
+            self.source,
+            self.manifest,
+            second_worktree,
+            image_kind="donor",
+            identity_path=self._identity("DONOR", "jdk-23+37", "3" * 64),
+        )
+        self.assertNotEqual(first, second)
+
+    def test_donor_refuses_baseline_identity(self) -> None:
+        with self.assertRaisesRegex(ValueError, "role mismatch"):
+            materializer.materialize(
+                self.source,
+                self.manifest,
+                self.worktree,
+                image_kind="donor",
+                identity_path=self._identity("BASELINE", "jdk-21+35"),
+            )
+
     def test_copy_mode_excludes_git_build_and_target(self) -> None:
         source = Path(self.temp.name) / "copy-source"
         destination = Path(self.temp.name) / "copy-target"
