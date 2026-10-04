@@ -5,6 +5,7 @@
   <groupId>com.m3.tooling</groupId><artifactId>migration-recipes</artifactId><version>0.1.0-SNAPSHOT</version>
   <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><rewrite.version>8.17.1</rewrite.version><jacoco.version>0.8.15</jacoco.version></properties>
   <dependencies>
+    <dependency><groupId>com.m3</groupId><artifactId>m3indexdb</artifactId><version>0.1.0-SNAPSHOT</version></dependency>
     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java</artifactId><version>${rewrite.version}</version></dependency>
     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-text</artifactId><version>${rewrite.version}</version></dependency>
     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java-21</artifactId><version>${rewrite.version}</version><scope>runtime</scope></dependency>
@@ -12,9 +13,9 @@
     <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
   </dependencies>
   <build><plugins>
-    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version></plugin>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version><configuration><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs></configuration></plugin>
     <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version><configuration><useModulePath>false</useModulePath><failIfNoTests>true</failIfNoTests></configuration></plugin>
-    <plugin><groupId>org.openrewrite.maven</groupId><artifactId>rewrite-maven-plugin</artifactId><version>5.23.1</version></plugin>
+    <plugin><groupId>org.openrewrite.maven</groupId><artifactId>rewrite-maven-plugin</artifactId><version>5.23.1</version><configuration><exportDatatables>true</exportDatatables><failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes></configuration></plugin>
     <plugin>
       <groupId>org.jacoco</groupId>
       <artifactId>jacoco-maven-plugin</artifactId>
@@ -37,6 +38,8 @@
             <includes>
               <include>com/m3/rewrite/scope/*</include>
               <include>com/m3/rewrite/atom/*</include>
+              <include>com/m3/rewrite/index/*</include>
+              <include>com/m3/rewrite/pass/*</include>
             </includes>
             <rules>
               <rule>
