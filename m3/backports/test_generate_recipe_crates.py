@@ -138,5 +138,228 @@ class GenerateRecipeCratesTest(unittest.TestCase):
                 )
 
 
+    def test_crate_size_one_emits_true_file_atomic_crates(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            out = Path(temp) / "out"
+            first_text = "final class A {}\n"
+            second_text = "final class B {}\n"
+            candidates = [
+                self.mod.Candidate(
+                    path="src/java.base/share/classes/p/A.java",
+                    status="MODIFIED",
+                    before_sha256=self.mod._sha256_text("final class A { int x; }\n"),
+                    after_sha256=self.mod._sha256_text(first_text),
+                    after_text=first_text,
+                ),
+                self.mod.Candidate(
+                    path="src/java.base/share/classes/p/B.java",
+                    status="ADDED",
+                    before_sha256="ABSENT",
+                    after_sha256=self.mod._sha256_text(second_text),
+                    after_text=second_text,
+                ),
+            ]
+
+            crates = self.mod.materialize(
+                out,
+                22,
+                candidates,
+                exclusions=[],
+                crate_size=1,
+            )
+
+            self.assertEqual(["jdk22-0001", "jdk22-0002"], crates)
+            for ordinal, expected_path in enumerate(
+                [candidate.path for candidate in candidates], 1
+            ):
+                crate = out / self.mod.RESOURCE_ROOT / f"jdk22-{ordinal:04d}"
+                with (crate / "manifest.tsv").open(
+                    "r", encoding="utf-8", newline=""
+                ) as handle:
+                    rows = list(csv.reader(handle, delimiter="\t"))
+                self.assertEqual(1, len(rows))
+                self.assertEqual(expected_path, rows[0][0])
+
+            yaml = (
+                out
+                / self.mod.YAML_ROOT
+                / "m3-jdk22-candidate-backports.yml"
+            ).read_text(encoding="utf-8")
+            self.assertIn("com.m3.generated.jdk22_0001", yaml)
+            self.assertIn("com.m3.generated.jdk22_0002", yaml)
+
+    def test_include_text_emits_separate_java_and_plain_text_crates(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            repo = root / "repo"
+            out = root / "out"
+            subprocess.run(("git", "init", "-q", str(repo)), check=True)
+            self.git(repo, "config", "user.email", "fixture@example.invalid")
+            self.git(repo, "config", "user.name", "Fixture")
+
+            java_path = "src/jdk.jlink/share/classes/p/A.java"
+            text_path = "make/Images.gmk"
+            properties_path = "src/jdk.jlink/share/classes/p/messages.properties"
+
+            self.write(repo, java_path, "package p; final class A { int x() { return 21; } }\n")
+            self.write(repo, text_path, "BASE=21\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk21")
+            self.git(repo, "tag", "jdk-21+35")
+
+            self.write(repo, java_path, "package p; final class A { int x() { return 24; } }\n")
+            self.write(repo, text_path, "BASE=24\n")
+            self.write(repo, properties_path, "key=value\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk24")
+            self.git(repo, "tag", "jdk-24+36")
+
+            candidates, exclusions = self.mod.candidates(
+                repo,
+                24,
+                selected=None,
+                all_candidates=True,
+                include_text=True,
+            )
+            self.assertEqual([], exclusions)
+            self.assertEqual(
+                [text_path, java_path, properties_path],
+                [candidate.path for candidate in candidates],
+            )
+            self.assertEqual(
+                ["TEXT", "JAVA", "TEXT"],
+                [candidate.kind for candidate in candidates],
+            )
+
+            crates = self.mod.materialize(
+                out,
+                24,
+                candidates,
+                exclusions,
+                crate_size=1,
+            )
+            self.assertEqual(
+                ["jdk24-java-0001", "jdk24-text-0001", "jdk24-text-0002"],
+                crates,
+            )
+
+            java_crate = out / self.mod.RESOURCE_ROOT / "jdk24-java-0001"
+            text_root = out / self.mod.TEXT_RESOURCE_ROOT
+            self.assertTrue((java_crate / "0001.java.txt").is_file())
+            self.assertTrue((text_root / "jdk24-text-0001" / "0001.txt").is_file())
+            self.assertTrue((text_root / "jdk24-text-0002" / "0001.txt").is_file())
+
+            yaml = (
+                out
+                / self.mod.YAML_ROOT
+                / "m3-jdk24-candidate-backports.yml"
+            ).read_text(encoding="utf-8")
+            self.assertIn(
+                "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe",
+                yaml,
+            )
+            self.assertIn(
+                "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
+                yaml,
+            )
+            self.assertIn("crateName: jdk24-java-0001", yaml)
+            self.assertIn("crateName: jdk24-text-0001", yaml)
+
+    def test_text_candidates_remain_opt_in_for_backward_compatibility(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            repo = root / "repo"
+            subprocess.run(("git", "init", "-q", str(repo)), check=True)
+            self.git(repo, "config", "user.email", "fixture@example.invalid")
+            self.git(repo, "config", "user.name", "Fixture")
+
+            path = "make/Images.gmk"
+            self.write(repo, path, "BASE=21\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk21")
+            self.git(repo, "tag", "jdk-21+35")
+            self.write(repo, path, "BASE=22\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk22")
+            self.git(repo, "tag", "jdk-22+36")
+
+            candidates, exclusions = self.mod.candidates(
+                repo,
+                22,
+                selected=None,
+                all_candidates=True,
+            )
+            self.assertEqual([], candidates)
+            self.assertEqual([], exclusions)
+
+            candidates, exclusions = self.mod.candidates(
+                repo,
+                22,
+                selected=None,
+                all_candidates=True,
+                include_text=True,
+            )
+            self.assertEqual([path], [candidate.path for candidate in candidates])
+            self.assertEqual("TEXT", candidates[0].kind)
+            self.assertEqual([], exclusions)
+
+    def test_text_mode_and_encoding_fail_into_typed_exclusions(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            repo = root / "repo"
+            subprocess.run(("git", "init", "-q", str(repo)), check=True)
+            self.git(repo, "config", "user.email", "fixture@example.invalid")
+            self.git(repo, "config", "user.name", "Fixture")
+
+            executable = "make/tool.sh"
+            binary = "make/blob.dat"
+            self.write(repo, executable, "#!/bin/sh\necho 21\n")
+            self.write(repo, binary, "text\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk21")
+            self.git(repo, "tag", "jdk-21+35")
+
+            self.write(repo, executable, "#!/bin/sh\necho 22\n")
+            (repo / executable).chmod(0o755)
+            (repo / binary).write_bytes(b"\xff\xfe\xfd")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk22")
+            self.git(repo, "tag", "jdk-22+36")
+
+            candidates, exclusions = self.mod.candidates(
+                repo,
+                22,
+                selected=None,
+                all_candidates=True,
+                include_text=True,
+            )
+            self.assertEqual([], candidates)
+            reasons = dict(exclusions)
+            self.assertTrue(reasons[executable].startswith("TYPED_EXCLUSION_FILE_MODE:"))
+            self.assertTrue(reasons[binary].startswith("TYPED_EXCLUSION_ENCODING:"))
+
+    def test_crate_size_rejects_zero_and_above_budget(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            out = Path(temp) / "out"
+            candidate = self.mod.Candidate(
+                path="src/java.base/share/classes/p/A.java",
+                status="ADDED",
+                before_sha256="ABSENT",
+                after_sha256=self.mod._sha256_text("final class A {}\n"),
+                after_text="final class A {}\n",
+            )
+            with self.assertRaises(ValueError):
+                self.mod.materialize(out, 22, [candidate], [], crate_size=0)
+            with self.assertRaises(ValueError):
+                self.mod.materialize(
+                    out,
+                    22,
+                    [candidate],
+                    [],
+                    crate_size=self.mod.CRATE_LIMIT + 1,
+                )
+
+
+
 if __name__ == "__main__":
     unittest.main()
