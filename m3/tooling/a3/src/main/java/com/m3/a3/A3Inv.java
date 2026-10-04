@@ -104,7 +104,7 @@ public final class A3Inv {
                                 module,
                                 area,
                                 rel.toString().replace('\\', '/'),
-                                kind(path),
+                                kind(rel.toString()),
                                 bytes.length,
                                 A3Fs.sha(bytes)));
             }
@@ -120,9 +120,10 @@ public final class A3Inv {
                 : fallback;
     }
 
-    private static Kind kind(Path path) {
+    static Kind kind(String path) {
         String name =
-                path.getFileName()
+                Path.of(Objects.requireNonNull(path, "path"))
+                        .getFileName()
                         .toString()
                         .toLowerCase(Locale.ROOT);
         if (name.endsWith(".java")) {

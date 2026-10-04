@@ -93,6 +93,245 @@ jobs:
           test "$CAP_ROWS" -ge 10
           printf 'A3 plan: JEP=%s JBS=%s CAP=%s\n' "$JEP_ROWS" "$JBS_ROWS" "$CAP_ROWS" >> "$GITHUB_STEP_SUMMARY"
 
+      - name: Expand real tree paths into serial FILE work atoms
+        shell: bash
+        run: |
+          set -euo pipefail
+          QUEUE="$REPO/m3/build/a3/work-queue.tsv"
+          WORK="$REPO/m3/build/a3/work.tsv"
+          cat > "$QUEUE" <<'TSV'
+          order	release	commit	jbs_ids	subject	domain	inventory_disposition	risk	scope_floor	proof_lane	recipe_strategy	priority	compatibility_state	next_action	paths
+          0	27	1111111111111111111111111111111111111111	JDK-A3-WORK	A3 serial work integration	core-libs	candidate	HIGH	MULTI_MODULE	CORE_LIBRARY	MIXED_PACKET_OPENREWRITE_PLUS_VERBATIM	35	PENDING_COMPATIBILITY_PROOF	PROVE_CORE_LIBRARY_BACKPORT	src/java.base/share/classes/java/lang/String.java,src/hotspot/share/runtime/os.cpp,make/autoconf/flags.m4
+          TSV
+
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="work --root $REPO --inventory m3/build/a3/inventory.tsv --queue m3/build/a3/work-queue.tsv --out m3/build/a3/work.tsv"
+
+          test -s "$WORK"
+          grep -F         shell: bash
+        run: |
+          set -euo pipefail
+          FIX="$RUNNER_TEMP/a3-fixture"
+          SRC="$FIX/src/java.base/share/classes/example/Sample.java"
+          mkdir -p "$(dirname "$SRC")"
+          cat > "$SRC" <<'JAVA'
+          package example;
+          final class Sample {
+              private static int compute(int a, int b) {
+                  return (a + b) * 31;
+              }
+          }
+          JAVA
+          cp "$SRC" "$RUNNER_TEMP/Sample.before"
+
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="apply --root $FIX --out m3/build/a3/apply --file src/java.base/share/classes/example/Sample.java"
+
+          cmp "$SRC" "$RUNNER_TEMP/Sample.before"
+          CANDIDATE="$FIX/m3/build/a3/apply/candidate/src/java.base/share/classes/example/Sample.java"
+          RECEIPT="$FIX/m3/build/a3/apply/receipt.tsv"
+          grep -F 'm3$pureIntAtom' "$CANDIDATE"
+          grep -F 'M3-IOP: PURE_INT_EXPRESSION' "$CANDIDATE"
+          grep -F $'\ttrue\ttrue' "$RECEIPT"
+          cp "$RECEIPT" "$REPO/m3/build/a3/apply-receipt.tsv"
+
+      - name: Upload A3 proof
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-a3-proof-${{ github.run_id }}
+          path: |
+            ${{ env.REPO }}/m3/build/a3/inventory.tsv
+            ${{ env.REPO }}/m3/build/a3/plan.tsv
+            ${{ env.REPO }}/m3/build/a3/work.tsv
+            ${{ env.REPO }}/m3/build/a3/apply-receipt.tsv
+          if-no-files-found: error
+          retention-days: 30
+src/java.base/share/classes/java/lang/String.java	PRESENT	JAVA	' "$WORK"
+          grep -F         shell: bash
+        run: |
+          set -euo pipefail
+          FIX="$RUNNER_TEMP/a3-fixture"
+          SRC="$FIX/src/java.base/share/classes/example/Sample.java"
+          mkdir -p "$(dirname "$SRC")"
+          cat > "$SRC" <<'JAVA'
+          package example;
+          final class Sample {
+              private static int compute(int a, int b) {
+                  return (a + b) * 31;
+              }
+          }
+          JAVA
+          cp "$SRC" "$RUNNER_TEMP/Sample.before"
+
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="apply --root $FIX --out m3/build/a3/apply --file src/java.base/share/classes/example/Sample.java"
+
+          cmp "$SRC" "$RUNNER_TEMP/Sample.before"
+          CANDIDATE="$FIX/m3/build/a3/apply/candidate/src/java.base/share/classes/example/Sample.java"
+          RECEIPT="$FIX/m3/build/a3/apply/receipt.tsv"
+          grep -F 'm3$pureIntAtom' "$CANDIDATE"
+          grep -F 'M3-IOP: PURE_INT_EXPRESSION' "$CANDIDATE"
+          grep -F $'\ttrue\ttrue' "$RECEIPT"
+          cp "$RECEIPT" "$REPO/m3/build/a3/apply-receipt.tsv"
+
+      - name: Upload A3 proof
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-a3-proof-${{ github.run_id }}
+          path: |
+            ${{ env.REPO }}/m3/build/a3/inventory.tsv
+            ${{ env.REPO }}/m3/build/a3/plan.tsv
+            ${{ env.REPO }}/m3/build/a3/apply-receipt.tsv
+          if-no-files-found: error
+          retention-days: 30
+	A3_JAVA_ATOMIZE_PATTERNIZE	FILE' "$WORK"
+          grep -F         shell: bash
+        run: |
+          set -euo pipefail
+          FIX="$RUNNER_TEMP/a3-fixture"
+          SRC="$FIX/src/java.base/share/classes/example/Sample.java"
+          mkdir -p "$(dirname "$SRC")"
+          cat > "$SRC" <<'JAVA'
+          package example;
+          final class Sample {
+              private static int compute(int a, int b) {
+                  return (a + b) * 31;
+              }
+          }
+          JAVA
+          cp "$SRC" "$RUNNER_TEMP/Sample.before"
+
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="apply --root $FIX --out m3/build/a3/apply --file src/java.base/share/classes/example/Sample.java"
+
+          cmp "$SRC" "$RUNNER_TEMP/Sample.before"
+          CANDIDATE="$FIX/m3/build/a3/apply/candidate/src/java.base/share/classes/example/Sample.java"
+          RECEIPT="$FIX/m3/build/a3/apply/receipt.tsv"
+          grep -F 'm3$pureIntAtom' "$CANDIDATE"
+          grep -F 'M3-IOP: PURE_INT_EXPRESSION' "$CANDIDATE"
+          grep -F $'\ttrue\ttrue' "$RECEIPT"
+          cp "$RECEIPT" "$REPO/m3/build/a3/apply-receipt.tsv"
+
+      - name: Upload A3 proof
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-a3-proof-${{ github.run_id }}
+          path: |
+            ${{ env.REPO }}/m3/build/a3/inventory.tsv
+            ${{ env.REPO }}/m3/build/a3/plan.tsv
+            ${{ env.REPO }}/m3/build/a3/apply-receipt.tsv
+          if-no-files-found: error
+          retention-days: 30
+src/hotspot/share/runtime/os.cpp	PRESENT	NATIVE	' "$WORK"
+          grep -F         shell: bash
+        run: |
+          set -euo pipefail
+          FIX="$RUNNER_TEMP/a3-fixture"
+          SRC="$FIX/src/java.base/share/classes/example/Sample.java"
+          mkdir -p "$(dirname "$SRC")"
+          cat > "$SRC" <<'JAVA'
+          package example;
+          final class Sample {
+              private static int compute(int a, int b) {
+                  return (a + b) * 31;
+              }
+          }
+          JAVA
+          cp "$SRC" "$RUNNER_TEMP/Sample.before"
+
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="apply --root $FIX --out m3/build/a3/apply --file src/java.base/share/classes/example/Sample.java"
+
+          cmp "$SRC" "$RUNNER_TEMP/Sample.before"
+          CANDIDATE="$FIX/m3/build/a3/apply/candidate/src/java.base/share/classes/example/Sample.java"
+          RECEIPT="$FIX/m3/build/a3/apply/receipt.tsv"
+          grep -F 'm3$pureIntAtom' "$CANDIDATE"
+          grep -F 'M3-IOP: PURE_INT_EXPRESSION' "$CANDIDATE"
+          grep -F $'\ttrue\ttrue' "$RECEIPT"
+          cp "$RECEIPT" "$REPO/m3/build/a3/apply-receipt.tsv"
+
+      - name: Upload A3 proof
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-a3-proof-${{ github.run_id }}
+          path: |
+            ${{ env.REPO }}/m3/build/a3/inventory.tsv
+            ${{ env.REPO }}/m3/build/a3/plan.tsv
+            ${{ env.REPO }}/m3/build/a3/apply-receipt.tsv
+          if-no-files-found: error
+          retention-days: 30
+	NATIVE_ATOM_REVIEW	FILE' "$WORK"
+          grep -F         shell: bash
+        run: |
+          set -euo pipefail
+          FIX="$RUNNER_TEMP/a3-fixture"
+          SRC="$FIX/src/java.base/share/classes/example/Sample.java"
+          mkdir -p "$(dirname "$SRC")"
+          cat > "$SRC" <<'JAVA'
+          package example;
+          final class Sample {
+              private static int compute(int a, int b) {
+                  return (a + b) * 31;
+              }
+          }
+          JAVA
+          cp "$SRC" "$RUNNER_TEMP/Sample.before"
+
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="apply --root $FIX --out m3/build/a3/apply --file src/java.base/share/classes/example/Sample.java"
+
+          cmp "$SRC" "$RUNNER_TEMP/Sample.before"
+          CANDIDATE="$FIX/m3/build/a3/apply/candidate/src/java.base/share/classes/example/Sample.java"
+          RECEIPT="$FIX/m3/build/a3/apply/receipt.tsv"
+          grep -F 'm3$pureIntAtom' "$CANDIDATE"
+          grep -F 'M3-IOP: PURE_INT_EXPRESSION' "$CANDIDATE"
+          grep -F $'\ttrue\ttrue' "$RECEIPT"
+          cp "$RECEIPT" "$REPO/m3/build/a3/apply-receipt.tsv"
+
+      - name: Upload A3 proof
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-a3-proof-${{ github.run_id }}
+          path: |
+            ${{ env.REPO }}/m3/build/a3/inventory.tsv
+            ${{ env.REPO }}/m3/build/a3/plan.tsv
+            ${{ env.REPO }}/m3/build/a3/apply-receipt.tsv
+          if-no-files-found: error
+          retention-days: 30
+make/autoconf/flags.m4	OUTSIDE_A3	OTHER	UNSCANNED	OUTSIDE_A3_REVIEW	FILE' "$WORK"
+          grep -F         shell: bash
+        run: |
+          set -euo pipefail
+          FIX="$RUNNER_TEMP/a3-fixture"
+          SRC="$FIX/src/java.base/share/classes/example/Sample.java"
+          mkdir -p "$(dirname "$SRC")"
+          cat > "$SRC" <<'JAVA'
+          package example;
+          final class Sample {
+              private static int compute(int a, int b) {
+                  return (a + b) * 31;
+              }
+          }
+          JAVA
+          cp "$SRC" "$RUNNER_TEMP/Sample.before"
+
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="apply --root $FIX --out m3/build/a3/apply --file src/java.base/share/classes/example/Sample.java"
+
+          cmp "$SRC" "$RUNNER_TEMP/Sample.before"
+          CANDIDATE="$FIX/m3/build/a3/apply/candidate/src/java.base/share/classes/example/Sample.java"
+          RECEIPT="$FIX/m3/build/a3/apply/receipt.tsv"
+          grep -F 'm3$pureIntAtom' "$CANDIDATE"
+          grep -F 'M3-IOP: PURE_INT_EXPRESSION' "$CANDIDATE"
+          grep -F $'\ttrue\ttrue' "$RECEIPT"
+          cp "$RECEIPT" "$REPO/m3/build/a3/apply-receipt.tsv"
+
+      - name: Upload A3 proof
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-a3-proof-${{ github.run_id }}
+          path: |
+            ${{ env.REPO }}/m3/build/a3/inventory.tsv
+            ${{ env.REPO }}/m3/build/a3/plan.tsv
+            ${{ env.REPO }}/m3/build/a3/apply-receipt.tsv
+          if-no-files-found: error
+          retention-days: 30
+	MULTI_MODULE	' "$WORK"
+          printf 'A3 serial FILE work rows=%s\n' "$(($(wc -l < "$WORK") - 1))" >> "$GITHUB_STEP_SUMMARY"
+
       - name: Prove guarded fixed-point candidate application
         shell: bash
         run: |
