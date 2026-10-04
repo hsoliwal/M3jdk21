@@ -10,9 +10,7 @@
     <groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.1.0</version>
     <executions>
       <execution><id>patch-contracts</id><phase>test</phase><goals><goal>exec</goal></goals>
-        <configuration><executable>python3</executable><arguments><argument>-S</argument><argument>-m</argument>
-          <argument>unittest</argument><argument>discover</argument><argument>-s</argument><argument>${project.basedir}</argument>
-          <argument>-p</argument><argument>test_fix.py</argument><argument>-v</argument>
+        <configuration><executable>python3</executable><arguments><argument>-S</argument><argument>${project.basedir}/test_fix.py</argument><argument>-v</argument>
         </arguments></configuration>
       </execution>
       <execution><id>readiness</id><phase>verify</phase><goals><goal>exec</goal></goals>
