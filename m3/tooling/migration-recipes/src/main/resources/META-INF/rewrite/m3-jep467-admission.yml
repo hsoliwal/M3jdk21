@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.M3Jep467Admission
+displayName: Classify JEP 467 Markdown documentation comments
+description: Replay exact catalogue and work-queue admission leaves without product-source mutation.
+recipeList:
+  - com.m3.rewrite.backport.M3Jep467AdmissionRecipe
