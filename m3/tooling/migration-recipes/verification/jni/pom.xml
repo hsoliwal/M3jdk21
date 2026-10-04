@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3.verification</groupId><artifactId>jni-packet</artifactId><version>0.1.0-SNAPSHOT</version>
+  <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
+  <dependencies>
+    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><version>1.7.36</version></dependency>
+    <!-- Pinned OpenRewrite runtime annotation is also needed by javac -Xlint:all. -->
+    <dependency><groupId>org.jetbrains</groupId><artifactId>annotations</artifactId><version>24.1.0</version><scope>provided</scope></dependency>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-core</artifactId><version>8.17.1</version></dependency>
+    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
+  </dependencies>
+  <build>
+    <sourceDirectory>${project.basedir}/../../src/main/java</sourceDirectory>
+    <testSourceDirectory>${project.basedir}/../../src/test/java</testSourceDirectory>
+    <resources><resource><directory>${project.basedir}/../../src/main/resources</directory><includes>
+      <include>META-INF/rewrite/m3-jni-packet.yml</include><include>META-INF/rewrite/m3-kit.yml</include>
+      <include>com/m3/rewrite/backport/jdk21-hash-pinned-text/jni-packet/**</include>
+      <include>com/m3/rewrite/backport/jdk21-hash-pinned-text/proof-kit/**</include>
+    </includes></resource></resources>
+    <plugins>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
+        <configuration><showWarnings>true</showWarnings><failOnWarning>true</failOnWarning><compilerArgs><arg>-Xlint:all</arg></compilerArgs>
+          <includes><include>com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include></includes>
+          <testIncludes><testInclude>com/m3/rewrite/backport/JniTest.java</testInclude><testInclude>com/m3/rewrite/backport/KitTest.java</testInclude></testIncludes>
+        </configuration>
+      </plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>
+        <configuration><useModulePath>false</useModulePath><failIfNoTests>true</failIfNoTests></configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
