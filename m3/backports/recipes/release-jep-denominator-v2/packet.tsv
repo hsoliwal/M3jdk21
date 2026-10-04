@@ -9,4 +9,5 @@ release-jep-denominator-v2	status-code	FILE	false	M3Jdk21HashPinnedTextSnapshotR
 release-jep-denominator-v2	status-test	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:release-jep-denominator-status-test	status-code
 release-jep-denominator-v2	status-report	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:release-jep-denominator-status-report	authority,catalogue,queue
 release-jep-denominator-v2	verifier	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:release-jep-denominator-verifier	authority-code,catalogue,queue,passes
-release-jep-denominator-v2	module-join	MODULE	true	com.m3.rewrite.backport.M3ReleaseJepDenominatorRecipe	authority,authority-code,authority-test,passes,catalogue,queue,status-code,status-test,status-report,verifier
+release-jep-denominator-v2	readme	FILE	false	M3Jdk21HashPinnedTextSnapshotRecipe:release-jep-denominator-readme	authority,catalogue,queue
+release-jep-denominator-v2	module-join	MODULE	true	com.m3.rewrite.backport.M3ReleaseJepDenominatorRecipe	authority,authority-code,authority-test,passes,catalogue,queue,status-code,status-test,status-report,verifier,readme
