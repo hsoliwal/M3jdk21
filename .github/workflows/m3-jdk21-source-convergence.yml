@@ -12,6 +12,7 @@ on:
       - "m3/backports/BACKPORT_PASSES.tsv"
       - "m3/docs/m3-multipass-convergence.md"
       - "src/**/*.java"
+      - "test/**/*.java"
       - ".github/workflows/m3-jdk21-source-convergence.yml"
   pull_request:
     paths:
@@ -21,6 +22,7 @@ on:
       - "m3/backports/BACKPORT_PASSES.tsv"
       - "m3/docs/m3-multipass-convergence.md"
       - "src/**/*.java"
+      - "test/**/*.java"
       - ".github/workflows/m3-jdk21-source-convergence.yml"
   workflow_dispatch:
 

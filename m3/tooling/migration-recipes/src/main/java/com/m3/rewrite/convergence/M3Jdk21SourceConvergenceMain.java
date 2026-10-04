@@ -30,7 +30,7 @@ import org.openrewrite.java.tree.J;
  * Maven-launched, whole-tree Java 21 convergence executor.
  *
  * <p>The OpenJDK configure/make build remains authoritative. This control-plane tool walks the
- * original {@code src/**/*.java} tree, runs only bounded JUnit-proven OpenRewrite FILE recipes,
+ * original {@code src/**/*.java} and {@code test/**/*.java} trees, runs only bounded JUnit-proven OpenRewrite FILE recipes,
  * and writes candidate postimages plus receipts under the caller-owned output directory. It never
  * writes the OpenJDK source tree.
  *
@@ -73,14 +73,7 @@ public final class M3Jdk21SourceConvergenceMain {
         Path output = checkedOutput(root, outputDirectory);
         positive(threads, "threads");
 
-        List<Path> files;
-        try (var stream = Files.walk(root.resolve("src"))) {
-            files =
-                    stream.filter(Files::isRegularFile)
-                            .filter(path -> path.getFileName().toString().endsWith(".java"))
-                            .sorted()
-                            .toList();
-        }
+        List<Path> files = javaFiles(root);
 
         ExecutorService executor = Executors.newFixedThreadPool(threads);
         List<Future<FileReceipt>> futures = new ArrayList<>(files.size());
@@ -341,15 +334,33 @@ public final class M3Jdk21SourceConvergenceMain {
 
     private static Path checkedOutput(Path root, Path value) {
         Path output = Objects.requireNonNull(value, "outputDirectory").toAbsolutePath().normalize();
-        if (output.equals(root) || output.startsWith(root.resolve("src"))) {
-            throw new IllegalArgumentException("output may not write the OpenJDK source tree");
+        if (output.equals(root)
+                || output.startsWith(root.resolve("src"))
+                || output.startsWith(root.resolve("test"))) {
+            throw new IllegalArgumentException("output may not write the OpenJDK source/test tree");
         }
         return output;
     }
 
+    private static List<Path> javaFiles(Path root) throws IOException {
+        ArrayList<Path> files = new ArrayList<>();
+        for (String subtree : List.of("src", "test")) {
+            Path start = root.resolve(subtree);
+            if (!Files.isDirectory(start)) continue;
+            try (var stream = Files.walk(start)) {
+                files.addAll(
+                        stream.filter(Files::isRegularFile)
+                                .filter(path -> path.getFileName().toString().endsWith(".java"))
+                                .toList());
+            }
+        }
+        files.sort(Comparator.naturalOrder());
+        return List.copyOf(files);
+    }
+
     private static String relativeJavaPath(String value) {
         String path = Objects.requireNonNull(value, "path").replace('\\', '/');
-        if (!path.startsWith("src/")
+        if (!(path.startsWith("src/") || path.startsWith("test/"))
                 || !path.endsWith(".java")
                 || path.contains("/../")
                 || path.contains("/./")

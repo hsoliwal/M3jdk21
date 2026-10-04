@@ -96,6 +96,28 @@ class MaterializeSourceConvergenceTest(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "unresolved convergence row"):
             materializer.materialize(self.source, self.manifest, self.worktree)
 
+    def test_test_tree_java_row_materializes(self) -> None:
+        path = "test/jdk/example/TestA.java"
+        before = b"package example; final class TestA {}\n"
+        after = b"package example; final class TestA { /* M3 */ }\n"
+        for tree in (self.source, self.worktree):
+            target = tree / path
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(before)
+        candidate = self.output / f"candidates/{path}"
+        candidate.parent.mkdir(parents=True, exist_ok=True)
+        candidate.write_bytes(after)
+        with self.manifest.open("a", encoding="utf-8") as handle:
+            handle.write(
+                f"{path}\t{sha(before)}\t{sha(after)}\ttrue\ttrue\ttrue\t"
+                f"true\tCONVERGED_CHANGED\t\tcandidates/{path}\n"
+            )
+
+        materializer.materialize(self.source, self.manifest, self.worktree)
+
+        self.assertEqual(before, (self.source / path).read_bytes())
+        self.assertEqual(after, (self.worktree / path).read_bytes())
+
     def test_copy_mode_excludes_git_build_and_target(self) -> None:
         source = Path(self.temp.name) / "copy-source"
         destination = Path(self.temp.name) / "copy-target"

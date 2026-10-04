@@ -15,6 +15,8 @@ on:
       - "m3/backports/pom.xml"
       - "m3/docs/m3jdk21-absorption-first.md"
       - ".github/workflows/m3-jdk21-absorption.yml"
+      - "src/**/*.java"
+      - "test/**/*.java"
   pull_request:
     paths:
       - "m3/tooling/migration-recipes/**"
@@ -26,6 +28,8 @@ on:
       - "m3/backports/pom.xml"
       - "m3/docs/m3jdk21-absorption-first.md"
       - ".github/workflows/m3-jdk21-absorption.yml"
+      - "src/**/*.java"
+      - "test/**/*.java"
   workflow_dispatch:
 
 permissions:
@@ -64,19 +68,30 @@ jobs:
             "refs/tags/jdk-26+35:refs/tags/jdk-26+35"
             "refs/tags/jdk-27+35:refs/tags/jdk-27+35"
           )
-          git -C "$upstream" -c protocol.version=2 fetch             --filter=blob:none --no-tags origin "${refs[@]}"
+          git -C "$upstream" -c protocol.version=2 fetch \
+            --filter=blob:none \
+            --no-tags \
+            origin \
+            "${refs[@]}"
 
       - name: Prove absorption join unit contract
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m unittest discover             -s m3/backports             -p 'test_absorption_plan.py'             -v
+          python3 -m unittest discover \
+            -s m3/backports \
+            -p 'test_absorption_plan.py' \
+            -v
 
       - name: Mavenize, atomize, patternize, and build absorption plan
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f m3/pom.xml             -Pm3-jdk-absorption             -Dm3.upstream.jdk.root="$RUNNER_TEMP/openjdk-jdk"             -Dm3.convergence.threads=4             verify
+          mvn -B -ntp -f m3/pom.xml \
+            -Pm3-jdk-absorption \
+            -Dm3.upstream.jdk.root="$RUNNER_TEMP/openjdk-jdk" \
+            -Dm3.convergence.threads=4 \
+            verify
 
       - name: Verify produced evidence
         shell: bash

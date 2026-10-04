@@ -54,7 +54,7 @@ OpenJDK still owns:
 The `m3-jdk-absorption` Maven profile is the common orchestration profile.
 
 In the migration-recipes module it runs
-`M3Jdk21SourceConvergenceMain` against the original `src/**/*.java` tree and writes only
+`M3Jdk21SourceConvergenceMain` against the original `src/**/*.java` and `test/**/*.java` trees and writes only
 candidate postimages plus `SOURCE_CONVERGENCE.tsv` under `target/`.
 
 In the backports module it:
@@ -91,7 +91,7 @@ When JEP/JBS authority grows, the same join accepts the new rows without a new i
 
 For complete commit rows, Java target paths are joined against `SOURCE_CONVERGENCE.tsv`:
 
-- `JAVA_BASELINE_CONVERGED` — every touched `src/**/*.java` file has a fixed-point convergence
+- `JAVA_BASELINE_CONVERGED` — every touched `src/**/*.java` or `test/**/*.java` file has a fixed-point convergence
   receipt;
 - `JAVA_BASELINE_HOLD` — at least one touched Java file cannot reach the admitted Java-21
   atomization/patternization fixed point;

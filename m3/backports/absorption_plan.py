@@ -15,7 +15,7 @@ import json
 from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable, Mapping, Sequence
+from typing import Mapping, Sequence
 
 _CONVERGED = {"CONVERGED_CHANGED", "CONVERGED_UNCHANGED"}
 _HEX = frozenset("0123456789abcdef")

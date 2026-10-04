@@ -20,13 +20,14 @@ class AbsorptionPlanTest(unittest.TestCase):
                 "path\tpreSha256\tpostSha256\tatomizationChanged\tpatternizationChanged"
                 "\tdocumentationChanged\tfixedPoint\tstatus\tmessage\tcandidate\n"
                 f"src/java.base/share/classes/p/A.java\t{'1'*64}\t{'2'*64}\ttrue\ttrue\ttrue\ttrue\tCONVERGED_CHANGED\t\tcandidates/a.java\n"
-                f"src/java.base/share/classes/p/B.java\t{'3'*64}\t{'3'*64}\tfalse\tfalse\tfalse\tfalse\tHOLD\tparse\t\n",
+                f"src/java.base/share/classes/p/B.java\t{'3'*64}\t{'3'*64}\tfalse\tfalse\tfalse\tfalse\tHOLD\tparse\t\n"
+                f"test/jdk/p/TestA.java\t{'4'*64}\t{'4'*64}\tfalse\tfalse\tfalse\ttrue\tCONVERGED_UNCHANGED\t\t\n",
                 encoding="utf-8",
             )
             convergence_root = absorption_plan._sha256_bytes(convergence.read_bytes())
             (root / "SOURCE_CONVERGENCE.summary.tsv").write_text(
                 "files\tchanged\tholds\tsemanticRoot\n"
-                f"2\t1\t1\t{convergence_root}\n",
+                f"3\t1\t1\t{convergence_root}\n",
                 encoding="utf-8",
             )
 
@@ -51,7 +52,8 @@ class AbsorptionPlanTest(unittest.TestCase):
                 + f"0\t27\t{'a'*40}\tJDK-1\tA\tcore-libs\treview\tMEDIUM\tFILE\tCORE_LIBRARY\tOPENREWRITE_OR_HASH_PINNED_JAVA\t35\tPENDING_COMPATIBILITY_PROOF\tPROVE_CORE_LIBRARY_BACKPORT\tsrc/java.base/share/classes/p/A.java\n"
                 + f"1\t27\t{'b'*40}\tJDK-2\tB\tcore-libs\treview\tMEDIUM\tFILE\tCORE_LIBRARY\tOPENREWRITE_OR_HASH_PINNED_JAVA\t35\tPENDING_COMPATIBILITY_PROOF\tPROVE_CORE_LIBRARY_BACKPORT\tsrc/java.base/share/classes/p/B.java\n"
                 + f"2\t27\t{'c'*40}\tJDK-3\tMissing\tcore-libs\treview\tMEDIUM\tFILE\tCORE_LIBRARY\tOPENREWRITE_OR_HASH_PINNED_JAVA\t35\tPENDING_COMPATIBILITY_PROOF\tPROVE_CORE_LIBRARY_BACKPORT\tsrc/java.base/share/classes/p/C.java\n"
-                + f"3\t27\t{'d'*40}\tJDK-4\tBuild\tbuild\treview\tLOW\tFILE\tBUILD\tHASH_PINNED_VERBATIM_PATCH\t10\tPENDING_COMPATIBILITY_PROOF\tPROVE_BUILD_BACKPORT\tmake/Images.gmk\n",
+                + f"3\t27\t{'d'*40}\tJDK-4\tBuild\tbuild\treview\tLOW\tFILE\tBUILD\tHASH_PINNED_VERBATIM_PATCH\t10\tPENDING_COMPATIBILITY_PROOF\tPROVE_BUILD_BACKPORT\tmake/Images.gmk\n"
+                + f"4\t27\t{'e'*40}\tJDK-5\tTest\ttest\treview\tLOW\tFILE\tTEST\tOPENREWRITE_OR_HASH_PINNED_JAVA\t11\tPENDING_COMPATIBILITY_PROOF\tPROVE_TEST_BACKPORT\ttest/jdk/p/TestA.java\n",
                 encoding="utf-8",
             )
 
@@ -59,7 +61,7 @@ class AbsorptionPlanTest(unittest.TestCase):
                 convergence, features, commits
             )
             self.assertEqual(convergence_root, actual_root)
-            self.assertEqual(7, len(rows))
+            self.assertEqual(8, len(rows))
             self.assertEqual(
                 ["AWAIT_FILE_ATOMS", "EXCLUDED_BY_JAVA21_CONTRACT", "AWAIT_FILE_ATOMS"],
                 [row.baseline_state for row in rows[:3]],
@@ -70,6 +72,7 @@ class AbsorptionPlanTest(unittest.TestCase):
                     "JAVA_BASELINE_HOLD",
                     "JAVA_BASELINE_MISSING",
                     "NO_JAVA_SOURCE",
+                    "JAVA_BASELINE_CONVERGED",
                 ],
                 [row.baseline_state for row in rows[3:]],
             )
@@ -83,13 +86,13 @@ class AbsorptionPlanTest(unittest.TestCase):
             self.assertEqual(semantic, root_file.read_text(encoding="utf-8").strip())
             parsed = json.loads(summary.read_text(encoding="utf-8"))
             self.assertEqual(3, parsed["feature_rows"])
-            self.assertEqual(4, parsed["commit_rows"])
+            self.assertEqual(5, parsed["commit_rows"])
             self.assertFalse(parsed["mutation_authority"])
             self.assertFalse(parsed["promotion_authority"])
 
             with out.open("r", encoding="utf-8", newline="") as handle:
                 emitted = list(csv.DictReader(handle, delimiter="\t"))
-            self.assertEqual(7, len(emitted))
+            self.assertEqual(8, len(emitted))
             self.assertEqual("false", emitted[0]["mutation_authority"])
 
     def test_rejects_noncontiguous_commit_queue_and_summary_drift(self) -> None:
