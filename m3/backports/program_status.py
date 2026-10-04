@@ -10,6 +10,8 @@ import json
 from collections import Counter
 from pathlib import Path
 
+import release_jep_authority
+
 PENDING_JEP = {"candidate", "candidate-high-risk", "hold-compat", "hold-jit", "hold-preview"}
 DECIDED_JEP = {"reject-compat", "reject-language", "superseded", "superseded-high-risk", "superseded-jit"}
 PENDING_SEED = {"candidate", "candidate-adapted", "candidate-high-risk", "hold-dependency", "hold-javac"}
@@ -33,6 +35,7 @@ def classify_seed(disposition: str) -> str:
     raise ValueError(f"unclassified seed disposition: {disposition}")
 
 def snapshot(root: Path) -> dict[str, object]:
+    release_authority = release_jep_authority.verify_repository_authority(root)
     backports = root / "m3" / "backports"
     jeps = read_tsv(backports / "JEP_CATALOGUE.tsv")
     seeds = read_tsv(backports / "UPSTREAM_CHANGE_SEEDS.tsv")
@@ -46,6 +49,9 @@ def snapshot(root: Path) -> dict[str, object]:
     return {
         "schema": 1,
         "jep_rows": len(jeps),
+        "release_jep_denominator": {
+            str(release): len(ids) for release, ids in sorted(release_authority.items())
+        },
         "jep_states": dict(sorted(jep_states.items())),
         "jep_dispositions": dict(sorted(Counter(row["disposition"] for row in jeps).items())),
         "seed_rows": len(seeds),
