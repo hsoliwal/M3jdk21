@@ -54,7 +54,10 @@ public final class M3RecipeScopeRegistry {
                     fixed(M3EditScope.FILE)),
             Map.entry(
                     "com.m3.rewrite.backport.M3ReleaseJepDenominatorRecipe",
-                    fixed(M3EditScope.MODULE)));
+                    fixed(M3EditScope.MODULE)),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3BackportRecipeDagExportRecipe",
+                    fixed(M3EditScope.MULTI_MODULE)));
 
     private M3RecipeScopeRegistry() {}
 

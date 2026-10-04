@@ -1,0 +1,7 @@
+packet_id	atom_id	contract_ref	documentation_ref	pattern	iop_role	junit_proof_ref	fixed_point_required
+backport-queue-dag-export-v2	exporter	backport-queue-dag-export-v2/exporter	m3/backports/recipes/backport-queue-dag-export-v2/README.md	EvidenceCompiler	Backport.QueueDag.exporter	M3BackportRecipeDagExportRecipeTest	true
+backport-queue-dag-export-v2	exporter-test	backport-queue-dag-export-v2/exporter-test	m3/backports/recipes/backport-queue-dag-export-v2/README.md	ProofAtom	Backport.QueueDag.test	M3BackportRecipeDagExportRecipeTest	true
+backport-queue-dag-export-v2	documentation	backport-queue-dag-export-v2/documentation	m3/backports/recipes/backport-queue-dag-export-v2/README.md	DocumentationAtom	Backport.QueueDag.documentation	M3BackportRecipeDagExportRecipeTest	true
+backport-queue-dag-export-v2	workflow	backport-queue-dag-export-v2/workflow	m3/backports/recipes/backport-queue-dag-export-v2/README.md	CiProjection	Backport.QueueDag.workflow	M3BackportRecipeDagExportRecipeTest	true
+backport-queue-dag-export-v2	catalogue	backport-queue-dag-export-v2/catalogue	m3/backports/recipes/backport-queue-dag-export-v2/README.md	CatalogueAtom	Backport.QueueDag.catalogue	M3BackportRecipeDagExportRecipeTest	true
+backport-queue-dag-export-v2	module-join	backport-queue-dag-export-v2/module-join	m3/backports/recipes/backport-queue-dag-export-v2/README.md	Composite	Backport.QueueDag.module-join	M3BackportRecipeDagExportRecipeTest	true

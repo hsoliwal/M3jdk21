@@ -16,6 +16,7 @@ import com.m3.rewrite.atom.M3PureIntConvergenceRecipe;
 import com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe;
 import com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe;
 import com.m3.rewrite.backport.M3ReleaseJepDenominatorRecipe;
+import com.m3.rewrite.backport.M3BackportRecipeDagExportRecipe;
 import com.m3.rewrite.backport.M3VerbatimJavaPairRecipe;
 import com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe;
 import com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe;
@@ -26,7 +27,7 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(14, M3RecipeScopeRegistry.size());
+        assertEquals(15, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(InstallIndexStringCompatibility.class.getName()));
@@ -41,6 +42,7 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3Jdk21HashPinnedTextSnapshotRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3VerbatimJavaPairRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3ReleaseJepDenominatorRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3BackportRecipeDagExportRecipe.class.getName()));
         assertFalse(M3RecipeScopeRegistry.registered(null));
         assertFalse(M3RecipeScopeRegistry.registered("missing.Recipe"));
         assertThrows(NullPointerException.class, () -> M3RecipeScopeRegistry.require((Class<?>) null));
@@ -56,6 +58,14 @@ final class M3RecipeScopeDeclarationTest {
 
         var nativePolicy = M3RecipeScopeRegistry.require(M3SegmentedLaneNativeRecipe.class);
         assertEquals(M3EditScope.FILE, nativePolicy.resolve(List.of("src/main/java/a/A.java")));
+
+        var queueDagPolicy = M3RecipeScopeRegistry.require(M3BackportRecipeDagExportRecipe.class);
+        assertEquals(
+                M3EditScope.MULTI_MODULE,
+                queueDagPolicy.resolve(List.of("m3/backports/export_recipe_dag.py")));
+        assertFalse(
+                queueDagPolicy.fileLocalMechanical(
+                        List.of("m3/backports/export_recipe_dag.py")));
 
         var denominatorPolicy = M3RecipeScopeRegistry.require(M3ReleaseJepDenominatorRecipe.class);
         assertEquals(
