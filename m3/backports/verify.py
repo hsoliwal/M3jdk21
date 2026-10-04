@@ -364,6 +364,15 @@ def verify_open_fd_count_8359706_backport(root: Path) -> None:
         raise AssertionError(
             f"JDK-8359706 unexpected disposition: {seed['disposition']}"
         )
+    followup = next((row for row in seeds if row["jbs"] == "JDK-8380236"), None)
+    if followup is None:
+        raise AssertionError("JDK-8380236 absorbed dependency missing from upstream seed")
+    if followup["upstream_commit"] != JDK_8380236_COMMIT:
+        raise AssertionError("JDK-8380236 seed donor commit drift")
+    if followup["disposition"] != "absorbed-dependency":
+        raise AssertionError(
+            f"JDK-8380236 unexpected disposition: {followup['disposition']}"
+        )
 
     linux = (root / "src/hotspot/os/linux/os_linux.cpp").read_text(encoding="utf-8")
     bsd = (root / "src/hotspot/os/bsd/os_bsd.cpp").read_text(encoding="utf-8")
