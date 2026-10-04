@@ -1,0 +1,65 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 database contract proof
+on:
+  push:
+    branches: ['m3/indexdb-contract-proof-20261004']
+  pull_request:
+    paths:
+      - 'm3/indexdb/**'
+      - '.github/workflows/m3-indexdb-boundary-proof.yml'
+permissions:
+  contents: read
+jobs:
+  contracts:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - name: Fetch exact candidate
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          test -n "$HEAD_SHA"
+          curl --fail --location --retry 3 \
+            "https://codeload.github.com/${GITHUB_REPOSITORY}/tar.gz/${HEAD_SHA}" \
+            -o "$RUNNER_TEMP/repo.tar.gz"
+          mkdir -p "$RUNNER_TEMP/repo"
+          tar -xzf "$RUNNER_TEMP/repo.tar.gz" -C "$RUNNER_TEMP/repo" --strip-components=1
+          printf 'REPO=%s\n' "$RUNNER_TEMP/repo" >> "$GITHUB_ENV"
+          printf 'TESTED_SHA=%s\n' "$HEAD_SHA" >> "$GITHUB_ENV"
+      - name: Prepare pinned Java 21
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 \
+            'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21%2B35/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz' \
+            -o "$RUNNER_TEMP/jdk21.tar.gz"
+          printf '%s  %s\n' \
+            '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6' \
+            "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -
+          tar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"
+          printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
+          printf '%s\n' "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
+      - name: Execute all database JUnit tests and unchanged coverage gate
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-db-proof"
+          printf '%s\n' "$TESTED_SHA" > "$RUNNER_TEMP/m3-db-proof/tested-sha.txt"
+          java -version 2>&1 | tee "$RUNNER_TEMP/m3-db-proof/java-version.txt"
+          mvn -version | tee "$RUNNER_TEMP/m3-db-proof/maven-version.txt"
+          mvn -B -ntp -f "$REPO/m3/indexdb/pom.xml" clean verify \
+            2>&1 | tee "$RUNNER_TEMP/m3-db-proof/maven-verify.log"
+      - name: Preserve reports and exact source even on rejection
+        if: always()
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-db-proof"
+          if test -n "${REPO:-}" && test -d "$REPO/m3/indexdb"; then
+            cp -R "$REPO/m3/indexdb" "$RUNNER_TEMP/m3-db-proof/indexdb"
+          fi
+      - name: Upload proof, not an admission claim
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-db-proof-${{ github.event.pull_request.head.sha || github.sha }}
+          path: ${{ runner.temp }}/m3-db-proof
+          if-no-files-found: error
