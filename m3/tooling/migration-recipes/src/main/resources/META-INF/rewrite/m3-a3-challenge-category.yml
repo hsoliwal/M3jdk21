@@ -1,0 +1,9 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.a3.ChallengeCategoryEvidence
+displayName: M3 A3 challenge category evidence
+description: >-
+  Source-sealed A3 join of LeetCode, HackerRank and GeeksforGeeks category evidence.
+  Challenge solution bodies remain evidence-only and gain no copy or promotion authority.
+recipeList:
+  - com.m3.rewrite.a3.M3A3ChallengeCategoryRecipe
