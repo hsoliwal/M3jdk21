@@ -33,10 +33,11 @@ import java.util.List;
 import jdk.test.lib.process.OutputAnalyzer;
 import jdk.test.lib.process.ProcessTools;
 import jdk.test.lib.Platform;
+import jdk.test.lib.Utils;
 
 /*
  * @test
- * @bug 7104647 7154822 8359706 8380236
+ * @bug 7104647 7154822
  * @summary Unit test for jcmd utility. The test will send different diagnostic
  * command requests to the current java process.
  *
@@ -180,11 +181,6 @@ public class TestJcmdSanity {
           output.shouldNotContain(" handler modified!"); // e.g. Warning: SIGILL handler modified!
           output.shouldNotContain("*** Handler was modified!");
           output.shouldNotContain("*** Expected: "); // e.g. *** Expected: javaSignalHandler in ...
-        }
-
-        // Supported Unix platforms report the current process descriptor count.
-        if (Platform.isLinux() || Platform.isOSX()) {
-            output.shouldMatch("Open File Descriptors: (?:> )?\\d+");
         }
     }
 }

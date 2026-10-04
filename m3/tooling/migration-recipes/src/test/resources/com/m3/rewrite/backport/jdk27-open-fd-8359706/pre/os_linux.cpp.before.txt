@@ -90,7 +90,6 @@
 # include <signal.h>
 # include <endian.h>
 # include <errno.h>
-# include <dirent.h>
 # include <dlfcn.h>
 # include <stdio.h>
 # include <unistd.h>
@@ -5470,37 +5469,6 @@ void os::print_memory_mappings(char* addr, size_t bytes, outputStream* st) {
       st->print_cr("nothing.");
     }
     st->cr();
-  }
-}
-
-void os::print_open_file_descriptors(outputStream* st) {
-  DIR* dirp = opendir("/proc/self/fd");
-  if (dirp == nullptr) {
-    st->print_cr("Open File Descriptors: unknown");
-    return;
-  }
-
-  int fds = 0;
-  struct dirent* dentp;
-  const jlong timeout_ns = 50000000L;  // 50 ms
-  bool timed_out = false;
-  jlong start = os::javaTimeNanos();
-
-  while ((dentp = readdir(dirp)) != nullptr && !timed_out) {
-    const char first = dentp->d_name[0];
-    if (first >= '0' && first <= '9') {
-      fds++;
-    }
-    if (fds != 0 && fds % 100 == 0) {
-      timed_out = (os::javaTimeNanos() - start) > timeout_ns;
-    }
-  }
-  closedir(dirp);
-
-  if (timed_out) {
-    st->print_cr("Open File Descriptors: > %d", fds);
-  } else {
-    st->print_cr("Open File Descriptors: %d", fds);
   }
 }
 
