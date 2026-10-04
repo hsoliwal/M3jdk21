@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.DbParse
+displayName: Bound DB snapshot parsing
+description: Repair the retained V1 decoder using the existing Java LST snapshot engine, from m3/indexdb; corrupt-input tightening is explicit.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: db-parse

@@ -1,0 +1,64 @@
+{
+  "task_packet": "active",
+  "source_doc": "m3/indexdb/tasks/parse/DESIGN.md",
+  "invariant_id": "DB_RECOVERY_BOUNDED_PARSE",
+  "base_commit": "ef39c669ee9ac77bee073f5b95479ec1613cdf3a",
+  "retained_source": "46112be5b68d8d3816b9d3100fc31d8b2e9de736",
+  "run": {
+    "mode": "apply",
+    "profile": "bounded",
+    "workers": 1,
+    "shard_count": 1,
+    "shard_index": 0
+  },
+  "targets": [
+    "m3/indexdb/**",
+    "m3/pom.xml",
+    "m3/tooling/migration-recipes/src/main/resources/**/db-*/**",
+    "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/db.yml",
+    "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/DbRecipeTest.java",
+    ".github/workflows/m3-db-parse.yml"
+  ],
+  "allowed_delta": [
+    "restore retained DB content and tests",
+    "bounded corrupt-input repair in existing codec",
+    "private operation atoms, tests, recipe templates, build registration and evidence"
+  ],
+  "invariant_locks": {
+    "STANDARD_JAVA_API": "LOCKED",
+    "EXISTING_DB_API": "LOCKED",
+    "EXISTING_TESTS": "RESTORE_UNCHANGED",
+    "COVERAGE_GATES": "LOCKED",
+    "MASTER_DEVELOP": "READ_ONLY",
+    "UPSTREAM_LICENSES": "LOCKED"
+  },
+  "forbidden": [
+    "blanket history merges",
+    "forced updates",
+    "new function framework",
+    "lowered coverage",
+    "false JUnit/JDK completion",
+    "root-level repository files"
+  ],
+  "verify_order": [
+    "diff",
+    "syntax/static",
+    "compile",
+    "JUnit",
+    "coverage",
+    "recipe and runtime"
+  ],
+  "output_contract": [
+    "STATUS.tsv",
+    "FINAL_REPORT.md",
+    "RUN_CONTEXT.tsv",
+    "PROVENANCE.tsv",
+    "VERIFY_CONTRACT.tsv",
+    "OUTPUT_CONTRACT.tsv"
+  ],
+  "stop_conditions": [
+    "preimage drift",
+    "unapproved file",
+    "failing test"
+  ]
+}
