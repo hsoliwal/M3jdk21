@@ -8,7 +8,7 @@ import org.openrewrite.Recipe;
 /**
  * Converges the authoritative JDK 22-27 released-JEP denominator as independent FILE atoms.
  *
- * <p>Ten one-target hash-pinned text leaves join at MODULE scope. Six targets are additive on
+ * <p>Eleven one-target hash-pinned text leaves join at MODULE scope. Six targets are additive on
  * current master; four are exact replacements. Catalogue, queue, pass ledger, verifier and status
  * are therefore unable to converge independently to contradictory denominators.</p>
  */
@@ -25,7 +25,8 @@ public final class M3ReleaseJepDenominatorRecipe extends Recipe {
             "release-jep-denominator-status-code",
             "release-jep-denominator-status-report",
             "release-jep-denominator-status-test",
-            "release-jep-denominator-verifier");
+            "release-jep-denominator-verifier",
+            "release-jep-denominator-readme");
 
     @Override
     public String getDisplayName() {
@@ -34,7 +35,7 @@ public final class M3ReleaseJepDenominatorRecipe extends Recipe {
 
     @Override
     public String getDescription() {
-        return "Joins ten independently hash-pinned FILE atoms so official release authority, "
+        return "Joins eleven independently hash-pinned FILE atoms so official release authority, "
                 + "catalogue, pass/work queue, verifier and status reporting converge to 85 JEPs.";
     }
 
