@@ -84,7 +84,7 @@ public class Preview {
     private final Log log;
     private final Source source;
 
-    protected static final Context.Key<Preview> previewKey = new Context.Key<>();
+    private static final Context.Key<Preview> previewKey = new Context.Key<>();
 
     public static Preview instance(Context context) {
         Preview instance = context.get(previewKey);
@@ -94,8 +94,7 @@ public class Preview {
         return instance;
     }
 
-    @SuppressWarnings("this-escape")
-    protected Preview(Context context) {
+    Preview(Context context) {
         context.put(previewKey, this);
         Options options = Options.instance(context);
         names = Names.instance(context);

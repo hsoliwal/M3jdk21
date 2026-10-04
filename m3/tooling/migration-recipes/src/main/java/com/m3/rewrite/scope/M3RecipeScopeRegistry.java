@@ -51,7 +51,10 @@ public final class M3RecipeScopeRegistry {
                     inferred()),
             Map.entry(
                     "com.m3.rewrite.backport.M3VerbatimJavaPairRecipe",
-                    fixed(M3EditScope.FILE)));
+                    fixed(M3EditScope.FILE)),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3Jep458BackportRecipe",
+                    explicitChange()));
 
     private M3RecipeScopeRegistry() {}
 
@@ -81,6 +84,13 @@ public final class M3RecipeScopeRegistry {
         return new M3RecipeScopePolicy(
                 scope,
                 M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING,
+                false);
+    }
+
+    private static M3RecipeScopePolicy explicitChange() {
+        return new M3RecipeScopePolicy(
+                M3EditScope.LIBRARY_API,
+                M3ContractMode.EXPLICIT_CONTRACT_CHANGE,
                 false);
     }
 
