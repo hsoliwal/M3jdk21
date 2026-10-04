@@ -7,6 +7,8 @@ Status: tool-plane contract layered on A3 (Atomize -> Patternize -> Absorb).
 A3 must make every released post-JDK21 enhancement visible to absorption planning without changing
 the locked Java 21 product contract.
 
+The current release-authority denominator contains exactly **85 released JEP rows** and the pinned JDK 22..27 GA intervals contain exactly **14,948 released commit rows**.
+
 The planning denominator is the union of five evidence families:
 
 1. released JEP catalogue rows;
