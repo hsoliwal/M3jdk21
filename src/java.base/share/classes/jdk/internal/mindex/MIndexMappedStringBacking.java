@@ -85,15 +85,18 @@ public final class MIndexMappedStringBacking implements MIndexStringBacking {
     private volatile boolean closed;
 
     private MIndexMappedStringBacking(Path textPath) {
+        FileChannel openedText = null;
+        ByteStore openedBytes = null;
         try {
             this.textPath = Objects.requireNonNull(textPath, "textPath")
                     .toAbsolutePath().normalize();
-            textChannel = FileChannel.open(this.textPath, StandardOpenOption.READ);
+            textChannel = openedText = FileChannel.open(this.textPath, StandardOpenOption.READ);
             Commit textCommit =
-                    readCommit(textChannel, TEXT_MAGIC, TEXT_VERSION, TEXT_HEADER_BYTES, "text");
+                    readCommit(textChannel, TEXT_MAGIC, TEXT_VERSION, TEXT_HEADER_BYTES,
+                            TEXT_RECORD_HEADER_BYTES, "text");
             textPages = Pages.map(textChannel, textCommit.committedLength());
 
-            byteStore = new ByteStore(Path.of(this.textPath.toString() + ".bytes"));
+            byteStore = openedBytes = new ByteStore(Path.of(this.textPath.toString() + ".bytes"));
 
             int rows = textCommit.rowCount();
             charOffsets = new long[rows];
@@ -111,9 +114,27 @@ public final class MIndexMappedStringBacking implements MIndexStringBacking {
 
             parseTextRows(textCommit);
         } catch (IOException failure) {
+            close(openedBytes, failure);
+            close(openedText, failure);
             throw new UncheckedIOException("open MIndex mapped String backing: " + textPath, failure);
-        } catch (RuntimeException failure) {
+        } catch (RuntimeException | Error failure) {
+            close(openedBytes, failure);
+            close(openedText, failure);
             throw failure;
+        }
+    }
+
+    /** Release an acquired resource without masking the failed construction. */
+    private static void close(AutoCloseable resource, Throwable failure) {
+        if (resource == null) {
+            return;
+        }
+        try {
+            resource.close();
+        } catch (Throwable cleanup) {
+            if (cleanup != failure) {
+                failure.addSuppressed(cleanup);
+            }
         }
     }
 
@@ -450,13 +471,19 @@ public final class MIndexMappedStringBacking implements MIndexStringBacking {
 
         ByteStore(Path path) throws IOException {
             channel = FileChannel.open(path, StandardOpenOption.READ);
-            Commit commit =
-                    readCommit(channel, BYTE_MAGIC, BYTE_VERSION, BYTE_HEADER_BYTES, "byte");
-            pages = Pages.map(channel, commit.committedLength());
-            payloadOffsets = new long[commit.rowCount()];
-            lengths = new int[commit.rowCount()];
-            hashes = new int[commit.rowCount()];
-            parse(commit);
+            try {
+                Commit commit =
+                        readCommit(channel, BYTE_MAGIC, BYTE_VERSION, BYTE_HEADER_BYTES,
+                                BYTE_RECORD_HEADER_BYTES, "byte");
+                pages = Pages.map(channel, commit.committedLength());
+                payloadOffsets = new long[commit.rowCount()];
+                lengths = new int[commit.rowCount()];
+                hashes = new int[commit.rowCount()];
+                parse(commit);
+            } catch (IOException | RuntimeException | Error failure) {
+                MIndexMappedStringBacking.close(channel, failure);
+                throw failure;
+            }
         }
 
         int length(long handle) {
@@ -532,8 +559,13 @@ public final class MIndexMappedStringBacking implements MIndexStringBacking {
         }
     }
 
+    /**
+     * Validate the selected commit before mapping or row-directory allocation.
+     * Even zero-length payloads and aliases require one complete record header.
+     */
     private static Commit readCommit(
-            FileChannel channel, int magic, int version, int headerBytes, String kind)
+            FileChannel channel, int magic, int version, int headerBytes,
+            int recordHeaderBytes, String kind)
             throws IOException {
         if (channel.size() < headerBytes) {
             throw corrupt("short " + kind + " header");
@@ -562,7 +594,8 @@ public final class MIndexMappedStringBacking implements MIndexStringBacking {
 
         if (commit.committedLength() < headerBytes
                 || commit.committedLength() > channel.size()
-                || commit.rowCount() < 0) {
+                || commit.rowCount() < 0
+                || commit.rowCount() > (commit.committedLength() - headerBytes) / recordHeaderBytes) {
             throw corrupt("invalid " + kind + " commit");
         }
         return commit;
