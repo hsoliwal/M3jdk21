@@ -9,13 +9,15 @@ import java.util.Objects;
  * Composes one concrete backport packet into the canonical M3 lifecycle DAG.
  *
  * <p>The generic canonical {@code recipe-crate} node is replaced by the packet's immutable recipe
- * atoms. Packet roots depend on {@code file-delta}; packet-local dependencies remain packet-local;
+ * atoms. Packet roots depend on {@code baseline-convergence}, which itself depends on
+ * {@code file-delta}; packet-local dependencies remain packet-local;
  * all terminal packet atoms rejoin at {@code recipe-junit}. Every later canonical verification and
  * the single serial promotion node are preserved.</p>
  */
 public final class M3PacketDagComposer {
     private static final String GENERIC_RECIPE = "recipe-crate";
     private static final String FILE_DELTA = "file-delta";
+    private static final String BASELINE_CONVERGENCE = "baseline-convergence";
     private static final String RECIPE_JUNIT = "recipe-junit";
 
     private M3PacketDagComposer() {}
@@ -41,6 +43,7 @@ public final class M3PacketDagComposer {
         M3BackportPacket checkedPacket = Objects.requireNonNull(packet, "packet");
         checkedDag.require(GENERIC_RECIPE);
         checkedDag.require(FILE_DELTA);
+        checkedDag.require(BASELINE_CONVERGENCE);
         checkedDag.require(RECIPE_JUNIT);
 
         ArrayList<M3DagNode> nodes = new ArrayList<>();
@@ -90,7 +93,7 @@ public final class M3PacketDagComposer {
                             atom.scopePromotionApproved(),
                             atom.workRef(),
                             atom.dependsOn().isEmpty()
-                                    ? List.of(FILE_DELTA)
+                                    ? List.of(BASELINE_CONVERGENCE)
                                     : atom.dependsOn().stream()
                                             .map(M3PacketDagComposer::nodeId)
                                             .toList()));
