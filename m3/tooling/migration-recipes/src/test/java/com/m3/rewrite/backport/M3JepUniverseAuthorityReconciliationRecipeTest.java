@@ -15,6 +15,7 @@ import java.util.TreeMap;
 import org.junit.jupiter.api.Test;
 import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.SourceFile;
+import org.openrewrite.config.Environment;
 import org.openrewrite.internal.InMemoryLargeSourceSet;
 import org.openrewrite.text.PlainText;
 
@@ -94,6 +95,19 @@ final class M3JepUniverseAuthorityReconciliationRecipeTest {
         Target additive = TARGETS.stream().filter(Target::absentBefore).findFirst().orElseThrow();
         occupied.add(text(additive.path(), "conflict\n"));
         assertThrows(RuntimeException.class, () -> run(occupied, 0));
+    }
+
+    @Test
+    void namedRecipeIsRegistered() {
+        var activated =
+                Environment.builder()
+                        .scanRuntimeClasspath("com.m3.rewrite.backport")
+                        .build()
+                        .activateRecipes(
+                                "com.m3.backport.M3JepUniverseAuthorityReconciliation");
+        assertEquals(
+                "com.m3.backport.M3JepUniverseAuthorityReconciliation",
+                activated.getRecipeList().getFirst().getName());
     }
 
     @Test
