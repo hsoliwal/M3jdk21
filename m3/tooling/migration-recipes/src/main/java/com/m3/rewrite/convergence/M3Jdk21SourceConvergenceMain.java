@@ -120,8 +120,16 @@ public final class M3Jdk21SourceConvergenceMain {
         String beforeHash = sha256(before);
 
         try {
+            Parsed parsed = parse(checkedPath, before);
+            if (parsed.hold()) {
+                return hold(checkedPath, beforeHash, parsed.message());
+            }
+
             Stage inventory =
-                    apply(new M3InventoryPureIntAtomCandidates(), checkedPath, before, 1);
+                    apply(
+                            new M3InventoryPureIntAtomCandidates(),
+                            parsed.source(),
+                            1);
             if (inventory.hold()) {
                 return hold(checkedPath, beforeHash, inventory.message());
             }
@@ -130,7 +138,10 @@ public final class M3Jdk21SourceConvergenceMain {
             }
 
             Stage atomized =
-                    apply(new M3AtomizePureIntReturnRecipe(), checkedPath, before, 1);
+                    apply(
+                            new M3AtomizePureIntReturnRecipe(),
+                            inventory.source(),
+                            1);
             if (atomized.hold()) {
                 return hold(checkedPath, beforeHash, atomized.message());
             }
@@ -138,7 +149,6 @@ public final class M3Jdk21SourceConvergenceMain {
             Stage patternized =
                     apply(
                             new M3PatternizePureIntAtomRecipe(),
-                            checkedPath,
                             atomized.source(),
                             1);
             if (patternized.hold()) {
@@ -148,7 +158,6 @@ public final class M3Jdk21SourceConvergenceMain {
             Stage documented =
                     apply(
                             new M3DocumentPureIntAtomRecipe(),
-                            checkedPath,
                             patternized.source(),
                             1);
             if (documented.hold()) {
@@ -158,7 +167,6 @@ public final class M3Jdk21SourceConvergenceMain {
             Stage fixedPoint =
                     apply(
                             new M3Java21ConvergenceRecipe(),
-                            checkedPath,
                             documented.source(),
                             8);
             if (fixedPoint.hold()) {
@@ -171,7 +179,7 @@ public final class M3Jdk21SourceConvergenceMain {
                         "composite convergence changed the staged postimage");
             }
 
-            String after = documented.source();
+            String after = documented.source().printAll();
             boolean changed = !before.equals(after);
             return new FileReceipt(
                     checkedPath,
@@ -210,7 +218,7 @@ public final class M3Jdk21SourceConvergenceMain {
         };
     }
 
-    private static Stage apply(Recipe recipe, String path, String source, int maxCycles) {
+    private static Parsed parse(String path, String source) {
         List<Throwable> errors = new ArrayList<>();
         InMemoryExecutionContext context = new InMemoryExecutionContext(errors::add);
         List<SourceFile> parsed =
@@ -222,15 +230,22 @@ public final class M3Jdk21SourceConvergenceMain {
                                 context)
                         .toList();
         if (!errors.isEmpty()) {
-            return Stage.hold(source, "parse error: " + compact(errors.getFirst()));
+            return Parsed.hold("parse error: " + compact(errors.getFirst()));
         }
         if (parsed.size() != 1 || !(parsed.getFirst() instanceof J.CompilationUnit)) {
-            return Stage.hold(source, "not a Java compilation unit");
+            return Parsed.hold("not a Java compilation unit");
         }
+        return Parsed.parsed(parsed.getFirst());
+    }
+
+    private static Stage apply(Recipe recipe, SourceFile source, int maxCycles) {
+        List<Throwable> errors = new ArrayList<>();
+        InMemoryExecutionContext context = new InMemoryExecutionContext(errors::add);
+        String path = normalized(source.getSourcePath());
 
         var run =
                 recipe.run(
-                        new InMemoryLargeSourceSet(parsed),
+                        new InMemoryLargeSourceSet(List.of(source)),
                         context,
                         maxCycles);
         if (!errors.isEmpty()) {
@@ -257,7 +272,7 @@ public final class M3Jdk21SourceConvergenceMain {
         if (!(after instanceof J.CompilationUnit)) {
             return Stage.hold(source, "FILE recipe downgraded Java LST");
         }
-        return Stage.changed(after.printAll());
+        return Stage.changed(after);
     }
 
     private static RunSummary write(Path output, List<FileReceipt> receipts) throws IOException {
@@ -467,16 +482,33 @@ public final class M3Jdk21SourceConvergenceMain {
         }
     }
 
-    private record Stage(String source, boolean changed, boolean hold, String message) {
-        static Stage unchanged(String source) {
+    private record Parsed(SourceFile source, boolean hold, String message) {
+        static Parsed parsed(SourceFile source) {
+            return new Parsed(Objects.requireNonNull(source, "source"), false, "");
+        }
+
+        static Parsed hold(String message) {
+            return new Parsed(null, true, compact(message));
+        }
+    }
+
+    private record Stage(SourceFile source, boolean changed, boolean hold, String message) {
+        Stage {
+            if (!hold) {
+                source = Objects.requireNonNull(source, "source");
+            }
+            message = compact(message);
+        }
+
+        static Stage unchanged(SourceFile source) {
             return new Stage(source, false, false, "");
         }
 
-        static Stage changed(String source) {
+        static Stage changed(SourceFile source) {
             return new Stage(source, true, false, "");
         }
 
-        static Stage hold(String source, String message) {
+        static Stage hold(SourceFile source, String message) {
             return new Stage(source, false, true, compact(message));
         }
     }
