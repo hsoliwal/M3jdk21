@@ -7,7 +7,7 @@ This tool is deliberately evidence-only. A commit message mentioning a JEP is a 
 not dependency closure and never a compatibility/admission decision. The resulting per-JEP path
 lists feed the existing exact JDK21↔donor file-delta / hash-pinned recipe generator.
 
-The complete released-change denominator remains inventory.py / compatibility_queue.py.
+The complete released JDK22-26 plus pinned JDK27-snapshot denominator remains inventory.py / compatibility_queue.py.
 """
 
 from __future__ import annotations
