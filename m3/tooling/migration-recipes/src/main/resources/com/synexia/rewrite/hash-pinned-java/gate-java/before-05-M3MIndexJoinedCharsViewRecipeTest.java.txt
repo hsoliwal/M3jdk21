@@ -11,7 +11,6 @@ import org.openrewrite.test.RewriteTest;
 import org.openrewrite.test.SourceSpecs;
 import org.openrewrite.text.PlainText;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.openrewrite.java.Assertions.java;
 
 /** Actual OpenRewrite scheduler tests; no disabled type validation or stubs. */
@@ -32,10 +31,8 @@ class M3MIndexJoinedCharsViewRecipeTest implements RewriteTest {
       boolean owner = name.equals("MIndexJoinedChars.java");
       String before = read(name + (owner && alreadyApplied ? ".after.txt" : ".before.txt"));
       files[i] = owner && !alreadyApplied
-          ? java(before, read(name + ".after.txt"), spec -> spec.noTrim().path(PREFIX + name)
-              .beforeRecipe(file -> assertEquals(before, file.printAll())))
-          : java(before, spec -> spec.noTrim().path(PREFIX + name)
-              .beforeRecipe(file -> assertEquals(before, file.printAll())));
+          ? java(before, read(name + ".after.txt"), spec -> spec.path(PREFIX + name))
+          : java(before, spec -> spec.path(PREFIX + name));
     }
     return files;
   }

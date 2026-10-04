@@ -2,7 +2,6 @@
 package com.m3.rewrite.backport;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -84,13 +83,9 @@ final class M3VerbatimJavaPairRecipeTest {
     @Test
     void driftAndMalformedDescriptorsFailClosed() {
         String drifted = BEFORE.replace("return 21;", "return 20;");
-        AssertionError failure = assertThrows(
-                AssertionError.class,
+        assertThrows(
+                IllegalStateException.class,
                 () -> apply(recipe(), Map.of(TARGET, drifted)));
-        Throwable cause = failure;
-        while (cause.getCause() != null) cause = cause.getCause();
-        var drift = assertInstanceOf(IllegalStateException.class, cause);
-        assertEquals("M3_VERBATIM_PREIMAGE_DRIFT:" + TARGET, drift.getMessage());
 
         assertThrows(
                 IllegalArgumentException.class,

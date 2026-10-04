@@ -1,3 +1,4 @@
+src/java.base/share/classes/module-info.java	aec8a9e19b03ad21d50513176571bb89d5a267dd6fe8825e204d884f36163d31	7fd7f4b25571bf13fc3e2048b87d730e8346e29102fd4a4159c0144699df55a8	00-module-info.java.txt
 src/jdk.compiler/share/classes/com/sun/tools/javac/code/Preview.java	44662f618e1c5f8257a5eb2f68e806f6fab48660b1b8911386d7807c61a14010	a8125e7682911aebee88b79df90902661c08b6938dc8584d2a4d9ca786f714ee	01-Preview.java.txt
 src/jdk.compiler/share/classes/com/sun/tools/javac/launcher/Fault.java	ABSENT	ea6dea5bdc8342d246a65e6520bb0bd8f5c1bc2a4050e4b21fb4a750b7395d01	02-Fault.java.txt
 src/jdk.compiler/share/classes/com/sun/tools/javac/launcher/MemoryClassLoader.java	ABSENT	28fca3222f297b7ebc25598cfff30423f721313845733dbeacdff62b491aeb9e	03-MemoryClassLoader.java.txt

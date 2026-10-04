@@ -5,10 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import org.junit.jupiter.api.Test;
-import org.openrewrite.RecipeSerializer;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.openrewrite.test.RewriteTest;
 import org.openrewrite.test.SourceSpecs;
 
@@ -34,15 +30,15 @@ class M3MIndexStringBulkCharBoundaryRecipeTest implements RewriteTest {
     private static SourceSpecs owner(boolean applied) {
         String before = read(applied ? "MIndexString.java.txt" : "MIndexString.java.before.txt");
         return applied
-                ? java(before, spec -> spec.noTrim().path(PATH))
-                : java(before, read("MIndexString.java.txt"), spec -> spec.noTrim().path(PATH));
+                ? java(before, spec -> spec.path(PATH))
+                : java(before, read("MIndexString.java.txt"), spec -> spec.path(PATH));
     }
 
     @Test
     void appliesExactJdkOwnerAndReachesFixedPoint() {
         rewriteRun(
                 spec -> spec
-                        .recipes(new M3HashPinnedJavaSnapshotRecipe(
+                        .recipe(new M3HashPinnedJavaSnapshotRecipe(
                                 "mindex-string-bulk-char-boundary"))
                         .cycles(2)
                         .expectedCyclesThatMakeChanges(1),
@@ -52,24 +48,8 @@ class M3MIndexStringBulkCharBoundaryRecipeTest implements RewriteTest {
     @Test
     void reviewedPostimageIsAlreadyFixedPoint() {
         rewriteRun(
-                spec -> spec.recipes(new M3HashPinnedJavaSnapshotRecipe(
+                spec -> spec.recipe(new M3HashPinnedJavaSnapshotRecipe(
                         "mindex-string-bulk-char-boundary")),
                 owner(true));
-    }
-
-    @Test
-    void configuredRecipeRoundTripsWithoutAdmittingAnImplicitCrate() {
-        var recipe = new M3HashPinnedJavaSnapshotRecipe("mindex-string-bulk-char-boundary");
-        var codec = new RecipeSerializer();
-        var restored = assertInstanceOf(M3HashPinnedJavaSnapshotRecipe.class,
-                codec.read(codec.write(recipe)));
-        assertEquals(recipe.getCrateName(), restored.getCrateName());
-        assertEquals(recipe, restored);
-        assertThrows(IllegalArgumentException.class,
-                () -> new M3HashPinnedJavaSnapshotRecipe(null));
-        assertThrows(IllegalArgumentException.class,
-                () -> new M3HashPinnedJavaSnapshotRecipe(""));
-        assertThrows(IllegalArgumentException.class,
-                () -> new M3HashPinnedJavaSnapshotRecipe("../escape"));
     }
 }

@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.GateJava
+displayName: Repair exact recipe proof sources
+description: Module-relative candidate repair; use migration-recipes as root. Preserve product APIs, all existing tests and quality thresholds.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: gate-java
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.GateMeta
+displayName: Repair exact source-lane metadata
+description: Repository-relative manifest repair and explicit module-info text lane. Target values remain exact; compiler product gates remain independent.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: gate-meta
