@@ -7,3 +7,4 @@ PROVENANCE.tsv	Source, fixture and engine identities
 VERIFY_CONTRACT.tsv	Required proof boundaries
 FINAL_REPORT.md	Exact delta and continuation without false full completion
 ACTION_QUEUE.tsv	Existing owners and open obligations
+EVIDENCE.tsv	Pinned source trees and separate executed/blocked hosted results

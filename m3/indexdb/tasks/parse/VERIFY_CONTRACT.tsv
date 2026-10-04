@@ -1,10 +1,14 @@
 gate	state	note
-inventory_and_diff	PASS	Master vs retained content inspected; actual source tree chosen
-source_syntax_and_hashes	PASS	Java21 compile; ordered exact manifests
-original_corruption_probes	REPRODUCED	24-byte count headers exhaust32MB; malformed UTF8 accepted
-candidate_corruption_probes	PASS	Same code/probes; candidate rejects all4
-first_hosted_JUnit	FAIL_1_OF_51	No skipped tests; nine new parser tests pass
-parent_oracle_correction	PENDING_REEXECUTION	Expected parent independently composed according to preexisting Javadoc
-full_DB_Maven_verify	PENDING_REEXECUTION	99percent unchanged; failures remain rejection
-OpenRewrite_replay	PENDING_EXECUTION	Run actual existing engines; syntax/patch replay not equivalent
-modified_JDK_jtreg_JNI	NOT_RUN	No java.base or HotSpot source edit
+inventory_and_source_diff	PASS	Retained content compared with master tree; missing owner restored explicitly
+ordered_template_hashes_and_config	PASS	4 manifests match source/postimages; XML/POM/JSON checks executed
+strict_Java21_compile	PASS	8 production files and direct probes; warnings treated as errors
+original_corruption_probes	REPRODUCED_4	24-byte headers exhaust32MB in3 separate JVMs; malformed UTF8 accepted
+candidate_corruption_probes	PASS_4	Identical probes reject malformed frames without OOM
+public_protected_API_comparison	PASS_8	javap outputs equal on original and candidate owners
+independent_parent_contract	PASS_ORIGINAL_AND_CANDIDATE	Original graph recomposes parent; no graph code change
+first_real_JUnit_run	FAIL_1_OF_51	9 new parser tests pass; one retained parent expectation fails; no skips
+subsequent_JUnit_rerun	NO_JOB_OBJECT	PR run37183817347; push run37183815512
+rerun_request	DENIED_403	This workflow run cannot be retried; no bypass attempted
+OpenRewrite_engine	NOT_RUN	Actual generator/composition/refusal tests supplied; still required
+current_JaCoCo_0.99	NOT_MEASURED	No exclusion or threshold change; retained first run stopped before report/check
+modified_JDK_jtreg_JNI	NOT_RUN	No java.base/HotSpot edit; not a completed runtime release
