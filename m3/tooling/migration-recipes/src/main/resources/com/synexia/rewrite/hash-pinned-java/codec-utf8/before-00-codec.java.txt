@@ -7,12 +7,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.EOFException;
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
-import java.nio.charset.CharacterCodingException;
-import java.nio.charset.CharsetDecoder;
-import java.nio.charset.CharsetEncoder;
-import java.nio.charset.CodingErrorAction;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,20 +16,11 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.TreeSet;
 
-/**
- * Compact deterministic V1 codec for one M3IndexDB semantic snapshot.
- *
- * <p>Pattern roles: lossless charset Adapter and payload-budget Specification.
- * Valid UTF-8 encoding is unchanged. Malformed persisted text and unpaired Java
- * surrogates are refused instead of silently replaced. Counts are checked against
- * the supplied payload before allocation; this is not a configurable memory quota.
- */
+/** Compact deterministic binary codec for one M3IndexDB semantic snapshot. */
 final class M3IndexDbSemanticCodec {
     private static final long MAGIC = 0x4d3349444253454dL; // M3IDBSEM
     private static final int VERSION = 1;
     private static final int SHA_BYTES = 32;
-    private static final int NODE_BYTES = 173;
-    private static final int EDGE_BYTES = 16;
     private static final int MAX_ROWS = 50_000_000;
     private static final int MAX_STRING_BYTES = 16 * 1024 * 1024;
 
@@ -46,12 +31,6 @@ final class M3IndexDbSemanticCodec {
         List<M3IndexDbSemanticNode> nodes = index.nodes();
         List<M3IndexDbSemanticEdge> edges = index.edges();
         StringTable strings = strings(nodes, edges);
-        count(strings.values().size(), "stringCount");
-        count(nodes.size(), "nodeCount");
-        count(edges.size(), "edgeCount");
-        CharsetEncoder encoder = StandardCharsets.UTF_8.newEncoder()
-                .onMalformedInput(CodingErrorAction.REPORT)
-                .onUnmappableCharacter(CodingErrorAction.REPORT);
 
         HashMap<String, Integer> nodeOrdinals =
                 new HashMap<>(Math.max(16, nodes.size() * 2));
@@ -69,7 +48,7 @@ final class M3IndexDbSemanticCodec {
                 out.writeInt(edges.size());
 
                 for (String value : strings.values()) {
-                    byte[] utf8 = utf8(value, encoder);
+                    byte[] utf8 = value.getBytes(StandardCharsets.UTF_8);
                     out.writeInt(utf8.length);
                     out.write(utf8);
                 }
@@ -127,15 +106,16 @@ final class M3IndexDbSemanticCodec {
             int nodeCount = count(in.readInt(), "nodeCount");
             int edgeCount = count(in.readInt(), "edgeCount");
 
-            long records = (long) nodeCount * NODE_BYTES + (long) edgeCount * EDGE_BYTES;
-            requireBytes(in.available(), (long) stringCount * Integer.BYTES + records);
-            CharsetDecoder decoder = StandardCharsets.UTF_8.newDecoder()
-                    .onMalformedInput(CodingErrorAction.REPORT)
-                    .onUnmappableCharacter(CodingErrorAction.REPORT);
             ArrayList<String> strings = new ArrayList<>(stringCount);
             for (int index = 0; index < stringCount; index++) {
-                long reserved = (long) (stringCount - index - 1) * Integer.BYTES + records;
-                strings.add(readText(in, decoder, reserved));
+                int length = in.readInt();
+                if (length < 0 || length > MAX_STRING_BYTES || length > in.available()) {
+                    throw new IllegalArgumentException(
+                            "invalid M3IndexDB semantic string length: " + length);
+                }
+                byte[] utf8 = in.readNBytes(length);
+                if (utf8.length != length) throw new EOFException("truncated semantic string");
+                strings.add(new String(utf8, StandardCharsets.UTF_8));
             }
 
             ArrayList<M3IndexDbSemanticNode> nodes = new ArrayList<>(nodeCount);
@@ -206,45 +186,6 @@ final class M3IndexDbSemanticCodec {
             throw new IllegalArgumentException(
                     "cannot decode M3IndexDB semantic payload",
                     impossible);
-        }
-    }
-
-    /** Reject impossible record budgets before allocating count-derived collections. */
-    private static void requireBytes(int available, long required) {
-        if (required > available) {
-            throw new IllegalArgumentException("semantic counts or lengths exceed payload");
-        }
-    }
-
-    /** Decode one string while reserving every remaining prefix and fixed record. */
-    private static String readText(DataInputStream in, CharsetDecoder decoder, long reserved)
-            throws IOException {
-        int length = in.readInt();
-        if (length < 0 || length > MAX_STRING_BYTES) {
-            throw new IllegalArgumentException(
-                    "invalid M3IndexDB semantic string length: " + length);
-        }
-        requireBytes(in.available(), reserved + length);
-        byte[] utf8 = in.readNBytes(length);
-        if (utf8.length != length) throw new EOFException("truncated semantic string");
-        return decoder.decode(ByteBuffer.wrap(utf8)).toString();
-    }
-
-    /** Encode valid Unicode using the JDK, never substitution or normalization. */
-    private static byte[] utf8(String value, CharsetEncoder encoder) {
-        if (value.length() > MAX_STRING_BYTES) {
-            throw new IllegalArgumentException("semantic string exceeds UTF-8 byte limit");
-        }
-        try {
-            ByteBuffer encoded = encoder.encode(CharBuffer.wrap(value));
-            if (encoded.remaining() > MAX_STRING_BYTES) {
-                throw new IllegalArgumentException("semantic string exceeds UTF-8 byte limit");
-            }
-            byte[] bytes = new byte[encoded.remaining()];
-            encoded.get(bytes);
-            return bytes;
-        } catch (CharacterCodingException malformed) {
-            throw new IllegalArgumentException("semantic string is not valid Unicode", malformed);
         }
     }
 

@@ -1,0 +1,31 @@
+{
+  "after": {
+    "count 12": {"exit": 0, "output": "COUNT_REJECTED\n"},
+    "count 16": {"exit": 0, "output": "COUNT_REJECTED\n"},
+    "count 20": {"exit": 0, "output": "COUNT_REJECTED\n"},
+    "fixtures /mnt/data/m3-db-next/fixed-fixtures": {"exit": 0, "output": "VALID_FIXTURES=128\n"},
+    "malformed": {"exit": 0, "output": "MALFORMED_REJECTED\n"},
+    "surrogate": {"exit": 0, "output": "SURROGATE_REJECTED\n"}
+  },
+  "base_commit": "9d9c9370e4cebbd6a87cb6ac60bf2917c4ea6f64",
+  "before": {
+    "count 12": {
+      "exit": 1,
+      "output": "Exception in thread \"main\" java.lang.OutOfMemoryError: Java heap space\n\tat java.base/java.util.ArrayList.<init>(ArrayList.java:156)\n\tat com.m3.indexdb.M3IndexDbSemanticCodec.decode(M3IndexDbSemanticCodec.java:109)\n\tat com.m3.indexdb.M3IndexDbSemanticIndex.decode(M3IndexDbSemanticIndex.java:182)\n\tat com.m3.indexdb.CodecProbe.main(CodecProbe.java:24)\n"
+    },
+    "count 16": {
+      "exit": 1,
+      "output": "Exception in thread \"main\" java.lang.OutOfMemoryError: Java heap space\n\tat java.base/java.util.ArrayList.<init>(ArrayList.java:156)\n\tat com.m3.indexdb.M3IndexDbSemanticCodec.decode(M3IndexDbSemanticCodec.java:121)\n\tat com.m3.indexdb.M3IndexDbSemanticIndex.decode(M3IndexDbSemanticIndex.java:182)\n\tat com.m3.indexdb.CodecProbe.main(CodecProbe.java:24)\n"
+    },
+    "count 20": {
+      "exit": 1,
+      "output": "Exception in thread \"main\" java.lang.OutOfMemoryError: Java heap space\n\tat java.base/java.util.ArrayList.<init>(ArrayList.java:156)\n\tat com.m3.indexdb.M3IndexDbSemanticCodec.decode(M3IndexDbSemanticCodec.java:160)\n\tat com.m3.indexdb.M3IndexDbSemanticIndex.decode(M3IndexDbSemanticIndex.java:182)\n\tat com.m3.indexdb.CodecProbe.main(CodecProbe.java:24)\n"
+    },
+    "fixtures /mnt/data/m3-db-next/base-fixtures": {"exit": 0, "output": "VALID_FIXTURES=128\n"},
+    "malformed": {"exit": 0, "output": "MALFORMED_ACCEPTED byteStable=false\n"},
+    "surrogate": {"exit": 0, "output": "SURROGATE_ACCEPTED roundTrip=false\n"}
+  },
+  "golden_sha256": "d972971c21142f82252f5cb912f7c17fee34af248767df251175228aa402c594",
+  "jdk": "Debian21.0.11+10",
+  "valid_v1_equal": 128
+}

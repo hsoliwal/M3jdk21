@@ -1,0 +1,8 @@
+source	identity	role
+M3IndexDB-PR79-executed-proof.zip	15b237ee4abec191fa4858832cf94ac3c9667b3f831bc9fa231e1763cd4d2bf5	Actual source and parent coverage artifact
+M3IndexDbSemanticCodec.java	316c3824409a29a0acc0d15fccca23132b317d36	Exact connector and artifact identity match
+M3HashPinnedJavaSnapshotRecipe.java	1c960db1d2f2f3cbf9acdfb9162e265597dfa03c	Existing recipe owner reused unchanged
+CharsetEncoder	https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/charset/CharsetEncoder.html	Reuse standard Java21 encoder in REPORT mode
+CharsetDecoder	https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/charset/CharsetDecoder.html	Reuse standard Java21 decoder in REPORT mode
+M3Scale(20261002-062112).txt	5ec31d51207bda02d2f1f9a7fcd940f2ae5e1bfc9f0ef9358139fe62b47f393b	Docs/inventory/contracts/proof canon
+original glue and tests	Apache-2.0	No external source body or new third-party dependency copied

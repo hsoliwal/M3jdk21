@@ -1,0 +1,11 @@
+key	value
+base_commit	9d9c9370e4cebbd6a87cb6ac60bf2917c4ea6f64
+base_pr	79
+scope	MODULE invalid-input tightening; one package-private implementation file
+original_codec_blob	316c3824409a29a0acc0d15fccca23132b317d36
+recipe	com.m3.rewrite.backport.CodecUtf8
+recipe_execution_root	m3/indexdb
+local_jdk	Debian OpenJDK21.0.11+10
+workers	1
+small_heap	-Xmx32m; isolated subprocesses
+canonical_promotion	NOT_PERFORMED

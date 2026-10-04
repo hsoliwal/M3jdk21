@@ -1,0 +1,11 @@
+gate	state	detail
+full_read_inventory	PASS	Pinned codec read; artifact SHA and source blob verified
+diff_static	PASS	Production diff captured; JSON and manifest parse/hash/order validation
+javac21	PASS	Real eight production sources and CodecProbe, strict warnings
+original_new_differential	PASS	128 valid V1 snapshots exactly equal
+small_heap	PASS	New decoder rejects each 50-million record header in32MB; original OOM reproduced
+malformed_text	PASS	Original lossy behavior reproduced; strict rejection after repair
+JUnit40	PENDING	Run inherited focused Maven CI without lowering coverage
+OpenRewrite4	PENDING	Exact replay, refusal, partial replay and recipe registration supplied
+coverage	PENDING	0.99 line and branch required; no green report claimed
+JDK_product_jtreg	NOT_APPLICABLE_TO_THIS_REPAIR	External semantic store only; overall JDK programme remains open

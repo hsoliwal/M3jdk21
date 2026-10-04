@@ -1,0 +1,7 @@
+priority	owner	state	exit
+P0	codec-utf8	LOCAL_PROBES_PASS	Execute real40-test JUnit CI and unchanged coverage gate
+P0	migration-recipes	OPEN	Execute CodecRecipeTest via existing reactor
+P1	M3IndexDB	OPEN	Recover remaining measured coverage and independent lifecycle/durability/concurrency work
+P1	existing OpenRewrite/JDT and partial-AST store	OPEN	Context-key invalidation, bounded persistent replay and real second-JVM source-tree proof
+P1	existing application database/framework owners	OPEN	Reviewed H2/JDBC/Spring templates; no mandatory java.base dependency
+P1	M3JDK21 backport queue	OPEN	Continue exact-head product builds/jtreg; codec fix is not programme completion
