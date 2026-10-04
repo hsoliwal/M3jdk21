@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
-"""Require selected Java backport targets to be normalized on both baseline and donor images."""
+"""Require selected Java backport targets to be normalized on baseline and donor images."""
 
 from __future__ import annotations
 
@@ -12,6 +12,28 @@ from typing import Sequence
 import release_donor_refs
 import source_convergence_gate
 import source_convergence_identity
+
+
+def _effective(
+    root: Path,
+    manifest: Path,
+    row: source_convergence_gate.Row,
+) -> str:
+    source_convergence_gate.require_converged(row)
+    source = source_convergence_gate.regular_file(root, row.path)
+    current = hashlib.sha256(source.read_bytes()).hexdigest()
+    if current != row.pre_sha256:
+        raise ValueError(
+            f"Java target preimage drift: {row.path}: {current} != {row.pre_sha256}"
+        )
+    if row.status == "CONVERGED_CHANGED":
+        candidate = source_convergence_gate.regular_file(manifest.parent, row.candidate)
+        actual = hashlib.sha256(candidate.read_bytes()).hexdigest()
+        if actual != row.post_sha256:
+            raise ValueError(
+                f"candidate postimage drift: {row.path}: {actual} != {row.post_sha256}"
+            )
+    return row.post_sha256
 
 
 def verify(
@@ -41,32 +63,58 @@ def verify(
         expected_revision=donor_ref,
     )
 
-    baseline_gate = source_convergence_gate.verify(
-        baseline_root.resolve(),
-        baseline_manifest.resolve(),
-        targets.resolve(),
-    )
-    donor_gate = source_convergence_gate.verify(
-        donor_root.resolve(),
-        donor_manifest.resolve(),
-        targets.resolve(),
-    )
-
+    baseline_root = baseline_root.resolve()
+    donor_root = donor_root.resolve()
+    baseline_manifest = baseline_manifest.resolve()
+    donor_manifest = donor_manifest.resolve()
+    baseline_rows = source_convergence_gate.load_manifest(baseline_manifest)
+    donor_rows = source_convergence_gate.load_manifest(donor_manifest)
     selected = source_convergence_gate.load_targets(targets.resolve())
     if not selected:
         raise ValueError("normalized pair gate selected zero Java targets")
 
+    evidence: list[str] = []
+    for target in selected:
+        donor_row = donor_rows.get(target)
+        if donor_row is None:
+            raise ValueError(f"missing donor SOURCE_CONVERGENCE row: {target}")
+        donor_effective = _effective(donor_root, donor_manifest, donor_row)
+
+        baseline_row = baseline_rows.get(target)
+        if baseline_row is None:
+            baseline_path = baseline_root / target
+            if baseline_path.exists() or baseline_path.is_symlink():
+                raise ValueError(
+                    f"baseline target exists without SOURCE_CONVERGENCE row: {target}"
+                )
+            baseline_effective = "ABSENT"
+        else:
+            baseline_effective = _effective(
+                baseline_root,
+                baseline_manifest,
+                baseline_row,
+            )
+
+        evidence.append(
+            "".join(
+                (
+                    target,
+                    baseline_effective,
+                    donor_effective,
+                    "ADDED" if baseline_effective == "ABSENT" else "PAIRED",
+                )
+            )
+        )
+
     digest = hashlib.sha256()
-    _frame(digest, "M3_NORMALIZED_SOURCE_PAIR_GATE_V1")
+    _frame(digest, "M3_NORMALIZED_SOURCE_PAIR_GATE_V2")
     _frame(digest, "jdk-21+35")
     _frame(digest, baseline_id.semantic_root)
-    _frame(digest, baseline_gate)
     _frame(digest, str(release))
     _frame(digest, donor_ref)
     _frame(digest, donor_id.semantic_root)
-    _frame(digest, donor_gate)
-    for path in selected:
-        _frame(digest, path)
+    for row in evidence:
+        _frame(digest, row)
     return digest.hexdigest()
 
 
