@@ -11,13 +11,14 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
-/** Preserves every current JEP/JBS/capability decision while assigning an A3 absorption lane. */
+/** Preserves every current JEP/JBS/capability/algorithm decision while assigning an A3 lane. */
 public final class A3Plan {
 
     public enum Kind {
         JEP,
         JBS,
-        CAP
+        CAP,
+        ALG
     }
 
     public enum Lane {
@@ -71,6 +72,7 @@ public final class A3Plan {
                 checkedRoot.resolve(
                         "m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"),
                 rows);
+        loadAlg(checkedRoot, rows);
         rows.sort(
                 Comparator.comparing((Row row) -> row.kind().ordinal())
                         .thenComparing(Row::release)
@@ -150,6 +152,22 @@ public final class A3Plan {
                             lane(fields[7]),
                             fields[5],
                             fields[9]));
+        }
+    }
+
+    private static void loadAlg(Path root, List<Row> rows) throws IOException {
+        for (A3Alg.Row algorithm : A3Alg.load(root)) {
+            rows.add(
+                    new Row(
+                            Kind.ALG,
+                            "",
+                            algorithm.atomId(),
+                            algorithm.technique(),
+                            algorithm.category(),
+                            algorithm.disposition(),
+                            lane(algorithm.disposition()),
+                            algorithm.githubRef(),
+                            algorithm.nextProof()));
         }
     }
 

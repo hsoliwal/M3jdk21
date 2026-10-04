@@ -43,10 +43,16 @@ class A3PlanTest {
                 capability_id	plane	candidate	evidence_type	evidence_ref	upstream_join_key	packaging_candidate	status	selected_for_distribution	next_proof
                 PACK-A3	TOOLING_PACK	A3 tooling	USER_REQUEST	R1	UNKNOWN	MAVEN	PENDING_ARTIFACT_PROOF	false	prove build
                 """);
+        Files.writeString(
+                backports.resolve("ALGORITHM_CATALOGUE.tsv"),
+                """
+                atom_id	category	technique	disposition	scope	target_owner	leetcode_ref	hackerrank_ref	geeksforgeeks_ref	github_ref	github_license	reuse_policy	next_proof
+                ALG-PREFIX-Z	STRING_SEARCH	Z_PREFIX	candidate-adapted	FILE	m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java	https://leetcode.com/problems/sum-of-scores-of-built-strings/	https://www.hackerrank.com/challenges/string-similarity/problem	https://www.geeksforgeeks.org/dsa/z-algorithm-linear-time-pattern-searching-algorithm/	https://github.com/hsoliwal/com.synexia	Apache-2.0	ADAPT_PERMISSIVE	prove UTF-16 owner reuse
+                """);
 
         List<A3Plan.Row> rows = A3Plan.load(root);
 
-        assertEquals(7, rows.size());
+        assertEquals(8, rows.size());
         assertEquals(
                 A3Plan.Lane.DIRECT,
                 require(rows, "JEP-485").lane());
@@ -71,6 +77,12 @@ class A3PlanTest {
         assertEquals(
                 "reject-compat",
                 require(rows, "JEP-486").disposition());
+        assertEquals(
+                A3Plan.Lane.ADAPT,
+                require(rows, "ALG-PREFIX-Z").lane());
+        assertEquals(
+                A3Plan.Kind.ALG,
+                require(rows, "ALG-PREFIX-Z").kind());
 
         A3Plan.write(root, Path.of("m3/build/a3/plan.tsv"));
         String plan =
@@ -78,6 +90,8 @@ class A3PlanTest {
         assertTrue(plan.contains("JEP-534"));
         assertTrue(plan.contains("\tSYSTEM\t"));
         assertTrue(plan.contains("PACK-A3"));
+        assertTrue(plan.contains("ALG-PREFIX-Z"));
+        assertTrue(plan.contains("\tALG-PREFIX-Z\t"));
     }
 
     private static A3Plan.Row require(
