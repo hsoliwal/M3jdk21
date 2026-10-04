@@ -6,11 +6,17 @@
   "files": {
     "src/hotspot/share/classfile/javaClasses.cpp": {
       "before": "ff253deee4139f38f05c8630d46f58a48fe8dcc41bccf7ded917f425224a96b4",
-      "after": "8f23cb683cb34fba46b0eadcfeb39898d42e267dcb7ae6e348c48bfd470b9936"
+      "after": "8f23cb683cb34fba46b0eadcfeb39898d42e267dcb7ae6e348c48bfd470b9936",
+      "superseded": [
+        "499114918b8036be7eb439ed7ade62906cfcb031fd634d865ddac946ebddfa35"
+      ]
     },
     "src/hotspot/share/classfile/javaClasses.hpp": {
       "before": "447d78f56780f1130b9d4c80691cb1f25456a2d9562b7817fab7d023fe5f380c",
-      "after": "c72e2f6fcec1665b2daadd4d288dd98b349d3955e38e8f17ef0476f66e3b5f02"
+      "after": "c72e2f6fcec1665b2daadd4d288dd98b349d3955e38e8f17ef0476f66e3b5f02",
+      "superseded": [
+        "3b40c5dac11d24e0d32147293618eff58bf9d476172dc3fbbe3f7e2cfa41aac5"
+      ]
     },
     "src/hotspot/share/classfile/javaClasses.inline.hpp": {
       "before": "cd3cd7eda9b081c174cd26ca26198e53ef79e7528d1634b29049fe246f5d13f9",
@@ -26,7 +32,10 @@
     },
     "src/hotspot/share/classfile/vmSymbols.hpp": {
       "before": "2f669bd835fc7c1696926f9e34e88e872a56c200b2511a537f1ec7344f3f1279",
-      "after": "093f375f1883f66b672bd3eba0b4d50be86925fd92de1ae348fae1101ed6823e"
+      "after": "093f375f1883f66b672bd3eba0b4d50be86925fd92de1ae348fae1101ed6823e",
+      "superseded": [
+        "eeffc686c1eef000be5e3be5eb02e13257c744a63ea926762e9d4749fadecc67"
+      ]
     },
     "src/hotspot/share/gc/shared/stringdedup/stringDedup.cpp": {
       "before": "23b3aa46e740e746f05b483e371c627a6ec629026638b53085af8f4cb82cb333",
@@ -42,7 +51,10 @@
     },
     "src/hotspot/share/prims/jni.cpp": {
       "before": "e809d78f4eec22f6140fa057a13f1b7787c137bceda9db242fa1cd083ed5f9a9",
-      "after": "82eec22a87598470669a05f2fc2581191f738ea3bafe6448c5ce43c39ab7c66b"
+      "after": "82eec22a87598470669a05f2fc2581191f738ea3bafe6448c5ce43c39ab7c66b",
+      "superseded": [
+        "95f131c664bf993f457d3ea53bdfe0850f842d82c5a42644a979d724580522f4"
+      ]
     },
     "src/hotspot/share/prims/jvmtiTagMap.cpp": {
       "before": "90c0d0142bed7c19c936979be1121cf85e80bb220a73afc5b6215427849621a2",
@@ -62,7 +74,10 @@
     },
     "src/hotspot/share/services/diagnosticCommand.cpp": {
       "before": "d1f20b59d79da2633ff7e7318e3df9cd5553f0a069dfd16d144a88477e3aef6b",
-      "after": "b0e5a34c68f8a8d8160358164eddcb1699d67246831095a28045c54fa94c7e52"
+      "after": "b0e5a34c68f8a8d8160358164eddcb1699d67246831095a28045c54fa94c7e52",
+      "superseded": [
+        "4673fdbcfde7930471ba9bc50dc69334570db017479a9531bf58776a705d400f"
+      ]
     },
     "src/hotspot/share/services/finalizerService.cpp": {
       "before": "8f3a66cdde9a8456ea6d2c6a03e87fc277a347a2c0b3890db91aac7a4521f4ac",
@@ -70,7 +85,10 @@
     },
     "src/java.base/share/classes/java/lang/MIndexString.java": {
       "before": null,
-      "after": "21e373dbe450c7cd7b85ede587209f88b4546b1833a75c83370b213aa66d97d0"
+      "after": "21e373dbe450c7cd7b85ede587209f88b4546b1833a75c83370b213aa66d97d0",
+      "superseded": [
+        "1399b110a329f39ee1c40df2d9bb9af216d0e512a343b5fcf641fb67b39a3c87"
+      ]
     },
     "src/java.base/share/classes/java/lang/MIndexStringPool.java": {
       "before": null,
@@ -78,7 +96,10 @@
     },
     "src/java.base/share/classes/java/lang/String.java": {
       "before": "d1c20848c0c15235e9eb9dd7d30ddc80f8c042e6b53255a4552ac19ec40e6625",
-      "after": "068cc68a4968c1f8aed45d7ff73a9bfca8dc19723015cd739728cbd56d90150d"
+      "after": "068cc68a4968c1f8aed45d7ff73a9bfca8dc19723015cd739728cbd56d90150d",
+      "superseded": [
+        "5f1c19dd6d46c12f5b3baf72422ae7e68975e41df4303451a1db2299c8581601"
+      ]
     },
     "src/java.base/share/classes/java/lang/StringConcatHelper.java": {
       "before": "98e7d9baa0f0c2b25213b45a291564aefab82b8944e458b54ec08c2419c98695",
