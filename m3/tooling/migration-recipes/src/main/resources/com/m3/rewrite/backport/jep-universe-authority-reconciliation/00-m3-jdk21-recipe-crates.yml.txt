@@ -1,0 +1,118 @@
+name: M3 JDK21 OpenRewrite crate generation
+
+on:
+  push:
+    branches:
+      - "m3/jep-universe-authority-reconciled-20261004"
+    paths:
+      - "m3/backports/RELEASE_DONOR_REFS.tsv"
+      - "m3/backports/release_donor_refs.py"
+      - "m3/backports/file_delta_inventory.py"
+      - "m3/backports/generate_recipe_crates.py"
+      - "m3/backports/test_file_delta_inventory.py"
+      - "m3/backports/test_generate_recipe_crates.py"
+      - "m3/tooling/migration-recipes/**"
+      - ".github/workflows/m3-jdk21-recipe-crates.yml"
+  pull_request:
+    paths:
+      - "m3/backports/RELEASE_DONOR_REFS.tsv"
+      - "m3/backports/release_donor_refs.py"
+      - "m3/backports/file_delta_inventory.py"
+      - "m3/backports/generate_recipe_crates.py"
+      - "m3/backports/test_file_delta_inventory.py"
+      - "m3/backports/test_generate_recipe_crates.py"
+      - "m3/tooling/migration-recipes/**"
+      - ".github/workflows/m3-jdk21-recipe-crates.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generate:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - release: 22
+            ref_kind: TAG
+            donor_ref: jdk-22+36
+          - release: 23
+            ref_kind: TAG
+            donor_ref: jdk-23+37
+          - release: 24
+            ref_kind: TAG
+            donor_ref: jdk-24+36
+          - release: 25
+            ref_kind: TAG
+            donor_ref: jdk-25+36
+          - release: 26
+            ref_kind: TAG
+            donor_ref: jdk-26+35
+          - release: 27
+            ref_kind: COMMIT
+            donor_ref: f3701c80216900f3ded26f9de1befe43813be95c
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Verify donor-ref authority
+        run: |
+          cd m3/backports
+          python3 -m unittest -v test_release_donor_refs.py
+
+      - name: Fetch JDK21 baseline and exact donor
+        shell: bash
+        env:
+          DONOR_REF: ${{ matrix.donor_ref }}
+          REF_KIND: ${{ matrix.ref_kind }}
+        run: |
+          set -euo pipefail
+          mkdir "$RUNNER_TEMP/upstream-jdk"
+          git -C "$RUNNER_TEMP/upstream-jdk" init -q
+          git -C "$RUNNER_TEMP/upstream-jdk" remote add origin https://github.com/openjdk/jdk.git
+          git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch             --filter=blob:none --no-tags origin             "refs/tags/jdk-21+35:refs/tags/jdk-21+35"
+          if [ "$REF_KIND" = TAG ]; then
+            git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch               --filter=blob:none --no-tags origin               "refs/tags/$DONOR_REF:refs/tags/$DONOR_REF"
+          else
+            git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch               --filter=blob:none --no-tags origin "$DONOR_REF"
+          fi
+          git -C "$RUNNER_TEMP/upstream-jdk" rev-parse --verify 'jdk-21+35^{commit}'
+          git -C "$RUNNER_TEMP/upstream-jdk" rev-parse --verify "$DONOR_REF^{commit}"
+          printf 'UPSTREAM=%s\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
+
+      - name: Unit-test comparator and crate generator
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd m3/backports
+          python3 -m unittest -v test_file_delta_inventory.py test_generate_recipe_crates.py
+
+      - name: Generate exact comparison and FILE candidate crates
+        shell: bash
+        env:
+          RELEASE: ${{ matrix.release }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/output"
+          python3 m3/backports/file_delta_inventory.py             --repo "$UPSTREAM"             --release "$RELEASE"             --donor-refs m3/backports/RELEASE_DONOR_REFS.tsv             --out "$RUNNER_TEMP/output/JDK21_FILE_DELTAS.tsv"
+          python3 m3/backports/generate_recipe_crates.py             --repo "$UPSTREAM"             --release "$RELEASE"             --donor-refs m3/backports/RELEASE_DONOR_REFS.tsv             --all-candidates             --include-text             --crate-size 1             --out "$RUNNER_TEMP/output/openrewrite-bundle"
+          gzip -9 -k "$RUNNER_TEMP/output/JDK21_FILE_DELTAS.tsv"
+          cat "$RUNNER_TEMP/output/openrewrite-bundle/CRATES.tsv"
+
+      - name: Prove OpenRewrite recipe substrate on Java 21
+        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
+
+      - name: Upload candidate bundle
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-jdk21-openrewrite-jdk${{ matrix.release }}-${{ github.run_id }}
+          path: ${{ runner.temp }}/output
+          if-no-files-found: error
+          retention-days: 7
