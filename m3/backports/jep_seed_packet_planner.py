@@ -147,7 +147,7 @@ def plan(
                 writer.writerows(exclusions)
             crates = []
             state = (
-                "NO_FINAL_GA_DELTA"
+                "NO_DONOR_TREE_DELTA"
                 if not exclusions
                 else "ONLY_TYPED_EXCLUSIONS"
             )
