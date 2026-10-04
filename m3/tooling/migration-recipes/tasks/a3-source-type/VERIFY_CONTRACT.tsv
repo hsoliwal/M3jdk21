@@ -1,0 +1,6 @@
+order	gate	state
+1	targeted diff review	IMPLEMENTED
+2	static/source review	COMPLETED
+3	corrected hosted compiler	PENDING
+4	existing and strengthened JUnit	PENDING
+5	coverage and product acceptance	NOT_CLAIMED
