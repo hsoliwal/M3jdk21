@@ -21,27 +21,27 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.function.Predicate;
 
-/** Flat postfix Predicate composition with no nested predicate-wrapper chain. */
+/**
+ * Flat short-circuit Predicate composition.
+ *
+ * <p>Homogeneous AND or OR chains are flattened into one atom array. Mixed/negated compositions
+ * fall back to one ordinary predicate atom so Java Predicate short-circuit and exception behavior
+ * remains exact.</p>
+ */
 public final class MIndexPredicate<T> implements Predicate<T> {
-    private static final byte PUSH = 1;
-    private static final byte AND = 2;
-    private static final byte OR = 3;
-    private static final byte NOT = 4;
+    private static final byte SINGLE = 0;
+    private static final byte AND = 1;
+    private static final byte OR = 2;
 
     private final Predicate<Object>[] atoms;
-    private final byte[] code;
-    private final int[] atomIndex;
-    private final int maxStack;
+    private final byte mode;
+    private final boolean negated;
 
     @SuppressWarnings("unchecked")
-    private MIndexPredicate(
-            Predicate<?>[] atoms,
-            byte[] code,
-            int[] atomIndex) {
+    private MIndexPredicate(Predicate<?>[] atoms, byte mode, boolean negated) {
         this.atoms = (Predicate<Object>[]) atoms;
-        this.code = code;
-        this.atomIndex = atomIndex;
-        this.maxStack = validate(code);
+        this.mode = mode;
+        this.negated = negated;
     }
 
     public static <T> MIndexPredicate<T> of(Predicate<? super T> predicate) {
@@ -52,59 +52,61 @@ public final class MIndexPredicate<T> implements Predicate<T> {
             return typed;
         }
         return new MIndexPredicate<>(
-                new Predicate<?>[] {predicate},
-                new byte[] {PUSH},
-                new int[] {0});
+                new Predicate<?>[] {predicate}, SINGLE, false);
     }
 
     @Override
     public boolean test(T value) {
-        long stack = 0L;
-        int depth = 0;
-        for (int index = 0; index < code.length; index++) {
-            switch (code[index]) {
-                case PUSH -> {
-                    if (atoms[atomIndex[index]].test(value)) {
-                        stack |= 1L << depth;
-                    } else {
-                        stack &= ~(1L << depth);
-                    }
-                    depth++;
+        boolean result;
+        if (mode == AND) {
+            result = true;
+            for (Predicate<Object> atom : atoms) {
+                if (!atom.test(value)) {
+                    result = false;
+                    break;
                 }
-                case AND, OR -> {
-                    boolean right = ((stack >>> (depth - 1)) & 1L) != 0L;
-                    boolean left = ((stack >>> (depth - 2)) & 1L) != 0L;
-                    depth -= 2;
-                    stack = lowBits(stack, depth);
-                    boolean result = code[index] == AND ? left && right : left || right;
-                    if (result) {
-                        stack |= 1L << depth;
-                    }
-                    depth++;
-                }
-                case NOT -> stack ^= 1L << (depth - 1);
-                default -> throw new AssertionError(code[index]);
             }
+        } else if (mode == OR) {
+            result = false;
+            for (Predicate<Object> atom : atoms) {
+                if (atom.test(value)) {
+                    result = true;
+                    break;
+                }
+            }
+        } else {
+            result = atoms[0].test(value);
         }
-        return (stack & 1L) != 0L;
+        return negated ? !result : result;
     }
 
     @Override
     public MIndexPredicate<T> and(Predicate<? super T> other) {
-        return combine(other, AND);
+        Objects.requireNonNull(other);
+        MIndexPredicate<T> right = MIndexPredicate.of(other);
+        if (mergeable(AND) && right.mergeable(AND)) {
+            return new MIndexPredicate<>(
+                    concat(atoms, right.atoms), AND, false);
+        }
+        return MIndexPredicate.of(
+                value -> this.test(value) && other.test(value));
     }
 
     @Override
     public MIndexPredicate<T> or(Predicate<? super T> other) {
-        return combine(other, OR);
+        Objects.requireNonNull(other);
+        MIndexPredicate<T> right = MIndexPredicate.of(other);
+        if (mergeable(OR) && right.mergeable(OR)) {
+            return new MIndexPredicate<>(
+                    concat(atoms, right.atoms), OR, false);
+        }
+        return MIndexPredicate.of(
+                value -> this.test(value) || other.test(value));
     }
 
     @Override
     public MIndexPredicate<T> negate() {
-        byte[] joinedCode = Arrays.copyOf(code, code.length + 1);
-        int[] joinedIndex = Arrays.copyOf(atomIndex, atomIndex.length + 1);
-        joinedCode[code.length] = NOT;
-        return new MIndexPredicate<>(atoms.clone(), joinedCode, joinedIndex);
+        return new MIndexPredicate<>(atoms, mode, !negated);
     }
 
     public int atomCount() {
@@ -112,63 +114,24 @@ public final class MIndexPredicate<T> implements Predicate<T> {
     }
 
     public int instructionCount() {
-        return code.length;
+        return atoms.length
+                + (atoms.length > 1 ? atoms.length - 1 : 0)
+                + (negated ? 1 : 0);
     }
 
     public int maximumStackDepth() {
-        return maxStack;
+        return 1;
     }
 
-    private MIndexPredicate<T> combine(Predicate<? super T> other, byte logical) {
-        MIndexPredicate<T> right = MIndexPredicate.of(other);
-        int atomOffset = atoms.length;
-        Predicate<?>[] joinedAtoms =
-                Arrays.copyOf(atoms, Math.addExact(atoms.length, right.atoms.length));
-        System.arraycopy(right.atoms, 0, joinedAtoms, atomOffset, right.atoms.length);
-
-        int codeLength = Math.addExact(Math.addExact(code.length, right.code.length), 1);
-        byte[] joinedCode = Arrays.copyOf(code, codeLength);
-        int[] joinedIndex = Arrays.copyOf(atomIndex, codeLength);
-        System.arraycopy(right.code, 0, joinedCode, code.length, right.code.length);
-        for (int index = 0; index < right.atomIndex.length; index++) {
-            joinedIndex[code.length + index] =
-                    right.code[index] == PUSH
-                            ? Math.addExact(atomOffset, right.atomIndex[index])
-                            : 0;
-        }
-        joinedCode[codeLength - 1] = logical;
-        return new MIndexPredicate<>(joinedAtoms, joinedCode, joinedIndex);
+    private boolean mergeable(byte requestedMode) {
+        return !negated && (mode == SINGLE || mode == requestedMode);
     }
 
-    private static int validate(byte[] code) {
-        int depth = 0;
-        int maximum = 0;
-        for (byte opcode : code) {
-            if (opcode == PUSH) {
-                maximum = Math.max(maximum, ++depth);
-                if (maximum > 63) {
-                    throw new IllegalArgumentException("predicate stack exceeds 63 entries");
-                }
-            } else if (opcode == AND || opcode == OR) {
-                if (depth < 2) {
-                    throw new IllegalArgumentException("malformed predicate program");
-                }
-                depth--;
-            } else if (opcode == NOT) {
-                if (depth < 1) {
-                    throw new IllegalArgumentException("malformed predicate program");
-                }
-            } else {
-                throw new IllegalArgumentException("unknown predicate opcode");
-            }
-        }
-        if (depth != 1) {
-            throw new IllegalArgumentException("malformed predicate program");
-        }
-        return maximum;
-    }
-
-    private static long lowBits(long value, int count) {
-        return count == 0 ? 0L : value & ((1L << count) - 1L);
+    private static Predicate<?>[] concat(
+            Predicate<?>[] left, Predicate<?>[] right) {
+        Predicate<?>[] result =
+                Arrays.copyOf(left, Math.addExact(left.length, right.length));
+        System.arraycopy(right, 0, result, left.length, right.length);
+        return result;
     }
 }
