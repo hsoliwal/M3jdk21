@@ -192,6 +192,58 @@ jobs:
             -Dtest=M3Jdk8347112BackportRecipeTest,M3Jdk8364182BackportRecipeTest,M3Jdk8374808BackportRecipeTest,M3Jdk8367584JfrOptionsHelpBackportRecipeTest,M3Jdk8368692PasswordSystemInBackportRecipeTest \
             -Dsurefire.failIfNoSpecifiedTests=false test
 
+      - name: Export candidate-only backport recipe DAG
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/m3-backport-dag"
+          python3 m3/backports/export_recipe_dag.py \
+            --output "$RUNNER_TEMP/m3-backport-dag/BACKPORT_RECIPE_DAG.tsv" \
+            --root-output "$RUNNER_TEMP/m3-backport-dag/BACKPORT_RECIPE_DAG_ROOT.txt"
+          python3 - "$RUNNER_TEMP/m3-backport-dag/BACKPORT_RECIPE_DAG.tsv" <<'PY'
+          import csv
+          import pathlib
+          import sys
+
+          path = pathlib.Path(sys.argv[1])
+          with path.open(encoding="utf-8", newline="") as stream:
+              rows = list(csv.DictReader(stream, delimiter="\t"))
+
+          if not rows:
+              raise SystemExit("empty backport recipe DAG")
+          if any(row["manifest_mutation_authority"] != "false" for row in rows):
+              raise SystemExit("queue export acquired mutation authority")
+          if any(row["promotion_authority"] != "false" for row in rows):
+              raise SystemExit("queue export acquired promotion authority")
+          apply = [row for row in rows if row["pass_id"] == "apply"]
+          if not apply or any(row["declared_source_changing"] != "true" for row in apply):
+              raise SystemExit("apply source-changing contract drift")
+          unexpected_ready = [
+              row["identity"]
+              for row in apply
+              if row["execution_ready"] == "true"
+              and row["proof_status"] not in {"VERIFIED", "PASS", "GREEN"}
+          ]
+          if unexpected_ready:
+              raise SystemExit(f"unverified execution-ready nodes: {unexpected_ready}")
+          print(
+              "PASS: candidate recipe DAG",
+              f"items={len(apply)}",
+              f"nodes={len(rows)}",
+              f"ready={sum(row['execution_ready'] == 'true' for row in apply)}",
+          )
+          PY
+
+      - name: Upload backport recipe DAG evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3jdk21-backport-recipe-dag
+          path: |
+            ${{ runner.temp }}/m3-backport-dag/BACKPORT_RECIPE_DAG.tsv
+            ${{ runner.temp }}/m3-backport-dag/BACKPORT_RECIPE_DAG_ROOT.txt
+          if-no-files-found: error
+          retention-days: 14
+
       - name: jcmd completion runtime smoke
         shell: bash
         run: |
