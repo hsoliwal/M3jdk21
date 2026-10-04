@@ -1,6 +1,6 @@
 type: specs.openrewrite.org/v1beta/recipe
 name: com.m3.M3ReleaseJepDenominator
 displayName: Converge authoritative released JEP denominator
-description: Join ten exact one-file denominator atoms at MODULE scope.
+description: Join eleven exact one-file denominator atoms at MODULE scope.
 recipeList:
   - com.m3.rewrite.backport.M3ReleaseJepDenominatorRecipe
