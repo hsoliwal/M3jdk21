@@ -34,7 +34,7 @@ jobs:
           trap - EXIT
           python3 m3/runtime-integration/char-array-copy/recipe/apply.py --check
       - name: Verify OpenRewrite convergence DAG
-        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
+        run: mvn -B -ntp -f m3/pom.xml -pl tooling/migration-recipes -am clean verify
       - name: Build and exercise immutable foundation
         run: ./m3/build.sh
       - name: Compare pinned Synexia content and range contract

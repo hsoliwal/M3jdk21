@@ -4,8 +4,20 @@ on:
   push:
     branches:
       - aix/jdk22-27-backports-20261002
+      - "m3/jdk21-*"
     paths:
       - "m3/backports/**"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/**"
+      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/**"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/**"
+      - "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/**"
+      - "src/hotspot/share/jfr/dcmd/jfrDcmds.cpp"
+      - "src/hotspot/share/jfr/dcmd/jfrDcmds.hpp"
+      - "src/hotspot/share/jfr/recorder/service/jfrOptionSet.cpp"
+      - "test/jdk/jdk/jfr/startupargs/TestOptionsHelp.java"
+      - "src/java.base/share/classes/sun/security/util/Password.java"
+      - "src/java.base/share/conf/security/java.security"
+      - "test/jdk/sun/security/tools/keytool/AllowSystemIn.java"
       - "make/modules/jdk.jcmd/Copy.gmk"
       - "src/jdk.jcmd/share/conf/bash-completion/jcmd"
       - "src/jdk.javadoc/share/classes/jdk/javadoc/internal/doclets/formats/html/DocFilesHandlerImpl.java"
@@ -42,6 +54,17 @@ on:
   pull_request:
     paths:
       - "m3/backports/**"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/**"
+      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/**"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/**"
+      - "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/**"
+      - "src/hotspot/share/jfr/dcmd/jfrDcmds.cpp"
+      - "src/hotspot/share/jfr/dcmd/jfrDcmds.hpp"
+      - "src/hotspot/share/jfr/recorder/service/jfrOptionSet.cpp"
+      - "test/jdk/jdk/jfr/startupargs/TestOptionsHelp.java"
+      - "src/java.base/share/classes/sun/security/util/Password.java"
+      - "src/java.base/share/conf/security/java.security"
+      - "test/jdk/sun/security/tools/keytool/AllowSystemIn.java"
       - "make/modules/jdk.jcmd/Copy.gmk"
       - "src/jdk.jcmd/share/conf/bash-completion/jcmd"
       - "src/jdk.javadoc/share/classes/jdk/javadoc/internal/doclets/formats/html/DocFilesHandlerImpl.java"
@@ -97,6 +120,8 @@ jobs:
           paths = (
               "m3/backports/README.md",
               "m3/backports/JEP_CATALOGUE.tsv",
+              "m3/backports/BACKPORT_PASSES.tsv",
+              "m3/backports/BACKPORT_WORK_QUEUE.tsv",
               "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv",
               "m3/backports/inventory.py",
               "m3/backports/pom.xml",
@@ -148,7 +173,7 @@ jobs:
       - name: Compile and syntax checks
         shell: bash
         run: |
-          python3 -m py_compile             m3/backports/inventory.py             m3/backports/test_inventory.py             m3/backports/verify.py
+          python3 -m compileall -q m3/backports
           python3 - <<'PY'
           import xml.etree.ElementTree as ET
           ET.parse("m3/backports/pom.xml")
@@ -160,11 +185,12 @@ jobs:
       - name: Tests and Maven recipe crate
         shell: bash
         run: |
-          python3 -m unittest -v m3/backports/test_inventory.py
+          python3 -m unittest discover -s m3/backports -p 'test_*.py' -v
           python3 m3/backports/verify.py --root .
           mvn -B -f m3/backports/pom.xml test
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
-            -Dtest=M3Jdk8347112BackportRecipeTest,M3Jdk8364182BackportRecipeTest,M3Jdk8374808BackportRecipeTest test
+          mvn -B -ntp -f m3/pom.xml -pl tooling/migration-recipes -am \
+            -Dtest=M3Jdk8347112BackportRecipeTest,M3Jdk8364182BackportRecipeTest,M3Jdk8374808BackportRecipeTest,M3Jdk8367584JfrOptionsHelpBackportRecipeTest,M3Jdk8368692PasswordSystemInBackportRecipeTest \
+            -Dsurefire.failIfNoSpecifiedTests=false test
 
       - name: jcmd completion runtime smoke
         shell: bash
@@ -215,7 +241,7 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             autoconf make gcc g++ zip unzip \
             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
-            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
+            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
 
       - name: Configure Java 21-compatible JDK
         shell: bash
@@ -258,7 +284,7 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             autoconf make gcc g++ zip unzip \
             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
-            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
+            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
 
       - name: Configure Java 21-compatible JDK
         shell: bash
@@ -307,7 +333,7 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             autoconf make gcc g++ zip unzip \
             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
-            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
+            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
 
       - name: Configure Java 21-compatible JDK
         shell: bash
@@ -336,3 +362,90 @@ jobs:
         run: |
           set -euo pipefail
           make JOBS=2 test TEST="test/jdk/java/security/KeyStore/TestKeyStoreBasic.java"
+
+  jfr-options-help-8367584:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Install focused OpenJDK build prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            autoconf make gcc g++ zip unzip \
+            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
+            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+
+      - name: Configure Java 21-compatible JDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash configure \
+            --with-boot-jdk="$JAVA_HOME" \
+            --with-debug-level=release \
+            --with-jvm-variants=server \
+            --disable-warnings-as-errors
+
+      - name: Build image with FlightRecorderOptions help leaf
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 images
+
+      - name: Run focused JFR startup help jtreg proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 test TEST="test/jdk/jdk/jfr/startupargs/TestOptionsHelp.java"
+
+  password-systemin-8368692:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Install focused OpenJDK build prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            autoconf make gcc g++ zip unzip \
+            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
+            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+
+      - name: Configure Java 21-compatible JDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash configure \
+            --with-boot-jdk="$JAVA_HOME" \
+            --with-debug-level=release \
+            --with-jvm-variants=server \
+            --disable-warnings-as-errors
+
+      - name: Build image with password System.in policy leaf
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 images
+
+      - name: Run focused password policy jtreg proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 test TEST="test/jdk/sun/security/tools/keytool/AllowSystemIn.java"
+

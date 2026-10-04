@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "m3/jdk21-compatible-backport-convergence-20261003"
+      - "m3/jdk21-*"
     paths:
       - "m3/backports/file_delta_inventory.py"
       - "m3/backports/generate_recipe_crates.py"
@@ -95,7 +96,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f "$M3ROOT/m3/tooling/migration-recipes/pom.xml" clean verify
+          mvn -B -ntp -f "$M3ROOT/m3/pom.xml" -pl tooling/migration-recipes -am clean verify
 
       - name: Upload candidate bundle
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02

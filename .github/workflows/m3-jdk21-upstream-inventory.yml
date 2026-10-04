@@ -1,6 +1,18 @@
 name: M3 JDK21 upstream inventory
 
 on:
+  push:
+    branches:
+      - "m3/jdk21-*"
+    paths:
+      - ".github/workflows/m3-jdk21-upstream-inventory.yml"
+      - "m3/backports/inventory.py"
+      - "m3/backports/compatibility_queue.py"
+      - "m3/backports/test_compatibility_queue.py"
+      - "m3/backports/BACKPORT_PASSES.tsv"
+      - "m3/backports/BACKPORT_WORK_QUEUE.tsv"
+      - "m3/backports/BACKPORT_PASSES.tsv"
+      - "m3/backports/BACKPORT_WORK_QUEUE.tsv"
   pull_request:
     paths:
       - ".github/workflows/m3-jdk21-upstream-inventory.yml"
