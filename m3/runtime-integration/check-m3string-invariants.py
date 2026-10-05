@@ -66,6 +66,27 @@ for path, text in [
     if retained_arrays:
         fail(f"{path} retains array field(s): {retained_arrays!r}")
 
+# Byte/char projections must descend through canonical owner geometry, not walk M3 tuple
+# charAt one unit at a time.
+if "owner.getBytes(" not in m3:
+    fail("M3String byte projection no longer delegates to canonical owner")
+if "void getBytes(" not in owner:
+    fail("M3StringOwner bulk byte projection missing")
+for fragment in [
+    "void getChars(int start, int end, char[] destination, int destinationStart)",
+    "void getBytes(",
+    "UNSAFE.getByte(source)",
+]:
+    if fragment not in atom:
+        fail(f"M3StringAtom bulk address projection missing: {fragment}")
+for fragment in [
+    "void getBytes(",
+    "left.owner().getBytes(",
+    "right.owner().getBytes(",
+]:
+    if fragment not in tuple_:
+        fail(f"M3StringTuple bulk range projection missing: {fragment}")
+
 # Length-proportional operation precompute is separate and bounded. It may retain primitive
 # algorithm lanes but never canonical spelling/payload or strong M3 owner/value references.
 for forbidden in [
