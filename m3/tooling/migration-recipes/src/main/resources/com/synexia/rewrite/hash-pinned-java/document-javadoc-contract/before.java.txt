@@ -27,8 +27,7 @@ public final class M3DocumentPureIntAtomRecipe extends Recipe {
 
     @Override
     public String getDescription() {
-        return "Adds idempotent semantic memory for the admitted pure-int atom and IOP role while "
-                + "preserving any existing declaration Javadoc.";
+        return "Adds idempotent Javadoc semantic memory for the admitted pure-int atom and IOP role.";
     }
 
     @Override
@@ -51,27 +50,10 @@ public final class M3DocumentPureIntAtomRecipe extends Recipe {
                 int newline = Math.max(whitespace.lastIndexOf('\n'), whitespace.lastIndexOf('\r'));
                 String indent = newline < 0 ? whitespace : whitespace.substring(newline + 1);
                 List<Comment> comments = new ArrayList<>(candidate.getComments());
-                int javadoc = firstJavadoc(comments);
-                TextComment marker = javadoc < 0
-                        ? new TextComment(true, "* " + DOC_ID + " ", "\n" + indent, Markers.EMPTY)
-                        : new TextComment(true, " " + DOC_ID + " ", "\n" + indent, Markers.EMPTY);
-                if (javadoc < 0) {
-                    comments.add(marker);
-                } else {
-                    comments.add(javadoc, marker);
-                }
+                comments.add(new TextComment(true, "* " + DOC_ID + " ", "\n" + indent, Markers.EMPTY));
                 return candidate.withComments(comments);
             }
         };
-    }
-
-    private static int firstJavadoc(List<Comment> comments) {
-        for (int index = 0; index < comments.size(); index++) {
-            if (comments.get(index) instanceof Javadoc.DocComment) {
-                return index;
-            }
-        }
-        return -1;
     }
 
     private static boolean hasDocumentation(J.MethodDeclaration method) {
