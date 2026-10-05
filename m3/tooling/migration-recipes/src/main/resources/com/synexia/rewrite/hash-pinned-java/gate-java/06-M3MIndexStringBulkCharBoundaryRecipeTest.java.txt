@@ -43,7 +43,7 @@ class M3MIndexStringBulkCharBoundaryRecipeTest implements RewriteTest {
         rewriteRun(
                 spec -> spec
                         .recipes(new M3HashPinnedJavaSnapshotRecipe(
-                                "mindex-string-bulk-char-boundary"))
+                                "mindex-string-bulk-char-boundary", false))
                         .cycles(2)
                         .expectedCyclesThatMakeChanges(1),
                 owner(false));
@@ -53,13 +53,13 @@ class M3MIndexStringBulkCharBoundaryRecipeTest implements RewriteTest {
     void reviewedPostimageIsAlreadyFixedPoint() {
         rewriteRun(
                 spec -> spec.recipes(new M3HashPinnedJavaSnapshotRecipe(
-                        "mindex-string-bulk-char-boundary")),
+                        "mindex-string-bulk-char-boundary", false)),
                 owner(true));
     }
 
     @Test
     void configuredRecipeRoundTripsWithoutAdmittingAnImplicitCrate() {
-        var recipe = new M3HashPinnedJavaSnapshotRecipe("mindex-string-bulk-char-boundary");
+        var recipe = new M3HashPinnedJavaSnapshotRecipe("mindex-string-bulk-char-boundary", false);
         var codec = new RecipeSerializer();
         var restored = assertInstanceOf(M3HashPinnedJavaSnapshotRecipe.class,
                 codec.read(codec.write(recipe)));

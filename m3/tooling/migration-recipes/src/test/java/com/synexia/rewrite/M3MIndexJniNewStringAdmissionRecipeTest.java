@@ -42,7 +42,7 @@ class M3MIndexJniNewStringAdmissionRecipeTest implements RewriteTest {
         rewriteRun(
                 spec -> spec
                         .recipes(new M3HashPinnedJavaSnapshotRecipe(
-                                "mindex-jni-newstring-admission"))
+                                "mindex-jni-newstring-admission", false))
                         .cycles(2)
                         .expectedCyclesThatMakeChanges(1),
                 owner(false));
@@ -52,13 +52,13 @@ class M3MIndexJniNewStringAdmissionRecipeTest implements RewriteTest {
     void reviewedPostimageIsAlreadyFixedPoint() {
         rewriteRun(
                 spec -> spec.recipes(new M3HashPinnedJavaSnapshotRecipe(
-                        "mindex-jni-newstring-admission")),
+                        "mindex-jni-newstring-admission", false)),
                 owner(true));
     }
 
     @Test
     void configuredRecipeRoundTripsWithoutAdmittingAnImplicitCrate() {
-        var recipe = new M3HashPinnedJavaSnapshotRecipe("mindex-jni-newstring-admission");
+        var recipe = new M3HashPinnedJavaSnapshotRecipe("mindex-jni-newstring-admission", false);
         var codec = new RecipeSerializer();
         var restored = assertInstanceOf(M3HashPinnedJavaSnapshotRecipe.class,
                 codec.read(codec.write(recipe)));

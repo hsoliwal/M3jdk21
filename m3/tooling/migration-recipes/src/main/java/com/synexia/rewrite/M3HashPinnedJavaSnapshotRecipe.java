@@ -114,7 +114,7 @@ public final class M3HashPinnedJavaSnapshotRecipe
                         String hash = sha256(file.printAll());
                         synchronized (inventory) {
                             if (!admitted(file)) {
-                                inventory.conflicts.add("target is not a Java compilation unit: " + path);
+                                inventory.conflicts.add("target representation does not match configured Java snapshot mode: " + path);
                             }
                             if (inventory.seen.putIfAbsent(path, hash) != null) {
                                 inventory.conflicts.add("duplicate target: " + path);
