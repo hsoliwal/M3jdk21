@@ -18,7 +18,7 @@ flags=(-ea -esa -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-Cr
 for mode in mapped local;do
  path="$result/test.m3lex";expected=true
  if [[ $mode == local ]];then path="$result/missing.m3lex";expected=false;fi
- timeout 60 "$M3_TEST_JDK/bin/java" "${flags[@]}" -Djdk.mindex.lexicon="$path" -Dm3.expect.lexicon="$expected" MIndexStringInvariant > "$result/invariant-$mode.log" 2>&1
+ timeout 60 "$M3_TEST_JDK/bin/java" "${flags[@]}" -Djdk.mindex.lexicon="$path" -Dm3.expect.lexicon="$expected" M3StringInvariant > "$result/invariant-$mode.log" 2>&1
  cat "$result/invariant-$mode.log"
 done
 for compact in + -;do
@@ -26,7 +26,7 @@ for compact in + -;do
   lexicon="$result/missing.m3lex";opts=(-Dm3.expect.lexicon=false)
   if [[ $tier == mapped ]];then lexicon="$result/test.m3lex";opts=(-Dm3.expect.lexicon=true);fi
   if [[ $tier == shared ]];then lexicon="$result/shared-owner/arena.bin";opts=(-Dm3.expect.lexicon=true -Dm3.shared.owner=true);fi
-  timeout 300 "$M3_TEST_JDK/bin/java" "${flags[@]}" -XX:"$compact"CompactStrings -Djdk.mindex.lexicon="$lexicon" "${opts[@]}" MIndexIntegration > "$result/integration-$tier-$compact.log" 2>&1
+  timeout 300 "$M3_TEST_JDK/bin/java" "${flags[@]}" -XX:"$compact"CompactStrings -Djdk.mindex.lexicon="$lexicon" "${opts[@]}" M3StringIntegration > "$result/integration-$tier-$compact.log" 2>&1
   cat "$result/integration-$tier-$compact.log"
  done
  timeout 300 "$M3_TEST_JDK/bin/java" "${flags[@]}" -XX:"$compact"CompactStrings -Xcheck:jni -Dm3.jni="$result/libjoinprobe.so" SegmentedJniProbe > "$result/jni-$compact.log" 2>&1
@@ -41,5 +41,5 @@ done
 
 timeout 60 "$M3_TEST_JDK/bin/java" "${flags[@]}" -Xcheck:jni -Djdk.mindex.lexicon="$result/shared-owner/arena.bin" -agentpath:"$result/libsegmentsjvmti.so" -Dm3.jni="$result/libjoinprobe.so" MappedNativeProbe > "$result/mapped-native.log" 2>&1
 cat "$result/mapped-native.log"
-timeout 60 "$M3_TEST_JDK/bin/java" "${flags[@]}" -Xmx128m WeakAdmissionProbe > "$result/weak-admission.log" 2>&1
-cat "$result/weak-admission.log"
+timeout 60 "$M3_TEST_JDK/bin/java" "${flags[@]}" -Xmx128m CanonicalAdmissionProbe > "$result/canonical-admission.log" 2>&1
+cat "$result/canonical-admission.log"
