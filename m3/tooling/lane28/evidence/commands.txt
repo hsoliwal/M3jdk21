@@ -1,0 +1,8 @@
+Java: Temurin 21.0.8+9; Maven: 3.9.9; GCC: 13.3.0; Python jsonschema: 4.26.0
+mvn -o -B -ntp -Dmaven.repo.local=<san-maven-cache> -f m3/tooling/lane28/pom.xml verify # exit 0, 12 tests
+mvn -o -B -ntp -Dmaven.repo.local=<san-maven-cache> -f m3/tooling/lane28/pom.xml -Dlane28.sanitize=true verify # exit 0, 12 tests
+mvn -o -B -ntp -Dmaven.repo.local=<san-maven-cache> -f m3/tooling/tq/pom.xml verify # exit 0, 12 tests
+python3 m3/tooling/lane28/verify-plan.py # exit 0
+python3 m3/tooling/tq/verify-plan.py # exit 0
+python3 m3/migration/migration.py validate . --previous m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt.before # exit 0
+python3 m3/migration/migration.py complete . # expected exit 2

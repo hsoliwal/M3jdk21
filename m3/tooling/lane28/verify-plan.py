@@ -41,16 +41,17 @@ for row in rows:
 for row in rows:
     assert (CRATE / 'target/generated' / row['path']).read_bytes() == row['after'], row['path']
 
-before_path = CRATE / 'src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt.before'
+before_path = CRATE / 'src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt.before'
 before = json.loads(before_path.read_text())
 after = json.loads(next(row['after'] for row in rows if row['path'] == 'm3/docs/name-mapping.json'))
 retained = copy.deepcopy(after)
-record = retained['migration']['records'].pop()
-assert record['id'] == 'synexia.counterpart.MIndexRegexTrigramQuery'
+added = retained['migration']['records'][-5:]
+assert all(row['id'].startswith('synexia.collections.') for row in added)
+del retained['migration']['records'][-5:]
 assert retained == before, 'Existing mapping authority must be retained in full'
 
 events = []
-with tempfile.TemporaryDirectory(prefix='m3-tq-custody-') as temporary:
+with tempfile.TemporaryDirectory(prefix='m3-lane28-custody-') as temporary:
     root = Path(temporary)
     for guard in plan['guards']:
         path = root / guard['path']
@@ -94,7 +95,7 @@ with tempfile.TemporaryDirectory(prefix='m3-tq-custody-') as temporary:
     guard.write_bytes(original)
     assert sealed.execute(plan_path, root)['state'] == 'before'
 
-result = {'schema': 'm3.tq-custody/1', 'plan_sha256': plan['plan_sha256'],
+result = {'schema': 'm3.lane28-custody/1', 'plan_sha256': plan['plan_sha256'],
           'generated_outputs': len(rows), 'retained_records': len(before['migration']['records']),
           'retained_gates': len(before['migration']['gates']), 'events': events}
 (CRATE / 'target/custody.json').write_text(json.dumps(result, indent=2) + '\n')

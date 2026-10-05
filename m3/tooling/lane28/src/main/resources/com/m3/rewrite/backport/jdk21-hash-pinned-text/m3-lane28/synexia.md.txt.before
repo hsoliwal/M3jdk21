@@ -1,15 +1,3 @@
-## Synexia Lane28 collection kernels
-
-Apache-2.0 applies to jdk.internal.mindex.M3Address28, M3IntLane28, M3LongLane28,
-M3BitLane28, M3Bits and the M3BitLane28.c libjava peer.
-Copyright 2026 Hitesh Soliwal and contributors.
-
-Adapted from the complete Synexia segmented primitive-lane sources, including
-lazy rank/select counts and their mutation maintenance. Changes: JDK internal
-package/names and libjava JNI symbol/header. Exact originals, source revisions,
-LICENSE, NOTICE, hashes and reproduction are retained under m3/tooling/lane28.
-Existing OpenJDK and other third-party notices retain their scope.
-
 ## Synexia TQ precompute kernel
 
 Apache-2.0 applies to jdk.internal.mindex.M3TQ and its nested types.

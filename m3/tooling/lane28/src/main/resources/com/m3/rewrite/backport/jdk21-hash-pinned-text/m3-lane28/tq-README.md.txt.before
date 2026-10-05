@@ -132,15 +132,3 @@ internal package, and the explicit canonical-backing reader. The native oracle
 changes its JNI include and generated test symbol prefix. The distribution
 notice scopes these files; existing OpenJDK and other donor licenses remain in
 force. No challenge-site solution or newly found third-party code was copied.
-
-## Serial port follow-ups
-
-A later port may append mappings and distribution notices. On such a tree, run
-`python3 m3/tooling/tq/verify-plan.py` after this crate's Maven gate. It verifies
-all TQ-owned product/test/workflow bytes exactly, permits only additive shared
-mapping/naming/notice content, and replays the complete historical eight-output
-plan in an isolated fixture for apply/fixed-point/rollback/refusal checks.
-A raw historical `recipe.py check/apply/rollback` against the evolved live tree
-correctly refuses; roll back subsequent packets first or use a matching fixture.
-The parent receipt remains historical evidence for its pinned tree. The Lane28
-receipt records the TQ rerun against the successor verifier and shared mapping.

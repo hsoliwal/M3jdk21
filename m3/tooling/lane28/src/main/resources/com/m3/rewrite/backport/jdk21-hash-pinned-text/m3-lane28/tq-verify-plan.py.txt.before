@@ -14,36 +14,13 @@ sealed = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(sealed)
 plan_path = CRATE / 'plan.json'
 plan, rows = sealed.sealed_plan(plan_path)
-sealed.observe_guards(ROOT, plan)
-# These three documents have shared ownership across serial port packets. Their
-# historical postimages remain byte-exact in the replay fixture below. The live
-# tree may append other ports, but must retain all this packet's authority.
-shared = {'m3/docs/name-mapping.json', 'm3/docs/counterpart-naming.md',
-          'src/java.base/share/legal/synexia.md'}
-for row in rows:
-    current = (ROOT / row['path']).read_bytes()
-    if row['path'] not in shared:
-        assert current == row['after'], row['path']
-    elif row['path'] == 'm3/docs/name-mapping.json':
-        current_map = json.loads(current)
-        expected_map = json.loads(row['after'])
-        ids = {r['id'] for r in expected_map['migration']['records']}
-        projected = copy.deepcopy(current_map)
-        projected['migration']['records'] = [r for r in projected['migration']['records'] if r['id'] in ids]
-        assert projected == expected_map, 'Existing mapping records/gates/authority changed'
-        assert len({r['id'] for r in current_map['migration']['records']}) == len(current_map['migration']['records'])
-    elif row['path'] == 'm3/docs/counterpart-naming.md':
-        lines = iter(current.decode().splitlines())
-        assert all(any(candidate == line for candidate in lines)
-                   for line in row['after'].decode().splitlines()), 'Naming lineage removed'
-    else:
-        assert current.endswith(row['after']), 'Prior distribution notices changed' 
+assert sealed.execute(plan_path, ROOT)['state'] == 'after'
 for row in rows:
     assert (CRATE / 'target/generated' / row['path']).read_bytes() == row['after'], row['path']
 
 before_path = CRATE / 'src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt.before'
 before = json.loads(before_path.read_text())
-after = json.loads(next(row['after'] for row in rows if row['path'] == 'm3/docs/name-mapping.json'))
+after = json.loads((ROOT / 'm3/docs/name-mapping.json').read_text())
 retained = copy.deepcopy(after)
 record = retained['migration']['records'].pop()
 assert record['id'] == 'synexia.counterpart.MIndexRegexTrigramQuery'
