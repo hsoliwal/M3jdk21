@@ -17,6 +17,7 @@ import com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe;
 import com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe;
 import com.m3.rewrite.backport.M3VerbatimJavaPairRecipe;
 import com.m3.rewrite.backport.M3Jep458BackportRecipe;
+import com.m3.rewrite.backport.M3Jep493RuntimeLinkLeafRecipe;
 import com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe;
 import com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe;
 import com.synexia.rewrite.M3SegmentedLaneNativeRecipe;
@@ -26,7 +27,7 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(14, M3RecipeScopeRegistry.size());
+        assertEquals(15, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(InstallIndexStringCompatibility.class.getName()));
@@ -41,6 +42,7 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3Jdk21HashPinnedTextSnapshotRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3VerbatimJavaPairRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jep458BackportRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3Jep493RuntimeLinkLeafRecipe.class.getName()));
         var jep = M3RecipeScopeRegistry.require(M3Jep458BackportRecipe.class);
         assertEquals(M3EditScope.LIBRARY_API, jep.minimumScope());
         assertEquals(M3ContractMode.EXPLICIT_CONTRACT_CHANGE, jep.contractMode());
@@ -85,6 +87,13 @@ final class M3RecipeScopeDeclarationTest {
             assertEquals(M3EditScope.FILE, policy.resolve(List.of("src/main/java/a/A.java")));
             assertTrue(policy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
         }
+
+        var jep493 = M3RecipeScopeRegistry.require(M3Jep493RuntimeLinkLeafRecipe.class);
+        assertEquals(M3EditScope.MODULE, jep493.minimumScope());
+        assertEquals(M3EditScope.MODULE, jep493.resolve(List.of(
+                "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/JRTArchive.java")));
+        assertFalse(jep493.fileLocalMechanical(List.of(
+                "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/JRTArchive.java")));
 
         var jdkJavaPolicy = M3RecipeScopeRegistry.require(M3Jdk21HashPinnedSnapshotRecipe.class);
         assertEquals(
@@ -137,7 +146,8 @@ final class M3RecipeScopeDeclarationTest {
                 M3PatternizePureIntAtomRecipe.class,
                 M3DocumentPureIntAtomRecipe.class,
                 M3PureIntConvergenceRecipe.class,
-                M3Java21ConvergenceRecipe.class)) {
+                M3Java21ConvergenceRecipe.class,
+                M3Jep493RuntimeLinkLeafRecipe.class)) {
             assertEquals(
                     M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING,
                     M3RecipeScopeRegistry.require(recipe).contractMode());
