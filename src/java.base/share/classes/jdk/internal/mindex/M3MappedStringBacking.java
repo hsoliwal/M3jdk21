@@ -48,9 +48,10 @@ import java.util.zip.CRC32;
  * and UTF-8 payloads used by MIndex runtimes and addresses them through stable logical IDs rather
  * than process virtual addresses.</p>
  *
- * <p>The current implementation is a backing kernel, not a replacement for {@code String.value}.
- * It exists so a later java.lang.String/HotSpot patch can consume the canonical storage contract
- * without coupling String semantics to one transport.</p>
+ * <p>This remains a transport-neutral internal backing kernel. The M3JDK String runtime now
+ * consumes the same canonical owner/coordinate contract through {@code java.lang.M3String};
+ * this mapped implementation is one internal transport and is not itself {@code String.value}.
+ * Java byte/char arrays remain explicit compatibility shadows rather than canonical payload.</p>
  */
 public final class M3MappedStringBacking implements M3StringBacking {
     private static final int TEXT_MAGIC = 0x4d49584d; // MIXM
