@@ -4,11 +4,16 @@ package com.m3.rewrite.backport;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.openrewrite.InMemoryExecutionContext;
+import org.openrewrite.Parser;
 import org.openrewrite.SourceFile;
+import org.openrewrite.java.JavaParser;
 import org.openrewrite.internal.InMemoryLargeSourceSet;
 
 class M3SynexiaHandoffGuardRecipeTest {
@@ -52,4 +57,50 @@ class M3SynexiaHandoffGuardRecipeTest {
 
     assertTrue(errors.isEmpty(), errors.toString());
   }
+  @Test
+  void verifiesRealJoinedStreamsPacketAndTypedReceiverFixedPoint() throws Exception {
+    String crate = "synexia-mindex-joined-streams-v1";
+    String target =
+        "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStreams.java";
+    var guard = new M3SynexiaHandoffGuardRecipe(crate);
+    assertEquals(
+        "6f65a22ef31dc83bc1946564effea1a938b29301de8390dcaec2c7bd446b14ad",
+        guard.packetRoot());
+    assertTrue(M3Jdk21HashPinnedSnapshotRecipe.jdkJavaPath(target));
+
+    String source =
+        resource(
+            "/com/m3/rewrite/backport/jdk21-hash-pinned/"
+                + crate
+                + "/0000-MIndexJoinedStreams.java.txt");
+    var errors = new ArrayList<Throwable>();
+    var context = new InMemoryExecutionContext(errors::add);
+    List<SourceFile> parsed =
+        JavaParser.fromJavaVersion()
+            .build()
+            .parseInputs(
+                List.of(Parser.Input.fromString(Path.of(target), source)),
+                null,
+                context)
+            .toList();
+    assertEquals(1, parsed.size());
+    assertEquals(source, parsed.getFirst().printAll());
+
+    var javaRecipe = new M3Jdk21HashPinnedSnapshotRecipe(crate);
+    assertTrue(
+        javaRecipe
+            .run(new InMemoryLargeSourceSet(parsed), context)
+            .getChangeset()
+            .getAllResults()
+            .isEmpty());
+    assertTrue(errors.isEmpty(), errors.toString());
+  }
+
+  private static String resource(String name) throws IOException {
+    try (var input = M3SynexiaHandoffGuardRecipeTest.class.getResourceAsStream(name)) {
+      if (input == null) throw new IOException("missing bridge resource: " + name);
+      return new String(input.readAllBytes(), StandardCharsets.UTF_8);
+    }
+  }
+
 }
