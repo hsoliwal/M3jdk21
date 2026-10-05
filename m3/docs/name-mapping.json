@@ -5095,6 +5095,115 @@
         },
         "source_state": "partial",
         "observation": "Review and explicit root coverage obligations: m3/docs/jcc-source-handoff.md and m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json. Ledger replay tests are separate from capability acceptance; tests is empty intentionally."
+      },
+      {
+        "id": "synexia.mindex-joined-streams",
+        "kind": "dependency-reuse",
+        "status": "implemented-unverified",
+        "reason": "Byte-identical package-private UTF-16/byte joined-stream cursor owner is present under m3/ports and now bound to the guarded SYNEXIA_M3_HANDOFF_V1 bridge; focused receiver/JDK gates remain pending.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "aa37ab2d7bb851bb2e86f314225dc43e118df071",
+            "module": "synexia-indexstring",
+            "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStreams.java",
+            "symbol": "com.synexia.indexstring.MIndexJoinedStreams",
+            "signatures": [
+              "static java.io.InputStream bytes(java.nio.ByteBuffer[],int)",
+              "static java.io.Reader chars(java.nio.CharBuffer[],int)"
+            ],
+            "sha256": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
+            "git_blob_sha1": "6f350a84b954b2f80929252254a007652fc1d0d0",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "7652e327eccb9df658cbfaf2f6373a01c562b260",
+            "module": "m3/ports/indexstring",
+            "path": "m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStreams.java",
+            "symbol": "com.synexia.indexstring.MIndexJoinedStreams",
+            "signatures": [
+              "static java.io.InputStream bytes(java.nio.ByteBuffer[],int)",
+              "static java.io.Reader chars(java.nio.CharBuffer[],int)"
+            ],
+            "sha256": "a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80",
+            "git_blob_sha1": "6f350a84b954b2f80929252254a007652fc1d0d0",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/master"
+          }
+        ],
+        "owner": "Retained com.synexia.indexstring package-private stream adapter under m3/ports; no java.base owner or payload authority is introduced.",
+        "identity": {
+          "namespace": "No new text identity. Streams traverse caller-supplied immutable ByteBuffer/CharBuffer segment views.",
+          "generation": "Cursor state is reader-local; backing generation and lifetime remain owned by the supplied segment owners."
+        },
+        "contract": {
+          "differences": [
+            "Source and target implementation bytes are identical at the pinned revisions; no semantic adaptation is performed by the bridge."
+          ],
+          "compatibility_obligations": [
+            "Preserve InputStream/Reader read, skip, mark/reset, ready/available, close and exception behavior.",
+            "Do not flatten or retain a second joined text payload; the cursor only advances supplied immutable segment views.",
+            "Any future package/API adaptation must use a new mapped record and target-side differential tests."
+          ],
+          "public_surface": [
+            "Package-private helper only; no public JDK or JNI API is added."
+          ]
+        },
+        "format": {
+          "schema": "SYNEXIA_M3_HANDOFF_V1 packet for migration custody; runtime stream format unchanged.",
+          "abi": null,
+          "bootstrap": "Outside java.base and HotSpot; retained m3/ports compatibility owner."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Exact source bytes are admitted only through the guarded source handoff packet and hash-pinned typed Java receiver.",
+          "joins": "No payload join or canonicalization is performed by this owner.",
+          "outputs": "Ordinary InputStream/Reader cursors over existing segment buffers; caller-requested reads copy only into caller destinations.",
+          "cached_facts": "Reader-local position/mark metadata only; no process-global cache or semantic precompute."
+        },
+        "recipe": {
+          "id": "com.m3.rewrite.backport.SynexiaBridgeMindexJoinedStreamsV1",
+          "version": "SYNEXIA_M3_HANDOFF_V1",
+          "path": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-synexia-mindex-joined-streams-v1.yml",
+          "sha256": null,
+          "preconditions": [
+            "Source packet root 6f65a22ef31dc83bc1946564effea1a938b29301de8390dcaec2c7bd446b14ad validates at the pinned Synexia revision.",
+            "Target preimage or already-converged postimage SHA-256 is a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80.",
+            "Guard recipe validates packet/provenance before the typed Java snapshot receiver executes."
+          ],
+          "rollback": "Resource import is additive and fail-closed; product-source receiver is already at the identical postimage and fixed-point replay must produce no change."
+        },
+        "tests": [],
+        "provenance": {
+          "license": "Apache-2.0 SPDX notice retained in the byte-identical source/target file.",
+          "publication": "User-authorized Synexia source is transferred through an exact source/target handoff packet; no challenge-site or unrelated private source is included.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "aa37ab2d7bb851bb2e86f314225dc43e118df071",
+          "target_revision": "7652e327eccb9df658cbfaf2f6373a01c562b260",
+          "direction": "source-to-target",
+          "target_adaptations": [],
+          "pending": [
+            "Execute the focused Synexia exporter Maven/JUnit gate on the exact source bridge head.",
+            "Execute the focused M3JDK21 packet/import/typed-receiver Maven/JUnit gate on the exact destination bridge head.",
+            "Run applicable module/JDK runtime gates before any promotion beyond the retained m3/ports compatibility owner."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "This record establishes bridge custody and exact byte continuity, not java.base/HotSpot promotion. The existing target owner predates the bridge and is unchanged."
       }
     ]
   }
