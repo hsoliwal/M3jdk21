@@ -284,23 +284,7 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
     }
 
     static boolean jdkJavaPath(String value) {
-        if (value == null
-                || !(value.startsWith("src/")
-                        || value.startsWith("test/")
-                        || value.startsWith("m3/ports/"))
-                || !value.endsWith(".java")
-                || value.indexOf('\\') >= 0
-                || value.length() > 4096) {
-            return false;
-        }
-        for (String part : value.split("/", -1)) {
-            if (!part.matches("[A-Za-z0-9_$.-]+")
-                    || ".".equals(part)
-                    || "..".equals(part)) {
-                return false;
-            }
-        }
-        return value.chars().noneMatch(Character::isISOControl);
+        return M3Jdk21HandoffPaths.javaSource(value);
     }
 
     private static String normalized(Path path) {
