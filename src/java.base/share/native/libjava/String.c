@@ -60,10 +60,12 @@ static void m3_throw(JNIEnv *env, const char *name, const char *message) {
     }
 }
 
-static jmethodID m3_char_at_method(JNIEnv *env, jobject value) {
+static jmethodID m3_method(
+        JNIEnv *env, jobject value, const char *name, const char *signature)
+{
     jclass type = (*env)->GetObjectClass(env, value);
     if (type == NULL) return NULL;
-    return (*env)->GetMethodID(env, type, "charAt", "(I)C");
+    return (*env)->GetMethodID(env, type, name, signature);
 }
 
 JNIEXPORT jbyteArray JNICALL
@@ -87,38 +89,16 @@ Java_java_lang_M3String_nativeByteShadow(
     jbyteArray result = (*env)->NewByteArray(env, (jsize)byte_length);
     if (result == NULL || byte_length == 0) return result;
 
-    jmethodID char_at = m3_char_at_method(env, value);
-    if (char_at == NULL) return NULL;
+    jmethodID get_bytes = m3_method(env, value, "getBytes", "([BIIBI)V");
+    if (get_bytes == NULL) return NULL;
 
-    jbyte *bytes = (jbyte *)malloc((size_t)byte_length);
-    if (bytes == NULL) {
-        m3_throw(env, "java/lang/OutOfMemoryError", "M3 byte shadow");
-        return NULL;
-    }
-
-    uint16_t endian_test = UINT16_C(1);
-    int little_endian = *((uint8_t *)&endian_test) == 1u;
-    for (jint index = 0; index < length; index++) {
-        jchar unit = (*env)->CallCharMethod(env, value, char_at, start + index);
-        if ((*env)->ExceptionCheck(env)) {
-            free(bytes);
-            return NULL;
-        }
-        if (coder == 0) {
-            bytes[index] = (jbyte)unit;
-        } else {
-            jint at = index << 1;
-            if (little_endian) {
-                bytes[at] = (jbyte)unit;
-                bytes[at + 1] = (jbyte)(unit >> 8);
-            } else {
-                bytes[at] = (jbyte)(unit >> 8);
-                bytes[at + 1] = (jbyte)unit;
-            }
-        }
-    }
-    (*env)->SetByteArrayRegion(env, result, 0, (jsize)byte_length, bytes);
-    free(bytes);
+    jvalue args[5];
+    args[0].l = result;
+    args[1].i = start;
+    args[2].i = 0;
+    args[3].b = coder;
+    args[4].i = length;
+    (*env)->CallVoidMethodA(env, value, get_bytes, args);
     return (*env)->ExceptionCheck(env) ? NULL : result;
 }
 
@@ -138,21 +118,14 @@ Java_java_lang_M3String_nativeCharShadow(
     jcharArray result = (*env)->NewCharArray(env, length);
     if (result == NULL || length == 0) return result;
 
-    jmethodID char_at = m3_char_at_method(env, value);
-    if (char_at == NULL) return NULL;
-    jchar *chars = (jchar *)malloc((size_t)length * sizeof(jchar));
-    if (chars == NULL) {
-        m3_throw(env, "java/lang/OutOfMemoryError", "M3 char shadow");
-        return NULL;
-    }
-    for (jint index = 0; index < length; index++) {
-        chars[index] = (*env)->CallCharMethod(env, value, char_at, start + index);
-        if ((*env)->ExceptionCheck(env)) {
-            free(chars);
-            return NULL;
-        }
-    }
-    (*env)->SetCharArrayRegion(env, result, 0, length, chars);
-    free(chars);
+    jmethodID get_chars = m3_method(env, value, "getChars", "(II[CI)V");
+    if (get_chars == NULL) return NULL;
+
+    jvalue args[4];
+    args[0].i = start;
+    args[1].i = start + length;
+    args[2].l = result;
+    args[3].i = 0;
+    (*env)->CallVoidMethodA(env, value, get_chars, args);
     return (*env)->ExceptionCheck(env) ? NULL : result;
 }
