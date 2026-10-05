@@ -15,6 +15,7 @@ on:
   pull_request:
     paths:
       - "m3/backports/recipes/jep-485-gatherers/**"
+      - "m3/backports/JEP_CATALOGUE.tsv"
       - "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
       - "m3/tooling/recipe-catalogue.tsv"
       - "m3/tooling/migration-recipes/**"
