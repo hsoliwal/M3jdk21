@@ -99,6 +99,13 @@ for fragment in [
 ]:
     if fragment not in search_precompute:
         fail(f"M3 exact trigram search reuse missing: {fragment}")
+for fragment in [
+    "static long maximumRetainedPrimitiveBytes()",
+    "(long) SLOTS * MAX_PATTERN_UNITS * (Integer.BYTES + Long.BYTES)",
+    "(long) SOURCE_SLOTS * MAX_TRIGRAM_SOURCE_UNITS * Long.BYTES",
+]:
+    if fragment not in search_precompute:
+        fail(f"M3 search precompute memory ceiling missing: {fragment}")
 if "public boolean containsAll(Facts required)" not in tq:
     fail("M3TQ exact trigram fact containment missing")
 if "long[] trigram" in facts or "M3TQ.Facts" in facts:
