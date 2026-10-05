@@ -3223,6 +3223,11 @@ public final class String
      */
     public String replace(char oldChar, char newChar) {
         if (oldChar != newChar) {
+            M3String storage = m3();
+            if (storage != null) {
+                M3String replaced = storage.replace(oldChar, newChar);
+                return replaced == storage ? this : new String(replaced);
+            }
             byte[] currentValue = value();
             String ret = isLatin1() ? StringLatin1.replace(currentValue, oldChar, newChar)
                                     : StringUTF16.replace(currentValue, oldChar, newChar);
@@ -3385,6 +3390,14 @@ public final class String
         if (trgtLen > 0) {
             if (trgtLen == 1 && replLen == 1) {
                 return replace(trgtStr.charAt(0), replStr.charAt(0));
+            }
+
+            M3String storage = m3();
+            if (storage != null) {
+                M3String targetM3 = M3String.canonicalize(trgtStr);
+                M3String replacementM3 = M3String.canonicalize(replStr);
+                M3String replaced = storage.replace(targetM3, replacementM3);
+                return replaced == storage ? this : new String(replaced);
             }
 
             boolean thisIsLatin1 = this.isLatin1();
