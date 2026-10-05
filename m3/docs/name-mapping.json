@@ -135,6 +135,16 @@
       ]
     },
     {
+      "source": "com.synexia.indexstring.MIndexStringPrecomputation / ByteFacts",
+      "target": "java.lang.M3StringFacts + java.lang.M3String.encode / encodeNoRepl",
+      "status": "internal byte-projection adaptation",
+      "mapping_rule": "canonical facts drive caller-owned byte[] projection directly from owner+coordinate; byte[] is never canonical payload; checked/no-replacement exception contracts remain JDK21-authoritative",
+      "donor_lineage": [
+        "b9d35ce3c3c266fb3641352a07903563a3a86b81",
+        "f2f15f1aaa147cf1af556b0c148954178f971de6"
+      ]
+    },
+    {
       "source": "com.synexia.indexstring.nativebridge.MIndexUtf16Shadow",
       "target": "JNI String UTF-16/char shadow paths and java.lang.M3String.nativeCharShadow",
       "status": "native compatibility adaptation",
