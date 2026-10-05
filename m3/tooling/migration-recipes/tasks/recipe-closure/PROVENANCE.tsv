@@ -1,0 +1,10 @@
+kind	reference	identity	use
+source	PR114	081780ea02c11e8fd41a5445ac169b6a28ac5d25	Exact full source baseline
+artifact	run37255987007/artifact11322552678	sha256:a0662117e005bb2afce6c66678fcef7dd878d0ec142d09c2ee56bbf6f0601676	Source and build inputs;not passing proof
+public_donor	hsoliwal/M3jdk21#113	blob:3518924871cf5914432c2bc78b9d304655010cc0	Exact A3AlgorithmCatalogue repair;Apache2 header retained
+upstream	openrewrite/rewrite@v8.17.1/RemoveUnusedImports	blob:dc04cb11d4fa6c4cccd369a6a02a9fed1e41f156	Reuse installed recipe and NoMissingTypes guard;no source copied
+upstream_diagnostic	openrewrite/rewrite@v8.17.1/ReloadableJava21JavadocVisitor	blob:f1dd5fb23db2361670cb0073306a3782fa46d8e7	Investigated remaining Javadoc failure;no donor patch claimed
+prior_user_artifact	m3jdk21-descriptor-and-programme-status-20261005.zip	owner-before:f4b4144f104eb4816cb80a44c136fa90b8114dc4	Reviewed templates and8 tests reused;actual framework execution now performed
+jdk_api	Java21 Class.descriptorString	existing java.base public operation	Descriptor spelling oracle;no foreign VM implementation copied
+programme	tasks/map-utf/TODO.tsv	31 original rows unchanged	Programme denominator retained,not automatically promoted
+donor_intake	hsoliwal/M3jdk21#115	18a5143137c09aa607de7527dcfe8bfb5228354f	Separate community-fork intake;not included or declared complete here
