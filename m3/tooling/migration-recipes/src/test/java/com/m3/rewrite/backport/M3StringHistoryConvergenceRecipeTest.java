@@ -97,7 +97,10 @@ final class M3StringHistoryConvergenceRecipeTest {
                         "03-invariants.py.txt"),
                 text(
                         "src/java.base/share/classes/java/lang/String.java",
-                        "04-String.java.txt"));
+                        "04-String.java.txt"),
+                text(
+                        "src/java.base/share/native/libjava/String.c",
+                        "05-String.c.txt"));
     }
 
     private static SourceFile java(String path, String resource) {
