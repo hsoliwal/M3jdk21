@@ -41,6 +41,8 @@ public class SegmentedAllocation {
         }
         if(expectedM3&&canonicalOwners.size()!=1)
             throw new AssertionError("equal joins did not converge to one canonical tuple owner: "+canonicalOwners.size());
+        if(expectedM3&&shadowBytes!=0)
+            throw new AssertionError("M3 String retained compatibility payload bytes: "+shadowBytes);
         System.out.printf("{\"m3\":%s,\"joins\":%d,\"allocated_bytes\":%d,\"operation_ns\":%d,\"canonical_join_owners\":%d,\"compatibility_shadow_arrays\":%d,\"compatibility_shadow_bytes\":%d}%n",
             expectedM3,n,allocated,elapsed,canonicalOwners.size(),shadows.size(),shadowBytes);
     }
