@@ -2618,18 +2618,22 @@ public final class String
             int from = Math.max(fromIndex, 0);
             if (from >= storage.length()) return -1;
             if (Character.isBmpCodePoint(ch)) {
+                if (!storage.facts().mayContainCodeUnit((char) ch)) return -1;
                 for (int index = from; index < storage.length(); index++) {
                     if (storage.charAt(index) == (char) ch) return index;
                 }
                 return -1;
             }
             if (!Character.isValidCodePoint(ch)) return -1;
+            char highRequired = Character.highSurrogate(ch);
+            char lowRequired = Character.lowSurrogate(ch);
+            M3StringFacts facts = storage.facts();
+            if (!facts.mayContainCodeUnit(highRequired)
+                    || !facts.mayContainCodeUnit(lowRequired)) return -1;
             for (int index = from; index < storage.length() - 1; index++) {
                 char high = storage.charAt(index);
                 char low = storage.charAt(index + 1);
-                if (Character.isHighSurrogate(high)
-                        && Character.isLowSurrogate(low)
-                        && Character.toCodePoint(high, low) == ch) return index;
+                if (high == highRequired && low == lowRequired) return index;
             }
             return -1;
         }
@@ -2682,18 +2686,22 @@ public final class String
         M3String storage = m3();
         if (storage != null) {
             if (Character.isBmpCodePoint(ch)) {
+                if (!storage.facts().mayContainCodeUnit((char) ch)) return -1;
                 for (int index = beginIndex; index < endIndex; index++) {
                     if (storage.charAt(index) == (char) ch) return index;
                 }
                 return -1;
             }
             if (!Character.isValidCodePoint(ch)) return -1;
+            char highRequired = Character.highSurrogate(ch);
+            char lowRequired = Character.lowSurrogate(ch);
+            M3StringFacts facts = storage.facts();
+            if (!facts.mayContainCodeUnit(highRequired)
+                    || !facts.mayContainCodeUnit(lowRequired)) return -1;
             for (int index = beginIndex; index + 1 < endIndex; index++) {
                 char high = storage.charAt(index);
                 char low = storage.charAt(index + 1);
-                if (Character.isHighSurrogate(high)
-                        && Character.isLowSurrogate(low)
-                        && Character.toCodePoint(high, low) == ch) return index;
+                if (high == highRequired && low == lowRequired) return index;
             }
             return -1;
         }
@@ -2768,18 +2776,22 @@ public final class String
             int from = Math.min(fromIndex, storage.length() - 1);
             if (from < 0) return -1;
             if (Character.isBmpCodePoint(ch)) {
+                if (!storage.facts().mayContainCodeUnit((char) ch)) return -1;
                 for (int index = from; index >= 0; index--) {
                     if (storage.charAt(index) == (char) ch) return index;
                 }
                 return -1;
             }
             if (!Character.isValidCodePoint(ch)) return -1;
+            char highRequired = Character.highSurrogate(ch);
+            char lowRequired = Character.lowSurrogate(ch);
+            M3StringFacts facts = storage.facts();
+            if (!facts.mayContainCodeUnit(highRequired)
+                    || !facts.mayContainCodeUnit(lowRequired)) return -1;
             for (int index = Math.min(from, storage.length() - 2); index >= 0; index--) {
                 char high = storage.charAt(index);
                 char low = storage.charAt(index + 1);
-                if (Character.isHighSurrogate(high)
-                        && Character.isLowSurrogate(low)
-                        && Character.toCodePoint(high, low) == ch) return index;
+                if (high == highRequired && low == lowRequired) return index;
             }
             return -1;
         }
@@ -2891,8 +2903,23 @@ public final class String
         checkBoundsBeginEnd(beginIndex, endIndex, length());
         M3String sourceM3 = m3();
         if (sourceM3 != null) {
-            int found = indexOf(str, beginIndex);
-            return found >= 0 && found + str.length() <= endIndex ? found : -1;
+            M3String targetM3 = str.m3();
+            if (targetM3 != null) {
+                return sourceM3.indexOf(targetM3, beginIndex, endIndex);
+            }
+            int targetLength = str.length();
+            if (targetLength == 0) return beginIndex;
+            if (targetLength > endIndex - beginIndex) return -1;
+            int limit = endIndex - targetLength;
+            char first = str.charAt(0);
+            for (int start = beginIndex; start <= limit; start++) {
+                if (sourceM3.charAt(start) != first) continue;
+                int index = 1;
+                while (index < targetLength
+                        && sourceM3.charAt(start + index) == str.charAt(index)) index++;
+                if (index == targetLength) return start;
+            }
+            return -1;
         }
         return indexOf(value(), coder(), endIndex, str, beginIndex);
     }
@@ -2978,7 +3005,7 @@ public final class String
             if (start < 0) return -1;
             if (targetLength == 0) return start;
             M3String target = str.m3();
-            if (target != null && !storage.mayContain(target)) return -1;
+            if (target != null) return storage.lastIndexOf(target, fromIndex);
             for (int candidate = start; candidate >= 0; candidate--) {
                 int index = 0;
                 while (index < targetLength
