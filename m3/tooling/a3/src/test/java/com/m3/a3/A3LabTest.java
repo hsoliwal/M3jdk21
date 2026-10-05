@@ -3,6 +3,7 @@ package com.m3.a3;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -27,6 +28,7 @@ final class A3LabTest {
         assertTrue(results.stream().allMatch(A3Lab.Result::behaviorStable));
         assertTrue(results.stream().allMatch(A3Lab.Result::contractStable));
         assertTrue(results.stream().allMatch(A3Lab.Result::lexicalDataStable));
+        assertTrue(results.stream().allMatch(A3Lab.Result::regexMatrixStable));
         assertTrue(results.stream().anyMatch(A3Lab.Result::changed));
         assertTrue(
                 results.stream()
@@ -53,6 +55,51 @@ final class A3LabTest {
         assertTrue(firstTsv.contains("\tP>A\tA+P\t"));
         assertTrue(firstTsv.contains("\tA>P>A\tA+P\t"));
         assertTrue(firstTsv.contains("\tP>A>P\tA+P\t"));
+    }
+
+    @Test
+    void regexMatrixIsPrecompiledDeterministicAndPayloadSensitive() {
+        A3RegexMatrix.Matrix first =
+                A3RegexMatrix.evaluate(
+                        "private static int compute(int a, int b) { return (a+b)*31; }");
+        A3RegexMatrix.Matrix replay =
+                A3RegexMatrix.evaluate(
+                        "private static int compute(int a, int b) { return (a+b)*31; }");
+        A3RegexMatrix.Matrix other =
+                A3RegexMatrix.evaluate("plain payload without Java-looking structure");
+
+        assertEquals(first, replay);
+        assertEquals(A3RegexMatrix.patternCount(), first.patternCount());
+        assertEquals(A3RegexMatrix.fixedSubjectCount() + 1, first.subjectCount());
+        assertTrue(first.patternCount() >= 16);
+        assertTrue(first.subjectCount() >= 17);
+        assertTrue(first.matchedCells() > 0);
+        assertEquals(64, first.root().length());
+        assertNotEquals(first.root(), other.root());
+        assertTrue(
+                first.signals().stream()
+                        .anyMatch(signal -> signal.literalPrefix().equals("return (a+b)*31;")));
+        assertTrue(
+                first.signals().stream()
+                        .anyMatch(signal -> signal.literalAsciiMask() != 0L));
+    }
+
+    @Test
+    void inMemoryCompilerSurfacesDeliberateJavacFailure() {
+        IllegalStateException failure =
+                assertThrows(
+                        IllegalStateException.class,
+                        () ->
+                                A3MemoryCompiler.compile(
+                                        "m3.lab.Broken",
+                                        """
+                                        package m3.lab;
+                                        final class Broken {
+                                            static int probe() { return missing(); }
+                                        }
+                                        """));
+        assertTrue(failure.getMessage().contains("A3 javac rejected mastery source"));
+        assertTrue(failure.getMessage().contains("missing"));
     }
 
     @Test
