@@ -46,6 +46,28 @@ abstract sealed class M3StringOwner permits M3StringAtom, M3StringTuple {
         }
     }
 
+    void getBytes(
+            int start,
+            int end,
+            byte[] destination,
+            int destinationStart,
+            byte destinationCoder) {
+        Objects.checkFromToIndex(start, end, length);
+        int count = end - start;
+        Objects.checkFromIndexSize(
+                destinationStart << destinationCoder,
+                count << destinationCoder,
+                destination.length);
+        for (int source = start, target = destinationStart; source < end; source++, target++) {
+            char unit = charAt(source);
+            if (destinationCoder == String.LATIN1) {
+                destination[target] = (byte) unit;
+            } else {
+                StringUTF16.putChar(destination, target, unit);
+            }
+        }
+    }
+
     final M3StringFacts facts() {
         M3StringFacts current = facts;
         if (current != null) return current;
