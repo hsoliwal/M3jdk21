@@ -535,6 +535,7 @@ final class M3String implements CharSequence {
 
         M3StringSearchPrecompute.Plan plan = M3StringSearchPrecompute.prepare(checked);
         if (plan != null) {
+            if (!M3StringSearchPrecompute.mayContain(this, plan)) return -1;
             return M3StringSearchPrecompute.indexOf(this, checked, plan, from, end);
         }
 
@@ -559,6 +560,7 @@ final class M3String implements CharSequence {
 
         M3StringSearchPrecompute.Plan plan = M3StringSearchPrecompute.prepare(checked);
         if (plan != null) {
+            if (!M3StringSearchPrecompute.mayContain(this, plan)) return -1;
             return M3StringSearchPrecompute.lastIndexOf(this, checked, plan, maximumStart);
         }
 
