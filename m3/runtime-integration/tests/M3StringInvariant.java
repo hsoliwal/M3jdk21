@@ -38,6 +38,15 @@ public final class M3StringInvariant {
                 "M3-backed String retains no byte payload");
         check(alpha1.equals(alpha2), "empty VM sentinel preserves equality");
 
+        // A pre-existing/bootstrap literal may remain stock-flat for VM safety, but any new
+        // wrapper constructed after M3 activation must canonicalize it and retain only the
+        // zero-length compatibility sentinel.
+        String copiedLiteral = new String("bootstrap-copy-canonical");
+        Object copiedLiteralM3 = body(copiedLiteral);
+        check(atom(owner(copiedLiteralM3)), "post-activation String copy owns M3 scalar");
+        check(((byte[]) STRING_VALUE.get(copiedLiteral)).length == 0,
+                "post-activation String copy discards flat payload");
+
         String right1 = fresh("gamma");
         String right2 = fresh("gamma");
         String joined1 = alpha1.concat(right1);
