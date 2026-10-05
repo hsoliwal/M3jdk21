@@ -128,6 +128,42 @@ class FileDeltaInventoryTest(unittest.TestCase):
             self.assertIn("SOURCE_SEALED_NATIVE_PAIR", text)
             self.assertIn("native_source", text)
 
+    def test_main_requires_only_selected_donor_refs(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            repo = Path(temp)
+            subprocess.run(("git", "init", "-q", str(repo)), check=True)
+            self.git(repo, "config", "user.email", "fixture@example.invalid")
+            self.git(repo, "config", "user.name", "Fixture")
+
+            self.write(repo, "src/A.java", "final class A { int x() { return 21; } }\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk21")
+            self.git(repo, "tag", "jdk-21+35")
+
+            self.write(repo, "src/A.java", "final class A { int x() { return 24; } }\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk24")
+            self.git(repo, "tag", "jdk-24+36")
+
+            output = repo / "jdk24.tsv"
+            self.assertEqual(
+                0,
+                self.mod.main(
+                    (
+                        "--repo",
+                        str(repo),
+                        "--release",
+                        "24",
+                        "--out",
+                        str(output),
+                    )
+                ),
+            )
+            text = output.read_text(encoding="utf-8")
+            self.assertIn("jdk-24+36", text)
+            self.assertNotIn("jdk-22+36", text)
+            self.assertNotIn("jdk-23+37", text)
+
     def test_fixed_jdk21_baseline_is_used_for_every_donor(self) -> None:
         self.assertEqual((21, "jdk-21+35"), self.mod.BASELINE)
         self.assertEqual(

@@ -74,13 +74,13 @@ jobs:
                "0a58cffe88ba823e71fcdcca64b784ed04ca5398"],
               text=True,
           ).splitlines()
-          if len(expected) != 250:
-              raise SystemExit(f"expected 250 pinned paths, found {len(expected)}")
+          if len(expected) != 251:
+              raise SystemExit(f"expected 251 pinned paths, found {len(expected)}")
           if sorted(expected) != sorted(actual):
               missing = sorted(set(actual) - set(expected))
               extra = sorted(set(expected) - set(actual))
               raise SystemExit(f"JEP467 path denominator drift missing={missing} extra={extra}")
-          print("JEP467_IMPLEMENTATION_PATHS=250")
+          print("JEP467_IMPLEMENTATION_PATHS=251")
           PY
 
       - name: Review implementation-to-GA follow-up delta
@@ -133,7 +133,7 @@ jobs:
             --include-text \
             --out target/jep467/file-atoms
 
-      - name: Account for all 250 selected paths
+      - name: Account for all 251 selected paths
         shell: bash
         run: |
           set -euo pipefail

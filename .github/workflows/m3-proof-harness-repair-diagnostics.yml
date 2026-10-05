@@ -1,0 +1,37 @@
+name: M3 proof harness repair diagnostics
+
+on:
+  push:
+    branches:
+      - "m3/proof-harness-repair-20261005"
+    paths:
+      - "m3/backports/**"
+      - ".github/workflows/m3-jep467-markdown-inventory.yml"
+      - ".github/workflows/m3-proof-harness-repair-diagnostics.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-backport-harness:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile Python proof harness
+        run: python3 -m compileall -q m3/backports
+
+      - name: Run complete backport unit suite
+        run: python3 -m unittest discover -v -s m3/backports -p 'test_*.py'
+
+      - name: Verify JEP 467 path denominator is nonempty and unique
+        shell: bash
+        run: |
+          set -euo pipefail
+          paths=m3/backports/recipes/jep-467-markdown/PATHS.txt
+          test -s "$paths"
+          test "$(grep -Ev '^[[:space:]]*(#|$)' "$paths" | wc -l)" -gt 0
+          test "$(grep -Ev '^[[:space:]]*(#|$)' "$paths" | sort | uniq -d | wc -l)" -eq 0
+          echo "JEP467_PATH_COUNT=$(grep -Ev '^[[:space:]]*(#|$)' "$paths" | wc -l)"
