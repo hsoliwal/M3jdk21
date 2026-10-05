@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.M3StringRuntimeV1
+displayName: Converge M3 String runtime ownership
+description: >-
+  Source-sealed M3JDK21 convergence. Synexia is donor provenance only; M3JDK21 owns
+  java.lang.M3String, String integration, HotSpot and JNI.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: synexia-m3string-runtime-v1
