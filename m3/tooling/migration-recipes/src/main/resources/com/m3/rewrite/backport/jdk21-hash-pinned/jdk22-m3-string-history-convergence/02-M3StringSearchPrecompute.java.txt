@@ -8,6 +8,7 @@ package java.lang;
 
 import java.lang.ref.WeakReference;
 import java.util.concurrent.atomic.AtomicReferenceArray;
+import jdk.internal.mindex.M3TQ;
 
 /**
  * Bounded length-proportional operation precompute for canonical M3 String patterns.
@@ -20,8 +21,15 @@ final class M3StringSearchPrecompute {
     private static final int SLOTS = 256;
     private static final int SLOT_MASK = SLOTS - 1;
     private static final int MAX_PATTERN_UNITS = 8_192;
+    private static final int SOURCE_SLOTS = 64;
+    private static final int SOURCE_SLOT_MASK = SOURCE_SLOTS - 1;
+    private static final int MIN_TRIGRAM_SOURCE_UNITS = 256;
+    private static final int MAX_TRIGRAM_SOURCE_UNITS = 32_768;
+
     private static final AtomicReferenceArray<Entry> CACHE =
             new AtomicReferenceArray<>(SLOTS);
+    private static final AtomicReferenceArray<SourceEntry> SOURCE_CACHE =
+            new AtomicReferenceArray<>(SOURCE_SLOTS);
 
     private M3StringSearchPrecompute() {}
 
@@ -51,9 +59,42 @@ final class M3StringSearchPrecompute {
             prefix[index] = matched;
         }
 
-        Plan plan = new Plan(length, prefix);
+        M3TQ.Facts trigrams = length >= 3 ? M3TQ.precompute(pattern, MAX_PATTERN_UNITS) : null;
+        Plan plan = new Plan(length, prefix, trigrams);
         CACHE.set(slot, new Entry(new WeakReference<>(owner), coordinate, plan));
         return plan;
+    }
+
+    static boolean mayContain(M3String source, Plan plan) {
+        if (plan.trigrams == null
+                || source.length() < MIN_TRIGRAM_SOURCE_UNITS
+                || source.length() > MAX_TRIGRAM_SOURCE_UNITS) {
+            return true;
+        }
+        return sourceFacts(source).containsAll(plan.trigrams);
+    }
+
+    private static M3TQ.Facts sourceFacts(M3String source) {
+        M3StringOwner owner = source.owner();
+        long coordinate = source.coordinate();
+        int slot = sourceSlot(owner, coordinate);
+        SourceEntry entry = SOURCE_CACHE.get(slot);
+        if (entry != null
+                && entry.owner.get() == owner
+                && entry.coordinate == coordinate
+                && entry.utf16Length == source.length()) {
+            return entry.facts;
+        }
+
+        M3TQ.Facts facts = M3TQ.precompute(source, MAX_TRIGRAM_SOURCE_UNITS);
+        SOURCE_CACHE.set(
+                slot,
+                new SourceEntry(
+                        new WeakReference<>(owner),
+                        coordinate,
+                        source.length(),
+                        facts));
+        return facts;
     }
 
     static int indexOf(
@@ -111,14 +152,45 @@ final class M3StringSearchPrecompute {
     static final class Plan {
         final int patternLength;
         final int[] prefix;
+        final M3TQ.Facts trigrams;
 
-        Plan(int patternLength, int[] prefix) {
+        Plan(int patternLength, int[] prefix, M3TQ.Facts trigrams) {
             this.patternLength = patternLength;
             this.prefix = prefix;
+            this.trigrams = trigrams;
         }
 
         long retainedPrimitiveBytes() {
-            return (long) prefix.length * Integer.BYTES;
+            return (long) prefix.length * Integer.BYTES
+                    + (trigrams == null ? 0L : (long) trigrams.keyCount() * Long.BYTES);
+        }
+    }
+
+    private static int sourceSlot(M3StringOwner owner, long coordinate) {
+        long mixed = Long.rotateLeft(coordinate, 11)
+                ^ Long.rotateLeft(owner.structuralHash64, 29)
+                ^ Integer.toUnsignedLong(System.identityHashCode(owner));
+        mixed ^= mixed >>> 33;
+        mixed *= 0xc4ceb9fe1a85ec53L;
+        mixed ^= mixed >>> 33;
+        return ((int) mixed) & SOURCE_SLOT_MASK;
+    }
+
+    private static final class SourceEntry {
+        final WeakReference<M3StringOwner> owner;
+        final long coordinate;
+        final int utf16Length;
+        final M3TQ.Facts facts;
+
+        SourceEntry(
+                WeakReference<M3StringOwner> owner,
+                long coordinate,
+                int utf16Length,
+                M3TQ.Facts facts) {
+            this.owner = owner;
+            this.coordinate = coordinate;
+            this.utf16Length = utf16Length;
+            this.facts = facts;
         }
     }
 
