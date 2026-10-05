@@ -25,6 +25,7 @@ atom = read("src/java.base/share/classes/java/lang/M3StringAtom.java")
 tuple_ = read("src/java.base/share/classes/java/lang/M3StringTuple.java")
 facts = read("src/java.base/share/classes/java/lang/M3StringFacts.java")
 search_precompute = read("src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java")
+tq = read("src/java.base/share/classes/jdk/internal/mindex/M3TQ.java")
 string = read("src/java.base/share/classes/java/lang/String.java")
 symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
 classes = read("src/hotspot/share/classfile/vmClassMacros.hpp")
@@ -65,6 +66,43 @@ for path, text in [
         retained_arrays = [row for row in retained_arrays if "static" not in row]
     if retained_arrays:
         fail(f"{path} retains array field(s): {retained_arrays!r}")
+
+# Byte/char projections must descend through canonical owner geometry, not walk M3 tuple
+# charAt one unit at a time.
+if "owner.getBytes(" not in m3:
+    fail("M3String byte projection no longer delegates to canonical owner")
+if "void getBytes(" not in owner:
+    fail("M3StringOwner bulk byte projection missing")
+for fragment in [
+    "void getChars(int start, int end, char[] destination, int destinationStart)",
+    "void getBytes(",
+    "UNSAFE.getByte(source)",
+]:
+    if fragment not in atom:
+        fail(f"M3StringAtom bulk address projection missing: {fragment}")
+for fragment in [
+    "void getBytes(",
+    "left.owner().getBytes(",
+    "right.owner().getBytes(",
+]:
+    if fragment not in tuple_:
+        fail(f"M3StringTuple bulk range projection missing: {fragment}")
+
+# Exact trigram membership is owned by M3TQ.Facts and reused by a separate bounded weak
+# source-range cache. Do not duplicate exact trigram arrays in M3StringFacts.
+for fragment in [
+    "private static final int SOURCE_SLOTS = 64;",
+    "private static final int MAX_TRIGRAM_SOURCE_UNITS = 32_768;",
+    "M3TQ.Facts trigrams;",
+    "M3TQ.precompute(source, MAX_TRIGRAM_SOURCE_UNITS)",
+    "sourceFacts(source).containsAll(plan.trigrams)",
+]:
+    if fragment not in search_precompute:
+        fail(f"M3 exact trigram search reuse missing: {fragment}")
+if "public boolean containsAll(Facts required)" not in tq:
+    fail("M3TQ exact trigram fact containment missing")
+if "long[] trigram" in facts or "M3TQ.Facts" in facts:
+    fail("M3StringFacts illegally owns length-proportional exact trigram state")
 
 # Length-proportional operation precompute is separate and bounded. It may retain primitive
 # algorithm lanes but never canonical spelling/payload or strong M3 owner/value references.
@@ -269,6 +307,7 @@ for fragment in [
 for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringPrecomputeSearchTest.java",
+    "M3TQFactsTest.java",
     "M3StringHistoryConvergenceRecipeTest",
 ]:
     if required_gate not in workflow:
