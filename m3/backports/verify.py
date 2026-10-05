@@ -317,6 +317,149 @@ def verify_keystore_instant_8374808_backport(root: Path) -> None:
                 f"provider-storage rewrite escaped compatibility leaf: {forbidden}"
             )
 
+
+
+def verify_jep458_current_equivalence(root: Path) -> None:
+    packet = root / "m3/backports/recipes/jep-458-current"
+    rows = read_tsv(packet / "CURRENT_TREE_EQUIVALENCE.tsv")
+    if len(rows) != 27:
+        raise AssertionError(f"expected 27 JEP 458 upstream paths, found {len(rows)}")
+
+    relations = {}
+    by_path = {}
+    for row in rows:
+        path = row["path"]
+        if path in by_path:
+            raise AssertionError(f"duplicate JEP 458 equivalence path: {path}")
+        by_path[path] = row
+        relation = row["current_relation"]
+        relations[relation] = relations.get(relation, 0) + 1
+
+        target = root / path
+        if not target.is_file():
+            raise AssertionError(f"missing current-tree JEP 458 path: {path}")
+        actual_blob = git_blob_sha1(target.read_bytes())
+        if actual_blob != row["current_git_blob"]:
+            raise AssertionError(
+                f"JEP 458 current Git blob drift for {path}: "
+                f"expected {row['current_git_blob']}, actual {actual_blob}"
+            )
+
+    expected_relations = {
+        "UPSTREAM_IDENTICAL": 15,
+        "JAVA21_ADAPTED": 11,
+        "PRESERVE_JDK21_COMPAT": 1,
+    }
+    if relations != expected_relations:
+        raise AssertionError(f"JEP 458 relation counts differ: {relations}")
+
+    main_path = "src/jdk.compiler/share/classes/com/sun/tools/javac/launcher/Main.java"
+    if by_path[main_path]["current_relation"] != "PRESERVE_JDK21_COMPAT":
+        raise AssertionError("JEP 458 legacy Main compatibility leaf lost")
+
+    resource_base = (
+        root
+        / "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport"
+    )
+    manifests = (
+        resource_base
+        / "jdk21-hash-pinned/jdk22-jep458-multifile-java/manifest.tsv",
+        resource_base
+        / "jdk21-hash-pinned-text/jdk22-jep458-multifile-text/manifest.tsv",
+    )
+    sealed_paths: set[str] = set()
+    for manifest_path in manifests:
+        manifest = read_tsv(manifest_path)
+        resource_root = manifest_path.parent
+        for row in manifest:
+            path = row["path"]
+            if path in sealed_paths:
+                raise AssertionError(f"duplicate JEP 458 sealed path: {path}")
+            sealed_paths.add(path)
+            target = root / path
+            if not target.is_file():
+                raise AssertionError(f"missing JEP 458 sealed target: {path}")
+            target_sha = hashlib.sha256(target.read_bytes()).hexdigest()
+            if target_sha != row["after"]:
+                raise AssertionError(
+                    f"JEP 458 sealed target drift for {path}: "
+                    f"expected {row['after']}, actual {target_sha}"
+                )
+            resource = resource_root / row["resource"]
+            if not resource.is_file():
+                raise AssertionError(f"missing JEP 458 sealed resource: {resource}")
+            resource_sha = hashlib.sha256(resource.read_bytes()).hexdigest()
+            if resource_sha != row["after"]:
+                raise AssertionError(
+                    f"JEP 458 resource/postimage mismatch for {path}: "
+                    f"expected {row['after']}, actual {resource_sha}"
+                )
+
+    if len(sealed_paths) != 26:
+        raise AssertionError(f"expected 26 JEP 458 sealed targets, found {len(sealed_paths)}")
+    if main_path in sealed_paths:
+        raise AssertionError("JEP 458 recipe must not delete/replace legacy Main.java")
+
+    module_info = (root / "src/java.base/share/classes/module-info.java").read_text(encoding="utf-8")
+    if "jdk.compiler," not in module_info and "jdk.compiler;" not in module_info:
+        raise AssertionError("JEP 458 java.base -> jdk.compiler qualified export missing")
+
+    java_c = (root / "src/java.base/share/native/libjli/java.c").read_text(encoding="utf-8")
+    if (
+        '#define SOURCE_LAUNCHER_MAIN_ENTRY "jdk.compiler/com.sun.tools.javac.launcher.SourceLauncher"'
+        not in java_c
+    ):
+        raise AssertionError("JEP 458 native SourceLauncher entry point missing")
+
+    preview = (
+        root / "src/jdk.compiler/share/classes/com/sun/tools/javac/code/Preview.java"
+    ).read_text(encoding="utf-8")
+    for required in (
+        "protected static final Context.Key<Preview> previewKey",
+        "protected Preview(Context context)",
+    ):
+        if required not in preview:
+            raise AssertionError(f"JEP 458 Preview adaptation missing: {required}")
+
+    memory_context = (
+        root / "src/jdk.compiler/share/classes/com/sun/tools/javac/launcher/MemoryContext.java"
+    ).read_text(encoding="utf-8")
+    if "modulePathModules.get(0)" not in memory_context:
+        raise AssertionError("JEP 458 Java21 List.get(0) MemoryContext adaptation missing")
+    if "modulePathModules.getFirst()" in memory_context:
+        raise AssertionError("post-21 List.getFirst leaked into JEP 458 MemoryContext")
+
+    source_launcher = (
+        root / "src/jdk.compiler/share/classes/com/sun/tools/javac/launcher/SourceLauncher.java"
+    ).read_text(encoding="utf-8")
+    if "MainMethodFinder.findMainMethod" not in source_launcher:
+        raise AssertionError("JEP 458 MainMethodFinder Java21 adaptation missing")
+    if "topLevelClassNames.get(0)" not in source_launcher:
+        raise AssertionError("JEP 458 SourceLauncher List.get(0) adaptation missing")
+
+    option = (
+        root / "src/jdk.compiler/share/classes/com/sun/tools/javac/main/Option.java"
+    ).read_text(encoding="utf-8")
+    if "public boolean isInBasicOptionGroup()" not in option:
+        raise AssertionError("JEP 458 javac option access leaf missing")
+
+    launcher_resources = (
+        root
+        / "src/jdk.compiler/share/classes/com/sun/tools/javac/resources/launcher.properties"
+    ).read_text(encoding="utf-8")
+    for required in (
+        "launcher.err.unnamed.pkg.not.allowed.named.modules",
+        "launcher.err.mismatch.end.of.path.and.package.name",
+    ):
+        if required not in launcher_resources:
+            raise AssertionError(f"JEP 458 launcher diagnostic missing: {required}")
+
+    multi_test = (
+        root / "test/langtools/tools/javac/launcher/MultiFileSourceLauncherTests.java"
+    ).read_text(encoding="utf-8")
+    if "class MultiFileSourceLauncherTests" not in multi_test:
+        raise AssertionError("JEP 458 multi-file jtreg proof missing")
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -333,12 +476,14 @@ def main() -> int:
     root = args.root.resolve()
     verify_jeps(root)
     verify_seed(root)
+    verify_jep458_current_equivalence(root)
     verify_jcmd_backport(root)
     verify_javadoc_8347112_backport(root)
     verify_security_properties_8364182_backport(root)
     verify_keystore_instant_8374808_backport(root)
     print(
-        "PASS: 82 JEP rows, non-JEP seed uniqueness, exact JDK-8357439 donor blobs, "
+        "PASS: 82 JEP rows, non-JEP seed uniqueness, JEP 458 current-tree equivalence, "
+        "exact JDK-8357439 donor blobs, "
         "JDK-8347112 javadoc adaptation, JDK-8364182 serviceability adaptation, "
         "and JDK-8374808 KeyStore Instant compatibility leaf"
     )
