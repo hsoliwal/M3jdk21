@@ -642,6 +642,12 @@ final class MIndexString {
         if (targetFacts != null && !precomputedFacts().mayContain(targetFacts)) {
             return -1;
         }
+        if (targetStorage != null) {
+            M3StringSearchPrecompute.Plan plan = M3StringSearchPrecompute.prepare(targetStorage);
+            if (plan != null) {
+                return M3StringSearchPrecompute.indexOf(this, targetStorage, plan, from, end);
+            }
+        }
         char first = target.charAt(0);
         char last = target.charAt(targetLength - 1);
         if (targetFacts == null
@@ -678,6 +684,12 @@ final class MIndexString {
                 targetStorage == null ? null : targetStorage.precomputedFacts();
         if (targetFacts != null && !precomputedFacts().mayContain(targetFacts)) {
             return -1;
+        }
+        if (targetStorage != null) {
+            M3StringSearchPrecompute.Plan plan = M3StringSearchPrecompute.prepare(targetStorage);
+            if (plan != null) {
+                return M3StringSearchPrecompute.lastIndexOf(this, targetStorage, plan, from);
+            }
         }
         char first = target.charAt(0);
         char last = target.charAt(targetLength - 1);
