@@ -25,6 +25,7 @@ atom = read("src/java.base/share/classes/java/lang/M3StringAtom.java")
 tuple_ = read("src/java.base/share/classes/java/lang/M3StringTuple.java")
 facts = read("src/java.base/share/classes/java/lang/M3StringFacts.java")
 search_precompute = read("src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java")
+tq = read("src/java.base/share/classes/jdk/internal/mindex/M3TQ.java")
 string = read("src/java.base/share/classes/java/lang/String.java")
 symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
 classes = read("src/hotspot/share/classfile/vmClassMacros.hpp")
@@ -86,6 +87,22 @@ for fragment in [
 ]:
     if fragment not in tuple_:
         fail(f"M3StringTuple bulk range projection missing: {fragment}")
+
+# Exact trigram membership is owned by M3TQ.Facts and reused by a separate bounded weak
+# source-range cache. Do not duplicate exact trigram arrays in M3StringFacts.
+for fragment in [
+    "private static final int SOURCE_SLOTS = 64;",
+    "private static final int MAX_TRIGRAM_SOURCE_UNITS = 32_768;",
+    "M3TQ.Facts trigrams;",
+    "M3TQ.precompute(source, MAX_TRIGRAM_SOURCE_UNITS)",
+    "sourceFacts(source).containsAll(plan.trigrams)",
+]:
+    if fragment not in search_precompute:
+        fail(f"M3 exact trigram search reuse missing: {fragment}")
+if "public boolean containsAll(Facts required)" not in tq:
+    fail("M3TQ exact trigram fact containment missing")
+if "long[] trigram" in facts or "M3TQ.Facts" in facts:
+    fail("M3StringFacts illegally owns length-proportional exact trigram state")
 
 # Length-proportional operation precompute is separate and bounded. It may retain primitive
 # algorithm lanes but never canonical spelling/payload or strong M3 owner/value references.
