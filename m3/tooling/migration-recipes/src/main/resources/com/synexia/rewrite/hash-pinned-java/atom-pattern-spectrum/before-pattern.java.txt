@@ -63,6 +63,6 @@ public final class M3PatternizePureIntAtomRecipe extends Recipe {
         return atom.getComments().stream()
                 .filter(TextComment.class::isInstance)
                 .map(TextComment.class::cast)
-                .anyMatch(comment -> comment.getText().strip().equals(MARKER));
+                .anyMatch(comment -> comment.getText().contains(MARKER));
     }
 }

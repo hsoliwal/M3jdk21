@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN" "https://checkstyle.org/dtds/configuration_1_3.dtd">
+<!-- Focused source lint; this is not a replacement for owning repository gates. -->
+<module name="Checker">
+  <module name="FileTabCharacter"/>
+  <module name="RegexpSingleline"><property name="format" value="[ \t]+$"/><property name="message" value="Trailing whitespace"/></module>
+  <module name="TreeWalker">
+    <module name="AvoidStarImport"/>
+    <module name="UnusedImports"/>
+    <module name="RedundantImport"/>
+    <module name="UpperEll"/>
+  </module>
+</module>

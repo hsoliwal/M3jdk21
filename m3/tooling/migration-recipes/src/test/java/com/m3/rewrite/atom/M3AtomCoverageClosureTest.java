@@ -11,10 +11,13 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
 import org.junit.jupiter.api.Test;
+import org.openrewrite.ExecutionContext;
 import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.Parser;
 import org.openrewrite.Recipe;
 import org.openrewrite.Tree;
+import org.openrewrite.TreeVisitor;
+import org.openrewrite.internal.InMemoryLargeSourceSet;
 import org.openrewrite.java.JavaParser;
 import org.openrewrite.java.tree.J;
 
@@ -192,11 +195,36 @@ final class M3AtomCoverageClosureTest {
         M3InventoryPureIntAtomCandidates inventory = new M3InventoryPureIntAtomCandidates();
         J.MethodDeclaration eligible =
                 method("private static int f(int a, int b) { return a + b; }");
-        assertNotNull(inventory.getVisitor().visit(eligible, context()));
-
         J.MethodDeclaration rejected =
                 method("private static int f(int a) { return a; }");
-        assertNotNull(inventory.getVisitor().visit(rejected, context()));
+        int[] detachedVisits = {0};
+        Recipe fixtureCycle = new Recipe() {
+            @Override public String getDisplayName() {
+                return "Exercise detached inventory nodes in a real recipe cycle";
+            }
+
+            @Override public String getDescription() {
+                return "Supplies the runner context while retaining detached-node inventory visits.";
+            }
+
+            @Override public List<Recipe> getRecipeList() {
+                return List.of(inventory);
+            }
+
+            @Override public TreeVisitor<?, ExecutionContext> getVisitor() {
+                return new TreeVisitor<Tree, ExecutionContext>() {
+                    @Override public Tree preVisit(Tree tree, ExecutionContext scheduled) {
+                        stopAfterPreVisit();
+                        assertNotNull(inventory.getVisitor().visit(eligible, scheduled));
+                        assertNotNull(inventory.getVisitor().visit(rejected, scheduled));
+                        detachedVisits[0]++;
+                        return tree;
+                    }
+                };
+            }
+        };
+        fixtureCycle.run(new InMemoryLargeSourceSet(List.of(unit(""))), context(), 1);
+        assertEquals(1, detachedVisits[0], "the scheduled fixture must visit both detached methods");
 
         M3FileAtomCandidateTable table = new M3FileAtomCandidateTable(inventory);
         M3FileAtomCandidateTable.Row row = new M3FileAtomCandidateTable.Row(
@@ -255,8 +283,20 @@ final class M3AtomCoverageClosureTest {
     }
 
     private static J.MethodDeclaration method(String member) {
+        return unit(member).getClasses()
+                .getFirst()
+                .getBody()
+                .getStatements()
+                .stream()
+                .filter(J.MethodDeclaration.class::isInstance)
+                .map(J.MethodDeclaration.class::cast)
+                .findFirst()
+                .orElseThrow();
+    }
+
+    private static J.CompilationUnit unit(String member) {
         String source = "class T { static int X = 7; " + member + " }";
-        J.CompilationUnit unit = (J.CompilationUnit) JavaParser.fromJavaVersion()
+        return (J.CompilationUnit) JavaParser.fromJavaVersion()
                 .build()
                 .parseInputs(
                         List.of(Parser.Input.fromString(
@@ -264,15 +304,6 @@ final class M3AtomCoverageClosureTest {
                                 source)),
                         null,
                         context())
-                .findFirst()
-                .orElseThrow();
-        return unit.getClasses()
-                .getFirst()
-                .getBody()
-                .getStatements()
-                .stream()
-                .filter(J.MethodDeclaration.class::isInstance)
-                .map(J.MethodDeclaration.class::cast)
                 .findFirst()
                 .orElseThrow();
     }
