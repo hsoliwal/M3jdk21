@@ -31,7 +31,8 @@
       "target": "java.lang.M3StringAtom + java.lang.M3StringPool",
       "status": "adapted scalar canonical-owner responsibility",
       "source_role": "Synexia donor/reference native canonical UTF-16 arena",
-      "target_rule": "M3JDK local scalar payload moves to native memory immediately; mapped atoms retain mapped owner/address; Java text arrays are not canonical"
+      "target_rule": "M3JDK local scalar payload moves to native memory immediately; mapped atoms retain mapped owner/address; Java text arrays are not canonical; VM-local native atoms are weakly canonicalized and their unreachable native blocks are reference-queue reclaimed with internal byte accounting",
+      "retention": "live M3String/M3StringTuple coordinates provide strong ownership; pool lookup retains WeakReference<M3StringAtom> only"
     },
     {
       "source": "com.synexia.indexstring.MIndexString",
@@ -53,7 +54,9 @@
         "composition lives in shared canonical tuple/reference owner",
         "precompute facts attach to canonical owner/range/composition identity",
         "precompute never owns spelling payload",
-        "JNI/native UTF-8/UTF-16/byte/char materializations are shadows only"
+        "JNI/native UTF-8/UTF-16/byte/char materializations are shadows only",
+        "all Java byte[]/char[] compatibility shadows, including empty sentinel, are JNI-created",
+        "VM-local native scalar lookup is weak; dead native payload is reclaimable"
       ]
     },
     {
