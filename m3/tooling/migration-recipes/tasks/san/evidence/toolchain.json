@@ -1,0 +1,12 @@
+{
+  "java": "Temurin 21.0.8+9",
+  "jdk_archive_sha256": "f2dc5418092c43003db8f9005c4a286e1c0104fea96ccdd49e8ebd037cac9219",
+  "maven": "3.9.9",
+  "maven_archive_sha512": "a555254d6b53d267965a3404ecb14e53c3827c09c3b94b5678835887ab404556bfaf78dcfe03ba76fa2508649dca8531c74bca4d5846513522404d48e8c4ac8b",
+  "cache_artifacts": 306,
+  "cache_resolved_offline_final": true,
+  "cache_is_repository_owned_mirror": false,
+  "native_code_changed": false,
+  "source_snapshot": "facb153dcd405d41baf36122607329e1d0c14476",
+  "target_snapshot": "db2017c1aa4aace99543417fba79e3f7a307c26b"
+}

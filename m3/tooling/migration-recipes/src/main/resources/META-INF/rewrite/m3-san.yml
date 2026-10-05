@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.SanitizeEstateScope
+displayName: M3 whole-estate sanitization scope
+description: Extend the existing source inventory with explicit whole-repository selection while retaining legacy family scope and all admission gates.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: san-estate

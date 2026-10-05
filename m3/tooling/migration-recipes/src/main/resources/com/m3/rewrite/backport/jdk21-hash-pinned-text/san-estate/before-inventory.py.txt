@@ -3,11 +3,8 @@
 """Pinned Git file-accounting adapter; semantic inventory stays with m3-java-inventory.
 
 This script never calls a lexical candidate list an exhaustive capability inventory.
-It inventories all tracked entries, including excluded/unreadable/submodule entries.
-Legacy family scope expands lexical hits to their containing Maven modules.
-Repository scope keeps EVERY tracked entry as an unresolved migration obligation;
-no prefix, extension, Maven activation or path heuristic grants JDK admission.
-It does not publish data or change the working tree.
+It inventories all tracked entries, including excluded/unreadable/submodule entries,
+and expands family hits to their containing Maven modules. It does not publish data.
 Run in the private source repository; the resulting whole-estate ledger stays private.
 """
 from __future__ import annotations
@@ -25,8 +22,7 @@ MAX_TEXT = 16 * 1024 * 1024
 def git(repo: Path, *args: str) -> bytes:
     return subprocess.check_output(['git', '-C', str(repo), *args], stderr=subprocess.PIPE)
 
-def scan(repo: Path, commit: str, scope: str = 'family') -> dict:
-    if scope not in ('family', 'repository'): raise Refusal('unsupported inventory scope')
+def scan(repo: Path, commit: str) -> dict:
     if re.fullmatch('[a-f0-9]{40}', commit) is None: raise Refusal('use an exact 40-hex commit')
     if git(repo, 'rev-parse', commit + '^{commit}').decode().strip() != commit: raise Refusal('commit differs')
     raw = git(repo, 'ls-tree', '-r', '-z', commit)
@@ -81,26 +77,10 @@ def scan(repo: Path, commit: str, scope: str = 'family') -> dict:
         if row['module'] in selected_modules and row['mode']!='120000' and row['object_type']=='blob':
             row['reasons'].append('same-owner-module-resource-or-dependency')
             row.update(disposition='partial',rationale='module closure candidate; includes non-prefix resources/tests/recipes')
-    # Keep the legacy scan and provenance intact. A whole-estate request changes
-    # selection only, never ownership, semantic completeness or admission status.
-    if scope == 'repository':
-        for row in rows:
-            row['reasons'].append('whole-repository-obligation')
-            if row['object_type'] != 'blob':
-                row.update(disposition='blocked', rationale='separately pinned submodule traversal required')
-            elif row['mode'] == '120000':
-                row.update(disposition='blocked', rationale='link bytes inventoried; target and portable replacement require review')
-            elif 'content-over-scan-budget' in row['reasons']:
-                row.update(disposition='blocked', rationale='exact bytes hashed; content exceeds reader budget')
-            else:
-                row.update(disposition='partial', rationale='whole-repository obligation; semantic, dependency, license and destination review required')
-        errors = sorted(set(errors) | {r['path'] for r in rows if r['disposition'] == 'blocked'})
     candidates=sorted(r['path'] for r in rows if r['disposition'] in ('partial','blocked'))
     return {'schema':'m3.git-file-accounting/1','commit':commit,
             'tree':git(repo,'rev-parse',commit+'^{tree}').decode().strip(),
             'tracked_entries':len(rows),'file_accounting_complete':True,'inventory_exhaustive':False,
-            'selection_scope':scope,'all_tracked_entries_selected':len(candidates)==len(rows),
-            'production_admitted':False,
             'semantic_owner':'com.synexia.m3.inventory.M3InventoryMain',
             'semantic_inventory_executed':False,'dependency_attribution_complete':False,
             'bounded_scan_gaps':sorted(errors),'candidate_paths':candidates,'entries':rows}
@@ -108,13 +88,11 @@ def scan(repo: Path, commit: str, scope: str = 'family') -> dict:
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--repo',type=Path,required=True);parser.add_argument('--commit',required=True)
-    parser.add_argument('--scope',choices=('family','repository'),default='family',
-                        help='repository keeps every tracked entry as an open obligation; family preserves legacy selection')
     parser.add_argument('--out',type=Path,required=True)
     args=parser.parse_args()
     try:
-        result=scan(args.repo,args.commit,args.scope);args.out.parent.mkdir(parents=True,exist_ok=True)
+        result=scan(args.repo,args.commit);args.out.parent.mkdir(parents=True,exist_ok=True)
         args.out.write_text(json.dumps(result,sort_keys=True,indent=2)+'\n')
-        print(json.dumps({k:result[k] for k in ('commit','selection_scope','tracked_entries','all_tracked_entries_selected','file_accounting_complete','inventory_exhaustive','semantic_inventory_executed','production_admitted')}))
+        print(json.dumps({k:result[k] for k in ('commit','tracked_entries','file_accounting_complete','inventory_exhaustive','semantic_inventory_executed')}))
     except (Refusal,OSError,ValueError,subprocess.CalledProcessError) as error:
         parser.exit(2,'REFUSED: '+str(error)+'\n')

@@ -8,9 +8,6 @@ on:
     paths:
       - "m3/tooling/a3/**"
       - "m3/tooling/migration-recipes/**"
-      - "m3/migration/inventory.py"
-      - "m3/migration/test_inventory.py"
-      - "m3/docs/whole-synexia-sanitization.md"
       - "m3/backports/JEP_CATALOGUE.tsv"
       - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
       - "m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"
@@ -24,9 +21,6 @@ on:
     paths:
       - "m3/tooling/a3/**"
       - "m3/tooling/migration-recipes/**"
-      - "m3/migration/inventory.py"
-      - "m3/migration/test_inventory.py"
-      - "m3/docs/whole-synexia-sanitization.md"
       - "m3/backports/JEP_CATALOGUE.tsv"
       - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
       - "m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"
@@ -75,17 +69,6 @@ jobs:
           java -version
           mvn -version
           mvn -B -ntp -f "$REPO/m3/pom.xml"             -pl tooling/a3 -am clean verify
-
-      - name: Prove SAN whole-estate recipe and accounting
-        shell: bash
-        run: |
-          set -euo pipefail
-          mvn -B -ntp -f "$REPO/m3/tooling/migration-recipes/tasks/san/pom.xml" package
-          cmp "$REPO/m3/migration/inventory.py" "$REPO/m3/tooling/migration-recipes/tasks/san/target/generated/inventory.py"
-          cmp "$REPO/m3/migration/test_inventory.py" "$REPO/m3/tooling/migration-recipes/tasks/san/target/generated/test_inventory.py"
-          cmp "$REPO/.github/workflows/m3-a3.yml" "$REPO/m3/tooling/migration-recipes/tasks/san/target/generated/m3-a3.yml"
-          cd "$REPO/m3/migration"
-          python3 -m unittest -v test_inventory.py
 
       - name: Inventory whole JDK source and test corpus
         shell: bash

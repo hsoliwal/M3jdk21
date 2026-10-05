@@ -1,0 +1,38 @@
+[
+  {
+    "file": "maven-offline.log",
+    "raw_sha256": "ea7a750a7e9befb47325526c0022c1e524cddeb3c26712cff4dcabb333a703ff",
+    "stored_sha256": "36a1b5ff15a8e4992c8094d944d42f471e31ec8e115709272497fbf16c523f8f",
+    "normalization": "strip trailing line whitespace; preserve line content/order"
+  },
+  {
+    "file": "inventory-tests.log",
+    "raw_sha256": "aa03c07f5a1e8cd762923a950fae72ebdd5c5efd2725bb2156578122c35010f8",
+    "stored_sha256": "aa03c07f5a1e8cd762923a950fae72ebdd5c5efd2725bb2156578122c35010f8",
+    "normalization": "strip trailing line whitespace; preserve line content/order"
+  },
+  {
+    "file": "cache-preparation-first-failure.log",
+    "raw_sha256": "01712f589c3080d72431c505b582bd2f3be88d0eff1dc888056d4e0cb83b6be8",
+    "stored_sha256": "dfa3a99829345f8367d4ec1c3392fbc51b27090409b920eae7902ad47392a6a5",
+    "normalization": "strip trailing line whitespace; preserve line content/order"
+  },
+  {
+    "file": "cache-preparation-second-failure.log",
+    "raw_sha256": "20a5c4d50ad89eece695bba263123c4690bda18f640ac59b7210031f0625629f",
+    "stored_sha256": "39d8fa6a4b9467a31315f0f5f2e7c0f303d138144f8df2e3d3513934fd7748b3",
+    "normalization": "strip trailing line whitespace; preserve line content/order"
+  },
+  {
+    "file": "cache-preparation-pass.log",
+    "raw_sha256": "241669772f8c7933ebc1ebf23635c1eb359ce685c9d85976ee3d8b584d684f47",
+    "stored_sha256": "9970555bbe25dc30068f0a1c76a945aabfcf42a6373a3ac349e418015e39110d",
+    "normalization": "strip trailing line whitespace; preserve line content/order"
+  },
+  {
+    "file": "current-collection-tests.log",
+    "raw_sha256": "f6dfb51435323f916535042df91d18e38cce658dab57f9446331cd20465fe1f1",
+    "stored_sha256": "d2b154ff49d9538ae688dc0a255ad215cc560f199bffdd501e0384452d6b494d",
+    "normalization": "strip trailing line whitespace; preserve line content/order"
+  }
+]
