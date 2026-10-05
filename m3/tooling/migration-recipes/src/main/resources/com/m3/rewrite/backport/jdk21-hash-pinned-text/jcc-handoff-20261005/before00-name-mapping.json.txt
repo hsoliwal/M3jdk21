@@ -3527,7 +3527,7 @@
         "id": "synexia.counterpart.MIndexJvmDescriptor",
         "kind": "adapter",
         "status": "implemented-unverified",
-        "reason": "Observed retained target-only hidden-class descriptor correction; exact target and recipe identities reconciled. Prior scoped receipts remain historical; current full module/image and source-target contract acceptance is not established by this ledger update.",
+        "reason": "Inlined reflection counterpart and caller-owned runtime bridge; bounded tests pass; global JVM admission remains open.",
         "sources": [
           {
             "repo": "hsoliwal/com.synexia",
@@ -3548,22 +3548,18 @@
         "targets": [
           {
             "repo": "hsoliwal/M3jdk21",
-            "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+            "commit": null,
             "module": "java.base",
             "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
             "symbol": "jdk.internal.mindex.M3Descriptor",
             "signatures": [
-              "public static java.lang.String type(java.lang.Class<?>)",
-              "public static java.lang.String field(java.lang.reflect.Field)",
-              "public static java.lang.String method(java.lang.reflect.Method)",
-              "public static java.lang.String constructor(java.lang.reflect.Constructor<?>)",
-              "public static java.lang.String recordComponent(java.lang.reflect.RecordComponent)"
+              "jdk.internal.mindex.M3Descriptor"
             ],
-            "sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67",
-            "git_blob_sha1": "92f4d7da32a3b8265675a413311fd304c6dc2dd2",
+            "sha256": "df17c48e54de060060e4393e5c2f3e8e2f068bad38a69576a82709cc6d4cbdb9",
+            "git_blob_sha1": null,
             "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": "refs/heads/master"
+            "revision_role": "candidate",
+            "tracking_ref": null
           }
         ],
         "owner": "jdk.internal.mindex.M3Descriptor",
@@ -3575,8 +3571,7 @@
           "differences": [
             "JDK String references and M3VI.Progress boundary; no application artifact dependency.",
             "Snapshot-local primitive symbol IDs; fingerprint includes exact UTF-16 spellings.",
-            "Declared releases are provenance, not verified byte identity or compilation admission.",
-            "Target commit 39702564163c017f9dc0350a305b032b06274857 delegates type(Class) to Class.descriptorString(); hidden-class spelling is an intentional correction. The source owner remains the older algorithm at 0b8dc32b9e8a616b7b7141bbdd88722839dc64bc."
+            "Declared releases are provenance, not verified byte identity or compilation admission."
           ],
           "compatibility_obligations": [
             "Public JDK types and behavior remain unchanged.",
@@ -3615,17 +3610,14 @@
           "cached_facts": "Primitive class/member/CSR lanes; caller-scoped declarations and precompute context; no persistent or cross-VM cache."
         },
         "recipe": {
-          "id": "com.m3.rewrite.backport.Descriptor",
-          "version": "snapshot@39702564163c017f9dc0350a305b032b06274857",
-          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
-          "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
+          "id": "m3-cb",
+          "version": "1",
+          "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+          "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
           "preconditions": [
-            "Use the retained M3Jdk21HashPinnedSnapshotRecipe and exact jdk22-descriptor manifest.",
-            "The owner must match df17c48e54de060060e4393e5c2f3e8e2f068bad38a69576a82709cc6d4cbdb9 or 1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67; the test is ABSENT or exact postimage.",
-            "Java21 parse/roundtrip and required-source checks remain active.",
-            "The legacy jdk22 crate prefix is not a JEP or Java language-level claim."
+            "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
           ],
-          "rollback": "A separately reviewed inverse packet must use the retained exact before image and preserve unrelated edits; no descriptor rollback is executed by this ledger change."
+          "rollback": "Retained sealed installer restores exact matching preimages; integration packet rolled back before source packet."
         },
         "tests": [
           {
@@ -3640,65 +3632,29 @@
         },
         "sync": {
           "source_revision": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
-          "target_revision": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+          "target_revision": "3ec445df10a3e8fc74aa983181f0700ac7bfbcad",
           "direction": "source-to-target",
           "target_adaptations": [
             "Concise JDK counterpart names",
             "Weak defining-loader identity",
             "Counterpart-row effective declared release",
             "Exact VM-local precompute context",
-            "No application dependency",
-            "Retain target-only Class.descriptorString hidden-class correction from 39702564163c017f9dc0350a305b032b06274857."
+            "No application dependency"
           ],
           "pending": [
             "Automatic Class/ClassLoader consumer and lifecycle hooks, module/agent/CDS/JNI/JIT admission",
             "Full family and non-prefix dependency inventory",
-            "AST/compiler consumers and performance measurements",
-            "Requalify current combined destination module/image/runtime at its exact commit; historical descriptor-only patch-mode receipts are not that proof.",
-            "Review the unchanged current source descriptor separately before any source-to-target replay or reverse-port proposal."
+            "AST/compiler consumers and performance measurements"
           ],
-          "conflicts": [
-            "Target hidden-class correction differs from the unchanged source algorithm; automatic overwrite and reverse port remain refused."
-          ]
+          "conflicts": []
         },
         "lineage": {
           "previous_sources": [],
-          "previous_targets": [
-            {
-              "repo": "hsoliwal/M3jdk21",
-              "commit": null,
-              "module": "java.base",
-              "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
-              "symbol": "jdk.internal.mindex.M3Descriptor",
-              "signatures": [
-                "jdk.internal.mindex.M3Descriptor"
-              ],
-              "sha256": "df17c48e54de060060e4393e5c2f3e8e2f068bad38a69576a82709cc6d4cbdb9",
-              "git_blob_sha1": null,
-              "fingerprint": null,
-              "revision_role": "candidate",
-              "tracking_ref": null
-            },
-            {
-              "repo": "hsoliwal/M3jdk21",
-              "commit": "f74592e363466a59b391fbbe47500c7985c9a691",
-              "module": "java.base",
-              "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
-              "symbol": "jdk.internal.mindex.M3Descriptor",
-              "signatures": [
-                "jdk.internal.mindex.M3Descriptor"
-              ],
-              "sha256": "df17c48e54de060060e4393e5c2f3e8e2f068bad38a69576a82709cc6d4cbdb9",
-              "git_blob_sha1": "f4b4144f104eb4816cb80a44c136fa90b8114dc4",
-              "fingerprint": null,
-              "revision_role": "pinned",
-              "tracking_ref": "refs/heads/master"
-            }
-          ],
+          "previous_targets": [],
           "supersedes": []
         },
         "source_state": "experimental",
-        "observation": "The complete previous record and exact old/current source/target bindings are retained in m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json#descriptor_reconciliation. Previous sync target 3ec445df10a3e8fc74aa983181f0700ac7bfbcad precedes target introduction; the path is absent there. The old target hash is verified at f74592e363466a59b391fbbe47500c7985c9a691. Existing cb-module-runtime evidence is historical and unchanged; implemented-unverified is retained."
+        "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
       },
       {
         "id": "synexia.counterpart.MIndexMember",
@@ -4763,338 +4719,6 @@
         },
         "source_state": "experimental",
         "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
-      },
-      {
-        "id": "synexia.jcc-recipe-laboratory",
-        "kind": "dependency-reuse",
-        "status": "blocked",
-        "reason": "Blocked source-qualified JCC laboratory handoff with an independently authored destination candidate tooling fixture. Its finite four-test proof is linked separately; source export, owning-module coverage, JDK gates and committed capability acceptance remain unadmitted.",
-        "sources": [
-          {
-            "repo": "hsoliwal/com.synexia",
-            "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
-            "symbol": "com.synexia.rewrite.M3RecipeMasteryLab",
-            "signatures": [],
-            "sha256": "0054ddf028c5a83c270c1a53795373c7cd8fa77395d23be7fd70424b644b0a3e",
-            "git_blob_sha1": "ee8adf451105c34d0afa228fe05b7dabb3b1e264",
-            "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": "refs/heads/develop"
-          },
-          {
-            "repo": "hsoliwal/com.synexia",
-            "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
-            "symbol": "com.synexia.rewrite.M3RecipeMasterySchedulePlanner",
-            "signatures": [],
-            "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb",
-            "git_blob_sha1": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc",
-            "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": "refs/heads/develop"
-          }
-        ],
-        "targets": [
-          {
-            "repo": "hsoliwal/M3jdk21",
-            "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
-            "module": "m3/tooling/migration-recipes",
-            "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java",
-            "symbol": "com.m3.rewrite.M3Java21ConvergenceRecipe",
-            "signatures": [
-              "java.util.List<org.openrewrite.Recipe> getRecipeList()"
-            ],
-            "sha256": "15e44e92ba509b405ed2e12ddc4c6bf2a427f59cdca95d7e8e960357732266e9",
-            "git_blob_sha1": "2f59c7f0756e5618343a88161040201ccb1af39d",
-            "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": "refs/heads/master"
-          },
-          {
-            "repo": "hsoliwal/M3jdk21",
-            "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
-            "module": "m3/tooling/migration-recipes",
-            "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
-            "symbol": "com.m3.rewrite.atom.M3PureIntConvergenceRecipe",
-            "signatures": [
-              "java.util.List<org.openrewrite.Recipe> getRecipeList()"
-            ],
-            "sha256": "ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534",
-            "git_blob_sha1": "a1a745a4ea8617937d8ecbb61eb17973dac0948f",
-            "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": "refs/heads/master"
-          },
-          {
-            "repo": "hsoliwal/M3jdk21",
-            "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
-            "module": "m3/tooling/migration-recipes",
-            "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
-            "symbol": "com.m3.rewrite.atom.M3PureIntAtomEligibility",
-            "signatures": [
-              "package-private static boolean eligible(J.MethodDeclaration)",
-              "package-private static boolean atomized(J.MethodDeclaration)"
-            ],
-            "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
-            "git_blob_sha1": "0041adab5913304874f5063fc2b982ff3cc1e065",
-            "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": "refs/heads/master"
-          },
-          {
-            "repo": "hsoliwal/M3jdk21",
-            "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
-            "module": "m3/tooling/migration-recipes",
-            "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/MemJava.java",
-            "symbol": "com.m3.rewrite.atom.MemJava",
-            "signatures": [
-              "package-private static java.lang.ClassLoader compile(java.util.Map<String,String>)"
-            ],
-            "sha256": "c2a204144a4ff7fe2f4abfa151a744e7114961b83b7f006e019e595f4569e238",
-            "git_blob_sha1": "341b55a500964906d15c88ccef9f3e05f2a1c025",
-            "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": "refs/heads/master"
-          },
-          {
-            "repo": "hsoliwal/M3jdk21",
-            "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
-            "module": "m3/tooling/migration-recipes",
-            "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3IntRecipeProjectTest.java",
-            "symbol": "com.m3.rewrite.atom.M3IntRecipeProjectTest",
-            "signatures": [
-              "package-private JUnit proof owner; no product API"
-            ],
-            "sha256": "004de5f30e2a3c54d439b36493e8733dc73fdae8a288ba18238423ded5afcbed",
-            "git_blob_sha1": "d3cd2a28b3635340c9035b6287650bdf44f975ac",
-            "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": "refs/heads/master"
-          },
-          {
-            "repo": "hsoliwal/M3jdk21",
-            "commit": null,
-            "module": "m3/tooling/migration-recipes",
-            "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/JccReceivingFixtureTest.java",
-            "symbol": "com.m3.rewrite.atom.JccReceivingFixtureTest",
-            "signatures": [
-              "void eachScheduleCompilesAndMatchesFrozenOraclesAtEveryIntermediate() throws java.lang.Exception",
-              "void actualCanonicalCompositeAgreesWithItsDeclaredChildrenAndFreshReplay() throws java.lang.Exception",
-              "void opaqueStringObserversAndIndependentClassStateRemainIntact() throws java.lang.Exception",
-              "void compilerAndBothObservationOraclesRejectCuratedMutants() throws java.lang.Exception"
-            ],
-            "sha256": "b034673ea218515cc12ab0b4173eabf06732f29e8a456be45b5ba0d00489ab39",
-            "git_blob_sha1": "3332012bbd7f3842279f40fdf0f1eaf123392957",
-            "fingerprint": null,
-            "revision_role": "candidate"
-          }
-        ],
-        "owner": "Existing M3JDK21 migration-recipes proof owners; Synexia source-canon remains the source admission authority",
-        "identity": {
-          "namespace": "Exact source/destination Git objects and capability contracts; no name-based equivalence.",
-          "generation": "Source and destination proof epochs are separate; replay never transfers acceptance."
-        },
-        "contract": {
-          "differences": [
-            "The destination pure-int eligibility domain is private static scalar-int expression leaves; broader source catalogue, parser, effect or JNI capabilities are not thereby admitted.",
-            "MemJava is a package-private test compiler with a platform-parent loader and Java21/proc:none/empty-path/-Xlint:all/-Werror constraints; no source Mastery engine is copied.",
-            "The declarative convergence catalogue has four children; the Java wrapper additionally composes upstream RemoveUnusedImports. Their exact activation paths are distinct.",
-            "The original destination receiving fixture exercises four scalar-int leaves and exact opaque string observations through retained MemJava and A/P/AP/PA recipes; it is not a port of the source Mastery corpus."
-          ],
-          "compatibility_obligations": [
-            "Java21 grammar, types, classfile/VM behavior and public Java/JNI interfaces remain unchanged.",
-            "Keep canonical MIndex payload ownership, coordinate units, lifetimes and JNI projections explicit.",
-            "Compiler/JUnit finite fixtures do not prove arbitrary-program equivalence or all repository coverage."
-          ],
-          "public_surface": [
-            "Tool-plane metadata and test receipts only; no product dependency or new exported API."
-          ]
-        },
-        "format": {
-          "schema": "Existing name-mapping schema/version1 plus referenced review receipts; no second registry.",
-          "abi": null,
-          "bootstrap": "External Maven/OpenRewrite/JUnit tool plane; never an OpenJDK build/runtime dependency."
-        },
-        "dependencies": [
-          {
-            "id": "family.entire-source-closure",
-            "resolution": "blocked",
-            "reason": "Every current root entry is accounted, but full file/symbol/dependency/source-canon coverage is unqualified."
-          }
-        ],
-        "materialization": {
-          "admission": "No JCC source export is admitted. This record stores a blocked receiving obligation.",
-          "joins": "No payload join, interner, owner translation or JNI adapter is materialized.",
-          "outputs": "Reviewed ledger/documentation and an independently authored candidate tooling test exist. No source-qualified JCC capability, JNI/regex adapter or JDK product output is materialized.",
-          "cached_facts": "Finite source receipts stay bound to their original source epoch and require target re-execution. The linked original receiving fixture has its own exact destination input hashes and four-test receipt; no source PASS count is transferred."
-        },
-        "recipe": {
-          "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-handoff-20261005",
-          "version": "0.1.0-SNAPSHOT",
-          "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-          "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
-          "preconditions": [
-            "Exact canonical map preimage 67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb.",
-            "Use the retained text transformer and sealed-install/1 replay owner for reviewed ledger bytes.",
-            "An admitted source-canon export and destination fixture/API proof remain mandatory before any capability promotion."
-          ],
-          "rollback": "The paired existing recipe.py sealed plan restores exact receipt-owned preimages and refuses foreign edits; no product rollback is implied."
-        },
-        "tests": [],
-        "provenance": {
-          "license": "Source path/hash metadata and original review text only; file-level licensing is required for any future implementation import.",
-          "publication": "User requested Synexia-to-M3JDK21 implementation and mapping; this bounded packet publishes no source implementation or private dataset.",
-          "copied_code": false
-        },
-        "sync": {
-          "source_revision": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
-          "target_revision": "da958d00d24154c0db87beca0ec80a7df2b43b73",
-          "direction": "source-to-target",
-          "target_adaptations": [
-            "Reuse existing destination compiler/atom owners and their narrower interfaces."
-          ],
-          "pending": [
-            "Seal current source recipe/template/output parity and execute its real source-canon checkpoint/history/pattern audit.",
-            "Require all eleven source verification gates at the same source execution root.",
-            "Complete source-qualified fixture applicability and receiving review. The original candidate fixture passed only its bounded tooling proof; complete owning-module 99% line/branch, image and applicable JNI gates remain.",
-            "Read back the final destination objects and PR state; no automatic cross-repository synchronization exists.",
-            "Bind candidate receiving artifacts to their actual committed objects after publication; null commit and candidate revision_role remain deliberate until separate read-back evidence exists."
-          ],
-          "conflicts": []
-        },
-        "lineage": {
-          "previous_sources": [],
-          "previous_targets": [],
-          "supersedes": []
-        },
-        "source_state": "partial",
-        "observation": "Review and explicit root coverage obligations: m3/docs/jcc-source-handoff.md and m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json. Ledger replay tests are separate from capability acceptance; tests is empty intentionally. Independently authored receiving-fixture evidence is linked under m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json#independent_receiving_fixture; it does not promote this blocked capability."
-      },
-      {
-        "id": "synexia.jcc-java-jni-regression",
-        "kind": "pending",
-        "status": "blocked",
-        "reason": "Java/regex/opaque-source/JNI regression applicability remains unreviewed against the destination's narrower domain. No destination JNI or regex implementation is inferred from source receipts.",
-        "sources": [
-          {
-            "repo": "hsoliwal/com.synexia",
-            "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
-            "symbol": "com.synexia.rewrite.M3AtomPatternSignalChainRecipe",
-            "signatures": [],
-            "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98",
-            "git_blob_sha1": "09df87a872817787fc8607bf11805cfa26c53aed",
-            "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": "refs/heads/develop"
-          },
-          {
-            "repo": "hsoliwal/com.synexia",
-            "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
-            "module": "synexia-openrewrite-recipes",
-            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
-            "symbol": "com.synexia.rewrite.M3CodeSignalChain",
-            "signatures": [],
-            "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa",
-            "git_blob_sha1": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
-            "fingerprint": null,
-            "revision_role": "pinned",
-            "tracking_ref": "refs/heads/develop"
-          }
-        ],
-        "targets": [],
-        "owner": "Existing M3JDK21 migration-recipes proof owners; Synexia source-canon remains the source admission authority",
-        "identity": {
-          "namespace": "Exact source/destination Git objects and capability contracts; no name-based equivalence.",
-          "generation": "Source and destination proof epochs are separate; replay never transfers acceptance."
-        },
-        "contract": {
-          "differences": [
-            "The destination pure-int eligibility domain is private static scalar-int expression leaves; broader source catalogue, parser, effect or JNI capabilities are not thereby admitted.",
-            "MemJava is a package-private test compiler with a platform-parent loader and Java21/proc:none/empty-path/-Xlint:all/-Werror constraints; no source Mastery engine is copied.",
-            "The declarative convergence catalogue has four children; the Java wrapper additionally composes upstream RemoveUnusedImports. Their exact activation paths are distinct."
-          ],
-          "compatibility_obligations": [
-            "Java21 grammar, types, classfile/VM behavior and public Java/JNI interfaces remain unchanged.",
-            "Keep canonical MIndex payload ownership, coordinate units, lifetimes and JNI projections explicit.",
-            "Compiler/JUnit finite fixtures do not prove arbitrary-program equivalence or all repository coverage."
-          ],
-          "public_surface": [
-            "Tool-plane metadata and test receipts only; no product dependency or new exported API."
-          ]
-        },
-        "format": {
-          "schema": "Existing name-mapping schema/version1 plus referenced review receipts; no second registry.",
-          "abi": null,
-          "bootstrap": "External Maven/OpenRewrite/JUnit tool plane; never an OpenJDK build/runtime dependency."
-        },
-        "dependencies": [
-          {
-            "id": "family.entire-source-closure",
-            "resolution": "blocked",
-            "reason": "Every current root entry is accounted, but full file/symbol/dependency/source-canon coverage is unqualified."
-          },
-          {
-            "id": "synexia.jcc-recipe-laboratory",
-            "resolution": "blocked",
-            "reason": "Requires the same admitted source handoff and existing destination proof owners."
-          },
-          {
-            "id": "family.word-facts",
-            "resolution": "pending",
-            "reason": "Algorithm/regex catalogue and exact owner review remain separate from metadata classification."
-          }
-        ],
-        "materialization": {
-          "admission": "No JCC source export is admitted. This record stores a blocked receiving obligation.",
-          "joins": "No payload join, interner, owner translation or JNI adapter is materialized.",
-          "outputs": "Reviewed registry/documentation/binding data only; capability fixture materialization requires a later admitted packet.",
-          "cached_facts": "Finite source receipts stay bound to their original source epoch and require target re-execution."
-        },
-        "recipe": {
-          "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-handoff-20261005",
-          "version": "0.1.0-SNAPSHOT",
-          "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-          "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
-          "preconditions": [
-            "Exact canonical map preimage 67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb.",
-            "Use the retained text transformer and sealed-install/1 replay owner for reviewed ledger bytes.",
-            "An admitted source-canon export and destination fixture/API proof remain mandatory before any capability promotion."
-          ],
-          "rollback": "The paired existing recipe.py sealed plan restores exact receipt-owned preimages and refuses foreign edits; no product rollback is implied."
-        },
-        "tests": [],
-        "provenance": {
-          "license": "Source path/hash metadata and original review text only; file-level licensing is required for any future implementation import.",
-          "publication": "User requested Synexia-to-M3JDK21 implementation and mapping; this bounded packet publishes no source implementation or private dataset.",
-          "copied_code": false
-        },
-        "sync": {
-          "source_revision": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
-          "target_revision": "da958d00d24154c0db87beca0ec80a7df2b43b73",
-          "direction": "source-to-target",
-          "target_adaptations": [
-            "Reuse existing destination compiler/atom owners and their narrower interfaces."
-          ],
-          "pending": [
-            "Seal current source recipe/template/output parity and execute its real source-canon checkpoint/history/pattern audit.",
-            "Require all eleven source verification gates at the same source execution root.",
-            "Review and materialize only applicable fixtures through existing destination owners; rerun exact target proof and required module/image/JNI gates.",
-            "Read back the final destination objects and PR state; no automatic cross-repository synchronization exists."
-          ],
-          "conflicts": []
-        },
-        "lineage": {
-          "previous_sources": [],
-          "previous_targets": [],
-          "supersedes": []
-        },
-        "source_state": "partial",
-        "observation": "Review and explicit root coverage obligations: m3/docs/jcc-source-handoff.md and m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json. Ledger replay tests are separate from capability acceptance; tests is empty intentionally."
       }
     ]
   }
