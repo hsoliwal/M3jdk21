@@ -1,0 +1,24 @@
+// SPDX-License-Identifier: Apache-2.0
+package jdk.internal.mindex;
+
+/** Necessary-condition signal helpers shared by M3 regex precompute. */
+final class M3RegexBits {
+    private M3RegexBits() {}
+    static boolean mayContain(long haystackSignal, long needleSignal) {
+        return (haystackSignal & needleSignal) == needleSignal;
+    }
+    static long addSignal(long signal, char value) {
+        int folded = value >= 'A' && value <= 'Z' ? value + ('a' - 'A') : value;
+        long first = mix64(Integer.toUnsignedLong(folded));
+        long second = mix64(Integer.toUnsignedLong(folded ^ 0x9e37_79b9));
+        return signal | (1L << ((int) first & 63)) | (1L << ((int) second & 63));
+    }
+    private static long mix64(long value) {
+        long mixed = value;
+        mixed ^= mixed >>> 33;
+        mixed *= 0xff51afd7ed558ccdL;
+        mixed ^= mixed >>> 33;
+        mixed *= 0xc4ceb9fe1a85ec53L;
+        return mixed ^ (mixed >>> 33);
+    }
+}
