@@ -6,7 +6,8 @@ modified_preimages	4
 absent_additions	11
 preimages_exact	true
 absent_targets_confirmed	true
-source_materialized	false
+source_materialized	true
+materialization	EXACT_RETAINED_POSTIMAGES
 scope	LIBRARY_API
 contract	EXPLICIT_CONTRACT_CHANGE
 promotion_authorized	false

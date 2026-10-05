@@ -1,7 +1,7 @@
 item	status	qualification
-inventory	PASS	4 modified preimages exact; 11 additive targets absent
+inventory	PASS	4 modified preimages exact; 11 additive targets absent on base
 retained_crate	PASS	15 reviewed source images present
-product_materialization	PENDING	next additive commit
+product_materialization	CANDIDATE_MATERIALIZED	exact retained blobs; no transcription
 recipe_junit	PENDING	exact-head execution required
 jdk_image	PENDING	configure/make images
 jtreg	PENDING	Gatherer + existing stream regression families
