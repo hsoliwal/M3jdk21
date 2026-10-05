@@ -84,6 +84,12 @@ if "private static final int MAX_PATTERN_UNITS = 8_192;" not in search_precomput
     fail("M3StringSearchPrecompute pattern budget changed without invariant review")
 if "final int[] prefix;" not in search_precompute:
     fail("prepared search plan lost primitive KMP metadata")
+if "M3String replace(char oldChar, char newChar)" not in m3:
+    fail("M3String canonical char replacement path missing")
+if "M3String replace(M3String target, M3String replacement)" not in m3:
+    fail("M3String canonical literal replacement path missing")
+if "Required length exceeds implementation limit" not in m3:
+    fail("M3String literal replacement lost expansion OOME contract")
 if "M3StringSearchPrecompute.prepare(checked)" not in m3:
     fail("M3String canonical search no longer reuses prepared operation metadata")
 if "trigramSignal64" not in facts or "bigramSignal64" not in facts:
@@ -143,6 +149,8 @@ critical_surfaces = {
     "bounded indexOf(String)": "return sourceM3.indexOf(targetM3, beginIndex, endIndex);",
     "lastIndexOf(String)": "M3String storage = m3();",
     "prepared reverse search": "return storage.lastIndexOf(target, fromIndex);",
+    "replace(char,char)": "M3String replaced = storage.replace(oldChar, newChar);",
+    "replace(CharSequence,CharSequence)": "M3String replaced = storage.replace(targetM3, replacementM3);",
     "substring": "M3String.sliceOf(this, beginIndex, endIndex)",
     "concat": "m3Concat(this, str)",
     "trim": "M3StringFacts facts = storage.facts();",
