@@ -522,6 +522,12 @@ void java_lang_String::copy_chars(
     return;
   }
 
+  oop storage = m3_storage(java_string);
+  if (storage != nullptr) {
+    java_lang_M3String::copy_chars(storage, start, len, destination);
+    return;
+  }
+
   typeArrayOop value = java_lang_String::value(java_string);
   if (is_latin1(java_string)) {
     for (int i = 0; i < len; i++) {
@@ -578,7 +584,10 @@ inline unsigned int java_lang_String::hash_code_impl(oop java_string, bool updat
   bool     is_latin1 = java_lang_String::is_latin1(java_string);
 
   unsigned int hash = 0;
-  if (length > 0) {
+  oop storage = m3_storage(java_string);
+  if (storage != nullptr) {
+    hash = (unsigned int)java_lang_M3String::java_hash(storage);
+  } else if (length > 0) {
     if (is_latin1) {
       hash = java_lang_String::hash_code(value->byte_at_addr(0), length);
     } else {
