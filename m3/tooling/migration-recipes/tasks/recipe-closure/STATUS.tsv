@@ -1,0 +1,16 @@
+item	state	evidence	limit
+exact_source_recovery	VERIFIED	artifact11322552678;tree02854e6c82fdd4f07fd1bc79a442bc237743950e	Input custody, not acceptance
+a3_compile_and_generated_replay	REPAIRED_LOCAL_TESTED	PR113 donor blob3518924871cf5914432c2bc78b9d304655010cc0;3 retained tests	Public sibling source reused exactly
+pure_int_scalar_domain	REPAIRED_LOCAL_TESTED	array-domain-red.log;array-domain-green.log;M3IntRecipeProjectTest	Post-name array and varargs are not scalar int parameters
+in_memory_recipe_project	LOCAL_PASS	6 tests;54 expressions;353 input pairs;2 recipe orders	Finite declared domain; not arbitrary Java proof
+import_recipe_admission	REPAIRED_LOCAL_TESTED	M3ImportAdmissionTest;retained registry tests	One already-used upstream recipe registered; unknown classes still refused
+snapshot_materialization	LOCAL_PASS	ClosureRecipeTest=3;DescriptorRecipeTest=9	Existing engines;4 repair owners and2 descriptor packet outputs
+strict_touched_java_compile	LOCAL_PASS	strict-compile.log;exit0	Actual dependencies;--release21 -proc:none -Xlint:all -Werror
+control_reactor	FAILED	final-fae.log;exit1;JUNIT.tsv;FAILURES.tsv	241 JUnit tests:237 pass;2 failures;2 errors;0 skipped test cases;2 downstream modules skipped
+migration_99_gate	FAILED	migration-coverage-check.log;exit1;COVERAGE.tsv	312/346 lines;186/263 branches;no threshold/exclusion changes
+indexdb_and_module_pack_gates	LOCAL_PASS	final-fae.log;COVERAGE.tsv	Only these existing module gates passed, not whole JDK
+descriptor_runtime	LOCAL_PASS	pass3-descriptor-runtime.log	8077 assertions in each of4 modes;actual class patched into stock JDK21,not full image
+foundation_runtime	LOCAL_PASS	foundation.log	70462 checks in each of4 modes;explicit foundation,not ordinary String
+native_build	BLOCKED	native-configure.log;exit1	Missing ALSA development headers;no make/images/jtreg acceptance
+backport_catalogue	INCOMPLETE	backport-program.json;backport-static.log	82 JEP rows:39 pending;13 seeds:12 pending;completion_claim=false
+whole_jdk	INCOMPLETE	TODO.tsv;existing tasks/map-utf/TODO.tsv	All31 original programme obligations retained;no blanket completion

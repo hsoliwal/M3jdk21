@@ -14,9 +14,6 @@ import java.util.Objects;
 public final class M3RecipeScopeRegistry {
     private static final Map<String, M3RecipeScopePolicy> POLICIES = Map.ofEntries(
             Map.entry(
-                    "org.openrewrite.java.RemoveUnusedImports",
-                    fixed(M3EditScope.FILE)),
-            Map.entry(
                     "com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe",
                     fixed(M3EditScope.MODULE)),
             Map.entry(

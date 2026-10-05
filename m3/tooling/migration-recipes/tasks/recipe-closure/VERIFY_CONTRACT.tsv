@@ -1,0 +1,13 @@
+gate	actual_state	mandatory_limit
+exact preimage and generated postimage	PASS_LOCAL	Closure and Descriptor recipes refuse drift/missing/wrong kinds and reach fresh fixed point
+diff and syntax hygiene	PASS_LOCAL	No POM/workflow/dependency/old test removal or disabled type validation
+strict Java21 compile	PASS_LOCAL	Nine touched/new recipe/test sources;separate descriptor runtime strict compile
+actual OpenRewrite tests	PARTIAL	20 new tests pass;retained String/JNI failures remain mandatory
+full control Maven verify	FAIL	Do not treat independent success as complete reactor
+99-percent migration coverage	FAIL	Configured original scope/atom gate remains unchanged
+foundation and descriptor execution	PASS_LOCAL_SCOPED	Same corpus repeated per VM mode;not4x distinct inputs
+Checkstyle/PMD/SpotBugs/Spotless	NOT_EXECUTED_HERE	Strict javac and hygiene are not a substitute for any separately required project tools
+native configure	FAIL_PREREQUISITE	ALSA headers absent
+native make/images/jtreg/platform/performance	NOT_EXECUTED	No matched image or performance claim
+hosted exact new head	PENDING_AT_PUBLICATION	Existing proof workflow is retained;only report observed run status later
+whole programme	INCOMPLETE	All original31 tasks retain their independent acceptance gates
