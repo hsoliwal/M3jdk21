@@ -90,50 +90,6 @@ Before recipe execution each fixture receives immutable read-only signals:
 
 The signals are regression discriminators and optimization hints only.
 
-## Regex matrix and in-memory compiler
-
-The compiler/runtime fan-in is fully in memory. `A3MemoryCompiler` uses the platform Java compiler
-with:
-
-```text
---release 21 -Xlint:all -Werror -proc:none
-```
-
-Generated class bytes, including local/nested classes, are retained in an in-memory file manager and
-loaded through a bounded class loader. A3Lab therefore no longer needs temporary source/class files
-for each pass application.
-
-`A3RegexMatrix` precompiles a bounded representative regex spectrum once per tooling JVM. The first
-matrix contains 16 categories:
-
-- literal matching;
-- Java method-shape whitespace;
-- keyword alternation;
-- quantifiers;
-- identifier/call character classes;
-- multiline visibility anchors;
-- DOTALL method-call shapes;
-- positive lookahead;
-- fixed-width lookbehind;
-- backreferences;
-- Unicode letter classes;
-- flat brace regions;
-- line comments;
-- block comments;
-- line-break matching;
-- quoted M3 atom names.
-
-Each observation evaluates those patterns against 16 fixed subjects plus the fixture's actual
-code-looking payload: 16 x 17 = 272 deterministic cells.
-
-For every match the matrix root binds the pattern ID, source, flags, precomputed literal-prefix and
-ASCII-presence signals, subject bytes, and exact `find()` start/end coordinates. The precomputed
-prefix/mask lanes are optimization hints only. They never certify a rewrite.
-
-Every A3Lab result row now carries `regexMatrixStable=true`. Any matrix-root drift rejects the
-schedule alongside compiler, public/protected contract, runtime behavior, lexical-data or fixed-point
-drift.
-
 ## Counterexamples
 
 Any parser losslessness failure, compile failure, warning, behavior drift, contract drift, cycle,

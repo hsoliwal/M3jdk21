@@ -3,9 +3,14 @@ package com.m3.a3;
 
 import com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe;
 import com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.net.URL;
+import java.net.URLClassLoader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -13,6 +18,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import javax.tools.ToolProvider;
 import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.Parser;
 import org.openrewrite.Recipe;
@@ -52,8 +58,7 @@ public final class A3Lab {
             boolean fixedPoint,
             boolean behaviorStable,
             boolean contractStable,
-            boolean lexicalDataStable,
-            boolean regexMatrixStable) {
+            boolean lexicalDataStable) {
         public Result {
             if (fixture < 0 || applications < 1 || compiles < 1) {
                 throw new IllegalArgumentException("invalid A3Lab result");
@@ -62,11 +67,7 @@ public final class A3Lab {
             subset = text(subset, "subset");
             beforeSha = sha(beforeSha, "beforeSha");
             afterSha = sha(afterSha, "afterSha");
-            if (!fixedPoint
-                    || !behaviorStable
-                    || !contractStable
-                    || !lexicalDataStable
-                    || !regexMatrixStable) {
+            if (!fixedPoint || !behaviorStable || !contractStable || !lexicalDataStable) {
                 throw new IllegalArgumentException("A3Lab result did not pass");
             }
         }
@@ -75,8 +76,7 @@ public final class A3Lab {
     private record Observation(
             List<String> contract,
             List<String> behavior,
-            String payload,
-            String regexMatrixRoot) {}
+            String payload) {}
 
     private record ResultAndSource(Result result, String source) {}
 
@@ -112,7 +112,7 @@ public final class A3Lab {
                 new StringBuilder(
                         "fixture\tschedule\tsubset\tbeforeSha\tafterSha\tapplications\tcompiles"
                                 + "\tchanged\tfixedPoint\tbehaviorStable\tcontractStable"
-                                + "\tlexicalDataStable\tregexMatrixStable\n");
+                                + "\tlexicalDataStable\n");
         for (Result result : results) {
             tsv.append(result.fixture())
                     .append('\t')
@@ -137,8 +137,6 @@ public final class A3Lab {
                     .append(result.contractStable())
                     .append('\t')
                     .append(result.lexicalDataStable())
-                    .append('\t')
-                    .append(result.regexMatrixStable())
                     .append('\n');
         }
         A3Fs.write(checkedRoot, checkedOut.resolve("results.tsv"), tsv.toString());
@@ -214,7 +212,6 @@ public final class A3Lab {
                         true,
                         true,
                         true,
-                        true,
                         true);
         return new ResultAndSource(result, current);
     }
@@ -286,57 +283,72 @@ public final class A3Lab {
             String schedule,
             int pass)
             throws Exception {
-        Class<?> type;
+        Path dir = Files.createTempDirectory("a3lab-");
         try {
-            type = A3MemoryCompiler.compile("m3.lab.Subject", source);
-        } catch (IllegalStateException failure) {
-            throw new IllegalStateException(
-                    "A3Lab javac gate failed fixture="
-                            + fixture
-                            + " schedule="
-                            + schedule
-                            + " pass="
-                            + pass
-                            + "\n"
-                            + failure.getMessage(),
-                    failure);
-        }
+            Path java = dir.resolve("m3/lab/Subject.java");
+            Files.createDirectories(java.getParent());
+            Files.writeString(java, source, StandardCharsets.UTF_8);
+            int compiled =
+                    ToolProvider.getSystemJavaCompiler()
+                            .run(
+                                    null,
+                                    null,
+                                    null,
+                                    "--release",
+                                    "21",
+                                    "-Xlint:all",
+                                    "-Werror",
+                                    "-d",
+                                    dir.toString(),
+                                    java.toString());
+            if (compiled != 0) {
+                throw new IllegalStateException(
+                        "A3Lab javac gate failed fixture="
+                                + fixture
+                                + " schedule="
+                                + schedule
+                                + " pass="
+                                + pass);
+            }
 
-        List<String> contract = contract(type);
-        Method probe = type.getMethod("probe", int.class, int.class);
-        Method matches = type.getMethod("matches", String.class);
-        Method payload = type.getMethod("payload");
+            try (URLClassLoader loader =
+                    new URLClassLoader(new URL[] {dir.toUri().toURL()}, null)) {
+                Class<?> type = loader.loadClass("m3.lab.Subject");
+                List<String> contract = contract(type);
+                Method probe = type.getMethod("probe", int.class, int.class);
+                Method matches = type.getMethod("matches", String.class);
+                Method payload = type.getMethod("payload");
 
-        ArrayList<String> behavior = new ArrayList<>();
-        for (int[] pair :
-                List.of(
-                        new int[] {0, 0},
-                        new int[] {1, 2},
-                        new int[] {-7, 3},
-                        new int[] {Integer.MAX_VALUE, 1})) {
-            behavior.add(
-                    pair[0]
-                            + ","
-                            + pair[1]
-                            + "="
-                            + probe.invoke(null, pair[0], pair[1]));
+                ArrayList<String> behavior = new ArrayList<>();
+                for (int[] pair :
+                        List.of(
+                                new int[] {0, 0},
+                                new int[] {1, 2},
+                                new int[] {-7, 3},
+                                new int[] {Integer.MAX_VALUE, 1})) {
+                    behavior.add(
+                            pair[0]
+                                    + ","
+                                    + pair[1]
+                                    + "="
+                                    + probe.invoke(null, pair[0], pair[1]));
+                }
+                for (String value :
+                        List.of(
+                                "return (a+b)*31;",
+                                "if (x) { return y; }",
+                                "plain text",
+                                "a+b?")) {
+                    behavior.add("m:" + value + "=" + matches.invoke(null, value));
+                }
+                return new Observation(
+                        contract,
+                        List.copyOf(behavior),
+                        Objects.toString(payload.invoke(null), ""));
+            }
+        } finally {
+            deleteTree(dir);
         }
-        for (String value :
-                List.of(
-                        "return (a+b)*31;",
-                        "if (x) { return y; }",
-                        "plain text",
-                        "a+b?")) {
-            behavior.add("m:" + value + "=" + matches.invoke(null, value));
-        }
-
-        String payloadText = Objects.toString(payload.invoke(null), "");
-        A3RegexMatrix.Matrix matrix = A3RegexMatrix.evaluate(payloadText);
-        return new Observation(
-                contract,
-                List.copyOf(behavior),
-                payloadText,
-                matrix.root());
     }
 
     private static List<String> contract(Class<?> type) {
@@ -383,9 +395,6 @@ public final class A3Lab {
         if (!expected.payload().equals(actual.payload())) {
             throw new IllegalStateException("A3Lab code-looking data drift");
         }
-        if (!expected.regexMatrixRoot().equals(actual.regexMatrixRoot())) {
-            throw new IllegalStateException("A3Lab regex matrix drift");
-        }
     }
 
     private static String subset(List<String> schedule) {
@@ -416,4 +425,22 @@ public final class A3Lab {
         return checked;
     }
 
+    private static void deleteTree(Path root) {
+        if (root == null || !Files.exists(root)) {
+            return;
+        }
+        try (var stream = Files.walk(root)) {
+            stream.sorted(Comparator.reverseOrder())
+                    .forEach(
+                            path -> {
+                                try {
+                                    Files.deleteIfExists(path);
+                                } catch (IOException ignored) {
+                                    // Temporary compiler output cleanup is best effort.
+                                }
+                            });
+        } catch (IOException ignored) {
+            // Temporary compiler output cleanup is best effort.
+        }
+    }
 }
