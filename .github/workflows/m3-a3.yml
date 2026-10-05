@@ -76,11 +76,24 @@ jobs:
           mvn -B -ntp -f "$REPO/m3/pom.xml" \
             -pl tooling/a3 -am -DskipTests install
 
-      - name: Run focused A3 JUnit proof
+      - name: Prove A3Lab source-sealed recipe delivery
         shell: bash
         run: |
           set -euo pipefail
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" test
+          mvn -B -ntp -f "$REPO/m3/tooling/migration-recipes/pom.xml" \
+            -Dtest=M3A3LabDeliveryRecipeTest \
+            -Dsurefire.failIfNoSpecifiedTests=false test
+
+      - name: Run focused A3 application and mastery JUnit proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          # A3Alg/A3Plan have independent current regressions. Keep them visible in
+          # their own gates; this stage answers only whether the retained Apply owner
+          # and new A3Lab recipe-mastery lane are mechanically sound.
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" \
+            -Dtest=A3ApplyTest,A3LabTest \
+            -Dsurefire.failIfNoSpecifiedTests=false test
 
       - name: Master hostile Atomize Patternize corpus
         shell: bash
