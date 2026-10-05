@@ -35,6 +35,13 @@ public class M3StringPrecomputeSearchTest {
         check(joined.lastIndexOf("omega") == oracle.lastIndexOf("omega"), "lastIndexOf String");
         check(joined.indexOf("not-present") == -1, "absent String");
 
+        String splitSupplementary = String.join("", "\ud83d", "\ude42");
+        check(splitSupplementary.equals("\ud83d\ude42"), "split surrogate content");
+        check(splitSupplementary.indexOf(0x1f642) == 0,
+                "supplementary code point across canonical atom seam");
+        check(splitSupplementary.lastIndexOf(0x1f642) == 0,
+                "reverse supplementary code point across canonical atom seam");
+
         String repeated = joined.repeat(3);
         String repeatedOracle = oracle.repeat(3);
         check(repeated.indexOf("\ud83d\ude42|omegaalpha") ==
