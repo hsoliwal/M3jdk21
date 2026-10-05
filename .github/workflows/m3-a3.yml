@@ -11,7 +11,9 @@ on:
       - "m3/backports/JEP_CATALOGUE.tsv"
       - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
       - "m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"
+      - "m3/backports/ALGORITHM_CATALOGUE.tsv"
       - "m3/docs/a3.md"
+      - "m3/docs/a3-alg.md"
       - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
       - "m3/pom.xml"
       - ".github/workflows/m3-a3.yml"
@@ -22,7 +24,9 @@ on:
       - "m3/backports/JEP_CATALOGUE.tsv"
       - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
       - "m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"
+      - "m3/backports/ALGORITHM_CATALOGUE.tsv"
       - "m3/docs/a3.md"
+      - "m3/docs/a3-alg.md"
       - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
       - "m3/pom.xml"
       - ".github/workflows/m3-a3.yml"
@@ -78,7 +82,22 @@ jobs:
           test "$NATIVE_ROWS" -gt 100
           printf 'A3 inventory: Java=%s Native=%s\n' "$JAVA_ROWS" "$NATIVE_ROWS" >> "$GITHUB_STEP_SUMMARY"
 
-      - name: Plan every current JEP JBS and community row
+      - name: Validate algorithm evidence catalogue
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="alg --root $REPO --out m3/build/a3/algorithms.tsv"
+          ALG="$REPO/m3/build/a3/algorithms.tsv"
+          test -s "$ALG"
+          ALG_ROWS="$(awk -F '\t' 'NR > 1 {n++} END {print n+0}' "$ALG")"
+          STRICT_ROWS="$(awk -F '\t' 'NR > 1 && ($4 == "admitted" || $4 == "candidate" || $4 == "candidate-adapted") {n++} END {print n+0}' "$ALG")"
+          STRICT_TRI="$(awk -F '\t' 'NR > 1 && ($4 == "admitted" || $4 == "candidate" || $4 == "candidate-adapted") && $7 == "true" {n++} END {print n+0}' "$ALG")"
+          test "$ALG_ROWS" -ge 7
+          test "$STRICT_ROWS" -eq "$STRICT_TRI"
+          awk -F '\t' 'NR > 1 && $9 != "false" {bad++} END {exit bad ? 1 : 0}' "$ALG"
+          printf 'A3 algorithms: rows=%s strict-triplatform=%s\n' "$ALG_ROWS" "$STRICT_TRI" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Plan every current JEP JBS community and algorithm row
         shell: bash
         run: |
           set -euo pipefail
@@ -88,10 +107,12 @@ jobs:
           JEP_ROWS="$(awk -F '\t' 'NR > 1 && $1 == "JEP" {n++} END {print n+0}' "$PLAN")"
           JBS_ROWS="$(awk -F '\t' 'NR > 1 && $1 == "JBS" {n++} END {print n+0}' "$PLAN")"
           CAP_ROWS="$(awk -F '\t' 'NR > 1 && $1 == "CAP" {n++} END {print n+0}' "$PLAN")"
+          ALG_ROWS="$(awk -F '\t' 'NR > 1 && $1 == "ALG" {n++} END {print n+0}' "$PLAN")"
           test "$JEP_ROWS" -ge 82
           test "$JBS_ROWS" -ge 13
           test "$CAP_ROWS" -ge 10
-          printf 'A3 plan: JEP=%s JBS=%s CAP=%s\n' "$JEP_ROWS" "$JBS_ROWS" "$CAP_ROWS" >> "$GITHUB_STEP_SUMMARY"
+          test "$ALG_ROWS" -ge 7
+          printf 'A3 plan: JEP=%s JBS=%s CAP=%s ALG=%s\n' "$JEP_ROWS" "$JBS_ROWS" "$CAP_ROWS" "$ALG_ROWS" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Expand real tree paths into serial FILE work atoms
         shell: bash
@@ -150,6 +171,7 @@ jobs:
           name: m3-a3-proof-${{ github.run_id }}
           path: |
             ${{ env.REPO }}/m3/build/a3/inventory.tsv
+            ${{ env.REPO }}/m3/build/a3/algorithms.tsv
             ${{ env.REPO }}/m3/build/a3/plan.tsv
             ${{ env.REPO }}/m3/build/a3/work.tsv
             ${{ env.REPO }}/m3/build/a3/apply-receipt.tsv
