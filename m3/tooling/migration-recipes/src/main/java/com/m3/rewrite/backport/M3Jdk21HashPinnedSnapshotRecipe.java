@@ -285,7 +285,9 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
 
     static boolean jdkJavaPath(String value) {
         if (value == null
-                || !(value.startsWith("src/") || value.startsWith("test/"))
+                || !(value.startsWith("src/")
+                        || value.startsWith("test/")
+                        || value.startsWith("m3/ports/"))
                 || !value.endsWith(".java")
                 || value.indexOf('\\') >= 0
                 || value.length() > 4096) {
