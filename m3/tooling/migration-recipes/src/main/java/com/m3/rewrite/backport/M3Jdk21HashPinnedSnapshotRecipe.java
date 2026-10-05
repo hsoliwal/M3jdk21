@@ -43,7 +43,7 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
 
     @Option(
             displayName = "Crate name",
-            description = "Generated exact donor crate below jdk21-hash-pinned.",
+            description = "Generated exact donor or reviewed Synexia crate below jdk21-hash-pinned.",
             example = "jdk27-0001")
     private final String crateName;
 
@@ -63,7 +63,8 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
     @JsonCreator
     public M3Jdk21HashPinnedSnapshotRecipe(@JsonProperty("crateName") String crateName) {
         if (crateName == null
-                || !crateName.matches("jdk(?:22|23|24|25|26|27)-[a-z0-9][a-z0-9-]{0,63}")) {
+                || !crateName.matches(
+                        "(?:jdk(?:22|23|24|25|26|27)|synexia)-[a-z0-9][a-z0-9-]{0,63}")) {
             throw new IllegalArgumentException("invalid M3JDK21 backport crate");
         }
         this.crateName = crateName;
@@ -80,7 +81,7 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
 
     @Override
     public String getDescription() {
-        return "Replays one reviewed OpenJDK donor crate only from exact JDK21 preimages or already-converged outputs.";
+        return "Replays one reviewed Java snapshot crate only from exact JDK21 preimages or already-converged outputs.";
     }
 
     @Override
