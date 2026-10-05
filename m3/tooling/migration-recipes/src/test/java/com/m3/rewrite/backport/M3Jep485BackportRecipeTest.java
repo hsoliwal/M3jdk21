@@ -25,6 +25,7 @@ import org.openrewrite.Parser;
 import org.openrewrite.Recipe;
 import org.openrewrite.Result;
 import org.openrewrite.SourceFile;
+import org.openrewrite.config.Environment;
 import org.openrewrite.internal.InMemoryLargeSourceSet;
 import org.openrewrite.java.JavaParser;
 import org.openrewrite.java.tree.J;
@@ -51,6 +52,11 @@ final class M3Jep485BackportRecipeTest {
         assertEquals(M3ContractMode.EXPLICIT_CONTRACT_CHANGE, policy.contractMode());
         assertFalse(policy.fileLocalMechanical(
                 List.of("src/java.base/share/classes/java/util/stream/Stream.java")));
+
+        Recipe named = Environment.builder().scanYamlResources().build()
+                .activateRecipes("com.m3.rewrite.backport.Jep485");
+        assertEquals(1, named.getRecipeList().size());
+        assertInstanceOf(M3Jep485BackportRecipe.class, named.getRecipeList().getFirst());
     }
 
     @Test
