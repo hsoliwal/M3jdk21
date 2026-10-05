@@ -57,6 +57,9 @@ public final class M3RecipeScopeRegistry {
                     fixed(M3EditScope.FILE)),
             Map.entry(
                     "com.m3.rewrite.backport.M3Jep458BackportRecipe",
+                    explicitChange()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3Jep485BackportRecipe",
                     explicitChange()));
 
     private M3RecipeScopeRegistry() {}
