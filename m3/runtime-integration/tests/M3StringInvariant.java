@@ -61,6 +61,28 @@ public final class M3StringInvariant {
         same(facts1, facts2, "whole canonical owner shares internal precompute facts");
         assertNoArrayInstanceFields(facts1.getClass());
 
+        String asciiTrim = fresh("  alpha  ");
+        eq("alpha", asciiTrim.trim(), "M3 trim facts");
+        eq("alpha", asciiTrim.strip(), "M3 ASCII strip facts");
+
+        String unicodeStrip = fresh("\u2003\talpha\t\u2003");
+        eq("alpha", unicodeStrip.strip(), "M3 Unicode strip facts");
+        eq("\u2003\talpha\t\u2003", unicodeStrip.trim(), "legacy trim differs from Unicode strip");
+
+        String allWhitespace = fresh(" \t\u2003");
+        eq("", allWhitespace.strip(), "all Unicode whitespace strips empty");
+        check(allWhitespace.isBlank(), "all Unicode whitespace is blank");
+
+        String whitespaceTuple =
+                fresh(" \u2003").concat(fresh("alpha")).concat(fresh("\u2003 "));
+        eq("alpha", whitespaceTuple.strip(), "tuple-composed whitespace boundaries");
+        check(!whitespaceTuple.isBlank(), "tuple-composed content is nonblank");
+
+        Object whitespaceFacts = M3_FACTS.invoke(body(whitespaceTuple));
+        same(whitespaceFacts, M3_FACTS.invoke(body(
+                fresh(" \u2003").concat(fresh("alpha")).concat(fresh("\u2003 "))))),
+                "equal whitespace tuple shares fixed facts");
+
         char[] chars = joined1.toCharArray();
         chars[0] = '!';
         eq("alphagamma", joined1, "JNI char shadow mutation isolation");
