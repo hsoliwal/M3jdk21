@@ -28,6 +28,7 @@ symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
 classes = read("src/hotspot/share/classfile/vmClassMacros.hpp")
 inline = read("src/hotspot/share/classfile/javaClasses.inline.hpp")
 mapping = read("m3/docs/name-mapping.json")
+port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
 
 # M3String must remain owner + coordinate only.
 instance_fields = re.findall(
@@ -104,6 +105,12 @@ critical_surfaces = {
     "lastIndexOf(String)": "M3String storage = m3();",
     "substring": "M3String.sliceOf(this, beginIndex, endIndex)",
     "concat": "m3Concat(this, str)",
+    "trim": "M3StringFacts facts = storage.facts();",
+    "strip": "facts.stripStart",
+    "stripLeading": "storage.facts().stripStart",
+    "stripTrailing": "storage.facts().stripEnd",
+    "indexOfNonWhitespace": "storage.facts().stripStart",
+    "lastIndexOfNonWhitespace": "storage.facts().stripEnd",
     "toCharArray": "return storage.charShadow();",
     "value": "return storage == null ? value : storage.materialize();",
 }
@@ -126,5 +133,14 @@ required_mapping_fragments = [
 for fragment in required_mapping_fragments:
     if fragment not in mapping:
         fail(f"name mapping missing: {fragment}")
+
+for fragment in [
+    "MIndexWhitespaceBoundaries\tjava.lang.M3StringFacts\tIMPLEMENTED",
+    "MIndexUtf16RangeFacts\tM3StringOwner.rangeFacts\tIMPLEMENTED",
+    "MIndexRegexTrigramQuery\tjdk.internal.mindex.M3TQ\tIMPLEMENTED",
+    "DO_NOT_PORT_TO_JAVA_LANG_STRING",
+]:
+    if fragment not in port_map:
+        fail(f"precompute port map missing: {fragment}")
 
 print("M3_STRING_SOURCE_INVARIANTS_PASS")
