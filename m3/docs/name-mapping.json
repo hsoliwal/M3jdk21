@@ -3,12 +3,12 @@
   "policy": "additive; no blind renames or unverified compatibility claims; Synexia donor names do not define M3JDK target ABI; precompute is internal-only",
   "mappings": [
     {
-      "source": "com.synexia.indexstring.MIndexString",
-      "target": "java.lang.M3String",
-      "status": "canonical target counterpart; representation convergence required",
+      "source": "com.synexia.indexstring.IndexStringTuple",
+      "source_commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+      "target": "java.lang.M3StringTuple",
+      "status": "adapted canonical persistent composition owner",
       "source_role": "Synexia donor/reference implementation",
-      "target_rule": "M3JDK naming is independent; preserve owner+coordinate semantics, internal precompute, and JNI shadow-only materialization",
-      "supersedes_target_name": "java.lang.MIndexString"
+      "target_rule": "M3String values retain owner+packed coordinate; tuple owners retain child coordinates only and no text arrays"
     },
     {
       "source": "com.synexia.indexstring.LocalM3StringPiece",
@@ -18,6 +18,54 @@
       "canonical_owner_decision": "retain established Synexia owner; adapter/migration deferred"
     },
     {
+      "source": "com.synexia.indexstring.MIndexMappedStringBacking",
+      "source_commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+      "target": "jdk.internal.mindex.M3MappedStringBacking",
+      "status": "renamed target-side internal counterpart",
+      "source_role": "Synexia donor/reference mapped backing",
+      "target_rule": "preserve mapped semantics while using M3 target vocabulary"
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexNativeResolver / com.synexia.indexstring.nativebridge.MIndexNativeIntern",
+      "source_commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+      "target": "java.lang.M3StringAtom + java.lang.M3StringPool",
+      "status": "adapted scalar canonical-owner responsibility",
+      "source_role": "Synexia donor/reference native canonical UTF-16 arena",
+      "target_rule": "M3JDK local scalar payload moves to native memory immediately; mapped atoms retain mapped owner/address; Java text arrays are not canonical"
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexString",
+      "target": "java.lang.M3String",
+      "status": "canonical target counterpart; representation convergence required",
+      "source_role": "Synexia donor/reference implementation",
+      "target_rule": "M3JDK naming is independent; preserve owner+coordinate semantics, internal precompute, and JNI shadow-only materialization",
+      "supersedes_target_name": "java.lang.MIndexString"
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexStringBacking",
+      "source_commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+      "target": "jdk.internal.mindex.M3StringBacking",
+      "status": "renamed target-side internal counterpart",
+      "source_role": "Synexia donor/reference backing contract",
+      "target_rule": "M3JDK target ABI uses M3 naming"
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexStringCanonicalFacts / MIndexStringPrecomputation",
+      "source_commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+      "target": "java.lang.M3StringFacts + jdk.internal.mindex.M3TQ",
+      "status": "split internal precompute counterpart; bounded scalar facts implemented, richer donor precompute remains synchronization queue",
+      "source_role": "Synexia donor/reference internal precompute",
+      "target_rule": "precompute stays implementation-internal, keys exact canonical owner/range/composition identity, owns no canonical spelling"
+    },
+    {
+      "source": "com.synexia.indexstring.nativebridge.MIndexUtf16Shadow",
+      "source_commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+      "target": "java.lang.M3String.nativeCharShadow + src/java.base/share/native/libjava/String.c",
+      "status": "adapted JNI shadow boundary",
+      "source_role": "Synexia donor/reference native UTF-16 shadow",
+      "target_rule": "char[] is caller-owned JNI materialization only and never canonical M3String storage"
+    },
+    {
       "source": "LocalMIndexStringPiece",
       "target": "com.m3.text.LocalM3StringPiece",
       "status": "provisional semantic direction only",
@@ -25,13 +73,13 @@
       "compatibility_facade": "deferred until original source contract is supplied"
     },
     {
-      "source": "MIndex family",
+      "source": "MatIndex family",
       "target": "M3 family",
       "status": "requires per-type source/API/ownership mapping",
       "source_commit": null
     },
     {
-      "source": "MatIndex family",
+      "source": "MIndex family",
       "target": "M3 family",
       "status": "requires per-type source/API/ownership mapping",
       "source_commit": null
