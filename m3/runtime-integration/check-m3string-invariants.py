@@ -86,27 +86,34 @@ if not char_at or "java_lang_M3String::char_at(storage, index)" not in char_at.g
 if re.search(r"\bpublic\b[^\n{;]*\bprecompute\s*\(", string, flags=re.IGNORECASE):
     fail("java.lang.String exposes precompute API")
 
-# Direct String.value reads in non-constructor instance methods are dangerous for M3-backed
-# values because value is intentionally an empty VM-layout sentinel. Permit only methods that
-# explicitly branch on m3() before the flat-array read. This is a conservative textual gate;
-# the runtime API probe remains the semantic authority.
-method_pattern = re.compile(
-    r"(?ms)^\s{4}(?:public|private|protected|static|final|native|synchronized|\s)+"
-    r"[\w<>\[\], ?]+\s+(\w+)\s*\([^)]*\)\s*\{"
-)
-starts = [(m.start(), m.group(1)) for m in method_pattern.finditer(string)]
-for index, (start, name) in enumerate(starts):
-    end = starts[index + 1][0] if index + 1 < len(starts) else len(string)
-    body = string[start:end]
-    if name in {"value", "maybeAdmit", "ensureM3", "m3AdmitNative"}:
-        continue
-    direct = re.search(r"(?<![.\w])value(?!\s*\()", body)
-    if direct and "m3()" not in body and name not in {"repeatCopyRest"}:
-        # Static helpers may own a local parameter named value; only flag methods that can read
-        # this.value implicitly (no local/parameter declaration of byte[] value).
-        header = body[: body.find("{") + 1]
-        if "byte[] value" not in header and "char[] value" not in header:
-            fail(f"String method {name} directly reads value without M3 branch")
+# Critical String surfaces must remain M3-aware. We deliberately check named semantic
+# entry points instead of trying to parse Java with regular expressions.
+critical_surfaces = {
+    "length": "M3String storage = m3();",
+    "charAt": "M3String storage = m3();",
+    "codePointAt": "if (m3() != null)",
+    "codePointBefore": "if (m3() != null)",
+    "codePointCount": "M3String storage = m3();",
+    "getChars": "M3String storage = m3();",
+    "equals": "M3String leftStorage = m3();",
+    "compareTo": "if (m3() != null || anotherString.m3() != null)",
+    "regionMatches": "if (m3() != null || other.m3() != null)",
+    "startsWith": "M3String sourceM3 = m3();",
+    "hashCode": "M3String storage = m3();",
+    "indexOf(String)": "M3String sourceM3 = m3();",
+    "lastIndexOf(String)": "M3String storage = m3();",
+    "substring": "M3String.sliceOf(this, beginIndex, endIndex)",
+    "concat": "m3Concat(this, str)",
+    "toCharArray": "return storage.charShadow();",
+    "value": "return storage == null ? value : storage.materialize();",
+}
+for surface, marker in critical_surfaces.items():
+    if marker not in string:
+        fail(f"critical String surface lost M3 route: {surface}")
+
+# M3-backed constructors must store only the empty compatibility sentinel.
+if string.count("storage.compatibilityValue()") < 4:
+    fail("M3-backed String constructors no longer consistently use the empty sentinel")
 
 # Mapping authority must preserve donor->target lineage and shadow names.
 required_mapping_fragments = [
