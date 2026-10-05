@@ -28,5 +28,8 @@ final class M3ScopeDefensiveBranchTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> M3ScopeInference.forPaths(List.of("src/")));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> M3ScopeInference.forPaths(List.of("src/demo/")));
     }
 }
