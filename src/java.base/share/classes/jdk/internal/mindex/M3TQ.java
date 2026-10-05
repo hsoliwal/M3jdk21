@@ -316,6 +316,30 @@ public final class M3TQ {
     }
 
     /**
+     * Returns true when every exact trigram in {@code required} is present in this fact set.
+     *
+     * <p>This is still only a substring/regex necessary condition: membership discards ordering
+     * and multiplicity, so true always requires exact verification.</p>
+     */
+    public boolean containsAll(Facts required) {
+      Objects.requireNonNull(required, "required");
+      int source = 0;
+      int needle = 0;
+      while (source < keys.length && needle < required.keys.length) {
+        long left = keys[source];
+        long right = required.keys[needle];
+        if (left < right) source++;
+        else if (left == right) {
+          source++;
+          needle++;
+        } else {
+          return false;
+        }
+      }
+      return needle == required.keys.length;
+    }
+
+    /**
      * Prepare facts for the ordered concatenation using metadata only.
      *
      * <p>With k retained keys this uses O(k) merge work and O(k) temporary/output space.
