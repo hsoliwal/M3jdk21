@@ -15,6 +15,7 @@ import java.util.Random;
 
 public class M3StringFactsCompositionTest {
     private static final Field STRING_M3;
+    private static final Field M3_OWNER;
     private static final Method FACTS;
     private static final List<Field> FACT_FIELDS;
     private static long checks;
@@ -24,6 +25,8 @@ public class M3StringFactsCompositionTest {
             STRING_M3 = String.class.getDeclaredField("m3");
             STRING_M3.setAccessible(true);
             Class<?> m3 = Class.forName("java.lang.M3String");
+            M3_OWNER = m3.getDeclaredField("owner");
+            M3_OWNER.setAccessible(true);
             FACTS = m3.getDeclaredMethod("facts");
             FACTS.setAccessible(true);
             Class<?> facts = Class.forName("java.lang.M3StringFacts");
@@ -110,8 +113,16 @@ public class M3StringFactsCompositionTest {
     }
 
     private static void sameFacts(String composed, String flat, String label) throws Exception {
-        Object composedFacts = facts(composed);
-        Object flatFacts = facts(flat);
+        Object composedBody = body(composed);
+        Object flatBody = body(flat);
+        Object flatOwner = M3_OWNER.get(flatBody);
+        checks++;
+        if (!flatOwner.getClass().getName().equals("java.lang.M3StringAtom")) {
+            throw new AssertionError(label + " flat oracle is not a scalar atom: " + flatOwner.getClass());
+        }
+
+        Object composedFacts = FACTS.invoke(composedBody);
+        Object flatFacts = FACTS.invoke(flatBody);
         for (Field field : FACT_FIELDS) {
             Object left = field.get(composedFacts);
             Object right = field.get(flatFacts);
@@ -129,13 +140,13 @@ public class M3StringFactsCompositionTest {
         }
     }
 
-    private static Object facts(String value) throws Exception {
+    private static Object body(String value) throws Exception {
         value.length();
         Object m3 = STRING_M3.get(value);
         if (m3 == null) {
             throw new AssertionError("String was not admitted to M3");
         }
-        return FACTS.invoke(m3);
+        return m3;
     }
 
     private static String fresh(String value) {
