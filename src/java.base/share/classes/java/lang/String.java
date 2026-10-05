@@ -2174,6 +2174,28 @@ public final class String
         private static final long serialVersionUID = 8575799808933029326L;
 
         public int compare(String s1, String s2) {
+            if (s1.m3() != null || s2.m3() != null) {
+                int i1 = 0;
+                int i2 = 0;
+                int n1 = s1.length();
+                int n2 = s2.length();
+                while (i1 < n1 && i2 < n2) {
+                    int c1 = s1.codePointAt(i1);
+                    int c2 = s2.codePointAt(i2);
+                    if (c1 != c2) {
+                        int u1 = Character.toUpperCase(c1);
+                        int u2 = Character.toUpperCase(c2);
+                        if (u1 != u2) {
+                            int l1 = Character.toLowerCase(u1);
+                            int l2 = Character.toLowerCase(u2);
+                            if (l1 != l2) return l1 - l2;
+                        }
+                    }
+                    i1 += Character.charCount(c1);
+                    i2 += Character.charCount(c2);
+                }
+                return n1 - n2;
+            }
             byte[] v1 = s1.value();
             byte[] v2 = s2.value();
             byte coder = s1.coder();
@@ -2256,6 +2278,12 @@ public final class String
              (ooffset > (long)other.length() - len)) {
             return false;
         }
+        if (m3() != null || other.m3() != null) {
+            for (int index = 0; index < len; index++) {
+                if (charAt(toffset + index) != other.charAt(ooffset + index)) return false;
+            }
+            return true;
+        }
         byte[] tv = value();
         byte[] ov = other.value();
         byte coder = coder();
@@ -2265,23 +2293,15 @@ public final class String
                 ooffset <<= UTF16;
                 len <<= UTF16;
             }
-            return ArraysSupport.mismatch(tv, toffset,
-                    ov, ooffset, len) < 0;
+            return ArraysSupport.mismatch(tv, toffset, ov, ooffset, len) < 0;
+        }
+        if (coder == LATIN1) {
+            while (len-- > 0) {
+                if (StringLatin1.getChar(tv, toffset++) != StringUTF16.getChar(ov, ooffset++)) return false;
+            }
         } else {
-            if (coder == LATIN1) {
-                while (len-- > 0) {
-                    if (StringLatin1.getChar(tv, toffset++) !=
-                        StringUTF16.getChar(ov, ooffset++)) {
-                        return false;
-                    }
-                }
-            } else {
-                while (len-- > 0) {
-                    if (StringUTF16.getChar(tv, toffset++) !=
-                        StringLatin1.getChar(ov, ooffset++)) {
-                        return false;
-                    }
-                }
+            while (len-- > 0) {
+                if (StringUTF16.getChar(tv, toffset++) != StringLatin1.getChar(ov, ooffset++)) return false;
             }
         }
         return true;
@@ -2340,11 +2360,43 @@ public final class String
         if (!ignoreCase) {
             return regionMatches(toffset, other, ooffset, len);
         }
-        // Note: toffset, ooffset, or len might be near -1>>>1.
         if ((ooffset < 0) || (toffset < 0)
                 || (toffset > (long)length() - len)
                 || (ooffset > (long)other.length() - len)) {
             return false;
+        }
+        if (m3() != null || other.m3() != null) {
+            int t = toffset;
+            int o = ooffset;
+            int remaining = len;
+            while (remaining > 0) {
+                int tc = charAt(t);
+                int oc = other.charAt(o);
+                int tcp = tc;
+                int ocp = oc;
+                int tw = 1;
+                int ow = 1;
+                if (Character.isHighSurrogate((char) tc) && remaining > 1
+                        && Character.isLowSurrogate(charAt(t + 1))) {
+                    tcp = Character.toCodePoint((char) tc, charAt(t + 1));
+                    tw = 2;
+                }
+                if (Character.isHighSurrogate((char) oc) && remaining > 1
+                        && Character.isLowSurrogate(other.charAt(o + 1))) {
+                    ocp = Character.toCodePoint((char) oc, other.charAt(o + 1));
+                    ow = 2;
+                }
+                if (tcp != ocp) {
+                    int tu = Character.toUpperCase(tcp);
+                    int ou = Character.toUpperCase(ocp);
+                    if (tu != ou && Character.toLowerCase(tu) != Character.toLowerCase(ou)) return false;
+                }
+                if (tw != ow) return false;
+                t += tw;
+                o += ow;
+                remaining -= tw;
+            }
+            return true;
         }
         byte[] tv = value();
         byte[] ov = other.value();
@@ -2568,6 +2620,24 @@ public final class String
      * {@code fromIndex} were larger than the string length, or were negative.
      */
     public int indexOf(int ch, int fromIndex) {
+        M3String storage = m3();
+        if (storage != null) {
+            int from = Math.max(fromIndex, 0);
+            if (from >= storage.length()) return -1;
+            if (Character.isBmpCodePoint(ch)) {
+                for (int index = from; index < storage.length(); index++) {
+                    if (storage.charAt(index) == (char) ch) return index;
+                }
+                return -1;
+            }
+            if (!Character.isValidCodePoint(ch)) return -1;
+            for (int index = from; index < storage.length() - 1; index++) {
+                char high = storage.charAt(index);
+                if (Character.isHighSurrogate(high)
+                        && Character.toCodePoint(high, storage.charAt(index + 1)) == ch) return index;
+            }
+            return -1;
+        }
         return isLatin1() ? StringLatin1.indexOf(value(), ch, fromIndex, length())
                 : StringUTF16.indexOf(value(), ch, fromIndex, length());
     }
@@ -2614,6 +2684,22 @@ public final class String
      */
     public int indexOf(int ch, int beginIndex, int endIndex) {
         checkBoundsBeginEnd(beginIndex, endIndex, length());
+        M3String storage = m3();
+        if (storage != null) {
+            if (Character.isBmpCodePoint(ch)) {
+                for (int index = beginIndex; index < endIndex; index++) {
+                    if (storage.charAt(index) == (char) ch) return index;
+                }
+                return -1;
+            }
+            if (!Character.isValidCodePoint(ch)) return -1;
+            for (int index = beginIndex; index + 1 < endIndex; index++) {
+                char high = storage.charAt(index);
+                if (Character.isHighSurrogate(high)
+                        && Character.toCodePoint(high, storage.charAt(index + 1)) == ch) return index;
+            }
+            return -1;
+        }
         return isLatin1() ? StringLatin1.indexOf(value(), ch, beginIndex, endIndex)
                 : StringUTF16.indexOf(value(), ch, beginIndex, endIndex);
     }
@@ -2680,6 +2766,24 @@ public final class String
      *          if the character does not occur before that point.
      */
     public int lastIndexOf(int ch, int fromIndex) {
+        M3String storage = m3();
+        if (storage != null) {
+            int from = Math.min(fromIndex, storage.length() - 1);
+            if (from < 0) return -1;
+            if (Character.isBmpCodePoint(ch)) {
+                for (int index = from; index >= 0; index--) {
+                    if (storage.charAt(index) == (char) ch) return index;
+                }
+                return -1;
+            }
+            if (!Character.isValidCodePoint(ch)) return -1;
+            for (int index = Math.min(from, storage.length() - 2); index >= 0; index--) {
+                char high = storage.charAt(index);
+                if (Character.isHighSurrogate(high)
+                        && Character.toCodePoint(high, storage.charAt(index + 1)) == ch) return index;
+            }
+            return -1;
+        }
         return isLatin1() ? StringLatin1.lastIndexOf(value(), ch, fromIndex)
                           : StringUTF16.lastIndexOf(value(), ch, fromIndex);
     }
@@ -2699,15 +2803,7 @@ public final class String
      *          or {@code -1} if there is no such occurrence.
      */
     public int indexOf(String str) {
-        byte coder = coder();
-        if (coder == str.coder()) {
-            return isLatin1() ? StringLatin1.indexOf(value(), str.value())
-                              : StringUTF16.indexOf(value(), str.value());
-        }
-        if (coder == LATIN1) {  // str.coder == UTF16
-            return -1;
-        }
-        return StringUTF16.indexOfLatin1(value(), str.value());
+        return indexOf(str, 0);
     }
 
     /**
@@ -2794,6 +2890,11 @@ public final class String
             return indexOf(str.charAt(0), beginIndex, endIndex);
         }
         checkBoundsBeginEnd(beginIndex, endIndex, length());
+        M3String sourceM3 = m3();
+        if (sourceM3 != null) {
+            int found = indexOf(str, beginIndex);
+            return found >= 0 && found + str.length() <= endIndex ? found : -1;
+        }
         return indexOf(value(), coder(), endIndex, str, beginIndex);
     }
 
@@ -2870,6 +2971,23 @@ public final class String
      *          or {@code -1} if there is no such occurrence.
      */
     public int lastIndexOf(String str, int fromIndex) {
+        Objects.requireNonNull(str, "str");
+        M3String storage = m3();
+        if (storage != null) {
+            int targetLength = str.length();
+            int start = Math.min(fromIndex, storage.length() - targetLength);
+            if (start < 0) return -1;
+            if (targetLength == 0) return start;
+            M3String target = str.m3();
+            if (target != null && !storage.mayContain(target)) return -1;
+            for (int candidate = start; candidate >= 0; candidate--) {
+                int index = 0;
+                while (index < targetLength
+                        && storage.charAt(candidate + index) == str.charAt(index)) index++;
+                if (index == targetLength) return candidate;
+            }
+            return -1;
+        }
         return lastIndexOf(value(), coder(), length(), str, fromIndex);
     }
 
