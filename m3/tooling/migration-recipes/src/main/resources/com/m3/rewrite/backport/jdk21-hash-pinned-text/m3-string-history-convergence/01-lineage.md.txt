@@ -83,3 +83,15 @@ M3JDK now treats the ordinary Java arrays exactly as compatibility/output projec
 - other Charsets receive one caller-owned UTF-16 projection and the stock `CharsetEncoder`
   replacement contract;
 - no produced `byte[]` or `char[]` becomes canonical M3 String storage.
+
+### No-replacement byte paths
+
+The JDK-internal no-replacement helpers also stay on M3 storage:
+
+- `String.getBytesUTF8NoRepl` uses `M3String.encodeUtf8NoRepl`;
+- `String.getBytesNoRepl` uses `M3String.encodeNoRepl`;
+- UTF-8 preserves the existing unpaired-surrogate `IllegalArgumentException` with
+  `UnmappableCharacterException` cause at the internal helper;
+- the checked `getBytesNoRepl` wrapper continues to expose the original
+  `CharacterCodingException` family;
+- these paths do not manufacture a Compact-String shadow before producing the caller-owned bytes.
