@@ -164,10 +164,16 @@ if "private volatile M3String m3;" not in string:
 
 # M3-backed wrappers must not create Java text arrays. Even the shared empty compatibility
 # sentinel is created through the JNI shadow boundary.
-# M3String may allocate caller-owned byte[] results because getBytes/charset encoding requires
-# real Java arrays. It must not stage canonical text through a Java char[] or retain text arrays.
+# Every Java byte[]/char[] produced from canonical M3 text is a JNI-created shadow, including
+# charset output. Canonical M3 code may fill/copy a shadow, but Java must not allocate the array.
 if "new char[" in m3:
     fail("M3String stages canonical text through a Java char[]")
+if "new byte[" in m3:
+    fail("M3String creates a byte shadow in Java instead of JNI")
+if "Arrays.copyOf(" in m3:
+    fail("M3String creates a resized byte shadow in Java instead of JNI")
+if "nativeAllocateByteShadow" not in m3:
+    fail("M3String JNI byte-shadow allocator missing")
 if "CharBuffer.wrap(this)" not in m3:
     fail("generic charset encoding no longer reads canonical M3 String directly")
 if "nativeByteShadow(EMPTY, 0, 0, String.LATIN1)" not in m3:
@@ -189,6 +195,16 @@ char_shadow = re.search(
 )
 if not byte_shadow or not char_shadow:
     fail("M3 JNI shadow functions missing")
+allocator_shadow = re.search(
+    r"Java_java_lang_M3String_nativeAllocateByteShadow\((?P<body>.*?)\n\}",
+    native_string,
+    flags=re.DOTALL,
+)
+if not allocator_shadow or "NewByteArray" not in allocator_shadow.group("body"):
+    fail("M3 JNI byte-shadow allocator missing or not JNI-allocated")
+if "malloc(" in allocator_shadow.group("body"):
+    fail("M3 JNI byte-shadow allocator introduced native staging")
+
 for label, body in [("byte", byte_shadow.group("body")), ("char", char_shadow.group("body"))]:
     if "malloc(" in body or "CallCharMethod" in body:
         fail(f"M3 {label} shadow reintroduced per-character/native staging")
