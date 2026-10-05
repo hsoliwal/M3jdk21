@@ -95,3 +95,14 @@ The JDK-internal no-replacement helpers also stay on M3 storage:
 - the checked `getBytesNoRepl` wrapper continues to expose the original
   `CharacterCodingException` family;
 - these paths do not manufacture a Compact-String shadow before producing the caller-owned bytes.
+
+
+## Exact trigram search layer
+
+The fixed 64-bit bigram/trigram signals in `M3StringFacts` remain cheap necessary-condition
+filters. Exact trigram sets are not duplicated there. For longer reusable source ranges,
+`M3StringSearchPrecompute` weakly keys a bounded 64-slot cache of exact `M3TQ.Facts`
+(up to 32,768 UTF-16 units). Prepared patterns carry their own budgeted exact M3TQ facts.
+
+Search uses exact trigram containment only as an absence proof before KMP. A positive containment
+result never proves a substring match; canonical UTF-16 KMP remains authoritative.
