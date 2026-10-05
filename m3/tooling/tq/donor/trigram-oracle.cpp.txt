@@ -1,0 +1,88 @@
+// SPDX-License-Identifier: Apache-2.0
+// Original independent verification oracle, not a production native provider.
+#include "com_synexia_indexstring_M3TrigramNativeProof.h"
+#include <cstdint>
+#include <exception>
+#include <new>
+#include <set>
+#include <vector>
+
+namespace {
+void fail(JNIEnv* env, const char* type, const char* message) {
+  jclass exception = env->FindClass(type);
+  if (exception != nullptr) {
+    env->ThrowNew(exception, message);
+    env->DeleteLocalRef(exception);
+  }
+}
+
+std::uint64_t unit(jchar value) {
+#ifdef M3_MUTANT_8BIT
+  return static_cast<std::uint64_t>(value & 0xffU);
+#else
+  return static_cast<std::uint64_t>(value);
+#endif
+}
+
+jlongArray range_keys(JNIEnv* env, jcharArray text, jint from, jint to, jint budget) {
+  if (text == nullptr) {
+    fail(env, "java/lang/NullPointerException", "text");
+    return nullptr;
+  }
+  try {
+    const jsize source_length = env->GetArrayLength(text);
+    if (from < 0 || to < from || to > source_length) {
+      fail(env, "java/lang/IndexOutOfBoundsException", "invalid UTF-16 range");
+      return nullptr;
+    }
+    const jsize length = to - from;
+    if (budget < 0 || length > budget) {
+      fail(env, "java/lang/IllegalArgumentException", "UTF-16 range budget");
+      return nullptr;
+    }
+    std::vector<jchar> chars(static_cast<std::size_t>(length));
+    if (length != 0) env->GetCharArrayRegion(text, from, length, chars.data());
+    if (env->ExceptionCheck()) return nullptr;
+    std::set<jlong> keys;
+    for (std::size_t index = 0; index + 2 < chars.size(); ++index) {
+      const auto key = unit(chars[index]) * UINT64_C(4294967296)
+          + unit(chars[index + 1]) * UINT64_C(65536) + unit(chars[index + 2]);
+      keys.insert(static_cast<jlong>(key));
+    }
+    std::vector<jlong> sorted(keys.begin(), keys.end());
+    // Unique windows cannot exceed the jsize input length.
+    auto result = env->NewLongArray(static_cast<jsize>(sorted.size()));
+    if (result == nullptr) return nullptr;
+    if (!sorted.empty()) {
+      env->SetLongArrayRegion(result, 0, static_cast<jsize>(sorted.size()), sorted.data());
+    }
+    if (env->ExceptionCheck()) return nullptr;
+    return result;
+  } catch (const std::bad_alloc&) {
+    fail(env, "java/lang/OutOfMemoryError", "trigram verification oracle allocation");
+  } catch (const std::exception&) {
+    fail(env, "java/lang/IllegalStateException", "trigram verification oracle failure");
+  } catch (...) {
+    fail(env, "java/lang/IllegalStateException", "unknown native oracle failure");
+  }
+  return nullptr;
+}
+
+}  // namespace
+
+extern "C" JNIEXPORT jlongArray JNICALL
+Java_com_synexia_indexstring_M3TrigramNativeProof_nativeKeys(
+    JNIEnv* env, jclass, jcharArray text) {
+  if (text == nullptr) {
+    fail(env, "java/lang/NullPointerException", "text");
+    return nullptr;
+  }
+  const jsize length = env->GetArrayLength(text);
+  return range_keys(env, text, 0, length, length);
+}
+
+extern "C" JNIEXPORT jlongArray JNICALL
+Java_com_synexia_indexstring_M3TrigramNativeProof_nativeRangeKeys(
+    JNIEnv* env, jclass, jcharArray text, jint from, jint to, jint budget) {
+  return range_keys(env, text, from, to, budget);
+}
