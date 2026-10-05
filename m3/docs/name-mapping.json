@@ -37,7 +37,7 @@
     {
       "source": "com.synexia.indexstring.MIndexString",
       "target": "java.lang.M3String",
-      "status": "canonical target counterpart; representation convergence required",
+      "status": "implemented-unverified runtime candidate",
       "source_role": "Synexia donor/reference implementation",
       "target_rule": "M3JDK naming is independent; preserve owner+coordinate semantics, internal precompute, and JNI shadow-only materialization",
       "supersedes_target_name": "java.lang.MIndexString",
@@ -50,7 +50,7 @@
         "utf_shadow_commit": "f2f15f1aaa147cf1af556b0c148954178f971de6"
       },
       "required_semantics": [
-        "M3String instance carries Object owner + long value only",
+        "M3String instance carries exactly one canonical owner reference + long packed coordinate",
         "composition lives in shared canonical tuple/reference owner",
         "precompute facts attach to canonical owner/range/composition identity",
         "precompute never owns spelling payload",
