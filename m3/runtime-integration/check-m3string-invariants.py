@@ -161,6 +161,9 @@ if "prefixMayMatch" not in facts or "suffixMayMatch" not in facts:
 
 if "private volatile M3String m3;" not in string:
     fail("java.lang.String no longer owns M3String")
+if "storage = maybeAdmit(original.value, original.coder);" not in string:
+    fail("post-activation String copy can retain a second flat payload")
+
 
 # M3-backed wrappers must not create Java text arrays. Even the shared empty compatibility
 # sentinel is created through the JNI shadow boundary.
