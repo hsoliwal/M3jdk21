@@ -77,6 +77,7 @@ final class M3StringJniArrayShadowsRecipeTest {
 
     private static List<SourceFile> textAfter() {
         return List.of(
+                text(".github/workflows/mindex-string-backing.yml", "07-workflow.yml.txt"),
                 text("m3/docs/m3-runtime-invariants.tsv", "03-runtime-invariants.tsv.txt"),
                 text("m3/docs/m3string-synexia-lineage.md", "04-lineage.md.txt"),
                 text("m3/docs/name-mapping.json", "05-name-mapping.json.txt"),
