@@ -4,6 +4,8 @@
  */
 package java.lang;
 
+import java.util.Objects;
+
 /** Canonical owner node for M3String. Text payload never lives in M3String itself. */
 abstract sealed class M3StringOwner permits M3StringAtom, M3StringTuple {
     static final byte ATOM = 1;
