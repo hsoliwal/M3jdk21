@@ -3630,7 +3630,7 @@ public final class String
             icoder |= el.coder();
         }
         byte coder = (byte) icoder;
-        if (m3JoinedStringsEnabled() && size <= 127) {
+        if (m3JoinedStringsEnabled()) {
             int pieceCount = size == 0 ? 2 : size * 2 + 1;
             String[] pieces = new String[pieceCount];
             int piece = 0;
@@ -4825,12 +4825,10 @@ public final class String
         if (Integer.MAX_VALUE / count < charLength) {
             throw new OutOfMemoryError("Required length exceeds implementation limit");
         }
-        if (m3JoinedStringsEnabled() && count <= 256) {
-            String[] pieces = new String[count];
-            Arrays.fill(pieces, this);
-            M3String storage = M3String.join(pieces);
+        if (m3JoinedStringsEnabled()) {
+            M3String storage = m3();
             if (storage != null) {
-                return new String(storage);
+                return new String(storage.repeat(count));
             }
         }
         byte[] currentValue = value();
