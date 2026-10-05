@@ -17,7 +17,7 @@ import jdk.internal.misc.Unsafe;
 final class M3StringAtom extends M3StringOwner {
     private static final Unsafe UNSAFE = Unsafe.getUnsafe();
 
-    /** Retains mapped/native ownership when the address is not process-life local memory. */
+    /** Retains mapped ownership. VM-local native blocks are lifetime-managed by M3StringPool. */
     final Object payloadOwner;
     final long address;
     final byte storageWidth;
@@ -104,6 +104,10 @@ final class M3StringAtom extends M3StringOwner {
         return bigEndian
                 ? (char) ((first << 8) | second)
                 : (char) (first | (second << 8));
+    }
+
+    long nativePayloadBytes() {
+        return Math.max(1L, Math.multiplyExact((long) length, storageWidth));
     }
 
     boolean contentEquals(byte[] compactValue, byte valueCoder) {
