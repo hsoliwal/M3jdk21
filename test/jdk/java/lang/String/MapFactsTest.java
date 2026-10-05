@@ -27,7 +27,7 @@
  * @test
  * @summary Validate mapped String facts and reject CRC-valid inconsistent headers
  * @modules java.base/jdk.internal.mindex
- * @build MIndexMappedStringBackingTest
+ * @build M3MappedStringBackingTest
  * @run main/othervm -Xmx64m MapFactsTest
  */
 
@@ -40,7 +40,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.zip.CRC32;
-import jdk.internal.mindex.MIndexMappedStringBacking;
+import jdk.internal.mindex.M3MappedStringBacking;
 
 /** Exercises the actual backing owner, using the unchanged original wire-format writer. */
 public class MapFactsTest {
@@ -101,7 +101,7 @@ public class MapFactsTest {
         appendAliases(path, extraAliases);
         byte[] text = Files.readAllBytes(path);
         byte[] bytes = Files.readAllBytes(sibling(path));
-        try (var backing = MIndexMappedStringBacking.open(path)) {
+        try (var backing = M3MappedStringBacking.open(path)) {
             check(backing.size() == 2 + extraAliases, "alias count");
             for (int row = 0; row < backing.size(); row++) {
                 int language = row == 0 ? 0 : row == 1 ? 7 : 20 + row;
@@ -201,7 +201,7 @@ public class MapFactsTest {
     private static void reject(Path path, String detail, String label) throws Exception {
         byte[] before = Files.readAllBytes(path);
         byte[] byteBefore = Files.readAllBytes(sibling(path));
-        try (var accepted = MIndexMappedStringBacking.open(path)) {
+        try (var accepted = M3MappedStringBacking.open(path)) {
             throw new AssertionError("ACCEPTED_INCONSISTENT_FACTS " + label
                     + " hash=" + accepted.hashCode(1L)
                     + " viewHash=" + accepted.view(1L).hashCode()
@@ -222,7 +222,7 @@ public class MapFactsTest {
 
     private static Method writer() {
         try {
-            Method method = MIndexMappedStringBackingTest.class.getDeclaredMethod("writeFixture", Path.class, String.class);
+            Method method = M3MappedStringBackingTest.class.getDeclaredMethod("writeFixture", Path.class, String.class);
             method.setAccessible(true);
             return method;
         } catch (ReflectiveOperationException failure) { throw new ExceptionInInitializerError(failure); }
