@@ -951,7 +951,9 @@ public final class String
      * Throws iae, instead of replacing, if unmappable.
      */
     static byte[] getBytesUTF8NoRepl(String s) {
-        return encodeUTF8(s.coder(), s.value(), false);
+        M3String storage = s.m3();
+        return storage != null ? storage.encodeUtf8NoRepl()
+                               : encodeUTF8(s.coder(), s.value(), false);
     }
 
     private static boolean isASCII(byte[] src) {
@@ -975,6 +977,10 @@ public final class String
     }
 
     private static byte[] getBytesNoRepl1(String s, Charset cs) {
+        M3String storage = s.m3();
+        if (storage != null) {
+            return storage.encodeNoRepl(cs);
+        }
         byte[] val = s.value();
         byte coder = s.coder();
         if (cs == UTF_8.INSTANCE) {
