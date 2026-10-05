@@ -421,16 +421,34 @@ final class M3String implements CharSequence {
         if (found < 0) return this;
 
         ArrayList<M3String> pieces = new ArrayList<>();
+        long outputLength = 0L;
         int cursor = 0;
         while (found >= 0) {
-            if (cursor < found) pieces.add(slice(cursor, found));
-            if (checkedReplacement.length() != 0) pieces.add(checkedReplacement);
+            if (cursor < found) {
+                M3String prefix = slice(cursor, found);
+                pieces.add(prefix);
+                outputLength += prefix.length();
+            }
+            if (checkedReplacement.length() != 0) {
+                pieces.add(checkedReplacement);
+                outputLength += checkedReplacement.length();
+            }
+            if (outputLength > Integer.MAX_VALUE) {
+                throw new OutOfMemoryError("Required length exceeds implementation limit");
+            }
             cursor = found + checkedTarget.length();
             found = cursor <= length() - checkedTarget.length()
                     ? indexOf(checkedTarget, cursor)
                     : -1;
         }
-        if (cursor < length()) pieces.add(slice(cursor, length()));
+        if (cursor < length()) {
+            M3String suffix = slice(cursor, length());
+            pieces.add(suffix);
+            outputLength += suffix.length();
+        }
+        if (outputLength > Integer.MAX_VALUE) {
+            throw new OutOfMemoryError("Required length exceeds implementation limit");
+        }
         return joinValues(pieces);
     }
 
