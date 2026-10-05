@@ -1,0 +1,31 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/check_references_v3.py"
+  ],
+  "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04",
+  "started_utc": "2026-10-05T17:42:54.173327+00:00",
+  "checker": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/check_references_v3.py",
+    "bytes": 40725,
+    "sha256": "521c18944616fe46a3e347860c25a7283e1b74674c594e40996c787e01e96b81"
+  },
+  "actual_receiving_receipt": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/verification-v3/receipt.json",
+    "bytes": 31015,
+    "sha256": "1f4ac9825d975520a04b7dc5ac1b282d96be32601c7abe2b0cfb676b0ff2df09"
+  },
+  "exit_code": 0,
+  "finished_utc": "2026-10-05T17:42:55.864392+00:00",
+  "stdout": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/reference-audit-invocation-v3/stdout.log",
+    "bytes": 244,
+    "sha256": "a86e91566b9c9d94e71679162bba29564651f8f0b565e489777c21cd495481b2"
+  },
+  "stderr": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/reference-audit-invocation-v3/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

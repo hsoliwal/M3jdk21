@@ -1,0 +1,11 @@
+--- T01/verify_publication_v3.py
++++ T02/verify_publication_v3.py
+@@ -29,7 +29,7 @@
+     from audit_base import BASE_COMMIT, BASE_TREE, OUT, TASK, digest, exact_write, git_blob, git_tree, json_bytes, resolve
+     from prepare_publication import BRANCH, PRODUCTION_UPDATES, expected_tree
+     assert digest((helpers / 'verify_publication.py').read_bytes()) == '8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639'
+-    assert digest((helpers / 'raw_custody_v3.py').read_bytes()) == 'a96f1aec811774467092a09cd750d47785fd4dd5482ce792ffac93c38deb9f5b'
++    assert digest((helpers / 'raw_custody_v3.py').read_bytes()) == '45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be'
+     from raw_custody_v3 import IDENTITY_ONLY, PROTOCOL, audit, bound
+ 
+     preflight_path = Path(sys.argv[1]).resolve(strict=True)

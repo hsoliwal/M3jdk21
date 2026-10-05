@@ -1,0 +1,35 @@
+{
+  "schema": "jcc-e04-bound-input-static-review/1",
+  "status": "ADMITTED_FOR_EXACT_RESOURCE_AUTHORING_ONLY",
+  "findings": [],
+  "source_commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+  "source_root": "0361e4a07b77a01df170523033fef01c4052ddc5",
+  "input_sha256": "df6713ad19ce80daad0383fbd5c3716412e2dca133e1db7e0150b88e141313b5",
+  "handoff_sha256": "d5e18258027f457a1fcdc45ff30b4e2e7a0723825ea95b651933af23f27fd28d",
+  "packet_sha256": "e0ae5375e313a8547f5cdb8f607d2fe1c04efe91d3d43c86d1a5878329beaf59",
+  "independent_checks": {
+    "DERIVED_INPUT_CHECKS.json": {
+      "bytes": 48101,
+      "sha256": "0874be2a1253b6f91d210a88508c62768a9085bf8efb230ae7d747653ded0461",
+      "git_blob_sha1": "7a8f58ef3d7b36666f600c46ec3fbb9415b609eb"
+    },
+    "PACKAGE_CHECKS.json": {
+      "bytes": 157946,
+      "sha256": "6b469859fab2a1168bfbb5d22f7f37f6b8e6349d80fed4d12cb18e7b3ca18652",
+      "git_blob_sha1": "a9e9dd788c57c3ae2918bc9ebb7b29c54971b103"
+    }
+  },
+  "report": {
+    "bytes": 9069,
+    "sha256": "dbdaa3d629aa954d7f42bf3cbc02600110c3a883ebb08d023f466d4ebcbf64eb",
+    "git_blob_sha1": "cdd189836c379e6459f2c4e82787c74d1aeff63b"
+  },
+  "candidate_code_executed": false,
+  "remote_actions": false,
+  "resource_afterimages_admitted": false,
+  "receiving_execution_admitted": false,
+  "source_qualification_status": "BLOCKED",
+  "source_export_admitted": false,
+  "destination_gates_passed": false,
+  "next_boundary": "Review exact authored four resources, plan/manifest, bound Java test, evidence copies and preservation before receiving execution."
+}

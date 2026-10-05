@@ -1,0 +1,31 @@
+{
+  "command": [
+    "python",
+    "-B",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/author_e04_v3.py"
+  ],
+  "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04",
+  "started_utc": "2026-10-05T17:33:18.064175+00:00",
+  "input": {
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/FINAL_SOURCE_INPUTS_V3.json",
+    "bytes": 83448,
+    "sha256": "df6713ad19ce80daad0383fbd5c3716412e2dca133e1db7e0150b88e141313b5"
+  },
+  "script": {
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/author_e04_v3.py",
+    "bytes": 18901,
+    "sha256": "db47c8ae008021e4a250004ae8631b1a40c9cd731c5c2001f41eacedac129359"
+  },
+  "exit_code": 0,
+  "finished_utc": "2026-10-05T17:33:19.758207+00:00",
+  "stdout": {
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/authoring-invocation-v3/stdout.log",
+    "bytes": 230,
+    "sha256": "2f48b47224cb85d1452b437ce21397bc814a78cb71154017ba4bea1561bc1b16"
+  },
+  "stderr": {
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/authoring-invocation-v3/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

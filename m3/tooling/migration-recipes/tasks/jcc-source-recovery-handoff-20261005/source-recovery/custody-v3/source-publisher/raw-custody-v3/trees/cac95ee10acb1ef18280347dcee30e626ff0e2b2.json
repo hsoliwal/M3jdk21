@@ -1,0 +1,28 @@
+{
+  "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2",
+  "result": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "content": "{\"sha\":\"cac95ee10acb1ef18280347dcee30e626ff0e2b2\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2\",\"tree\":[{\"path\":\"hash-pinned-java\",\"mode\":\"040000\",\"type\":\"tree\",\"sha\":\"8582ac8a6a16142f1ee2b8151085238304fb7aa3\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/trees/8582ac8a6a16142f1ee2b8151085238304fb7aa3\"}],\"truncated\":false}",
+        "title": "cac95ee10acb1ef18280347dcee30e626ff0e2b2",
+        "modified_date": null,
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2",
+        "display_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2",
+        "display_title": "cac95ee10acb1ef18280347dcee30e626ff0e2b2",
+        "structuredContent": {
+          "title": "cac95ee10acb1ef18280347dcee30e626ff0e2b2",
+          "content": "{\"sha\":\"cac95ee10acb1ef18280347dcee30e626ff0e2b2\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2\",\"tree\":[{\"path\":\"hash-pinned-java\",\"mode\":\"040000\",\"type\":\"tree\",\"sha\":\"8582ac8a6a16142f1ee2b8151085238304fb7aa3\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/trees/8582ac8a6a16142f1ee2b8151085238304fb7aa3\"}],\"truncated\":false}",
+          "display_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2"
+        }
+      },
+      "isError": false
+    }
+  }
+}
