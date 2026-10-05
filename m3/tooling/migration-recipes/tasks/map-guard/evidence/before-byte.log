@@ -1,0 +1,7 @@
+Exception in thread "main" java.lang.OutOfMemoryError: Requested array size exceeds VM limit
+	at java.base/jdk.internal.mindex.MIndexMappedStringBacking$ByteStore.<init>(MIndexMappedStringBacking.java:456)
+	at java.base/jdk.internal.mindex.MIndexMappedStringBacking.<init>(MIndexMappedStringBacking.java:96)
+	at java.base/jdk.internal.mindex.MIndexMappedStringBacking.open(MIndexMappedStringBacking.java:122)
+	at MapGuardTest.reject(MapGuardTest.java:281)
+	at MapGuardTest.badCounts(MapGuardTest.java:77)
+	at MapGuardTest.main(MapGuardTest.java:60)

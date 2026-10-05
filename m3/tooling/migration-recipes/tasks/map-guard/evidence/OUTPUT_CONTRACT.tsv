@@ -1,0 +1,13 @@
+artifact	purpose
+STATUS.tsv	Executed vs pending outcomes
+FINAL_REPORT.md	Exact changes, proof, limits
+RUN_CONTEXT.tsv	Pinned baseline and environment
+PROVENANCE.tsv	Existing owner and canon identity
+VERIFY_CONTRACT.tsv	Independent quality/product gates
+OUTPUT_CONTRACT.tsv	Required artifact inventory
+INVENTORY.tsv	Scoped source hashes and timestamps
+ACTION_QUEUE.tsv	All discussion-track continuation
+SUMMARY.tsv	Scoped counters only
+CLUSTERS_EXACT.tsv	Intentional byte-identical snapshots retained
+CLUSTERS_NORMALIZED.tsv	No semantic dedup claim
+*.log;*-api.txt	Raw execution and descriptor outputs
