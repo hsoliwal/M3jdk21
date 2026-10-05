@@ -145,7 +145,9 @@ final class M3DocumentationContractTest {
                     }
                 }.scan(unit, null);
             }
-            return assertNotNull(result.get(), "expected compiler-associated Javadoc");
+            String value = result.get();
+            assertNotNull(value, "expected compiler-associated Javadoc");
+            return value;
         }
     }
 }
