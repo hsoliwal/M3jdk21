@@ -1,0 +1,190 @@
+name: M3 JEP 485 Stream Gatherers admission
+
+on:
+  push:
+    branches:
+      - "m3/recover-jep485-current-master-20261005"
+    paths:
+      - "m3/backports/recipes/jep-485-gatherers/**"
+      - "m3/backports/JEP_CATALOGUE.tsv"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - "m3/tooling/migration-recipes/**"
+      - "m3/tooling/backport-dag/**"
+      - "src/java.base/share/classes/java/util/stream/**"
+      - "test/jdk/java/util/stream/**"
+      - ".github/workflows/m3-jep485-stream-gatherers.yml"
+  pull_request:
+    paths:
+      - "m3/backports/recipes/jep-485-gatherers/**"
+      - "m3/backports/JEP_CATALOGUE.tsv"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - "m3/tooling/migration-recipes/**"
+      - "m3/tooling/backport-dag/**"
+      - "src/java.base/share/classes/java/util/stream/**"
+      - "test/jdk/java/util/stream/**"
+      - ".github/workflows/m3-jep485-stream-gatherers.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recipe-dag-proof:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Prove recipe replay scope registration and fixed point
+        run: |
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+            -Dtest=M3Jep485StreamGatherersBackportRecipeTest,M3RecipeScopeDeclarationTest \
+            test
+
+      - name: Validate exact JEP 485 packet and atom evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+            -Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketMain \
+            -Dexec.args="$PWD/m3/backports/recipes/jep-485-gatherers/packet.tsv $PWD/m3/backports/recipes/jep-485-gatherers/atom-evidence.tsv" \
+            exec:java
+
+      - name: Project exact packet to Camel Airflow and Drools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/jep485-projection
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+            -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain \
+            -Dexec.args="$PWD/m3/backports/recipes/jep-485-gatherers/packet.tsv $PWD/target/jep485-projection $PWD/m3/backports/recipes/jep-485-gatherers/atom-evidence.tsv" \
+            exec:java
+          test -s target/jep485-projection/M3BackportRoutes.java
+          test -s target/jep485-projection/m3_backport_dag.py
+          test -s target/jep485-projection/m3_backport_rules.drl
+          test -s target/jep485-projection/atom-evidence.tsv
+
+      - name: Verify backport metadata
+        run: |
+          mvn -B -ntp -f m3/backports/pom.xml verify
+
+      - name: Upload recipe DAG evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: jep485-recipe-dag-${{ github.run_id }}
+          path: target/jep485-projection
+          if-no-files-found: error
+          retention-days: 30
+
+  openjdk-proof:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Install OpenJDK build prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            autoconf make gcc g++ zip unzip \
+            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
+            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
+
+      - name: Configure Java 21-compatible JDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash configure \
+            --with-boot-jdk="$JAVA_HOME" \
+            --with-debug-level=release \
+            --with-jvm-variants=server \
+            --disable-warnings-as-errors
+
+      - name: Build JDK image with final Stream Gatherers API
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 images
+
+      - name: Run JDK24 GA Gatherer jtreg family
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 test TEST="          test/jdk/java/util/stream/GathererAPITest.java           test/jdk/java/util/stream/GathererShortCircuitTest.java           test/jdk/java/util/stream/GathererTest.java           test/jdk/java/util/stream/GatherersFoldTest.java           test/jdk/java/util/stream/GatherersMapConcurrentTest.java           test/jdk/java/util/stream/GatherersScanTest.java           test/jdk/java/util/stream/GatherersWindowFixedTest.java           test/jdk/java/util/stream/GatherersWindowSlidingTest.java"
+
+      - name: Preserve existing recursive and short-circuit stream behavior
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 test TEST="          test/jdk/java/util/stream/test/org/openjdk/tests/java/util/stream/FlatMapOpTest.java           test/jdk/java/util/stream/test/org/openjdk/tests/java/util/stream/InfiniteStreamWithLimitOpTest.java"
+
+      - name: Compile and execute final API smoke with built JDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          JDK_IMAGE="$(find build -path '*/images/jdk' -type d | head -n 1)"
+          test -x "$JDK_IMAGE/bin/java"
+          test -x "$JDK_IMAGE/bin/javac"
+
+          tmp="$(mktemp -d)"
+          trap 'rm -rf "$tmp"' EXIT
+
+          cat > "$tmp/GatherSmoke.java" <<'EOF'
+          import java.util.List;
+          import java.util.stream.Gatherers;
+          import java.util.stream.Stream;
+
+          public class GatherSmoke {
+              public static void main(String[] args) {
+                  var windows =
+                          Stream.of(1, 2, 3, 4, 5)
+                                  .gather(Gatherers.windowFixed(2))
+                                  .toList();
+                  if (!windows.equals(
+                          List.of(List.of(1, 2), List.of(3, 4), List.of(5)))) {
+                      throw new AssertionError(windows);
+                  }
+
+                  var scan =
+                          Stream.of(1, 2, 3, 4)
+                                  .gather(Gatherers.scan(() -> 0, Integer::sum))
+                                  .toList();
+                  if (!scan.equals(List.of(1, 3, 6, 10))) {
+                      throw new AssertionError(scan);
+                  }
+
+                  var concurrent =
+                          Stream.of(1, 2, 3, 4)
+                                  .gather(Gatherers.mapConcurrent(2, value -> value * 2))
+                                  .toList();
+                  if (!concurrent.equals(List.of(2, 4, 6, 8))) {
+                      throw new AssertionError(concurrent);
+                  }
+
+                  System.out.println("JEP485_SMOKE_OK");
+              }
+          }
+          EOF
+
+          "$JDK_IMAGE/bin/javac" -d "$tmp" "$tmp/GatherSmoke.java"
+          test "$("$JDK_IMAGE/bin/java" -cp "$tmp" GatherSmoke)" = "JEP485_SMOKE_OK"
+
+      - name: Upload focused test report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: jep485-openjdk-proof-${{ github.run_id }}
+          path: build/*/test-results/**
+          if-no-files-found: warn
+          retention-days: 14
