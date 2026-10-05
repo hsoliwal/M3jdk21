@@ -4066,6 +4066,13 @@ public final class String
      *          has no leading or trailing space.
      */
     public String trim() {
+        M3String storage = m3();
+        if (storage != null) {
+            M3StringFacts facts = storage.facts();
+            if (facts.trimStart == 0 && facts.trimEnd == storage.length()) return this;
+            if (facts.trimStart == storage.length()) return "";
+            return new String(storage.slice(facts.trimStart, facts.trimEnd));
+        }
         byte[] currentValue = value();
         String ret = isLatin1() ? StringLatin1.trim(currentValue)
                                 : StringUTF16.trim(currentValue);
@@ -4099,6 +4106,13 @@ public final class String
      * @since 11
      */
     public String strip() {
+        M3String storage = m3();
+        if (storage != null) {
+            M3StringFacts facts = storage.facts();
+            if (facts.stripStart == 0 && facts.stripEnd == storage.length()) return this;
+            if (facts.stripStart == storage.length()) return "";
+            return new String(storage.slice(facts.stripStart, facts.stripEnd));
+        }
         byte[] currentValue = value();
         String ret = isLatin1() ? StringLatin1.strip(currentValue)
                                 : StringUTF16.strip(currentValue);
@@ -4130,6 +4144,13 @@ public final class String
      * @since 11
      */
     public String stripLeading() {
+        M3String storage = m3();
+        if (storage != null) {
+            int start = storage.facts().stripStart;
+            if (start == 0) return this;
+            if (start == storage.length()) return "";
+            return new String(storage.slice(start, storage.length()));
+        }
         byte[] currentValue = value();
         String ret = isLatin1() ? StringLatin1.stripLeading(currentValue)
                                 : StringUTF16.stripLeading(currentValue);
@@ -4161,6 +4182,13 @@ public final class String
      * @since 11
      */
     public String stripTrailing() {
+        M3String storage = m3();
+        if (storage != null) {
+            int end = storage.facts().stripEnd;
+            if (end == storage.length()) return this;
+            if (end == 0) return "";
+            return new String(storage.slice(0, end));
+        }
         byte[] currentValue = value();
         String ret = isLatin1() ? StringLatin1.stripTrailing(currentValue)
                                 : StringUTF16.stripTrailing(currentValue);
@@ -4272,12 +4300,16 @@ public final class String
     }
 
     private int indexOfNonWhitespace() {
+        M3String storage = m3();
+        if (storage != null) return storage.facts().stripStart;
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.indexOfNonWhitespace(currentValue)
                           : StringUTF16.indexOfNonWhitespace(currentValue);
     }
 
     private int lastIndexOfNonWhitespace() {
+        M3String storage = m3();
+        if (storage != null) return storage.facts().stripEnd;
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.lastIndexOfNonWhitespace(currentValue)
                           : StringUTF16.lastIndexOfNonWhitespace(currentValue);
