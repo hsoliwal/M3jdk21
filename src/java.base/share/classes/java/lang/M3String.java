@@ -26,6 +26,7 @@ import java.util.Objects;
 final class M3String implements CharSequence {
     private static final int SPAN_SHIFT = Integer.SIZE;
     private static final long SPAN_MASK = 0xffff_ffffL;
+    private static final byte[] EMPTY_COMPATIBILITY_SHADOW = new byte[0];
 
     private static final M3StringAtom EMPTY_OWNER =
             new M3StringAtom(null, 0L, (byte) 1, true, 0, String.LATIN1, 0, 0L,
@@ -267,7 +268,9 @@ final class M3String implements CharSequence {
     }
 
     byte[] compatibilityValue() {
-        return materialize();
+        // VM layout sentinel only. Canonical text lives behind owner+coordinate.
+        // Real byte/char arrays are created only by the explicit JNI shadow boundary.
+        return EMPTY_COMPATIBILITY_SHADOW;
     }
 
     /** JNI-created final Java UTF-16 array shadow. */
@@ -280,6 +283,32 @@ final class M3String implements CharSequence {
         if (needle.length() > length()) return false;
         long required = needle.facts().bitSignal64;
         return (facts().bitSignal64 & required) == required;
+    }
+
+    boolean startsWith(M3String prefix, int offset) {
+        Objects.requireNonNull(prefix, "prefix");
+        if (offset < 0 || offset > length() - prefix.length()) return false;
+        if (!mayContain(prefix)) return false;
+        for (int index = 0; index < prefix.length(); index++) {
+            if (charAt(offset + index) != prefix.charAt(index)) return false;
+        }
+        return true;
+    }
+
+    int indexOf(M3String needle, int fromIndex) {
+        Objects.requireNonNull(needle, "needle");
+        int from = Math.clamp(fromIndex, 0, length());
+        if (needle.length() == 0) return from;
+        if (needle.length() > length() - from || !mayContain(needle)) return -1;
+        int limit = length() - needle.length();
+        char first = needle.charAt(0);
+        for (int start = from; start <= limit; start++) {
+            if (charAt(start) != first) continue;
+            int index = 1;
+            while (index < needle.length() && charAt(start + index) == needle.charAt(index)) index++;
+            if (index == needle.length()) return start;
+        }
+        return -1;
     }
 
     static int pow31(int length) {
