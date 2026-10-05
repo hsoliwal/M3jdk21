@@ -115,9 +115,15 @@ class GeneratedCrateMaterializerTest(unittest.TestCase):
 
     def test_duplicate_target_ownership_fails_closed(self) -> None:
         root, generated, _ = self.fixture()
-        duplicate = generated / materializer.TEXT_ROOT / "jdk24-text-0001" / "manifest.tsv"
-        java_manifest = generated / materializer.JAVA_ROOT / "jdk24-java-0001" / "manifest.tsv"
-        duplicate.write_text(java_manifest.read_text(encoding="utf-8"), encoding="utf-8")
+        java_dir = generated / materializer.JAVA_ROOT / "jdk24-java-0001"
+        text_dir = generated / materializer.TEXT_ROOT / "jdk24-text-0001"
+        java_manifest = (java_dir / "manifest.tsv").read_text(encoding="utf-8").strip().split("\t")
+        duplicate_payload = (java_dir / java_manifest[3]).read_bytes()
+        (text_dir / "0001.txt").write_bytes(duplicate_payload)
+        (text_dir / "manifest.tsv").write_text(
+            f"{java_manifest[0]}\t{java_manifest[1]}\t{java_manifest[2]}\t0001.txt\n",
+            encoding="utf-8",
+        )
 
         with self.assertRaisesRegex(ValueError, "multiple generated crates"):
             materializer.run(root, generated, "check", True, None)
