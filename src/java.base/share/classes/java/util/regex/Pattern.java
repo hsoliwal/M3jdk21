@@ -43,6 +43,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import jdk.internal.mindex.M3TQ;
 import jdk.internal.util.ArraysSupport;
 import jdk.internal.util.regex.Grapheme;
 
@@ -1013,6 +1014,12 @@ public final class Pattern
     transient Node matchRoot;
 
     /**
+     * Candidate-only exact trigram query for case-sensitive literal find operations.
+     * Null means the regex engine is the only admissible authority.
+     */
+    transient M3TQ m3Tq;
+
+    /**
      * Temporary storage used by parsing pattern slice.
      */
     transient int[] buffer;
@@ -1909,6 +1916,12 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
             normalizedPattern = pattern;
         }
         patternLength = normalizedPattern.length();
+
+        // M3TQ is only an absence gate. Case-insensitive literal matching has different
+        // equivalence semantics and therefore deliberately does not install an exact query.
+        m3Tq = has(LITERAL) && !has(CASE_INSENSITIVE)
+                ? M3TQ.fromExact(List.of(pattern))
+                : null;
 
         // Copy pattern to int array for convenience
         // Use double zero to terminate pattern
