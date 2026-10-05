@@ -5032,10 +5032,15 @@ public final class String
     }
 
     M3String m3() {
+        return m3;
+    }
+
+    private M3String ensureM3() {
         M3String storage = m3;
         if (storage == null
                 && M3_JOINED_STRINGS
-                && jdk.internal.misc.VM.isBooted() && M3String.admissionEnabled()
+                && jdk.internal.misc.VM.isBooted()
+                && M3String.admissionEnabled()
                 && value.length != 0) {
             storage = M3String.admit(value, rawCoder());
             m3 = storage;
@@ -5050,7 +5055,7 @@ public final class String
      */
     static byte[] m3AdmitNative(String value) {
         String checked = Objects.requireNonNull(value, "value");
-        M3String storage = checked.m3();
+        M3String storage = checked.ensureM3();
         // JNI NewString/NewStringUTF used a temporary Compact-String construction shadow.
         // Once canonical M3 admission succeeds, discard that payload and retain only the VM
         // layout sentinel. Future byte/char arrays are explicit JNI compatibility shadows.
