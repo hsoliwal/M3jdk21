@@ -24,7 +24,9 @@ public class StringApiProbe {
  static void expect(Class<? extends Throwable> c,Runnable r){try{r.run();throw new AssertionError("missing exception");}catch(Throwable t){check(c.isInstance(t));record(t.getClass().getName());}}
  static void exercise(char[] chars)throws Exception{
   char[] mutable=chars.clone();String s=new String(mutable),copy=new String(chars);Arrays.fill(mutable,'x');
-  check(Arrays.equals(s.toCharArray(),chars));check(s!=copy&&s.equals(copy));check(s.compareTo(copy)==0);check(s.hashCode()==copy.hashCode());check(s.intern()==copy.intern());check(Arrays.equals(backing(s),backing(new String(s))));
+  check(Arrays.equals(s.toCharArray(),chars));check(s!=copy&&s.equals(copy));check(s.compareTo(copy)==0);check(s.hashCode()==copy.hashCode());check(s.intern()==copy.intern());
+  if(M3_ENABLED.getBoolean(null)&&chars.length!=0){check(backing(s).length==0);check(backing(copy).length==0);}
+  else check(Arrays.equals(backing(s),backing(new String(s))));
   check(new String(chars,0,chars.length).equals(s));check(new StringBuilder(s).toString().equals(s));check(new StringBuffer(s).toString().equals(s));
   String nativeRoundTrip=roundTrip(s);requireImmediateM3(nativeRoundTrip,chars.length!=0);requireCanonicalOwner(nativeRoundTrip,s,chars.length!=0);check(nativeRoundTrip.equals(s));
   String nativeWholeRegion=regionRoundTrip(s,0,s.length());requireImmediateM3(nativeWholeRegion,chars.length!=0);requireCanonicalOwner(nativeWholeRegion,s,chars.length!=0);check(nativeWholeRegion.equals(s));
