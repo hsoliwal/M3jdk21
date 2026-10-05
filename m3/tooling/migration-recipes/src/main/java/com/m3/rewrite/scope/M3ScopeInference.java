@@ -73,7 +73,8 @@ public final class M3ScopeInference {
                 || path.startsWith("../")
                 || path.endsWith("/..")
                 || path.contains("/./")
-                || path.startsWith("./")) {
+                || path.startsWith("./")
+                || path.endsWith("/")) {
             throw new IllegalArgumentException(
                     "canonical repository-relative path required: " + value);
         }
@@ -96,16 +97,16 @@ public final class M3ScopeInference {
                 String relative = path.substring(root.length());
                 return fromRelative(module, root, relative);
             }
-            if (parts.length >= 2) {
-                String module = parts[1].isBlank() ? "<src>" : parts[1];
-                String root = "src/" + module + "/";
-                return fromRelative(module, root, path.substring(root.length()));
-            }
+            // startsWith("src/") plus canonical-path validation guarantees a nonblank module token.
+            String module = parts[1];
+            String root = "src/" + module + "/";
+            return fromRelative(module, root, path.substring(root.length()));
         }
 
         if (path.startsWith("test/")) {
             String[] parts = path.split("/", -1);
-            String family = parts.length > 1 && !parts[1].isBlank() ? parts[1] : "test";
+            // The validated "test/" prefix guarantees a nonblank family token.
+            String family = parts[1];
             String root = "test/" + family + "/";
             String relative = path.length() > root.length() ? path.substring(root.length()) : "";
             return fromRelative("<jdk-test:" + family + ">", root, relative);
@@ -113,7 +114,8 @@ public final class M3ScopeInference {
 
         if (path.startsWith("make/modules/")) {
             String[] parts = path.split("/", -1);
-            String module = parts.length > 2 && !parts[2].isBlank() ? parts[2] : "<build>";
+            // The validated "make/modules/" prefix guarantees a nonblank module token.
+            String module = parts[2];
             String root = "make/modules/" + module + "/";
             String relative = path.length() > root.length() ? path.substring(root.length()) : "";
             return fromRelative(module, root, relative);
@@ -131,7 +133,7 @@ public final class M3ScopeInference {
     }
 
     private static Location fromRelative(String module, String sourceRoot, String relative) {
-        if (relative.isBlank() || relative.endsWith("/")) {
+        if (relative.isBlank()) {
             throw new IllegalArgumentException("target path must name a file");
         }
         int slash = relative.lastIndexOf('/');
