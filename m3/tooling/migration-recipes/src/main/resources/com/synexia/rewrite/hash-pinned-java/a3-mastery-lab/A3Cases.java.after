@@ -8,18 +8,32 @@ import java.util.Objects;
 
 /** Immutable generated A3 hostile-source corpus and cheap precompute signals. */
 final class A3Cases {
+    enum CallShape {
+        DIRECT,
+        MODERN
+    }
+
     record Signal(
             String sha256,
             int utf16Length,
             int codeDecoys,
             int regexDecoys,
             int textBlocks,
+            int lambdaShapes,
+            int switchShapes,
+            int recordShapes,
             String lineEnding) {
         Signal {
             if (sha256 == null || !sha256.matches("[0-9a-f]{64}")) {
                 throw new IllegalArgumentException("sha256");
             }
-            if (utf16Length < 0 || codeDecoys < 0 || regexDecoys < 0 || textBlocks < 0) {
+            if (utf16Length < 0
+                    || codeDecoys < 0
+                    || regexDecoys < 0
+                    || textBlocks < 0
+                    || lambdaShapes < 0
+                    || switchShapes < 0
+                    || recordShapes < 0) {
                 throw new IllegalArgumentException("negative A3 signal");
             }
             lineEnding = Objects.requireNonNull(lineEnding, "lineEnding");
@@ -40,8 +54,10 @@ final class A3Cases {
                         List.of("API", "COMPUTE", "DATA"));
         for (boolean hostile : List.of(false, true)) {
             for (String eol : List.of("\n", "\r\n")) {
-                for (List<String> order : orders) {
-                    fixtures.add(fixture(order, hostile, eol));
+                for (CallShape shape : CallShape.values()) {
+                    for (List<String> order : orders) {
+                        fixtures.add(fixture(order, hostile, eol, shape));
+                    }
                 }
             }
         }
@@ -56,6 +72,9 @@ final class A3Cases {
                         + count(source, "if (x) { return y; }"),
                 count(source, "Pattern.compile"),
                 count(source, "\"\"\""),
+                count(source, "IntBinaryOperator"),
+                count(source, "switch ("),
+                count(source, "record Pair"),
                 source.contains("\r\n") ? "CRLF" : "LF");
     }
 
@@ -63,12 +82,19 @@ final class A3Cases {
         if (before.codeDecoys() != after.codeDecoys()
                 || before.regexDecoys() != after.regexDecoys()
                 || before.textBlocks() != after.textBlocks()
+                || before.lambdaShapes() != after.lambdaShapes()
+                || before.switchShapes() != after.switchShapes()
+                || before.recordShapes() != after.recordShapes()
                 || !before.lineEnding().equals(after.lineEnding())) {
             throw new IllegalStateException("A3Lab lexical signal drift");
         }
     }
 
-    private static String fixture(List<String> order, boolean hostile, String eol) {
+    private static String fixture(
+            List<String> order,
+            boolean hostile,
+            String eol,
+            CallShape shape) {
         Map<String, String> blocks =
                 Map.of(
                         "DATA",
@@ -80,27 +106,7 @@ final class A3Cases {
                             }
                         """,
                         "API",
-                        """
-                            public static int probe(int a, int b) {
-                                return compute(a, b);
-                            }
-
-                            public static boolean matches(String value) {
-                                return java.util.regex.Pattern.compile(REGEX).matcher(value).find();
-                            }
-
-                            public static String payload() {
-                                class Local {
-                                    String value() {
-                                        return CODE + "|" + TEXT + "|" + REGEX;
-                                    }
-                                }
-                                java.util.function.Supplier<String> supplier = new Local()::value;
-                                return supplier.get();
-                            }
-
-                            public static native int nativeShape(int value);
-                        """);
+                        apiBlock(shape));
         StringBuilder out = new StringBuilder();
         out.append("package m3.lab;\n\npublic final class Subject {\n");
         for (String key : order) {
@@ -108,6 +114,50 @@ final class A3Cases {
         }
         out.append("    private Subject() {}\n}\n");
         return out.toString().replace("\n", eol);
+    }
+
+    private static String apiBlock(CallShape shape) {
+        String probe =
+                switch (shape) {
+                    case DIRECT ->
+                            """
+                                public static int probe(int a, int b) {
+                                    return compute(a, b);
+                                }
+                            """;
+                    case MODERN ->
+                            """
+                                public static int probe(int a, int b) {
+                                    record Pair(int left, int right) {}
+                                    Pair pair = new Pair(a, b);
+                                    java.util.function.IntBinaryOperator op =
+                                            (left, right) ->
+                                                    switch (Math.floorMod(left, 2)) {
+                                                        case 0 -> compute(left, right);
+                                                        default -> compute(left, right);
+                                                    };
+                                    return op.applyAsInt(pair.left(), pair.right());
+                                }
+                            """;
+                };
+        return probe
+                + """
+                    public static boolean matches(String value) {
+                        return java.util.regex.Pattern.compile(REGEX).matcher(value).find();
+                    }
+
+                    public static String payload() {
+                        class Local {
+                            String value() {
+                                return CODE + "|" + TEXT + "|" + REGEX;
+                            }
+                        }
+                        java.util.function.Supplier<String> supplier = new Local()::value;
+                        return supplier.get();
+                    }
+
+                    public static native int nativeShape(int value);
+                """;
     }
 
     private static String dataBlock(boolean hostile) {

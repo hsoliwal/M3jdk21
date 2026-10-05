@@ -21,37 +21,48 @@ import org.openrewrite.SourceFile;
 import org.openrewrite.internal.InMemoryLargeSourceSet;
 import org.openrewrite.java.JavaParser;
 
-/** Exact recipe-first delivery proof for the A3 hostile compiler mastery laboratory. */
+/** Exact recipe-first delivery proof for the expanded A3 hostile compiler mastery laboratory. */
 final class M3A3LabDeliveryRecipeTest {
     private static final String CRATE = "a3-mastery-lab";
+    private static final String BEFORE_ROOT = "/com/m3/rewrite/a3-lab/v2-before/";
 
     @Test
-    void exactA3PreimageGeneratesReviewedLabAndSecondRunIsFixedPoint() {
+    void exactCurrentA3PreimagesAdvanceMasteryAndSecondRunIsFixedPoint() {
         Map<String, String> before =
                 Map.of(
                         "src/main/java/com/m3/a3/A3.java",
-                        resource("/com/m3/rewrite/a3-lab/before-A3.java.txt"));
+                        resource(BEFORE_ROOT + "A3.java"),
+                        "src/main/java/com/m3/a3/A3Cases.java",
+                        resource(BEFORE_ROOT + "A3Cases.java"),
+                        "src/main/java/com/m3/a3/A3Lab.java",
+                        resource(BEFORE_ROOT + "A3Lab.java"),
+                        "src/test/java/com/m3/a3/A3LabTest.java",
+                        resource(BEFORE_ROOT + "A3LabTest.java"));
 
         Recipe recipe = new M3HashPinnedJavaSnapshotRecipe(CRATE);
-        Map<String, String> after = apply(recipe, before);
+        Map<String, String> changed = apply(recipe, before);
 
-        assertEquals(4, after.size());
-        assertTrue(after.get("src/main/java/com/m3/a3/A3.java").contains("case \"lab\""));
+        assertEquals(3, changed.size());
         assertTrue(
-                after.get("src/main/java/com/m3/a3/A3Cases.java")
-                        .contains("hostile-source corpus"));
+                changed.get("src/main/java/com/m3/a3/A3Cases.java")
+                        .contains("enum CallShape"));
         assertTrue(
-                after.get("src/main/java/com/m3/a3/A3Lab.java")
-                        .contains("M3AtomizePureIntReturnRecipe"));
+                changed.get("src/main/java/com/m3/a3/A3Cases.java")
+                        .contains("case MODERN"));
         assertTrue(
-                after.get("src/test/java/com/m3/a3/A3LabTest.java")
-                        .contains("assertEquals(96, results.size())"));
+                changed.get("src/main/java/com/m3/a3/A3Lab.java")
+                        .contains("List.of(\"A\", \"P\", \"A\")"));
+        assertTrue(
+                changed.get("src/test/java/com/m3/a3/A3LabTest.java")
+                        .contains("assertEquals(288, results.size())"));
 
-        assertTrue(apply(recipe, after).isEmpty());
+        Map<String, String> converged = new LinkedHashMap<>(before);
+        converged.putAll(changed);
+        assertTrue(apply(recipe, converged).isEmpty());
     }
 
     @Test
-    void declarativeRecipeBindsTheExactHashPinnedCrate() {
+    void declarativeRecipeStillBindsTheCanonicalHashPinnedCrate() {
         String yaml = resource("/META-INF/rewrite/m3-a3-lab.yml");
         assertTrue(yaml.contains("name: com.m3.a3.LabDelivery"));
         assertTrue(yaml.contains("M3HashPinnedJavaSnapshotRecipe"));
@@ -98,9 +109,6 @@ final class M3A3LabDeliveryRecipeTest {
                         inputs.add(
                                 Parser.Input.fromString(
                                         Path.of(path), source)));
-        if (inputs.isEmpty()) {
-            return List.of();
-        }
         return JavaParser.fromJavaVersion()
                 .build()
                 .parseInputs(inputs, null, context)

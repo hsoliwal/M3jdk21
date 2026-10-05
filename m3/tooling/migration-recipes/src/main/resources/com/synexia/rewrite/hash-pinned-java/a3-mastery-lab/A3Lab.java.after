@@ -42,7 +42,9 @@ public final class A3Lab {
                     List.of("A"),
                     List.of("P"),
                     List.of("A", "P"),
-                    List.of("P", "A"));
+                    List.of("P", "A"),
+                    List.of("A", "P", "A"),
+                    List.of("P", "A", "P"));
 
     public record Result(
             int fixture,
@@ -397,6 +399,7 @@ public final class A3Lab {
 
     private static String subset(List<String> schedule) {
         return schedule.stream()
+                .distinct()
                 .sorted()
                 .reduce((left, right) -> left + "+" + right)
                 .orElseThrow();
