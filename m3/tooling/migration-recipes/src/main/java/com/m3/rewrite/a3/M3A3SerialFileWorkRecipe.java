@@ -190,18 +190,21 @@ public final class M3A3SerialFileWorkRecipe
             ExecutionContext context) {
         String scanned = inventory.seen.get(path);
         String current = gitBlob(file.printAll());
-        if (scanned == null
-                || !current.equals(scanned)
-                || (!current.equals(target.before())
-                        && !current.equals(target.after()))) {
+        boolean matchesManifest = current.equals(target.before())
+                || current.equals(target.after());
+        // Generated ABSENT postimages enter the edit phase without a scanner observation.
+        boolean matchesScan = scanned == null
+                ? "ABSENT".equals(target.before()) && current.equals(target.after())
+                : current.equals(scanned);
+        if (!(file instanceof J.CompilationUnit) || !matchesManifest || !matchesScan) {
             throw new IllegalStateException("A3 target changed after scan: " + path);
         }
         if (current.equals(target.after())) return file;
         SourceFile candidate = parse(path, target.afterResource(), context);
         candidate = candidate.withId(file.getId());
-        return candidate.withSourcePath(file.getSourcePath())
-                .withMarkers(file.getMarkers())
-                .withFileAttributes(file.getFileAttributes())
+        candidate = candidate.withSourcePath(file.getSourcePath());
+        candidate = candidate.withMarkers(file.getMarkers());
+        return candidate.withFileAttributes(file.getFileAttributes())
                 .withCharset(file.getCharset())
                 .withCharsetBomMarked(file.isCharsetBomMarked())
                 .withChecksum(null);

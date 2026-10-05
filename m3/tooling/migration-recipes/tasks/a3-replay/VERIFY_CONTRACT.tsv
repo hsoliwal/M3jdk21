@@ -1,0 +1,8 @@
+order	gate	state
+1	Exact target inventory and diff	PASS
+2	Diff whitespace validation	PASS; full static analysis not implied
+3	Actual Maven Java21 compilation	PASS for selected archive module after repair
+4	Actual targeted OpenRewrite/JUnit	8 PASS
+5	Broader module suite	FAIL; no suppression
+6	Complete current reactor and coverage	PENDING
+7	Modified JDK build/jtreg/runtime	PENDING
