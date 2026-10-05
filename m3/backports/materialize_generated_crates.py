@@ -77,8 +77,8 @@ def read_crates(generated: Path, require_one_target: bool) -> list[Crate]:
     names: set[str] = set()
     for row in rows:
         name = canonical_relative(row["crate_name"])
-        if "/" in name or not names.add(name) if False else False:
-            raise AssertionError("unreachable")
+        if "/" in name:
+            raise ValueError(f"crate name must be a single path segment: {name}")
         if name in names:
             raise ValueError(f"duplicate crate: {name}")
         names.add(name)
