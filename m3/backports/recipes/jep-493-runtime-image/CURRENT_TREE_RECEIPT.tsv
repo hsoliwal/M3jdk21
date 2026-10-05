@@ -1,0 +1,17 @@
+field	value
+jep	493
+title	Linking Run-Time Images without JMODs
+upstream_commit	2ec358082f0896480bdbfcb289b4ba2bff0dd828
+donor_state	jdk-24+36
+packet_state	PACKET_READY
+source_materialized	false
+current_tree_equivalent	false
+implementation_paths	47
+recipe_atoms_generated	false
+dependency_audit	initial-pass-complete
+compile_proof	pending
+jtreg_proof	pending
+runtime_image_smoke	pending
+fixed_point	pending
+promotion	NOT_AUTHORIZED
+next_action	GENERATE_FILE_ATOMIC_JAVA_TEXT_CRATES_THEN_COMPOSE_MULTI_MODULE_PACKET
