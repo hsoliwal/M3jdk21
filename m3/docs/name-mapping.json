@@ -98,6 +98,44 @@
       "target": "M3 family",
       "status": "requires per-type source/API/ownership mapping",
       "source_commit": null
+    },
+    {
+      "source": "com.synexia.indexstring.IndexResolver / IndexStringTuple",
+      "target": "java.lang.M3StringOwner / java.lang.M3StringAtom / java.lang.M3StringTuple",
+      "status": "M3JDK bootstrap-safe adaptation",
+      "mapping_rule": "scalar and tuple ownership are target-internal; M3String remains owner+packed coordinate",
+      "donor_lineage": [
+        "8b202d3c10617d67f45247ccd81a21b9c5332a08",
+        "40d66f6edd0a9cf3e6b4545058c1ad54f6cd03bc"
+      ]
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexStringCanonicalFacts and composable text facts",
+      "target": "java.lang.M3StringFacts plus owner-internal bounded range facts",
+      "status": "internal-only target adaptation",
+      "mapping_rule": "derived fixed-size facts attach to canonical M3 owner/range identity; no public String API and no spelling payload",
+      "donor_lineage": [
+        "d08ee60be27b60a951a55a2b472d515bf142f8bf",
+        "b9d35ce3c3c266fb3641352a07903563a3a86b81"
+      ]
+    },
+    {
+      "source": "com.synexia.indexstring.nativebridge.MIndexUtf16Shadow",
+      "target": "JNI String UTF-16/char shadow paths and java.lang.M3String.nativeCharShadow",
+      "status": "native compatibility adaptation",
+      "mapping_rule": "shadow only; never canonical M3String payload",
+      "donor_lineage": [
+        "f2f15f1aaa147cf1af556b0c148954178f971de6"
+      ]
+    },
+    {
+      "source": "com.synexia.indexstring.nativebridge.MIndexUtf8Shadow",
+      "target": "JNI String UTF-8/byte shadow paths and java.lang.M3String.nativeByteShadow",
+      "status": "native compatibility adaptation",
+      "mapping_rule": "shadow only; never canonical M3String payload",
+      "donor_lineage": [
+        "f2f15f1aaa147cf1af556b0c148954178f971de6"
+      ]
     }
   ],
   "imported_donor_sources": [],
