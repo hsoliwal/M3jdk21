@@ -87,11 +87,17 @@ final class M3StringHistoryConvergenceRecipeTest {
                         "src/java.base/share/classes/java/lang/M3StringTuple.java",
                         "07-M3StringTuple.java.txt"),
                 java(
+                        "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+                        "08-M3TQ.java.txt"),
+                java(
                         "test/jdk/java/lang/String/M3StringFactsCompositionTest.java",
                         "04-M3StringFactsCompositionTest.java.txt"),
                 java(
                         "test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java",
-                        "03-M3StringPrecomputeSearchTest.java.txt"));
+                        "03-M3StringPrecomputeSearchTest.java.txt"),
+                java(
+                        "test/jdk/jdk/internal/mindex/M3TQFactsTest.java",
+                        "09-M3TQFactsTest.java.txt"));
     }
 
     private static List<SourceFile> textAfter() {
