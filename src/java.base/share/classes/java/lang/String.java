@@ -5050,9 +5050,11 @@ public final class String
      */
     static byte[] m3AdmitNative(String value) {
         String checked = Objects.requireNonNull(value, "value");
-        checked.m3();
-        // NewString/NewStringUTF already created this compatibility shadow in native code.
-        return checked.value;
+        M3String storage = checked.m3();
+        // JNI NewString/NewStringUTF used a temporary Compact-String construction shadow.
+        // Once canonical M3 admission succeeds, discard that payload and retain only the VM
+        // layout sentinel. Future byte/char arrays are explicit JNI compatibility shadows.
+        return storage == null ? checked.value : storage.compatibilityValue();
     }
 
     static boolean m3StorageRequested() {
