@@ -432,10 +432,8 @@ final class M3String implements CharSequence {
         byte[] output = new byte[capacity];
         if (length == 0) return output;
 
-        char[] chars = new char[length];
-        getChars(0, length, chars, 0);
         ByteBuffer bytes = ByteBuffer.wrap(output);
-        CharBuffer input = CharBuffer.wrap(chars);
+        CharBuffer input = CharBuffer.wrap(this);
         try {
             CoderResult result = encoder.encode(input, bytes, true);
             if (!result.isUnderflow()) result.throwException();
@@ -463,10 +461,8 @@ final class M3String implements CharSequence {
         byte[] output = new byte[capacity];
         if (length == 0) return output;
 
-        char[] chars = new char[length];
-        getChars(0, length, chars, 0);
         ByteBuffer bytes = ByteBuffer.wrap(output);
-        CharBuffer input = CharBuffer.wrap(chars);
+        CharBuffer input = CharBuffer.wrap(this);
         try {
             CoderResult result = encoder.encode(input, bytes, true);
             if (!result.isUnderflow()) result.throwException();
