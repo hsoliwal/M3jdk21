@@ -369,8 +369,24 @@ def verify_jep458_current_equivalence(root: Path) -> None:
     )
     sealed_paths: set[str] = set()
     for manifest_path in manifests:
-        manifest = read_tsv(manifest_path)
         resource_root = manifest_path.parent
+        manifest = []
+        for line in manifest_path.read_text(encoding="utf-8").splitlines():
+            if not line or line.startswith("#"):
+                continue
+            cells = line.split("\t")
+            if len(cells) != 4:
+                raise AssertionError(
+                    f"invalid JEP 458 hash-pinned manifest row: {manifest_path}: {line}"
+                )
+            manifest.append(
+                {
+                    "path": cells[0],
+                    "before": cells[1],
+                    "after": cells[2],
+                    "resource": cells[3],
+                }
+            )
         for row in manifest:
             path = row["path"]
             if path in sealed_paths:
