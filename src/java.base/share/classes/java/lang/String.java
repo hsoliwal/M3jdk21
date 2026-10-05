@@ -144,26 +144,23 @@ public final class String
                Constable, ConstantDesc {
 
     /**
-     * The value is used for character storage.
+     * Compact-String compatibility shadow.
      *
-     * @implNote This field is trusted by the VM, and is a subject to
-     * constant folding if String instance is constant. Overwriting this
-     * field after construction will cause problems.
+     * <p>For M3-backed Strings this array is not canonical identity or canonical payload; it is a
+     * compatibility projection retained while remaining JDK/HotSpot consumers are migrated.
+     * Shadows produced from M3String are allocated by the JNI shadow boundary. Bootstrap Strings
+     * created before M3 activation retain the stock representation.</p>
      *
-     * Additionally, it is marked with {@link Stable} to trust the contents
-     * of the array. No other facility in JDK provides this functionality (yet).
-     * {@link Stable} is safe here, because value is never null.
+     * @implNote The field remains VM-trusted during the migration and is never mutated.
      */
     @Stable
     private final byte[] value;
 
     /**
-     * Optional immutable segmented backing used by M3JDK Strings. Ordinary
-     * contiguous Strings keep this null and retain the stock Compact Strings
-     * representation. Joined/sliced Strings keep {@code value} as the empty
-     * sentinel and resolve their logical content through this descriptor.
+     * Canonical M3JDK text value. Synexia MIndexString is the donor/reference structure; M3JDK
+     * deliberately names its counterpart M3String. M3String itself is only owner + coordinate.
      */
-    private volatile MIndexString mindex;
+    private volatile M3String m3;
 
     /**
      * The identifier of the encoding used to encode the bytes in
@@ -260,7 +257,7 @@ public final class String
     public String() {
         this.value = "".value;
         this.coder = "".coder;
-        this.mindex = null;
+        this.m3 = null;
     }
 
     /**
@@ -275,10 +272,10 @@ public final class String
      */
     @IntrinsicCandidate
     public String(String original) {
-        MIndexString storage = original.mindex();
+        M3String storage = original.m3();
         this.value = storage == null ? original.value : storage.compatibilityValue();
         this.coder = storage == null ? original.coder : storage.coder();
-        this.mindex = storage;
+        this.m3 = storage;
         this.hash = original.hash;
         this.hashIsZero = original.hashIsZero;
     }
@@ -359,7 +356,7 @@ public final class String
         if (count == 0) {
             this.value = "".value;
             this.coder = "".coder;
-            this.mindex = null;
+            this.m3 = null;
             return;
         }
         byte[] candidate = null;
@@ -373,10 +370,10 @@ public final class String
         if (candidate == null) {
             candidate = StringUTF16.toBytes(codePoints, offset, count);
         }
-        MIndexString storage = maybeAdmit(candidate, candidateCoder);
+        M3String storage = maybeAdmit(candidate, candidateCoder);
         this.value = storage == null ? candidate : storage.compatibilityValue();
         this.coder = storage == null ? candidateCoder : storage.coder();
-        this.mindex = storage;
+        this.m3 = storage;
     }
 
     /**
@@ -424,7 +421,7 @@ public final class String
         if (count == 0) {
             this.value = "".value;
             this.coder = "".coder;
-            this.mindex = null;
+            this.m3 = null;
             return;
         }
         byte[] candidate;
@@ -440,10 +437,10 @@ public final class String
             }
             candidateCoder = UTF16;
         }
-        MIndexString storage = maybeAdmit(candidate, candidateCoder);
+        M3String storage = maybeAdmit(candidate, candidateCoder);
         this.value = storage == null ? candidate : storage.compatibilityValue();
         this.coder = storage == null ? candidateCoder : storage.coder();
-        this.mindex = storage;
+        this.m3 = storage;
     }
 
     /**
@@ -564,10 +561,10 @@ public final class String
     }
 
     private String(MIndexConstruction construction) {
-        MIndexString storage = maybeAdmit(construction.value, construction.coder);
+        M3String storage = maybeAdmit(construction.value, construction.coder);
         this.value = storage == null ? construction.value : storage.compatibilityValue();
         this.coder = storage == null ? construction.coder : storage.coder();
-        this.mindex = storage;
+        this.m3 = storage;
     }
 
     private static final class MIndexConstruction {
@@ -1536,7 +1533,7 @@ public final class String
      *          object.
      */
     public int length() {
-        MIndexString storage = mindex();
+        M3String storage = m3();
         return storage == null ? value.length >> coder() : storage.length();
     }
 
@@ -1550,7 +1547,7 @@ public final class String
      */
     @Override
     public boolean isEmpty() {
-        MIndexString storage = mindex();
+        M3String storage = m3();
         return storage == null ? value.length == 0 : storage.length() == 0;
     }
 
@@ -1573,7 +1570,7 @@ public final class String
      *             string.
      */
     public char charAt(int index) {
-        MIndexString storage = mindex();
+        M3String storage = m3();
         if (storage != null) {
             return storage.charAt(index);
         }
@@ -1607,7 +1604,7 @@ public final class String
      * @since      1.5
      */
     public int codePointAt(int index) {
-        if (mindex() != null) {
+        if (m3() != null) {
             checkIndex(index, length());
             char first = charAt(index);
             if (Character.isHighSurrogate(first) && index + 1 < length()) {
@@ -1652,7 +1649,7 @@ public final class String
     public int codePointBefore(int index) {
         int i = index - 1;
         checkIndex(i, length());
-        if (mindex() != null) {
+        if (m3() != null) {
             char second = charAt(i);
             if (Character.isLowSurrogate(second) && i > 0) {
                 char first = charAt(i - 1);
@@ -1691,7 +1688,7 @@ public final class String
      */
     public int codePointCount(int beginIndex, int endIndex) {
         Objects.checkFromToIndex(beginIndex, endIndex, length());
-        if (mindex() != null) {
+        if (m3() != null) {
             int count = 0;
             for (int index = beginIndex; index < endIndex; count++) {
                 char first = charAt(index++);
@@ -1765,7 +1762,7 @@ public final class String
     public void getChars(int srcBegin, int srcEnd, char[] dst, int dstBegin) {
         checkBoundsBeginEnd(srcBegin, srcEnd, length());
         checkBoundsOffCount(dstBegin, srcEnd - srcBegin, dst.length);
-        MIndexString storage = mindex();
+        M3String storage = m3();
         if (storage != null) {
             storage.getChars(srcBegin, srcEnd, dst, dstBegin);
         } else if (isLatin1()) {
@@ -1824,7 +1821,7 @@ public final class String
         checkBoundsBeginEnd(srcBegin, srcEnd, length());
         Objects.requireNonNull(dst);
         checkBoundsOffCount(dstBegin, srcEnd - srcBegin, dst.length);
-        if (mindex() != null) {
+        if (m3() != null) {
             for (int src = srcBegin, dstIndex = dstBegin; src < srcEnd; src++, dstIndex++) {
                 dst[dstIndex] = (byte) charAt(src);
             }
@@ -1926,8 +1923,8 @@ public final class String
         if (!(anObject instanceof String aString)) {
             return false;
         }
-        MIndexString leftStorage = mindex();
-        MIndexString rightStorage = aString.mindex();
+        M3String leftStorage = m3();
+        M3String rightStorage = aString.m3();
         if (leftStorage != null) {
             return leftStorage.contentEquals(aString);
         }
@@ -1965,7 +1962,7 @@ public final class String
         if (len != sb.length()) {
             return false;
         }
-        if (mindex() != null) {
+        if (m3() != null) {
             for (int index = 0; index < len; index++) {
                 if (charAt(index) != sb.charAt(index)) {
                     return false;
@@ -2025,7 +2022,7 @@ public final class String
         if (n != length()) {
             return false;
         }
-        if (mindex() != null) {
+        if (m3() != null) {
             for (int i = 0; i < n; i++) {
                 if (charAt(i) != cs.charAt(i)) {
                     return false;
@@ -2129,7 +2126,7 @@ public final class String
      *          lexicographically greater than the string argument.
      */
     public int compareTo(String anotherString) {
-        if (mindex() != null || anotherString.mindex() != null) {
+        if (m3() != null || anotherString.m3() != null) {
             int length1 = length();
             int length2 = anotherString.length();
             int limit = Math.min(length1, length2);
@@ -2465,7 +2462,7 @@ public final class String
         // from immutable state
         int h = hash;
         if (h == 0 && !hashIsZero) {
-            MIndexString storage = mindex();
+            M3String storage = m3();
             h = storage != null
                     ? storage.hashCodeValue()
                     : (isLatin1() ? StringLatin1.hashCode(value)
@@ -2942,8 +2939,8 @@ public final class String
             return "";
         }
         if (m3JoinedStringsEnabled()) {
-            MIndexString storage =
-                    MIndexString.sliceOf(this, beginIndex, endIndex);
+            M3String storage =
+                    M3String.sliceOf(this, beginIndex, endIndex);
             if (storage != null) {
                 return new String(storage);
             }
@@ -3646,7 +3643,7 @@ public final class String
                 }
             }
             pieces[piece] = suffix;
-            MIndexString storage = MIndexString.join(pieces);
+            M3String storage = M3String.join(pieces);
             if (storage != null) {
                 return new String(storage);
             }
@@ -4497,7 +4494,7 @@ public final class String
      *          the character sequence represented by this string.
      */
     public char[] toCharArray() {
-        MIndexString storage = mindex();
+        M3String storage = m3();
         if (storage != null) {
             char[] result = new char[storage.length()];
             storage.getChars(0, result.length, result, 0);
@@ -4833,7 +4830,7 @@ public final class String
         if (m3JoinedStringsEnabled() && count <= 256) {
             String[] pieces = new String[count];
             Arrays.fill(pieces, this);
-            MIndexString storage = MIndexString.join(pieces);
+            M3String storage = M3String.join(pieces);
             if (storage != null) {
                 return new String(storage);
             }
@@ -4894,7 +4891,7 @@ public final class String
      * @param coder     the coder of dst[]
      */
     void getBytes(byte[] dst, int dstBegin, byte coder) {
-        MIndexString storage = mindex();
+        M3String storage = m3();
         if (storage != null) {
             storage.getBytes(dst, 0, dstBegin, coder, length());
         } else if (coder() == coder) {
@@ -4917,7 +4914,7 @@ public final class String
      * @param length    the amount of copied chars
      */
     void getBytes(byte[] dst, int srcPos, int dstBegin, byte coder, int length) {
-        MIndexString storage = mindex();
+        M3String storage = m3();
         if (storage != null) {
             storage.getBytes(dst, srcPos, dstBegin, coder, length);
         } else if (coder() == coder) {
@@ -4940,7 +4937,7 @@ public final class String
         if (len == 0) {
             this.value = "".value;
             this.coder = "".coder;
-            this.mindex = null;
+            this.m3 = null;
             return;
         }
         byte[] candidate = COMPACT_STRINGS ? StringUTF16.compress(value, off, len) : null;
@@ -4948,10 +4945,10 @@ public final class String
         if (candidate == null) {
             candidate = StringUTF16.toBytes(value, off, len);
         }
-        MIndexString storage = maybeAdmit(candidate, candidateCoder);
+        M3String storage = maybeAdmit(candidate, candidateCoder);
         this.value = storage == null ? candidate : storage.compatibilityValue();
         this.coder = storage == null ? candidateCoder : storage.coder();
-        this.mindex = storage;
+        this.m3 = storage;
     }
 
     /*
@@ -4977,57 +4974,58 @@ public final class String
                 candidateCoder = UTF16;
             }
         }
-        MIndexString storage = maybeAdmit(candidate, candidateCoder);
+        M3String storage = maybeAdmit(candidate, candidateCoder);
         this.value = storage == null ? candidate : storage.compatibilityValue();
         this.coder = storage == null ? candidateCoder : storage.coder();
-        this.mindex = storage;
+        this.m3 = storage;
     }
 
    /*
     * Package private constructor which shares value array for speed.
     */
     String(byte[] value, byte coder) {
-        MIndexString storage = maybeAdmit(value, coder);
+        M3String storage = maybeAdmit(value, coder);
         this.value = storage == null ? value : storage.compatibilityValue();
         this.coder = storage == null ? coder : storage.coder();
-        this.mindex = storage;
+        this.m3 = storage;
     }
 
-    private static MIndexString maybeAdmit(byte[] value, byte coder) {
-        return M3_JOINED_STRINGS && jdk.internal.misc.VM.isBooted() && MIndexString.admissionEnabled() && value.length != 0
-                ? MIndexString.admit(value, coder)
+    private static M3String maybeAdmit(byte[] value, byte coder) {
+        return M3_JOINED_STRINGS && jdk.internal.misc.VM.isBooted() && M3String.admissionEnabled() && value.length != 0
+                ? M3String.admit(value, coder)
                 : null;
     }
 
-    /** Trusted constructor for one canonical MIndexString storage body. */
-    String(MIndexString storage) {
-        MIndexString checked = Objects.requireNonNull(storage, "storage");
+    /** Trusted constructor for one canonical M3String storage body. */
+    String(M3String storage) {
+        M3String checked = Objects.requireNonNull(storage, "storage");
         this.value = checked.compatibilityValue();
         this.coder = checked.coder();
-        this.mindex = checked;
+        this.m3 = checked;
     }
 
-    MIndexString mindex() {
-        MIndexString storage = mindex;
+    M3String m3() {
+        M3String storage = m3;
         if (storage == null
                 && M3_JOINED_STRINGS
-                && jdk.internal.misc.VM.isBooted() && MIndexString.admissionEnabled()
+                && jdk.internal.misc.VM.isBooted() && M3String.admissionEnabled()
                 && value.length != 0) {
-            storage = MIndexString.admit(value, rawCoder());
-            mindex = storage;
+            storage = M3String.admit(value, rawCoder());
+            m3 = storage;
         }
         return storage;
     }
 
     /**
      * VM-private JNI ingress hook. The VM calls this only after module initialization; the normal
-     * MIndex admission gates still decide whether the supplied String should attach canonical
+     * M3 admission gates still decide whether the supplied String should attach canonical
      * storage. Bootstrap-created Strings therefore retain the stock representation.
      */
     static byte[] m3AdmitNative(String value) {
         String checked = Objects.requireNonNull(value, "value");
-        MIndexString storage = checked.mindex();
-        return storage == null ? checked.value : storage.compatibilityValue();
+        checked.m3();
+        // NewString/NewStringUTF already created this compatibility shadow in native code.
+        return checked.value;
     }
 
     static boolean m3StorageRequested() {
@@ -5035,14 +5033,14 @@ public final class String
     }
 
     static boolean m3JoinedStringsEnabled() {
-        return M3_JOINED_STRINGS && jdk.internal.misc.VM.isBooted() && MIndexString.admissionEnabled();
+        return M3_JOINED_STRINGS && jdk.internal.misc.VM.isBooted() && M3String.admissionEnabled();
     }
 
     static String m3Concat(String first, String second) {
         if (!m3JoinedStringsEnabled()) {
             return null;
         }
-        MIndexString storage = MIndexString.join(first, second);
+        M3String storage = M3String.join(first, second);
         return storage == null ? null : new String(storage);
     }
 
@@ -5051,12 +5049,12 @@ public final class String
     }
 
     byte coder() {
-        MIndexString storage = mindex;
+        M3String storage = m3;
         return storage == null ? rawCoder() : storage.coder();
     }
 
     byte[] value() {
-        MIndexString storage = mindex();
+        M3String storage = m3();
         return storage == null ? value : storage.materialize();
     }
 
