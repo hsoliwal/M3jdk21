@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.Jep485
+displayName: Backport final JEP 485 Stream Gatherers
+description: >-
+  Replays the reviewed final JDK24 Stream Gatherers source/test graph from exact M3JDK21
+  preimages. Public API promotion remains separately proof-gated.
+tags:
+  - m3
+  - jdk21
+  - backport
+  - jep-485
+  - stream-gatherers
+recipeList:
+  - com.m3.rewrite.backport.M3Jep485BackportRecipe
