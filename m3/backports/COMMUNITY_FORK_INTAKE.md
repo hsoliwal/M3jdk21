@@ -181,3 +181,17 @@ It is complete for a pinned snapshot only when:
 
 The catalogue is intentionally extensible as additional relevant JDK21 forks/branches are
 identified.
+
+
+## Curated capability joins
+
+`COMMUNITY_FORK_CAPABILITIES.tsv` is a second-level join over the canonical fork catalogue.
+It does not replace fork history inventory. Each row must reference an existing `fork_id` and an
+immutable commit reachable from that fork's pinned history.
+
+The table exists to make high-value mechanisms reviewable without treating every fork-unique commit
+as equally important. It still grants no source-copy or distribution authority.
+
+Initial joins cover Dragonwell SIMD sort, SapMachine Vitals, Corretto Generational Shenandoah and
+Lilliput lanes, Microsoft GPU/JMX patch lanes, and a JetBrains Runtime Wayland correctness patch.
+Every row remains pending proof or explicitly held; none is an admission decision.
