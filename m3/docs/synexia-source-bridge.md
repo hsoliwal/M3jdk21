@@ -95,12 +95,25 @@ existing `M3Jdk21HashPinnedSnapshotRecipe` and
 atomically writes their changes.
 
 The Java entry point is
-`com.m3.rewrite.backport.SynexiaHandoffMaterializeCli`:
+`com.m3.rewrite.backport.SynexiaHandoffMaterializeCli`. Invoke it through Maven so the retained
+OpenRewrite runtime dependencies are on the classpath:
 
-```text
---check M3JDK21_ROOT synexia-<capability>-v1
---apply M3JDK21_ROOT synexia-<capability>-v1
+```sh
+mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+  -DskipTests compile \
+  org.codehaus.mojo:exec-maven-plugin:3.6.4:java \
+  -Dexec.mainClass=com.m3.rewrite.backport.SynexiaHandoffMaterializeCli \
+  -Dexec.args="--check /absolute/path/to/M3jdk21 synexia-<capability>-v1"
+
+mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+  -DskipTests compile \
+  org.codehaus.mojo:exec-maven-plugin:3.6.4:java \
+  -Dexec.mainClass=com.m3.rewrite.backport.SynexiaHandoffMaterializeCli \
+  -Dexec.args="--apply /absolute/path/to/M3jdk21 synexia-<capability>-v1"
 ```
+
+The importer must run first, followed by this Maven compilation, so the newly imported crate resources
+are present on the materializer classpath.
 
 The materializer is an execution shell, not a second transformation engine. It never interprets
 Synexia source itself and cannot bypass the packet guard or the typed Java receiver. Existing POSIX
