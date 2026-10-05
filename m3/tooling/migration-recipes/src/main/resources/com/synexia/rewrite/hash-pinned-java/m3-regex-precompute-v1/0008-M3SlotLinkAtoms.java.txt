@@ -1,0 +1,70 @@
+// SPDX-License-Identifier: Apache-2.0
+package jdk.internal.mindex;
+
+/**
+ * Stateless zero-object mechanics for doubly-linked stable integer slots.
+ *
+ * <p>Owners retain endpoint fields, free lists, payload lanes, indexes, counters and callback
+ * contracts. Endpoint updates are returned as one packed primitive long.</p>
+ */
+final class M3SlotLinkAtoms {
+    private M3SlotLinkAtoms() { }
+
+    static long pack(int first, int last) {
+        return ((long) first << 32) | (last & 0xffff_ffffL);
+    }
+
+    static int first(long endpoints) {
+        return (int) (endpoints >> 32);
+    }
+
+    static int last(long endpoints) {
+        return (int) endpoints;
+    }
+
+    static long linkLast(int[] previous, int[] next, int first, int last, int row) {
+        previous[row] = last;
+        next[row] = -1;
+        if (last >= 0) {
+            next[last] = row;
+        } else {
+            first = row;
+        }
+        return pack(first, row);
+    }
+
+    static long linkFirst(int[] previous, int[] next, int first, int last, int row) {
+        previous[row] = -1;
+        next[row] = first;
+        if (first >= 0) {
+            previous[first] = row;
+        } else {
+            last = row;
+        }
+        return pack(row, last);
+    }
+
+    static long unlink(int[] previous, int[] next, int first, int last, int row) {
+        int before = previous[row];
+        int after = next[row];
+        if (before >= 0) {
+            next[before] = after;
+        } else {
+            first = after;
+        }
+        if (after >= 0) {
+            previous[after] = before;
+        } else {
+            last = before;
+        }
+        return pack(first, last);
+    }
+
+    static long moveLast(int[] previous, int[] next, int first, int last, int row) {
+        if (row == last) {
+            return pack(first, last);
+        }
+        long endpoints = unlink(previous, next, first, last, row);
+        return linkLast(previous, next, first(endpoints), last(endpoints), row);
+    }
+}
