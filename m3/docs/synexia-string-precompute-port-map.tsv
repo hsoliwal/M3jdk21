@@ -12,7 +12,7 @@ Synexia	MIndexWhitespaceBoundaryCache	M3StringOwner.rangeFacts	IMPLEMENTED	bound
 Synexia	MIndexRegexTrigramQuery	jdk.internal.mindex.M3TQ	IMPLEMENTED	module-internal query	Conservative candidate filter only; exact verification remains authoritative
 Synexia	MIndexPreparedTrigramQuery	jdk.internal.mindex.M3TQ.Facts	IMPLEMENTED	module-internal caller-owned/budgeted facts	No canonical spelling retention
 Synexia	MIndexMappedStringFacts / MIndexMappedStringFactsSource	jdk.internal.mindex.M3MappedStringBacking	IMPLEMENTED	module-internal mapped owner facts	Backing IDs are owner-local logical coordinates
-Synexia	MIndexStringPrecomputation / ByteFacts	JNI shadow boundary + M3StringFacts	ADAPTED	no retained Java payload	Byte/char facts that require materialization remain compatibility shadows; canonical facts derive from M3 text
+Synexia	MIndexStringPrecomputation / ByteFacts	M3StringFacts + M3String.encode	IMPLEMENTED_CORE	fixed-size canonical facts + caller-owned output	UTF8 length/code-point geometry drive direct UTF-8/ASCII/ISO-8859-1 byte[] projection; generic charsets use one caller-owned M3 char projection; no canonical byte payload retained
 Synexia	MIndexPrefixZ / MIndexPrefixZCache	jdk.internal Pattern/search lane	SEPARATELY_BOUNDED_NOT_STRING_FIELD	budgeted cache only	Never place length-proportional Z arrays on M3String/M3StringFacts
 Synexia	MIndexPositionMasks / MIndexComposedPositionMasks	jdk.internal Pattern/search lane	SEPARATELY_BOUNDED_NOT_STRING_FIELD	budgeted cache/image only	Pattern/search optimization, not String identity
 Synexia	MIndexPatternPrecomputation / RegexComposition*	jdk.internal Pattern/search lane	SEPARATELY_BOUNDED_NOT_STRING_FIELD	budgeted plans/images	Exact regex engine remains authority
