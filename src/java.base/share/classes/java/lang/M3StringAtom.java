@@ -4,6 +4,8 @@
  */
 package java.lang;
 
+import java.util.Objects;
+
 import jdk.internal.misc.Unsafe;
 
 /**
