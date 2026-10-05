@@ -1,0 +1,110 @@
+name: M3 JDK21 community fork superset inventory
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/m3-jdk21-community-forks.yml"
+      - "m3/backports/COMMUNITY_FORKS.tsv"
+      - "m3/backports/community_fork_inventory.py"
+      - "m3/backports/test_community_fork_inventory.py"
+      - "m3/backports/COMMUNITY_FORK_INTAKE.md"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+
+      - name: Unit-test fork inventory mechanics
+        run: python3 -m unittest -v m3/backports/test_community_fork_inventory.py
+
+      - name: Fetch pinned fork histories without blobs
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf fork-universe
+          mkdir fork-universe
+          git -C fork-universe init -q
+
+          while IFS=$'\t' read -r fork_id repository ref pinned plane priority license copy selected notes; do
+            if [[ "$fork_id" == "fork_id" || -z "$fork_id" ]]; then
+              continue
+            fi
+            remote="m3-$fork_id"
+            git -C fork-universe remote add "$remote" "https://github.com/$repository.git"
+            git -C fork-universe -c protocol.version=2 fetch               --filter=blob:none               --no-tags               "$remote"               "+refs/heads/$ref:refs/remotes/m3/$fork_id"
+            actual="$(git -C fork-universe rev-parse "refs/remotes/m3/$fork_id^{commit}")"
+            if [[ "$actual" != "$pinned" ]]; then
+              echo "::error::$fork_id pin drift: expected $pinned, found $actual"
+              exit 1
+            fi
+          done < m3/backports/COMMUNITY_FORKS.tsv
+
+      - name: Materialize fork-unique commit and path evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf fork-inventory-output
+          python3 m3/backports/community_fork_inventory.py             --repo fork-universe             --catalog m3/backports/COMMUNITY_FORKS.tsv             --out-dir fork-inventory-output
+
+          python3 - <<'PY'
+          import csv
+          import json
+          from pathlib import Path
+
+          root = Path("fork-inventory-output")
+          with (root / "FORK_RELATIONSHIPS.tsv").open(
+              "r", encoding="utf-8", newline=""
+          ) as handle:
+              relationships = list(csv.DictReader(handle, delimiter="\t"))
+          with (root / "FORK_UNIQUE_CHANGES.tsv").open(
+              "r", encoding="utf-8", newline=""
+          ) as handle:
+              changes = list(csv.DictReader(handle, delimiter="\t"))
+          with (root / "FORK_PATH_CANDIDATES.tsv").open(
+              "r", encoding="utf-8", newline=""
+          ) as handle:
+              paths = list(csv.DictReader(handle, delimiter="\t"))
+
+          if len(relationships) != 11:
+              raise SystemExit(
+                  f"expected 11 fork/ref relationships, found {len(relationships)}"
+              )
+          if any(row["source_copy_authority"] != "false" for row in relationships):
+              raise SystemExit("fork relationship unexpectedly grants source-copy authority")
+          if any(row["selected_for_distribution"] != "false" for row in relationships):
+              raise SystemExit("fork relationship unexpectedly grants distribution authority")
+          if any(
+              row["compatibility_state"] != "PENDING_COMPATIBILITY_PROOF"
+              for row in changes
+          ):
+              raise SystemExit("fork heuristic auto-decided compatibility")
+          if any(
+              row["compatibility_state"] != "PENDING_COMPATIBILITY_PROOF"
+              or row["source_copy_authority"] != "false"
+              or row["selected_for_distribution"] != "false"
+              for row in paths
+          ):
+              raise SystemExit("fork path candidate authority drift")
+
+          summary = json.loads((root / "summary.json").read_text(encoding="utf-8"))
+          print(json.dumps(summary, sort_keys=True))
+          PY
+
+          gzip -9 -k fork-inventory-output/FORK_UNIQUE_CHANGES.tsv
+          gzip -9 -k fork-inventory-output/FORK_PATH_CANDIDATES.tsv
+
+      - name: Upload fork superset inventory
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-jdk21-community-fork-superset
+          path: fork-inventory-output/
+          if-no-files-found: error
+          retention-days: 14
