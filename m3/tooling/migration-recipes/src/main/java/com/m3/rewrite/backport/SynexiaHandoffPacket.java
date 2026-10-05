@@ -249,7 +249,7 @@ final class SynexiaHandoffPacket {
             }
             if (kind == Kind.JAVA
                     && (!sourcePath.endsWith(".java")
-                            || !M3Jdk21HashPinnedSnapshotRecipe.jdkJavaPath(targetPath))) {
+                            || !M3Jdk21HandoffPaths.javaSource(targetPath))) {
                 throw new IllegalStateException(
                         "JAVA handoff row is outside the typed receiver roots");
             }
