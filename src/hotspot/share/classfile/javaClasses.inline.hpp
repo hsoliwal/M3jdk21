@@ -173,11 +173,13 @@ jlong java_lang_M3String::coordinate(oop value) {
 }
 
 int java_lang_M3String::start(oop value) {
-  return (int)(((uint64_t)coordinate(value)) >> 32);
+  const julong packed = (julong)coordinate(value);
+  return (int)(packed >> 32);
 }
 
 int java_lang_M3String::length(oop value) {
-  return (int)(((uint64_t)coordinate(value)) & UINT64_C(0xffffffff));
+  const julong packed = (julong)coordinate(value);
+  return (int)(packed & (julong)0xffffffffu);
 }
 
 int java_lang_M3String::owner_length(oop value) {
