@@ -1,0 +1,33 @@
+test_apply_idempotent_rollback_replay (__main__.RecipeTests.test_apply_idempotent_rollback_replay) ... ok
+test_check_no_write (__main__.RecipeTests.test_check_no_write) ... ok
+test_dependency_guard (__main__.RecipeTests.test_dependency_guard) ... ok
+test_duplicate_json_key (__main__.RecipeTests.test_duplicate_json_key) ... ok
+test_duplicate_output (__main__.RecipeTests.test_duplicate_output) ... ok
+test_empty_file_not_absent (__main__.RecipeTests.test_empty_file_not_absent) ... ok
+test_explicit_crash_recovery (__main__.RecipeTests.test_explicit_crash_recovery) ... ok
+test_guard_missing (__main__.RecipeTests.test_guard_missing) ... ok
+test_guard_overlap (__main__.RecipeTests.test_guard_overlap) ... ok
+test_interrupted_write_rolls_back (__main__.RecipeTests.test_interrupted_write_rolls_back) ... ok
+test_invalid_recovery_state (__main__.RecipeTests.test_invalid_recovery_state) ... ok
+test_lock_only_recovery (__main__.RecipeTests.test_lock_only_recovery) ... ok
+test_lock_refusal (__main__.RecipeTests.test_lock_refusal) ... ok
+test_missing_required_preimage (__main__.RecipeTests.test_missing_required_preimage) ... ok
+test_mixed_state_refused (__main__.RecipeTests.test_mixed_state_refused) ... ok
+test_mode_preserved (__main__.RecipeTests.test_mode_preserved) ... ok
+test_noop_output (__main__.RecipeTests.test_noop_output) ... ok
+test_output_directory (__main__.RecipeTests.test_output_directory) ... ok
+test_plan_seal_drift (__main__.RecipeTests.test_plan_seal_drift) ... ok
+test_postimage_drift_refuses_rollback (__main__.RecipeTests.test_postimage_drift_refuses_rollback) ... ok
+test_preimage_drift_preserves_other_outputs (__main__.RecipeTests.test_preimage_drift_preserves_other_outputs) ... ok
+test_recovery_foreign_plan (__main__.RecipeTests.test_recovery_foreign_plan) ... ok
+test_recovery_preserves_foreign_edits (__main__.RecipeTests.test_recovery_preserves_foreign_edits) ... ok
+test_resource_drift (__main__.RecipeTests.test_resource_drift) ... ok
+test_resource_escape (__main__.RecipeTests.test_resource_escape) ... ok
+test_symlink_file (__main__.RecipeTests.test_symlink_file) ... ok
+test_symlink_parent (__main__.RecipeTests.test_symlink_parent) ... ok
+test_unsafe_destinations (__main__.RecipeTests.test_unsafe_destinations) ... ok
+
+----------------------------------------------------------------------
+Ran 28 tests in 0.031s
+
+OK

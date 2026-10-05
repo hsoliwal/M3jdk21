@@ -1,0 +1,51 @@
+{
+  "scope": "Historical local owner regressions on exactly unchanged retained implementation/schema bytes.",
+  "tests": {
+    "migration": 26,
+    "installer": 28
+  },
+  "runs": [
+    {
+      "id": "07-existing-migration-tests",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/migration/test/test_migration.py"
+      ],
+      "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate",
+      "started_utc": "2026-10-05T08:31:28.220886+00:00",
+      "ended_utc": "2026-10-05T08:31:29.028810+00:00",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "07-existing-migration-tests.stdout.log",
+      "stderr": "07-existing-migration-tests.stderr.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "28c4c097e4f339efab91cf61dff80a53e8b8c1ba8a7fae1f18bc2e9e6ad117a4"
+    },
+    {
+      "id": "08-existing-replay-tests",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/migration/test_recipe.py"
+      ],
+      "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate",
+      "started_utc": "2026-10-05T08:31:29.029178+00:00",
+      "ended_utc": "2026-10-05T08:31:29.151473+00:00",
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stdout": "08-existing-replay-tests.stdout.log",
+      "stderr": "08-existing-replay-tests.stderr.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "73272c1db4e2c8b00311e761fad98bf53e4334a594a967ab9b726d8aa93ae655"
+    }
+  ],
+  "unchanged_current_owner_inputs": {
+    "m3/migration/migration.py": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+    "m3/migration/recipe.py": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628",
+    "m3/docs/name-mapping.schema.json": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+    "m3/migration/test/test_migration.py": "01fa8c629c0002974a86c0ee363817f383ae4c88c61a399cc619d61c86c24413",
+    "m3/migration/test_recipe.py": "8b0785cc9d50384d8613ea4deb34a530fdd1f1fe0b75f98e3a64425ab6c39d77"
+  },
+  "new_epoch_packet_tests": "See ledger-e02; these owner regressions are not relabeled as a new run.",
+  "source_export_admitted": false,
+  "jdk_acceptance": false
+}

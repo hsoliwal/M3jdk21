@@ -1,0 +1,146 @@
+{
+  "repository": "hsoliwal/M3jdk21",
+  "destination_commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+  "module": "m3/tooling/migration-recipes",
+  "module_tree_sha1": "491ffd49dc4ce712f6ccf5f5eb1f3c2a316aea9e",
+  "tree_entries": 747,
+  "tree_receipt_sha256": "715259011e234f5810a3cf22b9d9f1e27e957e845e99b8d06a46b0ffb87fb8b2",
+  "recursive_tree_hashes_verified": 143,
+  "tracked_non_tree_entries": 605,
+  "by_default_input_role": {
+    "default-main-java": {
+      "total": 34,
+      "acquired": 17,
+      "unacquired": 17
+    },
+    "default-main-resource": {
+      "total": 335,
+      "acquired": 3,
+      "unacquired": 332
+    },
+    "default-test-java": {
+      "total": 45,
+      "acquired": 5,
+      "unacquired": 40
+    },
+    "default-test-resource": {
+      "total": 41,
+      "acquired": 0,
+      "unacquired": 41
+    },
+    "module-pom": {
+      "total": 1,
+      "acquired": 1,
+      "unacquired": 0
+    },
+    "other-tracked-module-input": {
+      "total": 149,
+      "acquired": 6,
+      "unacquired": 143
+    }
+  },
+  "exact_bodies_acquired": 32,
+  "unacquired_bodies": 573,
+  "pom_sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
+  "pom_git_blob_sha1": "86f223907bbb053f4792e6bf771c3c0882e1751b",
+  "declared_pinned_plugins": [
+    {
+      "coordinate": "org.apache.maven.plugins:maven-compiler-plugin:3.13.0",
+      "local_repository_directory": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/m2/org/apache/maven/plugins/maven-compiler-plugin/3.13.0",
+      "artifacts": [
+        {
+          "filename": "maven-compiler-plugin-3.13.0.pom",
+          "present": true,
+          "sha256": "0d00b84f26ff5f3e845bf349302345633ca65f8d8e9101b31082082415912c1e"
+        },
+        {
+          "filename": "maven-compiler-plugin-3.13.0.jar",
+          "present": true,
+          "sha256": "6f819947a2a773792dc91d17f906e22113bfb2fefb6b64dec836175715d7402a"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.apache.maven.plugins:maven-surefire-plugin:3.2.5",
+      "local_repository_directory": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/m2/org/apache/maven/plugins/maven-surefire-plugin/3.2.5",
+      "artifacts": [
+        {
+          "filename": "maven-surefire-plugin-3.2.5.pom",
+          "present": true,
+          "sha256": "284c61ddc929bbc9eeba3c8c11213f1f0f7bf0f8aa558067e0f9be3b90c8ddc0"
+        },
+        {
+          "filename": "maven-surefire-plugin-3.2.5.jar",
+          "present": true,
+          "sha256": "e35a8d2114b4c0166c3bf8e40ac63dd4608734347d7294555b6160a661294a92"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.openrewrite.maven:rewrite-maven-plugin:5.23.1",
+      "local_repository_directory": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/m2/org/openrewrite/maven/rewrite-maven-plugin/5.23.1",
+      "artifacts": [
+        {
+          "filename": "rewrite-maven-plugin-5.23.1.pom",
+          "present": true,
+          "sha256": "8fcba59fac39a4689a811e4e054207c07c6bd93157a836878b00a95faa3e4b99"
+        },
+        {
+          "filename": "rewrite-maven-plugin-5.23.1.jar",
+          "present": true,
+          "sha256": "f957b258dcd554558ccf81bb4102e0e12ad73d89e14c70ad081aa6205e863207"
+        }
+      ]
+    },
+    {
+      "coordinate": "org.jacoco:jacoco-maven-plugin:0.8.15",
+      "local_repository_directory": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/m2/org/jacoco/jacoco-maven-plugin/0.8.15",
+      "artifacts": [
+        {
+          "filename": "jacoco-maven-plugin-0.8.15.pom",
+          "present": false,
+          "sha256": null
+        },
+        {
+          "filename": "jacoco-maven-plugin-0.8.15.jar",
+          "present": false,
+          "sha256": null
+        }
+      ]
+    }
+  ],
+  "coverage_gate": {
+    "counter_limits": {
+      "LINE_COVEREDRATIO": "0.99",
+      "BRANCH_COVEREDRATIO": "0.99"
+    },
+    "element": "BUNDLE",
+    "includes": [
+      "com/m3/rewrite/scope/*",
+      "com/m3/rewrite/atom/*"
+    ],
+    "phases": [
+      "prepare-agent",
+      "verify:report",
+      "verify:check"
+    ]
+  },
+  "default_module_invocation": [
+    "mvn",
+    "-B",
+    "-ntp",
+    "-o",
+    "-Dmaven.repo.local=/workspace/scratch/1c68df1bae79/javac-convergence-20261005/m2",
+    "-f",
+    "m3/tooling/migration-recipes/pom.xml",
+    "clean",
+    "verify"
+  ],
+  "default_module_invocation_executed": false,
+  "availability": "BLOCKED: exact default module source/resource closure is incomplete and pinned JaCoCo 0.8.15 POM/JAR are absent from the selected offline repository.",
+  "dependency_transitive_closure_claimed": false,
+  "candidate_fixture_receipts_satisfy_full_module_gate": false,
+  "source_export_admitted": false,
+  "jdk_acceptance": false,
+  "frontier_sha256": "ec0984ec8e9aba80170b396540026a61442e14840da3000ba0e3cb744b356b2e"
+}
