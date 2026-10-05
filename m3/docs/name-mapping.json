@@ -1,7 +1,15 @@
 {
   "schema": 1,
-  "policy": "additive; no blind renames or unverified compatibility claims",
+  "policy": "additive; no blind renames or unverified compatibility claims; Synexia donor names do not define M3JDK target ABI; precompute is internal-only",
   "mappings": [
+    {
+      "source": "com.synexia.indexstring.MIndexString",
+      "target": "java.lang.M3String",
+      "status": "canonical target counterpart; representation convergence required",
+      "source_role": "Synexia donor/reference implementation",
+      "target_rule": "M3JDK naming is independent; preserve owner+coordinate semantics, internal precompute, and JNI shadow-only materialization",
+      "supersedes_target_name": "java.lang.MIndexString"
+    },
     {
       "source": "com.synexia.indexstring.LocalM3StringPiece",
       "source_commit": "9c36c18a7778e6096148a3bbee8f2af7575138b4",
