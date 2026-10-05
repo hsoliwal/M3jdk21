@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/acquisition/package_evidence.py",
+    "verify",
+    "--bundle",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-producer/evidence-bundle"
+  ],
+  "cwd": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005",
+  "endedAt": "2026-10-05T15:14:22.842702+00:00",
+  "exitCode": 0,
+  "proofGatesExecuted": false,
+  "startedAt": "2026-10-05T15:14:22.776105+00:00",
+  "stderr": {
+    "bytes": 0,
+    "path": "verify.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 769,
+    "path": "verify.stdout.log",
+    "sha256": "52c689d54b0a1436f871b74d672af4c3f8db5548c96f20928db7406c22cc38ee"
+  }
+}

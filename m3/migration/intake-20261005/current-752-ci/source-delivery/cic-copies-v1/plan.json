@@ -1,0 +1,32 @@
+{
+  "label": "cic-source18-and-outer26",
+  "prior": {
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/research/source-delivery-coverage/outer-copies-v1/coverage-append.json",
+    "sha256": "41230714370f2c21ecc2738f4e0ea156ccc076c10a03cad3300e76a30456d771"
+  },
+  "schema": "m3.source-delivery-append-plan/1",
+  "segments": [
+    {
+      "id": "cic-source-18",
+      "mapping": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/research/source-delivery-coverage/cic-copies-v1/source-mapping.json",
+        "sha256": "18d82beebf3cce690e96b0870f5009636f3298ea868875db10010557ca744549"
+      },
+      "whitelist": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/CIC-PUBLICATION-WHITELIST.json",
+        "sha256": "8dc5abcff5a3168bcb7f4fc918cb45dc60e91142676b9d37f4f8efd4937db1fe"
+      }
+    },
+    {
+      "id": "cic-portable-outer-26",
+      "mapping": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cic-producer-portable-v1/MAPPING.json",
+        "sha256": "c76b34dd8acb1060e9a812329d1e4a640e56650d15231758c325b65677c4feed"
+      },
+      "whitelist": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/PORTABLE-CIC-WHITELIST.json",
+        "sha256": "f88ab53834f00226c4cfe0e567b753580fff53f6f8d2d1d02c93942734fbbe80"
+      }
+    }
+  ]
+}

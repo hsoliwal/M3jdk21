@@ -1,0 +1,44 @@
+{
+  "canonicalProductionApplied": false,
+  "crossFamilyAtomicity": false,
+  "files": [
+    {
+      "bytes": 2413,
+      "path": ".github/workflows/m3-foundation.yml",
+      "sha256": "f6f569ef91e6b17be68a48801d1f97639d288d436c277a6401628bd82e210d3e"
+    },
+    {
+      "bytes": 4695,
+      "path": "m3/backports/compatibility_policy.py",
+      "sha256": "d51301d3ea225e89b000a2256855ab7806a1faf20c5fa493eb5666de1e7880c2"
+    },
+    {
+      "bytes": 7177,
+      "path": "m3/backports/test_compatibility_policy.py",
+      "sha256": "dbd50a08d902a4009c66e22b8e6f499a66bbe4316c2d96d1e47c60194b572937"
+    },
+    {
+      "bytes": 5380,
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
+      "sha256": "f34470a701cf71b4b4abbe1fa9a5091392a930426ec84d700f13e53edd244629"
+    },
+    {
+      "bytes": 4975,
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
+      "sha256": "3f3ab065d9e87e9f6095629a56b052642ec9d0883a466430e90a4a4355edd05b"
+    }
+  ],
+  "marker": "CIR_VERIFIED targets=5 cijMixedStates=4 citMixedStates=8 unionMixedStates=32 unionOrders=2 cijRefusals=12 citRefusals=14 postScanRefusals=10 outputSeal=3895ac2617d07cefd481a299aa18092d49c5bfb9733177740038b35e1c161442",
+  "output": {
+    "bytes": 1369,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/producer-v2/generated-candidate/OUTPUT.json",
+    "sha256": "0347e932f876d72db7d5247c54375fdc40f15f1138392ddffab03c0bb63834c5"
+  },
+  "outputSeal": "3895ac2617d07cefd481a299aa18092d49c5bfb9733177740038b35e1c161442",
+  "patch": {
+    "bytes": 4475,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/producer-v2/generated-candidate/candidate.patch",
+    "sha256": "a9a56f1803d5d33e42efb63fa0f047a1b49027beb827ca427adc25f8b126440e"
+  },
+  "strictCanonicalAdmission": false
+}

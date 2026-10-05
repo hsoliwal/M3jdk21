@@ -1,0 +1,102 @@
+[
+  {
+    "bytes": 335,
+    "path": "classes/META-INF/rewrite/m3-ci-752-corpus.yml",
+    "sha256": "c0d976a75695ef1d833ed633fce08fa6305cbcc0d1aa93dcc307f5112db881a1"
+  },
+  {
+    "bytes": 3690,
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$1.class",
+    "sha256": "89b442e92cc55de2172e032f4f0650647509a015cf2b72dd3ebba505ac6fa71f"
+  },
+  {
+    "bytes": 4810,
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$2.class",
+    "sha256": "1235413f44f1e53c83a5fa0786530ce15548c92c6b636b40118eef9847105611"
+  },
+  {
+    "bytes": 1230,
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$Inventory.class",
+    "sha256": "f54fea5844ba1b19ee22e5ccfae495d4a9b2b03e9edfb5bc09ac620321ef628f"
+  },
+  {
+    "bytes": 2128,
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$Target.class",
+    "sha256": "7eb62aee1d3e3f89575b4973ffba8e1defae3270853de61c96d1efbd21fe128e"
+  },
+  {
+    "bytes": 12466,
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.class",
+    "sha256": "4193579cb92dd4afca14b5ee67d57580dc1b1afa64fef31a5b608a13a0959c13"
+  },
+  {
+    "bytes": 712,
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/manifest.tsv",
+    "sha256": "7d443b17756355cb16d4871d68372194661aafb26cc650d15a71e6ba343d3d6f"
+  },
+  {
+    "bytes": 7750,
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-1.txt",
+    "sha256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55"
+  },
+  {
+    "bytes": 7750,
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-2.txt",
+    "sha256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55"
+  },
+  {
+    "bytes": 734,
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-3.txt",
+    "sha256": "0bff4ddf1d6a002510903127bc56c7a2921bfa5851ac8217007eb3699b9febac"
+  },
+  {
+    "bytes": 7782,
+    "path": "test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+    "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298"
+  },
+  {
+    "bytes": 7782,
+    "path": "test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after",
+    "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298"
+  },
+  {
+    "bytes": 734,
+    "path": "test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv",
+    "sha256": "b901f0b1aae122711792a66dc9750b9ba4608d59613641e74f378218757cbb4d"
+  },
+  {
+    "bytes": 3137,
+    "path": "test-classes/closure/A3Fs.java",
+    "sha256": "ebddb148600afd7ee7df1175175df7da86b3a2cb048ca9b4e723d4eec5c2fe8c"
+  },
+  {
+    "bytes": 1021,
+    "path": "test-classes/com/synexia/rewrite/CicRecipeTest$1.class",
+    "sha256": "3d62a8bef6ede0bc7c6f96a7a6cdabb4949a774de53339be9e28605410b3c469"
+  },
+  {
+    "bytes": 2502,
+    "path": "test-classes/com/synexia/rewrite/CicRecipeTest$Fixture.class",
+    "sha256": "38f4145aef42ee102671b72ecdc7a627b721cceafad8515c17e4fdcb587e9c98"
+  },
+  {
+    "bytes": 3847,
+    "path": "test-classes/com/synexia/rewrite/CicRecipeTest$RecordingSourceSet.class",
+    "sha256": "807359024bff382f481bdd99a5a0cc29e383ab690c2b2b001176388a3eff8a36"
+  },
+  {
+    "bytes": 1982,
+    "path": "test-classes/com/synexia/rewrite/CicRecipeTest$Replay.class",
+    "sha256": "d9d0f56ff94645302901b24111632f511e5e320e4efc4987353757b0ea4198f3"
+  },
+  {
+    "bytes": 2113,
+    "path": "test-classes/com/synexia/rewrite/CicRecipeTest$Target.class",
+    "sha256": "b7d89dc54c712b43a3304f9b2c21eaabbd873824fb683f4db2a62276179db54f"
+  },
+  {
+    "bytes": 41812,
+    "path": "test-classes/com/synexia/rewrite/CicRecipeTest.class",
+    "sha256": "280e8826b9be35f93d242adfb2b8d7f34d308b9a6795218a6d3593ec92fa14fe"
+  }
+]

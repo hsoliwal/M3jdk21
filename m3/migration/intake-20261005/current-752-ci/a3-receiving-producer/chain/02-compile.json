@@ -1,0 +1,46 @@
+{
+  "command": [
+    "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/apache-maven-3.9.9/bin/mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-s",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/settings.xml",
+    "-gs",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/settings.xml",
+    "-Dmaven.repo.local=/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/m2",
+    "-f",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/pom.xml",
+    "test-compile"
+  ],
+  "cwd": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project",
+  "endedAt": "2026-10-05T16:17:35.423349+00:00",
+  "environment": {
+    "JAVA_HOME": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64",
+    "LC_ALL": "C",
+    "MAVEN_SKIP_RC": "true",
+    "PATH": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64/bin:/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/apache-maven-3.9.9/bin:/bin:/usr/bin",
+    "TZ": "UTC"
+  },
+  "exitCode": 0,
+  "inputManifestSHA256": "88e63d70c0a92dace5e924fde82201a76b1002c25ace6d8fd6241f246e2728a4",
+  "priorReceipts": [
+    {
+      "bytes": 1805,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/chain/01-static.json",
+      "sha256": "dd2168c8675e6c95fee183e42192cc3a8bd28a9c14862aa3f0aa56effef7e34c"
+    }
+  ],
+  "stage": "compile",
+  "startedAt": "2026-10-05T16:17:32.281126+00:00",
+  "stderr": {
+    "bytes": 0,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/chain/02-compile.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 1396,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/chain/02-compile.stdout.log",
+    "sha256": "57b2b4f835c5346c9191ecc7de7c461aeba40ebfc9d9dd131079ad188fa9593f"
+  }
+}

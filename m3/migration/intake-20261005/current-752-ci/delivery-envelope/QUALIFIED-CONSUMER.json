@@ -1,0 +1,339 @@
+{
+  "consumerLane": "consumer-v5",
+  "consumerManifest": {
+    "bytes": 2198517,
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/consumer-manifest-v5.json",
+    "sha256": "8c3d4e6a28d4314a1de4c3a15c3616a371e04ac2eaf6357852c6ce28c1642db4"
+  },
+  "consumerResult": {
+    "bytes": 12464,
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/RESULT.json",
+    "sha256": "c037e9fd5b622f17d161d8efe1fbb15f2a128f803e27b70292448403dc43bd80"
+  },
+  "includedInFiniteSourceCohort": false,
+  "limits": {
+    "canonicalProductionApplied": false,
+    "dependencyClosureComplete": false,
+    "hostSystemLibrariesSealed": false,
+    "originalToolchainCustodyRevalidated": false,
+    "productWrites": 0,
+    "runtimeAccepted": false,
+    "wholeSourceTreeCovered": false
+  },
+  "proofGatesExecutedByReport": false,
+  "proofsModified": false,
+  "publicationEnvelopeOnly": true,
+  "publicationHead": {
+    "commit": "5c1ee9490e76943dfdb3ca27fade0d093d017226",
+    "tree": "f75369e0d15eb81ee0c8e1ae6e4fa62f767c42dc"
+  },
+  "receiving": {
+    "commit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+    "tree": "44feeb32f77a3442606ef3b63b923fd43732b20d"
+  },
+  "remoteWrites": false,
+  "reportKind": "Publication-only summary of existing actual receipts; no gates executed by this report",
+  "runtime": {
+    "canonicalCompleteExit": 2,
+    "canonicalValidateExit": 0,
+    "currentAuthorityRecords": 81,
+    "currentReadOnlyReplaySHA256s": [
+      "ae4758723f215fda7db7568df5441d83a773eabc7791f86505ca9dfc7c1416db",
+      "ae4758723f215fda7db7568df5441d83a773eabc7791f86505ca9dfc7c1416db"
+    ],
+    "currentReceiptSHA256": "ae4758723f215fda7db7568df5441d83a773eabc7791f86505ca9dfc7c1416db",
+    "historicalAuthorityRecords": 79,
+    "installer": {
+      "applyWrites": 24,
+      "reapplyWrites": 24,
+      "repeatWrites": 0,
+      "rollbackWrites": 24
+    },
+    "installerRefusals": [
+      {
+        "case": "stale",
+        "exit": 2
+      },
+      {
+        "case": "mixed",
+        "exit": 2
+      },
+      {
+        "case": "partial",
+        "exit": 2
+      },
+      {
+        "case": "wrong-seal",
+        "exit": 2
+      }
+    ],
+    "jccProfiles": [
+      {
+        "methods": [
+          "test_actual_packet_check_apply_idempotent_rollback_and_replay",
+          "test_actual_required_preimage_missing_or_drifted_refuses_atomically",
+          "test_each_actual_absent_output_occupied_refuses_atomically",
+          "test_each_actual_guard_missing_or_drifted_refuses_atomically",
+          "test_each_foreign_postimage_edit_refuses_rollback_and_replay_atomically",
+          "test_each_single_postimage_mixed_with_preimages_refuses_atomically"
+        ],
+        "plan": "plan.json",
+        "planSHA256": "648f80ae4073400f1ea1210f8cdc26942019d53eb4452d839961c466f395d05a",
+        "planSeal": "70283e86d30abf8e30a09b10d77be40f99160371a98927dc151d680e3c2e4a87",
+        "pomSHA256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
+        "profile": "before",
+        "recipeId": "jcc-handoff-20261005/2",
+        "tests": 6,
+        "validatorSHA256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"
+      },
+      {
+        "methods": [
+          "test_actual_packet_check_apply_idempotent_rollback_and_replay",
+          "test_actual_required_preimage_missing_or_drifted_refuses_atomically",
+          "test_each_actual_absent_output_occupied_refuses_atomically",
+          "test_each_actual_guard_missing_or_drifted_refuses_atomically",
+          "test_each_foreign_postimage_edit_refuses_rollback_and_replay_atomically",
+          "test_each_single_postimage_mixed_with_preimages_refuses_atomically"
+        ],
+        "plan": "plan-intake-8131.json",
+        "planSHA256": "8034d77f1124584888dce10760bd2f5dae55eeb93497f7a0db1d09a3a197ec5f",
+        "planSeal": "0704f21408ef263d4d0adc9eb5d48e62c7c30949cb1a197fb9b7f8a21aff4152",
+        "pomSHA256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
+        "profile": "after",
+        "recipeId": "jcc-handoff-20261005/2-intake-8131",
+        "tests": 6,
+        "validatorSHA256": "4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787"
+      },
+      {
+        "methods": [
+          "test_actual_packet_check_apply_idempotent_rollback_and_replay",
+          "test_actual_required_preimage_missing_or_drifted_refuses_atomically",
+          "test_each_actual_absent_output_occupied_refuses_atomically",
+          "test_each_actual_guard_missing_or_drifted_refuses_atomically",
+          "test_each_foreign_postimage_edit_refuses_rollback_and_replay_atomically",
+          "test_each_single_postimage_mixed_with_preimages_refuses_atomically"
+        ],
+        "plan": "plan-intake-752-ci.json",
+        "planSHA256": "e4ea964db1a6f9527122ff0dad1c969a43dc50a0f80c771c86b70bcd6da6dcaf",
+        "planSeal": "6e8d48067e814566e0c63db14db405c360c8ff3ab4948d352170b6ca20293594",
+        "pomSHA256": "a53bdeee8afe28b90cb0e348e718b70610a9487edb1b75b46e09bfb76e0f3dc9",
+        "profile": "current",
+        "recipeId": "jcc-handoff-20261005/2-intake-752-ci",
+        "tests": 6,
+        "validatorSHA256": "4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787"
+      }
+    ],
+    "oldPacketRefusedAgainstCurrentAuthority": true,
+    "originalReceiptSHA256": "ad1aa88119d8dbf5ab5a3fc64a43bd67bc67df8aadcde9139c663b15a042f1c2",
+    "retainedOutputs": 35,
+    "state": "PASS_BOUNDED_RECEIVER_CHECKS",
+    "wrongCurrentPacketSealRefused": true
+  },
+  "runtimeAcceptanceMeaning": "runtimeAccepted=false concerns broader JDK product/HotSpot admission. The bounded host and Java test/runtime receipts passed, and the separately identified Linux Java/JNI proof passed. This report neither reruns that native proof nor asserts whole-JDK, whole-repository, cross-platform or measured-performance qualification.",
+  "runtimeReport": {
+    "bytes": 6877778,
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/runtime-report.json",
+    "sha256": "ec02baa2bc07ab3a2e578c6047346a6b618edcd2f43e2db70f1cf488214c4ef3"
+  },
+  "schema": "m3.current-consumer-publication-summary/1",
+  "scope": {
+    "addedTargetPaths": [
+      "m3/migration/test/test_jcc_handoff_current_context.py",
+      "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-752-ci.json",
+      "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/pom-before-752.xml"
+    ],
+    "declaredSourceCensus": {
+      "bytes": 134644,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/research/source-delivery-coverage/cih-copies-v1/coverage-append.json",
+      "sha256": "83e2729fc7dae8769acce8cbdb0a1cd104088cf0d8a5e1162ce8a04e89c70ece"
+    },
+    "declaredSourceCensusPaths": 387,
+    "finalPublicationFileCount": null,
+    "jccReplacementPaths": [
+      "m3/migration/test/test_jcc_handoff_context_profiles.py",
+      "m3/migration/test/test_jcc_handoff_packet.py"
+    ],
+    "operations": {
+      "ADD": 3,
+      "REPLACE": 21
+    },
+    "previousNineteenOutputsByteIdentical": true,
+    "priorOverlay": {
+      "byteIdenticalRetainedFiles": 567,
+      "explicitExceptions": [
+        {
+          "afterSHA256": "9d79d07bb31ded0e5ec9eebef1095ae25be8f20c55f9e72aee4ba64852790594",
+          "beforeSHA256": "54114c84b923790cea717f85bdb78574aa3c14e00e1419e68c5cef7d8d87b1b4",
+          "path": "m3/migration/test/test_jcc_handoff_context_profiles.py"
+        },
+        {
+          "afterSHA256": "fde72eb9f2b682f50004defbc70e6d886a3f646abb0d89c0aec5de8ab0dbd30d",
+          "beforeSHA256": "1662cd99e60e03692e95bfdeb51dbf46c5c990dac7d5cadbd5e1ddb5fcad52fe",
+          "path": "m3/migration/test/test_jcc_handoff_packet.py"
+        }
+      ],
+      "manifest": {
+        "bytes": 306601,
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/m3jdk21/merge-8131/publication-7652/manifest.json",
+        "sha256": "02be366159d863a1cfbe64fe7f55d366a08d6a4194d9617790fcfebc681df915"
+      },
+      "originalFiles": 569
+    },
+    "producerOutputs": 24,
+    "qualifiedPaths": 221,
+    "qualifiedRepairPaths": 24,
+    "qualifiedTaskPaths": 197,
+    "sealedContextFiles": 2559
+  },
+  "separateNativeProof": {
+    "javaSources": 31,
+    "productionSourceChanges": 0,
+    "publicationManifest": {
+      "bytes": 14070,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/native/publication-manifest.json",
+      "sha256": "633b27c05776d03397eef4950ca7ae56f8f1b4f793666887aa72ab3e4c00cfc2"
+    },
+    "reexecutedByConsumer": false,
+    "repositoryInputs": 65,
+    "result": {
+      "bytes": 3750,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/RESULT.json",
+      "sha256": "1e82bec642c8ea8ece15e8caeeed283416c1b612e22c357b20178524b6ab1605"
+    },
+    "scope": "Fresh current Linux x86-64 exact 31-Java-source closure and existing short-flag JNI kernel; production unchanged.",
+    "state": "PASS"
+  },
+  "source": {
+    "commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+    "tree": "6c055c584ebb5fa177420d1668db73bcb7e7fef4"
+  },
+  "stages": [
+    {
+      "bytes": 973,
+      "exitCode": 0,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/chain/01-lint.json",
+      "sha256": "fdade936870a3b2fab6b08876e1620e674ffede6459e0f755450817431398c57",
+      "stage": "lint"
+    },
+    {
+      "bytes": 1001,
+      "exitCode": 0,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/chain/02-compile.json",
+      "sha256": "d43e625452aa71594185365762b84ee408a81220075026567a57dbeff1751030",
+      "stage": "compile"
+    },
+    {
+      "bytes": 1018,
+      "exitCode": 0,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/chain/03-test.json",
+      "sha256": "5f87b37f8fb1b3eff0a20305a64e72e19e947e3f3d096180e05afc3ec18b4f84",
+      "stage": "test"
+    },
+    {
+      "bytes": 1044,
+      "exitCode": 0,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/chain/04-runtime.json",
+      "sha256": "8ede25061011ae472d30843ad5a0c38e5a5fba37908b08408cdbb5924ad3cbe6",
+      "stage": "runtime"
+    }
+  ],
+  "state": "QUALIFIED_BOUNDED_CURRENT_CONSUMERS",
+  "testReport": {
+    "bytes": 91398,
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/test-report.json",
+    "sha256": "e7fd14744342a614635993baeaa6f89135eedd384b86c2bfa01292d7be6bcc2b"
+  },
+  "tests": {
+    "a3Matrix": {
+      "assertionsRetained": [
+        "fixedPoint",
+        "behaviorStable",
+        "contractStable",
+        "lexicalDataStable",
+        "regexMatrixStable"
+      ],
+      "combinations": 288,
+      "fixtures": 48,
+      "originalA3LabTestByteIdentical": true,
+      "schedules": 6,
+      "testSource": {
+        "bytes": 6117,
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/source/m3/tooling/a3/src/test/java/com/m3/a3/A3LabTest.java",
+        "sha256": "351eeac06154189e79f3d139336437d5911da5721c9a95a779ebd5d511997d9c"
+      }
+    },
+    "backportsTests": 35,
+    "coverage": {
+      "actualMavenCheckPassed": true,
+      "branchMinimum": 0.99,
+      "includes": [
+        "com/m3/rewrite/scope/*",
+        "com/m3/rewrite/atom/*"
+      ],
+      "lineMinimum": 0.99,
+      "originalConfigurationUnchanged": true
+    },
+    "errors": 0,
+    "failures": 0,
+    "fullCleanVerify": [
+      "m3/tooling/migration-recipes",
+      "m3/tooling/a3",
+      "m3/backports"
+    ],
+    "hostDiscoveries": [
+      109,
+      6
+    ],
+    "hostTests": 115,
+    "javaModules": {
+      "m3/tooling/a3": {
+        "suites": 6,
+        "tests": 19
+      },
+      "m3/tooling/migration-recipes": {
+        "suites": 58,
+        "tests": 220
+      }
+    },
+    "javaSuites": 64,
+    "javaTests": 239,
+    "skipped": 0
+  },
+  "trials": [
+    {
+      "lane": "consumer-v1",
+      "resultSHA256": "47a1efd8b72eb173d3c48124e549e7ecb28d332be09e97bc63290989ba34ba92",
+      "state": "STOPPED"
+    },
+    {
+      "lane": "consumer-v2",
+      "resultSHA256": "d8591a5652baf9c92902e6b1475b773fec4a1f498c1dbd6fe55dcffc002038d7",
+      "state": "STOPPED"
+    },
+    {
+      "lane": "consumer-v3",
+      "resultSHA256": "0d50bac3af04f4c1b498ca34c3b6c57ad76bf97aa3b51fbba1dc926d4b52d2a7",
+      "state": "STOPPED"
+    },
+    {
+      "lane": "consumer-v4",
+      "resultSHA256": "65ad6376f5e88ca2bd1e33e549c262a50bc58952ede7af8c17c9b0beed05ed73",
+      "state": "STOPPED"
+    },
+    {
+      "lane": "receiving-python-v1",
+      "resultSHA256": "be337d009319bab7c528f4ab6e61ada6ef5f407a33d070729e8d5cd68937a63e",
+      "state": "PASS_BOUNDED_PYTHON_RECEIVING_COMPONENTS"
+    },
+    {
+      "lane": "receiving-python-v2",
+      "resultSHA256": "687eed40f8cfd7c93a663dbce1bb9fbf7a80626d798fa2f502e73c1a4bbab0cc",
+      "state": "PASS_BOUNDED_PYTHON_RECEIVING_COMPONENTS"
+    },
+    {
+      "lane": "consumer-v5",
+      "resultSHA256": "c037e9fd5b622f17d161d8efe1fbb15f2a128f803e27b70292448403dc43bd80",
+      "state": "PASS_BOUNDED_CURRENT_CONSUMERS"
+    }
+  ]
+}

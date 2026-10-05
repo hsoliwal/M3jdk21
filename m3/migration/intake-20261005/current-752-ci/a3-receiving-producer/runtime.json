@@ -1,0 +1,49 @@
+{
+  "canonicalProductionApplied": false,
+  "crossFamilyAtomicity": false,
+  "files": [
+    {
+      "bytes": 10008,
+      "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+      "sha256": "0de471de5a54e1c87153e4b1c23c4013a800f07595cfc05eec7bd4e68f1345d6"
+    },
+    {
+      "bytes": 4466,
+      "path": "m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+      "sha256": "8922e21e4f814dc99282cf1828786a0347552454003e23ac2fa91aa8710851b1"
+    },
+    {
+      "bytes": 3522,
+      "path": "m3/tooling/migration-recipes/pom.xml",
+      "sha256": "a53bdeee8afe28b90cb0e348e718b70610a9487edb1b75b46e09bfb76e0f3dc9"
+    },
+    {
+      "bytes": 2338,
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java",
+      "sha256": "521a7f07e59f507e0ce3193a3d0c7540c232a37c74128d954b52670677498241"
+    },
+    {
+      "bytes": 10008,
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java",
+      "sha256": "0de471de5a54e1c87153e4b1c23c4013a800f07595cfc05eec7bd4e68f1345d6"
+    },
+    {
+      "bytes": 4466,
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java",
+      "sha256": "8922e21e4f814dc99282cf1828786a0347552454003e23ac2fa91aa8710851b1"
+    }
+  ],
+  "marker": "CIA_VERIFIED targets=6 mixedStates=64 initialRefusals=26 postScanRefusals=12 outputSeal=1aeb7260771ad433bfc24cfc37777324ce8898395ce044309fe02ea6986e02f4",
+  "output": {
+    "bytes": 1520,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/generated-candidate/OUTPUT.json",
+    "sha256": "90ed9bd9129dc8f99f913fd09be34d535aefb5a9a2169827e8cfaebdad368479"
+  },
+  "outputSeal": "1aeb7260771ad433bfc24cfc37777324ce8898395ce044309fe02ea6986e02f4",
+  "patch": {
+    "bytes": 10488,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/generated-candidate/candidate.patch",
+    "sha256": "52f34060ef1f8f8f01dbe3e0f73f1e9a85a9815817a47ab107e20ee6afd27d1d"
+  },
+  "strictCanonicalAdmission": false
+}

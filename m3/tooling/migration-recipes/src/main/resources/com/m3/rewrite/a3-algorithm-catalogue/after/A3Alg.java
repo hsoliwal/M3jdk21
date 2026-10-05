@@ -35,20 +35,33 @@ public final class A3Alg {
             Reuse reuse,
             String nextProof) {
 
-        public Row {
-            atomId = text(atomId, "atomId");
-            category = text(category, "category");
-            technique = text(technique, "technique");
-            disposition = text(disposition, "disposition");
-            scope = text(scope, "scope");
-            targetOwner = ref(targetOwner, "targetOwner");
-            leetcodeRef = ref(leetcodeRef, "leetcodeRef");
-            hackerrankRef = ref(hackerrankRef, "hackerrankRef");
-            geeksforgeeksRef = ref(geeksforgeeksRef, "geeksforgeeksRef");
-            githubRef = ref(githubRef, "githubRef");
-            githubLicense = ref(githubLicense, "githubLicense");
-            reuse = Objects.requireNonNull(reuse, "reuse");
-            nextProof = text(nextProof, "nextProof");
+        public Row(
+                String atomId,
+                String category,
+                String technique,
+                String disposition,
+                String scope,
+                String targetOwner,
+                String leetcodeRef,
+                String hackerrankRef,
+                String geeksforgeeksRef,
+                String githubRef,
+                String githubLicense,
+                Reuse reuse,
+                String nextProof) {
+            this.atomId = text(atomId, "atomId");
+            this.category = text(category, "category");
+            this.technique = text(technique, "technique");
+            this.disposition = text(disposition, "disposition");
+            this.scope = text(scope, "scope");
+            this.targetOwner = ref(targetOwner, "targetOwner");
+            this.leetcodeRef = ref(leetcodeRef, "leetcodeRef");
+            this.hackerrankRef = ref(hackerrankRef, "hackerrankRef");
+            this.geeksforgeeksRef = ref(geeksforgeeksRef, "geeksforgeeksRef");
+            this.githubRef = ref(githubRef, "githubRef");
+            this.githubLicense = ref(githubLicense, "githubLicense");
+            this.reuse = Objects.requireNonNull(reuse, "reuse");
+            this.nextProof = text(nextProof, "nextProof");
             validate(this);
         }
 

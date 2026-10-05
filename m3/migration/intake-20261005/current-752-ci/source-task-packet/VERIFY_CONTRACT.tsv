@@ -1,0 +1,10 @@
+gate	required_observation
+exact_diff	Java one-byte insertions; equivalent NUL spelling; retained six tests; scoped compiler selection
+producer	Actual existing owners; named recipes; complete before/after combinations; exact output hashes; fixed point; meaningful refusals
+typed_java	Both generated Java files parse and print exactly; current M3 compiler and test dependencies resolve
+m3_recipes	Complete current clean verify with all tests and unchanged JaCoCo requirements
+m3_backports	Complete current clean verify with all eight test modules and repository-root consumers
+target_installer	Five exact generated outputs; repeat; rollback; reapply; wrong seal and stale input refusals
+retained_receipts	Prior 81-record authority, 35-output packet and historical source/target pins preserved
+native	All32 actual commands and strict semantic-negative controls on the sealed current source closure
+publication	Expected feature parents; exact blobs and final trees; no loss of newer base files

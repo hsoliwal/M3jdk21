@@ -1,0 +1,3 @@
+CIC_JAVAP_API_EQUAL a515f99e9c3537a6a90d2047a2a84cb0194fedb211a673b03d07f42310f49766
+CIC_CORPUS_VERIFIED baselineFixtures=48 candidateFixtures=48 baselineHostileFailures=24 candidateValid=48 crlf=24 modern=24
+CIC_VERIFIED targets=3 mixedStates=8 initialRefusals=14 postScanRefusals=6 outputSeal=43db2acf1f8f06cb4de3abdc1da0e810affcdd38b226de6a91c3584f508a75c1

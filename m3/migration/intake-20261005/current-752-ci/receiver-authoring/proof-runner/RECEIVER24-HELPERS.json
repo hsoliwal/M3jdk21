@@ -1,0 +1,40 @@
+{
+  "state": "REVIEWED_NOT_EXECUTED",
+  "files": [
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/author-current-context-v5b.py",
+      "sha256": "8cee38e7cd9905d716b40668cd026973badececcfbf7f12ee6cf2a659f03120d",
+      "bytes": 12955
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/proof-runner/full-consumer-v5.py",
+      "sha256": "6ad43eb0cb55d4f5b601837c922b9a443baa570c56f9330f76fd9988e328fea3",
+      "bytes": 27567
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/proof-runner/runtime-v5.py",
+      "sha256": "981b47fd2adfb22a2a4a510737b1c5cab0143bc3ab3b425327a9fbfcb5ae72ac",
+      "bytes": 16251
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/proof-runner/python-components-v2.py",
+      "sha256": "3551f6caea6befdb9d989f0523af11ccb129d9caf21ee3f5cca1a835feea5ef4",
+      "bytes": 25647
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/proof-runner/RECEIVER-24-PLAN.md",
+      "sha256": "90d9d194c59f44911cb081076deee32c909a6ea070aa3d1ffb808a83c583356c",
+      "bytes": 3648
+    }
+  ],
+  "producerRequired": "actual corrected Cih PASS only",
+  "priorProofsChanged": false,
+  "scope": {
+    "targets": 24,
+    "additions": 3,
+    "hostMethods": 115,
+    "backportsMethods": 35,
+    "javaMethodsFromPreviousFullRun": 239,
+    "pythonPreflightDoesNotQualifyJava": true
+  }
+}

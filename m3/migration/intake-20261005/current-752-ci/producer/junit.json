@@ -1,0 +1,25 @@
+{
+  "counts": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 9
+  },
+  "methods": [
+    "actualNamedFamilyReplays",
+    "allCijStates",
+    "allCitStates",
+    "allUnionStatesAndOrders",
+    "cijRefusals",
+    "citRefusals",
+    "closedDisjointFamiliesAndSourceKindControls",
+    "exactJavaRepairAndTypedPostimages",
+    "postScanDrift"
+  ],
+  "report": {
+    "bytes": 17365,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/producer-v2/project/target/surefire-reports/TEST-com.synexia.rewrite.CiRecipeTest.xml",
+    "sha256": "97c1e0484ca976d7e2251852a1da504bd9f5f481fb3085e8d82a506bb754b49d"
+  },
+  "suite": "com.synexia.rewrite.CiRecipeTest"
+}

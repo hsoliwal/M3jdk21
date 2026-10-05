@@ -1,0 +1,18 @@
+output	required	observed	evidence
+current-result	PASS_BOUNDED	PASS	RESULT.json
+source-files	65 exact current repository inputs	65	evidence/current-v1/source-receipts.json
+java-sources	31 complete sources	31	evidence/current-v1/proof/SOURCES-current.txt
+compiled-artifact-identities	57 classes and 4 shared libraries	61	evidence/current-v1/proof/build-artifacts.json
+java-lane-oracle	frozen exact marker	{"assertions":2895062}	evidence/current-v1/RESULT.json
+java-real-tree	frozen exact marker	{"assertions":94299,"nodes":5021,"queryProviderCalls":0}	evidence/current-v1/RESULT.json
+existing-lazy-list	frozen exact marker	{"assertions":44148}	evidence/current-v1/RESULT.json
+existing-real-tree-superset	frozen exact marker	{"assertions":293132,"randomForests":400}	evidence/current-v1/RESULT.json
+jni-lane-ubsan-off	frozen exact marker	{"assertions":2895084}	evidence/current-v1/RESULT.json
+jni-real-tree-ubsan-off	frozen exact marker	{"assertions":94299,"nodes":5021,"queryProviderCalls":0}	evidence/current-v1/RESULT.json
+jni-lane-ubsan-on	frozen exact marker	{"assertions":2895084}	evidence/current-v1/RESULT.json
+jni-real-tree-ubsan-on	frozen exact marker	{"assertions":94299,"nodes":5021,"queryProviderCalls":0}	evidence/current-v1/RESULT.json
+semantic-mutants	each exact exit 1 and expected assertion marker	3 accepted refusal controls	evidence/current-v1/RESULT.json
+native-unavailable-and-ABI2	explicit refusal marker	2 accepted refusal scenarios	evidence/current-v1/RESULT.json
+production-changes	none	0	evidence/current-v1/RESULT.json
+whole-repository-or-product-admission	not asserted	false	evidence/current-v1/RESULT.json
+toolchain-install	not included	manifest-only	evidence/current-v1/proof/TOOLCHAIN.json

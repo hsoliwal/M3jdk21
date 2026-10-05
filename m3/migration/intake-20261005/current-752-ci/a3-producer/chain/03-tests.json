@@ -1,0 +1,51 @@
+{
+  "command": [
+    "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/apache-maven-3.9.9/bin/mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-s",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/settings.xml",
+    "-gs",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/settings.xml",
+    "-Dmaven.repo.local=/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/m2",
+    "-f",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/pom.xml",
+    "org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test"
+  ],
+  "cwd": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project",
+  "endedAt": "2026-10-05T15:50:59.546335+00:00",
+  "environment": {
+    "JAVA_HOME": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64",
+    "LC_ALL": "C",
+    "MAVEN_SKIP_RC": "true",
+    "PATH": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64/bin:/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/apache-maven-3.9.9/bin:/bin:/usr/bin",
+    "TZ": "UTC"
+  },
+  "exitCode": 0,
+  "inputManifestSHA256": "84ee44e0daea9a25873f99c7e932610ff859c78cc8d01b5135f8ce18efaae714",
+  "priorReceipts": [
+    {
+      "bytes": 1805,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/chain/01-static.json",
+      "sha256": "996024002a1ab407e313d5f71832eaccde9fe413942113a73dbe1635827acb4a"
+    },
+    {
+      "bytes": 2398,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/chain/02-compile.json",
+      "sha256": "b953807987037ec26581f075fa317551c2348ff0940a7842f7209448f67eb902"
+    }
+  ],
+  "stage": "tests",
+  "startedAt": "2026-10-05T15:50:48.093952+00:00",
+  "stderr": {
+    "bytes": 0,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/chain/03-tests.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 2586,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/chain/03-tests.stdout.log",
+    "sha256": "7321ddfb282387ed034444bbf8342e72f721cf3eb9f56ad11d52c8234d61657f"
+  }
+}

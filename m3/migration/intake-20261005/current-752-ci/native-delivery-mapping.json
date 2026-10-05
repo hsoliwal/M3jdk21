@@ -1,0 +1,176 @@
+{
+  "byteIdentical": true,
+  "files": [
+    {
+      "bytes": 1972,
+      "gitBlob": "1e30229b78c6b5bbafa37dbdede99ac2871dffb6",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/FINAL-AUDIT.json",
+      "sha256": "5c646be616f481b835bcf65607408f1573bd589716d1ea98cbf56f4616298e33",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/FINAL-AUDIT.json"
+    },
+    {
+      "bytes": 5351,
+      "gitBlob": "937a87a1bc218d46ffd57b231ec35e43ea753e10",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/FINAL_REPORT.md",
+      "sha256": "3b1a9bd70bdcddcea04d27f63e99c3bb051a623e5cdabff3ccd081fc7515cb62",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/FINAL_REPORT.md"
+    },
+    {
+      "bytes": 3167,
+      "gitBlob": "948f631ded6a210e65356fa131a832584fbd6c9c",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/INDEPENDENT-READBACK.json",
+      "sha256": "70038d936c62c8dfed73a60059b08104c5326f460ddc36e63d9e4249dc24bbda",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/INDEPENDENT-READBACK.json"
+    },
+    {
+      "bytes": 1719,
+      "gitBlob": "6ad5a4d3e65acbfb5f5909b14dd00f080786e238",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/OUTPUT_CONTRACT.tsv",
+      "sha256": "0ea2600bfc6703aa2449f8fbc3fe7c650eba1c5d2969cc0074d6ba83d43e331a",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/OUTPUT_CONTRACT.tsv"
+    },
+    {
+      "bytes": 5773,
+      "gitBlob": "462e5ba10bad01494d8db04f6d15672f1340fb20",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/PREPARED.json",
+      "sha256": "1d23b6f673f7ee717af18a9e9284808505d6e2956a610f8a30e30101c462a841",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/PREPARED.json"
+    },
+    {
+      "bytes": 2238,
+      "gitBlob": "12b6a06108c8642a363bfaee6f43f5e70d4f9c6a",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/PROVENANCE.tsv",
+      "sha256": "8eae2d464bc16b566957aff8cc0fb62f02dcada2250a8b51a493de0514966bfb",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/PROVENANCE.tsv"
+    },
+    {
+      "bytes": 1499,
+      "gitBlob": "59d2b1cd8f93498dba5c762827575837cb147c8c",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/README.md",
+      "sha256": "f59fe0e255ea492379e8a2b1e4cb1b731dcf5bdc46e889da6bc0706b9aa23f51",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/README.md"
+    },
+    {
+      "bytes": 3750,
+      "gitBlob": "1e0a22b15712c4c8cc9ee8524fc3721f1921a49d",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/RESULT.json",
+      "sha256": "1e82bec642c8ea8ece15e8caeeed283416c1b612e22c357b20178524b6ab1605",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/RESULT.json"
+    },
+    {
+      "bytes": 1718,
+      "gitBlob": "478f082136a72dc9e99e9f53f99d7eebd93e044d",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/RUN_CONTEXT.tsv",
+      "sha256": "06c850533eb5b9efc5da380835e47b4f6d797bb73a3b5cc5552f09c3b6bd87c2",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/RUN_CONTEXT.tsv"
+    },
+    {
+      "bytes": 1532,
+      "gitBlob": "82b14ae8e2701928091d688e0effba8017b7fd95",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/STATUS.tsv",
+      "sha256": "24d8a3a37645fe63c13aad8177c1333abcbd80dd176f69eea4a6d383e021da56",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/STATUS.tsv"
+    },
+    {
+      "bytes": 1295,
+      "gitBlob": "3014a8ad74a58713b702496ab1813f756d9ee179",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/VERIFY_CONTRACT.tsv",
+      "sha256": "8a94b7c0d1829129bc5a35853fea4844ad99f2ca5c9b391c13ef14b4e69585f7",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/VERIFY_CONTRACT.tsv"
+    },
+    {
+      "bytes": 6919,
+      "gitBlob": "69945db1835a4aa69c6a4dcd0bdbe84a5862fb30",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/evidence-bundle/BUNDLE.json",
+      "sha256": "d3a09e407eeb5e352e00ff7167ddb73737a2c488c16e4d382491defa4d706b42",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/BUNDLE.json"
+    },
+    {
+      "bytes": 4652,
+      "gitBlob": "827dedfdd74f0d4667d4d48b3405fb3d4b9c15b1",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/evidence-bundle/LANES.json",
+      "sha256": "87661dd6b9c47695e67b34a8f806ae2705e3972b8d5a63272bd092cd54ea4ade",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/LANES.json"
+    },
+    {
+      "bytes": 1432,
+      "gitBlob": "16ddccc11c8cd7a2b535d2995c81010025718437",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/evidence-bundle/PACKAGE.json",
+      "sha256": "c1c777a4facbbf4c5b842a3cd62326993ca7859d1ef67c6861bf5ae06e80f6c7",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/PACKAGE.json"
+    },
+    {
+      "bytes": 35870,
+      "gitBlob": "fe2ac83c7308d7cddd7265f2960fc88a56f0bff7",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/evidence-bundle/PATHS-0001.tsv",
+      "sha256": "59d32402560ecb152e0fbc87475a6ce59784b25833cc33f881268e081118761a",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/PATHS-0001.tsv"
+    },
+    {
+      "bytes": 2425,
+      "gitBlob": "df6218007f5b4f2f1762d5911ea9b78ac742e5fb",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/evidence-bundle/README.md",
+      "sha256": "2bc32d89eeff69ac9200abed775bdcd5bd346fe818f12f845dc97a845a214853",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/README.md"
+    },
+    {
+      "bytes": 1595,
+      "gitBlob": "7fe61878919de821529d44be9d12ac28dade5893",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/evidence-bundle/VERIFY-COMMAND.json",
+      "sha256": "fa34bfb0420e30c36b262a20474bf17805ef589dc687a689976f2de7fbe6600e",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/VERIFY-COMMAND.json"
+    },
+    {
+      "bytes": 770,
+      "gitBlob": "970f45ed467e08703d372b31779cb8e19a47569a",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/evidence-bundle/VERIFY.json",
+      "sha256": "14e7d9bbf54ae124f9f96e459244431ab3092036e48e282451cfb02e6f62f585",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/VERIFY.json"
+    },
+    {
+      "bytes": 1943079,
+      "gitBlob": "52223662629ceae0cda6456665619b02a9d8c5a0",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/evidence-bundle/part-0001.tar.gz",
+      "sha256": "39da8febc4cb5b66776b9655db3ac19d30e78c7ada2edb2238ccbebdb3ec7c8e",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/part-0001.tar.gz"
+    },
+    {
+      "bytes": 198304,
+      "gitBlob": "7389f784c5f2cc6dec5a04b819dd44b3d69bb6f0",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/evidence-bundle/part-0002.tar.gz",
+      "sha256": "76129776495671c7f33932595e4dc0014df10b3dfaa886d938af97e05370da0e",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/part-0002.tar.gz"
+    },
+    {
+      "bytes": 753,
+      "gitBlob": "80cc4a281e61dd90bf64b0946069bb3745ba830c",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/evidence-tools/native_bundle.py",
+      "sha256": "9bde181c72dd0372a55104ee9dfabc7173351c8734f8b9b778060589e2a5a3e6",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-tools/native_bundle.py"
+    },
+    {
+      "bytes": 33814,
+      "gitBlob": "1dbaa1ecf032b0f5d94a4e34aafee3f0cc88f0a0",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/evidence-tools/package_evidence.py",
+      "sha256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-tools/package_evidence.py"
+    },
+    {
+      "bytes": 14925,
+      "gitBlob": "0a18704512e7a8c406f92cc51f92adf855a44c35",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/evidence-tools/readback_native.py",
+      "sha256": "52e46492bd3ebadff1aea7981ae55b21c82d0c1523e4e067a2d8fc97618bd1e3",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-tools/readback_native.py"
+    },
+    {
+      "bytes": 1137,
+      "gitBlob": "b069625059c259c8aa552bd09e9b5972a935679f",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/native-current-v1/package-plan.json",
+      "sha256": "9bc72208f52d917857223bccd8f9b9ef5c3cce931515331d7c3d0b48b4cba68a",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/package-plan.json"
+    }
+  ],
+  "nativeReexecutedByReceivingProof": false,
+  "productRuntimeAccepted": false,
+  "sourceManifestSHA256": "633b27c05776d03397eef4950ca7ae56f8f1b4f793666887aa72ab3e4c00cfc2"
+}

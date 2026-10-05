@@ -1,0 +1,2101 @@
+{
+  "backportsMethods": [
+    "test_community_fork_capabilities.ForkCapabilityTest.test_branch_proof_can_reference_reachable_non_unique_head",
+    "test_community_fork_capabilities.ForkCapabilityTest.test_product_candidate_requires_reachable_unique_commit",
+    "test_community_fork_capabilities.ForkCapabilityTest.test_product_candidate_without_unique_evidence_refuses",
+    "test_community_fork_capabilities.ForkCapabilityTest.test_unknown_fork_and_authority_refuse",
+    "test_community_fork_inventory.CommunityForkInventoryTest.test_catalogue_refuses_pre_authorized_source_copy_or_distribution",
+    "test_community_fork_inventory.CommunityForkInventoryTest.test_cherry_equivalent_patch_is_filtered_but_unique_change_remains",
+    "test_community_fork_inventory.CommunityForkInventoryTest.test_output_writers_keep_all_authority_false",
+    "test_community_fork_inventory.CommunityForkInventoryTest.test_scope_recipe_risk_and_domain_are_evidence_only",
+    "test_compatibility_policy.CompatibilityPolicyTest.test_checked_in_ledger_is_valid",
+    "test_compatibility_policy.CompatibilityPolicyTest.test_dependencies_must_be_present_and_not_from_later_release",
+    "test_compatibility_policy.CompatibilityPolicyTest.test_duplicate_bad_url_and_pre22_rows_fail_closed",
+    "test_compatibility_policy.CompatibilityPolicyTest.test_empty_and_invalid_fields_fail_closed",
+    "test_compatibility_policy.CompatibilityPolicyTest.test_language_or_api_extension_cannot_be_marked_candidate_default",
+    "test_compatibility_policy.CompatibilityPolicyTest.test_nul_tokens_are_rejected_but_literal_escape_text_is_preserved",
+    "test_compatibility_policy.CompatibilityPolicyTest.test_rejected_feature_cannot_be_opt_in_default_marker",
+    "test_compatibility_queue.CompatibilityQueueTest.test_boolean_and_inventory_schema_fail_closed",
+    "test_compatibility_queue.CompatibilityQueueTest.test_every_row_remains_pending_compatibility_proof",
+    "test_compatibility_queue.CompatibilityQueueTest.test_priority_is_deterministic_and_low_risk_build_tooling_runs_first",
+    "test_compatibility_queue.CompatibilityQueueTest.test_scope_floor_and_recipe_strategy_are_physical_only",
+    "test_compatibility_queue.CompatibilityQueueTest.test_tsv_output_contains_all_mechanical_decision_fields",
+    "test_file_delta_inventory.FileDeltaInventoryTest.test_fixed_jdk21_baseline_is_used_for_every_donor",
+    "test_file_delta_inventory.FileDeltaInventoryTest.test_main_requires_only_selected_donor_refs",
+    "test_file_delta_inventory.FileDeltaInventoryTest.test_verbatim_union_marks_same_modified_added_and_removed",
+    "test_generate_recipe_crates.GenerateRecipeCratesTest.test_crate_size_one_emits_true_file_atomic_crates",
+    "test_generate_recipe_crates.GenerateRecipeCratesTest.test_crate_size_rejects_zero_and_above_budget",
+    "test_generate_recipe_crates.GenerateRecipeCratesTest.test_include_text_emits_separate_java_and_plain_text_crates",
+    "test_generate_recipe_crates.GenerateRecipeCratesTest.test_native_jni_candidates_have_first_class_source_sealed_lane",
+    "test_generate_recipe_crates.GenerateRecipeCratesTest.test_requires_explicit_selection_or_all_candidates",
+    "test_generate_recipe_crates.GenerateRecipeCratesTest.test_text_candidates_remain_opt_in_for_backward_compatibility",
+    "test_generate_recipe_crates.GenerateRecipeCratesTest.test_text_mode_and_encoding_fail_into_typed_exclusions",
+    "test_generate_recipe_crates.GenerateRecipeCratesTest.test_verbatim_pairs_generate_hash_pinned_openrewrite_crate",
+    "test_inventory.InventoryTest.test_tool_and_language_classification",
+    "test_program_status.ProgramStatusTest.test_disposition_classification_is_total_for_known_states",
+    "test_program_status.ProgramStatusTest.test_repository_snapshot_has_locked_denominators",
+    "test_program_status.ProgramStatusTest.test_tsv_is_deterministic"
+  ],
+  "backportsTests": 35,
+  "errors": 0,
+  "failures": 0,
+  "fullCleanVerify": [
+    "m3/tooling/migration-recipes",
+    "m3/tooling/a3",
+    "m3/backports"
+  ],
+  "hostCounts": [
+    109,
+    6
+  ],
+  "hostMethods": [
+    "test_intake.IntakeTest.test_actual_domain_grammars_reconstruct_original_metadata_and_seals",
+    "test_intake.IntakeTest.test_all_input_paths_refuse_aliases_and_escape",
+    "test_intake.IntakeTest.test_artifact_symlink_and_parent_symlink_refuse",
+    "test_intake.IntakeTest.test_cli_refuses_modified_review_output",
+    "test_intake.IntakeTest.test_cli_refuses_packet_seal_drift_and_duplicate_json_without_output",
+    "test_intake.IntakeTest.test_cli_resealed_malformed_junit_xml_refuses_without_receipt",
+    "test_intake.IntakeTest.test_cli_sealed_packet_output_and_exact_replay",
+    "test_intake.IntakeTest.test_domain_output_rejects_pcr_raw_seal_and_resealed_metadata_drift",
+    "test_intake.IntakeTest.test_domain_patch_drift_is_not_hidden_by_resealing_artifact_reference",
+    "test_intake.IntakeTest.test_duplicate_lanes_and_reused_output_paths_refuse",
+    "test_intake.IntakeTest.test_each_required_proof_artifact_must_exist_and_match_its_seal",
+    "test_intake.IntakeTest.test_existing_validate_and_reconcile_commands_keep_review_semantics",
+    "test_intake.IntakeTest.test_historical_input_order_uses_posix_path_components",
+    "test_intake.IntakeTest.test_materialization_marker_must_be_unique_unambiguous_and_exact",
+    "test_intake.IntakeTest.test_materializer_class_and_output_property_are_command_bound",
+    "test_intake.IntakeTest.test_missing_duplicate_and_legacy_authority_records",
+    "test_intake.IntakeTest.test_missing_duplicate_and_unsafe_output_mapping",
+    "test_intake.IntakeTest.test_output_content_and_seal_drift",
+    "test_intake.IntakeTest.test_output_manifest_scope_source_recipe_and_git_blob_identity",
+    "test_intake.IntakeTest.test_packet_identity_and_authority_mismatch",
+    "test_intake.IntakeTest.test_pcr_changes_must_match_the_manifest_before_after_rows",
+    "test_intake.IntakeTest.test_pcr_same_seal_wrong_recipe_prefix_refuses",
+    "test_intake.IntakeTest.test_recipe_consumer_roles_and_proof_identity_are_required",
+    "test_intake.IntakeTest.test_resealed_canonical_record_must_match_every_output_identity",
+    "test_intake.IntakeTest.test_resealed_consumer_must_bind_this_recipe_result",
+    "test_intake.IntakeTest.test_resealed_consumer_runtime_completion_pattern_must_hold",
+    "test_intake.IntakeTest.test_resealed_consumer_staging_must_cover_every_exact_output",
+    "test_intake.IntakeTest.test_resealed_empty_or_missing_required_compilation_outputs_refuse",
+    "test_intake.IntakeTest.test_resealed_failed_or_unexecuted_proofs_are_not_success",
+    "test_intake.IntakeTest.test_resealed_gate_order_exit_command_and_lineage_contradictions",
+    "test_intake.IntakeTest.test_resealed_junit_counts_suites_and_xml_must_agree",
+    "test_intake.IntakeTest.test_resealed_root_tree_is_recomputed_and_incomplete_or_invalid_roots_refuse",
+    "test_intake.IntakeTest.test_resealed_runtime_argv_must_match_the_sealed_command_plan",
+    "test_intake.IntakeTest.test_synthetic_review_receipt_is_repeatable_and_never_promotes",
+    "test_intake.IntakeTest.test_template_compiled_inventory_must_match_actual_output",
+    "test_intake.IntakeTest.test_top_level_owner_coverage_is_exact_and_explicit",
+    "test_intake.IntakeTest.test_v2_bound_historical_paths_remain_labels_and_accept_the_synthetic_bundle",
+    "test_intake.IntakeTest.test_v2_compile_source_root_requires_one_exact_selection",
+    "test_intake.IntakeTest.test_v2_input_manifest_requires_sorted_unique_well_formed_records",
+    "test_intake.IntakeTest.test_v2_resealed_commands_cannot_bypass_their_input_manifest_entry",
+    "test_intake.IntakeTest.test_v2_resealed_staging_cannot_bypass_unchanged_input_and_gate_seals",
+    "test_intake.IntakeTest.test_v2_staging_requires_its_exact_own_source_input_record",
+    "test_intake.IntakeTest.test_v3_alias_runtime_requires_exact_main_and_family_property",
+    "test_intake.IntakeTest.test_v3_aliases_are_explicit_not_inferred_from_recipe_suffix",
+    "test_intake.IntakeTest.test_v3_aliases_refuse_a_fully_consistent_old_crate",
+    "test_intake.IntakeTest.test_v3_explicit_aliases_preserve_family_schema_domain_and_property",
+    "test_intake.IntakeTest.test_v3_fresh_single_baseline_alias_packet_remains_review_only",
+    "test_intake.IntakeTest.test_v3_packet_and_lanes_cannot_declare_extra_source_baselines",
+    "test_intake.IntakeTest.test_v3_resealed_old_output_baseline_refuses",
+    "test_intake.IntakeTest.test_v3_resealed_old_producer_or_consumer_baselines_refuse",
+    "test_intake.IntakeTest.test_v3_resealed_output_requires_exact_alias_recipe_id",
+    "test_intake.IntakeTest.test_v4_mrc3_current_six_target_packet_is_read_only_and_family_bound",
+    "test_intake.IntakeTest.test_v4_mrc3_refuses_other_crates_main_classes_recipes_and_properties",
+    "test_intake.IntakeTest.test_v4_mrc3_resealed_old_producer_and_consumer_baselines_refuse",
+    "test_intake.IntakeTest.test_v5_mrc4_complete_seven_target_packet_is_read_only_and_family_bound",
+    "test_intake.IntakeTest.test_v5_mrc4_missing_seventh_mapping_record_or_consumer_source_refuses",
+    "test_intake.IntakeTest.test_v5_mrc4_refuses_other_crates_main_classes_recipes_and_properties",
+    "test_intake.IntakeTest.test_v5_mrc4_resealed_old_producer_and_consumer_baselines_refuse",
+    "test_intake_recipe.IntakeRecipeTest.test_actual_task_replay_fixed_point_and_rollback",
+    "test_intake_recipe.IntakeRecipeTest.test_dependency_guard_drift_refuses_before_any_output",
+    "test_intake_recipe.IntakeRecipeTest.test_destination_drift_refuses_before_any_output",
+    "test_intake_recipe.IntakeRecipeTest.test_exact_resource_drift_refuses_before_any_output",
+    "test_jcc_handoff_context_profiles.JccHandoffContextProfileTests.test_both_exact_profiles_select_their_sealed_plan_without_writes",
+    "test_jcc_handoff_context_profiles.JccHandoffContextProfileTests.test_each_other_guard_drift_refuses_during_actual_setup",
+    "test_jcc_handoff_context_profiles.JccHandoffContextProfileTests.test_missing_selected_plan_refuses_with_other_profile_still_present",
+    "test_jcc_handoff_context_profiles.JccHandoffContextProfileTests.test_resealed_recipe_identity_substitution_refuses",
+    "test_jcc_handoff_context_profiles.JccHandoffContextProfileTests.test_resealed_validator_guard_substitution_refuses",
+    "test_jcc_handoff_context_profiles.JccHandoffContextProfileTests.test_swapped_profile_plan_refuses",
+    "test_jcc_handoff_context_profiles.JccHandoffContextProfileTests.test_unknown_validator_refuses_without_fallback",
+    "test_jcc_handoff_context_profiles.JccHandoffContextProfileTests.test_whitespace_only_plan_drift_refuses",
+    "test_jcc_handoff_current_context.JccHandoffCurrentContextTests.test_all_three_profiles_execute_six_retained_packet_methods",
+    "test_jcc_handoff_current_context.JccHandoffCurrentContextTests.test_current_exact_pair_selects_new_plan_without_writes",
+    "test_jcc_handoff_current_context.JccHandoffCurrentContextTests.test_current_other_guard_drift_still_refuses_without_writes",
+    "test_jcc_handoff_current_context.JccHandoffCurrentContextTests.test_current_selected_plan_missing_drifted_or_resealed_refuses",
+    "test_jcc_handoff_current_context.JccHandoffCurrentContextTests.test_historical_pom_fixture_drift_refuses_without_writes",
+    "test_jcc_handoff_current_context.JccHandoffCurrentContextTests.test_known_validator_and_pom_in_unadmitted_pair_refuse",
+    "test_jcc_handoff_current_context.JccHandoffCurrentContextTests.test_unknown_pom_or_validator_refuses_without_fallback",
+    "test_jcc_handoff_packet.JccHandoffPacketTests.test_actual_packet_check_apply_idempotent_rollback_and_replay",
+    "test_jcc_handoff_packet.JccHandoffPacketTests.test_actual_required_preimage_missing_or_drifted_refuses_atomically",
+    "test_jcc_handoff_packet.JccHandoffPacketTests.test_each_actual_absent_output_occupied_refuses_atomically",
+    "test_jcc_handoff_packet.JccHandoffPacketTests.test_each_actual_guard_missing_or_drifted_refuses_atomically",
+    "test_jcc_handoff_packet.JccHandoffPacketTests.test_each_foreign_postimage_edit_refuses_rollback_and_replay_atomically",
+    "test_jcc_handoff_packet.JccHandoffPacketTests.test_each_single_postimage_mixed_with_preimages_refuses_atomically",
+    "test_migration.MigrationTest.test_duplicate_json_key_and_nonfinite_number_refused",
+    "test_migration.MigrationTest.test_duplicate_mapping_id",
+    "test_migration.MigrationTest.test_exclusion_requires_reason",
+    "test_migration.MigrationTest.test_extension_can_replay_from_canonical_authority",
+    "test_migration.MigrationTest.test_extension_preserves_legacy_and_refuses_drift",
+    "test_migration.MigrationTest.test_failed_receipt_is_not_pass",
+    "test_migration.MigrationTest.test_file_existence_is_not_test_evidence",
+    "test_migration.MigrationTest.test_incomplete_inventory_is_not_deletion",
+    "test_migration.MigrationTest.test_inventory_duplicates_refused",
+    "test_migration.MigrationTest.test_inventory_from_other_tracking_ref_is_unobserved",
+    "test_migration.MigrationTest.test_inventory_pin_drift_refused",
+    "test_migration.MigrationTest.test_malformed_nested_shapes_are_refused_before_completion",
+    "test_migration.MigrationTest.test_many_to_one_allowed_same_owner",
+    "test_migration.MigrationTest.test_moves_require_previous_source_lineage",
+    "test_migration.MigrationTest.test_nonprefix_additions_are_not_lost",
+    "test_migration.MigrationTest.test_output_creation_preserves_existing_work",
+    "test_migration.MigrationTest.test_pending_record_keeps_unknowns_visible",
+    "test_migration.MigrationTest.test_previous_mapping_cannot_disappear",
+    "test_migration.MigrationTest.test_receipt_must_match_exact_candidate",
+    "test_migration.MigrationTest.test_report_cannot_call_partial_complete",
+    "test_migration.MigrationTest.test_source_pin_is_required",
+    "test_migration.MigrationTest.test_target_only_drift_invalidates_test_claim",
+    "test_migration.MigrationTest.test_three_way_change_classification",
+    "test_migration.MigrationTest.test_unpinned_candidate_must_be_labeled",
+    "test_migration.MigrationTest.test_unsafe_paths_and_symlinks",
+    "test_migration.MigrationTest.test_valid_partial_is_not_complete",
+    "test_union.UnionTest.test_all_master_values_survive_with_exact_disjoint_head_intake_append",
+    "test_union.UnionTest.test_derived_packet_changes_only_authority_hash_without_changing_qualification_epoch",
+    "test_union.UnionTest.test_each_of_four_exact_input_byte_pins_refuses_even_json_equivalent_whitespace",
+    "test_union.UnionTest.test_historical_counts_duplicate_membership_and_foreign_members_cannot_bypass_pins",
+    "test_union.UnionTest.test_repeated_derivation_is_byte_deterministic_and_does_not_modify_supplied_inputs",
+    "test_union.UnionTest.test_richer_master_descriptor_and_two_blocked_jcc_obligations_are_unchanged"
+  ],
+  "hostTests": 115,
+  "javaCountSource": "complete actual Surefire XML; no invented expected count",
+  "javaModules": {
+    "m3/tooling/a3": {
+      "suites": 6,
+      "tests": 19
+    },
+    "m3/tooling/migration-recipes": {
+      "suites": 58,
+      "tests": 220
+    }
+  },
+  "javaSuites": [
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.InstallIndexStringCompatibilityTest",
+          "name": "refuseMissingPom"
+        },
+        {
+          "class": "com.m3.rewrite.InstallIndexStringCompatibilityTest",
+          "name": "generateSevenAndReachFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.InstallIndexStringCompatibilityTest",
+          "name": "refuseMixedAndDivergentState"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.InstallIndexStringCompatibilityTest",
+      "report": {
+        "bytes": 22244,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.InstallIndexStringCompatibilityTest.xml",
+        "sha256": "72e2f1e4eee16f8e8babe15c4cdac51f591f94751a170a1d41e0eaa12646cfac"
+      },
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.M3A3DeclarativeDeliveryRecipeTest",
+          "name": "declarativeYamlIsDeliveredByAHashPinnedTextCrate"
+        },
+        {
+          "class": "com.m3.rewrite.M3A3DeclarativeDeliveryRecipeTest",
+          "name": "migrationRecipeCrateGeneratesTheReviewedJavaOwners"
+        },
+        {
+          "class": "com.m3.rewrite.M3A3DeclarativeDeliveryRecipeTest",
+          "name": "a3JavaCrateTransformsExactPreimagesAndSecondRunIsFixedPoint"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.M3A3DeclarativeDeliveryRecipeTest",
+      "report": {
+        "bytes": 22317,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3A3DeclarativeDeliveryRecipeTest.xml",
+        "sha256": "711601aef6c7ed90d138ab9dbe5dfb65fdf1e30cc1086e32efd69daaa376d3b7"
+      },
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.M3A3LabDeliveryRecipeTest",
+          "name": "exactCurrentA3PreimagesAdvanceMasteryAndSecondRunIsFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.M3A3LabDeliveryRecipeTest",
+          "name": "declarativeRecipeStillBindsTheCanonicalHashPinnedCrate"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.M3A3LabDeliveryRecipeTest",
+      "report": {
+        "bytes": 22153,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3A3LabDeliveryRecipeTest.xml",
+        "sha256": "f8acbc83235ebba25cc2e20611ebd2fd5452673c10a2131e8b95bfb6c548c6ad"
+      },
+      "skipped": 0,
+      "tests": 2
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.M3A3LevenshteinEvidenceClosureRecipeTest",
+          "name": "exactCurrentTextPreimagesCloseEvidenceAndReplayAtFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.M3A3LevenshteinEvidenceClosureRecipeTest",
+          "name": "declarativeRecipeBindsExactTextCrate"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.M3A3LevenshteinEvidenceClosureRecipeTest",
+      "report": {
+        "bytes": 22181,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3A3LevenshteinEvidenceClosureRecipeTest.xml",
+        "sha256": "aa19760f1376570cea476f4e904b689f9f5bcc3293785a0141009cdb7fe03ff0"
+      },
+      "skipped": 0,
+      "tests": 2
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.M3A3MasteryWorkflowRecipeTest",
+          "name": "declarativeRecipeBindsExactTextCrate"
+        },
+        {
+          "class": "com.m3.rewrite.M3A3MasteryWorkflowRecipeTest",
+          "name": "exactCurrentTextPreimagesAdvanceMasteryAndReplayAtFixedPoint"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.M3A3MasteryWorkflowRecipeTest",
+      "report": {
+        "bytes": 22149,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3A3MasteryWorkflowRecipeTest.xml",
+        "sha256": "db7d19ee301f71dd573b8594ae0f494d7beeb83af308fffdc01945ec86b8e6e5"
+      },
+      "skipped": 0,
+      "tests": 2
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.M3A3RegexMemoryLabDeliveryRecipeTest",
+          "name": "declarativeRecipeBindsExactHashPinnedJavaCrate"
+        },
+        {
+          "class": "com.m3.rewrite.M3A3RegexMemoryLabDeliveryRecipeTest",
+          "name": "exactCurrentA3PreimagesAdvanceRegexMemoryLabAndReachFixedPoint"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.M3A3RegexMemoryLabDeliveryRecipeTest",
+      "report": {
+        "bytes": 22182,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3A3RegexMemoryLabDeliveryRecipeTest.xml",
+        "sha256": "a5914cfeda94f57497459dd5ff219e617e83ee713c8d7cca31619603d6e64b73"
+      },
+      "skipped": 0,
+      "tests": 2
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.M3A3RegexMemoryWorkflowRecipeTest",
+          "name": "exactCurrentTextPreimagesAdvanceRegexMemoryGateAndReplayAtFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.M3A3RegexMemoryWorkflowRecipeTest",
+          "name": "declarativeRecipeBindsExactTextCrate"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.M3A3RegexMemoryWorkflowRecipeTest",
+      "report": {
+        "bytes": 22167,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3A3RegexMemoryWorkflowRecipeTest.xml",
+        "sha256": "e372a3a6dd71259c6bb72e4d79683f64dc539480f30182ded60912b7c8511770"
+      },
+      "skipped": 0,
+      "tests": 2
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.M3ImportAdmissionTest",
+          "name": "removesOnlyUnusedImportsAndReachesFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.M3ImportAdmissionTest",
+          "name": "intentionallyUnresolvedInputRetainsEveryImport"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.M3ImportAdmissionTest",
+      "report": {
+        "bytes": 22119,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3ImportAdmissionTest.xml",
+        "sha256": "04cc6da2ff1831bef53c10da1f1c9141eaefdaa196d1e4ef8cd96e7eaad9a498"
+      },
+      "skipped": 0,
+      "tests": 2
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.M3Java21ConvergenceAdmissionTest",
+          "name": "everyTrustedChildIsRegisteredAtFileScopeWithLockedContract"
+        },
+        {
+          "class": "com.m3.rewrite.M3Java21ConvergenceAdmissionTest",
+          "name": "compositeItselfIsAdmittedAtTheSameFileLocalContractBoundary"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.M3Java21ConvergenceAdmissionTest",
+      "report": {
+        "bytes": 22393,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3Java21ConvergenceAdmissionTest.xml",
+        "sha256": "b98979544b9cdf56006ed964a287af7a22760e3605b0a0898ad37685e030e4d9"
+      },
+      "skipped": 0,
+      "tests": 2
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.M3Java21ConvergenceRecipeTest",
+          "name": "nonJavaSourcesAreNotAJavaTransformationSurface"
+        },
+        {
+          "class": "com.m3.rewrite.M3Java21ConvergenceRecipeTest",
+          "name": "catalogueCleanupPreservesUsedImportOrder"
+        },
+        {
+          "class": "com.m3.rewrite.M3Java21ConvergenceRecipeTest",
+          "name": "catalogueCleanupPreservesCommentsAndLiterals"
+        },
+        {
+          "class": "com.m3.rewrite.M3Java21ConvergenceRecipeTest",
+          "name": "oneTrustedDagConvergesAndSecondRunIsFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.M3Java21ConvergenceRecipeTest",
+          "name": "catalogueCleanupRetainsCapturedLambdaAndMethodReference"
+        },
+        {
+          "class": "com.m3.rewrite.M3Java21ConvergenceRecipeTest",
+          "name": "unknownTypesPreventGuessedImportRemoval"
+        },
+        {
+          "class": "com.m3.rewrite.M3Java21ConvergenceRecipeTest",
+          "name": "catalogueCleanupPreservesNativeAndCheckedExceptionContracts"
+        },
+        {
+          "class": "com.m3.rewrite.M3Java21ConvergenceRecipeTest",
+          "name": "orderedPassDagIsExplicitAndFileLocal"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.M3Java21ConvergenceRecipeTest",
+      "report": {
+        "bytes": 22969,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3Java21ConvergenceRecipeTest.xml",
+        "sha256": "3cb6ea2d027b4d3c08f4b7ee4089484ea01a2b237c5cf894ed330a8ce15a47ac"
+      },
+      "skipped": 0,
+      "tests": 8
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.M3Java21DeclarativeConvergenceTest",
+          "name": "resourceRecipeLeavesUnadmittedMethodsUntouched"
+        },
+        {
+          "class": "com.m3.rewrite.M3Java21DeclarativeConvergenceTest",
+          "name": "declarativeDagMatchesRetainedJavaCompatibilityOracleAndReachesFixedPoint"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.M3Java21DeclarativeConvergenceTest",
+      "report": {
+        "bytes": 22186,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3Java21DeclarativeConvergenceTest.xml",
+        "sha256": "904030b68aff31dc636192d84d89ecb0afffdadcdeee6d0edd657d8173815f1e"
+      },
+      "skipped": 0,
+      "tests": 2
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.a3.M3A3AlgorithmCatalogueRecipeTest",
+          "name": "exactImagesArePinnedAndRoundTrip"
+        },
+        {
+          "class": "com.m3.rewrite.a3.M3A3AlgorithmCatalogueRecipeTest",
+          "name": "foreignSourceIsNoOpAndUnexpectedA3SourceFailsClosed"
+        },
+        {
+          "class": "com.m3.rewrite.a3.M3A3AlgorithmCatalogueRecipeTest",
+          "name": "exactCurrentPreimagesTransformAndSecondPassIsFixedPoint"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.a3.M3A3AlgorithmCatalogueRecipeTest",
+      "report": {
+        "bytes": 22307,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.a3.M3A3AlgorithmCatalogueRecipeTest.xml",
+        "sha256": "1055b4e900fe5a6682c52e4ef2f9f1907806c14740710c203b84c9e3afe9ab56"
+      },
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.a3.M3A3SerialFileWorkRecipeTest",
+          "name": "exactImagesArePinnedAndRoundTrip"
+        },
+        {
+          "class": "com.m3.rewrite.a3.M3A3SerialFileWorkRecipeTest",
+          "name": "foreignSourceIsNoOpAndUnexpectedA3SourceFailsClosed"
+        },
+        {
+          "class": "com.m3.rewrite.a3.M3A3SerialFileWorkRecipeTest",
+          "name": "generatedSourcesAreVisitedButCannotChangeAfterGeneration"
+        },
+        {
+          "class": "com.m3.rewrite.a3.M3A3SerialFileWorkRecipeTest",
+          "name": "mixedReviewedStateResumesWithoutRegeneratingPresentOutputs"
+        },
+        {
+          "class": "com.m3.rewrite.a3.M3A3SerialFileWorkRecipeTest",
+          "name": "repositoryRelativeTargetsKeepTheirPathsAndUnrelatedTrees"
+        },
+        {
+          "class": "com.m3.rewrite.a3.M3A3SerialFileWorkRecipeTest",
+          "name": "missingDuplicateOccupiedAndNonJavaInputsNeverMaterialize"
+        },
+        {
+          "class": "com.m3.rewrite.a3.M3A3SerialFileWorkRecipeTest",
+          "name": "scannedSourcesCannotBeSwappedEvenForAnotherReviewedImage"
+        },
+        {
+          "class": "com.m3.rewrite.a3.M3A3SerialFileWorkRecipeTest",
+          "name": "exactCurrentPreimagesTransformAndSecondPassIsFixedPoint"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.a3.M3A3SerialFileWorkRecipeTest",
+      "report": {
+        "bytes": 23043,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.a3.M3A3SerialFileWorkRecipeTest.xml",
+        "sha256": "8e323a1b4929055afc290dbb4ec28f8d0994991cc6c51bba3cb9c5198c874ecd"
+      },
+      "skipped": 0,
+      "tests": 8
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.atom.JccReceivingFixtureTest",
+          "name": "compilerAndBothObservationOraclesRejectCuratedMutants"
+        },
+        {
+          "class": "com.m3.rewrite.atom.JccReceivingFixtureTest",
+          "name": "opaqueStringObserversAndIndependentClassStateRemainIntact"
+        },
+        {
+          "class": "com.m3.rewrite.atom.JccReceivingFixtureTest",
+          "name": "actualCanonicalCompositeAgreesWithItsDeclaredChildrenAndFreshReplay"
+        },
+        {
+          "class": "com.m3.rewrite.atom.JccReceivingFixtureTest",
+          "name": "eachScheduleCompilesAndMatchesFrozenOraclesAtEveryIntermediate"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.atom.JccReceivingFixtureTest",
+      "report": {
+        "bytes": 22470,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.JccReceivingFixtureTest.xml",
+        "sha256": "5aea58694d46acb9e5e713409c51c88e7c4088ccef871f83a61ece5f7887f8c0"
+      },
+      "skipped": 0,
+      "tests": 4
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.atom.M3AtomCommentRecipeTest",
+          "name": "sourceDriftCannotBeMaterialized"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3AtomCommentRecipeTest",
+          "name": "actualSnapshotRecipeMaterializesTheReviewedRepairAndReplays"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.atom.M3AtomCommentRecipeTest",
+      "report": {
+        "bytes": 22140,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3AtomCommentRecipeTest.xml",
+        "sha256": "0cba38ec6c762fc25dd7a17cd4e72a1b4d914f65cc487c85247fdff22822d2d0"
+      },
+      "skipped": 0,
+      "tests": 2
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.atom.M3AtomCoverageClosureTest",
+          "name": "eligibilityRejectsEveryUnsafeSurfaceAndUnsupportedExpressionShape"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3AtomCoverageClosureTest",
+          "name": "inventoryAndCandidateTableCoverDetachedAndAccessorPaths"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3AtomCoverageClosureTest",
+          "name": "semanticDocumentationIsIdempotentForGeneratedTextAndExistingJavadoc"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3AtomCoverageClosureTest",
+          "name": "recipeMetadataAndConvergenceCompositionAreFullyDeclared"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3AtomCoverageClosureTest",
+          "name": "atomizedAdmissionCoversAllStructuralGuards"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3AtomCoverageClosureTest",
+          "name": "eligibilityAcceptsEveryAdmittedPrimitiveOperatorAndWrapperShape"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3AtomCoverageClosureTest",
+          "name": "patternizationIsIdempotentAndRefusesNonAtomizedMethods"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.atom.M3AtomCoverageClosureTest",
+      "report": {
+        "bytes": 22922,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3AtomCoverageClosureTest.xml",
+        "sha256": "43c524ad8f184d440bc009572c3c1cb1eadaf26bdfee0ea27439c30573930902"
+      },
+      "skipped": 0,
+      "tests": 7
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.atom.M3AtomDefensiveBranchTest",
+          "name": "patternizationScansUnrelatedLocalCommentsBeforeAddingMarker"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3AtomDefensiveBranchTest",
+          "name": "documentationScansNonMatchingTextAndJavadocBeforeAddingSemanticMemory"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3AtomDefensiveBranchTest",
+          "name": "atomizedAdmissionRejectsNativeAndParameterNameCollisionShapes"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3AtomDefensiveBranchTest",
+          "name": "scalarIntAdmissionRejectsVarargsNestedInvalidUnaryAndOversizedComposition"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3AtomDefensiveBranchTest",
+          "name": "malformedLstsFailClosedAtEveryTypedEligibilityBoundary"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.atom.M3AtomDefensiveBranchTest",
+      "report": {
+        "bytes": 22650,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3AtomDefensiveBranchTest.xml",
+        "sha256": "fef8485aa526ac1a71381d07ba27d24222d9fd6f89cfbf88ae60c05a63610eac"
+      },
+      "skipped": 0,
+      "tests": 5
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.atom.M3AtomizePureIntReturnRecipeTest",
+          "name": "unsafeOrBroaderShapesAreLeftUntouched"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3AtomizePureIntReturnRecipeTest",
+          "name": "oneFileApplyChangesOnlyThePrivatePureLeafAndThenStops"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3AtomizePureIntReturnRecipeTest",
+          "name": "tagsDeclareBothAtomizationAndPatternization"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3AtomizePureIntReturnRecipeTest",
+          "name": "hundredFileFullApplyCompilesExecutesAndReachesFixedPoint"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.atom.M3AtomizePureIntReturnRecipeTest",
+      "report": {
+        "bytes": 22465,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3AtomizePureIntReturnRecipeTest.xml",
+        "sha256": "2ce99ac19356d0b4afef8c407baabc41e6f4dda14e5268b998c485c304668202"
+      },
+      "skipped": 0,
+      "tests": 4
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.atom.M3DocumentationContractTest",
+          "name": "undocumentedAtomRetainsGeneratedM3JavadocAndFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3DocumentationContractTest",
+          "name": "existingUserJavadocRemainsTheCompilerAssociatedContract"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.atom.M3DocumentationContractTest",
+      "report": {
+        "bytes": 22171,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3DocumentationContractTest.xml",
+        "sha256": "afc2cffb20f6e1558e5a170d4a9266b13d4396dbf2ba6bbbd224db3612daee71"
+      },
+      "skipped": 0,
+      "tests": 2
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.atom.M3IntRecipeProjectTest",
+          "name": "arrayDeclaratorsAndVarargsAreNotScalarIntParameters"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3IntRecipeProjectTest",
+          "name": "actualRecipesConvergeAcrossBothOrdersWithEveryIntermediateComparedToFrozenOriginal"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3IntRecipeProjectTest",
+          "name": "stateExceptionsAliasesAndLexicalLookalikesStayOutsideThePureLeafDomain"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3IntRecipeProjectTest",
+          "name": "compilerAndDifferentialOracleRejectDeliberatelyBadCandidates"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3IntRecipeProjectTest",
+          "name": "projectEnumerationOrderDoesNotChangeTheCompleteCompositeResult"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3IntRecipeProjectTest",
+          "name": "oneSweepBudgetIsNotAReplayWitness"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.atom.M3IntRecipeProjectTest",
+      "report": {
+        "bytes": 22763,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3IntRecipeProjectTest.xml",
+        "sha256": "31c79c04bfb10d7c9f027ce6e62014469d5fbdd87f5ffd1e56619558f2462d57"
+      },
+      "skipped": 0,
+      "tests": 6
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.atom.M3IntSpectrumTest",
+          "name": "standaloneOpaqueSourceRemainsByteIdentical"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3IntSpectrumTest",
+          "name": "atomizationRetainsInlineSemanticMemory"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3IntSpectrumTest",
+          "name": "allSixOrdersPreserveEveryIntermediateAndReachOneNormalForm"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3IntSpectrumTest",
+          "name": "compilerAndFrozenOracleKillCuratedBadCandidates"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.atom.M3IntSpectrumTest",
+      "report": {
+        "bytes": 22388,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3IntSpectrumTest.xml",
+        "sha256": "3a5a939fa9acd03944eab0c474788520cad8cc51cc0550e69f924f85a2a82fc3"
+      },
+      "skipped": 0,
+      "tests": 4
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.atom.M3InventoryPureIntAtomCandidatesTest",
+          "name": "candidateTableCarriesAllMechanicalFields"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3InventoryPureIntAtomCandidatesTest",
+          "name": "emitsOnlyCandidatesAcceptedByTheMutationRecipeAndDoesNotChangeSource"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3InventoryPureIntAtomCandidatesTest",
+          "name": "metadataDeclaresNonMutatingFileLocalAtomPatternInventory"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.atom.M3InventoryPureIntAtomCandidatesTest",
+      "report": {
+        "bytes": 22357,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3InventoryPureIntAtomCandidatesTest.xml",
+        "sha256": "09621a51842f792d6ae7f170d8822bfb2acd42b0ef4f037c8fa2c426e676e5b9"
+      },
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.atom.M3PatternMarkerTest",
+          "name": "longerOrPrefixedRoleLookalikesCannotSuppressTheCanonicalMarker"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3PatternMarkerTest",
+          "name": "exactExistingMarkerIsIdempotentWithSurroundingWhitespace"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.atom.M3PatternMarkerTest",
+      "report": {
+        "bytes": 22156,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3PatternMarkerTest.xml",
+        "sha256": "3fe78927d24d3e6332ebcf4e3e37c64581053bca7ee3eb783fb41384e903472e"
+      },
+      "skipped": 0,
+      "tests": 2
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.atom.M3PureIntConvergenceRecipeTest",
+          "name": "patternizerAndDocumenterConvergeIndependentlyAndThenStop"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3PureIntConvergenceRecipeTest",
+          "name": "compositeConvergesCompilesExecutesAndReachesFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3PureIntConvergenceRecipeTest",
+          "name": "nonAtomizedSourceIsNotPatternizedOrDocumented"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3PureIntConvergenceRecipeTest",
+          "name": "compositeOrderAndMetadataAreExplicit"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.atom.M3PureIntConvergenceRecipeTest",
+      "report": {
+        "bytes": 22458,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3PureIntConvergenceRecipeTest.xml",
+        "sha256": "9ca5ec6b93a18acce34d0fb19bfdd5e445868501cf4d13759b152ed68036ce37"
+      },
+      "skipped": 0,
+      "tests": 4
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.atom.M3RepositoryCorpusTest",
+          "name": "completePinnedM3GroupCompilesAndRunsItsRealPrefixAlgorithm"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3RepositoryCorpusTest",
+          "name": "sourcePinnedHundredFileCorpusRecordsAdmissionAndRefusalWithoutProductWrites"
+        },
+        {
+          "class": "com.m3.rewrite.atom.M3RepositoryCorpusTest",
+          "name": "changedSourceCannotBorrowAnOldPin"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.atom.M3RepositoryCorpusTest",
+      "report": {
+        "bytes": 22305,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.atom.M3RepositoryCorpusTest.xml",
+        "sha256": "b14e9b5b6cd7f40a03c2f223eabed0a04af57dd211a2a18329e7f51da9bf0bc0"
+      },
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.A3KitTest",
+          "name": "namedRecipeReplaysExactWorkflowThenStops"
+        },
+        {
+          "class": "com.m3.rewrite.backport.A3KitTest",
+          "name": "bothBytePinsAndOnlyTheTwoIntendedTriggersChange"
+        },
+        {
+          "class": "com.m3.rewrite.backport.A3KitTest",
+          "name": "missingDriftedAndDuplicateInputsRefuse"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.A3KitTest",
+      "report": {
+        "bytes": 22226,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.A3KitTest.xml",
+        "sha256": "b1d369aa13cae0bd46544f093d1fe3ef590ecbe492debc03003992f7e89b141b"
+      },
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.ClassVerTest",
+          "name": "missingDriftDuplicateAndOccupiedTargetsAreRefused"
+        },
+        {
+          "class": "com.m3.rewrite.backport.ClassVerTest",
+          "name": "exactSealsAndKernelRelativeScopeRemainExplicit"
+        },
+        {
+          "class": "com.m3.rewrite.backport.ClassVerTest",
+          "name": "exactJavaReplayAndFixedPointPreserveUnrelatedSource"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.ClassVerTest",
+      "report": {
+        "bytes": 22257,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.ClassVerTest.xml",
+        "sha256": "18b6e3af38dc3ac8c49a24234acb6b3ed14b00d0f0937035388dab849375141c"
+      },
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.ClosureRecipeTest",
+          "name": "anyDriftOrMissingRequiredOwnerRefusesTheWholeCrate"
+        },
+        {
+          "class": "com.m3.rewrite.backport.ClosureRecipeTest",
+          "name": "namedCompositionUsesTheSameCrateAndRetainsUnrelatedSource"
+        },
+        {
+          "class": "com.m3.rewrite.backport.ClosureRecipeTest",
+          "name": "exactParentReplayMatchesInstalledOwnersAndThenStops"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.ClosureRecipeTest",
+      "report": {
+        "bytes": 22291,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.ClosureRecipeTest.xml",
+        "sha256": "82e2468e3bf14307b4a47f3f2c0327f8ee2e0581d805eaf4df61e9fa94726686"
+      },
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.DbRecipeTest",
+          "name": "markerExpectationRepairReplaysCurrentSourceAndReachesFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.backport.DbRecipeTest",
+          "name": "driftMissingDuplicateAndWrongTreeAreRefused"
+        },
+        {
+          "class": "com.m3.rewrite.backport.DbRecipeTest",
+          "name": "fullRecoveryAndIndividualRepairsComposeToAStableModule"
+        },
+        {
+          "class": "com.m3.rewrite.backport.DbRecipeTest",
+          "name": "metadataRecoveryPreservesTheReactorAndRejectsUnreviewedPoms"
+        },
+        {
+          "class": "com.m3.rewrite.backport.DbRecipeTest",
+          "name": "privateAtomsRepairExactlyAndComposeWithFinalRecovery"
+        },
+        {
+          "class": "com.m3.rewrite.backport.DbRecipeTest",
+          "name": "jdkRecipePreservesSourceMetadataAndReplaysWithoutChanges"
+        },
+        {
+          "class": "com.m3.rewrite.backport.DbRecipeTest",
+          "name": "parseRepairGeneratesExactTestsAndReachesFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.backport.DbRecipeTest",
+          "name": "buildRepairHasExactPreimageAndStableJavaOutput"
+        },
+        {
+          "class": "com.m3.rewrite.backport.DbRecipeTest",
+          "name": "staleParentExpectationHasAnExactIndependentRepair"
+        },
+        {
+          "class": "com.m3.rewrite.backport.DbRecipeTest",
+          "name": "unrelatedSourceIsNotReplacedOrDeleted"
+        },
+        {
+          "class": "com.m3.rewrite.backport.DbRecipeTest",
+          "name": "jdkRecipeStillRefusesMissingDuplicateAndWrongTreeInputs"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.DbRecipeTest",
+      "report": {
+        "bytes": 23349,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.DbRecipeTest.xml",
+        "sha256": "f8f5cc05055311f8cda4b35ece71c277b94cd1c2f3d8c0405142e5d407e308b4"
+      },
+      "skipped": 0,
+      "tests": 11
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.DescriptorRecipeTest",
+          "name": "partialReplayOnlyAddsTheMissingTest"
+        },
+        {
+          "class": "com.m3.rewrite.backport.DescriptorRecipeTest",
+          "name": "actualCheckoutOwnerProducesTheExactRuntimeCandidate"
+        },
+        {
+          "class": "com.m3.rewrite.backport.DescriptorRecipeTest",
+          "name": "nonJavaAndOccupiedTestAreRefused"
+        },
+        {
+          "class": "com.m3.rewrite.backport.DescriptorRecipeTest",
+          "name": "namedRecipeAndSerializedConfigurationRetainTheCrate"
+        },
+        {
+          "class": "com.m3.rewrite.backport.DescriptorRecipeTest",
+          "name": "missingRequiredOwnerIsRefused"
+        },
+        {
+          "class": "com.m3.rewrite.backport.DescriptorRecipeTest",
+          "name": "duplicateOwnerIsRefused"
+        },
+        {
+          "class": "com.m3.rewrite.backport.DescriptorRecipeTest",
+          "name": "unrelatedSourceIsRetainedExactly"
+        },
+        {
+          "class": "com.m3.rewrite.backport.DescriptorRecipeTest",
+          "name": "exactReplayAndSecondPassFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.backport.DescriptorRecipeTest",
+          "name": "driftedOwnerIsRefused"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.DescriptorRecipeTest",
+      "report": {
+        "bytes": 23003,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.DescriptorRecipeTest.xml",
+        "sha256": "3a664af678f27e629030a2b3eeb66d0cc0a41944e5f0118c49a5a551ff4c1b58"
+      },
+      "skipped": 0,
+      "tests": 9
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.GateTest",
+          "name": "metadataRepairReplaysAllPathsWithoutChangingTargetContentIdentity"
+        },
+        {
+          "class": "com.m3.rewrite.backport.GateTest",
+          "name": "javaRepairReplaysExactSourcesAndReachesFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.backport.GateTest",
+          "name": "javaRepairRefusesMissingDuplicateAndWrongTreeTargets"
+        },
+        {
+          "class": "com.m3.rewrite.backport.GateTest",
+          "name": "namedConfigurationsUseExistingRegisteredEngines"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.GateTest",
+      "report": {
+        "bytes": 22390,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.GateTest.xml",
+        "sha256": "93d55c9d32b109795bcdedecb0f9ce1cc68a2268592959c866a19e6df2e7cbc1"
+      },
+      "skipped": 0,
+      "tests": 4
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.JccHandoffTest",
+          "name": "newJccRowsRemainBlockedAndCarryNoExportOrDestinationAcceptance"
+        },
+        {
+          "class": "com.m3.rewrite.backport.JccHandoffTest",
+          "name": "exactPacketReplaysAndFreshSecondPassIsUnchanged"
+        },
+        {
+          "class": "com.m3.rewrite.backport.JccHandoffTest",
+          "name": "everyDuplicateTargetRefusesEvenAtTheExactPostimage"
+        },
+        {
+          "class": "com.m3.rewrite.backport.JccHandoffTest",
+          "name": "namedEntryPointAndSerializedOwnerReplayTheActualPacket"
+        },
+        {
+          "class": "com.m3.rewrite.backport.JccHandoffTest",
+          "name": "targetMutationBetweenScanAndVisitRefuses"
+        },
+        {
+          "class": "com.m3.rewrite.backport.JccHandoffTest",
+          "name": "missingRequiredRegistryRefusesAllAdditions"
+        },
+        {
+          "class": "com.m3.rewrite.backport.JccHandoffTest",
+          "name": "existingGlobalsGatesAndFortyThreeRecordsRemainExact"
+        },
+        {
+          "class": "com.m3.rewrite.backport.JccHandoffTest",
+          "name": "everyChangedOrOccupiedTargetRefusesWithoutPartialResults"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.JccHandoffTest",
+      "report": {
+        "bytes": 22953,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.JccHandoffTest.xml",
+        "sha256": "1c6db4bd56d22f186cfd9a7b01f834a88d251cb88acb76e908b91b737a3129e6"
+      },
+      "skipped": 0,
+      "tests": 8
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.JniTest",
+          "name": "everyOccupiedInstructionAndDuplicateRefuses"
+        },
+        {
+          "class": "com.m3.rewrite.backport.JniTest",
+          "name": "namedPacketReplaysExactInstructionsAndFixedPoint"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.JniTest",
+      "report": {
+        "bytes": 22105,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.JniTest.xml",
+        "sha256": "a9d3b3eb99419c6c5bbf34fdb18dc431ae6d17f8537498826c768302fe83f68c"
+      },
+      "skipped": 0,
+      "tests": 2
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.KitTest",
+          "name": "occupiedAndDuplicatePathsRefuse"
+        },
+        {
+          "class": "com.m3.rewrite.backport.KitTest",
+          "name": "exactGenerationAndFixedPointPreserveUnrelatedSource"
+        },
+        {
+          "class": "com.m3.rewrite.backport.KitTest",
+          "name": "namedRecipeActivatesAndSealedBytesMatch"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.KitTest",
+      "report": {
+        "bytes": 22214,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.KitTest.xml",
+        "sha256": "1ca4db03ad16a5bf10790e82c4ecf774ee92e22d09ceafbc9e8c6c3f711523e3"
+      },
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.M3A3NativeJniLaneRecipeTest",
+          "name": "exactToolingPreimagesConvergeThenReachFixedPoint"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.M3A3NativeJniLaneRecipeTest",
+      "report": {
+        "bytes": 22023,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3A3NativeJniLaneRecipeTest.xml",
+        "sha256": "967c876edae6a230285f88522766d199bec15fe75bf55079220a378820572279"
+      },
+      "skipped": 0,
+      "tests": 1
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipeTest",
+          "name": "driftMissingDuplicateAndWrongTreeTypeFailClosed"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipeTest",
+          "name": "pathAndCrateValidationFailClosed"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipeTest",
+          "name": "exactTextCrateTransformsAddsAndThenStops"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipeTest",
+      "report": {
+        "bytes": 22338,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipeTest.xml",
+        "sha256": "57f63439398b4e58bd7a14fb7cb1f269fc18e757859f1d2b61849d161f884461"
+      },
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.M3Jdk8347112BackportRecipeTest",
+          "name": "exactJava21PreimagesReachReviewedPostimageAndThenFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3Jdk8347112BackportRecipeTest",
+          "name": "staleProductPreimageFailsClosed"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3Jdk8347112BackportRecipeTest",
+          "name": "compositeRecipeOwnsSeparateStructuredJavaAndTextAtoms"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.M3Jdk8347112BackportRecipeTest",
+      "report": {
+        "bytes": 22328,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3Jdk8347112BackportRecipeTest.xml",
+        "sha256": "245b324606bef3e0179124084f8113af67fb6e788c19ea996371512ad8d065cc"
+      },
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.M3Jdk8364182BackportRecipeTest",
+          "name": "exactJava21PreimagesReachReviewedPostimageAndThenFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3Jdk8364182BackportRecipeTest",
+          "name": "staleProductPreimageFailsClosed"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3Jdk8364182BackportRecipeTest",
+          "name": "compositeRecipeOwnsStructuredJavaAndHotspotTextAtoms"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.M3Jdk8364182BackportRecipeTest",
+      "report": {
+        "bytes": 22325,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3Jdk8364182BackportRecipeTest.xml",
+        "sha256": "888f998870a2d8c0624a71ecf6533cc3050610acfc47b2c32fdc987fc3bf142b"
+      },
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.M3Jdk8367584JfrOptionsHelpBackportRecipeTest",
+          "name": "compositeRecipeOwnsHotspotTextAndJavaTestAtoms"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3Jdk8367584JfrOptionsHelpBackportRecipeTest",
+          "name": "exactJdk21PreimagesReachHelpOnlyPostimageAndFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3Jdk8367584JfrOptionsHelpBackportRecipeTest",
+          "name": "staleHotspotPreimageFailsClosed"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.M3Jdk8367584JfrOptionsHelpBackportRecipeTest",
+      "report": {
+        "bytes": 22370,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3Jdk8367584JfrOptionsHelpBackportRecipeTest.xml",
+        "sha256": "34480f28c9c5eee8b9b0e0d26797554fbed0ee6bbfb7631410a2024c04305e87"
+      },
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.M3Jdk8368692PasswordSystemInBackportRecipeTest",
+          "name": "driftedPasswordPreimageFailsClosed"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3Jdk8368692PasswordSystemInBackportRecipeTest",
+          "name": "compositeRecipeOwnsJavaAndTextAtoms"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3Jdk8368692PasswordSystemInBackportRecipeTest",
+          "name": "exactCurrentPreimagesReachReviewedPostimagesAndFixedPoint"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.M3Jdk8368692PasswordSystemInBackportRecipeTest",
+      "report": {
+        "bytes": 22374,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3Jdk8368692PasswordSystemInBackportRecipeTest.xml",
+        "sha256": "3ef4e05b59adcbbdc9cec7ffd9b884f299da4144b1a49e53327680f224a53267"
+      },
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.M3Jdk8374808BackportRecipeTest",
+          "name": "recipeOwnsOneHashPinnedJavaAtomCrate"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3Jdk8374808BackportRecipeTest",
+          "name": "exactJava21PreimagesReachCompatibleApiLeafAndThenFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3Jdk8374808BackportRecipeTest",
+          "name": "staleKeyStorePreimageFailsClosed"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3Jdk8374808BackportRecipeTest",
+          "name": "providerStorageRewriteIsNotPartOfTheBackportLeaf"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.M3Jdk8374808BackportRecipeTest",
+      "report": {
+        "bytes": 22462,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3Jdk8374808BackportRecipeTest.xml",
+        "sha256": "e4b4659912f15a25ff195a08deecf20e65680f0479770fb824d918c4c3d44f6e"
+      },
+      "skipped": 0,
+      "tests": 4
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.M3JdkExecutionFollowthroughRecipeTest",
+          "name": "textAdapterRefusesMissingDriftDuplicateAndOccupiedTargets"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3JdkExecutionFollowthroughRecipeTest",
+          "name": "namedCompositionMaterializesExactTargetsAndReachesFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3JdkExecutionFollowthroughRecipeTest",
+          "name": "sealedPreimageAndPostimagesMatchTheirDeclaredByteHashes"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3JdkExecutionFollowthroughRecipeTest",
+          "name": "javaAdditionRefusesAnOccupiedNonJavaTree"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.M3JdkExecutionFollowthroughRecipeTest",
+      "report": {
+        "bytes": 22534,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3JdkExecutionFollowthroughRecipeTest.xml",
+        "sha256": "6586abb726dd5dbd47bd07e9b45ca30a1ffd4d1700f0499be83c5d8173fd5b95"
+      },
+      "skipped": 0,
+      "tests": 4
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.M3Jep458BackportRecipeTest",
+          "name": "descriptorTextDriftStillFailsClosed"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3Jep458BackportRecipeTest",
+          "name": "reviewedPostimagesAreAlreadyACompositeFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3Jep458BackportRecipeTest",
+          "name": "exactCurrentMasterPreimagesReplayAllTwentySixTargetsThenReachFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3Jep458BackportRecipeTest",
+          "name": "driftedCurrentMasterJavaPreimageFailsClosed"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3Jep458BackportRecipeTest",
+          "name": "descriptorLaneRetainsAllTargetsAndJavacModuleSyntax"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3Jep458BackportRecipeTest",
+          "name": "compositeRecipePinsDonorCratesAndPublicContractAuthority"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.M3Jep458BackportRecipeTest",
+      "report": {
+        "bytes": 22764,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3Jep458BackportRecipeTest.xml",
+        "sha256": "798c834341c428775feeeb141f0f6897e322cfdc4db24115d6581a3ac30ed400"
+      },
+      "skipped": 0,
+      "tests": 6
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.M3VerbatimJavaPairRecipeTest",
+          "name": "validRelativeSpellingsKeepTheExistingCanonicalTargetAndFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3VerbatimJavaPairRecipeTest",
+          "name": "driftAndMalformedDescriptorsFailClosed"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3VerbatimJavaPairRecipeTest",
+          "name": "parentTraversalAndMalformedPathVariantsAreRefused"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3VerbatimJavaPairRecipeTest",
+          "name": "exactPairTransformsOnlyTargetAndThenStops"
+        },
+        {
+          "class": "com.m3.rewrite.backport.M3VerbatimJavaPairRecipeTest",
+          "name": "metadataPinsBothSidesAndProvenance"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.M3VerbatimJavaPairRecipeTest",
+      "report": {
+        "bytes": 22604,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.M3VerbatimJavaPairRecipeTest.xml",
+        "sha256": "f440a0bb3a48cf632a37406ab1bfda2679e6c15697b504aaf8c4902c85b45ceb"
+      },
+      "skipped": 0,
+      "tests": 5
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.MapFactsRecipeTest",
+          "name": "missingDriftedDuplicateAndOccupiedInputsAreRefused"
+        },
+        {
+          "class": "com.m3.rewrite.backport.MapFactsRecipeTest",
+          "name": "workflowReplayRetainsTheOriginalTestAndAddsMapFacts"
+        },
+        {
+          "class": "com.m3.rewrite.backport.MapFactsRecipeTest",
+          "name": "completedOwnerResumesOnlyTheAbsentTestAndKeepsUnrelatedSource"
+        },
+        {
+          "class": "com.m3.rewrite.backport.MapFactsRecipeTest",
+          "name": "priorGateRetainsItsOriginalPreimageAndAgreesOnTheFinalOwner"
+        },
+        {
+          "class": "com.m3.rewrite.backport.MapFactsRecipeTest",
+          "name": "configuredNamedRecipeAndSerializationRetainExactCrate"
+        },
+        {
+          "class": "com.m3.rewrite.backport.MapFactsRecipeTest",
+          "name": "exactCandidateUsesJavaTreesPreservesContextAndReachesFixedPoint"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.MapFactsRecipeTest",
+      "report": {
+        "bytes": 22742,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.MapFactsRecipeTest.xml",
+        "sha256": "46f2aeacb0b718daa8ba0a19c04ee4245df91ce3164586c72ae6ee57f19e1e22"
+      },
+      "skipped": 0,
+      "tests": 6
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.MapGuardRecipeTest",
+          "name": "missingDriftedDuplicateAndOccupiedInputsAreRefused"
+        },
+        {
+          "class": "com.m3.rewrite.backport.MapGuardRecipeTest",
+          "name": "workflowReplayRetainsTheOriginalTestAndAddsMapGuard"
+        },
+        {
+          "class": "com.m3.rewrite.backport.MapGuardRecipeTest",
+          "name": "completedOwnerResumesOnlyTheAbsentTestAndKeepsUnrelatedSource"
+        },
+        {
+          "class": "com.m3.rewrite.backport.MapGuardRecipeTest",
+          "name": "configuredNamedRecipeAndSerializationRetainExactCrate"
+        },
+        {
+          "class": "com.m3.rewrite.backport.MapGuardRecipeTest",
+          "name": "exactCandidateUsesJavaTreesPreservesContextAndReachesFixedPoint"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.MapGuardRecipeTest",
+      "report": {
+        "bytes": 22594,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.MapGuardRecipeTest.xml",
+        "sha256": "e0a8f72f0ba8edd3a414dcd010bdd85ea80a9ee44dbfe24c6c5e37028ab3803f"
+      },
+      "skipped": 0,
+      "tests": 5
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.MapUtfRecipeTest",
+          "name": "missingDriftedDuplicateAndOccupiedInputsAreRefused"
+        },
+        {
+          "class": "com.m3.rewrite.backport.MapUtfRecipeTest",
+          "name": "recoveredFactsRecipeComposesWithUtfAtTheSamePostimage"
+        },
+        {
+          "class": "com.m3.rewrite.backport.MapUtfRecipeTest",
+          "name": "completedOwnerResumesOnlyTheAbsentTestAndKeepsUnrelatedSource"
+        },
+        {
+          "class": "com.m3.rewrite.backport.MapUtfRecipeTest",
+          "name": "priorGateRetainsItsOriginalPreimageAndAgreesOnTheFinalOwner"
+        },
+        {
+          "class": "com.m3.rewrite.backport.MapUtfRecipeTest",
+          "name": "configuredNamedRecipeAndSerializationRetainExactCrate"
+        },
+        {
+          "class": "com.m3.rewrite.backport.MapUtfRecipeTest",
+          "name": "exactCandidateUsesJavaTreesPreservesContextAndReachesFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.backport.MapUtfRecipeTest",
+          "name": "workflowReplayRetainsTheOriginalTestAndAddsMapUtf"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.MapUtfRecipeTest",
+      "report": {
+        "bytes": 22869,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.MapUtfRecipeTest.xml",
+        "sha256": "9a9173957c2ce8320095dd04c8ef3cd0ec73ee2fbb69408bcefb2f5c8b4cd7f2"
+      },
+      "skipped": 0,
+      "tests": 7
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.backport.VersionRecipeTest",
+          "name": "namedRecipeReplaysExactJavaOutputsAndFixedPoint"
+        },
+        {
+          "class": "com.m3.rewrite.backport.VersionRecipeTest",
+          "name": "alreadyRepairedOwnerOnlyGeneratesMissingTests"
+        },
+        {
+          "class": "com.m3.rewrite.backport.VersionRecipeTest",
+          "name": "missingDriftDuplicateWrongTypeAndOccupiedTargetsRefuse"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.backport.VersionRecipeTest",
+      "report": {
+        "bytes": 22279,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.backport.VersionRecipeTest.xml",
+        "sha256": "b7af15c14011ad2382fc3b5bf8ab043708c2a378e74a5e298012c0b4aac46c5a"
+      },
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.scope.M3RecipeScopeDeclarationTest",
+          "name": "everyCurrentRecipeHasExternalScopeAuthority"
+        },
+        {
+          "class": "com.m3.rewrite.scope.M3RecipeScopeDeclarationTest",
+          "name": "fixedAndTargetInferredScopesFollowTheM3PromotionOrder"
+        },
+        {
+          "class": "com.m3.rewrite.scope.M3RecipeScopeDeclarationTest",
+          "name": "currentRegistryIsBehaviorAndContractPreserving"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.scope.M3RecipeScopeDeclarationTest",
+      "report": {
+        "bytes": 22305,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.scope.M3RecipeScopeDeclarationTest.xml",
+        "sha256": "df105f6269d64628bf6b7ec29f66ea0a7bbd87973e4e27d770181e6ba3accbc3"
+      },
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.scope.M3ScopeContractTest",
+          "name": "scopeOrderingPromotionAndNextAreMechanical"
+        },
+        {
+          "class": "com.m3.rewrite.scope.M3ScopeContractTest",
+          "name": "policyPromotesOnlyAsFarAsItsTargetsRequire"
+        },
+        {
+          "class": "com.m3.rewrite.scope.M3ScopeContractTest",
+          "name": "sourcePathInferenceKeepsIndependentFilesAtTheNarrowestBoundary"
+        },
+        {
+          "class": "com.m3.rewrite.scope.M3ScopeContractTest",
+          "name": "invalidInferenceInputsAreRefused"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.scope.M3ScopeContractTest",
+      "report": {
+        "bytes": 22391,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.scope.M3ScopeContractTest.xml",
+        "sha256": "9e4cebfe66011a9d176685e213108766dc9f9f02be96124554c4f7f3783a279e"
+      },
+      "skipped": 0,
+      "tests": 4
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.scope.M3ScopeCoverageClosureTest",
+          "name": "editScopeFormsTheExactMonotonicAuthorityLattice"
+        },
+        {
+          "class": "com.m3.rewrite.scope.M3ScopeCoverageClosureTest",
+          "name": "inferenceRejectsEveryNonCanonicalPathFamily"
+        },
+        {
+          "class": "com.m3.rewrite.scope.M3ScopeCoverageClosureTest",
+          "name": "scopePolicyCoversFixedInferredAndExplicitContractModes"
+        },
+        {
+          "class": "com.m3.rewrite.scope.M3ScopeCoverageClosureTest",
+          "name": "registryCoversKnownUnknownNullAndClassLookupPaths"
+        },
+        {
+          "class": "com.m3.rewrite.scope.M3ScopeCoverageClosureTest",
+          "name": "inferenceCoversMavenOpenJdkBuildTestAndRepositoryLayouts"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.scope.M3ScopeCoverageClosureTest",
+      "report": {
+        "bytes": 22590,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.scope.M3ScopeCoverageClosureTest.xml",
+        "sha256": "33856fc8c26d06aa3ac4a937bd6d54b96b15b191116c8b6d5cf7daf4f68389f3"
+      },
+      "skipped": 0,
+      "tests": 5
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.scope.M3ScopeDefensiveBranchTest",
+          "name": "openJdkAndBuildPathFallbacksCoverNonClassAndEmptyRelativeBranches"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.scope.M3ScopeDefensiveBranchTest",
+      "report": {
+        "bytes": 22032,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.scope.M3ScopeDefensiveBranchTest.xml",
+        "sha256": "10264f34f9632770695832d27a3f9506dd3a72c07c337d3ceb299e1448a1ef13"
+      },
+      "skipped": 0,
+      "tests": 1
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.rewrite.semantic.M3SemanticHashRecipeTest",
+          "name": "openRewriteRecipeEmitsMethodAndFileRowsWithoutMutation"
+        },
+        {
+          "class": "com.m3.rewrite.semantic.M3SemanticHashRecipeTest",
+          "name": "formattingAndCommentsDoNotChangeBehavioralFingerprint"
+        },
+        {
+          "class": "com.m3.rewrite.semantic.M3SemanticHashRecipeTest",
+          "name": "realLogicChangeChangesBehavioralFingerprint"
+        },
+        {
+          "class": "com.m3.rewrite.semantic.M3SemanticHashRecipeTest",
+          "name": "admittedAtomizationPreservesBehaviorButAddsArchitectureIdentity"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.m3.rewrite.semantic.M3SemanticHashRecipeTest",
+      "report": {
+        "bytes": 22470,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.semantic.M3SemanticHashRecipeTest.xml",
+        "sha256": "3efacb9967bbc060a204ebb022062ce3ca675041aa0ba9d4b4d99a3dca33e138"
+      },
+      "skipped": 0,
+      "tests": 4
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.synexia.rewrite.M3DocumentJavadocContractRecipeTest",
+          "name": "reviewedPostimageIsAlreadyFixedPoint"
+        },
+        {
+          "class": "com.synexia.rewrite.M3DocumentJavadocContractRecipeTest",
+          "name": "appliesReviewedDocumenterChangeOnceAndReachesFixedPoint"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.synexia.rewrite.M3DocumentJavadocContractRecipeTest",
+      "report": {
+        "bytes": 22175,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.synexia.rewrite.M3DocumentJavadocContractRecipeTest.xml",
+        "sha256": "fc9bda8597fec2bfcd0e4f1743ef60b5d271c9331b8f18b1564dcbd478685888"
+      },
+      "skipped": 0,
+      "tests": 2
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.synexia.rewrite.M3MIndexJniNewStringAdmissionRecipeTest",
+          "name": "reviewedPostimageIsAlreadyFixedPoint"
+        },
+        {
+          "class": "com.synexia.rewrite.M3MIndexJniNewStringAdmissionRecipeTest",
+          "name": "configuredRecipeRoundTripsWithoutAdmittingAnImplicitCrate"
+        },
+        {
+          "class": "com.synexia.rewrite.M3MIndexJniNewStringAdmissionRecipeTest",
+          "name": "appliesExactStringOwnerAndReachesFixedPoint"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.synexia.rewrite.M3MIndexJniNewStringAdmissionRecipeTest",
+      "report": {
+        "bytes": 22341,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.synexia.rewrite.M3MIndexJniNewStringAdmissionRecipeTest.xml",
+        "sha256": "9c65ec9443ce89cc2e4b5ae3c4ef48385b0f9129dacc71e96bea7b4491c9b0a0"
+      },
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.synexia.rewrite.M3MIndexJoinedCharsViewRecipeTest",
+          "name": "actualSchedulerReplayAndFixedPoint"
+        },
+        {
+          "class": "com.synexia.rewrite.M3MIndexJoinedCharsViewRecipeTest",
+          "name": "alreadyAppliedIsUnchanged"
+        },
+        {
+          "class": "com.synexia.rewrite.M3MIndexJoinedCharsViewRecipeTest",
+          "name": "changedDependencyRefusedDuringScan"
+        },
+        {
+          "class": "com.synexia.rewrite.M3MIndexJoinedCharsViewRecipeTest",
+          "name": "missingClosureRefused"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.synexia.rewrite.M3MIndexJoinedCharsViewRecipeTest",
+      "report": {
+        "bytes": 22394,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.synexia.rewrite.M3MIndexJoinedCharsViewRecipeTest.xml",
+        "sha256": "bcf6fbf515a3f81d070ccf5360bd823c986b2ccdb05e9d9ab69ab6ebd5c3f996"
+      },
+      "skipped": 0,
+      "tests": 4
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.synexia.rewrite.M3MIndexStringBulkCharBoundaryRecipeTest",
+          "name": "reviewedPostimageIsAlreadyFixedPoint"
+        },
+        {
+          "class": "com.synexia.rewrite.M3MIndexStringBulkCharBoundaryRecipeTest",
+          "name": "configuredRecipeRoundTripsWithoutAdmittingAnImplicitCrate"
+        },
+        {
+          "class": "com.synexia.rewrite.M3MIndexStringBulkCharBoundaryRecipeTest",
+          "name": "appliesExactJdkOwnerAndReachesFixedPoint"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.synexia.rewrite.M3MIndexStringBulkCharBoundaryRecipeTest",
+      "report": {
+        "bytes": 22342,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.synexia.rewrite.M3MIndexStringBulkCharBoundaryRecipeTest.xml",
+        "sha256": "35d3ce545fec250c1ca2bb69ced2ab4e8187f52966176c047bc1ea09ad18a7e5"
+      },
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.synexia.rewrite.M3ScopeLiteralRepairRecipeTest",
+          "name": "reviewedPostimageIsAlreadyFixedPoint"
+        },
+        {
+          "class": "com.synexia.rewrite.M3ScopeLiteralRepairRecipeTest",
+          "name": "repairsExactMalformedPreimageAndReachesFixedPoint"
+        }
+      ],
+      "module": "m3/tooling/migration-recipes",
+      "name": "com.synexia.rewrite.M3ScopeLiteralRepairRecipeTest",
+      "report": {
+        "bytes": 22156,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.synexia.rewrite.M3ScopeLiteralRepairRecipeTest.xml",
+        "sha256": "dfd2671724bc7c59b762ce41fb7627dffcce7f536cd4861cbde3dec938de23ca"
+      },
+      "skipped": 0,
+      "tests": 2
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.a3.A3AlgTest",
+          "name": "validatesTriPlatformEvidenceAndLicenseBoundLineage"
+        },
+        {
+          "class": "com.m3.a3.A3AlgTest",
+          "name": "permissiveAdaptationRequiresReviewedGithubLicense"
+        },
+        {
+          "class": "com.m3.a3.A3AlgTest",
+          "name": "strictCandidateRequiresAllThreeChallengePlatforms"
+        }
+      ],
+      "module": "m3/tooling/a3",
+      "name": "com.m3.a3.A3AlgTest",
+      "report": {
+        "bytes": 20261,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/a3/target/surefire-reports/TEST-com.m3.a3.A3AlgTest.xml",
+        "sha256": "ff75c2b9f8ad025d3b76439bc98ae816ae2fed685e909b8f4dbe2f565878cab7"
+      },
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.a3.A3ApplyTest",
+          "name": "appliesRetainedConvergenceRecipeWithoutWritingJdkSource"
+        },
+        {
+          "class": "com.m3.a3.A3ApplyTest",
+          "name": "refusesRootWritesAndNonJavaTargets"
+        },
+        {
+          "class": "com.m3.a3.A3ApplyTest",
+          "name": "unmatchedJavaStillProducesFixedPointCandidateReceipt"
+        }
+      ],
+      "module": "m3/tooling/a3",
+      "name": "com.m3.a3.A3ApplyTest",
+      "report": {
+        "bytes": 20578,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/a3/target/surefire-reports/TEST-com.m3.a3.A3ApplyTest.xml",
+        "sha256": "6e49ae7e593b52d898ad5ec169a4bc64dc68361044d1be777714127d901fdbf5"
+      },
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.a3.A3InvTest",
+          "name": "inventoryIsStableAcrossProductNativeTestAndResourceTrees"
+        }
+      ],
+      "module": "m3/tooling/a3",
+      "name": "com.m3.a3.A3InvTest",
+      "report": {
+        "bytes": 20086,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/a3/target/surefire-reports/TEST-com.m3.a3.A3InvTest.xml",
+        "sha256": "fb845a5b4355d83a321e2da78795ce329047d1813ae658beb33aa670c24617df"
+      },
+      "skipped": 0,
+      "tests": 1
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.a3.A3LabTest",
+          "name": "patternizeOnlyIsHonestNoChangeWhileAtomizeChanges"
+        },
+        {
+          "class": "com.m3.a3.A3LabTest",
+          "name": "rootWriteGuardStillRejectsLabOutputOutsideM3Build"
+        },
+        {
+          "class": "com.m3.a3.A3LabTest",
+          "name": "persistedEvidenceStaysUnderM3BuildAndIsDeterministic"
+        },
+        {
+          "class": "com.m3.a3.A3LabTest",
+          "name": "regexMatrixIsPrecompiledDeterministicAndPayloadSensitive"
+        },
+        {
+          "class": "com.m3.a3.A3LabTest",
+          "name": "inMemoryCompilerSurfacesDeliberateJavacFailure"
+        },
+        {
+          "class": "com.m3.a3.A3LabTest",
+          "name": "hostileCorpusConvergesThroughAllAtomPatternSchedules"
+        }
+      ],
+      "module": "m3/tooling/a3",
+      "name": "com.m3.a3.A3LabTest",
+      "report": {
+        "bytes": 20675,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/a3/target/surefire-reports/TEST-com.m3.a3.A3LabTest.xml",
+        "sha256": "afaf5f5ccaff3a687f7d32cf34e1d17127451e3016ec9d7388b9fbbc89535e11"
+      },
+      "skipped": 0,
+      "tests": 6
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.a3.A3PlanTest",
+          "name": "plansJepJbsAndCommunityRowsWithoutErasingDisposition"
+        }
+      ],
+      "module": "m3/tooling/a3",
+      "name": "com.m3.a3.A3PlanTest",
+      "report": {
+        "bytes": 20084,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/a3/target/surefire-reports/TEST-com.m3.a3.A3PlanTest.xml",
+        "sha256": "7841483da5d0e4ff56d4826d48b8d6366eb6ae56e2d7a7e652940faee26ca9cd"
+      },
+      "skipped": 0,
+      "tests": 1
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "methods": [
+        {
+          "class": "com.m3.a3.A3WorkTest",
+          "name": "directRowsCanonicalizeEvidenceCoordinates"
+        },
+        {
+          "class": "com.m3.a3.A3WorkTest",
+          "name": "outputIsDeterministicAndLivesOnlyUnderM3Build"
+        },
+        {
+          "class": "com.m3.a3.A3WorkTest",
+          "name": "queueDriftAndDuplicatePathsFailClosed"
+        },
+        {
+          "class": "com.m3.a3.A3WorkTest",
+          "name": "cliWorkCommandConsumesExplicitPrecomputedInputs"
+        },
+        {
+          "class": "com.m3.a3.A3WorkTest",
+          "name": "expandsQueueIntoSerialFileAtomsWithoutWeakeningJoinScope"
+        }
+      ],
+      "module": "m3/tooling/a3",
+      "name": "com.m3.a3.A3WorkTest",
+      "report": {
+        "bytes": 20529,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/work/m3/tooling/a3/target/surefire-reports/TEST-com.m3.a3.A3WorkTest.xml",
+        "sha256": "96155973c51c451cb0442b94889a7016cae2f8e1016feca5de0c2920edc9048c"
+      },
+      "skipped": 0,
+      "tests": 5
+    }
+  ],
+  "javaTests": 239,
+  "originalCoverageThresholdsRetained": true,
+  "skipped": 0
+}

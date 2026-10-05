@@ -1,0 +1,45 @@
+--- package_evidence_state_v1.py
++++ package_evidence_state_v2.py
+@@ -113,6 +113,13 @@
+         self.warnings: list[str] = []
+         self.reference_sources: list[tuple[Path, Path]] = []
+         self.lanes = self.read_lanes()
++        paths = self.plan.get("inputManifestPaths")
++        self.explicit_input_manifests = None
++        if "inputManifestPaths" in self.plan:
++            expected = sorted("evidence/" + row["lane"] + "/inputs.json" for row in self.lanes)
++            if paths != expected:
++                raise ValueError("Explicit input manifests must exactly cover selected lane roots")
++            self.explicit_input_manifests = {self.root / path for path in paths}
+         self.primary = self.discover()
+ 
+     def read_lanes(self) -> list[dict]:
+@@ -237,10 +244,14 @@
+                                "mode": stat.S_IMODE(path.stat().st_mode) & 0o777,
+                                "chunks": chunks}
+         self.sha_paths[digest].append(logical)
+-        if path.name == "inputs.json" and under(path, self.root / "evidence"):
+-            self.reference_sources.append((path, path.parent))
+-        if path.name == "SOURCE-MANIFEST.json" and path.parent.name == "proof":
+-            self.reference_sources.append((path, path.parent.parent))
++        if self.explicit_input_manifests is not None:
++            if path in self.explicit_input_manifests:
++                self.reference_sources.append((path, path.parent))
++        else:
++            if path.name == "inputs.json" and under(path, self.root / "evidence"):
++                self.reference_sources.append((path, path.parent))
++            if path.name == "SOURCE-MANIFEST.json" and path.parent.name == "proof":
++                self.reference_sources.append((path, path.parent.parent))
+ 
+     def audit_references(self) -> None:
+         seen_sources: set[Path] = set()
+@@ -309,6 +320,9 @@
+     def collect(self) -> None:
+         for path in self.primary:
+             self.add(path)
++        if (self.explicit_input_manifests is not None
++                and {path for path, _ in self.reference_sources} != self.explicit_input_manifests):
++            raise ValueError("A selected lane input manifest was not retained")
+         self.audit_references()
+         if self.strict:
+             if self.primary != self.discover():

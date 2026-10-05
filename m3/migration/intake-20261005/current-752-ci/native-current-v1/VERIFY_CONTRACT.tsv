@@ -1,0 +1,9 @@
+order	gate	required_result	actual_result	evidence
+0	source and command seals	exact current inputs; fresh lane	PASS: patch b566b4dcc748c07a39ad53bf9ef00ae6a6a4ef0d8659b23e5bfd807ac62aabdb	evidence/current-v1/proof/PATCH.json
+1	lint	9 commands accepted with sealed outcomes	PASS; exit 0; no input drift	evidence/current-v1/chain/current-v1/01-lint.json
+2	compile	10 commands accepted with sealed outcomes	PASS; exit 0; no input drift	evidence/current-v1/chain/current-v1/02-compile.json
+3	test	6 commands accepted with sealed outcomes	PASS; exit 0; no input drift	evidence/current-v1/chain/current-v1/03-test.json
+4	runtime	7 commands accepted with sealed outcomes	PASS; exit 0; no input drift	evidence/current-v1/chain/current-v1/04-runtime.json
+5	final audit	8147 inputs; 65 repository blobs; 45 proof trees; 32 commands; 61 artifacts	PASS; 5c646be616f481b835bcf65607408f1573bd589716d1ea98cbf56f4616298e33	evidence/current-v1/FINAL-AUDIT.json
+6	archive readback	every archive part object shard and logical file reconstructed and hashed	see separately produced archive integrity receipt	evidence-bundle/VERIFY.json
+7	independent delivery readback	compare reconstructed logical bytes and actual result chain to frozen originals	see separately produced independent report	INDEPENDENT-READBACK.json

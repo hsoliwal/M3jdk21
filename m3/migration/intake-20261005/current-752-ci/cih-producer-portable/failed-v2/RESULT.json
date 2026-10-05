@@ -1,0 +1,42 @@
+{
+  "canonicalOfflineSourceClosure": false,
+  "canonicalProductionApplied": false,
+  "compiledArtifacts": {
+    "bytes": 8362,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v2/build-artifacts.json",
+    "sha256": "29443fb2e27553d5da2ddd7603cfa769e918f1ec97d3d72b4a7a4224244e58f6"
+  },
+  "consumerQualified": false,
+  "crossFamilyAtomicity": false,
+  "failure": {
+    "message": "tests command failed with exit 1",
+    "stage": "tests",
+    "type": "Refusal"
+  },
+  "inputManifestSHA256": "45c85cad1b9e7a33bdb13268fb708f294595b44fac3176d3cdc7585a60eda3b7",
+  "junit": null,
+  "patchSHA256": "28d88ff4cf114bb9f7c888de88f7fc1d7b658912635d1934ee3f9b8387d30e17",
+  "receipts": [
+    {
+      "bytes": 1805,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v2/chain/01-static.json",
+      "sha256": "84596a9637a936f35318ab2962ee0cab76de67fe25dec2717471eb3f19a55d07"
+    },
+    {
+      "bytes": 2495,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v2/chain/02-compile.json",
+      "sha256": "c25640d14ff6fa284a117d3240d2f481352012734123c6ecf279528abcc9d913"
+    },
+    {
+      "bytes": 2812,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v2/chain/03-tests.json",
+      "sha256": "f88b4c3f36452c01d4b8c94e9885439d63df56d40e7ab6a4f93129035449e347"
+    }
+  ],
+  "runtime": null,
+  "schema": "synexia.cih-752.proof-result/1",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "status": "STOP",
+  "strictCanonicalAdmission": false,
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2"
+}

@@ -1,0 +1,139 @@
+[
+  {
+    "disposition": "reported-result",
+    "lane": "current-v1",
+    "marker": "evidence/current-v1/RESULT.json",
+    "markerBytes": 3750,
+    "markerSHA256": "1e82bec642c8ea8ece15e8caeeed283416c1b612e22c357b20178524b6ab1605",
+    "originalResult": {
+      "build_artifacts": 61,
+      "class_artifacts": 57,
+      "commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+      "current_instruction_blob": "7038981e6d86a5e3bae25803fa0b6d77b557d538",
+      "final_audit_sha256": "5c646be616f481b835bcf65607408f1573bd589716d1ea98cbf56f4616298e33",
+      "java_sources": 31,
+      "native_implementation_added": false,
+      "native_refusals": [
+        "missing native library",
+        "ABI version 2"
+      ],
+      "new_junit_tests": 0,
+      "not_claimed": [
+        "Whole module/reactor",
+        "Maven/OpenRewrite native recipe execution",
+        "Annotation processing",
+        "Other platforms",
+        "SWT/Jini integration",
+        "Performance or memory measurement",
+        "Complete hermetic OS image"
+      ],
+      "observations": {
+        "existing-lazy-list": {
+          "assertions": 44148
+        },
+        "existing-real-tree-superset": {
+          "assertions": 293132,
+          "randomForests": 400
+        },
+        "java-lane-oracle": {
+          "assertions": 2895062
+        },
+        "java-real-tree": {
+          "assertions": 94299,
+          "nodes": 5021,
+          "queryProviderCalls": 0
+        },
+        "jni-lane-ubsan-off": {
+          "assertions": 2895084
+        },
+        "jni-lane-ubsan-on": {
+          "assertions": 2895084
+        },
+        "jni-real-tree-ubsan-off": {
+          "assertions": 94299,
+          "nodes": 5021,
+          "queryProviderCalls": 0
+        },
+        "jni-real-tree-ubsan-on": {
+          "assertions": 94299,
+          "nodes": 5021,
+          "queryProviderCalls": 0
+        }
+      },
+      "patch_sha256": "b566b4dcc748c07a39ad53bf9ef00ae6a6a4ef0d8659b23e5bfd807ac62aabdb",
+      "performance_measurement": false,
+      "production_source_changes": 0,
+      "repository": "hsoliwal/com.synexia",
+      "repository_inputs": 65,
+      "result": "PASS",
+      "root_tree": "6c055c584ebb5fa177420d1668db73bcb7e7fef4",
+      "scope": "Fresh current Linux x86-64 exact 31-Java-source closure and existing short-flag JNI kernel; production unchanged.",
+      "semantic_negative_controls": [
+        {
+          "accepted": true,
+          "actual_exit": 1,
+          "name": "reject-lost-bit-15"
+        },
+        {
+          "accepted": true,
+          "actual_exit": 1,
+          "name": "reject-missing-zero-holes"
+        },
+        {
+          "accepted": true,
+          "actual_exit": 1,
+          "name": "reject-native-any-not-all"
+        }
+      ],
+      "shared_libraries": 4,
+      "source_inputs_verified": 8147,
+      "stage_order": [
+        "patch",
+        "lint",
+        "compile",
+        "test",
+        "runtime"
+      ],
+      "stages": [
+        {
+          "accepted_commands": 9,
+          "command_receipts_sha256": "426ac256ce8a0eafd3392c8ca2726364ec82e1dc9f38771812110dcd9090921b",
+          "exit_code": 0,
+          "receipt": "chain/current-v1/01-lint.json",
+          "receipt_sha256": "8dc0da535008efa8d198e2dc97cef6b2ab3f5bafadda8c259f89e609e45defab",
+          "stage": "lint"
+        },
+        {
+          "accepted_commands": 10,
+          "command_receipts_sha256": "63257468140a54b647b1483291596d88f6a5133a0421a2e3ee594f08148b5e6c",
+          "exit_code": 0,
+          "receipt": "chain/current-v1/02-compile.json",
+          "receipt_sha256": "8a0d4b3165b9bf51ca0da616cd77df3d3a04069af46c996443cc275d335d9ceb",
+          "stage": "compile"
+        },
+        {
+          "accepted_commands": 6,
+          "command_receipts_sha256": "8f9a6291f47e83686d90bf336e972158472eeed0f11a8b84830c60a0a3bc256a",
+          "exit_code": 0,
+          "receipt": "chain/current-v1/03-test.json",
+          "receipt_sha256": "e0bd1717185d3b20f59051d7b406c21a73ff91c35a6c50b8f301e19cee76da2d",
+          "stage": "test"
+        },
+        {
+          "accepted_commands": 7,
+          "command_receipts_sha256": "d99a9725c93c3d8bc16052c2e1d58682ce8f7b8fc7d295029def0e9a28e32d07",
+          "exit_code": 0,
+          "receipt": "chain/current-v1/04-runtime.json",
+          "receipt_sha256": "f4b1a7dcdff64289e55d82c9c0afa7913b83e4b52c6f7c1cb3205b3fdf78a823",
+          "stage": "runtime"
+        }
+      ],
+      "strict_repository_admission": false,
+      "unchanged_prior_inputs": 64
+    },
+    "reportedBaseline": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+    "reportedStatus": "PASS",
+    "required": true,
+    "terminal": true
+  }
+]

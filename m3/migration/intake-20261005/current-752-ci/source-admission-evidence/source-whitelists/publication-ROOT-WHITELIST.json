@@ -1,0 +1,336 @@
+{
+  "status": "REVIEWED_SOURCE_EVIDENCE",
+  "files": [
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/README.md",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a2a9893db7f10e7fb93e8f17280e07cb161b8b11",
+      "sha256": "c4f6015fb69aa7cf39bc6c6694516060f0589fb36b8c1158fdb478b8afc87703",
+      "bytes": 5380,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/COPIED_INPUTS.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/COPIED_INPUTS.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cd259f495a58c582fdf80d6798f2d3135e78d400",
+      "sha256": "5538624b0a313737802a816a5c2a9126dd6d9952b9589f4f8f033ba704771abf",
+      "bytes": 6678,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/author-text-resources.py",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/author-text-resources.py",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b220eee40008ffba8d624cfa7b37e0cb49929ee8",
+      "sha256": "56131f696b1f278c433821338aec86d273b01ac06c50d3f4eee594ee0004a5f3",
+      "bytes": 6418,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/ACQUISITIONS.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/ACQUISITIONS.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c81a34d8d0ba1f8e53891cd2759bd9deda875f73",
+      "sha256": "7f53911ce1de3974fbd0bae2290d89f6520d127572f4e02545a7e3b9c6336af8",
+      "bytes": 264829,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/INDEX.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/INDEX.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7cee6421b6c3d68ded6275eb4e8abc10c192509e",
+      "sha256": "8a7986f83b3f80b252b1bb65bb38d83dcb8f0bec7ec521eaef7cd7b566a97e81",
+      "bytes": 2964,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/README.md",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "759e4de607a69495e1f9564211392d987e0733f9",
+      "sha256": "cdf843c21a56e538ce9a15d5297961073ea08d17ed5120a2d0f7cb57365e7e5b",
+      "bytes": 4328,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/REPORT.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/REPORT.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0f6c9002d2a525f8a2f759e4fd66ffd7d0bc072b",
+      "sha256": "b3451ffae472498a6d94d01f49aebed75928e68b414ccd6a5ac2655c6391e100",
+      "bytes": 13199,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/attempted-job-detail-111763396934.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/attempted-job-detail-111763396934.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1e3f1a953e77f22fc4f60acf41621d1b3a66d7ce",
+      "sha256": "88192edc8ce3b84943535216f9687f6a11440ec491b0aa119a3ec0eed8a18ac7",
+      "bytes": 156,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/attempted-job-detail-111763397210.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/attempted-job-detail-111763397210.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1e3f1a953e77f22fc4f60acf41621d1b3a66d7ce",
+      "sha256": "88192edc8ce3b84943535216f9687f6a11440ec491b0aa119a3ec0eed8a18ac7",
+      "bytes": 156,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/attempted-job-detail-111763397781.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/attempted-job-detail-111763397781.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1e3f1a953e77f22fc4f60acf41621d1b3a66d7ce",
+      "sha256": "88192edc8ce3b84943535216f9687f6a11440ec491b0aa119a3ec0eed8a18ac7",
+      "bytes": 156,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/check-runs.first-page.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/check-runs.first-page.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "37c43769f9f02bbebcdd6f2a877d61f0ea7936e0",
+      "sha256": "ec539b8da07e52f73c02465d9a0b8fa34b519d2c86bf30b1c965d311e55f5af6",
+      "bytes": 116267,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/combined-status.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/combined-status.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0c8b8056fd4afcb854e23af595fd69fa8a94b3b0",
+      "sha256": "3c91caab22dad3973962314f0f0d09d9f959792b3f7a5f0719262e27e7f3f685",
+      "bytes": 15,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/foundation-command-excerpts.txt",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/foundation-command-excerpts.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b963a4847e181099ce468c387e857153adc09ef9",
+      "sha256": "917ccef20aa289428426ba14ccf7e532e15bbbe0f3cd9ae3a8f3562384e0b41c",
+      "bytes": 4747,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/java-test-compile-excerpt.txt",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/java-test-compile-excerpt.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e9c6ff5f5fc9588732e69ea055ef94d5e1d33e32",
+      "sha256": "0d1fca352c18ae7c7759ca0bcc24b3fc099b01bbfbb7bd4dfa257ce0d9a7c26f",
+      "bytes": 2654,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/job-111763396934.log",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/job-111763396934.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8fa78f249c7642437d3720923755cb6a01d2d391",
+      "sha256": "5bf59102405b8a059dff536683a3344857f1e0a6d938a7288e1c43449f51291d",
+      "bytes": 78707,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/job-111763397210.log",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/job-111763397210.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ec8d701a0f2ac617068f91ba32de203bae3c4c96",
+      "sha256": "28a1d7372652aa3d704aae587c8e3f0f1763ee9b077a4d6fb806d6c2404b7676",
+      "bytes": 14446,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/job-111763397781.log",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/job-111763397781.log",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f822dc080b5784fc8b75b12332e179f11f3ffe23",
+      "sha256": "03d194f95a632e9e2ccae5f4756253cb3776c23172e4a2f4986874c37302aee1",
+      "bytes": 24769,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/python-import-excerpt.txt",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/python-import-excerpt.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "12138f6a451fc3db9dbc695e851fb2bb6a5532c8",
+      "sha256": "d6f4d5226df1904a87d32d63c16ca289745dd7c68e668151ad53153414aa875e",
+      "bytes": 1060,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/run-37310184481-jobs.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/run-37310184481-jobs.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "707285792977a159ff3d07aa939ae4c67b5e9b15",
+      "sha256": "58cc07d538b7ed3b663ee5baf4ed403da9e87f20b2406ba2ff6b099dcae7ca8e",
+      "bytes": 2367,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/run-37310184488-jobs.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/run-37310184488-jobs.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "54be93c320a60b197e5bca5e103b2653ff47f99e",
+      "sha256": "7551a6c3f4068dd37e5452448929bd37a5cf36c6516728978f02e5a0cd2cfd5e",
+      "bytes": 2143,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/run-37310184801-jobs.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/run-37310184801-jobs.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d4106d41e7023d5f26adef2455937e9e9dd2a436",
+      "sha256": "86711f471b3a400946b9ecd36e4ea02447b12d3b95097ff873d0dd38b7719584",
+      "bytes": 2747,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/workflow-runs.first-page.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/workflow-runs.first-page.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3e1dd489f3c9c68d9c667e1db126415ecfeed4d2",
+      "sha256": "6b28960e4c6643312e0c28fc33420550cbeca8c6cec2cd65026af22139d070c9",
+      "bytes": 3535,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/FINAL_REPORT.md",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/FINAL_REPORT.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8374478dcfa9887290609321f4f5f28a61546748",
+      "sha256": "9398e994685e1af07e10bfdec9ac7883dac856c055394daa4ce93e159f017b56",
+      "bytes": 1128,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/OUTPUT_CONTRACT.tsv",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/OUTPUT_CONTRACT.tsv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "10d7dd19c28b2389e22d09775b7c400a639b3cfc",
+      "sha256": "e10a3e8c6cac4ff480bf98ba33593d7591ef3b47c85e793714f1164759bf24d4",
+      "bytes": 644,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/PROVENANCE.tsv",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/PROVENANCE.tsv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0e1b96c555093e88aa27bfa46d661dd9d9bbd258",
+      "sha256": "4e5523e7fb5c37df8be0f327ed63a4b7b51b371117ba53cccbed8e4ac05d70e3",
+      "bytes": 708,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/RUN_CONTEXT.tsv",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/RUN_CONTEXT.tsv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0394b6fd874313406b2f989a707beaa8437dda6f",
+      "sha256": "6c980e16d0d4e4f8a58723522cb6e716fd5a44f30b0e3a27e75f848b726bdfc8",
+      "bytes": 583,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/STATUS.tsv",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/STATUS.tsv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b25b7644c66068560eae4ea1cea3f11b530eea28",
+      "sha256": "eab61f7203ce00769b1d67824e206c6552d9821c092f8d18621bee0761fc1c1d",
+      "bytes": 479,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/TASK_PACKET.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/TASK_PACKET.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "42a4acec9c01052a0e1183842c62d189cd40b8a3",
+      "sha256": "574537187fbbbbdc3800e64c31f19f4d9a4a63f49d6bc43935609ecd35bfe4af",
+      "bytes": 3562,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/VERIFY_CONTRACT.tsv",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/VERIFY_CONTRACT.tsv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7ebf0cb5e7b3815bd5a00557a701ed860b9029e2",
+      "sha256": "4e44f8931c93e3f4c58e3eb8359447acb6d8d2d5476a3d37b32fd505fe1bdcd5",
+      "bytes": 990,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/review/COPIED_REVIEW.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/review/COPIED_REVIEW.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "89db23984095361cdbbeba5f8f71f04a1f1b88d9",
+      "sha256": "37089aee060fe37bee3ac7e6fabc5f6cf33181de17c000cdf34cce1fd437e055",
+      "bytes": 379,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/review/cit-text3-review.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/review/cit-text3-review.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6eab5a2c0e11bd192230ea4c9e73a0e62322152f",
+      "sha256": "65112b1b058d200764e115a6f45cba1c545c80d09c009bddb6c67f500de39dc0",
+      "bytes": 11620,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/review/cit-text3-review.md",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/review/cit-text3-review.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7eb482e8669e0c329de875b99cfe6cdf838c8a1a",
+      "sha256": "3d43e216f7b89729a59019f7a8c29fa7ae6778dcddc79473f7831e00d8788b88",
+      "bytes": 2746,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/text-authoring.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/text-authoring.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5fb79462e5586e8117a699d2dff8c898bae3161a",
+      "sha256": "0f6e2d3d8f96b003e97ab25282967fac96df871a5713edd2561b4c70f6c2e821",
+      "bytes": 1691,
+      "encoding": "utf-8"
+    }
+  ],
+  "count": 33
+}

@@ -1,0 +1,142 @@
+[
+  {
+    "bytes": 493,
+    "path": "classes/META-INF/rewrite/m3-ci-752-a3.yml",
+    "sha256": "2dfa64c57bb5ad3f973852d6b8ea5e48f139215e2b737c43583fcd5f2773dbb8"
+  },
+  {
+    "bytes": 3690,
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$1.class",
+    "sha256": "89b442e92cc55de2172e032f4f0650647509a015cf2b72dd3ebba505ac6fa71f"
+  },
+  {
+    "bytes": 4810,
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$2.class",
+    "sha256": "1235413f44f1e53c83a5fa0786530ce15548c92c6b636b40118eef9847105611"
+  },
+  {
+    "bytes": 1230,
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$Inventory.class",
+    "sha256": "f54fea5844ba1b19ee22e5ccfae495d4a9b2b03e9edfb5bc09ac620321ef628f"
+  },
+  {
+    "bytes": 2128,
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$Target.class",
+    "sha256": "7eb62aee1d3e3f89575b4973ffba8e1defae3270853de61c96d1efbd21fe128e"
+  },
+  {
+    "bytes": 12466,
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.class",
+    "sha256": "4193579cb92dd4afca14b5ee67d57580dc1b1afa64fef31a5b608a13a0959c13"
+  },
+  {
+    "bytes": 1306,
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/manifest.tsv",
+    "sha256": "89d7df5d0190e71b6fb69797fe848b37f5ffb09e274f020135e0df948488782a"
+  },
+  {
+    "bytes": 10008,
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-1.txt",
+    "sha256": "0de471de5a54e1c87153e4b1c23c4013a800f07595cfc05eec7bd4e68f1345d6"
+  },
+  {
+    "bytes": 4466,
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-2.txt",
+    "sha256": "8922e21e4f814dc99282cf1828786a0347552454003e23ac2fa91aa8710851b1"
+  },
+  {
+    "bytes": 3522,
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-3.txt",
+    "sha256": "a53bdeee8afe28b90cb0e348e718b70610a9487edb1b75b46e09bfb76e0f3dc9"
+  },
+  {
+    "bytes": 2338,
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-4.txt",
+    "sha256": "521a7f07e59f507e0ce3193a3d0c7540c232a37c74128d954b52670677498241"
+  },
+  {
+    "bytes": 10008,
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-5.txt",
+    "sha256": "0de471de5a54e1c87153e4b1c23c4013a800f07595cfc05eec7bd4e68f1345d6"
+  },
+  {
+    "bytes": 4466,
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-6.txt",
+    "sha256": "8922e21e4f814dc99282cf1828786a0347552454003e23ac2fa91aa8710851b1"
+  },
+  {
+    "bytes": 9492,
+    "path": "test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+    "sha256": "d88f347f77069dc1e2e6a3871c68c55e76f885f324801957d041f9ecc31ec6f4"
+  },
+  {
+    "bytes": 4462,
+    "path": "test-classes/before/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+    "sha256": "d684f2c95622c32683dbdce162d2f49101c7431bfbba1927a34182dcecadc77f"
+  },
+  {
+    "bytes": 3383,
+    "path": "test-classes/before/m3/tooling/migration-recipes/pom.xml",
+    "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"
+  },
+  {
+    "bytes": 2338,
+    "path": "test-classes/before/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java",
+    "sha256": "280d7c08e9da9f618f4596516420a5c6c2de8f32fa1b52ff354853f3b0fb7c2b"
+  },
+  {
+    "bytes": 9492,
+    "path": "test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java",
+    "sha256": "d88f347f77069dc1e2e6a3871c68c55e76f885f324801957d041f9ecc31ec6f4"
+  },
+  {
+    "bytes": 4462,
+    "path": "test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java",
+    "sha256": "d684f2c95622c32683dbdce162d2f49101c7431bfbba1927a34182dcecadc77f"
+  },
+  {
+    "bytes": 6270,
+    "path": "test-classes/closure/A3AlgTest.java",
+    "sha256": "594ae68ab3994526b03d31db36aab0c11235a10c078c740ffaea7d597884efbe"
+  },
+  {
+    "bytes": 3137,
+    "path": "test-classes/closure/A3Fs.java",
+    "sha256": "ebddb148600afd7ee7df1175175df7da86b3a2cb048ca9b4e723d4eec5c2fe8c"
+  },
+  {
+    "bytes": 7885,
+    "path": "test-classes/closure/A3Plan.java",
+    "sha256": "e973e37826a09fc2571d4df5514cad4fafec37008d65b6a63cb6bf89a96f4800"
+  },
+  {
+    "bytes": 1021,
+    "path": "test-classes/com/synexia/rewrite/CiaRecipeTest$1.class",
+    "sha256": "d435d9b59bf82a6c4cdc5ea3b91ae6e861152f819032c77f6107bbd125384f65"
+  },
+  {
+    "bytes": 2502,
+    "path": "test-classes/com/synexia/rewrite/CiaRecipeTest$Fixture.class",
+    "sha256": "0d13889f97d6089acfd5ae0700a602cfa0ecc36cb0692ee64b6adfb2e5a78638"
+  },
+  {
+    "bytes": 3847,
+    "path": "test-classes/com/synexia/rewrite/CiaRecipeTest$RecordingSourceSet.class",
+    "sha256": "a0ae6837bb29b090092b0a797e456ee7edcab4607bee8c5abc9b9c3598df3c98"
+  },
+  {
+    "bytes": 1982,
+    "path": "test-classes/com/synexia/rewrite/CiaRecipeTest$Replay.class",
+    "sha256": "70692b831aed39e7309aa1a45a842475361ee2f97e94907d477bbff087dfc526"
+  },
+  {
+    "bytes": 2113,
+    "path": "test-classes/com/synexia/rewrite/CiaRecipeTest$Target.class",
+    "sha256": "c1f3a6a3399d9483a6da5ba9e13d82d1b96b40bbd33f27414233ef1ff10c8daf"
+  },
+  {
+    "bytes": 42381,
+    "path": "test-classes/com/synexia/rewrite/CiaRecipeTest.class",
+    "sha256": "1943dc06571b0d2945aadc04a35399c10b8b72930ec8d94347eaf33e95cee031"
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "canonicalProductionApplied": false,
+  "commandsSHA256": "fe9721674070989adacc9b8da30b96878099a892b4d1bc4ea8b3b2d012e277c5",
+  "expectedJUnitMethods": [
+    "allMixedStates",
+    "catalogueCompilationAndRuntime",
+    "exactRepairScope",
+    "initialRefusals",
+    "namedRecipeReplay",
+    "postScanDrift"
+  ],
+  "inputManifestSHA256": "88e63d70c0a92dace5e924fde82201a76b1002c25ace6d8fd6241f246e2728a4",
+  "projectFiles": 22,
+  "schema": "synexia.cia-752.prepared/1",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "specSHA256": "aba9dc9941853c8a7c2515fc72c7acd8cb05d61a776e27345701843c1daa5c83",
+  "stagingSHA256": "8bbf07b82a6f0004f8df81b1591ca02b25d76d58f57f705e2a48ade3f41ed4f5",
+  "status": "PREPARED_NOT_EXECUTED",
+  "strictCanonicalAdmission": false,
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2"
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "synexia.cic-752.authoring/1",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+  "recipe": "com.synexia.m3.Cic",
+  "ownerSHA256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+  "targets": [
+    {
+      "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+      "beforeSHA256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298",
+      "beforeBytes": 7782,
+      "afterSHA256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55",
+      "afterBytes": 7750,
+      "resource": "target-1.txt",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/source-baseline-v3/m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after",
+      "beforeSHA256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298",
+      "beforeBytes": 7782,
+      "afterSHA256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55",
+      "afterBytes": 7750,
+      "resource": "target-2.txt",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/source-baseline-v3/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv",
+      "beforeSHA256": "b901f0b1aae122711792a66dc9750b9ba4608d59613641e74f378218757cbb4d",
+      "beforeBytes": 734,
+      "afterSHA256": "0bff4ddf1d6a002510903127bc56c7a2921bfa5851ac8217007eb3699b9febac",
+      "afterBytes": 734,
+      "resource": "target-3.txt",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/source-baseline-v3/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv"
+    }
+  ],
+  "manifestSHA256": "7d443b17756355cb16d4871d68372194661aafb26cc650d15a71e6ba343d3d6f",
+  "admission": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-corpus-regex-admission.md",
+  "parentReceiverResultSHA256": "0d50bac3af04f4c1b498ca34c3b6c57ad76bf97aa3b51fbba1dc926d4b52d2a7",
+  "generatedOutputs": false,
+  "gatesRun": false,
+  "prior16PathsDisjoint": true,
+  "finalReceivingDistinctPaths": 19
+}

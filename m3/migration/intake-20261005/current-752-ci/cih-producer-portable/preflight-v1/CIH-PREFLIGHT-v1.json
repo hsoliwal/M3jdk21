@@ -1,0 +1,16 @@
+{
+  "schema": "synexia.cih-752.preflight-disposition/1",
+  "status": "STOPPED_PREFLIGHT_NO_PROOF_CREATED",
+  "observedAt": "2026-10-05T17:32:52.628983+00:00",
+  "specSHA256": "4c547c59a2bcbcf41000363a5c74064faea25c07926b11f6bf1b973e6e0d3e0b",
+  "runnerSHA256": "5ff7acc563cb45fa92ff1d6c35d06710e816cd93d4e1bcb16031bc151ca551d3",
+  "attemptedProof": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v1",
+  "reportedExitCode": 2,
+  "reportedToolOutput": "Refusal: closed project inventory required\n",
+  "proofDirectoryCreated": false,
+  "gatesExecuted": false,
+  "compilerExecuted": false,
+  "testsExecuted": false,
+  "cause": "Spec inputs were pathlib-component sorted; exact declared protocol requires sorted serialized relative-path strings. Same34 input identities, two inverted hyphenated path positions.",
+  "correction": "A separate v2spec sorts identical input rows by path string; no recipe, fixture, runner or resource body changes."
+}

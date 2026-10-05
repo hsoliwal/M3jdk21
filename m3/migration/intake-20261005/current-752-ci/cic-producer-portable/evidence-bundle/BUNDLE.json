@@ -1,0 +1,121 @@
+{
+  "boundary": "This is exact review/reconstruction evidence, not a hermetic toolchain image. Maven, JDK, Python and other dependency caches, compiled binaries, settings and credential material are omitted. Their sealed identities remain in the original manifests where recorded. OS, dynamic-library, shell and standard-library limits in the original tooling/results remain applicable. Packaging executes no proof gate and does not turn a focused or failed result into repository-wide admission.",
+  "chunkByteLimit": 524288,
+  "metadataShards": [
+    {
+      "bytes": 29133,
+      "kind": "files",
+      "member": "manifests/files-0001.jsonl",
+      "records": 100,
+      "sha256": "fb5978eca69e4e3c66fe035b24fcabb882cdea7920a6952c0b5307af7d389be2"
+    },
+    {
+      "bytes": 3210,
+      "kind": "omissions",
+      "member": "manifests/omissions-0001.jsonl",
+      "records": 12,
+      "sha256": "d60f4de3621de6df9dbb0590daf5f7e50af6bd382e441025449b5df6ae7803bd"
+    },
+    {
+      "bytes": 245622,
+      "kind": "references",
+      "member": "manifests/references-0001.jsonl",
+      "records": 640,
+      "sha256": "12b00e0fbe2ed5f08d7c4612701f8113a2fa8c4b0cddbbbfe48e159621d7ee8b"
+    },
+    {
+      "bytes": 245520,
+      "kind": "references",
+      "member": "manifests/references-0002.jsonl",
+      "records": 660,
+      "sha256": "34aaae8cff82249707204250e17044d7a91ea29bcd7072c919eb04e3f5bf19a4"
+    },
+    {
+      "bytes": 3688,
+      "kind": "references",
+      "member": "manifests/references-0003.jsonl",
+      "records": 10,
+      "sha256": "fa70a8f04432d9114a89eabde3ecf5cccf8568e3c82467503744360541749275"
+    }
+  ],
+  "partByteLimit": 1048576,
+  "parts": [
+    {
+      "bytes": 641196,
+      "members": 67,
+      "path": "part-0001.tar.gz",
+      "sha256": "a22a7ec431e02de315a9a7878f911b0818e021135c240f85c96dd64a3a9b31aa"
+    }
+  ],
+  "plan": {
+    "compiledBinaries": "hash-only",
+    "includePaths": [
+      "cic-authoring-v1",
+      "cic-spec-v1.json",
+      "cia-runtime-classpath-v1.txt",
+      "CIC-AUTHORED.json",
+      "QUALIFIED-CIC.json",
+      "review/cic-review.json",
+      "cic-package-inputs",
+      "cic-package-plan.json"
+    ],
+    "laneSelection": {
+      "additional": [],
+      "allowNotExecuted": [],
+      "includeAllExisting": false,
+      "required": [
+        "cic-producer-v1"
+      ]
+    },
+    "packageOwnerSHA256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574",
+    "proofGatesExecutedByPackaging": false,
+    "resultSHA256": "72d9ab1f3bb0065b70165f435cd93aad8710ca4671e60b94bfe21e614dd3855f",
+    "schema": "synexia.evidence.package-plan/1",
+    "scope": "Actual three-output Cic producer-v1 PASS with complete14-file task, exact reviewed source and metadata, all receipts/logs/generated outputs; prior16 bytes preserved; no parent consumer closure or toolchain image claim.",
+    "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+    "status": "FINAL_REVIEWED_SELECTION",
+    "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+    "toolCaches": "manifest-only"
+  },
+  "planSHA256": "257bfab2f4e0e444c7fbbf8f5fb9562c7deb3d006e11d4e50e262a9d31d6a156",
+  "proofGatesExecuted": false,
+  "rootLogicalMapping": "paths are relative to the original task root",
+  "schema": "synexia.evidence.bundle/1",
+  "sourceRoot": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs",
+  "summary": {
+    "omissionsByReason": {
+      "compiled-artifact-hash-only": 11,
+      "settings-or-credential-file": 1
+    },
+    "omittedDirectories": 0,
+    "omittedFileBytes": 77693,
+    "omittedFileRecords": 12,
+    "referencesByRetention": {
+      "exact-path-and-content": 44,
+      "excluded-input-manifest-only": 1,
+      "external-input-manifest-only": 1265
+    },
+    "retainedPathBytes": 3394935,
+    "retainedPaths": 100,
+    "sealedInputReferences": 1310,
+    "uniqueChunkBytes": 3163857,
+    "uniqueChunks": 62
+  },
+  "topFiles": [
+    {
+      "bytes": 5173,
+      "path": "LANES.json",
+      "sha256": "2a771ef45ec8ce29156a0a77c85f7f6ccd674296798849f7c22d8de32ba8270c"
+    },
+    {
+      "bytes": 2426,
+      "path": "README.md",
+      "sha256": "127a10c8ad077bc9d221a6407dd2190b5d10423aa295533b10f4266cf0270859"
+    },
+    {
+      "bytes": 14667,
+      "path": "PATHS-0001.tsv",
+      "sha256": "e2cf4b206248a6e7ed0e465d24d7e9f3097d9954c5f1e62041d5987b3c90a238"
+    }
+  ]
+}

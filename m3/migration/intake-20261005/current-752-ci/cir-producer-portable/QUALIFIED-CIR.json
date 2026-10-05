@@ -1,0 +1,66 @@
+{
+  "schema": "synexia.cir-752.qualification/1",
+  "status": "PASS_FOCUSED_PRODUCER",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+  "proof": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2",
+  "resultSHA256": "4dbc2cf6dc163cacd930b6e90d3d359aa15380535c811545651e4a936f3e92ea",
+  "outputSHA256": "90d336c43ad1ad0a397badc18cf384afe2c2502fcc64e0a1e11a8f0c1fcfa1ad",
+  "outputSeal": "cd016202be555f06fb18281156237109d9476a893d1fbb01616c28439b930c27",
+  "patchSHA256": "01f9f7c4b6f92e5cadc55d7518dede0559bbc50a953ea9ca2aaafe01a8b86e69",
+  "targets": [
+    {
+      "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+      "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef",
+      "bytes": 6447
+    },
+    {
+      "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+      "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada",
+      "bytes": 7516
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+      "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef",
+      "bytes": 6447
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+      "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada",
+      "bytes": 7516
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+      "sha256": "e7a96b1290ead86d3861f0388423504078cc8f66f10303f73e0a7d44a6e5776b",
+      "bytes": 658
+    }
+  ],
+  "orderedGates": 4,
+  "junitMethods": 6,
+  "mixedStates": 32,
+  "initialRefusals": 22,
+  "postScanRefusals": 10,
+  "nestedGeneratedJavaOutputs": 4,
+  "strictJavacSources": 6,
+  "retainedRuntimeTestBodies": [
+    "regexMatrixIsPrecompiledDeterministicAndPayloadSensitive",
+    "inMemoryCompilerSurfacesDeliberateJavacFailure",
+    "rootWriteGuardStillRejectsLabOutputOutsideM3Build"
+  ],
+  "oldMemoryParserAcceptedButJavacRejected": true,
+  "originalMemoryCompilerSyntaxErrors": 3,
+  "originalRegexMatrixCompilerSyntaxErrors": 3,
+  "priorTrial": {
+    "proof": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1",
+    "status": "STOP",
+    "failedStage": "compile",
+    "reason": "Missing exact task dependency M3PureIntAtomEligibility; repaired only by closure addition in v2.",
+    "resultSHA256": "8e075767061e6958163d2ba84e9b96051b5ba2e844bd40770290cb219fbb86ef"
+  },
+  "consumerQualified": false,
+  "crossFamilyAtomicity": false,
+  "canonicalProductionApplied": false,
+  "strictCanonicalAdmission": false,
+  "fullReactorQualified": false,
+  "canonicalOfflineSourceClosure": false
+}

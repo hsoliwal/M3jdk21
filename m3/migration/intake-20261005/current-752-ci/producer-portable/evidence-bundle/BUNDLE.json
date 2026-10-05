@@ -1,0 +1,149 @@
+{
+  "boundary": "This is exact review/reconstruction evidence, not a hermetic toolchain image. Maven, JDK, Python and other dependency caches, compiled binaries, settings and credential material are omitted. Their sealed identities remain in the original manifests where recorded. OS, dynamic-library, shell and standard-library limits in the original tooling/results remain applicable. Packaging executes no proof gate and does not turn a focused or failed result into repository-wide admission.",
+  "chunkByteLimit": 524288,
+  "metadataShards": [
+    {
+      "bytes": 61616,
+      "kind": "files",
+      "member": "manifests/files-0001.jsonl",
+      "records": 209,
+      "sha256": "c692a5a3bbfe4a0e5c88f7c7ae1aa718e2d4fa696e36506a42b35bb3068e1954"
+    },
+    {
+      "bytes": 7372,
+      "kind": "omissions",
+      "member": "manifests/omissions-0001.jsonl",
+      "records": 28,
+      "sha256": "048de673f3d2343b651e96b78ce0b93889717e8f90787da5bb94ab22970698b9"
+    },
+    {
+      "bytes": 245510,
+      "kind": "references",
+      "member": "manifests/references-0001.jsonl",
+      "records": 646,
+      "sha256": "f57e27fb6980556ba64fe276cf33a7a5dc46ed6f14faefcb80ad67184631ec50"
+    },
+    {
+      "bytes": 245493,
+      "kind": "references",
+      "member": "manifests/references-0002.jsonl",
+      "records": 665,
+      "sha256": "c71a03423d1e2c7842e58ca8455cfd98c6dac6117b1ceaed4e13b732f0ab5cca"
+    },
+    {
+      "bytes": 245745,
+      "kind": "references",
+      "member": "manifests/references-0003.jsonl",
+      "records": 643,
+      "sha256": "1ad3b96d7c292b6c6e538c9fe147d26430a4bb99a312e72e328ff0b670696be5"
+    },
+    {
+      "bytes": 245583,
+      "kind": "references",
+      "member": "manifests/references-0004.jsonl",
+      "records": 666,
+      "sha256": "4a14926e829ca3bf04276f61bd6d8cfdf63d4bbfc1fe78314dfd1105d76374aa"
+    },
+    {
+      "bytes": 15423,
+      "kind": "references",
+      "member": "manifests/references-0005.jsonl",
+      "records": 42,
+      "sha256": "422b69f73e1f1b6789e2ebb2222566c4e059db800a23c060b10d1341057da13c"
+    }
+  ],
+  "partByteLimit": 1048576,
+  "parts": [
+    {
+      "bytes": 419006,
+      "members": 90,
+      "path": "part-0001.tar.gz",
+      "sha256": "ae0415ed7616d2ac0645281ed1ec3b9046c7b3fdc5e8d9cebd3dc9530acbd617"
+    }
+  ],
+  "plan": {
+    "compiledBinaries": "hash-only",
+    "includePaths": [
+      "evidence/producer-v1",
+      "producer-authoring-v2",
+      "producer-spec-v1.json",
+      "producer-spec-v2.json",
+      "OWNER-PROVENANCE.json",
+      "PREFLIGHT-REFUSAL-v1.json",
+      "QUALIFIED-PRODUCER.json",
+      "task-packet",
+      "java-authoring-v1",
+      "text-authoring-v1",
+      "author-java-resources.py",
+      "author-text-resources.py",
+      "review",
+      "producer-package-inputs",
+      "producer-package-plan.json"
+    ],
+    "laneSelection": {
+      "additional": [],
+      "allowNotExecuted": [],
+      "includeAllExisting": false,
+      "required": [
+        "producer-v2"
+      ]
+    },
+    "packageOwnerSHA256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574",
+    "preparedV1Disposition": {
+      "externalDisposition": "PREFLIGHT-REFUSAL-v1.json",
+      "gatesExecuted": false,
+      "laneMarkerAbsentByDesign": true,
+      "proof": "evidence/producer-v1",
+      "retention": "explicit includePaths preserves all prepared evidence without inventing a terminal file"
+    },
+    "proofGatesExecutedByPackaging": false,
+    "resultSHA256": "d6d265a959e378fce47d68b5aa4a3a3bbee14bebf21355a54bd8077cb51e8630",
+    "schema": "synexia.evidence.package-plan/1",
+    "scope": "Actual Cij/Cit producer-v2 PASS plus exact producer-v1 prepared inputs and external zero-gate preflight disposition; no old trial mutated.",
+    "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+    "status": "FINAL_REVIEWED_SELECTION",
+    "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+    "toolCaches": "manifest-only"
+  },
+  "planSHA256": "0a42a19b547ba9615e8e2f7665832910d1af6b5496d19045a8fcae41ddd43afa",
+  "proofGatesExecuted": false,
+  "rootLogicalMapping": "paths are relative to the original task root",
+  "schema": "synexia.evidence.bundle/1",
+  "sourceRoot": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs",
+  "summary": {
+    "omissionsByReason": {
+      "compiled-artifact-hash-only": 26,
+      "settings-or-credential-file": 2
+    },
+    "omittedDirectories": 0,
+    "omittedFileBytes": 144547,
+    "omittedFileRecords": 28,
+    "referencesByRetention": {
+      "exact-path-and-content": 105,
+      "excluded-input-manifest-only": 2,
+      "external-input-manifest-only": 2555
+    },
+    "retainedPathBytes": 2194560,
+    "retainedPaths": 209,
+    "sealedInputReferences": 2662,
+    "uniqueChunkBytes": 1292403,
+    "uniqueChunks": 83
+  },
+  "topFiles": [
+    {
+      "bytes": 5676,
+      "path": "LANES.json",
+      "sha256": "5b60472eb82e66ed86319f97e5801679341da3b879b0cbdf4aae3a67e6158448"
+    },
+    {
+      "bytes": 2422,
+      "path": "README.md",
+      "sha256": "8ff04ca50375b1cae9baa8778de4e5e5f24e8d6076e5aed8057ea4b297522cb6"
+    },
+    {
+      "bytes": 32102,
+      "path": "PATHS-0001.tsv",
+      "sha256": "4ed047e88968fe23cb80c63afa204c1f8aaa69c7412d918ea12cba426e98a4ae"
+    }
+  ]
+}

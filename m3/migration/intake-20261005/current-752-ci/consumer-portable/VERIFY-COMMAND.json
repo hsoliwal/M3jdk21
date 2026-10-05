@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/m3-python/bin/python",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/packaging/package_evidence_state_v2.py",
+    "verify",
+    "--bundle",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/consumer-package-v6/evidence-bundle"
+  ],
+  "exitCode": 0,
+  "proofGatesExecuted": false,
+  "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdoutSHA256": "fa05bf649f8d5b7093611085c55675555f9139490c32f031c340799960529177"
+}

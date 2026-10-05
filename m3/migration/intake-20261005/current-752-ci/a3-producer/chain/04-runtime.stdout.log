@@ -1,0 +1,20 @@
+CIR_ORIGINAL_PARSER A3MemoryCompiler kinds=[org.openrewrite.java.tree.J$CompilationUnit] diagnostics=
+CIR_ORIGINAL_JAVAC A3MemoryCompiler [/com/m3/a3/A3MemoryCompiler.java:65: error: illegal line end in character literal
+            out.append('
+                       ^, /com/m3/a3/A3MemoryCompiler.java:82: error: illegal line end in character literal
+                || checked.indexOf('
+                                   ^, /com/m3/a3/A3MemoryCompiler.java:84: error: illegal line end in character literal
+                || checked.indexOf('
+                                   ^]
+CIR_ORIGINAL_PARSER A3RegexMatrix kinds=[org.openrewrite.tree.ParseError] diagnostics=
+CIR_ORIGINAL_JAVAC A3RegexMatrix [/com/m3/a3/A3RegexMatrix.java:61: error: ')' or ',' expected
+                    "Pattern.compile("a+b?")",
+                                      ^, /com/m3/a3/A3RegexMatrix.java:61: error: <identifier> expected
+                    "Pattern.compile("a+b?")",
+                                       ^, /com/m3/a3/A3RegexMatrix.java:61: error: <identifier> expected
+                    "Pattern.compile("a+b?")",
+                                         ^]
+CIR_A3_RUNTIME regexMatrixIsPrecompiledDeterministicAndPayloadSensitive PASS
+CIR_A3_RUNTIME inMemoryCompilerSurfacesDeliberateJavacFailure PASS
+CIR_A3_RUNTIME rootWriteGuardStillRejectsLabOutputOutsideM3Build PASS
+CIR_VERIFIED targets=5 mixedStates=32 initialRefusals=22 postScanRefusals=10 outputSeal=cd016202be555f06fb18281156237109d9476a893d1fbb01616c28439b930c27

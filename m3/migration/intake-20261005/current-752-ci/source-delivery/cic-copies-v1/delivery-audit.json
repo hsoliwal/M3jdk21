@@ -1,0 +1,1026 @@
+{
+  "boundary": "Known305 counts declared source paths only. Two enclosing whitelist documents are separate newly selected provenance-envelope inputs; they do not inflate the305 count. No consumer-v4 result is inferred.",
+  "bundle": {
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/BUNDLE.json",
+    "sha256": "0513d1819d9c6f49031049846c48a544f8c44325a2c69d0da36c546124fb3f80"
+  },
+  "candidate": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/candidate-v4",
+  "consumerQualified": false,
+  "missingWhitelistedSourceFiles": 0,
+  "newKnownSourcePaths": 44,
+  "parts": [
+    {
+      "bytes": 641196,
+      "members": 67,
+      "path": "part-0001.tar.gz",
+      "sha256": "a22a7ec431e02de315a9a7878f911b0818e021135c240f85c96dd64a3a9b31aa"
+    }
+  ],
+  "portableMapping": {
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cic-producer-portable-v1/MAPPING.json",
+    "sha256": "c76b34dd8acb1060e9a812329d1e4a640e56650d15231758c325b65677c4feed"
+  },
+  "portableWhitelist": {
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/PORTABLE-CIC-WHITELIST.json",
+    "sha256": "f88ab53834f00226c4cfe0e567b753580fff53f6f8d2d1d02c93942734fbbe80"
+  },
+  "priorPendingPublicationAdditionCount": 25,
+  "producerResultSHA256": "72d9ab1f3bb0065b70165f435cd93aad8710ca4671e60b94bfe21e614dd3855f",
+  "proofGatesExecuted": false,
+  "publicationAdditionBytes": 26255,
+  "publicationAdditions": [
+    {
+      "bytes": 11585,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/CIC-PUBLICATION-WHITELIST.json",
+      "gitBlob": "a68608a34d6fe03306941d1535ab0689909d8284",
+      "group": "provenance-only-publication-addition",
+      "mode": "100644",
+      "outsideKnown305SourcePathUniverse": true,
+      "path": "m3/migration/intake-20261005/current-752-ci/source-admission-evidence/source-whitelists/CIC-PUBLICATION-WHITELIST.json",
+      "sha": "a68608a34d6fe03306941d1535ab0689909d8284",
+      "sha256": "8dc5abcff5a3168bcb7f4fc918cb45dc60e91142676b9d37f4f8efd4937db1fe",
+      "sourceInput": "ci-repairs/CIC-PUBLICATION-WHITELIST.json",
+      "type": "blob"
+    },
+    {
+      "bytes": 14670,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/PORTABLE-CIC-WHITELIST.json",
+      "gitBlob": "72d4ab8f30a95da63e4b959faa45f9731a42fb6f",
+      "group": "provenance-only-publication-addition",
+      "mode": "100644",
+      "outsideKnown305SourcePathUniverse": true,
+      "path": "m3/migration/intake-20261005/current-752-ci/source-admission-evidence/source-whitelists/PORTABLE-CIC-WHITELIST.json",
+      "sha": "72d4ab8f30a95da63e4b959faa45f9731a42fb6f",
+      "sha256": "f88ab53834f00226c4cfe0e567b753580fff53f6f8d2d1d02c93942734fbbe80",
+      "sourceInput": "ci-repairs/PORTABLE-CIC-WHITELIST.json",
+      "type": "blob"
+    }
+  ],
+  "receiverManifest": {
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/consumer-manifest-v4.json",
+    "sha256": "f25a39ea2c764a5a9f2a84b43915aa4480aa4302718bc098bd4bfaa39727f7b3"
+  },
+  "schema": "m3.cic-delivery-audit/1",
+  "sourceObservations": [
+    {
+      "activeReceivingByteMatches": [],
+      "bytes": 3099,
+      "portableLogicalMatches": [
+        "cic-package-inputs/source-context/synexia/synexia-openrewrite-recipes/docs/20261005-m3-corpus-regex-admission.md"
+      ],
+      "portablePhysicalMatches": [
+        "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/source-context/20261005-m3-corpus-regex-admission.md"
+      ],
+      "receivingEvidenceByteMatches": [],
+      "selectedDelivery": {
+        "bytes": 3099,
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cic-producer-portable-v1/files/source-context/20261005-m3-corpus-regex-admission.md",
+        "gitBlob": "b5f1e39b8e1f1cbba79a1207a03287beff358c15",
+        "path": "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/source-context/20261005-m3-corpus-regex-admission.md",
+        "sha256": "abd1caa1c745bbd76b423d169690020072a11bb29fc6a8f7451f83c51a716216",
+        "sourcePath": "synexia-openrewrite-recipes/docs/20261005-m3-corpus-regex-admission.md"
+      },
+      "sha256": "abd1caa1c745bbd76b423d169690020072a11bb29fc6a8f7451f83c51a716216",
+      "sourcePath": "synexia-openrewrite-recipes/docs/20261005-m3-corpus-regex-admission.md"
+    },
+    {
+      "activeReceivingByteMatches": [],
+      "bytes": 3554,
+      "portableLogicalMatches": [
+        "cic-authoring-v1/README.md",
+        "evidence/cic-producer-v1/project/README.md"
+      ],
+      "portablePhysicalMatches": [],
+      "receivingEvidenceByteMatches": [],
+      "selectedDelivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "0513d1819d9c6f49031049846c48a544f8c44325a2c69d0da36c546124fb3f80",
+        "bytes": 3554,
+        "gitBlob": "8c154180389466b2699f9c07f85a3d6cafb3e0a0",
+        "logicalPath": "cic-authoring-v1/README.md",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/evidence-bundle/BUNDLE.json",
+        "sha256": "95310cc70041008ae728060151d8be346d143a990b50ce786f89b36f5b28b4a8",
+        "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/README.md"
+      },
+      "sha256": "95310cc70041008ae728060151d8be346d143a990b50ce786f89b36f5b28b4a8",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/README.md"
+    },
+    {
+      "activeReceivingByteMatches": [
+        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+      ],
+      "bytes": 12032,
+      "portableLogicalMatches": [
+        "cic-authoring-v1/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "evidence/cic-producer-v1/project/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+      ],
+      "portablePhysicalMatches": [],
+      "receivingEvidenceByteMatches": [],
+      "selectedDelivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "0513d1819d9c6f49031049846c48a544f8c44325a2c69d0da36c546124fb3f80",
+        "bytes": 12032,
+        "gitBlob": "a2e8c916208b563517e51b738744a05357e633aa",
+        "logicalPath": "cic-authoring-v1/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/evidence-bundle/BUNDLE.json",
+        "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+        "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+      },
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+    },
+    {
+      "activeReceivingByteMatches": [],
+      "bytes": 2628,
+      "portableLogicalMatches": [
+        "CIC-AUTHORED.json",
+        "cic-package-inputs/source-context/ci-repairs/CIC-AUTHORED.json"
+      ],
+      "portablePhysicalMatches": [
+        "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/CIC-AUTHORED.json"
+      ],
+      "receivingEvidenceByteMatches": [
+        "m3/migration/intake-20261005/current-752-ci/corpus-producer/AUTHORED.json"
+      ],
+      "selectedDelivery": {
+        "bytes": 2628,
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cic-producer-portable-v1/files/CIC-AUTHORED.json",
+        "gitBlob": "91b573f592e8592dd18384f311ddecfaded3601e",
+        "path": "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/CIC-AUTHORED.json",
+        "sha256": "4695885deca8f02fb774fa79d50a69a9c5ab08c7ef0f2e02ee721eac1f2d9105",
+        "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/evidence/authoring/CIC-AUTHORED.json"
+      },
+      "sha256": "4695885deca8f02fb774fa79d50a69a9c5ab08c7ef0f2e02ee721eac1f2d9105",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/evidence/authoring/CIC-AUTHORED.json"
+    },
+    {
+      "activeReceivingByteMatches": [],
+      "bytes": 2192,
+      "portableLogicalMatches": [
+        "QUALIFIED-CIC.json"
+      ],
+      "portablePhysicalMatches": [
+        "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/QUALIFIED-CIC.json"
+      ],
+      "receivingEvidenceByteMatches": [],
+      "selectedDelivery": {
+        "bytes": 2192,
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cic-producer-portable-v1/files/QUALIFIED-CIC.json",
+        "gitBlob": "4ade602780349d322e586b2220df98839bed362c",
+        "path": "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/QUALIFIED-CIC.json",
+        "sha256": "86574eed10be2f9731528f7b7046c1087ce85f0966ad2cfaf992f3febbca8a3f",
+        "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/evidence/authoring/QUALIFIED-CIC.json"
+      },
+      "sha256": "86574eed10be2f9731528f7b7046c1087ce85f0966ad2cfaf992f3febbca8a3f",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/evidence/authoring/QUALIFIED-CIC.json"
+    },
+    {
+      "activeReceivingByteMatches": [],
+      "bytes": 9653,
+      "portableLogicalMatches": [
+        "cic-spec-v1.json",
+        "evidence/cic-producer-v1/spec.json"
+      ],
+      "portablePhysicalMatches": [
+        "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/cic-spec-v1.json"
+      ],
+      "receivingEvidenceByteMatches": [
+        "m3/migration/intake-20261005/current-752-ci/corpus-producer/spec.json"
+      ],
+      "selectedDelivery": {
+        "bytes": 9653,
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cic-producer-portable-v1/files/cic-spec-v1.json",
+        "gitBlob": "4a3847fd17308351e1a113e82f9e64966a3b27c9",
+        "path": "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/cic-spec-v1.json",
+        "sha256": "50a0ba8c6ed64a26774740a00d2277e5a8e6634955450ddcd23b1645e8120209",
+        "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/evidence/authoring/cic-spec-v1.json"
+      },
+      "sha256": "50a0ba8c6ed64a26774740a00d2277e5a8e6634955450ddcd23b1645e8120209",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/evidence/authoring/cic-spec-v1.json"
+    },
+    {
+      "activeReceivingByteMatches": [],
+      "bytes": 3602,
+      "portableLogicalMatches": [
+        "cic-authoring-v1/pom.xml",
+        "evidence/cic-producer-v1/project/pom.xml"
+      ],
+      "portablePhysicalMatches": [],
+      "receivingEvidenceByteMatches": [],
+      "selectedDelivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "0513d1819d9c6f49031049846c48a544f8c44325a2c69d0da36c546124fb3f80",
+        "bytes": 3602,
+        "gitBlob": "08cd22488664a8f02d0a391578e8220faa11d848",
+        "logicalPath": "cic-authoring-v1/pom.xml",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/evidence-bundle/BUNDLE.json",
+        "sha256": "7c44942d4eb405903a12044e80100e8b21bdb30bf271507f5a0f12d4dda0d5a7",
+        "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/pom.xml"
+      },
+      "sha256": "7c44942d4eb405903a12044e80100e8b21bdb30bf271507f5a0f12d4dda0d5a7",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/pom.xml"
+    },
+    {
+      "activeReceivingByteMatches": [],
+      "bytes": 26869,
+      "portableLogicalMatches": [
+        "cic-authoring-v1/proof.py",
+        "evidence/cic-producer-v1/project/proof.py"
+      ],
+      "portablePhysicalMatches": [],
+      "receivingEvidenceByteMatches": [],
+      "selectedDelivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "0513d1819d9c6f49031049846c48a544f8c44325a2c69d0da36c546124fb3f80",
+        "bytes": 26869,
+        "gitBlob": "fbdd97b57a86acf5dcbd832176c797327e9b0f95",
+        "logicalPath": "cic-authoring-v1/proof.py",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/evidence-bundle/BUNDLE.json",
+        "sha256": "daea6f1b59b5c58c8ba398cfacb69fe7fb7e30386bbeb8a9820efcfef9a60407",
+        "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/proof.py"
+      },
+      "sha256": "daea6f1b59b5c58c8ba398cfacb69fe7fb7e30386bbeb8a9820efcfef9a60407",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/proof.py"
+    },
+    {
+      "activeReceivingByteMatches": [],
+      "bytes": 335,
+      "portableLogicalMatches": [
+        "cic-authoring-v1/src/main/resources/META-INF/rewrite/m3-ci-752-corpus.yml",
+        "evidence/cic-producer-v1/project/src/main/resources/META-INF/rewrite/m3-ci-752-corpus.yml",
+        "evidence/cic-producer-v1/project/target/classes/META-INF/rewrite/m3-ci-752-corpus.yml"
+      ],
+      "portablePhysicalMatches": [],
+      "receivingEvidenceByteMatches": [],
+      "selectedDelivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "0513d1819d9c6f49031049846c48a544f8c44325a2c69d0da36c546124fb3f80",
+        "bytes": 335,
+        "gitBlob": "03975051e74dd13c849040df765f02e153906cc0",
+        "logicalPath": "cic-authoring-v1/src/main/resources/META-INF/rewrite/m3-ci-752-corpus.yml",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/evidence-bundle/BUNDLE.json",
+        "sha256": "c0d976a75695ef1d833ed633fce08fa6305cbcc0d1aa93dcc307f5112db881a1",
+        "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/main/resources/META-INF/rewrite/m3-ci-752-corpus.yml"
+      },
+      "sha256": "c0d976a75695ef1d833ed633fce08fa6305cbcc0d1aa93dcc307f5112db881a1",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/main/resources/META-INF/rewrite/m3-ci-752-corpus.yml"
+    },
+    {
+      "activeReceivingByteMatches": [],
+      "bytes": 712,
+      "portableLogicalMatches": [
+        "cic-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/manifest.tsv",
+        "evidence/cic-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/manifest.tsv",
+        "evidence/cic-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/manifest.tsv"
+      ],
+      "portablePhysicalMatches": [],
+      "receivingEvidenceByteMatches": [],
+      "selectedDelivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "0513d1819d9c6f49031049846c48a544f8c44325a2c69d0da36c546124fb3f80",
+        "bytes": 712,
+        "gitBlob": "5aade24127a31d1a6127d50ce224b3dc7bbe8e20",
+        "logicalPath": "cic-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/manifest.tsv",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/evidence-bundle/BUNDLE.json",
+        "sha256": "7d443b17756355cb16d4871d68372194661aafb26cc650d15a71e6ba343d3d6f",
+        "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/manifest.tsv"
+      },
+      "sha256": "7d443b17756355cb16d4871d68372194661aafb26cc650d15a71e6ba343d3d6f",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/manifest.tsv"
+    },
+    {
+      "activeReceivingByteMatches": [
+        "m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+        "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after"
+      ],
+      "bytes": 7750,
+      "portableLogicalMatches": [
+        "cic-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-1.txt",
+        "cic-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-2.txt",
+        "evidence/cic-producer-v1/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+        "evidence/cic-producer-v1/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after",
+        "evidence/cic-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-1.txt",
+        "evidence/cic-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-2.txt",
+        "evidence/cic-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-1.txt",
+        "evidence/cic-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-2.txt"
+      ],
+      "portablePhysicalMatches": [],
+      "receivingEvidenceByteMatches": [
+        "m3/migration/intake-20261005/current-752-ci/crate/after/16.txt",
+        "m3/migration/intake-20261005/current-752-ci/crate/after/17.txt"
+      ],
+      "selectedDelivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "0513d1819d9c6f49031049846c48a544f8c44325a2c69d0da36c546124fb3f80",
+        "bytes": 7750,
+        "gitBlob": "933f2e0da87b5c2e73e63463c24f6844c05279f2",
+        "logicalPath": "cic-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-1.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/evidence-bundle/BUNDLE.json",
+        "sha256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55",
+        "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-1.txt"
+      },
+      "sha256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-1.txt"
+    },
+    {
+      "activeReceivingByteMatches": [
+        "m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+        "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after"
+      ],
+      "bytes": 7750,
+      "portableLogicalMatches": [
+        "cic-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-1.txt",
+        "cic-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-2.txt",
+        "evidence/cic-producer-v1/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+        "evidence/cic-producer-v1/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after",
+        "evidence/cic-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-1.txt",
+        "evidence/cic-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-2.txt",
+        "evidence/cic-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-1.txt",
+        "evidence/cic-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-2.txt"
+      ],
+      "portablePhysicalMatches": [],
+      "receivingEvidenceByteMatches": [
+        "m3/migration/intake-20261005/current-752-ci/crate/after/16.txt",
+        "m3/migration/intake-20261005/current-752-ci/crate/after/17.txt"
+      ],
+      "selectedDelivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "0513d1819d9c6f49031049846c48a544f8c44325a2c69d0da36c546124fb3f80",
+        "bytes": 7750,
+        "gitBlob": "933f2e0da87b5c2e73e63463c24f6844c05279f2",
+        "logicalPath": "cic-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-2.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/evidence-bundle/BUNDLE.json",
+        "sha256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55",
+        "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-2.txt"
+      },
+      "sha256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-2.txt"
+    },
+    {
+      "activeReceivingByteMatches": [
+        "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv"
+      ],
+      "bytes": 734,
+      "portableLogicalMatches": [
+        "cic-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-3.txt",
+        "evidence/cic-producer-v1/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv",
+        "evidence/cic-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-3.txt",
+        "evidence/cic-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-3.txt"
+      ],
+      "portablePhysicalMatches": [],
+      "receivingEvidenceByteMatches": [
+        "m3/migration/intake-20261005/current-752-ci/crate/after/18.txt"
+      ],
+      "selectedDelivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "0513d1819d9c6f49031049846c48a544f8c44325a2c69d0da36c546124fb3f80",
+        "bytes": 734,
+        "gitBlob": "9faab91609b62b8b8f81d9f2f0521dbc6579d28f",
+        "logicalPath": "cic-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-3.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/evidence-bundle/BUNDLE.json",
+        "sha256": "0bff4ddf1d6a002510903127bc56c7a2921bfa5851ac8217007eb3699b9febac",
+        "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-3.txt"
+      },
+      "sha256": "0bff4ddf1d6a002510903127bc56c7a2921bfa5851ac8217007eb3699b9febac",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-3.txt"
+    },
+    {
+      "activeReceivingByteMatches": [],
+      "bytes": 29910,
+      "portableLogicalMatches": [
+        "cic-authoring-v1/src/test/java/com/synexia/rewrite/CicRecipeTest.java",
+        "evidence/cic-producer-v1/project/src/test/java/com/synexia/rewrite/CicRecipeTest.java"
+      ],
+      "portablePhysicalMatches": [],
+      "receivingEvidenceByteMatches": [],
+      "selectedDelivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "0513d1819d9c6f49031049846c48a544f8c44325a2c69d0da36c546124fb3f80",
+        "bytes": 29910,
+        "gitBlob": "cc32c8c6f9596a95ee12826d17ad0dc1c48d1f3e",
+        "logicalPath": "cic-authoring-v1/src/test/java/com/synexia/rewrite/CicRecipeTest.java",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/evidence-bundle/BUNDLE.json",
+        "sha256": "5674d283c01e0c5a7e6b84a2819972970eded5487a40d66902a7afeae4af08f9",
+        "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/test/java/com/synexia/rewrite/CicRecipeTest.java"
+      },
+      "sha256": "5674d283c01e0c5a7e6b84a2819972970eded5487a40d66902a7afeae4af08f9",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/test/java/com/synexia/rewrite/CicRecipeTest.java"
+    },
+    {
+      "activeReceivingByteMatches": [],
+      "bytes": 7782,
+      "portableLogicalMatches": [
+        "cic-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+        "cic-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after",
+        "evidence/cic-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+        "evidence/cic-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after",
+        "evidence/cic-producer-v1/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+        "evidence/cic-producer-v1/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after"
+      ],
+      "portablePhysicalMatches": [],
+      "receivingEvidenceByteMatches": [
+        "m3/migration/intake-20261005/current-752-ci/crate/before/16.txt",
+        "m3/migration/intake-20261005/current-752-ci/crate/before/17.txt"
+      ],
+      "selectedDelivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "0513d1819d9c6f49031049846c48a544f8c44325a2c69d0da36c546124fb3f80",
+        "bytes": 7782,
+        "gitBlob": "c1bb8e454c71b62444f795a2e5240dd23859be90",
+        "logicalPath": "cic-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/evidence-bundle/BUNDLE.json",
+        "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298",
+        "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java"
+      },
+      "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java"
+    },
+    {
+      "activeReceivingByteMatches": [],
+      "bytes": 7782,
+      "portableLogicalMatches": [
+        "cic-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+        "cic-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after",
+        "evidence/cic-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+        "evidence/cic-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after",
+        "evidence/cic-producer-v1/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+        "evidence/cic-producer-v1/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after"
+      ],
+      "portablePhysicalMatches": [],
+      "receivingEvidenceByteMatches": [
+        "m3/migration/intake-20261005/current-752-ci/crate/before/16.txt",
+        "m3/migration/intake-20261005/current-752-ci/crate/before/17.txt"
+      ],
+      "selectedDelivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "0513d1819d9c6f49031049846c48a544f8c44325a2c69d0da36c546124fb3f80",
+        "bytes": 7782,
+        "gitBlob": "c1bb8e454c71b62444f795a2e5240dd23859be90",
+        "logicalPath": "cic-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/evidence-bundle/BUNDLE.json",
+        "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298",
+        "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after"
+      },
+      "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after"
+    },
+    {
+      "activeReceivingByteMatches": [],
+      "bytes": 734,
+      "portableLogicalMatches": [
+        "cic-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv",
+        "evidence/cic-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv",
+        "evidence/cic-producer-v1/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv"
+      ],
+      "portablePhysicalMatches": [],
+      "receivingEvidenceByteMatches": [
+        "m3/migration/intake-20261005/current-752-ci/crate/before/18.txt"
+      ],
+      "selectedDelivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "0513d1819d9c6f49031049846c48a544f8c44325a2c69d0da36c546124fb3f80",
+        "bytes": 734,
+        "gitBlob": "4fcf73bf19ec1b50334d6535bdfd995e28bee089",
+        "logicalPath": "cic-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/evidence-bundle/BUNDLE.json",
+        "sha256": "b901f0b1aae122711792a66dc9750b9ba4608d59613641e74f378218757cbb4d",
+        "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv"
+      },
+      "sha256": "b901f0b1aae122711792a66dc9750b9ba4608d59613641e74f378218757cbb4d",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv"
+    },
+    {
+      "activeReceivingByteMatches": [
+        "m3/tooling/a3/src/main/java/com/m3/a3/A3Fs.java"
+      ],
+      "bytes": 3137,
+      "portableLogicalMatches": [
+        "cic-authoring-v1/src/test/resources/closure/A3Fs.java",
+        "evidence/cic-producer-v1/project/src/test/resources/closure/A3Fs.java",
+        "evidence/cic-producer-v1/project/target/test-classes/closure/A3Fs.java"
+      ],
+      "portablePhysicalMatches": [],
+      "receivingEvidenceByteMatches": [],
+      "selectedDelivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "0513d1819d9c6f49031049846c48a544f8c44325a2c69d0da36c546124fb3f80",
+        "bytes": 3137,
+        "gitBlob": "562d875e0486279857286f82ffb6edb91024ce09",
+        "logicalPath": "cic-authoring-v1/src/test/resources/closure/A3Fs.java",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cic-producer-portable/evidence-bundle/BUNDLE.json",
+        "sha256": "ebddb148600afd7ee7df1175175df7da86b3a2cb048ca9b4e723d4eec5c2fe8c",
+        "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/test/resources/closure/A3Fs.java"
+      },
+      "sha256": "ebddb148600afd7ee7df1175175df7da86b3a2cb048ca9b4e723d4eec5c2fe8c",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/test/resources/closure/A3Fs.java"
+    }
+  ],
+  "sourceWhitelist": {
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/CIC-PUBLICATION-WHITELIST.json",
+    "sha256": "8dc5abcff5a3168bcb7f4fc918cb45dc60e91142676b9d37f4f8efd4937db1fe"
+  },
+  "state": "READ_ONLY_CENSUS",
+  "verifiedLogicalFileCount": 100,
+  "verifiedLogicalFiles": [
+    {
+      "bytes": 2628,
+      "path": "CIC-AUTHORED.json",
+      "sha256": "4695885deca8f02fb774fa79d50a69a9c5ab08c7ef0f2e02ee721eac1f2d9105"
+    },
+    {
+      "bytes": 3737,
+      "path": "OWNER-PROVENANCE.json",
+      "sha256": "ec28f568489da71a0574c09bfd0e361757b2558125444a0c3c39ff59ffce1421"
+    },
+    {
+      "bytes": 2192,
+      "path": "QUALIFIED-CIC.json",
+      "sha256": "86574eed10be2f9731528f7b7046c1087ce85f0966ad2cfaf992f3febbca8a3f"
+    },
+    {
+      "bytes": 9060,
+      "path": "cia-runtime-classpath-v1.txt",
+      "sha256": "959d091dc35f237c9902e48456b7ffc041096ed7e7097b999083ec0c66304cbe"
+    },
+    {
+      "bytes": 3554,
+      "path": "cic-authoring-v1/README.md",
+      "sha256": "95310cc70041008ae728060151d8be346d143a990b50ce786f89b36f5b28b4a8"
+    },
+    {
+      "bytes": 12032,
+      "path": "cic-authoring-v1/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+    },
+    {
+      "bytes": 3602,
+      "path": "cic-authoring-v1/pom.xml",
+      "sha256": "7c44942d4eb405903a12044e80100e8b21bdb30bf271507f5a0f12d4dda0d5a7"
+    },
+    {
+      "bytes": 26869,
+      "path": "cic-authoring-v1/proof.py",
+      "sha256": "daea6f1b59b5c58c8ba398cfacb69fe7fb7e30386bbeb8a9820efcfef9a60407"
+    },
+    {
+      "bytes": 335,
+      "path": "cic-authoring-v1/src/main/resources/META-INF/rewrite/m3-ci-752-corpus.yml",
+      "sha256": "c0d976a75695ef1d833ed633fce08fa6305cbcc0d1aa93dcc307f5112db881a1"
+    },
+    {
+      "bytes": 712,
+      "path": "cic-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/manifest.tsv",
+      "sha256": "7d443b17756355cb16d4871d68372194661aafb26cc650d15a71e6ba343d3d6f"
+    },
+    {
+      "bytes": 7750,
+      "path": "cic-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-1.txt",
+      "sha256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55"
+    },
+    {
+      "bytes": 7750,
+      "path": "cic-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-2.txt",
+      "sha256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55"
+    },
+    {
+      "bytes": 734,
+      "path": "cic-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-3.txt",
+      "sha256": "0bff4ddf1d6a002510903127bc56c7a2921bfa5851ac8217007eb3699b9febac"
+    },
+    {
+      "bytes": 29910,
+      "path": "cic-authoring-v1/src/test/java/com/synexia/rewrite/CicRecipeTest.java",
+      "sha256": "5674d283c01e0c5a7e6b84a2819972970eded5487a40d66902a7afeae4af08f9"
+    },
+    {
+      "bytes": 7782,
+      "path": "cic-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+      "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298"
+    },
+    {
+      "bytes": 7782,
+      "path": "cic-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after",
+      "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298"
+    },
+    {
+      "bytes": 734,
+      "path": "cic-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv",
+      "sha256": "b901f0b1aae122711792a66dc9750b9ba4608d59613641e74f378218757cbb4d"
+    },
+    {
+      "bytes": 3137,
+      "path": "cic-authoring-v1/src/test/resources/closure/A3Fs.java",
+      "sha256": "ebddb148600afd7ee7df1175175df7da86b3a2cb048ca9b4e723d4eec5c2fe8c"
+    },
+    {
+      "bytes": 13713,
+      "path": "cic-package-inputs/SOURCE-PROVENANCE.json",
+      "sha256": "8d23512f2c4b5da1791266ae8588d93eed65d22259b36e4a1c8185ef60ca5b02"
+    },
+    {
+      "bytes": 5502,
+      "path": "cic-package-inputs/review/cic-review.json",
+      "sha256": "be0030c0e228f622a8b175f484a6dbe5b91111c5eef0b33cc7aa5ad50adbe91f"
+    },
+    {
+      "bytes": 2628,
+      "path": "cic-package-inputs/source-context/ci-repairs/CIC-AUTHORED.json",
+      "sha256": "4695885deca8f02fb774fa79d50a69a9c5ab08c7ef0f2e02ee721eac1f2d9105"
+    },
+    {
+      "bytes": 3737,
+      "path": "cic-package-inputs/source-context/ci-repairs/OWNER-PROVENANCE.json",
+      "sha256": "ec28f568489da71a0574c09bfd0e361757b2558125444a0c3c39ff59ffce1421"
+    },
+    {
+      "bytes": 5004,
+      "path": "cic-package-inputs/source-context/ci-repairs/evidence/cia-producer-v1/RESULT.json",
+      "sha256": "c0f132f91f9c024d15030bd4d0acf63f287e8e38f2d5a51f1b7ba55c36490684"
+    },
+    {
+      "bytes": 1520,
+      "path": "cic-package-inputs/source-context/ci-repairs/evidence/cia-producer-v1/generated-candidate/OUTPUT.json",
+      "sha256": "90ed9bd9129dc8f99f913fd09be34d535aefb5a9a2169827e8cfaebdad368479"
+    },
+    {
+      "bytes": 4911,
+      "path": "cic-package-inputs/source-context/ci-repairs/evidence/cir-producer-v2/RESULT.json",
+      "sha256": "4dbc2cf6dc163cacd930b6e90d3d359aa15380535c811545651e4a936f3e92ea"
+    },
+    {
+      "bytes": 1462,
+      "path": "cic-package-inputs/source-context/ci-repairs/evidence/cir-producer-v2/generated-candidate/OUTPUT.json",
+      "sha256": "90d336c43ad1ad0a397badc18cf384afe2c2502fcc64e0a1e11a8f0c1fcfa1ad"
+    },
+    {
+      "bytes": 4857,
+      "path": "cic-package-inputs/source-context/ci-repairs/evidence/producer-v2/RESULT.json",
+      "sha256": "d6d265a959e378fce47d68b5aa4a3a3bbee14bebf21355a54bd8077cb51e8630"
+    },
+    {
+      "bytes": 1369,
+      "path": "cic-package-inputs/source-context/ci-repairs/evidence/producer-v2/generated-candidate/OUTPUT.json",
+      "sha256": "0347e932f876d72db7d5247c54375fdc40f15f1138392ddffab03c0bb63834c5"
+    },
+    {
+      "bytes": 677,
+      "path": "cic-package-inputs/source-context/m3/evidence/consumer-v3/PATCH.json",
+      "sha256": "a7d19551db584ec29a7a2881cb573d410f25491a78101cce0aa94c9e2df18319"
+    },
+    {
+      "bytes": 3384,
+      "path": "cic-package-inputs/source-context/m3/evidence/consumer-v3/RESULT.json",
+      "sha256": "0d50bac3af04f4c1b498ca34c3b6c57ad76bf97aa3b51fbba1dc926d4b52d2a7"
+    },
+    {
+      "bytes": 2445670,
+      "path": "cic-package-inputs/source-context/m3/evidence/consumer-v3/inputs.json",
+      "sha256": "b35f07f14e36a869dbbb74a5b00dae3f45352664763f5eb8155062389762f7d8"
+    },
+    {
+      "bytes": 15464,
+      "path": "cic-package-inputs/source-context/source/AGENTS-9963.md",
+      "sha256": "086b03459e4f441d0ecf1c90773dd63877c03956957ec0f41ac7ceb90069c0f9"
+    },
+    {
+      "bytes": 3099,
+      "path": "cic-package-inputs/source-context/synexia/synexia-openrewrite-recipes/docs/20261005-m3-corpus-regex-admission.md",
+      "sha256": "abd1caa1c745bbd76b423d169690020072a11bb29fc6a8f7451f83c51a716216"
+    },
+    {
+      "bytes": 1136,
+      "path": "cic-package-plan.json",
+      "sha256": "257bfab2f4e0e444c7fbbf8f5fb9562c7deb3d006e11d4e50e262a9d31d6a156"
+    },
+    {
+      "bytes": 9653,
+      "path": "cic-spec-v1.json",
+      "sha256": "50a0ba8c6ed64a26774740a00d2277e5a8e6634955450ddcd23b1645e8120209"
+    },
+    {
+      "bytes": 5004,
+      "path": "evidence/cia-producer-v1/RESULT.json",
+      "sha256": "c0f132f91f9c024d15030bd4d0acf63f287e8e38f2d5a51f1b7ba55c36490684"
+    },
+    {
+      "bytes": 1520,
+      "path": "evidence/cia-producer-v1/generated-candidate/OUTPUT.json",
+      "sha256": "90ed9bd9129dc8f99f913fd09be34d535aefb5a9a2169827e8cfaebdad368479"
+    },
+    {
+      "bytes": 838,
+      "path": "evidence/cic-producer-v1/PATCH.json",
+      "sha256": "2e40286005bd0e97a711b2ba81eae18e024a649b8415064cac3cb706ad3bc8c0"
+    },
+    {
+      "bytes": 4398,
+      "path": "evidence/cic-producer-v1/RESULT.json",
+      "sha256": "72d9ab1f3bb0065b70165f435cd93aad8710ca4671e60b94bfe21e614dd3855f"
+    },
+    {
+      "bytes": 3993,
+      "path": "evidence/cic-producer-v1/build-artifacts.json",
+      "sha256": "7479b76c017c02cd987e3af06412dab01ead063ab4b5d036f370f345072f42bf"
+    },
+    {
+      "bytes": 1805,
+      "path": "evidence/cic-producer-v1/chain/01-static.json",
+      "sha256": "6ba97df0e87c6c3801e49dc7c945cea529f9906885d26bf0b68778dc961109d8"
+    },
+    {
+      "bytes": 0,
+      "path": "evidence/cic-producer-v1/chain/01-static.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 250,
+      "path": "evidence/cic-producer-v1/chain/01-static.stdout.log",
+      "sha256": "5e34f8d203d5ea8ec3103786ca07cc097ebbfe886aec2ed3aa9581452488f42a"
+    },
+    {
+      "bytes": 2398,
+      "path": "evidence/cic-producer-v1/chain/02-compile.json",
+      "sha256": "8b95ecda4eed8bade78c5fc504e3226b199d1ef8ca58e116014277dbf48ea366"
+    },
+    {
+      "bytes": 0,
+      "path": "evidence/cic-producer-v1/chain/02-compile.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1407,
+      "path": "evidence/cic-producer-v1/chain/02-compile.stdout.log",
+      "sha256": "11efa6823ed1e146b49a2142934270717287bef2e756219f5ced73702b8ef25c"
+    },
+    {
+      "bytes": 2714,
+      "path": "evidence/cic-producer-v1/chain/03-tests.json",
+      "sha256": "881985e9eaa07ad82153f347e3aabbe0c69f3352ca1cffca4fbf02a92b7d1806"
+    },
+    {
+      "bytes": 210,
+      "path": "evidence/cic-producer-v1/chain/03-tests.stderr.log",
+      "sha256": "9ddf3781b5e43a87b1d67caac2bc4b251f9ce8d77c509c8369129f4b0359fd55"
+    },
+    {
+      "bytes": 1417,
+      "path": "evidence/cic-producer-v1/chain/03-tests.stdout.log",
+      "sha256": "0417a8dcb315c18a32359f029b189afccd437d7edb9b6657b0a5aaa6e1a24ac1"
+    },
+    {
+      "bytes": 11954,
+      "path": "evidence/cic-producer-v1/chain/04-runtime.json",
+      "sha256": "9ca17f707e7677d3777418047b44f85ee454532900055e7f2a0d9cdc3ee1df8b"
+    },
+    {
+      "bytes": 210,
+      "path": "evidence/cic-producer-v1/chain/04-runtime.stderr.log",
+      "sha256": "9ddf3781b5e43a87b1d67caac2bc4b251f9ce8d77c509c8369129f4b0359fd55"
+    },
+    {
+      "bytes": 360,
+      "path": "evidence/cic-producer-v1/chain/04-runtime.stdout.log",
+      "sha256": "2ae91de9929f11966ae27a4c59d6b84e4ca91cb20f375db44590135b4c07b876"
+    },
+    {
+      "bytes": 13052,
+      "path": "evidence/cic-producer-v1/commands.json",
+      "sha256": "6adf612272502883291c9f2662a83675bf8191373e1621fbf6a0db1168a04552"
+    },
+    {
+      "bytes": 1035,
+      "path": "evidence/cic-producer-v1/generated-candidate/OUTPUT.json",
+      "sha256": "436b249bfc859fe9eeb1dbd24943909262befde9cdd4f342920710c3f0a3b7c3"
+    },
+    {
+      "bytes": 3453,
+      "path": "evidence/cic-producer-v1/generated-candidate/candidate.patch",
+      "sha256": "ceca658f9404317c00a9c940d7f408e06cc8ade66b9ac0058f4bdd6892ab23cf"
+    },
+    {
+      "bytes": 7750,
+      "path": "evidence/cic-producer-v1/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+      "sha256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55"
+    },
+    {
+      "bytes": 7750,
+      "path": "evidence/cic-producer-v1/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after",
+      "sha256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55"
+    },
+    {
+      "bytes": 734,
+      "path": "evidence/cic-producer-v1/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv",
+      "sha256": "0bff4ddf1d6a002510903127bc56c7a2921bfa5851ac8217007eb3699b9febac"
+    },
+    {
+      "bytes": 337880,
+      "path": "evidence/cic-producer-v1/inputs.json",
+      "sha256": "71b18e42940e46980e2ef02972f2744a2b530683ebea9f2f61a743ef82019adb"
+    },
+    {
+      "bytes": 637,
+      "path": "evidence/cic-producer-v1/junit.json",
+      "sha256": "0d7c0aba41cf9ec3dcb952611040c20e25c2db9449f3c9c32624afba368255f2"
+    },
+    {
+      "bytes": 3554,
+      "path": "evidence/cic-producer-v1/project/README.md",
+      "sha256": "95310cc70041008ae728060151d8be346d143a990b50ce786f89b36f5b28b4a8"
+    },
+    {
+      "bytes": 12032,
+      "path": "evidence/cic-producer-v1/project/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+    },
+    {
+      "bytes": 3602,
+      "path": "evidence/cic-producer-v1/project/pom.xml",
+      "sha256": "7c44942d4eb405903a12044e80100e8b21bdb30bf271507f5a0f12d4dda0d5a7"
+    },
+    {
+      "bytes": 26869,
+      "path": "evidence/cic-producer-v1/project/proof.py",
+      "sha256": "daea6f1b59b5c58c8ba398cfacb69fe7fb7e30386bbeb8a9820efcfef9a60407"
+    },
+    {
+      "bytes": 335,
+      "path": "evidence/cic-producer-v1/project/src/main/resources/META-INF/rewrite/m3-ci-752-corpus.yml",
+      "sha256": "c0d976a75695ef1d833ed633fce08fa6305cbcc0d1aa93dcc307f5112db881a1"
+    },
+    {
+      "bytes": 712,
+      "path": "evidence/cic-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/manifest.tsv",
+      "sha256": "7d443b17756355cb16d4871d68372194661aafb26cc650d15a71e6ba343d3d6f"
+    },
+    {
+      "bytes": 7750,
+      "path": "evidence/cic-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-1.txt",
+      "sha256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55"
+    },
+    {
+      "bytes": 7750,
+      "path": "evidence/cic-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-2.txt",
+      "sha256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55"
+    },
+    {
+      "bytes": 734,
+      "path": "evidence/cic-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-3.txt",
+      "sha256": "0bff4ddf1d6a002510903127bc56c7a2921bfa5851ac8217007eb3699b9febac"
+    },
+    {
+      "bytes": 29910,
+      "path": "evidence/cic-producer-v1/project/src/test/java/com/synexia/rewrite/CicRecipeTest.java",
+      "sha256": "5674d283c01e0c5a7e6b84a2819972970eded5487a40d66902a7afeae4af08f9"
+    },
+    {
+      "bytes": 7782,
+      "path": "evidence/cic-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+      "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298"
+    },
+    {
+      "bytes": 7782,
+      "path": "evidence/cic-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after",
+      "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298"
+    },
+    {
+      "bytes": 734,
+      "path": "evidence/cic-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv",
+      "sha256": "b901f0b1aae122711792a66dc9750b9ba4608d59613641e74f378218757cbb4d"
+    },
+    {
+      "bytes": 3137,
+      "path": "evidence/cic-producer-v1/project/src/test/resources/closure/A3Fs.java",
+      "sha256": "ebddb148600afd7ee7df1175175df7da86b3a2cb048ca9b4e723d4eec5c2fe8c"
+    },
+    {
+      "bytes": 335,
+      "path": "evidence/cic-producer-v1/project/target/classes/META-INF/rewrite/m3-ci-752-corpus.yml",
+      "sha256": "c0d976a75695ef1d833ed633fce08fa6305cbcc0d1aa93dcc307f5112db881a1"
+    },
+    {
+      "bytes": 712,
+      "path": "evidence/cic-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/manifest.tsv",
+      "sha256": "7d443b17756355cb16d4871d68372194661aafb26cc650d15a71e6ba343d3d6f"
+    },
+    {
+      "bytes": 7750,
+      "path": "evidence/cic-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-1.txt",
+      "sha256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55"
+    },
+    {
+      "bytes": 7750,
+      "path": "evidence/cic-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-2.txt",
+      "sha256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55"
+    },
+    {
+      "bytes": 734,
+      "path": "evidence/cic-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-3.txt",
+      "sha256": "0bff4ddf1d6a002510903127bc56c7a2921bfa5851ac8217007eb3699b9febac"
+    },
+    {
+      "bytes": 351,
+      "path": "evidence/cic-producer-v1/project/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst",
+      "sha256": "07414881fcea76105daaf83a2555a0109d525d92c60ebee06464d78b25363362"
+    },
+    {
+      "bytes": 210,
+      "path": "evidence/cic-producer-v1/project/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst",
+      "sha256": "a699a09f24ce75bee20ca878ea2363f8f9237ccab9847029fb87a87ad34a7819"
+    },
+    {
+      "bytes": 283,
+      "path": "evidence/cic-producer-v1/project/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst",
+      "sha256": "94375281ed0ca84a907c8cbed65509798da729187c8e939264c20cd74f960f79"
+    },
+    {
+      "bytes": 180,
+      "path": "evidence/cic-producer-v1/project/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst",
+      "sha256": "bcd697ee96c5b460467fe23b8ded97c8ee9320421e817584d2da81add7b4017c"
+    },
+    {
+      "bytes": 17370,
+      "path": "evidence/cic-producer-v1/project/target/surefire-reports/TEST-com.synexia.rewrite.CicRecipeTest.xml",
+      "sha256": "785ca8d9a51ede59a63c6fc2841845e903eae06ce6d9a79d1da2c66c0a452626"
+    },
+    {
+      "bytes": 316,
+      "path": "evidence/cic-producer-v1/project/target/surefire-reports/com.synexia.rewrite.CicRecipeTest.txt",
+      "sha256": "d34bdace2a2293fd184ca4eb7fb7297c83e4ded6a639d5e22a0ffdd42b01d28a"
+    },
+    {
+      "bytes": 7782,
+      "path": "evidence/cic-producer-v1/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+      "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298"
+    },
+    {
+      "bytes": 7782,
+      "path": "evidence/cic-producer-v1/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after",
+      "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298"
+    },
+    {
+      "bytes": 734,
+      "path": "evidence/cic-producer-v1/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv",
+      "sha256": "b901f0b1aae122711792a66dc9750b9ba4608d59613641e74f378218757cbb4d"
+    },
+    {
+      "bytes": 3137,
+      "path": "evidence/cic-producer-v1/project/target/test-classes/closure/A3Fs.java",
+      "sha256": "ebddb148600afd7ee7df1175175df7da86b3a2cb048ca9b4e723d4eec5c2fe8c"
+    },
+    {
+      "bytes": 9060,
+      "path": "evidence/cic-producer-v1/runtime-classpath.txt",
+      "sha256": "959d091dc35f237c9902e48456b7ffc041096ed7e7097b999083ec0c66304cbe"
+    },
+    {
+      "bytes": 1636,
+      "path": "evidence/cic-producer-v1/runtime.json",
+      "sha256": "2a7eb9a3539cb007b1cdecfe6e7e90e2013d1c4434c06b2ad7b18f8dbc3d23a4"
+    },
+    {
+      "bytes": 9653,
+      "path": "evidence/cic-producer-v1/spec.json",
+      "sha256": "50a0ba8c6ed64a26774740a00d2277e5a8e6634955450ddcd23b1645e8120209"
+    },
+    {
+      "bytes": 5534,
+      "path": "evidence/cic-producer-v1/staging.json",
+      "sha256": "a9942f1a7cb8569c99641d37f35830b13195b83507c6c5f3e2ba5d87cc7f7dfb"
+    },
+    {
+      "bytes": 98206,
+      "path": "evidence/cic-producer-v1/tool-links.json",
+      "sha256": "bcf3a804bb9af655dde72896e5b94286b4bdb1fea7cd29d5deb26b22bcafdb5c"
+    },
+    {
+      "bytes": 19781,
+      "path": "evidence/cic-producer-v1/tooling.json",
+      "sha256": "101b3be1a55caeb7f683167b335e010a02d08c84e52e7dd71d684cad6e98e92e"
+    },
+    {
+      "bytes": 4911,
+      "path": "evidence/cir-producer-v2/RESULT.json",
+      "sha256": "4dbc2cf6dc163cacd930b6e90d3d359aa15380535c811545651e4a936f3e92ea"
+    },
+    {
+      "bytes": 1462,
+      "path": "evidence/cir-producer-v2/generated-candidate/OUTPUT.json",
+      "sha256": "90d336c43ad1ad0a397badc18cf384afe2c2502fcc64e0a1e11a8f0c1fcfa1ad"
+    },
+    {
+      "bytes": 4857,
+      "path": "evidence/producer-v2/RESULT.json",
+      "sha256": "d6d265a959e378fce47d68b5aa4a3a3bbee14bebf21355a54bd8077cb51e8630"
+    },
+    {
+      "bytes": 1369,
+      "path": "evidence/producer-v2/generated-candidate/OUTPUT.json",
+      "sha256": "0347e932f876d72db7d5247c54375fdc40f15f1138392ddffab03c0bb63834c5"
+    },
+    {
+      "bytes": 5502,
+      "path": "review/cic-review.json",
+      "sha256": "be0030c0e228f622a8b175f484a6dbe5b91111c5eef0b33cc7aa5ad50adbe91f"
+    }
+  ]
+}

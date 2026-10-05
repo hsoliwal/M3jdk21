@@ -1,0 +1,176 @@
+diff --git a/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java b/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java
+index bd0a88b..0116188 100644
+--- a/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java
++++ b/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java
+@@ -35,20 +35,33 @@ org.openrewrite.config.CompositeRecipe
+             Reuse reuse,
+             String nextProof) {
+ 
+-        public Row {
+-            atomId = text(atomId, "atomId");
+-            category = text(category, "category");
+-            technique = text(technique, "technique");
+-            disposition = text(disposition, "disposition");
+-            scope = text(scope, "scope");
+-            targetOwner = ref(targetOwner, "targetOwner");
+-            leetcodeRef = ref(leetcodeRef, "leetcodeRef");
+-            hackerrankRef = ref(hackerrankRef, "hackerrankRef");
+-            geeksforgeeksRef = ref(geeksforgeeksRef, "geeksforgeeksRef");
+-            githubRef = ref(githubRef, "githubRef");
+-            githubLicense = ref(githubLicense, "githubLicense");
+-            reuse = Objects.requireNonNull(reuse, "reuse");
+-            nextProof = text(nextProof, "nextProof");
++        public Row(
++                String atomId,
++                String category,
++                String technique,
++                String disposition,
++                String scope,
++                String targetOwner,
++                String leetcodeRef,
++                String hackerrankRef,
++                String geeksforgeeksRef,
++                String githubRef,
++                String githubLicense,
++                Reuse reuse,
++                String nextProof) {
++            this.atomId = text(atomId, "atomId");
++            this.category = text(category, "category");
++            this.technique = text(technique, "technique");
++            this.disposition = text(disposition, "disposition");
++            this.scope = text(scope, "scope");
++            this.targetOwner = ref(targetOwner, "targetOwner");
++            this.leetcodeRef = ref(leetcodeRef, "leetcodeRef");
++            this.hackerrankRef = ref(hackerrankRef, "hackerrankRef");
++            this.geeksforgeeksRef = ref(geeksforgeeksRef, "geeksforgeeksRef");
++            this.githubRef = ref(githubRef, "githubRef");
++            this.githubLicense = ref(githubLicense, "githubLicense");
++            this.reuse = Objects.requireNonNull(reuse, "reuse");
++            this.nextProof = text(nextProof, "nextProof");
+             validate(this);
+         }
+ 
+diff --git a/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java b/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java
+index 1570299..1aa3d92 100644
+--- a/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java
++++ b/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java
+@@ -25,10 +25,10 @@ org.openrewrite.config.CompositeRecipe
+                 backports.resolve("JEP_CATALOGUE.tsv"),
+                 """
+                 release	jep	title	domain	disposition	reason	superseded_by
+-                24	485	Stream Gatherers	library	candidate	final API	
+-                27	534	Compact Object Headers	vm-gc-runtime	candidate-high-risk	VM change	
+-                27	533	Structured Concurrency	library-runtime	hold-preview	preview	
+-                24	486	Disable Security Manager	compatibility-security	reject-compat	incompatible	
++                24	485	Stream Gatherers	library	candidate	final API\t
++                27	534	Compact Object Headers	vm-gc-runtime	candidate-high-risk	VM change\t
++                27	533	Structured Concurrency	library-runtime	hold-preview	preview\t
++                24	486	Disable Security Manager	compatibility-security	reject-compat	incompatible\t
+                 """);
+         Files.writeString(
+                 backports.resolve("UPSTREAM_CHANGE_SEEDS.tsv"),
+diff --git a/m3/tooling/migration-recipes/pom.xml b/m3/tooling/migration-recipes/pom.xml
+index 86f2239..92d5b11 100644
+--- a/m3/tooling/migration-recipes/pom.xml
++++ b/m3/tooling/migration-recipes/pom.xml
+@@ -8,6 +8,7 @@ org.openrewrite.config.CompositeRecipe
+     <!-- OpenRewrite 8.17.1 publishes PlainText from rewrite-core transitively; there is no rewrite-text artifact. -->
+     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java</artifactId><version>${rewrite.version}</version></dependency>
+     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java-21</artifactId><version>${rewrite.version}</version><scope>runtime</scope></dependency>
++    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><version>1.7.36</version><scope>runtime</scope></dependency>
+     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-test</artifactId><version>${rewrite.version}</version><scope>test</scope></dependency>
+     <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
+   </dependencies>
+diff --git a/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java b/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java
+index 33bf780..fa247df 100644
+--- a/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java
++++ b/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java
+@@ -38,7 +38,7 @@ org.openrewrite.config.CompositeRecipe
+                 "src/main/java/com/m3/a3/A3Alg.java",
+                 new Target(
+                         "ABSENT",
+-                        "bd0a88ba3c240510e57c51fb37c689205e02c9ec",
++                        "01161889ae30d4adeb746ba78ca38d53e7383a47",
+                         null,
+                         "after/A3Alg.java",
+                         false));
+@@ -46,7 +46,7 @@
+                 "src/test/java/com/m3/a3/A3PlanTest.java",
+                 new Target(
+                         "3e186021ae1b8997f5bb01ddb08f9b32bf5ae7a9",
+-                        "1570299bc0a09012b2752143d7d2861521801104",
++                        "1aa3d9274f635e1d3ad7f148949d85ab62d4d68d",
+                         "before/A3PlanTest.java",
+                         "after/A3PlanTest.java",
+                         true));
+diff --git a/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java b/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java
+index bd0a88b..0116188 100644
+--- a/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java
++++ b/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java
+@@ -35,20 +35,33 @@ org.openrewrite.config.CompositeRecipe
+             Reuse reuse,
+             String nextProof) {
+ 
+-        public Row {
+-            atomId = text(atomId, "atomId");
+-            category = text(category, "category");
+-            technique = text(technique, "technique");
+-            disposition = text(disposition, "disposition");
+-            scope = text(scope, "scope");
+-            targetOwner = ref(targetOwner, "targetOwner");
+-            leetcodeRef = ref(leetcodeRef, "leetcodeRef");
+-            hackerrankRef = ref(hackerrankRef, "hackerrankRef");
+-            geeksforgeeksRef = ref(geeksforgeeksRef, "geeksforgeeksRef");
+-            githubRef = ref(githubRef, "githubRef");
+-            githubLicense = ref(githubLicense, "githubLicense");
+-            reuse = Objects.requireNonNull(reuse, "reuse");
+-            nextProof = text(nextProof, "nextProof");
++        public Row(
++                String atomId,
++                String category,
++                String technique,
++                String disposition,
++                String scope,
++                String targetOwner,
++                String leetcodeRef,
++                String hackerrankRef,
++                String geeksforgeeksRef,
++                String githubRef,
++                String githubLicense,
++                Reuse reuse,
++                String nextProof) {
++            this.atomId = text(atomId, "atomId");
++            this.category = text(category, "category");
++            this.technique = text(technique, "technique");
++            this.disposition = text(disposition, "disposition");
++            this.scope = text(scope, "scope");
++            this.targetOwner = ref(targetOwner, "targetOwner");
++            this.leetcodeRef = ref(leetcodeRef, "leetcodeRef");
++            this.hackerrankRef = ref(hackerrankRef, "hackerrankRef");
++            this.geeksforgeeksRef = ref(geeksforgeeksRef, "geeksforgeeksRef");
++            this.githubRef = ref(githubRef, "githubRef");
++            this.githubLicense = ref(githubLicense, "githubLicense");
++            this.reuse = Objects.requireNonNull(reuse, "reuse");
++            this.nextProof = text(nextProof, "nextProof");
+             validate(this);
+         }
+ 
+diff --git a/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java b/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java
+index 1570299..1aa3d92 100644
+--- a/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java
++++ b/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java
+@@ -25,10 +25,10 @@ org.openrewrite.config.CompositeRecipe
+                 backports.resolve("JEP_CATALOGUE.tsv"),
+                 """
+                 release	jep	title	domain	disposition	reason	superseded_by
+-                24	485	Stream Gatherers	library	candidate	final API	
+-                27	534	Compact Object Headers	vm-gc-runtime	candidate-high-risk	VM change	
+-                27	533	Structured Concurrency	library-runtime	hold-preview	preview	
+-                24	486	Disable Security Manager	compatibility-security	reject-compat	incompatible	
++                24	485	Stream Gatherers	library	candidate	final API\t
++                27	534	Compact Object Headers	vm-gc-runtime	candidate-high-risk	VM change\t
++                27	533	Structured Concurrency	library-runtime	hold-preview	preview\t
++                24	486	Disable Security Manager	compatibility-security	reject-compat	incompatible\t
+                 """);
+         Files.writeString(
+                 backports.resolve("UPSTREAM_CHANGE_SEEDS.tsv"),

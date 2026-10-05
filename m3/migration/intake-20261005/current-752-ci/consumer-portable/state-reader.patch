@@ -1,0 +1,11 @@
+--- retained/package_evidence.py
++++ versioned/package_evidence_state_v1.py
+@@ -141,7 +141,7 @@
+                 if PRIVATE_MATERIAL.search(data):
+                     raise ValueError(f"Private-material pattern in terminal marker: {name}")
+                 body = json.loads(data)
+-                status_value = body.get("status", body.get("result", "UNSPECIFIED"))
++                status_value = body.get("status", body.get("result", body.get("state", "UNSPECIFIED")))
+                 is_unexecuted = marker.name == "NOT_EXECUTED.json"
+                 terminal_status = isinstance(status_value, str) and (
+                     status_value.startswith(("PASS", "STOPPED", "FAIL"))

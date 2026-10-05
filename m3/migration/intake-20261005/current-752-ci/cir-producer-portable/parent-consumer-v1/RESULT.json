@@ -1,0 +1,48 @@
+{
+  "canonicalProductionApplied": false,
+  "dependencyClosureComplete": false,
+  "evidence": {
+    "chain/01-lint.json": "74372b22a419c7c08d7c0351696db28fa9d53e98be3bd9813c8bcff2c873e232",
+    "chain/01-lint.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "chain/01-lint.stdout.log": "af7a083f13478ba46ce0083aaa62f80125a2947ae02079b2461f0c10cc09aa1f",
+    "chain/02-compile.json": "f6dc078d1e16521a74d0713b4ef9953280d844fa4d6ca94386c060aa766ccd35",
+    "chain/02-compile.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "chain/02-compile.stdout.log": "2fbb609478c2f8304ae26fc8ab0dcff324756f0065835e3ae5239bd10363c895",
+    "chain/03-test.json": "6919cec42accc328fc27bdaf3fae19ad24d123244adc889af7c7a1d693d3c021",
+    "chain/03-test.stderr.log": "fd102b7676dbd4fd1599711e176f876659d6b8f69bb64ac30878d95a42e56250",
+    "chain/03-test.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "commands/java-clean-verify.json": "aa29039a5e4d669f42c5b07efa103c9bb04afb183b4d4824891c2d0a321a7395",
+    "commands/java-clean-verify.stderr.log": "9ddf3781b5e43a87b1d67caac2bc4b251f9ce8d77c509c8369129f4b0359fd55",
+    "commands/java-clean-verify.stdout.log": "cfe4441374ab836747ab5f382cb419d6d9096bd029337a3ac5472f9f80ffdd43",
+    "commands/java-test-compile.json": "8ef0e90c6d0d4cffd7e61fabd4f01df57126492c6b69b030ffd308b18b8f74eb",
+    "commands/java-test-compile.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "commands/java-test-compile.stdout.log": "e7b5c6c9bd1b37308de3080fa1da4514999f70af13f0cd9dd658c073e7af15e9",
+    "commands/java-version.json": "7fa3930e8e2d26ab1556c9d8092b3357492fbacf8f0b247a099b718560377f7d",
+    "commands/java-version.stderr.log": "310252bd6dfd2b68ad2e953b7e62baad51b35394da5794f5a807aab0da9038c8",
+    "commands/java-version.stdout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "commands/javac-version.json": "d3cfe5916e9238620e7e97d2208ec739de681cea3500230eea7c61cbafe6448e",
+    "commands/javac-version.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "commands/javac-version.stdout.log": "a854217150e8efa255152b10d9353bafec6d6977ad0f1f200d990d863df879bd",
+    "commands/maven-version.json": "c6c7e5f594a17edae89ed2ba18ac4d932d480ffc4aeeb12fa1609d1d9aeb9d22",
+    "commands/maven-version.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "commands/maven-version.stdout.log": "605d5643ff4c56d3e3daa943ee851a78e6fa054fa45b67e14e961b0f3fa1c84c",
+    "compile-report.json": "50b076e542628c3e0e0f12552814f365f79f1d918c25364cac14791d10ceeada",
+    "lint-report.json": "74bff46a26ad100b92f476132ca9c97ac2f360422e4a1858732c0a470b537547"
+  },
+  "failed": "stage failed: test",
+  "hostSystemLibrariesSealed": false,
+  "inputsSHA256": "12acb72d89dc57b4c996e51d6a2b76d933de5a42e0fafbe77c0b7f4ff6c48b1f",
+  "originalToolchainCustodyRevalidated": false,
+  "productWrites": 0,
+  "receiving": {
+    "commit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+    "tree": "44feeb32f77a3442606ef3b63b923fd43732b20d"
+  },
+  "runtimeAccepted": false,
+  "source": {
+    "commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+    "tree": "6c055c584ebb5fa177420d1668db73bcb7e7fef4"
+  },
+  "state": "STOPPED",
+  "wholeSourceTreeCovered": false
+}

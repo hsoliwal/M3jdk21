@@ -1,0 +1,30 @@
+{
+  "schema": "synexia.evidence.package-plan/1",
+  "status": "FINAL_REVIEWED_SELECTION",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+  "packageOwnerSHA256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574",
+  "resultSHA256": "72d9ab1f3bb0065b70165f435cd93aad8710ca4671e60b94bfe21e614dd3855f",
+  "laneSelection": {
+    "required": [
+      "cic-producer-v1"
+    ],
+    "additional": [],
+    "allowNotExecuted": [],
+    "includeAllExisting": false
+  },
+  "includePaths": [
+    "cic-authoring-v1",
+    "cic-spec-v1.json",
+    "cia-runtime-classpath-v1.txt",
+    "CIC-AUTHORED.json",
+    "QUALIFIED-CIC.json",
+    "review/cic-review.json",
+    "cic-package-inputs",
+    "cic-package-plan.json"
+  ],
+  "scope": "Actual three-output Cic producer-v1 PASS with complete14-file task, exact reviewed source and metadata, all receipts/logs/generated outputs; prior16 bytes preserved; no parent consumer closure or toolchain image claim.",
+  "toolCaches": "manifest-only",
+  "compiledBinaries": "hash-only",
+  "proofGatesExecutedByPackaging": false
+}

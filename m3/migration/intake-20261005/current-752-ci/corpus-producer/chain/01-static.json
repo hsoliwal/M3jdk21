@@ -1,0 +1,33 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1/project/proof.py",
+    "_static",
+    "--proof",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1"
+  ],
+  "cwd": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1/project",
+  "endedAt": "2026-10-05T16:46:17.590404+00:00",
+  "environment": {
+    "JAVA_HOME": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64",
+    "LC_ALL": "C",
+    "MAVEN_SKIP_RC": "true",
+    "PATH": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64/bin:/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/apache-maven-3.9.9/bin:/bin:/usr/bin",
+    "TZ": "UTC"
+  },
+  "exitCode": 0,
+  "inputManifestSHA256": "71b18e42940e46980e2ef02972f2744a2b530683ebea9f2f61a743ef82019adb",
+  "priorReceipts": [],
+  "stage": "static",
+  "startedAt": "2026-10-05T16:46:17.542240+00:00",
+  "stderr": {
+    "bytes": 0,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1/chain/01-static.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 250,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1/chain/01-static.stdout.log",
+    "sha256": "5e34f8d203d5ea8ec3103786ca07cc097ebbfe886aec2ed3aa9581452488f42a"
+  }
+}

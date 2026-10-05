@@ -1,0 +1,52 @@
+{
+  "schema": "synexia.cic-752.qualification/1",
+  "status": "PASS_FOCUSED_PRODUCER",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+  "proof": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1",
+  "resultSHA256": "72d9ab1f3bb0065b70165f435cd93aad8710ca4671e60b94bfe21e614dd3855f",
+  "outputSHA256": "436b249bfc859fe9eeb1dbd24943909262befde9cdd4f342920710c3f0a3b7c3",
+  "outputSeal": "43db2acf1f8f06cb4de3abdc1da0e810affcdd38b226de6a91c3584f508a75c1",
+  "patchSHA256": "ceca658f9404317c00a9c940d7f408e06cc8ade66b9ac0058f4bdd6892ab23cf",
+  "outputs": [
+    {
+      "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+      "sha256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55",
+      "bytes": 7750
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after",
+      "sha256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55",
+      "bytes": 7750
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv",
+      "sha256": "0bff4ddf1d6a002510903127bc56c7a2921bfa5851ac8217007eb3699b9febac",
+      "bytes": 734
+    }
+  ],
+  "projectInputs": 14,
+  "orderedGates": 4,
+  "junitMethods": 6,
+  "mixedStates": 8,
+  "initialRefusals": 14,
+  "postScanRefusals": 6,
+  "baselineGeneratorSources": 2,
+  "candidateGeneratorSources": 2,
+  "compiledBaselineFixtures": 48,
+  "compiledCandidateFixtures": 48,
+  "baselineHostilePatternSyntaxExceptions": 24,
+  "candidateValidFixtures": 48,
+  "crlfFixtures": 24,
+  "modernCallFixtures": 24,
+  "publicProtectedApiTypes": 3,
+  "javapApiSHA256": "a515f99e9c3537a6a90d2047a2a84cb0194fedb211a673b03d07f42310f49766",
+  "prior16PathsDisjoint": true,
+  "finalReceivingDistinctPaths": 19,
+  "consumerQualified": false,
+  "crossFamilyAtomicity": false,
+  "canonicalProductionApplied": false,
+  "strictCanonicalAdmission": false,
+  "fullReactorQualified": false,
+  "canonicalOfflineSourceClosure": false
+}

@@ -1,0 +1,682 @@
+{
+  "schema": "synexia.cia-752.portable-source-retention/1",
+  "bundleIndexSHA256": "c36ef995a9ba9ef7c72be3c403a14ea580f6886df15a5e553e7d9ca525b6f3f5",
+  "projectInputsRetained": 22,
+  "actualGeneratedOutputsRetained": 6,
+  "includedNoncacheSealedInputReferences": 64,
+  "sourceAndMetadataReferences": [
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/CIA-AUTHORED.json",
+      "sha256": "33df01fd87e1ae74e5265a4259714f9b18a210f55fd94e8ee59a8721949518fa",
+      "bytes": 5730,
+      "exactBundlePaths": [
+        "CIA-AUTHORED.json",
+        "cia-package-inputs/source-context/ci-repairs/CIA-AUTHORED.json"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/OWNER-PROVENANCE.json",
+      "sha256": "ec28f568489da71a0574c09bfd0e361757b2558125444a0c3c39ff59ffce1421",
+      "bytes": 3737,
+      "exactBundlePaths": [
+        "OWNER-PROVENANCE.json",
+        "cia-package-inputs/source-context/ci-repairs/OWNER-PROVENANCE.json"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/README.md",
+      "sha256": "b27d8958a48a00f257bb892157b30065df5731fa8d99467c4506f434295aa914",
+      "bytes": 4202,
+      "exactBundlePaths": [
+        "cia-authoring-v1/README.md",
+        "evidence/cia-producer-v1/project/README.md"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "bytes": 12032,
+      "exactBundlePaths": [
+        "cia-authoring-v1/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "evidence/cia-producer-v1/project/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/pom.xml",
+      "sha256": "d7263a7f913f70e5be7c52031248477ab0bbef5e6bd8f84d7883b6702ff5e407",
+      "bytes": 3595,
+      "exactBundlePaths": [
+        "cia-authoring-v1/pom.xml",
+        "evidence/cia-producer-v1/project/pom.xml"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/proof.py",
+      "sha256": "02d7476cc67843e0ba01fa24bd4c2515bb0da3de64b87b5db1b570ea970ddb0b",
+      "bytes": 28469,
+      "exactBundlePaths": [
+        "cia-authoring-v1/proof.py",
+        "evidence/cia-producer-v1/project/proof.py"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/main/resources/META-INF/rewrite/m3-ci-752-a3.yml",
+      "sha256": "2dfa64c57bb5ad3f973852d6b8ea5e48f139215e2b737c43583fcd5f2773dbb8",
+      "bytes": 493,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/main/resources/META-INF/rewrite/m3-ci-752-a3.yml",
+        "evidence/cia-producer-v1/project/src/main/resources/META-INF/rewrite/m3-ci-752-a3.yml",
+        "evidence/cia-producer-v1/project/target/classes/META-INF/rewrite/m3-ci-752-a3.yml"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/manifest.tsv",
+      "sha256": "89d7df5d0190e71b6fb69797fe848b37f5ffb09e274f020135e0df948488782a",
+      "bytes": 1306,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/manifest.tsv",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/manifest.tsv",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/manifest.tsv"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-1.txt",
+      "sha256": "0de471de5a54e1c87153e4b1c23c4013a800f07595cfc05eec7bd4e68f1345d6",
+      "bytes": 10008,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-1.txt",
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-5.txt",
+        "evidence/cia-producer-v1/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+        "evidence/cia-producer-v1/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-1.txt",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-5.txt",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-1.txt",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-5.txt"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-2.txt",
+      "sha256": "8922e21e4f814dc99282cf1828786a0347552454003e23ac2fa91aa8710851b1",
+      "bytes": 4466,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-2.txt",
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-6.txt",
+        "evidence/cia-producer-v1/generated-candidate/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+        "evidence/cia-producer-v1/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-2.txt",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-6.txt",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-2.txt",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-6.txt"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-3.txt",
+      "sha256": "a53bdeee8afe28b90cb0e348e718b70610a9487edb1b75b46e09bfb76e0f3dc9",
+      "bytes": 3522,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-3.txt",
+        "evidence/cia-producer-v1/generated-candidate/m3/tooling/migration-recipes/pom.xml",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-3.txt",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-3.txt"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-4.txt",
+      "sha256": "521a7f07e59f507e0ce3193a3d0c7540c232a37c74128d954b52670677498241",
+      "bytes": 2338,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-4.txt",
+        "evidence/cia-producer-v1/generated-candidate/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-4.txt",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-4.txt"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-5.txt",
+      "sha256": "0de471de5a54e1c87153e4b1c23c4013a800f07595cfc05eec7bd4e68f1345d6",
+      "bytes": 10008,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-1.txt",
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-5.txt",
+        "evidence/cia-producer-v1/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+        "evidence/cia-producer-v1/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-1.txt",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-5.txt",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-1.txt",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-5.txt"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-6.txt",
+      "sha256": "8922e21e4f814dc99282cf1828786a0347552454003e23ac2fa91aa8710851b1",
+      "bytes": 4466,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-2.txt",
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-6.txt",
+        "evidence/cia-producer-v1/generated-candidate/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+        "evidence/cia-producer-v1/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-2.txt",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-6.txt",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-2.txt",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-6.txt"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/test/java/com/synexia/rewrite/CiaRecipeTest.java",
+      "sha256": "30e41c28cf90a370cbdb741d367c12db38b7f5aafe262f963df7298bdc7e20f7",
+      "bytes": 29501,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/test/java/com/synexia/rewrite/CiaRecipeTest.java",
+        "evidence/cia-producer-v1/project/src/test/java/com/synexia/rewrite/CiaRecipeTest.java"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+      "sha256": "d88f347f77069dc1e2e6a3871c68c55e76f885f324801957d041f9ecc31ec6f4",
+      "bytes": 9492,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+        "cia-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java",
+        "evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+        "evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java",
+        "evidence/cia-producer-v1/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+        "evidence/cia-producer-v1/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/test/resources/before/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+      "sha256": "d684f2c95622c32683dbdce162d2f49101c7431bfbba1927a34182dcecadc77f",
+      "bytes": 4462,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/test/resources/before/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+        "cia-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java",
+        "evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+        "evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java",
+        "evidence/cia-producer-v1/project/target/test-classes/before/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+        "evidence/cia-producer-v1/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/pom.xml",
+      "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
+      "bytes": 3383,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/pom.xml",
+        "evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/pom.xml",
+        "evidence/cia-producer-v1/project/target/test-classes/before/m3/tooling/migration-recipes/pom.xml"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java",
+      "sha256": "280d7c08e9da9f618f4596516420a5c6c2de8f32fa1b52ff354853f3b0fb7c2b",
+      "bytes": 2338,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java",
+        "evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java",
+        "evidence/cia-producer-v1/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java",
+      "sha256": "d88f347f77069dc1e2e6a3871c68c55e76f885f324801957d041f9ecc31ec6f4",
+      "bytes": 9492,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+        "cia-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java",
+        "evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+        "evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java",
+        "evidence/cia-producer-v1/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+        "evidence/cia-producer-v1/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java",
+      "sha256": "d684f2c95622c32683dbdce162d2f49101c7431bfbba1927a34182dcecadc77f",
+      "bytes": 4462,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/test/resources/before/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+        "cia-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java",
+        "evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+        "evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java",
+        "evidence/cia-producer-v1/project/target/test-classes/before/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+        "evidence/cia-producer-v1/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/test/resources/closure/A3AlgTest.java",
+      "sha256": "594ae68ab3994526b03d31db36aab0c11235a10c078c740ffaea7d597884efbe",
+      "bytes": 6270,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/test/resources/closure/A3AlgTest.java",
+        "evidence/cia-producer-v1/project/src/test/resources/closure/A3AlgTest.java",
+        "evidence/cia-producer-v1/project/target/test-classes/closure/A3AlgTest.java"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/test/resources/closure/A3Fs.java",
+      "sha256": "ebddb148600afd7ee7df1175175df7da86b3a2cb048ca9b4e723d4eec5c2fe8c",
+      "bytes": 3137,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/test/resources/closure/A3Fs.java",
+        "evidence/cia-producer-v1/project/src/test/resources/closure/A3Fs.java",
+        "evidence/cia-producer-v1/project/target/test-classes/closure/A3Fs.java"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/test/resources/closure/A3Plan.java",
+      "sha256": "e973e37826a09fc2571d4df5514cad4fafec37008d65b6a63cb6bf89a96f4800",
+      "bytes": 7885,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/test/resources/closure/A3Plan.java",
+        "evidence/cia-producer-v1/project/src/test/resources/closure/A3Plan.java",
+        "evidence/cia-producer-v1/project/target/test-classes/closure/A3Plan.java"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-runtime-classpath-v1.txt",
+      "sha256": "959d091dc35f237c9902e48456b7ffc041096ed7e7097b999083ec0c66304cbe",
+      "bytes": 9060,
+      "exactBundlePaths": [
+        "cia-runtime-classpath-v1.txt",
+        "evidence/cia-producer-v1/runtime-classpath.txt"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-spec-v1.json",
+      "sha256": "aba9dc9941853c8a7c2515fc72c7acd8cb05d61a776e27345701843c1daa5c83",
+      "bytes": 12639,
+      "exactBundlePaths": [
+        "cia-spec-v1.json",
+        "evidence/cia-producer-v1/spec.json"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/commands.json",
+      "sha256": "fe9721674070989adacc9b8da30b96878099a892b4d1bc4ea8b3b2d012e277c5",
+      "bytes": 13055,
+      "exactBundlePaths": [
+        "evidence/cia-producer-v1/commands.json"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/README.md",
+      "sha256": "b27d8958a48a00f257bb892157b30065df5731fa8d99467c4506f434295aa914",
+      "bytes": 4202,
+      "exactBundlePaths": [
+        "cia-authoring-v1/README.md",
+        "evidence/cia-producer-v1/project/README.md"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "bytes": 12032,
+      "exactBundlePaths": [
+        "cia-authoring-v1/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "evidence/cia-producer-v1/project/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/pom.xml",
+      "sha256": "d7263a7f913f70e5be7c52031248477ab0bbef5e6bd8f84d7883b6702ff5e407",
+      "bytes": 3595,
+      "exactBundlePaths": [
+        "cia-authoring-v1/pom.xml",
+        "evidence/cia-producer-v1/project/pom.xml"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/proof.py",
+      "sha256": "02d7476cc67843e0ba01fa24bd4c2515bb0da3de64b87b5db1b570ea970ddb0b",
+      "bytes": 28469,
+      "exactBundlePaths": [
+        "cia-authoring-v1/proof.py",
+        "evidence/cia-producer-v1/project/proof.py"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/src/main/resources/META-INF/rewrite/m3-ci-752-a3.yml",
+      "sha256": "2dfa64c57bb5ad3f973852d6b8ea5e48f139215e2b737c43583fcd5f2773dbb8",
+      "bytes": 493,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/main/resources/META-INF/rewrite/m3-ci-752-a3.yml",
+        "evidence/cia-producer-v1/project/src/main/resources/META-INF/rewrite/m3-ci-752-a3.yml",
+        "evidence/cia-producer-v1/project/target/classes/META-INF/rewrite/m3-ci-752-a3.yml"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/manifest.tsv",
+      "sha256": "89d7df5d0190e71b6fb69797fe848b37f5ffb09e274f020135e0df948488782a",
+      "bytes": 1306,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/manifest.tsv",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/manifest.tsv",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/manifest.tsv"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-1.txt",
+      "sha256": "0de471de5a54e1c87153e4b1c23c4013a800f07595cfc05eec7bd4e68f1345d6",
+      "bytes": 10008,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-1.txt",
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-5.txt",
+        "evidence/cia-producer-v1/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+        "evidence/cia-producer-v1/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-1.txt",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-5.txt",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-1.txt",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-5.txt"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-2.txt",
+      "sha256": "8922e21e4f814dc99282cf1828786a0347552454003e23ac2fa91aa8710851b1",
+      "bytes": 4466,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-2.txt",
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-6.txt",
+        "evidence/cia-producer-v1/generated-candidate/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+        "evidence/cia-producer-v1/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-2.txt",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-6.txt",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-2.txt",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-6.txt"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-3.txt",
+      "sha256": "a53bdeee8afe28b90cb0e348e718b70610a9487edb1b75b46e09bfb76e0f3dc9",
+      "bytes": 3522,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-3.txt",
+        "evidence/cia-producer-v1/generated-candidate/m3/tooling/migration-recipes/pom.xml",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-3.txt",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-3.txt"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-4.txt",
+      "sha256": "521a7f07e59f507e0ce3193a3d0c7540c232a37c74128d954b52670677498241",
+      "bytes": 2338,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-4.txt",
+        "evidence/cia-producer-v1/generated-candidate/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-4.txt",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-4.txt"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-5.txt",
+      "sha256": "0de471de5a54e1c87153e4b1c23c4013a800f07595cfc05eec7bd4e68f1345d6",
+      "bytes": 10008,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-1.txt",
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-5.txt",
+        "evidence/cia-producer-v1/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+        "evidence/cia-producer-v1/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-1.txt",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-5.txt",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-1.txt",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-5.txt"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-6.txt",
+      "sha256": "8922e21e4f814dc99282cf1828786a0347552454003e23ac2fa91aa8710851b1",
+      "bytes": 4466,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-2.txt",
+        "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-6.txt",
+        "evidence/cia-producer-v1/generated-candidate/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+        "evidence/cia-producer-v1/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-2.txt",
+        "evidence/cia-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-6.txt",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-2.txt",
+        "evidence/cia-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-6.txt"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/src/test/java/com/synexia/rewrite/CiaRecipeTest.java",
+      "sha256": "30e41c28cf90a370cbdb741d367c12db38b7f5aafe262f963df7298bdc7e20f7",
+      "bytes": 29501,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/test/java/com/synexia/rewrite/CiaRecipeTest.java",
+        "evidence/cia-producer-v1/project/src/test/java/com/synexia/rewrite/CiaRecipeTest.java"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+      "sha256": "d88f347f77069dc1e2e6a3871c68c55e76f885f324801957d041f9ecc31ec6f4",
+      "bytes": 9492,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+        "cia-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java",
+        "evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+        "evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java",
+        "evidence/cia-producer-v1/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+        "evidence/cia-producer-v1/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+      "sha256": "d684f2c95622c32683dbdce162d2f49101c7431bfbba1927a34182dcecadc77f",
+      "bytes": 4462,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/test/resources/before/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+        "cia-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java",
+        "evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+        "evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java",
+        "evidence/cia-producer-v1/project/target/test-classes/before/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+        "evidence/cia-producer-v1/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/pom.xml",
+      "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
+      "bytes": 3383,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/pom.xml",
+        "evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/pom.xml",
+        "evidence/cia-producer-v1/project/target/test-classes/before/m3/tooling/migration-recipes/pom.xml"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java",
+      "sha256": "280d7c08e9da9f618f4596516420a5c6c2de8f32fa1b52ff354853f3b0fb7c2b",
+      "bytes": 2338,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java",
+        "evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java",
+        "evidence/cia-producer-v1/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java",
+      "sha256": "d88f347f77069dc1e2e6a3871c68c55e76f885f324801957d041f9ecc31ec6f4",
+      "bytes": 9492,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+        "cia-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java",
+        "evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+        "evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java",
+        "evidence/cia-producer-v1/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+        "evidence/cia-producer-v1/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java",
+      "sha256": "d684f2c95622c32683dbdce162d2f49101c7431bfbba1927a34182dcecadc77f",
+      "bytes": 4462,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/test/resources/before/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+        "cia-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java",
+        "evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+        "evidence/cia-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java",
+        "evidence/cia-producer-v1/project/target/test-classes/before/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+        "evidence/cia-producer-v1/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/src/test/resources/closure/A3AlgTest.java",
+      "sha256": "594ae68ab3994526b03d31db36aab0c11235a10c078c740ffaea7d597884efbe",
+      "bytes": 6270,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/test/resources/closure/A3AlgTest.java",
+        "evidence/cia-producer-v1/project/src/test/resources/closure/A3AlgTest.java",
+        "evidence/cia-producer-v1/project/target/test-classes/closure/A3AlgTest.java"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/src/test/resources/closure/A3Fs.java",
+      "sha256": "ebddb148600afd7ee7df1175175df7da86b3a2cb048ca9b4e723d4eec5c2fe8c",
+      "bytes": 3137,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/test/resources/closure/A3Fs.java",
+        "evidence/cia-producer-v1/project/src/test/resources/closure/A3Fs.java",
+        "evidence/cia-producer-v1/project/target/test-classes/closure/A3Fs.java"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/src/test/resources/closure/A3Plan.java",
+      "sha256": "e973e37826a09fc2571d4df5514cad4fafec37008d65b6a63cb6bf89a96f4800",
+      "bytes": 7885,
+      "exactBundlePaths": [
+        "cia-authoring-v1/src/test/resources/closure/A3Plan.java",
+        "evidence/cia-producer-v1/project/src/test/resources/closure/A3Plan.java",
+        "evidence/cia-producer-v1/project/target/test-classes/closure/A3Plan.java"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/runtime-classpath.txt",
+      "sha256": "959d091dc35f237c9902e48456b7ffc041096ed7e7097b999083ec0c66304cbe",
+      "bytes": 9060,
+      "exactBundlePaths": [
+        "cia-runtime-classpath-v1.txt",
+        "evidence/cia-producer-v1/runtime-classpath.txt"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/spec.json",
+      "sha256": "aba9dc9941853c8a7c2515fc72c7acd8cb05d61a776e27345701843c1daa5c83",
+      "bytes": 12639,
+      "exactBundlePaths": [
+        "cia-spec-v1.json",
+        "evidence/cia-producer-v1/spec.json"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/staging.json",
+      "sha256": "8bbf07b82a6f0004f8df81b1591ca02b25d76d58f57f705e2a48ade3f41ed4f5",
+      "bytes": 8715,
+      "exactBundlePaths": [
+        "evidence/cia-producer-v1/staging.json"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/tool-links.json",
+      "sha256": "bcf3a804bb9af655dde72896e5b94286b4bdb1fea7cd29d5deb26b22bcafdb5c",
+      "bytes": 98206,
+      "exactBundlePaths": [
+        "evidence/cia-producer-v1/tool-links.json"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/tooling.json",
+      "sha256": "101b3be1a55caeb7f683167b335e010a02d08c84e52e7dd71d684cad6e98e92e",
+      "bytes": 19781,
+      "exactBundlePaths": [
+        "evidence/cia-producer-v1/tooling.json"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/RESULT.json",
+      "sha256": "4dbc2cf6dc163cacd930b6e90d3d359aa15380535c811545651e4a936f3e92ea",
+      "bytes": 4911,
+      "exactBundlePaths": [
+        "cia-package-inputs/source-context/ci-repairs/evidence/cir-producer-v2/RESULT.json",
+        "evidence/cir-producer-v2/RESULT.json"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/generated-candidate/OUTPUT.json",
+      "sha256": "90d336c43ad1ad0a397badc18cf384afe2c2502fcc64e0a1e11a8f0c1fcfa1ad",
+      "bytes": 1462,
+      "exactBundlePaths": [
+        "cia-package-inputs/source-context/ci-repairs/evidence/cir-producer-v2/generated-candidate/OUTPUT.json",
+        "evidence/cir-producer-v2/generated-candidate/OUTPUT.json"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/producer-v2/RESULT.json",
+      "sha256": "d6d265a959e378fce47d68b5aa4a3a3bbee14bebf21355a54bd8077cb51e8630",
+      "bytes": 4857,
+      "exactBundlePaths": [
+        "cia-package-inputs/source-context/ci-repairs/evidence/producer-v2/RESULT.json",
+        "evidence/producer-v2/RESULT.json"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/producer-v2/generated-candidate/OUTPUT.json",
+      "sha256": "0347e932f876d72db7d5247c54375fdc40f15f1138392ddffab03c0bb63834c5",
+      "bytes": 1369,
+      "exactBundlePaths": [
+        "cia-package-inputs/source-context/ci-repairs/evidence/producer-v2/generated-candidate/OUTPUT.json",
+        "evidence/producer-v2/generated-candidate/OUTPUT.json"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v2/PATCH.json",
+      "sha256": "21cb57eee62565e6122e1cde9a221eabf45b555cea28ca1bb5f76b2ed1c92f9d",
+      "bytes": 677,
+      "exactBundlePaths": [
+        "cia-package-inputs/source-context/m3/evidence/consumer-v2/PATCH.json"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v2/RESULT.json",
+      "sha256": "d8591a5652baf9c92902e6b1475b773fec4a1f498c1dbd6fe55dcffc002038d7",
+      "bytes": 3384,
+      "exactBundlePaths": [
+        "cia-package-inputs/source-context/m3/evidence/consumer-v2/RESULT.json"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v2/inputs.json",
+      "sha256": "3a18df88fa52077cf22be2e2193873c894d55ebc11195e8dc90b21e18fac1492",
+      "bytes": 2399340,
+      "exactBundlePaths": [
+        "cia-package-inputs/source-context/m3/evidence/consumer-v2/inputs.json"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/publication/SLF4J-RUNTIME-DIAGNOSIS.json",
+      "sha256": "68dd8b08cea1fa8940b8c4b89e020e1748db2561420ff364c8b834acbf24109e",
+      "bytes": 7466,
+      "exactBundlePaths": [
+        "cia-package-inputs/source-context/publication/SLF4J-RUNTIME-DIAGNOSIS.json"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/source/AGENTS-9963.md",
+      "sha256": "086b03459e4f441d0ecf1c90773dd63877c03956957ec0f41ac7ceb90069c0f9",
+      "bytes": 15464,
+      "exactBundlePaths": [
+        "cia-package-inputs/source-context/source/AGENTS-9963.md"
+      ]
+    },
+    {
+      "declaredPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-a3-runtime-admission.md",
+      "sha256": "e93fd4b683ff3bfc74ea3d2816468e8e41ad51945875d5d1a4d5224662c2ac59",
+      "bytes": 3825,
+      "exactBundlePaths": [
+        "cia-package-inputs/source-context/synexia/synexia-openrewrite-recipes/docs/20261005-m3-a3-runtime-admission.md"
+      ]
+    }
+  ],
+  "settingsManifestOnly": 2,
+  "toolAndDependencyBodiesRetained": false,
+  "compiledBodiesRetained": false,
+  "newProofGatesExecuted": false,
+  "consumerQualified": false
+}

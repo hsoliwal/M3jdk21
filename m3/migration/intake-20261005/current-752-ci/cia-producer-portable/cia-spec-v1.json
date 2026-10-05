@@ -1,0 +1,211 @@
+{
+  "schema": "synexia.cia-752.proof-spec/1",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+  "junitMethods": [
+    "allMixedStates",
+    "catalogueCompilationAndRuntime",
+    "exactRepairScope",
+    "initialRefusals",
+    "namedRecipeReplay",
+    "postScanDrift"
+  ],
+  "inputs": [
+    {
+      "path": "README.md",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/README.md",
+      "sha256": "b27d8958a48a00f257bb892157b30065df5731fa8d99467c4506f434295aa914",
+      "bytes": 4202
+    },
+    {
+      "path": "dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "bytes": 12032
+    },
+    {
+      "path": "pom.xml",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/pom.xml",
+      "sha256": "d7263a7f913f70e5be7c52031248477ab0bbef5e6bd8f84d7883b6702ff5e407",
+      "bytes": 3595
+    },
+    {
+      "path": "proof.py",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/proof.py",
+      "sha256": "02d7476cc67843e0ba01fa24bd4c2515bb0da3de64b87b5db1b570ea970ddb0b",
+      "bytes": 28469
+    },
+    {
+      "path": "src/main/resources/META-INF/rewrite/m3-ci-752-a3.yml",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/main/resources/META-INF/rewrite/m3-ci-752-a3.yml",
+      "sha256": "2dfa64c57bb5ad3f973852d6b8ea5e48f139215e2b737c43583fcd5f2773dbb8",
+      "bytes": 493
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/manifest.tsv",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/manifest.tsv",
+      "sha256": "89d7df5d0190e71b6fb69797fe848b37f5ffb09e274f020135e0df948488782a",
+      "bytes": 1306
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-1.txt",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-1.txt",
+      "sha256": "0de471de5a54e1c87153e4b1c23c4013a800f07595cfc05eec7bd4e68f1345d6",
+      "bytes": 10008
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-2.txt",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-2.txt",
+      "sha256": "8922e21e4f814dc99282cf1828786a0347552454003e23ac2fa91aa8710851b1",
+      "bytes": 4466
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-3.txt",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-3.txt",
+      "sha256": "a53bdeee8afe28b90cb0e348e718b70610a9487edb1b75b46e09bfb76e0f3dc9",
+      "bytes": 3522
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-4.txt",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-4.txt",
+      "sha256": "521a7f07e59f507e0ce3193a3d0c7540c232a37c74128d954b52670677498241",
+      "bytes": 2338
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-5.txt",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-5.txt",
+      "sha256": "0de471de5a54e1c87153e4b1c23c4013a800f07595cfc05eec7bd4e68f1345d6",
+      "bytes": 10008
+    },
+    {
+      "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-6.txt",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-6.txt",
+      "sha256": "8922e21e4f814dc99282cf1828786a0347552454003e23ac2fa91aa8710851b1",
+      "bytes": 4466
+    },
+    {
+      "path": "src/test/java/com/synexia/rewrite/CiaRecipeTest.java",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/test/java/com/synexia/rewrite/CiaRecipeTest.java",
+      "sha256": "30e41c28cf90a370cbdb741d367c12db38b7f5aafe262f963df7298bdc7e20f7",
+      "bytes": 29501
+    },
+    {
+      "path": "src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+      "sha256": "d88f347f77069dc1e2e6a3871c68c55e76f885f324801957d041f9ecc31ec6f4",
+      "bytes": 9492
+    },
+    {
+      "path": "src/test/resources/before/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/test/resources/before/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+      "sha256": "d684f2c95622c32683dbdce162d2f49101c7431bfbba1927a34182dcecadc77f",
+      "bytes": 4462
+    },
+    {
+      "path": "src/test/resources/before/m3/tooling/migration-recipes/pom.xml",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/pom.xml",
+      "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
+      "bytes": 3383
+    },
+    {
+      "path": "src/test/resources/before/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java",
+      "sha256": "280d7c08e9da9f618f4596516420a5c6c2de8f32fa1b52ff354853f3b0fb7c2b",
+      "bytes": 2338
+    },
+    {
+      "path": "src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java",
+      "sha256": "d88f347f77069dc1e2e6a3871c68c55e76f885f324801957d041f9ecc31ec6f4",
+      "bytes": 9492
+    },
+    {
+      "path": "src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java",
+      "sha256": "d684f2c95622c32683dbdce162d2f49101c7431bfbba1927a34182dcecadc77f",
+      "bytes": 4462
+    },
+    {
+      "path": "src/test/resources/closure/A3AlgTest.java",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/test/resources/closure/A3AlgTest.java",
+      "sha256": "594ae68ab3994526b03d31db36aab0c11235a10c078c740ffaea7d597884efbe",
+      "bytes": 6270
+    },
+    {
+      "path": "src/test/resources/closure/A3Fs.java",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/test/resources/closure/A3Fs.java",
+      "sha256": "ebddb148600afd7ee7df1175175df7da86b3a2cb048ca9b4e723d4eec5c2fe8c",
+      "bytes": 3137
+    },
+    {
+      "path": "src/test/resources/closure/A3Plan.java",
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-authoring-v1/src/test/resources/closure/A3Plan.java",
+      "sha256": "e973e37826a09fc2571d4df5514cad4fafec37008d65b6a63cb6bf89a96f4800",
+      "bytes": 7885
+    }
+  ],
+  "extraInputs": [
+    {
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-a3-runtime-admission.md",
+      "sha256": "e93fd4b683ff3bfc74ea3d2816468e8e41ad51945875d5d1a4d5224662c2ac59",
+      "bytes": 3825
+    },
+    {
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/CIA-AUTHORED.json",
+      "sha256": "33df01fd87e1ae74e5265a4259714f9b18a210f55fd94e8ee59a8721949518fa",
+      "bytes": 5730
+    },
+    {
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/source/AGENTS-9963.md",
+      "sha256": "086b03459e4f441d0ecf1c90773dd63877c03956957ec0f41ac7ceb90069c0f9",
+      "bytes": 15464
+    },
+    {
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/publication/SLF4J-RUNTIME-DIAGNOSIS.json",
+      "sha256": "68dd8b08cea1fa8940b8c4b89e020e1748db2561420ff364c8b834acbf24109e",
+      "bytes": 7466
+    },
+    {
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v2/RESULT.json",
+      "sha256": "d8591a5652baf9c92902e6b1475b773fec4a1f498c1dbd6fe55dcffc002038d7",
+      "bytes": 3384
+    },
+    {
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v2/PATCH.json",
+      "sha256": "21cb57eee62565e6122e1cde9a221eabf45b555cea28ca1bb5f76b2ed1c92f9d",
+      "bytes": 677
+    },
+    {
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v2/inputs.json",
+      "sha256": "3a18df88fa52077cf22be2e2193873c894d55ebc11195e8dc90b21e18fac1492",
+      "bytes": 2399340
+    },
+    {
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/RESULT.json",
+      "sha256": "4dbc2cf6dc163cacd930b6e90d3d359aa15380535c811545651e4a936f3e92ea",
+      "bytes": 4911
+    },
+    {
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/generated-candidate/OUTPUT.json",
+      "sha256": "90d336c43ad1ad0a397badc18cf384afe2c2502fcc64e0a1e11a8f0c1fcfa1ad",
+      "bytes": 1462
+    },
+    {
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/producer-v2/RESULT.json",
+      "sha256": "d6d265a959e378fce47d68b5aa4a3a3bbee14bebf21355a54bd8077cb51e8630",
+      "bytes": 4857
+    },
+    {
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/producer-v2/generated-candidate/OUTPUT.json",
+      "sha256": "0347e932f876d72db7d5247c54375fdc40f15f1138392ddffab03c0bb63834c5",
+      "bytes": 1369
+    },
+    {
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/OWNER-PROVENANCE.json",
+      "sha256": "ec28f568489da71a0574c09bfd0e361757b2558125444a0c3c39ff59ffce1421",
+      "bytes": 3737
+    }
+  ],
+  "scope": "Six exact catalogue/fixture/manifest/POM repairs; no existing recipe owner or guard changes; prior10 actual outputs preserved",
+  "preparationDoesNotRunGates": true
+}

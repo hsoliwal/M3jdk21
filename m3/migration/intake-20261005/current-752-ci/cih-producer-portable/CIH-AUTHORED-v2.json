@@ -1,0 +1,238 @@
+{
+  "schema": "synexia.cih-752.authoring/1",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+  "receivingHead": "5c1ee9490e76943dfdb3ca27fade0d093d017226",
+  "compositeContextManifestSHA256": "f25a39ea2c764a5a9f2a84b43915aa4480aa4302718bc098bd4bfaa39727f7b3",
+  "receiverStopResultSHA256": "65ad6376f5e88ca2bd1e33e549c262a50bc58952ede7af8c17c9b0beed05ed73",
+  "priorCiaResultSHA256": "c0f132f91f9c024d15030bd4d0acf63f287e8e38f2d5a51f1b7ba55c36490684",
+  "recipe": "com.synexia.m3.Cih",
+  "ownerSHA256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+  "targets": [
+    {
+      "path": "m3/migration/test/test_jcc_handoff_context_profiles.py",
+      "operation": "REPLACE",
+      "beforeSHA256": "54114c84b923790cea717f85bdb78574aa3c14e00e1419e68c5cef7d8d87b1b4",
+      "beforeBytes": 13206,
+      "afterSHA256": "9d79d07bb31ded0e5ec9eebef1095ae25be8f20c55f9e72aee4ba64852790594",
+      "afterBytes": 16119,
+      "resource": "target-1.txt",
+      "beforeOrigin": "composite-current-752-plus-pr148-5c-plus-qualified19"
+    },
+    {
+      "path": "m3/migration/test/test_jcc_handoff_current_context.py",
+      "operation": "ADD",
+      "beforeSHA256": "ABSENT",
+      "beforeBytes": null,
+      "afterSHA256": "30a838a363fb05f9c1caf48fd36c0a67de0767708e4b198b77af37ee0c41eb63",
+      "afterBytes": 7629,
+      "resource": "target-2.txt",
+      "beforeOrigin": "ABSENT-in-exact-composite-context"
+    },
+    {
+      "path": "m3/migration/test/test_jcc_handoff_packet.py",
+      "operation": "REPLACE",
+      "beforeSHA256": "1662cd99e60e03692e95bfdeb51dbf46c5c990dac7d5cadbd5e1ddb5fcad52fe",
+      "beforeBytes": 12660,
+      "afterSHA256": "fde72eb9f2b682f50004defbc70e6d886a3f646abb0d89c0aec5de8ab0dbd30d",
+      "afterBytes": 13634,
+      "resource": "target-3.txt",
+      "beforeOrigin": "composite-current-752-plus-pr148-5c-plus-qualified19"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-752-ci.json",
+      "operation": "ADD",
+      "beforeSHA256": "ABSENT",
+      "beforeBytes": null,
+      "afterSHA256": "e4ea964db1a6f9527122ff0dad1c969a43dc50a0f80c771c86b70bcd6da6dcaf",
+      "afterBytes": 2875,
+      "resource": "target-4.txt",
+      "beforeOrigin": "ABSENT-in-exact-composite-context"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/pom-before-752.xml",
+      "operation": "ADD",
+      "beforeSHA256": "ABSENT",
+      "beforeBytes": null,
+      "afterSHA256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
+      "afterBytes": 3383,
+      "resource": "target-5.txt",
+      "beforeOrigin": "ABSENT-in-exact-composite-context"
+    }
+  ],
+  "replacements": 2,
+  "additions": 3,
+  "manifestSHA256": "f41f9bbafabd4dba007d091d542972f40c5eab5c666b3ec077b5dd090370ef80",
+  "contextInputs": [
+    {
+      "path": "m3/docs/name-mapping.schema.json",
+      "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+      "bytes": 16827
+    },
+    {
+      "path": "m3/migration/intake-20261005/crate/after/0.txt",
+      "sha256": "8e229715d6783906b1ee249bb2707cdb5e412146219be6037154927abac893ea",
+      "bytes": 340001
+    },
+    {
+      "path": "m3/migration/intake-20261005/crate/after/1.txt",
+      "sha256": "fe7df1477c461ddfcedccd3ff2ca078d44dab5b7c5b46412a5873de611cb13c3",
+      "bytes": 11773
+    },
+    {
+      "path": "m3/migration/intake-20261005/crate/after/2.txt",
+      "sha256": "4d7496a37677aee3ba1aee206129625a5ed870d0f922eccde32ca670f09a11d8",
+      "bytes": 21178
+    },
+    {
+      "path": "m3/migration/intake-20261005/crate/after/3.txt",
+      "sha256": "4072d0cef765767e44e9ff93a11f2d7112b32f94ab6b3d07a03ed191307e2daf",
+      "bytes": 68888
+    },
+    {
+      "path": "m3/migration/intake-20261005/crate/after/4.txt",
+      "sha256": "8ccd586902d1b292310d6ded995cab15d14f56c43de3bdfa8c20bc4362eab517",
+      "bytes": 1437
+    },
+    {
+      "path": "m3/migration/intake-20261005/crate/after/5.txt",
+      "sha256": "af2c0ea782643d6860d10a3d9c35706781072a361fb74a8cf6ed4caa6236e5d6",
+      "bytes": 11078
+    },
+    {
+      "path": "m3/migration/intake-20261005/crate/after/6.txt",
+      "sha256": "1cfe107b886e495046ec77f74a2739705b403251ae4fafe640f0fe46ed656ed8",
+      "bytes": 93931
+    },
+    {
+      "path": "m3/migration/intake-20261005/crate/after/7.txt",
+      "sha256": "4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787",
+      "bytes": 56771
+    },
+    {
+      "path": "m3/migration/intake-20261005/crate/after/8.txt",
+      "sha256": "765f001aa41f95c1dfd9994ba64101526ce0324ede896228803133ec9313b9e9",
+      "bytes": 77751
+    },
+    {
+      "path": "m3/migration/intake-20261005/crate/after/9.txt",
+      "sha256": "cfe8e8930916ef96c7d23dd9d0942f082c5eb1d6cf4b2a2f6e9f3d69d8fa3e41",
+      "bytes": 3341
+    },
+    {
+      "path": "m3/migration/intake-20261005/crate/before/0.txt",
+      "sha256": "67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb",
+      "bytes": 196161
+    },
+    {
+      "path": "m3/migration/intake-20261005/crate/before/7.txt",
+      "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+      "bytes": 23333
+    },
+    {
+      "path": "m3/migration/intake-20261005/crate/plan.json",
+      "sha256": "47aa763f4678124df42f3181e68e2ff0a74636add9403c1e36e40224094e0cdc",
+      "bytes": 3288
+    },
+    {
+      "path": "m3/migration/migration.py",
+      "sha256": "4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787",
+      "bytes": 56771
+    },
+    {
+      "path": "m3/migration/recipe.py",
+      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628",
+      "bytes": 9860
+    },
+    {
+      "path": "m3/tooling/migration-recipes/pom.xml",
+      "sha256": "a53bdeee8afe28b90cb0e348e718b70610a9487edb1b75b46e09bfb76e0f3dc9",
+      "bytes": 3522
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "bytes": 12032
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/01-jcc-source-handoff.md.txt",
+      "sha256": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
+      "bytes": 17031
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/02-source-destination-bindings.json.txt",
+      "sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
+      "bytes": 24139
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/03-root-coverage-obligations.tsv.txt",
+      "sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
+      "bytes": 107504
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/after00-name-mapping.json.txt",
+      "sha256": "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace",
+      "bytes": 220539
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/before00-name-mapping.json.txt",
+      "sha256": "67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb",
+      "bytes": 196161
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/manifest.tsv",
+      "sha256": "258b5ab6f6cb7099685ee4548d5430fcb952561fefdf565a6dff149cf50c5f06",
+      "bytes": 687
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-8131.json",
+      "sha256": "8034d77f1124584888dce10760bd2f5dae55eeb93497f7a0db1d09a3a197ec5f",
+      "bytes": 2873
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
+      "sha256": "648f80ae4073400f1ea1210f8cdc26942019d53eb4452d839961c466f395d05a",
+      "bytes": 2861
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
+      "bytes": 396
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67",
+      "bytes": 1815
+    }
+  ],
+  "contextCount": 28,
+  "historical569ActiveExceptions": [
+    "m3/migration/test/test_jcc_handoff_context_profiles.py",
+    "m3/migration/test/test_jcc_handoff_packet.py"
+  ],
+  "historicalProofAndPlanBytesChanged": false,
+  "prior19ActiveBytesChanged": false,
+  "finalReceivingDistinctPaths": 24,
+  "gatesRun": false,
+  "contextSourceRoot": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/candidate-v4",
+  "priorOverlayMeaning": "The two existing test preimages are retained PR148 head5c images in the composite context, not rawmaster752 images.",
+  "previousAuthoringSHA256": "0fe3a9f01cba3c679d7e77b8f72dcc72fe7da7614aeea3db05bc3d5457230237",
+  "previousProducerResultSHA256": "302ed8be74016f6d9072fccc9d803702b778b6076f59a7e099d7aa5c3b7adcad",
+  "closureCorrection": {
+    "intakeImageCount": 12,
+    "newContextImages": [
+      "m3/migration/intake-20261005/crate/after/0.txt",
+      "m3/migration/intake-20261005/crate/after/1.txt",
+      "m3/migration/intake-20261005/crate/after/2.txt",
+      "m3/migration/intake-20261005/crate/after/3.txt",
+      "m3/migration/intake-20261005/crate/after/4.txt",
+      "m3/migration/intake-20261005/crate/after/5.txt",
+      "m3/migration/intake-20261005/crate/after/6.txt",
+      "m3/migration/intake-20261005/crate/after/8.txt",
+      "m3/migration/intake-20261005/crate/after/9.txt",
+      "m3/migration/intake-20261005/crate/before/0.txt"
+    ],
+    "profileChange": "Retain every image from the raw-SHA-verified intake plan before unchanged sealed_plan and context reconstruction",
+    "existingTestMethodBodiesChanged": false
+  }
+}

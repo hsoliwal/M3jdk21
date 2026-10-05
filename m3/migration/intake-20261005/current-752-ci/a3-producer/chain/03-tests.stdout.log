@@ -1,0 +1,45 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------< com.synexia.verification:m3-ci-752-regex >--------------
+[INFO] Building Pinned A3 literal repair recipe qualification 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- surefire:3.2.5:test (default-cli) @ m3-ci-752-regex ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.synexia.rewrite.CirRecipeTest
+CIR_ORIGINAL_PARSER A3MemoryCompiler kinds=[org.openrewrite.java.tree.J$CompilationUnit] diagnostics=
+CIR_ORIGINAL_JAVAC A3MemoryCompiler [/com/m3/a3/A3MemoryCompiler.java:65: error: illegal line end in character literal
+            out.append('
+                       ^, /com/m3/a3/A3MemoryCompiler.java:82: error: illegal line end in character literal
+                || checked.indexOf('
+                                   ^, /com/m3/a3/A3MemoryCompiler.java:84: error: illegal line end in character literal
+                || checked.indexOf('
+                                   ^]
+CIR_ORIGINAL_PARSER A3RegexMatrix kinds=[org.openrewrite.tree.ParseError] diagnostics=
+CIR_ORIGINAL_JAVAC A3RegexMatrix [/com/m3/a3/A3RegexMatrix.java:61: error: ')' or ',' expected
+                    "Pattern.compile("a+b?")",
+                                      ^, /com/m3/a3/A3RegexMatrix.java:61: error: <identifier> expected
+                    "Pattern.compile("a+b?")",
+                                       ^, /com/m3/a3/A3RegexMatrix.java:61: error: <identifier> expected
+                    "Pattern.compile("a+b?")",
+                                         ^]
+CIR_A3_RUNTIME regexMatrixIsPrecompiledDeterministicAndPayloadSensitive PASS
+CIR_A3_RUNTIME inMemoryCompilerSurfacesDeliberateJavacFailure PASS
+CIR_A3_RUNTIME rootWriteGuardStillRejectsLabOutputOutsideM3Build PASS
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.399 s -- in com.synexia.rewrite.CirRecipeTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  10.200 s
+[INFO] Finished at: 2026-10-05T15:50:59Z
+[INFO] ------------------------------------------------------------------------

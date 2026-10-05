@@ -1,0 +1,336 @@
+{
+  "schema": "synexia.cih-752.portable-publication-whitelist/1",
+  "status": "VERIFIED_REVIEW_EVIDENCE",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+  "producerResultSHA256": "f93e1ef05b82459105b8dacd6258af0caa86f0e2c2221f946e8250397ffa9dcb",
+  "bundleIndexSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+  "retentionAuditSHA256": "0645a443dd5350a0134172f0b5da02630813b27d4bfa6450a699bc9b9eca094b",
+  "files": [
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/CIH-AUTHORED-v2.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/CIH-AUTHORED-v2.json",
+      "mode": "100644",
+      "gitBlob": "4841ee52ea6577af0858d39dd6ae97907f5934a0",
+      "sha256": "646a74eb9a2398e0619742d78e64e00a869fbb6528ddb9146f2594793d2a0f70",
+      "bytes": 10582,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/OUTPUT.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/OUTPUT.json",
+      "mode": "100644",
+      "gitBlob": "e21b2823b326253d1c2996a8c69e3b5a7c79fce1",
+      "sha256": "c3e818efae6c7de3e9e92a4122f87f3af9e7e4fa997d053ce18c1015c0937372",
+      "bytes": 2023,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/PATCH.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/PATCH.json",
+      "mode": "100644",
+      "gitBlob": "d8269e047204e45169278a3e42712a6e51d57531",
+      "sha256": "73d5d79b33ef2f29f5f3d65d17c0bb30fd7b4110c0483edf0faf935447e03406",
+      "bytes": 825,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/QUALIFIED-CIH.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/QUALIFIED-CIH.json",
+      "mode": "100644",
+      "gitBlob": "0f59c35717a69fea98afc1beeff9e70947f32a45",
+      "sha256": "6b9516bc66fd4e4578ddbbad786adc80b7fb7dcf565c2bc422e11e1c518230f2",
+      "bytes": 4216,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/README.md",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/README.md",
+      "mode": "100644",
+      "gitBlob": "1a39f3326a5cdd339337633c966e58d73a563f07",
+      "sha256": "477ea8241d8893ae2608a48ac056bbeee92390d3780b70d708ca1faf571df96e",
+      "bytes": 3711,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/RESULT.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/RESULT.json",
+      "mode": "100644",
+      "gitBlob": "3a67ee488bade1d54923f2f3dda1b44037cf5711",
+      "sha256": "f93e1ef05b82459105b8dacd6258af0caa86f0e2c2221f946e8250397ffa9dcb",
+      "bytes": 5407,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/RETENTION-AUDIT.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/RETENTION-AUDIT.json",
+      "mode": "100644",
+      "gitBlob": "6d812e3950e7dd9992cfb371d8e26cad74d1487c",
+      "sha256": "0645a443dd5350a0134172f0b5da02630813b27d4bfa6450a699bc9b9eca094b",
+      "bytes": 252977,
+      "encoding": "base64",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/SOURCE-PROVENANCE.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/SOURCE-PROVENANCE.json",
+      "mode": "100644",
+      "gitBlob": "c32e14b9c2c67e95c4c4d16325556d9429cb72f2",
+      "sha256": "e87a0ece67ddaff13fddfb1ba447817da7dd4b23b69b04dbcecdffad1f287fcf",
+      "bytes": 61270,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/candidate.patch",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/candidate.patch",
+      "mode": "100644",
+      "gitBlob": "39f2bc58e877462f330513f16f78bf22502673a6",
+      "sha256": "17e4f8398e08468645b2ec15d99c45a0c49e942d03115cc92e53e713ba9c00af",
+      "bytes": 24160,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/cih-spec-v4.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/cih-spec-v4.json",
+      "mode": "100644",
+      "gitBlob": "7082064d226f0c373fa42a42e7a22412afb4506b",
+      "sha256": "a62117be1d989813f5efecaff71fe3675d9bd2118ca6ec15f828eb718c1e9c7f",
+      "bytes": 28938,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/BUNDLE.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+      "mode": "100644",
+      "gitBlob": "96ddbc86d63b04ef4f7c3606d04227816a82bf72",
+      "sha256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+      "bytes": 6160,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/LANES.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/LANES.json",
+      "mode": "100644",
+      "gitBlob": "4c1324c4dca2bb90b060bffcba8e38cbef43696c",
+      "sha256": "9dffb8cc6eb08a53823e7a84c18a2bf3e846031d5013b48c86775b64b47912dc",
+      "bytes": 6282,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/PACKAGE.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/PACKAGE.json",
+      "mode": "100644",
+      "gitBlob": "12d7438cd35fa409a740379565a187c91c519609",
+      "sha256": "f3916bec96a0b67bc50957a03a1feb04220bfa54c0451f3cc3c0dda0b66b18f8",
+      "bytes": 1450,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/PATHS-0001.tsv",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/PATHS-0001.tsv",
+      "mode": "100644",
+      "gitBlob": "9c13bd04c6096cf67afd44ee5177b1d1e54b72aa",
+      "sha256": "34e85993d63464327c795b64fbe0303d086682e31e438e7cd4884e5d3a7a8ffd",
+      "bytes": 66196,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/README.md",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/README.md",
+      "mode": "100644",
+      "gitBlob": "13885d919b2306d91475155861e48fa2e927a8b3",
+      "sha256": "946f63a7567b869cda5cfed2de2f50dc189992cc077058b4f2fdadc443641393",
+      "bytes": 2426,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/part-0001.tar.gz",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/part-0001.tar.gz",
+      "mode": "100644",
+      "gitBlob": "95d8fc792d648d56af7d32098552fc51d6ce138f",
+      "sha256": "d28153e170afc5182edb345ac68d9cf5950228c6add345dae2d5143e7066f3a3",
+      "bytes": 964209,
+      "encoding": "base64",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/part-0002.tar.gz",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/part-0002.tar.gz",
+      "mode": "100644",
+      "gitBlob": "15d0d8a785f09c209c0f1e8dea713a16ee36861f",
+      "sha256": "8e1934fbf33986ab1e26ee893f7def256f9d4b3240e5aa22ac01f15679ba2991",
+      "bytes": 596569,
+      "encoding": "base64",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/failed-v2/PATCH.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/failed-v2/PATCH.json",
+      "mode": "100644",
+      "gitBlob": "0a2a3ea1724cdade7715f66964321d4c120f9244",
+      "sha256": "28d88ff4cf114bb9f7c888de88f7fc1d7b658912635d1934ee3f9b8387d30e17",
+      "bytes": 825,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/failed-v2/RESULT.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/failed-v2/RESULT.json",
+      "mode": "100644",
+      "gitBlob": "aced1e950207242b2f0774fcc978601e00e92828",
+      "sha256": "302ed8be74016f6d9072fccc9d803702b778b6076f59a7e099d7aa5c3b7adcad",
+      "bytes": 1830,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/pack.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/pack.json",
+      "mode": "100644",
+      "gitBlob": "1d91458fc9e77b5bef9f1b728abf42991586c808",
+      "sha256": "31735fe46483b6709c846f17ce2fbfe867095c0724de4455dd8146b0c3214bee",
+      "bytes": 1365,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/pack.stderr.log",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/pack.stderr.log",
+      "mode": "100644",
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/pack.stdout.log",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/pack.stdout.log",
+      "mode": "100644",
+      "gitBlob": "f91dd3db74fafbedc378bdba8bb802ff7e09c62d",
+      "sha256": "b19b0ff2702e7a84c82485ee5e078841dc5409919d4c639a5b7bda6d07feee99",
+      "bytes": 653,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/package-plan.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/package-plan.json",
+      "mode": "100644",
+      "gitBlob": "67cfe9ef09a7251b0e4ff66d77d2dcc5b2ca0943",
+      "sha256": "412e885d2e696f62cf99c0eeba02c2a84b3d188f7adcf7b3510b85e6e1f76b1f",
+      "bytes": 2228,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/package_evidence.py",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/package_evidence.py",
+      "mode": "100644",
+      "gitBlob": "1dbaa1ecf032b0f5d94a4e34aafee3f0cc88f0a0",
+      "sha256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574",
+      "bytes": 33814,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/preflight-v1/CIH-PREFLIGHT-v1.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/preflight-v1/CIH-PREFLIGHT-v1.json",
+      "mode": "100644",
+      "gitBlob": "57ec64ae1e7523f3c593b90690978906ed139a21",
+      "sha256": "f45d3fc1aba7eae0456871bc3fdd9bc3ee56ca3f686e3d56fe89b35df69f9133",
+      "bytes": 1013,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/review/cih-review-v2.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/review/cih-review-v2.json",
+      "mode": "100644",
+      "gitBlob": "d434426dad4f9c01c9ed2d37549ea849603fa1ce",
+      "sha256": "1f7ab70bf3fb5d9ad95d1d1a39c7e79947c43970633ea5731bdef7a1258e2480",
+      "bytes": 6461,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/review/cih-review.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/review/cih-review.json",
+      "mode": "100644",
+      "gitBlob": "46857b8f33cfc3445905e456f1da2b7ed209a0f8",
+      "sha256": "065378b5b0cc9f0378d38b4ac6db8cc4a233e52856bbdf3328694abfdbb53c23",
+      "bytes": 3968,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/source-context/20261005-m3-jcc-context-admission.md",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/source-context/20261005-m3-jcc-context-admission.md",
+      "mode": "100644",
+      "gitBlob": "aa9c81284c2528797c75507e38583f41b1f824db",
+      "sha256": "485aa5416ddd8c4fc2a6b5816883e4899fea5b7f3f3ca1fe9ab6376c917dbd91",
+      "bytes": 3860,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/source-context/20261005-m3-jcc-context-closure-admission.md",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/source-context/20261005-m3-jcc-context-closure-admission.md",
+      "mode": "100644",
+      "gitBlob": "f0a45a21a6cb47240bfa74618c460096b0aaad93",
+      "sha256": "6f60b1564f267b2cc3476ad74412bed23c4e698dce016ed9968e56ff36105585",
+      "bytes": 2086,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/verify.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/verify.json",
+      "mode": "100644",
+      "gitBlob": "b2192190fd74511474ff02258da4362ebd694ecc",
+      "sha256": "87646ba7597a0c91dbbeda351bf29bbc3084924e7fe2862532e6df731197a369",
+      "bytes": 1119,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/verify.stderr.log",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/verify.stderr.log",
+      "mode": "100644",
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/verify.stdout.log",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/verify.stdout.log",
+      "mode": "100644",
+      "gitBlob": "145a10365c2e3aae34ec3e12c530dbbaf14e3067",
+      "sha256": "f91275c50a185d8e209501a2c583afd43a0013156818b649a3f8ebceace6722e",
+      "bytes": 770,
+      "encoding": "utf-8",
+      "group": "portable-cih-producer-evidence"
+    }
+  ],
+  "fileCount": 32,
+  "bytes": 2097393,
+  "proofGatesExecutedByPackaging": false,
+  "consumerQualified": false,
+  "canonicalProductionApplied": false
+}

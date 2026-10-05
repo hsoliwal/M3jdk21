@@ -1,0 +1,68 @@
+{
+  "boundary": "The finite612 source census excludes these outer publication mapping, helper and report envelopes. The source/receiver transport unions still include every explicitly selected envelope. No proof receipt is rewritten and no new behavioral qualification is granted.",
+  "consumerManifest": {
+    "bytes": 2198517,
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/consumer-manifest-v5.json",
+    "sha256": "8c3d4e6a28d4314a1de4c3a15c3616a371e04ac2eaf6357852c6ce28c1642db4"
+  },
+  "consumerPackage": {
+    "bytes": 75972,
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/consumer-package-v6/evidence-bundle/BUNDLE.json",
+    "sha256": "2e550586cbce37d2a2956f6a400670889dde4bc6daecd7e3f8e3a722a3e6f46f"
+  },
+  "consumerResult": {
+    "bytes": 12464,
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v5/RESULT.json",
+    "sha256": "c037e9fd5b622f17d161d8efe1fbb15f2a128f803e27b70292448403dc43bd80"
+  },
+  "declaredProducerSourcePaths": 387,
+  "failedAndSuccessfulCopyCustodyBodiesIdentical": true,
+  "failedPackagePreserved": {
+    "bytes": 3460,
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/package-refusal-v5/REFUSAL.json",
+    "sha256": "642cc79918c9801b782ce585bca511e96507863c913ddb3137880d6d0fab76ae"
+  },
+  "finiteMappedSourcePaths": 612,
+  "finiteSourceCoverage": {
+    "bytes": 292823,
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/receiver-source-cohort-v1/coverage-append.json",
+    "sha256": "080f757135d1f5e260e878a96d5412e178fe6f05d7d900765eb4dfe908d45536"
+  },
+  "finiteSourceMapping": {
+    "bytes": 164708,
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/receiver-source-cohort-v1/source-to-receiving.json",
+    "sha256": "7a8d830e1f4a353ae40a27d3374fc174f09516fa8632a8836fa170a6c1bb39bd"
+  },
+  "finiteSourceWhitelist": {
+    "bytes": 149290,
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/receiver-source-cohort-v1/source-whitelist.json",
+    "sha256": "34e063949387b9d5539e382b51d17b0eb45bee0546ce01707c1e44c59ea09d92"
+  },
+  "mainReceiverWhitelist": {
+    "bytes": 357635,
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/receiver-whitelist-v5.json",
+    "sha256": "bc12bfabf9325064b6566c3b97af92c57870a0f52f0290c6e6f52f7b5b70346b"
+  },
+  "packCommand": {
+    "bytes": 960,
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/consumer-package-v6/PACK-COMMAND.json",
+    "sha256": "b52c33b81dd21b0a5f6dcb7016ff4e19ac9d5e9d46595cf0a6324d157a50c717"
+  },
+  "productRuntimeAccepted": false,
+  "proofGatesExecutedByPublication": false,
+  "qualifiedPaths": 221,
+  "qualifiedTargetPaths": 24,
+  "qualifiedTaskPaths": 197,
+  "receiverProvenanceSourceAliases": 225,
+  "receivingCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+  "receivingHead": "5c1ee9490e76943dfdb3ca27fade0d093d017226",
+  "remoteWrites": false,
+  "sourceProofCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "sourcePublicationCommit": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+  "state": "POST_PASS_PUBLICATION_METADATA_EXECUTED",
+  "verifyCommand": {
+    "bytes": 640,
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/consumer-package-v6/VERIFY-COMMAND.json",
+    "sha256": "c1aaa04740046d1e7359259049dfad4d5b071d8af46261b5d138c3f789a56b83"
+  }
+}

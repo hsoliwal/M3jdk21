@@ -1,0 +1,358 @@
+{
+  "schema": "synexia.cir-752.publication-whitelist/1",
+  "status": "QUALIFIED_SOURCE_SET_READY_FOR_ROOT_REVIEW",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+  "producerProof": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2",
+  "producerResultSHA256": "4dbc2cf6dc163cacd930b6e90d3d359aa15380535c811545651e4a936f3e92ea",
+  "files": [
+    {
+      "path": "synexia-openrewrite-recipes/docs/20261005-m3-regex-template-admission-control-literals.md",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-regex-template-admission-control-literals.md",
+      "mode": "100644",
+      "gitBlob": "7ce4d137721be3dc8edded50193c799c120a9128",
+      "sha256": "e7f05694d31286451c54925aeccdce6fbe5d61fc5e121c99183e1bbd9232088b",
+      "bytes": 2660,
+      "encoding": "utf-8",
+      "group": "admission"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/docs/20261005-m3-regex-template-admission.md",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-regex-template-admission.md",
+      "mode": "100644",
+      "gitBlob": "a36cf06076378a12492a8b4e8b302ff2a444549b",
+      "sha256": "e6a88f16eb77e2c9d742a13003b3d5e78f708ca25f13e0949c4afbcf8d6964e5",
+      "bytes": 3765,
+      "encoding": "utf-8",
+      "group": "admission"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/README.md",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/README.md",
+      "mode": "100644",
+      "gitBlob": "8ca9e4a8b2095351e66e7aa34bf89ce753d0144f",
+      "sha256": "707b37b547da43923b517a6fca3e1b957ad528ea55ddde7331850ce78de7d053",
+      "bytes": 4931,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+      "mode": "100644",
+      "gitBlob": "f1e91061396fffa34245c9f40c2fe161f86cef74",
+      "sha256": "4f6c17a035e64106f172b488fded9b565d1af48d6a8ecbd4700b3ff0cc2cd1e1",
+      "bytes": 4448,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+      "mode": "100644",
+      "gitBlob": "5951c24774f1e40f3f42f7b61e8f7f2e38031bc0",
+      "sha256": "b831177cbaaeca359a0b397eb4c74c0caf86c27666db702ef4492a42c210cd9f",
+      "bytes": 2706,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/dependency-source/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+      "mode": "100644",
+      "gitBlob": "0041adab5913304874f5063fc2b982ff3cc1e065",
+      "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
+      "bytes": 7151,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "mode": "100644",
+      "gitBlob": "a2e8c916208b563517e51b738744a05357e633aa",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "bytes": 12032,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "mode": "100644",
+      "gitBlob": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
+      "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
+      "bytes": 13805,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/evidence/authoring/CIR-AUTHORED.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/CIR-AUTHORED.json",
+      "mode": "100644",
+      "gitBlob": "56b753b018440f71c3fcfe89af4ab777702eb985",
+      "sha256": "e93f9292546683cefd5e3f425cfab16fc1e9aaa7f2ae341ac5614fbd43e73df8",
+      "bytes": 6158,
+      "encoding": "utf-8",
+      "group": "exact-authored-and-qualified-provenance"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/evidence/authoring/CIR-CLOSURE-CORRECTION-v2.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/CIR-CLOSURE-CORRECTION-v2.json",
+      "mode": "100644",
+      "gitBlob": "f50f74ab93381d12b539937b756433790fa4736e",
+      "sha256": "220884f40b35dfc9bb1329629f93e8f80ac1bd22927105afc7daf64f4668bd07",
+      "bytes": 971,
+      "encoding": "utf-8",
+      "group": "exact-authored-and-qualified-provenance"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/evidence/authoring/INDEPENDENT-REVIEW.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/research/regex-matrix/independent/REVIEW.json",
+      "mode": "100644",
+      "gitBlob": "8271de222647a80ab25354c2e7467fb207feb006",
+      "sha256": "309e6c30f4e6342fcffdd0aab81f1a52ae51748029bd0122ceb546322c23c806",
+      "bytes": 8222,
+      "encoding": "utf-8",
+      "group": "exact-authored-and-qualified-provenance"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/evidence/authoring/QUALIFIED-CIR.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/QUALIFIED-CIR.json",
+      "mode": "100644",
+      "gitBlob": "e6434edfbc414ea0b1e6874c6c57ad311d8ba50b",
+      "sha256": "c96fc219ef9ade58c04da59979d202b74a4e82ece96a16fe6f840b0939a89dc7",
+      "bytes": 3026,
+      "encoding": "utf-8",
+      "group": "exact-authored-and-qualified-provenance"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/evidence/authoring/ROOT-REVIEW.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/review/cir-five-literals-root-review.json",
+      "mode": "100644",
+      "gitBlob": "86c5980da1681e6c63daf46de83465e5234bfc20",
+      "sha256": "75c7faa54c96c34df0d27376bfaa168b97e8a1667e6a0f4c1d13b511138f51c1",
+      "bytes": 5217,
+      "encoding": "utf-8",
+      "group": "exact-authored-and-qualified-provenance"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/pom.xml",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/pom.xml",
+      "mode": "100644",
+      "gitBlob": "6497b5cfa98e12bcd0e62e88cc9a0ece1c23b060",
+      "sha256": "de7d0f89b87ef2de2a129f3d630af31d68d02f88825fd546aaca48b5a9ba4fb6",
+      "bytes": 3604,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/proof.py",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/proof.py",
+      "mode": "100644",
+      "gitBlob": "a503302794721ad0bf340ab7205ebdbf0614d3a4",
+      "sha256": "22bc6a9f05bd3a881e9e5c3c1da07c85ae043ebe99dac1e769dcece82354058c",
+      "bytes": 26958,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+      "mode": "100644",
+      "gitBlob": "a1ebb9c063f24f282002cb815568cd7c629e21df",
+      "sha256": "e1486e41112dc0e4a354fbbc8a54d27a539d28aec961c012243421b2c6cab243",
+      "bytes": 467,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+      "mode": "100644",
+      "gitBlob": "b7792daa930021d14449b4de382ec70d49fbe742",
+      "sha256": "a212c4001d0a2a2df0289e4209bdb3c48846c2b8b2d750014171e55db6d494e3",
+      "bytes": 1213,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+      "mode": "100644",
+      "gitBlob": "975a4f2818770a6f865b48cb96762b5fa0c1707e",
+      "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef",
+      "bytes": 6447,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+      "mode": "100644",
+      "gitBlob": "85f132217c82e67a599bde5f22a4c5a348e120ce",
+      "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada",
+      "bytes": 7516,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+      "mode": "100644",
+      "gitBlob": "975a4f2818770a6f865b48cb96762b5fa0c1707e",
+      "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef",
+      "bytes": 6447,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+      "mode": "100644",
+      "gitBlob": "85f132217c82e67a599bde5f22a4c5a348e120ce",
+      "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada",
+      "bytes": 7516,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+      "mode": "100644",
+      "gitBlob": "c8848d8222c08485b603fee4f4c71c3900563109",
+      "sha256": "e7a96b1290ead86d3861f0388423504078cc8f66f10303f73e0a7d44a6e5776b",
+      "bytes": 658,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+      "mode": "100644",
+      "gitBlob": "4d0239ddfb6ea3f9ddb0e63e18fe7f52d7acdf71",
+      "sha256": "c59301677407e959e05be52a814e093e6c007fb64fa1266d1c44c6db75852117",
+      "bytes": 30148,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+      "mode": "100644",
+      "gitBlob": "277e13c69b882ad25ac0bf0429da26f018449e89",
+      "sha256": "9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697",
+      "bytes": 6442,
+      "encoding": "base64",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+      "mode": "100644",
+      "gitBlob": "bf91afcd627d8e2faa9790ea6592b6bc9c1b0e33",
+      "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404",
+      "bytes": 7514,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+      "mode": "100644",
+      "gitBlob": "277e13c69b882ad25ac0bf0429da26f018449e89",
+      "sha256": "9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697",
+      "bytes": 6442,
+      "encoding": "base64",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+      "mode": "100644",
+      "gitBlob": "bf91afcd627d8e2faa9790ea6592b6bc9c1b0e33",
+      "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404",
+      "bytes": 7514,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+      "mode": "100644",
+      "gitBlob": "f18bdb2c7808e88dc2692e58acafbdfbc854b7e5",
+      "sha256": "b2febbb17ed96ae6f582eee2e16af3fc5e435c23e350708f56397bee9ac38ab5",
+      "bytes": 658,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/closure/A3Cases.java",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/closure/A3Cases.java",
+      "mode": "100644",
+      "gitBlob": "c1bb8e454c71b62444f795a2e5240dd23859be90",
+      "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298",
+      "bytes": 7782,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/closure/A3Fs.java",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/closure/A3Fs.java",
+      "mode": "100644",
+      "gitBlob": "562d875e0486279857286f82ffb6edb91024ce09",
+      "sha256": "ebddb148600afd7ee7df1175175df7da86b3a2cb048ca9b4e723d4eec5c2fe8c",
+      "bytes": 3137,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/nested-a3/A3Lab.java.after",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/nested-a3/A3Lab.java.after",
+      "mode": "100644",
+      "gitBlob": "b9781fc4085f1f97ecb730ee1874ab16d52e6d8f",
+      "sha256": "c212736f000836cb782a5ff81fd2de48e67d36ea4b3bd53cf7743c4aadbfdaf6",
+      "bytes": 16196,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/nested-a3/A3LabTest.java.after",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/nested-a3/A3LabTest.java.after",
+      "mode": "100644",
+      "gitBlob": "ccc81c0af5070a343a853666de94c1e3e06eff34",
+      "sha256": "351eeac06154189e79f3d139336437d5911da5721c9a95a779ebd5d511997d9c",
+      "bytes": 6117,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/nested-a3/before/A3Lab.java",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/nested-a3/before/A3Lab.java",
+      "mode": "100644",
+      "gitBlob": "c42a107a8cb9ff4cc6a40cc660069868b9482636",
+      "sha256": "f68fb01640e7bee16e67af34ff986006a8ebebca3c13e9088296540f844b2200",
+      "bytes": 17623,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/nested-a3/before/A3LabTest.java",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/nested-a3/before/A3LabTest.java",
+      "mode": "100644",
+      "gitBlob": "8b9ce1735fdeb6f80f4c993b98b09120c43878cf",
+      "sha256": "225efc2885ba8c002d036ecf70b4dd8a13b646debc74afeb031b0fce624d3f18",
+      "bytes": 3860,
+      "encoding": "utf-8",
+      "group": "actual-qualified-task-input"
+    }
+  ],
+  "count": 34,
+  "scope": "Isolated Cir Maven task, unchanged authentic task dependencies, two additive admissions and exact finite qualification provenance. No canonical Synexia engine/YAML changes.",
+  "proofArchiveIncluded": false,
+  "limitations": {
+    "consumerQualified": false,
+    "crossFamilyAtomicity": false,
+    "canonicalProductionApplied": false
+  }
+}

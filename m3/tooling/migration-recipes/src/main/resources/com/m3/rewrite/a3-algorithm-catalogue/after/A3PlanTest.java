@@ -25,10 +25,10 @@ class A3PlanTest {
                 backports.resolve("JEP_CATALOGUE.tsv"),
                 """
                 release	jep	title	domain	disposition	reason	superseded_by
-                24	485	Stream Gatherers	library	candidate	final API	
-                27	534	Compact Object Headers	vm-gc-runtime	candidate-high-risk	VM change	
-                27	533	Structured Concurrency	library-runtime	hold-preview	preview	
-                24	486	Disable Security Manager	compatibility-security	reject-compat	incompatible	
+                24	485	Stream Gatherers	library	candidate	final API\t
+                27	534	Compact Object Headers	vm-gc-runtime	candidate-high-risk	VM change\t
+                27	533	Structured Concurrency	library-runtime	hold-preview	preview\t
+                24	486	Disable Security Manager	compatibility-security	reject-compat	incompatible\t
                 """);
         Files.writeString(
                 backports.resolve("UPSTREAM_CHANGE_SEEDS.tsv"),

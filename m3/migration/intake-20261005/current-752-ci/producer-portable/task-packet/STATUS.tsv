@@ -1,0 +1,7 @@
+scope	status	evidence
+recipe_resources	AUTHORED_NOT_QUALIFIED	Cij two Java fixtures; Cit three text files
+current_native	PASS_BOUNDED	RESULT SHA256 1e82bec642c8ea8ece15e8caeeed283416c1b612e22c357b20178524b6ab1605
+current_m3_consumers	PENDING	Actual complete Maven owners required
+target_installation	PENDING	Actual five generated outputs required
+publication	PENDING	Feature branches only after qualification
+repository_admission	NOT_CLAIMED	Bounded task and native closure only

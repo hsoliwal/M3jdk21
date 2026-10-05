@@ -1,0 +1,67 @@
+{
+  "schema": "synexia.ci-752.owner-provenance/1",
+  "ownership": "Synexia task authority; unchanged repository-owned source dependencies, not a new engine or a production fork.",
+  "dependencySource": [
+    {
+      "taskPath": "dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "originRepository": "hsoliwal/M3jdk21",
+      "originCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+      "originPath": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "bytes": 12032,
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "gitBlob": "a2e8c916208b563517e51b738744a05357e633aa",
+      "license": "SPDX-License-Identifier: Apache-2.0",
+      "changed": false
+    },
+    {
+      "taskPath": "dependency-source/com/synexia/rewrite/M3EditScope.java",
+      "originRepository": "hsoliwal/com.synexia",
+      "originCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+      "originPath": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "bytes": 1052,
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+      "gitBlob": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+      "license": "SPDX-License-Identifier: Apache-2.0",
+      "changed": false
+    },
+    {
+      "taskPath": "dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "originRepository": "hsoliwal/com.synexia",
+      "originCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+      "originPath": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "bytes": 21621,
+      "sha256": "5c30358f276a7587b3364e03f67330cd017f5325fb1f0afb15cb20a5ba8859f6",
+      "gitBlob": "6a58762e7c066fb7f67018c0c702c95ea35de4fe",
+      "license": "SPDX-License-Identifier: Apache-2.0",
+      "changed": false
+    },
+    {
+      "taskPath": "dependency-source/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "originRepository": "hsoliwal/com.synexia",
+      "originCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+      "originPath": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+      "bytes": 13262,
+      "sha256": "3537f87c5c0891e6164c204aa192ab7bdff28f06a5ed752b7ddd205fb968b74a",
+      "gitBlob": "2d89e85f0f9c54599e6f17bb0e0d34c8bac12a60",
+      "license": "SPDX-License-Identifier: Apache-2.0",
+      "changed": false
+    },
+    {
+      "taskPath": "dependency-source/com/synexia/rewrite/M3ScopeInference.java",
+      "originRepository": "hsoliwal/com.synexia",
+      "originCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+      "originPath": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "bytes": 6596,
+      "sha256": "17228a698f917bfabb46f8c4a20b50822820516fbc6e9ad71d52587a1918e730",
+      "gitBlob": "f6fd8d4a558a6b9b0c78cf4d010e63e3b3e1a9da",
+      "license": "SPDX-License-Identifier: Apache-2.0",
+      "changed": false
+    }
+  ],
+  "canonicalSourceOwnersEdited": false,
+  "m3TextOwnerRole": "Cij exact malformed Java PlainText preimages and exact reviewed text outputs; typed Java/reparse and actual consumer compilation separate.",
+  "synexiaTextOwnerRole": "Cit current Python/workflow structured-text paths.",
+  "supersededStaticAssumption": "Synexia Java snapshot does not accept PlainText targets; scanner and visitor require J.CompilationUnit. No gate was executed under that mistaken assumption.",
+  "outputTargets": 5,
+  "fullConsumerVerification": "Required separately; producer alone grants no current M3 module or strict canonical acceptance."
+}

@@ -1,0 +1,372 @@
+{
+  "schema": "m3.exact-head-ci-review/1",
+  "recordedAtUtc": "2026-10-05T14:20:17.281525+00:00",
+  "repository": "hsoliwal/M3jdk21",
+  "pullRequest": 148,
+  "headSha": "5c1ee9490e76943dfdb3ca27fade0d093d017226",
+  "result": "REMOTE_FAILURES_WITH_ACTIONABLE_DIAGNOSTICS",
+  "observedAtUtc": {
+    "from": "2026-10-05 14:12:50 UTC",
+    "through": "2026-10-05 14:15:08 UTC"
+  },
+  "coverage": {
+    "workflowQuery": "pull_request-filtered wrapper; first page only",
+    "returnedWorkflowRuns": 11,
+    "reportedWorkflowTotal": "NOT_EXPOSED_BY_WRAPPER",
+    "workflowConclusions": {
+      "failure": 9,
+      "success": 2
+    },
+    "checkRunsQuery": "exact commit check-runs, per_page=100, first page",
+    "reportedCheckRunsTotal": 33,
+    "returnedCheckRuns": 33,
+    "checkConclusions": {
+      "skipped": 3,
+      "queued": 8,
+      "failure": 19,
+      "success": 3
+    },
+    "representativeFailuresInspected": 3,
+    "allWorkflowJobsInspected": false,
+    "sourceHistoryOrBlameReviewed": false
+  },
+  "selectedJobs": [
+    {
+      "runId": 37310184488,
+      "jobId": 111763397210,
+      "workflow": "M3 OpenRewrite recipe proof",
+      "name": "verify-recipes",
+      "headSha": "5c1ee9490e76943dfdb3ca27fade0d093d017226",
+      "status": "completed",
+      "conclusion": "failure",
+      "runnerName": "GitHub Actions 1001313568",
+      "startedAt": "2026-10-05T12:33:27Z",
+      "completedAt": "2026-10-05T12:34:15Z",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/37310184488/job/111763397210",
+      "failedSteps": [
+        {
+          "name": "Maven JUnit OpenRewrite proof",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 4,
+          "started_at": "2026-10-05T12:33:57Z",
+          "completed_at": "2026-10-05T12:34:10Z"
+        }
+      ],
+      "logs": "job-111763397210.log"
+    },
+    {
+      "runId": 37310184801,
+      "jobId": 111763397781,
+      "workflow": "M3 foundation contracts",
+      "name": "foundation",
+      "headSha": "5c1ee9490e76943dfdb3ca27fade0d093d017226",
+      "status": "completed",
+      "conclusion": "failure",
+      "runnerName": "GitHub Actions 1001313567",
+      "startedAt": "2026-10-05T12:32:55Z",
+      "completedAt": "2026-10-05T12:33:53Z",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/37310184801/job/111763397781",
+      "failedSteps": [
+        {
+          "name": "Verify OpenRewrite convergence DAG",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 5,
+          "started_at": "2026-10-05T12:33:37Z",
+          "completed_at": "2026-10-05T12:33:51Z"
+        }
+      ],
+      "logs": "job-111763397781.log"
+    },
+    {
+      "runId": 37310184481,
+      "jobId": 111763396934,
+      "workflow": "M3 JDK proof kit",
+      "name": "proof",
+      "headSha": "5c1ee9490e76943dfdb3ca27fade0d093d017226",
+      "status": "completed",
+      "conclusion": "failure",
+      "runnerName": "GitHub Actions 1001313564",
+      "startedAt": "2026-10-05T12:32:50Z",
+      "completedAt": "2026-10-05T12:34:29Z",
+      "url": "https://github.com/hsoliwal/M3jdk21/actions/runs/37310184481/job/111763396934",
+      "failedSteps": [
+        {
+          "name": "Attempt the complete retained control reactor without hiding failures",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 5,
+          "started_at": "2026-10-05T12:33:55Z",
+          "completed_at": "2026-10-05T12:34:14Z"
+        }
+      ],
+      "logs": "job-111763396934.log"
+    }
+  ],
+  "diagnostics": [
+    {
+      "kind": "JAVA_TEST_SYNTAX_FAILURE",
+      "jobs": [
+        111763397210,
+        111763396934
+      ],
+      "goal": "maven-compiler-plugin:3.13.0:testCompile",
+      "locations": [
+        {
+          "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
+          "diagnostics": [
+            {
+              "line": 97,
+              "column": 54,
+              "message": "unclosed character literal"
+            },
+            {
+              "line": 98,
+              "column": 53,
+              "message": "';' expected"
+            }
+          ]
+        },
+        {
+          "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
+          "diagnostics": [
+            {
+              "line": 100,
+              "column": 54,
+              "message": "unclosed character literal"
+            },
+            {
+              "line": 101,
+              "column": 53,
+              "message": "';' expected"
+            }
+          ]
+        }
+      ],
+      "actionableBoundary": "Inspect and repair these exact Java test-source syntax locations through the existing recipe workflow. No attribution to the PR diff is established by this log review."
+    },
+    {
+      "kind": "COMPILER_RELEASE_SELECTION_FAILURE",
+      "job": 111763397781,
+      "goal": "maven-compiler-plugin:3.13.0:compile",
+      "message": "release version 21 not supported",
+      "downloadedJdk": "Temurin21 jdk-21+35",
+      "downloadedJdkVariable": "M3_JDK=/home/runner/work/_temp/jdk-21+35",
+      "loggedCommand": "mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify",
+      "explicitJAVA_HOMEAssignmentObserved": false,
+      "explicitPATHAssignmentObserved": false,
+      "mavenVersionOrSelectedJvmVersionObserved": false,
+      "actualCompilerVersion": "NOT_EXPOSED",
+      "distinction": "The successful download and M3_JDK variable do not establish which compiler the subsequent Maven command selected. The log proves its compile invocation rejected release 21.",
+      "actionableBoundary": "Bind and observe the Maven JVM/compiler selection against the intended pinned JDK; do not infer a specific installed Java version from this log."
+    },
+    {
+      "kind": "PYTHON_IMPORT_NULL_BYTE_FAILURE",
+      "job": 111763396934,
+      "path": "m3/backports/test_compatibility_policy.py",
+      "line": 9,
+      "statement": "import compatibility_policy",
+      "message": "ValueError: source code string cannot contain null bytes",
+      "importedModule": "compatibility_policy",
+      "actualOffendingPhysicalFile": "NOT_RESOLVED_BY_THIS_LOG_REVIEW",
+      "actionableBoundary": "Inspect the exact imported module bytes and source-generation path for NUL bytes. The traceback identifies the import boundary; this review did not fetch or execute that module."
+    }
+  ],
+  "excerpts": [
+    {
+      "path": "foundation-command-excerpts.txt",
+      "bytes": 4747,
+      "sha256": "917ccef20aa289428426ba14ccf7e532e15bbbe0f3cd9ae3a8f3562384e0b41c"
+    },
+    {
+      "path": "python-import-excerpt.txt",
+      "bytes": 1060,
+      "sha256": "d6f4d5226df1904a87d32d63c16ca289745dd7c68e668151ad53153414aa875e"
+    },
+    {
+      "path": "java-test-compile-excerpt.txt",
+      "bytes": 2654,
+      "sha256": "0d1fca352c18ae7c7759ca0bcc24b3fc099b01bbfbb7bd4dfa257ce0d9a7c26f"
+    }
+  ],
+  "accessLimits": [
+    "Three direct actions/jobs detail URLs were rejected by the Fetch URL allowlist; supported run-specific jobs responses and job-log tools supplied exact-head metadata, steps and logs.",
+    "Check annotation bodies were not fetched; the three concrete job logs supply the reported diagnostics."
+  ],
+  "boundaries": {
+    "remoteReruns": 0,
+    "retriesInitiated": 0,
+    "workflowChanges": 0,
+    "sourceChanges": 0,
+    "remoteWrites": 0,
+    "localTestsExecuted": 0,
+    "additionalCiAcquisitionAfterFrozenSamples": false,
+    "billingOrAccountCauseClaimed": false,
+    "allFailuresRootCaused": false,
+    "ciQualified": false
+  },
+  "acquisitions": [
+    {
+      "name": "workflow-runs.first-page.json",
+      "tool": "github_fetch_commit_workflow_runs",
+      "args": {
+        "repo_full_name": "hsoliwal/M3jdk21",
+        "commit_sha": "5c1ee9490e76943dfdb3ca27fade0d093d017226"
+      },
+      "observedAt": "2026-10-05 14:12:50 UTC",
+      "isError": false,
+      "format": "json",
+      "path": "workflow-runs.first-page.json",
+      "bytes": 3535,
+      "sha256": "6b28960e4c6643312e0c28fc33420550cbeca8c6cec2cd65026af22139d070c9"
+    },
+    {
+      "name": "check-runs.first-page.json",
+      "tool": "github_fetch",
+      "args": {
+        "url": "https://api.github.com/repos/hsoliwal/M3jdk21/commits/5c1ee9490e76943dfdb3ca27fade0d093d017226/check-runs?per_page=100"
+      },
+      "observedAt": "2026-10-05 14:12:50 UTC",
+      "isError": false,
+      "format": "json",
+      "path": "check-runs.first-page.json",
+      "bytes": 116267,
+      "sha256": "ec539b8da07e52f73c02465d9a0b8fa34b519d2c86bf30b1c965d311e55f5af6"
+    },
+    {
+      "name": "combined-status.json",
+      "tool": "github_get_commit_combined_status",
+      "args": {
+        "repo_full_name": "hsoliwal/M3jdk21",
+        "commit_sha": "5c1ee9490e76943dfdb3ca27fade0d093d017226"
+      },
+      "observedAt": "2026-10-05 14:12:50 UTC",
+      "isError": false,
+      "format": "json",
+      "path": "combined-status.json",
+      "bytes": 15,
+      "sha256": "3c91caab22dad3973962314f0f0d09d9f959792b3f7a5f0719262e27e7f3f685"
+    },
+    {
+      "name": "attempted-job-detail-111763397210.json",
+      "tool": "github_fetch",
+      "args": {
+        "url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/jobs/111763397210"
+      },
+      "observedAt": "2026-10-05 14:13:40 UTC",
+      "isError": true,
+      "format": "json",
+      "path": "attempted-job-detail-111763397210.json",
+      "bytes": 156,
+      "sha256": "88192edc8ce3b84943535216f9687f6a11440ec491b0aa119a3ec0eed8a18ac7"
+    },
+    {
+      "name": "job-111763397210.log",
+      "tool": "github_fetch_workflow_job_logs",
+      "args": {
+        "repo_full_name": "hsoliwal/M3jdk21",
+        "job_id": 111763397210
+      },
+      "observedAt": "2026-10-05 14:13:40 UTC",
+      "isError": false,
+      "format": "text",
+      "path": "job-111763397210.log",
+      "bytes": 14446,
+      "sha256": "28a1d7372652aa3d704aae587c8e3f0f1763ee9b077a4d6fb806d6c2404b7676"
+    },
+    {
+      "name": "run-37310184488-jobs.json",
+      "tool": "github_fetch",
+      "args": {
+        "url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/37310184488/jobs?per_page=100"
+      },
+      "observedAt": "2026-10-05 14:15:08 UTC",
+      "isError": false,
+      "format": "json",
+      "path": "run-37310184488-jobs.json",
+      "bytes": 2143,
+      "sha256": "7551a6c3f4068dd37e5452448929bd37a5cf36c6516728978f02e5a0cd2cfd5e"
+    },
+    {
+      "name": "attempted-job-detail-111763397781.json",
+      "tool": "github_fetch",
+      "args": {
+        "url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/jobs/111763397781"
+      },
+      "observedAt": "2026-10-05 14:13:40 UTC",
+      "isError": true,
+      "format": "json",
+      "path": "attempted-job-detail-111763397781.json",
+      "bytes": 156,
+      "sha256": "88192edc8ce3b84943535216f9687f6a11440ec491b0aa119a3ec0eed8a18ac7"
+    },
+    {
+      "name": "job-111763397781.log",
+      "tool": "github_fetch_workflow_job_logs",
+      "args": {
+        "repo_full_name": "hsoliwal/M3jdk21",
+        "job_id": 111763397781
+      },
+      "observedAt": "2026-10-05 14:13:40 UTC",
+      "isError": false,
+      "format": "text",
+      "path": "job-111763397781.log",
+      "bytes": 24769,
+      "sha256": "03d194f95a632e9e2ccae5f4756253cb3776c23172e4a2f4986874c37302aee1"
+    },
+    {
+      "name": "run-37310184801-jobs.json",
+      "tool": "github_fetch",
+      "args": {
+        "url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/37310184801/jobs?per_page=100"
+      },
+      "observedAt": "2026-10-05 14:15:08 UTC",
+      "isError": false,
+      "format": "json",
+      "path": "run-37310184801-jobs.json",
+      "bytes": 2747,
+      "sha256": "86711f471b3a400946b9ecd36e4ea02447b12d3b95097ff873d0dd38b7719584"
+    },
+    {
+      "name": "attempted-job-detail-111763396934.json",
+      "tool": "github_fetch",
+      "args": {
+        "url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/jobs/111763396934"
+      },
+      "observedAt": "2026-10-05 14:13:40 UTC",
+      "isError": true,
+      "format": "json",
+      "path": "attempted-job-detail-111763396934.json",
+      "bytes": 156,
+      "sha256": "88192edc8ce3b84943535216f9687f6a11440ec491b0aa119a3ec0eed8a18ac7"
+    },
+    {
+      "name": "job-111763396934.log",
+      "tool": "github_fetch_workflow_job_logs",
+      "args": {
+        "repo_full_name": "hsoliwal/M3jdk21",
+        "job_id": 111763396934
+      },
+      "observedAt": "2026-10-05 14:13:40 UTC",
+      "isError": false,
+      "format": "text",
+      "path": "job-111763396934.log",
+      "bytes": 78707,
+      "sha256": "5bf59102405b8a059dff536683a3344857f1e0a6d938a7288e1c43449f51291d"
+    },
+    {
+      "name": "run-37310184481-jobs.json",
+      "tool": "github_fetch",
+      "args": {
+        "url": "https://api.github.com/repos/hsoliwal/M3jdk21/actions/runs/37310184481/jobs?per_page=100"
+      },
+      "observedAt": "2026-10-05 14:15:08 UTC",
+      "isError": false,
+      "format": "json",
+      "path": "run-37310184481-jobs.json",
+      "bytes": 2367,
+      "sha256": "58cc07d538b7ed3b663ee5baf4ed403da9e87f20b2406ba2ff6b099dcae7ca8e"
+    }
+  ]
+}

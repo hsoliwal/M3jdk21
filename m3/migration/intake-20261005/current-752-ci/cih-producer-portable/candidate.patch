@@ -1,0 +1,443 @@
+diff --git a/m3/migration/test/test_jcc_handoff_context_profiles.py b/m3/migration/test/test_jcc_handoff_context_profiles.py
+index eea396e..9d443c7 100644
+--- a/m3/migration/test/test_jcc_handoff_context_profiles.py
++++ b/m3/migration/test/test_jcc_handoff_context_profiles.py
+@@ -42,6 +42,23 @@ org.openrewrite.config.CompositeRecipe
+ )
+ 
+ 
++POM = "m3/tooling/migration-recipes/pom.xml"
++HISTORICAL_POM = Path(
++    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/"
++    "jdk21-hash-pinned-text/jcc-handoff-20261005/pom-before-752.xml"
++)
++HISTORICAL_POM_SHA256 = "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"
++CURRENT_POM_SHA256 = "a53bdeee8afe28b90cb0e348e718b70610a9487edb1b75b46e09bfb76e0f3dc9"
++CURRENT_PROFILE = {
++    "state": "current",
++    "code_sha256": "4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787",
++    "plan": "plan-intake-752-ci.json",
++    "plan_sha256": "e4ea964db1a6f9527122ff0dad1c969a43dc50a0f80c771c86b70bcd6da6dcaf",
++    "recipe_id": "jcc-handoff-20261005/2-intake-752-ci",
++    "seal": "6e8d48067e814566e0c63db14db405c360c8ff3ab4948d352170b6ca20293594",
++}
++
++
+ class JccHandoffContextProfileTests(unittest.TestCase):
+     @classmethod
+     def setUpClass(cls):
+@@ -71,10 +88,21 @@
+         intake_bytes = retain(INTAKE_CRATE / "plan.json")
+         if cls.recipe.digest(intake_bytes) != INTAKE_PLAN_SHA256:
+             raise AssertionError("Profile controls require the original immutable intake plan")
++        for entry in json.loads(intake_bytes)["outputs"]:
++            for state in ("before", "after"):
++                if entry[state] is not None:
++                    retain(INTAKE_CRATE / entry[state]["resource"])
+         intake, _ = cls.recipe.sealed_plan(intake_path)
+         migration_outputs = [entry for entry in intake["outputs"] if entry["path"] == MIGRATION]
+         if len(migration_outputs) != 1:
+             raise AssertionError("Original intake must declare exactly one validator output")
++        historical_pom = retain(HISTORICAL_POM)
++        if cls.recipe.digest(historical_pom) != HISTORICAL_POM_SHA256:
++            raise AssertionError("Historical JCC POM fixture drift")
++        current_pom = retain(POM)
++        if cls.recipe.digest(current_pom) != CURRENT_POM_SHA256:
++            raise AssertionError("Current JCC POM fixture drift")
++        cls.pom_images = {"before": historical_pom, "after": historical_pom, "current": current_pom}
+         cls.code_images = {}
+         cls.plans = {}
+         for profile in PROFILES:
+@@ -94,6 +122,9 @@
+                 if guard["path"] == MIGRATION:
+                     if guard["sha256"] != profile["code_sha256"]:
+                         raise AssertionError("JCC profile does not guard its selected validator")
++                elif guard["path"] == POM:
++                    if guard["sha256"] != HISTORICAL_POM_SHA256:
++                        raise AssertionError("Historical JCC POM guard drift")
+                 else:
+                     if cls.recipe.digest(retain(guard["path"])) != guard["sha256"]:
+                         raise AssertionError("Actual shared JCC guard drift")
+@@ -110,6 +141,22 @@
+         if old_other != new_other or len(old_other) != 6:
+             raise AssertionError("JCC context plans changed the other six guards")
+ 
++        current_relative = cls.crate / CURRENT_PROFILE["plan"]
++        if cls.recipe.digest(retain(current_relative)) != CURRENT_PROFILE["plan_sha256"]:
++            raise AssertionError("Current JCC profile requires exact raw plan bytes")
++        current_plan, _ = cls.recipe.sealed_plan(cls.candidate / current_relative)
++        if (current_plan["recipe_id"], current_plan["plan_sha256"]) != (CURRENT_PROFILE["recipe_id"], CURRENT_PROFILE["seal"]):
++            raise AssertionError("Current JCC profile identity or seal mismatch")
++        expected = dict(current)
++        expected["recipe_id"] = CURRENT_PROFILE["recipe_id"]
++        expected["plan_sha256"] = CURRENT_PROFILE["seal"]
++        expected["guards"] = [dict(guard, sha256=CURRENT_POM_SHA256) if guard["path"] == POM else guard
++                              for guard in current["guards"]]
++        if current_plan != expected:
++            raise AssertionError("Current JCC plan changed more than its identity and POM guard")
++        cls.plans["current"] = current_plan
++        cls.code_images["current"] = cls.code_images["after"]
++
+     @classmethod
+     def tearDownClass(cls):
+         for path, content in cls.frozen_inputs.items():
+@@ -134,6 +181,7 @@
+             path.parent.mkdir(parents=True, exist_ok=True)
+             path.write_bytes(content)
+         (root / MIGRATION).write_bytes(self.code_images[profile["state"]])
++        (root / POM).write_bytes(self.pom_images[profile["state"]])
+         return root
+ 
+     def exercise_setup(self, root, profile, refusal=None):
+@@ -158,6 +206,7 @@
+                     self.assertEqual(self.source_bytes[str(self.crate / profile["plan"])],
+                                      isolated.frozen_inputs[selected])
+                     self.assertEqual(self.code_images[profile["state"]], isolated.guard_images[MIGRATION])
++                    self.assertEqual(self.pom_images[profile["state"]], isolated.guard_images[POM])
+                     self.assertEqual(4, len(isolated.rows))
+                     self.assertEqual(7, len(isolated.guard_images))
+         finally:
+diff --git a/m3/migration/test/test_jcc_handoff_current_context.py b/m3/migration/test/test_jcc_handoff_current_context.py
+new file mode 100644
+index 0000000..453cd60
+--- /dev/null
++++ b/m3/migration/test/test_jcc_handoff_current_context.py
+@@ -0,0 +1,139 @@ org.openrewrite.config.CompositeRecipe
++# SPDX-License-Identifier: Apache-2.0
++"""Exact third validator/POM profile; historical plans and behavior stay retained."""
++from __future__ import annotations
++
++import importlib.util
++import io
++import json
++import os
++from pathlib import Path
++import sys
++import unittest
++from unittest.mock import patch
++
++
++class JccHandoffCurrentContextTests(unittest.TestCase):
++    @classmethod
++    def setUpClass(cls):
++        override = os.environ.get("M3_JCC_CANDIDATE_ROOT")
++        cls.candidate = Path(override).resolve() if override else Path(__file__).resolve().parents[3]
++        previous = sys.dont_write_bytecode
++        sys.dont_write_bytecode = True
++        cls.addClassCleanup(setattr, sys, "dont_write_bytecode", previous)
++        path = cls.candidate / "m3/migration/test/test_jcc_handoff_context_profiles.py"
++        spec = importlib.util.spec_from_file_location("jcc_current_retained_profiles", path)
++        if spec is None or spec.loader is None:
++            raise AssertionError("Cannot load exact JCC context fixture")
++        cls.profiles = importlib.util.module_from_spec(spec)
++        spec.loader.exec_module(cls.profiles)
++        cls.controls = type("IsolatedCurrentJccProfiles", (cls.profiles.JccHandoffContextProfileTests,), {})
++        cls.addClassCleanup(cls.controls.doClassCleanups)
++        cls.controls.setUpClass()
++        cls.addClassCleanup(cls.controls.tearDownClass)
++
++    def setUp(self):
++        self.control = self.controls("runTest")
++        self.addCleanup(self.control.doCleanups)
++        self.current = self.profiles.CURRENT_PROFILE
++
++    def test_current_exact_pair_selects_new_plan_without_writes(self):
++        root = self.control.context(self.current)
++        self.control.exercise_setup(root, self.current)
++        self.assertEqual(self.profiles.CURRENT_POM_SHA256,
++                         self.control.recipe.digest((root / self.profiles.POM).read_bytes()))
++        for historical in self.profiles.PROFILES:
++            self.assertEqual(self.control.plans[historical["state"]]["outputs"],
++                             self.control.plans["current"]["outputs"])
++
++    def test_known_validator_and_pom_in_unadmitted_pair_refuse(self):
++        root = self.control.context(self.current)
++        (root / self.profiles.MIGRATION).write_bytes(self.control.code_images["before"])
++        self.control.exercise_setup(root, self.current, (AssertionError, "Unknown actual migration guard context"))
++
++    def test_unknown_pom_or_validator_refuses_without_fallback(self):
++        for path in (self.profiles.POM, self.profiles.MIGRATION):
++            with self.subTest(path=path):
++                root = self.control.context(self.current)
++                target = root / path
++                target.write_bytes(target.read_bytes() + b"\n# unknown context image\n")
++                self.control.exercise_setup(root, self.current, (AssertionError, "Unknown actual migration guard context"))
++
++    def test_current_selected_plan_missing_drifted_or_resealed_refuses(self):
++        for mutation in ("missing", "whitespace", "guard", "identity"):
++            with self.subTest(mutation=mutation):
++                root = self.control.context(self.current)
++                target = root / self.control.crate / self.current["plan"]
++                if mutation == "missing":
++                    target.unlink()
++                    refusal = (FileNotFoundError, "plan-intake-752-ci")
++                else:
++                    if mutation == "whitespace":
++                        target.write_bytes(target.read_bytes() + b"\n")
++                    else:
++                        plan = json.loads(target.read_bytes())
++                        if mutation == "guard":
++                            next(g for g in plan["guards"] if g["path"] == self.profiles.POM)["sha256"] = self.profiles.HISTORICAL_POM_SHA256
++                        else:
++                            plan["recipe_id"] = "jcc-handoff-20261005/unqualified-current"
++                        body = {key: value for key, value in plan.items() if key != "plan_sha256"}
++                        plan["plan_sha256"] = self.control.recipe.digest(self.control.recipe.canonical(body))
++                        target.write_bytes(self.control.recipe.canonical(plan))
++                    self.control.recipe.sealed_plan(target)
++                    refusal = (AssertionError, "Actual packet context plan bytes drift")
++                self.control.exercise_setup(root, self.current, refusal)
++
++    def test_historical_pom_fixture_drift_refuses_without_writes(self):
++        root = self.control.context(self.current)
++        target = root / self.profiles.HISTORICAL_POM
++        target.write_bytes(target.read_bytes() + b"\n<!-- historical image drift -->\n")
++        before = self.control.base.snapshot(root)
++        isolated = type("IsolatedHistoricalPomDrift", (self.profiles.JccHandoffContextProfileTests,), {})
++        try:
++            with patch.dict(os.environ, {"M3_JCC_CANDIDATE_ROOT": str(root)}):
++                with self.assertRaisesRegex(AssertionError, "Historical JCC POM fixture drift"):
++                    isolated.setUpClass()
++        finally:
++            isolated.doClassCleanups()
++            self.assertEqual(before, self.control.base.snapshot(root))
++
++    def test_current_other_guard_drift_still_refuses_without_writes(self):
++        for guard in self.control.plans["current"]["guards"]:
++            if guard["path"] in (self.profiles.MIGRATION, self.profiles.POM):
++                continue
++            with self.subTest(path=guard["path"]):
++                root = self.control.context(self.current)
++                target = root / guard["path"]
++                target.write_bytes(target.read_bytes() + b"\n# current guard drift\n")
++                self.control.exercise_setup(root, self.current, (AssertionError, "Actual candidate guard drift"))
++
++    def test_all_three_profiles_execute_six_retained_packet_methods(self):
++        expected = {
++            "test_actual_packet_check_apply_idempotent_rollback_and_replay",
++            "test_each_actual_guard_missing_or_drifted_refuses_atomically",
++            "test_actual_required_preimage_missing_or_drifted_refuses_atomically",
++            "test_each_actual_absent_output_occupied_refuses_atomically",
++            "test_each_single_postimage_mixed_with_preimages_refuses_atomically",
++            "test_each_foreign_postimage_edit_refuses_rollback_and_replay_atomically",
++        }
++        self.assertEqual(expected, set(unittest.defaultTestLoader.getTestCaseNames(self.control.base)))
++        for profile in (*self.profiles.PROFILES, self.current):
++            with self.subTest(state=profile["state"]):
++                root = self.control.context(profile)
++                before = self.control.base.snapshot(root)
++                isolated = type("IsolatedThreeProfilePacket", (self.control.base,), {})
++                suite = unittest.defaultTestLoader.loadTestsFromTestCase(isolated)
++                stream = io.StringIO()
++                previous = sys.dont_write_bytecode
++                try:
++                    with patch.dict(os.environ, {"M3_JCC_CANDIDATE_ROOT": str(root)}):
++                        result = unittest.TextTestRunner(stream=stream, verbosity=2).run(suite)
++                finally:
++                    sys.dont_write_bytecode = previous
++                self.assertEqual(6, result.testsRun, stream.getvalue())
++                self.assertTrue(result.wasSuccessful(), stream.getvalue())
++                self.assertFalse(result.skipped, stream.getvalue())
++                self.assertEqual(before, self.control.base.snapshot(root))
++
++
++if __name__ == "__main__":
++    unittest.main(verbosity=2)
+diff --git a/m3/migration/test/test_jcc_handoff_packet.py b/m3/migration/test/test_jcc_handoff_packet.py
+index d1784b9..b634cda 100644
+--- a/m3/migration/test/test_jcc_handoff_packet.py
++++ b/m3/migration/test/test_jcc_handoff_packet.py
+@@ -55,24 +55,38 @@ org.openrewrite.config.CompositeRecipe
+         spec.loader.exec_module(cls.recipe)
+         migration_owner = cls.candidate / "m3/migration/migration.py"
+         migration_sha256 = cls.recipe.digest(migration_owner.read_bytes())
+-        # These are two immutable qualification contexts, not a latest-plan lookup.
++        pom_path = cls.candidate / "m3/tooling/migration-recipes/pom.xml"
++        pom_sha256 = cls.recipe.digest(pom_path.read_bytes())
++        # Three exact validator/POM pairs; immutable plans never follow a latest lookup.
+         contexts = {
+-            "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e": (
++            ("fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
++             "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"): (
+                 "plan.json",
+                 "648f80ae4073400f1ea1210f8cdc26942019d53eb4452d839961c466f395d05a",
+                 "jcc-handoff-20261005/2",
+                 "70283e86d30abf8e30a09b10d77be40f99160371a98927dc151d680e3c2e4a87",
+             ),
+-            "4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787": (
++            ("4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787",
++             "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"): (
+                 "plan-intake-8131.json",
+                 "8034d77f1124584888dce10760bd2f5dae55eeb93497f7a0db1d09a3a197ec5f",
+                 "jcc-handoff-20261005/2-intake-8131",
+                 "0704f21408ef263d4d0adc9eb5d48e62c7c30949cb1a197fb9b7f8a21aff4152",
+             ),
++            ("4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787",
++             "a53bdeee8afe28b90cb0e348e718b70610a9487edb1b75b46e09bfb76e0f3dc9"): (
++                "plan-intake-752-ci.json",
++                "e4ea964db1a6f9527122ff0dad1c969a43dc50a0f80c771c86b70bcd6da6dcaf",
++                "jcc-handoff-20261005/2-intake-752-ci",
++                "6e8d48067e814566e0c63db14db405c360c8ff3ab4948d352170b6ca20293594",
++            ),
+         }
+-        if migration_sha256 not in contexts:
+-            raise AssertionError("Unknown actual migration guard context")
+-        plan_name, plan_sha256, recipe_id, plan_seal = contexts[migration_sha256]
++        pair = (migration_sha256, pom_sha256)
++        if pair not in contexts:
++            if migration_sha256 not in {key[0] for key in contexts}:
++                raise AssertionError("Unknown actual migration guard context")
++            raise AssertionError("Unknown actual migration guard context: Actual candidate guard drift: validator/POM pair")
++        plan_name, plan_sha256, recipe_id, plan_seal = contexts[pair]
+         source_plan = cls.candidate / CRATE / plan_name
+         if cls.recipe.digest(source_plan.read_bytes()) != plan_sha256:
+             raise AssertionError("Actual packet context plan bytes drift")
+diff --git a/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-752-ci.json b/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-752-ci.json
+new file mode 100644
+index 0000000..cfa9f89
+--- /dev/null
++++ b/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-752-ci.json
+@@ -0,0 +1,75 @@ org.openrewrite.config.CompositeRecipe
++{
++  "guards": [
++    {
++      "path": "m3/docs/name-mapping.schema.json",
++      "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b"
++    },
++    {
++      "path": "m3/migration/migration.py",
++      "sha256": "4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787"
++    },
++    {
++      "path": "m3/migration/recipe.py",
++      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
++    },
++    {
++      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
++      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
++    },
++    {
++      "path": "m3/tooling/migration-recipes/pom.xml",
++      "sha256": "a53bdeee8afe28b90cb0e348e718b70610a9487edb1b75b46e09bfb76e0f3dc9"
++    },
++    {
++      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
++      "sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"
++    },
++    {
++      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
++      "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1"
++    }
++  ],
++  "outputs": [
++    {
++      "after": {
++        "resource": "01-jcc-source-handoff.md.txt",
++        "sha256": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337"
++      },
++      "before": null,
++      "path": "m3/docs/jcc-source-handoff.md"
++    },
++    {
++      "after": {
++        "resource": "after00-name-mapping.json.txt",
++        "sha256": "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace"
++      },
++      "before": {
++        "resource": "before00-name-mapping.json.txt",
++        "sha256": "67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb"
++      },
++      "path": "m3/docs/name-mapping.json"
++    },
++    {
++      "after": {
++        "resource": "03-root-coverage-obligations.tsv.txt",
++        "sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b"
++      },
++      "before": null,
++      "path": "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv"
++    },
++    {
++      "after": {
++        "resource": "02-source-destination-bindings.json.txt",
++        "sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126"
++      },
++      "before": null,
++      "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json"
++    }
++  ],
++  "plan_sha256": "6e8d48067e814566e0c63db14db405c360c8ff3ab4948d352170b6ca20293594",
++  "recipe_id": "jcc-handoff-20261005/2-intake-752-ci",
++  "schema": "m3.sealed-install/1",
++  "scope": "Reviewed tool-plane ledger/documentation outputs only; no product or JCC export admission.",
++  "source_commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
++  "target_commit": "da958d00d24154c0db87beca0ec80a7df2b43b73"
++}
+diff --git a/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/pom-before-752.xml b/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/pom-before-752.xml
+new file mode 100644
+index 0000000..86f2239
+--- /dev/null
++++ b/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/pom-before-752.xml
+@@ -0,0 +1,63 @@ org.openrewrite.config.CompositeRecipe
++<?xml version="1.0" encoding="UTF-8"?>
++<!-- SPDX-License-Identifier: Apache-2.0 -->
++<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
++  <modelVersion>4.0.0</modelVersion>
++  <groupId>com.m3.tooling</groupId><artifactId>migration-recipes</artifactId><version>0.1.0-SNAPSHOT</version>
++  <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><rewrite.version>8.17.1</rewrite.version><jacoco.version>0.8.15</jacoco.version></properties>
++  <dependencies>
++    <!-- OpenRewrite 8.17.1 publishes PlainText from rewrite-core transitively; there is no rewrite-text artifact. -->
++    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java</artifactId><version>${rewrite.version}</version></dependency>
++    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java-21</artifactId><version>${rewrite.version}</version><scope>runtime</scope></dependency>
++    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-test</artifactId><version>${rewrite.version}</version><scope>test</scope></dependency>
++    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
++  </dependencies>
++  <build><plugins>
++    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version></plugin>
++    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version><configuration><useModulePath>false</useModulePath><failIfNoTests>true</failIfNoTests></configuration></plugin>
++    <plugin><groupId>org.openrewrite.maven</groupId><artifactId>rewrite-maven-plugin</artifactId><version>5.23.1</version></plugin>
++    <plugin>
++      <groupId>org.jacoco</groupId>
++      <artifactId>jacoco-maven-plugin</artifactId>
++      <version>${jacoco.version}</version>
++      <executions>
++        <execution>
++          <id>m3-coverage-agent</id>
++          <goals><goal>prepare-agent</goal></goals>
++        </execution>
++        <execution>
++          <id>m3-coverage-report</id>
++          <phase>verify</phase>
++          <goals><goal>report</goal></goals>
++        </execution>
++        <execution>
++          <id>m3-coverage-check</id>
++          <phase>verify</phase>
++          <goals><goal>check</goal></goals>
++          <configuration>
++            <includes>
++              <include>com/m3/rewrite/scope/*</include>
++              <include>com/m3/rewrite/atom/*</include>
++            </includes>
++            <rules>
++              <rule>
++                <element>BUNDLE</element>
++                <limits>
++                  <limit>
++                    <counter>LINE</counter>
++                    <value>COVEREDRATIO</value>
++                    <minimum>0.99</minimum>
++                  </limit>
++                  <limit>
++                    <counter>BRANCH</counter>
++                    <value>COVEREDRATIO</value>
++                    <minimum>0.99</minimum>
++                  </limit>
++                </limits>
++              </rule>
++            </rules>
++          </configuration>
++        </execution>
++      </executions>
++    </plugin>
++  </plugins></build>
++</project>

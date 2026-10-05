@@ -1,0 +1,1 @@
+{"status": "STATIC_SCOPE_PASS", "mainSources": 5, "testSources": 1, "testMethods": ["actualNamedFamilyReplays", "allCijStates", "allCitStates", "allUnionStatesAndOrders", "cijRefusals", "citRefusals", "closedDisjointFamiliesAndSourceKindControls", "exactJavaRepairAndTypedPostimages", "postScanDrift"], "outputs": 5, "typedJavaProof": false}

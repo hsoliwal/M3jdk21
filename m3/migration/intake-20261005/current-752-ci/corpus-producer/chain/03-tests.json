@@ -1,0 +1,51 @@
+{
+  "command": [
+    "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/apache-maven-3.9.9/bin/mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-s",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1/settings.xml",
+    "-gs",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1/settings.xml",
+    "-Dmaven.repo.local=/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/m2",
+    "-f",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1/project/pom.xml",
+    "org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test"
+  ],
+  "cwd": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1/project",
+  "endedAt": "2026-10-05T16:46:32.718343+00:00",
+  "environment": {
+    "JAVA_HOME": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64",
+    "LC_ALL": "C",
+    "MAVEN_SKIP_RC": "true",
+    "PATH": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64/bin:/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/apache-maven-3.9.9/bin:/bin:/usr/bin",
+    "TZ": "UTC"
+  },
+  "exitCode": 0,
+  "inputManifestSHA256": "71b18e42940e46980e2ef02972f2744a2b530683ebea9f2f61a743ef82019adb",
+  "priorReceipts": [
+    {
+      "bytes": 1805,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1/chain/01-static.json",
+      "sha256": "6ba97df0e87c6c3801e49dc7c945cea529f9906885d26bf0b68778dc961109d8"
+    },
+    {
+      "bytes": 2398,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1/chain/02-compile.json",
+      "sha256": "8b95ecda4eed8bade78c5fc504e3226b199d1ef8ca58e116014277dbf48ea366"
+    }
+  ],
+  "stage": "tests",
+  "startedAt": "2026-10-05T16:46:22.629517+00:00",
+  "stderr": {
+    "bytes": 210,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1/chain/03-tests.stderr.log",
+    "sha256": "9ddf3781b5e43a87b1d67caac2bc4b251f9ce8d77c509c8369129f4b0359fd55"
+  },
+  "stdout": {
+    "bytes": 1417,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1/chain/03-tests.stdout.log",
+    "sha256": "0417a8dcb315c18a32359f029b189afccd437d7edb9b6657b0a5aaa6e1a24ac1"
+  }
+}

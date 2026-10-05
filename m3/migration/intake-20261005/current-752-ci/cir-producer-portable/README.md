@@ -1,0 +1,13 @@
+# Cir current producer evidence
+
+This directory contains exact evidence for the five-target Cir recipe at Synexia source `9963cc08ff13922b92a0e3db7c30f56fddacba7d` and M3 target `752191c9291f6467110fb8a7badfbdc4c2d41af2`.
+
+The second producer attempt passed static, compilation, JUnit and runtime gates. Its six JUnit methods cover exact lexical deltas, named recipe replay, all 32 mixed states, 22 initial refusals, 10 post-scan refusals and nested actual A3 generation/compilation/runtime. Runtime repeats the controls and executes three retained A3 test method bodies. `RESULT.json`, `OUTPUT.json`, `PATCH.json` and `candidate.patch` are unchanged original proof artifacts.
+
+The first attempt stopped at compilation with eight missing-symbol diagnostics for the existing shared `M3PureIntAtomEligibility` owner. Its exact `STOP` result, receipts, logs and 26 project input files are preserved. The fresh second attempt adds that exact current dependency and retains all five postimages and all six test method bodies, with 27 project input files. The original failed proof was not rewritten.
+
+`evidence-bundle/BUNDLE.json` binds one deterministic archive part, original logical paths and content hashes. The archive retains both attempts, both authoring snapshots and specs, the source admissions, independent review, root review, correction record, every direct Cir source input and actual generated output. Identical contents are deduplicated. `RETENTION-AUDIT.json` independently maps all 53 project source inputs and noncache source/metadata input references to retained content.
+
+The unchanged `package_evidence.py` owner is included at SHA-256 `89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574`. The recorded pack and verify commands executed no proof gates. To inspect archive integrity, run `python package_evidence.py verify --bundle evidence-bundle`; to reconstruct its retained logical tree into a fresh directory, run `python package_evidence.py extract --bundle evidence-bundle --output /absolute/fresh/directory`.
+
+Tool/cache and compiled binary bodies are omitted; original sealed identities remain in the proof manifests. Settings are omitted. Parent consumer-v1 RESULT, PATCH, input manifest and failure command evidence establish provenance; this bundle does not contain or claim the complete parent consumer execution closure. The retained Cir result is focused producer qualification: consumer qualification, canonical production application and strict canonical admission remain false. Original OS, dynamic-library, shell and standard-library custody limits still apply.

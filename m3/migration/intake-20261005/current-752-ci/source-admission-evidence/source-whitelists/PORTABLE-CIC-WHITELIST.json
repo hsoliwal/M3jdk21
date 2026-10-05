@@ -1,0 +1,276 @@
+{
+  "schema": "synexia.cic-752.portable-publication-whitelist/1",
+  "status": "VERIFIED_REVIEW_EVIDENCE",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+  "producerResultSHA256": "72d9ab1f3bb0065b70165f435cd93aad8710ca4671e60b94bfe21e614dd3855f",
+  "bundleIndexSHA256": "0513d1819d9c6f49031049846c48a544f8c44325a2c69d0da36c546124fb3f80",
+  "retentionAuditSHA256": "1e9374074a13715cb2c52d1decdd9bb0baa2056593a369e0939b506b21d796e1",
+  "files": [
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/CIC-AUTHORED.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/CIC-AUTHORED.json",
+      "mode": "100644",
+      "gitBlob": "91b573f592e8592dd18384f311ddecfaded3601e",
+      "sha256": "4695885deca8f02fb774fa79d50a69a9c5ab08c7ef0f2e02ee721eac1f2d9105",
+      "bytes": 2628,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/OUTPUT.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/OUTPUT.json",
+      "mode": "100644",
+      "gitBlob": "92e5321785b11bf78db8519ca6e3923f24b838f1",
+      "sha256": "436b249bfc859fe9eeb1dbd24943909262befde9cdd4f342920710c3f0a3b7c3",
+      "bytes": 1035,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/PATCH.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/PATCH.json",
+      "mode": "100644",
+      "gitBlob": "569bd45d9ca8a86f3a7ff45c8df6a194ec0c3935",
+      "sha256": "2e40286005bd0e97a711b2ba81eae18e024a649b8415064cac3cb706ad3bc8c0",
+      "bytes": 838,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/QUALIFIED-CIC.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/QUALIFIED-CIC.json",
+      "mode": "100644",
+      "gitBlob": "4ade602780349d322e586b2220df98839bed362c",
+      "sha256": "86574eed10be2f9731528f7b7046c1087ce85f0966ad2cfaf992f3febbca8a3f",
+      "bytes": 2192,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/README.md",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/README.md",
+      "mode": "100644",
+      "gitBlob": "7e00b07c0c2867b8756b7141fc7e0b6ad7e64b68",
+      "sha256": "829701566b70f5632eb16eab6b9e77853998e0ec3e8521f0f2ec46713cd6edce",
+      "bytes": 2440,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/RESULT.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/RESULT.json",
+      "mode": "100644",
+      "gitBlob": "89f0adccd967f0899276da0c9b0d9d0a7059d216",
+      "sha256": "72d9ab1f3bb0065b70165f435cd93aad8710ca4671e60b94bfe21e614dd3855f",
+      "bytes": 4398,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/RETENTION-AUDIT.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/RETENTION-AUDIT.json",
+      "mode": "100644",
+      "gitBlob": "23c37b2eac2c2f560ff7f9e5d43215bbad5189e7",
+      "sha256": "1e9374074a13715cb2c52d1decdd9bb0baa2056593a369e0939b506b21d796e1",
+      "bytes": 34902,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/SOURCE-PROVENANCE.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/SOURCE-PROVENANCE.json",
+      "mode": "100644",
+      "gitBlob": "cd556df8e3f438706f2c12b62a836e7a73489da6",
+      "sha256": "8d23512f2c4b5da1791266ae8588d93eed65d22259b36e4a1c8185ef60ca5b02",
+      "bytes": 13713,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/candidate.patch",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/candidate.patch",
+      "mode": "100644",
+      "gitBlob": "d285a10d0dbff6904aa5b7b7e0cc41548f8d0dbc",
+      "sha256": "ceca658f9404317c00a9c940d7f408e06cc8ade66b9ac0058f4bdd6892ab23cf",
+      "bytes": 3453,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/cic-spec-v1.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/cic-spec-v1.json",
+      "mode": "100644",
+      "gitBlob": "4a3847fd17308351e1a113e82f9e64966a3b27c9",
+      "sha256": "50a0ba8c6ed64a26774740a00d2277e5a8e6634955450ddcd23b1645e8120209",
+      "bytes": 9653,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/evidence-bundle/BUNDLE.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/BUNDLE.json",
+      "mode": "100644",
+      "gitBlob": "a39f482cdf09d70bf8d6a783a70f1a5fcc1cf1a4",
+      "sha256": "0513d1819d9c6f49031049846c48a544f8c44325a2c69d0da36c546124fb3f80",
+      "bytes": 4392,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/evidence-bundle/LANES.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/LANES.json",
+      "mode": "100644",
+      "gitBlob": "da9c4607eff55fef335dc6c19d02eb980d361a1b",
+      "sha256": "2a771ef45ec8ce29156a0a77c85f7f6ccd674296798849f7c22d8de32ba8270c",
+      "bytes": 5173,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/evidence-bundle/PACKAGE.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/PACKAGE.json",
+      "mode": "100644",
+      "gitBlob": "59acea6b28bbc3bf2583a4526444210c61329601",
+      "sha256": "959ed1e36b63d0c79db5b04d55caee45a67c0a1a2d4bae4afc8638f67b99c0e5",
+      "bytes": 1445,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/evidence-bundle/PATHS-0001.tsv",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/PATHS-0001.tsv",
+      "mode": "100644",
+      "gitBlob": "30f57694f05851723ca143276207dadf3da53858",
+      "sha256": "e2cf4b206248a6e7ed0e465d24d7e9f3097d9954c5f1e62041d5987b3c90a238",
+      "bytes": 14667,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/evidence-bundle/README.md",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/README.md",
+      "mode": "100644",
+      "gitBlob": "4b8366014b9698b3af81e8b9d93a19b838535b59",
+      "sha256": "127a10c8ad077bc9d221a6407dd2190b5d10423aa295533b10f4266cf0270859",
+      "bytes": 2426,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/evidence-bundle/part-0001.tar.gz",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle/part-0001.tar.gz",
+      "mode": "100644",
+      "gitBlob": "fe626c063d5bd90912b7ca4bd48af524c9d1fefb",
+      "sha256": "a22a7ec431e02de315a9a7878f911b0818e021135c240f85c96dd64a3a9b31aa",
+      "bytes": 641196,
+      "encoding": "base64",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/pack.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/pack.json",
+      "mode": "100644",
+      "gitBlob": "b68c2cc73109cb526f15a5666baba7c4316c96b9",
+      "sha256": "d1dbe724262533a93313e17d52287657c92a6dedd649a8e2610c7c29258a9192",
+      "bytes": 1369,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/pack.stderr.log",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/pack.stderr.log",
+      "mode": "100644",
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/pack.stdout.log",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/pack.stdout.log",
+      "mode": "100644",
+      "gitBlob": "c5cc412c8b9df65f4ed99ef7de244d318fcaa8e8",
+      "sha256": "bb0540051cff9f148990e2d7a7fd48afab8a592055acb44d51febf305affda68",
+      "bytes": 649,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/package-plan.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/package-plan.json",
+      "mode": "100644",
+      "gitBlob": "a0c1ff29d24f455bdbc94ec9bb5e29a37b380145",
+      "sha256": "257bfab2f4e0e444c7fbbf8f5fb9562c7deb3d006e11d4e50e262a9d31d6a156",
+      "bytes": 1136,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/package_evidence.py",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/package_evidence.py",
+      "mode": "100644",
+      "gitBlob": "1dbaa1ecf032b0f5d94a4e34aafee3f0cc88f0a0",
+      "sha256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574",
+      "bytes": 33814,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/review/cic-review.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/review/cic-review.json",
+      "mode": "100644",
+      "gitBlob": "79e0f5aa3688beb828e7b34423ecb04ce95bf40b",
+      "sha256": "be0030c0e228f622a8b175f484a6dbe5b91111c5eef0b33cc7aa5ad50adbe91f",
+      "bytes": 5502,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/source-context/20261005-m3-corpus-regex-admission.md",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/source-context/20261005-m3-corpus-regex-admission.md",
+      "mode": "100644",
+      "gitBlob": "b5f1e39b8e1f1cbba79a1207a03287beff358c15",
+      "sha256": "abd1caa1c745bbd76b423d169690020072a11bb29fc6a8f7451f83c51a716216",
+      "bytes": 3099,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/verify.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/verify.json",
+      "mode": "100644",
+      "gitBlob": "7e474cbbbc1122849b22e598b269caa68edd846c",
+      "sha256": "744bfb12ada0e96f47d19d544de6653ff30dcd54d4ee6af260dd4b78d400257b",
+      "bytes": 1123,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/verify.stderr.log",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/verify.stderr.log",
+      "mode": "100644",
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/verify.stdout.log",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/verify.stdout.log",
+      "mode": "100644",
+      "gitBlob": "0741f3538a0ab7b8f74291977afff3dba5d52e22",
+      "sha256": "6cbe82f022d420b35d1aa3d532c073884fd487cbe015965882f3091898854688",
+      "bytes": 769,
+      "encoding": "utf-8",
+      "group": "portable-cic-producer-evidence"
+    }
+  ],
+  "fileCount": 26,
+  "bytes": 792012,
+  "proofGatesExecutedByPackaging": false,
+  "consumerQualified": false,
+  "canonicalProductionApplied": false
+}

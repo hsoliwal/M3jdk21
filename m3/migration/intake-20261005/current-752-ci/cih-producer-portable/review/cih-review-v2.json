@@ -1,0 +1,118 @@
+{
+  "actualProjectFileSetEqualsDeclaration": true,
+  "actualReceiverStopResultSHA256": "65ad6376f5e88ca2bd1e33e549c262a50bc58952ede7af8c17c9b0beed05ed73",
+  "actualSchedulerOutputsFeedPythonExecution": true,
+  "allDeclaredInputIdentitiesMatch": true,
+  "allTransitivePlanImageHashesMatch": true,
+  "authored": {
+    "bytes": 10582,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/CIH-AUTHORED-v2.json",
+    "sha256": "646a74eb9a2398e0619742d78e64e00a869fbb6528ddb9146f2594793d2a0f70"
+  },
+  "changedPacketMethods": [
+    "setUpClass"
+  ],
+  "changedProfileMethods": [
+    "setUpClass",
+    "context",
+    "exercise_setup"
+  ],
+  "compositeManifestSHA256": "f25a39ea2c764a5a9f2a84b43915aa4480aa4302718bc098bd4bfaa39727f7b3",
+  "contextFiles": 28,
+  "contextFilesMatchExactCompositeManifest": true,
+  "corrections": {
+    "contextClosure": "Ten exact historical image files were added: before/0.txt and after/{0,1,2,3,4,5,6,8,9}.txt. All twelve declared intake images and five declared JCC images were independently traversed as data and verified against their declared hashes and actual composite context.",
+    "initialReviewMissed": "The retained sealed_plan eagerly reads every non-null resource of the original ten-output intake plan. Its twelve-image dependency closure was not fully included in the initial eighteen-file context. The actual producer-v2 test gate correctly stopped on missing before/0.txt.",
+    "metadata": "Spec-v2 string-order correction retained the same34 input rows. Final spec-v4 has44 correctly string-sorted rows and30 extras. Authoring-v3 differs from authoring-v2 only by exact README count corrections34 to44 and eighteen to twenty-eight.",
+    "nestedContextClosure": "Four lines in profile setUpClass retain every non-null intake image into frozen_inputs and source_bytes before the unchanged sealed_plan call; nested contexts therefore copy every required image.",
+    "reviewExecution": "Only source reads, JSON/AST inspection, byte comparisons and hashes were performed. No owner/helper/test/gate was executed.",
+    "scopePreserved": "All six packet and eight profile test bodies remain byte-identical. Other four output bodies, retained installer, prior19 outputs, historical plans/resources and prior stopped proof inputs remain exact."
+  },
+  "currentPlanChanges": [
+    "recipe_id",
+    "one exact POM guard SHA256",
+    "plan_sha256"
+  ],
+  "declaredInputRowsStringSortedAndUnique": true,
+  "defectsFound": [],
+  "designedInitialRefusals": 16,
+  "designedNestedPacketExecutions": 18,
+  "designedPostScanRefusals": 10,
+  "designedSchedulerStates": 32,
+  "designedTopLevelPythonExecutions": 21,
+  "exactAllowedPairs": [
+    "historical validator + historical POM",
+    "intake validator + historical POM",
+    "intake validator + Cia POM"
+  ],
+  "extraInputs": 30,
+  "freshProducerV3AbsentAtReview": true,
+  "historicalPlansAndFourPacketOutputsRetained": true,
+  "historicalTestImagesPreservedIn": [
+    "m3/migration/intake-20261005/reconcile-8131/crate/after/1.txt",
+    "m3/migration/intake-20261005/reconcile-8131/crate/after/3.txt"
+  ],
+  "javaFixture": {
+    "bytes": 23936,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cih-authoring-v3/src/test/java/com/synexia/rewrite/CihRecipeTest.java",
+    "sha256": "3af6d32097697a95c02a4db190dade5bf37f5973ec37c04dcd7da36dee070c6c"
+  },
+  "limits": [
+    "Ordered producer gates must execute separately against the exact corrected frozen bytes.",
+    "This source review does not establish runtime PASS or full receiver, Java reactor, native, canonical or product acceptance.",
+    "The prior initial review and actual producer-v2 STOP remain preserved; this record corrects the prior transitive-closure assessment."
+  ],
+  "newContextMethodCount": 7,
+  "original569ActiveExceptions": [
+    "m3/migration/test/test_jcc_handoff_context_profiles.py",
+    "m3/migration/test/test_jcc_handoff_packet.py"
+  ],
+  "originalIntakeImageCount": 12,
+  "originalJccImageCount": 5,
+  "previousReview": {
+    "bytes": 3968,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/review/cih-review.json",
+    "sha256": "065378b5b0cc9f0378d38b4ac6db8cc4a233e52856bbdf3328694abfdbb53c23"
+  },
+  "priorProducerStop": {
+    "bytes": 1830,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v2/RESULT.json",
+    "sha256": "302ed8be74016f6d9072fccc9d803702b778b6076f59a7e099d7aa5c3b7adcad"
+  },
+  "priorStopAndSealedInputBytesStillExact": true,
+  "profilePostimageSHA256": "9d79d07bb31ded0e5ec9eebef1095ae25be8f20c55f9e72aee4ba64852790594",
+  "projectFiles": 44,
+  "proofGatesExecuted": false,
+  "publicationActionsPerformed": false,
+  "pythonVerifier": {
+    "bytes": 2284,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cih-authoring-v3/src/test/resources/verify_context.py",
+    "sha256": "6ec09d459bcfd1fb6b916bcfef440c590f8dc11685fdfe87ffe0acf2f3f1bc6f"
+  },
+  "remainingOriginal569PathsToRetain": 567,
+  "replacements": 2,
+  "retainedPacketMethodBodies": 6,
+  "retainedProfileMethodBodies": 8,
+  "reviewer": "/root/cia_review",
+  "runner": {
+    "bytes": 34497,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cih-authoring-v3/proof.py",
+    "sha256": "a01789ab8f727a812df26f610999ea5307444bf9fcc59f6865dec6fb39c0f17d"
+  },
+  "schema": "synexia.cih-752.independent-authoring-review/2",
+  "scope": "Frozen Cih source, exact project closure, scheduler fixture, Python execution verifier, proof runner and before/after lineage; static reads and independent byte/hash/AST comparisons only. No runtime PASS claimed.",
+  "sealedPythonExecutableForwardedToMavenAndStandalone": true,
+  "skipAcceptancePermitted": false,
+  "sourceFilesEdited": false,
+  "spec": {
+    "bytes": 28938,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cih-spec-v4.json",
+    "sha256": "a62117be1d989813f5efecaff71fe3675d9bd2118ca6ec15f828eb718c1e9c7f"
+  },
+  "status": "AMENDED_STATIC_REVIEW_CLEAR_FOR_ORDERED_GATES",
+  "supersedesPreviousClosureAssessment": true,
+  "targetCount": 5,
+  "targetSetDisjointFromPrior19": true,
+  "trueAbsentAdditions": 3,
+  "unchangedOtherTargetCount": 4
+}

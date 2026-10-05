@@ -1,0 +1,42 @@
+{
+  "boundary": "Read-only GitHub publication and remote-CI observations, recorded separately from qualified producer/consumer trials.",
+  "bytes": 116236,
+  "fileCount": 3,
+  "files": [
+    {
+      "bytes": 1614,
+      "group": "source-publication-and-ci-provenance",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/publication/source-producer-increment-v2/GITHUB-COMMIT.json",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/source-publication-e1cf/COMMIT.json",
+      "sha": "4268995cc2e64445ba6bde42fd151f1b1cafd0b6",
+      "sha256": "cae989142c43011180dbb7584f2379983fcf9e44823455d8bc281da30588bf55",
+      "type": "blob"
+    },
+    {
+      "bytes": 58017,
+      "group": "source-publication-and-ci-provenance",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/publication/source-producer-increment-v2/REMOTE-PUBLICATION.json",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/source-publication-e1cf/READBACK.json",
+      "sha": "39428346044f085a81729d99e849b4d4ea3fe57b",
+      "sha256": "bbee9a38f74068b39b576923d1f1760cd17198fac964c5aefc567d2eed2be490",
+      "type": "blob"
+    },
+    {
+      "bytes": 56605,
+      "group": "source-publication-and-ci-provenance",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/publication/SOURCE205-REMOTE-CI.json",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/source-publication-e1cf/REMOTE-CI.json",
+      "sha": "329340eb060d4606380ac1c6814b0a8b5c2558b8",
+      "sha256": "63e0c850a79fd3c4e278e630457b10e47945023bf537cbc03d0f10db77ef3468",
+      "type": "blob"
+    }
+  ],
+  "proofGatesExecuted": false,
+  "publicationCommit": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+  "schema": "synexia.source-publication-whitelist/1",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "sourceTree": "6c055c584ebb5fa177420d1668db73bcb7e7fef4"
+}

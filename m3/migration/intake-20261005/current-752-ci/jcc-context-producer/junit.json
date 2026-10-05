@@ -1,0 +1,22 @@
+{
+  "counts": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 6
+  },
+  "methods": [
+    "allMixedStates",
+    "contextRuntime",
+    "exactRepairScope",
+    "initialRefusals",
+    "namedRecipeReplay",
+    "postScanDrift"
+  ],
+  "report": {
+    "bytes": 21325,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/target/surefire-reports/TEST-com.synexia.rewrite.CihRecipeTest.xml",
+    "sha256": "6876499f28c1f3677bbed52e044a14e301af1c2519077c6aefa139c4f50d42b1"
+  },
+  "suite": "com.synexia.rewrite.CihRecipeTest"
+}

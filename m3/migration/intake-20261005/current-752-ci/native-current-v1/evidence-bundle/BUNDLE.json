@@ -1,0 +1,206 @@
+{
+  "boundary": "This is exact review/reconstruction evidence, not a hermetic toolchain image. Maven, JDK, Python and other dependency caches, compiled binaries, settings and credential material are omitted. Their sealed identities remain in the original manifests where recorded. OS, dynamic-library, shell and standard-library limits in the original tooling/results remain applicable. Packaging executes no proof gate and does not turn a focused or failed result into repository-wide admission.",
+  "chunkByteLimit": 524288,
+  "metadataShards": [
+    {
+      "bytes": 70597,
+      "kind": "files",
+      "member": "manifests/files-0001.jsonl",
+      "records": 250,
+      "sha256": "ef3d8232faa8827e15c1b47ac19092963244da8142e48031276984a477dc7312"
+    },
+    {
+      "bytes": 18254,
+      "kind": "omissions",
+      "member": "manifests/omissions-0001.jsonl",
+      "records": 67,
+      "sha256": "f8e2e6955fc5e6f56285bca7e7470f22d2147b47d0dddbe164abd7f4d2524671"
+    },
+    {
+      "bytes": 245622,
+      "kind": "references",
+      "member": "manifests/references-0001.jsonl",
+      "records": 606,
+      "sha256": "bf59fb8646927ad12bd6b93603664e77ad07ef99cf948109ebe86c1c99227133"
+    },
+    {
+      "bytes": 245354,
+      "kind": "references",
+      "member": "manifests/references-0002.jsonl",
+      "records": 588,
+      "sha256": "b4831a05ecf7fbc3c3c6335724ce6387f15d52596309ac135d65b006346c68f9"
+    },
+    {
+      "bytes": 245589,
+      "kind": "references",
+      "member": "manifests/references-0003.jsonl",
+      "records": 575,
+      "sha256": "d7a954a485967b87d9252e809003f95db65543531835279bff55457a79de7554"
+    },
+    {
+      "bytes": 245753,
+      "kind": "references",
+      "member": "manifests/references-0004.jsonl",
+      "records": 579,
+      "sha256": "bda756b9e45ebe5fd69e9e85c71f6d999e496eaa6a7f0cfa4aed7fb068d4ac2a"
+    },
+    {
+      "bytes": 245691,
+      "kind": "references",
+      "member": "manifests/references-0005.jsonl",
+      "records": 610,
+      "sha256": "35b08f64ee130bdd5e7e8878345412e6f4f22c04ab811df9bbaf1ff8a4391636"
+    },
+    {
+      "bytes": 245486,
+      "kind": "references",
+      "member": "manifests/references-0006.jsonl",
+      "records": 596,
+      "sha256": "cf5208bed4c0eb65c92c856e9fbd7a8fc13258326e71760f05dbf9330d749faf"
+    },
+    {
+      "bytes": 245652,
+      "kind": "references",
+      "member": "manifests/references-0007.jsonl",
+      "records": 589,
+      "sha256": "7ead5bf252670ca958b59cf3a7cf511e7f6ae51c98655f8957655c78bc8532c7"
+    },
+    {
+      "bytes": 245748,
+      "kind": "references",
+      "member": "manifests/references-0008.jsonl",
+      "records": 596,
+      "sha256": "8750ccd30ffdbd805372a8bb123964274a4af83f3c14b5ed24fc8977cbebb395"
+    },
+    {
+      "bytes": 245612,
+      "kind": "references",
+      "member": "manifests/references-0009.jsonl",
+      "records": 600,
+      "sha256": "afcfa1ca765e2d5daa9babb40ebb719b6bc7974e0736345b2a7e04534d40d1b5"
+    },
+    {
+      "bytes": 245520,
+      "kind": "references",
+      "member": "manifests/references-0010.jsonl",
+      "records": 585,
+      "sha256": "ca8b444d59680b86ead30a7ed7749e15911786710c085c69c0b4bb8585089944"
+    },
+    {
+      "bytes": 245637,
+      "kind": "references",
+      "member": "manifests/references-0011.jsonl",
+      "records": 579,
+      "sha256": "c6fdca4fd722604068be0debed0b12636088119f8a0e8985532d731385909480"
+    },
+    {
+      "bytes": 245632,
+      "kind": "references",
+      "member": "manifests/references-0012.jsonl",
+      "records": 593,
+      "sha256": "6efe4cd8af9fac6215fd98d58c0adb52589bb4910be9599891622197451ede51"
+    },
+    {
+      "bytes": 245437,
+      "kind": "references",
+      "member": "manifests/references-0013.jsonl",
+      "records": 586,
+      "sha256": "88d9a7faae06fc29c35983cf04a0edfbfd198ed07a9e9b7bd784bf686732149d"
+    },
+    {
+      "bytes": 194999,
+      "kind": "references",
+      "member": "manifests/references-0014.jsonl",
+      "records": 465,
+      "sha256": "16bccd914624278959bd66aa535196685cb904e4dee1e9efd245d33648035165"
+    }
+  ],
+  "partByteLimit": 2097152,
+  "parts": [
+    {
+      "bytes": 1943079,
+      "members": 211,
+      "path": "part-0001.tar.gz",
+      "sha256": "39da8febc4cb5b66776b9655db3ac19d30e78c7ada2edb2238ccbebdb3ec7c8e"
+    },
+    {
+      "bytes": 198304,
+      "members": 7,
+      "path": "part-0002.tar.gz",
+      "sha256": "76129776495671c7f33932595e4dc0014df10b3dfaa886d938af97e05370da0e"
+    }
+  ],
+  "plan": {
+    "compiledBinaries": "hash-only per existing package owner",
+    "includePaths": [
+      "acquisition",
+      "recipe",
+      "review",
+      "PREPARED.json",
+      "READINESS.json",
+      "publication-metadata",
+      "package-plan.json"
+    ],
+    "laneSelection": {
+      "additional": [],
+      "allowNotExecuted": [],
+      "includeAllExisting": false,
+      "required": [
+        "current-v1"
+      ]
+    },
+    "partProfile": {
+      "maximumPartBytes": 2097152,
+      "ownerSHA256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574",
+      "profileSHA256": "9bde181c72dd0372a55104ee9dfabc7173351c8734f8b9b778060589e2a5a3e6",
+      "singleArchiveFirst": true
+    },
+    "proofGatesExecutedByPackaging": false,
+    "resultSHA256": "1e82bec642c8ea8ece15e8caeeed283416c1b612e22c357b20178524b6ab1605",
+    "schema": "synexia.evidence.package-plan/1",
+    "scope": "Fresh current9963 native proof only; old trials immutable",
+    "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+    "sourceTree": "6c055c584ebb5fa177420d1668db73bcb7e7fef4",
+    "status": "FINAL_REVIEWED_SELECTION",
+    "toolInstallations": "external manifest-only; exact current rehash recorded"
+  },
+  "planSHA256": "9bc72208f52d917857223bccd8f9b9ef5c3cce931515331d7c3d0b48b4cba68a",
+  "proofGatesExecuted": false,
+  "rootLogicalMapping": "paths are relative to the original task root",
+  "schema": "synexia.evidence.bundle/1",
+  "sourceRoot": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/native",
+  "summary": {
+    "omissionsByReason": {
+      "compiled-artifact-hash-only": 67
+    },
+    "omittedDirectories": 0,
+    "omittedFileBytes": 363003,
+    "omittedFileRecords": 67,
+    "referencesByRetention": {
+      "exact-path-and-content": 94,
+      "external-input-manifest-only": 8053
+    },
+    "retainedPathBytes": 10912451,
+    "retainedPaths": 250,
+    "sealedInputReferences": 8147,
+    "uniqueChunkBytes": 10788092,
+    "uniqueChunks": 202
+  },
+  "topFiles": [
+    {
+      "bytes": 4652,
+      "path": "LANES.json",
+      "sha256": "87661dd6b9c47695e67b34a8f806ae2705e3972b8d5a63272bd092cd54ea4ade"
+    },
+    {
+      "bytes": 2425,
+      "path": "README.md",
+      "sha256": "2bc32d89eeff69ac9200abed775bdcd5bd346fe818f12f845dc97a845a214853"
+    },
+    {
+      "bytes": 35870,
+      "path": "PATHS-0001.tsv",
+      "sha256": "59d32402560ecb152e0fbc87475a6ce59784b25833cc33f881268e081118761a"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+--- job-111763397781.log: lines 218-234 (original timestamp/ANSI text retained) ---
+2026-10-05T12:33:31.9187816Z ##[group]Run curl --fail --location --retry 3 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21%2B35/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz' -o "$RUNNER_TEMP/jdk21.tar.gz"
+2026-10-05T12:33:31.9189420Z [36;1mcurl --fail --location --retry 3 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21%2B35/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz' -o "$RUNNER_TEMP/jdk21.tar.gz"[0m
+2026-10-05T12:33:31.9190767Z [36;1mprintf '%s  %s\n' '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6' "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -[0m
+2026-10-05T12:33:31.9191419Z [36;1mtar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"[0m
+2026-10-05T12:33:31.9191806Z [36;1mecho "M3_JDK=$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"[0m
+2026-10-05T12:33:31.9431968Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-05T12:33:31.9432344Z ##[endgroup]
+2026-10-05T12:33:31.9575465Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+2026-10-05T12:33:31.9576285Z                                  Dload  Upload   Total   Spent    Left  Speed
+2026-10-05T12:33:31.9576710Z 
+2026-10-05T12:33:32.2781764Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2026-10-05T12:33:32.2782552Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2026-10-05T12:33:32.5072402Z 
+2026-10-05T12:33:33.5318016Z   0  198M    0  703k    0     0  1278k      0  0:02:38 --:--:--  0:02:38 1278k
+2026-10-05T12:33:34.3531748Z  40  198M   40 80.0M    0     0  50.8M      0  0:00:03  0:00:01  0:00:02 77.5M
+2026-10-05T12:33:34.3532658Z 100  198M  100  198M    0     0  82.7M      0  0:00:02  0:00:02 --:--:--  107M
+2026-10-05T12:33:35.2921865Z /home/runner/work/_temp/jdk21.tar.gz: OK
+--- job-111763397781.log: lines 264-294 (original timestamp/ANSI text retained) ---
+2026-10-05T12:33:37.9664196Z ##[group]Run mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
+2026-10-05T12:33:37.9665052Z [36;1mmvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify[0m
+2026-10-05T12:33:37.9703294Z shell: /usr/bin/bash -e {0}
+2026-10-05T12:33:37.9703564Z env:
+2026-10-05T12:33:37.9703790Z   M3_JDK: /home/runner/work/_temp/jdk-21+35
+2026-10-05T12:33:37.9704068Z ##[endgroup]
+2026-10-05T12:33:41.9161576Z [INFO] Scanning for projects...
+2026-10-05T12:33:42.0111128Z [INFO] 
+2026-10-05T12:33:42.0121583Z [INFO] ------------------< com.m3.tooling:migration-recipes >------------------
+2026-10-05T12:33:42.0122636Z [INFO] Building migration-recipes 0.1.0-SNAPSHOT
+2026-10-05T12:33:42.0131447Z [INFO]   from pom.xml
+2026-10-05T12:33:42.0132560Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-05T12:33:47.5291085Z [INFO] 
+2026-10-05T12:33:47.5293953Z [INFO] --- clean:3.2.0:clean (default-clean) @ migration-recipes ---
+2026-10-05T12:33:47.8805848Z [INFO] 
+2026-10-05T12:33:47.8806913Z [INFO] --- jacoco:0.8.15:prepare-agent (m3-coverage-agent) @ migration-recipes ---
+2026-10-05T12:33:48.7484099Z [INFO] argLine set to -javaagent:/home/runner/.m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/target/jacoco.exec
+2026-10-05T12:33:48.7485492Z [INFO] 
+2026-10-05T12:33:48.7486029Z [INFO] --- resources:3.4.0:resources (default-resources) @ migration-recipes ---
+2026-10-05T12:33:49.6781721Z [INFO] Copying 384 resources from src/main/resources to target/classes
+2026-10-05T12:33:49.7471307Z [INFO] 
+2026-10-05T12:33:49.7471951Z [INFO] --- compiler:3.13.0:compile (default-compile) @ migration-recipes ---
+2026-10-05T12:33:50.7162481Z [INFO] Recompiling the module because of changed source code.
+2026-10-05T12:33:50.7317998Z [INFO] Compiling 34 source files with javac [debug release 21] to target/classes
+2026-10-05T12:33:51.0093492Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:33:51.0093894Z [INFO] BUILD FAILURE
+2026-10-05T12:33:51.0094191Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:33:51.0105086Z [INFO] Total time:  9.138 s
+2026-10-05T12:33:51.0106263Z [INFO] Finished at: 2026-10-05T12:33:51Z
+2026-10-05T12:33:51.0106626Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:33:51.0116943Z [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile (default-compile) on project migration-recipes: Fatal error compiling: error: release version 21 not supported -> [Help 1]

@@ -1,0 +1,24 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/acquisition/package_evidence.py",
+    "verify",
+    "--bundle",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/evidence-bundle"
+  ],
+  "exitCode": 0,
+  "startedAt": "2026-10-05T16:49:30.950549+00:00",
+  "finishedAt": "2026-10-05T16:49:31.027104+00:00",
+  "stdout": {
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/verify.stdout.log",
+    "sha256": "6cbe82f022d420b35d1aa3d532c073884fd487cbe015965882f3091898854688",
+    "bytes": 769
+  },
+  "stderr": {
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cic/verify.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  },
+  "packageOwnerSHA256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574",
+  "proofGatesExecuted": false
+}

@@ -1,0 +1,15 @@
+{
+  "kind": "STATIC_INDEPENDENT_REVIEW_NO_GATES",
+  "files": [
+    {
+      "path": "cit-text3-review.json",
+      "sha256": "65112b1b058d200764e115a6f45cba1c545c80d09c009bddb6c67f500de39dc0",
+      "bytes": 11620
+    },
+    {
+      "path": "cit-text3-review.md",
+      "sha256": "3d43e216f7b89729a59019f7a8c29fa7ae6778dcddc79473f7831e00d8788b88",
+      "bytes": 2746
+    }
+  ]
+}

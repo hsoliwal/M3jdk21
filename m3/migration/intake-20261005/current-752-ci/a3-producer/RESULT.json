@@ -1,0 +1,107 @@
+{
+  "canonicalOfflineSourceClosure": false,
+  "canonicalProductionApplied": false,
+  "compiledArtifacts": {
+    "bytes": 7834,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/build-artifacts.json",
+    "sha256": "3ede5e33d511da70a2bb115958618423808fb670876d5b2bfb653da04379ca93"
+  },
+  "consumerQualified": false,
+  "crossFamilyAtomicity": false,
+  "failure": null,
+  "inputManifestSHA256": "84ee44e0daea9a25873f99c7e932610ff859c78cc8d01b5135f8ce18efaae714",
+  "junit": {
+    "counts": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 6
+    },
+    "methods": [
+      "allMixedStates",
+      "exactLexicalRepairs",
+      "generatedA3CompilationAndRuntime",
+      "initialRefusals",
+      "namedRecipeReplay",
+      "postScanDrift"
+    ],
+    "report": {
+      "bytes": 18582,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/target/surefire-reports/TEST-com.synexia.rewrite.CirRecipeTest.xml",
+      "sha256": "27e611466d5fecf69f6fd7c69adce53b24842a738f0a3419e89e9698ea98593d"
+    },
+    "suite": "com.synexia.rewrite.CirRecipeTest"
+  },
+  "patchSHA256": "651cc67cff40d9b44f901a4767883c7208968adfa162742e060094e675e8c21f",
+  "receipts": [
+    {
+      "bytes": 1805,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/chain/01-static.json",
+      "sha256": "996024002a1ab407e313d5f71832eaccde9fe413942113a73dbe1635827acb4a"
+    },
+    {
+      "bytes": 2398,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/chain/02-compile.json",
+      "sha256": "b953807987037ec26581f075fa317551c2348ff0940a7842f7209448f67eb902"
+    },
+    {
+      "bytes": 2712,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/chain/03-tests.json",
+      "sha256": "9953ce1bd9d82d25f409abb665f7ed038830be681934e8cdcae8aeab17790e8f"
+    },
+    {
+      "bytes": 12071,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/chain/04-runtime.json",
+      "sha256": "e94f73eb3ddb0800d0dab40fe679a55227afdee496a2bc5acb373e768744d442"
+    }
+  ],
+  "runtime": {
+    "canonicalProductionApplied": false,
+    "crossFamilyAtomicity": false,
+    "files": [
+      {
+        "bytes": 6447,
+        "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef"
+      },
+      {
+        "bytes": 7516,
+        "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada"
+      },
+      {
+        "bytes": 6447,
+        "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef"
+      },
+      {
+        "bytes": 7516,
+        "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada"
+      },
+      {
+        "bytes": 658,
+        "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "sha256": "e7a96b1290ead86d3861f0388423504078cc8f66f10303f73e0a7d44a6e5776b"
+      }
+    ],
+    "marker": "CIR_VERIFIED targets=5 mixedStates=32 initialRefusals=22 postScanRefusals=10 outputSeal=cd016202be555f06fb18281156237109d9476a893d1fbb01616c28439b930c27",
+    "output": {
+      "bytes": 1462,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/generated-candidate/OUTPUT.json",
+      "sha256": "90d336c43ad1ad0a397badc18cf384afe2c2502fcc64e0a1e11a8f0c1fcfa1ad"
+    },
+    "outputSeal": "cd016202be555f06fb18281156237109d9476a893d1fbb01616c28439b930c27",
+    "patch": {
+      "bytes": 4250,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/generated-candidate/candidate.patch",
+      "sha256": "01f9f7c4b6f92e5cadc55d7518dede0559bbc50a953ea9ca2aaafe01a8b86e69"
+    },
+    "strictCanonicalAdmission": false
+  },
+  "schema": "synexia.cir-752.proof-result/1",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "status": "PASS_FOCUSED_PRODUCER",
+  "strictCanonicalAdmission": false,
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2"
+}

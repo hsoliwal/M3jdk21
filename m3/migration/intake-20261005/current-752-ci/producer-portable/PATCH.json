@@ -1,0 +1,24 @@
+{
+  "canonicalProductionApplied": false,
+  "commandsSHA256": "9bbed73d5bbe02c40cdc067f679bd3f5c4bae1a3fdf0fe37811421e19ca4a7cc",
+  "expectedJUnitMethods": [
+    "actualNamedFamilyReplays",
+    "allCijStates",
+    "allCitStates",
+    "allUnionStatesAndOrders",
+    "cijRefusals",
+    "citRefusals",
+    "closedDisjointFamiliesAndSourceKindControls",
+    "exactJavaRepairAndTypedPostimages",
+    "postScanDrift"
+  ],
+  "inputManifestSHA256": "8e4c1786eca162ca2c09f0206a9849b54f4c3b38b0c2e18c0af29090224ea163",
+  "projectFiles": 23,
+  "schema": "synexia.ci-752.prepared/1",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "specSHA256": "1d4f61a01faacdd32026739d9c8ec62c94a825a4f385cf92408a82ed6815ea9b",
+  "stagingSHA256": "8d92a9afe7cb8356ac4f4899538abc304edab113d1e4e87f97600522b36e55d4",
+  "status": "PREPARED_NOT_EXECUTED",
+  "strictCanonicalAdmission": false,
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2"
+}

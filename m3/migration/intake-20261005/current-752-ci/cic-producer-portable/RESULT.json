@@ -1,0 +1,97 @@
+{
+  "canonicalOfflineSourceClosure": false,
+  "canonicalProductionApplied": false,
+  "compiledArtifacts": {
+    "bytes": 3993,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1/build-artifacts.json",
+    "sha256": "7479b76c017c02cd987e3af06412dab01ead063ab4b5d036f370f345072f42bf"
+  },
+  "consumerQualified": false,
+  "crossFamilyAtomicity": false,
+  "failure": null,
+  "inputManifestSHA256": "71b18e42940e46980e2ef02972f2744a2b530683ebea9f2f61a743ef82019adb",
+  "junit": {
+    "counts": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 6
+    },
+    "methods": [
+      "allMixedStates",
+      "corpusCompilationAndRuntime",
+      "exactRepairScope",
+      "initialRefusals",
+      "namedRecipeReplay",
+      "postScanDrift"
+    ],
+    "report": {
+      "bytes": 17370,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1/project/target/surefire-reports/TEST-com.synexia.rewrite.CicRecipeTest.xml",
+      "sha256": "785ca8d9a51ede59a63c6fc2841845e903eae06ce6d9a79d1da2c66c0a452626"
+    },
+    "suite": "com.synexia.rewrite.CicRecipeTest"
+  },
+  "patchSHA256": "2e40286005bd0e97a711b2ba81eae18e024a649b8415064cac3cb706ad3bc8c0",
+  "receipts": [
+    {
+      "bytes": 1805,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1/chain/01-static.json",
+      "sha256": "6ba97df0e87c6c3801e49dc7c945cea529f9906885d26bf0b68778dc961109d8"
+    },
+    {
+      "bytes": 2398,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1/chain/02-compile.json",
+      "sha256": "8b95ecda4eed8bade78c5fc504e3226b199d1ef8ca58e116014277dbf48ea366"
+    },
+    {
+      "bytes": 2714,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1/chain/03-tests.json",
+      "sha256": "881985e9eaa07ad82153f347e3aabbe0c69f3352ca1cffca4fbf02a92b7d1806"
+    },
+    {
+      "bytes": 11954,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1/chain/04-runtime.json",
+      "sha256": "9ca17f707e7677d3777418047b44f85ee454532900055e7f2a0d9cdc3ee1df8b"
+    }
+  ],
+  "runtime": {
+    "canonicalProductionApplied": false,
+    "crossFamilyAtomicity": false,
+    "files": [
+      {
+        "bytes": 7750,
+        "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+        "sha256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55"
+      },
+      {
+        "bytes": 7750,
+        "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after",
+        "sha256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55"
+      },
+      {
+        "bytes": 734,
+        "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv",
+        "sha256": "0bff4ddf1d6a002510903127bc56c7a2921bfa5851ac8217007eb3699b9febac"
+      }
+    ],
+    "marker": "CIC_VERIFIED targets=3 mixedStates=8 initialRefusals=14 postScanRefusals=6 outputSeal=43db2acf1f8f06cb4de3abdc1da0e810affcdd38b226de6a91c3584f508a75c1",
+    "output": {
+      "bytes": 1035,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1/generated-candidate/OUTPUT.json",
+      "sha256": "436b249bfc859fe9eeb1dbd24943909262befde9cdd4f342920710c3f0a3b7c3"
+    },
+    "outputSeal": "43db2acf1f8f06cb4de3abdc1da0e810affcdd38b226de6a91c3584f508a75c1",
+    "patch": {
+      "bytes": 3453,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cic-producer-v1/generated-candidate/candidate.patch",
+      "sha256": "ceca658f9404317c00a9c940d7f408e06cc8ade66b9ac0058f4bdd6892ab23cf"
+    },
+    "strictCanonicalAdmission": false
+  },
+  "schema": "synexia.cic-752.proof-result/1",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "status": "PASS_FOCUSED_PRODUCER",
+  "strictCanonicalAdmission": false,
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2"
+}

@@ -1,0 +1,39 @@
+--- prepare_receiver_whitelist_v4.py
++++ prepare_receiver_whitelist_v5.py
+@@ -149,6 +149,8 @@
+             and package_plan['laneSelection']['allowNotExecuted'] == []
+             and package_plan['laneSelection']['includeAllExisting'] is False,
+             'exact package lane selection')
++    require(package_plan['inputManifestPaths'] == sorted('evidence/' + lane + '/inputs.json' for lane in expected_results),
++            'all seven actual lane-root input arrays retain reference auditing')
+     require(sha((package / 'staged/evidence/consumer-v5/RESULT.json').read_bytes()) == args.result_sha
+             and sha((package / 'staged/evidence/consumer-v5/authority/manifest.json').read_bytes()) == MANIFEST_SHA,
+             'exact copied final result and manifest')
+@@ -182,8 +184,8 @@
+     require(command['exitCode'] == 0 and command['proofGatesExecuted'] is False, 'actual package success')
+     verification = load(package / 'VERIFY-COMMAND.json')
+     require(verification['exitCode'] == 0 and verification['proofGatesExecuted'] is False, 'actual archive integrity verification')
+-    packager = R / 'packaging/package_evidence_state_v1.py'
+-    require(sha(packager.read_bytes()) == '99a140af284c3280d285d039e59cbebee4e961ae530fe4117e1421e485a09f9b',
++    packager = R / 'packaging/package_evidence_state_v2.py'
++    require(sha(packager.read_bytes()) == 'c7d0d838814be81b627810ec587e1d21d2841d922b0791a4c60642386c9ea39d',
+             'retained reviewed archive owner')
+     python = str(R.parent.parent / 'm3-python/bin/python')
+     require(command['command'] == [python, str(packager), 'pack', '--root', str(package / 'staged'),
+@@ -209,14 +211,14 @@
+                 file, 'provenance-addition')
+     for name in ('PACK-COMMAND.json', 'pack.stdout.log', 'pack.stderr.log', 'VERIFY-COMMAND.json', 'verify.stdout.log', 'verify.stderr.log'):
+         add(TASK + '/consumer-portable/' + name, package / name, 'provenance-addition')
+-    for name in ('COPY-CUSTODY.json', 'package-plan.json', 'package_evidence_state_v1.py', 'state-reader.patch', 'STATE-READER.json'):
++    for name in ('COPY-CUSTODY.json', 'package-plan.json', 'package_evidence_state_v2.py', 'state-reader.patch', 'STATE-READER.json', 'reference-scope.patch', 'REFERENCE-SCOPE.json', 'prepare_consumer_package_v7.py'):
+         add(TASK + '/consumer-portable/' + name, package / 'staged' / name, 'provenance-addition')
+     for file in sorted((package / 'staged/openjdk-752-attribution').rglob('*')):
+         if file.is_file():
+             add(TASK + '/consumer-portable/openjdk-752-attribution/' + file.relative_to(package / 'staged/openjdk-752-attribution').as_posix(), file, 'provenance-addition')
+     for name in ('RESULT.json', 'PATCH.json', 'lint-report.json', 'compile-report.json', 'test-report.json', 'runtime-report.json'):
+         add(TASK + '/consumer-portable/final/' + name, proof / name, 'provenance-addition')
+-    add(TASK + '/consumer-portable/prepare_receiver_whitelist_v4.py', Path(__file__), 'provenance-addition')
++    add(TASK + '/consumer-portable/prepare_receiver_whitelist_v5.py', Path(__file__), 'provenance-addition')
+     write(args.output, {
+         'schema': 'm3.current-receiver-publication-whitelist/1',
+         'state': 'EXACT_QUALIFIED_CONTEXT_AND_SEPARATE_PROVENANCE',

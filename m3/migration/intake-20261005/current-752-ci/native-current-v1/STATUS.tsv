@@ -1,0 +1,14 @@
+component	status	evidence	scope
+native-current-v1	PASS_BOUNDED_LINUX_X86_64	evidence/current-v1/RESULT.json	fresh execution at 9963cc08ff13922b92a0e3db7c30f56fddacba7d
+source-identity	PASS	evidence/current-v1/source-receipts.json	65 repository inputs; 64 operational inputs unchanged from historical native proof
+lint	PASS	evidence/current-v1/chain/current-v1/01-lint.json	9 accepted commands; no input drift
+compile	PASS	evidence/current-v1/chain/current-v1/02-compile.json	10 accepted commands; no input drift
+test	PASS	evidence/current-v1/chain/current-v1/03-test.json	6 accepted commands; no input drift
+runtime	PASS	evidence/current-v1/chain/current-v1/04-runtime.json	7 accepted commands; no input drift
+final-audit	PASS	evidence/current-v1/FINAL-AUDIT.json	8147 input seals; 32 command receipts; 61 compiled artifact identities
+production-source-changes	NONE	evidence/current-v1/RESULT.json	existing production Java and native implementation retained
+maven-openrewrite-native-recipe	NOT_EXECUTED	evidence/current-v1/RESULT.json	not qualified by this bounded native lane
+whole-module-reactor-admission	NOT_EXECUTED	evidence/current-v1/RESULT.json	strict repository admission remains false
+jdk-product-runtime	NOT_QUALIFIED	evidence/current-v1/proof/SCOPE.md	no product-runtime acceptance
+performance-memory	NOT_MEASURED	evidence/current-v1/RESULT.json	assertion counts are correctness observations
+archive-integrity	SEE_SEPARATE_READBACK	evidence-bundle/VERIFY.json	archive verification does not execute or extend proof gates

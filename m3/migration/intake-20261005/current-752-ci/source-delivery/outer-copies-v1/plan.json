@@ -1,0 +1,21 @@
+{
+  "label": "cia-27-physical-outer-copies",
+  "prior": {
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/research/source-delivery-coverage/coverage.json",
+    "sha256": "07df1ae51dd27de7ff4470c92864fdbbf4064e6403115d1baa9bd503ff162f26"
+  },
+  "schema": "m3.source-delivery-append-plan/1",
+  "segments": [
+    {
+      "id": "cia-portable-outer-27",
+      "mapping": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cia-producer-portable-v1/MAPPING.json",
+        "sha256": "c9c5011e73eafac8aaec5a12c60f005994e743fdf85e7df225b0b1a4c18f564b"
+      },
+      "whitelist": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/PORTABLE-CIA-WHITELIST.json",
+        "sha256": "fb283b1719522c78f0e385a8d07125e780bd7bdb8f0da6b5fa1928bf73b42991"
+      }
+    }
+  ]
+}

@@ -1,0 +1,319 @@
+{
+  "additional_producer_output_seal": "cd016202be555f06fb18281156237109d9476a893d1fbb01616c28439b930c27",
+  "additional_producer_result_sha256": "4dbc2cf6dc163cacd930b6e90d3d359aa15380535c811545651e4a936f3e92ea",
+  "cia_producer_output_seal": "1aeb7260771ad433bfc24cfc37777324ce8898395ce044309fe02ea6986e02f4",
+  "cia_producer_result_sha256": "c0f132f91f9c024d15030bd4d0acf63f287e8e38f2d5a51f1b7ba55c36490684",
+  "cic_producer_output_seal": "43db2acf1f8f06cb4de3abdc1da0e810affcdd38b226de6a91c3584f508a75c1",
+  "cic_producer_result_sha256": "72d9ab1f3bb0065b70165f435cd93aad8710ca4671e60b94bfe21e614dd3855f",
+  "cih_producer_output_seal": "66524b7605f7e490a1c3a2258c738da9d77f50c62a6475206289162d988b4801",
+  "cih_producer_result_sha256": "f93e1ef05b82459105b8dacd6258af0caa86f0e2c2221f946e8250397ffa9dcb",
+  "composite_preimage_context": {
+    "contextManifestSHA256": "f25a39ea2c764a5a9f2a84b43915aa4480aa4302718bc098bd4bfaa39727f7b3",
+    "meaning": "current752 plus prior569 head5c and nineteen actual generated repairs; two JCC test preimages belong to that composite context",
+    "receiverStopResultSHA256": "65ad6376f5e88ca2bd1e33e549c262a50bc58952ede7af8c17c9b0beed05ed73",
+    "receivingHead": "5c1ee9490e76943dfdb3ca27fade0d093d017226"
+  },
+  "declared_output_count": 24,
+  "guard_promoted_to_output": "m3/tooling/migration-recipes/pom.xml",
+  "guards": [
+    {
+      "path": "m3/migration/recipe.py",
+      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
+    },
+    {
+      "path": "m3/migration/migration.py",
+      "sha256": "4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787"
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "sha256": "245fcd73135ef418a30ee350049719574f86222e08c63219d883119b3dc8321f"
+    },
+    {
+      "path": "m3/docs/name-mapping.schema.json",
+      "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b"
+    },
+    {
+      "path": "m3/backports/pom.xml",
+      "sha256": "ba4dbc17bbfc3eaa1759d0b162eac562ff762847722006860c2e9f8ce65df9e2"
+    },
+    {
+      "path": "SYNEXIA_CONVERGENCE_MODEL.md",
+      "sha256": "dfb196cff22c5ad164df03e3c862d12b003d42b7c7ac2fd4e852ff20ade53c3c"
+    },
+    {
+      "path": "m3/pom.xml",
+      "sha256": "8124b37765f457df8d8aa6b9b89f54efba8845e4fdec399f4d41e809c3956a36"
+    },
+    {
+      "path": "m3/tooling/a3/pom.xml",
+      "sha256": "27308b049acc122f62f9cb9a9a679a94640952c423b04495c0ef5b9a2c824ec1"
+    }
+  ],
+  "outputs": [
+    {
+      "after": {
+        "resource": "after/0.txt",
+        "sha256": "f6f569ef91e6b17be68a48801d1f97639d288d436c277a6401628bd82e210d3e"
+      },
+      "before": {
+        "resource": "before/0.txt",
+        "sha256": "2a81b9ebfa5d477977dba4632a0e7c89f2ebb89606eb46491197536335d63fee"
+      },
+      "path": ".github/workflows/m3-foundation.yml"
+    },
+    {
+      "after": {
+        "resource": "after/1.txt",
+        "sha256": "d51301d3ea225e89b000a2256855ab7806a1faf20c5fa493eb5666de1e7880c2"
+      },
+      "before": {
+        "resource": "before/1.txt",
+        "sha256": "3fbe65ee5d3130858d114b0637207585e0cb20c2b5008def8c3dc6607f042d41"
+      },
+      "path": "m3/backports/compatibility_policy.py"
+    },
+    {
+      "after": {
+        "resource": "after/2.txt",
+        "sha256": "dbd50a08d902a4009c66e22b8e6f499a66bbe4316c2d96d1e47c60194b572937"
+      },
+      "before": {
+        "resource": "before/2.txt",
+        "sha256": "10d8d11da8b4dd6772875cb3ba5c1f2c0732e307cdd5c983a96811b9c9f5180d"
+      },
+      "path": "m3/backports/test_compatibility_policy.py"
+    },
+    {
+      "after": {
+        "resource": "after/3.txt",
+        "sha256": "f34470a701cf71b4b4abbe1fa9a5091392a930426ec84d700f13e53edd244629"
+      },
+      "before": {
+        "resource": "before/3.txt",
+        "sha256": "58d01008f3dc6e79d988e855d76ba90eb0a13d39a76e7eb4027d75442389ec94"
+      },
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java"
+    },
+    {
+      "after": {
+        "resource": "after/4.txt",
+        "sha256": "3f3ab065d9e87e9f6095629a56b052642ec9d0883a466430e90a4a4355edd05b"
+      },
+      "before": {
+        "resource": "before/4.txt",
+        "sha256": "69882638771a411cf0866f789a7b3ef7e7e7040cde38a1c40ef4a743d37168e2"
+      },
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java"
+    },
+    {
+      "after": {
+        "resource": "after/5.txt",
+        "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef"
+      },
+      "before": {
+        "resource": "before/5.txt",
+        "sha256": "9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697"
+      },
+      "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java"
+    },
+    {
+      "after": {
+        "resource": "after/6.txt",
+        "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada"
+      },
+      "before": {
+        "resource": "before/6.txt",
+        "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404"
+      },
+      "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java"
+    },
+    {
+      "after": {
+        "resource": "after/7.txt",
+        "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef"
+      },
+      "before": {
+        "resource": "before/7.txt",
+        "sha256": "9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697"
+      },
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after"
+    },
+    {
+      "after": {
+        "resource": "after/8.txt",
+        "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada"
+      },
+      "before": {
+        "resource": "before/8.txt",
+        "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404"
+      },
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after"
+    },
+    {
+      "after": {
+        "resource": "after/9.txt",
+        "sha256": "e7a96b1290ead86d3861f0388423504078cc8f66f10303f73e0a7d44a6e5776b"
+      },
+      "before": {
+        "resource": "before/9.txt",
+        "sha256": "b2febbb17ed96ae6f582eee2e16af3fc5e435c23e350708f56397bee9ac38ab5"
+      },
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv"
+    },
+    {
+      "after": {
+        "resource": "after/10.txt",
+        "sha256": "0de471de5a54e1c87153e4b1c23c4013a800f07595cfc05eec7bd4e68f1345d6"
+      },
+      "before": {
+        "resource": "before/10.txt",
+        "sha256": "d88f347f77069dc1e2e6a3871c68c55e76f885f324801957d041f9ecc31ec6f4"
+      },
+      "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java"
+    },
+    {
+      "after": {
+        "resource": "after/11.txt",
+        "sha256": "8922e21e4f814dc99282cf1828786a0347552454003e23ac2fa91aa8710851b1"
+      },
+      "before": {
+        "resource": "before/11.txt",
+        "sha256": "d684f2c95622c32683dbdce162d2f49101c7431bfbba1927a34182dcecadc77f"
+      },
+      "path": "m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java"
+    },
+    {
+      "after": {
+        "resource": "after/12.txt",
+        "sha256": "a53bdeee8afe28b90cb0e348e718b70610a9487edb1b75b46e09bfb76e0f3dc9"
+      },
+      "before": {
+        "resource": "before/12.txt",
+        "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"
+      },
+      "path": "m3/tooling/migration-recipes/pom.xml"
+    },
+    {
+      "after": {
+        "resource": "after/13.txt",
+        "sha256": "521a7f07e59f507e0ce3193a3d0c7540c232a37c74128d954b52670677498241"
+      },
+      "before": {
+        "resource": "before/13.txt",
+        "sha256": "280d7c08e9da9f618f4596516420a5c6c2de8f32fa1b52ff354853f3b0fb7c2b"
+      },
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java"
+    },
+    {
+      "after": {
+        "resource": "after/14.txt",
+        "sha256": "0de471de5a54e1c87153e4b1c23c4013a800f07595cfc05eec7bd4e68f1345d6"
+      },
+      "before": {
+        "resource": "before/14.txt",
+        "sha256": "d88f347f77069dc1e2e6a3871c68c55e76f885f324801957d041f9ecc31ec6f4"
+      },
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java"
+    },
+    {
+      "after": {
+        "resource": "after/15.txt",
+        "sha256": "8922e21e4f814dc99282cf1828786a0347552454003e23ac2fa91aa8710851b1"
+      },
+      "before": {
+        "resource": "before/15.txt",
+        "sha256": "d684f2c95622c32683dbdce162d2f49101c7431bfbba1927a34182dcecadc77f"
+      },
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java"
+    },
+    {
+      "after": {
+        "resource": "after/16.txt",
+        "sha256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55"
+      },
+      "before": {
+        "resource": "before/16.txt",
+        "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298"
+      },
+      "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java"
+    },
+    {
+      "after": {
+        "resource": "after/17.txt",
+        "sha256": "c0ff0c45cf310f233a18e163682d0c12876694a93b1f39a332ecf9e125c82c55"
+      },
+      "before": {
+        "resource": "before/17.txt",
+        "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298"
+      },
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after"
+    },
+    {
+      "after": {
+        "resource": "after/18.txt",
+        "sha256": "0bff4ddf1d6a002510903127bc56c7a2921bfa5851ac8217007eb3699b9febac"
+      },
+      "before": {
+        "resource": "before/18.txt",
+        "sha256": "b901f0b1aae122711792a66dc9750b9ba4608d59613641e74f378218757cbb4d"
+      },
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv"
+    },
+    {
+      "after": {
+        "resource": "after/19.txt",
+        "sha256": "9d79d07bb31ded0e5ec9eebef1095ae25be8f20c55f9e72aee4ba64852790594"
+      },
+      "before": {
+        "resource": "before/19.txt",
+        "sha256": "54114c84b923790cea717f85bdb78574aa3c14e00e1419e68c5cef7d8d87b1b4"
+      },
+      "path": "m3/migration/test/test_jcc_handoff_context_profiles.py"
+    },
+    {
+      "after": {
+        "resource": "after/20.txt",
+        "sha256": "30a838a363fb05f9c1caf48fd36c0a67de0767708e4b198b77af37ee0c41eb63"
+      },
+      "before": null,
+      "path": "m3/migration/test/test_jcc_handoff_current_context.py"
+    },
+    {
+      "after": {
+        "resource": "after/21.txt",
+        "sha256": "fde72eb9f2b682f50004defbc70e6d886a3f646abb0d89c0aec5de8ab0dbd30d"
+      },
+      "before": {
+        "resource": "before/21.txt",
+        "sha256": "1662cd99e60e03692e95bfdeb51dbf46c5c990dac7d5cadbd5e1ddb5fcad52fe"
+      },
+      "path": "m3/migration/test/test_jcc_handoff_packet.py"
+    },
+    {
+      "after": {
+        "resource": "after/22.txt",
+        "sha256": "e4ea964db1a6f9527122ff0dad1c969a43dc50a0f80c771c86b70bcd6da6dcaf"
+      },
+      "before": null,
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-752-ci.json"
+    },
+    {
+      "after": {
+        "resource": "after/23.txt",
+        "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"
+      },
+      "before": null,
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/pom-before-752.xml"
+    }
+  ],
+  "plan_sha256": "9c720d95d8f2a22a4cd9a4aa367e6b91842531f262e53a3245c91cad05bb3647",
+  "preimage_context": "Exact 752 source with unchanged 569-path PR148 intake overlay, plus closed current Java/backports source-test closure. All five replacement preimages equal the exact 752 target bytes. Source commit records Synexia recipe provenance.",
+  "producer_output_seal": "3895ac2617d07cefd481a299aa18092d49c5bfb9733177740038b35e1c161442",
+  "producer_result_sha256": "d6d265a959e378fce47d68b5aa4a3a3bbee14bebf21355a54bd8077cb51e8630",
+  "publication_head": "5c1ee9490e76943dfdb3ca27fade0d093d017226",
+  "recipe_id": "synexia-current-752-ci/5",
+  "schema": "m3.sealed-install/1",
+  "source_commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "target_commit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+  "target_tree": "44feeb32f77a3442606ef3b63b923fd43732b20d"
+}

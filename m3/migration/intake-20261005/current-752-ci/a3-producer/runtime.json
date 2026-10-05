@@ -1,0 +1,44 @@
+{
+  "canonicalProductionApplied": false,
+  "crossFamilyAtomicity": false,
+  "files": [
+    {
+      "bytes": 6447,
+      "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+      "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef"
+    },
+    {
+      "bytes": 7516,
+      "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+      "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada"
+    },
+    {
+      "bytes": 6447,
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+      "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef"
+    },
+    {
+      "bytes": 7516,
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+      "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada"
+    },
+    {
+      "bytes": 658,
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+      "sha256": "e7a96b1290ead86d3861f0388423504078cc8f66f10303f73e0a7d44a6e5776b"
+    }
+  ],
+  "marker": "CIR_VERIFIED targets=5 mixedStates=32 initialRefusals=22 postScanRefusals=10 outputSeal=cd016202be555f06fb18281156237109d9476a893d1fbb01616c28439b930c27",
+  "output": {
+    "bytes": 1462,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/generated-candidate/OUTPUT.json",
+    "sha256": "90d336c43ad1ad0a397badc18cf384afe2c2502fcc64e0a1e11a8f0c1fcfa1ad"
+  },
+  "outputSeal": "cd016202be555f06fb18281156237109d9476a893d1fbb01616c28439b930c27",
+  "patch": {
+    "bytes": 4250,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/generated-candidate/candidate.patch",
+    "sha256": "01f9f7c4b6f92e5cadc55d7518dede0559bbc50a953ea9ca2aaafe01a8b86e69"
+  },
+  "strictCanonicalAdmission": false
+}

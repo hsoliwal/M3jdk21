@@ -1,0 +1,35 @@
+{
+  "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+  "node_id": "C_kwDOQ2icstoAKGUxY2Y2ODQ2MjdhNjZlZTc4NGNmY2EwYjQyNTUzNTMxYjJkOGU3ZDQ",
+  "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/commits/e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+  "html_url": "https://github.com/hsoliwal/com.synexia/commit/e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+  "author": {
+    "name": "Hitesh Soliwal",
+    "email": "hsoliwal@gmail.com",
+    "date": "2026-10-05T16:15:35Z"
+  },
+  "committer": {
+    "name": "Hitesh Soliwal",
+    "email": "hsoliwal@gmail.com",
+    "date": "2026-10-05T16:15:35Z"
+  },
+  "tree": {
+    "sha": "3a7fd2a3e29202f3eef9d88fadbbc107b698e6fb",
+    "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3a7fd2a3e29202f3eef9d88fadbbc107b698e6fb"
+  },
+  "message": "Add recipe-driven M3 repairs and current Java/JNI evidence\n\nQualify the Cij/Cit and Cir task projects through actual recipe execution,\nretain failed trials and portable provenance, and publish the current\nprimitive collection and JNI correctness evidence. Preserve existing\nowners and repository contents. Full A3 receiving work continues in M3.",
+  "parents": [
+    {
+      "sha": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+      "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/commits/9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+      "html_url": "https://github.com/hsoliwal/com.synexia/commit/9963cc08ff13922b92a0e3db7c30f56fddacba7d"
+    }
+  ],
+  "verification": {
+    "verified": false,
+    "reason": "unsigned",
+    "signature": null,
+    "payload": null,
+    "verified_at": null
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "compiledBinaries": "hash-only",
+  "includePaths": [
+    "evidence/producer-v1",
+    "producer-authoring-v2",
+    "producer-spec-v1.json",
+    "producer-spec-v2.json",
+    "OWNER-PROVENANCE.json",
+    "PREFLIGHT-REFUSAL-v1.json",
+    "QUALIFIED-PRODUCER.json",
+    "task-packet",
+    "java-authoring-v1",
+    "text-authoring-v1",
+    "author-java-resources.py",
+    "author-text-resources.py",
+    "review",
+    "producer-package-inputs",
+    "producer-package-plan.json"
+  ],
+  "laneSelection": {
+    "additional": [],
+    "allowNotExecuted": [],
+    "includeAllExisting": false,
+    "required": [
+      "producer-v2"
+    ]
+  },
+  "packageOwnerSHA256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574",
+  "preparedV1Disposition": {
+    "externalDisposition": "PREFLIGHT-REFUSAL-v1.json",
+    "gatesExecuted": false,
+    "laneMarkerAbsentByDesign": true,
+    "proof": "evidence/producer-v1",
+    "retention": "explicit includePaths preserves all prepared evidence without inventing a terminal file"
+  },
+  "proofGatesExecutedByPackaging": false,
+  "resultSHA256": "d6d265a959e378fce47d68b5aa4a3a3bbee14bebf21355a54bd8077cb51e8630",
+  "schema": "synexia.evidence.package-plan/1",
+  "scope": "Actual Cij/Cit producer-v2 PASS plus exact producer-v1 prepared inputs and external zero-gate preflight disposition; no old trial mutated.",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "status": "FINAL_REVIEWED_SELECTION",
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+  "toolCaches": "manifest-only"
+}

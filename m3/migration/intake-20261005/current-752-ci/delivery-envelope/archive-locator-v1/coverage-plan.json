@@ -1,0 +1,21 @@
+{
+  "label": "receiver-current-evidence-cohort",
+  "prior": {
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/research/source-delivery-coverage/cih-copies-v1/coverage-append.json",
+    "sha256": "83e2729fc7dae8769acce8cbdb0a1cd104088cf0d8a5e1162ce8a04e89c70ece"
+  },
+  "schema": "m3.source-delivery-append-plan/1",
+  "segments": [
+    {
+      "id": "receiver-current-provenance",
+      "mapping": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/receiver-source-cohort-v2/source-to-receiving.json",
+        "sha256": "5008ed4ea2dc5bb79f5a67aed31bc71edb8fdf291436456ae73679a3920dc24e"
+      },
+      "whitelist": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/receiver-source-cohort-v2/source-whitelist.json",
+        "sha256": "fc812d914d4b2f93a1932ed0a7b326c57ba336b80c5f889c5a8f8cff1ece014d"
+      }
+    }
+  ]
+}

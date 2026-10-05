@@ -1,0 +1,859 @@
+﻿2026-10-05T12:32:51.6954946Z Current runner version: '2.337.0'
+2026-10-05T12:32:51.6981622Z ##[group]Runner Image Provisioner
+2026-10-05T12:32:51.6982472Z Hosted Compute Agent
+2026-10-05T12:32:51.6983304Z Version: 20260901.588
+2026-10-05T12:32:51.6984007Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+2026-10-05T12:32:51.6984837Z Build Date: 2026-09-01T19:56:44Z
+2026-10-05T12:32:51.6985868Z Worker ID: {70214ecf-7bc3-49b3-b9a9-821156a8e082}
+2026-10-05T12:32:51.6986603Z Azure Region: northcentralus
+2026-10-05T12:32:51.6987363Z ##[endgroup]
+2026-10-05T12:32:51.6988787Z ##[group]Operating System
+2026-10-05T12:32:51.6989504Z Ubuntu
+2026-10-05T12:32:51.6990112Z 22.04.5
+2026-10-05T12:32:51.6990671Z LTS
+2026-10-05T12:32:51.6991352Z ##[endgroup]
+2026-10-05T12:32:51.6991949Z ##[group]Runner Image
+2026-10-05T12:32:51.6992622Z Image: ubuntu-22.04
+2026-10-05T12:32:51.6993278Z Version: 20260927.309.1
+2026-10-05T12:32:51.6994655Z Included Software: https://github.com/actions/runner-images/blob/ubuntu22/20260927.309/images/ubuntu/Ubuntu2204-Readme.md
+2026-10-05T12:32:51.6996663Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu22%2F20260927.309
+2026-10-05T12:32:51.6997770Z ##[endgroup]
+2026-10-05T12:32:51.6998925Z ##[group]GITHUB_TOKEN Permissions
+2026-10-05T12:32:51.7001265Z Contents: read
+2026-10-05T12:32:51.7001930Z Metadata: read
+2026-10-05T12:32:51.7002550Z ##[endgroup]
+2026-10-05T12:32:51.7004699Z Secret source: Actions
+2026-10-05T12:32:51.7006051Z Cache mode: write
+2026-10-05T12:32:51.7007237Z Prepare workflow directory
+2026-10-05T12:32:51.7436588Z Prepare all required actions
+2026-10-05T12:32:51.7505008Z Getting action download info
+2026-10-05T12:32:51.9959753Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-05T12:32:52.3901632Z Complete job name: proof
+2026-10-05T12:32:52.4667983Z ##[group]Run set -euo pipefail
+2026-10-05T12:32:52.4668641Z [36;1mset -euo pipefail[0m
+2026-10-05T12:32:52.4669202Z [36;1m[[ "$HEAD_SHA" =~ ^[0-9a-f]{40}$ ]][0m
+2026-10-05T12:32:52.4670034Z [36;1mmkdir "$RUNNER_TEMP/kit" "$RUNNER_TEMP/repo" "$RUNNER_TEMP/maven-repo"[0m
+2026-10-05T12:32:52.4671380Z [36;1mcurl --fail --location --retry 3 "https://codeload.github.com/${GITHUB_REPOSITORY}/tar.gz/${HEAD_SHA}" -o "$RUNNER_TEMP/kit/source.tar.gz"[0m
+2026-10-05T12:32:52.4672759Z [36;1mtar -xzf "$RUNNER_TEMP/kit/source.tar.gz" -C "$RUNNER_TEMP/repo" --strip-components=1[0m
+2026-10-05T12:32:52.4673735Z [36;1mprintf '%s\n' "$HEAD_SHA" > "$RUNNER_TEMP/kit/source-sha.txt"[0m
+2026-10-05T12:32:52.4674533Z [36;1mprintf 'REPO=%s\n' "$RUNNER_TEMP/repo" >> "$GITHUB_ENV"[0m
+2026-10-05T12:32:52.5250047Z shell: /usr/bin/bash -e {0}
+2026-10-05T12:32:52.5250936Z env:
+2026-10-05T12:32:52.5251442Z   HEAD_SHA: 5c1ee9490e76943dfdb3ca27fade0d093d017226
+2026-10-05T12:32:52.5252048Z ##[endgroup]
+2026-10-05T12:32:52.5940510Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+2026-10-05T12:32:52.5941942Z                                  Dload  Upload   Total   Spent    Left  Speed
+2026-10-05T12:32:52.5942515Z 
+2026-10-05T12:32:52.9929157Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2026-10-05T12:32:53.8422891Z 100 13108    0 13108    0     0  32697      0 --:--:-- --:--:-- --:--:-- 32688
+2026-10-05T12:32:54.8148492Z 100 9505k    0 9505k    0     0  7604k      0 --:--:--  0:00:01 --:--:-- 7604k
+2026-10-05T12:32:55.8044193Z 100 14.8M    0 14.8M    0     0  6855k      0 --:--:--  0:00:02 --:--:-- 6854k
+2026-10-05T12:32:56.8112423Z 100 19.8M    0 19.8M    0     0  6339k      0 --:--:--  0:00:03 --:--:-- 6339k
+2026-10-05T12:32:57.8185732Z 100 28.0M    0 28.0M    0     0  6796k      0 --:--:--  0:00:04 --:--:-- 6796k
+2026-10-05T12:32:58.8315159Z 100 34.3M    0 34.3M    0     0  6735k      0 --:--:--  0:00:05 --:--:-- 7292k
+2026-10-05T12:32:59.8042929Z 100 40.5M    0 40.5M    0     0  6655k      0 --:--:--  0:00:06 --:--:-- 6416k
+2026-10-05T12:33:00.8118280Z 100 46.7M    0 46.7M    0     0  6642k      0 --:--:--  0:00:07 --:--:-- 6546k
+2026-10-05T12:33:01.8194020Z 100 53.2M    0 53.2M    0     0  6637k      0 --:--:--  0:00:08 --:--:-- 6829k
+2026-10-05T12:33:02.8514247Z 100 60.1M    0 60.1M    0     0  6672k      0 --:--:--  0:00:09 --:--:-- 6568k
+2026-10-05T12:33:03.8250518Z 100 65.2M    0 65.2M    0     0  6513k      0 --:--:--  0:00:10 --:--:-- 6283k
+2026-10-05T12:33:04.8431737Z 100 70.3M    0 70.3M    0     0  6415k      0 --:--:--  0:00:11 --:--:-- 6116k
+2026-10-05T12:33:05.8305129Z 100 77.1M    0 77.1M    0     0  6446k      0 --:--:--  0:00:12 --:--:-- 6167k
+2026-10-05T12:33:06.8084319Z 100 82.0M    0 82.0M    0     0  6343k      0 --:--:--  0:00:13 --:--:-- 5861k
+2026-10-05T12:33:07.8110221Z 100 87.0M    0 87.0M    0     0  6266k      0 --:--:--  0:00:14 --:--:-- 5515k
+2026-10-05T12:33:08.8160066Z 100 93.1M    0 93.1M    0     0  6266k      0 --:--:--  0:00:15 --:--:-- 5754k
+2026-10-05T12:33:09.8227237Z 100  101M    0  101M    0     0  6414k      0 --:--:--  0:00:16 --:--:-- 6411k
+2026-10-05T12:33:10.8261732Z 100  107M    0  107M    0     0  6404k      0 --:--:--  0:00:17 --:--:-- 6297k
+2026-10-05T12:33:11.2568439Z 100  113M    0  113M    0     0  6360k      0 --:--:--  0:00:18 --:--:-- 6404k
+2026-10-05T12:33:16.4132334Z 100  116M    0  116M    0     0  6364k      0 --:--:--  0:00:18 --:--:-- 6676k
+2026-10-05T12:33:16.4247595Z ##[group]Run set -euo pipefail
+2026-10-05T12:33:16.4248045Z [36;1mset -euo pipefail[0m
+2026-10-05T12:33:16.4248994Z [36;1mcurl --fail --location --retry 3 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21%2B35/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz' -o "$RUNNER_TEMP/jdk21.tar.gz"[0m
+2026-10-05T12:33:16.4250181Z [36;1mprintf '%s  %s\n' '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6' "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -[0m
+2026-10-05T12:33:16.4250881Z [36;1mtar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"[0m
+2026-10-05T12:33:16.4251334Z [36;1mprintf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"[0m
+2026-10-05T12:33:16.4251810Z [36;1mprintf '%s\n' "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"[0m
+2026-10-05T12:33:16.4337820Z shell: /usr/bin/bash -e {0}
+2026-10-05T12:33:16.4338105Z env:
+2026-10-05T12:33:16.4338360Z   REPO: /home/runner/work/_temp/repo
+2026-10-05T12:33:16.4338692Z ##[endgroup]
+2026-10-05T12:33:16.4768777Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+2026-10-05T12:33:16.4769944Z                                  Dload  Upload   Total   Spent    Left  Speed
+2026-10-05T12:33:16.4770662Z 
+2026-10-05T12:33:16.6419344Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2026-10-05T12:33:16.6420160Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2026-10-05T12:33:16.8051836Z 
+2026-10-05T12:33:17.2031875Z  12  198M   12 25.4M    0     0  77.4M      0  0:00:02 --:--:--  0:00:02 77.4M
+2026-10-05T12:33:17.2032574Z 100  198M  100  198M    0     0   272M      0 --:--:-- --:--:-- --:--:--  435M
+2026-10-05T12:33:17.9493264Z /home/runner/work/_temp/jdk21.tar.gz: OK
+2026-10-05T12:33:20.5249325Z ##[group]Run set -euo pipefail
+2026-10-05T12:33:20.5249669Z [36;1mset -euo pipefail[0m
+2026-10-05T12:33:20.5250021Z [36;1mjava -version 2>&1 | tee "$RUNNER_TEMP/kit/java-version.txt"[0m
+2026-10-05T12:33:20.5250480Z [36;1mmvn -version 2>&1 | tee "$RUNNER_TEMP/kit/maven-version.txt"[0m
+2026-10-05T12:33:20.5251210Z [36;1mmvn -B -ntp -Dmaven.repo.local="$RUNNER_TEMP/maven-repo" -f "$REPO/m3/tooling/module-packs/pom.xml" clean test 2>&1 | tee "$RUNNER_TEMP/kit/test.log"[0m
+2026-10-05T12:33:20.5252148Z [36;1mmvn -B -ntp -Dmaven.repo.local="$RUNNER_TEMP/maven-repo" -f "$REPO/m3/tooling/module-packs/pom.xml" verify 2>&1 | tee "$RUNNER_TEMP/kit/verify.log"[0m
+2026-10-05T12:33:20.5332677Z shell: /usr/bin/bash -e {0}
+2026-10-05T12:33:20.5332960Z env:
+2026-10-05T12:33:20.5333186Z   REPO: /home/runner/work/_temp/repo
+2026-10-05T12:33:20.5333496Z   JAVA_HOME: /home/runner/work/_temp/jdk-21+35
+2026-10-05T12:33:20.5333801Z ##[endgroup]
+2026-10-05T12:33:20.5753489Z openjdk version "21" 2023-09-19 LTS
+2026-10-05T12:33:20.5754526Z OpenJDK Runtime Environment Temurin-21+35 (build 21+35-LTS)
+2026-10-05T12:33:20.5755723Z OpenJDK 64-Bit Server VM Temurin-21+35 (build 21+35-LTS, mixed mode, sharing)
+2026-10-05T12:33:21.5582592Z Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)
+2026-10-05T12:33:21.5583306Z Maven home: /usr/share/apache-maven-3.9.16
+2026-10-05T12:33:21.5584007Z Java version: 21, vendor: Eclipse Adoptium, runtime: /home/runner/work/_temp/jdk-21+35
+2026-10-05T12:33:21.5584781Z Default locale: en, platform encoding: UTF-8
+2026-10-05T12:33:21.5585626Z OS name: "linux", version: "6.8.0-1064-azure", arch: "amd64", family: "unix"
+2026-10-05T12:33:23.4706554Z [INFO] Scanning for projects...
+2026-10-05T12:33:23.5577445Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:33:23.5606132Z [INFO] Reactor Build Order:
+2026-10-05T12:33:23.5635983Z [INFO] 
+2026-10-05T12:33:23.5637029Z [INFO] module-packs                                                       [pom]
+2026-10-05T12:33:23.5665855Z [INFO] module-pack-kernel                                                 [jar]
+2026-10-05T12:33:23.5696292Z [INFO] module-pack-recipes                                                [jar]
+2026-10-05T12:33:23.5706072Z [INFO] 
+2026-10-05T12:33:23.5726513Z [INFO] --------------------< com.m3.tooling:module-packs >---------------------
+2026-10-05T12:33:23.5747110Z [INFO] Building module-packs 0.1.0-SNAPSHOT                               [1/3]
+2026-10-05T12:33:23.5748100Z [INFO]   from pom.xml
+2026-10-05T12:33:23.5748857Z [INFO] --------------------------------[ pom ]---------------------------------
+2026-10-05T12:33:24.8700961Z [INFO] 
+2026-10-05T12:33:24.8726299Z [INFO] --- clean:3.2.0:clean (default-clean) @ module-packs ---
+2026-10-05T12:33:25.2681933Z [INFO] 
+2026-10-05T12:33:25.2686452Z [INFO] --- enforcer:3.5.0:enforce (default) @ module-packs ---
+2026-10-05T12:33:26.4648400Z [INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+2026-10-05T12:33:26.4650338Z [INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+2026-10-05T12:33:26.4676589Z [INFO] 
+2026-10-05T12:33:26.4696321Z [INFO] --- jacoco:0.8.15:prepare-agent (coverage) @ module-packs ---
+2026-10-05T12:33:27.4154486Z [INFO] argLine set to -javaagent:/home/runner/work/_temp/maven-repo/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/runner/work/_temp/repo/m3/tooling/module-packs/target/jacoco.exec
+2026-10-05T12:33:27.4157147Z [INFO] 
+2026-10-05T12:33:27.4179826Z [INFO] -----------------< com.m3.tooling:module-pack-kernel >------------------
+2026-10-05T12:33:27.4181159Z [INFO] Building module-pack-kernel 0.1.0-SNAPSHOT                         [2/3]
+2026-10-05T12:33:27.4186308Z [INFO]   from kernel/pom.xml
+2026-10-05T12:33:27.4187183Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-05T12:33:28.3759442Z [INFO] 
+2026-10-05T12:33:28.3760415Z [INFO] --- clean:3.2.0:clean (default-clean) @ module-pack-kernel ---
+2026-10-05T12:33:28.3773375Z [INFO] 
+2026-10-05T12:33:28.3775699Z [INFO] --- enforcer:3.5.0:enforce (default) @ module-pack-kernel ---
+2026-10-05T12:33:28.3800889Z [INFO] 
+2026-10-05T12:33:28.3846305Z [INFO] --- jacoco:0.8.15:prepare-agent (coverage) @ module-pack-kernel ---
+2026-10-05T12:33:28.3848198Z [INFO] argLine set to -javaagent:/home/runner/work/_temp/maven-repo/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/runner/work/_temp/repo/m3/tooling/module-packs/kernel/target/jacoco.exec
+2026-10-05T12:33:28.3849811Z [INFO] 
+2026-10-05T12:33:28.3850615Z [INFO] --- resources:3.4.0:resources (default-resources) @ module-pack-kernel ---
+2026-10-05T12:33:28.9199167Z [INFO] skip non existing resourceDirectory /home/runner/work/_temp/repo/m3/tooling/module-packs/kernel/src/main/resources
+2026-10-05T12:33:28.9208301Z [INFO] 
+2026-10-05T12:33:28.9208879Z [INFO] --- compiler:3.13.0:compile (default-compile) @ module-pack-kernel ---
+2026-10-05T12:33:29.9287270Z [INFO] Recompiling the module because of changed source code.
+2026-10-05T12:33:29.9331506Z [INFO] Compiling 5 source files with javac [debug release 21] to target/classes
+2026-10-05T12:33:30.7342438Z [INFO] JDK-8318913 workaround: patched module-info.class requires version from [21] to [21] on 1 JDK modules [java.base]
+2026-10-05T12:33:30.7355958Z [INFO] 
+2026-10-05T12:33:30.7356939Z [INFO] --- resources:3.4.0:testResources (default-testResources) @ module-pack-kernel ---
+2026-10-05T12:33:30.7396248Z [INFO] skip non existing resourceDirectory /home/runner/work/_temp/repo/m3/tooling/module-packs/kernel/src/test/resources
+2026-10-05T12:33:30.7397406Z [INFO] 
+2026-10-05T12:33:30.7398128Z [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ module-pack-kernel ---
+2026-10-05T12:33:30.7573411Z [INFO] Recompiling the module because of changed dependency.
+2026-10-05T12:33:30.7586600Z [INFO] Compiling 7 source files with javac [debug release 21] to target/test-classes
+2026-10-05T12:33:31.3171988Z [INFO] 
+2026-10-05T12:33:31.3186526Z [INFO] --- surefire:3.2.5:test (default-test) @ module-pack-kernel ---
+2026-10-05T12:33:32.9129151Z [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+2026-10-05T12:33:33.2850831Z [INFO] 
+2026-10-05T12:33:33.2851335Z [INFO] -------------------------------------------------------
+2026-10-05T12:33:33.2851873Z [INFO]  T E S T S
+2026-10-05T12:33:33.2852266Z [INFO] -------------------------------------------------------
+2026-10-05T12:33:34.1744087Z [INFO] Running com.m3.tools.modulepack.VersionTest
+2026-10-05T12:33:35.8426931Z [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.628 s -- in com.m3.tools.modulepack.VersionTest
+2026-10-05T12:33:35.8456028Z [INFO] Running com.m3.tools.modulepack.ArchiveBoundaryTest
+2026-10-05T12:33:35.9697026Z [INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.158 s -- in com.m3.tools.modulepack.ArchiveBoundaryTest
+2026-10-05T12:33:35.9702495Z [INFO] Running com.m3.tools.modulepack.M3ModuleClassVersionTest
+2026-10-05T12:33:36.3517509Z [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.384 s -- in com.m3.tools.modulepack.M3ModuleClassVersionTest
+2026-10-05T12:33:36.3546433Z [INFO] Running com.m3.tools.modulepack.M3ModulePackTest
+2026-10-05T12:33:36.6399284Z [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.288 s -- in com.m3.tools.modulepack.M3ModulePackTest
+2026-10-05T12:33:36.6854127Z [INFO] 
+2026-10-05T12:33:36.6855015Z [INFO] Results:
+2026-10-05T12:33:36.6855692Z [INFO] 
+2026-10-05T12:33:36.6856469Z [INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0
+2026-10-05T12:33:36.6857136Z [INFO] 
+2026-10-05T12:33:36.6886552Z [INFO] 
+2026-10-05T12:33:36.6887385Z [INFO] -----------------< com.m3.tooling:module-pack-recipes >-----------------
+2026-10-05T12:33:36.6888219Z [INFO] Building module-pack-recipes 0.1.0-SNAPSHOT                        [3/3]
+2026-10-05T12:33:36.6888884Z [INFO]   from recipes/pom.xml
+2026-10-05T12:33:36.6889726Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-05T12:33:39.0484081Z [INFO] 
+2026-10-05T12:33:39.0485613Z [INFO] --- clean:3.2.0:clean (default-clean) @ module-pack-recipes ---
+2026-10-05T12:33:39.0502085Z [INFO] 
+2026-10-05T12:33:39.0503128Z [INFO] --- enforcer:3.5.0:enforce (default) @ module-pack-recipes ---
+2026-10-05T12:33:39.0519477Z [INFO] 
+2026-10-05T12:33:39.0536615Z [INFO] --- jacoco:0.8.15:prepare-agent (coverage) @ module-pack-recipes ---
+2026-10-05T12:33:39.0538681Z [INFO] argLine set to -javaagent:/home/runner/work/_temp/maven-repo/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/runner/work/_temp/repo/m3/tooling/module-packs/recipes/target/jacoco.exec
+2026-10-05T12:33:39.0540347Z [INFO] 
+2026-10-05T12:33:39.0541069Z [INFO] --- resources:3.4.0:resources (default-resources) @ module-pack-recipes ---
+2026-10-05T12:33:39.0561333Z [INFO] Copying 3 resources from src/main/resources to target/classes
+2026-10-05T12:33:39.0612549Z [INFO] 
+2026-10-05T12:33:39.0613122Z [INFO] --- compiler:3.13.0:compile (default-compile) @ module-pack-recipes ---
+2026-10-05T12:33:39.0664581Z [INFO] Recompiling the module because of changed dependency.
+2026-10-05T12:33:39.0671423Z [INFO] Compiling 2 source files with javac [debug release 21] to target/classes
+2026-10-05T12:33:39.2357700Z [INFO] 
+2026-10-05T12:33:39.2369324Z [INFO] --- resources:3.4.0:testResources (default-testResources) @ module-pack-recipes ---
+2026-10-05T12:33:39.2381588Z [INFO] skip non existing resourceDirectory /home/runner/work/_temp/repo/m3/tooling/module-packs/recipes/src/test/resources
+2026-10-05T12:33:39.2402838Z [INFO] 
+2026-10-05T12:33:39.2426666Z [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ module-pack-recipes ---
+2026-10-05T12:33:39.2466636Z [INFO] Recompiling the module because of changed dependency.
+2026-10-05T12:33:39.2497512Z [INFO] Compiling 1 source file with javac [debug release 21] to target/test-classes
+2026-10-05T12:33:39.4896906Z [INFO] 
+2026-10-05T12:33:39.4905022Z [INFO] --- surefire:3.2.5:test (default-test) @ module-pack-recipes ---
+2026-10-05T12:33:39.4930192Z [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+2026-10-05T12:33:39.5003734Z [INFO] 
+2026-10-05T12:33:39.5005017Z [INFO] -------------------------------------------------------
+2026-10-05T12:33:39.5007502Z [INFO]  T E S T S
+2026-10-05T12:33:39.5175609Z [INFO] -------------------------------------------------------
+2026-10-05T12:33:40.4992950Z [INFO] Running com.m3.rewrite.packs.M3ModulePackRecipesTest
+2026-10-05T12:33:40.7626713Z SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2026-10-05T12:33:40.7628920Z SLF4J: Defaulting to no-operation (NOP) logger implementation
+2026-10-05T12:33:40.7630037Z SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2026-10-05T12:33:42.7906695Z [INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.281 s -- in com.m3.rewrite.packs.M3ModulePackRecipesTest
+2026-10-05T12:33:42.8342294Z [INFO] 
+2026-10-05T12:33:42.8342743Z [INFO] Results:
+2026-10-05T12:33:42.8343054Z [INFO] 
+2026-10-05T12:33:42.8343428Z [INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0
+2026-10-05T12:33:42.8343921Z [INFO] 
+2026-10-05T12:33:42.8353268Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:33:42.8366173Z [INFO] Reactor Summary for module-packs 0.1.0-SNAPSHOT:
+2026-10-05T12:33:42.8366790Z [INFO] 
+2026-10-05T12:33:42.8367230Z [INFO] module-packs ....................................... SUCCESS [  3.849 s]
+2026-10-05T12:33:42.8367935Z [INFO] module-pack-kernel ................................. SUCCESS [  9.273 s]
+2026-10-05T12:33:42.8368585Z [INFO] module-pack-recipes ................................ SUCCESS [  6.147 s]
+2026-10-05T12:33:42.8369245Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:33:42.8369708Z [INFO] BUILD SUCCESS
+2026-10-05T12:33:42.8370465Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:33:42.8370997Z [INFO] Total time:  19.404 s
+2026-10-05T12:33:42.8371371Z [INFO] Finished at: 2026-10-05T12:33:42Z
+2026-10-05T12:33:42.8371866Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:33:44.1327526Z [INFO] Scanning for projects...
+2026-10-05T12:33:44.2096808Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:33:44.2131952Z [INFO] Reactor Build Order:
+2026-10-05T12:33:44.2132427Z [INFO] 
+2026-10-05T12:33:44.2132903Z [INFO] module-packs                                                       [pom]
+2026-10-05T12:33:44.2133671Z [INFO] module-pack-kernel                                                 [jar]
+2026-10-05T12:33:44.2134438Z [INFO] module-pack-recipes                                                [jar]
+2026-10-05T12:33:44.2196015Z [INFO] 
+2026-10-05T12:33:44.2217055Z [INFO] --------------------< com.m3.tooling:module-packs >---------------------
+2026-10-05T12:33:44.2218550Z [INFO] Building module-packs 0.1.0-SNAPSHOT                               [1/3]
+2026-10-05T12:33:44.2219394Z [INFO]   from pom.xml
+2026-10-05T12:33:44.2220058Z [INFO] --------------------------------[ pom ]---------------------------------
+2026-10-05T12:33:44.3118005Z [INFO] 
+2026-10-05T12:33:44.3119900Z [INFO] --- enforcer:3.5.0:enforce (default) @ module-packs ---
+2026-10-05T12:33:44.5507061Z [INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+2026-10-05T12:33:44.5508688Z [INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+2026-10-05T12:33:44.5510667Z [INFO] 
+2026-10-05T12:33:44.5511603Z [INFO] --- jacoco:0.8.15:prepare-agent (coverage) @ module-packs ---
+2026-10-05T12:33:44.6531932Z [INFO] argLine set to -javaagent:/home/runner/work/_temp/maven-repo/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/runner/work/_temp/repo/m3/tooling/module-packs/target/jacoco.exec
+2026-10-05T12:33:44.6551851Z [INFO] 
+2026-10-05T12:33:44.6552618Z [INFO] --- jacoco:0.8.15:report (report) @ module-packs ---
+2026-10-05T12:33:44.6570154Z [INFO] Skipping JaCoCo execution due to missing execution data file.
+2026-10-05T12:33:44.6587953Z [INFO] 
+2026-10-05T12:33:44.6588719Z [INFO] --- jacoco:0.8.15:check (gate) @ module-packs ---
+2026-10-05T12:33:44.6628743Z [INFO] Skipping JaCoCo execution due to missing execution data file:/home/runner/work/_temp/repo/m3/tooling/module-packs/target/jacoco.exec
+2026-10-05T12:33:44.6630560Z [INFO] 
+2026-10-05T12:33:44.6631567Z [INFO] -----------------< com.m3.tooling:module-pack-kernel >------------------
+2026-10-05T12:33:44.6632246Z [INFO] Building module-pack-kernel 0.1.0-SNAPSHOT                         [2/3]
+2026-10-05T12:33:44.6633052Z [INFO]   from kernel/pom.xml
+2026-10-05T12:33:44.6633572Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-05T12:33:45.3784378Z [INFO] 
+2026-10-05T12:33:45.3806170Z [INFO] --- enforcer:3.5.0:enforce (default) @ module-pack-kernel ---
+2026-10-05T12:33:45.3815467Z [INFO] 
+2026-10-05T12:33:45.3837465Z [INFO] --- jacoco:0.8.15:prepare-agent (coverage) @ module-pack-kernel ---
+2026-10-05T12:33:45.3847515Z [INFO] argLine set to -javaagent:/home/runner/work/_temp/maven-repo/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/runner/work/_temp/repo/m3/tooling/module-packs/kernel/target/jacoco.exec
+2026-10-05T12:33:45.3849268Z [INFO] 
+2026-10-05T12:33:45.3850109Z [INFO] --- resources:3.4.0:resources (default-resources) @ module-pack-kernel ---
+2026-10-05T12:33:45.4737914Z [INFO] skip non existing resourceDirectory /home/runner/work/_temp/repo/m3/tooling/module-packs/kernel/src/main/resources
+2026-10-05T12:33:45.4741306Z [INFO] 
+2026-10-05T12:33:45.4742120Z [INFO] --- compiler:3.13.0:compile (default-compile) @ module-pack-kernel ---
+2026-10-05T12:33:45.6164451Z [INFO] Nothing to compile - all classes are up to date.
+2026-10-05T12:33:45.6165511Z [INFO] 
+2026-10-05T12:33:45.6226759Z [INFO] --- resources:3.4.0:testResources (default-testResources) @ module-pack-kernel ---
+2026-10-05T12:33:45.6266479Z [INFO] skip non existing resourceDirectory /home/runner/work/_temp/repo/m3/tooling/module-packs/kernel/src/test/resources
+2026-10-05T12:33:45.6295777Z [INFO] 
+2026-10-05T12:33:45.6326223Z [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ module-pack-kernel ---
+2026-10-05T12:33:45.6406559Z [INFO] Nothing to compile - all classes are up to date.
+2026-10-05T12:33:45.6412282Z [INFO] 
+2026-10-05T12:33:45.6412922Z [INFO] --- surefire:3.2.5:test (default-test) @ module-pack-kernel ---
+2026-10-05T12:33:45.8607919Z [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+2026-10-05T12:33:45.9117330Z [INFO] 
+2026-10-05T12:33:45.9132223Z [INFO] -------------------------------------------------------
+2026-10-05T12:33:45.9146221Z [INFO]  T E S T S
+2026-10-05T12:33:45.9146864Z [INFO] -------------------------------------------------------
+2026-10-05T12:33:46.8198084Z [INFO] Running com.m3.tools.modulepack.VersionTest
+2026-10-05T12:33:48.4997025Z [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.654 s -- in com.m3.tools.modulepack.VersionTest
+2026-10-05T12:33:48.4998507Z [INFO] Running com.m3.tools.modulepack.ArchiveBoundaryTest
+2026-10-05T12:33:48.6371568Z [INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.155 s -- in com.m3.tools.modulepack.ArchiveBoundaryTest
+2026-10-05T12:33:48.6420317Z [INFO] Running com.m3.tools.modulepack.M3ModuleClassVersionTest
+2026-10-05T12:33:49.0188917Z [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.375 s -- in com.m3.tools.modulepack.M3ModuleClassVersionTest
+2026-10-05T12:33:49.0215079Z [INFO] Running com.m3.tools.modulepack.M3ModulePackTest
+2026-10-05T12:33:49.2969418Z [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.290 s -- in com.m3.tools.modulepack.M3ModulePackTest
+2026-10-05T12:33:49.3403883Z [INFO] 
+2026-10-05T12:33:49.3416714Z [INFO] Results:
+2026-10-05T12:33:49.3417068Z [INFO] 
+2026-10-05T12:33:49.3417472Z [INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0
+2026-10-05T12:33:49.3417988Z [INFO] 
+2026-10-05T12:33:49.3431558Z [INFO] 
+2026-10-05T12:33:49.3432072Z [INFO] --- jar:3.4.2:jar (default-jar) @ module-pack-kernel ---
+2026-10-05T12:33:50.2507409Z [INFO] Building jar: /home/runner/work/_temp/repo/m3/tooling/module-packs/kernel/target/module-pack-kernel-0.1.0-SNAPSHOT.jar
+2026-10-05T12:33:50.3482515Z [INFO] 
+2026-10-05T12:33:50.3483318Z [INFO] --- jacoco:0.8.15:report (report) @ module-pack-kernel ---
+2026-10-05T12:33:50.3506967Z [INFO] Loading execution data file /home/runner/work/_temp/repo/m3/tooling/module-packs/kernel/target/jacoco.exec
+2026-10-05T12:33:50.4360500Z [INFO] Analyzed bundle 'module-pack-kernel' with 4 classes
+2026-10-05T12:33:50.5121578Z [INFO] 
+2026-10-05T12:33:50.5122353Z [INFO] --- jacoco:0.8.15:check (gate) @ module-pack-kernel ---
+2026-10-05T12:33:50.5152364Z [INFO] Loading execution data file /home/runner/work/_temp/repo/m3/tooling/module-packs/kernel/target/jacoco.exec
+2026-10-05T12:33:50.5286182Z [INFO] Analyzed bundle 'module-pack-kernel' with 4 classes
+2026-10-05T12:33:50.5298249Z [INFO] All coverage checks have been met.
+2026-10-05T12:33:50.5299251Z [INFO] 
+2026-10-05T12:33:50.5300157Z [INFO] -----------------< com.m3.tooling:module-pack-recipes >-----------------
+2026-10-05T12:33:50.5334741Z [INFO] Building module-pack-recipes 0.1.0-SNAPSHOT                        [3/3]
+2026-10-05T12:33:50.5337210Z [INFO]   from recipes/pom.xml
+2026-10-05T12:33:50.5337953Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-05T12:33:50.6244439Z [INFO] 
+2026-10-05T12:33:50.6264157Z [INFO] --- enforcer:3.5.0:enforce (default) @ module-pack-recipes ---
+2026-10-05T12:33:50.6266152Z [INFO] 
+2026-10-05T12:33:50.6267171Z [INFO] --- jacoco:0.8.15:prepare-agent (coverage) @ module-pack-recipes ---
+2026-10-05T12:33:50.6284408Z [INFO] argLine set to -javaagent:/home/runner/work/_temp/maven-repo/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/runner/work/_temp/repo/m3/tooling/module-packs/recipes/target/jacoco.exec
+2026-10-05T12:33:50.6296042Z [INFO] 
+2026-10-05T12:33:50.6296623Z [INFO] --- resources:3.4.0:resources (default-resources) @ module-pack-recipes ---
+2026-10-05T12:33:50.6327245Z [INFO] Copying 3 resources from src/main/resources to target/classes
+2026-10-05T12:33:50.6353622Z [INFO] 
+2026-10-05T12:33:50.6366737Z [INFO] --- compiler:3.13.0:compile (default-compile) @ module-pack-recipes ---
+2026-10-05T12:33:50.6412021Z [INFO] Recompiling the module because of changed dependency.
+2026-10-05T12:33:50.6477505Z [INFO] Compiling 2 source files with javac [debug release 21] to target/classes
+2026-10-05T12:33:51.3140422Z [INFO] 
+2026-10-05T12:33:51.3156619Z [INFO] --- resources:3.4.0:testResources (default-testResources) @ module-pack-recipes ---
+2026-10-05T12:33:51.3159525Z [INFO] skip non existing resourceDirectory /home/runner/work/_temp/repo/m3/tooling/module-packs/recipes/src/test/resources
+2026-10-05T12:33:51.3160804Z [INFO] 
+2026-10-05T12:33:51.3206207Z [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ module-pack-recipes ---
+2026-10-05T12:33:51.3226591Z [INFO] Recompiling the module because of changed dependency.
+2026-10-05T12:33:51.3227634Z [INFO] Compiling 1 source file with javac [debug release 21] to target/test-classes
+2026-10-05T12:33:51.6428577Z [INFO] 
+2026-10-05T12:33:51.6429610Z [INFO] --- surefire:3.2.5:test (default-test) @ module-pack-recipes ---
+2026-10-05T12:33:51.6494415Z [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+2026-10-05T12:33:51.6580404Z [INFO] 
+2026-10-05T12:33:51.6581189Z [INFO] -------------------------------------------------------
+2026-10-05T12:33:51.6581996Z [INFO]  T E S T S
+2026-10-05T12:33:51.6582597Z [INFO] -------------------------------------------------------
+2026-10-05T12:33:52.5277306Z [INFO] Running com.m3.rewrite.packs.M3ModulePackRecipesTest
+2026-10-05T12:33:52.8229238Z SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2026-10-05T12:33:52.8238347Z SLF4J: Defaulting to no-operation (NOP) logger implementation
+2026-10-05T12:33:52.8239543Z SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2026-10-05T12:33:54.9647105Z [INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.428 s -- in com.m3.rewrite.packs.M3ModulePackRecipesTest
+2026-10-05T12:33:55.0139982Z [INFO] 
+2026-10-05T12:33:55.0140327Z [INFO] Results:
+2026-10-05T12:33:55.0140654Z [INFO] 
+2026-10-05T12:33:55.0141073Z [INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0
+2026-10-05T12:33:55.0141551Z [INFO] 
+2026-10-05T12:33:55.0153277Z [INFO] 
+2026-10-05T12:33:55.0153760Z [INFO] --- jar:3.4.2:jar (default-jar) @ module-pack-recipes ---
+2026-10-05T12:33:55.0219245Z [INFO] Building jar: /home/runner/work/_temp/repo/m3/tooling/module-packs/recipes/target/module-pack-recipes-0.1.0-SNAPSHOT.jar
+2026-10-05T12:33:55.0416582Z [INFO] 
+2026-10-05T12:33:55.0417180Z [INFO] --- jacoco:0.8.15:report (report) @ module-pack-recipes ---
+2026-10-05T12:33:55.0418227Z [INFO] Loading execution data file /home/runner/work/_temp/repo/m3/tooling/module-packs/recipes/target/jacoco.exec
+2026-10-05T12:33:55.0560018Z [INFO] Analyzed bundle 'module-pack-recipes' with 4 classes
+2026-10-05T12:33:55.1044168Z [INFO] 
+2026-10-05T12:33:55.1056394Z [INFO] --- jacoco:0.8.15:check (gate) @ module-pack-recipes ---
+2026-10-05T12:33:55.1086715Z [INFO] Loading execution data file /home/runner/work/_temp/repo/m3/tooling/module-packs/recipes/target/jacoco.exec
+2026-10-05T12:33:55.1171718Z [INFO] Analyzed bundle 'module-pack-recipes' with 4 classes
+2026-10-05T12:33:55.1172563Z [INFO] All coverage checks have been met.
+2026-10-05T12:33:55.1174565Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:33:55.1175595Z [INFO] Reactor Summary for module-packs 0.1.0-SNAPSHOT:
+2026-10-05T12:33:55.1176341Z [INFO] 
+2026-10-05T12:33:55.1178069Z [INFO] module-packs ....................................... SUCCESS [  0.443 s]
+2026-10-05T12:33:55.1179103Z [INFO] module-pack-kernel ................................. SUCCESS [  5.865 s]
+2026-10-05T12:33:55.1180082Z [INFO] module-pack-recipes ................................ SUCCESS [  4.590 s]
+2026-10-05T12:33:55.1181018Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:33:55.1181766Z [INFO] BUILD SUCCESS
+2026-10-05T12:33:55.1182439Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:33:55.1183229Z [INFO] Total time:  11.009 s
+2026-10-05T12:33:55.1186537Z [INFO] Finished at: 2026-10-05T12:33:55Z
+2026-10-05T12:33:55.1187337Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:33:55.1722880Z ##[group]Run set -euo pipefail
+2026-10-05T12:33:55.1723204Z [36;1mset -euo pipefail[0m
+2026-10-05T12:33:55.1723822Z [36;1mmvn -B -ntp -fae -Dmaven.repo.local="$RUNNER_TEMP/maven-repo" -f "$REPO/m3/pom.xml" clean verify 2>&1 | tee "$RUNNER_TEMP/kit/reactor-verify.log"[0m
+2026-10-05T12:33:55.1799664Z shell: /usr/bin/bash -e {0}
+2026-10-05T12:33:55.1799961Z env:
+2026-10-05T12:33:55.1800176Z   REPO: /home/runner/work/_temp/repo
+2026-10-05T12:33:55.1800482Z   JAVA_HOME: /home/runner/work/_temp/jdk-21+35
+2026-10-05T12:33:55.1800790Z ##[endgroup]
+2026-10-05T12:33:56.5077608Z [INFO] Scanning for projects...
+2026-10-05T12:33:56.6076619Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:33:56.6099577Z [INFO] Reactor Build Order:
+2026-10-05T12:33:56.6136033Z [INFO] 
+2026-10-05T12:33:56.6155971Z [INFO] M3IndexDB                                                          [jar]
+2026-10-05T12:33:56.6186326Z [INFO] migration-recipes                                                  [jar]
+2026-10-05T12:33:56.6216189Z [INFO] M3JDK21 Maven control reactor                                      [pom]
+2026-10-05T12:33:56.6222567Z [INFO] M3 A3 absorption tooling                                           [jar]
+2026-10-05T12:33:56.6223659Z [INFO] M3JDK21 backport recipe DAG                                        [jar]
+2026-10-05T12:33:56.6224717Z [INFO] M3 JDK21 backport admission and verification                       [pom]
+2026-10-05T12:33:56.6225971Z [INFO] module-packs                                                       [pom]
+2026-10-05T12:33:56.6226964Z [INFO] module-pack-kernel                                                 [jar]
+2026-10-05T12:33:56.6227966Z [INFO] module-pack-recipes                                                [jar]
+2026-10-05T12:33:56.6228859Z [INFO] 
+2026-10-05T12:33:56.6229534Z [INFO] --------------------------< com.m3:m3indexdb >--------------------------
+2026-10-05T12:33:56.6230562Z [INFO] Building M3IndexDB 0.1.0-SNAPSHOT                                  [1/9]
+2026-10-05T12:33:56.6231432Z [INFO]   from indexdb/pom.xml
+2026-10-05T12:33:56.6232192Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-05T12:33:57.3227234Z [INFO] 
+2026-10-05T12:33:57.3228329Z [INFO] --- clean:3.2.0:clean (default-clean) @ m3indexdb ---
+2026-10-05T12:33:57.4016616Z [INFO] 
+2026-10-05T12:33:57.4017867Z [INFO] --- jacoco:0.8.15:prepare-agent (default) @ m3indexdb ---
+2026-10-05T12:33:57.5237286Z [INFO] argLine set to -javaagent:/home/runner/work/_temp/maven-repo/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/runner/work/_temp/repo/m3/indexdb/target/jacoco.exec
+2026-10-05T12:33:57.5238669Z [INFO] 
+2026-10-05T12:33:57.5239289Z [INFO] --- resources:3.4.0:resources (default-resources) @ m3indexdb ---
+2026-10-05T12:33:57.6193967Z [INFO] skip non existing resourceDirectory /home/runner/work/_temp/repo/m3/indexdb/src/main/resources
+2026-10-05T12:33:57.6196969Z [INFO] 
+2026-10-05T12:33:57.6197753Z [INFO] --- compiler:3.13.0:compile (default-compile) @ m3indexdb ---
+2026-10-05T12:33:57.7371538Z [INFO] Recompiling the module because of changed source code.
+2026-10-05T12:33:57.7419687Z [INFO] Compiling 8 source files with javac [debug release 21] to target/classes
+2026-10-05T12:33:58.8105457Z [INFO] 
+2026-10-05T12:33:58.8123445Z [INFO] --- resources:3.4.0:testResources (default-testResources) @ m3indexdb ---
+2026-10-05T12:33:58.8166210Z [INFO] skip non existing resourceDirectory /home/runner/work/_temp/repo/m3/indexdb/src/test/resources
+2026-10-05T12:33:58.8195724Z [INFO] 
+2026-10-05T12:33:58.8206395Z [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3indexdb ---
+2026-10-05T12:33:58.8247701Z [INFO] Recompiling the module because of changed dependency.
+2026-10-05T12:33:58.8254931Z [INFO] Compiling 12 source files with javac [debug release 21] to target/test-classes
+2026-10-05T12:33:59.6556061Z [INFO] 
+2026-10-05T12:33:59.6557551Z [INFO] --- surefire:3.2.5:test (default-test) @ m3indexdb ---
+2026-10-05T12:33:59.8468734Z [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+2026-10-05T12:33:59.8902140Z [INFO] 
+2026-10-05T12:33:59.8903623Z [INFO] -------------------------------------------------------
+2026-10-05T12:33:59.8904387Z [INFO]  T E S T S
+2026-10-05T12:33:59.8904958Z [INFO] -------------------------------------------------------
+2026-10-05T12:34:00.9056781Z [INFO] Running com.m3.indexdb.M3IndexDBIntegrityTest
+2026-10-05T12:34:01.1061404Z [INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.171 s -- in com.m3.indexdb.M3IndexDBIntegrityTest
+2026-10-05T12:34:01.1092230Z [INFO] Running com.m3.indexdb.M3IndexDbStoreBoundaryTest
+2026-10-05T12:34:01.1566014Z [INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.055 s -- in com.m3.indexdb.M3IndexDbStoreBoundaryTest
+2026-10-05T12:34:01.1646093Z [INFO] Running com.m3.indexdb.M3IndexDbSemanticFailClosedTest
+2026-10-05T12:34:01.2159455Z [INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.083 s -- in com.m3.indexdb.M3IndexDbSemanticFailClosedTest
+2026-10-05T12:34:01.2175947Z [INFO] Running com.m3.indexdb.DbParseTest
+2026-10-05T12:34:01.4617034Z [INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.231 s -- in com.m3.indexdb.DbParseTest
+2026-10-05T12:34:01.4642978Z [INFO] Running com.m3.indexdb.M3IndexDbArtifactTest
+2026-10-05T12:34:01.4686439Z [INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.m3.indexdb.M3IndexDbArtifactTest
+2026-10-05T12:34:01.4725882Z [INFO] Running com.m3.indexdb.M3IndexDbSemanticBoundaryTest
+2026-10-05T12:34:01.4826563Z [INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in com.m3.indexdb.M3IndexDbSemanticBoundaryTest
+2026-10-05T12:34:01.4846122Z [INFO] Running com.m3.indexdb.DbAtomTest
+2026-10-05T12:34:01.8786859Z [INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.388 s -- in com.m3.indexdb.DbAtomTest
+2026-10-05T12:34:01.8825985Z [INFO] Running com.m3.indexdb.M3IndexDbCodecBoundaryTest
+2026-10-05T12:34:01.9244765Z [INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.050 s -- in com.m3.indexdb.M3IndexDbCodecBoundaryTest
+2026-10-05T12:34:01.9246056Z [INFO] Running com.m3.indexdb.M3IndexDBTest
+2026-10-05T12:34:01.9309037Z [INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in com.m3.indexdb.M3IndexDBTest
+2026-10-05T12:34:01.9320618Z [INFO] Running com.m3.indexdb.M3IndexDbSemanticIndexTest
+2026-10-05T12:34:01.9987108Z [INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.062 s -- in com.m3.indexdb.M3IndexDbSemanticIndexTest
+2026-10-05T12:34:02.0404371Z [INFO] 
+2026-10-05T12:34:02.0405015Z [INFO] Results:
+2026-10-05T12:34:02.0405529Z [INFO] 
+2026-10-05T12:34:02.0416288Z [INFO] Tests run: 61, Failures: 0, Errors: 0, Skipped: 0
+2026-10-05T12:34:02.0416862Z [INFO] 
+2026-10-05T12:34:02.0435150Z [INFO] 
+2026-10-05T12:34:02.0435735Z [INFO] --- jar:3.5.0:jar (default-jar) @ m3indexdb ---
+2026-10-05T12:34:03.4451129Z [INFO] Building jar: /home/runner/work/_temp/repo/m3/indexdb/target/m3indexdb-0.1.0-SNAPSHOT.jar
+2026-10-05T12:34:03.4875957Z [INFO] 
+2026-10-05T12:34:03.4876686Z [INFO] --- jacoco:0.8.15:report (report) @ m3indexdb ---
+2026-10-05T12:34:03.4936219Z [INFO] Loading execution data file /home/runner/work/_temp/repo/m3/indexdb/target/jacoco.exec
+2026-10-05T12:34:03.5974687Z [INFO] Analyzed bundle 'M3IndexDB' with 14 classes
+2026-10-05T12:34:03.6724483Z [INFO] 
+2026-10-05T12:34:03.6725718Z [INFO] --- jacoco:0.8.15:check (check) @ m3indexdb ---
+2026-10-05T12:34:03.6769709Z [INFO] Loading execution data file /home/runner/work/_temp/repo/m3/indexdb/target/jacoco.exec
+2026-10-05T12:34:03.7004012Z [INFO] Analyzed bundle 'm3indexdb' with 14 classes
+2026-10-05T12:34:03.7004867Z [INFO] All coverage checks have been met.
+2026-10-05T12:34:03.7005776Z [INFO] 
+2026-10-05T12:34:03.7013541Z [INFO] ------------------< com.m3.tooling:migration-recipes >------------------
+2026-10-05T12:34:03.7015456Z [INFO] Building migration-recipes 0.1.0-SNAPSHOT                          [2/9]
+2026-10-05T12:34:03.7016417Z [INFO]   from tooling/migration-recipes/pom.xml
+2026-10-05T12:34:03.7017428Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-05T12:34:04.1323096Z [INFO] 
+2026-10-05T12:34:04.1323677Z [INFO] --- clean:3.2.0:clean (default-clean) @ migration-recipes ---
+2026-10-05T12:34:04.1352221Z [INFO] 
+2026-10-05T12:34:04.1352935Z [INFO] --- jacoco:0.8.15:prepare-agent (m3-coverage-agent) @ migration-recipes ---
+2026-10-05T12:34:04.1354581Z [INFO] argLine set to -javaagent:/home/runner/work/_temp/maven-repo/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/runner/work/_temp/repo/m3/tooling/migration-recipes/target/jacoco.exec
+2026-10-05T12:34:04.1356186Z [INFO] 
+2026-10-05T12:34:04.1356673Z [INFO] --- resources:3.4.0:resources (default-resources) @ migration-recipes ---
+2026-10-05T12:34:04.1488666Z [INFO] Copying 384 resources from src/main/resources to target/classes
+2026-10-05T12:34:04.2099647Z [INFO] 
+2026-10-05T12:34:04.2100264Z [INFO] --- compiler:3.13.0:compile (default-compile) @ migration-recipes ---
+2026-10-05T12:34:04.2176573Z [INFO] Recompiling the module because of changed source code.
+2026-10-05T12:34:04.2266408Z [INFO] Compiling 34 source files with javac [debug release 21] to target/classes
+2026-10-05T12:34:04.8397333Z [INFO] 
+2026-10-05T12:34:04.8416794Z [INFO] --- resources:3.4.0:testResources (default-testResources) @ migration-recipes ---
+2026-10-05T12:34:04.8430211Z [INFO] Copying 56 resources from src/test/resources to target/test-classes
+2026-10-05T12:34:04.8552028Z [INFO] 
+2026-10-05T12:34:04.8552993Z [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ migration-recipes ---
+2026-10-05T12:34:04.8641973Z [INFO] Recompiling the module because of changed dependency.
+2026-10-05T12:34:04.8661067Z [INFO] Compiling 60 source files with javac [debug release 21] to target/test-classes
+2026-10-05T12:34:05.0110563Z [INFO] -------------------------------------------------------------
+2026-10-05T12:34:05.0111458Z [ERROR] COMPILATION ERROR : 
+2026-10-05T12:34:05.0112220Z [INFO] -------------------------------------------------------------
+2026-10-05T12:34:05.0113974Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[97,54] unclosed character literal
+2026-10-05T12:34:05.0116356Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[98,53] ';' expected
+2026-10-05T12:34:05.0121217Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[100,54] unclosed character literal
+2026-10-05T12:34:05.0125050Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[101,53] ';' expected
+2026-10-05T12:34:05.0126635Z [INFO] 4 errors 
+2026-10-05T12:34:05.0127267Z [INFO] -------------------------------------------------------------
+2026-10-05T12:34:05.0127999Z [INFO] 
+2026-10-05T12:34:05.0128682Z [INFO] -------------------< com.m3:m3jdk21-control-reactor >-------------------
+2026-10-05T12:34:05.0129692Z [INFO] Building M3JDK21 Maven control reactor 0.1.0-SNAPSHOT              [3/9]
+2026-10-05T12:34:05.0130573Z [INFO]   from pom.xml
+2026-10-05T12:34:05.0131250Z [INFO] --------------------------------[ pom ]---------------------------------
+2026-10-05T12:34:05.0206822Z [INFO] 
+2026-10-05T12:34:05.0207610Z [INFO] --- clean:3.2.0:clean (default-clean) @ m3jdk21-control-reactor ---
+2026-10-05T12:34:05.0221731Z [INFO] 
+2026-10-05T12:34:05.0222633Z [INFO] --- enforcer:3.5.0:enforce (m3-java21-control-plane) @ m3jdk21-control-reactor ---
+2026-10-05T12:34:05.1417673Z [INFO] Rule 0: org.apache.maven.enforcer.rules.version.RequireJavaVersion passed
+2026-10-05T12:34:05.1419829Z [INFO] Rule 1: org.apache.maven.enforcer.rules.version.RequireMavenVersion passed
+2026-10-05T12:34:05.1420772Z [INFO] 
+2026-10-05T12:34:05.1421604Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:34:05.1422797Z [INFO] Skipping M3 A3 absorption tooling
+2026-10-05T12:34:05.1423661Z [INFO] This project has been banned from the build due to previous failures.
+2026-10-05T12:34:05.1424740Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:34:05.1425793Z [INFO] 
+2026-10-05T12:34:05.1426479Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:34:05.1427298Z [INFO] Skipping M3JDK21 backport recipe DAG
+2026-10-05T12:34:05.1428154Z [INFO] This project has been banned from the build due to previous failures.
+2026-10-05T12:34:05.1429135Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:34:05.1456057Z [INFO] 
+2026-10-05T12:34:05.1456579Z [INFO] ------------------< com.m3:jdk21-backport-admission >-------------------
+2026-10-05T12:34:05.1457394Z [INFO] Building M3 JDK21 backport admission and verification 0.1.0-SNAPSHOT [4/9]
+2026-10-05T12:34:05.1458008Z [INFO]   from backports/pom.xml
+2026-10-05T12:34:05.1458520Z [INFO] --------------------------------[ pom ]---------------------------------
+2026-10-05T12:34:05.2746246Z [INFO] 
+2026-10-05T12:34:05.2747245Z [INFO] --- clean:3.2.0:clean (default-clean) @ jdk21-backport-admission ---
+2026-10-05T12:34:05.2755712Z [INFO] 
+2026-10-05T12:34:05.2756555Z [INFO] --- exec:3.6.4:exec (verify-backport-catalogue) @ jdk21-backport-admission ---
+2026-10-05T12:34:05.6087987Z PASS: 82 JEP rows, non-JEP seed uniqueness, community fork catalogue authority, exact JDK-8357439 donor blobs, JDK-8347112 javadoc adaptation, JDK-8364182 serviceability adaptation, and JDK-8374808 KeyStore Instant compatibility leaf
+2026-10-05T12:34:05.6774768Z [INFO] 
+2026-10-05T12:34:05.6775785Z [INFO] --- exec:3.6.4:exec (test-backport-inventory) @ jdk21-backport-admission ---
+2026-10-05T12:34:05.8504165Z test_branch_proof_can_reference_reachable_non_unique_head (test_community_fork_capabilities.ForkCapabilityTest) ... ok
+2026-10-05T12:34:05.8850273Z test_product_candidate_requires_reachable_unique_commit (test_community_fork_capabilities.ForkCapabilityTest) ... ok
+2026-10-05T12:34:05.9197106Z test_product_candidate_without_unique_evidence_refuses (test_community_fork_capabilities.ForkCapabilityTest) ... ok
+2026-10-05T12:34:05.9524539Z test_unknown_fork_and_authority_refuse (test_community_fork_capabilities.ForkCapabilityTest) ... ok
+2026-10-05T12:34:05.9704357Z test_catalogue_refuses_pre_authorized_source_copy_or_distribution (test_community_fork_inventory.CommunityForkInventoryTest) ... ok
+2026-10-05T12:34:06.0608879Z test_cherry_equivalent_patch_is_filtered_but_unique_change_remains (test_community_fork_inventory.CommunityForkInventoryTest) ... ok
+2026-10-05T12:34:06.0789498Z test_output_writers_keep_all_authority_false (test_community_fork_inventory.CommunityForkInventoryTest) ... ok
+2026-10-05T12:34:06.0973908Z test_scope_recipe_risk_and_domain_are_evidence_only (test_community_fork_inventory.CommunityForkInventoryTest) ... ok
+2026-10-05T12:34:06.0977520Z test_compatibility_policy (unittest.loader._FailedTest) ... ERROR
+2026-10-05T12:34:06.1008039Z test_boolean_and_inventory_schema_fail_closed (test_compatibility_queue.CompatibilityQueueTest) ... ok
+2026-10-05T12:34:06.1020960Z test_every_row_remains_pending_compatibility_proof (test_compatibility_queue.CompatibilityQueueTest) ... ok
+2026-10-05T12:34:06.1034344Z test_priority_is_deterministic_and_low_risk_build_tooling_runs_first (test_compatibility_queue.CompatibilityQueueTest) ... ok
+2026-10-05T12:34:06.1047372Z test_scope_floor_and_recipe_strategy_are_physical_only (test_compatibility_queue.CompatibilityQueueTest) ... ok
+2026-10-05T12:34:06.1064514Z test_tsv_output_contains_all_mechanical_decision_fields (test_compatibility_queue.CompatibilityQueueTest) ... ok
+2026-10-05T12:34:06.1095736Z test_fixed_jdk21_baseline_is_used_for_every_donor (test_file_delta_inventory.FileDeltaInventoryTest) ... ok
+2026-10-05T12:34:06.1522367Z test_main_requires_only_selected_donor_refs (test_file_delta_inventory.FileDeltaInventoryTest) ... ok
+2026-10-05T12:34:06.2123899Z test_verbatim_union_marks_same_modified_added_and_removed (test_file_delta_inventory.FileDeltaInventoryTest) ... ok
+2026-10-05T12:34:06.2215036Z test_crate_size_one_emits_true_file_atomic_crates (test_generate_recipe_crates.GenerateRecipeCratesTest) ... ok
+2026-10-05T12:34:06.2240616Z test_crate_size_rejects_zero_and_above_budget (test_generate_recipe_crates.GenerateRecipeCratesTest) ... ok
+2026-10-05T12:34:06.2779782Z test_include_text_emits_separate_java_and_plain_text_crates (test_generate_recipe_crates.GenerateRecipeCratesTest) ... ok
+2026-10-05T12:34:06.3432842Z test_native_jni_candidates_have_first_class_source_sealed_lane (test_generate_recipe_crates.GenerateRecipeCratesTest) ... ok
+2026-10-05T12:34:06.3682757Z test_requires_explicit_selection_or_all_candidates (test_generate_recipe_crates.GenerateRecipeCratesTest) ... ok
+2026-10-05T12:34:06.4132925Z test_text_candidates_remain_opt_in_for_backward_compatibility (test_generate_recipe_crates.GenerateRecipeCratesTest) ... ok
+2026-10-05T12:34:06.4531136Z test_text_mode_and_encoding_fail_into_typed_exclusions (test_generate_recipe_crates.GenerateRecipeCratesTest) ... ok
+2026-10-05T12:34:06.5028380Z test_verbatim_pairs_generate_hash_pinned_openrewrite_crate (test_generate_recipe_crates.GenerateRecipeCratesTest) ... ok
+2026-10-05T12:34:06.6051597Z test_tool_and_language_classification (test_inventory.InventoryTest) ... ok
+2026-10-05T12:34:06.6052720Z test_disposition_classification_is_total_for_known_states (test_program_status.ProgramStatusTest) ... ok
+2026-10-05T12:34:06.6063326Z test_repository_snapshot_has_locked_denominators (test_program_status.ProgramStatusTest) ... ok
+2026-10-05T12:34:06.6072403Z test_tsv_is_deterministic (test_program_status.ProgramStatusTest) ... ok
+2026-10-05T12:34:06.6073082Z 
+2026-10-05T12:34:06.6073681Z ======================================================================
+2026-10-05T12:34:06.6074137Z ERROR: test_compatibility_policy (unittest.loader._FailedTest)
+2026-10-05T12:34:06.6074573Z ----------------------------------------------------------------------
+2026-10-05T12:34:06.6075022Z ImportError: Failed to import test module: test_compatibility_policy
+2026-10-05T12:34:06.6075669Z Traceback (most recent call last):
+2026-10-05T12:34:06.6076227Z   File "/usr/lib/python3.10/unittest/loader.py", line 436, in _find_test_path
+2026-10-05T12:34:06.6076642Z     module = self._get_module_from_name(name)
+2026-10-05T12:34:06.6077052Z   File "/usr/lib/python3.10/unittest/loader.py", line 377, in _get_module_from_name
+2026-10-05T12:34:06.6077458Z     __import__(name)
+2026-10-05T12:34:06.6077943Z   File "/home/runner/work/_temp/repo/m3/backports/test_compatibility_policy.py", line 9, in <module>
+2026-10-05T12:34:06.6078445Z     import compatibility_policy
+2026-10-05T12:34:06.6078771Z ValueError: source code string cannot contain null bytes
+2026-10-05T12:34:06.6079021Z 
+2026-10-05T12:34:06.6079025Z 
+2026-10-05T12:34:06.6079184Z ----------------------------------------------------------------------
+2026-10-05T12:34:06.6079523Z Ran 29 tests in 0.809s
+2026-10-05T12:34:06.6079666Z 
+2026-10-05T12:34:06.6079756Z FAILED (errors=1)
+2026-10-05T12:34:06.6836340Z [ERROR] Command execution failed.
+2026-10-05T12:34:06.6856607Z org.apache.commons.exec.ExecuteException: Process exited with an error: 1 (Exit value: 1)
+2026-10-05T12:34:06.6857970Z     at org.apache.commons.exec.DefaultExecutor.executeInternal (DefaultExecutor.java:408)
+2026-10-05T12:34:06.6859433Z     at org.apache.commons.exec.DefaultExecutor.execute (DefaultExecutor.java:306)
+2026-10-05T12:34:06.6860686Z     at org.codehaus.mojo.exec.ExecMojo.executeCommandLine (ExecMojo.java:913)
+2026-10-05T12:34:06.6861726Z     at org.codehaus.mojo.exec.ExecMojo.executeCommandLine (ExecMojo.java:873)
+2026-10-05T12:34:06.6862783Z     at org.codehaus.mojo.exec.ExecMojo.execute (ExecMojo.java:464)
+2026-10-05T12:34:06.6864300Z     at org.apache.maven.plugin.DefaultBuildPluginManager.executeMojo (DefaultBuildPluginManager.java:126)
+2026-10-05T12:34:06.6865048Z     at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute2 (MojoExecutor.java:328)
+2026-10-05T12:34:06.6866213Z     at org.apache.maven.lifecycle.internal.MojoExecutor.doExecute (MojoExecutor.java:316)
+2026-10-05T12:34:06.6867083Z     at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:212)
+2026-10-05T12:34:06.6868112Z     at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:174)
+2026-10-05T12:34:06.6869150Z     at org.apache.maven.lifecycle.internal.MojoExecutor.access$000 (MojoExecutor.java:75)
+2026-10-05T12:34:06.6870086Z     at org.apache.maven.lifecycle.internal.MojoExecutor$1.run (MojoExecutor.java:162)
+2026-10-05T12:34:06.6871296Z     at org.apache.maven.plugin.DefaultMojosExecutionStrategy.execute (DefaultMojosExecutionStrategy.java:39)
+2026-10-05T12:34:06.6872515Z     at org.apache.maven.lifecycle.internal.MojoExecutor.execute (MojoExecutor.java:159)
+2026-10-05T12:34:06.6873734Z     at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:105)
+2026-10-05T12:34:06.6875223Z     at org.apache.maven.lifecycle.internal.LifecycleModuleBuilder.buildProject (LifecycleModuleBuilder.java:73)
+2026-10-05T12:34:06.6877057Z     at org.apache.maven.lifecycle.internal.builder.singlethreaded.SingleThreadedBuilder.build (SingleThreadedBuilder.java:53)
+2026-10-05T12:34:06.6878454Z     at org.apache.maven.lifecycle.internal.LifecycleStarter.execute (LifecycleStarter.java:118)
+2026-10-05T12:34:06.6879411Z     at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:261)
+2026-10-05T12:34:06.6880188Z     at org.apache.maven.DefaultMaven.doExecute (DefaultMaven.java:173)
+2026-10-05T12:34:06.6880924Z     at org.apache.maven.DefaultMaven.execute (DefaultMaven.java:101)
+2026-10-05T12:34:06.6881596Z     at org.apache.maven.cli.MavenCli.execute (MavenCli.java:919)
+2026-10-05T12:34:06.6882233Z     at org.apache.maven.cli.MavenCli.doMain (MavenCli.java:285)
+2026-10-05T12:34:06.6882914Z     at org.apache.maven.cli.MavenCli.main (MavenCli.java:207)
+2026-10-05T12:34:06.6883872Z     at jdk.internal.reflect.DirectMethodHandleAccessor.invoke (DirectMethodHandleAccessor.java:103)
+2026-10-05T12:34:06.6884740Z     at java.lang.reflect.Method.invoke (Method.java:580)
+2026-10-05T12:34:06.6885793Z     at org.codehaus.plexus.classworlds.launcher.Launcher.launchEnhanced (Launcher.java:255)
+2026-10-05T12:34:06.6886869Z     at org.codehaus.plexus.classworlds.launcher.Launcher.launch (Launcher.java:201)
+2026-10-05T12:34:06.6887971Z     at org.codehaus.plexus.classworlds.launcher.Launcher.mainWithExitCode (Launcher.java:362)
+2026-10-05T12:34:06.6888990Z     at org.codehaus.plexus.classworlds.launcher.Launcher.main (Launcher.java:314)
+2026-10-05T12:34:06.6889645Z [INFO] 
+2026-10-05T12:34:06.6890095Z [INFO] --------------------< com.m3.tooling:module-packs >---------------------
+2026-10-05T12:34:06.6890896Z [INFO] Building module-packs 0.1.0-SNAPSHOT                               [5/9]
+2026-10-05T12:34:06.6891542Z [INFO]   from tooling/module-packs/pom.xml
+2026-10-05T12:34:06.6892116Z [INFO] --------------------------------[ pom ]---------------------------------
+2026-10-05T12:34:06.6892653Z [INFO] 
+2026-10-05T12:34:06.6893065Z [INFO] --- clean:3.2.0:clean (default-clean) @ module-packs ---
+2026-10-05T12:34:06.6893963Z [INFO] 
+2026-10-05T12:34:06.6894467Z [INFO] --- enforcer:3.5.0:enforce (default) @ module-packs ---
+2026-10-05T12:34:06.6895049Z [INFO] 
+2026-10-05T12:34:06.6895700Z [INFO] --- jacoco:0.8.15:prepare-agent (coverage) @ module-packs ---
+2026-10-05T12:34:06.6897289Z [INFO] argLine set to -javaagent:/home/runner/work/_temp/maven-repo/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/runner/work/_temp/repo/m3/tooling/module-packs/target/jacoco.exec
+2026-10-05T12:34:06.6898710Z [INFO] 
+2026-10-05T12:34:06.6899369Z [INFO] --- jacoco:0.8.15:report (report) @ module-packs ---
+2026-10-05T12:34:06.6900256Z [INFO] Skipping JaCoCo execution due to missing execution data file.
+2026-10-05T12:34:06.6900894Z [INFO] 
+2026-10-05T12:34:06.6901494Z [INFO] --- jacoco:0.8.15:check (gate) @ module-packs ---
+2026-10-05T12:34:06.6907704Z [INFO] Skipping JaCoCo execution due to missing execution data file:/home/runner/work/_temp/repo/m3/tooling/module-packs/target/jacoco.exec
+2026-10-05T12:34:06.6908707Z [INFO] 
+2026-10-05T12:34:06.6917297Z [INFO] -----------------< com.m3.tooling:module-pack-kernel >------------------
+2026-10-05T12:34:06.6936274Z [INFO] Building module-pack-kernel 0.1.0-SNAPSHOT                         [6/9]
+2026-10-05T12:34:06.6936750Z [INFO]   from tooling/module-packs/kernel/pom.xml
+2026-10-05T12:34:06.6937162Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-05T12:34:06.7010778Z [INFO] 
+2026-10-05T12:34:06.7011286Z [INFO] --- clean:3.2.0:clean (default-clean) @ module-pack-kernel ---
+2026-10-05T12:34:06.7016763Z [INFO] Deleting /home/runner/work/_temp/repo/m3/tooling/module-packs/kernel/target
+2026-10-05T12:34:06.7075032Z [INFO] 
+2026-10-05T12:34:06.7075656Z [INFO] --- enforcer:3.5.0:enforce (default) @ module-pack-kernel ---
+2026-10-05T12:34:06.7085961Z [INFO] 
+2026-10-05T12:34:06.7086435Z [INFO] --- jacoco:0.8.15:prepare-agent (coverage) @ module-pack-kernel ---
+2026-10-05T12:34:06.7092907Z [INFO] argLine set to -javaagent:/home/runner/work/_temp/maven-repo/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/runner/work/_temp/repo/m3/tooling/module-packs/kernel/target/jacoco.exec
+2026-10-05T12:34:06.7094577Z [INFO] 
+2026-10-05T12:34:06.7096487Z [INFO] --- resources:3.4.0:resources (default-resources) @ module-pack-kernel ---
+2026-10-05T12:34:06.7101714Z [INFO] skip non existing resourceDirectory /home/runner/work/_temp/repo/m3/tooling/module-packs/kernel/src/main/resources
+2026-10-05T12:34:06.7102758Z [INFO] 
+2026-10-05T12:34:06.7116735Z [INFO] --- compiler:3.13.0:compile (default-compile) @ module-pack-kernel ---
+2026-10-05T12:34:06.7342350Z [INFO] Recompiling the module because of changed source code.
+2026-10-05T12:34:06.7346083Z [INFO] Compiling 5 source files with javac [debug release 21] to target/classes
+2026-10-05T12:34:06.8578156Z [INFO] JDK-8318913 workaround: patched module-info.class requires version from [21] to [21] on 1 JDK modules [java.base]
+2026-10-05T12:34:06.8579362Z [INFO] 
+2026-10-05T12:34:06.8580329Z [INFO] --- resources:3.4.0:testResources (default-testResources) @ module-pack-kernel ---
+2026-10-05T12:34:06.8591915Z [INFO] skip non existing resourceDirectory /home/runner/work/_temp/repo/m3/tooling/module-packs/kernel/src/test/resources
+2026-10-05T12:34:06.8601693Z [INFO] 
+2026-10-05T12:34:06.8604447Z [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ module-pack-kernel ---
+2026-10-05T12:34:06.8699483Z [INFO] Recompiling the module because of changed dependency.
+2026-10-05T12:34:06.8703194Z [INFO] Compiling 7 source files with javac [debug release 21] to target/test-classes
+2026-10-05T12:34:07.0812489Z [INFO] 
+2026-10-05T12:34:07.0816019Z [INFO] --- surefire:3.2.5:test (default-test) @ module-pack-kernel ---
+2026-10-05T12:34:07.0842430Z [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+2026-10-05T12:34:07.0996542Z [INFO] 
+2026-10-05T12:34:07.0998808Z [INFO] -------------------------------------------------------
+2026-10-05T12:34:07.1006286Z [INFO]  T E S T S
+2026-10-05T12:34:07.1006955Z [INFO] -------------------------------------------------------
+2026-10-05T12:34:07.9902785Z [INFO] Running com.m3.tools.modulepack.VersionTest
+2026-10-05T12:34:09.6273685Z [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.641 s -- in com.m3.tools.modulepack.VersionTest
+2026-10-05T12:34:09.6313887Z [INFO] Running com.m3.tools.modulepack.ArchiveBoundaryTest
+2026-10-05T12:34:09.7520945Z [INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.114 s -- in com.m3.tools.modulepack.ArchiveBoundaryTest
+2026-10-05T12:34:09.7522501Z [INFO] Running com.m3.tools.modulepack.M3ModuleClassVersionTest
+2026-10-05T12:34:10.1175777Z [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.367 s -- in com.m3.tools.modulepack.M3ModuleClassVersionTest
+2026-10-05T12:34:10.1177666Z [INFO] Running com.m3.tools.modulepack.M3ModulePackTest
+2026-10-05T12:34:10.4002917Z [INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.282 s -- in com.m3.tools.modulepack.M3ModulePackTest
+2026-10-05T12:34:10.4483307Z [INFO] 
+2026-10-05T12:34:10.4484263Z [INFO] Results:
+2026-10-05T12:34:10.4484596Z [INFO] 
+2026-10-05T12:34:10.4484992Z [INFO] Tests run: 9, Failures: 0, Errors: 0, Skipped: 0
+2026-10-05T12:34:10.4485784Z [INFO] 
+2026-10-05T12:34:10.4492850Z [INFO] 
+2026-10-05T12:34:10.4493288Z [INFO] --- jar:3.4.2:jar (default-jar) @ module-pack-kernel ---
+2026-10-05T12:34:10.6178164Z [INFO] Building jar: /home/runner/work/_temp/repo/m3/tooling/module-packs/kernel/target/module-pack-kernel-0.1.0-SNAPSHOT.jar
+2026-10-05T12:34:10.7042056Z [INFO] 
+2026-10-05T12:34:10.7042897Z [INFO] --- jacoco:0.8.15:report (report) @ module-pack-kernel ---
+2026-10-05T12:34:10.7064846Z [INFO] Loading execution data file /home/runner/work/_temp/repo/m3/tooling/module-packs/kernel/target/jacoco.exec
+2026-10-05T12:34:10.7206567Z [INFO] Analyzed bundle 'module-pack-kernel' with 4 classes
+2026-10-05T12:34:10.7430123Z [INFO] 
+2026-10-05T12:34:10.7446547Z [INFO] --- jacoco:0.8.15:check (gate) @ module-pack-kernel ---
+2026-10-05T12:34:10.7455483Z [INFO] Loading execution data file /home/runner/work/_temp/repo/m3/tooling/module-packs/kernel/target/jacoco.exec
+2026-10-05T12:34:10.7514122Z [INFO] Analyzed bundle 'module-pack-kernel' with 4 classes
+2026-10-05T12:34:10.7536510Z [INFO] All coverage checks have been met.
+2026-10-05T12:34:10.7542111Z [INFO] 
+2026-10-05T12:34:10.7542834Z [INFO] -----------------< com.m3.tooling:module-pack-recipes >-----------------
+2026-10-05T12:34:10.7544044Z [INFO] Building module-pack-recipes 0.1.0-SNAPSHOT                        [7/9]
+2026-10-05T12:34:10.7545057Z [INFO]   from tooling/module-packs/recipes/pom.xml
+2026-10-05T12:34:10.7546075Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-05T12:34:10.7636538Z [INFO] 
+2026-10-05T12:34:10.7646530Z [INFO] --- clean:3.2.0:clean (default-clean) @ module-pack-recipes ---
+2026-10-05T12:34:10.7647627Z [INFO] Deleting /home/runner/work/_temp/repo/m3/tooling/module-packs/recipes/target
+2026-10-05T12:34:10.7686257Z [INFO] 
+2026-10-05T12:34:10.7687020Z [INFO] --- enforcer:3.5.0:enforce (default) @ module-pack-recipes ---
+2026-10-05T12:34:10.7702982Z [INFO] 
+2026-10-05T12:34:10.7703737Z [INFO] --- jacoco:0.8.15:prepare-agent (coverage) @ module-pack-recipes ---
+2026-10-05T12:34:10.7725822Z [INFO] argLine set to -javaagent:/home/runner/work/_temp/maven-repo/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/runner/work/_temp/repo/m3/tooling/module-packs/recipes/target/jacoco.exec
+2026-10-05T12:34:10.7728032Z [INFO] 
+2026-10-05T12:34:10.7728812Z [INFO] --- resources:3.4.0:resources (default-resources) @ module-pack-recipes ---
+2026-10-05T12:34:10.7729893Z [INFO] Copying 3 resources from src/main/resources to target/classes
+2026-10-05T12:34:10.7776074Z [INFO] 
+2026-10-05T12:34:10.7777031Z [INFO] --- compiler:3.13.0:compile (default-compile) @ module-pack-recipes ---
+2026-10-05T12:34:10.7799087Z [INFO] Recompiling the module because of changed dependency.
+2026-10-05T12:34:10.7800258Z [INFO] Compiling 2 source files with javac [debug release 21] to target/classes
+2026-10-05T12:34:10.8806288Z [INFO] 
+2026-10-05T12:34:10.8823548Z [INFO] --- resources:3.4.0:testResources (default-testResources) @ module-pack-recipes ---
+2026-10-05T12:34:10.8846524Z [INFO] skip non existing resourceDirectory /home/runner/work/_temp/repo/m3/tooling/module-packs/recipes/src/test/resources
+2026-10-05T12:34:10.8847464Z [INFO] 
+2026-10-05T12:34:10.8848445Z [INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ module-pack-recipes ---
+2026-10-05T12:34:10.8886103Z [INFO] Recompiling the module because of changed dependency.
+2026-10-05T12:34:10.8887286Z [INFO] Compiling 1 source file with javac [debug release 21] to target/test-classes
+2026-10-05T12:34:11.0565622Z [INFO] 
+2026-10-05T12:34:11.0586337Z [INFO] --- surefire:3.2.5:test (default-test) @ module-pack-recipes ---
+2026-10-05T12:34:11.0660333Z [INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+2026-10-05T12:34:11.0688440Z [INFO] 
+2026-10-05T12:34:11.0697729Z [INFO] -------------------------------------------------------
+2026-10-05T12:34:11.0698857Z [INFO]  T E S T S
+2026-10-05T12:34:11.0699477Z [INFO] -------------------------------------------------------
+2026-10-05T12:34:12.1020060Z [INFO] Running com.m3.rewrite.packs.M3ModulePackRecipesTest
+2026-10-05T12:34:12.3718325Z SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+2026-10-05T12:34:12.3720263Z SLF4J: Defaulting to no-operation (NOP) logger implementation
+2026-10-05T12:34:12.3721387Z SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+2026-10-05T12:34:14.6054891Z [INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.503 s -- in com.m3.rewrite.packs.M3ModulePackRecipesTest
+2026-10-05T12:34:14.6499749Z [INFO] 
+2026-10-05T12:34:14.6500122Z [INFO] Results:
+2026-10-05T12:34:14.6500455Z [INFO] 
+2026-10-05T12:34:14.6500794Z [INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0
+2026-10-05T12:34:14.6501117Z [INFO] 
+2026-10-05T12:34:14.6512941Z [INFO] 
+2026-10-05T12:34:14.6513917Z [INFO] --- jar:3.4.2:jar (default-jar) @ module-pack-recipes ---
+2026-10-05T12:34:14.6561666Z [INFO] Building jar: /home/runner/work/_temp/repo/m3/tooling/module-packs/recipes/target/module-pack-recipes-0.1.0-SNAPSHOT.jar
+2026-10-05T12:34:14.6608766Z [INFO] 
+2026-10-05T12:34:14.6609270Z [INFO] --- jacoco:0.8.15:report (report) @ module-pack-recipes ---
+2026-10-05T12:34:14.6610331Z [INFO] Loading execution data file /home/runner/work/_temp/repo/m3/tooling/module-packs/recipes/target/jacoco.exec
+2026-10-05T12:34:14.6675020Z [INFO] Analyzed bundle 'module-pack-recipes' with 4 classes
+2026-10-05T12:34:14.7102316Z [INFO] 
+2026-10-05T12:34:14.7104493Z [INFO] --- jacoco:0.8.15:check (gate) @ module-pack-recipes ---
+2026-10-05T12:34:14.7121725Z [INFO] Loading execution data file /home/runner/work/_temp/repo/m3/tooling/module-packs/recipes/target/jacoco.exec
+2026-10-05T12:34:14.7158897Z [INFO] Analyzed bundle 'module-pack-recipes' with 4 classes
+2026-10-05T12:34:14.7164497Z [INFO] All coverage checks have been met.
+2026-10-05T12:34:14.7165507Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:34:14.7166463Z [INFO] Reactor Summary for M3JDK21 Maven control reactor 0.1.0-SNAPSHOT:
+2026-10-05T12:34:14.7183018Z [INFO] 
+2026-10-05T12:34:14.7183706Z [INFO] M3IndexDB .......................................... SUCCESS [  7.083 s]
+2026-10-05T12:34:14.7184712Z [INFO] migration-recipes .................................. FAILURE [  1.313 s]
+2026-10-05T12:34:14.7185971Z [INFO] M3JDK21 Maven control reactor ...................... SUCCESS [  0.130 s]
+2026-10-05T12:34:14.7186885Z [INFO] M3 A3 absorption tooling ........................... SKIPPED
+2026-10-05T12:34:14.7188843Z [INFO] M3JDK21 backport recipe DAG ........................ SKIPPED
+2026-10-05T12:34:14.7192406Z [INFO] M3 JDK21 backport admission and verification ....... FAILURE [  1.542 s]
+2026-10-05T12:34:14.7193360Z [INFO] module-packs ....................................... SUCCESS [  0.006 s]
+2026-10-05T12:34:14.7194254Z [INFO] module-pack-kernel ................................. SUCCESS [  4.059 s]
+2026-10-05T12:34:14.7195234Z [INFO] module-pack-recipes ................................ SUCCESS [  3.966 s]
+2026-10-05T12:34:14.7196463Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:34:14.7197196Z [INFO] BUILD FAILURE
+2026-10-05T12:34:14.7197833Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:34:14.7198916Z [INFO] Total time:  18.236 s
+2026-10-05T12:34:14.7203434Z [INFO] Finished at: 2026-10-05T12:34:14Z
+2026-10-05T12:34:14.7204237Z [INFO] ------------------------------------------------------------------------
+2026-10-05T12:34:14.7206501Z [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project migration-recipes: Compilation failure: Compilation failure: 
+2026-10-05T12:34:14.7216079Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[97,54] unclosed character literal
+2026-10-05T12:34:14.7218342Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[98,53] ';' expected
+2026-10-05T12:34:14.7220574Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[100,54] unclosed character literal
+2026-10-05T12:34:14.7222766Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[101,53] ';' expected
+2026-10-05T12:34:14.7232328Z [ERROR] -> [Help 1]
+2026-10-05T12:34:14.7234001Z [ERROR] Failed to execute goal org.codehaus.mojo:exec-maven-plugin:3.6.4:exec (test-backport-inventory) on project jdk21-backport-admission: Command execution failed. Process exited with an error: 1 (Exit value: 1) -> [Help 2]
+2026-10-05T12:34:14.7236071Z [ERROR] 
+2026-10-05T12:34:14.7236770Z [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+2026-10-05T12:34:14.7237761Z [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+2026-10-05T12:34:14.7238512Z [ERROR] 
+2026-10-05T12:34:14.7240620Z [ERROR] For more information about the errors and possible solutions, please read the following articles:
+2026-10-05T12:34:14.7243905Z [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+2026-10-05T12:34:14.7245535Z [ERROR] [Help 2] http://cwiki.apache.org/confluence/display/MAVEN/MojoExecutionException
+2026-10-05T12:34:14.7246766Z [ERROR] 
+2026-10-05T12:34:14.7247468Z [ERROR] After correcting the problems, you can resume the build with the command
+2026-10-05T12:34:14.7248359Z [ERROR]   mvn <args> -rf :migration-recipes
+2026-10-05T12:34:14.7740181Z ##[error]Process completed with exit code 1.
+2026-10-05T12:34:14.7794567Z ##[group]Run set -euo pipefail
+2026-10-05T12:34:14.7794909Z [36;1mset -euo pipefail[0m
+2026-10-05T12:34:14.7795184Z [36;1mmkdir -p "$RUNNER_TEMP/kit"[0m
+2026-10-05T12:34:14.7795767Z [36;1mif command -v mvn >/dev/null; then[0m
+2026-10-05T12:34:14.7796155Z [36;1m  home=$(dirname "$(dirname "$(readlink -f "$(command -v mvn)")")")[0m
+2026-10-05T12:34:14.7796571Z [36;1m  test -d "$home/lib" && test -d "$home/boot"[0m
+2026-10-05T12:34:14.7796938Z [36;1m  mkdir -p "$RUNNER_TEMP/maven/conf"[0m
+2026-10-05T12:34:14.7797327Z [36;1m  cp -R "$home/bin" "$home/boot" "$home/lib" "$RUNNER_TEMP/maven/"[0m
+2026-10-05T12:34:14.7797729Z [36;1m  for name in LICENSE NOTICE README.txt; do[0m
+2026-10-05T12:34:14.7798138Z [36;1m    if test -f "$home/$name"; then cp "$home/$name" "$RUNNER_TEMP/maven/"; fi[0m
+2026-10-05T12:34:14.7798549Z [36;1m  done[0m
+2026-10-05T12:34:14.7798972Z [36;1m  if test -d "$home/conf/logging"; then cp -R "$home/conf/logging" "$RUNNER_TEMP/maven/conf/"; fi[0m
+2026-10-05T12:34:14.7799697Z [36;1m  printf '%s\n' '<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"/>' > "$RUNNER_TEMP/maven/conf/settings.xml"[0m
+2026-10-05T12:34:14.7800333Z [36;1m  tar -czf "$RUNNER_TEMP/kit/maven.tar.gz" -C "$RUNNER_TEMP" maven[0m
+2026-10-05T12:34:14.7800697Z [36;1mfi[0m
+2026-10-05T12:34:14.7800946Z [36;1mif test -d "$RUNNER_TEMP/maven-repo"; then[0m
+2026-10-05T12:34:14.7801606Z [36;1m  tar --exclude='*.lastUpdated' --exclude='resolver-status.properties' -czf "$RUNNER_TEMP/kit/repository.tar.gz" -C "$RUNNER_TEMP" maven-repo[0m
+2026-10-05T12:34:14.7802204Z [36;1mfi[0m
+2026-10-05T12:34:14.7802435Z [36;1mif test -d "$RUNNER_TEMP/repo/m3"; then[0m
+2026-10-05T12:34:14.7803182Z [36;1m  find "$RUNNER_TEMP/repo/m3" -type f \( -path '*/surefire-reports/*' -o -path '*/site/jacoco/*' -o -name 'jacoco.exec' \) -print0 | tar --null -T - -czf "$RUNNER_TEMP/kit/reports.tar.gz"[0m
+2026-10-05T12:34:14.7804108Z [36;1mfi[0m
+2026-10-05T12:34:14.7804874Z [36;1mprintf '%s\n' 'Proof inputs only. Artifact preservation is not test success or release admission. No user/runner settings, credentials, or generated key stores are included.' > "$RUNNER_TEMP/kit/BOUNDARY.txt"[0m
+2026-10-05T12:34:14.7806162Z [36;1m(cd "$RUNNER_TEMP/kit" && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)[0m
+2026-10-05T12:34:14.7882257Z shell: /usr/bin/bash -e {0}
+2026-10-05T12:34:14.7882520Z env:
+2026-10-05T12:34:14.7882744Z   REPO: /home/runner/work/_temp/repo
+2026-10-05T12:34:14.7883050Z   JAVA_HOME: /home/runner/work/_temp/jdk-21+35
+2026-10-05T12:34:14.7883359Z ##[endgroup]
+2026-10-05T12:34:17.5587156Z tar: Removing leading `/' from member names
+2026-10-05T12:34:17.5590645Z tar: Removing leading `/' from hard link targets
+2026-10-05T12:34:18.3027084Z ##[group]Run actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+2026-10-05T12:34:18.3027528Z with:
+2026-10-05T12:34:18.3027826Z   name: m3-jdk-kit-5c1ee9490e76943dfdb3ca27fade0d093d017226
+2026-10-05T12:34:18.3028186Z   path: /home/runner/work/_temp/kit
+2026-10-05T12:34:18.3028459Z   retention-days: 3
+2026-10-05T12:34:18.3028686Z   if-no-files-found: error
+2026-10-05T12:34:18.3028927Z   compression-level: 6
+2026-10-05T12:34:18.3029151Z   overwrite: false
+2026-10-05T12:34:18.3029375Z   include-hidden-files: false
+2026-10-05T12:34:18.3029614Z env:
+2026-10-05T12:34:18.3029825Z   REPO: /home/runner/work/_temp/repo
+2026-10-05T12:34:18.3030153Z   JAVA_HOME: /home/runner/work/_temp/jdk-21+35
+2026-10-05T12:34:18.3030457Z ##[endgroup]
+2026-10-05T12:34:18.4845086Z (node:2966) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-10-05T12:34:18.4846377Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-10-05T12:34:18.4920523Z With the provided path, there will be 12 files uploaded
+2026-10-05T12:34:18.4926599Z Artifact name is valid!
+2026-10-05T12:34:18.4927363Z Root directory input is valid!
+2026-10-05T12:34:18.7678574Z Beginning upload of artifact content to blob storage
+2026-10-05T12:34:19.0667172Z (node:2966) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+2026-10-05T12:34:19.4635025Z Uploaded bytes 8388608
+2026-10-05T12:34:19.8462171Z Uploaded bytes 16777216
+2026-10-05T12:34:19.8632824Z Uploaded bytes 25165824
+2026-10-05T12:34:19.9971808Z Uploaded bytes 33554432
+2026-10-05T12:34:20.4622440Z Uploaded bytes 41943040
+2026-10-05T12:34:20.6112431Z Uploaded bytes 50331648
+2026-10-05T12:34:20.8130373Z Uploaded bytes 58720256
+2026-10-05T12:34:21.0862436Z Uploaded bytes 67108864
+2026-10-05T12:34:21.3261777Z Uploaded bytes 75497472
+2026-10-05T12:34:21.6448267Z Uploaded bytes 83886080
+2026-10-05T12:34:21.8834633Z Uploaded bytes 92274688
+2026-10-05T12:34:22.1451361Z Uploaded bytes 100663296
+2026-10-05T12:34:22.3969515Z Uploaded bytes 109051904
+2026-10-05T12:34:22.6836471Z Uploaded bytes 117440512
+2026-10-05T12:34:22.9393290Z Uploaded bytes 125829120
+2026-10-05T12:34:23.2105540Z Uploaded bytes 134217728
+2026-10-05T12:34:23.5400027Z Uploaded bytes 142606336
+2026-10-05T12:34:23.7545964Z Uploaded bytes 150994944
+2026-10-05T12:34:24.0079468Z Uploaded bytes 159383552
+2026-10-05T12:34:24.3778056Z Uploaded bytes 167772160
+2026-10-05T12:34:24.6039987Z Uploaded bytes 176160768
+2026-10-05T12:34:24.8686629Z Uploaded bytes 184549376
+2026-10-05T12:34:24.9828176Z Uploaded bytes 185962507
+2026-10-05T12:34:25.0212763Z Finished uploading artifact content to blob storage!
+2026-10-05T12:34:25.0216192Z SHA256 digest of uploaded artifact zip is b9211094f4e628d19b8eb15542d9d7a9f441378a69db6381f96d71b824a0dac5
+2026-10-05T12:34:25.0218649Z Finalizing artifact upload
+2026-10-05T12:34:25.2903022Z Artifact m3-jdk-kit-5c1ee9490e76943dfdb3ca27fade0d093d017226.zip successfully finalized. Artifact ID 11345433257
+2026-10-05T12:34:25.2905497Z Artifact m3-jdk-kit-5c1ee9490e76943dfdb3ca27fade0d093d017226 has been successfully uploaded! Final size is 185962507 bytes. Artifact ID is 11345433257
+2026-10-05T12:34:25.2912453Z Artifact download URL: https://github.com/hsoliwal/M3jdk21/actions/runs/37310184481/artifacts/11345433257
+2026-10-05T12:34:25.3155875Z Cleaning up orphan processes
+2026-10-05T12:34:25.3471776Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

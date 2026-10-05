@@ -1,0 +1,16 @@
+{
+  "repo": "source",
+  "sha": "2eeb9b69b3bb11d0a40e4d7ac2aef123583a9ffa",
+  "rawBytes": 26409988,
+  "encoding": "utf-8",
+  "quotedCharacters": 28048115,
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "tool call error: tool call failed for `codex_apps/github.create_blob`\n\nCaused by:\n    Transport send error: Transport [codex_rmcp_client::event_notification_transport::EventNotificationTransport<rmcp::transport::worker::WorkerTransport<rmcp::transport::streamable_http_client::StreamableHttpClientWorker<codex_rmcp_client::http_client_adapter::StreamableHttpClientAdapter>>>] error: unexpected server response: HTTP 400: {\"detail\":\"MCP request body is invalid or exceeds the 16 MiB limit\"}"
+      }
+    ],
+    "isError": true
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "commit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+  "files": [
+    {
+      "bytes": 5379,
+      "gitBlob": "63344ac5b73c30def736f560bd9aa9348df3b97f",
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
+      "sha256": "58d01008f3dc6e79d988e855d76ba90eb0a13d39a76e7eb4027d75442389ec94"
+    },
+    {
+      "bytes": 4974,
+      "gitBlob": "c1865602253b72c9d5109a6b096146e847fd86aa",
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
+      "sha256": "69882638771a411cf0866f789a7b3ef7e7e7040cde38a1c40ef4a743d37168e2"
+    },
+    {
+      "bytes": 494,
+      "gitBlob": "eb7670be681545af7c424ee81242cb114b45e316",
+      "path": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-lab.yml",
+      "sha256": "cfd636693e49d352892bec390a63075c3ff84034ef6a428af61d93e911d9520a"
+    },
+    {
+      "bytes": 497,
+      "gitBlob": "52e0242df67d4fd11e8a99e390e1d58ff6fb7ff9",
+      "path": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-workflow.yml",
+      "sha256": "bd064c712c1be69c0fe2572d3d64256255b49d3d5fe770f1f2f0f1bfe8d9997d"
+    },
+    {
+      "bytes": 658,
+      "gitBlob": "f18bdb2c7808e88dc2692e58acafbdfbc854b7e5",
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+      "sha256": "b2febbb17ed96ae6f582eee2e16af3fc5e435c23e350708f56397bee9ac38ab5"
+    },
+    {
+      "bytes": 507,
+      "gitBlob": "40c60bd055fca26ec84fa93626c008e99440b6ba",
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-regex-memory-workflow/manifest.tsv",
+      "sha256": "39ff7949565412e2b8587fb428545d722c70fb360c8ee66962b08754642c6d17"
+    },
+    {
+      "bytes": 2205,
+      "gitBlob": "6ad9af43935d1cc7b5e471c1e7d21f8eb1538bb9",
+      "path": ".github/workflows/m3-foundation.yml",
+      "sha256": "2a81b9ebfa5d477977dba4632a0e7c89f2ebb89606eb46491197536335d63fee"
+    },
+    {
+      "bytes": 4830,
+      "gitBlob": "5d21cbb0eeb283e019072f6972dafa813897558c",
+      "path": ".github/workflows/m3-jdk-proof.yml",
+      "sha256": "22421943e3c62a53fe40d59b9f03bcd9fb0f14511d4714c8b857f3a7b36ee71d"
+    },
+    {
+      "bytes": 3518,
+      "gitBlob": "fd048ecd46ececc3242da1c2bede41f80ea8e4a8",
+      "path": ".github/workflows/m3-a3-openrewrite-declarative.yml",
+      "sha256": "7273cc9439ca62bc2b63ba440449fbd5b484ae2830092b98289a021fe9151af2"
+    },
+    {
+      "bytes": 3051,
+      "gitBlob": "d95c969805dff1f489472fb89b1c4564b3beeb5b",
+      "path": ".github/workflows/m3-tooling-recipes.yml",
+      "sha256": "252165fedc2e2962143cbd71d0ca68d553800ba7cf9c85df164edeb4713566a1"
+    },
+    {
+      "bytes": 10881,
+      "gitBlob": "5daa9cd739e9938cf7c940dc1cf012e4d8d978a9",
+      "path": ".github/workflows/m3-a3.yml",
+      "sha256": "b408f0b8d0e4d6e197230e3cb1469d14e0d52aecd33ac55c71f11d513d6e23ec"
+    },
+    {
+      "bytes": 3383,
+      "gitBlob": "86f223907bbb053f4792e6bf771c3c0882e1751b",
+      "path": "m3/tooling/migration-recipes/pom.xml",
+      "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"
+    },
+    {
+      "bytes": 3148,
+      "gitBlob": "41af049a920b271b051a5ac9e2b69495f411c5b8",
+      "path": "m3/backports/pom.xml",
+      "sha256": "ba4dbc17bbfc3eaa1759d0b162eac562ff762847722006860c2e9f8ce65df9e2"
+    }
+  ],
+  "newGatesRun": false
+}

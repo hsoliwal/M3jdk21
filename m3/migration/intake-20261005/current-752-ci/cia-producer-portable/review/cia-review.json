@@ -1,0 +1,83 @@
+{
+  "additionalSealedInputs": 12,
+  "allDeclaredInputIdentitiesMatched": true,
+  "authoringFilesModifiedByReviewer": false,
+  "canonicalAfterResourcePairsByteIdentical": true,
+  "currentBeforeImagesMatchedCandidateV2AndFrozenConsumerV2": true,
+  "disposition": "NO_BLOCKING_DEFECT_FOUND",
+  "executionClaim": "This record describes source review and identity comparisons only. Producer and receiving execution results are separate evidence.",
+  "fixtureReview": {
+    "actualCompilerRuntimeAndJavapCallsRequiredByFixture": true,
+    "baselineConstructorNpeRequiredByFixture": true,
+    "candidateValidAndInvalidConstructorsRequiredByFixture": true,
+    "declaredBaselineJavaSources": 2,
+    "declaredCandidateJavaSources": 6,
+    "declaredInitialRefusals": 26,
+    "declaredMixedStates": 64,
+    "declaredPostScanRefusals": 12,
+    "declaredRetainedAlgTestBodies": 3,
+    "declaredRetainedPlanTestBodies": 1,
+    "onlySlf4jApiVersion": "1.7.36",
+    "parentClasspathContainsA3Classes": false,
+    "parentClasspathContainsStaticLoggerBinder": false,
+    "realUnchangedOwnerAndScheduler": true,
+    "retainedClosureMatchesCurrentBytes": true,
+    "standaloneRuntimeJars": 69
+  },
+  "gatesExecutedByReviewer": false,
+  "projectFiles": 22,
+  "recordedAt": "2026-10-05T16:21:55.655201+00:00",
+  "repairs": [
+    "Only the same 13-component explicit canonical Row constructor assignments before unchanged validate(this).",
+    "Only four physical terminal TAB characters changed into Java source tab escapes in PlanTest and matching AFTER resource.",
+    "Only two matching catalogue-manifest AFTER Git-blob constants updated; historical BEFORE resources and constants retained.",
+    "Only runtime org.slf4j:slf4j-api:1.7.36 added in migration-recipes POM; no logging binding or coverage/test configuration change."
+  ],
+  "reviewArtifactOnly": true,
+  "reviewedInputs": [
+    {
+      "bytes": 28469,
+      "path": "cia-authoring-v1/proof.py",
+      "sha256": "02d7476cc67843e0ba01fa24bd4c2515bb0da3de64b87b5db1b570ea970ddb0b"
+    },
+    {
+      "bytes": 29501,
+      "path": "cia-authoring-v1/src/test/java/com/synexia/rewrite/CiaRecipeTest.java",
+      "sha256": "30e41c28cf90a370cbdb741d367c12db38b7f5aafe262f963df7298bdc7e20f7"
+    },
+    {
+      "bytes": 12639,
+      "path": "cia-spec-v1.json",
+      "sha256": "aba9dc9941853c8a7c2515fc72c7acd8cb05d61a776e27345701843c1daa5c83"
+    },
+    {
+      "bytes": 5730,
+      "path": "CIA-AUTHORED.json",
+      "sha256": "33df01fd87e1ae74e5265a4259714f9b18a210f55fd94e8ee59a8721949518fa"
+    },
+    {
+      "bytes": 1306,
+      "path": "cia-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/manifest.tsv",
+      "sha256": "89d7df5d0190e71b6fb69797fe848b37f5ffb09e274f020135e0df948488782a"
+    },
+    {
+      "bytes": 9060,
+      "path": "cia-runtime-classpath-v1.txt",
+      "sha256": "959d091dc35f237c9902e48456b7ffc041096ed7e7097b999083ec0c66304cbe"
+    },
+    {
+      "bytes": 12032,
+      "path": "cia-authoring-v1/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+    }
+  ],
+  "reviewer": "/root/cia_review",
+  "runnerReview": [
+    "Ordered static, compile, JUnit and runtime stages with source/tool/cache seals and fresh trial directories.",
+    "Exact JUnit suite/method inventory, sealed compiled artifacts and runtime-exported scheduler bytes.",
+    "Finite focused-producer authority only; full receiving and canonical qualification remain separate."
+  ],
+  "schema": "synexia.cia-752.independent-source-review/1",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2"
+}

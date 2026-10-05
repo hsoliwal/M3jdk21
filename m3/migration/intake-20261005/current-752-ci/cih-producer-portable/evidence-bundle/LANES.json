@@ -1,0 +1,135 @@
+[
+  {
+    "disposition": "reported-result",
+    "lane": "cih-producer-v3",
+    "marker": "evidence/cih-producer-v3/RESULT.json",
+    "markerBytes": 5407,
+    "markerSHA256": "f93e1ef05b82459105b8dacd6258af0caa86f0e2c2221f946e8250397ffa9dcb",
+    "originalResult": {
+      "canonicalOfflineSourceClosure": false,
+      "canonicalProductionApplied": false,
+      "compiledArtifacts": {
+        "bytes": 10293,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/build-artifacts.json",
+        "sha256": "1db63b28776b3aebd040e09342297747d5948bb9cd15c212e2c46d1ed6d31410"
+      },
+      "consumerQualified": false,
+      "crossFamilyAtomicity": false,
+      "failure": null,
+      "inputManifestSHA256": "0e2b01fb85ad2c52424cc31152e329da07c45234b51b1ccd1c5f37684a9e01bc",
+      "junit": {
+        "counts": {
+          "errors": 0,
+          "failures": 0,
+          "skipped": 0,
+          "tests": 6
+        },
+        "methods": [
+          "allMixedStates",
+          "contextRuntime",
+          "exactRepairScope",
+          "initialRefusals",
+          "namedRecipeReplay",
+          "postScanDrift"
+        ],
+        "report": {
+          "bytes": 21325,
+          "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/target/surefire-reports/TEST-com.synexia.rewrite.CihRecipeTest.xml",
+          "sha256": "6876499f28c1f3677bbed52e044a14e301af1c2519077c6aefa139c4f50d42b1"
+        },
+        "suite": "com.synexia.rewrite.CihRecipeTest"
+      },
+      "patchSHA256": "73d5d79b33ef2f29f5f3d65d17c0bb30fd7b4110c0483edf0faf935447e03406",
+      "receipts": [
+        {
+          "bytes": 1805,
+          "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/chain/01-static.json",
+          "sha256": "64c91cc357bccfa48cf7e4d47bdccc76f756bb0e6fd0c3ac37079c1d826e91b4"
+        },
+        {
+          "bytes": 2495,
+          "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/chain/02-compile.json",
+          "sha256": "4ba16ac5db5a3647f3fa828c75a37167c037e3ace119ef2190c2a6a8d1a24339"
+        },
+        {
+          "bytes": 2811,
+          "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/chain/03-tests.json",
+          "sha256": "b16ef2c7fa9ef78439f9813445c081495898c86089e6646d4a341cbaed481e90"
+        },
+        {
+          "bytes": 12052,
+          "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/chain/04-runtime.json",
+          "sha256": "2d4b194a74d07c439600c656ba98b55558365a3b24c39c9ec3ce5f4a57b01a94"
+        }
+      ],
+      "runtime": {
+        "canonicalProductionApplied": false,
+        "crossFamilyAtomicity": false,
+        "files": [
+          {
+            "beforeBytes": 13206,
+            "beforeSHA256": "54114c84b923790cea717f85bdb78574aa3c14e00e1419e68c5cef7d8d87b1b4",
+            "bytes": 16119,
+            "operation": "REPLACE",
+            "path": "m3/migration/test/test_jcc_handoff_context_profiles.py",
+            "sha256": "9d79d07bb31ded0e5ec9eebef1095ae25be8f20c55f9e72aee4ba64852790594"
+          },
+          {
+            "beforeBytes": null,
+            "beforeSHA256": "ABSENT",
+            "bytes": 7629,
+            "operation": "ADD",
+            "path": "m3/migration/test/test_jcc_handoff_current_context.py",
+            "sha256": "30a838a363fb05f9c1caf48fd36c0a67de0767708e4b198b77af37ee0c41eb63"
+          },
+          {
+            "beforeBytes": 12660,
+            "beforeSHA256": "1662cd99e60e03692e95bfdeb51dbf46c5c990dac7d5cadbd5e1ddb5fcad52fe",
+            "bytes": 13634,
+            "operation": "REPLACE",
+            "path": "m3/migration/test/test_jcc_handoff_packet.py",
+            "sha256": "fde72eb9f2b682f50004defbc70e6d886a3f646abb0d89c0aec5de8ab0dbd30d"
+          },
+          {
+            "beforeBytes": null,
+            "beforeSHA256": "ABSENT",
+            "bytes": 2875,
+            "operation": "ADD",
+            "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-752-ci.json",
+            "sha256": "e4ea964db1a6f9527122ff0dad1c969a43dc50a0f80c771c86b70bcd6da6dcaf"
+          },
+          {
+            "beforeBytes": null,
+            "beforeSHA256": "ABSENT",
+            "bytes": 3383,
+            "operation": "ADD",
+            "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/pom-before-752.xml",
+            "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"
+          }
+        ],
+        "marker": "CIH_VERIFIED targets=5 mixedStates=32 initialRefusals=16 postScanRefusals=10 outputSeal=66524b7605f7e490a1c3a2258c738da9d77f50c62a6475206289162d988b4801",
+        "output": {
+          "bytes": 2023,
+          "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/generated-candidate/OUTPUT.json",
+          "sha256": "c3e818efae6c7de3e9e92a4122f87f3af9e7e4fa997d053ce18c1015c0937372"
+        },
+        "outputSeal": "66524b7605f7e490a1c3a2258c738da9d77f50c62a6475206289162d988b4801",
+        "patch": {
+          "bytes": 24160,
+          "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/generated-candidate/candidate.patch",
+          "sha256": "17e4f8398e08468645b2ec15d99c45a0c49e942d03115cc92e53e713ba9c00af"
+        },
+        "strictCanonicalAdmission": false
+      },
+      "schema": "synexia.cih-752.proof-result/1",
+      "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+      "status": "PASS_FOCUSED_PRODUCER",
+      "strictCanonicalAdmission": false,
+      "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2"
+    },
+    "reportedBaseline": null,
+    "reportedStatus": "PASS_FOCUSED_PRODUCER",
+    "required": true,
+    "terminal": true
+  }
+]

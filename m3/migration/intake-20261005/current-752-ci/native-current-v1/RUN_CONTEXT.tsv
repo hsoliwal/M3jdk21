@@ -1,0 +1,21 @@
+field	value	evidence
+repository	hsoliwal/com.synexia	evidence/current-v1/RESULT.json
+source_commit	9963cc08ff13922b92a0e3db7c30f56fddacba7d	evidence/current-v1/RESULT.json
+source_root_tree	6c055c584ebb5fa177420d1668db73bcb7e7fef4	evidence/current-v1/RESULT.json
+execution_platform	Linux x86-64	evidence/current-v1/RESULT.json
+java_source_count	31	evidence/current-v1/proof/SOURCES-current.txt
+repository_input_count	65	evidence/current-v1/source-receipts.json
+operational_inputs_unchanged_from_652	64	evidence/current-v1/proof/CURRENT-SOURCE-IDENTITY.json
+jdk	Azul Zulu Java 21.0.12.1+1-LTS	evidence/current-v1/proof/TOOLCHAIN.json
+gcc	GCC 13; exact backend bytes pinned	evidence/current-v1/proof/TOOLCHAIN.json
+cmake	3.31.10; exact distribution set checked	evidence/current-v1/proof/TOOL-REUSE-CHECK.json
+tool_files	8053	evidence/current-v1/proof/TOOLCHAIN.json
+tool_bytes	466293744	evidence/current-v1/proof/TOOL-REUSE-CHECK.json
+all_sealed_inputs	8147	evidence/current-v1/proof/SOURCE-MANIFEST.json
+annotation_processing	disabled: -proc:none	evidence/current-v1/proof/commands.json
+native_modes	UBSan OFF and ON; -Xcheck:jni	evidence/current-v1/proof/commands.json
+stage_order	patch > lint > compile > test > runtime > final audit	evidence/current-v1/RESULT.json
+toolchain_body_packaging	excluded; manifests and acquisition provenance retained	evidence-bundle/BUNDLE.json
+compiled_body_packaging	excluded under prior hash-only convention; 57 class and 4 library identities retained	evidence/current-v1/proof/build-artifacts.json
+replay_paths	original absolute paths retained; deliberate environment restoration required	PREPARED.json
+complete_hermetic_os_image	false	evidence/current-v1/proof/TOOL-REUSE-CHECK.json

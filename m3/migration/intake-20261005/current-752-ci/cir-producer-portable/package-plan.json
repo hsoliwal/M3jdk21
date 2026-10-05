@@ -1,0 +1,42 @@
+{
+  "compiledBinaries": "hash-only",
+  "includePaths": [
+    "evidence/cir-producer-v1",
+    "cir-authoring-v1",
+    "cir-authoring-v2",
+    "cir-spec-v1.json",
+    "cir-spec-v2.json",
+    "CIR-AUTHORED.json",
+    "CIR-CLOSURE-CORRECTION-v2.json",
+    "review/cir-five-literals-root-review.json",
+    "cir-package-inputs",
+    "cir-package-plan.json"
+  ],
+  "laneSelection": {
+    "additional": [],
+    "allowNotExecuted": [],
+    "includeAllExisting": false,
+    "required": [
+      "cir-producer-v2"
+    ]
+  },
+  "packageOwnerSHA256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574",
+  "proofGatesExecutedByPackaging": false,
+  "rawPriorDisposition": {
+    "proof": "evidence/cir-producer-v1",
+    "result": {
+      "bytes": 1305,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/RESULT.json",
+      "sha256": "8e075767061e6958163d2ba84e9b96051b5ba2e844bd40770290cb219fbb86ef"
+    },
+    "retention": "explicit includePaths preserves exact terminal STOP and all proof files; no status rewrite or synthetic terminal marker",
+    "status": "STOP"
+  },
+  "resultSHA256": "4dbc2cf6dc163cacd930b6e90d3d359aa15380535c811545651e4a936f3e92ea",
+  "schema": "synexia.evidence.package-plan/1",
+  "scope": "Actual Cir producer-v2 PASS plus immutable original Cir-v1 compile STOP; all 27 current and 26 prior project source inputs retained.",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "status": "FINAL_REVIEWED_SELECTION",
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+  "toolCaches": "manifest-only"
+}

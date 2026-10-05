@@ -1,0 +1,202 @@
+[
+  {
+    "bytes": 403,
+    "path": "classes/META-INF/rewrite/m3-ci-752-java.yml",
+    "sha256": "f03d42912ca9f6417ed38ba9f3582c04f979e17fd46aaa979d94bd37dd0171d3"
+  },
+  {
+    "bytes": 441,
+    "path": "classes/META-INF/rewrite/m3-ci-752-text.yml",
+    "sha256": "4ac9bcaf7e026474b87045c8461b4ab5b95d4fcfc91e2678a2e8dd56f3046a04"
+  },
+  {
+    "bytes": 3690,
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$1.class",
+    "sha256": "89b442e92cc55de2172e032f4f0650647509a015cf2b72dd3ebba505ac6fa71f"
+  },
+  {
+    "bytes": 4810,
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$2.class",
+    "sha256": "1235413f44f1e53c83a5fa0786530ce15548c92c6b636b40118eef9847105611"
+  },
+  {
+    "bytes": 1230,
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$Inventory.class",
+    "sha256": "f54fea5844ba1b19ee22e5ccfae495d4a9b2b03e9edfb5bc09ac620321ef628f"
+  },
+  {
+    "bytes": 2128,
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$Target.class",
+    "sha256": "7eb62aee1d3e3f89575b4973ffba8e1defae3270853de61c96d1efbd21fe128e"
+  },
+  {
+    "bytes": 12466,
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.class",
+    "sha256": "4193579cb92dd4afca14b5ee67d57580dc1b1afa64fef31a5b608a13a0959c13"
+  },
+  {
+    "bytes": 532,
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-java/manifest.tsv",
+    "sha256": "20bb056836e5834daed7492bac87bef2df852945ea66d3cefc148ce9bff8b85a"
+  },
+  {
+    "bytes": 5380,
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-java/target-1.txt",
+    "sha256": "f34470a701cf71b4b4abbe1fa9a5091392a930426ec84d700f13e53edd244629"
+  },
+  {
+    "bytes": 4975,
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-java/target-2.txt",
+    "sha256": "3f3ab065d9e87e9f6095629a56b052642ec9d0883a466430e90a4a4355edd05b"
+  },
+  {
+    "bytes": 2130,
+    "path": "classes/com/synexia/rewrite/M3EditScope.class",
+    "sha256": "b7224c8f3d284d786150b46ebc7612db8ea37144870306db923ebef0105edabc"
+  },
+  {
+    "bytes": 3633,
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$1.class",
+    "sha256": "1df9ea0e227634fc5a28705e1ce6616197c047b0a694f0beb8cc34fef1d5f49e"
+  },
+  {
+    "bytes": 4830,
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$2.class",
+    "sha256": "5e869a803dad1ebd06b93ba92485b04bfbe36c2a16bc1e7bae5339905e1c6d66"
+  },
+  {
+    "bytes": 2114,
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$3.class",
+    "sha256": "4ec70b96ef929c44950bc6eaf289eeffd780ebe7b16b708df396e6d22d4edc9c"
+  },
+  {
+    "bytes": 1635,
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$Inventory.class",
+    "sha256": "941a3f8bf3b06a19866fa46dd4f4710a4b679787befb5bb50962219130d4e8d1"
+  },
+  {
+    "bytes": 1842,
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$ParserDependency.class",
+    "sha256": "bdcd960a3e90e4f2886aa28d56aee243388e7039a27df3548ad1411a809e6ed1"
+  },
+  {
+    "bytes": 2069,
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$Target.class",
+    "sha256": "224cdbb113ecf4bc8c54ea58051f70724ae47c3b4667cef4e879c5de8299a689"
+  },
+  {
+    "bytes": 22173,
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.class",
+    "sha256": "7351081f25fc01375ce36a77bb3388456da61b4588fe2bc7a520573a90ad450c"
+  },
+  {
+    "bytes": 3432,
+    "path": "classes/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe$1.class",
+    "sha256": "a124d6ed01d5fd896e6b916fdeda816cfa1e7572b8523d2dd90fbb79731caf00"
+  },
+  {
+    "bytes": 4896,
+    "path": "classes/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe$2.class",
+    "sha256": "055aa000e12385b998879334601ce229f521a3676d67691b2c77a8e5fc5f641d"
+  },
+  {
+    "bytes": 1266,
+    "path": "classes/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe$Inventory.class",
+    "sha256": "05d6144f08e14b1ae1b83d48860c47418def993ea6db38b139b12a9d2a637629"
+  },
+  {
+    "bytes": 2069,
+    "path": "classes/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe$Target.class",
+    "sha256": "8d42cb24dd5a25f27ac6ad4b59001fa9eec009447299b4d55d92d20c36596dca"
+  },
+  {
+    "bytes": 16115,
+    "path": "classes/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.class",
+    "sha256": "fbd68c7ddbb52380860c12e92c1bb263bef3682ddd9247de8b6d1dc18380125b"
+  },
+  {
+    "bytes": 1967,
+    "path": "classes/com/synexia/rewrite/M3ScopeInference$JavaLocation.class",
+    "sha256": "ca1accf38eb1988a6c8bc79d625209e6f1d64098fa0f63b2af86ae2dd93e93be"
+  },
+  {
+    "bytes": 6246,
+    "path": "classes/com/synexia/rewrite/M3ScopeInference.class",
+    "sha256": "9842899bf63fe7824c4a17027a1a5d1e33f2ac5fc4757e9bf3b42829fc0415c8"
+  },
+  {
+    "bytes": 587,
+    "path": "classes/com/synexia/rewrite/hash-pinned-text/m3-ci-752-text/manifest.tsv",
+    "sha256": "ee1689f026984bb0273a77848df5e4611f1c55ce9ffb45f1d5f1eda9e0a2ba12"
+  },
+  {
+    "bytes": 2413,
+    "path": "classes/com/synexia/rewrite/hash-pinned-text/m3-ci-752-text/target-1.txt",
+    "sha256": "f6f569ef91e6b17be68a48801d1f97639d288d436c277a6401628bd82e210d3e"
+  },
+  {
+    "bytes": 4695,
+    "path": "classes/com/synexia/rewrite/hash-pinned-text/m3-ci-752-text/target-2.txt",
+    "sha256": "d51301d3ea225e89b000a2256855ab7806a1faf20c5fa493eb5666de1e7880c2"
+  },
+  {
+    "bytes": 7177,
+    "path": "classes/com/synexia/rewrite/hash-pinned-text/m3-ci-752-text/target-3.txt",
+    "sha256": "dbd50a08d902a4009c66e22b8e6f499a66bbe4316c2d96d1e47c60194b572937"
+  },
+  {
+    "bytes": 2205,
+    "path": "test-classes/before/.github/workflows/m3-foundation.yml",
+    "sha256": "2a81b9ebfa5d477977dba4632a0e7c89f2ebb89606eb46491197536335d63fee"
+  },
+  {
+    "bytes": 4692,
+    "path": "test-classes/before/m3/backports/compatibility_policy.py",
+    "sha256": "3fbe65ee5d3130858d114b0637207585e0cb20c2b5008def8c3dc6607f042d41"
+  },
+  {
+    "bytes": 6038,
+    "path": "test-classes/before/m3/backports/test_compatibility_policy.py",
+    "sha256": "10d8d11da8b4dd6772875cb3ba5c1f2c0732e307cdd5c983a96811b9c9f5180d"
+  },
+  {
+    "bytes": 5379,
+    "path": "test-classes/before/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
+    "sha256": "58d01008f3dc6e79d988e855d76ba90eb0a13d39a76e7eb4027d75442389ec94"
+  },
+  {
+    "bytes": 4974,
+    "path": "test-classes/before/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
+    "sha256": "69882638771a411cf0866f789a7b3ef7e7e7040cde38a1c40ef4a743d37168e2"
+  },
+  {
+    "bytes": 1123,
+    "path": "test-classes/com/synexia/rewrite/CiRecipeTest$1.class",
+    "sha256": "e557293c953b8b120c27e6f94a0bf62917d812a567ef6fa2b13a0e89d920277e"
+  },
+  {
+    "bytes": 2491,
+    "path": "test-classes/com/synexia/rewrite/CiRecipeTest$Fixture.class",
+    "sha256": "be3cf1725ca24daa964866b0d91da21d940078bbaae04695978b58b86c47e0d4"
+  },
+  {
+    "bytes": 3842,
+    "path": "test-classes/com/synexia/rewrite/CiRecipeTest$RecordingSourceSet.class",
+    "sha256": "cbb7fb6a2072ae8147da963705ca9979a153da0621abc95eed64424964481c09"
+  },
+  {
+    "bytes": 1975,
+    "path": "test-classes/com/synexia/rewrite/CiRecipeTest$Replay.class",
+    "sha256": "25da58b0fa033ca0717a2688dfd36a35f0a063811dadcf7defe5623e5afb8dc5"
+  },
+  {
+    "bytes": 2106,
+    "path": "test-classes/com/synexia/rewrite/CiRecipeTest$Target.class",
+    "sha256": "990583b26be231512ac7909994de5becb0fc6895b629d948062cb283c6d78d85"
+  },
+  {
+    "bytes": 32085,
+    "path": "test-classes/com/synexia/rewrite/CiRecipeTest.class",
+    "sha256": "69f18313c3fea6c93bf9cfbab45d3dba0933f2b959585cba0f2cb95b27680424"
+  }
+]

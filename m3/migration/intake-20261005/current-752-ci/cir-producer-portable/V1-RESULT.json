@@ -1,0 +1,33 @@
+{
+  "canonicalOfflineSourceClosure": false,
+  "canonicalProductionApplied": false,
+  "compiledArtifacts": null,
+  "consumerQualified": false,
+  "crossFamilyAtomicity": false,
+  "failure": {
+    "message": "compile command failed with exit 1",
+    "stage": "compile",
+    "type": "Refusal"
+  },
+  "inputManifestSHA256": "31f6d5a98345b8f2ee50044d19ff6f1f6e88eb4c3a705c74fd7eb18d74b43050",
+  "junit": null,
+  "patchSHA256": "8f7a2a25b7470e2bc07a4f95020fc3dd9c44353e149d3b819d5934a2ee98608d",
+  "receipts": [
+    {
+      "bytes": 1805,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/chain/01-static.json",
+      "sha256": "03cc22c84719547c16a14db7961b6dd8ff58bc0e5cb0318e45477242636b8185"
+    },
+    {
+      "bytes": 2398,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/chain/02-compile.json",
+      "sha256": "377f5e8f5674ee8f352a802a86a337df48005bc35d00d0e27509bca9b7c49e6e"
+    }
+  ],
+  "runtime": null,
+  "schema": "synexia.cir-752.proof-result/1",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "status": "STOP",
+  "strictCanonicalAdmission": false,
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2"
+}

@@ -1,0 +1,1 @@
+{"status": "STATIC_SCOPE_PASS", "mainSources": 1, "testSources": 1, "testMethods": ["allMixedStates", "corpusCompilationAndRuntime", "exactRepairScope", "initialRefusals", "namedRecipeReplay", "postScanDrift"], "outputs": 3, "typedJavaProof": false}

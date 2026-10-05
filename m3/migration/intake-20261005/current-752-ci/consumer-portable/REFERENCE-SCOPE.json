@@ -1,0 +1,11 @@
+{
+  "absentBehavior": "Prior recursive inputs.json and SOURCE-MANIFEST.json discovery remains unchanged.",
+  "nestedHistoricalManifestMeaning": "All nested ledger/source files remain ordinary exact archived content; this option does not interpret those historical objects as current proof input arrays.",
+  "option": "inputManifestPaths",
+  "originalSHA256": "99a140af284c3280d285d039e59cbebee4e961ae530fe4117e1421e485a09f9b",
+  "proofGatesExecuted": false,
+  "refusedAttempt": "consumer-package-v5/PACK-COMMAND.json exitCode2; seven original proof receipts unchanged",
+  "requiredMeaning": "If present, the exact sorted array evidence/<selected-lane>/inputs.json for every selected lane, with no omissions or extra manifests. Every manifest must be retained and parsed by the unchanged strict row/reference audit.",
+  "scope": "Metadata-only explicit input-reference audit roots; all file bodies, chunk identities, exclusions, hashes and terminal markers retain the previous behavior. No proof execution or receipt rewrite.",
+  "versionSHA256": "c7d0d838814be81b627810ec587e1d21d2841d922b0791a4c60642386c9ea39d"
+}

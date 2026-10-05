@@ -1,0 +1,57 @@
+{
+  "schema": "synexia.evidence.package-plan/1",
+  "status": "FINAL_REVIEWED_SELECTION",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+  "packageOwnerSHA256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574",
+  "resultSHA256": "f93e1ef05b82459105b8dacd6258af0caa86f0e2c2221f946e8250397ffa9dcb",
+  "laneSelection": {
+    "required": [
+      "cih-producer-v3"
+    ],
+    "additional": [],
+    "allowNotExecuted": [],
+    "includeAllExisting": false
+  },
+  "preservedAdditionalTerminalTrials": [
+    {
+      "path": "evidence/cih-producer-v2",
+      "reportedStatus": "STOP",
+      "resultSHA256": "302ed8be74016f6d9072fccc9d803702b778b6076f59a7e099d7aa5c3b7adcad",
+      "reasonForDirectPathSelection": "The unchanged packaging owner admits PASS/STOPPED/FAIL lane prefixes; the real STOP receipt is preserved verbatim through includePaths rather than renamed."
+    }
+  ],
+  "preservedPreparationRefusals": [
+    {
+      "path": "CIH-PREFLIGHT-v1.json",
+      "sha256": "f45d3fc1aba7eae0456871bc3fdd9bc3ee56ca3f686e3d56fe89b35df69f9133",
+      "proofDirectoryCreated": false,
+      "producerGatesExecuted": false
+    }
+  ],
+  "includePaths": [
+    "cih-authoring-v1",
+    "cih-authoring-v2",
+    "cih-authoring-v3",
+    "cih-spec-v1.json",
+    "cih-spec-v2.json",
+    "cih-spec-v3.json",
+    "cih-spec-v4.json",
+    "CIH-AUTHORED.json",
+    "CIH-AUTHORED-v2.json",
+    "CIH-PLAN-AUTHORED.json",
+    "CIH-CLOSURE-PROFILE-DIFF.patch",
+    "CIH-PREFLIGHT-v1.json",
+    "QUALIFIED-CIH.json",
+    "cia-runtime-classpath-v1.txt",
+    "review/cih-review.json",
+    "review/cih-review-v2.json",
+    "cih-package-inputs",
+    "cih-package-plan.json",
+    "evidence/cih-producer-v2"
+  ],
+  "scope": "Actual five-output Cih-v3 PASS, complete44-file qualified task; actual Cih-v2 STOP complete34-file task; exact preflight and all three authoring versions, every receipt/log/generated output and source/provenance. Two explicitly declared historical569 active exceptions, three ABSENT additions, all prior19 active outputs unchanged.",
+  "toolCaches": "manifest-only",
+  "compiledBinaries": "hash-only",
+  "proofGatesExecutedByPackaging": false
+}

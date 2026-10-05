@@ -1,0 +1,1433 @@
+{
+  "schema": "synexia.remote-ci-observation/1",
+  "state": "REMOTE_CI_NOT_QUALIFIED",
+  "observedAt": "2026-10-05T16:28:28Z",
+  "repository": "hsoliwal/com.synexia",
+  "pr": 9358,
+  "head": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+  "runCount": 119,
+  "totals": {
+    "queued": 103,
+    "pending": 1,
+    "failure": 15
+  },
+  "runs": [
+    {
+      "id": 37339516178,
+      "name": "M3 Additive Superset Estate Recipe",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339516178",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339516058,
+      "name": "M3 sealed installer boundary",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339516058",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339515579,
+      "name": "M3FS prepared GPU search state",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339515579",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339515953,
+      "name": "TMS Finance Algorithm Recipe First",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339515953",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339515311,
+      "name": "SPDX compliance",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339515311",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339515799,
+      "name": "Reactor Additive Superset Java 21",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339515799",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339514883,
+      "name": "M3 Nebula donor recipe verification",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339514883",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339513816,
+      "name": "M3 Strict LLM Repository Gate",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339513816",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339513759,
+      "name": "M3 Minex Estate Review Queue Java 21",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339513759",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339514842,
+      "name": "M3 collection native dynamic arrays",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339514842",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339515035,
+      "name": "M3 TFL3 storage inventory",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339515035",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339515867,
+      "name": "M3 TFL3 Safetensors materialization",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339515867",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339515910,
+      "name": "M3 shared array JNI ownership",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339515910",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339514768,
+      "name": "M3 Partial AST Bounded Forward",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339514768",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339515479,
+      "name": "Canonical identity hard invariant",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339515479",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339515550,
+      "name": "Ordered CPU GEMV contract",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339515550",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339514937,
+      "name": "M3 decomposition kernel routing",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339514937",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339514788,
+      "name": "FileIndex checkpoint proof",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339514788",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339514114,
+      "name": "M3 Strict LLM Repository Gate",
+      "status": "pending",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339514114",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339514118,
+      "name": "OpenRewrite MIndexAST Sidecar",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339514118",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339513769,
+      "name": "Upwork Top-1000 + algorithm donor proof",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339513769",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339515237,
+      "name": "MIndex discrete logic Java JNI",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339515237",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339514845,
+      "name": "KIE all-branches forward additive superset audit",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339514845",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339514959,
+      "name": "M3 model shard CPU fabric",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339514959",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339514546,
+      "name": "M3 OpenRewrite universal SourceFile + IOP authority Java21",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339514546",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339514684,
+      "name": "M3 sealed partial AST leaf custody",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339514684",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339514586,
+      "name": "OpenRewrite behavior patternization Java21",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339514586",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339511994,
+      "name": "M3 Unified Recipe-First Serial Gate",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339511994",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339512500,
+      "name": "M3 shared array export",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339512500",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339512528,
+      "name": "Compiled schema bindings integration",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339512528",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339512804,
+      "name": "FileIndex local pool proof",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339512804",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339512130,
+      "name": "CI",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339512130",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339512301,
+      "name": "Sealed recipe evolution",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339512301",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339512750,
+      "name": "OpenRewrite Recipe Laboratory",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339512750",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339512706,
+      "name": "M3 Superset Preservation Gate",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339512706",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339511661,
+      "name": "M3 Java exact-tree retention",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339511661",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339512238,
+      "name": "M3 top-100 OpenRewrite fixed point",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339512238",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339512722,
+      "name": "M3 resident Q4 GEMV",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339512722",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339511433,
+      "name": "M3 JDT genuine SDK restoration",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339511433",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339512385,
+      "name": "MIndex tuple reference gates",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339512385",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339513365,
+      "name": "M3 Full All-Ref Superset",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339513365",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339509147,
+      "name": "M3 exact JDK collection evidence gates",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339509147",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339510479,
+      "name": "TMS Finance Multimodal Recipe First",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339510479",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339510797,
+      "name": "M3 OpenRewrite Class Recipe Java21",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339510797",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339509717,
+      "name": "M3 contract atom invariant",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339509717",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339509090,
+      "name": "M3 MIndex to M3 compatibility inventory",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339509090",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339509185,
+      "name": "M3 Root Self Control Plane",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339509185",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339510614,
+      "name": "M3 Abseil B-tree rebalance",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339510614",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339510670,
+      "name": "M3 recipe-first invariant",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339510670",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339509530,
+      "name": "M3 TFL3 transformer decomposition",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339509530",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339511150,
+      "name": "M3 transformer stage differential",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339511150",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339508254,
+      "name": "Tested source recovery",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339508254",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339508135,
+      "name": "File hash batch proof",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339508135",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339508191,
+      "name": "M3 TFL3 transformer candidate index",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339508191",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339508740,
+      "name": "Nebula visible-range recipe and JNI proof",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339508740",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339508495,
+      "name": "M3 CPU SIMD GEMV",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339508495",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339508831,
+      "name": "M3 Abseil B-tree delete rebalance",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339508831",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339508756,
+      "name": "Upwork Top-1000 Sincere Shared-Core Proof",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339508756",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339508832,
+      "name": "M3 object cost proof",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339508832",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339508422,
+      "name": "M3 MIndex External Contract Inventory",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339508422",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339507426,
+      "name": "M3 JNI contract inventory",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339507426",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339508061,
+      "name": "M3 Mavenized Atom Pattern Absorption",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339508061",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339507687,
+      "name": "M3 source-bound atom coverage",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339507687",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339507437,
+      "name": "M3 regex precompute regression",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339507437",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339508273,
+      "name": "M3 Complete System Audit",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339508273",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339507191,
+      "name": "M3 collection contracts",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339507191",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339508107,
+      "name": "MIndex char mask boundary",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339508107",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339507477,
+      "name": "M3 IndexString Regex Recipe-First",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339507477",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339507841,
+      "name": "Java performance invariants",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339507841",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339508136,
+      "name": "SAP compatibility Java and JNI proof",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339508136",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339508520,
+      "name": "AiX develop superset",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339508520",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339508475,
+      "name": "M3 shared range summary reuse",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339508475",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339509009,
+      "name": "M3 OpenRewrite PR Superset Self-Host V3",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339509009",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339508383,
+      "name": "M3 Module Fanout",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339508383",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339508375,
+      "name": "M3 hierarchical atom-pattern lattice",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339508375",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339507738,
+      "name": "M3 Estate Module Refactor Dry Run",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339507738",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339507857,
+      "name": "M3 gpu grep SHA donor integration",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339507857",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339508083,
+      "name": "UnicodeX dX dY convergence workspace",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339508083",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339507599,
+      "name": "MIndex Portable Decision",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339507599",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339506327,
+      "name": "Abseil int128 storage planner",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506327",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339506797,
+      "name": "M3 Partial AST Source Snapshot",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506797",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339506237,
+      "name": "M3 recipe laboratory",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506237",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339506030,
+      "name": "M3 Abseil addressed layout",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506030",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339506494,
+      "name": "M3 recipe crate serial atom review",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506494",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339506444,
+      "name": "Synexia ETL Superset",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506444",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339505785,
+      "name": "M3 native input object cost",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339505785",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339506391,
+      "name": "M3 JDK Expression Recipes Java21",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506391",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339506473,
+      "name": "M3 algorithm task mastery admission",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506473",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339505923,
+      "name": "Sealed OpenRewrite canonical Java",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339505923",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339506329,
+      "name": "M3 algorithm atom recipe-crate",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506329",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339506362,
+      "name": "M3 IOP declaration lint",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506362",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339506713,
+      "name": "Purpose-specific library ranking",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506713",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339506632,
+      "name": "Java 21 Serial Reactor Progress",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506632",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339506820,
+      "name": "SAP whole runtime convergence",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506820",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339506228,
+      "name": "IOP source admission",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506228",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339506191,
+      "name": "M3 qualified recipes Java 21",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506191",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339506241,
+      "name": "M3 recipe laboratory promotion gate",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506241",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339506370,
+      "name": "M3 MLLM tiny recipe-first",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506370",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339506321,
+      "name": "M3 scope multipass proof",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506321",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339475101,
+      "name": "TornadoVM M3 Java module",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339475101",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339475416,
+      "name": "M3 Full All-Ref Superset",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339475416",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339476074,
+      "name": "Synexia ETL Superset",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339476074",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339475482,
+      "name": "Purpose-specific library ranking",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339475482",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339475547,
+      "name": "Upwork Top-1000 + algorithm donor proof",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339475547",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339475664,
+      "name": "TornadoVM M3 source custody",
+      "status": "queued",
+      "conclusion": null,
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339475664",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339470859,
+      "name": ".github/workflows/donor-superset-multipass.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339470859",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339468683,
+      "name": ".github/workflows/jev-recipe-first-v1.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339468683",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339465435,
+      "name": ".github/workflows/cpullm-dictlang-semantic-runtime-v1.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339465435",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339466675,
+      "name": ".github/workflows/java-edi-formats.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339466675",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339464279,
+      "name": ".github/workflows/chrome2api-lazy-residency-v1.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339464279",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339462697,
+      "name": ".github/workflows/cpullm-dictlang-convergence-v2.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339462697",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339458987,
+      "name": ".github/workflows/classical-tools.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339458987",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339460811,
+      "name": ".github/workflows/upwork-top1000-sincere-java21.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339460811",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339457302,
+      "name": ".github/workflows/precommit-candidate-index-snapshot-replay-v1.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339457302",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339455816,
+      "name": ".github/workflows/m3-preimage-all-branches.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339455816",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339454275,
+      "name": ".github/workflows/m3-fingerprint-catalog.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339454275",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339452731,
+      "name": ".github/workflows/m3-archive-jsonb.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339452731",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339450989,
+      "name": ".github/workflows/jsparrow-attribution.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339450989",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    },
+    {
+      "id": 37339449123,
+      "name": ".github/workflows/cpullm-attached-use-cases.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339449123",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4"
+    }
+  ],
+  "failedRunJobs": [
+    {
+      "id": 37339506321,
+      "name": "M3 scope multipass proof",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506321",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+      "totalJobs": 1,
+      "jobs": [
+        {
+          "id": 111862673631,
+          "run_id": 37339506321,
+          "workflow_name": "M3 scope multipass proof",
+          "head_branch": "codex/m3-ci-current-20261005-9963cc0",
+          "run_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/37339506321",
+          "run_attempt": 1,
+          "node_id": "CR_kwDOQ2icss8AAAAaC4jw3w",
+          "head_sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/jobs/111862673631",
+          "html_url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506321/job/111862673631",
+          "status": "completed",
+          "conclusion": "failure",
+          "created_at": "2026-10-05T16:16:07Z",
+          "started_at": "2026-10-05T16:16:07Z",
+          "completed_at": "2026-10-05T16:16:52Z",
+          "name": "verify",
+          "steps": [],
+          "check_run_url": "https://api.github.com/repos/hsoliwal/com.synexia/check-runs/111862673631",
+          "labels": [
+            "ubuntu-22.04"
+          ],
+          "runner_id": 0,
+          "runner_name": "",
+          "runner_group_id": 0,
+          "runner_group_name": ""
+        }
+      ]
+    },
+    {
+      "id": 37339470859,
+      "name": ".github/workflows/donor-superset-multipass.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339470859",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+      "totalJobs": 0,
+      "jobs": []
+    },
+    {
+      "id": 37339468683,
+      "name": ".github/workflows/jev-recipe-first-v1.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339468683",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+      "totalJobs": 0,
+      "jobs": []
+    },
+    {
+      "id": 37339465435,
+      "name": ".github/workflows/cpullm-dictlang-semantic-runtime-v1.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339465435",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+      "totalJobs": 0,
+      "jobs": []
+    },
+    {
+      "id": 37339466675,
+      "name": ".github/workflows/java-edi-formats.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339466675",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+      "totalJobs": 0,
+      "jobs": []
+    },
+    {
+      "id": 37339464279,
+      "name": ".github/workflows/chrome2api-lazy-residency-v1.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339464279",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+      "totalJobs": 0,
+      "jobs": []
+    },
+    {
+      "id": 37339462697,
+      "name": ".github/workflows/cpullm-dictlang-convergence-v2.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339462697",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+      "totalJobs": 0,
+      "jobs": []
+    },
+    {
+      "id": 37339458987,
+      "name": ".github/workflows/classical-tools.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339458987",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+      "totalJobs": 0,
+      "jobs": []
+    },
+    {
+      "id": 37339460811,
+      "name": ".github/workflows/upwork-top1000-sincere-java21.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339460811",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+      "totalJobs": 0,
+      "jobs": []
+    },
+    {
+      "id": 37339457302,
+      "name": ".github/workflows/precommit-candidate-index-snapshot-replay-v1.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339457302",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+      "totalJobs": 0,
+      "jobs": []
+    },
+    {
+      "id": 37339455816,
+      "name": ".github/workflows/m3-preimage-all-branches.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339455816",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+      "totalJobs": 0,
+      "jobs": []
+    },
+    {
+      "id": 37339454275,
+      "name": ".github/workflows/m3-fingerprint-catalog.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339454275",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+      "totalJobs": 0,
+      "jobs": []
+    },
+    {
+      "id": 37339452731,
+      "name": ".github/workflows/m3-archive-jsonb.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339452731",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+      "totalJobs": 0,
+      "jobs": []
+    },
+    {
+      "id": 37339450989,
+      "name": ".github/workflows/jsparrow-attribution.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339450989",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+      "totalJobs": 0,
+      "jobs": []
+    },
+    {
+      "id": 37339449123,
+      "name": ".github/workflows/cpullm-attached-use-cases.yml",
+      "status": "completed",
+      "conclusion": "failure",
+      "url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339449123",
+      "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+      "totalJobs": 0,
+      "jobs": []
+    }
+  ],
+  "scopeFailureRun": {
+    "id": 37339506321,
+    "name": "M3 scope multipass proof",
+    "node_id": "WFR_kwLOQ2icss8AAAAIsZumkQ",
+    "head_branch": "codex/m3-ci-current-20261005-9963cc0",
+    "head_sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+    "path": ".github/workflows/m3-scope-multipass-proof.yml",
+    "display_title": "Add recipe-driven M3 repairs and current Java/JNI verification",
+    "run_number": 1984,
+    "event": "pull_request",
+    "status": "completed",
+    "conclusion": "failure",
+    "workflow_id": 373001433,
+    "check_suite_id": 101137038970,
+    "check_suite_node_id": "CS_kwDOQ2icss8AAAAXjDy-eg",
+    "url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/37339506321",
+    "html_url": "https://github.com/hsoliwal/com.synexia/actions/runs/37339506321",
+    "pull_requests": [
+      {
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/pulls/9358",
+        "id": 4747803672,
+        "number": 9358,
+        "head": {
+          "ref": "codex/m3-ci-current-20261005-9963cc0",
+          "sha": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+          "repo": {
+            "id": 1130929330,
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia",
+            "name": "com.synexia"
+          }
+        },
+        "base": {
+          "ref": "develop",
+          "sha": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+          "repo": {
+            "id": 1130929330,
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia",
+            "name": "com.synexia"
+          }
+        }
+      }
+    ],
+    "created_at": "2026-10-05T16:16:06Z",
+    "updated_at": "2026-10-05T16:16:53Z",
+    "actor": {
+      "login": "hsoliwal",
+      "id": 5656792,
+      "node_id": "MDQ6VXNlcjU2NTY3OTI=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5656792?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/hsoliwal",
+      "html_url": "https://github.com/hsoliwal",
+      "followers_url": "https://api.github.com/users/hsoliwal/followers",
+      "following_url": "https://api.github.com/users/hsoliwal/following{/other_user}",
+      "gists_url": "https://api.github.com/users/hsoliwal/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/hsoliwal/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/hsoliwal/subscriptions",
+      "organizations_url": "https://api.github.com/users/hsoliwal/orgs",
+      "repos_url": "https://api.github.com/users/hsoliwal/repos",
+      "events_url": "https://api.github.com/users/hsoliwal/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/hsoliwal/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "run_attempt": 1,
+    "referenced_workflows": [],
+    "run_started_at": "2026-10-05T16:16:06Z",
+    "triggering_actor": {
+      "login": "hsoliwal",
+      "id": 5656792,
+      "node_id": "MDQ6VXNlcjU2NTY3OTI=",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5656792?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/hsoliwal",
+      "html_url": "https://github.com/hsoliwal",
+      "followers_url": "https://api.github.com/users/hsoliwal/followers",
+      "following_url": "https://api.github.com/users/hsoliwal/following{/other_user}",
+      "gists_url": "https://api.github.com/users/hsoliwal/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/hsoliwal/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/hsoliwal/subscriptions",
+      "organizations_url": "https://api.github.com/users/hsoliwal/orgs",
+      "repos_url": "https://api.github.com/users/hsoliwal/repos",
+      "events_url": "https://api.github.com/users/hsoliwal/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/hsoliwal/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "jobs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/37339506321/jobs",
+    "logs_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/37339506321/logs",
+    "check_suite_url": "https://api.github.com/repos/hsoliwal/com.synexia/check-suites/101137038970",
+    "artifacts_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/37339506321/artifacts",
+    "cancel_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/37339506321/cancel",
+    "rerun_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/37339506321/rerun",
+    "previous_attempt_url": null,
+    "workflow_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/workflows/373001433",
+    "head_commit": {
+      "id": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+      "tree_id": "3a7fd2a3e29202f3eef9d88fadbbc107b698e6fb",
+      "message": "Add recipe-driven M3 repairs and current Java/JNI evidence\n\nQualify the Cij/Cit and Cir task projects through actual recipe execution,\nretain failed trials and portable provenance, and publish the current\nprimitive collection and JNI correctness evidence. Preserve existing\nowners and repository contents. Full A3 receiving work continues in M3.",
+      "timestamp": "2026-10-05T16:15:35Z",
+      "author": {
+        "name": "Hitesh Soliwal",
+        "email": "hsoliwal@gmail.com"
+      },
+      "committer": {
+        "name": "Hitesh Soliwal",
+        "email": "hsoliwal@gmail.com"
+      }
+    },
+    "repository": {
+      "id": 1130929330,
+      "node_id": "R_kgDOQ2icsg",
+      "name": "com.synexia",
+      "full_name": "hsoliwal/com.synexia",
+      "private": true,
+      "owner": {
+        "login": "hsoliwal",
+        "id": 5656792,
+        "node_id": "MDQ6VXNlcjU2NTY3OTI=",
+        "avatar_url": "https://avatars.githubusercontent.com/u/5656792?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/hsoliwal",
+        "html_url": "https://github.com/hsoliwal",
+        "followers_url": "https://api.github.com/users/hsoliwal/followers",
+        "following_url": "https://api.github.com/users/hsoliwal/following{/other_user}",
+        "gists_url": "https://api.github.com/users/hsoliwal/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/hsoliwal/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/hsoliwal/subscriptions",
+        "organizations_url": "https://api.github.com/users/hsoliwal/orgs",
+        "repos_url": "https://api.github.com/users/hsoliwal/repos",
+        "events_url": "https://api.github.com/users/hsoliwal/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/hsoliwal/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "html_url": "https://github.com/hsoliwal/com.synexia",
+      "description": "bal-address-tool",
+      "fork": false,
+      "url": "https://api.github.com/repos/hsoliwal/com.synexia",
+      "forks_url": "https://api.github.com/repos/hsoliwal/com.synexia/forks",
+      "keys_url": "https://api.github.com/repos/hsoliwal/com.synexia/keys{/key_id}",
+      "collaborators_url": "https://api.github.com/repos/hsoliwal/com.synexia/collaborators{/collaborator}",
+      "teams_url": "https://api.github.com/repos/hsoliwal/com.synexia/teams",
+      "hooks_url": "https://api.github.com/repos/hsoliwal/com.synexia/hooks",
+      "issue_events_url": "https://api.github.com/repos/hsoliwal/com.synexia/issues/events{/number}",
+      "events_url": "https://api.github.com/repos/hsoliwal/com.synexia/events",
+      "assignees_url": "https://api.github.com/repos/hsoliwal/com.synexia/assignees{/user}",
+      "branches_url": "https://api.github.com/repos/hsoliwal/com.synexia/branches{/branch}",
+      "tags_url": "https://api.github.com/repos/hsoliwal/com.synexia/tags",
+      "blobs_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs{/sha}",
+      "git_tags_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/tags{/sha}",
+      "git_refs_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/refs{/sha}",
+      "trees_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees{/sha}",
+      "statuses_url": "https://api.github.com/repos/hsoliwal/com.synexia/statuses/{sha}",
+      "languages_url": "https://api.github.com/repos/hsoliwal/com.synexia/languages",
+      "stargazers_url": "https://api.github.com/repos/hsoliwal/com.synexia/stargazers",
+      "contributors_url": "https://api.github.com/repos/hsoliwal/com.synexia/contributors",
+      "subscribers_url": "https://api.github.com/repos/hsoliwal/com.synexia/subscribers",
+      "subscription_url": "https://api.github.com/repos/hsoliwal/com.synexia/subscription",
+      "commits_url": "https://api.github.com/repos/hsoliwal/com.synexia/commits{/sha}",
+      "git_commits_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/commits{/sha}",
+      "comments_url": "https://api.github.com/repos/hsoliwal/com.synexia/comments{/number}",
+      "issue_comment_url": "https://api.github.com/repos/hsoliwal/com.synexia/issues/comments{/number}",
+      "contents_url": "https://api.github.com/repos/hsoliwal/com.synexia/contents/{+path}",
+      "compare_url": "https://api.github.com/repos/hsoliwal/com.synexia/compare/{base}...{head}",
+      "merges_url": "https://api.github.com/repos/hsoliwal/com.synexia/merges",
+      "archive_url": "https://api.github.com/repos/hsoliwal/com.synexia/{archive_format}{/ref}",
+      "downloads_url": "https://api.github.com/repos/hsoliwal/com.synexia/downloads",
+      "issues_url": "https://api.github.com/repos/hsoliwal/com.synexia/issues{/number}",
+      "pulls_url": "https://api.github.com/repos/hsoliwal/com.synexia/pulls{/number}",
+      "milestones_url": "https://api.github.com/repos/hsoliwal/com.synexia/milestones{/number}",
+      "notifications_url": "https://api.github.com/repos/hsoliwal/com.synexia/notifications{?since,all,participating}",
+      "labels_url": "https://api.github.com/repos/hsoliwal/com.synexia/labels{/name}",
+      "releases_url": "https://api.github.com/repos/hsoliwal/com.synexia/releases{/id}",
+      "deployments_url": "https://api.github.com/repos/hsoliwal/com.synexia/deployments"
+    },
+    "head_repository": {
+      "id": 1130929330,
+      "node_id": "R_kgDOQ2icsg",
+      "name": "com.synexia",
+      "full_name": "hsoliwal/com.synexia",
+      "private": true,
+      "owner": {
+        "login": "hsoliwal",
+        "id": 5656792,
+        "node_id": "MDQ6VXNlcjU2NTY3OTI=",
+        "avatar_url": "https://avatars.githubusercontent.com/u/5656792?v=4",
+        "gravatar_id": "",
+        "url": "https://api.github.com/users/hsoliwal",
+        "html_url": "https://github.com/hsoliwal",
+        "followers_url": "https://api.github.com/users/hsoliwal/followers",
+        "following_url": "https://api.github.com/users/hsoliwal/following{/other_user}",
+        "gists_url": "https://api.github.com/users/hsoliwal/gists{/gist_id}",
+        "starred_url": "https://api.github.com/users/hsoliwal/starred{/owner}{/repo}",
+        "subscriptions_url": "https://api.github.com/users/hsoliwal/subscriptions",
+        "organizations_url": "https://api.github.com/users/hsoliwal/orgs",
+        "repos_url": "https://api.github.com/users/hsoliwal/repos",
+        "events_url": "https://api.github.com/users/hsoliwal/events{/privacy}",
+        "received_events_url": "https://api.github.com/users/hsoliwal/received_events",
+        "type": "User",
+        "user_view_type": "public",
+        "site_admin": false
+      },
+      "html_url": "https://github.com/hsoliwal/com.synexia",
+      "description": "bal-address-tool",
+      "fork": false,
+      "url": "https://api.github.com/repos/hsoliwal/com.synexia",
+      "forks_url": "https://api.github.com/repos/hsoliwal/com.synexia/forks",
+      "keys_url": "https://api.github.com/repos/hsoliwal/com.synexia/keys{/key_id}",
+      "collaborators_url": "https://api.github.com/repos/hsoliwal/com.synexia/collaborators{/collaborator}",
+      "teams_url": "https://api.github.com/repos/hsoliwal/com.synexia/teams",
+      "hooks_url": "https://api.github.com/repos/hsoliwal/com.synexia/hooks",
+      "issue_events_url": "https://api.github.com/repos/hsoliwal/com.synexia/issues/events{/number}",
+      "events_url": "https://api.github.com/repos/hsoliwal/com.synexia/events",
+      "assignees_url": "https://api.github.com/repos/hsoliwal/com.synexia/assignees{/user}",
+      "branches_url": "https://api.github.com/repos/hsoliwal/com.synexia/branches{/branch}",
+      "tags_url": "https://api.github.com/repos/hsoliwal/com.synexia/tags",
+      "blobs_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs{/sha}",
+      "git_tags_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/tags{/sha}",
+      "git_refs_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/refs{/sha}",
+      "trees_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees{/sha}",
+      "statuses_url": "https://api.github.com/repos/hsoliwal/com.synexia/statuses/{sha}",
+      "languages_url": "https://api.github.com/repos/hsoliwal/com.synexia/languages",
+      "stargazers_url": "https://api.github.com/repos/hsoliwal/com.synexia/stargazers",
+      "contributors_url": "https://api.github.com/repos/hsoliwal/com.synexia/contributors",
+      "subscribers_url": "https://api.github.com/repos/hsoliwal/com.synexia/subscribers",
+      "subscription_url": "https://api.github.com/repos/hsoliwal/com.synexia/subscription",
+      "commits_url": "https://api.github.com/repos/hsoliwal/com.synexia/commits{/sha}",
+      "git_commits_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/commits{/sha}",
+      "comments_url": "https://api.github.com/repos/hsoliwal/com.synexia/comments{/number}",
+      "issue_comment_url": "https://api.github.com/repos/hsoliwal/com.synexia/issues/comments{/number}",
+      "contents_url": "https://api.github.com/repos/hsoliwal/com.synexia/contents/{+path}",
+      "compare_url": "https://api.github.com/repos/hsoliwal/com.synexia/compare/{base}...{head}",
+      "merges_url": "https://api.github.com/repos/hsoliwal/com.synexia/merges",
+      "archive_url": "https://api.github.com/repos/hsoliwal/com.synexia/{archive_format}{/ref}",
+      "downloads_url": "https://api.github.com/repos/hsoliwal/com.synexia/downloads",
+      "issues_url": "https://api.github.com/repos/hsoliwal/com.synexia/issues{/number}",
+      "pulls_url": "https://api.github.com/repos/hsoliwal/com.synexia/pulls{/number}",
+      "milestones_url": "https://api.github.com/repos/hsoliwal/com.synexia/milestones{/number}",
+      "notifications_url": "https://api.github.com/repos/hsoliwal/com.synexia/notifications{?since,all,participating}",
+      "labels_url": "https://api.github.com/repos/hsoliwal/com.synexia/labels{/name}",
+      "releases_url": "https://api.github.com/repos/hsoliwal/com.synexia/releases{/id}",
+      "deployments_url": "https://api.github.com/repos/hsoliwal/com.synexia/deployments"
+    }
+  },
+  "scopeFailureJobLog": {
+    "content": [
+      {
+        "type": "text",
+        "text": "GitHub API error 404: ﻿<?xml version=\"1.0\" encoding=\"utf-8\"?><Error><Code>BlobNotFound</Code><Message>The specified blob does not exist.\nRequestId:52dd99e1-a01e-0028-60e6-54fa42000000\nTime:2026-10-05T16:28:28.2342561Z</Message></Error>"
+      }
+    ],
+    "structuredContent": {
+      "error": "GitHub API error 404: ﻿<?xml version=\"1.0\" encoding=\"utf-8\"?><Error><Code>BlobNotFound</Code><Message>The specified blob does not exist.\nRequestId:52dd99e1-a01e-0028-60e6-54fa42000000\nTime:2026-10-05T16:28:28.2342561Z</Message></Error>",
+      "error_code": "NOT_FOUND",
+      "error_data": {
+        "error_str": "GitHub API error 404: ﻿<?xml version=\"1.0\" encoding=\"utf-8\"?><Error><Code>BlobNotFound</Code><Message>The specified blob does not exist.\nRequestId:52dd99e1-a01e-0028-60e6-54fa42000000\nTime:2026-10-05T16:28:28.2342561Z</Message></Error>"
+      }
+    },
+    "isError": true
+  },
+  "checkRunRead": {
+    "content": [
+      {
+        "type": "text",
+        "text": "HTTPError: 400: GitHub Fetch URL is not an allowed public GitHub repository or search endpoint. (Response: None)"
+      }
+    ],
+    "structuredContent": {
+      "error": "HTTPError: 400: GitHub Fetch URL is not an allowed public GitHub repository or search endpoint. (Response: None)",
+      "error_code": "INVALID_ARGUMENT"
+    },
+    "isError": true
+  },
+  "conclusions": {
+    "allRemoteChecksPassed": false,
+    "failureCauseEstablished": false,
+    "usableFailingStepLogsAvailable": false,
+    "localProofResultsUnchanged": true,
+    "candidateCodeExecutedByInspection": false
+  },
+  "boundary": "This is an observed remote CI snapshot at the named source head. It does not infer a code, account, billing or runner cause and does not substitute for local or remote qualification."
+}

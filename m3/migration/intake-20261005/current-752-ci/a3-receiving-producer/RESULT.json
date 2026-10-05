@@ -1,0 +1,112 @@
+{
+  "canonicalOfflineSourceClosure": false,
+  "canonicalProductionApplied": false,
+  "compiledArtifacts": {
+    "bytes": 5507,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/build-artifacts.json",
+    "sha256": "1c72b221a04b142896a14b83be5db0fb97b455e6d2146a65616377eefd138204"
+  },
+  "consumerQualified": false,
+  "crossFamilyAtomicity": false,
+  "failure": null,
+  "inputManifestSHA256": "88e63d70c0a92dace5e924fde82201a76b1002c25ace6d8fd6241f246e2728a4",
+  "junit": {
+    "counts": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 6
+    },
+    "methods": [
+      "allMixedStates",
+      "catalogueCompilationAndRuntime",
+      "exactRepairScope",
+      "initialRefusals",
+      "namedRecipeReplay",
+      "postScanDrift"
+    ],
+    "report": {
+      "bytes": 17586,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/target/surefire-reports/TEST-com.synexia.rewrite.CiaRecipeTest.xml",
+      "sha256": "e7fef1c96a01d2dd642e8f4adfa30839f2e2156d03c91e6847f9bb460a47a2ed"
+    },
+    "suite": "com.synexia.rewrite.CiaRecipeTest"
+  },
+  "patchSHA256": "65f849b3f72754ec74d985bf8b3d351f9cbdcd0d1e1997965a5c8e5718a0757a",
+  "receipts": [
+    {
+      "bytes": 1805,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/chain/01-static.json",
+      "sha256": "dd2168c8675e6c95fee183e42192cc3a8bd28a9c14862aa3f0aa56effef7e34c"
+    },
+    {
+      "bytes": 2398,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/chain/02-compile.json",
+      "sha256": "874114c7bd4268b66a63246f10db3eeb0d0379c251cc1641cc10e211d2a4d51e"
+    },
+    {
+      "bytes": 2714,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/chain/03-tests.json",
+      "sha256": "3121ea3525a4404186106387290b58be3af0865627b3e42ef659da9f8c0cd43b"
+    },
+    {
+      "bytes": 11954,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/chain/04-runtime.json",
+      "sha256": "02767d80e4b7c8485472a0efe726d8f909d083e32a446fd016f04237561063a6"
+    }
+  ],
+  "runtime": {
+    "canonicalProductionApplied": false,
+    "crossFamilyAtomicity": false,
+    "files": [
+      {
+        "bytes": 10008,
+        "path": "m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+        "sha256": "0de471de5a54e1c87153e4b1c23c4013a800f07595cfc05eec7bd4e68f1345d6"
+      },
+      {
+        "bytes": 4466,
+        "path": "m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+        "sha256": "8922e21e4f814dc99282cf1828786a0347552454003e23ac2fa91aa8710851b1"
+      },
+      {
+        "bytes": 3522,
+        "path": "m3/tooling/migration-recipes/pom.xml",
+        "sha256": "a53bdeee8afe28b90cb0e348e718b70610a9487edb1b75b46e09bfb76e0f3dc9"
+      },
+      {
+        "bytes": 2338,
+        "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java",
+        "sha256": "521a7f07e59f507e0ce3193a3d0c7540c232a37c74128d954b52670677498241"
+      },
+      {
+        "bytes": 10008,
+        "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java",
+        "sha256": "0de471de5a54e1c87153e4b1c23c4013a800f07595cfc05eec7bd4e68f1345d6"
+      },
+      {
+        "bytes": 4466,
+        "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java",
+        "sha256": "8922e21e4f814dc99282cf1828786a0347552454003e23ac2fa91aa8710851b1"
+      }
+    ],
+    "marker": "CIA_VERIFIED targets=6 mixedStates=64 initialRefusals=26 postScanRefusals=12 outputSeal=1aeb7260771ad433bfc24cfc37777324ce8898395ce044309fe02ea6986e02f4",
+    "output": {
+      "bytes": 1520,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/generated-candidate/OUTPUT.json",
+      "sha256": "90ed9bd9129dc8f99f913fd09be34d535aefb5a9a2169827e8cfaebdad368479"
+    },
+    "outputSeal": "1aeb7260771ad433bfc24cfc37777324ce8898395ce044309fe02ea6986e02f4",
+    "patch": {
+      "bytes": 10488,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/generated-candidate/candidate.patch",
+      "sha256": "52f34060ef1f8f8f01dbe3e0f73f1e9a85a9815817a47ab107e20ee6afd27d1d"
+    },
+    "strictCanonicalAdmission": false
+  },
+  "schema": "synexia.cia-752.proof-result/1",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "status": "PASS_FOCUSED_PRODUCER",
+  "strictCanonicalAdmission": false,
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2"
+}

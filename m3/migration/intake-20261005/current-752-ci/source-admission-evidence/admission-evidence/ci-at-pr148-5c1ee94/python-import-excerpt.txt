@@ -1,0 +1,12 @@
+--- job-111763396934.log: lines 560-570 (original timestamp/ANSI text retained) ---
+2026-10-05T12:34:06.6074137Z ERROR: test_compatibility_policy (unittest.loader._FailedTest)
+2026-10-05T12:34:06.6074573Z ----------------------------------------------------------------------
+2026-10-05T12:34:06.6075022Z ImportError: Failed to import test module: test_compatibility_policy
+2026-10-05T12:34:06.6075669Z Traceback (most recent call last):
+2026-10-05T12:34:06.6076227Z   File "/usr/lib/python3.10/unittest/loader.py", line 436, in _find_test_path
+2026-10-05T12:34:06.6076642Z     module = self._get_module_from_name(name)
+2026-10-05T12:34:06.6077052Z   File "/usr/lib/python3.10/unittest/loader.py", line 377, in _get_module_from_name
+2026-10-05T12:34:06.6077458Z     __import__(name)
+2026-10-05T12:34:06.6077943Z   File "/home/runner/work/_temp/repo/m3/backports/test_compatibility_policy.py", line 9, in <module>
+2026-10-05T12:34:06.6078445Z     import compatibility_policy
+2026-10-05T12:34:06.6078771Z ValueError: source code string cannot contain null bytes

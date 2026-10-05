@@ -1,0 +1,34 @@
+{
+  "compiledBinaries": "hash-only per existing package owner",
+  "includePaths": [
+    "acquisition",
+    "recipe",
+    "review",
+    "PREPARED.json",
+    "READINESS.json",
+    "publication-metadata",
+    "package-plan.json"
+  ],
+  "laneSelection": {
+    "additional": [],
+    "allowNotExecuted": [],
+    "includeAllExisting": false,
+    "required": [
+      "current-v1"
+    ]
+  },
+  "partProfile": {
+    "maximumPartBytes": 2097152,
+    "ownerSHA256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574",
+    "profileSHA256": "9bde181c72dd0372a55104ee9dfabc7173351c8734f8b9b778060589e2a5a3e6",
+    "singleArchiveFirst": true
+  },
+  "proofGatesExecutedByPackaging": false,
+  "resultSHA256": "1e82bec642c8ea8ece15e8caeeed283416c1b612e22c357b20178524b6ab1605",
+  "schema": "synexia.evidence.package-plan/1",
+  "scope": "Fresh current9963 native proof only; old trials immutable",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "sourceTree": "6c055c584ebb5fa177420d1668db73bcb7e7fef4",
+  "status": "FINAL_REVIEWED_SELECTION",
+  "toolInstallations": "external manifest-only; exact current rehash recorded"
+}

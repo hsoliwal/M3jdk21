@@ -1,0 +1,16 @@
+{
+  "schema": "synexia.ci-752.preflight-refusal/1",
+  "proof": "evidence/producer-v1",
+  "observedExitCode": 2,
+  "observedMessage": "Refusal: sealed input inventory is not unique/sorted",
+  "inputRows": 1331,
+  "uniqueRows": 1331,
+  "firstMismatchIndex": 122,
+  "cause": "Path object sorting compares components; verifier validates serialized path string order.",
+  "correction": "Change writer to sorted(sealed,key=str) while retaining duplicate and order validation.",
+  "gatesExecuted": false,
+  "chainCreated": false,
+  "sourceOrFixtureChanged": false,
+  "replacementAuthoring": "producer-authoring-v2",
+  "priorPreparedPatchSHA256": "e8cf492bbfc1d35ba39aa59e358f2e139ea393aa47bc1e12dbe133e4bda01b5a"
+}

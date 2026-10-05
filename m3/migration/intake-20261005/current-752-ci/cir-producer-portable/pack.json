@@ -1,0 +1,34 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/acquisition/package_evidence.py",
+    "pack",
+    "--root",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs",
+    "--plan",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-package-plan.json",
+    "--output",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cir/evidence-bundle"
+  ],
+  "cwd": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005",
+  "endedAt": "2026-10-05T15:54:05.954342+00:00",
+  "exitCode": 0,
+  "helper": {
+    "bytes": 33814,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/acquisition/package_evidence.py",
+    "sha256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574"
+  },
+  "operation": "pack",
+  "proofGatesExecuted": false,
+  "startedAt": "2026-10-05T15:54:05.178010+00:00",
+  "stderr": {
+    "bytes": 0,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cir/pack.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 651,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cir/pack.stdout.log",
+    "sha256": "cc3b73cf8616c991d1fe8dd757a630f228cc3e8294fb4b81cf88e7a47b80b8de"
+  }
+}

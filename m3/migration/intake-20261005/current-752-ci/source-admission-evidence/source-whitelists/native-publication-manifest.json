@@ -1,0 +1,234 @@
+{
+  "bundleSHA256": "d3a09e407eeb5e352e00ff7167ddb73737a2c488c16e4d382491defa4d706b42",
+  "bytes": 2275689,
+  "fileCount": 24,
+  "files": [
+    {
+      "bytes": 1972,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/FINAL-AUDIT.json",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/FINAL-AUDIT.json",
+      "sha": "1e30229b78c6b5bbafa37dbdede99ac2871dffb6",
+      "sha256": "5c646be616f481b835bcf65607408f1573bd589716d1ea98cbf56f4616298e33",
+      "type": "blob"
+    },
+    {
+      "bytes": 5351,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/FINAL_REPORT.md",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/FINAL_REPORT.md",
+      "sha": "937a87a1bc218d46ffd57b231ec35e43ea753e10",
+      "sha256": "3b1a9bd70bdcddcea04d27f63e99c3bb051a623e5cdabff3ccd081fc7515cb62",
+      "type": "blob"
+    },
+    {
+      "bytes": 3167,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/INDEPENDENT-READBACK.json",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/INDEPENDENT-READBACK.json",
+      "sha": "948f631ded6a210e65356fa131a832584fbd6c9c",
+      "sha256": "70038d936c62c8dfed73a60059b08104c5326f460ddc36e63d9e4249dc24bbda",
+      "type": "blob"
+    },
+    {
+      "bytes": 1719,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/OUTPUT_CONTRACT.tsv",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/OUTPUT_CONTRACT.tsv",
+      "sha": "6ad5a4d3e65acbfb5f5909b14dd00f080786e238",
+      "sha256": "0ea2600bfc6703aa2449f8fbc3fe7c650eba1c5d2969cc0074d6ba83d43e331a",
+      "type": "blob"
+    },
+    {
+      "bytes": 5773,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/PREPARED.json",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/PREPARED.json",
+      "sha": "462e5ba10bad01494d8db04f6d15672f1340fb20",
+      "sha256": "1d23b6f673f7ee717af18a9e9284808505d6e2956a610f8a30e30101c462a841",
+      "type": "blob"
+    },
+    {
+      "bytes": 2238,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/PROVENANCE.tsv",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/PROVENANCE.tsv",
+      "sha": "12b6a06108c8642a363bfaee6f43f5e70d4f9c6a",
+      "sha256": "8eae2d464bc16b566957aff8cc0fb62f02dcada2250a8b51a493de0514966bfb",
+      "type": "blob"
+    },
+    {
+      "bytes": 1499,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/README.md",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/README.md",
+      "sha": "59d2b1cd8f93498dba5c762827575837cb147c8c",
+      "sha256": "f59fe0e255ea492379e8a2b1e4cb1b731dcf5bdc46e889da6bc0706b9aa23f51",
+      "type": "blob"
+    },
+    {
+      "bytes": 3750,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/RESULT.json",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/RESULT.json",
+      "sha": "1e0a22b15712c4c8cc9ee8524fc3721f1921a49d",
+      "sha256": "1e82bec642c8ea8ece15e8caeeed283416c1b612e22c357b20178524b6ab1605",
+      "type": "blob"
+    },
+    {
+      "bytes": 1718,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/RUN_CONTEXT.tsv",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/RUN_CONTEXT.tsv",
+      "sha": "478f082136a72dc9e99e9f53f99d7eebd93e044d",
+      "sha256": "06c850533eb5b9efc5da380835e47b4f6d797bb73a3b5cc5552f09c3b6bd87c2",
+      "type": "blob"
+    },
+    {
+      "bytes": 1532,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/STATUS.tsv",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/STATUS.tsv",
+      "sha": "82b14ae8e2701928091d688e0effba8017b7fd95",
+      "sha256": "24d8a3a37645fe63c13aad8177c1333abcbd80dd176f69eea4a6d383e021da56",
+      "type": "blob"
+    },
+    {
+      "bytes": 1295,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/VERIFY_CONTRACT.tsv",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/VERIFY_CONTRACT.tsv",
+      "sha": "3014a8ad74a58713b702496ab1813f756d9ee179",
+      "sha256": "8a94b7c0d1829129bc5a35853fea4844ad99f2ca5c9b391c13ef14b4e69585f7",
+      "type": "blob"
+    },
+    {
+      "bytes": 6919,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/BUNDLE.json",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/BUNDLE.json",
+      "sha": "69945db1835a4aa69c6a4dcd0bdbe84a5862fb30",
+      "sha256": "d3a09e407eeb5e352e00ff7167ddb73737a2c488c16e4d382491defa4d706b42",
+      "type": "blob"
+    },
+    {
+      "bytes": 4652,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/LANES.json",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/LANES.json",
+      "sha": "827dedfdd74f0d4667d4d48b3405fb3d4b9c15b1",
+      "sha256": "87661dd6b9c47695e67b34a8f806ae2705e3972b8d5a63272bd092cd54ea4ade",
+      "type": "blob"
+    },
+    {
+      "bytes": 1432,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/PACKAGE.json",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/PACKAGE.json",
+      "sha": "16ddccc11c8cd7a2b535d2995c81010025718437",
+      "sha256": "c1c777a4facbbf4c5b842a3cd62326993ca7859d1ef67c6861bf5ae06e80f6c7",
+      "type": "blob"
+    },
+    {
+      "bytes": 35870,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/PATHS-0001.tsv",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/PATHS-0001.tsv",
+      "sha": "fe2ac83c7308d7cddd7265f2960fc88a56f0bff7",
+      "sha256": "59d32402560ecb152e0fbc87475a6ce59784b25833cc33f881268e081118761a",
+      "type": "blob"
+    },
+    {
+      "bytes": 2425,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/README.md",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/README.md",
+      "sha": "df6218007f5b4f2f1762d5911ea9b78ac742e5fb",
+      "sha256": "2bc32d89eeff69ac9200abed775bdcd5bd346fe818f12f845dc97a845a214853",
+      "type": "blob"
+    },
+    {
+      "bytes": 1595,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/VERIFY-COMMAND.json",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/VERIFY-COMMAND.json",
+      "sha": "7fe61878919de821529d44be9d12ac28dade5893",
+      "sha256": "fa34bfb0420e30c36b262a20474bf17805ef589dc687a689976f2de7fbe6600e",
+      "type": "blob"
+    },
+    {
+      "bytes": 770,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/VERIFY.json",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/VERIFY.json",
+      "sha": "970f45ed467e08703d372b31779cb8e19a47569a",
+      "sha256": "14e7d9bbf54ae124f9f96e459244431ab3092036e48e282451cfb02e6f62f585",
+      "type": "blob"
+    },
+    {
+      "bytes": 1943079,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/part-0001.tar.gz",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/part-0001.tar.gz",
+      "sha": "52223662629ceae0cda6456665619b02a9d8c5a0",
+      "sha256": "39da8febc4cb5b66776b9655db3ac19d30e78c7ada2edb2238ccbebdb3ec7c8e",
+      "type": "blob"
+    },
+    {
+      "bytes": 198304,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/part-0002.tar.gz",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/part-0002.tar.gz",
+      "sha": "7389f784c5f2cc6dec5a04b819dd44b3d69bb6f0",
+      "sha256": "76129776495671c7f33932595e4dc0014df10b3dfaa886d938af97e05370da0e",
+      "type": "blob"
+    },
+    {
+      "bytes": 753,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-tools/native_bundle.py",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-tools/native_bundle.py",
+      "sha": "80cc4a281e61dd90bf64b0946069bb3745ba830c",
+      "sha256": "9bde181c72dd0372a55104ee9dfabc7173351c8734f8b9b778060589e2a5a3e6",
+      "type": "blob"
+    },
+    {
+      "bytes": 33814,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-tools/package_evidence.py",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-tools/package_evidence.py",
+      "sha": "1dbaa1ecf032b0f5d94a4e34aafee3f0cc88f0a0",
+      "sha256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574",
+      "type": "blob"
+    },
+    {
+      "bytes": 14925,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-tools/readback_native.py",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-tools/readback_native.py",
+      "sha": "0a18704512e7a8c406f92cc51f92adf855a44c35",
+      "sha256": "52e46492bd3ebadff1aea7981ae55b21c82d0c1523e4e067a2d8fc97618bd1e3",
+      "type": "blob"
+    },
+    {
+      "bytes": 1137,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/package-plan.json",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/package-plan.json",
+      "sha": "b069625059c259c8aa552bd09e9b5972a935679f",
+      "sha256": "9bc72208f52d917857223bccd8f9b9ef5c3cce931515331d7c3d0b48b4cba68a",
+      "type": "blob"
+    }
+  ],
+  "gitHubPublished": false,
+  "independentReadbackSHA256": "70038d936c62c8dfed73a60059b08104c5326f460ddc36e63d9e4249dc24bbda",
+  "localRoot": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia",
+  "prefix": "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1",
+  "productionSourceChanges": 0,
+  "proofGatesExecutedByPackaging": false,
+  "resultSHA256": "1e82bec642c8ea8ece15e8caeeed283416c1b612e22c357b20178524b6ab1605",
+  "schema": "synexia.native-proof-publication/1",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "sourceTree": "6c055c584ebb5fa177420d1668db73bcb7e7fef4",
+  "status": "READY_FOR_SOURCE_PUBLICATION_REVIEW"
+}

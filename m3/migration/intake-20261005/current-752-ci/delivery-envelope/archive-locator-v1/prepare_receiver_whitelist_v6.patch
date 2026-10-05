@@ -1,0 +1,65 @@
+--- prepare_receiver_whitelist_v5.py
++++ prepare_receiver_whitelist_v6.py
+@@ -211,16 +211,60 @@
+                 file, 'provenance-addition')
+     for name in ('PACK-COMMAND.json', 'pack.stdout.log', 'pack.stderr.log', 'VERIFY-COMMAND.json', 'verify.stdout.log', 'verify.stderr.log'):
+         add(TASK + '/consumer-portable/' + name, package / name, 'provenance-addition')
+-    for name in ('COPY-CUSTODY.json', 'package-plan.json', 'package_evidence_state_v2.py', 'state-reader.patch', 'STATE-READER.json', 'reference-scope.patch', 'REFERENCE-SCOPE.json', 'prepare_consumer_package_v7.py'):
++    for name in ('package-plan.json', 'package_evidence_state_v2.py', 'state-reader.patch', 'STATE-READER.json', 'reference-scope.patch', 'REFERENCE-SCOPE.json', 'prepare_consumer_package_v7.py'):
+         add(TASK + '/consumer-portable/' + name, package / 'staged' / name, 'provenance-addition')
+     for file in sorted((package / 'staged/openjdk-752-attribution').rglob('*')):
+         if file.is_file():
+             add(TASK + '/consumer-portable/openjdk-752-attribution/' + file.relative_to(package / 'staged/openjdk-752-attribution').as_posix(), file, 'provenance-addition')
+     for name in ('RESULT.json', 'PATCH.json', 'lint-report.json', 'compile-report.json', 'test-report.json', 'runtime-report.json'):
+         add(TASK + '/consumer-portable/final/' + name, proof / name, 'provenance-addition')
+-    add(TASK + '/consumer-portable/prepare_receiver_whitelist_v5.py', Path(__file__), 'provenance-addition')
++    add(TASK + '/consumer-portable/prepare_receiver_whitelist_v5.py', Path(__file__).with_name('prepare_receiver_whitelist_v5.py'), 'provenance-addition')
++    # Publication-only representation: retain the full local custody admission above.
++    # Replace only its redundant loose publication row with an exact archive locator.
++    locator_path = R / 'publication-extra/custody-archive-locator-v1/COPY-CUSTODY.ARCHIVE.json'
++    require(sha(locator_path.read_bytes()) == '29e58bf8cae108b38b36fa5c370dc2db5e370edd4f2131a728456f885f1d8b97', 'exact reviewed archive locator')
++    locator = load(locator_path)
++    raw = (package / 'staged/COPY-CUSTODY.json').read_bytes()
++    require(locator['schema'] == 'm3.consumer-evidence.archive-locator/1'
++            and locator['logicalPath'] == 'COPY-CUSTODY.json'
++            and locator['sha256'] == sha(raw) and locator['bytes'] == len(raw)
++            and locator['gitBlob'] == hashlib.sha1(b'blob ' + str(len(raw)).encode() + b'\0' + raw).hexdigest()
++            and locator['mode'] == '100644', 'exact original logical custody identity')
++    require(locator['bundle']['sha256'] == bundle_sha
++            and locator['bundle']['bytes'] == bundle_path.stat().st_size
++            and locator['extractor']['sha256'] == sha(packager.read_bytes()), 'unchanged archive and extractor')
++    evidence_path = R.parent / 'publication/custody-archive-contingency-v1/COPY_CUSTODY_ARCHIVE_RECORD.json'
++    require(sha(evidence_path.read_bytes()) == locator['archiveInspection']['sha256'], 'archive reconstruction record seal')
++    record = load(evidence_path)
++    require(locator['archivedFileRecord'] == record['custodyRow']
++            and locator['chunkSequence'] == record['chunkSequence']
++            and locator['metadataShard'] == record['metadataShard']
++            and locator['metadataArchivePart'] == record['metadataArchivePart']
++            and record['completedNarrowReadOnlyInspection']['reconstructedBytesEqualLooseBytes'] is True,
++            'reviewed exact archived file and all ordered chunks')
++    add(TASK + '/consumer-portable/COPY-CUSTODY.ARCHIVE.json', locator_path, 'provenance-addition')
++    for entry in locator['transportRefusals']:
++        file = R.parent / 'publication' / Path(entry['path']).name
++        require(sha(file.read_bytes()) == entry['sha256'] and file.stat().st_size == entry['bytes'], 'original connector refusal')
++        add(TASK + '/consumer-portable/' + entry['path'], file, 'provenance-addition')
++    prior_path = R / 'publication-extra/receiver-whitelist-v5.json'
++    require(sha(prior_path.read_bytes()) == 'bc12bfabf9325064b6566c3b97af92c57870a0f52f0290c6e6f52f7b5b70346b', 'frozen original 610-row selection')
++    prior = load(prior_path)
++    prior_rows = {entry['path']: entry for entry in prior['files']}
++    removed = TASK + '/consumer-portable/COPY-CUSTODY.json'
++    added = {TASK + '/consumer-portable/COPY-CUSTODY.ARCHIVE.json'} | {
++        TASK + '/consumer-portable/' + entry['path'] for entry in locator['transportRefusals']}
++    require(len(prior_rows) == 610 and len(rows) == 612 and len(added) == 3
++            and set(rows) == (set(prior_rows) - {removed}) | added, 'exact one-remove three-add publication delta')
++    require(all(rows[path] == entry for path, entry in prior_rows.items() if path != removed),
++            'all other 609 physical entries remain exactly unchanged')
++    require(sorted(qualified) == prior['qualifiedPaths'] and len(qualified) == 221,
++            'all qualified target and task paths unchanged')
+     write(args.output, {
+         'schema': 'm3.current-receiver-publication-whitelist/1',
++        'previousSelectionSHA256': sha(prior_path.read_bytes()),
++        'physicalRepresentationDelta': {'removed': [removed], 'added': sorted(added), 'unchangedEntries': 609,
++            'logicalCustodyRetainedInArchive': True, 'archiveLocatorSHA256': sha(locator_path.read_bytes())},
+         'state': 'EXACT_QUALIFIED_CONTEXT_AND_SEPARATE_PROVENANCE',
+         'consumerResultSHA256': args.result_sha, 'consumerManifestSHA256': MANIFEST_SHA,
+         'sourceDeliveryCoverageSHA256': args.coverage_sha,

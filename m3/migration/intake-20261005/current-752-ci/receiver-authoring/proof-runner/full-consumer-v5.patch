@@ -1,0 +1,67 @@
+--- full-consumer-v4.py
++++ full-consumer-v5.py
+@@ -1,5 +1,5 @@
+ #!/usr/bin/env python3
+-"""Current migration-recipes, A3 and Python consumers after nineteen actual outputs."""
++"""Current migration-recipes, A3 and Python consumers after twenty-four actual outputs."""
+ import argparse
+ import ast
+ from datetime import datetime, timezone
+@@ -42,6 +42,16 @@
+     JAVA_MODULE + '/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after',
+     JAVA_MODULE + '/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv',
+ }
++JCC_CRATE = JAVA_MODULE + '/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005'
++ADDED_TARGETS = {
++    'm3/migration/test/test_jcc_handoff_current_context.py',
++    JCC_CRATE + '/plan-intake-752-ci.json',
++    JCC_CRATE + '/pom-before-752.xml',
++}
++TARGETS |= ADDED_TARGETS | {
++    'm3/migration/test/test_jcc_handoff_packet.py',
++    'm3/migration/test/test_jcc_handoff_context_profiles.py',
++}
+ SOURCE = {'commit': '9963cc08ff13922b92a0e3db7c30f56fddacba7d',
+           'tree': '6c055c584ebb5fa177420d1668db73bcb7e7fef4'}
+ RECEIVING = {'commit': '752191c9291f6467110fb8a7badfbdc4c2d41af2',
+@@ -135,7 +145,9 @@
+         require(not any(item['path'] == p or item['path'].startswith(p + '/') for p in OUTPUT_ROOTS),
+                 'source context must not contain prior consumer build outputs')
+     outputs = manifest['producerOutputs']
+-    require(len(outputs) == 19 and {r['path'] for r in outputs} == TARGETS, 'nineteen exact producer targets')
++    require(len(outputs) == 24 and {r['path'] for r in outputs} == TARGETS, 'twenty-four exact producer targets')
++    require(manifest['provenance']['addedTargetPaths'] == sorted(ADDED_TARGETS), 'three exact ABSENT-before additions')
++    require(manifest['provenance']['outputOperations'] == {path: 'ADD' if path in ADDED_TARGETS else 'REPLACE' for path in TARGETS}, 'closed target operation declarations')
+     external = manifest['externalInputs']
+     require(external and len({r['path'] for r in external}) == len(external), 'distinct external provenance inputs')
+     external_by_path = {r['path']: r for r in external}
+@@ -199,7 +211,7 @@
+     sets = {name: inventory(proof / name) for name in ('source', 'authority', 'harness')}
+     write(proof / 'sets.json', sets)
+     write(proof / 'PATCH.json', {'state': 'SEALED_BEFORE_LINT', 'source': SOURCE, 'receiving': RECEIVING,
+-          'publicationHead': manifest['publicationHead'], 'actualProducerTargets': 19,
++          'publicationHead': manifest['publicationHead'], 'actualProducerTargets': 24,
+           'manifestSHA256': digest((proof / 'authority/manifest.json').read_bytes()),
+           'ownerCommandsSHA256': digest((proof / 'owner-commands.json').read_bytes()), 'gatesRun': False})
+     inputs = [row(proof / name / item['path']) for name, entries in sets.items() for item in entries]
+@@ -281,9 +293,9 @@
+     backports = method_names(sorted((work / BACKPORTS).glob('test_*.py')))
+     migration = method_names(sorted((work / 'm3/migration/test').glob('test_*.py')))
+     union = method_names(sorted((work / HOST / 'test').glob('test_*.py')))
+-    require(len(migration) == 102 and len(union) == 6, 'retained host discovery owner changed')
++    require(len(migration) == 109 and len(union) == 6, 'retained host discovery owner changed')
+     write(proof / 'lint-report.json', {'pythonSources': [p.relative_to(work).as_posix() for p in paths],
+-          'backportsMethods': backports, 'hostMethods': sorted(migration + union), 'hostCounts': [102, 6],
++          'backportsMethods': backports, 'hostMethods': sorted(migration + union), 'hostCounts': [109, 6],
+           'javaTestSourceFiles': {module: [p.relative_to(work).as_posix()
+                                          for p in sorted((work / module / 'src/test/java').rglob('*.java'))]
+                                   for module in JAVA_MODULES}})
+@@ -361,7 +373,7 @@
+     backports, backport_counts = observed_tests(*run(proof, config, 'backports-clean-verify'))
+     require(backports == lint_report['backportsMethods'] and backport_counts == [len(backports)], 'full backports discovery mismatch')
+     host, host_counts = observed_tests(*run(proof, config, 'host-test'))
+-    require(host == lint_report['hostMethods'] and host_counts == [102, 6], 'full retained host discovery mismatch')
++    require(host == lint_report['hostMethods'] and host_counts == [109, 6], 'full retained host discovery mismatch')
+     for path in ('target/jacoco.exec', 'target/site/jacoco/jacoco.xml', 'target/site/jacoco/index.html'):
+         require((proof / 'work' / JAVA_MODULE / path).is_file(), 'coverage output absent: ' + path)
+     write(proof / 'test-report.json', {'javaTests': sum(s['tests'] for s in suites), 'javaSuites': suites,

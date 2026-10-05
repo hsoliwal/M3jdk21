@@ -1,0 +1,90 @@
+diff --git a/.github/workflows/m3-foundation.yml b/.github/workflows/m3-foundation.yml
+index 6ad9af4..97a4912 100644
+--- a/.github/workflows/m3-foundation.yml
++++ b/.github/workflows/m3-foundation.yml
+@@ -34,7 +34,14 @@ com.synexia.rewrite.CiRecipeTest$1
+           trap - EXIT
+           python3 m3/runtime-integration/char-array-copy/recipe/apply.py --check
+       - name: Verify OpenRewrite convergence DAG
+-        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
++        shell: bash
++        run: |
++          export JAVA_HOME="${M3_JDK:?Pinned JDK missing}"
++          export PATH="$JAVA_HOME/bin:$PATH"
++          java -version
++          javac -version
++          mvn -version
++          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
+       - name: Build and exercise immutable foundation
+         run: ./m3/build.sh
+       - name: Compare pinned Synexia content and range contract
+diff --git a/m3/backports/compatibility_policy.py b/m3/backports/compatibility_policy.py
+index b1e16c1..89673d6 100644
+--- a/m3/backports/compatibility_policy.py
++++ b/m3/backports/compatibility_policy.py
+Binary files differ
+diff --git a/m3/backports/test_compatibility_policy.py b/m3/backports/test_compatibility_policy.py
+index 4047196..e5b3206 100644
+--- a/m3/backports/test_compatibility_policy.py
++++ b/m3/backports/test_compatibility_policy.py
+@@ -139,6 +139,34 @@ com.synexia.rewrite.CiRecipeTest$1
+             _load_rows([row])
+ 
+ 
++    def test_nul_tokens_are_rejected_but_literal_escape_text_is_preserved(self) -> None:
++        original = _row(
++            jep="458",
++            release="22",
++            classification="COMPATIBLE_TOOLING",
++            default_java21="OPT_IN",
++        )
++        fields = (
++            "title", "classification", "default_java21",
++            "owner_lane", "evidence_url", "note",
++        )
++        for field in fields:
++            value = original[field]
++            for position in (0, len(value) // 2, len(value)):
++                with self.subTest(field=field, position=position):
++                    row = dict(original)
++                    row[field] = value[:position] + "\x00" + value[position:]
++                    with self.assertRaisesRegex(ValueError, f"^invalid {field}$"):
++                        _load_rows([row])
++
++        for field in ("title", "note"):
++            with self.subTest(literal_escape_field=field):
++                row = dict(original)
++                row[field] = r"literal \x00 text"
++                entries = _load_rows([row])
++                self.assertEqual(row[field], getattr(entries[0], field))
++
++
+ def _row(
+     *,
+     jep: str,
+diff --git a/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java b/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java
+index 63344ac..e349a7c 100644
+--- a/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java
++++ b/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java
+@@ -94,7 +94,7 @@ com.synexia.rewrite.CiRecipeTest$1
+                             output.put(
+                                     after.getSourcePath()
+                                             .toString()
+-                                            .replace('\', '/'),
++                                            .replace('\\', '/'),
+                                     after.printAll());
+                         });
+         return output;
+diff --git a/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java b/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java
+index c186560..8e7d6c7 100644
+--- a/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java
++++ b/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java
+@@ -97,7 +97,7 @@ com.synexia.rewrite.CiRecipeTest$1
+                             output.put(
+                                     after.getSourcePath()
+                                             .toString()
+-                                            .replace('\', '/'),
++                                            .replace('\\', '/'),
+                                     after.printAll());
+                         });
+         return output;

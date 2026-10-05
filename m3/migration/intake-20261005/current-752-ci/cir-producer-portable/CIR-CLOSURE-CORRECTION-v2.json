@@ -1,0 +1,16 @@
+{
+  "schema": "synexia.cir-752.closure-correction/1",
+  "priorProof": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1",
+  "priorResultSHA256": "8e075767061e6958163d2ba84e9b96051b5ba2e844bd40770290cb219fbb86ef",
+  "reason": "Actual compiler reports eight missing symbols for existing package-private shared eligibility owner; no repair target defect established.",
+  "addition": {
+    "path": "com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+    "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v1/source/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+    "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
+    "bytes": 7151
+  },
+  "targetImagesChanged": false,
+  "testAssertionsChanged": false,
+  "warningsRelaxed": false,
+  "priorProofChanged": false
+}

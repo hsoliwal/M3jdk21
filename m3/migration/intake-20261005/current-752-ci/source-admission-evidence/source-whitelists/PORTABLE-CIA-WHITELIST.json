@@ -1,0 +1,256 @@
+{
+  "schema": "synexia.cia-752.portable-publication-whitelist/1",
+  "status": "EXACT_PORTABLE_EVIDENCE_READY",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+  "producerResultSHA256": "c0f132f91f9c024d15030bd4d0acf63f287e8e38f2d5a51f1b7ba55c36490684",
+  "bundleIndexSHA256": "c36ef995a9ba9ef7c72be3c403a14ea580f6886df15a5e553e7d9ca525b6f3f5",
+  "publicationPrefix": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/",
+  "files": [
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/CIA-AUTHORED.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/CIA-AUTHORED.json",
+      "mode": "100644",
+      "gitBlob": "5deb24f6b3e69abcffde8f38363c1086eba625ac",
+      "sha256": "33df01fd87e1ae74e5265a4259714f9b18a210f55fd94e8ee59a8721949518fa",
+      "bytes": 5730,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/OUTPUT.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/OUTPUT.json",
+      "mode": "100644",
+      "gitBlob": "6942a185a85544755a807d650676af414fc6b88d",
+      "sha256": "90ed9bd9129dc8f99f913fd09be34d535aefb5a9a2169827e8cfaebdad368479",
+      "bytes": 1520,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/PATCH.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/PATCH.json",
+      "mode": "100644",
+      "gitBlob": "44cf99f59c8b7e9aef04fbfa38bfd23ac8b61995",
+      "sha256": "65f849b3f72754ec74d985bf8b3d351f9cbdcd0d1e1997965a5c8e5718a0757a",
+      "bytes": 841,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/QUALIFIED-CIA.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/QUALIFIED-CIA.json",
+      "mode": "100644",
+      "gitBlob": "f25fb4498c79da2d5196449d88af6a70b93fb175",
+      "sha256": "a0f06302aaf0f09551169cb79b7778a205d59f2e04fa567a6f30ad88c9e7b0f1",
+      "bytes": 2975,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/README.md",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/README.md",
+      "mode": "100644",
+      "gitBlob": "4501e7477f0a438a93cc73c3128cb90aaaa296ab",
+      "sha256": "057a52d468379d277f75eb94e14d289b45769516e9f1a795d31540173c015e5f",
+      "bytes": 3115,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/RESULT.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/RESULT.json",
+      "mode": "100644",
+      "gitBlob": "233308e0f95841708c15eb69909ae60da925d4cf",
+      "sha256": "c0f132f91f9c024d15030bd4d0acf63f287e8e38f2d5a51f1b7ba55c36490684",
+      "bytes": 5004,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/RETENTION-AUDIT.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/RETENTION-AUDIT.json",
+      "mode": "100644",
+      "gitBlob": "467d4145b3bb2c065fc42dc7f05ab052a535b7c1",
+      "sha256": "630ae30f86a1f86f0f7c391d33123a348b513ad9725663a89bcc3e43757f4274",
+      "bytes": 47733,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/SOURCE-PROVENANCE.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/SOURCE-PROVENANCE.json",
+      "mode": "100644",
+      "gitBlob": "4d58329a8d1b2143aed1319ee0b16603880b58fe",
+      "sha256": "99ca21ffd954ee6091341c0c88c4c0136570a8b8f952b27047af884b6e226215",
+      "bytes": 17582,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/candidate.patch",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/candidate.patch",
+      "mode": "100644",
+      "gitBlob": "b5839941b9bedb85f064ccdab18f0a684ae466f8",
+      "sha256": "52f34060ef1f8f8f01dbe3e0f73f1e9a85a9815817a47ab107e20ee6afd27d1d",
+      "bytes": 10488,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/cia-spec-v1.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/cia-spec-v1.json",
+      "mode": "100644",
+      "gitBlob": "f196b7cfb2a0b90117336767bfbb1e63177037fb",
+      "sha256": "aba9dc9941853c8a7c2515fc72c7acd8cb05d61a776e27345701843c1daa5c83",
+      "bytes": 12639,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/evidence-bundle/BUNDLE.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/evidence-bundle/BUNDLE.json",
+      "mode": "100644",
+      "gitBlob": "802135b30213a0e62ba6695d3c2bce1eefc3f9e2",
+      "sha256": "c36ef995a9ba9ef7c72be3c403a14ea580f6886df15a5e553e7d9ca525b6f3f5",
+      "bytes": 4363,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/evidence-bundle/LANES.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/evidence-bundle/LANES.json",
+      "mode": "100644",
+      "gitBlob": "978317ba840d93099501b99c202011f2b3285953",
+      "sha256": "3945e574d899beee10e647488e00cb729ee9a920830b40fdad7ff56cb7f96da5",
+      "bytes": 5839,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/evidence-bundle/PACKAGE.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/evidence-bundle/PACKAGE.json",
+      "mode": "100644",
+      "gitBlob": "6aad464cf892a3f693edc41821c92282cef9f11d",
+      "sha256": "4486eb0c58de2a5904702c2a3df7613cb2604abca118a5475b507cfb535d12b9",
+      "bytes": 1445,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/evidence-bundle/PATHS-0001.tsv",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/evidence-bundle/PATHS-0001.tsv",
+      "mode": "100644",
+      "gitBlob": "47ea84544aefe172a8095c553ca4aa1ee61baf69",
+      "sha256": "f8bdb4dc026d216dbb093958915ee73dc42aaa0c374329108e9d21dbef686698",
+      "bytes": 18860,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/evidence-bundle/README.md",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/evidence-bundle/README.md",
+      "mode": "100644",
+      "gitBlob": "172d93a0b4a691a0cb0c13c0b027d61a8b32368a",
+      "sha256": "3107516a94926f8256bf4a71b8f744dd80e29e362e8720c31056d6bafab3cff4",
+      "bytes": 2426,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/evidence-bundle/part-0001.tar.gz",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/evidence-bundle/part-0001.tar.gz",
+      "mode": "100644",
+      "gitBlob": "8f2c7b4dbec5fd22d9ec2f2a300fc00d4723f877",
+      "sha256": "dba2999f9eb2a00327bec97db4f5a6a07c7a9ae165b74e85c4755d49a74026a2",
+      "bytes": 650659,
+      "encoding": "base64"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/pack.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/pack.json",
+      "mode": "100644",
+      "gitBlob": "98deb9f95a1f45ad59a46fb6f93f88adb834633a",
+      "sha256": "352e4966719350dfe8eceefaf74edea8e84b8becd3acbd90d32c003625705135",
+      "bytes": 1050,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/pack.stderr.log",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/pack.stderr.log",
+      "mode": "100644",
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/pack.stdout.log",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/pack.stdout.log",
+      "mode": "100644",
+      "gitBlob": "61bd8efa9c3dd91622cd26e9b94d5b087f01f341",
+      "sha256": "dc95509226d58a11daff56056bdf9d558acf0018161ae97256fd09c48b295b17",
+      "bytes": 649,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/package-plan.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/package-plan.json",
+      "mode": "100644",
+      "gitBlob": "b377b99588d32aa9d0e013e4d6b31d411b7a73b3",
+      "sha256": "9020566a076872623e9a224fea20e0a4b536a44fa1dce6e8c3341a1f44f130b4",
+      "bytes": 1106,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/package_evidence.py",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/package_evidence.py",
+      "mode": "100644",
+      "gitBlob": "1dbaa1ecf032b0f5d94a4e34aafee3f0cc88f0a0",
+      "sha256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574",
+      "bytes": 33814,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/review/SLF4J-RUNTIME-DIAGNOSIS.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/review/SLF4J-RUNTIME-DIAGNOSIS.json",
+      "mode": "100644",
+      "gitBlob": "01b7c4359866e3547610b14401a2512270e0eff7",
+      "sha256": "68dd8b08cea1fa8940b8c4b89e020e1748db2561420ff364c8b834acbf24109e",
+      "bytes": 7466,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/review/cia-review.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/review/cia-review.json",
+      "mode": "100644",
+      "gitBlob": "1e3aaa7fc48d2ddc32471e19003d411944d24923",
+      "sha256": "845e401ef0719e95bbd45191bf7215c3d4ca68bfb2c8da71eef5904468879b1e",
+      "bytes": 3754,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/source-context/20261005-m3-a3-runtime-admission.md",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/source-context/20261005-m3-a3-runtime-admission.md",
+      "mode": "100644",
+      "gitBlob": "eeae47248e251da1c91f833a5b3d772b9562b09c",
+      "sha256": "e93fd4b683ff3bfc74ea3d2816468e8e41ad51945875d5d1a4d5224662c2ac59",
+      "bytes": 3825,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/verify.json",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/verify.json",
+      "mode": "100644",
+      "gitBlob": "c319a0855fcd9e187bf997b1abe8da157b3c454e",
+      "sha256": "261f653e95b4af343a9a2765086ae6bddbeabdf7e0cfa17593bad77f9992aad0",
+      "bytes": 804,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/verify.stderr.log",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/verify.stderr.log",
+      "mode": "100644",
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "encoding": "utf-8"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/verify.stdout.log",
+      "localPath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/verify.stdout.log",
+      "mode": "100644",
+      "gitBlob": "b2ebb1818c1452ae5140bbdcf0d5da00412452be",
+      "sha256": "918df998daa62e05551fbb06922ba2cfc65663471782aaafb7f5f8aef2c23851",
+      "bytes": 769,
+      "encoding": "utf-8"
+    }
+  ],
+  "proofGatesExecutedByPackaging": false,
+  "remoteWrites": false
+}

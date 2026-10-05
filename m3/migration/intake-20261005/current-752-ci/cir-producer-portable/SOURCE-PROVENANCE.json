@@ -1,0 +1,148 @@
+{
+  "externalSealedInputAliases": [
+    {
+      "original": {
+        "bytes": 9178,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/acquisition/test-classpath-v3.txt",
+        "sha256": "1fe9d70878efd807c04d5709f477bfe488f8d27bb7d42ee8382dc05e88a92197"
+      },
+      "retained": {
+        "bytes": 9178,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-package-inputs/source-context/acquisition/test-classpath-v3.txt",
+        "sha256": "1fe9d70878efd807c04d5709f477bfe488f8d27bb7d42ee8382dc05e88a92197"
+      },
+      "retainedAs": "cir-package-inputs/source-context/acquisition/test-classpath-v3.txt"
+    },
+    {
+      "original": {
+        "bytes": 676,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v1/PATCH.json",
+        "sha256": "082a323ce1b3de43039b12b1d71a5f4ff960c51a22e146858d2b40f5488574ec"
+      },
+      "retained": {
+        "bytes": 676,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-package-inputs/source-context/continuation-20261005/m3/evidence/consumer-v1/PATCH.json",
+        "sha256": "082a323ce1b3de43039b12b1d71a5f4ff960c51a22e146858d2b40f5488574ec"
+      },
+      "retainedAs": "cir-package-inputs/source-context/continuation-20261005/m3/evidence/consumer-v1/PATCH.json"
+    },
+    {
+      "original": {
+        "bytes": 3384,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v1/RESULT.json",
+        "sha256": "47a1efd8b72eb173d3c48124e549e7ecb28d332be09e97bc63290989ba34ba92"
+      },
+      "retained": {
+        "bytes": 3384,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-package-inputs/source-context/continuation-20261005/m3/evidence/consumer-v1/RESULT.json",
+        "sha256": "47a1efd8b72eb173d3c48124e549e7ecb28d332be09e97bc63290989ba34ba92"
+      },
+      "retainedAs": "cir-package-inputs/source-context/continuation-20261005/m3/evidence/consumer-v1/RESULT.json"
+    },
+    {
+      "original": {
+        "bytes": 2330245,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v1/inputs.json",
+        "sha256": "12acb72d89dc57b4c996e51d6a2b76d933de5a42e0fafbe77c0b7f4ff6c48b1f"
+      },
+      "retained": {
+        "bytes": 2330245,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-package-inputs/source-context/continuation-20261005/m3/evidence/consumer-v1/inputs.json",
+        "sha256": "12acb72d89dc57b4c996e51d6a2b76d933de5a42e0fafbe77c0b7f4ff6c48b1f"
+      },
+      "retainedAs": "cir-package-inputs/source-context/continuation-20261005/m3/evidence/consumer-v1/inputs.json"
+    },
+    {
+      "original": {
+        "bytes": 8222,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/research/regex-matrix/independent/REVIEW.json",
+        "sha256": "309e6c30f4e6342fcffdd0aab81f1a52ae51748029bd0122ceb546322c23c806"
+      },
+      "retained": {
+        "bytes": 8222,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-package-inputs/source-context/continuation-20261005/m3/research/regex-matrix/independent/REVIEW.json",
+        "sha256": "309e6c30f4e6342fcffdd0aab81f1a52ae51748029bd0122ceb546322c23c806"
+      },
+      "retainedAs": "cir-package-inputs/source-context/continuation-20261005/m3/research/regex-matrix/independent/REVIEW.json"
+    },
+    {
+      "original": {
+        "bytes": 15464,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/source/AGENTS-9963.md",
+        "sha256": "086b03459e4f441d0ecf1c90773dd63877c03956957ec0f41ac7ceb90069c0f9"
+      },
+      "retained": {
+        "bytes": 15464,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-package-inputs/source-context/continuation-20261005/source/AGENTS-9963.md",
+        "sha256": "086b03459e4f441d0ecf1c90773dd63877c03956957ec0f41ac7ceb90069c0f9"
+      },
+      "retainedAs": "cir-package-inputs/source-context/continuation-20261005/source/AGENTS-9963.md"
+    },
+    {
+      "original": {
+        "bytes": 2660,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-regex-template-admission-control-literals.md",
+        "sha256": "e7f05694d31286451c54925aeccdce6fbe5d61fc5e121c99183e1bbd9232088b"
+      },
+      "retained": {
+        "bytes": 2660,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-package-inputs/source-context/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-regex-template-admission-control-literals.md",
+        "sha256": "e7f05694d31286451c54925aeccdce6fbe5d61fc5e121c99183e1bbd9232088b"
+      },
+      "retainedAs": "cir-package-inputs/source-context/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-regex-template-admission-control-literals.md"
+    },
+    {
+      "original": {
+        "bytes": 3765,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-regex-template-admission.md",
+        "sha256": "e6a88f16eb77e2c9d742a13003b3d5e78f708ca25f13e0949c4afbcf8d6964e5"
+      },
+      "retained": {
+        "bytes": 3765,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-package-inputs/source-context/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-regex-template-admission.md",
+        "sha256": "e6a88f16eb77e2c9d742a13003b3d5e78f708ca25f13e0949c4afbcf8d6964e5"
+      },
+      "retainedAs": "cir-package-inputs/source-context/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-regex-template-admission.md"
+    }
+  ],
+  "packageOwner": {
+    "bytes": 33814,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/acquisition/package_evidence.py",
+    "sha256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574"
+  },
+  "parentConsumerBoundary": "Exact parent consumer RESULT, PATCH, inputs and failure command evidence retained as provenance. Full parent consumer source/tool execution closure is not claimed by this focused Cir bundle. Every direct Cir project/source input body is retained; caches and compiled bodies remain manifest-only.",
+  "proofGatesExecutedByPackaging": false,
+  "schema": "synexia.cir-evidence-source-custody/1",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "sourceSnapshots": [
+    {
+      "lane": "cir-producer-v1",
+      "result": {
+        "bytes": 1305,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/RESULT.json",
+        "sha256": "8e075767061e6958163d2ba84e9b96051b5ba2e844bd40770290cb219fbb86ef"
+      },
+      "sourceFiles": 26,
+      "staging": {
+        "bytes": 10372,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/staging.json",
+        "sha256": "c9698f2308e97da4f56e1f8fe37800dda1f3291393767890cfb0389c86f7db43"
+      }
+    },
+    {
+      "lane": "cir-producer-v2",
+      "result": {
+        "bytes": 4911,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/RESULT.json",
+        "sha256": "4dbc2cf6dc163cacd930b6e90d3d359aa15380535c811545651e4a936f3e92ea"
+      },
+      "sourceFiles": 27,
+      "staging": {
+        "bytes": 10760,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/staging.json",
+        "sha256": "a9cd32a002895e2af84421b6eb1d84c340970ae99c3e6467dfe27172650381dd"
+      }
+    }
+  ],
+  "targetCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2"
+}

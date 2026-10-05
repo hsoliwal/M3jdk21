@@ -1,0 +1,25 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/package_evidence.py",
+    "pack",
+    "--root",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs",
+    "--plan",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cia-package-plan.json",
+    "--output",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cia/evidence-bundle"
+  ],
+  "startedAt": "2026-10-05T16:23:18.143765+00:00",
+  "endedAt": "2026-10-05T16:23:18.598265+00:00",
+  "exitCode": 0,
+  "proofGatesExecuted": false,
+  "pack.stdout.log": {
+    "sha256": "dc95509226d58a11daff56056bdf9d558acf0018161ae97256fd09c48b295b17",
+    "bytes": 649
+  },
+  "pack.stderr.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "bytes": 0
+  }
+}

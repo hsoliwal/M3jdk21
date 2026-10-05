@@ -1,0 +1,2161 @@
+{
+  "archiveIntegrityReceipt": {
+    "bytes": 769,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cir/verify.stdout.log",
+    "sha256": "3e079c455939eb1e4b400175fc83b285c1d742dd8df977bd900d3b51fd9338e2"
+  },
+  "boundary": "Focused producer evidence only. Original parent consumer proof manifests/log references are included, not its complete source/toolchain execution closure.",
+  "bundleIndex": {
+    "bytes": 5357,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cir/evidence-bundle/BUNDLE.json",
+    "sha256": "9799b18e1fd42973fd27319240a57d3d7cb5ca20e436e41eb0d0f156ee4f8c89"
+  },
+  "checkedSourceAndMetadataFiles": 205,
+  "compiledDependencyBodiesRetained": false,
+  "consumerQualified": false,
+  "includedNoncacheSealedInputReferences": 146,
+  "priorFailedLaneRetainedAsExactRawEvidence": true,
+  "priorLaneResultRewritten": false,
+  "projectVersions": [
+    {
+      "lane": "cir-producer-v1",
+      "result": {
+        "bytes": 1305,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/RESULT.json",
+        "sha256": "8e075767061e6958163d2ba84e9b96051b5ba2e844bd40770290cb219fbb86ef"
+      },
+      "sourceInputs": [
+        {
+          "bytes": 4499,
+          "path": "README.md",
+          "sha256": "774052e8653a62c0ec804a31739bdb6d1f12fe2839ba0325d3534bb1fe617e73",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/README.md"
+        },
+        {
+          "bytes": 4448,
+          "path": "dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+          "sha256": "4f6c17a035e64106f172b488fded9b565d1af48d6a8ecbd4700b3ff0cc2cd1e1",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java"
+        },
+        {
+          "bytes": 2706,
+          "path": "dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+          "sha256": "b831177cbaaeca359a0b397eb4c74c0caf86c27666db702ef4492a42c210cd9f",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java"
+        },
+        {
+          "bytes": 12032,
+          "path": "dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+          "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+        },
+        {
+          "bytes": 13805,
+          "path": "dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+          "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
+        },
+        {
+          "bytes": 3604,
+          "path": "pom.xml",
+          "sha256": "de7d0f89b87ef2de2a129f3d630af31d68d02f88825fd546aaca48b5a9ba4fb6",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/pom.xml"
+        },
+        {
+          "bytes": 26901,
+          "path": "proof.py",
+          "sha256": "2606a41e49d8079ba71db8e3efac96f2e20f3f4520bddd80b90269602021e598",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/proof.py"
+        },
+        {
+          "bytes": 467,
+          "path": "src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+          "sha256": "e1486e41112dc0e4a354fbbc8a54d27a539d28aec961c012243421b2c6cab243",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml"
+        },
+        {
+          "bytes": 1213,
+          "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+          "sha256": "a212c4001d0a2a2df0289e4209bdb3c48846c2b8b2d750014171e55db6d494e3",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv"
+        },
+        {
+          "bytes": 6447,
+          "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+          "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt"
+        },
+        {
+          "bytes": 7516,
+          "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+          "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt"
+        },
+        {
+          "bytes": 6447,
+          "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+          "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt"
+        },
+        {
+          "bytes": 7516,
+          "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+          "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt"
+        },
+        {
+          "bytes": 658,
+          "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+          "sha256": "e7a96b1290ead86d3861f0388423504078cc8f66f10303f73e0a7d44a6e5776b",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt"
+        },
+        {
+          "bytes": 30148,
+          "path": "src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+          "sha256": "c59301677407e959e05be52a814e093e6c007fb64fa1266d1c44c6db75852117",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/java/com/synexia/rewrite/CirRecipeTest.java"
+        },
+        {
+          "bytes": 6442,
+          "path": "src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+          "sha256": "9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java"
+        },
+        {
+          "bytes": 7514,
+          "path": "src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+          "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java"
+        },
+        {
+          "bytes": 6442,
+          "path": "src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+          "sha256": "9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after"
+        },
+        {
+          "bytes": 7514,
+          "path": "src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+          "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after"
+        },
+        {
+          "bytes": 658,
+          "path": "src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+          "sha256": "b2febbb17ed96ae6f582eee2e16af3fc5e435c23e350708f56397bee9ac38ab5",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv"
+        },
+        {
+          "bytes": 7782,
+          "path": "src/test/resources/closure/A3Cases.java",
+          "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/closure/A3Cases.java"
+        },
+        {
+          "bytes": 3137,
+          "path": "src/test/resources/closure/A3Fs.java",
+          "sha256": "ebddb148600afd7ee7df1175175df7da86b3a2cb048ca9b4e723d4eec5c2fe8c",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/closure/A3Fs.java"
+        },
+        {
+          "bytes": 16196,
+          "path": "src/test/resources/nested-a3/A3Lab.java.after",
+          "sha256": "c212736f000836cb782a5ff81fd2de48e67d36ea4b3bd53cf7743c4aadbfdaf6",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/nested-a3/A3Lab.java.after"
+        },
+        {
+          "bytes": 6117,
+          "path": "src/test/resources/nested-a3/A3LabTest.java.after",
+          "sha256": "351eeac06154189e79f3d139336437d5911da5721c9a95a779ebd5d511997d9c",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/nested-a3/A3LabTest.java.after"
+        },
+        {
+          "bytes": 17623,
+          "path": "src/test/resources/nested-a3/before/A3Lab.java",
+          "sha256": "f68fb01640e7bee16e67af34ff986006a8ebebca3c13e9088296540f844b2200",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/nested-a3/before/A3Lab.java"
+        },
+        {
+          "bytes": 3860,
+          "path": "src/test/resources/nested-a3/before/A3LabTest.java",
+          "sha256": "225efc2885ba8c002d036ecf70b4dd8a13b646debc74afeb031b0fce624d3f18",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/nested-a3/before/A3LabTest.java"
+        }
+      ],
+      "sourceInputsRetained": 26
+    },
+    {
+      "lane": "cir-producer-v2",
+      "result": {
+        "bytes": 4911,
+        "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/RESULT.json",
+        "sha256": "4dbc2cf6dc163cacd930b6e90d3d359aa15380535c811545651e4a936f3e92ea"
+      },
+      "sourceInputs": [
+        {
+          "bytes": 4931,
+          "path": "README.md",
+          "sha256": "707b37b547da43923b517a6fca3e1b957ad528ea55ddde7331850ce78de7d053",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/README.md"
+        },
+        {
+          "bytes": 4448,
+          "path": "dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+          "sha256": "4f6c17a035e64106f172b488fded9b565d1af48d6a8ecbd4700b3ff0cc2cd1e1",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java"
+        },
+        {
+          "bytes": 2706,
+          "path": "dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+          "sha256": "b831177cbaaeca359a0b397eb4c74c0caf86c27666db702ef4492a42c210cd9f",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java"
+        },
+        {
+          "bytes": 7151,
+          "path": "dependency-source/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+          "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/dependency-source/com/m3/rewrite/atom/M3PureIntAtomEligibility.java"
+        },
+        {
+          "bytes": 12032,
+          "path": "dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+          "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+        },
+        {
+          "bytes": 13805,
+          "path": "dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+          "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
+        },
+        {
+          "bytes": 3604,
+          "path": "pom.xml",
+          "sha256": "de7d0f89b87ef2de2a129f3d630af31d68d02f88825fd546aaca48b5a9ba4fb6",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/pom.xml"
+        },
+        {
+          "bytes": 26958,
+          "path": "proof.py",
+          "sha256": "22bc6a9f05bd3a881e9e5c3c1da07c85ae043ebe99dac1e769dcece82354058c",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/proof.py"
+        },
+        {
+          "bytes": 467,
+          "path": "src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+          "sha256": "e1486e41112dc0e4a354fbbc8a54d27a539d28aec961c012243421b2c6cab243",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml"
+        },
+        {
+          "bytes": 1213,
+          "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+          "sha256": "a212c4001d0a2a2df0289e4209bdb3c48846c2b8b2d750014171e55db6d494e3",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv"
+        },
+        {
+          "bytes": 6447,
+          "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+          "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt"
+        },
+        {
+          "bytes": 7516,
+          "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+          "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt"
+        },
+        {
+          "bytes": 6447,
+          "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+          "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt"
+        },
+        {
+          "bytes": 7516,
+          "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+          "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt"
+        },
+        {
+          "bytes": 658,
+          "path": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+          "sha256": "e7a96b1290ead86d3861f0388423504078cc8f66f10303f73e0a7d44a6e5776b",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt"
+        },
+        {
+          "bytes": 30148,
+          "path": "src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+          "sha256": "c59301677407e959e05be52a814e093e6c007fb64fa1266d1c44c6db75852117",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/java/com/synexia/rewrite/CirRecipeTest.java"
+        },
+        {
+          "bytes": 6442,
+          "path": "src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+          "sha256": "9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java"
+        },
+        {
+          "bytes": 7514,
+          "path": "src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+          "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java"
+        },
+        {
+          "bytes": 6442,
+          "path": "src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+          "sha256": "9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after"
+        },
+        {
+          "bytes": 7514,
+          "path": "src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+          "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after"
+        },
+        {
+          "bytes": 658,
+          "path": "src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+          "sha256": "b2febbb17ed96ae6f582eee2e16af3fc5e435c23e350708f56397bee9ac38ab5",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv"
+        },
+        {
+          "bytes": 7782,
+          "path": "src/test/resources/closure/A3Cases.java",
+          "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/closure/A3Cases.java"
+        },
+        {
+          "bytes": 3137,
+          "path": "src/test/resources/closure/A3Fs.java",
+          "sha256": "ebddb148600afd7ee7df1175175df7da86b3a2cb048ca9b4e723d4eec5c2fe8c",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/closure/A3Fs.java"
+        },
+        {
+          "bytes": 16196,
+          "path": "src/test/resources/nested-a3/A3Lab.java.after",
+          "sha256": "c212736f000836cb782a5ff81fd2de48e67d36ea4b3bd53cf7743c4aadbfdaf6",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/nested-a3/A3Lab.java.after"
+        },
+        {
+          "bytes": 6117,
+          "path": "src/test/resources/nested-a3/A3LabTest.java.after",
+          "sha256": "351eeac06154189e79f3d139336437d5911da5721c9a95a779ebd5d511997d9c",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/nested-a3/A3LabTest.java.after"
+        },
+        {
+          "bytes": 17623,
+          "path": "src/test/resources/nested-a3/before/A3Lab.java",
+          "sha256": "f68fb01640e7bee16e67af34ff986006a8ebebca3c13e9088296540f844b2200",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/nested-a3/before/A3Lab.java"
+        },
+        {
+          "bytes": 3860,
+          "path": "src/test/resources/nested-a3/before/A3LabTest.java",
+          "sha256": "225efc2885ba8c002d036ecf70b4dd8a13b646debc74afeb031b0fce624d3f18",
+          "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/nested-a3/before/A3LabTest.java"
+        }
+      ],
+      "sourceInputsRetained": 27
+    }
+  ],
+  "proofGatesExecutedByPackaging": false,
+  "schema": "synexia.cir-portable-retention/1",
+  "sourceAndMetadataReferences": [
+    {
+      "bytes": 9178,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/acquisition/test-classpath-v3.txt",
+      "retainedAt": [
+        "cir-package-inputs/source-context/acquisition/test-classpath-v3.txt",
+        "evidence/cir-producer-v1/runtime-classpath.txt",
+        "evidence/cir-producer-v2/runtime-classpath.txt"
+      ],
+      "sha256": "1fe9d70878efd807c04d5709f477bfe488f8d27bb7d42ee8382dc05e88a92197"
+    },
+    {
+      "bytes": 6158,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/CIR-AUTHORED.json",
+      "retainedAt": [
+        "CIR-AUTHORED.json"
+      ],
+      "sha256": "e93f9292546683cefd5e3f425cfab16fc1e9aaa7f2ae341ac5614fbd43e73df8"
+    },
+    {
+      "bytes": 4499,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/README.md",
+      "retainedAt": [
+        "cir-authoring-v1/README.md",
+        "evidence/cir-producer-v1/project/README.md"
+      ],
+      "sha256": "774052e8653a62c0ec804a31739bdb6d1f12fe2839ba0325d3534bb1fe617e73"
+    },
+    {
+      "bytes": 4448,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+      "retainedAt": [
+        "cir-authoring-v1/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+        "cir-authoring-v2/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+        "evidence/cir-producer-v1/project/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+        "evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java"
+      ],
+      "sha256": "4f6c17a035e64106f172b488fded9b565d1af48d6a8ecbd4700b3ff0cc2cd1e1"
+    },
+    {
+      "bytes": 2706,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+      "retainedAt": [
+        "cir-authoring-v1/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+        "cir-authoring-v2/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+        "evidence/cir-producer-v1/project/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+        "evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java"
+      ],
+      "sha256": "b831177cbaaeca359a0b397eb4c74c0caf86c27666db702ef4492a42c210cd9f"
+    },
+    {
+      "bytes": 12032,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "retainedAt": [
+        "cir-authoring-v1/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "cir-authoring-v2/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "evidence/cir-producer-v1/project/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+      ],
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+    },
+    {
+      "bytes": 13805,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "retainedAt": [
+        "cir-authoring-v1/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "cir-authoring-v2/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "evidence/cir-producer-v1/project/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "evidence/cir-producer-v2/project/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
+      ],
+      "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599"
+    },
+    {
+      "bytes": 3604,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/pom.xml",
+      "retainedAt": [
+        "cir-authoring-v1/pom.xml",
+        "cir-authoring-v2/pom.xml",
+        "evidence/cir-producer-v1/project/pom.xml",
+        "evidence/cir-producer-v2/project/pom.xml"
+      ],
+      "sha256": "de7d0f89b87ef2de2a129f3d630af31d68d02f88825fd546aaca48b5a9ba4fb6"
+    },
+    {
+      "bytes": 26901,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/proof.py",
+      "retainedAt": [
+        "cir-authoring-v1/proof.py",
+        "evidence/cir-producer-v1/project/proof.py"
+      ],
+      "sha256": "2606a41e49d8079ba71db8e3efac96f2e20f3f4520bddd80b90269602021e598"
+    },
+    {
+      "bytes": 467,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+        "cir-authoring-v2/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+        "evidence/cir-producer-v1/project/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+        "evidence/cir-producer-v1/project/target/classes/META-INF/rewrite/m3-ci-752-regex.yml",
+        "evidence/cir-producer-v2/project/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+        "evidence/cir-producer-v2/project/target/classes/META-INF/rewrite/m3-ci-752-regex.yml"
+      ],
+      "sha256": "e1486e41112dc0e4a354fbbc8a54d27a539d28aec961c012243421b2c6cab243"
+    },
+    {
+      "bytes": 1213,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv"
+      ],
+      "sha256": "a212c4001d0a2a2df0289e4209bdb3c48846c2b8b2d750014171e55db6d494e3"
+    },
+    {
+      "bytes": 6447,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt"
+      ],
+      "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef"
+    },
+    {
+      "bytes": 7516,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt"
+      ],
+      "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada"
+    },
+    {
+      "bytes": 6447,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt"
+      ],
+      "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef"
+    },
+    {
+      "bytes": 7516,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt"
+      ],
+      "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada"
+    },
+    {
+      "bytes": 658,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt"
+      ],
+      "sha256": "e7a96b1290ead86d3861f0388423504078cc8f66f10303f73e0a7d44a6e5776b"
+    },
+    {
+      "bytes": 30148,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+        "cir-authoring-v2/src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+        "evidence/cir-producer-v1/project/src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+        "evidence/cir-producer-v2/project/src/test/java/com/synexia/rewrite/CirRecipeTest.java"
+      ],
+      "sha256": "c59301677407e959e05be52a814e093e6c007fb64fa1266d1c44c6db75852117"
+    },
+    {
+      "bytes": 6442,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after"
+      ],
+      "sha256": "9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697"
+    },
+    {
+      "bytes": 7514,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after"
+      ],
+      "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404"
+    },
+    {
+      "bytes": 6442,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after"
+      ],
+      "sha256": "9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697"
+    },
+    {
+      "bytes": 7514,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after"
+      ],
+      "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404"
+    },
+    {
+      "bytes": 658,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv"
+      ],
+      "sha256": "b2febbb17ed96ae6f582eee2e16af3fc5e435c23e350708f56397bee9ac38ab5"
+    },
+    {
+      "bytes": 7782,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/closure/A3Cases.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/closure/A3Cases.java",
+        "cir-authoring-v2/src/test/resources/closure/A3Cases.java",
+        "evidence/cir-producer-v1/project/src/test/resources/closure/A3Cases.java",
+        "evidence/cir-producer-v2/project/src/test/resources/closure/A3Cases.java",
+        "evidence/cir-producer-v2/project/target/test-classes/closure/A3Cases.java"
+      ],
+      "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298"
+    },
+    {
+      "bytes": 3137,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/closure/A3Fs.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/closure/A3Fs.java",
+        "cir-authoring-v2/src/test/resources/closure/A3Fs.java",
+        "evidence/cir-producer-v1/project/src/test/resources/closure/A3Fs.java",
+        "evidence/cir-producer-v2/project/src/test/resources/closure/A3Fs.java",
+        "evidence/cir-producer-v2/project/target/test-classes/closure/A3Fs.java"
+      ],
+      "sha256": "ebddb148600afd7ee7df1175175df7da86b3a2cb048ca9b4e723d4eec5c2fe8c"
+    },
+    {
+      "bytes": 16196,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/nested-a3/A3Lab.java.after",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/nested-a3/A3Lab.java.after",
+        "cir-authoring-v2/src/test/resources/nested-a3/A3Lab.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/nested-a3/A3Lab.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/nested-a3/A3Lab.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/nested-a3/A3Lab.java.after"
+      ],
+      "sha256": "c212736f000836cb782a5ff81fd2de48e67d36ea4b3bd53cf7743c4aadbfdaf6"
+    },
+    {
+      "bytes": 6117,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/nested-a3/A3LabTest.java.after",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/nested-a3/A3LabTest.java.after",
+        "cir-authoring-v2/src/test/resources/nested-a3/A3LabTest.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/nested-a3/A3LabTest.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/nested-a3/A3LabTest.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/nested-a3/A3LabTest.java.after"
+      ],
+      "sha256": "351eeac06154189e79f3d139336437d5911da5721c9a95a779ebd5d511997d9c"
+    },
+    {
+      "bytes": 17623,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/nested-a3/before/A3Lab.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/nested-a3/before/A3Lab.java",
+        "cir-authoring-v2/src/test/resources/nested-a3/before/A3Lab.java",
+        "evidence/cir-producer-v1/project/src/test/resources/nested-a3/before/A3Lab.java",
+        "evidence/cir-producer-v2/project/src/test/resources/nested-a3/before/A3Lab.java",
+        "evidence/cir-producer-v2/project/target/test-classes/nested-a3/before/A3Lab.java"
+      ],
+      "sha256": "f68fb01640e7bee16e67af34ff986006a8ebebca3c13e9088296540f844b2200"
+    },
+    {
+      "bytes": 3860,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v1/src/test/resources/nested-a3/before/A3LabTest.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/nested-a3/before/A3LabTest.java",
+        "cir-authoring-v2/src/test/resources/nested-a3/before/A3LabTest.java",
+        "evidence/cir-producer-v1/project/src/test/resources/nested-a3/before/A3LabTest.java",
+        "evidence/cir-producer-v2/project/src/test/resources/nested-a3/before/A3LabTest.java",
+        "evidence/cir-producer-v2/project/target/test-classes/nested-a3/before/A3LabTest.java"
+      ],
+      "sha256": "225efc2885ba8c002d036ecf70b4dd8a13b646debc74afeb031b0fce624d3f18"
+    },
+    {
+      "bytes": 14108,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-spec-v1.json",
+      "retainedAt": [
+        "cir-spec-v1.json",
+        "evidence/cir-producer-v1/spec.json"
+      ],
+      "sha256": "19628d649ac834335510467cbfc558eef19d52ebc858ef339c7407cc37476eca"
+    },
+    {
+      "bytes": 13178,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/commands.json",
+      "retainedAt": [
+        "evidence/cir-producer-v1/commands.json"
+      ],
+      "sha256": "27b715462fadcc7373ab758dc3950f9dbebf8cc21f0a4ef6d9fb5ea9160d2dd9"
+    },
+    {
+      "bytes": 4499,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/README.md",
+      "retainedAt": [
+        "cir-authoring-v1/README.md",
+        "evidence/cir-producer-v1/project/README.md"
+      ],
+      "sha256": "774052e8653a62c0ec804a31739bdb6d1f12fe2839ba0325d3534bb1fe617e73"
+    },
+    {
+      "bytes": 4448,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+      "retainedAt": [
+        "cir-authoring-v1/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+        "cir-authoring-v2/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+        "evidence/cir-producer-v1/project/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+        "evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java"
+      ],
+      "sha256": "4f6c17a035e64106f172b488fded9b565d1af48d6a8ecbd4700b3ff0cc2cd1e1"
+    },
+    {
+      "bytes": 2706,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+      "retainedAt": [
+        "cir-authoring-v1/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+        "cir-authoring-v2/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+        "evidence/cir-producer-v1/project/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+        "evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java"
+      ],
+      "sha256": "b831177cbaaeca359a0b397eb4c74c0caf86c27666db702ef4492a42c210cd9f"
+    },
+    {
+      "bytes": 12032,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "retainedAt": [
+        "cir-authoring-v1/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "cir-authoring-v2/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "evidence/cir-producer-v1/project/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+      ],
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+    },
+    {
+      "bytes": 13805,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "retainedAt": [
+        "cir-authoring-v1/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "cir-authoring-v2/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "evidence/cir-producer-v1/project/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "evidence/cir-producer-v2/project/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
+      ],
+      "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599"
+    },
+    {
+      "bytes": 3604,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/pom.xml",
+      "retainedAt": [
+        "cir-authoring-v1/pom.xml",
+        "cir-authoring-v2/pom.xml",
+        "evidence/cir-producer-v1/project/pom.xml",
+        "evidence/cir-producer-v2/project/pom.xml"
+      ],
+      "sha256": "de7d0f89b87ef2de2a129f3d630af31d68d02f88825fd546aaca48b5a9ba4fb6"
+    },
+    {
+      "bytes": 26901,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/proof.py",
+      "retainedAt": [
+        "cir-authoring-v1/proof.py",
+        "evidence/cir-producer-v1/project/proof.py"
+      ],
+      "sha256": "2606a41e49d8079ba71db8e3efac96f2e20f3f4520bddd80b90269602021e598"
+    },
+    {
+      "bytes": 467,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+        "cir-authoring-v2/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+        "evidence/cir-producer-v1/project/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+        "evidence/cir-producer-v1/project/target/classes/META-INF/rewrite/m3-ci-752-regex.yml",
+        "evidence/cir-producer-v2/project/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+        "evidence/cir-producer-v2/project/target/classes/META-INF/rewrite/m3-ci-752-regex.yml"
+      ],
+      "sha256": "e1486e41112dc0e4a354fbbc8a54d27a539d28aec961c012243421b2c6cab243"
+    },
+    {
+      "bytes": 1213,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv"
+      ],
+      "sha256": "a212c4001d0a2a2df0289e4209bdb3c48846c2b8b2d750014171e55db6d494e3"
+    },
+    {
+      "bytes": 6447,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt"
+      ],
+      "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef"
+    },
+    {
+      "bytes": 7516,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt"
+      ],
+      "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada"
+    },
+    {
+      "bytes": 6447,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt"
+      ],
+      "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef"
+    },
+    {
+      "bytes": 7516,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt"
+      ],
+      "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada"
+    },
+    {
+      "bytes": 658,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt"
+      ],
+      "sha256": "e7a96b1290ead86d3861f0388423504078cc8f66f10303f73e0a7d44a6e5776b"
+    },
+    {
+      "bytes": 30148,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+        "cir-authoring-v2/src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+        "evidence/cir-producer-v1/project/src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+        "evidence/cir-producer-v2/project/src/test/java/com/synexia/rewrite/CirRecipeTest.java"
+      ],
+      "sha256": "c59301677407e959e05be52a814e093e6c007fb64fa1266d1c44c6db75852117"
+    },
+    {
+      "bytes": 6442,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after"
+      ],
+      "sha256": "9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697"
+    },
+    {
+      "bytes": 7514,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after"
+      ],
+      "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404"
+    },
+    {
+      "bytes": 6442,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after"
+      ],
+      "sha256": "9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697"
+    },
+    {
+      "bytes": 7514,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after"
+      ],
+      "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404"
+    },
+    {
+      "bytes": 658,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv"
+      ],
+      "sha256": "b2febbb17ed96ae6f582eee2e16af3fc5e435c23e350708f56397bee9ac38ab5"
+    },
+    {
+      "bytes": 7782,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/src/test/resources/closure/A3Cases.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/closure/A3Cases.java",
+        "cir-authoring-v2/src/test/resources/closure/A3Cases.java",
+        "evidence/cir-producer-v1/project/src/test/resources/closure/A3Cases.java",
+        "evidence/cir-producer-v2/project/src/test/resources/closure/A3Cases.java",
+        "evidence/cir-producer-v2/project/target/test-classes/closure/A3Cases.java"
+      ],
+      "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298"
+    },
+    {
+      "bytes": 3137,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/src/test/resources/closure/A3Fs.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/closure/A3Fs.java",
+        "cir-authoring-v2/src/test/resources/closure/A3Fs.java",
+        "evidence/cir-producer-v1/project/src/test/resources/closure/A3Fs.java",
+        "evidence/cir-producer-v2/project/src/test/resources/closure/A3Fs.java",
+        "evidence/cir-producer-v2/project/target/test-classes/closure/A3Fs.java"
+      ],
+      "sha256": "ebddb148600afd7ee7df1175175df7da86b3a2cb048ca9b4e723d4eec5c2fe8c"
+    },
+    {
+      "bytes": 16196,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/src/test/resources/nested-a3/A3Lab.java.after",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/nested-a3/A3Lab.java.after",
+        "cir-authoring-v2/src/test/resources/nested-a3/A3Lab.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/nested-a3/A3Lab.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/nested-a3/A3Lab.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/nested-a3/A3Lab.java.after"
+      ],
+      "sha256": "c212736f000836cb782a5ff81fd2de48e67d36ea4b3bd53cf7743c4aadbfdaf6"
+    },
+    {
+      "bytes": 6117,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/src/test/resources/nested-a3/A3LabTest.java.after",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/nested-a3/A3LabTest.java.after",
+        "cir-authoring-v2/src/test/resources/nested-a3/A3LabTest.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/nested-a3/A3LabTest.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/nested-a3/A3LabTest.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/nested-a3/A3LabTest.java.after"
+      ],
+      "sha256": "351eeac06154189e79f3d139336437d5911da5721c9a95a779ebd5d511997d9c"
+    },
+    {
+      "bytes": 17623,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/src/test/resources/nested-a3/before/A3Lab.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/nested-a3/before/A3Lab.java",
+        "cir-authoring-v2/src/test/resources/nested-a3/before/A3Lab.java",
+        "evidence/cir-producer-v1/project/src/test/resources/nested-a3/before/A3Lab.java",
+        "evidence/cir-producer-v2/project/src/test/resources/nested-a3/before/A3Lab.java",
+        "evidence/cir-producer-v2/project/target/test-classes/nested-a3/before/A3Lab.java"
+      ],
+      "sha256": "f68fb01640e7bee16e67af34ff986006a8ebebca3c13e9088296540f844b2200"
+    },
+    {
+      "bytes": 3860,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/project/src/test/resources/nested-a3/before/A3LabTest.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/nested-a3/before/A3LabTest.java",
+        "cir-authoring-v2/src/test/resources/nested-a3/before/A3LabTest.java",
+        "evidence/cir-producer-v1/project/src/test/resources/nested-a3/before/A3LabTest.java",
+        "evidence/cir-producer-v2/project/src/test/resources/nested-a3/before/A3LabTest.java",
+        "evidence/cir-producer-v2/project/target/test-classes/nested-a3/before/A3LabTest.java"
+      ],
+      "sha256": "225efc2885ba8c002d036ecf70b4dd8a13b646debc74afeb031b0fce624d3f18"
+    },
+    {
+      "bytes": 9178,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/runtime-classpath.txt",
+      "retainedAt": [
+        "cir-package-inputs/source-context/acquisition/test-classpath-v3.txt",
+        "evidence/cir-producer-v1/runtime-classpath.txt",
+        "evidence/cir-producer-v2/runtime-classpath.txt"
+      ],
+      "sha256": "1fe9d70878efd807c04d5709f477bfe488f8d27bb7d42ee8382dc05e88a92197"
+    },
+    {
+      "bytes": 14108,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/spec.json",
+      "retainedAt": [
+        "cir-spec-v1.json",
+        "evidence/cir-producer-v1/spec.json"
+      ],
+      "sha256": "19628d649ac834335510467cbfc558eef19d52ebc858ef339c7407cc37476eca"
+    },
+    {
+      "bytes": 10372,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/staging.json",
+      "retainedAt": [
+        "evidence/cir-producer-v1/staging.json"
+      ],
+      "sha256": "c9698f2308e97da4f56e1f8fe37800dda1f3291393767890cfb0389c86f7db43"
+    },
+    {
+      "bytes": 98206,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/tool-links.json",
+      "retainedAt": [
+        "evidence/cir-producer-v1/tool-links.json",
+        "evidence/cir-producer-v2/tool-links.json"
+      ],
+      "sha256": "bcf3a804bb9af655dde72896e5b94286b4bdb1fea7cd29d5deb26b22bcafdb5c"
+    },
+    {
+      "bytes": 20034,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/tooling.json",
+      "retainedAt": [
+        "evidence/cir-producer-v1/tooling.json",
+        "evidence/cir-producer-v2/tooling.json"
+      ],
+      "sha256": "bb7d3927b01eeaa2170d04e8d3e521d7c073564196f8d42f9a21679d280e3187"
+    },
+    {
+      "bytes": 4857,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/producer-v2/RESULT.json",
+      "retainedAt": [
+        "evidence/producer-v2/RESULT.json"
+      ],
+      "sha256": "d6d265a959e378fce47d68b5aa4a3a3bbee14bebf21355a54bd8077cb51e8630"
+    },
+    {
+      "bytes": 1369,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/producer-v2/generated-candidate/OUTPUT.json",
+      "retainedAt": [
+        "evidence/producer-v2/generated-candidate/OUTPUT.json"
+      ],
+      "sha256": "0347e932f876d72db7d5247c54375fdc40f15f1138392ddffab03c0bb63834c5"
+    },
+    {
+      "bytes": 5217,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/review/cir-five-literals-root-review.json",
+      "retainedAt": [
+        "review/cir-five-literals-root-review.json"
+      ],
+      "sha256": "75c7faa54c96c34df0d27376bfaa168b97e8a1667e6a0f4c1d13b511138f51c1"
+    },
+    {
+      "bytes": 676,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v1/PATCH.json",
+      "retainedAt": [
+        "cir-package-inputs/source-context/continuation-20261005/m3/evidence/consumer-v1/PATCH.json"
+      ],
+      "sha256": "082a323ce1b3de43039b12b1d71a5f4ff960c51a22e146858d2b40f5488574ec"
+    },
+    {
+      "bytes": 3384,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v1/RESULT.json",
+      "retainedAt": [
+        "cir-package-inputs/source-context/continuation-20261005/m3/evidence/consumer-v1/RESULT.json"
+      ],
+      "sha256": "47a1efd8b72eb173d3c48124e549e7ecb28d332be09e97bc63290989ba34ba92"
+    },
+    {
+      "bytes": 2330245,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v1/inputs.json",
+      "retainedAt": [
+        "cir-package-inputs/source-context/continuation-20261005/m3/evidence/consumer-v1/inputs.json"
+      ],
+      "sha256": "12acb72d89dc57b4c996e51d6a2b76d933de5a42e0fafbe77c0b7f4ff6c48b1f"
+    },
+    {
+      "bytes": 8222,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/research/regex-matrix/independent/REVIEW.json",
+      "retainedAt": [
+        "cir-package-inputs/source-context/continuation-20261005/m3/research/regex-matrix/independent/REVIEW.json"
+      ],
+      "sha256": "309e6c30f4e6342fcffdd0aab81f1a52ae51748029bd0122ceb546322c23c806"
+    },
+    {
+      "bytes": 15464,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/source/AGENTS-9963.md",
+      "retainedAt": [
+        "cir-package-inputs/source-context/continuation-20261005/source/AGENTS-9963.md"
+      ],
+      "sha256": "086b03459e4f441d0ecf1c90773dd63877c03956957ec0f41ac7ceb90069c0f9"
+    },
+    {
+      "bytes": 2660,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-regex-template-admission-control-literals.md",
+      "retainedAt": [
+        "cir-package-inputs/source-context/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-regex-template-admission-control-literals.md"
+      ],
+      "sha256": "e7f05694d31286451c54925aeccdce6fbe5d61fc5e121c99183e1bbd9232088b"
+    },
+    {
+      "bytes": 3765,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-regex-template-admission.md",
+      "retainedAt": [
+        "cir-package-inputs/source-context/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-regex-template-admission.md"
+      ],
+      "sha256": "e6a88f16eb77e2c9d742a13003b3d5e78f708ca25f13e0949c4afbcf8d6964e5"
+    },
+    {
+      "bytes": 9178,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/acquisition/test-classpath-v3.txt",
+      "retainedAt": [
+        "cir-package-inputs/source-context/acquisition/test-classpath-v3.txt",
+        "evidence/cir-producer-v1/runtime-classpath.txt",
+        "evidence/cir-producer-v2/runtime-classpath.txt"
+      ],
+      "sha256": "1fe9d70878efd807c04d5709f477bfe488f8d27bb7d42ee8382dc05e88a92197"
+    },
+    {
+      "bytes": 6158,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/CIR-AUTHORED.json",
+      "retainedAt": [
+        "CIR-AUTHORED.json"
+      ],
+      "sha256": "e93f9292546683cefd5e3f425cfab16fc1e9aaa7f2ae341ac5614fbd43e73df8"
+    },
+    {
+      "bytes": 971,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/CIR-CLOSURE-CORRECTION-v2.json",
+      "retainedAt": [
+        "CIR-CLOSURE-CORRECTION-v2.json"
+      ],
+      "sha256": "220884f40b35dfc9bb1329629f93e8f80ac1bd22927105afc7daf64f4668bd07"
+    },
+    {
+      "bytes": 4931,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/README.md",
+      "retainedAt": [
+        "cir-authoring-v2/README.md",
+        "evidence/cir-producer-v2/project/README.md"
+      ],
+      "sha256": "707b37b547da43923b517a6fca3e1b957ad528ea55ddde7331850ce78de7d053"
+    },
+    {
+      "bytes": 4448,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+      "retainedAt": [
+        "cir-authoring-v1/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+        "cir-authoring-v2/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+        "evidence/cir-producer-v1/project/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+        "evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java"
+      ],
+      "sha256": "4f6c17a035e64106f172b488fded9b565d1af48d6a8ecbd4700b3ff0cc2cd1e1"
+    },
+    {
+      "bytes": 2706,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+      "retainedAt": [
+        "cir-authoring-v1/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+        "cir-authoring-v2/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+        "evidence/cir-producer-v1/project/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+        "evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java"
+      ],
+      "sha256": "b831177cbaaeca359a0b397eb4c74c0caf86c27666db702ef4492a42c210cd9f"
+    },
+    {
+      "bytes": 7151,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/dependency-source/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+      "retainedAt": [
+        "cir-authoring-v2/dependency-source/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+        "evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/atom/M3PureIntAtomEligibility.java"
+      ],
+      "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb"
+    },
+    {
+      "bytes": 12032,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "retainedAt": [
+        "cir-authoring-v1/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "cir-authoring-v2/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "evidence/cir-producer-v1/project/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+      ],
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+    },
+    {
+      "bytes": 13805,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "retainedAt": [
+        "cir-authoring-v1/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "cir-authoring-v2/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "evidence/cir-producer-v1/project/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "evidence/cir-producer-v2/project/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
+      ],
+      "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599"
+    },
+    {
+      "bytes": 3604,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/pom.xml",
+      "retainedAt": [
+        "cir-authoring-v1/pom.xml",
+        "cir-authoring-v2/pom.xml",
+        "evidence/cir-producer-v1/project/pom.xml",
+        "evidence/cir-producer-v2/project/pom.xml"
+      ],
+      "sha256": "de7d0f89b87ef2de2a129f3d630af31d68d02f88825fd546aaca48b5a9ba4fb6"
+    },
+    {
+      "bytes": 26958,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/proof.py",
+      "retainedAt": [
+        "cir-authoring-v2/proof.py",
+        "evidence/cir-producer-v2/project/proof.py"
+      ],
+      "sha256": "22bc6a9f05bd3a881e9e5c3c1da07c85ae043ebe99dac1e769dcece82354058c"
+    },
+    {
+      "bytes": 467,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+        "cir-authoring-v2/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+        "evidence/cir-producer-v1/project/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+        "evidence/cir-producer-v1/project/target/classes/META-INF/rewrite/m3-ci-752-regex.yml",
+        "evidence/cir-producer-v2/project/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+        "evidence/cir-producer-v2/project/target/classes/META-INF/rewrite/m3-ci-752-regex.yml"
+      ],
+      "sha256": "e1486e41112dc0e4a354fbbc8a54d27a539d28aec961c012243421b2c6cab243"
+    },
+    {
+      "bytes": 1213,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv"
+      ],
+      "sha256": "a212c4001d0a2a2df0289e4209bdb3c48846c2b8b2d750014171e55db6d494e3"
+    },
+    {
+      "bytes": 6447,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt"
+      ],
+      "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef"
+    },
+    {
+      "bytes": 7516,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt"
+      ],
+      "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada"
+    },
+    {
+      "bytes": 6447,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt"
+      ],
+      "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef"
+    },
+    {
+      "bytes": 7516,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt"
+      ],
+      "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada"
+    },
+    {
+      "bytes": 658,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt"
+      ],
+      "sha256": "e7a96b1290ead86d3861f0388423504078cc8f66f10303f73e0a7d44a6e5776b"
+    },
+    {
+      "bytes": 30148,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+        "cir-authoring-v2/src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+        "evidence/cir-producer-v1/project/src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+        "evidence/cir-producer-v2/project/src/test/java/com/synexia/rewrite/CirRecipeTest.java"
+      ],
+      "sha256": "c59301677407e959e05be52a814e093e6c007fb64fa1266d1c44c6db75852117"
+    },
+    {
+      "bytes": 6442,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after"
+      ],
+      "sha256": "9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697"
+    },
+    {
+      "bytes": 7514,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after"
+      ],
+      "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404"
+    },
+    {
+      "bytes": 6442,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after"
+      ],
+      "sha256": "9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697"
+    },
+    {
+      "bytes": 7514,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after"
+      ],
+      "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404"
+    },
+    {
+      "bytes": 658,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv"
+      ],
+      "sha256": "b2febbb17ed96ae6f582eee2e16af3fc5e435c23e350708f56397bee9ac38ab5"
+    },
+    {
+      "bytes": 7782,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/closure/A3Cases.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/closure/A3Cases.java",
+        "cir-authoring-v2/src/test/resources/closure/A3Cases.java",
+        "evidence/cir-producer-v1/project/src/test/resources/closure/A3Cases.java",
+        "evidence/cir-producer-v2/project/src/test/resources/closure/A3Cases.java",
+        "evidence/cir-producer-v2/project/target/test-classes/closure/A3Cases.java"
+      ],
+      "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298"
+    },
+    {
+      "bytes": 3137,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/closure/A3Fs.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/closure/A3Fs.java",
+        "cir-authoring-v2/src/test/resources/closure/A3Fs.java",
+        "evidence/cir-producer-v1/project/src/test/resources/closure/A3Fs.java",
+        "evidence/cir-producer-v2/project/src/test/resources/closure/A3Fs.java",
+        "evidence/cir-producer-v2/project/target/test-classes/closure/A3Fs.java"
+      ],
+      "sha256": "ebddb148600afd7ee7df1175175df7da86b3a2cb048ca9b4e723d4eec5c2fe8c"
+    },
+    {
+      "bytes": 16196,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/nested-a3/A3Lab.java.after",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/nested-a3/A3Lab.java.after",
+        "cir-authoring-v2/src/test/resources/nested-a3/A3Lab.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/nested-a3/A3Lab.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/nested-a3/A3Lab.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/nested-a3/A3Lab.java.after"
+      ],
+      "sha256": "c212736f000836cb782a5ff81fd2de48e67d36ea4b3bd53cf7743c4aadbfdaf6"
+    },
+    {
+      "bytes": 6117,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/nested-a3/A3LabTest.java.after",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/nested-a3/A3LabTest.java.after",
+        "cir-authoring-v2/src/test/resources/nested-a3/A3LabTest.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/nested-a3/A3LabTest.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/nested-a3/A3LabTest.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/nested-a3/A3LabTest.java.after"
+      ],
+      "sha256": "351eeac06154189e79f3d139336437d5911da5721c9a95a779ebd5d511997d9c"
+    },
+    {
+      "bytes": 17623,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/nested-a3/before/A3Lab.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/nested-a3/before/A3Lab.java",
+        "cir-authoring-v2/src/test/resources/nested-a3/before/A3Lab.java",
+        "evidence/cir-producer-v1/project/src/test/resources/nested-a3/before/A3Lab.java",
+        "evidence/cir-producer-v2/project/src/test/resources/nested-a3/before/A3Lab.java",
+        "evidence/cir-producer-v2/project/target/test-classes/nested-a3/before/A3Lab.java"
+      ],
+      "sha256": "f68fb01640e7bee16e67af34ff986006a8ebebca3c13e9088296540f844b2200"
+    },
+    {
+      "bytes": 3860,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-authoring-v2/src/test/resources/nested-a3/before/A3LabTest.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/nested-a3/before/A3LabTest.java",
+        "cir-authoring-v2/src/test/resources/nested-a3/before/A3LabTest.java",
+        "evidence/cir-producer-v1/project/src/test/resources/nested-a3/before/A3LabTest.java",
+        "evidence/cir-producer-v2/project/src/test/resources/nested-a3/before/A3LabTest.java",
+        "evidence/cir-producer-v2/project/target/test-classes/nested-a3/before/A3LabTest.java"
+      ],
+      "sha256": "225efc2885ba8c002d036ecf70b4dd8a13b646debc74afeb031b0fce624d3f18"
+    },
+    {
+      "bytes": 15029,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cir-spec-v2.json",
+      "retainedAt": [
+        "cir-spec-v2.json",
+        "evidence/cir-producer-v2/spec.json"
+      ],
+      "sha256": "6ab29f4f82803624282c8f20f65afa6413a3088cd63a5d6abf2f83748f217bd5"
+    },
+    {
+      "bytes": 1305,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v1/RESULT.json",
+      "retainedAt": [
+        "evidence/cir-producer-v1/RESULT.json"
+      ],
+      "sha256": "8e075767061e6958163d2ba84e9b96051b5ba2e844bd40770290cb219fbb86ef"
+    },
+    {
+      "bytes": 13178,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/commands.json",
+      "retainedAt": [
+        "evidence/cir-producer-v2/commands.json"
+      ],
+      "sha256": "058c0719377eb2b8fc9302f013fcacc0d8ad2712b69635944a3f1c64480889b9"
+    },
+    {
+      "bytes": 4931,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/README.md",
+      "retainedAt": [
+        "cir-authoring-v2/README.md",
+        "evidence/cir-producer-v2/project/README.md"
+      ],
+      "sha256": "707b37b547da43923b517a6fca3e1b957ad528ea55ddde7331850ce78de7d053"
+    },
+    {
+      "bytes": 4448,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+      "retainedAt": [
+        "cir-authoring-v1/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+        "cir-authoring-v2/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+        "evidence/cir-producer-v1/project/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+        "evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java"
+      ],
+      "sha256": "4f6c17a035e64106f172b488fded9b565d1af48d6a8ecbd4700b3ff0cc2cd1e1"
+    },
+    {
+      "bytes": 2706,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+      "retainedAt": [
+        "cir-authoring-v1/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+        "cir-authoring-v2/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+        "evidence/cir-producer-v1/project/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+        "evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java"
+      ],
+      "sha256": "b831177cbaaeca359a0b397eb4c74c0caf86c27666db702ef4492a42c210cd9f"
+    },
+    {
+      "bytes": 7151,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+      "retainedAt": [
+        "cir-authoring-v2/dependency-source/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+        "evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/atom/M3PureIntAtomEligibility.java"
+      ],
+      "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb"
+    },
+    {
+      "bytes": 12032,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "retainedAt": [
+        "cir-authoring-v1/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "cir-authoring-v2/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "evidence/cir-producer-v1/project/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "evidence/cir-producer-v2/project/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+      ],
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+    },
+    {
+      "bytes": 13805,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "retainedAt": [
+        "cir-authoring-v1/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "cir-authoring-v2/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "evidence/cir-producer-v1/project/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+        "evidence/cir-producer-v2/project/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
+      ],
+      "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599"
+    },
+    {
+      "bytes": 3604,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/pom.xml",
+      "retainedAt": [
+        "cir-authoring-v1/pom.xml",
+        "cir-authoring-v2/pom.xml",
+        "evidence/cir-producer-v1/project/pom.xml",
+        "evidence/cir-producer-v2/project/pom.xml"
+      ],
+      "sha256": "de7d0f89b87ef2de2a129f3d630af31d68d02f88825fd546aaca48b5a9ba4fb6"
+    },
+    {
+      "bytes": 26958,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/proof.py",
+      "retainedAt": [
+        "cir-authoring-v2/proof.py",
+        "evidence/cir-producer-v2/project/proof.py"
+      ],
+      "sha256": "22bc6a9f05bd3a881e9e5c3c1da07c85ae043ebe99dac1e769dcece82354058c"
+    },
+    {
+      "bytes": 467,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+        "cir-authoring-v2/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+        "evidence/cir-producer-v1/project/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+        "evidence/cir-producer-v1/project/target/classes/META-INF/rewrite/m3-ci-752-regex.yml",
+        "evidence/cir-producer-v2/project/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+        "evidence/cir-producer-v2/project/target/classes/META-INF/rewrite/m3-ci-752-regex.yml"
+      ],
+      "sha256": "e1486e41112dc0e4a354fbbc8a54d27a539d28aec961c012243421b2c6cab243"
+    },
+    {
+      "bytes": 1213,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv"
+      ],
+      "sha256": "a212c4001d0a2a2df0289e4209bdb3c48846c2b8b2d750014171e55db6d494e3"
+    },
+    {
+      "bytes": 6447,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt"
+      ],
+      "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef"
+    },
+    {
+      "bytes": 7516,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt"
+      ],
+      "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada"
+    },
+    {
+      "bytes": 6447,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt"
+      ],
+      "sha256": "acc1f301aef53281ccbb26c78921537de99f98bc3f401906f5be658c761f62ef"
+    },
+    {
+      "bytes": 7516,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt"
+      ],
+      "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada"
+    },
+    {
+      "bytes": 658,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+      "retainedAt": [
+        "cir-authoring-v1/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+        "cir-authoring-v2/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+        "evidence/cir-producer-v1/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+        "evidence/cir-producer-v1/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+        "evidence/cir-producer-v2/generated-candidate/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "evidence/cir-producer-v2/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+        "evidence/cir-producer-v2/project/target/classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt"
+      ],
+      "sha256": "e7a96b1290ead86d3861f0388423504078cc8f66f10303f73e0a7d44a6e5776b"
+    },
+    {
+      "bytes": 30148,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+        "cir-authoring-v2/src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+        "evidence/cir-producer-v1/project/src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+        "evidence/cir-producer-v2/project/src/test/java/com/synexia/rewrite/CirRecipeTest.java"
+      ],
+      "sha256": "c59301677407e959e05be52a814e093e6c007fb64fa1266d1c44c6db75852117"
+    },
+    {
+      "bytes": 6442,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after"
+      ],
+      "sha256": "9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697"
+    },
+    {
+      "bytes": 7514,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after"
+      ],
+      "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404"
+    },
+    {
+      "bytes": 6442,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after"
+      ],
+      "sha256": "9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697"
+    },
+    {
+      "bytes": 7514,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after"
+      ],
+      "sha256": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404"
+    },
+    {
+      "bytes": 658,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "cir-authoring-v2/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "evidence/cir-producer-v1/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "evidence/cir-producer-v2/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+        "evidence/cir-producer-v2/project/target/test-classes/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv"
+      ],
+      "sha256": "b2febbb17ed96ae6f582eee2e16af3fc5e435c23e350708f56397bee9ac38ab5"
+    },
+    {
+      "bytes": 7782,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/closure/A3Cases.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/closure/A3Cases.java",
+        "cir-authoring-v2/src/test/resources/closure/A3Cases.java",
+        "evidence/cir-producer-v1/project/src/test/resources/closure/A3Cases.java",
+        "evidence/cir-producer-v2/project/src/test/resources/closure/A3Cases.java",
+        "evidence/cir-producer-v2/project/target/test-classes/closure/A3Cases.java"
+      ],
+      "sha256": "677324e1566d482eb5b4470ec1a63d3493bb2a75fc77ea0edb61ba364906c298"
+    },
+    {
+      "bytes": 3137,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/closure/A3Fs.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/closure/A3Fs.java",
+        "cir-authoring-v2/src/test/resources/closure/A3Fs.java",
+        "evidence/cir-producer-v1/project/src/test/resources/closure/A3Fs.java",
+        "evidence/cir-producer-v2/project/src/test/resources/closure/A3Fs.java",
+        "evidence/cir-producer-v2/project/target/test-classes/closure/A3Fs.java"
+      ],
+      "sha256": "ebddb148600afd7ee7df1175175df7da86b3a2cb048ca9b4e723d4eec5c2fe8c"
+    },
+    {
+      "bytes": 16196,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/nested-a3/A3Lab.java.after",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/nested-a3/A3Lab.java.after",
+        "cir-authoring-v2/src/test/resources/nested-a3/A3Lab.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/nested-a3/A3Lab.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/nested-a3/A3Lab.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/nested-a3/A3Lab.java.after"
+      ],
+      "sha256": "c212736f000836cb782a5ff81fd2de48e67d36ea4b3bd53cf7743c4aadbfdaf6"
+    },
+    {
+      "bytes": 6117,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/nested-a3/A3LabTest.java.after",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/nested-a3/A3LabTest.java.after",
+        "cir-authoring-v2/src/test/resources/nested-a3/A3LabTest.java.after",
+        "evidence/cir-producer-v1/project/src/test/resources/nested-a3/A3LabTest.java.after",
+        "evidence/cir-producer-v2/project/src/test/resources/nested-a3/A3LabTest.java.after",
+        "evidence/cir-producer-v2/project/target/test-classes/nested-a3/A3LabTest.java.after"
+      ],
+      "sha256": "351eeac06154189e79f3d139336437d5911da5721c9a95a779ebd5d511997d9c"
+    },
+    {
+      "bytes": 17623,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/nested-a3/before/A3Lab.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/nested-a3/before/A3Lab.java",
+        "cir-authoring-v2/src/test/resources/nested-a3/before/A3Lab.java",
+        "evidence/cir-producer-v1/project/src/test/resources/nested-a3/before/A3Lab.java",
+        "evidence/cir-producer-v2/project/src/test/resources/nested-a3/before/A3Lab.java",
+        "evidence/cir-producer-v2/project/target/test-classes/nested-a3/before/A3Lab.java"
+      ],
+      "sha256": "f68fb01640e7bee16e67af34ff986006a8ebebca3c13e9088296540f844b2200"
+    },
+    {
+      "bytes": 3860,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/project/src/test/resources/nested-a3/before/A3LabTest.java",
+      "retainedAt": [
+        "cir-authoring-v1/src/test/resources/nested-a3/before/A3LabTest.java",
+        "cir-authoring-v2/src/test/resources/nested-a3/before/A3LabTest.java",
+        "evidence/cir-producer-v1/project/src/test/resources/nested-a3/before/A3LabTest.java",
+        "evidence/cir-producer-v2/project/src/test/resources/nested-a3/before/A3LabTest.java",
+        "evidence/cir-producer-v2/project/target/test-classes/nested-a3/before/A3LabTest.java"
+      ],
+      "sha256": "225efc2885ba8c002d036ecf70b4dd8a13b646debc74afeb031b0fce624d3f18"
+    },
+    {
+      "bytes": 9178,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/runtime-classpath.txt",
+      "retainedAt": [
+        "cir-package-inputs/source-context/acquisition/test-classpath-v3.txt",
+        "evidence/cir-producer-v1/runtime-classpath.txt",
+        "evidence/cir-producer-v2/runtime-classpath.txt"
+      ],
+      "sha256": "1fe9d70878efd807c04d5709f477bfe488f8d27bb7d42ee8382dc05e88a92197"
+    },
+    {
+      "bytes": 15029,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/spec.json",
+      "retainedAt": [
+        "cir-spec-v2.json",
+        "evidence/cir-producer-v2/spec.json"
+      ],
+      "sha256": "6ab29f4f82803624282c8f20f65afa6413a3088cd63a5d6abf2f83748f217bd5"
+    },
+    {
+      "bytes": 10760,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/staging.json",
+      "retainedAt": [
+        "evidence/cir-producer-v2/staging.json"
+      ],
+      "sha256": "a9cd32a002895e2af84421b6eb1d84c340970ae99c3e6467dfe27172650381dd"
+    },
+    {
+      "bytes": 98206,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/tool-links.json",
+      "retainedAt": [
+        "evidence/cir-producer-v1/tool-links.json",
+        "evidence/cir-producer-v2/tool-links.json"
+      ],
+      "sha256": "bcf3a804bb9af655dde72896e5b94286b4bdb1fea7cd29d5deb26b22bcafdb5c"
+    },
+    {
+      "bytes": 20034,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cir-producer-v2/tooling.json",
+      "retainedAt": [
+        "evidence/cir-producer-v1/tooling.json",
+        "evidence/cir-producer-v2/tooling.json"
+      ],
+      "sha256": "bb7d3927b01eeaa2170d04e8d3e521d7c073564196f8d42f9a21679d280e3187"
+    },
+    {
+      "bytes": 4857,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/producer-v2/RESULT.json",
+      "retainedAt": [
+        "evidence/producer-v2/RESULT.json"
+      ],
+      "sha256": "d6d265a959e378fce47d68b5aa4a3a3bbee14bebf21355a54bd8077cb51e8630"
+    },
+    {
+      "bytes": 1369,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/producer-v2/generated-candidate/OUTPUT.json",
+      "retainedAt": [
+        "evidence/producer-v2/generated-candidate/OUTPUT.json"
+      ],
+      "sha256": "0347e932f876d72db7d5247c54375fdc40f15f1138392ddffab03c0bb63834c5"
+    },
+    {
+      "bytes": 5217,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/review/cir-five-literals-root-review.json",
+      "retainedAt": [
+        "review/cir-five-literals-root-review.json"
+      ],
+      "sha256": "75c7faa54c96c34df0d27376bfaa168b97e8a1667e6a0f4c1d13b511138f51c1"
+    },
+    {
+      "bytes": 676,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v1/PATCH.json",
+      "retainedAt": [
+        "cir-package-inputs/source-context/continuation-20261005/m3/evidence/consumer-v1/PATCH.json"
+      ],
+      "sha256": "082a323ce1b3de43039b12b1d71a5f4ff960c51a22e146858d2b40f5488574ec"
+    },
+    {
+      "bytes": 3384,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v1/RESULT.json",
+      "retainedAt": [
+        "cir-package-inputs/source-context/continuation-20261005/m3/evidence/consumer-v1/RESULT.json"
+      ],
+      "sha256": "47a1efd8b72eb173d3c48124e549e7ecb28d332be09e97bc63290989ba34ba92"
+    },
+    {
+      "bytes": 2330245,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v1/inputs.json",
+      "retainedAt": [
+        "cir-package-inputs/source-context/continuation-20261005/m3/evidence/consumer-v1/inputs.json"
+      ],
+      "sha256": "12acb72d89dc57b4c996e51d6a2b76d933de5a42e0fafbe77c0b7f4ff6c48b1f"
+    },
+    {
+      "bytes": 8222,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/research/regex-matrix/independent/REVIEW.json",
+      "retainedAt": [
+        "cir-package-inputs/source-context/continuation-20261005/m3/research/regex-matrix/independent/REVIEW.json"
+      ],
+      "sha256": "309e6c30f4e6342fcffdd0aab81f1a52ae51748029bd0122ceb546322c23c806"
+    },
+    {
+      "bytes": 15464,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/source/AGENTS-9963.md",
+      "retainedAt": [
+        "cir-package-inputs/source-context/continuation-20261005/source/AGENTS-9963.md"
+      ],
+      "sha256": "086b03459e4f441d0ecf1c90773dd63877c03956957ec0f41ac7ceb90069c0f9"
+    },
+    {
+      "bytes": 2660,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-regex-template-admission-control-literals.md",
+      "retainedAt": [
+        "cir-package-inputs/source-context/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-regex-template-admission-control-literals.md"
+      ],
+      "sha256": "e7f05694d31286451c54925aeccdce6fbe5d61fc5e121c99183e1bbd9232088b"
+    },
+    {
+      "bytes": 3765,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-regex-template-admission.md",
+      "retainedAt": [
+        "cir-package-inputs/source-context/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-regex-template-admission.md"
+      ],
+      "sha256": "e6a88f16eb77e2c9d742a13003b3d5e78f708ca25f13e0949c4afbcf8d6964e5"
+    }
+  ],
+  "sourceTrialBytesUnchanged": true,
+  "status": "EXACT_SOURCE_INPUTS_AND_ARCHIVE_VERIFIED"
+}

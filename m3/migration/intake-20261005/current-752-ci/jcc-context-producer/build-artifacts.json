@@ -1,0 +1,247 @@
+[
+  {
+    "bytes": 342,
+    "path": "classes/META-INF/rewrite/m3-ci-752-jcc.yml",
+    "sha256": "0c3c2a8282cf205d656150964e3baddb03a4e31ad189ea9770e79b76bf6929b3"
+  },
+  {
+    "bytes": 3690,
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$1.class",
+    "sha256": "89b442e92cc55de2172e032f4f0650647509a015cf2b72dd3ebba505ac6fa71f"
+  },
+  {
+    "bytes": 4810,
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$2.class",
+    "sha256": "1235413f44f1e53c83a5fa0786530ce15548c92c6b636b40118eef9847105611"
+  },
+  {
+    "bytes": 1230,
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$Inventory.class",
+    "sha256": "f54fea5844ba1b19ee22e5ccfae495d4a9b2b03e9edfb5bc09ac620321ef628f"
+  },
+  {
+    "bytes": 2128,
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe$Target.class",
+    "sha256": "7eb62aee1d3e3f89575b4973ffba8e1defae3270853de61c96d1efbd21fe128e"
+  },
+  {
+    "bytes": 12466,
+    "path": "classes/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.class",
+    "sha256": "4193579cb92dd4afca14b5ee67d57580dc1b1afa64fef31a5b608a13a0959c13"
+  },
+  {
+    "bytes": 970,
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/manifest.tsv",
+    "sha256": "f41f9bbafabd4dba007d091d542972f40c5eab5c666b3ec077b5dd090370ef80"
+  },
+  {
+    "bytes": 16119,
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-1.txt",
+    "sha256": "9d79d07bb31ded0e5ec9eebef1095ae25be8f20c55f9e72aee4ba64852790594"
+  },
+  {
+    "bytes": 7629,
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-2.txt",
+    "sha256": "30a838a363fb05f9c1caf48fd36c0a67de0767708e4b198b77af37ee0c41eb63"
+  },
+  {
+    "bytes": 13634,
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-3.txt",
+    "sha256": "fde72eb9f2b682f50004defbc70e6d886a3f646abb0d89c0aec5de8ab0dbd30d"
+  },
+  {
+    "bytes": 2875,
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-4.txt",
+    "sha256": "e4ea964db1a6f9527122ff0dad1c969a43dc50a0f80c771c86b70bcd6da6dcaf"
+  },
+  {
+    "bytes": 3383,
+    "path": "classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-5.txt",
+    "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"
+  },
+  {
+    "bytes": 13206,
+    "path": "test-classes/before/m3/migration/test/test_jcc_handoff_context_profiles.py",
+    "sha256": "54114c84b923790cea717f85bdb78574aa3c14e00e1419e68c5cef7d8d87b1b4"
+  },
+  {
+    "bytes": 12660,
+    "path": "test-classes/before/m3/migration/test/test_jcc_handoff_packet.py",
+    "sha256": "1662cd99e60e03692e95bfdeb51dbf46c5c990dac7d5cadbd5e1ddb5fcad52fe"
+  },
+  {
+    "bytes": 2502,
+    "path": "test-classes/com/synexia/rewrite/CihRecipeTest$Fixture.class",
+    "sha256": "9c392c84ea309f9fe60076aa3ed65020a795c420eee1aee82eccd6310f0595f0"
+  },
+  {
+    "bytes": 3847,
+    "path": "test-classes/com/synexia/rewrite/CihRecipeTest$RecordingSourceSet.class",
+    "sha256": "bd7d4f9e588e1004d58eb968e55b8a99ade1e06d5035cc9b34c2d849c830593b"
+  },
+  {
+    "bytes": 1982,
+    "path": "test-classes/com/synexia/rewrite/CihRecipeTest$Replay.class",
+    "sha256": "aa0afb77b2d03f4a48058d40c9367372f1e8b86e08fc0057831618934b0e2b6b"
+  },
+  {
+    "bytes": 2113,
+    "path": "test-classes/com/synexia/rewrite/CihRecipeTest$Target.class",
+    "sha256": "2b1f96cfb62c881a44f4ae5b8929c308e8a4b77818d39b7c4fe3b8f80a3500e4"
+  },
+  {
+    "bytes": 32505,
+    "path": "test-classes/com/synexia/rewrite/CihRecipeTest.class",
+    "sha256": "a69a9e040a4b1d9574f91793cce1932283a7702860d993c605e8d14f8da41d59"
+  },
+  {
+    "bytes": 16827,
+    "path": "test-classes/context/m3/docs/name-mapping.schema.json",
+    "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b"
+  },
+  {
+    "bytes": 340001,
+    "path": "test-classes/context/m3/migration/intake-20261005/crate/after/0.txt",
+    "sha256": "8e229715d6783906b1ee249bb2707cdb5e412146219be6037154927abac893ea"
+  },
+  {
+    "bytes": 11773,
+    "path": "test-classes/context/m3/migration/intake-20261005/crate/after/1.txt",
+    "sha256": "fe7df1477c461ddfcedccd3ff2ca078d44dab5b7c5b46412a5873de611cb13c3"
+  },
+  {
+    "bytes": 21178,
+    "path": "test-classes/context/m3/migration/intake-20261005/crate/after/2.txt",
+    "sha256": "4d7496a37677aee3ba1aee206129625a5ed870d0f922eccde32ca670f09a11d8"
+  },
+  {
+    "bytes": 68888,
+    "path": "test-classes/context/m3/migration/intake-20261005/crate/after/3.txt",
+    "sha256": "4072d0cef765767e44e9ff93a11f2d7112b32f94ab6b3d07a03ed191307e2daf"
+  },
+  {
+    "bytes": 1437,
+    "path": "test-classes/context/m3/migration/intake-20261005/crate/after/4.txt",
+    "sha256": "8ccd586902d1b292310d6ded995cab15d14f56c43de3bdfa8c20bc4362eab517"
+  },
+  {
+    "bytes": 11078,
+    "path": "test-classes/context/m3/migration/intake-20261005/crate/after/5.txt",
+    "sha256": "af2c0ea782643d6860d10a3d9c35706781072a361fb74a8cf6ed4caa6236e5d6"
+  },
+  {
+    "bytes": 93931,
+    "path": "test-classes/context/m3/migration/intake-20261005/crate/after/6.txt",
+    "sha256": "1cfe107b886e495046ec77f74a2739705b403251ae4fafe640f0fe46ed656ed8"
+  },
+  {
+    "bytes": 56771,
+    "path": "test-classes/context/m3/migration/intake-20261005/crate/after/7.txt",
+    "sha256": "4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787"
+  },
+  {
+    "bytes": 77751,
+    "path": "test-classes/context/m3/migration/intake-20261005/crate/after/8.txt",
+    "sha256": "765f001aa41f95c1dfd9994ba64101526ce0324ede896228803133ec9313b9e9"
+  },
+  {
+    "bytes": 3341,
+    "path": "test-classes/context/m3/migration/intake-20261005/crate/after/9.txt",
+    "sha256": "cfe8e8930916ef96c7d23dd9d0942f082c5eb1d6cf4b2a2f6e9f3d69d8fa3e41"
+  },
+  {
+    "bytes": 196161,
+    "path": "test-classes/context/m3/migration/intake-20261005/crate/before/0.txt",
+    "sha256": "67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb"
+  },
+  {
+    "bytes": 23333,
+    "path": "test-classes/context/m3/migration/intake-20261005/crate/before/7.txt",
+    "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"
+  },
+  {
+    "bytes": 3288,
+    "path": "test-classes/context/m3/migration/intake-20261005/crate/plan.json",
+    "sha256": "47aa763f4678124df42f3181e68e2ff0a74636add9403c1e36e40224094e0cdc"
+  },
+  {
+    "bytes": 56771,
+    "path": "test-classes/context/m3/migration/migration.py",
+    "sha256": "4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787"
+  },
+  {
+    "bytes": 9860,
+    "path": "test-classes/context/m3/migration/recipe.py",
+    "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
+  },
+  {
+    "bytes": 3522,
+    "path": "test-classes/context/m3/tooling/migration-recipes/pom.xml",
+    "sha256": "a53bdeee8afe28b90cb0e348e718b70610a9487edb1b75b46e09bfb76e0f3dc9"
+  },
+  {
+    "bytes": 12032,
+    "path": "test-classes/context/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+    "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+  },
+  {
+    "bytes": 396,
+    "path": "test-classes/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+    "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1"
+  },
+  {
+    "bytes": 17031,
+    "path": "test-classes/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/01-jcc-source-handoff.md.txt",
+    "sha256": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337"
+  },
+  {
+    "bytes": 24139,
+    "path": "test-classes/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/02-source-destination-bindings.json.txt",
+    "sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126"
+  },
+  {
+    "bytes": 107504,
+    "path": "test-classes/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/03-root-coverage-obligations.tsv.txt",
+    "sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b"
+  },
+  {
+    "bytes": 220539,
+    "path": "test-classes/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/after00-name-mapping.json.txt",
+    "sha256": "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace"
+  },
+  {
+    "bytes": 196161,
+    "path": "test-classes/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/before00-name-mapping.json.txt",
+    "sha256": "67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb"
+  },
+  {
+    "bytes": 687,
+    "path": "test-classes/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/manifest.tsv",
+    "sha256": "258b5ab6f6cb7099685ee4548d5430fcb952561fefdf565a6dff149cf50c5f06"
+  },
+  {
+    "bytes": 2873,
+    "path": "test-classes/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-8131.json",
+    "sha256": "8034d77f1124584888dce10760bd2f5dae55eeb93497f7a0db1d09a3a197ec5f"
+  },
+  {
+    "bytes": 2861,
+    "path": "test-classes/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
+    "sha256": "648f80ae4073400f1ea1210f8cdc26942019d53eb4452d839961c466f395d05a"
+  },
+  {
+    "bytes": 1815,
+    "path": "test-classes/context/src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+    "sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"
+  },
+  {
+    "bytes": 4145,
+    "path": "test-classes/context-manifest.tsv",
+    "sha256": "4dd2b505c0943a244cea446643cf24edc3fb971469308de8069b6fdf2680005c"
+  },
+  {
+    "bytes": 2284,
+    "path": "test-classes/verify_context.py",
+    "sha256": "6ec09d459bcfd1fb6b916bcfef440c590f8dc11685fdfe87ffe0acf2f3f1bc6f"
+  }
+]

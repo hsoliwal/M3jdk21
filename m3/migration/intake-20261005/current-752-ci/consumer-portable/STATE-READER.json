@@ -1,0 +1,14 @@
+{
+  "changedLines": 1,
+  "consumerV1Status": "STOPPED",
+  "originalSHA256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574",
+  "precedence": [
+    "status",
+    "result",
+    "state"
+  ],
+  "preservedResultFields": true,
+  "pythonComponentStatus": "PASS_BOUNDED_PYTHON_RECEIVING_COMPONENTS",
+  "scope": "Metadata-only terminal status reader; no proof execution, receipt edits or inferred acceptance",
+  "versionSHA256": "99a140af284c3280d285d039e59cbebee4e961ae530fe4117e1421e485a09f9b"
+}

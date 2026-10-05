@@ -1,0 +1,16 @@
+{
+  "schema":"synexia.ci-752.output/1",
+  "sourceCommit":"9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "targetCommit":"752191c9291f6467110fb8a7badfbdc4c2d41af2",
+  "outputs":[
+    {"path":".github/workflows/m3-foundation.yml","sha256":"f6f569ef91e6b17be68a48801d1f97639d288d436c277a6401628bd82e210d3e","bytes":2413},
+    {"path":"m3/backports/compatibility_policy.py","sha256":"d51301d3ea225e89b000a2256855ab7806a1faf20c5fa493eb5666de1e7880c2","bytes":4695},
+    {"path":"m3/backports/test_compatibility_policy.py","sha256":"dbd50a08d902a4009c66e22b8e6f499a66bbe4316c2d96d1e47c60194b572937","bytes":7177},
+    {"path":"m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java","sha256":"f34470a701cf71b4b4abbe1fa9a5091392a930426ec84d700f13e53edd244629","bytes":5380},
+    {"path":"m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java","sha256":"3f3ab065d9e87e9f6095629a56b052642ec9d0883a466430e90a4a4355edd05b","bytes":4975}
+  ],
+  "outputSeal":"3895ac2617d07cefd481a299aa18092d49c5bfb9733177740038b35e1c161442",
+  "cijTargets":2,"citTargets":3,"cijMixedStates":4,"citMixedStates":8,
+  "unionMixedStates":32,"unionOrders":2,"cijRefusals":12,"citRefusals":14,"postScanRefusals":10,
+  "crossFamilyAtomicity":false,"canonicalProductionApplied":false,"strictCanonicalAdmission":false
+}

@@ -1,0 +1,22 @@
+{
+  "counts": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 6
+  },
+  "methods": [
+    "allMixedStates",
+    "catalogueCompilationAndRuntime",
+    "exactRepairScope",
+    "initialRefusals",
+    "namedRecipeReplay",
+    "postScanDrift"
+  ],
+  "report": {
+    "bytes": 17586,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cia-producer-v1/project/target/surefire-reports/TEST-com.synexia.rewrite.CiaRecipeTest.xml",
+    "sha256": "e7fef1c96a01d2dd642e8f4adfa30839f2e2156d03c91e6847f9bb460a47a2ed"
+  },
+  "suite": "com.synexia.rewrite.CiaRecipeTest"
+}

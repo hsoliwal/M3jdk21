@@ -1,0 +1,165 @@
+{
+  "boundary": "The original producer-source count, finite receiver-evidence census and outer envelopes are separate sets. Archives and qualification are unchanged. Outer whitelist controls and these CURRENT entry bytes are not inputs to their own finite census.",
+  "consumerBundleSHA256": "2e550586cbce37d2a2956f6a400670889dde4bc6daecd7e3f8e3a722a3e6f46f",
+  "consumerManifestSHA256": "8c3d4e6a28d4314a1de4c3a15c3616a371e04ac2eaf6357852c6ce28c1642db4",
+  "consumerResultSHA256": "c037e9fd5b622f17d161d8efe1fbb15f2a128f803e27b70292448403dc43bd80",
+  "counts": {
+    "declaredProducerSourcePaths": 387,
+    "finiteMappedSourcePaths": 614,
+    "finiteSourceAndOuterUnionPaths": 642,
+    "mainReceiverAndOuterUnionPaths": 640,
+    "mainReceiverPaths": 612,
+    "outerEnvelopePaths": 28,
+    "qualifiedPaths": 221,
+    "receiverProvenanceSourceAliases": 227
+  },
+  "historicalPreUploadEnvelopes": {
+    "count": 17,
+    "meaning": "All17 old rows and bodies remain exact historical pre-upload metadata. Their older physical whitelist and census are superseded for this delivery by the operative references above.",
+    "receiverWhitelist": {
+      "bytes": 18551,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/final-delivery-envelopes-v1/receiver-supplement.json",
+      "sha256": "8f20f54fb9ce34db397a46de69a8125b4a1f33d2740c92da909b06e0719bf5d6"
+    },
+    "receivingPaths": [
+      "m3/migration/intake-20261005/current-752-ci/delivery-envelope/POST-PASS-PUBLICATION.json",
+      "m3/migration/intake-20261005/current-752-ci/delivery-envelope/QUALIFIED-CONSUMER.json",
+      "m3/migration/intake-20261005/current-752-ci/delivery-envelope/QUALIFIED-README.md",
+      "m3/migration/intake-20261005/current-752-ci/delivery-envelope/collect_receiver_source_v1.py",
+      "m3/migration/intake-20261005/current-752-ci/delivery-envelope/coverage-append.json",
+      "m3/migration/intake-20261005/current-752-ci/delivery-envelope/coverage-plan.json",
+      "m3/migration/intake-20261005/current-752-ci/delivery-envelope/package-refusal-v5/PACK-COMMAND.json",
+      "m3/migration/intake-20261005/current-752-ci/delivery-envelope/package-refusal-v5/REFUSAL.json",
+      "m3/migration/intake-20261005/current-752-ci/delivery-envelope/package-refusal-v5/pack.stderr.log",
+      "m3/migration/intake-20261005/current-752-ci/delivery-envelope/package-refusal-v5/pack.stdout.log",
+      "m3/migration/intake-20261005/current-752-ci/delivery-envelope/package-refusal-v5/package-plan.json",
+      "m3/migration/intake-20261005/current-752-ci/delivery-envelope/package-refusal-v5/package_evidence_state_v1.py",
+      "m3/migration/intake-20261005/current-752-ci/delivery-envelope/prepare_consumer_package_v7.patch",
+      "m3/migration/intake-20261005/current-752-ci/delivery-envelope/prepare_receiver_whitelist_v5.patch",
+      "m3/migration/intake-20261005/current-752-ci/delivery-envelope/receiver-whitelist.json",
+      "m3/migration/intake-20261005/current-752-ci/delivery-envelope/source-to-receiving.json",
+      "m3/migration/intake-20261005/current-752-ci/delivery-envelope/source-whitelist.json"
+    ],
+    "sourcePaths": [
+      "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/envelope/POST-PASS-PUBLICATION.json",
+      "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/envelope/QUALIFIED-CONSUMER.json",
+      "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/envelope/QUALIFIED-README.md",
+      "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/envelope/collect_receiver_source_v1.py",
+      "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/envelope/coverage-append.json",
+      "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/envelope/coverage-plan.json",
+      "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/envelope/package-refusal-v5/PACK-COMMAND.json",
+      "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/envelope/package-refusal-v5/REFUSAL.json",
+      "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/envelope/package-refusal-v5/pack.stderr.log",
+      "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/envelope/package-refusal-v5/pack.stdout.log",
+      "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/envelope/package-refusal-v5/package-plan.json",
+      "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/envelope/package-refusal-v5/package_evidence_state_v1.py",
+      "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/envelope/prepare_consumer_package_v7.patch",
+      "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/envelope/prepare_receiver_whitelist_v5.patch",
+      "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/envelope/receiver-whitelist.json",
+      "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/envelope/source-to-receiving.json",
+      "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/envelope/source-whitelist.json"
+    ],
+    "sourceWhitelist": {
+      "bytes": 18974,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/final-delivery-envelopes-v1/source-supplement.json",
+      "sha256": "127b98f9c4399e3079404b6a7bb72ad613b8f4a3bf06a6eaa71e4574af6190ae"
+    }
+  },
+  "operative": {
+    "COPY_CUSTODY_ARCHIVE_RECORD.json": {
+      "bytes": 32702,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/publication/custody-archive-contingency-v1/COPY_CUSTODY_ARCHIVE_RECORD.json",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/COPY_CUSTODY_ARCHIVE_RECORD.json",
+      "relativePath": "delivery-envelope/archive-locator-v1/COPY_CUSTODY_ARCHIVE_RECORD.json",
+      "sha256": "9e2836c488ced0ae07e302e99ad7c455a28fe5b85fe197588aaab57990940351",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/delivery-envelope/archive-locator-v1/COPY_CUSTODY_ARCHIVE_RECORD.json"
+    },
+    "coverage-append.json": {
+      "bytes": 295082,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/receiver-source-cohort-v2/coverage-append.json",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/coverage-append.json",
+      "relativePath": "delivery-envelope/archive-locator-v1/coverage-append.json",
+      "sha256": "16108baff154b3ec89bf4722a846123176100c67f76f9b5a5eee98a0514567cb",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/delivery-envelope/archive-locator-v1/coverage-append.json"
+    },
+    "coverage-plan.json": {
+      "bytes": 1015,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/receiver-source-cohort-v2/coverage-plan.json",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/coverage-plan.json",
+      "relativePath": "delivery-envelope/archive-locator-v1/coverage-plan.json",
+      "sha256": "91df78ca4ea3fe9e7f6af8214b9062dfe22bdc17c8a16604bc5bb321e8739a48",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/delivery-envelope/archive-locator-v1/coverage-plan.json"
+    },
+    "prepare_final_delivery_envelopes_v2.py": {
+      "bytes": 19170,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/packaging/prepare_final_delivery_envelopes_v2.py",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/prepare_final_delivery_envelopes_v2.py",
+      "relativePath": "delivery-envelope/archive-locator-v1/prepare_final_delivery_envelopes_v2.py",
+      "sha256": "4edced2b83f862ac2793f2526e9e1794d5046d52010736f703236f5e6e4dd7fc",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/delivery-envelope/archive-locator-v1/prepare_final_delivery_envelopes_v2.py"
+    },
+    "prepare_receiver_whitelist_v6.patch": {
+      "bytes": 5674,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/packaging/prepare_receiver_whitelist_v6.patch",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/prepare_receiver_whitelist_v6.patch",
+      "relativePath": "delivery-envelope/archive-locator-v1/prepare_receiver_whitelist_v6.patch",
+      "sha256": "531cc600b15e6a79d8254734c6ae0ff3826953ef34ac66cd860af08c8b8112c9",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/delivery-envelope/archive-locator-v1/prepare_receiver_whitelist_v6.patch"
+    },
+    "prepare_receiver_whitelist_v6.py": {
+      "bytes": 19969,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/packaging/prepare_receiver_whitelist_v6.py",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/prepare_receiver_whitelist_v6.py",
+      "relativePath": "delivery-envelope/archive-locator-v1/prepare_receiver_whitelist_v6.py",
+      "sha256": "0d982a856d35b7fb9f64f4d6cdf0a25ddcf118d20f07fccbdf729c5f1711d65e",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/delivery-envelope/archive-locator-v1/prepare_receiver_whitelist_v6.py"
+    },
+    "receiver-whitelist.json": {
+      "bytes": 359542,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/receiver-whitelist-v6.json",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+      "relativePath": "delivery-envelope/archive-locator-v1/receiver-whitelist.json",
+      "sha256": "dd00b3ffb24dff10006f6f4c7a7e73aefd17b4e0bac870cc8ff44935e2025a45",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/delivery-envelope/archive-locator-v1/receiver-whitelist.json"
+    },
+    "source-to-receiving.json": {
+      "bytes": 166219,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/receiver-source-cohort-v2/source-to-receiving.json",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/source-to-receiving.json",
+      "relativePath": "delivery-envelope/archive-locator-v1/source-to-receiving.json",
+      "sha256": "5008ed4ea2dc5bb79f5a67aed31bc71edb8fdf291436456ae73679a3920dc24e",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/delivery-envelope/archive-locator-v1/source-to-receiving.json"
+    },
+    "source-whitelist.json": {
+      "bytes": 150609,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/receiver-source-cohort-v2/source-whitelist.json",
+      "receivingPath": "m3/migration/intake-20261005/current-752-ci/delivery-envelope/archive-locator-v1/source-whitelist.json",
+      "relativePath": "delivery-envelope/archive-locator-v1/source-whitelist.json",
+      "sha256": "fc812d914d4b2f93a1932ed0a7b326c57ba336b80c5f889c5a8f8cff1ece014d",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/receiver-current/delivery-envelope/archive-locator-v1/source-whitelist.json"
+    }
+  },
+  "originalSourcePublicationCommit": "e1cf684627a66ee784cfca0b42553531b2d8e7d4",
+  "physicalRepresentationDelta": {
+    "added": [
+      "m3/migration/intake-20261005/current-752-ci/consumer-portable/COPY-CUSTODY.ARCHIVE.json",
+      "m3/migration/intake-20261005/current-752-ci/consumer-portable/transport-refusals/LARGEST-BLOB-TRANSPORT-FAILURE-v1.json",
+      "m3/migration/intake-20261005/current-752-ci/consumer-portable/transport-refusals/LARGEST-BLOB-TRANSPORT-FAILURE-v2.json"
+    ],
+    "archiveLocatorSHA256": "29e58bf8cae108b38b36fa5c370dc2db5e370edd4f2131a728456f885f1d8b97",
+    "logicalCustodyRetainedInArchive": true,
+    "removed": [
+      "m3/migration/intake-20261005/current-752-ci/consumer-portable/COPY-CUSTODY.json"
+    ],
+    "unchangedEntries": 609
+  },
+  "proofGatesExecuted": false,
+  "receivingCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+  "receivingHead": "5c1ee9490e76943dfdb3ca27fade0d093d017226",
+  "remoteWrites": false,
+  "runtimeAccepted": false,
+  "schema": "m3.current-delivery-index/1",
+  "sourceProofCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "state": "OPERATIVE_PUBLICATION_METADATA",
+  "transportRefusalAttribution": "Both retained connector failures were source-repository upload attempts. M3 receives the exact records as provenance under the shared request-size constraint; no separate failed M3 attempt is claimed."
+}

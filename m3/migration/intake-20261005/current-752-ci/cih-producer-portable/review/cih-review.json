@@ -1,0 +1,91 @@
+{
+  "actualProjectFileSetEqualsDeclaration": true,
+  "actualReceiverStopResultSHA256": "65ad6376f5e88ca2bd1e33e549c262a50bc58952ede7af8c17c9b0beed05ed73",
+  "actualSchedulerOutputsFeedPythonExecution": true,
+  "allDeclaredInputIdentitiesMatch": true,
+  "authored": {
+    "bytes": 7729,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/CIH-AUTHORED.json",
+    "sha256": "0fe3a9f01cba3c679d7e77b8f72dcc72fe7da7614aeea3db05bc3d5457230237"
+  },
+  "changedPacketMethods": [
+    "setUpClass"
+  ],
+  "changedProfileMethods": [
+    "setUpClass",
+    "context",
+    "exercise_setup"
+  ],
+  "compositeManifestSHA256": "f25a39ea2c764a5a9f2a84b43915aa4480aa4302718bc098bd4bfaa39727f7b3",
+  "contextFiles": 18,
+  "contextFilesMatchExactCompositeManifest": true,
+  "currentPlanChanges": [
+    "recipe_id",
+    "one exact POM guard SHA256",
+    "plan_sha256"
+  ],
+  "defectsFound": [],
+  "designedInitialRefusals": 16,
+  "designedNestedPacketExecutions": 18,
+  "designedPostScanRefusals": 10,
+  "designedSchedulerStates": 32,
+  "designedTopLevelPythonExecutions": 21,
+  "exactAllowedPairs": [
+    "historical validator + historical POM",
+    "intake validator + historical POM",
+    "intake validator + Cia POM"
+  ],
+  "extraInputs": 18,
+  "historicalPlansAndFourPacketOutputsRetained": true,
+  "historicalTestImagesPreservedIn": [
+    "m3/migration/intake-20261005/reconcile-8131/crate/after/1.txt",
+    "m3/migration/intake-20261005/reconcile-8131/crate/after/3.txt"
+  ],
+  "javaFixture": {
+    "bytes": 23936,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cih-authoring-v1/src/test/java/com/synexia/rewrite/CihRecipeTest.java",
+    "sha256": "2445078d1e0b0dfe4b69320267d4664044081fa73a76e466ac055114391b3c9f"
+  },
+  "limits": [
+    "Ordered producer gates must execute separately against these frozen bytes.",
+    "Focused producer acceptance does not grant full receiver, Java reactor, native, canonical or product acceptance.",
+    "Receiver24 must handle absent preimages and exact three validator/POM contexts; its proof helpers are separate review scope."
+  ],
+  "newContextMethodCount": 7,
+  "original569ActiveExceptions": [
+    "m3/migration/test/test_jcc_handoff_context_profiles.py",
+    "m3/migration/test/test_jcc_handoff_packet.py"
+  ],
+  "projectFiles": 34,
+  "proofGatesExecuted": false,
+  "publicationActionsPerformed": false,
+  "pythonVerifier": {
+    "bytes": 2284,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cih-authoring-v1/src/test/resources/verify_context.py",
+    "sha256": "6ec09d459bcfd1fb6b916bcfef440c590f8dc11685fdfe87ffe0acf2f3f1bc6f"
+  },
+  "remainingOriginal569PathsToRetain": 567,
+  "replacements": 2,
+  "retainedPacketMethodBodies": 6,
+  "retainedProfileMethodBodies": 8,
+  "reviewer": "/root/cia_review",
+  "runner": {
+    "bytes": 33872,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cih-authoring-v1/proof.py",
+    "sha256": "5ff7acc563cb45fa92ff1d6c35d06710e816cd93d4e1bcb16031bc151ca551d3"
+  },
+  "schema": "synexia.cih-752.independent-authoring-review/1",
+  "scope": "Frozen Cih source, exact project closure, scheduler fixture, Python execution verifier, proof runner and before/after lineage; static reads and independent byte/hash/AST comparisons only. No runtime PASS claimed.",
+  "sealedPythonExecutableForwardedToMavenAndStandalone": true,
+  "skipAcceptancePermitted": false,
+  "sourceFilesEdited": false,
+  "spec": {
+    "bytes": 20795,
+    "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cih-spec-v1.json",
+    "sha256": "4c547c59a2bcbcf41000363a5c74064faea25c07926b11f6bf1b973e6e0d3e0b"
+  },
+  "status": "STATIC_REVIEW_CLEAR_FOR_ORDERED_GATES",
+  "targetCount": 5,
+  "targetSetDisjointFromPrior19": true,
+  "trueAbsentAdditions": 3
+}

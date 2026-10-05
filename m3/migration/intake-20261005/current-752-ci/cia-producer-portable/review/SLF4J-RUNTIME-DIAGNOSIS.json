@@ -1,0 +1,134 @@
+{
+  "a3Slf4jEntries": [],
+  "bindingAndProviderEntries": {
+    "a3": [],
+    "migration": []
+  },
+  "candidateCodeExecuted": false,
+  "classpathCounts": {
+    "a3": 45,
+    "migration": 51
+  },
+  "classpathSources": {
+    "a3": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v2/work/m3/tooling/a3/target/surefire-reports/TEST-com.m3.a3.A3ApplyTest.xml",
+    "migration": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v2/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3A3RegexMemoryLabDeliveryRecipeTest.xml"
+  },
+  "errorEvidence": [
+    {
+      "firstFrames": [
+        "at org.openrewrite.config.ClasspathScanningLoader.<clinit>(ClasspathScanningLoader.java:42)",
+        "at org.openrewrite.config.Environment$Builder.scanRuntimeClasspath(Environment.java:224)",
+        "at org.openrewrite.config.ClasspathScanningLoader.<clinit>(ClasspathScanningLoader.java:42)"
+      ],
+      "loggerFactoryMissing": true,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v2/work/m3/tooling/a3/target/surefire-reports/com.m3.a3.A3ApplyTest.txt"
+    },
+    {
+      "firstFrames": [
+        "at org.openrewrite.Recipe.<clinit>(Recipe.java:63)",
+        "at org.openrewrite.Recipe.<clinit>(Recipe.java:63)",
+        "at org.openrewrite.Recipe.<clinit>(Recipe.java:63)"
+      ],
+      "loggerFactoryMissing": true,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v2/work/m3/tooling/a3/target/surefire-reports/com.m3.a3.A3LabTest.txt"
+    }
+  ],
+  "gatesRun": false,
+  "inputs": [
+    {
+      "bytes": 5301,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/dependencies/m2-v3/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.pom",
+      "sha256": "41da8f872a8cd817c2c151fe21610d2ee6d733d6a20a9ba46c1889e6e527868e"
+    },
+    {
+      "bytes": 5556,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/dependencies/m2-v3/org/openrewrite/rewrite-java/8.17.1/rewrite-java-8.17.1.pom",
+      "sha256": "8f1625cf3fe6facfe2504e9268e3906e5f5465342169c2cb5cf6c429a931bf09"
+    },
+    {
+      "bytes": 4518,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/dependencies/m2-v3/org/openrewrite/rewrite-test/8.17.1/rewrite-test-8.17.1.pom",
+      "sha256": "2644ced63be692a20cc768db86f9c9ac618140b62374e9fb64f2d3e17502cdd0"
+    },
+    {
+      "bytes": 2743,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/dependencies/m2-v3/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.pom",
+      "sha256": "fb046a9c229437928bb11c2d27c8b5d773eb8a25e60cbd253d985210dedc2684"
+    },
+    {
+      "bytes": 22383,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v2/work/m3/tooling/a3/target/surefire-reports/TEST-com.m3.a3.A3ApplyTest.xml",
+      "sha256": "bd5ea5660474bf429a2594823a9bac6ccb5cff59318817b88f93a19d399e8d1a"
+    },
+    {
+      "bytes": 22180,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v2/work/m3/tooling/migration-recipes/target/surefire-reports/TEST-com.m3.rewrite.M3A3RegexMemoryLabDeliveryRecipeTest.xml",
+      "sha256": "862e1040c226bda34af13bccb2675863705d7d4665259be0f44e01bc3e611d0c"
+    },
+    {
+      "bytes": 41125,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/dependencies/m2-v3/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar",
+      "sha256": "d3ef575e3e4979678dc01bf1dcce51021493b4d11fb7f1be8ad982877c16a1c0"
+    },
+    {
+      "bytes": 3633,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v2/work/m3/tooling/a3/pom.xml",
+      "sha256": "27308b049acc122f62f9cb9a9a679a94640952c423b04495c0ef5b9a2c824ec1"
+    },
+    {
+      "bytes": 3383,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v2/work/m3/tooling/migration-recipes/pom.xml",
+      "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"
+    },
+    {
+      "bytes": 1622,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v2/work/m3/pom.xml",
+      "sha256": "8124b37765f457df8d8aa6b9b89f54efba8845e4fdec399f4d41e809c3956a36"
+    },
+    {
+      "bytes": 2678,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v2/work/m3/tooling/a3/target/surefire-reports/com.m3.a3.A3ApplyTest.txt",
+      "sha256": "764a39a211020e73947b830b15e8d4cfe7ca9a6623f5b2c5ef7e86ce792a4a3f"
+    },
+    {
+      "bytes": 3404,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/evidence/consumer-v2/work/m3/tooling/a3/target/surefire-reports/com.m3.a3.A3LabTest.txt",
+      "sha256": "c0c690824a586dcaf7df4e65c0c72026480fc2c05d0dcd7f4f68e6dca5b5a61a"
+    }
+  ],
+  "limits": "Dependency diagnosis only; no repaired runtime was executed. This does not address separate A3 algorithm/null or TSV-fixture failures.",
+  "migrationSlf4jEntries": [
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/dependencies/m2-v3/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar"
+  ],
+  "pomEdits": false,
+  "rationale": [
+    "The missing org.slf4j.LoggerFactory class belongs to slf4j-api, and the actual cached1.7.36 JAR contains it.",
+    "Both Recipe and ClasspathScanningLoader initialization fail inside the exported OpenRewrite-backed recipe runtime.",
+    "Successful migration tests receive API1.7.36 only via test-scoped rewrite-test8.17.1; that dependency is not propagated to A3.",
+    "Runtime scope on migration-recipes supplies its own exported runtime requirement and propagates to downstream A3 test/runtime classpaths without broadening compile dependencies. Existing compilation already passed; neither module directly imports SLF4J in main sources.",
+    "The actual51-entry migration test classpath contains no SLF4J1 binding class or SLF4J2 provider service among its JARs. A binding is not established as necessary by these failures.",
+    "Keep OpenRewrite8.17.1 and the already resolved API1.7.36 pin. Adding task-specific slf4j-simple2.0.13 would add an unneeded backend and version change."
+  ],
+  "receivingCommit": "752191c9291f6467110fb8a7badfbdc4c2d41af2",
+  "recommendation": {
+    "additionalDownloadsNeededForThisArtifact": false,
+    "artifactId": "slf4j-api",
+    "bindingRequiredForObservedClassFailure": false,
+    "groupId": "org.slf4j",
+    "owner": "m3/tooling/migration-recipes/pom.xml",
+    "scope": "runtime",
+    "version": "1.7.36"
+  },
+  "remoteActions": false,
+  "rewriteCoreDeclaresSlf4j": false,
+  "rewriteTestSlf4jDependency": {
+    "artifactId": "slf4j-api",
+    "groupId": "org.slf4j",
+    "optional": "",
+    "scope": "runtime",
+    "version": "1.7.36"
+  },
+  "schema": "m3.a3.slf4j-runtime-diagnosis/1",
+  "sourceCommit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
+  "status": "INDEPENDENT_READ_ONLY_CONFIRMATION"
+}

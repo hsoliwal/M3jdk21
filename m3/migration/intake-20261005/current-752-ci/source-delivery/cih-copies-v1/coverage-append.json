@@ -1,0 +1,1604 @@
+{
+  "allSourcePathCount": 387,
+  "allSourcePaths": [
+    "synexia-openrewrite-recipes/docs/20261005-m3-a3-runtime-admission.md",
+    "synexia-openrewrite-recipes/docs/20261005-m3-ci-admission-correction.md",
+    "synexia-openrewrite-recipes/docs/20261005-m3-ci-admission.md",
+    "synexia-openrewrite-recipes/docs/20261005-m3-ci-owner-resolution.md",
+    "synexia-openrewrite-recipes/docs/20261005-m3-corpus-regex-admission.md",
+    "synexia-openrewrite-recipes/docs/20261005-m3-jcc-context-admission.md",
+    "synexia-openrewrite-recipes/docs/20261005-m3-jcc-context-closure-admission.md",
+    "synexia-openrewrite-recipes/docs/20261005-m3-regex-template-admission-control-literals.md",
+    "synexia-openrewrite-recipes/docs/20261005-m3-regex-template-admission.md",
+    "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3-ci-752-text.yml",
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ci-752-text/manifest.tsv",
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ci-752-text/target-1.txt",
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ci-752-text/target-2.txt",
+    "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ci-752-text/target-3.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/README.md",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/evidence/authoring/CIA-AUTHORED.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/evidence/authoring/QUALIFIED-CIA.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/evidence/authoring/SLF4J-RUNTIME-DIAGNOSIS.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/pom.xml",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/proof.py",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/src/main/resources/META-INF/rewrite/m3-ci-752-a3.yml",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/manifest.tsv",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-1.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-2.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-3.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-4.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-5.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-a3/target-6.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/src/test/java/com/synexia/rewrite/CiaRecipeTest.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Alg.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/src/test/resources/before/m3/tooling/a3/src/test/java/com/m3/a3/A3PlanTest.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/src/test/resources/before/m3/tooling/migration-recipes/pom.xml",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/src/test/resources/before/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3Alg.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/a3-algorithm-catalogue/after/A3PlanTest.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/src/test/resources/closure/A3AlgTest.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/src/test/resources/closure/A3Fs.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-a3/src/test/resources/closure/A3Plan.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/README.md",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/evidence/authoring/CIC-AUTHORED.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/evidence/authoring/QUALIFIED-CIC.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/evidence/authoring/cic-spec-v1.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/pom.xml",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/proof.py",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/main/resources/META-INF/rewrite/m3-ci-752-corpus.yml",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/manifest.tsv",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-1.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-2.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-corpus/target-3.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/test/java/com/synexia/rewrite/CicRecipeTest.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-corpus/src/test/resources/closure/A3Fs.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/README.md",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/evidence/authoring/CIH-AUTHORED-v2.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/evidence/authoring/CIH-PLAN-AUTHORED.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/evidence/authoring/QUALIFIED-CIH.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/evidence/authoring/cih-spec-v4.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/pom.xml",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/proof.py",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/main/resources/META-INF/rewrite/m3-ci-752-jcc.yml",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/manifest.tsv",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-1.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-2.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-3.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-4.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-5.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/java/com/synexia/rewrite/CihRecipeTest.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/before/m3/migration/test/test_jcc_handoff_context_profiles.py",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/before/m3/migration/test/test_jcc_handoff_packet.py",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context-manifest.tsv",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/docs/name-mapping.schema.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/after/0.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/after/1.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/after/2.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/after/3.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/after/4.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/after/5.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/after/6.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/after/7.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/after/8.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/after/9.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/before/0.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/before/7.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/plan.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/migration.py",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/recipe.py",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/pom.xml",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/01-jcc-source-handoff.md.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/02-source-destination-bindings.json.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/03-root-coverage-obligations.tsv.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/after00-name-mapping.json.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/before00-name-mapping.json.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/manifest.tsv",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-8131.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/verify_context.py",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/README.md",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/dependency-source/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/dependency-source/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/dependency-source/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/evidence/authoring/CIR-AUTHORED.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/evidence/authoring/CIR-CLOSURE-CORRECTION-v2.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/evidence/authoring/INDEPENDENT-REVIEW.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/evidence/authoring/QUALIFIED-CIR.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/evidence/authoring/ROOT-REVIEW.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/pom.xml",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/proof.py",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/main/resources/META-INF/rewrite/m3-ci-752-regex.yml",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/manifest.tsv",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-1.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-2.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-3.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-4.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-regex/target-5.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/java/com/synexia/rewrite/CirRecipeTest.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/before/m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/closure/A3Cases.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/closure/A3Fs.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/nested-a3/A3Lab.java.after",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/nested-a3/A3LabTest.java.after",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/nested-a3/before/A3Lab.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752-regex/src/test/resources/nested-a3/before/A3LabTest.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/README.md",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/dependency-source/com/synexia/rewrite/M3EditScope.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/dependency-source/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/dependency-source/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/dependency-source/com/synexia/rewrite/M3ScopeInference.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/evidence/authoring/FINAL_REPORT.md",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/evidence/authoring/OUTPUT_CONTRACT.tsv",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/evidence/authoring/OWNER-PROVENANCE.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/evidence/authoring/PREFLIGHT-REFUSAL-v1.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/evidence/authoring/PROVENANCE.tsv",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/evidence/authoring/RUN_CONTEXT.tsv",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/evidence/authoring/STATUS.tsv",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/evidence/authoring/TASK_PACKET.json",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/evidence/authoring/VERIFY_CONTRACT.tsv",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/pom.xml",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/proof.py",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/src/main/resources/META-INF/rewrite/m3-ci-752-java.yml",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/src/main/resources/META-INF/rewrite/m3-ci-752-text.yml",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-java/manifest.tsv",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-java/target-1.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-java/target-2.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ci-752-text/manifest.tsv",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ci-752-text/target-1.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ci-752-text/target-2.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3-ci-752-text/target-3.txt",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/src/test/java/com/synexia/rewrite/CiRecipeTest.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/src/test/resources/before/.github/workflows/m3-foundation.yml",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/src/test/resources/before/m3/backports/compatibility_policy.py",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/src/test/resources/before/m3/backports/test_compatibility_policy.py",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/src/test/resources/before/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
+    "synexia-openrewrite-recipes/tasks/m3-ci-752/src/test/resources/before/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/README.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/COPIED_INPUTS.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/author-text-resources.py",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/ACQUISITIONS.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/INDEX.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/README.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/REPORT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/attempted-job-detail-111763396934.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/attempted-job-detail-111763397210.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/attempted-job-detail-111763397781.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/check-runs.first-page.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/combined-status.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/foundation-command-excerpts.txt",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/java-test-compile-excerpt.txt",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/job-111763396934.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/job-111763397210.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/job-111763397781.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/python-import-excerpt.txt",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/run-37310184481-jobs.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/run-37310184488-jobs.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/run-37310184801-jobs.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/ci-at-pr148-5c1ee94/workflow-runs.first-page.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/FINAL_REPORT.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/OUTPUT_CONTRACT.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/PROVENANCE.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/RUN_CONTEXT.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/STATUS.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/TASK_PACKET.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/preparation-packet/VERIFY_CONTRACT.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/review/COPIED_REVIEW.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/review/cit-text3-review.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/review/cit-text3-review.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/admission-evidence/text-authoring.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/CIA-AUTHORED.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/OUTPUT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/PATCH.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/QUALIFIED-CIA.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/README.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/RESULT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/RETENTION-AUDIT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/SOURCE-PROVENANCE.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/candidate.patch",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/cia-spec-v1.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/evidence-bundle/BUNDLE.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/evidence-bundle/LANES.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/evidence-bundle/PACKAGE.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/evidence-bundle/PATHS-0001.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/evidence-bundle/README.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/evidence-bundle/part-0001.tar.gz",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/pack.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/pack.stderr.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/pack.stdout.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/package-plan.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/package_evidence.py",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/review/SLF4J-RUNTIME-DIAGNOSIS.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/review/cia-review.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/source-context/20261005-m3-a3-runtime-admission.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/verify.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/verify.stderr.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cia-current/verify.stdout.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/CIC-AUTHORED.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/OUTPUT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/PATCH.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/QUALIFIED-CIC.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/README.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/RESULT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/RETENTION-AUDIT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/SOURCE-PROVENANCE.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/candidate.patch",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/cic-spec-v1.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/evidence-bundle/BUNDLE.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/evidence-bundle/LANES.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/evidence-bundle/PACKAGE.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/evidence-bundle/PATHS-0001.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/evidence-bundle/README.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/evidence-bundle/part-0001.tar.gz",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/pack.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/pack.stderr.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/pack.stdout.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/package-plan.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/package_evidence.py",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/review/cic-review.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/source-context/20261005-m3-corpus-regex-admission.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/verify.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/verify.stderr.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cic-current/verify.stdout.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/CIH-AUTHORED-v2.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/OUTPUT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/PATCH.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/QUALIFIED-CIH.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/README.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/RESULT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/RETENTION-AUDIT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/SOURCE-PROVENANCE.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/candidate.patch",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/cih-spec-v4.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/BUNDLE.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/LANES.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/PACKAGE.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/PATHS-0001.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/README.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/part-0001.tar.gz",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/part-0002.tar.gz",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/failed-v2/PATCH.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/failed-v2/RESULT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/pack.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/pack.stderr.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/pack.stdout.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/package-plan.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/package_evidence.py",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/preflight-v1/CIH-PREFLIGHT-v1.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/review/cih-review-v2.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/review/cih-review.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/source-context/20261005-m3-jcc-context-admission.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/source-context/20261005-m3-jcc-context-closure-admission.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/verify.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/verify.stderr.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/verify.stdout.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/CIR-AUTHORED.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/CIR-CLOSURE-CORRECTION-v2.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/OUTPUT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/PATCH.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/QUALIFIED-CIR.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/README.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/RESULT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/RETENTION-AUDIT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/SOURCE-PROVENANCE.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/V1-PATCH.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/V1-RESULT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/candidate.patch",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/cir-spec-v1.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/cir-spec-v2.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/evidence-bundle/BUNDLE.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/evidence-bundle/LANES.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/evidence-bundle/PACKAGE.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/evidence-bundle/PATHS-0001.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/evidence-bundle/README.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/evidence-bundle/part-0001.tar.gz",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/pack.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/pack.stderr.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/pack.stdout.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/package-plan.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/package_evidence.py",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/parent-consumer-v1/PATCH.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/parent-consumer-v1/RESULT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/review/cir-five-literals-root-review.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/review/independent.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/source-context/20261005-m3-regex-template-admission-control-literals.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/source-context/20261005-m3-regex-template-admission.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/verify.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/verify.stderr.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/cir-current/verify.stdout.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/FINAL-AUDIT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/FINAL_REPORT.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/INDEPENDENT-READBACK.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/OUTPUT_CONTRACT.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/PREPARED.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/PROVENANCE.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/README.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/RESULT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/RUN_CONTEXT.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/STATUS.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/VERIFY_CONTRACT.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/BUNDLE.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/LANES.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/PACKAGE.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/PATHS-0001.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/README.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/VERIFY-COMMAND.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/VERIFY.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/part-0001.tar.gz",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-bundle/part-0002.tar.gz",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-tools/native_bundle.py",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-tools/package_evidence.py",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/evidence-tools/readback_native.py",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/native-current-v1/package-plan.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/OUTPUT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/OWNER-PROVENANCE.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/PACK-COMMAND.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/PATCH.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/PREFLIGHT-REFUSAL-v1.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/QUALIFIED-PRODUCER.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/README.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/RESULT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/RETENTION-AUDIT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/SOURCE-PROVENANCE.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/V1-PATCH.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/VERIFY-COMMAND.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/VERIFY.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/candidate.patch",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/evidence-bundle/BUNDLE.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/evidence-bundle/LANES.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/evidence-bundle/PACKAGE.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/evidence-bundle/PATHS-0001.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/evidence-bundle/README.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/evidence-bundle/part-0001.tar.gz",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/evidence-tools/package_evidence.py",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/pack.stderr.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/pack.stdout.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/package-plan.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/source-context/m3/acquisition/ci-source-manifest.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/source-context/source/AGENTS-9963.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/source-context/synexia/synexia-openrewrite-recipes/docs/20261005-m3-ci-admission-correction.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/source-context/synexia/synexia-openrewrite-recipes/docs/20261005-m3-ci-admission.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/source-context/synexia/synexia-openrewrite-recipes/docs/20261005-m3-ci-owner-resolution.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/specs/producer-spec-v1.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/specs/producer-spec-v2.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/task-packet/FINAL_REPORT.md",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/task-packet/OUTPUT_CONTRACT.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/task-packet/PROVENANCE.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/task-packet/RUN_CONTEXT.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/task-packet/STATUS.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/task-packet/TASK_PACKET.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/task-packet/VERIFY_CONTRACT.tsv",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/verify.stderr.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/producer-current/verify.stdout.log",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/source-publication-e1cf/COMMIT.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/source-publication-e1cf/READBACK.json",
+    "synexia-openrewrite-recipes/verification/ci-current-20261005/source-publication-e1cf/REMOTE-CI.json"
+  ],
+  "boundary": "Content presence and explicit source-path mapping only; local publication copies are not remote publication or qualification. Prior pending additions remain pending.",
+  "consumerQualified": false,
+  "helperSHA256": "d123d2aec12ca33606fdc9ff168f67d7a99c071c05abb11c3484cd1887e2c875",
+  "inputs": [
+    {
+      "bytes": 33220,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/CIH-PUBLICATION-WHITELIST.json",
+      "sha256": "9a3cb490fb4f566fca4c47cdcb10e6226e8ea1251e641df15a14f0b85327426b"
+    },
+    {
+      "bytes": 18058,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/PORTABLE-CIH-WHITELIST.json",
+      "sha256": "69f12df98f27fcf536e4645109f9e19c75f7ebc290190188fee65adb07266b42"
+    },
+    {
+      "bytes": 6160,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+      "sha256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9"
+    },
+    {
+      "bytes": 22518,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/MAPPING.json",
+      "sha256": "feb528d99014446264b23a1da7ba6c14155d4a2e32b2d89586167cd177208bd7"
+    },
+    {
+      "bytes": 79399,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/research/source-delivery-coverage/cic-copies-v1/coverage-append.json",
+      "sha256": "4e6b41c9f13931272dbd82f18c8a53b179b0f1293f135bb722bb8056f642d084"
+    },
+    {
+      "bytes": 1544,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/research/source-delivery-coverage/cih-copies-v1/plan.json",
+      "sha256": "858811aca4fbdc277316af707a210d11d0d2544c2c3796a768a2c49d4fc5becd"
+    },
+    {
+      "bytes": 41385,
+      "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/research/source-delivery-coverage/cih-copies-v1/source-mapping.json",
+      "sha256": "4deb8298fbf72f050a2cfe89f5116d993443a11bd75d35a79dabda7976c16795"
+    }
+  ],
+  "label": "cih-source50-and-outer32",
+  "newRows": [
+    {
+      "bytes": 3860,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/source-context/20261005-m3-jcc-context-admission.md",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/source-context/20261005-m3-jcc-context-admission.md"
+      },
+      "gitBlob": "aa9c81284c2528797c75507e38583f41b1f824db",
+      "segment": "cih-source-50",
+      "sha256": "485aa5416ddd8c4fc2a6b5816883e4899fea5b7f3f3ca1fe9ab6376c917dbd91",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-jcc-context-admission.md",
+      "sourcePath": "synexia-openrewrite-recipes/docs/20261005-m3-jcc-context-admission.md"
+    },
+    {
+      "bytes": 2086,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/source-context/20261005-m3-jcc-context-closure-admission.md",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/source-context/20261005-m3-jcc-context-closure-admission.md"
+      },
+      "gitBlob": "f0a45a21a6cb47240bfa74618c460096b0aaad93",
+      "segment": "cih-source-50",
+      "sha256": "6f60b1564f267b2cc3476ad74412bed23c4e698dce016ed9968e56ff36105585",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/synexia/synexia-openrewrite-recipes/docs/20261005-m3-jcc-context-closure-admission.md",
+      "sourcePath": "synexia-openrewrite-recipes/docs/20261005-m3-jcc-context-closure-admission.md"
+    },
+    {
+      "bytes": 5382,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/README.md",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "b29b18dc4a0240c1a69af66d248e87329c587788",
+      "segment": "cih-source-50",
+      "sha256": "9ca44363670592996c357b40b355ae1fbbbe871653686b67ec2774f9124a2eb5",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/README.md",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/README.md"
+    },
+    {
+      "bytes": 12032,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "a2e8c916208b563517e51b738744a05357e633aa",
+      "segment": "cih-source-50",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+    },
+    {
+      "bytes": 10582,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/CIH-AUTHORED-v2.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/CIH-AUTHORED-v2.json"
+      },
+      "gitBlob": "4841ee52ea6577af0858d39dd6ae97907f5934a0",
+      "segment": "cih-source-50",
+      "sha256": "646a74eb9a2398e0619742d78e64e00a869fbb6528ddb9146f2594793d2a0f70",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/CIH-AUTHORED-v2.json",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/evidence/authoring/CIH-AUTHORED-v2.json"
+    },
+    {
+      "bytes": 746,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "CIH-PLAN-AUTHORED.json",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "e08ac91e2ab9922c194fe330219f896fce56113f",
+      "segment": "cih-source-50",
+      "sha256": "cba17d0fc702badd7d04fa97ca26e03aa1be55e73997db5376247630e2dd2fb6",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/CIH-PLAN-AUTHORED.json",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/evidence/authoring/CIH-PLAN-AUTHORED.json"
+    },
+    {
+      "bytes": 4216,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/QUALIFIED-CIH.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/QUALIFIED-CIH.json"
+      },
+      "gitBlob": "0f59c35717a69fea98afc1beeff9e70947f32a45",
+      "segment": "cih-source-50",
+      "sha256": "6b9516bc66fd4e4578ddbbad786adc80b7fb7dcf565c2bc422e11e1c518230f2",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/QUALIFIED-CIH.json",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/evidence/authoring/QUALIFIED-CIH.json"
+    },
+    {
+      "bytes": 28938,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/cih-spec-v4.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/cih-spec-v4.json"
+      },
+      "gitBlob": "7082064d226f0c373fa42a42e7a22412afb4506b",
+      "segment": "cih-source-50",
+      "sha256": "a62117be1d989813f5efecaff71fe3675d9bd2118ca6ec15f828eb718c1e9c7f",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/cih-spec-v4.json",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/evidence/authoring/cih-spec-v4.json"
+    },
+    {
+      "bytes": 3645,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/pom.xml",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "a7f2834d98a8c145702f577c0abb7f22d22df6e4",
+      "segment": "cih-source-50",
+      "sha256": "56bf78962e54e516f29fd70faa858e010d84bd2f69ee3316d4484f8698e0a4ec",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/pom.xml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/pom.xml"
+    },
+    {
+      "bytes": 34497,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/proof.py",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "38910cca3dfa7b575b2e00b24fc28a6c868eb414",
+      "segment": "cih-source-50",
+      "sha256": "a01789ab8f727a812df26f610999ea5307444bf9fcc59f6865dec6fb39c0f17d",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/proof.py",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/proof.py"
+    },
+    {
+      "bytes": 342,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/main/resources/META-INF/rewrite/m3-ci-752-jcc.yml",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "5be99d8fcf1c6dabd193b8d632d572acc6f59489",
+      "segment": "cih-source-50",
+      "sha256": "0c3c2a8282cf205d656150964e3baddb03a4e31ad189ea9770e79b76bf6929b3",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/main/resources/META-INF/rewrite/m3-ci-752-jcc.yml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/main/resources/META-INF/rewrite/m3-ci-752-jcc.yml"
+    },
+    {
+      "bytes": 970,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/manifest.tsv",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "0a0d575584af41fe769bf7a308fe8fe70bc0eaee",
+      "segment": "cih-source-50",
+      "sha256": "f41f9bbafabd4dba007d091d542972f40c5eab5c666b3ec077b5dd090370ef80",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/manifest.tsv"
+    },
+    {
+      "bytes": 16119,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-1.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "9d443c71fa88dfa81607dcffd970747fa43a82e8",
+      "segment": "cih-source-50",
+      "sha256": "9d79d07bb31ded0e5ec9eebef1095ae25be8f20c55f9e72aee4ba64852790594",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-1.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-1.txt"
+    },
+    {
+      "bytes": 7629,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-2.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "453cd601ca80a8fb87509538e02606f5fd925dcb",
+      "segment": "cih-source-50",
+      "sha256": "30a838a363fb05f9c1caf48fd36c0a67de0767708e4b198b77af37ee0c41eb63",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-2.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-2.txt"
+    },
+    {
+      "bytes": 13634,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-3.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "b634cda03970541f81cf513983a6ef987fdf5ebc",
+      "segment": "cih-source-50",
+      "sha256": "fde72eb9f2b682f50004defbc70e6d886a3f646abb0d89c0aec5de8ab0dbd30d",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-3.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-3.txt"
+    },
+    {
+      "bytes": 2875,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-4.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "cfa9f8915448ba09a2070a2b8427cc0480fef903",
+      "segment": "cih-source-50",
+      "sha256": "e4ea964db1a6f9527122ff0dad1c969a43dc50a0f80c771c86b70bcd6da6dcaf",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-4.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-4.txt"
+    },
+    {
+      "bytes": 3383,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-5.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "86f223907bbb053f4792e6bf771c3c0882e1751b",
+      "segment": "cih-source-50",
+      "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-5.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-752-jcc/target-5.txt"
+    },
+    {
+      "bytes": 23936,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/java/com/synexia/rewrite/CihRecipeTest.java",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "d76ab2858ff7fc57c83bac88f6cb6fbe2574dd43",
+      "segment": "cih-source-50",
+      "sha256": "3af6d32097697a95c02a4db190dade5bf37f5973ec37c04dcd7da36dee070c6c",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/java/com/synexia/rewrite/CihRecipeTest.java",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/java/com/synexia/rewrite/CihRecipeTest.java"
+    },
+    {
+      "bytes": 13206,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/before/m3/migration/test/test_jcc_handoff_context_profiles.py",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "eea396ea1574d446c4348a9f0011830069cf3f1a",
+      "segment": "cih-source-50",
+      "sha256": "54114c84b923790cea717f85bdb78574aa3c14e00e1419e68c5cef7d8d87b1b4",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/before/m3/migration/test/test_jcc_handoff_context_profiles.py",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/before/m3/migration/test/test_jcc_handoff_context_profiles.py"
+    },
+    {
+      "bytes": 12660,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/before/m3/migration/test/test_jcc_handoff_packet.py",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "d1784b93a973e203ec81cf6943c0411eeeab80f4",
+      "segment": "cih-source-50",
+      "sha256": "1662cd99e60e03692e95bfdeb51dbf46c5c990dac7d5cadbd5e1ddb5fcad52fe",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/before/m3/migration/test/test_jcc_handoff_packet.py",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/before/m3/migration/test/test_jcc_handoff_packet.py"
+    },
+    {
+      "bytes": 4145,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context-manifest.tsv",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "812dac65951d144e4c0b80bf3ae960c003d4ee52",
+      "segment": "cih-source-50",
+      "sha256": "4dd2b505c0943a244cea446643cf24edc3fb971469308de8069b6fdf2680005c",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context-manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context-manifest.tsv"
+    },
+    {
+      "bytes": 16827,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/docs/name-mapping.schema.json",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "40f032174baa2f1c19e3b02686723bc37f37122c",
+      "segment": "cih-source-50",
+      "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/docs/name-mapping.schema.json",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/docs/name-mapping.schema.json"
+    },
+    {
+      "bytes": 340001,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/after/0.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "fd4d2633d45b28048e08bb6955801e1164a49bf5",
+      "segment": "cih-source-50",
+      "sha256": "8e229715d6783906b1ee249bb2707cdb5e412146219be6037154927abac893ea",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/after/0.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/after/0.txt"
+    },
+    {
+      "bytes": 11773,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/after/1.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "89d01ae9ee4a440d7d596fbe70636c05ac8d47f9",
+      "segment": "cih-source-50",
+      "sha256": "fe7df1477c461ddfcedccd3ff2ca078d44dab5b7c5b46412a5873de611cb13c3",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/after/1.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/after/1.txt"
+    },
+    {
+      "bytes": 21178,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/after/2.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "cb54992f21971718f3e86aa6558bf02f2e83f1d6",
+      "segment": "cih-source-50",
+      "sha256": "4d7496a37677aee3ba1aee206129625a5ed870d0f922eccde32ca670f09a11d8",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/after/2.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/after/2.txt"
+    },
+    {
+      "bytes": 68888,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/after/3.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "20b9e82539c6dba488446d7e4db3acb046b478a9",
+      "segment": "cih-source-50",
+      "sha256": "4072d0cef765767e44e9ff93a11f2d7112b32f94ab6b3d07a03ed191307e2daf",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/after/3.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/after/3.txt"
+    },
+    {
+      "bytes": 1437,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/after/4.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "8763f90be2f3b34fdcee4581e824fb36ed2f9510",
+      "segment": "cih-source-50",
+      "sha256": "8ccd586902d1b292310d6ded995cab15d14f56c43de3bdfa8c20bc4362eab517",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/after/4.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/after/4.txt"
+    },
+    {
+      "bytes": 11078,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/after/5.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "60d11144446f50ea0db411e621cc20354a6c69d9",
+      "segment": "cih-source-50",
+      "sha256": "af2c0ea782643d6860d10a3d9c35706781072a361fb74a8cf6ed4caa6236e5d6",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/after/5.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/after/5.txt"
+    },
+    {
+      "bytes": 93931,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/after/6.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "db3d34df3dcfe8eccedb92fba85a21755229a39e",
+      "segment": "cih-source-50",
+      "sha256": "1cfe107b886e495046ec77f74a2739705b403251ae4fafe640f0fe46ed656ed8",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/after/6.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/after/6.txt"
+    },
+    {
+      "bytes": 56771,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/after/7.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "47f6ae264b43a3e03a2d3c02a1c3473ca24b74d4",
+      "segment": "cih-source-50",
+      "sha256": "4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/after/7.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/after/7.txt"
+    },
+    {
+      "bytes": 77751,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/after/8.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "9c28e213eb2eb6457dc262d04ed298fcc377d409",
+      "segment": "cih-source-50",
+      "sha256": "765f001aa41f95c1dfd9994ba64101526ce0324ede896228803133ec9313b9e9",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/after/8.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/after/8.txt"
+    },
+    {
+      "bytes": 3341,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/after/9.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "b60f4b0d0b549f16916fa61080d541491eb190da",
+      "segment": "cih-source-50",
+      "sha256": "cfe8e8930916ef96c7d23dd9d0942f082c5eb1d6cf4b2a2f6e9f3d69d8fa3e41",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/after/9.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/after/9.txt"
+    },
+    {
+      "bytes": 196161,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/before/0.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "a9c2b967920add39044066e815a7dbb1384c4b87",
+      "segment": "cih-source-50",
+      "sha256": "67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/before/0.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/before/0.txt"
+    },
+    {
+      "bytes": 23333,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/before/7.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7",
+      "segment": "cih-source-50",
+      "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/before/7.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/before/7.txt"
+    },
+    {
+      "bytes": 3288,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/plan.json",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "e1523ed8c48c45537b58875f0d30fae7ffce1368",
+      "segment": "cih-source-50",
+      "sha256": "47aa763f4678124df42f3181e68e2ff0a74636add9403c1e36e40224094e0cdc",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/intake-20261005/crate/plan.json",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/intake-20261005/crate/plan.json"
+    },
+    {
+      "bytes": 56771,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/migration.py",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "47f6ae264b43a3e03a2d3c02a1c3473ca24b74d4",
+      "segment": "cih-source-50",
+      "sha256": "4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/migration.py",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/migration.py"
+    },
+    {
+      "bytes": 9860,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/recipe.py",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "02f88f9f8b1eb8930fff59684c81bb30819800ad",
+      "segment": "cih-source-50",
+      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/migration/recipe.py",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/migration/recipe.py"
+    },
+    {
+      "bytes": 3522,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/pom.xml",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "92d5b114407bd298c39a1e3df9bed504e5f2325e",
+      "segment": "cih-source-50",
+      "sha256": "a53bdeee8afe28b90cb0e348e718b70610a9487edb1b75b46e09bfb76e0f3dc9",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/pom.xml",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/pom.xml"
+    },
+    {
+      "bytes": 12032,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "a2e8c916208b563517e51b738744a05357e633aa",
+      "segment": "cih-source-50",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+    },
+    {
+      "bytes": 17031,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/01-jcc-source-handoff.md.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "f7991e22d16e01c9d9626add7d6894a1404dc19c",
+      "segment": "cih-source-50",
+      "sha256": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/01-jcc-source-handoff.md.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/01-jcc-source-handoff.md.txt"
+    },
+    {
+      "bytes": 24139,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/02-source-destination-bindings.json.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "375a65a82dd39b5fa278e52472f3a99bdd5c9fdf",
+      "segment": "cih-source-50",
+      "sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/02-source-destination-bindings.json.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/02-source-destination-bindings.json.txt"
+    },
+    {
+      "bytes": 107504,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/03-root-coverage-obligations.tsv.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "5ed0454b97e046042a6ffce38f29a06776016378",
+      "segment": "cih-source-50",
+      "sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/03-root-coverage-obligations.tsv.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/03-root-coverage-obligations.tsv.txt"
+    },
+    {
+      "bytes": 220539,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/after00-name-mapping.json.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "895458cdc16a87f915f34747e1bf8684b827f16d",
+      "segment": "cih-source-50",
+      "sha256": "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/after00-name-mapping.json.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/after00-name-mapping.json.txt"
+    },
+    {
+      "bytes": 196161,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/before00-name-mapping.json.txt",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "a9c2b967920add39044066e815a7dbb1384c4b87",
+      "segment": "cih-source-50",
+      "sha256": "67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/before00-name-mapping.json.txt",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/before00-name-mapping.json.txt"
+    },
+    {
+      "bytes": 687,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/manifest.tsv",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "9f24b0965b9c78257ab0ebfb9f3f83561766e0ea",
+      "segment": "cih-source-50",
+      "sha256": "258b5ab6f6cb7099685ee4548d5430fcb952561fefdf565a6dff149cf50c5f06",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/manifest.tsv"
+    },
+    {
+      "bytes": 2873,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-8131.json",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "58daf2a0c7974a3bcf8ae9e0e2cee30548006681",
+      "segment": "cih-source-50",
+      "sha256": "8034d77f1124584888dce10760bd2f5dae55eeb93497f7a0db1d09a3a197ec5f",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-8131.json",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-8131.json"
+    },
+    {
+      "bytes": 2861,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "12fa915d4d077fd870900e65d79d2135921977b0",
+      "segment": "cih-source-50",
+      "sha256": "648f80ae4073400f1ea1210f8cdc26942019d53eb4452d839961c466f395d05a",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json"
+    },
+    {
+      "bytes": 396,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "2a62a7a35e9e59cf403336c197f60d7e5915b064",
+      "segment": "cih-source-50",
+      "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv"
+    },
+    {
+      "bytes": 1815,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/context/src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "92f4d7da32a3b8265675a413311fd304c6dc2dd2",
+      "segment": "cih-source-50",
+      "sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/context/src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/context/src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java"
+    },
+    {
+      "bytes": 2284,
+      "classification": "VERIFIED_PORTABLE_LOGICAL_BYTES",
+      "delivery": {
+        "bundleFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+        "bundleSHA256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+        "logicalPath": "evidence/cih-producer-v3/project/src/test/resources/verify_context.py",
+        "receivingBundle": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "6c27940e05578d9e7e8b7d5b25fa7ecda589e84d",
+      "segment": "cih-source-50",
+      "sha256": "6ec09d459bcfd1fb6b916bcfef440c590f8dc11685fdfe87ffe0acf2f3f1bc6f",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/evidence/cih-producer-v3/project/src/test/resources/verify_context.py",
+      "sourcePath": "synexia-openrewrite-recipes/tasks/m3-ci-752-jcc/src/test/resources/verify_context.py"
+    },
+    {
+      "bytes": 10582,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/CIH-AUTHORED-v2.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/CIH-AUTHORED-v2.json"
+      },
+      "gitBlob": "4841ee52ea6577af0858d39dd6ae97907f5934a0",
+      "segment": "cih-portable-outer-32",
+      "sha256": "646a74eb9a2398e0619742d78e64e00a869fbb6528ddb9146f2594793d2a0f70",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/CIH-AUTHORED-v2.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/CIH-AUTHORED-v2.json"
+    },
+    {
+      "bytes": 2023,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/OUTPUT.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/OUTPUT.json"
+      },
+      "gitBlob": "e21b2823b326253d1c2996a8c69e3b5a7c79fce1",
+      "segment": "cih-portable-outer-32",
+      "sha256": "c3e818efae6c7de3e9e92a4122f87f3af9e7e4fa997d053ce18c1015c0937372",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/OUTPUT.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/OUTPUT.json"
+    },
+    {
+      "bytes": 825,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/PATCH.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/PATCH.json"
+      },
+      "gitBlob": "d8269e047204e45169278a3e42712a6e51d57531",
+      "segment": "cih-portable-outer-32",
+      "sha256": "73d5d79b33ef2f29f5f3d65d17c0bb30fd7b4110c0483edf0faf935447e03406",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/PATCH.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/PATCH.json"
+    },
+    {
+      "bytes": 4216,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/QUALIFIED-CIH.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/QUALIFIED-CIH.json"
+      },
+      "gitBlob": "0f59c35717a69fea98afc1beeff9e70947f32a45",
+      "segment": "cih-portable-outer-32",
+      "sha256": "6b9516bc66fd4e4578ddbbad786adc80b7fb7dcf565c2bc422e11e1c518230f2",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/QUALIFIED-CIH.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/QUALIFIED-CIH.json"
+    },
+    {
+      "bytes": 3711,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/README.md",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/README.md"
+      },
+      "gitBlob": "1a39f3326a5cdd339337633c966e58d73a563f07",
+      "segment": "cih-portable-outer-32",
+      "sha256": "477ea8241d8893ae2608a48ac056bbeee92390d3780b70d708ca1faf571df96e",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/README.md",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/README.md"
+    },
+    {
+      "bytes": 5407,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/RESULT.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/RESULT.json"
+      },
+      "gitBlob": "3a67ee488bade1d54923f2f3dda1b44037cf5711",
+      "segment": "cih-portable-outer-32",
+      "sha256": "f93e1ef05b82459105b8dacd6258af0caa86f0e2c2221f946e8250397ffa9dcb",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/RESULT.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/RESULT.json"
+    },
+    {
+      "bytes": 252977,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/RETENTION-AUDIT.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/RETENTION-AUDIT.json"
+      },
+      "gitBlob": "6d812e3950e7dd9992cfb371d8e26cad74d1487c",
+      "segment": "cih-portable-outer-32",
+      "sha256": "0645a443dd5350a0134172f0b5da02630813b27d4bfa6450a699bc9b9eca094b",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/RETENTION-AUDIT.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/RETENTION-AUDIT.json"
+    },
+    {
+      "bytes": 61270,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/SOURCE-PROVENANCE.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/SOURCE-PROVENANCE.json"
+      },
+      "gitBlob": "c32e14b9c2c67e95c4c4d16325556d9429cb72f2",
+      "segment": "cih-portable-outer-32",
+      "sha256": "e87a0ece67ddaff13fddfb1ba447817da7dd4b23b69b04dbcecdffad1f287fcf",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/SOURCE-PROVENANCE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/SOURCE-PROVENANCE.json"
+    },
+    {
+      "bytes": 24160,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/candidate.patch",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/candidate.patch"
+      },
+      "gitBlob": "39f2bc58e877462f330513f16f78bf22502673a6",
+      "segment": "cih-portable-outer-32",
+      "sha256": "17e4f8398e08468645b2ec15d99c45a0c49e942d03115cc92e53e713ba9c00af",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/candidate.patch",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/candidate.patch"
+    },
+    {
+      "bytes": 28938,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/cih-spec-v4.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/cih-spec-v4.json"
+      },
+      "gitBlob": "7082064d226f0c373fa42a42e7a22412afb4506b",
+      "segment": "cih-portable-outer-32",
+      "sha256": "a62117be1d989813f5efecaff71fe3675d9bd2118ca6ec15f828eb718c1e9c7f",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/cih-spec-v4.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/cih-spec-v4.json"
+    },
+    {
+      "bytes": 6160,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/evidence-bundle/BUNDLE.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/BUNDLE.json"
+      },
+      "gitBlob": "96ddbc86d63b04ef4f7c3606d04227816a82bf72",
+      "segment": "cih-portable-outer-32",
+      "sha256": "c35af298ba90856010d34112eda5cbc7bd92f61c85fd4cd8e124558f6832ddb9",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/BUNDLE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/BUNDLE.json"
+    },
+    {
+      "bytes": 6282,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/evidence-bundle/LANES.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/LANES.json"
+      },
+      "gitBlob": "4c1324c4dca2bb90b060bffcba8e38cbef43696c",
+      "segment": "cih-portable-outer-32",
+      "sha256": "9dffb8cc6eb08a53823e7a84c18a2bf3e846031d5013b48c86775b64b47912dc",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/LANES.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/LANES.json"
+    },
+    {
+      "bytes": 1450,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/evidence-bundle/PACKAGE.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/PACKAGE.json"
+      },
+      "gitBlob": "12d7438cd35fa409a740379565a187c91c519609",
+      "segment": "cih-portable-outer-32",
+      "sha256": "f3916bec96a0b67bc50957a03a1feb04220bfa54c0451f3cc3c0dda0b66b18f8",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/PACKAGE.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/PACKAGE.json"
+    },
+    {
+      "bytes": 66196,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/evidence-bundle/PATHS-0001.tsv",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/PATHS-0001.tsv"
+      },
+      "gitBlob": "9c13bd04c6096cf67afd44ee5177b1d1e54b72aa",
+      "segment": "cih-portable-outer-32",
+      "sha256": "34e85993d63464327c795b64fbe0303d086682e31e438e7cd4884e5d3a7a8ffd",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/PATHS-0001.tsv",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/PATHS-0001.tsv"
+    },
+    {
+      "bytes": 2426,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/evidence-bundle/README.md",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/README.md"
+      },
+      "gitBlob": "13885d919b2306d91475155861e48fa2e927a8b3",
+      "segment": "cih-portable-outer-32",
+      "sha256": "946f63a7567b869cda5cfed2de2f50dc189992cc077058b4f2fdadc443641393",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/README.md",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/README.md"
+    },
+    {
+      "bytes": 964209,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/evidence-bundle/part-0001.tar.gz",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/part-0001.tar.gz"
+      },
+      "gitBlob": "95d8fc792d648d56af7d32098552fc51d6ce138f",
+      "segment": "cih-portable-outer-32",
+      "sha256": "d28153e170afc5182edb345ac68d9cf5950228c6add345dae2d5143e7066f3a3",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/part-0001.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/part-0001.tar.gz"
+    },
+    {
+      "bytes": 596569,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/evidence-bundle/part-0002.tar.gz",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/evidence-bundle/part-0002.tar.gz"
+      },
+      "gitBlob": "15d0d8a785f09c209c0f1e8dea713a16ee36861f",
+      "segment": "cih-portable-outer-32",
+      "sha256": "8e1934fbf33986ab1e26ee893f7def256f9d4b3240e5aa22ac01f15679ba2991",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/evidence-bundle/part-0002.tar.gz",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/evidence-bundle/part-0002.tar.gz"
+    },
+    {
+      "bytes": 825,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/failed-v2/PATCH.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/failed-v2/PATCH.json"
+      },
+      "gitBlob": "0a2a3ea1724cdade7715f66964321d4c120f9244",
+      "segment": "cih-portable-outer-32",
+      "sha256": "28d88ff4cf114bb9f7c888de88f7fc1d7b658912635d1934ee3f9b8387d30e17",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/failed-v2/PATCH.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/failed-v2/PATCH.json"
+    },
+    {
+      "bytes": 1830,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/failed-v2/RESULT.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/failed-v2/RESULT.json"
+      },
+      "gitBlob": "aced1e950207242b2f0774fcc978601e00e92828",
+      "segment": "cih-portable-outer-32",
+      "sha256": "302ed8be74016f6d9072fccc9d803702b778b6076f59a7e099d7aa5c3b7adcad",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/failed-v2/RESULT.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/failed-v2/RESULT.json"
+    },
+    {
+      "bytes": 1365,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/pack.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/pack.json"
+      },
+      "gitBlob": "1d91458fc9e77b5bef9f1b728abf42991586c808",
+      "segment": "cih-portable-outer-32",
+      "sha256": "31735fe46483b6709c846f17ce2fbfe867095c0724de4455dd8146b0c3214bee",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/pack.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/pack.json"
+    },
+    {
+      "bytes": 0,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/pack.stderr.log",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/pack.stderr.log"
+      },
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "segment": "cih-portable-outer-32",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/pack.stderr.log",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/pack.stderr.log"
+    },
+    {
+      "bytes": 653,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/pack.stdout.log",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/pack.stdout.log"
+      },
+      "gitBlob": "f91dd3db74fafbedc378bdba8bb802ff7e09c62d",
+      "segment": "cih-portable-outer-32",
+      "sha256": "b19b0ff2702e7a84c82485ee5e078841dc5409919d4c639a5b7bda6d07feee99",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/pack.stdout.log",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/pack.stdout.log"
+    },
+    {
+      "bytes": 2228,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/package-plan.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package-plan.json"
+      },
+      "gitBlob": "67cfe9ef09a7251b0e4ff66d77d2dcc5b2ca0943",
+      "segment": "cih-portable-outer-32",
+      "sha256": "412e885d2e696f62cf99c0eeba02c2a84b3d188f7adcf7b3510b85e6e1f76b1f",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/package-plan.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/package-plan.json"
+    },
+    {
+      "bytes": 33814,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/package_evidence.py",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py"
+      },
+      "gitBlob": "1dbaa1ecf032b0f5d94a4e34aafee3f0cc88f0a0",
+      "segment": "cih-portable-outer-32",
+      "sha256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/package_evidence.py",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/package_evidence.py"
+    },
+    {
+      "bytes": 1013,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/preflight-v1/CIH-PREFLIGHT-v1.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/preflight-v1/CIH-PREFLIGHT-v1.json"
+      },
+      "gitBlob": "57ec64ae1e7523f3c593b90690978906ed139a21",
+      "segment": "cih-portable-outer-32",
+      "sha256": "f45d3fc1aba7eae0456871bc3fdd9bc3ee56ca3f686e3d56fe89b35df69f9133",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/preflight-v1/CIH-PREFLIGHT-v1.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/preflight-v1/CIH-PREFLIGHT-v1.json"
+    },
+    {
+      "bytes": 6461,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/review/cih-review-v2.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/review/cih-review-v2.json"
+      },
+      "gitBlob": "d434426dad4f9c01c9ed2d37549ea849603fa1ce",
+      "segment": "cih-portable-outer-32",
+      "sha256": "1f7ab70bf3fb5d9ad95d1d1a39c7e79947c43970633ea5731bdef7a1258e2480",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/review/cih-review-v2.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/review/cih-review-v2.json"
+    },
+    {
+      "bytes": 3968,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/review/cih-review.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/review/cih-review.json"
+      },
+      "gitBlob": "46857b8f33cfc3445905e456f1da2b7ed209a0f8",
+      "segment": "cih-portable-outer-32",
+      "sha256": "065378b5b0cc9f0378d38b4ac6db8cc4a233e52856bbdf3328694abfdbb53c23",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/review/cih-review.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/review/cih-review.json"
+    },
+    {
+      "bytes": 3860,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/source-context/20261005-m3-jcc-context-admission.md",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/source-context/20261005-m3-jcc-context-admission.md"
+      },
+      "gitBlob": "aa9c81284c2528797c75507e38583f41b1f824db",
+      "segment": "cih-portable-outer-32",
+      "sha256": "485aa5416ddd8c4fc2a6b5816883e4899fea5b7f3f3ca1fe9ab6376c917dbd91",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/source-context/20261005-m3-jcc-context-admission.md",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/source-context/20261005-m3-jcc-context-admission.md"
+    },
+    {
+      "bytes": 2086,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/source-context/20261005-m3-jcc-context-closure-admission.md",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/source-context/20261005-m3-jcc-context-closure-admission.md"
+      },
+      "gitBlob": "f0a45a21a6cb47240bfa74618c460096b0aaad93",
+      "segment": "cih-portable-outer-32",
+      "sha256": "6f60b1564f267b2cc3476ad74412bed23c4e698dce016ed9968e56ff36105585",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/source-context/20261005-m3-jcc-context-closure-admission.md",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/source-context/20261005-m3-jcc-context-closure-admission.md"
+    },
+    {
+      "bytes": 1119,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/verify.json",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/verify.json"
+      },
+      "gitBlob": "b2192190fd74511474ff02258da4362ebd694ecc",
+      "segment": "cih-portable-outer-32",
+      "sha256": "87646ba7597a0c91dbbeda351bf29bbc3084924e7fe2862532e6df731197a369",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/verify.json",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/verify.json"
+    },
+    {
+      "bytes": 0,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/verify.stderr.log",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/verify.stderr.log"
+      },
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "segment": "cih-portable-outer-32",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/verify.stderr.log",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/verify.stderr.log"
+    },
+    {
+      "bytes": 770,
+      "classification": "VERIFIED_PHYSICAL_PUBLICATION_COPY",
+      "delivery": {
+        "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/cih-producer-portable-v1/files/verify.stdout.log",
+        "receivingPath": "m3/migration/intake-20261005/current-752-ci/cih-producer-portable/verify.stdout.log"
+      },
+      "gitBlob": "145a10365c2e3aae34ec3e12c530dbbaf14e3067",
+      "segment": "cih-portable-outer-32",
+      "sha256": "f91275c50a185d8e209501a2c583afd43a0013156818b649a3f8ebceace6722e",
+      "sourceFile": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/ci-repairs/portable-cih/verify.stdout.log",
+      "sourcePath": "synexia-openrewrite-recipes/verification/ci-current-20261005/cih-current/verify.stdout.log"
+    }
+  ],
+  "newSourceBytes": 3886509,
+  "newSourcePathCount": 82,
+  "pendingPublicationAdditionCount": 25,
+  "priorCoverage": {
+    "file": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/research/source-delivery-coverage/cic-copies-v1/coverage-append.json",
+    "sha256": "4e6b41c9f13931272dbd82f18c8a53b179b0f1293f135bb722bb8056f642d084"
+  },
+  "priorCoverageModified": false,
+  "priorSourcePathCount": 305,
+  "proofGatesExecuted": false,
+  "publicationAdditions": [],
+  "schema": "m3.source-delivery-append/1",
+  "state": "READ_ONLY_CENSUS_APPEND"
+}

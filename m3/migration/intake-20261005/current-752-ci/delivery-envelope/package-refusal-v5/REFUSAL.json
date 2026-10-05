@@ -1,0 +1,84 @@
+{
+  "exitCode": 2,
+  "files": [
+    {
+      "bytes": 960,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/consumer-package-v5/PACK-COMMAND.json",
+      "sha256": "bb87a602709eb7cc31c24798d7b3844d662a38f83ff5ab018d15966c46d463dd"
+    },
+    {
+      "bytes": 0,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/consumer-package-v5/pack.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 304,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/consumer-package-v5/pack.stderr.log",
+      "sha256": "19fdc88a4288b93d80401722106f85be934fbcfdf9f7f988d32c828c46204f4b"
+    },
+    {
+      "bytes": 2260,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/consumer-package-v5/staged/package-plan.json",
+      "sha256": "d5ec50e8e8eb0a45e704ce57b83f8e55237cb4d8866a013d3849964bb7de061c"
+    },
+    {
+      "bytes": 26409988,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/consumer-package-v5/staged/COPY-CUSTODY.json",
+      "sha256": "6944dd229154bdc7a535c4cff48e9340465d8471e8e7652a95cc943feef4ff74"
+    },
+    {
+      "bytes": 4275,
+      "path": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/continuation-20261005/m3/publication-extra/consumer-package-v5/staged/evidence/consumer-v1/source/m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/ledger-e02/inputs.json",
+      "sha256": "51250125710096ae370597945d8069bcd3ae00777f76612f401270787e66a364"
+    }
+  ],
+  "originalProofs": [
+    {
+      "fileCount": 6297,
+      "lane": "consumer-v1",
+      "resultSHA256": "47a1efd8b72eb173d3c48124e549e7ecb28d332be09e97bc63290989ba34ba92",
+      "unchanged": true
+    },
+    {
+      "fileCount": 6618,
+      "lane": "consumer-v2",
+      "resultSHA256": "d8591a5652baf9c92902e6b1475b773fec4a1f498c1dbd6fe55dcffc002038d7",
+      "unchanged": true
+    },
+    {
+      "fileCount": 6691,
+      "lane": "consumer-v3",
+      "resultSHA256": "0d50bac3af04f4c1b498ca34c3b6c57ad76bf97aa3b51fbba1dc926d4b52d2a7",
+      "unchanged": true
+    },
+    {
+      "fileCount": 6759,
+      "lane": "consumer-v4",
+      "resultSHA256": "65ad6376f5e88ca2bd1e33e549c262a50bc58952ede7af8c17c9b0beed05ed73",
+      "unchanged": true
+    },
+    {
+      "fileCount": 29965,
+      "lane": "consumer-v5",
+      "resultSHA256": "c037e9fd5b622f17d161d8efe1fbb15f2a128f803e27b70292448403dc43bd80",
+      "unchanged": true
+    },
+    {
+      "fileCount": 24491,
+      "lane": "receiving-python-v1",
+      "resultSHA256": "be337d009319bab7c528f4ab6e61ada6ef5f407a33d070729e8d5cd68937a63e",
+      "unchanged": true
+    },
+    {
+      "fileCount": 28377,
+      "lane": "receiving-python-v2",
+      "resultSHA256": "687eed40f8cfd7c93a663dbce1bb9fbf7a80626d798fa2f502e73c1a4bbab0cc",
+      "unchanged": true
+    }
+  ],
+  "originalProofsUnchanged": true,
+  "proofGatesExecuted": false,
+  "reason": "Nested historical ledger inputs.json is an object, while recursive reference discovery interpreted it as current row-array authority. All original bytes remain retained; no behavior gate ran.",
+  "receiptsRewritten": false,
+  "state": "PACKAGING_ONLY_REFUSAL_PRESERVED"
+}

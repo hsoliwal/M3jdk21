@@ -1,0 +1,11 @@
+--- author-current-context-v4.py
++++ author-current-context-v4b.py
+@@ -15,7 +15,7 @@
+  ap=argparse.ArgumentParser();ap.add_argument('--producer',type=Path,required=True);ap.add_argument('--result-sha',required=True);ap.add_argument('--output',type=Path,required=True);ap.add_argument('--manifest',type=Path,required=True);a=ap.parse_args()
+  req=old.req;sha=old.sha;load=old.load;write=old.write;copy=old.copy;producer=a.producer.resolve();result_path=producer/'RESULT.json'
+  req(sha(result_path.read_bytes())==a.result_sha,'declared Cic producer result seal');result=load(result_path)
+- req(result['schema']=='synexia.cic-752.result/1' and result['status']=='PASS_FOCUSED_PRODUCER' and result['failure'] is None and result['sourceCommit']==old.SOURCE and result['targetCommit']==old.TARGET,'actual Cic PASS required')
++ req(result['schema']=='synexia.cic-752.proof-result/1' and result['status']=='PASS_FOCUSED_PRODUCER' and result['failure'] is None and result['sourceCommit']==old.SOURCE and result['targetCommit']==old.TARGET,'actual Cic PASS required')
+  counts=result['junit']['counts'];req(counts['tests']==len(result['junit']['methods'])>0 and counts['errors']==counts['failures']==counts['skipped']==0,'complete Cic JUnit receipt')
+  base_path=R/'consumer-manifest-v3.json';req(sha(base_path.read_bytes())==BASE_MANIFEST,'original materialized context identity');manifest=load(base_path);base=R/'candidate-v3';req(old.inventory(base)==manifest['files'],'original sixteen-output context drift')
+  ext={x['path']:x for x in manifest['externalInputs']}
