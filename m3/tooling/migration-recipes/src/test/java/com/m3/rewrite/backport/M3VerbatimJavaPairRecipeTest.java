@@ -110,6 +110,33 @@ final class M3VerbatimJavaPairRecipeTest {
                         TARGET, "jdk-21+35", "jdk-27+35", "JDK-8000000", BEFORE, BEFORE));
     }
 
+    @Test
+    void parentTraversalAndMalformedPathVariantsAreRefused() {
+        for (String path : List.of(
+                "../escape.java", "..\\escape.java", "../../escape.java",
+                "./../escape.java", "./..\\escape.java", "../src/Sample.java",
+                "src/../escape.java", "src\\..\\escape.java", "/escape.java",
+                "C:/escape.java", "C:\\escape.java", "//host/share.java",
+                "src//Sample.java", "src/./Sample.java", "src/..", "readme.md", "", " ")) {
+            var failure = assertThrows(IllegalArgumentException.class,
+                    () -> new M3VerbatimJavaPairRecipe(
+                            path, "jdk-21+35", "jdk-27+35", "JDK-8000000", BEFORE, AFTER), path);
+            assertEquals("M3_VERBATIM_TARGET_PATH:" + path, failure.getMessage());
+        }
+    }
+
+    @Test
+    void validRelativeSpellingsKeepTheExistingCanonicalTargetAndFixedPoint() {
+        for (String path : List.of(TARGET, "./" + TARGET,
+                TARGET.replace('/', '\\'), ".\\" + TARGET.replace('/', '\\'))) {
+            var recipe = new M3VerbatimJavaPairRecipe(
+                    path, "jdk-21+35", "jdk-27+35", "JDK-8000000", BEFORE, AFTER);
+            assertEquals(TARGET, recipe.targetPath());
+            assertEquals(Map.of(TARGET, AFTER), apply(recipe, Map.of(TARGET, BEFORE)));
+            assertTrue(apply(recipe, Map.of(TARGET, AFTER)).isEmpty());
+        }
+    }
+
     private static Map<String, String> apply(
             M3VerbatimJavaPairRecipe recipe,
             Map<String, String> sources) {

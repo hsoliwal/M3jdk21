@@ -157,6 +157,7 @@ public final class M3VerbatimJavaPairRecipe extends Recipe {
         if (path.isBlank()
                 || path.startsWith("/")
                 || path.matches("^[A-Za-z]:/.*")
+                || path.startsWith("../")
                 || path.contains("/../")
                 || path.endsWith("/..")
                 || path.contains("/./")
