@@ -18,6 +18,16 @@ abstract sealed class M3StringOwner permits M3StringAtom, M3StringTuple {
     final long structuralHash64;
     private volatile M3StringFacts facts;
 
+    /*
+     * Small bounded range-fact cache. Keys are exact packed M3String coordinates and therefore
+     * never alias equal numeric ranges from another owner. Four slots keep retention bounded
+     * while covering the hot substring/view cases without a global cache.
+     */
+    private volatile RangeFact range0;
+    private volatile RangeFact range1;
+    private volatile RangeFact range2;
+    private volatile RangeFact range3;
+
     M3StringOwner(byte kind, int length, byte coder, int javaHash, long structuralHash64) {
         this.kind = kind;
         this.length = length;
@@ -52,5 +62,43 @@ abstract sealed class M3StringOwner permits M3StringAtom, M3StringTuple {
         }
     }
 
+    final M3StringFacts rangeFacts(long coordinate, M3String value) {
+        RangeFact first = range0;
+        if (first != null && first.coordinate == coordinate) return first.facts;
+        RangeFact second = range1;
+        if (second != null && second.coordinate == coordinate) return second.facts;
+        RangeFact third = range2;
+        if (third != null && third.coordinate == coordinate) return third.facts;
+        RangeFact fourth = range3;
+        if (fourth != null && fourth.coordinate == coordinate) return fourth.facts;
+
+        M3StringFacts computed = M3StringFacts.scan(Objects.requireNonNull(value, "value"));
+        synchronized (this) {
+            first = range0;
+            if (first != null && first.coordinate == coordinate) return first.facts;
+            second = range1;
+            if (second != null && second.coordinate == coordinate) return second.facts;
+            third = range2;
+            if (third != null && third.coordinate == coordinate) return third.facts;
+            fourth = range3;
+            if (fourth != null && fourth.coordinate == coordinate) return fourth.facts;
+            range3 = range2;
+            range2 = range1;
+            range1 = range0;
+            range0 = new RangeFact(coordinate, computed);
+        }
+        return computed;
+    }
+
     abstract M3StringFacts computeFacts();
+
+    private static final class RangeFact {
+        final long coordinate;
+        final M3StringFacts facts;
+
+        RangeFact(long coordinate, M3StringFacts facts) {
+            this.coordinate = coordinate;
+            this.facts = Objects.requireNonNull(facts, "facts");
+        }
+    }
 }
