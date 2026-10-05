@@ -106,6 +106,70 @@ final class M3StringAtom extends M3StringOwner {
                 : (char) (first | (second << 8));
     }
 
+    @Override
+    void getChars(int start, int end, char[] destination, int destinationStart) {
+        Objects.checkFromToIndex(start, end, length);
+        Objects.checkFromIndexSize(destinationStart, end - start, destination.length);
+        if (storageWidth == 1) {
+            long source = address + start;
+            for (int target = destinationStart; start < end; start++, target++, source++) {
+                destination[target] = (char) (UNSAFE.getByte(source) & 0xff);
+            }
+            return;
+        }
+        long source = address + ((long) start << 1);
+        for (int target = destinationStart; start < end; start++, target++, source += 2L) {
+            int first = UNSAFE.getByte(source) & 0xff;
+            int second = UNSAFE.getByte(source + 1L) & 0xff;
+            destination[target] = bigEndian
+                    ? (char) ((first << 8) | second)
+                    : (char) (first | (second << 8));
+        }
+    }
+
+    @Override
+    void getBytes(
+            int start,
+            int end,
+            byte[] destination,
+            int destinationStart,
+            byte destinationCoder) {
+        Objects.checkFromToIndex(start, end, length);
+        int count = end - start;
+        Objects.checkFromIndexSize(
+                destinationStart << destinationCoder,
+                count << destinationCoder,
+                destination.length);
+
+        if (storageWidth == 1 && destinationCoder == String.LATIN1) {
+            long source = address + start;
+            for (int target = destinationStart; start < end; start++, target++, source++) {
+                destination[target] = UNSAFE.getByte(source);
+            }
+            return;
+        }
+
+        long source = address + (storageWidth == 1 ? start : ((long) start << 1));
+        for (int target = destinationStart; start < end; start++, target++) {
+            char unit;
+            if (storageWidth == 1) {
+                unit = (char) (UNSAFE.getByte(source++) & 0xff);
+            } else {
+                int first = UNSAFE.getByte(source) & 0xff;
+                int second = UNSAFE.getByte(source + 1L) & 0xff;
+                unit = bigEndian
+                        ? (char) ((first << 8) | second)
+                        : (char) (first | (second << 8));
+                source += 2L;
+            }
+            if (destinationCoder == String.LATIN1) {
+                destination[target] = (byte) unit;
+            } else {
+                StringUTF16.putChar(destination, target, unit);
+            }
+        }
+    }
+
     long nativePayloadBytes() {
         return Math.max(1L, Math.multiplyExact((long) length, storageWidth));
     }
