@@ -12,7 +12,7 @@ jobs:
   proof:
     if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-22.04
-    timeout-minutes: 25
+    timeout-minutes: 45
     steps:
       - name: Read the exact candidate
         env:
@@ -40,6 +40,11 @@ jobs:
           mvn -version 2>&1 | tee "$RUNNER_TEMP/kit/maven-version.txt"
           mvn -B -ntp -Dmaven.repo.local="$RUNNER_TEMP/maven-repo" -f "$REPO/m3/tooling/module-packs/pom.xml" clean test 2>&1 | tee "$RUNNER_TEMP/kit/test.log"
           mvn -B -ntp -Dmaven.repo.local="$RUNNER_TEMP/maven-repo" -f "$REPO/m3/tooling/module-packs/pom.xml" verify 2>&1 | tee "$RUNNER_TEMP/kit/verify.log"
+      - name: Attempt the complete retained control reactor without hiding failures
+        if: always() && env.REPO != ''
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -fae -Dmaven.repo.local="$RUNNER_TEMP/maven-repo" -f "$REPO/m3/pom.xml" clean verify 2>&1 | tee "$RUNNER_TEMP/kit/reactor-verify.log"
       - name: Preserve exact runtime and dependencies even on rejection
         if: always()
         run: |
@@ -60,8 +65,8 @@ jobs:
           if test -d "$RUNNER_TEMP/maven-repo"; then
             tar --exclude='*.lastUpdated' --exclude='resolver-status.properties' -czf "$RUNNER_TEMP/kit/repository.tar.gz" -C "$RUNNER_TEMP" maven-repo
           fi
-          if test -d "$RUNNER_TEMP/repo/m3/tooling/module-packs"; then
-            find "$RUNNER_TEMP/repo/m3/tooling/module-packs" -type f \( -path '*/surefire-reports/*' -o -path '*/site/jacoco/*' -o -name 'jacoco.exec' \) -print0 | tar --null -T - -czf "$RUNNER_TEMP/kit/reports.tar.gz"
+          if test -d "$RUNNER_TEMP/repo/m3"; then
+            find "$RUNNER_TEMP/repo/m3" -type f \( -path '*/surefire-reports/*' -o -path '*/site/jacoco/*' -o -name 'jacoco.exec' \) -print0 | tar --null -T - -czf "$RUNNER_TEMP/kit/reports.tar.gz"
           fi
           printf '%s\n' 'Proof inputs only. Artifact preservation is not test success or release admission. No user/runner settings, credentials, or generated key stores are included.' > "$RUNNER_TEMP/kit/BOUNDARY.txt"
           (cd "$RUNNER_TEMP/kit" && find . -type f ! -name SHA256SUMS -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
