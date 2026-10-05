@@ -1,0 +1,27 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Synexia handoff bridge
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/migration-recipes/**'
+      - 'm3/docs/name-mapping.json'
+      - 'm3/docs/synexia-source-bridge.md'
+      - '.github/workflows/m3-synexia-handoff.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  handoff:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Verify Synexia handoff packet import and receivers
+        run: mvn -B -ntp -f m3/tooling/migration-recipes/verification/synexia-handoff/pom.xml verify
