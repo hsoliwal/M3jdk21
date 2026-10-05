@@ -1,0 +1,14 @@
+key	value
+repository	hsoliwal/M3jdk21
+base_commit	8131f535300c005afd27443d0281ede11198522f
+branch	m3/jep485-stream-gatherers-20261005
+jep	485
+donor_release	24
+recipe_engine	M3Jdk21HashPinnedSnapshotRecipe
+crate	jdk24-jep485-stream-gatherers
+target_count	15
+existing_preimages	4
+absent_additions	11
+authority	LIBRARY_API
+contract_mode	EXPLICIT_CONTRACT_CHANGE
+promotion	false
