@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -41,6 +43,24 @@ class M3SynexiaHandoffMaterializerTest {
         SynexiaHandoffMaterializer.apply(repo, "synexia-fixture-v1");
     assertEquals(0, second.changedTargets());
     assertEquals(first.packetRoot(), second.packetRoot());
+  }
+
+  @Test
+  void materializeCliChecksWithoutWriting() throws Exception {
+    Path repo = temp.resolve("cli-repo");
+    Files.createDirectories(repo);
+    var stdout = new ByteArrayOutputStream();
+    var stderr = new ByteArrayOutputStream();
+    int status =
+        SynexiaHandoffMaterializeCli.run(
+            new String[] {"--check", repo.toString(), "synexia-fixture-v1"},
+            new PrintStream(stdout, true, StandardCharsets.UTF_8),
+            new PrintStream(stderr, true, StandardCharsets.UTF_8));
+    assertEquals(0, status, stderr.toString(StandardCharsets.UTF_8));
+    assertTrue(
+        stdout.toString(StandardCharsets.UTF_8).contains("SYNEXIA_HANDOFF_MATERIALIZE_V1"));
+    assertTrue(stdout.toString(StandardCharsets.UTF_8).contains("changed=2"));
+    assertTrue(Files.notExists(repo.resolve("m3/ports/bridge-fixture/src/sample/BridgeJava.java")));
   }
 
   @Test
