@@ -9,7 +9,7 @@ snapshot or reuse donor identifiers as target ABI.
 | Synexia commit | Donor transition | M3JDK consequence |
 | --- | --- | --- |
 | `8b202d3c10617d67f45247ccd81a21b9c5332a08` | Inline scalar handles and share immutable token spans; `MIndexString` converges to owner + packed long coordinate | `java.lang.M3String` has exactly `owner` + `value` instance state |
-| `c3c67a433e1689d42bc68720290b7ca5f54c3313` | Materialize canonical tuple reference DAG | `M3StringTuple` owns persistent child coordinates; no per-value segment/offset/end arrays |
+| `c3c67a433e1689d42bc68720290b7ca5f54c3313` | Materialize canonical tuple reference DAG with height-balanced concat and sequence equality | `M3StringTuple` owns persistent child coordinates, remains AVL-bounded, and equivalent coordinate sequences intern independently of parenthesization; no per-value segment/offset/end arrays |
 | `40d66f6edd0a9cf3e6b4545058c1ad54f6cd03bc` | Route concat/compose/repeat through canonical tuple DAG | M3 concat/repeat create/reuse tuple owners; substring is a coordinate range |
 | `d08ee60be27b60a951a55a2b472d515bf142f8bf` | Compose/reuse canonical text precomputation without retaining a second spelling | M3 precompute is owner/range keyed derived metadata only |
 | `33ebec8fa64c215bf8bfa0dc4ec66085f5500a52` | Cache immutable per-atom metrics, bit signal and character facts together | M3 fixed-size facts prepare once on canonical owner/range identity |
@@ -46,7 +46,7 @@ boundary requires it.
 
 1. Canonical text identity is owner + coordinate.
 2. Scalar payload is native/mapped canonical storage; Java text arrays are not canonical payload.
-3. Composition is a persistent canonical reference DAG.
+3. Composition is a persistent canonical reference DAG, AVL-bounded under arbitrary concat and canonicalized by ordered coordinate sequence rather than binary parenthesization.
 4. Substrings are owner/range coordinates.
 5. Precompute is entirely implementation-internal and never a public Java String contract.
 6. Precompute cannot become a second spelling store.
