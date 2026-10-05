@@ -15,6 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HexFormat;
 import java.util.Iterator;
@@ -41,6 +42,8 @@ final class M3StringPool {
     private static final AtomicLong NEXT_LOCAL_ID = new AtomicLong(1L);
     private static final AtomicLong NEXT_TUPLE_ID = new AtomicLong(1L << 40);
     private static final AtomicLong LOCAL_NATIVE_BYTES = new AtomicLong();
+    // Ordered coordinate-sequence hashing is compositional so association does not affect identity.
+    private static final long COORDINATE_HASH_BASE = 0x9e3779b185ebca87L;
 
     private static final ConcurrentHashMap<Fingerprint, LocalBucket> LOCAL =
             new ConcurrentHashMap<>();
@@ -114,13 +117,72 @@ final class M3StringPool {
     static M3String concat(M3String left, M3String right) {
         Objects.requireNonNull(left, "left");
         Objects.requireNonNull(right, "right");
+        expungeTuples();
+        return concatBalanced(left, right);
+    }
+
+    /**
+     * Synexia MIndexTupleReferences-compatible AVL concatenation over M3 coordinates.
+     *
+     * <p>Whole tuple owners are structural branches. Arbitrary scalar/range coordinates are
+     * immutable leaves. Concatenation therefore stays logarithmic under repeated append/prepend,
+     * while slices remain owner+range coordinates and never flatten spelling payload.</p>
+     */
+    private static M3String concatBalanced(M3String left, M3String right) {
         if (left.length() == 0) return right;
         if (right.length() == 0) return left;
         if (left.owner() == right.owner() && left.end() == right.start()) {
-            return M3String.range(left.owner(), left.start(), Math.addExact(left.length(), right.length()));
+            return M3String.range(
+                    left.owner(), left.start(), Math.addExact(left.length(), right.length()));
         }
 
-        expungeTuples();
+        int leftHeight = treeHeight(left);
+        int rightHeight = treeHeight(right);
+        if (leftHeight > rightHeight + 1) {
+            M3StringTuple branch = requireWholeTuple(left);
+            return balance(branch.left, concatBalanced(branch.right, right));
+        }
+        if (rightHeight > leftHeight + 1) {
+            M3StringTuple branch = requireWholeTuple(right);
+            return balance(concatBalanced(left, branch.left), branch.right);
+        }
+        return internTuple(left, right);
+    }
+
+    private static M3String balance(M3String left, M3String right) {
+        int leftHeight = treeHeight(left);
+        int rightHeight = treeHeight(right);
+        if (leftHeight > rightHeight + 1) {
+            M3StringTuple branch = requireWholeTuple(left);
+            if (treeHeight(branch.left) >= treeHeight(branch.right)) {
+                return internTuple(branch.left, internTuple(branch.right, right));
+            }
+            M3StringTuple middle = requireWholeTuple(branch.right);
+            return internTuple(
+                    internTuple(branch.left, middle.left),
+                    internTuple(middle.right, right));
+        }
+        if (rightHeight > leftHeight + 1) {
+            M3StringTuple branch = requireWholeTuple(right);
+            if (treeHeight(branch.right) >= treeHeight(branch.left)) {
+                return internTuple(internTuple(left, branch.left), branch.right);
+            }
+            M3StringTuple middle = requireWholeTuple(branch.left);
+            return internTuple(
+                    internTuple(left, middle.left),
+                    internTuple(middle.right, branch.right));
+        }
+        return internTuple(left, right);
+    }
+
+    private static M3String internTuple(M3String left, M3String right) {
+        if (left.length() == 0) return right;
+        if (right.length() == 0) return left;
+        if (left.owner() == right.owner() && left.end() == right.start()) {
+            return M3String.range(
+                    left.owner(), left.start(), Math.addExact(left.length(), right.length()));
+        }
+
         long hash = tupleHash64(left, right);
         for (;;) {
             TupleBucket bucket = TUPLES.computeIfAbsent(hash, ignored -> new TupleBucket());
@@ -129,13 +191,103 @@ final class M3StringPool {
                 for (Iterator<TupleRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
                     TupleRef reference = iterator.next();
                     M3StringTuple existing = reference.get();
-                    if (existing == null) iterator.remove();
-                    else if (existing.geometryEquals(left, right)) return M3String.whole(existing);
+                    if (existing == null) {
+                        iterator.remove();
+                    } else if (existing.geometryEquals(left, right)) {
+                        return M3String.whole(existing);
+                    }
                 }
                 long id = nextId(NEXT_TUPLE_ID, "M3 tuple ID");
                 M3StringTuple created = new M3StringTuple(left, right, id, hash);
                 bucket.values.add(new TupleRef(created, hash, bucket));
                 return M3String.whole(created);
+            }
+        }
+    }
+
+    static int treeHeight(M3String value) {
+        M3StringTuple tuple = wholeTuple(value);
+        return tuple == null ? 0 : tuple.height;
+    }
+
+    static int coordinateLeafCount(M3String value) {
+        M3StringTuple tuple = wholeTuple(value);
+        return tuple == null ? 1 : tuple.leafCount;
+    }
+
+    static long coordinateSequenceHash64(M3String value) {
+        M3StringTuple tuple = wholeTuple(value);
+        return tuple == null ? value.identityHash64() : tuple.coordinateSequenceHash64;
+    }
+
+    static long coordinateSequenceHash64(M3String left, M3String right) {
+        return coordinateSequenceHash64(left) * coordinateHashPower(coordinateLeafCount(right))
+                + coordinateSequenceHash64(right);
+    }
+
+    private static long coordinateHashPower(int exponent) {
+        long result = 1L;
+        long base = COORDINATE_HASH_BASE;
+        for (int remaining = exponent; remaining != 0; remaining >>>= 1) {
+            if ((remaining & 1) != 0) result *= base;
+            base *= base;
+        }
+        return result;
+    }
+
+    private static M3StringTuple wholeTuple(M3String value) {
+        return value.start() == 0
+                        && value.length() == value.owner().length
+                        && value.owner() instanceof M3StringTuple tuple
+                ? tuple
+                : null;
+    }
+
+    private static M3StringTuple requireWholeTuple(M3String value) {
+        M3StringTuple tuple = wholeTuple(value);
+        if (tuple == null) {
+            throw new InternalError("M3 coordinate is not a whole tuple");
+        }
+        return tuple;
+    }
+
+    static boolean sameCoordinateSequence(
+            M3StringTuple existing, M3String candidateLeft, M3String candidateRight) {
+        int candidateLeaves = Math.addExact(
+                coordinateLeafCount(candidateLeft), coordinateLeafCount(candidateRight));
+        if (existing.leafCount != candidateLeaves
+                || existing.coordinateSequenceHash64
+                        != coordinateSequenceHash64(candidateLeft, candidateRight)) {
+            return false;
+        }
+
+        CoordinateCursor current = new CoordinateCursor(existing.left, existing.right);
+        CoordinateCursor candidate = new CoordinateCursor(candidateLeft, candidateRight);
+        while (current.hasNext() && candidate.hasNext()) {
+            if (!current.next().sameCoordinate(candidate.next())) return false;
+        }
+        return !current.hasNext() && !candidate.hasNext();
+    }
+
+    private static final class CoordinateCursor {
+        private final ArrayDeque<M3String> pending = new ArrayDeque<>();
+
+        CoordinateCursor(M3String left, M3String right) {
+            pending.addLast(right);
+            pending.addLast(left);
+        }
+
+        boolean hasNext() {
+            return !pending.isEmpty();
+        }
+
+        M3String next() {
+            while (true) {
+                M3String value = pending.removeLast();
+                M3StringTuple tuple = wholeTuple(value);
+                if (tuple == null) return value;
+                pending.addLast(tuple.right);
+                pending.addLast(tuple.left);
             }
         }
     }
@@ -200,10 +352,9 @@ final class M3StringPool {
     }
 
     private static long tupleHash64(M3String left, M3String right) {
-        long hash = mix64(0x517cc1b727220a95L ^ left.identityHash64());
-        hash = mix64(hash ^ right.identityHash64());
-        hash = mix64(hash ^ Integer.toUnsignedLong(left.length()));
-        return mix64(hash ^ Integer.toUnsignedLong(right.length()));
+        int leaves = Math.addExact(coordinateLeafCount(left), coordinateLeafCount(right));
+        long sequence = coordinateSequenceHash64(left, right);
+        return mix64(sequence ^ Long.rotateLeft(Integer.toUnsignedLong(leaves), 32));
     }
 
     private static boolean mappedLatin1(long address, int length, boolean bigEndian) {
