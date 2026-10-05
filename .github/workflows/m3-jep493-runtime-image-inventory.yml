@@ -48,7 +48,15 @@ jobs:
           mkdir "$RUNNER_TEMP/upstream-jdk"
           git -C "$RUNNER_TEMP/upstream-jdk" init -q
           git -C "$RUNNER_TEMP/upstream-jdk" remote add origin https://github.com/openjdk/jdk.git
-          git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch             --filter=blob:none --no-tags origin             "refs/tags/jdk-21+35:refs/tags/jdk-21+35"             "refs/tags/jdk-24+36:refs/tags/jdk-24+36"
+          git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch \
+            --filter=blob:none --no-tags origin \
+            "refs/tags/jdk-21+35:refs/tags/jdk-21+35" \
+            "refs/tags/jdk-22+36:refs/tags/jdk-22+36" \
+            "refs/tags/jdk-23+37:refs/tags/jdk-23+37" \
+            "refs/tags/jdk-24+36:refs/tags/jdk-24+36" \
+            "refs/tags/jdk-25+36:refs/tags/jdk-25+36" \
+            "refs/tags/jdk-26+35:refs/tags/jdk-26+35" \
+            "refs/tags/jdk-27+35:refs/tags/jdk-27+35"
           printf 'UPSTREAM=%s\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
 
       - name: Unit-test whole-tree comparator and mixed crate generator
