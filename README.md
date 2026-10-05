@@ -10,3 +10,7 @@ or either of these files:
 See <https://openjdk.org/> for more information about the OpenJDK
 Community and the JDK and see <https://bugs.openjdk.org> for JDK issue
 tracking.
+
+## Fork development guide
+
+See [Developing the M3JDK21 fork](doc/DEVELOPMENT_GUIDE.md) for build lanes, source ownership, verification boundaries and contribution handover.
