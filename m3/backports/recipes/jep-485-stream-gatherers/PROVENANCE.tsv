@@ -1,0 +1,7 @@
+kind	reference	use
+catalogue	m3/backports/JEP_CATALOGUE.tsv	JEP485 final library candidate
+donor_crate	m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers	Reviewed JDK24 Java/test postimages
+preimage_manifest	jdk24-jep485-stream-gatherers/manifest.tsv	Four SHA256-pinned JDK21 owners plus eleven ABSENT targets
+engine	M3Jdk21HashPinnedSnapshotRecipe	Existing fail-closed source materializer
+authority_model	M3RecipeScopeRegistry	Explicit API-change admission
+preview_lineage	JEP461/JEP473	Superseded; not independently imported
