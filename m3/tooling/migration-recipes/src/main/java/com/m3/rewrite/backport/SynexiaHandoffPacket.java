@@ -122,8 +122,11 @@ final class SynexiaHandoffPacket {
             if (!sourceSha.equals(after)) {
                 throw new IllegalStateException("handoff target postimage differs from reviewed source bytes");
             }
-            if (kind == Kind.JAVA && (!sourcePath.endsWith(".java") || !targetPath.endsWith(".java"))) {
-                throw new IllegalStateException("JAVA handoff row must map .java to .java");
+            if (kind == Kind.JAVA
+                    && (!sourcePath.endsWith(".java")
+                            || !M3Jdk21HandoffPaths.javaSource(targetPath))) {
+                throw new IllegalStateException(
+                        "JAVA handoff row is outside the typed receiver roots");
             }
             if (kind != Kind.JAVA && targetPath.endsWith(".java")) {
                 throw new IllegalStateException(
@@ -164,6 +167,11 @@ final class SynexiaHandoffPacket {
 
         verifyManifest(JAVA_ROOT, crate, javaManifest);
         verifyManifest(TEXT_ROOT, crate, textManifest);
+        String alias = resource("/META-INF/rewrite/m3-" + crate + ".yml");
+        if (!canonicalAlias(crate, !javaManifest.isEmpty(), !textManifest.isEmpty())
+                .equals(alias)) {
+            throw new IllegalStateException("Synexia handoff recipe alias drift");
+        }
         return new Verified(crate, revision, packetRoot, rows.size(), payloadBytes);
     }
 
