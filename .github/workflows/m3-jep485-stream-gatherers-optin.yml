@@ -6,6 +6,7 @@ on:
       - "m3/jep485-opt-in-control-20261005"
     paths:
       - "m3/backports/recipes/jep-485-gatherers/**"
+      - "m3/backports/JEP_CATALOGUE.tsv"
       - "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
       - "m3/tooling/recipe-catalogue.tsv"
       - "m3/tooling/migration-recipes/**"
@@ -65,8 +66,13 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
 
+          catalogue = Path("m3/backports/JEP_CATALOGUE.tsv").read_text(encoding="utf-8").splitlines()
           priority = Path("m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv").read_text(encoding="utf-8").splitlines()
           policy = Path("m3/backports/recipes/jep-485-gatherers/POLICY.tsv").read_text(encoding="utf-8").splitlines()
+
+          catalogue_rows = [line.split("\t") for line in catalogue[1:] if line.startswith("24\t485\t")]
+          assert len(catalogue_rows) == 1, catalogue_rows
+          assert catalogue_rows[0][4] == "hold-compat", catalogue_rows[0]
 
           jep = [line.split("\t") for line in priority[1:] if line.startswith("485\t")]
           assert len(jep) == 1, jep
@@ -107,6 +113,7 @@ jobs:
         run: |
           set -euo pipefail
           mvn -B -ntp -f m3/backports/pom.xml verify
+          python3 m3/backports/program_status.py --root .             --json-out target/jep485-program-status.json             --tsv-out target/jep485-program-status.tsv
 
       - name: 8 - Upload recipe DAG evidence
         if: always()
@@ -116,6 +123,8 @@ jobs:
           path: |
             target/jep485-projection
             m3/backports/recipes/jep-485-gatherers/POLICY.tsv
+            target/jep485-program-status.json
+            target/jep485-program-status.tsv
           if-no-files-found: warn
           retention-days: 30
 
