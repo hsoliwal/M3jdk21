@@ -1,0 +1,16 @@
+field	value
+packet	jep-458-multifile-source-launcher
+upstream_commit	517b1788198fc325961df61161f9b365c7b2524e
+recipe	com.m3.rewrite.backport.M3Jep458BackportRecipe
+java_targets	21
+text_native_targets	5
+total_targets	26
+base_branch	m3/second-pass-review-dag-backport-admission-20261005
+base_commit	dd23c1188dbd3a75dddd63e8d7513cf83813a399
+recipe_replay_source_delta	0
+current_tree_state	REVIEWED_POSTIMAGES_ALREADY_PRESENT
+recipe_junit	PENDING_HOSTED_PROOF
+openjdk_image_build	PENDING_HOSTED_PROOF
+focused_jtreg	PENDING_HOSTED_PROOF
+runtime_smoke	PENDING_HOSTED_PROOF
+promotion	NOT_AUTHORIZED
