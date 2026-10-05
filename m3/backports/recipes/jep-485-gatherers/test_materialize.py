@@ -7,12 +7,14 @@ import importlib.util
 from pathlib import Path
 import tempfile
 import unittest
+import sys
 
 
 MODULE_PATH = Path(__file__).with_name("materialize.py")
 SPEC = importlib.util.spec_from_file_location("m3_jep485_materialize", MODULE_PATH)
 assert SPEC is not None and SPEC.loader is not None
 materialize = importlib.util.module_from_spec(SPEC)
+sys.modules[SPEC.name] = materialize
 SPEC.loader.exec_module(materialize)
 
 
