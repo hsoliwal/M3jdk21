@@ -18,7 +18,11 @@ package java.lang;
  * reject impossible work, but exact M3 String comparison remains semantic authority.</p>
  */
 final class M3StringFacts {
+    private static final int UTF8_REPLACEMENT_BYTES =
+            java.nio.charset.StandardCharsets.UTF_8.newEncoder().replacement().length;
+
     final int utf16Length;
+    final int utf8Length;
     final int codePointCount;
     final int unpairedSurrogateCount;
     final int javaHash;
@@ -48,6 +52,7 @@ final class M3StringFacts {
 
     private M3StringFacts(
             int utf16Length,
+            int utf8Length,
             int codePointCount,
             int unpairedSurrogateCount,
             int javaHash,
@@ -67,6 +72,7 @@ final class M3StringFacts {
             int stripStart,
             int stripEnd) {
         this.utf16Length = utf16Length;
+        this.utf8Length = utf8Length;
         this.codePointCount = codePointCount;
         this.unpairedSurrogateCount = unpairedSurrogateCount;
         this.javaHash = javaHash;
@@ -90,9 +96,12 @@ final class M3StringFacts {
     static M3StringFacts scan(M3String value) {
         int length = value.length();
         int hash = 0;
+        int utf8 = 0;
         int codePoints = 0;
         int unpaired = 0;
         long signal = 0L;
+        boolean ascii = true;
+        boolean latin1 = true;
         long prefix = 0L;
         long suffix = 0L;
         long bigrams = 0L;
@@ -164,6 +173,7 @@ final class M3StringFacts {
 
         return new M3StringFacts(
                 length,
+                utf8,
                 codePoints,
                 unpaired,
                 hash,
@@ -192,6 +202,10 @@ final class M3StringFacts {
                 Character.isHighSurrogate(left.lastUtf16Unit)
                         && Character.isLowSurrogate(right.firstUtf16Unit);
         int length = Math.addExact(left.utf16Length, right.utf16Length);
+        int utf8 = Math.addExact(left.utf8Length, right.utf8Length);
+        if (seamPair) {
+            utf8 = Math.addExact(utf8, 4 - 2 * UTF8_REPLACEMENT_BYTES);
+        }
 
         int trimStart =
                 left.trimStart == left.utf16Length
@@ -239,6 +253,7 @@ final class M3StringFacts {
 
         return new M3StringFacts(
                 length,
+                utf8,
                 Math.addExact(left.codePointCount, right.codePointCount) - (seamPair ? 1 : 0),
                 Math.addExact(left.unpairedSurrogateCount, right.unpairedSurrogateCount)
                         - (seamPair ? 2 : 0),
@@ -288,6 +303,12 @@ final class M3StringFacts {
     boolean mayContainCodeUnit(char unit) {
         long required = addSignal(0L, unit);
         return (bitSignal64 & required) == required;
+    }
+
+    private static int utf8Bytes(char value) {
+        if (value <= 0x7f) return 1;
+        if (value <= 0x7ff) return 2;
+        return 3;
     }
 
     private static int pow31(int length) {
