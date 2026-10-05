@@ -63,7 +63,7 @@ public final class M3ScopeInference {
 
     private static String normalizedPath(String value) {
         Objects.requireNonNull(value, "path");
-        String path = value.replace('\\', '/');
+        String path = value.replace('\', '/');
         if (path.isBlank()
                 || path.startsWith("/")
                 || path.matches("^[A-Za-z]:/.*")
@@ -93,14 +93,21 @@ public final class M3ScopeInference {
             if (parts.length >= 5 && "classes".equals(parts[3])) {
                 String module = parts[1];
                 String root = "src/" + parts[1] + "/" + parts[2] + "/classes/";
+                if (path.length() <= root.length()) {
+                    throw new IllegalArgumentException("target path must name a file");
+                }
                 String relative = path.substring(root.length());
                 return fromRelative(module, root, relative);
             }
-            if (parts.length >= 2) {
-                String module = parts[1].isBlank() ? "<src>" : parts[1];
+            if (parts.length >= 2 && !parts[1].isBlank()) {
+                String module = parts[1];
                 String root = "src/" + module + "/";
+                if (path.length() <= root.length()) {
+                    throw new IllegalArgumentException("target path must name a file");
+                }
                 return fromRelative(module, root, path.substring(root.length()));
             }
+            throw new IllegalArgumentException("target path must name a file");
         }
 
         if (path.startsWith("test/")) {
