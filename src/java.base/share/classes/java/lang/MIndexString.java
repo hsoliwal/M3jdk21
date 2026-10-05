@@ -87,6 +87,12 @@ final class MIndexString {
     /** Compatibility projection for non-local storage only. */
     private volatile byte[] materialized;
 
+    /**
+     * Constant-size M3 String facts retained once by this canonical storage identity.
+     * Length-proportional analyses remain in separately budgeted precompute owners.
+     */
+    private volatile M3StringPrecompute.Facts precomputedFacts;
+
     private MIndexString(
             byte storageKind,
             byte[] localValue,
@@ -473,6 +479,21 @@ final class MIndexString {
 
     long structuralHash64() {
         return structuralHash64;
+    }
+
+    M3StringPrecompute.Facts precomputedFacts() {
+        M3StringPrecompute.Facts current = precomputedFacts;
+        if (current != null) {
+            return current;
+        }
+        synchronized (this) {
+            current = precomputedFacts;
+            if (current == null) {
+                current = M3StringPrecompute.compute(this);
+                precomputedFacts = current;
+            }
+            return current;
+        }
     }
 
     boolean isScalar() {
