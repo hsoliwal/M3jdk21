@@ -39,7 +39,22 @@
       "status": "canonical target counterpart; representation convergence required",
       "source_role": "Synexia donor/reference implementation",
       "target_rule": "M3JDK naming is independent; preserve owner+coordinate semantics, internal precompute, and JNI shadow-only materialization",
-      "supersedes_target_name": "java.lang.MIndexString"
+      "supersedes_target_name": "java.lang.MIndexString",
+      "lineage": {
+        "donor_repo": "hsoliwal/com.synexia",
+        "owner_coordinate_commit": "8b202d3c10617d67f45247ccd81a21b9c5332a08",
+        "reference_dag_commit": "40d66f6edd0a9cf3e6b4545058c1ad54f6cd03bc",
+        "composable_precompute_commit": "d08ee60be27b60a951a55a2b472d515bf142f8bf",
+        "canonical_fact_bundle_commit": "b9d35ce3c3c266fb3641352a07903563a3a86b81",
+        "utf_shadow_commit": "f2f15f1aaa147cf1af556b0c148954178f971de6"
+      },
+      "required_semantics": [
+        "M3String instance carries Object owner + long value only",
+        "composition lives in shared canonical tuple/reference owner",
+        "precompute facts attach to canonical owner/range/composition identity",
+        "precompute never owns spelling payload",
+        "JNI/native UTF-8/UTF-16/byte/char materializations are shadows only"
+      ]
     },
     {
       "source": "com.synexia.indexstring.MIndexStringBacking",
