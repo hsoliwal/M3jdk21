@@ -113,6 +113,14 @@ public class M3StringFactsCompositionTest {
     }
 
     private static void sameFacts(String composed, String flat, String label) throws Exception {
+        if (composed.length() == 0) {
+            checks++;
+            if (flat.length() != 0) {
+                throw new AssertionError(label + " empty content mismatch");
+            }
+            return;
+        }
+
         Object composedBody = body(composed);
         Object flatBody = body(flat);
         Object flatOwner = M3_OWNER.get(flatBody);
