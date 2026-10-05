@@ -21,7 +21,7 @@ class M3SynexiaHandoffGuardRecipeTest {
   void verifiesPacketAndReplaysExistingTypedReceivers() {
     var guard = new M3SynexiaHandoffGuardRecipe("synexia-fixture-v1");
     assertEquals(
-        "7964c80982e4ab4d62b1c9f906b6da1060d769fa4aea805dc1f15bea077773fa",
+        "dec398e4b1d725d1233aa953e232d444cff3f90bb816ef04fe6cd13c9459306b",
         guard.packetRoot());
 
     var errors = new ArrayList<Throwable>();
@@ -32,7 +32,7 @@ class M3SynexiaHandoffGuardRecipeTest {
         javaRecipe.run(new InMemoryLargeSourceSet(List.of()), context).getChangeset().getAllResults();
     assertEquals(1, javaRun.size());
     SourceFile javaAfter = javaRun.getFirst().getAfter();
-    assertEquals("m3/bridge-fixture/src/sample/BridgeJava.java", javaAfter.getSourcePath().toString().replace('\\', '/'));
+    assertEquals("m3/ports/bridge-fixture/src/sample/BridgeJava.java", javaAfter.getSourcePath().toString().replace('\\', '/'));
     assertTrue(javaAfter.printAll().contains("return 7"));
     assertTrue(
         javaRecipe
