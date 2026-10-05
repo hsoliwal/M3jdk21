@@ -1,0 +1,11 @@
+item	state	evidence	limit
+base	PINNED	8131f535300c005afd27443d0281ede11198522f	current master at packet start
+donor_crate	PRESENT	jdk24-jep485-stream-gatherers;15 rows	4 current owners +11 additions
+recipe_wrapper	IMPLEMENTED	M3Jep485BackportRecipe	candidate-only
+scope_authority	IMPLEMENTED	LIBRARY_API + EXPLICIT_CONTRACT_CHANGE	no behavior-preserving misclassification
+named_recipe	IMPLEMENTED	com.m3.rewrite.backport.Jep485	Maven/OpenRewrite activation
+recipe_tests	PENDING_HOSTED	M3Jep485BackportRecipeTest	must prove exact current preimages and fixed point
+product_sources	NOT_APPLIED	source-sealed donor resources only	no java.base promotion before recipe proof
+matched_jdk_build	NOT_EXECUTED	-	required before compatibility admission
+focused_jtreg	NOT_EXECUTED	8 donor stream tests + existing stream regressions	required
+whole_jdk	INCOMPLETE	programme denominator remains open	no completion claim
