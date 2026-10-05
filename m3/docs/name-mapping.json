@@ -8,7 +8,8 @@
       "target": "java.lang.M3StringTuple",
       "status": "adapted canonical AVL persistent composition owner",
       "source_role": "Synexia donor/reference implementation",
-      "target_rule": "M3String values retain owner+packed coordinate; tuple owners retain child coordinates only, keep concat AVL-bounded, and intern the normalized ordered coordinate sequence independently of binary association; no text arrays"
+      "target_rule": "M3String values retain owner+packed coordinate; tuple owners retain child coordinates only, keep concat AVL-bounded, and intern the normalized ordered coordinate sequence independently of binary association; no text arrays",
+      "recipe": "com.m3.rewrite.backport.M3StringBalancedDag"
     },
     {
       "source": "com.synexia.indexstring.LocalM3StringPiece",
@@ -59,7 +60,8 @@
         "all Java byte[]/char[] compatibility shadows, including empty sentinel, are JNI-created",
         "VM-local native scalar lookup is weak; dead native payload is reclaimable",
         "tuple DAG remains AVL-bounded under arbitrary append/prepend and canonical tuple interning is association-independent over the normalized ordered coordinate sequence"
-      ]
+      ],
+      "balanced_dag_recipe": "com.m3.rewrite.backport.M3StringBalancedDag"
     },
     {
       "source": "com.synexia.indexstring.MIndexStringBacking",
