@@ -313,10 +313,7 @@ public final class MIndexMappedStringBacking implements MIndexStringBacking {
                     throw corrupt("text record size at " + cursor);
                 }
                 charOffset = cursor + TEXT_RECORD_HEADER_BYTES;
-                int expectedCrc = textPages.getInt(cursor + 56L);
-                if (charCrc(textPages, charOffset, utf16Length) != expectedCrc) {
-                    throw corrupt("text record CRC at " + cursor);
-                }
+                verifyTextPayload(cursor, charOffset, utf16Length);
             } else {
                 int owner = payloadRef - 1;
                 if (owner < 0 || owner >= row || recordBytes != TEXT_RECORD_HEADER_BYTES) {
@@ -324,7 +321,12 @@ public final class MIndexMappedStringBacking implements MIndexStringBacking {
                 }
                 if (utf16Lengths[owner] != utf16Length
                         || utf8Lengths[owner] != utf8Length
+                        || codePointCounts[owner] != textPages.getInt(cursor + 20L)
+                        || unpairedSurrogates[owner] != textPages.getInt(cursor + 24L)
                         || javaHashes[owner] != textPages.getInt(cursor + 28L)
+                        || hash31Powers[owner] != textPages.getInt(cursor + 32L)
+                        || firstUnits[owner] != textPages.getInt(cursor + 36L)
+                        || lastUnits[owner] != textPages.getInt(cursor + 40L)
                         || utf8Handles[owner] != utf8Handle) {
                     throw corrupt("text payload alias facts at " + cursor);
                 }
@@ -631,13 +633,49 @@ public final class MIndexMappedStringBacking implements MIndexStringBacking {
         return (int) crc.getValue();
     }
 
-    private static int charCrc(Pages pages, long offset, int utf16Length) {
+    /** Verify CRC and String facts in the same scalar-payload pass before publishing a row. */
+    private void verifyTextPayload(long record, long offset, int length) {
         CRC32 crc = new CRC32();
-        long bytes = Math.multiplyExact((long) utf16Length, Character.BYTES);
-        for (long index = 0; index < bytes; index++) {
-            crc.update(pages.getByte(offset + index));
+        int codePoints = length;
+        int unpaired = 0;
+        int hash = 0;
+        int power = 1;
+        int first = -1;
+        int last = -1;
+        boolean previousHigh = false;
+        for (int index = 0; index < length; index++) {
+            long position = offset + ((long) index << 1);
+            int high = textPages.getByte(position) & 0xff;
+            int low = textPages.getByte(position + 1L) & 0xff;
+            crc.update(high);
+            crc.update(low);
+            char unit = (char) ((high << 8) | low);
+            if (index == 0) {
+                first = unit;
+            }
+            last = unit;
+            // Intentional int wraparound: the String hash and power-of-31 contract.
+            hash = 31 * hash + unit;
+            power *= 31;
+            if (Character.isLowSurrogate(unit) && previousHigh) {
+                codePoints--;
+                unpaired--; // The preceding high unit was provisionally counted.
+            } else if (Character.isSurrogate(unit)) {
+                unpaired++;
+            }
+            previousHigh = Character.isHighSurrogate(unit);
         }
-        return (int) crc.getValue();
+        if ((int) crc.getValue() != textPages.getInt(record + 56L)) {
+            throw corrupt("text record CRC at " + record);
+        }
+        if (codePoints != textPages.getInt(record + 20L)
+                || unpaired != textPages.getInt(record + 24L)
+                || hash != textPages.getInt(record + 28L)
+                || power != textPages.getInt(record + 32L)
+                || first != textPages.getInt(record + 36L)
+                || last != textPages.getInt(record + 40L)) {
+            throw corrupt("text record facts at " + record);
+        }
     }
 
     private static void readFully(FileChannel channel, ByteBuffer target, long offset)
