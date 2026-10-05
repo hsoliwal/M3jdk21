@@ -2,6 +2,17 @@
 
 Status: **documentation-only architecture and implementation handoff**. This document does not modify production Java, HotSpot, native code, an installed JDK, generated mapping records, or acceptance evidence. It deliberately distinguishes observed repository state, candidate designs, implementation work and verified behavior.
 
+## Canonical ownership invariant
+
+**Synexia is a donor; M3JDK21 is the product/runtime owner.** M3 String and every String
+precompute/index/fact used at runtime are owned inside this repository. Synexia may supply
+source-pinned algorithms, recipes, fixtures and provenance, but `java.base`, HotSpot and JNI must
+not depend on Synexia runtime modules. See [m3-string-ownership-invariant.md](m3-string-ownership-invariant.md).
+
+The architectural name is **M3 String**. Existing `MIndexString*` source identifiers are legacy
+implementation/lineage names until a complete Java + HotSpot + JNI/native + recipe + mapping rename
+is admitted; they must not be duplicated by a parallel String owner.
+
 ## 1. Programme scope
 
 The M3 programme covers the complete JDK and runtime implementation. String is one subsystem. Collections, primitive/value storage, concurrency, I/O, compiler/runtime infrastructure, VM metadata and native boundaries are first-class parts of the same programme.
