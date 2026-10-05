@@ -205,6 +205,44 @@ class java_lang_String : AllStatic {
   friend class StringTable;
 };
 
+/**
+ * VM access to java.lang.M3String and its canonical owner graph.
+ *
+ * M3String itself is exactly owner + packed range coordinate. Payload arrays are
+ * not part of this layout. Atom owners address native/mapped bytes; tuple owners
+ * retain only child M3String coordinates.
+ */
+class java_lang_M3String : AllStatic {
+ private:
+  static int _owner_offset;
+  static int _value_offset;
+
+  static int _owner_kind_offset;
+  static int _owner_length_offset;
+  static int _owner_coder_offset;
+  static int _owner_javaHash_offset;
+
+  static int _atom_address_offset;
+  static int _atom_storageWidth_offset;
+  static int _atom_bigEndian_offset;
+
+  static int _tuple_left_offset;
+  static int _tuple_right_offset;
+
+ public:
+  static void compute_offsets();
+  static void serialize_offsets(SerializeClosure* f) NOT_CDS_RETURN;
+
+  static inline oop owner(oop value);
+  static inline jlong coordinate(oop value);
+  static inline int start(oop value);
+  static inline int length(oop value);
+  static inline jbyte coder(oop value);
+  static inline jint java_hash(oop value);
+  static inline jchar char_at(oop value, int index);
+  static void copy_chars(oop value, int start, int len, jchar* destination);
+};
+
 // Interface to java.lang.Class objects
 
 #define CLASS_INJECTED_FIELDS(macro)                                       \
