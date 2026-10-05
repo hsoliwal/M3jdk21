@@ -1,0 +1,8 @@
+kind	reference	use
+source_base	hsoliwal/M3jdk21#124@fab519204af556cfb75148c4c36334537506d013	stacked exact owner baseline
+prior_proof	hsoliwal/M3jdk21#117	measured original 90.17/70.72 deficit and recipe laboratory
+dependency_artifact	run37255987007/artifact11322552678	recovered Maven/OpenRewrite/JUnit/JaCoCo inputs
+production_owner	M3ScopeInference	one fail-closed invalid-path repair and unreachable-condition contraction
+test_owner	M3ScopeBoundaryCoverageTest	path/layout/refusal boundaries
+test_owner	M3PureIntBoundaryCoverageTest	AST/operator/depth/node/shape boundaries
+test_owner	M3RecipeMetadataAndDocumentationCoverageTest	metadata/TextComment/Javadoc idempotence

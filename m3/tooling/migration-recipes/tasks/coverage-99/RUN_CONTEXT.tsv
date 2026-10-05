@@ -1,0 +1,17 @@
+key	value
+repository	hsoliwal/M3jdk21
+base	fab519204af556cfb75148c4c36334537506d013
+branch	m3/migration-coverage-99-20261005
+runtime	Debian OpenJDK21.0.11+10-1-deb13u2
+maven	3.9.16
+openrewrite	8.17.1
+junit	5.10.2
+jacoco	0.8.15
+dependency_resolution	offline recovered proof-kit cache
+test_count	30
+test_failures	0
+test_errors	0
+test_skipped	0
+coverage_command	mvn -o -B -ntp -Dmaven.repo.local=<recovered-cache> -f m3/tooling/migration-recipes/pom.xml clean verify -Dtest=<focused scope+atom suite>
+threshold_change	false
+exclusion_change	false

@@ -1,0 +1,9 @@
+item	state	evidence	limit
+stack_base	PINNED	fab519204af556cfb75148c4c36334537506d013	PR124 parser-custody head
+new_boundary_tests	PASS_LOCAL	30 focused tests total;0 failures;0 errors;0 skipped	Slow retained corpus test not deleted/disabled
+scope_coverage	PASS_LOCAL	158/158 lines;95/95 branches	unchanged JaCoCo include/threshold
+atom_coverage	PASS_LOCAL	187/188 lines;154/156 branches	unchanged JaCoCo include/threshold
+combined_coverage	PASS_LOCAL	345/346 lines=99.71%;249/251 branches=99.20%	minimum99% line and branch
+scope_fail_closed	REPAIRED_LOCAL_TESTED	trailing-directory path now deliberate IllegalArgumentException	valid-path classification unchanged
+exact_head_ci	PENDING	stacked branch published	must reproduce before promotion
+whole_jdk	INCOMPLETE	wider programme ledger remains authoritative	no whole-JDK completion claim
