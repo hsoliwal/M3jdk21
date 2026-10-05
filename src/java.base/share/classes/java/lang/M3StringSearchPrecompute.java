@@ -33,6 +33,18 @@ final class M3StringSearchPrecompute {
 
     private M3StringSearchPrecompute() {}
 
+    /**
+     * Conservative upper bound for primitive metadata retained by both direct-mapped caches.
+     * Object/reference overhead is intentionally excluded; cache cardinality is separately fixed.
+     */
+    static long maximumRetainedPrimitiveBytes() {
+        long patternBytes =
+                (long) SLOTS * MAX_PATTERN_UNITS * (Integer.BYTES + Long.BYTES);
+        long sourceBytes =
+                (long) SOURCE_SLOTS * MAX_TRIGRAM_SOURCE_UNITS * Long.BYTES;
+        return Math.addExact(patternBytes, sourceBytes);
+    }
+
     static Plan prepare(M3String pattern) {
         int length = pattern.length();
         if (length < 2 || length > MAX_PATTERN_UNITS) return null;
