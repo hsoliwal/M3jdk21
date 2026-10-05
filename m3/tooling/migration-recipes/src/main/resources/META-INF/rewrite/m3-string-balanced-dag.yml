@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.M3StringBalancedDag
+displayName: Balance and canonicalize the M3 String coordinate DAG
+description: Replays the exact Synexia-derived AVL tuple and association-independent coordinate-sequence canonicalization, its jtreg proof, invariant gates, CI wiring and donor-to-target mapping.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk22-m3-string-balanced-dag
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-string-balanced-dag
