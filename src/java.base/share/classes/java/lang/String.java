@@ -1849,7 +1849,9 @@ public final class String
      */
     public byte[] getBytes(String charsetName)
             throws UnsupportedEncodingException {
-        return encode(lookupCharset(charsetName), coder(), value());
+        Charset charset = lookupCharset(charsetName);
+        M3String storage = m3();
+        return storage != null ? storage.encode(charset) : encode(charset, coder(), value());
     }
 
     /**
@@ -1872,7 +1874,8 @@ public final class String
      */
     public byte[] getBytes(Charset charset) {
         if (charset == null) throw new NullPointerException();
-        return encode(charset, coder(), value());
+        M3String storage = m3();
+        return storage != null ? storage.encode(charset) : encode(charset, coder(), value());
      }
 
     /**
@@ -1890,7 +1893,9 @@ public final class String
      * @since      1.1
      */
     public byte[] getBytes() {
-        return encode(Charset.defaultCharset(), coder(), value());
+        Charset charset = Charset.defaultCharset();
+        M3String storage = m3();
+        return storage != null ? storage.encode(charset) : encode(charset, coder(), value());
     }
 
     /**
