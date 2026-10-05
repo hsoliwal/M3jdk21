@@ -6,6 +6,15 @@
  * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringPrecomputeSearchTest
  */
 
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
+import java.nio.charset.CoderResult;
+import java.nio.charset.CodingErrorAction;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Random;
 
 public class M3StringPrecomputeSearchTest {
@@ -92,6 +101,29 @@ public class M3StringPrecomputeSearchTest {
         String overlap = String.join("", "aa", "aa");
         check(overlap.replace("aa", "b").equals("bb"), "replace non-overlap semantics");
         check(joined.replace("not-present", "x") == joined, "replace literal absent identity");
+
+        Charset[] encodings = {
+                StandardCharsets.UTF_8,
+                StandardCharsets.US_ASCII,
+                StandardCharsets.ISO_8859_1,
+                StandardCharsets.UTF_16LE,
+                StandardCharsets.UTF_16BE
+        };
+        for (Charset charset : encodings) {
+            check(Arrays.equals(joined.getBytes(charset), encodeOracle(oracle, charset)),
+                    "getBytes charset " + charset.name());
+            check(Arrays.equals(splitSupplementary.getBytes(charset),
+                            encodeOracle("\ud83d\ude42".toCharArray(), charset)),
+                    "getBytes split surrogate " + charset.name());
+            String unpaired = String.join("", "\ud83d", "x", "\ude42");
+            check(Arrays.equals(unpaired.getBytes(charset),
+                            encodeOracle("\ud83dx\ude42".toCharArray(), charset)),
+                    "getBytes unpaired surrogate " + charset.name());
+        }
+        check(Arrays.equals(joined.getBytes("UTF-8"), encodeOracle(oracle, StandardCharsets.UTF_8)),
+                "named UTF-8 bytes");
+        check(Arrays.equals(joined.getBytes(), encodeOracle(oracle, Charset.defaultCharset())),
+                "default charset bytes");
 
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
@@ -222,6 +254,17 @@ public class M3StringPrecomputeSearchTest {
                             source.replace(new String(replaceTarget), replacement),
                             naiveReplace(oracle, replaceTarget, replacementChars)),
                     "random literal replace " + trial);
+            if ((trial & 15) == 0) {
+                Charset charset = switch ((trial >>> 4) % 5) {
+                    case 0 -> StandardCharsets.UTF_8;
+                    case 1 -> StandardCharsets.US_ASCII;
+                    case 2 -> StandardCharsets.ISO_8859_1;
+                    case 3 -> StandardCharsets.UTF_16LE;
+                    default -> StandardCharsets.UTF_16BE;
+                };
+                check(Arrays.equals(source.getBytes(charset), encodeOracle(oracle, charset)),
+                        "random getBytes " + charset.name() + " trial " + trial);
+            }
         }
     }
 
@@ -301,6 +344,23 @@ public class M3StringPrecomputeSearchTest {
             if (source[index] == high && source[index + 1] == low) return index;
         }
         return -1;
+    }
+
+    private static byte[] encodeOracle(char[] value, Charset charset) {
+        CharsetEncoder encoder = charset.newEncoder()
+                .onMalformedInput(CodingErrorAction.REPLACE)
+                .onUnmappableCharacter(CodingErrorAction.REPLACE);
+        int capacity = (int) (value.length * (double) encoder.maxBytesPerChar());
+        ByteBuffer bytes = ByteBuffer.allocate(capacity);
+        try {
+            CoderResult result = encoder.encode(CharBuffer.wrap(value), bytes, true);
+            if (!result.isUnderflow()) result.throwException();
+            result = encoder.flush(bytes);
+            if (!result.isUnderflow()) result.throwException();
+        } catch (CharacterCodingException impossibleWithReplacement) {
+            throw new AssertionError(impossibleWithReplacement);
+        }
+        return Arrays.copyOf(bytes.array(), bytes.position());
     }
 
     private static char[] naiveReplace(char[] source, char oldChar, char newChar) {
