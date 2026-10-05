@@ -1,0 +1,10 @@
+group	scope	members	purpose	mutation_authority
+build-wiring	MULTI_MODULE	9	build/module/taglet wiring and compile exclusions	false
+java-base-support	MODULE	1	supporting java.base implementation leaf touched by upstream feature	false
+compiler-public-api	LIBRARY_API	10	additive/changed compiler model and doc-tree API surface	false
+javac-engine	MODULE	18	tokenizer, parser, doc-tree/model implementation and javac tooling	false
+markdown-module	MODULE	147	new private CommonMark-derived parser module plus legal resources	false
+javadoc	MODULE	28	standard doclet, doclint, tool and rendering integration	false
+markdown-tests	MODULE	12	focused JEP467 Markdown documentation-comment tests	false
+regression-tests	MULTI_MODULE	25	existing javac/javadoc/classfile regressions touched by implementation	false
+feature-join	LIBRARY_API	250	join only reviewed groups after GA-followup and public/legal review	false
