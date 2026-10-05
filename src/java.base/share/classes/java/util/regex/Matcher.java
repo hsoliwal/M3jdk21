@@ -147,7 +147,6 @@ public final class Matcher implements MatchResult {
     CharSequence text;
 
     private static final int M3_TQ_MAX_UTF16_UNITS = 32_768;
-    private CharSequence m3TqFactsText;
     private int m3TqFactsFrom = -1;
     private int m3TqFactsTo = -1;
     private M3TQ.Facts m3TqFacts;
@@ -436,6 +435,9 @@ public final class Matcher implements MatchResult {
                 localsPos[i].clear();
         }
         lastAppendPosition = 0;
+        m3TqFacts = null;
+        m3TqFactsFrom = -1;
+        m3TqFactsTo = -1;
         from = 0;
         to = getTextLength();
         modCount++;
@@ -1742,11 +1744,9 @@ public final class Matcher implements MatchResult {
 
         M3TQ.Facts facts = m3TqFacts;
         if (facts == null
-                || m3TqFactsText != text
                 || m3TqFactsFrom != this.from
                 || m3TqFactsTo != to) {
             facts = M3TQ.precompute(text, this.from, to, M3_TQ_MAX_UTF16_UNITS);
-            m3TqFactsText = text;
             m3TqFactsFrom = this.from;
             m3TqFactsTo = to;
             m3TqFacts = facts;
