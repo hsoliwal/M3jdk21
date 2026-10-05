@@ -136,16 +136,16 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p target/jep485-proof
-          python3 m3/backports/recipes/jep-485-gatherers/materialize.py             --root "$PWD"             --mode check             --receipt target/jep485-proof/preimage.tsv
+          mkdir -p $RUNNER_TEMP/jep485-proof
+          python3 m3/backports/recipes/jep-485-gatherers/materialize.py             --root "$PWD"             --mode check             --receipt $RUNNER_TEMP/jep485-proof/preimage.tsv
           test -z "$(git status --porcelain=v1 -uall)"
 
       - name: 2 - Materialize opt-in candidate in ephemeral checkout
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/recipes/jep-485-gatherers/materialize.py             --root "$PWD"             --mode apply             --receipt target/jep485-proof/apply.tsv
-          python3 m3/backports/recipes/jep-485-gatherers/materialize.py             --root "$PWD"             --mode verify-post             --receipt target/jep485-proof/postimage.tsv
+          python3 m3/backports/recipes/jep-485-gatherers/materialize.py             --root "$PWD"             --mode apply             --receipt $RUNNER_TEMP/jep485-proof/apply.tsv
+          python3 m3/backports/recipes/jep-485-gatherers/materialize.py             --root "$PWD"             --mode verify-post             --receipt $RUNNER_TEMP/jep485-proof/postimage.tsv
           git diff --check
 
       - name: 3 - Prove only manifest-declared product paths changed
@@ -270,7 +270,7 @@ jobs:
         with:
           name: jep485-optin-openjdk-proof-${{ github.run_id }}
           path: |
-            target/jep485-proof
+            ${{ runner.temp }}/jep485-proof
             build/*/test-results/**
           if-no-files-found: warn
           retention-days: 14
