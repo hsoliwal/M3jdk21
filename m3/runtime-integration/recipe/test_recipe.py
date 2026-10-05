@@ -48,6 +48,14 @@ class RecipeTest(unittest.TestCase):
    if actual in hashes.get('superseded',[]):seen_superseded+=1
   self.assertEqual(7,seen_superseded)
 
+ def test_current_jni_owner_is_verified_supersession(self):
+  name='src/hotspot/share/prims/jni.cpp'
+  expected='95adc8ea2a9035e65b613a7fb4131f8629bc90f81b70008895a77c1e396b05f9'
+  source=ROOT/name
+  actual=recipe.digest(source.read_bytes())
+  self.assertEqual(expected,actual)
+  self.assertIn(actual,manifest['files'][name]['superseded'])
+
  def test_patch_bytes_remain_content_addressed(self):
   patch=HERE/'runtime.patch'
   self.assertEqual(manifest['patch_sha256'],recipe.digest(patch.read_bytes()))
