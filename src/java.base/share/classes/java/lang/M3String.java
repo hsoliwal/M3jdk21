@@ -216,10 +216,7 @@ final class M3String implements CharSequence {
     }
 
     int hashCodeValue() {
-        if (start() == 0 && length() == owner.length) return owner.javaHash;
-        int hash = 0;
-        for (int index = 0; index < length(); index++) hash = 31 * hash + charAt(index);
-        return hash;
+        return facts().javaHash;
     }
 
     M3StringFacts facts() {
