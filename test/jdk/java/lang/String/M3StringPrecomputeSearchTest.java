@@ -153,8 +153,12 @@ public class M3StringPrecomputeSearchTest {
             invokeBytes("getBytesUTF8NoRepl", new Class<?>[] {String.class}, malformedUtf8);
             throw new AssertionError("UTF-8 no-replacement accepted unpaired surrogate");
         } catch (IllegalArgumentException expected) {
+            check(expected.getMessage().equals("malformed input off : 0, length : 1"),
+                    "UTF-8 no-replacement message");
             check(expected.getCause() instanceof UnmappableCharacterException,
                     "UTF-8 no-replacement cause");
+            check(((UnmappableCharacterException) expected.getCause()).getInputLength() == 1,
+                    "UTF-8 no-replacement input length");
         }
         try {
             invokeBytes("getBytesNoRepl",
@@ -164,6 +168,8 @@ public class M3StringPrecomputeSearchTest {
         } catch (CharacterCodingException expected) {
             check(expected instanceof UnmappableCharacterException,
                     "getBytesNoRepl UTF-8 exception type");
+            check(((UnmappableCharacterException) expected).getInputLength() == 1,
+                    "getBytesNoRepl UTF-8 input length");
         }
         try {
             invokeBytes("getBytesNoRepl",
@@ -172,6 +178,18 @@ public class M3StringPrecomputeSearchTest {
             throw new AssertionError("ASCII no-replacement accepted Unicode input");
         } catch (CharacterCodingException expected) {
             check(true, "ASCII no-replacement rejected Unicode input");
+        }
+
+        try {
+            invokeBytes("getBytesNoRepl",
+                    new Class<?>[] {String.class, Charset.class},
+                    splitSupplementary, StandardCharsets.US_ASCII);
+            throw new AssertionError("ASCII no-replacement accepted supplementary pair");
+        } catch (CharacterCodingException expected) {
+            check(expected instanceof UnmappableCharacterException,
+                    "ASCII supplementary exception type");
+            check(((UnmappableCharacterException) expected).getInputLength() == 2,
+                    "ASCII supplementary input length");
         }
 
         String repeated = joined.repeat(3);
