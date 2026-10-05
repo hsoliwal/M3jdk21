@@ -118,8 +118,12 @@ if "private volatile M3String m3;" not in string:
 
 # M3-backed wrappers must not create Java text arrays. Even the shared empty compatibility
 # sentinel is created through the JNI shadow boundary.
-if "new byte[" in m3 or "new char[" in m3:
-    fail("M3String creates Java byte/char shadow directly")
+# M3String may allocate caller-owned byte[] results because getBytes/charset encoding requires
+# real Java arrays. It must not stage canonical text through a Java char[] or retain text arrays.
+if "new char[" in m3:
+    fail("M3String stages canonical text through a Java char[]")
+if "CharBuffer.wrap(this)" not in m3:
+    fail("generic charset encoding no longer reads canonical M3 String directly")
 if "nativeByteShadow(EMPTY, 0, 0, String.LATIN1)" not in m3:
     fail("M3String empty compatibility sentinel is not JNI-created")
 if "return storage == null ? checked.value : storage.compatibilityValue();" not in string:
