@@ -1,0 +1,26 @@
+{
+  "sourceCommit": "99221b0f25a1b09c32855d76e295b816f632a46b",
+  "recipe": "com.synexia.rewrite.Mrd",
+  "files": [
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "cd55551642f4e513d650cad0f4b798e22a880c7a13e7170d22eb2a7f23234c07",
+      "gitBlob": "4b0a8ebf086c33b43d6588f638f417914c99978e",
+      "artifact": "m3/migration/intake-20261005/portable/mrd/outputs/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
+    }
+  ],
+  "materialization": {
+    "manifest": {
+      "path": "m3/migration/intake-20261005/portable/mrd/recipe/materialization/manifest.tsv",
+      "sha256": "3d67950e579cfc780877860458a258f2dcf0bf5eba3aa7d054b8a284791c7889"
+    },
+    "output": {
+      "path": "m3/migration/intake-20261005/portable/mrd/recipe/materialization/OUTPUT.json",
+      "sha256": "f5369f767e19cfc21ed889acfa6d632e2e147db317ff61f72572072052d77efc"
+    },
+    "patch": {
+      "path": "m3/migration/intake-20261005/portable/mrd/recipe/materialization/candidate.patch",
+      "sha256": "1135bf4b540baa679e3c280048102c7765d19803fd3809fbf8dd96a292fb03be"
+    }
+  }
+}

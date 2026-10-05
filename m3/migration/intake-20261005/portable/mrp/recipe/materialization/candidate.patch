@@ -1,0 +1,160 @@
+diff --git a/synexia-primitives/src/main/java/com/synexia/primitives/DenseCollections.java b/synexia-primitives/src/main/java/com/synexia/primitives/DenseCollections.java
+index 2edc0cb..2eb8cf2 100644
+--- a/synexia-primitives/src/main/java/com/synexia/primitives/DenseCollections.java
++++ b/synexia-primitives/src/main/java/com/synexia/primitives/DenseCollections.java
+@@ -53,6 +53,14 @@ com.synexia.rewrite.Mrp
+     public static IntLongHashMap intLongMap() { return new IntLongHashMap(); }
+     public static LongIntHashMap longIntMap() { return new LongIntHashMap(); }
+     public static LongLongHashMap longLongMap() { return new LongLongHashMap(); }
++    public static LongByteHashMap longByteMap() { return new LongByteHashMap(); }
++    public static LongSortedSet longSortedSet() { return new LongSortedSet(); }
++    public static LongByteSortedMap longByteSortedMap() { return new LongByteSortedMap(); }
++    public static LongLongSortedMap longLongSortedMap() { return new LongLongSortedMap(); }
++    public static LongLongPriorityQueue longPriorityQueue() { return new LongLongPriorityQueue(); }
++    public static LongLongPriorityQueue longPriorityQueue(boolean minFirst) {
++        return new LongLongPriorityQueue(8, minFirst);
++    }
+     public static <V> IntObjectHashMap<V> intObjectMap() { return new IntObjectHashMap<>(); }
+     public static <V> LongObjectHashMap<V> longObjectMap() { return new LongObjectHashMap<>(); }
+     public static <K> ObjectIntHashMap<K> objectIntMap() { return new ObjectIntHashMap<>(); }
+diff --git a/synexia-primitives/src/main/java/com/synexia/primitives/FuzzyStructureFactory.java b/synexia-primitives/src/main/java/com/synexia/primitives/FuzzyStructureFactory.java
+index 9588ec0..580985b 100644
+--- a/synexia-primitives/src/main/java/com/synexia/primitives/FuzzyStructureFactory.java
++++ b/synexia-primitives/src/main/java/com/synexia/primitives/FuzzyStructureFactory.java
+@@ -306,6 +306,15 @@ com.synexia.rewrite.Mrp
+         if (parsed.has("spmc")) return Concurrency.SPMC;
+         if (parsed.has("mpmc")) return Concurrency.MPMC;
+ 
++        int producerCount = roleCardinality(parsed, "producer", "producers");
++        int consumerCount = roleCardinality(parsed, "consumer", "consumers");
++        if (producerCount != 0 && consumerCount != 0) {
++            if (producerCount == 1) {
++                return consumerCount == 1 ? Concurrency.SPSC : Concurrency.SPMC;
++            }
++            return consumerCount == 1 ? Concurrency.MPSC : Concurrency.MPMC;
++        }
++
+         boolean many = parsed.has("many") || parsed.has("multiple");
+         boolean producers = parsed.has("producer") || parsed.has("producers");
+         boolean consumers = parsed.has("consumer") || parsed.has("consumers");
+@@ -318,6 +327,24 @@
+         return Concurrency.NONE;
+     }
+ 
++    /** Zero retains the existing fallback for absent or contradictory role quantities. */
++    private static int roleCardinality(Parsed parsed, String singular, String plural) {
++        int result = 0;
++        for (int index = 1; index < parsed.tokens.size(); index++) {
++            String role = parsed.tokens.get(index);
++            if (!role.equals(singular) && !role.equals(plural)) continue;
++            int current = switch (parsed.tokens.get(index - 1)) {
++                case "one", "single" -> 1;
++                case "many", "multiple" -> 2;
++                default -> 0;
++            };
++            if (current == 0) continue;
++            if (result != 0 && result != current) return 0;
++            result = current;
++        }
++        return result;
++    }
++
+     private static PrimitiveKind[] kinds(List<String> tokens) {
+         List<PrimitiveKind> kinds = new ArrayList<>();
+         for (String token : tokens) {
+@@ -464,6 +491,8 @@
+     }
+ 
+     private static String canonical(String token) {
++        // Preserve the typed-map connector before approximate family selection.
++        if ("to".equals(token)) return token;
+         String exact = VOCABULARY.get(token);
+         if (exact != null) return exact;
+ 
+diff --git a/synexia-primitives/src/test/java/com/synexia/primitives/AdvancedAlgorithmShapesTest.java b/synexia-primitives/src/test/java/com/synexia/primitives/AdvancedAlgorithmShapesTest.java
+index dab6b3a..837e588 100644
+--- a/synexia-primitives/src/test/java/com/synexia/primitives/AdvancedAlgorithmShapesTest.java
++++ b/synexia-primitives/src/test/java/com/synexia/primitives/AdvancedAlgorithmShapesTest.java
+@@ -14,12 +14,20 @@ com.synexia.rewrite.Mrp
+         LongSegmentTree segment = new LongSegmentTree(new long[] {1, 2, 3, 4}, 0L, Long::sum);
+         assertEquals(9L, segment.query(1, 4));
+         segment.set(2, 10);
+-        assertEquals(16L, segment.query(0, 4));
++        long[] afterSet = {1, 2, 10, 4};
++        assertEquals(Arrays.stream(afterSet).sum(), segment.query(0, 4));
++        for (int index = 0; index < afterSet.length; index++) {
++            assertEquals(afterSet[index], segment.get(index));
++        }
+ 
+         RangeAddLongSumTree lazy = new RangeAddLongSumTree(new long[] {1, 2, 3, 4});
+         lazy.add(1, 4, 5);
+-        assertEquals(25L, lazy.total());
+-        assertEquals(18L, lazy.sum(1, 3));
++        long[] afterRangeAdd = {1, 7, 8, 9};
++        assertEquals(Arrays.stream(afterRangeAdd).sum(), lazy.total());
++        assertEquals(Arrays.stream(afterRangeAdd, 1, 3).sum(), lazy.sum(1, 3));
++        for (int index = 0; index < afterRangeAdd.length; index++) {
++            assertEquals(afterRangeAdd[index], lazy.get(index));
++        }
+ 
+         LongSparseTable sparse = new LongSparseTable(new long[] {7, 2, 9, 1, 5}, Math::min);
+         assertEquals(1L, sparse.query(1, 5));
+diff --git a/synexia-primitives/src/test/java/com/synexia/primitives/ProviderBackedPrimitiveTreeSupersetTest.java b/synexia-primitives/src/test/java/com/synexia/primitives/ProviderBackedPrimitiveTreeSupersetTest.java
+index 0eec158..88ef6cb 100644
+--- a/synexia-primitives/src/test/java/com/synexia/primitives/ProviderBackedPrimitiveTreeSupersetTest.java
++++ b/synexia-primitives/src/test/java/com/synexia/primitives/ProviderBackedPrimitiveTreeSupersetTest.java
+@@ -57,7 +57,7 @@ com.synexia.rewrite.Mrp
+                     long parentId, int offset, int limit, long[] childIds) {
+                 seenParent[0] = parentId;
+                 childIds[0] = 7L;
+-                return pageResult(1, -1);
++                return PagedPrimitiveTreeProvider.pageResult(1, -1);
+             }
+         };
+ 
+@@ -103,14 +103,14 @@
+             @Override
+             public long loadRoots(int offset, int limit, long[] rootIds) {
+                 rootIds[0] = 9L;
+-                return pageResult(1, -1);
++                return PagedPrimitiveTreeProvider.pageResult(1, -1);
+             }
+ 
+             @Override
+             public long loadChildren(
+                     long parentId, int offset, int limit, long[] childIds) {
+                 childIds[0] = 9L;
+-                return pageResult(1, -1);
++                return PagedPrimitiveTreeProvider.pageResult(1, -1);
+             }
+         };
+ 
+@@ -149,6 +149,8 @@
+         tree.loadNextRootPage();
+         tree.loadNextChildPage(10L);
+         tree.loadNextChildPage(101L);
++        long materializedBeforeTraversal = tree.materializedSize();
++        assertEquals(2L, materializedBeforeTraversal, "paging setup materializes the two parents");
+         int callsBeforeTraversal = provider.totalProviderCalls();
+ 
+         tree.setExpanded(10L, true);
+@@ -161,13 +163,17 @@
+         assertEquals(List.of(10L, 101L, 1001L, 102L, 103L, 20L, 30L), visible);
+         assertEquals(callsBeforeTraversal, provider.totalProviderCalls(),
+                 "loaded-only traversal must not invoke provider");
+-        assertEquals(0L, tree.materializedSize(),
+-                "expansion and visible traversal must not materialize payload");
++        assertEquals(materializedBeforeTraversal, tree.materializedSize(),
++                "expansion and visible traversal must not materialize additional payload");
+ 
+         tree.setExpanded(101L, false);
+         long[] window = new long[4];
+         assertEquals(4, tree.fillVisibleLoadedWindow(1, 4, window));
+         assertArrayEquals(new long[] {101L, 102L, 103L, 20L}, window);
++        assertEquals(callsBeforeTraversal, provider.totalProviderCalls(),
++                "collapsed-window traversal must not invoke provider");
++        assertEquals(materializedBeforeTraversal, tree.materializedSize(),
++                "collapsed-window traversal must not materialize additional payload");
+     }
+ 
+     @Test

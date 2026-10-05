@@ -1,0 +1,2 @@
+# One exact existing engine target; parser dependencies are opt-in context resources.
+synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java	0a5ae64b92bc05230d50f218cbba7600c60bd865ce1217932a7c62d93c8f7ee5	cd55551642f4e513d650cad0f4b798e22a880c7a13e7170d22eb2a7f23234c07	M3HashPinnedJavaSnapshotRecipe.java.txt

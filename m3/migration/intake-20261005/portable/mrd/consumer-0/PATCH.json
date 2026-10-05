@@ -1,0 +1,16 @@
+{
+  "status": "SEALED_BEFORE_LINT",
+  "baseline": "99221b0f25a1b09c32855d76e295b816f632a46b",
+  "lane": "mrc-current-bootstrap",
+  "specSHA256": "15437ec7b61f3a055c5d396d52368a84e295d1bb0135294c11fadc65f6b3f555",
+  "inputManifestSHA256": "cd037268a3887eaea165d62b4d4e5884c22346f3d8e7d601152faa30f27e66a3",
+  "commandsSHA256": "f2b9006065fcd269cdd00ad83968c2421242523487ea640941efbd1844c994f1",
+  "stagingSHA256": "45c2c290bee9d46b001691f669ac1401dd5e5faec3e00c8a78bba90ff71bbe0a",
+  "toolingSHA256": "0ad391cb4ee38b875fd079ab023b2f783cf2b4e1349381618e31e072dd05e84b",
+  "sourceFiles": 33,
+  "javaFiles": 11,
+  "lintJavaFiles": 11,
+  "effectiveOutputAbsent": true,
+  "strictCanonicalAdmission": false,
+  "canonicalProductionApplied": false
+}

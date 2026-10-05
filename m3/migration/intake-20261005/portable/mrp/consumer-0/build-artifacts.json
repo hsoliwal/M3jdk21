@@ -1,0 +1,2217 @@
+[
+  {
+    "path": "classes/com/synexia/primitives/AdaptiveEnumPrimitiveMap$OrdinalConsumer.class",
+    "sha256": "7449c88399224db8038434f9525e882a35cad0315d02e6fb98ae8575d9a82935",
+    "bytes": 388
+  },
+  {
+    "path": "classes/com/synexia/primitives/AdaptiveEnumPrimitiveMap.class",
+    "sha256": "378535093e7e7b042cac44d760bd445d560e4d3bb2f5b5e083045c348f70f80c",
+    "bytes": 9289
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmCandidate$Estimator.class",
+    "sha256": "25b578bf4abb55cc7511af63c6722c19949265668c26adc17a1161fcc63d40ab",
+    "bytes": 410
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmCandidate$Matcher.class",
+    "sha256": "b3da6a328fd6c782105215cb32fc0f4bca1e54911b89846cd6c685e0283fc7f4",
+    "bytes": 418
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmCandidate$Traits.class",
+    "sha256": "166e59523cff5fc719cf2732f3b420f0e4328f9417b8c72d6a7559f7d6e5b7b1",
+    "bytes": 2513
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmCandidate.class",
+    "sha256": "9bde2fa043651d69bbe20276ad9d2605adc4b4b319a5c0e8b6b04ad010f2ee74",
+    "bytes": 3481
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmKernels$1.class",
+    "sha256": "a957aabdbf5fa5a86d685d2014ad4058e47519d1b2520044d0d9d6d418f247a5",
+    "bytes": 930
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmKernels$ShortestPathResult.class",
+    "sha256": "59f28f059f5457d740c2f616525b0959a3669baed9ca999b304ec0ec89a0d23a",
+    "bytes": 1854
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmKernels.class",
+    "sha256": "4ec44bc20bde53e23a15d3a27267463edfcd41072c7bae779cd38ecae3293ea4",
+    "bytes": 15441
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmRequirements$Builder.class",
+    "sha256": "fd703d639a7fe50f295b7a3d0b8b108c0198de955a26ba8492a364aa2f8d3154",
+    "bytes": 9182
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmRequirements$CompressionMode.class",
+    "sha256": "f2edeff6142da4ec1aeee4c9473da4806e3e116a62df0b6aec2519f51f92b9a7",
+    "bytes": 1371
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmRequirements$ConnectivityMode.class",
+    "sha256": "7874c60015cf2b9e36ebce6a20946e2b09401bbfec86e73c8a08ca7c89544459",
+    "bytes": 1422
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmRequirements$FlowMode.class",
+    "sha256": "32fcf24e4bae09bd1e87912b44c9e12df9f51cc989b9cd2a3ee64d3e6bb03b1e",
+    "bytes": 1321
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmRequirements$GraphAnalysisMode.class",
+    "sha256": "3f4d703162211d31a487680dd923164cc9c2702871832c3657cdf161681224b1",
+    "bytes": 1461
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmRequirements$GraphWeightLaw.class",
+    "sha256": "4999b50d832de5d2b0cfe13dc1153aded602fe21120c6d6910aca1b887c72c4c",
+    "bytes": 1524
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmRequirements$MatchingMode.class",
+    "sha256": "49554bc85a21a63dddcb54aacb88f431e68f21d433a6b7266b54bd8da77fefa8",
+    "bytes": 1362
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmRequirements$Priorities.class",
+    "sha256": "e8c6bdb99eec9078af9439702f284f2cf3fe10703ab0ed9db760afc41f012d2d",
+    "bytes": 2859
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmRequirements$Purpose.class",
+    "sha256": "5a746b0e7ef054c1d8ea44cf6a764b7188e67947d5c94174461718e76e9324a3",
+    "bytes": 2035
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmRequirements$RangeAggregation.class",
+    "sha256": "360e76cf32e9bf7046eb5dc9d543bc24c05b0a8795ff6adb69a3df69ab89b9af",
+    "bytes": 1479
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmRequirements$RangeMutation.class",
+    "sha256": "e96c64a4d932b746424022e0e49aaae7bd9b42f4842f959595e7b3c25946df64",
+    "bytes": 1526
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmRequirements$RangeQuery.class",
+    "sha256": "d75d725d7bb3c4ececb5d8138c6fbff2ec7a4af587edfe313f25547069963b51",
+    "bytes": 1377
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmRequirements$RankMode.class",
+    "sha256": "e929191065e546f9cd37474d8cfb081525211dfbfbfac7c4c45f639b8aef6ec2",
+    "bytes": 1380
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmRequirements$Scale.class",
+    "sha256": "9dbea134b3e9a32142c2bde877d9ce5c534da7c471583efe361452a54303fc6d",
+    "bytes": 2717
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmRequirements$SearchMode.class",
+    "sha256": "9aafbde257715259424cb4e94e7c72b506610aee73d2770c81905381718542df",
+    "bytes": 1386
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmRequirements$SpanningMode.class",
+    "sha256": "092ba69261e77e89ede17f5e5ef232e961b7cedb5f35ce9d2ccee2116c6402a4",
+    "bytes": 1356
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmRequirements$TextMode.class",
+    "sha256": "c633c9dbf41614b765e22b988e3b2cd117d8a391d65da2fee1988a79f8c8b2dc",
+    "bytes": 1450
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmRequirements$TreeMode.class",
+    "sha256": "6eea84f132a5b5bebed194e1f83b9495dd88f68d5678af9192f194e5e5b51197",
+    "bytes": 1385
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmRequirements$WindowMode.class",
+    "sha256": "c30a9eed6b09c977a313911fc734083ceb214a3699c289757d706dbe9cc688a5",
+    "bytes": 1438
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmRequirements.class",
+    "sha256": "549b2cd087c9a906ec407d00117c8ef0c0b8d538910058a7fddc29f4c246ac24",
+    "bytes": 9544
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmSelection$Alternative.class",
+    "sha256": "5f168b5e2990497d677db8ca852c858eabb35facbd7a8446eec4c572be609fc5",
+    "bytes": 2468
+  },
+  {
+    "path": "classes/com/synexia/primitives/AlgorithmSelection.class",
+    "sha256": "442de09c81ef4c4f449e6c0763b950f0aa55acda5995580f0fb821ee473b52d2",
+    "bytes": 2259
+  },
+  {
+    "path": "classes/com/synexia/primitives/BoundedProviderBackedPrimitiveList.class",
+    "sha256": "70d1b0438a611a958150c63fb57d4918921288fd596d1501ff4cbb937c46fa83",
+    "bytes": 5502
+  },
+  {
+    "path": "classes/com/synexia/primitives/BoundedProviderBackedPrimitiveLongTree.class",
+    "sha256": "aa36db9a388ee8fbc89a0aa33fb546df0dc4736285e56898571f9a7cadf09bc3",
+    "bytes": 9969
+  },
+  {
+    "path": "classes/com/synexia/primitives/BoundedProviderBackedPrimitiveRows.class",
+    "sha256": "adc8d0586ccd222ade1b16796594053dbf12dd4af715f4207d255ad097c65634",
+    "bytes": 9274
+  },
+  {
+    "path": "classes/com/synexia/primitives/BoundedProviderBackedPrimitiveTree.class",
+    "sha256": "b98341cf6c386f8c946a975b341ac72b6bef177d50ac558d0f9edf233a9ce10f",
+    "bytes": 12658
+  },
+  {
+    "path": "classes/com/synexia/primitives/BoundedVersionedProviderBackedPrimitiveLongTree.class",
+    "sha256": "f5f216991a8c0b5eacbec15164b365384e04435b0e4fb6ef3654a5b930c89181",
+    "bytes": 10892
+  },
+  {
+    "path": "classes/com/synexia/primitives/BulkPrimitiveRowProvider.class",
+    "sha256": "f947466eb53f2e521dfbfda69fba6dd95475b951b6ae825d5b5e89a3a89a7599",
+    "bytes": 1738
+  },
+  {
+    "path": "classes/com/synexia/primitives/CharTrieSet.class",
+    "sha256": "9847921a8061f817cdb8bb108387cae3d274bd544f04c01bb63113827a17eba2",
+    "bytes": 3227
+  },
+  {
+    "path": "classes/com/synexia/primitives/CursorPagedPrimitiveTreeProvider.class",
+    "sha256": "1ef83e63f03b030e860d87ef64f8ec6eb103c69a63c6fa8548123a74c7372e4e",
+    "bytes": 909
+  },
+  {
+    "path": "classes/com/synexia/primitives/DeltaEncodedLongList.class",
+    "sha256": "00e41b18242e4fb32b0f3c0477a5f4cd646020e8be6949f314d5be7518f8c99f",
+    "bytes": 3525
+  },
+  {
+    "path": "classes/com/synexia/primitives/DenseCollections.class",
+    "sha256": "1109815e19d02bba9c342adfe4f62200783628358b087fcf8d0cb0376000d0a3",
+    "bytes": 33566
+  },
+  {
+    "path": "classes/com/synexia/primitives/DenseDominanceSet.class",
+    "sha256": "4f65d19b19cb971a9c0fb2db2054e1fdf1628d6038aa9bc28cc372379336611f",
+    "bytes": 4792
+  },
+  {
+    "path": "classes/com/synexia/primitives/DenseHash.class",
+    "sha256": "078018fb9b1e41965224e7a03347b7330b37a5f09b9b7b850aa4868d1cfdc8fb",
+    "bytes": 1409
+  },
+  {
+    "path": "classes/com/synexia/primitives/DenseIdentityHashMap.class",
+    "sha256": "7d80104858a1c85b8efc6e422abee99b11e0b094afc0d782a21d9ba4deb10e7b",
+    "bytes": 5218
+  },
+  {
+    "path": "classes/com/synexia/primitives/DenseIdentityHashSet.class",
+    "sha256": "d51143411a11ff9291a7a8d415a42fec6eb3ad89ccdd5b784b4e3bea36cf7360",
+    "bytes": 4556
+  },
+  {
+    "path": "classes/com/synexia/primitives/DenseObjectHashSet.class",
+    "sha256": "143e7fd60dd3a0731d06dbd0dec43e73f369ad0ca96cb06dd6900082a0713718",
+    "bytes": 4972
+  },
+  {
+    "path": "classes/com/synexia/primitives/DenseObjectObjectHashMap.class",
+    "sha256": "bdf9c71aa7d0cd4cb450c8630533332a943caa1f0e3148e5029f203e93ec507a",
+    "bytes": 5666
+  },
+  {
+    "path": "classes/com/synexia/primitives/EnumPrimitiveMap$OrdinalConsumer.class",
+    "sha256": "290e2bda89b8a6f5b5ac2aed7d701b31958fc2c763bc7b972857bf8b06b5f31a",
+    "bytes": 364
+  },
+  {
+    "path": "classes/com/synexia/primitives/EnumPrimitiveMap.class",
+    "sha256": "fdfb7c17d4c8a09bc71946d7b9f46a91d280abcbf87c22c7e5293a77056cf638",
+    "bytes": 5698
+  },
+  {
+    "path": "classes/com/synexia/primitives/FrozenRankSelect.class",
+    "sha256": "512afc41da892ebdc4d77707921e74a95de7e78e11e4fa4cffb1520636284365",
+    "bytes": 6043
+  },
+  {
+    "path": "classes/com/synexia/primitives/FuzzyAlgorithmFactory$1.class",
+    "sha256": "7eb198da445dc4a288b6c897b2c621c95ad9af8d26925e1dd797b1f86065eebb",
+    "bytes": 1527
+  },
+  {
+    "path": "classes/com/synexia/primitives/FuzzyAlgorithmFactory$Ranked.class",
+    "sha256": "6c22500f6cd9161c98b4a59a474f725d8dc85b1bba0e98ba098660ac8d9bffb5",
+    "bytes": 2148
+  },
+  {
+    "path": "classes/com/synexia/primitives/FuzzyAlgorithmFactory$Scored.class",
+    "sha256": "343780f2b8c23ef32e611d13b64b39ecb8c5a79836b1697c633990b881165239",
+    "bytes": 1840
+  },
+  {
+    "path": "classes/com/synexia/primitives/FuzzyAlgorithmFactory.class",
+    "sha256": "9b9426dfd129b63f1efc7e5c5c9adac38bb3cc5dfdf716e31bf39d62f422a3f4",
+    "bytes": 13298
+  },
+  {
+    "path": "classes/com/synexia/primitives/FuzzyPrimitiveFactory.class",
+    "sha256": "872299b60f55c67008c0626c61ae34594945bf93d0aed13acf2892d5171f73c6",
+    "bytes": 2481
+  },
+  {
+    "path": "classes/com/synexia/primitives/FuzzyProviderCollectionFactory$1.class",
+    "sha256": "d5bcae6e6a647262039b57cda27cb3b387e636c11753ade925ebb383296163c6",
+    "bytes": 1567
+  },
+  {
+    "path": "classes/com/synexia/primitives/FuzzyProviderCollectionFactory$Plan.class",
+    "sha256": "e310c65a1056f6617885c477c8898763e5834ef93fa1405ec50da07bd049d321",
+    "bytes": 2941
+  },
+  {
+    "path": "classes/com/synexia/primitives/FuzzyProviderCollectionFactory.class",
+    "sha256": "5547492fc0900d878e6f57d8d395c13a5c751a074bd0b4a8974438e335a52bd5",
+    "bytes": 10835
+  },
+  {
+    "path": "classes/com/synexia/primitives/FuzzyStructureFactory$1.class",
+    "sha256": "fa2ce63216ab605486825218fd5446a078868bda79ed0f436adddebd3db61404",
+    "bytes": 924
+  },
+  {
+    "path": "classes/com/synexia/primitives/FuzzyStructureFactory$Concurrency.class",
+    "sha256": "6c239ad69b52fcc120754150b5ca79fdaec2ec0db9948bc5df71ebd18a1353b3",
+    "bytes": 1595
+  },
+  {
+    "path": "classes/com/synexia/primitives/FuzzyStructureFactory$Family.class",
+    "sha256": "7d791244cfb536fe40b2d638145016ee39c29b2f71631c4843f80cd9a33a85e1",
+    "bytes": 2238
+  },
+  {
+    "path": "classes/com/synexia/primitives/FuzzyStructureFactory$Parsed.class",
+    "sha256": "2262e19e77951a335800dc269c0f01d3585325f3bfc5ce529916b8be22035c48",
+    "bytes": 2620
+  },
+  {
+    "path": "classes/com/synexia/primitives/FuzzyStructureFactory$Plan.class",
+    "sha256": "1671e30b1bae169166046e4f971d9fcde23345f6eda7f556c25d583efde5b655",
+    "bytes": 5730
+  },
+  {
+    "path": "classes/com/synexia/primitives/FuzzyStructureFactory$Storage.class",
+    "sha256": "5b33db59bddb6b0d146883f1022a127ec0b3b5f4b7f65ee6f228d609af23ced5",
+    "bytes": 1931
+  },
+  {
+    "path": "classes/com/synexia/primitives/FuzzyStructureFactory.class",
+    "sha256": "40bbaf5ff15ead58df2590c54d599bf3b9ad19538123c327aca991e2625911e3",
+    "bytes": 29879
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntAhoCorasick$MatchConsumer.class",
+    "sha256": "1d527424cc0cb2d79d4bcb0134b6f6a1803de98786c94925d27d5332f3012bcd",
+    "bytes": 355
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntAhoCorasick.class",
+    "sha256": "b9f8601f0d44894e3ae33d6dbdb517c8f4cfe08547743b5523ac24773cef65f7",
+    "bytes": 5775
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntArrayDeque.class",
+    "sha256": "6ccecb1d580556be3d3855875bebcdd8de638adcb365f6a21eff7c98202d86a9",
+    "bytes": 4586
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntArrayList.class",
+    "sha256": "a9dc125a35f243bcf3e03fc407c7576e8cfa4a3745628d6ee64cb7036089d9a8",
+    "bytes": 5059
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntBinaryLiftingLca.class",
+    "sha256": "0f9ae4694767263f4cb6b0a7681fbb2b67e6a9f009f36995fd56ac4a28aae4cc",
+    "bytes": 3588
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntBipartiteMatcher.class",
+    "sha256": "636e2bb9b5d7d2038dc580582598efdb2326a6ce045515cb93244413b95564ed",
+    "bytes": 4420
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntCartesianTree$Mode.class",
+    "sha256": "10ee17a8b563e03608b5c541ec3277da1bcefbc2994a8f64ee4a49187daa6430",
+    "bytes": 1282
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntCartesianTree.class",
+    "sha256": "37c277d4eab0bd10c29b5b7a7a5e9e96ff5724f970926fed4cf976e21219b88c",
+    "bytes": 2052
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntCoordinateCompressor.class",
+    "sha256": "992f20b973c992fe27602576cc05400e864f4d4f52662179bf73e0eb6d3175e2",
+    "bytes": 2718
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntDagPaths.class",
+    "sha256": "820c7c412205acca3b9c3470850f685e1e6491f4957e4d646345c0e7e7309d83",
+    "bytes": 2140
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntDisjointSet.class",
+    "sha256": "5db38d3686811f31977a86a1929ee82129fc80b328cf2a622036a4ac27d0c30d",
+    "bytes": 1926
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntDoubleSparseVector$EntryConsumer.class",
+    "sha256": "fdf7856d485de242ae02164ebcd44e9e7bebf294d8ec9e4809712802610b6ce4",
+    "bytes": 375
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntDoubleSparseVector.class",
+    "sha256": "b0168e09f3479c2d7552d721f47121cdb0316b7b8cd292f977d9e8f67adc95c8",
+    "bytes": 4137
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntGraphAlgorithms$SccResult.class",
+    "sha256": "629142d97fe5e719d8075fa00de9b58f4aea00362f69b5992cb229f6c9cbf3c0",
+    "bytes": 872
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntGraphAlgorithms.class",
+    "sha256": "22f728c1b3f7058e9ae9c18ec97b837d1b7e569d03c1243aa4cffeca8bfeaa4b",
+    "bytes": 3669
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntHashSet.class",
+    "sha256": "b674a1f9eec2f883e7a0a0b09e4e66d18c63ed50b7208a6243feeda859b199e8",
+    "bytes": 3366
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntHeavyLightIndex$SegmentConsumer.class",
+    "sha256": "52d08b0c73416741d8c1e852ec94c3496934596e8f7d2161f64c153e176403cf",
+    "bytes": 370
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntHeavyLightIndex.class",
+    "sha256": "acb1dc3d38fb19e921199ea7a4c1e591abee42da9bfd2da9fe08deed77f3f3ed",
+    "bytes": 4886
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntIntHashMap$Consumer.class",
+    "sha256": "11c57f8faa074d2d492509e6b329c4ccf6e497c5825aff611c49017ef1228eab",
+    "bytes": 341
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntIntHashMap.class",
+    "sha256": "846c5249d6dd99ac461214d7f8c3434534839e07a136986aef9aced9dca8b990",
+    "bytes": 4204
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntKmpPattern$MatchConsumer.class",
+    "sha256": "52bec7917e8f458c96719ce44b201775bb36e18b2fc44b648c99eec882a0e710",
+    "bytes": 351
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntKmpPattern.class",
+    "sha256": "963e79722871a1980edae6311cc00835863e90a1212cb28b70ed1b059d3c11f1",
+    "bytes": 2940
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntLongAdjacencyGraph$EdgeConsumer.class",
+    "sha256": "90569a060d297ff8967fd5704fe7891646f4bd527d3d66f60aabcafdce5284ad",
+    "bytes": 373
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntLongAdjacencyGraph.class",
+    "sha256": "a7cdeccbeb93922ecff3df4a0375ad1da1ae2f36079f921d365c3ad47c9c5299",
+    "bytes": 3817
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntLongBellmanFord$Result.class",
+    "sha256": "a6ec026a338741ce38f45038a8702233918b33e4c802a3d1ae51db689ceac706",
+    "bytes": 3339
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntLongBellmanFord.class",
+    "sha256": "10d2da6b5ccd4352139cb5ddd9e9046059fcd88d5985c74738e5cf0418ea3e05",
+    "bytes": 2306
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntLongHashMap$Consumer.class",
+    "sha256": "04674d6ea320a380a5d3a54d6f80e3655c5525a3ab906a05827b14c0fa1cdac6",
+    "bytes": 344
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntLongHashMap.class",
+    "sha256": "71a0593dee276e3d027d3932d9e9e73eeed3a84dd944e4d9acdd6152cc7d28d8",
+    "bytes": 4273
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntLongShortestPaths$Heap.class",
+    "sha256": "31b96b690534488058ae0c3979791860ee9f56386b8010f67f412ab3ec6b046b",
+    "bytes": 2283
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntLongShortestPaths.class",
+    "sha256": "1125cadeb18446df5a8f05c725a2a334a3eb11fbe99d77cba5c69b562a294d8c",
+    "bytes": 1876
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntLowLink$Result.class",
+    "sha256": "76d41abb93f7c994cbd63aaaf721129ba3f43d3e5bc5aa0e56c6597aa56960d7",
+    "bytes": 1195
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntLowLink.class",
+    "sha256": "cb11ac69b154b090702a199bcf702eb137ae5ad8cd9417f7f3c01fe7fd948319",
+    "bytes": 3249
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntManacher.class",
+    "sha256": "3b15031af0fcd391827fe21d74b26d29bcc70dd0557f7405949edafecb58e926",
+    "bytes": 2853
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntMinHeap.class",
+    "sha256": "6bf6eb86ac6036f466a7ba3978c1a8c1b01f50de17deb45585365f9dc7e1f239",
+    "bytes": 2026
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntMinimumSpanningForest$Result.class",
+    "sha256": "2f36905daa53064a2d4cce01be5634dc76d8268a18ea4a71f00e6ab4a5f902bf",
+    "bytes": 1097
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntMinimumSpanningForest.class",
+    "sha256": "7562ff8c3f1ad53d09cd78ba365d96f2b296d6cf42abf02b160540cb6aa8ad46",
+    "bytes": 3154
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntObjectHashMap$Consumer.class",
+    "sha256": "b6cc0c76b80b3524cd0e5f2bee14f7517bf97fa6e53e004016775f5e5b19026b",
+    "bytes": 448
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntObjectHashMap.class",
+    "sha256": "85cc9d6d4c248f68b0f86f193f9a88528ff73c6ab23366a7a1d3033c9150bafb",
+    "bytes": 4765
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntPrefixRollingHash$Hash.class",
+    "sha256": "9103ec0d56c3bff50111533ac0de5faa61f0041b61973581fe559b816593b4a2",
+    "bytes": 1679
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntPrefixRollingHash.class",
+    "sha256": "5d7b90cbd30c7ae45ab5272fae6618add414af80ccd3bd216b9c4c1c0814cf13",
+    "bytes": 3632
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntRollbackDisjointSet.class",
+    "sha256": "340fcfaae04fb7c346f06eb27bc376e715959438f8c284fa9df3d9f9aea25a92",
+    "bytes": 3375
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntSparseSet.class",
+    "sha256": "7f7c297e86d044eaa9b88316a3b09b9e652e8d0e221e448499db833d52f218ea",
+    "bytes": 2782
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntSpscRingBuffer.class",
+    "sha256": "8591dfdccb90daf963f754fc97c03e99a7125dda95633ac1c1b338f6d2bc2159",
+    "bytes": 2551
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntSuffixArrayIndex.class",
+    "sha256": "5e9477ec6750ce6fa9e83628fbb25b37f52645ebfea1b177e38103ccbf4d3b31",
+    "bytes": 5490
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntWaveletMatrix.class",
+    "sha256": "19d9198aea5082a71d0ae61e6f160f957ccd89b44fb75ca3ce1249c9aa295fbe",
+    "bytes": 4727
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntZIndex.class",
+    "sha256": "0877b3649133e7a3d0cdd9f8271c7a5821826d6409881bba3646d5d5fbe06d95",
+    "bytes": 1249
+  },
+  {
+    "path": "classes/com/synexia/primitives/IntZeroOneShortestPaths.class",
+    "sha256": "43fe7219f7c1664220ed2668649e7b11f19566f328f44659d90555c23d129518",
+    "bytes": 1745
+  },
+  {
+    "path": "classes/com/synexia/primitives/LazyBitAddressSpace.class",
+    "sha256": "cfdff4f287972ea593917a24361e8c11db00319c3c0cb0d0833b66c869ad7e12",
+    "bytes": 4715
+  },
+  {
+    "path": "classes/com/synexia/primitives/LazyElementFlags.class",
+    "sha256": "f40eeb37da1a45bc3322a9c20b1067b13f3a0bc150d06d9198cc5a420a7cb7f0",
+    "bytes": 1336
+  },
+  {
+    "path": "classes/com/synexia/primitives/LazyPrimitiveAddressSpace$LeafConsumer.class",
+    "sha256": "a95bbc6258186fca24922a1bac123957b846ddd2d17dcfe7b4625b903458cf07",
+    "bytes": 402
+  },
+  {
+    "path": "classes/com/synexia/primitives/LazyPrimitiveAddressSpace.class",
+    "sha256": "832996f1a8ca64d17843c0232eaa52bca79940780a5cfac4c32be95db57cda37",
+    "bytes": 5983
+  },
+  {
+    "path": "classes/com/synexia/primitives/LazyPrimitiveSoaTable.class",
+    "sha256": "bc9a4ade07784f28ea51f07b01a8ef7a9c80a21eaf2d6891fd7e99d591dd2e64",
+    "bytes": 5324
+  },
+  {
+    "path": "classes/com/synexia/primitives/LeanCollectionFactory$Domain.class",
+    "sha256": "3ec0122cec1d079d0518b2d61f726a9f85a80e2f86bd7f0f0cb26c1b84efcda8",
+    "bytes": 1411
+  },
+  {
+    "path": "classes/com/synexia/primitives/LeanCollectionFactory$Plan.class",
+    "sha256": "06d9ec65bf594bfec5e3dac3a0c2bc29ec52e7636af884987ef81e153bed28c1",
+    "bytes": 3313
+  },
+  {
+    "path": "classes/com/synexia/primitives/LeanCollectionFactory.class",
+    "sha256": "4d3d701fe465125749d6853d14717ff33e9ad383aac5bbe9545c223154fe238d",
+    "bytes": 8760
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongArrayDeque.class",
+    "sha256": "ff04d73e8766d257015abb5b20846a8d4196d26ac58b0bc806529d522b8e07d0",
+    "bytes": 2525
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongArrayList.class",
+    "sha256": "8e5735f3a6594b351c1cab7a71a781e47f394d6f1f890e9d39f4b4ebf41ee53e",
+    "bytes": 5109
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongBitSet.class",
+    "sha256": "2cd6e7e3a695494b38f129f164441a632e945bcb3c20613e6ae8c3f4265af54d",
+    "bytes": 3313
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongBloomFilter.class",
+    "sha256": "ce10534a02038ff19812afc4c65232212307f9366dcd93f1e462865210808758",
+    "bytes": 3210
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongByteHashMap$Consumer.class",
+    "sha256": "805a16d638a8196a9c14861835d5d700750bf5eb19c7bf0f2d3fcb8ffdcc2fb1",
+    "bytes": 347
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongByteHashMap.class",
+    "sha256": "ac72972f2c7b383ced1105a20c6ed00379dc1bc4c02d1bbf96f1d69ddd63ed1e",
+    "bytes": 5202
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongByteSortedMap$Consumer.class",
+    "sha256": "bd7031aea936792d9054778fb73f0a6c7e83e42b1bcdd17da67477f20ebb7de0",
+    "bytes": 353
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongByteSortedMap.class",
+    "sha256": "3cee28a08afa58ff9beed90bddf52521951f9a058120fd9f54d9ef1699aacf17",
+    "bytes": 5675
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongCountMinSketch.class",
+    "sha256": "c0b13ffb09a86e0e3d03dece714e41fedbe2359c75615b1c63b28ec4f26a3d13",
+    "bytes": 3256
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongCountingBloomFilter.class",
+    "sha256": "6f714624bdafea6fdd2c66f8263296f7f125ec009b097d2c053fc1b23b95b7b6",
+    "bytes": 2829
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongFenwickTree.class",
+    "sha256": "989231e73f63b5f782ea15d57227459586fb4a36255e41b3e0988206e50f9ef0",
+    "bytes": 2696
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongHashSet.class",
+    "sha256": "a6433cd046e37165622e04632870eb79a8d56a3c6bb07b64acab05d13975fb2e",
+    "bytes": 3413
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongHistogram.class",
+    "sha256": "9a02760715745912a228a84abb878b9aa33896599ec731e4678e70cb6b5605b0",
+    "bytes": 3603
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongHungarianAssignment$Result.class",
+    "sha256": "6156a1e2912c49e27661f00cd1261f28cf1050ead431c23672d7130aabd77fe8",
+    "bytes": 896
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongHungarianAssignment.class",
+    "sha256": "70a52799cc6b93ad771b618d963ae5866e151ab6e24252e894e241b9d1789680",
+    "bytes": 2560
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongHyperLogLog.class",
+    "sha256": "fe1baa7a380bb1645c4ea871fbd5553ea9e34292d4ea9f037234549dda98bda6",
+    "bytes": 2521
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongIntHashMap$Consumer.class",
+    "sha256": "f27a0171f1c6652d46789be96bb5d67241a857ed11596455a7357a27fb661a85",
+    "bytes": 344
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongIntHashMap.class",
+    "sha256": "5d17440eb481363af14d0e452916460f04b44e67632aadd256ec055e98de4e93",
+    "bytes": 4299
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongLiChaoTree$Mode.class",
+    "sha256": "d95100f204e94fe0fb2ac778a484d617424571672c8f36bef006fa743228e48b",
+    "bytes": 1266
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongLiChaoTree.class",
+    "sha256": "9c025609ce4dbb46261a88879454da9d2f8b47a6049a1d27b33e587f6d13b0a8",
+    "bytes": 4203
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongLongHashMap$Consumer.class",
+    "sha256": "02f5f9f4d7be067e52bab29a44f8051fe041d44b71ad3a80ccd1d247cbf2808f",
+    "bytes": 347
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongLongHashMap.class",
+    "sha256": "a27b9d047dd4ea60c9fc5c9ae4e752e3c49f25237c7f103f52c073bf61b04435",
+    "bytes": 4276
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongLongPriorityQueue$Admission.class",
+    "sha256": "38ac11dc52ec0751766f6de5dcf0e045080cb6902c5d8572e2104089c0236445",
+    "bytes": 368
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongLongPriorityQueue$Consumer.class",
+    "sha256": "f7854183661a4247548ef3891f877db405411b72aea0198750df017e477e13fa",
+    "bytes": 365
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongLongPriorityQueue.class",
+    "sha256": "6a7c68af109d5d9a32d579bd6103d3944e7ddbe47f4215bd7ce3436e40832b64",
+    "bytes": 5788
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongLongRangeMap$RangeValueConsumer.class",
+    "sha256": "471e1dd8ec16f408c4c91b24a6c8bca22f88c219f89ab48eeeddb8ccbee24e5c",
+    "bytes": 371
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongLongRangeMap.class",
+    "sha256": "c6bf47e4274489ee1e29a9d027aa11707b2d72397b17660aaa491ca105847efb",
+    "bytes": 5504
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongLongSortedMap$Admission.class",
+    "sha256": "683a79ac3559341acd5d2bc565b68bd4bf17e66310ee016f04cc489e6e28f4bc",
+    "bytes": 356
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongLongSortedMap$Consumer.class",
+    "sha256": "ea8031d7c2a44e18c1b412260ad82d293b39f37e5a47db10008063c6fbb49b12",
+    "bytes": 353
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongLongSortedMap.class",
+    "sha256": "c83f6ad9a86683a74804a1c449748aee1b8587e5875337ed76eb7611cb20d8a0",
+    "bytes": 6818
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongMeetInMiddle.class",
+    "sha256": "3661f46051711226fb5cb8bde4f104160cbcdae5d54aba5a45c42ae02b14024d",
+    "bytes": 2388
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongMinCostFlow$MinHeap.class",
+    "sha256": "fc916c80503fee96dd1b58e6c8f96b3ee84e10dc8277bdc3ed1c4f94c49bfeee",
+    "bytes": 2330
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongMinCostFlow$Result.class",
+    "sha256": "8050317d545f46952997f7b12fd591ea24769062d30c32560ef6e6a3e74074c4",
+    "bytes": 1650
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongMinCostFlow.class",
+    "sha256": "41f10aa8b9a69de814adf6b5eefe8916ac82fdb32a5946987495b656a008fd08",
+    "bytes": 5288
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongMinHeap.class",
+    "sha256": "1c73f9a3dfae760bcfa406876ad20f3ad4c6c86891404d2d98c2c345ae8fb870",
+    "bytes": 2049
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongObjectHashMap$Consumer.class",
+    "sha256": "c2d990b005c3982114b1f3b74aac3a94e2e4d7fb5c5fa0e26826bd469b743433",
+    "bytes": 451
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongObjectHashMap.class",
+    "sha256": "b584b5fade3e076a4ce400b9aeb379b10e59c480fd4155a54542a3c5408007cf",
+    "bytes": 4816
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongOrderStatisticMultiset.class",
+    "sha256": "f3bcd89d1dbfe68d2c84c7d05d5c8577ca57a422642370d90e22b50a01c50330",
+    "bytes": 7177
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongPartitionSearch.class",
+    "sha256": "b2cc3fd80a7326f727df09f31354002dc9299b4f10b572c3c6cdaa4c5cd3540e",
+    "bytes": 2300
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongPrefixSums.class",
+    "sha256": "b0a4e47580ec5db02e86e7c2f42e076c43af773fbe828265da1a66f324271c79",
+    "bytes": 2420
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongPushRelabelMaxFlow.class",
+    "sha256": "7d2fcb7808c6e6131b9fdbc429ca4d104866a6c2ac9ea01a837ef6c443dccd5f",
+    "bytes": 5005
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongRangeSet$RangeConsumer.class",
+    "sha256": "7159f466dabace9be1e338f2ceeadef63449d693ea0e6e5364ee0b5e29c18a46",
+    "bytes": 348
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongRangeSet.class",
+    "sha256": "3298547bfd39758e4964dcfb380fc80744729017b235e1f1bf7dc84778bccd3e",
+    "bytes": 5499
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongReservoirSampler.class",
+    "sha256": "162fdd3cf7f5bdd6d03d68ef1fc215dbbe8e11bceb13012219071d900ab6c20d",
+    "bytes": 2702
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongSegmentTree.class",
+    "sha256": "be858958a777e61e3fa132c4ee884f3a1eef1ef97254363eda95e983eef56c22",
+    "bytes": 3507
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongSlidingWindow.class",
+    "sha256": "c33d700f782985eb686cc24875424fb3267560564a2c8fedf227e7574c96f901",
+    "bytes": 2852
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongSortedSet$Admission.class",
+    "sha256": "fd15547da54fdea54083562717e5aa62fbf8261d76f2780a52e9f17c51c2eeed",
+    "bytes": 343
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongSortedSet.class",
+    "sha256": "d64ded646204ec0bab853efc285106920969564d0ca81a9acc6d12900a5b6ade",
+    "bytes": 5823
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongSpaceSavingTopK$EntryConsumer.class",
+    "sha256": "3d686e4a5ac49321c83111614178c310278602cbdc6cb29bc2bbbfac4e30846b",
+    "bytes": 370
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongSpaceSavingTopK.class",
+    "sha256": "3e062067040bef9eccf72a3a427423aae0fd4de8fcee690e3cba79286e6c7d61",
+    "bytes": 2559
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongSparseTable.class",
+    "sha256": "e7e24a957c91f737ca416bb2581b2ae296bf803a7df13193720d89493d90cbdd",
+    "bytes": 2623
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongSpscRingBuffer.class",
+    "sha256": "6a468db92623ff57d84084a1547b6ac821292d77d802af515bbf054e9d953960",
+    "bytes": 2563
+  },
+  {
+    "path": "classes/com/synexia/primitives/LongTimingWheel.class",
+    "sha256": "b183481150fbdcd7c4b9b7b9c17a4a4a7e7594991fc6cbc05b527b2add5334af",
+    "bytes": 3614
+  },
+  {
+    "path": "classes/com/synexia/primitives/MonotoneLongDeque$Mode.class",
+    "sha256": "27c9142e2987aea4e218befe781871d4267ab6e1e332ce9edbfff78ece986434",
+    "bytes": 1290
+  },
+  {
+    "path": "classes/com/synexia/primitives/MonotoneLongDeque.class",
+    "sha256": "a23a36b7b942e2593e09f21e243746cbe736c8d221dc4be5060656c9222f56f3",
+    "bytes": 3408
+  },
+  {
+    "path": "classes/com/synexia/primitives/ObjectCounterMap$CounterConsumer.class",
+    "sha256": "9203c3e3e143ee4f769cd96c66c11e2b93734bc64e346fc4ac70e2f86a1f1b4c",
+    "bytes": 462
+  },
+  {
+    "path": "classes/com/synexia/primitives/ObjectCounterMap.class",
+    "sha256": "408e44fafeef3062813c189f155c14f46e042752d96a2a9845e98901fc777115",
+    "bytes": 5760
+  },
+  {
+    "path": "classes/com/synexia/primitives/ObjectIntHashMap$Consumer.class",
+    "sha256": "afd1c21f00d80dbbd9cf6dc60178bfc7651283f436c2f0aac61a00e43b0d59cf",
+    "bytes": 448
+  },
+  {
+    "path": "classes/com/synexia/primitives/ObjectIntHashMap.class",
+    "sha256": "2c8e13f3225bb7cc658f64b23389d7c096664c18ade2cf00ee58f182dcb5fb07",
+    "bytes": 4944
+  },
+  {
+    "path": "classes/com/synexia/primitives/ObjectLongHashMap$Consumer.class",
+    "sha256": "00d5da007ca10fb742799d1bcf6f51b8132bc2267ffa3a1f7ed2176053488d78",
+    "bytes": 451
+  },
+  {
+    "path": "classes/com/synexia/primitives/ObjectLongHashMap.class",
+    "sha256": "4f89a947247e6c0120a56eec0d58b815b63427fe76a82cc88c2e039ff86e1bb2",
+    "bytes": 5000
+  },
+  {
+    "path": "classes/com/synexia/primitives/ObjectPrimitiveHashMap$EntryConsumer.class",
+    "sha256": "15f667a6926a5ec2c0cc72fbf81af5b584d372b11809775772ffe6e5026b20d3",
+    "bytes": 476
+  },
+  {
+    "path": "classes/com/synexia/primitives/ObjectPrimitiveHashMap.class",
+    "sha256": "b8afa5cad38d554b862d1ff900a77de731998fdcbbc86572bc95087375a12f03",
+    "bytes": 6556
+  },
+  {
+    "path": "classes/com/synexia/primitives/PackedBooleanList$BooleanConsumer.class",
+    "sha256": "8ea1d872fc2a7d8f5c1e7231c6a04d96720e4a6afd4b5399ca8a0101b2d43334",
+    "bytes": 366
+  },
+  {
+    "path": "classes/com/synexia/primitives/PackedBooleanList.class",
+    "sha256": "f8e76bb92ce91465923cc43f827e1728e58464377952a0ba293ff20a30990440",
+    "bytes": 5298
+  },
+  {
+    "path": "classes/com/synexia/primitives/PackedUnsignedIntList.class",
+    "sha256": "478f8f7a35819e347d7c94f16ce0f8686150a70fa4bb69437d3b1974d2a57ae1",
+    "bytes": 4391
+  },
+  {
+    "path": "classes/com/synexia/primitives/PagedPrimitiveTreeProvider$ChildHint.class",
+    "sha256": "ff9e88a21bdde9d7a5d0525e23fe78663d301fce9edd4e01860482b7c3492961",
+    "bytes": 1461
+  },
+  {
+    "path": "classes/com/synexia/primitives/PagedPrimitiveTreeProvider.class",
+    "sha256": "6de839f86f7bcf3edb40ee4eec3a689ffab6048b11bffb8c2253456c0d534a6f",
+    "bytes": 1627
+  },
+  {
+    "path": "classes/com/synexia/primitives/PersistentLongSumTree.class",
+    "sha256": "5869311da1ddb4df34a035fd34c8c0a0d91e7aa8f839b619244cd2c5372046d2",
+    "bytes": 4525
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveAdaptiveByteMap$EntryConsumer.class",
+    "sha256": "ad850ad2708a015f3f7e3402d77e48943c713849081cafe523f894f8b55914d3",
+    "bytes": 384
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveAdaptiveByteMap.class",
+    "sha256": "2e82bc2bfa7bc98ce3d547f7e3abf6fb17f5e6bef916604a313450b03a319c00",
+    "bytes": 6791
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveAdaptiveCharMap$EntryConsumer.class",
+    "sha256": "2ebdee2371cda8ccd2461fee24c7e69347b0027eb7147678aeeb85c77cd0fafa",
+    "bytes": 384
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveAdaptiveCharMap.class",
+    "sha256": "bb4449b050550b0a1786df0da353f55f6b38683af59940fe673200f9459767c5",
+    "bytes": 6795
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveAdaptiveMap$1.class",
+    "sha256": "9aee96e8edef044ab5106de8c7a4dd60372124777c7e0696b030b30b1ee7facd",
+    "bytes": 1062
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveAdaptiveMap$EntryConsumer.class",
+    "sha256": "1df1644890d724841ca76c6dafae14c3cf69aa398029b94f5c6be26e7fa7b71f",
+    "bytes": 372
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveAdaptiveMap.class",
+    "sha256": "e09ae77193b2285e756ca67e3d7cffbff07d6b8e9a3c592fe1062433cdc32d8a",
+    "bytes": 9366
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveAdaptiveShortMap$EntryConsumer.class",
+    "sha256": "785a6da4216f4adf5a0e2e991bcd9fcdea65dd03bd1b12560e952f95ec543317",
+    "bytes": 387
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveAdaptiveShortMap.class",
+    "sha256": "893a2859172138a62e8db073e2a3f61aae57fd0b9cd87e1118f6e9fb4a7d096b",
+    "bytes": 6809
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveArrayDeque.class",
+    "sha256": "1f6ebd44df5786993a778f69803971154ebc1defa70150ae55ff3ea1ff9ff1dc",
+    "bytes": 6601
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveArrayList.class",
+    "sha256": "400aab1da83ff85632ef50976f7ac0ecbdcbaab2a2486fdb0f22c3a4235923f9",
+    "bytes": 6364
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveBag$CountConsumer.class",
+    "sha256": "bdacab3d0d93327f2e9be86041a508f5fa47ce6cd0d2d544f42f790b0edd0303",
+    "bytes": 348
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveBag.class",
+    "sha256": "8d07fb7aa589317d05776b60f130609acbf768f1b64447245975f33e5d8c48dc",
+    "bytes": 4605
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveBiMap$EntryConsumer.class",
+    "sha256": "3cb0fb25feebadbcbf1df1b2e6a31b39c6c17df105f66470f4f1f554e94dada6",
+    "bytes": 354
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveBiMap.class",
+    "sha256": "4f2508dfac2e859d342306eba3e8947529729f3b19de76ef566aca866a8e53ba",
+    "bytes": 5159
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveBigArray.class",
+    "sha256": "220a6cc1cd1259e5811df31946c213236a7f136e322355ee444f97e44d95573b",
+    "bytes": 6412
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveBigHashMap$EntryConsumer.class",
+    "sha256": "a9ad4d30dc87bce72334eef29bc6c5d45b945df380b53889348852e34360dceb",
+    "bytes": 369
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveBigHashMap.class",
+    "sha256": "0a91a340d2b57ed15d9dd011910f1c1a28985c577d70bf058628503f8d7b2c9e",
+    "bytes": 6343
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveBigHashSet.class",
+    "sha256": "648a9dabfbb63df7e9f94fe15aac10aeab5125693d86b926d862e3350d7e90a5",
+    "bytes": 5291
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveBigList.class",
+    "sha256": "1035509a60c62ddcc1c36c373a5f9fd0ef0d30e74ba6f599d9e5e4802bfd0077",
+    "bytes": 3834
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveBits.class",
+    "sha256": "3c2f65e719cefe9cecf0bc58abd73e44521dffe7fc2525d4f218f6873aeca81d",
+    "bytes": 1191
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveCounterMap$CounterConsumer.class",
+    "sha256": "674ab75d5b41f92033985b511114480f6011e1fe1b501e45aaba19ccf900b5d8",
+    "bytes": 373
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveCounterMap.class",
+    "sha256": "5a30ec0ee460362e295367b3f2f5e8df93310fcab6961df77a4287a04b8ce2be",
+    "bytes": 4470
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveDirectBooleanMap$EntryConsumer.class",
+    "sha256": "ba8a6cedc60dfce65b1f79eaecea299e79d3e49a36888634c50f07d557aa6e99",
+    "bytes": 387
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveDirectBooleanMap.class",
+    "sha256": "3b78202637bda23bd2177e48f696dfc0dc76de2830af61e93763af974bef5537",
+    "bytes": 3289
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveDirectByteMap$EntryConsumer.class",
+    "sha256": "c257132c5a751fa3926d7d4cff225c1a884474e922944f7ec01688d2b6c6ca47",
+    "bytes": 378
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveDirectByteMap.class",
+    "sha256": "9adc6dea3e4dd322ea5f65130871207822d2633c5acf085e8487b7146a91da52",
+    "bytes": 5242
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveDirectCharMap$EntryConsumer.class",
+    "sha256": "e1686a71f25bce0dd048191ab9e4b397fc8590ae980d34d4cb034b750d5093fe",
+    "bytes": 378
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveDirectCharMap.class",
+    "sha256": "bfbbd0c0474112dfb775f92df53132260479cc39029ea8dca067d2fd83fb94a9",
+    "bytes": 3331
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveDirectIntMap$EntryConsumer.class",
+    "sha256": "5588bed8acfe1e1411890cd721a69a47d3f9d30ca30c4f2d9167f5f219f6e5be",
+    "bytes": 375
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveDirectIntMap.class",
+    "sha256": "cb8cbf59d9a4f7a5479856a3224db967641f31bc9efc2f6cdd92c0f8065b2856",
+    "bytes": 3807
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveDirectIntTable$CellConsumer.class",
+    "sha256": "8917dd49f90f720d81d14cebf10a6318d15417d19f17256352128c0e2b8b0349",
+    "bytes": 380
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveDirectIntTable.class",
+    "sha256": "1ae46b2249284b5a9554daa97f582af2285bac738edb552e3ec4b570456786ca",
+    "bytes": 4810
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveDirectShortMap$EntryConsumer.class",
+    "sha256": "f0b91c1f8eabeb2cb71bb41065b4a3b4a79b05012caf7f09121726892179e5cd",
+    "bytes": 381
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveDirectShortMap.class",
+    "sha256": "f158a7ee513ed91affd820b65af4b009b2dd092499970a7e89f6900ceb730e32",
+    "bytes": 3576
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveDoubleEndedPriorityQueue.class",
+    "sha256": "736600d54cf7933e20c33e202851714271581b181b9eb90c8357d8180882b7fe",
+    "bytes": 7319
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveDpKernels.class",
+    "sha256": "d798578dd32e8808223b12219eb791a30b5d6a2c093a1e914237390044622928",
+    "bytes": 3142
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveFilteredList.class",
+    "sha256": "8ac22b09d5b0093be1a86d0f4dc3861d9614e38f1eab1d759b564c449c767f6f",
+    "bytes": 2088
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveFilteredSet.class",
+    "sha256": "b2bced86da1b35f157fc534eafeea867ae6a81a4c60db26b68839bdea76b2941",
+    "bytes": 2055
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveFrozenList.class",
+    "sha256": "a571b3e037bbcc3b19cb0ddc92fb5c5f6c6d5420d016eaa698f7fd87691b8d3a",
+    "bytes": 2428
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveFrozenMap$EntryConsumer.class",
+    "sha256": "53a7b4e44f2f2824c64dc43c155a796467c04f288019d6ec591fb431dd8b76d0",
+    "bytes": 366
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveFrozenMap.class",
+    "sha256": "5d85b5ceae1ae71845c3c8f1b0fbfeca0697f010bef2dd166364aab7cdc01729",
+    "bytes": 5790
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveFrozenSet.class",
+    "sha256": "1b2e661373345c2154de51a9a51a7feaf3b17f14b3b949bc850309597194319c",
+    "bytes": 2482
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveHandleTable.class",
+    "sha256": "0714567d4ced8c1df5184d35c809619b8725d7c5a20f6ca4faac83a029cdf8a8",
+    "bytes": 5862
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveHashMultiMap$EntryConsumer.class",
+    "sha256": "6c5d3394a5fdd423fd200d40d82fd16b1e7ef184fedfd8f43e49ca8e9d030e31",
+    "bytes": 375
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveHashMultiMap.class",
+    "sha256": "adeea60a7c7efa5b08c01fa9f65796a3758c8952b950fc154ab4d53c93f44c7c",
+    "bytes": 8156
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveHashSet.class",
+    "sha256": "3c589e64030d20d51b9c54b36b4856196a28945a4d7e7d9be39b6250713c1f40",
+    "bytes": 4982
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveIndexView.class",
+    "sha256": "6a79332fcdd711bbe3448732986844407775b15590ba0eae072daddf6cc6e35a",
+    "bytes": 5438
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveKind.class",
+    "sha256": "88375f7f9105b0927b5d8cfdb4eed90d27c6d1cf1a2391a1ec721ad242b88f84",
+    "bytes": 10752
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveLruMap$EntryConsumer.class",
+    "sha256": "40ede05cdd28028770a3d92be733071f44477e809e27e373ff9c0999964e759e",
+    "bytes": 357
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveLruMap.class",
+    "sha256": "42ddbf92a08f5cdf8397b250c074c2979e78ea2e2f5552441518bc02d1d83442",
+    "bytes": 6051
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveMinHeap.class",
+    "sha256": "6f535049d2c352badea7c4f79453ef209b93aa0d6ba0ada26041dad0692c018e",
+    "bytes": 3312
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveMpmcRingBuffer.class",
+    "sha256": "998280c5f1f2455bc453591c35dd28034d67ce48f9dab3cec2598b9bb029ff54",
+    "bytes": 7698
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveMpscRingBuffer.class",
+    "sha256": "d18ece3967706bf5ccc73aa5b38e3e2cb2c4075ec3dc87c8b38286bc619d8762",
+    "bytes": 5922
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveObjectHashMap$EntryConsumer.class",
+    "sha256": "971e850cd8c92efb8643dc7a33856389db1a32ec52443c3d6614b6a6873e10ef",
+    "bytes": 476
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveObjectHashMap.class",
+    "sha256": "8ce5aae13c7d6d22edc18ac7d8ba650048c90bc529713d7ed2c81805178fc6b5",
+    "bytes": 6782
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveOrderedMap$EntryConsumer.class",
+    "sha256": "8e12c582fb3b801eb31b62003a696d9cc8521e1045a6d1b2307f234beb95bf81",
+    "bytes": 369
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveOrderedMap.class",
+    "sha256": "407f890046aa2430409ab25bd0f626f919806b57f3111e46aecc13cc36d398d0",
+    "bytes": 2912
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveOrderedSet.class",
+    "sha256": "35b2adf090ae3c823c168730981a35f8c3bb743de5966b8b531532c7c8a4c792",
+    "bytes": 2312
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitivePairList$PairConsumer.class",
+    "sha256": "a22497fbf0af9392732cd722f01ab1d1c0fb2a9ecf1c1cfdfe0fc05a14e41104",
+    "bytes": 361
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitivePairList.class",
+    "sha256": "dc9870e4a5a3d5b3902469c0f30352acab4268a6869d2caa7d2625d5d2b7a842",
+    "bytes": 4310
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitivePartialSort.class",
+    "sha256": "13fcacb778bc0fc8d8f76029b13545ffd1bb1fb88e037f1fd57e94187b2ff694",
+    "bytes": 5060
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitivePrimitiveHashMap$EntryConsumer.class",
+    "sha256": "36e2ea0a3f28d98d70b1df6554b1d70a6a232ffc80ab65bdf66daee0bbe724e8",
+    "bytes": 387
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitivePrimitiveHashMap.class",
+    "sha256": "786e1da6a076dc4f6ab71b0d62b2903a900f37524ac672c9ea0e49066e02c87c",
+    "bytes": 9797
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveQueue.class",
+    "sha256": "6e15d92e66062e2d4623ec1eb5957281c668a0e6ee91b4f3cea9035e46a9072c",
+    "bytes": 1654
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveRoaringIntSet.class",
+    "sha256": "888024d1efc9686e75c23838f5b42379dee1904ac5565b833e60e55f751582f0",
+    "bytes": 8511
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveRoaringLongSet.class",
+    "sha256": "6bf49e37907fc0b98741ef08867c8e5d405d5ceb79e408a8e56ada00a93562e9",
+    "bytes": 5882
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveRowProvider.class",
+    "sha256": "af36d44d5b03e1e302adb95f3b25fc229f3f2f860a898b76467c53f6577afbc1",
+    "bytes": 778
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveSemaphoreMpmcQueue.class",
+    "sha256": "6075977e74ca5947f7d45a884c5f9160ab990f0abbe99548ce3b5fe1846266fe",
+    "bytes": 3938
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveSoaPriorityQueue.class",
+    "sha256": "9becf60de5ae7f4af76a7caafc3c54209642da25ed07a7aad8822134076790e3",
+    "bytes": 4255
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveSoaStore.class",
+    "sha256": "64daa9349ee01ccee558a9841d24f8b1c3b06de37741e325204a2366e10bb086",
+    "bytes": 12656
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveSortedArrayMap$EntryConsumer.class",
+    "sha256": "84f165c81d3f19facf9c5592f69774a0616df90c1a9d0b20f4a96370b9e26cee",
+    "bytes": 381
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveSortedArrayMap.class",
+    "sha256": "6e97536e232c29204ddb8f85a0cdefa1442652a8b5ea7a67c5710d0ebd58d523",
+    "bytes": 4969
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveSortedArraySet.class",
+    "sha256": "74a2d9b57e779be12518b319f67eebf1de5ba69bc9f198f5b2818f7641416897",
+    "bytes": 4210
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveSortedBag$CountConsumer.class",
+    "sha256": "8d53d378604c489e57f2bfa3e7139002c81c0b846ae643484b8213980c3d0a02",
+    "bytes": 366
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveSortedBag.class",
+    "sha256": "77cd581aeddcad4746c05c4050b373db4a9d457abed231cfa798f93fb50366a2",
+    "bytes": 3986
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveSortedGapMap$EntryConsumer.class",
+    "sha256": "f41e20ef6a046fc323da0f39b2095e84c6375bac5bf9f3a04c19f2f3ea31100a",
+    "bytes": 375
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveSortedGapMap.class",
+    "sha256": "e6303077f104ebaa865fd0296aee77847c246d90ab5fd15740952f239d514b8b",
+    "bytes": 6851
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveSortedGapSet.class",
+    "sha256": "fda06dc40634f255f83e9a3ef2fba495e269e09a0b0a362c72973432ea46f262",
+    "bytes": 5843
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveSortedMultiMap.class",
+    "sha256": "b6da84385362ce75e6fd6b3f4749e2cb70bd77c7c34a182e034d39da56cdf72b",
+    "bytes": 4460
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveSortedTable$CellConsumer.class",
+    "sha256": "ab2efe88734ac993410f558b2475628f38697521461ad0442dd46745e963f62e",
+    "bytes": 371
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveSortedTable$KeyValueConsumer.class",
+    "sha256": "f3c4ee0372f5aa5614dbf52e6c4d0a65e01fa7cb597bfad1d9334e6a9d575f76",
+    "bytes": 378
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveSortedTable.class",
+    "sha256": "41330268a32adebed0080cdd8e870a56a2e052c581713f8131e390b71e2fb7c0",
+    "bytes": 8315
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveSpmcRingBuffer.class",
+    "sha256": "1490313f770adaa15788cd30b540bfd11c9fe94b4ee1ca8c8068ac4afeffdf92",
+    "bytes": 5932
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveSpscRingBuffer.class",
+    "sha256": "c8a0f60dee761fd28dae9c02edfbc4cf6001ebf8ec4e2f6c00be70bcdea87852",
+    "bytes": 3533
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveStack.class",
+    "sha256": "3dbbd1c70ec8a0dbfd5c3970b13b48223965f877b210d2eca96f799a80dca763",
+    "bytes": 1662
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveTopK$Mode.class",
+    "sha256": "6f00597e821912d37418f7016d84d3a9bf8d32c7472d45ecf6eced6fbed1e9f2",
+    "bytes": 1277
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveTopK.class",
+    "sha256": "e3f4a017246e96fdf1fd85affae188f7118445509306580558b211ae849eca1a",
+    "bytes": 3622
+  },
+  {
+    "path": "classes/com/synexia/primitives/PrimitiveTouchObserver.class",
+    "sha256": "f6db2a1f1429e422530800cf59d1b02b4bcfc213865fc9bf155ba25aa11ff109",
+    "bytes": 766
+  },
+  {
+    "path": "classes/com/synexia/primitives/ProviderBackedPrimitiveList.class",
+    "sha256": "c11ad8f50889aca6de0aac592c21d9803c69158cb883a096e626da0aead23660",
+    "bytes": 5240
+  },
+  {
+    "path": "classes/com/synexia/primitives/ProviderBackedPrimitiveLongTree$1.class",
+    "sha256": "effcebf831a9310f77e6542663a1135c10075b4940ca13628ee9b8582b4fd1e3",
+    "bytes": 1031
+  },
+  {
+    "path": "classes/com/synexia/primitives/ProviderBackedPrimitiveLongTree.class",
+    "sha256": "2fd652501d235dc1d9fbe802fc4e9a77c58c83a1e08c9e391d590170c716a767",
+    "bytes": 12686
+  },
+  {
+    "path": "classes/com/synexia/primitives/ProviderBackedPrimitiveRows.class",
+    "sha256": "94537af6b20b59af6c66388ce320d51deb31510b1da2bef10208e810dc752f7c",
+    "bytes": 13842
+  },
+  {
+    "path": "classes/com/synexia/primitives/ProviderBackedPrimitiveTree$1.class",
+    "sha256": "77de6356a1ab1e42bdd8bbaf90be4b20d499d1db3f4582566a7d1a3f6871b9e5",
+    "bytes": 1019
+  },
+  {
+    "path": "classes/com/synexia/primitives/ProviderBackedPrimitiveTree$VisibleCursor.class",
+    "sha256": "7fe370a327e39465268c58f623194e08c7fcad6db9b03b99356c7cef51dce074",
+    "bytes": 1988
+  },
+  {
+    "path": "classes/com/synexia/primitives/ProviderBackedPrimitiveTree.class",
+    "sha256": "7dd5ac016b055644a9a50a157c45287ce3cbd8b75ccebc73b5cd67ed7447a437",
+    "bytes": 19632
+  },
+  {
+    "path": "classes/com/synexia/primitives/ProviderCollectionFactory.class",
+    "sha256": "f0c77b28f705877b0164beb2c8697b7306a62c50247dd15ebf07a4a5280d4382",
+    "bytes": 6926
+  },
+  {
+    "path": "classes/com/synexia/primitives/ProviderCollectionRequirements$Builder.class",
+    "sha256": "be88dd0fc7b8461d743d4551bf8531f43c1abe7b3bc5e552053b5cfaa6f3b2d9",
+    "bytes": 3005
+  },
+  {
+    "path": "classes/com/synexia/primitives/ProviderCollectionRequirements$IdWidth.class",
+    "sha256": "40568654a584acb69590cf9304a7975668175bd2324a35777e052c31c1de4d3e",
+    "bytes": 1467
+  },
+  {
+    "path": "classes/com/synexia/primitives/ProviderCollectionRequirements$Paging.class",
+    "sha256": "706a7b711980fef99d93ba88a71cf60955295ee268921dd5d1b4726bec12e139",
+    "bytes": 1520
+  },
+  {
+    "path": "classes/com/synexia/primitives/ProviderCollectionRequirements$Purpose.class",
+    "sha256": "b49d6a76b9f81687076c660d570c4f61a04d3b5f451fdf129d7fab8c684826b5",
+    "bytes": 1464
+  },
+  {
+    "path": "classes/com/synexia/primitives/ProviderCollectionRequirements.class",
+    "sha256": "ac642cd300c17e8651223cdba2c8f945a8f9dc0da0259f608ba18b352d56f6e8",
+    "bytes": 4882
+  },
+  {
+    "path": "classes/com/synexia/primitives/ProviderCollectionStats.class",
+    "sha256": "944753658955426406fb320c1c1e0380270b49c31c5edd0a6c7688a534c968b1",
+    "bytes": 3210
+  },
+  {
+    "path": "classes/com/synexia/primitives/ProviderLoadException.class",
+    "sha256": "7e8775fb4b3b9883aa6a7d4c33a511ef8c1cd052c637cef4395129563caf72f4",
+    "bytes": 1110
+  },
+  {
+    "path": "classes/com/synexia/primitives/ProviderResidencyClock$Admission.class",
+    "sha256": "b2c4ec076e80811a1da33c90e8b4e01ea193e6a2d6e216d2da6f5c167e6de99c",
+    "bytes": 1460
+  },
+  {
+    "path": "classes/com/synexia/primitives/ProviderResidencyClock$Evictor.class",
+    "sha256": "f3c0d7d57c28dbcf6bbb3e41e0054894e094bb811a89aab3f343514176063590",
+    "bytes": 364
+  },
+  {
+    "path": "classes/com/synexia/primitives/ProviderResidencyClock$FlagsReader.class",
+    "sha256": "f2a15f400a4df9067f404615a76a76866701d4b125e71d1f9a292db98bc376ed",
+    "bytes": 372
+  },
+  {
+    "path": "classes/com/synexia/primitives/ProviderResidencyClock.class",
+    "sha256": "3581191685afcc898d71e5cab4544f8aeea45e97fd4430267f7c844a97bf41f9",
+    "bytes": 4466
+  },
+  {
+    "path": "classes/com/synexia/primitives/RangeAddLongSumTree.class",
+    "sha256": "1047c9c28f7ff649caff9e621d2c91bb9c6b20c77616c059d4805fe9fc74249c",
+    "bytes": 3735
+  },
+  {
+    "path": "classes/com/synexia/primitives/RunLengthLongList$RunConsumer.class",
+    "sha256": "bf8e0de18c768185651d758c5cfe19b148aa62bc50d3a227322b46c7ca2fc24a",
+    "bytes": 359
+  },
+  {
+    "path": "classes/com/synexia/primitives/RunLengthLongList.class",
+    "sha256": "73ff316ce0736fd961f673d539b8b7c44ee4c1c9c189cdf6274cf4d65dd8bf1e",
+    "bytes": 3622
+  },
+  {
+    "path": "classes/com/synexia/primitives/StandardAlgorithmCandidates$1.class",
+    "sha256": "6b60d282349f00b18e82b8e69e7e2b5462c2c8519cfb28714b67f805cc52802d",
+    "bytes": 2734
+  },
+  {
+    "path": "classes/com/synexia/primitives/StandardAlgorithmCandidates.class",
+    "sha256": "a39b7d968e1133138919b83c4762285da99320eb68c8ed9cce62723af6f10aff",
+    "bytes": 26683
+  },
+  {
+    "path": "classes/com/synexia/primitives/TouchAwarePrimitiveRowProvider.class",
+    "sha256": "9d5b8644fe41869b0a4d404b4548b0697ccadca95b4c2246571175c462dfb29e",
+    "bytes": 346
+  },
+  {
+    "path": "classes/com/synexia/primitives/VersionedCursorPagedPrimitiveTreeProvider.class",
+    "sha256": "590aba66efbbb018239fc21ba2652dae226a148a22d1399e33af888538206ec4",
+    "bytes": 1018
+  },
+  {
+    "path": "classes/com/synexia/primitives/VersionedProviderBackedPrimitiveLongTree$VersionPinningAdapter.class",
+    "sha256": "aa120d9a3ed1ef923caeab559caac0ecf7302d144037378dc160c376ec2dddb0",
+    "bytes": 3999
+  },
+  {
+    "path": "classes/com/synexia/primitives/VersionedProviderBackedPrimitiveLongTree$VersionedTreeProviderStats.class",
+    "sha256": "389df79781fcfc986fc23e1ef7ecb140a982f418a5862245711704e05da2d2a1",
+    "bytes": 2325
+  },
+  {
+    "path": "classes/com/synexia/primitives/VersionedProviderBackedPrimitiveLongTree.class",
+    "sha256": "d933a970d1e1268db5d9554242ee0ed5bf643e444a993f56c13be603b7c3720a",
+    "bytes": 5704
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/AdvancedAlgorithmShapesTest.class",
+    "sha256": "414b21a20de591609e590a788103151c33288fd11766aba776bfe5fc179667e2",
+    "bytes": 12028
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/BoundedProviderRowsFailureAdmissionTest$1Provider.class",
+    "sha256": "123dbc0b47b0550d1f23de6d7b8cc5c1a70a7728e5ab9da2d4a0de676229ee40",
+    "bytes": 1882
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/BoundedProviderRowsFailureAdmissionTest$AfterTouchProvider.class",
+    "sha256": "8b3a6dd81132ad0a9c87b0ef7dbfaf7fc50c7b173c2fc3b4d4de8bd47cfe1c80",
+    "bytes": 2121
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/BoundedProviderRowsFailureAdmissionTest$BadArgument.class",
+    "sha256": "374ac976246b68b1636c76db8862e21c8de0e8afada99552259aa412434de06f",
+    "bytes": 2053
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/BoundedProviderRowsFailureAdmissionTest$Demand.class",
+    "sha256": "5fb8e2104fa142e7cc864ddd8985e2cb4df5074e01edd88d337c4a3944b63973",
+    "bytes": 1623
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/BoundedProviderRowsFailureAdmissionTest$FailureKind.class",
+    "sha256": "eaaf1a647e605bb81485f839507bf861dd4a4feee7456c03bdae60c918eb9b89",
+    "bytes": 1523
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/BoundedProviderRowsFailureAdmissionTest.class",
+    "sha256": "6c28d590c7b45bf4a64a773bfe3c8e11dedac2c872a54811fba47091d9b03b36",
+    "bytes": 13903
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/BulkPrimitiveRowProviderTest$1Provider.class",
+    "sha256": "0849b07b9e357458f3a5c43eb34a4dcbdd79377a4be4722eb9adb2b7e29b992e",
+    "bytes": 1853
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/BulkPrimitiveRowProviderTest$2Provider.class",
+    "sha256": "0a9d5284f713a31c6cea2003c90cd9805af87f12c04947f0b11e87262ff802ac",
+    "bytes": 1011
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/BulkPrimitiveRowProviderTest$3Provider.class",
+    "sha256": "eb65526daccf18efcbfe9a99702e181bcea22c3d92566ca84d305a24957d74db",
+    "bytes": 1393
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/BulkPrimitiveRowProviderTest$4Provider.class",
+    "sha256": "9fcc580ad025f1a91c389d7bbc16b30b1495a1c7a4866e501d2a17d994870de6",
+    "bytes": 1265
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/BulkPrimitiveRowProviderTest$5Provider.class",
+    "sha256": "acd7038e29bedd191e3cda69eafebb55e0312ff8bfe30a2216629d121652c8ca",
+    "bytes": 2289
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/BulkPrimitiveRowProviderTest$6Provider.class",
+    "sha256": "a15aa03c5bfb73be16bbf61814b9498306eb7601ba90c93f55b0becdb5bfa035",
+    "bytes": 2973
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/BulkPrimitiveRowProviderTest.class",
+    "sha256": "ac2974f6f6a26f6a545cd7ca0002fcf4f74c67f945435fceb6a3d16632702394",
+    "bytes": 8111
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/CollectionContractProof$1.class",
+    "sha256": "85eda9eaaee8a758da418e361f7e58cbc39ac79e9fae7270e8cce5e43463b667",
+    "bytes": 1071
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/CollectionContractProof.class",
+    "sha256": "58b896433ddb241776aea47b3a42b25243f2a808aa23c06cded494596ac9e5ee",
+    "bytes": 30581
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/CollectionContractsTest.class",
+    "sha256": "8f2a7bc81d9a3d2a53c88d566f7887f814e5a83b25550ef21a03f0bfef898260",
+    "bytes": 662
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/CollectionPerformanceProbe.class",
+    "sha256": "670adee38d2a2a3d99dec7f097ca0e4a7729608187a330d088db6eeb2148480a",
+    "bytes": 6589
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/CollectionSupersetCountsSelfTest$1.class",
+    "sha256": "bbecbbf5e15e85010e6fe73e22ffca63fc48cb343d2497009df0d91ea49ea06e",
+    "bytes": 1168
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/CollectionSupersetCountsSelfTest$2.class",
+    "sha256": "6e0f0b234ca19dd9b45976e545711424c2bd3c496a2005270e9efdc6e0a857bb",
+    "bytes": 1098
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/CollectionSupersetCountsSelfTest.class",
+    "sha256": "d01922acaee68d848fb0e4be5c7fb6e1289244fbe1bdbd447189680222a46a37",
+    "bytes": 22612
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/CollectionSupersetCountsTest.class",
+    "sha256": "058871f9e55b882e28709bdb14f658f3f347e772cdbbe33e8cb7769f25ca8c58",
+    "bytes": 660
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/DenseCollectionsSelfTest$TestKey.class",
+    "sha256": "525065c32ebac22fc5c18c3ebf2f1fff427aa033be634f70f3084bba0cfa9be2",
+    "bytes": 1414
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/DenseCollectionsSelfTest.class",
+    "sha256": "f8623f9a15477d2bb73229f5aadc9a9568c609e054a90de566e651702608cdb0",
+    "bytes": 28073
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/DenseCollectionsTest.class",
+    "sha256": "91b84923412e208a21648c5295689ef3824a4a07085800ed6301ca4cb7a5d882",
+    "bytes": 659
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ExactWidthCollectionsSelfTest$1.class",
+    "sha256": "0305c21061c9b7717a4b2ace20a24c72c1e230511c1d18da43a618c3d0c1a7f9",
+    "bytes": 1089
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ExactWidthCollectionsSelfTest.class",
+    "sha256": "2e9af3243d4e908efe434d02a033268604c6e8738d39d9c84cf670a5668fdb7b",
+    "bytes": 14027
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ExactWidthCollectionsTest.class",
+    "sha256": "8f6b345e7b0e174b729e9eccff13530ee6dac12f08a413bdb440bb10c909caa9",
+    "bytes": 631
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ExtendedPrimitiveCollectionsSelfTest$1.class",
+    "sha256": "996c8a780b93a67fa9c8dbce1fd924c04717ba099779cbfe297a3625b2749fe8",
+    "bytes": 1110
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ExtendedPrimitiveCollectionsSelfTest.class",
+    "sha256": "0f1a88ff1751e82a4b88260b9e56197f01fb8f29301f93934d1b0397f28edbe3",
+    "bytes": 9576
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ExtendedPrimitiveCollectionsTest.class",
+    "sha256": "d813d75234e5e5f56e23cc2bb05704efb6fad83515b57a7e108c7569708ee6f5",
+    "bytes": 657
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/FossCollectionDonorSelfTest.class",
+    "sha256": "d22e18cf09b49ce45d35b135342259779544e6f15473b13a18182d7906c7d994",
+    "bytes": 20120
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/FossCollectionDonorTest.class",
+    "sha256": "4ecd22b347d6bd093de78a0b5084a593c7cf71c8a6e0675917a9079d2903f57f",
+    "bytes": 667
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/FossSemanticClosureSelfTest.class",
+    "sha256": "46ad768a14bd48cbb8890fe01e81f2594286bf24ebd625765d8a0c2efc3d7343",
+    "bytes": 9953
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/FossSemanticClosureTest.class",
+    "sha256": "fcdc2dd5075ed2f3f27e7b627e93e792e66b4917686f87ea98242238212ca2bf",
+    "bytes": 622
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/FuzzyAlgorithmFactoryTest.class",
+    "sha256": "9d425aee3f11033202db1c7699b5fbf74c8a8fc48e7335a327e18b55a969fb23",
+    "bytes": 13009
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/FuzzyAlgorithmFactoryWave2Test.class",
+    "sha256": "14d2c4bc787135d384722f55c9f649374e76dd8dcd65c1b230dfd29688733041",
+    "bytes": 12332
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/FuzzyStructureFactoryTest.class",
+    "sha256": "a3126a147c23f165375739b73472776a1b2893314e58fc8cde453adb21e5426b",
+    "bytes": 6538
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/JdkCollectionContractProof$ChildList.class",
+    "sha256": "b17b885dd178cba6689b0a776fe9f800b922353d6fc2b5afea17662d96ae582e",
+    "bytes": 671
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/JdkCollectionContractProof$Day.class",
+    "sha256": "d7f56f36b294614786d6a55d2d59bc9a271a4f5a2b69d81fda03206f99b3f965",
+    "bytes": 1351
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/JdkCollectionContractProof$Key.class",
+    "sha256": "2abe4c1484c11b5387364de8996840a3df58aeeb628ff3757ccb955f897fd09b",
+    "bytes": 1386
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/JdkCollectionContractProof.class",
+    "sha256": "4c5a594ef38207c6c6be8576ac41b0ac5015aa8ee3ebad168a1788e96b929c02",
+    "bytes": 26717
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/JdkCollectionSurface.class",
+    "sha256": "0732f7b806214d37acf718c6b81c763d5d63db173e1fb39e803449793cbe56e9",
+    "bytes": 19422
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/JdkCollectionSurfaceProof$Checked.class",
+    "sha256": "a46ffe8b9bf95634a9eb82bf157ba1f86ed1d46d27c7d9039c477b48095aefe2",
+    "bytes": 418
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/JdkCollectionSurfaceProof.class",
+    "sha256": "c29484cd5a6e299202cd3194bacff8b91e0a7918be0d136e45fd3ab8d6b4399d",
+    "bytes": 14268
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/LazySegmentedStorageTest.class",
+    "sha256": "b6989cea7f64f03de53b2c700b9a184546ceb58bbc31545672bb14f0994ef711",
+    "bytes": 5944
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/LeanCollectionFactoryTest.class",
+    "sha256": "3d00ccbc695ee321f686966cd02ea4ef9fcabf254237d766a1754a2d9d7587d2",
+    "bytes": 8611
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/MarkerPatternCollectionsSelfTest.class",
+    "sha256": "b89316d509a55d7b211c0751958d300174a3e41287ab80fac5ff18a44c2fcd95",
+    "bytes": 6389
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/MarkerPatternCollectionsTest.class",
+    "sha256": "03f8adfd2ea0bb40b1f6ef68d67a27d03219f5da067e8368f71bc59c487f9562",
+    "bytes": 646
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/MrpFactoryTest.class",
+    "sha256": "66712d30c8ec2d8b29ed23337563ca5a86db749c40a4e239fe285957730a2b03",
+    "bytes": 3158
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/MrpIntentTest$MapCase.class",
+    "sha256": "c489f41fb0aeabf892b39dd7e023073205357b633900b725c11c17c06c031752",
+    "bytes": 2891
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/MrpIntentTest$QueueCase.class",
+    "sha256": "7abdf8e01ca9b06f756ac4f94b73702c31ba38bcff6fef98f7518b0e80bdff23",
+    "bytes": 2453
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/MrpIntentTest.class",
+    "sha256": "2faa2b309da702998ff9661ee77d7c94a23ac02797fcc7f32eb9a3211b47a9ec",
+    "bytes": 11866
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ObjectCounterZeroMetadataRepairTest$CollisionKey.class",
+    "sha256": "e913cb76f18f56e5ba9e6ecf4b68a93a1db21495d0ca3f0d09f9bbf92310a170",
+    "bytes": 1594
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ObjectCounterZeroMetadataRepairTest.class",
+    "sha256": "d762a232f3e5f07a1aacc2ed3f0a7680dd87926617a598e275dad57cfd094aaa",
+    "bytes": 10079
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/PcsProbe$BadArgument.class",
+    "sha256": "0c1b906ea8eb400eff9c184717da38da97d694fac0fc561f9d466976e7c8d6ad",
+    "bytes": 1803
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/PcsProbe$Demand.class",
+    "sha256": "8417a4a8a6b46718e941d75a929b6c5e031e448c2edaf57985065acae38f34a1",
+    "bytes": 1281
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/PcsProbe$Events.class",
+    "sha256": "f31f9101865bbfbdf768643116623a8a06f1e4ffe7b4997507e8e4ca116eeccc",
+    "bytes": 2435
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/PcsProbe$Kind.class",
+    "sha256": "6b16abb19aab07dd3478bf499e86b0cdcf999dac73d6a752f9492675e415f324",
+    "bytes": 1276
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/PcsProbe$ListDemand.class",
+    "sha256": "1a9487d98d34b540de10f0fd0b127d55435f8549558f164958493bc09805533d",
+    "bytes": 1403
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/PcsProbe$Model.class",
+    "sha256": "258282258a210cfb4b8938a35df3d0d6c62284d5fda0d4e60924eb92c2a5fa40",
+    "bytes": 6558
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/PcsProbe$Phase.class",
+    "sha256": "62ee5a90aa4dc62261490cde9e8e03240edbf3b526d9eaf012875d995430648a",
+    "bytes": 1481
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/PcsProbe$Tree.class",
+    "sha256": "8f8ffd2c1435a36e4a9ee5de65cb71fcad7976c66d7afde6d3e9c6f3d1f6d995",
+    "bytes": 8553
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/PcsProbe.class",
+    "sha256": "c10848269e3c2cda3d583543e2c2cfbe55fde0eb39ec2a4d5f9d8fc6cbbbeca2",
+    "bytes": 52811
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/PcsTest.class",
+    "sha256": "34f0608738428c8e8b722e156613567974e492c25c201b5804bc5ce080ed5696",
+    "bytes": 3668
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/PrimitiveCollectionSupersetSelfTest.class",
+    "sha256": "3595686c6eff300e452ef2703f7f803b758315ccf14a7eed06568f55728a4366",
+    "bytes": 8474
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/PrimitiveCollectionSupersetTest.class",
+    "sha256": "49e0bc1b2b893d7318c154033508d0dce3889ed1eb13d58e0bc836dbf8f23357",
+    "bytes": 657
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/PrimitiveMpmcConcurrencySelfTest$1.class",
+    "sha256": "703d8da8ff6240beeef4b850762b0e980c6f5bc64ff3294d9ad8a654ca1a9a73",
+    "bytes": 1098
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/PrimitiveMpmcConcurrencySelfTest.class",
+    "sha256": "080ed28117f745e370f73bd962cede8f59b73004c05389a3e6c2319bdd27816b",
+    "bytes": 9556
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/PrimitiveMpmcConcurrencyTest.class",
+    "sha256": "535aea98da708bed9e01791a0a85f98bf96fccca4940e846177cd5cfac9f277a",
+    "bytes": 690
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/PrimitiveTouchObserverTest$FailingObserverProvider.class",
+    "sha256": "477776328d3cb720bc564af3f65f93b3dbfdf7fec5f21a2805c3299e5bc7512a",
+    "bytes": 1134
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/PrimitiveTouchObserverTest$ObservedProvider.class",
+    "sha256": "76f5026d2774a5b9153ec38496ab2f64520f9818ed574516cc85a56752769442",
+    "bytes": 2894
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/PrimitiveTouchObserverTest.class",
+    "sha256": "6d54e93e3106ebd18eafcca07ab0c570d0cf17898cb89c06c3f230ec9b999247",
+    "bytes": 3704
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderBackedPrimitiveListTest$1Provider.class",
+    "sha256": "66f5378714bbb6f45ffbcfe40127ff5937a463f2670ad9f5838ae74f850447e9",
+    "bytes": 2092
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderBackedPrimitiveListTest.class",
+    "sha256": "f74f574ef6bd7c5e1836748dd3f4fe6210aece980bcba31f715b04fa3c9fc0c3",
+    "bytes": 5620
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderBackedPrimitiveLongTreeTest$1.class",
+    "sha256": "86e73b184fba9a3681441ec827ba5cd41e8fa81ffc257e7be2552f71f67b1f15",
+    "bytes": 1153
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderBackedPrimitiveLongTreeTest$2.class",
+    "sha256": "7972677c4c2395cd493a509a39ed8f7d1144d44ca4d19a9f3e689787e447ee7f",
+    "bytes": 1689
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderBackedPrimitiveLongTreeTest$ModelProvider.class",
+    "sha256": "6450893b58749f6079735452c96e86031428af0f1168631e28df50778a0b8356",
+    "bytes": 1778
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderBackedPrimitiveLongTreeTest.class",
+    "sha256": "27f6dca96f225d159403c7696da4231d3dea807a5c1bb36144efa935f4193ca1",
+    "bytes": 5914
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderBackedPrimitiveRowsTest$1.class",
+    "sha256": "64026078cba9f0720de42b635475e16ad2f016f3749114726916d55d9b9c280a",
+    "bytes": 1207
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderBackedPrimitiveRowsTest.class",
+    "sha256": "0503c79448ae8f1b40efd7da4156161b379e8576bc7cb407bf6552ce2e3fef5d",
+    "bytes": 6246
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderBackedPrimitiveTreeSupersetTest$1.class",
+    "sha256": "8347ff01f2ac8657dcf881879553adb259ffb888a4c6aa8c197576495e64dcd7",
+    "bytes": 1282
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderBackedPrimitiveTreeSupersetTest$2.class",
+    "sha256": "0c9661a40e74ad1b31e233a80ab163b0c9a7b71894ab8472034c164eb3bcd012",
+    "bytes": 1300
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderBackedPrimitiveTreeSupersetTest$ForestProvider.class",
+    "sha256": "7e3cc6d5778efc7ff8b4ab2943658eefaa3d5c19561f73896ea7495c00f8f2ae",
+    "bytes": 2464
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderBackedPrimitiveTreeSupersetTest.class",
+    "sha256": "f2296b2b2dc8704517c9b89141b35ca76fb55bd66668b21761aaca39cd467d4c",
+    "bytes": 8622
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderBackedPrimitiveTreeTest$1.class",
+    "sha256": "c47a0f9e1ba1ced1c74441079b66341bcc6bf93405ad0fe65408a468649f502c",
+    "bytes": 1483
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderBackedPrimitiveTreeTest$2.class",
+    "sha256": "6c5f7175a1d519e7a7cb8631d8e66b5538bd0c138187da19919094395c944eba",
+    "bytes": 1128
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderBackedPrimitiveTreeTest$3.class",
+    "sha256": "5b8e4e4c10c5d4bde40015e3a4fe91a39a96a85c4190b05ce43a3f25f1aa116b",
+    "bytes": 1578
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderBackedPrimitiveTreeTest$ModelProvider.class",
+    "sha256": "f429f263ea738952842e02b4ce33dec4c27cd596e16475212c00e3ae2a605d58",
+    "bytes": 1800
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderBackedPrimitiveTreeTest.class",
+    "sha256": "01b3c71611495df6dee7ce8f8962516d76ac18f0fc994c5d98c4151b5867c615",
+    "bytes": 6734
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSafetyProbe$1.class",
+    "sha256": "c7447db952f3661aa42a97f9c1b72e797102f2801cc0f5e04b2ea41b09f7b986",
+    "bytes": 1568
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSafetyProbe.class",
+    "sha256": "3f1668cb968801d3d13f74a15d36423ec260be080f5569050a4b83a80891e7bf",
+    "bytes": 4471
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSafetyTest$1.class",
+    "sha256": "27994c5e0a2476845563a08742dfe29d8425e1ce769379dc031ef369dc9bcb22",
+    "bytes": 3422
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSafetyTest$10.class",
+    "sha256": "33991159c263602fd4a9d2c192bcd68643d20798cda5fe1870b73a1a400309e3",
+    "bytes": 3355
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSafetyTest$11.class",
+    "sha256": "c98e0914b09af755508762b19933858d93685620e95c01c47439f053f29b31b2",
+    "bytes": 2278
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSafetyTest$12.class",
+    "sha256": "5c7894e6e12851b560fa69dfe6b2255275969839186a7d377992f695abe43344",
+    "bytes": 1338
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSafetyTest$13.class",
+    "sha256": "0adbb8f2f259b5a86e79108b3b41e4e3a3c1367a9c0f41b62c62b3cc2df8d731",
+    "bytes": 1250
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSafetyTest$14.class",
+    "sha256": "da2f154868d8eb260806548a656d945e7f15f5da33dc2bf8f3e51000f65d71a4",
+    "bytes": 3076
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSafetyTest$2.class",
+    "sha256": "9aa31a53e317dd9adc798714c7f0f53893630c036c160660c7ee8233461763f1",
+    "bytes": 1707
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSafetyTest$3.class",
+    "sha256": "4954d9fc9e2949f08c7118a4a629ad99008034572b6b4eabefafbf29e6a799b2",
+    "bytes": 3590
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSafetyTest$4.class",
+    "sha256": "a0e5c9b942f53be707adac0ad210a5a3163e778a68483475ded113b91d1e001b",
+    "bytes": 1294
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSafetyTest$5.class",
+    "sha256": "131231eabba3abc6376465ab77c3372ae7af9a7377de064435c3efe6a9ef5089",
+    "bytes": 1283
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSafetyTest$6.class",
+    "sha256": "e1adba69a4249f236521d406765de172204005a6c1b661f9ad4862d736daa296",
+    "bytes": 3118
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSafetyTest$7.class",
+    "sha256": "8a05e5937fbdeed4bd8866a8045f36b70b38c8afec0659a6901b611550580ff7",
+    "bytes": 2569
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSafetyTest$8.class",
+    "sha256": "89742dd2573f46353328556254f9820f00b3b8788310e47464af850f8a5a7c32",
+    "bytes": 1418
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSafetyTest$9.class",
+    "sha256": "839daed9b4e89a4b4f21a5cc59576253eb45a005c670eb6a380db0ccd4e72c74",
+    "bytes": 4863
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSafetyTest$TreeProvider.class",
+    "sha256": "bc3b4f03653b2e0cba95aa566c832ce8cf1aee070d6b2eaca5ce8e74ddaee31c",
+    "bytes": 894
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSafetyTest.class",
+    "sha256": "22098ae0c1382dd53c155df3a7600d3c8fc450294dedeb60269e47c6a4dfa579",
+    "bytes": 22218
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSupersetProbe$CallbackProvider.class",
+    "sha256": "e1d9fd033cf5a7afbcfd7d3f802f690383c92d81de35b24986c628aeabab9ea5",
+    "bytes": 1497
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSupersetProbe$FailingObserver.class",
+    "sha256": "74f5b8645228c36c0511062abfb65a1ceb730a4f6341fc68235ad2a2b5644baf",
+    "bytes": 1143
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSupersetProbe$VersionProvider.class",
+    "sha256": "c60ad1fdd8b7ea74082e8f0c1370d161b3a967f02bb122356f8da14b5c7b6467",
+    "bytes": 1105
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSupersetProbe.class",
+    "sha256": "b5a774f31f4f767e24be167319df62daa5a5be3ed951e4beb2139c07a41c6a6b",
+    "bytes": 6320
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSupersetTest$ObservingRowsProvider.class",
+    "sha256": "e4b16c7a5ee5c39bc9e2b319d96340c7e55d3f907499f6707b7dc5edf790c2ba",
+    "bytes": 4893
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSupersetTest$ObservingTreeProvider.class",
+    "sha256": "7be5596ce42b7b41220e13ef6245cb19f925ad47c8ef09ffc9ff42043744195d",
+    "bytes": 4057
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSupersetTest$Phase.class",
+    "sha256": "8b521bfc25d3f53a434702567b5adfab48f8664f1027c8398a439a2fe1f9fb09",
+    "bytes": 1684
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderCallbackSupersetTest.class",
+    "sha256": "29be0ad51662964b95d5af074bde1d0bbd55a7ac6b7113d2ed29f6f838f16a34",
+    "bytes": 6277
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderResidencySupersetTest$CursorTreeProvider.class",
+    "sha256": "b34b16c0f2e357c22c91970b8e646a8f33542a567e32d05073fba4ef956d080d",
+    "bytes": 930
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderResidencySupersetTest$OffsetTreeProvider.class",
+    "sha256": "c0fd5f92c79b0fdfad1d20dedaa48ee540a51d287360164635014ff4a40ccb19",
+    "bytes": 1654
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderResidencySupersetTest$VersionedCursorTreeProvider.class",
+    "sha256": "1593f15cec2cb730d77bff54eaaa43a6082d706ffdf3f0366d3406ebc316c471",
+    "bytes": 1082
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderResidencySupersetTest.class",
+    "sha256": "131aff7986b9b22e74b864be4c5051a72d4d2a2917dd9bc93273a72a102d7969",
+    "bytes": 12415
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderResidencyVersionedTreeTest$VersionedModelProvider.class",
+    "sha256": "04292e9076f75aa015ebfaf3ba6302a34bf5e107c65f66f5d3471d2f30f3ddca",
+    "bytes": 2071
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderResidencyVersionedTreeTest.class",
+    "sha256": "4f6be4386004b6c6d4a76b608bfd8128156537b9022d0436724fc7e6c8766275",
+    "bytes": 12009
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderResidencyVersionedTreeVerifier$Model.class",
+    "sha256": "571a20d6f5f180183080e0d8fd2105ed1c4fe3d825f3e508c48f24e0977e363e",
+    "bytes": 2014
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderResidencyVersionedTreeVerifier.class",
+    "sha256": "1ab826e4589503547231240b745aaa41c7defd3409ac51c7b9ac7ce2e92b6323",
+    "bytes": 6875
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderSerializationCompatibilityTest$1.class",
+    "sha256": "95abfc07dbfa3e10ec8c1fbca89e30aa0689ca64baed98661db1c775a237b91b",
+    "bytes": 1355
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ProviderSerializationCompatibilityTest.class",
+    "sha256": "c76015aae803df5ba98772bb58a8b67d0852a98492d13ad9e4cd18e6b581a7f7",
+    "bytes": 9553
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/PurposeCollectionsSelfTest.class",
+    "sha256": "9668ef555290368e9588690b1f4e910e4e94994419404b48c1c08b1e9b958741",
+    "bytes": 12745
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/PurposeCollectionsTest.class",
+    "sha256": "78b20b2dd20e7478768bfcbb764a1097d4166ade33277a1bd35ef805e2afa4d1",
+    "bytes": 611
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/RecoveredSeriousAlgorithmShapesTest.class",
+    "sha256": "0f200296e0a924a1a44ebf0ed829d63c8d37f9bfe180532eb941b49cdb5ef793",
+    "bytes": 13189
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/TouchAwarePrimitiveRowProviderTest$1.class",
+    "sha256": "c94dd8afa75cb7d056b9e1591a850d1d860208c840a683650d86f7f2504f0b1f",
+    "bytes": 1277
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/TouchAwarePrimitiveRowProviderTest$1Provider.class",
+    "sha256": "9bf52562d5a905e2a95f93a8454b7a7fe5e5f073566160b7d38fd989d405ee37",
+    "bytes": 1190
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/TouchAwarePrimitiveRowProviderTest.class",
+    "sha256": "72fe3ec8f7898fa12a71987a4184fa4dc2025e651bce204d132a7202bb7f370e",
+    "bytes": 3448
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/VersionedProviderLookupCounterTest$VersionedProvider.class",
+    "sha256": "4b3d4c8280a38328d3231149ed4f70616f200fbf562aba7d53c71ba4dde86312",
+    "bytes": 2218
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/VersionedProviderLookupCounterTest.class",
+    "sha256": "30737772964c4ddc9f05e2c356e8a78bed4105766d3eb1cb9332b4bdba7f76bb",
+    "bytes": 5155
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ZeroMetadataHashTest$1.class",
+    "sha256": "795180ed48afce3b7986df8afcf4932f386117c5237c3f3c96733b72a0a3b9a0",
+    "bytes": 1062
+  },
+  {
+    "path": "test-classes/com/synexia/primitives/ZeroMetadataHashTest.class",
+    "sha256": "16a2ea3505053bc9730017d03d8fac138c10f558d173609df4e110625dac5152",
+    "bytes": 11360
+  }
+]

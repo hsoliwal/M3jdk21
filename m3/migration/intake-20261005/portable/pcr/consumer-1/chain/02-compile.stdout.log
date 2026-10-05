@@ -1,0 +1,28 @@
+{"stage": "compile", "commandIndex": 1, "executable": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/apache-maven-3.9.9/bin/mvn"}
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----< com.synexia.verification:mre-primitives-current-992-20261005 >----
+[INFO] Building M3 primitives current992 exact-source qualification 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ mre-primitives-current-992-20261005 ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/primitives-current-v3/sources/synexia-primitives/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ mre-primitives-current-992-20261005 ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 185 source files with javac [debug release 21] to ../target/classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ mre-primitives-current-992-20261005 ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/primitives-current-v3/sources/synexia-primitives/src/test/resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ mre-primitives-current-992-20261005 ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 57 source files with javac [debug release 21] to ../target/test-classes
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  4.904 s
+[INFO] Finished at: 2026-10-05T11:27:42+02:00
+[INFO] ------------------------------------------------------------------------
+{"artifacts": 443, "artifactManifestSHA256": "db2ec4560898d27399fd80944bdb87038695e222a50aeb2b2c514e59b9e499d7"}

@@ -1,0 +1,227 @@
+[
+  {
+    "path": "classes/com/synexia/common/collections/jdk/LazyValueProvider.class",
+    "sha256": "8c1863c5c25b90cf64577515e6b3008fe00024c391280bec8056b34e9057cc88",
+    "bytes": 762
+  },
+  {
+    "path": "classes/com/synexia/common/collections/jdk/OrderedSlotMap$SetView.class",
+    "sha256": "5668ab16e069f9168f78cc7542549809731669ebe0f0479c262b498a596dbfec",
+    "bytes": 2397
+  },
+  {
+    "path": "classes/com/synexia/common/collections/jdk/OrderedSlotMap$View.class",
+    "sha256": "0a19650cf545094357343bae59d5d9839f8432cd9b5470622d4fd67d100c973b",
+    "bytes": 4741
+  },
+  {
+    "path": "classes/com/synexia/common/collections/jdk/OrderedSlotMap.class",
+    "sha256": "bade60122970a2061a77445d5109a8641deb4f82af4d9a0701139f6dee150704",
+    "bytes": 2441
+  },
+  {
+    "path": "classes/com/synexia/common/collections/jdk/PackedLazyValueState.class",
+    "sha256": "d09b42c8552d53ec9f1774aef7ed8fa063378b3b66579e281f8494a7397b3736",
+    "bytes": 9894
+  },
+  {
+    "path": "classes/com/synexia/common/collections/jdk/PackedTreeMap$Tree.class",
+    "sha256": "d93a488add1d3db99c87f1fd1962143662f8224b2d5113e8c5886824fc20579f",
+    "bytes": 8441
+  },
+  {
+    "path": "classes/com/synexia/common/collections/jdk/PackedTreeMap.class",
+    "sha256": "91f198d703b0ad559f6869e6117460b1d5e5ce66c28135e380774d10692c7c15",
+    "bytes": 23876
+  },
+  {
+    "path": "classes/com/synexia/common/collections/jdk/PackedTreeSet.class",
+    "sha256": "ff075a3236163d64eda55758d1da77ee8d411cb6855974074948298416284b9f",
+    "bytes": 6960
+  },
+  {
+    "path": "classes/com/synexia/common/collections/jdk/SlotArrays.class",
+    "sha256": "b8e27f54cb7a635ecc0c04e424f1d79d1906b59ee851fde3064b77e9f564be4e",
+    "bytes": 1415
+  },
+  {
+    "path": "classes/com/synexia/common/collections/jdk/SlotMap$1.class",
+    "sha256": "8964f18ed470d0645dfb2cbc1709fababee2c20cc693cb46b91c02827da8e54b",
+    "bytes": 2314
+  },
+  {
+    "path": "classes/com/synexia/common/collections/jdk/SlotMap$2.class",
+    "sha256": "c76bace4a178169bcd43512a05f2964f7d8d0da5efdae5508300e2d960c10490",
+    "bytes": 1585
+  },
+  {
+    "path": "classes/com/synexia/common/collections/jdk/SlotMap$3.class",
+    "sha256": "bbd5acefc53920eb93db9de3c0ffb26818ae5576e40b4a5f8bd74e7fe9fc6248",
+    "bytes": 1354
+  },
+  {
+    "path": "classes/com/synexia/common/collections/jdk/SlotMap$4.class",
+    "sha256": "79fdf96211c9f03343d3f8251d1e67952479d0d8500efb440b8c79c4e5b24be8",
+    "bytes": 2038
+  },
+  {
+    "path": "classes/com/synexia/common/collections/jdk/SlotMap$LiveEntry.class",
+    "sha256": "3e72a9efb29b5a22f231298c7ddbe7cbc7b50f5fff1c74e94f41a47b3580b05e",
+    "bytes": 2911
+  },
+  {
+    "path": "classes/com/synexia/common/collections/jdk/SlotMap.class",
+    "sha256": "bf494d4328f91a6ae55d8460f88829816a90aef7ba2528fc5a3d81ebc5675677",
+    "bytes": 10184
+  },
+  {
+    "path": "classes/com/synexia/common/collections/jdk/SlotSpliterators$1.class",
+    "sha256": "bd0bc3d2ebf26f01f295b7e1bc5fa1fd4f5df555ed0c9251cf99b4e9cd15bd4f",
+    "bytes": 1695
+  },
+  {
+    "path": "classes/com/synexia/common/collections/jdk/SlotSpliterators.class",
+    "sha256": "e3701423bead9007a49020cb0183df52c61006b07853c59561c7ac05b06338de",
+    "bytes": 1902
+  },
+  {
+    "path": "classes/com/synexia/common/lazy/event/LazyEventBits.class",
+    "sha256": "29da67cdb9e784e0d402ef5d526ad3c6c40393ec6ca49613b07dde0808a91d92",
+    "bytes": 992
+  },
+  {
+    "path": "classes/com/synexia/common/lazy/event/LazyEventGranularity.class",
+    "sha256": "c5c45101896624c1fdb8cbba62723a64ad527f73ff730abbd6d607ebd59ca8bc",
+    "bytes": 2051
+  },
+  {
+    "path": "classes/com/synexia/common/lazy/event/LazyEventPolicy.class",
+    "sha256": "c0799a1400c39bf9e0e743ed42f5b1e48512fb1dc8ebf308866b18faecd09b9b",
+    "bytes": 3802
+  },
+  {
+    "path": "classes/com/synexia/common/lazy/event/LazyEventSink$NoOpHolder.class",
+    "sha256": "9aad27e7c5cd287e87369b79014367c3339ec67673fddc0d5030695ad121933e",
+    "bytes": 1582
+  },
+  {
+    "path": "classes/com/synexia/common/lazy/event/LazyEventSink.class",
+    "sha256": "27ff43226df06bf0d42c57ab9c0c8292b9042137fc37a33defbb1070fcc9374f",
+    "bytes": 934
+  },
+  {
+    "path": "classes/com/synexia/common/lazy/event/LazyEventSource.class",
+    "sha256": "861ea0e11259a137264814f87c5d2747a3552a1b990722c61a4ac36517ad980e",
+    "bytes": 926
+  },
+  {
+    "path": "classes/com/synexia/common/lazy/event/LazyEvents.class",
+    "sha256": "c9b0c30c73bb06fb324bd583f479445b5b512ec575ecf97cf23730a738f0b77a",
+    "bytes": 2051
+  },
+  {
+    "path": "classes/com/synexia/common/lazy/event/LazyOperation.class",
+    "sha256": "8693dc0b048736dd2144fab696c50377ad09e7aa5c657c65b3cf5dc0ed698b8d",
+    "bytes": 2081
+  },
+  {
+    "path": "classes/com/synexia/common/progress/ChildProgressMonitor.class",
+    "sha256": "429a831fe8f12343ec6996eb5546a642595a2e273109f8664d71a4f51029b9a2",
+    "bytes": 5494
+  },
+  {
+    "path": "classes/com/synexia/common/progress/DefaultProgressMonitor.class",
+    "sha256": "cbb9f24389ca0d5a8cddf9a674b56277d5afb75df51c9afc7d50545e157abbcc",
+    "bytes": 4315
+  },
+  {
+    "path": "classes/com/synexia/common/progress/ProgressAdapters$LegacyAdapter.class",
+    "sha256": "49320ec868721df13472dd8f04bdb4a0bef1f240decfbdee32b4e2f68906c3b0",
+    "bytes": 3847
+  },
+  {
+    "path": "classes/com/synexia/common/progress/ProgressAdapters.class",
+    "sha256": "5ad6669617668ae63831b0b3b3ebb2cd960866574cefe0a1b9c822c2620901bd",
+    "bytes": 1287
+  },
+  {
+    "path": "classes/com/synexia/common/progress/ProgressMonitor.class",
+    "sha256": "d64feabf4713e91446ee30342dfa7ff33a933a71a587ecee1f5496b0134edb8e",
+    "bytes": 1679
+  },
+  {
+    "path": "classes/com/synexia/common/progress/ProgressScope.class",
+    "sha256": "7ee266d855c7d9b76dcd35d4471fdb1b124c571734a976a66ff90e976926cf6a",
+    "bytes": 1679
+  },
+  {
+    "path": "classes/com/synexia/common/progress/ProgressState.class",
+    "sha256": "ff215ed86638acef59f27631664fd728f362f97508ca6823a52bd70ec9653254",
+    "bytes": 2958
+  },
+  {
+    "path": "classes/com/synexia/common/progress/SystemProgress.class",
+    "sha256": "e915d87b23f047fbee3db2b5ed3c006211585d1f9aed1aaadee412cb80db5aab",
+    "bytes": 1333
+  },
+  {
+    "path": "classes/com/synexia/common/utils/Progress$NullProgress.class",
+    "sha256": "9eeca6a1933daccbcbdee391b89f74718dd2454d01432d2cadedf548b902aaed",
+    "bytes": 1748
+  },
+  {
+    "path": "classes/com/synexia/common/utils/Progress$Snapshot.class",
+    "sha256": "b46db97217923bc8e0129660d12dffe70c83da9dcb1834b716412819c571c26f",
+    "bytes": 2361
+  },
+  {
+    "path": "classes/com/synexia/common/utils/Progress$SubProgress.class",
+    "sha256": "7cfb104dbbb0cf25a0c0a80fbe8189095037c0898322f1d5ced11228aa125e3d",
+    "bytes": 2176
+  },
+  {
+    "path": "classes/com/synexia/common/utils/Progress.class",
+    "sha256": "995fab320c000d2b69d182216ba0745ec976bc0c7cf49c58fbb9d6158e7598a8",
+    "bytes": 7041
+  },
+  {
+    "path": "test-classes/com/synexia/common/collections/jdk/PackedLazyCallbackSafetyTest$Model.class",
+    "sha256": "370bd6a8b036a1b29e9613295f4facc0a9c92877b33e7ef4d93c6ff0dc1e7276",
+    "bytes": 3430
+  },
+  {
+    "path": "test-classes/com/synexia/common/collections/jdk/PackedLazyCallbackSafetyTest$Phase.class",
+    "sha256": "9432100ece7347c3ca00c4c5908be73e6a3edc3a2ef2ce9704faf36f9c938dec",
+    "bytes": 2621
+  },
+  {
+    "path": "test-classes/com/synexia/common/collections/jdk/PackedLazyCallbackSafetyTest.class",
+    "sha256": "ea77c25efeef54da13940622713d74327948fd4cabdab056d1cbe4a807547a7e",
+    "bytes": 40706
+  },
+  {
+    "path": "test-classes/com/synexia/common/collections/jdk/PackedLazyTreeMapSelfTest$1.class",
+    "sha256": "c40da3501f5517bba35041ffbd963c0686ad1aa988c8cf363df893c304648366",
+    "bytes": 3075
+  },
+  {
+    "path": "test-classes/com/synexia/common/collections/jdk/PackedLazyTreeMapSelfTest.class",
+    "sha256": "933bb45c6a3f2550dffd8b648efdee82c30e37b9227b67ac55cae3f226acdcf8",
+    "bytes": 26849
+  },
+  {
+    "path": "test-classes/com/synexia/common/collections/jdk/PackedLazyTreeMapTest.class",
+    "sha256": "4b124e4555b8a08cecc26ef50fe8e2f04d6646d2d642a705eac1927bd3f6e5b5",
+    "bytes": 710
+  },
+  {
+    "path": "test-classes/com/synexia/common/collections/jdk/PackedLazyValueStateSelfTest$1.class",
+    "sha256": "c70e8a3db6ad2a31a6b20d9f2a77e60a1409fb6956d6ff30e811e72270203a8a",
+    "bytes": 3444
+  },
+  {
+    "path": "test-classes/com/synexia/common/collections/jdk/PackedLazyValueStateSelfTest.class",
+    "sha256": "9ceab7862dc8b1895a37a46b0a3ea3865c367b6810caf4974e52d67b3df56eed",
+    "bytes": 11448
+  }
+]

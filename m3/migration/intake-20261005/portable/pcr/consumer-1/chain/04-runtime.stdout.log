@@ -1,0 +1,17 @@
+{"stage": "runtime", "commandIndex": 1, "executable": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64/bin/java"}
+{"internalCachedReads":1,"externalTouchPairs":3,"rowProviderLoads":2,"residentRows":1,"admissionFailures":1,"versionLookups":2}
+{"stage": "runtime", "commandIndex": 2, "executable": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64/bin/java"}
+{"result":"PASS","rowLoads":2,"treePayloadLoads":2,"linkedChildren":3,"rowFlagsUnsigned":32773}
+{"stage": "runtime", "commandIndex": 3, "executable": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64/bin/java"}
+PCS_OK scenarios=24
+{"stage": "runtime", "commandIndex": 4, "executable": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64/bin/java"}
+retained lane bytes multimap=328629->81 bag=131072->64 bimap=393216->192
+PASS collection-superset-counts checks=6822278
+{"stage": "runtime", "commandIndex": 5, "executable": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64/bin/java"}
+PASS exact-width checks=6512060
+{"stage": "runtime", "commandIndex": 6, "executable": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64/bin/java"}
+CHECKS=12 RESULT=PASS
+{"stage": "runtime", "commandIndex": 7, "executable": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64/bin/java"}
+MRP_FACTORY_OK groups=1 directions=3
+{"stage": "runtime", "commandIndex": 8, "executable": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64/bin/java"}
+MRP_INTENT_OK groups=4 connectorMaps=4 topKAndTypo=3 topologyPhrases=128 explicitPrecedence=5 legacyFallback=2 invalidInputs=3

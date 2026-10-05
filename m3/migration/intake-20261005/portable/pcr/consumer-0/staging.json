@@ -1,0 +1,222 @@
+{
+  "baseline": "99221b0f25a1b09c32855d76e295b816f632a46b",
+  "lane": "packed-current-992",
+  "files": [
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/LazyValueProvider.java",
+      "sha256": "c0880ab0b42368b97dbdc67e9d8d44eaef1724356c0ce8c634bc70aa176d77dc",
+      "bytes": 1260,
+      "gitBlob": "139a63e109a5f1abbbbd3fc553d037b593e11836",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/collections/jdk/LazyValueProvider.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/OrderedSlotMap.java",
+      "sha256": "af20d25233e0a0a1f44c004ecfc74496fc528b65aedd32aad7d82259243b1a39",
+      "bytes": 4201,
+      "gitBlob": "27ea899e1cc26f9c3fdb413969d27d23bda0d398",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/collections/jdk/OrderedSlotMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/PackedLazyValueState.java",
+      "sha256": "bce1d43153ff314030eaf27f93108105a3f876e7364d71fe3a4c4f2883db99d0",
+      "bytes": 10611,
+      "gitBlob": "c0f0cedabe6a51e67fa8103748e147b31a0b541c",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/generated-candidate/synexia-common/src/main/java/com/synexia/common/collections/jdk/PackedLazyValueState.java",
+      "origin": "actual-pcr-current-output"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/PackedTreeMap.java",
+      "sha256": "4ee669eacb371768d6c8d20790d45791c9c99472721753b89916ad45b2c0d566",
+      "bytes": 23792,
+      "gitBlob": "2c573a2bef1d84cce54ca15953ccf3429755af8a",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/collections/jdk/PackedTreeMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/PackedTreeSet.java",
+      "sha256": "57c00aa21ca260077299f718bb8cf489d7795e0a54e9ef86d9263333fbed4147",
+      "bytes": 3320,
+      "gitBlob": "7d55c8488f3ff4c6365e0c96ac7189393ffc8c5d",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/collections/jdk/PackedTreeSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/SlotArrays.java",
+      "sha256": "ae3fae638766ad6d65867a1762fb664956335c63129ab47c2c2ccfa54c577932",
+      "bytes": 1071,
+      "gitBlob": "4fe0b5517f4f96f38876ebfe1bfd329d66def204",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/collections/jdk/SlotArrays.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/SlotMap.java",
+      "sha256": "16fb80dd4fe51f355894466f8c4d2f80ea7a5b9ffeb01f9eef17af957d49e332",
+      "bytes": 10668,
+      "gitBlob": "3ceabb2f939096e16562940009495484c0cf581f",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/collections/jdk/SlotMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/SlotSpliterators.java",
+      "sha256": "a6cc66b52fc46e2e034472a43da602180f2c6cb47d3b85aaca2ee63e7a3a043f",
+      "bytes": 1560,
+      "gitBlob": "6f170346aa54d0ffcfdc1992406cc13f578b0818",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/collections/jdk/SlotSpliterators.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/lazy/event/LazyEventBits.java",
+      "sha256": "f981447e2ffdcd86beb8d9899cb078ae75e4c99aee4cf478aeb5159a890e0059",
+      "bytes": 1108,
+      "gitBlob": "ef0ebd1f26d49f01b7176006950ae8360e728c67",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/lazy/event/LazyEventBits.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/lazy/event/LazyEventGranularity.java",
+      "sha256": "996f794617b3e7f91d1a82ff35a52951a1463733714928a4b3cbf447aa641887",
+      "bytes": 792,
+      "gitBlob": "d5c2b0a71f47bf397cbf76edd43db097969857c9",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/lazy/event/LazyEventGranularity.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/lazy/event/LazyEventPolicy.java",
+      "sha256": "9a45efd457e28731f4e9e8ff6c128bc78957805e50f8342fb2858ae8b0fc37fd",
+      "bytes": 2261,
+      "gitBlob": "0f1434a9d0c4974d2e9d4daa218e0ee2f0433010",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/lazy/event/LazyEventPolicy.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/lazy/event/LazyEventSink.java",
+      "sha256": "aa9dcf95ab90bbababef955bf99bd7c5cd1de1e99ddcaba2c984bd06cdeaa7ed",
+      "bytes": 989,
+      "gitBlob": "9eadea9bde80dd1d7a86fd23b4cb97b9786938cf",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/lazy/event/LazyEventSink.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/lazy/event/LazyEventSource.java",
+      "sha256": "8ed2bb589bb590a71f8371aa0ef20b700dc5327bbdb622f3071e25f9ae95243f",
+      "bytes": 374,
+      "gitBlob": "8fb34c9283f11e0db0a752480fbd196ee79b5c48",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/lazy/event/LazyEventSource.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/lazy/event/LazyEvents.java",
+      "sha256": "25c313a03429f48d4ee6be8c6a2cd3e467446b73cf87ca942608021544eae6dc",
+      "bytes": 1070,
+      "gitBlob": "109c4f0fd3d7726debded3f1d8dd81284dacdc1e",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/lazy/event/LazyEvents.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/lazy/event/LazyOperation.java",
+      "sha256": "2d6d5bf67c997fcf67d03e4faced27bc8c2791ced5c011bdb633bfb51d850abe",
+      "bytes": 447,
+      "gitBlob": "f21bd420edb755356165eabc9bbbb9266048a87c",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/lazy/event/LazyOperation.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/progress/ChildProgressMonitor.java",
+      "sha256": "397bcfc5e8eaa4d516f6fccd1d3c238be4432f6f6a49f77a425ae21fd7d969ff",
+      "bytes": 5527,
+      "gitBlob": "3909723ae02d81a27e5a6056fe8cfacd82042840",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/progress/ChildProgressMonitor.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/progress/DefaultProgressMonitor.java",
+      "sha256": "f20685bf29db34cd7cb68e7546bea7825f62ceb90f4546fd8a7f1849e1dd9b69",
+      "bytes": 3168,
+      "gitBlob": "7dd9cc7b2a810eaa8ba946aec0b94e124a667def",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/progress/DefaultProgressMonitor.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/progress/ProgressAdapters.java",
+      "sha256": "f836f33c6e078b6fcccbe63d63db615534ef676caf16866edecf973d5766c3aa",
+      "bytes": 3545,
+      "gitBlob": "3a26ac8d7a86bc608e75745871b465d93ebcd5bb",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/progress/ProgressAdapters.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/progress/ProgressMonitor.java",
+      "sha256": "a6ea4f264fd771e52bfe575baa35b96de8d06abec723dab7eac712d5843524de",
+      "bytes": 906,
+      "gitBlob": "7457acbf97423af4d8405ebd3efabd224f7373fa",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/progress/ProgressMonitor.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/progress/ProgressScope.java",
+      "sha256": "bae8f4a057f4ef2ef5a927eafa8d7babf20275313cdb42c5620c7b4a37b9442a",
+      "bytes": 1331,
+      "gitBlob": "8bdfd5c6b82deb8eaaf521e12ed5230ccf7ed8b2",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/progress/ProgressScope.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/progress/ProgressState.java",
+      "sha256": "29cde61a192e454dd2ffde25e5a142cdc2a25e806ce91f7f01e6d5d7f6bf6960",
+      "bytes": 952,
+      "gitBlob": "87b14cb9a32f6d6c0f53441aaeedfab9333826cf",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/progress/ProgressState.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/progress/SystemProgress.java",
+      "sha256": "e97ec1d4932635e08d3fc590d64ae84b4a450c6f064c1539bf63b0d4a95e6a55",
+      "bytes": 855,
+      "gitBlob": "98d95d576dc7d5d548389fd83a53a574b8ec440c",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/progress/SystemProgress.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/utils/Progress.java",
+      "sha256": "d6f6fb0d890bed0f12ac066d3cd86ce55f64b1ee859a181a1008320cb22273a2",
+      "bytes": 9443,
+      "gitBlob": "f61e6504ccb95d8c183d4f830e6c8a2a582d3fca",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/main/java/com/synexia/common/utils/Progress.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedLazyCallbackSafetyTest.java",
+      "sha256": "34ae724febc38948d095222f403e5b4a351ab08cc3ea0e129c56bb012744255c",
+      "bytes": 29216,
+      "gitBlob": "b01f0623ca4f83086daf4c2ccf63728e0fb510b3",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/generated-candidate/synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedLazyCallbackSafetyTest.java",
+      "origin": "actual-pcr-current-output"
+    },
+    {
+      "path": "synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedLazyTreeMapSelfTest.java",
+      "sha256": "7e239cc9f87b05b39db1e0cddd81dc842ab07f8df5d49e20a585867becce0979",
+      "bytes": 18419,
+      "gitBlob": "9ff9c4b4936701342b09b0ac8baa6bf20fd44afa",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/generated-candidate/synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedLazyTreeMapSelfTest.java",
+      "origin": "actual-pcr-current-output"
+    },
+    {
+      "path": "synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedLazyTreeMapTest.java",
+      "sha256": "8bf64f34107e0d54395b9692b2496c2db1878fe5f546d40079c8fe1ec8649c13",
+      "bytes": 288,
+      "gitBlob": "7734282fe2f4b789fe721964e00c6db6ce86e069",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedLazyTreeMapTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedLazyValueStateSelfTest.java",
+      "sha256": "742fc8c8f22fc210e2d1b6353c7fd08c2ab5782ccaed788589dc97147e5530c5",
+      "bytes": 7702,
+      "gitBlob": "230eb9b9ba3ff9b8a8f220703fd48f2a47e4ee5b",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedLazyValueStateSelfTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    }
+  ]
+}

@@ -1,0 +1,229 @@
+{
+  "schema": "m3.registry-union-independent-byte-review/1",
+  "recordedAtUtc": "2026-10-05T11:44:36.637173+00:00",
+  "result": "NO_ARTIFACT_MISMATCH_FOUND",
+  "scope": "Read-only byte, JSON-value, retained-tree-leaf and source review. No candidate import/execution or proof gates.",
+  "identities": {
+    "base": {
+      "commit": "ccb4ace7f7d79f97ae2d9600de55960504cc3c21",
+      "tree": "f5533ab50b60297c955d94a8e1190ad91d0bf831"
+    },
+    "master": {
+      "commit": "8131f535300c005afd27443d0281ede11198522f",
+      "tree": "8a87d42532c93117f88f8e49abc728f3e49a8118"
+    },
+    "head": {
+      "commit": "a73202a02577d3e3242a390b962fd3e08b691b60",
+      "tree": "a3ddbb9adba0023fea585d46bfc0bb74eb58a199"
+    }
+  },
+  "inputs": {
+    "base": {
+      "sha256": "67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb",
+      "bytes": 196161,
+      "gitBlobSha1": "a9c2b967920add39044066e815a7dbb1384c4b87"
+    },
+    "master": {
+      "sha256": "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace",
+      "bytes": 220539,
+      "gitBlobSha1": "895458cdc16a87f915f34747e1bf8684b827f16d"
+    },
+    "head": {
+      "sha256": "8e229715d6783906b1ee249bb2707cdb5e412146219be6037154927abac893ea",
+      "bytes": 340001,
+      "gitBlobSha1": "fd4d2633d45b28048e08bb6955801e1164a49bf5"
+    },
+    "packet": {
+      "sha256": "109173cb43fd91e084415284083d0d0ff92a1039a0b21216b7336c0a2c3dcf2e",
+      "bytes": 91316,
+      "gitBlobSha1": "fd9151977242c53204c4205d9d984e29f0e52245"
+    }
+  },
+  "reviewedArtifacts": {
+    "derive.py": {
+      "sha256": "8f6ca7c15f40440752848bf38669b0034f94fe81dc30d60d2d3d736eae6d12e0",
+      "bytes": 7226
+    },
+    "test/test_union.py": {
+      "sha256": "1ccb0686629b097fba379c8e172660a32dc5a5b1a85169d113f7b0eb1daf3ead",
+      "bytes": 8146
+    },
+    "derivation.json": {
+      "sha256": "152991c42a08db1901dd4dc6c3966cc5bf35674cc116c7447e2961dc9cbf164a",
+      "bytes": 1996
+    },
+    "m3/docs/name-mapping.json": {
+      "sha256": "245fcd73135ef418a30ee350049719574f86222e08c63219d883119b3dc8321f",
+      "bytes": 363157
+    },
+    "packet.json": {
+      "sha256": "3b556b885af4b5afeb0b9f22a4bcceea93b6c836125019bde1534652d77c7639",
+      "bytes": 91316
+    }
+  },
+  "checks": [
+    {
+      "claim": "base tree inventory commit and tree match admitted identity",
+      "matches": true
+    },
+    {
+      "claim": "base proposal input equals exact retained raw source",
+      "matches": true
+    },
+    {
+      "claim": "base input Git blob matches admitted tree leaf",
+      "matches": true
+    },
+    {
+      "claim": "master tree inventory commit and tree match admitted identity",
+      "matches": true
+    },
+    {
+      "claim": "master proposal input equals exact retained raw source",
+      "matches": true
+    },
+    {
+      "claim": "master input Git blob matches admitted tree leaf",
+      "matches": true
+    },
+    {
+      "claim": "head tree inventory commit and tree match admitted identity",
+      "matches": true
+    },
+    {
+      "claim": "head proposal input equals exact retained raw source",
+      "matches": true
+    },
+    {
+      "claim": "head input Git blob matches admitted tree leaf",
+      "matches": true
+    },
+    {
+      "claim": "original packet retained byte-exact against published raw packet",
+      "matches": true
+    },
+    {
+      "claim": "original packet Git blob matches head tree leaf",
+      "matches": true
+    },
+    {
+      "claim": "original packet SHA matches previously sealed 35-output packet",
+      "matches": true
+    },
+    {
+      "claim": "head input equals original publication registry",
+      "matches": true
+    },
+    {
+      "claim": "base exact unique record inventory",
+      "matches": true
+    },
+    {
+      "claim": "master exact unique record inventory",
+      "matches": true
+    },
+    {
+      "claim": "head exact unique record inventory",
+      "matches": true
+    },
+    {
+      "claim": "exact 35 disjoint intake additions",
+      "matches": true
+    },
+    {
+      "claim": "all intake additions retain intake namespace",
+      "matches": true
+    },
+    {
+      "claim": "all 46 master records preserved in order and value",
+      "matches": true
+    },
+    {
+      "claim": "all 35 disjoint intake records preserved in order and value",
+      "matches": true
+    },
+    {
+      "claim": "union has 81 rows and 81 unique IDs",
+      "matches": true
+    },
+    {
+      "claim": "all non-record master JSON values preserved",
+      "matches": true
+    },
+    {
+      "claim": "actual registry bytes equal deterministic serialization of exact union",
+      "matches": true
+    },
+    {
+      "claim": "richer complete master descriptor preserved as implemented-unverified",
+      "matches": true
+    },
+    {
+      "claim": "two JCC records preserved complete and blocked",
+      "matches": true
+    },
+    {
+      "claim": "old authority digest occurs exactly once in original packet",
+      "matches": true
+    },
+    {
+      "claim": "derived packet bytes change only single authority digest",
+      "matches": true
+    },
+    {
+      "claim": "authority substitution is byte-exact reversible",
+      "matches": true
+    },
+    {
+      "claim": "parsed packet changes only authority.sha256",
+      "matches": true
+    },
+    {
+      "claim": "five producer lanes and 35 unique mappings remain exact",
+      "matches": true
+    },
+    {
+      "claim": "all source target owner sourceRoot and schema values unchanged",
+      "matches": true
+    },
+    {
+      "claim": "all retained derivation receipt values match raw inputs outputs and conservative claims",
+      "matches": true
+    },
+    {
+      "claim": "proposal name-mapping.json equals retained derived artifact",
+      "matches": true
+    },
+    {
+      "claim": "proposal packet.json equals retained derived artifact",
+      "matches": true
+    },
+    {
+      "claim": "proposal derivation.json equals retained derived artifact",
+      "matches": true
+    },
+    {
+      "claim": "six union test methods remain present",
+      "matches": true
+    }
+  ],
+  "testMethods": [
+    "test_all_master_values_survive_with_exact_disjoint_head_intake_append",
+    "test_richer_master_descriptor_and_two_blocked_jcc_obligations_are_unchanged",
+    "test_derived_packet_changes_only_authority_hash_without_changing_qualification_epoch",
+    "test_repeated_derivation_is_byte_deterministic_and_does_not_modify_supplied_inputs",
+    "test_each_of_four_exact_input_byte_pins_refuses_even_json_equivalent_whitespace",
+    "test_historical_counts_duplicate_membership_and_foreign_members_cannot_bypass_pins"
+  ],
+  "staticCoverageObservation": {
+    "location": "test/test_union.py:49,107; derive.py:100-115",
+    "finding": "The six tests assert the report is a dict and repeat-equal but do not assert its provenance fields or retained derivation.json. The actual report was independently checked in full in this review and is correct.",
+    "severity": "TEST_COVERAGE_GAP_NO_CURRENT_ARTIFACT_DEFECT",
+    "notAGateFailure": true
+  },
+  "limitations": [
+    "Retained exact tree inventories are the admitted provenance boundary; no new remote Git acquisition.",
+    "No candidate execution/imports, tests, gates, recipe application, source edits or Git writes.",
+    "This review does not transfer source/runtime qualification to integration master 8131."
+  ]
+}

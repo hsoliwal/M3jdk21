@@ -1,0 +1,62 @@
+{
+  "status": "PASS_FOCUSED_TEST_PROJECT",
+  "chain": "mre-current-v2",
+  "baseline": "99221b0f25a1b09c32855d76e295b816f632a46b",
+  "orderedGates": [
+    {
+      "stage": "lint",
+      "exitCode": 0,
+      "startedAt": "2026-10-05T09:01:03.917131+00:00",
+      "endedAt": "2026-10-05T09:01:09.251101+00:00",
+      "receipt": "chain/01-lint.json",
+      "receiptSHA256": "89b7355066a6c95120fe22d491bf5abd622f9fdcad0b5d313d71a6ab30f425de",
+      "stdoutSHA256": "5a05902987213afc6ba9251310eac97ecd6afd7d56c4c1d81c1b0ad11b89aa8b",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "compile",
+      "exitCode": 0,
+      "startedAt": "2026-10-05T09:01:09.251894+00:00",
+      "endedAt": "2026-10-05T09:01:14.603745+00:00",
+      "receipt": "chain/02-compile.json",
+      "receiptSHA256": "9285079750f62da9ef3c0683bbf47d41460d60549113b539e5584f85c724d7b1",
+      "stdoutSHA256": "2159a2f0b6885cb3fdc71f582774b721ce4469e5894e48d84c543f2575e4ba88",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "test",
+      "exitCode": 0,
+      "startedAt": "2026-10-05T09:01:14.604818+00:00",
+      "endedAt": "2026-10-05T09:01:33.529347+00:00",
+      "receipt": "chain/03-test.json",
+      "receiptSHA256": "0095dba42490fd86c87d400018d0c7bb63285d932fb36c996a8ae21cd5df1782",
+      "stdoutSHA256": "5d048fa166cb1d223cf14efd96bb74a97980c0fdaac5b38c02d50254b093b239",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "runtime",
+      "exitCode": 0,
+      "startedAt": "2026-10-05T09:01:33.530514+00:00",
+      "endedAt": "2026-10-05T09:01:51.652458+00:00",
+      "receipt": "chain/04-runtime.json",
+      "receiptSHA256": "591985254c80ef34343fbb5475cc007853555525b057ed4d7ec3e248d9153889",
+      "stdoutSHA256": "d43002c701cb63bd64a0674dd7af4f6932611cebff6e8ac5661c9b0b8e676057",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "patchSHA256": "8bd3e01e3e072cc4a8a307adf642e69554c6099518b36d773d2d7c982c371f74",
+  "inputManifestSHA256": "e62024c184db13c86ff236c2cae2cc7034eee511c9fc28a8609b1115b227d29a",
+  "compiledArtifactManifestSHA256": "3ee340bb11137edaa51c514685164acaeaed224c3961f5667d1046d0cbd8544e",
+  "junit": {
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "junitReportSHA256": "5b3dd12286345c6d8b1699d08a22985729b4ba8368e546fa1b4b75e966aaeab3",
+  "runtimeReportSHA256": "444064a6854a24d92765f669ffa2486d41f0ecab979ff395dc50cef94e748d6b",
+  "runtimeCommands": 1,
+  "strictCanonicalAdmission": false,
+  "canonicalProductionApplied": false,
+  "sourceSlice": true
+}

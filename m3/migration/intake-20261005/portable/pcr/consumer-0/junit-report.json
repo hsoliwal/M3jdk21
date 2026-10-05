@@ -1,0 +1,31 @@
+{
+  "status": "ACTUAL_SUREFIRE_REPORTS",
+  "totals": {
+    "tests": 14,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": {
+    "com.synexia.common.collections.jdk.PackedLazyCallbackSafetyTest": {
+      "counts": {
+        "tests": 13,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.common.collections.jdk.PackedLazyCallbackSafetyTest.xml",
+      "sha256": "71dbefe03a8d4ea81b46c26978a651e45609b91a2d3204817da3daea4de92a8d"
+    },
+    "com.synexia.common.collections.jdk.PackedLazyTreeMapTest": {
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.common.collections.jdk.PackedLazyTreeMapTest.xml",
+      "sha256": "af7a29dc2917b23f682454ec63fc0b37bcf85dee2e2e7dac2b0196e070a1d441"
+    }
+  }
+}

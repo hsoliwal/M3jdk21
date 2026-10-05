@@ -1,0 +1,1942 @@
+{
+  "baseline": "99221b0f25a1b09c32855d76e295b816f632a46b",
+  "lane": "primitives-current-992",
+  "files": [
+    {
+      "path": "synexia-openrewrite-recipes/verification/mre-20261005/primitive-closure/src/test/java/com/synexia/primitives/MrpFactoryTest.java",
+      "sha256": "6964b26d600cd63ddd956757ca0e40243946de1adcf705717838bee12302575a",
+      "bytes": 2291,
+      "gitBlob": "fa24e620241e7fa7fda54df60ddcf3612cd4aefb",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/repo/synexia-openrewrite-recipes/verification/mre-20261005/primitive-closure/src/test/java/com/synexia/primitives/MrpFactoryTest.java",
+      "origin": "authored-mrp-factory-contract"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/mre-20261005/primitive-runtime/src/test/java/com/synexia/primitives/MrpIntentTest.java",
+      "sha256": "b4cab528cd1154863e1776f48b56a9ae35002ce0fe655c266f21e2c64af26aba",
+      "bytes": 9583,
+      "gitBlob": "8f81ee8f2f88baeea5c1d6f97c266273a5233871",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/repo/synexia-openrewrite-recipes/verification/mre-20261005/primitive-runtime/src/test/java/com/synexia/primitives/MrpIntentTest.java",
+      "origin": "ADMITTED_MRP_V2_BOUNDED_INTENT_CONTRACT"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/AdaptiveEnumPrimitiveMap.java",
+      "sha256": "f8cca906fced9db2e8fbf10d814b496d1f15f55e93845a0ecada9a9258aa4c13",
+      "bytes": 6135,
+      "gitBlob": "8ce54c1298409342fa633fbb0f291ef8e31324f8",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/AdaptiveEnumPrimitiveMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/AlgorithmCandidate.java",
+      "sha256": "0a608ebe00747f3a2240bbcb2be698c670ba6c038e46282f6a5dd23b09a94fc5",
+      "bytes": 3030,
+      "gitBlob": "8730309eb5bb7f5622ede414ebf935357201007d",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/AlgorithmCandidate.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/AlgorithmKernels.java",
+      "sha256": "c1e07aca565771c3bd9261efcf360609fbd778a6e68b518b90ecf1e2ea2053f8",
+      "bytes": 15670,
+      "gitBlob": "b76a1290f764fffb4f64d9542d6bf4521878dee1",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/AlgorithmKernels.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/AlgorithmRequirements.java",
+      "sha256": "0149e52a0be234fd5234d49b108d079ce38d21358bbf012e6d3665c215d78e08",
+      "bytes": 17754,
+      "gitBlob": "95aa7ce56a121357029efbf9d8de1479035fd5ed",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/AlgorithmRequirements.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/AlgorithmSelection.java",
+      "sha256": "f7c97b4932c3866c5864ab9431f4c7476c7470c385f4048e9688db42c291aa9d",
+      "bytes": 1351,
+      "gitBlob": "5ba8dcba9af246caa0743ff9fb360e3321085cc6",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/AlgorithmSelection.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/BoundedProviderBackedPrimitiveList.java",
+      "sha256": "597119e271136294780290ff714b283a6aeae033e2f556cbb09cda173d4ebac2",
+      "bytes": 4915,
+      "gitBlob": "5b6811ee3f644b1513225cf671e6aef256786e7f",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/BoundedProviderBackedPrimitiveList.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/BoundedProviderBackedPrimitiveLongTree.java",
+      "sha256": "137e7c9b741ef312c419a15f905d1f22cd40b30f6a13d65592883aa884c7170d",
+      "bytes": 9557,
+      "gitBlob": "2ee33f016f3c70179d3f96158508391940e34db9",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/generated-candidate/synexia-primitives/src/main/java/com/synexia/primitives/BoundedProviderBackedPrimitiveLongTree.java",
+      "origin": "actual-pcr-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/BoundedProviderBackedPrimitiveRows.java",
+      "sha256": "c790a117f18812c6ab4106b867fc2d2962255763a29d1d3bcf2cd209962a1d37",
+      "bytes": 11605,
+      "gitBlob": "5ad5af4be17c953cdb440ed7297e98f9909682db",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/generated-candidate/synexia-primitives/src/main/java/com/synexia/primitives/BoundedProviderBackedPrimitiveRows.java",
+      "origin": "actual-pcr-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/BoundedProviderBackedPrimitiveTree.java",
+      "sha256": "66929697ffc39003a1fa1d015975a6a03fbba20531bbc17b5f535bc8f08cf2f4",
+      "bytes": 12996,
+      "gitBlob": "0009bb763bd7333fecc11d2c739836d5aea53512",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/generated-candidate/synexia-primitives/src/main/java/com/synexia/primitives/BoundedProviderBackedPrimitiveTree.java",
+      "origin": "actual-pcr-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/BoundedVersionedProviderBackedPrimitiveLongTree.java",
+      "sha256": "aaa96b03ad1ac7115ec4f012526939d5e12d1bcb4cc5f4fa4c3f25d02f5656d2",
+      "bytes": 10480,
+      "gitBlob": "28e4231c027fe2c6438aec16f3f3aad6fd173526",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/generated-candidate/synexia-primitives/src/main/java/com/synexia/primitives/BoundedVersionedProviderBackedPrimitiveLongTree.java",
+      "origin": "actual-pcr-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/BulkPrimitiveRowProvider.java",
+      "sha256": "a7cabd7700dc059cff64455bd3dba9a445a1db217876b41ebe46ac91292b79db",
+      "bytes": 1977,
+      "gitBlob": "55fd86e7ab7267f393603a2795ffe3fd2de802db",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/BulkPrimitiveRowProvider.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/CharTrieSet.java",
+      "sha256": "1bc28408907f9e7cfc0f437511d8ebcd78e81735d664c0c78a9a17008fe01210",
+      "bytes": 3614,
+      "gitBlob": "0a534a254c16f36a7f7e67db595c14197304d546",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/CharTrieSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/CursorPagedPrimitiveTreeProvider.java",
+      "sha256": "3b7b7c7146450a7fc0bfe7a27932335b96c03668a1d0ad9be5e16ce3b4b402ef",
+      "bytes": 1146,
+      "gitBlob": "18df87f92e58aa65ceba37b900a201758482db0d",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/CursorPagedPrimitiveTreeProvider.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/DeltaEncodedLongList.java",
+      "sha256": "49fdce54d8e0406d0bfc907820e4599049e8a14fad6f0ee867f6b2c4f169ab85",
+      "bytes": 4107,
+      "gitBlob": "eb96608ce7130004e14a95adeb294d0b5c0d5881",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/DeltaEncodedLongList.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/DenseCollections.java",
+      "sha256": "7b13870db69e4fb85822e069abd68a9f541e6494f6a925c803058e00c0ab8580",
+      "bytes": 20419,
+      "gitBlob": "2eb8cf24c37a5f7d2667227362426f13c7033cfa",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/mrp-current-v2/generated-candidate/synexia-primitives/src/main/java/com/synexia/primitives/DenseCollections.java",
+      "origin": "actual-mrp2-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/DenseDominanceSet.java",
+      "sha256": "07b3d8da2c80006f8b0ab43c6a320d80f242feb471bc4e5bac58c496cdadfb1c",
+      "bytes": 3769,
+      "gitBlob": "776a8f87dba8c613fb0fe48646b1adb36b88129e",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/DenseDominanceSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/DenseHash.java",
+      "sha256": "62ea2717c4ae3c98446ce5564c46d20bd70edcd990ea8116a992001b18f861ff",
+      "bytes": 1342,
+      "gitBlob": "0474a80b032eb1e1fae085c886e7b7fe71200bf8",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/DenseHash.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/DenseIdentityHashMap.java",
+      "sha256": "e8eb106ebf2bc0af5281a0827365f6b4f6fa1baff32a5c5028d4ae08220a82b9",
+      "bytes": 5478,
+      "gitBlob": "c188ef527c65dbeb3a97b5c965aa4f42ef61526f",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/DenseIdentityHashMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/DenseIdentityHashSet.java",
+      "sha256": "74b5ed237f4e963ba2759cec032c5f490247c642ace5c483e60f1c08c0f53748",
+      "bytes": 4466,
+      "gitBlob": "7396c6c8072892c99b7ae7aa18149cf4dd959a52",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/DenseIdentityHashSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/DenseObjectHashSet.java",
+      "sha256": "c5cb84e626d338f5182cd17340c8729bb5b08a88b61d0fb7dcba4e0b7867dd68",
+      "bytes": 5021,
+      "gitBlob": "25b03ceefd9bff04e9796cb282f21ebb3d9b3b94",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/DenseObjectHashSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/DenseObjectObjectHashMap.java",
+      "sha256": "b1aa757864ea671ca53207260da89c471bfe045669637d892d230e1e02315d41",
+      "bytes": 6079,
+      "gitBlob": "a7a852dbe020a7c18a2b2613a2618ed014299d09",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/DenseObjectObjectHashMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/EnumPrimitiveMap.java",
+      "sha256": "72eec8844295aba7c754367e9aa1bf6ee88b1437361ba6f3431c8d345b06c99c",
+      "bytes": 4318,
+      "gitBlob": "4ce35d213fa4d999d2dab8b1fe8bf8d10009b92e",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/EnumPrimitiveMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/FrozenRankSelect.java",
+      "sha256": "351e445d5120b65ec347be02b24444accb7228fa77c96026be2ecbcd407e427e",
+      "bytes": 7443,
+      "gitBlob": "85a8a6b7114fee1631287d1de8d06b0a164a614e",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/FrozenRankSelect.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/FuzzyAlgorithmFactory.java",
+      "sha256": "5009886010d85b873030153233edd7ae0eb57ac6a6f216991f85a9192786669d",
+      "bytes": 9676,
+      "gitBlob": "53d1d06d37aa71002264499a7f941b984ed063ca",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/FuzzyAlgorithmFactory.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/FuzzyPrimitiveFactory.java",
+      "sha256": "39eda31277b7aca485c27dba97e0d948384a05bf7854c7c754ae87eac57d1af9",
+      "bytes": 1839,
+      "gitBlob": "d3c3d3e877edf41b9a3649253f63018987a450b8",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/FuzzyPrimitiveFactory.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/FuzzyProviderCollectionFactory.java",
+      "sha256": "6428552407b92f36d00e2aa0e103a755450473ce0bf54fbf6e25ba99ba7f898c",
+      "bytes": 11928,
+      "gitBlob": "e47dd197df9fca8aba46dc4a3a14a1715ca4ea68",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/FuzzyProviderCollectionFactory.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/FuzzyStructureFactory.java",
+      "sha256": "6ed7a073965d2b8552447e33b046d19f2a01db931b2cd345699b1722c365f040",
+      "bytes": 28261,
+      "gitBlob": "580985b0330ee5c585c966de7473e80bdc48c26d",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/mrp-current-v2/generated-candidate/synexia-primitives/src/main/java/com/synexia/primitives/FuzzyStructureFactory.java",
+      "origin": "actual-mrp2-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntAhoCorasick.java",
+      "sha256": "ffc367464c570e89261e2871c960ca566305b043e444589bc1f993a682f8676e",
+      "bytes": 9171,
+      "gitBlob": "6bf5fe1ef7e813833b997d9233b52590846cb297",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntAhoCorasick.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntArrayDeque.java",
+      "sha256": "6d91274c2cee06f1b90f8846e6b32f21bfb79d9bbf8ffd63f06e09147e3e93e5",
+      "bytes": 9368,
+      "gitBlob": "e5a3dcf87e19d38a2fcf07148320919c958d483a",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntArrayDeque.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntArrayList.java",
+      "sha256": "f05a17d896958e4104e19dbd07005766a80d5be268f9ceee5fdde97ef6eaae52",
+      "bytes": 5081,
+      "gitBlob": "84f72c59c5945bf5657f870358b40d3cc39ba0de",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntArrayList.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntBinaryLiftingLca.java",
+      "sha256": "3e668cccba0270ba074f396bc41330675ed125d7ab197e9016d1229ce8993aee",
+      "bytes": 4179,
+      "gitBlob": "06b7f72b82c77802c6bcab4dab64683fce09a682",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntBinaryLiftingLca.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntBipartiteMatcher.java",
+      "sha256": "b3c37f0b5e74275d6770a8b0baad67528865368551c47ac679411156a6d73451",
+      "bytes": 5944,
+      "gitBlob": "86680b4ce20a910010bfbf507833158d282da901",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntBipartiteMatcher.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntCartesianTree.java",
+      "sha256": "6eee136321ebe0b4be99fd3601ec6b1eb29e186e0092795c8838fae9b66b541a",
+      "bytes": 2006,
+      "gitBlob": "de2812095e234554b15124b5784ea0496ab77d02",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntCartesianTree.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntCoordinateCompressor.java",
+      "sha256": "9b21be66b82d23b90766622692317c0aa089ad570dccd8dfa7763b535bb9f9dd",
+      "bytes": 2258,
+      "gitBlob": "bd2861fe3e4d3ee4b7adf33a004185485a771551",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntCoordinateCompressor.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntDagPaths.java",
+      "sha256": "dc0ca56fd96cf2786346059c0915a626be88182a770ebd19e7bab9a201932498",
+      "bytes": 2225,
+      "gitBlob": "183a0fc9034d61b325bb43ad4b29e7b06634eba2",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntDagPaths.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntDisjointSet.java",
+      "sha256": "9c53bea26ad3db30f8b03eb198386729a53412f987b23c76467b0688b339116c",
+      "bytes": 1865,
+      "gitBlob": "d77af7250e0eb2bbadd62031fcc73f6d0227552f",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntDisjointSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntDoubleSparseVector.java",
+      "sha256": "fbefcd5d095c09ab02a9aba3f077c53e961e563340196c9378a5434c057f80f9",
+      "bytes": 3802,
+      "gitBlob": "3b934a5a45b9a0c3cf9212d938b729657a53b1e9",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntDoubleSparseVector.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntGraphAlgorithms.java",
+      "sha256": "507f01ec0ee3ab0fd8abf9d6e2f80ecc5e198be3a044e85f3c515ec554bace7a",
+      "bytes": 5835,
+      "gitBlob": "4fc4af0af93082948d6129c127ab920893b4fec1",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntGraphAlgorithms.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntHashSet.java",
+      "sha256": "386d5fd669e5bf830a82352003a6c58856d16b32625304227b903f257f2442e0",
+      "bytes": 3904,
+      "gitBlob": "7ad80e21bd6c2dde2253ae9b9912131576bd4190",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntHashSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntHeavyLightIndex.java",
+      "sha256": "8445747b8910fbbffac01da681b9db3743d5ec307424a36edb3c2b1f561dc901",
+      "bytes": 6444,
+      "gitBlob": "5f5009417113c420def975df742a90b456b111e7",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntHeavyLightIndex.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntIntHashMap.java",
+      "sha256": "9ff5dbd896d33161f41f7c20f329788f9fe1422a47298f933af782695422f57d",
+      "bytes": 5044,
+      "gitBlob": "c5ec1b82e612c844ec19c9e3862155be6fd061bd",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntIntHashMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntKmpPattern.java",
+      "sha256": "6527382babcb7dc5178e5fd6aca2d4e7fb6664b0565d3c4090e13d13a9fe2f72",
+      "bytes": 3881,
+      "gitBlob": "6efd4e089521edd1d2f6d6689a54b47d5ebca3a7",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntKmpPattern.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntLongAdjacencyGraph.java",
+      "sha256": "16ac3dea40477c305d0d67471d2d6e72b0e49114dccbe9acee330b099545a4b0",
+      "bytes": 4051,
+      "gitBlob": "8dc99d1575101a1a9396f6a8c9f3fc78cd45f614",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntLongAdjacencyGraph.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntLongBellmanFord.java",
+      "sha256": "3b1f473dc8225c42d84ae5466015f8d8bbafa0af2579bb2ab7bbde271b50249e",
+      "bytes": 6936,
+      "gitBlob": "da28f9de1dacbc1773fce41b659414484801bf9a",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntLongBellmanFord.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntLongHashMap.java",
+      "sha256": "05d50d5dff1b5f2b93b77b0e7a72405c5a0d6668df26748ae3ed852f7c782f89",
+      "bytes": 5077,
+      "gitBlob": "fb7419a4615cb728ac7693782cb71bc4bce82782",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntLongHashMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntLongShortestPaths.java",
+      "sha256": "e2bfbb506b01fc1d63c2fd08af12f55e2d66f66a3e6fe33335a0434782a89e3a",
+      "bytes": 4175,
+      "gitBlob": "441cab248a0280688ae1f6a5d3aaa07ba310b1ac",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntLongShortestPaths.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntLowLink.java",
+      "sha256": "3bd15b2d865814db96367de54cb434f6e39ee72ccf72618cfd7f4adae40ab0c2",
+      "bytes": 4955,
+      "gitBlob": "950be674c975b78d22cf445d903d84ba203aa5a7",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntLowLink.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntManacher.java",
+      "sha256": "425d607dfae91ed93841a1f3613981460ca2bdf7b27ca2f0b33635babd14c296",
+      "bytes": 2709,
+      "gitBlob": "4fe34cf538baafad51ea10af8d6ea5cb33171ffc",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntManacher.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntMinHeap.java",
+      "sha256": "ddb47e9451a2b5171399935c353000b7e4957fe8afc24f8d5008c73958fdc82e",
+      "bytes": 1916,
+      "gitBlob": "cc6c819e2bfa257092dd8a877e3e8b0e6aa8184a",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntMinHeap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntMinimumSpanningForest.java",
+      "sha256": "134f5ae828cd1382e6868c4cf6fb258f02750f5a4d1a75d176b8e9006181f6a3",
+      "bytes": 3699,
+      "gitBlob": "a4b9027b2e36bb5fcd4862876410ca67439e30a5",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntMinimumSpanningForest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntObjectHashMap.java",
+      "sha256": "39036b4caa5fe51b999f550450c1c13402bebb52869ed7057f45be9a680f09ea",
+      "bytes": 4867,
+      "gitBlob": "6663eafad1ac598a5091400d926c642aa5763904",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntObjectHashMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntPrefixRollingHash.java",
+      "sha256": "3f45dae05f02f8ae22b61c8d333d5b789612c4f5c1da7f62f78a5d0a586c2a61",
+      "bytes": 4037,
+      "gitBlob": "5ca56000d8212cb63b52c1f43216791478d9a8cb",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntPrefixRollingHash.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntRollbackDisjointSet.java",
+      "sha256": "672b17322ee23a5bfe0f07196dd8f808e87a6476b7da4c62248c631e1c4e3922",
+      "bytes": 3676,
+      "gitBlob": "22eedfc4944fc14e3f0cf8d3f9dd47dfc1287b73",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntRollbackDisjointSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntSparseSet.java",
+      "sha256": "2e77f67d4565d60a08dbcbc4468a919ecfc00b817841b097ffe888c45649bd1e",
+      "bytes": 2837,
+      "gitBlob": "6e079e51dec049b07715973608bfb22f581953fa",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntSparseSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntSpscRingBuffer.java",
+      "sha256": "7d78e7de48656fca1e6901515088619480c407bbc3ce3fab089261d628b12a05",
+      "bytes": 2078,
+      "gitBlob": "4712e1746b5586b7825349a1eb5cfa12f481ca0a",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntSpscRingBuffer.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntSuffixArrayIndex.java",
+      "sha256": "32314e81c2fd363db576e15f0b6bae48e8e3bba425fa88ba64b8d93b41c28a99",
+      "bytes": 7090,
+      "gitBlob": "26f6b4386f6f4614ce42cde6db8da2e488ddb34f",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntSuffixArrayIndex.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntWaveletMatrix.java",
+      "sha256": "077ef4b6890014955eb69e679cfcca6b7915d64ee4d5270e494f763ee0bb94fd",
+      "bytes": 6171,
+      "gitBlob": "6219fab3a62b3d809050b88e8d1cac78aea08d6c",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntWaveletMatrix.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntZIndex.java",
+      "sha256": "0b557b0903432b77cab759693cf86e830d01c19846952c314c80dd399a5c24b2",
+      "bytes": 999,
+      "gitBlob": "13ad7d9260da13eb152bd860d6d285112bb1e3ed",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntZIndex.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/IntZeroOneShortestPaths.java",
+      "sha256": "f3195bb3d61102853bbdcc50a4f92f61cc629b335960a2a074ad447fa8b96f08",
+      "bytes": 1540,
+      "gitBlob": "a9e45e4dd6c62a0c4e9db4134b2b1f25ebe4db2e",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/IntZeroOneShortestPaths.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LazyBitAddressSpace.java",
+      "sha256": "74266664426026dc5b6b1d250ee3475d820606fd4ea5d45918df8f05c1e47e52",
+      "bytes": 6688,
+      "gitBlob": "dcea79e26f3654203e186ce8a4cc6080317466b4",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LazyBitAddressSpace.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LazyElementFlags.java",
+      "sha256": "1373d80833ef646d1f463e15afe33f113acbd8ceae2ea4051279660c1a66c629",
+      "bytes": 1765,
+      "gitBlob": "2936817d5bda126c76063778e301cdec31c3ed65",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LazyElementFlags.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LazyPrimitiveAddressSpace.java",
+      "sha256": "72578984d197b02d2cc62f8a1fb65b1ec3b5f9dd177814f231a54e6e25514bb0",
+      "bytes": 7018,
+      "gitBlob": "3aa5527a7955644dc55f5010ffa0a2793d941ff0",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LazyPrimitiveAddressSpace.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LazyPrimitiveSoaTable.java",
+      "sha256": "158630ffd0b3127994ef4d46ca5031d5ba9a3287d2d253ba85ee0edd24dafcda",
+      "bytes": 5225,
+      "gitBlob": "1d34936a1c279e919a14b24687fc37fbf5c9864c",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LazyPrimitiveSoaTable.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LeanCollectionFactory.java",
+      "sha256": "3bb093662bcf51d2cb4c29142eaba1ba6876c088d0ceef62962933cf5c7b7bd9",
+      "bytes": 7599,
+      "gitBlob": "7baa96ce45a56e1a973fb603275571144ab480bc",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LeanCollectionFactory.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongArrayDeque.java",
+      "sha256": "7c54012d0758498e78c4b8e445969849f8a9ff3c0100888ccef952a9a76220ff",
+      "bytes": 2197,
+      "gitBlob": "9b34c54dadb3d5b1ce6ab5872d453f4c9cb9850f",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongArrayDeque.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongArrayList.java",
+      "sha256": "b7158b17bf3d277980718beb3f32b053a4a737c1b882cdce6a78defbb123f32a",
+      "bytes": 5110,
+      "gitBlob": "2991dadd2c897f7ab76607259922aa3654a301c4",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongArrayList.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongBitSet.java",
+      "sha256": "d78f11666803987387179958097cfc0418f98f40df099af393c64c628d19ac17",
+      "bytes": 2809,
+      "gitBlob": "bf58f2ffcd1bfe076c142782b583c3d19aa59af5",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongBitSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongBloomFilter.java",
+      "sha256": "77663b456e8094866ddb63636acfd39ffa02af4d289836b41ad2d3a852454c26",
+      "bytes": 3510,
+      "gitBlob": "86c23b56743ba55efa222470168f27ace101bc1e",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongBloomFilter.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongByteHashMap.java",
+      "sha256": "d5d0050d8b78a7d54965b6649b3bdb121193593acfb906a8a5291725d19678bb",
+      "bytes": 6594,
+      "gitBlob": "7bf91d3c77c647b77f9cf78fd9e7e4e786adcb8b",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongByteHashMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongByteSortedMap.java",
+      "sha256": "9fc6ea89c2b3f85c77a09211007f2faa1d2aa26108b37fb05f9ae9c12831e783",
+      "bytes": 7041,
+      "gitBlob": "6ca1ad3c80f04d0943a259a6156eaf059a0cdb55",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongByteSortedMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongCountMinSketch.java",
+      "sha256": "63a464a553c6630b5be457de9538380e1d7e7e7b4bcd6affdbcd4eb1fb673c59",
+      "bytes": 3584,
+      "gitBlob": "101dafc0bb1023fd1abb6317678222d339b01f16",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongCountMinSketch.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongCountingBloomFilter.java",
+      "sha256": "56cd4a03bbda612de4f311d3de1af7b96bf44bdf429970924e8edecaf0679828",
+      "bytes": 3236,
+      "gitBlob": "3ebe8568492d52530e576095e14c895986d7f9d1",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongCountingBloomFilter.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongFenwickTree.java",
+      "sha256": "ff60712bf7dd86669c3b7ed0f38527184b4d16ceb79f80819bec19cf3ea76a85",
+      "bytes": 2396,
+      "gitBlob": "62f0edaf0d0d90023c0024ba17b45a5c2e25fee3",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongFenwickTree.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongHashSet.java",
+      "sha256": "18adfd906d24266df7294b57fc82cd14a3aa8aa08dfbbb2b6adb2a3423b79847",
+      "bytes": 3940,
+      "gitBlob": "7be50c90374233a6fddf903e7196ffeb7e77c1e1",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongHashSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongHistogram.java",
+      "sha256": "18c42996e6f61ca18d4079110de7c02e75aece17f6c045b48eb39123678e584f",
+      "bytes": 4666,
+      "gitBlob": "7c00ae43b24823407fe568159623539d93e0202f",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongHistogram.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongHungarianAssignment.java",
+      "sha256": "40399327a9b98acabba126c02f7f9b45de273873ede3864f5751fe949f363349",
+      "bytes": 4306,
+      "gitBlob": "54d1544441aa7c73d1bd157bc195dab103812267",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongHungarianAssignment.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongHyperLogLog.java",
+      "sha256": "73fc05c0a5081c709c9c146bf4dc92a5469b14ee763db5642ee9b5976ec4f584",
+      "bytes": 2471,
+      "gitBlob": "d7267d3381f1d31f14dd00e0c3c5784145cd6d37",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongHyperLogLog.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongIntHashMap.java",
+      "sha256": "09122801d5b98c03d613894208ab388fcc8511dcb9fb1bde972a32a0ead6ab16",
+      "bytes": 5083,
+      "gitBlob": "c9182ee2d3f3bda109e88e84e73c18536ca67957",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongIntHashMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongLiChaoTree.java",
+      "sha256": "6fc004bc04766b2e7e931c2980742f4c0c83b0700b6ba48d4b79bcf4763e4411",
+      "bytes": 5016,
+      "gitBlob": "c9acff98e5d511837d5b7c321ad35520cd8bbf33",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongLiChaoTree.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongLongHashMap.java",
+      "sha256": "4428a4f02bd81242c5b29795d62ea3bc5a37bce69ace1b4f777eeb67b2081e99",
+      "bytes": 5116,
+      "gitBlob": "9dc68afec7178d57009983436126a8e1864f233d",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongLongHashMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongLongPriorityQueue.java",
+      "sha256": "5f77ffd0510ef6bc12789611112cb46f1c2eb2f44d67c36dec7db4b2f3e50ca0",
+      "bytes": 6606,
+      "gitBlob": "3c3911baad34a25b9a2878aea50894bf695089df",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongLongPriorityQueue.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongLongRangeMap.java",
+      "sha256": "252dd6459e1bceed1f935aa6ae39bb892a3013d53a880d2356800bf0020f44cc",
+      "bytes": 7148,
+      "gitBlob": "ef289a25090041022ed88266c248e5202c8a0329",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongLongRangeMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongLongSortedMap.java",
+      "sha256": "b8fbdd25e24964d4857b106bf914d59de9da0019e3b9ead83a154988f4fd8584",
+      "bytes": 7717,
+      "gitBlob": "5489839ae45c7e5a33515ec61eac94f071dbd1a0",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongLongSortedMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongMeetInMiddle.java",
+      "sha256": "2ce99713bdbbe4f7d4287993ffe6197aa69ff6e89b6a959df05dbfc65d40d5a3",
+      "bytes": 2469,
+      "gitBlob": "0f57b367c1b3914c7b0dabf68a038e87a2abc00f",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongMeetInMiddle.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongMinCostFlow.java",
+      "sha256": "0d52d7acec60022392721dee7ee10da6760a1fb49013a8160559b11c13f68155",
+      "bytes": 10529,
+      "gitBlob": "fb33f92b07d99944360fd28a0739bd547b490a0e",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongMinCostFlow.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongMinHeap.java",
+      "sha256": "ae3e5b2bb070c6a3bd006bde95f92439f1e5780d30630a86072cbce15fd47759",
+      "bytes": 1927,
+      "gitBlob": "8bc946f055e0ce4d71426eeed4e39332cd013a2e",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongMinHeap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongObjectHashMap.java",
+      "sha256": "a9a99bbfaba5765b0161f175b5f8f9103679dee821695c9e4ecb996a4a652a4f",
+      "bytes": 4900,
+      "gitBlob": "20f0ee2b66c03b3df6f1331f6fc91a0d6a034bdf",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongObjectHashMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongOrderStatisticMultiset.java",
+      "sha256": "25c7162263577ec9a18aa140797c96bc916da4069dbd54a6758546efe6ba42c1",
+      "bytes": 9787,
+      "gitBlob": "a9ba2d07cba880a68ba62e86e7d1d8754c7fd593",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongOrderStatisticMultiset.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongPartitionSearch.java",
+      "sha256": "202d3621dbc86f60d1bc3bb31f23cc6213c11c45749d5ba73d238d24e317cac3",
+      "bytes": 2953,
+      "gitBlob": "83d5f4156899f2a6c88457f74c459bd3dee9a38e",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongPartitionSearch.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongPrefixSums.java",
+      "sha256": "fe638f5a67cae5f962e64fa8d1a25ade26c6b56e18c6ff28a8a3bcde6410a12c",
+      "bytes": 2006,
+      "gitBlob": "33e383494d1896e0d50ddb8ee25bebe67484045d",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongPrefixSums.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongPushRelabelMaxFlow.java",
+      "sha256": "1b0362ed4d7c77d686172b57fd69dc1caa6867fa852405aa7b3da188242e9a3c",
+      "bytes": 7718,
+      "gitBlob": "9436a9baf48288c389ccfd2bca27accee4e7dd99",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongPushRelabelMaxFlow.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongRangeSet.java",
+      "sha256": "39a1de35c57c1bc1a5bc3ae9178ce48ef20a5b7f553be7879537cf631045e5ef",
+      "bytes": 6711,
+      "gitBlob": "8431bc31aedbefe226324f1b211a5896a1333922",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongRangeSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongReservoirSampler.java",
+      "sha256": "08839a35800ebacdfdf7012dab9e9e80802492a6a413eb40d78291fb5936e96f",
+      "bytes": 2534,
+      "gitBlob": "aa3b86a12a784d56608f27c12fd5beda8b40491d",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongReservoirSampler.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongSegmentTree.java",
+      "sha256": "a8ea0a5473cb1950f6077d1e39220deeb4fc2182e46c024d3eefbef8a424ab68",
+      "bytes": 3387,
+      "gitBlob": "f6e9e71d1dd58b3156fa175e9f02dad605cb5f62",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongSegmentTree.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongSlidingWindow.java",
+      "sha256": "aa14db821e13f09e0e04e77c081a39791577b621e074c3771e74df69ca79cba2",
+      "bytes": 2699,
+      "gitBlob": "9a73807bf4bdb21fecaacdb52f450fd6b2683c0e",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongSlidingWindow.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongSortedSet.java",
+      "sha256": "6fdd5e3f19c56c54528d772b1312be9df4382687ebd8ed2b8491ffaeab12bb0e",
+      "bytes": 5697,
+      "gitBlob": "3b38bceb996d927bc114ceae973aad87ae2710ee",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongSortedSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongSpaceSavingTopK.java",
+      "sha256": "501b699f4e111ebc5c6b29bccab7ef21dffe3b6207283d01eb9d63f2cdd079d9",
+      "bytes": 2672,
+      "gitBlob": "7dbffbf290d42ff113eb3d5fc094e4440004bd2d",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongSpaceSavingTopK.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongSparseTable.java",
+      "sha256": "519932e9b05fa0c101692b2e7d8c769646c3fd4bdac3677f718826f27781e6d2",
+      "bytes": 2456,
+      "gitBlob": "631d0c3da8b275b38d9fab9967073f70c9586ca8",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongSparseTable.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongSpscRingBuffer.java",
+      "sha256": "6b1589e9d8262a46cb6a49ba013871a5277b4507b98627f9437992f277c6b59d",
+      "bytes": 2089,
+      "gitBlob": "dbb67468d032f6440eca6dc49b2e09645e2d63be",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongSpscRingBuffer.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongTimingWheel.java",
+      "sha256": "6d1873f400e56fc4d61014ba4e876c57cad68e14136c4fc472665bcf6fe9758b",
+      "bytes": 4501,
+      "gitBlob": "bcc687afd6d42a7e256432fd7cf1c366208e88e4",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/LongTimingWheel.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/MonotoneLongDeque.java",
+      "sha256": "74ad848d48f72e891feeb920d9562dc007430570192686644d2f0448b1ff3950",
+      "bytes": 3483,
+      "gitBlob": "b241b152792b0531b522341f27f3c96e305367ba",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/MonotoneLongDeque.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/ObjectCounterMap.java",
+      "sha256": "21fa5ac34877acf45336e1a7efa82966e097fd4ab1f62ae9f54b4ee3ad4f56e0",
+      "bytes": 3410,
+      "gitBlob": "0389462dac9be6d7a4084239fd20937d746157da",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/generated-candidate/synexia-primitives/src/main/java/com/synexia/primitives/ObjectCounterMap.java",
+      "origin": "actual-pcr-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/ObjectIntHashMap.java",
+      "sha256": "b2d9cc47126845996052a99a27ae992ea987413fde3dd737e4cc8d9dce8acaa6",
+      "bytes": 4992,
+      "gitBlob": "c9f46f1d47267324830712b4cefad1f168eb50da",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/ObjectIntHashMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/ObjectLongHashMap.java",
+      "sha256": "0c7f10a94864eafbc66eb727e08e72ed9e79dc4c556753126eca7a185051a896",
+      "bytes": 5020,
+      "gitBlob": "78fdc34802daa7f2bb8eb1e9765fb3c7bd7e10ec",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/ObjectLongHashMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/ObjectPrimitiveHashMap.java",
+      "sha256": "0299ca2f70313fe3c8e8270a06a6951a2c581011872cf135a0d17e8b627afb04",
+      "bytes": 6644,
+      "gitBlob": "bcd1ad2fb801157f6055f9726222628eecef7b06",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/ObjectPrimitiveHashMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PackedBooleanList.java",
+      "sha256": "683d5a9e2c19d0c8a8dc84c7e38adc70fa80036c1567a41d9753ec4cdf54b921",
+      "bytes": 6107,
+      "gitBlob": "f06d03089e2b72fac8778ca6513b3607ac0eabcd",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PackedBooleanList.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PackedUnsignedIntList.java",
+      "sha256": "259a10e1894487160dd7a606a6ba5b333749ca26b5b73e29322fa7265977b5fb",
+      "bytes": 4738,
+      "gitBlob": "7752b16dbfaf75a1fe056c5038b0d217bb8d412f",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PackedUnsignedIntList.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PagedPrimitiveTreeProvider.java",
+      "sha256": "632bb97fc34e1c3d639180196f7666f09ed5a853e6a08090f894bb5a37f42d0f",
+      "bytes": 1959,
+      "gitBlob": "3bbbfc29aaf5f37308524fedee1de1c314867064",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PagedPrimitiveTreeProvider.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PersistentLongSumTree.java",
+      "sha256": "5e5ef3ad53976c8e287427f3a7dc4d1aaa6ae40b02823bb5f3b38a7ac8e6800d",
+      "bytes": 4935,
+      "gitBlob": "cb0a9170f2ec892463eb484cadbc63ab8565159c",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PersistentLongSumTree.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveAdaptiveByteMap.java",
+      "sha256": "3b89e7637512394996d5e4225fb024a3b0e9bbc6c83fa46a0c13920891446d63",
+      "bytes": 4981,
+      "gitBlob": "70922a781bc48985a8c08d58701d5946dacdb1ea",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveAdaptiveByteMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveAdaptiveCharMap.java",
+      "sha256": "d3dc72c86ffcd5519c27c80c004521d7ae9040df6769a43e64eba7a4f9d2ba61",
+      "bytes": 5474,
+      "gitBlob": "c66c8a213d414dd160ebb644f924c7787d367c78",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveAdaptiveCharMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveAdaptiveMap.java",
+      "sha256": "87b01f14c8771bb7c5953478cd29daf2aa3a60ce9d0d46173ece5abac8a30991",
+      "bytes": 8447,
+      "gitBlob": "71d65c5c0854e6d3f4ac0a67b8e39931b44f604c",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveAdaptiveMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveAdaptiveShortMap.java",
+      "sha256": "b1dba680fc4de4486b4bf376984c8db09e8a3868c4d347ad32ab948fff2b0d8b",
+      "bytes": 5285,
+      "gitBlob": "2c088919255ed0d3dcc5a6113d975b1ec740076f",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveAdaptiveShortMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveArrayDeque.java",
+      "sha256": "51d38ae358885d6570363ce6fe5ce4cd0c5e31f57baa2cd7d5ee49ac611a2540",
+      "bytes": 12187,
+      "gitBlob": "7b2bfc81d5fe8fe69b6c5258d66f521d89ae1dec",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveArrayDeque.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveArrayList.java",
+      "sha256": "d62843c2a201eb50028d6caa66db6ed03592e90eb7ec900aeb141b7cc6138170",
+      "bytes": 13518,
+      "gitBlob": "2b2f7d73fbcdc1d8ea6b65c0520ca526d7306f4d",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveArrayList.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveBag.java",
+      "sha256": "d9e7b218e8c562758b7e5a52f43a94e8c02b9e71616f8085ef535d2ca8956d74",
+      "bytes": 4077,
+      "gitBlob": "501e1cf9df31876ddfdbda1a6bca69c3c424d771",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveBag.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveBiMap.java",
+      "sha256": "80912834d806f85ba383ee1becb81880c8857c3d6d737a7ec6d0a419c99ab087",
+      "bytes": 6259,
+      "gitBlob": "7cf4a9d5251ad1f962e725ffb03ebaf32e2fe479",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveBiMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveBigArray.java",
+      "sha256": "b2a44b6eb0abe84cc9323ce42f38020c0433642e7c4b0dbe2af5507774625dd8",
+      "bytes": 7296,
+      "gitBlob": "74be18a620779691da8cfa87b003366145d173d6",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveBigArray.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveBigHashMap.java",
+      "sha256": "7e4531a6bc146d10ccc2b6588de8b9cdc047982bf106aa2eb2fd0b9ac35488c7",
+      "bytes": 8136,
+      "gitBlob": "e100a368727c12908205a63d35770731b01a0816",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveBigHashMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveBigHashSet.java",
+      "sha256": "49df9a31784019664de1977ecd4c8946cc3e4e5f8cccd50f368c59763fad03cb",
+      "bytes": 6553,
+      "gitBlob": "0648ecf94abee3d0f2404ddca9e3ee51408d1290",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveBigHashSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveBigList.java",
+      "sha256": "75b33f3b76f0cef58e33502de308b3a8c9443680b8b56324f4fbd9e9784e57d7",
+      "bytes": 3220,
+      "gitBlob": "9c15144441e4a74016b1af91502015f70b2bbbab",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveBigList.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveBits.java",
+      "sha256": "160f4ac1040a1f4cf4d0c0723ec9abdefb955ba37e4b3a563de6dd5c6ce9a649",
+      "bytes": 842,
+      "gitBlob": "671ec04b4f5334ca1c7e45c7ca915609b199ffbc",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveBits.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveCounterMap.java",
+      "sha256": "8ea7c506e625a44a82b0ddb9845a5ee8b791d9aff9f9efb54ca80877d1d7f30f",
+      "bytes": 3056,
+      "gitBlob": "e731a56ef0f32c0d5f9ec4939ec271421113715b",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveCounterMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveDirectBooleanMap.java",
+      "sha256": "e95475853fb4a90af271bdb1f9fee939a6dcaa130624a3b09cfbf5375120aca4",
+      "bytes": 2872,
+      "gitBlob": "dd258538f2deadd13c4c7db4831e72712d21fe5e",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveDirectBooleanMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveDirectByteMap.java",
+      "sha256": "47d9a380833a6d78ade9cc12a2ced9d67b937f0a5f3356573f3d202dacc0657e",
+      "bytes": 5340,
+      "gitBlob": "07a49472ab3a467737e1c373e0a27017d9316487",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveDirectByteMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveDirectCharMap.java",
+      "sha256": "9f4ad3f418bf66279787010bc9da1882b715bf56d95ac675b46f18654050aa00",
+      "bytes": 3125,
+      "gitBlob": "4024f1fde4413a4c9206d82ce7392cdcd7ad5334",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveDirectCharMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveDirectIntMap.java",
+      "sha256": "2b220b673896dde3fc9fa5178497471ad5b6d6e140a7d48022bdb6de69282a00",
+      "bytes": 3273,
+      "gitBlob": "3de749cc32b0e66cf2f18b16d48349e33688f98a",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveDirectIntMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveDirectIntTable.java",
+      "sha256": "979164f51ff2437ba797cb7cf293755af798271465f4803c2668a03c64e3c22b",
+      "bytes": 5016,
+      "gitBlob": "2d93ef91ba73cd15ec94171d23e78e119ccad1e6",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveDirectIntTable.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveDirectShortMap.java",
+      "sha256": "9bb013541505f026d5f17a6cd7a1cc36ebb2edbb5be688a32f3330527a9b8b18",
+      "bytes": 3333,
+      "gitBlob": "9d75a468e8791d14198bd1915433780163431798",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveDirectShortMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveDoubleEndedPriorityQueue.java",
+      "sha256": "7fd60ab726c8608f46dc7353b22b2a57be15b8bb7643b4bcb5bedbba9c2479de",
+      "bytes": 14116,
+      "gitBlob": "d1507aac2d65b16f84559caa6d3a02c908bbf1ef",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveDoubleEndedPriorityQueue.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveDpKernels.java",
+      "sha256": "b8cf1ccd07daf2d497006c89a4ade73477fc487c6dd5f4bc75a0f86a1e3ba73a",
+      "bytes": 5092,
+      "gitBlob": "16d7a7a586482dc50c342a98d18d7d115ce38dcb",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveDpKernels.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveFilteredList.java",
+      "sha256": "0e5d6f5e6fba654d55717c0de8225f4d321a2bbfd14327f7c19db468cdb3b04e",
+      "bytes": 1378,
+      "gitBlob": "ccc8512e32c5e69230345d4195269f1945a0d21c",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveFilteredList.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveFilteredSet.java",
+      "sha256": "7dea7ed362e760f30f325063ba7774530dc0bc0c384050bceb840dd3f36f092e",
+      "bytes": 1334,
+      "gitBlob": "83d6151f369435d195f5d61ea0a3009002041533",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveFilteredSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveFrozenList.java",
+      "sha256": "965ad54eb489d09db9e9ce6726613741884beb2d0194fe6ce8d7321a4e2af8cc",
+      "bytes": 1535,
+      "gitBlob": "8af7d2c2bec2b660acd73761bd61c41112d3cd32",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveFrozenList.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveFrozenMap.java",
+      "sha256": "2bc2143e748c5535f1fbd1ebf99f5a7a0c1b2a66f44407f043174474d501b825",
+      "bytes": 5144,
+      "gitBlob": "3b46196b306753cd7c2b7c20f649f5f8d176b61e",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveFrozenMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveFrozenSet.java",
+      "sha256": "83a5ece2811d89bc214c7dd43ddc7142afd53af8ed78cdd559f0de89c9f9a7e1",
+      "bytes": 1560,
+      "gitBlob": "3a2e58b5744ebaaf5b9c3db4a5f1201bdd6449c0",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveFrozenSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveHandleTable.java",
+      "sha256": "ef42feb7a4033a6dee7eb0577c0335ef9cac2bbfc4fbeba6541c257c39106918",
+      "bytes": 6799,
+      "gitBlob": "52c3db6234a6a005a408348ae0a0c96c1b1d4423",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveHandleTable.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveHashMultiMap.java",
+      "sha256": "60c18b9570cfa4baec979b50a884029b73957da8c63f8fdca935ee7dccb2b69d",
+      "bytes": 9310,
+      "gitBlob": "309b87c3ef32fb3a197b076034f74f28a08b9733",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveHashMultiMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveHashSet.java",
+      "sha256": "9f46d87ec06f2405c4d70d67e8f1eca1b1415a65e88c4153f212287d4fdda49f",
+      "bytes": 5857,
+      "gitBlob": "51f5f02e919fb69177957dc24f4f43498ed8b01b",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveHashSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveIndexView.java",
+      "sha256": "4b1d2cfa3150a6937d5239b09d7dc7f12de8caa6e3fa5c02b199c020a509b2a4",
+      "bytes": 6147,
+      "gitBlob": "24d16010813ea3c801e0bbef0374a661bcffaa76",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveIndexView.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveKind.java",
+      "sha256": "415a237f423d6705a9fe610ac7e1dc302dfabb356e306595ad464f23c3737a8f",
+      "bytes": 14428,
+      "gitBlob": "4bc7c258073072e0310d1a50c3885ed55c50816b",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveKind.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveLruMap.java",
+      "sha256": "0452f3ea8c6148cdfe54d9ed45e7326d0d4a2b29d339b81a4bdefeacdaa75008",
+      "bytes": 7186,
+      "gitBlob": "1a8630adaa0079fa26565bc3be9bf63f6f9f291d",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveLruMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveMinHeap.java",
+      "sha256": "7e4b6a0426975bd6c83ef4710fc4980ce7cd958e89650569d93989a9e2b09728",
+      "bytes": 2797,
+      "gitBlob": "abdd76da45628dc87cc71194ce0188b0bf09e49f",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveMinHeap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveMpmcRingBuffer.java",
+      "sha256": "4ee6f0e8f27cf520e88abf2164182fc0c5790de12de332320469400fe546123c",
+      "bytes": 12673,
+      "gitBlob": "3c27d6f08cec67b8c40f236fadbe1aeb2461bcb7",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveMpmcRingBuffer.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveMpscRingBuffer.java",
+      "sha256": "424e6399f839fe307292413c311754344e384d744cc6feea1e1dd4ff48bf7962",
+      "bytes": 7433,
+      "gitBlob": "16c51ff5730d61ac2a8bb431428a87fcc4ff1a9a",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveMpscRingBuffer.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveObjectHashMap.java",
+      "sha256": "376d382114df00ef91a67407b96fbd726796656e725a6d610c49404ca4562e04",
+      "bytes": 6676,
+      "gitBlob": "c087b2e36e1d0ec5953ba694f4c1f2a88c208241",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveObjectHashMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveOrderedMap.java",
+      "sha256": "aae3aa416ea7f88d454d8d65527c8c63b9dbd4ec571522c036de7ec5932b5147",
+      "bytes": 2377,
+      "gitBlob": "7f033166b87df1e4eac88d46cf8c73e9809eaaec",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveOrderedMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveOrderedSet.java",
+      "sha256": "5ec5451db174df40160f261f337c9bdd36677cd002c8d013f77bd709bd5cc932",
+      "bytes": 1776,
+      "gitBlob": "ce839aba8ce6f832e67b7561f43e07663c1337fe",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveOrderedSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitivePairList.java",
+      "sha256": "6f3214d29e0a8c281b703d2d6e36029f6f9bb8c92f32097f0de6ccfad1be90bb",
+      "bytes": 3515,
+      "gitBlob": "18b4df100ea3e0c35c0c60beced1de1fde3557b0",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitivePairList.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitivePartialSort.java",
+      "sha256": "a9554a975e70b919dd38b8ec6d1dd623da56a4f2c4cdf770c8abf7f3454f3c76",
+      "bytes": 6217,
+      "gitBlob": "b1d55828cea936c20fe5a2fee249538d974254d3",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitivePartialSort.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitivePrimitiveHashMap.java",
+      "sha256": "7dd57ca6a174add60ebbc346384924a4c6750077946d55ad46d324f7c8dadc94",
+      "bytes": 14080,
+      "gitBlob": "2d7297db60608f4cf6ebc5781f7f217509155800",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitivePrimitiveHashMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveQueue.java",
+      "sha256": "e0f15d5f9b785e85daccd1e3ad21037bb5eaa20384d31ac29fe0c2a272d4563b",
+      "bytes": 1019,
+      "gitBlob": "20e7a1385a65c813c81fa9904a26b042a99e5583",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveQueue.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveRoaringIntSet.java",
+      "sha256": "f7631108368242aa48dc3710d6f652e26e1e7d1c08b3a72cb8651bd5ad2b8b1d",
+      "bytes": 10809,
+      "gitBlob": "2583f69f8d9ce09c331c00d6deaf575e07285f62",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveRoaringIntSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveRoaringLongSet.java",
+      "sha256": "56b94a8dd3dfec193e06cf8d1abfaf7eb1e7a2c4c98122717d9d0d6c283bfe6c",
+      "bytes": 5226,
+      "gitBlob": "94d690a7d8063b060b884d0768f4d4706541f1f4",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveRoaringLongSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveRowProvider.java",
+      "sha256": "3e93a3987d88cb6babfbd2f943350f83e255c68c3a6182d63308455dd73bc50f",
+      "bytes": 541,
+      "gitBlob": "fcd32f22fa8d2c5037f730d119e4360572d0c884",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveRowProvider.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSemaphoreMpmcQueue.java",
+      "sha256": "3eb0d01fc452d564ccf8c947df63275f95f0f9ba8a5a4f0082233ffb879a619c",
+      "bytes": 3858,
+      "gitBlob": "30c95b053778340fde6eafab0e9e4599d60bb7a0",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSemaphoreMpmcQueue.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSoaPriorityQueue.java",
+      "sha256": "22fcff225e2f03667c322a2a6590e8be3ee560931ed904b0b72f83fd1c47ef0e",
+      "bytes": 4323,
+      "gitBlob": "58a4d96d4e3a9ce511fdf3197d802200d8d6e7d3",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSoaPriorityQueue.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSoaStore.java",
+      "sha256": "658aa14c28e829401f824e58a620f7446ea9916216b670c1ca8dcf2a4efc66a5",
+      "bytes": 17651,
+      "gitBlob": "53b12f476b0e4bb16932ac78baed42bedc9773df",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSoaStore.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSortedArrayMap.java",
+      "sha256": "6bb91c099f0ea3e1a4b3c900b2a48683a6bdd70f7c89672f6aa864d3fe43a3d1",
+      "bytes": 4604,
+      "gitBlob": "0eee957d8e8b56644312e597a9f8eedf67d4e767",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSortedArrayMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSortedArraySet.java",
+      "sha256": "78bc96bd89a2b7057309d826e3c01eb52fa0b7070e9c882aebca365f56e97099",
+      "bytes": 3396,
+      "gitBlob": "8f9516d8e475882416c32e2713c09ebcfaac0d87",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSortedArraySet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSortedBag.java",
+      "sha256": "0040b93bca1393735b743a45ae17fadec7c1ffcf3a4f55628021bb324c478218",
+      "bytes": 2416,
+      "gitBlob": "a1f46b7ddb216c180007a7eef6d7c44e9c855d0d",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSortedBag.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSortedGapMap.java",
+      "sha256": "e96b1c5a87ca46c0015bc989c92a01c4cd936fa4f3ed6ca5834e24124eebd5ba",
+      "bytes": 7463,
+      "gitBlob": "e404e4aaa16e6e52c85bc1f0eebc60a9e7ed9942",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSortedGapMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSortedGapSet.java",
+      "sha256": "59a65b20046547e74dba146ed592955d8ba613ab6ed176d3df3e51823887c3f9",
+      "bytes": 6198,
+      "gitBlob": "b7c50f5e87f92bb1a7496755c691ac756c34402f",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSortedGapSet.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSortedMultiMap.java",
+      "sha256": "fd535ece7b723f0f7a9b4ee9ca1a8485aa33897401380226a6bc678576381886",
+      "bytes": 4341,
+      "gitBlob": "629c3bf32908b6090192100fd67ca5def628ff10",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSortedMultiMap.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSortedTable.java",
+      "sha256": "4d110be656860e166bfbad35e1601e6838136c431c9fa1002ef2d30a795d00ce",
+      "bytes": 9997,
+      "gitBlob": "325ab5b7040598c6e47091e927fb4f4fc3e42c8d",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSortedTable.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSpmcRingBuffer.java",
+      "sha256": "f90d58c87060b82b92b33e10206dd45408aa7484eee1a9b1f3d2b7feb0f5d9e0",
+      "bytes": 7497,
+      "gitBlob": "62a5646f9ff4c3516720808ba0b043f72cbddd60",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSpmcRingBuffer.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSpscRingBuffer.java",
+      "sha256": "5fa68f27ae6f83461a014fae583b102746fc63215dbcb702474bf292116f9e5f",
+      "bytes": 3075,
+      "gitBlob": "f492b741cceacb5ca981528062e3c2150966d51a",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveSpscRingBuffer.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveStack.java",
+      "sha256": "6efd2d144025c825422c7d76e648ff8bf9e3b5256f1cd04db1dd0ea3346e390d",
+      "bytes": 1035,
+      "gitBlob": "1074b7d91516fb8e28498166f11398e607e8a4d0",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveStack.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveTopK.java",
+      "sha256": "dfbea42f9486acae9f7a6952cf6c847c636596f15fc36bf4a9ffe8116d0a1bff",
+      "bytes": 3385,
+      "gitBlob": "1db2491024a1c90295feeccecd3718906017eb8f",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveTopK.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveTouchObserver.java",
+      "sha256": "0c969296757784b655d3936bb58ff1053c509e7b4e8e81ca78e8182d2d63adfb",
+      "bytes": 791,
+      "gitBlob": "75ef3153edfcb2ad355c685872ab68ca8432dc26",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveTouchObserver.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/ProviderBackedPrimitiveList.java",
+      "sha256": "6c0c907191c694aa1156f3417906e5dff70c72c68218029a6c195cb75c61cc3f",
+      "bytes": 5099,
+      "gitBlob": "159cf7aeb961ab257c0528bb2be3365089c8cbb2",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/ProviderBackedPrimitiveList.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/ProviderBackedPrimitiveLongTree.java",
+      "sha256": "b89245779c8fef4c343799852040a3fc2914d842c394141791a24be9b2faf537",
+      "bytes": 18685,
+      "gitBlob": "a8d61c9fac7aa966ccb64e4645bae164708c68b5",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/ProviderBackedPrimitiveLongTree.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/ProviderBackedPrimitiveRows.java",
+      "sha256": "8d5e8c505158bc60e41dcda5a16d468c293aa11948d0e3c93d6500634c0e345d",
+      "bytes": 20592,
+      "gitBlob": "fbb824db0a93177c7bced79cecf966345b330fbc",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/generated-candidate/synexia-primitives/src/main/java/com/synexia/primitives/ProviderBackedPrimitiveRows.java",
+      "origin": "actual-pcr-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/ProviderBackedPrimitiveTree.java",
+      "sha256": "54d644d091245973aa51415ab3039f202da91b275c55f78bfb3e7458c5d9eb1d",
+      "bytes": 34751,
+      "gitBlob": "b1cde220d6035623360ddfa7e615a7ef893207fc",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/ProviderBackedPrimitiveTree.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/ProviderCollectionFactory.java",
+      "sha256": "af7369ff8f84800663b4c45e58b20f43f8499c8af8aa97b823729d2e4f662177",
+      "bytes": 4977,
+      "gitBlob": "26515ae1ce7036dbcde7e6d88fcad550607d9aa8",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/ProviderCollectionFactory.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/ProviderCollectionRequirements.java",
+      "sha256": "0b4bdd84cbe2805d64c99de69bd904e98be73c0247f82b908f33ab0d56cee578",
+      "bytes": 6470,
+      "gitBlob": "68201d1b11a7be0fdb2b8a6344d7cf5157973ee1",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/ProviderCollectionRequirements.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/ProviderCollectionStats.java",
+      "sha256": "b4eb1b282d75a03ed11703d31e764b6925e57bd62947e8f1965d45b1635fbe63",
+      "bytes": 1094,
+      "gitBlob": "932c6ceb6e897f4038cf8f7cd9936455fcf1ae45",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/ProviderCollectionStats.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/ProviderLoadException.java",
+      "sha256": "33698be7290d3c5c61d980f0abf1de66c574100a1f02dd19afbf97edce1b4278",
+      "bytes": 598,
+      "gitBlob": "2461179cfc65bbf0c5958906c45ad9cf1a776062",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/ProviderLoadException.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/ProviderResidencyClock.java",
+      "sha256": "59ade3206de3980674ed075781334bfc2fdbeaa85ad478223f658fbdbbf30a60",
+      "bytes": 4522,
+      "gitBlob": "b23190317cb2ac63ccbe858cb257d2d4aef0adf3",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/ProviderResidencyClock.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/RangeAddLongSumTree.java",
+      "sha256": "f0c4f894a5a257304b6496575fb44f7479f94aea62be6a4013894f0c7dfdaf44",
+      "bytes": 3898,
+      "gitBlob": "056739022075fd97ad466bde3ed8823f4e55fdf6",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/RangeAddLongSumTree.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/RunLengthLongList.java",
+      "sha256": "9878a1fe8ce415860bb11c926f25c100f425d391660f806340590b27f06ad478",
+      "bytes": 3711,
+      "gitBlob": "79f5d05aae85a177b039fab95f5540cae93708c7",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/RunLengthLongList.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/StandardAlgorithmCandidates.java",
+      "sha256": "4d9c47c8566a39c7ca2bc947c9364148204248cec8ad855b09f90e53e2419d62",
+      "bytes": 29373,
+      "gitBlob": "b868b6716d259d21dba4e6bb1214aa26c84a3f8d",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/StandardAlgorithmCandidates.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/TouchAwarePrimitiveRowProvider.java",
+      "sha256": "f91d6e32e80877fcfec1e166100e989aa9deda9cea78bc85bef132be72e23ae2",
+      "bytes": 767,
+      "gitBlob": "99c5e092e5965631cfc2d023d9dfdb5e690ac2de",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/TouchAwarePrimitiveRowProvider.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/VersionedCursorPagedPrimitiveTreeProvider.java",
+      "sha256": "976b692047181b3a18d8ccec1444a16e18afa3fb26c3f6d7e1574f76b715aed1",
+      "bytes": 1253,
+      "gitBlob": "123ad99e70a7fca1c48083cd23c284df2ba8dfdf",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/main/java/com/synexia/primitives/VersionedCursorPagedPrimitiveTreeProvider.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/VersionedProviderBackedPrimitiveLongTree.java",
+      "sha256": "2ca650f68fd0450a2886ae303b0b91eafdffe326464abf8ae5a1d669a78a5adb",
+      "bytes": 8252,
+      "gitBlob": "eec4901e9a436cea40e80c50863b602f25855d00",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/generated-candidate/synexia-primitives/src/main/java/com/synexia/primitives/VersionedProviderBackedPrimitiveLongTree.java",
+      "origin": "actual-pcr-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/AdvancedAlgorithmShapesTest.java",
+      "sha256": "8cdda3b1f66d8c8b17b87566634717a85d2a00d54543b43cfa863a21fb044aa4",
+      "bytes": 8406,
+      "gitBlob": "837e58889d33e418585234c4fea9b4a5b47c8f68",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/mrp-current-v2/generated-candidate/synexia-primitives/src/test/java/com/synexia/primitives/AdvancedAlgorithmShapesTest.java",
+      "origin": "actual-mrp2-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/BoundedProviderRowsFailureAdmissionTest.java",
+      "sha256": "d96abf1b94b58467a158cf6985012fa9e3b4c5dbedfe724f85881af6b3ab6b3f",
+      "bytes": 15329,
+      "gitBlob": "1b9400a00a1dee18391558363e9d795808b67987",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/generated-candidate/synexia-primitives/src/test/java/com/synexia/primitives/BoundedProviderRowsFailureAdmissionTest.java",
+      "origin": "actual-pcr-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/BulkPrimitiveRowProviderTest.java",
+      "sha256": "13499edabbaa9f69e28da6bd1e0f985ce502a7de91abd4f1845b26af0b491a26",
+      "bytes": 14617,
+      "gitBlob": "4ab8a97de7903fb839666330a1d7059e1a8bedad",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/generated-candidate/synexia-primitives/src/test/java/com/synexia/primitives/BulkPrimitiveRowProviderTest.java",
+      "origin": "actual-pcr-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/CollectionContractProof.java",
+      "sha256": "cb64afecb3ca7caa9ba83ec40724bf46d8feae5891113af17624f27ddef41f54",
+      "bytes": 29068,
+      "gitBlob": "48ae7306e531dd9a552a82804164040648c2c7ca",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/CollectionContractProof.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/CollectionContractsTest.java",
+      "sha256": "ce8d864c50ed8ffac663c97b6d77d36842da49cb39b627f38b9930ac19d60487",
+      "bytes": 368,
+      "gitBlob": "83c28a7741e743539602b0f42a5ef625c1fa3528",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/CollectionContractsTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/CollectionPerformanceProbe.java",
+      "sha256": "70c598eb9c69c60157d3b89178b01339b0ec221d025fb219b6ab8cbf88ce0ee4",
+      "bytes": 5629,
+      "gitBlob": "507e961698c0e619b04831331deca6479c86f247",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/CollectionPerformanceProbe.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/CollectionSupersetCountsSelfTest.java",
+      "sha256": "c35e5b5db0cfad6c0aa65cf26003597b8ed7d3d82a93dbc53dffb4bfb47fb1d2",
+      "bytes": 18207,
+      "gitBlob": "13c1f8b0ac4dc72b510c7dfe98f5ca454d82438c",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/CollectionSupersetCountsSelfTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/CollectionSupersetCountsTest.java",
+      "sha256": "f61a6990d5dbfc78993b763197f51a55495dcb4da39576579a3fb92813229f9a",
+      "bytes": 244,
+      "gitBlob": "ac605ee476150b2db640f3c44190c7419a6a6202",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/CollectionSupersetCountsTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/DenseCollectionsSelfTest.java",
+      "sha256": "f8f583bd7a806e64d53265587073e5ac65a9e4c5e5b316e3be4ff0c04a29a0c5",
+      "bytes": 23610,
+      "gitBlob": "6c0789be76007e2dc1222c4c2948d816fb240b7e",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/DenseCollectionsSelfTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/DenseCollectionsTest.java",
+      "sha256": "79025dafb9ee9bf7fee79583928588f88f2c08a5136a3482e180b99557e309a9",
+      "bytes": 228,
+      "gitBlob": "77289905f31450e4822979da91bc0457500f5a1d",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/DenseCollectionsTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ExactWidthCollectionsSelfTest.java",
+      "sha256": "64f95e0c5cc521ffe0f4dbf5f591ef8affa5233a1d88c8df5446b9a449cbf8fe",
+      "bytes": 12305,
+      "gitBlob": "34bbd1d21b4ccc8a416aa22f7aa4162ac3a7a980",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/generated-candidate/synexia-primitives/src/test/java/com/synexia/primitives/ExactWidthCollectionsSelfTest.java",
+      "origin": "actual-pcr-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ExactWidthCollectionsTest.java",
+      "sha256": "d2f8e425b49c9264646cf8edfdd989e74411696afffd776155e40e113b8c1a35",
+      "bytes": 221,
+      "gitBlob": "3ab0892d5f22ce84658093906c6b735b1dcd4ca2",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/ExactWidthCollectionsTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ExtendedPrimitiveCollectionsSelfTest.java",
+      "sha256": "b9f0ac58eae83a42bfa38af43b00eedc85f8dd913376e2752d19b9f0ac680271",
+      "bytes": 6501,
+      "gitBlob": "01a8a507bdc03d80081ca3877f64c51a870dbf45",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/ExtendedPrimitiveCollectionsSelfTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ExtendedPrimitiveCollectionsTest.java",
+      "sha256": "88e4571994f8afae7f5614ba2e985fae30387c90afc14bb1c12cd94730b96a29",
+      "bytes": 233,
+      "gitBlob": "3c7219319ee7185801a25ce6a6cb8fbec01f14e2",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/ExtendedPrimitiveCollectionsTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/FossCollectionDonorSelfTest.java",
+      "sha256": "4d4d53264866301cad9caeaa7b704acbb4a573840a4c0430a6d68b2ced29e8a2",
+      "bytes": 16545,
+      "gitBlob": "8739b265549fbc56088223e48f44d3b7c3ad4184",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/FossCollectionDonorSelfTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/FossCollectionDonorTest.java",
+      "sha256": "edbc699bbc0044d643badfdb8e57f807e19c9b029b5fccd6c541adc5386065f7",
+      "bytes": 230,
+      "gitBlob": "a0d146c05cf4fa1da03e5f85f3887fd7899b8a4f",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/FossCollectionDonorTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/FossSemanticClosureSelfTest.java",
+      "sha256": "e363ef2bbaff14a9463217cf81f03b287685d4667bda9397b732f0100fa4d750",
+      "bytes": 7411,
+      "gitBlob": "cfb3f02ff9f3250bb17d157727df51b768d0913a",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/FossSemanticClosureSelfTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/FossSemanticClosureTest.java",
+      "sha256": "d023830c12e2560900b06c802fdb1434e4f01d27f78e149c4f61842c2ad76ada",
+      "bytes": 216,
+      "gitBlob": "5f4e0939a7501157e39c91800fd2b77a2c53d71b",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/FossSemanticClosureTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/FuzzyAlgorithmFactoryTest.java",
+      "sha256": "1469ee3843b2667dae2e75a41032ba7a06be0be80a9c014729d6f782e41dc30d",
+      "bytes": 12038,
+      "gitBlob": "0103fb05ff3b4c203c14f367dc9ae32d0d589d3b",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/FuzzyAlgorithmFactoryTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/FuzzyAlgorithmFactoryWave2Test.java",
+      "sha256": "7ab7d6eab3b2efad79ec98b120a40193c6fa0b1836b657524aa2c7f4d1d609a5",
+      "bytes": 12374,
+      "gitBlob": "5e0002a129b14ed2d20d3fd330f2375f7c820704",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/FuzzyAlgorithmFactoryWave2Test.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/FuzzyStructureFactoryTest.java",
+      "sha256": "cc813b503a2d51b94a2cdf6fca2eab9d245e2086695ab4df3f2b25fbc72cd5a6",
+      "bytes": 4056,
+      "gitBlob": "d4f90a991787009fd407d07901a0b76ccbc5542b",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/FuzzyStructureFactoryTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/JdkCollectionContractProof.java",
+      "sha256": "17a28d0881f0b3798c56301b92781772c6e20cf8cd7a801a6b4ce8191af46ec1",
+      "bytes": 15852,
+      "gitBlob": "7480d9f082010f9619b8912206d79e4f11ca209c",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/JdkCollectionContractProof.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/JdkCollectionSurface.java",
+      "sha256": "c3e6b9453f9e0310d5aaa5adc7aa55ac8f612c8b3c75b013c3405a0b84de5998",
+      "bytes": 14601,
+      "gitBlob": "2e2a9fd499e5c4c9a6a5c9157d7529298083b352",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/JdkCollectionSurface.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/JdkCollectionSurfaceProof.java",
+      "sha256": "9f7189789c4358f0d0a92756fa0ca672bb66d2c02fc97cb7e3cca9a5e1a88851",
+      "bytes": 10580,
+      "gitBlob": "042fa0bc4545876bc3d0a6e16df7b805fd81a462",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/JdkCollectionSurfaceProof.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/LazySegmentedStorageTest.java",
+      "sha256": "7289e2fae830b8361cf64974f6b0f5501fe32c72f90ebe11df409b9dc393c6d5",
+      "bytes": 4772,
+      "gitBlob": "e5002807097279a5509a9c111a3b23372bc80ded",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/LazySegmentedStorageTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/LeanCollectionFactoryTest.java",
+      "sha256": "d201aa16703a47f8038009078be20c912345f7ac1fa4c2bceabf9ecef902be1a",
+      "bytes": 5188,
+      "gitBlob": "4e77ddf109728edca31a1fdbda90b47745509c5f",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/LeanCollectionFactoryTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/MarkerPatternCollectionsSelfTest.java",
+      "sha256": "3ad22d8bca30620327a5ab22c0897a36c23302e7948cd5bf4d67facb7ab58772",
+      "bytes": 5025,
+      "gitBlob": "7bc00e77c8dd02c68d66dca3dfb64337fa123f30",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/MarkerPatternCollectionsSelfTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/MarkerPatternCollectionsTest.java",
+      "sha256": "d4f739ceadfb2722d0f6ce421d06cc7ee3f9883c0a8bbc3efdbae34c1cea0458",
+      "bytes": 230,
+      "gitBlob": "c68791313ff11f6fe7265e9a1378ab88bd7ba220",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/MarkerPatternCollectionsTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ObjectCounterZeroMetadataRepairTest.java",
+      "sha256": "f7272d4ca18106de32c03bf52ae7894f6e08a0f8dca12e0883830596d5048401",
+      "bytes": 7342,
+      "gitBlob": "0f293a1613c892e2e3b8abf5b9788a38ae9cbcb1",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/generated-candidate/synexia-primitives/src/test/java/com/synexia/primitives/ObjectCounterZeroMetadataRepairTest.java",
+      "origin": "actual-pcr-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/PcsProbe.java",
+      "sha256": "4fa7b2ca8086982bfc6e47d7ab2af8bac8537a2f245f70bc2bf06f3bb2c62940",
+      "bytes": 68319,
+      "gitBlob": "f1d16a3ba907eeef5502812b89c769473d45fae6",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/generated-candidate/synexia-primitives/src/test/java/com/synexia/primitives/PcsProbe.java",
+      "origin": "actual-pcr-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/PcsTest.java",
+      "sha256": "012ce8ac2d50bcfedaaff2ac9604b589b58b5b9e8b018ae524906bba965aaa9c",
+      "bytes": 3748,
+      "gitBlob": "dc014b5eed1de722142ffbbf1b3103c209c6f3fb",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/generated-candidate/synexia-primitives/src/test/java/com/synexia/primitives/PcsTest.java",
+      "origin": "actual-pcr-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/PrimitiveCollectionSupersetSelfTest.java",
+      "sha256": "44bb8ce4fcaca0ca58bdf9c96b4210b79d3a27764263c1efd398df2f29ae4fcc",
+      "bytes": 8134,
+      "gitBlob": "9b2303284a3dd58653756ef4580f60cc8f4d89d2",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/PrimitiveCollectionSupersetSelfTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/PrimitiveCollectionSupersetTest.java",
+      "sha256": "96c1d32b1691473383bdfff2a0c18a7cbc04f82a716e0d8e3a56a1e13d2d4bd5",
+      "bytes": 235,
+      "gitBlob": "3d9f35efe9dd40de3d9de8472497ee3b927944b9",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/PrimitiveCollectionSupersetTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/PrimitiveMpmcConcurrencySelfTest.java",
+      "sha256": "e37f44d5d72e1479871636f09ef52dc60d9e55741e0901cb2decaadde5896715",
+      "bytes": 6597,
+      "gitBlob": "b87770a42708294f33fe19d4a2ba6705c72a6a65",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/PrimitiveMpmcConcurrencySelfTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/PrimitiveMpmcConcurrencyTest.java",
+      "sha256": "2c0d9285dea99a28d027bfbedba67318b53fc7ea4c11bd9f9e99dc9a2395facd",
+      "bytes": 243,
+      "gitBlob": "f04c2e8b9ba364efabb47d804cb4de539c7ecfca",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/PrimitiveMpmcConcurrencyTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/PrimitiveTouchObserverTest.java",
+      "sha256": "40c6d9fff3f6dc98bbace253e2d07afb2042f5552ea699ff48658ec5cb70e831",
+      "bytes": 3419,
+      "gitBlob": "a9c7e3c2a30161af8a7731b2210457d37f821c34",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/PrimitiveTouchObserverTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderBackedPrimitiveListTest.java",
+      "sha256": "77247f23cf888c1da2a2b8c22b5c231ce11af35f801b72218252cce938af544b",
+      "bytes": 4123,
+      "gitBlob": "09b3ec2bd9de1a1b2c7d038d417d9794c833c20b",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/ProviderBackedPrimitiveListTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderBackedPrimitiveLongTreeTest.java",
+      "sha256": "e71476ddc964b95414de124b75be01587976441fc5e05d818881848eea59a666",
+      "bytes": 8528,
+      "gitBlob": "498433596b97bc4af600eeca89fb9268b1915c3b",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/ProviderBackedPrimitiveLongTreeTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderBackedPrimitiveRowsTest.java",
+      "sha256": "697c308150208531540dc1c95a5e638ac914b7e0632c5a483ff48eeadc797bbb",
+      "bytes": 5375,
+      "gitBlob": "b61198d62c79163b14dcc69f97f643d7fd1db34e",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/ProviderBackedPrimitiveRowsTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderBackedPrimitiveTreeSupersetTest.java",
+      "sha256": "09b2b504982bf30a6ddd4ea502ffa6d9d0096658df7ca30c8e728136452943d8",
+      "bytes": 10643,
+      "gitBlob": "88ef6cb99e4de24e8dba04d0936cdbbff32a546f",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/mrp-current-v2/generated-candidate/synexia-primitives/src/test/java/com/synexia/primitives/ProviderBackedPrimitiveTreeSupersetTest.java",
+      "origin": "actual-mrp2-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderBackedPrimitiveTreeTest.java",
+      "sha256": "fe285fa2bbc2db5802c7e2cb8902b1307e52cefe48facd9a50d0f64ceb505936",
+      "bytes": 8420,
+      "gitBlob": "eb4a9eaa799a3562d41530c004245e8114317ef0",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/ProviderBackedPrimitiveTreeTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderCallbackSafetyProbe.java",
+      "sha256": "8b5bef28fa7ef27a739837c935ad1264ce7234af21129ba68a297854a480ab68",
+      "bytes": 3201,
+      "gitBlob": "40b13c1032ea3996840b8c835117b49fd9dceec2",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/ProviderCallbackSafetyProbe.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderCallbackSafetyTest.java",
+      "sha256": "f14242a92a86fd823a2ebcc658d7c9ab52bb2e9b56e9e51e2221a28c4cf30e31",
+      "bytes": 28245,
+      "gitBlob": "192bc7023ec2b345b60be2fab0b9c9be06740ff1",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/ProviderCallbackSafetyTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderCallbackSupersetProbe.java",
+      "sha256": "08bdfe2a0cedf372b4b765765297358dcc4fddb88282a8bb391024bc881d3a57",
+      "bytes": 6342,
+      "gitBlob": "65a2d1015e35734942e7b084677dc7aea3ef6001",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/generated-candidate/synexia-primitives/src/test/java/com/synexia/primitives/ProviderCallbackSupersetProbe.java",
+      "origin": "actual-pcr-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderCallbackSupersetTest.java",
+      "sha256": "035b67874278adae7381d61c12eb368312573928d3ded5a35dfa40b2915ef79f",
+      "bytes": 10205,
+      "gitBlob": "85df14254f76a0e256d966569bf3a6b63c2dbbf8",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/generated-candidate/synexia-primitives/src/test/java/com/synexia/primitives/ProviderCallbackSupersetTest.java",
+      "origin": "actual-pcr-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderResidencySupersetTest.java",
+      "sha256": "f10da50534f059a422106021392cdb21e86172a9bbc025431024fe86e68d5b84",
+      "bytes": 12353,
+      "gitBlob": "5aca96469737aeb27ac753e2e095bf4901770d5b",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/generated-candidate/synexia-primitives/src/test/java/com/synexia/primitives/ProviderResidencySupersetTest.java",
+      "origin": "actual-pcr-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderResidencyVersionedTreeTest.java",
+      "sha256": "28ea7b6b057cb36f7ee3e526e454da0a154d2c7cbed3232052a4dd69eac18583",
+      "bytes": 9487,
+      "gitBlob": "bf8e1a8424ecc4a507aad022a6ee960b39a04e33",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/ProviderResidencyVersionedTreeTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderResidencyVersionedTreeVerifier.java",
+      "sha256": "f85a603d90dd57a95d53f6cc2cf44c70ab39782c829b63563a74edc23418965d",
+      "bytes": 4639,
+      "gitBlob": "aa368db881a21b738df74a4a8100e24cd471b1a2",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/ProviderResidencyVersionedTreeVerifier.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderSerializationCompatibilityTest.java",
+      "sha256": "417ae18483014c4db1964933e5d700071d0618e7242ad416b78daabaca59f893",
+      "bytes": 5568,
+      "gitBlob": "4eb504d7f3ea13b0215e80463742156eeebd0e45",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/ProviderSerializationCompatibilityTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/PurposeCollectionsSelfTest.java",
+      "sha256": "659a09914656eaeef0df4db4ee6293298a4042716b5bdd30fcbe4b3b9c6d0a3f",
+      "bytes": 9173,
+      "gitBlob": "1437c07cacec4bb101045e6d1866048a9092ffab",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/PurposeCollectionsSelfTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/PurposeCollectionsTest.java",
+      "sha256": "f2c6352dcad56a2e6ee1e31140c87fa77f2b32d06f685616442182daa3124fe8",
+      "bytes": 207,
+      "gitBlob": "4733b2338775d024e3b9d5df2b24b204dacd3254",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/PurposeCollectionsTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/RecoveredSeriousAlgorithmShapesTest.java",
+      "sha256": "22906aa6b583184b88b3e965cbc6a30024e5e738aaf73dce153e2375f833cfa8",
+      "bytes": 13903,
+      "gitBlob": "708bc98c5659c467963f8f37cf5248811454fc48",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/RecoveredSeriousAlgorithmShapesTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/TouchAwarePrimitiveRowProviderTest.java",
+      "sha256": "18fa93b89108d2d1ef1595651c7060ada2db8bb6db347a5fd088e855e0f6a6a0",
+      "bytes": 2311,
+      "gitBlob": "82fccba04b7002614ea048a8e4151047fbad0a25",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/TouchAwarePrimitiveRowProviderTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/VersionedProviderLookupCounterTest.java",
+      "sha256": "78b23ce5fbc6d941b829577498b017f19dfa7c65a5767cdfdad55d0e34cf8edf",
+      "bytes": 6138,
+      "gitBlob": "d61722cc00503ddb2ff19ae7ce9bfca9667afab7",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/generated-candidate/synexia-primitives/src/test/java/com/synexia/primitives/VersionedProviderLookupCounterTest.java",
+      "origin": "actual-pcr-current-output"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ZeroMetadataHashTest.java",
+      "sha256": "2714929da1f6f2979bc54870b252af59de68e5c20490f8290d1606ba592890f9",
+      "bytes": 9447,
+      "gitBlob": "3e65fcee9e1b35056d3e097c8e86d343492a5503",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/collections/sources/synexia-primitives/src/test/java/com/synexia/primitives/ZeroMetadataHashTest.java",
+      "origin": "CURRENT_992_GIT_TREE_PARITY"
+    }
+  ]
+}

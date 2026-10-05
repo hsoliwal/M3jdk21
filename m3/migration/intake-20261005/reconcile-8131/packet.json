@@ -1,0 +1,2224 @@
+{
+  "schema": "m3.synexia-intake/1",
+  "source": {
+    "repo": "hsoliwal/com.synexia",
+    "commit": "99221b0f25a1b09c32855d76e295b816f632a46b",
+    "tree": "d0af0944d2dfe6af3349b2e1c72691648c596f6d"
+  },
+  "target": {
+    "repo": "hsoliwal/M3jdk21",
+    "commit": "ccb4ace7f7d79f97ae2d9600de55960504cc3c21",
+    "tree": "f5533ab50b60297c955d94a8e1190ad91d0bf831"
+  },
+  "authority": {
+    "path": "m3/docs/name-mapping.json",
+    "sha256": "245fcd73135ef418a30ee350049719574f86222e08c63219d883119b3dc8321f"
+  },
+  "sourceRoot": {
+    "path": "m3/migration/intake-20261005/source-root.json",
+    "sha256": "1cfe107b886e495046ec77f74a2739705b403251ae4fafe640f0fe46ed656ed8"
+  },
+  "owners": [
+    {
+      "path": ".claude",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": ".desktop-reads",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": ".dockerignore",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": ".editorconfig",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": ".gitattributes",
+      "disposition": "custody-only",
+      "reason": "Repository governance/provenance input; preserve source identity and review relevant downstream obligations, no runtime code port."
+    },
+    {
+      "path": ".github",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": ".gitignore",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": ".gitmodules",
+      "disposition": "custody-only",
+      "reason": "Repository governance/provenance input; preserve source identity and review relevant downstream obligations, no runtime code port."
+    },
+    {
+      "path": ".java-version",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": ".jqassistant.yml",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": ".m3",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": ".mcp.json",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": ".merge-preserved",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": ".mvn",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": ".rgignore",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": ".superset",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "AGENTS.md",
+      "disposition": "custody-only",
+      "reason": "Repository governance/provenance input; preserve source identity and review relevant downstream obligations, no runtime code port."
+    },
+    {
+      "path": "CITATION.cff",
+      "disposition": "custody-only",
+      "reason": "Repository governance/provenance input; preserve source identity and review relevant downstream obligations, no runtime code port."
+    },
+    {
+      "path": "CLAUDE.md",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "disposition": "custody-only",
+      "reason": "Repository governance/provenance input; preserve source identity and review relevant downstream obligations, no runtime code port."
+    },
+    {
+      "path": "CPULLM_APACHE_DATAFLOW_DAGS.md",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "CPULLM_COMPACT_SYNTHESIS_ADMISSION_RECEIPT.json",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "CPULLM_COMPACT_SYNTHESIS_CAS_REPLAY_ADMISSION_RECEIPT.json",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "FLINK_INTEGRATION.md",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "FOSS_REUSE_DECISION.tsv",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "LESM_LSEM_EXTRACTION.tsv",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "LICENSE",
+      "disposition": "custody-only",
+      "reason": "Repository governance/provenance input; preserve source identity and review relevant downstream obligations, no runtime code port."
+    },
+    {
+      "path": "LICENSE.spdx",
+      "disposition": "custody-only",
+      "reason": "Repository governance/provenance input; preserve source identity and review relevant downstream obligations, no runtime code port."
+    },
+    {
+      "path": "LICENSES",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "MANIFEST.sha256",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "Makefile",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "NOTICE",
+      "disposition": "custody-only",
+      "reason": "Repository governance/provenance input; preserve source identity and review relevant downstream obligations, no runtime code port."
+    },
+    {
+      "path": "README.md",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_clusters_info.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_compile_aop.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_compile_check.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_compile_count.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_compile_final.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_compile_final_tail.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_compile_full.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_compile_full_run.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_compile_reactor.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_compile_run_20260306_102237.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_compile_status.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_compile_tail.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_compile_verify.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_cstat.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_desk_ai_action.md",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_desk_anchor.md",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_desk_conv_latest.md",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_desk_convergence.md",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_desk_decomp.md",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_desk_everything.md",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_desk_m3scale.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_desk_mech_refactor.md",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_dup_stats.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_empty_by_dir.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_empty_detail.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_fail_mods2.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_git_status.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_import_stats.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_imports_stat.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_inv_scripts.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_p1_status.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_python_check.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_reactor_errs.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_reactor_stat.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_run_imports.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_run_p1_dry.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_run_p1_dry2.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_run_whitespace.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_spotless_all.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_spotless_all2.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_spotless_detail.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_spotless_fix.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_spotless_flldcim.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_spotless_modules.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_spotless_targeted.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_sync_done.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_templates_listing.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_test123.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "_ws_count.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "agents",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "aix-chrome-ai-studio",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "aix-superset-v016",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "aix-superset-v017",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "archive-maven-projects",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "artifacts",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "big-files.tsv",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "big-java.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "build-check.bat",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "build-check2.bat",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "build-full.bat",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "build-full2.bat",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "build-out.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "build-output.txt",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "chat-artifacts",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "clients",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "codemaya-paroksha",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-agents",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-ai",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-camel-kie",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-demos",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-donor-inventory",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-mechanics-adapters",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-mechanics-core",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-mechanics-cpullm",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-mechanics-headless-app",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-mechanics-native-bridge",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-mechanics-rop-plugin",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-mechanics-spi",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-mechanics-ui",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-mechanics-ui-api",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-mechanics-visual-bridge",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-visual-api",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-visual-architecture-tests",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-visual-bridge-browser",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-visual-bridge-diffusion",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-visual-bridge-neural",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-visual-bridge-platform",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-visual-bridge-renderer",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-visual-bridge-rop",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-visual-core",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-visual-headless",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-visual-headless-pde",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-visual-orchestrator",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-visual-product",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-visual-runtime",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-visual-ui",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-eclipse-visual-web",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-flow",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-java-web-modules",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-java-web-runtime",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-java-web-transport",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-java-web-workers",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-language-mechanics-adapters",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-mcp",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-nlp",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-parent",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-process",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-rag",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-skills",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-tools",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-transpiler",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-transpiler-aitrans-bridge",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-transpiler-skillmd-bridge",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-transpiler-teavm",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cognix-vscode",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "com",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "compose.yaml",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "config",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cpullm-java",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cpullm-opdag",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cpullm-opdag-paroksha",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cpullm-paroksha-superset",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "cpullm-text-evidence-v1",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "docker",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "docs",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "donors",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "eclipse-plugins",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "experiments",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "integrations",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "jdk-overlays",
+      "disposition": "blocked",
+      "reason": "JDK-specific root owner exists, but its exact descendant, runtime and recipe closure remains uninspected; do not duplicate or overwrite."
+    },
+    {
+      "path": "jqassistant",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "local-but-cloud",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "m3",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "m3-fast-search",
+      "disposition": "tooling",
+      "reason": "Existing recipe/inventory/catalogue tool-plane owner; bounded task targets inspected, remaining descendants require classification."
+    },
+    {
+      "path": "m3-java-contracts",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "m3-java-inventory",
+      "disposition": "tooling",
+      "reason": "Existing recipe/inventory/catalogue tool-plane owner; bounded task targets inspected, remaining descendants require classification."
+    },
+    {
+      "path": "mvnw",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "mvnw.cmd",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "operations-dashboard-design-system",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "operations-dashboard-ui",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "pom.xml",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "python",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "research",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "rewrite.yml",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "scripts",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "src",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "superset",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synex-bop",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexi-protocol",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-agent",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-aicore",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-aiop",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-algo",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-algorithm-runtime",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-anop",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-aop",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-api-corpus",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-appliance-watchdog",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-archive-mavenizer",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-artifact-intelligence",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-beam-cpullm",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-beam-etl",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-bitop",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-bom",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-bop",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-build-inventory",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-camel-dag-bridge",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-camel-dag-kie",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-chat-artifacts",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-chrome-ai",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-chrome-diffusion",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-chromeml-api",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-classic-intelligence",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-classic-tools",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-classic-tools-jni",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-cmop",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-code-convergence",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-code-convergence-jini",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-common",
+      "disposition": "module-port-candidate",
+      "reason": "Current complete module tree acquired; established segmented collection port reused. Provider/short/JNI applicability is per-file review work."
+    },
+    {
+      "path": "synexia-common-cache",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-common-core",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-consolidation-runtime",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-cop",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-cop-bop",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-cpu-camel-fabric",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-cpullm",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-dashboard-api",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-dawn-jni",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-dfs",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-dictlang",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-diffusion",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-docker",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-donor-inventory",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-donor-superset",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-donor-superset-api",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-donor-superset-bridge-archive",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-donor-superset-bridge-build",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-donor-superset-bridge-git",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-donor-superset-core",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-donor-superset-headless",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-edge-ingress",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-enterprise-data-plane",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-etl",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-etl-dfs",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-fastsearch",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-fileindex",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-flink-cpullm",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-flink-datastream",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-flink-spi",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-flldcim",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-fop",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-forge",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-format-fabric",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-game-kernel",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-hash-pack-parent",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-hpcpop",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-index-precompute",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-index-precompute-adapters",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-indexstring",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-indexstring-compiler",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-indexstring-jini",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-indexstring-maven-plugin",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-indexstring-tornadovm",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-interned-language",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-ioc",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-iop",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-java-web-workbench",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-jev",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-job",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-kie-policy",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-kubernetes",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-l2c",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-l2g",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-l2v",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-llmcpp",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-local-appliance",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-local-appliance-shell",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-local-k3s",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-m3-api-factory",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-m3-cloner",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-m3-recipe",
+      "disposition": "tooling",
+      "reason": "Existing recipe/inventory/catalogue tool-plane owner; bounded task targets inspected, remaining descendants require classification."
+    },
+    {
+      "path": "synexia-m3-tooling",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-m3index",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-machine",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-mat-collections",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-mat-index-string",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-mat-value",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-mat-value-maven-plugin",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-mat-value-processor",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-maven-plugin",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-mindex",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-mindex-indexstring-bridge",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-mindex-vm",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-mllm",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-native-interop",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-netnet",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-neural-renderer-jni",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-neural-rendering",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-ngrok",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-openrewrite-recipes",
+      "disposition": "tooling",
+      "reason": "Existing recipe/inventory/catalogue tool-plane owner; bounded task targets inspected, remaining descendants require classification."
+    },
+    {
+      "path": "synexia-opsdash",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-picocli-shell-m3",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-pluginify-api",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-pluginify-bridge-eclipse",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-pluginify-bridge-native",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-pluginify-bridge-teavm",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-pluginify-core",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-pluginify-headless",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-pluginify-maven-plugin",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-primitives",
+      "disposition": "module-port-candidate",
+      "reason": "Complete 185 main/48 test source tree acquired; current20-target recipe subset classified. Target dependency/contract adaptation remains pending."
+    },
+    {
+      "path": "synexia-process",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-repository-java-candidate",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-retrieval-fabric",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-retrieval-runtime",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-rop",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-rop-h2",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-route-policy",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-runtime",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-sap-compat",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-sap-migration",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-shape-bridge",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-shape-compiler",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-specgrep",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-specialist-ai",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-ssh",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-sshd-server",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-synthesis",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-tabletree",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-tabletree-spring-data",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-tmop",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-top",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-tornadovm-m3",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-translate",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-truckmate",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-tunnel",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-unicodex",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-unix4j-m3",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-upwork-pipeline",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-vdp",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-visual-pixel-runtime",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "synexia-watchdog-policy",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "tests",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "third_party",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "tools",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "truckmate-automation",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "truckmate-integration",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "vendor",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "verification",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    },
+    {
+      "path": "visual-compiler-inline",
+      "disposition": "blocked",
+      "reason": "Exact root object inventoried; complete descendant/semantic dependency classification has not been performed."
+    }
+  ],
+  "lanes": [
+    {
+      "id": "mrc2",
+      "recipe": "com.synexia.rewrite.Mrc4",
+      "manifest": {
+        "path": "m3/migration/intake-20261005/portable/mrc2/outputs.json",
+        "sha256": "d5122dbb448b0ced7162c5e28f881f6ef1611fbac72b31eecc6162508affe3f8"
+      },
+      "outputSeal": "ad18ae05b67736732113275907deef085a06036346d5c68b877fb5270daee95e",
+      "proofs": [
+        {
+          "role": "recipe",
+          "result": {
+            "path": "m3/migration/intake-20261005/portable/mrc2/recipe/RESULT.json",
+            "sha256": "4cd704a31cba101e36721476876720a8d3bc2c141d8128ac14db2230d69b8770"
+          }
+        },
+        {
+          "role": "consumer",
+          "result": {
+            "path": "m3/migration/intake-20261005/portable/mrc2/consumer-0/RESULT.json",
+            "sha256": "ac3a58759bd8dda7d2e437fd2fd1aa3201c30842c4993447dd0987d625fc268e"
+          }
+        }
+      ],
+      "mappings": [
+        {
+          "path": "m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+          "id": "synexia.intake.mrc2.CompetitiveProblemReview",
+          "disposition": "tooling",
+          "requiredGates": [
+            "java21-tooling",
+            "recipe-fixed-point-refusal"
+          ]
+        },
+        {
+          "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+          "id": "synexia.intake.mrc2.ChallengeDonorPassLedger",
+          "disposition": "tooling",
+          "requiredGates": [
+            "java21-tooling",
+            "recipe-fixed-point-refusal"
+          ]
+        },
+        {
+          "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
+          "id": "synexia.intake.mrc2.CompetitiveCapabilityPlanIndex",
+          "disposition": "tooling",
+          "requiredGates": [
+            "java21-tooling",
+            "recipe-fixed-point-refusal"
+          ]
+        },
+        {
+          "path": "synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java",
+          "id": "synexia.intake.mrc2.DonorMechanicalShapeCatalog",
+          "disposition": "tooling",
+          "requiredGates": [
+            "java21-tooling",
+            "recipe-fixed-point-refusal"
+          ]
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
+          "id": "synexia.intake.mrc2.M3OpenRewriteRuntimeRecipeInventoryRecipe",
+          "disposition": "tooling",
+          "requiredGates": [
+            "java21-tooling",
+            "recipe-fixed-point-refusal"
+          ]
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeCrateSerialAtomReview.java",
+          "id": "synexia.intake.mrc2.M3RecipeCrateSerialAtomReview",
+          "disposition": "tooling",
+          "requiredGates": [
+            "java21-tooling",
+            "recipe-fixed-point-refusal"
+          ]
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SemanticCodeInventoryRecipe.java",
+          "id": "synexia.intake.mrc2.M3SemanticCodeInventoryRecipe",
+          "disposition": "tooling",
+          "requiredGates": [
+            "java21-tooling",
+            "recipe-fixed-point-refusal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mrd",
+      "recipe": "com.synexia.rewrite.Mrd",
+      "manifest": {
+        "path": "m3/migration/intake-20261005/portable/mrd/outputs.json",
+        "sha256": "cabb07c15f85501c516c3b67f2c83cf19b2047d7489408cc9f61780214428460"
+      },
+      "outputSeal": "77f62a92b3bc445eb9980537ffbf8dfb5caf1071e013f1ade29383347974982c",
+      "proofs": [
+        {
+          "role": "recipe",
+          "result": {
+            "path": "m3/migration/intake-20261005/portable/mrd/recipe/RESULT.json",
+            "sha256": "31b7e0ce9fc360555865112e366573bfed3375a542496333cd5e6dcb60e6471d"
+          }
+        },
+        {
+          "role": "consumer",
+          "result": {
+            "path": "m3/migration/intake-20261005/portable/mrd/consumer-0/RESULT.json",
+            "sha256": "4cd704a31cba101e36721476876720a8d3bc2c141d8128ac14db2230d69b8770"
+          }
+        }
+      ],
+      "mappings": [
+        {
+          "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+          "id": "synexia.intake.mrd.M3HashPinnedJavaSnapshotRecipe",
+          "disposition": "tooling",
+          "requiredGates": [
+            "java21-tooling",
+            "recipe-fixed-point-refusal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mre2",
+      "recipe": "com.synexia.rewrite.Mre2",
+      "manifest": {
+        "path": "m3/migration/intake-20261005/portable/mre2/outputs.json",
+        "sha256": "e519607f15e882db9b03f9015e6193029e44ede98ee36d7c1a48975eae19aef6"
+      },
+      "outputSeal": "39ef1d5ecb98af7ddbb0efbbf8ea188bbeefb03600080b885af951454a2bbb78",
+      "proofs": [
+        {
+          "role": "recipe",
+          "result": {
+            "path": "m3/migration/intake-20261005/portable/mre2/recipe/RESULT.json",
+            "sha256": "ca973eb099233eef271db4e64ff4c256466ced9cd4cd473064e7d22f08558f33"
+          }
+        },
+        {
+          "role": "consumer",
+          "result": {
+            "path": "m3/migration/intake-20261005/portable/mre2/consumer-0/RESULT.json",
+            "sha256": "ac3a58759bd8dda7d2e437fd2fd1aa3201c30842c4993447dd0987d625fc268e"
+          }
+        },
+        {
+          "role": "consumer",
+          "result": {
+            "path": "m3/migration/intake-20261005/portable/mre2/consumer-1/RESULT.json",
+            "sha256": "adce0fb4251ed4efa2dff2ec0818a0c7d9be585893241d8b7c2fda0a6c919a20"
+          }
+        }
+      ],
+      "mappings": [
+        {
+          "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
+          "id": "synexia.intake.mre2.M3RecipeMasteryLab",
+          "disposition": "tooling",
+          "requiredGates": [
+            "java21-tooling",
+            "recipe-fixed-point-refusal"
+          ]
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/Pcr.java",
+          "id": "synexia.intake.mre2.Pcr",
+          "disposition": "tooling",
+          "requiredGates": [
+            "java21-tooling",
+            "recipe-fixed-point-refusal"
+          ]
+        },
+        {
+          "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/Pcs.java",
+          "id": "synexia.intake.mre2.Pcs",
+          "disposition": "tooling",
+          "requiredGates": [
+            "java21-tooling",
+            "recipe-fixed-point-refusal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mrp",
+      "recipe": "com.synexia.rewrite.Mrp",
+      "manifest": {
+        "path": "m3/migration/intake-20261005/portable/mrp/outputs.json",
+        "sha256": "6bfe1aaaf01492abf6e2bccafa939bf093538ba0c6a6d064a3cf8ab1c594cbe8"
+      },
+      "outputSeal": "6b9f5b92ca032ebbb157d008ba0ba012e0a112f2580800f542fdef997a618968",
+      "proofs": [
+        {
+          "role": "recipe",
+          "result": {
+            "path": "m3/migration/intake-20261005/portable/mrp/recipe/RESULT.json",
+            "sha256": "605bd51ded9733cc2bdffaec01fff584997d1a4b0551cb80f1f5cb70142263e5"
+          }
+        },
+        {
+          "role": "consumer",
+          "result": {
+            "path": "m3/migration/intake-20261005/portable/mrp/consumer-0/RESULT.json",
+            "sha256": "9ac3f2db501508383bc80aa2c8e0e983aa2e814d10a6bc3de241613b756ff5dc"
+          }
+        }
+      ],
+      "mappings": [
+        {
+          "path": "synexia-primitives/src/main/java/com/synexia/primitives/DenseCollections.java",
+          "id": "synexia.intake.mrp.DenseCollections",
+          "disposition": "module-port-candidate",
+          "requiredGates": [
+            "java21-module",
+            "jni-abi-applicability",
+            "module-dependency-closure",
+            "provider-lifecycle-parity"
+          ]
+        },
+        {
+          "path": "synexia-primitives/src/main/java/com/synexia/primitives/FuzzyStructureFactory.java",
+          "id": "synexia.intake.mrp.FuzzyStructureFactory",
+          "disposition": "module-port-candidate",
+          "requiredGates": [
+            "java21-module",
+            "jni-abi-applicability",
+            "module-dependency-closure",
+            "provider-lifecycle-parity"
+          ]
+        },
+        {
+          "path": "synexia-primitives/src/test/java/com/synexia/primitives/AdvancedAlgorithmShapesTest.java",
+          "id": "synexia.intake.mrp.AdvancedAlgorithmShapesTest",
+          "disposition": "test-oracle",
+          "requiredGates": [
+            "source-contract-parity",
+            "test-oracle-adaptation"
+          ]
+        },
+        {
+          "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderBackedPrimitiveTreeSupersetTest.java",
+          "id": "synexia.intake.mrp.ProviderBackedPrimitiveTreeSupersetTest",
+          "disposition": "test-oracle",
+          "requiredGates": [
+            "source-contract-parity",
+            "test-oracle-adaptation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pcr",
+      "recipe": "com.synexia.rewrite.Pcr",
+      "manifest": {
+        "path": "m3/migration/intake-20261005/portable/pcr/outputs.json",
+        "sha256": "5a6211430e935fb53f9a2e8a593a4feb42468f9dcfc55024c312adf3dd03b9d3"
+      },
+      "outputSeal": "7be22020b757ad60872454c61f7c02e633f7768a532520488f8dd1bd8487f4b8",
+      "proofs": [
+        {
+          "role": "recipe",
+          "result": {
+            "path": "m3/migration/intake-20261005/portable/pcr/recipe/RESULT.json",
+            "sha256": "adce0fb4251ed4efa2dff2ec0818a0c7d9be585893241d8b7c2fda0a6c919a20"
+          }
+        },
+        {
+          "role": "consumer",
+          "result": {
+            "path": "m3/migration/intake-20261005/portable/pcr/consumer-0/RESULT.json",
+            "sha256": "f66c2e921d399f4d64957a868f692943bec9410fa311afcc70df278896e3265a"
+          }
+        },
+        {
+          "role": "consumer",
+          "result": {
+            "path": "m3/migration/intake-20261005/portable/pcr/consumer-1/RESULT.json",
+            "sha256": "9ac3f2db501508383bc80aa2c8e0e983aa2e814d10a6bc3de241613b756ff5dc"
+          }
+        }
+      ],
+      "mappings": [
+        {
+          "path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/PackedLazyValueState.java",
+          "id": "synexia.intake.pcr.PackedLazyValueState",
+          "disposition": "module-port-candidate",
+          "requiredGates": [
+            "java21-module",
+            "jni-abi-applicability",
+            "module-dependency-closure",
+            "provider-lifecycle-parity"
+          ]
+        },
+        {
+          "path": "synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedLazyCallbackSafetyTest.java",
+          "id": "synexia.intake.pcr.PackedLazyCallbackSafetyTest",
+          "disposition": "test-oracle",
+          "requiredGates": [
+            "source-contract-parity",
+            "test-oracle-adaptation"
+          ]
+        },
+        {
+          "path": "synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedLazyTreeMapSelfTest.java",
+          "id": "synexia.intake.pcr.PackedLazyTreeMapSelfTest",
+          "disposition": "test-oracle",
+          "requiredGates": [
+            "source-contract-parity",
+            "test-oracle-adaptation"
+          ]
+        },
+        {
+          "path": "synexia-primitives/src/main/java/com/synexia/primitives/BoundedProviderBackedPrimitiveLongTree.java",
+          "id": "synexia.intake.pcr.BoundedProviderBackedPrimitiveLongTree",
+          "disposition": "module-port-candidate",
+          "requiredGates": [
+            "java21-module",
+            "jni-abi-applicability",
+            "module-dependency-closure",
+            "provider-lifecycle-parity"
+          ]
+        },
+        {
+          "path": "synexia-primitives/src/main/java/com/synexia/primitives/BoundedProviderBackedPrimitiveRows.java",
+          "id": "synexia.intake.pcr.BoundedProviderBackedPrimitiveRows",
+          "disposition": "module-port-candidate",
+          "requiredGates": [
+            "java21-module",
+            "jni-abi-applicability",
+            "module-dependency-closure",
+            "provider-lifecycle-parity"
+          ]
+        },
+        {
+          "path": "synexia-primitives/src/main/java/com/synexia/primitives/BoundedProviderBackedPrimitiveTree.java",
+          "id": "synexia.intake.pcr.BoundedProviderBackedPrimitiveTree",
+          "disposition": "module-port-candidate",
+          "requiredGates": [
+            "java21-module",
+            "jni-abi-applicability",
+            "module-dependency-closure",
+            "provider-lifecycle-parity"
+          ]
+        },
+        {
+          "path": "synexia-primitives/src/main/java/com/synexia/primitives/BoundedVersionedProviderBackedPrimitiveLongTree.java",
+          "id": "synexia.intake.pcr.BoundedVersionedProviderBackedPrimitiveLongTree",
+          "disposition": "module-port-candidate",
+          "requiredGates": [
+            "java21-module",
+            "jni-abi-applicability",
+            "module-dependency-closure",
+            "provider-lifecycle-parity"
+          ]
+        },
+        {
+          "path": "synexia-primitives/src/main/java/com/synexia/primitives/ObjectCounterMap.java",
+          "id": "synexia.intake.pcr.ObjectCounterMap",
+          "disposition": "module-port-candidate",
+          "requiredGates": [
+            "java21-module",
+            "jni-abi-applicability",
+            "module-dependency-closure",
+            "provider-lifecycle-parity"
+          ]
+        },
+        {
+          "path": "synexia-primitives/src/main/java/com/synexia/primitives/ProviderBackedPrimitiveRows.java",
+          "id": "synexia.intake.pcr.ProviderBackedPrimitiveRows",
+          "disposition": "module-port-candidate",
+          "requiredGates": [
+            "java21-module",
+            "jni-abi-applicability",
+            "module-dependency-closure",
+            "provider-lifecycle-parity"
+          ]
+        },
+        {
+          "path": "synexia-primitives/src/main/java/com/synexia/primitives/VersionedProviderBackedPrimitiveLongTree.java",
+          "id": "synexia.intake.pcr.VersionedProviderBackedPrimitiveLongTree",
+          "disposition": "module-port-candidate",
+          "requiredGates": [
+            "java21-module",
+            "jni-abi-applicability",
+            "module-dependency-closure",
+            "provider-lifecycle-parity"
+          ]
+        },
+        {
+          "path": "synexia-primitives/src/test/java/com/synexia/primitives/BoundedProviderRowsFailureAdmissionTest.java",
+          "id": "synexia.intake.pcr.BoundedProviderRowsFailureAdmissionTest",
+          "disposition": "test-oracle",
+          "requiredGates": [
+            "source-contract-parity",
+            "test-oracle-adaptation"
+          ]
+        },
+        {
+          "path": "synexia-primitives/src/test/java/com/synexia/primitives/BulkPrimitiveRowProviderTest.java",
+          "id": "synexia.intake.pcr.BulkPrimitiveRowProviderTest",
+          "disposition": "test-oracle",
+          "requiredGates": [
+            "source-contract-parity",
+            "test-oracle-adaptation"
+          ]
+        },
+        {
+          "path": "synexia-primitives/src/test/java/com/synexia/primitives/ExactWidthCollectionsSelfTest.java",
+          "id": "synexia.intake.pcr.ExactWidthCollectionsSelfTest",
+          "disposition": "test-oracle",
+          "requiredGates": [
+            "source-contract-parity",
+            "test-oracle-adaptation"
+          ]
+        },
+        {
+          "path": "synexia-primitives/src/test/java/com/synexia/primitives/ObjectCounterZeroMetadataRepairTest.java",
+          "id": "synexia.intake.pcr.ObjectCounterZeroMetadataRepairTest",
+          "disposition": "test-oracle",
+          "requiredGates": [
+            "source-contract-parity",
+            "test-oracle-adaptation"
+          ]
+        },
+        {
+          "path": "synexia-primitives/src/test/java/com/synexia/primitives/PcsProbe.java",
+          "id": "synexia.intake.pcr.PcsProbe",
+          "disposition": "test-oracle",
+          "requiredGates": [
+            "source-contract-parity",
+            "test-oracle-adaptation"
+          ]
+        },
+        {
+          "path": "synexia-primitives/src/test/java/com/synexia/primitives/PcsTest.java",
+          "id": "synexia.intake.pcr.PcsTest",
+          "disposition": "test-oracle",
+          "requiredGates": [
+            "source-contract-parity",
+            "test-oracle-adaptation"
+          ]
+        },
+        {
+          "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderCallbackSupersetProbe.java",
+          "id": "synexia.intake.pcr.ProviderCallbackSupersetProbe",
+          "disposition": "test-oracle",
+          "requiredGates": [
+            "source-contract-parity",
+            "test-oracle-adaptation"
+          ]
+        },
+        {
+          "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderCallbackSupersetTest.java",
+          "id": "synexia.intake.pcr.ProviderCallbackSupersetTest",
+          "disposition": "test-oracle",
+          "requiredGates": [
+            "source-contract-parity",
+            "test-oracle-adaptation"
+          ]
+        },
+        {
+          "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderResidencySupersetTest.java",
+          "id": "synexia.intake.pcr.ProviderResidencySupersetTest",
+          "disposition": "test-oracle",
+          "requiredGates": [
+            "source-contract-parity",
+            "test-oracle-adaptation"
+          ]
+        },
+        {
+          "path": "synexia-primitives/src/test/java/com/synexia/primitives/VersionedProviderLookupCounterTest.java",
+          "id": "synexia.intake.pcr.VersionedProviderLookupCounterTest",
+          "disposition": "test-oracle",
+          "requiredGates": [
+            "source-contract-parity",
+            "test-oracle-adaptation"
+          ]
+        }
+      ]
+    }
+  ]
+}

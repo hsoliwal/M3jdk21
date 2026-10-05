@@ -1,0 +1,63 @@
+{
+  "schema": "m3.registry-reconciliation/1",
+  "state": "DERIVED_NOT_APPLIED_OR_QUALIFIED",
+  "commonBase": "ccb4ace7f7d79f97ae2d9600de55960504cc3c21",
+  "integrationMaster": {
+    "commit": "8131f535300c005afd27443d0281ede11198522f",
+    "tree": "8a87d42532c93117f88f8e49abc728f3e49a8118"
+  },
+  "publicationHead": {
+    "commit": "a73202a02577d3e3242a390b962fd3e08b691b60",
+    "tree": "a3ddbb9adba0023fea585d46bfc0bb74eb58a199"
+  },
+  "inputs": {
+    "base": {
+      "sha256": "67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb",
+      "bytes": 196161
+    },
+    "master": {
+      "sha256": "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace",
+      "bytes": 220539
+    },
+    "head": {
+      "sha256": "8e229715d6783906b1ee249bb2707cdb5e412146219be6037154927abac893ea",
+      "bytes": 340001
+    },
+    "packet": {
+      "sha256": "109173cb43fd91e084415284083d0d0ff92a1039a0b21216b7336c0a2c3dcf2e",
+      "bytes": 91316
+    }
+  },
+  "outputs": {
+    "registry": {
+      "sha256": "245fcd73135ef418a30ee350049719574f86222e08c63219d883119b3dc8321f",
+      "bytes": 363157
+    },
+    "packet": {
+      "sha256": "3b556b885af4b5afeb0b9f22a4bcceea93b6c836125019bde1534652d77c7639",
+      "bytes": 91316
+    }
+  },
+  "masterRecordsPreserved": 46,
+  "intakeRecordsPreserved": 35,
+  "uniqueRecords": 81,
+  "descriptorPolicy": "Preserve the complete current master record without acceptance upgrade.",
+  "packetDelta": [
+    "authority.sha256"
+  ],
+  "qualificationSource": {
+    "repo": "hsoliwal/com.synexia",
+    "commit": "99221b0f25a1b09c32855d76e295b816f632a46b",
+    "tree": "d0af0944d2dfe6af3349b2e1c72691648c596f6d"
+  },
+  "qualificationTarget": {
+    "repo": "hsoliwal/M3jdk21",
+    "commit": "ccb4ace7f7d79f97ae2d9600de55960504cc3c21",
+    "tree": "f5533ab50b60297c955d94a8e1190ad91d0bf831"
+  },
+  "wholeSourceTreeCovered": false,
+  "dependencyClosureComplete": false,
+  "runtimeAccepted": false,
+  "canonicalProductionApplied": false,
+  "productWrites": 0
+}

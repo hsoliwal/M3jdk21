@@ -1,0 +1,51 @@
+{
+  "status": "ACTUAL_SUREFIRE_REPORTS",
+  "totals": {
+    "tests": 39,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": {
+    "com.synexia.rewrite.M3ClosureCompatibilityTest": {
+      "counts": {
+        "tests": 13,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.rewrite.M3ClosureCompatibilityTest.xml",
+      "sha256": "f3cc4675fda6a9b6788c1f95df4894a9e61af58e61bbb797f35176f549b17dff"
+    },
+    "com.synexia.rewrite.M3RecipeConvergenceLabControlFlowTest": {
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.rewrite.M3RecipeConvergenceLabControlFlowTest.xml",
+      "sha256": "47510f3681df9f55c486a3e127ecfe9b8eb2236eff9cb894f7996f472a11644f"
+    },
+    "com.synexia.rewrite.M3RecipeMasteryIsolationTest": {
+      "counts": {
+        "tests": 18,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.rewrite.M3RecipeMasteryIsolationTest.xml",
+      "sha256": "4387c678877b5e72faed27a12e728863b0088970ba8ac01f66e23b51b8c6a62c"
+    },
+    "com.synexia.rewrite.M3RecipeMasteryLiveSupersetTest": {
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.rewrite.M3RecipeMasteryLiveSupersetTest.xml",
+      "sha256": "17d4037ad9d45dff4d6288a8db4e79142462abc594218b123994428dfb6f064d"
+    }
+  }
+}

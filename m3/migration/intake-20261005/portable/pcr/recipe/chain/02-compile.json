@@ -1,0 +1,20 @@
+{
+  "stage": "compile",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/harness/execute.py",
+    "--config",
+    "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/commands.json",
+    "--stage",
+    "compile"
+  ],
+  "cwd": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005",
+  "JAVA_HOME": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64",
+  "source_manifest_sha256": "3b906207157d2fca3bede9bb51cc5310cb31c1f7b104d7b51a06b6be714d6041",
+  "prior_receipts": [
+    "01-lint.json"
+  ],
+  "exit_code": 0,
+  "stdout_sha256": "bb41640c661c37cf593b3945c17780c4a5e1d95a1873f0287ebe5d8abdff4701",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+}

@@ -1,0 +1,134 @@
+{
+  "sourceCommit": "99221b0f25a1b09c32855d76e295b816f632a46b",
+  "recipe": "com.synexia.rewrite.Pcr",
+  "files": [
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/jdk/PackedLazyValueState.java",
+      "sha256": "bce1d43153ff314030eaf27f93108105a3f876e7364d71fe3a4c4f2883db99d0",
+      "gitBlob": "c0f0cedabe6a51e67fa8103748e147b31a0b541c",
+      "artifact": "m3/migration/intake-20261005/portable/pcr/outputs/synexia-common/src/main/java/com/synexia/common/collections/jdk/PackedLazyValueState.java"
+    },
+    {
+      "path": "synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedLazyCallbackSafetyTest.java",
+      "sha256": "34ae724febc38948d095222f403e5b4a351ab08cc3ea0e129c56bb012744255c",
+      "gitBlob": "b01f0623ca4f83086daf4c2ccf63728e0fb510b3",
+      "artifact": "m3/migration/intake-20261005/portable/pcr/outputs/synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedLazyCallbackSafetyTest.java"
+    },
+    {
+      "path": "synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedLazyTreeMapSelfTest.java",
+      "sha256": "7e239cc9f87b05b39db1e0cddd81dc842ab07f8df5d49e20a585867becce0979",
+      "gitBlob": "9ff9c4b4936701342b09b0ac8baa6bf20fd44afa",
+      "artifact": "m3/migration/intake-20261005/portable/pcr/outputs/synexia-common/src/test/java/com/synexia/common/collections/jdk/PackedLazyTreeMapSelfTest.java"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/BoundedProviderBackedPrimitiveLongTree.java",
+      "sha256": "137e7c9b741ef312c419a15f905d1f22cd40b30f6a13d65592883aa884c7170d",
+      "gitBlob": "2ee33f016f3c70179d3f96158508391940e34db9",
+      "artifact": "m3/migration/intake-20261005/portable/pcr/outputs/synexia-primitives/src/main/java/com/synexia/primitives/BoundedProviderBackedPrimitiveLongTree.java"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/BoundedProviderBackedPrimitiveRows.java",
+      "sha256": "c790a117f18812c6ab4106b867fc2d2962255763a29d1d3bcf2cd209962a1d37",
+      "gitBlob": "5ad5af4be17c953cdb440ed7297e98f9909682db",
+      "artifact": "m3/migration/intake-20261005/portable/pcr/outputs/synexia-primitives/src/main/java/com/synexia/primitives/BoundedProviderBackedPrimitiveRows.java"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/BoundedProviderBackedPrimitiveTree.java",
+      "sha256": "66929697ffc39003a1fa1d015975a6a03fbba20531bbc17b5f535bc8f08cf2f4",
+      "gitBlob": "0009bb763bd7333fecc11d2c739836d5aea53512",
+      "artifact": "m3/migration/intake-20261005/portable/pcr/outputs/synexia-primitives/src/main/java/com/synexia/primitives/BoundedProviderBackedPrimitiveTree.java"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/BoundedVersionedProviderBackedPrimitiveLongTree.java",
+      "sha256": "aaa96b03ad1ac7115ec4f012526939d5e12d1bcb4cc5f4fa4c3f25d02f5656d2",
+      "gitBlob": "28e4231c027fe2c6438aec16f3f3aad6fd173526",
+      "artifact": "m3/migration/intake-20261005/portable/pcr/outputs/synexia-primitives/src/main/java/com/synexia/primitives/BoundedVersionedProviderBackedPrimitiveLongTree.java"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/ObjectCounterMap.java",
+      "sha256": "21fa5ac34877acf45336e1a7efa82966e097fd4ab1f62ae9f54b4ee3ad4f56e0",
+      "gitBlob": "0389462dac9be6d7a4084239fd20937d746157da",
+      "artifact": "m3/migration/intake-20261005/portable/pcr/outputs/synexia-primitives/src/main/java/com/synexia/primitives/ObjectCounterMap.java"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/ProviderBackedPrimitiveRows.java",
+      "sha256": "8d5e8c505158bc60e41dcda5a16d468c293aa11948d0e3c93d6500634c0e345d",
+      "gitBlob": "fbb824db0a93177c7bced79cecf966345b330fbc",
+      "artifact": "m3/migration/intake-20261005/portable/pcr/outputs/synexia-primitives/src/main/java/com/synexia/primitives/ProviderBackedPrimitiveRows.java"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/VersionedProviderBackedPrimitiveLongTree.java",
+      "sha256": "2ca650f68fd0450a2886ae303b0b91eafdffe326464abf8ae5a1d669a78a5adb",
+      "gitBlob": "eec4901e9a436cea40e80c50863b602f25855d00",
+      "artifact": "m3/migration/intake-20261005/portable/pcr/outputs/synexia-primitives/src/main/java/com/synexia/primitives/VersionedProviderBackedPrimitiveLongTree.java"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/BoundedProviderRowsFailureAdmissionTest.java",
+      "sha256": "d96abf1b94b58467a158cf6985012fa9e3b4c5dbedfe724f85881af6b3ab6b3f",
+      "gitBlob": "1b9400a00a1dee18391558363e9d795808b67987",
+      "artifact": "m3/migration/intake-20261005/portable/pcr/outputs/synexia-primitives/src/test/java/com/synexia/primitives/BoundedProviderRowsFailureAdmissionTest.java"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/BulkPrimitiveRowProviderTest.java",
+      "sha256": "13499edabbaa9f69e28da6bd1e0f985ce502a7de91abd4f1845b26af0b491a26",
+      "gitBlob": "4ab8a97de7903fb839666330a1d7059e1a8bedad",
+      "artifact": "m3/migration/intake-20261005/portable/pcr/outputs/synexia-primitives/src/test/java/com/synexia/primitives/BulkPrimitiveRowProviderTest.java"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ExactWidthCollectionsSelfTest.java",
+      "sha256": "64f95e0c5cc521ffe0f4dbf5f591ef8affa5233a1d88c8df5446b9a449cbf8fe",
+      "gitBlob": "34bbd1d21b4ccc8a416aa22f7aa4162ac3a7a980",
+      "artifact": "m3/migration/intake-20261005/portable/pcr/outputs/synexia-primitives/src/test/java/com/synexia/primitives/ExactWidthCollectionsSelfTest.java"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ObjectCounterZeroMetadataRepairTest.java",
+      "sha256": "f7272d4ca18106de32c03bf52ae7894f6e08a0f8dca12e0883830596d5048401",
+      "gitBlob": "0f293a1613c892e2e3b8abf5b9788a38ae9cbcb1",
+      "artifact": "m3/migration/intake-20261005/portable/pcr/outputs/synexia-primitives/src/test/java/com/synexia/primitives/ObjectCounterZeroMetadataRepairTest.java"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/PcsProbe.java",
+      "sha256": "4fa7b2ca8086982bfc6e47d7ab2af8bac8537a2f245f70bc2bf06f3bb2c62940",
+      "gitBlob": "f1d16a3ba907eeef5502812b89c769473d45fae6",
+      "artifact": "m3/migration/intake-20261005/portable/pcr/outputs/synexia-primitives/src/test/java/com/synexia/primitives/PcsProbe.java"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/PcsTest.java",
+      "sha256": "012ce8ac2d50bcfedaaff2ac9604b589b58b5b9e8b018ae524906bba965aaa9c",
+      "gitBlob": "dc014b5eed1de722142ffbbf1b3103c209c6f3fb",
+      "artifact": "m3/migration/intake-20261005/portable/pcr/outputs/synexia-primitives/src/test/java/com/synexia/primitives/PcsTest.java"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderCallbackSupersetProbe.java",
+      "sha256": "08bdfe2a0cedf372b4b765765297358dcc4fddb88282a8bb391024bc881d3a57",
+      "gitBlob": "65a2d1015e35734942e7b084677dc7aea3ef6001",
+      "artifact": "m3/migration/intake-20261005/portable/pcr/outputs/synexia-primitives/src/test/java/com/synexia/primitives/ProviderCallbackSupersetProbe.java"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderCallbackSupersetTest.java",
+      "sha256": "035b67874278adae7381d61c12eb368312573928d3ded5a35dfa40b2915ef79f",
+      "gitBlob": "85df14254f76a0e256d966569bf3a6b63c2dbbf8",
+      "artifact": "m3/migration/intake-20261005/portable/pcr/outputs/synexia-primitives/src/test/java/com/synexia/primitives/ProviderCallbackSupersetTest.java"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderResidencySupersetTest.java",
+      "sha256": "f10da50534f059a422106021392cdb21e86172a9bbc025431024fe86e68d5b84",
+      "gitBlob": "5aca96469737aeb27ac753e2e095bf4901770d5b",
+      "artifact": "m3/migration/intake-20261005/portable/pcr/outputs/synexia-primitives/src/test/java/com/synexia/primitives/ProviderResidencySupersetTest.java"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/VersionedProviderLookupCounterTest.java",
+      "sha256": "78b23ce5fbc6d941b829577498b017f19dfa7c65a5767cdfdad55d0e34cf8edf",
+      "gitBlob": "d61722cc00503ddb2ff19ae7ce9bfca9667afab7",
+      "artifact": "m3/migration/intake-20261005/portable/pcr/outputs/synexia-primitives/src/test/java/com/synexia/primitives/VersionedProviderLookupCounterTest.java"
+    }
+  ],
+  "materialization": {
+    "manifest": {
+      "path": "m3/migration/intake-20261005/portable/pcr/recipe/materialization/manifest.tsv",
+      "sha256": "be42c1c429c4a40fbce3499fa8d47ab380606fb6605843435751eaef80f3bcaa"
+    },
+    "output": null,
+    "patch": null
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "guards": [
+    {
+      "path": "m3/migration/migration.py",
+      "sha256": "4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787"
+    },
+    {
+      "path": "m3/migration/recipe.py",
+      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
+    },
+    {
+      "path": "m3/docs/name-mapping.schema.json",
+      "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b"
+    },
+    {
+      "path": "m3/migration/test/test_migration.py",
+      "sha256": "01fa8c629c0002974a86c0ee363817f383ae4c88c61a399cc619d61c86c24413"
+    },
+    {
+      "path": "m3/migration/intake-20261005/crate/plan.json",
+      "sha256": "47aa763f4678124df42f3181e68e2ff0a74636add9403c1e36e40224094e0cdc"
+    }
+  ],
+  "integration_master_commit": "8131f535300c005afd27443d0281ede11198522f",
+  "integration_master_tree": "8a87d42532c93117f88f8e49abc728f3e49a8118",
+  "outputs": [
+    {
+      "after": {
+        "resource": "after/0.txt",
+        "sha256": "245fcd73135ef418a30ee350049719574f86222e08c63219d883119b3dc8321f"
+      },
+      "before": {
+        "resource": "before/0.txt",
+        "sha256": "8e229715d6783906b1ee249bb2707cdb5e412146219be6037154927abac893ea"
+      },
+      "path": "m3/docs/name-mapping.json"
+    },
+    {
+      "after": {
+        "resource": "after/1.txt",
+        "sha256": "1662cd99e60e03692e95bfdeb51dbf46c5c990dac7d5cadbd5e1ddb5fcad52fe"
+      },
+      "before": {
+        "resource": "before/1.txt",
+        "sha256": "3cfe511098ff3b6caafb1f1e04f94b448e02e25f160fe98427531fc8c77a1555"
+      },
+      "path": "m3/migration/test/test_jcc_handoff_packet.py"
+    },
+    {
+      "after": {
+        "resource": "after/2.txt",
+        "sha256": "8034d77f1124584888dce10760bd2f5dae55eeb93497f7a0db1d09a3a197ec5f"
+      },
+      "before": null,
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan-intake-8131.json"
+    },
+    {
+      "after": {
+        "resource": "after/3.txt",
+        "sha256": "54114c84b923790cea717f85bdb78574aa3c14e00e1419e68c5cef7d8d87b1b4"
+      },
+      "before": null,
+      "path": "m3/migration/test/test_jcc_handoff_context_profiles.py"
+    }
+  ],
+  "plan_sha256": "eff507611bcaa5e2d3bc2736f87a279f7b6552c0dad047a151d47d9ef52bcc6a",
+  "preimage_context": "Exact authenticated master8131 context overlaid with all 544 immutable a732 publication paths; registry preimage is head79 and JCC setup preimage is master8131. source_commit identifies publication lineage, not a single-commit checkout of the composite preimages.",
+  "recipe_id": "synexia-intake-reconcile-8131/1",
+  "schema": "m3.sealed-install/1",
+  "source_commit": "a73202a02577d3e3242a390b962fd3e08b691b60"
+}

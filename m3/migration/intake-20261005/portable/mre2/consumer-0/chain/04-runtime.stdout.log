@@ -1,0 +1,6 @@
+{"stage": "runtime", "commandIndex": 1, "executable": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64/bin/java"}
+MRE_LAB_OK junitEquivalentGroups=18 phaseSchedules=15 contractMode=compiled-project-only nativeExecution=false
+{"stage": "runtime", "commandIndex": 2, "executable": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64/bin/java"}
+MRC_CLOSURE_OK junitEquivalentGroups=13 verifiedOwners=8 candidateRepairs=7 nativeExecution=false
+{"stage": "runtime", "commandIndex": 3, "executable": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64/bin/java"}
+MRE_LIVE_SUPERSET_OK junitEquivalentGroups=3 nativeExecution=false

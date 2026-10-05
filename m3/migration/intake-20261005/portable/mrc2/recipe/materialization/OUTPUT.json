@@ -1,0 +1,25 @@
+{
+  "schema":"synexia.mrc.output/1",
+  "crate":"mrc-v4",
+  "baseline":"99221b0f25a1b09c32855d76e295b816f632a46b",
+  "recipe":"com.synexia.rewrite.Mrc4",
+  "manifest":{"resource":"com/synexia/rewrite/hash-pinned-java/mrc-v4/manifest.tsv","sha256":"29cd35b127528efe79af2bfb8d8e81a7d4e80c174c6af11df5249aa3a5229f7f"},
+  "targetCount":7,
+  "changes":7,
+  "replacements":7,
+  "additions":0,
+  "mixedStates":128,
+  "inventoryRefusals":29,
+  "envelope":"generic-rendered-java-snapshot",
+  "patch":{"path":"candidate.patch","sha256":"a394e730e97d9d40efff4872fe668cf8cb7db7ad565a3dbd81c137ebef536c26","bytes":10973},
+  "files":[
+    {"path":"m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java","beforeSHA256":"c0ea0f3d0c50a81a2fa353adb0542d60e648aed93028775de5fabd55d8bd8024","afterSHA256":"35d503be04c1206f3e0ebae79e2e117cf25e66d54ee314e82ec3a4e41539547e","sha256":"35d503be04c1206f3e0ebae79e2e117cf25e66d54ee314e82ec3a4e41539547e","gitBlob":"acb7d9092233f8dad18406e11d51b7205581bfb4","bytes":48403,"change":"REPLACE"},
+    {"path":"synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java","beforeSHA256":"3c9b1c00836f9eb97c741482d252aa581dabb0643cf181cd4eb880409b37455f","afterSHA256":"460ac381ab86ad926d1253b012032a1ea2b0b53a02ea3169436958ec35c45ade","sha256":"460ac381ab86ad926d1253b012032a1ea2b0b53a02ea3169436958ec35c45ade","gitBlob":"2f35db68a22a7bff1f5ca1a3cacbb9423730298e","bytes":33102,"change":"REPLACE"},
+    {"path":"synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java","beforeSHA256":"718d541f102f6c4286f23d077462d2bd28b922e3da48437d3bcbd1e12aa23696","afterSHA256":"59742f333ab2a04c3cd5b12061bff182e9a2114549117ce323928d391c10fafa","sha256":"59742f333ab2a04c3cd5b12061bff182e9a2114549117ce323928d391c10fafa","gitBlob":"e4e55dbc3f9255ad71dfa391c43c352b31472622","bytes":17440,"change":"REPLACE"},
+    {"path":"synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java","beforeSHA256":"0cb91a21a5c22f2fcb6f6e04e76a86466eaa5136bd2552686975a31a64e8e58c","afterSHA256":"32ad3ecb53a611de29ce8bdcf4079d77576b3b6d5a56a847b67c9cbd5c91b326","sha256":"32ad3ecb53a611de29ce8bdcf4079d77576b3b6d5a56a847b67c9cbd5c91b326","gitBlob":"108514ff8960adc20c9fd88d4fd01ba55cc2f3c8","bytes":20208,"change":"REPLACE"},
+    {"path":"synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java","beforeSHA256":"5ef1e5871ff3b0d9ba2345bd1ac8133df349f71e3257201555a0d137d315f3f4","afterSHA256":"dfaeb0026c90f2563d52e599a478f54f130b25ef89c150f39e58b0ff9049e304","sha256":"dfaeb0026c90f2563d52e599a478f54f130b25ef89c150f39e58b0ff9049e304","gitBlob":"db4bbc598b26eadd20cde6556eeda6f80c0cf7ec","bytes":6242,"change":"REPLACE"},
+    {"path":"synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeCrateSerialAtomReview.java","beforeSHA256":"5b240e9c5d2c6da5b70ab045a7756f72de47bd8eeac4c3cc3d410e2e9db4bb4a","afterSHA256":"b11640b4d97f95e3c12299f85cf0dbba081ae70b7b6c2c4ff8b2135446be1337","sha256":"b11640b4d97f95e3c12299f85cf0dbba081ae70b7b6c2c4ff8b2135446be1337","gitBlob":"1b4edfccece8a7e9bb5df3212e3061470f7c13d9","bytes":24064,"change":"REPLACE"},
+    {"path":"synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SemanticCodeInventoryRecipe.java","beforeSHA256":"fa0d380eadb57cccf5a41fdffaea85000ada90c9b90b113f29cda006b70c2f03","afterSHA256":"3a475b5a1ea098b0ce07368e4ef1080f8c888d7166ceefe85716a12d735b21cc","sha256":"3a475b5a1ea098b0ce07368e4ef1080f8c888d7166ceefe85716a12d735b21cc","gitBlob":"d02f33fe0be66066efb5148d0694763cfaea2392","bytes":36683,"change":"REPLACE"}
+  ],
+  "outputSealSHA256":"ad18ae05b67736732113275907deef085a06036346d5c68b877fb5270daee95e"
+}

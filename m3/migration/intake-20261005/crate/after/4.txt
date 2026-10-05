@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3</groupId><artifactId>synexia-intake-task</artifactId><version>1</version>
+  <packaging>pom</packaging>
+  <name>Source-bound Synexia intake task proof</name>
+  <description>Host-tool receipt admission only; no JDK product dependencies or source application.</description>
+  <properties><m3.python>python3</m3.python></properties>
+  <build><plugins><plugin>
+    <groupId>org.codehaus.mojo</groupId><artifactId>exec-maven-plugin</artifactId><version>3.6.4</version>
+    <executions><execution><id>current-migration-intake-and-replay-contracts</id><phase>test</phase><goals><goal>exec</goal></goals>
+      <configuration>
+        <executable>${m3.python}</executable><workingDirectory>${project.basedir}/../../..</workingDirectory>
+        <arguments><argument>-m</argument><argument>unittest</argument><argument>discover</argument>
+          <argument>-s</argument><argument>m3/migration/test</argument><argument>-p</argument><argument>test_*.py</argument><argument>-v</argument></arguments>
+      </configuration>
+    </execution></executions>
+  </plugin></plugins></build>
+</project>

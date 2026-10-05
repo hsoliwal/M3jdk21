@@ -1,0 +1,161 @@
+{
+  "authority": {
+    "path": "m3/docs/name-mapping.json",
+    "sha256": "245fcd73135ef418a30ee350049719574f86222e08c63219d883119b3dc8321f"
+  },
+  "dependencyClosureComplete": false,
+  "lanes": [
+    {
+      "id": "mrc2",
+      "mappingIds": [
+        "synexia.intake.mrc2.CompetitiveProblemReview",
+        "synexia.intake.mrc2.ChallengeDonorPassLedger",
+        "synexia.intake.mrc2.CompetitiveCapabilityPlanIndex",
+        "synexia.intake.mrc2.DonorMechanicalShapeCatalog",
+        "synexia.intake.mrc2.M3OpenRewriteRuntimeRecipeInventoryRecipe",
+        "synexia.intake.mrc2.M3RecipeCrateSerialAtomReview",
+        "synexia.intake.mrc2.M3SemanticCodeInventoryRecipe"
+      ],
+      "outputSeal": "ad18ae05b67736732113275907deef085a06036346d5c68b877fb5270daee95e",
+      "outputs": 7,
+      "proofResults": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mrc2/recipe/RESULT.json",
+          "sha256": "4cd704a31cba101e36721476876720a8d3bc2c141d8128ac14db2230d69b8770"
+        },
+        {
+          "path": "m3/migration/intake-20261005/portable/mrc2/consumer-0/RESULT.json",
+          "sha256": "ac3a58759bd8dda7d2e437fd2fd1aa3201c30842c4993447dd0987d625fc268e"
+        }
+      ],
+      "recipe": "com.synexia.rewrite.Mrc4"
+    },
+    {
+      "id": "mrd",
+      "mappingIds": [
+        "synexia.intake.mrd.M3HashPinnedJavaSnapshotRecipe"
+      ],
+      "outputSeal": "77f62a92b3bc445eb9980537ffbf8dfb5caf1071e013f1ade29383347974982c",
+      "outputs": 1,
+      "proofResults": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mrd/recipe/RESULT.json",
+          "sha256": "31b7e0ce9fc360555865112e366573bfed3375a542496333cd5e6dcb60e6471d"
+        },
+        {
+          "path": "m3/migration/intake-20261005/portable/mrd/consumer-0/RESULT.json",
+          "sha256": "4cd704a31cba101e36721476876720a8d3bc2c141d8128ac14db2230d69b8770"
+        }
+      ],
+      "recipe": "com.synexia.rewrite.Mrd"
+    },
+    {
+      "id": "mre2",
+      "mappingIds": [
+        "synexia.intake.mre2.M3RecipeMasteryLab",
+        "synexia.intake.mre2.Pcr",
+        "synexia.intake.mre2.Pcs"
+      ],
+      "outputSeal": "39ef1d5ecb98af7ddbb0efbbf8ea188bbeefb03600080b885af951454a2bbb78",
+      "outputs": 3,
+      "proofResults": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mre2/recipe/RESULT.json",
+          "sha256": "ca973eb099233eef271db4e64ff4c256466ced9cd4cd473064e7d22f08558f33"
+        },
+        {
+          "path": "m3/migration/intake-20261005/portable/mre2/consumer-0/RESULT.json",
+          "sha256": "ac3a58759bd8dda7d2e437fd2fd1aa3201c30842c4993447dd0987d625fc268e"
+        },
+        {
+          "path": "m3/migration/intake-20261005/portable/mre2/consumer-1/RESULT.json",
+          "sha256": "adce0fb4251ed4efa2dff2ec0818a0c7d9be585893241d8b7c2fda0a6c919a20"
+        }
+      ],
+      "recipe": "com.synexia.rewrite.Mre2"
+    },
+    {
+      "id": "mrp",
+      "mappingIds": [
+        "synexia.intake.mrp.DenseCollections",
+        "synexia.intake.mrp.FuzzyStructureFactory",
+        "synexia.intake.mrp.AdvancedAlgorithmShapesTest",
+        "synexia.intake.mrp.ProviderBackedPrimitiveTreeSupersetTest"
+      ],
+      "outputSeal": "6b9f5b92ca032ebbb157d008ba0ba012e0a112f2580800f542fdef997a618968",
+      "outputs": 4,
+      "proofResults": [
+        {
+          "path": "m3/migration/intake-20261005/portable/mrp/recipe/RESULT.json",
+          "sha256": "605bd51ded9733cc2bdffaec01fff584997d1a4b0551cb80f1f5cb70142263e5"
+        },
+        {
+          "path": "m3/migration/intake-20261005/portable/mrp/consumer-0/RESULT.json",
+          "sha256": "9ac3f2db501508383bc80aa2c8e0e983aa2e814d10a6bc3de241613b756ff5dc"
+        }
+      ],
+      "recipe": "com.synexia.rewrite.Mrp"
+    },
+    {
+      "id": "pcr",
+      "mappingIds": [
+        "synexia.intake.pcr.PackedLazyValueState",
+        "synexia.intake.pcr.PackedLazyCallbackSafetyTest",
+        "synexia.intake.pcr.PackedLazyTreeMapSelfTest",
+        "synexia.intake.pcr.BoundedProviderBackedPrimitiveLongTree",
+        "synexia.intake.pcr.BoundedProviderBackedPrimitiveRows",
+        "synexia.intake.pcr.BoundedProviderBackedPrimitiveTree",
+        "synexia.intake.pcr.BoundedVersionedProviderBackedPrimitiveLongTree",
+        "synexia.intake.pcr.ObjectCounterMap",
+        "synexia.intake.pcr.ProviderBackedPrimitiveRows",
+        "synexia.intake.pcr.VersionedProviderBackedPrimitiveLongTree",
+        "synexia.intake.pcr.BoundedProviderRowsFailureAdmissionTest",
+        "synexia.intake.pcr.BulkPrimitiveRowProviderTest",
+        "synexia.intake.pcr.ExactWidthCollectionsSelfTest",
+        "synexia.intake.pcr.ObjectCounterZeroMetadataRepairTest",
+        "synexia.intake.pcr.PcsProbe",
+        "synexia.intake.pcr.PcsTest",
+        "synexia.intake.pcr.ProviderCallbackSupersetProbe",
+        "synexia.intake.pcr.ProviderCallbackSupersetTest",
+        "synexia.intake.pcr.ProviderResidencySupersetTest",
+        "synexia.intake.pcr.VersionedProviderLookupCounterTest"
+      ],
+      "outputSeal": "7be22020b757ad60872454c61f7c02e633f7768a532520488f8dd1bd8487f4b8",
+      "outputs": 20,
+      "proofResults": [
+        {
+          "path": "m3/migration/intake-20261005/portable/pcr/recipe/RESULT.json",
+          "sha256": "adce0fb4251ed4efa2dff2ec0818a0c7d9be585893241d8b7c2fda0a6c919a20"
+        },
+        {
+          "path": "m3/migration/intake-20261005/portable/pcr/consumer-0/RESULT.json",
+          "sha256": "f66c2e921d399f4d64957a868f692943bec9410fa311afcc70df278896e3265a"
+        },
+        {
+          "path": "m3/migration/intake-20261005/portable/pcr/consumer-1/RESULT.json",
+          "sha256": "9ac3f2db501508383bc80aa2c8e0e983aa2e814d10a6bc3de241613b756ff5dc"
+        }
+      ],
+      "recipe": "com.synexia.rewrite.Pcr"
+    }
+  ],
+  "originalToolchainCustodyRevalidated": false,
+  "outputs": 35,
+  "packetSHA256": "3b556b885af4b5afeb0b9f22a4bcceea93b6c836125019bde1534652d77c7639",
+  "productWrites": 0,
+  "rootOwners": 343,
+  "runtimeAccepted": false,
+  "schema": "m3.synexia-intake-receipt/1",
+  "source": {
+    "commit": "99221b0f25a1b09c32855d76e295b816f632a46b",
+    "repo": "hsoliwal/com.synexia",
+    "tree": "d0af0944d2dfe6af3349b2e1c72691648c596f6d"
+  },
+  "state": "RECEIVED_FOR_REVIEW",
+  "target": {
+    "commit": "ccb4ace7f7d79f97ae2d9600de55960504cc3c21",
+    "repo": "hsoliwal/M3jdk21",
+    "tree": "f5533ab50b60297c955d94a8e1190ad91d0bf831"
+  },
+  "wholeSourceTreeCovered": false
+}

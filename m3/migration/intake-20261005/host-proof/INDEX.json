@@ -1,0 +1,588 @@
+{
+  "archive": {
+    "bytes": 3442343,
+    "format": "USTAR in gzip; sorted regular entries; mode 0644; uid 0; gid 0; mtime 0",
+    "path": "m3/migration/intake-20261005/host-proof/evidence.tar.gz",
+    "sha256": "0cd30b259752db14777dc2e17f35366ea29100d0ec3cfdccf51d2571bf11eac4"
+  },
+  "baseRootTree": "f5533ab50b60297c955d94a8e1190ad91d0bf831",
+  "baseline": "ccb4ace7f7d79f97ae2d9600de55960504cc3c21",
+  "excludedBodies": [
+    "unchanged baseline and source fixture",
+    "toolchains and dependency caches",
+    "compiled Python and upstream Java/native artifacts"
+  ],
+  "members": [
+    {
+      "binding": "RESULT.inputsSHA256 -> inputs.json row",
+      "bytes": 813,
+      "gitBlob": "5e5c3b35870f004ae78620fa76ddfe3a070822c6",
+      "path": "PATCH.json",
+      "sha256": "ca712d9aa60cf63d1a04460a8bbc39fc2f967d3c59fe73cd5820370176a4f660",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/PATCH.json"
+    },
+    {
+      "binding": "selected terminal result SHA-256",
+      "bytes": 97080,
+      "gitBlob": "5a110464bd4b83ba3c285be17ae61ba2ec4a126a",
+      "path": "RESULT.json",
+      "sha256": "077aef9e67566ae1e2fe3eb552c9fa5880b582f2bd9ea44dfb39b2d8e6babfbc",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/RESULT.json"
+    },
+    {
+      "binding": "RESULT.inputsSHA256 -> inputs.json row",
+      "bytes": 3648,
+      "gitBlob": "6a63a59bbb6bafe211fa23c6ec4b66d6476ab3de",
+      "path": "authority/candidate-manifest.json",
+      "sha256": "3ce70d5055ce74621cadd24d0a0d0bbf4202901ca24b9416e589095637b51c80",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/authority/candidate-manifest.json"
+    },
+    {
+      "binding": "RESULT.inputsSHA256 -> inputs.json row",
+      "bytes": 778818,
+      "gitBlob": "766f1d067afb38235f1de8c99ce9aacaf8e9fdd6",
+      "path": "authority/dependencies.json",
+      "sha256": "e638b50b527247718bd6b8bf8d8003fb6073cd4a8f3cabb328b0477430695832",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/authority/dependencies.json"
+    },
+    {
+      "binding": "RESULT.inputsSHA256 -> inputs.json row",
+      "bytes": 5972,
+      "gitBlob": "da8c65a875d7360c0d4cb6f5fd50c7a9c9da9df2",
+      "path": "authority/publication-plan.json",
+      "sha256": "96236fc676af5722b9ca2a95263b5bcd2f39f2f29cb50c8a5f728edd607670da",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/authority/publication-plan.json"
+    },
+    {
+      "binding": "RESULT.inputsSHA256 -> inputs.json row",
+      "bytes": 14185672,
+      "gitBlob": "7be3c292038625bf4e04559b3521cf513eb54dc7",
+      "path": "authority/tree.json",
+      "sha256": "8d71090cefc1e8d711ca28822b5d6914d1dd6fbc3b28a42094b4b19cfcd317f8",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/authority/tree.json"
+    },
+    {
+      "binding": "RESULT.inputsSHA256 -> inputs.json row",
+      "bytes": 3212,
+      "gitBlob": "976911caaa275bb2f82d71062b28cf97475ba9b9",
+      "path": "authority/upstream-bindings.json",
+      "sha256": "ed6713a8c3f3aa6ae1ea5ee1ac256b4670bb183fa2d4fd234f502468fc864a42",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/authority/upstream-bindings.json"
+    },
+    {
+      "binding": "RESULT.inputsSHA256 -> inputs.json row",
+      "bytes": 134200,
+      "gitBlob": "fe32857c098813d870b1bfefe68b7517136a853d",
+      "path": "authority/upstream-inputs.json",
+      "sha256": "3816f9caae8488ab174e03c1b62c8d58ac97a204369ca843e5fee62c54d95713",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/authority/upstream-inputs.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 888,
+      "gitBlob": "4860b83a58b919417f1d1f4cdf14a6bc6ebadb01",
+      "path": "chain/01-lint.json",
+      "sha256": "1e753c8d487837d45a8e31b71f6343f89b42e91092616f70bc4b19a12d6dca70",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/chain/01-lint.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 0,
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "path": "chain/01-lint.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/chain/01-lint.stderr.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 20,
+      "gitBlob": "70989b27ed9c7abd55fc9857a16766ba1c0fe589",
+      "path": "chain/01-lint.stdout.log",
+      "sha256": "92a4228c016c3533bef22e341361ab25abf4243047648df880b43261409ecef2",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/chain/01-lint.stdout.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 916,
+      "gitBlob": "fbc0e1c5111c38081736f49bf0e021e6c1345aaa",
+      "path": "chain/02-compile.json",
+      "sha256": "9bba10a360c98a206cff2ff5ec728920c93bc59e3f93ebaa47daa7ef4e711540",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/chain/02-compile.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 0,
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "path": "chain/02-compile.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/chain/02-compile.stderr.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 23,
+      "gitBlob": "236d8bce4517034dd78d0e82ea23388f756abef5",
+      "path": "chain/02-compile.stdout.log",
+      "sha256": "c517503216bd5c717f1c7ef03f672b6b7a7bd5ae20a7d6536b9cb664afee2739",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/chain/02-compile.stdout.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 933,
+      "gitBlob": "3c5dd1eca37077249c56ac01b548d6f75da71db0",
+      "path": "chain/03-test.json",
+      "sha256": "4b99c79f79ba25abfabfddb8a3b61d1c4e592ed210824d7f93b343b1b6ff8a0a",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/chain/03-test.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 0,
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "path": "chain/03-test.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/chain/03-test.stderr.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 20,
+      "gitBlob": "ea0363ccbddea5962fa8a731210d3dc30bcf43d7",
+      "path": "chain/03-test.stdout.log",
+      "sha256": "f28f166de7270e6c706a5bfc40fee536791ade5c13f18e129ccebaf22b6652a4",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/chain/03-test.stdout.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 959,
+      "gitBlob": "7da2993be933ffa4cbd1310ef5859025029bf091",
+      "path": "chain/04-runtime.json",
+      "sha256": "c4f0cc44c4aafbf49ff262145642a03c3a9b4462d142c952dd890541876c3b16",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/chain/04-runtime.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 0,
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "path": "chain/04-runtime.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/chain/04-runtime.stderr.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 23,
+      "gitBlob": "4fbe740e4d889e1948538447729b521ee8882fbf",
+      "path": "chain/04-runtime.stdout.log",
+      "sha256": "7931f70ff037ada35b3232eca7358b27425d83d55837d4bcfbd2c67aec4a6935",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/chain/04-runtime.stdout.log"
+    },
+    {
+      "binding": "RESULT.inputsSHA256 -> inputs.json row",
+      "bytes": 1331,
+      "gitBlob": "6ae79c9f936fe1d42aac895867b7fb49a71df812",
+      "path": "commands.json",
+      "sha256": "3784c4ea80f4567ca8c709011e87e72833691c4f3f72e0001128cdbcd7f27b2f",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 804,
+      "gitBlob": "bb17d05a6e5ece2ab2f3a1ff3a2f886a84daa649",
+      "path": "commands/canonical-complete.json",
+      "sha256": "ab5cbc591c8690170498b8f164acf5ad6e755e83267575d8c811cef7e402fcd8",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/canonical-complete.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 12764,
+      "gitBlob": "bd952a652f54f4ab66a7c688b13fe702d5d22038",
+      "path": "commands/canonical-complete.stderr.log",
+      "sha256": "7e022a80464b4a244581a764d0ead6be13a89b17efb062c4a9fa1dcbcc5df106",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/canonical-complete.stderr.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 47,
+      "gitBlob": "407ff20445c228580201d3d921ccfc1ec401a7f7",
+      "path": "commands/canonical-complete.stdout.log",
+      "sha256": "d4578b77ded4c87f33240fad4588e418b3157992288cbf4a1a4e38be14ece15b",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/canonical-complete.stdout.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 804,
+      "gitBlob": "1e17a38e024693239d86d6fcb40484c8252e6b7c",
+      "path": "commands/canonical-validate.json",
+      "sha256": "f514c3e10f710ee6e0e6bfa18e1bf54611ef8c6cf630206dfc6956f34aa2556c",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/canonical-validate.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 0,
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "path": "commands/canonical-validate.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/canonical-validate.stderr.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 47,
+      "gitBlob": "407ff20445c228580201d3d921ccfc1ec401a7f7",
+      "path": "commands/canonical-validate.stdout.log",
+      "sha256": "d4578b77ded4c87f33240fad4588e418b3157992288cbf4a1a4e38be14ece15b",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/canonical-validate.stdout.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 814,
+      "gitBlob": "fecae27663f9d80e77202ebe5504a46841dc2126",
+      "path": "commands/installer-after.json",
+      "sha256": "a52863a416ef9fd6bd0a8a8b6f515ecbb9379aa4b2b614025f8e66f4f76169f3",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/installer-after.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 0,
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "path": "commands/installer-after.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/installer-after.stderr.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 165,
+      "gitBlob": "b5a81dd914adeac592cb9fad5ba3e353c583183f",
+      "path": "commands/installer-after.stdout.log",
+      "sha256": "7380a4d830dc3ebead4386041de5291d0f427ce1961c3df86752221bf782476f",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/installer-after.stdout.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 814,
+      "gitBlob": "f51cacb0473ac2890fb7b22b9632f0f2f13765ea",
+      "path": "commands/installer-apply.json",
+      "sha256": "53ed9401470be122038cb592c6f23d40adef89203996b49efe880e7b982715e4",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/installer-apply.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 0,
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "path": "commands/installer-apply.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/installer-apply.stderr.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 166,
+      "gitBlob": "2e483d314afa793797f4f752ed9df8a2ebcc5681",
+      "path": "commands/installer-apply.stdout.log",
+      "sha256": "f84bafc26c4cce73bf78a3e2fe44a9f4ed934e294c4b084a6ca2d85772c7992e",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/installer-apply.stdout.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 814,
+      "gitBlob": "01cfd5e30423a16025f9b4859bf615b319c78f9a",
+      "path": "commands/installer-before.json",
+      "sha256": "eb53a8f4e2dad6640cd92ce6c4decab117fbd0c3c8319777736d3837b0ef8f9f",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/installer-before.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 0,
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "path": "commands/installer-before.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/installer-before.stderr.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 166,
+      "gitBlob": "822ebc9323341763c236ac273fdb8ad8a57a1e7a",
+      "path": "commands/installer-before.stdout.log",
+      "sha256": "773ea1cb3c651bf81de20608aaa52047bc13a3505c721fb487ab6898aed5ccc7",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/installer-before.stdout.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 814,
+      "gitBlob": "3523a5c6c465610e5f3a90f7340f299b837f1b55",
+      "path": "commands/installer-fixedpoint.json",
+      "sha256": "24c96ad4cff6a0518f08f4843f2d797996fc05b82eb6daec7ca643c065c059cb",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/installer-fixedpoint.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 0,
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "path": "commands/installer-fixedpoint.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/installer-fixedpoint.stderr.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 165,
+      "gitBlob": "b5a81dd914adeac592cb9fad5ba3e353c583183f",
+      "path": "commands/installer-fixedpoint.stdout.log",
+      "sha256": "7380a4d830dc3ebead4386041de5291d0f427ce1961c3df86752221bf782476f",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/installer-fixedpoint.stdout.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 1067,
+      "gitBlob": "17fca1a84c0efe1dd7071ffe2061505015272b48",
+      "path": "commands/maven-test.json",
+      "sha256": "2d7e2c09f9885f05fd5f0d74d1671da58c40056819a26bd8824f27984a49d0d1",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/maven-test.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 12608,
+      "gitBlob": "5fb1dca37c0bcc8f768d3f398a3b89d2c247fc46",
+      "path": "commands/maven-test.stderr.log",
+      "sha256": "528489d2d380c8574e7ecda5ec57725a292de4881fdea6751d52a76b01945606",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/maven-test.stderr.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 724,
+      "gitBlob": "e292cacb6d6c25503034789ce4cd055ec85c85c5",
+      "path": "commands/maven-test.stdout.log",
+      "sha256": "d2eadb48ecfad6820796c1a29be795fc1791cd33c6ca97018648ed1610ca09c7",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/maven-test.stdout.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 929,
+      "gitBlob": "3c16b42b311bdc31f94501d7f13c7b9cbd612ea5",
+      "path": "commands/portable-intake-replay-1.json",
+      "sha256": "e1d4f4492b12c98fd496a743443be9ddf8307448b889ef43f363673dafcbcf39",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/portable-intake-replay-1.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 0,
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "path": "commands/portable-intake-replay-1.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/portable-intake-replay-1.stderr.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 6437,
+      "gitBlob": "e1fc6dac304e9af98de3cdab3eaffb2d6dfc609a",
+      "path": "commands/portable-intake-replay-1.stdout.log",
+      "sha256": "ad1aa88119d8dbf5ab5a3fc64a43bd67bc67df8aadcde9139c663b15a042f1c2",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/portable-intake-replay-1.stdout.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 929,
+      "gitBlob": "3c16b42b311bdc31f94501d7f13c7b9cbd612ea5",
+      "path": "commands/portable-intake-replay-2.json",
+      "sha256": "e1d4f4492b12c98fd496a743443be9ddf8307448b889ef43f363673dafcbcf39",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/portable-intake-replay-2.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 0,
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "path": "commands/portable-intake-replay-2.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/portable-intake-replay-2.stderr.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 6437,
+      "gitBlob": "e1fc6dac304e9af98de3cdab3eaffb2d6dfc609a",
+      "path": "commands/portable-intake-replay-2.stdout.log",
+      "sha256": "ad1aa88119d8dbf5ab5a3fc64a43bd67bc67df8aadcde9139c663b15a042f1c2",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/portable-intake-replay-2.stdout.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 1104,
+      "gitBlob": "d85b9260b03b046d21a077c0809d536f482a372d",
+      "path": "commands/portable-intake-wrong-seal.json",
+      "sha256": "50de0a790fa82e23f484d2c42a5afe73ea646cb72b5d9e25baf911505f742b85",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/portable-intake-wrong-seal.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 44,
+      "gitBlob": "51e6f4094c256202a8156607ca333183d4ad1b8d",
+      "path": "commands/portable-intake-wrong-seal.stderr.log",
+      "sha256": "f0c33e11c0950686d10476d0f160a4856ec9f83e3e4042c9fa0816c423d9e1e0",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/portable-intake-wrong-seal.stderr.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 0,
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "path": "commands/portable-intake-wrong-seal.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/portable-intake-wrong-seal.stdout.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 1103,
+      "gitBlob": "ea4336746a6d3b68b2b97ba2357e8488f79f22d4",
+      "path": "commands/portable-intake.json",
+      "sha256": "d0890393fcdc389f8f4cb42bafcff79837f8e3178ef637c80dab8cfa1d72eb5f",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/portable-intake.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 0,
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "path": "commands/portable-intake.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/portable-intake.stderr.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 0,
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "path": "commands/portable-intake.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/portable-intake.stdout.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 969,
+      "gitBlob": "b5608dc99825c3aa441a10b500d2895925c3ce64",
+      "path": "commands/portable-prepare.json",
+      "sha256": "c550fd10a9c1785d1b8eed81c2e7882d92ab7e6daa92dcca594afc280bd10096",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/portable-prepare.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 0,
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "path": "commands/portable-prepare.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/portable-prepare.stderr.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 415,
+      "gitBlob": "e4704eaef47d77f01b443587c1519e89bc542011",
+      "path": "commands/portable-prepare.stdout.log",
+      "sha256": "037e71d52c961c8015ccf498c4ad5735a8eb8b562c0f30d0a4cf0dc0ea214c56",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/commands/portable-prepare.stdout.log"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 789,
+      "gitBlob": "136d772026c3841b4ad22141138e6d5371f8d4e1",
+      "path": "compiled-artifacts.json",
+      "sha256": "cf52b4fb76e011b808ff8f7dcb661509a389d127653a5021a1c4088d7afedb44",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/compiled-artifacts.json"
+    },
+    {
+      "binding": "RESULT.inputsSHA256 -> inputs.json row",
+      "bytes": 111703,
+      "gitBlob": "7e3cf12c7493cc1c81f1ac58c917847fb5572c02",
+      "path": "config.json",
+      "sha256": "2555a224d5068fde30b2eb22b7f7eccd90cf39e9ca479fc5de10685d2558203a",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/config.json"
+    },
+    {
+      "binding": "RESULT.inputsSHA256",
+      "bytes": 986635,
+      "gitBlob": "5c00f6e744b20e3535b03bda16bff4395f33b174",
+      "path": "inputs.json",
+      "sha256": "a4cb669651a445656e2a168da5648998d23918d99c2975c54cd801e044f31ac0",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/inputs.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 7638,
+      "gitBlob": "2876f00c152f04f7355ff21eaec8812670132340",
+      "path": "lint-report.json",
+      "sha256": "bac9eaa01ed78d5aa4b92e4d92a387f9ff11aee3aa6fc67bd27c67c8682df4b6",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/lint-report.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 535890,
+      "gitBlob": "59d2387d0bc0d23272d90a4781b53923f66b50ff",
+      "path": "portable-runtime-report.json",
+      "sha256": "5b5c3377bf3dece30bd358b0f97b26f5615c540424a52c468dd30c1462c45c82",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/portable-runtime-report.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 762919,
+      "gitBlob": "e408de9dff076e3cc8cdbc817eee8b248d30b903",
+      "path": "runtime-report.json",
+      "sha256": "02638e1ad93c7229a6a574db7282b2f5661d77a4f8a027e0a76d07ca5b509c95",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/runtime-report.json"
+    },
+    {
+      "binding": "RESULT.inputsSHA256 -> inputs.json row",
+      "bytes": 649486,
+      "gitBlob": "7725091d2a71435c007f799055f49973bd014ad0",
+      "path": "source-context.json",
+      "sha256": "f1f0022a57fed38cd735773c36104ebf4bfac9193f0919dfc6b04e9d37241394",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/source-context.json"
+    },
+    {
+      "binding": "RESULT.evidence",
+      "bytes": 7711,
+      "gitBlob": "776a65e51ff06a593cf63d78d6e89d237e402538",
+      "path": "test-report.json",
+      "sha256": "dd13d13c6753ddf946d41bf468a41af9b6039528cbbf1d08d06e153eeee6107a",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/test-report.json"
+    },
+    {
+      "binding": "RESULT.inputsSHA256 -> inputs.json row",
+      "bytes": 669152,
+      "gitBlob": "806695d5fa42622422125b140f90abff547ce392",
+      "path": "tooling-roots.json",
+      "sha256": "8911b7bc1bca95665416ad6d9b9632cfec12caeb954574d26a47710a4621cd96",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/tooling-roots.json"
+    },
+    {
+      "binding": "RESULT.inputsSHA256 -> inputs.json row",
+      "bytes": 1225686,
+      "gitBlob": "5626e608041450578faaa14cb74198f326918f45",
+      "path": "tooling.json",
+      "sha256": "5cd176cd4d3ff573e478921959ef9df407bcefbd9c0c87baac56a18b003dc4a4",
+      "sourcePath": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/m3-intake-v2/tooling.json"
+    }
+  ],
+  "proofInputsSHA256": "a4cb669651a445656e2a168da5648998d23918d99c2975c54cd801e044f31ac0",
+  "proofResultSHA256": "077aef9e67566ae1e2fe3eb552c9fa5880b582f2bd9ea44dfb39b2d8e6babfbc",
+  "proofRunnerSHA256": "b6646c465ba63df18b4e2b23b615966e5c7263f3353f0a6f1665d7691923fe8c",
+  "publicationHelperSHA256": "397b1b24c89b5e954d8292f772cedbf798676bed2aa09097349bc5fc4752d511",
+  "schema": "m3.host-proof-publication-index/1",
+  "scope": {
+    "canonicalProductionApplied": false,
+    "completeReconstructionProvided": false,
+    "dependencyClosureComplete": false,
+    "gitObjectsCreated": false,
+    "githubWrites": false,
+    "hostSystemLibrariesSealed": false,
+    "originalToolchainCustodyRevalidated": false,
+    "productRuntimeAccepted": false,
+    "productWrites": 0,
+    "runtimeAccepted": false,
+    "strictCanonicalAdmission": false,
+    "wholeSourceTreeCovered": false
+  },
+  "selection": {
+    "canonicalMappingRecords": 79,
+    "executedUnittestMethods": 88,
+    "hostEvidenceFiles": 67,
+    "installedTargets": 10,
+    "installerResources": 13,
+    "portableFiles": 518,
+    "stages": [
+      "lint",
+      "compile",
+      "test",
+      "runtime"
+    ],
+    "upstreamOutputIdentities": 35
+  },
+  "verificationBoundary": "Selected publication bytes and retained host evidence were rechecked; the original upstream toolchain and full source/dependency closure were not re-executed or repackaged."
+}

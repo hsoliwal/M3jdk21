@@ -1,0 +1,44 @@
+{
+  "sourceCommit": "99221b0f25a1b09c32855d76e295b816f632a46b",
+  "recipe": "com.synexia.rewrite.Mrp",
+  "files": [
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/DenseCollections.java",
+      "sha256": "7b13870db69e4fb85822e069abd68a9f541e6494f6a925c803058e00c0ab8580",
+      "gitBlob": "2eb8cf24c37a5f7d2667227362426f13c7033cfa",
+      "artifact": "m3/migration/intake-20261005/portable/mrp/outputs/synexia-primitives/src/main/java/com/synexia/primitives/DenseCollections.java"
+    },
+    {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/FuzzyStructureFactory.java",
+      "sha256": "6ed7a073965d2b8552447e33b046d19f2a01db931b2cd345699b1722c365f040",
+      "gitBlob": "580985b0330ee5c585c966de7473e80bdc48c26d",
+      "artifact": "m3/migration/intake-20261005/portable/mrp/outputs/synexia-primitives/src/main/java/com/synexia/primitives/FuzzyStructureFactory.java"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/AdvancedAlgorithmShapesTest.java",
+      "sha256": "8cdda3b1f66d8c8b17b87566634717a85d2a00d54543b43cfa863a21fb044aa4",
+      "gitBlob": "837e58889d33e418585234c4fea9b4a5b47c8f68",
+      "artifact": "m3/migration/intake-20261005/portable/mrp/outputs/synexia-primitives/src/test/java/com/synexia/primitives/AdvancedAlgorithmShapesTest.java"
+    },
+    {
+      "path": "synexia-primitives/src/test/java/com/synexia/primitives/ProviderBackedPrimitiveTreeSupersetTest.java",
+      "sha256": "09b2b504982bf30a6ddd4ea502ffa6d9d0096658df7ca30c8e728136452943d8",
+      "gitBlob": "88ef6cb99e4de24e8dba04d0936cdbbff32a546f",
+      "artifact": "m3/migration/intake-20261005/portable/mrp/outputs/synexia-primitives/src/test/java/com/synexia/primitives/ProviderBackedPrimitiveTreeSupersetTest.java"
+    }
+  ],
+  "materialization": {
+    "manifest": {
+      "path": "m3/migration/intake-20261005/portable/mrp/recipe/materialization/manifest.tsv",
+      "sha256": "876d3655e26360dee60286298e4815f75f261ae78ab2577d581531e54df6c8f1"
+    },
+    "output": {
+      "path": "m3/migration/intake-20261005/portable/mrp/recipe/materialization/OUTPUT.json",
+      "sha256": "e20501e6fa400e4ebadfc52146e03aaeeb64839a99c47970f85d2fb9f0c3f639"
+    },
+    "patch": {
+      "path": "m3/migration/intake-20261005/portable/mrp/recipe/materialization/candidate.patch",
+      "sha256": "c66bf321695a7eb2db93693492e2732e8039e7982f5be7b138002368407ac5dd"
+    }
+  }
+}

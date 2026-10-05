@@ -1,0 +1,391 @@
+{
+  "status": "ACTUAL_SUREFIRE_REPORTS",
+  "totals": {
+    "tests": 191,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": {
+    "com.synexia.primitives.AdvancedAlgorithmShapesTest": {
+      "counts": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.AdvancedAlgorithmShapesTest.xml",
+      "sha256": "07e0a4d7af92b5f27f79ff4c350534d334d34ec4de72f72478ab0f661b27d1f7"
+    },
+    "com.synexia.primitives.BoundedProviderRowsFailureAdmissionTest": {
+      "counts": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.BoundedProviderRowsFailureAdmissionTest.xml",
+      "sha256": "f1040d672acc646c44b6f058e26d75d2ca0c947c5bcac0e1b4c313df343799f3"
+    },
+    "com.synexia.primitives.BulkPrimitiveRowProviderTest": {
+      "counts": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.BulkPrimitiveRowProviderTest.xml",
+      "sha256": "00ff33ba6e57ec5ad4c42a2d64f76b45494af1518808167e7d5de220e0b74d7c"
+    },
+    "com.synexia.primitives.CollectionContractsTest": {
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.CollectionContractsTest.xml",
+      "sha256": "e30b7e69714e8cf11da797d691133e0c72a351f704c1d0e7c35b5c337c3d74f1"
+    },
+    "com.synexia.primitives.CollectionSupersetCountsTest": {
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.CollectionSupersetCountsTest.xml",
+      "sha256": "e1189f86eb318a8f8b51375f74ffb62c30c9aef35712f01d277ad976da7e7b23"
+    },
+    "com.synexia.primitives.DenseCollectionsTest": {
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.DenseCollectionsTest.xml",
+      "sha256": "6b694af2c8c7f73b36383c9f841837ab4e674e94a0564271ea70edb6f374ddad"
+    },
+    "com.synexia.primitives.ExactWidthCollectionsTest": {
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.ExactWidthCollectionsTest.xml",
+      "sha256": "fa54f899764b8d05de1e3cbb5617fcb9f4a27321a11279fdec3db3e34d05dfb9"
+    },
+    "com.synexia.primitives.ExtendedPrimitiveCollectionsTest": {
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.ExtendedPrimitiveCollectionsTest.xml",
+      "sha256": "92d2c6b8b80095b38072e69dc75ebe85ef8fc47383dc10822c41225ba8ed1390"
+    },
+    "com.synexia.primitives.FossCollectionDonorTest": {
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.FossCollectionDonorTest.xml",
+      "sha256": "6860839610eacfcf1c61e73fa371408558cd8e7feda89cb0ba645b6d2e15fafe"
+    },
+    "com.synexia.primitives.FossSemanticClosureTest": {
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.FossSemanticClosureTest.xml",
+      "sha256": "2179f5ff73ea67e2e36c66a90d6835a72503afed46bfa5cebdccec9344a44f28"
+    },
+    "com.synexia.primitives.FuzzyAlgorithmFactoryTest": {
+      "counts": {
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.FuzzyAlgorithmFactoryTest.xml",
+      "sha256": "fef7815fa49acf9aa23bcbffe46f6bd94632283de78408aae49fa737b755c907"
+    },
+    "com.synexia.primitives.FuzzyAlgorithmFactoryWave2Test": {
+      "counts": {
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.FuzzyAlgorithmFactoryWave2Test.xml",
+      "sha256": "22b94124ad094f6de8ecac97bb28f92f93cc65a344d76637f10ed4b1cf311fbf"
+    },
+    "com.synexia.primitives.FuzzyStructureFactoryTest": {
+      "counts": {
+        "tests": 11,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.FuzzyStructureFactoryTest.xml",
+      "sha256": "ee63ee6034baa816749bedbba548070b0e47d40bb55b99a776c0930617e1514c"
+    },
+    "com.synexia.primitives.LazySegmentedStorageTest": {
+      "counts": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.LazySegmentedStorageTest.xml",
+      "sha256": "4eaa8b0cdf60f5bb28a431445bce70fb9ecb9b13ef51492aca73950a82a8cdeb"
+    },
+    "com.synexia.primitives.LeanCollectionFactoryTest": {
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.LeanCollectionFactoryTest.xml",
+      "sha256": "1d3a127d4735440dd7f2f8b6b83d096a35178d8dc3de46d18b66002990a432ed"
+    },
+    "com.synexia.primitives.MarkerPatternCollectionsTest": {
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.MarkerPatternCollectionsTest.xml",
+      "sha256": "d39c14f1079b409ed8d5d555996c8357b9ab0911d72a5c8d606e88693e44b680"
+    },
+    "com.synexia.primitives.MrpFactoryTest": {
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.MrpFactoryTest.xml",
+      "sha256": "1e6c0712c3a1a8f41daf097f534e2e8944f5167b3e9add933591aa6dc6c960f3"
+    },
+    "com.synexia.primitives.MrpIntentTest": {
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.MrpIntentTest.xml",
+      "sha256": "dec59d03d3e623296bb58fc2e86401197e8c9fb534cf7d55c61378292e6c2f78"
+    },
+    "com.synexia.primitives.ObjectCounterZeroMetadataRepairTest": {
+      "counts": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.ObjectCounterZeroMetadataRepairTest.xml",
+      "sha256": "3a192397e3d2283e72c5256f86187505efb345d7f2d2763b6813cdb6785afef0"
+    },
+    "com.synexia.primitives.PcsTest": {
+      "counts": {
+        "tests": 24,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.PcsTest.xml",
+      "sha256": "a4f6ff561875aef121d150d1790f51cd8d58473c89af894654545d10c0b18d57"
+    },
+    "com.synexia.primitives.PrimitiveCollectionSupersetTest": {
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.PrimitiveCollectionSupersetTest.xml",
+      "sha256": "d63931cb91ffba4673d9e498b26e61249c7eb183ebab40be1a2f0e703b7daecb"
+    },
+    "com.synexia.primitives.PrimitiveMpmcConcurrencyTest": {
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.PrimitiveMpmcConcurrencyTest.xml",
+      "sha256": "78fab6131bf4a46806b20e4939843e9fc0e7e2931daf8023fffdb5cb9b71a576"
+    },
+    "com.synexia.primitives.PrimitiveTouchObserverTest": {
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.PrimitiveTouchObserverTest.xml",
+      "sha256": "8268e9679af7864afd4b87068ce289802f164f6eda1b718937fad0de0e577779"
+    },
+    "com.synexia.primitives.ProviderBackedPrimitiveListTest": {
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.ProviderBackedPrimitiveListTest.xml",
+      "sha256": "b14c42b91b1b7e812d6fca011859d9cf593a8ae4ffc08ee8353d4231ddc7c0e5"
+    },
+    "com.synexia.primitives.ProviderBackedPrimitiveLongTreeTest": {
+      "counts": {
+        "tests": 4,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.ProviderBackedPrimitiveLongTreeTest.xml",
+      "sha256": "f9e878b812f26301f91324a7fcfdeca73e33e3d704f831b37f4457b46d839b5e"
+    },
+    "com.synexia.primitives.ProviderBackedPrimitiveRowsTest": {
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.ProviderBackedPrimitiveRowsTest.xml",
+      "sha256": "904775ea28dcf9a4c3e5c561dd8c5036e4e814458f21f93d3596acb11f22f5f1"
+    },
+    "com.synexia.primitives.ProviderBackedPrimitiveTreeSupersetTest": {
+      "counts": {
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.ProviderBackedPrimitiveTreeSupersetTest.xml",
+      "sha256": "efc9493ec80f51df51e8cc2c2cbe80e81df53ce851c5d9684fccb8e953b75a1e"
+    },
+    "com.synexia.primitives.ProviderBackedPrimitiveTreeTest": {
+      "counts": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.ProviderBackedPrimitiveTreeTest.xml",
+      "sha256": "fcecd8d810f9c6767604ea0e74e55491e108636376fe770a5e4c71a7c4c89ba0"
+    },
+    "com.synexia.primitives.ProviderCallbackSafetyTest": {
+      "counts": {
+        "tests": 18,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.ProviderCallbackSafetyTest.xml",
+      "sha256": "7f3567ab8ea65e5369682de1a524fb069f56255a665d89e3049865fd9c78a3c6"
+    },
+    "com.synexia.primitives.ProviderCallbackSupersetTest": {
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.ProviderCallbackSupersetTest.xml",
+      "sha256": "50a27934222696b1a96ed79502837c215957bbbf74d3898063d64ee2e1fd7c15"
+    },
+    "com.synexia.primitives.ProviderResidencySupersetTest": {
+      "counts": {
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.ProviderResidencySupersetTest.xml",
+      "sha256": "0fb6acc548dbc7778a340bc416066909cf465a89f4c8dd12ee5fced41fccde9c"
+    },
+    "com.synexia.primitives.ProviderResidencyVersionedTreeTest": {
+      "counts": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.ProviderResidencyVersionedTreeTest.xml",
+      "sha256": "970a14337597c864b0a50528fec487670817840aee73510afc0bbf0e3cee9aa3"
+    },
+    "com.synexia.primitives.ProviderSerializationCompatibilityTest": {
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.ProviderSerializationCompatibilityTest.xml",
+      "sha256": "689e1029b52d65d0d7f3cfe3ebd59734313240072bacf4d7e38b801bd317c672"
+    },
+    "com.synexia.primitives.PurposeCollectionsTest": {
+      "counts": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.PurposeCollectionsTest.xml",
+      "sha256": "8aa409e27aad083416245adf875c9b7fef5f46c090ea853ddb99a3386116c118"
+    },
+    "com.synexia.primitives.RecoveredSeriousAlgorithmShapesTest": {
+      "counts": {
+        "tests": 9,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.RecoveredSeriousAlgorithmShapesTest.xml",
+      "sha256": "d01ed7fac24e7de61105cdc3f23a1af00f48ab29d181afc157c3f28af0d0c311"
+    },
+    "com.synexia.primitives.TouchAwarePrimitiveRowProviderTest": {
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.TouchAwarePrimitiveRowProviderTest.xml",
+      "sha256": "1328987e8e176be8977c76e814e004ac218c65435eda9a8a8483534540cb9851"
+    },
+    "com.synexia.primitives.VersionedProviderLookupCounterTest": {
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.VersionedProviderLookupCounterTest.xml",
+      "sha256": "0920e7ff2e63816f0552091b8177e666f9a5886e1f406653906347c22475fb6e"
+    },
+    "com.synexia.primitives.ZeroMetadataHashTest": {
+      "counts": {
+        "tests": 8,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.primitives.ZeroMetadataHashTest.xml",
+      "sha256": "0847ae086a0efedda785da8abac3cb93faa1c6b19a73ef3608052b016bd7d12d"
+    }
+  }
+}
