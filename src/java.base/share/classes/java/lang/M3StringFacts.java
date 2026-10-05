@@ -30,6 +30,8 @@ final class M3StringFacts {
     final char firstUtf16Unit;
     final char lastUtf16Unit;
     final long bitSignal64;
+    final boolean ascii;
+    final boolean latin1;
 
     final int asciiUpperHash;
     final int asciiLowerHash;
@@ -60,6 +62,8 @@ final class M3StringFacts {
             char firstUtf16Unit,
             char lastUtf16Unit,
             long bitSignal64,
+            boolean ascii,
+            boolean latin1,
             int asciiUpperHash,
             int asciiLowerHash,
             int asciiTitleHash,
@@ -80,6 +84,8 @@ final class M3StringFacts {
         this.firstUtf16Unit = firstUtf16Unit;
         this.lastUtf16Unit = lastUtf16Unit;
         this.bitSignal64 = bitSignal64;
+        this.ascii = ascii;
+        this.latin1 = latin1;
         this.asciiUpperHash = asciiUpperHash;
         this.asciiLowerHash = asciiLowerHash;
         this.asciiTitleHash = asciiTitleHash;
@@ -120,6 +126,8 @@ final class M3StringFacts {
             last = unit;
             hash = 31 * hash + unit;
             signal = addSignal(signal, unit);
+            ascii &= unit <= 0x7f;
+            latin1 &= unit <= 0xff;
             upperHash = 31 * upperHash + asciiUpper(unit);
             lowerHash = 31 * lowerHash + asciiLower(unit);
             titleHash = 31 * titleHash + (index == 0 ? asciiUpper(unit) : asciiLower(unit));
@@ -145,8 +153,12 @@ final class M3StringFacts {
                     && Character.isLowSurrogate(value.charAt(index + 1))) {
                 codePoint = Character.toCodePoint(unit, value.charAt(index + 1));
                 width = 2;
+                utf8 = Math.addExact(utf8, 4);
             } else if (Character.isSurrogate(unit)) {
                 unpaired++;
+                utf8 = Math.addExact(utf8, UTF8_REPLACEMENT_BYTES);
+            } else {
+                utf8 = Math.addExact(utf8, utf8Bytes(unit));
             }
             codePoints++;
 
@@ -181,6 +193,8 @@ final class M3StringFacts {
                 first,
                 last,
                 signal,
+                ascii,
+                latin1,
                 upperHash,
                 lowerHash,
                 titleHash,
@@ -262,6 +276,8 @@ final class M3StringFacts {
                 left.firstUtf16Unit,
                 right.lastUtf16Unit,
                 left.bitSignal64 | right.bitSignal64,
+                left.ascii && right.ascii,
+                left.latin1 && right.latin1,
                 left.asciiUpperHash * right.hash31Power + right.asciiUpperHash,
                 left.asciiLowerHash * right.hash31Power + right.asciiLowerHash,
                 left.asciiTitleHash * right.hash31Power + right.asciiLowerHash,
