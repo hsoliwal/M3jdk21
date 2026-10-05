@@ -49,6 +49,16 @@ final class M3StringSearchPrecompute {
         int length = pattern.length();
         if (length < 2 || length > MAX_PATTERN_UNITS) return null;
 
+        try {
+            return prepareAllocated(pattern, length);
+        } catch (OutOfMemoryError unavailable) {
+            // Precompute is never semantic authority. Under memory pressure, fall back to the
+            // allocation-free exact search path instead of changing String.indexOf behavior.
+            return null;
+        }
+    }
+
+    private static Plan prepareAllocated(M3String pattern, int length) {
         M3StringOwner owner = pattern.owner();
         long coordinate = pattern.coordinate();
         int slot = slot(owner, coordinate);
@@ -83,7 +93,12 @@ final class M3StringSearchPrecompute {
                 || source.length() > MAX_TRIGRAM_SOURCE_UNITS) {
             return true;
         }
-        return sourceFacts(source).containsAll(plan.trigrams);
+        try {
+            return sourceFacts(source).containsAll(plan.trigrams);
+        } catch (OutOfMemoryError unavailable) {
+            // Exact trigram facts are optional. KMP remains authoritative.
+            return true;
+        }
     }
 
     private static M3TQ.Facts sourceFacts(M3String source) {
