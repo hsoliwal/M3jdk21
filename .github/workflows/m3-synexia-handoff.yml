@@ -23,5 +23,7 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
+      - name: Validate canonical migration mapping
+        run: python3 m3/migration/migration.py validate .
       - name: Verify Synexia handoff packet import and receivers
         run: mvn -B -ntp -f m3/tooling/migration-recipes/verification/synexia-handoff/pom.xml verify
