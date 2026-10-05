@@ -1,0 +1,8 @@
+item	status	qualification
+inventory	PASS	4 modified preimages exact; 11 additive targets absent
+retained_crate	PASS	15 reviewed source images present
+product_materialization	PENDING	next additive commit
+recipe_junit	PENDING	exact-head execution required
+jdk_image	PENDING	configure/make images
+jtreg	PENDING	Gatherer + existing stream regression families
+api_smoke	PENDING	built JDK only

@@ -1,0 +1,7 @@
+artifact	purpose
+STATUS.tsv	truth state
+RUN_CONTEXT.tsv	pinned receiver/donor
+PROVENANCE.tsv	revision authority
+VERIFY_CONTRACT.tsv	gates
+OUTPUT_CONTRACT.tsv	artifact inventory
+FINAL_REPORT.md	executed results and blockers

@@ -1,0 +1,7 @@
+key	value
+repository	hsoliwal/M3jdk21
+base_commit	fc6dedcb84e8eb9f95689d4e9ff9d1614775b529
+donor_tag	jdk-24+36
+recipe_crate	jdk24-jep485-stream-gatherers
+mode	apply-to-review-branch
+canonical_master	read-only

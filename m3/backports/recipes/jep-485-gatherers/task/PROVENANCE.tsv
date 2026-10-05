@@ -1,0 +1,5 @@
+source	identity	role
+M3JDK21 master	fc6dedcb84e8eb9f95689d4e9ff9d1614775b529	current receiver
+JEP485 retained crate	current-master resource tree	reviewed postimages
+PR105	ec5ca82ecffcdc5b146587e55e5ade04d74f6c0f	historical reviewed recovery witness
+OpenJDK JDK24 GA	jdk-24+36	final feature donor authority

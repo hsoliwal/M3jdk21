@@ -1,0 +1,7 @@
+gate	status	condition
+diff	PENDING	product commit must touch only declared recovery owners/evidence
+recipe	PENDING	15 exact results + drift refusal + fixed point
+compile	PENDING	full JDK image
+jtreg	PENDING	8 Gatherer tests + retained stream regressions
+runtime	PENDING	built-JDK GatherSmoke
+retention	PENDING	post-merge current tree must contain exact admitted surface

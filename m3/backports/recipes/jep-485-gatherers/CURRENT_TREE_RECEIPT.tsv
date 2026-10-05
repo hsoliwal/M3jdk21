@@ -1,0 +1,12 @@
+key	value
+base_commit	fc6dedcb84e8eb9f95689d4e9ff9d1614775b529
+retained_crate	jdk24-jep485-stream-gatherers
+target_count	15
+modified_preimages	4
+absent_additions	11
+preimages_exact	true
+absent_targets_confirmed	true
+source_materialized	false
+scope	LIBRARY_API
+contract	EXPLICIT_CONTRACT_CHANGE
+promotion_authorized	false
