@@ -28,7 +28,7 @@ import sun.nio.ch.DirectBuffer;
 /**
  * Canonical owner pool for M3String.
  *
- * <p>Scalar payload is either read-only mapped storage or process-life native memory. Java
+ * <p>Scalar payload is either read-only mapped storage or weakly interned VM-local native memory. Java
  * byte[]/char[] values are admission or compatibility shadows only and are never retained here.
  * Tuple nodes retain only child M3 coordinates and form a persistent immutable DAG.</p>
  */
@@ -40,6 +40,7 @@ final class M3StringPool {
 
     private static final AtomicLong NEXT_LOCAL_ID = new AtomicLong(1L);
     private static final AtomicLong NEXT_TUPLE_ID = new AtomicLong(1L << 40);
+    private static final AtomicLong LOCAL_NATIVE_BYTES = new AtomicLong();
 
     private static final ConcurrentHashMap<Fingerprint, LocalBucket> LOCAL =
             new ConcurrentHashMap<>();
@@ -102,7 +103,9 @@ final class M3StringPool {
                 }
                 long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
                 M3StringAtom created = M3StringAtom.local(value, coder, id, hash64);
-                bucket.values.add(new LocalRef(created, fingerprint, bucket));
+                long retainedBytes = created.nativePayloadBytes();
+                LOCAL_NATIVE_BYTES.addAndGet(retainedBytes);
+                bucket.values.add(new LocalRef(created, fingerprint, bucket, retainedBytes));
                 return created;
             }
         }
@@ -164,6 +167,11 @@ final class M3StringPool {
         }
     }
 
+    static long localNativeBytes() {
+        expungeLocals();
+        return LOCAL_NATIVE_BYTES.get();
+    }
+
     private static long nextId(AtomicLong sequence, String label) {
         long id = sequence.getAndIncrement();
         if (id <= 0L) throw new IllegalStateException(label + " exhausted");
@@ -220,19 +228,26 @@ final class M3StringPool {
         final Fingerprint fingerprint;
         final LocalBucket bucket;
         final long address;
+        final long retainedBytes;
         private boolean released;
 
-        LocalRef(M3StringAtom value, Fingerprint fingerprint, LocalBucket bucket) {
+        LocalRef(
+                M3StringAtom value,
+                Fingerprint fingerprint,
+                LocalBucket bucket,
+                long retainedBytes) {
             super(value, LOCAL_QUEUE);
             this.fingerprint = fingerprint;
             this.bucket = bucket;
             this.address = value.address;
+            this.retainedBytes = retainedBytes;
         }
 
         void releaseNative() {
             if (!released) {
                 released = true;
                 if (address != 0L) UNSAFE.freeMemory(address);
+                LOCAL_NATIVE_BYTES.addAndGet(-retainedBytes);
             }
         }
     }
