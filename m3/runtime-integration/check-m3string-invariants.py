@@ -176,6 +176,9 @@ for fragment in [
     "ArrayList<LocalRef> values",
     "extends WeakReference<M3StringAtom>",
     "UNSAFE.freeMemory(address)",
+    "AtomicLong LOCAL_NATIVE_BYTES",
+    "LOCAL_NATIVE_BYTES.addAndGet(-retainedBytes)",
+    "created.nativePayloadBytes()",
 ]:
     if fragment not in pool:
         fail(f"VM-local M3 atom lifecycle missing: {fragment}")
