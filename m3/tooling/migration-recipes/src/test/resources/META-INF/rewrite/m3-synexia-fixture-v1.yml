@@ -2,12 +2,13 @@
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: com.m3.rewrite.backport.SynexiaBridgeFixtureV1
-displayName: Receive reviewed Synexia handoff fixture
-description: Verifies the handoff packet then replays exact Java and text snapshots.
+displayName: Receive reviewed Synexia handoff synexia-fixture-v1
+description: Replays exact target-ready Synexia bytes through existing M3JDK21 hash-pinned owners.
 tags:
   - m3
   - synexia
   - jdk21
+  - hash-pinned
   - candidate-only
 recipeList:
   - com.m3.rewrite.backport.M3SynexiaHandoffGuardRecipe:
