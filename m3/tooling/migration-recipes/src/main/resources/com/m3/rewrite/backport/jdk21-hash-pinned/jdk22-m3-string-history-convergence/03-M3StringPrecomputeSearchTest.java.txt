@@ -78,6 +78,21 @@ public class M3StringPrecomputeSearchTest {
         check(blankJoined.isBlank(), "blank facts");
         check(blankJoined.strip().isEmpty(), "strip blank");
 
+        check(equalChars(joined.replace('a', 'X'), naiveReplace(oracle, 'a', 'X')),
+                "replace char canonical");
+        check(joined.replace('z', 'X') == joined, "replace char absent identity");
+        check(equalChars(
+                        joined.replace("\u03b2eta", "Q"),
+                        naiveReplace(oracle, "\u03b2eta".toCharArray(), new char[] {'Q'})),
+                "replace literal canonical");
+        check(equalChars(
+                        joined.replace("\ud83d\ude42", ""),
+                        naiveReplace(oracle, "\ud83d\ude42".toCharArray(), new char[0])),
+                "replace literal deletion");
+        String overlap = String.join("", "aa", "aa");
+        check(overlap.replace("aa", "b").equals("bb"), "replace non-overlap semantics");
+        check(joined.replace("not-present", "x") == joined, "replace literal absent identity");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
@@ -183,6 +198,30 @@ public class M3StringPrecomputeSearchTest {
             check(equalChars(source.strip(), naiveStrip(oracle).toCharArray()),
                     "random strip " + trial);
             check(source.isBlank() == naiveIsBlank(oracle), "random blank " + trial);
+            char oldChar = oracle.length == 0
+                    ? 'x'
+                    : oracle[random.nextInt(oracle.length)];
+            char newChar = (char) random.nextInt(Character.MAX_VALUE + 1);
+            check(equalChars(source.replace(oldChar, newChar), naiveReplace(oracle, oldChar, newChar)),
+                    "random char replace " + trial);
+
+            char[] replaceTarget;
+            if (oracle.length == 0) {
+                replaceTarget = new char[] {'x'};
+            } else {
+                int replaceLength = 1 + random.nextInt(Math.min(4, oracle.length));
+                int replaceStart = random.nextInt(oracle.length - replaceLength + 1);
+                replaceTarget = copyRange(oracle, replaceStart, replaceStart + replaceLength);
+                if ((trial & 7) == 0) {
+                    replaceTarget = append(replaceTarget, '#');
+                }
+            }
+            String replacement = atoms[random.nextInt(atoms.length)];
+            char[] replacementChars = replacement.toCharArray();
+            check(equalChars(
+                            source.replace(new String(replaceTarget), replacement),
+                            naiveReplace(oracle, replaceTarget, replacementChars)),
+                    "random literal replace " + trial);
         }
     }
 
@@ -262,6 +301,48 @@ public class M3StringPrecomputeSearchTest {
             if (source[index] == high && source[index + 1] == low) return index;
         }
         return -1;
+    }
+
+    private static char[] naiveReplace(char[] source, char oldChar, char newChar) {
+        char[] result = copyRange(source, 0, source.length);
+        for (int index = 0; index < result.length; index++) {
+            if (result[index] == oldChar) result[index] = newChar;
+        }
+        return result;
+    }
+
+    private static char[] naiveReplace(char[] source, char[] target, char[] replacement) {
+        if (target.length == 0) {
+            throw new IllegalArgumentException("test oracle requires non-empty literal target");
+        }
+        int matches = 0;
+        for (int index = 0; index <= source.length - target.length; ) {
+            if (matchesAt(source, target, index)) {
+                matches++;
+                index += target.length;
+            } else {
+                index++;
+            }
+        }
+        long length = (long) source.length
+                + (long) matches * (replacement.length - target.length);
+        if (length > Integer.MAX_VALUE) {
+            throw new OutOfMemoryError("test oracle result too large");
+        }
+        char[] result = new char[(int) length];
+        int sourceIndex = 0;
+        int output = 0;
+        while (sourceIndex < source.length) {
+            if (sourceIndex <= source.length - target.length
+                    && matchesAt(source, target, sourceIndex)) {
+                System.arraycopy(replacement, 0, result, output, replacement.length);
+                output += replacement.length;
+                sourceIndex += target.length;
+            } else {
+                result[output++] = source[sourceIndex++];
+            }
+        }
+        return result;
     }
 
     private static String naiveTrim(char[] value) {
