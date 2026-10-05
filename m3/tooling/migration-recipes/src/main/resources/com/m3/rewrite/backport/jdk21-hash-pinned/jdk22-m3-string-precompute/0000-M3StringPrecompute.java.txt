@@ -11,22 +11,19 @@
 
 package java.lang;
 
-import java.util.concurrent.atomic.AtomicReferenceArray;
-
 /**
- * Internal bounded precompute plane for M3 String.
+ * Internal constant-size precompute plane for M3 String.
  *
- * <p>Synexia is donor/provenance only. Runtime facts live in M3JDK21. This
- * sidecar deliberately does not add per-String or per-MIndexString payload
- * arrays. Facts are immutable, derived from canonical M3 String storage, and
- * retained in a bounded direct-mapped cache.</p>
+ * <p>Synexia is donor/provenance only. Runtime facts live in M3JDK21. Constant-size facts are
+ * retained once by the canonical {@link MIndexString} storage identity, so every ordinary
+ * {@link String} wrapper referring to that storage reuses the same facts. No global cache owns
+ * String payloads or extends mapped-storage lifetime. Length-proportional analyses belong in
+ * separately budgeted precompute owners.</p>
+ *
+ * <p>All filters are necessary conditions only. A negative result may reject work; a positive
+ * result always requires exact canonical M3 String verification.</p>
  */
 final class M3StringPrecompute {
-    private static final int SLOTS = 1 << 12;
-    private static final int SLOT_MASK = SLOTS - 1;
-    private static final AtomicReferenceArray<Facts> CACHE =
-            new AtomicReferenceArray<>(SLOTS);
-
     private M3StringPrecompute() {}
 
     static boolean mayContainChar(MIndexString value, char ch) {
@@ -49,42 +46,43 @@ final class M3StringPrecompute {
     }
 
     static Facts facts(MIndexString value) {
-        long id = value.canonicalId();
-        int slot = slot(id);
-        Facts current = CACHE.get(slot);
-        if (current != null && current.owner == value && current.canonicalId == id) {
-            return current;
-        }
-        Facts computed = compute(value, id);
-        CACHE.set(slot, computed);
-        return computed;
+        return value.precomputedFacts();
     }
 
-    private static Facts compute(MIndexString value, long id) {
-        int length = value.length();
-        long low = 0L;
-        long high = 0L;
+    /*
+     * Joined-value folding is owned by MIndexString because its segment geometry is private.
+     * Scalar and partial-range scans stay here so no second representation learns storage layout.
+     */
+
+    static Facts scan(MIndexString value, int start, int count) {
+        if (count == 0) {
+            return Facts.EMPTY;
+        }
+
+        long lowMask = 0L;
+        long highMask = 0L;
         int codePoints = 0;
         int unpaired = 0;
+        int end = start + count;
 
-        for (int index = 0; index < length; index++) {
+        for (int index = start; index < end; index++) {
             char ch = value.charAt(index);
             int bit = mixChar(ch);
             if (bit < 64) {
-                low |= 1L << bit;
+                lowMask |= 1L << bit;
             } else {
-                high |= 1L << (bit - 64);
+                highMask |= 1L << (bit - 64);
             }
 
             codePoints++;
             if (Character.isHighSurrogate(ch)) {
-                if (index + 1 < length && Character.isLowSurrogate(value.charAt(index + 1))) {
+                if (index + 1 < end && Character.isLowSurrogate(value.charAt(index + 1))) {
                     char lowSurrogate = value.charAt(++index);
                     int lowBit = mixChar(lowSurrogate);
                     if (lowBit < 64) {
-                        low |= 1L << lowBit;
+                        lowMask |= 1L << lowBit;
                     } else {
-                        high |= 1L << (lowBit - 64);
+                        highMask |= 1L << (lowBit - 64);
                     }
                 } else {
                     unpaired++;
@@ -95,23 +93,40 @@ final class M3StringPrecompute {
         }
 
         return new Facts(
-                value,
-                id,
-                low,
-                high,
+                count,
+                lowMask,
+                highMask,
                 codePoints,
                 unpaired,
-                pow31(length),
-                length == 0 ? 0 : value.charAt(0),
-                length == 0 ? 0 : value.charAt(length - 1));
+                pow31(count),
+                value.charAt(start),
+                value.charAt(end - 1));
     }
 
-    private static int slot(long canonicalId) {
-        long mixed = canonicalId;
-        mixed ^= mixed >>> 33;
-        mixed *= 0xff51afd7ed558ccdL;
-        mixed ^= mixed >>> 33;
-        return ((int) mixed) & SLOT_MASK;
+    /**
+     * Constant-time seam composition for complete immutable fact bundles.
+     */
+    static Facts combine(Facts left, Facts right) {
+        if (left.utf16Length == 0) {
+            return right;
+        }
+        if (right.utf16Length == 0) {
+            return left;
+        }
+        boolean joinsSurrogatePair =
+                Character.isHighSurrogate(left.lastChar)
+                        && Character.isLowSurrogate(right.firstChar);
+        return new Facts(
+                Math.addExact(left.utf16Length, right.utf16Length),
+                left.charMaskLow | right.charMaskLow,
+                left.charMaskHigh | right.charMaskHigh,
+                Math.addExact(left.codePointCount, right.codePointCount)
+                        - (joinsSurrogatePair ? 1 : 0),
+                Math.addExact(left.unpairedSurrogateCount, right.unpairedSurrogateCount)
+                        - (joinsSurrogatePair ? 2 : 0),
+                left.power31 * right.power31,
+                left.firstChar,
+                right.lastChar);
     }
 
     private static int mixChar(char ch) {
@@ -135,8 +150,9 @@ final class M3StringPrecompute {
     }
 
     static final class Facts {
-        final MIndexString owner;
-        final long canonicalId;
+        static final Facts EMPTY = new Facts(0, 0L, 0L, 0, 0, 1, (char) 0, (char) 0);
+
+        final int utf16Length;
         final long charMaskLow;
         final long charMaskHigh;
         final int codePointCount;
@@ -146,8 +162,7 @@ final class M3StringPrecompute {
         final char lastChar;
 
         Facts(
-                MIndexString owner,
-                long canonicalId,
+                int utf16Length,
                 long charMaskLow,
                 long charMaskHigh,
                 int codePointCount,
@@ -155,8 +170,7 @@ final class M3StringPrecompute {
                 int power31,
                 char firstChar,
                 char lastChar) {
-            this.owner = owner;
-            this.canonicalId = canonicalId;
+            this.utf16Length = utf16Length;
             this.charMaskLow = charMaskLow;
             this.charMaskHigh = charMaskHigh;
             this.codePointCount = codePointCount;
