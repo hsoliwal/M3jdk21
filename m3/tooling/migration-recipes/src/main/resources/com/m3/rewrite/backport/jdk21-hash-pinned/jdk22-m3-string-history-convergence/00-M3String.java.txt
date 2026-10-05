@@ -128,6 +128,28 @@ final class M3String implements CharSequence {
         return level.getFirst();
     }
 
+    static M3String canonicalize(String source) {
+        String checked = Objects.requireNonNull(source, "source");
+        M3String storage = checked.m3();
+        if (storage != null) return storage;
+        if (checked.length() == 0) return EMPTY;
+        return admit(checked.value(), checked.coder());
+    }
+
+    private static M3String joinValues(ArrayList<M3String> values) {
+        if (values.isEmpty()) return EMPTY;
+        ArrayList<M3String> level = values;
+        while (level.size() > 1) {
+            ArrayList<M3String> next = new ArrayList<>((level.size() + 1) >>> 1);
+            for (int index = 0; index < level.size(); index += 2) {
+                if (index + 1 == level.size()) next.add(level.get(index));
+                else next.add(M3StringPool.concat(level.get(index), level.get(index + 1)));
+            }
+            level = next;
+        }
+        return level.getFirst();
+    }
+
     static M3String sliceOf(String source, int beginIndex, int endIndex) {
         Objects.requireNonNull(source, "source");
         M3String storage = source.m3();
@@ -361,6 +383,73 @@ final class M3String implements CharSequence {
             if (index == checked.length()) return candidate;
         }
         return -1;
+    }
+
+    M3String replace(char oldChar, char newChar) {
+        if (oldChar == newChar || !facts().mayContainCodeUnit(oldChar)) return this;
+
+        int first = -1;
+        for (int index = 0; index < length(); index++) {
+            if (charAt(index) == oldChar) {
+                first = index;
+                break;
+            }
+        }
+        if (first < 0) return this;
+
+        M3String replacement = canonicalize(String.valueOf(newChar));
+        ArrayList<M3String> pieces = new ArrayList<>();
+        int cursor = 0;
+        for (int index = first; index < length(); index++) {
+            if (charAt(index) != oldChar) continue;
+            if (cursor < index) pieces.add(slice(cursor, index));
+            pieces.add(replacement);
+            cursor = index + 1;
+        }
+        if (cursor < length()) pieces.add(slice(cursor, length()));
+        return joinValues(pieces);
+    }
+
+    M3String replace(M3String target, M3String replacement) {
+        M3String checkedTarget = Objects.requireNonNull(target, "target");
+        M3String checkedReplacement = Objects.requireNonNull(replacement, "replacement");
+        if (checkedTarget.length() == 0) {
+            throw new IllegalArgumentException("empty literal target handled by String compatibility path");
+        }
+
+        int found = indexOf(checkedTarget, 0);
+        if (found < 0) return this;
+
+        ArrayList<M3String> pieces = new ArrayList<>();
+        long outputLength = 0L;
+        int cursor = 0;
+        while (found >= 0) {
+            if (cursor < found) {
+                M3String prefix = slice(cursor, found);
+                pieces.add(prefix);
+                outputLength += prefix.length();
+            }
+            if (checkedReplacement.length() != 0) {
+                pieces.add(checkedReplacement);
+                outputLength += checkedReplacement.length();
+            }
+            if (outputLength > Integer.MAX_VALUE) {
+                throw new OutOfMemoryError("Required length exceeds implementation limit");
+            }
+            cursor = found + checkedTarget.length();
+            found = cursor <= length() - checkedTarget.length()
+                    ? indexOf(checkedTarget, cursor)
+                    : -1;
+        }
+        if (cursor < length()) {
+            M3String suffix = slice(cursor, length());
+            pieces.add(suffix);
+            outputLength += suffix.length();
+        }
+        if (outputLength > Integer.MAX_VALUE) {
+            throw new OutOfMemoryError("Required length exceeds implementation limit");
+        }
+        return joinValues(pieces);
     }
 
     static int pow31(int length) {
