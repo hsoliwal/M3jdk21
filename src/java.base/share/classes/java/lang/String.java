@@ -2633,8 +2633,10 @@ public final class String
             if (!Character.isValidCodePoint(ch)) return -1;
             for (int index = from; index < storage.length() - 1; index++) {
                 char high = storage.charAt(index);
+                char low = storage.charAt(index + 1);
                 if (Character.isHighSurrogate(high)
-                        && Character.toCodePoint(high, storage.charAt(index + 1)) == ch) return index;
+                        && Character.isLowSurrogate(low)
+                        && Character.toCodePoint(high, low) == ch) return index;
             }
             return -1;
         }
@@ -2695,8 +2697,10 @@ public final class String
             if (!Character.isValidCodePoint(ch)) return -1;
             for (int index = beginIndex; index + 1 < endIndex; index++) {
                 char high = storage.charAt(index);
+                char low = storage.charAt(index + 1);
                 if (Character.isHighSurrogate(high)
-                        && Character.toCodePoint(high, storage.charAt(index + 1)) == ch) return index;
+                        && Character.isLowSurrogate(low)
+                        && Character.toCodePoint(high, low) == ch) return index;
             }
             return -1;
         }
@@ -2779,8 +2783,10 @@ public final class String
             if (!Character.isValidCodePoint(ch)) return -1;
             for (int index = Math.min(from, storage.length() - 2); index >= 0; index--) {
                 char high = storage.charAt(index);
+                char low = storage.charAt(index + 1);
                 if (Character.isHighSurrogate(high)
-                        && Character.toCodePoint(high, storage.charAt(index + 1)) == ch) return index;
+                        && Character.isLowSurrogate(low)
+                        && Character.toCodePoint(high, low) == ch) return index;
             }
             return -1;
         }
