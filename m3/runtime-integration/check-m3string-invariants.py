@@ -57,7 +57,8 @@ for path, text in [
         text,
         flags=re.MULTILINE,
     )
-    # M3String's one static empty sentinel is allowed; no instance array fields are.
+    # Static implementation metadata is outside the value object; no instance array fields
+    # are allowed on the canonical value/owner/fact graph.
     if path == "M3String.java":
         retained_arrays = [row for row in retained_arrays if "static" not in row]
     if retained_arrays:
