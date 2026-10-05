@@ -286,14 +286,12 @@ final class M3String implements CharSequence {
                 destinationBegin << destinationCoder,
                 count << destinationCoder,
                 destination.length);
-        for (int index = 0; index < count; index++) {
-            char unit = charAt(sourceBegin + index);
-            if (destinationCoder == String.LATIN1) {
-                destination[destinationBegin + index] = (byte) unit;
-            } else {
-                StringUTF16.putChar(destination, destinationBegin + index, unit);
-            }
-        }
+        owner.getBytes(
+                Math.addExact(start(), sourceBegin),
+                Math.addExact(start(), sourceBegin + count),
+                destination,
+                destinationBegin,
+                destinationCoder);
     }
 
     byte[] encode(Charset charset) {
