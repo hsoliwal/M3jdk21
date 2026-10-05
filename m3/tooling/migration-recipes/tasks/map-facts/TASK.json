@@ -1,0 +1,64 @@
+{
+  "task_packet": "active",
+  "source_doc": "README.md",
+  "invariant_id": "M3-MAP-FACTS",
+  "baseline": "3a433416ae7981301844682896e5aefc6f0f8901",
+  "run": {
+    "mode": "apply",
+    "profile": "scoped-review-candidate",
+    "workers": 1,
+    "shard_count": 1,
+    "shard_index": 0
+  },
+  "targets": {
+    "files": [
+      "src/java.base/share/classes/jdk/internal/mindex/MIndexMappedStringBacking.java",
+      "test/jdk/java/lang/String/MapFactsTest.java",
+      ".github/workflows/mindex-string-backing.yml"
+    ],
+    "modules": [
+      "m3/tooling/migration-recipes"
+    ]
+  },
+  "invariant_locks": {
+    "PUBLIC_API": "LOCKED",
+    "VALID_EXTERNAL_BEHAVIOR": "LOCKED",
+    "CANONICAL_BRANCHES": "NO_WRITES",
+    "INSTALLED_JDK": "READ_ONLY",
+    "ORIGINAL_TESTS": "LOCKED"
+  },
+  "allowed_delta": [
+    "single-pass persisted UTF16 fact verification",
+    "alias fact verification",
+    "recipe/test/provenance and prior final-image reconciliation",
+    "add new test to existing workflow"
+  ],
+  "forbidden": [
+    "new retained payload or per-row fact objects",
+    "String.class/HotSpot transplant",
+    "disable preceding gates",
+    "claim unexecuted proof"
+  ],
+  "verify_order": [
+    "diff",
+    "lint",
+    "compile",
+    "tests",
+    "runtime"
+  ],
+  "output_contract": [
+    "STATUS.tsv",
+    "FINAL_REPORT.md",
+    "RUN_CONTEXT.tsv",
+    "PROVENANCE.tsv",
+    "VERIFY_CONTRACT.tsv",
+    "OUTPUT_CONTRACT.tsv"
+  ],
+  "stop_conditions": [
+    "source drift",
+    "public API drift",
+    "valid fixture regression",
+    "compile/test failure",
+    "unproven whole-JDK promotion"
+  ]
+}
