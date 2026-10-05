@@ -1,0 +1,53 @@
+schema: M3_JDK_CONSOLIDATION_V1
+source:
+  repo: hsoliwal/com.synexia
+  reviewedDevelop: 5bea7c90f54f58b468c7aca185fa33753631fe64
+  geometry:
+    pr: 9083
+    head: 89373af6881b309f5333876cde780b3ea5471a44
+    requiredBeforeNativePromotion: true
+  mastery:
+    canonicalPr: 9018
+    rule: one canonical multipass laboratory; no competing engine
+target:
+  repo: hsoliwal/M3jdk21
+  reviewedMaster: a8d0b7bebfc89ad5e7eb57a5a95470385adc9441
+authority:
+  recipeIsSourceChangingProduct: true
+  javaSemanticsAreOracle: true
+  jniIsOptionalAcceleration: true
+  persistentProcessPointersForbidden: true
+  exactUtf16Required: true
+  approximateSignalsProveMatches: false
+dispositions:
+  - capability: java.lang.String canonical MIndex storage
+    target: src/java.base/share/classes/java/lang/MIndexString.java
+    disposition: JDK_RUNTIME_INLINE
+  - capability: ordinary String integration
+    target: src/java.base/share/classes/java/lang/String.java
+    disposition: JDK_RUNTIME_INLINE
+  - capability: atomize-patternize recipe mastery
+    target: m3/tooling/migration-recipes
+    disposition: TOOLING_ONLY
+  - capability: SharedArrayPool literal geometry
+    disposition: JDK_INTERNAL_ADAPTER
+    gate: exact #9083 nonzero-language multipage regression plus reopen and native parity
+  - capability: challenge-site algorithms
+    disposition: REFERENCE_ONLY
+    rule: taxonomy/constraints/counterexamples only; no solution-body copy
+  - capability: licensed GitHub donor mechanics
+    disposition: REIMPLEMENT_FROM_CONTRACT
+    rule: exact revision/path/blob/license and adaptation record required
+promotionGates:
+  - source-inventory-complete
+  - recipe-fixed-point-and-drift-refusal
+  - full-fastdebug-jdk-image
+  - string-unicode-regex-differential
+  - jni-string-parity-xcheck
+  - compiled-c1-c2-m3-enabled
+  - gc-intern-dedup
+  - cds-jvmti-jfr-serviceability
+  - shared-generation-cross-process
+  - platform-native
+  - performance-memory
+  - independent-audit
