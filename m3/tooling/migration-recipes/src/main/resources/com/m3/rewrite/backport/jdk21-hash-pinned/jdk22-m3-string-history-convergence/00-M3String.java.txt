@@ -6,7 +6,16 @@
  */
 package java.lang;
 
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.charset.CharacterCodingException;
+import java.nio.charset.Charset;
+import java.nio.charset.CharsetEncoder;
+import java.nio.charset.CoderResult;
+import java.nio.charset.CodingErrorAction;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -284,6 +293,104 @@ final class M3String implements CharSequence {
                 StringUTF16.putChar(destination, destinationBegin + index, unit);
             }
         }
+    }
+
+    byte[] encode(Charset charset) {
+        Charset checked = Objects.requireNonNull(charset, "charset");
+        if (checked.equals(StandardCharsets.UTF_8)) {
+            return encodeUtf8();
+        }
+        if (checked.equals(StandardCharsets.ISO_8859_1)) {
+            return encodeSingleByte(false);
+        }
+        if (checked.equals(StandardCharsets.US_ASCII)) {
+            return encodeSingleByte(true);
+        }
+        return encodeWithEncoder(checked);
+    }
+
+    private byte[] encodeUtf8() {
+        M3StringFacts prepared = facts();
+        byte[] output = new byte[prepared.utf8Length];
+        int target = 0;
+        for (int index = 0; index < length(); index++) {
+            char unit = charAt(index);
+            if (unit < 0x80) {
+                output[target++] = (byte) unit;
+            } else if (unit < 0x800) {
+                output[target++] = (byte) (0xc0 | (unit >>> 6));
+                output[target++] = (byte) (0x80 | (unit & 0x3f));
+            } else if (Character.isHighSurrogate(unit)
+                    && index + 1 < length()
+                    && Character.isLowSurrogate(charAt(index + 1))) {
+                int codePoint = Character.toCodePoint(unit, charAt(++index));
+                output[target++] = (byte) (0xf0 | (codePoint >>> 18));
+                output[target++] = (byte) (0x80 | ((codePoint >>> 12) & 0x3f));
+                output[target++] = (byte) (0x80 | ((codePoint >>> 6) & 0x3f));
+                output[target++] = (byte) (0x80 | (codePoint & 0x3f));
+            } else if (Character.isSurrogate(unit)) {
+                // JDK21 String UTF-8 replacement is the single byte '?'.
+                output[target++] = '?';
+            } else {
+                output[target++] = (byte) (0xe0 | (unit >>> 12));
+                output[target++] = (byte) (0x80 | ((unit >>> 6) & 0x3f));
+                output[target++] = (byte) (0x80 | (unit & 0x3f));
+            }
+        }
+        if (target != output.length) {
+            throw new InternalError("M3String UTF-8 precompute length mismatch");
+        }
+        return output;
+    }
+
+    private byte[] encodeSingleByte(boolean asciiOnly) {
+        M3StringFacts prepared = facts();
+        byte[] output = new byte[prepared.codePointCount];
+        int target = 0;
+        for (int index = 0; index < length(); index++) {
+            char unit = charAt(index);
+            int limit = asciiOnly ? 0x7f : 0xff;
+            if (unit <= limit) {
+                output[target++] = (byte) unit;
+                continue;
+            }
+            if (Character.isHighSurrogate(unit)
+                    && index + 1 < length()
+                    && Character.isLowSurrogate(charAt(index + 1))) {
+                index++;
+            }
+            output[target++] = '?';
+        }
+        if (target != output.length) {
+            throw new InternalError("M3String single-byte precompute length mismatch");
+        }
+        return output;
+    }
+
+    private byte[] encodeWithEncoder(Charset charset) {
+        CharsetEncoder encoder = charset.newEncoder()
+                .onMalformedInput(CodingErrorAction.REPLACE)
+                .onUnmappableCharacter(CodingErrorAction.REPLACE);
+        int length = length();
+        int capacity = (int) (length * (double) encoder.maxBytesPerChar());
+        byte[] output = new byte[capacity];
+        if (length == 0) return output;
+
+        char[] chars = new char[length];
+        getChars(0, length, chars, 0);
+        ByteBuffer bytes = ByteBuffer.wrap(output);
+        CharBuffer input = CharBuffer.wrap(chars);
+        try {
+            CoderResult result = encoder.encode(input, bytes, true);
+            if (!result.isUnderflow()) result.throwException();
+            result = encoder.flush(bytes);
+            if (!result.isUnderflow()) result.throwException();
+        } catch (CharacterCodingException impossibleWithReplacement) {
+            throw new Error(impossibleWithReplacement);
+        }
+        return bytes.position() == output.length
+                ? output
+                : Arrays.copyOf(output, bytes.position());
     }
 
     /**
