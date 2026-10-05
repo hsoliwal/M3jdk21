@@ -3,7 +3,7 @@
  * @test
  * @summary Verify TQ range facts, canonical backing reuse and required JNI parity
  * @modules java.base/jdk.internal.mindex
- * @build MIndexMappedStringBackingTest
+ * @build M3MappedStringBackingTest
  * @run main/native M3TQTest
  */
 
@@ -17,8 +17,8 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 import jdk.internal.mindex.M3TQ;
-import jdk.internal.mindex.MIndexMappedStringBacking;
-import jdk.internal.mindex.MIndexStringBacking;
+import jdk.internal.mindex.M3MappedStringBacking;
+import jdk.internal.mindex.M3StringBacking;
 
 public class M3TQTest {
     private static long checks;
@@ -155,7 +155,7 @@ public class M3TQTest {
         expect(NullPointerException.class, () -> M3TQ.all().testPrecomputed(null));
         expect(NullPointerException.class, () -> M3TQ.fromExact(null));
         expect(NullPointerException.class, () -> M3TQ.and(Arrays.asList(M3TQ.all(),null)));
-        expect(NullPointerException.class, () -> M3TQ.precompute((MIndexStringBacking) null, 1, 0, 0, 0));
+        expect(NullPointerException.class, () -> M3TQ.precompute((M3StringBacking) null, 1, 0, 0, 0));
         expect(NullPointerException.class, () -> nativeKeys(null));
         expect(NullPointerException.class, () -> nativeRangeKeys(null, 0, 0, 0));
         expect(IndexOutOfBoundsException.class, () -> nativeRangeKeys(new char[1], -1, 1, 1));
@@ -168,14 +168,14 @@ public class M3TQTest {
     }
 
     private static void mapped() throws Exception {
-        var writer = MIndexMappedStringBackingTest.class.getDeclaredMethod("writeFixture", Path.class, String.class);
+        var writer = M3MappedStringBackingTest.class.getDeclaredMethod("writeFixture", Path.class, String.class);
         writer.setAccessible(true);
         Path directory = Files.createTempDirectory("m3-tq");
         int file = 0;
         for (String text : List.of("", "a", "ab", "abc", "ababa", "A\uD800x\uD83D\uDE00\uDC00Z", "\u0000\u00FF\u0100")) {
             Path path = directory.resolve("text-" + file++ + ".midx");
             writer.invoke(null, path, text);
-            try (var owner = MIndexMappedStringBacking.open(path)) {
+            try (var owner = M3MappedStringBacking.open(path)) {
                 for (long id : new long[]{1, (7L << 32) | 2}) {
                     for (int from = 0; from <= text.length(); from++) {
                         for (int to = from; to <= text.length(); to++) {
@@ -218,10 +218,10 @@ public class M3TQTest {
         public String toString() { throw new AssertionError("no materialization"); }
     }
 
-    private static final class BackingFence implements MIndexStringBacking {
-        final MIndexStringBacking delegate; final long id; final int from,to;
+    private static final class BackingFence implements M3StringBacking {
+        final M3StringBacking delegate; final long id; final int from,to;
         int reads; boolean sealed;
-        BackingFence(MIndexStringBacking delegate, long id, int from, int to) {
+        BackingFence(M3StringBacking delegate, long id, int from, int to) {
             this.delegate=delegate; this.id=id; this.from=from; this.to=to;
         }
         public int length(long key) { check(key==id,"owner id"); return delegate.length(key); }
