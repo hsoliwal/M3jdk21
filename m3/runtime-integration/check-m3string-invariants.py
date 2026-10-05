@@ -89,6 +89,9 @@ for encoding_marker in [
     "private byte[] encodeUtf8()",
     "private byte[] encodeSingleByte(boolean asciiOnly)",
     "private byte[] encodeWithEncoder(Charset charset)",
+    "byte[] encodeNoRepl(Charset charset)",
+    "byte[] encodeUtf8NoRepl()",
+    "private byte[] encodeWithEncoderNoRepl(Charset charset)",
 ]:
     if encoding_marker not in m3:
         fail(f"M3String direct byte projection missing: {encoding_marker}")
@@ -175,6 +178,8 @@ critical_surfaces = {
     "toCharArray": "return storage.charShadow();",
     "getBytes(Charset)": "return storage != null ? storage.encode(charset) : encode(charset, coder(), value());",
     "getBytes(String)": "return storage != null ? storage.encode(charset) : encode(charset, coder(), value());",
+    "getBytesUTF8NoRepl": "return storage != null ? storage.encodeUtf8NoRepl()",
+    "getBytesNoRepl": "return storage.encodeNoRepl(cs);",
     "value": "return storage == null ? value : storage.materialize();",
 }
 for surface, marker in critical_surfaces.items():
