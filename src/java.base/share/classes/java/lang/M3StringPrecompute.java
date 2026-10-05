@@ -49,17 +49,10 @@ final class M3StringPrecompute {
         return value.precomputedFacts();
     }
 
-    /**
-     * Computes one canonical fact bundle. Joined M3 Strings reuse already-retained complete-atom
-     * facts and scan only partial atom ranges.
+    /*
+     * Joined-value folding is owned by MIndexString because its segment geometry is private.
+     * Scalar and partial-range scans stay here so no second representation learns storage layout.
      */
-    static Facts compute(MIndexString value) {
-        int length = value.length();
-        if (length == 0) {
-            return Facts.EMPTY;
-        }
-        return scan(value, 0, length);
-    }
 
     static Facts scan(MIndexString value, int start, int count) {
         if (count == 0) {
