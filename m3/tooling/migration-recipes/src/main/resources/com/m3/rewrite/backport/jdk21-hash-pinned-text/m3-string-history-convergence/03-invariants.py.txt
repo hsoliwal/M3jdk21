@@ -84,6 +84,19 @@ if "private static final int MAX_PATTERN_UNITS = 8_192;" not in search_precomput
     fail("M3StringSearchPrecompute pattern budget changed without invariant review")
 if "final int[] prefix;" not in search_precompute:
     fail("prepared search plan lost primitive KMP metadata")
+for encoding_marker in [
+    "byte[] encode(Charset charset)",
+    "private byte[] encodeUtf8()",
+    "private byte[] encodeSingleByte(boolean asciiOnly)",
+    "private byte[] encodeWithEncoder(Charset charset)",
+]:
+    if encoding_marker not in m3:
+        fail(f"M3String direct byte projection missing: {encoding_marker}")
+if "prepared.utf8Length" not in m3 or "prepared.codePointCount" not in m3:
+    fail("M3String direct byte projection no longer consumes canonical length facts")
+if "final int utf8Length;" not in facts or "final boolean ascii;" not in facts or "final boolean latin1;" not in facts:
+    fail("M3StringFacts lost byte-encoding geometry")
+
 if "M3String replace(char oldChar, char newChar)" not in m3:
     fail("M3String canonical char replacement path missing")
 if "M3String replace(M3String target, M3String replacement)" not in m3:
@@ -160,6 +173,8 @@ critical_surfaces = {
     "indexOfNonWhitespace": "storage.facts().stripStart",
     "lastIndexOfNonWhitespace": "storage.facts().stripEnd",
     "toCharArray": "return storage.charShadow();",
+    "getBytes(Charset)": "return storage != null ? storage.encode(charset) : encode(charset, coder(), value());",
+    "getBytes(String)": "return storage != null ? storage.encode(charset) : encode(charset, coder(), value());",
     "value": "return storage == null ? value : storage.materialize();",
 }
 for surface, marker in critical_surfaces.items():
