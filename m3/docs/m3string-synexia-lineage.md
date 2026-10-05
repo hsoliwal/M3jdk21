@@ -35,6 +35,7 @@ Current donor pin reviewed for this port: `hsoliwal/com.synexia@9963cc08ff13922b
 | native scalar resolver/interner responsibility | `java.lang.M3StringAtom` + `java.lang.M3StringPool` |
 | canonical String facts/precomputation | `java.lang.M3StringFacts` + internal M3 kernels such as `jdk.internal.mindex.M3TQ` |
 | UTF-16 native shadow | `M3String.nativeCharShadow` + libjava JNI implementation |
+| UTF-8/byte native shadow | `M3String.nativeByteShadow` / `nativeAllocateByteShadow` + libjava JNI implementation |
 | mapped String backing | `jdk.internal.mindex.M3MappedStringBacking` |
 | backing contract | `jdk.internal.mindex.M3StringBacking` |
 
@@ -54,6 +55,7 @@ boundary requires it.
 8. Absence or eviction of precompute cannot alter Java String semantics.
 9. VM-local native scalar owners are weakly canonicalized: live M3 coordinates/DAGs own lifetime; dead native blocks are reclaimed through the local reference queue.
 10. Every Java byte[]/char[] compatibility shadow, including the shared empty VM sentinel, is created through the JNI shadow boundary.
+11. Every M3-derived Java array, including charset result byte arrays, is allocated by JNI; Java M3 code only bulk-fills or copies the caller-owned shadow.
 
 ## Search/precompute convergence absorbed
 
@@ -76,12 +78,14 @@ M3JDK now treats the ordinary Java arrays exactly as compatibility/output projec
 
 - `String.toCharArray()` obtains its caller-owned `char[]` directly from `M3String`;
 - public `String.getBytes(...)` dispatches to `M3String.encode` when the String is M3-backed;
-- UTF-8 uses the canonical `utf8Length` fact to allocate the final byte array exactly and streams
-  UTF-16 units directly, including split pairs and JDK replacement semantics for unpaired surrogates;
-- US-ASCII and ISO-8859-1 allocate from canonical code-point geometry and emit one replacement byte
-  per unmappable code point;
-- other Charsets receive one caller-owned UTF-16 projection and the stock `CharsetEncoder`
-  replacement contract;
+- UTF-8 uses the canonical `utf8Length` fact to size a JNI-created final byte shadow exactly and
+  streams UTF-16 units directly, including split pairs and JDK replacement semantics for unpaired surrogates;
+- US-ASCII and ISO-8859-1 size JNI-created byte shadows from canonical code-point geometry and emit
+  one replacement byte per unmappable code point;
+- other Charsets read the canonical M3 value directly through `CharBuffer.wrap(this)` while the
+  destination byte array is still allocated through the JNI shadow allocator;
+- resizing a generic-charset result allocates the smaller destination through JNI and bulk-copies;
+  no Java `new byte[]`, `new char[]`, or `Arrays.copyOf` is allowed in `M3String`;
 - no produced `byte[]` or `char[]` becomes canonical M3 String storage.
 
 ### No-replacement byte paths
