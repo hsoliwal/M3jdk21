@@ -3,7 +3,7 @@
  *
  * @test
  * @summary Differential M3 String search/precompute against independent UTF-16 oracles
- * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringPrecomputeSearchTest
+ * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringPrecomputeSearchTest
  */
 
 import java.nio.ByteBuffer;
@@ -14,19 +14,22 @@ import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CoderResult;
 import java.nio.charset.CodingErrorAction;
 import java.nio.charset.StandardCharsets;
+import java.nio.charset.UnmappableCharacterException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Random;
 
 public class M3StringPrecomputeSearchTest {
     private static long checks;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         deterministic();
         randomizedCompositions();
         System.out.println("M3_STRING_PRECOMPUTE_SEARCH_PASS|checks=" + checks);
     }
 
-    private static void deterministic() {
+    private static void deterministic() throws Exception {
         String left = "alpha";
         String middle = "\u03b2eta";
         String emoji = "\ud83d\ude42";
@@ -124,6 +127,70 @@ public class M3StringPrecomputeSearchTest {
                 "named UTF-8 bytes");
         check(Arrays.equals(joined.getBytes(), encodeOracle(oracle, Charset.defaultCharset())),
                 "default charset bytes");
+
+        String validAscii = String.join("", "alpha", "XYZ", "123");
+        char[] validAsciiOracle = "alphaXYZ123".toCharArray();
+        check(Arrays.equals(
+                        invokeBytes("getBytesUTF8NoRepl",
+                                new Class<?>[] {String.class}, validAscii),
+                        encodeOracleNoRepl(validAsciiOracle, StandardCharsets.UTF_8)),
+                "internal UTF-8 no-replacement bytes");
+        check(Arrays.equals(
+                        invokeBytes("getBytesNoRepl",
+                                new Class<?>[] {String.class, Charset.class},
+                                validAscii, StandardCharsets.US_ASCII),
+                        encodeOracleNoRepl(validAsciiOracle, StandardCharsets.US_ASCII)),
+                "internal ASCII no-replacement bytes");
+        check(Arrays.equals(
+                        invokeBytes("getBytesNoRepl",
+                                new Class<?>[] {String.class, Charset.class},
+                                joined, StandardCharsets.UTF_16LE),
+                        encodeOracleNoRepl(oracle, StandardCharsets.UTF_16LE)),
+                "internal generic no-replacement bytes");
+
+        String malformedUtf8 = String.join("", "\ud83d", "x");
+        try {
+            invokeBytes("getBytesUTF8NoRepl", new Class<?>[] {String.class}, malformedUtf8);
+            throw new AssertionError("UTF-8 no-replacement accepted unpaired surrogate");
+        } catch (IllegalArgumentException expected) {
+            check(expected.getMessage().equals("malformed input off : 0, length : 1"),
+                    "UTF-8 no-replacement message");
+            check(expected.getCause() instanceof UnmappableCharacterException,
+                    "UTF-8 no-replacement cause");
+            check(((UnmappableCharacterException) expected.getCause()).getInputLength() == 1,
+                    "UTF-8 no-replacement input length");
+        }
+        try {
+            invokeBytes("getBytesNoRepl",
+                    new Class<?>[] {String.class, Charset.class},
+                    malformedUtf8, StandardCharsets.UTF_8);
+            throw new AssertionError("getBytesNoRepl accepted unpaired surrogate");
+        } catch (CharacterCodingException expected) {
+            check(expected instanceof UnmappableCharacterException,
+                    "getBytesNoRepl UTF-8 exception type");
+            check(((UnmappableCharacterException) expected).getInputLength() == 1,
+                    "getBytesNoRepl UTF-8 input length");
+        }
+        try {
+            invokeBytes("getBytesNoRepl",
+                    new Class<?>[] {String.class, Charset.class},
+                    joined, StandardCharsets.US_ASCII);
+            throw new AssertionError("ASCII no-replacement accepted Unicode input");
+        } catch (CharacterCodingException expected) {
+            check(true, "ASCII no-replacement rejected Unicode input");
+        }
+
+        try {
+            invokeBytes("getBytesNoRepl",
+                    new Class<?>[] {String.class, Charset.class},
+                    splitSupplementary, StandardCharsets.US_ASCII);
+            throw new AssertionError("ASCII no-replacement accepted supplementary pair");
+        } catch (CharacterCodingException expected) {
+            check(expected instanceof UnmappableCharacterException,
+                    "ASCII supplementary exception type");
+            check(((UnmappableCharacterException) expected).getInputLength() == 2,
+                    "ASCII supplementary input length");
+        }
 
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
@@ -344,6 +411,33 @@ public class M3StringPrecomputeSearchTest {
             if (source[index] == high && source[index + 1] == low) return index;
         }
         return -1;
+    }
+
+    private static byte[] invokeBytes(
+            String methodName, Class<?>[] parameterTypes, Object... arguments) throws Exception {
+        Method method = String.class.getDeclaredMethod(methodName, parameterTypes);
+        method.setAccessible(true);
+        try {
+            return (byte[]) method.invoke(null, arguments);
+        } catch (InvocationTargetException failure) {
+            Throwable cause = failure.getCause();
+            if (cause instanceof CharacterCodingException coding) throw coding;
+            if (cause instanceof RuntimeException runtime) throw runtime;
+            if (cause instanceof Error error) throw error;
+            throw new AssertionError(cause);
+        }
+    }
+
+    private static byte[] encodeOracleNoRepl(char[] value, Charset charset)
+            throws CharacterCodingException {
+        CharsetEncoder encoder = charset.newEncoder();
+        int capacity = (int) (value.length * (double) encoder.maxBytesPerChar());
+        ByteBuffer bytes = ByteBuffer.allocate(capacity);
+        CoderResult result = encoder.encode(CharBuffer.wrap(value), bytes, true);
+        if (!result.isUnderflow()) result.throwException();
+        result = encoder.flush(bytes);
+        if (!result.isUnderflow()) result.throwException();
+        return Arrays.copyOf(bytes.array(), bytes.position());
     }
 
     private static byte[] encodeOracle(char[] value, Charset charset) {
