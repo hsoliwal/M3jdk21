@@ -1,0 +1,5 @@
+owner	role	proof
+MIndexMappedStringBacking.parseTextRows	Ordered row admission and alias reuse	MapFactsTest/MapGuardTest
+MIndexMappedStringBacking.verifyTextPayload	Single-pass contract validator	143 valid fixtures and corruption probes
+MapFacts	Configured exact-source recipe	MapFactsRecipeTest; execution pending
+MapFactsWorkflow	Existing workflow projection	Exact text images; scheduler test pending

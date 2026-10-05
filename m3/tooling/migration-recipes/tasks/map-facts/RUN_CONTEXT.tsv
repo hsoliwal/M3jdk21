@@ -1,0 +1,12 @@
+key	value
+baseline	3a433416ae7981301844682896e5aefc6f0f8901
+baseline_tree	44704818462984abf1beb5d3c13a12686f9d8586
+master_observed	7ead93addf4a7b9614d4ad34c8dd02f4b93b9c36
+review_branch	m3/map-facts-publish-20261005-3a43
+java	21.0.11+10-1-deb13u2-Debian
+platform	Linux x86_64
+source_acquisition	Hash-checked saved source export plus connected GitHub revision/owner reads
+checkout_completeness	Scoped export, not full reactor checkout
+workers	1 serial; no distributed execution
+installed_JDK	Read-only; isolated java.base package patch output
+promotion	None; draft review only

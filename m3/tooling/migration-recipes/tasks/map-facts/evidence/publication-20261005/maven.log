@@ -1,0 +1,2 @@
+exit=127
+bash: line 1: mvn: command not found

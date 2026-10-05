@@ -1,0 +1,59 @@
+=== baseline-alias-20 ===
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_INCONSISTENT_FACTS CRC-valid alias field=20 hash=1904090358 viewHash=1904090358 actualStringHash=1904090358
+	at MapFactsTest.reject(MapFactsTest.java:208)
+	at MapFactsTest.corrupt(MapFactsTest.java:154)
+	at MapFactsTest.main(MapFactsTest.java:67)
+=== baseline-alias-24 ===
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_INCONSISTENT_FACTS CRC-valid alias field=24 hash=1904090358 viewHash=1904090358 actualStringHash=1904090358
+	at MapFactsTest.reject(MapFactsTest.java:208)
+	at MapFactsTest.corrupt(MapFactsTest.java:154)
+	at MapFactsTest.main(MapFactsTest.java:67)
+=== baseline-alias-28 ===
+MAP_FACTS_PASS checks=4 specimens=1 fdChecks=0 mode=alias-28
+=== baseline-alias-32 ===
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_INCONSISTENT_FACTS CRC-valid alias field=32 hash=1904090358 viewHash=1904090358 actualStringHash=1904090358
+	at MapFactsTest.reject(MapFactsTest.java:208)
+	at MapFactsTest.corrupt(MapFactsTest.java:154)
+	at MapFactsTest.main(MapFactsTest.java:67)
+=== baseline-alias-36 ===
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_INCONSISTENT_FACTS CRC-valid alias field=36 hash=1904090358 viewHash=1904090358 actualStringHash=1904090358
+	at MapFactsTest.reject(MapFactsTest.java:208)
+	at MapFactsTest.corrupt(MapFactsTest.java:154)
+	at MapFactsTest.main(MapFactsTest.java:67)
+=== baseline-alias-40 ===
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_INCONSISTENT_FACTS CRC-valid alias field=40 hash=1904090358 viewHash=1904090358 actualStringHash=1904090358
+	at MapFactsTest.reject(MapFactsTest.java:208)
+	at MapFactsTest.corrupt(MapFactsTest.java:154)
+	at MapFactsTest.main(MapFactsTest.java:67)
+=== baseline-scalar-20 ===
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_INCONSISTENT_FACTS CRC-valid scalar field=20 hash=1904090358 viewHash=1904090358 actualStringHash=1904090358
+	at MapFactsTest.reject(MapFactsTest.java:208)
+	at MapFactsTest.corrupt(MapFactsTest.java:154)
+	at MapFactsTest.main(MapFactsTest.java:66)
+=== baseline-scalar-24 ===
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_INCONSISTENT_FACTS CRC-valid scalar field=24 hash=1904090358 viewHash=1904090358 actualStringHash=1904090358
+	at MapFactsTest.reject(MapFactsTest.java:208)
+	at MapFactsTest.corrupt(MapFactsTest.java:154)
+	at MapFactsTest.main(MapFactsTest.java:66)
+=== baseline-scalar-28 ===
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_INCONSISTENT_FACTS CRC-valid scalar field=28 hash=830348535 viewHash=830348535 actualStringHash=1904090358
+	at MapFactsTest.reject(MapFactsTest.java:208)
+	at MapFactsTest.corrupt(MapFactsTest.java:154)
+	at MapFactsTest.main(MapFactsTest.java:66)
+=== baseline-scalar-32 ===
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_INCONSISTENT_FACTS CRC-valid scalar field=32 hash=1904090358 viewHash=1904090358 actualStringHash=1904090358
+	at MapFactsTest.reject(MapFactsTest.java:208)
+	at MapFactsTest.corrupt(MapFactsTest.java:154)
+	at MapFactsTest.main(MapFactsTest.java:66)
+=== baseline-scalar-36 ===
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_INCONSISTENT_FACTS CRC-valid scalar field=36 hash=1904090358 viewHash=1904090358 actualStringHash=1904090358
+	at MapFactsTest.reject(MapFactsTest.java:208)
+	at MapFactsTest.corrupt(MapFactsTest.java:154)
+	at MapFactsTest.main(MapFactsTest.java:66)
+=== baseline-scalar-40 ===
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_INCONSISTENT_FACTS CRC-valid scalar field=40 hash=1904090358 viewHash=1904090358 actualStringHash=1904090358
+	at MapFactsTest.reject(MapFactsTest.java:208)
+	at MapFactsTest.corrupt(MapFactsTest.java:154)
+	at MapFactsTest.main(MapFactsTest.java:66)
+=== baseline-valid ===
+MAP_FACTS_PASS checks=370810 specimens=143 fdChecks=0 mode=valid

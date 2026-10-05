@@ -1,0 +1,11 @@
+gate	result	artifact
+archive_and_source_identity	PASS	PROVENANCE.tsv;inputs.sha256
+patch_whitespace_and_syntax	PASS_LIMITED	evidence/publication-20261005/static.json
+baseline_regressions_and_probes	PASS	evidence/publication-20261005/baseline-probes.log
+Java21_kernel_compile	PASS	evidence/publication-20261005/compile.log
+candidate_original_MapGuard	PASS	evidence/publication-20261005/guard.log
+candidate_MapFacts_three_modes	PASS	evidence/publication-20261005/facts.log
+public_API_descriptors	IDENTICAL	evidence/publication-20261005/api.json
+Maven_OpenRewrite_JUnit	NOT_RUN	evidence/publication-20261005/maven.log
+JaCoCo99	UNMEASURED	No pass inferred from assertions
+full_lint_reactor_JDK_jtreg_native	NOT_RUN	Independent product admission remains required

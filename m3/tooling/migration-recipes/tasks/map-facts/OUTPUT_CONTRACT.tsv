@@ -1,0 +1,15 @@
+artifact	purpose
+README.md	Preserved original intent/contract
+TASK.json	Preserved baseline/scope/locks
+FINAL_REPORT.md	Current publication verification and boundaries
+STATUS.tsv	Separate tested and unexecuted states
+RUN_CONTEXT.tsv	Pinned runtime/source identity
+PROVENANCE.tsv	Saved-source and upstream identity
+VERIFY_CONTRACT.tsv	Ordered gate outcomes
+OUTPUT_CONTRACT.tsv	This output contract
+CONTINUATION.tsv	All unfinished discussion tracks
+PATTERNS.tsv	Semantic roles and proof ownership
+SUPERSESSION.tsv	Earlier MapGuard guards retained
+inputs.sha256	Exact28 source/resource inputs
+verify.sh	Existing source-sealed runtime command
+evidence/publication-20261005	Actual new execution logs

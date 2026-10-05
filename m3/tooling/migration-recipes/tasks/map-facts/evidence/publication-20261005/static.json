@@ -1,0 +1,7 @@
+{
+  "diff": "PASS",
+  "shell": "PASS",
+  "YAML": "PASS",
+  "manifest_rows_checked": 6,
+  "full_static_analysis": "NOT_RUN"
+}

@@ -1,0 +1,20 @@
+[
+  {
+    "type": "MIndexMappedStringBacking$View",
+    "before_sha256": "a58297e9ccf7b3060bf2a95564513b65c12c3a1f8f592d70d35af57f28b13f03",
+    "after_sha256": "a58297e9ccf7b3060bf2a95564513b65c12c3a1f8f592d70d35af57f28b13f03",
+    "byte_identical": true
+  },
+  {
+    "type": "MIndexMappedStringBacking",
+    "before_sha256": "416f7b6f2d0324257fbc0addf73eccd83b9ebe96011fa15b31ce8427e620d495",
+    "after_sha256": "416f7b6f2d0324257fbc0addf73eccd83b9ebe96011fa15b31ce8427e620d495",
+    "byte_identical": true
+  },
+  {
+    "type": "MIndexStringBacking",
+    "before_sha256": "d9f79801f96a8f378a3ddd78633487add8b02b48627d48c8bebd696caa702710",
+    "after_sha256": "d9f79801f96a8f378a3ddd78633487add8b02b48627d48c8bebd696caa702710",
+    "byte_identical": true
+  }
+]

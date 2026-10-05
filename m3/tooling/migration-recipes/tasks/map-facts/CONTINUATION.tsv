@@ -1,0 +1,11 @@
+priority	owner	state	next_gate
+P1	MapFacts	PUBLICATION_CANDIDATE	Exact-head readback and draft PR; no canonical merge
+P1	MapGuard/MapFacts recipe corpus	FRAMEWORK_PROOF_PENDING	Actual Maven verify;all11 preceding/new cases and unchanged coverage gates
+P1	Mapped backing product	LOCAL_SUBSET_PASS	Complete configure/build/jtreg/platform proof
+P1	Complete compatible JEP/non-JEP/tooling backports	OPEN	Full inventory;per-change classification,dependency closure,source presence and tests
+P1	Merged JEP485 content preservation	SOURCE_AUDIT_REQUIRED	Compare PR63 product/recipe blobs with current master; ancestry is not source delivery
+P1	Ordinary String/HotSpot	NOT_CHANGED_HERE	Matched ownership/lifetime/JIT/GC/JNI/CDS and String/regex tests
+P1	Atomization/patternization/IOP99	OPEN	Verified recipes and meaningful contract coverage; no asserted percent
+P2	UTF8/UTF16 parity and remaining headers	PARTIAL_CONTRACT_ONLY	Declared semantic validator plus immutable-file lifetime protocol
+P2	DB/parser/partial-AST ownership	REUSE_EXISTING	Existing store/parser owners and invalidation/proof queues
+P2	JavaFX/framework packs/M3 naming	OPEN	OrdinaryJava21 framework compatibility and actual module/platform acceptance

@@ -1,0 +1,9 @@
+source	identity	role
+PR99 upstream parent	3a433416ae7981301844682896e5aefc6f0f8901	Current unchanged MapGuard baseline
+runtime preimage blob	0968beed3e2b330eaa34a57b8b30afb894f31fa9	Matched connected source tree
+runtime postimage blob	a0d1db39e30b68351aaea7e4d794471f2deb3f85	Exact reverified local source
+MapFactsTest blob	69703b272a5f153eaf8d43d169a5151cb725e15d	Exact product regression
+MapFactsRecipeTest blob	fc9234e4a3c162216fe94464cf844ffef6c452a3	Existing-engine test source; execution pending
+prior delivered archive SHA256	cb94d89373877142364e209a9c16df25e3dd60f955c1f4fd641236a4f49ec788	Historical local source and receipts preserved by user artifact
+prior patch SHA256	ed41ba0d7320c383b5caa39e82837ef9625c4a11a18f557eda479711510501ae	Forward/reverse checked; no export ancestry merge
+M3 locked canon	5ec31d51207bda02d2f1f9a7fcd940f2ae5e1bfc9f0ef9358139fe62b47f393b	Inventory/docs/proof/scope requirements

@@ -1,0 +1,3 @@
+owner	prior_head	prior_postimage	state
+MapGuard runtime image	3a433416ae7981301844682896e5aefc6f0f8901	b038fff642ab35aa2cf749d3ac81c3559ff8f6fc59a723fd2a5212654f4ba651	SUPERSEDED_LOCAL_CANDIDATE; prior receipts remain historical
+MapGuard tests and source guards	3a433416ae7981301844682896e5aefc6f0f8901	unchanged	RETAINED

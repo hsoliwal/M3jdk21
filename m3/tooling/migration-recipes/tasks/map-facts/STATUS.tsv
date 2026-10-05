@@ -1,0 +1,12 @@
+item	status	qualification
+MapFacts	REVIEW_CANDIDATE	Exact saved source reverified for publication; canonical branches unchanged
+pinned_baseline	MATCH	PR99 remains at3a433416ae7981301844682896e5aefc6f0f8901
+baseline_defects	11_REPRODUCED_OF_12_PROBES	Alias-hash rejection already existed
+MapGuard	PASS	78 assertions per default/interpreter run before and after
+MapFacts_runtime	PASS	370960 assertions/158 fixtures/24 FD checks in each of3 modes
+public_protected_API	UNCHANGED	Three javap surfaces byte-identical
+source_recipe_seals	PASS	28 pinned inputs; six Java/text manifest rows
+JUnit_OpenRewrite	NOT_RUN	Maven absent;11 preceding/new recipe cases remain required
+coverage99	UNMEASURED	No threshold or denominator change
+full_JDK_jtreg_JNI	NOT_RUN	Isolated package patch is not product acceptance
+whole_programme	NOT_COMPLETE	See existing owners and CONTINUATION.tsv
