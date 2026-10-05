@@ -99,7 +99,7 @@ public final class M3ScopeInference {
                 String relative = path.substring(root.length());
                 return fromRelative(module, root, relative);
             }
-            if (parts.length >= 2 && !parts[1].isBlank()) {
+            if (!parts[1].isBlank()) {
                 String module = parts[1];
                 String root = "src/" + module + "/";
                 if (path.length() <= root.length()) {
@@ -112,7 +112,7 @@ public final class M3ScopeInference {
 
         if (path.startsWith("test/")) {
             String[] parts = path.split("/", -1);
-            String family = parts.length > 1 && !parts[1].isBlank() ? parts[1] : "test";
+            String family = parts[1].isBlank() ? "test" : parts[1];
             String root = "test/" + family + "/";
             String relative = path.length() > root.length() ? path.substring(root.length()) : "";
             return fromRelative("<jdk-test:" + family + ">", root, relative);
@@ -120,7 +120,7 @@ public final class M3ScopeInference {
 
         if (path.startsWith("make/modules/")) {
             String[] parts = path.split("/", -1);
-            String module = parts.length > 2 && !parts[2].isBlank() ? parts[2] : "<build>";
+            String module = parts[2].isBlank() ? "<build>" : parts[2];
             String root = "make/modules/" + module + "/";
             String relative = path.length() > root.length() ? path.substring(root.length()) : "";
             return fromRelative(module, root, relative);
