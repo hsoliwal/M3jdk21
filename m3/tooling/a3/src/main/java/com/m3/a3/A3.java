@@ -44,6 +44,10 @@ public final class A3 {
                             options.root(),
                             options.out("m3/build/a3/apply"),
                             options.sources());
+            case "lab" ->
+                    A3Lab.write(
+                            options.root(),
+                            options.out("m3/build/a3/lab"));
             default -> {
                 usage();
                 throw new IllegalArgumentException(
@@ -54,7 +58,7 @@ public final class A3 {
 
     private static void usage() {
         System.err.println(
-                "A3: inv|alg|plan|work|apply [--root PATH] [--out PATH] "
+                "A3: inv|alg|plan|work|apply|lab [--root PATH] [--out PATH] "
                         + "[--inventory PATH] [--queue PATH] "
                         + "[--file PATH ...] [--list PATH]");
     }
