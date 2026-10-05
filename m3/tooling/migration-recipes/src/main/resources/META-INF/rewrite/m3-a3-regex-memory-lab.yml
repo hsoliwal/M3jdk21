@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.a3.RegexMemoryLabDelivery
+displayName: Install A3 in-memory regex mastery extension
+description: >-
+  Source-sealed installation of the in-memory Java 21 compiler, precompiled regex/string matrix,
+  and A3Lab receipt integration. Candidate-only; no JDK product source or promotion authority.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: a3-regex-memory-lab
