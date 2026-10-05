@@ -1,0 +1,11 @@
+/*
+ * Copyright 2026 Synexia <hsoliwal@gmail.com>
+ * Licensed under the Apache License, Version 2.0
+ */
+package jdk.internal.mindex;
+
+/** Primitive two-long predicate used for allocation-free filtering of packed maps. */
+@FunctionalInterface
+interface M3LongLongPredicate {
+    boolean test(long first, long second);
+}
