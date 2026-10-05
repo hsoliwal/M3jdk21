@@ -1,9 +1,9 @@
-name: MIndex JDK mapped String backing
+name: M3JDK mapped String backing
 on:
   pull_request:
     paths:
       - 'src/java.base/share/classes/jdk/internal/mindex/**'
-      - 'test/jdk/java/lang/String/MIndexMappedStringBackingTest.java'
+      - 'test/jdk/java/lang/String/M3MappedStringBackingTest.java'
       - 'test/jdk/java/lang/String/MapGuardTest.java'
       - 'test/jdk/java/lang/String/MapFactsTest.java'
       - 'test/jdk/java/lang/String/MapUtfTest.java'
@@ -29,5 +29,5 @@ jobs:
         run: bash configure --with-debug-level=fastdebug --with-jvm-variants=server
       - name: Build java.base
         run: make java.base-java-only
-      - name: Run MIndex String backing jtreg
-        run: make test TEST="test/jdk/java/lang/String/MIndexMappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java"
+      - name: Run M3 String backing jtreg
+        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java"
