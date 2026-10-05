@@ -237,6 +237,7 @@ class java_lang_M3String : AllStatic {
   static inline jlong coordinate(oop value);
   static inline int start(oop value);
   static inline int length(oop value);
+  static inline int owner_length(oop value);
   static inline jbyte coder(oop value);
   static inline jint java_hash(oop value);
   static inline jchar char_at(oop value, int index);
