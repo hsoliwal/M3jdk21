@@ -83,6 +83,66 @@ final class M3AtomDefensiveBranchTest {
                         > comments);
     }
 
+    @Test
+    void malformedLstsFailClosedAtEveryTypedEligibilityBoundary() {
+        J.MethodDeclaration eligible = method(
+                "private static int f(int a, int b) { return a + b; }");
+        assertFalse(M3PureIntAtomEligibility.eligible(
+                eligible.withReturnTypeExpression(null)));
+
+        J.Return returned = (J.Return) eligible.getBody().getStatements().getFirst();
+        assertFalse(M3PureIntAtomEligibility.eligible(
+                eligible.withParameters(List.of(returned))));
+
+        J.VariableDeclarations first =
+                (J.VariableDeclarations) eligible.getParameters().get(0);
+        J.VariableDeclarations second =
+                (J.VariableDeclarations) eligible.getParameters().get(1);
+        assertFalse(M3PureIntAtomEligibility.eligible(
+                eligible.withParameters(List.of(first.withTypeExpression(null), second))));
+        assertFalse(M3PureIntAtomEligibility.eligible(
+                eligible.withParameters(List.of(first.withVariables(List.of(
+                        first.getVariables().getFirst(),
+                        second.getVariables().getFirst())), second))));
+        assertFalse(M3PureIntAtomEligibility.eligible(
+                eligible.withParameters(List.of(first, first))));
+
+        J.MethodDeclaration atomized = method(
+                "private static int f(int a, int b) { "
+                        + "int m3$pureIntAtom = a + b; return m3$pureIntAtom; }");
+        assertFalse(M3PureIntAtomEligibility.atomized(
+                atomized.withReturnTypeExpression(null)));
+        J.VariableDeclarations atom =
+                (J.VariableDeclarations) atomized.getBody().getStatements().getFirst();
+        J.Return atomReturn = (J.Return) atomized.getBody().getStatements().get(1);
+        assertFalse(M3PureIntAtomEligibility.atomized(
+                atomized.withBody(atomized.getBody().withStatements(List.of(
+                        atom.withTypeExpression(null), atomReturn)))));
+
+        J.MethodDeclaration literals = method(
+                "private static int f(int a, int b) { return 1 + 2; }");
+        J.Return literalReturn = (J.Return) literals.getBody().getStatements().getFirst();
+        J.Binary binary = (J.Binary) literalReturn.getExpression();
+        J.Literal left = (J.Literal) binary.getLeft();
+        J.Binary malformedLiteral = binary.withLeft(left.withValue(Character.valueOf('x')));
+        assertFalse(M3PureIntAtomEligibility.eligible(
+                literals.withBody(literals.getBody().withStatements(List.of(
+                        literalReturn.withExpression(malformedLiteral))))));
+
+        J.MethodDeclaration parenthesized = method(
+                "private static int f(int a, int b) { return (a + b); }");
+        J.Return parenReturn =
+                (J.Return) parenthesized.getBody().getStatements().getFirst();
+        J.Parentheses<?> parentheses = (J.Parentheses<?>) parenReturn.getExpression();
+        @SuppressWarnings({"rawtypes", "unchecked"})
+        J.Parentheses<?> malformedParentheses = ((J.Parentheses) parentheses)
+                .withTree(parenthesized.getBody())
+                .withType(org.openrewrite.java.tree.JavaType.Primitive.Int);
+        assertFalse(M3PureIntAtomEligibility.eligible(
+                parenthesized.withBody(parenthesized.getBody().withStatements(List.of(
+                        parenReturn.withExpression(malformedParentheses))))));
+    }
+
     private static String balanced(String leaf, int depth) {
         if (depth == 0) {
             return leaf;
