@@ -35,6 +35,7 @@ dedup = read("src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp")
 mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
+native_string = read("src/java.base/share/native/libjava/String.c")
 
 # M3String must remain owner + coordinate only.
 instance_fields = re.findall(
@@ -128,6 +129,30 @@ if "nativeByteShadow(EMPTY, 0, 0, String.LATIN1)" not in m3:
     fail("M3String empty compatibility sentinel is not JNI-created")
 if "return storage == null ? checked.value : storage.compatibilityValue();" not in string:
     fail("JNI ingress no longer discards the temporary construction payload")
+
+# JNI creates only the final compatibility arrays, then bulk-fills them from canonical M3
+# storage. Per-code-unit JNI dispatch and temporary C spelling buffers are forbidden.
+byte_shadow = re.search(
+    r"Java_java_lang_M3String_nativeByteShadow\((?P<body>.*?)\n\}",
+    native_string,
+    flags=re.DOTALL,
+)
+char_shadow = re.search(
+    r"Java_java_lang_M3String_nativeCharShadow\((?P<body>.*?)\n\}",
+    native_string,
+    flags=re.DOTALL,
+)
+if not byte_shadow or not char_shadow:
+    fail("M3 JNI shadow functions missing")
+for label, body in [("byte", byte_shadow.group("body")), ("char", char_shadow.group("body"))]:
+    if "malloc(" in body or "CallCharMethod" in body:
+        fail(f"M3 {label} shadow reintroduced per-character/native staging")
+if '"getBytes", "([BIIBI)V"' not in byte_shadow.group("body"):
+    fail("M3 byte shadow does not bulk-fill through M3String.getBytes")
+if '"getChars", "(II[CI)V"' not in char_shadow.group("body"):
+    fail("M3 char shadow does not bulk-fill through M3String.getChars")
+if "CallVoidMethodA" not in byte_shadow.group("body") or "CallVoidMethodA" not in char_shadow.group("body"):
+    fail("M3 JNI shadows lost single bulk dispatch")
 
 # Donor class naming must not leak back into live VM symbols/layout.
 for path, text in [
