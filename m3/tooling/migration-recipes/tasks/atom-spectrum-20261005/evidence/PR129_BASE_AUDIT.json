@@ -1,0 +1,327 @@
+{
+  "schema": "m3-pr-current-base-intersection-v1",
+  "recorded_utc": "2026-10-05 08:25:08 UTC",
+  "repository": "hsoliwal/M3jdk21",
+  "purpose": "Investigate publication-time mergeable=false without changing the tested source closure.",
+  "finding": "NO_SCOPED_INPUT_OVERLAP; CURRENT_PR_MERGEABLE",
+  "pull_request": {
+    "tool": "mcp__codex_apps__github_get_pr_info",
+    "url": "https://github.com/hsoliwal/M3jdk21/pull/129",
+    "number": 129,
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "mergeable": true,
+    "head": "codex/m3jdk-atom-spectrum-20261005",
+    "head_sha": "a96338d9b72ae4c71638948b2e5e8f851ac07726",
+    "base": "master",
+    "base_sha": "ccb4ace7f7d79f97ae2d9600de55960504cc3c21",
+    "merge_commit_sha": "6fea22b13720cff7fb0df70d7cb4fb71629e3689",
+    "commits": 2,
+    "changed_files": 43
+  },
+  "tested_candidate": {
+    "phase": "current-3",
+    "completed_utc": "2026-10-05 08:02:44 UTC",
+    "head_sha": "a96338d9b72ae4c71638948b2e5e8f851ac07726",
+    "parent_commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+    "parent_root_tree": "548f3d7c434c49c3989fc722f34ebba2ba9f0c5a",
+    "main_sources": 8,
+    "test_sources": 12,
+    "junit_cases": 39,
+    "failures_errors_skips": 0
+  },
+  "newer_base": {
+    "tool": "mcp__codex_apps__github_fetch",
+    "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/commits/ccb4ace7f7d79f97ae2d9600de55960504cc3c21",
+    "sha": "ccb4ace7f7d79f97ae2d9600de55960504cc3c21",
+    "tree_sha": "f5533ab50b60297c955d94a8e1190ad91d0bf831",
+    "parents": [
+      "da958d00d24154c0db87beca0ec80a7df2b43b73",
+      "59d8307d61789be555e009c2b76082f073e2cea7"
+    ],
+    "message": "merge: additive superset PR #128\n\nChronological additive convergence into master. Preserve PR #128 ancestry; no squash/rebase."
+  },
+  "comparison": {
+    "tool": "mcp__codex_apps__github_compare_commits",
+    "base": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+    "head": "ccb4ace7f7d79f97ae2d9600de55960504cc3c21",
+    "status": "ahead",
+    "ahead_by": 6,
+    "behind_by": 0,
+    "total_commits": 6,
+    "too_large": null,
+    "merge_base": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+    "changed_file_count": 14,
+    "files": [
+      {
+        "filename": ".github/workflows/m3-a3.yml",
+        "status": "modified",
+        "additions": 34,
+        "deletions": 2,
+        "changes": 36,
+        "previous_filename": null
+      },
+      {
+        "filename": "m3/docs/a3-lab.md",
+        "status": "added",
+        "additions": 98,
+        "deletions": 0,
+        "changes": 98,
+        "previous_filename": null
+      },
+      {
+        "filename": "m3/tooling/a3/src/main/java/com/m3/a3/A3.java",
+        "status": "modified",
+        "additions": 5,
+        "deletions": 1,
+        "changes": 6,
+        "previous_filename": null
+      },
+      {
+        "filename": "m3/tooling/a3/src/main/java/com/m3/a3/A3Cases.java",
+        "status": "added",
+        "additions": 144,
+        "deletions": 0,
+        "changes": 144,
+        "previous_filename": null
+      },
+      {
+        "filename": "m3/tooling/a3/src/main/java/com/m3/a3/A3Lab.java",
+        "status": "added",
+        "additions": 443,
+        "deletions": 0,
+        "changes": 443,
+        "previous_filename": null
+      },
+      {
+        "filename": "m3/tooling/a3/src/test/java/com/m3/a3/A3LabTest.java",
+        "status": "added",
+        "additions": 76,
+        "deletions": 0,
+        "changes": 76,
+        "previous_filename": null
+      },
+      {
+        "filename": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-lab.yml",
+        "status": "added",
+        "additions": 11,
+        "deletions": 0,
+        "changes": 11,
+        "previous_filename": null
+      },
+      {
+        "filename": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3.java.after",
+        "status": "added",
+        "additions": 143,
+        "deletions": 0,
+        "changes": 143,
+        "previous_filename": null
+      },
+      {
+        "filename": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Cases.java.after",
+        "status": "added",
+        "additions": 144,
+        "deletions": 0,
+        "changes": 144,
+        "previous_filename": null
+      },
+      {
+        "filename": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3Lab.java.after",
+        "status": "added",
+        "additions": 443,
+        "deletions": 0,
+        "changes": 443,
+        "previous_filename": null
+      },
+      {
+        "filename": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/A3LabTest.java.after",
+        "status": "added",
+        "additions": 76,
+        "deletions": 0,
+        "changes": 76,
+        "previous_filename": null
+      },
+      {
+        "filename": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-lab/manifest.tsv",
+        "status": "added",
+        "additions": 4,
+        "deletions": 0,
+        "changes": 4,
+        "previous_filename": null
+      },
+      {
+        "filename": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3LabDeliveryRecipeTest.java",
+        "status": "added",
+        "additions": 124,
+        "deletions": 0,
+        "changes": 124,
+        "previous_filename": null
+      },
+      {
+        "filename": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-lab/before-A3.java.txt",
+        "status": "added",
+        "additions": 139,
+        "deletions": 0,
+        "changes": 139,
+        "previous_filename": null
+      }
+    ]
+  },
+  "bound_input_manifests": [
+    {
+      "path": "delivery/PUBLISH_MANIFEST.json",
+      "entries": 43,
+      "bytes": 27704,
+      "sha256": "523c47adcea9e2416d25467864c84dc1836f708e60474d12e6bc56faa994adde"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/SOURCE_PINS.tsv",
+      "entries": 15,
+      "bytes": 3414,
+      "sha256": "93bbb83b9ac9f0ae952e39ad95649367a452c2449fec20a8c051926420a3d58e"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/evidence/FINAL_SOURCE_SHA256.tsv",
+      "entries": 19,
+      "bytes": 3019,
+      "sha256": "5920ac61c49c7595e557088c1f3cb6bfa39473713a4be99f79a25c4968beaac2"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/atom/spectrum/CORPUS.tsv",
+      "entries": 100,
+      "source_bytes": 4004365,
+      "pin_commit": "e8fdab9a7abc4b0273438ce9e5d0ffd6255b1247",
+      "bytes": 18328,
+      "sha256": "38ed8c01c6982fa4a52ea155c2e9652dfe45f317d8ae994c17fba01c7309fbda"
+    }
+  ],
+  "preserved_snapshot_helper": {
+    "path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+    "git_blob": "717c3e01f8f0407ce96439e3ecc96190b10c1eed",
+    "sha256": "9cf77c6e68a534e84b88230ca517fa6c5a76fb3e101ea3a1f68aa5222c3ec4d9"
+  },
+  "build_and_verification_controls": [
+    {
+      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/pom.xml",
+      "bytes": 3221,
+      "sha256": "2c74118271736d55096f2e613753d269a3a5b41dc4d7332ba9a15593b95edbe6"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/checkstyle.xml",
+      "bytes": 644,
+      "sha256": "e8838f6b765b92ada1e24636c0ed003c2eb4869bd57e796e6368d472ad601f16"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/verify-static.py",
+      "bytes": 4083,
+      "sha256": "1f2d36d60ca7b780d8c68b21adfba679e8c9153c94d425fbcbe378f02b32c4da"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/verify-runtime.py",
+      "bytes": 8011,
+      "sha256": "c9232197ec05646f050c62ab25c8a1f0c6f131e9150643e4239d43b0ade3c42b"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/atom-spectrum-20261005/SOURCE_PINS.tsv",
+      "bytes": 3414,
+      "sha256": "93bbb83b9ac9f0ae952e39ad95649367a452c2449fec20a8c051926420a3d58e"
+    }
+  ],
+  "maven_selection": {
+    "focused_pom_has_parent": false,
+    "test_source_directory": "${project.basedir}/../../src/test/java",
+    "compiler_and_resource_selectors": {
+      "production": {
+        "root": "m3/tooling/migration-recipes/src/main/java",
+        "patterns": [
+          "com/m3/rewrite/atom/*.java",
+          "com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
+        ],
+        "selected_file_count": 8,
+        "changed_paths_matching_selection": [],
+        "selected_paths": [
+          "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+          "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java",
+          "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3FileAtomCandidateTable.java",
+          "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java",
+          "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+          "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+          "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
+          "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java"
+        ]
+      },
+      "test": {
+        "root": "m3/tooling/migration-recipes/src/test/java",
+        "patterns": [
+          "com/m3/rewrite/atom/*.java"
+        ],
+        "selected_file_count": 12,
+        "changed_paths_matching_selection": [],
+        "selected_paths": [
+          "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomCommentRecipeTest.java",
+          "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomCoverageClosureTest.java",
+          "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomDefensiveBranchTest.java",
+          "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipeTest.java",
+          "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3IntRecipeProjectTest.java",
+          "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3IntSpectrumTest.java",
+          "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3InventoryPureIntAtomCandidatesTest.java",
+          "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3PatternMarkerTest.java",
+          "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipeTest.java",
+          "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3RepositoryCorpusTest.java",
+          "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/MemJava.java",
+          "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/SpectrumCases.java"
+        ]
+      },
+      "resources": {
+        "root": "m3/tooling/migration-recipes/src/main/resources",
+        "patterns": [
+          "com/synexia/rewrite/hash-pinned-java/atom-comment-custody/**",
+          "com/synexia/rewrite/hash-pinned-java/atom-pattern-spectrum/**"
+        ],
+        "selected_file_count": 8,
+        "changed_paths_matching_selection": []
+      },
+      "test_resources": {
+        "root": "m3/tooling/migration-recipes/src/test/resources",
+        "patterns": [
+          "com/m3/rewrite/atom/spectrum/**"
+        ],
+        "selected_file_count": 1,
+        "changed_paths_matching_selection": []
+      }
+    },
+    "new_delivery_test": {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3LabDeliveryRecipeTest.java",
+      "selected": false,
+      "reason": "Compiler testIncludes admits only com/m3/rewrite/atom/*.java; this file is in the parent package."
+    }
+  },
+  "intersections": {
+    "published_43_paths": [],
+    "source_pin_paths": [],
+    "executed_atom_source_manifest_paths": [],
+    "real_corpus_100_paths": [],
+    "task_build_and_verification_controls": [],
+    "ancestor_pom_and_maven_options": []
+  },
+  "local_hash_audit": {
+    "published_manifest_matches": 43,
+    "source_pin_entries_match": 15,
+    "executed_atom_sources_match": 19,
+    "corpus_sources_sha256_and_git_blob_match": 100
+  },
+  "actions": {
+    "source_changes": 0,
+    "ref_mutations": 0,
+    "merge_or_rebase": false,
+    "verification_rerun": false,
+    "reason": "No existing or newly added file intersects the focused compiler/resource selectors, build controls, delivered paths or pinned corpus."
+  },
+  "limits": [
+    "The publication-time false result is superseded by a later mergeable=true observation; the cause of the initial result was not established.",
+    "The 39 passing tests remain evidence from current-3 on parent da958; they were not rerun against the GitHub synthetic merge.",
+    "New A3 CLI/lab/workflow/delivery resources and tests were not qualified by the focused atom-spectrum lane.",
+    "Full migration-recipes default-module gates, OpenJDK configure/make/jtreg and JNI/native runtime remain outside the executed claim."
+  ]
+}

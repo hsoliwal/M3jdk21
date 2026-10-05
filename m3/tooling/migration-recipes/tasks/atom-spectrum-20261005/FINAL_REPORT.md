@@ -65,6 +65,29 @@ source-preimage authority and compact preflight results. The complete preflight 
 diffs are retained in the indexed raw evidence. The final compilation includes eight production and
 twelve test sources; all 39 selected JUnit cases pass.
 
+## Newer-base publication audit
+
+After draft [PR129](https://github.com/hsoliwal/M3jdk21/pull/129) was created at
+`a96338d9b72ae4c71638948b2e5e8f851ac07726`, a subsequent read reported `mergeable=true` against
+master `ccb4ace7f7d79f97ae2d9600de55960504cc3c21`, root tree
+`f5533ab50b60297c955d94a8e1190ad91d0bf831`. This supersedes the creation-time false observation;
+the reason for that initial observation was not established.
+
+The exact comparison from the tested parent `da958d00d24154c0db87beca0ec80a7df2b43b73` contains
+six intervening commits and fourteen changed files for the A3 CLI/lab, its workflow/documentation
+and its separate delivery crate. None overlaps the 43 published paths, selected production/test
+sources, verification controls, resource selections or 100 pinned corpus paths. The focused POM
+explicitly limits test compilation to `com/m3/rewrite/atom/*.java`, so the added
+`com/m3/rewrite/M3A3LabDeliveryRecipeTest.java` does not enter the focused run even though the test
+source directory is the parent `src/test/java` directory. The new A3 resource crate is likewise
+outside the two explicit resource includes.
+
+[PR129_BASE_AUDIT.json](evidence/PR129_BASE_AUDIT.json) records exact commits/tree, changed paths,
+selectors, empty intersections and source-manifest hashes. All 43 original delivery hashes and
+100 corpus hashes were rechecked locally. No source integration or test rerun was needed. The 39
+passing cases remain the executed `current-3` result on the tested parent; this newer-base audit
+does not claim qualification of the new A3 features or execution against a synthetic merge.
+
 ## Generated transformation proof
 
 The new generated project contains 324 admitted primitive-int expressions: nine outer operators,
