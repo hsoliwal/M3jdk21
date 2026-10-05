@@ -94,6 +94,30 @@ class M3SynexiaHandoffImportTest {
   }
 
   @Test
+  void refusesTextPayloadTargetingJavaEvenWithAValidPacketRoot() throws Exception {
+    Path export = fixture("text-as-java");
+    Path bridge =
+        resources(export)
+            .resolve("com/m3/rewrite/backport/synexia-bridge/synexia-sample-v1");
+    Path packet = bridge.resolve("packet.tsv");
+    String changed =
+        Files.readString(packet)
+            .replace("m3/ports/sample/README.txt", "m3/ports/sample/README.java");
+    Files.writeString(packet, changed);
+    Path properties = bridge.resolve("bridge.properties");
+    String propertyText =
+        Files.readString(properties)
+            .replaceFirst("packetRoot=[0-9a-f]{64}", "packetRoot=" + sha256(changed));
+    Files.writeString(properties, propertyText);
+
+    Path target = temp.resolve("target-text-as-java");
+    Files.createDirectories(target);
+    assertThrows(
+        IllegalStateException.class,
+        () -> SynexiaHandoffImport.inspect(export, target, "synexia-sample-v1"));
+  }
+
+  @Test
   void refusesSymlinkedExportResourceWhenSupported() throws Exception {
     Path export = fixture("refusal-symlink");
     Path packet =
