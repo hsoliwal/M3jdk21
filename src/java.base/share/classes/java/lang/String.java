@@ -2384,6 +2384,10 @@ public final class String
         if (toffset < 0 || toffset > length() - prefix.length()) {
             return false;
         }
+        MIndexString m3 = mindex();
+        if (m3 != null) {
+            return m3.regionMatches(toffset, prefix, 0, prefix.length());
+        }
         byte[] ta = value();
         byte[] pa = prefix.value();
         int po = 0;
@@ -2560,6 +2564,10 @@ public final class String
      * {@code fromIndex} were larger than the string length, or were negative.
      */
     public int indexOf(int ch, int fromIndex) {
+        MIndexString m3 = mindex();
+        if (m3 != null) {
+            return m3.indexOf(ch, fromIndex, length());
+        }
         return isLatin1() ? StringLatin1.indexOf(value(), ch, fromIndex, length())
                 : StringUTF16.indexOf(value(), ch, fromIndex, length());
     }
@@ -2606,6 +2614,10 @@ public final class String
      */
     public int indexOf(int ch, int beginIndex, int endIndex) {
         checkBoundsBeginEnd(beginIndex, endIndex, length());
+        MIndexString m3 = mindex();
+        if (m3 != null) {
+            return m3.indexOf(ch, beginIndex, endIndex);
+        }
         return isLatin1() ? StringLatin1.indexOf(value(), ch, beginIndex, endIndex)
                 : StringUTF16.indexOf(value(), ch, beginIndex, endIndex);
     }
@@ -2672,6 +2684,10 @@ public final class String
      *          if the character does not occur before that point.
      */
     public int lastIndexOf(int ch, int fromIndex) {
+        MIndexString m3 = mindex();
+        if (m3 != null) {
+            return m3.lastIndexOf(ch, fromIndex);
+        }
         return isLatin1() ? StringLatin1.lastIndexOf(value(), ch, fromIndex)
                           : StringUTF16.lastIndexOf(value(), ch, fromIndex);
     }
@@ -2691,6 +2707,10 @@ public final class String
      *          or {@code -1} if there is no such occurrence.
      */
     public int indexOf(String str) {
+        MIndexString m3 = mindex();
+        if (m3 != null) {
+            return m3.indexOf(str, 0, length());
+        }
         byte coder = coder();
         if (coder == str.coder()) {
             return isLatin1() ? StringLatin1.indexOf(value(), str.value())
@@ -2733,6 +2753,10 @@ public final class String
      *          or {@code -1} if there is no such occurrence.
      */
     public int indexOf(String str, int fromIndex) {
+        MIndexString m3 = mindex();
+        if (m3 != null) {
+            return m3.indexOf(str, fromIndex, length());
+        }
         return indexOf(value(), coder(), length(), str, fromIndex);
     }
 
@@ -2766,6 +2790,10 @@ public final class String
             return indexOf(str.charAt(0), beginIndex, endIndex);
         }
         checkBoundsBeginEnd(beginIndex, endIndex, length());
+        MIndexString m3 = mindex();
+        if (m3 != null) {
+            return m3.indexOf(str, beginIndex, endIndex);
+        }
         return indexOf(value(), coder(), endIndex, str, beginIndex);
     }
 
@@ -2842,6 +2870,10 @@ public final class String
      *          or {@code -1} if there is no such occurrence.
      */
     public int lastIndexOf(String str, int fromIndex) {
+        MIndexString m3 = mindex();
+        if (m3 != null) {
+            return m3.lastIndexOf(str, fromIndex);
+        }
         return lastIndexOf(value(), coder(), length(), str, fromIndex);
     }
 
