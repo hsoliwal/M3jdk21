@@ -99,14 +99,14 @@ jobs:
           PA="$(awk -F '\t' 'NR > 1 && $2 == "P>A" {n++} END {print n+0}' "$LAB")"
           APA="$(awk -F '\t' 'NR > 1 && $2 == "A>P>A" {n++} END {print n+0}' "$LAB")"
           PAP="$(awk -F '\t' 'NR > 1 && $2 == "P>A>P" {n++} END {print n+0}' "$LAB")"
-          PASS="$(awk -F '\t' 'NR > 1 && $9 == "true" && $10 == "true" && $11 == "true" && $12 == "true" {n++} END {print n+0}' "$LAB")"
+          PASS="$(awk -F '\t' 'NR > 1 && $9 == "true" && $10 == "true" && $11 == "true" && $12 == "true" && $13 == "true" {n++} END {print n+0}' "$LAB")"
           test "$ROWS" -eq 288
           test "$AP" -eq 48
           test "$PA" -eq 48
           test "$APA" -eq 48
           test "$PAP" -eq 48
           test "$PASS" -eq "$ROWS"
-          printf 'A3Lab: rows=%s A>P=%s P>A=%s A>P>A=%s P>A>P=%s all-gates=%s\n' "$ROWS" "$AP" "$PA" "$APA" "$PAP" "$PASS" >> "$GITHUB_STEP_SUMMARY"
+          printf 'A3Lab: rows=%s A>P=%s P>A=%s A>P>A=%s P>A>P=%s all-gates+regex=%s\n' "$ROWS" "$AP" "$PA" "$APA" "$PAP" "$PASS" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Inventory whole JDK source and test corpus
         shell: bash

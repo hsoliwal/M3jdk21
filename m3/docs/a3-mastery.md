@@ -80,6 +80,17 @@ For every admitted fixture:
 The campaign is bounded for CI, but the fixture generator is deterministic so stronger campaigns can
 raise the case/input budget without changing semantics.
 
+## Thicker regex/string precompute
+
+The mastery campaign also maintains a precompiled regex/string matrix independent of recipe
+authority. The matrix deliberately includes literals, groups/alternation, quantifiers, classes,
+anchors, DOTALL/MULTILINE, lookaround, backreferences, Unicode classes and comment/code-looking
+shapes.
+
+Each transformed fixture must preserve the exact matrix root over the fixed subject corpus plus its
+own payload. This gives the LLM/static-analysis lane a thicker pool of reusable lexical signals while
+keeping Java LST/AST, javac and runtime/JUnit evidence authoritative.
+
 ## JDK build boundary
 
 The mastery lab verifies the A3 tooling and FILE-local candidate behavior only.
