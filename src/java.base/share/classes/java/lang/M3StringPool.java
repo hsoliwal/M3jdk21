@@ -45,6 +45,7 @@ final class M3StringPool {
             new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<Long, TupleBucket> TUPLES =
             new ConcurrentHashMap<>();
+    private static final ReferenceQueue<M3StringAtom> LOCAL_QUEUE = new ReferenceQueue<>();
     private static final ReferenceQueue<M3StringTuple> TUPLE_QUEUE = new ReferenceQueue<>();
 
     private static volatile Lexicon lexicon;
@@ -82,17 +83,28 @@ final class M3StringPool {
     }
 
     private static M3StringAtom internLocal(byte[] value, byte coder) {
+        expungeLocals();
         long hash64 = contentHash64(value, coder);
         Fingerprint fingerprint = new Fingerprint(coder, value.length, hash64);
-        LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
-        synchronized (bucket) {
-            for (M3StringAtom existing : bucket.values) {
-                if (existing.contentEquals(value, coder)) return existing;
+        for (;;) {
+            LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
+            synchronized (bucket) {
+                if (bucket.retired) continue;
+                for (Iterator<LocalRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
+                    LocalRef reference = iterator.next();
+                    M3StringAtom existing = reference.get();
+                    if (existing == null) {
+                        iterator.remove();
+                        reference.releaseNative();
+                    } else if (existing.contentEquals(value, coder)) {
+                        return existing;
+                    }
+                }
+                long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
+                M3StringAtom created = M3StringAtom.local(value, coder, id, hash64);
+                bucket.values.add(new LocalRef(created, fingerprint, bucket));
+                return created;
             }
-            long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
-            M3StringAtom created = M3StringAtom.local(value, coder, id, hash64);
-            bucket.values.add(created);
-            return created;
         }
     }
 
@@ -121,6 +133,20 @@ final class M3StringPool {
                 M3StringTuple created = new M3StringTuple(left, right, id, hash);
                 bucket.values.add(new TupleRef(created, hash, bucket));
                 return M3String.whole(created);
+            }
+        }
+    }
+
+    private static void expungeLocals() {
+        LocalRef reference;
+        while ((reference = (LocalRef) LOCAL_QUEUE.poll()) != null) {
+            LocalBucket bucket = reference.bucket;
+            synchronized (bucket) {
+                bucket.values.remove(reference);
+                reference.releaseNative();
+                if (bucket.values.isEmpty() && LOCAL.remove(reference.fingerprint, bucket)) {
+                    bucket.retired = true;
+                }
             }
         }
     }
@@ -186,7 +212,29 @@ final class M3StringPool {
     private record Fingerprint(byte coder, int byteLength, long hash64) {}
 
     private static final class LocalBucket {
-        final ArrayList<M3StringAtom> values = new ArrayList<>();
+        final ArrayList<LocalRef> values = new ArrayList<>();
+        boolean retired;
+    }
+
+    private static final class LocalRef extends WeakReference<M3StringAtom> {
+        final Fingerprint fingerprint;
+        final LocalBucket bucket;
+        final long address;
+        private boolean released;
+
+        LocalRef(M3StringAtom value, Fingerprint fingerprint, LocalBucket bucket) {
+            super(value, LOCAL_QUEUE);
+            this.fingerprint = fingerprint;
+            this.bucket = bucket;
+            this.address = value.address;
+        }
+
+        void releaseNative() {
+            if (!released) {
+                released = true;
+                if (address != 0L) UNSAFE.freeMemory(address);
+            }
+        }
     }
 
     private static final class TupleBucket {
