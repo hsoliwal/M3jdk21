@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.SynexiaBridgeFixtureV1
+displayName: Receive reviewed Synexia handoff fixture
+description: Verifies the handoff packet then replays exact Java and text snapshots.
+tags:
+  - m3
+  - synexia
+  - jdk21
+  - candidate-only
+recipeList:
+  - com.m3.rewrite.backport.M3SynexiaHandoffGuardRecipe:
+      crateName: synexia-fixture-v1
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: synexia-fixture-v1
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: synexia-fixture-v1
