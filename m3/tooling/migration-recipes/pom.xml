@@ -60,4 +60,26 @@
       </executions>
     </plugin>
   </plugins></build>
+
+  <profiles>
+    <profile>
+      <id>m3-a3-recipe-mastery-lab</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.openrewrite.maven</groupId>
+            <artifactId>rewrite-maven-plugin</artifactId>
+            <version>5.23.1</version>
+            <configuration>
+              <activeRecipes>
+                <recipe>com.m3.rewrite.M3A3RecipeMasteryLab</recipe>
+              </activeRecipes>
+              <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
+              <failOnDryRunResults>false</failOnDryRunResults>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

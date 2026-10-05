@@ -1,0 +1,9 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.M3A3RecipeMasteryLab
+displayName: Install M3 A3 recipe mastery laboratory
+description: >-
+  Installs the source-sealed in-memory Java/regex permutation laboratory used to mechanically
+  master the retained atomize-patternize-document convergence recipe.
+recipeList:
+  - com.m3.rewrite.M3A3RecipeMasteryLabRecipe
