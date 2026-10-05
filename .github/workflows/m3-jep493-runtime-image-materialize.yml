@@ -1,0 +1,256 @@
+name: M3 JEP 493 generated-crate materialization
+
+on:
+  push:
+    branches:
+      - "m3/jep493-generated-crate-materialization-20261005"
+    paths:
+      - "m3/backports/file_delta_inventory.py"
+      - "m3/backports/generate_recipe_crates.py"
+      - "m3/backports/materialize_generated_crates.py"
+      - "m3/backports/test_file_delta_inventory.py"
+      - "m3/backports/test_generate_recipe_crates.py"
+      - "m3/backports/test_materialize_generated_crates.py"
+      - "m3/backports/recipes/jep-493-runtime-image/**"
+      - "m3/tooling/migration-recipes/**"
+      - "m3/tooling/backport-dag/**"
+      - ".github/workflows/m3-jep493-runtime-image-materialize.yml"
+  pull_request:
+    paths:
+      - "m3/backports/file_delta_inventory.py"
+      - "m3/backports/generate_recipe_crates.py"
+      - "m3/backports/materialize_generated_crates.py"
+      - "m3/backports/test_file_delta_inventory.py"
+      - "m3/backports/test_generate_recipe_crates.py"
+      - "m3/backports/test_materialize_generated_crates.py"
+      - "m3/backports/recipes/jep-493-runtime-image/**"
+      - "m3/tooling/migration-recipes/**"
+      - "m3/tooling/backport-dag/**"
+      - ".github/workflows/m3-jep493-runtime-image-materialize.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  generated-packet-proof:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 125
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: 1 - Diff hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+
+      - name: 2 - Unit-test comparator generator and exact executor
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile m3/backports/file_delta_inventory.py m3/backports/generate_recipe_crates.py m3/backports/materialize_generated_crates.py
+          cd m3/backports
+          python3 -m unittest -v test_file_delta_inventory.py test_generate_recipe_crates.py test_materialize_generated_crates.py
+
+      - name: 3 - Fetch pinned OpenJDK 21 and 24 GA trees
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir "$RUNNER_TEMP/upstream-jdk"
+          git -C "$RUNNER_TEMP/upstream-jdk" init -q
+          git -C "$RUNNER_TEMP/upstream-jdk" remote add origin https://github.com/openjdk/jdk.git
+          git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch --filter=blob:none --no-tags origin "refs/tags/jdk-21+35:refs/tags/jdk-21+35" "refs/tags/jdk-24+36:refs/tags/jdk-24+36"
+          printf 'UPSTREAM=%s\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
+
+      - name: 4 - Generate exact 47-path FILE recipe atoms
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/jep493"
+          python3 m3/backports/file_delta_inventory.py --repo "$UPSTREAM" --release 24 --out "$RUNNER_TEMP/jep493/JDK21_TO_JDK24.tsv"
+          python3 m3/backports/generate_recipe_crates.py --repo "$UPSTREAM" --release 24 --paths-file m3/backports/recipes/jep-493-runtime-image/PATHS.txt --crate-size 1 --include-text --out "$RUNNER_TEMP/jep493/file-atoms"
+
+      - name: 5 - Prove 47-path accounting and one-file crate granularity
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ["RUNNER_TEMP"]) / "jep493"
+          selected = [
+              line.strip()
+              for line in Path("m3/backports/recipes/jep-493-runtime-image/PATHS.txt")
+                  .read_text(encoding="utf-8").splitlines()
+              if line.strip()
+          ]
+          assert len(selected) == 47, len(selected)
+          assert len(set(selected)) == 47
+
+          with (root / "JDK21_TO_JDK24.tsv").open(encoding="utf-8", newline="") as handle:
+              delta = {
+                  row["path"]: row["status"]
+                  for row in csv.DictReader(handle, delimiter="\t")
+                  if row["path"] in set(selected)
+              }
+          assert set(delta) == set(selected), sorted(set(selected) - set(delta))
+          same = {path for path, status in delta.items() if status == "SAME"}
+
+          with (root / "file-atoms" / "CRATES.tsv").open(encoding="utf-8", newline="") as handle:
+              crates = list(csv.DictReader(handle, delimiter="\t"))
+          assert crates, "no generated JEP493 crates"
+          assert all(int(row["target_count"]) == 1 for row in crates), crates
+          generated = sum(int(row["target_count"]) for row in crates)
+
+          with (root / "file-atoms" / "EXCLUSIONS.tsv").open(encoding="utf-8", newline="") as handle:
+              exclusions = list(csv.DictReader(handle, delimiter="\t"))
+          if exclusions:
+              raise SystemExit(f"JEP493 has typed exclusions requiring review: {exclusions}")
+
+          if generated + len(same) != len(selected):
+              raise SystemExit(
+                  f"JEP493 accounting mismatch generated={generated} "
+                  f"same={len(same)} selected={len(selected)}"
+              )
+          print(f"JEP493_ACCOUNTED generated={generated} same={len(same)} exclusions=0")
+          PY
+
+      - name: 6 - Validate and project the canonical JEP493 recipe DAG
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/jep493/projections"
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml -Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketMain -Dexec.args="$PWD/m3/backports/recipes/jep-493-runtime-image/packet.tsv $PWD/m3/backports/recipes/jep-493-runtime-image/atom-evidence.tsv" exec:java
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain -Dexec.args="$PWD/m3/backports/recipes/jep-493-runtime-image/packet.tsv $RUNNER_TEMP/jep493/projections $PWD/m3/backports/recipes/jep-493-runtime-image/atom-evidence.tsv" exec:java
+          test -s "$RUNNER_TEMP/jep493/projections/M3BackportRoutes.java"
+          test -s "$RUNNER_TEMP/jep493/projections/m3_backport_dag.py"
+          test -s "$RUNNER_TEMP/jep493/projections/m3_backport_rules.drl"
+
+      - name: 7 - Verify every current-tree preimage before mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/materialize_generated_crates.py --root "$PWD" --generated "$RUNNER_TEMP/jep493/file-atoms" --mode check --require-one-target-per-crate --receipt "$RUNNER_TEMP/jep493/preimage.tsv"
+          test -z "$(git status --porcelain=v1 -uall)"
+
+      - name: 8 - Materialize exact JEP493 candidate and prove fixed point
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/materialize_generated_crates.py --root "$PWD" --generated "$RUNNER_TEMP/jep493/file-atoms" --mode apply --require-one-target-per-crate --receipt "$RUNNER_TEMP/jep493/apply.tsv"
+          python3 m3/backports/materialize_generated_crates.py --root "$PWD" --generated "$RUNNER_TEMP/jep493/file-atoms" --mode verify-post --require-one-target-per-crate --receipt "$RUNNER_TEMP/jep493/postimage.tsv"
+          git diff --check
+          before="$(git diff --binary | sha256sum | awk '{print $1}')"
+          python3 m3/backports/materialize_generated_crates.py --root "$PWD" --generated "$RUNNER_TEMP/jep493/file-atoms" --mode apply --require-one-target-per-crate
+          after="$(git diff --binary | sha256sum | awk '{print $1}')"
+          test "$before" = "$after"
+
+      - name: 9 - Prove only generated crate targets changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          import subprocess
+
+          generated = Path(os.environ["RUNNER_TEMP"]) / "jep493" / "file-atoms"
+          expected = set()
+          for root in (
+              generated / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned",
+              generated / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text",
+          ):
+              if not root.exists():
+                  continue
+              for manifest in root.glob("*/manifest.tsv"):
+                  for line in manifest.read_text(encoding="utf-8").splitlines():
+                      if line and not line.startswith("#"):
+                          expected.add(line.split("\t", 1)[0])
+
+          status = subprocess.check_output(
+              ["git", "status", "--porcelain=v1", "-uall"], text=True
+          )
+          actual = {line[3:] for line in status.splitlines() if line}
+          if actual != expected:
+              raise SystemExit(
+                  "JEP493 changed-path fence failed\n"
+                  f"expected={sorted(expected)}\nactual={sorted(actual)}"
+              )
+          print(f"JEP493_CHANGED_PATHS {len(actual)}")
+          PY
+
+      - name: 10 - Verify M3 metadata and scope substrate
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/backports/pom.xml verify
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3RecipeScopeDeclarationTest test
+
+      - name: 11 - Install OpenJDK build prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends autoconf make gcc g++ zip unzip libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
+
+      - name: 12 - Configure a linkable Java21 runtime image
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash configure --with-boot-jdk="$JAVA_HOME" --with-debug-level=release --with-jvm-variants=server --enable-linkable-runtime --disable-warnings-as-errors
+
+      - name: 13 - Build JDK image
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 images
+
+      - name: 14 - Run JEP493 runtime-image jtreg family
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 test TEST="test/jdk/tools/jlink/runtimeImage"
+
+      - name: 15 - Run existing jlink and JMOD regressions touched by the packet
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 test TEST="test/jdk/jdk/modules/etc/JmodExcludedFiles.java test/jdk/tools/jlink/ImageFileCreatorTest.java test/jdk/tools/jlink/IntegrationTest.java test/jdk/tools/jlink/JLinkDedupTestBatchSizeOne.java test/jdk/tools/jlink/JLinkHelpCapabilityTest.java test/jdk/tools/jlink/multireleasejar/JLinkMRJavaBaseVersionTest.java test/jdk/tools/jlink/plugins/GenerateJLIClassesPluginTest.java test/jdk/tools/jlink/plugins/IncludeLocalesPluginTest.java"
+
+      - name: 16 - Prove real linking from the built run-time image
+        shell: bash
+        run: |
+          set -euo pipefail
+          JDK_IMAGE="$(find build -path '*/images/jdk' -type d | head -n 1)"
+          test -x "$JDK_IMAGE/bin/java"
+          test -x "$JDK_IMAGE/bin/jlink"
+          test ! -d "$JDK_IMAGE/jmods"
+          "$JDK_IMAGE/bin/jlink" --help > "$RUNNER_TEMP/jep493/jlink-help.txt"
+          grep -F "Linking from run-time image enabled" "$RUNNER_TEMP/jep493/jlink-help.txt"
+          OUT="$RUNNER_TEMP/jep493/java-base-image"
+          "$JDK_IMAGE/bin/jlink" --verbose --add-modules java.base --output "$OUT" > "$RUNNER_TEMP/jep493/jlink-runtime.log" 2>&1
+          grep -F "Linking based on the current run-time image" "$RUNNER_TEMP/jep493/jlink-runtime.log"
+          test "$("$OUT/bin/java" --list-modules | sed 's/@.*//' | tr -d '\r')" = "java.base"
+
+      - name: 17 - Upload generated recipes and proof receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: jep493-generated-crate-proof-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/jep493
+            build/*/test-results/**
+          if-no-files-found: warn
+          retention-days: 30
