@@ -27,6 +27,7 @@ string = read("src/java.base/share/classes/java/lang/String.java")
 symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
 classes = read("src/hotspot/share/classfile/vmClassMacros.hpp")
 inline = read("src/hotspot/share/classfile/javaClasses.inline.hpp")
+dedup = read("src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp")
 mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
 
@@ -121,6 +122,9 @@ for surface, marker in critical_surfaces.items():
 # M3-backed constructors must store only the empty compatibility sentinel.
 if string.count("storage.compatibilityValue()") < 4:
     fail("M3-backed String constructors no longer consistently use the empty sentinel")
+
+if "if (java_lang_String::is_m3_joined(java_string))" not in dedup:
+    fail("String deduplication is not fail-closed for M3-backed values")
 
 # Mapping authority must preserve donor->target lineage and shadow names.
 required_mapping_fragments = [
