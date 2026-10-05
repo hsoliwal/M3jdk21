@@ -1,0 +1,38 @@
+name: M3 post-21 JEP compatibility policy
+
+on:
+  push:
+    branches:
+      - "m3/post21-jep-compat-reconcile-20261005"
+    paths:
+      - "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
+      - "m3/backports/compatibility_policy.py"
+      - "m3/backports/test_compatibility_policy.py"
+      - ".github/workflows/m3-post21-jep-compatibility-policy.yml"
+  pull_request:
+    paths:
+      - "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
+      - "m3/backports/compatibility_policy.py"
+      - "m3/backports/test_compatibility_policy.py"
+      - ".github/workflows/m3-post21-jep-compatibility-policy.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  policy:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile policy
+        run: python3 -m compileall -q m3/backports/compatibility_policy.py m3/backports/test_compatibility_policy.py
+
+      - name: Validate checked-in compatibility ledger
+        run: python3 m3/backports/compatibility_policy.py
+
+      - name: Run compatibility-policy tests
+        working-directory: m3/backports
+        run: python3 -m unittest -v test_compatibility_policy.py
