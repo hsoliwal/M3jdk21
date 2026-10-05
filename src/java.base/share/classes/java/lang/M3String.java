@@ -686,6 +686,28 @@ final class M3String implements CharSequence {
 
     private static native byte[] nativeAllocateByteShadow(int length);
 
+    /**
+     * Allocates a caller-visible byte shadow through JNI. M3 canonical owners never allocate or
+     * retain Java byte arrays; charset results are compatibility/output shadows just like
+     * Compact-String materializations.
+     */
+    private static byte[] allocateByteShadow(int length) {
+        if (length < 0) throw new NegativeArraySizeException();
+        return nativeAllocateByteShadow(length);
+    }
+
+    /** Shrinks one JNI-created output shadow without introducing a Java-side array allocation. */
+    private static byte[] resizeByteShadow(byte[] source, int length) {
+        Objects.requireNonNull(source, "source");
+        Objects.checkFromIndexSize(0, length, source.length);
+        if (length == source.length) return source;
+        byte[] result = nativeAllocateByteShadow(length);
+        System.arraycopy(source, 0, result, 0, length);
+        return result;
+    }
+
+    private static native byte[] nativeAllocateByteShadow(int length);
+
     private static native byte[] nativeByteShadow(
             M3String value, int start, int length, byte coder);
 
