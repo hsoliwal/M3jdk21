@@ -118,9 +118,16 @@ final class M3StringFacts {
 
         if (length == 0) {
             stripStart = stripEnd = trimStart = trimEnd = 0;
-        } else if (leadingStrip) {
-            // Entire value is Unicode whitespace.
-            stripEnd = stripStart;
+        } else {
+            if (leadingStrip) {
+                // Entire value is Unicode whitespace. start==length, end==0 is the
+                // composable empty-boundary encoding used by tuple facts.
+                stripEnd = 0;
+            }
+            if (trimStart == length) {
+                // Same composable empty-boundary encoding for legacy trim().
+                trimEnd = 0;
+            }
         }
 
         return new M3StringFacts(
