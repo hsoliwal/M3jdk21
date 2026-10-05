@@ -489,11 +489,35 @@ final class MIndexString {
         synchronized (this) {
             current = precomputedFacts;
             if (current == null) {
-                current = M3StringPrecompute.compute(this);
+                current = computePrecomputedFacts();
                 precomputedFacts = current;
             }
             return current;
         }
+    }
+
+    private M3StringPrecompute.Facts computePrecomputedFacts() {
+        if (length == 0) {
+            return M3StringPrecompute.Facts.EMPTY;
+        }
+        if (storageKind != JOINED) {
+            return M3StringPrecompute.scan(this, 0, length);
+        }
+
+        M3StringPrecompute.Facts result = M3StringPrecompute.Facts.EMPTY;
+        int previous = 0;
+        for (int index = 0; index < segments.length; index++) {
+            MIndexString atom = segments[index];
+            int count = ends[index] - previous;
+            int offset = offsets[index];
+            M3StringPrecompute.Facts part =
+                    offset == 0 && count == atom.length
+                            ? atom.precomputedFacts()
+                            : M3StringPrecompute.scan(atom, offset, count);
+            result = M3StringPrecompute.combine(result, part);
+            previous = ends[index];
+        }
+        return result;
     }
 
     boolean isScalar() {
