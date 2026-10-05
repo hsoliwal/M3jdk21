@@ -1,0 +1,5 @@
+src/jdk.jlink/share/classes/jdk/tools/jlink/internal/JRTArchive.java	ABSENT	3d194dbecc6c0e742b2996ce16cbaffe92f232e3b9999fe27c3ce610ed87588a	00-JRTArchive.java.txt
+src/jdk.jlink/share/classes/jdk/tools/jlink/internal/LinkableRuntimeImage.java	ABSENT	67922cd32885251a808539119ad03b2e1cdacb1e43112af25b1b7f00299d0819	01-LinkableRuntimeImage.java.txt
+src/jdk.jlink/share/classes/jdk/tools/jlink/internal/runtimelink/JimageDiffGenerator.java	ABSENT	eac3acb7e48450b69f20de75faecf11c4bca4674101a676f6eed3527e392a64c	02-JimageDiffGenerator.java.txt
+src/jdk.jlink/share/classes/jdk/tools/jlink/internal/runtimelink/ResourceDiff.java	ABSENT	55b0ee03dffb9a0d8c1e7a2b98be68706dba4db01dd71b0282017390619fd960	03-ResourceDiff.java.txt
+src/jdk.jlink/share/classes/jdk/tools/jlink/internal/runtimelink/ResourcePoolReader.java	ABSENT	af1df1de2f38c296eb6eaf40eb0e74b284906cd9577dd2cfda0375e19dbba735	04-ResourcePoolReader.java.txt
