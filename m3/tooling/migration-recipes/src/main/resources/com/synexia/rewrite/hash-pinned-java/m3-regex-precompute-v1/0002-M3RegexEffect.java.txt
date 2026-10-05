@@ -1,0 +1,345 @@
+// SPDX-License-Identifier: Apache-2.0
+package jdk.internal.mindex;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.Objects;
+import java.util.function.IntUnaryOperator;
+
+/**
+ * Immutable transition effect of one already-admitted UTF-16 fragment for an
+ * {@link M3RegexProgram}.
+ *
+ * <p>An effect is a function from every possible incoming automaton state to the state reached
+ * after the fragment. Composition therefore represents concatenation without rereading either
+ * fragment. This contract deliberately contains no native pointer and is suitable for later dense
+ * interning/persistence.
+ */
+public final class M3RegexEffect {
+  private static final long IMAGE_MAGIC = 0x314658455852494dL; // MIXREXF1
+  private static final int IMAGE_VERSION = 1;
+  private static final int DIGEST_BYTES = 32;
+  private static final int HEADER_BYTES = 8 + 4 + 4 + 4 + 4 + DIGEST_BYTES + DIGEST_BYTES;
+  private final String programFingerprint;
+  private final int[] nextState;
+  private final int logicalLength;
+
+  public M3RegexEffect(String programFingerprint, int[] nextState, int logicalLength) {
+    this.programFingerprint = Objects.requireNonNull(programFingerprint, "programFingerprint");
+    this.nextState = Objects.requireNonNull(nextState, "nextState").clone();
+    if (logicalLength < 0) throw new IllegalArgumentException("negative logicalLength");
+    for (int state : this.nextState) {
+      if (state < 0 || state >= this.nextState.length) {
+        throw new IllegalArgumentException("transition outside effect state space");
+      }
+    }
+    this.logicalLength = logicalLength;
+  }
+
+  public String programFingerprint() {
+    return programFingerprint;
+  }
+
+  public int stateCount() {
+    return nextState.length;
+  }
+
+  public int logicalLength() {
+    return logicalLength;
+  }
+
+  public int apply(int incomingState) {
+    if (incomingState < 0 || incomingState >= nextState.length) {
+      throw new IndexOutOfBoundsException("incomingState=" + incomingState);
+    }
+    return nextState[incomingState];
+  }
+
+  public int[] transitions() {
+    return nextState.clone();
+  }
+
+  /**
+   * Compose two effects in source order: {@code left} followed by {@code right}.
+   */
+  public static M3RegexEffect compose(M3RegexEffect left, M3RegexEffect right) {
+    Objects.requireNonNull(left, "left");
+    Objects.requireNonNull(right, "right");
+    if (!left.programFingerprint.equals(right.programFingerprint)) {
+      throw new IllegalArgumentException("effects belong to different regex programs");
+    }
+    if (left.nextState.length != right.nextState.length) {
+      throw new IllegalArgumentException("effect state spaces differ");
+    }
+    int[] composed = new int[left.nextState.length];
+    for (int state = 0; state < composed.length; state++) {
+      composed[state] = right.nextState[left.nextState[state]];
+    }
+    return new M3RegexEffect(
+        left.programFingerprint, composed, Math.addExact(left.logicalLength, right.logicalLength));
+  }
+
+  public long primitivePayloadBytes() {
+    return 4L * nextState.length;
+  }
+
+  /**
+   * Read-only mmap view of one validated effect image.
+   *
+   * <p>The file is fully authenticated against the caller-supplied program fingerprint and the
+   * stored content digest before this view is returned. Afterwards the caller must keep the file
+   * immutable for the lifetime of the mapping; this class does not claim hostile-filesystem
+   * isolation. Transition payload stays mapped until {@link #materialize()} is requested.</p>
+   */
+  public static final class MappedView {
+    private final String programFingerprint;
+    private final ByteBuffer image;
+    private final int stateCount;
+    private final int logicalLength;
+    private final String contentFingerprint;
+
+    private MappedView(
+        String programFingerprint,
+        ByteBuffer image,
+        int stateCount,
+        int logicalLength,
+        String contentFingerprint) {
+      this.programFingerprint = programFingerprint;
+      this.image = image.asReadOnlyBuffer().order(ByteOrder.LITTLE_ENDIAN);
+      this.stateCount = stateCount;
+      this.logicalLength = logicalLength;
+      this.contentFingerprint = contentFingerprint;
+    }
+
+    public String programFingerprint() { return programFingerprint; }
+    public int stateCount() { return stateCount; }
+    public int logicalLength() { return logicalLength; }
+    public long primitivePayloadBytes() { return 4L * stateCount; }
+    public String contentFingerprint() { return contentFingerprint; }
+
+    public int apply(int incomingState) {
+      Objects.checkIndex(incomingState, stateCount);
+      return image.getInt(Math.addExact(HEADER_BYTES, Math.multiplyExact(incomingState, 4)));
+    }
+
+    /** Explicit heap materialization boundary. */
+    public M3RegexEffect materialize() {
+      int[] transitions = new int[stateCount];
+      for (int state = 0; state < stateCount; state++) transitions[state] = apply(state);
+      return new M3RegexEffect(programFingerprint, transitions, logicalLength);
+    }
+  }
+
+  /** Stable SHA-256 identity of this immutable effect payload. */
+  public String contentFingerprint() {
+    return HexFormat.of().formatHex(contentDigest());
+  }
+
+  /**
+   * Persist this effect in a versioned pointer-free image.
+   *
+   * <p>The image binds the regex-program fingerprint, state count, logical length and transitions.
+   * Existing files are never overwritten by this method.</p>
+   */
+  public void writeImage(Path path) throws IOException {
+    Objects.requireNonNull(path, "path");
+    byte[] program = sha256(programFingerprint.getBytes(StandardCharsets.UTF_8));
+    byte[] content = contentDigest();
+    long bytes = Math.addExact(HEADER_BYTES, Math.multiplyExact(4L, nextState.length));
+    if (bytes > Integer.MAX_VALUE) throw new IllegalArgumentException("effect image too large");
+    ByteBuffer image = ByteBuffer.allocate((int) bytes).order(ByteOrder.LITTLE_ENDIAN);
+    image.putLong(IMAGE_MAGIC);
+    image.putInt(IMAGE_VERSION);
+    image.putInt(HEADER_BYTES);
+    image.putInt(nextState.length);
+    image.putInt(logicalLength);
+    image.put(program);
+    image.put(content);
+    for (int state : nextState) image.putInt(state);
+    image.flip();
+    try (FileChannel channel =
+        FileChannel.open(path, StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE)) {
+      while (image.hasRemaining()) channel.write(image);
+      channel.force(true);
+    }
+  }
+
+  /**
+   * Read and validate a persisted effect.
+   *
+   * <p>The caller supplies the expected program fingerprint; a file cannot select its own semantic
+   * owner. Corruption, schema drift and cross-program reuse fail closed.</p>
+   */
+  public static M3RegexEffect readImage(Path path, String expectedProgramFingerprint)
+      throws IOException {
+    Objects.requireNonNull(path, "path");
+    Objects.requireNonNull(expectedProgramFingerprint, "expectedProgramFingerprint");
+    try (FileChannel channel = FileChannel.open(path, StandardOpenOption.READ)) {
+      long size = channel.size();
+      if (size < HEADER_BYTES || size > Integer.MAX_VALUE) {
+        throw new IOException("invalid regex effect image size");
+      }
+      ByteBuffer image = ByteBuffer.allocate((int) size).order(ByteOrder.LITTLE_ENDIAN);
+      while (image.hasRemaining()) {
+        if (channel.read(image) < 0) throw new IOException("truncated regex effect image");
+      }
+      image.flip();
+      if (image.getLong() != IMAGE_MAGIC
+          || image.getInt() != IMAGE_VERSION
+          || image.getInt() != HEADER_BYTES) {
+        throw new IOException("unsupported regex effect image");
+      }
+      int states = image.getInt();
+      int length = image.getInt();
+      if (states < 1 || length < 0 || size != HEADER_BYTES + 4L * states) {
+        throw new IOException("invalid regex effect image geometry");
+      }
+      byte[] storedProgram = new byte[DIGEST_BYTES];
+      byte[] storedContent = new byte[DIGEST_BYTES];
+      image.get(storedProgram).get(storedContent);
+      byte[] expectedProgram =
+          sha256(expectedProgramFingerprint.getBytes(StandardCharsets.UTF_8));
+      if (!MessageDigest.isEqual(storedProgram, expectedProgram)) {
+        throw new IOException("regex effect program fingerprint mismatch");
+      }
+      int[] transitions = new int[states];
+      for (int i = 0; i < states; i++) transitions[i] = image.getInt();
+      M3RegexEffect effect =
+          new M3RegexEffect(expectedProgramFingerprint, transitions, length);
+      if (!MessageDigest.isEqual(storedContent, effect.contentDigest())) {
+        throw new IOException("regex effect image checksum mismatch");
+      }
+      return effect;
+    } catch (IllegalArgumentException invalid) {
+      throw new IOException("invalid regex effect image", invalid);
+    }
+  }
+
+  /**
+   * Map and validate a persisted effect without copying its transition lane to heap.
+   *
+   * <p>The FileChannel is closed after mapping; the read-only mapping owns the visible bytes.
+   * Program identity and content digest are checked before publication.</p>
+   */
+  public static MappedView mapImage(Path path, String expectedProgramFingerprint)
+      throws IOException {
+    Objects.requireNonNull(path, "path");
+    Objects.requireNonNull(expectedProgramFingerprint, "expectedProgramFingerprint");
+    try (FileChannel channel = FileChannel.open(path, StandardOpenOption.READ)) {
+      long size = channel.size();
+      if (size < HEADER_BYTES || size > Integer.MAX_VALUE) {
+        throw new IOException("invalid regex effect image size");
+      }
+      ByteBuffer image =
+          channel.map(FileChannel.MapMode.READ_ONLY, 0, size).order(ByteOrder.LITTLE_ENDIAN);
+      if (image.getLong() != IMAGE_MAGIC
+          || image.getInt() != IMAGE_VERSION
+          || image.getInt() != HEADER_BYTES) {
+        throw new IOException("unsupported regex effect image");
+      }
+      int states = image.getInt();
+      int length = image.getInt();
+      if (states < 1 || length < 0 || size != HEADER_BYTES + 4L * states) {
+        throw new IOException("invalid regex effect image geometry");
+      }
+      byte[] storedProgram = new byte[DIGEST_BYTES];
+      byte[] storedContent = new byte[DIGEST_BYTES];
+      image.get(storedProgram).get(storedContent);
+      byte[] expectedProgram =
+          sha256(expectedProgramFingerprint.getBytes(StandardCharsets.UTF_8));
+      if (!MessageDigest.isEqual(storedProgram, expectedProgram)) {
+        throw new IOException("regex effect program fingerprint mismatch");
+      }
+      for (int state = 0; state < states; state++) {
+        int target = image.getInt(HEADER_BYTES + 4 * state);
+        if (target < 0 || target >= states) {
+          throw new IOException("transition outside effect state space");
+        }
+      }
+      byte[] actualContent = contentDigest(
+          expectedProgramFingerprint,
+          states,
+          length,
+          state -> image.getInt(HEADER_BYTES + 4 * state));
+      if (!MessageDigest.isEqual(storedContent, actualContent)) {
+        throw new IOException("regex effect image checksum mismatch");
+      }
+      return new MappedView(
+          expectedProgramFingerprint,
+          image,
+          states,
+          length,
+          HexFormat.of().formatHex(storedContent));
+    } catch (IllegalArgumentException | ArithmeticException invalid) {
+      throw new IOException("invalid regex effect image", invalid);
+    }
+  }
+
+  private byte[] contentDigest() {
+    return contentDigest(
+        programFingerprint, nextState.length, logicalLength, state -> nextState[state]);
+  }
+
+  private static byte[] contentDigest(
+      String programFingerprint,
+      int stateCount,
+      int logicalLength,
+      IntUnaryOperator transitionAt) {
+    MessageDigest digest = digest();
+    digest.update("M3RegexEffect/v1".getBytes(StandardCharsets.UTF_8));
+    byte[] program = programFingerprint.getBytes(StandardCharsets.UTF_8);
+    updateInt(digest, program.length);
+    digest.update(program);
+    updateInt(digest, stateCount);
+    updateInt(digest, logicalLength);
+    for (int state = 0; state < stateCount; state++) {
+      updateInt(digest, transitionAt.applyAsInt(state));
+    }
+    return digest.digest();
+  }
+
+  private static byte[] sha256(byte[] value) {
+    MessageDigest digest = digest();
+    return digest.digest(value);
+  }
+
+  private static MessageDigest digest() {
+    try {
+      return MessageDigest.getInstance("SHA-256");
+    } catch (NoSuchAlgorithmException impossible) {
+      throw new IllegalStateException("SHA-256 unavailable", impossible);
+    }
+  }
+
+  private static void updateInt(MessageDigest digest, int value) {
+    digest.update((byte) (value >>> 24));
+    digest.update((byte) (value >>> 16));
+    digest.update((byte) (value >>> 8));
+    digest.update((byte) value);
+  }
+
+  @Override
+  public boolean equals(Object other) {
+    if (this == other) return true;
+    if (!(other instanceof M3RegexEffect effect)) return false;
+    return logicalLength == effect.logicalLength
+        && programFingerprint.equals(effect.programFingerprint)
+        && Arrays.equals(nextState, effect.nextState);
+  }
+
+  @Override
+  public int hashCode() {
+    int result = programFingerprint.hashCode();
+    result = 31 * result + Arrays.hashCode(nextState);
+    return 31 * result + logicalLength;
+  }
+}
