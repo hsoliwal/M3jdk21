@@ -52,6 +52,8 @@ boundary requires it.
 6. Precompute cannot become a second spelling store.
 7. JNI byte/char/UTF arrays and buffers are shadows/materializations only.
 8. Absence or eviction of precompute cannot alter Java String semantics.
+9. VM-local native scalar owners are weakly canonicalized: live M3 coordinates/DAGs own lifetime; dead native blocks are reclaimed through the local reference queue.
+10. Every Java byte[]/char[] compatibility shadow, including the shared empty VM sentinel, is created through the JNI shadow boundary.
 
 ## Search/precompute convergence absorbed
 
