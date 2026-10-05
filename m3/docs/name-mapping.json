@@ -120,6 +120,18 @@
       ]
     },
     {
+      "source": "com.synexia.indexstring.MIndexStringSearchPlan and canonical operation-search facts",
+      "target": "java.lang.M3StringSearchPrecompute",
+      "status": "internal-only bounded operation-precompute adaptation",
+      "mapping_rule": "weakly key exact M3 owner+coordinate; retain primitive pattern metadata only; no String/char[]/byte[]/M3String payload; eviction changes performance only",
+      "donor_lineage": [
+        "46d92ec424862459e767b1d6df5b329e3241cdf3",
+        "e649343956a2ea21609713f7a62954fefe757468",
+        "bb4033de627c36e371430095a5db1122d30cc5a0",
+        "6b21032aaee902122d3dfeb027b270acc23de67b"
+      ]
+    },
+    {
       "source": "com.synexia.indexstring.nativebridge.MIndexUtf16Shadow",
       "target": "JNI String UTF-16/char shadow paths and java.lang.M3String.nativeCharShadow",
       "status": "native compatibility adaptation",
