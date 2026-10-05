@@ -1,0 +1,13 @@
+{
+  "task_packet": "active",
+  "source_doc": "M3-SCALE v3 Locked Canon",
+  "invariant_id": "M3-JDK-FORK-SUPERSET",
+  "run": {"mode": "apply", "profile": "full", "workers": 1, "shard_count": 1, "shard_index": 0},
+  "targets": {"files": ["m3/backports/forks.tsv", "m3/backports/fork_queue.py", "m3/backports/test_fork_queue.py", "m3/backports/COMMUNITY_CAPABILITY_CANDIDATES.tsv"]},
+  "invariant_locks": {"PUBLIC_API": "LOCKED", "EXTERNAL_BEHAVIOR": "LOCKED", "JDK_PRODUCT_SOURCE": "LOCKED"},
+  "allowed_delta": "Pinned donor evidence, deterministic queueing, tests, and one candidate-ledger row",
+  "forbidden": ["product source mutation", "automatic donor admission", "history rewrite", "license relabeling"],
+  "verify_order": ["diff", "lint", "compile", "tests", "runtime"],
+  "output_contract": ["README.md", "TASK_PACKET.json", "forks.tsv", "fork_queue.py", "test_fork_queue.py"],
+  "stop_conditions": ["un-pinned donor revision", "unsupported license state", "duplicate candidate id"]
+}
