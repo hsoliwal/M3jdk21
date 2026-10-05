@@ -4,7 +4,7 @@ release	jep	title	domain	disposition	reason	superseded_by
 22	454	Foreign Function & Memory API	library-runtime-native	candidate-high-risk	Final API; requires java.base/native/runtime dependency audit.	
 22	456	Unnamed Variables & Patterns	language	reject-language	Requires Java grammar/javac semantic changes.	
 22	457	Class-File API (Preview)	library	superseded	Use final JEP 484 instead of preview.	484
-22	458	Launch Multi-File Source-Code Programs	tool-launcher	candidate	Tool/source-launcher behavior over existing Java grammar; verify javac/launcher dependency closure.	
+22	458	Launch Multi-File Source-Code Programs	tool-launcher	candidate-adapted	Current master contains the complete 26-target Java21-adapted source-launcher graph plus preserved legacy Main; source-sealed fixed-point proof exists, while OpenJDK build/focused jtreg/runtime admission remains pending.	
 22	459	String Templates (Second Preview)	language	reject-language	Requires Java grammar/javac changes and was later withdrawn.	
 22	460	Vector API (Seventh Incubator)	library-hotspot-compiler	hold-jit	Incubator lineage depends on HotSpot/JIT vector support; do not backport as a simple library.	537
 22	461	Stream Gatherers (Preview)	library	superseded	Use final JEP 485 instead of preview.	485
