@@ -1,0 +1,9 @@
+log	sha256	outcome
+baseline-compile.log	c3e51373bb8acb62fe9b30854946b25d45773d5df9b1bf61cdc4641b4393a68d	Actual baseline compiler error
+a3-targeted-first.log	5a7382f3046c601832a4e4c08583cbaccc98ae5750a1919068178b0e5e9fb153	Actual original replay failure after type-only repair
+a3-targeted-repaired.log	0c717dea2112f63a10cf09e9f90cec96a783c9cbf4453bd03239f611ef460121	New test generic inference error, corrected
+a3-targeted-repaired2.log	e1fa6ecaefafd3a47e96ef182b436d444623e1006c620f9d33e2a287cebda1eb	Scheduler provenance exposed incorrect marker-equality assumption, corrected explicitly
+a3-targeted-repaired3.log	0fe7e180ed7993eb64169e5111daf668cc1a826cfd52bb6ed719bb930b1da5b4	8 JUnit PASS
+migration-test-diagnostic.log	b983f20967910edbbab595b0142a918d98239870ab7f2fd134e416683de4a007	124 tests; 3 failures/2 errors retained
+a3-exact-published-test.log	08a5639898b2d49c79ebf05740b9497e7585453b9612ed5f76dff1db065afa33	8 JUnit PASS; actual JaCoCo report generated
+TEST-com.m3.rewrite.a3.M3A3SerialFileWorkRecipeTest.xml	ca4354bb2d7615a1e16df8e0adc9e30f6b96d370c410d97b13b1c9796ccac2d1	8 tests; 0 failures/errors/skips
