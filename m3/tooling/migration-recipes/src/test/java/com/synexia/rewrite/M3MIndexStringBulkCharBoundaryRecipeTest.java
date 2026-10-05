@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.openrewrite.test.RewriteTest;
 import org.openrewrite.test.SourceSpecs;
 
-import static org.openrewrite.java.Assertions.java;
+import static org.openrewrite.test.SourceSpecs.text;
 
 /** Exact current java.base owner -> reviewed MIndex bulk-character boundary candidate. */
 class M3MIndexStringBulkCharBoundaryRecipeTest implements RewriteTest {
@@ -34,8 +34,8 @@ class M3MIndexStringBulkCharBoundaryRecipeTest implements RewriteTest {
     private static SourceSpecs owner(boolean applied) {
         String before = read(applied ? "MIndexString.java.txt" : "MIndexString.java.before.txt");
         return applied
-                ? java(before, spec -> spec.noTrim().path(PATH))
-                : java(before, read("MIndexString.java.txt"), spec -> spec.noTrim().path(PATH));
+                ? text(before, spec -> spec.noTrim().path(PATH))
+                : text(before, read("MIndexString.java.txt"), spec -> spec.noTrim().path(PATH));
     }
 
     @Test
@@ -64,6 +64,7 @@ class M3MIndexStringBulkCharBoundaryRecipeTest implements RewriteTest {
         var restored = assertInstanceOf(M3HashPinnedJavaSnapshotRecipe.class,
                 codec.read(codec.write(recipe)));
         assertEquals(recipe.getCrateName(), restored.getCrateName());
+        assertEquals(false, restored.isLst());
         assertEquals(recipe, restored);
         assertThrows(IllegalArgumentException.class,
                 () -> new M3HashPinnedJavaSnapshotRecipe(null));

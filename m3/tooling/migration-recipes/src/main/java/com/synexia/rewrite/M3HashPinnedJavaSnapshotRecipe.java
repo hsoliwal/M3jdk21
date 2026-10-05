@@ -27,12 +27,15 @@ import org.openrewrite.Tree;
 import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaParser;
 import org.openrewrite.java.tree.J;
+import org.openrewrite.text.PlainText;
 
 /**
  * Reusable, candidate-only Java migration from an exact source snapshot to reviewed Java LSTs.
  *
  * <p>Each crate supplies a manifest and UTF-8 templates as classpath resources. All target
- * preimages and all output templates are admitted before any output is produced. Hashes cover
+ * preimages and all output templates are admitted before any output is produced. Java LST mode is
+ * the default. Explicit PlainText mode is a source-custody fallback for parser-incompatible exact
+ * JDK owners and does not claim Java semantic/type validation. Hashes cover
  * rendered Java text encoded as UTF-8, not the original on-disk byte encoding. Replacements
  * preserve the input charset and BOM flag and discard its obsolete checksum. This recipe checks source identity and
  * syntax; the sealed M3 contract, coverage, compiler, test and runtime gates remain authoritative.
@@ -47,6 +50,12 @@ public final class M3HashPinnedJavaSnapshotRecipe
             example = "sealed-readonly-requirement")
     private final String crateName;
 
+    @Option(
+            displayName = "LST mode",
+            description = "Parse targets/templates as Java LSTs. Set false only for exact Java-source custody when the pinned parser cannot represent the reviewed owner.",
+            required = false)
+    private final boolean lst;
+
     private record Target(String path, String before, String after, String text) { }
 
     public static final class Inventory {
@@ -60,12 +69,19 @@ public final class M3HashPinnedJavaSnapshotRecipe
         }
     }
 
+    public M3HashPinnedJavaSnapshotRecipe(String crateName) {
+        this(crateName, true);
+    }
+
     @JsonCreator
-    public M3HashPinnedJavaSnapshotRecipe(@JsonProperty("crateName") String crateName) {
+    public M3HashPinnedJavaSnapshotRecipe(
+            @JsonProperty("crateName") String crateName,
+            @JsonProperty("lst") Boolean lst) {
         if (crateName == null || !crateName.matches("[a-z0-9][a-z0-9-]{0,79}")) {
             throw new IllegalArgumentException("invalid hash-pinned Java crate");
         }
         this.crateName = crateName;
+        this.lst = lst == null || lst;
     }
 
     @Override public String getDisplayName() {
@@ -73,8 +89,8 @@ public final class M3HashPinnedJavaSnapshotRecipe
     }
 
     @Override public String getDescription() {
-        return "Reconstructs reviewed Java LST candidates only when every source matches "
-                + "the crate's exact SHA-256 preimage or already matches its SHA-256 output.";
+        return "Reconstructs reviewed Java source from exact SHA-256 preimages. LST mode is the "
+                + "default; explicit PlainText mode provides source custody only and never Java semantic proof.";
     }
 
     @Override public Set<String> getTags() {
@@ -97,7 +113,7 @@ public final class M3HashPinnedJavaSnapshotRecipe
                         if (!target.path().equals(path)) continue;
                         String hash = sha256(file.printAll());
                         synchronized (inventory) {
-                            if (!(file instanceof J.CompilationUnit)) {
+                            if (!admitted(file)) {
                                 inventory.conflicts.add("target is not a Java compilation unit: " + path);
                             }
                             if (inventory.seen.putIfAbsent(path, hash) != null) {
@@ -144,7 +160,7 @@ public final class M3HashPinnedJavaSnapshotRecipe
                                     ? target.before().equals("ABSENT")
                                             && current.equals(target.after())
                                     : current.equals(scanned);
-                            if (!(file instanceof J.CompilationUnit)
+                            if (!admitted(file)
                                     || !matchesManifest || !matchesScan) {
                                 throw new IllegalStateException("target changed after scan: " + path);
                             }
@@ -167,7 +183,9 @@ public final class M3HashPinnedJavaSnapshotRecipe
 
     public String getCrateName() { return crateName; }
 
-    private static void prepare(Inventory inventory, ExecutionContext context) {
+    public boolean isLst() { return lst; }
+
+    private void prepare(Inventory inventory, ExecutionContext context) {
         synchronized (inventory) {
             requireAdmissible(inventory);
             if (inventory.candidates == null) {
@@ -194,7 +212,13 @@ public final class M3HashPinnedJavaSnapshotRecipe
         }
     }
 
-    private static SourceFile parse(Target target, ExecutionContext context) {
+    private SourceFile parse(Target target, ExecutionContext context) {
+        if (!lst) {
+            return PlainText.builder()
+                    .sourcePath(Path.of(target.path()))
+                    .text(target.text())
+                    .build();
+        }
         List<SourceFile> parsed = JavaParser.fromJavaVersion().build()
                 .parseInputs(List.of(Parser.Input.fromString(Path.of(target.path()), target.text())),
                         null, context).toList();
@@ -245,6 +269,10 @@ public final class M3HashPinnedJavaSnapshotRecipe
                     || part.equals(".") || part.equals("..")) return false;
         }
         return value.chars().noneMatch(Character::isISOControl);
+    }
+
+    private boolean admitted(SourceFile file) {
+        return lst ? file instanceof J.CompilationUnit : file instanceof PlainText;
     }
 
     private static String normalized(Path path) {
