@@ -23,14 +23,14 @@ class M3SynexiaHandoffMaterializerTest {
         SynexiaHandoffMaterializer.inspect(repo, "synexia-fixture-v1");
     assertEquals(2, check.targets());
     assertEquals(2, check.changedTargets());
-    assertTrue(Files.notExists(repo.resolve("m3/bridge-fixture/src/sample/BridgeJava.java")));
+    assertTrue(Files.notExists(repo.resolve("m3/ports/bridge-fixture/src/sample/BridgeJava.java")));
 
     SynexiaHandoffMaterializer.Receipt first =
         SynexiaHandoffMaterializer.apply(repo, "synexia-fixture-v1");
     assertEquals(2, first.changedTargets());
     assertTrue(
         Files.readString(
-                repo.resolve("m3/bridge-fixture/src/sample/BridgeJava.java"),
+                repo.resolve("m3/ports/bridge-fixture/src/sample/BridgeJava.java"),
                 StandardCharsets.UTF_8)
             .contains("return 7"));
     assertEquals(
@@ -49,7 +49,7 @@ class M3SynexiaHandoffMaterializerTest {
     Files.createDirectories(repo);
     SynexiaHandoffMaterializer.apply(repo, "synexia-fixture-v1");
 
-    Path java = repo.resolve("m3/bridge-fixture/src/sample/BridgeJava.java");
+    Path java = repo.resolve("m3/ports/bridge-fixture/src/sample/BridgeJava.java");
     Path text = repo.resolve("m3/bridge-fixture/README.txt");
     Files.writeString(java, Files.readString(java) + "// drift\n");
     Files.delete(text);
