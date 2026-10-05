@@ -5,6 +5,8 @@ on:
       - 'src/java.base/share/classes/jdk/internal/mindex/**'
       - 'm3/docs/m3-runtime-invariants.tsv'
       - 'm3/docs/name-mapping.json'
+      - 'm3/docs/m3string-synexia-lineage.md'
+      - 'm3/docs/synexia-string-precompute-port-map.tsv'
       - 'm3/runtime-integration/**'
       - 'src/hotspot/share/prims/jni.cpp'
       - 'src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp'
@@ -20,6 +22,7 @@ on:
       - 'test/jdk/java/lang/String/MapGuardTest.java'
       - 'test/jdk/java/lang/String/MapFactsTest.java'
       - 'test/jdk/java/lang/String/MapUtfTest.java'
+      - 'test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java'
       - 'doc/mindex-string-backing.md'
       - '.github/workflows/mindex-string-backing.yml'
   workflow_dispatch:
@@ -45,4 +48,4 @@ jobs:
       - name: Build java.base
         run: make java.base-java-only
       - name: Run M3 String backing jtreg
-        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java"
+        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java"
