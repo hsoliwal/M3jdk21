@@ -218,7 +218,7 @@ final class M3String implements CharSequence {
     M3StringFacts facts() {
         return start() == 0 && length() == owner.length
                 ? owner.facts()
-                : M3StringFacts.scan(this);
+                : owner.rangeFacts(value, this);
     }
 
     boolean contentEquals(String other) {
