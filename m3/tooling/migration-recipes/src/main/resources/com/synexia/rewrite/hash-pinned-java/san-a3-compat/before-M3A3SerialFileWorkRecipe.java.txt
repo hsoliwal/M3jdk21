@@ -10,7 +10,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HexFormat;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,31 +23,30 @@ import org.openrewrite.TreeVisitor;
 import org.openrewrite.java.JavaParser;
 import org.openrewrite.java.tree.J;
 
-/** Source-sealed recipe for the A3 algorithm catalogue bridge. */
-public final class M3A3AlgorithmCatalogueRecipe
-        extends ScanningRecipe<M3A3AlgorithmCatalogueRecipe.Inventory> {
+/** Source-sealed recipe for A3 serial FILE work planning. */
+public final class M3A3SerialFileWorkRecipe
+        extends ScanningRecipe<M3A3SerialFileWorkRecipe.Inventory> {
 
     private static final String ROOT =
-            "/com/m3/rewrite/a3-algorithm-catalogue/";
-    private static final Map<String, M3A3AlgorithmCatalogueManifest.Target> TARGETS =
-            M3A3AlgorithmCatalogueManifest.targets();
+            "/com/m3/rewrite/a3-serial-file-work/";
+    private static final Map<String, M3A3SerialFileWorkManifest.Target> TARGETS =
+            M3A3SerialFileWorkManifest.targets();
 
     public static final class Inventory {
         private final Map<String, String> seen = new LinkedHashMap<>();
-        private final Set<String> generated = new HashSet<>();
         private final List<String> conflicts = new ArrayList<>();
         private boolean active;
     }
 
     @Override
     public String getDisplayName() {
-        return "Install A3 algorithm catalogue bridge";
+        return "Install A3 serial FILE work planner";
     }
 
     @Override
     public String getDescription() {
-        return "Installs the compact A3Alg validator and ALG planning join from exact current "
-                + "A3 preimages and reviewed additive postimages.";
+        return "Installs the compact A3 queue-to-FILE-work join from exact current A3 preimages "
+                + "and additive reviewed postimages.";
     }
 
     @Override
@@ -57,9 +55,9 @@ public final class M3A3AlgorithmCatalogueRecipe
                 "m3",
                 "jdk21",
                 "a3",
-                "algorithm",
-                "catalogue",
-                "donor",
+                "atomize",
+                "patternize",
+                "absorb",
                 "recipe-first",
                 "file-local",
                 "candidate-only");
@@ -72,7 +70,7 @@ public final class M3A3AlgorithmCatalogueRecipe
 
     @Override
     public Inventory getInitialValue(ExecutionContext context) {
-        TARGETS.forEach(M3A3AlgorithmCatalogueRecipe::requireResources);
+        TARGETS.forEach(M3A3SerialFileWorkRecipe::requireResources);
         return new Inventory();
     }
 
@@ -84,7 +82,7 @@ public final class M3A3AlgorithmCatalogueRecipe
                 if (!(tree instanceof SourceFile file)) return tree;
                 stopAfterPreVisit();
                 String path = canonical(file.getSourcePath());
-                M3A3AlgorithmCatalogueManifest.Target target = TARGETS.get(path);
+                M3A3SerialFileWorkManifest.Target target = TARGETS.get(path);
                 if (target == null) return tree;
                 observe(inventory, path, target, file);
                 return tree;
@@ -104,10 +102,9 @@ public final class M3A3AlgorithmCatalogueRecipe
                     if (!inventory.seen.containsKey(path)) {
                         if (!"ABSENT".equals(target.before())) {
                             throw new IllegalStateException(
-                                    "required A3Alg preimage missing: " + path);
+                                    "required A3 preimage missing: " + path);
                         }
                         generated.add(parse(path, target.afterResource(), context));
-                        inventory.generated.add(path);
                     }
                 });
         return List.copyOf(generated);
@@ -123,7 +120,7 @@ public final class M3A3AlgorithmCatalogueRecipe
                 if (!(tree instanceof SourceFile file)) return tree;
                 stopAfterPreVisit();
                 String path = canonical(file.getSourcePath());
-                M3A3AlgorithmCatalogueManifest.Target target = TARGETS.get(path);
+                M3A3SerialFileWorkManifest.Target target = TARGETS.get(path);
                 if (target == null) return tree;
                 return replace(inventory, path, target, file, context);
             }
@@ -138,10 +135,6 @@ public final class M3A3AlgorithmCatalogueRecipe
         return false;
     }
 
-    public boolean challengeSourceCopyAuthority() {
-        return false;
-    }
-
     public boolean donorSourceCopyAuthority() {
         return false;
     }
@@ -150,7 +143,7 @@ public final class M3A3AlgorithmCatalogueRecipe
         return false;
     }
 
-    static Map<String, M3A3AlgorithmCatalogueManifest.Target> targetManifest() {
+    static Map<String, M3A3SerialFileWorkManifest.Target> targetManifest() {
         return TARGETS;
     }
 
@@ -174,48 +167,44 @@ public final class M3A3AlgorithmCatalogueRecipe
     private static void observe(
             Inventory inventory,
             String path,
-            M3A3AlgorithmCatalogueManifest.Target target,
+            M3A3SerialFileWorkManifest.Target target,
             SourceFile file) {
         inventory.active = true;
         String current = gitBlob(file.printAll());
         if (inventory.seen.putIfAbsent(path, current) != null) {
-            inventory.conflicts.add("duplicate A3Alg target: " + path);
+            inventory.conflicts.add("duplicate A3 target: " + path);
         }
         if (!(file instanceof J.CompilationUnit)) {
-            inventory.conflicts.add("A3Alg target is not Java: " + path);
+            inventory.conflicts.add("A3 target is not Java: " + path);
         }
         if (!current.equals(target.before()) && !current.equals(target.after())) {
-            inventory.conflicts.add("A3Alg source drift: " + path);
+            inventory.conflicts.add("A3 source drift: " + path);
         }
     }
 
     private static SourceFile replace(
             Inventory inventory,
             String path,
-            M3A3AlgorithmCatalogueManifest.Target target,
+            M3A3SerialFileWorkManifest.Target target,
             SourceFile file,
             ExecutionContext context) {
         String scanned = inventory.seen.get(path);
         String current = gitBlob(file.printAll());
-        boolean matchesScan = scanned == null
-                ? inventory.generated.contains(path)
-                        && "ABSENT".equals(target.before())
-                        && current.equals(target.after())
-                : current.equals(scanned);
-        if (!matchesScan
+        if (scanned == null
+                || !current.equals(scanned)
                 || (!current.equals(target.before())
                         && !current.equals(target.after()))) {
-            throw new IllegalStateException("A3Alg target changed after scan: " + path);
+            throw new IllegalStateException("A3 target changed after scan: " + path);
         }
         if (current.equals(target.after())) return file;
         SourceFile candidate = parse(path, target.afterResource(), context);
         candidate = candidate.withId(file.getId());
-        candidate = candidate.withSourcePath(file.getSourcePath());
-        candidate = candidate.withMarkers(file.getMarkers());
-        candidate = candidate.withFileAttributes(file.getFileAttributes());
-        candidate = candidate.withCharset(file.getCharset());
-        candidate = candidate.withCharsetBomMarked(file.isCharsetBomMarked());
-        return candidate.withChecksum(null);
+        return candidate.withSourcePath(file.getSourcePath())
+                .withMarkers(file.getMarkers())
+                .withFileAttributes(file.getFileAttributes())
+                .withCharset(file.getCharset())
+                .withCharsetBomMarked(file.isCharsetBomMarked())
+                .withChecksum(null);
     }
 
     private static void requireAdmissible(Inventory inventory) {
@@ -226,7 +215,7 @@ public final class M3A3AlgorithmCatalogueRecipe
                 (path, target) -> {
                     if (target.required() && !inventory.seen.containsKey(path)) {
                         throw new IllegalStateException(
-                                "required A3Alg owner missing: " + path);
+                                "required A3 owner missing: " + path);
                     }
                 });
     }
@@ -250,7 +239,7 @@ public final class M3A3AlgorithmCatalogueRecipe
                     || !(files.getFirst() instanceof J.CompilationUnit)
                     || !text.equals(files.getFirst().printAll())) {
                 throw new IllegalStateException(
-                        "A3Alg reviewed postimage did not Java-roundtrip: " + path);
+                        "A3 reviewed postimage did not Java-roundtrip: " + path);
             }
             return files.getFirst();
         }
@@ -258,14 +247,14 @@ public final class M3A3AlgorithmCatalogueRecipe
 
     private static void requireResources(
             String path,
-            M3A3AlgorithmCatalogueManifest.Target target) {
+            M3A3SerialFileWorkManifest.Target target) {
         if (!target.after().equals(gitBlob(resource(target.afterResource())))) {
-            throw new IllegalStateException("A3Alg reviewed resource drift: " + path);
+            throw new IllegalStateException("A3 reviewed resource drift: " + path);
         }
         if (target.beforeResource() != null
                 && !target.before().equals(
                         gitBlob(resource(target.beforeResource())))) {
-            throw new IllegalStateException("A3Alg preimage resource drift: " + path);
+            throw new IllegalStateException("A3 preimage resource drift: " + path);
         }
     }
 
@@ -277,16 +266,16 @@ public final class M3A3AlgorithmCatalogueRecipe
 
     private static String resource(String relative) {
         try (InputStream input =
-                M3A3AlgorithmCatalogueRecipe.class.getResourceAsStream(
+                M3A3SerialFileWorkRecipe.class.getResourceAsStream(
                         ROOT + relative)) {
             if (input == null) {
                 throw new IllegalStateException(
-                        "missing A3Alg reviewed resource: " + relative);
+                        "missing A3 reviewed resource: " + relative);
             }
             return new String(input.readAllBytes(), StandardCharsets.UTF_8);
         } catch (IOException failure) {
             throw new IllegalStateException(
-                    "cannot read A3Alg reviewed resource: " + relative,
+                    "cannot read A3 reviewed resource: " + relative,
                     failure);
         }
     }

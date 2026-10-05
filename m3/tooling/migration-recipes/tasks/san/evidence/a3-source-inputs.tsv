@@ -1,0 +1,6 @@
+path	sha256
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueManifest.java	280d7c08e9da9f618f4596516420a5c6c2de8f32fa1b52ff354853f3b0fb7c2b
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3SerialFileWorkManifest.java	3f39c37a6c88b36547c010b915f6f14bc9566a3be1dba1ee1648e31f044bca2c
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java	8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6
+m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java	b96894a77e5c310addbda72b248ab56fedf8ceb24e5de81fe6e5d090982a4abc
+m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueRecipeTest.java	12024b153d6aa2cd7b311535faf7b9e3f3ea3df5d736c318ea6e7ee1194da3fa

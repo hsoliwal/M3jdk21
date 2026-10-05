@@ -1,0 +1,75 @@
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ---------------------< com.m3.tooling:san-recipe >----------------------
+[INFO] Building SAN: whole-estate sanitization scope recipe 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ san-recipe ---
+[INFO] Copying 13 resources from ../../src/main/resources to target/classes
+[INFO]
+[INFO] --- compiler:3.13.0:compile (default-compile) @ san-recipe ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ san-recipe ---
+[INFO] skip non existing resourceDirectory /workspace/scratch/18b9e6a1dfc0/m3jdk21/m3/tooling/migration-recipes/tasks/san/src/test/resources
+[INFO]
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ san-recipe ---
+[INFO] Nothing to compile - all classes are up to date.
+[INFO]
+[INFO] --- surefire:3.2.5:test (default-test) @ san-recipe ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.rewrite.SanTest
+SLF4J: No SLF4J providers were found.
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See https://www.slf4j.org/codes.html#noProviders for further details.
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.181 s -- in com.m3.rewrite.SanTest
+[INFO] Running com.m3.rewrite.SanCompatTest
+[ERROR] Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 6.605 s <<< FAILURE! -- in com.m3.rewrite.SanCompatTest
+[ERROR] com.m3.rewrite.SanCompatTest.replayCompilesActualA3OwnersAndReachesFixedPoint -- Time elapsed: 6.134 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <Markers(id=ef1449fc-1082-4d80-ad00-d1789ae009e7, markers=[])> but was: <Markers(id=ef1449fc-1082-4d80-ad00-d1789ae009e7, markers=[RecipesThatMadeChanges(id=a5e5918e-5ad7-45cc-a004-35c3d71e1158, recipes=[[com.m3.rewrite.a3.M3A3SerialFileWorkRecipe@f11707a5]])])>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertEquals.failNotEqual(AssertEquals.java:197)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1145)
+	at com.m3.rewrite.a3.M3A3SerialFileWorkRecipeTest.lambda$exactCurrentPreimagesTransformAndSecondPassIsFixedPoint$3(M3A3SerialFileWorkRecipeTest.java:91)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at com.m3.rewrite.a3.M3A3SerialFileWorkRecipeTest.exactCurrentPreimagesTransformAndSecondPassIsFixedPoint(M3A3SerialFileWorkRecipeTest.java:83)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.m3.rewrite.SanCompatTest.replayCompilesActualA3OwnersAndReachesFixedPoint(SanCompatTest.java:84)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO]
+[INFO] Results:
+[INFO]
+[ERROR] Failures:
+[ERROR]   SanCompatTest.replayCompilesActualA3OwnersAndReachesFixedPoint:84 expected: <Markers(id=ef1449fc-1082-4d80-ad00-d1789ae009e7, markers=[])> but was: <Markers(id=ef1449fc-1082-4d80-ad00-d1789ae009e7, markers=[RecipesThatMadeChanges(id=a5e5918e-5ad7-45cc-a004-35c3d71e1158, recipes=[[com.m3.rewrite.a3.M3A3SerialFileWorkRecipe@f11707a5]])])>
+[INFO]
+[ERROR] Tests run: 5, Failures: 1, Errors: 0, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  8.968 s
+[INFO] Finished at: 2026-10-05T10:26:02+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project san-recipe: There are test failures.
+[ERROR]
+[ERROR] Please refer to /workspace/scratch/18b9e6a1dfc0/m3jdk21/m3/tooling/migration-recipes/tasks/san/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR]
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR]
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

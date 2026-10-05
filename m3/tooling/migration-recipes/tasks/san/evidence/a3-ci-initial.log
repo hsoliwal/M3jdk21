@@ -1,0 +1,163 @@
+﻿2026-10-05T02:18:47.0255236Z Current runner version: '2.337.0'
+2026-10-05T02:18:47.0281239Z ##[group]Runner Image Provisioner
+2026-10-05T02:18:47.0282186Z Hosted Compute Agent
+2026-10-05T02:18:47.0282941Z Version: 20260901.588
+2026-10-05T02:18:47.0283620Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+2026-10-05T02:18:47.0284432Z Build Date: 2026-09-01T19:56:44Z
+2026-10-05T02:18:47.0285200Z Worker ID: {b36d4324-c06a-4ef9-9820-d8446dc43d08}
+2026-10-05T02:18:47.0285932Z Azure Region: westus
+2026-10-05T02:18:47.0286620Z ##[endgroup]
+2026-10-05T02:18:47.0288572Z ##[group]Operating System
+2026-10-05T02:18:47.0289494Z Ubuntu
+2026-10-05T02:18:47.0290229Z 22.04.5
+2026-10-05T02:18:47.0290827Z LTS
+2026-10-05T02:18:47.0291437Z ##[endgroup]
+2026-10-05T02:18:47.0292039Z ##[group]Runner Image
+2026-10-05T02:18:47.0292658Z Image: ubuntu-22.04
+2026-10-05T02:18:47.0293357Z Version: 20260927.309.1
+2026-10-05T02:18:47.0294697Z Included Software: https://github.com/actions/runner-images/blob/ubuntu22/20260927.309/images/ubuntu/Ubuntu2204-Readme.md
+2026-10-05T02:18:47.0296436Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu22%2F20260927.309
+2026-10-05T02:18:47.0297477Z ##[endgroup]
+2026-10-05T02:18:47.0298751Z ##[group]GITHUB_TOKEN Permissions
+2026-10-05T02:18:47.0301235Z Contents: read
+2026-10-05T02:18:47.0302002Z Metadata: read
+2026-10-05T02:18:47.0302630Z ##[endgroup]
+2026-10-05T02:18:47.0304860Z Secret source: Actions
+2026-10-05T02:18:47.0305973Z Cache mode: write
+2026-10-05T02:18:47.0306763Z Prepare workflow directory
+2026-10-05T02:18:47.0688621Z Prepare all required actions
+2026-10-05T02:18:47.0753791Z Getting action download info
+2026-10-05T02:18:47.4043286Z Download action repository 'actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+2026-10-05T02:18:47.7583564Z Complete job name: a3-proof
+2026-10-05T02:18:47.8408446Z ##[group]Run set -euo pipefail
+2026-10-05T02:18:47.8409396Z [36;1mset -euo pipefail[0m
+2026-10-05T02:18:47.8409993Z [36;1mtest -n "$HEAD_SHA"[0m
+2026-10-05T02:18:47.8411213Z [36;1mcurl --fail --location --retry 3             "https://codeload.github.com/${GITHUB_REPOSITORY}/tar.gz/${HEAD_SHA}"             -o "$RUNNER_TEMP/repo.tar.gz"[0m
+2026-10-05T02:18:47.8412445Z [36;1mmkdir -p "$RUNNER_TEMP/repo"[0m
+2026-10-05T02:18:47.8413279Z [36;1mtar -xzf "$RUNNER_TEMP/repo.tar.gz" -C "$RUNNER_TEMP/repo" --strip-components=1[0m
+2026-10-05T02:18:47.8414221Z [36;1mprintf 'REPO=%s\n' "$RUNNER_TEMP/repo" >> "$GITHUB_ENV"[0m
+2026-10-05T02:18:47.8911049Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-05T02:18:47.8912095Z env:
+2026-10-05T02:18:47.8912622Z   HEAD_SHA: e17fb9f665203005be7038f814cba49193e69bcb
+2026-10-05T02:18:47.8913253Z ##[endgroup]
+2026-10-05T02:18:47.9164451Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+2026-10-05T02:18:47.9166970Z                                  Dload  Upload   Total   Spent    Left  Speed
+2026-10-05T02:18:47.9167803Z
+2026-10-05T02:18:48.7051561Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2026-10-05T02:18:49.7237884Z 100 3121k    0 3121k    0     0  3948k      0 --:--:-- --:--:-- --:--:-- 3946k
+2026-10-05T02:18:50.7089519Z 100  9.7M    0  9.7M    0     0  5546k      0 --:--:--  0:00:01 --:--:-- 5547k
+2026-10-05T02:18:51.7117054Z 100 18.3M    0 18.3M    0     0  6732k      0 --:--:--  0:00:02 --:--:-- 6733k
+2026-10-05T02:18:52.7131743Z 100 25.5M    0 25.5M    0     0  6876k      0 --:--:--  0:00:03 --:--:-- 6877k
+2026-10-05T02:18:53.7083702Z 100 32.5M    0 32.5M    0     0  6936k      0 --:--:--  0:00:04 --:--:-- 6936k
+2026-10-05T02:18:54.7046759Z 100 39.6M    0 39.6M    0     0  7003k      0 --:--:--  0:00:05 --:--:-- 7487k
+2026-10-05T02:18:55.6861927Z 100 46.5M    0 46.5M    0     0  7017k      0 --:--:--  0:00:06 --:--:-- 7551k
+2026-10-05T02:18:56.6863421Z 100 53.5M    0 53.5M    0     0  7061k      0 --:--:--  0:00:07 --:--:-- 7244k
+2026-10-05T02:18:57.7014748Z 100 60.2M    0 60.2M    0     0  7034k      0 --:--:--  0:00:08 --:--:-- 7154k
+2026-10-05T02:18:58.6932893Z 100 67.6M    0 67.6M    0     0  7075k      0 --:--:--  0:00:09 --:--:-- 7208k
+2026-10-05T02:18:59.7102529Z 100 74.2M    0 74.2M    0     0  7055k      0 --:--:--  0:00:10 --:--:-- 7114k
+2026-10-05T02:19:00.7087193Z 100 80.5M    0 80.5M    0     0  6988k      0 --:--:--  0:00:11 --:--:-- 6950k
+2026-10-05T02:19:01.6846784Z 100 87.2M    0 87.2M    0     0  6984k      0 --:--:--  0:00:12 --:--:-- 6865k
+2026-10-05T02:19:02.6974638Z 100 96.6M    0 96.6M    0     0  7184k      0 --:--:--  0:00:13 --:--:-- 7447k
+2026-10-05T02:19:03.4905937Z 100  103M    0  103M    0     0  7135k      0 --:--:--  0:00:14 --:--:-- 7251k
+2026-10-05T02:19:03.4906621Z 100  109M    0  109M    0     0  7181k      0 --:--:--  0:00:15 --:--:-- 7466k
+2026-10-05T02:19:08.2221056Z ##[group]Run set -euo pipefail
+2026-10-05T02:19:08.2221431Z [36;1mset -euo pipefail[0m
+2026-10-05T02:19:08.2222434Z [36;1mcurl --fail --location --retry 3             'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21%2B35/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz'             -o "$RUNNER_TEMP/jdk21.tar.gz"[0m
+2026-10-05T02:19:08.2223807Z [36;1mprintf '%s  %s\n'             '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6'             "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -[0m
+2026-10-05T02:19:08.2224544Z [36;1mtar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"[0m
+2026-10-05T02:19:08.2224979Z [36;1mprintf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"[0m
+2026-10-05T02:19:08.2225430Z [36;1mprintf '%s\n' "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"[0m
+2026-10-05T02:19:08.2298330Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-05T02:19:08.2298698Z env:
+2026-10-05T02:19:08.2298955Z   REPO: /home/runner/work/_temp/repo
+2026-10-05T02:19:08.2299559Z ##[endgroup]
+2026-10-05T02:19:08.2455392Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+2026-10-05T02:19:08.2456446Z                                  Dload  Upload   Total   Spent    Left  Speed
+2026-10-05T02:19:08.2457178Z
+2026-10-05T02:19:08.4595043Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2026-10-05T02:19:08.4595954Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2026-10-05T02:19:08.6842706Z
+2026-10-05T02:19:09.5489787Z  17  198M   17 35.4M    0     0  80.8M      0  0:00:02 --:--:--  0:00:02 80.8M
+2026-10-05T02:19:09.5490713Z 100  198M  100  198M    0     0   152M      0  0:00:01  0:00:01 --:--:--  188M
+2026-10-05T02:19:10.3687189Z /home/runner/work/_temp/jdk21.tar.gz: OK
+2026-10-05T02:19:12.6251717Z ##[group]Run set -euo pipefail
+2026-10-05T02:19:12.6252074Z [36;1mset -euo pipefail[0m
+2026-10-05T02:19:12.6252322Z [36;1mjava -version[0m
+2026-10-05T02:19:12.6252550Z [36;1mmvn -version[0m
+2026-10-05T02:19:12.6252921Z [36;1mmvn -B -ntp -f "$REPO/m3/pom.xml"             -pl tooling/a3 -am clean verify[0m
+2026-10-05T02:19:12.6353621Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-10-05T02:19:12.6354249Z env:
+2026-10-05T02:19:12.6354564Z   REPO: /home/runner/work/_temp/repo
+2026-10-05T02:19:12.6355055Z   JAVA_HOME: /home/runner/work/_temp/jdk-21+35
+2026-10-05T02:19:12.6355539Z ##[endgroup]
+2026-10-05T02:19:12.6864018Z openjdk version "21" 2023-09-19 LTS
+2026-10-05T02:19:12.6866572Z OpenJDK Runtime Environment Temurin-21+35 (build 21+35-LTS)
+2026-10-05T02:19:12.6868606Z OpenJDK 64-Bit Server VM Temurin-21+35 (build 21+35-LTS, mixed mode, sharing)
+2026-10-05T02:19:13.7143815Z Apache Maven 3.9.16 (2bdd9fddda4b155ebf8000e807eb73fd829a51d5)
+2026-10-05T02:19:13.7145444Z Maven home: /usr/share/apache-maven-3.9.16
+2026-10-05T02:19:13.7146913Z Java version: 21, vendor: Eclipse Adoptium, runtime: /home/runner/work/_temp/jdk-21+35
+2026-10-05T02:19:13.7148241Z Default locale: en, platform encoding: UTF-8
+2026-10-05T02:19:13.7150112Z OS name: "linux", version: "6.8.0-1064-azure", arch: "amd64", family: "unix"
+2026-10-05T02:19:15.6882474Z [INFO] Scanning for projects...
+2026-10-05T02:19:15.7929864Z [INFO] ------------------------------------------------------------------------
+2026-10-05T02:19:15.7931209Z [INFO] Reactor Build Order:
+2026-10-05T02:19:15.7931920Z [INFO]
+2026-10-05T02:19:15.7950183Z [INFO] migration-recipes                                                  [jar]
+2026-10-05T02:19:15.7980945Z [INFO] M3JDK21 Maven control reactor                                      [pom]
+2026-10-05T02:19:15.7990403Z [INFO] M3 A3 absorption tooling                                           [jar]
+2026-10-05T02:19:15.8081043Z [INFO]
+2026-10-05T02:19:15.8081873Z [INFO] ------------------< com.m3.tooling:migration-recipes >------------------
+2026-10-05T02:19:15.8082885Z [INFO] Building migration-recipes 0.1.0-SNAPSHOT                          [1/3]
+2026-10-05T02:19:15.8083683Z [INFO]   from tooling/migration-recipes/pom.xml
+2026-10-05T02:19:15.8084361Z [INFO] --------------------------------[ jar ]---------------------------------
+2026-10-05T02:19:19.6551206Z [INFO]
+2026-10-05T02:19:19.6560805Z [INFO] --- clean:3.2.0:clean (default-clean) @ migration-recipes ---
+2026-10-05T02:19:19.8962794Z [INFO]
+2026-10-05T02:19:19.8963817Z [INFO] --- jacoco:0.8.15:prepare-agent (m3-coverage-agent) @ migration-recipes ---
+2026-10-05T02:19:20.5747644Z [INFO] argLine set to -javaagent:/home/runner/.m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/home/runner/work/_temp/repo/m3/tooling/migration-recipes/target/jacoco.exec
+2026-10-05T02:19:20.5750195Z [INFO]
+2026-10-05T02:19:20.5752961Z [INFO] --- resources:3.4.0:resources (default-resources) @ migration-recipes ---
+2026-10-05T02:19:21.3160017Z [INFO] Copying 304 resources from src/main/resources to target/classes
+2026-10-05T02:19:21.3722456Z [INFO]
+2026-10-05T02:19:21.3723240Z [INFO] --- compiler:3.13.0:compile (default-compile) @ migration-recipes ---
+2026-10-05T02:19:22.0061558Z [INFO] Recompiling the module because of changed source code.
+2026-10-05T02:19:22.0180251Z [INFO] Compiling 34 source files with javac [debug release 21] to target/classes
+2026-10-05T02:19:23.4655670Z [INFO] -------------------------------------------------------------
+2026-10-05T02:19:23.4656852Z [ERROR] COMPILATION ERROR :
+2026-10-05T02:19:23.4658009Z [INFO] -------------------------------------------------------------
+2026-10-05T02:19:23.4660000Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueRecipe.java:[206,17] cannot find symbol
+2026-10-05T02:19:23.4661675Z   symbol:   method withSourcePath(java.nio.file.Path)
+2026-10-05T02:19:23.4663014Z   location: interface org.openrewrite.Tree
+2026-10-05T02:19:23.4664636Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3SerialFileWorkRecipe.java:[204,17] cannot find symbol
+2026-10-05T02:19:23.4666333Z   symbol:   method withFileAttributes(org.openrewrite.FileAttributes)
+2026-10-05T02:19:23.4667331Z   location: interface org.openrewrite.Tree
+2026-10-05T02:19:23.4668046Z [INFO] 2 errors
+2026-10-05T02:19:23.4668915Z [INFO] -------------------------------------------------------------
+2026-10-05T02:19:23.4670319Z [INFO] ------------------------------------------------------------------------
+2026-10-05T02:19:23.4671439Z [INFO] Reactor Summary for M3JDK21 Maven control reactor 0.1.0-SNAPSHOT:
+2026-10-05T02:19:23.4672410Z [INFO]
+2026-10-05T02:19:23.4673278Z [INFO] migration-recipes .................................. FAILURE [  7.660 s]
+2026-10-05T02:19:23.4674458Z [INFO] M3JDK21 Maven control reactor ...................... SKIPPED
+2026-10-05T02:19:23.4692849Z [INFO] M3 A3 absorption tooling ........................... SKIPPED
+2026-10-05T02:19:23.4693897Z [INFO] ------------------------------------------------------------------------
+2026-10-05T02:19:23.4694802Z [INFO] BUILD FAILURE
+2026-10-05T02:19:23.4703841Z [INFO] ------------------------------------------------------------------------
+2026-10-05T02:19:23.4712238Z [INFO] Total time:  7.814 s
+2026-10-05T02:19:23.4712832Z [INFO] Finished at: 2026-10-05T02:19:23Z
+2026-10-05T02:19:23.4713771Z [INFO] ------------------------------------------------------------------------
+2026-10-05T02:19:23.4715315Z [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile (default-compile) on project migration-recipes: Compilation failure: Compilation failure:
+2026-10-05T02:19:23.4717155Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3AlgorithmCatalogueRecipe.java:[206,17] cannot find symbol
+2026-10-05T02:19:23.4717932Z [ERROR]   symbol:   method withSourcePath(java.nio.file.Path)
+2026-10-05T02:19:23.4718307Z [ERROR]   location: interface org.openrewrite.Tree
+2026-10-05T02:19:23.4719011Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3SerialFileWorkRecipe.java:[204,17] cannot find symbol
+2026-10-05T02:19:23.4720649Z [ERROR]   symbol:   method withFileAttributes(org.openrewrite.FileAttributes)
+2026-10-05T02:19:23.4721088Z [ERROR]   location: interface org.openrewrite.Tree
+2026-10-05T02:19:23.4721420Z [ERROR] -> [Help 1]
+2026-10-05T02:19:23.4721620Z [ERROR]
+2026-10-05T02:19:23.4721938Z [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+2026-10-05T02:19:23.4722572Z [ERROR] Re-run Maven using the -X switch to enable full debug logging.
+2026-10-05T02:19:23.4722955Z [ERROR]
+2026-10-05T02:19:23.4723362Z [ERROR] For more information about the errors and possible solutions, please read the following articles:
+2026-10-05T02:19:23.4724058Z [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
+2026-10-05T02:19:23.5095881Z ##[error]Process completed with exit code 1.
+2026-10-05T02:19:23.5317829Z Cleaning up orphan processes

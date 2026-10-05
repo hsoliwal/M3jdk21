@@ -88,10 +88,7 @@ class M3A3SerialFileWorkRecipeTest {
                             if (original != null) {
                                 assertEquals(original.getId(), source.getId());
                                 assertEquals(original.getSourcePath(), source.getSourcePath());
-                                assertEquals(original.getMarkers(), source.getMarkers()
-                                        .removeByType(org.openrewrite.marker.RecipesThatMadeChanges.class));
-                                assertTrue(source.getMarkers()
-                                        .findFirst(org.openrewrite.marker.RecipesThatMadeChanges.class).isPresent());
+                                assertEquals(original.getMarkers(), source.getMarkers());
                                 assertEquals(original.getFileAttributes(), source.getFileAttributes());
                                 assertEquals(original.getCharset(), source.getCharset());
                                 assertEquals(original.isCharsetBomMarked(), source.isCharsetBomMarked());

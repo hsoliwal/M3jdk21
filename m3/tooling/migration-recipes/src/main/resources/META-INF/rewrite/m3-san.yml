@@ -6,3 +6,11 @@ description: Extend the existing source inventory with explicit whole-repository
 recipeList:
   - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
       crateName: san-estate
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.RepairSanA3Types
+displayName: Retain SourceFile types in A3 replacement metadata
+description: Replay exact target-typed metadata calls without changing A3 admission or source semantics.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: san-a3-compat

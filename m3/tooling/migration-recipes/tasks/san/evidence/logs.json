@@ -34,5 +34,59 @@
     "raw_sha256": "f6dfb51435323f916535042df91d18e38cce658dab57f9446331cd20465fe1f1",
     "stored_sha256": "d2b154ff49d9538ae688dc0a255ad215cc560f199bffdd501e0384452d6b494d",
     "normalization": "strip trailing line whitespace; preserve line content/order"
+  },
+  {
+    "file": "a3-ci-initial.log",
+    "raw_sha256": "349cc2c385e849c09f30d2409965b9d9eec4c5fd4e6a86028a1cd4ccf1fe7d22",
+    "stored_sha256": "21df4586db6d62cb5c4f1599b5bebf9ddabce591ceeded167bf25ca212d8f6f1",
+    "normalization": "strip trailing line whitespace; preserve line content/order"
+  },
+  {
+    "file": "a3-manifest-refusal.log",
+    "raw_sha256": "ce29974a846c7aebd3fcc70b8b9d7ce5ea75095bff86207d436987ad5e0057b2",
+    "stored_sha256": "2ca14363900f6458ccf015f269acf03d76849031559744cfbfa94aece2144a6d",
+    "normalization": "strip trailing line whitespace; preserve line content/order"
+  },
+  {
+    "file": "a3-generated-scan-failure.log",
+    "raw_sha256": "c0fe37ddc450590e96836a1787b1e51fda422f5aecc99031eedfbf631d5b46b5",
+    "stored_sha256": "3b0e011418cdc5de67643ff2a80e1b27e8a5e3d5b81eb7b3542c32454e7077e5",
+    "normalization": "strip trailing line whitespace; preserve line content/order"
+  },
+  {
+    "file": "a3-marker-test-failure.log",
+    "raw_sha256": "e587ce852aa139c5b91e2dc3f028a4ac3ee01fa7b4b20763c9d13c42fdb2e0f1",
+    "stored_sha256": "0e41b0bd458626f1423c3c55a7292a0079166e6aa47491358008a93f59a3521b",
+    "normalization": "strip trailing line whitespace; preserve line content/order"
+  },
+  {
+    "file": "san-a3-final.log",
+    "raw_sha256": "0a96e05aa79714a30e4aa3ca49e5d65018963018beb2428ee4230df0454cffef",
+    "stored_sha256": "8e77e6da1de8f7c692aba2be40da3fb94785d79f021a44c931e9cbc9f8fed2cb",
+    "normalization": "strip trailing line whitespace; preserve line content/order"
+  },
+  {
+    "file": "a3-compile.log",
+    "raw_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stored_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "normalization": "strip trailing line whitespace; preserve line content/order"
+  },
+  {
+    "file": "a3-existing-tests.log",
+    "raw_sha256": "ffdfc23e1234de1cae2944d0d5ab7d1b9671d72eed18c7dc8e425239bf763df1",
+    "stored_sha256": "ffdfc23e1234de1cae2944d0d5ab7d1b9671d72eed18c7dc8e425239bf763df1",
+    "normalization": "strip trailing line whitespace; preserve line content/order"
+  },
+  {
+    "file": "a3-reactor-offline-missing-cache.log",
+    "raw_sha256": "51171cb3275f8b3aaaaff29bc1fd76feb61248202fdec42237df961049940c0b",
+    "stored_sha256": "29cc606b6be392dafe49e0e1f93586e0b082d79981d491bcca6f7c035c09dcba",
+    "normalization": "strip trailing line whitespace; preserve line content/order"
+  },
+  {
+    "file": "a3-reactor-prepare.log",
+    "raw_sha256": "2673d5d97c5b4733b695729e8454553d3f3da6d7258639b070d3a3850c06d662",
+    "stored_sha256": "a1925e155526cd7ea0cd4ac123597e9e3554824d027f02a6482a2e23f8aafdde",
+    "normalization": "strip trailing line whitespace; preserve line content/order"
   }
 ]

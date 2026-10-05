@@ -1,0 +1,1586 @@
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO]
+[INFO] migration-recipes                                                  [jar]
+[INFO] M3JDK21 Maven control reactor                                      [pom]
+[INFO] M3 A3 absorption tooling                                           [jar]
+[INFO]
+[INFO] ------------------< com.m3.tooling:migration-recipes >------------------
+[INFO] Building migration-recipes 0.1.0-SNAPSHOT                          [1/3]
+[INFO]   from tooling/migration-recipes/pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO]
+[INFO] --- jacoco:0.8.15:prepare-agent (m3-coverage-agent) @ migration-recipes ---
+[INFO] argLine set to -javaagent:/workspace/scratch/18b9e6a1dfc0/tools/san-maven-cache/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar=destfile=/workspace/scratch/18b9e6a1dfc0/m3jdk21/m3/tooling/migration-recipes/target/jacoco.exec
+[INFO]
+[INFO] --- resources:3.3.1:resources (default-resources) @ migration-recipes ---
+[INFO] Copying 311 resources from src/main/resources to target/classes
+[INFO]
+[INFO] --- compiler:3.13.0:compile (default-compile) @ migration-recipes ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 34 source files with javac [debug release 21] to target/classes
+[INFO]
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ migration-recipes ---
+[INFO] Copying 41 resources from src/test/resources to target/test-classes
+[INFO]
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ migration-recipes ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 35 source files with javac [debug release 21] to target/test-classes
+[INFO]
+[INFO] --- surefire:3.2.5:test (default-test) @ migration-recipes ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO]
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.m3.rewrite.InstallIndexStringCompatibilityTest
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.249 s -- in com.m3.rewrite.InstallIndexStringCompatibilityTest
+[INFO] Running com.m3.rewrite.a3.M3A3SerialFileWorkRecipeTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.336 s -- in com.m3.rewrite.a3.M3A3SerialFileWorkRecipeTest
+[INFO] Running com.m3.rewrite.a3.M3A3AlgorithmCatalogueRecipeTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.632 s -- in com.m3.rewrite.a3.M3A3AlgorithmCatalogueRecipeTest
+[INFO] Running com.m3.rewrite.scope.M3RecipeScopeDeclarationTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in com.m3.rewrite.scope.M3RecipeScopeDeclarationTest
+[INFO] Running com.m3.rewrite.scope.M3ScopeContractTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.004 s -- in com.m3.rewrite.scope.M3ScopeContractTest
+[INFO] Running com.m3.rewrite.semantic.M3SemanticHashRecipeTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.750 s -- in com.m3.rewrite.semantic.M3SemanticHashRecipeTest
+[INFO] Running com.m3.rewrite.M3Java21ConvergenceRecipeTest
+[INFO] Tests run: 8, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.307 s -- in com.m3.rewrite.M3Java21ConvergenceRecipeTest
+[INFO] Running com.m3.rewrite.backport.MapGuardRecipeTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.896 s -- in com.m3.rewrite.backport.MapGuardRecipeTest
+[INFO] Running com.m3.rewrite.backport.M3VerbatimJavaPairRecipeTest
+[ERROR] Tests run: 3, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.332 s <<< FAILURE! -- in com.m3.rewrite.backport.M3VerbatimJavaPairRecipeTest
+[ERROR] com.m3.rewrite.backport.M3VerbatimJavaPairRecipeTest.driftAndMalformedDescriptorsFailClosed -- Time elapsed: 0.100 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:152)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:73)
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3115)
+	at com.m3.rewrite.backport.M3VerbatimJavaPairRecipeTest.driftAndMalformedDescriptorsFailClosed(M3VerbatimJavaPairRecipeTest.java:95)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] Running com.m3.rewrite.backport.M3Jdk8364182BackportRecipeTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.601 s -- in com.m3.rewrite.backport.M3Jdk8364182BackportRecipeTest
+[INFO] Running com.m3.rewrite.backport.ClassVerTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.460 s -- in com.m3.rewrite.backport.ClassVerTest
+[INFO] Running com.m3.rewrite.backport.MapUtfRecipeTest
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.368 s -- in com.m3.rewrite.backport.MapUtfRecipeTest
+[INFO] Running com.m3.rewrite.backport.MapFactsRecipeTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.563 s -- in com.m3.rewrite.backport.MapFactsRecipeTest
+[INFO] Running com.m3.rewrite.backport.M3JdkExecutionFollowthroughRecipeTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.391 s -- in com.m3.rewrite.backport.M3JdkExecutionFollowthroughRecipeTest
+[INFO] Running com.m3.rewrite.backport.M3A3NativeJniLaneRecipeTest
+[INFO] Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 s -- in com.m3.rewrite.backport.M3A3NativeJniLaneRecipeTest
+[INFO] Running com.m3.rewrite.backport.DbRecipeTest
+[INFO] Tests run: 11, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.96 s -- in com.m3.rewrite.backport.DbRecipeTest
+[INFO] Running com.m3.rewrite.backport.M3Jdk8368692PasswordSystemInBackportRecipeTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.609 s -- in com.m3.rewrite.backport.M3Jdk8368692PasswordSystemInBackportRecipeTest
+[INFO] Running com.m3.rewrite.backport.GateTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.981 s -- in com.m3.rewrite.backport.GateTest
+[INFO] Running com.m3.rewrite.backport.KitTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.222 s -- in com.m3.rewrite.backport.KitTest
+[INFO] Running com.m3.rewrite.backport.M3Jep458BackportRecipeTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 12.13 s -- in com.m3.rewrite.backport.M3Jep458BackportRecipeTest
+[INFO] Running com.m3.rewrite.backport.M3Jdk8367584JfrOptionsHelpBackportRecipeTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.190 s -- in com.m3.rewrite.backport.M3Jdk8367584JfrOptionsHelpBackportRecipeTest
+[INFO] Running com.m3.rewrite.backport.M3Jdk8347112BackportRecipeTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.685 s -- in com.m3.rewrite.backport.M3Jdk8347112BackportRecipeTest
+[INFO] Running com.m3.rewrite.backport.M3Jdk8374808BackportRecipeTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.694 s -- in com.m3.rewrite.backport.M3Jdk8374808BackportRecipeTest
+[INFO] Running com.m3.rewrite.backport.VersionRecipeTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.973 s -- in com.m3.rewrite.backport.VersionRecipeTest
+[INFO] Running com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipeTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipeTest
+[INFO] Running com.m3.rewrite.backport.JniTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.219 s -- in com.m3.rewrite.backport.JniTest
+[INFO] Running com.m3.rewrite.M3Java21DeclarativeConvergenceTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.433 s -- in com.m3.rewrite.M3Java21DeclarativeConvergenceTest
+[INFO] Running com.m3.rewrite.atom.M3AtomizePureIntReturnRecipeTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 8.995 s -- in com.m3.rewrite.atom.M3AtomizePureIntReturnRecipeTest
+[INFO] Running com.m3.rewrite.atom.M3InventoryPureIntAtomCandidatesTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.147 s -- in com.m3.rewrite.atom.M3InventoryPureIntAtomCandidatesTest
+[INFO] Running com.m3.rewrite.atom.M3PureIntConvergenceRecipeTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.739 s -- in com.m3.rewrite.atom.M3PureIntConvergenceRecipeTest
+[INFO] Running com.m3.rewrite.M3A3DeclarativeDeliveryRecipeTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.000 s -- in com.m3.rewrite.M3A3DeclarativeDeliveryRecipeTest
+[INFO] Running com.m3.rewrite.M3Java21ConvergenceAdmissionTest
+[ERROR] Tests run: 2, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.006 s <<< FAILURE! -- in com.m3.rewrite.M3Java21ConvergenceAdmissionTest
+[ERROR] com.m3.rewrite.M3Java21ConvergenceAdmissionTest.everyTrustedChildIsRegisteredAtFileScopeWithLockedContract -- Time elapsed: 0.002 s <<< ERROR!
+java.lang.IllegalArgumentException: unregistered M3 recipe: org.openrewrite.java.RemoveUnusedImports
+	at com.m3.rewrite.scope.M3RecipeScopeRegistry.require(M3RecipeScopeRegistry.java:65)
+	at com.m3.rewrite.scope.M3RecipeScopeRegistry.require(M3RecipeScopeRegistry.java:72)
+	at com.m3.rewrite.M3Java21ConvergenceAdmissionTest.everyTrustedChildIsRegisteredAtFileScopeWithLockedContract(M3Java21ConvergenceAdmissionTest.java:29)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] Running com.synexia.rewrite.M3MIndexStringBulkCharBoundaryRecipeTest
+[ERROR] Tests run: 3, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.294 s <<< FAILURE! -- in com.synexia.rewrite.M3MIndexStringBulkCharBoundaryRecipeTest
+[ERROR] com.synexia.rewrite.M3MIndexStringBulkCharBoundaryRecipeTest.reviewedPostimageIsAlreadyFixedPoint -- Time elapsed: 0.150 s <<< ERROR!
+java.lang.IllegalStateException:
+LST contains missing or invalid type information
+Identifier->VariableDeclarations->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/Unsafe
+
+Identifier->MethodInvocation->NamedVariable->VariableDeclarations->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/Unsafe
+
+Identifier->VariableDeclarations->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->MethodInvocation->NewClass->NamedVariable->VariableDeclarations->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->ArrayType->VariableDeclarations->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->ArrayType->VariableDeclarations->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->Assignment->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/segments
+
+Identifier->FieldAccess->ControlParentheses->Synchronized->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->MethodInvocation->Block->Synchronized->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->MethodInvocation->Block->Synchronized->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->MethodInvocation->Return->Block->Try->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+
+/*~~(MethodDeclaration type is missing or malformed)~~>*/static MIndexString emptyStorage() {
+    return /*~~(Identifier type is missing or malformed)~~>*/EMPTY_STORAGE;
+}
+
+Identifier->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/EMPTY_STORAGE
+
+Identifier->MethodInvocation->Ternary->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringLatin1
+
+Identifier->MethodInvocation->Ternary->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringUTF16
+
+NewClass->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(NewClass type is missing or malformed)~~>*/new MIndexString(
+               LOCAL,
+               canonicalValue,
+               null,
+               0L,
+               null,
+               null,
+               null,
+               length,
+               coder,
+               canonicalId,
+               hash,
+               structuralHash64)
+
+NewClass->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(NewClass type is missing or malformed)~~>*/new MIndexString(
+               bigEndian ? SHARED_LEXICON : LEXICON,
+               null,
+               Objects.requireNonNull(mappedOwner, "mappedOwner"),
+               mappedAddress,
+               null,
+               null,
+               null,
+               length,
+               String.COMPACT_STRINGS && mappedLatin1(mappedAddress, length, bigEndian) ? String.LATIN1 : String.UTF16,
+               canonicalId,
+               javaHash,
+               structuralHash64)
+
+Identifier->ArrayType->VariableDeclarations->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/Objects.requireNonNull(segments, "segments")
+
+Identifier->VariableDeclarations->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->NamedVariable->VariableDeclarations->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/Objects.requireNonNull(segments[index], "segment")
+
+Identifier->MethodInvocation->Unary->ControlParentheses->If->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+
+MethodInvocation->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/Objects.checkFromIndexSize(offsets[index], lengths[index], atom.length)
+
+Identifier->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+NewClass->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(NewClass type is missing or malformed)~~>*/new MIndexString(
+        JOINED,
+        null,
+        null,
+        0L,
+        segments,
+        offsets,
+        ends,
+        logicalLength,
+        coder,
+        canonicalId,
+        0,
+        structuralHash64)
+
+Identifier->MethodInvocation->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/provisional
+
+NewClass->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(NewClass type is missing or malformed)~~>*/new MIndexString(
+               JOINED,
+               null,
+               null,
+               0L,
+               segments,
+               offsets,
+               ends,
+               logicalLength,
+               coder,
+               canonicalId,
+               hash,
+               structuralHash64)
+
+MethodInvocation->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/join(new String[] {first, second})
+
+Identifier->VariableDeclarations->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->NamedVariable->VariableDeclarations->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/part.mindex()
+
+Identifier->Binary->Binary->ControlParentheses->If->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/storage
+
+Identifier->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/EMPTY_STORAGE
+
+Identifier->ArrayType->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->NewArray->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->VariableDeclarations->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->NamedVariable->VariableDeclarations->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/part.mindex()
+
+Identifier->Binary->Binary->ControlParentheses->If->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/storage
+
+MethodInvocation->Assignment->Block->ForLoop->Block->If->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/addNormalized(
+                           atoms,
+                           atomOffsets,
+                           atomLengths,
+                           count,
+                           storage.segments[index],
+                           storage.offsets[index],
+                           take)
+
+Identifier->MethodInvocation->Assignment->Block->Else->If->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/storage
+
+MethodInvocation->Assignment->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/java.util.Arrays.copyOf(atoms, count)
+
+Identifier->MethodInvocation->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/source.mindex()
+
+Identifier->Binary->ControlParentheses->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/storage
+
+Identifier->MethodInvocation->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/storage
+
+Identifier->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/this
+
+Identifier->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/EMPTY_STORAGE
+
+Identifier->MethodInvocation->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->NewArray->MethodInvocation->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->ArrayType->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->NewArray->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->VariableDeclarations->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->MethodInvocation->Assignment->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+
+Identifier->MethodInvocation->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/EMPTY_STORAGE
+
+Identifier->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/this
+
+Identifier->ArrayType->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->NewArray->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->Assignment->Block->ForLoop->Block->If->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation#name#type is not the same instance as the MethodType of MethodInvocation.)~~>*/addNormalized(
+                           atoms,
+                           atomOffsets,
+                           atomLengths,
+                           at,
+                           segments[segment],
+                           offsets[segment],
+                           ends[segment] - previous)
+
+MethodInvocation->Assignment->Block->Else->If->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation#name#type is not the same instance as the MethodType of MethodInvocation.)~~>*/addNormalized(atoms, atomOffsets, atomLengths, at, this, 0, length)
+
+Identifier->MethodInvocation->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->MethodInvocation->Ternary->Case->Block->SwitchExpression->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringLatin1
+
+Identifier->MethodInvocation->Ternary->Case->Block->SwitchExpression->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringUTF16
+
+MethodInvocation->Yield->Block->Case->Block->SwitchExpression->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/segments[segment].charAt(offsets[segment] + index - previous)
+
+Identifier->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/other.mindex()
+
+Identifier->Binary->ControlParentheses->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/that
+
+Identifier->MethodInvocation->Block->If->Block->Case->Block->Switch->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringLatin1
+
+Identifier->MethodInvocation->Block->Else->If->Block->Case->Block->Switch->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringUTF16
+
+Identifier->MethodInvocation->Binary->NamedVariable->VariableDeclarations->Block->ForLoop->Block->Case->Block->Switch->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/UNSAFE
+
+Identifier->MethodInvocation->Binary->NamedVariable->VariableDeclarations->Block->ForLoop->Block->Case->Block->Switch->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/UNSAFE
+
+MethodInvocation->Block->WhileLoop->Block->Case->Block->Switch->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/segments[segment].getChars(atomBegin, atomBegin + take, dst, target)
+
+Identifier->MethodInvocation->Block->Else->If->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringUTF16
+
+Identifier->ArrayType->VariableDeclarations->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->VariableDeclarations->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->MethodInvocation->Binary->Assignment->ForLoop->Block->If->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+
+Identifier->MethodInvocation->Binary->ControlParentheses->If->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/UNSAFE
+
+Identifier->MethodInvocation->Binary->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/UNSAFE
+
+Identifier->MethodInvocation->Binary->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/UNSAFE
+
+Identifier->ArrayType->VariableDeclarations->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->VariableDeclarations->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->MethodInvocation->Unary->ControlParentheses->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+
+MethodInvocation->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/Objects.checkFromIndexSize(offset, length, atom.length)
+
+Identifier->Binary->Binary->Binary->ControlParentheses->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+
+Identifier->Assignment->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+	at org.openrewrite.java.Assertions.assertValidTypes(Assertions.java:87)
+	at org.openrewrite.java.Assertions.validateTypes(Assertions.java:57)
+	at org.openrewrite.test.RewriteTest.rewriteRun(RewriteTest.java:305)
+	at org.openrewrite.test.RewriteTest.rewriteRun(RewriteTest.java:133)
+	at com.synexia.rewrite.M3MIndexStringBulkCharBoundaryRecipeTest.reviewedPostimageIsAlreadyFixedPoint(M3MIndexStringBulkCharBoundaryRecipeTest.java:54)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[ERROR] com.synexia.rewrite.M3MIndexStringBulkCharBoundaryRecipeTest.appliesExactJdkOwnerAndReachesFixedPoint -- Time elapsed: 0.122 s <<< ERROR!
+java.lang.IllegalStateException:
+LST contains missing or invalid type information
+Identifier->VariableDeclarations->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/Unsafe
+
+Identifier->MethodInvocation->NamedVariable->VariableDeclarations->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/Unsafe
+
+Identifier->VariableDeclarations->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->MethodInvocation->NewClass->NamedVariable->VariableDeclarations->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->ArrayType->VariableDeclarations->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->ArrayType->VariableDeclarations->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->Assignment->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/segments
+
+Identifier->FieldAccess->ControlParentheses->Synchronized->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->MethodInvocation->Block->Synchronized->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->MethodInvocation->Block->Synchronized->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->MethodInvocation->Return->Block->Try->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+
+/*~~(MethodDeclaration type is missing or malformed)~~>*/static MIndexString emptyStorage() {
+    return /*~~(Identifier type is missing or malformed)~~>*/EMPTY_STORAGE;
+}
+
+Identifier->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/EMPTY_STORAGE
+
+Identifier->MethodInvocation->Ternary->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringLatin1
+
+Identifier->MethodInvocation->Ternary->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringUTF16
+
+NewClass->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(NewClass type is missing or malformed)~~>*/new MIndexString(
+               LOCAL,
+               canonicalValue,
+               null,
+               0L,
+               null,
+               null,
+               null,
+               length,
+               coder,
+               canonicalId,
+               hash,
+               structuralHash64)
+
+NewClass->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(NewClass type is missing or malformed)~~>*/new MIndexString(
+               bigEndian ? SHARED_LEXICON : LEXICON,
+               null,
+               Objects.requireNonNull(mappedOwner, "mappedOwner"),
+               mappedAddress,
+               null,
+               null,
+               null,
+               length,
+               String.COMPACT_STRINGS && mappedLatin1(mappedAddress, length, bigEndian) ? String.LATIN1 : String.UTF16,
+               canonicalId,
+               javaHash,
+               structuralHash64)
+
+Identifier->ArrayType->VariableDeclarations->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/Objects.requireNonNull(segments, "segments")
+
+Identifier->VariableDeclarations->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->NamedVariable->VariableDeclarations->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/Objects.requireNonNull(segments[index], "segment")
+
+Identifier->MethodInvocation->Unary->ControlParentheses->If->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+
+MethodInvocation->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/Objects.checkFromIndexSize(offsets[index], lengths[index], atom.length)
+
+Identifier->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+NewClass->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(NewClass type is missing or malformed)~~>*/new MIndexString(
+        JOINED,
+        null,
+        null,
+        0L,
+        segments,
+        offsets,
+        ends,
+        logicalLength,
+        coder,
+        canonicalId,
+        0,
+        structuralHash64)
+
+Identifier->MethodInvocation->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/provisional
+
+NewClass->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(NewClass type is missing or malformed)~~>*/new MIndexString(
+               JOINED,
+               null,
+               null,
+               0L,
+               segments,
+               offsets,
+               ends,
+               logicalLength,
+               coder,
+               canonicalId,
+               hash,
+               structuralHash64)
+
+MethodInvocation->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/join(new String[] {first, second})
+
+Identifier->VariableDeclarations->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->NamedVariable->VariableDeclarations->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/part.mindex()
+
+Identifier->Binary->Binary->ControlParentheses->If->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/storage
+
+Identifier->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/EMPTY_STORAGE
+
+Identifier->ArrayType->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->NewArray->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->VariableDeclarations->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->NamedVariable->VariableDeclarations->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/part.mindex()
+
+Identifier->Binary->Binary->ControlParentheses->If->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/storage
+
+MethodInvocation->Assignment->Block->ForLoop->Block->If->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/addNormalized(
+                           atoms,
+                           atomOffsets,
+                           atomLengths,
+                           count,
+                           storage.segments[index],
+                           storage.offsets[index],
+                           take)
+
+Identifier->MethodInvocation->Assignment->Block->Else->If->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/storage
+
+MethodInvocation->Assignment->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/java.util.Arrays.copyOf(atoms, count)
+
+Identifier->MethodInvocation->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/source.mindex()
+
+Identifier->Binary->ControlParentheses->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/storage
+
+Identifier->MethodInvocation->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/storage
+
+Identifier->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/this
+
+Identifier->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/EMPTY_STORAGE
+
+Identifier->MethodInvocation->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->NewArray->MethodInvocation->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->ArrayType->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->NewArray->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->VariableDeclarations->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->MethodInvocation->Assignment->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+
+Identifier->MethodInvocation->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/EMPTY_STORAGE
+
+Identifier->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/this
+
+Identifier->ArrayType->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->NewArray->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->Assignment->Block->ForLoop->Block->If->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation#name#type is not the same instance as the MethodType of MethodInvocation.)~~>*/addNormalized(
+                           atoms,
+                           atomOffsets,
+                           atomLengths,
+                           at,
+                           segments[segment],
+                           offsets[segment],
+                           ends[segment] - previous)
+
+MethodInvocation->Assignment->Block->Else->If->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation#name#type is not the same instance as the MethodType of MethodInvocation.)~~>*/addNormalized(atoms, atomOffsets, atomLengths, at, this, 0, length)
+
+Identifier->MethodInvocation->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->MethodInvocation->Ternary->Case->Block->SwitchExpression->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringLatin1
+
+Identifier->MethodInvocation->Ternary->Case->Block->SwitchExpression->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringUTF16
+
+MethodInvocation->Yield->Block->Case->Block->SwitchExpression->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/segments[segment].charAt(offsets[segment] + index - previous)
+
+Identifier->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/other.mindex()
+
+Identifier->Binary->ControlParentheses->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/that
+
+Identifier->MethodInvocation->Block->If->Block->Case->Block->Switch->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringLatin1
+
+Identifier->MethodInvocation->Block->Else->If->Block->Case->Block->Switch->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringUTF16
+
+MethodInvocation->Block->WhileLoop->Block->Case->Block->Switch->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/segments[segment].getChars(atomStart, atomStart + limit - source, dst, target)
+
+Identifier->MethodInvocation->Block->Else->If->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringUTF16
+
+Identifier->ArrayType->VariableDeclarations->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->VariableDeclarations->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->MethodInvocation->Binary->Assignment->ForLoop->Block->If->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+
+Identifier->MethodInvocation->Binary->ControlParentheses->If->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/UNSAFE
+
+Identifier->MethodInvocation->Binary->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/UNSAFE
+
+Identifier->MethodInvocation->Binary->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/UNSAFE
+
+Identifier->ArrayType->VariableDeclarations->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->VariableDeclarations->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->MethodInvocation->Unary->ControlParentheses->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+
+MethodInvocation->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/Objects.checkFromIndexSize(offset, length, atom.length)
+
+Identifier->Binary->Binary->Binary->ControlParentheses->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+
+Identifier->Assignment->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+	at org.openrewrite.java.Assertions.assertValidTypes(Assertions.java:87)
+	at org.openrewrite.java.Assertions.validateTypes(Assertions.java:57)
+	at org.openrewrite.test.RewriteTest.rewriteRun(RewriteTest.java:305)
+	at org.openrewrite.test.RewriteTest.rewriteRun(RewriteTest.java:133)
+	at com.synexia.rewrite.M3MIndexStringBulkCharBoundaryRecipeTest.appliesExactJdkOwnerAndReachesFixedPoint(M3MIndexStringBulkCharBoundaryRecipeTest.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+
+[INFO] Running com.synexia.rewrite.M3MIndexJoinedCharsViewRecipeTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.472 s -- in com.synexia.rewrite.M3MIndexJoinedCharsViewRecipeTest
+[INFO] Running com.synexia.rewrite.M3MIndexJniNewStringAdmissionRecipeTest
+[ERROR] Tests run: 3, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0.375 s <<< FAILURE! -- in com.synexia.rewrite.M3MIndexJniNewStringAdmissionRecipeTest
+[ERROR] com.synexia.rewrite.M3MIndexJniNewStringAdmissionRecipeTest.reviewedPostimageIsAlreadyFixedPoint -- Time elapsed: 0.194 s <<< FAILURE!
+java.lang.AssertionError: Failed to parse sources or run recipe
+	at org.openrewrite.test.RewriteTest.lambda$defaultExecutionContext$15(RewriteTest.java:633)
+	at org.openrewrite.java.isolated.ReloadableJava21Parser.lambda$parseInputs$0(ReloadableJava21Parser.java:171)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1939)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:682)
+	at org.openrewrite.test.RewriteTest.rewriteRun(RewriteTest.java:285)
+	at org.openrewrite.test.RewriteTest.rewriteRun(RewriteTest.java:133)
+	at com.synexia.rewrite.M3MIndexJniNewStringAdmissionRecipeTest.reviewedPostimageIsAlreadyFixedPoint(M3MIndexJniNewStringAdmissionRecipeTest.java:53)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.AssertionError: Failed to parse sources or run recipe
+	at org.openrewrite.test.RewriteTest.lambda$defaultExecutionContext$15(RewriteTest.java:633)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.convert(ReloadableJava21ParserVisitor.java:1688)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.convertAll(ReloadableJava21ParserVisitor.java:1718)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.visitCompilationUnit(ReloadableJava21ParserVisitor.java:549)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.visitCompilationUnit(ReloadableJava21ParserVisitor.java:73)
+	at com.sun.tools.javac.tree.JCTree$JCCompilationUnit.accept(JCTree.java:623)
+	at com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:92)
+	at org.openrewrite.java.isolated.ReloadableJava21Parser.lambda$parseInputs$0(ReloadableJava21Parser.java:166)
+	... 14 more
+Caused by: org.openrewrite.java.JavaParsingException: Failed to convert for the following cursor stack:--- BEGIN PATH ---
+JCCompilationUnit(sourceFile = src/java.base/share/classes/java/lang/String.java)
+--- END PATH ---
+
+	... 21 more
+Caused by: java.lang.AssertionError: Failed to parse sources or run recipe
+	at org.openrewrite.test.RewriteTest.lambda$defaultExecutionContext$15(RewriteTest.java:633)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.convert(ReloadableJava21ParserVisitor.java:1688)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.convert(ReloadableJava21ParserVisitor.java:1694)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.convertStatements(ReloadableJava21ParserVisitor.java:1800)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.convertStatements(ReloadableJava21ParserVisitor.java:1782)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.visitClass(ReloadableJava21ParserVisitor.java:505)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.visitClass(ReloadableJava21ParserVisitor.java:73)
+	at com.sun.tools.javac.tree.JCTree$JCClassDecl.accept(JCTree.java:855)
+	at com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:92)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.convert(ReloadableJava21ParserVisitor.java:1665)
+	... 20 more
+Caused by: org.openrewrite.java.JavaParsingException: Failed to convert for the following cursor stack:--- BEGIN PATH ---
+JCCompilationUnit(sourceFile = src/java.base/share/classes/java/lang/String.java)
+JCClassDecl(name = String, line = 142)
+--- END PATH ---
+
+	... 29 more
+Caused by: java.lang.IllegalStateException: Expected to be able to find @exception
+	at org.openrewrite.java.isolated.ReloadableJava21JavadocVisitor.sourceBefore(ReloadableJava21JavadocVisitor.java:991)
+	at org.openrewrite.java.isolated.ReloadableJava21JavadocVisitor.visitThrows(ReloadableJava21JavadocVisitor.java:913)
+	at org.openrewrite.java.isolated.ReloadableJava21JavadocVisitor.visitThrows(ReloadableJava21JavadocVisitor.java:52)
+	at com.sun.tools.javac.tree.DCTree$DCThrows.accept(DCTree.java:1282)
+	at com.sun.source.util.DocTreeScanner.scan(DocTreeScanner.java:90)
+	at org.openrewrite.java.isolated.ReloadableJava21JavadocVisitor.convertMultiline(ReloadableJava21JavadocVisitor.java:1089)
+	at org.openrewrite.java.isolated.ReloadableJava21JavadocVisitor.visitDocComment(ReloadableJava21JavadocVisitor.java:342)
+	at org.openrewrite.java.isolated.ReloadableJava21JavadocVisitor.visitDocComment(ReloadableJava21JavadocVisitor.java:52)
+	at com.sun.tools.javac.tree.DCTree$DCDocComment.accept(DCTree.java:358)
+	at com.sun.source.util.DocTreeScanner.scan(DocTreeScanner.java:90)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.formatWithCommentTree(ReloadableJava21ParserVisitor.java:2164)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.convert(ReloadableJava21ParserVisitor.java:1665)
+	... 28 more
+
+[ERROR] com.synexia.rewrite.M3MIndexJniNewStringAdmissionRecipeTest.appliesExactStringOwnerAndReachesFixedPoint -- Time elapsed: 0.174 s <<< FAILURE!
+java.lang.AssertionError: Failed to parse sources or run recipe
+	at org.openrewrite.test.RewriteTest.lambda$defaultExecutionContext$15(RewriteTest.java:633)
+	at org.openrewrite.java.isolated.ReloadableJava21Parser.lambda$parseInputs$0(ReloadableJava21Parser.java:171)
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197)
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1939)
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509)
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499)
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921)
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:682)
+	at org.openrewrite.test.RewriteTest.rewriteRun(RewriteTest.java:285)
+	at org.openrewrite.test.RewriteTest.rewriteRun(RewriteTest.java:133)
+	at com.synexia.rewrite.M3MIndexJniNewStringAdmissionRecipeTest.appliesExactStringOwnerAndReachesFixedPoint(M3MIndexJniNewStringAdmissionRecipeTest.java:42)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+Caused by: java.lang.AssertionError: Failed to parse sources or run recipe
+	at org.openrewrite.test.RewriteTest.lambda$defaultExecutionContext$15(RewriteTest.java:633)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.convert(ReloadableJava21ParserVisitor.java:1688)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.convertAll(ReloadableJava21ParserVisitor.java:1718)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.visitCompilationUnit(ReloadableJava21ParserVisitor.java:549)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.visitCompilationUnit(ReloadableJava21ParserVisitor.java:73)
+	at com.sun.tools.javac.tree.JCTree$JCCompilationUnit.accept(JCTree.java:623)
+	at com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:92)
+	at org.openrewrite.java.isolated.ReloadableJava21Parser.lambda$parseInputs$0(ReloadableJava21Parser.java:166)
+	... 14 more
+Caused by: org.openrewrite.java.JavaParsingException: Failed to convert for the following cursor stack:--- BEGIN PATH ---
+JCCompilationUnit(sourceFile = src/java.base/share/classes/java/lang/String.java)
+--- END PATH ---
+
+	... 21 more
+Caused by: java.lang.AssertionError: Failed to parse sources or run recipe
+	at org.openrewrite.test.RewriteTest.lambda$defaultExecutionContext$15(RewriteTest.java:633)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.convert(ReloadableJava21ParserVisitor.java:1688)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.convert(ReloadableJava21ParserVisitor.java:1694)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.convertStatements(ReloadableJava21ParserVisitor.java:1800)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.convertStatements(ReloadableJava21ParserVisitor.java:1782)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.visitClass(ReloadableJava21ParserVisitor.java:505)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.visitClass(ReloadableJava21ParserVisitor.java:73)
+	at com.sun.tools.javac.tree.JCTree$JCClassDecl.accept(JCTree.java:855)
+	at com.sun.source.util.TreePathScanner.scan(TreePathScanner.java:92)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.convert(ReloadableJava21ParserVisitor.java:1665)
+	... 20 more
+Caused by: org.openrewrite.java.JavaParsingException: Failed to convert for the following cursor stack:--- BEGIN PATH ---
+JCCompilationUnit(sourceFile = src/java.base/share/classes/java/lang/String.java)
+JCClassDecl(name = String, line = 142)
+--- END PATH ---
+
+	... 29 more
+Caused by: java.lang.IllegalStateException: Expected to be able to find @exception
+	at org.openrewrite.java.isolated.ReloadableJava21JavadocVisitor.sourceBefore(ReloadableJava21JavadocVisitor.java:991)
+	at org.openrewrite.java.isolated.ReloadableJava21JavadocVisitor.visitThrows(ReloadableJava21JavadocVisitor.java:913)
+	at org.openrewrite.java.isolated.ReloadableJava21JavadocVisitor.visitThrows(ReloadableJava21JavadocVisitor.java:52)
+	at com.sun.tools.javac.tree.DCTree$DCThrows.accept(DCTree.java:1282)
+	at com.sun.source.util.DocTreeScanner.scan(DocTreeScanner.java:90)
+	at org.openrewrite.java.isolated.ReloadableJava21JavadocVisitor.convertMultiline(ReloadableJava21JavadocVisitor.java:1089)
+	at org.openrewrite.java.isolated.ReloadableJava21JavadocVisitor.visitDocComment(ReloadableJava21JavadocVisitor.java:342)
+	at org.openrewrite.java.isolated.ReloadableJava21JavadocVisitor.visitDocComment(ReloadableJava21JavadocVisitor.java:52)
+	at com.sun.tools.javac.tree.DCTree$DCDocComment.accept(DCTree.java:358)
+	at com.sun.source.util.DocTreeScanner.scan(DocTreeScanner.java:90)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.formatWithCommentTree(ReloadableJava21ParserVisitor.java:2164)
+	at org.openrewrite.java.isolated.ReloadableJava21ParserVisitor.convert(ReloadableJava21ParserVisitor.java:1665)
+	... 28 more
+
+[INFO]
+[INFO] Results:
+[INFO]
+[ERROR] Failures:
+[ERROR]   M3VerbatimJavaPairRecipeTest.driftAndMalformedDescriptorsFailClosed:95 Expected java.lang.IllegalArgumentException to be thrown, but nothing was thrown.
+[ERROR]   M3MIndexJniNewStringAdmissionRecipeTest.appliesExactStringOwnerAndReachesFixedPoint:42 Failed to parse sources or run recipe
+[ERROR]   M3MIndexJniNewStringAdmissionRecipeTest.reviewedPostimageIsAlreadyFixedPoint:53 Failed to parse sources or run recipe
+[ERROR] Errors:
+[ERROR]   M3Java21ConvergenceAdmissionTest.everyTrustedChildIsRegisteredAtFileScopeWithLockedContract:29 » IllegalArgument unregistered M3 recipe: org.openrewrite.java.RemoveUnusedImports
+[ERROR]   M3MIndexStringBulkCharBoundaryRecipeTest.appliesExactJdkOwnerAndReachesFixedPoint:43 » IllegalState LST contains missing or invalid type information
+Identifier->VariableDeclarations->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/Unsafe
+
+Identifier->MethodInvocation->NamedVariable->VariableDeclarations->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/Unsafe
+
+Identifier->VariableDeclarations->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->MethodInvocation->NewClass->NamedVariable->VariableDeclarations->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->ArrayType->VariableDeclarations->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->ArrayType->VariableDeclarations->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->Assignment->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/segments
+
+Identifier->FieldAccess->ControlParentheses->Synchronized->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->MethodInvocation->Block->Synchronized->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->MethodInvocation->Block->Synchronized->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->MethodInvocation->Return->Block->Try->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+
+/*~~(MethodDeclaration type is missing or malformed)~~>*/static MIndexString emptyStorage() {
+    return /*~~(Identifier type is missing or malformed)~~>*/EMPTY_STORAGE;
+}
+
+Identifier->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/EMPTY_STORAGE
+
+Identifier->MethodInvocation->Ternary->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringLatin1
+
+Identifier->MethodInvocation->Ternary->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringUTF16
+
+NewClass->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(NewClass type is missing or malformed)~~>*/new MIndexString(
+               LOCAL,
+               canonicalValue,
+               null,
+               0L,
+               null,
+               null,
+               null,
+               length,
+               coder,
+               canonicalId,
+               hash,
+               structuralHash64)
+
+NewClass->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(NewClass type is missing or malformed)~~>*/new MIndexString(
+               bigEndian ? SHARED_LEXICON : LEXICON,
+               null,
+               Objects.requireNonNull(mappedOwner, "mappedOwner"),
+               mappedAddress,
+               null,
+               null,
+               null,
+               length,
+               String.COMPACT_STRINGS && mappedLatin1(mappedAddress, length, bigEndian) ? String.LATIN1 : String.UTF16,
+               canonicalId,
+               javaHash,
+               structuralHash64)
+
+Identifier->ArrayType->VariableDeclarations->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/Objects.requireNonNull(segments, "segments")
+
+Identifier->VariableDeclarations->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->NamedVariable->VariableDeclarations->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/Objects.requireNonNull(segments[index], "segment")
+
+Identifier->MethodInvocation->Unary->ControlParentheses->If->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+
+MethodInvocation->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/Objects.checkFromIndexSize(offsets[index], lengths[index], atom.length)
+
+Identifier->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+NewClass->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(NewClass type is missing or malformed)~~>*/new MIndexString(
+        JOINED,
+        null,
+        null,
+        0L,
+        segments,
+        offsets,
+        ends,
+        logicalLength,
+        coder,
+        canonicalId,
+        0,
+        structuralHash64)
+
+Identifier->MethodInvocation->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/provisional
+
+NewClass->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(NewClass type is missing or malformed)~~>*/new MIndexString(
+               JOINED,
+               null,
+               null,
+               0L,
+               segments,
+               offsets,
+               ends,
+               logicalLength,
+               coder,
+               canonicalId,
+               hash,
+               structuralHash64)
+
+MethodInvocation->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/join(new String[] {first, second})
+
+Identifier->VariableDeclarations->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->NamedVariable->VariableDeclarations->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/part.mindex()
+
+Identifier->Binary->Binary->ControlParentheses->If->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/storage
+
+Identifier->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/EMPTY_STORAGE
+
+Identifier->ArrayType->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->NewArray->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->VariableDeclarations->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->NamedVariable->VariableDeclarations->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/part.mindex()
+
+Identifier->Binary->Binary->ControlParentheses->If->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/storage
+
+MethodInvocation->Assignment->Block->ForLoop->Block->If->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/addNormalized(
+                           atoms,
+                           atomOffsets,
+                           atomLengths,
+                           count,
+                           storage.segments[index],
+                           storage.offsets[index],
+                           take)
+
+Identifier->MethodInvocation->Assignment->Block->Else->If->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/storage
+
+MethodInvocation->Assignment->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/java.util.Arrays.copyOf(atoms, count)
+
+Identifier->MethodInvocation->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/source.mindex()
+
+Identifier->Binary->ControlParentheses->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/storage
+
+Identifier->MethodInvocation->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/storage
+
+Identifier->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/this
+
+Identifier->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/EMPTY_STORAGE
+
+Identifier->MethodInvocation->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->NewArray->MethodInvocation->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->ArrayType->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->NewArray->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->VariableDeclarations->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->MethodInvocation->Assignment->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+
+Identifier->MethodInvocation->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/EMPTY_STORAGE
+
+Identifier->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/this
+
+Identifier->ArrayType->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->NewArray->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->Assignment->Block->ForLoop->Block->If->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation#name#type is not the same instance as the MethodType of MethodInvocation.)~~>*/addNormalized(
+                           atoms,
+                           atomOffsets,
+                           atomLengths,
+                           at,
+                           segments[segment],
+                           offsets[segment],
+                           ends[segment] - previous)
+
+MethodInvocation->Assignment->Block->Else->If->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation#name#type is not the same instance as the MethodType of MethodInvocation.)~~>*/addNormalized(atoms, atomOffsets, atomLengths, at, this, 0, length)
+
+Identifier->MethodInvocation->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->MethodInvocation->Ternary->Case->Block->SwitchExpression->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringLatin1
+
+Identifier->MethodInvocation->Ternary->Case->Block->SwitchExpression->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringUTF16
+
+MethodInvocation->Yield->Block->Case->Block->SwitchExpression->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/segments[segment].charAt(offsets[segment] + index - previous)
+
+Identifier->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/other.mindex()
+
+Identifier->Binary->ControlParentheses->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/that
+
+Identifier->MethodInvocation->Block->If->Block->Case->Block->Switch->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringLatin1
+
+Identifier->MethodInvocation->Block->Else->If->Block->Case->Block->Switch->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringUTF16
+
+MethodInvocation->Block->WhileLoop->Block->Case->Block->Switch->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/segments[segment].getChars(atomStart, atomStart + limit - source, dst, target)
+
+Identifier->MethodInvocation->Block->Else->If->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringUTF16
+
+Identifier->ArrayType->VariableDeclarations->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->VariableDeclarations->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->MethodInvocation->Binary->Assignment->ForLoop->Block->If->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+
+Identifier->MethodInvocation->Binary->ControlParentheses->If->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/UNSAFE
+
+Identifier->MethodInvocation->Binary->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/UNSAFE
+
+Identifier->MethodInvocation->Binary->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/UNSAFE
+
+Identifier->ArrayType->VariableDeclarations->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->VariableDeclarations->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->MethodInvocation->Unary->ControlParentheses->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+
+MethodInvocation->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/Objects.checkFromIndexSize(offset, length, atom.length)
+
+Identifier->Binary->Binary->Binary->ControlParentheses->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+
+Identifier->Assignment->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+[ERROR]   M3MIndexStringBulkCharBoundaryRecipeTest.reviewedPostimageIsAlreadyFixedPoint:54 » IllegalState LST contains missing or invalid type information
+Identifier->VariableDeclarations->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/Unsafe
+
+Identifier->MethodInvocation->NamedVariable->VariableDeclarations->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/Unsafe
+
+Identifier->VariableDeclarations->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->MethodInvocation->NewClass->NamedVariable->VariableDeclarations->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->ArrayType->VariableDeclarations->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->ArrayType->VariableDeclarations->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->Assignment->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/segments
+
+Identifier->FieldAccess->ControlParentheses->Synchronized->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->MethodInvocation->Block->Synchronized->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->MethodInvocation->Block->Synchronized->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->MethodInvocation->Return->Block->Try->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+
+/*~~(MethodDeclaration type is missing or malformed)~~>*/static MIndexString emptyStorage() {
+    return /*~~(Identifier type is missing or malformed)~~>*/EMPTY_STORAGE;
+}
+
+Identifier->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/EMPTY_STORAGE
+
+Identifier->MethodInvocation->Ternary->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringLatin1
+
+Identifier->MethodInvocation->Ternary->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringUTF16
+
+NewClass->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(NewClass type is missing or malformed)~~>*/new MIndexString(
+               LOCAL,
+               canonicalValue,
+               null,
+               0L,
+               null,
+               null,
+               null,
+               length,
+               coder,
+               canonicalId,
+               hash,
+               structuralHash64)
+
+NewClass->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(NewClass type is missing or malformed)~~>*/new MIndexString(
+               bigEndian ? SHARED_LEXICON : LEXICON,
+               null,
+               Objects.requireNonNull(mappedOwner, "mappedOwner"),
+               mappedAddress,
+               null,
+               null,
+               null,
+               length,
+               String.COMPACT_STRINGS && mappedLatin1(mappedAddress, length, bigEndian) ? String.LATIN1 : String.UTF16,
+               canonicalId,
+               javaHash,
+               structuralHash64)
+
+Identifier->ArrayType->VariableDeclarations->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/Objects.requireNonNull(segments, "segments")
+
+Identifier->VariableDeclarations->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->NamedVariable->VariableDeclarations->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/Objects.requireNonNull(segments[index], "segment")
+
+Identifier->MethodInvocation->Unary->ControlParentheses->If->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+
+MethodInvocation->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/Objects.checkFromIndexSize(offsets[index], lengths[index], atom.length)
+
+Identifier->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+NewClass->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(NewClass type is missing or malformed)~~>*/new MIndexString(
+        JOINED,
+        null,
+        null,
+        0L,
+        segments,
+        offsets,
+        ends,
+        logicalLength,
+        coder,
+        canonicalId,
+        0,
+        structuralHash64)
+
+Identifier->MethodInvocation->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/provisional
+
+NewClass->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(NewClass type is missing or malformed)~~>*/new MIndexString(
+               JOINED,
+               null,
+               null,
+               0L,
+               segments,
+               offsets,
+               ends,
+               logicalLength,
+               coder,
+               canonicalId,
+               hash,
+               structuralHash64)
+
+MethodInvocation->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/join(new String[] {first, second})
+
+Identifier->VariableDeclarations->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->NamedVariable->VariableDeclarations->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/part.mindex()
+
+Identifier->Binary->Binary->ControlParentheses->If->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/storage
+
+Identifier->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/EMPTY_STORAGE
+
+Identifier->ArrayType->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->NewArray->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->VariableDeclarations->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->NamedVariable->VariableDeclarations->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/part.mindex()
+
+Identifier->Binary->Binary->ControlParentheses->If->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/storage
+
+MethodInvocation->Assignment->Block->ForLoop->Block->If->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/addNormalized(
+                           atoms,
+                           atomOffsets,
+                           atomLengths,
+                           count,
+                           storage.segments[index],
+                           storage.offsets[index],
+                           take)
+
+Identifier->MethodInvocation->Assignment->Block->Else->If->Block->ForEachLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/storage
+
+MethodInvocation->Assignment->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/java.util.Arrays.copyOf(atoms, count)
+
+Identifier->MethodInvocation->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/source.mindex()
+
+Identifier->Binary->ControlParentheses->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/storage
+
+Identifier->MethodInvocation->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/storage
+
+Identifier->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/this
+
+Identifier->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/EMPTY_STORAGE
+
+Identifier->MethodInvocation->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->NewArray->MethodInvocation->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->ArrayType->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->NewArray->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->VariableDeclarations->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->MethodInvocation->Assignment->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+
+Identifier->MethodInvocation->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/EMPTY_STORAGE
+
+Identifier->Return->Block->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/this
+
+Identifier->ArrayType->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->NewArray->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->Assignment->Block->ForLoop->Block->If->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation#name#type is not the same instance as the MethodType of MethodInvocation.)~~>*/addNormalized(
+                           atoms,
+                           atomOffsets,
+                           atomLengths,
+                           at,
+                           segments[segment],
+                           offsets[segment],
+                           ends[segment] - previous)
+
+MethodInvocation->Assignment->Block->Else->If->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation#name#type is not the same instance as the MethodType of MethodInvocation.)~~>*/addNormalized(atoms, atomOffsets, atomLengths, at, this, 0, length)
+
+Identifier->MethodInvocation->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexStringPool
+
+Identifier->MethodInvocation->Ternary->Case->Block->SwitchExpression->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringLatin1
+
+Identifier->MethodInvocation->Ternary->Case->Block->SwitchExpression->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringUTF16
+
+MethodInvocation->Yield->Block->Case->Block->SwitchExpression->Return->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/segments[segment].charAt(offsets[segment] + index - previous)
+
+Identifier->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+MethodInvocation->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/other.mindex()
+
+Identifier->Binary->ControlParentheses->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/that
+
+Identifier->MethodInvocation->Block->If->Block->Case->Block->Switch->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringLatin1
+
+Identifier->MethodInvocation->Block->Else->If->Block->Case->Block->Switch->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringUTF16
+
+Identifier->MethodInvocation->Binary->NamedVariable->VariableDeclarations->Block->ForLoop->Block->Case->Block->Switch->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/UNSAFE
+
+Identifier->MethodInvocation->Binary->NamedVariable->VariableDeclarations->Block->ForLoop->Block->Case->Block->Switch->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/UNSAFE
+
+MethodInvocation->Block->WhileLoop->Block->Case->Block->Switch->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/segments[segment].getChars(atomBegin, atomBegin + take, dst, target)
+
+Identifier->MethodInvocation->Block->Else->If->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/StringUTF16
+
+Identifier->ArrayType->VariableDeclarations->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->VariableDeclarations->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->MethodInvocation->Binary->Assignment->ForLoop->Block->If->Block->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+
+Identifier->MethodInvocation->Binary->ControlParentheses->If->ForLoop->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/UNSAFE
+
+Identifier->MethodInvocation->Binary->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/UNSAFE
+
+Identifier->MethodInvocation->Binary->NamedVariable->VariableDeclarations->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/UNSAFE
+
+Identifier->ArrayType->VariableDeclarations->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->VariableDeclarations->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/MIndexString
+
+Identifier->MethodInvocation->Unary->ControlParentheses->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+
+MethodInvocation->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(MethodInvocation type is missing or malformed)~~>*/Objects.checkFromIndexSize(offset, length, atom.length)
+
+Identifier->Binary->Binary->Binary->ControlParentheses->If->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+
+Identifier->Assignment->Block->MethodDeclaration->Block->ClassDeclaration->CompilationUnit
+/*~~(Identifier type is missing or malformed)~~>*/atom
+[INFO]
+[ERROR] Tests run: 133, Failures: 3, Errors: 3, Skipped: 0
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for M3JDK21 Maven control reactor 0.1.0-SNAPSHOT:
+[INFO]
+[INFO] migration-recipes .................................. FAILURE [01:33 min]
+[INFO] M3JDK21 Maven control reactor ...................... SKIPPED
+[INFO] M3 A3 absorption tooling ........................... SKIPPED
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:33 min
+[INFO] Finished at: 2026-10-05T10:29:27+08:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.2.5:test (default-test) on project migration-recipes: There are test failures.
+[ERROR]
+[ERROR] Please refer to /workspace/scratch/18b9e6a1dfc0/m3jdk21/m3/tooling/migration-recipes/target/surefire-reports for the individual test results.
+[ERROR] Please refer to dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR]
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR]
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

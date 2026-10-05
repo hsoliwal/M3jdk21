@@ -1,0 +1,14 @@
+{
+  "initial_ci_head": "e17fb9f665203005be7038f814cba49193e69bcb",
+  "initial_ci_run": 37254813807,
+  "initial_ci_job": 111589512966,
+  "san_final_junit_tests": 5,
+  "retained_a3_test_methods": 6,
+  "san_final_passed": true,
+  "broader_migration_recipe_tests": 133,
+  "broader_failures": 3,
+  "broader_errors": 3,
+  "broader_skipped": 0,
+  "broader_gate_passed": false,
+  "production_promotion": false
+}
