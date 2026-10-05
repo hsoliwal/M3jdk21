@@ -85,7 +85,7 @@ final class TQTest {
         var javac = new ArrayList<>(List.of(JAVAC,"-source","21","-target","21","-proc:none","-Xlint:all","-Werror",
                 "--patch-module","java.base="+PATCH,"--add-exports","java.base/jdk.internal.mindex=ALL-UNNAMED",
                 "-h",OUT.resolve("headers").toString(),"-d",PROBES.toString(),GENERATED.resolve(TEST+"M3TQTest.java").toString(),
-                ROOT.resolve(TEST+"MIndexMappedStringBackingTest.java").toString(),ROOT.resolve(TEST+"MapFactsTest.java").toString()));
+                ROOT.resolve(TEST+"M3MappedStringBackingTest.java").toString(),ROOT.resolve(TEST+"MapFactsTest.java").toString()));
         execute(javac,"compile-probes.log",true);
         compileNative(OUT,false,"compile-native.log");
     }
@@ -176,7 +176,7 @@ final class TQTest {
     }
 
     @Test void unchangedMappedRegressions() throws Exception {
-        execute(runtime(PATCH,OUT,"MIndexMappedStringBackingTest"),"original-mapped.log",true);
+        execute(runtime(PATCH,OUT,"M3MappedStringBackingTest"),"original-mapped.log",true);
         execute(runtime(PATCH,OUT,"MapFactsTest"),"original-facts.log",true);
     }
 
@@ -202,8 +202,8 @@ final class TQTest {
         Files.createDirectories(output);
         execute(List.of(JAVAC,"-source","21","-target","21","-proc:none","-implicit:none","-Xlint:all","-Werror",
                 "--patch-module","java.base="+ROOT.resolve(PRODUCT)+java.io.File.pathSeparator+kernel.getParent(),
-                "-d",output.toString(),kernel.toString(),ROOT.resolve(PRODUCT+"jdk/internal/mindex/MIndexStringBacking.java").toString(),
-                ROOT.resolve(PRODUCT+"jdk/internal/mindex/MIndexMappedStringBacking.java").toString()),log,true);
+                "-d",output.toString(),kernel.toString(),ROOT.resolve(PRODUCT+"jdk/internal/mindex/M3StringBacking.java").toString(),
+                ROOT.resolve(PRODUCT+"jdk/internal/mindex/M3MappedStringBacking.java").toString()),log,true);
     }
 
     private static void compileNative(Path directory,boolean mutant,String log) throws Exception {
