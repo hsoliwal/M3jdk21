@@ -1688,16 +1688,9 @@ public final class String
      */
     public int codePointCount(int beginIndex, int endIndex) {
         Objects.checkFromToIndex(beginIndex, endIndex, length());
-        if (m3() != null) {
-            int count = 0;
-            for (int index = beginIndex; index < endIndex; count++) {
-                char first = charAt(index++);
-                if (Character.isHighSurrogate(first) && index < endIndex
-                        && Character.isLowSurrogate(charAt(index))) {
-                    index++;
-                }
-            }
-            return count;
+        M3String storage = m3();
+        if (storage != null) {
+            return storage.slice(beginIndex, endIndex).facts().codePointCount;
         }
         if (isLatin1()) {
             return endIndex - beginIndex;
