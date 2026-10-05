@@ -1,0 +1,2 @@
+/* M3JDK21 migration tombstone. Runtime owner: java.lang.M3StringPool in M3StringPool.java. */
+package java.lang;
