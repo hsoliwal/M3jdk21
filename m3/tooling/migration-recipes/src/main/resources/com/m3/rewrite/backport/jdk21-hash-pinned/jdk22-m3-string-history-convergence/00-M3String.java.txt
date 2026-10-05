@@ -14,6 +14,7 @@ import java.nio.charset.CharsetEncoder;
 import java.nio.charset.CoderResult;
 import java.nio.charset.CodingErrorAction;
 import java.nio.charset.StandardCharsets;
+import java.nio.charset.UnmappableCharacterException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
@@ -365,6 +366,92 @@ final class M3String implements CharSequence {
             throw new InternalError("M3String single-byte precompute length mismatch");
         }
         return output;
+    }
+
+    byte[] encodeNoRepl(Charset charset) {
+        Charset checked = Objects.requireNonNull(charset, "charset");
+        if (checked.equals(StandardCharsets.UTF_8)) {
+            return encodeUtf8NoRepl();
+        }
+        if (checked.equals(StandardCharsets.ISO_8859_1)) {
+            byte[] output = new byte[length()];
+            for (int index = 0; index < length(); index++) {
+                char unit = charAt(index);
+                if (unit > 0xff) throw unmappable(index, 1);
+                output[index] = (byte) unit;
+            }
+            return output;
+        }
+        if (checked.equals(StandardCharsets.US_ASCII) && facts().ascii) {
+            byte[] output = new byte[length()];
+            for (int index = 0; index < length(); index++) {
+                output[index] = (byte) charAt(index);
+            }
+            return output;
+        }
+        return encodeWithEncoderNoRepl(checked);
+    }
+
+    byte[] encodeUtf8NoRepl() {
+        M3StringFacts prepared = facts();
+        byte[] output = new byte[prepared.utf8Length];
+        int target = 0;
+        for (int index = 0; index < length(); index++) {
+            char unit = charAt(index);
+            if (unit < 0x80) {
+                output[target++] = (byte) unit;
+            } else if (unit < 0x800) {
+                output[target++] = (byte) (0xc0 | (unit >>> 6));
+                output[target++] = (byte) (0x80 | (unit & 0x3f));
+            } else if (Character.isHighSurrogate(unit)
+                    && index + 1 < length()
+                    && Character.isLowSurrogate(charAt(index + 1))) {
+                int codePoint = Character.toCodePoint(unit, charAt(++index));
+                output[target++] = (byte) (0xf0 | (codePoint >>> 18));
+                output[target++] = (byte) (0x80 | ((codePoint >>> 12) & 0x3f));
+                output[target++] = (byte) (0x80 | ((codePoint >>> 6) & 0x3f));
+                output[target++] = (byte) (0x80 | (codePoint & 0x3f));
+            } else if (Character.isSurrogate(unit)) {
+                throw unmappable(index, 1);
+            } else {
+                output[target++] = (byte) (0xe0 | (unit >>> 12));
+                output[target++] = (byte) (0x80 | ((unit >>> 6) & 0x3f));
+                output[target++] = (byte) (0x80 | (unit & 0x3f));
+            }
+        }
+        if (target != output.length) {
+            throw new InternalError("M3String UTF-8 no-replacement length mismatch");
+        }
+        return output;
+    }
+
+    private byte[] encodeWithEncoderNoRepl(Charset charset) {
+        CharsetEncoder encoder = charset.newEncoder();
+        int length = length();
+        int capacity = (int) (length * (double) encoder.maxBytesPerChar());
+        byte[] output = new byte[capacity];
+        if (length == 0) return output;
+
+        char[] chars = new char[length];
+        getChars(0, length, chars, 0);
+        ByteBuffer bytes = ByteBuffer.wrap(output);
+        CharBuffer input = CharBuffer.wrap(chars);
+        try {
+            CoderResult result = encoder.encode(input, bytes, true);
+            if (!result.isUnderflow()) result.throwException();
+            result = encoder.flush(bytes);
+            if (!result.isUnderflow()) result.throwException();
+        } catch (CharacterCodingException failure) {
+            throw new IllegalArgumentException(failure);
+        }
+        return bytes.position() == output.length
+                ? output
+                : Arrays.copyOf(output, bytes.position());
+    }
+
+    private static IllegalArgumentException unmappable(int offset, int length) {
+        String message = "malformed input off : " + offset + ", length : " + length;
+        return new IllegalArgumentException(message, new UnmappableCharacterException(length));
     }
 
     private byte[] encodeWithEncoder(Charset charset) {
