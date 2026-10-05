@@ -39,6 +39,10 @@ jobs:
         run: |
           mvn -B -ntp -f m3/tooling/ci-repair/pom.xml verify
           python3 m3/tooling/ci-repair/verify-plan.py
+      - name: Verify image qualification recipe
+        run: |
+          mvn -B -ntp -f m3/tooling/image-gates/pom.xml verify
+          python3 m3/tooling/image-gates/verify-plan.py
       - name: Verify OpenRewrite convergence DAG
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
       - name: Build and exercise immutable foundation

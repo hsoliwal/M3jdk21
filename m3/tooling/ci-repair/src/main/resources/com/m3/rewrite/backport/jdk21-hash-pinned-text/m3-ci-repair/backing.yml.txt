@@ -22,16 +22,19 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '20'
+          java-version: '21.0.8'
       - name: Install build prerequisites
         run: |
           sudo apt-get update
           sudo apt-get install -y autoconf make gcc g++ zip unzip \
             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
             libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+      - name: Get JTReg
+        id: jtreg
+        uses: ./.github/actions/get-jtreg
       - name: Configure
-        run: bash configure --with-debug-level=fastdebug --with-jvm-variants=server
-      - name: Build java.base
-        run: make java.base-java-only
+        run: bash configure --with-debug-level=fastdebug --with-jvm-variants=server --with-jtreg=${{ steps.jtreg.outputs.path }}
+      - name: Build complete image with prerequisites
+        run: make JOBS=2 images
       - name: Run MIndex String backing jtreg
         run: make test TEST="test/jdk/java/lang/String/MIndexMappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java"

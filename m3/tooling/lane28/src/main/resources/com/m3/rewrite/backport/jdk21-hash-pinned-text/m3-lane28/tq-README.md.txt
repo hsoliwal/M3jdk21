@@ -113,9 +113,12 @@ the exact executed boundary, counters, tools, source hashes and remaining work.
 Local runtime evidence patches the three internal classes into a stock Java 21
 `java.base`; it is not a rebuilt M3JDK image pass. `.github/workflows/m3-tq.yml`
 separately builds the complete fastdebug image, then runs `verify-image.sh`
-without patch-module in seven modes, including M3-enabled C1/C2 and noncompact
-strings. That gate must run against the PR tree; a queued or absent job is not a
-pass. The image script also requires JNI checks and compiled kernel evidence.
+without patch-module in four normal modes plus three M3 interpreter-boundary
+requests (C1, C2 and noncompact C2). The current `UseM3StringStorage` guard
+forces interpreted execution for these requests; they are not JIT evidence. That gate must run against the PR tree; a queued or absent job is not a
+pass. The image script requires JNI checks, actual compiled kernels for normal
+C1/C2, and interpreted mode with zero compiled methods for M3 requests.
+See `../image-gates/README.md` for captured full-image evidence and scope.
 
 This bounded crate does not waive the existing full migration-recipes reactor,
 99% coverage gate, complete jtreg/TCK, GC/CDS/JVMTI/JFR, platform, memory and

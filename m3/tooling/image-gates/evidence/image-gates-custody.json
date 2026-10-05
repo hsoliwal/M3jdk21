@@ -1,0 +1,56 @@
+{
+  "schema": "m3.image-gates-custody/1",
+  "plan_sha256": "88fb01126653d658325491dde50a08810252845f81669657a7148388c88e6d66",
+  "generated_outputs": 29,
+  "events": [
+    {
+      "mode": "check",
+      "recipe": "image-gates-1",
+      "plan_sha256": "88fb01126653d658325491dde50a08810252845f81669657a7148388c88e6d66",
+      "state": "before",
+      "files": 29,
+      "writes": 0
+    },
+    {
+      "mode": "apply",
+      "recipe": "image-gates-1",
+      "plan_sha256": "88fb01126653d658325491dde50a08810252845f81669657a7148388c88e6d66",
+      "state": "after",
+      "files": 29,
+      "writes": 29
+    },
+    {
+      "mode": "apply",
+      "recipe": "image-gates-1",
+      "plan_sha256": "88fb01126653d658325491dde50a08810252845f81669657a7148388c88e6d66",
+      "state": "after",
+      "files": 29,
+      "writes": 0
+    },
+    {
+      "mode": "rollback",
+      "recipe": "image-gates-1",
+      "plan_sha256": "88fb01126653d658325491dde50a08810252845f81669657a7148388c88e6d66",
+      "state": "before",
+      "files": 29,
+      "writes": 29
+    },
+    {
+      "mode": "rollback",
+      "recipe": "image-gates-1",
+      "plan_sha256": "88fb01126653d658325491dde50a08810252845f81669657a7148388c88e6d66",
+      "state": "before",
+      "files": 29,
+      "writes": 0
+    },
+    {
+      "refusal": "destination drift"
+    },
+    {
+      "refusal": "mixed states"
+    },
+    {
+      "refusal": "dependency drift"
+    }
+  ]
+}

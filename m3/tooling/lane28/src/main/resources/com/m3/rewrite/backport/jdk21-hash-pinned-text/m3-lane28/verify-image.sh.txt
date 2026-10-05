@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: Apache-2.0
 # Linux image qualification. No patch-module: use the built fork's java.base.
+# m3-c1/c2 names describe requests: M3 String storage must force interpretation.
 set -euo pipefail
 root=$(cd "$(dirname "$0")/../../.." && pwd)
 : "${M3_TEST_JDK:?Set the absolute path of the freshly built fastdebug M3JDK image}"
@@ -46,16 +47,13 @@ for mode in interpreter mixed c1 c2 m3-c1 m3-c2 m3-c2-nocompact; do
   done
   grep -q 'maintainedCounts=true' "$out/$mode-M3Lane28Test.log"
   if [[ -n "$compiler" ]]; then
-    python3 - "$out/$mode-compilation.xml" "$compiler" <<'PY'
-import pathlib, sys
-lines = pathlib.Path(sys.argv[1]).read_text().splitlines()
-assert any("<nmethod" in line and "compiler='" + sys.argv[2] + "'" in line
-           and "method='jdk.internal.mindex.M3BitLane28 " in line for line in lines), \
-    "No compiled Lane28 kernel evidence"
-PY
+    evidence_flags=()
+    if [[ "$mode" == m3-* ]]; then evidence_flags+=(--m3-interpreter); fi
+    python3 "$root/m3/tooling/image-gates/check-log.py" \
+      "$out/$mode-compilation.xml" "$compiler" jdk.internal.mindex.M3BitLane28 "${evidence_flags[@]}"
   fi
 done
-echo 'PASS: bounded fork-image Lane28 and native peer tests in seven modes'
+echo 'PASS: bounded fork-image Lane28 and native peer tests across four normal modes and three M3 interpreter-boundary requests'
 timeout 240 "$image/bin/java" -Xbatch -XX:-TieredCompilation -XX:CompileThreshold=100 \
   --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
   -cp "$out/classes" M3Lane28Cost > "$out/cost.log" 2>&1
