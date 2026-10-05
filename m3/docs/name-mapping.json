@@ -5336,5 +5336,7 @@
         "observation": "TQ is a caller-owned precompute kernel, not a production JNI accelerator or proof of complete MIndex migration."
       }
     ]
-  }
+  },
+  "precompute_port_map": "m3/docs/synexia-string-precompute-port-map.tsv",
+  "precompute_scope_rule": "Only String-semantic and String-search donor precompute maps into M3JDK String/runtime internals; Synexia language, semantic, DAG, probabilistic and reasoning precompute must not be transplanted into java.lang.String."
 }
