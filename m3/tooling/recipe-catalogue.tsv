@@ -11,3 +11,4 @@ m3-jdk8374808-keystore-instant	com.m3.rewrite.backport.M3Jdk8374808BackportRecip
 m3-jdk8368692-password-systemin	com.m3.rewrite.backport.M3Jdk8368692PasswordSystemInBackportRecipe	MODULE	JAVA21_COMPATIBLE_ADDITIVE_SECURITY_POLICY	CANDIDATE_UNVERIFIED	PENDING_CI
 m3-jdk8367584-jfr-options-help	com.m3.rewrite.backport.M3Jdk8367584JfrOptionsHelpBackportRecipe	MODULE	JAVA21_COMPATIBLE_ADDITIVE_JFR_TOOLING_HELP	CANDIDATE_UNVERIFIED	PENDING_CI
 m3-jep458-multifile-source-launcher	com.m3.rewrite.backport.M3Jep458BackportRecipe	LIBRARY_API	EXPLICIT_CONTRACT_CHANGE	CANDIDATE_UNVERIFIED	PENDING_CI
+m3-jep493-runtimelink-leaf	com.m3.rewrite.backport.M3Jep493RuntimeLinkLeafRecipe	MODULE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
