@@ -81,6 +81,16 @@ The first catalogue seed covers the families already discussed in M3 work:
 Existing JDK owners are preferred. A new atom is admitted only when the repository has a real
 contract/owner gap and the independent implementation can be proved against the JDK oracle.
 
+### Fuzzy-search evidence closure
+
+`ALG-LEV` now has the complete tri-platform reference denominator for the unit-cost edit-distance
+family: LeetCode Edit Distance, HackerRank Basic Spell Checker, and GeeksforGeeks Edit Distance.
+Apache Lucene remains Apache-2.0 GitHub reference evidence for Levenshtein-automaton mechanics.
+
+That closes the evidence gap only. The row remains `REFERENCE_ONLY` and moves to
+`hold-contract`: A3 must inventory a real JDK fuzzy/string owner and exact public/internal contract
+before proposing any implementation or JNI/native acceleration.
+
 ## Recipe-first rule
 
 The Java control-plane change is delivered through one source-sealed OpenRewrite ScanningRecipe.
