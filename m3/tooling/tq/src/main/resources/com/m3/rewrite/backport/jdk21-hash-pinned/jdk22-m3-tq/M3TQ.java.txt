@@ -240,7 +240,7 @@ public final class M3TQ {
    * @param maxUtf16Units maximum admitted range length
    * @return caller-owned immutable facts with no retained backing reference
    */
-  public static Facts precompute(MIndexStringBacking backing, long id,
+  public static Facts precompute(M3StringBacking backing, long id,
       int from, int to, int maxUtf16Units) {
     Objects.requireNonNull(backing, "backing");
     return precompute(new CharSequence() {
