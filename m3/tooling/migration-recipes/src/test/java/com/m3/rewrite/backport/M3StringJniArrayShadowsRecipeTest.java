@@ -69,7 +69,6 @@ final class M3StringJniArrayShadowsRecipeTest {
     private static List<SourceFile> javaAfter() {
         return List.of(
                 java("src/java.base/share/classes/java/lang/M3String.java", "00-M3String.java.txt"),
-                java("src/java.base/share/classes/java/lang/String.java", "01-String.java.txt"),
                 java(
                         "test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java",
                         "02-M3StringPrecomputeSearchTest.java.txt"));
@@ -88,6 +87,7 @@ final class M3StringJniArrayShadowsRecipeTest {
                 text(
                         "m3/runtime-integration/tests/M3StringInvariant.java",
                         "02-M3StringInvariant.java.txt"),
+                text("src/java.base/share/classes/java/lang/String.java", "08-String.java.txt"),
                 text("src/java.base/share/native/libjava/String.c", "00-String.c.txt"));
     }
 
