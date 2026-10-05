@@ -69,6 +69,18 @@ static jmethodID m3_method(
 }
 
 JNIEXPORT jbyteArray JNICALL
+Java_java_lang_M3String_nativeAllocateByteShadow(
+        JNIEnv *env, jclass ignored, jint length)
+{
+    if (length < 0) {
+        m3_throw(env, "java/lang/NegativeArraySizeException",
+                 "negative M3 byte shadow length");
+        return NULL;
+    }
+    return (*env)->NewByteArray(env, length);
+}
+
+JNIEXPORT jbyteArray JNICALL
 Java_java_lang_M3String_nativeByteShadow(
         JNIEnv *env, jclass ignored, jobject value, jint start, jint length, jbyte coder)
 {
