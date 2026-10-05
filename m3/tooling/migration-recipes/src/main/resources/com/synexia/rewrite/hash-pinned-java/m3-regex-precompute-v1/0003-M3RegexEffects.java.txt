@@ -1,0 +1,159 @@
+// SPDX-License-Identifier: Apache-2.0
+package jdk.internal.mindex;
+
+import java.util.Objects;
+
+/**
+ * Bounded, capture-free effects derived from the existing regex program's anchored ASCII DFA.
+ *
+ * <p>This is an opt-in MATCHES projection. A null preparation/effect means the original matcher
+ * remains responsible. The effect has no capture or positional-assertion semantics; a prepared
+ * result must be checked by {@link Machine#matchesVerified(M3RegexEffect, CharSequence)} before
+ * it is used as final truth for caller-supplied input.
+ */
+public final class M3RegexEffects {
+  // A deliberately small construction budget: effect preparation costs O(DFA states * UTF-16 units).
+  private static final long MAX_TRANSITION_STEPS = 8_000_000L;
+  private static final int ASCII_CARDINALITY = 128;
+  private static final String FINGERPRINT_PREFIX = "M_INDEX_REGEX_ASCII_MATCHES_EFFECT_V1:";
+
+  private M3RegexEffects() {}
+
+  /** Admit the existing assertion-free DFA for capture-free Boolean full matching. */
+  public static Machine tryPrepare(M3RegexProgram program) {
+    return tryPrepare(program, null);
+  }
+
+  /** Admit with the caller's progress and cancellation monitor. */
+  public static Machine tryPrepare(M3RegexProgram program, M3RegexProgress monitor) {
+    Objects.requireNonNull(program, "program");
+    M3RegexProgress progress = monitor == null ? M3RegexProgress.noop() : monitor;
+    progress.checkCanceled();
+    if (program.captureCount() != 0) return null;
+    M3RegexProgram.AsciiDfaImage image = program.anchoredAsciiDfaImage();
+    if (image == null) return null;
+    // Both the automaton and its semantic mode are bound to the effect's identity.
+    String fingerprint = FINGERPRINT_PREFIX + program.image().rootHash();
+    progress.checkCanceled();
+    return new Machine(program, fingerprint, image);
+  }
+
+  /** One immutable program-specific effect builder and projection evaluator. */
+  public static final class Machine {
+    private final M3RegexProgram program;
+    private final String fingerprint;
+    private final short[] transitions;
+    private final byte[] accepting;
+    private final int startState;
+    private final int sinkState;
+
+    private Machine(
+        M3RegexProgram program, String fingerprint,
+        M3RegexProgram.AsciiDfaImage image) {
+      this.program = program;
+      this.fingerprint = fingerprint;
+      this.transitions = image.transitions();
+      this.accepting = image.accepting();
+      this.startState = image.startState();
+      this.sinkState = accepting.length;
+    }
+
+    public String programFingerprint() {
+      return fingerprint;
+    }
+
+    public int stateCount() {
+      return sinkState + 1;
+    }
+
+    /** Identity for the empty fragment, including the absorbing dead state. */
+    public M3RegexEffect identity() {
+      int[] next = new int[stateCount()];
+      for (int state = 0; state < next.length; state++) next[state] = state;
+      return new M3RegexEffect(fingerprint, next, 0);
+    }
+
+    /**
+     * Compute a transition for every possible incoming DFA state. A non-ASCII unit or a work
+     * budget miss returns null so callers can use the unmodified regex matcher.
+     */
+    public M3RegexEffect tryEffect(CharSequence fragment) {
+      return tryEffect(fragment, null);
+    }
+
+    public M3RegexEffect tryEffect(CharSequence fragment, M3RegexProgress monitor) {
+      Objects.requireNonNull(fragment, "fragment");
+      M3RegexProgress progress = monitor == null ? M3RegexProgress.noop() : monitor;
+      progress.checkCanceled();
+      int length = fragment.length();
+      if ((long) stateCount() * length > MAX_TRANSITION_STEPS) return null;
+
+      // One snapshot prevents changing CharSequence implementations from assigning different
+      // characters to different incoming states during the same effect construction.
+      char[] units = new char[length];
+      progress.beginTask("prepare MIndex regex effect", stateCount());
+      try {
+        for (int offset = 0; offset < length; offset++) {
+          if ((offset & 255) == 0) progress.checkCanceled();
+          char unit = fragment.charAt(offset);
+          if (unit >= ASCII_CARDINALITY) return null;
+          units[offset] = unit;
+        }
+        int[] next = new int[stateCount()];
+        for (int source = 0; source < sinkState; source++) {
+          if ((source & 31) == 0) progress.checkCanceled();
+          int state = source;
+          for (char unit : units) {
+            int target = transitions[state * ASCII_CARDINALITY + unit];
+            if (target < 0) {
+              state = sinkState;
+              break;
+            }
+            state = target;
+          }
+          next[source] = state;
+          progress.worked(1);
+        }
+        next[sinkState] = sinkState;
+        progress.worked(1);
+        progress.checkCanceled();
+        return new M3RegexEffect(fingerprint, next, length);
+      } finally {
+        progress.done();
+      }
+    }
+
+    /**
+     * Raw effect projection. Effects are public value objects, so a caller could forge transitions
+     * while retaining the fingerprint. Do not use this result to reject candidates or as final
+     * regex truth; use matchesVerified with the complete source instead.
+     */
+    public boolean effectMatchesUnchecked(M3RegexEffect effect) {
+      requireCompatible(effect);
+      int finalState = effect.apply(startState);
+      return finalState != sinkState && accepting[finalState] != 0;
+    }
+
+    /** Final truth remains with the original M3RegexProgram, including its input checks. */
+    public boolean matchesVerified(M3RegexEffect effect, CharSequence fullInput) {
+      requireCompatible(effect);
+      Objects.requireNonNull(fullInput, "fullInput");
+      if (effect.logicalLength() != fullInput.length()) {
+        throw new IllegalArgumentException("effect length does not match input length");
+      }
+      boolean exact = program.matches(fullInput);
+      if (effectMatchesUnchecked(effect) != exact) {
+        throw new IllegalStateException("regex effect disagrees with exact matcher");
+      }
+      return exact;
+    }
+
+    private void requireCompatible(M3RegexEffect effect) {
+      Objects.requireNonNull(effect, "effect");
+      if (!fingerprint.equals(effect.programFingerprint())
+          || stateCount() != effect.stateCount()) {
+        throw new IllegalArgumentException("effect belongs to another regex automaton");
+      }
+    }
+  }
+}
