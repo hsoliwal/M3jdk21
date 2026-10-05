@@ -63,7 +63,7 @@ public final class M3ScopeInference {
 
     private static String normalizedPath(String value) {
         Objects.requireNonNull(value, "path");
-        String path = value.replace('\', '/');
+        String path = value.replace('\\', '/');
         if (path.isBlank()
                 || path.startsWith("/")
                 || path.matches("^[A-Za-z]:/.*")
