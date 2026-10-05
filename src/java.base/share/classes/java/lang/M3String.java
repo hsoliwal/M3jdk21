@@ -16,7 +16,6 @@ import java.nio.charset.CodingErrorAction;
 import java.nio.charset.StandardCharsets;
 import java.nio.charset.UnmappableCharacterException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -310,7 +309,7 @@ final class M3String implements CharSequence {
 
     private byte[] encodeUtf8() {
         M3StringFacts prepared = facts();
-        byte[] output = new byte[prepared.utf8Length];
+        byte[] output = allocateByteShadow(prepared.utf8Length);
         int target = 0;
         for (int index = 0; index < length(); index++) {
             char unit = charAt(index);
@@ -344,7 +343,7 @@ final class M3String implements CharSequence {
 
     private byte[] encodeSingleByte(boolean asciiOnly) {
         M3StringFacts prepared = facts();
-        byte[] output = new byte[prepared.codePointCount];
+        byte[] output = allocateByteShadow(prepared.codePointCount);
         int target = 0;
         for (int index = 0; index < length(); index++) {
             char unit = charAt(index);
@@ -372,7 +371,7 @@ final class M3String implements CharSequence {
             return encodeUtf8NoRepl();
         }
         if (checked.equals(StandardCharsets.ISO_8859_1)) {
-            byte[] output = new byte[length()];
+            byte[] output = allocateByteShadow(length());
             for (int index = 0; index < length(); index++) {
                 char unit = charAt(index);
                 if (unit > 0xff) throw unmappable(index, 1);
@@ -381,7 +380,7 @@ final class M3String implements CharSequence {
             return output;
         }
         if (checked.equals(StandardCharsets.US_ASCII) && facts().ascii) {
-            byte[] output = new byte[length()];
+            byte[] output = allocateByteShadow(length());
             for (int index = 0; index < length(); index++) {
                 output[index] = (byte) charAt(index);
             }
@@ -392,7 +391,7 @@ final class M3String implements CharSequence {
 
     byte[] encodeUtf8NoRepl() {
         M3StringFacts prepared = facts();
-        byte[] output = new byte[prepared.utf8Length];
+        byte[] output = allocateByteShadow(prepared.utf8Length);
         int target = 0;
         for (int index = 0; index < length(); index++) {
             char unit = charAt(index);
@@ -427,7 +426,7 @@ final class M3String implements CharSequence {
         CharsetEncoder encoder = charset.newEncoder();
         int length = length();
         int capacity = (int) (length * (double) encoder.maxBytesPerChar());
-        byte[] output = new byte[capacity];
+        byte[] output = allocateByteShadow(capacity);
         if (length == 0) return output;
 
         ByteBuffer bytes = ByteBuffer.wrap(output);
@@ -442,7 +441,7 @@ final class M3String implements CharSequence {
         }
         return bytes.position() == output.length
                 ? output
-                : Arrays.copyOf(output, bytes.position());
+                : resizeByteShadow(output, bytes.position());
     }
 
     private static IllegalArgumentException unmappable(int offset, int length) {
@@ -456,7 +455,7 @@ final class M3String implements CharSequence {
                 .onUnmappableCharacter(CodingErrorAction.REPLACE);
         int length = length();
         int capacity = (int) (length * (double) encoder.maxBytesPerChar());
-        byte[] output = new byte[capacity];
+        byte[] output = allocateByteShadow(capacity);
         if (length == 0) return output;
 
         ByteBuffer bytes = ByteBuffer.wrap(output);
@@ -471,7 +470,7 @@ final class M3String implements CharSequence {
         }
         return bytes.position() == output.length
                 ? output
-                : Arrays.copyOf(output, bytes.position());
+                : resizeByteShadow(output, bytes.position());
     }
 
     /**
@@ -664,6 +663,28 @@ final class M3String implements CharSequence {
     private static int count(long coordinate) {
         return (int) (coordinate & SPAN_MASK);
     }
+
+    /**
+     * Allocates a caller-visible byte shadow through JNI. M3 canonical owners never allocate or
+     * retain Java byte arrays; charset results are compatibility/output shadows just like
+     * Compact-String materializations.
+     */
+    private static byte[] allocateByteShadow(int length) {
+        if (length < 0) throw new NegativeArraySizeException();
+        return nativeAllocateByteShadow(length);
+    }
+
+    /** Shrinks one JNI-created output shadow without introducing a Java-side array allocation. */
+    private static byte[] resizeByteShadow(byte[] source, int length) {
+        Objects.requireNonNull(source, "source");
+        Objects.checkFromIndexSize(0, length, source.length);
+        if (length == source.length) return source;
+        byte[] result = nativeAllocateByteShadow(length);
+        System.arraycopy(source, 0, result, 0, length);
+        return result;
+    }
+
+    private static native byte[] nativeAllocateByteShadow(int length);
 
     private static native byte[] nativeByteShadow(
             M3String value, int start, int length, byte coder);
