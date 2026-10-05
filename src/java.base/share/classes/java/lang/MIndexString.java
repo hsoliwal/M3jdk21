@@ -526,6 +526,140 @@ final class MIndexString {
     }
 
     /**
+     * Searches canonical M3 String storage without forcing a compatibility byte[] materialization.
+     */
+    int indexOf(int ch, int fromIndex, int endIndex) {
+        int from = Math.max(0, fromIndex);
+        int end = Math.min(length, endIndex);
+        if (from >= end || !Character.isValidCodePoint(ch)
+                || !M3StringPrecompute.mayContainCodePoint(this, ch)) {
+            return -1;
+        }
+        if (Character.isBmpCodePoint(ch)) {
+            char wanted = (char) ch;
+            for (int index = from; index < end; index++) {
+                if (charAt(index) == wanted) {
+                    return index;
+                }
+            }
+            return -1;
+        }
+        char high = Character.highSurrogate(ch);
+        char low = Character.lowSurrogate(ch);
+        for (int index = from; index + 1 < end; index++) {
+            if (charAt(index) == high && charAt(index + 1) == low) {
+                return index;
+            }
+        }
+        return -1;
+    }
+
+    int lastIndexOf(int ch, int fromIndex) {
+        if (length == 0 || fromIndex < 0 || !Character.isValidCodePoint(ch)
+                || !M3StringPrecompute.mayContainCodePoint(this, ch)) {
+            return -1;
+        }
+        int from = Math.min(fromIndex, length - 1);
+        if (Character.isBmpCodePoint(ch)) {
+            char wanted = (char) ch;
+            for (int index = from; index >= 0; index--) {
+                if (charAt(index) == wanted) {
+                    return index;
+                }
+            }
+            return -1;
+        }
+        char high = Character.highSurrogate(ch);
+        char low = Character.lowSurrogate(ch);
+        for (int index = Math.min(from, length - 2); index >= 0; index--) {
+            if (charAt(index) == high && charAt(index + 1) == low) {
+                return index;
+            }
+        }
+        return -1;
+    }
+
+    int indexOf(String target, int fromIndex, int endIndex) {
+        Objects.requireNonNull(target, "target");
+        int from = Math.clamp(fromIndex, 0, length);
+        int end = Math.min(length, endIndex);
+        int targetLength = target.length();
+        if (targetLength == 0) {
+            return Math.min(from, end);
+        }
+        if (from > end - targetLength) {
+            return -1;
+        }
+
+        char first = target.charAt(0);
+        char last = target.charAt(targetLength - 1);
+        if (!M3StringPrecompute.mayContainChar(this, first)
+                || !M3StringPrecompute.mayContainChar(this, last)) {
+            return -1;
+        }
+
+        int candidate = indexOf(first, from, end - targetLength + 1);
+        while (candidate >= 0) {
+            int lastIndex = candidate + targetLength - 1;
+            if (charAt(lastIndex) == last && regionMatches(candidate, target, 0, targetLength)) {
+                return candidate;
+            }
+            candidate = indexOf(first, candidate + 1, end - targetLength + 1);
+        }
+        return -1;
+    }
+
+    int lastIndexOf(String target, int fromIndex) {
+        Objects.requireNonNull(target, "target");
+        int targetLength = target.length();
+        int right = length - targetLength;
+        int from = Math.min(fromIndex, right);
+        if (from < 0) {
+            return -1;
+        }
+        if (targetLength == 0) {
+            return from;
+        }
+
+        char first = target.charAt(0);
+        char last = target.charAt(targetLength - 1);
+        if (!M3StringPrecompute.mayContainChar(this, first)
+                || !M3StringPrecompute.mayContainChar(this, last)) {
+            return -1;
+        }
+
+        for (int candidate = from; candidate >= 0; candidate--) {
+            if (charAt(candidate) == first
+                    && charAt(candidate + targetLength - 1) == last
+                    && regionMatches(candidate, target, 0, targetLength)) {
+                return candidate;
+            }
+        }
+        return -1;
+    }
+
+    boolean regionMatches(int offset, String other, int otherOffset, int count) {
+        Objects.requireNonNull(other, "other");
+        if (offset < 0 || otherOffset < 0 || count < 0
+                || offset > length - count || otherOffset > other.length() - count) {
+            return false;
+        }
+        if (count == 0) {
+            return true;
+        }
+        MIndexString otherStorage = other.mindex();
+        if (otherStorage == this && offset == otherOffset) {
+            return true;
+        }
+        for (int index = 0; index < count; index++) {
+            if (charAt(offset + index) != other.charAt(otherOffset + index)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
      * Copy one UTF-16 range into the caller-owned compatibility array without flattening the
      * canonical MIndex representation first.
      *
