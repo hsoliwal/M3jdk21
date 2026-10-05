@@ -27,7 +27,7 @@
  * @test
  * @summary Bind mapped UTF8 payloads to UTF16, including replacement and chunk boundaries
  * @modules java.base/jdk.internal.mindex
- * @build MIndexMappedStringBackingTest
+ * @build M3MappedStringBackingTest
  * @run main/othervm -Xmx64m MapUtfTest
  */
 
@@ -40,7 +40,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.zip.CRC32;
-import jdk.internal.mindex.MIndexMappedStringBacking;
+import jdk.internal.mindex.M3MappedStringBacking;
 
 /** Tests the actual mapped owner, reusing the existing independently written fixture writer. */
 public class MapUtfTest {
@@ -98,7 +98,7 @@ public class MapUtfTest {
         byte[] before = Files.readAllBytes(path);
         byte[] priorBytes = Files.readAllBytes(sibling(path));
         byte[] expected = text.getBytes(StandardCharsets.UTF_8);
-        try (var backing = MIndexMappedStringBacking.open(path)) {
+        try (var backing = M3MappedStringBacking.open(path)) {
             for (long id : new long[] {1L, (7L << 32) | 2L}) {
                 check(backing.materialize(id).equals(text), "UTF16 not normalized or replaced");
                 check(backing.utf8Length(id) == expected.length, "UTF8 byte count");
@@ -121,7 +121,7 @@ public class MapUtfTest {
         replaceProjection(path, wrong);
         byte[] before = Files.readAllBytes(path);
         byte[] priorBytes = Files.readAllBytes(sibling(path));
-        try (var accepted = MIndexMappedStringBacking.open(path)) {
+        try (var accepted = M3MappedStringBacking.open(path)) {
             throw new AssertionError("ACCEPTED_UTF8_MISMATCH case=" + index
                     + " scalarLength=" + accepted.length(1L) + " bytes=" + wrong.length);
         } catch (IllegalStateException refused) {
@@ -174,7 +174,7 @@ public class MapUtfTest {
 
     private static Path fixture(Path directory, String text) throws Exception {
         Path path = directory.resolve("utf-" + specimens++ + ".midx");
-        Method writer = MIndexMappedStringBackingTest.class.getDeclaredMethod("writeFixture", Path.class, String.class);
+        Method writer = M3MappedStringBackingTest.class.getDeclaredMethod("writeFixture", Path.class, String.class);
         writer.setAccessible(true);
         writer.invoke(null, path, text);
         return path;
