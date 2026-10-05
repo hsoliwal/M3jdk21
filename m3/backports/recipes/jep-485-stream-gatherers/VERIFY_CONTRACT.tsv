@@ -1,0 +1,13 @@
+gate	state	requirement
+diff	PENDING_HOSTED	branch diff must contain only packet/recipe/scope-test changes before product promotion
+recipe_compile	PENDING_HOSTED	Java21/OpenRewrite module compilation
+exact_preimages	PENDING_HOSTED	all four current owners match manifest hashes
+absent_targets	PENDING_HOSTED	all eleven additions remain absent before replay
+recipe_replay	PENDING_HOSTED	15 exact postimages
+fixed_point	PENDING_HOSTED	fresh second pass yields no changes
+scope_authority	IMPLEMENTED	LIBRARY_API/EXPLICIT_CONTRACT_CHANGE
+product_compile	NOT_EXECUTED	matched modified java.base build
+focused_jtreg	NOT_EXECUTED	all donor Gatherer tests plus existing stream regression tier
+api_diff	NOT_EXECUTED	only explicitly admitted Gatherer API additions
+runtime_parallel_jmm	NOT_EXECUTED	parallel/short-circuit/concurrent mapping behavior
+whole_programme	INCOMPLETE	no JDK completion claim
