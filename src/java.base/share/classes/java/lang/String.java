@@ -4496,9 +4496,7 @@ public final class String
     public char[] toCharArray() {
         M3String storage = m3();
         if (storage != null) {
-            char[] result = new char[storage.length()];
-            storage.getChars(0, result.length, result, 0);
-            return result;
+            return storage.charShadow();
         }
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.toChars(currentValue)
