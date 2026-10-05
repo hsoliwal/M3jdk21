@@ -97,6 +97,10 @@ Reusable facts may include:
 
 Precomputation is not free. Every fact has an owner, validity domain, admission cost, invalidation rule, concurrency model and memory budget.
 
+**Internal-precompute invariant:** these facts and their owners are implementation-private machinery. Public JDK values expose exact semantic operations/results, not precompute objects, preparation APIs, cache lifecycle, retention controls or fact-table identity. Internal facts are keyed by exact canonical M3 owner plus scalar/range/composition coordinates; they never become a second canonical payload. Missing/evicted facts must fall back to the exact Java semantic path.
+
+For the String route, Synexia `MIndexString` is the donor/reference type and M3JDK `M3String` is the target counterpart. JNI/native `byte[]`, `char[]`, UTF-8 and UTF-16 representations are shadows/materializations of M3String coordinates, not canonical String storage. See `m3-runtime-invariants.tsv`.
+
 ### 3.4 Public Java compatibility surfaces
 
 The public type remains authoritative for:
