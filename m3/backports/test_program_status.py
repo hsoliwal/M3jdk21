@@ -34,6 +34,9 @@ class ProgramStatusTest(unittest.TestCase):
         self.assertEqual(82, sum(data["jep_states"].values()))
         self.assertEqual(13, data["seed_rows"])
         self.assertEqual(13, sum(data["seed_states"].values()))
+        self.assertEqual(12, data["community_fork_rows"])
+        self.assertFalse(data["community_fork_source_copy_authority"])
+        self.assertFalse(data["community_fork_selected_for_distribution"])
         self.assertFalse(data["completion_claim"])
         self.assertGreaterEqual(data["materialized_packet_count"], 2)
 
@@ -45,6 +48,7 @@ class ProgramStatusTest(unittest.TestCase):
         self.assertEqual(first, second)
         self.assertTrue(first.startswith("kind\tstate\tcount\n"))
         self.assertIn("jep\ttotal\t82\n", first)
+        self.assertIn("community-fork\ttotal\t12\n", first)
 
 if __name__ == "__main__":
     unittest.main()
