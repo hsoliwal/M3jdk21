@@ -25,6 +25,9 @@
 
 #include "jvm.h"
 #include "java_lang_String.h"
+#include <limits.h>
+#include <stdint.h>
+#include <stdlib.h>
 
 JNIEXPORT jobject JNICALL
 Java_java_lang_String_intern(JNIEnv *env, jobject this)
@@ -41,4 +44,115 @@ Java_java_lang_StringUTF16_isBigEndian(JNIEnv *env, jclass cls)
   } else {
     return JNI_FALSE;
   }
+}
+
+
+/*
+ * M3String compatibility shadows.
+ *
+ * Canonical M3 text remains behind the owner/coordinate representation.
+ * These entry points allocate final Java arrays only at an explicit compatibility boundary.
+ */
+static void m3_throw(JNIEnv *env, const char *name, const char *message) {
+    jclass type = (*env)->FindClass(env, name);
+    if (type != NULL) {
+        (*env)->ThrowNew(env, type, message);
+    }
+}
+
+static jmethodID m3_char_at_method(JNIEnv *env, jobject value) {
+    jclass type = (*env)->GetObjectClass(env, value);
+    if (type == NULL) return NULL;
+    return (*env)->GetMethodID(env, type, "charAt", "(I)C");
+}
+
+JNIEXPORT jbyteArray JNICALL
+Java_java_lang_M3String_nativeByteShadow(
+        JNIEnv *env, jclass ignored, jobject value, jint start, jint length, jbyte coder)
+{
+    if (value == NULL) {
+        m3_throw(env, "java/lang/NullPointerException", "M3String");
+        return NULL;
+    }
+    if (start < 0 || length < 0 || (coder != 0 && coder != 1)) {
+        m3_throw(env, "java/lang/IllegalArgumentException", "invalid M3 shadow range/coder");
+        return NULL;
+    }
+    jlong byte_length = ((jlong)length) << coder;
+    if (byte_length > INT_MAX) {
+        m3_throw(env, "java/lang/OutOfMemoryError", "M3 byte shadow too large");
+        return NULL;
+    }
+
+    jbyteArray result = (*env)->NewByteArray(env, (jsize)byte_length);
+    if (result == NULL || byte_length == 0) return result;
+
+    jmethodID char_at = m3_char_at_method(env, value);
+    if (char_at == NULL) return NULL;
+
+    jbyte *bytes = (jbyte *)malloc((size_t)byte_length);
+    if (bytes == NULL) {
+        m3_throw(env, "java/lang/OutOfMemoryError", "M3 byte shadow");
+        return NULL;
+    }
+
+    uint16_t endian_test = UINT16_C(1);
+    int little_endian = *((uint8_t *)&endian_test) == 1u;
+    for (jint index = 0; index < length; index++) {
+        jchar unit = (*env)->CallCharMethod(env, value, char_at, start + index);
+        if ((*env)->ExceptionCheck(env)) {
+            free(bytes);
+            return NULL;
+        }
+        if (coder == 0) {
+            bytes[index] = (jbyte)unit;
+        } else {
+            jint at = index << 1;
+            if (little_endian) {
+                bytes[at] = (jbyte)unit;
+                bytes[at + 1] = (jbyte)(unit >> 8);
+            } else {
+                bytes[at] = (jbyte)(unit >> 8);
+                bytes[at + 1] = (jbyte)unit;
+            }
+        }
+    }
+    (*env)->SetByteArrayRegion(env, result, 0, (jsize)byte_length, bytes);
+    free(bytes);
+    return (*env)->ExceptionCheck(env) ? NULL : result;
+}
+
+JNIEXPORT jcharArray JNICALL
+Java_java_lang_M3String_nativeCharShadow(
+        JNIEnv *env, jclass ignored, jobject value, jint start, jint length)
+{
+    if (value == NULL) {
+        m3_throw(env, "java/lang/NullPointerException", "M3String");
+        return NULL;
+    }
+    if (start < 0 || length < 0) {
+        m3_throw(env, "java/lang/IllegalArgumentException", "invalid M3 char shadow range");
+        return NULL;
+    }
+
+    jcharArray result = (*env)->NewCharArray(env, length);
+    if (result == NULL || length == 0) return result;
+
+    jmethodID char_at = m3_char_at_method(env, value);
+    if (char_at == NULL) return NULL;
+    jchar *chars = (jchar *)malloc((size_t)length * sizeof(jchar));
+    if (chars == NULL) {
+        m3_throw(env, "java/lang/OutOfMemoryError", "M3 char shadow");
+        return NULL;
+    }
+    for (jint index = 0; index < length; index++) {
+        chars[index] = (*env)->CallCharMethod(env, value, char_at, start + index);
+        if ((*env)->ExceptionCheck(env)) {
+            free(chars);
+            return NULL;
+        }
+    }
+    (*env)->SetCharArrayRegion(env, result, 0, length, chars);
+    free(chars);
+    return (*env)->ExceptionCheck(env) ? NULL : result;
 }
