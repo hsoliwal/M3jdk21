@@ -23,6 +23,7 @@ owner = read("src/java.base/share/classes/java/lang/M3StringOwner.java")
 atom = read("src/java.base/share/classes/java/lang/M3StringAtom.java")
 tuple_ = read("src/java.base/share/classes/java/lang/M3StringTuple.java")
 facts = read("src/java.base/share/classes/java/lang/M3StringFacts.java")
+search_precompute = read("src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java")
 string = read("src/java.base/share/classes/java/lang/String.java")
 symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
 classes = read("src/hotspot/share/classfile/vmClassMacros.hpp")
@@ -58,6 +59,32 @@ for path, text in [
         retained_arrays = [row for row in retained_arrays if "static" not in row]
     if retained_arrays:
         fail(f"{path} retains array field(s): {retained_arrays!r}")
+
+# Length-proportional operation precompute is separate and bounded. It may retain primitive
+# algorithm lanes but never canonical spelling/payload or strong M3 owner/value references.
+for forbidden in [
+    r"\bString\s+\w+\s*;",
+    r"\bchar\[\]\s+\w+\s*;",
+    r"\bbyte\[\]\s+\w+\s*;",
+    r"\bM3String\s+\w+\s*;",
+    r"\bM3StringOwner\s+\w+\s*;",
+]:
+    if re.search(forbidden, search_precompute):
+        fail(f"M3StringSearchPrecompute retains forbidden payload/strong owner: {forbidden}")
+if "WeakReference<M3StringOwner>" not in search_precompute:
+    fail("M3StringSearchPrecompute must weakly key canonical owner")
+if "private static final int SLOTS = 256;" not in search_precompute:
+    fail("M3StringSearchPrecompute cache bound changed without invariant review")
+if "private static final int MAX_PATTERN_UNITS = 8_192;" not in search_precompute:
+    fail("M3StringSearchPrecompute pattern budget changed without invariant review")
+if "final int[] prefix;" not in search_precompute:
+    fail("prepared search plan lost primitive KMP metadata")
+if "M3StringSearchPrecompute.prepare(checked)" not in m3:
+    fail("M3String canonical search no longer reuses prepared operation metadata")
+if "trigramSignal64" not in facts or "bigramSignal64" not in facts:
+    fail("M3StringFacts lost canonical n-gram candidate facts")
+if "prefixMayMatch" not in facts or "suffixMayMatch" not in facts:
+    fail("M3StringFacts lost canonical boundary candidate facts")
 
 if "private volatile M3String m3;" not in string:
     fail("java.lang.String no longer owns M3String")
@@ -103,7 +130,9 @@ critical_surfaces = {
     "startsWith": "M3String sourceM3 = m3();",
     "hashCode": "M3String storage = m3();",
     "indexOf(String)": "M3String sourceM3 = m3();",
+    "bounded indexOf(String)": "return sourceM3.indexOf(targetM3, beginIndex, endIndex);",
     "lastIndexOf(String)": "M3String storage = m3();",
+    "prepared reverse search": "return storage.lastIndexOf(target, fromIndex);",
     "substring": "M3String.sliceOf(this, beginIndex, endIndex)",
     "concat": "m3Concat(this, str)",
     "trim": "M3StringFacts facts = storage.facts();",
@@ -142,6 +171,7 @@ for fragment in [
     "MIndexWhitespaceBoundaries\tjava.lang.M3StringFacts\tIMPLEMENTED",
     "MIndexUtf16RangeFacts\tM3StringOwner.rangeFacts\tIMPLEMENTED",
     "MIndexRegexTrigramQuery\tjdk.internal.mindex.M3TQ\tIMPLEMENTED",
+    "MIndexStringSearchPlan\tjava.lang.M3StringSearchPrecompute\tIMPLEMENTED",
     "DO_NOT_PORT_TO_JAVA_LANG_STRING",
 ]:
     if fragment not in port_map:
