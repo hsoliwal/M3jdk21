@@ -10,7 +10,14 @@ import json
 from collections import Counter
 from pathlib import Path
 
-PENDING_JEP = {"candidate", "candidate-high-risk", "hold-compat", "hold-jit", "hold-preview"}
+PENDING_JEP = {
+    "candidate",
+    "candidate-adapted",
+    "candidate-high-risk",
+    "hold-compat",
+    "hold-jit",
+    "hold-preview",
+}
 DECIDED_JEP = {"reject-compat", "reject-language", "superseded", "superseded-high-risk", "superseded-jit"}
 PENDING_SEED = {"candidate", "candidate-adapted", "candidate-high-risk", "hold-dependency", "hold-javac"}
 
