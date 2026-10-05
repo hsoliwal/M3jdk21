@@ -106,3 +106,13 @@
 - [ ] Run focused bridge tests and module verification available in the environment.
 - [ ] Read workflow status without converting unrelated CI failures into bridge failures.
 - [ ] Self-review the full branch diff and keep all unexecuted JDK/HotSpot/JNI gates explicit.
+
+## Execution Rulings
+
+- Ruling: resource import alone is insufficient for the requested bridge. The destination now
+  includes a recipe-backed filesystem materializer that runs the retained packet guard and
+  Java/text snapshot recipes before product writes. Cost if wrong: additional tool-plane code, but
+  no new transformation authority or product dependency.
+- Ruling: JAVA handoff targets are limited to `src/`, `test/` and `m3/ports/`, and TEXT/NATIVE
+  may not target `.java`. This prevents bypass of the typed Java parser while preserving the
+  existing compatibility-port destination.
