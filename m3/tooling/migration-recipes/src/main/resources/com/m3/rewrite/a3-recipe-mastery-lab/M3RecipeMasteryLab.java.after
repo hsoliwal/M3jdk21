@@ -275,12 +275,12 @@ final class M3RecipeMasteryLab {
                             "private static int ghost(int a,int b){return (a+b)*31;}";
                     private static final String RX =
                             "(?s)private\\\\s+static\\\\s+int\\\\s+ghost.*return";
-                    private static final String TEXT = """
+                    private static final String TEXT = \"""
                             private static int ghost(int a, int b) {
                                 return (a + b) * 31;
                             }
                             😀 surrogate-safe text
-                            """;
+                            \""";
 
                     static int call(int a, int b) { return target(a, b); }
 

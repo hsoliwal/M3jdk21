@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.util.Collection;
-import java.util.LinkedHashMap;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -38,7 +38,7 @@ public final class M3A3RecipeMasteryLabRecipe
                     "M3Java21RecipeMasteryLabTest.java.after");
 
     static final class Inventory {
-        private final Map<String, String> seen = new LinkedHashMap<>();
+        private final Map<String, String> seen = new ConcurrentHashMap<>();
         private boolean refused;
     }
 

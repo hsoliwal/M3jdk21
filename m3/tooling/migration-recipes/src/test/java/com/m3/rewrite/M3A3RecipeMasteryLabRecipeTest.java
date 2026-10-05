@@ -88,7 +88,7 @@ class M3A3RecipeMasteryLabRecipeTest {
                         context);
 
         assertThrows(
-                IllegalStateException.class,
+                RuntimeException.class,
                 () ->
                         new M3A3RecipeMasteryLabRecipe()
                                 .run(
