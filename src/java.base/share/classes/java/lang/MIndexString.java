@@ -517,7 +517,7 @@ final class MIndexString {
             result = M3StringPrecompute.combine(result, part);
             previous = ends[index];
         }
-        return result;
+        return M3StringPrecompute.withWhitespace(this, result);
     }
 
     boolean isScalar() {
@@ -636,10 +636,17 @@ final class MIndexString {
             return -1;
         }
 
+        MIndexString targetStorage = target.mindex();
+        M3StringPrecompute.Facts targetFacts =
+                targetStorage == null ? null : targetStorage.precomputedFacts();
+        if (targetFacts != null && !precomputedFacts().mayContain(targetFacts)) {
+            return -1;
+        }
         char first = target.charAt(0);
         char last = target.charAt(targetLength - 1);
-        if (!M3StringPrecompute.mayContainChar(this, first)
-                || !M3StringPrecompute.mayContainChar(this, last)) {
+        if (targetFacts == null
+                && (!M3StringPrecompute.mayContainChar(this, first)
+                        || !M3StringPrecompute.mayContainChar(this, last))) {
             return -1;
         }
 
@@ -666,10 +673,17 @@ final class MIndexString {
             return from;
         }
 
+        MIndexString targetStorage = target.mindex();
+        M3StringPrecompute.Facts targetFacts =
+                targetStorage == null ? null : targetStorage.precomputedFacts();
+        if (targetFacts != null && !precomputedFacts().mayContain(targetFacts)) {
+            return -1;
+        }
         char first = target.charAt(0);
         char last = target.charAt(targetLength - 1);
-        if (!M3StringPrecompute.mayContainChar(this, first)
-                || !M3StringPrecompute.mayContainChar(this, last)) {
+        if (targetFacts == null
+                && (!M3StringPrecompute.mayContainChar(this, first)
+                        || !M3StringPrecompute.mayContainChar(this, last))) {
             return -1;
         }
 
@@ -695,6 +709,16 @@ final class MIndexString {
         MIndexString otherStorage = other.mindex();
         if (otherStorage == this && offset == otherOffset) {
             return true;
+        }
+        if (otherStorage != null && otherOffset == 0 && count == otherStorage.length) {
+            M3StringPrecompute.Facts sourceFacts = precomputedFacts();
+            M3StringPrecompute.Facts otherFacts = otherStorage.precomputedFacts();
+            if (offset == 0 && !sourceFacts.prefixMayMatch(otherFacts)) {
+                return false;
+            }
+            if (offset == length - count && !sourceFacts.suffixMayMatch(otherFacts)) {
+                return false;
+            }
         }
         for (int index = 0; index < count; index++) {
             if (charAt(offset + index) != other.charAt(otherOffset + index)) {
