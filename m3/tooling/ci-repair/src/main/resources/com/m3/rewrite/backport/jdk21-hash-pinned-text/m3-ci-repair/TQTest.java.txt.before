@@ -200,20 +200,10 @@ final class TQTest {
 
     private static void compileProduct(Path output,Path kernel,String log) throws Exception {
         Files.createDirectories(output);
-        // Limit javac source discovery to the three tested sources. The full JDK
-        // source root also contains java.lang classes that belong to the image build.
-        Path sources = OUT.resolve("product-sources/"+output.getFileName());
-        Path packageRoot = sources.resolve("jdk/internal/mindex");
-        Files.createDirectories(packageRoot);
-        Files.write(packageRoot.resolve("M3TQ.java"),Files.readAllBytes(kernel));
-        for (String name : List.of("MIndexStringBacking","MIndexMappedStringBacking"))
-            Files.write(packageRoot.resolve(name+".java"),
-                    Files.readAllBytes(ROOT.resolve(PRODUCT+"jdk/internal/mindex/"+name+".java")));
         execute(List.of(JAVAC,"-source","21","-target","21","-proc:none","-implicit:none","-Xlint:all","-Werror",
-                "--patch-module","java.base="+sources,
-                "-d",output.toString(),packageRoot.resolve("M3TQ.java").toString(),
-                packageRoot.resolve("MIndexStringBacking.java").toString(),
-                packageRoot.resolve("MIndexMappedStringBacking.java").toString()),log,true);
+                "--patch-module","java.base="+ROOT.resolve(PRODUCT)+java.io.File.pathSeparator+kernel.getParent(),
+                "-d",output.toString(),kernel.toString(),ROOT.resolve(PRODUCT+"jdk/internal/mindex/MIndexStringBacking.java").toString(),
+                ROOT.resolve(PRODUCT+"jdk/internal/mindex/MIndexMappedStringBacking.java").toString()),log,true);
     }
 
     private static void compileNative(Path directory,boolean mutant,String log) throws Exception {
