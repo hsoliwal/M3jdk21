@@ -1,0 +1,3884 @@
+{
+  "schema": "jcc-final-source-root-accounting-review/v1",
+  "repository": "hsoliwal/com.synexia",
+  "final_commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+  "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005",
+  "final_root_tree": "6f9b6a48f8cefa7a643f222c7aa1f621497725e7",
+  "prior_commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+  "prior_root_tree": "3a270e543f9a547582ebda8ac8b69bfd134c41be",
+  "publication_receipt": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/SOURCE_IMPLEMENTATION_PUBLICATION_VERIFIED.json",
+  "publication_receipt_sha256": "03ba5aa231929079fda7772dc6a798a687ba7486fa81ceacc0723407330f956a",
+  "commit_binding_scope": "Uses recorded publication receipt commit/tree/ref verification; no remote call or raw commit-object rehash in this task.",
+  "root_entry_count": 343,
+  "root_entry_types": {
+    "tree": 255,
+    "blob": 87,
+    "commit": 1
+  },
+  "same_root_names_modes_types_as_prior": true,
+  "changed_root_entries": [
+    {
+      "path": "m3-fast-search",
+      "before": "aacc161f5945b128d36db6605c36bebe42418afa",
+      "after": "7088d7a59391a8fd60579b48a823f8add288b698"
+    },
+    {
+      "path": "synexia-algo",
+      "before": "aea2e7241afbb075da2e3f6177d0e5b3cf50d384",
+      "after": "a8c10cc39bc257a2b3ee137d616deada022c938f"
+    },
+    {
+      "path": "synexia-donor-inventory",
+      "before": "3158c2692a9aaa328a306b5f155e8a868d87c09c",
+      "after": "c5b779af825e71cb677ecba0b757c053ecffc89b"
+    },
+    {
+      "path": "synexia-openrewrite-recipes",
+      "before": "3a1508ce8d45731c3a2d1cd3980315cca3546f6c",
+      "after": "d8106554d43b3b9fa0d25d5eb1b89b90ebc28a91"
+    }
+  ],
+  "root_entries": [
+    {
+      "path": ".claude",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "29058f8dab9eb4f843ead16a685541721bb85185"
+    },
+    {
+      "path": ".desktop-reads",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "795ee566963febf1b7ffa47cfebaff974ff55da4"
+    },
+    {
+      "path": ".dockerignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "77e255c13d8ce47c5fc7a633aa0bff0a4942a6e2"
+    },
+    {
+      "path": ".editorconfig",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ded03dfc4bc9c0119a12561dd6c9f59137caf1cf"
+    },
+    {
+      "path": ".gitattributes",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "02ed838beb1bfc9d15fc4ea233431f6ee9fb1084"
+    },
+    {
+      "path": ".github",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "33a55f72b85df857751b7687ab2b4b80c5dfae1d"
+    },
+    {
+      "path": ".gitignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cd70378522c7e194b319500ede4043c4b0b431ca"
+    },
+    {
+      "path": ".gitmodules",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4135dd7c4002ee428dc364e51d3c104091304584"
+    },
+    {
+      "path": ".java-version",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "aabe6ec3909c9d4871f8f89ef88ca3b6795ebd29"
+    },
+    {
+      "path": ".jqassistant.yml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "46738095614c236007cf2b0d3208c0a9acb95229"
+    },
+    {
+      "path": ".m3",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "244b70ce1a2b2899bff7a74591ecef6734369709"
+    },
+    {
+      "path": ".mcp.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "96a7b94f597be37f8ec98caeba77bc8aafb58990"
+    },
+    {
+      "path": ".merge-preserved",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c70ca371f37dd3cc0d534188a7f35958e6956562"
+    },
+    {
+      "path": ".mvn",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4b0ba8ecadcc9aef2cd554dacb5e84b3dd62fd50"
+    },
+    {
+      "path": ".rgignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4d7c871d6da76860e6b1deafb5e7d479404e432b"
+    },
+    {
+      "path": ".superset",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "229ab0d3b2675c7733c618e527ee111f73d85087"
+    },
+    {
+      "path": "AGENTS.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7038981e6d86a5e3bae25803fa0b6d77b557d538"
+    },
+    {
+      "path": "CITATION.cff",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a02339abb3d5babbcdb87af29fe5c83f5f5f9a38"
+    },
+    {
+      "path": "CLAUDE.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "67311dc1eadbb50c8b29e596ed12ce29f3288582"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "516187d466a8549314f9e639743c5f8efb2adc62"
+    },
+    {
+      "path": "CPULLM_APACHE_DATAFLOW_DAGS.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f9a93a29104c8361e1f3f334d64e4f61643fafdc"
+    },
+    {
+      "path": "CPULLM_COMPACT_SYNTHESIS_ADMISSION_RECEIPT.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dd57e320000211bc7243d20099af080ea60da2c3"
+    },
+    {
+      "path": "CPULLM_COMPACT_SYNTHESIS_CAS_REPLAY_ADMISSION_RECEIPT.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cfa9d3d97883ebf42872dd384139c3bbf20d9442"
+    },
+    {
+      "path": "FLINK_INTEGRATION.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e3d506737c28873cce533f213b3bf345e8eebd26"
+    },
+    {
+      "path": "FOSS_REUSE_DECISION.tsv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d70d8bdf1c8285820a6869150ccc0b85bebf9344"
+    },
+    {
+      "path": "LESM_LSEM_EXTRACTION.tsv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b9910cafecf2ddc307166ad02e235e323574903e"
+    },
+    {
+      "path": "LICENSE",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "29f81d812f3e768fa89638d1f72920dbfd1413a8"
+    },
+    {
+      "path": "LICENSE.spdx",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "522885e193f157cd403379a4e07b7d52e56325a7"
+    },
+    {
+      "path": "LICENSES",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "53bccd1962e6959417e0677207209efb00d0229e"
+    },
+    {
+      "path": "MANIFEST.sha256",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "92399860df81280159e4feeb13ebd773e18d96b1"
+    },
+    {
+      "path": "Makefile",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9a1dc6d826b4986ebc5940f25dac250703131c24"
+    },
+    {
+      "path": "NOTICE",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cf6694a1316785ba2aa45394314bbae2e856c7fe"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "92fe4286ed5d2141f550c3a37e2115acbe736a9d"
+    },
+    {
+      "path": "_clusters_info.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a156292cd1d1b5ad799008f63cba1b02bbafaa1d"
+    },
+    {
+      "path": "_compile_aop.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9f569295f1e07899a32c54e43838d2cb49f2d0e8"
+    },
+    {
+      "path": "_compile_check.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1139caafbe85fb673baa97866ab6381c87030369"
+    },
+    {
+      "path": "_compile_count.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "48dd41a02de81359a1194a5dd8c655881e3dd3ba"
+    },
+    {
+      "path": "_compile_final.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6131ca6ac0eb615486da615e0e0dc8c090ce342b"
+    },
+    {
+      "path": "_compile_final_tail.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b0ff29842caa385dc5842d09caaed7858c793698"
+    },
+    {
+      "path": "_compile_full.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fc18ae3e6a1984a18bc6b681ef477970b655d45c"
+    },
+    {
+      "path": "_compile_full_run.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "65637302d3034211592ce7e006d75a7ce9326e4b"
+    },
+    {
+      "path": "_compile_reactor.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8965eba8035b06635155b7f994917785a0b9e67f"
+    },
+    {
+      "path": "_compile_run_20260306_102237.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ab405631df1811ca24bab8076f23c0d4a53b425b"
+    },
+    {
+      "path": "_compile_status.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e418839793f614764608267b1ef3f9621800a169"
+    },
+    {
+      "path": "_compile_tail.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1f1fbbcf56fd04d510a89c7c826e5a586d3ba437"
+    },
+    {
+      "path": "_compile_verify.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c7ac9a3cdc65b226b40c8524f61c60107fb801fc"
+    },
+    {
+      "path": "_cstat.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "af17e3cec02f2b17e3f0b1b695e3d73eb413ed83"
+    },
+    {
+      "path": "_desk_ai_action.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1187bd84b5bf13949c832c9684575c566831436f"
+    },
+    {
+      "path": "_desk_anchor.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f31dc6c83ac73f302e0faa1f09826f71cd62e1e3"
+    },
+    {
+      "path": "_desk_conv_latest.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ae0008e20fda456d5933e491ff5f43572060dc04"
+    },
+    {
+      "path": "_desk_convergence.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e9a0ce3c57af7ff3113925ef2d1b85eb891411f6"
+    },
+    {
+      "path": "_desk_decomp.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "163b982f37868cce6cc5cadde7e8e09aedc61f54"
+    },
+    {
+      "path": "_desk_everything.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "446a66e07cf1fde564a01fcfe169694b37f0d1c6"
+    },
+    {
+      "path": "_desk_m3scale.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d71ba4aae257c0a707b91dd04a6c7d1d4526214b"
+    },
+    {
+      "path": "_desk_mech_refactor.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "06103de8dd6f3c9682799bcc6f48c8862257a635"
+    },
+    {
+      "path": "_dup_stats.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d2a256da8964bc72e406df959c01b03237304449"
+    },
+    {
+      "path": "_empty_by_dir.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "174d2031850ce151b59c17c12297c7c9dba93687"
+    },
+    {
+      "path": "_empty_detail.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0c0cf67cd3e56c6805754f2786432d5cb6231d88"
+    },
+    {
+      "path": "_fail_mods2.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "961a914c4ce2faa06e3c28fc4dc828f0d692d184"
+    },
+    {
+      "path": "_git_status.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7f39753fb43894a5eb25fde6a5575c74a2af3919"
+    },
+    {
+      "path": "_import_stats.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a5655b25bbe8ef73f326f4914b124e23be41aa03"
+    },
+    {
+      "path": "_imports_stat.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "16dd1b3d3017b7920212f989f890d6ba405f8b51"
+    },
+    {
+      "path": "_inv_scripts.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5f05804becec48a1c910c97da02a469ff47efe81"
+    },
+    {
+      "path": "_p1_status.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "be3bd48236ee17196b03997dcc9449d0a8934995"
+    },
+    {
+      "path": "_python_check.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "871f03dccab8c9ac14631baeddf99c90cf428e5d"
+    },
+    {
+      "path": "_reactor_errs.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "da235d6c2bae8d4e15bd59ad50e61fd5b3567f5e"
+    },
+    {
+      "path": "_reactor_stat.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f39b01805f0571f8a9f034dc05f743a6832e76a7"
+    },
+    {
+      "path": "_run_imports.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b034187e80fd12835be6fecce021505eeb23b156"
+    },
+    {
+      "path": "_run_p1_dry.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "95e935b0b4a04a3301955a6b9aa7d1a422b81e26"
+    },
+    {
+      "path": "_run_p1_dry2.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "58c2ac40cf59056b4a48da8f1c8c8a871f445488"
+    },
+    {
+      "path": "_run_whitespace.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cad9585ee11caeaaf9cca2d1532cb585cd744b26"
+    },
+    {
+      "path": "_spotless_all.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "310354d7f807694dce684b66d0f337f9361596ce"
+    },
+    {
+      "path": "_spotless_all2.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1139caafbe85fb673baa97866ab6381c87030369"
+    },
+    {
+      "path": "_spotless_detail.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3a37dc5e785c016d98fe5dfc4d11e7233442b65a"
+    },
+    {
+      "path": "_spotless_fix.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1139caafbe85fb673baa97866ab6381c87030369"
+    },
+    {
+      "path": "_spotless_flldcim.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1139caafbe85fb673baa97866ab6381c87030369"
+    },
+    {
+      "path": "_spotless_modules.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "19310ca75e0fbf7e7ba514f60ac3e7352ea5fa35"
+    },
+    {
+      "path": "_spotless_targeted.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1139caafbe85fb673baa97866ab6381c87030369"
+    },
+    {
+      "path": "_sync_done.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c16790ec78b3e154ba1e3d0c820f59ed6e7bed59"
+    },
+    {
+      "path": "_templates_listing.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5f48c89474845b0bdd3f8bfd3933ddf81c7f2198"
+    },
+    {
+      "path": "_test123.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b6fc4c620b67d95f953a5c1c1230aaab5db5a1b0"
+    },
+    {
+      "path": "_ws_count.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4f3ad3117edbe475469ad20e15d7f5efc9a42e37"
+    },
+    {
+      "path": "agents",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "48588d1c54f58823e41f506b121bc0b80608a747"
+    },
+    {
+      "path": "aix-chrome-ai-studio",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "da970877bcaaa01ed169cae260661a3a971a0245"
+    },
+    {
+      "path": "aix-superset-v016",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1f929aea85770bfb3c21cf4a0be93012396eaf19"
+    },
+    {
+      "path": "aix-superset-v017",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5d7adddf9f35dc984b90b7a805d8fcf59f8ad786"
+    },
+    {
+      "path": "archive-maven-projects",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ad7342a8eb675476008c951aed4c6fc66ed10e5d"
+    },
+    {
+      "path": "artifacts",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2dc2d9d8bdd5b4cd3bc743f09230d129862dda29"
+    },
+    {
+      "path": "big-files.tsv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3d36ce43fa7e04b549c4710ad5f0eb603c3ad5be"
+    },
+    {
+      "path": "big-java.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8b137891791fe96927ad78e64b0aad7bded08bdc"
+    },
+    {
+      "path": "build-check.bat",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f69b4c47739218564e237a6f4d97ef6931365781"
+    },
+    {
+      "path": "build-check2.bat",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e7c0f39ced25363009c8ef486f0a14e1b5951cf6"
+    },
+    {
+      "path": "build-full.bat",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d13180955612e2b940c396f28112219d5d571a50"
+    },
+    {
+      "path": "build-full2.bat",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ca8038872557215939b86fb451015e9022462267"
+    },
+    {
+      "path": "build-out.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "46939bb1f671159c25d378442592aac5687eb52d"
+    },
+    {
+      "path": "build-output.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a16fa84e12f6b865129945e776f41091bd311512"
+    },
+    {
+      "path": "chat-artifacts",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5a53c41f3c82511835edfe8d7f9ae623f733f49e"
+    },
+    {
+      "path": "clients",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "79f50c57281ab6f02ae4fc0f69dfbe199771511d"
+    },
+    {
+      "path": "codemaya-paroksha",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8a21fa9007c2baedbd5449861b0948f2f092ec85"
+    },
+    {
+      "path": "cognix-agents",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "29e3aa513705e5332e63da5f40fd5a4d09d1a1ab"
+    },
+    {
+      "path": "cognix-ai",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "550a13b624e605aeb4e8426edfc9a278ad669888"
+    },
+    {
+      "path": "cognix-camel-kie",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c2684cc498d17f217db780309cfa41b6d0ccd734"
+    },
+    {
+      "path": "cognix-demos",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "365ccd869a829f17d4e04a111788a2624b36f536"
+    },
+    {
+      "path": "cognix-donor-inventory",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b033c06e7fe7df6d0caae86bda193fde874c646d"
+    },
+    {
+      "path": "cognix-eclipse-mechanics-adapters",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "39568ae94232368ad896ecae8c2b8d402c891a16"
+    },
+    {
+      "path": "cognix-eclipse-mechanics-core",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e321492dbf9b78a4fda9996218ac97710d3cc989"
+    },
+    {
+      "path": "cognix-eclipse-mechanics-cpullm",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e24076d44773f75107e27ffe81db53cc391e3b86"
+    },
+    {
+      "path": "cognix-eclipse-mechanics-headless-app",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f2e03c85bf0be2de24b29381a6ffd40b49a144ae"
+    },
+    {
+      "path": "cognix-eclipse-mechanics-native-bridge",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "0e21ae0a17db168fcf8b8c77e39ed91390a93472"
+    },
+    {
+      "path": "cognix-eclipse-mechanics-rop-plugin",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "0fe9a8afddd83719f2b52e5b53632f6af274ada0"
+    },
+    {
+      "path": "cognix-eclipse-mechanics-spi",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8159470c51f6105cfd74e264eba01bbe7be762e0"
+    },
+    {
+      "path": "cognix-eclipse-mechanics-ui-api",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "fd0d78a1485b08ca451285cff169beebc456cf77"
+    },
+    {
+      "path": "cognix-eclipse-mechanics-ui",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f3ea5c1ef646a1d8f53cff7a824f722074ea5a56"
+    },
+    {
+      "path": "cognix-eclipse-mechanics-visual-bridge",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "bb131530001c1fac2f670209d6d47cedca60f245"
+    },
+    {
+      "path": "cognix-eclipse-visual-api",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e6746e8a2fd47d5f0e7f39eb002fd72c9bd267a0"
+    },
+    {
+      "path": "cognix-eclipse-visual-architecture-tests",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ecb5ef234007359503dc462c84462e9850726236"
+    },
+    {
+      "path": "cognix-eclipse-visual-bridge-browser",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2c29f55a5d0b2d563e544eac82c06dbe09792922"
+    },
+    {
+      "path": "cognix-eclipse-visual-bridge-diffusion",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d3c66f14342d3e07ddbae353c81dfed3bc42de86"
+    },
+    {
+      "path": "cognix-eclipse-visual-bridge-neural",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b555332cbf095d14f791e3a28e28af75fd19230f"
+    },
+    {
+      "path": "cognix-eclipse-visual-bridge-platform",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4d3cb2141988ea3abc982a663c0cebac5efc6a11"
+    },
+    {
+      "path": "cognix-eclipse-visual-bridge-renderer",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9a59dc8858e3fe34ef101909fac0b343702b6c1b"
+    },
+    {
+      "path": "cognix-eclipse-visual-bridge-rop",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "bb16f9af57f6828f38ea1ded41a54f8b19fb41ab"
+    },
+    {
+      "path": "cognix-eclipse-visual-core",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ea6ce678f8ecd502462e267f5be387874b6e7293"
+    },
+    {
+      "path": "cognix-eclipse-visual-headless-pde",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6d88fcf56157b7362c8b836a852af525fba5b340"
+    },
+    {
+      "path": "cognix-eclipse-visual-headless",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "abdedd1df18d61710444555ef66dfd8ece7c46bc"
+    },
+    {
+      "path": "cognix-eclipse-visual-orchestrator",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "de1c0a617a2328689e1f099476f1cb0c5355477a"
+    },
+    {
+      "path": "cognix-eclipse-visual-product",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "0adb376fe28f21da4811e854955a91b9fedd9a4b"
+    },
+    {
+      "path": "cognix-eclipse-visual-runtime",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ec89d0086a7daac15ff4c544bac1b15eba020270"
+    },
+    {
+      "path": "cognix-eclipse-visual-ui",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c2dc42c494da5ee2dfe44867761c53a542e5ca3f"
+    },
+    {
+      "path": "cognix-eclipse-visual-web",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "dae02816e74ab6f26ba1e80b8a3b4c78328c8a96"
+    },
+    {
+      "path": "cognix-eclipse",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f71e8cfa7b8d0e67256066bfbde46e037941d20c"
+    },
+    {
+      "path": "cognix-flow",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ca425c4c6ac5f5a4106dcf0ff254f2acafb5444c"
+    },
+    {
+      "path": "cognix-java-web-modules",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c38e02083e70a4eaa8ca3881bb8579fa3cb4ac3e"
+    },
+    {
+      "path": "cognix-java-web-runtime",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a2c1cf14e073384d6f85d9bfbef920674504d2c4"
+    },
+    {
+      "path": "cognix-java-web-transport",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a7cbdb43f596ea65acfe92f7f5c433b8c90ddb89"
+    },
+    {
+      "path": "cognix-java-web-workers",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "01d43fea3d35d7bc41001827460ff1cd7fa14815"
+    },
+    {
+      "path": "cognix-language-mechanics-adapters",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e638678142beb56306d4773b6ae126ec5a62e752"
+    },
+    {
+      "path": "cognix-mcp",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a85f24feadf7b4413ae9252568ed9d893d90096d"
+    },
+    {
+      "path": "cognix-nlp",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6a2c8b5254c2ef1e5657e9d362664ac8903df5f9"
+    },
+    {
+      "path": "cognix-parent",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "08c82b21f1efe5cb66932fa58e5561481c02fe59"
+    },
+    {
+      "path": "cognix-process",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ff48b15acf2e81397c75c0744cc11c93e8bd6ba9"
+    },
+    {
+      "path": "cognix-rag",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "bf318c82fa3b829ff13e891a9c9c07215eebbd7c"
+    },
+    {
+      "path": "cognix-skills",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "54973fd210cfd131bf18610a42b1b7bcbe4294c5"
+    },
+    {
+      "path": "cognix-tools",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "650aee576b039f2852bc88c31f71a87f96f760bb"
+    },
+    {
+      "path": "cognix-transpiler-aitrans-bridge",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9a008e64a77beb20610bc235ea2362c239ea13af"
+    },
+    {
+      "path": "cognix-transpiler-skillmd-bridge",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "3d219d73ab760ef63e30375b5cedc8153fd1c37e"
+    },
+    {
+      "path": "cognix-transpiler-teavm",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "081a6140cc6bfc05b77477ba63b2f0e05380eb9b"
+    },
+    {
+      "path": "cognix-transpiler",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "70836056d523cf7049b20aafb18ff9c1c5a8ebe3"
+    },
+    {
+      "path": "cognix-vscode",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "532b23d7c87d35da6081d7f28cd37808e6207568"
+    },
+    {
+      "path": "com",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "33e8b7f93363e7d78f564dad9f0cd8980de57d9a"
+    },
+    {
+      "path": "compose.yaml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5d7609c2c557c6d4e0ad53d3ecdbc5a42fd77f08"
+    },
+    {
+      "path": "config",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "564415140de315eddf0c5f9514a62225cac432bc"
+    },
+    {
+      "path": "cpullm-java",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "851a35b9267fd68e9421453c1a56cef80557e6d0"
+    },
+    {
+      "path": "cpullm-opdag-paroksha",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "0102ca9f0ba9197c0bb94b5833e285fe59d69b04"
+    },
+    {
+      "path": "cpullm-opdag",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ce762106b40d4a656b9ad426504fadd2921e3ff9"
+    },
+    {
+      "path": "cpullm-paroksha-superset",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6dbd999150ac8b4353a2695ba16bffe90755fa34"
+    },
+    {
+      "path": "cpullm-text-evidence-v1",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9b0bbde46cd51e58f90c72a305442439cccb5cc7"
+    },
+    {
+      "path": "docker",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8dd8485bad4754912174a8d6ce070118e8e148c5"
+    },
+    {
+      "path": "docs",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "7e5bff2ebb8863c2927c78f510a81850b24aa91e"
+    },
+    {
+      "path": "donors",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "03e5847c3e409732b101b381fe4401d456a649f1"
+    },
+    {
+      "path": "eclipse-plugins",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6f6b6cbe6f7fd60ad3687610c9f5a1bb102f1270"
+    },
+    {
+      "path": "experiments",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1a191d775041a6eb04d199ea254b1a78fa9cea56"
+    },
+    {
+      "path": "integrations",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5067203734f63832a015fe6f6464e3e665d6417f"
+    },
+    {
+      "path": "jdk-overlays",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f6bab162d058a8bb3a84127976ecb2fc56991df4"
+    },
+    {
+      "path": "jqassistant",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "fc0b0e77189f64e2892eca15416c9209f9f1a16b"
+    },
+    {
+      "path": "local-but-cloud",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "769f8f60258df154315ac9de14c1799f93e930ee"
+    },
+    {
+      "path": "m3-fast-search",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "7088d7a59391a8fd60579b48a823f8add288b698"
+    },
+    {
+      "path": "m3-java-contracts",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "80a92d063c92b0f7cac3fbe27afa869517cbacf7"
+    },
+    {
+      "path": "m3-java-inventory",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a1e0a6bf301bb6f45324a8b4394c7adec8eb6b26"
+    },
+    {
+      "path": "m3",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5e8b29f98d5583c4f23b9cb459eb7910753ab3a3"
+    },
+    {
+      "path": "mvnw",
+      "mode": "100755",
+      "type": "blob",
+      "sha": "bd8896bf2217b46faa0291585e01ac1a3441a958"
+    },
+    {
+      "path": "mvnw.cmd",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5761d948924c19571d27b465c519b2e2f9e30351"
+    },
+    {
+      "path": "operations-dashboard-design-system",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9c0016524cbfeef7fd6947c52c57946fe3d7d6c3"
+    },
+    {
+      "path": "operations-dashboard-ui",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "3ff34ff89abb7172ca04feceadfe72ca21db8994"
+    },
+    {
+      "path": "pom.xml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "98889a040aad5cc3c82f782bb4b173d118207988"
+    },
+    {
+      "path": "python",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "27c793367a50e8f147b84f0b3873478795e2e1fa"
+    },
+    {
+      "path": "research",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d96df76ab3627707f348c575e28a42585354f972"
+    },
+    {
+      "path": "rewrite.yml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "242b3b322ab4cdb55b61ec0815872f3abb1f3e66"
+    },
+    {
+      "path": "scripts",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "170c9086f5d2d040da5e49212f77dcd30d94a9d1"
+    },
+    {
+      "path": "src",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "512bf754ef80e71da36665603112f08d8e504012"
+    },
+    {
+      "path": "superset",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a154f3555951d17b4d3dbe663fb1362a7a864d16"
+    },
+    {
+      "path": "synex-bop",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b82112bad2774e5a43b1106555880ecb16b8e473"
+    },
+    {
+      "path": "synexi-protocol",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "498423475a5a89e6af65947e60f95dbbe2e18802"
+    },
+    {
+      "path": "synexia-agent",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6ec9e4a128fd3a939e5532e0e819c8a2c0ef923d"
+    },
+    {
+      "path": "synexia-aicore",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ecd1ac28403d47067f250f8cbc8d380c9e51ecba"
+    },
+    {
+      "path": "synexia-aiop",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "db35a88f2f24dad80096c6cd2db57c5b22c78e9e"
+    },
+    {
+      "path": "synexia-algo",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a8c10cc39bc257a2b3ee137d616deada022c938f"
+    },
+    {
+      "path": "synexia-algorithm-runtime",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d5495d319957c19037b156bb96ea12d2d2cf206c"
+    },
+    {
+      "path": "synexia-anop",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8c2c98620e4fba051df2b563ffa2352687c650e9"
+    },
+    {
+      "path": "synexia-aop",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "590ddca493f80e806b6251da88b762fcedc2fbc2"
+    },
+    {
+      "path": "synexia-api-corpus",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a4323f8c0830f2746fb1bff40e52945d5f8e86f3"
+    },
+    {
+      "path": "synexia-appliance-watchdog",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b836c8af196983a3acfdf78d3ab5a9dd986354c1"
+    },
+    {
+      "path": "synexia-archive-mavenizer",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ff7400016e764157040ccfda0110f7eb911bbd58"
+    },
+    {
+      "path": "synexia-artifact-intelligence",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a38402f66edcd5116d707f76a07c1364ec99564b"
+    },
+    {
+      "path": "synexia-beam-cpullm",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e9cf765d9bf7c54dec0be0b9a55f1d3495a31fdf"
+    },
+    {
+      "path": "synexia-beam-etl",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2a06177acb4829f41812045f5ae80a39a1e3d17e"
+    },
+    {
+      "path": "synexia-bitop",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "7d7a274af6ca55f0f2d9d47f29a0f8d2f39ee1d5"
+    },
+    {
+      "path": "synexia-bom",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a18845b6b185de74056e7475f2719a2ef85b1c2e"
+    },
+    {
+      "path": "synexia-bop",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "08bbecb9d6e73cd8dc073032beff1426b0368a7c"
+    },
+    {
+      "path": "synexia-build-inventory",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8f60508b9857671b1ed8cb0a8289da3c702d2420"
+    },
+    {
+      "path": "synexia-camel-dag-bridge",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "7d70a1fea4c56c8bc52481fac143b558d8e7f5b1"
+    },
+    {
+      "path": "synexia-camel-dag-kie",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d40f66993f14d5e1d94d84282696de8d529e3108"
+    },
+    {
+      "path": "synexia-chat-artifacts",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "451b0554b19b9448425ba333f85d68b38953ecc8"
+    },
+    {
+      "path": "synexia-chrome-ai",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "326bec4f0ce32cb005c4298c67d763656a6da7ab"
+    },
+    {
+      "path": "synexia-chrome-diffusion",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1bc7b2b1bbf26a538e914ac278adece14a0db7c6"
+    },
+    {
+      "path": "synexia-chromeml-api",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4d319dc870c9975731b2f67e6fd3b9e53ef33ada"
+    },
+    {
+      "path": "synexia-classic-intelligence",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8169898b534a591234d7b17e21880eb277e07466"
+    },
+    {
+      "path": "synexia-classic-tools-jni",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "98da56c41cdabda65085787222cf0594ae6cb16b"
+    },
+    {
+      "path": "synexia-classic-tools",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "20220d3ec69fd2249bf4b9b36faccdf46cdde241"
+    },
+    {
+      "path": "synexia-cmop",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "0b9eccde61ebe1008d6beb70ecff3730301100b3"
+    },
+    {
+      "path": "synexia-code-convergence-jini",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a1dbada9cf320cca376f77e72a07b2dd2459bdfd"
+    },
+    {
+      "path": "synexia-code-convergence",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "22b099d170ff650ed5ba4ec79b82f502e93871bb"
+    },
+    {
+      "path": "synexia-common-cache",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1309dae05f0ec1a18f75ddf3eb9c5e2624ce1413"
+    },
+    {
+      "path": "synexia-common-core",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "0ee2a5813767f9bb68c1a552c6a066cd00b89efb"
+    },
+    {
+      "path": "synexia-common",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e4b851b5d64a2436c372a05da37e59de3a3c8249"
+    },
+    {
+      "path": "synexia-consolidation-runtime",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5a2fcf5cb9dfed6c7d83aab86e2ddbfa66e2dd31"
+    },
+    {
+      "path": "synexia-cop-bop",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "05676ad5249f35d8643500357cd438c57e792f10"
+    },
+    {
+      "path": "synexia-cop",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b4500eb5b96c756429a584d9828bccbfc51610b9"
+    },
+    {
+      "path": "synexia-cpu-camel-fabric",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "46b4307031e05d956fe56454b3cfe9538e7564f0"
+    },
+    {
+      "path": "synexia-cpullm",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4176db681cf0317a3817b8385baa0f9d1f929e2a"
+    },
+    {
+      "path": "synexia-dashboard-api",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "86af41120a1c7c38acf9d711b231d8cde36ae8f1"
+    },
+    {
+      "path": "synexia-dawn-jni",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d5f98f9e918f4afd473a83e0a137fd3ccf5370ca"
+    },
+    {
+      "path": "synexia-dfs",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d8a44fe7dc7124e42dc1cbd6bc303bc98e222160"
+    },
+    {
+      "path": "synexia-dictlang",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ab1a651e0d0bb205152bd58a29e73175f5113a94"
+    },
+    {
+      "path": "synexia-diffusion",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "13582f4781a12995d809971196d32c3b16f39bda"
+    },
+    {
+      "path": "synexia-docker",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "29e559614ce163caf00f8169851ff73809a5565f"
+    },
+    {
+      "path": "synexia-donor-inventory",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c5b779af825e71cb677ecba0b757c053ecffc89b"
+    },
+    {
+      "path": "synexia-donor-superset-api",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "aa91e8c2f4d30d1fe884016cf5e3e8fc0f015dab"
+    },
+    {
+      "path": "synexia-donor-superset-bridge-archive",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a5579bca3033c63e6de0f725d668ba98eb7283f2"
+    },
+    {
+      "path": "synexia-donor-superset-bridge-build",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "235732e5cd8aaddb91e7445a290419081e494333"
+    },
+    {
+      "path": "synexia-donor-superset-bridge-git",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "05636e7d04d869ec49b4d1d912c074db7893d090"
+    },
+    {
+      "path": "synexia-donor-superset-core",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "751f334fc62a9420263cadb5de3acddb0fe446c4"
+    },
+    {
+      "path": "synexia-donor-superset-headless",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d09f58ab75f94810a1eaba4c974bc9df4f168bdf"
+    },
+    {
+      "path": "synexia-donor-superset",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e9f9f2f8157a79e24e5d07fa0d3908ffc57c8cec"
+    },
+    {
+      "path": "synexia-edge-ingress",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1e48e5e6d3b1e8476e4879e6f5e9b51578acd8bb"
+    },
+    {
+      "path": "synexia-enterprise-data-plane",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "552c3e1b921497228c6e4e0a900ff05e0ec65c54"
+    },
+    {
+      "path": "synexia-etl-dfs",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b1ef1f16be726439d3e61d55bd1b3d56f1d6ca09"
+    },
+    {
+      "path": "synexia-etl",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "dcd586a26e287671b449fa7bc072ff5558ccd666"
+    },
+    {
+      "path": "synexia-fastsearch",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "86dec56588f970051c515bcfcbb39b9a6501f4fa"
+    },
+    {
+      "path": "synexia-fileindex",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "10e016e92182ae5c4f896138a3eb057de33eceb3"
+    },
+    {
+      "path": "synexia-flink-cpullm",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "459d85b607d4b739211b1bfe03c0b90a93a414f4"
+    },
+    {
+      "path": "synexia-flink-datastream",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a659d02270014f6dabfe693af5d7957d79ca9ec1"
+    },
+    {
+      "path": "synexia-flink-spi",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e4dbaac7b9451e1c218e10bca02aa2e440ca99c1"
+    },
+    {
+      "path": "synexia-flldcim",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e443758088aa4b7bfaac80b1d812f17c8d2adff4"
+    },
+    {
+      "path": "synexia-fop",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "7501ae3a10b82a46bc772f37550d3374d7946821"
+    },
+    {
+      "path": "synexia-forge",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "90c3ece29e4cea15c3814ceed0e9558bb8f04754"
+    },
+    {
+      "path": "synexia-format-fabric",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "3739cb4fe30a8b525f2be53044f770760bb7ed5f"
+    },
+    {
+      "path": "synexia-game-kernel",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "89bab0180eafd8ab684f854e9cd7423f54aefb88"
+    },
+    {
+      "path": "synexia-hash-pack-parent",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6447a3a2fdb848605757b8558f70be5def1c7016"
+    },
+    {
+      "path": "synexia-hpcpop",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "68a122dff051c4be42a19e06c888c95a92c32179"
+    },
+    {
+      "path": "synexia-index-precompute-adapters",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "731d84521b5027b3c03b5b21b5329b943234a661"
+    },
+    {
+      "path": "synexia-index-precompute",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "527faec803802de6ee9ae737dd46b734293e6727"
+    },
+    {
+      "path": "synexia-indexstring-compiler",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "85d2fa3f71e6e1123ffea6d47bcee05a0817f1d5"
+    },
+    {
+      "path": "synexia-indexstring-jini",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8010015d18a583757a277819fe1006da477273e0"
+    },
+    {
+      "path": "synexia-indexstring-maven-plugin",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4138ef8507bf46aa61de484306be2f970da74cc7"
+    },
+    {
+      "path": "synexia-indexstring-tornadovm",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "25f03d1f848dd7ed20b4f21d1227bb5bce512912"
+    },
+    {
+      "path": "synexia-indexstring",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b5c246331464186cb3fca73c1a13d253983e15af"
+    },
+    {
+      "path": "synexia-interned-language",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "dfb18ebcc07352acc9a18e96497abb7a19b62bd9"
+    },
+    {
+      "path": "synexia-ioc",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f09605b582bfae22e00184b601a7ba53ed420558"
+    },
+    {
+      "path": "synexia-iop",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a82744ec82bf8e673582f31f2228a30e2a72d79a"
+    },
+    {
+      "path": "synexia-java-web-workbench",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f2f20d4bb648fb375a3fc3c681a1a0d37be0e4c9"
+    },
+    {
+      "path": "synexia-jev",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4d8601936fff2f0efb446950dbe89234efeb8b91"
+    },
+    {
+      "path": "synexia-job",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9d81ffe2134a6c37f592cf2567d1203faf920c89"
+    },
+    {
+      "path": "synexia-kie-policy",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "836f7c4d775c6cdf8a37ce2fcf0d8db1b39c4f24"
+    },
+    {
+      "path": "synexia-kubernetes",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d3a54486010d20fa44752ed724168eb45d5c3926"
+    },
+    {
+      "path": "synexia-l2c",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6c806f7744381583b6c2ee63f309f235f73b50b5"
+    },
+    {
+      "path": "synexia-l2g",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e7e212efa8eab8766dfe7183e79d6dc1a4ce52d2"
+    },
+    {
+      "path": "synexia-l2v",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "721091e79aa6007ccdd138a059145178f80d91b5"
+    },
+    {
+      "path": "synexia-llmcpp",
+      "mode": "160000",
+      "type": "commit",
+      "sha": "480d0c8c9aa9f844ad961392c79a5867559d5e9f"
+    },
+    {
+      "path": "synexia-local-appliance-shell",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "77ffd8f2471db67ef22f7f58990000644fc311fa"
+    },
+    {
+      "path": "synexia-local-appliance",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e04eb7442f985d707cdd688e24cd79644eca4954"
+    },
+    {
+      "path": "synexia-local-k3s",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9a365e76cc562d7238c63ca8deb050e142a5a5c9"
+    },
+    {
+      "path": "synexia-m3-api-factory",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4290badf2b3b5a30f8ac0285553bc4404b8f4281"
+    },
+    {
+      "path": "synexia-m3-cloner",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "98d956d5eeabf2a1661c6006b09716eee77cb776"
+    },
+    {
+      "path": "synexia-m3-recipe",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "92d4317598fc46e5eeb33da5e7603d38246da41e"
+    },
+    {
+      "path": "synexia-m3-tooling",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5c9f16e7fc36130d822481cc0d44de9840fbb6b1"
+    },
+    {
+      "path": "synexia-m3index",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4bee45fa7f9f510ba19a3abe489ed0b12ebd5bce"
+    },
+    {
+      "path": "synexia-machine",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2caf4b64b6b03e654c9838c471cf656e81c87594"
+    },
+    {
+      "path": "synexia-mat-collections",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "29ef2cbfae23e07b5634067ea64dc2e12fea200e"
+    },
+    {
+      "path": "synexia-mat-index-string",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "993fa6caae8aa436ce800ee4571c79ae3bc240b6"
+    },
+    {
+      "path": "synexia-mat-value-maven-plugin",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "accab6a540caba2b229f9b938c8f3f6ec21712b0"
+    },
+    {
+      "path": "synexia-mat-value-processor",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a55308557545b27d077221f1e4c322f37522db11"
+    },
+    {
+      "path": "synexia-mat-value",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f40f817770495f97142c57d5a09334a8fbcca588"
+    },
+    {
+      "path": "synexia-maven-plugin",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "7001abb7a4ac5e7a21e3969249d5d70fa986e30d"
+    },
+    {
+      "path": "synexia-mindex-indexstring-bridge",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "997bf5af5b4a26879b51e047f9123122b33dfd78"
+    },
+    {
+      "path": "synexia-mindex-vm",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "273189d58174201d133a4616fe5b8c68854d6e39"
+    },
+    {
+      "path": "synexia-mindex",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f61c3e629e12e5011ca3033506eec98a5b5c4b89"
+    },
+    {
+      "path": "synexia-mllm",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a1cc488e9fcfb3f461523baf96da3e928cdadb54"
+    },
+    {
+      "path": "synexia-native-interop",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "13e44efb59c14fc0fe3ec1bd69e079c31dd1cfe9"
+    },
+    {
+      "path": "synexia-netnet",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "79764ff6c67e1a9ae28ddb0f16b9d7e16504a119"
+    },
+    {
+      "path": "synexia-neural-renderer-jni",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e0bc9d365f82a0ae66a848a7b788ddb6b7d87004"
+    },
+    {
+      "path": "synexia-neural-rendering",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "df6d582b7266fb41da174a58e906d34db4825ad9"
+    },
+    {
+      "path": "synexia-ngrok",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4cac29404b2947c47421156a2888aa3c7fb25deb"
+    },
+    {
+      "path": "synexia-openrewrite-recipes",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d8106554d43b3b9fa0d25d5eb1b89b90ebc28a91"
+    },
+    {
+      "path": "synexia-opsdash",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "fdd571624220332d3bea7d502dc3cb981f3661e2"
+    },
+    {
+      "path": "synexia-picocli-shell-m3",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "244afd28c2dcf0c3ccc7aa6e1bf1cb79737ceb68"
+    },
+    {
+      "path": "synexia-pluginify-api",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ebd67230394e9d036ab5b33e4dd9c54a1c2fc45b"
+    },
+    {
+      "path": "synexia-pluginify-bridge-eclipse",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "27b3633f173d596d41a506dd0aa9ee23e384d71c"
+    },
+    {
+      "path": "synexia-pluginify-bridge-native",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f4ef33f4b24f443a74acfd134577b65b475814c8"
+    },
+    {
+      "path": "synexia-pluginify-bridge-teavm",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "888d4eafddb4f14d3e2de30b9065184e6d3b39e5"
+    },
+    {
+      "path": "synexia-pluginify-core",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2d1fa80816bfeed03c950a3c05e275f17de1d515"
+    },
+    {
+      "path": "synexia-pluginify-headless",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "953153ebf7b8763fd1afed5f0009e9f6e25da819"
+    },
+    {
+      "path": "synexia-pluginify-maven-plugin",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c9ff91c0fe804ccf201c0ee475c88baed241e83e"
+    },
+    {
+      "path": "synexia-primitives",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "bfd692b93feb5f46745aa43c7acada2e62071d9d"
+    },
+    {
+      "path": "synexia-process",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2a08a5ea477355cedc66a7299f61ced237f634a8"
+    },
+    {
+      "path": "synexia-repository-java-candidate",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "0d9542033898268f01b3ca5a2850503e83cffb4c"
+    },
+    {
+      "path": "synexia-retrieval-fabric",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "01328ad796ff1811774cd240efb6331ab6d2fba5"
+    },
+    {
+      "path": "synexia-retrieval-runtime",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "04500e9c7c585e92a669f2157ee0ccbabf036af4"
+    },
+    {
+      "path": "synexia-rop-h2",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "85903554b67ac9a96c3979fe5f85faed50964a25"
+    },
+    {
+      "path": "synexia-rop",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "110c06663481a566b547f520c94dacd4e2ae5952"
+    },
+    {
+      "path": "synexia-route-policy",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "45a569f90642ce9a9a7e30176f23893b83a9aab0"
+    },
+    {
+      "path": "synexia-runtime",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "74d65667b795e014c1ab7902d237917bf566cdbe"
+    },
+    {
+      "path": "synexia-sap-compat",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "bdcce5f3a200843f3c31cd3d31439cb757d172f8"
+    },
+    {
+      "path": "synexia-sap-migration",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1a64145df9cb56c69dd5356562b804e91dc96231"
+    },
+    {
+      "path": "synexia-shape-bridge",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d5af59c0396be68c5dbfcbca8aa3b72efc25b88d"
+    },
+    {
+      "path": "synexia-shape-compiler",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "0dd547e958f43c4d2d93a483a551a0b2cce15488"
+    },
+    {
+      "path": "synexia-specgrep",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "261637c00009b5d102f71da93d5f3eaf6e8f2867"
+    },
+    {
+      "path": "synexia-specialist-ai",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ec3da64be363e4572dee730e5b1115c20a064776"
+    },
+    {
+      "path": "synexia-ssh",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c4bfdce1f73ca75bf84726a24ad12fb6e89b7a18"
+    },
+    {
+      "path": "synexia-sshd-server",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "22de36680f9661587b75b9c85b9b7657adbae83c"
+    },
+    {
+      "path": "synexia-synthesis",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9a733af767588984030c4f07f08b6d7534789a01"
+    },
+    {
+      "path": "synexia-tabletree-spring-data",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b14344a34a0d7f92d865d26adff0fe281f25d874"
+    },
+    {
+      "path": "synexia-tabletree",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "fb54f9ba1fb77a6756d12fe8470a961c1cc2c72d"
+    },
+    {
+      "path": "synexia-tmop",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d91e9b6d8b462d292da57ee34cc089e962b9dc59"
+    },
+    {
+      "path": "synexia-top",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "928f7ad8fe14d892aa88630f7efa042446636f26"
+    },
+    {
+      "path": "synexia-tornadovm-m3",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b2fd3e1453a383a219d8871cc5b7d41bed275db7"
+    },
+    {
+      "path": "synexia-translate",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "001bbf3628a0a0a1dbd75d357683d61d83046b68"
+    },
+    {
+      "path": "synexia-truckmate",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ac195fa6912910f4826c73414070da82f196d8c3"
+    },
+    {
+      "path": "synexia-tunnel",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6e13f8fd7cfcb64569da2d2ee7331682858ba408"
+    },
+    {
+      "path": "synexia-unicodex",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "06c3c178c53478f763cfcb5214528a23dff025a4"
+    },
+    {
+      "path": "synexia-unix4j-m3",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8bd1b458309096286ee20b57b55e13d8c2af1cda"
+    },
+    {
+      "path": "synexia-upwork-pipeline",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "7ced7b79dbcd15c4d68ed250b010e13f69b4c3c3"
+    },
+    {
+      "path": "synexia-vdp",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4559cc62be6624ef552b3f6fee2516bb8e6ce883"
+    },
+    {
+      "path": "synexia-visual-pixel-runtime",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5106adf6c01e3fedce807c4f5e187edf52225629"
+    },
+    {
+      "path": "synexia-watchdog-policy",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "16fb77867e89d926b48e355193602b76cd99e11e"
+    },
+    {
+      "path": "tests",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "008ba9e0cb863451585c5f35092fba8f94aa65b6"
+    },
+    {
+      "path": "third_party",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "0be674fd8f342b62cb1e83e901997fbb91b91efe"
+    },
+    {
+      "path": "tools",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9123f98669bebfd29d94e56470bac163a618cadc"
+    },
+    {
+      "path": "truckmate-automation",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ec4e4728e734adbcc86eb938c851f983771c4acf"
+    },
+    {
+      "path": "truckmate-integration",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9020863b105cdd40f70ac437c7cc0096842f70e5"
+    },
+    {
+      "path": "vendor",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "43180da976da1879e33431c52cd495b5b3f6077e"
+    },
+    {
+      "path": "verification",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "a4851243c444ba533c636341f582bfae6fc10878"
+    },
+    {
+      "path": "visual-compiler-inline",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "2b40a68ac24127adf2497028c4083c5e5571b9ef"
+    }
+  ],
+  "root_pom": {
+    "body_path": "/workspace/scratch/c0bcaa06df78/m3-mastery/inventory/final-integration/build-declarations/root-pom.xml",
+    "git_blob_sha1": "98889a040aad5cc3c82f782bb4b173d118207988",
+    "sha256": "f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab",
+    "bytes": 119981,
+    "unchanged_from_0b": true
+  },
+  "maven_declaration_count": 201,
+  "direct_path_count": 190,
+  "nested_path_count": 11,
+  "nested_root_count": 8,
+  "distinct_root_components": 194,
+  "declaration_contexts": {
+    "project": 200,
+    "profile:m3-tornado": 1
+  },
+  "declarations_equal_prior_exactly": true,
+  "maven_declarations": [
+    {
+      "path": "cognix-parent",
+      "context": "project"
+    },
+    {
+      "path": "synexia-bom",
+      "context": "project"
+    },
+    {
+      "path": "third_party/re2j",
+      "context": "project"
+    },
+    {
+      "path": "synexia-anop",
+      "context": "project"
+    },
+    {
+      "path": "synexia-flldcim",
+      "context": "project"
+    },
+    {
+      "path": "synexia-fop",
+      "context": "project"
+    },
+    {
+      "path": "synexia-common",
+      "context": "project"
+    },
+    {
+      "path": "synexia-interned-language",
+      "context": "project"
+    },
+    {
+      "path": "synexia-bitop",
+      "context": "project"
+    },
+    {
+      "path": "synexia-mat-value",
+      "context": "project"
+    },
+    {
+      "path": "synexia-iop",
+      "context": "project"
+    },
+    {
+      "path": "synexia-tmop",
+      "context": "project"
+    },
+    {
+      "path": "synexia-cop",
+      "context": "project"
+    },
+    {
+      "path": "synexia-top",
+      "context": "project"
+    },
+    {
+      "path": "synexia-bop",
+      "context": "project"
+    },
+    {
+      "path": "synexia-cop-bop",
+      "context": "project"
+    },
+    {
+      "path": "synexia-aop",
+      "context": "project"
+    },
+    {
+      "path": "synexia-cmop",
+      "context": "project"
+    },
+    {
+      "path": "synexia-dictlang",
+      "context": "project"
+    },
+    {
+      "path": "synexia-unicodex",
+      "context": "project"
+    },
+    {
+      "path": "synexia-algo",
+      "context": "project"
+    },
+    {
+      "path": "synexia-shape-compiler",
+      "context": "project"
+    },
+    {
+      "path": "synexia-diffusion",
+      "context": "project"
+    },
+    {
+      "path": "synexia-visual-pixel-runtime",
+      "context": "project"
+    },
+    {
+      "path": "synexia-ioc",
+      "context": "project"
+    },
+    {
+      "path": "synexia-specgrep",
+      "context": "project"
+    },
+    {
+      "path": "synexia-format-fabric",
+      "context": "project"
+    },
+    {
+      "path": "synexia-fileindex",
+      "context": "project"
+    },
+    {
+      "path": "synexia-donor-inventory",
+      "context": "project"
+    },
+    {
+      "path": "synexia-donor-superset",
+      "context": "project"
+    },
+    {
+      "path": "synexia-archive-mavenizer",
+      "context": "project"
+    },
+    {
+      "path": "synexia-api-corpus",
+      "context": "project"
+    },
+    {
+      "path": "synexia-m3-api-factory",
+      "context": "project"
+    },
+    {
+      "path": "synexia-m3-recipe",
+      "context": "project"
+    },
+    {
+      "path": "synexia-fastsearch",
+      "context": "project"
+    },
+    {
+      "path": "m3-fast-search",
+      "context": "project"
+    },
+    {
+      "path": "m3-java-contracts",
+      "context": "project"
+    },
+    {
+      "path": "m3-java-inventory",
+      "context": "project"
+    },
+    {
+      "path": "synexia-classic-intelligence",
+      "context": "project"
+    },
+    {
+      "path": "synexia-retrieval-runtime",
+      "context": "project"
+    },
+    {
+      "path": "synexia-runtime",
+      "context": "project"
+    },
+    {
+      "path": "synexia-pluginify-api",
+      "context": "project"
+    },
+    {
+      "path": "synexia-pluginify-core",
+      "context": "project"
+    },
+    {
+      "path": "synexia-pluginify-bridge-eclipse",
+      "context": "project"
+    },
+    {
+      "path": "synexia-pluginify-bridge-native",
+      "context": "project"
+    },
+    {
+      "path": "synexia-pluginify-headless",
+      "context": "project"
+    },
+    {
+      "path": "synexia-pluginify-maven-plugin",
+      "context": "project"
+    },
+    {
+      "path": "synexia-dawn-jni",
+      "context": "project"
+    },
+    {
+      "path": "synexia-aicore",
+      "context": "project"
+    },
+    {
+      "path": "synexia-indexstring",
+      "context": "project"
+    },
+    {
+      "path": "synexia-index-precompute",
+      "context": "project"
+    },
+    {
+      "path": "synexia-index-precompute-adapters",
+      "context": "project"
+    },
+    {
+      "path": "synexia-indexstring/algorithm-bridge",
+      "context": "project"
+    },
+    {
+      "path": "synexia-tabletree",
+      "context": "project"
+    },
+    {
+      "path": "synexia-tabletree-spring-data",
+      "context": "project"
+    },
+    {
+      "path": "synexia-indexstring-compiler",
+      "context": "project"
+    },
+    {
+      "path": "synexia-indexstring-maven-plugin",
+      "context": "project"
+    },
+    {
+      "path": "synexia-mindex",
+      "context": "project"
+    },
+    {
+      "path": "synexia-l2g",
+      "context": "project"
+    },
+    {
+      "path": "synexia-l2v",
+      "context": "project"
+    },
+    {
+      "path": "synexia-l2c",
+      "context": "project"
+    },
+    {
+      "path": "synexia-mindex-indexstring-bridge",
+      "context": "project"
+    },
+    {
+      "path": "synexia-m3index",
+      "context": "project"
+    },
+    {
+      "path": "synexia-shape-bridge",
+      "context": "project"
+    },
+    {
+      "path": "synexia-specialist-ai",
+      "context": "project"
+    },
+    {
+      "path": "synexia-flink-spi",
+      "context": "project"
+    },
+    {
+      "path": "synexia-etl",
+      "context": "project"
+    },
+    {
+      "path": "synexia-dfs",
+      "context": "project"
+    },
+    {
+      "path": "synexia-etl-dfs",
+      "context": "project"
+    },
+    {
+      "path": "synexia-flink-datastream",
+      "context": "project"
+    },
+    {
+      "path": "synexia-ssh",
+      "context": "project"
+    },
+    {
+      "path": "synexia-sshd-server",
+      "context": "project"
+    },
+    {
+      "path": "synexia-synthesis",
+      "context": "project"
+    },
+    {
+      "path": "synexia-cpullm",
+      "context": "project"
+    },
+    {
+      "path": "synexia-flink-cpullm",
+      "context": "project"
+    },
+    {
+      "path": "synexia-beam-cpullm",
+      "context": "project"
+    },
+    {
+      "path": "synexia-beam-etl",
+      "context": "project"
+    },
+    {
+      "path": "synexia-code-convergence",
+      "context": "project"
+    },
+    {
+      "path": "synexia-code-convergence-jini",
+      "context": "project"
+    },
+    {
+      "path": "synexia-indexstring-jini",
+      "context": "project"
+    },
+    {
+      "path": "synexia-forge",
+      "context": "project"
+    },
+    {
+      "path": "synexia-chromeml-api",
+      "context": "project"
+    },
+    {
+      "path": "tools/library-ranking",
+      "context": "project"
+    },
+    {
+      "path": "cognix-ai",
+      "context": "project"
+    },
+    {
+      "path": "cognix-mcp",
+      "context": "project"
+    },
+    {
+      "path": "cognix-nlp",
+      "context": "project"
+    },
+    {
+      "path": "synexia-mllm",
+      "context": "project"
+    },
+    {
+      "path": "synexia-mllm/chrome2api-java",
+      "context": "project"
+    },
+    {
+      "path": "synexia-mllm/nanobrowser-java",
+      "context": "project"
+    },
+    {
+      "path": "synexia-mllm/nanobrowser-java/model-execution/contexts",
+      "context": "project"
+    },
+    {
+      "path": "synexia-translate",
+      "context": "project"
+    },
+    {
+      "path": "cognix-agents",
+      "context": "project"
+    },
+    {
+      "path": "agents/codeact-java",
+      "context": "project"
+    },
+    {
+      "path": "cognix-flow",
+      "context": "project"
+    },
+    {
+      "path": "cognix-camel-kie",
+      "context": "project"
+    },
+    {
+      "path": "synexia-enterprise-data-plane",
+      "context": "project"
+    },
+    {
+      "path": "synexia-sap-compat",
+      "context": "project"
+    },
+    {
+      "path": "synexia-sap-migration",
+      "context": "project"
+    },
+    {
+      "path": "synexia-camel-dag-bridge",
+      "context": "project"
+    },
+    {
+      "path": "synexia-camel-dag-kie",
+      "context": "project"
+    },
+    {
+      "path": "cognix-process",
+      "context": "project"
+    },
+    {
+      "path": "cognix-tools",
+      "context": "project"
+    },
+    {
+      "path": "cognix-donor-inventory",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-mechanics-core",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-mechanics-spi",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-mechanics-adapters",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-mechanics-native-bridge",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-mechanics-visual-bridge",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-mechanics-rop-plugin",
+      "context": "project"
+    },
+    {
+      "path": "cognix-language-mechanics-adapters",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-mechanics-ui-api",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-mechanics-ui",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-mechanics-cpullm",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-mechanics-headless-app",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-visual-api",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-visual-core",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-visual-bridge-browser",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-visual-bridge-neural",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-visual-bridge-diffusion",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-visual-bridge-renderer",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-visual-bridge-rop",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-visual-bridge-platform",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-visual-headless",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-visual-orchestrator",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-visual-runtime",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-visual-headless-pde",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-visual-product",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-visual-ui",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-visual-web",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse-visual-architecture-tests",
+      "context": "project"
+    },
+    {
+      "path": "synexia-cpu-camel-fabric",
+      "context": "project"
+    },
+    {
+      "path": "synexia-indexstring-tornadovm",
+      "context": "project"
+    },
+    {
+      "path": "synexia-neural-renderer-jni",
+      "context": "project"
+    },
+    {
+      "path": "synexia-algorithm-runtime",
+      "context": "project"
+    },
+    {
+      "path": "synexia-consolidation-runtime",
+      "context": "project"
+    },
+    {
+      "path": "cpullm-opdag/provider-integrations/java",
+      "context": "project"
+    },
+    {
+      "path": "cognix-transpiler",
+      "context": "project"
+    },
+    {
+      "path": "cognix-java-web-runtime",
+      "context": "project"
+    },
+    {
+      "path": "cognix-java-web-transport",
+      "context": "project"
+    },
+    {
+      "path": "cognix-java-web-modules",
+      "context": "project"
+    },
+    {
+      "path": "cognix-java-web-workers",
+      "context": "project"
+    },
+    {
+      "path": "cognix-transpiler-teavm",
+      "context": "project"
+    },
+    {
+      "path": "synexia-pluginify-bridge-teavm",
+      "context": "project"
+    },
+    {
+      "path": "cognix-transpiler-skillmd-bridge",
+      "context": "project"
+    },
+    {
+      "path": "cognix-skills",
+      "context": "project"
+    },
+    {
+      "path": "cognix-rag",
+      "context": "project"
+    },
+    {
+      "path": "cognix-demos",
+      "context": "project"
+    },
+    {
+      "path": "synexia-mat-value-processor",
+      "context": "project"
+    },
+    {
+      "path": "synexia-mat-value-maven-plugin",
+      "context": "project"
+    },
+    {
+      "path": "synexia-openrewrite-recipes",
+      "context": "project"
+    },
+    {
+      "path": "synexia-repository-java-candidate",
+      "context": "project"
+    },
+    {
+      "path": "synexia-upwork-pipeline",
+      "context": "project"
+    },
+    {
+      "path": "synexia-maven-plugin",
+      "context": "project"
+    },
+    {
+      "path": "synexia-agent",
+      "context": "project"
+    },
+    {
+      "path": "synexia-rop",
+      "context": "project"
+    },
+    {
+      "path": "synexia-rop-h2",
+      "context": "project"
+    },
+    {
+      "path": "synexia-vdp",
+      "context": "project"
+    },
+    {
+      "path": "synexia-m3-cloner",
+      "context": "project"
+    },
+    {
+      "path": "synexia-ngrok",
+      "context": "project"
+    },
+    {
+      "path": "synexia-docker",
+      "context": "project"
+    },
+    {
+      "path": "synexia-kubernetes",
+      "context": "project"
+    },
+    {
+      "path": "synexia-dashboard-api",
+      "context": "project"
+    },
+    {
+      "path": "synexia-tunnel",
+      "context": "project"
+    },
+    {
+      "path": "synexia-opsdash",
+      "context": "project"
+    },
+    {
+      "path": "synexia-edge-ingress",
+      "context": "project"
+    },
+    {
+      "path": "synexia-local-appliance",
+      "context": "project"
+    },
+    {
+      "path": "synexia-local-k3s",
+      "context": "project"
+    },
+    {
+      "path": "synexia-local-appliance-shell",
+      "context": "project"
+    },
+    {
+      "path": "synexia-route-policy",
+      "context": "project"
+    },
+    {
+      "path": "synexia-kie-policy",
+      "context": "project"
+    },
+    {
+      "path": "synexia-appliance-watchdog",
+      "context": "project"
+    },
+    {
+      "path": "cognix-transpiler-aitrans-bridge",
+      "context": "project"
+    },
+    {
+      "path": "synexia-aiop",
+      "context": "project"
+    },
+    {
+      "path": "synexia-artifact-intelligence",
+      "context": "project"
+    },
+    {
+      "path": "synexia-build-inventory",
+      "context": "project"
+    },
+    {
+      "path": "synexia-chat-artifacts",
+      "context": "project"
+    },
+    {
+      "path": "synexia-classic-tools",
+      "context": "project"
+    },
+    {
+      "path": "synexia-classic-tools-jni",
+      "context": "project"
+    },
+    {
+      "path": "synexia-hpcpop",
+      "context": "project"
+    },
+    {
+      "path": "synexia-mat-collections",
+      "context": "project"
+    },
+    {
+      "path": "synexia-netnet",
+      "context": "project"
+    },
+    {
+      "path": "synexia-primitives",
+      "context": "project"
+    },
+    {
+      "path": "cognix-eclipse",
+      "context": "project"
+    },
+    {
+      "path": "cpullm-java",
+      "context": "project"
+    },
+    {
+      "path": "cpullm-paroksha-superset",
+      "context": "project"
+    },
+    {
+      "path": "synexia-chrome-diffusion",
+      "context": "project"
+    },
+    {
+      "path": "synexia-common-cache",
+      "context": "project"
+    },
+    {
+      "path": "synexia-common-core",
+      "context": "project"
+    },
+    {
+      "path": "synexia-hash-pack-parent",
+      "context": "project"
+    },
+    {
+      "path": "synexia-java-web-workbench",
+      "context": "project"
+    },
+    {
+      "path": "synexia-neural-rendering",
+      "context": "project"
+    },
+    {
+      "path": "synexia-picocli-shell-m3",
+      "context": "project"
+    },
+    {
+      "path": "synexia-process",
+      "context": "project"
+    },
+    {
+      "path": "synexia-retrieval-fabric",
+      "context": "project"
+    },
+    {
+      "path": "synexia-truckmate",
+      "context": "project"
+    },
+    {
+      "path": "synexia-truckmate/reference",
+      "context": "project"
+    },
+    {
+      "path": "synexia-truckmate/transport",
+      "context": "project"
+    },
+    {
+      "path": "synexia-unix4j-m3",
+      "context": "project"
+    },
+    {
+      "path": "synexia-watchdog-policy",
+      "context": "project"
+    },
+    {
+      "path": "synexi-protocol",
+      "context": "project"
+    },
+    {
+      "path": "synexia-cpu-camel-fabric/providers/tornadovm",
+      "context": "profile:m3-tornado"
+    }
+  ],
+  "maven_scope": "Declarations only, including the m3-tornado profile. Does not prove every declared module pom.xml was acquired or built, profile activation, reactor closure, export or delivery.",
+  "final_package_tree": "284cac67103e667d93846eeb92d83cf99f1daed1",
+  "final_package_entry_count": 1358,
+  "root_to_package_chain": [
+    {
+      "name": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes",
+      "old_tree": "3a1508ce8d45731c3a2d1cd3980315cca3546f6c",
+      "final_tree": "d8106554d43b3b9fa0d25d5eb1b89b90ebc28a91",
+      "old_receipt": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-source-0b8dc/trees/3a1508ce8d45731c3a2d1cd3980315cca3546f6c.json",
+      "method": "Complete old entry set plus recorded final child SHAs; recomputed exact final Git tree hash."
+    },
+    {
+      "name": "src",
+      "path": "synexia-openrewrite-recipes/src",
+      "old_tree": "7ebaa0cbdc66e1f6db0817b0aa3dc3e51d0caaa9",
+      "final_tree": "dc4cff8f68b4f138f333bfdb9eab938d6d277388",
+      "old_receipt": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-source-0b8dc/trees/7ebaa0cbdc66e1f6db0817b0aa3dc3e51d0caaa9.json",
+      "method": "Complete old entry set plus recorded final child SHAs; recomputed exact final Git tree hash."
+    },
+    {
+      "name": "main",
+      "path": "synexia-openrewrite-recipes/src/main",
+      "old_tree": "4d90f1f247b01b735c3998ca779ba94a6c8f0147",
+      "final_tree": "75636030562e4f373a64436dce092c780adcdf99",
+      "old_receipt": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-source-0b8dc/trees/4d90f1f247b01b735c3998ca779ba94a6c8f0147.json",
+      "method": "Complete old entry set plus recorded final child SHAs; recomputed exact final Git tree hash."
+    },
+    {
+      "name": "java",
+      "path": "synexia-openrewrite-recipes/src/main/java",
+      "old_tree": "0a9a1f1b893289a9e76a34cd3ffdb3250da2d3dc",
+      "final_tree": "bee9798cb41dee193ff909a2afd3a01be438c918",
+      "old_receipt": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-source-0b8dc/trees/0a9a1f1b893289a9e76a34cd3ffdb3250da2d3dc.json",
+      "method": "Complete old entry set plus recorded final child SHAs; recomputed exact final Git tree hash."
+    },
+    {
+      "name": "com",
+      "path": "synexia-openrewrite-recipes/src/main/java/com",
+      "old_tree": "0f81ac5774490fd51fae77a9680b4af6e4dd0315",
+      "final_tree": "14d3cc911d4028a99dd21c5357da35f779d07fb8",
+      "old_receipt": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-source-0b8dc/trees/0f81ac5774490fd51fae77a9680b4af6e4dd0315.json",
+      "method": "Complete old entry set plus recorded final child SHAs; recomputed exact final Git tree hash."
+    },
+    {
+      "name": "synexia",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia",
+      "old_tree": "aafbc7fb61545787ecee80c600dd1ed7452b4957",
+      "final_tree": "d629188abe30d99fee38ceade5d20a044320332e",
+      "old_receipt": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-source-0b8dc/trees/aafbc7fb61545787ecee80c600dd1ed7452b4957.json",
+      "method": "Complete old entry set plus recorded final child SHAs; recomputed exact final Git tree hash."
+    }
+  ],
+  "reconstructed_intermediate_trees": [
+    {
+      "path": "synexia-openrewrite-recipes",
+      "old_receipt": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-source-0b8dc/trees/3a1508ce8d45731c3a2d1cd3980315cca3546f6c.json",
+      "sha": "d8106554d43b3b9fa0d25d5eb1b89b90ebc28a91",
+      "tree": [
+        {
+          "path": "ATOM_HASH_DATABASE.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "87dcc31a5ed43e88fcf05aae81459fff06f33416",
+          "size": 10946
+        },
+        {
+          "path": "LLM_RECEIPT_FIXTURE_REPAIR.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4aeda0fa26e899eac005d1a3d3d6bb9d9a994d59",
+          "size": 3845
+        },
+        {
+          "path": "M3_HASH_PINNED_JAVA_RECIPE.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4b050274e58c209042d9f8f472aebe684b9e9b11",
+          "size": 2898
+        },
+        {
+          "path": "README.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "2595bdfda8d07fda35c8779773be013b366a92b6",
+          "size": 20261
+        },
+        {
+          "path": "RECIPE_LABORATORY.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "2b24d0922d89ce56dee04a669bdffc846c3416bb",
+          "size": 7865
+        },
+        {
+          "path": "RECIPE_LITERAL_SYNTAX_REPAIR.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "5043d264cee4f8a29fd8b0f15e4357aa6280a62a",
+          "size": 6222
+        },
+        {
+          "path": "SAP_OBSERVABLE_SURFACE_SYNTAX_REPAIR.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "30beea213fba67a46ed9848440199f6c82dee245",
+          "size": 4423
+        },
+        {
+          "path": "THIRD_PARTY_NOTICES.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e158f1593e63dbe53b5e28235fd4c18fa7df9ce1",
+          "size": 10826
+        },
+        {
+          "path": "crates",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "48028d7c0287ccbd90d0416c9f5debccc0a51c83"
+        },
+        {
+          "path": "docs",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "6a0461adee8a9f54916e987a0f79d633c647143b"
+        },
+        {
+          "path": "integration",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "c3892f5dce84faf8b3bc07e8b9c063a0d52b00c6"
+        },
+        {
+          "path": "interface-abstract-base-checkstyle.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "755873d903057b3b84688be32e06f97507002a1c",
+          "size": 496
+        },
+        {
+          "path": "native",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "20bae09f6a32df13bd309f2f99686f146867659b"
+        },
+        {
+          "path": "pom-api-capability-gap-delivery.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "d797f249d1ab1f964b6afef9a133d71fa9acbcbf",
+          "size": 3268
+        },
+        {
+          "path": "pom-api-capability-implementation-crate.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "cf08273d0735fba9fddaab9d4128da920213c7fb",
+          "size": 3078
+        },
+        {
+          "path": "pom-api-capability-implementation-review-receipt.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "9688dd122c63f0d4bc14f453f4a42ad97723b14f",
+          "size": 3059
+        },
+        {
+          "path": "pom-api-capability-map.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "5d8acff22da5d36a264fd60f1625915b8fb41aba",
+          "size": 2889
+        },
+        {
+          "path": "pom-api-capability-reviewed-bootstrap-plan.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "0568de2ac60e121461f7b8a3e19b160514f8465c",
+          "size": 3037
+        },
+        {
+          "path": "pom-code-understanding-cross-view.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "bb69f6d8d21a67b470623376c1cc8cde1eec2f4d",
+          "size": 2086
+        },
+        {
+          "path": "pom-collections-jdk-names.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "68b8c86f8f52e4176c7776eb7831348070d0c62e",
+          "size": 4054
+        },
+        {
+          "path": "pom-collections-superset-counts.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "7d852c305cbd8429a9451b488ad2057ec8a32449",
+          "size": 3672
+        },
+        {
+          "path": "pom-derivative-regex-precompute.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "18a2f22574da0c9c2827decaef77bd6b13a29082",
+          "size": 2967
+        },
+        {
+          "path": "pom-hybrid-fuzzy-precompute.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "5af7dbe66b901ed05462961084816bcb2ba71e80",
+          "size": 2997
+        },
+        {
+          "path": "pom-interface-abstract-base.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "5325e308aa9ece089efa517e6eacf787f6d8914f",
+          "size": 4233
+        },
+        {
+          "path": "pom-inventory-literal-syntax-repair.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "75cc15b1640b30e7481eee24541706ee4c85ee25",
+          "size": 2658
+        },
+        {
+          "path": "pom-literal-output-proof.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "91d428749a404b82246a30a15bc1e1b9ec92e931",
+          "size": 3056
+        },
+        {
+          "path": "pom-literal-syntax-repair.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "280a08c55c921fa2d0640037fc895ffdc9127e17",
+          "size": 2633
+        },
+        {
+          "path": "pom-llm-receipt-fixture-proof.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "fdea783229bfbf6fcb7e82d5c29b377e8338f5de",
+          "size": 2670
+        },
+        {
+          "path": "pom-llm-receipt-fixture-repair.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "7cb612921f330f4e2f3633d710f508cea6fdfec6",
+          "size": 2731
+        },
+        {
+          "path": "pom-mechanical-donor-shape-review.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "63b6240e06309911f6d473c718b85ba10e8979fc",
+          "size": 3699
+        },
+        {
+          "path": "pom-mindex-array.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4a934744846626ff32fe646832f3b83c04067764",
+          "size": 3528
+        },
+        {
+          "path": "pom-mindex-bridge-map.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "10fc87ccc94c234f4bdb021f95b73095c81ef917",
+          "size": 3017
+        },
+        {
+          "path": "pom-mindex-trial.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "206d3bf18689968606a5977686a59920ec0ab1c3",
+          "size": 2742
+        },
+        {
+          "path": "pom-mindex-xviewer-runtime-closure.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "2f9052becd1aea511ec22f97d86e2958c19e7cfc",
+          "size": 3080
+        },
+        {
+          "path": "pom-myers-fuzzy-precompute.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "1b6ee532f0773bd665ad27bb66cf80640277c3bd",
+          "size": 2873
+        },
+        {
+          "path": "pom-nebula-packed-occurrence.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "dddfea3fc54ca799fd8047ab7d28c0dbff6f5335",
+          "size": 6162
+        },
+        {
+          "path": "pom-partial-ast-native-pressure-v14.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "ce08a3638424d0514fc957b2877c98c5dfa80c1a",
+          "size": 3248
+        },
+        {
+          "path": "pom-portable-decision.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "4694ed73591c0c5f967dec5769b2d631dbe12c9a",
+          "size": 2887
+        },
+        {
+          "path": "pom-recipe-bootstrap-source-kind.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "997d761bed02097c4441bf47b511f4c69a11c988",
+          "size": 3026
+        },
+        {
+          "path": "pom-repository-superset-execution-bundle.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "0d9d87bf025aea665cc9f38b01e590bdee487240",
+          "size": 2965
+        },
+        {
+          "path": "pom-schema-bindings.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "b981ded3eb7219e013763ad9509af3fea9bf750e",
+          "size": 2103
+        },
+        {
+          "path": "pom-sealed-installer.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "38034bc03b4c06ee8f0198e1e6e5785c12ac65d1",
+          "size": 2720
+        },
+        {
+          "path": "pom-sha256-native.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "780c6e1598d10239eca789e77f15903fd46c93fa",
+          "size": 3235
+        },
+        {
+          "path": "pom-suffix-position.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "2b222e3c053c9b8ad3a29930856a6cc993195603",
+          "size": 2953
+        },
+        {
+          "path": "pom-swt-style-distillation.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "0934d9c66e1d46b71306de6ebe7adddc125f2fe1",
+          "size": 2486
+        },
+        {
+          "path": "pom-swt-viewport-build-gates-proof.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "41f24c4832dbc70f805b1237cca64a1f5edbbbf4",
+          "size": 2853
+        },
+        {
+          "path": "pom.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "1b0053aab66aa449190825044172c66896f39a6f",
+          "size": 193096
+        },
+        {
+          "path": "recipe-crates",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "6c5914a15ec02fef076691e3937531a1050f5004"
+        },
+        {
+          "path": "recipes",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "cf6ed17a2960a5e8128ab5d872b3dcee11fb81ec"
+        },
+        {
+          "path": "src",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "dc4cff8f68b4f138f333bfdb9eab938d6d277388"
+        },
+        {
+          "path": "standard-application-contract-pom.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "89db577add13e6e3657d4db5961f38a86242fd0b",
+          "size": 8738
+        },
+        {
+          "path": "tasks",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "6e4fc862aca7cd68b5b0019f4bf548e45825d44f"
+        },
+        {
+          "path": "third_party",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "e6405c8d2b9f364701d51744f18d7859de54ffaa"
+        },
+        {
+          "path": "tools",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "021d83730df353b384961c7d9e31572582b0a079"
+        },
+        {
+          "path": "tutorial-github-contract-pom.xml",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "c5c4ee6f2bfee870cfe982cf10f177ed182ae6da",
+          "size": 6999
+        },
+        {
+          "path": "upwork-application-pack.md",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "e8a3c997f88d3560625546c312f4d5bdee00297d",
+          "size": 7214
+        },
+        {
+          "path": "upwork-application-shortlist.tsv",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "473f34ccc763be0566c29deef55a0e1d44754e67",
+          "size": 2593
+        },
+        {
+          "path": "upwork-marketplace-details.tsv",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "923777d1be3ee95a2eae78f4d4638ad8c53c4b51",
+          "size": 50114
+        },
+        {
+          "path": "upwork-marketplace-revalidation.tsv",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "df9392e0d6c8ed1b5d2bbac3b2101633afd2f1d2",
+          "size": 431
+        },
+        {
+          "path": "upwork-profile-context.tsv",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "b7d3f759b5dc79a61f3846c884fcd73751d66dad",
+          "size": 137
+        },
+        {
+          "path": "verification",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "252b6ef7e1a63368848879e83dbe9660ff80413c"
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src",
+      "old_receipt": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-source-0b8dc/trees/7ebaa0cbdc66e1f6db0817b0aa3dc3e51d0caaa9.json",
+      "sha": "dc4cff8f68b4f138f333bfdb9eab938d6d277388",
+      "tree": [
+        {
+          "path": "main",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "75636030562e4f373a64436dce092c780adcdf99"
+        },
+        {
+          "path": "schema-recipe-integration",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "446296574c5da115c4ce17719163665249a0bad6"
+        },
+        {
+          "path": "schema-recipe-test",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "d0edd6cb2b2e4da84357bf7ed6cbf8656d6d9807"
+        },
+        {
+          "path": "test",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "799063d9df18dc1ec0f30acd029b1cd4cdc80e4d"
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main",
+      "old_receipt": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-source-0b8dc/trees/4d90f1f247b01b735c3998ca779ba94a6c8f0147.json",
+      "sha": "75636030562e4f373a64436dce092c780adcdf99",
+      "tree": [
+        {
+          "path": "java",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "bee9798cb41dee193ff909a2afd3a01be438c918"
+        },
+        {
+          "path": "native",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "db0ea5cd5e353c5d0286b09447afbdb4b3b150b0"
+        },
+        {
+          "path": "resources",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "467a6edc8822edc4c677e4c41b691e2362e36001"
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java",
+      "old_receipt": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-source-0b8dc/trees/0a9a1f1b893289a9e76a34cd3ffdb3250da2d3dc.json",
+      "sha": "bee9798cb41dee193ff909a2afd3a01be438c918",
+      "tree": [
+        {
+          "path": "com",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "14d3cc911d4028a99dd21c5357da35f779d07fb8"
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com",
+      "old_receipt": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-source-0b8dc/trees/0f81ac5774490fd51fae77a9680b4af6e4dd0315.json",
+      "sha": "14d3cc911d4028a99dd21c5357da35f779d07fb8",
+      "tree": [
+        {
+          "path": "synexia",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "d629188abe30d99fee38ceade5d20a044320332e"
+        }
+      ],
+      "truncated": false
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia",
+      "old_receipt": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-source-0b8dc/trees/aafbc7fb61545787ecee80c600dd1ed7452b4957.json",
+      "sha": "d629188abe30d99fee38ceade5d20a044320332e",
+      "tree": [
+        {
+          "path": "M3AlgorithmCapabilityCandidate.java",
+          "mode": "100644",
+          "type": "blob",
+          "sha": "f5ca8785e3386c07eb64b03e5e95dcb131ec2512",
+          "size": 6515
+        },
+        {
+          "path": "rewrite",
+          "mode": "040000",
+          "type": "tree",
+          "sha": "284cac67103e667d93846eeb92d83cf99f1daed1"
+        }
+      ],
+      "truncated": false
+    }
+  ],
+  "owners": [
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java",
+      "symbol": "com.synexia.rewrite.M3TranspilePass",
+      "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+      "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005",
+      "git_blob_sha1": "ef8c0ed9e64adc66dbb663fd36fa3d8a7486123c",
+      "sha256": "f68f4db3d6a849d172f9b168e81138429a6c16aa18745c518058436e0e8efca6",
+      "bytes": 528,
+      "mode": "100644",
+      "body_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java",
+      "baseline_body_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java",
+      "baseline_git_blob": "ef8c0ed9e64adc66dbb663fd36fa3d8a7486123c",
+      "baseline_sha256": "f68f4db3d6a849d172f9b168e81138429a6c16aa18745c518058436e0e8efca6",
+      "unchanged_from_0b": true,
+      "binding": "Complete rehashed final root, six reconstructed/rehashed intermediate trees, complete rehashed final package, exact rehashed body."
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePassResult.java",
+      "symbol": "com.synexia.rewrite.M3TranspilePassResult",
+      "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+      "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005",
+      "git_blob_sha1": "977b8f683dd2ab76ca2256533989f12a2814f044",
+      "sha256": "596c420fbc30eb07867c03d48b56af6fab1dc6891114362dabc9e0f8ff7bbb4f",
+      "bytes": 1441,
+      "mode": "100644",
+      "body_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePassResult.java",
+      "baseline_body_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePassResult.java",
+      "baseline_git_blob": "977b8f683dd2ab76ca2256533989f12a2814f044",
+      "baseline_sha256": "596c420fbc30eb07867c03d48b56af6fab1dc6891114362dabc9e0f8ff7bbb4f",
+      "unchanged_from_0b": true,
+      "binding": "Complete rehashed final root, six reconstructed/rehashed intermediate trees, complete rehashed final package, exact rehashed body."
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePlan.java",
+      "symbol": "com.synexia.rewrite.M3TranspilePlan",
+      "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+      "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005",
+      "git_blob_sha1": "290b11dc5be769119cdb202262f0336ee3612313",
+      "sha256": "3073058ea8237577b4506ce3222ee83914f68c7451db83bb3f7f8792abf8d13a",
+      "bytes": 3759,
+      "mode": "100644",
+      "body_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePlan.java",
+      "baseline_body_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePlan.java",
+      "baseline_git_blob": "290b11dc5be769119cdb202262f0336ee3612313",
+      "baseline_sha256": "3073058ea8237577b4506ce3222ee83914f68c7451db83bb3f7f8792abf8d13a",
+      "unchanged_from_0b": true,
+      "binding": "Complete rehashed final root, six reconstructed/rehashed intermediate trees, complete rehashed final package, exact rehashed body."
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspileRun.java",
+      "symbol": "com.synexia.rewrite.M3TranspileRun",
+      "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+      "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005",
+      "git_blob_sha1": "14284e82051ac5936dd82d93881228a914906c84",
+      "sha256": "0be8b21e6fd0ec16b21c781e6ee9d9248fa8413a4010984246fb69cf72ffd485",
+      "bytes": 3256,
+      "mode": "100644",
+      "body_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspileRun.java",
+      "baseline_body_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspileRun.java",
+      "baseline_git_blob": "14284e82051ac5936dd82d93881228a914906c84",
+      "baseline_sha256": "0be8b21e6fd0ec16b21c781e6ee9d9248fa8413a4010984246fb69cf72ffd485",
+      "unchanged_from_0b": true,
+      "binding": "Complete rehashed final root, six reconstructed/rehashed intermediate trees, complete rehashed final package, exact rehashed body."
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
+      "symbol": "com.synexia.rewrite.M3RecipeMasteryLab",
+      "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+      "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005",
+      "git_blob_sha1": "ee8adf451105c34d0afa228fe05b7dabb3b1e264",
+      "sha256": "0054ddf028c5a83c270c1a53795373c7cd8fa77395d23be7fd70424b644b0a3e",
+      "bytes": 43215,
+      "mode": "100644",
+      "body_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
+      "baseline_body_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
+      "baseline_git_blob": "ee8adf451105c34d0afa228fe05b7dabb3b1e264",
+      "baseline_sha256": "0054ddf028c5a83c270c1a53795373c7cd8fa77395d23be7fd70424b644b0a3e",
+      "unchanged_from_0b": true,
+      "binding": "Complete rehashed final root, six reconstructed/rehashed intermediate trees, complete rehashed final package, exact rehashed body.",
+      "old_mapped_source_to_preserve_exactly": {
+        "repo": "hsoliwal/com.synexia",
+        "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+        "module": "synexia-openrewrite-recipes",
+        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
+        "symbol": "com.synexia.rewrite.M3RecipeMasteryLab",
+        "signatures": [],
+        "sha256": "0054ddf028c5a83c270c1a53795373c7cd8fa77395d23be7fd70424b644b0a3e",
+        "git_blob_sha1": "ee8adf451105c34d0afa228fe05b7dabb3b1e264",
+        "fingerprint": null,
+        "revision_role": "pinned",
+        "tracking_ref": "refs/heads/develop"
+      }
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
+      "symbol": "com.synexia.rewrite.M3RecipeMasterySchedulePlanner",
+      "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+      "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005",
+      "git_blob_sha1": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc",
+      "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb",
+      "bytes": 10021,
+      "mode": "100644",
+      "body_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
+      "baseline_body_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
+      "baseline_git_blob": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc",
+      "baseline_sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb",
+      "unchanged_from_0b": true,
+      "binding": "Complete rehashed final root, six reconstructed/rehashed intermediate trees, complete rehashed final package, exact rehashed body.",
+      "old_mapped_source_to_preserve_exactly": {
+        "repo": "hsoliwal/com.synexia",
+        "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+        "module": "synexia-openrewrite-recipes",
+        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
+        "symbol": "com.synexia.rewrite.M3RecipeMasterySchedulePlanner",
+        "signatures": [],
+        "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb",
+        "git_blob_sha1": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc",
+        "fingerprint": null,
+        "revision_role": "pinned",
+        "tracking_ref": "refs/heads/develop"
+      }
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
+      "symbol": "com.synexia.rewrite.M3AtomPatternSignalChainRecipe",
+      "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+      "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005",
+      "git_blob_sha1": "09df87a872817787fc8607bf11805cfa26c53aed",
+      "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98",
+      "bytes": 72231,
+      "mode": "100644",
+      "body_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
+      "baseline_body_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
+      "baseline_git_blob": "09df87a872817787fc8607bf11805cfa26c53aed",
+      "baseline_sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98",
+      "unchanged_from_0b": true,
+      "binding": "Complete rehashed final root, six reconstructed/rehashed intermediate trees, complete rehashed final package, exact rehashed body.",
+      "old_mapped_source_to_preserve_exactly": {
+        "repo": "hsoliwal/com.synexia",
+        "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+        "module": "synexia-openrewrite-recipes",
+        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
+        "symbol": "com.synexia.rewrite.M3AtomPatternSignalChainRecipe",
+        "signatures": [],
+        "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98",
+        "git_blob_sha1": "09df87a872817787fc8607bf11805cfa26c53aed",
+        "fingerprint": null,
+        "revision_role": "pinned",
+        "tracking_ref": "refs/heads/develop"
+      }
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
+      "symbol": "com.synexia.rewrite.M3CodeSignalChain",
+      "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+      "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005",
+      "git_blob_sha1": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
+      "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa",
+      "bytes": 30230,
+      "mode": "100644",
+      "body_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
+      "baseline_body_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
+      "baseline_git_blob": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
+      "baseline_sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa",
+      "unchanged_from_0b": true,
+      "binding": "Complete rehashed final root, six reconstructed/rehashed intermediate trees, complete rehashed final package, exact rehashed body.",
+      "old_mapped_source_to_preserve_exactly": {
+        "repo": "hsoliwal/com.synexia",
+        "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+        "module": "synexia-openrewrite-recipes",
+        "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
+        "symbol": "com.synexia.rewrite.M3CodeSignalChain",
+        "signatures": [],
+        "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa",
+        "git_blob_sha1": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
+        "fingerprint": null,
+        "revision_role": "pinned",
+        "tracking_ref": "refs/heads/develop"
+      }
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+      "symbol": "com.synexia.rewrite.M3OpenRewriteTranspiler",
+      "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+      "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005",
+      "git_blob_sha1": "fd2134586b5369a0dcd62d207dbc6208168dd72f",
+      "sha256": "cc4e0b24f50b0a6f462c8aa1ff1ddee2eea67d6043158b9e7a8f5a1e91b9e4c9",
+      "bytes": 27183,
+      "mode": "100644",
+      "body_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+      "baseline_body_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+      "baseline_git_blob": "4ad85bdd6e78520f31909b3f2b9868e3aa32ef70",
+      "baseline_sha256": "a6f2476158f3f26dcd150ece4516920e7e66418723d6a3ba15ec4edb51beee39",
+      "unchanged_from_0b": false,
+      "binding": "Complete rehashed final root, six reconstructed/rehashed intermediate trees, complete rehashed final package, exact rehashed body."
+    }
+  ],
+  "retained_api_evidence": [
+    {
+      "owner": "M3AtomPatternSignalChainRecipe",
+      "compared_class_blocks": 14,
+      "all_blocks_exactly_equal": true,
+      "preexisting_old_evidence": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-integration-0b8dc/api-review/candidate-all.api.txt",
+      "preexisting_final_evidence": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-integration-0b8dc/api-review/final-original-replay/combined-69.api.txt"
+    },
+    {
+      "owner": "M3RecipeMasteryLab",
+      "compared_class_blocks": 10,
+      "all_blocks_exactly_equal": true,
+      "preexisting_old_evidence": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-integration-0b8dc/api-review/candidate-all.api.txt",
+      "preexisting_final_evidence": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-integration-0b8dc/api-review/final-original-replay/combined-69.api.txt"
+    }
+  ],
+  "fresh_full_body_reads": [
+    "M3TranspilePass",
+    "M3TranspilePassResult",
+    "M3TranspilePlan",
+    "M3TranspileRun",
+    "M3RecipeMasterySchedulePlanner"
+  ],
+  "byte_identity_carries_forward_prior_review": [
+    "M3RecipeMasteryLab",
+    "M3AtomPatternSignalChainRecipe",
+    "M3CodeSignalChain"
+  ],
+  "fresh_compilation_or_tests": false,
+  "remote_operations": false,
+  "input_seals": {
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/context/current-source-0b8dc/ROOT_AND_PRS.json": {
+      "bytes": 99716,
+      "sha256": "7cebc720d74cc3e0564f328f285314785fed9f09ca0177a0efd7e79ab023b799"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/SOURCE_FINAL_ROOT_TREE.json": {
+      "bytes": 93931,
+      "sha256": "b0827f6d75731bbd252674beac3c34f611d57810689ecbda6a71a4e02b39bc92"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/SOURCE_FINAL_REWRITE_PACKAGE_TREE.json": {
+      "bytes": 414108,
+      "sha256": "d206de535ce680d5347e6360a83f6cf5bebd94ce16fb175d20d9f955c1287885"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/SOURCE_IMPLEMENTATION_PUBLICATION_VERIFIED.json": {
+      "bytes": 370323,
+      "sha256": "03ba5aa231929079fda7772dc6a798a687ba7486fa81ceacc0723407330f956a"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-integration-0b8dc/publication/FINAL_MANIFEST.json": {
+      "bytes": 2565850,
+      "sha256": "762bdfefcc4340b7288d646e97390f7bb8358a8efac22985c6e6f0fbf57d547d"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-source-0b8dc/trees/3a1508ce8d45731c3a2d1cd3980315cca3546f6c.json": {
+      "bytes": 18074,
+      "sha256": "14f946e09019c09605ec73f40629f82dd59e5e36b75a3a495578c86bd3ffd927"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-source-0b8dc/trees/7ebaa0cbdc66e1f6db0817b0aa3dc3e51d0caaa9.json": {
+      "bytes": 1258,
+      "sha256": "5b531089217bc897d6c7fc5e0db1bbbb78f6aa6ac2c82dc35faaf1f745084d04"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-source-0b8dc/trees/4d90f1f247b01b735c3998ca779ba94a6c8f0147.json": {
+      "bytes": 976,
+      "sha256": "d8527b019d4c387fa4c4d840c30e52d3df943686ac0898ab9d4986e95e89d60c"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-source-0b8dc/trees/0a9a1f1b893289a9e76a34cd3ffdb3250da2d3dc.json": {
+      "bytes": 460,
+      "sha256": "226ebbad2b9951519f82d0905b2a766e281b30b3be7edcfcb70f70acaa72c6e5"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-source-0b8dc/trees/0f81ac5774490fd51fae77a9680b4af6e4dd0315.json": {
+      "bytes": 464,
+      "sha256": "849d1dcb4476bd7f13ae95727d38b5105013f268a42d3cc11b544b4da2c1433f"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-source-0b8dc/trees/aafbc7fb61545787ecee80c600dd1ed7452b4957.json": {
+      "bytes": 769,
+      "sha256": "81ea8c31a87a4d177153cb43a5d901108933c33aaaa776cb39d4deea0345c4c0"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-source-0b8dc/trees/d9f07106e421d832b6b950aed8c73cb4d5eb4cb9.json": {
+      "bytes": 414108,
+      "sha256": "769e4380ad879c0b963975923dbfbb672869f58c592da42efea946eaab9d8414"
+    },
+    "/workspace/scratch/c0bcaa06df78/m3-mastery/inventory/final-integration/build-declarations/root-pom.xml": {
+      "bytes": 119981,
+      "sha256": "f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate-authoring/packet-e02/ROOT_POM_DECLARATIONS.json": {
+      "bytes": 14404,
+      "sha256": "48801048e8a3be135085bbd34015b0a35420c80c8e95fabe2b50cb77d8541cb4"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/candidate/m3/docs/name-mapping.json": {
+      "bytes": 220539,
+      "sha256": "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-source-0b8dc/CURRENT_SOURCE_ACQUISITION_READY.json": {
+      "bytes": 750709,
+      "sha256": "159ba8544f5d6caa724176a25ca42147befdb9a62f216ec7765f971a286453f5"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java": {
+      "bytes": 528,
+      "sha256": "f68f4db3d6a849d172f9b168e81138429a6c16aa18745c518058436e0e8efca6"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java": {
+      "bytes": 528,
+      "sha256": "f68f4db3d6a849d172f9b168e81138429a6c16aa18745c518058436e0e8efca6"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePassResult.java": {
+      "bytes": 1441,
+      "sha256": "596c420fbc30eb07867c03d48b56af6fab1dc6891114362dabc9e0f8ff7bbb4f"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePassResult.java": {
+      "bytes": 1441,
+      "sha256": "596c420fbc30eb07867c03d48b56af6fab1dc6891114362dabc9e0f8ff7bbb4f"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePlan.java": {
+      "bytes": 3759,
+      "sha256": "3073058ea8237577b4506ce3222ee83914f68c7451db83bb3f7f8792abf8d13a"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePlan.java": {
+      "bytes": 3759,
+      "sha256": "3073058ea8237577b4506ce3222ee83914f68c7451db83bb3f7f8792abf8d13a"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspileRun.java": {
+      "bytes": 3256,
+      "sha256": "0be8b21e6fd0ec16b21c781e6ee9d9248fa8413a4010984246fb69cf72ffd485"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspileRun.java": {
+      "bytes": 3256,
+      "sha256": "0be8b21e6fd0ec16b21c781e6ee9d9248fa8413a4010984246fb69cf72ffd485"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java": {
+      "bytes": 43215,
+      "sha256": "0054ddf028c5a83c270c1a53795373c7cd8fa77395d23be7fd70424b644b0a3e"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java": {
+      "bytes": 43215,
+      "sha256": "0054ddf028c5a83c270c1a53795373c7cd8fa77395d23be7fd70424b644b0a3e"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java": {
+      "bytes": 10021,
+      "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java": {
+      "bytes": 10021,
+      "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java": {
+      "bytes": 72231,
+      "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java": {
+      "bytes": 72231,
+      "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java": {
+      "bytes": 30230,
+      "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java": {
+      "bytes": 30230,
+      "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java": {
+      "bytes": 27183,
+      "sha256": "cc4e0b24f50b0a6f462c8aa1ff1ddee2eea67d6043158b9e7a8f5a1e91b9e4c9"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java": {
+      "bytes": 26951,
+      "sha256": "a6f2476158f3f26dcd150ece4516920e7e66418723d6a3ba15ec4edb51beee39"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-integration-0b8dc/api-review/candidate-all.api.txt": {
+      "bytes": 95612,
+      "sha256": "ed2a1e6b02cd7390ca72e87d1245ff1e4e37651cd43fbc97cc8ed24fb46932a4"
+    },
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-integration-0b8dc/api-review/final-original-replay/combined-69.api.txt": {
+      "bytes": 100868,
+      "sha256": "1d06eda9fe75087a67bd2ecf18a8e453f88a0e7f99ed3964c11997eeaaee749b"
+    }
+  }
+}
