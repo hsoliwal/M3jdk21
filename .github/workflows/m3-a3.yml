@@ -76,11 +76,14 @@ jobs:
           mvn -B -ntp -f "$REPO/m3/pom.xml" \
             -pl tooling/a3 -am -DskipTests install
 
-      - name: Run focused A3 JUnit proof
+      - name: Run focused A3 JUnit and recipe replay proof
         shell: bash
         run: |
           set -euo pipefail
           mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" test
+          mvn -B -ntp -f "$REPO/m3/tooling/migration-recipes/pom.xml" \
+            -Dtest=M3A3LabDeliveryRecipeTest,M3A3MasteryWorkflowRecipeTest \
+            -Dsurefire.failIfNoSpecifiedTests=false test
 
       - name: Master hostile Atomize Patternize corpus
         shell: bash
@@ -94,12 +97,16 @@ jobs:
           ROWS="$(awk -F '\t' 'NR > 1 {n++} END {print n+0}' "$LAB")"
           AP="$(awk -F '\t' 'NR > 1 && $2 == "A>P" {n++} END {print n+0}' "$LAB")"
           PA="$(awk -F '\t' 'NR > 1 && $2 == "P>A" {n++} END {print n+0}' "$LAB")"
+          APA="$(awk -F '\t' 'NR > 1 && $2 == "A>P>A" {n++} END {print n+0}' "$LAB")"
+          PAP="$(awk -F '\t' 'NR > 1 && $2 == "P>A>P" {n++} END {print n+0}' "$LAB")"
           PASS="$(awk -F '\t' 'NR > 1 && $9 == "true" && $10 == "true" && $11 == "true" && $12 == "true" {n++} END {print n+0}' "$LAB")"
-          test "$ROWS" -eq 96
-          test "$AP" -eq 24
-          test "$PA" -eq 24
+          test "$ROWS" -eq 288
+          test "$AP" -eq 48
+          test "$PA" -eq 48
+          test "$APA" -eq 48
+          test "$PAP" -eq 48
           test "$PASS" -eq "$ROWS"
-          printf 'A3Lab: rows=%s A>P=%s P>A=%s all-gates=%s\n' "$ROWS" "$AP" "$PA" "$PASS" >> "$GITHUB_STEP_SUMMARY"
+          printf 'A3Lab: rows=%s A>P=%s P>A=%s A>P>A=%s P>A>P=%s all-gates=%s\n' "$ROWS" "$AP" "$PA" "$APA" "$PAP" "$PASS" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Inventory whole JDK source and test corpus
         shell: bash

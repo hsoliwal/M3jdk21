@@ -41,9 +41,14 @@ The first bounded corpus combines:
 - comments containing fake declarations and control flow;
 - text blocks containing Java-looking code;
 - regex strings containing braces, groups, quantifiers and source-looking tokens;
-- lambda/stream/local-class syntax;
+- direct caller shape;
+- Java 21 local-record + lambda + switch-expression caller shape;
+- local-class/method-reference syntax;
 - six deterministic member orders;
 - LF and CRLF line endings.
+
+The Cartesian fixture axis is therefore 48 deterministic source files:
+2 lexical hostility modes x 2 line endings x 2 caller shapes x 6 member orders.
 
 Code-looking text must remain data.
 
@@ -61,10 +66,17 @@ A
 P
 A -> P
 P -> A
+A -> P -> A
+P -> A -> P
 ```
 
+The repeated schedules deliberately revisit an already-achieved operation. Their final source must
+equal the corresponding A+P normal form; an already-completed Atomize or Patternize step is not
+allowed to create new work on replay.
+
 Each schedule is cycled from the original fixture until stable or until the bounded pass budget is
-exhausted. Equal subsets must converge to the same rendered normal form regardless of order.
+exhausted. Equal operation sets must converge to the same rendered normal form regardless of order
+or redundant replay. The bounded campaign produces 48 x 6 = 288 result rows.
 
 ## Static precompute
 
@@ -73,7 +85,8 @@ Before recipe execution each fixture receives immutable read-only signals:
 - SHA-256;
 - UTF-16 source length;
 - line-ending kind;
-- counts for selected code-looking String/comment/text-block/regex markers.
+- counts for selected code-looking String/comment/text-block/regex markers;
+- lambda, switch-expression and local-record shape counts.
 
 The signals are regression discriminators and optimization hints only.
 

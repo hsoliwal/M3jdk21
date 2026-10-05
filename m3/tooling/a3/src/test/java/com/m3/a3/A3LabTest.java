@@ -20,9 +20,9 @@ final class A3LabTest {
     void hostileCorpusConvergesThroughAllAtomPatternSchedules() throws Exception {
         List<A3Lab.Result> results = A3Lab.run();
 
-        assertEquals(24, A3Lab.fixtureCount());
-        assertEquals(4, A3Lab.scheduleCount());
-        assertEquals(96, results.size());
+        assertEquals(48, A3Lab.fixtureCount());
+        assertEquals(6, A3Lab.scheduleCount());
+        assertEquals(288, results.size());
         assertTrue(results.stream().allMatch(A3Lab.Result::fixedPoint));
         assertTrue(results.stream().allMatch(A3Lab.Result::behaviorStable));
         assertTrue(results.stream().allMatch(A3Lab.Result::contractStable));
@@ -51,6 +51,8 @@ final class A3LabTest {
         assertTrue(firstTsv.startsWith("fixture\tschedule\tsubset\t"));
         assertTrue(firstTsv.contains("\tA>P\tA+P\t"));
         assertTrue(firstTsv.contains("\tP>A\tA+P\t"));
+        assertTrue(firstTsv.contains("\tA>P>A\tA+P\t"));
+        assertTrue(firstTsv.contains("\tP>A>P\tA+P\t"));
     }
 
     @Test
@@ -72,5 +74,23 @@ final class A3LabTest {
                 results.stream()
                         .filter(result -> result.schedule().equals("A"))
                         .allMatch(A3Lab.Result::changed));
+        assertEquals(
+                results.stream()
+                        .filter(result -> result.schedule().equals("A>P"))
+                        .map(A3Lab.Result::afterSha)
+                        .toList(),
+                results.stream()
+                        .filter(result -> result.schedule().equals("A>P>A"))
+                        .map(A3Lab.Result::afterSha)
+                        .toList());
+        assertEquals(
+                results.stream()
+                        .filter(result -> result.schedule().equals("P>A"))
+                        .map(A3Lab.Result::afterSha)
+                        .toList(),
+                results.stream()
+                        .filter(result -> result.schedule().equals("P>A>P"))
+                        .map(A3Lab.Result::afterSha)
+                        .toList());
     }
 }
