@@ -19,6 +19,7 @@ def fail(message: str) -> None:
     raise SystemExit(1)
 
 m3 = read("src/java.base/share/classes/java/lang/M3String.java")
+pool = read("src/java.base/share/classes/java/lang/M3StringPool.java")
 owner = read("src/java.base/share/classes/java/lang/M3StringOwner.java")
 atom = read("src/java.base/share/classes/java/lang/M3StringAtom.java")
 tuple_ = read("src/java.base/share/classes/java/lang/M3StringTuple.java")
@@ -91,9 +92,14 @@ if "prefixMayMatch" not in facts or "suffixMayMatch" not in facts:
 if "private volatile M3String m3;" not in string:
     fail("java.lang.String no longer owns M3String")
 
-# M3-backed wrappers must not retain a spelling byte[].
-if "return EMPTY_COMPATIBILITY_SHADOW;" not in m3:
-    fail("M3String compatibilityValue must return the empty VM sentinel")
+# M3-backed wrappers must not create Java text arrays. Even the shared empty compatibility
+# sentinel is created through the JNI shadow boundary.
+if "new byte[" in m3 or "new char[" in m3:
+    fail("M3String creates Java byte/char shadow directly")
+if "nativeByteShadow(EMPTY, 0, 0, String.LATIN1)" not in m3:
+    fail("M3String empty compatibility sentinel is not JNI-created")
+if "return storage == null ? checked.value : storage.compatibilityValue();" not in string:
+    fail("JNI ingress no longer discards the temporary construction payload")
 
 # Donor class naming must not leak back into live VM symbols/layout.
 for path, text in [
@@ -160,6 +166,21 @@ if "if (UseM3StringStorage)" not in stringopts:
     fail("legacy C2 StringConcat optimization is not disabled for M3 storage")
 if "if (java_lang_String::is_m3_joined(string))" not in archive_writer:
     fail("CDS String sizing is not fail-closed for M3 values")
+
+
+# VM-local native atoms must not be retained forever by the canonical lookup table.
+# Live M3String/Tuple owners provide the strong lifetime. The pool keeps weak refs and frees
+# the native block when the owner becomes unreachable.
+for fragment in [
+    "ReferenceQueue<M3StringAtom> LOCAL_QUEUE",
+    "ArrayList<LocalRef> values",
+    "extends WeakReference<M3StringAtom>",
+    "UNSAFE.freeMemory(address)",
+]:
+    if fragment not in pool:
+        fail(f"VM-local M3 atom lifecycle missing: {fragment}")
+if "ArrayList<M3StringAtom> values" in pool:
+    fail("VM-local M3 atom pool strongly retains native atoms")
 
 # Mapping authority must preserve donor->target lineage and shadow names.
 required_mapping_fragments = [
