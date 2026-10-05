@@ -38,6 +38,8 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import jdk.internal.mindex.M3TQ;
+
 /**
  * An engine that performs match operations on a {@linkplain
  * java.lang.CharSequence character sequence} by interpreting a {@link Pattern}.
@@ -143,6 +145,12 @@ public final class Matcher implements MatchResult {
      * The original string being matched.
      */
     CharSequence text;
+
+    private static final int M3_TQ_MAX_UTF16_UNITS = 32_768;
+    private CharSequence m3TqFactsText;
+    private int m3TqFactsFrom = -1;
+    private int m3TqFactsTo = -1;
+    private M3TQ.Facts m3TqFacts;
 
     /**
      * Matcher state used by the last node. NOANCHOR is used when a
@@ -1722,6 +1730,30 @@ public final class Matcher implements MatchResult {
      * calls to the search methods start at a new "soft" boundary which is
      * the end of the previous match.
      */
+    private boolean m3TqAllowsSearch() {
+        M3TQ query = parentPattern.m3Tq;
+        if (query == null || !query.hasConstraints() || !(text instanceof String)) {
+            return true;
+        }
+        int regionLength = to - this.from;
+        if (regionLength < 0 || regionLength > M3_TQ_MAX_UTF16_UNITS) {
+            return true;
+        }
+
+        M3TQ.Facts facts = m3TqFacts;
+        if (facts == null
+                || m3TqFactsText != text
+                || m3TqFactsFrom != this.from
+                || m3TqFactsTo != to) {
+            facts = M3TQ.precompute(text, this.from, to, M3_TQ_MAX_UTF16_UNITS);
+            m3TqFactsText = text;
+            m3TqFactsFrom = this.from;
+            m3TqFactsTo = to;
+            m3TqFacts = facts;
+        }
+        return query.testPrecomputed(facts);
+    }
+
     boolean search(int from) {
         this.hitEnd = false;
         this.requireEnd = false;
@@ -1735,6 +1767,15 @@ public final class Matcher implements MatchResult {
                 localsPos[i].clear();
         }
         acceptMode = NOANCHOR;
+        if (!m3TqAllowsSearch()) {
+            // Literal Start/BnM search reaches the end on failure. Preserve the observable
+            // Matcher state while skipping the exact engine only when absence is proven.
+            this.hitEnd = true;
+            this.first = -1;
+            this.oldLast = this.last;
+            this.modCount++;
+            return false;
+        }
         boolean result = parentPattern.root.match(this, from, text);
         if (!result)
             this.first = -1;
