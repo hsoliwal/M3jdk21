@@ -125,6 +125,10 @@ final class SynexiaHandoffPacket {
             if (kind == Kind.JAVA && (!sourcePath.endsWith(".java") || !targetPath.endsWith(".java"))) {
                 throw new IllegalStateException("JAVA handoff row must map .java to .java");
             }
+            if (kind != Kind.JAVA && targetPath.endsWith(".java")) {
+                throw new IllegalStateException(
+                        "TEXT/NATIVE handoff rows cannot target Java compilation units");
+            }
             if (!targets.add(targetPath)) {
                 throw new IllegalStateException("duplicate Synexia handoff target: " + targetPath);
             }
@@ -252,6 +256,10 @@ final class SynexiaHandoffPacket {
                             || !M3Jdk21HandoffPaths.javaSource(targetPath))) {
                 throw new IllegalStateException(
                         "JAVA handoff row is outside the typed receiver roots");
+            }
+            if (kind != Kind.JAVA && targetPath.endsWith(".java")) {
+                throw new IllegalStateException(
+                        "TEXT/NATIVE handoff rows cannot target Java compilation units");
             }
             if (!targets.add(targetPath)) {
                 throw new IllegalStateException(
