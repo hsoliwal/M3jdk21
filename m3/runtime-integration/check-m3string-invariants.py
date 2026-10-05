@@ -195,6 +195,25 @@ for fragment in [
 if "ArrayList<M3StringAtom> values" in pool:
     fail("VM-local M3 atom pool strongly retains native atoms")
 
+# Persistent tuple geometry must preserve the Synexia reference-DAG convergence rules:
+# bounded AVL height and canonical identity by ordered coordinate sequence, not parenthesization.
+for fragment in [
+    "final int height;",
+    "final int leafCount;",
+    "final long coordinateSequenceHash64;",
+    "sameCoordinateSequence",
+]:
+    if fragment not in tuple_:
+        fail(f"M3 tuple canonical-sequence metadata missing: {fragment}")
+for fragment in [
+    "concatBalanced",
+    "private static M3String balance",
+    "coordinateSequenceHash64(M3String left, M3String right)",
+    "CoordinateCursor",
+]:
+    if fragment not in pool:
+        fail(f"M3 tuple balance/canonicalization missing: {fragment}")
+
 # Mapping authority must preserve donor->target lineage and shadow names.
 required_mapping_fragments = [
     '"source": "com.synexia.indexstring.MIndexString"',
@@ -220,7 +239,9 @@ for fragment in [
 for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringPrecomputeSearchTest.java",
+    "M3StringDagBalanceTest.java",
     "M3StringHistoryConvergenceRecipeTest",
+    "M3StringBalancedDagRecipeTest",
 ]:
     if required_gate not in workflow:
         fail(f"M3 String workflow lost verification gate: {required_gate}")
