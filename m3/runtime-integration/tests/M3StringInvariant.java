@@ -32,10 +32,11 @@ public final class M3StringInvariant {
         check(address(alphaOwner) != 0L, "scalar native/mapped address");
         check((payloadOwner(alphaOwner) != null) == expectMapped, "mapped/local owner selection");
 
-        byte[] shadow1 = (byte[]) STRING_VALUE.get(alpha1);
-        byte[] shadow2 = (byte[]) STRING_VALUE.get(alpha2);
-        check(shadow1 != shadow2, "compatibility shadows are not canonical shared payload");
-        check(alpha1.equals(alpha2), "shadow independence preserves equality");
+        byte[] sentinel1 = (byte[]) STRING_VALUE.get(alpha1);
+        byte[] sentinel2 = (byte[]) STRING_VALUE.get(alpha2);
+        check(sentinel1.length == 0 && sentinel2.length == 0,
+                "M3-backed String retains no byte payload");
+        check(alpha1.equals(alpha2), "empty VM sentinel preserves equality");
 
         String right1 = fresh("gamma");
         String right2 = fresh("gamma");
@@ -74,7 +75,7 @@ public final class M3StringInvariant {
 
         System.out.println("M3_STRING_INVARIANT_PASS checks=" + checks
                 + " mapped=" + expectMapped
-                + " m3Fields=2 arrays=shadows-only precompute=internal");
+                + " m3Fields=2 retainedArrays=0 shadows=jni-only precompute=internal");
     }
 
     static String fresh(String value) {
