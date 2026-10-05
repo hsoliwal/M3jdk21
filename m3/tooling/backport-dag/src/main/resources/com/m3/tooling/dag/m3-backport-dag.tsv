@@ -1,5 +1,9 @@
 id	kind	scope	mutating	serial_promotion	scope_promotion_approved	work_ref	depends_on
-inventory	INVENTORY	FILE	false	false	false	m3/backports/inventory.py	
+review-code-signal	RECIPE	FILE	false	false	false	com.synexia.rewrite.M3CodeSignalTriggerRecipe	
+review-atom-pattern	RECIPE	FILE	false	false	false	com.synexia.rewrite.M3AtomPatternSignalChain	review-code-signal
+review-problem-planner	RECIPE	FILE	false	false	false	com.synexia.M3ProblemRecipePlanner	review-atom-pattern
+review-jni-contract	RECIPE	FILE	false	false	false	com.synexia.rewrite.M3JniContractInventoryRecipe	review-problem-planner
+inventory	INVENTORY	FILE	false	false	false	m3/backports/inventory.py	review-jni-contract
 compatibility-proof	COMPATIBILITY	FILE	false	false	false	m3/backports/compatibility_queue.py	inventory
 dependency-closure	COMPATIBILITY	FILE	false	false	false	dependency-review	compatibility-proof
 file-delta	INVENTORY	FILE	false	false	false	m3/backports/file_delta_inventory.py	dependency-closure

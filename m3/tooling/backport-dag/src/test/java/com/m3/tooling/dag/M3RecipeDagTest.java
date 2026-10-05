@@ -15,8 +15,22 @@ final class M3RecipeDagTest {
     @Test
     void canonicalDagIsDeterministicAndPromotionIsLast() {
         M3RecipeDag dag = M3RecipeDag.canonical();
-        assertEquals(12, dag.size());
-        assertEquals("inventory", dag.topologicalOrder().getFirst().id());
+        assertEquals(16, dag.size());
+        assertEquals("review-code-signal", dag.topologicalOrder().getFirst().id());
+        assertEquals(
+                List.of(
+                        "review-code-signal",
+                        "review-atom-pattern",
+                        "review-problem-planner",
+                        "review-jni-contract"),
+                dag.topologicalOrder().subList(0, 4).stream()
+                        .map(M3DagNode::id)
+                        .toList());
+        assertTrue(dag.topologicalOrder().subList(0, 4).stream()
+                .allMatch(node -> node.kind() == M3DagKind.RECIPE
+                        && node.scope() == M3EditScope.FILE
+                        && !node.mutating()));
+        assertEquals(List.of("review-jni-contract"), dag.require("inventory").dependsOn());
         assertEquals("promote", dag.topologicalOrder().getLast().id());
         assertTrue(dag.require("promote").serialPromotion());
         assertThrows(IllegalArgumentException.class, () -> dag.require("missing"));

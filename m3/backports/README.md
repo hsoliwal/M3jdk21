@@ -267,6 +267,37 @@ promotion authority. A framework-specific runner must bind the emitted node meta
 existing Maven/OpenRewrite work reference, and the canonical M3 verification tail remains
 authoritative.
 
+## Second-pass review DAG pre-admission
+
+Before JDK inventory/compatibility admission, the canonical backport DAG now runs four read-only
+FILE-scoped recipe atoms from merged Synexia PR #8973:
+
+```text
+M3CodeSignalTriggerRecipe
+  -> M3AtomPatternSignalChain
+  -> M3ProblemRecipePlanner
+  -> M3JniContractInventoryRecipe
+  -> existing JDK inventory
+  -> compatibility proof
+  -> recipe crate
+  -> diff/lint/build/jtreg/runtime
+  -> serial promotion
+```
+
+The exact content commit is
+`5369fdc8c076b998b0dd39c7c67c85d11a4b2d8f`. The upstream PR is merged into
+`hsoliwal/com.synexia:develop`.
+
+This review chain grants no source mutation, semantic-equivalence, challenge-source copy,
+JNI/native execution or promotion authority. It is evidence that narrows recipe/backport work before
+the normal compatibility gate.
+
+The canonical DAG still has exactly one serial terminal promotion node. Camel and Airflow remain
+scheduler projections of the same DAG; Drools/KIE remains admission/rule evidence only.
+
+The upstream GitHub Actions DAG run was created but produced no jobs. The custody receipt therefore
+records `UPSTREAM_MERGED_ACTIONS_STARTUP_BLOCKED_NO_JOBS`; no hosted green-build claim is inferred.
+
 ## Backport packet
 
 Each actual backport must record:
