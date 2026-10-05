@@ -34,6 +34,7 @@ archive_writer = read("src/hotspot/share/cds/archiveHeapWriter.cpp")
 dedup = read("src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp")
 mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
+workflow = read(".github/workflows/mindex-string-backing.yml")
 
 # M3String must remain owner + coordinate only.
 instance_fields = re.findall(
@@ -207,5 +208,13 @@ for fragment in [
 ]:
     if fragment not in port_map:
         fail(f"precompute port map missing: {fragment}")
+
+for required_gate in [
+    "M3StringFactsCompositionTest.java",
+    "M3StringPrecomputeSearchTest.java",
+    "M3StringHistoryConvergenceRecipeTest",
+]:
+    if required_gate not in workflow:
+        fail(f"M3 String workflow lost verification gate: {required_gate}")
 
 print("M3_STRING_SOURCE_INVARIANTS_PASS")
