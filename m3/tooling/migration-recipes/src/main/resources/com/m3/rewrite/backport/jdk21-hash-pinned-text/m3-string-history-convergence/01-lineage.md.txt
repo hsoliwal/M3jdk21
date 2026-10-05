@@ -69,3 +69,17 @@ The M3JDK target now follows the donor history rather than a single donor snapsh
 - Length-proportional donor analyses such as Z, Manacher, position masks, LCP and regex plans remain
   separate internal budgeted lanes and are not fields of `M3String`, `M3StringOwner` or
   `M3StringFacts`.
+
+## Array projection boundary
+
+M3JDK now treats the ordinary Java arrays exactly as compatibility/output projections:
+
+- `String.toCharArray()` obtains its caller-owned `char[]` directly from `M3String`;
+- public `String.getBytes(...)` dispatches to `M3String.encode` when the String is M3-backed;
+- UTF-8 uses the canonical `utf8Length` fact to allocate the final byte array exactly and streams
+  UTF-16 units directly, including split pairs and JDK replacement semantics for unpaired surrogates;
+- US-ASCII and ISO-8859-1 allocate from canonical code-point geometry and emit one replacement byte
+  per unmappable code point;
+- other Charsets receive one caller-owned UTF-16 projection and the stock `CharsetEncoder`
+  replacement contract;
+- no produced `byte[]` or `char[]` becomes canonical M3 String storage.
