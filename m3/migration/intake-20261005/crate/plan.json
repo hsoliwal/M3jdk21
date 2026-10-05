@@ -1,0 +1,108 @@
+{
+  "schema": "m3.sealed-install/1",
+  "recipe_id": "synexia-intake-20261005",
+  "source_commit": "ccb4ace7f7d79f97ae2d9600de55960504cc3c21",
+  "outputs": [
+    {
+      "path": "m3/docs/name-mapping.json",
+      "before": {
+        "resource": "before/0.txt",
+        "sha256": "67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb"
+      },
+      "after": {
+        "resource": "after/0.txt",
+        "sha256": "8e229715d6783906b1ee249bb2707cdb5e412146219be6037154927abac893ea"
+      }
+    },
+    {
+      "path": "m3/docs/synexia-intake-20261005.md",
+      "before": null,
+      "after": {
+        "resource": "after/1.txt",
+        "sha256": "fe7df1477c461ddfcedccd3ff2ca078d44dab5b7c5b46412a5873de611cb13c3"
+      }
+    },
+    {
+      "path": "m3/migration/intake-20261005/output-plan.json",
+      "before": null,
+      "after": {
+        "resource": "after/2.txt",
+        "sha256": "4d7496a37677aee3ba1aee206129625a5ed870d0f922eccde32ca670f09a11d8"
+      }
+    },
+    {
+      "path": "m3/migration/intake-20261005/owners.json",
+      "before": null,
+      "after": {
+        "resource": "after/3.txt",
+        "sha256": "4072d0cef765767e44e9ff93a11f2d7112b32f94ab6b3d07a03ed191307e2daf"
+      }
+    },
+    {
+      "path": "m3/migration/intake-20261005/pom.xml",
+      "before": null,
+      "after": {
+        "resource": "after/4.txt",
+        "sha256": "8ccd586902d1b292310d6ded995cab15d14f56c43de3bdfa8c20bc4362eab517"
+      }
+    },
+    {
+      "path": "m3/migration/intake-20261005/prepare.py",
+      "before": null,
+      "after": {
+        "resource": "after/5.txt",
+        "sha256": "af2c0ea782643d6860d10a3d9c35706781072a361fb74a8cf6ed4caa6236e5d6"
+      }
+    },
+    {
+      "path": "m3/migration/intake-20261005/source-root.json",
+      "before": null,
+      "after": {
+        "resource": "after/6.txt",
+        "sha256": "1cfe107b886e495046ec77f74a2739705b403251ae4fafe640f0fe46ed656ed8"
+      }
+    },
+    {
+      "path": "m3/migration/migration.py",
+      "before": {
+        "resource": "before/7.txt",
+        "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"
+      },
+      "after": {
+        "resource": "after/7.txt",
+        "sha256": "4114b546749888ec5e6065ea6087d39ea63bafb6ce5881e2239eafaade3b7787"
+      }
+    },
+    {
+      "path": "m3/migration/test/test_intake.py",
+      "before": null,
+      "after": {
+        "resource": "after/8.txt",
+        "sha256": "765f001aa41f95c1dfd9994ba64101526ce0324ede896228803133ec9313b9e9"
+      }
+    },
+    {
+      "path": "m3/migration/test/test_intake_recipe.py",
+      "before": null,
+      "after": {
+        "resource": "after/9.txt",
+        "sha256": "cfe8e8930916ef96c7d23dd9d0942f082c5eb1d6cf4b2a2f6e9f3d69d8fa3e41"
+      }
+    }
+  ],
+  "guards": [
+    {
+      "path": "m3/docs/name-mapping.schema.json",
+      "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b"
+    },
+    {
+      "path": "m3/migration/recipe.py",
+      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
+    },
+    {
+      "path": "m3/migration/test/test_migration.py",
+      "sha256": "01fa8c629c0002974a86c0ee363817f383ae4c88c61a399cc619d61c86c24413"
+    }
+  ],
+  "plan_sha256": "1edc34324afd69587e3e57c598663d06f092c0ba8840625860650e9be9d02d27"
+}

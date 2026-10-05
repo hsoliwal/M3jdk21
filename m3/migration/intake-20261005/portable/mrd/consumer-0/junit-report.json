@@ -1,0 +1,31 @@
+{
+  "status": "ACTUAL_SUREFIRE_REPORTS",
+  "totals": {
+    "tests": 10,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": {
+    "com.synexia.rewrite.M3ParserDependenciesTest": {
+      "counts": {
+        "tests": 7,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.rewrite.M3ParserDependenciesTest.xml",
+      "sha256": "5426a3364afc66672252ea90754c1dfa82f10369c4260903c4c9bbb36963d6d7"
+    },
+    "com.synexia.rewrite.Mrc4Test": {
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.rewrite.Mrc4Test.xml",
+      "sha256": "c0c03c463a2a09f2eb90541fcd9e93b782a96d1087479a78f2439cf38d481383"
+    }
+  }
+}

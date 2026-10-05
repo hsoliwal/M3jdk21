@@ -1,0 +1,78 @@
+{
+  "schema": "m3.synexia-intake-bindings/1",
+  "lanes": {
+    "mre2": {
+      "recipeId": "com.synexia.rewrite.Mre2",
+      "recipe": {
+        "proof": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/mre-current-v2",
+        "resultSHA256": "ca973eb099233eef271db4e64ff4c256466ced9cd4cd473064e7d22f08558f33"
+      },
+      "consumers": [
+        {
+          "proof": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/lab-current-v4",
+          "resultSHA256": "ac3a58759bd8dda7d2e437fd2fd1aa3201c30842c4993447dd0987d625fc268e"
+        },
+        {
+          "proof": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2",
+          "resultSHA256": "adce0fb4251ed4efa2dff2ec0818a0c7d9be585893241d8b7c2fda0a6c919a20"
+        }
+      ]
+    },
+    "pcr": {
+      "recipeId": "com.synexia.rewrite.Pcr",
+      "recipe": {
+        "proof": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2",
+        "resultSHA256": "adce0fb4251ed4efa2dff2ec0818a0c7d9be585893241d8b7c2fda0a6c919a20"
+      },
+      "consumers": [
+        {
+          "proof": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/packed-current-v2",
+          "resultSHA256": "f66c2e921d399f4d64957a868f692943bec9410fa311afcc70df278896e3265a"
+        },
+        {
+          "proof": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/primitives-current-v3",
+          "resultSHA256": "9ac3f2db501508383bc80aa2c8e0e983aa2e814d10a6bc3de241613b756ff5dc"
+        }
+      ]
+    },
+    "mrc2": {
+      "recipeId": "com.synexia.rewrite.Mrc4",
+      "recipe": {
+        "proof": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/mrc-current-v5",
+        "resultSHA256": "4cd704a31cba101e36721476876720a8d3bc2c141d8128ac14db2230d69b8770"
+      },
+      "consumers": [
+        {
+          "proof": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/lab-current-v4",
+          "resultSHA256": "ac3a58759bd8dda7d2e437fd2fd1aa3201c30842c4993447dd0987d625fc268e"
+        }
+      ]
+    },
+    "mrd": {
+      "recipeId": "com.synexia.rewrite.Mrd",
+      "recipe": {
+        "proof": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/mrd-current-v1",
+        "resultSHA256": "31b7e0ce9fc360555865112e366573bfed3375a542496333cd5e6dcb60e6471d"
+      },
+      "consumers": [
+        {
+          "proof": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/mrc-current-v5",
+          "resultSHA256": "4cd704a31cba101e36721476876720a8d3bc2c141d8128ac14db2230d69b8770"
+        }
+      ]
+    },
+    "mrp": {
+      "recipeId": "com.synexia.rewrite.Mrp",
+      "recipe": {
+        "proof": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/mrp-current-v2",
+        "resultSHA256": "605bd51ded9733cc2bdffaec01fff584997d1a4b0551cb80f1f5cb70142263e5"
+      },
+      "consumers": [
+        {
+          "proof": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/primitives-current-v3",
+          "resultSHA256": "9ac3f2db501508383bc80aa2c8e0e983aa2e814d10a6bc3de241613b756ff5dc"
+        }
+      ]
+    }
+  }
+}

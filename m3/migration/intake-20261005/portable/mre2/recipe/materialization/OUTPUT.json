@@ -1,0 +1,22 @@
+{
+  "schema":"synexia.mre.output/1",
+  "crate":"mre-v2",
+  "baseline":"99221b0f25a1b09c32855d76e295b816f632a46b",
+  "recipe":"com.synexia.rewrite.Mre2",
+  "manifest":{"resource":"com/synexia/rewrite/hash-pinned-java/mre-v2/manifest.tsv","sha256":"b5c8fc4f434c6d99d3825ff237566e2565bda17458f42ba7081f3a17f50dfe8e"},
+  "targetCount":3,
+  "changes":3,
+  "replacements":2,
+  "additions":1,
+  "inventoryRefusals":12,
+  "postScanRefusals":8,
+  "postScanSchedulerRefusals":3,
+  "envelope":"generic-rendered-java-snapshot",
+  "patch":{"path":"candidate.patch","sha256":"56ba623b4bf60cfb283405c9813e4a03ea48cc7411b57da2f1fc32ebe0c49265","bytes":19751},
+  "files":[
+    {"path":"synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java","beforeSHA256":"0054ddf028c5a83c270c1a53795373c7cd8fa77395d23be7fd70424b644b0a3e","afterSHA256":"e031938aa72942031cd8506ccf9b93804d3d1f9a03942f7dd3634a65771d08d6","sha256":"e031938aa72942031cd8506ccf9b93804d3d1f9a03942f7dd3634a65771d08d6","gitBlob":"c6e8edd0b9cb35787305120d966ec35874f722b5","bytes":44652,"change":"REPLACE"},
+    {"path":"synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/Pcr.java","beforeSHA256":"ABSENT","afterSHA256":"540138b6d3f864920bead17b40a3176dd604fb67ef8b3ab13003804ddadf3fa1","sha256":"540138b6d3f864920bead17b40a3176dd604fb67ef8b3ab13003804ddadf3fa1","gitBlob":"eb7c1cceb4e3289d5db25267aa956d9ad3fec9fb","bytes":1097,"change":"ADD"},
+    {"path":"synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/Pcs.java","beforeSHA256":"c959e3ffe78aef2fe89cb1f9913d5d981c4b5e1a718c77a2faf689e702f24041","afterSHA256":"08eea2a4fcd779912a44cdbaff6251ff08383d103fba65e081162d26defbf417","sha256":"08eea2a4fcd779912a44cdbaff6251ff08383d103fba65e081162d26defbf417","gitBlob":"2f1abb6a8bed0c89f35e324e6237d1605a4048ae","bytes":27811,"change":"REPLACE"}
+  ],
+  "outputSealSHA256":"39ef1d5ecb98af7ddbb0efbbf8ea188bbeefb03600080b885af951454a2bbb78"
+}

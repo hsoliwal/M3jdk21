@@ -1,0 +1,262 @@
+[
+  {
+    "path": "classes/com/synexia/algorithms/corpus/ChallengePlatform.class",
+    "sha256": "ecc35c5643df389dca37c8e7f6c468793ff5ea52165c77c3829baa8f8f588ecd",
+    "bytes": 2165
+  },
+  {
+    "path": "classes/com/synexia/algorithms/corpus/CompetitiveProblemCategory$1.class",
+    "sha256": "443e5be13059e7171af0525f3a9bbba7dd21bf571de26a80e16c7d054bae213f",
+    "bytes": 7609
+  },
+  {
+    "path": "classes/com/synexia/algorithms/corpus/CompetitiveProblemCategory.class",
+    "sha256": "ba827ea8d7f201787c80ad8c23f4e2695e698a86002b6c5b611e0a539e767952",
+    "bytes": 3931
+  },
+  {
+    "path": "classes/com/synexia/algorithms/shapes/AlgorithmShape.class",
+    "sha256": "f523d7f54110d322e0fc3d92ad56a22fe90a242785a34c74ef39678ac56e14bb",
+    "bytes": 8932
+  },
+  {
+    "path": "classes/com/synexia/fastsearch/problem/ProblemCategory.class",
+    "sha256": "6e3fa525f0c3049e3892abe39c182fb730ff0b5505f900686403ea83898fcfb2",
+    "bytes": 2748
+  },
+  {
+    "path": "classes/com/synexia/fastsearch/problem/ProblemSource.class",
+    "sha256": "6cfb95b4b27252451e3fba5b756df3ca7d21dd56adfd55d67297d9e485c8919f",
+    "bytes": 4548
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3EditScope.class",
+    "sha256": "b7224c8f3d284d786150b46ebc7612db8ea37144870306db923ebef0105edabc",
+    "bytes": 2130
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$1.class",
+    "sha256": "1df9ea0e227634fc5a28705e1ce6616197c047b0a694f0beb8cc34fef1d5f49e",
+    "bytes": 3633
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$2.class",
+    "sha256": "5e869a803dad1ebd06b93ba92485b04bfbe36c2a16bc1e7bae5339905e1c6d66",
+    "bytes": 4830
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$3.class",
+    "sha256": "e7dd625a9cc7f030cca038dbaf6160056e585e7db5454d19c4c418e30e9328a1",
+    "bytes": 2114
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$Inventory.class",
+    "sha256": "941a3f8bf3b06a19866fa46dd4f4710a4b679787befb5bb50962219130d4e8d1",
+    "bytes": 1635
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$ParserDependency.class",
+    "sha256": "bdcd960a3e90e4f2886aa28d56aee243388e7039a27df3548ad1411a809e6ed1",
+    "bytes": 1842
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$Target.class",
+    "sha256": "224cdbb113ecf4bc8c54ea58051f70724ae47c3b4667cef4e879c5de8299a689",
+    "bytes": 2069
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.class",
+    "sha256": "e6a338f21865bc5d72cc3c26fc50e37e8d05177cd887140a0194fffaaad26be5",
+    "bytes": 22106
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3ScopeInference$JavaLocation.class",
+    "sha256": "ca1accf38eb1988a6c8bc79d625209e6f1d64098fa0f63b2af86ae2dd93e93be",
+    "bytes": 1967
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3ScopeInference.class",
+    "sha256": "9842899bf63fe7824c4a17027a1a5d1e33f2ac5fc4757e9bf3b42829fc0415c8",
+    "bytes": 6246
+  },
+  {
+    "path": "classes/com/synexia/rewrite/Mrc4.class",
+    "sha256": "118bd381e2f9072ab2c7be4b424052fab2ea6f911199f53f8146fb89500c73fc",
+    "bytes": 1519
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mrc-v4/AlgorithmShape.java.txt",
+    "sha256": "2c71acd9c451ed3fff967ad9d1bcfb575ca8f5d7a5d74dfd3831285ff2a3c212",
+    "bytes": 3041
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mrc-v4/ChallengeDonorPassLedger.java.txt",
+    "sha256": "460ac381ab86ad926d1253b012032a1ea2b0b53a02ea3169436958ec35c45ade",
+    "bytes": 33102
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mrc-v4/ChallengePlatform.java.txt",
+    "sha256": "058720952ac5454b912d96548b0508116ebab27fa8c8110a84ee010338bfbbbc",
+    "bytes": 750
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mrc-v4/CompetitiveCapabilityPlanIndex.java.txt",
+    "sha256": "59742f333ab2a04c3cd5b12061bff182e9a2114549117ce323928d391c10fafa",
+    "bytes": 17440
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mrc-v4/CompetitiveProblemCategory.java.txt",
+    "sha256": "1d01d237fce679c3243d1d84fe495876feb66187d7e5795e9781f8f260dd2af4",
+    "bytes": 3831
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mrc-v4/CompetitiveProblemReview.java.txt",
+    "sha256": "35d503be04c1206f3e0ebae79e2e117cf25e66d54ee314e82ec3a4e41539547e",
+    "bytes": 48403
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mrc-v4/DonorMechanicalShapeCatalog.java.txt",
+    "sha256": "32ad3ecb53a611de29ce8bdcf4079d77576b3b6d5a56a847b67c9cbd5c91b326",
+    "bytes": 20208
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mrc-v4/M3OpenRewriteRuntimeRecipeInventoryRecipe.java.txt",
+    "sha256": "dfaeb0026c90f2563d52e599a478f54f130b25ef89c150f39e58b0ff9049e304",
+    "bytes": 6242
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mrc-v4/M3RecipeCrateSerialAtomReview.java.txt",
+    "sha256": "b11640b4d97f95e3c12299f85cf0dbba081ae70b7b6c2c4ff8b2135446be1337",
+    "bytes": 24064
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mrc-v4/M3SemanticCodeInventoryRecipe.java.txt",
+    "sha256": "3a475b5a1ea098b0ce07368e4ef1080f8c888d7166ceefe85716a12d735b21cc",
+    "bytes": 36683
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mrc-v4/ProblemCategory.java.txt",
+    "sha256": "c7b11ef76eb5e231353c6c30d950b2cceef95a68ba0f2bf9db76cc3aff9b0c12",
+    "bytes": 661
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mrc-v4/ProblemSource.java.txt",
+    "sha256": "32f5b5a7b2605fbc4208abb5a62b92626a63e5547fddd2484b54c82c2a836e8f",
+    "bytes": 3161
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mrc-v4/manifest.tsv",
+    "sha256": "29cd35b127528efe79af2bfb8d8e81a7d4e80c174c6af11df5249aa3a5229f7f",
+    "bytes": 1936
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mrc-v4/parser-dependencies.tsv",
+    "sha256": "11e7f2d55bcc5118c166bbe38a66051cc6d49b08d04b7fc8932b72222510988e",
+    "bytes": 951
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mrc-v4/provenance.tsv",
+    "sha256": "bf0a717a0a3e69642d1c2801a115dda33928ac4665140a2e6685a1f889cd602c",
+    "bytes": 3279
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/M3ParserDependenciesTest$EngineLoader.class",
+    "sha256": "90ab55244944864d22ed763f59bb391e98ec7f959bac1ef27c76e39b0ebaa066",
+    "bytes": 4158
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/M3ParserDependenciesTest$Fixture.class",
+    "sha256": "a97870d0ef167349edeacd52c045b053f9621a406c7d5a0ca67bd1a4623aacb1",
+    "bytes": 8405
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/M3ParserDependenciesTest$RecordingSourceSet.class",
+    "sha256": "b7f8e05797a7249aed51ee34f8e6b83cbb1c5d4d3cddeb410391e2900ab8ec52",
+    "bytes": 3661
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/M3ParserDependenciesTest$Run.class",
+    "sha256": "992ebef5c67525486b2f61f611e26b3d02d6f2eb59db92f075f3b00c709c614a",
+    "bytes": 2520
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/M3ParserDependenciesTest$Target.class",
+    "sha256": "374fafcaaa1a7faa7ced80879f588034b0a814337e08659e996a815e5a9718e8",
+    "bytes": 2035
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/M3ParserDependenciesTest.class",
+    "sha256": "6e87a5b2f338573b238e08eb32f91f976f35cbb610e95d5a587e7c60f92927ff",
+    "bytes": 35844
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/Mrc4Test$1.class",
+    "sha256": "74c85e57e9b17dd6d499efc82bbf95e25cbbfce00e461e6ff953e4f036b00f84",
+    "bytes": 2119
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/Mrc4Test$Candidate.class",
+    "sha256": "4bab173dc99e4f4a16ed2a1b17cdb4ff0319b47d61f04812af83683b6a5380f9",
+    "bytes": 1963
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/Mrc4Test$Fixture.class",
+    "sha256": "25b39e9351c0311bb07ee37d9ff33175276b31e722dea3022e61673facfcd0e1",
+    "bytes": 2447
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/Mrc4Test$RecordingSourceSet.class",
+    "sha256": "d7cda8a9b2b4b3a172c109c8cd744a575bb0d5b4c93bd9d7fc500489605cd27b",
+    "bytes": 3888
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/Mrc4Test$Replay.class",
+    "sha256": "ba1cde40b812cf31230797186ccc67dfd553cdec1b90300ceac33da9f351dc44",
+    "bytes": 1947
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/Mrc4Test$Target.class",
+    "sha256": "69c8ac309207469f8c7dfddb55fa5f1210ce754475db5a1e5d2d0cddb523340a",
+    "bytes": 2078
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/Mrc4Test.class",
+    "sha256": "f74cd94ead4190e069daed56dd7cd6843063b7f5299f2530a5b57a297e09fc2b",
+    "bytes": 33087
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/mrc-v4/before/ChallengeDonorPassLedger.java.txt",
+    "sha256": "3c9b1c00836f9eb97c741482d252aa581dabb0643cf181cd4eb880409b37455f",
+    "bytes": 33077
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/mrc-v4/before/CompetitiveCapabilityPlanIndex.java.txt",
+    "sha256": "718d541f102f6c4286f23d077462d2bd28b922e3da48437d3bcbd1e12aa23696",
+    "bytes": 17409
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/mrc-v4/before/CompetitiveProblemReview.java.txt",
+    "sha256": "c0ea0f3d0c50a81a2fa353adb0542d60e648aed93028775de5fabd55d8bd8024",
+    "bytes": 48085
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/mrc-v4/before/DonorMechanicalShapeCatalog.java.txt",
+    "sha256": "0cb91a21a5c22f2fcb6f6e04e76a86466eaa5136bd2552686975a31a64e8e58c",
+    "bytes": 20254
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/mrc-v4/before/M3OpenRewriteRuntimeRecipeInventoryRecipe.java.txt",
+    "sha256": "5ef1e5871ff3b0d9ba2345bd1ac8133df349f71e3257201555a0d137d315f3f4",
+    "bytes": 6207
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/mrc-v4/before/M3RecipeCrateSerialAtomReview.java.txt",
+    "sha256": "5b240e9c5d2c6da5b70ab045a7756f72de47bd8eeac4c3cc3d410e2e9db4bb4a",
+    "bytes": 23950
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/mrc-v4/before/M3SemanticCodeInventoryRecipe.java.txt",
+    "sha256": "fa0d380eadb57cccf5a41fdffaea85000ada90c9b90b113f29cda006b70c2f03",
+    "bytes": 36538
+  }
+]

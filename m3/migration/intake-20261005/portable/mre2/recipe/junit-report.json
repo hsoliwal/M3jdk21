@@ -1,0 +1,21 @@
+{
+  "status": "ACTUAL_SUREFIRE_REPORTS",
+  "totals": {
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": {
+    "com.synexia.rewrite.Mre2Test": {
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.rewrite.Mre2Test.xml",
+      "sha256": "6ea73be9e2e36de48937093b270fe63501fdf4a67cf8a2c3cc5f850543d75da9"
+    }
+  }
+}

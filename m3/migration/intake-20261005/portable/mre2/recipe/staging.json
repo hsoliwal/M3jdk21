@@ -1,0 +1,102 @@
+{
+  "baseline": "99221b0f25a1b09c32855d76e295b816f632a46b",
+  "lane": "mre-current-bootstrap",
+  "files": [
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "sha256": "962d37d62d740c3e8055c365a048ae7ee0479c26a9f6bbfe741e540d6c1134ab",
+      "bytes": 1052,
+      "gitBlob": "274360816db1e44a2f1796a3bc5cdeff6b0ce6db",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/convergence/closure/source/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3EditScope.java",
+      "origin": "current-git-blob-parity"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "cd55551642f4e513d650cad0f4b798e22a880c7a13e7170d22eb2a7f23234c07",
+      "bytes": 21558,
+      "gitBlob": "4b0a8ebf086c33b43d6588f638f417914c99978e",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/mrd-current-v1/generated-candidate/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "origin": "actual-mrd-current-output"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "sha256": "17228a698f917bfabb46f8c4a20b50822820516fbc6e9ad71d52587a1918e730",
+      "bytes": 6596,
+      "gitBlob": "f6fd8d4a558a6b9b0c78cf4d010e63e3b3e1a9da",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/research/convergence/closure/source/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3ScopeInference.java",
+      "origin": "current-git-blob-parity"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/Mre2.java",
+      "sha256": "c026a63ec93ed47b077ca33cb0f6a7fb39b25acdf5f17246b56710811e92715b",
+      "bytes": 1090,
+      "gitBlob": "19f8b81723ff411a9fb71ac95a6b76b9597513fc",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/repo/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/Mre2.java",
+      "origin": "authored-current-recipe"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/mre-v2/M3RecipeMasteryLab.java.txt",
+      "sha256": "e031938aa72942031cd8506ccf9b93804d3d1f9a03942f7dd3634a65771d08d6",
+      "bytes": 44652,
+      "gitBlob": "c6e8edd0b9cb35787305120d966ec35874f722b5",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/repo/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/mre-v2/M3RecipeMasteryLab.java.txt",
+      "origin": "authored-current-crate"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/mre-v2/Pcr.java.txt",
+      "sha256": "540138b6d3f864920bead17b40a3176dd604fb67ef8b3ab13003804ddadf3fa1",
+      "bytes": 1097,
+      "gitBlob": "eb7c1cceb4e3289d5db25267aa956d9ad3fec9fb",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/repo/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/mre-v2/Pcr.java.txt",
+      "origin": "authored-current-crate"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/mre-v2/Pcs.java.txt",
+      "sha256": "08eea2a4fcd779912a44cdbaff6251ff08383d103fba65e081162d26defbf417",
+      "bytes": 27811,
+      "gitBlob": "2f1abb6a8bed0c89f35e324e6237d1605a4048ae",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/repo/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/mre-v2/Pcs.java.txt",
+      "origin": "authored-current-crate"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/mre-v2/manifest.tsv",
+      "sha256": "b5c8fc4f434c6d99d3825ff237566e2565bda17458f42ba7081f3a17f50dfe8e",
+      "bytes": 707,
+      "gitBlob": "ebc6339ea7a67ce696babd3c10a200485cbf1ba0",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/repo/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/mre-v2/manifest.tsv",
+      "origin": "authored-current-crate"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/mre-v2/provenance.tsv",
+      "sha256": "084bb57096875b311067b2155e269bb25c55854ec4d3c1c9f03f2a04c21dd339",
+      "bytes": 1010,
+      "gitBlob": "f8234a08fb442b2f999882c90d80c142e5e7cdbd",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/repo/synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/mre-v2/provenance.tsv",
+      "origin": "authored-current-crate"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/mre-20261005/bootstrap-v2/src/test/java/com/synexia/rewrite/Mre2Test.java",
+      "sha256": "e7285aa876eeee94a4f6e79c8d7598010c259a4a5fbe126f5d20f73832d3af0b",
+      "bytes": 31359,
+      "gitBlob": "c1e516e36c81bfd58543e4fd47d1936fabb7982b",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/repo/synexia-openrewrite-recipes/verification/mre-20261005/bootstrap-v2/src/test/java/com/synexia/rewrite/Mre2Test.java",
+      "origin": "authored-current-fixture"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/mre-20261005/bootstrap-v2/src/test/resources/com/synexia/rewrite/mre-v2/before/M3RecipeMasteryLab.java.txt",
+      "sha256": "0054ddf028c5a83c270c1a53795373c7cd8fa77395d23be7fd70424b644b0a3e",
+      "bytes": 43215,
+      "gitBlob": "ee8adf451105c34d0afa228fe05b7dabb3b1e264",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/repo/synexia-openrewrite-recipes/verification/mre-20261005/bootstrap-v2/src/test/resources/com/synexia/rewrite/mre-v2/before/M3RecipeMasteryLab.java.txt",
+      "origin": "authored-current-fixture"
+    },
+    {
+      "path": "synexia-openrewrite-recipes/verification/mre-20261005/bootstrap-v2/src/test/resources/com/synexia/rewrite/mre-v2/before/Pcs.java.txt",
+      "sha256": "c959e3ffe78aef2fe89cb1f9913d5d981c4b5e1a718c77a2faf689e702f24041",
+      "bytes": 23191,
+      "gitBlob": "0d0ebee7aa2ac8aec31ca28d30476ecdb424b734",
+      "source": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/repo/synexia-openrewrite-recipes/verification/mre-20261005/bootstrap-v2/src/test/resources/com/synexia/rewrite/mre-v2/before/Pcs.java.txt",
+      "origin": "authored-current-fixture"
+    }
+  ]
+}

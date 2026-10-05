@@ -1,0 +1,127 @@
+[
+  {
+    "path": "classes/com/synexia/rewrite/M3EditScope.class",
+    "sha256": "b7224c8f3d284d786150b46ebc7612db8ea37144870306db923ebef0105edabc",
+    "bytes": 2130
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$1.class",
+    "sha256": "1df9ea0e227634fc5a28705e1ce6616197c047b0a694f0beb8cc34fef1d5f49e",
+    "bytes": 3633
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$2.class",
+    "sha256": "5e869a803dad1ebd06b93ba92485b04bfbe36c2a16bc1e7bae5339905e1c6d66",
+    "bytes": 4830
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$3.class",
+    "sha256": "e7dd625a9cc7f030cca038dbaf6160056e585e7db5454d19c4c418e30e9328a1",
+    "bytes": 2114
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$Inventory.class",
+    "sha256": "941a3f8bf3b06a19866fa46dd4f4710a4b679787befb5bb50962219130d4e8d1",
+    "bytes": 1635
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$ParserDependency.class",
+    "sha256": "bdcd960a3e90e4f2886aa28d56aee243388e7039a27df3548ad1411a809e6ed1",
+    "bytes": 1842
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$Target.class",
+    "sha256": "224cdbb113ecf4bc8c54ea58051f70724ae47c3b4667cef4e879c5de8299a689",
+    "bytes": 2069
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.class",
+    "sha256": "e6a338f21865bc5d72cc3c26fc50e37e8d05177cd887140a0194fffaaad26be5",
+    "bytes": 22106
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3ScopeInference$JavaLocation.class",
+    "sha256": "ca1accf38eb1988a6c8bc79d625209e6f1d64098fa0f63b2af86ae2dd93e93be",
+    "bytes": 1967
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3ScopeInference.class",
+    "sha256": "9842899bf63fe7824c4a17027a1a5d1e33f2ac5fc4757e9bf3b42829fc0415c8",
+    "bytes": 6246
+  },
+  {
+    "path": "classes/com/synexia/rewrite/Mre2.class",
+    "sha256": "7ba3c5daf2e3b5606a213cb9fb7b2bb03e95772141a18db8ff6405f0593d6caa",
+    "bytes": 1531
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mre-v2/M3RecipeMasteryLab.java.txt",
+    "sha256": "e031938aa72942031cd8506ccf9b93804d3d1f9a03942f7dd3634a65771d08d6",
+    "bytes": 44652
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mre-v2/Pcr.java.txt",
+    "sha256": "540138b6d3f864920bead17b40a3176dd604fb67ef8b3ab13003804ddadf3fa1",
+    "bytes": 1097
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mre-v2/Pcs.java.txt",
+    "sha256": "08eea2a4fcd779912a44cdbaff6251ff08383d103fba65e081162d26defbf417",
+    "bytes": 27811
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mre-v2/manifest.tsv",
+    "sha256": "b5c8fc4f434c6d99d3825ff237566e2565bda17458f42ba7081f3a17f50dfe8e",
+    "bytes": 707
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mre-v2/provenance.tsv",
+    "sha256": "084bb57096875b311067b2155e269bb25c55854ec4d3c1c9f03f2a04c21dd339",
+    "bytes": 1010
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/Mre2Test$Candidate.class",
+    "sha256": "7d005257f9fb5d8012f095c281b46999d56363431f11deb01491162631541ba2",
+    "bytes": 1963
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/Mre2Test$Fixture.class",
+    "sha256": "598ce620ed3796f248dbb56f812af450595df20ac736c2a5675dffa759c0a9b1",
+    "bytes": 2447
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/Mre2Test$PostScan.class",
+    "sha256": "d86e83229a9563ad7289735fb668fbae06863ea44b05dc5c56bf02e3bc64e359",
+    "bytes": 1635
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/Mre2Test$RecordingSourceSet.class",
+    "sha256": "f61892e4b9c2f87fe753a543dbb4a079293c519de92c0f0d689aac8b44dd8546",
+    "bytes": 4470
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/Mre2Test$Replay.class",
+    "sha256": "c7f95594cfca3ecfef00d7c79f0f0644e9fbb90fd028df4324c114bcef9a537e",
+    "bytes": 2216
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/Mre2Test$Target.class",
+    "sha256": "98eb32d5de847aa2039a2d70437b3838fd99d1ef99291c36657ada516997392e",
+    "bytes": 2205
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/Mre2Test.class",
+    "sha256": "5e7fab899dda8ed9743c012575aefbbf7c8d9293fc926e6d915c64af0753292c",
+    "bytes": 36452
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/mre-v2/before/M3RecipeMasteryLab.java.txt",
+    "sha256": "0054ddf028c5a83c270c1a53795373c7cd8fa77395d23be7fd70424b644b0a3e",
+    "bytes": 43215
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/mre-v2/before/Pcs.java.txt",
+    "sha256": "c959e3ffe78aef2fe89cb1f9913d5d981c4b5e1a718c77a2faf689e702f24041",
+    "bytes": 23191
+  }
+]

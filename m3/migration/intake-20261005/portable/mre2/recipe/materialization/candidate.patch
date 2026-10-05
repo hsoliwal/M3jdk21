@@ -1,0 +1,412 @@
+diff --git a/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java b/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java
+index ee8adf4..c6e8edd 100644
+--- a/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java
++++ b/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java
+@@ -22,6 +22,7 @@ com.synexia.rewrite.Mre2
+ import java.util.LinkedHashMap;
+ import java.util.LinkedHashSet;
+ import java.util.List;
++import java.util.Locale;
+ import java.util.Map;
+ import java.util.Objects;
+ import java.util.Set;
+@@ -34,6 +35,7 @@
+ import javax.tools.JavaFileObject;
+ import javax.tools.SimpleJavaFileObject;
+ import javax.tools.StandardJavaFileManager;
++import javax.tools.StandardLocation;
+ import javax.tools.ToolProvider;
+ import org.openrewrite.InMemoryExecutionContext;
+ import org.openrewrite.Recipe;
+@@ -371,20 +373,19 @@
+             IProgressMonitor progress,
+             List<EvidenceObserver> observers) {
+         Map<String, String> current = fixture.sources();
+-        Set<String> seenRoots = new LinkedHashSet<>();
+-        seenRoots.add(sourceRoot(current));
++        // Compare exact source states only at the same complete-round phase.
++        // A later recipe may legitimately revisit an earlier intermediate source.
++        Rlc<String> rounds = new Rlc<>(current);
+         List<Step> steps = new ArrayList<>();
+         Observation lastObservation = baseline;
+ 
+         for (int pass = 1; pass <= limits.maxPasses(); pass++) {
+             progress.checkCanceled();
+-            boolean passChanged = false;
+             for (RecipeAtom atom : schedule.atoms()) {
+                 progress.checkCanceled();
+                 ApplyResult applied = apply(fixture, current, atom, progress);
+                 checkedSources(applied.sources(), limits);
+                 current = applied.sources();
+-                passChanged |= applied.changed();
+ 
+                 Observation observation = compileAndObserve(current, fixture, progress, observers);
+                 requireBehavior(fixture, schedule, pass, atom.id(), baseline, observation);
+@@ -399,23 +400,23 @@
+                                 observation.classRootSha256(),
+                                 observation.atomRootSha256(),
+                                 observation.evidenceRoots()));
+-                if (applied.changed() && !seenRoots.add(stepRoot)) {
+-                    throw new AssertionError(
+-                            "recipe cycle detected for "
+-                                    + fixture.id()
+-                                    + " subset "
+-                                    + schedule.subset()
+-                                    + " schedule "
+-                                    + schedule.ids()
+-                                    + " at pass "
+-                                    + pass
+-                                    + " recipe "
+-                                    + atom.id());
+-                }
++                rounds.observe(current, applied.changed() ? 1 : 0);
+             }
+ 
++            Rlc.Verdict verdict = rounds.finish();
++            if (verdict == Rlc.Verdict.OSCILLATION) {
++                throw new AssertionError(
++                        "recipe cycle detected for "
++                                + fixture.id()
++                                + " subset "
++                                + schedule.subset()
++                                + " schedule "
++                                + schedule.ids()
++                                + " at complete pass "
++                                + pass);
++            }
+             String root = sourceRoot(current);
+-            if (!passChanged) {
++            if (verdict == Rlc.Verdict.FIXED_POINT) {
+                 Observation finalObservation = compileAndObserve(current, fixture, progress, observers);
+                 requireBehavior(
+                         fixture, schedule, pass, "final-observation", baseline, finalObservation);
+@@ -516,6 +517,7 @@
+         progress.checkCanceled();
+         CompiledProject compiled = compile(sources);
+         progress.checkCanceled();
++        requireFixtureClasses(compiled, fixture);
+         String atoms = atomRoot(sources, progress);
+         String contract = publicContract(compiled.loader(), fixture.contractClasses());
+         Probe probe = probe(compiled.loader(), fixture.probeClass(), fixture.probeMethod());
+@@ -524,6 +526,19 @@
+                 compiled.classRootSha256(), atoms, contract, probe.value(), probe.isNull(), evidence);
+     }
+ 
++    private static void requireFixtureClasses(CompiledProject compiled, Fixture fixture) {
++        if (!compiled.classNames().contains(fixture.probeClass())) {
++            throw new AssertionError(
++                    "fixture probe class is not owned by compiled project: " + fixture.probeClass());
++        }
++        for (String className : fixture.contractClasses()) {
++            if (!compiled.classNames().contains(className)) {
++                throw new AssertionError(
++                        "fixture contract class is not owned by compiled project: " + className);
++            }
++        }
++    }
++
+     private static Map<String, String> evidenceRoots(
+             Map<String, String> sources,
+             List<EvidenceObserver> observers,
+@@ -577,8 +592,14 @@
+         if (compiler == null) throw new IllegalStateException("JDK compiler is required");
+         DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
+         try (StandardJavaFileManager standard =
+-                        compiler.getStandardFileManager(diagnostics, null, StandardCharsets.UTF_8);
++                        compiler.getStandardFileManager(diagnostics, Locale.ROOT, StandardCharsets.UTF_8);
+                 MemoryFileManager manager = new MemoryFileManager(standard)) {
++            // This fixture API admits no external dependency paths. Do not let the host
++            // application's classpath or source tree silently supply part of the project.
++            standard.setLocationFromPaths(StandardLocation.CLASS_PATH, List.of());
++            standard.setLocationFromPaths(StandardLocation.SOURCE_PATH, List.of());
++            standard.setLocationFromPaths(StandardLocation.ANNOTATION_PROCESSOR_PATH, List.of());
++            standard.setLocationFromPaths(StandardLocation.MODULE_PATH, List.of());
+             List<JavaFileObject> inputs =
+                     sources.entrySet().stream()
+                             .filter(
+@@ -617,13 +638,14 @@
+                                                 .append(':')
+                                                 .append(diagnostic.getLineNumber())
+                                                 .append(' ')
+-                                                .append(diagnostic.getMessage(null)));
++                                                .append(diagnostic.getMessage(Locale.ROOT)));
+                 throw new AssertionError(failure);
+             }
+             Map<String, byte[]> classes = manager.classes();
+             return new CompiledProject(
+                     new MemoryClassLoader(classes),
+-                    classRoot(classes));
++                    classRoot(classes),
++                    classes.keySet());
+         } catch (IOException failure) {
+             throw new IllegalStateException(failure);
+         }
+@@ -922,7 +944,12 @@
+         }
+     }
+ 
+-    private record CompiledProject(ClassLoader loader, String classRootSha256) {}
++    private record CompiledProject(
++            ClassLoader loader, String classRootSha256, Set<String> classNames) {
++        CompiledProject {
++            classNames = Set.copyOf(classNames);
++        }
++    }
+ 
+     private static final class SourceObject extends SimpleJavaFileObject {
+         private final String source;
+@@ -987,7 +1014,7 @@
+         private final Map<String, byte[]> classes;
+ 
+         MemoryClassLoader(Map<String, byte[]> classes) {
+-            super(M3RecipeMasteryLab.class.getClassLoader());
++            super(ClassLoader.getPlatformClassLoader());
+             this.classes = classes;
+         }
+ 
+diff --git a/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/Pcr.java b/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/Pcr.java
+new file mode 100644
+index 0000000..eb7c1cc
+--- /dev/null
++++ b/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/Pcr.java
+@@ -0,0 +1,40 @@ com.synexia.rewrite.Mre2
++// SPDX-License-Identifier: Apache-2.0
++package com.synexia.rewrite;
++
++import java.util.List;
++import java.util.Set;
++import org.openrewrite.Recipe;
++
++/** Provider Callback Reconciliation: the frozen-current configuration of the existing Pcs owner. */
++public final class Pcr extends Recipe {
++    @Override
++    public String getDisplayName() {
++        return "Reconcile Pcr provider callback superset candidate";
++    }
++
++    @Override
++    public String getDescription() {
++        return "Retains landed collection repairs and produces the twenty-target current provider "
++                + "candidate through the existing strict Pcs source envelope and snapshot recipe.";
++    }
++
++    @Override
++    public Set<String> getTags() {
++        return Set.of("synexia", "m3", "openrewrite", "recipe-first", "candidate-only", "m3-capability:pcr");
++    }
++
++    @Override
++    public int maxCycles() {
++        return 1;
++    }
++
++    @Override
++    public boolean causesAnotherCycle() {
++        return false;
++    }
++
++    @Override
++    public List<Recipe> getRecipeList() {
++        return List.of(Pcs.reconciled());
++    }
++}
+diff --git a/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/Pcs.java b/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/Pcs.java
+index 0d0ebee..2f1abb6 100644
+--- a/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/Pcs.java
++++ b/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/Pcs.java
+@@ -40,6 +40,10 @@ com.synexia.rewrite.Mre2
+  */
+ public final class Pcs extends ScanningRecipe<Pcs.Inventory> {
+     public static final String CRATE_NAME = "pcs-v1";
++    private static final String RECONCILED_CRATE = "pcs-reconciled-v1";
++    private static final String RECONCILED_MANIFEST =
++            "/com/synexia/rewrite/pcs-reconciled-v1/target-manifest.tsv";
++    private final boolean reconciled;
+     private static final String RESOURCE_ROOT = "/com/synexia/rewrite/hash-pinned-java/";
+     private static final String MANIFEST = "/com/synexia/rewrite/pcs-v1/target-manifest.tsv";
+     private static final List<String> ADDITIONAL_PATHS = List.of(
+@@ -52,34 +56,56 @@
+ 
+     private record Target(String path, String before, String after, boolean retained) { }
+ 
++    /** Retains the published pcs-v1 entry point and its exact resource contract. */
++    public Pcs() {
++        this(false);
++    }
++
++    private Pcs(boolean reconciled) {
++        this.reconciled = reconciled;
++    }
++
++    /** Closed current-snapshot configuration; no caller-selected crate is admitted. */
++    static Pcs reconciled() {
++        return new Pcs(true);
++    }
++
+     /** Invocation-local source inventory and fully staged outputs; never shared between runs. */
+     public static final class Inventory {
+         private final Map<String, Target> targets;
++        private final boolean reconciled;
+         private final Map<String, SourceFile> seen = new TreeMap<>();
+         private final Map<String, String> observed = new TreeMap<>();
+         private final List<String> conflicts = new ArrayList<>();
+         private Map<String, SourceFile> candidates;
+         private IllegalStateException failure;
+ 
+-        private Inventory(Map<String, Target> targets) {
++        private Inventory(Map<String, Target> targets, boolean reconciled) {
+             this.targets = targets;
++            this.reconciled = reconciled;
+         }
+     }
+ 
+     @Override
+     public String getDisplayName() {
+-        return "Compose Pcs provider callback and bounded tree candidates";
++        return reconciled ? "Reconcile Pcr provider callback and bounded tree candidates"
++                : "Compose Pcs provider callback and bounded tree candidates";
+     }
+ 
+     @Override
+     public String getDescription() {
++        if (reconciled) {
++            return "Admit the twenty current provider targets, retain landed repairs, "
++                    + "and publish the complete reconciled candidate through the shared Pcs envelope.";
++        }
+         return "Admit the twenty exact repository targets, privately run the retained callback "
+                 + "recipe and bounded-tree snapshot crate, and publish only their complete verified candidate.";
+     }
+ 
+     @Override
+     public Set<String> getTags() {
+-        return Set.of("synexia", "m3", "openrewrite", "recipe-first", "candidate-only", "m3-capability:pcs");
++        return Set.of("synexia", "m3", "openrewrite", "recipe-first", "candidate-only",
++                reconciled ? "m3-capability:pcr" : "m3-capability:pcs");
+     }
+ 
+     @Override
+@@ -94,7 +120,7 @@
+ 
+     @Override
+     public Inventory getInitialValue(ExecutionContext context) {
+-        return new Inventory(targets());
++        return new Inventory(targets(reconciled), reconciled);
+     }
+ 
+     @Override
+@@ -184,18 +210,18 @@
+     }
+ 
+     public List<String> targetPaths() {
+-        return List.copyOf(new TreeMap<>(targets()).keySet());
++        return List.copyOf(new TreeMap<>(targets(reconciled)).keySet());
+     }
+ 
+     public Map<String, String> preimageManifest() {
+         Map<String, String> manifest = new TreeMap<>();
+-        targets().forEach((path, target) -> manifest.put(path, target.before()));
++        targets(reconciled).forEach((path, target) -> manifest.put(path, target.before()));
+         return Map.copyOf(manifest);
+     }
+ 
+     public Map<String, String> postimageManifest() {
+         Map<String, String> manifest = new TreeMap<>();
+-        targets().forEach((path, target) -> manifest.put(path, target.after()));
++        targets(reconciled).forEach((path, target) -> manifest.put(path, target.after()));
+         return Map.copyOf(manifest);
+     }
+ 
+@@ -211,7 +237,8 @@
+             if (inventory.candidates != null) return;
+             try {
+                 Map<String, SourceFile> staged = new TreeMap<>();
+-                for (boolean retained : List.of(true, false)) {
++                List<Boolean> components = inventory.reconciled ? List.of(true) : List.of(true, false);
++                for (boolean retained : components) {
+                     List<SourceFile> inputs = new ArrayList<>();
+                     Set<String> allowed = new HashSet<>();
+                     for (Target target : new TreeMap<>(inventory.targets).values()) {
+@@ -220,8 +247,10 @@
+                         SourceFile source = inventory.seen.get(target.path());
+                         if (source != null) inputs.add(source);
+                     }
+-                    Recipe component = retained ? new M3ProviderCallbackSupersetRecipe()
+-                            : new M3HashPinnedJavaSnapshotRecipe(CRATE_NAME);
++                    Recipe component = inventory.reconciled
++                            ? new M3HashPinnedJavaSnapshotRecipe(RECONCILED_CRATE)
++                            : retained ? new M3ProviderCallbackSupersetRecipe()
++                                    : new M3HashPinnedJavaSnapshotRecipe(CRATE_NAME);
+                     Map<String, SourceFile> outputs = runIsolated(component, inputs, allowed);
+                     if (!outputs.keySet().equals(allowed)) {
+                         throw new IllegalStateException("incomplete Pcs component output: " + component.getName());
+@@ -346,7 +375,8 @@
+         }
+     }
+ 
+-    private static Map<String, Target> targets() {
++    private static Map<String, Target> targets(boolean reconciled) {
++        if (reconciled) return reconciledTargets();
+         var retained = new M3ProviderCallbackSupersetRecipe();
+         var extension = new M3HashPinnedJavaSnapshotRecipe(CRATE_NAME);
+         List<String> retainedPaths = retained.targetPaths();
+@@ -413,6 +443,60 @@
+         return Map.copyOf(targets);
+     }
+ 
++    /** Binds the current flat crate to the same exact scope as the retained Pcs capability. */
++    private static Map<String, Target> reconciledTargets() {
++        Map<String, Target> retained = targets(false);
++        var snapshot = new M3HashPinnedJavaSnapshotRecipe(RECONCILED_CRATE);
++        List<String> paths = snapshot.targetPaths();
++        Map<String, String> before = snapshot.preimageManifest();
++        if (paths.size() != 20 || !paths.equals(List.copyOf(new TreeMap<>(retained).keySet()))
++                || !before.keySet().equals(retained.keySet())) {
++            throw new IllegalStateException("Pcr scope drift or overlap");
++        }
++        Map<String, List<String>> rows = new TreeMap<>();
++        for (String line : resource(RESOURCE_ROOT + RECONCILED_CRATE + "/manifest.tsv").lines().toList()) {
++            if (line.isBlank() || line.startsWith("#")) continue;
++            String[] cells = line.split("\t", -1);
++            if (cells.length != 4 || !cells[1].equals(before.get(cells[0]))
++                    || !cells[2].matches("[0-9a-f]{64}")
++                    || rows.putIfAbsent(cells[0], List.of(cells)) != null) {
++                throw new IllegalStateException("Pcr snapshot manifest changed after engine admission");
++            }
++        }
++        if (!List.copyOf(rows.keySet()).equals(paths)) {
++            throw new IllegalStateException("Pcr snapshot target set changed after engine admission");
++        }
++        List<String> provenance = resource(RECONCILED_MANIFEST).lines().toList();
++        if (provenance.size() != paths.size() + 1
++                || !provenance.getFirst().equals(
++                        "path\tbefore_git_blob\tbefore_sha256\tafter_sha256\tcrate\ttemplate")) {
++            throw new IllegalStateException("Pcr provenance manifest scope/header drift");
++        }
++        Map<String, Target> targets = new TreeMap<>();
++        String previous = "";
++        for (String line : provenance.subList(1, provenance.size())) {
++            String[] cells = line.split("\t", -1);
++            List<String> row = cells.length == 6 ? rows.get(cells[0]) : null;
++            if (row == null || previous.compareTo(cells[0]) >= 0
++                    || !cells[2].equals(row.get(1)) || !cells[3].equals(row.get(2))
++                    || !RECONCILED_CRATE.equals(cells[4]) || !cells[5].equals(row.get(3))
++                    || !("ABSENT".equals(cells[2]) ? "ABSENT".equals(cells[1])
++                            : cells[1].matches("[0-9a-f]{40}"))) {
++                throw new IllegalStateException("Pcr provenance disagrees with the admitted snapshot");
++            }
++            previous = cells[0];
++            Target target = new Target(cells[0], cells[2], cells[3], true);
++            if (targets.putIfAbsent(target.path(), target) != null) {
++                throw new IllegalStateException("duplicate Pcr target: " + target.path());
++            }
++        }
++        if (!targets.keySet().equals(retained.keySet())
++                || snapshot.requiredScope() != M3ScopeInference.inferJavaTargets(paths)) {
++            throw new IllegalStateException("Pcr union scope drift");
++        }
++        return Map.copyOf(targets);
++    }
++
+     private static String exactPath(SourceFile source) {
+         String raw = source.getSourcePath().toString();
+         if (!raw.equals(canonical(source.getSourcePath())) || source.getSourcePath().isAbsolute()) {

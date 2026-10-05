@@ -1,0 +1,51 @@
+{
+  "status": "ACTUAL_SUREFIRE_REPORTS",
+  "totals": {
+    "tests": 21,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "suites": {
+    "com.synexia.rewrite.M3ProviderCallbackSupersetRecipeTest": {
+      "counts": {
+        "tests": 2,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.rewrite.M3ProviderCallbackSupersetRecipeTest.xml",
+      "sha256": "aafb48dba65272856b7eb9c9036b581ec77561b49182f60bb8efab3f31f78c32"
+    },
+    "com.synexia.rewrite.M3VersionedProviderSyntaxRepairRecipeTest": {
+      "counts": {
+        "tests": 13,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.rewrite.M3VersionedProviderSyntaxRepairRecipeTest.xml",
+      "sha256": "7dfc2c5ad3695af4ebcaddbed4ce7e1195cf9735e9691ace7335f16cd1dafcf9"
+    },
+    "com.synexia.rewrite.PcrTest": {
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.rewrite.PcrTest.xml",
+      "sha256": "2bdaf31f09c23d676a6e1ac288730a83b78a09902d7e4f07c4f917c1afb0955f"
+    },
+    "com.synexia.rewrite.PcsTest": {
+      "counts": {
+        "tests": 3,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "report": "TEST-com.synexia.rewrite.PcsTest.xml",
+      "sha256": "13f386d2d11d29a1e7875df4808ab18c3e9c3f8aa0102656f97e914566336366"
+    }
+  }
+}

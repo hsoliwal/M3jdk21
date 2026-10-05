@@ -1,0 +1,22 @@
+{
+  "schema":"synexia.mrp.output/1",
+  "crate":"mrp-v2",
+  "baseline":"99221b0f25a1b09c32855d76e295b816f632a46b",
+  "recipe":"com.synexia.rewrite.Mrp",
+  "manifest":{"resource":"com/synexia/rewrite/hash-pinned-java/mrp-v2/manifest.tsv","sha256":"876d3655e26360dee60286298e4815f75f261ae78ab2577d581531e54df6c8f1"},
+  "targetCount":4,
+  "changes":4,
+  "replacements":4,
+  "additions":0,
+  "mixedStates":16,
+  "inventoryRefusals":17,
+  "envelope":"generic-rendered-java-snapshot",
+  "patch":{"path":"candidate.patch","sha256":"c66bf321695a7eb2db93693492e2732e8039e7982f5be7b138002368407ac5dd","bytes":8613},
+  "files":[
+    {"path":"synexia-primitives/src/main/java/com/synexia/primitives/DenseCollections.java","beforeSHA256":"789f14ccb6f5f8c7f3081f1e64c73859014691eb87ce79783858c2f02da54c82","afterSHA256":"7b13870db69e4fb85822e069abd68a9f541e6494f6a925c803058e00c0ab8580","sha256":"7b13870db69e4fb85822e069abd68a9f541e6494f6a925c803058e00c0ab8580","gitBlob":"2eb8cf24c37a5f7d2667227362426f13c7033cfa","bytes":20419,"change":"REPLACE"},
+    {"path":"synexia-primitives/src/main/java/com/synexia/primitives/FuzzyStructureFactory.java","beforeSHA256":"419db410c6777155486bb4cebca75ae4f9a8c5fd01cc49e86d2c5796aac1996e","afterSHA256":"6ed7a073965d2b8552447e33b046d19f2a01db931b2cd345699b1722c365f040","sha256":"6ed7a073965d2b8552447e33b046d19f2a01db931b2cd345699b1722c365f040","gitBlob":"580985b0330ee5c585c966de7473e80bdc48c26d","bytes":28261,"change":"REPLACE"},
+    {"path":"synexia-primitives/src/test/java/com/synexia/primitives/AdvancedAlgorithmShapesTest.java","beforeSHA256":"163fab61d6dd7edfda54a3c29e93a1b5525f962f45816abb404b8a454a9fb25e","afterSHA256":"8cdda3b1f66d8c8b17b87566634717a85d2a00d54543b43cfa863a21fb044aa4","sha256":"8cdda3b1f66d8c8b17b87566634717a85d2a00d54543b43cfa863a21fb044aa4","gitBlob":"837e58889d33e418585234c4fea9b4a5b47c8f68","bytes":8406,"change":"REPLACE"},
+    {"path":"synexia-primitives/src/test/java/com/synexia/primitives/ProviderBackedPrimitiveTreeSupersetTest.java","beforeSHA256":"25fcfff2c2fd9d7f4ce553ff7c30b0911801827323eb9eaeefabd1612c097ad8","afterSHA256":"09b2b504982bf30a6ddd4ea502ffa6d9d0096658df7ca30c8e728136452943d8","sha256":"09b2b504982bf30a6ddd4ea502ffa6d9d0096658df7ca30c8e728136452943d8","gitBlob":"88ef6cb99e4de24e8dba04d0936cdbbff32a546f","bytes":10643,"change":"REPLACE"}
+  ],
+  "outputSealSHA256":"6b9f5b92ca032ebbb157d008ba0ba012e0a112f2580800f542fdef997a618968"
+}

@@ -1,0 +1,19 @@
+{
+  "schema":"synexia.mrd.output/1",
+  "crate":"mrd-v1",
+  "baseline":"99221b0f25a1b09c32855d76e295b816f632a46b",
+  "recipe":"com.synexia.rewrite.Mrd",
+  "manifest":{"resource":"com/synexia/rewrite/hash-pinned-java/mrd-v1/manifest.tsv","sha256":"3d67950e579cfc780877860458a258f2dcf0bf5eba3aa7d054b8a284791c7889"},
+  "targetCount":1,
+  "changes":1,
+  "replacements":1,
+  "additions":0,
+  "mixedStates":2,
+  "inventoryRefusals":5,
+  "envelope":"generic-rendered-java-snapshot",
+  "patch":{"path":"candidate.patch","sha256":"1135bf4b540baa679e3c280048102c7765d19803fd3809fbf8dd96a292fb03be","bytes":10832},
+  "files":[
+    {"path":"synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java","beforeSHA256":"0a5ae64b92bc05230d50f218cbba7600c60bd865ce1217932a7c62d93c8f7ee5","afterSHA256":"cd55551642f4e513d650cad0f4b798e22a880c7a13e7170d22eb2a7f23234c07","sha256":"cd55551642f4e513d650cad0f4b798e22a880c7a13e7170d22eb2a7f23234c07","gitBlob":"4b0a8ebf086c33b43d6588f638f417914c99978e","bytes":21558,"change":"REPLACE"}
+  ],
+  "outputSealSHA256":"77f62a92b3bc445eb9980537ffbf8dfb5caf1071e013f1ade29383347974982c"
+}

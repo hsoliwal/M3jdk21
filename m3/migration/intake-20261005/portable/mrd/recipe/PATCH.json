@@ -1,0 +1,16 @@
+{
+  "status": "SEALED_BEFORE_LINT",
+  "baseline": "99221b0f25a1b09c32855d76e295b816f632a46b",
+  "lane": "mrd-current-requalification",
+  "specSHA256": "3bdd6da2cf5a39475220cf02c63ce01c99de3b595ab8d27e3af6ae6db0b67980",
+  "inputManifestSHA256": "0ba6feb74460587ac61002032f2e65da843e5cce14b648841f188ad6191463f1",
+  "commandsSHA256": "3d942867e091983cb0a36b0f1c5e94d8ef10c919f224e846881ca94218f9741b",
+  "stagingSHA256": "e226da0e459dcf0245fd7917f274b78e94189fdea1e8fe546d14d3e227e3fb8f",
+  "toolingSHA256": "e9310cfa52d2a440c54bfe1530ff1482da16559f8208dd28212cc960637f8efb",
+  "sourceFiles": 9,
+  "javaFiles": 5,
+  "lintJavaFiles": 5,
+  "effectiveOutputAbsent": true,
+  "strictCanonicalAdmission": false,
+  "canonicalProductionApplied": false
+}

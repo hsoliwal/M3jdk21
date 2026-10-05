@@ -1,0 +1,62 @@
+{
+  "status": "PASS_FOCUSED_TEST_PROJECT",
+  "chain": "mrd-current-v1",
+  "baseline": "99221b0f25a1b09c32855d76e295b816f632a46b",
+  "orderedGates": [
+    {
+      "stage": "lint",
+      "exitCode": 0,
+      "startedAt": "2026-10-05T08:51:45.898872+00:00",
+      "endedAt": "2026-10-05T08:51:48.871074+00:00",
+      "receipt": "chain/01-lint.json",
+      "receiptSHA256": "c13bd700f0cc41945efb48d1e45c33c35181202ea87aa6d9e03b14ba6ee5a70b",
+      "stdoutSHA256": "5a05902987213afc6ba9251310eac97ecd6afd7d56c4c1d81c1b0ad11b89aa8b",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "compile",
+      "exitCode": 0,
+      "startedAt": "2026-10-05T08:51:48.871852+00:00",
+      "endedAt": "2026-10-05T08:51:53.643276+00:00",
+      "receipt": "chain/02-compile.json",
+      "receiptSHA256": "dea2dd4f661283b2b75d86e07c1c05e400e8b0fdc8788f658717d79d9a78bd0f",
+      "stdoutSHA256": "669bf0fe614bbdc8e471fb6ba19c2ee2425aa3149e55f439bd70f8565ac5a5b0",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "test",
+      "exitCode": 0,
+      "startedAt": "2026-10-05T08:51:53.644458+00:00",
+      "endedAt": "2026-10-05T08:52:01.668841+00:00",
+      "receipt": "chain/03-test.json",
+      "receiptSHA256": "65b836bb2e2611d9869e5f6e4ba64c941fcc7c8d76adfdf776f36b4b5c2120da",
+      "stdoutSHA256": "b1f8a51b676933e7fb18a92ae18dbf91e03c3899a31b27f80ac3d4bbeeb75472",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "stage": "runtime",
+      "exitCode": 0,
+      "startedAt": "2026-10-05T08:52:01.669891+00:00",
+      "endedAt": "2026-10-05T08:52:07.557427+00:00",
+      "receipt": "chain/04-runtime.json",
+      "receiptSHA256": "6412baa15c3a5b703b1315ebf5dbbc0839373d165a1b1adbcfb04d71ab0679a3",
+      "stdoutSHA256": "5bd1804e0fa98500ebd06a892e347cd2772174b981a6c7d23216d0744024486a",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "patchSHA256": "b4e050f83369539983f6b5bf16c7895eed654737d4bb06182793f639140389d8",
+  "inputManifestSHA256": "0ba6feb74460587ac61002032f2e65da843e5cce14b648841f188ad6191463f1",
+  "compiledArtifactManifestSHA256": "e277accae2fe8235fca0c9d71ec038dfc31c720fb98578d1b76cbabd2f639ef7",
+  "junit": {
+    "tests": 3,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "junitReportSHA256": "9eaddccbd33966ff468247e6069d8044a671978e222ba2691a0fc30c8908e9cc",
+  "runtimeReportSHA256": "221455dc69da8016667633bde03a8c88e5801e31aad0e54fc30bad53e4d13b5e",
+  "runtimeCommands": 1,
+  "strictCanonicalAdmission": false,
+  "canonicalProductionApplied": false,
+  "sourceSlice": true
+}

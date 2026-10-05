@@ -1,0 +1,11 @@
+{
+  "pythonExecutable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+  "pythonExecutableSHA256": "fa67443527ed9647f760d807e2a38f26340757123e643c4639cf273ed15d5ea7",
+  "pythonVersion": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "pythonStdlibPath": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12",
+  "javaHome": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/zulu21.52.203-ca-jdk21.0.12.1-linux_x64",
+  "maven": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/apache-maven-3.9.9",
+  "mavenSettings": "/workspace/scratch/5809f5dce3dd/m3-recipe-evolution-20261005/evidence/pcr-current-v2/harness/settings.xml",
+  "boundary": "Declared executable/cache bytes are sealed; OS, dynamic libraries, shell utilities and Python standard library are outside complete image sealing.",
+  "canonicalOfflineSourceClosure": false
+}

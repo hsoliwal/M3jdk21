@@ -1,0 +1,5 @@
+# path	beforeSHA256	afterSHA256	template
+# baseline 99221b0f25a1b09c32855d76e295b816f632a46b
+synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java	0054ddf028c5a83c270c1a53795373c7cd8fa77395d23be7fd70424b644b0a3e	e031938aa72942031cd8506ccf9b93804d3d1f9a03942f7dd3634a65771d08d6	M3RecipeMasteryLab.java.txt
+synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/Pcr.java	ABSENT	540138b6d3f864920bead17b40a3176dd604fb67ef8b3ab13003804ddadf3fa1	Pcr.java.txt
+synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/Pcs.java	c959e3ffe78aef2fe89cb1f9913d5d981c4b5e1a718c77a2faf689e702f24041	08eea2a4fcd779912a44cdbaff6251ff08383d103fba65e081162d26defbf417	Pcs.java.txt

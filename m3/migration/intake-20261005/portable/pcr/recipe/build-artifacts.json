@@ -1,0 +1,602 @@
+[
+  {
+    "path": "classes/com/synexia/rewrite/M3EditScope.class",
+    "sha256": "b7224c8f3d284d786150b46ebc7612db8ea37144870306db923ebef0105edabc",
+    "bytes": 2130
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$1.class",
+    "sha256": "1df9ea0e227634fc5a28705e1ce6616197c047b0a694f0beb8cc34fef1d5f49e",
+    "bytes": 3633
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$2.class",
+    "sha256": "5e869a803dad1ebd06b93ba92485b04bfbe36c2a16bc1e7bae5339905e1c6d66",
+    "bytes": 4830
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$3.class",
+    "sha256": "e7dd625a9cc7f030cca038dbaf6160056e585e7db5454d19c4c418e30e9328a1",
+    "bytes": 2114
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$Inventory.class",
+    "sha256": "941a3f8bf3b06a19866fa46dd4f4710a4b679787befb5bb50962219130d4e8d1",
+    "bytes": 1635
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$ParserDependency.class",
+    "sha256": "bdcd960a3e90e4f2886aa28d56aee243388e7039a27df3548ad1411a809e6ed1",
+    "bytes": 1842
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$Target.class",
+    "sha256": "224cdbb113ecf4bc8c54ea58051f70724ae47c3b4667cef4e879c5de8299a689",
+    "bytes": 2069
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.class",
+    "sha256": "e6a338f21865bc5d72cc3c26fc50e37e8d05177cd887140a0194fffaaad26be5",
+    "bytes": 22106
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3OpenRewriteInventory$Entry.class",
+    "sha256": "e09a5cfd008b661ae1f341c214158bed33587225baea994151e56f0acc21f063",
+    "bytes": 3569
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3OpenRewriteInventory$Option.class",
+    "sha256": "65a2ac0823e9c1e6bcd4b53377e560127419e92c115ccfb865e9ca862819264e",
+    "bytes": 2387
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3OpenRewriteInventory.class",
+    "sha256": "99e3d9cb3e9bbc5082168a067609fe3676e435c4abd3f6e26371e02d77f18981",
+    "bytes": 7066
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3ProviderCallbackSupersetRecipe$1.class",
+    "sha256": "00c0f5afa4c7e10e0ca346a1e94497881e1cb208c8f1614b580e327762eb9a4b",
+    "bytes": 3827
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3ProviderCallbackSupersetRecipe$2.class",
+    "sha256": "588f24a0df34acf6bf8847189c0a5199f4a39c5b2927f67d8cc61b4acb5fd8bf",
+    "bytes": 5100
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3ProviderCallbackSupersetRecipe$Inventory.class",
+    "sha256": "4ebf56f9428d6e4bc7d224e498be4d43987b64a214915331fbbc78cd318d18f8",
+    "bytes": 1419
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3ProviderCallbackSupersetRecipe$Module.class",
+    "sha256": "28ef3fc7f861e907360414ebce497f4bfa0bc89bd2a8864ea62e2ee3278975bb",
+    "bytes": 1798
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3ProviderCallbackSupersetRecipe$Target.class",
+    "sha256": "3c045c7d5fb9f22ffb955f2c23abe8981b79cb11facf06d9009dd74ce1c866f5",
+    "bytes": 2776
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3ProviderCallbackSupersetRecipe.class",
+    "sha256": "a563049c373340c21ea77498be1dc129a15e541a0a5140918bf117466e4e4854",
+    "bytes": 21097
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3ScopeInference$JavaLocation.class",
+    "sha256": "ca1accf38eb1988a6c8bc79d625209e6f1d64098fa0f63b2af86ae2dd93e93be",
+    "bytes": 1967
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3ScopeInference.class",
+    "sha256": "9842899bf63fe7824c4a17027a1a5d1e33f2ac5fc4757e9bf3b42829fc0415c8",
+    "bytes": 6246
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3VersionedProviderSyntaxRepairRecipe$1.class",
+    "sha256": "616465cede1406c53853d712d2870dec3eecc9111f6b1f7c72711ded85e53f61",
+    "bytes": 2437
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3VersionedProviderSyntaxRepairRecipe$2.class",
+    "sha256": "aac59fe73e389eb83145164b3d86a5159ee3b4d437a06f5146e567bdfb649143",
+    "bytes": 1995
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3VersionedProviderSyntaxRepairRecipe$Scan.class",
+    "sha256": "c58cf33b516739a252dfa25cdbc5531c488066bc2ca0bb435fdfe746b1f6c415",
+    "bytes": 646
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3VersionedProviderSyntaxRepairRecipe.class",
+    "sha256": "82e1e9630ac31a393f617013c8717c592e6f210c668def199bad3cfc6cf1c943",
+    "bytes": 11076
+  },
+  {
+    "path": "classes/com/synexia/rewrite/Pcr.class",
+    "sha256": "17a25d48fb485b92b43ed567f0fc8c23e7c04773728f074d094252fce75ee200",
+    "bytes": 1567
+  },
+  {
+    "path": "classes/com/synexia/rewrite/Pcs$1.class",
+    "sha256": "d0185747128187a19d4cd8724e65eb3d0b631ef9f963c4f511f7ba4265076cc3",
+    "bytes": 3466
+  },
+  {
+    "path": "classes/com/synexia/rewrite/Pcs$2.class",
+    "sha256": "04d9fd91ba75487ce6863c09e8b154a48e028cf6c7fa438da8fd51297b18bbb2",
+    "bytes": 4775
+  },
+  {
+    "path": "classes/com/synexia/rewrite/Pcs$Inventory.class",
+    "sha256": "7b6995dea300d1243fdf849debe8c2668750871623c3a90d458eaf383cfec382",
+    "bytes": 1272
+  },
+  {
+    "path": "classes/com/synexia/rewrite/Pcs$Target.class",
+    "sha256": "ccdd7ac097f68e6d625f0c49054c02375573ea21ebc6c66d005ea249493eb610",
+    "bytes": 1881
+  },
+  {
+    "path": "classes/com/synexia/rewrite/Pcs.class",
+    "sha256": "f7755722d8ec699f06df8b4ef0e9fe7fefa51771cc08439546f26e8edac56998",
+    "bytes": 24972
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/BoundedProviderBackedPrimitiveLongTree.java.txt",
+    "sha256": "137e7c9b741ef312c419a15f905d1f22cd40b30f6a13d65592883aa884c7170d",
+    "bytes": 9557
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/BoundedProviderBackedPrimitiveRows.java.txt",
+    "sha256": "c790a117f18812c6ab4106b867fc2d2962255763a29d1d3bcf2cd209962a1d37",
+    "bytes": 11605
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/BoundedProviderBackedPrimitiveTree.java.txt",
+    "sha256": "66929697ffc39003a1fa1d015975a6a03fbba20531bbc17b5f535bc8f08cf2f4",
+    "bytes": 12996
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/BoundedProviderRowsFailureAdmissionTest.java.txt",
+    "sha256": "d96abf1b94b58467a158cf6985012fa9e3b4c5dbedfe724f85881af6b3ab6b3f",
+    "bytes": 15329
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/BoundedVersionedProviderBackedPrimitiveLongTree.java.txt",
+    "sha256": "aaa96b03ad1ac7115ec4f012526939d5e12d1bcb4cc5f4fa4c3f25d02f5656d2",
+    "bytes": 10480
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/BulkPrimitiveRowProviderTest.java.txt",
+    "sha256": "13499edabbaa9f69e28da6bd1e0f985ce502a7de91abd4f1845b26af0b491a26",
+    "bytes": 14617
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/ExactWidthCollectionsSelfTest.java.txt",
+    "sha256": "64f95e0c5cc521ffe0f4dbf5f591ef8affa5233a1d88c8df5446b9a449cbf8fe",
+    "bytes": 12305
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/ObjectCounterMap.java.txt",
+    "sha256": "21fa5ac34877acf45336e1a7efa82966e097fd4ab1f62ae9f54b4ee3ad4f56e0",
+    "bytes": 3410
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/ObjectCounterZeroMetadataRepairTest.java.txt",
+    "sha256": "f7272d4ca18106de32c03bf52ae7894f6e08a0f8dca12e0883830596d5048401",
+    "bytes": 7342
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/PackedLazyCallbackSafetyTest.java.txt",
+    "sha256": "34ae724febc38948d095222f403e5b4a351ab08cc3ea0e129c56bb012744255c",
+    "bytes": 29216
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/PackedLazyTreeMapSelfTest.java.txt",
+    "sha256": "7e239cc9f87b05b39db1e0cddd81dc842ab07f8df5d49e20a585867becce0979",
+    "bytes": 18419
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/PackedLazyValueState.java.txt",
+    "sha256": "bce1d43153ff314030eaf27f93108105a3f876e7364d71fe3a4c4f2883db99d0",
+    "bytes": 10611
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/PcsProbe.java.txt",
+    "sha256": "4fa7b2ca8086982bfc6e47d7ab2af8bac8537a2f245f70bc2bf06f3bb2c62940",
+    "bytes": 68319
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/PcsTest.java.txt",
+    "sha256": "012ce8ac2d50bcfedaaff2ac9604b589b58b5b9e8b018ae524906bba965aaa9c",
+    "bytes": 3748
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/ProviderBackedPrimitiveRows.java.txt",
+    "sha256": "8d5e8c505158bc60e41dcda5a16d468c293aa11948d0e3c93d6500634c0e345d",
+    "bytes": 20592
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/ProviderCallbackSupersetProbe.java.txt",
+    "sha256": "08bdfe2a0cedf372b4b765765297358dcc4fddb88282a8bb391024bc881d3a57",
+    "bytes": 6342
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/ProviderCallbackSupersetTest.java.txt",
+    "sha256": "035b67874278adae7381d61c12eb368312573928d3ded5a35dfa40b2915ef79f",
+    "bytes": 10205
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/ProviderResidencySupersetTest.java.txt",
+    "sha256": "f10da50534f059a422106021392cdb21e86172a9bbc025431024fe86e68d5b84",
+    "bytes": 12353
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/VersionedProviderBackedPrimitiveLongTree.java.txt",
+    "sha256": "2ca650f68fd0450a2886ae303b0b91eafdffe326464abf8ae5a1d669a78a5adb",
+    "bytes": 8252
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/VersionedProviderLookupCounterTest.java.txt",
+    "sha256": "78b23ce5fbc6d941b829577498b017f19dfa7c65a5767cdfdad55d0e34cf8edf",
+    "bytes": 6138
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-reconciled-v1/manifest.tsv",
+    "sha256": "be42c1c429c4a40fbce3499fa8d47ab380606fb6605843435751eaef80f3bcaa",
+    "bytes": 4750
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-v1/BoundedProviderBackedPrimitiveLongTree.java.txt",
+    "sha256": "137e7c9b741ef312c419a15f905d1f22cd40b30f6a13d65592883aa884c7170d",
+    "bytes": 9557
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-v1/BoundedProviderBackedPrimitiveTree.java.txt",
+    "sha256": "66929697ffc39003a1fa1d015975a6a03fbba20531bbc17b5f535bc8f08cf2f4",
+    "bytes": 12996
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-v1/BoundedVersionedProviderBackedPrimitiveLongTree.java.txt",
+    "sha256": "aaa96b03ad1ac7115ec4f012526939d5e12d1bcb4cc5f4fa4c3f25d02f5656d2",
+    "bytes": 10480
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-v1/PcsProbe.java.txt",
+    "sha256": "4fa7b2ca8086982bfc6e47d7ab2af8bac8537a2f245f70bc2bf06f3bb2c62940",
+    "bytes": 68319
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-v1/PcsTest.java.txt",
+    "sha256": "012ce8ac2d50bcfedaaff2ac9604b589b58b5b9e8b018ae524906bba965aaa9c",
+    "bytes": 3748
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-v1/ProviderResidencySupersetTest.java.txt",
+    "sha256": "f10da50534f059a422106021392cdb21e86172a9bbc025431024fe86e68d5b84",
+    "bytes": 12353
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/pcs-v1/manifest.tsv",
+    "sha256": "73e24e2a5641bccf6c1df6b674e54a159459579050e77a7a350afc40c777a3b6",
+    "bytes": 1465
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/provider-callback-superset-common-v2/PackedLazyCallbackSafetyTest.java.txt",
+    "sha256": "34ae724febc38948d095222f403e5b4a351ab08cc3ea0e129c56bb012744255c",
+    "bytes": 29216
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/provider-callback-superset-common-v2/PackedLazyTreeMapSelfTest.java.txt",
+    "sha256": "7e239cc9f87b05b39db1e0cddd81dc842ab07f8df5d49e20a585867becce0979",
+    "bytes": 18419
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/provider-callback-superset-common-v2/PackedLazyValueState.java.txt",
+    "sha256": "bce1d43153ff314030eaf27f93108105a3f876e7364d71fe3a4c4f2883db99d0",
+    "bytes": 10611
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/provider-callback-superset-common-v2/manifest.tsv",
+    "sha256": "f74b8f96fbb300477c673c2aa3c3378542e4eba3dd29d6d4d12b4f24528156a1",
+    "bytes": 716
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/provider-callback-superset-primitives-v2/BoundedProviderBackedPrimitiveRows.java.txt",
+    "sha256": "c790a117f18812c6ab4106b867fc2d2962255763a29d1d3bcf2cd209962a1d37",
+    "bytes": 11605
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/provider-callback-superset-primitives-v2/BoundedProviderRowsFailureAdmissionTest.java.txt",
+    "sha256": "d96abf1b94b58467a158cf6985012fa9e3b4c5dbedfe724f85881af6b3ab6b3f",
+    "bytes": 15329
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/provider-callback-superset-primitives-v2/BulkPrimitiveRowProviderTest.java.txt",
+    "sha256": "13499edabbaa9f69e28da6bd1e0f985ce502a7de91abd4f1845b26af0b491a26",
+    "bytes": 14617
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/provider-callback-superset-primitives-v2/ExactWidthCollectionsSelfTest.java.txt",
+    "sha256": "64f95e0c5cc521ffe0f4dbf5f591ef8affa5233a1d88c8df5446b9a449cbf8fe",
+    "bytes": 12305
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/provider-callback-superset-primitives-v2/ObjectCounterMap.java.txt",
+    "sha256": "31d7799fd2ced9e98d42ae3f75ac0d9316f0f5ac9d727dc248baca1179b374e4",
+    "bytes": 3410
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/provider-callback-superset-primitives-v2/ObjectCounterZeroMetadataRepairTest.java.txt",
+    "sha256": "f7272d4ca18106de32c03bf52ae7894f6e08a0f8dca12e0883830596d5048401",
+    "bytes": 7342
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/provider-callback-superset-primitives-v2/ProviderBackedPrimitiveRows.java.txt",
+    "sha256": "8d5e8c505158bc60e41dcda5a16d468c293aa11948d0e3c93d6500634c0e345d",
+    "bytes": 20592
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/provider-callback-superset-primitives-v2/ProviderCallbackSupersetProbe.java.txt",
+    "sha256": "08bdfe2a0cedf372b4b765765297358dcc4fddb88282a8bb391024bc881d3a57",
+    "bytes": 6342
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/provider-callback-superset-primitives-v2/ProviderCallbackSupersetTest.java.txt",
+    "sha256": "035b67874278adae7381d61c12eb368312573928d3ded5a35dfa40b2915ef79f",
+    "bytes": 10205
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/provider-callback-superset-primitives-v2/VersionedProviderBackedPrimitiveLongTree.java.txt",
+    "sha256": "2ca650f68fd0450a2886ae303b0b91eafdffe326464abf8ae5a1d669a78a5adb",
+    "bytes": 8252
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/provider-callback-superset-primitives-v2/VersionedProviderLookupCounterTest.java.txt",
+    "sha256": "78b23ce5fbc6d941b829577498b017f19dfa7c65a5767cdfdad55d0e34cf8edf",
+    "bytes": 6138
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/provider-callback-superset-primitives-v2/manifest.tsv",
+    "sha256": "5a05c7b567decbd5c95984a82c3a31151f290caf44a01ad98fa53be10cd50004",
+    "bytes": 2444
+  },
+  {
+    "path": "classes/com/synexia/rewrite/pcs-reconciled-v1/target-manifest.tsv",
+    "sha256": "ad4db021b5d7829d2823696e8d0a224af6822bf0de311b119d35841f73bc4630",
+    "bytes": 5721
+  },
+  {
+    "path": "classes/com/synexia/rewrite/pcs-v1/before/BoundedProviderBackedPrimitiveLongTree.java.txt",
+    "sha256": "03969fe0395c6c4bafb96d59fb7d5b8cc23def1a145db85f0d62ee86897d754a",
+    "bytes": 7423
+  },
+  {
+    "path": "classes/com/synexia/rewrite/pcs-v1/before/BoundedProviderBackedPrimitiveTree.java.txt",
+    "sha256": "d99b080812f9146e88cfd2691513cdaf58003e2b0b8f665d9c6f58c7ddfebd27",
+    "bytes": 10875
+  },
+  {
+    "path": "classes/com/synexia/rewrite/pcs-v1/before/BoundedVersionedProviderBackedPrimitiveLongTree.java.txt",
+    "sha256": "d6af9974ee39c2a7df4aa96c2740d44cc215c8f8c018aa923a4c50843d1eaf3e",
+    "bytes": 7998
+  },
+  {
+    "path": "classes/com/synexia/rewrite/pcs-v1/before/ProviderResidencySupersetTest.java.txt",
+    "sha256": "86e812d2198ac545a1dbbbcd5177324827bf52e443b5331e6144e401e167fb5a",
+    "bytes": 12062
+  },
+  {
+    "path": "classes/com/synexia/rewrite/pcs-v1/target-manifest.tsv",
+    "sha256": "3d763d32b532aca34bacc8e166f2c27017ee4adebd08300d18d84eb380313f58",
+    "bytes": 1705
+  },
+  {
+    "path": "classes/com/synexia/rewrite/provider-callback-superset-v2/before/BoundedProviderBackedPrimitiveRows.java.txt",
+    "sha256": "60a4fce539057d3539f0dc613771ffbaddf5620a35cee3981d73da93a479aaaf",
+    "bytes": 10429
+  },
+  {
+    "path": "classes/com/synexia/rewrite/provider-callback-superset-v2/before/BulkPrimitiveRowProviderTest.java.txt",
+    "sha256": "6dc36dbc364c00d81c0e9701c57f54af16ba819fc58a25873c4481f065ffac40",
+    "bytes": 14275
+  },
+  {
+    "path": "classes/com/synexia/rewrite/provider-callback-superset-v2/before/ExactWidthCollectionsSelfTest.java.txt",
+    "sha256": "294362c956ec1ccc87a71fd60a2fe357d342b7889f1e731440178481b3e4dcba",
+    "bytes": 11595
+  },
+  {
+    "path": "classes/com/synexia/rewrite/provider-callback-superset-v2/before/ObjectCounterMap.java.txt",
+    "sha256": "00d802bfc42d74054f6ad1a464386379d022cf547f31c9d10f308e6ef74acbb8",
+    "bytes": 3620
+  },
+  {
+    "path": "classes/com/synexia/rewrite/provider-callback-superset-v2/before/PackedLazyTreeMapSelfTest.java.txt",
+    "sha256": "b24d29b5f50a9db8061366edd60a5ec2a4a85c1e121ba5c3d02b3fc57a072b5b",
+    "bytes": 18410
+  },
+  {
+    "path": "classes/com/synexia/rewrite/provider-callback-superset-v2/before/PackedLazyValueState.java.txt",
+    "sha256": "3d01703ab16541f285db7beb1ccdb78a69d1692dd9bfcac9de47bd84751c9c7b",
+    "bytes": 8766
+  },
+  {
+    "path": "classes/com/synexia/rewrite/provider-callback-superset-v2/before/ProviderBackedPrimitiveRows.java.txt",
+    "sha256": "5d29a6b7522d4c7d641112af45ac294d57b45dad39e8346b30c41b2c0f2d3113",
+    "bytes": 20280
+  },
+  {
+    "path": "classes/com/synexia/rewrite/provider-callback-superset-v2/before/VersionedProviderBackedPrimitiveLongTree.java.txt",
+    "sha256": "9a3eb62d3b2e5a59d7bbdc6960f0abccf42f152afd9dd0a73fa13f5c74f3be51",
+    "bytes": 8251
+  },
+  {
+    "path": "classes/com/synexia/rewrite/provider-callback-superset-v2/target-manifest.tsv",
+    "sha256": "a1e8fd3b014acb8de0f78c14bfb598c838cdff3de16e2c36e57e2534bf50a6ad",
+    "bytes": 4323
+  },
+  {
+    "path": "classes/com/synexia/rewrite/versioned-provider-syntax/after.java.txt",
+    "sha256": "2ca650f68fd0450a2886ae303b0b91eafdffe326464abf8ae5a1d669a78a5adb",
+    "bytes": 8252
+  },
+  {
+    "path": "classes/com/synexia/rewrite/versioned-provider-syntax/before.java.txt",
+    "sha256": "9a3eb62d3b2e5a59d7bbdc6960f0abccf42f152afd9dd0a73fa13f5c74f3be51",
+    "bytes": 8251
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/M3ProviderCallbackSupersetRecipeTest$RecordingSourceSet.class",
+    "sha256": "1c2fc6c2333100b81de542c8fefffdf48c956f77137c71683b84114ce203afed",
+    "bytes": 3728
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/M3ProviderCallbackSupersetRecipeTest$Target.class",
+    "sha256": "9e9a912913612904ca767e05ccd4edd638bc15f7c01e6a0c6cefa1a6425236c9",
+    "bytes": 2137
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/M3ProviderCallbackSupersetRecipeTest.class",
+    "sha256": "e6bb68ffc49e4a470cf1b56d8852957ad9518437c53c6c619b31e2259e72149d",
+    "bytes": 32090
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/M3VersionedProviderSyntaxRepairRecipeTest.class",
+    "sha256": "fff122b5afc0d61c984c0a43e9aa27be94353a86d8f9d735df213c1fcc46575c",
+    "bytes": 17544
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/PcrTest$Corpus.class",
+    "sha256": "2eb5640c236768c2168234d15429cc4bcb1961768241af8bdbb4550366c64dcc",
+    "bytes": 2430
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/PcrTest$Proof.class",
+    "sha256": "056f82bbd60f59315aa6396f39e73fb31e9aef8585983ff01f11af495584a9e7",
+    "bytes": 2207
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/PcrTest$RecordingSourceSet.class",
+    "sha256": "da9860394b2b2f784e6200e225560fc44ef4be1778cc3c56fafcc52545eaa909",
+    "bytes": 4188
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/PcrTest$Target.class",
+    "sha256": "cfd25183eedaca041ef8c43c3125f043ce3f528db38a84b39be04a9b103d14ca",
+    "bytes": 2087
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/PcrTest.class",
+    "sha256": "087d962b2ea92e9e30e503f52f4767936f6e4f1d0f9e83202265108655529ae3",
+    "bytes": 44689
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/PcsTest$Proof.class",
+    "sha256": "f5f41d7bceeda8c0b847ede53a783ffa76c7b9283f310ed822bc53e2e4ca4b6d",
+    "bytes": 2207
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/PcsTest$RecordingSourceSet.class",
+    "sha256": "4b1328947ea552b40053ca42d81f876810fe1e39f812686b695ee510dc55809f",
+    "bytes": 4082
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/PcsTest$Target.class",
+    "sha256": "7bea93bb81831eb562e465a529abc6b115b993d6dee279526e3fd4efc237f7cb",
+    "bytes": 2083
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/PcsTest.class",
+    "sha256": "9be29d18270a583e0ce3b753a134d8478d9636567603a3ad9727d9f627f60ccd",
+    "bytes": 40991
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/hash-pinned-java/malformed-candidate/A.java.txt",
+    "sha256": "b1c419a5a3d142d510b1228154b2f20a4c13b7473e73596ea56da0656a248a67",
+    "bytes": 48
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/hash-pinned-java/malformed-candidate/B.java.txt",
+    "sha256": "d4253360be9545b33339354078feafc52ec426e9a936f66337ad374dc0b4782d",
+    "bytes": 47
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/hash-pinned-java/malformed-candidate/manifest.tsv",
+    "sha256": "ea970b6173b3611eb915f44dea4e4543a573682a2c0738b0d99593307d26edb9",
+    "bytes": 264
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/hash-pinned-java/provider-callback-bad-hash/Target.java.txt",
+    "sha256": "82dce4150393a351e17fee018da72aaa4d76c4950a12ac7f307366223a5d15ff",
+    "bytes": 40
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/hash-pinned-java/provider-callback-bad-hash/manifest.tsv",
+    "sha256": "c4af6266fd8b362470db6f210210fb9a8a32fadd430549e685825d39aa722ef5",
+    "bytes": 122
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/pcs-reconciled-v1/before/BoundedProviderBackedPrimitiveLongTree.java.txt",
+    "sha256": "03969fe0395c6c4bafb96d59fb7d5b8cc23def1a145db85f0d62ee86897d754a",
+    "bytes": 7423
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/pcs-reconciled-v1/before/BoundedProviderBackedPrimitiveRows.java.txt",
+    "sha256": "60a4fce539057d3539f0dc613771ffbaddf5620a35cee3981d73da93a479aaaf",
+    "bytes": 10429
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/pcs-reconciled-v1/before/BoundedProviderBackedPrimitiveTree.java.txt",
+    "sha256": "d99b080812f9146e88cfd2691513cdaf58003e2b0b8f665d9c6f58c7ddfebd27",
+    "bytes": 10875
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/pcs-reconciled-v1/before/BoundedVersionedProviderBackedPrimitiveLongTree.java.txt",
+    "sha256": "d6af9974ee39c2a7df4aa96c2740d44cc215c8f8c018aa923a4c50843d1eaf3e",
+    "bytes": 7998
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/pcs-reconciled-v1/before/BulkPrimitiveRowProviderTest.java.txt",
+    "sha256": "6dc36dbc364c00d81c0e9701c57f54af16ba819fc58a25873c4481f065ffac40",
+    "bytes": 14275
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/pcs-reconciled-v1/before/ExactWidthCollectionsSelfTest.java.txt",
+    "sha256": "ce320709bc97ca94594109e39a71fc43a0238f4c803aa345afcd46b4a344737b",
+    "bytes": 11766
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/pcs-reconciled-v1/before/ObjectCounterMap.java.txt",
+    "sha256": "21fa5ac34877acf45336e1a7efa82966e097fd4ab1f62ae9f54b4ee3ad4f56e0",
+    "bytes": 3410
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/pcs-reconciled-v1/before/PackedLazyTreeMapSelfTest.java.txt",
+    "sha256": "b24d29b5f50a9db8061366edd60a5ec2a4a85c1e121ba5c3d02b3fc57a072b5b",
+    "bytes": 18410
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/pcs-reconciled-v1/before/PackedLazyValueState.java.txt",
+    "sha256": "3d01703ab16541f285db7beb1ccdb78a69d1692dd9bfcac9de47bd84751c9c7b",
+    "bytes": 8766
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/pcs-reconciled-v1/before/ProviderBackedPrimitiveRows.java.txt",
+    "sha256": "5d29a6b7522d4c7d641112af45ac294d57b45dad39e8346b30c41b2c0f2d3113",
+    "bytes": 20280
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/pcs-reconciled-v1/before/ProviderResidencySupersetTest.java.txt",
+    "sha256": "86e812d2198ac545a1dbbbcd5177324827bf52e443b5331e6144e401e167fb5a",
+    "bytes": 12062
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/pcs-reconciled-v1/before/VersionedProviderBackedPrimitiveLongTree.java.txt",
+    "sha256": "2ca650f68fd0450a2886ae303b0b91eafdffe326464abf8ae5a1d669a78a5adb",
+    "bytes": 8252
+  }
+]

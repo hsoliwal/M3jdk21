@@ -1,0 +1,1 @@
+MRP_INTENT_OK groups=4 connectorMaps=4 topKAndTypo=3 topologyPhrases=128 explicitPrecedence=5 legacyFallback=2 invalidInputs=3

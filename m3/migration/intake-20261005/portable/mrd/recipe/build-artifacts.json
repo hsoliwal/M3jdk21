@@ -1,0 +1,102 @@
+[
+  {
+    "path": "classes/com/synexia/rewrite/M3EditScope.class",
+    "sha256": "b7224c8f3d284d786150b46ebc7612db8ea37144870306db923ebef0105edabc",
+    "bytes": 2130
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$1.class",
+    "sha256": "04dc5a19daa7b3dc836645d4004ceaac0c903429a0962f3d2ded2207481571fe",
+    "bytes": 3633
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$2.class",
+    "sha256": "f04e132647eadbeb640f70f031417c9a0bd88bbbfbe69ed9c2784304c25e9e91",
+    "bytes": 4830
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$Inventory.class",
+    "sha256": "e6092acea9f95ac881b9e8400db26d5e68cf443e682dfa754917d094adf14fb9",
+    "bytes": 1266
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe$Target.class",
+    "sha256": "c362ea5734434887543e51a9615114ac1879fe130361e05b00baca8a1fac262a",
+    "bytes": 2069
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.class",
+    "sha256": "9ee0584e4e8c38c7a1f4757a60651450600a53ac97a7266781962a03664778e9",
+    "bytes": 15507
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3ScopeInference$JavaLocation.class",
+    "sha256": "ca1accf38eb1988a6c8bc79d625209e6f1d64098fa0f63b2af86ae2dd93e93be",
+    "bytes": 1967
+  },
+  {
+    "path": "classes/com/synexia/rewrite/M3ScopeInference.class",
+    "sha256": "9842899bf63fe7824c4a17027a1a5d1e33f2ac5fc4757e9bf3b42829fc0415c8",
+    "bytes": 6246
+  },
+  {
+    "path": "classes/com/synexia/rewrite/Mrd.class",
+    "sha256": "300907d653512ba7e61b4e50501de0aab0f9b58fb0fec9330dc8b56340f0f8a5",
+    "bytes": 1476
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mrd-v1/M3HashPinnedJavaSnapshotRecipe.java.txt",
+    "sha256": "cd55551642f4e513d650cad0f4b798e22a880c7a13e7170d22eb2a7f23234c07",
+    "bytes": 21558
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mrd-v1/manifest.tsv",
+    "sha256": "3d67950e579cfc780877860458a258f2dcf0bf5eba3aa7d054b8a284791c7889",
+    "bytes": 354
+  },
+  {
+    "path": "classes/com/synexia/rewrite/hash-pinned-java/mrd-v1/provenance.tsv",
+    "sha256": "ffe49f72f90c887740f78b0317d176b03052b4933c8259324678994d2f5b332a",
+    "bytes": 444
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/MrdTest$1.class",
+    "sha256": "3378ca1c5bb9c0c6e96e4b0887d8e15cd1f57f0a0a15d466f5a35c4adefc7ef4",
+    "bytes": 2115
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/MrdTest$Candidate.class",
+    "sha256": "347714d3998b7a34a345f7484cb36d4e3e74f82fb7de6e2b9596a328926b58ad",
+    "bytes": 1956
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/MrdTest$Fixture.class",
+    "sha256": "82db82263057898446c6a5b2196ca0d133a1fef0ae2fb8e7fc17b0928300ca53",
+    "bytes": 2436
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/MrdTest$RecordingSourceSet.class",
+    "sha256": "ff50b25f66689dad51526e7e84d700e4954089939704765830443e38865f269a",
+    "bytes": 3883
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/MrdTest$Replay.class",
+    "sha256": "d243e4bb6fc61743e048a7897cd0365780b5fc338507346ee4fcf421c7f254f6",
+    "bytes": 1940
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/MrdTest$Target.class",
+    "sha256": "301b6e48c2fdeefcf2163ec8530b1531c4a788cca4f6200daa7dbebe005a8cd5",
+    "bytes": 2071
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/MrdTest.class",
+    "sha256": "85701c47e3a6c536f27fdc9c7f7b6077edb33b89f668f3695cda8565238b9fef",
+    "bytes": 31380
+  },
+  {
+    "path": "test-classes/com/synexia/rewrite/mrd-v1/before/M3HashPinnedJavaSnapshotRecipe.java.txt",
+    "sha256": "0a5ae64b92bc05230d50f218cbba7600c60bd865ce1217932a7c62d93c8f7ee5",
+    "bytes": 14674
+  }
+]
