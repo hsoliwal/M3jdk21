@@ -1746,7 +1746,12 @@ public final class Matcher implements MatchResult {
         if (facts == null
                 || m3TqFactsFrom != this.from
                 || m3TqFactsTo != to) {
-            facts = M3TQ.precompute(text, this.from, to, M3_TQ_MAX_UTF16_UNITS);
+            try {
+                facts = M3TQ.precompute(text, this.from, to, M3_TQ_MAX_UTF16_UNITS);
+            } catch (OutOfMemoryError unavailable) {
+                // Candidate precompute must never add a new failure mode to Matcher.find().
+                return true;
+            }
             m3TqFactsFrom = this.from;
             m3TqFactsTo = to;
             m3TqFacts = facts;
