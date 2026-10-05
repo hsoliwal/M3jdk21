@@ -1,6 +1,6 @@
 # JEP 458 current-tree recovery — Launch Multi-File Source-Code Programs
 
-Status: dependency-complete recovery work packet; not yet a completion claim.
+Status: current-tree Java-21 adaptation is materialized and source-sealed; OpenJDK build/jtreg/runtime admission remains pending.
 
 ## Upstream authority
 
@@ -42,6 +42,22 @@ across module/build/test boundaries. The packet does **not** misreport these cra
 The file-delta inventory remains per-file evidence, and future recipe generation may split a graph
 into smaller FILE atoms only when each resulting recipe is independently replayable and
 contract-preserving. Feature admission still rejoins through the explicit MULTI_MODULE node.
+
+## Current-tree equivalence
+
+`CURRENT_TREE_EQUIVALENCE.tsv` is the live-master receipt for all 27 paths touched by the upstream
+JEP 458 commit:
+
+- 15 paths are byte-identical to the upstream donor blob;
+- 11 paths are explicit Java-21 adaptations whose reviewed postimages are the live master bytes;
+- `com.sun.tools.javac.launcher.Main` is intentionally preserved even though JDK 22 removed it.
+
+The two source-sealed recipe manifests cover 26 targets and every reviewed postimage is the current
+tree. The legacy Main compatibility leaf is deliberately outside mutation manifests.
+
+Historical before-hashes remain in the recipe manifests as archaeology. Live JUnit no longer
+depends on removed historical fixture files; it proves the present sealed postimage is a fixed point
+and that Java/text drift fails closed.
 
 ## Verification boundary
 
