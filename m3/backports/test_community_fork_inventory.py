@@ -7,6 +7,7 @@ import csv
 import importlib.util
 import os
 import subprocess
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -16,6 +17,7 @@ MODULE_PATH = Path(__file__).with_name("community_fork_inventory.py")
 SPEC = importlib.util.spec_from_file_location("community_fork_inventory", MODULE_PATH)
 assert SPEC is not None and SPEC.loader is not None
 mod = importlib.util.module_from_spec(SPEC)
+sys.modules[SPEC.name] = mod
 SPEC.loader.exec_module(mod)
 
 
