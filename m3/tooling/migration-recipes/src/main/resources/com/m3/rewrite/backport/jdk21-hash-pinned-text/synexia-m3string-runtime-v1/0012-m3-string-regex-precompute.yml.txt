@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 String and regex precompute
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-string-regex-precompute.yml'
+      - 'src/java.base/**'
+      - 'src/hotspot/**'
+      - 'test/jdk/java/lang/String/**'
+      - 'test/jdk/java/util/regex/**'
+      - 'm3/tooling/migration-recipes/**'
+      - 'm3/docs/m3-regex-precompute-inventory.tsv'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: m3-string-regex-precompute-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  image:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
+        with:
+          distribution: temurin
+          java-version: '21.0.8'
+      - name: Build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y autoconf make gcc g++ zip unzip libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+      - name: Configure
+        run: |
+          mkdir -p m3/build/string-regex-precompute
+          bash configure --with-boot-jdk="$JAVA_HOME" --with-debug-level=fastdebug --with-jvm-variants=server --enable-warnings-as-errors 2>&1 | tee m3/build/string-regex-precompute/configure.log
+      - name: Build image
+        run: make JOBS=2 images 2>&1 | tee m3/build/string-regex-precompute/build.log
+      - name: Focused jtreg
+        run: make test TEST="test/jdk/java/lang/String/M3StringPrecomputeTest.java test/jdk/java/util/regex/M3RegexPrecomputeTest.java test/jdk/java/lang/String/M3TQTest.java" 2>&1 | tee m3/build/string-regex-precompute/jtreg.log
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: m3-string-regex-precompute-${{ github.sha }}
+          path: m3/build/string-regex-precompute/
+          if-no-files-found: error
