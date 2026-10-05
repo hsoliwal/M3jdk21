@@ -30,7 +30,7 @@
                 <argument>-ntp</argument>
                 <argument>-f</argument>
                 <argument>m3/tooling/migration-recipes/pom.xml</argument>
-                <argument>-Dtest=M3SynexiaHandoffGuardRecipeTest,M3SynexiaHandoffImportTest</argument>
+                <argument>-Dtest=M3SynexiaHandoffGuardRecipeTest,M3SynexiaHandoffImportTest,M3SynexiaHandoffMaterializerTest</argument>
                 <argument>test</argument>
               </arguments>
             </configuration>
