@@ -282,34 +282,73 @@ final class M3String implements CharSequence {
     }
 
     boolean mayContain(M3String needle) {
-        Objects.requireNonNull(needle, "needle");
-        if (needle.length() > length()) return false;
-        long required = needle.facts().bitSignal64;
-        return (facts().bitSignal64 & required) == required;
+        M3String checked = Objects.requireNonNull(needle, "needle");
+        return facts().mayContain(checked.facts());
     }
 
     boolean startsWith(M3String prefix, int offset) {
-        Objects.requireNonNull(prefix, "prefix");
-        if (offset < 0 || offset > length() - prefix.length()) return false;
-        if (!mayContain(prefix)) return false;
-        for (int index = 0; index < prefix.length(); index++) {
-            if (charAt(offset + index) != prefix.charAt(index)) return false;
+        M3String checked = Objects.requireNonNull(prefix, "prefix");
+        if (offset < 0 || offset > length() - checked.length()) return false;
+        M3StringFacts sourceFacts = facts();
+        M3StringFacts prefixFacts = checked.facts();
+        if (!sourceFacts.mayContain(prefixFacts)) return false;
+        if (offset == 0 && !sourceFacts.prefixMayMatch(prefixFacts)) return false;
+        if (offset == length() - checked.length() && !sourceFacts.suffixMayMatch(prefixFacts)) {
+            return false;
+        }
+        for (int index = 0; index < checked.length(); index++) {
+            if (charAt(offset + index) != checked.charAt(index)) return false;
         }
         return true;
     }
 
     int indexOf(M3String needle, int fromIndex) {
-        Objects.requireNonNull(needle, "needle");
+        return indexOf(needle, fromIndex, length());
+    }
+
+    int indexOf(M3String needle, int fromIndex, int endIndex) {
+        M3String checked = Objects.requireNonNull(needle, "needle");
+        int end = Math.min(length(), endIndex);
         int from = Math.clamp(fromIndex, 0, length());
-        if (needle.length() == 0) return from;
-        if (needle.length() > length() - from || !mayContain(needle)) return -1;
-        int limit = length() - needle.length();
-        char first = needle.charAt(0);
+        if (checked.length() == 0) return Math.min(from, end);
+        if (from > end - checked.length() || !mayContain(checked)) return -1;
+
+        M3StringSearchPrecompute.Plan plan = M3StringSearchPrecompute.prepare(checked);
+        if (plan != null) {
+            return M3StringSearchPrecompute.indexOf(this, checked, plan, from, end);
+        }
+
+        int limit = end - checked.length();
+        char first = checked.charAt(0);
         for (int start = from; start <= limit; start++) {
             if (charAt(start) != first) continue;
             int index = 1;
-            while (index < needle.length() && charAt(start + index) == needle.charAt(index)) index++;
-            if (index == needle.length()) return start;
+            while (index < checked.length()
+                    && charAt(start + index) == checked.charAt(index)) index++;
+            if (index == checked.length()) return start;
+        }
+        return -1;
+    }
+
+    int lastIndexOf(M3String needle, int fromIndex) {
+        M3String checked = Objects.requireNonNull(needle, "needle");
+        int maximumStart = Math.min(fromIndex, length() - checked.length());
+        if (maximumStart < 0) return -1;
+        if (checked.length() == 0) return maximumStart;
+        if (!mayContain(checked)) return -1;
+
+        M3StringSearchPrecompute.Plan plan = M3StringSearchPrecompute.prepare(checked);
+        if (plan != null) {
+            return M3StringSearchPrecompute.lastIndexOf(this, checked, plan, maximumStart);
+        }
+
+        char first = checked.charAt(0);
+        for (int candidate = maximumStart; candidate >= 0; candidate--) {
+            if (charAt(candidate) != first) continue;
+            int index = 1;
+            while (index < checked.length()
+                    && charAt(candidate + index) == checked.charAt(index)) index++;
+            if (index == checked.length()) return candidate;
         }
         return -1;
     }
