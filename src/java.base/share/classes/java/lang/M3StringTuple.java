@@ -16,6 +16,12 @@ final class M3StringTuple extends M3StringOwner {
     final M3String left;
     final M3String right;
     final long canonicalId;
+    /** AVL height of the canonical child-coordinate DAG. Scalar/range leaves have height zero. */
+    final int height;
+    /** Number of normalized coordinate leaves, independent of binary association. */
+    final int leafCount;
+    /** Ordered coordinate-sequence hash, independent of binary association. */
+    final long coordinateSequenceHash64;
 
     M3StringTuple(M3String left, M3String right, long canonicalId, long structuralHash64) {
         super(
@@ -27,6 +33,13 @@ final class M3StringTuple extends M3StringOwner {
         this.left = Objects.requireNonNull(left, "left");
         this.right = Objects.requireNonNull(right, "right");
         this.canonicalId = canonicalId;
+        this.height = Math.addExact(
+                1, Math.max(M3StringPool.treeHeight(left), M3StringPool.treeHeight(right)));
+        this.leafCount = Math.addExact(
+                M3StringPool.coordinateLeafCount(left),
+                M3StringPool.coordinateLeafCount(right));
+        this.coordinateSequenceHash64 =
+                M3StringPool.coordinateSequenceHash64(left, right);
     }
 
     @Override
@@ -55,7 +68,10 @@ final class M3StringTuple extends M3StringOwner {
     }
 
     boolean geometryEquals(M3String candidateLeft, M3String candidateRight) {
-        return left.sameCoordinate(candidateLeft) && right.sameCoordinate(candidateRight);
+        if (left.sameCoordinate(candidateLeft) && right.sameCoordinate(candidateRight)) {
+            return true;
+        }
+        return M3StringPool.sameCoordinateSequence(this, candidateLeft, candidateRight);
     }
 
     @Override
