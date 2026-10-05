@@ -1,0 +1,81 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 second-pass review DAG admission
+
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/backport-dag/**'
+      - 'm3/backports/README.md'
+      - '.github/workflows/m3-jdk21-second-pass-review-dag.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  local-dag:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: 1 - Diff hygiene
+        run: git diff --check
+
+      - name: 2 - Compile and test canonical backport DAG
+        run: >-
+          mvn -B -ntp
+          -f m3/tooling/backport-dag/pom.xml
+          -Dtest=M3RecipeDagTest,M3SecondPassReviewBindingTest
+          -Dsurefire.failIfNoSpecifiedTests=false
+          test
+
+      - name: 3 - Full M3 backport DAG proof including 99 percent semantic gate
+        run: >-
+          mvn -B -ntp
+          -f m3/tooling/backport-dag/pom.xml
+          verify
+
+  upstream-dag:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Clone exact merged Synexia DAG content
+        env:
+          GH_TOKEN: ${{ secrets.M3_SYNEXIA_TOKEN }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${GH_TOKEN:-}" || { echo "M3_SYNEXIA_TOKEN is required for hosted upstream proof"; exit 1; }
+          gh repo clone hsoliwal/com.synexia "$RUNNER_TEMP/com.synexia"
+          git -C "$RUNNER_TEMP/com.synexia" checkout --detach 5369fdc8c076b998b0dd39c7c67c85d11a4b2d8f
+          test "$(git -C "$RUNNER_TEMP/com.synexia" rev-parse HEAD)" = 5369fdc8c076b998b0dd39c7c67c85d11a4b2d8f
+
+      - name: Prove saved second-pass review DAG
+        working-directory: ${{ runner.temp }}/com.synexia
+        run: >-
+          ./mvnw -B -ntp
+          -pl synexia-m3-recipe
+          -Dtest=M3SecondPassReviewDagPlanTest
+          test
+
+      - name: Prove hostile atom-pattern signal fixture
+        working-directory: ${{ runner.temp }}/com.synexia
+        run: >-
+          ./mvnw -B -ntp
+          -f synexia-openrewrite-recipes/verification/m3-atom-pattern-signal-chain-20261004/pom.xml
+          verify
