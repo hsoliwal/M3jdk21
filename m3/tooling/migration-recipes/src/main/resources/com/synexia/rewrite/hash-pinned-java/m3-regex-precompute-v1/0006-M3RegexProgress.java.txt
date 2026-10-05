@@ -1,0 +1,21 @@
+// SPDX-License-Identifier: Apache-2.0
+package jdk.internal.mindex;
+
+/** JDK-owned progress/cancellation boundary for bounded M3 regex precompute. */
+public interface M3RegexProgress {
+    long UNKNOWN = -1L;
+    default void beginTask(String task, long totalWork) {}
+    default void subTask(String task) {}
+    default void checkCanceled() {
+        if (Thread.currentThread().isInterrupted()) {
+            throw new java.util.concurrent.CancellationException();
+        }
+    }
+    default void worked(long work) {}
+    default void done() {}
+    static M3RegexProgress noop() { return Noop.INSTANCE; }
+    final class Noop {
+        private static final M3RegexProgress INSTANCE = new M3RegexProgress() {};
+        private Noop() {}
+    }
+}
