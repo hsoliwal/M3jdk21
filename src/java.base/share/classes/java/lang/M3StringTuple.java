@@ -54,6 +54,53 @@ final class M3StringTuple extends M3StringOwner {
         right.getChars(0, end - leftLength, destination, destinationStart + leftCount);
     }
 
+    @Override
+    void getBytes(
+            int start,
+            int end,
+            byte[] destination,
+            int destinationStart,
+            byte destinationCoder) {
+        Objects.checkFromToIndex(start, end, length);
+        int count = end - start;
+        Objects.checkFromIndexSize(
+                destinationStart << destinationCoder,
+                count << destinationCoder,
+                destination.length);
+        int leftLength = left.length();
+        if (end <= leftLength) {
+            left.owner().getBytes(
+                    left.start() + start,
+                    left.start() + end,
+                    destination,
+                    destinationStart,
+                    destinationCoder);
+            return;
+        }
+        if (start >= leftLength) {
+            right.owner().getBytes(
+                    right.start() + start - leftLength,
+                    right.start() + end - leftLength,
+                    destination,
+                    destinationStart,
+                    destinationCoder);
+            return;
+        }
+        int leftCount = leftLength - start;
+        left.owner().getBytes(
+                left.start() + start,
+                left.end(),
+                destination,
+                destinationStart,
+                destinationCoder);
+        right.owner().getBytes(
+                right.start(),
+                right.start() + end - leftLength,
+                destination,
+                destinationStart + leftCount,
+                destinationCoder);
+    }
+
     boolean geometryEquals(M3String candidateLeft, M3String candidateRight) {
         return left.sameCoordinate(candidateLeft) && right.sameCoordinate(candidateRight);
     }
