@@ -4270,8 +4270,53 @@ public final class String
      * @since 11
      */
     public Stream<String> lines() {
+        if (m3() != null) {
+            return StreamSupport.stream(new M3LinesSpliterator(this), false);
+        }
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.lines(currentValue) : StringUTF16.lines(currentValue);
+    }
+
+    /**
+     * Lazy line traversal for M3-backed Strings. It preserves String.lines() CR/LF/CRLF
+     * semantics and emits M3 substring coordinates rather than flattening the source.
+     */
+    private static final class M3LinesSpliterator
+            extends Spliterators.AbstractSpliterator<String> {
+        private final String source;
+        private int index;
+
+        M3LinesSpliterator(String source) {
+            super(source.length(), Spliterator.ORDERED | Spliterator.IMMUTABLE | Spliterator.NONNULL);
+            this.source = source;
+        }
+
+        @Override
+        public boolean tryAdvance(Consumer<? super String> action) {
+            Objects.requireNonNull(action, "action");
+            int length = source.length();
+            if (index >= length) return false;
+
+            int start = index;
+            int end = start;
+            while (end < length) {
+                char unit = source.charAt(end);
+                if (unit == '\n' || unit == '\r') break;
+                end++;
+            }
+
+            action.accept(source.substring(start, end));
+            if (end == length) {
+                index = length;
+            } else if (source.charAt(end) == '\r'
+                    && end + 1 < length
+                    && source.charAt(end + 1) == '\n') {
+                index = end + 2;
+            } else {
+                index = end + 1;
+            }
+            return true;
+        }
     }
 
     /**
@@ -4667,6 +4712,9 @@ public final class String
      */
     @Override
     public IntStream chars() {
+        if (m3() != null) {
+            return CharSequence.super.chars();
+        }
         return StreamSupport.intStream(
             isLatin1() ? new StringLatin1.CharsSpliterator(value(), Spliterator.IMMUTABLE)
                        : new StringUTF16.CharsSpliterator(value(), Spliterator.IMMUTABLE),
@@ -4687,6 +4735,9 @@ public final class String
      */
     @Override
     public IntStream codePoints() {
+        if (m3() != null) {
+            return CharSequence.super.codePoints();
+        }
         return StreamSupport.intStream(
             isLatin1() ? new StringLatin1.CharsSpliterator(value(), Spliterator.IMMUTABLE)
                        : new StringUTF16.CodePointsSpliterator(value(), Spliterator.IMMUTABLE),
