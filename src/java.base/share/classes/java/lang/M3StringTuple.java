@@ -4,6 +4,8 @@
  */
 package java.lang;
 
+import java.util.Objects;
+
 /**
  * Canonical persistent composition node.
  *
