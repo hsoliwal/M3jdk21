@@ -1,0 +1,11 @@
+gate	state	detail
+diff	PASS_LOCAL	git diff --check clean in recovered checkout
+compile	PASS_LOCAL	34 production +44 test sources compiled under release21 in focused run
+tests	PASS_LOCAL	30 run;0 failure;0 error;0 skipped
+line_coverage	PASS_LOCAL	345/346=99.71%
+branch_coverage	PASS_LOCAL	249/251=99.20%
+thresholds	LOCKED	0.99 line /0.99 branch unchanged
+exclusions	LOCKED	no coverage exclusion added
+existing_slow_tests	RETAINED	not removed or disabled; focused run does not replace full suite
+hosted_exact_head	PENDING	existing workflow must rerun on published head
+runtime_jdk	OUT_OF_SCOPE	this packet is recipe coverage, not matched-image jtreg/runtime acceptance
