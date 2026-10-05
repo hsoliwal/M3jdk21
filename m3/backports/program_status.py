@@ -36,6 +36,7 @@ def snapshot(root: Path) -> dict[str, object]:
     backports = root / "m3" / "backports"
     jeps = read_tsv(backports / "JEP_CATALOGUE.tsv")
     seeds = read_tsv(backports / "UPSTREAM_CHANGE_SEEDS.tsv")
+    forks = read_tsv(backports / "COMMUNITY_FORKS.tsv")
     recipe_root = backports / "recipes"
     packets = sorted(
         path.name for path in recipe_root.iterdir()
@@ -51,6 +52,14 @@ def snapshot(root: Path) -> dict[str, object]:
         "seed_rows": len(seeds),
         "seed_states": dict(sorted(seed_states.items())),
         "seed_dispositions": dict(sorted(Counter(row["disposition"] for row in seeds).items())),
+        "community_fork_rows": len(forks),
+        "community_fork_planes": dict(sorted(Counter(row["plane"] for row in forks).items())),
+        "community_fork_source_copy_authority": any(
+            row["source_copy_authority"] != "false" for row in forks
+        ),
+        "community_fork_selected_for_distribution": any(
+            row["selected_for_distribution"] != "false" for row in forks
+        ),
         "materialized_packets": packets,
         "materialized_packet_count": len(packets),
         "completion_claim": False,
@@ -62,6 +71,9 @@ def render_tsv(data: dict[str, object]) -> str:
         *(( "jep-state", key, str(value)) for key, value in data["jep_states"].items()),
         ("seed", "total", str(data["seed_rows"])),
         *(( "seed-state", key, str(value)) for key, value in data["seed_states"].items()),
+        ("community-fork", "total", str(data["community_fork_rows"])),
+        *(( "community-fork-plane", key, str(value))
+          for key, value in data["community_fork_planes"].items()),
         ("packet", "materialized", str(data["materialized_packet_count"])),
     ]
     return "kind\tstate\tcount\n" + "".join(
