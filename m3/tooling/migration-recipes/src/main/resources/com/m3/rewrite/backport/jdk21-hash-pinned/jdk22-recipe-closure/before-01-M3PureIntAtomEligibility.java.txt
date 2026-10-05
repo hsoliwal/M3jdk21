@@ -94,16 +94,13 @@ final class M3PureIntAtomEligibility {
         return returned.getExpression();
     }
 
-    // The declared variable type also captures post-name array dimensions and varargs.
-    // A primitive-looking syntax token alone does not establish a scalar int parameter.
     private static Set<String> intParameters(J.MethodDeclaration method) {
         Set<String> names = new HashSet<>();
         for (J parameter : method.getParameters()) {
             if (!(parameter instanceof J.VariableDeclarations declarations)
                     || declarations.getTypeExpression() == null
                     || declarations.getTypeExpression().getType() != JavaType.Primitive.Int
-                    || declarations.getVariables().size() != 1
-                    || declarations.getVariables().getFirst().getType() != JavaType.Primitive.Int) {
+                    || declarations.getVariables().size() != 1) {
                 return null;
             }
             String name = declarations.getVariables().getFirst().getSimpleName();
