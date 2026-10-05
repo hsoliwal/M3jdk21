@@ -307,6 +307,7 @@ for fragment in [
 for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringPrecomputeSearchTest.java",
+    "M3TQFactsTest.java",
     "M3StringHistoryConvergenceRecipeTest",
 ]:
     if required_gate not in workflow:
