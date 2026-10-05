@@ -2259,6 +2259,10 @@ public final class String
              (ooffset > (long)other.length() - len)) {
             return false;
         }
+        MIndexString m3 = mindex();
+        if (m3 != null) {
+            return m3.regionMatches(toffset, other, ooffset, len);
+        }
         byte[] tv = value();
         byte[] ov = other.value();
         byte coder = coder();
@@ -3953,6 +3957,17 @@ public final class String
      *          has no leading or trailing space.
      */
     public String trim() {
+        MIndexString m3 = mindex();
+        if (m3 != null) {
+            M3StringPrecompute.Whitespace whitespace = m3.precomputedFacts().whitespace;
+            if (whitespace.trimStart == 0 && whitespace.trimEnd == length()) {
+                return this;
+            }
+            if (whitespace.trimBlank()) {
+                return "";
+            }
+            return substring(whitespace.trimStart, whitespace.trimEnd);
+        }
         byte[] currentValue = value();
         String ret = isLatin1() ? StringLatin1.trim(currentValue)
                                 : StringUTF16.trim(currentValue);
@@ -3986,6 +4001,17 @@ public final class String
      * @since 11
      */
     public String strip() {
+        MIndexString m3 = mindex();
+        if (m3 != null) {
+            M3StringPrecompute.Whitespace whitespace = m3.precomputedFacts().whitespace;
+            if (whitespace.blank()) {
+                return "";
+            }
+            if (whitespace.stripStart == 0 && whitespace.stripEnd == length()) {
+                return this;
+            }
+            return substring(whitespace.stripStart, whitespace.stripEnd);
+        }
         byte[] currentValue = value();
         String ret = isLatin1() ? StringLatin1.strip(currentValue)
                                 : StringUTF16.strip(currentValue);
@@ -4017,6 +4043,14 @@ public final class String
      * @since 11
      */
     public String stripLeading() {
+        MIndexString m3 = mindex();
+        if (m3 != null) {
+            M3StringPrecompute.Whitespace whitespace = m3.precomputedFacts().whitespace;
+            if (whitespace.blank()) {
+                return "";
+            }
+            return whitespace.stripStart == 0 ? this : substring(whitespace.stripStart);
+        }
         byte[] currentValue = value();
         String ret = isLatin1() ? StringLatin1.stripLeading(currentValue)
                                 : StringUTF16.stripLeading(currentValue);
@@ -4048,6 +4082,14 @@ public final class String
      * @since 11
      */
     public String stripTrailing() {
+        MIndexString m3 = mindex();
+        if (m3 != null) {
+            M3StringPrecompute.Whitespace whitespace = m3.precomputedFacts().whitespace;
+            if (whitespace.blank()) {
+                return "";
+            }
+            return whitespace.stripEnd == length() ? this : substring(0, whitespace.stripEnd);
+        }
         byte[] currentValue = value();
         String ret = isLatin1() ? StringLatin1.stripTrailing(currentValue)
                                 : StringUTF16.stripTrailing(currentValue);
@@ -4068,7 +4110,9 @@ public final class String
      * @since 11
      */
     public boolean isBlank() {
-        return indexOfNonWhitespace() == length();
+        MIndexString m3 = mindex();
+        return m3 != null ? m3.precomputedFacts().whitespace.blank()
+                          : indexOfNonWhitespace() == length();
     }
 
     /**
