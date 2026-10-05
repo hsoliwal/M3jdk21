@@ -557,37 +557,37 @@ public final class String
      */
     @SuppressWarnings("removal")
     private String(Charset charset, byte[] bytes, int offset, int length) {
-        this(decodeForMIndexConstruction(charset, bytes, offset, length));
+        this(decodeForM3Construction(charset, bytes, offset, length));
     }
 
-    private String(MIndexConstruction construction) {
+    private String(M3Construction construction) {
         M3String storage = maybeAdmit(construction.value, construction.coder);
         this.value = storage == null ? construction.value : storage.compatibilityValue();
         this.coder = storage == null ? construction.coder : storage.coder();
         this.m3 = storage;
     }
 
-    private static final class MIndexConstruction {
+    private static final class M3Construction {
         final byte[] value;
         final byte coder;
 
-        MIndexConstruction(byte[] value, byte coder) {
+        M3Construction(byte[] value, byte coder) {
             this.value = value;
             this.coder = coder;
         }
     }
 
     @SuppressWarnings("removal")
-    private static MIndexConstruction decodeForMIndexConstruction(
+    private static M3Construction decodeForM3Construction(
             Charset charset, byte[] bytes, int offset, int length) {
         if (length == 0) {
-            return new MIndexConstruction("".value, "".coder);
+            return new M3Construction("".value, "".coder);
         }
         if (charset == UTF_8.INSTANCE) {
             if (COMPACT_STRINGS) {
                 int dp = StringCoding.countPositives(bytes, offset, length);
                 if (dp == length) {
-                    return new MIndexConstruction(
+                    return new M3Construction(
                             Arrays.copyOfRange(bytes, offset, offset + length), LATIN1);
                 }
                 int sl = offset + length;
@@ -617,7 +617,7 @@ public final class String
                     if (dp != dst.length) {
                         dst = Arrays.copyOf(dst, dp);
                     }
-                    return new MIndexConstruction(dst, LATIN1);
+                    return new M3Construction(dst, LATIN1);
                 }
                 byte[] buf = new byte[length << 1];
                 StringLatin1.inflate(dst, 0, buf, 0, dp);
@@ -626,27 +626,27 @@ public final class String
                 if (dp != length) {
                     dst = Arrays.copyOf(dst, dp << 1);
                 }
-                return new MIndexConstruction(dst, UTF16);
+                return new M3Construction(dst, UTF16);
             }
             byte[] dst = new byte[length << 1];
             int dp = decodeUTF8_UTF16(bytes, offset, offset + length, dst, 0, true);
             if (dp != length) {
                 dst = Arrays.copyOf(dst, dp << 1);
             }
-            return new MIndexConstruction(dst, UTF16);
+            return new M3Construction(dst, UTF16);
         }
 
         if (charset == ISO_8859_1.INSTANCE) {
             return COMPACT_STRINGS
-                    ? new MIndexConstruction(
+                    ? new M3Construction(
                             Arrays.copyOfRange(bytes, offset, offset + length), LATIN1)
-                    : new MIndexConstruction(
+                    : new M3Construction(
                             StringLatin1.inflate(bytes, offset, length), UTF16);
         }
 
         if (charset == US_ASCII.INSTANCE) {
             if (COMPACT_STRINGS && !StringCoding.hasNegatives(bytes, offset, length)) {
-                return new MIndexConstruction(
+                return new M3Construction(
                         Arrays.copyOfRange(bytes, offset, offset + length), LATIN1);
             }
             byte[] dst = new byte[length << 1];
@@ -655,23 +655,23 @@ public final class String
                 int b = bytes[offset++];
                 StringUTF16.putChar(dst, dp++, (b >= 0) ? (char)b : REPL);
             }
-            return new MIndexConstruction(dst, UTF16);
+            return new M3Construction(dst, UTF16);
         }
 
         CharsetDecoder cd = charset.newDecoder();
         if (cd instanceof ArrayDecoder ad) {
             if (ad.isASCIICompatible() && !StringCoding.hasNegatives(bytes, offset, length)) {
                 return COMPACT_STRINGS
-                        ? new MIndexConstruction(
+                        ? new M3Construction(
                                 Arrays.copyOfRange(bytes, offset, offset + length), LATIN1)
-                        : new MIndexConstruction(
+                        : new M3Construction(
                                 StringLatin1.inflate(bytes, offset, length), UTF16);
             }
 
             if (COMPACT_STRINGS && ad.isLatin1Decodable()) {
                 byte[] dst = new byte[length];
                 ad.decodeToLatin1(bytes, offset, length, dst);
-                return new MIndexConstruction(dst, LATIN1);
+                return new M3Construction(dst, LATIN1);
             }
 
             int en = scale(length, cd.maxCharsPerByte());
@@ -682,10 +682,10 @@ public final class String
             if (COMPACT_STRINGS) {
                 byte[] bs = StringUTF16.compress(ca, 0, clen);
                 if (bs != null) {
-                    return new MIndexConstruction(bs, LATIN1);
+                    return new M3Construction(bs, LATIN1);
                 }
             }
-            return new MIndexConstruction(StringUTF16.toBytes(ca, 0, clen), UTF16);
+            return new M3Construction(StringUTF16.toBytes(ca, 0, clen), UTF16);
         }
 
         int en = scale(length, cd.maxCharsPerByte());
@@ -707,10 +707,10 @@ public final class String
         if (COMPACT_STRINGS) {
             byte[] bs = StringUTF16.compress(ca, 0, caLen);
             if (bs != null) {
-                return new MIndexConstruction(bs, LATIN1);
+                return new M3Construction(bs, LATIN1);
             }
         }
-        return new MIndexConstruction(StringUTF16.toBytes(ca, 0, caLen), UTF16);
+        return new M3Construction(StringUTF16.toBytes(ca, 0, caLen), UTF16);
     }
 
     /*
