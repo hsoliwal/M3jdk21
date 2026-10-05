@@ -275,6 +275,11 @@ public final class String
     @IntrinsicCandidate
     public String(String original) {
         M3String storage = original.m3();
+        if (storage == null) {
+            // A bootstrap/legacy source remains untouched, but a wrapper constructed after M3
+            // activation must use the canonical owner rather than retain another flat payload.
+            storage = maybeAdmit(original.value, original.coder);
+        }
         this.value = storage == null ? original.value : storage.compatibilityValue();
         this.coder = storage == null ? original.coder : storage.coder();
         this.m3 = storage;
