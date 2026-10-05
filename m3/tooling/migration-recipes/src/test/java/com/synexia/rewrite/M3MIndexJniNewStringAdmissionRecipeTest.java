@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.openrewrite.test.RewriteTest;
 import org.openrewrite.test.SourceSpecs;
 
-import static org.openrewrite.java.Assertions.java;
+import static org.openrewrite.test.SourceSpecs.text;
 
 /** Exact current java.lang.String owner -> reviewed JNI MIndex admission hook. */
 class M3MIndexJniNewStringAdmissionRecipeTest implements RewriteTest {
@@ -33,8 +33,8 @@ class M3MIndexJniNewStringAdmissionRecipeTest implements RewriteTest {
     private static SourceSpecs owner(boolean applied) {
         String source = read(applied ? "String.java.txt" : "String.java.before.txt");
         return applied
-                ? java(source, spec -> spec.noTrim().path(PATH))
-                : java(source, read("String.java.txt"), spec -> spec.noTrim().path(PATH));
+                ? text(source, spec -> spec.noTrim().path(PATH))
+                : text(source, read("String.java.txt"), spec -> spec.noTrim().path(PATH));
     }
 
     @Test
@@ -42,7 +42,7 @@ class M3MIndexJniNewStringAdmissionRecipeTest implements RewriteTest {
         rewriteRun(
                 spec -> spec
                         .recipes(new M3HashPinnedJavaSnapshotRecipe(
-                                "mindex-jni-newstring-admission"))
+                                "mindex-jni-newstring-admission", false))
                         .cycles(2)
                         .expectedCyclesThatMakeChanges(1),
                 owner(false));
@@ -52,17 +52,18 @@ class M3MIndexJniNewStringAdmissionRecipeTest implements RewriteTest {
     void reviewedPostimageIsAlreadyFixedPoint() {
         rewriteRun(
                 spec -> spec.recipes(new M3HashPinnedJavaSnapshotRecipe(
-                        "mindex-jni-newstring-admission")),
+                        "mindex-jni-newstring-admission", false)),
                 owner(true));
     }
 
     @Test
     void configuredRecipeRoundTripsWithoutAdmittingAnImplicitCrate() {
-        var recipe = new M3HashPinnedJavaSnapshotRecipe("mindex-jni-newstring-admission");
+        var recipe = new M3HashPinnedJavaSnapshotRecipe("mindex-jni-newstring-admission", false);
         var codec = new RecipeSerializer();
         var restored = assertInstanceOf(M3HashPinnedJavaSnapshotRecipe.class,
                 codec.read(codec.write(recipe)));
         assertEquals(recipe.getCrateName(), restored.getCrateName());
+        assertEquals(false, restored.isLst());
         assertEquals(recipe, restored);
         assertThrows(IllegalArgumentException.class,
                 () -> new M3HashPinnedJavaSnapshotRecipe(null));
