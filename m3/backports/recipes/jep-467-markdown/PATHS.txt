@@ -248,3 +248,4 @@ test/langtools/tools/javac/lib/DPrinter.java
 test/langtools/tools/javac/processing/model/util/elements/TestGetDocCommentKind.java
 test/langtools/tools/javac/processing/model/util/elements/TestGetDocComment_Block.java
 test/langtools/tools/javac/processing/model/util/elements/TestGetDocComment_Line.java
+test/langtools/tools/javac/processing/model/util/elements/TestGetDocComments.java

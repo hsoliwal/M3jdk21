@@ -239,7 +239,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = _parse_args(sys.argv[1:] if argv is None else argv)
     repo = args.repo.resolve()
     releases = tuple(args.release or range(22, 28))
-    _verify(repo, (BASELINE[1], *(ref for _release, ref in DONORS)))
+    selected_refs = tuple(ref for release, ref in DONORS if release in releases)
+    _verify(repo, (BASELINE[1], *selected_refs))
     rows = compare(repo, releases)
     if args.out is None:
         write_tsv(rows, sys.stdout)
