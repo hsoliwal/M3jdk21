@@ -107,6 +107,12 @@ final class M3String implements CharSequence {
         for (String part : parts) {
             String checked = Objects.requireNonNull(part, "part");
             M3String storage = checked.m3();
+            if (storage == null && checked.length() != 0) {
+                // Legacy/bootstrap wrapper stays flat. Admit its immutable spelling into the
+                // canonical M3 owner only for this composition; do not attach duplicate storage
+                // back to the old String object.
+                storage = M3String.admit(checked.value(), checked.coder());
+            }
             if (storage != null && storage.length() != 0) level.add(storage);
         }
         if (level.isEmpty()) return EMPTY;
