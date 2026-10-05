@@ -84,6 +84,15 @@ class M3A3SerialFileWorkRecipeTest {
                         result -> {
                             SourceFile source = result.getAfter();
                             assertTrue(source != null);
+                            SourceFile original = result.getBefore();
+                            if (original != null) {
+                                assertEquals(original.getId(), source.getId());
+                                assertEquals(original.getSourcePath(), source.getSourcePath());
+                                assertEquals(original.getMarkers(), source.getMarkers());
+                                assertEquals(original.getFileAttributes(), source.getFileAttributes());
+                                assertEquals(original.getCharset(), source.getCharset());
+                                assertEquals(original.isCharsetBomMarked(), source.isCharsetBomMarked());
+                            }
                             after.put(
                                     source.getSourcePath()
                                             .toString()

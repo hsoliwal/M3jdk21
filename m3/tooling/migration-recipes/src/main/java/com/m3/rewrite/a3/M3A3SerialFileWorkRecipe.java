@@ -198,8 +198,8 @@ public final class M3A3SerialFileWorkRecipe
         }
         if (current.equals(target.after())) return file;
         SourceFile candidate = parse(path, target.afterResource(), context);
-        return candidate.withId(file.getId())
-                .withSourcePath(file.getSourcePath())
+        candidate = candidate.withId(file.getId());
+        return candidate.withSourcePath(file.getSourcePath())
                 .withMarkers(file.getMarkers())
                 .withFileAttributes(file.getFileAttributes())
                 .withCharset(file.getCharset())
