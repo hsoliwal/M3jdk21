@@ -26,7 +26,10 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(14, M3RecipeScopeRegistry.size());
+        assertEquals(15, M3RecipeScopeRegistry.size());
+        assertTrue(M3RecipeScopeRegistry.registered(org.openrewrite.java.RemoveUnusedImports.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.require(org.openrewrite.java.RemoveUnusedImports.class)
+                .fileLocalMechanical(List.of("src/main/java/a/A.java")));
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(InstallIndexStringCompatibility.class.getName()));

@@ -59,17 +59,26 @@ public final class M3DocumentPureIntAtomRecipe extends Recipe {
     private static boolean hasDocumentation(J.MethodDeclaration method) {
         for (Comment comment : method.getComments()) {
             if (comment instanceof TextComment textComment
-                    && textComment.getText().contains(DOC_ID)) {
+                    && textComment.isMultiline()
+                    && textComment.getText().strip().equals("* " + DOC_ID)) {
                 return true;
             }
             if (comment instanceof Javadoc.DocComment docComment
-                    && docComment.getBody().stream()
-                            .filter(Javadoc.Text.class::isInstance)
-                            .map(Javadoc.Text.class::cast)
-                            .anyMatch(text -> text.getText().contains(DOC_ID))) {
+                    && canonicalDocumentation(docComment)) {
                 return true;
             }
         }
         return false;
+    }
+
+    private static boolean canonicalDocumentation(Javadoc.DocComment comment) {
+        StringBuilder body = new StringBuilder();
+        for (Javadoc node : comment.getBody()) {
+            if (!(node instanceof Javadoc.Text text)) {
+                return false;
+            }
+            body.append(text.getText());
+        }
+        return body.toString().strip().equals(DOC_ID);
     }
 }

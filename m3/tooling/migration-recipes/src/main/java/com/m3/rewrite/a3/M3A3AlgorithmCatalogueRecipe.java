@@ -10,6 +10,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HexFormat;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +35,7 @@ public final class M3A3AlgorithmCatalogueRecipe
 
     public static final class Inventory {
         private final Map<String, String> seen = new LinkedHashMap<>();
+        private final Set<String> generated = new HashSet<>();
         private final List<String> conflicts = new ArrayList<>();
         private boolean active;
     }
@@ -105,6 +107,7 @@ public final class M3A3AlgorithmCatalogueRecipe
                                     "required A3Alg preimage missing: " + path);
                         }
                         generated.add(parse(path, target.afterResource(), context));
+                        inventory.generated.add(path);
                     }
                 });
         return List.copyOf(generated);
@@ -194,21 +197,25 @@ public final class M3A3AlgorithmCatalogueRecipe
             ExecutionContext context) {
         String scanned = inventory.seen.get(path);
         String current = gitBlob(file.printAll());
-        if (scanned == null
-                || !current.equals(scanned)
+        boolean matchesScan = scanned == null
+                ? inventory.generated.contains(path)
+                        && "ABSENT".equals(target.before())
+                        && current.equals(target.after())
+                : current.equals(scanned);
+        if (!matchesScan
                 || (!current.equals(target.before())
                         && !current.equals(target.after()))) {
             throw new IllegalStateException("A3Alg target changed after scan: " + path);
         }
         if (current.equals(target.after())) return file;
         SourceFile candidate = parse(path, target.afterResource(), context);
-        return candidate.withId(file.getId())
-                .withSourcePath(file.getSourcePath())
-                .withMarkers(file.getMarkers())
-                .withFileAttributes(file.getFileAttributes())
-                .withCharset(file.getCharset())
-                .withCharsetBomMarked(file.isCharsetBomMarked())
-                .withChecksum(null);
+        candidate = candidate.withId(file.getId());
+        candidate = candidate.withSourcePath(file.getSourcePath());
+        candidate = candidate.withMarkers(file.getMarkers());
+        candidate = candidate.withFileAttributes(file.getFileAttributes());
+        candidate = candidate.withCharset(file.getCharset());
+        candidate = candidate.withCharsetBomMarked(file.isCharsetBomMarked());
+        return candidate.withChecksum(null);
     }
 
     private static void requireAdmissible(Inventory inventory) {

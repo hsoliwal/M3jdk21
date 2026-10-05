@@ -44,6 +44,9 @@ public final class M3RecipeScopeRegistry {
                     "com.m3.rewrite.M3Java21ConvergenceRecipe",
                     fixed(M3EditScope.FILE)),
             Map.entry(
+                    "org.openrewrite.java.RemoveUnusedImports",
+                    fixed(M3EditScope.FILE)),
+            Map.entry(
                     "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe",
                     inferred()),
             Map.entry(
