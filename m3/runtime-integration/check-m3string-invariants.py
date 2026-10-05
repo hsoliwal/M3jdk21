@@ -37,6 +37,8 @@ mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
 native_string = read("src/java.base/share/native/libjava/String.c")
+pattern = read("src/java.base/share/classes/java/util/regex/Pattern.java")
+matcher = read("src/java.base/share/classes/java/util/regex/Matcher.java")
 
 # M3String must remain owner + coordinate only.
 instance_fields = re.findall(
@@ -199,6 +201,33 @@ if '"getChars", "(II[CI)V"' not in char_shadow.group("body"):
 if "CallVoidMethodA" not in byte_shadow.group("body") or "CallVoidMethodA" not in char_shadow.group("body"):
     fail("M3 JNI shadows lost single bulk dispatch")
 
+# Regex TQ integration is candidate-only and deliberately narrow. Literal find/search may
+# reject proven absence, but anchored match/lookingAt and case-insensitive literal semantics stay
+# entirely with the stock node engine.
+for fragment in [
+    "transient M3TQ m3Tq;",
+    "has(LITERAL) && !has(CASE_INSENSITIVE)",
+    "M3TQ.fromExact(List.of(pattern))",
+]:
+    if fragment not in pattern:
+        fail(f"Pattern literal TQ compilation boundary missing: {fragment}")
+for fragment in [
+    "private static final int M3_TQ_MAX_UTF16_UNITS = 32_768;",
+    "!(text instanceof String)",
+    "M3TQ.precompute(text, this.from, to, M3_TQ_MAX_UTF16_UNITS)",
+    "if (!m3TqAllowsSearch())",
+    "this.hitEnd = true;",
+]:
+    if fragment not in matcher:
+        fail(f"Matcher literal TQ search boundary missing: {fragment}")
+match_method = re.search(
+    r"boolean\s+match\(int from, int anchor\)\s*\{(?P<body>.*?)\n\s*\}",
+    matcher,
+    flags=re.DOTALL,
+)
+if not match_method or "m3TqAllowsSearch" in match_method.group("body"):
+    fail("anchored Matcher.match must not use M3TQ candidate gate")
+
 # Donor class naming must not leak back into live VM symbols/layout.
 for path, text in [
     ("vmSymbols.hpp", symbols),
@@ -315,6 +344,7 @@ for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringPrecomputeSearchTest.java",
     "M3TQFactsTest.java",
+    "M3RegexLiteralTQTest.java",
     "M3StringHistoryConvergenceRecipeTest",
 ]:
     if required_gate not in workflow:
