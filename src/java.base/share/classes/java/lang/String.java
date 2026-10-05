@@ -2381,6 +2381,17 @@ public final class String
         if (toffset < 0 || toffset > length() - prefix.length()) {
             return false;
         }
+        M3String sourceM3 = m3();
+        if (sourceM3 != null) {
+            M3String prefixM3 = prefix.m3();
+            if (prefixM3 != null) {
+                return sourceM3.startsWith(prefixM3, toffset);
+            }
+            for (int index = 0; index < prefix.length(); index++) {
+                if (sourceM3.charAt(toffset + index) != prefix.charAt(index)) return false;
+            }
+            return true;
+        }
         byte[] ta = value();
         byte[] pa = prefix.value();
         int po = 0;
@@ -2730,6 +2741,26 @@ public final class String
      *          or {@code -1} if there is no such occurrence.
      */
     public int indexOf(String str, int fromIndex) {
+        Objects.requireNonNull(str, "str");
+        M3String sourceM3 = m3();
+        if (sourceM3 != null) {
+            M3String targetM3 = str.m3();
+            if (targetM3 != null) return sourceM3.indexOf(targetM3, fromIndex);
+            int from = Math.clamp(fromIndex, 0, sourceM3.length());
+            int targetLength = str.length();
+            if (targetLength == 0) return from;
+            if (targetLength > sourceM3.length() - from) return -1;
+            int limit = sourceM3.length() - targetLength;
+            char first = str.charAt(0);
+            for (int start = from; start <= limit; start++) {
+                if (sourceM3.charAt(start) != first) continue;
+                int index = 1;
+                while (index < targetLength
+                        && sourceM3.charAt(start + index) == str.charAt(index)) index++;
+                if (index == targetLength) return start;
+            }
+            return -1;
+        }
         return indexOf(value(), coder(), length(), str, fromIndex);
     }
 
