@@ -257,9 +257,11 @@ public final class M3HashPinnedJavaSnapshotRecipe
     }
 
     private static boolean javaPath(String value) {
-        if (!(value.startsWith("src/main/java/")
-                        || value.startsWith("src/test/java/")
-                        || value.startsWith("src/java.base/share/classes/"))
+        boolean mavenJava = value.startsWith("src/main/java/")
+                || value.startsWith("src/test/java/")
+                || value.contains("/src/main/java/")
+                || value.contains("/src/test/java/");
+        if (!(mavenJava || value.startsWith("src/java.base/share/classes/"))
                 || !value.endsWith(".java") || value.indexOf('\\') >= 0
                 || value.length() > 4096) {
             return false;
