@@ -1,0 +1,3 @@
+log	sha256	result
+replay-guards-test.log	fed6468aa65ff9aa5f2927dcb0e816318cdad49a331be5708cdc925951b68ed2	16 actual JUnit tests passed
+kit-materialization-1.log	c36c1b622188ca3858d526d7397106c8577a0a21ce54c2c34dbb6077f1802c55	Named recipe changes=1 fixed_point=true
