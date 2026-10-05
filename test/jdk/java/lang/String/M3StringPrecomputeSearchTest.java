@@ -128,6 +128,19 @@ public class M3StringPrecomputeSearchTest {
         check(Arrays.equals(joined.getBytes(), encodeOracle(oracle, Charset.defaultCharset())),
                 "default charset bytes");
 
+        // Every array returned from canonical M3 text is an independent JNI-created shadow.
+        // Mutating it must never mutate the canonical owner, its facts, or later shadows.
+        byte[] utf8Shadow = joined.getBytes(StandardCharsets.UTF_8);
+        byte originalFirstByte = utf8Shadow[0];
+        utf8Shadow[0] ^= 0x7f;
+        check(joined.charAt(0) == 'a', "byte shadow mutation cannot alter canonical text");
+        check(joined.hashCode() == new String(oracle).hashCode(),
+                "byte shadow mutation cannot alter canonical facts");
+        byte[] secondUtf8Shadow = joined.getBytes(StandardCharsets.UTF_8);
+        check(secondUtf8Shadow != utf8Shadow, "byte output shadow is caller-owned");
+        check(secondUtf8Shadow[0] == originalFirstByte,
+                "later byte shadow is rebuilt from canonical storage");
+
         String validAscii = String.join("", "alpha", "XYZ", "123");
         char[] validAsciiOracle = "alphaXYZ123".toCharArray();
         check(Arrays.equals(
