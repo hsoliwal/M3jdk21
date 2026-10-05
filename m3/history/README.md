@@ -112,6 +112,38 @@ Docs precede code. Verification proceeds diff -> lint/syntax -> byte compilation
 -> fixture tests -> actual history read. A successful history read never promotes
 runtime source. One worker, one shard, no distributed execution or model calls.
 
+## Retained-capability audit
+
+Merged history is evidence, not proof that a capability remains in the current tree. The
+`retention.py` pass closes that gap for capabilities explicitly listed in
+`RETAINED_CAPABILITIES.tsv`.
+
+Each catalogue row points to an existing source-sealed recipe manifest. For an exact Git commit the
+audit reads both catalogue and manifests from Git objects, hashes the current target blobs, and
+emits one of:
+
+- `RETAINED_EXACT` — the current blob still equals the sealed postimage;
+- `PRESENT_DRIFTED_REVIEW` — the path remains but evolved after the sealed postimage;
+- `MISSING` — a retained target disappeared from the current tree.
+
+Drift is a review obligation, not automatic semantic loss. Missing retained targets are a failing
+CI gate until the retention contract is deliberately changed or the capability is restored.
+
+The initial retained contract covers both JEP 458 source-sealed graphs. New compatible capabilities
+are added to the retention catalogue only after their product packet is actually promoted; candidate
+PRs are never pre-declared as retained.
+
+Maven/CI entry point:
+
+```sh
+mvn -B -f m3/history/retention-pom.xml verify \
+  -Dm3.repo=/absolute/full-clone \
+  -Dm3.retentionCommit=<full-commit-id> \
+  -Dm3.output=/outside-worktree/retention
+```
+
+This audit is read-only. It does not restore, merge, cherry-pick or infer behavioral equivalence.
+
 ## Recovery/patternization order
 
 Read `ATOM_PLAN.tsv`. First establish the exact candidate/target contract and
