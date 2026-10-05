@@ -909,6 +909,69 @@ void java_lang_String::print(oop java_string, outputStream* st) {
   st->print("\"");
 }
 
+// java_lang_M3String
+
+int java_lang_M3String::_owner_offset;
+int java_lang_M3String::_value_offset;
+int java_lang_M3String::_owner_kind_offset;
+int java_lang_M3String::_owner_length_offset;
+int java_lang_M3String::_owner_coder_offset;
+int java_lang_M3String::_owner_javaHash_offset;
+int java_lang_M3String::_atom_address_offset;
+int java_lang_M3String::_atom_storageWidth_offset;
+int java_lang_M3String::_atom_bigEndian_offset;
+int java_lang_M3String::_tuple_left_offset;
+int java_lang_M3String::_tuple_right_offset;
+
+#define M3_STRING_VALUE_FIELDS_DO(macro) \
+  macro(_owner_offset, v, "owner", m3_string_owner_signature, false); \
+  macro(_value_offset, v, "value", long_signature, false);
+
+#define M3_STRING_OWNER_FIELDS_DO(macro) \
+  macro(_owner_kind_offset, o, "kind", byte_signature, false); \
+  macro(_owner_length_offset, o, "length", int_signature, false); \
+  macro(_owner_coder_offset, o, "coder", byte_signature, false); \
+  macro(_owner_javaHash_offset, o, "javaHash", int_signature, false);
+
+#define M3_STRING_ATOM_FIELDS_DO(macro) \
+  macro(_atom_address_offset, a, "address", long_signature, false); \
+  macro(_atom_storageWidth_offset, a, "storageWidth", byte_signature, false); \
+  macro(_atom_bigEndian_offset, a, "bigEndian", bool_signature, false);
+
+#define M3_STRING_TUPLE_FIELDS_DO(macro) \
+  macro(_tuple_left_offset, t, "left", m3_string_signature, false); \
+  macro(_tuple_right_offset, t, "right", m3_string_signature, false);
+
+void java_lang_M3String::compute_offsets() {
+  InstanceKlass* v = vmClasses::M3String_klass();
+  InstanceKlass* o = vmClasses::M3StringOwner_klass();
+  InstanceKlass* a = vmClasses::M3StringAtom_klass();
+  InstanceKlass* t = vmClasses::M3StringTuple_klass();
+  M3_STRING_VALUE_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+  M3_STRING_OWNER_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+  M3_STRING_ATOM_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+  M3_STRING_TUPLE_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+}
+
+#if INCLUDE_CDS
+void java_lang_M3String::serialize_offsets(SerializeClosure* f) {
+  M3_STRING_VALUE_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+  M3_STRING_OWNER_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+  M3_STRING_ATOM_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+  M3_STRING_TUPLE_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+}
+#endif
+
+void java_lang_M3String::copy_chars(
+    oop value, int start, int len, jchar* destination) {
+  assert(value != nullptr, "M3String required");
+  assert(destination != nullptr || len == 0, "destination required");
+  assert(start >= 0 && len >= 0 && start <= length(value) - len, "range");
+  for (int index = 0; index < len; index++) {
+    destination[index] = char_at(value, start + index);
+  }
+}
+
 // java_lang_Class
 
 int java_lang_Class::_klass_offset;
@@ -5329,6 +5392,7 @@ void java_lang_InternalError::serialize_offsets(SerializeClosure* f) {
   //end
 
 #define BASIC_JAVA_CLASSES_DO_PART2(f) \
+  f(java_lang_M3String) \
   f(java_lang_System) \
   f(java_lang_ClassLoader) \
   f(java_lang_Throwable) \
