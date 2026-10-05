@@ -28,6 +28,8 @@ string = read("src/java.base/share/classes/java/lang/String.java")
 symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
 classes = read("src/hotspot/share/classfile/vmClassMacros.hpp")
 inline = read("src/hotspot/share/classfile/javaClasses.inline.hpp")
+stringopts = read("src/hotspot/share/opto/stringopts.cpp")
+archive_writer = read("src/hotspot/share/cds/archiveHeapWriter.cpp")
 dedup = read("src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp")
 mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
@@ -154,6 +156,10 @@ if string.count("storage.compatibilityValue()") < 4:
 
 if "if (java_lang_String::is_m3_joined(java_string))" not in dedup:
     fail("String deduplication is not fail-closed for M3-backed values")
+if "if (UseM3StringStorage)" not in stringopts:
+    fail("legacy C2 StringConcat optimization is not disabled for M3 storage")
+if "if (java_lang_String::is_m3_joined(string))" not in archive_writer:
+    fail("CDS String sizing is not fail-closed for M3 values")
 
 # Mapping authority must preserve donor->target lineage and shadow names.
 required_mapping_fragments = [
