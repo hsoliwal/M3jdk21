@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.M3StringJniArrayShadows
+displayName: Keep every M3-derived Java array behind the JNI shadow boundary
+description: Replays the exact history-derived M3JDK21 String change that allocates all M3-derived byte and char arrays through JNI, preserves canonical owner plus coordinate storage, keeps precompute internal, and retains the Synexia-to-M3JDK naming map.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk22-m3-jni-array-shadows
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-jni-array-shadows
