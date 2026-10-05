@@ -1,0 +1,2 @@
+/* M3JDK21 migration tombstone. Runtime owner: java.lang.M3String in M3String.java. Synexia MIndexString is donor provenance only. */
+package java.lang;
