@@ -223,6 +223,7 @@ class java_lang_M3String : AllStatic {
   static int _owner_javaHash_offset;
   static int _owner_facts_offset;
   static int _facts_utf8Length_offset;
+  static int _facts_modifiedUtf8Length_offset;
 
   static int _atom_address_offset;
   static int _atom_storageWidth_offset;
@@ -245,7 +246,7 @@ class java_lang_M3String : AllStatic {
   static inline int owner_length(oop value);
   static inline jbyte coder(oop value);
   static inline jint java_hash(oop value);
-  static inline int utf8_length_if_precomputed(oop value);
+  static inline int modified_utf8_length_if_precomputed(oop value);
   static inline jchar char_at(oop value, int index);
   static void copy_chars(oop value, int start, int len, jchar* destination);
 };
