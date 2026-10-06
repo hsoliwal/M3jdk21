@@ -753,6 +753,25 @@ for fragment in [
 if "M3String asciiCase(boolean upper)" not in m3:
     fail("M3String ROOT ASCII canonical case mapper missing")
 
+# Fixed scan-avoidance facts must remain constant-size and have live consumers.
+for fragment in [
+    "final boolean hasAsciiUpper;",
+    "final boolean hasAsciiLower;",
+    "final boolean hasBackslash;",
+    "final boolean hasLineTerminator;",
+]:
+    if fragment not in facts:
+        fail(f"M3 fixed scan-avoidance fact missing: {fragment}")
+for fragment in [
+    "if (!prepared.hasBackslash) return this;",
+    "(upper && !prepared.hasAsciiLower)",
+    "(!upper && !prepared.hasAsciiUpper)",
+]:
+    if fragment not in m3:
+        fail(f"M3 fixed scan-avoidance consumer missing: {fragment}")
+if "prepared != null && !prepared.hasLineTerminator" not in string:
+    fail("String.lines lost prepared no-terminator fast path")
+
 # Full Unicode/locale case conversion for M3-backed Strings must use the JDK conditional
 # casing engine over canonical String access. Source value() materialization is forbidden.
 for fragment in [
@@ -775,6 +794,23 @@ for fragment in [
 ]:
     if fragment not in abstract_builder:
         fail(f"AbstractStringBuilder M3 range-coder decision missing: {fragment}")
+
+# Mutable builder sources may reuse immutable M3 target plans, but source bytes are never cached.
+for fragment in [
+    "static int indexOf(\n            byte[] source,",
+    "static int lastIndexOf(\n            byte[] source,",
+    "sourceUnit(source, sourceCoder, index)",
+]:
+    if fragment not in search_precompute:
+        fail(f"M3 builder prepared-target search path missing: {fragment}")
+for fragment in [
+    "M3StringSearchPrecompute.indexOf(",
+    "src, srcCoder, srcCount, targetM3, plan, fromIndex",
+    "M3StringSearchPrecompute.lastIndexOf(",
+    "src, srcCoder, targetM3, plan, fromIndex",
+]:
+    if fragment not in string:
+        fail(f"String builder helper lost prepared M3 target route: {fragment}")
 
 # Shared flat-source substring search (used by AbstractStringBuilder) must not materialize
 # an M3-backed target String through value().
@@ -818,6 +854,8 @@ for fragment in [
         fail(f"M3 builder bulk String ingress missing: {fragment}")
 if "M3StringBuilderInteropTest.java" not in workflow:
     fail("M3 String workflow lost builder interop proof")
+if "M3StringBuilderInteropTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java" not in workflow:
+    fail("M3 String workflow does not execute builder interop proof")
 
 # M3-backed constructors must store only the empty compatibility sentinel.
 if string.count("storage.compatibilityValue()") < 4:
