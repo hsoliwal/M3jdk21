@@ -127,6 +127,24 @@ public class M3StringInternTest {
                 new String(new byte[] {(byte) 0x80}, StandardCharsets.US_ASCII);
         check(malformedAscii.equals("\ufffd"), "malformed ASCII remains decoder-owned");
 
+        StringBuilder builder = new StringBuilder("ab\u0100c");
+        String builderSnapshot = new String(builder);
+        String builderPeer = new String(new char[] {'a', 'b', '\u0100', 'c'});
+        check(M3_OWNER.get(STRING_M3.get(builderSnapshot))
+                        == M3_OWNER.get(STRING_M3.get(builderPeer)),
+                "StringBuilder constructor shares canonical owner");
+        builder.setCharAt(0, 'z');
+        builder.setCharAt(2, 'Q');
+        check(builderSnapshot.equals("ab\u0100c"),
+                "StringBuilder constructor snapshots mutable backing");
+
+        StringBuilder latinBuilder = new StringBuilder("builder-ascii");
+        String latinBuilderSnapshot = new String(latinBuilder);
+        String latinBuilderPeer = new String("builder-ascii".toCharArray());
+        check(M3_OWNER.get(STRING_M3.get(latinBuilderSnapshot))
+                        == M3_OWNER.get(STRING_M3.get(latinBuilderPeer)),
+                "Latin1 StringBuilder constructor shares canonical owner");
+
         String empty = new String(new char[0]);
         check(empty.intern() == "".intern(), "empty intern identity");
 
