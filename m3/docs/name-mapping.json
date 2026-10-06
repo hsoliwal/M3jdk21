@@ -6558,5 +6558,129 @@
     ]
   },
   "precompute_port_map": "m3/docs/synexia-string-precompute-port-map.tsv",
-  "precompute_scope_rule": "Only String-semantic and String-search donor precompute maps into M3JDK String/runtime internals; Synexia language, semantic, DAG, probabilistic and reasoning precompute must not be transplanted into java.lang.String."
+  "precompute_scope_rule": "Only String-semantic and String-search donor precompute maps into M3JDK String/runtime internals; Synexia language, semantic, DAG, probabilistic and reasoning precompute must not be transplanted into java.lang.String.",
+  "porting_invariant": {
+    "id": "M3-JDK-PORT-1",
+    "authority": "M3JDK21",
+    "source_workspace": "hsoliwal/com.synexia",
+    "target_repository": "hsoliwal/M3jdk21",
+    "source_role": "convergence workspace, donor/reference implementation, recipe and evidence producer",
+    "target_role": "self-contained product/runtime destination",
+    "naming_analogy": "MIndexString -> java.lang.M3String while public java.lang.String remains String",
+    "rules": [
+      "Public JDK APIs retain JDK names and contracts.",
+      "Internal target replacements reuse established M3JDK21 M3 names before creating new owners.",
+      "MIndex and MatIndex prefixes are source provenance, not target ABI naming instructions.",
+      "Map capability and ownership, not prefixes: one donor may split and multiple donors may consolidate.",
+      "Precompute is internal derived state keyed to canonical target identity and never owns a second canonical payload.",
+      "Batch, fuzzy, GPU, posting and search images require a concrete target consumer and do not become public java.lang or java.util state by default.",
+      "JNI and native code are adapted to target symbols, lifetime, ABI and target-side tests.",
+      "Maven and OpenRewrite remain authoring/proof tooling and are not M3JDK21 runtime dependencies.",
+      "Every admitted port updates this mapping and is materialized through a reviewed recipe crate.",
+      "Synexia success is donor evidence only; target compiler, JUnit/jtreg, JNI/native and image gates decide M3JDK21 admission."
+    ],
+    "canonical_document": "m3/docs/m3jdk21-porting-invariant.md"
+  },
+  "family_name_mapping": [
+    {
+      "source_family": "com.synexia.indexstring.MIndexString and canonical String owners",
+      "target_family": "java.lang.M3String family",
+      "public_api": "java.lang.String remains java.lang.String",
+      "target_owners": [
+        "java.lang.M3String",
+        "java.lang.M3StringOwner",
+        "java.lang.M3StringAtom",
+        "java.lang.M3StringPool",
+        "java.lang.M3StringTuple"
+      ],
+      "rule": "Preserve owner+coordinate and canonical composition semantics; no second text payload."
+    },
+    {
+      "source_family": "MIndexString*Facts / *Precomputation / prepared String search facts",
+      "target_family": "M3 String internal precompute",
+      "public_api": "no new public precompute API",
+      "target_owners": [
+        "java.lang.M3StringFacts",
+        "java.lang.M3StringSearchPrecompute",
+        "java.lang.M3StringPositionPrecompute",
+        "jdk.internal.mindex.M3TQ",
+        "M3StringOwner.rangeFacts"
+      ],
+      "rule": "Split by concrete consumer; candidate facts never replace exact String/regex semantics."
+    },
+    {
+      "source_family": "MIndex/MatIndex primitive address, lane, bitmap and packed storage",
+      "target_family": "M3 primitive storage",
+      "public_api": "implementation-internal",
+      "target_owners": [
+        "jdk.internal.mindex.M3Address28",
+        "jdk.internal.mindex.M3IntLane28",
+        "jdk.internal.mindex.M3LongLane28",
+        "jdk.internal.mindex.M3BitLane28",
+        "jdk.internal.mindex.M3Bits",
+        "com.m3.collections M3 lane owners"
+      ],
+      "rule": "Reuse existing target lane/address owners; preserve range, alias, sparse, concurrency and native ABI contracts."
+    },
+    {
+      "source_family": "Synexia lean collections / MIndex collection families",
+      "target_family": "per-concrete JDK collection backend",
+      "public_api": "ArrayList/HashMap/TreeMap/ConcurrentHashMap/etc keep JDK names",
+      "target_owners": [
+        "existing java.util concrete implementation",
+        "existing java.util.concurrent concrete implementation",
+        "com.m3.collections proving-ground owners where not yet promoted"
+      ],
+      "rule": "Never create one universal M3 Collection replacement; backend substitutions are contract-specific."
+    },
+    {
+      "source_family": "MIndexClass* / class precompute",
+      "target_family": "M3 class bridge/index/context",
+      "public_api": "java.lang.Class remains Class",
+      "target_owners": [
+        "jdk.internal.mindex.M3Class",
+        "jdk.internal.mindex.M3CI",
+        "jdk.internal.mindex.M3CB",
+        "jdk.internal.mindex.M3PC"
+      ],
+      "rule": "Preserve defining-loader/module/lifecycle identity."
+    },
+    {
+      "source_family": "MIndexAST*",
+      "target_family": "M3 AST",
+      "public_api": "compiler/JDK APIs retain existing names",
+      "target_owners": [
+        "jdk.internal.mindex.M3AST",
+        "jdk.internal.mindex.M3ASTPC"
+      ],
+      "rule": "Reserved/internal until source-position, type, format and consumer gates pass."
+    },
+    {
+      "source_family": "MIndexCompilerASTPrecompute and compiler-only facts",
+      "target_family": "javac M3 precompute",
+      "public_api": "javac APIs retain existing names",
+      "target_owners": [
+        "com.sun.tools.javac.m3.M3ASTPC"
+      ],
+      "rule": "Compiler dependencies stay in jdk.compiler and never leak into java.base."
+    },
+    {
+      "source_family": "MIndex JNI/native mapped/string/search accelerators",
+      "target_family": "target-owned JDK/native accelerator",
+      "public_api": "existing JDK API remains authoritative",
+      "target_owners": [
+        "src/java.base/share/native/libjava",
+        "jdk.internal.mindex internal accelerators",
+        "HotSpot owners only after dedicated admission"
+      ],
+      "rule": "Adapt symbols, headers, lifetime and ABI; donor JNI proof is not target proof."
+    },
+    {
+      "source_family": "MIndex batch/search/posting/fuzzy/GPU/truth images",
+      "target_family": "optional internal module or deferred donor capability",
+      "public_api": "none by default",
+      "target_owners": [],
+      "rule": "Do not attach whole-corpus images to java.lang.String or java.util collections without a concrete bounded JDK consumer."
+    }
+  ]
 }
