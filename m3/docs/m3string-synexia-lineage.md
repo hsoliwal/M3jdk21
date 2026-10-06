@@ -10,6 +10,7 @@ snapshot or reuse donor identifiers as target ABI.
 | --- | --- | --- |
 | `8b202d3c10617d67f45247ccd81a21b9c5332a08` | Inline scalar handles and share immutable token spans; `MIndexString` converges to owner + packed long coordinate | `java.lang.M3String` has exactly `owner` + `value` instance state |
 | `c3c67a433e1689d42bc68720290b7ca5f54c3313` | Materialize canonical tuple reference DAG | `M3StringTuple` owns persistent child coordinates; no per-value segment/offset/end arrays |
+| `57935a5d55d9d873ee5e83e1f7ca95e27ed6d2c8` | Defer tuple flattening behind a balanced shared reference DAG | M3JDK tuple concat uses bounded AVL-style balancing; partial ranges remain owner+coordinate leaves |
 | `40d66f6edd0a9cf3e6b4545058c1ad54f6cd03bc` | Route concat/compose/repeat through canonical tuple DAG | M3 concat/repeat create/reuse tuple owners; substring is a coordinate range |
 | `d08ee60be27b60a951a55a2b472d515bf142f8bf` | Compose/reuse canonical text precomputation without retaining a second spelling | M3 precompute is owner/range keyed derived metadata only |
 | `33ebec8fa64c215bf8bfa0dc4ec66085f5500a52` | Cache immutable per-atom metrics, bit signal and character facts together | M3 fixed-size facts prepare once on canonical owner/range identity |
@@ -54,6 +55,8 @@ boundary requires it.
 8. Absence or eviction of precompute cannot alter Java String semantics.
 9. VM-local native scalar owners are weakly canonicalized: live M3 coordinates/DAGs own lifetime; dead native blocks are reclaimed through the local reference queue.
 10. Every Java byte[]/char[] compatibility shadow, including the shared empty VM sentinel, is created through the JNI shadow boundary.
+10. Canonical tuple identity is independent of concat parenthesization: equal ordered UTF-16 value sequences admitted as compositions converge after exact verification; hash collisions affect lookup cost only.
+11. Canonical tuple DAG depth remains bounded by balancing; no concat chain may recreate an unbounded rope.
 
 ## Search/precompute convergence absorbed
 
