@@ -7,7 +7,6 @@
 package java.lang;
 
 import java.lang.ref.WeakReference;
-import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
 /**
@@ -347,7 +346,6 @@ final class M3StringSourcePrecompute {
     }
 
     private record Anchor(int row, int offset) {}
-    }
 
     private static final class Entry {
         final WeakReference<M3StringOwner> owner;
