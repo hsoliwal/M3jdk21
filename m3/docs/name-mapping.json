@@ -6638,10 +6638,35 @@
       "Precompute is internal derived state keyed to canonical target identity and never owns a second canonical payload.",
       "Batch, fuzzy, GPU, posting and search images require a concrete target consumer and do not become public java.lang or java.util state by default.",
       "JNI and native code are adapted to target symbols, lifetime, ABI and target-side tests.",
-      "Maven and OpenRewrite remain authoring/proof tooling and are not M3JDK21 runtime dependencies.",
+      "Maven and OpenRewrite recipes are first-class donor artifacts, remain authoring/proof tooling, and are not M3JDK21 runtime dependencies.",
+      "The whole qualified Synexia workspace is a candidate donor universe: source, native code, recipes, generated postimages, tests, fixtures, docs, schemas, proof crates, algorithms and independently reimplemented ideas.",
+      "License and NOTICE lineage follows every copied/adapted artifact; third-party material is never relicensed merely by transit through Synexia.",
       "Every admitted port updates this mapping and is materialized through a reviewed recipe crate.",
       "Synexia success is donor evidence only; target compiler, JUnit/jtreg, JNI/native and image gates decide M3JDK21 admission."
     ],
+    "canonical_document": "m3/docs/m3jdk21-porting-invariant.md"
+  },
+  "donor_artifact_policy": {
+    "id": "M3-JDK-DONOR-ARTIFACTS-1",
+    "candidate_source": "whole qualified hsoliwal/com.synexia workspace",
+    "artifact_classes": [
+      "source",
+      "jni-native",
+      "recipe",
+      "generated-postimage",
+      "test-fixture-oracle",
+      "documentation-schema-mapping",
+      "proof-receipt-ci-gate",
+      "precompute-index-collection-search-layout",
+      "algorithm-architecture-idea-reference"
+    ],
+    "recipe_rule": "Qualified Synexia recipes and their proof crates may be copied or adapted into target tooling; recipe execution is never a Synexia runtime dependency.",
+    "generated_output_rule": "A recipe license does not relicense its inputs or outputs; generated postimages must satisfy source provenance and destination licensing.",
+    "first_party_rule": "Synexia-original Apache-2.0 material is a target donor candidate; contribution under different target terms requires actual rights and an explicit target-side licensing decision.",
+    "third_party_rule": "Third-party material retains its original copyright, license and NOTICE obligations and is never made Apache-2.0 merely by Synexia wrapping, atomization, testing or convergence.",
+    "idea_rule": "Ideas, algorithms, behaviors and architecture patterns may be independently reimplemented under target ownership while retaining donor provenance as engineering evidence.",
+    "target_license_rule": "M3JDK21 follows OpenJDK per-file/module licensing and must not blindly commingle license-incompatible source.",
+    "runtime_dependency_rule": "M3JDK21 runtime has no dependency on Synexia modules, services or build tooling.",
     "canonical_document": "m3/docs/m3jdk21-porting-invariant.md"
   },
   "family_name_mapping": [
