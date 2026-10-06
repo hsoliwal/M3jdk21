@@ -56,8 +56,10 @@ compatibility, implementation and proof packet closes.
 
 ## Priority-matrix closure
 
-`POST21_PRIORITY_COMPATIBILITY.tsv` now contains **34 rows**, and every priority row must also
+`POST21_PRIORITY_COMPATIBILITY.tsv` now contains **36 rows**, and every priority row must also
 exist in the full released-JEP catalogue.
+
+The current matrix also makes two previously implicit relationships explicit: JEP 404 is the opt-in runtime substrate required before JEP 521 can be considered, and JEP 510 is an opt-in post-21 SE API extension rather than default Java-21 behavior.
 
 `program_status.py` now fails closed when:
 
