@@ -16,6 +16,7 @@ CRATE = Path(
     "m3/tooling/migration-recipes/src/main/resources/"
     "com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep485-stream-gatherers"
 )
+OPT_IN_TOKEN = "JEP485"
 
 
 @dataclass(frozen=True)
@@ -95,7 +96,17 @@ def verify_declared_path(repo: Path, relative: str) -> Path:
     return candidate
 
 
-def materialize(repo: Path, mode: str, receipt: Path | None) -> int:
+def materialize(
+    repo: Path,
+    mode: str,
+    receipt: Path | None,
+    acknowledged_opt_in: bool = False,
+) -> int:
+    if mode == "apply" and not acknowledged_opt_in:
+        raise ValueError(
+            "JEP485_OPT_IN_REQUIRED:apply requires explicit "
+            "--acknowledge-opt-in-se-api JEP485"
+        )
     rows = load_manifest(repo)
     receipts: list[tuple[str, str, str]] = []
 
@@ -154,10 +165,20 @@ def main() -> int:
         default="check",
     )
     parser.add_argument("--receipt", type=Path)
+    parser.add_argument(
+        "--acknowledge-opt-in-se-api",
+        choices=(OPT_IN_TOKEN,),
+        help="Required only for source-mutating apply of the opt-in SE API packet.",
+    )
     args = parser.parse_args()
 
     try:
-        count = materialize(args.root, args.mode, args.receipt)
+        count = materialize(
+            args.root,
+            args.mode,
+            args.receipt,
+            acknowledged_opt_in=args.acknowledge_opt_in_se_api == OPT_IN_TOKEN,
+        )
     except (OSError, ValueError) as failure:
         print(f"jep485 materialization refused: {failure}", file=sys.stderr)
         return 2
