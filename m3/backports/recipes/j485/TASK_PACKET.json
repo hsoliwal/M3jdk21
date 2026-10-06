@@ -1,0 +1,42 @@
+{
+  "task_packet": "active",
+  "source_doc": "M3-SCALE v3 Locked Canon",
+  "invariant_id": "J485-CURRENT-RECONCILE",
+  "run": {
+    "mode": "apply",
+    "profile": "full",
+    "workers": 1,
+    "shard_count": 1,
+    "shard_index": 0
+  },
+  "targets": {
+    "product": "READ_ONLY",
+    "tests": 7,
+    "recipe": "com.m3.j485.Tests"
+  },
+  "invariant_locks": {
+    "PUBLIC_API": "LOCKED",
+    "PRODUCT_SOURCE": "LOCKED",
+    "JAVA21_IDENTITY": "OPT_IN_SE_API_EXTENSION"
+  },
+  "allowed_delta": "Seven Gatherer jtreg files plus reusable recipe/proof/workflow assets",
+  "forbidden": [
+    "product-source rewrite",
+    "aggregate stale-file overwrite",
+    "coverage weakening",
+    "history rewrite"
+  ],
+  "verify_order": [
+    "inventory",
+    "recipe replay",
+    "source21 patch compile",
+    "smoke",
+    "jtreg",
+    "full image"
+  ],
+  "stop_conditions": [
+    "source drift",
+    "unexpected product delta",
+    "recipe non-fixed-point"
+  ]
+}
