@@ -83,6 +83,61 @@ final class M3StringPool {
         return M3String.whole(internLocal(value, coder));
     }
 
+    static M3String internLatin1Bytes(byte[] source, int offset, int length) {
+        Objects.requireNonNull(source, "source");
+        Objects.checkFromIndexSize(offset, length, source.length);
+        if (length == 0) return M3String.empty();
+
+        byte coder = String.COMPACT_STRINGS ? String.LATIN1 : String.UTF16;
+        if (coder == String.UTF16 && length > StringUTF16.MAX_LENGTH) {
+            throw new OutOfMemoryError(
+                    "UTF16 String size is " + length
+                            + ", should be less than " + StringUTF16.MAX_LENGTH);
+        }
+
+        Lexicon active = lexicon;
+        if (active != null && active.available()) {
+            int row = active.findLatin1Bytes(source, offset, length);
+            if (row >= 0) return M3String.whole(active.atom(row));
+        }
+
+        int byteLength = length << coder;
+        long hash64 =
+                mix64(0x9e3779b97f4a7c15L ^ coder ^ Integer.toUnsignedLong(byteLength));
+        for (int index = 0; index < length; index++) {
+            hash64 = mix64(hash64 ^ (source[offset + index] & 0xffL));
+        }
+        Fingerprint fingerprint = new Fingerprint(coder, byteLength, hash64);
+
+        expungeLocals();
+        for (;;) {
+            LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
+            synchronized (bucket) {
+                if (bucket.retired) continue;
+                for (Iterator<LocalRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
+                    LocalRef reference = iterator.next();
+                    M3StringAtom existing = reference.get();
+                    if (existing == null) {
+                        iterator.remove();
+                        reference.releaseNative();
+                    } else if (existing.contentEqualsLatin1Bytes(
+                            source, offset, length, coder)) {
+                        return M3String.whole(existing);
+                    }
+                }
+
+                long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
+                M3StringAtom created =
+                        M3StringAtom.localLatin1Bytes(
+                                source, offset, length, coder, id, hash64);
+                long retainedBytes = created.nativePayloadBytes();
+                LOCAL_NATIVE_BYTES.addAndGet(retainedBytes);
+                bucket.values.add(new LocalRef(created, fingerprint, bucket, retainedBytes));
+                return M3String.whole(created);
+            }
+        }
+    }
+
     static M3String internChars(char[] source, int offset, int length) {
         Objects.requireNonNull(source, "source");
         Objects.checkFromIndexSize(offset, length, source.length);
@@ -510,6 +565,32 @@ final class M3StringPool {
                     comparison = unit - mappedUnit(offsets[middle], 0);
                     if (comparison == 0) comparison = 1 - length;
                 }
+                if (comparison == 0) {
+                    return middle;
+                }
+                if (comparison < 0) {
+                    high = middle - 1;
+                } else {
+                    low = middle + 1;
+                }
+            }
+            return -1;
+        }
+
+        int findLatin1Bytes(byte[] value, int offset, int logicalLength) {
+            int low = 0;
+            int high = offsets.length - 1;
+            while (low <= high) {
+                int middle = (low + high) >>> 1;
+                int common = Math.min(logicalLength, lengths[middle]);
+                int comparison = 0;
+                for (int index = 0; index < common; index++) {
+                    comparison =
+                            (value[offset + index] & 0xff)
+                                    - mappedUnit(offsets[middle], index);
+                    if (comparison != 0) break;
+                }
+                if (comparison == 0) comparison = logicalLength - lengths[middle];
                 if (comparison == 0) {
                     return middle;
                 }
