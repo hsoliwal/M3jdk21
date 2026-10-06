@@ -23,7 +23,6 @@ Do not shorten arbitrary words into unexplained initials.
 | `com.synexia.mindex.ast.MIndexAST` | `jdk.internal.mindex.M3AST` | AST = Abstract Syntax Tree | Reserved mapping; root-package facade must be reconciled separately |
 | `MIndexASTPrecompute` | `jdk.internal.mindex.M3ASTPC` | AST precompute context | Reserved mapping; dependency/format review pending |
 | `MIndexCompilerASTPrecompute` | `com.sun.tools.javac.m3.M3ASTPC` | Compiler-specific context, jdk.compiler | Reserved mapping; must not pull compiler dependencies into java.base |
-| `MIndexRegexTrigramQuery` | `jdk.internal.mindex.M3TQ` | TQ = Trigram Query; java.base | Inlined candidate kernel and canonical-backing range bridge; full-image acceptance pending |
 | Existing JDK String counterpart | existing `java.lang.MIndexString` and backing owners | Retain current implementation lineage | No blanket prefix rename |
 
 Reserved names are candidates, not new exported APIs or claims that code exists. The mapping
