@@ -48,7 +48,7 @@
         "composable_precompute_commit": "d08ee60be27b60a951a55a2b472d515bf142f8bf",
         "canonical_fact_bundle_commit": "b9d35ce3c3c266fb3641352a07903563a3a86b81",
         "utf_shadow_commit": "f2f15f1aaa147cf1af556b0c148954178f971de6",
-        "balanced_reference_dag_commit": "57935a5d55d9873ee5e83e1f7ca95e27ed6d2c8"
+        "balanced_reference_dag_commit": "57935a5d55d9d873ee5e83e1f7ca95e27ed6d2c8"
       },
       "required_semantics": [
         "M3String instance carries exactly one canonical owner reference + long packed coordinate",
@@ -112,7 +112,7 @@
       "donor_lineage": [
         "8b202d3c10617d67f45247ccd81a21b9c5332a08",
         "40d66f6edd0a9cf3e6b4545058c1ad54f6cd03bc",
-        "57935a5d55d9873ee5e83e1f7ca95e27ed6d2c8"
+        "57935a5d55d9d873ee5e83e1f7ca95e27ed6d2c8"
       ]
     },
     {
