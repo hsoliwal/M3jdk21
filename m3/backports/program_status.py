@@ -44,6 +44,11 @@ def snapshot(root: Path) -> dict[str, object]:
         if path.is_dir() and (path / "README.md").is_file()
     )
     jep_ids = [row["jep"] for row in jeps]
+    release_jep_pairs = [(int(row["release"]), int(row["jep"])) for row in jeps]
+    if any(release < 22 or release > 27 for release, _jep in release_jep_pairs):
+        raise ValueError("released JEP catalogue contains a row outside JDK 22..27")
+    if release_jep_pairs != sorted(release_jep_pairs):
+        raise ValueError("released JEP catalogue must be sorted by release then JEP")
     duplicate_jeps = sorted(
         jep for jep, count in Counter(jep_ids).items() if count > 1
     )
@@ -66,6 +71,8 @@ def snapshot(root: Path) -> dict[str, object]:
         "jep_unique_rows": len(set(jep_ids)),
         "priority_jep_rows": len(priorities),
         "priority_missing_from_catalogue": priority_missing,
+        "released_jdk_floor": min(release for release, _jep in release_jep_pairs),
+        "released_jdk_ceiling": max(release for release, _jep in release_jep_pairs),
         "seed_rows": len(seeds),
         "seed_states": dict(sorted(seed_states.items())),
         "seed_dispositions": dict(sorted(Counter(row["disposition"] for row in seeds).items())),
