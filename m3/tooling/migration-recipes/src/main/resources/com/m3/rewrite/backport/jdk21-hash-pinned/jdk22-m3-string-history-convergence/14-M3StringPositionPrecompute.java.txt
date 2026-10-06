@@ -162,11 +162,9 @@ final class M3StringPositionPrecompute {
 
         int start = block << BLOCK_SHIFT;
         int end = Math.min(source.length(), start + BLOCK_SIZE);
-        char[] scratch = new char[end - start];
-        source.getChars(start, end, scratch, 0);
         long computed = 0L;
-        for (char unit : scratch) {
-            computed |= M3StringFacts.codeUnitSignal(unit);
+        for (int index = start; index < end; index++) {
+            computed |= M3StringFacts.codeUnitSignal(source.charAt(index));
         }
         if (computed == 0L) {
             throw new InternalError("M3 position block produced empty signal");
@@ -183,18 +181,17 @@ final class M3StringPositionPrecompute {
 
         int start = block << BLOCK_SHIFT;
         int end = Math.min(source.length(), start + BLOCK_SIZE);
-        char[] scratch = new char[end - start];
-        source.getChars(start, end, scratch, 0);
-        char[] units = new char[scratch.length];
-        long[] masks = new long[scratch.length];
+        int width = end - start;
+        char[] units = new char[width];
+        long[] masks = new long[width];
         int count = 0;
 
-        for (int index = 0; index < scratch.length; index++) {
-            char unit = scratch[index];
+        for (int offset = 0; offset < width; offset++) {
+            char unit = source.charAt(start + offset);
             int at = 0;
             while (at < count && units[at] < unit) at++;
             if (at < count && units[at] == unit) {
-                masks[at] |= 1L << index;
+                masks[at] |= 1L << offset;
                 continue;
             }
             if (at < count) {
@@ -202,7 +199,7 @@ final class M3StringPositionPrecompute {
                 System.arraycopy(masks, at, masks, at + 1, count - at);
             }
             units[at] = unit;
-            masks[at] = 1L << index;
+            masks[at] = 1L << offset;
             count++;
         }
 
