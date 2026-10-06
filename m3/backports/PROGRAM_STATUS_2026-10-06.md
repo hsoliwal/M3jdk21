@@ -19,10 +19,15 @@ python3 m3/backports/jep_residue.py --root . --out m3/backports/JEP_RESIDUE_QUEU
 
 ## Released JEP denominator
 
-The corrected released catalogue contains **85 unique JEP rows** spanning JDK 22 through JDK 27.
+The corrected released catalogue contains **86 unique JEP rows** spanning JDK 22 through JDK 27.
 
 This lane repairs three omissions from the older 82-row snapshot:
 
+- **JEP 404** — Generational Shenandoah (Experimental) — JDK 24
+  - disposition: `superseded`
+  - reason: JEP 521 is the final status lineage, but JEP 404 is the required implementation
+    substrate and therefore must remain in the released denominator and compatibility dependency
+    graph
 - **JEP 483** — Ahead-of-Time Class Loading & Linking — JDK 24
   - disposition: `candidate-high-risk`
   - reason: runtime/CDS optimization, no Java grammar change, but dependency closure and
@@ -44,7 +49,7 @@ Current disposition counts:
   - 5 `hold-compat`
   - 5 `hold-jit`
   - 3 `hold-preview`
-- **44** decided no direct default backport
+- **45** decided no direct default backport
   - 19 `reject-language`
   - 5 `reject-compat`
   - 17 `superseded`
