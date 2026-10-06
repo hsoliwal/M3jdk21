@@ -34,6 +34,7 @@ inline = read("src/hotspot/share/classfile/javaClasses.inline.hpp")
 stringopts = read("src/hotspot/share/opto/stringopts.cpp")
 archive_writer = read("src/hotspot/share/cds/archiveHeapWriter.cpp")
 dedup = read("src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp")
+stringtable = read("src/hotspot/share/classfile/stringTable.cpp")
 mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
@@ -294,6 +295,17 @@ if "m3TqFactsText" in matcher:
 if "m3TqFacts = null;" not in matcher or "m3TqFactsFrom = -1;" not in matcher:
     fail("Matcher reset must invalidate cached TQ facts")
 
+# Ordinary StringTable hashing must consume M3's exact Java hash directly. Defensive alternate
+# halfsiphash remains UTF-16 based, and intern identity/equality stays with the existing table.
+for fragment in [
+    "if (!_alt_hash)",
+    "return java_lang_String::hash_code(val_oop);",
+    "jchar* chars = java_lang_String::as_unicode_string_or_null(val_oop, length);",
+    "return hash_string(chars, length, true);",
+]:
+    if fragment not in stringtable:
+        fail(f"M3 StringTable hash path missing: {fragment}")
+
 # Donor class naming must not leak back into live VM symbols/layout.
 for path, text in [
     ("vmSymbols.hpp", symbols),
@@ -465,6 +477,7 @@ for fragment in [
 for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringPrecomputeSearchTest.java",
+    "M3StringInternTest.java",
     "M3TQFactsTest.java",
     "M3RegexLiteralTQTest.java",
     "M3StringHistoryConvergenceRecipeTest",
