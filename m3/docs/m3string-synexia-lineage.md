@@ -178,3 +178,25 @@ for adaptive prepared literal search. M3JDK adapts that idea into the existing
 
 The adaptive threshold and work bound are implementation choices guarded by the source invariant
 and differential tests, not changes to the Java String contract.
+
+
+## No-port rule for expensive donor facts
+
+"Synexia is the donor" does not mean every donor precompute becomes a JDK allocation. The
+inventory now distinguishes useful M3JDK21 runtime owners from algorithms with no JDK21 semantic
+consumer:
+
+- Prefix-Z/border/period lanes remain donor-only until a concrete JDK operation can amortize their
+  O(n) retained metadata. `repeat()` is already O(log repetitions) over canonical tuple geometry,
+  so Prefix-Z is not justified merely to detect repeated powers.
+- Manacher palindrome radii are not ported because `java.lang.String` has no palindrome API.
+- Suffix-decision DFA facts are not ported merely to accelerate `endsWith`; the fixed suffix
+  summary plus exact verification is smaller and sufficient.
+- LCP/RMQ search-tree facts are not ported because M3JDK21 intentionally has no suffix-array/index
+  owner in `java.lang.String`.
+- General regex composition/capture summaries remain outside this change. Only the mathematically
+  safe necessary-literal/trigram absence boundary is consumed, and the stock regex engine remains
+  exact authority.
+
+This is part of the M3 String invariant: precompute must have a real owner, bounded retention, and
+a JDK-visible execution consumer. Unused metadata is not an implementation success.
