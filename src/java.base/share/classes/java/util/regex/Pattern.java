@@ -1975,6 +1975,25 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
             }
         }
 
+        // A case-sensitive BMP Slice at the actual match root is a mandatory leading
+        // literal before any optional/branching node. Reuse that compiled semantic fact rather
+        // than reparsing regex source text. SliceS/case-folded/branch roots deliberately bypass.
+        if (m3Tq == null && matchRoot != null && matchRoot.getClass() == Slice.class) {
+            int[] literal = ((Slice) matchRoot).buffer;
+            if (literal.length >= 3) {
+                char[] chars = new char[literal.length];
+                for (int index = 0; index < literal.length; index++) {
+                    chars[index] = (char) literal[index];
+                }
+                try {
+                    m3Tq = M3TQ.fromExact(List.of(new String(chars)));
+                } catch (OutOfMemoryError unavailable) {
+                    // Candidate precompute remains optional.
+                    m3Tq = null;
+                }
+            }
+        }
+
         // Peephole optimization
         if (matchRoot instanceof Slice) {
             root = BnM.optimize(matchRoot);
