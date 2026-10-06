@@ -253,6 +253,24 @@ public class M3StringPrecomputeSearchTest {
                 "block position lastIndexOf");
         check(sparse.indexOf('Q') == -1, "block position absent");
 
+        char[] exactMaskChars = new char[512];
+        Arrays.fill(exactMaskChars, 'm');
+        for (int position : new int[] {0, 63, 64, 127, 128, 255, 256, 511}) {
+            exactMaskChars[position] = 'X';
+        }
+        String exactMask = new String(exactMaskChars);
+        for (int from : new int[] {-1, 0, 1, 62, 63, 64, 65, 126, 127, 128, 129, 254, 255, 256, 257, 510, 511, 512}) {
+            check(exactMask.indexOf('X', from) == naiveIndexOf(exactMaskChars, 'X', from),
+                    "exact block mask index from=" + from);
+            check(exactMask.lastIndexOf('X', from) == naiveLastIndexOf(exactMaskChars, 'X', from),
+                    "exact block mask reverse from=" + from);
+        }
+        for (char candidate = 0; candidate < 256; candidate++) {
+            check(exactMask.indexOf(candidate)
+                            == naiveIndexOf(exactMaskChars, candidate, 0),
+                    "exact block mask candidate=" + (int) candidate);
+        }
+
         String sparseSupplementary = String.join(
                 "",
                 "a".repeat(319) + "\ud83d",
