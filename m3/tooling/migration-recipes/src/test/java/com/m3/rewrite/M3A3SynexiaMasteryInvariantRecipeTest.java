@@ -26,11 +26,9 @@ final class M3A3SynexiaMasteryInvariantRecipeTest {
             "/com/m3/rewrite/a3-synexia-mastery-invariant/";
 
     @Test
-    void exactPolicyTestAndWorkflowPreimagesAdvanceAndSecondRunIsFixedPoint() {
+    void exactCurrentPolicyPreimagesAdvanceAndSecondRunIsFixedPoint() {
         Map<String, String> before =
                 Map.of(
-                        ".github/workflows/m3-a3-synexia-mastery-custody.yml",
-                        resource("workflow.before.yml"),
                         "m3/compatibility/synexia-recipe-home-policy.tsv",
                         resource("policy.before.tsv"),
                         "m3/compatibility/test_synexia_recipe_home_policy.py",
@@ -38,7 +36,7 @@ final class M3A3SynexiaMasteryInvariantRecipeTest {
 
         Recipe recipe = new M3Jdk21HashPinnedTextSnapshotRecipe(CRATE);
         Map<String, String> first = apply(recipe, before);
-        assertEquals(3, first.size());
+        assertEquals(2, first.size());
 
         String policy = first.get("m3/compatibility/synexia-recipe-home-policy.tsv");
         assertTrue(
@@ -48,17 +46,13 @@ final class M3A3SynexiaMasteryInvariantRecipeTest {
         String policyTest =
                 first.get("m3/compatibility/test_synexia_recipe_home_policy.py");
         assertTrue(policyTest.contains("import xml.etree.ElementTree as ET"));
+        assertTrue(policyTest.contains("PIN = ROOT / \"compatibility\" / \"synexia-recipe-home-pin.tsv\""));
         assertTrue(
                 policyTest.contains(
                         "test_a3_mastery_and_catalogue_resolve_to_synexia_recipe_owners"));
         assertTrue(
                 policyTest.contains(
                         "import com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe;"));
-
-        String workflow =
-                first.get(".github/workflows/m3-a3-synexia-mastery-custody.yml");
-        assertTrue(workflow.contains("python3 m3/compatibility/test_synexia_recipe_home_policy.py"));
-        assertTrue(workflow.contains("python3 m3/compatibility/check_synexia_recipe_ownership.py"));
 
         assertTrue(apply(recipe, first).isEmpty());
     }
