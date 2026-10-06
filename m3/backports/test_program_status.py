@@ -30,8 +30,11 @@ class ProgramStatusTest(unittest.TestCase):
     def test_repository_snapshot_has_locked_denominators(self):
         root = Path(__file__).resolve().parents[2]
         data = program_status.snapshot(root)
-        self.assertEqual(82, data["jep_rows"])
-        self.assertEqual(82, sum(data["jep_states"].values()))
+        self.assertEqual(85, data["jep_rows"])
+        self.assertEqual(85, sum(data["jep_states"].values()))
+        self.assertEqual(85, data["jep_unique_rows"])
+        self.assertEqual(34, data["priority_jep_rows"])
+        self.assertEqual([], data["priority_missing_from_catalogue"])
         self.assertEqual(13, data["seed_rows"])
         self.assertEqual(13, sum(data["seed_states"].values()))
         self.assertEqual(12, data["community_fork_rows"])
@@ -47,7 +50,9 @@ class ProgramStatusTest(unittest.TestCase):
         second = program_status.render_tsv(data)
         self.assertEqual(first, second)
         self.assertTrue(first.startswith("kind\tstate\tcount\n"))
-        self.assertIn("jep\ttotal\t82\n", first)
+        self.assertIn("jep\ttotal\t85\n", first)
+        self.assertIn("jep\tunique\t85\n", first)
+        self.assertIn("jep-priority\ttotal\t34\n", first)
         self.assertIn("community-fork\ttotal\t12\n", first)
 
 if __name__ == "__main__":
