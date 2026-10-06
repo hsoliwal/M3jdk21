@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.rewrite.backport;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.List;
 import java.util.Set;
+import org.openrewrite.Option;
 import org.openrewrite.Recipe;
 
 /**
@@ -14,6 +16,7 @@ import org.openrewrite.Recipe;
  * deliberately materializes this packet.</p>
  */
 public final class M3Jep485StreamGatherersBackportRecipe extends Recipe {
+    public static final String OPT_IN_TOKEN = "JEP485";
     public static final String DONOR_TAG = "jdk-24+36";
     public static final String IMPLEMENTATION_COMMIT =
             "33b26f79a986d015abdcd84b89842adc0a4bde64";
@@ -21,6 +24,26 @@ public final class M3Jep485StreamGatherersBackportRecipe extends Recipe {
             "ef0dc2518e7636cc8a9ca580613ff5edeb4c19fd";
     public static final String MAP_CONCURRENT_FIX =
             "450636ae28b84ded083b6861c6cba85fbf87e16e";
+
+    @Option(
+            displayName = "Explicit opt-in token",
+            description = "Must be JEP485 to materialize the opt-in SE API extension.",
+            example = "JEP485",
+            required = false)
+    private final String optInToken;
+
+    public M3Jep485StreamGatherersBackportRecipe() {
+        this(null);
+    }
+
+    @JsonCreator
+    public M3Jep485StreamGatherersBackportRecipe(String optInToken) {
+        this.optInToken = optInToken;
+    }
+
+    public boolean optedIn() {
+        return OPT_IN_TOKEN.equals(optInToken);
+    }
 
     @Override
     public String getDisplayName() {
@@ -57,6 +80,9 @@ public final class M3Jep485StreamGatherersBackportRecipe extends Recipe {
 
     @Override
     public List<Recipe> getRecipeList() {
+        if (!optedIn()) {
+            return List.of();
+        }
         return List.of(
                 new M3Jdk21HashPinnedSnapshotRecipe("jdk24-jep485-stream-gatherers"));
     }
