@@ -1,0 +1,10 @@
+key	value
+repository	hsoliwal/M3jdk21
+base_commit	87590cb96fb0e2dc0f88fae8e01957f7179cd255
+branch	m3/recover-jep493-runtimelink-leaf-20261006
+source_pr	109
+source_head	de7d752d26b11153df020145060c36753570aa8b
+donor_tag	jdk-24+36
+ga_commit	6705a9255d28f351950e7fbca9d05e73942a4e27
+leaf_scope	MODULE
+feature_scope	MULTI_MODULE
