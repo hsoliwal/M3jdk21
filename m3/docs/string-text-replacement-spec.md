@@ -9,6 +9,17 @@ Read with:
 - the operational mapping authority `name-mapping.json`
 - branch-specific String/runtime evidence only at its exact pinned commit.
 
+## Canonical ownership invariant
+
+For Route C / M3JDK21, **Synexia is the donor and M3JDK21 is the runtime owner**. The canonical
+architectural name is **M3 String**, and all String precompute lives inside M3JDK21. Synexia-side
+MIndex/precompute modules may donate qualified algorithms and evidence; they are not runtime
+dependencies or canonical precompute owners for the JDK implementation.
+
+Current source identifiers such as `MIndexString` are treated as the existing M3 String
+implementation lineage until a complete cross-layer rename is performed. Do not introduce a
+parallel `M3String` owner. See [m3-string-ownership-invariant.md](m3-string-ownership-invariant.md).
+
 ## 1. Scope
 
 The text programme covers the complete dependency closure of ordinary Java text behavior, not only the `String` class:
