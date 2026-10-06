@@ -1,0 +1,286 @@
+name: M3 JEP 485 opt-in Stream Gatherers proof
+
+on:
+  push:
+    branches:
+      - "m3/jep485-opt-in-control-20261005"
+    paths:
+      - "m3/backports/recipes/jep-485-gatherers/**"
+      - "m3/backports/JEP_CATALOGUE.tsv"
+      - "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - "m3/tooling/migration-recipes/**"
+      - "m3/tooling/backport-dag/**"
+      - ".github/workflows/m3-jep485-stream-gatherers-optin.yml"
+  pull_request:
+    paths:
+      - "m3/backports/recipes/jep-485-gatherers/**"
+      - "m3/backports/JEP_CATALOGUE.tsv"
+      - "m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - "m3/tooling/migration-recipes/**"
+      - "m3/tooling/backport-dag/**"
+      - ".github/workflows/m3-jep485-stream-gatherers-optin.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recipe-dag-proof:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: 1 - Diff hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+
+      - name: 2 - Materializer syntax and unit proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile             m3/backports/recipes/jep-485-gatherers/materialize.py             m3/backports/recipes/jep-485-gatherers/test_materialize.py
+          python3 m3/backports/recipes/jep-485-gatherers/test_materialize.py
+
+      - name: 3 - Prove OpenRewrite replay scope and fixed point
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3Jep485StreamGatherersBackportRecipeTest,M3RecipeScopeDeclarationTest             test
+
+      - name: 4 - Prove Java21 identity policy remains opt-in
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          catalogue = Path("m3/backports/JEP_CATALOGUE.tsv").read_text(encoding="utf-8").splitlines()
+          priority = Path("m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv").read_text(encoding="utf-8").splitlines()
+          policy = Path("m3/backports/recipes/jep-485-gatherers/POLICY.tsv").read_text(encoding="utf-8").splitlines()
+
+          catalogue_rows = [line.split("\t") for line in catalogue[1:] if line.startswith("24\t485\t")]
+          assert len(catalogue_rows) == 1, catalogue_rows
+          assert catalogue_rows[0][4] == "hold-compat", catalogue_rows[0]
+
+          jep = [line.split("\t") for line in priority[1:] if line.startswith("485\t")]
+          assert len(jep) == 1, jep
+          row = jep[0]
+          assert row[3] == "OPT_IN_SE_API_EXTENSION", row
+          assert row[4] == "NO", row
+
+          packet = [line.split("\t") for line in policy[1:] if line.strip()]
+          assert packet == [[
+              "485",
+              "OPT_IN_SE_API_EXTENSION",
+              "NO",
+              "LIBRARY_API",
+              "EXPLICIT_CONTRACT_CHANGE",
+              "false",
+          ]], packet
+          PY
+
+      - name: 5 - Validate packet and atom evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketMain             -Dexec.args="$PWD/m3/backports/recipes/jep-485-gatherers/packet.tsv $PWD/m3/backports/recipes/jep-485-gatherers/atom-evidence.tsv"             exec:java
+
+      - name: 6 - Project exact packet to Camel Airflow and Drools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/jep485-projection
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain             -Dexec.args="$PWD/m3/backports/recipes/jep-485-gatherers/packet.tsv $PWD/target/jep485-projection $PWD/m3/backports/recipes/jep-485-gatherers/atom-evidence.tsv"             exec:java
+          test -s target/jep485-projection/M3BackportRoutes.java
+          test -s target/jep485-projection/m3_backport_dag.py
+          test -s target/jep485-projection/m3_backport_rules.drl
+          test -s target/jep485-projection/atom-evidence.tsv
+
+      - name: 7 - Verify backport metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/backports/pom.xml verify
+          python3 m3/backports/program_status.py --root .             --json-out target/jep485-program-status.json             --tsv-out target/jep485-program-status.tsv
+
+      - name: 8 - Upload recipe DAG evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: jep485-optin-recipe-dag-${{ github.run_id }}
+          path: |
+            target/jep485-projection
+            m3/backports/recipes/jep-485-gatherers/POLICY.tsv
+            target/jep485-program-status.json
+            target/jep485-program-status.tsv
+          if-no-files-found: warn
+          retention-days: 30
+
+  openjdk-proof:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 110
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: 1 - Verify exact current-master preimages
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p $RUNNER_TEMP/jep485-proof
+          python3 m3/backports/recipes/jep-485-gatherers/materialize.py             --root "$PWD"             --mode check             --receipt $RUNNER_TEMP/jep485-proof/preimage.tsv
+          test -z "$(git status --porcelain=v1 -uall)"
+
+      - name: 2 - Materialize opt-in candidate in ephemeral checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/recipes/jep-485-gatherers/materialize.py             --root "$PWD"             --mode apply             --acknowledge-opt-in-se-api JEP485             --receipt $RUNNER_TEMP/jep485-proof/apply.tsv
+          python3 m3/backports/recipes/jep-485-gatherers/materialize.py             --root "$PWD"             --mode verify-post             --receipt $RUNNER_TEMP/jep485-proof/postimage.tsv
+          git diff --check
+
+      - name: 3 - Prove only manifest-declared product paths changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+
+          manifest = Path(
+              "m3/tooling/migration-recipes/src/main/resources/"
+              "com/m3/rewrite/backport/jdk21-hash-pinned/"
+              "jdk24-jep485-stream-gatherers/manifest.tsv"
+          )
+          expected = sorted(
+              line.split("\t", 1)[0]
+              for line in manifest.read_text(encoding="utf-8").splitlines()
+              if line and not line.startswith("#")
+          )
+          status = subprocess.check_output(
+              ["git", "status", "--porcelain=v1", "-uall"], text=True
+          )
+          actual = sorted(
+              line[3:]
+              for line in status.splitlines()
+              if line and line[3:] != "target/"
+          )
+          # target/ is gitignored; only source/test product paths should be visible.
+          if actual != expected:
+              raise SystemExit(
+                  "materialized path set differs from manifest\n"
+                  f"expected={expected}\nactual={actual}"
+              )
+          PY
+
+      - name: 4 - Install OpenJDK build prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends             autoconf make gcc g++ zip unzip             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev             libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
+
+      - name: 5 - Configure Java 21-compatible JDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash configure             --with-boot-jdk="$JAVA_HOME"             --with-debug-level=release             --with-jvm-variants=server             --disable-warnings-as-errors
+
+      - name: 6 - Build opt-in JDK image
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 images
+
+      - name: 7 - Run JDK24 GA Gatherer jtreg family
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 test TEST="          test/jdk/java/util/stream/GathererAPITest.java           test/jdk/java/util/stream/GathererShortCircuitTest.java           test/jdk/java/util/stream/GathererTest.java           test/jdk/java/util/stream/GatherersFoldTest.java           test/jdk/java/util/stream/GatherersMapConcurrentTest.java           test/jdk/java/util/stream/GatherersScanTest.java           test/jdk/java/util/stream/GatherersWindowFixedTest.java           test/jdk/java/util/stream/GatherersWindowSlidingTest.java"
+
+      - name: 8 - Preserve existing recursive and short-circuit stream behavior
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 test TEST="          test/jdk/java/util/stream/test/org/openjdk/tests/java/util/stream/FlatMapOpTest.java           test/jdk/java/util/stream/test/org/openjdk/tests/java/util/stream/InfiniteStreamWithLimitOpTest.java"
+
+      - name: 9 - Compile and execute final API smoke with built JDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          JDK_IMAGE="$(find build -path '*/images/jdk' -type d | head -n 1)"
+          test -x "$JDK_IMAGE/bin/java"
+          test -x "$JDK_IMAGE/bin/javac"
+
+          tmp="$(mktemp -d)"
+          trap 'rm -rf "$tmp"' EXIT
+
+          cat > "$tmp/GatherSmoke.java" <<'EOF'
+          import java.util.List;
+          import java.util.stream.Gatherers;
+          import java.util.stream.Stream;
+
+          public class GatherSmoke {
+              public static void main(String[] args) {
+                  var windows =
+                          Stream.of(1, 2, 3, 4, 5)
+                                  .gather(Gatherers.windowFixed(2))
+                                  .toList();
+                  if (!windows.equals(
+                          List.of(List.of(1, 2), List.of(3, 4), List.of(5)))) {
+                      throw new AssertionError(windows);
+                  }
+
+                  var scan =
+                          Stream.of(1, 2, 3, 4)
+                                  .gather(Gatherers.scan(() -> 0, Integer::sum))
+                                  .toList();
+                  if (!scan.equals(List.of(1, 3, 6, 10))) {
+                      throw new AssertionError(scan);
+                  }
+
+                  var concurrent =
+                          Stream.of(1, 2, 3, 4)
+                                  .gather(Gatherers.mapConcurrent(2, value -> value * 2))
+                                  .toList();
+                  if (!concurrent.equals(List.of(2, 4, 6, 8))) {
+                      throw new AssertionError(concurrent);
+                  }
+
+                  System.out.println("JEP485_OPTIN_SMOKE_OK");
+              }
+          }
+          EOF
+
+          "$JDK_IMAGE/bin/javac" -d "$tmp" "$tmp/GatherSmoke.java"
+          test "$("$JDK_IMAGE/bin/java" -cp "$tmp" GatherSmoke)" = "JEP485_OPTIN_SMOKE_OK"
+
+      - name: 10 - Upload opt-in build proof
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: jep485-optin-openjdk-proof-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/jep485-proof
+            build/*/test-results/**
+          if-no-files-found: warn
+          retention-days: 14

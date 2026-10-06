@@ -29,7 +29,7 @@ release	jep	title	domain	disposition	reason	superseded_by
 24	478	Key Derivation Function API (Preview)	security-library	superseded	Use final JEP 510.	510
 24	479	Remove the Windows 32-bit x86 Port	removal	reject-compat	Removal conflicts with JDK 21 compatibility preservation.	
 24	484	Class-File API	library	candidate	Final library API; no Java grammar change, but requires classfile/version compatibility audit.	
-24	485	Stream Gatherers	library	candidate	Final library API; no Java grammar change.	
+24	485	Stream Gatherers	library	hold-compat	Final post-21 java.util.stream SE API; retain only as explicit opt-in LIBRARY_API extension so default Java21 identity stays sealed.	
 24	486	Permanently Disable the Security Manager	compatibility-security	reject-compat	Intentional behavioral incompatibility with JDK 21.	
 24	487	Scoped Values (Fourth Preview)	library-runtime	superseded	Use final JEP 506.	506
 24	488	Primitive Types in Patterns, instanceof, and switch (Second Preview)	language	reject-language	Requires Java grammar/javac semantic changes.	
