@@ -69,6 +69,16 @@ for path, text in [
     if retained_arrays:
         fail(f"{path} retains array field(s): {retained_arrays!r}")
 
+# Encoding facts must be executable, not decorative metadata.
+for fragment in [
+    "if (prepared.ascii) {",
+    "(!asciiOnly && prepared.latin1)",
+    "if (prepared.latin1) {",
+    "getBytes(output, 0, 0, String.LATIN1, length());",
+]:
+    if fragment not in m3:
+        fail(f"M3 byte precompute fast path missing: {fragment}")
+
 # Byte/char projections must descend through canonical owner geometry, not walk M3 tuple
 # charAt one unit at a time.
 if "owner.getBytes(" not in m3:
