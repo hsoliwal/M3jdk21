@@ -1,0 +1,9 @@
+order	jbs	commit	purpose	action
+1	JDK-8319123	33b26f79a986d015abdcd84b89842adc0a4bde64	Implement JEP 461 Stream Gatherers preview	ABSORB_BASE
+2	JDK-8328316	ab28045d7785d948b2bce685f06043e8217961f4	Allow finisher output after sequential integrator short-circuit	ABSORB_FIX
+3	JDK-8334162	cff048c7354dd947a3946d262f4752a55b7e2a43	Correct defaultCombiner Javadoc link	ABSORB_FIX
+4	JDK-8342707	ef0dc2518e7636cc8a9ca580613ff5edeb4c19fd	Graduate Gatherers from Preview for JEP 485	ABSORB_FINAL
+5	JDK-8347274	450636ae28b84ded083b6861c6cba85fbf87e16e	Correct mapConcurrent delays interruption and finishing	ABSORB_FIX
+6	JDK-8357647	aea32ec5060a2e57947dc3e5d14613241e223ce4	Forward upstream size information downstream	ABSORB_FIX
+X	JDK-8325949	384deda65fd63e23d4caaaa9762f2ac80de78029	Introduce MhUtil helper	ADAPT_NOT_COPY
+X	JDK-8196106	8a5b86c52954f6917acfda11df183691beb07f56	Broader flatMap short-circuit refactor	EXCLUDE_UNRELATED

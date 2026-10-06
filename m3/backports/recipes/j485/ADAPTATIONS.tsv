@@ -1,0 +1,7 @@
+id	path	upstream_shape	java21_adaptation	contract
+J485-A1	src/java.base/share/classes/java/util/stream/GathererOp.java	MhUtil.findVarHandle(MethodHandles.lookup(), "next", Hybrid.class)	Use Lookup.findVarHandle(Hybrid.class,"next",Hybrid.class) in a static initializer; catch ReflectiveOperationException and throw InternalError	Identical success/failure semantics without importing post-21 helper
+J485-A2	test/jdk/java/util/stream/GathererShortCircuitTest.java	Unnamed _ lambda parameters	Rename to ignoredState / ignoredElement as appropriate	Test behavior unchanged; source-21 compilation restored
+J485-A3	test/jdk/java/util/stream/GathererTest.java	Unnamed _ lambda parameter	Rename to ignored	Test behavior unchanged; source-21 compilation restored
+J485-A4	src/java.base/share/classes/java/util/stream/Stream.java	Preview import/annotation from JEP 461	Use graduated JEP 485 API form with no PreviewFeature annotation	Final API semantics
+J485-A5	src/java.base/share/classes/jdk/internal/javac/PreviewFeature.java	Preview enum entry existed in preview lineage	Do not add preview entry	Final API is not preview
+J485-A6	test/jdk/lib/testlibrary/bootlib/java.base/java/util/stream/DefaultMethodStreams.java	Copyright-only original JEP delta	Exclude	No functional dependency

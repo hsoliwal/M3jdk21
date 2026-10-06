@@ -1,0 +1,15 @@
+src/java.base/share/classes/java/util/stream/Gatherer.java
+src/java.base/share/classes/java/util/stream/GathererOp.java
+src/java.base/share/classes/java/util/stream/Gatherers.java
+src/java.base/share/classes/java/util/stream/AbstractPipeline.java
+src/java.base/share/classes/java/util/stream/ReferencePipeline.java
+src/java.base/share/classes/java/util/stream/Stream.java
+src/java.base/share/classes/java/util/stream/package-info.java
+test/jdk/java/util/stream/GathererAPITest.java
+test/jdk/java/util/stream/GathererShortCircuitTest.java
+test/jdk/java/util/stream/GathererTest.java
+test/jdk/java/util/stream/GatherersFoldTest.java
+test/jdk/java/util/stream/GatherersMapConcurrentTest.java
+test/jdk/java/util/stream/GatherersScanTest.java
+test/jdk/java/util/stream/GatherersWindowFixedTest.java
+test/jdk/java/util/stream/GatherersWindowSlidingTest.java

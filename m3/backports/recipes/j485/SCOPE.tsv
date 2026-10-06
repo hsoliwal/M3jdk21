@@ -1,0 +1,15 @@
+field	value
+packet	J485
+jep	485
+title	Stream Gatherers
+source_release	24 final + later compatible fixes through JDK-8357647
+target	M3JDK21
+scope_floor	LIBRARY_API
+default_java21_identity	LOCKED_NOT_STOCK_21
+distribution_state	CANDIDATE_NOT_SELECTED
+recipe_strategy	FILE_ATOMS_THEN_EXPLICIT_LIB_API_DAG
+java21_language_syntax	PASS_STATIC_AUDIT
+missing_internal_dependency	MhUtil only; adapt locally
+patched_module_compile	PENDING
+jtreg	PENDING
+whole_image	BLOCKED_OS_DEV_HEADERS
