@@ -10,7 +10,9 @@ import csv
 import hashlib
 from pathlib import Path
 
-EXPECTED_RELEASE_COUNTS = {22: 12, 23: 12, 24: 22, 25: 17, 26: 10, 27: 9}
+import release_jep_authority
+
+EXPECTED_RELEASE_COUNTS = {22: 12, 23: 12, 24: 24, 25: 18, 26: 10, 27: 9}
 EXPECTED_TOTAL = sum(EXPECTED_RELEASE_COUNTS.values())
 
 
@@ -371,6 +373,7 @@ def parse_args() -> argparse.Namespace:
 def main() -> int:
     args = parse_args()
     root = args.root.resolve()
+    release_jep_authority.verify_repository_authority(root)
     verify_jeps(root)
     verify_seed(root)
     verify_community_fork_catalog(root)
@@ -379,7 +382,7 @@ def main() -> int:
     verify_security_properties_8364182_backport(root)
     verify_keystore_instant_8374808_backport(root)
     print(
-        "PASS: 82 JEP rows, non-JEP seed uniqueness, community fork catalogue authority, "
+        "PASS: 85 released JEP rows with release-authority closure, non-JEP seed uniqueness, community fork catalogue authority, "
         "exact JDK-8357439 donor blobs, "
         "JDK-8347112 javadoc adaptation, JDK-8364182 serviceability adaptation, "
         "and JDK-8374808 KeyStore Instant compatibility leaf"
