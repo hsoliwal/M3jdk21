@@ -7,6 +7,7 @@
 package java.lang;
 
 import java.lang.ref.WeakReference;
+import java.util.concurrent.atomic.AtomicLongArray;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
 /**
@@ -47,7 +48,7 @@ final class M3StringPositionPrecompute {
         while (index < end) {
             int block = index >>> BLOCK_SHIFT;
             int blockEnd = Math.min(end, (block + 1) << BLOCK_SHIFT);
-            if ((blocks.signals[block] & required) != required) {
+            if ((blockSignal(source, blocks, block) & required) != required) {
                 index = blockEnd;
                 continue;
             }
@@ -72,7 +73,7 @@ final class M3StringPositionPrecompute {
         while (index >= 0) {
             int block = index >>> BLOCK_SHIFT;
             int blockStart = block << BLOCK_SHIFT;
-            if ((blocks.signals[block] & required) != required) {
+            if ((blockSignal(source, blocks, block) & required) != required) {
                 index = blockStart - 1;
                 continue;
             }
@@ -104,12 +105,7 @@ final class M3StringPositionPrecompute {
             return entry.blocks;
         }
 
-        long[] signals = new long[(length + BLOCK_MASK) >>> BLOCK_SHIFT];
-        for (int index = 0; index < length; index++) {
-            signals[index >>> BLOCK_SHIFT] |=
-                    M3StringFacts.codeUnitSignal(source.charAt(index));
-        }
-        Blocks blocks = new Blocks(signals);
+        Blocks blocks = new Blocks((length + BLOCK_MASK) >>> BLOCK_SHIFT);
         CACHE.set(
                 slot,
                 new Entry(
@@ -118,6 +114,25 @@ final class M3StringPositionPrecompute {
                         length,
                         blocks));
         return blocks;
+    }
+
+    private static long blockSignal(M3String source, Blocks blocks, int block) {
+        long current = blocks.signals.get(block);
+        if (current != 0L) return current;
+
+        int start = block << BLOCK_SHIFT;
+        int end = Math.min(source.length(), start + BLOCK_SIZE);
+        long computed = 0L;
+        for (int index = start; index < end; index++) {
+            computed |= M3StringFacts.codeUnitSignal(source.charAt(index));
+        }
+        if (computed == 0L) {
+            throw new InternalError("M3 position block produced empty signal");
+        }
+        if (blocks.signals.compareAndSet(block, 0L, computed)) {
+            return computed;
+        }
+        return blocks.signals.get(block);
     }
 
     private static int linearIndexOf(M3String source, char unit, int from, int end) {
@@ -145,10 +160,10 @@ final class M3StringPositionPrecompute {
     }
 
     private static final class Blocks {
-        final long[] signals;
+        final AtomicLongArray signals;
 
-        Blocks(long[] signals) {
-            this.signals = signals;
+        Blocks(int blockCount) {
+            this.signals = new AtomicLongArray(blockCount);
         }
     }
 
