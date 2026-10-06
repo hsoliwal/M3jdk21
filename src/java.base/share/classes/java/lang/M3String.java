@@ -630,6 +630,13 @@ final class M3String implements CharSequence {
         return true;
     }
 
+    int indexOfLineTerminator(int fromIndex) {
+        M3StringFacts prepared = factsIfPrepared();
+        if (prepared != null && !prepared.hasLineTerminator) return -1;
+        return M3StringPositionPrecompute.indexOfEither(
+                this, '\n', '\r', fromIndex, length());
+    }
+
     int indexOf(char unit, int fromIndex, int endIndex) {
         M3StringFacts prepared = factsIfPrepared();
         if (prepared != null && !prepared.mayContainCodeUnit(unit)) return -1;
