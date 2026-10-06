@@ -112,6 +112,15 @@ for fragment in [
     if fragment not in m3:
         fail(f"M3 byte precompute fast path missing: {fragment}")
 
+# Bulk byte projection validates coder and byte geometry before descending into owner recursion.
+for fragment in [
+    "destinationCoder != String.LATIN1 && destinationCoder != String.UTF16",
+    "(long) destinationBegin << destinationCoder",
+    "(long) count << destinationCoder",
+]:
+    if fragment not in m3:
+        fail(f"M3 bulk byte entry validation missing: {fragment}")
+
 # Byte/char projections must descend through canonical owner geometry, not walk M3 tuple
 # charAt one unit at a time.
 if "owner.getBytes(" not in m3:
