@@ -7624,6 +7624,12 @@
       "build/runtime/JNI tests",
       "final promotion"
     ],
-    "portable_semantics_owner": "Synexia"
+    "portable_semantics_owner": "Synexia",
+    "source_origin_commit": "1b954f886f0a40684c84bac443851d9fe4af1764",
+    "source_pr_status": "hsoliwal/com.synexia#9489 closed historical review; canonical packet is present on develop",
+    "executable_verifier_recipe": "com.synexia.rewrite.M3StringCanonicalDagInvariant",
+    "executable_verifier_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3StringCanonicalDagInvariantRecipe.java",
+    "executable_verifier_pr": "hsoliwal/com.synexia#9524",
+    "executable_verifier_role": "Synexia-owned executable verification/mastery engine for the canonical packet; no M3JDK runtime dependency"
   }
 }
