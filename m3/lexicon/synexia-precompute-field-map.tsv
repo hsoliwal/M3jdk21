@@ -26,3 +26,17 @@ IndexWordSignalProfile	presence64	long	presence64	synexia.records.tsv:precompute
 IndexWordSignalProfile	simHash64	long	sim_hash64	synexia.records.tsv:precompute_payload	MAPPED	probabilistic signature remains donor-owned and opaque
 IndexWordSignalProfile	frequencyRank	int	frequency_rank	synexia.records.tsv:precompute_payload	MAPPED	frequency ordering remains source metadata, never image_row identity
 IndexWordSignalFlags	EMPTY/ASCII/LATIN1/...	int	flags	synexia.records.tsv:precompute_payload	MAPPED	profile flags are preserved only when supplied; bounded M3StringFacts remain independently verified
+LangDexProjection.Entry	conceptId	long	langdex_concept_id	synexia.records.tsv:precompute_payload	MAPPED	validated nonzero LangDex concept coordinate remains donor-owned and is not renumbered
+LangDexProjection.Entry	frequency	long	langdex_frequency	synexia.records.tsv:precompute_payload	MAPPED	validated nonnegative LangDex frequency remains source metadata
+LangDexProjection.Entry	flags	int	langdex_flags	synexia.records.tsv:precompute_payload	MAPPED	validated unsigned-16-bit LangDex entry flags remain opaque
+LangDexWordProfile	lexicalClassMask	long	langdex_lexical_class_mask	synexia.records.tsv:precompute_payload	MAPPED	primitive lexical class mask is retained without reclassification
+LangDexWordProfile	semanticClassMask	long	langdex_semantic_class_mask	synexia.records.tsv:precompute_payload	MAPPED	primitive semantic class mask is retained without reclassification
+LangDexWordProfile	subjectId	int	langdex_subject_id	synexia.records.tsv:precompute_payload	MAPPED	validated LangDex subject coordinate remains donor-owned
+LangDexWordProfile	featureBits	int	langdex_feature_bits	synexia.records.tsv:precompute_payload	MAPPED	morphology/feature bits remain donor-owned and opaque
+LangDexWordProfile	evidenceMask	int	langdex_evidence_mask	synexia.records.tsv:precompute_payload	MAPPED	evidence bits remain donor-owned and opaque
+LangDexWordProfile	confidencePermille	int	langdex_confidence_permille	synexia.records.tsv:precompute_payload	MAPPED	confidence remains bounded donor metadata in the inclusive 0..1000 range
+LangDexLexicalProfile	lexicalClassMask	long	langdex_lexical_class_mask	synexia.records.tsv:precompute_payload	MAPPED	profile-level lexical class mask shares the LangDex canonical type
+LangDexLexicalProfile	featureBits	int	langdex_feature_bits	synexia.records.tsv:precompute_payload	MAPPED	profile-level feature bits share the LangDex canonical type
+LangDexLexicalProfile	evidenceMask	int	langdex_evidence_mask	synexia.records.tsv:precompute_payload	MAPPED	profile-level evidence bits share the LangDex canonical type
+LangDexLexicalProfile	confidencePermille	int	langdex_confidence_permille	synexia.records.tsv:precompute_payload	MAPPED	profile-level confidence shares the LangDex canonical type and bound
+LangDexTranslation	targetLexemeId	long	langdex_target_lexeme_id	synexia.records.tsv:precompute_payload	MAPPED	target lexeme coordinate remains donor-owned and is not substituted with image_row

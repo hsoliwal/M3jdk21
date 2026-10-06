@@ -221,6 +221,7 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual(10, len(sources))
         self.assertEqual(12, len(sources["dictlang.dictionary"]["precompute_fields"].split(",")))
         self.assertEqual(15, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
+        self.assertEqual(10, len(sources["unicodex.langdex.lexemes"]["precompute_fields"].split(",")))
         self.assertEqual("", sources["translate.rows"]["precompute_fields"])
         self.assertEqual("", sources["dictlang.numbers.0-10000"]["precompute_fields"])
 
@@ -244,6 +245,56 @@ class SynexiaExportTest(unittest.TestCase):
                           "dictlang.thesaurus", "dictlang.antonyms"):
             required = set(sources[source_id]["precompute_fields"].split(","))
             self.assertTrue(required.issubset(mapped), source_id)
+
+    def test_langdex_owner_payload_round_trips_with_admitted_shapes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source_id = "unicodex.langdex.lexemes"
+            source_path = "synexia-unicodex/docs/langdex/UPSTREAM_SCHEMA.tsv"
+            sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
+            requirement = sources[source_id]["precompute_fields"]
+            manifest = root / "sources.tsv"
+            manifest.write_text(
+                "\t".join(EXPORT.MANIFEST_COLUMNS_V2) + "\n"
+                + "\t".join((source_id, "LangDex lexemes", source_path, "lexeme_id",
+                              "glottocode,lemma,source,concept_id",
+                              "M3StringFacts + LangDexCoordinate", "CC-BY-SA-3.0",
+                              "fixture", requirement)) + "\n",
+                encoding="utf-8",
+            )
+            payload = {
+                "langdex_concept_id": 42,
+                "langdex_confidence_permille": 950,
+                "langdex_evidence_mask": 3,
+                "langdex_feature_bits": 7,
+                "langdex_flags": 1,
+                "langdex_frequency": 9,
+                "langdex_lexical_class_mask": 1,
+                "langdex_semantic_class_mask": 2,
+                "langdex_subject_id": 4,
+                "langdex_target_lexeme_id": 77,
+            }
+            records = root / "records.tsv"
+            records.write_text(
+                "\t".join(EXPORT.RECORD_COLUMNS_V2) + "\n"
+                + "\t".join((source_id, source_path, "lexeme", "x-glotto-abcd1234",
+                              "17", "bonjour", "concept:42", "BONJOUR", "-",
+                              "M3StringFacts + LangDexCoordinate",
+                              json.dumps(payload, separators=(",", ":")))) + "\n",
+                encoding="utf-8",
+            )
+            output = root / "output"
+            EXPORT.export(manifest, records, output, "fixture", "3e85c872adf556901a341a9eb1c3b59864918da1",
+                          ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
+            mapping = list(csv.DictReader(
+                (output / "synexia.records.tsv").read_text(encoding="utf-8").splitlines(),
+                delimiter="\t"))[0]
+            self.assertEqual(payload, json.loads(mapping["precompute_payload"]))
+            export_manifest = json.loads((output / "synexia.export.json").read_text(encoding="utf-8"))
+            self.assertEqual(10, len(export_manifest["source"]["precompute_fields"][source_id]))
+            self.assertEqual("long", export_manifest["source"]["precompute_field_types"]["langdex_concept_id"])
+            self.assertEqual("int", export_manifest["source"]["precompute_field_types"]["langdex_flags"])
+            VERIFY.verify(output)
 
     def test_replay_is_byte_identical_except_for_output_location(self):
         with tempfile.TemporaryDirectory() as directory:
