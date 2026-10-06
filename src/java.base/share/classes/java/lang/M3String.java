@@ -305,10 +305,14 @@ final class M3String implements CharSequence {
 
     void getBytes(byte[] destination, int sourceBegin, int destinationBegin, byte destinationCoder,
             int count) {
+        Objects.requireNonNull(destination, "destination");
+        if (destinationCoder != String.LATIN1 && destinationCoder != String.UTF16) {
+            throw new IllegalArgumentException("invalid destination String coder");
+        }
         Objects.checkFromIndexSize(sourceBegin, count, length());
         Objects.checkFromIndexSize(
-                destinationBegin << destinationCoder,
-                count << destinationCoder,
+                (long) destinationBegin << destinationCoder,
+                (long) count << destinationCoder,
                 destination.length);
         owner.getBytes(
                 Math.addExact(start(), sourceBegin),
