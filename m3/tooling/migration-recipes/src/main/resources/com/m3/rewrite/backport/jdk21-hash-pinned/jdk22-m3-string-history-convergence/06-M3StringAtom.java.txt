@@ -72,6 +72,34 @@ final class M3StringAtom extends M3StringOwner {
                 null, address, width, true, length, coder, javaHash, canonicalId, structuralHash64);
     }
 
+    static M3StringAtom localUnit(
+            char unit, byte coder, long canonicalId, long structuralHash64) {
+        if (coder != String.LATIN1 && coder != String.UTF16) {
+            throw new IllegalArgumentException("invalid String coder");
+        }
+        if (coder == String.LATIN1 && unit > 0xff) {
+            throw new IllegalArgumentException("Latin1 unit out of range");
+        }
+        byte width = coder == String.LATIN1 ? (byte) 1 : (byte) 2;
+        long address = UNSAFE.allocateMemory(width);
+        if (width == 1) {
+            UNSAFE.putByte(address, (byte) unit);
+        } else {
+            UNSAFE.putByte(address, (byte) (unit >>> 8));
+            UNSAFE.putByte(address + 1L, (byte) unit);
+        }
+        return new M3StringAtom(
+                null,
+                address,
+                width,
+                true,
+                1,
+                coder,
+                unit,
+                canonicalId,
+                structuralHash64);
+    }
+
     static M3StringAtom mapped(
             Object payloadOwner,
             long address,
