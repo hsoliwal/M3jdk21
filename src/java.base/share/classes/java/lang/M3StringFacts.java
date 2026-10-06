@@ -21,6 +21,19 @@ final class M3StringFacts {
     private static final int UTF8_REPLACEMENT_BYTES =
             java.nio.charset.StandardCharsets.UTF_8.newEncoder().replacement().length;
 
+    static final int FLAG_ASCII = 1;
+    static final int FLAG_LATIN1 = 1 << 1;
+    static final int FLAG_HAS_ASCII_UPPER = 1 << 2;
+    static final int FLAG_HAS_ASCII_LOWER = 1 << 3;
+    static final int FLAG_HAS_SURROGATE = 1 << 4;
+    static final int FLAG_BLANK = 1 << 5;
+    static final int FLAG_EMPTY = 1 << 6;
+    static final int FLAG_HAS_ASCII_DIGIT = 1 << 7;
+    static final int FLAG_HAS_ASCII_WORD = 1 << 8;
+    static final int FLAG_HAS_ASCII_SPACE = 1 << 9;
+    private static final int UNIVERSAL_FLAGS =
+            FLAG_ASCII | FLAG_LATIN1 | FLAG_BLANK | FLAG_EMPTY;
+
     final int utf16Length;
     final int utf8Length;
     final int codePointCount;
@@ -30,6 +43,7 @@ final class M3StringFacts {
     final char firstUtf16Unit;
     final char lastUtf16Unit;
     final long bitSignal64;
+    final int characterFlags;
     final boolean ascii;
     final boolean latin1;
 
@@ -62,6 +76,7 @@ final class M3StringFacts {
             char firstUtf16Unit,
             char lastUtf16Unit,
             long bitSignal64,
+            int characterFlags,
             boolean ascii,
             boolean latin1,
             int asciiUpperHash,
@@ -84,6 +99,7 @@ final class M3StringFacts {
         this.firstUtf16Unit = firstUtf16Unit;
         this.lastUtf16Unit = lastUtf16Unit;
         this.bitSignal64 = bitSignal64;
+        this.characterFlags = characterFlags;
         this.ascii = ascii;
         this.latin1 = latin1;
         this.asciiUpperHash = asciiUpperHash;
@@ -106,6 +122,8 @@ final class M3StringFacts {
         int codePoints = 0;
         int unpaired = 0;
         long signal = 0L;
+        int characterFlags =
+                FLAG_ASCII | FLAG_LATIN1 | FLAG_BLANK | (length == 0 ? FLAG_EMPTY : 0);
         boolean ascii = true;
         boolean latin1 = true;
         long prefix = 0L;
@@ -126,6 +144,7 @@ final class M3StringFacts {
             last = unit;
             hash = 31 * hash + unit;
             signal = addSignal(signal, unit);
+            characterFlags = addCharacterFlags(characterFlags, unit);
             ascii &= unit <= 0x7f;
             latin1 &= unit <= 0xff;
             upperHash = 31 * upperHash + asciiUpper(unit);
@@ -163,6 +182,7 @@ final class M3StringFacts {
             codePoints++;
 
             boolean whitespace = Character.isWhitespace(codePoint);
+            if (!whitespace) characterFlags &= ~FLAG_BLANK;
             if (leadingStrip) {
                 if (whitespace) stripStart = codePointStart + width;
                 else leadingStrip = false;
@@ -193,6 +213,7 @@ final class M3StringFacts {
                 first,
                 last,
                 signal,
+                characterFlags,
                 ascii,
                 latin1,
                 upperHash,
@@ -249,6 +270,9 @@ final class M3StringFacts {
                 left.bigramSignal64 | right.bigramSignal64,
                 left.lastUtf16Unit,
                 right.firstUtf16Unit);
+        int characterFlags =
+                ((left.characterFlags & right.characterFlags) & UNIVERSAL_FLAGS)
+                        | ((left.characterFlags | right.characterFlags) & ~UNIVERSAL_FLAGS);
         long trigrams = left.trigramSignal64 | right.trigramSignal64;
         if (left.utf16Length >= 2) {
             trigrams = addTrigramSignal(
@@ -276,8 +300,9 @@ final class M3StringFacts {
                 left.firstUtf16Unit,
                 right.lastUtf16Unit,
                 left.bitSignal64 | right.bitSignal64,
-                left.ascii && right.ascii,
-                left.latin1 && right.latin1,
+                characterFlags,
+                (characterFlags & FLAG_ASCII) != 0,
+                (characterFlags & FLAG_LATIN1) != 0,
                 left.asciiUpperHash * right.hash31Power + right.asciiUpperHash,
                 left.asciiLowerHash * right.hash31Power + right.asciiLowerHash,
                 left.asciiTitleHash * right.hash31Power + right.asciiLowerHash,
@@ -314,6 +339,34 @@ final class M3StringFacts {
         if (width == 0) return true;
         long mask = width == 4 ? -1L : (1L << (width * 16)) - 1L;
         return (suffix4 & mask) == (suffix.suffix4 & mask);
+    }
+
+    boolean blank() {
+        return (characterFlags & FLAG_BLANK) != 0;
+    }
+
+    boolean hasAsciiUpper() {
+        return (characterFlags & FLAG_HAS_ASCII_UPPER) != 0;
+    }
+
+    boolean hasAsciiLower() {
+        return (characterFlags & FLAG_HAS_ASCII_LOWER) != 0;
+    }
+
+    boolean hasAsciiDigit() {
+        return (characterFlags & FLAG_HAS_ASCII_DIGIT) != 0;
+    }
+
+    boolean hasAsciiWord() {
+        return (characterFlags & FLAG_HAS_ASCII_WORD) != 0;
+    }
+
+    boolean hasAsciiSpace() {
+        return (characterFlags & FLAG_HAS_ASCII_SPACE) != 0;
+    }
+
+    boolean hasSurrogate() {
+        return (characterFlags & FLAG_HAS_SURROGATE) != 0;
     }
 
     boolean mayContainCodeUnit(char unit) {
@@ -380,6 +433,18 @@ final class M3StringFacts {
         mixed ^= mixed >>> 15;
         mixed *= 0x846ca68b;
         return mixed ^ (mixed >>> 16);
+    }
+
+    private static int addCharacterFlags(int flags, char value) {
+        if (value > 0x7f) flags &= ~FLAG_ASCII;
+        if (value > 0xff) flags &= ~FLAG_LATIN1;
+        if (value >= 'A' && value <= 'Z') flags |= FLAG_HAS_ASCII_UPPER | FLAG_HAS_ASCII_WORD;
+        if (value >= 'a' && value <= 'z') flags |= FLAG_HAS_ASCII_LOWER | FLAG_HAS_ASCII_WORD;
+        if (value >= '0' && value <= '9') flags |= FLAG_HAS_ASCII_DIGIT | FLAG_HAS_ASCII_WORD;
+        if (value == '_') flags |= FLAG_HAS_ASCII_WORD;
+        if (value == ' ' || (value >= '\t' && value <= '\r')) flags |= FLAG_HAS_ASCII_SPACE;
+        if (Character.isSurrogate(value)) flags |= FLAG_HAS_SURROGATE;
+        return flags;
     }
 
     private static char asciiUpper(char value) {
