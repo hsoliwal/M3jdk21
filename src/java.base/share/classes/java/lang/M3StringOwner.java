@@ -68,6 +68,21 @@ abstract sealed class M3StringOwner permits M3StringAtom, M3StringTuple {
         }
     }
 
+    final M3StringFacts factsIfPrepared() {
+        return facts;
+    }
+
+    final M3StringFacts rangeFactsIfPrepared(long coordinate) {
+        RangeFact first = range0;
+        if (first != null && first.coordinate == coordinate) return first.facts;
+        RangeFact second = range1;
+        if (second != null && second.coordinate == coordinate) return second.facts;
+        RangeFact third = range2;
+        if (third != null && third.coordinate == coordinate) return third.facts;
+        RangeFact fourth = range3;
+        return fourth != null && fourth.coordinate == coordinate ? fourth.facts : null;
+    }
+
     final M3StringFacts facts() {
         M3StringFacts current = facts;
         if (current != null) return current;
