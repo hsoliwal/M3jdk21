@@ -42,6 +42,7 @@ mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
 native_string = read("src/java.base/share/native/libjava/String.c")
+hotspot_jni = read("src/hotspot/share/prims/jni.cpp")
 native_encoding_java = read("test/jdk/java/lang/String/nativeEncoding/StringPlatformChars.java")
 native_encoding_c = read("test/jdk/java/lang/String/nativeEncoding/libstringPlatformChars.c")
 arguments = read("src/hotspot/share/runtime/arguments.cpp")
@@ -389,6 +390,18 @@ copy_chars_body = re.search(
 )
 if not copy_chars_body or "char_at(value, start + index)" in copy_chars_body.group("body"):
     fail("HotSpot M3 copy_chars reintroduced per-unit char_at traversal")
+
+# JNI StringCritical may return a required native copy for M3, but it must fill that copy through
+# the same canonical bulk accessor as GetStringChars/Region, not per-unit VM dispatch.
+critical = re.search(
+    r"jni_GetStringCritical\((?P<body>.*?)\n\}?",
+    hotspot_jni,
+    flags=re.DOTALL,
+)
+if "java_lang_String::copy_chars(s, 0, s_len, ret);" not in hotspot_jni:
+    fail("GetStringCritical lost canonical bulk copy")
+if "ret[i] = java_lang_String::char_at(s, i);" in hotspot_jni:
+    fail("GetStringCritical reintroduced per-unit M3 VM dispatch")
 
 # JNI creates only the final compatibility arrays, then bulk-fills them from canonical M3
 # storage. Per-code-unit JNI dispatch and temporary C spelling buffers are forbidden.
