@@ -32,3 +32,4 @@ jep	release	title	classification	default_java21	dependency	owner_lane	evidence_u
 515	25	Ahead-of-Time Method Profiling	COMPATIBLE_RUNTIME	CANDIDATE	483	AOT	https://openjdk.org/jeps/515	Runtime candidate; requires AOT dependency closure and Java21 behavior proof.
 401	26	Value Classes and Objects (Preview)	REJECT_JVMS_LANGUAGE_SPEC	NO		LANGUAGE_JVMS	https://openjdk.org/jeps/401	Changes JLS/JVMS/object semantics/class-file rules; never default Java21.
 516	26	Ahead-of-Time Object Caching with Any GC	COMPATIBLE_RUNTIME	CANDIDATE	483,514,515	AOT	https://openjdk.org/jeps/516	Runtime candidate only after prior Leyden dependency closure and GC parity proof.
+521	25	Generational Shenandoah	COMPATIBLE_RUNTIME	OPT_IN		GC	https://openjdk.org/jeps/521	Makes the existing generational Shenandoah mode non-experimental; candidate only with GC/runtime parity and explicit operational approval.
