@@ -2532,13 +2532,19 @@ public final class String
             return false;
         }
         M3String sourceM3 = m3();
+        M3String prefixM3 = prefix.m3();
         if (sourceM3 != null) {
-            M3String prefixM3 = prefix.m3();
             if (prefixM3 != null) {
                 return sourceM3.startsWith(prefixM3, toffset);
             }
             for (int index = 0; index < prefix.length(); index++) {
                 if (sourceM3.charAt(toffset + index) != prefix.charAt(index)) return false;
+            }
+            return true;
+        }
+        if (prefixM3 != null) {
+            for (int index = 0; index < prefixM3.length(); index++) {
+                if (charAt(toffset + index) != prefixM3.charAt(index)) return false;
             }
             return true;
         }
@@ -3006,6 +3012,28 @@ public final class String
             return fromIndex;
         }
 
+        M3String targetM3 = tgtStr.m3();
+        if (targetM3 != null) {
+            int limit = srcCount - tgtCount;
+            char first = targetM3.charAt(0);
+            for (int start = fromIndex; start <= limit; start++) {
+                char sourceFirst = srcCoder == LATIN1
+                        ? StringLatin1.charAt(src, start)
+                        : StringUTF16.charAt(src, start);
+                if (sourceFirst != first) continue;
+                int index = 1;
+                while (index < tgtCount) {
+                    char sourceUnit = srcCoder == LATIN1
+                            ? StringLatin1.charAt(src, start + index)
+                            : StringUTF16.charAt(src, start + index);
+                    if (sourceUnit != targetM3.charAt(index)) break;
+                    index++;
+                }
+                if (index == tgtCount) return start;
+            }
+            return -1;
+        }
+
         byte[] tgt = tgtStr.value();
         byte tgtCoder = tgtStr.coder();
         if (srcCoder == tgtCoder) {
@@ -3090,8 +3118,9 @@ public final class String
      */
     static int lastIndexOf(byte[] src, byte srcCoder, int srcCount,
                            String tgtStr, int fromIndex) {
-        byte[] tgt = tgtStr.value();
-        byte tgtCoder = tgtStr.coder();
+        M3String targetM3 = tgtStr.m3();
+        byte[] tgt = targetM3 == null ? tgtStr.value() : null;
+        byte tgtCoder = targetM3 == null ? tgtStr.coder() : 0;
         int tgtCount = tgtStr.length();
         /*
          * Check arguments; return immediately where possible. For
@@ -3107,6 +3136,25 @@ public final class String
         /* Empty string always matches. */
         if (tgtCount == 0) {
             return fromIndex;
+        }
+        if (targetM3 != null) {
+            char first = targetM3.charAt(0);
+            for (int start = fromIndex; start >= 0; start--) {
+                char sourceFirst = srcCoder == LATIN1
+                        ? StringLatin1.charAt(src, start)
+                        : StringUTF16.charAt(src, start);
+                if (sourceFirst != first) continue;
+                int index = 1;
+                while (index < tgtCount) {
+                    char sourceUnit = srcCoder == LATIN1
+                            ? StringLatin1.charAt(src, start + index)
+                            : StringUTF16.charAt(src, start + index);
+                    if (sourceUnit != targetM3.charAt(index)) break;
+                    index++;
+                }
+                if (index == tgtCount) return start;
+            }
+            return -1;
         }
         if (srcCoder == tgtCoder) {
             return srcCoder == LATIN1
@@ -3453,6 +3501,42 @@ public final class String
                 M3String replacementM3 = M3String.canonicalize(replStr);
                 M3String replaced = storage.replace(targetM3, replacementM3);
                 return replaced == storage ? this : new String(replaced);
+            }
+
+            M3String targetM3 = trgtStr.m3();
+            M3String replacementM3 = replStr.m3();
+            if (targetM3 != null || replacementM3 != null) {
+                int first = indexOf(trgtStr, 0);
+                if (first < 0) return this;
+
+                int matches = 1;
+                int cursor = first + trgtLen;
+                for (;;) {
+                    int next = indexOf(trgtStr, cursor);
+                    if (next < 0) break;
+                    matches++;
+                    cursor = next + trgtLen;
+                }
+
+                long resultLength =
+                        (long) thisLen + (long) matches * (replLen - trgtLen);
+                if (resultLength > Integer.MAX_VALUE) {
+                    throw new OutOfMemoryError("Required length exceeds implementation limit");
+                }
+
+                StringBuilder builder = new StringBuilder((int) resultLength);
+                int source = 0;
+                int found = first;
+                while (found >= 0) {
+                    builder.append(this, source, found);
+                    builder.append(replStr);
+                    source = found + trgtLen;
+                    found = source <= thisLen - trgtLen
+                            ? indexOf(trgtStr, source)
+                            : -1;
+                }
+                builder.append(this, source, thisLen);
+                return builder.toString();
             }
 
             boolean thisIsLatin1 = this.isLatin1();
@@ -4034,6 +4118,9 @@ public final class String
             M3String mapped = storage.asciiCase(false);
             return mapped == storage ? this : new String(mapped);
         }
+        if (storage != null) {
+            return caseMapM3(locale, false);
+        }
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.toLowerCase(this, currentValue, locale)
                           : StringUTF16.toLowerCase(this, currentValue, locale);
@@ -4122,6 +4209,9 @@ public final class String
             M3String mapped = storage.asciiCase(true);
             return mapped == storage ? this : new String(mapped);
         }
+        if (storage != null) {
+            return caseMapM3(locale, true);
+        }
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.toUpperCase(this, currentValue, locale)
                           : StringUTF16.toUpperCase(this, currentValue, locale);
@@ -4148,6 +4238,68 @@ public final class String
      */
     public String toUpperCase() {
         return toUpperCase(Locale.getDefault());
+    }
+
+    private String caseMapM3(Locale locale, boolean upper) {
+        int length = length();
+        StringBuilder output = null;
+        int copyStart = 0;
+
+        for (int index = 0; index < length; ) {
+            int sourceCodePoint = codePointAt(index);
+            int sourceWidth = Character.charCount(sourceCodePoint);
+            int mapped =
+                    upper
+                            ? ConditionalSpecialCasing.toUpperCaseEx(this, index, locale)
+                            : ConditionalSpecialCasing.toLowerCaseEx(this, index, locale);
+
+            char[] mappedUnits = null;
+            boolean unchanged;
+            if (mapped == Character.ERROR) {
+                mappedUnits =
+                        upper
+                                ? ConditionalSpecialCasing.toUpperCaseCharArray(this, index, locale)
+                                : ConditionalSpecialCasing.toLowerCaseCharArray(this, index, locale);
+                unchanged = mappedUnits != null && mappedUnits.length == sourceWidth;
+                if (unchanged) {
+                    for (int unit = 0; unit < sourceWidth; unit++) {
+                        if (mappedUnits[unit] != charAt(index + unit)) {
+                            unchanged = false;
+                            break;
+                        }
+                    }
+                }
+            } else {
+                unchanged = mapped == sourceCodePoint;
+            }
+
+            if (!unchanged) {
+                if (output == null) {
+                    output = new StringBuilder(length);
+                }
+                if (copyStart < index) {
+                    output.append(this, copyStart, index);
+                }
+                if (mapped == Character.ERROR) {
+                    if (mappedUnits == null) {
+                        throw new InternalError("missing conditional case mapping");
+                    }
+                    output.append(mappedUnits);
+                } else {
+                    output.appendCodePoint(mapped);
+                }
+                copyStart = index + sourceWidth;
+            }
+            index += sourceWidth;
+        }
+
+        if (output == null) {
+            return this;
+        }
+        if (copyStart < length) {
+            output.append(this, copyStart, length);
+        }
+        return output.toString();
     }
 
     /**
@@ -5180,11 +5332,9 @@ public final class String
         if (Integer.MAX_VALUE / count < charLength) {
             throw new OutOfMemoryError("Required length exceeds implementation limit");
         }
-        if (m3JoinedStringsEnabled()) {
-            M3String storage = m3();
-            if (storage != null) {
-                return new String(storage.repeat(count));
-            }
+        M3String storage = m3();
+        if (storage != null) {
+            return new String(storage.repeat(count));
         }
         byte[] currentValue = value();
         final int len = currentValue.length;
