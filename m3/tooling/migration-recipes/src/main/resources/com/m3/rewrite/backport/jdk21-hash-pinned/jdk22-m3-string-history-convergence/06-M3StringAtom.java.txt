@@ -72,6 +72,205 @@ final class M3StringAtom extends M3StringOwner {
                 null, address, width, true, length, coder, javaHash, canonicalId, structuralHash64);
     }
 
+    static M3StringAtom localCodePoints(
+            int[] source,
+            int offset,
+            int count,
+            int utf16Length,
+            byte coder,
+            long canonicalId,
+            long structuralHash64) {
+        Objects.requireNonNull(source, "source");
+        Objects.checkFromIndexSize(offset, count, source.length);
+        if (coder != String.LATIN1 && coder != String.UTF16) {
+            throw new IllegalArgumentException("invalid String coder");
+        }
+        byte width = coder == String.LATIN1 ? (byte) 1 : (byte) 2;
+        long bytes = Math.max(1L, (long) utf16Length * width);
+        long address = UNSAFE.allocateMemory(bytes);
+        int javaHash = 0;
+        int output = 0;
+        for (int index = 0; index < count; index++) {
+            int cp = source[offset + index];
+            if (Character.isBmpCodePoint(cp)) {
+                char unit = (char) cp;
+                if (coder == String.LATIN1 && unit > 0xff) {
+                    UNSAFE.freeMemory(address);
+                    throw new IllegalArgumentException("Latin1 unit out of range");
+                }
+                javaHash = 31 * javaHash + unit;
+                putUnit(address, width, output++, unit);
+            } else if (Character.isValidCodePoint(cp)) {
+                char high = Character.highSurrogate(cp);
+                char low = Character.lowSurrogate(cp);
+                javaHash = 31 * javaHash + high;
+                javaHash = 31 * javaHash + low;
+                putUnit(address, width, output++, high);
+                putUnit(address, width, output++, low);
+            } else {
+                UNSAFE.freeMemory(address);
+                throw new IllegalArgumentException(Integer.toString(cp));
+            }
+        }
+        if (output != utf16Length) {
+            UNSAFE.freeMemory(address);
+            throw new InternalError("M3 code-point UTF16 length mismatch");
+        }
+        return new M3StringAtom(
+                null,
+                address,
+                width,
+                true,
+                utf16Length,
+                coder,
+                javaHash,
+                canonicalId,
+                structuralHash64);
+    }
+
+    private static void putUnit(long address, byte width, int index, char unit) {
+        if (width == 1) {
+            UNSAFE.putByte(address + index, (byte) unit);
+        } else {
+            long at = address + ((long) index << 1);
+            UNSAFE.putByte(at, (byte) (unit >>> 8));
+            UNSAFE.putByte(at + 1L, (byte) unit);
+        }
+    }
+
+    static M3StringAtom localCompactBytes(
+            byte[] source,
+            int sourceOffset,
+            int length,
+            byte sourceCoder,
+            byte targetCoder,
+            long canonicalId,
+            long structuralHash64) {
+        Objects.requireNonNull(source, "source");
+        if (sourceCoder != String.LATIN1 && sourceCoder != String.UTF16) {
+            throw new IllegalArgumentException("invalid source String coder");
+        }
+        if (targetCoder != String.LATIN1 && targetCoder != String.UTF16) {
+            throw new IllegalArgumentException("invalid target String coder");
+        }
+        Objects.checkFromIndexSize(sourceOffset, length, source.length >> sourceCoder);
+
+        byte width = targetCoder == String.LATIN1 ? (byte) 1 : (byte) 2;
+        long bytes = Math.max(1L, (long) length * width);
+        long address = UNSAFE.allocateMemory(bytes);
+        int javaHash = 0;
+        for (int index = 0; index < length; index++) {
+            char unit =
+                    sourceCoder == String.LATIN1
+                            ? (char) (source[sourceOffset + index] & 0xff)
+                            : StringUTF16.charAt(source, sourceOffset + index);
+            if (targetCoder == String.LATIN1 && unit > 0xff) {
+                UNSAFE.freeMemory(address);
+                throw new IllegalArgumentException("Latin1 unit out of range");
+            }
+            javaHash = 31 * javaHash + unit;
+            if (width == 1) {
+                UNSAFE.putByte(address + index, (byte) unit);
+            } else {
+                long at = address + ((long) index << 1);
+                UNSAFE.putByte(at, (byte) (unit >>> 8));
+                UNSAFE.putByte(at + 1L, (byte) unit);
+            }
+        }
+        return new M3StringAtom(
+                null,
+                address,
+                width,
+                true,
+                length,
+                targetCoder,
+                javaHash,
+                canonicalId,
+                structuralHash64);
+    }
+
+    static M3StringAtom localLatin1Bytes(
+            byte[] source,
+            int offset,
+            int length,
+            byte coder,
+            long canonicalId,
+            long structuralHash64) {
+        Objects.requireNonNull(source, "source");
+        Objects.checkFromIndexSize(offset, length, source.length);
+        if (coder != String.LATIN1 && coder != String.UTF16) {
+            throw new IllegalArgumentException("invalid String coder");
+        }
+        byte width = coder == String.LATIN1 ? (byte) 1 : (byte) 2;
+        long bytes = Math.max(1L, (long) length * width);
+        long address = UNSAFE.allocateMemory(bytes);
+        int javaHash = 0;
+        for (int index = 0; index < length; index++) {
+            char unit = (char) (source[offset + index] & 0xff);
+            javaHash = 31 * javaHash + unit;
+            if (width == 1) {
+                UNSAFE.putByte(address + index, (byte) unit);
+            } else {
+                long at = address + ((long) index << 1);
+                UNSAFE.putByte(at, (byte) 0);
+                UNSAFE.putByte(at + 1L, (byte) unit);
+            }
+        }
+        return new M3StringAtom(
+                null,
+                address,
+                width,
+                true,
+                length,
+                coder,
+                javaHash,
+                canonicalId,
+                structuralHash64);
+    }
+
+    static M3StringAtom localChars(
+            char[] source,
+            int offset,
+            int length,
+            byte coder,
+            long canonicalId,
+            long structuralHash64) {
+        Objects.requireNonNull(source, "source");
+        Objects.checkFromIndexSize(offset, length, source.length);
+        if (coder != String.LATIN1 && coder != String.UTF16) {
+            throw new IllegalArgumentException("invalid String coder");
+        }
+        byte width = coder == String.LATIN1 ? (byte) 1 : (byte) 2;
+        long bytes = Math.max(1L, (long) length * width);
+        long address = UNSAFE.allocateMemory(bytes);
+        int javaHash = 0;
+        for (int index = 0; index < length; index++) {
+            char unit = source[offset + index];
+            if (coder == String.LATIN1 && unit > 0xff) {
+                UNSAFE.freeMemory(address);
+                throw new IllegalArgumentException("Latin1 unit out of range");
+            }
+            javaHash = 31 * javaHash + unit;
+            if (width == 1) {
+                UNSAFE.putByte(address + index, (byte) unit);
+            } else {
+                long at = address + ((long) index << 1);
+                UNSAFE.putByte(at, (byte) (unit >>> 8));
+                UNSAFE.putByte(at + 1L, (byte) unit);
+            }
+        }
+        return new M3StringAtom(
+                null,
+                address,
+                width,
+                true,
+                length,
+                coder,
+                javaHash,
+                canonicalId,
+                structuralHash64);
+    }
+
     static M3StringAtom localUnit(
             char unit, byte coder, long canonicalId, long structuralHash64) {
         if (coder != String.LATIN1 && coder != String.UTF16) {
@@ -202,6 +401,69 @@ final class M3StringAtom extends M3StringOwner {
         return Math.max(1L, Math.multiplyExact((long) length, storageWidth));
     }
 
+    boolean contentEqualsCodePoints(
+            int[] source, int offset, int count, int utf16Length, byte targetCoder) {
+        Objects.requireNonNull(source, "source");
+        Objects.checkFromIndexSize(offset, count, source.length);
+        if (targetCoder != coder || utf16Length != length) return false;
+        int at = 0;
+        for (int index = 0; index < count; index++) {
+            int cp = source[offset + index];
+            if (Character.isBmpCodePoint(cp)) {
+                if (charAt(at++) != (char) cp) return false;
+            } else if (Character.isValidCodePoint(cp)) {
+                if (charAt(at++) != Character.highSurrogate(cp)
+                        || charAt(at++) != Character.lowSurrogate(cp)) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        }
+        return at == length;
+    }
+
+    boolean contentEqualsCompactBytes(
+            byte[] source,
+            int sourceOffset,
+            int count,
+            byte sourceCoder,
+            byte targetCoder) {
+        Objects.requireNonNull(source, "source");
+        if (sourceCoder != String.LATIN1 && sourceCoder != String.UTF16) return false;
+        Objects.checkFromIndexSize(sourceOffset, count, source.length >> sourceCoder);
+        if (targetCoder != coder || count != length) return false;
+        for (int index = 0; index < count; index++) {
+            char candidate =
+                    sourceCoder == String.LATIN1
+                            ? (char) (source[sourceOffset + index] & 0xff)
+                            : StringUTF16.charAt(source, sourceOffset + index);
+            if (candidate != charAt(index)) return false;
+        }
+        return true;
+    }
+
+    boolean contentEqualsLatin1Bytes(
+            byte[] source, int offset, int count, byte valueCoder) {
+        Objects.requireNonNull(source, "source");
+        Objects.checkFromIndexSize(offset, count, source.length);
+        if (valueCoder != coder || count != length) return false;
+        for (int index = 0; index < count; index++) {
+            if ((char) (source[offset + index] & 0xff) != charAt(index)) return false;
+        }
+        return true;
+    }
+
+    boolean contentEquals(char[] source, int offset, int count, byte valueCoder) {
+        Objects.requireNonNull(source, "source");
+        Objects.checkFromIndexSize(offset, count, source.length);
+        if (valueCoder != coder || count != length) return false;
+        for (int index = 0; index < count; index++) {
+            if (source[offset + index] != charAt(index)) return false;
+        }
+        return true;
+    }
+
     boolean contentEquals(byte[] compactValue, byte valueCoder) {
         if (valueCoder != coder || (compactValue.length >> valueCoder) != length) return false;
         for (int index = 0; index < length; index++) {
@@ -217,5 +479,12 @@ final class M3StringAtom extends M3StringOwner {
     @Override
     M3StringFacts computeFacts() {
         return M3StringFacts.scan(M3String.whole(this));
+    }
+
+    @Override
+    M3StringFacts computeRangeFacts(int start, int length) {
+        Objects.checkFromIndexSize(start, length, this.length);
+        if (start == 0 && length == this.length) return facts();
+        return M3StringFacts.scan(M3String.range(this, start, length));
     }
 }
