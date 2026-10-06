@@ -37,6 +37,7 @@ on:
       - 'test/jdk/java/lang/String/M3StringLiteralRegexReplacementTest.java'
       - 'test/jdk/java/lang/String/M3StringLiteralRegexSplitTest.java'
       - 'test/jdk/java/lang/String/M3StringLiteralRegexMatchesTest.java'
+      - 'test/jdk/java/lang/String/M3StringConcatStagingTest.java'
       - 'test/jdk/java/lang/String/nativeEncoding/StringPlatformChars.java'
       - 'test/jdk/java/lang/String/nativeEncoding/libstringPlatformChars.c'
       - 'test/jdk/jdk/internal/mindex/M3TQFactsTest.java'
@@ -69,4 +70,4 @@ jobs:
       - name: Build java.base
         run: make java.base-java-only
       - name: Run M3 String backing jtreg
-        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/java/lang/String/nativeEncoding/StringPlatformChars.java test/jdk/java/lang/String/M3StringBuilderInteropTest.java test/jdk/java/lang/String/M3StringLiteralRegexReplacementTest.java test/jdk/java/lang/String/M3StringLiteralRegexSplitTest.java test/jdk/java/lang/String/M3StringLiteralRegexMatchesTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/jdk/internal/mindex/M3OwnedPrecomputeTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java"
+        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/java/lang/String/nativeEncoding/StringPlatformChars.java test/jdk/java/lang/String/M3StringBuilderInteropTest.java test/jdk/java/lang/String/M3StringLiteralRegexReplacementTest.java test/jdk/java/lang/String/M3StringLiteralRegexSplitTest.java test/jdk/java/lang/String/M3StringLiteralRegexMatchesTest.java test/jdk/java/lang/String/M3StringConcatStagingTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/jdk/internal/mindex/M3OwnedPrecomputeTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java"
