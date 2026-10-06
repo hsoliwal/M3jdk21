@@ -83,6 +83,41 @@ final class M3StringPool {
         return M3String.whole(internLocal(value, coder));
     }
 
+    static M3String internUnit(char unit) {
+        byte coder = StringLatin1.canEncode(unit) ? String.LATIN1 : String.UTF16;
+        int byteLength = 1 << coder;
+        long hash64 = mix64(0x9e3779b97f4a7c15L ^ coder ^ Integer.toUnsignedLong(byteLength));
+        hash64 = mix64(hash64 ^ unit);
+        Fingerprint fingerprint = new Fingerprint(coder, byteLength, hash64);
+
+        expungeLocals();
+        for (;;) {
+            LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
+            synchronized (bucket) {
+                if (bucket.retired) continue;
+                for (Iterator<LocalRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
+                    LocalRef reference = iterator.next();
+                    M3StringAtom existing = reference.get();
+                    if (existing == null) {
+                        iterator.remove();
+                        reference.releaseNative();
+                    } else if (existing.length == 1
+                            && existing.coder == coder
+                            && existing.charAt(0) == unit) {
+                        return M3String.whole(existing);
+                    }
+                }
+
+                long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
+                M3StringAtom created = M3StringAtom.localUnit(unit, coder, id, hash64);
+                long retainedBytes = created.nativePayloadBytes();
+                LOCAL_NATIVE_BYTES.addAndGet(retainedBytes);
+                bucket.values.add(new LocalRef(created, fingerprint, bucket, retainedBytes));
+                return M3String.whole(created);
+            }
+        }
+    }
+
     private static M3StringAtom internLocal(byte[] value, byte coder) {
         expungeLocals();
         long hash64 = contentHash64(value, coder);
