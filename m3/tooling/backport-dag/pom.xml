@@ -21,6 +21,11 @@
       <version>${project.version}</version>
     </dependency>
     <dependency>
+      <groupId>com.m3</groupId>
+      <artifactId>a3</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
       <version>${junit.version}</version>
@@ -76,6 +81,7 @@
                 <include>com/m3/tooling/dag/M3DagSemanticRoot*</include>
                 <include>com/m3/tooling/dag/M3DagProjection*</include>
                 <include>com/m3/tooling/dag/M3DagProjector*</include>
+                <include>com/m3/tooling/dag/M3A3BackportPreparation*</include>
               </includes>
               <rules><rule><element>BUNDLE</element><limits>
                 <limit><counter>LINE</counter><value>COVEREDRATIO</value><minimum>0.99</minimum></limit>

@@ -33,7 +33,8 @@ jobs:
       - name: 2 - Compile and test canonical backport DAG
         run: >-
           mvn -B -ntp
-          -f m3/tooling/backport-dag/pom.xml
+          -f m3/pom.xml
+          -pl tooling/backport-dag -am
           -Dtest=M3RecipeDagTest,M3SecondPassReviewBindingTest
           -Dsurefire.failIfNoSpecifiedTests=false
           test
@@ -41,7 +42,9 @@ jobs:
       - name: 3 - Full M3 backport DAG proof including 99 percent semantic gate
         run: >-
           mvn -B -ntp
-          -f m3/tooling/backport-dag/pom.xml
+          -f m3/pom.xml
+          -pl tooling/backport-dag -am
+          -Dsurefire.failIfNoSpecifiedTests=false
           verify
 
   upstream-dag:
@@ -52,7 +55,6 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-          cache: maven
 
       - name: Clone exact merged Synexia DAG content
         env:

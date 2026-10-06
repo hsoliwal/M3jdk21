@@ -19,11 +19,26 @@ serial-promotion semantics.
 
 The canonical path is:
 
-`inventory -> compatibility-proof -> dependency-closure -> file-delta -> recipe-crate ->
-recipe-junit -> diff -> lint -> compile -> jtreg -> runtime -> promote`
+`review-code-signal -> review-atom-pattern -> review-problem-planner -> review-jni-contract ->\n`inventory -> compatibility-proof -> dependency-closure -> file-delta -> a3-preparation -> recipe-crate ->\n`recipe-junit -> diff -> lint -> compile -> jtreg -> runtime -> promote`
 
 Independent FILE recipes derived from one work packet may fan out in the same topological layer.
 Canonical promotion is one serial terminal node.
+
+### A3 preparation gate
+
+The canonical DAG has an explicit `a3-preparation` node between exact file-delta inventory and
+source-changing recipe crates.
+
+- Java files under `src/**` and `test/**` are run through the existing A3 FILE convergence
+  owner: atomize -> patternize/IOP -> document -> fixed point.
+- C/C++/HotSpot/JNI/build/resources are not sent through the Java parser. They are recorded as
+  `NON_JAVA_SOURCE_SEALED` and continue only through exact source-pinned text/native recipe atoms.
+- The preparation step writes `backport-preparation.tsv` under `m3/build`; it never writes the
+  canonical OpenJDK source tree.
+- Packet root atoms depend on `a3-preparation`, not directly on `file-delta`.
+
+This makes the user's M3 rule mechanical: make each Java leaf structurally easier to absorb first,
+while preserving native truth and delaying wider scope joins until after file-local convergence.
 
 ## Scope law
 
