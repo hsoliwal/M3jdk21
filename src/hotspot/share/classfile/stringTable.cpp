@@ -138,14 +138,20 @@ class StringTableConfig : public StackObj {
       return 0;
     }
     *is_dead = false;
+    if (!_alt_hash) {
+      // The canonical Java hash is already exact for M3 owner+coordinate Strings.
+      // Avoid allocating a temporary UTF-16 shadow on the ordinary StringTable path.
+      return java_lang_String::hash_code(val_oop);
+    }
+
     ResourceMark rm;
-    // All String oops are hashed as unicode
+    // Alternate halfsiphash is defined over UTF-16 units and still needs the unicode view.
     int length;
     jchar* chars = java_lang_String::as_unicode_string_or_null(val_oop, length);
     if (chars != nullptr) {
-      return hash_string(chars, length, _alt_hash);
+      return hash_string(chars, length, true);
     }
-    vm_exit_out_of_memory(length, OOM_MALLOC_ERROR, "get hash from oop");
+    vm_exit_out_of_memory(length, OOM_MALLOC_ERROR, "get alternate hash from oop");
     return 0;
   }
   // We use default allocation/deallocation but counted
