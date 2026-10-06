@@ -1,5 +1,6 @@
 fork_id	repository	ref	pinned_head	plane	priority	license_policy	source_copy_authority	selected_for_distribution	notes
 upstream21u	openjdk/jdk21u	master	bb6b279495ceff8442dbd0225756b92d466d5309	BASELINE	BASELINE	OPENJDK_SOURCE_TERMS	false	false	Canonical JDK21u comparison reference
+adoptium-jdk21u	adoptium/jdk21u	master	bb6b279495ceff8442dbd0225756b92d466d5309	MIRROR	HIGH	REVIEW_REPOSITORY_AND_PATH_LICENSES	false	false	Temurin source mirror pin equals upstream21u baseline; zero unique-source claim
 corretto	corretto/corretto-21	develop	6769fa77bab4faae3ddb9940a90aafb5ad818b2a	PRODUCT	HIGH	REVIEW_REPOSITORY_AND_PATH_LICENSES	false	false	Amazon Corretto 21 product development branch
 corretto-shenandoah	corretto/corretto-21	generational-shenandoah	94a25764d0784df6663b96bf7910d113c98609d4	EXPERIMENTAL	MEDIUM	REVIEW_REPOSITORY_AND_PATH_LICENSES	false	false	Generational Shenandoah capability evidence only
 corretto-lilliput	corretto/corretto-21	lilliput-2	5892a9d66acda9b654507fa59d497387d6073e74	EXPERIMENTAL	MEDIUM	REVIEW_REPOSITORY_AND_PATH_LICENSES	false	false	Compact-header/Lilliput capability evidence only
