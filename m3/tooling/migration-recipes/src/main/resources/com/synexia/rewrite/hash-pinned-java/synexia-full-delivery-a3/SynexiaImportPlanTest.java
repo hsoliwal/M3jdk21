@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -156,6 +157,21 @@ final class SynexiaImportPlanTest {
                 IllegalArgumentException.class,
                 () -> SynexiaImportPlan.writePlan(
                         fixture.m3jdk(), temp.resolve("absolute-outside"), plan));
+
+        Path build = fixture.m3jdk().resolve("m3/build");
+        Files.createDirectories(build);
+        Path outside = temp.resolve("symlink-outside");
+        Files.createDirectories(outside);
+        Path link = build.resolve("link");
+        try {
+            Files.createSymbolicLink(link, outside);
+        } catch (UnsupportedOperationException | IOException | SecurityException unsupported) {
+            Assumptions.assumeTrue(false, "symbolic links unavailable");
+        }
+        assertThrows(
+                IOException.class,
+                () -> SynexiaImportPlan.writePlan(
+                        fixture.m3jdk(), Path.of("m3/build/link/run"), plan));
     }
 
     @Test
@@ -268,6 +284,50 @@ final class SynexiaImportPlanTest {
                         "2".repeat(64),
                         SynexiaImportPlan.Action.STALE,
                         SynexiaImportPlan.Lane.OTHER_APACHE));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new SynexiaImportPlan.Row(
+                        "openrewrite-java",
+                        "src/A.java",
+                        "m3/vendor/synexia/A.java",
+                        "APACHE_SOURCE",
+                        "1".repeat(64),
+                        "2".repeat(64),
+                        SynexiaImportPlan.Action.KEEP,
+                        SynexiaImportPlan.Lane.OPENREWRITE_RECIPE));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new SynexiaImportPlan.Row(
+                        "openrewrite-java",
+                        "src/A.java",
+                        "m3/vendor/synexia/A.java",
+                        "APACHE_SOURCE",
+                        "1".repeat(64),
+                        "1".repeat(64),
+                        SynexiaImportPlan.Action.REPLACE,
+                        SynexiaImportPlan.Lane.OPENREWRITE_RECIPE));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new SynexiaImportPlan.Row(
+                        "openrewrite-java",
+                        "NONE",
+                        "m3/vendor/synexia/A.java",
+                        "APACHE_SOURCE",
+                        "1".repeat(64),
+                        "1".repeat(64),
+                        SynexiaImportPlan.Action.KEEP,
+                        SynexiaImportPlan.Lane.OPENREWRITE_RECIPE));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new SynexiaImportPlan.Row(
+                        "openrewrite-java",
+                        "src/A.java",
+                        "m3/vendor/synexia/A.java",
+                        "STALE",
+                        "1".repeat(64),
+                        "1".repeat(64),
+                        SynexiaImportPlan.Action.KEEP,
+                        SynexiaImportPlan.Lane.OPENREWRITE_RECIPE));
         assertThrows(
                 IllegalArgumentException.class,
                 () -> new SynexiaImportPlan.Plan(

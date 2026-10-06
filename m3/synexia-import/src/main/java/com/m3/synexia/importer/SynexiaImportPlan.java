@@ -79,12 +79,41 @@ public final class SynexiaImportPlan {
                     digestOrMarker(currentSha256, "currentSha256", Set.of("ABSENT"));
             action = Objects.requireNonNull(action, "action");
             lane = Objects.requireNonNull(lane, "lane");
-            if (action == Action.ADD && !"ABSENT".equals(currentSha256)) {
-                throw new IllegalArgumentException("ADD currentSha256");
-            }
-            if (action == Action.STALE
-                    && (!"STALE".equals(expectedSha256) || !"NONE".equals(sourcePath))) {
-                throw new IllegalArgumentException("STALE row");
+            if (action == Action.STALE) {
+                if (!"stale".equals(category)
+                        || !"NONE".equals(sourcePath)
+                        || !"STALE".equals(mode)
+                        || !"STALE".equals(expectedSha256)
+                        || "ABSENT".equals(currentSha256)) {
+                    throw new IllegalArgumentException("STALE row");
+                }
+            } else {
+                if ("NONE".equals(sourcePath)
+                        || "STALE".equals(expectedSha256)
+                        || (!"APACHE_SOURCE".equals(mode)
+                                && !"APACHE_RECIPE_RESOURCE".equals(mode))) {
+                    throw new IllegalArgumentException("delivery row");
+                }
+                switch (action) {
+                    case ADD -> {
+                        if (!"ABSENT".equals(currentSha256)) {
+                            throw new IllegalArgumentException("ADD currentSha256");
+                        }
+                    }
+                    case KEEP -> {
+                        if ("ABSENT".equals(currentSha256)
+                                || !currentSha256.equals(expectedSha256)) {
+                            throw new IllegalArgumentException("KEEP hash relation");
+                        }
+                    }
+                    case REPLACE -> {
+                        if ("ABSENT".equals(currentSha256)
+                                || currentSha256.equals(expectedSha256)) {
+                            throw new IllegalArgumentException("REPLACE hash relation");
+                        }
+                    }
+                    case STALE -> throw new AssertionError();
+                }
             }
         }
     }
@@ -216,11 +245,18 @@ public final class SynexiaImportPlan {
             if (!sha256(bytes).equals(entry.sha256())) {
                 throw new IllegalStateException("staged Synexia source hash drift");
             }
-            writeOrVerify(out.resolve("candidate").resolve(row.targetPath()), bytes);
+            writeOrVerify(
+                    out,
+                    out.resolve("candidate").resolve(row.targetPath()),
+                    bytes);
         }
 
-        writeOrVerify(out.resolve("PLAN.tsv"), plan.toTsv().getBytes(StandardCharsets.UTF_8));
         writeOrVerify(
+                out,
+                out.resolve("PLAN.tsv"),
+                plan.toTsv().getBytes(StandardCharsets.UTF_8));
+        writeOrVerify(
+                out,
                 out.resolve("ROOT"),
                 ("ROOT  " + plan.root() + "\n").getBytes(StandardCharsets.UTF_8));
         return plan;
@@ -230,8 +266,12 @@ public final class SynexiaImportPlan {
         Path root = existingRoot(m3jdkRoot, "m3jdkRoot");
         Path out = buildOutput(root, output);
         Plan checked = Objects.requireNonNull(plan, "plan");
-        writeOrVerify(out.resolve("PLAN.tsv"), checked.toTsv().getBytes(StandardCharsets.UTF_8));
         writeOrVerify(
+                out,
+                out.resolve("PLAN.tsv"),
+                checked.toTsv().getBytes(StandardCharsets.UTF_8));
+        writeOrVerify(
+                out,
                 out.resolve("ROOT"),
                 ("ROOT  " + checked.root() + "\n").getBytes(StandardCharsets.UTF_8));
     }
@@ -322,7 +362,12 @@ public final class SynexiaImportPlan {
     }
 
     private static Path buildOutput(Path root, Path output) throws IOException {
-        Path build = root.resolve("m3/build").normalize();
+        Path m3 = root.resolve("m3").normalize();
+        if (Files.isSymbolicLink(m3)
+                || !Files.isDirectory(m3, LinkOption.NOFOLLOW_LINKS)) {
+            throw new IOException("M3 root is not a regular directory");
+        }
+        Path build = m3.resolve("build").normalize();
         Path candidate = Objects.requireNonNull(output, "output");
         Path resolved = candidate.isAbsolute()
                 ? candidate.toAbsolutePath().normalize()
@@ -331,15 +376,34 @@ public final class SynexiaImportPlan {
             throw new IllegalArgumentException(
                     "Synexia import plan output must stay below m3/build");
         }
-        if (Files.exists(resolved, LinkOption.NOFOLLOW_LINKS)) {
-            if (Files.isSymbolicLink(resolved)
-                    || !Files.isDirectory(resolved, LinkOption.NOFOLLOW_LINKS)) {
-                throw new IOException("Synexia import output is not a regular directory");
-            }
-        } else {
-            Files.createDirectories(resolved);
-        }
+        requireDirectoryChain(m3, resolved);
         return resolved;
+    }
+
+    private static void requireDirectoryChain(Path trustedRoot, Path directory)
+            throws IOException {
+        Path root = trustedRoot.toAbsolutePath().normalize();
+        Path target = directory.toAbsolutePath().normalize();
+        if (!target.startsWith(root)) {
+            throw new IllegalArgumentException("directory escaped trusted root");
+        }
+        if (Files.isSymbolicLink(root)
+                || !Files.isDirectory(root, LinkOption.NOFOLLOW_LINKS)) {
+            throw new IOException("trusted output root is not a regular directory");
+        }
+        Path current = root;
+        for (Path part : root.relativize(target)) {
+            current = current.resolve(part);
+            if (Files.exists(current, LinkOption.NOFOLLOW_LINKS)) {
+                if (Files.isSymbolicLink(current)
+                        || !Files.isDirectory(current, LinkOption.NOFOLLOW_LINKS)) {
+                    throw new IOException(
+                            "staged output ancestor is not a regular directory: " + current);
+                }
+            } else {
+                Files.createDirectory(current);
+            }
+        }
     }
 
     private static Path existingRoot(Path value, String field) {
@@ -366,11 +430,16 @@ public final class SynexiaImportPlan {
         }
     }
 
-    private static void writeOrVerify(Path path, byte[] bytes) throws IOException {
+    private static void writeOrVerify(
+            Path outputRoot, Path path, byte[] bytes) throws IOException {
+        Path root = outputRoot.toAbsolutePath().normalize();
         Path target = path.toAbsolutePath().normalize();
+        if (!target.startsWith(root) || target.equals(root)) {
+            throw new IllegalArgumentException("staged output escaped output root");
+        }
         Path parent = target.getParent();
         if (parent == null) throw new IOException("output has no parent");
-        Files.createDirectories(parent);
+        requireDirectoryChain(root, parent);
         if (Files.exists(target, LinkOption.NOFOLLOW_LINKS)) {
             requireRegular(target, "staged output");
             if (!MessageDigest.isEqual(Files.readAllBytes(target), bytes)) {
