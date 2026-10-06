@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.M3StringCanonicalDagMasterRepair
+displayName: Repair M3String canonical balanced DAG on current master
+description: Replays the current-master repair that restores balanced, parenthesization-independent M3String tuple identity while preserving newer scalar admission, internal precompute, and M3 target naming.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk22-m3-string-canonical-dag-master-repair
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-string-canonical-dag-master-repair
