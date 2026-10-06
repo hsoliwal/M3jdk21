@@ -1,0 +1,159 @@
+name: M3 JEP 491 monitor-unpinning materialization
+
+on:
+  push:
+    branches:
+      - "m3/j491-materialization-substrate-20261006"
+    paths:
+      - "m3/backports/recipes/j491/**"
+      - "m3/backports/j491_materialize.py"
+      - "m3/backports/test_j491_materialize.py"
+      - "m3/backports/commit_patch_atoms.py"
+      - "m3/backports/test_commit_patch_atoms.py"
+      - "m3/backports/file_delta_inventory.py"
+      - ".github/workflows/m3-jep491-materialization.yml"
+  pull_request:
+    paths:
+      - "m3/backports/recipes/j491/**"
+      - "m3/backports/j491_materialize.py"
+      - "m3/backports/test_j491_materialize.py"
+      - "m3/backports/commit_patch_atoms.py"
+      - "m3/backports/test_commit_patch_atoms.py"
+      - "m3/backports/file_delta_inventory.py"
+      - ".github/workflows/m3-jep491-materialization.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  materialize-file-atoms:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Fetch exact J491 implementation and reconciliation commits
+        shell: bash
+        run: |
+          set -euo pipefail
+          donor="$RUNNER_TEMP/j491-upstream"
+          git init -q "$donor"
+          git -C "$donor" remote add origin https://github.com/openjdk/jdk.git
+          git -C "$donor" -c protocol.version=2 fetch --filter=blob:none --no-tags origin             8a2a75e56de4497da48f43b3be3eb71bf3ef75ab             78b80150e009745b8f28d36c3836f18ad0ca921f             f636674889f925d4feb9a8d2be811e66f9b3a0ac             fbbc7c35f422294090b8c7a02a19ab2fb67c7070             7a6ff9206a0a4d116dec542819d51daa558d200d             b9b62a02488ee9c1a5a7a9ede87505781dfc0f73             88b4a906d2c520ce6a7b21adc5e709067e520cdd
+          printf 'J491_DONOR=%s\n' "$donor" >> "$GITHUB_ENV"
+
+      - name: Prove exact 246-path denominator
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/j491
+          git -C "$J491_DONOR" diff --name-only             8a2a75e56de4497da48f43b3be3eb71bf3ef75ab             78b80150e009745b8f28d36c3836f18ad0ca921f | LC_ALL=C sort             > target/j491/UPSTREAM_PATHS.txt
+          LC_ALL=C sort m3/backports/recipes/j491/PATHS.txt > target/j491/CHECKED_PATHS.txt
+          test "$(wc -l < target/j491/UPSTREAM_PATHS.txt)" -eq 246
+          cmp target/j491/UPSTREAM_PATHS.txt target/j491/CHECKED_PATHS.txt
+
+      - name: Unit-test exact-ref inventory classifier and patch atoms
+        working-directory: m3/backports
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v             test_file_delta_inventory.py             test_j491_materialize.py             test_commit_patch_atoms.py
+
+      - name: Emit deterministic architecture and domain DAG
+        run: |
+          set -euo pipefail
+          python3 m3/backports/j491_materialize.py             --paths m3/backports/recipes/j491/PATHS.txt             --out target/j491/classification
+          test "$(($(wc -l < target/j491/classification/ARCH_DAG.tsv)-1))" -eq 246
+
+      - name: Materialize target-side FILE patch candidates without mutating checkout
+        run: |
+          set -euo pipefail
+          python3 m3/backports/commit_patch_atoms.py             --donor-repo "$J491_DONOR"             --target-root "$PWD"             --parent 8a2a75e56de4497da48f43b3be3eb71bf3ef75ab             --commit 78b80150e009745b8f28d36c3836f18ad0ca921f             --paths m3/backports/recipes/j491/PATHS.txt             --out target/j491/patch-atoms
+          python3 - <<'PY'
+          import csv
+          from collections import Counter
+          from pathlib import Path
+
+          path = Path("target/j491/patch-atoms/APPLICABILITY.tsv")
+          with path.open(encoding="utf-8", newline="") as handle:
+              rows = list(csv.DictReader(handle, delimiter="\t"))
+          if len(rows) != 246:
+              raise SystemExit(f"J491 applicability denominator drift: {len(rows)}")
+          allowed = {
+              "EXACT_PARENT_REPLAY", "CONTEXT_PATCH_APPLIED", "ADD_ABSENT_TARGET",
+              "ALREADY_CONVERGED", "ALREADY_REMOVED", "REVIEW_DELETE_EXACT",
+              "REVIEW_RENAME", "CONFLICT_MISSING_TARGET", "CONFLICT_CONTEXT",
+              "CONFLICT_OCCUPIED_ADD", "CONFLICT_DELETE_DRIFT", "REVIEW_UNSUPPORTED_STATUS",
+          }
+          unknown = sorted({row["disposition"] for row in rows} - allowed)
+          if unknown:
+              raise SystemExit(f"unknown J491 dispositions: {unknown}")
+          counts = Counter(row["disposition"] for row in rows)
+          out = Path("target/j491/APPLICABILITY_COUNTS.tsv")
+          with out.open("w", encoding="utf-8", newline="") as handle:
+              writer = csv.writer(handle, delimiter="\t", lineterminator="\n")
+              writer.writerow(("disposition", "count"))
+              for name in sorted(counts):
+                  writer.writerow((name, counts[name]))
+          print("J491_APPLICABILITY", dict(sorted(counts.items())))
+          PY
+          git diff --exit-code
+          test -z "$(git status --porcelain | grep -v '^?? target/' || true)"
+
+      - name: Reconcile post-integration follow-up intersections
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv
+          import os
+          import subprocess
+          from pathlib import Path
+
+          donor = Path(os.environ["J491_DONOR"])
+          base_paths = {
+              line.strip()
+              for line in Path("m3/backports/recipes/j491/PATHS.txt").read_text().splitlines()
+              if line.strip()
+          }
+          followups = [
+              ("JDK-8344247", "f636674889f925d4feb9a8d2be811e66f9b3a0ac"),
+              ("JDK-8346120", "fbbc7c35f422294090b8c7a02a19ab2fb67c7070"),
+              ("JDK-8345543", "7a6ff9206a0a4d116dec542819d51daa558d200d"),
+              ("JDK-8346792", "b9b62a02488ee9c1a5a7a9ede87505781dfc0f73"),
+              ("JDK-8349689", "88b4a906d2c520ce6a7b21adc5e709067e520cdd"),
+          ]
+          rows = []
+          for jbs, commit in followups:
+              paths = subprocess.check_output(
+                  ["git", "-C", str(donor), "diff-tree", "--no-commit-id", "--name-only", "-r", commit],
+                  text=True,
+              ).splitlines()
+              for path in sorted(paths):
+                  rows.append((jbs, commit, path, "J491_BASE_PATH" if path in base_paths else "FOLLOWUP_EXTRA_PATH"))
+          out = Path("target/j491/FOLLOWUP_INTERSECTIONS.tsv")
+          with out.open("w", encoding="utf-8", newline="") as handle:
+              writer = csv.writer(handle, delimiter="\t", lineterminator="\n")
+              writer.writerow(("jbs", "commit", "path", "relation"))
+              writer.writerows(rows)
+          print(f"J491_FOLLOWUP_PATH_ROWS={len(rows)}")
+          PY
+
+      - name: Verify M3 backport Python substrate
+        working-directory: m3/backports
+        run: |
+          set -euo pipefail
+          python3 -m compileall -q             file_delta_inventory.py             generate_recipe_crates.py             j491_materialize.py             commit_patch_atoms.py
+
+      - name: Upload J491 FILE-atom materialization evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: j491-file-atoms-${{ github.run_id }}
+          path: target/j491
+          if-no-files-found: error
+          retention-days: 30

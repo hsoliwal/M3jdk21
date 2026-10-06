@@ -142,6 +142,44 @@ def _lane(path: str, status: str) -> str:
     return "VERBATIM_RESOURCE_PAIR"
 
 
+def compare_refs(
+    repo: Path,
+    release: int,
+    baseline_ref: str,
+    donor_ref: str,
+) -> list[FileDelta]:
+    """Compare two exact refs without pretending the donor is an entire GA release."""
+    if release not in range(22, 28):
+        raise ValueError(f"unsupported donor release: {release}")
+    if not baseline_ref or not donor_ref:
+        raise ValueError("baseline_ref and donor_ref are required")
+    _verify(repo, (baseline_ref, donor_ref))
+    baseline = _tree(repo, baseline_ref)
+    donor = _tree(repo, donor_ref)
+    rows: list[FileDelta] = []
+    for path in sorted(set(baseline) | set(donor)):
+        before = baseline.get(path)
+        after = donor.get(path)
+        status = _status(before, after)
+        rows.append(
+            FileDelta(
+                release=release,
+                baseline_ref=baseline_ref,
+                donor_ref=donor_ref,
+                path=path,
+                status=status,
+                baseline_mode="" if before is None else before.mode,
+                donor_mode="" if after is None else after.mode,
+                baseline_oid="" if before is None else before.oid,
+                donor_oid="" if after is None else after.oid,
+                java_source=path.endswith(".java"),
+                native_source=_native_source(path),
+                recipe_lane=_lane(path, status),
+            )
+        )
+    return rows
+
+
 def compare(
     repo: Path,
     donor_releases: Iterable[int] = range(22, 28),
@@ -154,33 +192,10 @@ def compare(
 
     baseline_release, baseline_ref = BASELINE
     assert baseline_release == 21
-    baseline = _tree(repo, baseline_ref)
     rows: list[FileDelta] = []
-
     for release, donor_ref in DONORS:
-        if release not in selected:
-            continue
-        donor = _tree(repo, donor_ref)
-        for path in sorted(set(baseline) | set(donor)):
-            before = baseline.get(path)
-            after = donor.get(path)
-            status = _status(before, after)
-            rows.append(
-                FileDelta(
-                    release=release,
-                    baseline_ref=baseline_ref,
-                    donor_ref=donor_ref,
-                    path=path,
-                    status=status,
-                    baseline_mode="" if before is None else before.mode,
-                    donor_mode="" if after is None else after.mode,
-                    baseline_oid="" if before is None else before.oid,
-                    donor_oid="" if after is None else after.oid,
-                    java_source=path.endswith(".java"),
-                    native_source=_native_source(path),
-                    recipe_lane=_lane(path, status),
-                )
-            )
+        if release in selected:
+            rows.extend(compare_refs(repo, release, baseline_ref, donor_ref))
     return rows
 
 
