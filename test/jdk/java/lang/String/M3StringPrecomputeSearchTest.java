@@ -428,6 +428,18 @@ public class M3StringPrecomputeSearchTest {
         check(builderLatinRange.toString().equals("Platin"),
                 "StringBuilder late inflation M3 Latin range");
 
+        String emptyTargetSource = String.join("", "a", "\ud83d", "\ude42", "b");
+        String emptyTargetReplaced = emptyTargetSource.replace("", "-");
+        check(equalChars(
+                        emptyTargetReplaced,
+                        naiveReplaceEmpty(chars(emptyTargetSource), new char[] {'-'})),
+                "replace empty target UTF16 boundaries");
+        String emptyReplacementNoop = emptyTargetSource.replace("", "");
+        check(equalChars(emptyReplacementNoop, chars(emptyTargetSource)),
+                "replace empty target empty replacement content");
+        check(emptyReplacementNoop != emptyTargetSource,
+                "replace empty target empty replacement fresh wrapper");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
@@ -903,6 +915,21 @@ public class M3StringPrecomputeSearchTest {
             remaining -= lw;
         }
         return true;
+    }
+
+    private static char[] naiveReplaceEmpty(char[] source, char[] replacement) {
+        long length = (long) source.length + (long) (source.length + 1) * replacement.length;
+        if (length > Integer.MAX_VALUE) throw new OutOfMemoryError("test oracle result too large");
+        char[] result = new char[(int) length];
+        int output = 0;
+        System.arraycopy(replacement, 0, result, output, replacement.length);
+        output += replacement.length;
+        for (char unit : source) {
+            result[output++] = unit;
+            System.arraycopy(replacement, 0, result, output, replacement.length);
+            output += replacement.length;
+        }
+        return result;
     }
 
     private static char[] naiveReplace(char[] source, char oldChar, char newChar) {
