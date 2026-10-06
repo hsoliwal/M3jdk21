@@ -3006,6 +3006,28 @@ public final class String
             return fromIndex;
         }
 
+        M3String targetM3 = tgtStr.m3();
+        if (targetM3 != null) {
+            int limit = srcCount - tgtCount;
+            char first = targetM3.charAt(0);
+            for (int start = fromIndex; start <= limit; start++) {
+                char sourceFirst = srcCoder == LATIN1
+                        ? StringLatin1.charAt(src, start)
+                        : StringUTF16.charAt(src, start);
+                if (sourceFirst != first) continue;
+                int index = 1;
+                while (index < tgtCount) {
+                    char sourceUnit = srcCoder == LATIN1
+                            ? StringLatin1.charAt(src, start + index)
+                            : StringUTF16.charAt(src, start + index);
+                    if (sourceUnit != targetM3.charAt(index)) break;
+                    index++;
+                }
+                if (index == tgtCount) return start;
+            }
+            return -1;
+        }
+
         byte[] tgt = tgtStr.value();
         byte tgtCoder = tgtStr.coder();
         if (srcCoder == tgtCoder) {
@@ -3090,8 +3112,9 @@ public final class String
      */
     static int lastIndexOf(byte[] src, byte srcCoder, int srcCount,
                            String tgtStr, int fromIndex) {
-        byte[] tgt = tgtStr.value();
-        byte tgtCoder = tgtStr.coder();
+        M3String targetM3 = tgtStr.m3();
+        byte[] tgt = targetM3 == null ? tgtStr.value() : null;
+        byte tgtCoder = targetM3 == null ? tgtStr.coder() : 0;
         int tgtCount = tgtStr.length();
         /*
          * Check arguments; return immediately where possible. For
@@ -3107,6 +3130,25 @@ public final class String
         /* Empty string always matches. */
         if (tgtCount == 0) {
             return fromIndex;
+        }
+        if (targetM3 != null) {
+            char first = targetM3.charAt(0);
+            for (int start = fromIndex; start >= 0; start--) {
+                char sourceFirst = srcCoder == LATIN1
+                        ? StringLatin1.charAt(src, start)
+                        : StringUTF16.charAt(src, start);
+                if (sourceFirst != first) continue;
+                int index = 1;
+                while (index < tgtCount) {
+                    char sourceUnit = srcCoder == LATIN1
+                            ? StringLatin1.charAt(src, start + index)
+                            : StringUTF16.charAt(src, start + index);
+                    if (sourceUnit != targetM3.charAt(index)) break;
+                    index++;
+                }
+                if (index == tgtCount) return start;
+            }
+            return -1;
         }
         if (srcCoder == tgtCoder) {
             return srcCoder == LATIN1
