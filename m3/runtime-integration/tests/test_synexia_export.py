@@ -33,13 +33,30 @@ class SynexiaExportTest(unittest.TestCase):
     columns = EXPORT.RECORD_COLUMNS
 
     def write_inputs(self, root: Path, conflict: bool = False,
-                     with_payload: bool = False) -> tuple[Path, Path]:
+                     with_payload: bool = False,
+                     with_requirements: bool = False) -> tuple[Path, Path]:
         root.mkdir(parents=True, exist_ok=True)
         manifest = root / "sources.tsv"
+        manifest_columns = (EXPORT.MANIFEST_COLUMNS_V2 if with_requirements
+                            else EXPORT.MANIFEST_COLUMNS)
+        number_requirement = "frequency_rank" if with_requirements else "-"
+        translation_requirement = (
+            "code_point_length,concept_ids,corpus_count,document_frequency,expansion_word_ids,"
+            "first_code_point,language,last_code_point,lemma_id,lexical_rank,mapping_id,"
+            "memberships,morphology_mask,phonetic_id,pos_mask,presence64,script_ordinal,"
+            "sim_hash64,stem_id,subjects,utf16_length")
+        number_row = ("numbers", "Numbers", "synexia-dictlang/src/main/java/com/synexia/dictlang/NumberLexicon.java",
+                      "number", "value,spelling", "M3StringFacts + NumberPrecompute", "Apache-2.0", "fixture")
+        translation_row = ("translations", "Translations", "synexia-translate/src/main/java/com/synexia/translate/Language.java",
+                           "translation_id", "language_tag,source_id,target_id", "M3StringFacts + TranslationMapping",
+                           "Apache-2.0", "fixture")
+        if with_requirements:
+            number_row += (number_requirement,)
+            translation_row += (translation_requirement,)
         manifest.write_text(
-            "\t".join(EXPORT.MANIFEST_COLUMNS) + "\n"
-            "numbers\tNumbers\tsynexia-dictlang/src/main/java/com/synexia/dictlang/NumberLexicon.java\tnumber\tvalue,spelling\tM3StringFacts + NumberPrecompute\tApache-2.0\tfixture\n"
-            "translations\tTranslations\tsynexia-translate/src/main/java/com/synexia/translate/Language.java\ttranslation_id\tlanguage_tag,source_id,target_id\tM3StringFacts + TranslationMapping\tApache-2.0\tfixture\n",
+            "\t".join(manifest_columns) + "\n"
+            + "\t".join(number_row) + "\n"
+            + "\t".join(translation_row) + "\n",
             encoding="utf-8",
         )
         rows = []
@@ -97,7 +114,8 @@ class SynexiaExportTest(unittest.TestCase):
 
     def run_export(self, root: Path, output: Path, conflict: bool = False,
                    with_payload: bool = False):
-        manifest, records = self.write_inputs(root, conflict, with_payload)
+        manifest, records = self.write_inputs(root, conflict, with_payload,
+                                              with_requirements=with_payload)
         return EXPORT.export(manifest, records, output, "https://github.com/hsoliwal/com.synexia",
                              "3e85c872adf556901a341a9eb1c3b59864918da1")
 
@@ -130,6 +148,10 @@ class SynexiaExportTest(unittest.TestCase):
             self.assertIn("M3StringFacts", facts)
             profiles = (root / "first/synexia.precompute-index.tsv").read_text(encoding="utf-8")
             self.assertIn("M3StringFacts + NumberPrecompute", profiles)
+            export_manifest = json.loads((root / "first/synexia.export.json").read_text(encoding="utf-8"))
+            self.assertEqual(["frequency_rank"],
+                             export_manifest["source"]["precompute_fields"]["numbers"])
+            self.assertIn("concept_ids", export_manifest["source"]["precompute_fields"]["translations"])
             image = (root / "first/synexia.m3lex").read_bytes()
             magic, version, count, payload, units = struct.unpack_from(">QIIQQ", image)
             self.assertEqual(EXPORT.MAGIC, magic)
@@ -167,6 +189,25 @@ class SynexiaExportTest(unittest.TestCase):
                     EXPORT.export(manifest, records, root / ("output-" + str(attempt)),
                                   "fixture", "0" * 40)
             records.write_text(original, encoding="utf-8")
+
+    def test_manifest_requirements_reject_missing_owner_field(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest, records = self.write_inputs(root / "input", with_payload=True,
+                                                  with_requirements=True)
+            original = records.read_text(encoding="utf-8")
+            records.write_text(original.replace('"frequency_rank": 0', '"other_rank": 0', 1),
+                                encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "missing required fields"):
+                EXPORT.export(manifest, records, root / "output", "fixture", "0" * 40)
+
+    def test_reviewed_source_manifest_has_explicit_owner_field_coverage(self):
+        sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
+        self.assertEqual(10, len(sources))
+        self.assertEqual(12, len(sources["dictlang.dictionary"]["precompute_fields"].split(",")))
+        self.assertEqual(15, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
+        self.assertEqual("", sources["translate.rows"]["precompute_fields"])
+        self.assertEqual("", sources["dictlang.numbers.0-10000"]["precompute_fields"])
 
     def test_replay_is_byte_identical_except_for_output_location(self):
         with tempfile.TemporaryDirectory() as directory:

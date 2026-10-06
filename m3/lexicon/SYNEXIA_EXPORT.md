@@ -6,8 +6,17 @@ explicit export; it does not rename, reallocate or infer a replacement lexicon.
 
 `m3/lexicon/synexia-source-manifest.tsv` is the reviewed source-family map. It
 keeps the Synexia path, source identity field, mapping fields, and target
-precompute owner visible. It is a catalog, not a license to redistribute the
-bulk datasets named by it.
+precompute owner visible. Its final `precompute_fields` column is the v2
+requirement map for owner payloads. It is a catalog, not a license to
+redistribute the bulk datasets named by it.
+
+The source manifest's legacy eight-column form remains accepted. The v2 form
+appends `precompute_fields`, a sorted, unique comma-separated list of required
+snake_case keys, or `-` when that source family has no inspected owner-field
+contract. The exporter rejects a record before creating output when its
+canonical `precompute_payload` omits a required key. The source-blind verifier
+rechecks the same requirement map from `synexia.export.json`, so the mapping
+cannot silently lose an owner precompute field between export and consumption.
 
 ## Export contract
 

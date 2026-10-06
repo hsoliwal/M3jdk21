@@ -14,6 +14,7 @@ import csv
 import hashlib
 import json
 import pathlib
+import re
 import struct
 
 MAGIC = 0x4D334C4558303031
@@ -186,6 +187,16 @@ def verify(output: pathlib.Path) -> dict[str, int]:
         if not path.is_file() or digest(path.read_bytes()) != expected:
             raise ValueError(f"output hash mismatch: {name}")
 
+    source_payload_fields = manifest.get("source", {}).get("precompute_fields")
+    if not isinstance(source_payload_fields, dict):
+        raise ValueError("source precompute field requirements are missing")
+    for source_id, fields in source_payload_fields.items():
+        if (not isinstance(source_id, str) or not isinstance(fields, list)
+                or any(not isinstance(field, str)
+                       or re.fullmatch(r"[a-z][a-z0-9_]*", field) is None for field in fields)
+                or fields != sorted(set(fields))):
+            raise ValueError("invalid source precompute field requirements")
+
     shard_rows = read_tsv(output / "synexia.shards.tsv", SHARD_COLUMNS)
     images: dict[tuple[int, int], str] = {}
     image_hashes: dict[tuple[int, int], int] = {}
@@ -229,6 +240,13 @@ def verify(output: pathlib.Path) -> dict[str, int]:
             raise ValueError("mapping metadata is incomplete")
         if canonical_precompute_payload(row["precompute_payload"]) != row["precompute_payload"]:
             raise ValueError("precompute payload is not canonical")
+        if row["source_id"] not in source_payload_fields:
+            raise ValueError("source precompute field requirements do not cover mapping")
+        payload_keys = set(json.loads(row["precompute_payload"]))
+        missing = [field for field in source_payload_fields[row["source_id"]]
+                   if field not in payload_keys]
+        if missing:
+            raise ValueError("precompute payload field coverage mismatch")
         profile = row["precompute_profile"]
         profile_sources.setdefault(profile, set()).add(identity)
         profile_coordinates.setdefault(profile, set()).add(key)
