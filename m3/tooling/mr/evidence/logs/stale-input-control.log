@@ -1,0 +1,4 @@
+Exception in thread "main" java.lang.AssertionError: equal different input invalidates without another text owner at cell 0
+	at M3RegexReuseTest.check(M3RegexReuseTest.java:210)
+	at M3RegexReuseTest.reuse(M3RegexReuseTest.java:153)
+	at M3RegexReuseTest.main(M3RegexReuseTest.java:32)

@@ -1,0 +1,12 @@
+key	value
+patterns	58
+flags	7
+strings	92
+shapes	3
+workers	4
+packet	112056
+executed_pairs	105432
+syntax_rejected_pairs	6624
+rows	406
+filter_rejections	3261
+warm_reads	2355120
