@@ -95,6 +95,48 @@ public final class M3StringInvariant {
         eq("alphagamma".repeat(5), repeated, "repeat DAG content");
         check(tuple(owner(body(repeated))), "repeat remains canonical composition");
 
+        String pa = fresh("a");
+        String pb = fresh("b");
+        String pc = fresh("c");
+        String leftAssociated = pa.concat(pb).concat(pc);
+        String rightAssociated = pa.concat(pb.concat(pc));
+        Object leftAssociatedBody = body(leftAssociated);
+        Object rightAssociatedBody = body(rightAssociated);
+        same(
+                owner(leftAssociatedBody),
+                owner(rightAssociatedBody),
+                "equal ordered composition ignores concat parenthesization");
+        same(
+                M3_FACTS.invoke(leftAssociatedBody),
+                M3_FACTS.invoke(rightAssociatedBody),
+                "parenthesization shares canonical internal precompute");
+
+        String rangeAtom = fresh("abcd");
+        String rangePrefix = rangeAtom.substring(0, 2);
+        String rangeSuffix = rangeAtom.substring(2, 4);
+        String splitAtTupleBoundary = pa.concat(rangePrefix).concat(rangeSuffix);
+        String collapsedBeforeTuple = pa.concat(rangePrefix.concat(rangeSuffix));
+        same(
+                owner(body(splitAtTupleBoundary)),
+                owner(body(collapsedBeforeTuple)),
+                "adjacent canonical atom ranges normalize across tuple boundaries");
+        String flatAbc = fresh("abc");
+        check(
+                owner(body(flatAbc)) != owner(leftAssociatedBody),
+                "equal spelling does not collapse a different canonical M3 coordinate structure");
+
+        String chain = fresh("x");
+        for (int index = 1; index < 4096; index++) {
+            chain = chain.concat(fresh("x"));
+        }
+        Object chainOwner = owner(body(chain));
+        check(tuple(chainOwner), "long concat chain remains tuple-backed");
+        int height = field(chainOwner.getClass(), "height").getInt(chainOwner);
+        check(height <= 20, "long concat chain stays balanced height=" + height);
+        check(chain.length() == 4096, "balanced concat chain length");
+        check(chain.charAt(0) == 'x' && chain.charAt(4095) == 'x',
+                "balanced concat chain endpoint content");
+
         System.out.println("M3_STRING_INVARIANT_PASS checks=" + checks
                 + " mapped=" + expectMapped
                 + " m3Fields=2 retainedArrays=0 shadows=jni-only precompute=internal");
