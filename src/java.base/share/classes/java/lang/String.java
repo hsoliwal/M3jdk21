@@ -4118,6 +4118,9 @@ public final class String
             M3String mapped = storage.asciiCase(false);
             return mapped == storage ? this : new String(mapped);
         }
+        if (storage != null) {
+            return caseMapM3(locale, false);
+        }
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.toLowerCase(this, currentValue, locale)
                           : StringUTF16.toLowerCase(this, currentValue, locale);
@@ -4206,6 +4209,9 @@ public final class String
             M3String mapped = storage.asciiCase(true);
             return mapped == storage ? this : new String(mapped);
         }
+        if (storage != null) {
+            return caseMapM3(locale, true);
+        }
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.toUpperCase(this, currentValue, locale)
                           : StringUTF16.toUpperCase(this, currentValue, locale);
@@ -4232,6 +4238,68 @@ public final class String
      */
     public String toUpperCase() {
         return toUpperCase(Locale.getDefault());
+    }
+
+    private String caseMapM3(Locale locale, boolean upper) {
+        int length = length();
+        StringBuilder output = null;
+        int copyStart = 0;
+
+        for (int index = 0; index < length; ) {
+            int sourceCodePoint = codePointAt(index);
+            int sourceWidth = Character.charCount(sourceCodePoint);
+            int mapped =
+                    upper
+                            ? ConditionalSpecialCasing.toUpperCaseEx(this, index, locale)
+                            : ConditionalSpecialCasing.toLowerCaseEx(this, index, locale);
+
+            char[] mappedUnits = null;
+            boolean unchanged;
+            if (mapped == Character.ERROR) {
+                mappedUnits =
+                        upper
+                                ? ConditionalSpecialCasing.toUpperCaseCharArray(this, index, locale)
+                                : ConditionalSpecialCasing.toLowerCaseCharArray(this, index, locale);
+                unchanged = mappedUnits != null && mappedUnits.length == sourceWidth;
+                if (unchanged) {
+                    for (int unit = 0; unit < sourceWidth; unit++) {
+                        if (mappedUnits[unit] != charAt(index + unit)) {
+                            unchanged = false;
+                            break;
+                        }
+                    }
+                }
+            } else {
+                unchanged = mapped == sourceCodePoint;
+            }
+
+            if (!unchanged) {
+                if (output == null) {
+                    output = new StringBuilder(length);
+                }
+                if (copyStart < index) {
+                    output.append(this, copyStart, index);
+                }
+                if (mapped == Character.ERROR) {
+                    if (mappedUnits == null) {
+                        throw new InternalError("missing conditional case mapping");
+                    }
+                    output.append(mappedUnits);
+                } else {
+                    output.appendCodePoint(mapped);
+                }
+                copyStart = index + sourceWidth;
+            }
+            index += sourceWidth;
+        }
+
+        if (output == null) {
+            return this;
+        }
+        if (copyStart < length) {
+            output.append(this, copyStart, length);
+        }
+        return output.toString();
     }
 
     /**
