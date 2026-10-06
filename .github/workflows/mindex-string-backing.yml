@@ -7,6 +7,7 @@ on:
       - 'm3/docs/name-mapping.json'
       - 'm3/docs/m3string-synexia-lineage.md'
       - 'm3/docs/synexia-string-precompute-port-map.tsv'
+      - 'm3/docs/synexia-mindex-precompute-inventory.tsv'
       - 'm3/docs/string-precompute-completeness.tsv'
       - 'm3/runtime-integration/**'
       - 'src/hotspot/share/prims/jni.cpp'
@@ -54,6 +55,8 @@ jobs:
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringHistoryConvergenceRecipeTest test
       - name: Prove canonical DAG master-repair recipe
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringCanonicalDagMasterRepairRecipeTest test
+      - name: Prove MIndex precompute inventory recipe
+        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=MIndexPrecomputeInventoryRecipeTest test
       - name: Set up Java 20 boot JDK for OpenJDK 21 build
         uses: actions/setup-java@v4
         with:
