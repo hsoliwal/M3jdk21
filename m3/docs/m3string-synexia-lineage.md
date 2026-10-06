@@ -200,3 +200,30 @@ consumer:
 
 This is part of the M3 String invariant: precompute must have a real owner, bounded retention, and
 a JDK-visible execution consumer. Unused metadata is not an implementation success.
+
+
+## Fixed scan-avoidance facts
+
+The fixed canonical fact bundle also retains four boolean summaries that compose exactly across
+canonical tuple seams and ranges:
+
+- whether an ASCII uppercase unit occurs;
+- whether an ASCII lowercase unit occurs;
+- whether a backslash occurs;
+- whether CR or LF occurs.
+
+They have immediate JDK consumers: no-backslash `translateEscapes`, already-normalized ROOT ASCII
+case conversion, and prepared single-line `String.lines()`. These remain scalar metadata on the
+existing fact owner; they do not introduce another payload lane.
+
+## Prepared M3 targets on mutable builders
+
+`AbstractStringBuilder` remains mutable and owns its compact `byte[]`; that source is never
+cached as M3 text. The immutable M3 search target may nevertheless reuse its existing bounded
+`M3StringSearchPrecompute.Plan`:
+
+- forward builder search uses the same AUTO BMH->KMP plan;
+- reverse builder search uses the same reverse-prefix KMP lane;
+- each invocation reads the builder's current bytes/coder directly;
+- builder mutation between calls is therefore observed immediately;
+- target M3 text is never materialized through `String.value()`.
