@@ -127,6 +127,7 @@ final class M3StringHistoryConvergenceRecipeTest {
     private static List<SourceFile> textAfter() {
         return List.of(
                 text(".github/workflows/mindex-string-backing.yml", "00-workflow.yml.txt"),
+                text("src/hotspot/share/prims/jni.cpp", "06-jni.cpp.txt"),
                 text("m3/docs/m3string-synexia-lineage.md", "01-lineage.md.txt"),
                 text(
                         "m3/docs/synexia-string-precompute-port-map.tsv",
