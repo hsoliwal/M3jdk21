@@ -574,6 +574,9 @@ if "if (M3String.admissionEnabled())" not in string
 
 # Canonical single-unit transforms must re-enter the native pool directly rather than create
 # temporary one-character String/byte[] payloads.
+if "String.COMPACT_STRINGS && StringLatin1.canEncode(unit)" not in pool:
+    fail("M3 direct unit interning ignores CompactStrings mode")
+
 for fragment in [
     "static M3String internUnit(char unit)",
     "active.findUnit(unit)",
