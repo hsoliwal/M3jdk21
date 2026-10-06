@@ -18,6 +18,7 @@ import java.nio.charset.UnmappableCharacterException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
+import sun.nio.cs.ArrayEncoder;
 
 /**
  * M3JDK canonical String value.
@@ -497,6 +498,15 @@ final class M3String implements CharSequence {
                 .onMalformedInput(CodingErrorAction.REPLACE)
                 .onUnmappableCharacter(CodingErrorAction.REPLACE);
         int length = length();
+        if (encoder instanceof ArrayEncoder arrayEncoder
+                && arrayEncoder.isASCIICompatible()) {
+            M3StringFacts prepared = facts();
+            if (prepared.ascii) {
+                byte[] output = new byte[length];
+                getBytes(output, 0, 0, String.LATIN1, length);
+                return output;
+            }
+        }
         int capacity = (int) (length * (double) encoder.maxBytesPerChar());
         byte[] output = new byte[capacity];
         if (length == 0) return output;
