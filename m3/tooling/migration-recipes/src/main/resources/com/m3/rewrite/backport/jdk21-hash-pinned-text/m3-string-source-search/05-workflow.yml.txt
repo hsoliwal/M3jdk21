@@ -1,0 +1,63 @@
+name: M3JDK String owner-coordinate runtime
+on:
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/jdk/internal/mindex/**'
+      - 'm3/docs/m3-runtime-invariants.tsv'
+      - 'm3/docs/name-mapping.json'
+      - 'm3/docs/m3string-synexia-lineage.md'
+      - 'm3/docs/synexia-string-precompute-port-map.tsv'
+      - 'm3/runtime-integration/**'
+      - 'src/hotspot/share/prims/jni.cpp'
+      - 'src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp'
+      - 'src/hotspot/share/classfile/vmClassMacros.hpp'
+      - 'src/hotspot/share/classfile/vmSymbols.hpp'
+      - 'src/hotspot/share/classfile/javaClasses.inline.hpp'
+      - 'src/hotspot/share/classfile/javaClasses.hpp'
+      - 'src/hotspot/share/classfile/javaClasses.cpp'
+      - 'src/hotspot/share/cds/archiveHeapWriter.cpp'
+      - 'src/hotspot/share/opto/stringopts.cpp'
+      - 'src/java.base/share/native/libjava/String.c'
+      - 'src/java.base/share/classes/java/lang/M3String*.java'
+      - 'src/java.base/share/classes/java/lang/String.java'
+      - 'test/jdk/java/lang/String/M3MappedStringBackingTest.java'
+      - 'test/jdk/java/lang/String/MapGuardTest.java'
+      - 'test/jdk/java/lang/String/MapFactsTest.java'
+      - 'test/jdk/java/lang/String/MapUtfTest.java'
+      - 'test/jdk/java/lang/String/M3StringFactsCompositionTest.java'
+      - 'test/jdk/java/lang/String/M3StringCanonicalDagTest.java'
+      - 'test/jdk/java/lang/String/M3StringSourcePrecomputeTest.java'
+      - 'test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java'
+      - 'test/jdk/java/lang/String/M3StringInternTest.java'
+      - 'test/jdk/jdk/internal/mindex/M3TQFactsTest.java'
+      - 'test/jdk/java/util/regex/M3RegexLiteralTQTest.java'
+      - 'doc/mindex-string-backing.md'
+      - '.github/workflows/mindex-string-backing.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  jdk-backing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '20'
+      - name: Verify M3 String source invariants
+        run: python3 m3/runtime-integration/check-m3string-invariants.py
+      - name: Prove M3 String history-convergence recipe
+        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringHistoryConvergenceRecipeTest test
+      - name: Prove balanced canonical DAG recipe
+        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringBalancedCanonicalDagFinal2RecipeTest test
+      - name: Install build prerequisites
+        run: sudo apt-get update && sudo apt-get install -y autoconf
+      - name: Configure
+        run: bash configure --with-debug-level=fastdebug --with-jvm-variants=server
+      - name: Build java.base
+        run: make java.base-java-only
+      - name: Run M3 String backing jtreg
+        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringCanonicalDagTest.java test/jdk/java/lang/String/M3StringSourcePrecomputeTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java"
