@@ -4,3 +4,11 @@ displayName: Prepare final JEP 510 KDF for M3JDK21
 description: Hash-pinned final KDF/HKDF API and Java-21 receiver integrations; product application remains security-gated.
 recipeList:
   - com.m3.rewrite.backport.M3Jep510KdfBackportRecipe
+
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.jdk21.Jep510KdfCandidate
+displayName: Materialize JEP 510 KDF candidate and security tests
+description: Exact product and pinned security-test recipe DAG; build/jtreg/runtime proof remains required before promotion.
+recipeList:
+  - com.m3.rewrite.backport.M3Jep510KdfCandidateRecipe
