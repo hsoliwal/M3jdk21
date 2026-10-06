@@ -3479,6 +3479,12 @@ public final class String
                 throw new OutOfMemoryError("Required length exceeds implementation limit");
             }
 
+            M3String storage = m3();
+            if (storage != null) {
+                M3String replacementM3 = M3String.canonicalize(replStr);
+                return new String(storage.replaceEmptyTarget(replacementM3));
+            }
+
             StringBuilder sb = new StringBuilder(resultLen);
             sb.append(replStr);
             for (int i = 0; i < thisLen; ++i) {
