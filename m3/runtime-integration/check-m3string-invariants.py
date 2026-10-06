@@ -321,6 +321,9 @@ if "private volatile M3String m3;" not in string:
 
 # M3-backed wrappers must not create Java text arrays. Even the shared empty compatibility
 # sentinel is created through the JNI shadow boundary.
+if "String.COMPACT_STRINGS ? String.LATIN1 : String.UTF16" not in m3:
+    fail("M3 canonical empty owner ignores CompactStrings mode")
+
 # M3String may allocate caller-owned byte[] results because getBytes/charset encoding requires
 # real Java arrays. It must not stage canonical text through a Java char[] or retain text arrays.
 if "new char[" in m3:
