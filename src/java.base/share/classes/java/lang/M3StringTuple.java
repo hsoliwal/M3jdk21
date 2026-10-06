@@ -15,6 +15,7 @@ import java.util.Objects;
 final class M3StringTuple extends M3StringOwner {
     final M3String left;
     final M3String right;
+    final int height;
     final long canonicalId;
 
     M3StringTuple(M3String left, M3String right, long canonicalId, long structuralHash64) {
@@ -26,6 +27,7 @@ final class M3StringTuple extends M3StringOwner {
                 structuralHash64);
         this.left = Objects.requireNonNull(left, "left");
         this.right = Objects.requireNonNull(right, "right");
+        this.height = 1 + Math.max(childHeight(left), childHeight(right));
         this.canonicalId = canonicalId;
     }
 
@@ -101,8 +103,32 @@ final class M3StringTuple extends M3StringOwner {
                 destinationCoder);
     }
 
-    boolean geometryEquals(M3String candidateLeft, M3String candidateRight) {
-        return left.sameCoordinate(candidateLeft) && right.sameCoordinate(candidateRight);
+    /**
+     * Exact ordered UTF-16 sequence comparison for tuple canonicalization.
+     *
+     * <p>The pool routes candidates by a shape-independent content key, then verifies exact
+     * content here. This makes tuple identity independent of concat parenthesization without
+     * retaining a flattened text/segment array.</p>
+     */
+    boolean sequenceEquals(M3String candidateLeft, M3String candidateRight) {
+        int leftLength = candidateLeft.length();
+        if (length != Math.addExact(leftLength, candidateRight.length())) return false;
+        for (int index = 0; index < leftLength; index++) {
+            if (charAt(index) != candidateLeft.charAt(index)) return false;
+        }
+        for (int index = 0; index < candidateRight.length(); index++) {
+            if (charAt(leftLength + index) != candidateRight.charAt(index)) return false;
+        }
+        return true;
+    }
+
+    private static int childHeight(M3String value) {
+        M3StringOwner owner = value.owner();
+        return value.start() == 0
+                        && value.length() == owner.length
+                        && owner instanceof M3StringTuple tuple
+                ? tuple.height
+                : 0;
     }
 
     @Override
