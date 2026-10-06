@@ -15,6 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HexFormat;
 import java.util.Iterator;
@@ -191,7 +192,7 @@ final class M3StringPool {
         int javaHash =
                 left.hashCodeValue() * M3String.pow31(right.length()) + right.hashCodeValue();
         byte coder = (byte) (left.coder() | right.coder());
-        long sequenceKey = tupleSequenceKey(javaHash, totalLength, coder);
+        long sequenceKey = tupleSequenceKey(left, right);
         for (;;) {
             TupleBucket bucket =
                     TUPLES.computeIfAbsent(sequenceKey, ignored -> new TupleBucket());
@@ -205,7 +206,7 @@ final class M3StringPool {
                     } else if (existing.length == totalLength
                             && existing.coder == coder
                             && existing.javaHash == javaHash
-                            && existing.sequenceEquals(left, right)) {
+                            && sameLeafSequence(M3String.whole(existing), left, right)) {
                         return M3String.whole(existing);
                     }
                 }
@@ -276,10 +277,38 @@ final class M3StringPool {
         return hash;
     }
 
-    private static long tupleSequenceKey(int javaHash, int length, byte coder) {
-        long route = ((long) javaHash << 32) ^ Integer.toUnsignedLong(length);
-        route ^= ((long) coder & 0xffL) << 56;
-        return mix64(0x517cc1b727220a95L ^ route);
+    private static long tupleSequenceKey(M3String left, M3String right) {
+        LeafCursor cursor = new LeafCursor(left, right);
+        long hash = 0x517cc1b727220a95L;
+        int spans = 0;
+        int units = 0;
+        while (cursor.next()) {
+            M3StringAtom atom = cursor.atom();
+            hash = mix64(hash ^ atom.canonicalId);
+            hash = mix64(hash ^ Integer.toUnsignedLong(cursor.start()));
+            hash = mix64(hash ^ Integer.toUnsignedLong(cursor.length()));
+            spans = Math.addExact(spans, 1);
+            units = Math.addExact(units, cursor.length());
+        }
+        hash = mix64(hash ^ Integer.toUnsignedLong(units));
+        return mix64(hash ^ (Integer.toUnsignedLong(spans) << 32));
+    }
+
+    private static boolean sameLeafSequence(
+            M3String existing, M3String left, M3String right) {
+        LeafCursor candidate = new LeafCursor(existing, null);
+        LeafCursor requested = new LeafCursor(left, right);
+        for (;;) {
+            boolean candidateNext = candidate.next();
+            boolean requestedNext = requested.next();
+            if (candidateNext != requestedNext) return false;
+            if (!candidateNext) return true;
+            if (candidate.atom() != requested.atom()
+                    || candidate.start() != requested.start()
+                    || candidate.length() != requested.length()) {
+                return false;
+            }
+        }
     }
 
     private static boolean mappedLatin1(long address, int length, boolean bigEndian) {
@@ -325,6 +354,112 @@ final class M3StringPool {
                 if (address != 0L) UNSAFE.freeMemory(address);
                 LOCAL_NATIVE_BYTES.addAndGet(-retainedBytes);
             }
+        }
+    }
+
+    /**
+     * Transient normalized cursor over terminal canonical atom coordinates.
+     *
+     * <p>Tuple shape is deliberately ignored. Adjacent ranges over the same atom are coalesced so
+     * balancing and concat parenthesization cannot change canonical sequence identity. The cursor
+     * retains only traversal metadata and never copies or materializes text.</p>
+     */
+    private static final class LeafCursor {
+        private final ArrayDeque<M3String> pending = new ArrayDeque<>();
+
+        private M3StringAtom atom;
+        private int start;
+        private int length;
+
+        private boolean buffered;
+        private M3StringAtom bufferedAtom;
+        private int bufferedStart;
+        private int bufferedLength;
+
+        private M3StringAtom rawAtom;
+        private int rawStart;
+        private int rawLength;
+
+        LeafCursor(M3String first, M3String second) {
+            if (second != null && second.length() != 0) pending.push(second);
+            if (first != null && first.length() != 0) pending.push(first);
+        }
+
+        boolean next() {
+            if (buffered) {
+                atom = bufferedAtom;
+                start = bufferedStart;
+                length = bufferedLength;
+                buffered = false;
+            } else {
+                if (!pullRaw()) return false;
+                atom = rawAtom;
+                start = rawStart;
+                length = rawLength;
+            }
+
+            while (pullRaw()) {
+                if (rawAtom == atom && start + length == rawStart) {
+                    length = Math.addExact(length, rawLength);
+                } else {
+                    buffered = true;
+                    bufferedAtom = rawAtom;
+                    bufferedStart = rawStart;
+                    bufferedLength = rawLength;
+                    break;
+                }
+            }
+            return true;
+        }
+
+        M3StringAtom atom() {
+            return atom;
+        }
+
+        int start() {
+            return start;
+        }
+
+        int length() {
+            return length;
+        }
+
+        private boolean pullRaw() {
+            while (!pending.isEmpty()) {
+                M3String value = pending.pop();
+                if (value.length() == 0) continue;
+                if (value.owner() instanceof M3StringAtom scalar) {
+                    rawAtom = scalar;
+                    rawStart = value.start();
+                    rawLength = value.length();
+                    return true;
+                }
+
+                M3StringTuple tuple = (M3StringTuple) value.owner();
+                int rangeStart = value.start();
+                int rangeEnd = value.end();
+                int leftLength = tuple.left.length();
+
+                if (rangeEnd > leftLength) {
+                    int rightStart = Math.max(0, rangeStart - leftLength);
+                    int rightEnd = rangeEnd - leftLength;
+                    pending.push(
+                            M3String.range(
+                                    tuple.right.owner(),
+                                    Math.addExact(tuple.right.start(), rightStart),
+                                    rightEnd - rightStart));
+                }
+                if (rangeStart < leftLength) {
+                    int leftStart = rangeStart;
+                    int leftEnd = Math.min(rangeEnd, leftLength);
+                    pending.push(
+                            M3String.range(
+                                    tuple.left.owner(),
+                                    Math.addExact(tuple.left.start(), leftStart),
+                                    leftEnd - leftStart));
+                }
+            }
+            return false;
         }
     }
 
