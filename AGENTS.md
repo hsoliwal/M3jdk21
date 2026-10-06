@@ -29,7 +29,7 @@ templates or recipe fixed-point tests in M3JDK21 after application.
 
 Current canonical recipe owners for the M3 String work:
 
-- `com.synexia.rewrite.M3Jdk21StringHistoryConvergence`
+- `com.synexia.rewrite.m3jdk.M3StringHistoryConvergence`
 - `com.synexia.rewrite.M3Jdk21TqConvergence`
 
 See `m3/docs/synexia-recipe-application.md`.
