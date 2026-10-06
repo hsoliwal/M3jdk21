@@ -361,6 +361,15 @@ public final class String
             this.m3 = null;
             return;
         }
+
+        M3String direct = maybeAdmitCodePoints(codePoints, offset, count);
+        if (direct != null) {
+            this.value = direct.compatibilityValue();
+            this.coder = direct.coder();
+            this.m3 = direct;
+            return;
+        }
+
         byte[] candidate = null;
         byte candidateCoder = UTF16;
         if (COMPACT_STRINGS) {
@@ -372,10 +381,9 @@ public final class String
         if (candidate == null) {
             candidate = StringUTF16.toBytes(codePoints, offset, count);
         }
-        M3String storage = maybeAdmit(candidate, candidateCoder);
-        this.value = storage == null ? candidate : storage.compatibilityValue();
-        this.coder = storage == null ? candidateCoder : storage.coder();
-        this.m3 = storage;
+        this.value = candidate;
+        this.coder = candidateCoder;
+        this.m3 = null;
     }
 
     /**
@@ -5350,6 +5358,16 @@ public final class String
         this.value = storage == null ? value : storage.compatibilityValue();
         this.coder = storage == null ? coder : storage.coder();
         this.m3 = storage;
+    }
+
+    private static M3String maybeAdmitCodePoints(
+            int[] value, int offset, int count) {
+        return M3_JOINED_STRINGS
+                && jdk.internal.misc.VM.isBooted()
+                && M3String.admissionEnabled()
+                && count != 0
+                ? M3String.admitCodePoints(value, offset, count)
+                : null;
     }
 
     private static M3String maybeAdmitCompact(
