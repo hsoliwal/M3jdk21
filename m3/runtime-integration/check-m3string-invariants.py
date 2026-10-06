@@ -52,6 +52,7 @@ hotspot_inline = read("src/hotspot/share/classfile/javaClasses.inline.hpp")
 hotspot_classes = read("src/hotspot/share/classfile/javaClasses.cpp")
 hotspot_symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
 hotspot_class_macros = read("src/hotspot/share/classfile/vmClassMacros.hpp")
+native_encoding_test = read("test/jdk/java/lang/String/nativeEncoding/StringPlatformChars.java")
 vm_intrinsics = read("src/hotspot/share/classfile/vmIntrinsics.cpp")
 string_opts = read("src/hotspot/share/opto/stringopts.cpp")
 native_string_test = read("test/jdk/java/lang/String/nativeEncoding/libstringPlatformChars.c")
@@ -832,6 +833,14 @@ for fragment in [
 ]:
     if fragment not in hotspot_inline:
         fail(f"M3 VM range modified-UTF fact reuse missing: {fragment}")
+
+for fragment in [
+    "testPreparedRangeUtfLengths();",
+    "range.hashCode();",
+    "getUtf8Length(range)",
+]:
+    if fragment not in native_encoding_test:
+        fail(f"M3 prepared range JNI UTF proof missing: {fragment}")
 
 # Donor class naming must not leak back into live VM symbols/layout.
 for path, text in [
