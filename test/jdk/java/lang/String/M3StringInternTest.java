@@ -7,12 +7,16 @@
  * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringInternTest
  */
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 
 public class M3StringInternTest {
     private static final Field STRING_M3;
     private static final Field M3_OWNER;
+    private static final Constructor<String> RAW_STRING;
+    private static final Method UTF16_TO_BYTES;
     private static long checks;
 
     static {
@@ -22,6 +26,12 @@ public class M3StringInternTest {
             Class<?> m3 = Class.forName("java.lang.M3String");
             M3_OWNER = m3.getDeclaredField("owner");
             M3_OWNER.setAccessible(true);
+            RAW_STRING = String.class.getDeclaredConstructor(byte[].class, byte.class);
+            RAW_STRING.setAccessible(true);
+            Class<?> utf16 = Class.forName("java.lang.StringUTF16");
+            UTF16_TO_BYTES =
+                    utf16.getDeclaredMethod("toBytes", char[].class, int.class, int.class);
+            UTF16_TO_BYTES.setAccessible(true);
         } catch (ReflectiveOperationException failure) {
             throw new ExceptionInInitializerError(failure);
         }
@@ -174,6 +184,16 @@ public class M3StringInternTest {
             check(expected.getMessage().equals(Integer.toString(Character.MAX_CODE_POINT + 1)),
                     "invalid code-point message parity");
         }
+
+        byte[] forcedUtf16Ascii =
+                (byte[]) UTF16_TO_BYTES.invoke(null, new char[] {'A', 'B'}, 0, 2);
+        String forcedUtf16 = RAW_STRING.newInstance(forcedUtf16Ascii, (byte) 1);
+        String normalizedAsciiPeer = new String(new char[] {'A', 'B'});
+        check(M3_OWNER.get(STRING_M3.get(forcedUtf16))
+                        == M3_OWNER.get(STRING_M3.get(normalizedAsciiPeer)),
+                "incoming UTF16 ASCII normalizes to canonical owner");
+        forcedUtf16Ascii[0] ^= 1;
+        check(forcedUtf16.equals("AB"), "raw compact input snapshots into canonical owner");
 
         String empty = new String(new char[0]);
         check(empty.intern() == "".intern(), "empty intern identity");
