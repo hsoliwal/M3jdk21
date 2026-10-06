@@ -4332,7 +4332,8 @@ public final class String
      * @since 11
      */
     public boolean isBlank() {
-        return indexOfNonWhitespace() == length();
+        M3String storage = m3();
+        return storage != null ? storage.facts().blank() : indexOfNonWhitespace() == length();
     }
 
     /**
