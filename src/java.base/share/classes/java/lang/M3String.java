@@ -649,6 +649,7 @@ final class M3String implements CharSequence {
         int end = Math.min(length(), endIndex);
         int from = Math.clamp(fromIndex, 0, length());
         if (checked.length() == 0) return Math.min(from, end);
+        if (checked.length() == 1) return indexOf(checked.charAt(0), from, end);
         if (from > end - checked.length() || !mayContain(checked)) return -1;
 
         M3StringSearchPrecompute.Plan plan = M3StringSearchPrecompute.prepare(checked);
@@ -674,6 +675,7 @@ final class M3String implements CharSequence {
         int maximumStart = Math.min(fromIndex, length() - checked.length());
         if (maximumStart < 0) return -1;
         if (checked.length() == 0) return maximumStart;
+        if (checked.length() == 1) return lastIndexOf(checked.charAt(0), maximumStart);
         if (!mayContain(checked)) return -1;
 
         M3StringSearchPrecompute.Plan plan = M3StringSearchPrecompute.prepare(checked);
