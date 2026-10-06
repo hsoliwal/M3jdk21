@@ -81,6 +81,26 @@ canonical owner/range identity, length-proportional plans live in separately bou
 absence/eviction of any fact changes performance only. Precompute never becomes a second spelling
 store and never owns the canonical text.
 
+## Code-point range/navigation lane
+
+The Synexia donor history for prepared UTF-16 range metrics and code-point navigation is adapted
+internally as `M3StringCodePointPrecompute`. This lane is deliberately separate from
+`M3String`, `M3StringOwner`, and fixed `M3StringFacts`.
+
+- cache key: exact canonical M3 owner identity + packed coordinate;
+- cache bound: 64 direct-mapped weak-owner slots;
+- source bound: 32,768 UTF-16 units;
+- retained primitive payload: cumulative valid-surrogate-pair counts at 64-unit block boundaries;
+- no String, M3String, byte[], char[], or spelling payload is retained;
+- whole-value counts continue to reuse canonical fixed facts;
+- small/one-shot ranges keep the existing exact range-fact path;
+- large/repeated range/navigation work may admit the bounded block-prefix lane;
+- small offsets use exact direct traversal rather than paying a whole-source preparation cost;
+- cache miss, eviction, budget refusal, or OutOfMemoryError changes performance only.
+
+`String.codePointCount(begin,end)` and `String.offsetByCodePoints` delegate through M3String when
+M3-backed. Split surrogate boundaries and unpaired surrogates remain exact JDK UTF-16 semantics.
+
 ## Boundary with the Synexia donor MIndexString
 
 The mapped payload owner is now interoperable with #7498: ordinary Strings and
