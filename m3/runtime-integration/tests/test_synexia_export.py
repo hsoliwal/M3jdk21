@@ -20,6 +20,11 @@ EXPORT = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader is not None
 sys.modules[SPEC.name] = EXPORT
 SPEC.loader.exec_module(EXPORT)
+VERIFY_SPEC = importlib.util.spec_from_file_location("synexia_verify", ROOT / "m3/runtime-integration/verify-synexia-lexicon.py")
+VERIFY = importlib.util.module_from_spec(VERIFY_SPEC)
+assert VERIFY_SPEC.loader is not None
+sys.modules[VERIFY_SPEC.name] = VERIFY
+VERIFY_SPEC.loader.exec_module(VERIFY)
 
 
 class SynexiaExportTest(unittest.TestCase):
@@ -79,6 +84,12 @@ class SynexiaExportTest(unittest.TestCase):
             self.assertEqual(10004, count)
             self.assertEqual(payload + 2 * units, len(image))
             self.assertEqual(image[32:64], hashlib.sha256(image[:32] + image[64:]).digest())
+            expected_units = sum(len(str(number).encode("utf-16-le", "surrogatepass")) // 2
+                                 for number in range(10001)) + sum(
+                                     len(value.encode("utf-16-le", "surrogatepass")) // 2
+                                     for value in ("London", "लंदन", "m"))
+            self.assertEqual({"source_records": 10004, "image_records": 10004, "shards": 1,
+                              "utf16_units": expected_units}, VERIFY.verify(root / "first"))
 
     def test_replay_is_byte_identical_except_for_output_location(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -98,6 +109,18 @@ class SynexiaExportTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "duplicate source/record identity"):
                 self.run_export(root / "input", root / "output", conflict=True)
             self.assertFalse((root / "output").exists())
+
+    def test_source_blind_verifier_rejects_post_export_mutation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.run_export(root / "input", root / "output")
+            self.assertEqual(10004, VERIFY.verify(root / "output")["image_records"])
+            mapping = root / "output/synexia.records.tsv"
+            original = mapping.read_bytes()
+            mapping.write_bytes(original.replace(b"London", b"Lond0n", 1))
+            with self.assertRaisesRegex(ValueError, "output hash mismatch"):
+                VERIFY.verify(root / "output")
+            mapping.write_bytes(original)
 
     def test_large_projection_is_sharded_without_renumbering_source_ids(self):
         with tempfile.TemporaryDirectory() as directory:

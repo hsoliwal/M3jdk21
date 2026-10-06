@@ -61,8 +61,10 @@ has been checked into this public JDK repository.
 
 ```text
 python3 -m unittest m3/runtime-integration/tests/test_synexia_export.py
+python3 m3/runtime-integration/verify-synexia-lexicon.py /operator/m3jdk-lexicon/export
 ```
 
 The proof covers all number IDs `0..10000`, multilingual/proper-name and unit
 mapping rows, deterministic replay, M3LEX001 version 2 metadata, precompute
-sidecars, and conflict refusal before output creation.
+sidecars, conflict refusal before output creation, and source-blind rejection
+of a post-export mutation.
