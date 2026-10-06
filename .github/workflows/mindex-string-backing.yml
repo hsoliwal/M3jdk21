@@ -25,6 +25,7 @@ on:
       - 'test/jdk/java/lang/String/MapFactsTest.java'
       - 'test/jdk/java/lang/String/MapUtfTest.java'
       - 'test/jdk/java/lang/String/M3StringFactsCompositionTest.java'
+      - 'test/jdk/java/lang/String/M3StringCanonicalDagTest.java'
       - 'test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java'
       - 'test/jdk/java/lang/String/M3StringInternTest.java'
       - 'test/jdk/jdk/internal/mindex/M3TQFactsTest.java'
@@ -49,6 +50,8 @@ jobs:
         run: python3 m3/runtime-integration/check-m3string-invariants.py
       - name: Prove M3 String history-convergence recipe
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringHistoryConvergenceRecipeTest test
+      - name: Prove balanced canonical DAG recipe
+        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringBalancedCanonicalDagFinal2RecipeTest test
       - name: Install build prerequisites
         run: sudo apt-get update && sudo apt-get install -y autoconf
       - name: Configure
@@ -56,4 +59,4 @@ jobs:
       - name: Build java.base
         run: make java.base-java-only
       - name: Run M3 String backing jtreg
-        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java"
+        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringCanonicalDagTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java"
