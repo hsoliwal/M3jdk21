@@ -38,6 +38,7 @@ dedup = read("src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp")
 stringtable = read("src/hotspot/share/classfile/stringTable.cpp")
 mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
+precompute_inventory = read("m3/docs/synexia-mindex-precompute-inventory.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
 native_string = read("src/java.base/share/native/libjava/String.c")
 pattern = read("src/java.base/share/classes/java/util/regex/Pattern.java")
@@ -797,6 +798,21 @@ required_mapping_fragments = [
 for fragment in required_mapping_fragments:
     if fragment not in mapping:
         fail(f"name mapping missing: {fragment}")
+
+for required_family in [
+    "Generic precompute engine",
+    "Universal precompute API",
+    "AST precompute",
+    "File/source facts",
+    "DAG precompute",
+    "Regex precompute",
+    "Hardware precompute",
+    "Distributed/Jini precompute",
+    "String relation/unary projection",
+    "Bigram/relation precompute",
+]:
+    if required_family not in precompute_inventory:
+        fail(f"broader MIndex precompute inventory missing: {required_family}")
 
 for fragment in [
     "MIndexWhitespaceBoundaries\tjava.lang.M3StringFacts\tIMPLEMENTED",
