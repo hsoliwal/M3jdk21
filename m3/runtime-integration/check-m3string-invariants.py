@@ -200,7 +200,9 @@ for fragment in [
         fail(f"M3 exact trigram search reuse missing: {fragment}")
 for fragment in [
     "static long maximumRetainedPrimitiveBytes()",
-    "(long) SLOTS * MAX_PATTERN_UNITS * (2L * Integer.BYTES + Long.BYTES)",
+    "(long) SLOTS * (",
+    "(long) MAX_PATTERN_UNITS * (2L * Integer.BYTES + Long.BYTES)",
+    "256L * Integer.BYTES",
     "(long) SOURCE_SLOTS * MAX_TRIGRAM_SOURCE_UNITS * Long.BYTES",
 ]:
     if fragment not in search_precompute:
