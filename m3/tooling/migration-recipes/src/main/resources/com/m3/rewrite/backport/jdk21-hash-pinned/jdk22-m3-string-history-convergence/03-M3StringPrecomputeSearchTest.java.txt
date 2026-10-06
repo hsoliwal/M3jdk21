@@ -294,6 +294,49 @@ public class M3StringPrecomputeSearchTest {
                                 sparseSupplementaryOracle.length - 1),
                 "block supplementary lastIndexOf");
 
+        String adaptiveSource = String.join(
+                "",
+                "aaaaaaaaab".repeat(220),
+                "needle-XYZ",
+                "aaaaaaaaab".repeat(220));
+        char[] adaptiveOracle = adaptiveSource.toCharArray();
+        for (String needle : new String[] {
+                "aaaaaaaaac",
+                "aaaaaaaab",
+                "needle-XYZ",
+                "aaaaaaaaabaaaaaaaaab",
+                "baaaaaaaab"
+        }) {
+            char[] needleChars = needle.toCharArray();
+            for (int from : new int[] {-3, 0, 1, 7, 511, 1024, adaptiveOracle.length - 32}) {
+                check(adaptiveSource.indexOf(needle, from)
+                                == naiveIndexOf(adaptiveOracle, needleChars, from),
+                        "adaptive BMH/KMP needle=" + needle + " from=" + from);
+            }
+        }
+        check(adaptiveSource.indexOf("needle-XYZ", 0, adaptiveSource.indexOf("needle-XYZ"))
+                        == -1,
+                "adaptive bounded end excludes match");
+
+        // BMH uses a 256-entry low-byte table. Different UTF-16 units sharing the same low byte
+        // may only reduce a skip, never skip a valid match.
+        String collisionSource = String.join(
+                "",
+                "\u0101".repeat(300),
+                "\u0001\u0201\u0301\u0401\u0501\u0601\u0701\u0801",
+                "\u0101".repeat(300));
+        char[] collisionOracle = collisionSource.toCharArray();
+        for (String needle : new String[] {
+                "\u0001\u0201\u0301\u0401\u0501\u0601\u0701\u0801",
+                "\u0101\u0101\u0101\u0101\u0101\u0101\u0101\u0101",
+                "\u0001\u0201\u0301\u0401\u0501\u0601\u0701\u0901"
+        }) {
+            char[] needleChars = needle.toCharArray();
+            check(collisionSource.indexOf(needle)
+                            == naiveIndexOf(collisionOracle, needleChars, 0),
+                    "BMH low-byte collision needle=" + Arrays.toString(needleChars));
+        }
+
         String overlapReverse = String.join(
                 "",
                 "ababa".repeat(180),
