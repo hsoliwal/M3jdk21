@@ -296,6 +296,19 @@ public class M3StringPrecomputeSearchTest {
             }
         }
 
+        String escaped = String.join("", "a\\n", "b\\141", "\\\n", "c\\s\\\\d");
+        check(equalChars(
+                        escaped.translateEscapes(),
+                        naiveTranslateEscapes(chars(escaped))),
+                "translateEscapes canonical");
+        String plainEscapes = String.join("", "plain", "-text");
+        String plainTranslated = plainEscapes.translateEscapes();
+        check(equalChars(plainTranslated, chars(plainEscapes)),
+                "translateEscapes no-op content");
+        check(plainTranslated != plainEscapes, "translateEscapes no-op fresh String");
+        expectIllegalArgument(() -> String.join("", "bad", "\\").translateEscapes(),
+                "translateEscapes trailing backslash");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
@@ -401,6 +414,12 @@ public class M3StringPrecomputeSearchTest {
             check(equalChars(source.strip(), naiveStrip(oracle).toCharArray()),
                     "random strip " + trial);
             check(source.isBlank() == naiveIsBlank(oracle), "random blank " + trial);
+            String escapedRandom = randomEscapedString(random, atoms);
+            check(equalChars(
+                            escapedRandom.translateEscapes(),
+                            naiveTranslateEscapes(chars(escapedRandom))),
+                    "random translateEscapes " + trial);
+
             if (isAscii(oracle)) {
                 check(equalChars(
                                 source.toLowerCase(Locale.ROOT),
@@ -593,6 +612,84 @@ public class M3StringPrecomputeSearchTest {
             throw new AssertionError(impossibleWithReplacement);
         }
         return Arrays.copyOf(bytes.array(), bytes.position());
+    }
+
+    private static String randomEscapedString(Random random, String[] atoms) {
+        StringBuilder value = new StringBuilder();
+        int pieces = 1 + random.nextInt(8);
+        String[] escapes = {
+                "\\b", "\\f", "\\n", "\\r", "\\s", "\\t",
+                "\\'", "\\"", "\\\\", "\\0", "\\7", "\\12",
+                "\\141", "\\\n", "\\\r", "\\\r\n"
+        };
+        for (int index = 0; index < pieces; index++) {
+            if (random.nextBoolean()) value.append(escapes[random.nextInt(escapes.length)]);
+            else value.append(atoms[random.nextInt(atoms.length)]);
+        }
+        return String.join("", value.toString());
+    }
+
+    private static char[] naiveTranslateEscapes(char[] source) {
+        char[] output = new char[source.length];
+        int from = 0;
+        int to = 0;
+        while (from < source.length) {
+            char ch = source[from++];
+            if (ch == '\\') {
+                ch = from < source.length ? source[from++] : '\0';
+                switch (ch) {
+                    case 'b' -> ch = '\b';
+                    case 'f' -> ch = '\f';
+                    case 'n' -> ch = '\n';
+                    case 'r' -> ch = '\r';
+                    case 's' -> ch = ' ';
+                    case 't' -> ch = '\t';
+                    case '\'', '"', '\\' -> {
+                        // as is
+                    }
+                    case '0', '1', '2', '3', '4', '5', '6', '7' -> {
+                        int limit = Math.min(from + (ch <= '3' ? 2 : 1), source.length);
+                        int code = ch - '0';
+                        while (from < limit) {
+                            char next = source[from];
+                            if (next < '0' || next > '7') break;
+                            from++;
+                            code = (code << 3) | (next - '0');
+                        }
+                        ch = (char) code;
+                    }
+                    case '\n' -> {
+                        continue;
+                    }
+                    case '\r' -> {
+                        if (from < source.length && source[from] == '\n') from++;
+                        continue;
+                    }
+                    default -> throw new IllegalArgumentException(
+                            String.format(
+                                    "Invalid escape sequence: \\%c \\\\u%04X",
+                                    ch,
+                                    (int) ch));
+                }
+            }
+            output[to++] = ch;
+        }
+        return copyRange(output, 0, to);
+    }
+
+    private static char[] chars(String value) {
+        char[] result = new char[value.length()];
+        value.getChars(0, value.length(), result, 0);
+        return result;
+    }
+
+    private static void expectIllegalArgument(Runnable action, String label) {
+        try {
+            action.run();
+            throw new AssertionError(label + " did not throw");
+        } catch (IllegalArgumentException expected) {
+            checks++;
+        }
     }
 
     private static boolean isAscii(char[] value) {
