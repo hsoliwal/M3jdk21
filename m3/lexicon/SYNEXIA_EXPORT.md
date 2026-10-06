@@ -49,7 +49,11 @@ The field-level donor mapping is maintained in
 families without making their values part of `java.lang.String`. Its
 `donor_java_type` column records the inspected scalar or relation-array shape
 (`int`, `long`, `int[]`, or `long[]`) so future validators can reject shape
-drift without interpreting the language metadata as String semantics.
+drift without interpreting the language metadata as String semantics. When
+that field map is present beside the source manifest (or is supplied with
+`--field-map`), the exporter enforces those shapes and Java `int`/`long`
+bounds; the source-blind verifier repeats the same check from the exported
+type map, while the export manifest carries the field-map hash for provenance.
 
 `source_id + record_id` is the immutable source identity. The exporter rejects
 duplicates, unknown source families, source-path drift, empty fields and
@@ -86,7 +90,8 @@ The output is:
   fingerprint;
 - `synexia.precompute.tsv`: bounded UTF-16/code-point/hash/ASCII/Latin-1/
   whitespace facts plus the Synexia precompute profile;
-- `synexia.export.json`: source pins, input/output hashes, counts and policy.
+- `synexia.export.json`: source pins, input/output hashes, counts, policy and,
+  when available, the canonical precompute field-type map and its SHA-256.
 
 `com.m3.text.SharedLexiconCatalog.open(exportDirectory)` validates the shard
 manifest and all four sidecars together. It exposes stable

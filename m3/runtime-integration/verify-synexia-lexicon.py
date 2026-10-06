@@ -30,6 +30,7 @@ FACT_COLUMNS = ("shard_id", "image_row", "utf16_units", "java_hash", "code_point
                 "contains_whitespace", "precompute_profile")
 PROFILE_COLUMNS = ("precompute_profile", "source_records", "image_records", "sha256")
 MAX_PRECOMPUTE_PAYLOAD_BYTES = 1 * 1024 * 1024
+ALLOWED_DONOR_TYPES = frozenset(("int", "long", "int[]", "long[]"))
 
 
 def digest(data: bytes) -> str:
@@ -64,6 +65,20 @@ def canonical_precompute_payload(value: str) -> str:
     if len(canonical.encode("utf-8")) > MAX_PRECOMPUTE_PAYLOAD_BYTES:
         raise ValueError("canonical precompute payload exceeds 1 MiB")
     return canonical
+
+
+def _fits_donor_type(value: object, donor_type: str) -> bool:
+    if donor_type == "int":
+        return isinstance(value, int) and not isinstance(value, bool) and -2**31 <= value < 2**31
+    if donor_type == "long":
+        return isinstance(value, int) and not isinstance(value, bool) and -2**63 <= value < 2**63
+    if donor_type == "int[]":
+        return (isinstance(value, list)
+                and all(_fits_donor_type(item, "int") for item in value))
+    if donor_type == "long[]":
+        return (isinstance(value, list)
+                and all(_fits_donor_type(item, "long") for item in value))
+    return False
 
 
 def unescape_sidecar_text(value: str) -> str:
@@ -196,6 +211,17 @@ def verify(output: pathlib.Path) -> dict[str, int]:
                        or re.fullmatch(r"[a-z][a-z0-9_]*", field) is None for field in fields)
                 or fields != sorted(set(fields))):
             raise ValueError("invalid source precompute field requirements")
+    source_field_types = manifest.get("source", {}).get("precompute_field_types", {})
+    if not isinstance(source_field_types, dict) or any(
+            not isinstance(field, str) or not isinstance(donor_type, str)
+            or donor_type not in ALLOWED_DONOR_TYPES
+            for field, donor_type in source_field_types.items()):
+        raise ValueError("invalid source precompute field types")
+    field_map_digest = manifest.get("source", {}).get("precompute_field_map_sha256")
+    if (field_map_digest is not None
+            and (not isinstance(field_map_digest, str)
+                 or re.fullmatch(r"[0-9a-f]{64}", field_map_digest) is None)):
+        raise ValueError("invalid source precompute field-map hash")
 
     shard_rows = read_tsv(output / "synexia.shards.tsv", SHARD_COLUMNS)
     images: dict[tuple[int, int], str] = {}
@@ -242,11 +268,17 @@ def verify(output: pathlib.Path) -> dict[str, int]:
             raise ValueError("precompute payload is not canonical")
         if row["source_id"] not in source_payload_fields:
             raise ValueError("source precompute field requirements do not cover mapping")
-        payload_keys = set(json.loads(row["precompute_payload"]))
+        payload = json.loads(row["precompute_payload"])
+        payload_keys = set(payload)
         missing = [field for field in source_payload_fields[row["source_id"]]
                    if field not in payload_keys]
         if missing:
             raise ValueError("precompute payload field coverage mismatch")
+        if source_field_types:
+            for field in source_payload_fields[row["source_id"]]:
+                donor_type = source_field_types.get(field)
+                if donor_type is None or not _fits_donor_type(payload[field], donor_type):
+                    raise ValueError("precompute payload field type mismatch")
         profile = row["precompute_profile"]
         profile_sources.setdefault(profile, set()).add(identity)
         profile_coordinates.setdefault(profile, set()).add(key)

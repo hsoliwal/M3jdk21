@@ -42,7 +42,7 @@ class SynexiaExportTest(unittest.TestCase):
         number_requirement = "frequency_rank" if with_requirements else "-"
         translation_requirement = (
             "code_point_length,concept_ids,corpus_count,document_frequency,expansion_word_ids,"
-            "first_code_point,language,last_code_point,lemma_id,lexical_rank,mapping_id,"
+            "first_code_point,last_code_point,lemma_id,lexical_rank,"
             "memberships,morphology_mask,phonetic_id,pos_mask,presence64,script_ordinal,"
             "sim_hash64,stem_id,subjects,utf16_length")
         number_row = ("numbers", "Numbers", "synexia-dictlang/src/main/java/com/synexia/dictlang/NumberLexicon.java",
@@ -117,7 +117,8 @@ class SynexiaExportTest(unittest.TestCase):
         manifest, records = self.write_inputs(root, conflict, with_payload,
                                               with_requirements=with_payload)
         return EXPORT.export(manifest, records, output, "https://github.com/hsoliwal/com.synexia",
-                             "3e85c872adf556901a341a9eb1c3b59864918da1")
+                             "3e85c872adf556901a341a9eb1c3b59864918da1",
+                             ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
 
     def test_preserves_ids_mappings_numbers_and_precompute(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -152,6 +153,8 @@ class SynexiaExportTest(unittest.TestCase):
             self.assertEqual(["frequency_rank"],
                              export_manifest["source"]["precompute_fields"]["numbers"])
             self.assertIn("concept_ids", export_manifest["source"]["precompute_fields"]["translations"])
+            self.assertEqual("long[]", export_manifest["source"]["precompute_field_types"]["concept_ids"])
+            self.assertRegex(export_manifest["source"]["precompute_field_map_sha256"], r"^[0-9a-f]{64}$")
             image = (root / "first/synexia.m3lex").read_bytes()
             magic, version, count, payload, units = struct.unpack_from(">QIIQQ", image)
             self.assertEqual(EXPORT.MAGIC, magic)
@@ -200,6 +203,18 @@ class SynexiaExportTest(unittest.TestCase):
                                 encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "missing required fields"):
                 EXPORT.export(manifest, records, root / "output", "fixture", "0" * 40)
+
+    def test_admitted_field_map_rejects_wrong_owner_shape(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest, records = self.write_inputs(root / "input", with_payload=True,
+                                                  with_requirements=True)
+            original = records.read_text(encoding="utf-8")
+            records.write_text(original.replace('"frequency_rank": 0', '"frequency_rank": "0"', 1),
+                                encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "field frequency_rank is not int"):
+                EXPORT.export(manifest, records, root / "output", "fixture", "0" * 40,
+                              ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
 
     def test_reviewed_source_manifest_has_explicit_owner_field_coverage(self):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
