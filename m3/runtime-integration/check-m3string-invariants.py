@@ -434,10 +434,22 @@ for fragment in [
     if fragment not in string:
         fail(f"M3 code-point offset fact route missing: {fragment}")
 
+# Negative filters must reuse existing range facts; they must not force an O(n) fact scan before
+# an O(n) exact comparison.
+for fragment in [
+    "M3StringFacts factsIfPrepared()",
+    "owner.rangeFactsIfPrepared(value)",
+    "final M3StringFacts rangeFactsIfPrepared(long coordinate)",
+]:
+    if fragment not in (m3 + owner):
+        fail(f"M3 prepared-fact reuse path missing: {fragment}")
+
 # Range hashes and ASCII case hashes are negative filters only; exact comparison remains in
 # String.regionMatches for every surviving candidate.
 for fragment in [
-    "leftRange.hashCodeValue() != rightRange.hashCodeValue()",
+    "leftRange.factsIfPrepared()",
+    "rightRange.factsIfPrepared()",
+    "leftFacts.javaHash != rightFacts.javaHash",
     "leftFacts.asciiLowerHash != rightFacts.asciiLowerHash",
     "leftFacts.asciiUpperHash != rightFacts.asciiUpperHash",
     "leftFacts.asciiTitleHash != rightFacts.asciiTitleHash",
