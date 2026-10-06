@@ -38,6 +38,7 @@ dedup = read("src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp")
 stringtable = read("src/hotspot/share/classfile/stringTable.cpp")
 mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
+precompute_inventory = read("m3/docs/synexia-mindex-precompute-inventory.tsv")
 completeness = read("m3/docs/string-precompute-completeness.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
 native_string = read("src/java.base/share/native/libjava/String.c")
@@ -164,6 +165,112 @@ for row in critical_port_map_rows:
 
 if "m3/docs/string-precompute-completeness.tsv" not in workflow:
     fail("M3 String workflow does not trigger on completeness ledger changes")
+
+
+# M3_PRECOMPUTE_UNIVERSE_INVENTORY: broader Synexia precompute families must all be
+# classified, even when the correct M3JDK decision is to keep them outside java.lang.String.
+inventory_rows = []
+for line_number, line in enumerate(precompute_inventory.splitlines(), start=1):
+    if not line or line.startswith("#"):
+        continue
+    cells = line.split("\t")
+    if line_number == 1:
+        if cells != [
+            "sourceWorld",
+            "donorFamily",
+            "representativeSources",
+            "targetDisposition",
+            "m3TargetOrRule",
+            "notes",
+        ]:
+            fail("MIndex precompute inventory header changed")
+        continue
+    if len(cells) != 6 or any(not cell for cell in cells):
+        fail(f"invalid MIndex precompute inventory row {line_number}")
+    inventory_rows.append(cells)
+
+if len(inventory_rows) < 28:
+    fail(f"MIndex precompute inventory unexpectedly small: {len(inventory_rows)}")
+
+allowed_inventory_dispositions = {
+    "PORT_TO_M3JDK",
+    "PORT_INTERNAL",
+    "PORT_INTERNAL_BOUNDED",
+    "DONOR_CANDIDATE",
+    "PORT_SELECTIVELY",
+    "DONOR_ACCELERATOR",
+    "PORT_BY_CONSUMER",
+    "DONOR_IMAGE",
+    "DONOR_DOMAIN",
+    "DONOR_TOOLING",
+    "DONOR_STORAGE",
+    "DONOR_GRAPH",
+    "PORT_ARCHITECTURE",
+    "DONOR_FRAMEWORK",
+    "DONOR_DISTRIBUTED",
+    "DONOR_COMPILER",
+    "REVIEW_REQUIRED",
+    "DONOR_MODEL",
+    "DONOR_COLLECTIONS",
+    "PORT_BOUNDARY",
+    "DONOR_MAPPING",
+}
+inventory_families = set()
+for row in inventory_rows:
+    source_world, family, sources, disposition, target, notes = row
+    if source_world != "Synexia":
+        fail(f"unexpected precompute donor world: {source_world}")
+    if family in inventory_families:
+        fail(f"duplicate MIndex precompute family: {family}")
+    inventory_families.add(family)
+    if disposition not in allowed_inventory_dispositions:
+        fail(f"unclassified MIndex precompute family: {family} -> {disposition}")
+    if any("TODO" in cell or "UNCLASSIFIED" in cell for cell in row):
+        fail(f"unfinished MIndex precompute inventory row: {family}")
+    if "java.lang.String" in target and disposition not in {
+        "PORT_TO_M3JDK",
+        "PORT_INTERNAL",
+        "PORT_INTERNAL_BOUNDED",
+        "PORT_SELECTIVELY",
+        "PORT_BOUNDARY",
+    }:
+        fail(f"non-String donor family incorrectly mapped into java.lang.String: {family}")
+
+required_inventory_families = {
+    "Canonical String identity",
+    "Canonical String facts",
+    "String operation plans",
+    "Prefix/border/period facts",
+    "Palindrome facts",
+    "Suffix/LCP decision facts",
+    "Literal/search trees",
+    "Regex precompute",
+    "Regex atom/native acceleration",
+    "Hash precompute",
+    "Code/text signals",
+    "Word/lexical facts",
+    "Bigram/relation precompute",
+    "Semantic/reasoning precompute",
+    "AST precompute",
+    "File/source facts",
+    "DAG precompute",
+    "Generic precompute engine",
+    "Universal precompute API",
+    "Distributed/Jini precompute",
+    "Hardware precompute",
+    "Compiler/schema precompute",
+    "API/spec precompute",
+    "String relation/unary projection",
+    "String model/vocabulary",
+    "Collections/search structures",
+    "Native shadow/boundary",
+    "Bridge convergence",
+}
+missing_inventory_families = required_inventory_families - inventory_families
+if missing_inventory_families:
+    fail("MIndex precompute inventory missing: "
+         + ", ".join(sorted(missing_inventory_families)))
+
 
 # Field-level parity for the fixed semantic donor bundle.
 for field in [
