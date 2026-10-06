@@ -54,24 +54,28 @@ public class M3StringSourcePrecomputeTest {
         Object body = body(source);
         check(!(boolean) IS_PREPARED.invoke(null, body), "source index initially cold");
 
-        check(source.indexOf("needle-one") == 700, "first search exact");
+        String needleOne = fresh("needle-one");
+        String needleTwo = fresh("needle-two");
+        String needleThree = fresh("needle-three");
+        check(source.indexOf(needleOne) == 700, "first search exact");
         check(!(boolean) IS_PREPARED.invoke(null, body), "first search only admits source");
 
-        int second = source.lastIndexOf("needle-one");
+        int second = source.lastIndexOf(needleOne);
         check(second > 1400, "second search exact reverse");
         check((boolean) IS_PREPARED.invoke(null, body), "second search prepares source index");
 
-        check(source.indexOf("needle-two") == 1411, "prepared forward search");
-        check(source.indexOf("needle-two", 1000) == 1411, "prepared from-index search");
-        check(source.indexOf("needle-two", 0, 1411) == -1, "prepared bounded end exclusion");
-        check(source.indexOf("needle-two", 0, 1421) == 1411, "prepared bounded end inclusion");
-        check(source.lastIndexOf("needle-two", source.length()) == 1411,
+        check(source.indexOf(needleTwo) == 1411, "prepared forward search");
+        check(source.indexOf(needleTwo, 1000) == 1411, "prepared from-index search");
+        check(source.indexOf(needleTwo, 0, 1411) == -1, "prepared bounded end exclusion");
+        check(source.indexOf(needleTwo, 0, 1421) == 1411, "prepared bounded end inclusion");
+        check(source.lastIndexOf(needleTwo, source.length()) == 1411,
                 "prepared reverse search");
-        check(source.indexOf("needle-three") == -1, "prepared absent search");
+        check(source.indexOf(needleThree) == -1, "prepared absent search");
 
         String dense = fresh("abc".repeat(600));
-        check(dense.indexOf("abc") == 0, "dense source first exact");
-        check(dense.lastIndexOf("abc") == dense.length() - 3, "dense source reverse exact");
+        String abc = fresh("abc");
+        check(dense.indexOf(abc) == 0, "dense source first exact");
+        check(dense.lastIndexOf(abc) == dense.length() - 3, "dense source reverse exact");
         check((boolean) IS_PREPARED.invoke(null, body(dense)),
                 "dense source may prepare even when execution falls back");
     }
@@ -86,8 +90,8 @@ public class M3StringSourcePrecomputeTest {
         String source = fresh(new String(oracle));
 
         // Admit and build the source index before randomized comparisons.
-        source.indexOf("abc");
-        source.indexOf("XYZ");
+        source.indexOf(fresh("abc"));
+        source.indexOf(fresh("XYZ"));
         check((boolean) IS_PREPARED.invoke(null, body(source)), "random source index prepared");
 
         for (int trial = 0; trial < 3000; trial++) {
