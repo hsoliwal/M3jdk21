@@ -414,6 +414,16 @@ if "if (java_lang_String::is_m3_joined(string))" not in archive_writer:
     fail("CDS String sizing is not fail-closed for M3 values")
 
 
+# Escape translation must scan canonical M3 storage and rebuild from slices/unit atoms; the
+# stock char[] implementation remains fallback-only for non-M3 Strings.
+for fragment in [
+    "M3String translateEscapes()",
+    "pieces.add(M3StringPool.internUnit(escaped))",
+    "return new String(storage.translateEscapes());",
+]:
+    if fragment not in (m3 + string):
+        fail(f"M3 translateEscapes canonical route missing: {fragment}")
+
 # Canonical single-unit transforms must re-enter the native pool directly rather than create
 # temporary one-character String/byte[] payloads.
 for fragment in [
