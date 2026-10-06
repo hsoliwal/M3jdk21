@@ -552,14 +552,25 @@ static jchar* m3_unicode_range(oop string, int start, int len) {
 // Buffer conversions must not allocate scratch space: JNI callers may have no ResourceMark.
 static char* m3_utf8_range(oop string, int start, int len, char* buf, int buflen) {
   assert(buflen > 0, "zero length output buffer");
+  static const int chunk_capacity = 256;
+  jchar scratch[chunk_capacity];
   char* out = buf;
-  for (int i = 0; i < len; i++) {
-    jchar c = java_lang_String::char_at(string, start + i);
-    int size = UNICODE::utf8_size(c);
-    if (size >= buflen) break;
-    UNICODE::as_utf8(&c, 1, out, buflen);
-    out += size;
-    buflen -= size;
+  int copied = 0;
+  while (copied < len) {
+    const int chunk = MIN2(chunk_capacity, len - copied);
+    java_lang_String::copy_chars(string, start + copied, chunk, scratch);
+    for (int i = 0; i < chunk; i++) {
+      jchar c = scratch[i];
+      int size = UNICODE::utf8_size(c);
+      if (size >= buflen) {
+        *out = '\0';
+        return buf;
+      }
+      UNICODE::as_utf8(&c, 1, out, buflen);
+      out += size;
+      buflen -= size;
+    }
+    copied += chunk;
   }
   *out = '\0';
   return buf;
@@ -702,7 +713,15 @@ int java_lang_String::utf8_length(oop java_string, typeArrayOop value) {
     }
     int result = 0;
     int len = length(java_string);
-    for (int i = 0; i < len; i++) result += UNICODE::utf8_size(char_at(java_string, i));
+    static const int chunk_capacity = 256;
+    jchar scratch[chunk_capacity];
+    for (int copied = 0; copied < len; copied += chunk_capacity) {
+      const int chunk = MIN2(chunk_capacity, len - copied);
+      copy_chars(java_string, copied, chunk, scratch);
+      for (int i = 0; i < chunk; i++) {
+        result += UNICODE::utf8_size(scratch[i]);
+      }
+    }
     return result;
   }
 
