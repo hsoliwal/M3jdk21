@@ -1,0 +1,4 @@
+Exception in thread "main" java.lang.AssertionError: bounds accepted
+	at M3SparseFillTest.bounds(M3SparseFillTest.java:49)
+	at M3SparseFillTest.verify(M3SparseFillTest.java:54)
+	at M3SparseFillTest.main(M3SparseFillTest.java:121)
