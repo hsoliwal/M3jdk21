@@ -52,10 +52,17 @@
  * is an example: trigram facts are necessary-condition metadata and a positive
  * result still requires the authoritative verifier.</p>
  *
- * <h2>External donor material</h2>
+ * <h2>External implementation references</h2>
  *
- * <p>External algorithm families such as RE2/J or Lucene may inform
- * independently implemented JDK-internal kernels only after provenance,
+ * <p>Abstract domains such as language, reasoning, search, graphs, automata,
+ * logic and mathematics are not owned by a project merely because that project
+ * implements them. Provenance and licensing attach to specific reviewed
+ * implementation artifacts: exact source/blob revisions, concrete encodings,
+ * generated tables, serialization formats, tests, and particular solver or
+ * algorithm realizations.</p>
+ *
+ * <p>Specific RE2/J, Lucene, Synexia, or other implementation artifacts may
+ * inform independently written JDK-internal kernels only after provenance,
  * licensing and semantic parity are recorded by the donor workspace. Donor
  * package names and public APIs do not define M3JDK class names or ABI.</p>
  *
