@@ -18,6 +18,7 @@ import java.nio.charset.UnmappableCharacterException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Random;
 
 public class M3StringPrecomputeSearchTest {
@@ -203,6 +204,78 @@ public class M3StringPrecomputeSearchTest {
                     "ASCII supplementary input length");
         }
 
+        String asciiCase = String.join("", "AbC", "-xYz-123");
+        check(asciiCase.toLowerCase(Locale.ROOT).equals("abc-xyz-123"),
+                "ROOT ASCII lowercase");
+        check(asciiCase.toUpperCase(Locale.ROOT).equals("ABC-XYZ-123"),
+                "ROOT ASCII uppercase");
+        String alreadyLower = String.join("", "abc", "-123");
+        check(alreadyLower.toLowerCase(Locale.ROOT) == alreadyLower,
+                "ROOT ASCII lowercase unchanged identity");
+        String alreadyUpper = String.join("", "ABC", "-123");
+        check(alreadyUpper.toUpperCase(Locale.ROOT) == alreadyUpper,
+                "ROOT ASCII uppercase unchanged identity");
+        check(String.join("", "I", "X").toLowerCase(Locale.forLanguageTag("tr"))
+                        .equals("\u0131x"),
+                "Turkish lowercase bypass");
+        check(String.join("", "\u03a3", "X").toLowerCase(Locale.ROOT).equals("\u03c3x"),
+                "non-ASCII lowercase bypass");
+
+        String equalComposed = String.join("", "Aa", "BB");
+        String equalScalar = new String("AaBB".toCharArray());
+        check(equalComposed.equals(equalScalar), "equal composed/scalar content");
+        check(!String.join("", "alpha", "X").equals(String.join("", "alpha", "Y")),
+                "unequal canonical hash reject");
+        // "Aa" and "BB" are the classic Java String hash collision.
+        String collisionLeft = String.join("", "A", "a");
+        String collisionRight = String.join("", "B", "B");
+        check(collisionLeft.hashCode() == collisionRight.hashCode(), "known Java hash collision");
+        check(!collisionLeft.equals(collisionRight), "hash collision exact verification");
+
+        String sparse = String.join(
+                "",
+                "a".repeat(320),
+                "Z",
+                "b".repeat(320),
+                "Z",
+                "c".repeat(320));
+        char[] sparseOracle = (
+                "a".repeat(320) + "Z" + "b".repeat(320) + "Z" + "c".repeat(320))
+                .toCharArray();
+        check(sparse.indexOf('Z') == naiveIndexOf(sparseOracle, 'Z', 0),
+                "block position indexOf");
+        check(sparse.indexOf('Z', 321) == naiveIndexOf(sparseOracle, 'Z', 321),
+                "block position indexOf from");
+        check(sparse.indexOf('Z', 100, 600)
+                        == naiveIndexOfBounded(sparseOracle, new char[] {'Z'}, 100, 600),
+                "block position bounded");
+        check(sparse.lastIndexOf('Z') == naiveLastIndexOf(sparseOracle, 'Z', sparseOracle.length),
+                "block position lastIndexOf");
+        check(sparse.indexOf('Q') == -1, "block position absent");
+
+        String sparseSupplementary = String.join(
+                "",
+                "a".repeat(319) + "\ud83d",
+                "\ude42" + "b".repeat(384),
+                "\ud83d",
+                "\ude42" + "c".repeat(320));
+        char[] sparseSupplementaryOracle = sparseSupplementary.toCharArray();
+        check(sparseSupplementary.indexOf(0x1f642)
+                        == naiveIndexOfCodePoint(
+                                sparseSupplementaryOracle, 0x1f642, 0,
+                                sparseSupplementaryOracle.length),
+                "block supplementary indexOf");
+        check(sparseSupplementary.indexOf(0x1f642, 320)
+                        == naiveIndexOfCodePoint(
+                                sparseSupplementaryOracle, 0x1f642, 320,
+                                sparseSupplementaryOracle.length),
+                "block supplementary indexOf from");
+        check(sparseSupplementary.lastIndexOf(0x1f642)
+                        == naiveLastIndexOfCodePoint(
+                                sparseSupplementaryOracle, 0x1f642,
+                                sparseSupplementaryOracle.length - 1),
+                "block supplementary lastIndexOf");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
@@ -308,6 +381,16 @@ public class M3StringPrecomputeSearchTest {
             check(equalChars(source.strip(), naiveStrip(oracle).toCharArray()),
                     "random strip " + trial);
             check(source.isBlank() == naiveIsBlank(oracle), "random blank " + trial);
+            if (isAscii(oracle)) {
+                check(equalChars(
+                                source.toLowerCase(Locale.ROOT),
+                                naiveAsciiCase(oracle, false)),
+                        "random ROOT lowercase " + trial);
+                check(equalChars(
+                                source.toUpperCase(Locale.ROOT),
+                                naiveAsciiCase(oracle, true)),
+                        "random ROOT uppercase " + trial);
+            }
             int regionLength = oracle.length == 0 ? 0 : random.nextInt(oracle.length + 1);
             int leftStart = oracle.length == regionLength
                     ? 0
@@ -490,6 +573,24 @@ public class M3StringPrecomputeSearchTest {
             throw new AssertionError(impossibleWithReplacement);
         }
         return Arrays.copyOf(bytes.array(), bytes.position());
+    }
+
+    private static boolean isAscii(char[] value) {
+        for (char unit : value) {
+            if (unit > 0x7f) return false;
+        }
+        return true;
+    }
+
+    private static char[] naiveAsciiCase(char[] value, boolean upper) {
+        char[] result = copyRange(value, 0, value.length);
+        for (int index = 0; index < result.length; index++) {
+            char unit = result[index];
+            result[index] = upper
+                    ? (unit >= 'a' && unit <= 'z' ? (char) (unit - ('a' - 'A')) : unit)
+                    : (unit >= 'A' && unit <= 'Z' ? (char) (unit + ('a' - 'A')) : unit);
+        }
+        return result;
     }
 
     private static boolean naiveRegionMatches(
