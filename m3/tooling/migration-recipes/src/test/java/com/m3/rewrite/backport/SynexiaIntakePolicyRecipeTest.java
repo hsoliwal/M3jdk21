@@ -13,6 +13,7 @@ import java.util.TreeMap;
 import org.junit.jupiter.api.Test;
 import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.SourceFile;
+import org.openrewrite.config.Environment;
 import org.openrewrite.internal.InMemoryLargeSourceSet;
 import org.openrewrite.text.PlainText;
 
@@ -21,6 +22,10 @@ final class SynexiaIntakePolicyRecipeTest {
             "/com/m3/rewrite/backport/jdk21-hash-pinned-text/synexia-intake-policy/";
 
     private static final String WORKFLOW = ".github/workflows/m3-synexia-intake-policy.yml";
+    private static final String CANONICAL_PORTING = "m3/docs/M3JDK21_PORTING_INVARIANT.md";
+    private static final String CONVERGENCE = "m3/docs/SYNEXIA_CONVERGENCE_MODEL.md";
+    private static final String ATOM_PATTERN =
+            "m3/docs/atom-pattern-admission-and-tooling-boundary.md";
     private static final String PORTING = "m3/docs/m3jdk21-porting-invariant.md";
     private static final String DIRECT = "m3/docs/synexia-direct-copy-review.tsv";
     private static final String POLICY = "m3/docs/synexia-intake-policy.tsv";
@@ -31,6 +36,9 @@ final class SynexiaIntakePolicyRecipeTest {
     void exactCurrentMasterPreimagesReplayAndThenReachFixedPoint() {
         var recipe = new M3Jdk21HashPinnedTextSnapshotRecipe("synexia-intake-policy");
         List<SourceFile> before = List.of(
+                text(CANONICAL_PORTING, "pre-06-M3JDK21_PORTING_INVARIANT.md.txt"),
+                text(CONVERGENCE, "pre-07-SYNEXIA_CONVERGENCE_MODEL.md.txt"),
+                text(ATOM_PATTERN, "pre-08-atom-pattern-admission-and-tooling-boundary.md.txt"),
                 text(PORTING, "pre-01-porting.md.txt"),
                 text(FOSS, "pre-04-foss.tsv.txt"));
 
@@ -43,6 +51,9 @@ final class SynexiaIntakePolicyRecipeTest {
 
         Map<String, String> expected = new TreeMap<>();
         expected.put(WORKFLOW, resource("00-workflow.yml.txt"));
+        expected.put(CANONICAL_PORTING, resource("06-M3JDK21_PORTING_INVARIANT.md.txt"));
+        expected.put(CONVERGENCE, resource("07-SYNEXIA_CONVERGENCE_MODEL.md.txt"));
+        expected.put(ATOM_PATTERN, resource("08-atom-pattern-admission-and-tooling-boundary.md.txt"));
         expected.put(PORTING, resource("01-porting.md.txt"));
         expected.put(DIRECT, resource("02-direct-copy.tsv.txt"));
         expected.put(POLICY, resource("03-policy.tsv.txt"));
@@ -72,6 +83,45 @@ final class SynexiaIntakePolicyRecipeTest {
         assertThrows(RuntimeException.class, () -> recipe.run(
                 new InMemoryLargeSourceSet(before), context(), 1)
                 .getChangeset().getAllResults());
+    }
+
+    @Test
+    void namedPolicyComposesTextAndJavaVerificationPackets() {
+        var declared =
+                Environment.builder()
+                        .scanRuntimeClasspath("com.m3.rewrite")
+                        .build()
+                        .activateRecipes("com.m3.rewrite.backport.SynexiaIntakePolicy")
+                        .getRecipeList()
+                        .getFirst();
+
+        assertEquals(2, declared.getRecipeList().size());
+        assertInstanceOf(M3Jdk21HashPinnedTextSnapshotRecipe.class, declared.getRecipeList().get(0));
+        assertInstanceOf(M3Jdk21HashPinnedSnapshotRecipe.class, declared.getRecipeList().get(1));
+        assertEquals(
+                "synexia-intake-policy",
+                ((M3Jdk21HashPinnedTextSnapshotRecipe) declared.getRecipeList().get(0))
+                        .getCrateName());
+        assertEquals(
+                "synexia-intake-policy-java",
+                ((M3Jdk21HashPinnedSnapshotRecipe) declared.getRecipeList().get(1))
+                        .getCrateName());
+    }
+
+    @Test
+    void canonicalHandoffDocsNameSynexiaOwnerAndKeepTargetScopeIndependent() {
+        String porting = resource("06-M3JDK21_PORTING_INVARIANT.md.txt");
+        String convergence = resource("07-SYNEXIA_CONVERGENCE_MODEL.md.txt");
+        String scope = resource("08-atom-pattern-admission-and-tooling-boundary.md.txt");
+
+        assertTrue(porting.contains("M3EveryModuleAtomPatternInventoryRecipe"));
+        assertTrue(porting.contains("FILE -> PACKAGE -> MODULE -> PROJECT -> REPOSITORY"));
+        assertTrue(convergence.contains("M3HierarchicalAtomPatternRecipe"));
+        assertTrue(convergence.contains("M3MavenizedAtomPatternAbsorptionRecipe"));
+        assertTrue(scope.contains("Synexia donor-preparation hierarchy"));
+        assertTrue(scope.contains("M3JDK21 target-admission hierarchy"));
+        assertTrue(scope.contains("MULTI_MODULE"));
+        assertTrue(scope.contains("LIBRARY_API"));
     }
 
     @Test
