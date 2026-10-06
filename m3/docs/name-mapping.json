@@ -313,6 +313,41 @@
       "status": "donor image families",
       "source_role": "Unicode code-point/property tables, SI/unit catalogs and other frozen numeric/static precompute",
       "target_rule": "Import only versioned immutable tables required by a target-internal consumer; never retain them as per-String payload and never expose them as public java.lang.String precompute API."
+    },
+    {
+      "source": "com.synexia.mindex.MIndexStringPrecomputeImage / MIndexStringPrecomputeProfile / MIndexStringPrecomputeCache",
+      "target": "java.lang.M3StringFacts + java.lang.M3StringSearchPrecompute + java.lang.M3StringPositionPrecompute + unported donor analysis lanes",
+      "status": "responsibility split; no monolithic M3JDK target image/cache/profile",
+      "source_role": "heavy per-string profile/image/cache bundling histogram, KMP/Z, palindrome, rolling-hash, sketch and suffix-index lanes",
+      "target_rule": "Internalize only lanes with a concrete JDK consumer. Fixed facts stay on M3StringFacts; literal-pattern search metadata stays in bounded weak-owner M3StringSearchPrecompute; exact code-unit position metadata stays in bounded M3StringPositionPrecompute. Do not retain Z/palindrome/full rolling-hash/minHash/simHash/suffix-array/LCP/RMQ state without a named JDK consumer."
+    },
+    {
+      "source": "com.synexia.mindex.MIndexStringRelationPrecompute / MIndexStringRelationImage",
+      "target": "no retained M3JDK pair-relation cache; exact M3String/String operations",
+      "status": "donor-only: no current JDK21 consumer",
+      "source_role": "bounded global cache of exact pair prefix/suffix/compare/occurrence relations",
+      "target_rule": "Do not copy the 32MiB global pair cache/occurrence arrays into java.base. Existing exact M3 String operations and bounded per-pattern plans remain semantic authority."
+    },
+    {
+      "source": "com.synexia.mindex.MIndexStringUnaryProjectionPrecompute",
+      "target": "java.lang.M3String + java.lang.M3StringFacts + java.lang.String projection operations",
+      "status": "semantic subset implemented; donor global result cache intentionally absent",
+      "source_role": "cached LOWER_ROOT/UPPER_ROOT/TRIM/STRIP projection results",
+      "target_rule": "Preserve exact ROOT-case and trim/strip semantics using canonical M3 operations/facts. Do not add the donor 8MiB projected-result-ID cache without evidence that a JDK consumer amortizes global retention."
+    },
+    {
+      "source": "com.synexia.mindex.MIndexStringPrecomputeBridge / MIndexStringPrecomputeBridgePlan plus com.synexia.mindex.indexstring.MIndexStringPrecomputeConvergenceBridge",
+      "target": "direct M3JDK String/M3String/internal-precompute routing",
+      "status": "responsibility split; bridge object not required in target runtime",
+      "source_role": "cross-owner membrane between canonical IndexString, runtime MIndexString, compiler/JDK callers and retained precompute",
+      "target_rule": "M3JDK already owns M3String directly. Preserve admission/preparation/budget/fail-open semantics in target owners rather than reproducing an application-to-runtime bridge or Synexia dependency."
+    },
+    {
+      "source": "com.synexia.m3index.M3StringPrecomputeImage / M3StringPrecomputeProfile",
+      "target": "no direct java.lang counterpart",
+      "status": "donor wrapper names only",
+      "source_role": "M3-named donor facade delegating to MIndexStringPrecomputeImage/Profile",
+      "target_rule": "Do not infer M3JDK ABI from the donor wrapper name. M3JDK target naming and ownership are defined independently by java.lang.M3String and internal M3 precompute owners."
     }
   ],
   "imported_donor_sources": [],
