@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.M3StringSourceSearch
+displayName: Converge M3 String repeated-source search precompute
+description: Replays the Synexia-history-derived bounded repeated-source postings/hash precompute, its exact M3 integration, invariants, naming map and hosted proof without exposing precompute as public String API.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk22-m3-string-source-search
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-string-source-search
