@@ -17,8 +17,9 @@ import java.util.concurrent.atomic.AtomicReferenceArray;
  * starts at 64-code-unit block boundaries. It never owns spelling, byte/char arrays, String
  * wrappers, or M3String values. Exact code-point counts use block prefixes plus at most one block
  * of local UTF-16 verification per boundary. Offset navigation uses monotone exact range counts.
- * Cache absence, eviction, budget refusal, or allocation failure falls back to exact linear
- * traversal and therefore cannot change String semantics.</p>
+ * Cache absence, eviction, budget refusal, or allocation failure falls back to the existing
+ * exact range-fact path for counts or exact linear traversal for offsets and therefore cannot
+ * change String semantics.</p>
  */
 final class M3StringCodePointPrecompute {
     private static final int BLOCK_SHIFT = 6;
@@ -227,18 +228,6 @@ final class M3StringCodePointPrecompute {
         return index + 1 < source.length()
                 && Character.isHighSurrogate(source.charAt(index))
                 && Character.isLowSurrogate(source.charAt(index + 1));
-    }
-
-    private static int linearCodePointCount(M3String source, int beginIndex, int endIndex) {
-        int count = endIndex - beginIndex;
-        for (int index = beginIndex; index + 1 < endIndex; index++) {
-            if (Character.isHighSurrogate(source.charAt(index))
-                    && Character.isLowSurrogate(source.charAt(index + 1))) {
-                count--;
-                index++;
-            }
-        }
-        return count;
     }
 
     private static int linearOffsetByCodePoints(
