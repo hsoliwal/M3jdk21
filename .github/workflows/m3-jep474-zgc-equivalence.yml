@@ -38,8 +38,7 @@ jobs:
           git -C "$RUNNER_TEMP/upstream-jdk" init -q
           git -C "$RUNNER_TEMP/upstream-jdk" remote add origin https://github.com/openjdk/jdk.git
           git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch             --filter=blob:none --no-tags origin             "4ba74475d44831c1fe49359458163cd1567e9619"
-          printf 'UPSTREAM=%s
-' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
+          printf 'UPSTREAM=%s\\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
 
       - name: Prove exact seven-path denominator and compatibility split
         shell: bash
@@ -113,8 +112,7 @@ jobs:
           make JOBS=2 images
           JAVA_BIN="$(find build -path '*/images/jdk/bin/java' -type f | head -n 1)"
           test -x "$JAVA_BIN"
-          printf 'M3_JAVA=%s
-' "$JAVA_BIN" >> "$GITHUB_ENV"
+          printf 'M3_JAVA=%s\\n' "$JAVA_BIN" >> "$GITHUB_ENV"
 
       - name: Prove Java21 ZGC default remains non-generational
         shell: bash
