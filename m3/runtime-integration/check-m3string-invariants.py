@@ -509,6 +509,18 @@ for fragment in [
         fail(f"Pattern compiled literal-effect TQ boundary missing: {fragment}")
 
 for fragment in [
+    "skipM3TqTransparentLeading",
+    "current instanceof Begin",
+    "current instanceof Caret",
+    "current instanceof UnixCaret",
+    "current instanceof GroupHead",
+    "compiledRequiredLiteral",
+    "current.getClass() == Slice.class",
+]:
+    if fragment not in pattern:
+        fail(f"Pattern mandatory literal graph precompute missing: {fragment}")
+
+for fragment in [
     "transient M3TQ m3Tq;",
     "has(LITERAL) && !has(CASE_INSENSITIVE)",
     "M3TQ.fromExact(List.of(pattern))",
