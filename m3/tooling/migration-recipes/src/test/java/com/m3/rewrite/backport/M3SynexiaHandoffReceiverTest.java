@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 final class M3SynexiaHandoffReceiverTest {
     @Test
-    void javaSnapshotAdmitsSynexiaRecipeAndM3OwnedRoots() {
+    void javaSnapshotAdmitsOnlyTargetReceiverProofRootsForSynexiaCrates() {
         assertDoesNotThrow(
                 () -> new M3Jdk21HashPinnedSnapshotRecipe("synexia-recipe-export-v1"));
         assertTrue(
@@ -26,6 +26,23 @@ final class M3SynexiaHandoffReceiverTest {
                 M3Jdk21HashPinnedSnapshotRecipe.jdkJavaPath(
                         "m3/ports/sample/src/main/java/sample/Sample.java"));
         assertFalse(M3Jdk21HashPinnedSnapshotRecipe.jdkJavaPath("m3/docs/Sample.java"));
+        assertTrue(
+                M3Jdk21HashPinnedSnapshotRecipe.synexiaReceiverJavaPath(
+                        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/"
+                                + "M3SynexiaHandoffGuardRecipe.java"));
+        assertTrue(
+                M3Jdk21HashPinnedSnapshotRecipe.synexiaReceiverJavaPath(
+                        "m3/tooling/a3/src/test/java/com/m3/a3/A3ApplyTest.java"));
+        assertFalse(
+                M3Jdk21HashPinnedSnapshotRecipe.synexiaReceiverJavaPath(
+                        "src/java.base/share/classes/java/lang/String.java"));
+        assertFalse(
+                M3Jdk21HashPinnedSnapshotRecipe.synexiaReceiverJavaPath(
+                        "test/jdk/java/lang/String/Test.java"));
+        assertFalse(
+                M3Jdk21HashPinnedSnapshotRecipe.synexiaReceiverJavaPath(
+                        ".m3/openrewrite-recipes/src/main/java/com/synexia/rewrite/"
+                                + "M3HashPinnedJavaSnapshotRecipe.java"));
     }
 
     @Test
