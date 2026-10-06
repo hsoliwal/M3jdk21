@@ -850,6 +850,22 @@ final class M3String implements CharSequence {
         return joinValues(pieces);
     }
 
+    M3String replaceEmptyTarget(M3String replacement) {
+        M3String checkedReplacement = Objects.requireNonNull(replacement, "replacement");
+        if (checkedReplacement.length() == 0) {
+            // String.replace("", "") returns a distinct but content-equal String; preserve
+            // canonical storage while letting the String wrapper provide object freshness.
+            return this;
+        }
+        ArrayList<M3String> pieces = new ArrayList<>();
+        pieces.add(checkedReplacement);
+        for (int index = 0; index < length(); index++) {
+            pieces.add(slice(index, index + 1));
+            pieces.add(checkedReplacement);
+        }
+        return joinValues(pieces);
+    }
+
     M3String replace(M3String target, M3String replacement) {
         M3String checkedTarget = Objects.requireNonNull(target, "target");
         M3String checkedReplacement = Objects.requireNonNull(replacement, "replacement");
