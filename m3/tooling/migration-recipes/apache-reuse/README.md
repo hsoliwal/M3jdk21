@@ -1,3 +1,63 @@
+# Canonical Synexia receiver
+
+`SYNEXIA_RECIPE_OWNERSHIP_V1` governs this handoff. The canonical reusable
+Apache reuse recipe implementation, shared templates, manifests, fixtures and
+proof tooling live in `hsoliwal/com.synexia`, under
+`synexia-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse/`.
+The `m3jdk21-receiver` profile binds that same Synexia-owned recipe to this target.
+New generic fixes and stronger proof fixtures belong in that existing Synexia
+owner. This directory is a receiving pointer and a frozen historical proof packet.
+
+The local POM, template resources and earlier evidence below remain frozen
+historical proof tooling. Preserve their original source/license/hash lineage;
+they are not the current generic authoring path. The complete previous README
+is preserved verbatim after the historical boundary below. Its old execution
+status describes that earlier packet only.
+
+M3JDK21 continues to own its JDK/HotSpot/JNI runtime, accepted M3 String and
+precompute, public contracts and existing naming registry. Recipe custody adds
+no Synexia runtime dependency. Eligible Apache-covered reuse retains applicable
+LICENSE/NOTICE, attribution and modification notices; it never relicenses
+inherited OpenJDK or other third-party material.
+
+## Current source binding and reproduction
+
+Read [SYNEXIA_APPLICATION.json](SYNEXIA_APPLICATION.json) for the exact
+`synexiaRevision`, executed recipe identities, source/target hashes and recorded
+gate results. That application receipt is the execution record for this handoff.
+This guide and the presence of files do not independently assert a successful
+build, installed policy, completed migration or target runtime qualification.
+
+Use the pinned Java 21/Maven toolchain and approved offline dependencies. Set
+both checkout paths explicitly. The Synexia checkout must already be at the
+exact source commit recorded by the receipt, with no tracked or untracked edits
+in the canonical crate or engine. Ignored build outputs remain outside that source
+check. These commands do not change a branch or its history. Run compile, test
+and verify in order, stopping on failure.
+
+```sh
+set -eu
+synexia_root=/absolute/path/to/com.synexia
+target_root=/absolute/path/to/M3jdk21
+expected_revision=$(python3 -c 'import json,re,sys; v=json.load(open(sys.argv[1], encoding="utf-8"))["synexiaRevision"]; assert isinstance(v,str) and re.fullmatch("[0-9a-f]{40}",v); print(v)' "$target_root/m3/tooling/migration-recipes/apache-reuse/SYNEXIA_APPLICATION.json")
+test "$(git -C "$synexia_root" rev-parse HEAD)" = "$expected_revision"
+test -z "$(git -C "$synexia_root" status --porcelain --untracked-files=all -- synexia-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedTextSnapshotRecipe.java)"
+mvn -o -B -ntp -f "$synexia_root/synexia-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse/pom.xml" -Pm3jdk21-receiver -Dm3.target.root="$target_root" compile
+mvn -o -B -ntp -f "$synexia_root/synexia-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse/pom.xml" -Pm3jdk21-receiver -Dm3.target.root="$target_root" test
+mvn -o -B -ntp -f "$synexia_root/synexia-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse/pom.xml" -Pm3jdk21-receiver -Dm3.target.root="$target_root" verify
+```
+
+The source-owned tests stage actual OpenRewrite Results. Only successful,
+reviewed Results with exact preimages and postimages may enter the existing
+application process. Check receiving-tree hashes and zero-change replay. These
+Maven commands do not themselves install results into the target checkout or
+retire historical tooling. Missing tools, failed gates or source drift block
+application; manually copying templates is not a substitute for execution.
+
+---
+
+## Historical target-local packet (preserved verbatim)
+
 # Apache reuse: code, recipes and every owned asset kind
 
 Synexia is the convergence workspace. All task-bound public targets, including
