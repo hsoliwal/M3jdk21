@@ -707,7 +707,7 @@ Symbol* java_lang_String::as_symbol_or_null(oop java_string) {
 int java_lang_String::utf8_length(oop java_string, typeArrayOop value) {
   if (is_m3_joined(java_string)) {
     oop storage = m3_storage(java_string);
-    int prepared = java_lang_M3String::utf8_length_if_precomputed(storage);
+    int prepared = java_lang_M3String::modified_utf8_length_if_precomputed(storage);
     if (prepared >= 0) {
       return prepared;
     }
@@ -952,6 +952,7 @@ int java_lang_M3String::_owner_coder_offset;
 int java_lang_M3String::_owner_javaHash_offset;
 int java_lang_M3String::_owner_facts_offset;
 int java_lang_M3String::_facts_utf8Length_offset;
+int java_lang_M3String::_facts_modifiedUtf8Length_offset;
 int java_lang_M3String::_atom_address_offset;
 int java_lang_M3String::_atom_storageWidth_offset;
 int java_lang_M3String::_atom_bigEndian_offset;
@@ -979,7 +980,8 @@ int java_lang_M3String::_tuple_right_offset;
   macro(_tuple_right_offset, t, "right", m3_string_signature, false);
 
 #define M3_STRING_FACTS_FIELDS_DO(macro) \
-  macro(_facts_utf8Length_offset, f, "utf8Length", int_signature, false);
+  macro(_facts_utf8Length_offset, f, "utf8Length", int_signature, false); \
+  macro(_facts_modifiedUtf8Length_offset, f, "modifiedUtf8Length", int_signature, false);
 
 void java_lang_M3String::compute_offsets() {
   InstanceKlass* v = vmClasses::M3String_klass();
