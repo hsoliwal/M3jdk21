@@ -1,0 +1,8 @@
+gate	state
+docs_before_code	PASS
+reuse_synexia_import_model	PASS_BY_SOURCE
+all_delivery_lanes_tested	AUTHORED_PENDING_EXECUTION
+all_delta_actions_tested	AUTHORED_PENDING_EXECUTION
+recipe_fixed_point	AUTHORED_PENDING_EXECUTION
+a3_module_tests	AUTHORED_PENDING_EXECUTION
+promotion_authority	FALSE

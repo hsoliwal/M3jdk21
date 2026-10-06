@@ -1,0 +1,13 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.A3SynexiaDeliveryWork
+displayName: Bridge sealed Synexia delivery into A3 review work
+description: >
+  Install the target-specific A3 Synexia delivery bridge, its exact Maven dependency and its
+  contract document. The bridge emits review work only and grants no promotion authority.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: a3-synexia-delivery-work
+      lst: true
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: a3-synexia-delivery-work-text
