@@ -30,6 +30,7 @@ public final class M3FormulaTruthIndex {
     }
 
     private final M3FormulaTable formulas;
+    private final M3CoordinateSpace modelSpace;
     private final long[] formulaIds;
     private final long[] modelIds;
     private final int wordsPerFormula;
@@ -38,12 +39,14 @@ public final class M3FormulaTruthIndex {
 
     private M3FormulaTruthIndex(
             M3FormulaTable formulas,
+            M3CoordinateSpace modelSpace,
             long[] formulaIds,
             long[] modelIds,
             int wordsPerFormula,
             long[] positiveBits,
             long[] negativeBits) {
         this.formulas = formulas;
+        this.modelSpace = Objects.requireNonNull(modelSpace, "modelSpace");
         this.formulaIds = formulaIds;
         this.modelIds = modelIds;
         this.wordsPerFormula = wordsPerFormula;
@@ -53,17 +56,21 @@ public final class M3FormulaTruthIndex {
 
     public static M3FormulaTruthIndex compile(
             M3FormulaTable formulas,
+            M3CoordinateSpace modelSpace,
             long[] modelIds,
             ModelAtomTruthProvider provider) {
-        return compile(formulas, modelIds, provider, Budget.DEFAULT);
+        return compile(formulas, modelSpace, modelIds, provider, Budget.DEFAULT);
     }
 
     public static M3FormulaTruthIndex compile(
             M3FormulaTable formulaTable,
+            M3CoordinateSpace modelSpace,
             long[] inputModelIds,
             ModelAtomTruthProvider provider,
             Budget budget) {
         M3FormulaTable formulas = Objects.requireNonNull(formulaTable, "formulas");
+        M3CoordinateSpace checkedModelSpace =
+                Objects.requireNonNull(modelSpace, "modelSpace");
         long[] models = canonicalIds(Objects.requireNonNull(inputModelIds, "modelIds"));
         ModelAtomTruthProvider truthProvider = Objects.requireNonNull(provider, "provider");
         Budget checkedBudget = Objects.requireNonNull(budget, "budget");
@@ -108,11 +115,29 @@ public final class M3FormulaTruthIndex {
         }
 
         return new M3FormulaTruthIndex(
-                formulas, formulaIds, models, wordsPerFormula, positive, negative);
+                formulas,
+                checkedModelSpace,
+                formulaIds,
+                models,
+                wordsPerFormula,
+                positive,
+                negative);
     }
 
     public M3FormulaTable formulas() {
         return formulas;
+    }
+
+    public M3CoordinateSpace formulaSpace() {
+        return formulas.formulaSpace();
+    }
+
+    public M3CoordinateSpace atomSpace() {
+        return formulas.atomSpace();
+    }
+
+    public M3CoordinateSpace modelSpace() {
+        return modelSpace;
     }
 
     public int formulaCount() {
