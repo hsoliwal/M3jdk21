@@ -43,6 +43,7 @@ mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
 native_string = read("src/java.base/share/native/libjava/String.c")
+hotspot_java_classes = read("src/hotspot/share/classfile/javaClasses.cpp")
 hotspot_jni = read("src/hotspot/share/prims/jni.cpp")
 native_encoding_java = read("test/jdk/java/lang/String/nativeEncoding/StringPlatformChars.java")
 native_encoding_c = read("test/jdk/java/lang/String/nativeEncoding/libstringPlatformChars.c")
@@ -414,6 +415,16 @@ if "java_lang_String::copy_chars(s, 0, s_len, ret);" not in hotspot_jni:
     fail("GetStringCritical lost canonical bulk copy")
 if "ret[i] = java_lang_String::char_at(s, i);" in hotspot_jni:
     fail("GetStringCritical reintroduced per-unit M3 VM dispatch")
+
+# HotSpot equality may prove identity from the exact canonical owner+coordinate pair before
+# falling back to logical UTF-16 comparison. It must not compare the String.value sentinel.
+for fragment in [
+    "java_lang_M3String::owner(left) == java_lang_M3String::owner(right)",
+    "java_lang_M3String::coordinate(left) == java_lang_M3String::coordinate(right)",
+    "char_at(str1, i) != char_at(str2, i)",
+]:
+    if fragment not in hotspot_java_classes:
+        fail(f"HotSpot M3 String equality path missing: {fragment}")
 
 # JNI creates only the final compatibility arrays, then bulk-fills them from canonical M3
 # storage. Per-code-unit JNI dispatch and temporary C spelling buffers are forbidden.
