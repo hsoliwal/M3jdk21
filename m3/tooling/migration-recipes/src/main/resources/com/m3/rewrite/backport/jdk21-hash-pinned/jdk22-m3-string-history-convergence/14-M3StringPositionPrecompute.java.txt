@@ -1,0 +1,168 @@
+/*
+ * Copyright (c) 2026, Hitesh Soliwal. All rights reserved.
+ * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+ *
+ * GPLv2 with the Classpath exception.
+ */
+package java.lang;
+
+import java.lang.ref.WeakReference;
+import java.util.concurrent.atomic.AtomicReferenceArray;
+
+/**
+ * Separately bounded position precompute for BMP code-unit search.
+ *
+ * <p>Each 64-code-unit source block stores the same conservative two-bit code-unit signal used by
+ * {@link M3StringFacts}. Negative block tests may skip exact work; positive blocks always perform
+ * exact UTF-16 comparison. Entries weakly key canonical owner+coordinate and retain only primitive
+ * block masks.</p>
+ */
+final class M3StringPositionPrecompute {
+    private static final int BLOCK_SHIFT = 6;
+    private static final int BLOCK_SIZE = 1 << BLOCK_SHIFT;
+    private static final int BLOCK_MASK = BLOCK_SIZE - 1;
+
+    private static final int SLOTS = 64;
+    private static final int SLOT_MASK = SLOTS - 1;
+    private static final int MIN_SOURCE_UNITS = 256;
+    private static final int MAX_SOURCE_UNITS = 32_768;
+
+    private static final AtomicReferenceArray<Entry> CACHE =
+            new AtomicReferenceArray<>(SLOTS);
+
+    private M3StringPositionPrecompute() {}
+
+    static int indexOf(M3String source, char unit, int fromIndex, int endIndex) {
+        int from = Math.max(0, fromIndex);
+        int end = Math.min(source.length(), endIndex);
+        if (from >= end) return -1;
+
+        Blocks blocks = prepare(source);
+        if (blocks == null) {
+            return linearIndexOf(source, unit, from, end);
+        }
+
+        long required = M3StringFacts.codeUnitSignal(unit);
+        int index = from;
+        while (index < end) {
+            int block = index >>> BLOCK_SHIFT;
+            int blockEnd = Math.min(end, (block + 1) << BLOCK_SHIFT);
+            if ((blocks.signals[block] & required) != required) {
+                index = blockEnd;
+                continue;
+            }
+            for (; index < blockEnd; index++) {
+                if (source.charAt(index) == unit) return index;
+            }
+        }
+        return -1;
+    }
+
+    static int lastIndexOf(M3String source, char unit, int fromIndex) {
+        int from = Math.min(fromIndex, source.length() - 1);
+        if (from < 0) return -1;
+
+        Blocks blocks = prepare(source);
+        if (blocks == null) {
+            return linearLastIndexOf(source, unit, from);
+        }
+
+        long required = M3StringFacts.codeUnitSignal(unit);
+        int index = from;
+        while (index >= 0) {
+            int block = index >>> BLOCK_SHIFT;
+            int blockStart = block << BLOCK_SHIFT;
+            if ((blocks.signals[block] & required) != required) {
+                index = blockStart - 1;
+                continue;
+            }
+            for (; index >= blockStart; index--) {
+                if (source.charAt(index) == unit) return index;
+            }
+        }
+        return -1;
+    }
+
+    static long maximumRetainedPrimitiveBytes() {
+        long blocksPerEntry =
+                (MAX_SOURCE_UNITS + BLOCK_MASK) >>> BLOCK_SHIFT;
+        return (long) SLOTS * blocksPerEntry * Long.BYTES;
+    }
+
+    private static Blocks prepare(M3String source) {
+        int length = source.length();
+        if (length < MIN_SOURCE_UNITS || length > MAX_SOURCE_UNITS) return null;
+
+        M3StringOwner owner = source.owner();
+        long coordinate = source.coordinate();
+        int slot = slot(owner, coordinate);
+        Entry entry = CACHE.get(slot);
+        if (entry != null
+                && entry.owner.get() == owner
+                && entry.coordinate == coordinate
+                && entry.length == length) {
+            return entry.blocks;
+        }
+
+        long[] signals = new long[(length + BLOCK_MASK) >>> BLOCK_SHIFT];
+        for (int index = 0; index < length; index++) {
+            signals[index >>> BLOCK_SHIFT] |=
+                    M3StringFacts.codeUnitSignal(source.charAt(index));
+        }
+        Blocks blocks = new Blocks(signals);
+        CACHE.set(
+                slot,
+                new Entry(
+                        new WeakReference<>(owner),
+                        coordinate,
+                        length,
+                        blocks));
+        return blocks;
+    }
+
+    private static int linearIndexOf(M3String source, char unit, int from, int end) {
+        for (int index = from; index < end; index++) {
+            if (source.charAt(index) == unit) return index;
+        }
+        return -1;
+    }
+
+    private static int linearLastIndexOf(M3String source, char unit, int from) {
+        for (int index = from; index >= 0; index--) {
+            if (source.charAt(index) == unit) return index;
+        }
+        return -1;
+    }
+
+    private static int slot(M3StringOwner owner, long coordinate) {
+        long mixed = coordinate
+                ^ Long.rotateLeft(owner.structuralHash64, 17)
+                ^ Integer.toUnsignedLong(System.identityHashCode(owner));
+        mixed ^= mixed >>> 33;
+        mixed *= 0xff51afd7ed558ccdL;
+        mixed ^= mixed >>> 33;
+        return ((int) mixed) & SLOT_MASK;
+    }
+
+    private static final class Blocks {
+        final long[] signals;
+
+        Blocks(long[] signals) {
+            this.signals = signals;
+        }
+    }
+
+    private static final class Entry {
+        final WeakReference<M3StringOwner> owner;
+        final long coordinate;
+        final int length;
+        final Blocks blocks;
+
+        Entry(WeakReference<M3StringOwner> owner, long coordinate, int length, Blocks blocks) {
+            this.owner = owner;
+            this.coordinate = coordinate;
+            this.length = length;
+            this.blocks = blocks;
+        }
+    }
+}
