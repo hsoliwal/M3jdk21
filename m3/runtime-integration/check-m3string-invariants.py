@@ -452,6 +452,13 @@ for forbidden_path in [
     "src/java.base/share/classes/java/lang/M3StringSuffixDecision.java",
     "src/java.base/share/classes/java/lang/M3StringLcpPrecompute.java",
     "src/java.base/share/classes/java/lang/M3StringSuffixIndex.java",
+    "src/java.base/share/classes/java/lang/M3StringPrecomputedStrings.java",
+    "src/java.base/share/classes/java/lang/M3StringMappedPrecomputation.java",
+    "src/java.base/share/classes/java/lang/M3StringLiteralSearchSummary.java",
+    "src/java.base/share/classes/java/lang/M3StringPrefixFrontier.java",
+    "src/java.base/share/classes/java/lang/M3StringExactWeightPrecomputation.java",
+    "src/java.base/share/classes/java/lang/M3StringJoinedNativeSearch.java",
+    "src/java.base/share/classes/java/lang/M3StringUtf16SearchImage.java",
 ]:
     if (ROOT / forbidden_path).exists():
         fail(f"unreviewed no-port String precompute owner appeared: {forbidden_path}")
