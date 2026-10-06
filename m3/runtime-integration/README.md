@@ -1,7 +1,10 @@
-# MIndex-backed ordinary String integration
+# M3String-backed ordinary String integration
 
-This candidate replaces #5's provisional String leaf directory with #4's canonical
-`java.lang.MIndexString` owner and retains #5's tested VM boundary protections. It
+This candidate adapts the Synexia MIndex String donor model into the M3JDK target runtime.
+Synexia's `com.synexia.indexstring.MIndexString` is the donor/reference type; the M3JDK
+counterpart is `java.lang.M3String`. M3 target naming is authoritative inside the JDK.
+The target preserves the donor owner+coordinate structure and retains the tested VM boundary
+protections. It
 requires a complete matched OpenJDK/HotSpot image. Do not transplant classes or
 replace the system JDK. The flag is `-XX:+UnlockExperimentalVMOptions
 -XX:+UseM3StringStorage`; it forces interpreter mode. Compiled mode, CDS, JFR,
@@ -46,7 +49,7 @@ cleanup. The finite mapped lexicon remains owned for the VM's lifetime.
 
 Two-reference `+`, `concat`, eligible general invokedynamic concat recipes,
 `substring`, bounded `repeat` and bounded `String.join` compose scalar/range tuples.
-Equal live geometry shares one tuple body. Full and partial slices retain the same
+Canonical tuple reuse ignores binary-tree parenthesization: the same normalized ordered terminal M3 atom owner/range sequence shares one tuple owner after exact verification. Full and partial slices retain the same
 backing, including small slices of large atoms; that retention is deliberate.
 Full-atom hashes combine precomputed Java hashes with powers of 31. Java hash and
 VM StringTable hashing avoid rescanning full joined atoms. Original String identity
@@ -66,7 +69,14 @@ the flag is enabled, so later lazy descriptor attachment cannot change release
 ownership. JNI/JVMTI tests inspect the Java cache before and after native traversal.
 SA's decoder is adapted and compiled; live debugger attachment is not tested.
 
-## Boundary with the application MIndexString
+## Internal precompute invariant
+
+All String precompute is implementation-internal in both worlds. Synexia donor precompute maps to
+M3JDK internal fact/search lanes; it is not public `java.lang.String` API. Fixed facts attach to
+canonical owner/range identity, length-proportional plans live in separately bounded caches, and
+absence/eviction changes performance only. Precompute never becomes a second spelling store.
+
+## Boundary with the Synexia donor MIndexString
 
 The mapped payload owner is now interoperable with #7498: ordinary Strings and
 its SharedArrayPool reader can use the same committed file bytes. This does **not**
