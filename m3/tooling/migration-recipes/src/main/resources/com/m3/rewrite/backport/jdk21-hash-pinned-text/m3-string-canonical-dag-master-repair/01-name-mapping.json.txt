@@ -163,6 +163,62 @@
       "donor_lineage": [
         "f2f15f1aaa147cf1af556b0c148954178f971de6"
       ]
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexPrecomputedStrings",
+      "target": "java.lang.M3StringPool + jdk.internal.mindex.M3MappedStringBacking + java.lang.M3StringOwner",
+      "status": "responsibility-split internal target",
+      "source_role": "Synexia donor facade attaching frozen precomputed rows/ranges to MIndexString",
+      "target_rule": "Do not create a public M3JDK facade. Canonical scalar/tuple ownership, mapped backing, and bounded exact-coordinate range facts remain separate internal owners; no second spelling store."
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexMappedPrecomputation",
+      "target": "jdk.internal.mindex.M3MappedStringBacking + java.lang.M3StringPool + internal fact owners",
+      "status": "partial internal storage counterpart",
+      "source_role": "Synexia donor mapped payload/fact publication owner",
+      "target_rule": "Port only mapped String facts/formats required by a concrete JDK runtime consumer. Broader donor image lanes remain donor/storage tooling and never become public String API."
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexLiteralSearchSummary",
+      "target": "java.lang.M3StringFacts + java.lang.M3StringSearchPrecompute operations",
+      "status": "no retained target summary object",
+      "source_role": "Synexia donor caller-retained exact literal summary",
+      "target_rule": "JDK String returns primitive/boolean results. Reuse internal facts/plans but do not retain source/pattern summary objects solely for java.lang.String."
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexMaskLiteralSearch",
+      "target": "java.lang.M3StringPositionPrecompute + exact M3String search",
+      "status": "absorbed internal execution responsibility",
+      "source_role": "Synexia exact indexOf over immutable position masks",
+      "target_rule": "Negative position facts may skip; all positive candidates remain exact verified. Position masks stay bounded and weak-owner keyed."
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexPrefixFrontier",
+      "target": "no java.lang.String counterpart",
+      "status": "donor-only fuzzy search state",
+      "source_role": "Synexia query-local bounded edit-distance frontier",
+      "target_rule": "Do not port to java.lang.String or M3StringFacts."
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexExactWeightPrecomputation",
+      "target": "no java.lang.String counterpart",
+      "status": "donor-only vocabulary/index sidecar",
+      "source_role": "Synexia fixed-width exact-weight matrix for batch vocabulary operations",
+      "target_rule": "String compare/prefix operations stay exact over M3 coordinates; no retained vocabulary matrix in java.lang.String."
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexJoinedNativeSearch",
+      "target": "optional jdk.internal accelerator only",
+      "status": "optional internal acceleration donor",
+      "source_role": "Synexia prepared KMP/JNI executor over segmented bytes",
+      "target_rule": "May inform future internal accelerators, but M3String identity/semantics never depend on this byte-oriented execution lane."
+    },
+    {
+      "source": "com.synexia.indexstring.IndexUtf16SearchImage",
+      "target": "no java.lang.String counterpart",
+      "status": "donor-only dictionary/batch search image",
+      "source_role": "Synexia frozen off-heap UTF-16 corpus/offset/length execution image",
+      "target_rule": "Keep outside java.lang.String; this is dictionary/M3FS execution residency, not per-String state."
     }
   ],
   "imported_donor_sources": [],
