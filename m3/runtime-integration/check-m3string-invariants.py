@@ -353,6 +353,24 @@ if "if (java_lang_String::is_m3_joined(string))" not in archive_writer:
     fail("CDS String sizing is not fail-closed for M3 values")
 
 
+# Canonical single-unit transforms must re-enter the native pool directly rather than create
+# temporary one-character String/byte[] payloads.
+for fragment in [
+    "static M3String internUnit(char unit)",
+    "M3StringAtom.localUnit(unit, coder, id, hash64)",
+    "existing.charAt(0) == unit",
+]:
+    if fragment not in pool:
+        fail(f"M3 direct unit interning missing: {fragment}")
+for fragment in [
+    "M3StringPool.internUnit(mapped)",
+    "M3StringPool.internUnit(newChar)",
+]:
+    if fragment not in m3:
+        fail(f"M3 canonical transform still detours through String: {fragment}")
+if "canonicalize(String.valueOf(mapped))" in m3 or "canonicalize(String.valueOf(newChar))" in m3:
+    fail("M3 canonical single-unit transform reintroduced one-char String churn")
+
 # VM-local native atoms must not be retained forever by the canonical lookup table.
 # Live M3String/Tuple owners provide the strong lifetime. The pool keeps weak refs and frees
 # the native block when the owner becomes unreachable.
