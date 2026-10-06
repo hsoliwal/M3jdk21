@@ -1,7 +1,6 @@
 schema	canonical_repository	target_repository	local_surface	disposition	canonical_owner	license	handoff_required
 M3JDK21_SYNEXIA_RECIPE_HOME_V1	hsoliwal/com.synexia	hsoliwal/M3jdk21	m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/**	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia.rewrite.M3RecipeFirstInvariant	Apache-2.0	true
 M3JDK21_SYNEXIA_RECIPE_HOME_V1	hsoliwal/com.synexia	hsoliwal/M3jdk21	m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/**	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia.rewrite.M3RepositoryAtomizePatternizeRecipe	Apache-2.0	true
-M3JDK21_SYNEXIA_RECIPE_HOME_V1	hsoliwal/com.synexia	hsoliwal/M3jdk21	m3/tooling/a3/src/main/java/com/m3/a3/A3Lab.java	TARGET_PROOF_CONSUMER	com.synexia.rewrite.atom	Apache-2.0	true
 M3JDK21_SYNEXIA_RECIPE_HOME_V1	hsoliwal/com.synexia	hsoliwal/M3jdk21	m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/**	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia.rewrite.M3AtomHashDatabaseRecipe	Apache-2.0	true
 M3JDK21_SYNEXIA_RECIPE_HOME_V1	hsoliwal/com.synexia	hsoliwal/M3jdk21	m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/**	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia.rewrite.M3AlgorithmRecipeFirstFullReviewRecipe	Apache-2.0	true
 M3JDK21_SYNEXIA_RECIPE_HOME_V1	hsoliwal/com.synexia	hsoliwal/M3jdk21	m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/synexia/**	RECEIVER_ADAPTER_ONLY	com.synexia.rewrite.M3JdkHandoff	Apache-2.0	true

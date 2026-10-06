@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.a3.SynexiaMasteryInvariantDelivery
+displayName: Enforce A3 Synexia mastery ownership invariant
+description: >-
+  Source-sealed update of the machine-readable Synexia recipe-home policy, its fail-closed
+  compatibility test, and the focused A3 workflow. Candidate-only; no JDK product source or
+  promotion authority.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: a3-synexia-mastery-invariant

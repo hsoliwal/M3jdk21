@@ -16,7 +16,7 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         with POLICY.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
 
-        self.assertEqual(9, len(rows))
+        self.assertEqual(8, len(rows))
         for row in rows:
             self.assertEqual("M3JDK21_SYNEXIA_RECIPE_HOME_V1", row["schema"])
             self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
@@ -50,54 +50,6 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
                 "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/**"
             ]["handoff_required"],
         )
-
-
-    def test_a3_mastery_and_catalogue_resolve_to_synexia_recipe_owners(self) -> None:
-        with POLICY.open(encoding="utf-8", newline="") as handle:
-            rows = {row["local_surface"]: row for row in csv.DictReader(handle, delimiter="\t")}
-
-        a3 = rows["m3/tooling/a3/src/main/java/com/m3/a3/A3Lab.java"]
-        self.assertEqual("TARGET_PROOF_CONSUMER", a3["disposition"])
-        self.assertEqual("com.synexia.rewrite.atom", a3["canonical_owner"])
-        self.assertEqual("true", a3["handoff_required"])
-
-        lab = (
-            ROOT
-            / "tooling"
-            / "a3"
-            / "src"
-            / "main"
-            / "java"
-            / "com"
-            / "m3"
-            / "a3"
-            / "A3Lab.java"
-        ).read_text(encoding="utf-8")
-        self.assertIn(
-            "import com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe;", lab
-        )
-        self.assertIn(
-            "import com.synexia.rewrite.atom.M3PatternizePureIntAtomRecipe;", lab
-        )
-        self.assertNotIn(
-            "import com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe;", lab
-        )
-        self.assertNotIn(
-            "import com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe;", lab
-        )
-
-        catalogue = (ROOT / "tooling" / "recipe-catalogue.tsv").read_text(
-            encoding="utf-8"
-        )
-        for owner in (
-            "M3AtomizePureIntReturnRecipe",
-            "M3InventoryPureIntAtomCandidates",
-            "M3PatternizePureIntAtomRecipe",
-            "M3DocumentPureIntAtomRecipe",
-            "M3PureIntConvergenceRecipe",
-        ):
-            self.assertIn(f"com.synexia.rewrite.atom.{owner}", catalogue)
-            self.assertNotIn(f"com.m3.rewrite.atom.{owner}", catalogue)
 
 
     def test_canonical_home_pin_binds_exact_synexia_manifest(self) -> None:

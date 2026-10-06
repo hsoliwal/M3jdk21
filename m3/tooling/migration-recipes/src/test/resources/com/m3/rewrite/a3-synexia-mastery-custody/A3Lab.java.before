@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.a3;
 
-import com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe;
-import com.synexia.rewrite.atom.M3PatternizePureIntAtomRecipe;
+import com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe;
+import com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
