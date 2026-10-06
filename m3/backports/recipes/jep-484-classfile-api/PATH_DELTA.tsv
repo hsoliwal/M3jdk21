@@ -1,0 +1,11 @@
+kind	relative_path
+REMOVED	WritableElement.java
+REMOVED	impl/Options.java
+REMOVED	impl/TransformingCodeBuilder.java
+ADDED	attribute/package-info.java
+ADDED	attribute/snippet-files/PackageSnippets.java
+ADDED	constantpool/package-info.java
+ADDED	constantpool/snippet-files/PackageSnippets.java
+ADDED	impl/ClassFileImpl.java
+ADDED	impl/verifier/ParserVerifier.java
+ADDED	instruction/package-info.java
