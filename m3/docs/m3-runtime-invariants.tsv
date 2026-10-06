@@ -8,3 +8,7 @@ M3-JDK-STRING-1	PRECOMPUTE_KEYS_M3_IDENTITY_RANGE_COMPOSITION	Precompute reuse i
 M3-JDK-STRING-1	PRECOMPUTE_NEVER_OWNS_CANONICAL_TEXT	Derived precompute never becomes a second text payload and absence of precompute cannot alter exact Java String semantics.
 M3-JDK-STRING-1	JNI_BYTE_CHAR_ARRAYS_ARE_SHADOWS	JNI/native byte[], char[], UTF-8 and UTF-16 representations are shadows materialized from M3String and are never retained as canonical String/M3String storage.
 M3-JDK-STRING-1	INTERNAL_PRECOMPUTE_NAMES_NEED_NOT_MATCH_DONOR	M3JDK internal precompute owners may use compact M3 names; donor class names are provenance/mapping evidence, not target ABI requirements.
+M3-JDK-STRING-1	COMPOSITION_DAG_IS_BALANCED	Canonical M3String tuple composition is maintained as a bounded-height persistent DAG; repeated concat/repeat may not form an unbounded rope chain.
+M3-JDK-STRING-1	TUPLE_IDENTITY_IGNORES_PARENTHESIZATION	Binary-tree grouping is not canonical identity; the same ordered terminal M3 atom owner/range coordinate sequence converges to one canonical tuple owner.
+M3-JDK-STRING-1	EQUAL_TEXT_DIFFERENT_COORDINATES_NEED_NOT_COLLAPSE	Canonical tuple identity is structural over M3 owner/range coordinates, not java.lang.String content equality; equal UTF-16 spelling built from a different canonical coordinate structure may remain distinct.
+M3-JDK-STRING-1	TUPLE_HASH_IS_CANDIDATE_ONLY	Shape-independent structural/content hashes route tuple candidates only; exact terminal owner/range sequence verification decides canonical reuse, so collisions change cost only.
