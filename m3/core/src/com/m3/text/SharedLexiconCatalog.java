@@ -42,6 +42,9 @@ public final class SharedLexiconCatalog {
             "unpaired_surrogates", "non_bmp_code_points", "ascii", "latin1",
             "contains_whitespace", "precompute_profile"
     };
+    private static final String[] PROFILE_HEADER = {
+            "precompute_profile", "source_records", "image_records", "sha256"
+    };
 
     private final List<SharedLexiconImage> images;
     private final List<String> files;
@@ -49,12 +52,14 @@ public final class SharedLexiconCatalog {
     private final List<String> lastLexemes;
     private final Map<Coordinate, List<SourceMapping>> mappings;
     private final Map<Coordinate, PrecomputeFacts> precompute;
+    private final List<PrecomputeProfile> precomputeProfiles;
     private final long recordCount;
 
     private SharedLexiconCatalog(List<SharedLexiconImage> images, List<String> files,
                                  List<String> firstLexemes, List<String> lastLexemes,
                                  Map<Coordinate, List<SourceMapping>> mappings,
                                  Map<Coordinate, PrecomputeFacts> precompute,
+                                 List<PrecomputeProfile> precomputeProfiles,
                                  long recordCount) {
         this.images = List.copyOf(images);
         this.files = List.copyOf(files);
@@ -64,6 +69,7 @@ public final class SharedLexiconCatalog {
         mappings.forEach((coordinate, values) -> mappingCopy.put(coordinate, List.copyOf(values)));
         this.mappings = Map.copyOf(mappingCopy);
         this.precompute = Map.copyOf(precompute);
+        this.precomputeProfiles = List.copyOf(precomputeProfiles);
         this.recordCount = recordCount;
     }
 
@@ -125,8 +131,9 @@ public final class SharedLexiconCatalog {
         if (mappings.size() != recordCount || precompute.size() != recordCount)
             throw new IOException("metadata coverage does not match image records");
         validatePrecomputeProfiles(mappings, precompute);
+        List<PrecomputeProfile> profiles = readPrecomputeProfiles(directory, mappings);
         return new SharedLexiconCatalog(images, files, firstLexemes, lastLexemes,
-                mappings, precompute, recordCount);
+                mappings, precompute, profiles, recordCount);
     }
 
     public record Coordinate(int shardId, int imageRow) { }
@@ -143,6 +150,10 @@ public final class SharedLexiconCatalog {
                                   boolean ascii, boolean latin1, boolean containsWhitespace,
                                   String precomputeProfile) { }
 
+    /** Deterministic descriptor for one Synexia precompute owner/profile. */
+    public record PrecomputeProfile(String profile, long sourceRecords, long imageRecords,
+                                    String fingerprint) { }
+
     public int shardCount() { return images.size(); }
     public long recordCount() { return recordCount; }
     public List<String> shardFiles() { return files; }
@@ -154,6 +165,7 @@ public final class SharedLexiconCatalog {
         requireCoordinate(coordinate);
         return precompute.get(coordinate);
     }
+    public List<PrecomputeProfile> precomputeProfiles() { return precomputeProfiles; }
 
     /** Explicitly warms all mapped shards; this does not flatten their payloads. */
     public void warm() { for (SharedLexiconImage image : images) image.warm(); }
@@ -248,6 +260,56 @@ public final class SharedLexiconCatalog {
                     throw new IOException("precompute owner dropped for " + entry.getKey()
                             + ": " + mapping.precomputeProfile());
             }
+        }
+    }
+
+    private static List<PrecomputeProfile> readPrecomputeProfiles(
+            Path directory, Map<Coordinate, List<SourceMapping>> mappings) throws IOException {
+        List<String> lines = readSidecar(directory.resolve("synexia.precompute-index.tsv"), PROFILE_HEADER);
+        Map<String, Integer> sourceCounts = new HashMap<>();
+        Map<String, java.util.Set<Coordinate>> imageCoordinates = new HashMap<>();
+        for (List<SourceMapping> values : mappings.values()) {
+            for (SourceMapping mapping : values) {
+                sourceCounts.merge(mapping.precomputeProfile(), 1, Math::addExact);
+                imageCoordinates.computeIfAbsent(mapping.precomputeProfile(), ignored -> new java.util.HashSet<>())
+                        .add(mapping.coordinate());
+            }
+        }
+        List<PrecomputeProfile> result = new ArrayList<>();
+        java.util.Set<String> seen = new java.util.HashSet<>();
+        String previous = null;
+        for (int lineNumber = 1; lineNumber < lines.size(); lineNumber++) {
+            String[] fields = splitSidecar(lines.get(lineNumber), PROFILE_HEADER.length, lineNumber);
+            requireFields(fields, lineNumber);
+            String profile = fields[0];
+            if (!seen.add(profile) || (previous != null && previous.compareTo(profile) >= 0))
+                throw malformed(lineNumber, "precompute profiles are not strictly sorted or are duplicated");
+            if (!sourceCounts.containsKey(profile)) throw malformed(lineNumber, "unknown precompute profile");
+            long sourceCount = parseNonNegativeLong(fields[1], lineNumber, "source_records");
+            long imageCount = parseNonNegativeLong(fields[2], lineNumber, "image_records");
+            if (sourceCount != sourceCounts.get(profile)
+                    || imageCount != imageCoordinates.get(profile).size())
+                throw malformed(lineNumber, "precompute profile cardinality mismatch");
+            byte[] fingerprint = parseDigest(fields[3], lineNumber);
+            String expected = HexFormat.of().formatHex(profileFingerprint(profile, sourceCount, imageCount));
+            if (!HexFormat.of().formatHex(fingerprint).equals(expected))
+                throw malformed(lineNumber, "precompute profile fingerprint mismatch");
+            result.add(new PrecomputeProfile(profile, sourceCount, imageCount, expected));
+            previous = profile;
+        }
+        if (result.isEmpty() || !seen.equals(sourceCounts.keySet()))
+            throw new IOException("precompute profile coverage does not match mappings");
+        return List.copyOf(result);
+    }
+
+    private static byte[] profileFingerprint(String profile, long sourceCount, long imageCount) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            digest.update((profile + "\t" + sourceCount + "\t" + imageCount + "\n")
+                    .getBytes(StandardCharsets.UTF_8));
+            return digest.digest();
+        } catch (NoSuchAlgorithmException impossible) {
+            throw new AssertionError(impossible);
         }
     }
 

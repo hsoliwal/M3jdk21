@@ -78,6 +78,8 @@ class SynexiaExportTest(unittest.TestCase):
             facts = (root / "first/synexia.precompute.tsv").read_text(encoding="utf-8")
             self.assertIn("NumberPrecompute", facts)
             self.assertIn("M3StringFacts", facts)
+            profiles = (root / "first/synexia.precompute-index.tsv").read_text(encoding="utf-8")
+            self.assertIn("M3StringFacts + NumberPrecompute", profiles)
             image = (root / "first/synexia.m3lex").read_bytes()
             magic, version, count, payload, units = struct.unpack_from(">QIIQQ", image)
             self.assertEqual(EXPORT.MAGIC, magic)
@@ -90,6 +92,7 @@ class SynexiaExportTest(unittest.TestCase):
                                      len(value.encode("utf-16-le", "surrogatepass")) // 2
                                      for value in ("London", "लंदन", "m"))
             self.assertEqual({"source_records": 10004, "image_records": 10004, "shards": 1,
+                              "precompute_profiles": 2,
                               "utf16_units": expected_units}, VERIFY.verify(root / "first"))
 
     def test_replay_is_byte_identical_except_for_output_location(self):
@@ -98,7 +101,7 @@ class SynexiaExportTest(unittest.TestCase):
             self.run_export(root / "input", root / "one")
             self.run_export(root / "input", root / "two")
             for name in ("synexia.m3lex", "synexia.shards.tsv", "synexia.records.tsv",
-                         "synexia.precompute.tsv", "synexia.export.json"):
+                         "synexia.precompute-index.tsv", "synexia.precompute.tsv", "synexia.export.json"):
                 self.assertEqual((root / "one" / name).read_bytes(), (root / "two" / name).read_bytes(), name)
             manifest = json.loads((root / "one/synexia.export.json").read_text(encoding="utf-8"))
             self.assertEqual("M3LEX001", manifest["target"]["image_format"])
@@ -144,7 +147,8 @@ class SynexiaExportTest(unittest.TestCase):
             EXPORT.export(manifest, records, output, "fixture", "0" * 40)
             sidecar = (output / "synexia.records.tsv").read_text(encoding="utf-8")
             self.assertIn("\\uD800", sidecar)
-            self.assertEqual({"source_records": 1, "image_records": 1, "shards": 1, "utf16_units": 1},
+            self.assertEqual({"source_records": 1, "image_records": 1, "shards": 1,
+                              "precompute_profiles": 1, "utf16_units": 1},
                              VERIFY.verify(output))
 
     def test_source_blind_verifier_rejects_post_export_mutation(self):

@@ -92,6 +92,11 @@ public final class FoundationTest {
         try(InputStream input=Files.newInputStream(path)){byte[] buffer=new byte[4096];for(int read;(read=input.read(buffer))>=0;)if(read!=0)digest.update(buffer,0,read);}
         return java.util.HexFormat.of().formatHex(digest.digest());
     }
+    static String profileHash(String profile,long sourceRecords,long imageRecords)throws Exception{
+        java.security.MessageDigest digest=java.security.MessageDigest.getInstance("SHA-256");
+        digest.update((profile+"\t"+sourceRecords+"\t"+imageRecords+"\n").getBytes(java.nio.charset.StandardCharsets.UTF_8));
+        return java.util.HexFormat.of().formatHex(digest.digest());
+    }
     static void catalog(Path directory) throws Exception {
         Path one=directory.resolve("one.m3lex"), two=directory.resolve("two.m3lex");
         writeV2(one,List.of("a","\ud800"));writeV2(two,List.of("\ud801","\ud802"));
@@ -113,8 +118,18 @@ public final class FoundationTest {
                 +"1\t0\t1\t55297\t1\t1\t0\tFalse\tFalse\tFalse\tprofile-high2\n"
                 +"1\t1\t1\t55298\t1\t1\t0\tFalse\tFalse\tFalse\tprofile-high3\n";
         Files.writeString(directory.resolve("synexia.precompute.tsv"),facts,java.nio.charset.StandardCharsets.UTF_8);
+        String profileHeader="precompute_profile\tsource_records\timage_records\tsha256\n";
+        String profiles=profileHeader
+                +"profile-a\t1\t1\t"+profileHash("profile-a",1,1)+"\n"
+                +"profile-a2\t1\t1\t"+profileHash("profile-a2",1,1)+"\n"
+                +"profile-high\t1\t1\t"+profileHash("profile-high",1,1)+"\n"
+                +"profile-high2\t1\t1\t"+profileHash("profile-high2",1,1)+"\n"
+                +"profile-high3\t1\t1\t"+profileHash("profile-high3",1,1)+"\n";
+        Files.writeString(directory.resolve("synexia.precompute-index.tsv"),profiles,java.nio.charset.StandardCharsets.UTF_8);
         SharedLexiconCatalog catalog=SharedLexiconCatalog.open(directory);catalog.warm();
         check(catalog.shardCount()==2);check(catalog.recordCount()==4);check(catalog.shardFiles().equals(List.of("one.m3lex","two.m3lex")));
+        check(catalog.precomputeProfiles().size()==5);
+        check(catalog.precomputeProfiles().get(0).profile().equals("profile-a"));
         check(catalog.mappingsAt(new SharedLexiconCatalog.Coordinate(0,0)).size()==2);
         check(catalog.mappingsAt(new SharedLexiconCatalog.Coordinate(0,0)).get(1).mappingName().equals("A2"));
         check(catalog.find("\ud801").equals(Optional.of(new SharedLexiconCatalog.Coordinate(1,0))));

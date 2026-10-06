@@ -34,6 +34,7 @@ MANIFEST_COLUMNS = (
     "source_id", "canonical_name", "synexia_path", "record_id_field",
     "mapping_fields", "precompute_target", "data_license", "data_policy",
 )
+PROFILE_COLUMNS = ("precompute_profile", "source_records", "image_records", "sha256")
 
 
 @dataclass(frozen=True)
@@ -263,6 +264,21 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
                      for column in mapping_columns} for record in records]
     mapping_bytes = write_tsv(output / "synexia.records.tsv", mapping_columns, mapping_rows)
 
+    profile_sources: dict[str, set[tuple[str, str]]] = {}
+    profile_coordinates: dict[str, set[tuple[int, int]]] = {}
+    for record in records:
+        profile = record["precompute_profile"]
+        profile_sources.setdefault(profile, set()).add((record["source_id"], record["record_id"]))
+        profile_coordinates.setdefault(profile, set()).add(physical_row[record["lexeme"]])
+    profile_rows = []
+    for profile in sorted(profile_sources):
+        source_count = len(profile_sources[profile])
+        image_count = len(profile_coordinates[profile])
+        fingerprint = sha256_bytes(f"{profile}\t{source_count}\t{image_count}\n".encode("utf-8"))
+        profile_rows.append({"precompute_profile": profile, "source_records": source_count,
+                             "image_records": image_count, "sha256": fingerprint})
+    profile_bytes = write_tsv(output / "synexia.precompute-index.tsv", PROFILE_COLUMNS, profile_rows)
+
     fact_columns = ("shard_id", "image_row", "utf16_units", "java_hash", "code_points", "unpaired_surrogates",
                     "non_bmp_code_points", "ascii", "latin1", "contains_whitespace",
                     "precompute_profile")
@@ -283,11 +299,14 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
                    "image_format": "M3LEX001", "image_version": VERSION,
                    "mapping_sidecar": "synexia.records.tsv",
                    "shards_sidecar": "synexia.shards.tsv",
+                   "precompute_index_sidecar": "synexia.precompute-index.tsv",
                    "precompute_sidecar": "synexia.precompute.tsv"},
         "counts": {"source_records": len(records), "image_records": len(by_lexeme),
-                   "source_families": len(sources), "shards": len(shards)},
+                   "source_families": len(sources), "shards": len(shards),
+                   "precompute_profiles": len(profile_rows)},
         "outputs": {**image_outputs, "synexia.shards.tsv": sha256_bytes(shard_bytes),
                     "synexia.records.tsv": sha256_bytes(mapping_bytes),
+                    "synexia.precompute-index.tsv": sha256_bytes(profile_bytes),
                     "synexia.precompute.tsv": sha256_bytes(fact_bytes)},
         "identity_rule": "source_id + record_id is opaque and never renumbered; image_row is only a physical M3LEX projection",
         "data_policy": "operator-supplied snapshot only; no network download or implicit license grant",
