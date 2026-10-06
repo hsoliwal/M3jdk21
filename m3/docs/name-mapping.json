@@ -6,9 +6,9 @@
       "source": "com.synexia.indexstring.IndexStringTuple",
       "source_commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
       "target": "java.lang.M3StringTuple",
-      "status": "adapted canonical persistent composition owner",
+      "status": "adapted canonical balanced persistent composition owner",
       "source_role": "Synexia donor/reference implementation",
-      "target_rule": "M3String values retain owner+packed coordinate; tuple owners retain child coordinates only and no text arrays"
+      "target_rule": "M3String values retain owner+packed coordinate; tuple owners retain child coordinates only, maintain bounded persistent height, and canonicalize ordered terminal owner/range sequences independently of concat parenthesization; no text arrays"
     },
     {
       "source": "com.synexia.indexstring.LocalM3StringPiece",
@@ -47,7 +47,8 @@
         "reference_dag_commit": "40d66f6edd0a9cf3e6b4545058c1ad54f6cd03bc",
         "composable_precompute_commit": "d08ee60be27b60a951a55a2b472d515bf142f8bf",
         "canonical_fact_bundle_commit": "b9d35ce3c3c266fb3641352a07903563a3a86b81",
-        "utf_shadow_commit": "f2f15f1aaa147cf1af556b0c148954178f971de6"
+        "utf_shadow_commit": "f2f15f1aaa147cf1af556b0c148954178f971de6",
+        "balanced_reference_dag_commit": "57935a5d55d9873ee5e83e1f7ca95e27ed6d2c8"
       },
       "required_semantics": [
         "M3String instance carries exactly one canonical owner reference + long packed coordinate",
@@ -56,7 +57,8 @@
         "precompute never owns spelling payload",
         "JNI/native UTF-8/UTF-16/byte/char materializations are shadows only",
         "all Java byte[]/char[] compatibility shadows, including empty sentinel, are JNI-created",
-        "VM-local native scalar lookup is weak; dead native payload is reclaimable"
+        "VM-local native scalar lookup is weak; dead native payload is reclaimable",
+        "tuple composition is bounded-height and canonical by ordered terminal M3 owner/range sequence independent of concat parenthesization"
       ]
     },
     {
@@ -106,10 +108,11 @@
       "source": "com.synexia.indexstring.IndexResolver / IndexStringTuple",
       "target": "java.lang.M3StringOwner / java.lang.M3StringAtom / java.lang.M3StringTuple",
       "status": "M3JDK bootstrap-safe adaptation",
-      "mapping_rule": "scalar and tuple ownership are target-internal; M3String remains owner+packed coordinate",
+      "mapping_rule": "scalar and tuple ownership are target-internal; M3String remains owner+packed coordinate; tuple geometry is balanced and canonical reuse is verified by ordered terminal M3 owner/range sequence, not binary-tree shape",
       "donor_lineage": [
         "8b202d3c10617d67f45247ccd81a21b9c5332a08",
-        "40d66f6edd0a9cf3e6b4545058c1ad54f6cd03bc"
+        "40d66f6edd0a9cf3e6b4545058c1ad54f6cd03bc",
+        "57935a5d55d9873ee5e83e1f7ca95e27ed6d2c8"
       ]
     },
     {
