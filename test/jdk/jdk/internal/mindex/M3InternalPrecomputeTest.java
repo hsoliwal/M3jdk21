@@ -39,13 +39,14 @@ public class M3InternalPrecomputeTest {
     }
 
     private static void postings() {
+        M3PostingIndex.Builder builder = M3PostingIndex.builder();
+        int doc0 = builder.addDocument(11L, 12L, 13L);
+        int doc1 = builder.addDocument(11L, 14L, 13L);
+        int doc2 = builder.addDocument(15L, 12L, 13L);
+        check(doc0 == 0 && doc1 == 1 && doc2 == 2, "document row coordinates");
         M3PostingIndex index =
-                M3PostingIndex.builder()
-                        .addDocument(11L, 12L, 13L)
-                        .addDocument(11L, 14L, 13L)
-                        .addDocument(15L, 12L, 13L)
-                        .relationPair(0, 11L, 13L)
-                        .relationPair(1, 11L, 13L)
+                builder.relationPair(doc0, 11L, 13L)
+                        .relationPair(doc1, 11L, 13L)
                         .build();
 
         eq(new int[] {0, 1}, index.documents(11L), "token posting");
@@ -173,8 +174,8 @@ public class M3InternalPrecomputeTest {
                 M3FormulaProbabilityIndex.compile(truth, probabilities);
         long aTrue = probabilityImage.massQ32(F_A, M3Truth.TRUE);
         long aBoth = probabilityImage.massQ32(F_A, M3Truth.BOTH);
-        check(aTrue + aBoth == 3L * (M3ProbabilityVector.ONE_Q32 / 4L),
-                "formula probability mass");
+        check(aTrue + aBoth == M3ProbabilityVector.ONE_Q32,
+                "formula asserted-positive probability mass");
         check(probabilityImage.retainedPrimitiveBytes() > 0L, "formula probability payload");
     }
 
