@@ -83,6 +83,86 @@ final class M3StringPool {
         return M3String.whole(internLocal(value, coder));
     }
 
+    static M3String internCodePoints(int[] source, int offset, int count) {
+        Objects.requireNonNull(source, "source");
+        Objects.checkFromIndexSize(offset, count, source.length);
+        if (count == 0) return M3String.empty();
+
+        long utf16LengthLong = 0L;
+        boolean latin1 = String.COMPACT_STRINGS;
+        for (int index = 0; index < count; index++) {
+            int cp = source[offset + index];
+            if (Character.isBmpCodePoint(cp)) {
+                utf16LengthLong++;
+                if (cp > 0xff) latin1 = false;
+            } else if (Character.isValidCodePoint(cp)) {
+                utf16LengthLong += 2L;
+                latin1 = false;
+            } else {
+                throw new IllegalArgumentException(Integer.toString(cp));
+            }
+        }
+
+        if (utf16LengthLong > Integer.MAX_VALUE) {
+            throw new OutOfMemoryError("UTF16 String size is " + utf16LengthLong);
+        }
+        int utf16Length = (int) utf16LengthLong;
+        byte coder = latin1 ? String.LATIN1 : String.UTF16;
+        if (coder == String.UTF16 && utf16Length > StringUTF16.MAX_LENGTH) {
+            throw new OutOfMemoryError(
+                    "UTF16 String size is " + utf16Length
+                            + ", should be less than " + StringUTF16.MAX_LENGTH);
+        }
+
+        Lexicon active = lexicon;
+        if (active != null && active.available()) {
+            int row = active.findCodePoints(source, offset, count, utf16Length);
+            if (row >= 0) return M3String.whole(active.atom(row));
+        }
+
+        int byteLength = utf16Length << coder;
+        long hash64 =
+                mix64(0x9e3779b97f4a7c15L ^ coder ^ Integer.toUnsignedLong(byteLength));
+        for (int index = 0; index < count; index++) {
+            int cp = source[offset + index];
+            if (Character.isBmpCodePoint(cp)) {
+                hash64 = mix64(hash64 ^ (char) cp);
+            } else {
+                hash64 = mix64(hash64 ^ Character.highSurrogate(cp));
+                hash64 = mix64(hash64 ^ Character.lowSurrogate(cp));
+            }
+        }
+        Fingerprint fingerprint = new Fingerprint(coder, byteLength, hash64);
+
+        expungeLocals();
+        for (;;) {
+            LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
+            synchronized (bucket) {
+                if (bucket.retired) continue;
+                for (Iterator<LocalRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
+                    LocalRef reference = iterator.next();
+                    M3StringAtom existing = reference.get();
+                    if (existing == null) {
+                        iterator.remove();
+                        reference.releaseNative();
+                    } else if (existing.contentEqualsCodePoints(
+                            source, offset, count, utf16Length, coder)) {
+                        return M3String.whole(existing);
+                    }
+                }
+
+                long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
+                M3StringAtom created =
+                        M3StringAtom.localCodePoints(
+                                source, offset, count, utf16Length, coder, id, hash64);
+                long retainedBytes = created.nativePayloadBytes();
+                LOCAL_NATIVE_BYTES.addAndGet(retainedBytes);
+                bucket.values.add(new LocalRef(created, fingerprint, bucket, retainedBytes));
+                return M3String.whole(created);
+            }
+        }
+    }
+
     static M3String internCompactBytes(
             byte[] source, int sourceOffset, int length, byte sourceCoder) {
         Objects.requireNonNull(source, "source");
@@ -653,6 +733,62 @@ final class M3StringPool {
                 }
             }
             return -1;
+        }
+
+        int findCodePoints(
+                int[] value, int offset, int count, int utf16Length) {
+            int low = 0;
+            int high = offsets.length - 1;
+            while (low <= high) {
+                int middle = (low + high) >>> 1;
+                int comparison =
+                        compareCodePoints(
+                                value,
+                                offset,
+                                count,
+                                utf16Length,
+                                offsets[middle],
+                                lengths[middle]);
+                if (comparison == 0) return middle;
+                if (comparison < 0) high = middle - 1;
+                else low = middle + 1;
+            }
+            return -1;
+        }
+
+        private int compareCodePoints(
+                int[] value,
+                int offset,
+                int count,
+                int utf16Length,
+                int mappedOffset,
+                int mappedLength) {
+            int common = Math.min(utf16Length, mappedLength);
+            int cpIndex = 0;
+            int sourceUnit = 0;
+            char pendingLow = 0;
+            boolean hasPendingLow = false;
+
+            for (int index = 0; index < common; index++) {
+                char left;
+                if (hasPendingLow) {
+                    left = pendingLow;
+                    hasPendingLow = false;
+                } else {
+                    int cp = value[offset + cpIndex++];
+                    if (Character.isBmpCodePoint(cp)) {
+                        left = (char) cp;
+                    } else {
+                        left = Character.highSurrogate(cp);
+                        pendingLow = Character.lowSurrogate(cp);
+                        hasPendingLow = true;
+                    }
+                }
+                char right = mappedUnit(mappedOffset, index);
+                if (left != right) return left - right;
+                sourceUnit++;
+            }
+            return utf16Length - mappedLength;
         }
 
         int findCompactBytes(
