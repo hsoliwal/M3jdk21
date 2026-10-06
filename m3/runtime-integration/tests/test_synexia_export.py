@@ -123,6 +123,29 @@ class SynexiaExportTest(unittest.TestCase):
                               "3e85c872adf556901a341a9eb1c3b59864918da1")
             self.assertFalse((root / "output").exists())
 
+    def test_unpaired_utf16_surrogate_round_trips_through_utf8_sidecars(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = root / "sources.tsv"
+            manifest.write_text(
+                "\t".join(EXPORT.MANIFEST_COLUMNS) + "\n"
+                "surrogate\tSurrogate\tfixture/source\tid\tname\tM3StringFacts + Surrogate\tApache-2.0\tfixture\n",
+                encoding="utf-8",
+            )
+            records = root / "records.tsv"
+            records.write_text(
+                "\t".join(EXPORT.RECORD_COLUMNS) + "\n"
+                "surrogate\tfixture/source\tfixture\tund\tS1\t\ud800\tS1\tSURROGATE\t-\tM3StringFacts + Surrogate\n",
+                encoding="utf-8",
+                errors="surrogatepass",
+            )
+            output = root / "output"
+            EXPORT.export(manifest, records, output, "fixture", "0" * 40)
+            sidecar = (output / "synexia.records.tsv").read_text(encoding="utf-8")
+            self.assertIn("\\uD800", sidecar)
+            self.assertEqual({"source_records": 1, "image_records": 1, "shards": 1, "utf16_units": 1},
+                             VERIFY.verify(output))
+
     def test_source_blind_verifier_rejects_post_export_mutation(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

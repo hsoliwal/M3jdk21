@@ -25,6 +25,11 @@ reviewed `precompute_target` for its Synexia source family. It preserves mapping
 IDs/names and translation profiles verbatim. Physical `image_row` values are only a sorted `M3LEX001` projection;
 they are never substituted for a Synexia ID.
 
+Lexeme fields in the TSV sidecars preserve UTF-16 exactly while remaining valid
+UTF-8: backslashes, controls and unpaired UTF-16 surrogates use `\\uHHHH`
+escapes; valid surrogate pairs are emitted as their Unicode scalar. The image
+itself remains the authoritative UTF-16LE payload.
+
 ```text
 python3 m3/runtime-integration/export-synexia-lexicon.py \
   --source-manifest m3/lexicon/synexia-source-manifest.tsv \

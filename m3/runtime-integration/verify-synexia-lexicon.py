@@ -32,6 +32,30 @@ def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
+def unescape_sidecar_text(value: str) -> str:
+    """Decode the exporter’s UTF-16-preserving sidecar escaping."""
+    encoded = bytearray()
+    at = 0
+    while at < len(value):
+        if value[at] != "\\":
+            encoded.extend(value[at].encode("utf-16-le", "surrogatepass"))
+            at += 1
+            continue
+        if at + 1 < len(value) and value[at + 1] == "\\":
+            encoded.extend(b"\\\x00")
+            at += 2
+            continue
+        if at + 5 >= len(value) or value[at + 1] != "u":
+            raise ValueError("invalid sidecar escape")
+        try:
+            unit = int(value[at + 2:at + 6], 16)
+        except ValueError as error:
+            raise ValueError("invalid sidecar UTF-16 escape") from error
+        encoded.extend(struct.pack("<H", unit))
+        at += 6
+    return bytes(encoded).decode("utf-16-le", "surrogatepass")
+
+
 def read_tsv(path: pathlib.Path, columns: tuple[str, ...]) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8", errors="surrogatepass", newline="") as stream:
         reader = csv.DictReader(stream, delimiter="\t")
@@ -138,7 +162,7 @@ def verify(output: pathlib.Path) -> dict[str, int]:
         values, hashes, units = read_image(output / filename)
         if int(row["image_records"]) != len(values) or int(row["utf16_units"]) != units:
             raise ValueError(f"shard metadata mismatch: {filename}")
-        if row["first_lexeme"] != values[0] or row["last_lexeme"] != values[-1]:
+        if unescape_sidecar_text(row["first_lexeme"]) != values[0] or unescape_sidecar_text(row["last_lexeme"]) != values[-1]:
             raise ValueError(f"shard lexical bounds mismatch: {filename}")
         if filename.name not in outputs:
             raise ValueError(f"shard missing from output manifest: {filename}")
@@ -162,7 +186,7 @@ def verify(output: pathlib.Path) -> dict[str, int]:
             raise ValueError("duplicate source identity")
         identities.add(identity)
         key = (int(row["shard_id"]), int(row["image_row"]))
-        if key not in images or row["lexeme"] != images[key]:
+        if key not in images or unescape_sidecar_text(row["lexeme"]) != images[key]:
             raise ValueError("source mapping does not match image coordinate")
         if not row["mapping_name"] or not row["precompute_profile"]:
             raise ValueError("mapping metadata is incomplete")

@@ -52,6 +52,25 @@ def utf16_units(text: str) -> bytes:
     return text.encode("utf-16-be", "surrogatepass")
 
 
+def escape_sidecar_text(text: str) -> str:
+    """Keep sidecars valid UTF-8 while preserving exact UTF-16 code units."""
+    units = struct.unpack(">" + "H" * (len(utf16_units(text)) // 2), utf16_units(text))
+    output: list[str] = []
+    at = 0
+    while at < len(units):
+        unit = units[at]
+        if 0xD800 <= unit <= 0xDBFF and at + 1 < len(units) and 0xDC00 <= units[at + 1] <= 0xDFFF:
+            output.append(chr(0x10000 + ((unit - 0xD800) << 10) + units[at + 1] - 0xDC00))
+            at += 2
+        elif unit == 0x5C or unit < 0x20 or 0xD800 <= unit <= 0xDFFF:
+            output.append(f"\\u{unit:04X}")
+            at += 1
+        else:
+            output.append(chr(unit))
+            at += 1
+    return "".join(output)
+
+
 def java_hash(text: str) -> int:
     encoded = text.encode("utf-16-le", "surrogatepass")
     value = 0
@@ -67,9 +86,8 @@ def code_point_facts(text: str) -> tuple[int, int, int]:
     at = 0
     while at < len(units):
         unit = units[at]
-        if 0xD800 <= unit <= 0xDBFF and at + 1 < len(units):
-            following = units[at + 1]
-            if 0xDC00 <= following <= 0xDFFF:
+        if 0xD800 <= unit <= 0xDBFF:
+            if at + 1 < len(units) and 0xDC00 <= units[at + 1] <= 0xDFFF:
                 code_points += 1
                 non_bmp += 1
                 at += 2
@@ -225,8 +243,8 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
         shard_rows.append({
             "shard_id": shard,
             "file": filename,
-            "first_lexeme": values[0],
-            "last_lexeme": values[-1],
+            "first_lexeme": escape_sidecar_text(values[0]),
+            "last_lexeme": escape_sidecar_text(values[-1]),
             "image_records": len(values),
             "utf16_units": sum(len(utf16_units(value)) // 2 for value in values),
             "sha256": image_outputs[filename],
@@ -240,6 +258,7 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
                        "translation_profile", "precompute_profile")
     mapping_rows = [{column: (physical_row[record["lexeme"]][0] if column == "shard_id"
                               else physical_row[record["lexeme"]][1] if column == "image_row"
+                              else escape_sidecar_text(record[column]) if column == "lexeme"
                               else record[column])
                      for column in mapping_columns} for record in records]
     mapping_bytes = write_tsv(output / "synexia.records.tsv", mapping_columns, mapping_rows)
