@@ -63,6 +63,9 @@ public final class M3RecipeScopeRegistry {
                     explicitChange()),
             Map.entry(
                     "com.m3.rewrite.backport.M3ReleaseJepAuthorityRepairRecipe",
+                    fixed(M3EditScope.MULTI_MODULE)),
+            Map.entry(
+                    "com.m3.rewrite.synexia.M3SynexiaImportInventoryRecipe",
                     fixed(M3EditScope.MULTI_MODULE)));
 
     private M3RecipeScopeRegistry() {}
