@@ -662,6 +662,7 @@
   template(m3_string_owner_signature,             "Ljava/lang/M3StringOwner;")                                 \
   template(m3_string_atom_signature,              "Ljava/lang/M3StringAtom;")                                  \
   template(m3_string_tuple_signature,             "Ljava/lang/M3StringTuple;")                              \
+  template(m3_string_facts_signature,             "Ljava/lang/M3StringFacts;")                              \
   template(m3_string_array_signature,             "[Ljava/lang/M3String;")                             \
   template(string_array_signature,                    "[Ljava/lang/String;")                                      \
   template(reference_signature,                       "Ljava/lang/ref/Reference;")                                \
