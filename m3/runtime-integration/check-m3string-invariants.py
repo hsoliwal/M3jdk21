@@ -617,6 +617,20 @@ for fragment in [
 if "M3String asciiCase(boolean upper)" not in m3:
     fail("M3String ROOT ASCII canonical case mapper missing")
 
+# Full Unicode/locale case conversion for M3-backed Strings must use the JDK conditional
+# casing engine over canonical String access. Source value() materialization is forbidden.
+for fragment in [
+    "return caseMapM3(locale, false);",
+    "return caseMapM3(locale, true);",
+    "private String caseMapM3(Locale locale, boolean upper)",
+    "ConditionalSpecialCasing.toLowerCaseEx(this, index, locale)",
+    "ConditionalSpecialCasing.toUpperCaseEx(this, index, locale)",
+    "ConditionalSpecialCasing.toLowerCaseCharArray(this, index, locale)",
+    "ConditionalSpecialCasing.toUpperCaseCharArray(this, index, locale)",
+]:
+    if fragment not in string:
+        fail(f"M3 full JDK case-mapping route missing: {fragment}")
+
 # Builder coder selection may use exact M3 range facts locally. This does not change the
 # String/HotSpot coder; it only avoids inflating a Latin1 builder for a Latin1-only M3 range.
 for fragment in [
