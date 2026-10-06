@@ -231,6 +231,24 @@ if "public boolean containsAll(Facts required)" not in tq:
 if "long[] trigram" in facts or "M3TQ.Facts" in facts:
     fail("M3StringFacts illegally owns length-proportional exact trigram state")
 
+# Cold range facts follow canonical owner geometry. Tuple ranges compose child facts and only
+# atom-edge ranges may scan UTF-16 directly.
+for fragment in [
+    "computeRangeFacts(checked.start(), checked.length())",
+    "abstract M3StringFacts computeRangeFacts(int start, int length)",
+]:
+    if fragment not in owner:
+        fail(f"M3 structural range-fact dispatch missing: {fragment}")
+for fragment in [
+    "return left.slice(start, end).facts();",
+    "return right.slice(start - leftLength, end - leftLength).facts();",
+    "return M3StringFacts.compose(",
+]:
+    if fragment not in tuple_:
+        fail(f"M3 tuple range-fact composition missing: {fragment}")
+if "M3StringFacts.scan(M3String.range(this, start, length))" not in atom:
+    fail("M3 atom range-fact edge scan missing")
+
 # Fixed String facts are opportunistic search filters. Cold search must not force a complete
 # M3StringFacts scan before the dedicated bounded search/position owners execute.
 for fragment in [
