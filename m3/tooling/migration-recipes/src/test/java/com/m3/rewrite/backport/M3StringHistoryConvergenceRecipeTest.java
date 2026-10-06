@@ -69,6 +69,9 @@ final class M3StringHistoryConvergenceRecipeTest {
     private static List<SourceFile> javaAfter() {
         return List.of(
                 java(
+                        "src/java.base/share/classes/java/lang/AbstractStringBuilder.java",
+                        "16-AbstractStringBuilder.java.txt"),
+                java(
                         "src/java.base/share/classes/java/lang/M3String.java",
                         "00-M3String.java.txt"),
                 java(
