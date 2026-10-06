@@ -3,13 +3,30 @@
  *
  * @test
  * @summary M3-backed String.intern preserves JDK identity and collision semantics
- * @run main/othervm -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringInternTest
+ * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage M3StringInternTest
+ * @run main/othervm --add-opens=java.base/java.lang=ALL-UNNAMED -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage -XX:-CompactStrings M3StringInternTest
  */
 
+import java.lang.reflect.Field;
+
 public class M3StringInternTest {
+    private static final Field STRING_M3;
+    private static final Field M3_OWNER;
     private static long checks;
 
-    public static void main(String[] args) {
+    static {
+        try {
+            STRING_M3 = String.class.getDeclaredField("m3");
+            STRING_M3.setAccessible(true);
+            Class<?> m3 = Class.forName("java.lang.M3String");
+            M3_OWNER = m3.getDeclaredField("owner");
+            M3_OWNER.setAccessible(true);
+        } catch (ReflectiveOperationException failure) {
+            throw new ExceptionInInitializerError(failure);
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
         String composed = String.join("", "m3", "-", "intern");
         String scalar = new String("m3-intern".toCharArray());
         check(composed != scalar, "distinct wrappers before intern");
@@ -32,6 +49,23 @@ public class M3StringInternTest {
         check(collisionLeft.intern() != collisionRight.intern(), "collision intern distinction");
         check(collisionLeft.intern().equals("Aa"), "collision left content");
         check(collisionRight.intern().equals("BB"), "collision right content");
+
+        String unitValue = String.valueOf('x');
+        String unitScalar = new String(new char[] {'x'});
+        unitValue.length();
+        unitScalar.length();
+        Object unitValueM3 = STRING_M3.get(unitValue);
+        Object unitScalarM3 = STRING_M3.get(unitScalar);
+        check(unitValueM3 != null && unitScalarM3 != null, "unit Strings admitted to M3");
+        check(M3_OWNER.get(unitValueM3) == M3_OWNER.get(unitScalarM3),
+                "valueOf/scalar canonical unit owner identity");
+
+        String wideValue = String.valueOf('\u0100');
+        String wideScalar = new String(new char[] {'\u0100'});
+        wideValue.length();
+        wideScalar.length();
+        check(M3_OWNER.get(STRING_M3.get(wideValue)) == M3_OWNER.get(STRING_M3.get(wideScalar)),
+                "wide valueOf/scalar canonical unit owner identity");
 
         String empty = new String(new char[0]);
         check(empty.intern() == "".intern(), "empty intern identity");
