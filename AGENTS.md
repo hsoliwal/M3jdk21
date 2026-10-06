@@ -23,3 +23,17 @@ source/target preimages and postimages with compiler/behavior, recipe fixed-poin
 applicable jtreg/native/runtime gates. Resource-sensitive changes require CPU, retained-heap and
 native/process-memory evidence. Do not equate a finite donor pass or merge ancestry with complete
 target delivery; retain pending gates and partial coverage explicitly.
+
+
+## Current M3 String recipe authority
+
+The reusable M3 String history-convergence recipe is owned only by Synexia:
+
+- recipe: `com.synexia.rewrite.m3jdk.M3StringHistoryConvergence`
+- repository: `hsoliwal/com.synexia`
+- custody PR: `#9530`
+- pinned custody revision: `ad5df8458ffeba643a6c343e82dd61a338facf29`
+
+M3JDK21 keeps the applied runtime, target-native tests and a compact application receipt. Do not
+recreate the deleted `m3-string-history-convergence` recipe descriptor, snapshot crates, or local
+fixed-point recipe test here.
