@@ -530,6 +530,18 @@ for unsupported in [
     if unsupported not in arguments:
         fail(f"M3 unsupported VM subsystem guard missing: {unsupported}")
 
+# VM terminology must describe the actual representation owner. M3 storage is no longer a
+# join-only feature; every M3-backed String is covered by the same predicate.
+vm_string_bridge = java_classes_hpp + java_classes_inline + java_classes_cpp + hotspot_jni
+if "is_m3_joined" in vm_string_bridge:
+    fail("stale join-only M3 VM predicate name leaked back into runtime")
+for fragment in [
+    "is_m3_backed(oop java_string)",
+    "java_lang_String::is_m3_backed",
+]:
+    if fragment not in vm_string_bridge:
+        fail(f"M3 VM backed-storage predicate missing: {fragment}")
+
 # Donor class naming must not leak back into live VM symbols/layout.
 for path, text in [
     ("vmSymbols.hpp", symbols),
