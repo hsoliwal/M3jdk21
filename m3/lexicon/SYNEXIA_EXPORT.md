@@ -52,6 +52,13 @@ The output is:
   whitespace facts plus the Synexia precompute profile;
 - `synexia.export.json`: source pins, input/output hashes, counts and policy.
 
+`com.m3.text.SharedLexiconCatalog.open(exportDirectory)` validates the shard
+manifest and all three sidecars together. It exposes stable
+`(shardId,imageRow)` coordinates, one-to-many source mappings and immutable
+precompute facts without joining image payloads. `textAt` is the explicit
+single-record materialization boundary; source IDs and mapping names are not
+converted into VM-local `String` identities.
+
 The image is suitable for the existing `-Djdk.mindex.lexicon=/absolute/file`
 boundary. The sidecars remain language-layer metadata; they are not fields of
 `java.lang.String`, and they do not make Synexia resolver IDs interchangeable

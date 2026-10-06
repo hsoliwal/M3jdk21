@@ -99,11 +99,31 @@ public final class FoundationTest {
         String rows="0\tone.m3lex\ta\t\\uD800\t2\t2\t"+sha256(one)+"\n"
                 +"1\ttwo.m3lex\t\\uD801\t\\uD802\t2\t2\t"+sha256(two)+"\n";
         Files.writeString(directory.resolve("synexia.shards.tsv"),header+rows,java.nio.charset.StandardCharsets.UTF_8);
+        String mappingHeader="source_id\tsource_path\tsource_kind\tlanguage_tag\trecord_id\tlexeme\tshard_id\timage_row\tmapping_id\tmapping_name\ttranslation_profile\tprecompute_profile\n";
+        String mappings=mappingHeader
+                +"source-a\tpath-a\tkind-a\ten\tid-a\ta\t0\t0\tmap-a\tA\tprofile-a\tprofile-a\n"
+                +"source-a2\tpath-a2\tkind-a2\ten\tid-a2\ta\t0\t0\tmap-a2\tA2\tprofile-a2\tprofile-a2\n"
+                +"source-high\tpath-high\tkind-high\ten\tid-high\t\\uD800\t0\t1\tmap-high\tHIGH\tprofile-high\tprofile-high\n"
+                +"source-high2\tpath-high2\tkind-high2\ten\tid-high2\t\\uD801\t1\t0\tmap-high2\tHIGH2\tprofile-high2\tprofile-high2\n"
+                +"source-high3\tpath-high3\tkind-high3\ten\tid-high3\t\\uD802\t1\t1\tmap-high3\tHIGH3\tprofile-high3\tprofile-high3\n";
+        Files.writeString(directory.resolve("synexia.records.tsv"),mappings,java.nio.charset.StandardCharsets.UTF_8);
+        String facts="shard_id\timage_row\tutf16_units\tjava_hash\tcode_points\tunpaired_surrogates\tnon_bmp_code_points\tascii\tlatin1\tcontains_whitespace\tprecompute_profile\n"
+                +"0\t0\t1\t97\t1\t0\t0\tTrue\tTrue\tFalse\tprofile-a + profile-a2\n"
+                +"0\t1\t1\t55296\t1\t1\t0\tFalse\tFalse\tFalse\tprofile-high\n"
+                +"1\t0\t1\t55297\t1\t1\t0\tFalse\tFalse\tFalse\tprofile-high2\n"
+                +"1\t1\t1\t55298\t1\t1\t0\tFalse\tFalse\tFalse\tprofile-high3\n";
+        Files.writeString(directory.resolve("synexia.precompute.tsv"),facts,java.nio.charset.StandardCharsets.UTF_8);
         SharedLexiconCatalog catalog=SharedLexiconCatalog.open(directory);catalog.warm();
         check(catalog.shardCount()==2);check(catalog.recordCount()==4);check(catalog.shardFiles().equals(List.of("one.m3lex","two.m3lex")));
+        check(catalog.mappingsAt(new SharedLexiconCatalog.Coordinate(0,0)).size()==2);
+        check(catalog.mappingsAt(new SharedLexiconCatalog.Coordinate(0,0)).get(1).mappingName().equals("A2"));
         check(catalog.find("\ud801").equals(Optional.of(new SharedLexiconCatalog.Coordinate(1,0))));
+        check(catalog.precomputeAt(new SharedLexiconCatalog.Coordinate(1,0)).javaHash()==55297L);
         check(catalog.find("missing").isEmpty());check(catalog.textAt(new SharedLexiconCatalog.Coordinate(1,1)).equals("\ud802"));
         Files.writeString(directory.resolve("synexia.shards.tsv"),header+"0\t../one.m3lex\ta\tb\t2\t2\t"+sha256(one)+"\n",java.nio.charset.StandardCharsets.UTF_8);
+        expect(IOException.class,()->SharedLexiconCatalog.open(directory));
+        Files.writeString(directory.resolve("synexia.shards.tsv"),header+rows,java.nio.charset.StandardCharsets.UTF_8);
+        Files.writeString(directory.resolve("synexia.precompute.tsv"),facts.replace("55297", "1"),java.nio.charset.StandardCharsets.UTF_8);
         expect(IOException.class,()->SharedLexiconCatalog.open(directory));
     }
     public static void main(String[] args)throws Exception{pieces();Path dir=Files.createTempDirectory("m3-foundation-");try{images(dir);catalog(dir);}finally{try(var paths=Files.list(dir)){for(Path path:paths.toList())Files.delete(path);}Files.delete(dir);}System.out.println("FOUNDATION_PASS checks="+checks);}

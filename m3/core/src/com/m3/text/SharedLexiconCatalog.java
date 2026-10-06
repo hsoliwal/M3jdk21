@@ -11,8 +11,10 @@ import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HexFormat;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -30,20 +32,38 @@ public final class SharedLexiconCatalog {
             "shard_id", "file", "first_lexeme", "last_lexeme", "image_records",
             "utf16_units", "sha256"
     };
+    private static final String[] MAPPING_HEADER = {
+            "source_id", "source_path", "source_kind", "language_tag", "record_id", "lexeme",
+            "shard_id", "image_row", "mapping_id", "mapping_name", "translation_profile",
+            "precompute_profile"
+    };
+    private static final String[] PRECOMPUTE_HEADER = {
+            "shard_id", "image_row", "utf16_units", "java_hash", "code_points",
+            "unpaired_surrogates", "non_bmp_code_points", "ascii", "latin1",
+            "contains_whitespace", "precompute_profile"
+    };
 
     private final List<SharedLexiconImage> images;
     private final List<String> files;
     private final List<String> firstLexemes;
     private final List<String> lastLexemes;
+    private final Map<Coordinate, List<SourceMapping>> mappings;
+    private final Map<Coordinate, PrecomputeFacts> precompute;
     private final long recordCount;
 
     private SharedLexiconCatalog(List<SharedLexiconImage> images, List<String> files,
                                  List<String> firstLexemes, List<String> lastLexemes,
+                                 Map<Coordinate, List<SourceMapping>> mappings,
+                                 Map<Coordinate, PrecomputeFacts> precompute,
                                  long recordCount) {
         this.images = List.copyOf(images);
         this.files = List.copyOf(files);
         this.firstLexemes = List.copyOf(firstLexemes);
         this.lastLexemes = List.copyOf(lastLexemes);
+        Map<Coordinate, List<SourceMapping>> mappingCopy = new HashMap<>();
+        mappings.forEach((coordinate, values) -> mappingCopy.put(coordinate, List.copyOf(values)));
+        this.mappings = Map.copyOf(mappingCopy);
+        this.precompute = Map.copyOf(precompute);
         this.recordCount = recordCount;
     }
 
@@ -100,14 +120,39 @@ public final class SharedLexiconCatalog {
             previousLast = last;
         }
         if (images.isEmpty()) throw new IOException("empty shard manifest");
-        return new SharedLexiconCatalog(images, files, firstLexemes, lastLexemes, recordCount);
+        Map<Coordinate, List<SourceMapping>> mappings = readMappings(directory, images);
+        Map<Coordinate, PrecomputeFacts> precompute = readPrecompute(directory, images);
+        if (mappings.size() != recordCount || precompute.size() != recordCount)
+            throw new IOException("metadata coverage does not match image records");
+        return new SharedLexiconCatalog(images, files, firstLexemes, lastLexemes,
+                mappings, precompute, recordCount);
     }
 
     public record Coordinate(int shardId, int imageRow) { }
 
+    /** One preserved Synexia source identity; several may point at one lexeme. */
+    public record SourceMapping(String sourceId, String sourcePath, String sourceKind,
+                                String languageTag, String recordId, String lexeme,
+                                Coordinate coordinate, String mappingId, String mappingName,
+                                String translationProfile, String precomputeProfile) { }
+
+    /** Exported facts are retained as data; the Python verifier remains their cross-language authority. */
+    public record PrecomputeFacts(Coordinate coordinate, long utf16Units, long javaHash,
+                                  int codePoints, int unpairedSurrogates, int nonBmpCodePoints,
+                                  boolean ascii, boolean latin1, boolean containsWhitespace,
+                                  String precomputeProfile) { }
+
     public int shardCount() { return images.size(); }
     public long recordCount() { return recordCount; }
     public List<String> shardFiles() { return files; }
+    public List<SourceMapping> mappingsAt(Coordinate coordinate) {
+        requireCoordinate(coordinate);
+        return mappings.get(coordinate);
+    }
+    public PrecomputeFacts precomputeAt(Coordinate coordinate) {
+        requireCoordinate(coordinate);
+        return precompute.get(coordinate);
+    }
 
     /** Explicitly warms all mapped shards; this does not flatten their payloads. */
     public void warm() { for (SharedLexiconImage image : images) image.warm(); }
@@ -132,9 +177,117 @@ public final class SharedLexiconCatalog {
     /** Materializes exactly one requested UTF-16 record. */
     public String textAt(Coordinate coordinate) {
         Objects.requireNonNull(coordinate);
-        if (coordinate.shardId() < 0 || coordinate.shardId() >= images.size())
-            throw new IndexOutOfBoundsException("shardId=" + coordinate.shardId());
+        requireCoordinate(coordinate);
         return images.get(coordinate.shardId()).recordText(coordinate.imageRow());
+    }
+
+    private void requireCoordinate(Coordinate coordinate) {
+        Objects.requireNonNull(coordinate);
+        if (coordinate.shardId() < 0 || coordinate.shardId() >= images.size()
+                || coordinate.imageRow() < 0
+                || coordinate.imageRow() >= images.get(coordinate.shardId()).size())
+            throw new IndexOutOfBoundsException("coordinate=" + coordinate);
+    }
+
+    private static Map<Coordinate, List<SourceMapping>> readMappings(
+            Path directory, List<SharedLexiconImage> images) throws IOException {
+        List<String> lines = readSidecar(directory.resolve("synexia.records.tsv"), MAPPING_HEADER);
+        Map<Coordinate, List<SourceMapping>> result = new HashMap<>();
+        java.util.Set<List<String>> identities = new java.util.HashSet<>();
+        for (int lineNumber = 1; lineNumber < lines.size(); lineNumber++) {
+            String[] fields = splitSidecar(lines.get(lineNumber), MAPPING_HEADER.length, lineNumber);
+            requireFields(fields, lineNumber);
+            List<String> identity = List.of(fields[0], fields[4]);
+            if (!identities.add(identity)) throw malformed(lineNumber, "duplicate source identity");
+            Coordinate coordinate = coordinate(fields[6], fields[7], images, lineNumber);
+            String lexeme = decodeSidecarText(fields[5], lineNumber);
+            if (!imageText(images, coordinate).equals(lexeme))
+                throw malformed(lineNumber, "mapping lexeme does not match image coordinate");
+            SourceMapping mapping = new SourceMapping(fields[0], fields[1], fields[2], fields[3],
+                    fields[4], lexeme, coordinate, fields[8], fields[9], fields[10], fields[11]);
+            result.computeIfAbsent(coordinate, ignored -> new ArrayList<>()).add(mapping);
+        }
+        if (lines.size() == 1) throw new IOException("empty synexia.records.tsv");
+        return result;
+    }
+
+    private static Map<Coordinate, PrecomputeFacts> readPrecompute(
+            Path directory, List<SharedLexiconImage> images) throws IOException {
+        List<String> lines = readSidecar(directory.resolve("synexia.precompute.tsv"), PRECOMPUTE_HEADER);
+        Map<Coordinate, PrecomputeFacts> result = new HashMap<>();
+        for (int lineNumber = 1; lineNumber < lines.size(); lineNumber++) {
+            String[] fields = splitSidecar(lines.get(lineNumber), PRECOMPUTE_HEADER.length, lineNumber);
+            requireFields(fields, lineNumber);
+            Coordinate coordinate = coordinate(fields[0], fields[1], images, lineNumber);
+            if (result.containsKey(coordinate)) throw malformed(lineNumber, "duplicate precompute coordinate");
+            String text = imageText(images, coordinate);
+            long units = parseNonNegativeLong(fields[2], lineNumber, "utf16_units");
+            long hash = parseUnsignedHash(fields[3], lineNumber);
+            if (units != text.length() || hash != Integer.toUnsignedLong(javaHash(text)))
+                throw malformed(lineNumber, "precompute text facts do not match image");
+            int codePoints = parseNonNegativeInt(fields[4], lineNumber, "code_points");
+            int unpaired = parseNonNegativeInt(fields[5], lineNumber, "unpaired_surrogates");
+            int nonBmp = parseNonNegativeInt(fields[6], lineNumber, "non_bmp_code_points");
+            PrecomputeFacts facts = new PrecomputeFacts(coordinate, units, hash, codePoints,
+                    unpaired, nonBmp, parseBoolean(fields[7], lineNumber),
+                    parseBoolean(fields[8], lineNumber), parseBoolean(fields[9], lineNumber), fields[10]);
+            result.put(coordinate, facts);
+        }
+        if (lines.size() == 1) throw new IOException("empty synexia.precompute.tsv");
+        return result;
+    }
+
+    private static List<String> readSidecar(Path path, String[] header) throws IOException {
+        List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+        if (lines.isEmpty() || !lines.get(0).equals(String.join("\t", header)))
+            throw new IOException("invalid sidecar header: " + path.getFileName());
+        return lines;
+    }
+
+    private static String[] splitSidecar(String line, int expectedFields, int lineNumber) throws IOException {
+        if (line.isEmpty()) throw malformed(lineNumber, "empty sidecar row");
+        String[] fields = line.split("\\t", -1);
+        if (fields.length != expectedFields) throw malformed(lineNumber, "wrong sidecar field count");
+        return fields;
+    }
+
+    private static void requireFields(String[] fields, int lineNumber) throws IOException {
+        for (String field : fields) if (field.isEmpty()) throw malformed(lineNumber, "empty sidecar field");
+    }
+
+    private static Coordinate coordinate(String shard, String row, List<SharedLexiconImage> images,
+                                         int lineNumber) throws IOException {
+        int shardId = parseNonNegativeInt(shard, lineNumber, "shard_id");
+        int imageRow = parseNonNegativeInt(row, lineNumber, "image_row");
+        if (shardId >= images.size() || imageRow >= images.get(shardId).size())
+            throw malformed(lineNumber, "sidecar coordinate outside image");
+        return new Coordinate(shardId, imageRow);
+    }
+
+    private static String imageText(List<SharedLexiconImage> images, Coordinate coordinate) {
+        return images.get(coordinate.shardId()).recordText(coordinate.imageRow());
+    }
+
+    private static int javaHash(String value) {
+        int hash = 0;
+        for (int at = 0; at < value.length(); at++) hash = 31 * hash + value.charAt(at);
+        return hash;
+    }
+
+    private static long parseUnsignedHash(String value, int lineNumber) throws IOException {
+        try {
+            long parsed = Long.parseLong(value);
+            if (parsed < 0 || parsed > 0xffff_ffffL) throw new NumberFormatException();
+            return parsed;
+        } catch (NumberFormatException failure) {
+            throw malformed(lineNumber, "invalid java_hash");
+        }
+    }
+
+    private static boolean parseBoolean(String value, int lineNumber) throws IOException {
+        if (value.equals("True")) return true;
+        if (value.equals("False")) return false;
+        throw malformed(lineNumber, "invalid boolean precompute fact");
     }
 
     private static Path safeChild(Path directory, String fileName, int lineNumber) throws IOException {
