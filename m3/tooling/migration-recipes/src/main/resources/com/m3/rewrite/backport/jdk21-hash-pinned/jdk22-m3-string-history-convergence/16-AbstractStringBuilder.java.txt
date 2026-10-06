@@ -1730,7 +1730,15 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
     }
 
     private void inflateIfNeededFor(String input) {
-        if (COMPACT_STRINGS && (coder != input.coder())) {
+        if (!COMPACT_STRINGS || !isLatin1()) {
+            return;
+        }
+        M3String storage = input.m3();
+        if (storage != null) {
+            if (!storage.facts().latin1) {
+                inflate();
+            }
+        } else if (coder != input.coder()) {
             inflate();
         }
     }
