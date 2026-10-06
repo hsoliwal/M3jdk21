@@ -299,7 +299,7 @@ if "m3TqFacts = null;" not in matcher or "m3TqFactsFrom = -1;" not in matcher:
 # halfsiphash remains UTF-16 based, and intern identity/equality stays with the existing table.
 for fragment in [
     "if (!_alt_hash)",
-    "return java_lang_String::hash_code(val_oop);",
+    "return java_lang_String::hash_code_noupdate(val_oop);",
     "jchar* chars = java_lang_String::as_unicode_string_or_null(val_oop, length);",
     "return hash_string(chars, length, true);",
 ]:
