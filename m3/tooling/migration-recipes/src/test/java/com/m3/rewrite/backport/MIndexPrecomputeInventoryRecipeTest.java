@@ -50,8 +50,12 @@ final class MIndexPrecomputeInventoryRecipeTest {
         return List.of(
                 text(".github/workflows/mindex-string-backing.yml", "00-workflow.yml.txt"),
                 text("m3/docs/name-mapping.json", "01-name-mapping.json.txt"),
+                text("m3/docs/string-precompute-completeness.tsv",
+                        "04-string-completeness.tsv.txt"),
                 text("m3/docs/synexia-mindex-precompute-inventory.tsv",
                         "02-precompute-inventory.tsv.txt"),
+                text("m3/docs/synexia-string-precompute-port-map.tsv",
+                        "05-string-port-map.tsv.txt"),
                 text("m3/runtime-integration/check-m3string-invariants.py",
                         "03-invariants.py.txt"));
     }
