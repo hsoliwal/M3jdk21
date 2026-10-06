@@ -15,6 +15,7 @@ import java.nio.charset.CoderResult;
 import java.nio.charset.CodingErrorAction;
 import java.nio.charset.StandardCharsets;
 import java.nio.charset.UnmappableCharacterException;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -203,6 +204,12 @@ public class M3StringPrecomputeSearchTest {
             check(((UnmappableCharacterException) expected).getInputLength() == 2,
                     "ASCII supplementary input length");
         }
+
+        String coldAsciiCase = new String("AbC-xYz-123".toCharArray());
+        check(!factsPrepared(coldAsciiCase), "cold ROOT ASCII facts initially absent");
+        check(coldAsciiCase.toLowerCase(Locale.ROOT).equals("abc-xyz-123"),
+                "cold ROOT ASCII lowercase");
+        check(factsPrepared(coldAsciiCase), "cold ROOT ASCII prepares canonical facts");
 
         String asciiCase = String.join("", "AbC", "-xYz-123");
         check(!asciiCase.isBlank(), "prepare ASCII case facts");
@@ -734,6 +741,18 @@ public class M3StringPrecomputeSearchTest {
             if (source[index] == high && source[index + 1] == low) return index;
         }
         return -1;
+    }
+
+    private static boolean factsPrepared(String value) throws Exception {
+        Field m3Field = String.class.getDeclaredField("m3");
+        m3Field.setAccessible(true);
+        Object storage = m3Field.get(value);
+        if (storage == null) {
+            throw new AssertionError("String was not admitted to M3");
+        }
+        Method factsIfPrepared = storage.getClass().getDeclaredMethod("factsIfPrepared");
+        factsIfPrepared.setAccessible(true);
+        return factsIfPrepared.invoke(storage) != null;
     }
 
     private static byte[] invokeBytes(
