@@ -1,0 +1,19 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Fc0Forward
+displayName: Fc0 Forward ordered composition
+description: One explicitly declared complete family order; no unlisted-order or semantic-intermediate claim.
+recipeList:
+  - com.synexia.m3.Fc0Cwf
+  - com.synexia.m3.Fc0Tqc
+  - com.synexia.m3.Fc0Pdc
+  - com.synexia.m3.Fc0Clr
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Fc0Reverse
+displayName: Fc0 Reverse ordered composition
+description: One explicitly declared complete family order; no unlisted-order or semantic-intermediate claim.
+recipeList:
+  - com.synexia.m3.Fc0Clr
+  - com.synexia.m3.Fc0Pdc
+  - com.synexia.m3.Fc0Tqc
+  - com.synexia.m3.Fc0Cwf

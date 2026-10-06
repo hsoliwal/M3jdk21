@@ -1,0 +1,304 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.m3.tooling.dag;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.m3.rewrite.scope.M3EditScope;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+
+final class M3PacketDagComposerTest {
+    @Test
+    void independentFileAtomsFanOutAndRejoinBeforeJUnit() {
+        M3BackportPacket packet =
+                new M3BackportPacket(
+                        "jdk-x",
+                        List.of(
+                                atom("java", M3EditScope.FILE, false, "recipe.Java", List.of()),
+                                atom("text", M3EditScope.FILE, false, "recipe.Text", List.of())));
+
+        M3RecipeDag dag = M3PacketDagComposer.compose(packet);
+
+        assertEquals(M3RecipeDag.canonical().size() - 1 + packet.atoms().size(), dag.size());
+        assertReviewPrefix(dag);
+        assertThrows(IllegalArgumentException.class, () -> dag.require("recipe-crate"));
+        assertEquals(
+                List.of("file-delta"),
+                dag.require("packet-java").dependsOn());
+        assertEquals(
+                List.of("file-delta"),
+                dag.require("packet-text").dependsOn());
+        assertEquals(
+                List.of("packet-java", "packet-text"),
+                dag.require("recipe-junit").dependsOn());
+        assertEquals(
+                List.of("packet-java", "packet-text"),
+                dag.layers().get(layerOf(dag, "file-delta") + 1).stream().map(M3DagNode::id).toList());
+        assertEquals("promote", dag.topologicalOrder().getLast().id());
+        assertEquals(M3EditScope.FILE, dag.require("promote").scope());
+    }
+
+    @Test
+    void packetDependenciesFormLaterLayersAndTerminalFanIn() {
+        M3BackportPacket packet =
+                new M3BackportPacket(
+                        "jdk-y",
+                        List.of(
+                                atom("a", M3EditScope.FILE, false, "recipe.A", List.of()),
+                                atom("b", M3EditScope.FILE, false, "recipe.B", List.of()),
+                                atom(
+                                        "join",
+                                        M3EditScope.PACKAGE,
+                                        true,
+                                        "recipe.Join",
+                                        List.of("a", "b"))));
+
+        M3RecipeDag dag = M3PacketDagComposer.compose(packet);
+
+        assertEquals(
+                List.of("packet-a", "packet-b"),
+                dag.layers().get(layerOf(dag, "file-delta") + 1).stream().map(M3DagNode::id).toList());
+        assertEquals(
+                List.of("packet-join"),
+                dag.layers().get(layerOf(dag, "file-delta") + 2).stream().map(M3DagNode::id).toList());
+        assertEquals(
+                List.of("packet-join"),
+                dag.require("recipe-junit").dependsOn());
+        assertEquals(M3EditScope.PACKAGE, dag.require("packet-join").scope());
+        assertEquals(M3EditScope.PACKAGE, dag.require("promote").scope());
+        assertEquals(List.of("packet-a", "packet-b"), dag.require("packet-join").dependsOn());
+        assertEquals(layerOf(dag, "packet-join") + 1, layerOf(dag, "recipe-junit"));
+        assertReviewPrefix(dag);
+    }
+
+    @Test
+    void broaderRootAtomRequiresExplicitPromotionApproval() {
+        M3BackportPacket rejected =
+                new M3BackportPacket(
+                        "jdk-z",
+                        List.of(
+                                atom(
+                                        "package",
+                                        M3EditScope.PACKAGE,
+                                        false,
+                                        "recipe.Package",
+                                        List.of())));
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> M3PacketDagComposer.compose(rejected));
+
+        M3BackportPacket accepted =
+                new M3BackportPacket(
+                        "jdk-z",
+                        List.of(
+                                atom(
+                                        "package",
+                                        M3EditScope.PACKAGE,
+                                        true,
+                                        "recipe.Package",
+                                        List.of())));
+
+        assertEquals(
+                M3EditScope.PACKAGE,
+                M3PacketDagComposer.compose(accepted)
+                        .require("packet-package")
+                        .scope());
+    }
+
+    @Test
+    void packetCyclesAreRejectedByCanonicalDagKernel() {
+        M3BackportPacket cyclic =
+                new M3BackportPacket(
+                        "jdk-cycle",
+                        List.of(
+                                atom("a", M3EditScope.FILE, false, "recipe.A", List.of("b")),
+                                atom("b", M3EditScope.FILE, false, "recipe.B", List.of("a"))));
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> M3PacketDagComposer.compose(cyclic));
+    }
+
+    @Test
+    void composedDagPreservesCanonicalVerificationTail() {
+        M3RecipeDag dag =
+                M3PacketDagComposer.compose(
+                        new M3BackportPacket(
+                                "jdk-tail",
+                                List.of(
+                                        atom(
+                                                "a",
+                                                M3EditScope.FILE,
+                                                false,
+                                                "recipe.A",
+                                                List.of()))));
+
+        assertEquals(
+                List.of(
+                        "recipe-junit",
+                        "diff",
+                        "lint",
+                        "compile",
+                        "jtreg",
+                        "runtime",
+                        "promote"),
+                dag.topologicalOrder().stream()
+                        .map(M3DagNode::id)
+                        .filter(
+                                id ->
+                                        List.of(
+                                                        "recipe-junit",
+                                                        "diff",
+                                                        "lint",
+                                                        "compile",
+                                                        "jtreg",
+                                                        "runtime",
+                                                        "promote")
+                                                .contains(id))
+                        .toList());
+        assertTrue(dag.require("promote").serialPromotion());
+    }
+
+    @Test
+    void evidenceBoundCompositionRequiresCompleteSemanticProof() {
+        M3BackportPacket packet =
+                new M3BackportPacket(
+                        "jdk-evidence",
+                        List.of(
+                                atom(
+                                        "java",
+                                        M3EditScope.FILE,
+                                        false,
+                                        "recipe.Java",
+                                        List.of())));
+        M3BackportPacketEvidence evidence =
+                new M3BackportPacketEvidence(
+                        "jdk-evidence",
+                        List.of(
+                                new M3RecipeAtomEvidence(
+                                        "java",
+                                        "contract/java",
+                                        "docs/java.md",
+                                        "Strategy",
+                                        "ConcreteStrategy.Java",
+                                        "JavaRecipeTest",
+                                        true)));
+
+        M3RecipeDag composed = M3PacketDagComposer.compose(packet, evidence);
+        assertReviewPrefix(composed);
+        assertEquals(List.of("file-delta"), composed.require("packet-java").dependsOn());
+        assertEquals(
+                List.of("packet-java"),
+                composed.layers().get(layerOf(composed, "file-delta") + 1).stream()
+                        .map(M3DagNode::id).toList());
+
+        M3BackportPacketEvidence missing =
+                new M3BackportPacketEvidence(
+                        "jdk-evidence",
+                        List.of(
+                                new M3RecipeAtomEvidence(
+                                        "other",
+                                        "contract/other",
+                                        "docs/other.md",
+                                        "Adapter",
+                                        "Adapter.Other",
+                                        "OtherRecipeTest",
+                                        true)));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> M3PacketDagComposer.compose(packet, missing));
+        assertThrows(
+                NullPointerException.class,
+                () -> M3PacketDagComposer.compose(packet, null));
+    }
+
+    @Test
+    void dependencyIdsPreserveDeclaredOrderWhenAtomsAreListedLater() {
+        M3BackportPacket packet =
+                new M3BackportPacket(
+                        "jdk-order",
+                        List.of(
+                                atom("join", M3EditScope.FILE, false, "recipe.Join", List.of("a", "b")),
+                                atom("b", M3EditScope.FILE, false, "recipe.B", List.of()),
+                                atom("a", M3EditScope.FILE, false, "recipe.A", List.of()),
+                                atom("tail", M3EditScope.FILE, false, "recipe.Tail", List.of("b"))));
+
+        M3RecipeDag dag = M3PacketDagComposer.compose(packet);
+
+        assertEquals(List.of("packet-a", "packet-b"), dag.require("packet-join").dependsOn());
+        assertEquals(List.of("packet-b"), dag.require("packet-tail").dependsOn());
+        assertEquals(List.of("file-delta"), dag.require("packet-a").dependsOn());
+        assertEquals(List.of("file-delta"), dag.require("packet-b").dependsOn());
+        assertEquals(List.of("packet-join", "packet-tail"), dag.require("recipe-junit").dependsOn());
+        assertEquals("promote", dag.topologicalOrder().getLast().id());
+    }
+
+    @Test
+    void publicNodeIdPreservesPrefixAndNullContract() {
+        M3RecipeAtom prefixed = atom("packet-a", M3EditScope.FILE, false, "recipe.A", List.of());
+
+        assertEquals("packet-packet-a", M3PacketDagComposer.nodeId(prefixed));
+        NullPointerException failure =
+                assertThrows(NullPointerException.class, () -> M3PacketDagComposer.nodeId(null));
+        assertEquals("atom", failure.getMessage());
+    }
+
+    @Test
+    void everyBroaderPacketRootRequiresItsOwnExplicitApproval() {
+        for (M3EditScope scope : M3EditScope.values()) {
+            String packetId = "scope-" + scope.name().toLowerCase(java.util.Locale.ROOT).replace('_', '-');
+            M3BackportPacket unapproved = new M3BackportPacket(packetId,
+                    List.of(atom("first", scope, false, "recipe.First", List.of())));
+            if (scope == M3EditScope.FILE) {
+                assertReviewPrefix(M3PacketDagComposer.compose(unapproved));
+            } else {
+                IllegalArgumentException failure = assertThrows(
+                        IllegalArgumentException.class, () -> M3PacketDagComposer.compose(unapproved));
+                assertEquals("silent scope escalation at packet-first: FILE -> " + scope, failure.getMessage());
+            }
+            M3RecipeDag approved = M3PacketDagComposer.compose(new M3BackportPacket(packetId,
+                    List.of(atom("first", scope, true, "recipe.First", List.of()))));
+            assertEquals(scope, approved.require("packet-first").scope());
+            assertEquals(scope, approved.require("promote").scope());
+            assertEquals(List.of("file-delta"), approved.require("packet-first").dependsOn());
+            assertReviewPrefix(approved);
+        }
+    }
+
+    private static int layerOf(M3RecipeDag dag, String id) {
+        for (int index = 0; index < dag.layers().size(); index++) {
+            if (dag.layers().get(index).stream().anyMatch(node -> node.id().equals(id))) {
+                return index;
+            }
+        }
+        throw new AssertionError("missing DAG node " + id);
+    }
+
+    private static void assertReviewPrefix(M3RecipeDag dag) {
+        M3RecipeDag canonical = M3RecipeDag.canonical();
+        assertEquals(16, canonical.size());
+        List<String> prefix = List.of("review-code-signal", "review-atom-pattern",
+                "review-problem-planner", "review-jni-contract", "inventory",
+                "compatibility-proof", "dependency-closure", "file-delta");
+        assertEquals(prefix, dag.topologicalOrder().subList(0, prefix.size()).stream()
+                .map(M3DagNode::id).toList());
+        for (String id : prefix) {
+            assertEquals(canonical.require(id), dag.require(id));
+        }
+        assertEquals(layerOf(dag, "runtime") + 1, layerOf(dag, "promote"));
+        assertEquals(List.of("runtime"), dag.require("promote").dependsOn());
+        assertTrue(dag.require("promote").serialPromotion());
+    }
+
+    private static M3RecipeAtom atom(
+            String id,
+            M3EditScope scope,
+            boolean approved,
+            String workRef,
+            List<String> dependencies) {
+        return new M3RecipeAtom(id, scope, approved, workRef, dependencies);
+    }
+}

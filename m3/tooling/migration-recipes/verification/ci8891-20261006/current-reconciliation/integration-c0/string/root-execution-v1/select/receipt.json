@@ -1,0 +1,28 @@
+{
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/prepare_package.py",
+    "--proof",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/evidence/producer-v1",
+    "--receiving-result",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/primary-observation-v1/RESULT.json",
+    "--receiving-inputs",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/receiving-selection-v1/RECEIVING-SELECTION.json",
+    "--semantic-result",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/spc-semantic-v1/RESULT.json"
+  ],
+  "cwd": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1",
+  "id": "select",
+  "exitCode": 0,
+  "elapsedSeconds": 2.4464516639709473,
+  "stdout": {
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/select/stdout.log",
+    "bytes": 778,
+    "sha256": "7ba0c0d38d1225c9126fe59f2d6750ed8405705621e3ee0b9baabff727a7a494"
+  },
+  "stderr": {
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/select/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

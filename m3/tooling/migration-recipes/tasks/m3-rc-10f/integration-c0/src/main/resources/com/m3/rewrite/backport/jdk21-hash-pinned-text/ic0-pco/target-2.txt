@@ -1,0 +1,231 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.m3.tooling.dag;
+
+import com.m3.rewrite.scope.M3EditScope;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.ByteBuffer;
+import java.nio.charset.CodingErrorAction;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
+/** Explicit, hash-bound collection ingress; legacy packet codecs remain unchanged. */
+public final class M3PacketCollectionLoader {
+    private static final int MAX_DESCRIPTOR_BYTES = 16 * 1024;
+    private static final int MAX_INPUT_BYTES = 8 * 1024 * 1024;
+    private static final int MAX_PARTITIONS = 16;
+    private static final int MAX_JOINS = 16;
+    private static final int MAX_ATOMS = MAX_PARTITIONS * 256 + MAX_JOINS;
+    private static final int MAX_DEPENDENCIES = 256;
+    private static final int MAX_LINE_CHARS = 128 * 1024;
+    private static final String DESCRIPTOR_HEADER =
+            "schema\tcollection_id\tpacket_file\tpacket_sha256\tevidence_file\tevidence_sha256"
+                    + "\tmapping_file\tmapping_sha256\tpartition_order\tatoms\tedges\tjoins";
+    private static final String PACKET_HEADER =
+            "packet_id\tatom_id\tscope\tscope_promotion_approved\twork_ref\tdepends_on";
+    private static final String EVIDENCE_HEADER =
+            "packet_id\tatom_id\tcontract_ref\tdocumentation_ref\tpattern\tiop_role"
+                    + "\tjunit_proof_ref\tfixed_point_required";
+    private static final String MAPPING_HEADER = "original_atom_id\talias_atom_id\tpartition_id";
+
+    private M3PacketCollectionLoader() {}
+
+    public static M3BackportPacketCollection load(Path descriptor) throws IOException {
+        Path source = descriptor.toAbsolutePath().normalize();
+        byte[] descriptorBytes = read(source, MAX_DESCRIPTOR_BYTES);
+        List<String[]> declaration = rows(descriptorBytes, DESCRIPTOR_HEADER, 12, 1);
+        String[] declared = declaration.getFirst();
+        require(declared[0].equals("m3.packet-collection/1"), "collection schema");
+        String id = declared[1];
+        require(id.matches("[a-z0-9][a-z0-9-]{0,31}"), "collection id");
+        List<String> order = commaList(declared[8], MAX_PARTITIONS, false);
+        require(new LinkedHashSet<>(order).size() == order.size(), "duplicate partition id");
+        for (String partition : order) {
+            require(partition.matches("[a-z0-9][a-z0-9-]{0,39}"), "partition id");
+        }
+        int atomCount = integer(declared[9], 1, MAX_ATOMS, "atom count");
+        int edgeCount = integer(declared[10], 0, MAX_ATOMS * MAX_DEPENDENCIES, "edge count");
+        int joinCount = integer(declared[11], 0, MAX_JOINS, "join count");
+        Path parent = source.getParent();
+        Set<String> names = Set.of(declared[2], declared[4], declared[6]);
+        require(!names.contains(source.getFileName().toString()), "distinct inputs required");
+        byte[] packetBytes = pinned(parent, declared[2], declared[3]);
+        byte[] evidenceBytes = pinned(parent, declared[4], declared[5]);
+        byte[] mappingBytes = pinned(parent, declared[6], declared[7]);
+        List<String[]> packetRows = rows(packetBytes, PACKET_HEADER, 6, MAX_ATOMS);
+        List<String[]> evidenceRows = rows(evidenceBytes, EVIDENCE_HEADER, 8, MAX_ATOMS);
+        List<String[]> mappingRows = rows(mappingBytes, MAPPING_HEADER, 3, MAX_ATOMS);
+        require(packetRows.size() == atomCount && evidenceRows.size() == atomCount
+                && mappingRows.size() == atomCount, "exact atom/evidence/mapping coverage required");
+
+        LinkedHashMap<String, String> aliases = new LinkedHashMap<>();
+        LinkedHashMap<String, String> assignments = new LinkedHashMap<>();
+        Set<String> firstPartitionOrder = new LinkedHashSet<>();
+        boolean boundaryStarted = false;
+        for (int index = 0; index < atomCount; index++) {
+            String[] atom = packetRows.get(index);
+            String[] evidence = evidenceRows.get(index);
+            String[] mapping = mappingRows.get(index);
+            require(atom[0].equals(id) && evidence[0].equals(id), "original packet/evidence id");
+            String original = atom[1];
+            require(original.equals(evidence[1]) && original.equals(mapping[0]), "original row order/bijection");
+            String alias = M3BackportPacketCollection.aliasOf(original);
+            require(alias.equals(mapping[1]), "alias digest mismatch");
+            require(aliases.putIfAbsent(original, alias) == null, "duplicate original/alias id");
+            String partition = mapping[2];
+            require(partition.equals("@join") || order.contains(partition), "unknown partition assignment");
+            if (partition.equals("@join")) {
+                boundaryStarted = true;
+            } else {
+                require(!boundaryStarted, "partition atom after boundary join");
+                firstPartitionOrder.add(partition);
+            }
+            assignments.put(original, partition);
+        }
+        require(order.equals(List.copyOf(firstPartitionOrder)), "original partition order");
+
+        LinkedHashMap<String, List<M3RecipeAtom>> atoms = new LinkedHashMap<>();
+        LinkedHashMap<String, List<M3RecipeAtomEvidence>> evidence = new LinkedHashMap<>();
+        for (String partition : order) {
+            atoms.put(partition, new ArrayList<>());
+            evidence.put(partition, new ArrayList<>());
+        }
+        List<M3RecipeAtom> joins = new ArrayList<>();
+        List<M3RecipeAtomEvidence> joinEvidence = new ArrayList<>();
+        int observedEdges = 0;
+        for (int index = 0; index < atomCount; index++) {
+            String[] raw = packetRows.get(index);
+            String[] proof = evidenceRows.get(index);
+            String original = raw[1];
+            String partition = assignments.get(original);
+            List<String> originalDependencies = commaList(raw[5], MAX_DEPENDENCIES, true);
+            require(new LinkedHashSet<>(originalDependencies).size() == originalDependencies.size(), "duplicate original dependency");
+            List<String> dependencies = new ArrayList<>();
+            for (String dependency : originalDependencies) {
+                require(aliases.containsKey(dependency), "missing original dependency");
+                if (!partition.equals("@join")) {
+                    require(partition.equals(assignments.get(dependency)), "cross-partition dependency");
+                }
+                dependencies.add(aliases.get(dependency));
+            }
+            observedEdges = Math.addExact(observedEdges, dependencies.size());
+            M3RecipeAtom atom = new M3RecipeAtom(aliases.get(original), M3EditScope.valueOf(raw[2]),
+                    bool(raw[3]), textCell(raw[4]), dependencies);
+            M3RecipeAtomEvidence atomEvidence = new M3RecipeAtomEvidence(aliases.get(original),
+                    textCell(proof[2]), textCell(proof[3]), textCell(proof[4]), textCell(proof[5]),
+                    textCell(proof[6]), bool(proof[7]));
+            if (partition.equals("@join")) {
+                require(joins.size() < MAX_JOINS, "boundary join budget");
+                joins.add(atom);
+                joinEvidence.add(atomEvidence);
+            } else {
+                require(atoms.get(partition).size() < 256, "partition atom budget");
+                atoms.get(partition).add(atom);
+                evidence.get(partition).add(atomEvidence);
+            }
+        }
+        require(observedEdges == edgeCount && joins.size() == joinCount, "declared edge/join counts");
+        List<M3BackportPacket> packets = new ArrayList<>();
+        List<M3BackportPacketEvidence> packetEvidence = new ArrayList<>();
+        for (String partition : order) {
+            String packetId = id + "-" + partition;
+            packets.add(new M3BackportPacket(packetId, atoms.get(partition)));
+            packetEvidence.add(new M3BackportPacketEvidence(packetId, evidence.get(partition)));
+        }
+        return new M3BackportPacketCollection(id, packets, packetEvidence, joins, joinEvidence,
+                aliases, sha256(descriptorBytes));
+    }
+
+    private static byte[] pinned(Path parent, String name, String expected) throws IOException {
+        require(name.matches("[A-Za-z0-9][A-Za-z0-9._-]{0,127}") && !name.contains(".."), "flat input filename");
+        require(expected.matches("[0-9a-f]{64}"), "input SHA256");
+        byte[] bytes = read(parent.resolve(name), MAX_INPUT_BYTES);
+        require(sha256(bytes).equals(expected), "input SHA256 mismatch: " + name);
+        return bytes;
+    }
+
+    private static byte[] read(Path path, int limit) throws IOException {
+        require(Files.isRegularFile(path, LinkOption.NOFOLLOW_LINKS), "regular input file required");
+        require(Files.size(path) <= limit, "input byte budget");
+        byte[] bytes;
+        try (InputStream stream = Files.newInputStream(path)) {
+            bytes = stream.readNBytes(limit + 1);
+        }
+        require(bytes.length <= limit, "input byte budget");
+        return bytes;
+    }
+
+    private static List<String[]> rows(byte[] bytes, String header, int columns, int maxRows) throws IOException {
+        String text = StandardCharsets.UTF_8.newDecoder()
+                .onMalformedInput(CodingErrorAction.REPORT).onUnmappableCharacter(CodingErrorAction.REPORT)
+                .decode(ByteBuffer.wrap(bytes)).toString();
+        require(text.endsWith("\n") && text.indexOf('\r') < 0 && text.indexOf('\0') < 0,
+                "canonical UTF8/LF TSV required");
+        long newlines = text.chars().filter(value -> value == '\n').count();
+        require(newlines >= 2 && newlines <= maxRows + 1L, "TSV row budget");
+        String[] lines = text.split("\n", -1);
+        require(lines[0].equals(header), "TSV header");
+        List<String[]> result = new ArrayList<>();
+        for (int i = 1; i < lines.length - 1; i++) {
+            String line = lines[i];
+            require(line.length() <= MAX_LINE_CHARS, "TSV line budget");
+            require(line.chars().filter(value -> value == '\t').count() == columns - 1L, "TSV column count");
+            result.add(line.split("\t", -1));
+        }
+        return result;
+    }
+
+    private static List<String> commaList(String text, int limit, boolean emptyAllowed) {
+        if (text.isEmpty() && emptyAllowed) {
+            return List.of();
+        }
+        require(!text.isEmpty() && text.chars().filter(value -> value == ',').count() < limit, "list budget");
+        List<String> values = Arrays.asList(text.split(",", -1));
+        for (String value : values) {
+            require(!value.isEmpty() && value.equals(value.strip()), "exact nonempty list item");
+        }
+        return List.copyOf(values);
+    }
+
+    private static int integer(String text, int minimum, int maximum, String label) {
+        require(text.matches("0|[1-9][0-9]{0,6}"), label);
+        int value = Integer.parseInt(text);
+        require(value >= minimum && value <= maximum, label);
+        return value;
+    }
+
+    private static boolean bool(String value) {
+        require(value.equals("true") || value.equals("false"), "literal boolean required");
+        return value.equals("true");
+    }
+
+    private static String textCell(String value) {
+        require(!value.isEmpty() && value.length() <= 4096 && value.equals(value.strip()), "exact bounded text cell");
+        return value;
+    }
+
+    private static String sha256(byte[] bytes) {
+        try {
+            return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes));
+        } catch (NoSuchAlgorithmException impossible) {
+            throw new IllegalStateException(impossible);
+        }
+    }
+
+    private static void require(boolean condition, String message) {
+        if (!condition) {
+            throw new IllegalArgumentException(message);
+        }
+    }
+}

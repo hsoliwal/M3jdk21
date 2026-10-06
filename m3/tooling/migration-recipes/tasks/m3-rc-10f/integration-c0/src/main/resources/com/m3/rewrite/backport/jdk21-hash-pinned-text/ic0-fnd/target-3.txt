@@ -1,0 +1,174 @@
+#!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+"""Refusal and isolation contracts for the explicit currentc0 task context.
+
+All mutations occur in a temporary fixture repository. Generated fixture bytes
+are deliberately test data; the production runner does not attest Maven itself.
+"""
+import importlib.util
+import json
+from pathlib import Path
+import subprocess
+import tempfile
+import unittest
+from unittest import mock
+
+CRATE = Path(__file__).resolve().parents[3]
+ROOT = CRATE.parents[2]
+spec = importlib.util.spec_from_file_location('current_history', CRATE / 'verify-current.py')
+current = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(current)
+
+
+class CurrentContextTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        # Real installed source/config identities must match before constructing
+        # any synthetic fixture; no Maven outputs or old receipts are borrowed.
+        cls.source = current.load_context(ROOT)
+
+    def setUp(self):
+        self.directory = tempfile.TemporaryDirectory(prefix='m3-currentc0-test-')
+        self.addCleanup(self.directory.cleanup)
+        self.root = Path(self.directory.name)
+        for path, data in self.source['contents'].items():
+            current.place(self.root, path, data, self.source['pins'][path]['mode'])
+        current.place(self.root, current.MANIFEST, self.source['manifest_bytes'])
+        for task in self.source['tasks']:
+            for path, data in task['images']:
+                current.place(self.root, task['crate'] + '/target/generated/' + path, data)
+
+    def change_manifest(self, mutate):
+        path = self.root / current.MANIFEST
+        value = json.loads(path.read_text())
+        mutate(value)
+        value['manifest_sha256'] = current.digest(current.canonical(
+            {k: v for k, v in value.items() if k != 'manifest_sha256'}))
+        path.write_bytes(current.canonical(value))
+
+    def refuses_before_replay(self, marker):
+        with mock.patch.object(current.subprocess, 'run', side_effect=AssertionError('replay started')):
+            with self.assertRaisesRegex(current.Refusal, marker):
+                current.qualify(self.root)
+        self.assertFalse((self.root / 'm3/tooling/image-gates/target/currentc0').exists())
+
+    def test_protected_current_string_workflow_drift(self):
+        path = self.root / '.github/workflows/mindex-string-backing.yml'
+        path.write_bytes(path.read_bytes() + b'\nforeign change\n')
+        self.refuses_before_replay('identity drift')
+
+    def test_current_tq_owner_drift(self):
+        path = self.root / 'm3/tooling/tq/src/test/java/com/m3/tq/TQTest.java'
+        path.write_bytes(path.read_bytes() + b'\n// foreign change\n')
+        self.refuses_before_replay('identity drift')
+
+    def test_corrected_memory_manifest_cannot_be_rolled_back(self):
+        relative = 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv'
+        task = next(t for t in self.source['tasks'] if t['id'] == 'image-gates')
+        old = dict(task['images'])[relative]
+        self.assertNotEqual(old, (self.root / relative).read_bytes())
+        (self.root / relative).write_bytes(old)
+        self.refuses_before_replay('identity drift')
+
+    def test_missing_cia_supplier(self):
+        (self.root / 'm3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java').unlink()
+        self.refuses_before_replay('missing file')
+
+    def test_legacy_string_owner_cannot_return(self):
+        current.place(self.root, current.LEGACY[3], b'legacy owner\n')
+        self.refuses_before_replay('legacy owner reintroduced')
+
+    def test_duplicate_context_row(self):
+        def duplicate(value):
+            value['selected_outputs'][1] = dict(value['selected_outputs'][0])
+        self.change_manifest(duplicate)
+        self.refuses_before_replay('duplicate context path')
+
+    def test_extra_unowned_selection_is_rejected(self):
+        first = self.source['manifest']['selected_outputs'][0]
+        current.place(self.root, 'unrelated.txt', self.source['contents'][first['path']], first['mode'])
+        def replace(value):
+            value['selected_outputs'][0]['path'] = 'unrelated.txt'
+            value['selected_outputs'].sort(key=lambda row: row['path'])
+        self.change_manifest(replace)
+        self.refuses_before_replay('unexpected historical target|unowned current selection')
+
+    def test_unsafe_manifest_path_is_rejected(self):
+        def escape(value):
+            value['selected_outputs'][0]['path'] = '../outside'
+        self.change_manifest(escape)
+        self.refuses_before_replay('unsafe relative path')
+
+    def test_symlink_input_is_rejected(self):
+        path = self.root / '.github/workflows/mindex-string-backing.yml'
+        original = ROOT / '.github/workflows/mindex-string-backing.yml'
+        path.unlink()
+        path.symlink_to(original)
+        self.refuses_before_replay('symlink refused')
+
+    def test_guard_drift_is_rejected(self):
+        path = self.root / 'm3/migration/recipe.py'
+        path.write_bytes(path.read_bytes() + b'\n# drift\n')
+        self.refuses_before_replay('identity drift')
+
+    def test_resource_drift_is_rejected(self):
+        path = self.root / 'm3/tooling/ci-repair/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-ci-repair/foundation.yml.txt'
+        path.write_bytes(path.read_bytes() + b'\n# drift\n')
+        self.refuses_before_replay('identity drift')
+
+    def test_missing_generated_output_is_not_replaced_from_template(self):
+        task = self.source['tasks'][0]
+        path = self.root / task['crate'] / 'target/generated' / task['images'][0][0]
+        path.unlink()
+        self.refuses_before_replay('missing file')
+
+    def test_historical_receipt_cannot_substitute_generated_output(self):
+        task = self.source['tasks'][0]
+        path = self.root / task['crate'] / 'target/generated' / task['images'][0][0]
+        receipt = self.root / 'm3/tooling/ci-repair/evidence/ci-repair-custody.json'
+        path.write_bytes(receipt.read_bytes())
+        self.refuses_before_replay('Maven generated output drift')
+
+    def test_original_verifier_failure_propagates_despite_old_result(self):
+        old = self.root / 'm3/tooling/image-gates/target/currentc0/old/RESULT.json'
+        old.parent.mkdir(parents=True)
+        old.write_text('{"status":"PASS"}\n')
+        failed = subprocess.CompletedProcess([], 3, b'', b'forced refusal\n')
+        with mock.patch.object(current.subprocess, 'run', return_value=failed):
+            with self.assertRaisesRegex(current.Refusal, 'historical verifier failed'):
+                current.qualify(self.root)
+        self.assertEqual('{"status":"PASS"}\n', old.read_text())
+
+    def test_current_mutation_is_detected_even_when_child_fails(self):
+        def mutate(*args, **kwargs):
+            path = self.root / '.github/workflows/mindex-string-backing.yml'
+            path.write_bytes(path.read_bytes() + b'\nmutated during replay\n')
+            return subprocess.CompletedProcess([], 3, b'', b'failed\n')
+        with mock.patch.object(current.subprocess, 'run', side_effect=mutate):
+            with self.assertRaisesRegex(current.Refusal, 'identity drift'):
+                current.qualify(self.root)
+
+    def test_per_task_historical_roots_preserve_current_owners(self):
+        admission = current.load_context(self.root)
+        generated = current.generated_outputs(admission)
+        before = {path: (self.root / path).read_bytes() for path in admission['pins']}
+        for task in admission['tasks']:
+            with tempfile.TemporaryDirectory(prefix='m3-isolation-test-') as directory:
+                historical = Path(directory)
+                current.materialize_task(admission, task, historical, generated)
+                for path, data in task['images']:
+                    self.assertEqual(data, (historical / path).read_bytes())
+                self.assertFalse((historical / current.LEGACY[3]).exists())
+        result = current.qualify(self.root)
+        proof = json.loads(Path(result['report']).read_text())
+        self.assertEqual(33, proof['maven_generated_outputs_matched'])
+        self.assertEqual(['ci-repair', 'image-gates'], [row['task'] for row in proof['historical_tasks']])
+        self.assertTrue(proof['current_inputs_unchanged'])
+        self.assertFalse(proof['maven_execution_attested_by_this_command'])
+        self.assertFalse(proof['current_runtime_qualified'])
+        self.assertFalse(proof['full_openjdk_build_qualified'])
+        self.assertEqual(before, {path: (self.root / path).read_bytes() for path in admission['pins']})
+
+
+if __name__ == '__main__':
+    unittest.main()

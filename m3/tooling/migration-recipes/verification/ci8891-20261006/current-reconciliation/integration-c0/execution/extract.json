@@ -1,0 +1,45 @@
+{
+  "argv": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py",
+    "extract",
+    "--bundle",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/bundle",
+    "--output",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/extracted"
+  ],
+  "cwd": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1",
+  "ended": "2026-10-06T06:48:34.338981+00:00",
+  "environment": {
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "PATH": "/usr/bin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "TZ": "UTC"
+  },
+  "exitCode": 0,
+  "id": "extract",
+  "priorReceipts": [
+    {
+      "bytes": 1641,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/pack.json",
+      "sha256": "07a504cf806e1a22e5928fa3001fcedd77ebef6e229f1ac05376e15aa36f1a44"
+    },
+    {
+      "bytes": 1634,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/verify.json",
+      "sha256": "9ddb0ddbf2b0bd1ec544fede9ff28173a0a1f5bacc0fbfac99c863385d3cc16f"
+    }
+  ],
+  "started": "2026-10-06T06:48:33.873734+00:00",
+  "stderr": {
+    "bytes": 0,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/extract.stderr.log",
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "stdout": {
+    "bytes": 770,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/root-run-v1/extract.stdout.log",
+    "sha256": "36a16e499021fd7bf1e92eb8e8a2dd048e382d6acf42c426fc6a851c36337721"
+  }
+}

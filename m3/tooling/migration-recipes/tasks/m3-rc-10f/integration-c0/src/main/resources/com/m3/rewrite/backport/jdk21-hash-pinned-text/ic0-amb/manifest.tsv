@@ -1,0 +1,3 @@
+m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt/before/A3.java	ABSENT	6d9ec887c87898167748ca5f77598f95a6784cfaf14882f4983733c006374b77	target-1.txt
+m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt/before/A3Lab.java	ABSENT	c212736f000836cb782a5ff81fd2de48e67d36ea4b3bd53cf7743c4aadbfdaf6	target-2.txt
+m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-mastery-receipt/before/A3LabTest.java	ABSENT	351eeac06154189e79f3d139336437d5911da5721c9a95a779ebd5d511997d9c	target-3.txt
