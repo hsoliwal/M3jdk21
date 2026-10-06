@@ -13,3 +13,9 @@ preserved_upstream_deletions	2
 product_paths	42
 test_paths	15
 promotion	NOT_AUTHORIZED
+required_overflow_fix	8643cc21333c6b51242ed3b9295b25f372244755
+required_performance_fix	0d5f5e15d43f94a79c6133baecd5af217365d176
+cumulative_final_commit	0d5f5e15d43f94a79c6133baecd5af217365d176
+cumulative_paths	64
+cumulative_admitted_paths	62
+cumulative_product_paths	47
