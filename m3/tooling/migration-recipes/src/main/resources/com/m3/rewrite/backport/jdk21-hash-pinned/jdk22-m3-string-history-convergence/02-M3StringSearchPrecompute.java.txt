@@ -7,6 +7,7 @@
 package java.lang;
 
 import java.lang.ref.WeakReference;
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 import jdk.internal.mindex.M3TQ;
 
@@ -39,7 +40,9 @@ final class M3StringSearchPrecompute {
      */
     static long maximumRetainedPrimitiveBytes() {
         long patternBytes =
-                (long) SLOTS * MAX_PATTERN_UNITS * (2L * Integer.BYTES + Long.BYTES);
+                (long) SLOTS * (
+                        (long) MAX_PATTERN_UNITS * (2L * Integer.BYTES + Long.BYTES)
+                                + 256L * Integer.BYTES);
         long sourceBytes =
                 (long) SOURCE_SLOTS * MAX_TRIGRAM_SOURCE_UNITS * Long.BYTES;
         return Math.addExact(patternBytes, sourceBytes);
@@ -92,8 +95,14 @@ final class M3StringSearchPrecompute {
             reversePrefix[index] = matched;
         }
 
+        int[] skip256 = new int[256];
+        Arrays.fill(skip256, Math.max(1, length));
+        for (int index = 0; index < length - 1; index++) {
+            skip256[pattern.charAt(index) & 255] = length - 1 - index;
+        }
+
         M3TQ.Facts trigrams = length >= 3 ? M3TQ.precompute(pattern, MAX_PATTERN_UNITS) : null;
-        Plan plan = new Plan(length, prefix, reversePrefix, trigrams);
+        Plan plan = new Plan(length, prefix, reversePrefix, skip256, trigrams);
         CACHE.set(slot, new Entry(new WeakReference<>(owner), coordinate, plan));
         return plan;
     }
@@ -141,6 +150,18 @@ final class M3StringSearchPrecompute {
             Plan plan,
             int fromIndex,
             int endIndex) {
+        if (plan.patternLength >= 8) {
+            return adaptiveBmh(source, pattern, plan, fromIndex, endIndex);
+        }
+        return kmp(source, pattern, plan, fromIndex, endIndex);
+    }
+
+    private static int kmp(
+            M3String source,
+            M3String pattern,
+            Plan plan,
+            int fromIndex,
+            int endIndex) {
         int matched = 0;
         for (int index = fromIndex; index < endIndex; index++) {
             char unit = source.charAt(index);
@@ -150,6 +171,34 @@ final class M3StringSearchPrecompute {
             if (unit == pattern.charAt(matched)) matched++;
             if (matched == plan.patternLength) {
                 return index - plan.patternLength + 1;
+            }
+        }
+        return -1;
+    }
+
+    private static int adaptiveBmh(
+            M3String source,
+            M3String pattern,
+            Plan plan,
+            int fromIndex,
+            int endIndex) {
+        int maximumStart = endIndex - plan.patternLength;
+        int at = fromIndex;
+        long failedComparisonWork = 0L;
+        while (at <= maximumStart) {
+            int index = plan.patternLength - 1;
+            while (index >= 0 && pattern.charAt(index) == source.charAt(at + index)) {
+                index--;
+            }
+            if (index < 0) return at;
+
+            int shift = plan.skip256[source.charAt(at + plan.patternLength - 1) & 255];
+            if (shift > maximumStart - at) return -1;
+            at += shift;
+
+            failedComparisonWork += plan.patternLength - index;
+            if (failedComparisonWork > (long) plan.patternLength + 2L * (at - fromIndex)) {
+                return kmp(source, pattern, plan, at, endIndex);
             }
         }
         return -1;
@@ -193,17 +242,24 @@ final class M3StringSearchPrecompute {
         final int patternLength;
         final int[] prefix;
         final int[] reversePrefix;
+        final int[] skip256;
         final M3TQ.Facts trigrams;
 
-        Plan(int patternLength, int[] prefix, int[] reversePrefix, M3TQ.Facts trigrams) {
+        Plan(
+                int patternLength,
+                int[] prefix,
+                int[] reversePrefix,
+                int[] skip256,
+                M3TQ.Facts trigrams) {
             this.patternLength = patternLength;
             this.prefix = prefix;
             this.reversePrefix = reversePrefix;
+            this.skip256 = skip256;
             this.trigrams = trigrams;
         }
 
         long retainedPrimitiveBytes() {
-            return (long) (prefix.length + reversePrefix.length) * Integer.BYTES
+            return (long) (prefix.length + reversePrefix.length + skip256.length) * Integer.BYTES
                     + (trigrams == null ? 0L : (long) trigrams.keyCount() * Long.BYTES);
         }
     }
