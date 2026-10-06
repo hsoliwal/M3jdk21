@@ -1,0 +1,2 @@
+jep	default_java21	opt_in_extension	scope	contract	classfile_default	promotion_authority
+484	NO	YES	LIBRARY_API	EXPLICIT_CONTRACT_CHANGE	MUST_REMAIN_JAVA21_COMPATIBLE	false
