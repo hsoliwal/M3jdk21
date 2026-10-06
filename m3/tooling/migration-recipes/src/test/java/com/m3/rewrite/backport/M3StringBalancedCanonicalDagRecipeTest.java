@@ -76,6 +76,9 @@ final class M3StringBalancedCanonicalDagRecipeTest {
 
     private static List<SourceFile> textAfter() {
         return List.of(
+                text(
+                        ".github/workflows/mindex-string-backing.yml",
+                        "05-workflow.yml.txt"),
                 text("m3/docs/m3string-synexia-lineage.md", "00-lineage.md.txt"),
                 text("m3/docs/name-mapping.json", "01-name-mapping.json.txt"),
                 text(
@@ -86,7 +89,15 @@ final class M3StringBalancedCanonicalDagRecipeTest {
                         "03-invariants.py.txt"),
                 text(
                         "m3/runtime-integration/tests/M3StringInvariant.java",
-                        "04-M3StringInvariant.java.txt"));
+                        "04-M3StringInvariant.java.txt"),
+                text(
+                        "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/"
+                                + "m3-string-balanced-canonical-dag.yml",
+                        "06-recipe.yml.txt"),
+                text(
+                        "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/"
+                                + "M3StringBalancedCanonicalDagRecipeTest.java",
+                        "07-recipe-test.java.txt"));
     }
 
     private static SourceFile java(String path, String resource) {
