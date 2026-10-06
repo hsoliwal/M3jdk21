@@ -67,7 +67,7 @@ The pinned GA intervals contain 14,948 upstream commits:
 - JDK 26 interval: 2,611
 - JDK 27 interval: 2,358
 
-`JEP_CATALOGUE.tsv` records all 82 JEPs delivered by JDK 22 through JDK 27 and gives their
+`JEP_CATALOGUE.tsv` records all 85 JEPs delivered by JDK 22 through JDK 27 and gives their
 initial downstream disposition. A disposition is an admission decision, not implementation evidence.
 
 `UPSTREAM_CHANGE_SEEDS.tsv` records individually inspected non-JEP enhancements. It is intentionally
