@@ -1,0 +1,45 @@
+name: M3 JEP484 Class-File API inventory
+
+on:
+  push:
+    branches:
+      - "m3/jep484-classfile-api-inventory-*"
+  pull_request:
+    paths:
+      - "m3/backports/recipes/jep-484-classfile-api/**"
+      - "m3/tooling/migration-recipes/**"
+      - ".github/workflows/m3-jep484-classfile-api-inventory.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Diff hygiene
+        run: git diff --check
+
+      - name: Verify cumulative Class-File inventory denominator
+        run: python3 m3/backports/recipes/jep-484-classfile-api/verify.py
+
+      - name: Verify inventory verifier fails closed
+        run: python3 m3/backports/recipes/jep-484-classfile-api/test_verify.py
+
+      - name: Verify OpenRewrite DataTables and scope authority
+        run: >
+          mvn -B -ntp
+          -f m3/tooling/migration-recipes/pom.xml
+          -Dtest=M3Jep484ClassfileApiInventoryRecipeTest,M3RecipeScopeDeclarationTest
+          -Dsurefire.failIfNoSpecifiedTests=false
+          test
