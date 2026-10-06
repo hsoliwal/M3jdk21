@@ -62,3 +62,28 @@ This is only an admission result. Compile and behavior proof remain authoritativ
 10. only then move from dependency-closure/materialize to verify/promote.
 
 No Java 21 API/removal or language-semantic change is admitted by this inventory packet.
+
+
+## Current-master generated-crate execution
+
+The repository now retains the executor required to turn the deterministic generator output into an
+exact candidate without hand-editing any jlink file:
+
+- generator: `m3/backports/generate_recipe_crates.py`;
+- executor: `m3/backports/materialize_generated_crates.py`;
+- selected set: this packet's 47-path `PATHS.txt`;
+- granularity: `--crate-size 1`;
+- lanes: structured Java plus strict UTF-8 text;
+- FILE atom authority remains FILE; feature composition remains MULTI_MODULE.
+
+The executor accepts only generated hash-pinned manifests. It rejects path escape, symlinks,
+duplicate target ownership, preimage drift, multi-target crates when the FILE gate is enabled, and
+postimage hash drift. Exact postimages replay to a fixed point.
+
+The checked-in branch still contains no JEP 493 product mutation. The dedicated workflow generates
+the crates from pinned `jdk-21+35` and `jdk-24+36` trees, verifies the 47-path denominator,
+materializes only in the ephemeral checkout, proves the changed-path fence and fixed point, then
+configures with `--enable-linkable-runtime`, builds the image, runs the runtime-image/legacy jlink
+jtreg gates, and performs a real no-JMOD runtime-link smoke.
+
+A green workflow is implementation evidence, not automatic promotion authority.
