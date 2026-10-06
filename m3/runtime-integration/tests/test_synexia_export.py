@@ -110,6 +110,19 @@ class SynexiaExportTest(unittest.TestCase):
                 self.run_export(root / "input", root / "output", conflict=True)
             self.assertFalse((root / "output").exists())
 
+    def test_precompute_profile_drift_is_rejected_before_output(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest, records = self.write_inputs(root / "input")
+            changed = records.read_text(encoding="utf-8").replace(
+                "M3StringFacts + NumberPrecompute", "WrongOwner", 1)
+            records.write_text(changed, encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "precompute profile mismatch"):
+                EXPORT.export(manifest, records, root / "output",
+                              "https://github.com/hsoliwal/com.synexia",
+                              "3e85c872adf556901a341a9eb1c3b59864918da1")
+            self.assertFalse((root / "output").exists())
+
     def test_source_blind_verifier_rejects_post_export_mutation(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

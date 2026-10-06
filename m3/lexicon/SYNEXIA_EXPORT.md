@@ -20,8 +20,9 @@ mapping_id mapping_name translation_profile precompute_profile
 
 `source_id + record_id` is the immutable source identity. The exporter rejects
 duplicates, unknown source families, source-path drift, empty fields and
-embedded separators. It preserves mapping IDs/names and translation profiles
-verbatim. Physical `image_row` values are only a sorted `M3LEX001` projection;
+embedded separators. Each record's `precompute_profile` must exactly match the
+reviewed `precompute_target` for its Synexia source family. It preserves mapping
+IDs/names and translation profiles verbatim. Physical `image_row` values are only a sorted `M3LEX001` projection;
 they are never substituted for a Synexia ID.
 
 ```text

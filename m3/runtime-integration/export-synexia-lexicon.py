@@ -127,6 +127,8 @@ def load_records(path: pathlib.Path, sources: dict[str, dict[str, str]]) -> tupl
         seen.add(key)
         if row["source_path"] != sources[row["source_id"]]["synexia_path"]:
             raise ValueError(f"source path mismatch for {row['source_id']}")
+        if row["precompute_profile"] != sources[row["source_id"]]["precompute_target"]:
+            raise ValueError(f"precompute profile mismatch for {row['source_id']}")
         result.append(Record(tuple(row[column] for column in RECORD_COLUMNS)))
     if not result:
         raise ValueError("lexicon records are empty")
