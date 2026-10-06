@@ -570,6 +570,15 @@ for fragment in [
     if fragment not in (m3 + owner):
         fail(f"M3 prepared-fact reuse path missing: {fragment}")
 
+# Mixed flat/M3 prefix checks must not materialize the M3 prefix through value().
+for fragment in [
+    "M3String prefixM3 = prefix.m3();",
+    "if (prefixM3 != null) {",
+    "prefixM3.charAt(index)",
+]:
+    if fragment not in string:
+        fail(f"mixed flat/M3 startsWith route missing: {fragment}")
+
 # Range hashes and ASCII case hashes are negative filters only; exact comparison remains in
 # String.regionMatches for every surviving candidate.
 for fragment in [
