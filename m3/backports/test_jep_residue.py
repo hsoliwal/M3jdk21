@@ -124,6 +124,21 @@ class JepResidueTest(unittest.TestCase):
         self.assertEqual("RECIPE_CLASS", by_jep[485].evidence_state)
         self.assertIn("M3Jep485BackportRecipe.java", by_jep[485].evidence_paths)
 
+    def test_detects_compact_jep_packet_directory_names(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            packet = root / "m3/backports/recipes/j510"
+            packet.mkdir(parents=True)
+            (packet / "README.md").write_text("packet", encoding="utf-8")
+
+            catalogue = [
+                self.row(release=25, jep=510, disposition="candidate"),
+            ]
+            item = self.r.queue(root, catalogue, [])[0]
+
+        self.assertEqual("MATERIALIZED_PACKET", item.evidence_state)
+        self.assertIn("m3/backports/recipes/j510", item.evidence_paths)
+
     def test_priority_matrix_metadata_is_joined_without_granting_compatibility(self) -> None:
         catalogue = [self.row(release=24, jep=493, disposition="candidate")]
         priorities = [
