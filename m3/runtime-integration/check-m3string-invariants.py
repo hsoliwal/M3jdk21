@@ -323,6 +323,8 @@ for fragment in [
 for fragment in [
     "leftRange.hashCodeValue() != rightRange.hashCodeValue()",
     "leftFacts.asciiLowerHash != rightFacts.asciiLowerHash",
+    "leftFacts.asciiUpperHash != rightFacts.asciiUpperHash",
+    "leftFacts.asciiTitleHash != rightFacts.asciiTitleHash",
 ]:
     if fragment not in string:
         fail(f"M3 region precompute filter missing: {fragment}")
