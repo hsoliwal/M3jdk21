@@ -386,6 +386,20 @@ public class M3StringPrecomputeSearchTest {
             }
         }
 
+        String sparseEscapes = String.join(
+                "",
+                "a".repeat(640),
+                "\\n",
+                "b".repeat(640),
+                "\\141",
+                "c".repeat(640),
+                "\\\n",
+                "d".repeat(640));
+        check(equalChars(
+                        sparseEscapes.translateEscapes(),
+                        naiveTranslateEscapes(chars(sparseEscapes))),
+                "translateEscapes sparse position precompute");
+
         String escaped = String.join("", "a\\n", "b\\141", "\\\n", "c\\s\\\\d");
         check(equalChars(
                         escaped.translateEscapes(),
