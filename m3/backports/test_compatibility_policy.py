@@ -21,6 +21,11 @@ class CompatibilityPolicyTest(unittest.TestCase):
         self.assertEqual("REJECT_LANGUAGE_SPEC", by_jep[511].classification)
         self.assertEqual("REJECT_JVMS_LANGUAGE_SPEC", by_jep[401].classification)
 
+        self.assertEqual("COMPATIBLE_RUNTIME", by_jep[404].classification)
+        self.assertEqual("OPT_IN", by_jep[404].default_java21)
+        self.assertEqual("OPT_IN_SE_API_EXTENSION", by_jep[510].classification)
+        self.assertEqual("NO", by_jep[510].default_java21)
+        self.assertEqual((404,), by_jep[521].dependencies)
         self.assertEqual((483,), by_jep[514].dependencies)
         self.assertEqual((483,), by_jep[515].dependencies)
         self.assertEqual((483, 514, 515), by_jep[516].dependencies)
