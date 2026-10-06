@@ -7635,6 +7635,7 @@
     "identity_rule": "String/search precompute keys exact M3 owner plus packed coordinate; no parallel vocabulary or duplicate spelling owner",
     "reasoning_rule": "Knowledge/reasoning is not java.lang.String precompute and requires a separate concrete JDK consumer",
     "package_documentation": "src/java.base/share/classes/jdk/internal/mindex/package-info.java",
-    "provenance_rule": "Abstract domains are taxonomy only. Provenance/license binds exact reviewed implementation artifacts; independently written M3JDK implementations use JDK-owned names and code."
+    "provenance_rule": "Abstract domains are taxonomy only. Provenance/license binds exact reviewed implementation artifacts; independently written M3JDK implementations use JDK-owned names and code.",
+    "implementation_evolution": "Internal implementations are versioned/replaceable realizations, not permanent ABI or domain ownership. Replacements preserve semantics, M3 identity, fallback/lifecycle contracts, and receive their own provenance/proofs."
   }
 }
