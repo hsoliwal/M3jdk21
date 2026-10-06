@@ -81,7 +81,7 @@ exist in the full released-JEP catalogue.
 
 ## Deterministic JEP residue queue
 
-`JEP_RESIDUE_QUEUE.tsv` materializes all 41 pending rows.
+`JEP_RESIDUE_QUEUE.tsv` materializes all 42 pending rows.
 
 For each row it records:
 
@@ -92,10 +92,14 @@ For each row it records:
 - next mechanical action;
 - priority-matrix Java21 default/classification when available.
 
-Current JEP packet evidence recognized on this branch:
+Current JEP packet evidence recognized by the regenerated queue:
 
+- JEP 423 — `MATERIALIZED_PACKET`
 - JEP 458 — `MATERIALIZED_PACKET`
 - JEP 467 — `MATERIALIZED_PACKET`
+- JEP 474 — `MATERIALIZED_PACKET`
+- JEP 484 — `MATERIALIZED_PACKET`
+- JEP 485 — `MATERIALIZED_PACKET`
 - JEP 493 — `MATERIALIZED_PACKET`
 
 The remaining pending rows stay visible even when no recipe exists yet. A missing recipe means
@@ -103,15 +107,20 @@ The remaining pending rows stay visible even when no recipe exists yet. A missin
 
 ## Materialized backport packet estate
 
-Eight packet directories currently have repository-owned README/evidence contracts:
+Thirteen packet directories currently have repository-owned README/evidence contracts:
 
+- `j423`
+- `j491`
 - `jdk-8347112`
 - `jdk-8364182`
 - `jdk-8367584`
 - `jdk-8368692`
 - `jdk-8374808`
+- `jep-423-region-pinning`
 - `jep-458-current`
 - `jep-467-markdown`
+- `jep-474-generational-zgc`
+- `jep-485-gatherers`
 - `jep-493-runtime-image`
 
 A packet directory is evidence of implementation/replay work. It is not itself proof that the
