@@ -1,0 +1,7 @@
+src/hotspot/share/gc/shared/gc_globals.hpp
+src/hotspot/share/gc/x/xArguments.cpp
+src/hotspot/share/gc/x/xInitialize.cpp
+src/hotspot/share/runtime/arguments.cpp
+test/hotspot/jtreg/gc/x/TestDeprecated.java
+test/hotspot/jtreg/gc/z/TestDefault.java
+test/hotspot/jtreg/runtime/CommandLine/VMDeprecatedOptions.java
