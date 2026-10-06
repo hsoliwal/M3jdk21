@@ -41,10 +41,37 @@ port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
 recipe_authority = read("m3/docs/synexia-string-recipe-authority.tsv")
 precompute_inventory = read("m3/docs/synexia-mindex-precompute-inventory.tsv")
 completeness = read("m3/docs/string-precompute-completeness.tsv")
+mechanical_placement = read("m3/docs/mechanical-precompute-donor-placement.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
 native_string = read("src/java.base/share/native/libjava/String.c")
 pattern = read("src/java.base/share/classes/java/util/regex/Pattern.java")
 matcher = read("src/java.base/share/classes/java/util/regex/Matcher.java")
+
+
+# Mechanical donor libraries never become java.base runtime dependencies.
+for forbidden_package in [
+    "org.tweetyproject",
+    "com.google.re2j",
+    "org.apache.lucene",
+]:
+    for source_path in [
+        "src/java.base/share/classes/java/lang/M3String.java",
+        "src/java.base/share/classes/java/lang/M3StringOwner.java",
+        "src/java.base/share/classes/java/lang/M3StringFacts.java",
+        "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java",
+        "src/java.base/share/classes/java/util/regex/Pattern.java",
+        "src/java.base/share/classes/java/util/regex/Matcher.java",
+    ]:
+        if forbidden_package in read(source_path):
+            fail(f"mechanical donor runtime dependency leaked into java.base: {forbidden_package} in {source_path}")
+
+for required_placement in [
+    "TweetyProject\tcom.synexia.indexstring.precompute.* / reasoning.*\tno java.lang.String owner\tDONOR_ONLY_NO_JDK_STRING_CONSUMER",
+    "RE2/J\tcom.synexia.indexstring.MIndexRe2Plan\tjava.util.regex/internal M3 candidate-plan lanes\tADAPT_MECHANICS_NO_RE2J_RUNTIME",
+    "Apache Lucene\tcom.synexia.indexstring.MIndexLuceneMechanicalPrecompute\tseparate internal M3 corpus/term/postings plane\tADAPT_COLLECTION_MECHANICS_NOT_M3STRING",
+]:
+    if required_placement not in mechanical_placement:
+        fail(f"mechanical donor placement missing: {required_placement}")
 
 # STRING_PRECOMPUTE_COMPLETENESS: every donor String-precompute responsibility must be
 # either mapped to one internal M3 owner or explicitly classified out of java.lang.String.
