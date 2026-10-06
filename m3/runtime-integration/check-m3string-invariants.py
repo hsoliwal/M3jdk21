@@ -563,6 +563,12 @@ for fragment in [
     if fragment not in abstract_builder:
         fail(f"AbstractStringBuilder M3 bulk String append route missing: {fragment}")
 
+# Once a String is already M3-backed, range preservation is not optional composition.
+# substring must keep the same canonical owner+coordinate regardless of the admission/join gate.
+if "M3String storage = m3();" not in string
+        or "return new String(storage.slice(beginIndex, endIndex));" not in string:
+    fail("M3-backed substring no longer preserves canonical owner+coordinate directly")
+
 # M3-backed constructors must store only the empty compatibility sentinel.
 if string.count("storage.compatibilityValue()") < 4:
     fail("M3-backed String constructors no longer consistently use the empty sentinel")
