@@ -4,6 +4,7 @@ on:
     paths:
       - 'src/java.base/share/classes/jdk/internal/mindex/**'
       - 'm3/docs/m3-runtime-invariants.tsv'
+      - 'm3/docs/mechanical-precompute-donor-placement.tsv'
       - 'm3/docs/name-mapping.json'
       - 'm3/docs/synexia-string-recipe-authority.tsv'
       - 'm3/docs/m3jdk21-porting-invariant.md'
