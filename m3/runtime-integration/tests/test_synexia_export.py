@@ -215,7 +215,12 @@ class SynexiaExportTest(unittest.TestCase):
                 encoding="utf-8", newline="") as stream:
             rows = list(csv.DictReader(stream, delimiter="\t"))
         mapped = {row["canonical_payload_field"] for row in rows if row["status"] == "MAPPED"}
-        field_types = {row["canonical_payload_field"]: row["donor_java_type"] for row in rows}
+        allowed_types = {"int", "long", "int[]", "long[]"}
+        field_types: dict[str, str] = {}
+        for row in rows:
+            self.assertIn(row["donor_java_type"], allowed_types)
+            previous = field_types.setdefault(row["canonical_payload_field"], row["donor_java_type"])
+            self.assertEqual(previous, row["donor_java_type"], row["canonical_payload_field"])
         self.assertEqual("long[]", field_types["concept_ids"])
         self.assertEqual("int[]", field_types["memberships"])
         self.assertEqual("long", field_types["lexicon_fingerprint"])
