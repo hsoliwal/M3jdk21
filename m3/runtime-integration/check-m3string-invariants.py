@@ -572,6 +572,12 @@ for fragment in [
     if fragment not in abstract_builder:
         fail(f"AbstractStringBuilder M3 bulk String append route missing: {fragment}")
 
+# Existing M3 storage remains the execution owner for repeat; the admission/join feature gate
+# controls creation of M3 storage, not operations on a String that already owns it.
+if "M3String storage = m3();" not in string
+        or "return new String(storage.repeat(count));" not in string:
+    fail("M3-backed repeat no longer executes on canonical storage")
+
 # Once a String is already M3-backed, range preservation is not optional composition.
 # substring must keep the same canonical owner+coordinate regardless of the admission/join gate.
 if "M3String storage = m3();" not in string
