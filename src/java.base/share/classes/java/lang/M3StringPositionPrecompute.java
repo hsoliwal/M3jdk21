@@ -39,7 +39,12 @@ final class M3StringPositionPrecompute {
         int end = Math.min(source.length(), endIndex);
         if (from >= end) return -1;
 
-        Blocks blocks = prepare(source);
+        Blocks blocks;
+        try {
+            blocks = prepare(source);
+        } catch (OutOfMemoryError unavailable) {
+            return linearIndexOf(source, unit, from, end);
+        }
         if (blocks == null) {
             return linearIndexOf(source, unit, from, end);
         }
@@ -53,7 +58,15 @@ final class M3StringPositionPrecompute {
                 index = blockEnd;
                 continue;
             }
-            long positions = exactBlock(source, blocks, block).mask(unit);
+            long positions;
+            try {
+                positions = exactBlock(source, blocks, block).mask(unit);
+            } catch (OutOfMemoryError unavailable) {
+                for (; index < blockEnd; index++) {
+                    if (source.charAt(index) == unit) return index;
+                }
+                continue;
+            }
             int offset = index & BLOCK_MASK;
             positions &= -1L << offset;
             int width = blockEnd - (block << BLOCK_SHIFT);
@@ -70,7 +83,12 @@ final class M3StringPositionPrecompute {
         int from = Math.min(fromIndex, source.length() - 1);
         if (from < 0) return -1;
 
-        Blocks blocks = prepare(source);
+        Blocks blocks;
+        try {
+            blocks = prepare(source);
+        } catch (OutOfMemoryError unavailable) {
+            return linearLastIndexOf(source, unit, from);
+        }
         if (blocks == null) {
             return linearLastIndexOf(source, unit, from);
         }
@@ -84,7 +102,15 @@ final class M3StringPositionPrecompute {
                 index = blockStart - 1;
                 continue;
             }
-            long positions = exactBlock(source, blocks, block).mask(unit);
+            long positions;
+            try {
+                positions = exactBlock(source, blocks, block).mask(unit);
+            } catch (OutOfMemoryError unavailable) {
+                for (; index >= blockStart; index--) {
+                    if (source.charAt(index) == unit) return index;
+                }
+                continue;
+            }
             int offset = index & BLOCK_MASK;
             if (offset < Long.SIZE - 1) positions &= (1L << (offset + 1)) - 1L;
             if (positions != 0L) {
