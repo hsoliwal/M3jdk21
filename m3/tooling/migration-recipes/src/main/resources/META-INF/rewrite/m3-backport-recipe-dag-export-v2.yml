@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.M3BackportRecipeDagExport
+displayName: Install complete M3JDK21 backport queue DAG export
+description: Join five exact control-plane FILE atoms at MULTI_MODULE scope.
+recipeList:
+  - com.m3.rewrite.backport.M3BackportRecipeDagExportRecipe
