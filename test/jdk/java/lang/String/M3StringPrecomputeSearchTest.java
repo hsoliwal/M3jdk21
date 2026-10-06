@@ -553,6 +553,13 @@ public class M3StringPrecomputeSearchTest {
         check(noCaseChange.toUpperCase(Locale.ROOT) == noCaseChange,
                 "M3 Unicode upper unchanged identity");
 
+        StringBuilder builder = new StringBuilder("prefix:");
+        builder.append(joined, 1, joined.length() - 1);
+        char[] builderExpected = new char["prefix:".length() + joined.length() - 2];
+        "prefix:".getChars(0, "prefix:".length(), builderExpected, 0);
+        joined.getChars(1, joined.length() - 1, builderExpected, "prefix:".length());
+        check(equalChars(builder.toString(), builderExpected), "StringBuilder M3 append range");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
