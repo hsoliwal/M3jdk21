@@ -217,7 +217,7 @@ for fragment in [
     "static int codePointCount(M3String source, int beginIndex, int endIndex)",
     "static int offsetByCodePoints(M3String source, int index, int codePointOffset)",
     "catch (OutOfMemoryError unavailable)",
-    "linearCodePointCount(source, beginIndex, endIndex)",
+    "source.slice(beginIndex, endIndex).facts().codePointCount",
     "linearOffsetByCodePoints(source, index, codePointOffset)",
     "static long maximumRetainedPrimitiveBytes()",
 ]:
