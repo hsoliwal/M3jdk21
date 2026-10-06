@@ -48,6 +48,7 @@ class A3ApplyTest {
         assertEquals(
                 com.synexia.rewrite.atom.M3PureIntConvergenceRecipe.class.getName(),
                 receipt.recipe());
+        assertEquals("com.m3.rewrite.M3Java21Convergence", receipt.recipe());
         assertTrue(receipt.changed());
         assertTrue(receipt.fixedPoint());
         assertFalse(receipt.beforeSha().equals(receipt.afterSha()));

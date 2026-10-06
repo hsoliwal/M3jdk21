@@ -8,6 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 POLICY = ROOT / "compatibility" / "synexia-recipe-home-policy.tsv"
+PIN = ROOT / "compatibility" / "synexia-recipe-home-pin.tsv"
 
 
 class SynexiaRecipeHomePolicyTest(unittest.TestCase):
@@ -49,6 +50,7 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
                 "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/**"
             ]["handoff_required"],
         )
+
 
     def test_a3_mastery_and_catalogue_resolve_to_synexia_recipe_owners(self) -> None:
         with POLICY.open(encoding="utf-8", newline="") as handle:
@@ -96,6 +98,29 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         ):
             self.assertIn(f"com.synexia.rewrite.atom.{owner}", catalogue)
             self.assertNotIn(f"com.m3.rewrite.atom.{owner}", catalogue)
+
+
+    def test_canonical_home_pin_binds_exact_synexia_manifest(self) -> None:
+        with PIN.open(encoding="utf-8", newline="") as handle:
+            rows = list(csv.DictReader(handle, delimiter="\t"))
+
+        self.assertEqual(1, len(rows))
+        row = rows[0]
+        self.assertEqual("M3JDK21_SYNEXIA_RECIPE_HOME_PIN_V1", row["schema"])
+        self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
+        self.assertRegex(row["canonical_revision"], r"^[0-9a-f]{40}$")
+        self.assertEqual(
+            "synexia-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv",
+            row["canonical_manifest_path"],
+        )
+        self.assertRegex(row["canonical_manifest_git_blob"], r"^[0-9a-f]{40}$")
+        self.assertEqual(
+            "docs/M3-SCALE/invariants/SYNEXIA-PUBLIC-TARGET-CONVERGENCE-1.json",
+            row["convergence_invariant_path"],
+        )
+        self.assertRegex(row["convergence_invariant_git_blob"], r"^[0-9a-f]{40}$")
+        self.assertEqual("Apache-2.0", row["license"])
+        self.assertEqual("PINNED_CANONICAL_SOURCE", row["state"])
 
 
     def test_opt_in_maven_profile_consumes_canonical_synexia_recipe_artifact(self) -> None:
