@@ -72,10 +72,22 @@ final class M3StringCanonicalDagMasterRepairRecipeTest {
 
     private static List<SourceFile> textAfter() {
         return List.of(
+                text(".github/workflows/mindex-string-backing.yml",
+                        "04-workflow.yml.txt"),
+                text("doc/mindex-string-backing.md",
+                        "06-backing-doc.md.txt"),
                 text("m3/docs/m3-runtime-invariants.tsv",
                         "00-runtime-invariants.tsv.txt"),
                 text("m3/docs/name-mapping.json",
-                        "01-name-mapping.json.txt"));
+                        "01-name-mapping.json.txt"),
+                text("m3/docs/synexia-string-precompute-port-map.tsv",
+                        "02-port-map.tsv.txt"),
+                text("m3/runtime-integration/README.md",
+                        "05-runtime-readme.md.txt"),
+                text("m3/runtime-integration/check-m3string-invariants.py",
+                        "03-invariants.py.txt"),
+                text("m3/runtime-integration/tests/M3StringInvariant.java",
+                        "07-M3StringInvariant.java.txt"));
     }
 
     private static SourceFile java(String path, String resource) {
