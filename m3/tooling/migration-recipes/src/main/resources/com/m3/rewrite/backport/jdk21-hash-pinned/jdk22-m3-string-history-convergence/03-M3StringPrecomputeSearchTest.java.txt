@@ -205,14 +205,17 @@ public class M3StringPrecomputeSearchTest {
         }
 
         String asciiCase = String.join("", "AbC", "-xYz-123");
+        check(!asciiCase.isBlank(), "prepare ASCII case facts");
         check(asciiCase.toLowerCase(Locale.ROOT).equals("abc-xyz-123"),
                 "ROOT ASCII lowercase");
         check(asciiCase.toUpperCase(Locale.ROOT).equals("ABC-XYZ-123"),
                 "ROOT ASCII uppercase");
         String alreadyLower = String.join("", "abc", "-123");
+        check(!alreadyLower.isBlank(), "prepare lowercase facts");
         check(alreadyLower.toLowerCase(Locale.ROOT) == alreadyLower,
                 "ROOT ASCII lowercase unchanged identity");
         String alreadyUpper = String.join("", "ABC", "-123");
+        check(!alreadyUpper.isBlank(), "prepare uppercase facts");
         check(alreadyUpper.toUpperCase(Locale.ROOT) == alreadyUpper,
                 "ROOT ASCII uppercase unchanged identity");
         check(String.join("", "I", "X").toLowerCase(Locale.forLanguageTag("tr"))
@@ -378,6 +381,64 @@ public class M3StringPrecomputeSearchTest {
         String valueOfUtf162 = String.valueOf('\u0100');
         check(valueOfUtf16.equals("\u0100"), "valueOf UTF16 char content");
         check(valueOfUtf16 != valueOfUtf162, "valueOf UTF16 fresh wrapper");
+
+        String bmpOffsets = String.join("", "abc", "\ud83d", "x", "\ude42", "XYZ");
+        char[] bmpOffsetOracle = bmpOffsets.toCharArray();
+        for (int index = 0; index <= bmpOffsets.length(); index++) {
+            for (int delta = -bmpOffsets.length() - 1; delta <= bmpOffsets.length() + 1; delta++) {
+                compareOffsetByCodePoints(bmpOffsets, bmpOffsetOracle, index, delta,
+                        "BMP/unpaired offset index=" + index + " delta=" + delta);
+            }
+        }
+        String pairedOffsets = String.join("", "a", "\ud83d", "\ude42", "b");
+        char[] pairedOffsetOracle = pairedOffsets.toCharArray();
+        for (int index = 0; index <= pairedOffsets.length(); index++) {
+            for (int delta = -4; delta <= 4; delta++) {
+                compareOffsetByCodePoints(pairedOffsets, pairedOffsetOracle, index, delta,
+                        "paired offset index=" + index + " delta=" + delta);
+            }
+        }
+
+        byte[] deprecatedBytes = new byte[joined.length() + 4];
+        Arrays.fill(deprecatedBytes, (byte) 0x55);
+        joined.getBytes(1, joined.length() - 1, deprecatedBytes, 2);
+        for (int index = 1; index < joined.length() - 1; index++) {
+            check(deprecatedBytes[index + 1] == (byte) joined.charAt(index),
+                    "deprecated getBytes low8 index=" + index);
+        }
+        check(deprecatedBytes[0] == (byte) 0x55 && deprecatedBytes[1] == (byte) 0x55,
+                "deprecated getBytes prefix untouched");
+        check(deprecatedBytes[deprecatedBytes.length - 1] == (byte) 0x55,
+                "deprecated getBytes suffix untouched");
+
+        String builderSource = String.join("", "ab", "\u0100", "cd", "\ud83d\ude42", "ef");
+        StringBuilder builderWhole = new StringBuilder();
+        builderWhole.append(builderSource);
+        check(builderWhole.toString().equals(builderSource), "StringBuilder append M3 whole");
+
+        StringBuilder builderRange = new StringBuilder("L");
+        builderRange.append(builderSource, 1, builderSource.length() - 1);
+        check(builderRange.toString().equals(
+                        "L" + builderSource.substring(1, builderSource.length() - 1)),
+                "StringBuilder append M3 range");
+
+        StringBuilder builderLatinRange = new StringBuilder("P");
+        String utf16OwnerLatinRange = String.join("", "\u0100", "latin", "\u0101");
+        builderLatinRange.append(utf16OwnerLatinRange, 1, 6);
+        check(builderLatinRange.toString().equals("Platin"),
+                "StringBuilder late inflation M3 Latin range");
+
+        String emptyTargetSource = String.join("", "a", "\ud83d", "\ude42", "b");
+        String emptyTargetReplaced = emptyTargetSource.replace("", "-");
+        check(equalChars(
+                        emptyTargetReplaced,
+                        naiveReplaceEmpty(chars(emptyTargetSource), new char[] {'-'})),
+                "replace empty target UTF16 boundaries");
+        String emptyReplacementNoop = emptyTargetSource.replace("", "");
+        check(equalChars(emptyReplacementNoop, chars(emptyTargetSource)),
+                "replace empty target empty replacement content");
+        check(emptyReplacementNoop != emptyTargetSource,
+                "replace empty target empty replacement fresh wrapper");
 
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
@@ -559,6 +620,28 @@ public class M3StringPrecomputeSearchTest {
                 check(Arrays.equals(source.getBytes(charset), encodeOracle(oracle, charset)),
                         "random getBytes " + charset.name() + " trial " + trial);
             }
+        }
+    }
+
+    private static void compareOffsetByCodePoints(
+            String source, char[] oracle, int index, int delta, String label) {
+        Integer expected = null;
+        RuntimeException expectedFailure = null;
+        try {
+            expected = Character.offsetByCodePoints(CharBuffer.wrap(oracle), index, delta);
+        } catch (RuntimeException failure) {
+            expectedFailure = failure;
+        }
+
+        try {
+            int actual = source.offsetByCodePoints(index, delta);
+            check(expectedFailure == null, label + " expected failure " + expectedFailure);
+            check(actual == expected, label + " actual=" + actual + " expected=" + expected);
+        } catch (RuntimeException failure) {
+            check(expectedFailure != null, label + " unexpected " + failure);
+            check(failure.getClass() == expectedFailure.getClass(),
+                    label + " exception=" + failure.getClass()
+                            + " expected=" + expectedFailure.getClass());
         }
     }
 
@@ -832,6 +915,21 @@ public class M3StringPrecomputeSearchTest {
             remaining -= lw;
         }
         return true;
+    }
+
+    private static char[] naiveReplaceEmpty(char[] source, char[] replacement) {
+        long length = (long) source.length + (long) (source.length + 1) * replacement.length;
+        if (length > Integer.MAX_VALUE) throw new OutOfMemoryError("test oracle result too large");
+        char[] result = new char[(int) length];
+        int output = 0;
+        System.arraycopy(replacement, 0, result, output, replacement.length);
+        output += replacement.length;
+        for (char unit : source) {
+            result[output++] = unit;
+            System.arraycopy(replacement, 0, result, output, replacement.length);
+            output += replacement.length;
+        }
+        return result;
     }
 
     private static char[] naiveReplace(char[] source, char oldChar, char newChar) {
