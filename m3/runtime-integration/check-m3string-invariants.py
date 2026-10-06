@@ -42,6 +42,7 @@ stringtable = read("src/hotspot/share/classfile/stringTable.cpp")
 mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
+recipe_receipt = read("m3/docs/synexia-recipe-application.md")
 builder = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
 native_string = read("src/java.base/share/native/libjava/String.c")
 native_string_test = read("test/jdk/java/lang/String/nativeEncoding/libstringPlatformChars.c")
@@ -961,7 +962,8 @@ for required_trigger in [
     "src/java.base/share/classes/java/lang/AbstractStringBuilder.java",
     "src/java.base/share/classes/java/util/regex/Pattern.java",
     "src/java.base/share/classes/java/util/regex/Matcher.java",
-    "m3/tooling/migration-recipes/**",
+    "m3/docs/synexia-recipe-application.md",
+    "AGENTS.md",
 ]:
     if required_trigger not in workflow:
         fail(f"M3 String workflow lost trigger path: {required_trigger}")
@@ -971,12 +973,38 @@ for required_gate in [
     "M3StringPrecomputeSearchTest.java",
     "M3StringInternTest.java",
     "nativeEncoding/StringPlatformChars.java",
-    "M3StringInternTest.java",
     "M3TQFactsTest.java",
     "M3RegexLiteralTQTest.java",
-    "M3StringHistoryConvergenceRecipeTest",
 ]:
     if required_gate not in workflow:
         fail(f"M3 String workflow lost verification gate: {required_gate}")
+
+# Synexia owns reusable M3JDK21 recipes; this target keeps only the applied product and receipt.
+for fragment in [
+    "hsoliwal/com.synexia",
+    "pull/9491",
+    "com.synexia.rewrite.M3Jdk21StringHistoryConvergence",
+    "com.synexia.rewrite.M3Jdk21TqConvergence",
+    "5291e3867224be653da89cd69e3b764b2fab213f",
+]:
+    if fragment not in recipe_receipt:
+        fail(f"Synexia recipe application receipt missing: {fragment}")
+
+for forbidden_recipe_path in [
+    "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-history-convergence.yml",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-history-convergence",
+    "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3StringHistoryConvergenceRecipeTest.java",
+    "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq",
+    "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq",
+    "m3/tooling/tq/src/test/java/com/m3/tq/TQTest.java",
+]:
+    if (ROOT / forbidden_recipe_path).exists():
+        fail(f"Synexia-owned recipe duplicated in M3JDK21: {forbidden_recipe_path}")
+
+if "M3StringHistoryConvergenceRecipeTest" in workflow:
+    fail("M3JDK21 workflow must not execute a local Synexia-owned recipe proof")
+if "m3/tooling/migration-recipes/**" in workflow:
+    fail("M3JDK21 String workflow must not treat local recipe custody as authoritative")
 
 print("M3_STRING_SOURCE_INVARIANTS_PASS")
