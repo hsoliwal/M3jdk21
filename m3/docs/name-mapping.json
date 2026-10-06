@@ -6776,7 +6776,9 @@
     "source_repo": "hsoliwal/com.synexia",
     "source_path": "synexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006",
     "source_tracking_ref": "refs/heads/develop",
-    "source_pr": "hsoliwal/com.synexia#9489",
+    "source_submission_pr": "hsoliwal/com.synexia#9489",
+    "source_commit": "5a46a1fbef73bab9ba39dcd06444e867f2e61da7",
+    "source_resolution": "ADDITIVE_MERGE",
     "target_packet_role": "generated executable/hash-pinned application copy",
     "target_repo": "hsoliwal/M3jdk21",
     "target_owns": [

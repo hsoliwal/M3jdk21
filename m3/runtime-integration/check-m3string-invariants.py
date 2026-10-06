@@ -985,6 +985,8 @@ for fragment in [
     '"recipe_id": "synexia.m3jdk.string.canonical-dag.20261006"',
     '"source_repo": "hsoliwal/com.synexia"',
     '"source_path": "synexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006"',
+    '"source_commit": "5a46a1fbef73bab9ba39dcd06444e867f2e61da7"',
+    '"source_resolution": "ADDITIVE_MERGE"',
     '"target_packet_role": "generated executable/hash-pinned application copy"',
     '"portable_semantics_owner": "Synexia"',
 ]:
@@ -995,6 +997,8 @@ for fragment in [
     "recipe_id\tsynexia.m3jdk.string.canonical-dag.20261006",
     "authority_repo\thsoliwal/com.synexia",
     "authority_path\tsynexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006",
+    "authority_commit\t5a46a1fbef73bab9ba39dcd06444e867f2e61da7",
+    "authority_resolution\tADDITIVE_MERGE",
     "target_packet_role\tgenerated executable/hash-pinned application copy",
     "target_runtime_owner\tM3JDK",
     "precompute_rule\timplementation-internal in both worlds; never canonical spelling",

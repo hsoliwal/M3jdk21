@@ -4,7 +4,9 @@ recipe_id	synexia.m3jdk.string.canonical-dag.20261006
 authority_repo	hsoliwal/com.synexia
 authority_path	synexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006
 authority_tracking_ref	refs/heads/develop
-authority_pr	hsoliwal/com.synexia#9489
+authority_submission_pr	hsoliwal/com.synexia#9489
+authority_commit	5a46a1fbef73bab9ba39dcd06444e867f2e61da7
+authority_resolution	ADDITIVE_MERGE
 target_repo	hsoliwal/M3jdk21
 target_packet_role	generated executable/hash-pinned application copy
 target_recipe_name	com.m3.rewrite.backport.M3StringCanonicalDagMasterRepair
