@@ -24,6 +24,9 @@ snapshot or reuse donor identifiers as target ABI.
 | `d6308bff7e3a55e77c4dc45c4f47187acb2e523b` | Exact suffix-decision precompute with Java/JNI validation | an early decision is authoritative only when mathematically complete and independently validated |
 | `b9d35ce3c3c266fb3641352a07903563a3a86b81` | Retain canonical fact bundles in canonical tuple body | `M3StringOwner` lazily retains internal fixed-size `M3StringFacts` |
 | `f2f15f1aaa147cf1af556b0c148954178f971de6` | Introduce native UTF-16/UTF-8 shadows explicitly outside canonical MIndexString | M3JDK byte/char arrays are compatibility shadows; `M3String` never retains them |
+| `f58fca04106ba39f1438d44ca4e2e9775b2a9430` | Attach MIndexString rows to precomputed UTF-16 range facts | M3 range/navigation optimizations key exact owner+coordinate and never own spelling |
+| `106c7692385af34ec0ae3cc25958c9cb26371075` | Reuse tuple precompute for UTF-16 range metrics | M3 code-point range counts reuse separately bounded internal primitive geometry |
+| `f26f5ff094acb31706437f284c1cf7d9dbf3ebd5` | Navigate code-point offsets with prepared range metrics | M3 `offsetByCodePoints` uses bounded internal navigation facts and exact fallback |
 
 Current donor pin reviewed for this port: `hsoliwal/com.synexia@9963cc08ff13922b92a0e3db7c30f56fddacba7d`.
 
@@ -203,3 +206,13 @@ consumer:
 
 This is part of the M3 String invariant: precompute must have a real owner, bounded retention, and
 a JDK-visible execution consumer. Unused metadata is not an implementation success.
+
+
+## Code-point range/navigation precompute
+
+Synexia's prepared UTF-16 range-metric/code-point navigation lineage is adapted into
+`java.lang.M3StringCodePointPrecompute`. The target does not copy the donor class names or its
+row-image layout. It retains only a bounded weak-owner primitive block-prefix lane over exact M3
+owner+coordinate identity. `codePointCount(begin,end)` and `offsetByCodePoints` preserve split
+surrogate and unpaired-surrogate semantics. Budget refusal, eviction, or allocation failure falls
+back to exact traversal; the lane is never semantic authority or canonical text storage.
