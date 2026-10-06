@@ -779,25 +779,21 @@ final class M3String implements CharSequence {
     }
 
     M3String replace(char oldChar, char newChar) {
-        if (oldChar == newChar || !facts().mayContainCodeUnit(oldChar)) return this;
+        if (oldChar == newChar) return this;
+        M3StringFacts prepared = factsIfPrepared();
+        if (prepared != null && !prepared.mayContainCodeUnit(oldChar)) return this;
 
-        int first = -1;
-        for (int index = 0; index < length(); index++) {
-            if (charAt(index) == oldChar) {
-                first = index;
-                break;
-            }
-        }
-        if (first < 0) return this;
+        int found = indexOf(oldChar, 0, length());
+        if (found < 0) return this;
 
         M3String replacement = M3StringPool.internUnit(newChar);
         ArrayList<M3String> pieces = new ArrayList<>();
         int cursor = 0;
-        for (int index = first; index < length(); index++) {
-            if (charAt(index) != oldChar) continue;
-            if (cursor < index) pieces.add(slice(cursor, index));
+        while (found >= 0) {
+            if (cursor < found) pieces.add(slice(cursor, found));
             pieces.add(replacement);
-            cursor = index + 1;
+            cursor = found + 1;
+            found = cursor < length() ? indexOf(oldChar, cursor, length()) : -1;
         }
         if (cursor < length()) pieces.add(slice(cursor, length()));
         return joinValues(pieces);
