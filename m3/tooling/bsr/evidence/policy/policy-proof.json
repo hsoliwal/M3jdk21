@@ -1,0 +1,18 @@
+{
+  "schema": "m3.porting-policy-proof/1",
+  "families": 6,
+  "retained_records": 52,
+  "retained_gates": 20,
+  "rejected_mutants": [
+    "missing policy",
+    "wrong product owner",
+    "public API rename",
+    "duplicate family",
+    "unknown source mapping",
+    "invented target naming",
+    "compiler dependency in java.base",
+    "existing admission promotion",
+    "removed existing mapping"
+  ],
+  "prior_mapping_canonical_sha256": "bccb957396e35c75e7fb8373174593498e778898d5091c3b2f71157d4b0938f1"
+}

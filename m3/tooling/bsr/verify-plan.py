@@ -6,6 +6,8 @@ import importlib.util
 import json
 from pathlib import Path
 import tempfile
+import subprocess
+import sys
 
 CRATE = Path(__file__).resolve().parent
 ROOT = CRATE.parents[2]
@@ -15,13 +17,17 @@ spec.loader.exec_module(sealed)
 plan_path = CRATE / 'plan.json'
 plan, rows = sealed.sealed_plan(plan_path)
 assert sealed.execute(plan_path, ROOT, 'check')['state'] == 'after'
-assert len(rows) == 17
+assert len(rows) == 24
 for row in rows:
     assert (CRATE / 'target/generated' / row['path']).read_bytes() == row['after'], row['path']
+subprocess.run([sys.executable, str(CRATE / 'verify-policy.py')], check=True)
 
 mapping = next(row for row in rows if row['path'] == 'm3/docs/name-mapping.json')
 before = json.loads(mapping['before'])
 after = json.loads(mapping['after'])
+assert 'porting_policy' not in before
+policy = after.pop('porting_policy')
+assert policy == json.loads((ROOT / 'm3/docs/name-mapping.json').read_text())['porting_policy']
 old_records = before['migration'].pop('records')
 new_records = after['migration'].pop('records')
 assert before == after, 'Top-level authority/gates changed'
@@ -79,9 +85,9 @@ with tempfile.TemporaryDirectory(prefix='m3-bsr-custody-') as temporary:
         put(root, guard['path'], (ROOT / guard['path']).read_bytes())
     for row in rows:
         put(root, row['path'], row['before'])
-    for mode, state, writes in [('check', 'before', 0), ('apply', 'after', 17),
+    for mode, state, writes in [('check', 'before', 0), ('apply', 'after', 24),
                                 ('apply', 'after', 0), ('check', 'after', 0),
-                                ('rollback', 'before', 17), ('rollback', 'before', 0)]:
+                                ('rollback', 'before', 24), ('rollback', 'before', 0)]:
         result = sealed.execute(plan_path, root, mode)
         assert (result['state'], result['writes']) == (state, writes)
         events.append({'mode': mode, **result})
@@ -156,7 +162,7 @@ with tempfile.TemporaryDirectory(prefix='m3-bsr-succession-') as temporary:
     verify()
 
 result = {'schema': 'm3.bsr-custody/1', 'plan_sha256': plan['plan_sha256'],
-          'generated_outputs': 17, 'unchanged_records': 47, 'retained_gates': 20,
+          'generated_outputs': 24, 'unchanged_records': 47, 'retained_gates': 20,
           'predecessor_plan_sha256': prior_plan['plan_sha256'], 'events': events}
 (CRATE / 'target/custody.json').write_text(json.dumps(result, indent=2) + '\n')
 print('PASS: exact outputs, selective mapping, fixed point, rollback, predecessor chain and seven no-write refusals')

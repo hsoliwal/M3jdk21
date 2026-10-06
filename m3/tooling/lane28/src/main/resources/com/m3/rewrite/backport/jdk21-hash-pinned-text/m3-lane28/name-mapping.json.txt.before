@@ -5471,5 +5471,210 @@
     ]
   },
   "precompute_port_map": "m3/docs/synexia-string-precompute-port-map.tsv",
-  "precompute_scope_rule": "Only String-semantic and String-search donor precompute maps into M3JDK String/runtime internals; Synexia language, semantic, DAG, probabilistic and reasoning precompute must not be transplanted into java.lang.String."
+  "precompute_scope_rule": "Only String-semantic and String-search donor precompute maps into M3JDK String/runtime internals; Synexia language, semantic, DAG, probabilistic and reasoning precompute must not be transplanted into java.lang.String.",
+  "porting_policy": {
+    "version": 1,
+    "product_repository": "hsoliwal/M3jdk21",
+    "convergence_repository": "hsoliwal/com.synexia",
+    "authority": {
+      "naming_map": "m3/docs/name-mapping.json",
+      "invariant": "m3/docs/M3JDK21_PORTING_INVARIANT.md",
+      "naming_rules": "m3/docs/counterpart-naming.md",
+      "porting_order": "m3/docs/m3-porting.md",
+      "string_precompute_detail": "m3/docs/synexia-string-precompute-port-map.tsv"
+    },
+    "roles": {
+      "m3jdk21": "canonical-product-runtime-and-target-naming-authority",
+      "synexia": "convergence-workspace-and-source-contributor-only-for-this-target"
+    },
+    "recipe_contributions": {
+      "source_modules": [
+        "synexia-m3-recipe",
+        "synexia-openrewrite-recipes"
+      ],
+      "inputs": [
+        "qualified-Java-JNI-atoms",
+        "recipe-generated-postimages",
+        "atomizer-patternizer-compositions",
+        "fixtures-catalogues-and-proof-receipts"
+      ],
+      "intake": "inventory-exact-source-body-history-contract-and-dependency-closure-before-target-adaptation",
+      "runtime_code": "port-qualified-algorithms-to-existing-target-owners-and-appropriate-JDK-layers",
+      "recipe_execution": "retain-as-authoring-and-proof-tooling-never-a-product-runtime-dependency"
+    },
+    "compatibility": {
+      "baseline": "OpenJDK 21",
+      "public_api_names": "preserve-existing-JDK-names",
+      "internal_m3_names": "replacement-and-optimization-owners-not-new-public-JDK-contracts",
+      "source_names": "retain-Synexia-compatibility-and-provenance",
+      "existing_names": "reuse-current-map-before-assigning-a-reviewed-new-name"
+    },
+    "naming_analogy": {
+      "source": "com.synexia.indexstring.MIndexString",
+      "target": "java.lang.M3String",
+      "public_api": "java.lang.String"
+    },
+    "product_invariant": {
+      "string_state": "canonical-owner-reference-plus-packed-coordinate",
+      "canonical_payload": "shared-native-or-mapped-atoms-and-canonical-coordinate-composition",
+      "derived_facts": "exact-owner-generation-range-composition-and-semantic-context",
+      "string_native_materialization": "JNI-created-byte-char-UTF-shadows-only-never-canonical-spelling",
+      "collections": "no-retained-structural-object-per-logical-entry",
+      "runtime_dependencies": "self-contained-target-no-Synexia-module-service-or-process",
+      "layer_ownership": "appropriate-JDK-module-or-HotSpot-owner-with-independent-admission",
+      "radical_vm_changes": "separately-scoped-experimental-project"
+    },
+    "family_mappings": [
+      {
+        "id": "string",
+        "label": "String",
+        "target_modules": [
+          "java.base"
+        ],
+        "mapping_sources": [
+          "com.synexia.indexstring.MIndexString",
+          "com.synexia.indexstring.IndexResolver / IndexStringTuple",
+          "com.synexia.indexstring.MIndexStringBacking",
+          "com.synexia.indexstring.MIndexMappedStringBacking"
+        ],
+        "migration_record_ids": [],
+        "existing_targets": [
+          "java.lang.M3String",
+          "java.lang.M3StringOwner",
+          "java.lang.M3StringAtom",
+          "java.lang.M3StringPool",
+          "java.lang.M3StringTuple",
+          "jdk.internal.mindex.M3StringBacking",
+          "jdk.internal.mindex.M3MappedStringBacking"
+        ],
+        "boundary": "Public java.lang.String retains its JDK name and contract; M3String and its existing owners implement internal canonical storage.",
+        "admission": "consult-existing-mappings-and-migration-records"
+      },
+      {
+        "id": "precompute",
+        "label": "Precompute",
+        "target_modules": [
+          "java.base"
+        ],
+        "mapping_sources": [
+          "com.synexia.indexstring.MIndexStringCanonicalFacts / MIndexStringPrecomputation",
+          "com.synexia.indexstring.MIndexStringSearchPlan and canonical operation-search facts",
+          "com.synexia.indexstring.MIndexMaskLiteralSearch"
+        ],
+        "migration_record_ids": [
+          "synexia.counterpart.MIndexRegexTrigramQuery"
+        ],
+        "existing_targets": [
+          "java.lang.M3StringFacts",
+          "java.lang.M3StringSearchPrecompute",
+          "java.lang.M3StringPositionPrecompute",
+          "jdk.internal.mindex.M3TQ"
+        ],
+        "boundary": "Derived exact-owner/range/composition facts and conservative filters; no second spelling store, public donor facade or positive-match shortcut. Broader non-String facts stay in their appropriate layer.",
+        "admission": "consult-existing-mappings-and-migration-records"
+      },
+      {
+        "id": "collections",
+        "label": "Collections",
+        "target_modules": [
+          "java.base"
+        ],
+        "mapping_sources": [],
+        "migration_record_ids": [
+          "synexia.collections.SegmentedAddress28",
+          "synexia.collections.SegmentedIntLane28",
+          "synexia.collections.SegmentedLongLane28",
+          "synexia.collections.SegmentedBitLane28",
+          "synexia.collections.PackedBitAtoms"
+        ],
+        "existing_targets": [
+          "jdk.internal.mindex.M3Address28",
+          "jdk.internal.mindex.M3IntLane28",
+          "jdk.internal.mindex.M3LongLane28",
+          "jdk.internal.mindex.M3BitLane28",
+          "jdk.internal.mindex.M3Bits"
+        ],
+        "boundary": "Preserve public java.util names and contracts. Reuse existing primitive/packed/segmented owners without retained structural objects per logical entry; bounded lane presence does not admit automatic collection replacement.",
+        "admission": "consult-existing-mappings-and-migration-records"
+      },
+      {
+        "id": "native",
+        "label": "JNI and native",
+        "target_modules": [
+          "java.base"
+        ],
+        "mapping_sources": [
+          "com.synexia.indexstring.nativebridge.MIndexUtf16Shadow",
+          "com.synexia.indexstring.nativebridge.MIndexUtf8Shadow"
+        ],
+        "migration_record_ids": [
+          "synexia.collections.SegmentedBitLane28"
+        ],
+        "existing_targets": [
+          "java.lang.M3String.nativeCharShadow",
+          "java.lang.M3String.nativeByteShadow",
+          "src/java.base/share/native/libjava/M3BitLane28.c"
+        ],
+        "boundary": "Target-owned JNI/native linkage, lifetime and ABI. String byte/char exports are compatibility shadows, never canonical payload; no Synexia runtime service or library dependency.",
+        "admission": "consult-existing-mappings-and-migration-records"
+      },
+      {
+        "id": "class-ast",
+        "label": "Class, version and AST",
+        "target_modules": [
+          "java.base"
+        ],
+        "mapping_sources": [],
+        "migration_record_ids": [
+          "synexia.counterpart.MIndexVersionTable",
+          "synexia.counterpart.MIndexLibraryRelease",
+          "synexia.counterpart.MIndexVmSession",
+          "synexia.counterpart.MIndexClassIndex",
+          "synexia.counterpart.MIndexClass",
+          "synexia.counterpart.MIndexVmPrecomputeKey",
+          "synexia.counterpart.MIndexAST",
+          "synexia.counterpart.MIndexASTPrecompute"
+        ],
+        "existing_targets": [
+          "jdk.internal.mindex.M3VI",
+          "jdk.internal.mindex.M3Release",
+          "jdk.internal.mindex.M3CB",
+          "jdk.internal.mindex.M3CI",
+          "jdk.internal.mindex.M3Class",
+          "jdk.internal.mindex.M3PC",
+          "jdk.internal.mindex.M3AST",
+          "jdk.internal.mindex.M3ASTPC"
+        ],
+        "boundary": "Public Class/ClassLoader identity remains JDK-owned. Preserve defining-loader/module/generation boundaries and invalidation; reserved AST mappings do not imply implementations or admission.",
+        "admission": "consult-existing-mappings-and-migration-records"
+      },
+      {
+        "id": "compiler",
+        "label": "Compiler",
+        "target_modules": [
+          "jdk.compiler"
+        ],
+        "mapping_sources": [],
+        "migration_record_ids": [
+          "synexia.counterpart.MIndexCompilerASTPrecompute",
+          "route-b.compiler-lowering"
+        ],
+        "existing_targets": [
+          "com.sun.tools.javac.m3.M3ASTPC"
+        ],
+        "boundary": "Keep compiler-specific owners in jdk.compiler and retain the reserved mapping until qualified. No javac dependency in java.base; Maven/OpenRewrite is authoring/proof tooling, not the runtime compiler or proof of JIT/AOT integration.",
+        "admission": "consult-existing-mappings-and-migration-records"
+      }
+    ],
+    "promotion": {
+      "method": "pinned-Maven-OpenRewrite-recipe-execution",
+      "mapping_updates": "extend-this-authority-and-existing-lineage-no-competing-registry",
+      "proof": "exact-source-and-target-contract-lifecycle-ABI-compiler-native-and-image-evidence",
+      "performance": "measure-cold-preparation-and-warm-reuse-separately",
+      "compatibility": "preserve-working-JDK21-behavior-with-qualified-fallback-and-invalidation",
+      "status": "mapping-or-policy-is-not-runtime-admission",
+      "feedback": "target-receipts-and-missing-capabilities-return-to-Synexia-convergence",
+      "licenses": "retain-scoped-Synexia-Apache-2.0-and-existing-JDK-third-party-notices"
+    }
+  }
 }

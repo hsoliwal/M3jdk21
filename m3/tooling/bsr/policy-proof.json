@@ -1,0 +1,7 @@
+{
+  "schema": "m3.porting-policy-input/1",
+  "prior_target_commit": "9e2f2da611ae45a36d84e8b6d71109f5ae3d4e0b",
+  "prior_mapping_canonical_sha256": "bccb957396e35c75e7fb8373174593498e778898d5091c3b2f71157d4b0938f1",
+  "source_roots_observed_at": "a8e8b3ade47d04229aff2a280e67bad5741ed863",
+  "scope": "Canonical policy addition only; preserve all existing names, records and gates"
+}

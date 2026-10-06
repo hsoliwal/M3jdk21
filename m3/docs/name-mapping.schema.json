@@ -164,6 +164,9 @@
         "records"
       ],
       "additionalProperties": false
+    },
+    "porting_policy": {
+      "$ref": "#/$defs/portingPolicy"
     }
   },
   "required": [
@@ -720,6 +723,420 @@
         "runs"
       ],
       "additionalProperties": true
+    },
+    "portingPolicy": {
+      "type": "object",
+      "properties": {
+        "version": {
+          "const": 1
+        },
+        "product_repository": {
+          "const": "hsoliwal/M3jdk21"
+        },
+        "convergence_repository": {
+          "const": "hsoliwal/com.synexia"
+        },
+        "authority": {
+          "type": "object",
+          "properties": {
+            "naming_map": {
+              "const": "m3/docs/name-mapping.json"
+            },
+            "invariant": {
+              "const": "m3/docs/M3JDK21_PORTING_INVARIANT.md"
+            },
+            "naming_rules": {
+              "const": "m3/docs/counterpart-naming.md"
+            },
+            "porting_order": {
+              "const": "m3/docs/m3-porting.md"
+            },
+            "string_precompute_detail": {
+              "const": "m3/docs/synexia-string-precompute-port-map.tsv"
+            }
+          },
+          "required": [
+            "naming_map",
+            "invariant",
+            "naming_rules",
+            "porting_order",
+            "string_precompute_detail"
+          ],
+          "additionalProperties": false
+        },
+        "roles": {
+          "type": "object",
+          "properties": {
+            "m3jdk21": {
+              "const": "canonical-product-runtime-and-target-naming-authority"
+            },
+            "synexia": {
+              "const": "convergence-workspace-and-source-contributor-only-for-this-target"
+            }
+          },
+          "required": [
+            "m3jdk21",
+            "synexia"
+          ],
+          "additionalProperties": false
+        },
+        "recipe_contributions": {
+          "type": "object",
+          "properties": {
+            "source_modules": {
+              "const": [
+                "synexia-m3-recipe",
+                "synexia-openrewrite-recipes"
+              ]
+            },
+            "inputs": {
+              "const": [
+                "qualified-Java-JNI-atoms",
+                "recipe-generated-postimages",
+                "atomizer-patternizer-compositions",
+                "fixtures-catalogues-and-proof-receipts"
+              ]
+            },
+            "intake": {
+              "const": "inventory-exact-source-body-history-contract-and-dependency-closure-before-target-adaptation"
+            },
+            "runtime_code": {
+              "const": "port-qualified-algorithms-to-existing-target-owners-and-appropriate-JDK-layers"
+            },
+            "recipe_execution": {
+              "const": "retain-as-authoring-and-proof-tooling-never-a-product-runtime-dependency"
+            }
+          },
+          "required": [
+            "source_modules",
+            "inputs",
+            "intake",
+            "runtime_code",
+            "recipe_execution"
+          ],
+          "additionalProperties": false
+        },
+        "compatibility": {
+          "type": "object",
+          "properties": {
+            "baseline": {
+              "const": "OpenJDK 21"
+            },
+            "public_api_names": {
+              "const": "preserve-existing-JDK-names"
+            },
+            "internal_m3_names": {
+              "const": "replacement-and-optimization-owners-not-new-public-JDK-contracts"
+            },
+            "source_names": {
+              "const": "retain-Synexia-compatibility-and-provenance"
+            },
+            "existing_names": {
+              "const": "reuse-current-map-before-assigning-a-reviewed-new-name"
+            }
+          },
+          "required": [
+            "baseline",
+            "public_api_names",
+            "internal_m3_names",
+            "source_names",
+            "existing_names"
+          ],
+          "additionalProperties": false
+        },
+        "naming_analogy": {
+          "type": "object",
+          "properties": {
+            "source": {
+              "const": "com.synexia.indexstring.MIndexString"
+            },
+            "target": {
+              "const": "java.lang.M3String"
+            },
+            "public_api": {
+              "const": "java.lang.String"
+            }
+          },
+          "required": [
+            "source",
+            "target",
+            "public_api"
+          ],
+          "additionalProperties": false
+        },
+        "product_invariant": {
+          "type": "object",
+          "properties": {
+            "string_state": {
+              "const": "canonical-owner-reference-plus-packed-coordinate"
+            },
+            "canonical_payload": {
+              "const": "shared-native-or-mapped-atoms-and-canonical-coordinate-composition"
+            },
+            "derived_facts": {
+              "const": "exact-owner-generation-range-composition-and-semantic-context"
+            },
+            "string_native_materialization": {
+              "const": "JNI-created-byte-char-UTF-shadows-only-never-canonical-spelling"
+            },
+            "collections": {
+              "const": "no-retained-structural-object-per-logical-entry"
+            },
+            "runtime_dependencies": {
+              "const": "self-contained-target-no-Synexia-module-service-or-process"
+            },
+            "layer_ownership": {
+              "const": "appropriate-JDK-module-or-HotSpot-owner-with-independent-admission"
+            },
+            "radical_vm_changes": {
+              "const": "separately-scoped-experimental-project"
+            }
+          },
+          "required": [
+            "string_state",
+            "canonical_payload",
+            "derived_facts",
+            "string_native_materialization",
+            "collections",
+            "runtime_dependencies",
+            "layer_ownership",
+            "radical_vm_changes"
+          ],
+          "additionalProperties": false
+        },
+        "promotion": {
+          "type": "object",
+          "properties": {
+            "method": {
+              "const": "pinned-Maven-OpenRewrite-recipe-execution"
+            },
+            "mapping_updates": {
+              "const": "extend-this-authority-and-existing-lineage-no-competing-registry"
+            },
+            "proof": {
+              "const": "exact-source-and-target-contract-lifecycle-ABI-compiler-native-and-image-evidence"
+            },
+            "performance": {
+              "const": "measure-cold-preparation-and-warm-reuse-separately"
+            },
+            "compatibility": {
+              "const": "preserve-working-JDK21-behavior-with-qualified-fallback-and-invalidation"
+            },
+            "status": {
+              "const": "mapping-or-policy-is-not-runtime-admission"
+            },
+            "feedback": {
+              "const": "target-receipts-and-missing-capabilities-return-to-Synexia-convergence"
+            },
+            "licenses": {
+              "const": "retain-scoped-Synexia-Apache-2.0-and-existing-JDK-third-party-notices"
+            }
+          },
+          "required": [
+            "method",
+            "mapping_updates",
+            "proof",
+            "performance",
+            "compatibility",
+            "status",
+            "feedback",
+            "licenses"
+          ],
+          "additionalProperties": false
+        },
+        "family_mappings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "enum": [
+                  "string",
+                  "precompute",
+                  "collections",
+                  "native",
+                  "class-ast",
+                  "compiler"
+                ]
+              },
+              "label": {
+                "type": "string",
+                "minLength": 1
+              },
+              "target_modules": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              },
+              "mapping_sources": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              },
+              "migration_record_ids": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true
+              },
+              "existing_targets": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "uniqueItems": true,
+                "minItems": 1
+              },
+              "boundary": {
+                "type": "string",
+                "minLength": 1
+              },
+              "admission": {
+                "const": "consult-existing-mappings-and-migration-records"
+              }
+            },
+            "required": [
+              "id",
+              "label",
+              "target_modules",
+              "mapping_sources",
+              "migration_record_ids",
+              "existing_targets",
+              "boundary",
+              "admission"
+            ],
+            "additionalProperties": false,
+            "anyOf": [
+              {
+                "properties": {
+                  "mapping_sources": {
+                    "minItems": 1
+                  }
+                }
+              },
+              {
+                "properties": {
+                  "migration_record_ids": {
+                    "minItems": 1
+                  }
+                }
+              }
+            ]
+          },
+          "minItems": 6,
+          "maxItems": 6,
+          "allOf": [
+            {
+              "contains": {
+                "properties": {
+                  "id": {
+                    "const": "string"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "properties": {
+                  "id": {
+                    "const": "precompute"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "properties": {
+                  "id": {
+                    "const": "collections"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "properties": {
+                  "id": {
+                    "const": "native"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "properties": {
+                  "id": {
+                    "const": "class-ast"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            },
+            {
+              "contains": {
+                "properties": {
+                  "id": {
+                    "const": "compiler"
+                  }
+                },
+                "required": [
+                  "id"
+                ]
+              },
+              "minContains": 1,
+              "maxContains": 1
+            }
+          ]
+        }
+      },
+      "required": [
+        "version",
+        "product_repository",
+        "convergence_repository",
+        "authority",
+        "roles",
+        "recipe_contributions",
+        "compatibility",
+        "naming_analogy",
+        "product_invariant",
+        "promotion",
+        "family_mappings"
+      ],
+      "additionalProperties": false
     }
   }
 }

@@ -1,5 +1,10 @@
 # M3 counterpart naming and runtime version contract
 
+Canonical product policy: [M3JDK21_PORTING_INVARIANT.md](M3JDK21_PORTING_INVARIANT.md).
+The machine-readable `porting_policy` and family references extend the existing
+[name-mapping.json](name-mapping.json); public JDK APIs keep JDK names and M3
+names identify internal replacement/optimization owners.
+
 This extends the retained authority in `name-mapping.json`. It follows the short-pattern/acronym
 rule in `atom-pattern-admission-and-tooling-boundary.md` and the source/target lineage rules in
 `migration-mapping-lifecycle.md`. It is not a replacement registry.

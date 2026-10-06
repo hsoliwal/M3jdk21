@@ -44,7 +44,7 @@ The existing Python validator requires `m3/migration/requirements.txt`. Local
 Maven evidence used an offline, prepopulated dependency cache. It does not prove
 repository-local dependency-mirror completeness.
 
-The executed outer recipe produces 17 exact outputs and checks nine existing
+The executed outer recipe produces 24 exact outputs and checks nine existing
 dependencies. It carries the runtime owner, jtreg probe, existing Java/text
 recipe resources, mapping, image test and both existing workflows. The inner
 Lane28 Java recipe separately reproduces the adapted owner as a Java LST.
@@ -129,3 +129,20 @@ Future ports must compare current target history and keep JDK-specific JNI and
 compiler constraints. Preserve owner/generation binding for other precomputed
 facts; this bitmap's single-threaded mutable-owner proof does not establish a
 classloader, versioned AST or general regex optimization.
+
+## Canonical policy follow-up
+
+The product policy is [M3JDK21_PORTING_INVARIANT.md](../../docs/M3JDK21_PORTING_INVARIANT.md)
+and `porting_policy` in the existing naming map. Synexia's existing donor-boundary
+page points here. Six family groups reference existing names/records, including
+reserved AST/compiler entries. Recipe-module algorithms and generated postimages
+are explicit intake candidates; recipe execution remains authoring/proof tooling.
+
+The original BSR runtime evidence in `evidence/receipt.json` qualifies the earlier
+17-output packet at commit `9e2f2da611ae45a36d84e8b6d71109f5ae3d4e0b`.
+This documentation/policy extension retains those exact runtime bytes and extends
+the same recipe to 24 outputs. `evidence/policy/receipt.json` records current
+recipe/custody/schema checks and the unchanged prior naming/admission authority.
+`verify-plan.py` also runs `verify-policy.py`; it rejects nine policy mutations.
+Historical mapping fixtures accept the schema's optional extension; the current
+live-tree gate requires the canonical policy and exact existing family references.

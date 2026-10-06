@@ -1,113 +1,202 @@
-# SPDX-License-Identifier: Apache-2.0
-name: M3 Lane28 counterparts
-on:
-  pull_request:
-    paths:
-      - '.github/workflows/m3-lane28.yml'
-      - '.m3/openrewrite-recipes/**'
-      - 'm3/tooling/lane28/**'
-      - 'm3/tooling/tq-sync/**'
-      - 'm3/tooling/migration-recipes/**'
-      - 'm3/tooling/image-gates/**'
-      - 'm3/migration/**'
-      - 'm3/docs/name-mapping*'
-      - 'm3/docs/counterpart-naming.md'
-      - 'src/java.base/**'
-      - 'src/hotspot/**'
-      - 'test/jdk/jdk/internal/mindex/**'
-      - 'm3/tooling/tq/**'
-  workflow_dispatch:
-permissions:
-  contents: read
-concurrency:
-  group: m3-lane28-${{ github.ref }}
-  cancel-in-progress: true
-jobs:
-  recipe:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 20
-    steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
-      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
-        with:
-          distribution: temurin
-          java-version: '21.0.8'
-      - name: Pin Maven
-        shell: bash
-        run: |
-          set -euo pipefail
-          curl --fail --location --retry 3 https://archive.apache.org/dist/maven/maven-3/3.9.9/binaries/apache-maven-3.9.9-bin.tar.gz -o "$RUNNER_TEMP/maven.tgz"
-          echo "a555254d6b53d267965a3404ecb14e53c3827c09c3b94b5678835887ab404556bfaf78dcfe03ba76fa2508649dca8531c74bca4d5846513522404d48e8c4ac8b $RUNNER_TEMP/maven.tgz" | sha512sum -c -
-          tar -xzf "$RUNNER_TEMP/maven.tgz" -C "$RUNNER_TEMP"
-          echo "$RUNNER_TEMP/apache-maven-3.9.9/bin" >> "$GITHUB_PATH"
-      - name: Mapping validator dependencies
-        shell: bash
-        run: |
-          python3 -m venv "$RUNNER_TEMP/lane28-python"
-          "$RUNNER_TEMP/lane28-python/bin/python" -m pip install -r m3/migration/requirements.txt
-          echo "$RUNNER_TEMP/lane28-python/bin" >> "$GITHUB_PATH"
-      - name: TQ successor recipe and custody
-        run: |
-          mvn -B -ntp -f m3/tooling/tq-sync/pom.xml verify
-          python3 m3/tooling/tq-sync/verify-plan.py
-      - name: Recipe, UTF-16, mapped-owner, JNI and compiled-kernel gates
-        run: mvn -B -ntp -f m3/tooling/lane28/pom.xml verify
-      - name: Preserve release evidence
-        run: |
-          mkdir -p m3/tooling/lane28/target/release
-          cp m3/tooling/lane28/target/*.log m3/tooling/lane28/target/release/
-          cp m3/tooling/lane28/target/surefire-reports/TEST-*.xml m3/tooling/lane28/target/release/
-      - name: Native undefined-behavior gate
-        run: mvn -B -ntp -f m3/tooling/lane28/pom.xml -Dlane28.sanitize=true verify
-      - name: Predecessor TQ recipe and regression
-        run: mvn -B -ntp -f m3/tooling/tq/pom.xml verify
-      - name: Installed bytes and retained mapping
-        shell: bash
-        run: |
-          python3 m3/tooling/lane28/verify-plan.py
-          python3 m3/tooling/tq/verify-plan.py
-          python3 m3/migration/migration.py validate . --previous m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt.before
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
-        with:
-          name: lane28-recipe-${{ github.sha }}
-          path: |
-            m3/tooling/tq-sync/target/surefire-reports/
-            m3/tooling/tq-sync/target/custody.json
-            m3/tooling/lane28/target/*.log
-            m3/tooling/lane28/target/*compilation.xml
-            m3/tooling/lane28/target/custody.json
-            m3/tooling/lane28/target/surefire-reports/
-            m3/tooling/lane28/target/release/
-          if-no-files-found: error
-  image:
-    needs: recipe
-    runs-on: ubuntu-24.04
-    timeout-minutes: 120
-    steps:
-      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
-      - uses: actions/setup-java@b6effb05e454b25005698d916606bdc6ffcbf961
-        with:
-          distribution: temurin
-          java-version: '21.0.8'
-      - name: Build dependencies
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y autoconf make gcc g++ zip unzip libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
-      - name: Build complete fastdebug image
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p m3/tooling/lane28/target/image
-          bash configure --with-boot-jdk="$JAVA_HOME" --with-debug-level=fastdebug --with-jvm-variants=server --enable-warnings-as-errors 2>&1 | tee m3/tooling/lane28/target/image/configure.log
-          make JOBS=2 images 2>&1 | tee m3/tooling/lane28/target/image/build.log
-      - name: Qualify compiled kernels and M3 interpreter boundary
-        env:
-          M3_TEST_JDK: ${{ github.workspace }}/build/linux-x86_64-server-fastdebug/images/jdk
-        run: bash m3/tooling/lane28/verify-image.sh
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        if: always()
-        with:
-          name: lane28-image-${{ github.sha }}
-          path: m3/tooling/lane28/target/image/
-          if-no-files-found: error
+{
+  "schema": "m3.sealed-install/1",
+  "recipe_id": "lane28-restoration-szf-20261006",
+  "outputs": [
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Address28.java",
+      "before": null,
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3Address28.java.txt",
+        "sha256": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java",
+      "before": null,
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3BitLane28.java.txt",
+        "sha256": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Bits.java",
+      "before": null,
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3Bits.java.txt",
+        "sha256": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java",
+      "before": null,
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3IntLane28.java.txt",
+        "sha256": "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java",
+      "before": null,
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3LongLane28.java.txt",
+        "sha256": "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644"
+      }
+    },
+    {
+      "path": "test/jdk/jdk/internal/mindex/M3Lane28Cost.java",
+      "before": null,
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3Lane28Cost.java.txt",
+        "sha256": "2296066665b8e54238daf2db46329cb0bf29c9ded0182f05bbb8ca2365da99ca"
+      }
+    },
+    {
+      "path": "test/jdk/jdk/internal/mindex/M3Lane28Test.java",
+      "before": null,
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3Lane28Test.java.txt",
+        "sha256": "a64c0dceb51627a7e4ca1a1a65bfc8bf388a9b8f1b622afca5cf84f320740aa3"
+      }
+    },
+    {
+      "path": ".github/workflows/m3-lane28.yml",
+      "before": null,
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/workflow.yml.txt",
+        "sha256": "1a0ef88a0edc06a87cc2d899edccb2ae931d7bec303448277b1c83f7ea782ecb"
+      }
+    },
+    {
+      "path": "m3/docs/counterpart-naming.md",
+      "before": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/counterpart-naming.md.txt.before",
+        "sha256": "8a32b9ba61492c9b232439b9d917db12f3d8d5b25236bb4acb0439c32e16ac8d"
+      },
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/counterpart-naming.md.txt",
+        "sha256": "56626d53928e650c0b87e3505718bffd8e3db4c335eee087760fc4fd5d7618b9"
+      }
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "before": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt.before",
+        "sha256": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60"
+      },
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt",
+        "sha256": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da"
+      }
+    },
+    {
+      "path": "m3/tooling/lane28/feedback/cost-1.log",
+      "before": null,
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/cost-1.log.txt",
+        "sha256": "4a913fb62f874130d502525ba55fe801b3380105083d12753cc58609347d17c3"
+      }
+    },
+    {
+      "path": "m3/tooling/lane28/feedback/cost-2.log",
+      "before": null,
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/cost-2.log.txt",
+        "sha256": "862b574905978ff2f58fdda899fb8e334bf1bbd4af93a12ded82373a7f13a221"
+      }
+    },
+    {
+      "path": "m3/tooling/lane28/feedback/lane28-20261005.json",
+      "before": null,
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/feedback.json.txt",
+        "sha256": "9f354d3d351652704bac00126d3c6bbde711ef156529138f96c36c0677c1790e"
+      }
+    },
+    {
+      "path": "m3/tooling/lane28/feedback/lane28-20261005.md",
+      "before": null,
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/feedback.md.txt",
+        "sha256": "9fb9210c0e55082361ddea59fa96f595d18920888348aa3e83e728d55f72e084"
+      }
+    },
+    {
+      "path": "m3/tooling/lane28/verify-image.sh",
+      "before": null,
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/verify-image.sh.txt",
+        "sha256": "78ab9aa7a036687b303007fb2395b1a282da38dfb6129fab62b4ce92944d4331"
+      }
+    },
+    {
+      "path": "src/java.base/share/legal/synexia.md",
+      "before": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/synexia.md.txt.before",
+        "sha256": "f2c1255f1a27c75e7c6835e01f61e3fb861407571410365e9b64267c7f27f516"
+      },
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/synexia.md.txt",
+        "sha256": "5142333a2bcde8c5555b123a685046963c860d52552b4f8f1d19532571f0ae7a"
+      }
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3BitLane28.c",
+      "before": null,
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/M3BitLane28.c.txt",
+        "sha256": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f"
+      }
+    },
+    {
+      "path": "m3/tooling/lane28/check-log.py",
+      "before": null,
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/check-log.py.txt",
+        "sha256": "3401754e77113c76d15c7f70844ae95e210000fb31c2be4a15b668aa7d3c64e5"
+      }
+    },
+    {
+      "path": "test/jdk/jdk/internal/mindex/M3SparseFillTest.java",
+      "before": null,
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3SparseFillTest.java.txt",
+        "sha256": "f560cccbf14e7486b0abddf3783f311d390dbe1b355283f5cc4b2a50ed0b2903"
+      }
+    }
+  ],
+  "guards": [
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
+      "sha256": "0e65b26f674f68fea30151ea63a17faef2f88ca0f0679723bb3dc230fda22b72"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+    },
+    {
+      "path": ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapTaskRecipe.java",
+      "sha256": "58bac6968ebd2cce6f43f338c289db14435b3ef05ed2abc13402275285b89462"
+    },
+    {
+      "path": ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe.java",
+      "sha256": "05ac05e7f3cb7549d26866a61dec0edf19515317c95f73db82d1c517cad88ef5"
+    },
+    {
+      "path": "m3/migration/recipe.py",
+      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
+    },
+    {
+      "path": "make/CompileJavaModules.gmk",
+      "sha256": "45941b0fb6da4dd5284db9fada24f4aff51fcdf39ba23bc13cee8052273bee5e"
+    },
+    {
+      "path": "make/modules/java.base/Lib.gmk",
+      "sha256": "b097a927a83875b4b4c92ce5c3b9ecd4e4acb4d81962719d31d6df7ae0adad47"
+    },
+    {
+      "path": "make/modules/java.base/lib/CoreLibraries.gmk",
+      "sha256": "13ff8e34221af4f6c2ff814dee1a9abdab848519788d22df66060407321a58e4"
+    }
+  ],
+  "plan_sha256": "efb0fbadcf62a8ab82371dfbe14b95f81429ba5b2ceac061a964ae35da811a9f"
+}

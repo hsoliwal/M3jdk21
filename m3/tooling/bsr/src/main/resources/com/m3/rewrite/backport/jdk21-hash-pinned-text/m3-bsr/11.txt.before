@@ -1,78 +1,61 @@
-#!/usr/bin/env python3
+#!/usr/bin/env bash
 # SPDX-License-Identifier: Apache-2.0
-"""Verify TQ reconciliation, preserved authority, and sealed replay/refusals."""
-import importlib.util
-import json
-from pathlib import Path
-import tempfile
-
-CRATE = Path(__file__).resolve().parent
-ROOT = CRATE.parents[2]
-spec = importlib.util.spec_from_file_location('sealed', ROOT / 'm3/migration/recipe.py')
-sealed = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(sealed)
-plan_path = CRATE / 'plan.json'
-plan, rows = sealed.sealed_plan(plan_path)
-assert sealed.execute(plan_path, ROOT, 'check')['state'] == 'after'
-for row in rows:
-    assert (CRATE / 'target/generated' / row['path']).read_bytes() == row['after']
-
-# Only the existing TQ record may advance; preserve the other 51 records and
-# every top-level authority field, including all 20 gates. No status promotion.
-mapping = next(row for row in rows if row['path'] == 'm3/docs/name-mapping.json')
-before_map = json.loads(mapping['before'])
-after_map = json.loads(mapping['after'])
-identity = 'synexia.counterpart.MIndexRegexTrigramQuery'
-for document in (before_map, after_map):
-    record = next(r for r in document['migration']['records'] if r['id'] == identity)
-    assert record['status'] == 'implemented-unverified'
-    document['migration']['records'].remove(record)
-assert before_map == after_map, 'Unrelated mapping authority changed'
-assert len(after_map['migration']['records']) == 51
-assert len(after_map['migration']['gates']) == 20
-kernel = 'src/java.base/share/classes/jdk/internal/mindex/M3TQ.java'
-assert kernel in {guard['path'] for guard in plan['guards']}
-assert kernel not in {row['path'] for row in rows}, 'Existing runtime owner must survive'
-
-events = []
-with tempfile.TemporaryDirectory(prefix='m3-tq-sync-') as temporary:
-    root = Path(temporary)
-    for guard in plan['guards']:
-        path = root / guard['path']
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_bytes((ROOT / guard['path']).read_bytes())
-    for row in rows:
-        path = root / row['path']
-        path.parent.mkdir(parents=True, exist_ok=True)
-        if row['before'] is not None: path.write_bytes(row['before'])
-    for mode, state, writes in [('check', 'before', 0), ('apply', 'after', len(rows)),
-                                ('apply', 'after', 0), ('rollback', 'before', len(rows)),
-                                ('rollback', 'before', 0)]:
-        result = sealed.execute(plan_path, root, mode)
-        assert (result['state'], result['writes']) == (state, writes)
-        events.append({'mode': mode, **result})
-
-    def refusal(label):
-        snapshot = {str(p.relative_to(root)): p.read_bytes() for p in root.rglob('*') if p.is_file()}
-        try:
-            sealed.execute(plan_path, root, 'apply')
-        except sealed.Refusal:
-            events.append({'refusal': label})
-        else:
-            raise AssertionError('Unexpected admission: ' + label)
-        assert snapshot == {str(p.relative_to(root)): p.read_bytes() for p in root.rglob('*') if p.is_file()}
-
-    path = root / rows[0]['path']
-    path.write_bytes(rows[0]['before'] + b'\ndrift\n')
-    refusal('destination drift')
-    path.write_bytes(rows[0]['after'])
-    refusal('mixed states')
-    path.write_bytes(rows[0]['before'])
-    guard = root / plan['guards'][0]['path']
-    guard.write_bytes(guard.read_bytes() + b'\ndrift\n')
-    refusal('dependency drift')
-
-result = {'schema': 'm3.tq-sync-custody/1', 'plan_sha256': plan['plan_sha256'],
-          'generated_outputs': len(rows), 'events': events}
-(CRATE / 'target/custody.json').write_text(json.dumps(result, indent=2) + '\n')
-print('PASS: exact recipe outputs, fixed point, rollback and three no-write refusals')
+# Linux image qualification. No patch-module: use the built fork's java.base.
+# m3-c1/c2 names describe requests: M3 String storage must force interpretation.
+set -euo pipefail
+root=$(cd "$(dirname "$0")/../../.." && pwd)
+: "${M3_TEST_JDK:?Set the absolute path of the freshly built fastdebug M3JDK image}"
+image=$(cd "$M3_TEST_JDK" && pwd)
+out="$root/m3/tooling/lane28/target/image"
+mkdir -p "$out/classes" "$out/headers"
+"$image/bin/java" -version > "$out/version.log" 2>&1
+if ! grep -q fastdebug "$out/version.log"; then
+  echo 'A matching fastdebug fork image is required' >&2
+  exit 2
+fi
+testdir="$root/test/jdk/jdk/internal/mindex"
+"$image/bin/javac" -source 21 -target 21 -proc:none -Xlint:all -Werror \
+  --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+  -d "$out/classes" "$testdir/M3Lane28Test.java" "$testdir/M3Lane28Cost.java" "$testdir/M3SparseFillTest.java" \
+  > "$out/javac.log" 2>&1
+# The production symbol must be exported from this image's own libjava.
+nm -D "$image/lib/libjava.so" > "$out/libjava-symbols.log"
+grep -q Java_jdk_internal_mindex_M3BitLane28_cardinality0 "$out/libjava-symbols.log"
+for mode in interpreter mixed c1 c2 m3-c1 m3-c2 m3-c2-nocompact; do
+  flags=()
+  compiler=''
+  case "$mode" in
+    interpreter) flags+=(-Xint);;
+    c1|m3-c1) compiler=c1; flags+=(-XX:TieredStopAtLevel=1);;
+    c2|m3-c2|m3-c2-nocompact) compiler=c2; flags+=(-XX:-TieredCompilation);;
+  esac
+  if [[ -n "$compiler" ]]; then
+    flags+=(-Xbatch -XX:CompileThreshold=100 -XX:+UnlockDiagnosticVMOptions
+      -XX:+LogCompilation "-XX:LogFile=$out/$mode-compilation.xml")
+  fi
+  if [[ "$mode" == m3-* ]]; then
+    flags+=(-XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage)
+  fi
+  if [[ "$mode" == *-nocompact ]]; then flags+=(-XX:-CompactStrings); fi
+  for main in M3Lane28Test M3SparseFillTest; do
+    runflags=("${flags[@]}")
+    if [[ -n "$compiler" ]]; then runflags+=("-XX:LogFile=$out/$mode-$main-compilation.xml"); fi
+    timeout 240 "$image/bin/java" -Xmx256m -ea -esa -Xcheck:jni \
+      -XX:-CreateCoredumpOnCrash "${runflags[@]}" \
+      --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+      --add-opens java.base/jdk.internal.mindex=ALL-UNNAMED -cp "$out/classes" "$main" \
+      > "$out/$mode-$main.log" 2>&1
+  done
+  grep -q 'PASS checks=' "$out/$mode-M3SparseFillTest.log"
+  grep -q 'maintainedCounts=true' "$out/$mode-M3Lane28Test.log"
+  if [[ -n "$compiler" ]]; then
+    evidence_flags=()
+    if [[ "$mode" == m3-* ]]; then evidence_flags+=(--m3-interpreter); fi
+    python3 "$root/m3/tooling/lane28/check-log.py" \
+      "$out/$mode-M3Lane28Test-compilation.xml" "$compiler" jdk.internal.mindex.M3BitLane28 "${evidence_flags[@]}"
+  fi
+done
+echo 'PASS: bounded fork-image Lane28 and native peer tests across four normal modes and three M3 interpreter-boundary requests'
+timeout 240 "$image/bin/java" -Xbatch -XX:-TieredCompilation -XX:CompileThreshold=100 \
+  --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+  -cp "$out/classes" M3Lane28Cost > "$out/cost.log" 2>&1

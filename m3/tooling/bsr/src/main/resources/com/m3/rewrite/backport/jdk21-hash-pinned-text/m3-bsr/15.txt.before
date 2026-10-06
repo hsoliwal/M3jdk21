@@ -1,271 +1,61 @@
-// SPDX-License-Identifier: Apache-2.0
-package jdk.internal.mindex;
-
-/**
- * Lazy occupancy/flag lane. Each touched 4,096-slot logical block owns exactly 64 long words.
- */
-public final class M3BitLane28 {
-    private final long[][][] regions = new long[M3Address28.REGION_COUNT][][];
-    private int allocatedRegions;
-    private int allocatedBlocks;
-    private int cardinality;
-    // Exact derived facts, prepared only by a nontrivial rank/select query. No payload copy.
-    private int[] regionCounts;
-    private short[][] pageCounts;
-
-    public boolean get(int slot) {
-        M3Address28.checkSlot(slot);
-        long[][] region = regions[M3Address28.region(slot)];
-        if (region == null) {
-            return false;
-        }
-        long[] words = region[M3Address28.block(slot)];
-        if (words == null) {
-            return false;
-        }
-        int offset = M3Address28.offset(slot);
-        return (words[M3Bits.wordIndex(offset)] & M3Bits.bitMask(offset)) != 0L;
-    }
-
-    public void set(int slot) {
-        set(slot, true);
-    }
-
-    public void clear(int slot) {
-        set(slot, false);
-    }
-
-    public void set(int slot, boolean value) {
-        M3Address28.checkSlot(slot);
-        int offset = M3Address28.offset(slot);
-        int wordIndex = M3Bits.wordIndex(offset);
-        long mask = M3Bits.bitMask(offset);
-
-        if (!value) {
-            long[][] region = regions[M3Address28.region(slot)];
-            if (region == null) {
-                return;
-            }
-            long[] words = region[M3Address28.block(slot)];
-            if (words == null || (words[wordIndex] & mask) == 0L) {
-                return;
-            }
-            words[wordIndex] &= ~mask;
-            changeCardinality(slot, -1);
-            return;
-        }
-
-        long[] words = ensureBlock(slot);
-        if ((words[wordIndex] & mask) == 0L) {
-            words[wordIndex] |= mask;
-            changeCardinality(slot, 1);
-        }
-    }
-
-    public void flip(int slot) {
-        if (get(slot)) {
-            clear(slot);
-        } else {
-            set(slot);
-        }
-    }
-
-    public int cardinality() {
-        return cardinality;
-    }
-
-    public int allocatedRegionCount() {
-        return allocatedRegions;
-    }
-
-    public int allocatedBlockCount() {
-        return allocatedBlocks;
-    }
-
-    /** Bitmap payload only; excludes lazy rank/select metadata, directories and headers. */
-    public long payloadBytes() {
-        return (long) allocatedBlocks
-                * M3Address28.OCCUPANCY_WORDS_PER_BLOCK
-                * Long.BYTES;
-    }
-
-    /** Returns the first set slot at or after from, or -1; MAX_SLOTS is a valid end. */
-    public int nextSetBit(int from) {
-        M3Address28.checkRange(from, M3Address28.MAX_SLOTS);
-        while (from < M3Address28.MAX_SLOTS) {
-            long[][] region = regions[from >>> 20];
-            if (region == null) { from = ((from >>> 20) + 1) << 20; continue; }
-            long[] page = region[(from >>> 12) & 255];
-            int end = ((from >>> 12) + 1) << 12;
-            if (page != null) {
-                int wordIndex = (from & 4095) >>> 6;
-                long word = page[wordIndex] & (-1L << (from & 63));
-                for (;;) {
-                    if (word != 0) return (from & ~4095) + (wordIndex << 6)
-                            + Long.numberOfTrailingZeros(word);
-                    if (++wordIndex == 64) break;
-                    word = page[wordIndex];
-                }
-            }
-            from = end;
-        }
-        return -1;
-    }
-
-    /** Returns the last set slot at or before from, or -1; -1 is a valid empty prefix. */
-    public int previousSetBit(int from) {
-        if (from < -1 || from >= M3Address28.MAX_SLOTS) {
-            throw new IndexOutOfBoundsException(from);
-        }
-        while (from >= 0) {
-            long[][] region = regions[from >>> 20];
-            if (region == null) { from = (from & ~((1 << 20) - 1)) - 1; continue; }
-            long[] page = region[(from >>> 12) & 255];
-            if (page != null) {
-                int wordIndex = (from & 4095) >>> 6;
-                long word = page[wordIndex] & (-1L >>> (63 - (from & 63)));
-                for (;;) {
-                    if (word != 0) return (from & ~4095) + (wordIndex << 6)
-                            + 63 - Long.numberOfLeadingZeros(word);
-                    if (--wordIndex < 0) break;
-                    word = page[wordIndex];
-                }
-            }
-            from = (from & ~4095) - 1;
-        }
-        return -1;
-    }
-
-    /** Counts set bits in [from, to), skipping absent regions and pages. */
-    public int cardinality(int from, int to) {
-        M3Address28.checkRange(from, to);
-        if (from == 0 && to == M3Address28.MAX_SLOTS) return cardinality;
-        int count = 0;
-        while (from < to) {
-            long[][] region = regions[from >>> 20];
-            if (region == null) { from = Math.min(to, ((from >>> 20) + 1) << 20); continue; }
-            int regionEnd = ((from >>> 20) + 1) << 20;
-            if (regionCounts != null && (from & ((1 << 20) - 1)) == 0 && regionEnd <= to) {
-                count += regionCounts[from >>> 20];
-                from = regionEnd;
-                continue;
-            }
-            long[] page = region[(from >>> 12) & 255];
-            int end = Math.min(to, ((from >>> 12) + 1) << 12);
-            if (pageCounts != null && (from & 4095) == 0 && end - from == 4096) {
-                count += pageCounts[from >>> 20][(from >>> 12) & 255];
-                from = end;
-            } else if (page != null) {
-                while (from < end) {
-                    int wordEnd = Math.min(end, (from | 63) + 1);
-                    long mask = (-1L << (from & 63)) & (-1L >>> (63 - ((wordEnd - 1) & 63)));
-                    count += Long.bitCount(page[(from & 4095) >>> 6] & mask);
-                    from = wordEnd;
-                }
-            } else from = end;
-        }
-        return count;
-    }
-
-    /**
-     * Exclusive rank: number of set slots below end. The first nontrivial rank/select
-     * scans allocated bitmap words to prepare exact page/region counts. Subsequent
-     * queries skip complete pages/regions; successful writes maintain the counts.
-     * Metadata is bounded by 256 ints and 256 lazily allocated arrays of 256 shorts,
-     * plus one reference directory and headers. This lane remains single-threaded.
-     */
-    public int rank(int end) {
-        M3Address28.checkRange(0, end);
-        if (end == 0 || cardinality == 0) return 0;
-        if (end == M3Address28.MAX_SLOTS) return cardinality;
-        prepareCounts();
-        return cardinality(0, end);
-    }
-
-    /** Returns the slot of the zero-based ordinal set bit, or -1 if ordinal is out of range. */
-    public int select(int ordinal) {
-        if (ordinal < 0 || ordinal >= cardinality) return -1;
-        prepareCounts();
-        for (int r = 0; r < regions.length; r++) {
-            if (ordinal >= regionCounts[r]) { ordinal -= regionCounts[r]; continue; }
-            long[][] region = regions[r];
-            for (int b = 0; b < region.length; b++) {
-                int pageCount = pageCounts[r][b];
-                if (ordinal >= pageCount) { ordinal -= pageCount; continue; }
-                long[] page = region[b];
-                for (int w = 0; w < page.length; w++) {
-                    long word = page[w];
-                    int count = Long.bitCount(word);
-                    if (ordinal >= count) { ordinal -= count; continue; }
-                    while (ordinal-- > 0) word &= word - 1;
-                    return (r << 20) | (b << 12) | (w << 6) | Long.numberOfTrailingZeros(word);
-                }
-            }
-        }
-        throw new IllegalStateException("concurrent mutation of a single-threaded lane");
-    }
-
-    /**
-     * Explicit JNI peer of cardinality(from,to), linked into the JDK libjava library.
-     * Reads one existing bitmap page at a time; JNI may copy its words. No flattening,
-     * retained pointer, callback, implicit fallback or speed guarantee is involved.
-     */
-    public int cardinalityNative(int from, int to) {
-        M3Address28.checkRange(from, to);
-        return cardinality0(regions, from, to);
-    }
-
-    private static native int cardinality0(long[][][] regions, int from, int to);
-
-    private void changeCardinality(int slot, int delta) {
-        cardinality += delta;
-        if (regionCounts != null) {
-            regionCounts[slot >>> 20] += delta;
-            pageCounts[slot >>> 20][(slot >>> 12) & 255] += (short) delta;
-        }
-    }
-
-    private void prepareCounts() {
-        if (regionCounts != null) return;
-        int[] totals = new int[M3Address28.REGION_COUNT];
-        short[][] counts = new short[M3Address28.REGION_COUNT][];
-        for (int r = 0; r < regions.length; r++) {
-            long[][] region = regions[r];
-            if (region == null) continue;
-            counts[r] = new short[M3Address28.BLOCKS_PER_REGION];
-            for (int b = 0; b < region.length; b++) {
-                long[] page = region[b];
-                if (page == null) continue;
-                int count = 0;
-                for (long word : page) count += Long.bitCount(word);
-                counts[r][b] = (short) count; // Page cardinality is in [0, 4096].
-                totals[r] += count;
-            }
-        }
-        // Publish only a complete index; allocation failure leaves the owner unchanged.
-        pageCounts = counts;
-        regionCounts = totals;
-    }
-
-    private long[] ensureBlock(int slot) {
-        int regionIndex = M3Address28.region(slot);
-        long[][] region = regions[regionIndex];
-        if (region == null) {
-            region = new long[M3Address28.BLOCKS_PER_REGION][];
-            if (pageCounts != null) {
-                // Allocate metadata before publishing a new region or changing a payload bit.
-                pageCounts[regionIndex] = new short[M3Address28.BLOCKS_PER_REGION];
-            }
-            regions[regionIndex] = region;
-            allocatedRegions++;
-        }
-        int blockIndex = M3Address28.block(slot);
-        long[] words = region[blockIndex];
-        if (words == null) {
-            words = new long[M3Address28.OCCUPANCY_WORDS_PER_BLOCK];
-            region[blockIndex] = words;
-            allocatedBlocks++;
-        }
-        return words;
-    }
-}
+#!/usr/bin/env bash
+# SPDX-License-Identifier: Apache-2.0
+# Linux image qualification. No patch-module: use the built fork's java.base.
+# m3-c1/c2 names describe requests: M3 String storage must force interpretation.
+set -euo pipefail
+root=$(cd "$(dirname "$0")/../../.." && pwd)
+: "${M3_TEST_JDK:?Set the absolute path of the freshly built fastdebug M3JDK image}"
+image=$(cd "$M3_TEST_JDK" && pwd)
+out="$root/m3/tooling/lane28/target/image"
+mkdir -p "$out/classes" "$out/headers"
+"$image/bin/java" -version > "$out/version.log" 2>&1
+if ! grep -q fastdebug "$out/version.log"; then
+  echo 'A matching fastdebug fork image is required' >&2
+  exit 2
+fi
+testdir="$root/test/jdk/jdk/internal/mindex"
+"$image/bin/javac" -source 21 -target 21 -proc:none -Xlint:all -Werror \
+  --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+  -d "$out/classes" "$testdir/M3Lane28Test.java" "$testdir/M3Lane28Cost.java" "$testdir/M3SparseFillTest.java" \
+  > "$out/javac.log" 2>&1
+# The production symbol must be exported from this image's own libjava.
+nm -D "$image/lib/libjava.so" > "$out/libjava-symbols.log"
+grep -q Java_jdk_internal_mindex_M3BitLane28_cardinality0 "$out/libjava-symbols.log"
+for mode in interpreter mixed c1 c2 m3-c1 m3-c2 m3-c2-nocompact; do
+  flags=()
+  compiler=''
+  case "$mode" in
+    interpreter) flags+=(-Xint);;
+    c1|m3-c1) compiler=c1; flags+=(-XX:TieredStopAtLevel=1);;
+    c2|m3-c2|m3-c2-nocompact) compiler=c2; flags+=(-XX:-TieredCompilation);;
+  esac
+  if [[ -n "$compiler" ]]; then
+    flags+=(-Xbatch -XX:CompileThreshold=100 -XX:+UnlockDiagnosticVMOptions
+      -XX:+LogCompilation "-XX:LogFile=$out/$mode-compilation.xml")
+  fi
+  if [[ "$mode" == m3-* ]]; then
+    flags+=(-XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage)
+  fi
+  if [[ "$mode" == *-nocompact ]]; then flags+=(-XX:-CompactStrings); fi
+  for main in M3Lane28Test M3SparseFillTest; do
+    runflags=("${flags[@]}")
+    if [[ -n "$compiler" ]]; then runflags+=("-XX:LogFile=$out/$mode-$main-compilation.xml"); fi
+    timeout 240 "$image/bin/java" -Xmx256m -ea -esa -Xcheck:jni \
+      -XX:-CreateCoredumpOnCrash "${runflags[@]}" \
+      --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+      --add-opens java.base/jdk.internal.mindex=ALL-UNNAMED -cp "$out/classes" "$main" \
+      > "$out/$mode-$main.log" 2>&1
+  done
+  grep -q 'PASS checks=' "$out/$mode-M3SparseFillTest.log"
+  grep -q 'maintainedCounts=true' "$out/$mode-M3Lane28Test.log"
+  if [[ -n "$compiler" ]]; then
+    evidence_flags=()
+    if [[ "$mode" == m3-* ]]; then evidence_flags+=(--m3-interpreter); fi
+    python3 "$root/m3/tooling/lane28/check-log.py" \
+      "$out/$mode-M3Lane28Test-compilation.xml" "$compiler" jdk.internal.mindex.M3BitLane28 "${evidence_flags[@]}"
+  fi
+done
+echo 'PASS: bounded fork-image Lane28 and native peer tests across four normal modes and three M3 interpreter-boundary requests'
+timeout 240 "$image/bin/java" -Xbatch -XX:-TieredCompilation -XX:CompileThreshold=100 \
+  --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+  -cp "$out/classes" M3Lane28Cost > "$out/cost.log" 2>&1

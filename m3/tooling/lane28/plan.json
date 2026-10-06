@@ -81,11 +81,11 @@
       "path": "m3/docs/name-mapping.json",
       "before": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt.before",
-        "sha256": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60"
+        "sha256": "86b6c5438d9f2b91be295194d887fb9545617d3e40abcd54fd1eb86cd995b753"
       },
       "after": {
         "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt",
-        "sha256": "83c74c0b5d8d0d82ed22d7a7a5ce1963c074b782ecf5a67cfdd33b8e73ea84d8"
+        "sha256": "38e79e954271ead13946ddfe4b391ae3f357d9a3ecc7f73a3bea2d2219f2c901"
       }
     },
     {
@@ -198,5 +198,5 @@
       "sha256": "13ff8e34221af4f6c2ff814dee1a9abdab848519788d22df66060407321a58e4"
     }
   ],
-  "plan_sha256": "cd909f789a5c33124ae231b224749a4551201eb6804ca8960f90dafee3282eac"
+  "plan_sha256": "73b489323579331d62dc827ecb379ddeaed08ecbbb8446755255d56e3fb42c51"
 }

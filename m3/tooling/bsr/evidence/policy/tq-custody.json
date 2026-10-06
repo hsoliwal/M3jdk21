@@ -1,0 +1,66 @@
+{
+  "schema": "m3.tq-custody/1",
+  "plan_sha256": "4c16d92d036d1d156dacdd651b35056ea12daa55bfb19b92d6f57ef1d81c227b",
+  "generated_outputs": 8,
+  "retained_records": 46,
+  "retained_gates": 20,
+  "events": [
+    {
+      "mode": "check",
+      "recipe": "tq-1",
+      "plan_sha256": "4c16d92d036d1d156dacdd651b35056ea12daa55bfb19b92d6f57ef1d81c227b",
+      "state": "before",
+      "files": 8,
+      "writes": 0
+    },
+    {
+      "mode": "apply",
+      "recipe": "tq-1",
+      "plan_sha256": "4c16d92d036d1d156dacdd651b35056ea12daa55bfb19b92d6f57ef1d81c227b",
+      "state": "after",
+      "files": 8,
+      "writes": 8
+    },
+    {
+      "mode": "apply",
+      "recipe": "tq-1",
+      "plan_sha256": "4c16d92d036d1d156dacdd651b35056ea12daa55bfb19b92d6f57ef1d81c227b",
+      "state": "after",
+      "files": 8,
+      "writes": 0
+    },
+    {
+      "mode": "check",
+      "recipe": "tq-1",
+      "plan_sha256": "4c16d92d036d1d156dacdd651b35056ea12daa55bfb19b92d6f57ef1d81c227b",
+      "state": "after",
+      "files": 8,
+      "writes": 0
+    },
+    {
+      "mode": "rollback",
+      "recipe": "tq-1",
+      "plan_sha256": "4c16d92d036d1d156dacdd651b35056ea12daa55bfb19b92d6f57ef1d81c227b",
+      "state": "before",
+      "files": 8,
+      "writes": 8
+    },
+    {
+      "mode": "rollback",
+      "recipe": "tq-1",
+      "plan_sha256": "4c16d92d036d1d156dacdd651b35056ea12daa55bfb19b92d6f57ef1d81c227b",
+      "state": "before",
+      "files": 8,
+      "writes": 0
+    },
+    {
+      "refusal": "occupied target, no writes"
+    },
+    {
+      "refusal": "mixed pre/postimages, no writes"
+    },
+    {
+      "refusal": "dependency drift, no writes"
+    }
+  ]
+}

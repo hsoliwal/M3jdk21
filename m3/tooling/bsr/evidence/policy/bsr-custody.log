@@ -1,0 +1,2 @@
+PASS: canonical product policy, six existing family mappings, unchanged authority and nine rejected policy drifts
+PASS: exact outputs, selective mapping, fixed point, rollback, predecessor chain and seven no-write refusals

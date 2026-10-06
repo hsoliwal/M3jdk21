@@ -1,0 +1,38 @@
+{
+  "schema": "m3.porting-policy-receipt/1",
+  "prior_target_commit": "9e2f2da611ae45a36d84e8b6d71109f5ae3d4e0b",
+  "recipe": "M3Jdk21HashPinnedTextSnapshotRecipe/m3-bsr",
+  "plan_sha256": "4b933cdb25ccac85ce8e42a0f577d3135573ced1ea07add0a1d708124ac77f49",
+  "outputs": 24,
+  "tests": {
+    "bsr": 11,
+    "tq_sync": 3,
+    "tq_final_generation": 1,
+    "lane28_final_generation": 1,
+    "policy_mutants_rejected": 9,
+    "custody_verifiers": 4
+  },
+  "runtime_sources_tests_and_make_files": "byte-identical to prior target commit within the scoped checkout",
+  "prior_bsr_runtime_ubsan_evidence": "../receipt.json at prior_target_commit; no runtime mutation in policy follow-up",
+  "mapping": "prior complete mapping unchanged after removing new porting_policy",
+  "canonical_invariant": "m3/docs/M3JDK21_PORTING_INVARIANT.md",
+  "source_handoff": "hsoliwal/com.synexia:docs/M3JDK21_DONOR_BOUNDARY.md",
+  "completion": "INCOMPLETE",
+  "hosted_ci": "not established for this follow-up",
+  "evidence": {
+    "bsr-custody.log": "b10ddc46e4032285942e4cbe8b59eca68fcc8313bb5da17145dce8ebb1c7808f",
+    "bsr-custody.json": "1d189322a28c63409bc39b61ec6dda1fabdd968669de0add578475f0768ba9b9",
+    "final-lane28.log": "8b57cda83404b7a4559ef98a628d4345b48fcc283cafbc6ea56b000e10b31308",
+    "policy-proof.json": "2a6fd4eb547b90b05b7d7e75029578dba1b06965b039cfe55d0ad8f480afe772",
+    "tq-custody.json": "3f03c3f63e15184cd73188d935341a23f938ddfc4cb77cccefad1b1207334fdc",
+    "final-tq.log": "b51659bad5d08b755559ebe94d98c9817889b735655495dd45df4b838b65aeab",
+    "mapping.log": "d4578b77ded4c87f33240fad4588e418b3157992288cbf4a1a4e38be14ece15b",
+    "lane28-custody.json": "2e09178f312edb23c740504a2c2607a76e293a38484a0ddffd980e62478f3b24",
+    "tq-sync-custody.json": "d58b41b86ef98407c88f0392959185049742666516d19f1d48c90eede0b81737",
+    "final-maven.log": "b817a4efb394167011300803a643150156ef3a644818c21c04b0e700a4597169",
+    "final-tq-sync.log": "40f6433d34d5badca60eb6e2ac44164c42bda200d43da9735e8925eab7e62eaa",
+    "tq-custody.log": "83c46d50af06b6c6d1654e1f6e867a8f39af0eee2724b5a46e1be406a68532f6",
+    "tq-sync-custody.log": "cf7adaa51f0fcef894ac98bd9a0d74f2ae58615dfe81721845f4dc55af16e825",
+    "lane28-custody.log": "83c46d50af06b6c6d1654e1f6e867a8f39af0eee2724b5a46e1be406a68532f6"
+  }
+}

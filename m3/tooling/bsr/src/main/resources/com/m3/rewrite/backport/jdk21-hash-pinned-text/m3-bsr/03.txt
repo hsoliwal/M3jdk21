@@ -1,202 +1,138 @@
-{
-  "schema": "m3.sealed-install/1",
-  "recipe_id": "lane28-restoration-szf-20261006",
-  "outputs": [
-    {
-      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Address28.java",
-      "before": null,
-      "after": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3Address28.java.txt",
-        "sha256": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa"
-      }
-    },
-    {
-      "path": "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java",
-      "before": null,
-      "after": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3BitLane28.java.txt",
-        "sha256": "ec5b7f126dfce9650343c4769a883b61f503b462cd8a2b87c79c15efc9d9a424"
-      }
-    },
-    {
-      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Bits.java",
-      "before": null,
-      "after": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3Bits.java.txt",
-        "sha256": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab"
-      }
-    },
-    {
-      "path": "src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java",
-      "before": null,
-      "after": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3IntLane28.java.txt",
-        "sha256": "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda"
-      }
-    },
-    {
-      "path": "src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java",
-      "before": null,
-      "after": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3LongLane28.java.txt",
-        "sha256": "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644"
-      }
-    },
-    {
-      "path": "test/jdk/jdk/internal/mindex/M3Lane28Cost.java",
-      "before": null,
-      "after": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3Lane28Cost.java.txt",
-        "sha256": "2296066665b8e54238daf2db46329cb0bf29c9ded0182f05bbb8ca2365da99ca"
-      }
-    },
-    {
-      "path": "test/jdk/jdk/internal/mindex/M3Lane28Test.java",
-      "before": null,
-      "after": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3Lane28Test.java.txt",
-        "sha256": "a64c0dceb51627a7e4ca1a1a65bfc8bf388a9b8f1b622afca5cf84f320740aa3"
-      }
-    },
-    {
-      "path": ".github/workflows/m3-lane28.yml",
-      "before": null,
-      "after": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/workflow.yml.txt",
-        "sha256": "009ca466373d6128a1ac8843bd2449025fc577df10d88d9a1785f87b6a6e06b7"
-      }
-    },
-    {
-      "path": "m3/docs/counterpart-naming.md",
-      "before": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/counterpart-naming.md.txt.before",
-        "sha256": "8a32b9ba61492c9b232439b9d917db12f3d8d5b25236bb4acb0439c32e16ac8d"
-      },
-      "after": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/counterpart-naming.md.txt",
-        "sha256": "56626d53928e650c0b87e3505718bffd8e3db4c335eee087760fc4fd5d7618b9"
-      }
-    },
-    {
-      "path": "m3/docs/name-mapping.json",
-      "before": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt.before",
-        "sha256": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60"
-      },
-      "after": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt",
-        "sha256": "83c74c0b5d8d0d82ed22d7a7a5ce1963c074b782ecf5a67cfdd33b8e73ea84d8"
-      }
-    },
-    {
-      "path": "m3/tooling/lane28/feedback/cost-1.log",
-      "before": null,
-      "after": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/cost-1.log.txt",
-        "sha256": "4a913fb62f874130d502525ba55fe801b3380105083d12753cc58609347d17c3"
-      }
-    },
-    {
-      "path": "m3/tooling/lane28/feedback/cost-2.log",
-      "before": null,
-      "after": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/cost-2.log.txt",
-        "sha256": "862b574905978ff2f58fdda899fb8e334bf1bbd4af93a12ded82373a7f13a221"
-      }
-    },
-    {
-      "path": "m3/tooling/lane28/feedback/lane28-20261005.json",
-      "before": null,
-      "after": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/feedback.json.txt",
-        "sha256": "9f354d3d351652704bac00126d3c6bbde711ef156529138f96c36c0677c1790e"
-      }
-    },
-    {
-      "path": "m3/tooling/lane28/feedback/lane28-20261005.md",
-      "before": null,
-      "after": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/feedback.md.txt",
-        "sha256": "9fb9210c0e55082361ddea59fa96f595d18920888348aa3e83e728d55f72e084"
-      }
-    },
-    {
-      "path": "m3/tooling/lane28/verify-image.sh",
-      "before": null,
-      "after": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/verify-image.sh.txt",
-        "sha256": "b964e28001a32aa05068905e56753c4b39ab7b6f6dc1127fc95d7483faf0a6c0"
-      }
-    },
-    {
-      "path": "src/java.base/share/legal/synexia.md",
-      "before": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/synexia.md.txt.before",
-        "sha256": "f2c1255f1a27c75e7c6835e01f61e3fb861407571410365e9b64267c7f27f516"
-      },
-      "after": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/synexia.md.txt",
-        "sha256": "5142333a2bcde8c5555b123a685046963c860d52552b4f8f1d19532571f0ae7a"
-      }
-    },
-    {
-      "path": "src/java.base/share/native/libjava/M3BitLane28.c",
-      "before": null,
-      "after": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/M3BitLane28.c.txt",
-        "sha256": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f"
-      }
-    },
-    {
-      "path": "m3/tooling/lane28/check-log.py",
-      "before": null,
-      "after": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/check-log.py.txt",
-        "sha256": "3401754e77113c76d15c7f70844ae95e210000fb31c2be4a15b668aa7d3c64e5"
-      }
-    },
-    {
-      "path": "test/jdk/jdk/internal/mindex/M3SparseFillTest.java",
-      "before": null,
-      "after": {
-        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3SparseFillTest.java.txt",
-        "sha256": "f560cccbf14e7486b0abddf3783f311d390dbe1b355283f5cc4b2a50ed0b2903"
-      }
-    }
-  ],
-  "guards": [
-    {
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
-      "sha256": "0e65b26f674f68fea30151ea63a17faef2f88ca0f0679723bb3dc230fda22b72"
-    },
-    {
-      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
-      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
-    },
-    {
-      "path": ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapTaskRecipe.java",
-      "sha256": "58bac6968ebd2cce6f43f338c289db14435b3ef05ed2abc13402275285b89462"
-    },
-    {
-      "path": ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe.java",
-      "sha256": "05ac05e7f3cb7549d26866a61dec0edf19515317c95f73db82d1c517cad88ef5"
-    },
-    {
-      "path": "m3/migration/recipe.py",
-      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
-    },
-    {
-      "path": "make/CompileJavaModules.gmk",
-      "sha256": "45941b0fb6da4dd5284db9fada24f4aff51fcdf39ba23bc13cee8052273bee5e"
-    },
-    {
-      "path": "make/modules/java.base/Lib.gmk",
-      "sha256": "b097a927a83875b4b4c92ce5c3b9ecd4e4acb4d81962719d31d6df7ae0adad47"
-    },
-    {
-      "path": "make/modules/java.base/lib/CoreLibraries.gmk",
-      "sha256": "13ff8e34221af4f6c2ff814dee1a9abdab848519788d22df66060407321a58e4"
-    }
-  ],
-  "plan_sha256": "cd909f789a5c33124ae231b224749a4551201eb6804ca8960f90dafee3282eac"
-}
+# M3 counterpart naming and runtime version contract
+
+Canonical product policy: [M3JDK21_PORTING_INVARIANT.md](M3JDK21_PORTING_INVARIANT.md).
+The machine-readable `porting_policy` and family references extend the existing
+[name-mapping.json](name-mapping.json); public JDK APIs keep JDK names and M3
+names identify internal replacement/optimization owners.
+
+This extends the retained authority in `name-mapping.json`. It follows the short-pattern/acronym
+rule in `atom-pattern-admission-and-tooling-boundary.md` and the source/target lineage rules in
+`migration-mapping-lifecycle.md`. It is not a replacement registry.
+
+## Names and placement
+
+Use an established JDK or M3 owner first. Define an acronym once beside its contract, then use the
+short name consistently in source, recipes, tests and documentation. Preserve conventional API
+names, acronyms such as AST/DAG/JNI, and native symbols that have an existing ABI. Avoid adding
+`Runtime`, `Framework`, `Manager`, `Implementation` or repeated `Index` words without a distinct role.
+Do not shorten arbitrary words into unexplained initials.
+
+| Source capability | Target spelling | Meaning / placement | This increment |
+| --- | --- | --- | --- |
+| `MIndexVersionTable` | `jdk.internal.mindex.M3VI` | VI = Version Index; java.base | Inlined, recipe-generated internal kernel; local module tests passed |
+| `MIndexLibraryRelease` | `jdk.internal.mindex.M3Release` | Release provenance; java.base | Inlined, recipe-generated internal value; local module tests passed |
+| `MIndexVmSession` | `jdk.internal.mindex.M3CB` | CB = Class Bridge | Inlined caller-owned bridge; explicit lifecycle invalidation |
+| `MIndexClassIndex` | `jdk.internal.mindex.M3CI` | CI = Class Index | Inlined reflection snapshot, primitive lanes and weak defining-loader boundary |
+| `MIndexClass` | `jdk.internal.mindex.M3Class` | Indexed class view | Inlined owner/row view; public type remains `java.lang.Class` |
+| `MIndexVmPrecomputeKey` | `jdk.internal.mindex.M3PC` | PC = Precompute Context | Inlined VM-local immutable context; ordered dependency equality |
+| `com.synexia.mindex.ast.MIndexAST` | `jdk.internal.mindex.M3AST` | AST = Abstract Syntax Tree | Reserved mapping; root-package facade must be reconciled separately |
+| `MIndexASTPrecompute` | `jdk.internal.mindex.M3ASTPC` | AST precompute context | Reserved mapping; dependency/format review pending |
+| `MIndexCompilerASTPrecompute` | `com.sun.tools.javac.m3.M3ASTPC` | Compiler-specific context, jdk.compiler | Reserved mapping; must not pull compiler dependencies into java.base |
+| `MIndexRegexTrigramQuery` | `jdk.internal.mindex.M3TQ` | TQ = Trigram Query; java.base | Inlined candidate kernel and canonical-backing range bridge; full-image acceptance pending |
+| `SegmentedAddress28` | `jdk.internal.mindex.M3Address28` | 28-bit primitive collection lane/address owner; java.base | Complete source adaptation; full-image admission pending |
+| `SegmentedIntLane28` | `jdk.internal.mindex.M3IntLane28` | 28-bit primitive collection lane/address owner; java.base | Complete source adaptation; full-image admission pending |
+| `SegmentedLongLane28` | `jdk.internal.mindex.M3LongLane28` | 28-bit primitive collection lane/address owner; java.base | Complete source adaptation; full-image admission pending |
+| `SegmentedBitLane28` | `jdk.internal.mindex.M3BitLane28` | 28-bit primitive collection lane/address owner; java.base | Complete source adaptation; full-image admission pending |
+| `PackedBitAtoms` | `jdk.internal.mindex.M3Bits` | Shared bit-address arithmetic; java.base | Complete source adaptation; full-image admission pending |
+| `com.synexia.indexstring.MIndexString` | `java.lang.M3String` | Internal canonical String value; Synexia is donor/reference, M3JDK owns target naming | Replace the provisional `java.lang.MIndexString` naming/representation; preserve donor owner+coordinate semantics |
+| `IndexStringTuple` | `java.lang.M3StringTuple` | Canonical persistent composition owner | Ported as M3 child-coordinate DAG; no text arrays |
+| native MIndex String scalar resolver/interner | `java.lang.M3StringAtom` / `M3StringPool` | Canonical native/mapped scalar ownership | Adapted to JDK bootstrap/runtime boundary |
+| `MIndexStringCanonicalFacts` / String precompute | `java.lang.M3StringFacts` + internal M3 kernels | Internal precompute only | Fixed-size canonical facts implemented; richer donor facts remain mapped work |
+| `MIndexStringBacking` | `jdk.internal.mindex.M3StringBacking` | Internal backing contract | Renamed target counterpart |
+| `MIndexMappedStringBacking` | `jdk.internal.mindex.M3MappedStringBacking` | Internal mapped backing | Renamed target counterpart |
+
+
+
+### String/precompute naming invariant
+
+Synexia names are provenance and donor names, not M3JDK ABI names. The String donor relation is `MIndexString -> M3String`. The target must preserve the donor's canonical owner/coordinate semantics while using the M3JDK name.
+
+All precompute remains implementation-internal in both worlds. M3JDK may use compact internal M3 names for fact stores and kernels, but must not expose donor `*Precompute*` classes as public JDK contracts merely to mirror Synexia. Precompute attaches to exact M3String scalar/range/composition identity and never becomes canonical text storage. JNI byte/char/UTF shadows are materialization products only. The machine-readable rules are in `m3-runtime-invariants.tsv`; the inspected donor history is recorded in `m3string-synexia-lineage.md`.
+
+Reserved names are candidates, not new exported APIs or claims that code exists. The mapping
+records bind concrete source paths/blobs and dispositions. Package/module collision checks and
+source/binary/native compatibility are required before each reserved name becomes an implementation.
+The Java public class remains `String`, `Class`, `ClassLoader`, etc. Existing Synexia spellings remain
+valid in their source repository; ports are traced adaptations, not destructive moves.
+
+## Effective version (EV)
+
+EV means the effective counterpart implementation and its admitted revision for an operation.
+It is distinct from the library's raw release label, version-ordering scheme, Java class-file major
+version, JVM feature version, snapshot generation and class-redefinition epoch.
+
+A future target operation may use a counterpart only when its exact contract, dependency closure,
+module/loader context and supported execution mode have passed admission. The effective revision
+then derives from that counterpart's immutable implementation/context stamp. A mapping row or
+the numerically greatest library version cannot enable a backend.
+
+The runtime association must bind the actual defining `Class` and VM-local loader identity to the
+immutable counterpart view, owner namespace/generation and epoch. Same binary names in different
+loaders remain different classes. Delegation resolves to the defining owner. Hidden classes,
+bootstrap classes, arrays and primitive mirrors need explicit contracts. A global catalogue may
+share immutable content identities; it must not retain live Class/ClassLoader/JNI references or
+equate classes between JVMs. A supplied release digest is a declaration, not authenticated final
+post-transform class bytes.
+
+The precompute context must include implementation/analysis revision, exact definition inputs,
+ordered dependency closure, format/ABI, module access, VM/JDK/compiler flags and native target
+when relevant. Changed dependencies, retransformation/redefinition, unloading, access changes or
+owner generations invalidate affected reuse before publication. Hash hits discover candidates;
+they do not bypass verification, linking, class initialization, JNI lifetime or JIT deoptimization.
+
+Integration uses explicit OFF / OBSERVE / ENABLED modes, with the original JDK operation as the
+fallback. Version-index queries and caller-owned Class bridge operations are active.
+`M3CB.effectiveVersion(Class<?>)` resolves a declared release through that exact Class's
+counterpart row; `effective` also returns the current context and epoch. Neither API
+authenticates post-transform class bytes. Lifecycle owners must invalidate before definition
+or access-context changes. Automatic Class/AST dispatch,
+loader attachment, native code installation and a universal EV API are **not implemented**.
+There is no new VM-wide class registry. Existing `Class.getName`, class identity, module resolution,
+`java.version` and class-file formats are unchanged.
+
+## Every MIndex family remains in scope
+
+`m3/migration/vi-census.tsv` is a refreshed review queue of 2,494 matching production Java filenames
+from eight exact, untruncated Git subtrees. Its receipt states the source commit, subtree roots,
+selection rule and exclusions. It includes all matching paths in those subtrees, including names
+that occur in multiple packages. It does not cover every repository module, nested declaration,
+non-prefix dependency, generated input, native symbol or contract. Every row remains REVIEW.
+It supplements the earlier census and does not advance the complete-source coverage flag.
+
+For each capability, inspect its body/history, dependencies, existing JDK owner, source license and
+behavior before assigning a name. Record direct port, adaptation, consolidation, dependency reuse
+or a reasoned pending/blocked disposition in the existing authority. Include all required helpers;
+do not import just the prefix-matching file or create a second payload/collection owner.
+
+Order: immutable storage and identifiers -> structural lanes/views -> class and AST precompute
+-> loader/compiler consumers -> JNI/HotSpot/JIT integration. Product code and native dependencies
+must be repository-owned and build with the OpenJDK toolchain. Maven/OpenRewrite remains authoring
+and proof tooling. No Synexia application artifact may become a product dependency.
+
+## License and tests
+
+The VI/Release kernels and fourteen Class bridge owners retain Apache-2.0. Exact source originals,
+license and NOTICE snapshots live in `m3/tooling/vi/donor` and `m3/tooling/cb/donor`; the java.base distribution notice is
+`src/java.base/share/legal/synexia.md`. Existing OpenJDK and third-party notices remain authoritative
+for their respective code. The user requested Apache-2.0 for relevant Synexia code; this does not
+relicense unrelated donors or the JDK.
+
+The VI recipe has generation/fixed-point, target-drift, parser, tamper and unrelated-input checks.
+Java 21 patch-module compilation and interpreter/mixed runtime probes compare version ranges with
+the independent JPMS oracle, including raw-label preservation, equal-precedence rows, cancellation,
+budgets and revision drift. Library release identity is exact, not precedence equality. The source
+and target have explicit String/progress-boundary adaptations, not a drop-in binary ABI claim.
+
+The matching Linux x86_64 fastdebug JDK image build and bounded jtreg tests pass. Class
+bridge tests pass in interpreter, mixed, C1-only and non-tiered C2 modes. Automatic runtime
+consumers, lifecycle/access changes, agents/redefinition, expanded CDS/JVMTI/GC coverage and
+other architectures remain open; see the exact evidence receipt for the tested boundary.
+AST promotion needs exact source/bytecode provenance and compiler regression tests. Radical
+class-file/linkage/identity changes remain a separately reviewed experimental JVM project.
+
+The CB packet runs 4,515 assertions per stock patch-module interpreter/mixed mode and
+4,525 per matching image mode (reflection exposes additional M3 String metadata). These cover
+metadata parity, defining-loader
+identity, hidden/bootstrap/primitive/array classes, unloading, declared releases and invalidation.
+The jtreg sources are generated by the same recipe. Exact executed modes and remaining gates are
+recorded in `m3/tooling/cb/evidence/receipt.json`; patch-module evidence alone is not a fork-image pass.

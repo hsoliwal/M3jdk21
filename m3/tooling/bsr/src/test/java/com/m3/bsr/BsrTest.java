@@ -71,7 +71,7 @@ final class BsrTest {
             if(line.startsWith("#")||line.isBlank())continue;String[] row=line.split("\t");
             assertEquals(row[1],hash(Files.readAllBytes(ROOT.resolve(row[0]))),row[0]);
         }
-        before=parse();after=apply(before);assertEquals(17,after.size());
+        before=parse();after=apply(before);assertEquals(24,after.size());
         compile("before",kernel(before).printAll());compile("after",kernel(after).printAll());
         for(SourceFile file:after) {
             Path generated=OUT.resolve("generated").resolve(file.getSourcePath());
@@ -99,7 +99,7 @@ final class BsrTest {
     }
     @Test void retainsUnrelatedAndRejectsTemplateTampering() throws Exception {
         var files=parse();var unrelated=PlainText.builder().sourcePath(Path.of("unrelated.txt")).text("retained").build();
-        files.add(unrelated);var changes=apply(files);assertEquals(17,changes.size());
+        files.add(unrelated);var changes=apply(files);assertEquals(24,changes.size());
         assertTrue(changes.stream().noneMatch(f->f.getSourcePath().equals(unrelated.getSourcePath())));
         Path bad=OUT.resolve("test-classes/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr-bad");Files.createDirectories(bad);
         try(var list=Files.list(RES)) {for(Path p:list.toList())Files.writeString(bad.resolve(p.getFileName()),Files.readString(p)+(p.getFileName().toString().equals("manifest.tsv")?"":"drift"));}
