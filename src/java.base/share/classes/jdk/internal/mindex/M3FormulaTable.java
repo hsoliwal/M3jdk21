@@ -34,6 +34,8 @@ public final class M3FormulaTable {
         M3Truth truth(long atomId);
     }
 
+    private final M3CoordinateSpace formulaSpace;
+    private final M3CoordinateSpace atomSpace;
     private final long[] formulaIds;
     private final byte[] kinds;
     private final long[] atomIds;
@@ -43,12 +45,16 @@ public final class M3FormulaTable {
     private final long[] slots;
 
     private M3FormulaTable(
+            M3CoordinateSpace formulaSpace,
+            M3CoordinateSpace atomSpace,
             long[] formulaIds,
             byte[] kinds,
             long[] atomIds,
             int[] operandOffsets,
             long[] operands,
             int[] topologicalRows) {
+        this.formulaSpace = Objects.requireNonNull(formulaSpace, "formulaSpace");
+        this.atomSpace = Objects.requireNonNull(atomSpace, "atomSpace");
         this.formulaIds = formulaIds;
         this.kinds = kinds;
         this.atomIds = atomIds;
@@ -58,8 +64,17 @@ public final class M3FormulaTable {
         this.slots = buildSlots(formulaIds);
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public static Builder builder(
+            M3CoordinateSpace formulaSpace, M3CoordinateSpace atomSpace) {
+        return new Builder(formulaSpace, atomSpace);
+    }
+
+    public M3CoordinateSpace formulaSpace() {
+        return formulaSpace;
+    }
+
+    public M3CoordinateSpace atomSpace() {
+        return atomSpace;
     }
 
     public int size() {
@@ -222,7 +237,15 @@ public final class M3FormulaTable {
     }
 
     public static final class Builder {
+        private final M3CoordinateSpace formulaSpace;
+        private final M3CoordinateSpace atomSpace;
         private final TreeMap<Long, Draft> drafts = new TreeMap<>(Long::compareUnsigned);
+
+        private Builder(
+                M3CoordinateSpace formulaSpace, M3CoordinateSpace atomSpace) {
+            this.formulaSpace = Objects.requireNonNull(formulaSpace, "formulaSpace");
+            this.atomSpace = Objects.requireNonNull(atomSpace, "atomSpace");
+        }
 
         public Builder atom(long formulaId, long atomId) {
             if (atomId == 0L) throw new IllegalArgumentException("atom ID must be nonzero");
@@ -323,7 +346,15 @@ public final class M3FormulaTable {
             }
             if (written != count) throw new IllegalArgumentException("formula graph contains cycle");
 
-            return new M3FormulaTable(ids, kinds, atoms, offsets, operands, topological);
+            return new M3FormulaTable(
+                    formulaSpace,
+                    atomSpace,
+                    ids,
+                    kinds,
+                    atoms,
+                    offsets,
+                    operands,
+                    topological);
         }
 
         private static void validateArity(Draft draft) {
