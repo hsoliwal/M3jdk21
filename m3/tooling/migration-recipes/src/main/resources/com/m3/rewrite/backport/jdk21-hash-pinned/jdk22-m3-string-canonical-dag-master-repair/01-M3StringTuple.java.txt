@@ -116,23 +116,4 @@ final class M3StringTuple extends M3StringOwner {
     M3StringFacts computeFacts() {
         return M3StringFacts.compose(left.facts(), right.facts());
     }
-
-    @Override
-    M3StringFacts computeRangeFacts(int start, int length) {
-        Objects.checkFromIndexSize(start, length, this.length);
-        if (start == 0 && length == this.length) return facts();
-        if (length == 0) return M3StringFacts.scan(M3String.empty());
-
-        int end = start + length;
-        int leftLength = left.length();
-        if (end <= leftLength) {
-            return left.slice(start, end).facts();
-        }
-        if (start >= leftLength) {
-            return right.slice(start - leftLength, end - leftLength).facts();
-        }
-        return M3StringFacts.compose(
-                left.slice(start, leftLength).facts(),
-                right.slice(0, end - leftLength).facts());
-    }
 }

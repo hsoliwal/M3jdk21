@@ -231,6 +231,9 @@ class java_lang_M3String : AllStatic {
   static int _tuple_left_offset;
   static int _tuple_right_offset;
 
+  static void copy_owner_chars(
+      oop owner, int start, int len, jchar* destination);
+
  public:
   static void compute_offsets();
   static void serialize_offsets(SerializeClosure* f) NOT_CDS_RETURN;

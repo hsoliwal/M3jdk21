@@ -552,14 +552,25 @@ static jchar* m3_unicode_range(oop string, int start, int len) {
 // Buffer conversions must not allocate scratch space: JNI callers may have no ResourceMark.
 static char* m3_utf8_range(oop string, int start, int len, char* buf, int buflen) {
   assert(buflen > 0, "zero length output buffer");
+  static const int chunk_capacity = 256;
+  jchar scratch[chunk_capacity];
   char* out = buf;
-  for (int i = 0; i < len; i++) {
-    jchar c = java_lang_String::char_at(string, start + i);
-    int size = UNICODE::utf8_size(c);
-    if (size >= buflen) break;
-    UNICODE::as_utf8(&c, 1, out, buflen);
-    out += size;
-    buflen -= size;
+  int copied = 0;
+  while (copied < len) {
+    const int chunk = MIN2(chunk_capacity, len - copied);
+    java_lang_String::copy_chars(string, start + copied, chunk, scratch);
+    for (int i = 0; i < chunk; i++) {
+      jchar c = scratch[i];
+      int size = UNICODE::utf8_size(c);
+      if (size >= buflen) {
+        *out = '\0';
+        return buf;
+      }
+      UNICODE::as_utf8(&c, 1, out, buflen);
+      out += size;
+      buflen -= size;
+    }
+    copied += chunk;
   }
   *out = '\0';
   return buf;
@@ -702,7 +713,15 @@ int java_lang_String::utf8_length(oop java_string, typeArrayOop value) {
     }
     int result = 0;
     int len = length(java_string);
-    for (int i = 0; i < len; i++) result += UNICODE::utf8_size(char_at(java_string, i));
+    static const int chunk_capacity = 256;
+    jchar scratch[chunk_capacity];
+    for (int copied = 0; copied < len; copied += chunk_capacity) {
+      const int chunk = MIN2(chunk_capacity, len - copied);
+      copy_chars(java_string, copied, chunk, scratch);
+      for (int i = 0; i < chunk; i++) {
+        result += UNICODE::utf8_size(scratch[i]);
+      }
+    }
     return result;
   }
 
@@ -985,14 +1004,68 @@ void java_lang_M3String::serialize_offsets(SerializeClosure* f) {
 }
 #endif
 
+void java_lang_M3String::copy_owner_chars(
+    oop o, int start, int len, jchar* destination) {
+  assert(o != nullptr, "M3 owner required");
+  assert(destination != nullptr || len == 0, "destination required");
+  assert(start >= 0 && len >= 0 && start <= o->int_field(_owner_length_offset) - len,
+         "owner range");
+  if (len == 0) {
+    return;
+  }
+
+  if (o->klass() == vmClasses::M3StringAtom_klass()) {
+    const jlong address = o->long_field(_atom_address_offset);
+    const jbyte width = o->byte_field(_atom_storageWidth_offset);
+    const uint8_t* bytes =
+        reinterpret_cast<const uint8_t*>((uintptr_t)address);
+    if (width == 1) {
+      for (int index = 0; index < len; index++) {
+        destination[index] = (jchar)bytes[start + index];
+      }
+      return;
+    }
+
+    assert(width == 2, "M3 atom width");
+    const bool big_endian = o->bool_field(_atom_bigEndian_offset);
+    size_t at = (size_t)start << 1;
+    for (int index = 0; index < len; index++, at += 2) {
+      const uint16_t first = bytes[at];
+      const uint16_t second = bytes[at + 1];
+      destination[index] = big_endian
+          ? (jchar)((first << 8) | second)
+          : (jchar)(first | (second << 8));
+    }
+    return;
+  }
+
+  assert(o->klass() == vmClasses::M3StringTuple_klass(),
+         "M3 owner must be atom or tuple");
+  oop left = o->obj_field(_tuple_left_offset);
+  oop right = o->obj_field(_tuple_right_offset);
+  const int left_length = length(left);
+  const int end = start + len;
+
+  if (end <= left_length) {
+    copy_chars(left, start, len, destination);
+    return;
+  }
+  if (start >= left_length) {
+    copy_chars(right, start - left_length, len, destination);
+    return;
+  }
+
+  const int left_count = left_length - start;
+  copy_chars(left, start, left_count, destination);
+  copy_chars(right, 0, len - left_count, destination + left_count);
+}
+
 void java_lang_M3String::copy_chars(
     oop value, int start, int len, jchar* destination) {
   assert(value != nullptr, "M3String required");
   assert(destination != nullptr || len == 0, "destination required");
   assert(start >= 0 && len >= 0 && start <= length(value) - len, "range");
-  for (int index = 0; index < len; index++) {
-    destination[index] = char_at(value, start + index);
-  }
+  copy_owner_chars(owner(value), java_lang_M3String::start(value) + start, len, destination);
 }
 
 // java_lang_Class

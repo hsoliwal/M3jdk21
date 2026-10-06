@@ -109,7 +109,8 @@ abstract sealed class M3StringOwner permits M3StringAtom, M3StringTuple {
         RangeFact fourth = range3;
         if (fourth != null && fourth.coordinate == coordinate) return fourth.facts;
 
-        M3StringFacts computed = M3StringFacts.scan(Objects.requireNonNull(value, "value"));
+        M3String checked = Objects.requireNonNull(value, "value");
+        M3StringFacts computed = computeRangeFacts(checked.start(), checked.length());
         synchronized (this) {
             first = range0;
             if (first != null && first.coordinate == coordinate) return first.facts;
@@ -128,6 +129,8 @@ abstract sealed class M3StringOwner permits M3StringAtom, M3StringTuple {
     }
 
     abstract M3StringFacts computeFacts();
+
+    abstract M3StringFacts computeRangeFacts(int start, int length);
 
     private static final class RangeFact {
         final long coordinate;
