@@ -217,6 +217,7 @@ for fragment in [
     "if (!prepared.hasAsciiUpper()) return this;",
     "if (!prepared.hasAsciiLower()) return this;",
     "if (!prepared.hasAsciiSpace()) {",
+    "return storage != null ? storage.facts().blank() : indexOfNonWhitespace() == length();",
 ]:
     if fragment not in string:
         fail(f"M3 character-flag consumer missing: {fragment}")
