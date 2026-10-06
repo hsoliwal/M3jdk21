@@ -1,0 +1,73 @@
+name: M3 released JEP denominator authority
+
+on:
+  push:
+    branches:
+      - "m3/release-jep-denominator-current-master-*"
+    paths:
+      - "m3/backports/RELEASE_JEP_AUTHORITY.tsv"
+      - "m3/backports/JEP_CATALOGUE.tsv"
+      - "m3/backports/release_jep_authority.py"
+      - "m3/backports/test_release_jep_authority.py"
+      - "m3/backports/program_status.py"
+      - "m3/backports/test_program_status.py"
+      - "m3/backports/verify.py"
+      - "m3/backports/README.md"
+      - ".github/workflows/m3-release-jep-denominator-current.yml"
+  pull_request:
+    paths:
+      - "m3/backports/RELEASE_JEP_AUTHORITY.tsv"
+      - "m3/backports/JEP_CATALOGUE.tsv"
+      - "m3/backports/release_jep_authority.py"
+      - "m3/backports/test_release_jep_authority.py"
+      - "m3/backports/program_status.py"
+      - "m3/backports/test_program_status.py"
+      - "m3/backports/verify.py"
+      - "m3/backports/README.md"
+      - ".github/workflows/m3-release-jep-denominator-current.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  denominator-proof:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Diff hygiene
+        run: git diff --check
+      - name: Compile denominator tools
+        run: >
+          python3 -m py_compile
+          m3/backports/release_jep_authority.py
+          m3/backports/program_status.py
+          m3/backports/verify.py
+      - name: Unit proof
+        working-directory: m3/backports
+        run: >
+          python3 -m unittest -v
+          test_release_jep_authority.py
+          test_program_status.py
+      - name: Full backport catalogue verification
+        run: python3 m3/backports/verify.py --root .
+      - name: Deterministic program status
+        run: |
+          python3 m3/backports/program_status.py             --root .             --json-out target/m3-program-status.json             --tsv-out target/m3-program-status.tsv
+          grep -F $'jep\ttotal\t85' target/m3-program-status.tsv
+      - name: Upload denominator proof
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-release-jep-denominator-${{ github.run_id }}
+          path: |
+            target/m3-program-status.json
+            target/m3-program-status.tsv
+          if-no-files-found: warn
+          retention-days: 30
