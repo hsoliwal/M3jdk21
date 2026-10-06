@@ -102,7 +102,7 @@ for row in completeness_rows:
         "DONOR_ONLY_NO_JDK21_CONSUMER",
     }:
         fail(f"String-runtime responsibility incorrectly classified out: {donor}")
-    if "TODO" in row or "UNCLASSIFIED" in row:
+    if any("TODO" in cell or "UNCLASSIFIED" in cell for cell in row):
         fail(f"unfinished String precompute classification: {donor}")
 
 required_responsibilities = {
@@ -134,6 +134,22 @@ missing_responsibilities = required_responsibilities - seen_responsibilities
 if missing_responsibilities:
     fail("String precompute completeness ledger missing: "
          + ", ".join(sorted(missing_responsibilities)))
+
+by_responsibility = {row[1]: row for row in completeness_rows}
+expected_dispositions = {
+    "MIndexStringCanonicalFacts.canonicalTupleId": "IMPLEMENTED_IDENTITY_OWNER",
+    "MIndexStringCanonicalFacts.structuralHash64": "IMPLEMENTED_IDENTITY_OWNER",
+    "MIndexStringCanonicalFacts.tokenCount": "NOT_JDK_STRING_SEMANTICS",
+    "MIndexStringCanonicalFacts.tokenHash64": "NOT_JDK_STRING_SEMANTICS",
+    "MIndexPrefixZ / MIndexPrefixZCache": "DONOR_ONLY_NO_JDK21_CONSUMER",
+    "MIndexPalindromeFacts / Manacher facts": "DONOR_ONLY_NO_JDK21_CONSUMER",
+    "MIndexSuffixDecision / suffix DFA facts": "DONOR_ONLY_NO_JDK21_CONSUMER",
+    "LCP range-minimum / suffix-index facts": "DONOR_ONLY_NO_JDK21_CONSUMER",
+}
+for donor, expected in expected_dispositions.items():
+    actual = by_responsibility[donor][3]
+    if actual != expected:
+        fail(f"String precompute disposition drift: {donor}: {actual} != {expected}")
 
 # Field-level parity for the fixed semantic donor bundle.
 for field in [
