@@ -36,13 +36,26 @@ Synexia's language-local word-ID planes have a different scope. If a future JDK 
 language dictionary, its precompute must share that subsystem's one canonical coordinate generation;
 it must not create separate RE2/J-, Lucene-, or reasoning-owned vocabularies.
 
+## Domain versus implementation provenance
+
+M3JDK does not attribute ownership of abstract domains to external projects. Language, reasoning,
+logic, search, graphs, automata, argumentation and mathematical semantics are general domains.
+
+Provenance/licensing records bind **specific implementation artifacts** only: a pinned repository
+revision, source/blob, generated table, encoding, serialization format, test vector, or concrete
+solver/algorithm realization. M3JDK may independently implement the same abstract semantics under
+JDK-owned internal names when the implementation is independently written and the required
+behavioral proof passes.
+
+This distinction is mandatory in mapping documents and code comments.
+
 ## Donor mapping
 
 Synexia is the donor/convergence workspace. M3JDK is the target/runtime owner.
 
 - Synexia `MIndexRegexTrigramQuery` -> JDK-internal `M3TQ`.
 - Synexia String-search/precompute ideas -> JDK-owned fixed facts or bounded internal search plans.
-- RE2/J- or Lucene-derived ideas enter only through qualified Synexia provenance and are
+- Ideas learned from specific reviewed RE2/J or Lucene implementation artifacts enter only through qualified Synexia provenance and are
   independently adapted to a concrete JDK consumer.
 - Tweety-style knowledge/reasoning has no `java.lang.String` counterpart.
 
