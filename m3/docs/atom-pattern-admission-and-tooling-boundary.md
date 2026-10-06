@@ -51,6 +51,47 @@ tool plane must not create a downstream dependency in product code.
 
 Atomization and patternization are orthogonal and both are required admission dimensions.
 
+## Cross-repository scope distinction
+
+There are two related hierarchies and they must not be conflated.
+
+**Synexia donor-preparation hierarchy**
+
+```text
+FILE -> PACKAGE -> MODULE -> PROJECT -> REPOSITORY
+```
+
+This proves that the donor/convergence workspace has inventoried and patternized the complete
+Mavenized source context from the narrow leaf to the repository owner. It is used for reusable
+recipe mastery and handoff completeness.
+
+**M3JDK21 target-admission hierarchy**
+
+1. FILE
+2. VISIBILITY
+3. PACKAGE
+4. MODULE
+5. MULTI_MODULE
+6. LIBRARY_API
+
+This remains the authority for a concrete JDK transformation. A Synexia REPOSITORY-scoped handoff
+does not grant M3JDK21 repository-wide write authority, and a Synexia FILE atom does not make a
+HotSpot/JNI/ABI change file-local. The target infers the narrowest truthful JDK scope after mapping
+the accepted donor atom to its actual JDK owner and reverse consumers.
+
+The two hierarchies join through exact lineage:
+
+```text
+Synexia capability / atom / pattern / recipe
+  -> exact Apache-2.0/provenance-qualified handoff
+  -> M3JDK21 mapping ID / target owner
+  -> target scope
+  -> target-specific recipe/adaptation
+  -> target evidence
+```
+
+Generic recipe improvements flow back to Synexia. JDK-only adaptation remains here.
+
 ## Scope promotion law
 
 Every refactoring recipe must operate at the narrowest sufficient authority:
