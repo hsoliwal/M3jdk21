@@ -2653,18 +2653,7 @@ public final class String
             if (Character.isBmpCodePoint(ch)) {
                 return storage.indexOf((char) ch, from, storage.length());
             }
-            if (!Character.isValidCodePoint(ch)) return -1;
-            char highRequired = Character.highSurrogate(ch);
-            char lowRequired = Character.lowSurrogate(ch);
-            M3StringFacts facts = storage.facts();
-            if (!facts.mayContainCodeUnit(highRequired)
-                    || !facts.mayContainCodeUnit(lowRequired)) return -1;
-            for (int index = from; index < storage.length() - 1; index++) {
-                char high = storage.charAt(index);
-                char low = storage.charAt(index + 1);
-                if (high == highRequired && low == lowRequired) return index;
-            }
-            return -1;
+            return storage.indexOfCodePoint(ch, from, storage.length());
         }
         return isLatin1() ? StringLatin1.indexOf(value(), ch, fromIndex, length())
                 : StringUTF16.indexOf(value(), ch, fromIndex, length());
@@ -2717,18 +2706,7 @@ public final class String
             if (Character.isBmpCodePoint(ch)) {
                 return storage.indexOf((char) ch, beginIndex, endIndex);
             }
-            if (!Character.isValidCodePoint(ch)) return -1;
-            char highRequired = Character.highSurrogate(ch);
-            char lowRequired = Character.lowSurrogate(ch);
-            M3StringFacts facts = storage.facts();
-            if (!facts.mayContainCodeUnit(highRequired)
-                    || !facts.mayContainCodeUnit(lowRequired)) return -1;
-            for (int index = beginIndex; index + 1 < endIndex; index++) {
-                char high = storage.charAt(index);
-                char low = storage.charAt(index + 1);
-                if (high == highRequired && low == lowRequired) return index;
-            }
-            return -1;
+            return storage.indexOfCodePoint(ch, beginIndex, endIndex);
         }
         return isLatin1() ? StringLatin1.indexOf(value(), ch, beginIndex, endIndex)
                 : StringUTF16.indexOf(value(), ch, beginIndex, endIndex);
@@ -2803,18 +2781,7 @@ public final class String
             if (Character.isBmpCodePoint(ch)) {
                 return storage.lastIndexOf((char) ch, from);
             }
-            if (!Character.isValidCodePoint(ch)) return -1;
-            char highRequired = Character.highSurrogate(ch);
-            char lowRequired = Character.lowSurrogate(ch);
-            M3StringFacts facts = storage.facts();
-            if (!facts.mayContainCodeUnit(highRequired)
-                    || !facts.mayContainCodeUnit(lowRequired)) return -1;
-            for (int index = Math.min(from, storage.length() - 2); index >= 0; index--) {
-                char high = storage.charAt(index);
-                char low = storage.charAt(index + 1);
-                if (high == highRequired && low == lowRequired) return index;
-            }
-            return -1;
+            return storage.lastIndexOfCodePoint(ch, from);
         }
         return isLatin1() ? StringLatin1.lastIndexOf(value(), ch, fromIndex)
                           : StringUTF16.lastIndexOf(value(), ch, fromIndex);
