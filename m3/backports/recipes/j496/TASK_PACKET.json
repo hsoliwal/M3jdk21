@@ -1,0 +1,51 @@
+{
+  "task_packet": "active",
+  "source_doc": "M3-SCALE v3 Locked Canon",
+  "invariant_id": "J496-MLKEM-INTAKE",
+  "run": {
+    "mode": "inventory",
+    "profile": "security-high-risk",
+    "workers": 1,
+    "shard_count": 1,
+    "shard_index": 0
+  },
+  "targets": {
+    "jep": 496,
+    "prerequisite_commit": "3f53d571343792341481f4d15970cdc0bcd76a5e",
+    "feature_commit": "13987b4244614d594dc8f94c288eddb6239a066f",
+    "product_materialization": false
+  },
+  "invariant_locks": {
+    "JAVA21_IDENTITY": "LOCKED",
+    "PUBLIC_API": "REVIEW_REQUIRED",
+    "SECURITY_REVIEW": "MANDATORY",
+    "A3_PREPARATION": "MANDATORY",
+    "NATIVE_ACCELERATION": "OUT_OF_SCOPE_UNTIL_JAVA_ORACLE"
+  },
+  "allowed_delta": "Inventory, dependency closure, exact upstream path denominator, security proof planning",
+  "forbidden": [
+    "security product mutation",
+    "unreviewed public API exposure",
+    "dropping JDK-8340327 prerequisite",
+    "native optimization before Java oracle",
+    "promotion without ACVP/provider/security proof"
+  ],
+  "verify_order": [
+    "inventory",
+    "dependency audit",
+    "A3 Java preparation",
+    "source21 compile",
+    "FIPS 203 ACVP vectors",
+    "provider semantics",
+    "security jtreg",
+    "whole image",
+    "fixed point"
+  ],
+  "stop_conditions": [
+    "missing prerequisite",
+    "source-level incompatibility",
+    "public API incompatibility",
+    "vector mismatch",
+    "provider-order drift"
+  ]
+}
