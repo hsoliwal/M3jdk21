@@ -13,11 +13,22 @@ completion claim.
 - M3JDK21 verbatim baseline: OpenJDK 21 GA
   `890adb6410dab4606a4f26a942aed02fb2f55387`
 
-The upstream implementation commit touches **59 paths**:
+The initial upstream implementation commit touches **59 paths**.
 
-- **42** product/runtime/SA/WhiteBox paths;
+The mandatory cumulative lineage is:
+
+1. JDK-8318706 / `38cfb220ddadbb401cc15f313aadb8234f626210` — JEP 423 implementation;
+2. JDK-8323610 / `8643cc21333c6b51242ed3b9295b25f372244755` — pin-count overflow fix;
+3. JDK-8322484 / `0d5f5e15d43f94a79c6133baecd5af217365d176` — pin-cache performance repair.
+
+The cumulative materialization denominator is therefore **64 paths**:
+
+- **47** product/runtime/SA/WhiteBox paths;
 - **15** admitted regression/proof paths;
 - **2** upstream-deleted JDK21 test paths that M3JDK21 preserves by default.
+
+The five additional product paths are introduced by the mandatory pin-cache repair and are first-class
+FILE atoms. A packet that materializes only the initial 59-path implementation is incomplete.
 
 ## Compatibility split
 
@@ -40,9 +51,11 @@ Java21 paths unless a later compatibility proof authorizes removal.
 
 The first pass is strictly file-atomic:
 
-1. pin all 59 upstream touched paths in `PATHS.txt`;
+1. pin the 64-path cumulative denominator in `PATHS.txt`;
 2. exclude the two upstream deletions from source materialization;
-3. generate one exact Java/text/native FILE atom per admitted path from JDK22 GA state;
+3. audit selected-path history from the implementation parent through the two mandatory fixes;
+4. require no unreviewed selected-path commit between the cumulative final fix and JDK22 GA;
+5. generate one exact Java/text/native FILE atom per 62 admitted path from the proven cumulative donor state;
 4. compare every candidate against the JDK21 verbatim preimage;
 5. retain per-file JUnit/jtreg/native proof references;
 6. only after all FILE atoms reach fixed point may G1 package/module composition be proposed.
@@ -57,6 +70,13 @@ FILE
 ```
 
 No LIBRARY_API promotion is implied by this inventory.
+
+## Donor-state rule
+
+JDK22 GA may be used as the physical postimage source only after selected-path lineage proves that
+the 62 admitted paths contain no unreviewed intervening changes beyond the three required commits,
+and no later JDK22-GA change modifies them after the cumulative final fix. If that audit finds
+additional commits, those commits become explicit dependency/review rows before materialization.
 
 ## Required proof before promotion
 
