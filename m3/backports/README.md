@@ -67,8 +67,7 @@ The pinned GA intervals contain 14,948 upstream commits:
 - JDK 26 interval: 2,611
 - JDK 27 interval: 2,358
 
-`JEP_CATALOGUE.tsv` records all 82 JEPs delivered by JDK 22 through JDK 27 and gives their
-initial downstream disposition. A disposition is an admission decision, not implementation evidence.
+`RELEASE_JEP_AUTHORITY.tsv` is the fail-closed released-feature denominator for JDK 22 through JDK 27. `JEP_CATALOGUE.tsv` records all 85 authority JEPs and gives their downstream disposition. A disposition is an admission decision, not implementation evidence.
 
 `UPSTREAM_CHANGE_SEEDS.tsv` records individually inspected non-JEP enhancements. It is intentionally
 only a seed. `inventory.py` is the denominator builder: against a complete local `openjdk/jdk`
@@ -383,7 +382,7 @@ recipe JUnit and fixed-point verification pass. See `recipes/jdk-8374808/`.
 M3JDK21 backport convergence is complete only when:
 
 - the full 14,948-commit released denominator is inventoried;
-- all 82 JEPs and all non-JEP changes have a compatibility decision or explicit pending proof;
+- all 85 released JEPs and all non-JEP changes have a compatibility decision or explicit pending proof;
 - every proven-compatible change is implemented or proven already present by equivalence;
 - every accepted backport has provenance and verification evidence;
 - the full M3JDK21 build/test gates are green; and
