@@ -65,7 +65,9 @@ final class M3StringBalancedCanonicalDagFinal2RecipeTest {
                 java("src/java.base/share/classes/java/lang/M3StringPool.java",
                         "00-M3StringPool.java.txt"),
                 java("src/java.base/share/classes/java/lang/M3StringTuple.java",
-                        "01-M3StringTuple.java.txt"));
+                        "01-M3StringTuple.java.txt"),
+                java("test/jdk/java/lang/String/M3StringCanonicalDagTest.java",
+                        "02-M3StringCanonicalDagTest.java.txt"));
     }
 
     private static List<SourceFile> textAfter() {
