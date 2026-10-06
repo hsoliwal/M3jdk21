@@ -1,7 +1,10 @@
-# MIndex-backed ordinary String integration
+# M3String-backed ordinary String integration
 
-This candidate replaces #5's provisional String leaf directory with #4's canonical
-`java.lang.MIndexString` owner and retains #5's tested VM boundary protections. It
+This candidate adapts the Synexia MIndex String donor model into the M3JDK target runtime.
+Synexia's `com.synexia.indexstring.MIndexString` is the donor/reference type; the M3JDK
+counterpart is `java.lang.M3String`. M3 target naming is authoritative inside the JDK.
+The target preserves the donor owner+coordinate structure and retains the tested VM boundary
+protections. It
 requires a complete matched OpenJDK/HotSpot image. Do not transplant classes or
 replace the system JDK. The flag is `-XX:+UnlockExperimentalVMOptions
 -XX:+UseM3StringStorage`; it forces interpreter mode. Compiled mode, CDS, JFR,
@@ -36,37 +39,49 @@ file only after both child VMs have mapped it, then verify content after GC.
 
 ## Storage and Java behavior
 
-After VM bootstrap, trusted/array/charset/builder/copy constructors admit content
-to MIndex storage before publishing final String fields. A shared hit retains its
-mapped scalar and no temporary constructor payload array. Equal live local misses
-share the canonical immutable Compact-String array. Local and tuple tables hold
-weak references, with queued metadata cleanup during admission. This is not a
-fixed total-memory budget: metadata scales with live atoms/tuples and pending
-cleanup. The finite mapped lexicon remains owned for the VM's lifetime.
+After VM bootstrap, trusted/array/charset/builder/copy constructors may admit content
+to M3String storage before publishing the logical String value. A shared hit retains its
+mapped scalar owner. A VM-local miss moves the immutable spelling into canonical native
+memory; M3String itself retains only one owner reference plus one packed coordinate.
+For M3-backed Strings the legacy `String.value` array is a compatibility sentinel rather
+than canonical text. Local and tuple lookup tables hold weak references, with queued
+metadata/native cleanup during admission. This is not a fixed total-memory budget:
+metadata scales with live atoms/tuples and pending cleanup. The finite mapped lexicon
+remains owned for the VM's lifetime.
 
 Two-reference `+`, `concat`, eligible general invokedynamic concat recipes,
 `substring`, bounded `repeat` and bounded `String.join` compose scalar/range tuples.
-Equal live geometry shares one tuple body. Full and partial slices retain the same
-backing, including small slices of large atoms; that retention is deliberate.
-Full-atom hashes combine precomputed Java hashes with powers of 31. Java hash and
-VM StringTable hashing avoid rescanning full joined atoms. Original String identity
-and content-based `intern` semantics are separate from descriptor identity.
+Tuple geometry is maintained as a bounded-height persistent DAG. Canonical tuple reuse is
+independent of binary-tree parenthesization: the same normalized ordered terminal M3 atom
+owner/range sequence converges after exact verification. Candidate hashes route lookup only;
+hash equality never proves canonical identity. Full and partial slices retain the same owner
+and change only their packed coordinate, including small slices of large atoms; that retention
+is deliberate. Java hash and VM StringTable hashing avoid unnecessary rescans. Original String
+identity and content-based `intern` semantics remain separate from M3 coordinate identity.
 
-Pre-bootstrap wrappers retain their original final byte arrays and may attach
-canonical metadata later. They cannot discard those arrays retroactively.
-Empty Strings may keep the ordinary empty representation. General recipes linked
-before activation and large join/repeat paths retain explicit contiguous fallbacks.
-There is no claim that every concat shape or every consumer remains unmaterialized.
-Other byte-array consumers use a separate descriptor cache. `toCharArray` traverses
-atoms directly into its required result, without allocating an extra byte cache.
+Pre-bootstrap wrappers may retain their original flat byte arrays because VM bootstrap
+cannot retroactively rewrite already-published final layout state. Post-activation M3-backed
+Strings use M3String as semantic authority. Java `byte[]` / `char[]` values are projections
+or compatibility shadows, not canonical M3 payload. Public copy APIs return fresh caller-owned
+arrays; JNI/native String access similarly materializes/release-manages shadows. General recipes
+linked before activation and explicitly unsupported boundaries may retain contiguous fallbacks.
+There is no claim that every consumer is zero-materialization.
 
-VM readers acquire the volatile descriptor. Native UTF-8 conversions retain #5's
-no-scratch-allocation buffer paths. JNI critical acquisition always copies while
-the flag is enabled, so later lazy descriptor attachment cannot change release
-ownership. JNI/JVMTI tests inspect the Java cache before and after native traversal.
-SA's decoder is adapted and compiled; live debugger attachment is not tested.
+VM readers acquire the M3String coordinate and descend the M3 owner graph. Native UTF-8
+and UTF-16 conversion paths produce compatibility shadows from canonical M3 text. JNI critical
+acquisition copies while the flag is enabled, so release ownership remains explicit. Returned
+shadows never become canonical M3String storage. JNI/JVMTI tests inspect the boundary before and
+after native traversal. SA's decoder is adapted and compiled; live debugger attachment is not tested.
 
-## Boundary with the application MIndexString
+## Internal precompute invariant
+
+All String precompute is implementation-internal in both worlds. Synexia donor precompute maps to
+M3JDK internal fact/search lanes; it is not public `java.lang.String` API. Fixed facts attach to
+canonical owner/range identity, length-proportional plans live in separately bounded caches, and
+absence/eviction of any fact changes performance only. Precompute never becomes a second spelling
+store and never owns the canonical text.
+
+## Boundary with the Synexia donor MIndexString
 
 The mapped payload owner is now interoperable with #7498: ordinary Strings and
 its SharedArrayPool reader can use the same committed file bytes. This does **not**
