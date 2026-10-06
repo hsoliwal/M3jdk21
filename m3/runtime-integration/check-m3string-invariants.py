@@ -25,6 +25,7 @@ atom = read("src/java.base/share/classes/java/lang/M3StringAtom.java")
 tuple_ = read("src/java.base/share/classes/java/lang/M3StringTuple.java")
 facts = read("src/java.base/share/classes/java/lang/M3StringFacts.java")
 search_precompute = read("src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java")
+position_precompute = read("src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java")
 tq = read("src/java.base/share/classes/jdk/internal/mindex/M3TQ.java")
 string = read("src/java.base/share/classes/java/lang/String.java")
 symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
@@ -99,6 +100,30 @@ for fragment in [
 ]:
     if fragment not in tuple_:
         fail(f"M3StringTuple bulk range projection missing: {fragment}")
+
+# Position masks are a separate bounded weak-owner lane. They store one conservative signal per
+# 64 UTF-16 units and may skip blocks only on a negative signal.
+for fragment in [
+    "private static final int BLOCK_SIZE = 1 << BLOCK_SHIFT;",
+    "private static final int SLOTS = 64;",
+    "private static final int MAX_SOURCE_UNITS = 32_768;",
+    "WeakReference<M3StringOwner>",
+    "long[] signals",
+    "M3StringFacts.codeUnitSignal(unit)",
+    "static long maximumRetainedPrimitiveBytes()",
+]:
+    if fragment not in position_precompute:
+        fail(f"M3 position precompute invariant missing: {fragment}")
+for fragment in [
+    "M3StringPositionPrecompute.indexOf(this, unit, fromIndex, endIndex)",
+    "M3StringPositionPrecompute.lastIndexOf(this, unit, fromIndex)",
+]:
+    if fragment not in m3:
+        fail(f"M3 String position precompute route missing: {fragment}")
+if "M3StringPositionPrecompute" not in string:
+    # String delegates through M3String methods; do not require direct coupling.
+    if "return storage.indexOf((char) ch" not in string or "return storage.lastIndexOf((char) ch" not in string:
+        fail("java.lang.String BMP search lost M3 position-precompute route")
 
 # Exact trigram membership is owned by M3TQ.Facts and reused by a separate bounded weak
 # source-range cache. Do not duplicate exact trigram arrays in M3StringFacts.
