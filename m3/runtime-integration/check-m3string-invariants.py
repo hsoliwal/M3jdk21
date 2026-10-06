@@ -48,6 +48,10 @@ workflow = read(".github/workflows/mindex-string-backing.yml")
 recipe_receipt = read("m3/docs/synexia-recipe-application.md")
 builder = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
 native_string = read("src/java.base/share/native/libjava/String.c")
+hotspot_inline = read("src/hotspot/share/classfile/javaClasses.inline.hpp")
+hotspot_classes = read("src/hotspot/share/classfile/javaClasses.cpp")
+hotspot_symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
+hotspot_class_macros = read("src/hotspot/share/classfile/vmClassMacros.hpp")
 vm_intrinsics = read("src/hotspot/share/classfile/vmIntrinsics.cpp")
 string_opts = read("src/hotspot/share/opto/stringopts.cpp")
 native_string_test = read("test/jdk/java/lang/String/nativeEncoding/libstringPlatformChars.c")
@@ -801,6 +805,33 @@ for fragment in [
         fail(f"M3 HotSpot intrinsic guard missing: {fragment}")
 if "if (UseM3StringStorage)" not in string_opts or "return;" not in string_opts:
     fail("C2 String concat optimizer is not fail-closed for M3 storage")
+
+# HotSpot may reuse already-prepared exact owner-range facts for modified UTF-8 length.
+# Cache absence must remain a fail-open scan fallback.
+for fragment in [
+    "java/lang/M3StringOwner$RangeFact",
+    "m3_string_range_fact_signature",
+]:
+    if fragment not in hotspot_symbols:
+        fail(f"M3 VM range-fact symbol missing: {fragment}")
+if "M3StringRangeFact_klass" not in hotspot_class_macros:
+    fail("M3 VM range-fact klass registration missing")
+for fragment in [
+    "_owner_range0_offset",
+    "_owner_range3_offset",
+    "_range_coordinate_offset",
+    "_range_facts_offset",
+    "M3_STRING_RANGE_FACT_FIELDS_DO",
+]:
+    if fragment not in hotspot_classes:
+        fail(f"M3 VM range-fact offset plumbing missing: {fragment}")
+for fragment in [
+    "range->long_field(_range_coordinate_offset) == wanted",
+    "range->obj_field_acquire(_range_facts_offset)",
+    "return facts == nullptr ? -1",
+]:
+    if fragment not in hotspot_inline:
+        fail(f"M3 VM range modified-UTF fact reuse missing: {fragment}")
 
 # Donor class naming must not leak back into live VM symbols/layout.
 for path, text in [
