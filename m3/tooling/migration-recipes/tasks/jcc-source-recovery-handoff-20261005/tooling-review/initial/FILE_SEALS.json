@@ -1,0 +1,132 @@
+{
+  "schema": "jcc-static-review-seals/1",
+  "epoch": "T01",
+  "files": [
+    {
+      "path": "INPUTS.json",
+      "bytes": 7320,
+      "sha256": "195ff814b12c14f80cee26c2d86385315d1a4d9829315996be31a36f6a43cf4d",
+      "git_blob_sha1": "82d7f9f343852578adf01ac2647a910e72447318"
+    },
+    {
+      "path": "REVIEW.json",
+      "bytes": 1245,
+      "sha256": "7c5e70a0095e24dbec941b877d51e153f8f46fc67da3c803871766456603a3d3",
+      "git_blob_sha1": "cfadb33fb8648ccc69deb99990dedf01ea85212e"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 9055,
+      "sha256": "3b79302b2797b99bae5013946e1196ca1f4b836c89c69a416cf1db7431684976",
+      "git_blob_sha1": "21d55bd3a4f2977e727d91e22831c9d51d1be466"
+    },
+    {
+      "path": "STATIC_INPUT_CHECKS.json",
+      "bytes": 6923,
+      "sha256": "fc6e7ae2fa63710e714e189722d0a2aa15b0d6a7944767e767b8ce13471a8014",
+      "git_blob_sha1": "7e62fce8651461d0ae4a4a54e2f2f91540ca4917"
+    },
+    {
+      "path": "inputs/BINDING_INPUT_CONTRACT.md",
+      "bytes": 9298,
+      "sha256": "985d699535e0d560ac3b51492533fac226740bd08b0ca4074e044d1ba2241757",
+      "git_blob_sha1": "3ff273cce3544beb1963012d6f5e97216871b06b"
+    },
+    {
+      "path": "inputs/CONTEXT_REFERENCES.json",
+      "bytes": 470167,
+      "sha256": "fbc460874aeb04a688ad0ed9b47ad8e3f3b37f88af09d0f32ecfeedc2827fbed",
+      "git_blob_sha1": "5f4cca8343c48f3c8d3d113222b12c3da4018fb3"
+    },
+    {
+      "path": "inputs/DERIVATION_INPUTS.json",
+      "bytes": 177,
+      "sha256": "9c2eb2a5d487896b7fbfd13a7ddb028ce9c13f7457e5889e63731d6d550d7824",
+      "git_blob_sha1": "7e17325f91b2c1c77948a0f2cb704bcb50ef46a7"
+    },
+    {
+      "path": "inputs/DERIVATION_PREPARATION.md",
+      "bytes": 5154,
+      "sha256": "831ff5d5e7fd24206224071c76396304a5d12b10ba6a3eaf89679c05c1a18d49",
+      "git_blob_sha1": "31cae11499d4aaf9c5261291e6ce2651f2f09dbf"
+    },
+    {
+      "path": "inputs/FINAL_SOURCE_INPUTS.json",
+      "bytes": 459,
+      "sha256": "9b7da59a722b5ac719b22f5f05b18845b63969b94531621d6f15179ca135a6b9",
+      "git_blob_sha1": "3dddee9494c0cd8d903cbd91ae54d550e2e5ad22"
+    },
+    {
+      "path": "inputs/HANDOFF_DOCUMENT.template.md",
+      "bytes": 10613,
+      "sha256": "cb91b2dace9f4043fb68baea120350aff715fc37d718d576bdc0d2fb9d1febfa",
+      "git_blob_sha1": "db19e81c5e89ebb9ff5a579d0c127d199a46123f"
+    },
+    {
+      "path": "inputs/JccSourceRecoveryHandoffTest.java",
+      "bytes": 29924,
+      "sha256": "18c22fbd3ffecaf2ff01b956073ce070e839ef401a2cf173695d94ceefe747d4",
+      "git_blob_sha1": "ca13037a64d93a3b7565a7fc55197b9433624cfd"
+    },
+    {
+      "path": "inputs/UNBOUND_READINESS_02.json",
+      "bytes": 4146,
+      "sha256": "b4fb5b2f3cef2354e8d75677c80052c225dc19491dc2e0a46b6332e878be9cff",
+      "git_blob_sha1": "1e3fc1614b83a251c3a9e7ea0ac41850d82e00bb"
+    },
+    {
+      "path": "inputs/author_e04.py",
+      "bytes": 17171,
+      "sha256": "52530abace51d6a429f00490aaa4d86265901d69cfd3d6a8d71f3b4c3fe8a7c6",
+      "git_blob_sha1": "c352559edec8ad4adb377f9b4feb1294774c6952"
+    },
+    {
+      "path": "inputs/before00-name-mapping.json.txt",
+      "bytes": 236215,
+      "sha256": "e4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3",
+      "git_blob_sha1": "d10174dd61016069b9d5b73b7fd581a025855bcc"
+    },
+    {
+      "path": "inputs/before01-jcc-source-handoff.md.txt",
+      "bytes": 16423,
+      "sha256": "59ed76969f86486e7adb377409e284f69577fe02754006fdfe5b3938a16760a0",
+      "git_blob_sha1": "69ef3f693b65ec5dc95ab38f35c449c933c1c80b"
+    },
+    {
+      "path": "inputs/before02-source-destination-bindings.json.txt",
+      "bytes": 92103,
+      "sha256": "049c7c1987c05a15f4152fcb8f261a65245d72a25688d5a530a4afa5405cd3ef",
+      "git_blob_sha1": "b6283a33b9348f4ac6da3adaf5a35edb34a5a0c1"
+    },
+    {
+      "path": "inputs/before03-root-coverage-obligations.tsv.txt",
+      "bytes": 107597,
+      "sha256": "59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12",
+      "git_blob_sha1": "b734e19c2dace50691612215e9a7cfb70c014aab"
+    },
+    {
+      "path": "inputs/derive_source_handoff.py",
+      "bytes": 11994,
+      "sha256": "c344090ff2fdd35ba8d695a1f1d183699316a0d822257a5bae9f91782fdc9ed7",
+      "git_blob_sha1": "974a6f2cddc9af78f84a78eeeedd83299e1e3f81"
+    },
+    {
+      "path": "inputs/run_verification.py",
+      "bytes": 8913,
+      "sha256": "2a14e773f11fbdf45e9467c558971e552be7183234bdb72212e7d691e71d5ca2",
+      "git_blob_sha1": "629aac09b72466fa4a167f958b319a858b38e2c6"
+    },
+    {
+      "path": "inputs/source_verify_publication.py",
+      "bytes": 9623,
+      "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639",
+      "git_blob_sha1": "a4e9bdad2fc2394f84a4593460c7eeab5e94f4e3"
+    },
+    {
+      "path": "inputs/test_jcc_source_recovery_handoff_packet.py",
+      "bytes": 17089,
+      "sha256": "90dc23b1a8db4ec3347048c7f85e688a76893633955e877eab723bdd87d58d19",
+      "git_blob_sha1": "e25e8cff096a7d7785b2d61cdbcea64022bc8b9b"
+    }
+  ]
+}

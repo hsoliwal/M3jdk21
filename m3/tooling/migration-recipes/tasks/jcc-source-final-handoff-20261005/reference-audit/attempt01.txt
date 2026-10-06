@@ -1,0 +1,1 @@
+Checker-only failed observation: declaration comparison expected pipe separators; actual canonical TSV uses semicolons. It reached the root declaration comparison after source/destination and lineage checks. No output/candidate/production mutation, no test or installer rerun. Corrected checker uses the existing semicolon representation.

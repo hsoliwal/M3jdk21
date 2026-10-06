@@ -1,0 +1,65 @@
+--- T01/author_e04.py
++++ T02/author_e04.py
+@@ -32,7 +32,34 @@
+  assert row['commit']==source and row['tracking_ref']==ref and row['repo']=='hsoliwal/com.synexia'
+  return {k:copy.deepcopy(row[k]) for k in ('repo','commit','module','path','symbol','signatures','sha256','git_blob_sha1','fingerprint','revision_role','tracking_ref')}
+ 
+-def validate_inputs(f):
++def admit_receipt_targets(f,require_absent=True):
++ reserved={'PUBLICATION_READBACK.json':f['publication_receipt'],'SOURCE_FIELDS_AND_PROOFS.json':f['source_inventory'],'ROOT_ACCOUNTING.json':f['root_accounting']}
++ extras=f['additional_receipts'];assert isinstance(extras,dict)
++ for name in extras:
++  assert isinstance(name,str) and name not in ('','.','..') and '\\' not in name
++  relative=Path(name)
++  assert not relative.is_absolute() and relative.as_posix()==name
++  assert all(part not in ('','.','..') for part in relative.parts)
++ assert not set(reserved)&set(extras),'Additional receipt replaces a reserved name'
++ receipts={**reserved,**extras};destinations=[]
++ for name in receipts:
++  destination=R/TASK/'source-recovery'/name
++  for parent in destination.parents:
++   assert not parent.is_symlink(),('Symlink receipt parent',parent)
++   assert not parent.exists() or parent.is_dir(),('Receipt parent is not a directory',parent)
++  assert not destination.is_symlink(),destination
++  if require_absent:assert not destination.exists(),destination
++  else:
++   assert destination.is_file(),destination
++   assert ident(destination)==ident(checked_ref(receipts[name])),('Authored receipt drift',destination)
++  destinations.append(destination)
++ assert len(destinations)==len(set(destinations))
++ for index,left in enumerate(destinations):
++  for right in destinations[index+1:]:
++   assert left not in right.parents and right not in left.parents,('Receipt file/ancestor conflict',left,right)
++ return receipts
++
++def validate_inputs(f,receipts_absent=False):
+  if not __debug__:raise RuntimeError('Optimized Python disables required E4 input admission assertions')
+  # No writes precede complete admission of real published identity and local proofs.
+  assert f['state']=='PUBLISHED_READBACK_VERIFIED','Recovery publication has not been bound'
+@@ -72,7 +99,7 @@
+  assert source in document and root in document and f['source_pr'] in document
+  assert f['pending_obligations'] and all(isinstance(x,str) and x for x in f['pending_obligations'])
+  assert f['source_qualification_reviewed'] is True and f['promote_capability'] is False
+- assert not {'PUBLICATION_READBACK.json','SOURCE_FIELDS_AND_PROOFS.json','ROOT_ACCOUNTING.json'} & set(f['additional_receipts'])
++ admit_receipt_targets(f,require_absent=receipts_absent)
+  for rid in IDS:
+   assert isinstance(f['record_observations'][rid],str) and f['record_observations'][rid].strip()
+   assert isinstance(f['record_reasons'][rid],str) and f['record_reasons'][rid].strip()
+@@ -82,7 +109,7 @@
+  return source,root,ref,inventory,rootacct,baseline
+ 
+ def main():
+- f=read(B/'FINAL_SOURCE_INPUTS.json');source,root,ref,inventory,roots,context=validate_inputs(f)
++ f=read(B/'FINAL_SOURCE_INPUTS.json');source,root,ref,inventory,roots,context=validate_inputs(f,receipts_absent=True)
+  assert not (C/'plan.json').exists() and not (B/'AUTHORING_RESULT.json').exists(),'Use a new explicit epoch for any revised afterimages'
+  oldplan=read(OLD/'plan.json');assert oldplan['plan_sha256']=='af65912789780e214f09644b38f542db5f7670b83ee1fada228bce08f8f9b30e'
+  for guard in oldplan['guards']:assert ident(R/guard['path'])['sha256']==guard['sha256']
+@@ -112,7 +139,7 @@
+  binding['source_execution']=copy.deepcopy(inventory['source_execution'])
+  binding['source_publication']=copy.deepcopy(inventory['source_publication'])
+  assert binding['source_publication']['commit']==source and binding['source_publication']['root_tree']==root
+- evidence_inputs={'PUBLICATION_READBACK.json':f['publication_receipt'],'SOURCE_FIELDS_AND_PROOFS.json':f['source_inventory'],'ROOT_ACCOUNTING.json':f['root_accounting'],**f['additional_receipts']}
++ evidence_inputs=admit_receipt_targets(f)
+  evidence={}
+  for name,receipt in evidence_inputs.items():
+   assert not Path(name).is_absolute() and '..' not in Path(name).parts

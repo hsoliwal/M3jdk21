@@ -1,0 +1,58 @@
+{
+  "versions": {
+    "java": "openjdk version \"21.0.2\" 2024-01-16\nOpenJDK Runtime Environment (build 21.0.2+13-58)\nOpenJDK 64-Bit Server VM (build 21.0.2+13-58, mixed mode, sharing)",
+    "javac": "javac 21.0.2",
+    "maven": "Apache Maven 3.9.12 (848fbb4bf2d427b72bdb2471c22fced7ebd9a7a1)\nMaven home: /workspace/scratch/877d9513c002/toolchains/apache-maven-3.9.12\nJava version: 21.0.2, vendor: Oracle Corporation, runtime: /workspace/scratch/877d9513c002/toolchains/jdk-21.0.2\nDefault locale: en, platform encoding: UTF-8\nOS name: \"linux\", version: \"6.18.44\", arch: \"amd64\", family: \"unix\"",
+    "gcc": "gcc (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+  },
+  "inputs": [
+    {
+      "path": "/workspace/scratch/877d9513c002/toolchains/jdk-21.0.2/bin/java",
+      "bytes": 12328,
+      "sha256": "5dda16a9b19944151e5bfc0684f438a6a1a3d2a2e28d19cb5bc0422daeaf185d"
+    },
+    {
+      "path": "/workspace/scratch/877d9513c002/toolchains/jdk-21.0.2/bin/javac",
+      "bytes": 12416,
+      "sha256": "11b7944c5ca2a06b03c24452bb2841f0cec2abc891cd0379ddf57bc1edad89d5"
+    },
+    {
+      "path": "/workspace/scratch/877d9513c002/toolchains/jdk-21.0.2/bin/javap",
+      "bytes": 12384,
+      "sha256": "27e50d439fa0ae7ed581de4bdfc5e966807f74ddc0c2860fd0f5626699f907bd"
+    },
+    {
+      "path": "/workspace/scratch/877d9513c002/toolchains/jdk-21.0.2/release",
+      "bytes": 1223,
+      "sha256": "f99c9bbe8dc946d63909e319ba2d9dcd8cf7a3078721d1f7ab177bb275a740bb"
+    },
+    {
+      "path": "/workspace/scratch/877d9513c002/toolchains/jdk-21.0.2/lib/modules",
+      "bytes": 139257677,
+      "sha256": "9d7505f88da56f28139935bdbd4dc4205dcc21145d8a6ff393ad509dd42c5b6d"
+    },
+    {
+      "path": "/workspace/scratch/877d9513c002/toolchains/apache-maven-3.9.12/bin/mvn",
+      "bytes": 6184,
+      "sha256": "f9381d0cb98abaaf9592dae421eddc497e84ed9bfb723b84c111d1350863c3a2"
+    },
+    {
+      "path": "/workspace/scratch/877d9513c002/toolchains/apache-maven-3.9.12/boot/plexus-classworlds-2.9.0.jar",
+      "bytes": 54086,
+      "sha256": "1ad3292cd563381e3fd632f3fded1988f9e9b2be7a9f3db63ff4c4cedba13fa5"
+    },
+    {
+      "path": "/workspace/scratch/5809f5dce3dd/provider-superset-20261005/toolchain/checkstyle-12.3.1-all.jar",
+      "bytes": 17461101,
+      "sha256": "4ecdfa8504452e1557d2e2c364085f0ae5703b67ec9c759976ca378d41cb8f7a"
+    },
+    {
+      "path": "/usr/bin/gcc",
+      "bytes": 1023032,
+      "sha256": "6117c52522997d2aaccb2b52b3c6bf42c0a6c5edb1d718431fed6b2fc5fec234"
+    }
+  ],
+  "timezone_env": "Europe/Berlin",
+  "locale": "C.UTF-8",
+  "offline": true
+}

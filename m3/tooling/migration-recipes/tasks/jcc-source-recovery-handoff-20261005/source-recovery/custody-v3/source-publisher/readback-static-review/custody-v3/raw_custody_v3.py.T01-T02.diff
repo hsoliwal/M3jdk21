@@ -1,0 +1,25 @@
+--- T01/raw_custody_v3.py
++++ T02/raw_custody_v3.py
+@@ -30,8 +30,10 @@
+ 
+ def bound(spec, expected_sha=None):
+     from audit_base import OUT, digest
+-    path = Path(spec['local_path']).resolve(strict=True)
+-    assert path.is_file() and not path.is_symlink() and path.is_relative_to(OUT)
++    original_path = Path(spec['local_path'])
++    assert original_path.is_file() and not original_path.is_symlink()
++    path = original_path.resolve(strict=True)
++    assert path.is_relative_to(OUT)
+     raw = path.read_bytes()
+     assert digest(raw) == spec['sha256']
+     if expected_sha is not None:
+@@ -138,6 +140,9 @@
+     commit = custody['verification_commit']
+     assert commit['request_url'] == 'https://api.github.com/repos/' + REPOSITORY + '/git/commits/' + PROBE_COMMIT
+     body = commit['body']
++    original_response = commit['original_response']
++    assert original_response['isError'] is False
++    assert json.loads(original_response['structuredContent']['content']) == body
+     assert body['sha'] == PROBE_COMMIT and body['tree']['sha'] == PROBE_TREE
+     assert [parent['sha'] for parent in body['parents']] == [BASE_COMMIT]
+     for sha, entries in base_trees.items():
