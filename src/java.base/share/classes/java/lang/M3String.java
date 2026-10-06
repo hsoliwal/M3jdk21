@@ -551,6 +551,45 @@ final class M3String implements CharSequence {
         return M3StringPositionPrecompute.lastIndexOf(this, unit, fromIndex);
     }
 
+    int indexOfCodePoint(int codePoint, int fromIndex, int endIndex) {
+        if (!Character.isValidCodePoint(codePoint)) return -1;
+        if (Character.isBmpCodePoint(codePoint)) {
+            return indexOf((char) codePoint, fromIndex, endIndex);
+        }
+
+        char high = Character.highSurrogate(codePoint);
+        char low = Character.lowSurrogate(codePoint);
+        M3StringFacts prepared = facts();
+        if (!prepared.mayContainCodeUnit(high) || !prepared.mayContainCodeUnit(low)) return -1;
+
+        int end = Math.min(length(), endIndex);
+        int candidate = indexOf(high, fromIndex, Math.max(0, end - 1));
+        while (candidate >= 0) {
+            if (candidate + 1 < end && charAt(candidate + 1) == low) return candidate;
+            candidate = indexOf(high, candidate + 1, Math.max(0, end - 1));
+        }
+        return -1;
+    }
+
+    int lastIndexOfCodePoint(int codePoint, int fromIndex) {
+        if (!Character.isValidCodePoint(codePoint)) return -1;
+        if (Character.isBmpCodePoint(codePoint)) {
+            return lastIndexOf((char) codePoint, fromIndex);
+        }
+
+        char high = Character.highSurrogate(codePoint);
+        char low = Character.lowSurrogate(codePoint);
+        M3StringFacts prepared = facts();
+        if (!prepared.mayContainCodeUnit(high) || !prepared.mayContainCodeUnit(low)) return -1;
+
+        int candidate = lastIndexOf(high, Math.min(fromIndex, length() - 2));
+        while (candidate >= 0) {
+            if (charAt(candidate + 1) == low) return candidate;
+            candidate = lastIndexOf(high, candidate - 1);
+        }
+        return -1;
+    }
+
     int indexOf(M3String needle, int fromIndex) {
         return indexOf(needle, fromIndex, length());
     }
