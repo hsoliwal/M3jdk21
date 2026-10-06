@@ -37,6 +37,8 @@ mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
 native_string = read("src/java.base/share/native/libjava/String.c")
+pattern = read("src/java.base/share/classes/java/util/regex/Pattern.java")
+matcher = read("src/java.base/share/classes/java/util/regex/Matcher.java")
 
 # M3String must remain owner + coordinate only.
 instance_fields = re.findall(
@@ -99,6 +101,13 @@ for fragment in [
 ]:
     if fragment not in search_precompute:
         fail(f"M3 exact trigram search reuse missing: {fragment}")
+for fragment in [
+    "static long maximumRetainedPrimitiveBytes()",
+    "(long) SLOTS * MAX_PATTERN_UNITS * (Integer.BYTES + Long.BYTES)",
+    "(long) SOURCE_SLOTS * MAX_TRIGRAM_SOURCE_UNITS * Long.BYTES",
+]:
+    if fragment not in search_precompute:
+        fail(f"M3 search precompute memory ceiling missing: {fragment}")
 if "public boolean containsAll(Facts required)" not in tq:
     fail("M3TQ exact trigram fact containment missing")
 if "long[] trigram" in facts or "M3TQ.Facts" in facts:
@@ -191,6 +200,42 @@ if '"getChars", "(II[CI)V"' not in char_shadow.group("body"):
     fail("M3 char shadow does not bulk-fill through M3String.getChars")
 if "CallVoidMethodA" not in byte_shadow.group("body") or "CallVoidMethodA" not in char_shadow.group("body"):
     fail("M3 JNI shadows lost single bulk dispatch")
+
+# Regex TQ integration is candidate-only and deliberately narrow. Literal find/search may
+# reject proven absence, but anchored match/lookingAt and case-insensitive literal semantics stay
+# entirely with the stock node engine.
+for fragment in [
+    "transient M3TQ m3Tq;",
+    "has(LITERAL) && !has(CASE_INSENSITIVE)",
+    "M3TQ.fromExact(List.of(pattern))",
+]:
+    if fragment not in pattern:
+        fail(f"Pattern literal TQ compilation boundary missing: {fragment}")
+for fragment in [
+    "private static final int M3_TQ_MAX_UTF16_UNITS = 32_768;",
+    "!(text instanceof String)",
+    "M3TQ.precompute(text, this.from, to, M3_TQ_MAX_UTF16_UNITS)",
+    "if (!m3TqAllowsSearch())",
+    "this.hitEnd = true;",
+]:
+    if fragment not in matcher:
+        fail(f"Matcher literal TQ search boundary missing: {fragment}")
+match_method = re.search(
+    r"boolean\s+match\(int from, int anchor\)\s*\{(?P<body>.*?)\n\s*\}",
+    matcher,
+    flags=re.DOTALL,
+)
+if not match_method or "m3TqAllowsSearch" in match_method.group("body"):
+    fail("anchored Matcher.match must not use M3TQ candidate gate")
+
+if "catch (OutOfMemoryError unavailable)" not in pattern:
+    fail("Pattern literal TQ compile must fail open on precompute OOME")
+if matcher.count("catch (OutOfMemoryError unavailable)") < 1:
+    fail("Matcher literal TQ source precompute must fail open on OOME")
+if "m3TqFactsText" in matcher:
+    fail("Matcher TQ cache must not retain a duplicate strong input reference")
+if "m3TqFacts = null;" not in matcher or "m3TqFactsFrom = -1;" not in matcher:
+    fail("Matcher reset must invalidate cached TQ facts")
 
 # Donor class naming must not leak back into live VM symbols/layout.
 for path, text in [
@@ -308,6 +353,7 @@ for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringPrecomputeSearchTest.java",
     "M3TQFactsTest.java",
+    "M3RegexLiteralTQTest.java",
     "M3StringHistoryConvergenceRecipeTest",
 ]:
     if required_gate not in workflow:
