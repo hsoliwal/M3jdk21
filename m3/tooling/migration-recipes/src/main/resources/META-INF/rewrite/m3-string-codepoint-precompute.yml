@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.M3StringCodePointPrecompute
+displayName: Converge M3 String code-point precompute
+description: Replays the Synexia-history-derived bounded code-point range/navigation precompute, String routing, exact jtreg proof, and donor-to-M3 mapping without exposing precompute as public API.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk22-m3-string-codepoint-precompute
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-string-codepoint-precompute
