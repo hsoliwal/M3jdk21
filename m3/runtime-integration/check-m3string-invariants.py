@@ -645,6 +645,16 @@ for fragment in [
     if fragment not in (string + m3 + pool + atom):
         fail(f"M3 direct char-array ingress missing: {fragment}")
 
+# Empty-target literal replacement is defined at every UTF-16 code-unit boundary, including
+# between surrogate halves. M3 preserves that exact contract without StringBuilder flattening.
+for fragment in [
+    "M3String replaceEmptyTarget(M3String replacement)",
+    "pieces.add(slice(index, index + 1));",
+    "return new String(storage.replaceEmptyTarget(replacementM3));",
+]:
+    if fragment not in (m3 + string):
+        fail(f"M3 empty-target replacement route missing: {fragment}")
+
 # Canonical single-unit transforms must re-enter the native pool directly rather than create
 # temporary one-character String/byte[] payloads.
 if "String.COMPACT_STRINGS" not in pool
