@@ -1,0 +1,12 @@
+field	value
+jep	485
+title	Stream Gatherers
+current_tree_state	PRODUCT_INTEGRATION_PRESENT
+source_materialized	true
+product_path_count	7
+product_paths	java/util/stream/Gatherer.java,java/util/stream/Gatherers.java,java/util/stream/GathererOp.java,java/util/stream/Stream.java,java/util/stream/ReferencePipeline.java,java/util/stream/AbstractPipeline.java,java/util/stream/package-info.java
+default_java21	NO
+classification	OPT_IN_SE_API_EXTENSION
+mutation_scope	LIBRARY_API
+promotion	NOT_AUTHORIZED
+next_action	RUN_JAVA21_BUILD_GATHERER_JTREG_AND_FIXED_POINT_PROOF
