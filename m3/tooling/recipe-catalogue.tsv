@@ -14,3 +14,4 @@ m3-jep458-multifile-source-launcher	com.m3.rewrite.backport.M3Jep458BackportReci
 m3-a3-algorithm-catalogue	com.m3.rewrite.a3.M3A3AlgorithmCatalogueRecipe	FILE	EVIDENCE_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
 m3-jep485-stream-gatherers	com.m3.rewrite.backport.M3Jep485StreamGatherersBackportRecipe	LIBRARY_API	JAVA21_COMPATIBLE_ADDITIVE_LIBRARY_API	CANDIDATE_UNVERIFIED	PENDING_CI
 m3-release-jep-authority-repair	com.m3.rewrite.backport.M3ReleaseJepAuthorityRepairRecipe	MULTI_MODULE	BEHAVIOR_AND_CONTRACT_PRESERVING	CANDIDATE_UNVERIFIED	PENDING_CI
+m3-jep523-g1-default	com.m3.rewrite.backport.M3Jep523BackportRecipe	MODULE	JAVA21_COMPATIBLE_RUNTIME_DEFAULT_POLICY	CANDIDATE_UNVERIFIED	PENDING_CI
