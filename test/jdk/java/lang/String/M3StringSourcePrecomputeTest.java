@@ -72,7 +72,8 @@ public class M3StringSourcePrecomputeTest {
         String dense = fresh("abc".repeat(600));
         check(dense.indexOf("abc") == 0, "dense source first exact");
         check(dense.lastIndexOf("abc") == dense.length() - 3, "dense source reverse exact");
-        check((boolean) IS_PREPARED.invoke(null, body), "dense fallback does not disturb hot entry");
+        check((boolean) IS_PREPARED.invoke(null, body(dense)),
+                "dense source may prepare even when execution falls back");
     }
 
     private static void randomizedRepeatedSearch() throws Exception {
