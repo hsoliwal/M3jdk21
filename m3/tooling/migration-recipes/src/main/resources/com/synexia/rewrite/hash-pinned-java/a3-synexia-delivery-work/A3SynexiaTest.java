@@ -14,7 +14,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.HexFormat;
 import java.util.List;
 import java.util.Map;
@@ -188,6 +187,54 @@ final class A3SynexiaTest {
                                 sha,
                                 sha,
                                 false,
+                                "STAGE_THEN_REVIEW"));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        new A3Synexia.Row(
+                                0,
+                                "a".repeat(40),
+                                "b".repeat(64),
+                                "c".repeat(64),
+                                "outside/A.java",
+                                SynexiaImportPlan.Action.KEEP,
+                                SynexiaImportPlan.Lane.OPENREWRITE_RECIPE,
+                                A3Synexia.ReviewLane.RECIPE_EXECUTION_REVIEW,
+                                sha,
+                                sha,
+                                false,
+                                "REUSE_VERIFIED_VENDOR"));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        new A3Synexia.Row(
+                                0,
+                                "a".repeat(40),
+                                "b".repeat(64),
+                                "c".repeat(64),
+                                "m3/vendor/synexia/A.java",
+                                SynexiaImportPlan.Action.KEEP,
+                                SynexiaImportPlan.Lane.OPENREWRITE_RECIPE,
+                                A3Synexia.ReviewLane.RECIPE_EXECUTION_REVIEW,
+                                "ABSENT",
+                                sha,
+                                false,
+                                "REUSE_VERIFIED_VENDOR"));
+        assertThrows(
+                IllegalArgumentException.class,
+                () ->
+                        new A3Synexia.Row(
+                                0,
+                                "a".repeat(40),
+                                "b".repeat(64),
+                                "c".repeat(64),
+                                "m3/vendor/synexia/A.java",
+                                SynexiaImportPlan.Action.REPLACE,
+                                SynexiaImportPlan.Lane.OPENREWRITE_RECIPE,
+                                A3Synexia.ReviewLane.RECIPE_EXECUTION_REVIEW,
+                                sha,
+                                sha,
+                                true,
                                 "STAGE_THEN_REVIEW"));
     }
 

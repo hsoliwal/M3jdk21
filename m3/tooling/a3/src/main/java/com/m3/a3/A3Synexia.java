@@ -47,11 +47,15 @@ public final class A3Synexia {
             manifestRoot = sha(manifestRoot, "manifestRoot");
             planRoot = sha(planRoot, "planRoot");
             targetPath = A3WorkValues.sourcePath(targetPath);
+            if (!targetPath.startsWith("m3/vendor/synexia/")) {
+                throw new IllegalArgumentException("targetPath");
+            }
             action = Objects.requireNonNull(action, "action");
             deliveryLane = Objects.requireNonNull(deliveryLane, "deliveryLane");
             reviewLane = Objects.requireNonNull(reviewLane, "reviewLane");
             expectedSha256 = hashOrMarker(expectedSha256, "expectedSha256", "STALE");
             currentSha256 = hashOrMarker(currentSha256, "currentSha256", "ABSENT");
+            requireHashRelation(action, expectedSha256, currentSha256);
             nextAction = A3WorkValues.text(nextAction, "nextAction");
             boolean expectedCandidate =
                     action == SynexiaImportPlan.Action.ADD
@@ -170,11 +174,41 @@ public final class A3Synexia {
         };
     }
 
+    private static void requireHashRelation(
+            SynexiaImportPlan.Action action,
+            String expected,
+            String current) {
+        switch (action) {
+            case ADD -> {
+                if (!"ABSENT".equals(current) || "STALE".equals(expected)) {
+                    throw new IllegalArgumentException("ADD hash relation");
+                }
+            }
+            case KEEP -> {
+                if ("ABSENT".equals(current)
+                        || "STALE".equals(expected)
+                        || !current.equals(expected)) {
+                    throw new IllegalArgumentException("KEEP hash relation");
+                }
+            }
+            case REPLACE -> {
+                if ("ABSENT".equals(current)
+                        || "STALE".equals(expected)
+                        || current.equals(expected)) {
+                    throw new IllegalArgumentException("REPLACE hash relation");
+                }
+            }
+            case STALE -> {
+                if (!"STALE".equals(expected) || "ABSENT".equals(current)) {
+                    throw new IllegalArgumentException("STALE hash relation");
+                }
+            }
+        }
+    }
+
     private static String hashOrMarker(String value, String field, String marker) {
         String checked = A3WorkValues.text(value, field);
-        return marker.equals(checked) || "ABSENT".equals(checked)
-                ? checked
-                : sha(checked, field);
+        return marker.equals(checked) ? checked : sha(checked, field);
     }
 
     private static String gitObject(String value, String field) {
