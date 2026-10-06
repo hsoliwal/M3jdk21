@@ -49,6 +49,37 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
             ]["handoff_required"],
         )
 
+    def test_opt_in_maven_profile_consumes_canonical_synexia_recipe_artifact(self) -> None:
+        pom = ROOT / "tooling" / "migration-recipes" / "pom.xml"
+        tree = ET.parse(pom)
+        ns = {"m": "http://maven.apache.org/POM/4.0.0"}
+        root = tree.getroot()
+
+        version = root.find("m:properties/m:m3.synexia.version", ns)
+        self.assertIsNotNone(version)
+        self.assertEqual("1.0.0-SNAPSHOT", version.text)
+
+        profiles = root.findall("m:profiles/m:profile", ns)
+        profile = next(
+            p
+            for p in profiles
+            if p.find("m:id", ns) is not None
+            and p.find("m:id", ns).text == "m3-synexia-canonical-recipes"
+        )
+        self.assertIsNone(profile.find("m:activation", ns))
+
+        dependency = profile.find(
+            "m:build/m:plugins/m:plugin/m:dependencies/m:dependency", ns
+        )
+        self.assertIsNotNone(dependency)
+        self.assertEqual("com.synexia", dependency.find("m:groupId", ns).text)
+        self.assertEqual(
+            "synexia-openrewrite-recipes", dependency.find("m:artifactId", ns).text
+        )
+        self.assertEqual(
+            "${m3.synexia.version}", dependency.find("m:version", ns).text
+        )
+
     def test_m3index_db_and_jdk_bridge_are_synexia_owned(self) -> None:
         with POLICY.open(encoding="utf-8", newline="") as handle:
             rows = {row["local_surface"]: row for row in csv.DictReader(handle, delimiter="\t")}
