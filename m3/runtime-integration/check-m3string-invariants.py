@@ -484,9 +484,13 @@ for fragment in [
     if fragment not in port_map:
         fail(f"precompute port map missing: {fragment}")
 
+if "M3StringPrecomputeSearchTest.java test/jdk/" in workflow:
+    fail("M3 String workflow contains concatenated path entries")
+
 for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringPrecomputeSearchTest.java",
+    "M3StringInternTest.java",
     "M3StringInternTest.java",
     "M3TQFactsTest.java",
     "M3RegexLiteralTQTest.java",
