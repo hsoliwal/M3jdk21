@@ -1,0 +1,60 @@
+ordinal	commit	date	issue	milestone	subject
+0	2b00ac0d02a110326846c75ea7ea535dccbb1924	2023-12-04T07:07:57Z	8308753	JEP-457	8308753: Class-File API transition to Preview
+1	0217b5ac8b25db96fce026ac027b18024e25a329	2023-12-06T15:32:24Z	8321248		8321248: ClassFile API ClassModel::verify is inconsistent with the rest of the API
+2	519ecd352a66633589f160db7390647d90e36b99	2023-12-07T17:01:29Z	8319413		8319413: Start of release updates for JDK 23
+3	3c6459e1de9e75898a1b32a95acf684050fbe1af	2023-12-11T10:08:42Z	8321641		8321641: ClassFile ModuleAttribute.ModuleAttributeBuilder::moduleVersion spec contains a copy-paste error
+4	3bffe223a34e8077cb1ce11f64fc34fcb0751ac7	2024-02-07T07:54:22Z	8319463		8319463: ClassSignature should have superclass and superinterfaces as ClassTypeSig
+5	71c5bbcec7052a8394dd49c0a8c46801adbfcae4	2024-04-09T09:35:07Z	8329527		8329527: Opcode.IFNONNULL.primaryTypeKind() is not ReferenceType
+6	f9bc2db9a9b8e5b7314fba5f70cb79e07ed02bd8	2024-04-09T14:41:39Z	8325371		8325371: Missing ClassFile.Option in package summary
+7	97c180892b62ccba0041fb4480ecd2191aea0032	2024-04-16T08:23:31Z	8329099		8329099: Undocumented exception thrown by Instruction factory methods accepting Opcode
+8	235ba9a7025964b1e43149c7102e26b82b2081ad	2024-04-18T16:12:50Z	8330458		8330458: Add missing @since tag to ClassFile.JAVA_23_VERSION
+9	ea06129851be7bd9876685f74e35392874154179	2024-04-26T07:02:45Z	8322847		8322847: java.lang.classfile.BufWriter should specify @throws for its writeXXX methods
+10	ae82405ff7a48bc6e61b1d05bf74839b7ed50c11	2024-05-02T10:08:29Z	8323058		8323058: Revisit j.l.classfile.CodeBuilder API surface
+11	c60474b1229b67265acbd709f6ba081303329be4	2024-05-03T11:08:33Z	8323707		8323707: Adjust Classfile API's type arg model to better represent the embodied type
+12	3b8227ba24c7bc05a8ea23801e3816e8fc80de4e	2024-05-07T05:28:45Z	8326836		8326836: Incorrect `@since` tags for ClassSignature methods
+13	784b8fce7a1b05209a8db168c8d2f86484a1a817	2024-05-10T10:50:51Z	8331744		8331744: java.lang.classfile.TypeKind improvements
+14	414a7fdc5e4aae4cec25b0847bb7c163f271b4e0	2024-05-21T08:02:18Z	8311175		8311175: Move BufWriter::asByteBuffer to BufWriterImpl
+15	cfdc64fcb43e3b261dddc6cc6947235a9e76154e	2024-05-24T15:58:34Z	8331291		8331291: java.lang.classfile.Attributes class performs a lot of static initializations
+16	579cf705ff74d1ebb56b605d9a7ca17d87c36d84	2024-05-30T06:12:50Z	8332597		8332597: Remove redundant methods from j.l.classfile.ClassReader API
+17	f608918df3f887277845db383cf07b0863bba615	2024-05-30T11:51:49Z	8332614		8332614: Type-checked ConstantPool.entryByIndex and ClassReader.readEntryOrNull
+18	b101dcb609eae00b406f387cd90e58487d5868df	2024-06-04T16:57:59Z	8333312		8333312: Incorrect since tags on new ClassReader and ConstantPool methods
+19	75dc2f8518d0adea30f7065d6732b807c0220756	2024-06-06T16:01:57Z	8330182		8330182: Start of release updates for JDK 24
+20	8d2f9e57c3797c01c84df007f4d2bfdcd645d0c0	2024-06-08T13:05:36Z	8333749		8333749: Consolidate ConstantDesc conversion in java.base
+21	3a2d426489ead9672512e0c5a6862284a54734ba	2024-07-03T02:42:06Z	8334726		8334726: Remove accidentally exposed individual methods from Class-File API
+22	8a664a4c359deefd7237f3672b62d7d8c1ffb453	2024-07-03T02:43:41Z	8334734		8334734: Remove specialized readXxxEntry methods from ClassReader
+23	f7af4504a804711d93208b763b3e41eafcf61735	2024-07-03T02:49:43Z	8335110		8335110: Fix instruction name and API spec inconsistencies in CodeBuilder
+24	0db9bc57de07f8f1d0bf657621cb1b8fd7b01211	2024-07-03T05:03:56Z	8335290		8335290: Rename ClassFile::transform to ClassFile::transformClass
+25	f4fa35e28b9881729ac47c8518e758bba676fdec	2024-07-04T15:44:57Z	8330954		8330954: since-checker - Fix remaining @ since tags in java.base
+26	cad68e06ecad1e19091d1af9c0f9b8145d6842fb	2024-07-10T21:06:39Z	8335935		8335935: Chained builders not sending transformed models to next transforms
+27	a9f5e76a65f743be9cd995fbea9c78ff9cef3402	2024-07-14T15:01:51Z	8335905		8335905: CompoundElement API cleanup
+28	a253e0ff4b88541d01596b0e73ede4b96a258fca	2024-07-15T12:11:53Z	8335642		8335642: Hide Transform implementation for Class-File API
+29	92de2b2d5f21af38380b437af51e49c7ac142258	2024-07-22T13:27:12Z	8336039		8336039: Doccheck: HTML warnings, broken links and missing files in java.base documentation
+30	22914e0774f5bb8ded3d825bea1dc312b12d4d4a	2024-07-23T04:59:58Z	8335938		8335938: Review XxxBuilder.original and XxxModel.parent
+31	a2a236f9041083e4b8f11e068da0031dd5f52c2b	2024-07-23T12:11:47Z	8335939		8335939: Hide element writing across the ClassFile API
+32	ab27090aa085283233851410827767785b3b7b1f	2024-07-29T21:58:08Z	8337225		8337225: Demote maxStack and maxLocals from CodeModel to CodeAttribute
+33	6154a2129ba505b7163a1998792296827a056750	2024-07-30T17:41:38Z	8336032		8336032: Enforce immutability of Lists used by ClassFile API
+34	93c19ac73c2feb8d6191bc5da98b4a9c8e2b5590	2024-07-30T17:41:49Z	8337219		8337219: AccessFlags factories do not require necessary arguments
+35	78773b1769922611318243b6680d59518ed4e015	2024-08-08T15:52:17Z	8338015		8338015: Fix "Java Java" typo in package info file of java.lang.classfile
+36	6af1d6ff210b3ddbc7d1585428b49631248a500b	2024-08-13T15:14:06Z	8335927		8335927: Revisit AnnotationConstantValueEntry and AnnotationValue.OfConstant
+37	56dec215b0d056fc23137372ecb3376af2a7b891	2024-08-15T13:28:25Z	8338014		8338014: Improve usage of @jvms tags in class file API
+38	961e944fa731dc84be2764c01e4b326187474605	2024-08-16T15:48:54Z	8336754		8336754: Remodel TypeAnnotation to "has" instead of "be" an Annotation
+39	68d1f5c33bf3f64f44f8a10c2f9e4007cfd07d2b	2024-08-20T05:43:04Z	8338543		8338543: ClassBuilder withMethod builders should cache the method type symbol
+40	1ebf2cf639300728ffc024784f5dc1704317b0b3	2024-08-20T19:02:38Z	8336756		8336756: Improve ClassFile Annotation writing
+41	80adea8e0ab3753c3623267c6a2bd3eaed69ad29	2024-08-21T11:58:21Z	8338545		8338545: Functional interface implementations for common pre-boot ClassFile operations
+42	a461369f16a2d92ab428d14c36dd69fa5942bbc5	2024-08-23T15:16:44Z	8338700		8338700: AttributeMapper type parameter should be bounded by Attribute
+43	777ed2b5d2ef8371407cc9bf0370a7cef937cfb7	2024-08-29T15:45:52Z	8339132		8339132: Make DirectCodeBuilder write through without allocating instruction objects
+44	25e03b52094f46f89f2fe8f20e7e5622928add5f	2024-08-30T17:28:28Z	8339115		8339115: Rename TypeKind enum constants to follow code style
+45	ad40a122d632d65052b71125c0dfd58c54e3a521	2024-09-03T13:44:48Z	8339214		8339214: Remove misleading CodeBuilder.loadConstant(Opcode, ConstantDesc)
+46	bd8569bc6cc888cbf514e9329e2c24a059d89711	2024-09-04T12:29:40Z	8339131		8339131: Remove rarely-used accessor methods from Opcode
+47	4d65c3efcaa5f855f9e0fbdd8e9d4f4ed2b44d3b	2024-09-12T15:16:38Z	8339876		8339876: Move constant symbol caches to Utf8EntryImpl
+48	3e14fb9c16e4ac3ad3c565059c534cfeacb45c7b	2024-09-17T16:24:38Z	8340200		8340200: Misspelled constant `AttributesProcessingOption.DROP_UNSTABLE_ATRIBUTES`
+49	2461263aac35b25e2a48b6fc84da49e4b553dbc3	2024-09-21T00:21:04Z	8339217		8339217: Optimize ClassFile API loadConstant
+50	8c8f0d85ce30e45c34d4b096f7f1430cd9e7fd70	2024-09-26T06:34:18Z	8339260		8339260: Move rarely used constants out of ClassFile
+51	39c17b392699007496816f788fca9fbe670dd6f8	2024-10-02T03:30:02Z	8341277		8341277: Validate slot argument for instruction factories
+52	f8db3a831b61bb585c5494a7a8657e37000892b4	2024-10-05T01:21:25Z	8341510		8341510: Optimize StackMapGenerator::processFieldInstructions
+53	1c3e56c3e45be3626afec0461d4ae8059b0b577f	2024-10-05T15:37:18Z	8341512		8341512: Optimize StackMapGenerator::processInvokeInstructions
+54	20f36c666c30e50c446d09cca4ea52395317a7eb	2024-10-06T16:26:45Z	8339329		8339329: ConstantPoolBuilder#constantValueEntry method doc typo and clarifications
+55	a2c775222e17a3ba2e388c9a0eb9ffd33efad219	2024-10-14T17:21:10Z	8317356		8317356: Fix missing null checks in the ClassFile API
+56	3ebfc6c1e27119180700af5ea85e5fa6c1771050	2024-10-17T10:49:53Z	8342336		8342336: Optimize ClassFile imports
+57	ba39321902400e103cdce0b326d0005123b1d87e	2024-11-15T11:40:15Z	8343881		8343881: java.lang.classfile.Attribute  attributeName() method should return Utf8Entry
+58	84ffb64cd73f8af11cf3670c6f19d282c2ac6961	2024-11-15T14:38:17Z	8334714	JEP-484	8334714: Implement JEP 484: Class-File API
