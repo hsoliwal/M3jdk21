@@ -68,6 +68,12 @@ Java_StringPlatformChars_getUtf16(JNIEnv *env, jclass unused, jstring value)
     return result;
 }
 
+JNIEXPORT jint JNICALL
+Java_StringPlatformChars_getUtf8Length(JNIEnv *env, jclass unused, jstring value)
+{
+    return (*env)->GetStringUTFLength(env, value);
+}
+
 JNIEXPORT jbyteArray JNICALL
 Java_StringPlatformChars_getUtf8(JNIEnv *env, jclass unused, jstring value)
 {
