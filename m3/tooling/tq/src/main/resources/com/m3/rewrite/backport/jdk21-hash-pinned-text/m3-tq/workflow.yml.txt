@@ -6,6 +6,8 @@ on:
       - '.github/workflows/m3-tq.yml'
       - '.m3/openrewrite-recipes/**'
       - 'm3/tooling/tq/**'
+      - 'm3/tooling/tq-sync/**'
+      - 'm3/tooling/lane28/**'
       - 'm3/tooling/migration-recipes/**'
       - 'm3/migration/**'
       - 'm3/docs/name-mapping*'
@@ -43,6 +45,10 @@ jobs:
           python3 -m venv "$RUNNER_TEMP/tq-python"
           "$RUNNER_TEMP/tq-python/bin/python" -m pip install -r m3/migration/requirements.txt
           echo "$RUNNER_TEMP/tq-python/bin" >> "$GITHUB_PATH"
+      - name: TQ successor recipe and custody
+        run: |
+          mvn -B -ntp -f m3/tooling/tq-sync/pom.xml verify
+          python3 m3/tooling/tq-sync/verify-plan.py
       - name: Recipe, UTF-16, mapped-owner, JNI and compiled-kernel gates
         run: mvn -B -ntp -f m3/tooling/tq/pom.xml verify
       - name: Preserve release evidence
@@ -62,6 +68,8 @@ jobs:
         with:
           name: tq-recipe-${{ github.sha }}
           path: |
+            m3/tooling/tq-sync/target/surefire-reports/
+            m3/tooling/tq-sync/target/custody.json
             m3/tooling/tq/target/*.log
             m3/tooling/tq/target/*compilation.xml
             m3/tooling/tq/target/custody.json
@@ -89,7 +97,7 @@ jobs:
           mkdir -p m3/tooling/tq/target/image
           bash configure --with-boot-jdk="$JAVA_HOME" --with-debug-level=fastdebug --with-jvm-variants=server --enable-warnings-as-errors 2>&1 | tee m3/tooling/tq/target/image/configure.log
           make JOBS=2 images 2>&1 | tee m3/tooling/tq/target/image/build.log
-      - name: Match source with image, exercise M3-enabled C1 and C2
+      - name: Match source with image and verify the M3 interpreter boundary
         env:
           M3_TEST_JDK: ${{ github.workspace }}/build/linux-x86_64-server-fastdebug/images/jdk
         run: bash m3/tooling/tq/verify-image.sh

@@ -16,7 +16,7 @@ testdir="$root/test/jdk/java/lang/String"
 "$image/bin/javac" -source 21 -target 21 -proc:none -Xlint:all -Werror \
   --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
   -h "$out/headers" -d "$out/classes" "$testdir/M3TQTest.java" \
-  "$testdir/MIndexMappedStringBackingTest.java" "$testdir/MapFactsTest.java" \
+  "$testdir/M3MappedStringBackingTest.java" "$testdir/MapFactsTest.java" \
   > "$out/javac.log" 2>&1
 g++ -std=c++17 -O2 -Wall -Wextra -Werror -Wconversion -Wshadow -Wpedantic \
   -fPIC -shared -I"$image/include" -I"$image/include/linux" \
@@ -31,14 +31,15 @@ for mode in interpreter mixed c1 c2 m3-c1 m3-c2 m3-c2-nocompact; do
     c2|m3-c2|m3-c2-nocompact) compiler=c2; flags+=(-XX:-TieredCompilation);;
   esac
   if [[ -n "$compiler" ]]; then
-    flags+=(-Xbatch -XX:CompileThreshold=100 -XX:+UnlockDiagnosticVMOptions
+    flags+=('-XX:CompileCommand=dontinline,jdk.internal.mindex.M3TQ$Facts::containsAll'
+      -Xbatch -XX:CompileThreshold=100 -XX:+UnlockDiagnosticVMOptions
       -XX:+LogCompilation "-XX:LogFile=$out/$mode-compilation.xml")
   fi
   if [[ "$mode" == m3-* ]]; then
     flags+=(-XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage)
   fi
   if [[ "$mode" == *-nocompact ]]; then flags+=(-XX:-CompactStrings); fi
-  for main in M3TQTest MIndexMappedStringBackingTest MapFactsTest; do
+  for main in M3TQTest M3MappedStringBackingTest MapFactsTest; do
     # Keep kernel compilation evidence separate from unchanged regression runs.
     runflags=("${flags[@]}")
     if [[ -n "$compiler" && "$main" != M3TQTest ]]; then
@@ -52,13 +53,12 @@ for mode in interpreter mixed c1 c2 m3-c1 m3-c2 m3-c2-nocompact; do
   done
   grep -q 'warmPayloadReads=0' "$out/$mode-M3TQTest.log"
   if [[ -n "$compiler" ]]; then
-    python3 - "$out/$mode-compilation.xml" "$compiler" <<'PY'
-import pathlib, sys
-lines = pathlib.Path(sys.argv[1]).read_text().splitlines()
-assert any("<nmethod" in line and "compiler='" + sys.argv[2] + "'" in line
-           and "method='jdk.internal.mindex.M3TQ " in line for line in lines), \
-    "No compiled TQ kernel evidence"
-PY
+    evidence_flags=()
+    if [[ "$mode" == m3-* ]]; then evidence_flags+=(--m3-interpreter); fi
+    python3 "$root/m3/tooling/lane28/check-log.py" \
+      "$out/$mode-compilation.xml" "$compiler" jdk.internal.mindex.M3TQ "${evidence_flags[@]}"
+    python3 "$root/m3/tooling/lane28/check-log.py" \
+      "$out/$mode-compilation.xml" "$compiler" 'jdk.internal.mindex.M3TQ$Facts containsAll' "${evidence_flags[@]}"
   fi
 done
-echo 'PASS: bounded fork-image TQ and mapped-owner tests in seven modes'
+echo 'PASS: TQ and mapped-owner parity, normal compiled kernels and retained M3 interpreter boundary'

@@ -6,6 +6,7 @@ on:
       - '.github/workflows/m3-lane28.yml'
       - '.m3/openrewrite-recipes/**'
       - 'm3/tooling/lane28/**'
+      - 'm3/tooling/tq-sync/**'
       - 'm3/tooling/migration-recipes/**'
       - 'm3/tooling/image-gates/**'
       - 'm3/migration/**'
@@ -45,6 +46,10 @@ jobs:
           python3 -m venv "$RUNNER_TEMP/lane28-python"
           "$RUNNER_TEMP/lane28-python/bin/python" -m pip install -r m3/migration/requirements.txt
           echo "$RUNNER_TEMP/lane28-python/bin" >> "$GITHUB_PATH"
+      - name: TQ successor recipe and custody
+        run: |
+          mvn -B -ntp -f m3/tooling/tq-sync/pom.xml verify
+          python3 m3/tooling/tq-sync/verify-plan.py
       - name: Recipe, UTF-16, mapped-owner, JNI and compiled-kernel gates
         run: mvn -B -ntp -f m3/tooling/lane28/pom.xml verify
       - name: Preserve release evidence
@@ -67,6 +72,8 @@ jobs:
         with:
           name: lane28-recipe-${{ github.sha }}
           path: |
+            m3/tooling/tq-sync/target/surefire-reports/
+            m3/tooling/tq-sync/target/custody.json
             m3/tooling/lane28/target/*.log
             m3/tooling/lane28/target/*compilation.xml
             m3/tooling/lane28/target/custody.json
