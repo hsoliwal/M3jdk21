@@ -66,6 +66,32 @@ public class M3StringCanonicalDagTest {
         equal("Aa", hashCollisionA, "hash collision left content");
         equal("BB", hashCollisionB, "hash collision right content");
 
+        String high = fresh("\uD83D");
+        String lowAndSpace = fresh("\uDE00\u2003");
+        String tail = fresh("Abc  ");
+        String factsLeft = high.concat(lowAndSpace).concat(tail);
+        String factsRight = high.concat(lowAndSpace.concat(tail));
+        String factsFlat = fresh("\uD83D\uDE00\u2003Abc  ");
+        same(owner(body(factsLeft)), owner(body(factsRight)),
+                "shape-independent composed facts share canonical owner");
+        same(M3_FACTS.invoke(body(factsLeft)), M3_FACTS.invoke(body(factsRight)),
+                "shape-independent composed facts share one fact bundle");
+        equal(factsFlat, factsLeft, "split-surrogate composed content");
+        check(factsLeft.hashCode() == factsFlat.hashCode(), "shape-independent Java hash");
+        check(factsLeft.codePointCount(0, factsLeft.length())
+                        == factsFlat.codePointCount(0, factsFlat.length()),
+                "shape-independent code-point count");
+        equal(factsFlat.strip(), factsLeft.strip(), "shape-independent strip");
+        equal(factsFlat.trim(), factsLeft.trim(), "shape-independent trim");
+        check(factsLeft.startsWith(fresh("\uD83D\uDE00")), "shape-independent prefix facts");
+        check(factsLeft.endsWith(fresh("c  ")), "shape-independent suffix facts");
+        check(factsLeft.indexOf("Abc") == factsFlat.indexOf("Abc"),
+                "shape-independent prepared search");
+        check(java.util.Arrays.equals(
+                        factsLeft.getBytes(java.nio.charset.StandardCharsets.UTF_8),
+                        factsFlat.getBytes(java.nio.charset.StandardCharsets.UTF_8)),
+                "shape-independent UTF-8 projection");
+
         String chain = fresh("x");
         for (int index = 1; index < 4096; index++) {
             chain = chain.concat(fresh("x"));
