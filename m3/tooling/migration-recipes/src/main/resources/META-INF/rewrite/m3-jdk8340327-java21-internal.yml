@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.jdk21.Jdk8340327Java21Internal
+displayName: Adapt JDK-8340327 named-key framework to Java 21
+description: >-
+  Replays the source-sealed internal JDK-8340327 framework without importing
+  java.security.AsymmetricKey into the default Java 21 public API.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk8340327Java21InternalRecipe
