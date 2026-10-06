@@ -347,6 +347,7 @@ final class M3StringSourcePrecompute {
     }
 
     private record Anchor(int row, int offset) {}
+    }
 
     private static final class Entry {
         final WeakReference<M3StringOwner> owner;
