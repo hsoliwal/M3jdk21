@@ -32,7 +32,7 @@ The reusable M3 String history-convergence recipe is owned only by Synexia:
 - recipe: `com.synexia.rewrite.m3jdk.M3StringHistoryConvergence`
 - repository: `hsoliwal/com.synexia`
 - custody PR: `#9530`
-- pinned custody revision: `ad5df8458ffeba643a6c343e82dd61a338facf29`
+- pinned custody revision: `9572256310e141a60da28951896e06fbe1c1e199`
 
 M3JDK21 keeps the applied runtime, target-native tests and a compact application receipt. Do not
 recreate the deleted `m3-string-history-convergence` recipe descriptor, snapshot crates, or local
