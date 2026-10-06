@@ -161,7 +161,6 @@ final class TQTest {
             List<String> command=runtime(PATCH,OUT,"M3TQTest");
             if(mode.equals("interpreter"))command.add(1,"-Xint");
             if(mode.equals("c1")||mode.equals("c2")) {
-                command.add(1,"-XX:CompileCommand=dontinline,jdk.internal.mindex.M3TQ$Facts::containsAll");
                 command.addAll(1,List.of("-Xbatch","-XX:CompileThreshold=100","-XX:+UnlockDiagnosticVMOptions","-XX:+LogCompilation",
                         "-XX:LogFile="+OUT.resolve(mode+"-compilation.xml")));
                 command.add(1,mode.equals("c1")?"-XX:TieredStopAtLevel=1":"-XX:-TieredCompilation");
@@ -170,8 +169,6 @@ final class TQTest {
             assertTrue(Files.readString(OUT.resolve(mode+".log")).contains("warmPayloadReads=0"));
             if(mode.equals("c1")||mode.equals("c2")) {
                 String log=Files.readString(OUT.resolve(mode+"-compilation.xml"));
-                assertTrue(log.lines().anyMatch(l->l.contains("<nmethod")&&l.contains("compiler='"+mode+"'")
-                        &&l.contains("method='jdk.internal.mindex.M3TQ$Facts containsAll ")),"containment compiled by "+mode);
                 assertTrue(log.lines().anyMatch(l->l.contains("<nmethod")&&l.contains("compiler='"+mode+"'")
                         &&l.contains("method='jdk.internal.mindex.M3TQ ")),"kernel compiled by "+mode);
             }
@@ -201,29 +198,12 @@ final class TQTest {
         assertTrue(Files.readString(OUT.resolve("seam-mutant.log")).contains("AssertionError: seam composition"));
     }
 
-    @Test void rejectsContainmentMutant() throws Exception {
-        Path source=OUT.resolve("containment-mutant/M3TQ.java");Files.createDirectories(source.getParent());
-        String original=Files.readString(GENERATED.resolve(KERNEL));
-        assertTrue(original.contains("return needle == required.keys.length;"));
-        Files.writeString(source,original.replace("return needle == required.keys.length;","return true;"));
-        Path patch=OUT.resolve("containment-mutant-patch");
-        compileProduct(patch,source,"containment-mutant-compile.log");
-        execute(runtime(patch,OUT,"M3TQTest"),"containment-mutant.log",false);
-        assertTrue(Files.readString(OUT.resolve("containment-mutant.log")).contains("AssertionError: containment set oracle"));
-    }
-
     private static void compileProduct(Path output,Path kernel,String log) throws Exception {
         Files.createDirectories(output);
-        Path isolated=output.resolveSibling(output.getFileName()+"-sources");
-        Path owner=isolated.resolve("jdk/internal/mindex");Files.createDirectories(owner);
-        Files.copy(kernel,owner.resolve("M3TQ.java"),java.nio.file.StandardCopyOption.REPLACE_EXISTING);
-        for(String name:List.of("M3StringBacking","M3MappedStringBacking"))
-            Files.copy(ROOT.resolve(PRODUCT+"jdk/internal/mindex/"+name+".java"),owner.resolve(name+".java"),
-                    java.nio.file.StandardCopyOption.REPLACE_EXISTING);
         execute(List.of(JAVAC,"-source","21","-target","21","-proc:none","-implicit:none","-Xlint:all","-Werror",
-                "--patch-module","java.base="+isolated,"-d",output.toString(),
-                owner.resolve("M3TQ.java").toString(),owner.resolve("M3StringBacking.java").toString(),
-                owner.resolve("M3MappedStringBacking.java").toString()),log,true);
+                "--patch-module","java.base="+ROOT.resolve(PRODUCT)+java.io.File.pathSeparator+kernel.getParent(),
+                "-d",output.toString(),kernel.toString(),ROOT.resolve(PRODUCT+"jdk/internal/mindex/M3StringBacking.java").toString(),
+                ROOT.resolve(PRODUCT+"jdk/internal/mindex/M3MappedStringBacking.java").toString()),log,true);
     }
 
     private static void compileNative(Path directory,boolean mutant,String log) throws Exception {

@@ -22,7 +22,10 @@ final class M3StringFacts {
             java.nio.charset.StandardCharsets.UTF_8.newEncoder().replacement().length;
 
     final int utf16Length;
+    /** Standard java.nio.charset UTF-8 byte length (malformed UTF-16 uses encoder replacement). */
     final int utf8Length;
+    /** HotSpot/JNI modified UTF-8 length, computed independently per UTF-16 code unit. */
+    final int modifiedUtf8Length;
     final int codePointCount;
     final int unpairedSurrogateCount;
     final int javaHash;
@@ -55,6 +58,7 @@ final class M3StringFacts {
     private M3StringFacts(
             int utf16Length,
             int utf8Length,
+            int modifiedUtf8Length,
             int codePointCount,
             int unpairedSurrogateCount,
             int javaHash,
@@ -77,6 +81,7 @@ final class M3StringFacts {
             int stripEnd) {
         this.utf16Length = utf16Length;
         this.utf8Length = utf8Length;
+        this.modifiedUtf8Length = modifiedUtf8Length;
         this.codePointCount = codePointCount;
         this.unpairedSurrogateCount = unpairedSurrogateCount;
         this.javaHash = javaHash;
@@ -103,6 +108,7 @@ final class M3StringFacts {
         int length = value.length();
         int hash = 0;
         int utf8 = 0;
+        int modifiedUtf8 = 0;
         int codePoints = 0;
         int unpaired = 0;
         long signal = 0L;
@@ -125,6 +131,7 @@ final class M3StringFacts {
             if (index == 0) first = unit;
             last = unit;
             hash = 31 * hash + unit;
+            modifiedUtf8 = Math.addExact(modifiedUtf8, modifiedUtf8Bytes(unit));
             signal = addSignal(signal, unit);
             ascii &= unit <= 0x7f;
             latin1 &= unit <= 0xff;
@@ -186,6 +193,7 @@ final class M3StringFacts {
         return new M3StringFacts(
                 length,
                 utf8,
+                modifiedUtf8,
                 codePoints,
                 unpaired,
                 hash,
@@ -217,6 +225,8 @@ final class M3StringFacts {
                         && Character.isLowSurrogate(right.firstUtf16Unit);
         int length = Math.addExact(left.utf16Length, right.utf16Length);
         int utf8 = Math.addExact(left.utf8Length, right.utf8Length);
+        int modifiedUtf8 =
+                Math.addExact(left.modifiedUtf8Length, right.modifiedUtf8Length);
         if (seamPair) {
             utf8 = Math.addExact(utf8, 4 - 2 * UTF8_REPLACEMENT_BYTES);
         }
@@ -268,6 +278,7 @@ final class M3StringFacts {
         return new M3StringFacts(
                 length,
                 utf8,
+                modifiedUtf8,
                 Math.addExact(left.codePointCount, right.codePointCount) - (seamPair ? 1 : 0),
                 Math.addExact(left.unpairedSurrogateCount, right.unpairedSurrogateCount)
                         - (seamPair ? 2 : 0),
@@ -328,6 +339,12 @@ final class M3StringFacts {
     private static int utf8Bytes(char value) {
         if (value <= 0x7f) return 1;
         if (value <= 0x7ff) return 2;
+        return 3;
+    }
+
+    private static int modifiedUtf8Bytes(char value) {
+        if (value >= 0x0001 && value <= 0x007f) return 1;
+        if (value <= 0x07ff) return 2;
         return 3;
     }
 

@@ -559,21 +559,6 @@ static char* m3_utf8_range(oop string, int start, int len, char* buf, int buflen
   while (copied < len) {
     const int chunk = MIN2(chunk_capacity, len - copied);
     java_lang_String::copy_chars(string, start + copied, chunk, scratch);
-
-    int chunk_bytes = 0;
-    for (int i = 0; i < chunk; i++) {
-      chunk_bytes += UNICODE::utf8_size(scratch[i]);
-    }
-    if (chunk_bytes < buflen) {
-      UNICODE::as_utf8(scratch, chunk, out, buflen);
-      out += chunk_bytes;
-      buflen -= chunk_bytes;
-      copied += chunk;
-      continue;
-    }
-
-    // Preserve the historical bounded-buffer behavior: emit complete code units only and
-    // terminate before the first unit that cannot fit with the trailing NUL.
     for (int i = 0; i < chunk; i++) {
       jchar c = scratch[i];
       int size = UNICODE::utf8_size(c);
@@ -912,15 +897,6 @@ bool java_lang_String::equals(oop str1, oop str2) {
   if (is_m3_backed(str1) || is_m3_backed(str2)) {
     int len = length(str1);
     if (length(str2) != len) return false;
-
-    oop left = m3_storage(str1);
-    oop right = m3_storage(str2);
-    if (left != nullptr && right != nullptr
-        && java_lang_M3String::owner(left) == java_lang_M3String::owner(right)
-        && java_lang_M3String::coordinate(left) == java_lang_M3String::coordinate(right)) {
-      return true;
-    }
-
     for (int i = 0; i < len; i++) if (char_at(str1, i) != char_at(str2, i)) return false;
     return true;
   }

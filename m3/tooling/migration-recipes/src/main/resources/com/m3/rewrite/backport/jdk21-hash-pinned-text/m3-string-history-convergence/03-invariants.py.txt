@@ -28,10 +28,13 @@ search_precompute = read("src/java.base/share/classes/java/lang/M3StringSearchPr
 position_precompute = read("src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java")
 tq = read("src/java.base/share/classes/jdk/internal/mindex/M3TQ.java")
 string = read("src/java.base/share/classes/java/lang/String.java")
+asb = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
 abstract_builder = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
 symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
 classes = read("src/hotspot/share/classfile/vmClassMacros.hpp")
 inline = read("src/hotspot/share/classfile/javaClasses.inline.hpp")
+java_classes_cpp = read("src/hotspot/share/classfile/javaClasses.cpp")
+java_classes_hpp = read("src/hotspot/share/classfile/javaClasses.hpp")
 stringopts = read("src/hotspot/share/opto/stringopts.cpp")
 archive_writer = read("src/hotspot/share/cds/archiveHeapWriter.cpp")
 dedup = read("src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp")
@@ -40,6 +43,12 @@ mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
 native_string = read("src/java.base/share/native/libjava/String.c")
+native_string_test = read("test/jdk/java/lang/String/nativeEncoding/libstringPlatformChars.c")
+hotspot_java_classes = read("src/hotspot/share/classfile/javaClasses.cpp")
+hotspot_jni = read("src/hotspot/share/prims/jni.cpp")
+native_encoding_java = read("test/jdk/java/lang/String/nativeEncoding/StringPlatformChars.java")
+native_encoding_c = read("test/jdk/java/lang/String/nativeEncoding/libstringPlatformChars.c")
+arguments = read("src/hotspot/share/runtime/arguments.cpp")
 pattern = read("src/java.base/share/classes/java/util/regex/Pattern.java")
 matcher = read("src/java.base/share/classes/java/util/regex/Matcher.java")
 
@@ -105,6 +114,17 @@ for fragment in [
 if "storage.getBytes(dst, srcBegin, dstBegin, LATIN1, srcEnd - srcBegin);" not in string:
     fail("deprecated String.getBytes range lost M3 bulk projection")
 
+# AbstractStringBuilder String append/insert must consume M3 storage through String.getBytes;
+# direct String.value() copies are fallback-only for non-M3 inputs.
+for fragment in [
+    "M3String storage = s.m3();",
+    "s.getBytes(this.value, off, this.count, LATIN1, end - off);",
+    "s.getBytes(this.value, i, j, UTF16, end - i);",
+    "s.getBytes(this.value, off, this.count, UTF16, end - off);",
+]:
+    if fragment not in asb:
+        fail(f"AbstractStringBuilder M3 bulk append route missing: {fragment}")
+
 # Byte/char projections must descend through canonical owner geometry, not walk M3 tuple
 # charAt one unit at a time.
 if "owner.getBytes(" not in m3:
@@ -136,7 +156,11 @@ for fragment in [
     if fragment not in position_precompute:
         fail(f"M3 position precompute fail-open path missing: {fragment}")
 
+if "char[] scratch" in position_precompute:
+    fail("M3 position precompute reintroduced transient text staging")
+
 for fragment in [
+    "source.charAt(start + offset)",
     "final AtomicReferenceArray<ExactBlock> exact;",
     "Arrays.binarySearch(units, unit)",
     "Long.numberOfTrailingZeros(positions)",
@@ -230,6 +254,24 @@ if "public boolean containsAll(Facts required)" not in tq:
     fail("M3TQ exact trigram fact containment missing")
 if "long[] trigram" in facts or "M3TQ.Facts" in facts:
     fail("M3StringFacts illegally owns length-proportional exact trigram state")
+
+# Cold range facts follow canonical owner geometry. Tuple ranges compose child facts and only
+# atom-edge ranges may scan UTF-16 directly.
+for fragment in [
+    "computeRangeFacts(checked.start(), checked.length())",
+    "abstract M3StringFacts computeRangeFacts(int start, int length)",
+]:
+    if fragment not in owner:
+        fail(f"M3 structural range-fact dispatch missing: {fragment}")
+for fragment in [
+    "return left.slice(start, end).facts();",
+    "return right.slice(start - leftLength, end - leftLength).facts();",
+    "return M3StringFacts.compose(",
+]:
+    if fragment not in tuple_:
+        fail(f"M3 tuple range-fact composition missing: {fragment}")
+if "M3StringFacts.scan(M3String.range(this, start, length))" not in atom:
+    fail("M3 atom range-fact edge scan missing")
 
 # Fixed String facts are opportunistic search filters. Cold search must not force a complete
 # M3StringFacts scan before the dedicated bounded search/position owners execute.
@@ -339,6 +381,70 @@ if "nativeByteShadow(EMPTY, 0, 0, String.LATIN1)" not in m3:
 if "return storage == null ? checked.value : storage.compatibilityValue();" not in string:
     fail("JNI ingress no longer discards the temporary construction payload")
 
+# HotSpot native scratch copies must traverse canonical owner geometry in bulk. StringTable,
+# symbols and JVMTI may materialize scoped native UTF-16 scratch, but per-unit M3 DAG descent is
+# forbidden in java_lang_M3String::copy_chars.
+for fragment in [
+    "static void copy_owner_chars(",
+    "copy_owner_chars(owner(value), java_lang_M3String::start(value) + start, len, destination);",
+]:
+    if fragment not in java_classes_hpp + java_classes_cpp:
+        fail(f"HotSpot M3 structural copy contract missing: {fragment}")
+for fragment in [
+    "if (o->klass() == vmClasses::M3StringAtom_klass())",
+    "copy_chars(left, start, left_count, destination);",
+    "copy_chars(right, 0, len - left_count, destination + left_count);",
+]:
+    if fragment not in java_classes_cpp:
+        fail(f"HotSpot M3 owner-range copier missing: {fragment}")
+copy_chars_body = re.search(
+    r"void java_lang_M3String::copy_chars\((?P<body>.*?)\n\}",
+    java_classes_cpp,
+    flags=re.DOTALL,
+)
+if not copy_chars_body or "char_at(value, start + index)" in copy_chars_body.group("body"):
+    fail("HotSpot M3 copy_chars reintroduced per-unit char_at traversal")
+
+# JNI StringCritical may return a required native copy for M3, but it must fill that copy through
+# the same canonical bulk accessor as GetStringChars/Region, not per-unit VM dispatch.
+critical = re.search(
+    r"jni_GetStringCritical\((?P<body>.*?)\n\}?",
+    hotspot_jni,
+    flags=re.DOTALL,
+)
+if "java_lang_String::copy_chars(s, 0, s_len, ret);" not in hotspot_jni:
+    fail("GetStringCritical lost canonical bulk copy")
+if "ret[i] = java_lang_String::char_at(s, i);" in hotspot_jni:
+    fail("GetStringCritical reintroduced per-unit M3 VM dispatch")
+
+# HotSpot modified-UTF8 writing should bulk-convert complete M3 UTF-16 chunks when they fit,
+# retaining the per-unit path only as the bounded-buffer truncation fallback.
+for fragment in [
+    "int chunk_bytes = 0;",
+    "UNICODE::as_utf8(scratch, chunk, out, buflen);",
+    "if (chunk_bytes < buflen)",
+]:
+    if fragment not in hotspot_java_classes:
+        fail(f"HotSpot M3 UTF8 bulk chunk path missing: {fragment}")
+
+# HotSpot equality may prove identity from the exact canonical owner+coordinate pair before
+# falling back to logical UTF-16 comparison. It must not compare the String.value sentinel.
+for fragment in [
+    "java_lang_M3String::owner(left) == java_lang_M3String::owner(right)",
+    "java_lang_M3String::coordinate(left) == java_lang_M3String::coordinate(right)",
+    "char_at(str1, i) != char_at(str2, i)",
+]:
+    if fragment not in hotspot_java_classes:
+        fail(f"HotSpot M3 String equality path missing: {fragment}")
+
+# JNI region APIs must stay covered by the existing native String harness.
+for fragment in [
+    "GetStringRegion(env, value, start, length, buffer)",
+    "GetStringUTFRegion(env, value, start, length, buffer)",
+]:
+    if fragment not in native_string_test:
+        fail(f"JNI String region proof missing: {fragment}")
+
 # JNI creates only the final compatibility arrays, then bulk-fills them from canonical M3
 # storage. Per-code-unit JNI dispatch and temporary C spelling buffers are forbidden.
 byte_shadow = re.search(
@@ -366,6 +472,16 @@ if "CallVoidMethodA" not in byte_shadow.group("body") or "CallVoidMethodA" not i
 # Regex TQ integration is candidate-only and deliberately narrow. Literal find/search may
 # reject proven absence, but anchored match/lookingAt and case-insensitive literal semantics stay
 # entirely with the stock node engine.
+for fragment in [
+    "compiledM3Tq(matchRoot)",
+    "node.getClass() == Slice.class",
+    "node instanceof Branch branch",
+    "atom == null || atom.getClass() != Slice.class",
+    "M3TQ.fromExact(alternatives)",
+]:
+    if fragment not in pattern:
+        fail(f"Pattern compiled literal-effect TQ boundary missing: {fragment}")
+
 for fragment in [
     "transient M3TQ m3Tq;",
     "has(LITERAL) && !has(CASE_INSENSITIVE)",
@@ -430,6 +546,53 @@ for required_no_port in [
 ]:
     if required_no_port not in port_map:
         fail(f"String donor no-port classification missing: {required_no_port}")
+
+# Standard UTF-8 and modified UTF-8 are different M3 facts. VM/JNI GetStringUTFLength must
+# consume the modified UTF-8 fact, with a native regression that covers NUL and surrogate units.
+for fragment in [
+    "final int modifiedUtf8Length;",
+    "modifiedUtf8 = Math.addExact(modifiedUtf8, modifiedUtf8Bytes(unit));",
+]:
+    if fragment not in facts:
+        fail(f"M3 modified UTF8 fact missing: {fragment}")
+for fragment in [
+    "_facts_modifiedUtf8Length_offset",
+    "modified_utf8_length_if_precomputed",
+]:
+    if fragment not in (java_classes_hpp + java_classes_cpp + inline):
+        fail(f"M3 VM modified UTF8 accessor missing: {fragment}")
+if "GetStringUTFLength" not in native_encoding_c or "modifiedUtf8Length(s)" not in native_encoding_java:
+    fail("M3 modified UTF8 JNI length regression missing")
+
+# VM/JIT experiment boundary: subsystems that still assume String.value payload semantics must
+# remain disabled until they become explicitly M3-aware.
+for fragment in [
+    "if (UseM3StringStorage) {",
+    "FLAG_SET_ERGO(OptimizeStringConcat, false);",
+    "UseStringDeduplication = false;",
+]:
+    if fragment not in arguments:
+        fail(f"M3 VM experiment boundary missing: {fragment}")
+for unsupported in [
+    "UseM3StringStorage does not support JVMCI",
+    "UseM3StringStorage does not support UseStringDeduplication",
+    "UseM3StringStorage does not support CDS archive operations",
+    "UseM3StringStorage does not support Flight Recorder",
+]:
+    if unsupported not in arguments:
+        fail(f"M3 unsupported VM subsystem guard missing: {unsupported}")
+
+# VM terminology must describe the actual representation owner. M3 storage is no longer a
+# join-only feature; every M3-backed String is covered by the same predicate.
+vm_string_bridge = java_classes_hpp + java_classes_inline + java_classes_cpp + hotspot_jni
+if "is_m3_joined" in vm_string_bridge:
+    fail("stale join-only M3 VM predicate name leaked back into runtime")
+for fragment in [
+    "is_m3_backed(oop java_string)",
+    "java_lang_String::is_m3_backed",
+]:
+    if fragment not in vm_string_bridge:
+        fail(f"M3 VM backed-storage predicate missing: {fragment}")
 
 # Donor class naming must not leak back into live VM symbols/layout.
 for path, text in [
@@ -525,6 +688,25 @@ for fragment in [
     if fragment not in (m3 + owner):
         fail(f"M3 prepared-fact reuse path missing: {fragment}")
 
+# Literal replacement with a flat/bootstrap source and M3 target/replacement must reuse
+# direct target search plus builder M3 ingress; M3 operands must not be materialized via value().
+for fragment in [
+    "M3String targetM3 = trgtStr.m3();",
+    "M3String replacementM3 = replStr.m3();",
+    "builder.append(replStr);",
+]:
+    if fragment not in string:
+        fail(f"mixed flat/M3 literal replace route missing: {fragment}")
+
+# Mixed flat/M3 prefix checks must not materialize the M3 prefix through value().
+for fragment in [
+    "M3String prefixM3 = prefix.m3();",
+    "if (prefixM3 != null) {",
+    "prefixM3.charAt(index)",
+]:
+    if fragment not in string:
+        fail(f"mixed flat/M3 startsWith route missing: {fragment}")
+
 # Range hashes and ASCII case hashes are negative filters only; exact comparison remains in
 # String.regionMatches for every surviving candidate.
 for fragment in [
@@ -553,6 +735,38 @@ for fragment in [
 if "M3String asciiCase(boolean upper)" not in m3:
     fail("M3String ROOT ASCII canonical case mapper missing")
 
+# Full Unicode/locale case conversion for M3-backed Strings must use the JDK conditional
+# casing engine over canonical String access. Source value() materialization is forbidden.
+for fragment in [
+    "return caseMapM3(locale, false);",
+    "return caseMapM3(locale, true);",
+    "private String caseMapM3(Locale locale, boolean upper)",
+    "ConditionalSpecialCasing.toLowerCaseEx(this, index, locale)",
+    "ConditionalSpecialCasing.toUpperCaseEx(this, index, locale)",
+    "ConditionalSpecialCasing.toLowerCaseCharArray(this, index, locale)",
+    "ConditionalSpecialCasing.toUpperCaseCharArray(this, index, locale)",
+]:
+    if fragment not in string:
+        fail(f"M3 full JDK case-mapping route missing: {fragment}")
+
+# Builder coder selection may use exact M3 range facts locally. This does not change the
+# String/HotSpot coder; it only avoids inflating a Latin1 builder for a Latin1-only M3 range.
+for fragment in [
+    "M3String storage = input.m3();",
+    "if (!storage.facts().latin1) {",
+]:
+    if fragment not in abstract_builder:
+        fail(f"AbstractStringBuilder M3 range-coder decision missing: {fragment}")
+
+# Shared flat-source substring search (used by AbstractStringBuilder) must not materialize
+# an M3-backed target String through value().
+for fragment in [
+    "M3String targetM3 = tgtStr.m3();",
+    "targetM3.charAt(index)",
+]:
+    if string.count(fragment) < 2:
+        fail(f"builder/static search M3 target route missing: {fragment}")
+
 # AbstractStringBuilder must not materialize M3 String.value() while appending String ranges.
 for fragment in [
     "M3String storage = s.m3();",
@@ -562,6 +776,12 @@ for fragment in [
 ]:
     if fragment not in abstract_builder:
         fail(f"AbstractStringBuilder M3 bulk String append route missing: {fragment}")
+
+# Existing M3 storage remains the execution owner for repeat; the admission/join feature gate
+# controls creation of M3 storage, not operations on a String that already owns it.
+if "M3String storage = m3();" not in string
+        or "return new String(storage.repeat(count));" not in string:
+    fail("M3-backed repeat no longer executes on canonical storage")
 
 # Once a String is already M3-backed, range preservation is not optional composition.
 # substring must keep the same canonical owner+coordinate regardless of the admission/join gate.
@@ -724,10 +944,20 @@ for fragment in [
 if "M3StringPrecomputeSearchTest.java test/jdk/" in workflow:
     fail("M3 String workflow contains concatenated path entries")
 
+for required_trigger in [
+    "src/java.base/share/classes/java/lang/AbstractStringBuilder.java",
+    "src/java.base/share/classes/java/util/regex/Pattern.java",
+    "src/java.base/share/classes/java/util/regex/Matcher.java",
+    "m3/tooling/migration-recipes/**",
+]:
+    if required_trigger not in workflow:
+        fail(f"M3 String workflow lost trigger path: {required_trigger}")
+
 for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringPrecomputeSearchTest.java",
     "M3StringInternTest.java",
+    "nativeEncoding/StringPlatformChars.java",
     "M3StringInternTest.java",
     "M3TQFactsTest.java",
     "M3RegexLiteralTQTest.java",

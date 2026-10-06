@@ -11,7 +11,6 @@ snapshot or reuse donor identifiers as target ABI.
 | `8b202d3c10617d67f45247ccd81a21b9c5332a08` | Inline scalar handles and share immutable token spans; `MIndexString` converges to owner + packed long coordinate | `java.lang.M3String` has exactly `owner` + `value` instance state |
 | `c3c67a433e1689d42bc68720290b7ca5f54c3313` | Materialize canonical tuple reference DAG | `M3StringTuple` owns persistent child coordinates; no per-value segment/offset/end arrays |
 | `40d66f6edd0a9cf3e6b4545058c1ad54f6cd03bc` | Route concat/compose/repeat through canonical tuple DAG | M3 concat/repeat create/reuse tuple owners; substring is a coordinate range |
-| `57935a5d55d9d873ee5e83e1f7ca95e27ed6d2c8` | Defer native tuple flattening behind shared reference DAG | M3JDK tuple concat keeps bounded persistent height; partial ranges remain owner+coordinate leaves |
 | `d08ee60be27b60a951a55a2b472d515bf142f8bf` | Compose/reuse canonical text precomputation without retaining a second spelling | M3 precompute is owner/range keyed derived metadata only |
 | `33ebec8fa64c215bf8bfa0dc4ec66085f5500a52` | Cache immutable per-atom metrics, bit signal and character facts together | M3 fixed-size facts prepare once on canonical owner/range identity |
 | `46d92ec424862459e767b1d6df5b329e3241cdf3` | Compile reusable search-plan prefix/skip/hash/signal metadata | M3 length-proportional pattern metadata lives in separately bounded `M3StringSearchPrecompute` |
@@ -55,8 +54,6 @@ boundary requires it.
 8. Absence or eviction of precompute cannot alter Java String semantics.
 9. VM-local native scalar owners are weakly canonicalized: live M3 coordinates/DAGs own lifetime; dead native blocks are reclaimed through the local reference queue.
 10. Every Java byte[]/char[] compatibility shadow, including the shared empty VM sentinel, is created through the JNI shadow boundary.
-11. Canonical tuple identity is independent of concat parenthesization: the same ordered terminal M3 atom owner/range sequence converges after exact verification. Equal UTF-16 spelling from a different M3 coordinate structure does not define canonical identity; route-hash collisions affect lookup cost only.
-12. Tuple geometry remains bounded-height; balancing may change parenthesization but never terminal coordinate order or String semantics.
 
 ## Search/precompute convergence absorbed
 

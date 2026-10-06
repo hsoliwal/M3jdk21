@@ -20,6 +20,10 @@ on:
       - 'src/java.base/share/native/libjava/String.c'
       - 'src/java.base/share/classes/java/lang/M3String*.java'
       - 'src/java.base/share/classes/java/lang/String.java'
+      - 'src/java.base/share/classes/java/lang/AbstractStringBuilder.java'
+      - 'src/java.base/share/classes/java/util/regex/Pattern.java'
+      - 'src/java.base/share/classes/java/util/regex/Matcher.java'
+      - 'm3/tooling/migration-recipes/**'
       - 'test/jdk/java/lang/String/M3MappedStringBackingTest.java'
       - 'test/jdk/java/lang/String/MapGuardTest.java'
       - 'test/jdk/java/lang/String/MapFactsTest.java'
@@ -27,6 +31,8 @@ on:
       - 'test/jdk/java/lang/String/M3StringFactsCompositionTest.java'
       - 'test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java'
       - 'test/jdk/java/lang/String/M3StringInternTest.java'
+      - 'test/jdk/java/lang/String/nativeEncoding/StringPlatformChars.java'
+      - 'test/jdk/java/lang/String/nativeEncoding/libstringPlatformChars.c'
       - 'test/jdk/jdk/internal/mindex/M3TQFactsTest.java'
       - 'test/jdk/java/util/regex/M3RegexLiteralTQTest.java'
       - 'doc/mindex-string-backing.md'
@@ -56,4 +62,4 @@ jobs:
       - name: Build java.base
         run: make java.base-java-only
       - name: Run M3 String backing jtreg
-        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java"
+        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/java/lang/String/nativeEncoding/StringPlatformChars.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java"

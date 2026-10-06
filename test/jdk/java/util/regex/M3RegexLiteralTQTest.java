@@ -31,6 +31,25 @@ public class M3RegexLiteralTQTest {
         compareFind(Pattern.compile("XYZ", Pattern.LITERAL), source, 0, marker);
         compareFind(Pattern.compile("XYZ", Pattern.LITERAL), source, marker, marker + 3);
 
+        // A mandatory compiled Slice prefix may gate ordinary regex find, but the exact engine
+        // still owns suffix quantifiers and all match state.
+        compareFind(Pattern.compile("abc.*tail"), "zzabc-middle-tailzz", 0, 19);
+        compareFind(Pattern.compile("abc.*tail"), "zz-no-required-prefix-tail", 0,
+                "zz-no-required-prefix-tail".length());
+        compareFind(Pattern.compile("abc(?:def)?"), "zzabczz", 0, 7);
+
+        // A pure top-level alternation can use OR-of-required-prefixes without choosing one
+        // alternative as globally mandatory.
+        compareFind(Pattern.compile("abc|def"), "zzdefzz", 0, 7);
+        compareFind(Pattern.compile("abc|def"), "zzghizz", 0, 7);
+        compareFind(Pattern.compile("abc.*|def.*"), "zzdef-middlezz", 0, 14);
+        // A short legal alternative makes trigram filtering vacuous, never false.
+        compareFind(Pattern.compile("abc|d"), "zzdzz", 0, 5);
+
+        // Optional/empty-root graphs must NOT be treated as requiring their first textual branch.
+        compareFind(Pattern.compile("abc?"), "zzabzz", 0, 6);
+        compareFind(Pattern.compile("(?:abc)?def"), "zzdefzz", 0, 7);
+
         // Case-insensitive literal matching has different equivalence semantics and must bypass
         // exact TQ gating.
         compareFind(

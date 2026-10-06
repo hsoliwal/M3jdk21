@@ -1975,6 +1975,19 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
             }
         }
 
+        // Reuse compiled semantic facts rather than reparsing regex source text. A
+        // case-sensitive BMP Slice at the match root is a mandatory leading literal. A top-level
+        // Branch is also safe when every alternative begins with such a Slice and no alternative
+        // is empty: M3TQ OR preserves "one of these prefixes must occur". Anything else bypasses.
+        if (m3Tq == null && matchRoot != null) {
+            try {
+                m3Tq = compiledM3Tq(matchRoot);
+            } catch (OutOfMemoryError unavailable) {
+                // Candidate precompute remains optional.
+                m3Tq = null;
+            }
+        }
+
         // Peephole optimization
         if (matchRoot instanceof Slice) {
             root = BnM.optimize(matchRoot);
@@ -2007,6 +2020,32 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
         patternLength = 0;
         compiled = true;
         topClosureNodes = null;
+    }
+
+    private static M3TQ compiledM3Tq(Node node) {
+        if (node.getClass() == Slice.class) {
+            String literal = compiledSliceLiteral((Slice) node);
+            return literal.length() >= 3 ? M3TQ.fromExact(List.of(literal)) : null;
+        }
+        if (node instanceof Branch branch) {
+            ArrayList<String> alternatives = new ArrayList<>(branch.size);
+            for (int index = 0; index < branch.size; index++) {
+                Node atom = branch.atoms[index];
+                if (atom == null || atom.getClass() != Slice.class) return null;
+                alternatives.add(compiledSliceLiteral((Slice) atom));
+            }
+            return alternatives.isEmpty() ? null : M3TQ.fromExact(alternatives);
+        }
+        return null;
+    }
+
+    private static String compiledSliceLiteral(Slice slice) {
+        int[] literal = slice.buffer;
+        char[] chars = new char[literal.length];
+        for (int index = 0; index < literal.length; index++) {
+            chars[index] = (char) literal[index];
+        }
+        return new String(chars);
     }
 
     private Map<String, Integer> namedGroupsMap() {

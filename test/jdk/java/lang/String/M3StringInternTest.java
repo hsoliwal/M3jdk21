@@ -195,6 +195,30 @@ public class M3StringInternTest {
         forcedUtf16Ascii[0] ^= 1;
         check(forcedUtf16.equals("AB"), "raw compact input snapshots into canonical owner");
 
+        String longComposed = String.join(
+                "",
+                "left-".repeat(300),
+                "\ud83d",
+                "\ude42",
+                "-middle-".repeat(220),
+                "\u0100",
+                "-right".repeat(280));
+        String longScalar = new String(longComposed.toCharArray());
+        check(longComposed.hashCode() == longScalar.hashCode(),
+                "long composed VM hash parity");
+        check(longComposed.intern() == longScalar.intern(),
+                "long composed VM intern identity");
+
+        int longBegin = 257;
+        int longEnd = longComposed.length() - 193;
+        String longRange = longComposed.substring(longBegin, longEnd);
+        String longRangeScalar = new String(
+                longComposed.substring(longBegin, longEnd).toCharArray());
+        check(longRange.hashCode() == longRangeScalar.hashCode(),
+                "long M3 range VM hash parity");
+        check(longRange.intern() == longRangeScalar.intern(),
+                "long M3 range VM intern identity");
+
         String empty = new String(new char[0]);
         check(empty.intern() == "".intern(), "empty intern identity");
 

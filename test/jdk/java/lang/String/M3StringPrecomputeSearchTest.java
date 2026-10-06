@@ -15,7 +15,6 @@ import java.nio.charset.CoderResult;
 import java.nio.charset.CodingErrorAction;
 import java.nio.charset.StandardCharsets;
 import java.nio.charset.UnmappableCharacterException;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -204,12 +203,6 @@ public class M3StringPrecomputeSearchTest {
             check(((UnmappableCharacterException) expected).getInputLength() == 2,
                     "ASCII supplementary input length");
         }
-
-        String coldAsciiCase = new String("AbC-xYz-123".toCharArray());
-        check(!factsPrepared(coldAsciiCase), "cold ROOT ASCII facts initially absent");
-        check(coldAsciiCase.toLowerCase(Locale.ROOT).equals("abc-xyz-123"),
-                "cold ROOT ASCII lowercase");
-        check(factsPrepared(coldAsciiCase), "cold ROOT ASCII prepares canonical facts");
 
         String asciiCase = String.join("", "AbC", "-xYz-123");
         check(!asciiCase.isBlank(), "prepare ASCII case facts");
@@ -459,6 +452,106 @@ public class M3StringPrecomputeSearchTest {
         String rangeRepeated = rangeRepeatSource.repeat(5);
         check(rangeRepeated.equals("ababababab"),
                 "repeat preserves existing M3 range independent of join gate");
+
+        String latinM3ForUtf16Builder = String.join("", "latin", "-only");
+        StringBuilder utf16BuilderFromLatin = new StringBuilder("\u0100");
+        utf16BuilderFromLatin.append(latinM3ForUtf16Builder);
+        check(utf16BuilderFromLatin.toString().equals("\u0100latin-only"),
+                "UTF16 builder bulk inflates Latin1 M3");
+
+        String builderNeedle = String.join("", "b", "\u0100", "c");
+        StringBuilder searchableBuilder = new StringBuilder("xxab\u0100cdab\u0100czz");
+        check(searchableBuilder.indexOf(builderNeedle)
+                        == searchableBuilder.toString().indexOf(builderNeedle),
+                "StringBuilder indexOf M3 target");
+        check(searchableBuilder.indexOf(builderNeedle, 5)
+                        == searchableBuilder.toString().indexOf(builderNeedle, 5),
+                "StringBuilder indexOf M3 target from");
+        check(searchableBuilder.lastIndexOf(builderNeedle)
+                        == searchableBuilder.toString().lastIndexOf(builderNeedle),
+                "StringBuilder lastIndexOf M3 target");
+        check(searchableBuilder.lastIndexOf(builderNeedle, 8)
+                        == searchableBuilder.toString().lastIndexOf(builderNeedle, 8),
+                "StringBuilder lastIndexOf M3 target from");
+
+        String latinBuilderNeedle = String.join("", "aba", "ba");
+        StringBuilder latinSearchBuilder = new StringBuilder("xxababaxx");
+        check(latinSearchBuilder.indexOf(latinBuilderNeedle)
+                        == latinSearchBuilder.toString().indexOf(latinBuilderNeedle),
+                "Latin1 builder indexOf M3 target");
+        check(latinSearchBuilder.lastIndexOf(latinBuilderNeedle)
+                        == latinSearchBuilder.toString().lastIndexOf(latinBuilderNeedle),
+                "Latin1 builder lastIndexOf M3 target");
+
+        String flatStartsWithSource = "bootstrap-prefix-body";
+        String m3Prefix = String.join("", "bootstrap", "-prefix");
+        check(flatStartsWithSource.startsWith(m3Prefix),
+                "flat source startsWith M3 prefix");
+        check(flatStartsWithSource.startsWith(m3Prefix, 0),
+                "flat source startsWith M3 prefix offset");
+        check(!flatStartsWithSource.startsWith(String.join("", "bootstrap", "-prefiy")),
+                "flat source startsWith M3 prefix negative");
+
+        String flatReplaceSource = "legacy-aba-aba-tail";
+        String m3ReplaceTarget = String.join("", "a", "ba");
+        String m3Replacement = String.join("", "X", "\u0100");
+        String mixedReplace = flatReplaceSource.replace(m3ReplaceTarget, m3Replacement);
+        check(mixedReplace.equals("legacy-X\u0100-X\u0100-tail"),
+                "flat source replace M3 target/replacement");
+        check(flatReplaceSource.replace(String.join("", "not", "-present"), m3Replacement)
+                        == flatReplaceSource,
+                "flat source replace absent M3 target identity");
+
+        String flatReplacementOnlySource = "foo-foo";
+        String m3ReplacementOnly = String.join("", "R", "R");
+        check(flatReplacementOnlySource.replace("foo", m3ReplacementOnly).equals("RR-RR"),
+                "flat source replace M3 replacement");
+
+        String greekM3 = String.join("", "A", "\u03a3", " ");
+        check(greekM3.toLowerCase(Locale.ROOT).equals("a\u03c2 "),
+                "M3 Greek final sigma lowercase");
+
+        String turkishM3 = String.join("", "I", "\u0130", "i", "\u0131");
+        check(turkishM3.toLowerCase(Locale.forLanguageTag("tr"))
+                        .equals("\u0131ii\u0131"),
+                "M3 Turkish lowercase");
+        check(turkishM3.toUpperCase(Locale.forLanguageTag("tr"))
+                        .equals("I\u0130\u0130I"),
+                "M3 Turkish uppercase");
+
+        String azeriM3 = String.join("", "I", "i");
+        check(azeriM3.toLowerCase(Locale.forLanguageTag("az"))
+                        .equals("\u0131i"),
+                "M3 Azeri lowercase");
+        check(azeriM3.toUpperCase(Locale.forLanguageTag("az"))
+                        .equals("I\u0130"),
+                "M3 Azeri uppercase");
+
+        String sharpSM3 = String.join("", "stra", "\u00dfe");
+        check(sharpSM3.toUpperCase(Locale.ROOT).equals("STRASSE"),
+                "M3 sharp-s uppercase expansion");
+
+        String lithuanianM3 = String.join("", "I", "\u0301");
+        String lithuanianFlat = "I\u0301";
+        Locale lithuanian = Locale.forLanguageTag("lt");
+        check(lithuanianM3.toLowerCase(lithuanian)
+                        .equals(lithuanianFlat.toLowerCase(lithuanian)),
+                "M3 Lithuanian conditional lowercase parity");
+
+        String deseretM3 = String.join("", "\ud801", "\udc00", "x");
+        String deseretFlat = "\ud801\udc00x";
+        check(deseretM3.toLowerCase(Locale.ROOT)
+                        .equals(deseretFlat.toLowerCase(Locale.ROOT)),
+                "M3 supplementary lowercase parity");
+        check(deseretM3.toUpperCase(Locale.ROOT)
+                        .equals(deseretFlat.toUpperCase(Locale.ROOT)),
+                "M3 supplementary uppercase parity");
+
+        String noCaseChange = String.join("", "123", "-_");
+        check(noCaseChange.toLowerCase(Locale.ROOT) == noCaseChange,
+                "M3 Unicode lower unchanged identity");
+        check(noCaseChange.toUpperCase(Locale.ROOT) == noCaseChange,
+                "M3 Unicode upper unchanged identity");
 
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
@@ -741,18 +834,6 @@ public class M3StringPrecomputeSearchTest {
             if (source[index] == high && source[index + 1] == low) return index;
         }
         return -1;
-    }
-
-    private static boolean factsPrepared(String value) throws Exception {
-        Field m3Field = String.class.getDeclaredField("m3");
-        m3Field.setAccessible(true);
-        Object storage = m3Field.get(value);
-        if (storage == null) {
-            throw new AssertionError("String was not admitted to M3");
-        }
-        Method factsIfPrepared = storage.getClass().getDeclaredMethod("factsIfPrepared");
-        factsIfPrepared.setAccessible(true);
-        return factsIfPrepared.invoke(storage) != null;
     }
 
     private static byte[] invokeBytes(

@@ -15,7 +15,6 @@ import java.util.Objects;
 final class M3StringTuple extends M3StringOwner {
     final M3String left;
     final M3String right;
-    final int height;
     final long canonicalId;
 
     M3StringTuple(M3String left, M3String right, long canonicalId, long structuralHash64) {
@@ -27,7 +26,6 @@ final class M3StringTuple extends M3StringOwner {
                 structuralHash64);
         this.left = Objects.requireNonNull(left, "left");
         this.right = Objects.requireNonNull(right, "right");
-        this.height = 1 + Math.max(childHeight(left), childHeight(right));
         this.canonicalId = canonicalId;
     }
 
@@ -103,13 +101,8 @@ final class M3StringTuple extends M3StringOwner {
                 destinationCoder);
     }
 
-    private static int childHeight(M3String value) {
-        M3StringOwner owner = value.owner();
-        return value.start() == 0
-                        && value.length() == owner.length
-                        && owner instanceof M3StringTuple tuple
-                ? tuple.height
-                : 0;
+    boolean geometryEquals(M3String candidateLeft, M3String candidateRight) {
+        return left.sameCoordinate(candidateLeft) && right.sameCoordinate(candidateRight);
     }
 
     @Override

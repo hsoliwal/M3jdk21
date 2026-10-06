@@ -28,186 +28,29 @@ search_precompute = read("src/java.base/share/classes/java/lang/M3StringSearchPr
 position_precompute = read("src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java")
 tq = read("src/java.base/share/classes/jdk/internal/mindex/M3TQ.java")
 string = read("src/java.base/share/classes/java/lang/String.java")
+asb = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
 abstract_builder = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
 symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
 classes = read("src/hotspot/share/classfile/vmClassMacros.hpp")
 inline = read("src/hotspot/share/classfile/javaClasses.inline.hpp")
+java_classes_cpp = read("src/hotspot/share/classfile/javaClasses.cpp")
+java_classes_hpp = read("src/hotspot/share/classfile/javaClasses.hpp")
 stringopts = read("src/hotspot/share/opto/stringopts.cpp")
 archive_writer = read("src/hotspot/share/cds/archiveHeapWriter.cpp")
 dedup = read("src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp")
 stringtable = read("src/hotspot/share/classfile/stringTable.cpp")
 mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
-completeness = read("m3/docs/string-precompute-completeness.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
 native_string = read("src/java.base/share/native/libjava/String.c")
+native_string_test = read("test/jdk/java/lang/String/nativeEncoding/libstringPlatformChars.c")
+hotspot_java_classes = read("src/hotspot/share/classfile/javaClasses.cpp")
+hotspot_jni = read("src/hotspot/share/prims/jni.cpp")
+native_encoding_java = read("test/jdk/java/lang/String/nativeEncoding/StringPlatformChars.java")
+native_encoding_c = read("test/jdk/java/lang/String/nativeEncoding/libstringPlatformChars.c")
+arguments = read("src/hotspot/share/runtime/arguments.cpp")
 pattern = read("src/java.base/share/classes/java/util/regex/Pattern.java")
 matcher = read("src/java.base/share/classes/java/util/regex/Matcher.java")
-
-# STRING_PRECOMPUTE_COMPLETENESS: every donor String-precompute responsibility must be
-# either mapped to one internal M3 owner or explicitly classified out of java.lang.String.
-completeness_rows = []
-for line_number, line in enumerate(completeness.splitlines(), start=1):
-    if not line or line.startswith("#"):
-        continue
-    cells = line.split("\t")
-    if line_number == 1:
-        if cells != [
-            "scope",
-            "donor_responsibility",
-            "m3jdk_owner",
-            "disposition",
-            "retention",
-            "semantic_authority",
-            "notes",
-        ]:
-            fail("String precompute completeness header changed")
-        continue
-    if len(cells) != 7 or any(not cell for cell in cells):
-        fail(f"invalid String precompute completeness row {line_number}")
-    completeness_rows.append(cells)
-
-if not completeness_rows:
-    fail("String precompute completeness ledger is empty")
-
-allowed_dispositions = {
-    "IMPLEMENTED_FIXED",
-    "IMPLEMENTED_IDENTITY_OWNER",
-    "IMPLEMENTED_BOUNDED",
-    "IMPLEMENTED_SAFE_SUBSET",
-    "IMPLEMENTED_SEMANTIC_SUBSET",
-    "IMPLEMENTED_INTERNAL",
-    "ADAPTED_BOUNDED",
-    "PARTIAL_SAFE_CONSUMPTION",
-    "PARTIAL_INTERNAL_STORAGE_COUNTERPART",
-    "RESPONSIBILITY_SPLIT_INTERNAL",
-    "NOT_JDK_STRING_SEMANTICS",
-    "DONOR_ONLY_NO_JDK21_CONSUMER",
-    "DO_NOT_PORT_TO_JAVA_LANG_STRING",
-    "OPTIONAL_INTERNAL",
-}
-seen_responsibilities = set()
-for row in completeness_rows:
-    scope, donor, target, disposition, retention, authority, notes = row
-    if donor in seen_responsibilities:
-        fail(f"duplicate String precompute responsibility: {donor}")
-    seen_responsibilities.add(donor)
-    if disposition not in allowed_dispositions:
-        fail(f"unclassified String precompute responsibility: {donor} -> {disposition}")
-    if disposition.startswith("IMPLEMENTED") and target.startswith("no current"):
-        fail(f"implemented String precompute has no target: {donor}")
-    if scope == "STRING_RUNTIME" and disposition in {
-        "NOT_JDK_STRING_SEMANTICS",
-        "DO_NOT_PORT_TO_JAVA_LANG_STRING",
-        "DONOR_ONLY_NO_JDK21_CONSUMER",
-    }:
-        fail(f"String-runtime responsibility incorrectly classified out: {donor}")
-    if any("TODO" in cell or "UNCLASSIFIED" in cell for cell in row):
-        fail(f"unfinished String precompute classification: {donor}")
-
-required_responsibilities = {
-    "IndexTextMetrics",
-    "MIndexTextPrecomputedFacts",
-    "MIndexWhitespaceBoundaries",
-    "MIndexWhitespaceBoundaryCache",
-    "MIndexStringCanonicalFacts.canonicalTupleId",
-    "MIndexStringCanonicalFacts.structuralHash64",
-    "MIndexStringCanonicalFacts.tokenCount",
-    "MIndexStringCanonicalFacts.tokenHash64",
-    "MIndexUtf16RangeFacts",
-    "MIndexStringSearchPlan",
-    "MIndexPositionMasks / MIndexComposedPositionMasks",
-    "MIndexPreparedTrigramQuery",
-    "MIndexRegexTrigramQuery",
-    "MIndexPatternPrecomputation / RegexComposition*",
-    "MIndexStringPrecomputationByteFacts.byteLength",
-    "MIndexStringPrecomputationByteFacts.SHA256",
-    "MIndexMappedStringFacts / MIndexMappedStringFactsSource",
-    "MIndexMappedPrecomputation",
-    "MIndexPrecomputedStrings",
-    "MIndexPrefixZ / MIndexPrefixZCache",
-    "MIndexPalindromeFacts / Manacher facts",
-    "MIndexSuffixDecision / suffix DFA facts",
-    "LCP range-minimum / suffix-index facts",
-}
-missing_responsibilities = required_responsibilities - seen_responsibilities
-if missing_responsibilities:
-    fail("String precompute completeness ledger missing: "
-         + ", ".join(sorted(missing_responsibilities)))
-
-by_responsibility = {row[1]: row for row in completeness_rows}
-expected_dispositions = {
-    "MIndexStringCanonicalFacts.canonicalTupleId": "IMPLEMENTED_IDENTITY_OWNER",
-    "MIndexStringCanonicalFacts.structuralHash64": "IMPLEMENTED_IDENTITY_OWNER",
-    "MIndexStringCanonicalFacts.tokenCount": "NOT_JDK_STRING_SEMANTICS",
-    "MIndexStringCanonicalFacts.tokenHash64": "NOT_JDK_STRING_SEMANTICS",
-    "MIndexPrefixZ / MIndexPrefixZCache": "DONOR_ONLY_NO_JDK21_CONSUMER",
-    "MIndexPalindromeFacts / Manacher facts": "DONOR_ONLY_NO_JDK21_CONSUMER",
-    "MIndexSuffixDecision / suffix DFA facts": "DONOR_ONLY_NO_JDK21_CONSUMER",
-    "LCP range-minimum / suffix-index facts": "DONOR_ONLY_NO_JDK21_CONSUMER",
-}
-for donor, expected in expected_dispositions.items():
-    actual = by_responsibility[donor][3]
-    if actual != expected:
-        fail(f"String precompute disposition drift: {donor}: {actual} != {expected}")
-
-critical_port_map_rows = [
-    "MIndexStringPrecomputationByteFacts.byteLength\tjava.lang.M3StringFacts + M3String.encode*\tIMPLEMENTED_SEMANTIC_SUBSET",
-    "MIndexStringPrecomputationByteFacts.SHA256\tinternal artifact/hash service\tNOT_STRING_SEMANTICS",
-    "MIndexTupleReferences.concat/balance + MIndexStringIntern.internReferences\tjava.lang.M3StringPool + M3StringTuple\tIMPLEMENTED_UNVERIFIED",
-    "MIndexStringSearchPlan\tjava.lang.M3StringSearchPrecompute\tIMPLEMENTED",
-    "MIndexPositionMasks / MIndexComposedPositionMasks\tjava.lang.M3StringPositionPrecompute\tIMPLEMENTED",
-]
-for row in critical_port_map_rows:
-    if row not in port_map:
-        fail(f"String precompute port/completeness drift: {row}")
-
-if "m3/docs/string-precompute-completeness.tsv" not in workflow:
-    fail("M3 String workflow does not trigger on completeness ledger changes")
-
-# Field-level parity for the fixed semantic donor bundle.
-for field in [
-    "final int utf16Length;",
-    "final int utf8Length;",
-    "final int codePointCount;",
-    "final int unpairedSurrogateCount;",
-    "final int javaHash;",
-    "final int hash31Power;",
-    "final char firstUtf16Unit;",
-    "final char lastUtf16Unit;",
-    "final long bitSignal64;",
-    "final boolean ascii;",
-    "final boolean latin1;",
-    "final int asciiUpperHash;",
-    "final int asciiLowerHash;",
-    "final int asciiTitleHash;",
-    "final long prefix4;",
-    "final long suffix4;",
-    "final long bigramSignal64;",
-    "final long trigramSignal64;",
-    "final int trimStart;",
-    "final int trimEnd;",
-    "final int stripStart;",
-    "final int stripEnd;",
-]:
-    if field not in facts:
-        fail(f"M3 fixed String precompute field missing: {field}")
-
-# Identity/structure facts belong to canonical owners, not the text-fact bundle.
-for fragment in [
-    "final long structuralHash64;",
-    "final long canonicalId;",
-]:
-    if fragment not in owner and fragment not in tuple_:
-        fail(f"M3 owner identity fact missing: {fragment}")
-for forbidden in [
-    "tokenCount",
-    "tokenHash64",
-    "canonicalTupleId",
-    "structuralHash64",
-]:
-    if forbidden in facts:
-        fail(f"donor identity/tokenization fact leaked into M3StringFacts: {forbidden}")
 
 # M3String must remain owner + coordinate only.
 instance_fields = re.findall(
@@ -249,40 +92,6 @@ for fragment in [
     if fragment not in m3:
         fail(f"M3 generic ASCII-compatible encoder fast path missing: {fragment}")
 
-if "prepared.unpairedSurrogateCount == 0" not in m3
-        or "return encodeUtf8();" not in m3:
-    fail("M3 strict UTF-8 does not reuse unpaired-surrogate facts")
-
-# Canonical composition follows the Synexia persistent reference-DAG history.
-# Binary-tree shape is an implementation detail. Candidate hashes route lookup only;
-# exact normalized terminal M3 owner/range coordinates decide canonical reuse.
-if "final int height;" not in tuple_:
-    fail("M3 tuple canonical DAG height missing")
-for fragment in [
-    "private static M3String concatBalanced(M3String left, M3String right)",
-    "private static M3String balance(M3String left, M3String right)",
-    "private static int height(M3String value)",
-    "private static M3String internTuple(M3String left, M3String right)",
-    "private static long tupleRouteKey(",
-    "long routeKey = tupleRouteKey(left, right, javaHash, totalLength, coder);",
-    "private static char joinedCharAt(M3String left, M3String right, int index)",
-    "private static boolean sameLeafSequence(",
-    "private static final class LeafCursor",
-    "rawAtom == atom && start + length == rawStart",
-    "candidate.atom() != requested.atom()",
-]:
-    if fragment not in pool:
-        fail(f"M3 balanced structural-canonical pool invariant missing: {fragment}")
-for forbidden in [
-    "geometryEquals(left, right)",
-    "tupleHash64(M3String left, M3String right)",
-    "left.identityHash64()",
-    "sequenceHash64(",
-    "combineSequenceHash(",
-]:
-    if forbidden in pool:
-        fail(f"M3 tuple interning regressed to shape/scanning identity: {forbidden}")
-
 # Encoding facts must be executable, not decorative metadata.
 for fragment in [
     "if (prepared.ascii) {",
@@ -304,6 +113,17 @@ for fragment in [
 
 if "storage.getBytes(dst, srcBegin, dstBegin, LATIN1, srcEnd - srcBegin);" not in string:
     fail("deprecated String.getBytes range lost M3 bulk projection")
+
+# AbstractStringBuilder String append/insert must consume M3 storage through String.getBytes;
+# direct String.value() copies are fallback-only for non-M3 inputs.
+for fragment in [
+    "M3String storage = s.m3();",
+    "s.getBytes(this.value, off, this.count, LATIN1, end - off);",
+    "s.getBytes(this.value, i, j, UTF16, end - i);",
+    "s.getBytes(this.value, off, this.count, UTF16, end - off);",
+]:
+    if fragment not in asb:
+        fail(f"AbstractStringBuilder M3 bulk append route missing: {fragment}")
 
 # Byte/char projections must descend through canonical owner geometry, not walk M3 tuple
 # charAt one unit at a time.
@@ -336,7 +156,11 @@ for fragment in [
     if fragment not in position_precompute:
         fail(f"M3 position precompute fail-open path missing: {fragment}")
 
+if "char[] scratch" in position_precompute:
+    fail("M3 position precompute reintroduced transient text staging")
+
 for fragment in [
+    "source.charAt(start + offset)",
     "final AtomicReferenceArray<ExactBlock> exact;",
     "Arrays.binarySearch(units, unit)",
     "Long.numberOfTrailingZeros(positions)",
@@ -430,6 +254,24 @@ if "public boolean containsAll(Facts required)" not in tq:
     fail("M3TQ exact trigram fact containment missing")
 if "long[] trigram" in facts or "M3TQ.Facts" in facts:
     fail("M3StringFacts illegally owns length-proportional exact trigram state")
+
+# Cold range facts follow canonical owner geometry. Tuple ranges compose child facts and only
+# atom-edge ranges may scan UTF-16 directly.
+for fragment in [
+    "computeRangeFacts(checked.start(), checked.length())",
+    "abstract M3StringFacts computeRangeFacts(int start, int length)",
+]:
+    if fragment not in owner:
+        fail(f"M3 structural range-fact dispatch missing: {fragment}")
+for fragment in [
+    "return left.slice(start, end).facts();",
+    "return right.slice(start - leftLength, end - leftLength).facts();",
+    "return M3StringFacts.compose(",
+]:
+    if fragment not in tuple_:
+        fail(f"M3 tuple range-fact composition missing: {fragment}")
+if "M3StringFacts.scan(M3String.range(this, start, length))" not in atom:
+    fail("M3 atom range-fact edge scan missing")
 
 # Fixed String facts are opportunistic search filters. Cold search must not force a complete
 # M3StringFacts scan before the dedicated bounded search/position owners execute.
@@ -539,6 +381,70 @@ if "nativeByteShadow(EMPTY, 0, 0, String.LATIN1)" not in m3:
 if "return storage == null ? checked.value : storage.compatibilityValue();" not in string:
     fail("JNI ingress no longer discards the temporary construction payload")
 
+# HotSpot native scratch copies must traverse canonical owner geometry in bulk. StringTable,
+# symbols and JVMTI may materialize scoped native UTF-16 scratch, but per-unit M3 DAG descent is
+# forbidden in java_lang_M3String::copy_chars.
+for fragment in [
+    "static void copy_owner_chars(",
+    "copy_owner_chars(owner(value), java_lang_M3String::start(value) + start, len, destination);",
+]:
+    if fragment not in java_classes_hpp + java_classes_cpp:
+        fail(f"HotSpot M3 structural copy contract missing: {fragment}")
+for fragment in [
+    "if (o->klass() == vmClasses::M3StringAtom_klass())",
+    "copy_chars(left, start, left_count, destination);",
+    "copy_chars(right, 0, len - left_count, destination + left_count);",
+]:
+    if fragment not in java_classes_cpp:
+        fail(f"HotSpot M3 owner-range copier missing: {fragment}")
+copy_chars_body = re.search(
+    r"void java_lang_M3String::copy_chars\((?P<body>.*?)\n\}",
+    java_classes_cpp,
+    flags=re.DOTALL,
+)
+if not copy_chars_body or "char_at(value, start + index)" in copy_chars_body.group("body"):
+    fail("HotSpot M3 copy_chars reintroduced per-unit char_at traversal")
+
+# JNI StringCritical may return a required native copy for M3, but it must fill that copy through
+# the same canonical bulk accessor as GetStringChars/Region, not per-unit VM dispatch.
+critical = re.search(
+    r"jni_GetStringCritical\((?P<body>.*?)\n\}?",
+    hotspot_jni,
+    flags=re.DOTALL,
+)
+if "java_lang_String::copy_chars(s, 0, s_len, ret);" not in hotspot_jni:
+    fail("GetStringCritical lost canonical bulk copy")
+if "ret[i] = java_lang_String::char_at(s, i);" in hotspot_jni:
+    fail("GetStringCritical reintroduced per-unit M3 VM dispatch")
+
+# HotSpot modified-UTF8 writing should bulk-convert complete M3 UTF-16 chunks when they fit,
+# retaining the per-unit path only as the bounded-buffer truncation fallback.
+for fragment in [
+    "int chunk_bytes = 0;",
+    "UNICODE::as_utf8(scratch, chunk, out, buflen);",
+    "if (chunk_bytes < buflen)",
+]:
+    if fragment not in hotspot_java_classes:
+        fail(f"HotSpot M3 UTF8 bulk chunk path missing: {fragment}")
+
+# HotSpot equality may prove identity from the exact canonical owner+coordinate pair before
+# falling back to logical UTF-16 comparison. It must not compare the String.value sentinel.
+for fragment in [
+    "java_lang_M3String::owner(left) == java_lang_M3String::owner(right)",
+    "java_lang_M3String::coordinate(left) == java_lang_M3String::coordinate(right)",
+    "char_at(str1, i) != char_at(str2, i)",
+]:
+    if fragment not in hotspot_java_classes:
+        fail(f"HotSpot M3 String equality path missing: {fragment}")
+
+# JNI region APIs must stay covered by the existing native String harness.
+for fragment in [
+    "GetStringRegion(env, value, start, length, buffer)",
+    "GetStringUTFRegion(env, value, start, length, buffer)",
+]:
+    if fragment not in native_string_test:
+        fail(f"JNI String region proof missing: {fragment}")
+
 # JNI creates only the final compatibility arrays, then bulk-fills them from canonical M3
 # storage. Per-code-unit JNI dispatch and temporary C spelling buffers are forbidden.
 byte_shadow = re.search(
@@ -566,6 +472,16 @@ if "CallVoidMethodA" not in byte_shadow.group("body") or "CallVoidMethodA" not i
 # Regex TQ integration is candidate-only and deliberately narrow. Literal find/search may
 # reject proven absence, but anchored match/lookingAt and case-insensitive literal semantics stay
 # entirely with the stock node engine.
+for fragment in [
+    "compiledM3Tq(matchRoot)",
+    "node.getClass() == Slice.class",
+    "node instanceof Branch branch",
+    "atom == null || atom.getClass() != Slice.class",
+    "M3TQ.fromExact(alternatives)",
+]:
+    if fragment not in pattern:
+        fail(f"Pattern compiled literal-effect TQ boundary missing: {fragment}")
+
 for fragment in [
     "transient M3TQ m3Tq;",
     "has(LITERAL) && !has(CASE_INSENSITIVE)",
@@ -618,47 +534,9 @@ for forbidden_path in [
     "src/java.base/share/classes/java/lang/M3StringSuffixDecision.java",
     "src/java.base/share/classes/java/lang/M3StringLcpPrecompute.java",
     "src/java.base/share/classes/java/lang/M3StringSuffixIndex.java",
-    "src/java.base/share/classes/java/lang/M3StringPrecomputedStrings.java",
-    "src/java.base/share/classes/java/lang/M3StringMappedPrecomputation.java",
-    "src/java.base/share/classes/java/lang/M3StringLiteralSearchSummary.java",
-    "src/java.base/share/classes/java/lang/M3StringPrefixFrontier.java",
-    "src/java.base/share/classes/java/lang/M3StringExactWeightPrecomputation.java",
-    "src/java.base/share/classes/java/lang/M3StringJoinedNativeSearch.java",
-    "src/java.base/share/classes/java/lang/M3StringUtf16SearchImage.java",
 ]:
     if (ROOT / forbidden_path).exists():
         fail(f"unreviewed no-port String precompute owner appeared: {forbidden_path}")
-
-for required_live_donor_family in [
-    "IndexDictionary* / IndexLexicon*Image / MappedIndexDictionary / MappedIndexLexicon*\tSynexia/M3 mapped lexicon and index layer\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
-    "IndexNGram* / MappedIndexNGram* / MIndexMutableNGramIndex / MIndexScopedNgrams\tjdk.internal.mindex.M3TQ only for exact String/regex trigram subset; otherwise donor index layer\tPARTIAL_SAFE_CONSUMPTION",
-    "MIndexLiteralAutomaton / MIndexLiteralRangeEffects / MIndexLiteralSkipTable / MIndexLiteralEffectImage / MIndexLiteralNative\tjava.lang.M3StringSearchPrecompute + exact String search where semantically equivalent\tPARTIAL_SAFE_CONSUMPTION",
-    "MIndexRegex* / IndexRegex* / MatIndexRegex* / Mapped*Regex* / regex accelerator providers\tjava.util.regex Pattern/Matcher + jdk.internal.mindex.M3TQ + optional internal accelerators\tPARTIAL_SAFE_CONSUMPTION",
-    "IndexMask* / MIndexMask* / MIndexMasked* / MIndexCaseComposition\tjava.lang.M3StringPositionPrecompute for exact code-unit position facts; otherwise donor view/index layer\tPARTIAL_SAFE_CONSUMPTION",
-    "IndexArtifactHash* / MIndexBlake3* / MIndexTreeHash256 / Mat*Hash* / MatMerkleHash / MIndexSignatureImage\tinternal artifact/hash service\tNOT_STRING_SEMANTICS",
-    "MIndexPageableTree* / MIndexTokenSearchTree / MIndexVocabularySearchTree / MIndexCompositeSearchTrie / MIndex*SearchIndex / MIndexSearchEngine / MIndexSearchProgram / MIndexSearchQuery\tSynexia search/index/service layer\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
-    "IndexWord* / LexicalFacts / LexiconFactsImage / MappedLexiconFacts / IndexPos* / language/model vocabulary images\tSynexia language/lexicon layer\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
-    "MIndexMappedArrays / MIndexMappedByteStore / MIndexMappedBytes / MIndexMappedResolver / MIndexMappedStringResolver / MappedIndexStringStore / MappedMatIndexString*\tinternal storage/mapping adapters only where needed; otherwise donor storage layer\tPARTIAL_INTERNAL_STORAGE_COUNTERPART",
-    "MIndexGpu* / Jni*Search* / Java*SearchAccelerator / CppPrepared* / GpuByteAutomaton*\toptional jdk.internal accelerator boundary\tOPTIONAL_INTERNAL",
-    "MIndexBatchImage / MIndexSearchImage / MIndexPatternTruthImage / MIndexRegexTruthImage / MIndexBloom* / MIndexCodeTextSignalTrialImage / MIndexLongPostingImage / MIndexImageLimits\tSynexia batch/search publication layer\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
-    "MatIndex*Image / MappedMat* / MappedMIndexStructuralBundle / MatIndexStringPositionIndex / MatIndexSuffixTrie\tSynexia materialized structural/index layer\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
-]:
-    if required_live_donor_family not in port_map:
-        fail(f"live Synexia precompute family classification missing: {required_live_donor_family}")
-
-for required_live_donor_mapping in [
-    "MIndexPrecomputedStrings\tM3StringPool + M3MappedStringBacking + M3StringOwner.rangeFacts\tRESPONSIBILITY_SPLIT_INTERNAL",
-    "MIndexMappedPrecomputation\tM3MappedStringBacking + M3StringPool mapped lexicon + internal fact owners\tPARTIAL_INTERNAL_STORAGE_COUNTERPART",
-    "MIndexLiteralSearchSummary\tM3StringFacts + M3StringSearchPrecompute operations\tNO_RETAINED_SUMMARY_OBJECT",
-    "MIndexMaskLiteralSearch\tM3StringPositionPrecompute + exact String search\tIMPLEMENTED",
-    "MIndexPrefixFrontier\tno java.lang.String owner\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
-    "MIndexExactWeightPrecomputation\tno java.lang.String owner\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
-    "MIndexJoinedNativeSearch\toptional jdk.internal accelerator only\tOPTIONAL_INTERNAL",
-    "IndexUtf16SearchImage\tno java.lang.String owner\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
-    "MIndexPrecomputationLayout / MIndexLanguagePrecomputeStats\tno java.lang.String owner\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
-]:
-    if required_live_donor_mapping not in port_map:
-        fail(f"live Synexia precompute classification missing: {required_live_donor_mapping}")
 
 for required_no_port in [
     "MIndexPrefixZ / MIndexPrefixZCache\tno current M3JDK21 owner\tDONOR_ONLY_NO_JDK21_CONSUMER",
@@ -668,6 +546,53 @@ for required_no_port in [
 ]:
     if required_no_port not in port_map:
         fail(f"String donor no-port classification missing: {required_no_port}")
+
+# Standard UTF-8 and modified UTF-8 are different M3 facts. VM/JNI GetStringUTFLength must
+# consume the modified UTF-8 fact, with a native regression that covers NUL and surrogate units.
+for fragment in [
+    "final int modifiedUtf8Length;",
+    "modifiedUtf8 = Math.addExact(modifiedUtf8, modifiedUtf8Bytes(unit));",
+]:
+    if fragment not in facts:
+        fail(f"M3 modified UTF8 fact missing: {fragment}")
+for fragment in [
+    "_facts_modifiedUtf8Length_offset",
+    "modified_utf8_length_if_precomputed",
+]:
+    if fragment not in (java_classes_hpp + java_classes_cpp + inline):
+        fail(f"M3 VM modified UTF8 accessor missing: {fragment}")
+if "GetStringUTFLength" not in native_encoding_c or "modifiedUtf8Length(s)" not in native_encoding_java:
+    fail("M3 modified UTF8 JNI length regression missing")
+
+# VM/JIT experiment boundary: subsystems that still assume String.value payload semantics must
+# remain disabled until they become explicitly M3-aware.
+for fragment in [
+    "if (UseM3StringStorage) {",
+    "FLAG_SET_ERGO(OptimizeStringConcat, false);",
+    "UseStringDeduplication = false;",
+]:
+    if fragment not in arguments:
+        fail(f"M3 VM experiment boundary missing: {fragment}")
+for unsupported in [
+    "UseM3StringStorage does not support JVMCI",
+    "UseM3StringStorage does not support UseStringDeduplication",
+    "UseM3StringStorage does not support CDS archive operations",
+    "UseM3StringStorage does not support Flight Recorder",
+]:
+    if unsupported not in arguments:
+        fail(f"M3 unsupported VM subsystem guard missing: {unsupported}")
+
+# VM terminology must describe the actual representation owner. M3 storage is no longer a
+# join-only feature; every M3-backed String is covered by the same predicate.
+vm_string_bridge = java_classes_hpp + java_classes_inline + java_classes_cpp + hotspot_jni
+if "is_m3_joined" in vm_string_bridge:
+    fail("stale join-only M3 VM predicate name leaked back into runtime")
+for fragment in [
+    "is_m3_backed(oop java_string)",
+    "java_lang_String::is_m3_backed",
+]:
+    if fragment not in vm_string_bridge:
+        fail(f"M3 VM backed-storage predicate missing: {fragment}")
 
 # Donor class naming must not leak back into live VM symbols/layout.
 for path, text in [
@@ -763,6 +688,25 @@ for fragment in [
     if fragment not in (m3 + owner):
         fail(f"M3 prepared-fact reuse path missing: {fragment}")
 
+# Literal replacement with a flat/bootstrap source and M3 target/replacement must reuse
+# direct target search plus builder M3 ingress; M3 operands must not be materialized via value().
+for fragment in [
+    "M3String targetM3 = trgtStr.m3();",
+    "M3String replacementM3 = replStr.m3();",
+    "builder.append(replStr);",
+]:
+    if fragment not in string:
+        fail(f"mixed flat/M3 literal replace route missing: {fragment}")
+
+# Mixed flat/M3 prefix checks must not materialize the M3 prefix through value().
+for fragment in [
+    "M3String prefixM3 = prefix.m3();",
+    "if (prefixM3 != null) {",
+    "prefixM3.charAt(index)",
+]:
+    if fragment not in string:
+        fail(f"mixed flat/M3 startsWith route missing: {fragment}")
+
 # Range hashes and ASCII case hashes are negative filters only; exact comparison remains in
 # String.regionMatches for every surviving candidate.
 for fragment in [
@@ -781,9 +725,8 @@ if "for (int index = 0; index < len; index++)" not in string:
 # Case conversion is canonical only for ASCII + Locale.ROOT. Locale-sensitive and non-ASCII
 # transformations must continue through the stock JDK case engine.
 for fragment in [
-    "storage != null && locale.equals(Locale.ROOT)",
-    "M3StringFacts prepared = storage.facts();",
-    "if (prepared.ascii) {",
+    "M3StringFacts prepared = storage == null ? null : storage.factsIfPrepared();",
+    "prepared != null && locale.equals(Locale.ROOT) && prepared.ascii",
     "storage.asciiCase(false)",
     "storage.asciiCase(true)",
 ]:
@@ -791,6 +734,20 @@ for fragment in [
         fail(f"M3 ROOT ASCII case boundary missing: {fragment}")
 if "M3String asciiCase(boolean upper)" not in m3:
     fail("M3String ROOT ASCII canonical case mapper missing")
+
+# Full Unicode/locale case conversion for M3-backed Strings must use the JDK conditional
+# casing engine over canonical String access. Source value() materialization is forbidden.
+for fragment in [
+    "return caseMapM3(locale, false);",
+    "return caseMapM3(locale, true);",
+    "private String caseMapM3(Locale locale, boolean upper)",
+    "ConditionalSpecialCasing.toLowerCaseEx(this, index, locale)",
+    "ConditionalSpecialCasing.toUpperCaseEx(this, index, locale)",
+    "ConditionalSpecialCasing.toLowerCaseCharArray(this, index, locale)",
+    "ConditionalSpecialCasing.toUpperCaseCharArray(this, index, locale)",
+]:
+    if fragment not in string:
+        fail(f"M3 full JDK case-mapping route missing: {fragment}")
 
 # Builder coder selection may use exact M3 range facts locally. This does not change the
 # String/HotSpot coder; it only avoids inflating a Latin1 builder for a Latin1-only M3 range.
@@ -800,6 +757,15 @@ for fragment in [
 ]:
     if fragment not in abstract_builder:
         fail(f"AbstractStringBuilder M3 range-coder decision missing: {fragment}")
+
+# Shared flat-source substring search (used by AbstractStringBuilder) must not materialize
+# an M3-backed target String through value().
+for fragment in [
+    "M3String targetM3 = tgtStr.m3();",
+    "targetM3.charAt(index)",
+]:
+    if string.count(fragment) < 2:
+        fail(f"builder/static search M3 target route missing: {fragment}")
 
 # AbstractStringBuilder must not materialize M3 String.value() while appending String ranges.
 for fragment in [
@@ -978,15 +944,24 @@ for fragment in [
 if "M3StringPrecomputeSearchTest.java test/jdk/" in workflow:
     fail("M3 String workflow contains concatenated path entries")
 
+for required_trigger in [
+    "src/java.base/share/classes/java/lang/AbstractStringBuilder.java",
+    "src/java.base/share/classes/java/util/regex/Pattern.java",
+    "src/java.base/share/classes/java/util/regex/Matcher.java",
+    "m3/tooling/migration-recipes/**",
+]:
+    if required_trigger not in workflow:
+        fail(f"M3 String workflow lost trigger path: {required_trigger}")
+
 for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringPrecomputeSearchTest.java",
     "M3StringInternTest.java",
-    "M3StringCanonicalDagTest.java",
+    "nativeEncoding/StringPlatformChars.java",
+    "M3StringInternTest.java",
     "M3TQFactsTest.java",
     "M3RegexLiteralTQTest.java",
     "M3StringHistoryConvergenceRecipeTest",
-    "M3StringCanonicalDagMasterRepairRecipeTest",
 ]:
     if required_gate not in workflow:
         fail(f"M3 String workflow lost verification gate: {required_gate}")

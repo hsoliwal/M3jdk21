@@ -6,9 +6,9 @@
       "source": "com.synexia.indexstring.IndexStringTuple",
       "source_commit": "9963cc08ff13922b92a0e3db7c30f56fddacba7d",
       "target": "java.lang.M3StringTuple",
-      "status": "adapted canonical balanced persistent composition owner",
+      "status": "adapted canonical persistent composition owner",
       "source_role": "Synexia donor/reference implementation",
-      "target_rule": "M3String values retain owner+packed coordinate; tuple owners retain child coordinates only, maintain bounded persistent height, and canonicalize ordered terminal owner/range sequences independently of concat parenthesization; no text arrays"
+      "target_rule": "M3String values retain owner+packed coordinate; tuple owners retain child coordinates only and no text arrays"
     },
     {
       "source": "com.synexia.indexstring.LocalM3StringPiece",
@@ -31,35 +31,15 @@
       "target": "java.lang.M3StringAtom + java.lang.M3StringPool",
       "status": "adapted scalar canonical-owner responsibility",
       "source_role": "Synexia donor/reference native canonical UTF-16 arena",
-      "target_rule": "M3JDK local scalar payload moves to native memory immediately; mapped atoms retain mapped owner/address; Java text arrays are not canonical; VM-local native atoms are weakly canonicalized and their unreachable native blocks are reference-queue reclaimed with internal byte accounting",
-      "retention": "live M3String/M3StringTuple coordinates provide strong ownership; pool lookup retains WeakReference<M3StringAtom> only"
+      "target_rule": "M3JDK local scalar payload moves to native memory immediately; mapped atoms retain mapped owner/address; Java text arrays are not canonical"
     },
     {
       "source": "com.synexia.indexstring.MIndexString",
       "target": "java.lang.M3String",
-      "status": "implemented-unverified runtime candidate",
+      "status": "canonical target counterpart; representation convergence required",
       "source_role": "Synexia donor/reference implementation",
       "target_rule": "M3JDK naming is independent; preserve owner+coordinate semantics, internal precompute, and JNI shadow-only materialization",
-      "supersedes_target_name": "java.lang.MIndexString",
-      "lineage": {
-        "donor_repo": "hsoliwal/com.synexia",
-        "owner_coordinate_commit": "8b202d3c10617d67f45247ccd81a21b9c5332a08",
-        "reference_dag_commit": "40d66f6edd0a9cf3e6b4545058c1ad54f6cd03bc",
-        "composable_precompute_commit": "d08ee60be27b60a951a55a2b472d515bf142f8bf",
-        "canonical_fact_bundle_commit": "b9d35ce3c3c266fb3641352a07903563a3a86b81",
-        "utf_shadow_commit": "f2f15f1aaa147cf1af556b0c148954178f971de6",
-        "balanced_reference_dag_commit": "57935a5d55d9d873ee5e83e1f7ca95e27ed6d2c8"
-      },
-      "required_semantics": [
-        "M3String instance carries exactly one canonical owner reference + long packed coordinate",
-        "composition lives in shared canonical tuple/reference owner",
-        "precompute facts attach to canonical owner/range/composition identity",
-        "precompute never owns spelling payload",
-        "JNI/native UTF-8/UTF-16/byte/char materializations are shadows only",
-        "all Java byte[]/char[] compatibility shadows, including empty sentinel, are JNI-created",
-        "VM-local native scalar lookup is weak; dead native payload is reclaimable",
-        "tuple composition is bounded-height and canonical by ordered terminal M3 owner/range sequence independent of concat parenthesization"
-      ]
+      "supersedes_target_name": "java.lang.MIndexString"
     },
     {
       "source": "com.synexia.indexstring.MIndexStringBacking",
@@ -103,146 +83,6 @@
       "target": "M3 family",
       "status": "requires per-type source/API/ownership mapping",
       "source_commit": null
-    },
-    {
-      "source": "com.synexia.indexstring.IndexResolver / IndexStringTuple",
-      "target": "java.lang.M3StringOwner / java.lang.M3StringAtom / java.lang.M3StringTuple",
-      "status": "M3JDK bootstrap-safe adaptation",
-      "mapping_rule": "scalar and tuple ownership are target-internal; M3String remains owner+packed coordinate",
-      "donor_lineage": [
-        "8b202d3c10617d67f45247ccd81a21b9c5332a08",
-        "40d66f6edd0a9cf3e6b4545058c1ad54f6cd03bc"
-      ]
-    },
-    {
-      "source": "com.synexia.indexstring.MIndexStringCanonicalFacts and composable text facts",
-      "target": "java.lang.M3StringFacts plus owner-internal bounded range facts",
-      "status": "internal-only target adaptation",
-      "mapping_rule": "derived fixed-size facts attach to canonical M3 owner/range identity; no public String API and no spelling payload",
-      "donor_lineage": [
-        "d08ee60be27b60a951a55a2b472d515bf142f8bf",
-        "b9d35ce3c3c266fb3641352a07903563a3a86b81"
-      ]
-    },
-    {
-      "source": "com.synexia.indexstring.MIndexStringSearchPlan and canonical operation-search facts",
-      "target": "java.lang.M3StringSearchPrecompute",
-      "status": "internal-only bounded operation-precompute adaptation",
-      "mapping_rule": "weakly key exact M3 owner+coordinate; retain primitive pattern metadata only; no String/char[]/byte[]/M3String payload; eviction changes performance only",
-      "donor_lineage": [
-        "46d92ec424862459e767b1d6df5b329e3241cdf3",
-        "e649343956a2ea21609713f7a62954fefe757468",
-        "bb4033de627c36e371430095a5db1122d30cc5a0",
-        "6b21032aaee902122d3dfeb027b270acc23de67b"
-      ]
-    },
-    {
-      "source": "com.synexia.indexstring.MIndexStringPrecomputation / ByteFacts",
-      "target": "java.lang.M3StringFacts + java.lang.M3String.encode / encodeNoRepl",
-      "status": "internal byte-projection adaptation",
-      "mapping_rule": "canonical facts drive caller-owned byte[] projection directly from owner+coordinate; byte[] is never canonical payload; checked/no-replacement exception contracts remain JDK21-authoritative",
-      "donor_lineage": [
-        "b9d35ce3c3c266fb3641352a07903563a3a86b81",
-        "f2f15f1aaa147cf1af556b0c148954178f971de6"
-      ]
-    },
-    {
-      "source": "com.synexia.indexstring.nativebridge.MIndexUtf16Shadow",
-      "target": "JNI String UTF-16/char shadow paths and java.lang.M3String.nativeCharShadow",
-      "status": "native compatibility adaptation",
-      "mapping_rule": "shadow only; never canonical M3String payload",
-      "donor_lineage": [
-        "f2f15f1aaa147cf1af556b0c148954178f971de6"
-      ]
-    },
-    {
-      "source": "com.synexia.indexstring.nativebridge.MIndexUtf8Shadow",
-      "target": "JNI String UTF-8/byte shadow paths and java.lang.M3String.nativeByteShadow",
-      "status": "native compatibility adaptation",
-      "mapping_rule": "shadow only; never canonical M3String payload",
-      "donor_lineage": [
-        "f2f15f1aaa147cf1af556b0c148954178f971de6"
-      ]
-    },
-    {
-      "source": "com.synexia.indexstring.MIndexPrecomputedStrings",
-      "target": "java.lang.M3StringPool + jdk.internal.mindex.M3MappedStringBacking + java.lang.M3StringOwner",
-      "status": "responsibility-split internal target",
-      "source_role": "Synexia donor facade attaching frozen precomputed rows/ranges to MIndexString",
-      "target_rule": "Do not create a public M3JDK facade. Canonical scalar/tuple ownership, mapped backing, and bounded exact-coordinate range facts remain separate internal owners; no second spelling store.",
-      "source_blob_sha1": "23643c472f9a18990cdbc9181e3cbc2b1d1c3084",
-      "source_commit": "3338106f30b3f47481bfcf83017a884e1545e8e4",
-      "source_tracking_ref": "refs/heads/develop"
-    },
-    {
-      "source": "com.synexia.indexstring.MIndexMappedPrecomputation",
-      "target": "jdk.internal.mindex.M3MappedStringBacking + java.lang.M3StringPool + internal fact owners",
-      "status": "partial internal storage counterpart",
-      "source_role": "Synexia donor mapped payload/fact publication owner",
-      "target_rule": "Port only mapped String facts/formats required by a concrete JDK runtime consumer. Broader donor image lanes remain donor/storage tooling and never become public String API.",
-      "source_blob_sha1": "3597e9588093b9af0fd4a633da7bf39428748c23",
-      "source_commit": "43c49a3f2574c8145e787104e6270bc3fb0cb885",
-      "source_tracking_ref": "refs/heads/develop"
-    },
-    {
-      "source": "com.synexia.indexstring.MIndexLiteralSearchSummary",
-      "target": "java.lang.M3StringFacts + java.lang.M3StringSearchPrecompute operations",
-      "status": "no retained target summary object",
-      "source_role": "Synexia donor caller-retained exact literal summary",
-      "target_rule": "JDK String returns primitive/boolean results. Reuse internal facts/plans but do not retain source/pattern summary objects solely for java.lang.String.",
-      "source_blob_sha1": "a42df4b008fa6b131381dd28973182a02152c2ab",
-      "source_commit": "9c552723d878a6ded6e7cc290ad31d68aa403121",
-      "source_tracking_ref": "refs/heads/develop"
-    },
-    {
-      "source": "com.synexia.indexstring.MIndexMaskLiteralSearch",
-      "target": "java.lang.M3StringPositionPrecompute + exact M3String search",
-      "status": "absorbed internal execution responsibility",
-      "source_role": "Synexia exact indexOf over immutable position masks",
-      "target_rule": "Negative position facts may skip; all positive candidates remain exact verified. Position masks stay bounded and weak-owner keyed.",
-      "source_blob_sha1": "9ab4b1538f3be00bda4d64a36bbcec4c34230851",
-      "source_commit": "7a47a8a445ca438fb59206508a42b6054956049a",
-      "source_tracking_ref": "refs/heads/develop"
-    },
-    {
-      "source": "com.synexia.indexstring.MIndexPrefixFrontier",
-      "target": "no java.lang.String counterpart",
-      "status": "donor-only fuzzy search state",
-      "source_role": "Synexia query-local bounded edit-distance frontier",
-      "target_rule": "Do not port to java.lang.String or M3StringFacts.",
-      "source_blob_sha1": "60602934bd92e36fd939a249fbadfbc40a984438",
-      "source_commit": "eb2eecf8cef4ee4891afb732f42716f490b0533e",
-      "source_tracking_ref": "refs/heads/develop"
-    },
-    {
-      "source": "com.synexia.indexstring.MIndexExactWeightPrecomputation",
-      "target": "no java.lang.String counterpart",
-      "status": "donor-only vocabulary/index sidecar",
-      "source_role": "Synexia fixed-width exact-weight matrix for batch vocabulary operations",
-      "target_rule": "String compare/prefix operations stay exact over M3 coordinates; no retained vocabulary matrix in java.lang.String.",
-      "source_blob_sha1": "403a4fca13f9b4e92cec39f3904cd7083f7423c9",
-      "source_commit": "8522504791ca0dc71fc19acfbb2bf550d6027027",
-      "source_tracking_ref": "refs/heads/develop"
-    },
-    {
-      "source": "com.synexia.indexstring.MIndexJoinedNativeSearch",
-      "target": "optional jdk.internal accelerator only",
-      "status": "optional internal acceleration donor",
-      "source_role": "Synexia prepared KMP/JNI executor over segmented bytes",
-      "target_rule": "May inform future internal accelerators, but M3String identity/semantics never depend on this byte-oriented execution lane.",
-      "source_blob_sha1": "38f670c52f6a126363ed9e31cdb52cfa390169d7",
-      "source_commit": "1907a7d040504b546d17a85c67bc2a2677979920",
-      "source_tracking_ref": "refs/heads/develop"
-    },
-    {
-      "source": "com.synexia.indexstring.IndexUtf16SearchImage",
-      "target": "no java.lang.String counterpart",
-      "status": "donor-only dictionary/batch search image",
-      "source_role": "Synexia frozen off-heap UTF-16 corpus/offset/length execution image",
-      "target_rule": "Keep outside java.lang.String; this is dictionary/M3FS execution residency, not per-String state.",
-      "source_blob_sha1": "1a6c8a8cafd9297bc6cec3730b81edc5b7f9cb47",
-      "source_commit": "5648dec28cb9a86a9908c190ce2af3d71515b953",
-      "source_tracking_ref": "refs/heads/develop"
     }
   ],
   "imported_donor_sources": [],
@@ -5347,18 +5187,17 @@
             "signatures": [
               "Facts precompute(CharSequence,int)",
               "Facts precompute(CharSequence,int,int,int)",
-              "Facts precompute(M3StringBacking,long,int,int,int)",
+              "Facts precompute(MIndexStringBacking,long,int,int,int)",
               "boolean testPrecomputed(Facts)",
-              "Facts Facts.concat(Facts,int)",
-              "boolean Facts.containsAll(Facts)"
+              "Facts Facts.concat(Facts,int)"
             ],
-            "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
-            "git_blob_sha1": "ca23741ecd8cd24593ba5c260aa0d939c53d6766",
+            "sha256": "6ba1883a307c0c8c4b6254c1a531e98b805c00a6cb943135a6cc13b47522b187",
+            "git_blob_sha1": "565173748382cb3c49c35649785c41b46288a251",
             "fingerprint": null,
             "revision_role": "candidate"
           }
         ],
-        "owner": "jdk.internal.mindex.M3TQ derived facts; existing M3StringBacking retains payload authority",
+        "owner": "jdk.internal.mindex.M3TQ derived facts; existing MIndexStringBacking retains payload authority",
         "identity": {
           "namespace": "No identity minted. Caller binds facts to the exact immutable owner, id, generation and UTF-16 range.",
           "generation": "Backing remains open and stable while scanned; returned facts retain no backing or payload reference."
@@ -5366,14 +5205,13 @@
         "contract": {
           "differences": [
             "JDK package and short TQ name; factories become public only within the unexported internal package.",
-            "Adds direct M3StringBacking range overload using a temporary nonmaterializing reader.",
-            "This packet preserves existing String/Pattern.LITERAL consumers; broader regex dispatch is not qualified."
+            "Adds direct MIndexStringBacking range overload using a temporary nonmaterializing reader.",
+            "No automatic Pattern/Matcher guard derivation or dispatch is installed."
           ],
           "compatibility_obligations": [
             "Preserve exact UTF-16 keys, short alternatives, AND/OR semantics, budgets, defensive exports and seam composition.",
             "A guard positive is never a regex match; region/lookaround context remains caller authority.",
-            "No changes to public JDK String, Pattern, Matcher, Class or JNI contracts.",
-            "Facts.containsAll is exact set inclusion only; ordering/multiplicity and exact text matching remain separate."
+            "No changes to public JDK String, Pattern, Matcher, Class or JNI contracts."
           ],
           "public_surface": [
             "Internal java.base kernel only; no new exported Java SE API."
@@ -5399,9 +5237,9 @@
         },
         "recipe": {
           "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-tq",
-          "version": "2-current-owner-custody",
+          "version": "1",
           "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
-          "sha256": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338",
+          "sha256": "245e252da59d310ea7e4229e5cafa5d25e322fee82d349337b37eab8a1f161a1",
           "preconditions": [
             "Explicit ABSENT Java targets, exact template hashes, pinned existing recipe and backing owners.",
             "Actual Java and text recipes execute fixed-point/refusal gates before sealed-install materialization."
@@ -5412,10 +5250,6 @@
           {
             "id": "tq-port",
             "receipt": "m3/tooling/tq/evidence/receipt.json"
-          },
-          {
-            "id": "tq-sync",
-            "receipt": "m3/tooling/tq-sync/evidence/receipt.json"
           }
         ],
         "provenance": {
@@ -5425,17 +5259,16 @@
         },
         "sync": {
           "source_revision": "cf3796cfca75284e9626b1e31703e41314c9f852",
-          "target_revision": "1c389e31805fb4faf5d9fe256c8dc6797a2eadff",
+          "target_revision": "7652e327eccb9df658cbfaf2f6373a01c562b260",
           "direction": "source-to-target",
           "target_adaptations": [
             "M3TQ internal name",
             "JDK backing range bridge",
-            "Public internal query factories",
-            "Retain M3 backing rename and existing Facts.containsAll from 1ba43c787d44cf46324634efee7bceacd9fcec4e"
+            "Public internal query factories"
           ],
           "pending": [
-            "Complete matched image, normal C1/C2 and M3 interpreter-boundary gates",
-            "Broader Pattern/Matcher guard derivation beyond retained case-sensitive literal search",
+            "Complete matched image and M3-enabled C1/C2 gates",
+            "Automatic safe Pattern/Matcher guard derivation and use",
             "Cross-platform native tests, retained-memory and performance evidence",
             "Full MIndex inventory and remaining family migration"
           ],
@@ -5443,33 +5276,12 @@
         },
         "lineage": {
           "previous_sources": [],
-          "previous_targets": [
-            {
-              "repo": "hsoliwal/M3jdk21",
-              "commit": null,
-              "module": "java.base",
-              "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
-              "symbol": "jdk.internal.mindex.M3TQ",
-              "signatures": [
-                "Facts precompute(CharSequence,int)",
-                "Facts precompute(CharSequence,int,int,int)",
-                "Facts precompute(MIndexStringBacking,long,int,int,int)",
-                "boolean testPrecomputed(Facts)",
-                "Facts Facts.concat(Facts,int)"
-              ],
-              "sha256": "6ba1883a307c0c8c4b6254c1a531e98b805c00a6cb943135a6cc13b47522b187",
-              "git_blob_sha1": "565173748382cb3c49c35649785c41b46288a251",
-              "fingerprint": null,
-              "revision_role": "candidate"
-            }
-          ],
+          "previous_targets": [],
           "supersedes": []
         },
         "source_state": "implemented",
-        "observation": "TQ is a caller-owned precompute kernel, not a production JNI accelerator or proof of complete MIndex migration. Current owner survives byte-for-byte; templates, guards and mapping are reconciled by tq-sync."
+        "observation": "TQ is a caller-owned precompute kernel, not a production JNI accelerator or proof of complete MIndex migration."
       }
     ]
-  },
-  "precompute_port_map": "m3/docs/synexia-string-precompute-port-map.tsv",
-  "precompute_scope_rule": "Only String-semantic and String-search donor precompute maps into M3JDK String/runtime internals; Synexia language, semantic, DAG, probabilistic and reasoning precompute must not be transplanted into java.lang.String."
+  }
 }
