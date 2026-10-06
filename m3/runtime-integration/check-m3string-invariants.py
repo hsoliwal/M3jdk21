@@ -177,6 +177,22 @@ if "public boolean containsAll(Facts required)" not in tq:
 if "long[] trigram" in facts or "M3TQ.Facts" in facts:
     fail("M3StringFacts illegally owns length-proportional exact trigram state")
 
+# Fixed String facts are opportunistic search filters. Cold search must not force a complete
+# M3StringFacts scan before the dedicated bounded search/position owners execute.
+for fragment in [
+    "M3StringFacts sourceFacts = factsIfPrepared();",
+    "M3StringFacts needleFacts = checked.factsIfPrepared();",
+    "M3StringFacts prepared = factsIfPrepared();",
+]:
+    if fragment not in m3:
+        fail(f"M3 cold-search prepared-fact reuse missing: {fragment}")
+for forbidden in [
+    "if (!facts().mayContainCodeUnit(unit))",
+    "M3StringFacts prepared = facts();\n        if (!prepared.mayContainCodeUnit",
+]:
+    if forbidden in m3:
+        fail(f"M3 cold search forces whole facts: {forbidden}")
+
 # AUTO literal search owns one compact 256-entry BMH skip table and may restart the existing
 # exact KMP lane only at a start already proven unresolved by the conservative skip.
 for fragment in [
