@@ -1,0 +1,467 @@
+{
+  "addedFiles": 72,
+  "addedPaths": [
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/README.md",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/RECONSTRUCT.md",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/pom.xml",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/proof.py",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/META-INF/rewrite/sc0-orders.yml",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/META-INF/rewrite/sc0-spc.yml",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/manifest.tsv",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-1.txt",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-2.txt",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-3.txt",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-4.txt",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-5.txt",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/composition-orders.json",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/qualification.json",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/java/com/synexia/rewrite/Sc0RecipeTest.java",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/runtime-integration/fix-root-ascii-case/manifest.json",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/tooling/image-gates/current-c0.json",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/03-M3StringPrecomputeSearchTest.java.txt",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv",
+    "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/CURRENT-DELIVERY.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/CURRENT-DELIVERY.md",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/PARENT-CHECKPOINT.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/PORTABLE-MANIFEST.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/PROJECT-READY.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/READBACK.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/README.md",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/ROOT-READBACK-v1.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/SOURCE-CLOSURE.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/TASK-MAPPING.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/bundle/BUNDLE.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/bundle/LANES.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/bundle/PACKAGE.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/bundle/PATHS-0001.tsv",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/bundle/README.md",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/bundle/part-0001.tar.gz",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/bundle/part-0002.tar.gz",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/bundle/part-0003.tar.gz",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/bundle/part-0004.tar.gz",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/bundle/part-0005.tar.gz",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/bundle/part-0006.tar.gz",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/bundle/part-0007.tar.gz",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/bundle/part-0008.tar.gz",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/bundle/part-0009.tar.gz",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/bundle/part-0010.tar.gz",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/bundle/part-0011.tar.gz",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/finish_package.py",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/package-plan.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/package_evidence.py",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/prepare_package.py",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/receiving-selection/RECEIVING-SELECTION.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/reconstruct.py",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/reviews/independent-metadata-readback.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/root-execution-v1/RESULT.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/root-execution-v1/extract/receipt.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/root-execution-v1/extract/stderr.log",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/root-execution-v1/extract/stdout.log",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/root-execution-v1/finish/receipt.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/root-execution-v1/finish/stderr.log",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/root-execution-v1/finish/stdout.log",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/root-execution-v1/pack/receipt.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/root-execution-v1/pack/stderr.log",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/root-execution-v1/pack/stdout.log",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/root-execution-v1/select/receipt.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/root-execution-v1/select/stderr.log",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/root-execution-v1/select/stdout.log",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/root-execution-v1/verify/receipt.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/root-execution-v1/verify/stderr.log",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/root-execution-v1/verify/stdout.log",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/terminal-selection-v1/COMMANDS.json",
+    "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/terminal-selection-v1/SELECTION-READBACK.json"
+  ],
+  "baseCommit": "18287e16c3d5dee6243752ccd653264c66bd2020",
+  "baseTree": "378af3b70959bfaac66913ab4067ea0ff0733ddd",
+  "canonicalPromotion": false,
+  "classverExecuted": false,
+  "classverInstalled": false,
+  "compiledObservationsIdentityOnly": {
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/spc-semantic-v1/fixture-classes/StringEscapeContract$Checked.class": {
+      "bytes": 283,
+      "gitBlob": "dcedb6230cada60f54e504ab41f79a36089795f2",
+      "sha256": "3732a0efd457afe4d1acee1e31b1d8ff5ea1edcd93f0d8946de08189cfe0b849"
+    },
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/spc-semantic-v1/fixture-classes/StringEscapeContract$ChooseEscape.class": {
+      "bytes": 778,
+      "gitBlob": "f2e040c534fe87c3b389658a8f9d77aca40f1792",
+      "sha256": "1083f20908329a49c5d628feb80bb0ddb83f78ce1de3787c55846b08c0733aad"
+    },
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/spc-semantic-v1/fixture-classes/StringEscapeContract.class": {
+      "bytes": 12621,
+      "gitBlob": "c2eef9aa0ad3373962974a797cae13fc381560c5",
+      "sha256": "5266e29fffb5f29b2531bad5a6bf3de6a25ed44f1f65cb1c01caa3d028ee2b31"
+    },
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/spc-semantic-v1/java-observations/after-current/classes/M3StringPrecomputeSearchTest.class": {
+      "bytes": 31545,
+      "gitBlob": "8e92e9bf4fe807318b26e93f701efc1b886f2740",
+      "sha256": "65e560f5b076031153e0b1a504ce593221f522a23324ab814f551de8f7a5c0ef"
+    },
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/spc-semantic-v1/java-observations/after-template/classes/M3StringPrecomputeSearchTest.class": {
+      "bytes": 31545,
+      "gitBlob": "8e92e9bf4fe807318b26e93f701efc1b886f2740",
+      "sha256": "65e560f5b076031153e0b1a504ce593221f522a23324ab814f551de8f7a5c0ef"
+    },
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/spc-semantic-v1/java-observations/negative-wrong-atom/classes/M3StringPrecomputeSearchTest.class": {
+      "bytes": 31537,
+      "gitBlob": "1cbec94aebc981e4625d42246c3bdd05726f16ea",
+      "sha256": "c148f36f2e5efa177cd7c4ee144b90521beb1bd4b08771825507fb86b4df2733"
+    }
+  },
+  "executionAliases": [],
+  "fullCheckoutPerformed": false,
+  "fullTrackedFiles": 71032,
+  "githubWrites": false,
+  "historicalArchive": {
+    "materializationBodies": [
+      {
+        "bytes": 2760,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0/materialization-v1/command.json",
+        "sha256": "69c225f203805b38dd5f4a76828f80cf8d339b53a1b8603f4cc29998e1017f70"
+      },
+      {
+        "bytes": 8699,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0/materialization-v1/stdout.log",
+        "sha256": "9c966898caabd5417db0bd49a1b7b8dc7b11f630edd946c6d2273777ee86abc0"
+      }
+    ],
+    "priorSpec": {
+      "bytes": 7117,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/M3-CHECK-SPEC.json",
+      "sha256": "0ccde05ae279fcfdc4c170b4d72810a3e0836dc00779223f70de006256a03f1e"
+    }
+  },
+  "historicalMaterializationBodiesRetainedInPublishedParent": {
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0/materialization-v1/command.json": {
+      "bytes": 2760,
+      "gitBlob": "3a69a30ee5848fab19ddfd433750449116f79cde",
+      "sha256": "69c225f203805b38dd5f4a76828f80cf8d339b53a1b8603f4cc29998e1017f70"
+    },
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0/materialization-v1/stdout.log": {
+      "bytes": 8699,
+      "gitBlob": "62d55beec9b126ce25b8501c4923d4c38bcc12f6",
+      "sha256": "9c966898caabd5417db0bd49a1b7b8dc7b11f630edd946c6d2273777ee86abc0"
+    }
+  },
+  "ordinaryGitDiffCheck": true,
+  "portable": {
+    "bundleIndex": {
+      "bytes": 123241,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/bundle/BUNDLE.json",
+      "sha256": "af4f16e7c63ea8adb004de897bb3cfb1b089bac346c9360e438ae2969e36039e"
+    },
+    "extractReceipt": {
+      "bytes": 1321,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/extract/receipt.json",
+      "sha256": "91dbf5dec038c5d9e9481d62eaffd76067e367cf4b7749db2dcd14d5880b32c4"
+    },
+    "extractedRoot": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted",
+    "owner": {
+      "bytes": 33814,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py",
+      "sha256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574"
+    },
+    "ownerSHA256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574",
+    "projectReady": {
+      "bytes": 14331,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/PROJECT-READY.json",
+      "sha256": "0d4e7b4726d4f1c598a8ccdb75357418e21ebbf67d6be6607089f7c9004d8062"
+    },
+    "publicationPrefix": "m3/tooling/migration-recipes/verification/ci8891-20261006/current-reconciliation/integration-c0/string/bundle/",
+    "pythonExecutable": {
+      "bytes": 30894944,
+      "path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+      "sha256": "fa67443527ed9647f760d807e2a38f26340757123e643c4639cf273ed15d5ea7"
+    },
+    "readback": {
+      "bytes": 384272,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/READBACK.json",
+      "sha256": "3f1a568c9846f6b2b627aa6cfe287693e2be26c13cd2ba2052afea9443a0e0f1"
+    },
+    "sourceClosure": {
+      "bytes": 2214350,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/SOURCE-CLOSURE.json",
+      "sha256": "75ddf05d07f537ace036cfa6d490aa2849213d386fb14fff6736198cb45c068b"
+    },
+    "verifyReceipt": {
+      "bytes": 1173,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/root-execution-v1/verify/receipt.json",
+      "sha256": "4af01550538d0e5b5069dff567bbacbd6f97a4d1c49ffc5c449a7faea7f288ab"
+    }
+  },
+  "predictedFinalTree": "89c777422d73ec46ab2f733ea367f7ad04c51a02",
+  "priorClassverLedgerPreservedWithinUnchangedCheckpoint": true,
+  "priorReceiving": [
+    {
+      "terminal": {
+        "bytes": 32077,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0/primary-observation-v1/RESULT.json",
+        "sha256": "78195f460e0c2d58d4736660dab3e3244c16c3b42ac644e065833969ced8e466"
+      }
+    },
+    {
+      "terminal": {
+        "bytes": 32991,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/RESULT.json",
+        "sha256": "fcbf7e041a1465babc525f4a7c9743a5d4f57cb43a1c4bd065d3e90fbdcd1a51"
+      }
+    }
+  ],
+  "producer": {
+    "outputSHA256": "3e9df04fcc1e555dc3ea245cb4dd0a9a1fc6d59635412796c5cfa2e0afd704ac",
+    "outputSeal": "6d86b730b0e77bd1e1fca5dc13396429b979cc45f17f05e8c1590c1c11f9c0a7",
+    "qualificationResource": "src/main/resources/qualification.json",
+    "resultSHA256": "93a0a751404f26418165bcd9287b90287214d8c8f3213ce1baf1c975ccaa3fd6",
+    "root": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/evidence/producer-v1"
+  },
+  "publicationManifest": {
+    "bytes": 38407,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/M3-PUBLICATION-MANIFEST.json",
+    "sha256": "eae2b0469c438c4999e22b1bea89fb258425a8e145d167748c009818c611276e"
+  },
+  "publicationRequirement": "Remote created tree must equal predictedFinalTree before commit/ref publication.",
+  "publishedParent": {
+    "originalCheck": {
+      "bytes": 61468,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/integration-c0-final-v2/m3-check-v1/RESULT.json",
+      "sha256": "adfc8318e78cfd50b7c93ca3f5e7d8b5062083ee647b6ce41be0eac515ff2ab6"
+    },
+    "previousCheck": {
+      "bytes": 27962,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/m3-check-v2/RESULT.json",
+      "sha256": "b40b1cb1851ddfacc407cbb5050f4017ff858a4a18bd50de655fe0cf10c732d6"
+    },
+    "previousManifests": [
+      {
+        "bytes": 196832,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/integration-c0-final-v2/M3-PUBLICATION-MANIFEST.json",
+        "sha256": "e4017e398d703711929a119e8b5b3504fc849f19af85883b603d4105ee58eac2"
+      },
+      {
+        "bytes": 53566,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/M3-PUBLICATION-MANIFEST.json",
+        "sha256": "70f581a3c94acbc98a446b7eee9526449d47c06ae46b9c7049499ff00b86bc11"
+      }
+    ],
+    "previousPairedMaps": [
+      {
+        "bytes": 297967,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/integration-c0-final-v2/FINAL-PAIRED-FILES.json",
+        "sha256": "bb815cfcf64ac5298fa857355b8caccb5ebda6c76e2803906d8c92ac9578a2a8"
+      },
+      {
+        "bytes": 79199,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/FINAL-PAIRED-FILES.json",
+        "sha256": "5cde38612911bdaf74b1ec4dfb857f7f1f747eccf42f72aa55e5458c48df71f2"
+      }
+    ],
+    "previousSourceCheck": {
+      "bytes": 3726,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/source-check-v1/RESULT.json",
+      "sha256": "0412191c668da818ec38883442d7fecbd5fa536de8749d099c787dd07753c31f"
+    },
+    "priorOrderingAttempt": [
+      {
+        "bytes": 3039,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/root-check-execution-v1/RESULT.json",
+        "sha256": "ae3a68043410d7291ec66e431b7f0eb8a93ff7b72ad134f0bfd2d6b347387f9f"
+      },
+      {
+        "bytes": 1363,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/root-check-execution-v1/m3.json",
+        "sha256": "0a35965a8eadfeaea6351b40d9452ec4d90bb65937bff64cdb6d9fbbf37e5b7f"
+      },
+      {
+        "bytes": 0,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/root-check-execution-v1/m3.stdout.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "bytes": 1319,
+        "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/root-check-execution-v1/m3.stderr.log",
+        "sha256": "8ba3d31226d999cd44b72cdecf3d9314e9865de99d2aa4505ded8d12be3eb541"
+      }
+    ],
+    "publicationReceipt": {
+      "bytes": 1997,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/PUBLISHED.json",
+      "sha256": "1da6eed2dada9ee85cea964e3097d869929b03975863c27a0412d55c44ba0d58"
+    },
+    "rawCommit": {
+      "bytes": 550,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-check-authoring-v1/published-parent/m3.commit",
+      "sha256": "8aacc97bbdd482051940cce827b14c50544b2e2822148d52736e35a156a9421e"
+    },
+    "remoteCommits": {
+      "bytes": 425,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/remote-commits.json",
+      "sha256": "f3247bdfc03bfe9eeec3060a4567efac74c73ef5de113470cefff6b25c433fed"
+    }
+  },
+  "receipts": [
+    {
+      "bytes": 2191,
+      "gitBlob": "a12e1376edacbd76d45af2ab23d6994e2cf6520c",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/commands/001-git-version.json",
+      "sha256": "622265709247032075cbeebfb20a6895aaeac8e3041f4604aaa2def4ee50aaf1"
+    },
+    {
+      "bytes": 2343,
+      "gitBlob": "3ec34fe6fec065ce1e6954df15271c76bb46cd2e",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/commands/002-python-version.json",
+      "sha256": "d424b915a58ec533191fb3cde6b2eee87046a8541b214e13a8d1a09411ed1c92"
+    },
+    {
+      "bytes": 2707,
+      "gitBlob": "4e19035ed796d415e950bfdfca4ee4afba7ffa48",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/commands/003-init.json",
+      "sha256": "8c712afdc1284f318e47c6ddc18575033f5f021e96021c64dbe1491c1f84289b"
+    },
+    {
+      "bytes": 2537,
+      "gitBlob": "6220cf0cea0316a1fbc4a9f8bac297f3d6f060b5",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/commands/004-no-remotes.json",
+      "sha256": "c712498acd860a85eb803a3ec94b5dda8793f096f9deb60c40320666e2f14b7d"
+    },
+    {
+      "bytes": 2680,
+      "gitBlob": "56c3e83b7605ffdf21f313ee5c9d42d4f9263d00",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/commands/005-published-parent-object.json",
+      "sha256": "4988cd3fbd73d00e95c4b0051e7bafa3c1c3b018f963582d1ee5c6cfa0a35524"
+    },
+    {
+      "bytes": 2594,
+      "gitBlob": "e5106a2bf12e47f4993544b580eb12ae15ddc1fa",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/commands/006-base-tree.json",
+      "sha256": "7d45820e304d1457507ab18b3ced47ace48ef157bf332d4f689e42a4ae254ad2"
+    },
+    {
+      "bytes": 2633,
+      "gitBlob": "89c17259d0167ba9205eda4cc40f3e8422fb899a",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/commands/007-base-leaves.json",
+      "sha256": "fe1c74ee98d25f1b7a30499eb0e544d2a1b3baebce4bbe2e8dd22e24d8ccc7a6"
+    },
+    {
+      "bytes": 2609,
+      "gitBlob": "2492f8d06ee05b1d60a8d623fa36f6a3e3c7d655",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/commands/008-root-attributes.json",
+      "sha256": "d832c886cc8d21b1cd7c1325805e268ed678092c34ba912827d366e68f70f8b0"
+    },
+    {
+      "bytes": 2596,
+      "gitBlob": "c94f380c889c58acbf3c43b464c0cef6fd4c2723",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/commands/009-read-base-tree.json",
+      "sha256": "de56f61e6ed104bc1d5fea33e8b2b06a7f7fb37d655222d032f6bb78ec895c44"
+    },
+    {
+      "bytes": 2570,
+      "gitBlob": "de3a2a57444970eab12d76418a56a81877594e75",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/commands/010-base-index.json",
+      "sha256": "908978df052a40239d24da83e5a166d9552c22c90b729c257f0739cfabd98b28"
+    },
+    {
+      "bytes": 2679,
+      "gitBlob": "147f29d2394ba73a1f5d928cbc2d50ea709e2236",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/commands/011-omit-unchanged-worktree.json",
+      "sha256": "2e8943aafbee06e8d0b435ed32773490738e50381a45704e6b90acbac7038c83"
+    },
+    {
+      "bytes": 2672,
+      "gitBlob": "bea4e004fc3017b7a2532a900225a5e1a45c6ceb",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/commands/012-publication-blobs.json",
+      "sha256": "85201371e2a8f8f65e1dea7b2563168f7019cae4dcdbc44809b8d843d10abc4c"
+    },
+    {
+      "bytes": 2649,
+      "gitBlob": "d23793edafaed6a8f49ae797e52361aacbbc473b",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/commands/013-publication-index.json",
+      "sha256": "90df0d298b94c87de604b0b7bc299a3a3fa8d6e839b8e13cc8c1b64a541f1240"
+    },
+    {
+      "bytes": 2590,
+      "gitBlob": "ffe1c1d889c55d1f65903f66632f3bc400bf6a0e",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/commands/014-complete-final-index.json",
+      "sha256": "f995857fb1138ca747226aa22d546ce97610b7653fa13b51a66834ae06699e5f"
+    },
+    {
+      "bytes": 2574,
+      "gitBlob": "fa96aebe6151cad1133790508003e5ab4668499d",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/commands/015-write-final-tree.json",
+      "sha256": "017cf0d05b24f25a2158d4d5d8ba2b12789b6d3319df9d7d5332472cab548665"
+    },
+    {
+      "bytes": 2649,
+      "gitBlob": "f1af8519507155cd74591c5fa9c9f09f78673ca2",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/commands/016-complete-final-tree.json",
+      "sha256": "5e5be6926258d17736a07f2cbb3f7e96e5d0a972fdc0335c09974213a0dc8d3f"
+    },
+    {
+      "bytes": 2760,
+      "gitBlob": "3ef150b93e8aa050954039680c273ed2d0a14046",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/commands/017-base-to-final-diff.json",
+      "sha256": "e01002ab28b0f35d50a0c96e017a29df137772c0df03311fe87af123419948ff"
+    },
+    {
+      "bytes": 2684,
+      "gitBlob": "99f9e701450095160f5a083255030045543e3618",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/commands/018-ordinary-full-diff-check.json",
+      "sha256": "9ac497d6f21076e0daa637b129938f841bd96a1c299c9281c949319936b6cbfc"
+    },
+    {
+      "bytes": 2588,
+      "gitBlob": "f8daf1a35023543ad3f4b304fdb983ce486f2111",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/commands/019-final-index-custody.json",
+      "sha256": "7ecb84b3934ff81bd6b8b968c5e9e9021ef4e4fbab2dc4e2418b77571ba0bd39"
+    },
+    {
+      "bytes": 2578,
+      "gitBlob": "2145651b36911cb93f2f6f81cba694f95022366f",
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/string-c0-final-v1/m3-check-v2/commands/020-final-tree-custody.json",
+      "sha256": "f8df86a6cc63449004b7c13801e2d1bf4c26599b64570124eeee7594cfb45bdc"
+    }
+  ],
+  "receiving": {
+    "selection": {
+      "bytes": 74585,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/receiving-selection-v1/RECEIVING-SELECTION.json",
+      "sha256": "de8f5754b18391d8e3768d2a7a2ee0073884427eb09e45093cc1a44bf709aa8d"
+    },
+    "terminal": {
+      "bytes": 33725,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/primary-observation-v1/RESULT.json",
+      "sha256": "6f8d824c7b58f801a3563869d1a34605b36f160a1a04ea4dc6d9dc5455e5e6e8"
+    }
+  },
+  "receivingOutcomeInferred": false,
+  "receivingQualified": false,
+  "receivingReportedStatus": "PRIMARY_ONLY_STOP",
+  "retainedBaseLeaves": 70960,
+  "retainedPreviousCheckpointFiles": 435,
+  "runtimeJsonAuthority": "RESULT binds its semantic value; current retained byte identity is separately bound here.",
+  "schema": "m3.task-evidence-publication-check/1",
+  "semantic": {
+    "controller": {
+      "bytes": 27576,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/semantic-authoring/spc_semantic_capture_v2.py",
+      "sha256": "e5af8e5b84691328d05a4177881b18dae2c7596d19f6c743ebea0a7c804bc823"
+    },
+    "plan": {
+      "bytes": 23197,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/semantic-authoring/SEMANTIC-PLAN-v2.json",
+      "sha256": "946d2ce1d5d6b948c6ed8794c776904a07a886b980027092f2104f47dd18f85e"
+    },
+    "result": {
+      "bytes": 11281,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/spc-semantic-v1/RESULT.json",
+      "sha256": "072c8c827e49f7822f780a17e9c1a2fcc80b1ce5744fbbd90f197901b61a41de"
+    }
+  },
+  "semanticOrReactorQualification": false,
+  "sourceCommit": "d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c",
+  "sourceRepositoryWrites": false,
+  "status": "PASS_ADDITIVE_TASK_EVIDENCE_ZERO_EXEMPTIONS",
+  "whitespaceExemptions": 0
+}
