@@ -70,6 +70,34 @@ for path, text in [
     if retained_arrays:
         fail(f"{path} retains array field(s): {retained_arrays!r}")
 
+# Canonical composition follows the Synexia reference-DAG history: balanced persistent
+# geometry, but identity is independent of concat parenthesization. Identity is structural:
+# the same normalized terminal atom owner/range sequence converges; equal UTF-16 spelling from a
+# different M3 coordinate structure must not be collapsed. No flattened lane is retained.
+if "final int height;" not in tuple_:
+    fail("M3 tuple canonical DAG height missing")
+for fragment in [
+    "private static M3String concatBalanced(M3String left, M3String right)",
+    "private static M3String balance(M3String left, M3String right)",
+    "private static int height(M3String value)",
+    "private static M3String internTuple(M3String left, M3String right)",
+    "private static long tupleSequenceKey(M3String left, M3String right)",
+    "private static boolean sameLeafSequence(",
+    "private static final class LeafCursor",
+    "rawAtom == atom && start + length == rawStart",
+    "candidate.atom() != requested.atom()",
+]:
+    if fragment not in pool:
+        fail(f"M3 balanced structural-canonical pool invariant missing: {fragment}")
+for forbidden in [
+    "geometryEquals(left, right)",
+    "left.identityHash64()",
+    "existing.sequenceEquals(left, right)",
+    "tupleSequenceKey(javaHash, totalLength, coder)",
+]:
+    if forbidden in pool:
+        fail(f"M3 tuple interning regressed to shape/text identity: {forbidden}")
+
 # Encoding facts must be executable, not decorative metadata.
 for fragment in [
     "if (prepared.ascii) {",
@@ -463,6 +491,7 @@ for required_gate in [
     "M3TQFactsTest.java",
     "M3RegexLiteralTQTest.java",
     "M3StringHistoryConvergenceRecipeTest",
+    "M3StringBalancedCanonicalDagRecipeTest",
 ]:
     if required_gate not in workflow:
         fail(f"M3 String workflow lost verification gate: {required_gate}")
