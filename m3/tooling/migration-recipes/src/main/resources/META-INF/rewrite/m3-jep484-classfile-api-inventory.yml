@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.jdk21.Jep484ClassFileApiInventory
+displayName: Inventory cumulative JEP 484 Class-File API lineage
+description: >-
+  Emits the JDK21 internal engine, JEP457/JEP466/JEP484 lineage, tree denominator,
+  and opt-in-only Java21 public-API policy without mutating JDK source.
+recipeList:
+  - com.m3.rewrite.backport.M3Jep484ClassfileApiInventoryRecipe
