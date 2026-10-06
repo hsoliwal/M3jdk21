@@ -151,6 +151,20 @@ for donor, expected in expected_dispositions.items():
     if actual != expected:
         fail(f"String precompute disposition drift: {donor}: {actual} != {expected}")
 
+critical_port_map_rows = [
+    "MIndexStringPrecomputationByteFacts.byteLength\tjava.lang.M3StringFacts + M3String.encode*\tIMPLEMENTED_SEMANTIC_SUBSET",
+    "MIndexStringPrecomputationByteFacts.SHA256\tinternal artifact/hash service\tNOT_STRING_SEMANTICS",
+    "MIndexTupleReferences.concat/balance + MIndexStringIntern.internReferences\tjava.lang.M3StringPool + M3StringTuple\tIMPLEMENTED_UNVERIFIED",
+    "MIndexStringSearchPlan\tjava.lang.M3StringSearchPrecompute\tIMPLEMENTED",
+    "MIndexPositionMasks / MIndexComposedPositionMasks\tjava.lang.M3StringPositionPrecompute\tIMPLEMENTED",
+]
+for row in critical_port_map_rows:
+    if row not in port_map:
+        fail(f"String precompute port/completeness drift: {row}")
+
+if "m3/docs/string-precompute-completeness.tsv" not in workflow:
+    fail("M3 String workflow does not trigger on completeness ledger changes")
+
 # Field-level parity for the fixed semantic donor bundle.
 for field in [
     "final int utf16Length;",
