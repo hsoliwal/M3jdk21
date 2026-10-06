@@ -9,7 +9,7 @@ Status: **applied product state; Synexia owns the reusable recipes**.
 Repository: `hsoliwal/com.synexia`  
 Custody PR: https://github.com/hsoliwal/com.synexia/pull/9529  
 Custody branch: `m3/m3jdk21-string-canonical-dag-synexia-home-20261006`  
-Pinned custody revision: `72ab30840fce4e0a3b7fad0cb2a974ece7e60391`
+Pinned custody revision: `61a7e606cd6b9c364149e04dce63e590817deaf5`
 
 Named recipe:
 
@@ -40,19 +40,31 @@ M3JDK21 runtime branch:
 
 Applied/fixed-point revision:
 
-`b8a8359a219a3e3ea97e820952b83017c4f03dbb`
+`971017f6836ab10ff9feb4c79e184f09e766eccf`
 
 Direct manifest comparison after moving recipe custody to Synexia:
 
-- Java recipe targets: **19 exact postimages**.
+- Java recipe targets: **20 exact postimages**.
 - Text/native/workflow targets: **11 exact postimages**.
-- **30/30 carried targets are byte-identical** between the Synexia canonical templates and receiver revision `b8a8359a219a3e3ea97e820952b83017c4f03dbb`.
+- **31/31 carried targets are byte-identical** between the Synexia canonical templates and receiver revision `971017f6836ab10ff9feb4c79e184f09e766eccf`.
 - Synexia records the exact target receipt in `.m3/m3jdk21-string-history-convergence-handoff.tsv`.
 - Receiver PR: https://github.com/hsoliwal/M3jdk21/pull/248
 
 The original `before` hashes remain the exact stacked recipe preimages inherited from the former
 M3JDK-local crate. They are not a license to overwrite arbitrary current `master`: the donor recipe
 fails closed on any source that matches neither its exact preimage nor its exact postimage.
+
+## Historical receipt anchors
+
+These identifiers are retained only as lineage checkpoints for older target-side structural gates;
+they are **not** the current canonical recipe or receiver revision:
+
+- earlier Synexia recipe checkpoint: `602ff6fbd8760ad2d13b3461d0c27ed567c16144`;
+- earlier M3JDK receiver checkpoint: `bcb5419fd4425ef4b41c86c13e7a6f24d5233e68`;
+- at that checkpoint, **30/30 carried targets are byte-identical**.
+
+The current authoritative exact handoff is the 31-target receipt above and in
+Synexia `.m3/m3jdk21-string-history-convergence-handoff.tsv`.
 
 ## M3JDK21 ownership
 
