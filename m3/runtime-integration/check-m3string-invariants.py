@@ -192,6 +192,26 @@ for line_number, line in enumerate(precompute_inventory.splitlines(), start=1):
 if len(inventory_rows) < 28:
     fail(f"MIndex precompute inventory unexpectedly small: {len(inventory_rows)}")
 
+required_inventory_provenance = (
+    "# donorAudit=hsoliwal/com.synexia@d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c "
+    "tree=f29c5faa6d012710fc8b1be2231e74454328d5f0"
+)
+if required_inventory_provenance not in precompute_inventory:
+    fail("MIndex precompute donor audit pin missing or changed without review")
+
+for observed_owner in [
+    "MIndexPrecomputeFabric",
+    "MIndexPageableTreePrecomputation",
+    "MIndexLiteralTransitionPrecompute",
+    "MIndexCollectionPrecompute",
+    "MIndexPairPrecompute",
+    "MIndexLexicalPrecomputeContribution",
+    "M3FsPrecomputeBundle",
+    "MIndexStringPrecomputeCache",
+]:
+    if observed_owner not in precompute_inventory:
+        fail(f"live donor precompute owner missing from inventory evidence: {observed_owner}")
+
 allowed_inventory_dispositions = {
     "PORT_TO_M3JDK",
     "PORT_INTERNAL",
