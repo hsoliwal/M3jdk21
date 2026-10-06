@@ -3173,12 +3173,9 @@ public final class String
         if (subLen == 0) {
             return "";
         }
-        if (m3JoinedStringsEnabled()) {
-            M3String storage =
-                    M3String.sliceOf(this, beginIndex, endIndex);
-            if (storage != null) {
-                return new String(storage);
-            }
+        M3String storage = m3();
+        if (storage != null) {
+            return new String(storage.slice(beginIndex, endIndex));
         }
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.newString(currentValue, beginIndex, subLen)
