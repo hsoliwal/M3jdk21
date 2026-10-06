@@ -4620,6 +4620,10 @@ public final class String
         if (isEmpty()) {
             return "";
         }
+        M3String storage = m3();
+        if (storage != null) {
+            return new String(storage.translateEscapes());
+        }
         char[] chars = toCharArray();
         int length = chars.length;
         int from = 0;
