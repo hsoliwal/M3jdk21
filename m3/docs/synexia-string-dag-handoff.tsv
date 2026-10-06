@@ -1,0 +1,2 @@
+schema	packet_id	canonical_recipe_repository	target_repository	target_recipe_role	target_recipe	canonical_owner	license	target_product_promotion_authority
+M3_STRING_DAG_HANDOFF_RECEIPT_V1	synexia.m3jdk.string.canonical-dag.20261006	hsoliwal/com.synexia	hsoliwal/M3jdk21	ADAPTER_FIXTURE_PROOF	com.m3.rewrite.backport.M3StringCanonicalDagMasterRepair	com.synexia.rewrite.M3StringCanonicalDagInvariant	Apache-2.0	true
