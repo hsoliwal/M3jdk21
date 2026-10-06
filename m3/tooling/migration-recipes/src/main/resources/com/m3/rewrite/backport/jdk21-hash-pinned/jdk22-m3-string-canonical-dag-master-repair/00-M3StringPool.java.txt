@@ -469,7 +469,7 @@ final class M3StringPool {
         int javaHash =
                 left.hashCodeValue() * M3String.pow31(right.length()) + right.hashCodeValue();
         byte coder = (byte) (left.coder() | right.coder());
-        long routeKey = tupleRouteKey(javaHash, totalLength, coder);
+        long routeKey = tupleRouteKey(left, right, javaHash, totalLength, coder);
 
         for (;;) {
             TupleBucket bucket = TUPLES.computeIfAbsent(routeKey, ignored -> new TupleBucket());
@@ -542,10 +542,27 @@ final class M3StringPool {
         return mixed ^ (mixed >>> 31);
     }
 
-    private static long tupleRouteKey(int javaHash, int totalLength, byte coder) {
+    private static long tupleRouteKey(
+            M3String left, M3String right, int javaHash, int totalLength, byte coder) {
         long route = mix64(Integer.toUnsignedLong(javaHash));
         route = mix64(route ^ Long.rotateLeft(Integer.toUnsignedLong(totalLength), 17));
-        return mix64(route ^ coder);
+        route = mix64(route ^ coder);
+
+        int edge = Math.min(4, totalLength);
+        for (int index = 0; index < edge; index++) {
+            route = mix64(route ^ joinedCharAt(left, right, index));
+        }
+        for (int index = Math.max(edge, totalLength - 4); index < totalLength; index++) {
+            route = mix64(route ^ Long.rotateLeft(joinedCharAt(left, right, index), 23));
+        }
+        return route;
+    }
+
+    private static char joinedCharAt(M3String left, M3String right, int index) {
+        int leftLength = left.length();
+        return index < leftLength
+                ? left.charAt(index)
+                : right.charAt(index - leftLength);
     }
 
     private static boolean sameLeafSequence(
