@@ -35,6 +35,8 @@ class ProgramStatusTest(unittest.TestCase):
         self.assertEqual(85, data["jep_unique_rows"])
         self.assertEqual(34, data["priority_jep_rows"])
         self.assertEqual([], data["priority_missing_from_catalogue"])
+        self.assertEqual(22, data["released_jdk_floor"])
+        self.assertEqual(27, data["released_jdk_ceiling"])
         self.assertEqual(13, data["seed_rows"])
         self.assertEqual(13, sum(data["seed_states"].values()))
         self.assertEqual(12, data["community_fork_rows"])
