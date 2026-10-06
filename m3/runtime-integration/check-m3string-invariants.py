@@ -249,8 +249,8 @@ for fragment in [
     if fragment not in m3:
         fail(f"M3 generic ASCII-compatible encoder fast path missing: {fragment}")
 
-if "prepared.unpairedSurrogateCount == 0" not in m3
-        or "return encodeUtf8();" not in m3:
+if ("prepared.unpairedSurrogateCount == 0" not in m3
+        or "return encodeUtf8();" not in m3):
     fail("M3 strict UTF-8 does not reuse unpaired-surrogate facts")
 
 # Canonical composition follows the Synexia persistent reference-DAG history.
@@ -701,8 +701,8 @@ critical_surfaces = {
     "codePointCount": "M3String storage = m3();",
     "getChars": "M3String storage = m3();",
     "equals": "M3String leftStorage = m3();",
-    "compareTo": "if (m3() != null || anotherString.m3() != null)",
-    "regionMatches": "if (m3() != null || other.m3() != null)",
+    "compareTo": "M3String rightM3 = anotherString.m3();",
+    "regionMatches": "M3String rightM3 = other.m3();",
     "startsWith": "M3String sourceM3 = m3();",
     "hashCode": "M3String storage = m3();",
     "indexOf(String)": "M3String sourceM3 = m3();",
@@ -711,7 +711,7 @@ critical_surfaces = {
     "prepared reverse search": "return storage.lastIndexOf(target, fromIndex);",
     "replace(char,char)": "M3String replaced = storage.replace(oldChar, newChar);",
     "replace(CharSequence,CharSequence)": "M3String replaced = storage.replace(targetM3, replacementM3);",
-    "substring": "M3String.sliceOf(this, beginIndex, endIndex)",
+    "substring": "return new String(storage.slice(beginIndex, endIndex));",
     "concat": "m3Concat(this, str)",
     "trim": "M3StringFacts facts = storage.facts();",
     "strip": "facts.stripStart",
@@ -730,11 +730,25 @@ for surface, marker in critical_surfaces.items():
     if marker not in string:
         fail(f"critical String surface lost M3 route: {surface}")
 
+# Current compare/region owners bind both M3 values before testing the route.
+# Require the exact comparison after coordinate/hash candidate shortcuts.
+for fragment in [
+    "if (leftM3 != null || rightM3 != null)",
+    "leftM3.sameCoordinate(rightM3)",
+    "int difference = charAt(index) - anotherString.charAt(index);",
+    "if (charAt(toffset + index) != other.charAt(ooffset + index)) return false;",
+]:
+    if fragment not in string:
+        fail(f"M3 exact comparison route missing: {fragment}")
+
 # Canonical equality may use Java hash only as a negative filter. Equal hashes still require
 # exact UTF-16 comparison because collisions are part of the String.hashCode contract.
 for fragment in [
     "if (sameCoordinate(that)) return true;",
-    "if (hashCodeValue() != that.hashCodeValue()) return false;",
+    "if (owner.javaHash != that.owner.javaHash) return false;",
+    "M3StringFacts leftFacts = factsIfPrepared();",
+    "M3StringFacts rightFacts = that.factsIfPrepared();",
+    "leftFacts.javaHash != rightFacts.javaHash",
     "if (charAt(index) != other.charAt(index)) return false;",
 ]:
     if fragment not in m3:
@@ -813,14 +827,14 @@ for fragment in [
 
 # Existing M3 storage remains the execution owner for repeat; the admission/join feature gate
 # controls creation of M3 storage, not operations on a String that already owns it.
-if "M3String storage = m3();" not in string
-        or "return new String(storage.repeat(count));" not in string:
+if ("M3String storage = m3();" not in string
+        or "return new String(storage.repeat(count));" not in string):
     fail("M3-backed repeat no longer executes on canonical storage")
 
 # Once a String is already M3-backed, range preservation is not optional composition.
 # substring must keep the same canonical owner+coordinate regardless of the admission/join gate.
-if "M3String storage = m3();" not in string
-        or "return new String(storage.slice(beginIndex, endIndex));" not in string:
+if ("M3String storage = m3();" not in string
+        or "return new String(storage.slice(beginIndex, endIndex));" not in string):
     fail("M3-backed substring no longer preserves canonical owner+coordinate directly")
 
 # M3-backed constructors must store only the empty compatibility sentinel.
@@ -845,8 +859,8 @@ for fragment in [
     if fragment not in (m3 + string):
         fail(f"M3 translateEscapes canonical route missing: {fragment}")
 
-if "if (M3String.admissionEnabled())" not in string
-        or "return new String(M3StringPool.internUnit(c));" not in string:
+if ("if (M3String.admissionEnabled())" not in string
+        or "return new String(M3StringPool.internUnit(c));" not in string):
     fail("String.valueOf(char) does not use direct M3 unit interning after activation")
 
 # Exact single-byte charset ingress may bypass decoded compact byte[] staging only when the
@@ -911,8 +925,8 @@ for fragment in [
 
 # Canonical single-unit transforms must re-enter the native pool directly rather than create
 # temporary one-character String/byte[] payloads.
-if "String.COMPACT_STRINGS" not in pool
-        or "&& mappedLatin1(address, lengths[row], bigEndian)" not in pool:
+if ("String.COMPACT_STRINGS" not in pool
+        or "&& mappedLatin1(address, lengths[row], bigEndian)" not in pool):
     fail("mapped M3 lexicon coder ignores CompactStrings mode")
 if "String.COMPACT_STRINGS && StringLatin1.canEncode(unit)" not in pool:
     fail("M3 direct unit interning ignores CompactStrings mode")
@@ -968,14 +982,16 @@ for fragment in required_mapping_fragments:
 for fragment in [
     "MIndexWhitespaceBoundaries\tjava.lang.M3StringFacts\tIMPLEMENTED",
     "MIndexUtf16RangeFacts\tM3StringOwner.rangeFacts\tIMPLEMENTED",
-    "MIndexRegexTrigramQuery\tjdk.internal.mindex.M3TQ\tIMPLEMENTED",
+    "MIndexRegexTrigramQuery\tjdk.internal.mindex.M3TQ + java.util.regex.Pattern/Matcher\tIMPLEMENTED",
     "MIndexStringSearchPlan\tjava.lang.M3StringSearchPrecompute\tIMPLEMENTED",
     "DO_NOT_PORT_TO_JAVA_LANG_STRING",
 ]:
     if fragment not in port_map:
         fail(f"precompute port map missing: {fragment}")
 
-if "M3StringPrecomputeSearchTest.java test/jdk/" in workflow:
+if any(re.match(r"^\s*-\s*['\"]test/jdk/", line)
+       and "M3StringPrecomputeSearchTest.java test/jdk/" in line
+       for line in workflow.splitlines()):
     fail("M3 String workflow contains concatenated path entries")
 
 for required_gate in [

@@ -435,9 +435,9 @@ public final class Matcher implements MatchResult {
                 localsPos[i].clear();
         }
         lastAppendPosition = 0;
-        m3TqFacts = null;
-        m3TqFactsFrom = -1;
-        m3TqFactsTo = -1;
+        // Derived facts are not match state. Keep them for the same immutable input;
+        // m3TqAllowsSearch checks the exact region before reuse. reset(input) invalidates
+        // before changing text, so no second input reference is needed for cache identity.
         from = 0;
         to = getTextLength();
         modCount++;
@@ -459,6 +459,11 @@ public final class Matcher implements MatchResult {
      * @return  This matcher
      */
     public Matcher reset(CharSequence input) {
+        if (input != text) {
+            m3TqFacts = null;
+            m3TqFactsFrom = -1;
+            m3TqFactsTo = -1;
+        }
         text = input;
         return reset();
     }

@@ -6236,6 +6236,324 @@
         },
         "source_state": "implemented",
         "observation": "The older com.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement. Source recovery: LOST at master 87590cb, restored through the version 2 recipe; historical record retained in history/9af35b3/mapping-records.json."
+      },
+      {
+        "id": "synexia.regex.mr",
+        "kind": "adapter",
+        "status": "implemented-unverified",
+        "reason": "MR adapts completed-work reuse to the existing JDK Matcher lifecycle; exact immutable input and region facts survive same-input reset. Scoped tests pass; complete-image admission remains open.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "cf3796cfca75284e9626b1e31703e41314c9f852",
+            "module": "synexia-indexstring",
+            "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+            "symbol": "com.synexia.indexstring.MIndexRegexTrigramQuery",
+            "signatures": [
+              "Facts precompute(CharSequence,int)",
+              "Facts precompute(CharSequence,int,int,int)",
+              "boolean testPrecomputed(Facts)",
+              "Facts Facts.concat(Facts,int)"
+            ],
+            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
+            "git_blob_sha1": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/util/regex/Matcher.java",
+            "symbol": "java.util.regex.Matcher",
+            "signatures": [
+              "Matcher reset()",
+              "Matcher reset(CharSequence)"
+            ],
+            "sha256": "8bdc84b934c398e5538319632d304a19960771c9fb8557249e3097e5fd7001a0",
+            "git_blob_sha1": "6ba03897985b381a3c520ff9503a742b13d02040",
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "java.base",
+            "path": "src/java.base/share/classes/java/util/regex/Matcher.java",
+            "symbol": "java.util.regex.Matcher",
+            "signatures": [
+              "Matcher reset()",
+              "Matcher reset(CharSequence)",
+              "boolean find()",
+              "Matcher region(int,int)"
+            ],
+            "sha256": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "java.util.regex.Matcher derived-fact lifecycle; M3 String retains payload authority",
+        "identity": {
+          "namespace": "No identity minted. Caller binds facts to the exact immutable owner, id, generation and UTF-16 range.",
+          "generation": "Backing remains open and stable while scanned; returned facts retain no backing or payload reference."
+        },
+        "contract": {
+          "differences": [
+            "JDK package and short TQ name; factories become public only within the unexported internal package.",
+            "Adds direct M3StringBacking range overload using a temporary nonmaterializing reader.",
+            "Case-sensitive Pattern.LITERAL find consumes bounded absence facts; positive candidates use the existing exact engine.",
+            "MR preserves the same immutable String input facts across reset; changing input invalidates before assignment. Exact region remains part of the reuse key."
+          ],
+          "compatibility_obligations": [
+            "Preserve exact UTF-16 keys, short alternatives, AND/OR semantics, budgets, defensive exports and seam composition.",
+            "A guard positive is never a regex match; region/lookaround context remains caller authority.",
+            "No changes to public JDK String, Pattern, Matcher, Class or JNI contracts."
+          ],
+          "public_surface": [
+            "Internal java.base kernel only; no new exported Java SE API."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Only java.base dependencies; Maven/OpenRewrite and JNI verification oracle are tool/test-only."
+        },
+        "dependencies": [
+          {
+            "id": "synexia.counterpart.MIndexRegexTrigramQuery",
+            "resolution": "resolved",
+            "reason": "Retained canonical M3TQ source and Pattern.LITERAL consumer are unchanged."
+          }
+        ],
+        "materialization": {
+          "admission": "One bounded scan of requested UTF-16 units; no materialization or normalization.",
+          "joins": "Merge primitive fact lanes and at most two seam keys, without payload reads.",
+          "outputs": "Caller-owned immutable Facts with sorted unique long[] and scalar boundaries; no retained per-key wrapper.",
+          "cached_facts": "Caller-owned metadata, no global cache. Length budget precedes allocation; no global all-pairs precompute."
+        },
+        "recipe": {
+          "id": "mr-1",
+          "version": "1",
+          "path": "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
+          "sha256": "5b44008f02f49ce0a48fafcb4da24af69ea526a67f88041c209d6d574ed788da",
+          "preconditions": [
+            "Exact current Java preimages; original dependency pins; candidate-only recipe admission."
+          ],
+          "rollback": "Restore sealed preimages in an exclusively owned worktree after source/hash review; never rewrite canonical history."
+        },
+        "tests": [
+          {
+            "id": "mr-local",
+            "receipt": "m3/tooling/mr/evidence/receipt.json"
+          }
+        ],
+        "provenance": {
+          "license": "Existing GPLv2-with-Classpath-exception JDK owner; Apache-2.0 donor facts and recipe evidence retain their notices.",
+          "publication": "User-authorized M3JDK21 adaptation. No newly copied donor runtime body.",
+          "copied_code": false
+        },
+        "sync": {
+          "source_revision": "cf3796cfca75284e9626b1e31703e41314c9f852",
+          "target_revision": "c0a14387009aefc7d62bd3268055d526e04f9074",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Same-input immutable fact reuse; no new Matcher fields or retained text reference."
+          ],
+          "pending": [
+            "Matching fork image and jtreg/native/platform admission remain open.",
+            "The MR nine-subtree 4288-file census is review evidence, not complete semantic dependency coverage."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "Private lifecycle adaptation in the existing Matcher. Does not port RXM captures or the RXA provider."
+      },
+      {
+        "id": "synexia.regex.rxm",
+        "kind": "pending",
+        "status": "pending",
+        "reason": "RXM freezes exact full-input JDK matches, lookingAt and find capture offsets. Matcher has mutable region, bounds, reset, pattern and append state; direct Result substitution is not admitted.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "4f9a91ab6239212acdb676757d96f5083d27c474",
+            "module": "synexia-mindex/runtime",
+            "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/regex/MIndexCompositeRegexIndex.java",
+            "symbol": "com.synexia.mindex.regex.MIndexCompositeRegexIndex",
+            "signatures": [
+              "MIndexCompositeRegexIndex"
+            ],
+            "sha256": "2e4da7b5b4519c4b4dc8231231dcc9b2b2e408e2524ae6ca142b1cd56622ae6c",
+            "git_blob_sha1": "20c22c81316b48314c1c7c3d6e173e688f3b787d",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          }
+        ],
+        "targets": [],
+        "owner": "java.util.regex.Pattern/Matcher for compatible atoms; M3 String remains canonical text owner",
+        "identity": {
+          "namespace": "Exact immutable source owner/range plus operation/provider/flags; target adaptation must bind all Matcher state.",
+          "generation": "Donor receipts do not qualify a different provider or target revision."
+        },
+        "contract": {
+          "differences": [
+            "RXM freezes exact full-input JDK matches, lookingAt and find capture offsets. Matcher has mutable region, bounds, reset, pattern and append state; direct Result substitution is not admitted."
+          ],
+          "compatibility_obligations": [
+            "Preserve API/native/serialization contracts; no prefix renaming."
+          ],
+          "public_surface": []
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Outside java.base; inclusion requires bootstrap review."
+        },
+        "dependencies": [
+          {
+            "id": "synexia.counterpart.MIndexRegexTrigramQuery",
+            "resolution": "resolved",
+            "reason": "Existing target candidate-only trigram owner is reused where applicable."
+          }
+        ],
+        "materialization": {
+          "admission": "Pending target consumer qualification.",
+          "joins": "Seams and arbitrary UTF-16 ranges require exact tests.",
+          "outputs": "Caller-owned capture offsets or boolean only when selected contract permits.",
+          "cached_facts": "No M3String fields or copied spelling storage; no global all-pairs precompute."
+        },
+        "recipe": {
+          "id": null,
+          "version": null,
+          "path": null,
+          "sha256": null,
+          "preconditions": [
+            "Target semantics and consumer review."
+          ],
+          "rollback": "No runtime port installed."
+        },
+        "tests": [],
+        "provenance": {
+          "license": "Apache-2.0 donor; no donor source body copied into the runtime in MR.",
+          "publication": "User-authorized handoff of exact donor identities and finite receipts.",
+          "copied_code": false
+        },
+        "sync": {
+          "source_revision": "4f9a91ab6239212acdb676757d96f5083d27c474",
+          "target_revision": "c0a14387009aefc7d62bd3268055d526e04f9074",
+          "direction": "source-to-target",
+          "target_adaptations": [],
+          "pending": [
+            "RXM freezes exact full-input JDK matches, lookingAt and find capture offsets. Matcher has mutable region, bounds, reset, pattern and append state; direct Result substitution is not admitted."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "Donor capability survives in current source. Target port is pending; target field/naming compatibility is not inferred from a matching prefix."
+      },
+      {
+        "id": "synexia.regex.rxa",
+        "kind": "pending",
+        "status": "pending",
+        "reason": "RXA preserves a restricted RE2/J-oriented boolean provider, including recorded disagreements with JDK dot, anchors and whitespace. A table or provider rename cannot grant JDK Pattern equivalence.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "4f9a91ab6239212acdb676757d96f5083d27c474",
+            "module": "synexia-mindex/runtime",
+            "path": "synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRegexAutomaton.java",
+            "symbol": "com.synexia.mindex.MIndexRegexAutomaton",
+            "signatures": [
+              "MIndexRegexAutomaton"
+            ],
+            "sha256": "c4cd9feb7645ccd1ef7fc66d165e33ee74fb9fbf6002d80518c228df47290b46",
+            "git_blob_sha1": "28a5c10f1b0c859694da2c2ee880667f54ddf717",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          }
+        ],
+        "targets": [],
+        "owner": "java.util.regex.Pattern/Matcher for compatible atoms; M3 String remains canonical text owner",
+        "identity": {
+          "namespace": "Exact immutable source owner/range plus operation/provider/flags; target adaptation must bind all Matcher state.",
+          "generation": "Donor receipts do not qualify a different provider or target revision."
+        },
+        "contract": {
+          "differences": [
+            "RXA preserves a restricted RE2/J-oriented boolean provider, including recorded disagreements with JDK dot, anchors and whitespace. A table or provider rename cannot grant JDK Pattern equivalence."
+          ],
+          "compatibility_obligations": [
+            "Preserve API/native/serialization contracts; no prefix renaming."
+          ],
+          "public_surface": []
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Outside java.base; inclusion requires bootstrap review."
+        },
+        "dependencies": [
+          {
+            "id": "synexia.counterpart.MIndexRegexTrigramQuery",
+            "resolution": "resolved",
+            "reason": "Existing target candidate-only trigram owner is reused where applicable."
+          }
+        ],
+        "materialization": {
+          "admission": "Pending target consumer qualification.",
+          "joins": "Seams and arbitrary UTF-16 ranges require exact tests.",
+          "outputs": "Caller-owned capture offsets or boolean only when selected contract permits.",
+          "cached_facts": "No M3String fields or copied spelling storage; no global all-pairs precompute."
+        },
+        "recipe": {
+          "id": null,
+          "version": null,
+          "path": null,
+          "sha256": null,
+          "preconditions": [
+            "Target semantics and consumer review."
+          ],
+          "rollback": "No runtime port installed."
+        },
+        "tests": [],
+        "provenance": {
+          "license": "Apache-2.0 donor; no donor source body copied into the runtime in MR.",
+          "publication": "User-authorized handoff of exact donor identities and finite receipts.",
+          "copied_code": false
+        },
+        "sync": {
+          "source_revision": "4f9a91ab6239212acdb676757d96f5083d27c474",
+          "target_revision": "c0a14387009aefc7d62bd3268055d526e04f9074",
+          "direction": "source-to-target",
+          "target_adaptations": [],
+          "pending": [
+            "RXA preserves a restricted RE2/J-oriented boolean provider, including recorded disagreements with JDK dot, anchors and whitespace. A table or provider rename cannot grant JDK Pattern equivalence."
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "Donor capability survives in current source. Target port is pending; target field/naming compatibility is not inferred from a matching prefix."
       }
     ]
   },
