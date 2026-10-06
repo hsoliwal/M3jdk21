@@ -45,6 +45,17 @@ public class M3StringPrecomputeSearchTest {
         check(joined.regionMatches(6, "\u03b2eta", 0, 4), "regionMatches");
         check(!joined.regionMatches(6, "\u03b2eto", 0, 4), "region mismatch");
 
+        String asciiMixed = String.join("", "Al", "PhA", "XYZ");
+        check(asciiMixed.equalsIgnoreCase("aLpHaxyz"), "ASCII equalsIgnoreCase");
+        check(asciiMixed.regionMatches(true, 0, "xxALPHAXYZyy", 2, asciiMixed.length()),
+                "ASCII regionMatches ignoreCase");
+        check(!asciiMixed.regionMatches(true, 0, "xxALPHQXYZyy", 2, asciiMixed.length()),
+                "ASCII regionMatches ignoreCase negative");
+        String unicodeCase = String.join("", "\u03a3", "\u03c3", "\ud83d\ude42");
+        check(unicodeCase.regionMatches(true, 0, "\u03c3\u03a3\ud83d\ude42", 0, unicodeCase.length()),
+                "Unicode regionMatches ignoreCase");
+
+
         check(joined.indexOf('a') == naiveIndexOf(oracle, 'a', 0), "indexOf BMP");
         check(joined.indexOf('\u03b2') == naiveIndexOf(oracle, '\u03b2', 0), "indexOf Unicode BMP");
         check(joined.indexOf(0x1f642) == naiveIndexOfCodePoint(oracle, 0x1f642, 0, oracle.length),
@@ -297,6 +308,30 @@ public class M3StringPrecomputeSearchTest {
             check(equalChars(source.strip(), naiveStrip(oracle).toCharArray()),
                     "random strip " + trial);
             check(source.isBlank() == naiveIsBlank(oracle), "random blank " + trial);
+            int regionLength = oracle.length == 0 ? 0 : random.nextInt(oracle.length + 1);
+            int leftStart = oracle.length == regionLength
+                    ? 0
+                    : random.nextInt(oracle.length - regionLength + 1);
+            char[] comparison = copyRange(oracle, 0, oracle.length);
+            if (comparison.length != 0 && (trial & 1) == 0) {
+                int mutate = random.nextInt(comparison.length);
+                char unit = comparison[mutate];
+                if (unit >= 'a' && unit <= 'z') comparison[mutate] = (char) (unit - 32);
+                else if (unit >= 'A' && unit <= 'Z') comparison[mutate] = (char) (unit + 32);
+                else if ((trial & 3) == 0) comparison[mutate] ^= 1;
+            }
+            int rightStart = comparison.length == regionLength
+                    ? 0
+                    : random.nextInt(comparison.length - regionLength + 1);
+            String comparisonString = new String(comparison);
+            check(source.regionMatches(leftStart, comparisonString, rightStart, regionLength)
+                            == naiveRegionMatches(
+                                    oracle, leftStart, comparison, rightStart, regionLength, false),
+                    "random exact region " + trial);
+            check(source.regionMatches(true, leftStart, comparisonString, rightStart, regionLength)
+                            == naiveRegionMatches(
+                                    oracle, leftStart, comparison, rightStart, regionLength, true),
+                    "random CI region " + trial);
             char oldChar = oracle.length == 0
                     ? 'x'
                     : oracle[random.nextInt(oracle.length)];
@@ -455,6 +490,60 @@ public class M3StringPrecomputeSearchTest {
             throw new AssertionError(impossibleWithReplacement);
         }
         return Arrays.copyOf(bytes.array(), bytes.position());
+    }
+
+    private static boolean naiveRegionMatches(
+            char[] left,
+            int leftOffset,
+            char[] right,
+            int rightOffset,
+            int length,
+            boolean ignoreCase) {
+        if (leftOffset < 0 || rightOffset < 0 || length < 0
+                || leftOffset > left.length - length
+                || rightOffset > right.length - length) {
+            return false;
+        }
+        if (!ignoreCase) {
+            for (int index = 0; index < length; index++) {
+                if (left[leftOffset + index] != right[rightOffset + index]) return false;
+            }
+            return true;
+        }
+
+        int l = leftOffset;
+        int r = rightOffset;
+        int remaining = length;
+        while (remaining > 0) {
+            int lc = left[l];
+            int rc = right[r];
+            int lcp = lc;
+            int rcp = rc;
+            int lw = 1;
+            int rw = 1;
+            if (Character.isHighSurrogate((char) lc) && remaining > 1
+                    && Character.isLowSurrogate(left[l + 1])) {
+                lcp = Character.toCodePoint((char) lc, left[l + 1]);
+                lw = 2;
+            }
+            if (Character.isHighSurrogate((char) rc) && remaining > 1
+                    && Character.isLowSurrogate(right[r + 1])) {
+                rcp = Character.toCodePoint((char) rc, right[r + 1]);
+                rw = 2;
+            }
+            if (lcp != rcp) {
+                int lu = Character.toUpperCase(lcp);
+                int ru = Character.toUpperCase(rcp);
+                if (lu != ru && Character.toLowerCase(lu) != Character.toLowerCase(ru)) {
+                    return false;
+                }
+            }
+            if (lw != rw) return false;
+            l += lw;
+            r += rw;
+            remaining -= lw;
+        }
+        return true;
     }
 
     private static char[] naiveReplace(char[] source, char oldChar, char newChar) {
