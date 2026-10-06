@@ -114,6 +114,9 @@ final class M3StringHistoryConvergenceRecipeTest {
                         "test/jdk/java/lang/String/M3StringInternTest.java",
                         "15-M3StringInternTest.java.txt"),
                 java(
+                        "test/jdk/java/lang/String/nativeEncoding/StringPlatformChars.java",
+                        "17-StringPlatformChars.java.txt"),
+                java(
                         "test/jdk/jdk/internal/mindex/M3TQFactsTest.java",
                         "09-M3TQFactsTest.java.txt"),
                 java(
@@ -136,7 +139,19 @@ final class M3StringHistoryConvergenceRecipeTest {
                         "04-String.java.txt"),
                 text(
                         "src/java.base/share/native/libjava/String.c",
-                        "05-String.c.txt"));
+                        "05-String.c.txt"),
+                text(
+                        "src/hotspot/share/classfile/javaClasses.cpp",
+                        "06-javaClasses.cpp.txt"),
+                text(
+                        "src/hotspot/share/classfile/javaClasses.hpp",
+                        "07-javaClasses.hpp.txt"),
+                text(
+                        "src/hotspot/share/classfile/javaClasses.inline.hpp",
+                        "08-javaClasses.inline.hpp.txt"),
+                text(
+                        "test/jdk/java/lang/String/nativeEncoding/libstringPlatformChars.c",
+                        "09-libstringPlatformChars.c.txt"));
     }
 
     private static SourceFile java(String path, String resource) {
