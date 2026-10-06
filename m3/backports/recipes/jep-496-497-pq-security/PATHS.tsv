@@ -2,6 +2,21 @@ identity	path	upstream_action	m3_action	reason
 JDK-8318096	src/java.base/share/classes/java/security/AsymmetricKey.java	ADD	EXCLUDE_DEFAULT	Public Java API absent from Java21; separate opt-in decision required.
 JDK-8318096	src/java.base/share/classes/java/security/PrivateKey.java	MODIFY	EXCLUDE_DEFAULT	Public API hierarchy change belongs to AsymmetricKey extension.
 JDK-8318096	src/java.base/share/classes/java/security/PublicKey.java	MODIFY	EXCLUDE_DEFAULT	Public API hierarchy change belongs to AsymmetricKey extension.
+JDK-8318096	src/java.base/share/classes/java/security/interfaces/DSAParams.java	MODIFY	EXCLUDE_DEFAULT	Public security API prerequisite composition.
+JDK-8318096	src/java.base/share/classes/java/security/interfaces/DSAPrivateKey.java	MODIFY	EXCLUDE_DEFAULT	Public key interface hierarchy change.
+JDK-8318096	src/java.base/share/classes/java/security/interfaces/DSAPublicKey.java	MODIFY	EXCLUDE_DEFAULT	Public key interface hierarchy change.
+JDK-8318096	src/java.base/share/classes/java/security/interfaces/ECPrivateKey.java	MODIFY	EXCLUDE_DEFAULT	Public key interface hierarchy change.
+JDK-8318096	src/java.base/share/classes/java/security/interfaces/ECPublicKey.java	MODIFY	EXCLUDE_DEFAULT	Public key interface hierarchy change.
+JDK-8318096	src/java.base/share/classes/java/security/interfaces/EdECPrivateKey.java	MODIFY	EXCLUDE_DEFAULT	Public key interface hierarchy change.
+JDK-8318096	src/java.base/share/classes/java/security/interfaces/EdECPublicKey.java	MODIFY	EXCLUDE_DEFAULT	Public key interface hierarchy change.
+JDK-8318096	src/java.base/share/classes/java/security/interfaces/RSAPrivateKey.java	MODIFY	EXCLUDE_DEFAULT	Public key interface hierarchy change.
+JDK-8318096	src/java.base/share/classes/java/security/interfaces/RSAPublicKey.java	MODIFY	EXCLUDE_DEFAULT	Public key interface hierarchy change.
+JDK-8318096	src/java.base/share/classes/java/security/interfaces/XECPrivateKey.java	MODIFY	EXCLUDE_DEFAULT	Public key interface hierarchy change.
+JDK-8318096	src/java.base/share/classes/java/security/interfaces/XECPublicKey.java	MODIFY	EXCLUDE_DEFAULT	Public key interface hierarchy change.
+JDK-8318096	src/java.base/share/classes/javax/crypto/interfaces/DHPrivateKey.java	MODIFY	EXCLUDE_DEFAULT	Public key interface hierarchy change.
+JDK-8318096	src/java.base/share/classes/javax/crypto/interfaces/DHPublicKey.java	MODIFY	EXCLUDE_DEFAULT	Public key interface hierarchy change.
+JDK-8318096	src/jdk.crypto.cryptoki/share/classes/sun/security/pkcs11/P11Key.java	MODIFY	EXCLUDE_DEFAULT	Internal implementation coupled to the public AsymmetricKey hierarchy.
+JDK-8318096	test/jdk/java/security/AsymmetricKey/GetParams.java	ADD	EXCLUDE_DEFAULT	Regression belongs to the excluded public API extension.
 JDK-8340327	src/java.base/share/classes/sun/security/pkcs/NamedPKCS8Key.java	ADD	CANDIDATE_ADAPT	Internal prerequisite.
 JDK-8340327	src/java.base/share/classes/sun/security/provider/NamedKEM.java	ADD	CANDIDATE_ADAPT	Internal KEM framework prerequisite.
 JDK-8340327	src/java.base/share/classes/sun/security/provider/NamedKeyFactory.java	ADD	CANDIDATE_ADAPT	Must be adapted away from java.security.AsymmetricKey.
