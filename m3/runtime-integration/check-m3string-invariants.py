@@ -42,6 +42,8 @@ mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
 native_string = read("src/java.base/share/native/libjava/String.c")
+native_encoding_java = read("test/jdk/java/lang/String/nativeEncoding/StringPlatformChars.java")
+native_encoding_c = read("test/jdk/java/lang/String/nativeEncoding/libstringPlatformChars.c")
 arguments = read("src/hotspot/share/runtime/arguments.cpp")
 pattern = read("src/java.base/share/classes/java/util/regex/Pattern.java")
 matcher = read("src/java.base/share/classes/java/util/regex/Matcher.java")
@@ -476,6 +478,23 @@ for required_no_port in [
 ]:
     if required_no_port not in port_map:
         fail(f"String donor no-port classification missing: {required_no_port}")
+
+# Standard UTF-8 and modified UTF-8 are different M3 facts. VM/JNI GetStringUTFLength must
+# consume the modified UTF-8 fact, with a native regression that covers NUL and surrogate units.
+for fragment in [
+    "final int modifiedUtf8Length;",
+    "modifiedUtf8 = Math.addExact(modifiedUtf8, modifiedUtf8Bytes(unit));",
+]:
+    if fragment not in facts:
+        fail(f"M3 modified UTF8 fact missing: {fragment}")
+for fragment in [
+    "_facts_modifiedUtf8Length_offset",
+    "modified_utf8_length_if_precomputed",
+]:
+    if fragment not in (java_classes_hpp + java_classes_cpp + java_classes_inline):
+        fail(f"M3 VM modified UTF8 accessor missing: {fragment}")
+if "GetStringUTFLength" not in native_encoding_c or "modifiedUtf8Length(s)" not in native_encoding_java:
+    fail("M3 modified UTF8 JNI length regression missing")
 
 # VM/JIT experiment boundary: subsystems that still assume String.value payload semantics must
 # remain disabled until they become explicitly M3-aware.
