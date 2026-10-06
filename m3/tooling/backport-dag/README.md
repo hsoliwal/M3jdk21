@@ -104,3 +104,25 @@ These files intentionally have no authority to accept a backport by themselves.
 The semantic DAG kernel is gated at 99% line and branch coverage. Tests prove cycle rejection,
 missing dependencies, parallel FILE layers, explicit scope promotion, serial terminal promotion and
 promotion-fact admission.
+
+
+## Nebula transfer and JEP residue queue
+
+The target-side transfer consumer is `M3NebulaTransferAdmission`. It validates the complete
+content-addressed Nebula recipe/DAG bundle, the Java-21/OpenRewrite identity, the
+`JAVA21_JDK_COMPATIBILITY_AND_BACKPORT_LANES` target, and authority-free
+Maven/OpenRewrite/Camel/Airflow/Drools projections.
+
+`M3JepResidueQueue` and `M3JepResidueDagPlanner` then bind every unresolved JDK22-27 JEP row
+to this canonical DAG without deciding compatibility. The CLI is:
+
+```bash
+mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+  -Dexec.mainClass=com.m3.tooling.dag.M3JepResiduePlanMain \
+  -Dexec.args="m3/backports/JEP_RESIDUE_QUEUE.tsv <nebula-transfer-dir> <out-dir>" \
+  exec:java
+```
+
+The emitted JEP work orders carry neither source-mutation nor promotion authority. JDK-specific
+compatibility, dependency closure, file delta, recipe/JUnit, build, jtreg and runtime proof remain
+mandatory before the existing serial promotion node.
