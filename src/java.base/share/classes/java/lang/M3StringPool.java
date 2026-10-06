@@ -15,6 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HexFormat;
 import java.util.Iterator;
@@ -401,24 +402,94 @@ final class M3StringPool {
         if (left.length() == 0) return right;
         if (right.length() == 0) return left;
         if (left.owner() == right.owner() && left.end() == right.start()) {
-            return M3String.range(left.owner(), left.start(), Math.addExact(left.length(), right.length()));
+            return M3String.range(
+                    left.owner(), left.start(), Math.addExact(left.length(), right.length()));
         }
+        return concatBalanced(left, right);
+    }
 
+    private static M3String concatBalanced(M3String left, M3String right) {
+        int leftHeight = height(left);
+        int rightHeight = height(right);
+        if (leftHeight > rightHeight + 1) {
+            M3StringTuple branch = (M3StringTuple) left.owner();
+            return balance(branch.left, concatBalanced(branch.right, right));
+        }
+        if (rightHeight > leftHeight + 1) {
+            M3StringTuple branch = (M3StringTuple) right.owner();
+            return balance(concatBalanced(left, branch.left), branch.right);
+        }
+        return internTuple(left, right);
+    }
+
+    private static M3String balance(M3String left, M3String right) {
+        int leftHeight = height(left);
+        int rightHeight = height(right);
+        if (leftHeight > rightHeight + 1) {
+            M3StringTuple branch = (M3StringTuple) left.owner();
+            if (height(branch.left) >= height(branch.right)) {
+                return internTuple(branch.left, internTuple(branch.right, right));
+            }
+            M3StringTuple middle = (M3StringTuple) branch.right.owner();
+            return internTuple(
+                    internTuple(branch.left, middle.left),
+                    internTuple(middle.right, right));
+        }
+        if (rightHeight > leftHeight + 1) {
+            M3StringTuple branch = (M3StringTuple) right.owner();
+            if (height(branch.right) >= height(branch.left)) {
+                return internTuple(internTuple(left, branch.left), branch.right);
+            }
+            M3StringTuple middle = (M3StringTuple) branch.left.owner();
+            return internTuple(
+                    internTuple(left, middle.left),
+                    internTuple(middle.right, branch.right));
+        }
+        return internTuple(left, right);
+    }
+
+    private static int height(M3String value) {
+        M3StringOwner owner = value.owner();
+        return value.start() == 0
+                        && value.length() == owner.length
+                        && owner instanceof M3StringTuple tuple
+                ? tuple.height
+                : 0;
+    }
+
+    /**
+     * Parenthesization-independent tuple interning.
+     *
+     * <p>The O(1) route key is candidate-only. Exact normalized terminal M3 atom owner/range
+     * coordinates decide canonical reuse, so route collisions affect lookup cost only.</p>
+     */
+    private static M3String internTuple(M3String left, M3String right) {
         expungeTuples();
-        long hash = tupleHash64(left, right);
+        int totalLength = Math.addExact(left.length(), right.length());
+        int javaHash =
+                left.hashCodeValue() * M3String.pow31(right.length()) + right.hashCodeValue();
+        byte coder = (byte) (left.coder() | right.coder());
+        long routeKey = tupleRouteKey(javaHash, totalLength, coder);
+
         for (;;) {
-            TupleBucket bucket = TUPLES.computeIfAbsent(hash, ignored -> new TupleBucket());
+            TupleBucket bucket = TUPLES.computeIfAbsent(routeKey, ignored -> new TupleBucket());
             synchronized (bucket) {
                 if (bucket.retired) continue;
                 for (Iterator<TupleRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
                     TupleRef reference = iterator.next();
                     M3StringTuple existing = reference.get();
-                    if (existing == null) iterator.remove();
-                    else if (existing.geometryEquals(left, right)) return M3String.whole(existing);
+                    if (existing == null) {
+                        iterator.remove();
+                    } else if (existing.length == totalLength
+                            && existing.coder == coder
+                            && existing.javaHash == javaHash
+                            && sameLeafSequence(M3String.whole(existing), left, right)) {
+                        return M3String.whole(existing);
+                    }
                 }
                 long id = nextId(NEXT_TUPLE_ID, "M3 tuple ID");
-                M3StringTuple created = new M3StringTuple(left, right, id, hash);
-                bucket.values.add(new TupleRef(created, hash, bucket));
+                M3StringTuple created = new M3StringTuple(left, right, id, routeKey);
+                bucket.values.add(new TupleRef(created, routeKey, bucket));
                 return M3String.whole(created);
             }
         }
@@ -471,11 +542,27 @@ final class M3StringPool {
         return mixed ^ (mixed >>> 31);
     }
 
-    private static long tupleHash64(M3String left, M3String right) {
-        long hash = mix64(0x517cc1b727220a95L ^ left.identityHash64());
-        hash = mix64(hash ^ right.identityHash64());
-        hash = mix64(hash ^ Integer.toUnsignedLong(left.length()));
-        return mix64(hash ^ Integer.toUnsignedLong(right.length()));
+    private static long tupleRouteKey(int javaHash, int totalLength, byte coder) {
+        long route = mix64(Integer.toUnsignedLong(javaHash));
+        route = mix64(route ^ Long.rotateLeft(Integer.toUnsignedLong(totalLength), 17));
+        return mix64(route ^ coder);
+    }
+
+    private static boolean sameLeafSequence(
+            M3String existing, M3String left, M3String right) {
+        LeafCursor candidate = new LeafCursor(existing, null);
+        LeafCursor requested = new LeafCursor(left, right);
+        for (;;) {
+            boolean candidateNext = candidate.next();
+            boolean requestedNext = requested.next();
+            if (candidateNext != requestedNext) return false;
+            if (!candidateNext) return true;
+            if (candidate.atom() != requested.atom()
+                    || candidate.start() != requested.start()
+                    || candidate.length() != requested.length()) {
+                return false;
+            }
+        }
     }
 
     private static boolean mappedLatin1(long address, int length, boolean bigEndian) {
@@ -521,6 +608,97 @@ final class M3StringPool {
                 if (address != 0L) UNSAFE.freeMemory(address);
                 LOCAL_NATIVE_BYTES.addAndGet(-retainedBytes);
             }
+        }
+    }
+
+    private static final class LeafCursor {
+        private final ArrayDeque<M3String> pending = new ArrayDeque<>();
+
+        private M3StringAtom atom;
+        private int start;
+        private int length;
+
+        private boolean buffered;
+        private M3StringAtom bufferedAtom;
+        private int bufferedStart;
+        private int bufferedLength;
+
+        private M3StringAtom rawAtom;
+        private int rawStart;
+        private int rawLength;
+
+        LeafCursor(M3String first, M3String second) {
+            if (second != null && second.length() != 0) pending.push(second);
+            if (first != null && first.length() != 0) pending.push(first);
+        }
+
+        boolean next() {
+            if (buffered) {
+                atom = bufferedAtom;
+                start = bufferedStart;
+                length = bufferedLength;
+                buffered = false;
+            } else {
+                if (!pullRaw()) return false;
+                atom = rawAtom;
+                start = rawStart;
+                length = rawLength;
+            }
+
+            while (pullRaw()) {
+                if (rawAtom == atom && start + length == rawStart) {
+                    length = Math.addExact(length, rawLength);
+                } else {
+                    buffered = true;
+                    bufferedAtom = rawAtom;
+                    bufferedStart = rawStart;
+                    bufferedLength = rawLength;
+                    break;
+                }
+            }
+            return true;
+        }
+
+        M3StringAtom atom() { return atom; }
+        int start() { return start; }
+        int length() { return length; }
+
+        private boolean pullRaw() {
+            while (!pending.isEmpty()) {
+                M3String value = pending.pop();
+                if (value.length() == 0) continue;
+                if (value.owner() instanceof M3StringAtom scalar) {
+                    rawAtom = scalar;
+                    rawStart = value.start();
+                    rawLength = value.length();
+                    return true;
+                }
+
+                M3StringTuple tuple = (M3StringTuple) value.owner();
+                int rangeStart = value.start();
+                int rangeEnd = value.end();
+                int leftLength = tuple.left.length();
+
+                if (rangeEnd > leftLength) {
+                    int rightStart = Math.max(0, rangeStart - leftLength);
+                    int rightEnd = rangeEnd - leftLength;
+                    pending.push(
+                            M3String.range(
+                                    tuple.right.owner(),
+                                    Math.addExact(tuple.right.start(), rightStart),
+                                    rightEnd - rightStart));
+                }
+                if (rangeStart < leftLength) {
+                    int leftStart = rangeStart;
+                    int leftEnd = Math.min(rangeEnd, leftLength);
+                    pending.push(
+                            M3String.range(
+                                    tuple.left.owner(),
+                                    Math.addExact(tuple.left.start(), leftStart),
+                                    leftEnd - leftStart));
+                }
+            }
+            return false;
         }
     }
 
