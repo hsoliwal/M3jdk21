@@ -2284,7 +2284,15 @@ public final class String
              (ooffset > (long)other.length() - len)) {
             return false;
         }
-        if (m3() != null || other.m3() != null) {
+        M3String leftM3 = m3();
+        M3String rightM3 = other.m3();
+        if (leftM3 != null || rightM3 != null) {
+            if (leftM3 != null && rightM3 != null) {
+                M3String leftRange = leftM3.slice(toffset, toffset + len);
+                M3String rightRange = rightM3.slice(ooffset, ooffset + len);
+                if (leftRange.sameCoordinate(rightRange)) return true;
+                if (leftRange.hashCodeValue() != rightRange.hashCodeValue()) return false;
+            }
             for (int index = 0; index < len; index++) {
                 if (charAt(toffset + index) != other.charAt(ooffset + index)) return false;
             }
@@ -2371,7 +2379,17 @@ public final class String
                 || (ooffset > (long)other.length() - len)) {
             return false;
         }
-        if (m3() != null || other.m3() != null) {
+        M3String leftM3 = m3();
+        M3String rightM3 = other.m3();
+        if (leftM3 != null || rightM3 != null) {
+            if (leftM3 != null && rightM3 != null) {
+                M3StringFacts leftFacts = leftM3.slice(toffset, toffset + len).facts();
+                M3StringFacts rightFacts = rightM3.slice(ooffset, ooffset + len).facts();
+                if (leftFacts.ascii && rightFacts.ascii
+                        && leftFacts.asciiLowerHash != rightFacts.asciiLowerHash) {
+                    return false;
+                }
+            }
             int t = toffset;
             int o = ooffset;
             int remaining = len;
