@@ -1,0 +1,12 @@
+key	value
+repository	hsoliwal/M3jdk21
+branch	m3/j484-custody-plan-20261006
+branch_base	c0a14387009aefc7d62bd3268055d526e04f9074
+jdk21_ref	jdk-21+35
+jdk24_ref	jdk-24+36
+direct_descendants	238
+unmapped_jdk21	3
+added_jdk24	7
+custody_rows	248
+mutation_authority	false
+promotion_authority	false
