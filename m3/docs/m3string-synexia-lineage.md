@@ -106,3 +106,19 @@ filters. Exact trigram sets are not duplicated there. For longer reusable source
 
 Search uses exact trigram containment only as an absence proof before KMP. A positive containment
 result never proves a substring match; canonical UTF-16 KMP remains authoritative.
+
+
+## Regex literal-find consumption
+
+The existing `M3TQ` exact trigram facts are now consumed by the JDK regex engine only at a
+semantically safe boundary:
+
+- case-sensitive `Pattern.LITERAL` compilation may prepare a candidate-only `M3TQ`;
+- only `Matcher.find()` / internal search may use the absence proof;
+- `matches()` and `lookingAt()` never use the TQ gate;
+- mutable/non-`String` inputs bypass the gate;
+- region facts are bounded to 32,768 UTF-16 units and are invalidated on matcher reset;
+- both pattern and source precompute fail open on `OutOfMemoryError`;
+- failed candidate rejection reproduces literal-search `hitEnd=true` state, while
+  `requireEnd` remains unchanged;
+- exact Pattern nodes remain the final authority for every positive candidate.
