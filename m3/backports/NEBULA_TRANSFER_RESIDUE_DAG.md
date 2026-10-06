@@ -34,6 +34,12 @@ pinned hsoliwal/nebula commit
 - entrypoint: `org.eclipse.nebula.m3.rewrite.NebulaM3Java21ConvergenceRecipe`;
 - target lane: `JAVA21_JDK_COMPATIBILITY_AND_BACKPORT_LANES`.
 
+Exact proving source: `hsoliwal/nebula@m3/final-nebula-recipe-lab-20261006` commit `818f2a6ba38399d2564c15494cd4333cca8d37eb`.
+
+The admitted transfer must also carry the exact refactor authority order:
+
+`FILE,VISIBILITY,PACKAGE,MODULE,MULTI_MODULE,LIBRARY_API`.
+
 The target does not trust the transfer's hashes. `M3NebulaTransferAdmission` recomputes:
 
 - scheduler-plan root;
