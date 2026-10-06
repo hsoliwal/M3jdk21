@@ -55,7 +55,7 @@ boundary requires it.
 8. Absence or eviction of precompute cannot alter Java String semantics.
 9. VM-local native scalar owners are weakly canonicalized: live M3 coordinates/DAGs own lifetime; dead native blocks are reclaimed through the local reference queue.
 10. Every Java byte[]/char[] compatibility shadow, including the shared empty VM sentinel, is created through the JNI shadow boundary.
-11. Canonical tuple identity is independent of concat parenthesization: equal ordered UTF-16 value sequences admitted as compositions converge after exact verification; hash collisions affect lookup cost only.
+11. Canonical tuple identity is independent of concat parenthesization: the same normalized ordered terminal M3 atom owner/range sequence converges after exact verification. Equal UTF-16 spelling from a different M3 coordinate structure does not define canonical identity; hash collisions affect lookup cost only.
 12. Canonical tuple DAG depth remains bounded by balancing; no concat chain may recreate an unbounded rope.
 
 ## Search/precompute convergence absorbed
