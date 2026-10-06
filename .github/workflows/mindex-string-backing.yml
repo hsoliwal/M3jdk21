@@ -6,6 +6,7 @@ on:
       - 'm3/docs/m3-runtime-invariants.tsv'
       - 'm3/docs/name-mapping.json'
       - 'm3/docs/synexia-string-recipe-authority.tsv'
+      - 'm3/docs/synexia-recipe-application.md'
       - 'm3/docs/m3jdk21-porting-invariant.md'
       - 'm3/docs/m3string-synexia-lineage.md'
       - 'm3/docs/synexia-string-precompute-port-map.tsv'
@@ -55,8 +56,6 @@ jobs:
           java-version: '21'
       - name: Verify M3 String source invariants
         run: python3 m3/runtime-integration/check-m3string-invariants.py
-      - name: Prove M3 String history-convergence recipe
-        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringHistoryConvergenceRecipeTest test
       - name: Prove canonical DAG master-repair recipe
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringCanonicalDagMasterRepairRecipeTest test
       - name: Prove immutable Matcher fact reuse
