@@ -19,6 +19,7 @@ import com.m3.rewrite.backport.M3VerbatimJavaPairRecipe;
 import com.m3.rewrite.backport.M3Jep458BackportRecipe;
 import com.m3.rewrite.backport.M3Jep485StreamGatherersBackportRecipe;
 import com.m3.rewrite.backport.M3ReleaseJepAuthorityRepairRecipe;
+import com.m3.rewrite.synexia.M3SynexiaImportInventoryRecipe;
 import com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe;
 import com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe;
 import com.synexia.rewrite.M3SegmentedLaneNativeRecipe;
@@ -28,7 +29,7 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(17, M3RecipeScopeRegistry.size());
+        assertEquals(18, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered("org.openrewrite.java.RemoveUnusedImports"));
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
@@ -46,6 +47,12 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3Jep458BackportRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jep485StreamGatherersBackportRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3ReleaseJepAuthorityRepairRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3SynexiaImportInventoryRecipe.class.getName()));
+        var synexiaImport = M3RecipeScopeRegistry.require(M3SynexiaImportInventoryRecipe.class);
+        assertEquals(M3EditScope.MULTI_MODULE, synexiaImport.minimumScope());
+        assertEquals(M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING, synexiaImport.contractMode());
+        assertFalse(synexiaImport.fileLocalMechanical(List.of("m3/synexia-import/synexia-seed-export.tsv")));
+
         var denominatorRepair = M3RecipeScopeRegistry.require(M3ReleaseJepAuthorityRepairRecipe.class);
         assertEquals(M3EditScope.MULTI_MODULE, denominatorRepair.minimumScope());
         assertEquals(M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING, denominatorRepair.contractMode());
@@ -151,7 +158,8 @@ final class M3RecipeScopeDeclarationTest {
                 M3DocumentPureIntAtomRecipe.class,
                 M3PureIntConvergenceRecipe.class,
                 M3Java21ConvergenceRecipe.class,
-                M3ReleaseJepAuthorityRepairRecipe.class)) {
+                M3ReleaseJepAuthorityRepairRecipe.class,
+                M3SynexiaImportInventoryRecipe.class)) {
             assertEquals(
                     M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING,
                     M3RecipeScopeRegistry.require(recipe).contractMode());
