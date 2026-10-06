@@ -37,7 +37,8 @@ Those sidecars preserve Synexia source names, opaque IDs, language/translation
 profiles, SI/acronym/number mappings and source precompute ownership; they stay
 outside `java.lang.String`. `com.m3.text.SharedLexiconCatalog` is the explicit
 read-only multi-shard loader: it validates `synexia.shards.tsv`, raw image
-SHA-256, UTF-16 bounds/order and escaped sidecar endpoints, then returns stable
+SHA-256, UTF-16 bounds/order, escaped sidecar endpoints, complete precompute
+profile coverage and profile fingerprints, then returns stable
 `(shardId,imageRow)` coordinates without flattening shard payloads. A VM may map
 one selected shard per process today; catalog warmup is an explicit loader
 operation and is not implied by the presence of the sidecar manifest.

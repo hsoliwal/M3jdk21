@@ -26,6 +26,7 @@ MAPPING_COLUMNS = ("source_id", "source_path", "source_kind", "language_tag", "r
 FACT_COLUMNS = ("shard_id", "image_row", "utf16_units", "java_hash", "code_points",
                 "unpaired_surrogates", "non_bmp_code_points", "ascii", "latin1",
                 "contains_whitespace", "precompute_profile")
+PROFILE_COLUMNS = ("precompute_profile", "source_records", "image_records", "sha256")
 
 
 def digest(data: bytes) -> str:
@@ -144,7 +145,8 @@ def verify(output: pathlib.Path) -> dict[str, int]:
     if target.get("image_format") != "M3LEX001" or target.get("image_version") != VERSION:
         raise ValueError("unsupported target image contract")
     outputs = manifest.get("outputs", {})
-    required = {"synexia.shards.tsv", "synexia.records.tsv", "synexia.precompute.tsv"}
+    required = {"synexia.shards.tsv", "synexia.records.tsv", "synexia.precompute-index.tsv",
+                "synexia.precompute.tsv"}
     if not required.issubset(outputs):
         raise ValueError("export output hashes are incomplete")
     for name, expected in outputs.items():
@@ -180,6 +182,9 @@ def verify(output: pathlib.Path) -> dict[str, int]:
 
     mapping_rows = read_tsv(output / "synexia.records.tsv", MAPPING_COLUMNS)
     identities: set[tuple[str, str]] = set()
+    profile_sources: dict[str, set[tuple[str, str]]] = {}
+    profile_coordinates: dict[str, set[tuple[int, int]]] = {}
+    mapping_profiles: dict[tuple[int, int], set[str]] = {}
     for row in mapping_rows:
         identity = (row["source_id"], row["record_id"])
         if identity in identities:
@@ -190,11 +195,16 @@ def verify(output: pathlib.Path) -> dict[str, int]:
             raise ValueError("source mapping does not match image coordinate")
         if not row["mapping_name"] or not row["precompute_profile"]:
             raise ValueError("mapping metadata is incomplete")
+        profile = row["precompute_profile"]
+        profile_sources.setdefault(profile, set()).add(identity)
+        profile_coordinates.setdefault(profile, set()).add(key)
+        mapping_profiles.setdefault(key, set()).add(profile)
     if len(mapping_rows) != int(manifest["counts"]["source_records"]):
         raise ValueError("source record count mismatch")
 
     fact_rows = read_tsv(output / "synexia.precompute.tsv", FACT_COLUMNS)
     fact_keys: set[tuple[int, int]] = set()
+    fact_profiles: dict[tuple[int, int], str] = {}
     for row in fact_rows:
         key = (int(row["shard_id"]), int(row["image_row"]))
         if key in fact_keys or key not in images:
@@ -208,10 +218,35 @@ def verify(output: pathlib.Path) -> dict[str, int]:
                   row["contains_whitespace"] == "True")
         if actual != expected or not row["precompute_profile"]:
             raise ValueError("precompute fact mismatch")
+        fact_profiles[key] = row["precompute_profile"]
     if fact_keys != set(images):
         raise ValueError("precompute coverage mismatch")
+    for key, profiles in mapping_profiles.items():
+        if any(profile not in fact_profiles[key] for profile in profiles):
+            raise ValueError("precompute owner profile coverage mismatch")
+
+    profile_rows = read_tsv(output / "synexia.precompute-index.tsv", PROFILE_COLUMNS)
+    seen_profiles: set[str] = set()
+    for row in profile_rows:
+        profile = row["precompute_profile"]
+        if profile in seen_profiles or profile not in profile_sources:
+            raise ValueError("precompute profile catalog mismatch")
+        seen_profiles.add(profile)
+        source_count = int(row["source_records"])
+        image_count = int(row["image_records"])
+        if source_count != len(profile_sources[profile]) or image_count != len(profile_coordinates[profile]):
+            raise ValueError("precompute profile cardinality mismatch")
+        expected_fingerprint = digest(
+            f"{profile}\t{source_count}\t{image_count}\n".encode("utf-8"))
+        if row["sha256"] != expected_fingerprint:
+            raise ValueError("precompute profile fingerprint mismatch")
+    if seen_profiles != set(profile_sources):
+        raise ValueError("precompute profile coverage mismatch")
+    if len(profile_rows) != int(manifest["counts"]["precompute_profiles"]):
+        raise ValueError("precompute profile count mismatch")
     return {"source_records": len(mapping_rows), "image_records": len(images),
-            "shards": len(shard_rows), "utf16_units": total_units}
+            "shards": len(shard_rows), "precompute_profiles": len(profile_rows),
+            "utf16_units": total_units}
 
 
 def main(argv: list[str] | None = None) -> int:

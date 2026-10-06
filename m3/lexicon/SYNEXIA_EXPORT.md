@@ -48,9 +48,21 @@ The output is:
 - `synexia.shards.tsv`: shard order, file, lexical bounds, counts and hashes;
 - `synexia.records.tsv`: exact source IDs, names, mappings, language/profile
   coordinates and their physical shard/image row;
+- `synexia.precompute-index.tsv`: every exact Synexia precompute-owner profile,
+  source-row and physical-coordinate cardinality, and deterministic coverage
+  fingerprint;
 - `synexia.precompute.tsv`: bounded UTF-16/code-point/hash/ASCII/Latin-1/
   whitespace facts plus the Synexia precompute profile;
 - `synexia.export.json`: source pins, input/output hashes, counts and policy.
+
+`com.m3.text.SharedLexiconCatalog.open(exportDirectory)` validates the shard
+manifest and all four sidecars together. It exposes stable
+`(shardId,imageRow)` coordinates, one-to-many source mappings and immutable
+precompute facts plus the complete profile catalog without joining image
+payloads. `textAt` is the explicit single-record materialization boundary;
+source IDs and mapping names are not converted into VM-local `String` identities.
+`prefix(value, limit)` is the first mapped query surface: it returns ordered
+coordinates through shard-local lower bounds and exact UTF-16 prefix checks.
 
 The image is suitable for the existing `-Djdk.mindex.lexicon=/absolute/file`
 boundary. The sidecars remain language-layer metadata; they are not fields of

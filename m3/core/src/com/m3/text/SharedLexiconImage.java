@@ -127,15 +127,34 @@ public final class SharedLexiconImage {
     /** Binary lookup using the image's UTF-16 ordering and Java String ordering. */
     int findRecord(String value) {
         Objects.requireNonNull(value);
-        int low = 0, high = offsets.length - 1;
-        while (low <= high) {
+        int row = lowerBound(value);
+        return row < offsets.length && compareRecordTo(row, value) == 0 ? row : -1;
+    }
+
+    /** First record whose UTF-16 value is not less than {@code value}. */
+    int lowerBound(String value) {
+        Objects.requireNonNull(value);
+        int low = 0, high = offsets.length;
+        while (low < high) {
             int middle = (low + high) >>> 1;
-            int comparison = compareRecordTo(middle, value);
-            if (comparison < 0) low = middle + 1;
-            else if (comparison > 0) high = middle - 1;
-            else return middle;
+            if (compareRecordTo(middle, value) < 0) low = middle + 1;
+            else high = middle;
         }
-        return -1;
+        return low;
+    }
+
+    /** Exact UTF-16 prefix test directly against mapped bytes. */
+    boolean startsWith(int index, String prefix) {
+        Objects.requireNonNull(prefix);
+        Objects.checkIndex(index, offsets.length);
+        ByteBuffer record = recordBytes(index);
+        if (prefix.length() > record.remaining() / 2) return false;
+        for (int at = 0; at < prefix.length(); at++) {
+            int offset = at * 2;
+            int unit = (record.get(offset) & 0xff) | ((record.get(offset + 1) & 0xff) << 8);
+            if (unit != prefix.charAt(at)) return false;
+        }
+        return true;
     }
 
     private int compareRecordTo(int index, String value) {
