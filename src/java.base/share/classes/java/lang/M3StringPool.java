@@ -395,34 +395,6 @@ final class M3StringPool {
         }
     }
 
-    private static M3StringAtom internLocal(byte[] value, byte coder) {
-        expungeLocals();
-        long hash64 = contentHash64(value, coder);
-        Fingerprint fingerprint = new Fingerprint(coder, value.length, hash64);
-        for (;;) {
-            LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
-            synchronized (bucket) {
-                if (bucket.retired) continue;
-                for (Iterator<LocalRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
-                    LocalRef reference = iterator.next();
-                    M3StringAtom existing = reference.get();
-                    if (existing == null) {
-                        iterator.remove();
-                        reference.releaseNative();
-                    } else if (existing.contentEquals(value, coder)) {
-                        return existing;
-                    }
-                }
-                long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
-                M3StringAtom created = M3StringAtom.local(value, coder, id, hash64);
-                long retainedBytes = created.nativePayloadBytes();
-                LOCAL_NATIVE_BYTES.addAndGet(retainedBytes);
-                bucket.values.add(new LocalRef(created, fingerprint, bucket, retainedBytes));
-                return created;
-            }
-        }
-    }
-
     static M3String concat(M3String left, M3String right) {
         Objects.requireNonNull(left, "left");
         Objects.requireNonNull(right, "right");
@@ -497,18 +469,6 @@ final class M3StringPool {
         mixed ^= mixed >>> 27;
         mixed *= 0x94d049bb133111ebL;
         return mixed ^ (mixed >>> 31);
-    }
-
-    private static long contentHash64(byte[] value, byte coder) {
-        long hash = mix64(0x9e3779b97f4a7c15L ^ coder ^ Integer.toUnsignedLong(value.length));
-        int length = value.length >> coder;
-        for (int index = 0; index < length; index++) {
-            char unit = coder == String.LATIN1
-                    ? StringLatin1.charAt(value, index)
-                    : StringUTF16.charAt(value, index);
-            hash = mix64(hash ^ unit);
-        }
-        return hash;
     }
 
     private static long tupleHash64(M3String left, M3String right) {
@@ -858,26 +818,6 @@ final class M3StringPool {
             return -1;
         }
 
-        int find(byte[] value, byte coder) {
-            int logicalLength = value.length >> coder;
-            int low = 0;
-            int high = offsets.length - 1;
-            while (low <= high) {
-                int middle = (low + high) >>> 1;
-                int comparison =
-                        compareInput(value, coder, logicalLength, offsets[middle], lengths[middle]);
-                if (comparison == 0) {
-                    return middle;
-                }
-                if (comparison < 0) {
-                    high = middle - 1;
-                } else {
-                    low = middle + 1;
-                }
-            }
-            return -1;
-        }
-
         M3StringAtom atom(int row) {
             M3StringAtom result = atoms[row];
             if (result != null) {
@@ -908,22 +848,6 @@ final class M3StringPool {
                 }
                 return result;
             }
-        }
-
-        private int compareInput(
-                byte[] value, byte coder, int logicalLength, int offset, int length) {
-            int common = Math.min(logicalLength, length);
-            for (int index = 0; index < common; index++) {
-                char left =
-                        coder == String.LATIN1
-                                ? (char) (value[index] & 0xff)
-                                : StringUTF16.charAt(value, index);
-                char right = mappedUnit(offset, index);
-                if (left != right) {
-                    return left - right;
-                }
-            }
-            return logicalLength - length;
         }
 
         private char mappedUnit(int offset, int index) {
