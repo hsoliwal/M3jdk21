@@ -46,7 +46,10 @@ rejected. Legacy input receives the explicit canonical payload `{}`.
 The field-level donor mapping is maintained in
 `m3/lexicon/synexia-precompute-field-map.tsv`; it covers the `IndexWordFacts`,
 `IndexWordSignalEnrichment`, `IndexWordSignalProfile` and `IndexWordSignalFlags`
-families without making their values part of `java.lang.String`.
+families without making their values part of `java.lang.String`. Its
+`donor_java_type` column records the inspected scalar or relation-array shape
+(`int`, `long`, `int[]`, or `long[]`) so future validators can reject shape
+drift without interpreting the language metadata as String semantics.
 
 `source_id + record_id` is the immutable source identity. The exporter rejects
 duplicates, unknown source families, source-path drift, empty fields and

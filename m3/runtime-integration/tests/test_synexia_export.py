@@ -213,11 +213,13 @@ class SynexiaExportTest(unittest.TestCase):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
         with (ROOT / "m3/lexicon/synexia-precompute-field-map.tsv").open(
                 encoding="utf-8", newline="") as stream:
-            mapped = {
-                row["canonical_payload_field"]
-                for row in csv.DictReader(stream, delimiter="\t")
-                if row["status"] == "MAPPED"
-            }
+            rows = list(csv.DictReader(stream, delimiter="\t"))
+        mapped = {row["canonical_payload_field"] for row in rows if row["status"] == "MAPPED"}
+        field_types = {row["canonical_payload_field"]: row["donor_java_type"] for row in rows}
+        self.assertEqual("long[]", field_types["concept_ids"])
+        self.assertEqual("int[]", field_types["memberships"])
+        self.assertEqual("long", field_types["lexicon_fingerprint"])
+        self.assertTrue(all(field_types.values()))
         for source_id in ("dictlang.dictionary", "dictlang.frequency",
                           "dictlang.thesaurus", "dictlang.antonyms"):
             required = set(sources[source_id]["precompute_fields"].split(","))

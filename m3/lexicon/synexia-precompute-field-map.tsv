@@ -1,28 +1,28 @@
-donor_type	donor_field	canonical_payload_field	m3jdk_storage	status	preservation_rule
-IndexWordFacts	languageId	language_id	synexia.records.tsv:precompute_payload	MAPPED	operator-supplied value is preserved at source_id+record_id; no String semantic
-IndexWordFacts	wordCount	word_count	synexia.records.tsv:precompute_payload	MAPPED	operator-supplied value is preserved without recomputation
-IndexWordFacts	lexiconFingerprint	lexicon_fingerprint	synexia.records.tsv:precompute_payload	MAPPED	fingerprint remains donor-owned and opaque
-IndexWordFacts	totalCorpusTokens	total_corpus_tokens	synexia.records.tsv:precompute_payload	MAPPED	corpus aggregate remains language-layer metadata
-IndexWordFacts	totalDocuments	total_documents	synexia.records.tsv:precompute_payload	MAPPED	document aggregate remains language-layer metadata
-IndexWordFacts	flags	flags	synexia.records.tsv:precompute_payload	MAPPED	bit/enum flags are retained, not converted into String flags
-IndexWordFacts	corpusCount	corpus_count	synexia.records.tsv:precompute_payload	MAPPED	per-word frequency value is retained exactly as supplied
-IndexWordFacts	documentFrequency	document_frequency	synexia.records.tsv:precompute_payload	MAPPED	per-word document value is retained exactly as supplied
-IndexWordFacts	membershipCount/membershipAt	memberships	synexia.records.tsv:precompute_payload	MAPPED	ordered relation IDs retain donor order and ownership
-IndexWordFacts	conceptCount/conceptAt	concept_ids	synexia.records.tsv:precompute_payload	MAPPED	ordered concept IDs retain donor order and ownership
-IndexWordFacts	subjectCount/subjectAt	subjects	synexia.records.tsv:precompute_payload	MAPPED	ordered subject IDs retain donor order and ownership
-IndexWordFacts	expansionSize/expansionWordIdAt	expansion_word_ids	synexia.records.tsv:precompute_payload	MAPPED	ordered expansion IDs retain donor order and ownership
-IndexWordSignalEnrichment	stemId	stem_id	synexia.records.tsv:precompute_payload	MAPPED	optional enrichment ID uses explicit NONE/default semantics in source payload
-IndexWordSignalEnrichment	lemmaId	lemma_id	synexia.records.tsv:precompute_payload	MAPPED	optional enrichment ID uses explicit NONE/default semantics in source payload
-IndexWordSignalEnrichment	phoneticId	phonetic_id	synexia.records.tsv:precompute_payload	MAPPED	optional enrichment ID uses explicit NONE/default semantics in source payload
-IndexWordSignalEnrichment	posMask	pos_mask	synexia.records.tsv:precompute_payload	MAPPED	bit mask remains donor-owned and opaque
-IndexWordSignalEnrichment	morphologyMask	morphology_mask	synexia.records.tsv:precompute_payload	MAPPED	bit mask remains donor-owned and opaque
-IndexWordSignalProfile	lexicalRank	lexical_rank	synexia.records.tsv:precompute_payload	MAPPED	lexical ordering signal remains source metadata
-IndexWordSignalProfile	utf16Length	utf16_length	synexia.records.tsv:precompute_payload	MAPPED	owner-provided value is retained; independently verified M3StringFacts remain authoritative for image text
-IndexWordSignalProfile	codePointLength	code_point_length	synexia.records.tsv:precompute_payload	MAPPED	owner-provided value is retained; independently verified M3StringFacts remain authoritative for image text
-IndexWordSignalProfile	firstCodePoint	first_code_point	synexia.records.tsv:precompute_payload	MAPPED	boundary signal remains donor-owned and opaque
-IndexWordSignalProfile	lastCodePoint	last_code_point	synexia.records.tsv:precompute_payload	MAPPED	boundary signal remains donor-owned and opaque
-IndexWordSignalProfile	scriptOrdinal	script_ordinal	synexia.records.tsv:precompute_payload	MAPPED	Unicode script signal remains language-layer metadata
-IndexWordSignalProfile	presence64	presence64	synexia.records.tsv:precompute_payload	MAPPED	presence signature remains donor-owned and opaque
-IndexWordSignalProfile	simHash64	sim_hash64	synexia.records.tsv:precompute_payload	MAPPED	probabilistic signature remains donor-owned and opaque
-IndexWordSignalProfile	frequencyRank	frequency_rank	synexia.records.tsv:precompute_payload	MAPPED	frequency ordering remains source metadata, never image_row identity
-IndexWordSignalFlags	EMPTY/ASCII/LATIN1/...	flags	synexia.records.tsv:precompute_payload	MAPPED	profile flags are preserved only when supplied; bounded M3StringFacts remain independently verified
+donor_type	donor_field	donor_java_type	canonical_payload_field	m3jdk_storage	status	preservation_rule
+IndexWordFacts	languageId	int	language_id	synexia.records.tsv:precompute_payload	MAPPED	operator-supplied value is preserved at source_id+record_id; no String semantic
+IndexWordFacts	wordCount	int	word_count	synexia.records.tsv:precompute_payload	MAPPED	operator-supplied value is preserved without recomputation
+IndexWordFacts	lexiconFingerprint	long	lexicon_fingerprint	synexia.records.tsv:precompute_payload	MAPPED	fingerprint remains donor-owned and opaque
+IndexWordFacts	totalCorpusTokens	long	total_corpus_tokens	synexia.records.tsv:precompute_payload	MAPPED	corpus aggregate remains language-layer metadata
+IndexWordFacts	totalDocuments	long	total_documents	synexia.records.tsv:precompute_payload	MAPPED	document aggregate remains language-layer metadata
+IndexWordFacts	flags	int	flags	synexia.records.tsv:precompute_payload	MAPPED	bit/enum flags are retained, not converted into String flags
+IndexWordFacts	corpusCount	long	corpus_count	synexia.records.tsv:precompute_payload	MAPPED	per-word frequency value is retained exactly as supplied
+IndexWordFacts	documentFrequency	int	document_frequency	synexia.records.tsv:precompute_payload	MAPPED	per-word document value is retained exactly as supplied
+IndexWordFacts	membershipCount/membershipAt	int[]	memberships	synexia.records.tsv:precompute_payload	MAPPED	ordered relation IDs retain donor order and ownership
+IndexWordFacts	conceptCount/conceptAt	long[]	concept_ids	synexia.records.tsv:precompute_payload	MAPPED	ordered concept IDs retain donor order and ownership
+IndexWordFacts	subjectCount/subjectAt	long[]	subjects	synexia.records.tsv:precompute_payload	MAPPED	ordered subject IDs retain donor order and ownership
+IndexWordFacts	expansionSize/expansionWordIdAt	long[]	expansion_word_ids	synexia.records.tsv:precompute_payload	MAPPED	ordered expansion IDs retain donor order and ownership
+IndexWordSignalEnrichment	stemId	long	stem_id	synexia.records.tsv:precompute_payload	MAPPED	optional enrichment ID uses explicit NONE/default semantics in source payload
+IndexWordSignalEnrichment	lemmaId	long	lemma_id	synexia.records.tsv:precompute_payload	MAPPED	optional enrichment ID uses explicit NONE/default semantics in source payload
+IndexWordSignalEnrichment	phoneticId	long	phonetic_id	synexia.records.tsv:precompute_payload	MAPPED	optional enrichment ID uses explicit NONE/default semantics in source payload
+IndexWordSignalEnrichment	posMask	int	pos_mask	synexia.records.tsv:precompute_payload	MAPPED	bit mask remains donor-owned and opaque
+IndexWordSignalEnrichment	morphologyMask	int	morphology_mask	synexia.records.tsv:precompute_payload	MAPPED	bit mask remains donor-owned and opaque
+IndexWordSignalProfile	lexicalRank	int	lexical_rank	synexia.records.tsv:precompute_payload	MAPPED	lexical ordering signal remains source metadata
+IndexWordSignalProfile	utf16Length	int	utf16_length	synexia.records.tsv:precompute_payload	MAPPED	owner-provided value is retained; independently verified M3StringFacts remain authoritative for image text
+IndexWordSignalProfile	codePointLength	int	code_point_length	synexia.records.tsv:precompute_payload	MAPPED	owner-provided value is retained; independently verified M3StringFacts remain authoritative for image text
+IndexWordSignalProfile	firstCodePoint	int	first_code_point	synexia.records.tsv:precompute_payload	MAPPED	boundary signal remains donor-owned and opaque
+IndexWordSignalProfile	lastCodePoint	int	last_code_point	synexia.records.tsv:precompute_payload	MAPPED	boundary signal remains donor-owned and opaque
+IndexWordSignalProfile	scriptOrdinal	int	script_ordinal	synexia.records.tsv:precompute_payload	MAPPED	Unicode script signal remains language-layer metadata
+IndexWordSignalProfile	presence64	long	presence64	synexia.records.tsv:precompute_payload	MAPPED	presence signature remains donor-owned and opaque
+IndexWordSignalProfile	simHash64	long	sim_hash64	synexia.records.tsv:precompute_payload	MAPPED	probabilistic signature remains donor-owned and opaque
+IndexWordSignalProfile	frequencyRank	int	frequency_rank	synexia.records.tsv:precompute_payload	MAPPED	frequency ordering remains source metadata, never image_row identity
+IndexWordSignalFlags	EMPTY/ASCII/LATIN1/...	int	flags	synexia.records.tsv:precompute_payload	MAPPED	profile flags are preserved only when supplied; bounded M3StringFacts remain independently verified
