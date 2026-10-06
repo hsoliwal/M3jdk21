@@ -1,0 +1,81 @@
+name: M3 JEP 484 Class-File API path map
+
+on:
+  push:
+    branches:
+      - "m3/jep484-path-map-20261006"
+  pull_request:
+    paths:
+      - "m3/backports/recipes/jep-484-classfile-api/**"
+      - ".github/workflows/m3-jep484-classfile-path-map.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  map:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Diff hygiene
+        run: git diff --check
+
+      - name: Unit-test mapper
+        run: python3 m3/backports/recipes/jep-484-classfile-api/test_path_map.py
+
+      - name: Fetch exact OpenJDK donor refs
+        run: |
+          set -euo pipefail
+          git remote add m3-upstream https://github.com/openjdk/jdk.git
+          git fetch --no-tags --filter=blob:none m3-upstream             refs/tags/jdk-21+35:refs/tags/m3-jdk21             refs/tags/jdk-24+36:refs/tags/m3-jdk24
+
+      - name: Materialize exact path/content map
+        run: |
+          set -euo pipefail
+          out="$RUNNER_TEMP/jep484-map"
+          python3 m3/backports/recipes/jep-484-classfile-api/path_map.py             --repo . --jdk21-ref refs/tags/m3-jdk21 --jdk24-ref refs/tags/m3-jdk24             --out "$out"
+          python3 - "$out/summary.json" <<'PY'
+          import json,sys
+          d=json.load(open(sys.argv[1],encoding="utf-8"))
+          expected={
+            "jdk21_internal_files":241,
+            "jdk24_combined_files":245,
+            "direct_descendants":238,
+            "unmapped_jdk21":3,
+            "ambiguous":0,
+            "added_jdk24":7,
+            "mutation_authority":False,
+            "promotion_authority":False,
+          }
+          for key,value in expected.items():
+              if d.get(key) != value:
+                  raise SystemExit(f"{key}: expected {value!r}, got {d.get(key)!r}")
+          PY
+
+      - name: Re-run existing inventory verifier
+        run: |
+          python3 m3/backports/recipes/jep-484-classfile-api/verify.py
+          python3 m3/backports/recipes/jep-484-classfile-api/test_verify.py
+
+      - name: Prove inventory recipe remains non-mutating
+        run: |
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3Jep484ClassfileApiInventoryRecipeTest,M3RecipeScopeDeclarationTest             -Dsurefire.failIfNoSpecifiedTests=false test
+
+      - name: Upload map evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: jep484-path-map-${{ github.sha }}
+          path: ${{ runner.temp }}/jep484-map
+          if-no-files-found: error
+          retention-days: 7
