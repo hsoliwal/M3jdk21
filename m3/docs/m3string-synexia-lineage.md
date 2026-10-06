@@ -144,3 +144,17 @@ The Synexia compiled-search lineage included both forward and reverse prefix fac
 retains both in the bounded `M3StringSearchPrecompute.Plan`: ordinary `indexOf` uses forward
 KMP, while `lastIndexOf` scans backward with a reverse-prefix KMP lane and returns the first
 reverse match. The memory ceiling formula explicitly budgets both primitive int lanes.
+
+
+## Exact UTF-16 position-mask convergence
+
+Synexia commit `f9634d59d85864aa34f6829ccdda64a732465e80` is the mature position-mask
+donor step. M3JDK adapts only the String-search geometry, not Synexia fuzzy-search ownership:
+
+- `M3StringPositionPrecompute` is a separate weak owner+coordinate cache;
+- 64-code-unit block signals cheaply reject impossible blocks;
+- touched candidate blocks lazily freeze exact sorted UTF-16 unit -> 64-bit position masks;
+- exact masks are used only to locate candidates for `indexOf` / `lastIndexOf`;
+- the cache is bounded to 64 sources and 32,768 UTF-16 units per source;
+- the explicit primitive-retention ceiling includes both block signals and worst-case exact masks;
+- no position arrays are fields of `M3String`, `M3StringOwner`, or `M3StringFacts`.
