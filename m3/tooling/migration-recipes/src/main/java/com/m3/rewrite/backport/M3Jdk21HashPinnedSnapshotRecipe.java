@@ -63,8 +63,9 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
     @JsonCreator
     public M3Jdk21HashPinnedSnapshotRecipe(@JsonProperty("crateName") String crateName) {
         if (crateName == null
-                || !crateName.matches("jdk(?:22|23|24|25|26|27)-[a-z0-9][a-z0-9-]{0,63}")) {
-            throw new IllegalArgumentException("invalid M3JDK21 backport crate");
+                || !crateName.matches(
+                        "(?:jdk(?:22|23|24|25|26|27)|synexia)-[a-z0-9][a-z0-9-]{0,63}")) {
+            throw new IllegalArgumentException("invalid M3JDK21 Java snapshot crate");
         }
         this.crateName = crateName;
     }
@@ -75,12 +76,12 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
 
     @Override
     public String getDisplayName() {
-        return "M3JDK21 hash-pinned donor snapshot";
+        return "M3JDK21 hash-pinned Java snapshot";
     }
 
     @Override
     public String getDescription() {
-        return "Replays one reviewed OpenJDK donor crate only from exact JDK21 preimages or already-converged outputs.";
+        return "Replays one reviewed OpenJDK donor or Apache-2.0 Synexia crate only from exact JDK21 preimages or already-converged outputs.";
     }
 
     @Override
@@ -284,7 +285,13 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
 
     static boolean jdkJavaPath(String value) {
         if (value == null
-                || !(value.startsWith("src/") || value.startsWith("test/"))
+                || !(value.startsWith("src/")
+                        || value.startsWith("test/")
+                        || value.startsWith("m3/ports/")
+                        || value.startsWith(".m3/openrewrite-recipes/src/main/java/")
+                        || value.startsWith(".m3/openrewrite-recipes/src/test/java/")
+                        || value.startsWith("m3/tooling/migration-recipes/src/main/java/")
+                        || value.startsWith("m3/tooling/migration-recipes/src/test/java/"))
                 || !value.endsWith(".java")
                 || value.indexOf('\\') >= 0
                 || value.length() > 4096) {
