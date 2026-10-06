@@ -13,3 +13,12 @@ name_map	Synexia MIndexString -> M3JDK java.lang.M3String
 precompute_rule	implementation-internal in both worlds; never canonical spelling
 shadow_rule	byte[]/char[]/UTF buffers are compatibility shadows only
 promotion_rule	M3JDK owns ABI/layout/bootstrap/build/runtime/JNI tests and final promotion
+authority_origin_commit	1b954f886f0a40684c84bac443851d9fe4af1764
+authority_origin_pr_status	hsoliwal/com.synexia#9489 closed historical review; packet present on develop
+executable_verifier_recipe	com.synexia.rewrite.M3StringCanonicalDagInvariant
+executable_verifier_path	synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3StringCanonicalDagInvariantRecipe.java
+executable_verifier_tracking_ref	refs/heads/m3/string-canonical-dag-recipe-authority-20261006
+executable_verifier_pr	hsoliwal/com.synexia#9524
+authority_source_lock_path	synexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006/source-lock.json
+authority_source_lock_commit	5fb52a051fa0e2722c2f69f2e22ac7f330c91ce2
+authority_source_lock_blob	0230b1a0864266d9243c161f7541c01492c9626e
