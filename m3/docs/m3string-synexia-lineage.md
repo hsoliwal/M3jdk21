@@ -227,3 +227,16 @@ cached as M3 text. The immutable M3 search target may nevertheless reuse its exi
 - each invocation reads the builder's current bytes/coder directly;
 - builder mutation between calls is therefore observed immediately;
 - target M3 text is never materialized through `String.value()`.
+
+
+## Position-precomputed line traversal
+
+`String.lines()` is now a second real consumer of the bounded position-mask owner. Long M3-backed
+strings locate the next CR or LF with one `indexOfEither` block walk:
+
+- tier-1 block signals reject blocks containing neither terminator;
+- touched candidate blocks reuse the exact sorted unit->64-bit position masks;
+- CRLF is still exact-verified as a pair;
+- short/out-of-budget strings fall back to one linear pass;
+- allocation failure in the optional cache is fail-open;
+- emitted lines remain M3 substring coordinates and never flatten the source.
