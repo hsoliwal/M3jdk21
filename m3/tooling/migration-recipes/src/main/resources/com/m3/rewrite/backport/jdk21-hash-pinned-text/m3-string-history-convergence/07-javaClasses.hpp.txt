@@ -128,7 +128,7 @@ class java_lang_String : AllStatic {
   static inline typeArrayOop value_no_keepalive(oop java_string);
   static inline oop m3_storage(oop java_string);
   static inline oop m3_storage_no_keepalive(oop java_string);
-  static inline bool is_m3_joined(oop java_string);
+  static inline bool is_m3_backed(oop java_string);
   static inline jchar char_at(oop java_string, int index);
   static void copy_chars(oop java_string, int start, int len, jchar* destination);
   static inline bool hash_is_set(oop string);
