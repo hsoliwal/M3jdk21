@@ -5307,6 +5307,20 @@ public final class String
     String(AbstractStringBuilder asb, Void sig) {
         byte[] val = asb.getValue();
         int length = asb.length();
+
+        M3String direct =
+                maybeAdmitCompact(
+                        val,
+                        0,
+                        length,
+                        asb.isLatin1() ? LATIN1 : UTF16);
+        if (direct != null) {
+            this.value = direct.compatibilityValue();
+            this.coder = direct.coder();
+            this.m3 = direct;
+            return;
+        }
+
         byte[] candidate;
         byte candidateCoder;
         if (asb.isLatin1()) {
@@ -5323,10 +5337,9 @@ public final class String
                 candidateCoder = UTF16;
             }
         }
-        M3String storage = maybeAdmit(candidate, candidateCoder);
-        this.value = storage == null ? candidate : storage.compatibilityValue();
-        this.coder = storage == null ? candidateCoder : storage.coder();
-        this.m3 = storage;
+        this.value = candidate;
+        this.coder = candidateCoder;
+        this.m3 = null;
     }
 
    /*
@@ -5337,6 +5350,16 @@ public final class String
         this.value = storage == null ? value : storage.compatibilityValue();
         this.coder = storage == null ? coder : storage.coder();
         this.m3 = storage;
+    }
+
+    private static M3String maybeAdmitCompact(
+            byte[] value, int sourceOffset, int length, byte sourceCoder) {
+        return M3_JOINED_STRINGS
+                && jdk.internal.misc.VM.isBooted()
+                && M3String.admissionEnabled()
+                && length != 0
+                ? M3String.admitCompactBytes(value, sourceOffset, length, sourceCoder)
+                : null;
     }
 
     private static M3String maybeAdmit(char[] value, int offset, int length) {
