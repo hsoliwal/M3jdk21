@@ -105,6 +105,16 @@ for fragment in [
 # Position masks are a separate bounded weak-owner lane. They store one conservative signal per
 # 64 UTF-16 units and may skip blocks only on a negative signal.
 for fragment in [
+    "final AtomicReferenceArray<ExactBlock> exact;",
+    "Arrays.binarySearch(units, unit)",
+    "Long.numberOfTrailingZeros(positions)",
+    "Long.numberOfLeadingZeros(positions)",
+    "MAX_SOURCE_UNITS * (Character.BYTES + Long.BYTES)",
+]:
+    if fragment not in position_precompute:
+        fail(f"M3 exact position-mask layer missing: {fragment}")
+
+for fragment in [
     "private static final int BLOCK_SIZE = 1 << BLOCK_SHIFT;",
     "private static final int SLOTS = 64;",
     "private static final int MAX_SOURCE_UNITS = 32_768;",
