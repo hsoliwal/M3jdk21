@@ -240,3 +240,17 @@ strings locate the next CR or LF with one `indexOfEither` block walk:
 - short/out-of-budget strings fall back to one linear pass;
 - allocation failure in the optional cache is fail-open;
 - emitted lines remain M3 substring coordinates and never flatten the source.
+
+
+## UTF-16 code-point boundary precompute
+
+Repeated code-point geometry queries now have a dedicated bounded owner rather than forcing
+range-fact rescans:
+
+- `M3StringCodePointPrecompute` weakly keys exact owner+coordinate values;
+- 64 entries, at most 32,768 UTF-16 units each;
+- metadata is only paired-low-surrogate continuation masks plus per-block prefix counts;
+- `String.codePointCount` consumes exact range counts;
+- `String.offsetByCodePoints` uses boundary rank/select with correct mid-surrogate start behavior;
+- out-of-budget/OOME cases fall back to the existing exact JDK path;
+- no code-point arrays or continuation masks are fields of `M3String` or `M3StringFacts`.
