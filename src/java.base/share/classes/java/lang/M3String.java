@@ -528,6 +528,7 @@ final class M3String implements CharSequence {
     boolean startsWith(M3String prefix, int offset) {
         M3String checked = Objects.requireNonNull(prefix, "prefix");
         if (offset < 0 || offset > length() - checked.length()) return false;
+        if (offset == 0 && sameCoordinate(checked)) return true;
         M3StringFacts sourceFacts = facts();
         M3StringFacts prefixFacts = checked.facts();
         if (!sourceFacts.mayContain(prefixFacts)) return false;
