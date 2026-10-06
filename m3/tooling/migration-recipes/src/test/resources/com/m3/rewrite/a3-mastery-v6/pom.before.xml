@@ -107,32 +107,6 @@
         </plugins>
       </build>
     </profile>
-    <profile>
-      <id>m3-a3-mastery-v6</id>
-      <build>
-        <plugins>
-          <plugin>
-            <groupId>org.openrewrite.maven</groupId>
-            <artifactId>rewrite-maven-plugin</artifactId>
-            <version>5.23.1</version>
-            <dependencies>
-              <dependency>
-                <groupId>com.m3.tooling</groupId>
-                <artifactId>migration-recipes</artifactId>
-                <version>${project.version}</version>
-              </dependency>
-            </dependencies>
-            <configuration>
-              <activeRecipes>
-                <recipe>com.m3.a3.MasteryV6</recipe>
-              </activeRecipes>
-              <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
-              <failOnDryRunResults>false</failOnDryRunResults>
-            </configuration>
-          </plugin>
-        </plugins>
-      </build>
-    </profile>
   </profiles>
 
 </project>
