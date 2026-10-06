@@ -1,0 +1,13 @@
+metric	value	note
+jdk21_internal_java_files	241	Existing jdk.internal.classfile engine in M3JDK21 master.
+jdk21_public_java_files	0	java.lang.classfile package absent on Java21 baseline.
+jdk24_public_java_files	161	Final java.lang.classfile subtree at jdk-24+36.
+jdk24_internal_java_files	84	Retained jdk.internal.classfile components/implementation at jdk-24+36.
+jdk24_combined_java_files	245	Public + retained internal final engine.
+normalized_direct_descendants	238	JDK21 internal relative paths found in JDK24 after Classfile -> ClassFile spelling normalization.
+normalized_removed	3	JDK21 internal owners with no direct normalized JDK24 path.
+normalized_added	7	JDK24 final owners with no direct normalized JDK21 path.
+public_history_commits	59	Commits touching java/lang/classfile from first preview transition through finalization.
+jep457_transition_touched_paths	300	Whole commit touched paths for 8308753.
+jep466_transition_touched_paths	1	8326744 is preview-stage metadata only; not the full second-preview evolution.
+jep484_finalization_touched_paths	165	Whole finalization commit touched paths for 8334714.
