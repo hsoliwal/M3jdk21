@@ -1,0 +1,3 @@
+order	jbs	commit	role	disposition
+1	JDK-8340327	3f53d571343792341481f4d15970cdc0bcd76a5e	Named standard-parameter public-key framework	REQUIRED_PREREQUISITE
+2	JDK-8298390	13987b4244614d594dc8f94c288eddb6239a066f	JEP 496 ML-KEM implementation	TARGET_FEATURE
