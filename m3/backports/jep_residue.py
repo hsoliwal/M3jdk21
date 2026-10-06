@@ -55,6 +55,9 @@ class Residue:
     next_action: str
     default_java21: str
     priority_classification: str
+    receipt_state: str
+    promotion: str
+    receipt_next_action: str
 
 
 def read_tsv(path: Path) -> list[dict[str, str]]:
@@ -62,8 +65,21 @@ def read_tsv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(handle, delimiter="\t"))
 
 
-def _recipe_evidence(root: Path, jep: int) -> tuple[str, tuple[str, ...]]:
+def _receipt(packet_dir: Path) -> dict[str, str]:
+    path = packet_dir / "CURRENT_TREE_RECEIPT.tsv"
+    if not path.is_file():
+        return {}
+    rows = read_tsv(path)
+    return {
+        row.get("field", ""): row.get("value", "")
+        for row in rows
+        if row.get("field", "")
+    }
+
+
+def _recipe_evidence(root: Path, jep: int) -> tuple[str, tuple[str, ...], dict[str, str]]:
     evidence: list[str] = []
+    receipt: dict[str, str] = {}
 
     recipes = root / "m3" / "backports" / "recipes"
     if recipes.is_dir():
@@ -71,6 +87,11 @@ def _recipe_evidence(root: Path, jep: int) -> tuple[str, tuple[str, ...]]:
         for candidate in sorted(recipes.iterdir()):
             if candidate.is_dir() and candidate.name.startswith(prefix):
                 evidence.append(candidate.relative_to(root).as_posix())
+                candidate_receipt = _receipt(candidate)
+                if candidate_receipt:
+                    if receipt and receipt != candidate_receipt:
+                        raise ValueError(f"conflicting current-tree receipts for JEP {jep}")
+                    receipt = candidate_receipt
 
     recipe_java = (
         root
@@ -97,7 +118,7 @@ def _recipe_evidence(root: Path, jep: int) -> tuple[str, tuple[str, ...]]:
         state = "RECIPE_CLASS"
     else:
         state = "NO_RECIPE_EVIDENCE"
-    return state, tuple(evidence)
+    return state, tuple(evidence), receipt
 
 
 def queue(
@@ -119,7 +140,7 @@ def queue(
         disposition = row["disposition"]
         if disposition not in PENDING:
             continue
-        state, evidence = _recipe_evidence(root, jep)
+        state, evidence, receipt = _recipe_evidence(root, jep)
         pending.append(
             (
                 PRIORITY[disposition],
@@ -128,12 +149,13 @@ def queue(
                 row,
                 state,
                 evidence,
+                receipt,
             )
         )
 
     pending.sort(key=lambda item: (item[0], item[1], item[2]))
     result: list[Residue] = []
-    for order, (priority, release, jep, row, state, evidence) in enumerate(pending):
+    for order, (priority, release, jep, row, state, evidence, receipt) in enumerate(pending):
         priority_row = priority_by_jep.get(jep, {})
         result.append(
             Residue(
@@ -149,6 +171,13 @@ def queue(
                 next_action=ACTION[row["disposition"]],
                 default_java21=priority_row.get("default_java21", ""),
                 priority_classification=priority_row.get("classification", ""),
+                receipt_state=(
+                    receipt.get("current_tree_state")
+                    or receipt.get("packet_state")
+                    or ""
+                ),
+                promotion=receipt.get("promotion", ""),
+                receipt_next_action=receipt.get("next_action", ""),
             )
         )
     return result
@@ -170,6 +199,9 @@ def write_tsv(items: Sequence[Residue], out) -> None:
             "next_action",
             "default_java21",
             "priority_classification",
+            "receipt_state",
+            "promotion",
+            "receipt_next_action",
         )
     )
     for item in items:
@@ -187,6 +219,9 @@ def write_tsv(items: Sequence[Residue], out) -> None:
                 item.next_action,
                 item.default_java21,
                 item.priority_classification,
+                item.receipt_state,
+                item.promotion,
+                item.receipt_next_action,
             )
         )
 
