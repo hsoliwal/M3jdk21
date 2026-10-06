@@ -7,7 +7,8 @@ inventory	INVENTORY	FILE	false	false	false	m3/backports/inventory.py	review-jni-
 compatibility-proof	COMPATIBILITY	FILE	false	false	false	m3/backports/compatibility_queue.py	inventory
 dependency-closure	COMPATIBILITY	FILE	false	false	false	dependency-review	compatibility-proof
 file-delta	INVENTORY	FILE	false	false	false	m3/backports/file_delta_inventory.py	dependency-closure
-recipe-crate	RECIPE	FILE	true	false	false	com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe	file-delta
+a3-preparation	RECIPE	FILE	false	false	false	com.m3.tooling.dag.M3A3BackportPreparation	file-delta
+recipe-crate	RECIPE	FILE	true	false	false	com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe	a3-preparation
 recipe-junit	VERIFICATION	FILE	false	false	false	mvn:migration-recipes:test	recipe-crate
 diff	VERIFICATION	FILE	false	false	false	git-diff	recipe-junit
 lint	VERIFICATION	FILE	false	false	false	lint	diff
