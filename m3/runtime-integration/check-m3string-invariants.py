@@ -331,6 +331,27 @@ for fragment in [
     if fragment not in stringtable:
         fail(f"M3 StringTable hash path missing: {fragment}")
 
+# Expensive donor facts with no JDK21 semantic consumer are intentional NO_PORTs. Adding one of
+# these java.lang owners requires an explicit architecture/invariant revision and a real consumer.
+for forbidden_path in [
+    "src/java.base/share/classes/java/lang/M3StringPrefixZ.java",
+    "src/java.base/share/classes/java/lang/M3StringPalindromePrecompute.java",
+    "src/java.base/share/classes/java/lang/M3StringSuffixDecision.java",
+    "src/java.base/share/classes/java/lang/M3StringLcpPrecompute.java",
+    "src/java.base/share/classes/java/lang/M3StringSuffixIndex.java",
+]:
+    if (ROOT / forbidden_path).exists():
+        fail(f"unreviewed no-port String precompute owner appeared: {forbidden_path}")
+
+for required_no_port in [
+    "MIndexPrefixZ / MIndexPrefixZCache\tno current M3JDK21 owner\tDONOR_ONLY_NO_JDK21_CONSUMER",
+    "MIndexPalindromePrecompute / Manacher facts\tno current M3JDK21 owner\tDONOR_ONLY_NO_JDK21_CONSUMER",
+    "MIndexSuffixDecision / suffix DFA facts\tno current M3JDK21 owner\tDONOR_ONLY_NO_JDK21_CONSUMER",
+    "LCP range-minimum precompute\tno current M3JDK21 suffix-index owner\tDONOR_ONLY_NO_JDK21_CONSUMER",
+]:
+    if required_no_port not in port_map:
+        fail(f"String donor no-port classification missing: {required_no_port}")
+
 # Donor class naming must not leak back into live VM symbols/layout.
 for path, text in [
     ("vmSymbols.hpp", symbols),
