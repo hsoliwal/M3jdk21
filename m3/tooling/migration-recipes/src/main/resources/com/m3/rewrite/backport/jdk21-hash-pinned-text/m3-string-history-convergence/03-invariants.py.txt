@@ -28,6 +28,7 @@ search_precompute = read("src/java.base/share/classes/java/lang/M3StringSearchPr
 position_precompute = read("src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java")
 tq = read("src/java.base/share/classes/jdk/internal/mindex/M3TQ.java")
 string = read("src/java.base/share/classes/java/lang/String.java")
+abstract_builder = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
 symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
 classes = read("src/hotspot/share/classfile/vmClassMacros.hpp")
 inline = read("src/hotspot/share/classfile/javaClasses.inline.hpp")
@@ -71,6 +72,17 @@ for path, text in [
     if retained_arrays:
         fail(f"{path} retains array field(s): {retained_arrays!r}")
 
+# Replacement-enabled generic encoders reproduce JDK21's ArrayEncoder ASCII-compatible
+# fast path without materializing a source byte[]: fixed ASCII facts + canonical bulk projection.
+for fragment in [
+    "encoder instanceof ArrayEncoder arrayEncoder",
+    "arrayEncoder.isASCIICompatible()",
+    "if (prepared.ascii)",
+    "getBytes(output, 0, 0, String.LATIN1, length);",
+]:
+    if fragment not in m3:
+        fail(f"M3 generic ASCII-compatible encoder fast path missing: {fragment}")
+
 # Encoding facts must be executable, not decorative metadata.
 for fragment in [
     "if (prepared.ascii) {",
@@ -80,6 +92,18 @@ for fragment in [
 ]:
     if fragment not in m3:
         fail(f"M3 byte precompute fast path missing: {fragment}")
+
+# Bulk byte projection validates coder and byte geometry before descending into owner recursion.
+for fragment in [
+    "destinationCoder != String.LATIN1 && destinationCoder != String.UTF16",
+    "(long) destinationBegin << destinationCoder",
+    "(long) count << destinationCoder",
+]:
+    if fragment not in m3:
+        fail(f"M3 bulk byte entry validation missing: {fragment}")
+
+if "storage.getBytes(dst, srcBegin, dstBegin, LATIN1, srcEnd - srcBegin);" not in string:
+    fail("deprecated String.getBytes range lost M3 bulk projection")
 
 # Byte/char projections must descend through canonical owner geometry, not walk M3 tuple
 # charAt one unit at a time.
@@ -104,6 +128,14 @@ for fragment in [
 
 # Position masks are a separate bounded weak-owner lane. They store one conservative signal per
 # 64 UTF-16 units and may skip blocks only on a negative signal.
+for fragment in [
+    "catch (OutOfMemoryError unavailable)",
+    "return linearIndexOf(source, unit, from, end);",
+    "return linearLastIndexOf(source, unit, from);",
+]:
+    if fragment not in position_precompute:
+        fail(f"M3 position precompute fail-open path missing: {fragment}")
+
 for fragment in [
     "final AtomicReferenceArray<ExactBlock> exact;",
     "Arrays.binarySearch(units, unit)",
@@ -154,6 +186,26 @@ for fragment in [
     if fragment not in string:
         fail(f"String supplementary M3 route missing: {fragment}")
 
+for fragment in [
+    "if (checked.length() == 1) return indexOf(checked.charAt(0), from, end);",
+    "if (checked.length() == 1) return lastIndexOf(checked.charAt(0), maximumStart);",
+]:
+    if fragment not in m3:
+        fail(f"M3 one-unit literal search lost position-precompute route: {fragment}")
+
+# Prepared literal AUTO search follows the mature Synexia convergence: bounded 256-entry
+# conservative BMH skip metadata for long patterns, with existing KMP as the exact adversarial
+# fallback. Low-byte collisions may only reduce skips; KMP remains semantic authority.
+for fragment in [
+    "int[] skip256 = new int[256];",
+    "skip256[pattern.charAt(index) & 255] = length - 1 - index;",
+    "if (plan.patternLength >= 8)",
+    "failedComparisonWork > (long) plan.patternLength + 2L * (at - fromIndex)",
+    "return kmp(source, pattern, plan, at, endIndex);",
+]:
+    if fragment not in search_precompute:
+        fail(f"M3 adaptive BMH/KMP convergence missing: {fragment}")
+
 # Exact trigram membership is owned by M3TQ.Facts and reused by a separate bounded weak
 # source-range cache. Do not duplicate exact trigram arrays in M3StringFacts.
 for fragment in [
@@ -167,7 +219,9 @@ for fragment in [
         fail(f"M3 exact trigram search reuse missing: {fragment}")
 for fragment in [
     "static long maximumRetainedPrimitiveBytes()",
-    "(long) SLOTS * MAX_PATTERN_UNITS * (2L * Integer.BYTES + Long.BYTES)",
+    "(long) SLOTS * (",
+    "(long) MAX_PATTERN_UNITS * (2L * Integer.BYTES + Long.BYTES)",
+    "256L * Integer.BYTES",
     "(long) SOURCE_SLOTS * MAX_TRIGRAM_SOURCE_UNITS * Long.BYTES",
 ]:
     if fragment not in search_precompute:
@@ -176,6 +230,22 @@ if "public boolean containsAll(Facts required)" not in tq:
     fail("M3TQ exact trigram fact containment missing")
 if "long[] trigram" in facts or "M3TQ.Facts" in facts:
     fail("M3StringFacts illegally owns length-proportional exact trigram state")
+
+# Fixed String facts are opportunistic search filters. Cold search must not force a complete
+# M3StringFacts scan before the dedicated bounded search/position owners execute.
+for fragment in [
+    "M3StringFacts sourceFacts = factsIfPrepared();",
+    "M3StringFacts needleFacts = checked.factsIfPrepared();",
+    "M3StringFacts prepared = factsIfPrepared();",
+]:
+    if fragment not in m3:
+        fail(f"M3 cold-search prepared-fact reuse missing: {fragment}")
+for forbidden in [
+    "if (!facts().mayContainCodeUnit(unit))",
+    "M3StringFacts prepared = facts();\n        if (!prepared.mayContainCodeUnit",
+]:
+    if forbidden in m3:
+        fail(f"M3 cold search forces whole facts: {forbidden}")
 
 # AUTO literal search owns one compact 256-entry BMH skip table and may restart the existing
 # exact KMP lane only at a start already proven unresolved by the conservative skip.
@@ -231,6 +301,12 @@ if "prepared.utf8Length" not in m3 or "prepared.codePointCount" not in m3:
 if "final int utf8Length;" not in facts or "final boolean ascii;" not in facts or "final boolean latin1;" not in facts:
     fail("M3StringFacts lost byte-encoding geometry")
 
+for fragment in [
+    "int found = indexOf(oldChar, 0, length());",
+    "found = cursor < length() ? indexOf(oldChar, cursor, length()) : -1;",
+]:
+    if fragment not in m3:
+        fail(f"M3 char replacement lost position-precompute reuse: {fragment}")
 if "M3String replace(char oldChar, char newChar)" not in m3:
     fail("M3String canonical char replacement path missing")
 if "M3String replace(M3String target, M3String replacement)" not in m3:
@@ -249,6 +325,9 @@ if "private volatile M3String m3;" not in string:
 
 # M3-backed wrappers must not create Java text arrays. Even the shared empty compatibility
 # sentinel is created through the JNI shadow boundary.
+if "String.COMPACT_STRINGS ? String.LATIN1 : String.UTF16" not in m3:
+    fail("M3 canonical empty owner ignores CompactStrings mode")
+
 # M3String may allocate caller-owned byte[] results because getBytes/charset encoding requires
 # real Java arrays. It must not stage canonical text through a Java char[] or retain text arrays.
 if "new char[" in m3:
@@ -331,6 +410,27 @@ for fragment in [
     if fragment not in stringtable:
         fail(f"M3 StringTable hash path missing: {fragment}")
 
+# Expensive donor facts with no JDK21 semantic consumer are intentional NO_PORTs. Adding one of
+# these java.lang owners requires an explicit architecture/invariant revision and a real consumer.
+for forbidden_path in [
+    "src/java.base/share/classes/java/lang/M3StringPrefixZ.java",
+    "src/java.base/share/classes/java/lang/M3StringPalindromePrecompute.java",
+    "src/java.base/share/classes/java/lang/M3StringSuffixDecision.java",
+    "src/java.base/share/classes/java/lang/M3StringLcpPrecompute.java",
+    "src/java.base/share/classes/java/lang/M3StringSuffixIndex.java",
+]:
+    if (ROOT / forbidden_path).exists():
+        fail(f"unreviewed no-port String precompute owner appeared: {forbidden_path}")
+
+for required_no_port in [
+    "MIndexPrefixZ / MIndexPrefixZCache\tno current M3JDK21 owner\tDONOR_ONLY_NO_JDK21_CONSUMER",
+    "MIndexPalindromePrecompute / Manacher facts\tno current M3JDK21 owner\tDONOR_ONLY_NO_JDK21_CONSUMER",
+    "MIndexSuffixDecision / suffix DFA facts\tno current M3JDK21 owner\tDONOR_ONLY_NO_JDK21_CONSUMER",
+    "LCP range-minimum precompute\tno current M3JDK21 suffix-index owner\tDONOR_ONLY_NO_JDK21_CONSUMER",
+]:
+    if required_no_port not in port_map:
+        fail(f"String donor no-port classification missing: {required_no_port}")
+
 # Donor class naming must not leak back into live VM symbols/layout.
 for path, text in [
     ("vmSymbols.hpp", symbols),
@@ -402,10 +502,35 @@ for fragment in [
     if fragment not in m3:
         fail(f"M3 collision-safe equality path missing: {fragment}")
 
+# codePointCount is executable geometry: when it equals UTF-16 length there are no surrogate
+# pairs, so code-point offsets are identical to code-unit offsets. All other cases delegate to
+# Character.offsetByCodePoints for exact JDK boundary/exception behavior.
+for fragment in [
+    "M3StringFacts prepared = storage.factsIfPrepared();",
+    "storage.coder() == LATIN1",
+    "prepared.codePointCount == storage.length()",
+    "long result = (long) index + codePointOffset;",
+    "return Character.offsetByCodePoints(this, index, codePointOffset);",
+]:
+    if fragment not in string:
+        fail(f"M3 code-point offset fact route missing: {fragment}")
+
+# Negative filters must reuse existing range facts; they must not force an O(n) fact scan before
+# an O(n) exact comparison.
+for fragment in [
+    "M3StringFacts factsIfPrepared()",
+    "owner.rangeFactsIfPrepared(value)",
+    "final M3StringFacts rangeFactsIfPrepared(long coordinate)",
+]:
+    if fragment not in (m3 + owner):
+        fail(f"M3 prepared-fact reuse path missing: {fragment}")
+
 # Range hashes and ASCII case hashes are negative filters only; exact comparison remains in
 # String.regionMatches for every surviving candidate.
 for fragment in [
-    "leftRange.hashCodeValue() != rightRange.hashCodeValue()",
+    "leftRange.factsIfPrepared()",
+    "rightRange.factsIfPrepared()",
+    "leftFacts.javaHash != rightFacts.javaHash",
     "leftFacts.asciiLowerHash != rightFacts.asciiLowerHash",
     "leftFacts.asciiUpperHash != rightFacts.asciiUpperHash",
     "leftFacts.asciiTitleHash != rightFacts.asciiTitleHash",
@@ -418,7 +543,8 @@ if "for (int index = 0; index < len; index++)" not in string:
 # Case conversion is canonical only for ASCII + Locale.ROOT. Locale-sensitive and non-ASCII
 # transformations must continue through the stock JDK case engine.
 for fragment in [
-    "locale.equals(Locale.ROOT) && storage.facts().ascii",
+    "M3StringFacts prepared = storage == null ? null : storage.factsIfPrepared();",
+    "prepared != null && locale.equals(Locale.ROOT) && prepared.ascii",
     "storage.asciiCase(false)",
     "storage.asciiCase(true)",
 ]:
@@ -426,6 +552,22 @@ for fragment in [
         fail(f"M3 ROOT ASCII case boundary missing: {fragment}")
 if "M3String asciiCase(boolean upper)" not in m3:
     fail("M3String ROOT ASCII canonical case mapper missing")
+
+# AbstractStringBuilder must not materialize M3 String.value() while appending String ranges.
+for fragment in [
+    "M3String storage = s.m3();",
+    "s.getBytes(this.value, off, this.count, LATIN1, end - off);",
+    "s.getBytes(this.value, i, j, UTF16, end - i);",
+    "s.getBytes(this.value, off, this.count, UTF16, end - off);",
+]:
+    if fragment not in abstract_builder:
+        fail(f"AbstractStringBuilder M3 bulk String append route missing: {fragment}")
+
+# Once a String is already M3-backed, range preservation is not optional composition.
+# substring must keep the same canonical owner+coordinate regardless of the admission/join gate.
+if "M3String storage = m3();" not in string
+        or "return new String(storage.slice(beginIndex, endIndex));" not in string:
+    fail("M3-backed substring no longer preserves canonical owner+coordinate directly")
 
 # M3-backed constructors must store only the empty compatibility sentinel.
 if string.count("storage.compatibilityValue()") < 4:
@@ -453,8 +595,74 @@ if "if (M3String.admissionEnabled())" not in string
         or "return new String(M3StringPool.internUnit(c));" not in string:
     fail("String.valueOf(char) does not use direct M3 unit interning after activation")
 
+# Exact single-byte charset ingress may bypass decoded compact byte[] staging only when the
+# mapping is exact: ISO-8859-1, or all-ASCII UTF-8/US-ASCII. Other decoding stays stock-authority.
+for fragment in [
+    "maybeAdmitDecodedSingleByte(charset, bytes, offset, length)",
+    "charset == ISO_8859_1.INSTANCE",
+    "charset == UTF_8.INSTANCE || charset == US_ASCII.INSTANCE",
+    "StringCoding.countPositives(bytes, offset, length) == length",
+    "M3String.admitLatin1Bytes(bytes, offset, length)",
+    "M3StringPool.internLatin1Bytes(source, offset, length)",
+    "M3StringAtom.localLatin1Bytes(",
+]:
+    if fragment not in (string + m3 + pool + atom):
+        fail(f"M3 exact byte-array ingress missing: {fragment}")
+
+# Unicode code-point array ingress emits canonical UTF-16 directly into native storage.
+for fragment in [
+    "M3String direct = maybeAdmitCodePoints(codePoints, offset, count);",
+    "M3String.admitCodePoints(value, offset, count)",
+    "M3StringPool.internCodePoints(source, offset, count)",
+    "M3StringAtom.localCodePoints(",
+    "throw new IllegalArgumentException(Integer.toString(cp));",
+]:
+    if fragment not in (string + m3 + pool + atom):
+        fail(f"M3 direct code-point ingress missing: {fragment}")
+
+# StringBuilder ingress reads its compact backing directly and snapshots once into M3.
+for fragment in [
+    "M3String direct =",
+    "maybeAdmitCompact(",
+    "M3String.admitCompactBytes(value, sourceOffset, length, sourceCoder)",
+    "M3StringPool.internCompactBytes(source, sourceOffset, length, sourceCoder)",
+    "M3StringAtom.localCompactBytes(",
+]:
+    if fragment not in (string + m3 + pool + atom):
+        fail(f"M3 direct StringBuilder ingress missing: {fragment}")
+
+if "return internCompactBytes(value, 0, value.length >> coder, coder);" not in pool:
+    fail("M3 scalar ingress bypasses canonical coder normalization")
+
+# Mutable char[] ingress must snapshot directly into canonical M3 storage after activation.
+# Do not compress to a transient compact byte[] first and then copy again into native storage.
+for fragment in [
+    "M3String direct = maybeAdmit(value, off, len);",
+    "M3String.admit(value, offset, length)",
+    "M3StringPool.internChars(source, offset, length)",
+    "M3StringAtom.localChars(source, offset, length, coder, id, hash64)",
+]:
+    if fragment not in (string + m3 + pool + atom):
+        fail(f"M3 direct char-array ingress missing: {fragment}")
+
+# Empty-target literal replacement is defined at every UTF-16 code-unit boundary, including
+# between surrogate halves. M3 preserves that exact contract without StringBuilder flattening.
+for fragment in [
+    "M3String replaceEmptyTarget(M3String replacement)",
+    "pieces.add(slice(index, index + 1));",
+    "return new String(storage.replaceEmptyTarget(replacementM3));",
+]:
+    if fragment not in (m3 + string):
+        fail(f"M3 empty-target replacement route missing: {fragment}")
+
 # Canonical single-unit transforms must re-enter the native pool directly rather than create
 # temporary one-character String/byte[] payloads.
+if "String.COMPACT_STRINGS" not in pool
+        or "&& mappedLatin1(address, lengths[row], bigEndian)" not in pool:
+    fail("mapped M3 lexicon coder ignores CompactStrings mode")
+if "String.COMPACT_STRINGS && StringLatin1.canEncode(unit)" not in pool:
+    fail("M3 direct unit interning ignores CompactStrings mode")
+
 for fragment in [
     "static M3String internUnit(char unit)",
     "active.findUnit(unit)",
