@@ -53,6 +53,8 @@ jobs:
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringHistoryConvergenceRecipeTest test
       - name: Prove balanced canonical DAG recipe
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringBalancedCanonicalDagFinal2RecipeTest test
+      - name: Prove repeated-source search recipe
+        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringSourceSearchRecipeTest test
       - name: Install build prerequisites
         run: sudo apt-get update && sudo apt-get install -y autoconf
       - name: Configure
