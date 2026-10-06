@@ -125,6 +125,22 @@ if "M3StringPositionPrecompute" not in string:
     if "return storage.indexOf((char) ch" not in string or "return storage.lastIndexOf((char) ch" not in string:
         fail("java.lang.String BMP search lost M3 position-precompute route")
 
+for fragment in [
+    "int indexOfCodePoint(int codePoint, int fromIndex, int endIndex)",
+    "int lastIndexOfCodePoint(int codePoint, int fromIndex)",
+    "candidate = indexOf(high, fromIndex",
+    "candidate = lastIndexOf(high",
+]:
+    if fragment not in m3:
+        fail(f"M3 supplementary position-precompute route missing: {fragment}")
+for fragment in [
+    "return storage.indexOfCodePoint(ch, from, storage.length());",
+    "return storage.indexOfCodePoint(ch, beginIndex, endIndex);",
+    "return storage.lastIndexOfCodePoint(ch, from);",
+]:
+    if fragment not in string:
+        fail(f"String supplementary M3 route missing: {fragment}")
+
 # Exact trigram membership is owned by M3TQ.Facts and reused by a separate bounded weak
 # source-range cache. Do not duplicate exact trigram arrays in M3StringFacts.
 for fragment in [
