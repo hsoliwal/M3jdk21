@@ -63,6 +63,7 @@
   template(java_lang_M3StringOwner,            "java/lang/M3StringOwner")           \
   template(java_lang_M3StringAtom,             "java/lang/M3StringAtom")            \
   template(java_lang_M3StringTuple,            "java/lang/M3StringTuple")           \
+  template(java_lang_M3StringFacts,            "java/lang/M3StringFacts")           \
   template(java_lang_StringLatin1,                    "java/lang/StringLatin1")                   \
   template(java_lang_StringUTF16,                     "java/lang/StringUTF16")                    \
   template(java_lang_Thread,                          "java/lang/Thread")                         \
