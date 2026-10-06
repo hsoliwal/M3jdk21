@@ -944,6 +944,15 @@ for fragment in [
 if "M3StringPrecomputeSearchTest.java test/jdk/" in workflow:
     fail("M3 String workflow contains concatenated path entries")
 
+for required_trigger in [
+    "src/java.base/share/classes/java/lang/AbstractStringBuilder.java",
+    "src/java.base/share/classes/java/util/regex/Pattern.java",
+    "src/java.base/share/classes/java/util/regex/Matcher.java",
+    "M3StringHistoryConvergenceRecipeTest.java",
+]:
+    if required_trigger not in workflow:
+        fail(f"M3 String workflow lost trigger path: {required_trigger}")
+
 for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringPrecomputeSearchTest.java",
