@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023, 2024, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2023, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -21,6 +21,7 @@
  * questions.
  */
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Gatherers;
 import java.util.stream.Stream;
@@ -33,11 +34,11 @@ import static org.junit.jupiter.api.Assumptions.*;
 
 /**
  * @test
- * @summary Tests the API and contract of Gatherers.fold
- * @run junit GatherersFoldTest
+ * @summary Tests the API and contract of Gatherers.scan
+ * @run junit GatherersScanTest
  */
 
-public class GatherersFoldTest {
+public class GatherersScanTest {
 
     record Config(int streamSize, boolean parallel) {
         Stream<Integer> stream() {
@@ -63,27 +64,37 @@ public class GatherersFoldTest {
 
     @Test
     public void throwsNPEWhenStateSupplierIsNull() {
-        assertThrows(NullPointerException.class, () -> Gatherers.<String, String>fold(null, (state, next) -> state));
+        assertThrows(NullPointerException.class,
+                () -> Gatherers.<String, String>scan(null, (state, next) -> state));
     }
 
     @Test
-    public void throwsNPEWhenFolderFunctionIsNull() {
-        assertThrows(NullPointerException.class, () -> Gatherers.<String, String>fold(() -> "", null));
+    public void throwsNPEWhenScannerFunctionIsNull() {
+        assertThrows(NullPointerException.class,
+                () -> Gatherers.<String, String>scan(() -> "", null));
     }
 
     @ParameterizedTest
     @MethodSource("configurations")
     public void behavesAsExpected(Config config) {
-        final var expectedResult = List.of(
-            config.stream()
-                    .sequential()
-                    .reduce(0L, (acc, next) -> acc + next,(l, r) -> {
-                        throw new IllegalStateException();
-                    })
-        );
+        final List<Long> expectedResult;
+        if (config.streamSize() == 0) {
+            expectedResult = List.of();
+        } else {
+            expectedResult = config.stream()
+                .sequential()
+                .reduce(
+                        new LinkedList<Long>(),
+                        (acc, next) -> {
+                            acc.addLast((acc.isEmpty() ? 0L : acc.getLast()) + next);
+                            return acc;
+                        },
+                        (l, r) -> { throw new IllegalStateException(); }
+                );
+        }
 
         final var result = config.stream()
-                .gather(Gatherers.fold(() -> 0L, (acc, next) -> acc + next))
+                .gather(Gatherers.scan(() -> 0L, (acc, next) -> acc + next))
                 .toList();
 
         assertEquals(expectedResult, result);

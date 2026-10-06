@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023, 2024, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2023, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -35,11 +35,11 @@ import static org.junit.jupiter.api.Assumptions.*;
 
 /**
  * @test
- * @summary Tests the API and contract of Gatherers.windowSliding
- * @run junit GatherersWindowSlidingTest
+ * @summary Tests the API and contract of Gatherers.windowFixed
+ * @run junit GatherersWindowFixedTest
  */
 
-public class GatherersWindowSlidingTest {
+public class GatherersWindowFixedTest {
 
     record Config(int streamSize, boolean parallel) {
         Stream<Integer> stream() {
@@ -70,15 +70,16 @@ public class GatherersWindowSlidingTest {
     @ParameterizedTest
     @ValueSource(ints = { Integer.MIN_VALUE, -999, -1, 0})
     public void throwsIAEWhenWindowSizeIsSmallerThanOne(int windowSize) {
-        assertThrows(IllegalArgumentException.class, () -> Gatherers.windowSliding(windowSize));
+        assertThrows(IllegalArgumentException.class,
+                () -> Gatherers.windowFixed(windowSize));
     }
 
     @ParameterizedTest
     @MethodSource("nonempty_configurations")
-    public void behavesAsExpectedWhenWindowSizeIsLargerThanStreamSize(Config config) {
+    public void behavesAsExpectedWhenWindowSizeIsSizeOfStream(Config config) {
         final var streamSize = config.streamSize();
         final var result = config.stream()
-                .gather(Gatherers.windowSliding(streamSize + 1))
+                .gather(Gatherers.windowFixed(streamSize))
                 .toList();
         assertEquals(1, result.size());
         assertEquals(config.stream().toList(), result.get(0));
@@ -87,19 +88,16 @@ public class GatherersWindowSlidingTest {
     @Test
     public void toleratesNullElements() {
         assertEquals(
-                List.of(
-                        Arrays.asList(null, null),
-                        Arrays.asList(null, null)
-                ),
-                Stream.of(null, null, null)
-                        .gather(Gatherers.windowSliding(2))
-                        .toList());
+                List.of(Arrays.asList(null, null)),
+                Stream.of(null, null)
+                    .gather(Gatherers.windowFixed(2))
+                    .toList());
     }
 
     @Test
     public void throwsUOEWhenWindowsAreAttemptedToBeModified() {
         var window = Stream.of(1)
-                .gather(Gatherers.windowSliding(1))
+                .gather(Gatherers.windowFixed(1))
                 .findFirst()
                 .get();
         assertThrows(UnsupportedOperationException.class,
@@ -112,27 +110,24 @@ public class GatherersWindowSlidingTest {
         final var streamSize = config.streamSize();
         // Tests that the layout of the returned data is as expected
         for (var windowSize : List.of(1, 2, 3, 10)) {
-            final var expectLastWindowSize = streamSize < windowSize ? streamSize : windowSize;
-            final var expectedNumberOfWindows = streamSize == 0 ? 0 : Math.max(1, 1 + streamSize - windowSize);
+            final var expectLastWindowSize = streamSize % windowSize == 0 ? windowSize : streamSize % windowSize;
+            final var expectedSize = (streamSize / windowSize) + ((streamSize % windowSize == 0) ? 0 : 1);
 
-            int expectedElement = 0;
-            int currentWindow = 0;
+            final var expected = config.stream().toList().iterator();
 
             final var result = config.stream()
-                    .gather(Gatherers.windowSliding(windowSize))
+                    .gather(Gatherers.windowFixed(windowSize))
                     .toList();
 
+            int currentWindow = 0;
             for (var window : result) {
                 ++currentWindow;
-                assertEquals(currentWindow < expectedNumberOfWindows ? windowSize : expectLastWindowSize, window.size());
-                for (var element : window) {
-                    assertEquals(++expectedElement, element.intValue());
-                }
-                // rewind for the sliding motion
-                expectedElement -= (window.size() - 1);
+                assertEquals(currentWindow < expectedSize ? windowSize : expectLastWindowSize, window.size());
+                for (var element : window)
+                    assertEquals(expected.next(), element);
             }
 
-            assertEquals(expectedNumberOfWindows, currentWindow);
+            assertEquals(expectedSize, currentWindow);
         }
     }
 }

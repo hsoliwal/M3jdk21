@@ -1,0 +1,8 @@
+path	current_blob	state
+src/java.base/share/classes/java/util/stream/Gatherer.java	267ec62b931d1b7e3c30cf0dd0e5877cec019887	FINAL_DONOR_EQUIVALENT
+src/java.base/share/classes/java/util/stream/GathererOp.java	3d3f356276e2716d75970561ff0f951582d1edda	JAVA21_ADAPTED_PLUS_SIZE_PROPAGATION
+src/java.base/share/classes/java/util/stream/Gatherers.java	0a98d7d5033e6e0ba98c757a606d0d6bdfbbe183	FINAL_DONOR_EQUIVALENT
+src/java.base/share/classes/java/util/stream/AbstractPipeline.java	ac9a7243d60295f80b18b0169fb03ddc5f6f7040	SUPERSET_KEEP
+src/java.base/share/classes/java/util/stream/ReferencePipeline.java	796e4e74e299127ed4a79e4dfae498028446e56d	SUPERSET_KEEP
+src/java.base/share/classes/java/util/stream/Stream.java	a04e52cdc3598a0f371baba936b4b6d27748bbb1	J485_API_PRESENT_KEEP
+src/java.base/share/classes/java/util/stream/package-info.java	e79ce70742301cff72ada5910fac10eac3696990	J485_DOC_PRESENT_KEEP
