@@ -176,6 +176,7 @@ for field in [
     "final char firstUtf16Unit;",
     "final char lastUtf16Unit;",
     "final long bitSignal64;",
+    "final int characterFlags;",
     "final boolean ascii;",
     "final boolean latin1;",
     "final int asciiUpperHash;",
@@ -192,6 +193,34 @@ for field in [
 ]:
     if field not in facts:
         fail(f"M3 fixed String precompute field missing: {field}")
+
+# Synexia IndexCharacterFlags is a fixed ten-bit canonical fact lane.
+for fragment in [
+    "static final int FLAG_ASCII = 1;",
+    "static final int FLAG_LATIN1 = 1 << 1;",
+    "static final int FLAG_HAS_ASCII_UPPER = 1 << 2;",
+    "static final int FLAG_HAS_ASCII_LOWER = 1 << 3;",
+    "static final int FLAG_HAS_SURROGATE = 1 << 4;",
+    "static final int FLAG_BLANK = 1 << 5;",
+    "static final int FLAG_EMPTY = 1 << 6;",
+    "static final int FLAG_HAS_ASCII_DIGIT = 1 << 7;",
+    "static final int FLAG_HAS_ASCII_WORD = 1 << 8;",
+    "static final int FLAG_HAS_ASCII_SPACE = 1 << 9;",
+    "characterFlags = addCharacterFlags(characterFlags, unit);",
+    "((left.characterFlags & right.characterFlags) & UNIVERSAL_FLAGS)",
+    "((left.characterFlags | right.characterFlags) & ~UNIVERSAL_FLAGS)",
+]:
+    if fragment not in facts:
+        fail(f"M3 fixed character-flag lane missing: {fragment}")
+
+for fragment in [
+    "if (!prepared.hasAsciiUpper()) return this;",
+    "if (!prepared.hasAsciiLower()) return this;",
+    "if (!prepared.hasAsciiSpace()) {",
+    "return storage != null ? storage.facts().blank() : indexOfNonWhitespace() == length();",
+]:
+    if fragment not in string:
+        fail(f"M3 character-flag consumer missing: {fragment}")
 
 # Identity/structure facts belong to canonical owners, not the text-fact bundle.
 for fragment in [
@@ -987,6 +1016,7 @@ for required_gate in [
     "M3RegexLiteralTQTest.java",
     "M3StringHistoryConvergenceRecipeTest",
     "M3StringCanonicalDagMasterRepairRecipeTest",
+    "M3StringCharacterFlagsRecipeTest",
 ]:
     if required_gate not in workflow:
         fail(f"M3 String workflow lost verification gate: {required_gate}")
