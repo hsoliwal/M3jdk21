@@ -611,7 +611,7 @@ final class M3String implements CharSequence {
 
             if (pieces == null) pieces = new ArrayList<>();
             if (cursor < index) pieces.add(slice(cursor, index));
-            pieces.add(canonicalize(String.valueOf(mapped)));
+            pieces.add(M3StringPool.internUnit(mapped));
             cursor = index + 1;
         }
         if (pieces == null) return this;
@@ -631,7 +631,7 @@ final class M3String implements CharSequence {
         }
         if (first < 0) return this;
 
-        M3String replacement = canonicalize(String.valueOf(newChar));
+        M3String replacement = M3StringPool.internUnit(newChar);
         ArrayList<M3String> pieces = new ArrayList<>();
         int cursor = 0;
         for (int index = first; index < length(); index++) {
