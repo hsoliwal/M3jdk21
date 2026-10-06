@@ -317,6 +317,46 @@ def verify_keystore_instant_8374808_backport(root: Path) -> None:
                 f"provider-storage rewrite escaped compatibility leaf: {forbidden}"
             )
 
+
+
+def verify_community_fork_catalog(root: Path) -> None:
+    rows = read_tsv(root / "m3/backports/COMMUNITY_FORKS.tsv")
+    ids = [row["fork_id"] for row in rows]
+    if len(ids) != len(set(ids)):
+        raise AssertionError("duplicate community fork id")
+    if rows[0]["fork_id"] != "upstream21u":
+        raise AssertionError("community fork baseline row must be upstream21u")
+    if rows[0]["repository"] != "openjdk/jdk21u" or rows[0]["ref"] != "master":
+        raise AssertionError("community fork baseline must be openjdk/jdk21u master")
+
+    required_products = {
+        "corretto",
+        "sapmachine",
+        "microsoft",
+        "tencent-kona",
+        "dragonwell-standard",
+        "jetbrains-runtime",
+    }
+    missing = required_products - set(ids)
+    if missing:
+        raise AssertionError(f"community fork catalogue missing required product rows: {sorted(missing)}")
+
+    for row in rows:
+        if not row["repository"] or "/" not in row["repository"]:
+            raise AssertionError(f"invalid community fork repository: {row['fork_id']}")
+        if not row["ref"]:
+            raise AssertionError(f"blank community fork ref: {row['fork_id']}")
+        if len(row["pinned_head"]) != 40 or any(
+            ch not in "0123456789abcdef" for ch in row["pinned_head"]
+        ):
+            raise AssertionError(f"invalid community fork pinned head: {row['fork_id']}")
+        if row["source_copy_authority"] != "false":
+            raise AssertionError(f"community fork source-copy authority granted: {row['fork_id']}")
+        if row["selected_for_distribution"] != "false":
+            raise AssertionError(f"community fork distribution authority granted: {row['fork_id']}")
+        if row["license_policy"] != "REVIEW_REPOSITORY_AND_PATH_LICENSES" and row["fork_id"] != "upstream21u":
+            raise AssertionError(f"community fork license policy drift: {row['fork_id']}")
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
@@ -333,12 +373,14 @@ def main() -> int:
     root = args.root.resolve()
     verify_jeps(root)
     verify_seed(root)
+    verify_community_fork_catalog(root)
     verify_jcmd_backport(root)
     verify_javadoc_8347112_backport(root)
     verify_security_properties_8364182_backport(root)
     verify_keystore_instant_8374808_backport(root)
     print(
-        "PASS: 82 JEP rows, non-JEP seed uniqueness, exact JDK-8357439 donor blobs, "
+        "PASS: 82 JEP rows, non-JEP seed uniqueness, community fork catalogue authority, "
+        "exact JDK-8357439 donor blobs, "
         "JDK-8347112 javadoc adaptation, JDK-8364182 serviceability adaptation, "
         "and JDK-8374808 KeyStore Instant compatibility leaf"
     )
