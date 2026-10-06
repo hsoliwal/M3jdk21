@@ -1,0 +1,8 @@
+gate	current_state	evidence	remaining_boundary
+RECIPE-STRING-PARSE	CLOSED_RECIPE_GATE	PR126 exact-head OpenRewrite run: M3MIndexJniNewStringAdmissionRecipeTest 3/3 PASS	String/JNI product compile/native/jtreg remains WP-12/WP-62
+RECIPE-STRING-TYPES	CLOSED_RECIPE_GATE	PR126 exact-head OpenRewrite run: M3MIndexStringBulkCharBoundaryRecipeTest 3/3 PASS using explicit source-custody mode	Semantic product type/native proof remains WP-12; source custody is not type attribution
+RECIPE-COVERAGE	CLOSED_EXECUTED	PR132/PR136 proof: 42 focused JUnit PASS; LINE 379/379; BRANCH 268/269; unchanged JaCoCo 0.99/0.99 gate PASS	Full current-master reactor remains P0 RECIPE
+RECIPE	OPEN	PR126 full migration suite 163/163 PASS before later additions; subsequent focused owners green	Run unfiltered current-master m3 reactor after exact source/toolchain recovery
+BUILD-ALSA	BLOCKED_ENVIRONMENT	Real fastdebug/headless configure still requires ALSA; ALSA/CUPS/Freetype/Fontconfig/GTK dev headers unavailable; package DNS blocked	Provide actual Linux development packages, then configure/make/images/jtreg
+J485	DRAFT_EXECUTION_PENDING	PR177 recipe-first 15-file candidate + focused Java21 proof workflow queued	Recipe/JDK21 patch proof, eight jtreg files, LIBRARY_API review, full image
+J423	INVENTORIED_NATIVE_PENDING	PR179 pins JEP implementation + pin-count overflow + pin-cache performance fix	MULTI_MODULE native recipes/build/jtreg/JNI/SA/JFR/performance
