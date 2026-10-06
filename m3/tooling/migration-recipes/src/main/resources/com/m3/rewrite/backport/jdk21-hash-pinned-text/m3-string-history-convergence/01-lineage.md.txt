@@ -122,3 +122,15 @@ semantically safe boundary:
 - failed candidate rejection reproduces literal-search `hitEnd=true` state, while
   `requireEnd` remains unchanged;
 - exact Pattern nodes remain the final authority for every positive candidate.
+
+
+## Bounded position masks
+
+Synexia's position-mask lineage is adapted as `M3StringPositionPrecompute`, not as fields on
+`M3String` or `M3StringFacts`. The implementation keeps one conservative code-unit signal per
+64 UTF-16 units, weakly keyed by canonical owner+coordinate. It is capped at 64 cache slots and
+32,768 UTF-16 units per source (about 256 KiB of primitive masks at the hard ceiling).
+
+`String.indexOf(int)`, bounded `indexOf(int,...)`, and `lastIndexOf(int)` use this lane for
+BMP code units after the whole-value fact filter. A negative block mask may skip that block; every
+positive block is still exact-verified. Supplementary code-point search remains pair-exact.
