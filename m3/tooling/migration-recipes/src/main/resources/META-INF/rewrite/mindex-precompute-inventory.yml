@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.MIndexPrecomputeInventory
+displayName: Lock Synexia MIndex precompute inventory and M3 mapping
+description: Replays the current-master governance snapshot for the complete Synexia precompute family inventory, target naming map, source invariant gate and String CI trigger without introducing a Synexia runtime dependency.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-mindex-precompute-inventory
