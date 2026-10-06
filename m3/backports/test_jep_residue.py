@@ -178,7 +178,7 @@ class JepResidueTest(unittest.TestCase):
             self.r.read_tsv(backports / "JEP_CATALOGUE.tsv"),
             self.r.read_tsv(backports / "POST21_PRIORITY_COMPATIBILITY.tsv"),
         )
-        self.assertEqual(41, len(items))
+        self.assertEqual(42, len(items))
         by_jep = {item.jep: item for item in items}
         self.assertEqual("MATERIALIZED_PACKET", by_jep[458].evidence_state)
         self.assertEqual(
@@ -192,6 +192,7 @@ class JepResidueTest(unittest.TestCase):
         self.assertEqual("MATERIALIZED_PACKET", by_jep[493].evidence_state)
         self.assertEqual("PACKET_READY", by_jep[493].receipt_state)
         self.assertEqual("NOT_AUTHORIZED", by_jep[493].promotion)
+        self.assertEqual("NO_RECIPE_EVIDENCE", by_jep[404].evidence_state)
         self.assertEqual("NO_RECIPE_EVIDENCE", by_jep[483].evidence_state)
         self.assertEqual("NO_RECIPE_EVIDENCE", by_jep[521].evidence_state)
         self.assertNotIn(401, by_jep)
