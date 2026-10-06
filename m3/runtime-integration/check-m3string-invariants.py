@@ -456,6 +456,20 @@ for forbidden_path in [
     if (ROOT / forbidden_path).exists():
         fail(f"unreviewed no-port String precompute owner appeared: {forbidden_path}")
 
+for required_live_donor_mapping in [
+    "MIndexPrecomputedStrings\tM3StringPool + M3MappedStringBacking + M3StringOwner.rangeFacts\tRESPONSIBILITY_SPLIT_INTERNAL",
+    "MIndexMappedPrecomputation\tM3MappedStringBacking + M3StringPool mapped lexicon + internal fact owners\tPARTIAL_INTERNAL_STORAGE_COUNTERPART",
+    "MIndexLiteralSearchSummary\tM3StringFacts + M3StringSearchPrecompute operations\tNO_RETAINED_SUMMARY_OBJECT",
+    "MIndexMaskLiteralSearch\tM3StringPositionPrecompute + exact String search\tIMPLEMENTED",
+    "MIndexPrefixFrontier\tno java.lang.String owner\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
+    "MIndexExactWeightPrecomputation\tno java.lang.String owner\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
+    "MIndexJoinedNativeSearch\toptional jdk.internal accelerator only\tOPTIONAL_INTERNAL",
+    "IndexUtf16SearchImage\tno java.lang.String owner\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
+    "MIndexPrecomputationLayout / MIndexLanguagePrecomputeStats\tno java.lang.String owner\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
+]:
+    if required_live_donor_mapping not in port_map:
+        fail(f"live Synexia precompute classification missing: {required_live_donor_mapping}")
+
 for required_no_port in [
     "MIndexPrefixZ / MIndexPrefixZCache\tno current M3JDK21 owner\tDONOR_ONLY_NO_JDK21_CONSUMER",
     "MIndexPalindromePrecompute / Manacher facts\tno current M3JDK21 owner\tDONOR_ONLY_NO_JDK21_CONSUMER",
