@@ -1,0 +1,17 @@
+invariantId	law	mechanicalMeaning
+M3-JDK-STRING-1	SYNEXIA_IS_DONOR_M3JDK_OWNS_TARGET_NAMES	Synexia source names are donor/reference names; M3JDK uses its own M3 names and preserves semantics/structure rather than copying identifiers blindly.
+M3-JDK-STRING-1	MINDEXSTRING_MAPS_TO_M3STRING	Synexia com.synexia.indexstring.MIndexString maps to the M3JDK internal java.lang.M3String counterpart.
+M3-JDK-STRING-1	STRING_OWNS_M3STRING	The M3JDK java.lang.String representation is defined in terms of its internal M3String value owner rather than an optional MIndex sidecar.
+M3-JDK-STRING-1	M3STRING_IS_OWNER_PLUS_COORDINATE	M3String preserves the donor owner+coordinate model; per-value byte arrays, char arrays, segment arrays and offset/end arrays are not canonical M3String payload.
+M3-JDK-STRING-1	PRECOMPUTE_IS_INTERNAL_IMPLEMENTATION	All M3JDK precompute facts, tables, caches, images and prepared plans are internal implementation details and are not part of java.lang.String or other public JDK API contracts.
+M3-JDK-STRING-1	PRECOMPUTE_KEYS_M3_IDENTITY_RANGE_COMPOSITION	Precompute reuse is bound to exact M3 owner/identity plus range/composition coordinates and cannot alias across owners merely by numeric ID or equal text.
+M3-JDK-STRING-1	PRECOMPUTE_NEVER_OWNS_CANONICAL_TEXT	Derived precompute never becomes a second text payload and absence of precompute cannot alter exact Java String semantics.
+M3-JDK-STRING-1	JNI_BYTE_CHAR_ARRAYS_ARE_SHADOWS	JNI/native byte[], char[], UTF-8 and UTF-16 representations are shadows materialized from M3String and are never retained as canonical String/M3String storage.
+M3-JDK-STRING-1	INTERNAL_PRECOMPUTE_NAMES_NEED_NOT_MATCH_DONOR	M3JDK internal precompute owners may use compact M3 names; donor class names are provenance/mapping evidence, not target ABI requirements.
+M3-JDK-STRING-1	COMPOSITION_DAG_IS_BALANCED	Canonical M3String tuple composition is maintained as a bounded-height persistent DAG; repeated concat/repeat may not form an unbounded rope chain.
+M3-JDK-STRING-1	TUPLE_IDENTITY_IGNORES_PARENTHESIZATION	Binary-tree grouping is not canonical identity; the same ordered terminal M3 atom owner/range coordinate sequence converges to one canonical tuple owner.
+M3-JDK-STRING-1	EQUAL_TEXT_DIFFERENT_COORDINATES_NEED_NOT_COLLAPSE	Canonical tuple identity is structural over M3 owner/range coordinates, not java.lang.String content equality; equal UTF-16 spelling built from a different canonical coordinate structure may remain distinct.
+M3-JDK-STRING-1	TUPLE_HASH_IS_CANDIDATE_ONLY	Shape-independent structural/content hashes route tuple candidates only; exact terminal owner/range sequence verification decides canonical reuse, so collisions change cost only.
+M3-JDK-STRING-1	SOURCE_SEARCH_PRECOMPUTE_INTERNAL_BOUNDED	Repeated-source postings and region-hash metadata live only in a bounded internal weak-owner cache keyed by exact M3 owner+coordinate; no public String API or canonical payload field is added.
+M3-JDK-STRING-1	SOURCE_SEARCH_HASH_IS_CANDIDATE_ONLY	Prefix/region Java hashes and rare-character postings may reject or route candidates but every positive candidate is exact UTF-16 verified before returning a String result.
+M3-JDK-STRING-1	SOURCE_SEARCH_PRECOMPUTE_REQUIRES_REUSE	Length-proportional per-source search metadata is admitted only after repeated use and may be evicted without changing String semantics.
