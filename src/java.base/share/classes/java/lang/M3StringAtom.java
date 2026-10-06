@@ -72,6 +72,49 @@ final class M3StringAtom extends M3StringOwner {
                 null, address, width, true, length, coder, javaHash, canonicalId, structuralHash64);
     }
 
+    static M3StringAtom localChars(
+            char[] source,
+            int offset,
+            int length,
+            byte coder,
+            long canonicalId,
+            long structuralHash64) {
+        Objects.requireNonNull(source, "source");
+        Objects.checkFromIndexSize(offset, length, source.length);
+        if (coder != String.LATIN1 && coder != String.UTF16) {
+            throw new IllegalArgumentException("invalid String coder");
+        }
+        byte width = coder == String.LATIN1 ? (byte) 1 : (byte) 2;
+        long bytes = Math.max(1L, (long) length * width);
+        long address = UNSAFE.allocateMemory(bytes);
+        int javaHash = 0;
+        for (int index = 0; index < length; index++) {
+            char unit = source[offset + index];
+            if (coder == String.LATIN1 && unit > 0xff) {
+                UNSAFE.freeMemory(address);
+                throw new IllegalArgumentException("Latin1 unit out of range");
+            }
+            javaHash = 31 * javaHash + unit;
+            if (width == 1) {
+                UNSAFE.putByte(address + index, (byte) unit);
+            } else {
+                long at = address + ((long) index << 1);
+                UNSAFE.putByte(at, (byte) (unit >>> 8));
+                UNSAFE.putByte(at + 1L, (byte) unit);
+            }
+        }
+        return new M3StringAtom(
+                null,
+                address,
+                width,
+                true,
+                length,
+                coder,
+                javaHash,
+                canonicalId,
+                structuralHash64);
+    }
+
     static M3StringAtom localUnit(
             char unit, byte coder, long canonicalId, long structuralHash64) {
         if (coder != String.LATIN1 && coder != String.UTF16) {
@@ -200,6 +243,16 @@ final class M3StringAtom extends M3StringOwner {
 
     long nativePayloadBytes() {
         return Math.max(1L, Math.multiplyExact((long) length, storageWidth));
+    }
+
+    boolean contentEquals(char[] source, int offset, int count, byte valueCoder) {
+        Objects.requireNonNull(source, "source");
+        Objects.checkFromIndexSize(offset, count, source.length);
+        if (valueCoder != coder || count != length) return false;
+        for (int index = 0; index < count; index++) {
+            if (source[offset + index] != charAt(index)) return false;
+        }
+        return true;
     }
 
     boolean contentEquals(byte[] compactValue, byte valueCoder) {
