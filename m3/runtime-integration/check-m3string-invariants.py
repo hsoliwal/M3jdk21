@@ -238,6 +238,22 @@ for fragment in [
     if fragment not in m3:
         fail(f"M3 one-unit literal search lost position-precompute route: {fragment}")
 
+# Mutable AbstractStringBuilder sources may reuse immutable M3 target plans, but source text is
+# never cached. The byte[] source is read per invocation through its current coder.
+for fragment in [
+    "static int indexOf(\n            byte[] source,",
+    "static int lastIndexOf(\n            byte[] source,",
+    "sourceUnit(source, sourceCoder, index)",
+]:
+    if fragment not in search_precompute:
+        fail(f"M3 builder prepared-target search path missing: {fragment}")
+for fragment in [
+    "M3StringSearchPrecompute.indexOf(\n                        src, srcCoder, srcCount, targetM3, plan, fromIndex)",
+    "M3StringSearchPrecompute.lastIndexOf(\n                        src, srcCoder, targetM3, plan, fromIndex)",
+]:
+    if fragment not in string:
+        fail(f"String builder helper lost prepared M3 target route: {fragment}")
+
 # Prepared literal AUTO search follows the mature Synexia convergence: bounded 256-entry
 # conservative BMH skip metadata for long patterns, with existing KMP as the exact adversarial
 # fallback. Low-byte collisions may only reduce skips; KMP remains semantic authority.
@@ -1001,6 +1017,7 @@ for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringPrecomputeSearchTest.java",
     "M3StringInternTest.java",
+    "M3StringBuilderSearchTest.java",
     "nativeEncoding/StringPlatformChars.java",
     "M3TQFactsTest.java",
     "M3RegexLiteralTQTest.java",
