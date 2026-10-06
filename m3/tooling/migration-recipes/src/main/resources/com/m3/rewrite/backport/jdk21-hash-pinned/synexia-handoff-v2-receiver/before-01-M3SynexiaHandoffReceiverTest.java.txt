@@ -46,20 +46,6 @@ final class M3SynexiaHandoffReceiverTest {
     }
 
     @Test
-    void v2AcceptsOnlyExplicitTargetRecipeRolesBoundToCanonicalSynexiaRecipe() {
-        assertDoesNotThrow(
-                () -> new M3SynexiaHandoffGuardRecipe("synexia-guard-v2-adapter-v1").getVisitor());
-
-        assertThrows(
-                IllegalStateException.class,
-                () -> new M3SynexiaHandoffGuardRecipe("synexia-guard-v2-generic-v1").getVisitor());
-
-        assertThrows(
-                IllegalStateException.class,
-                () -> new M3SynexiaHandoffGuardRecipe("synexia-guard-v2-copy-v1").getVisitor());
-    }
-
-    @Test
     void receiverRejectsUnscopedCrateNames() {
         assertThrows(
                 IllegalArgumentException.class,
