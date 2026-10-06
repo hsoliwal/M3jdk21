@@ -95,6 +95,28 @@ public final class M3StringInvariant {
         eq("alphagamma".repeat(5), repeated, "repeat DAG content");
         check(tuple(owner(body(repeated))), "repeat remains canonical composition");
 
+        String pa = fresh("a");
+        String pb = fresh("b");
+        String pc = fresh("c");
+        String leftAssociated = pa.concat(pb).concat(pc);
+        String rightAssociated = pa.concat(pb.concat(pc));
+        same(
+                owner(body(leftAssociated)),
+                owner(body(rightAssociated)),
+                "equal ordered composition ignores concat parenthesization");
+
+        String chain = fresh("x");
+        for (int index = 1; index < 4096; index++) {
+            chain = chain.concat(fresh("x"));
+        }
+        Object chainOwner = owner(body(chain));
+        check(tuple(chainOwner), "long concat chain remains tuple-backed");
+        int height = field(chainOwner.getClass(), "height").getInt(chainOwner);
+        check(height <= 20, "long concat chain stays balanced height=" + height);
+        check(chain.length() == 4096, "balanced concat chain length");
+        check(chain.charAt(0) == 'x' && chain.charAt(4095) == 'x',
+                "balanced concat chain endpoint content");
+
         System.out.println("M3_STRING_INVARIANT_PASS checks=" + checks
                 + " mapped=" + expectMapped
                 + " m3Fields=2 retainedArrays=0 shadows=jni-only precompute=internal");
