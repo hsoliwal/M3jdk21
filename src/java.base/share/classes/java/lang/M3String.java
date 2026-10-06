@@ -846,18 +846,13 @@ final class M3String implements CharSequence {
     }
 
     M3String translateEscapes() {
-        M3StringFacts prepared = facts();
-        if (!prepared.hasBackslash) return this;
-        ArrayList<M3String> pieces = null;
         int cursor = 0;
-        int index = 0;
-        while (index < length()) {
-            if (charAt(index) != '\\') {
-                index++;
-                continue;
-            }
+        int slash = indexOf('\\', 0, length());
+        if (slash < 0) return this;
 
-            int slash = index++;
+        ArrayList<M3String> pieces = new ArrayList<>();
+        while (slash >= 0) {
+            int index = slash + 1;
             char escaped = index < length() ? charAt(index++) : '\0';
             if (pieces == null) pieces = new ArrayList<>();
             if (cursor < slash) pieces.add(slice(cursor, slash));
@@ -900,9 +895,9 @@ final class M3String implements CharSequence {
 
             if (emit) pieces.add(M3StringPool.internUnit(escaped));
             cursor = index;
+            slash = cursor < length() ? indexOf('\\', cursor, length()) : -1;
         }
 
-        if (pieces == null) return this;
         if (cursor < length()) pieces.add(slice(cursor, length()));
         return joinValues(pieces);
     }
