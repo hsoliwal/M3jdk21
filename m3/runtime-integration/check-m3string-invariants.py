@@ -26,6 +26,7 @@ tuple_ = read("src/java.base/share/classes/java/lang/M3StringTuple.java")
 facts = read("src/java.base/share/classes/java/lang/M3StringFacts.java")
 search_precompute = read("src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java")
 position_precompute = read("src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java")
+codepoint_precompute = read("src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java")
 tq = read("src/java.base/share/classes/jdk/internal/mindex/M3TQ.java")
 string = read("src/java.base/share/classes/java/lang/String.java")
 asb = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
@@ -307,6 +308,27 @@ for fragment in [
         fail(f"M3 adaptive BMH/KMP search invariant missing: {fragment}")
 if "65536" in search_precompute and "skip" in search_precompute:
     fail("M3 literal search must not retain a 65536-entry UTF-16 skip table")
+
+# UTF-16 code-point boundary metadata is a separate weak bounded owner. It stores only paired-low
+# continuation masks/prefix counts and must never become canonical String payload.
+for fragment in [
+    "private static final int SLOTS = 64;",
+    "private static final int MAX_SOURCE_UNITS = 32_768;",
+    "final long[] continuationMasks;",
+    "final int[] continuationPrefixCounts;",
+    "WeakReference<M3StringOwner>",
+    "static long maximumRetainedPrimitiveBytes()",
+]:
+    if fragment not in codepoint_precompute:
+        fail(f"M3 code-point precompute boundary missing: {fragment}")
+for fragment in [
+    "M3StringCodePointPrecompute.codePointCount(storage, beginIndex, endIndex)",
+    "M3StringCodePointPrecompute.offsetByCodePoints(",
+]:
+    if fragment not in string:
+        fail(f"String code-point precompute consumer missing: {fragment}")
+if "continuationMasks" in facts or "continuationPrefixCounts" in facts:
+    fail("M3StringFacts illegally owns length-proportional code-point metadata")
 
 # Length-proportional operation precompute is separate and bounded. It may retain primitive
 # algorithm lanes but never canonical spelling/payload or strong M3 owner/value references.
