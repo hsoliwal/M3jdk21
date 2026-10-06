@@ -480,4 +480,11 @@ final class M3StringAtom extends M3StringOwner {
     M3StringFacts computeFacts() {
         return M3StringFacts.scan(M3String.whole(this));
     }
+
+    @Override
+    M3StringFacts computeRangeFacts(int start, int length) {
+        Objects.checkFromIndexSize(start, length, this.length);
+        if (start == 0 && length == this.length) return facts();
+        return M3StringFacts.scan(M3String.range(this, start, length));
+    }
 }
