@@ -611,6 +611,9 @@ for fragment in [
     if fragment not in (string + m3 + pool + atom):
         fail(f"M3 direct StringBuilder ingress missing: {fragment}")
 
+if "return internCompactBytes(value, 0, value.length >> coder, coder);" not in pool:
+    fail("M3 scalar ingress bypasses canonical coder normalization")
+
 # Mutable char[] ingress must snapshot directly into canonical M3 storage after activation.
 # Do not compress to a transient compact byte[] first and then copy again into native storage.
 for fragment in [
