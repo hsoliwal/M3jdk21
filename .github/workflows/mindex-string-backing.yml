@@ -7,6 +7,7 @@ on:
       - 'm3/docs/name-mapping.json'
       - 'm3/docs/m3string-synexia-lineage.md'
       - 'm3/docs/synexia-string-precompute-port-map.tsv'
+      - 'm3/docs/string-precompute-completeness.tsv'
       - 'm3/runtime-integration/**'
       - 'src/hotspot/share/prims/jni.cpp'
       - 'src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp'
