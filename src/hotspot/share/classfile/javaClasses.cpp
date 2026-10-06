@@ -897,6 +897,15 @@ bool java_lang_String::equals(oop str1, oop str2) {
   if (is_m3_backed(str1) || is_m3_backed(str2)) {
     int len = length(str1);
     if (length(str2) != len) return false;
+
+    oop left = m3_storage(str1);
+    oop right = m3_storage(str2);
+    if (left != nullptr && right != nullptr
+        && java_lang_M3String::owner(left) == java_lang_M3String::owner(right)
+        && java_lang_M3String::coordinate(left) == java_lang_M3String::coordinate(right)) {
+      return true;
+    }
+
     for (int i = 0; i < len; i++) if (char_at(str1, i) != char_at(str2, i)) return false;
     return true;
   }
