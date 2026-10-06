@@ -61,7 +61,7 @@ final class M3ReleaseJepAuthorityRepairRecipeTest {
 
         var first = recipe.run(new InMemoryLargeSourceSet(before), context(), 1);
         List<Result> changes = first.getChangeset().getAllResults();
-        assertEquals(9, changes.size());
+        assertEquals(11, changes.size());
 
         Map<String, SourceFile> after = new TreeMap<>();
         before.forEach(source -> after.put(path(source), source));
@@ -81,6 +81,16 @@ final class M3ReleaseJepAuthorityRepairRecipeTest {
         assertTrue(catalogue.contains("24\t404\tGenerational Shenandoah (Experimental)"));
         assertFalse(catalogue.contains("26\t401\tValue Classes and Objects"));
         assertTrue(catalogue.indexOf("25\t520\t") < catalogue.indexOf("25\t521\t"));
+
+        String priority = after.get("m3/backports/POST21_PRIORITY_COMPATIBILITY.tsv").printAll();
+        assertTrue(priority.contains("24\t404\tGenerational Shenandoah (Experimental)"));
+        assertFalse(priority.contains("26\t401\tValue Classes and Objects"));
+
+        String residue = after.get("m3/backports/JEP_RESIDUE_QUEUE.tsv").printAll();
+        assertTrue(residue.contains("22\t423\tRegion Pinning for G1\tgc\tcandidate\t20\tMATERIALIZED_PACKET"));
+        assertTrue(residue.contains("23\t474\tZGC: Generational Mode by Default\tgc-runtime\tcandidate\t20\tMATERIALIZED_PACKET"));
+        assertTrue(residue.contains("24\t484\tClass-File API\tlibrary\tcandidate\t20\tMATERIALIZED_PACKET"));
+        assertTrue(residue.contains("24\t404\tGenerational Shenandoah (Experimental)\tgc-runtime\tcandidate-high-risk"));
 
         String authority = after.get("m3/backports/RELEASE_JEP_AUTHORITY.tsv").printAll();
         assertTrue(authority.contains(
