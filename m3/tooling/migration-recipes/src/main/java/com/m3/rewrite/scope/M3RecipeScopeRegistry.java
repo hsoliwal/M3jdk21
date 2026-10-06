@@ -56,6 +56,12 @@ public final class M3RecipeScopeRegistry {
                     "com.m3.rewrite.backport.M3VerbatimJavaPairRecipe",
                     fixed(M3EditScope.FILE)),
             Map.entry(
+                    "com.m3.rewrite.backport.M3ReleaseJepDenominatorRecipe",
+                    fixed(M3EditScope.MODULE)),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3BackportRecipeDagExportRecipe",
+                    fixed(M3EditScope.MULTI_MODULE)),
+            Map.entry(
                     "com.m3.rewrite.backport.M3Jep458BackportRecipe",
                     explicitChange()));
 
