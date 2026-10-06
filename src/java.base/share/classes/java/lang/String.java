@@ -3503,6 +3503,42 @@ public final class String
                 return replaced == storage ? this : new String(replaced);
             }
 
+            M3String targetM3 = trgtStr.m3();
+            M3String replacementM3 = replStr.m3();
+            if (targetM3 != null || replacementM3 != null) {
+                int first = indexOf(trgtStr, 0);
+                if (first < 0) return this;
+
+                int matches = 1;
+                int cursor = first + trgtLen;
+                for (;;) {
+                    int next = indexOf(trgtStr, cursor);
+                    if (next < 0) break;
+                    matches++;
+                    cursor = next + trgtLen;
+                }
+
+                long resultLength =
+                        (long) thisLen + (long) matches * (replLen - trgtLen);
+                if (resultLength > Integer.MAX_VALUE) {
+                    throw new OutOfMemoryError("Required length exceeds implementation limit");
+                }
+
+                StringBuilder builder = new StringBuilder((int) resultLength);
+                int source = 0;
+                int found = first;
+                while (found >= 0) {
+                    builder.append(this, source, found);
+                    builder.append(replStr);
+                    source = found + trgtLen;
+                    found = source <= thisLen - trgtLen
+                            ? indexOf(trgtStr, source)
+                            : -1;
+                }
+                builder.append(this, source, thisLen);
+                return builder.toString();
+            }
+
             boolean thisIsLatin1 = this.isLatin1();
             boolean trgtIsLatin1 = trgtStr.isLatin1();
             boolean replIsLatin1 = replStr.isLatin1();
