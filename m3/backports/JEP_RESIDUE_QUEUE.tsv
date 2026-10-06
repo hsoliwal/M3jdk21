@@ -7,8 +7,8 @@ order	release	jep	title	domain	disposition	priority	evidence_state	evidence_path
 5	24	493	Linking Run-Time Images without JMODs	tool-jlink-runtime-image	candidate	20	MATERIALIZED_PACKET	m3/backports/recipes/jep-493-runtime-image	PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	OPT_IN	COMPATIBLE_TOOLING	PACKET_READY	NOT_AUTHORIZED	GENERATE_FILE_ATOMIC_JAVA_TEXT_CRATES_THEN_COMPOSE_MULTI_MODULE_PACKET
 6	24	496	Quantum-Resistant Module-Lattice-Based Key Encapsulation Mechanism	security-library	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT					
 7	24	497	Quantum-Resistant Module-Lattice-Based Digital Signature Algorithm	security-library	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT					
-8	25	510	Key Derivation Function API	security-library	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT					
-9	25	521	Generational Shenandoah	gc-runtime-config	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	OPT_IN	COMPATIBLE_RUNTIME			
+8	25	510	Key Derivation Function API	security-library	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	NO	OPT_IN_SE_API_EXTENSION			
+9	25	521	Generational Shenandoah	gc-runtime-config	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	OPT_IN	COMPATIBLE_RUNTIME			CLOSE_JEP404_RUNTIME_SUBSTRATE_THEN_PROVE_JEP521_STATUS_GRADUATION
 10	27	523	Make G1 the Default Garbage Collector in All Environments	gc-runtime-config	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT					
 11	22	454	Foreign Function & Memory API	library-runtime-native	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF	NO	OPT_IN_SE_API_EXTENSION			
 12	23	467	Markdown Documentation Comments	tool-javadoc-javac-doc	candidate-high-risk	40	MATERIALIZED_PACKET	m3/backports/recipes/jep-467-markdown	CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF	NO	OPT_IN_SOURCE_TOOLING	PACKET_READY	NOT_AUTHORIZED	GENERATE_FILE_ATOMIC_JAVA_TEXT_CRATES_AND_REVIEW_LIBRARY_API_JOIN
