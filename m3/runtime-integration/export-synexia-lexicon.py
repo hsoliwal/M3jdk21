@@ -16,6 +16,7 @@ import csv
 import hashlib
 import json
 import pathlib
+import re
 import struct
 from dataclasses import dataclass
 
@@ -41,6 +42,7 @@ MANIFEST_COLUMNS = (
     "source_id", "canonical_name", "synexia_path", "record_id_field",
     "mapping_fields", "precompute_target", "data_license", "data_policy",
 )
+MANIFEST_COLUMNS_V2 = MANIFEST_COLUMNS + ("precompute_fields",)
 PROFILE_COLUMNS = ("precompute_profile", "source_records", "image_records", "sha256")
 MAX_PRECOMPUTE_PAYLOAD_BYTES = 1 * 1024 * 1024
 
@@ -128,13 +130,30 @@ def read_tsv(path: pathlib.Path, columns: tuple[str, ...]) -> tuple[list[dict[st
     return rows, raw
 
 
+def canonical_required_fields(value: str) -> str:
+    """Validate sorted comma-separated owner payload keys declared by a source family."""
+    if value == "-":
+        return ""
+    fields = value.split(",")
+    if (not fields or any(not re.fullmatch(r"[a-z][a-z0-9_]*", field) for field in fields)
+            or fields != sorted(set(fields))):
+        raise ValueError("precompute_fields must be sorted unique snake_case names or '-'")
+    return ",".join(fields)
+
+
 def read_manifest(path: pathlib.Path) -> tuple[dict[str, dict[str, str]], bytes]:
-    rows, raw = read_tsv(path, MANIFEST_COLUMNS)
+    raw = path.read_bytes()
+    with path.open("r", encoding="utf-8", errors="surrogatepass", newline="") as stream:
+        columns = tuple(csv.DictReader(stream, delimiter="\t").fieldnames or ())
+    if columns not in (MANIFEST_COLUMNS, MANIFEST_COLUMNS_V2):
+        raise ValueError(f"{path}: expected columns {MANIFEST_COLUMNS} or {MANIFEST_COLUMNS_V2}")
+    rows, _ = read_tsv(path, columns)
     result: dict[str, dict[str, str]] = {}
     for row in rows:
         source_id = row["source_id"]
         if source_id in result:
             raise ValueError(f"duplicate source_id: {source_id}")
+        row["precompute_fields"] = canonical_required_fields(row.get("precompute_fields", "-"))
         result[source_id] = row
     if not result:
         raise ValueError("source manifest is empty")
@@ -195,6 +214,11 @@ def load_records(path: pathlib.Path, sources: dict[str, dict[str, str]]) -> tupl
         normalized = {column: row[column] for column in RECORD_COLUMNS}
         normalized["precompute_payload"] = canonical_precompute_payload(
             row.get("precompute_payload", "{}"))
+        payload_keys = set(json.loads(normalized["precompute_payload"]))
+        required_fields = [field for field in sources[row["source_id"]]["precompute_fields"].split(",") if field]
+        missing = [field for field in required_fields if field not in payload_keys]
+        if missing:
+            raise ValueError("precompute payload missing required fields: " + ",".join(missing))
         result.append(Record(normalized))
     if not result:
         raise ValueError("lexicon records are empty")
@@ -339,7 +363,10 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
         "schema": EXPORT_SCHEMA,
         "source": {"repository": source_repo, "commit": source_commit,
                    "manifest_sha256": sha256_bytes(source_manifest_bytes),
-                   "records_sha256": sha256_bytes(records_bytes)},
+                   "records_sha256": sha256_bytes(records_bytes),
+                   "precompute_fields": {
+                       source_id: [field for field in source["precompute_fields"].split(",") if field]
+                       for source_id, source in sorted(sources.items())}},
         "target": {"repository": "https://github.com/hsoliwal/M3jdk21",
                    "image_format": "M3LEX001", "image_version": VERSION,
                    "mapping_sidecar": "synexia.records.tsv",
