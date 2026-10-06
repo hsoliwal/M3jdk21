@@ -39,21 +39,15 @@ public final class A3 {
                             options.inventory(),
                             options.queue(),
                             options.out("m3/build/a3/work.tsv"));
-            case "apply" -> {
-                A3M.requireCurrent(options.masteryRoot(), options.mastery());
-                A3Apply.run(
-                        options.root(),
-                        options.out("m3/build/a3/apply"),
-                        options.sources());
-            }
+            case "apply" ->
+                    A3Apply.run(
+                            options.root(),
+                            options.out("m3/build/a3/apply"),
+                            options.sources());
             case "lab" ->
                     A3Lab.write(
                             options.root(),
                             options.out("m3/build/a3/lab"));
-            case "mastery" ->
-                    A3M.write(
-                            options.root(),
-                            options.out("m3/build/a3/mastery"));
             default -> {
                 usage();
                 throw new IllegalArgumentException(
@@ -64,9 +58,9 @@ public final class A3 {
 
     private static void usage() {
         System.err.println(
-                "A3: inv|alg|plan|work|apply|lab|mastery [--root PATH] [--out PATH] "
-                        + "[--inventory PATH] [--queue PATH] [--mastery PATH] "
-                        + "[--mastery-root PATH] [--file PATH ...] [--list PATH]");
+                "A3: inv|alg|plan|work|apply|lab [--root PATH] [--out PATH] "
+                        + "[--inventory PATH] [--queue PATH] "
+                        + "[--file PATH ...] [--list PATH]");
     }
 
     private record Args(
@@ -74,8 +68,6 @@ public final class A3 {
             Path out,
             Path inventory,
             Path queue,
-            Path mastery,
-            Path masteryRootOverride,
             List<String> files,
             Path list) {
 
@@ -84,8 +76,6 @@ public final class A3 {
             Path out = null;
             Path inventory = Path.of("m3/build/a3/inventory.tsv");
             Path queue = Path.of("m3/build/backports/COMPATIBILITY_QUEUE.tsv");
-            Path mastery = Path.of("m3/build/a3/mastery/receipt.tsv");
-            Path masteryRootOverride = null;
             Path list = null;
             ArrayList<String> files = new ArrayList<>();
 
@@ -101,11 +91,6 @@ public final class A3 {
                     inventory = Path.of(requireValue(args, ++index, key));
                 } else if ("--queue".equals(key)) {
                     queue = Path.of(requireValue(args, ++index, key));
-                } else if ("--mastery".equals(key)) {
-                    mastery = Path.of(requireValue(args, ++index, key));
-                } else if ("--mastery-root".equals(key)) {
-                    masteryRootOverride =
-                            Path.of(requireValue(args, ++index, key));
                 } else if ("--list".equals(key)) {
                     list = Path.of(requireValue(args, ++index, key));
                 } else {
@@ -118,18 +103,12 @@ public final class A3 {
                     out,
                     inventory,
                     queue,
-                    mastery,
-                    masteryRootOverride,
                     List.copyOf(files),
                     list);
         }
 
         Path out(String fallback) {
             return out == null ? Path.of(fallback) : out;
-        }
-
-        Path masteryRoot() {
-            return masteryRootOverride == null ? root : masteryRootOverride;
         }
 
         List<String> sources() throws Exception {

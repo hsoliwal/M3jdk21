@@ -2,7 +2,6 @@
 package com.m3.a3;
 
 import com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe;
-import com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe;
 import com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -26,8 +25,7 @@ import org.openrewrite.tree.ParseError;
  * Compiler-driven A3 mastery lab for the retained Atomize/Patternize FILE recipes.
  *
  * <p>The lab generates bounded hostile Java fixtures in memory, executes every non-empty ordered
- * subset of Atomize/Patternize/Document plus the retained A-P-A/P-A-P stress schedules, recompiles
- * after each recipe application,
+ * subset of the two retained source-changing atoms, recompiles after each recipe application,
  * compares public/protected contracts and runtime behavior, and requires equal-subset order
  * convergence plus a fixed point. It never writes JDK src/test trees.</p>
  */
@@ -37,19 +35,8 @@ public final class A3Lab {
             List.of(
                     List.of("A"),
                     List.of("P"),
-                    List.of("D"),
                     List.of("A", "P"),
                     List.of("P", "A"),
-                    List.of("A", "D"),
-                    List.of("D", "A"),
-                    List.of("P", "D"),
-                    List.of("D", "P"),
-                    List.of("A", "P", "D"),
-                    List.of("A", "D", "P"),
-                    List.of("P", "A", "D"),
-                    List.of("P", "D", "A"),
-                    List.of("D", "A", "P"),
-                    List.of("D", "P", "A"),
                     List.of("A", "P", "A"),
                     List.of("P", "A", "P"));
 
@@ -236,7 +223,6 @@ public final class A3Lab {
         return switch (atom) {
             case "A" -> new M3AtomizePureIntReturnRecipe();
             case "P" -> new M3PatternizePureIntAtomRecipe();
-            case "D" -> new M3DocumentPureIntAtomRecipe();
             default -> throw new IllegalArgumentException("unknown A3Lab atom: " + atom);
         };
     }
