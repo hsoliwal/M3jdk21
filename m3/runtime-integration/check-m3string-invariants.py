@@ -308,6 +308,16 @@ for surface, marker in critical_surfaces.items():
     if marker not in string:
         fail(f"critical String surface lost M3 route: {surface}")
 
+# Canonical equality may use Java hash only as a negative filter. Equal hashes still require
+# exact UTF-16 comparison because collisions are part of the String.hashCode contract.
+for fragment in [
+    "if (sameCoordinate(that)) return true;",
+    "if (hashCodeValue() != that.hashCodeValue()) return false;",
+    "if (charAt(index) != other.charAt(index)) return false;",
+]:
+    if fragment not in m3:
+        fail(f"M3 collision-safe equality path missing: {fragment}")
+
 # Range hashes and ASCII case hashes are negative filters only; exact comparison remains in
 # String.regionMatches for every surviving candidate.
 for fragment in [
