@@ -253,6 +253,29 @@ public class M3StringPrecomputeSearchTest {
                 "block position lastIndexOf");
         check(sparse.indexOf('Q') == -1, "block position absent");
 
+        String sparseSupplementary = String.join(
+                "",
+                "a".repeat(319) + "\ud83d",
+                "\ude42" + "b".repeat(384),
+                "\ud83d",
+                "\ude42" + "c".repeat(320));
+        char[] sparseSupplementaryOracle = sparseSupplementary.toCharArray();
+        check(sparseSupplementary.indexOf(0x1f642)
+                        == naiveIndexOfCodePoint(
+                                sparseSupplementaryOracle, 0x1f642, 0,
+                                sparseSupplementaryOracle.length),
+                "block supplementary indexOf");
+        check(sparseSupplementary.indexOf(0x1f642, 320)
+                        == naiveIndexOfCodePoint(
+                                sparseSupplementaryOracle, 0x1f642, 320,
+                                sparseSupplementaryOracle.length),
+                "block supplementary indexOf from");
+        check(sparseSupplementary.lastIndexOf(0x1f642)
+                        == naiveLastIndexOfCodePoint(
+                                sparseSupplementaryOracle, 0x1f642,
+                                sparseSupplementaryOracle.length - 1),
+                "block supplementary lastIndexOf");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
