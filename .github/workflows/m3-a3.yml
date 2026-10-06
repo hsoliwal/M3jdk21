@@ -64,6 +64,22 @@ jobs:
           printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
           printf '%s\n' "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
 
+      - name: Install pinned Synexia canonical A3 recipe export
+        shell: bash
+        env:
+          SYNEXIA_A3_COMMIT: 4172b7ea5bb35f74ee19c578bddfb582eb210b5d
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 \
+            "https://codeload.github.com/hsoliwal/com.synexia/tar.gz/${SYNEXIA_A3_COMMIT}" \
+            -o "$RUNNER_TEMP/synexia-a3.tar.gz"
+          mkdir -p "$RUNNER_TEMP/synexia-a3"
+          tar -xzf "$RUNNER_TEMP/synexia-a3.tar.gz" \
+            -C "$RUNNER_TEMP/synexia-a3" --strip-components=1
+          mvn -B -ntp \
+            -f "$RUNNER_TEMP/synexia-a3/synexia-openrewrite-recipes/pom-jdk-a3-export.xml" \
+            install
+
       - name: Compile and install retained A3 recipe dependencies
         shell: bash
         run: |
