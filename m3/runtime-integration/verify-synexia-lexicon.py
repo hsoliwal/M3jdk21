@@ -13,6 +13,7 @@ import argparse
 import csv
 import hashlib
 import json
+import math
 import pathlib
 import re
 import struct
@@ -30,7 +31,7 @@ FACT_COLUMNS = ("shard_id", "image_row", "utf16_units", "java_hash", "code_point
                 "contains_whitespace", "precompute_profile")
 PROFILE_COLUMNS = ("precompute_profile", "source_records", "image_records", "sha256")
 MAX_PRECOMPUTE_PAYLOAD_BYTES = 1 * 1024 * 1024
-ALLOWED_DONOR_TYPES = frozenset(("int", "long", "int[]", "long[]"))
+ALLOWED_DONOR_TYPES = frozenset(("boolean", "double", "int", "long", "int[]", "long[]"))
 
 
 def digest(data: bytes) -> str:
@@ -68,6 +69,15 @@ def canonical_precompute_payload(value: str) -> str:
 
 
 def _fits_donor_type(value: object, donor_type: str) -> bool:
+    if donor_type == "boolean":
+        return isinstance(value, bool)
+    if donor_type == "double":
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            return False
+        try:
+            return math.isfinite(float(value))
+        except (OverflowError, ValueError):
+            return False
     if donor_type == "int":
         return isinstance(value, int) and not isinstance(value, bool) and -2**31 <= value < 2**31
     if donor_type == "long":

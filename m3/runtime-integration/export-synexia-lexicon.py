@@ -15,6 +15,7 @@ import argparse
 import csv
 import hashlib
 import json
+import math
 import pathlib
 import re
 import struct
@@ -49,7 +50,7 @@ FIELD_MAP_COLUMNS = (
     "donor_type", "donor_field", "donor_java_type", "canonical_payload_field",
     "m3jdk_storage", "status", "preservation_rule",
 )
-ALLOWED_DONOR_TYPES = frozenset(("int", "long", "int[]", "long[]"))
+ALLOWED_DONOR_TYPES = frozenset(("boolean", "double", "int", "long", "int[]", "long[]"))
 
 
 @dataclass(frozen=True)
@@ -165,6 +166,15 @@ def read_field_map(path: pathlib.Path) -> dict[str, str]:
 
 
 def _fits_donor_type(value: object, donor_type: str) -> bool:
+    if donor_type == "boolean":
+        return isinstance(value, bool)
+    if donor_type == "double":
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            return False
+        try:
+            return math.isfinite(float(value))
+        except (OverflowError, ValueError):
+            return False
     if donor_type == "int":
         return isinstance(value, int) and not isinstance(value, bool) and -2**31 <= value < 2**31
     if donor_type == "long":

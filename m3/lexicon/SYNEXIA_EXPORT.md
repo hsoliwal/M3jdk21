@@ -49,7 +49,7 @@ The field-level donor mapping is maintained in
 and reviewed LangDex primitive profile families without making their values part
 of `java.lang.String`. Its
 `donor_java_type` column records the inspected scalar or relation-array shape
-(`int`, `long`, `int[]`, or `long[]`) so future validators can reject shape
+(`boolean`, `double`, `int`, `long`, `int[]`, or `long[]`) so future validators can reject shape
 drift without interpreting the language metadata as String semantics. When
 that field map is present beside the source manifest (or is supplied with
 `--field-map`), the exporter enforces those shapes and Java `int`/`long`

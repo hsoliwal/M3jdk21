@@ -222,6 +222,7 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual(12, len(sources["dictlang.dictionary"]["precompute_fields"].split(",")))
         self.assertEqual(15, len(sources["dictlang.frequency"]["precompute_fields"].split(",")))
         self.assertEqual(10, len(sources["unicodex.langdex.lexemes"]["precompute_fields"].split(",")))
+        self.assertEqual(4, len(sources["dictlang.si-units"]["precompute_fields"].split(",")))
         self.assertEqual("", sources["translate.rows"]["precompute_fields"])
         self.assertEqual("", sources["dictlang.numbers.0-10000"]["precompute_fields"])
 
@@ -231,7 +232,7 @@ class SynexiaExportTest(unittest.TestCase):
                 encoding="utf-8", newline="") as stream:
             rows = list(csv.DictReader(stream, delimiter="\t"))
         mapped = {row["canonical_payload_field"] for row in rows if row["status"] == "MAPPED"}
-        allowed_types = {"int", "long", "int[]", "long[]"}
+        allowed_types = {"boolean", "double", "int", "long", "int[]", "long[]"}
         field_types: dict[str, str] = {}
         for row in rows:
             self.assertIn(row["donor_java_type"], allowed_types)
@@ -240,6 +241,8 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual("long[]", field_types["concept_ids"])
         self.assertEqual("int[]", field_types["memberships"])
         self.assertEqual("long", field_types["lexicon_fingerprint"])
+        self.assertEqual("double", field_types["si_offset"])
+        self.assertEqual("boolean", field_types["si_prefixable"])
         self.assertTrue(all(field_types.values()))
         for source_id in ("dictlang.dictionary", "dictlang.frequency",
                           "dictlang.thesaurus", "dictlang.antonyms"):
@@ -295,6 +298,56 @@ class SynexiaExportTest(unittest.TestCase):
             self.assertEqual("long", export_manifest["source"]["precompute_field_types"]["langdex_concept_id"])
             self.assertEqual("int", export_manifest["source"]["precompute_field_types"]["langdex_flags"])
             VERIFY.verify(output)
+
+    def test_si_unit_owner_payload_round_trips_scalar_java_types(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source_id = "dictlang.si-units"
+            source_path = "synexia-dictlang/shared/api/src/main/java/com/synexia/dictshared/api/SiUnit.java"
+            sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
+            requirement = sources[source_id]["precompute_fields"]
+            manifest = root / "sources.tsv"
+            manifest.write_text(
+                "\t".join(EXPORT.MANIFEST_COLUMNS_V2) + "\n"
+                + "\t".join((source_id, "SI units", source_path, "unit_id",
+                              "canonical_name,symbol", "M3StringFacts + SiUnitPrecompute",
+                              "Apache-2.0", "fixture", requirement)) + "\n",
+                encoding="utf-8",
+            )
+            payload = {
+                "si_decimal_exponent": -3,
+                "si_dimension_packed": 281474976710656,
+                "si_offset": 273.15,
+                "si_prefixable": True,
+            }
+            records = root / "records.tsv"
+            records.write_text(
+                "\t".join(EXPORT.RECORD_COLUMNS_V2) + "\n"
+                + "\t".join((source_id, source_path, "si-unit", "und", "metre", "m",
+                              "si:metre", "METRE", "-", "M3StringFacts + SiUnitPrecompute",
+                              json.dumps(payload, separators=(",", ":")))) + "\n",
+                encoding="utf-8",
+            )
+            output = root / "output"
+            EXPORT.export(manifest, records, output, "fixture", "3e85c872adf556901a341a9eb1c3b59864918da1",
+                          ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
+            mapping = list(csv.DictReader(
+                (output / "synexia.records.tsv").read_text(encoding="utf-8").splitlines(),
+                delimiter="\t"))[0]
+            self.assertEqual(payload, json.loads(mapping["precompute_payload"]))
+            export_manifest = json.loads((output / "synexia.export.json").read_text(encoding="utf-8"))
+            self.assertEqual("double", export_manifest["source"]["precompute_field_types"]["si_offset"])
+            self.assertEqual("boolean", export_manifest["source"]["precompute_field_types"]["si_prefixable"])
+            VERIFY.verify(output)
+            records.write_text(
+                records.read_text(encoding="utf-8").replace(
+                    '"si_prefixable":true', '"si_prefixable":1', 1),
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "field si_prefixable is not boolean"):
+                EXPORT.export(manifest, records, root / "bad-output", "fixture",
+                              "3e85c872adf556901a341a9eb1c3b59864918da1",
+                              ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
 
     def test_replay_is_byte_identical_except_for_output_location(self):
         with tempfile.TemporaryDirectory() as directory:
