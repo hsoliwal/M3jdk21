@@ -67,6 +67,15 @@ public class M3StringInternTest {
         check(M3_OWNER.get(STRING_M3.get(wideValue)) == M3_OWNER.get(STRING_M3.get(wideScalar)),
                 "wide valueOf/scalar canonical unit owner identity");
 
+        String deletedToEmpty = String.join("", "x").replace("x", "");
+        check(deletedToEmpty.isEmpty(), "canonical delete-to-empty content");
+        check(deletedToEmpty.intern() == "".intern(), "canonical delete-to-empty intern identity");
+
+        String continuedToEmpty = String.join("", "\\\n").translateEscapes();
+        check(continuedToEmpty.isEmpty(), "canonical continuation-to-empty content");
+        check(continuedToEmpty.intern() == "".intern(),
+                "canonical continuation-to-empty intern identity");
+
         String empty = new String(new char[0]);
         check(empty.intern() == "".intern(), "empty intern identity");
 
