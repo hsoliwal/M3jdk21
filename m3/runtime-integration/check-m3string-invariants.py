@@ -174,6 +174,19 @@ for fragment in [
     if fragment not in string:
         fail(f"String supplementary M3 route missing: {fragment}")
 
+# Prepared literal AUTO search follows the mature Synexia convergence: bounded 256-entry
+# conservative BMH skip metadata for long patterns, with existing KMP as the exact adversarial
+# fallback. Low-byte collisions may only reduce skips; KMP remains semantic authority.
+for fragment in [
+    "int[] skip256 = new int[256];",
+    "skip256[pattern.charAt(index) & 255] = length - 1 - index;",
+    "if (plan.patternLength >= 8)",
+    "failedComparisonWork > (long) plan.patternLength + 2L * (at - fromIndex)",
+    "return kmp(source, pattern, plan, at, endIndex);",
+]:
+    if fragment not in search_precompute:
+        fail(f"M3 adaptive BMH/KMP convergence missing: {fragment}")
+
 # Exact trigram membership is owned by M3TQ.Facts and reused by a separate bounded weak
 # source-range cache. Do not duplicate exact trigram arrays in M3StringFacts.
 for fragment in [
