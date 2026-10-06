@@ -408,6 +408,31 @@ for fragment in [
     if fragment not in search_precompute:
         fail(f"M3 adaptive BMH/KMP convergence missing: {fragment}")
 
+# Flat mutable builders keep their own compact byte storage, but an immutable M3 String
+# needle must be consumed through prepared M3 facts rather than materialized with String.value().
+for fragment in [
+    "static int indexOfFlat(",
+    "static int lastIndexOfFlat(",
+    "adaptiveBmhFlat(",
+    "kmpFlat(",
+    "flatCharAt(byte[] source, byte coder, int index)",
+]:
+    if fragment not in search_precompute:
+        fail(f"M3 flat-source prepared search missing: {fragment}")
+for fragment in [
+    "M3String targetM3 = tgtStr.m3();",
+    "M3StringSearchPrecompute.indexOfFlat(",
+    "M3StringSearchPrecompute.lastIndexOfFlat(",
+]:
+    if fragment not in string:
+        fail(f"String builder-search M3 needle route missing: {fragment}")
+builder_search_index = string[string.find("static int indexOf(byte[] src"):string.find("public int lastIndexOf(String str)")]
+if "byte[] tgt = tgtStr.value();" in builder_search_index and builder_search_index.find("M3String targetM3 = tgtStr.m3();") > builder_search_index.find("byte[] tgt = tgtStr.value();"):
+    fail("builder indexOf materializes M3 needle before canonical route")
+builder_search_last = string[string.find("static int lastIndexOf(byte[] src"):string.find("public String substring(int beginIndex)")]
+if "byte[] tgt = tgtStr.value();" in builder_search_last and builder_search_last.find("M3String targetM3 = tgtStr.m3();") > builder_search_last.find("byte[] tgt = tgtStr.value();"):
+    fail("builder lastIndexOf materializes M3 needle before canonical route")
+
 # Exact trigram membership is owned by M3TQ.Facts and reused by a separate bounded weak
 # source-range cache. Do not duplicate exact trigram arrays in M3StringFacts.
 for fragment in [
@@ -1051,6 +1076,7 @@ for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringPrecomputeSearchTest.java",
     "M3StringInternTest.java",
+    "M3StringBuilderSearchTest.java",
     "M3StringCanonicalDagTest.java",
     "M3TQFactsTest.java",
     "M3RegexLiteralTQTest.java",
