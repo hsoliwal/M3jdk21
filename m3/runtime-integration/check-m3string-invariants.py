@@ -182,6 +182,13 @@ for fragment in [
     if fragment not in string:
         fail(f"String supplementary M3 route missing: {fragment}")
 
+for fragment in [
+    "if (checked.length() == 1) return indexOf(checked.charAt(0), from, end);",
+    "if (checked.length() == 1) return lastIndexOf(checked.charAt(0), maximumStart);",
+]:
+    if fragment not in m3:
+        fail(f"M3 one-unit literal search lost position-precompute route: {fragment}")
+
 # Prepared literal AUTO search follows the mature Synexia convergence: bounded 256-entry
 # conservative BMH skip metadata for long patterns, with existing KMP as the exact adversarial
 # fallback. Low-byte collisions may only reduce skips; KMP remains semantic authority.
