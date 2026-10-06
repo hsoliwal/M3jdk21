@@ -204,6 +204,104 @@ final class M3StringSearchPrecompute {
         return -1;
     }
 
+    static int indexOfFlat(
+            byte[] source,
+            byte sourceCoder,
+            int sourceCount,
+            M3String pattern,
+            Plan plan,
+            int fromIndex) {
+        int from = Math.clamp(fromIndex, 0, sourceCount);
+        if (plan.patternLength > sourceCount - from) return -1;
+        if (plan.patternLength >= 8) {
+            return adaptiveBmhFlat(source, sourceCoder, sourceCount, pattern, plan, from);
+        }
+        return kmpFlat(source, sourceCoder, sourceCount, pattern, plan, from);
+    }
+
+    static int lastIndexOfFlat(
+            byte[] source,
+            byte sourceCoder,
+            int sourceCount,
+            M3String pattern,
+            Plan plan,
+            int fromIndex) {
+        int maximumStart = Math.min(fromIndex, sourceCount - plan.patternLength);
+        if (maximumStart < 0) return -1;
+
+        int matched = 0;
+        int scanStart = maximumStart + plan.patternLength - 1;
+        for (int index = scanStart; index >= 0; index--) {
+            char unit = flatCharAt(source, sourceCoder, index);
+            while (matched > 0 && unit != reverseUnit(pattern, matched)) {
+                matched = plan.reversePrefix[matched - 1];
+            }
+            if (unit == reverseUnit(pattern, matched)) matched++;
+            if (matched == plan.patternLength) return index;
+        }
+        return -1;
+    }
+
+    private static int kmpFlat(
+            byte[] source,
+            byte sourceCoder,
+            int sourceCount,
+            M3String pattern,
+            Plan plan,
+            int fromIndex) {
+        int matched = 0;
+        for (int index = fromIndex; index < sourceCount; index++) {
+            char unit = flatCharAt(source, sourceCoder, index);
+            while (matched > 0 && unit != pattern.charAt(matched)) {
+                matched = plan.prefix[matched - 1];
+            }
+            if (unit == pattern.charAt(matched)) matched++;
+            if (matched == plan.patternLength) {
+                return index - plan.patternLength + 1;
+            }
+        }
+        return -1;
+    }
+
+    private static int adaptiveBmhFlat(
+            byte[] source,
+            byte sourceCoder,
+            int sourceCount,
+            M3String pattern,
+            Plan plan,
+            int fromIndex) {
+        int maximumStart = sourceCount - plan.patternLength;
+        int at = fromIndex;
+        long failedComparisonWork = 0L;
+        while (at <= maximumStart) {
+            int index = plan.patternLength - 1;
+            while (index >= 0
+                    && pattern.charAt(index)
+                            == flatCharAt(source, sourceCoder, at + index)) {
+                index--;
+            }
+            if (index < 0) return at;
+
+            int shift =
+                    plan.skip256[
+                            flatCharAt(source, sourceCoder, at + plan.patternLength - 1) & 255];
+            if (shift > maximumStart - at) return -1;
+            at += shift;
+
+            failedComparisonWork += plan.patternLength - index;
+            if (failedComparisonWork > (long) plan.patternLength + 2L * (at - fromIndex)) {
+                return kmpFlat(source, sourceCoder, sourceCount, pattern, plan, at);
+            }
+        }
+        return -1;
+    }
+
+    private static char flatCharAt(byte[] source, byte coder, int index) {
+        return coder == String.LATIN1
+                ? StringLatin1.charAt(source, index)
+                : StringUTF16.charAt(source, index);
+    }
+
     static int lastIndexOf(
             M3String source,
             M3String pattern,
