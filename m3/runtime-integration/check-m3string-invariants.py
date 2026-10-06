@@ -948,7 +948,7 @@ for required_trigger in [
     "src/java.base/share/classes/java/lang/AbstractStringBuilder.java",
     "src/java.base/share/classes/java/util/regex/Pattern.java",
     "src/java.base/share/classes/java/util/regex/Matcher.java",
-    "M3StringHistoryConvergenceRecipeTest.java",
+    "m3/tooling/migration-recipes/**",
 ]:
     if required_trigger not in workflow:
         fail(f"M3 String workflow lost trigger path: {required_trigger}")
