@@ -43,6 +43,11 @@ public final class M3FormulaProbabilityIndex {
         M3ProbabilityVector checkedProbabilities =
                 Objects.requireNonNull(probabilities, "probabilities");
 
+        if (!checkedTruth.modelSpace().equals(checkedProbabilities.coordinateSpace())) {
+            throw new IllegalArgumentException(
+                    "probability vector and truth image use different model coordinate spaces");
+        }
+
         long[] formulaIds = checkedTruth.formulaIds();
         long[] models = checkedTruth.modelIds();
         long[] trueMass = new long[formulaIds.length];
