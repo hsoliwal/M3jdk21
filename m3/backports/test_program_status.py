@@ -33,7 +33,7 @@ class ProgramStatusTest(unittest.TestCase):
         self.assertEqual(85, data["jep_rows"])
         self.assertEqual(85, sum(data["jep_states"].values()))
         self.assertEqual(85, data["jep_unique_rows"])
-        self.assertEqual(34, data["priority_jep_rows"])
+        self.assertEqual(36, data["priority_jep_rows"])
         self.assertEqual([], data["priority_missing_from_catalogue"])
         self.assertEqual(22, data["released_jdk_floor"])
         self.assertEqual(27, data["released_jdk_ceiling"])
@@ -54,7 +54,7 @@ class ProgramStatusTest(unittest.TestCase):
         self.assertTrue(first.startswith("kind\tstate\tcount\n"))
         self.assertIn("jep\ttotal\t85\n", first)
         self.assertIn("jep\tunique\t85\n", first)
-        self.assertIn("jep-priority\ttotal\t34\n", first)
+        self.assertIn("jep-priority\ttotal\t36\n", first)
         self.assertIn("community-fork\ttotal\t12\n", first)
 
 if __name__ == "__main__":
