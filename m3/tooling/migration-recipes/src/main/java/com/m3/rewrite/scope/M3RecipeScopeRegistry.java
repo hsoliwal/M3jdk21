@@ -60,6 +60,9 @@ public final class M3RecipeScopeRegistry {
                     explicitChange()),
             Map.entry(
                     "com.m3.rewrite.backport.M3Jep485StreamGatherersBackportRecipe",
+                    explicitChange()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3Jep484ClassfileApiInventoryRecipe",
                     explicitChange()));
 
     private M3RecipeScopeRegistry() {}
