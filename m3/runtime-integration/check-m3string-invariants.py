@@ -589,6 +589,17 @@ for fragment in [
     if fragment not in (string + m3 + pool + atom):
         fail(f"M3 exact byte-array ingress missing: {fragment}")
 
+# Unicode code-point array ingress emits canonical UTF-16 directly into native storage.
+for fragment in [
+    "M3String direct = maybeAdmitCodePoints(codePoints, offset, count);",
+    "M3String.admitCodePoints(value, offset, count)",
+    "M3StringPool.internCodePoints(source, offset, count)",
+    "M3StringAtom.localCodePoints(",
+    "throw new IllegalArgumentException(Integer.toString(cp));",
+]:
+    if fragment not in (string + m3 + pool + atom):
+        fail(f"M3 direct code-point ingress missing: {fragment}")
+
 # StringBuilder ingress reads its compact backing directly and snapshots once into M3.
 for fragment in [
     "M3String direct =",
