@@ -103,25 +103,6 @@ final class M3StringTuple extends M3StringOwner {
                 destinationCoder);
     }
 
-    /**
-     * Exact ordered UTF-16 sequence comparison for tuple canonicalization.
-     *
-     * <p>The pool routes candidates by a shape-independent content key, then verifies exact
-     * content here. This makes tuple identity independent of concat parenthesization without
-     * retaining a flattened text/segment array.</p>
-     */
-    boolean sequenceEquals(M3String candidateLeft, M3String candidateRight) {
-        int leftLength = candidateLeft.length();
-        if (length != Math.addExact(leftLength, candidateRight.length())) return false;
-        for (int index = 0; index < leftLength; index++) {
-            if (charAt(index) != candidateLeft.charAt(index)) return false;
-        }
-        for (int index = 0; index < candidateRight.length(); index++) {
-            if (charAt(leftLength + index) != candidateRight.charAt(index)) return false;
-        }
-        return true;
-    }
-
     private static int childHeight(M3String value) {
         M3StringOwner owner = value.owner();
         return value.start() == 0
