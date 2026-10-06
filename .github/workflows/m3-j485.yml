@@ -1,0 +1,44 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 J485 Java21 proof
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-j485.yml'
+      - 'm3/backports/recipes/j485/**'
+      - 'm3/tooling/migration-recipes/**'
+      - 'src/java.base/share/classes/java/util/stream/**'
+      - 'test/jdk/java/util/stream/Gatherer*.java'
+permissions:
+  contents: read
+jobs:
+  j485:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - name: Prepare pinned Java 21
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21%2B35/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz' -o "$RUNNER_TEMP/jdk21.tar.gz"
+          printf '%s  %s\n' '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6' "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -
+          tar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"
+          printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
+          printf '%s\n' "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
+      - name: Execute actual OpenRewrite J485 recipe atoms
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=com.m3.rewrite.backport.J485RecipeTest test
+      - name: Compile and execute patched Java21 java.base
+        run: |
+          set -euo pipefail
+          bash m3/backports/recipes/j485/verify-java21.sh "$JAVA_HOME" "$GITHUB_WORKSPACE/m3/build/j485"
+      - name: Preserve bounded receipts
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-j485-${{ github.event.pull_request.head.sha }}
+          path: m3/build/j485
+          if-no-files-found: warn
+          retention-days: 7
