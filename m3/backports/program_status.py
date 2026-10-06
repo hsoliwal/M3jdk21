@@ -35,6 +35,7 @@ def classify_seed(disposition: str) -> str:
 def snapshot(root: Path) -> dict[str, object]:
     backports = root / "m3" / "backports"
     jeps = read_tsv(backports / "JEP_CATALOGUE.tsv")
+    priorities = read_tsv(backports / "POST21_PRIORITY_COMPATIBILITY.tsv")
     seeds = read_tsv(backports / "UPSTREAM_CHANGE_SEEDS.tsv")
     forks = read_tsv(backports / "COMMUNITY_FORKS.tsv")
     recipe_root = backports / "recipes"
@@ -42,6 +43,19 @@ def snapshot(root: Path) -> dict[str, object]:
         path.name for path in recipe_root.iterdir()
         if path.is_dir() and (path / "README.md").is_file()
     )
+    jep_ids = [row["jep"] for row in jeps]
+    duplicate_jeps = sorted(
+        jep for jep, count in Counter(jep_ids).items() if count > 1
+    )
+    priority_missing = sorted(
+        row["jep"] for row in priorities if row["jep"] not in set(jep_ids)
+    )
+    if duplicate_jeps:
+        raise ValueError(f"duplicate JEP catalogue rows: {duplicate_jeps}")
+    if priority_missing:
+        raise ValueError(
+            f"priority JEP rows missing from full catalogue: {priority_missing}"
+        )
     jep_states = Counter(classify_jep(row["disposition"]) for row in jeps)
     seed_states = Counter(classify_seed(row["disposition"]) for row in seeds)
     return {
@@ -49,6 +63,9 @@ def snapshot(root: Path) -> dict[str, object]:
         "jep_rows": len(jeps),
         "jep_states": dict(sorted(jep_states.items())),
         "jep_dispositions": dict(sorted(Counter(row["disposition"] for row in jeps).items())),
+        "jep_unique_rows": len(set(jep_ids)),
+        "priority_jep_rows": len(priorities),
+        "priority_missing_from_catalogue": priority_missing,
         "seed_rows": len(seeds),
         "seed_states": dict(sorted(seed_states.items())),
         "seed_dispositions": dict(sorted(Counter(row["disposition"] for row in seeds).items())),
@@ -68,6 +85,8 @@ def snapshot(root: Path) -> dict[str, object]:
 def render_tsv(data: dict[str, object]) -> str:
     rows = [
         ("jep", "total", str(data["jep_rows"])),
+        ("jep", "unique", str(data["jep_unique_rows"])),
+        ("jep-priority", "total", str(data["priority_jep_rows"])),
         *(( "jep-state", key, str(value)) for key, value in data["jep_states"].items()),
         ("seed", "total", str(data["seed_rows"])),
         *(( "seed-state", key, str(value)) for key, value in data["seed_states"].items()),
