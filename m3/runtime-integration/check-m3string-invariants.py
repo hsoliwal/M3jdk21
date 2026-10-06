@@ -570,6 +570,16 @@ for fragment in [
     if fragment not in (m3 + owner):
         fail(f"M3 prepared-fact reuse path missing: {fragment}")
 
+# Literal replacement with a flat/bootstrap source and M3 target/replacement must reuse
+# direct target search plus builder M3 ingress; M3 operands must not be materialized via value().
+for fragment in [
+    "M3String targetM3 = trgtStr.m3();",
+    "M3String replacementM3 = replStr.m3();",
+    "builder.append(replStr);",
+]:
+    if fragment not in string:
+        fail(f"mixed flat/M3 literal replace route missing: {fragment}")
+
 # Mixed flat/M3 prefix checks must not materialize the M3 prefix through value().
 for fragment in [
     "M3String prefixM3 = prefix.m3();",
