@@ -1,0 +1,9 @@
+item	state	evidence	limit
+base	PINNED	87590cb96fb0e2dc0f88fae8e01957f7179cd255	current master at recovery start
+five_targets	ABSENT_CONFIRMED	all five GA-final classes absent before recovery	no overwrite
+product_leaf	RESTORED_BRANCH	exact PR109 blobs	five additive internal classes only
+recipe	RESTORED_BRANCH	M3Jep493RuntimeLinkLeafRecipe + hash-pinned crate	candidate-only
+scope	RESTORED_BRANCH	MODULE / BEHAVIOR_AND_CONTRACT_PRESERVING	full JEP493 remains MULTI_MODULE
+recipe_tests	PENDING_HOSTED	focused source-sealed + registry tests	must pass
+jdk_jlink_compile	PENDING_HOSTED	focused OpenJDK target	must pass before next adaptation leaf
+feature_complete	false	full JEP493 owner/build/test graph still pending	no promotion
