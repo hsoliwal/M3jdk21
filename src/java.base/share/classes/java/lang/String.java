@@ -3014,6 +3014,11 @@ public final class String
 
         M3String targetM3 = tgtStr.m3();
         if (targetM3 != null) {
+            M3StringSearchPrecompute.Plan plan = M3StringSearchPrecompute.prepare(targetM3);
+            if (plan != null) {
+                return M3StringSearchPrecompute.indexOf(
+                        src, srcCoder, srcCount, targetM3, plan, fromIndex);
+            }
             int limit = srcCount - tgtCount;
             char first = targetM3.charAt(0);
             for (int start = fromIndex; start <= limit; start++) {
@@ -3138,6 +3143,11 @@ public final class String
             return fromIndex;
         }
         if (targetM3 != null) {
+            M3StringSearchPrecompute.Plan plan = M3StringSearchPrecompute.prepare(targetM3);
+            if (plan != null) {
+                return M3StringSearchPrecompute.lastIndexOf(
+                        src, srcCoder, targetM3, plan, fromIndex);
+            }
             char first = targetM3.charAt(0);
             for (int start = fromIndex; start >= 0; start--) {
                 char sourceFirst = srcCoder == LATIN1
@@ -4512,7 +4522,12 @@ public final class String
      * @since 11
      */
     public Stream<String> lines() {
-        if (m3() != null) {
+        M3String storage = m3();
+        if (storage != null) {
+            M3StringFacts prepared = storage.factsIfPrepared();
+            if (prepared != null && !prepared.hasLineTerminator) {
+                return Stream.of(this);
+            }
             return StreamSupport.stream(new M3LinesSpliterator(this), false);
         }
         byte[] currentValue = value();
