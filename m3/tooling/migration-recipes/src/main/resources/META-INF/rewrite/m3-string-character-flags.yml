@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.M3StringCharacterFlags
+displayName: Add complete M3 String character-flag precompute
+description: Replays the Synexia donor ten-bit character flag lane into M3StringFacts, composes it across canonical tuples/ranges, and wires safe String consumers without exposing precompute API.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk22-m3-string-character-flags
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-string-character-flags
