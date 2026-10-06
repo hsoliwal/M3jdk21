@@ -499,8 +499,10 @@ final class M3StringPool {
                                     (byte) 2,
                                     bigEndian,
                                     lengths[row],
-                                    mappedLatin1(address, lengths[row], bigEndian)
-                                            ? String.LATIN1 : String.UTF16,
+                                    String.COMPACT_STRINGS
+                                                    && mappedLatin1(address, lengths[row], bigEndian)
+                                            ? String.LATIN1
+                                            : String.UTF16,
                                     javaHashes[row],
                                     id,
                                     M3StringPool.mix64(id ^ lengths[row]));
