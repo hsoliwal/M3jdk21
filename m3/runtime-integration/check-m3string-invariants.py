@@ -28,6 +28,7 @@ search_precompute = read("src/java.base/share/classes/java/lang/M3StringSearchPr
 position_precompute = read("src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java")
 tq = read("src/java.base/share/classes/jdk/internal/mindex/M3TQ.java")
 string = read("src/java.base/share/classes/java/lang/String.java")
+asb = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
 abstract_builder = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
 symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
 classes = read("src/hotspot/share/classfile/vmClassMacros.hpp")
@@ -110,6 +111,17 @@ for fragment in [
 
 if "storage.getBytes(dst, srcBegin, dstBegin, LATIN1, srcEnd - srcBegin);" not in string:
     fail("deprecated String.getBytes range lost M3 bulk projection")
+
+# AbstractStringBuilder String append/insert must consume M3 storage through String.getBytes;
+# direct String.value() copies are fallback-only for non-M3 inputs.
+for fragment in [
+    "M3String storage = s.m3();",
+    "s.getBytes(this.value, off, this.count, LATIN1, end - off);",
+    "s.getBytes(this.value, i, j, UTF16, end - i);",
+    "s.getBytes(this.value, off, this.count, UTF16, end - off);",
+]:
+    if fragment not in asb:
+        fail(f"AbstractStringBuilder M3 bulk append route missing: {fragment}")
 
 # Byte/char projections must descend through canonical owner geometry, not walk M3 tuple
 # charAt one unit at a time.
