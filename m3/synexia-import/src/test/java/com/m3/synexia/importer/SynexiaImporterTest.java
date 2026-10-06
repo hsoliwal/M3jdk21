@@ -42,6 +42,7 @@ final class SynexiaImporterTest {
         assertFalse(Files.exists(m3jdk.resolve(targetPath)));
 
         SynexiaImporter.materialize(synexia, m3jdk, manifest);
+        SynexiaImporter.verifyTargetSnapshot(m3jdk, manifest);
         assertTrue(Files.isRegularFile(m3jdk.resolve(targetPath)));
         assertEquals(sha256(bytes), sha256(Files.readAllBytes(m3jdk.resolve(targetPath))));
 
@@ -69,6 +70,9 @@ final class SynexiaImporterTest {
 
         write(synexia.resolve(sourcePath), before);
         write(m3jdk.resolve(targetPath), apache("package p; final class A { int y; }\n"));
+        assertThrows(
+                IllegalStateException.class,
+                () -> SynexiaImporter.verifyTargetSnapshot(m3jdk, manifest));
         assertThrows(
                 IllegalStateException.class,
                 () -> SynexiaImporter.verify(synexia, m3jdk, manifest));
