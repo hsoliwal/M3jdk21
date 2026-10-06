@@ -483,6 +483,15 @@ public class M3StringPrecomputeSearchTest {
                         == latinSearchBuilder.toString().lastIndexOf(latinBuilderNeedle),
                 "Latin1 builder lastIndexOf M3 target");
 
+        String flatStartsWithSource = "bootstrap-prefix-body";
+        String m3Prefix = String.join("", "bootstrap", "-prefix");
+        check(flatStartsWithSource.startsWith(m3Prefix),
+                "flat source startsWith M3 prefix");
+        check(flatStartsWithSource.startsWith(m3Prefix, 0),
+                "flat source startsWith M3 prefix offset");
+        check(!flatStartsWithSource.startsWith(String.join("", "bootstrap", "-prefiy")),
+                "flat source startsWith M3 prefix negative");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
