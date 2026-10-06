@@ -1,0 +1,26 @@
+field	value
+jep	423
+title	Region Pinning for G1
+classification	COMPATIBLE_RUNTIME
+default_java21	CANDIDATE
+baseline_ref	jdk-21+35
+donor_ref	jdk-22+36
+implementation_issue	JDK-8318706
+implementation_commit	38cfb220ddadbb401cc15f313aadb8234f626210
+required_followup_issue_1	JDK-8323610
+required_followup_contract_1	HeapRegion pin count uses size_t-width storage
+required_followup_issue_2	JDK-8322484
+required_followup_contract_2	G1RegionPinCache thread-local pin/unpin fast path present
+selected_paths	57
+preserved_upstream_deletions	2
+generator	m3/backports/generate_recipe_crates.py
+executor	m3/backports/materialize_generated_crates.py
+crate_size	1
+include_text	true
+include_native	true
+file_atom_scope	FILE
+g1_core_scope	MODULE
+feature_scope	MULTI_MODULE
+branch_product_mutation	false
+ci_materialization	EPHEMERAL_ONLY
+promotion	NOT_AUTHORIZED
