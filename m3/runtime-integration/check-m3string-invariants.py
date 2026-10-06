@@ -42,6 +42,7 @@ dedup = read("src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp")
 stringtable = read("src/hotspot/share/classfile/stringTable.cpp")
 mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
+history_recovery = read("m3/docs/m3string-history-recovery.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
 recipe_receipt = read("m3/docs/synexia-recipe-application.md")
 builder = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
@@ -563,6 +564,48 @@ for fragment in [
 ]:
     if fragment not in stringtable:
         fail(f"M3 StringTable hash path missing: {fragment}")
+
+
+# String migration is history-derived, not current-snapshot-only. Qualified historical atoms must
+# remain explicitly absorbed, adapted, safely subset-ported, or held outside java.lang.String.
+for fragment in [
+    "mindex.string.composite.range-retention\t29bf7407028012d724f48fe5099b8993ce3ffa60",
+    "mindex.string.masked-view\t5b64833c3e221b4a7b7b87ad1c5b83d3a96f94b7",
+    "mindex.string.literal-regex-replacement\t0d7eb082ce561fd64f3ecd0f56c1ede3dd6661c7",
+    "mindex.string.mapped-fact-attachment\t7a47a8a445ca438fb59206508a42b6054956049a",
+    "mindex.string.palindrome-facts\t10b4894505a6f6306f340c5ff3ef17270706b2c6",
+    "mindex.string.suffix-decision\td6308bff7e3a55e77c4dc45c4f47187acb2e523b",
+    "mindex.string.relation-precompute\ta217f8cc42912fdd19b757b815b8c0ac3aa9c132",
+    "\tABSORB_RUNTIME\tALREADY_ABSORBED\t",
+    "\tADAPT_INTERNAL_VIEW\tPENDING_CONCRETE_JDK_CONSUMER\t",
+    "\tPORT_SAFE_SUBSET\tRECOVERED_IN_RECEIVER\t",
+    "\tPRESERVE_DONOR_NO_STRING_CONSUMER\tNO_PORT",
+    "\tEXTERNAL_M3_PLANE\tNO_PORT_TO_STRING\t",
+]:
+    if fragment not in history_recovery:
+        fail(f"M3 String history-recovery ledger missing: {fragment}")
+
+for fragment in [
+    "static boolean isConservativeLiteralRegex(String expression)",
+    "static boolean isLiteralRegexReplacement(String replacement)",
+    "M3String replaceFirstLiteralRegex(M3String target, M3String replacement)",
+]:
+    if fragment not in m3:
+        fail(f"history-recovered literal-regex M3 atom missing: {fragment}")
+
+for fragment in [
+    "M3String.isConservativeLiteralRegex(regex)",
+    "M3String.isLiteralRegexReplacement(replacement)",
+    "storage.replaceFirstLiteralRegex(target, repl)",
+    "target.length() == 0",
+    "storage.replaceEmptyTarget(repl)",
+    "storage.replace(target, repl)",
+]:
+    if fragment not in string:
+        fail(f"history-recovered String literal-regex route missing: {fragment}")
+
+if (ROOT / "src/java.base/share/classes/java/lang/SubM3String.java").exists():
+    fail("donor SubMIndexString taxonomy was copied instead of absorbing owner+coordinate semantics")
 
 # Expensive donor facts with no JDK21 semantic consumer are intentional NO_PORTs. Adding one of
 # these java.lang owners requires an explicit architecture/invariant revision and a real consumer.
