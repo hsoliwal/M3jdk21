@@ -21,31 +21,44 @@ python3 m3/backports/jep_residue.py --root . --out m3/backports/JEP_RESIDUE_QUEU
 
 The corrected released catalogue contains **85 unique JEP rows** spanning JDK 22 through JDK 27.
 
-This lane repairs three omissions from the older 82-row snapshot:
+The current repair restores the released-feature authority that was partially lost by a later
+merge. The authoritative JDK 22–27 set includes:
 
+- **JEP 404** — Generational Shenandoah (Experimental) — JDK 24
+  - disposition: `candidate-high-risk`
+  - reason: base generational Shenandoah implementation; GC/runtime dependency closure and
+    platform proof are mandatory
 - **JEP 483** — Ahead-of-Time Class Loading & Linking — JDK 24
   - disposition: `candidate-high-risk`
   - reason: runtime/CDS optimization, no Java grammar change, but dependency closure and
     startup/class-loading parity are mandatory
 - **JEP 521** — Generational Shenandoah — JDK 25
-  - disposition: `candidate`
-  - reason: makes an existing Shenandoah mode non-experimental; no Java grammar/API change, but
-    GC/runtime option and regression proof are mandatory
-- **JEP 401** — Value Classes and Objects (Preview) — JDK 26
-  - disposition: `reject-language`
-  - reason: preview language/JVMS/object-identity/class-file changes exceed the locked Java 21
-    contract
+  - disposition: `candidate-high-risk`
+  - reason: productizes the JEP 404 lineage and therefore depends on the complete JEP 404 collector
+    implementation
+
+**JEP 401 is not part of the released JDK 22–27 authority set** and is removed from this denominator
+rather than being used to keep the total artificially at 85.
+
+Per-release authority counts:
+
+- JDK 22: 12
+- JDK 23: 12
+- JDK 24: 24
+- JDK 25: 18
+- JDK 26: 10
+- JDK 27: 9
 
 Current disposition counts:
 
-- **41** pending proof or implementation
+- **42** pending proof or implementation
   - 11 `candidate`
-  - 17 `candidate-high-risk`
+  - 18 `candidate-high-risk`
   - 5 `hold-compat`
   - 5 `hold-jit`
   - 3 `hold-preview`
-- **44** decided no direct default backport
-  - 19 `reject-language`
+- **43** decided no direct default backport
+  - 18 `reject-language`
   - 5 `reject-compat`
   - 17 `superseded`
   - 2 `superseded-high-risk`
