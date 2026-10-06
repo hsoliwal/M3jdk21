@@ -1,0 +1,5 @@
+order	identity	kind	release	upstream_commit	upstream_ref	physical_scope	default_java21	status	depends_on	next_proof
+0	JDK21-INTERNAL-CLASSFILE	INTERNAL_ENGINE_BASELINE	21	890adb6410dab4606a4f26a942aed02fb2f55387	jdk-21+35	MODULE	YES	PRESENT		Inventory internal engine and prove public package absent.
+1	JEP-457	PUBLIC_API_FIRST_PREVIEW	22	2b00ac0d02a110326846c75ea7ea535dccbb1924	jdk-22+36	LIBRARY_API	NO	OPT_IN_ONLY	JDK21-INTERNAL-CLASSFILE	Review internal-to-public rename/publicization and downstream module/tool migrations.
+2	JEP-466	PUBLIC_API_SECOND_PREVIEW	23	19a99d023e32fa9f4d26b76bd36993719e1dfe21	jdk-23+37	LIBRARY_API	NO	OPT_IN_ONLY	JEP-457	Use cumulative classfile-path history; transition commit alone only changes preview-stage metadata.
+3	JEP-484	FINAL_PUBLIC_API	24	84ffb64cd73f8af11cf3670c6f19d282c2ac6961	jdk-24+36	LIBRARY_API	NO	CANDIDATE_OPT_IN_UNVERIFIED	JEP-466	Author source-sealed opt-in API packet only after Java21 classfile-version/default-behavior adaptation plan is complete.
