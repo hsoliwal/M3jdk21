@@ -113,6 +113,18 @@ class JepResidueTest(unittest.TestCase):
             ]
             by_jep = {item.jep: item for item in self.r.queue(root, catalogue, [])}
 
+        self.assertEqual("PACKET_EVIDENCE", by_jep[423].evidence_state)
+        self.assertIn("m3/backports/recipes/j423", by_jep[423].evidence_paths)
+        self.assertIn(
+            "m3/backports/recipes/jep-423-region-pinning",
+            by_jep[423].evidence_paths,
+        )
+        self.assertEqual("MATERIALIZED_PACKET", by_jep[474].evidence_state)
+        self.assertEqual("EQUIVALENCE_PROOF_PENDING", by_jep[474].receipt_state)
+        self.assertEqual("PACKET_EVIDENCE", by_jep[484].evidence_state)
+        self.assertEqual("MATERIALIZED_PACKET", by_jep[485].evidence_state)
+        self.assertEqual("PRODUCT_INTEGRATION_PRESENT", by_jep[485].receipt_state)
+        self.assertEqual("PACKET_EVIDENCE", by_jep[491].evidence_state)
         self.assertEqual("MATERIALIZED_PACKET", by_jep[458].evidence_state)
         self.assertIn("jep-458-current", by_jep[458].evidence_paths)
         self.assertEqual("PACKET_READY", by_jep[458].receipt_state)
@@ -123,6 +135,26 @@ class JepResidueTest(unittest.TestCase):
         )
         self.assertEqual("RECIPE_CLASS", by_jep[485].evidence_state)
         self.assertIn("M3Jep485BackportRecipe.java", by_jep[485].evidence_paths)
+
+    def test_short_and_long_packet_directories_are_evidence_not_materialization_without_receipt(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            short_packet = root / "m3/backports/recipes/j423"
+            long_packet = root / "m3/backports/recipes/jep-423-region-pinning"
+            short_packet.mkdir(parents=True)
+            long_packet.mkdir(parents=True)
+            (short_packet / "README.md").write_text("inventory", encoding="utf-8")
+            (long_packet / "README.md").write_text("candidate packet", encoding="utf-8")
+
+            item = self.r.queue(
+                root,
+                [self.row(release=22, jep=423, disposition="candidate")],
+                [],
+            )[0]
+
+        self.assertEqual("PACKET_EVIDENCE", item.evidence_state)
+        self.assertIn("m3/backports/recipes/j423", item.evidence_paths)
+        self.assertIn("m3/backports/recipes/jep-423-region-pinning", item.evidence_paths)
 
     def test_priority_matrix_metadata_is_joined_without_granting_compatibility(self) -> None:
         catalogue = [self.row(release=24, jep=493, disposition="candidate")]
