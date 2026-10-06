@@ -43,6 +43,7 @@ mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
 native_string = read("src/java.base/share/native/libjava/String.c")
+native_string_test = read("test/jdk/java/lang/String/nativeEncoding/libstringPlatformChars.c")
 hotspot_java_classes = read("src/hotspot/share/classfile/javaClasses.cpp")
 hotspot_jni = read("src/hotspot/share/prims/jni.cpp")
 native_encoding_java = read("test/jdk/java/lang/String/nativeEncoding/StringPlatformChars.java")
@@ -435,6 +436,14 @@ for fragment in [
 ]:
     if fragment not in hotspot_java_classes:
         fail(f"HotSpot M3 String equality path missing: {fragment}")
+
+# JNI region APIs must stay covered by the existing native String harness.
+for fragment in [
+    "GetStringRegion(env, value, start, length, buffer)",
+    "GetStringUTFRegion(env, value, start, length, buffer)",
+]:
+    if fragment not in native_string_test:
+        fail(f"JNI String region proof missing: {fragment}")
 
 # JNI creates only the final compatibility arrays, then bulk-fills them from canonical M3
 # storage. Per-code-unit JNI dispatch and temporary C spelling buffers are forbidden.
