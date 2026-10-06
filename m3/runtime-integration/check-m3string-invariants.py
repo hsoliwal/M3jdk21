@@ -101,6 +101,9 @@ for fragment in [
     if fragment not in m3:
         fail(f"M3 bulk byte entry validation missing: {fragment}")
 
+if "storage.getBytes(dst, srcBegin, dstBegin, LATIN1, srcEnd - srcBegin);" not in string:
+    fail("deprecated String.getBytes range lost M3 bulk projection")
+
 # Byte/char projections must descend through canonical owner geometry, not walk M3 tuple
 # charAt one unit at a time.
 if "owner.getBytes(" not in m3:
