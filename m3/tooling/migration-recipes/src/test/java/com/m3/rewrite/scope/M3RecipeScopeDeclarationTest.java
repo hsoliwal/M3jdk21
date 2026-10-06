@@ -17,6 +17,7 @@ import com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe;
 import com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe;
 import com.m3.rewrite.backport.M3VerbatimJavaPairRecipe;
 import com.m3.rewrite.backport.M3Jep458BackportRecipe;
+import com.m3.rewrite.backport.M3ReleaseJepDenominatorCurrentRecipe;
 import com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe;
 import com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe;
 import com.synexia.rewrite.M3SegmentedLaneNativeRecipe;
@@ -26,7 +27,7 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(15, M3RecipeScopeRegistry.size());
+        assertEquals(16, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered("org.openrewrite.java.RemoveUnusedImports"));
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
@@ -42,6 +43,15 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3Jdk21HashPinnedTextSnapshotRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3VerbatimJavaPairRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jep458BackportRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3ReleaseJepDenominatorCurrentRecipe.class.getName()));
+        var denominator =
+                M3RecipeScopeRegistry.require(M3ReleaseJepDenominatorCurrentRecipe.class);
+        assertEquals(M3EditScope.MULTI_MODULE, denominator.minimumScope());
+        assertEquals(
+                M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING,
+                denominator.contractMode());
+        assertFalse(denominator.fileLocalMechanical(List.of("m3/backports/JEP_CATALOGUE.tsv")));
+
         var jep = M3RecipeScopeRegistry.require(M3Jep458BackportRecipe.class);
         assertEquals(M3EditScope.LIBRARY_API, jep.minimumScope());
         assertEquals(M3ContractMode.EXPLICIT_CONTRACT_CHANGE, jep.contractMode());
@@ -138,7 +148,8 @@ final class M3RecipeScopeDeclarationTest {
                 M3PatternizePureIntAtomRecipe.class,
                 M3DocumentPureIntAtomRecipe.class,
                 M3PureIntConvergenceRecipe.class,
-                M3Java21ConvergenceRecipe.class)) {
+                M3Java21ConvergenceRecipe.class,
+                M3ReleaseJepDenominatorCurrentRecipe.class)) {
             assertEquals(
                     M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING,
                     M3RecipeScopeRegistry.require(recipe).contractMode());
