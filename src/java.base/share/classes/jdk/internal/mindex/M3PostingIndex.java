@@ -21,24 +21,31 @@ import java.util.TreeMap;
  * same coordinate space/generation supplied by the caller.</p>
  */
 public final class M3PostingIndex {
+    private final M3CoordinateSpace coordinateSpace;
     private final int documentCount;
     private final LongPostings tokens;
     private final PairPostings adjacentPairs;
     private final PairPostings relationPairs;
 
     private M3PostingIndex(
+            M3CoordinateSpace coordinateSpace,
             int documentCount,
             LongPostings tokens,
             PairPostings adjacentPairs,
             PairPostings relationPairs) {
+        this.coordinateSpace = Objects.requireNonNull(coordinateSpace, "coordinateSpace");
         this.documentCount = documentCount;
         this.tokens = tokens;
         this.adjacentPairs = adjacentPairs;
         this.relationPairs = relationPairs;
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public static Builder builder(M3CoordinateSpace coordinateSpace) {
+        return new Builder(coordinateSpace);
+    }
+
+    public M3CoordinateSpace coordinateSpace() {
+        return coordinateSpace;
     }
 
     public int documentCount() {
@@ -158,8 +165,13 @@ public final class M3PostingIndex {
     }
 
     public static final class Builder {
+        private final M3CoordinateSpace coordinateSpace;
         private final ArrayList<long[]> documents = new ArrayList<>();
         private final ArrayList<RelationDraft> relations = new ArrayList<>();
+
+        private Builder(M3CoordinateSpace coordinateSpace) {
+            this.coordinateSpace = Objects.requireNonNull(coordinateSpace, "coordinateSpace");
+        }
 
         public int addDocument(long... tokenIds) {
             Objects.requireNonNull(tokenIds, "tokenIds");
@@ -222,6 +234,7 @@ public final class M3PostingIndex {
             }
 
             return new M3PostingIndex(
+                    coordinateSpace,
                     documents.size(),
                     LongPostings.freeze(tokenMap),
                     PairPostings.freeze(adjacentMap),
