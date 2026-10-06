@@ -471,6 +471,10 @@ public final class M3SynexiaHandoffGuardRecipe extends Recipe {
         }
     }
 
+    static String hierarchyQualificationRoot(String text) {
+        return HierarchyQualification.parse(text).root();
+    }
+
     private record HierarchyQualification(
             String sourceRevision,
             String hierarchyRoot,
