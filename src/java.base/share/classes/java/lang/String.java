@@ -2306,7 +2306,12 @@ public final class String
                 M3String leftRange = leftM3.slice(toffset, toffset + len);
                 M3String rightRange = rightM3.slice(ooffset, ooffset + len);
                 if (leftRange.sameCoordinate(rightRange)) return true;
-                if (leftRange.hashCodeValue() != rightRange.hashCodeValue()) return false;
+                M3StringFacts leftFacts = leftRange.factsIfPrepared();
+                M3StringFacts rightFacts = rightRange.factsIfPrepared();
+                if (leftFacts != null && rightFacts != null
+                        && leftFacts.javaHash != rightFacts.javaHash) {
+                    return false;
+                }
             }
             for (int index = 0; index < len; index++) {
                 if (charAt(toffset + index) != other.charAt(ooffset + index)) return false;
@@ -2398,9 +2403,12 @@ public final class String
         M3String rightM3 = other.m3();
         if (leftM3 != null || rightM3 != null) {
             if (leftM3 != null && rightM3 != null) {
-                M3StringFacts leftFacts = leftM3.slice(toffset, toffset + len).facts();
-                M3StringFacts rightFacts = rightM3.slice(ooffset, ooffset + len).facts();
-                if (leftFacts.ascii && rightFacts.ascii
+                M3StringFacts leftFacts =
+                        leftM3.slice(toffset, toffset + len).factsIfPrepared();
+                M3StringFacts rightFacts =
+                        rightM3.slice(ooffset, ooffset + len).factsIfPrepared();
+                if (leftFacts != null && rightFacts != null
+                        && leftFacts.ascii && rightFacts.ascii
                         && (leftFacts.asciiLowerHash != rightFacts.asciiLowerHash
                                 || leftFacts.asciiUpperHash != rightFacts.asciiUpperHash
                                 || leftFacts.asciiTitleHash != rightFacts.asciiTitleHash)) {
