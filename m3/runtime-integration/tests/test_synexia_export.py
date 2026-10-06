@@ -70,13 +70,21 @@ class SynexiaExportTest(unittest.TestCase):
                         "expansion_word_ids": [201, 202],
                         "language": row[3],
                         "lemma_id": 11,
+                        "lexical_rank": 5,
                         "mapping_id": row[6],
                         "memberships": [301],
                         "morphology_mask": 16,
                         "phonetic_id": 13,
                         "pos_mask": 8,
+                        "presence64": 17,
+                        "sim_hash64": 19,
+                        "script_ordinal": 25,
                         "stem_id": 7,
                         "subjects": [401],
+                        "utf16_length": len(row[5].encode("utf-16-le", "surrogatepass")) // 2,
+                        "code_point_length": len(row[5]),
+                        "first_code_point": ord(row[5][0]),
+                        "last_code_point": ord(row[5][-1]),
                     }
                 enriched.append(row + (json.dumps(payload, ensure_ascii=False),))
             rows = enriched
@@ -115,6 +123,8 @@ class SynexiaExportTest(unittest.TestCase):
             self.assertEqual([101, 102], london_payload["concept_ids"])
             self.assertEqual([201, 202], london_payload["expansion_word_ids"])
             self.assertEqual(13, london_payload["phonetic_id"])
+            self.assertEqual(19, london_payload["sim_hash64"])
+            self.assertEqual(25, london_payload["script_ordinal"])
             facts = (root / "first/synexia.precompute.tsv").read_text(encoding="utf-8")
             self.assertIn("NumberPrecompute", facts)
             self.assertIn("M3StringFacts", facts)

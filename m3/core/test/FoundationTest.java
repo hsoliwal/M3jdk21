@@ -157,6 +157,7 @@ public final class FoundationTest {
         SharedLexiconCatalog.Coordinate london=catalog.find("London").orElseThrow();
         check(catalog.mappingsAt(london).stream().anyMatch(mapping->mapping.translationProfile().equals("en->hi")));
         check(catalog.mappingsAt(london).stream().anyMatch(mapping->mapping.precomputePayload().contains("\"phonetic_id\":13")));
+        check(catalog.mappingsAt(london).stream().anyMatch(mapping->mapping.precomputePayload().contains("\"sim_hash64\":19")));
         List<SharedLexiconCatalog.Coordinate> hundreds=catalog.prefix("100",3);
         check(hundreds.size()==3);check(catalog.textAt(hundreds.get(0)).equals("100"));
         check(catalog.textAt(hundreds.get(1)).equals("1000"));check(catalog.textAt(hundreds.get(2)).equals("10000"));

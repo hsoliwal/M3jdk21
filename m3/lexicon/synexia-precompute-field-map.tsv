@@ -16,5 +16,13 @@ IndexWordSignalEnrichment	lemmaId	lemma_id	synexia.records.tsv:precompute_payloa
 IndexWordSignalEnrichment	phoneticId	phonetic_id	synexia.records.tsv:precompute_payload	MAPPED	optional enrichment ID uses explicit NONE/default semantics in source payload
 IndexWordSignalEnrichment	posMask	pos_mask	synexia.records.tsv:precompute_payload	MAPPED	bit mask remains donor-owned and opaque
 IndexWordSignalEnrichment	morphologyMask	morphology_mask	synexia.records.tsv:precompute_payload	MAPPED	bit mask remains donor-owned and opaque
+IndexWordSignalProfile	lexicalRank	lexical_rank	synexia.records.tsv:precompute_payload	MAPPED	lexical ordering signal remains source metadata
+IndexWordSignalProfile	utf16Length	utf16_length	synexia.records.tsv:precompute_payload	MAPPED	owner-provided value is retained; independently verified M3StringFacts remain authoritative for image text
+IndexWordSignalProfile	codePointLength	code_point_length	synexia.records.tsv:precompute_payload	MAPPED	owner-provided value is retained; independently verified M3StringFacts remain authoritative for image text
+IndexWordSignalProfile	firstCodePoint	first_code_point	synexia.records.tsv:precompute_payload	MAPPED	boundary signal remains donor-owned and opaque
+IndexWordSignalProfile	lastCodePoint	last_code_point	synexia.records.tsv:precompute_payload	MAPPED	boundary signal remains donor-owned and opaque
+IndexWordSignalProfile	scriptOrdinal	script_ordinal	synexia.records.tsv:precompute_payload	MAPPED	Unicode script signal remains language-layer metadata
+IndexWordSignalProfile	presence64	presence64	synexia.records.tsv:precompute_payload	MAPPED	presence signature remains donor-owned and opaque
+IndexWordSignalProfile	simHash64	sim_hash64	synexia.records.tsv:precompute_payload	MAPPED	probabilistic signature remains donor-owned and opaque
 IndexWordSignalProfile	frequencyRank	frequency_rank	synexia.records.tsv:precompute_payload	MAPPED	frequency ordering remains source metadata, never image_row identity
 IndexWordSignalFlags	EMPTY/ASCII/LATIN1/...	flags	synexia.records.tsv:precompute_payload	MAPPED	profile flags are preserved only when supplied; bounded M3StringFacts remain independently verified
