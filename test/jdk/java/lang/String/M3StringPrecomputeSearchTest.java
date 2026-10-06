@@ -18,6 +18,7 @@ import java.nio.charset.UnmappableCharacterException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Random;
 
 public class M3StringPrecomputeSearchTest {
@@ -203,6 +204,23 @@ public class M3StringPrecomputeSearchTest {
                     "ASCII supplementary input length");
         }
 
+        String asciiCase = String.join("", "AbC", "-xYz-123");
+        check(asciiCase.toLowerCase(Locale.ROOT).equals("abc-xyz-123"),
+                "ROOT ASCII lowercase");
+        check(asciiCase.toUpperCase(Locale.ROOT).equals("ABC-XYZ-123"),
+                "ROOT ASCII uppercase");
+        String alreadyLower = String.join("", "abc", "-123");
+        check(alreadyLower.toLowerCase(Locale.ROOT) == alreadyLower,
+                "ROOT ASCII lowercase unchanged identity");
+        String alreadyUpper = String.join("", "ABC", "-123");
+        check(alreadyUpper.toUpperCase(Locale.ROOT) == alreadyUpper,
+                "ROOT ASCII uppercase unchanged identity");
+        check(String.join("", "I", "X").toLowerCase(Locale.forLanguageTag("tr"))
+                        .equals("\u0131x"),
+                "Turkish lowercase bypass");
+        check(String.join("", "\u03a3", "X").toLowerCase(Locale.ROOT).equals("\u03c3x"),
+                "non-ASCII lowercase bypass");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
@@ -308,6 +326,16 @@ public class M3StringPrecomputeSearchTest {
             check(equalChars(source.strip(), naiveStrip(oracle).toCharArray()),
                     "random strip " + trial);
             check(source.isBlank() == naiveIsBlank(oracle), "random blank " + trial);
+            if (isAscii(oracle)) {
+                check(equalChars(
+                                source.toLowerCase(Locale.ROOT),
+                                naiveAsciiCase(oracle, false)),
+                        "random ROOT lowercase " + trial);
+                check(equalChars(
+                                source.toUpperCase(Locale.ROOT),
+                                naiveAsciiCase(oracle, true)),
+                        "random ROOT uppercase " + trial);
+            }
             int regionLength = oracle.length == 0 ? 0 : random.nextInt(oracle.length + 1);
             int leftStart = oracle.length == regionLength
                     ? 0
@@ -490,6 +518,24 @@ public class M3StringPrecomputeSearchTest {
             throw new AssertionError(impossibleWithReplacement);
         }
         return Arrays.copyOf(bytes.array(), bytes.position());
+    }
+
+    private static boolean isAscii(char[] value) {
+        for (char unit : value) {
+            if (unit > 0x7f) return false;
+        }
+        return true;
+    }
+
+    private static char[] naiveAsciiCase(char[] value, boolean upper) {
+        char[] result = copyRange(value, 0, value.length);
+        for (int index = 0; index < result.length; index++) {
+            char unit = result[index];
+            result[index] = upper
+                    ? (unit >= 'a' && unit <= 'z' ? (char) (unit - ('a' - 'A')) : unit)
+                    : (unit >= 'A' && unit <= 'Z' ? (char) (unit + ('a' - 'A')) : unit);
+        }
+        return result;
     }
 
     private static boolean naiveRegionMatches(
