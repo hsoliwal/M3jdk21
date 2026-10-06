@@ -261,7 +261,9 @@ public final class M3HashPinnedJavaSnapshotRecipe
                 || value.startsWith("src/test/java/")
                 || value.contains("/src/main/java/")
                 || value.contains("/src/test/java/");
-        if (!(mavenJava || value.startsWith("src/java.base/share/classes/"))
+        if (!(mavenJava
+                || value.startsWith("src/java.base/share/classes/")
+                || value.startsWith("test/"))
                 || !value.endsWith(".java") || value.indexOf('\\') >= 0
                 || value.length() > 4096) {
             return false;
