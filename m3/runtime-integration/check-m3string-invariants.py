@@ -45,6 +45,8 @@ workflow = read(".github/workflows/mindex-string-backing.yml")
 recipe_receipt = read("m3/docs/synexia-recipe-application.md")
 builder = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
 native_string = read("src/java.base/share/native/libjava/String.c")
+vm_intrinsics = read("src/hotspot/share/classfile/vmIntrinsics.cpp")
+string_opts = read("src/hotspot/share/opto/stringopts.cpp")
 native_string_test = read("test/jdk/java/lang/String/nativeEncoding/libstringPlatformChars.c")
 hotspot_java_classes = read("src/hotspot/share/classfile/javaClasses.cpp")
 hotspot_jni = read("src/hotspot/share/prims/jni.cpp")
@@ -595,6 +597,20 @@ for fragment in [
 ]:
     if fragment not in vm_string_bridge:
         fail(f"M3 VM backed-storage predicate missing: {fragment}")
+
+# HotSpot must not intrinsify contiguous String.value assumptions while M3 storage is active.
+for fragment in [
+    "if (UseM3StringStorage) {",
+    "case vmIntrinsics::_compareToL:",
+    "case vmIntrinsics::_indexOfL:",
+    "case vmIntrinsics::_equalsL:",
+    "case vmIntrinsics::_StringBuilder_toString:",
+    "case vmIntrinsics::_StringBuffer_toString:",
+]:
+    if fragment not in vm_intrinsics:
+        fail(f"M3 HotSpot intrinsic guard missing: {fragment}")
+if "if (UseM3StringStorage)" not in string_opts or "return;" not in string_opts:
+    fail("C2 String concat optimizer is not fail-closed for M3 storage")
 
 # Donor class naming must not leak back into live VM symbols/layout.
 for path, text in [
