@@ -69,6 +69,27 @@ for path, text in [
     if retained_arrays:
         fail(f"{path} retains array field(s): {retained_arrays!r}")
 
+# Canonical composition follows the Synexia reference-DAG history: balanced persistent
+# geometry, but identity is independent of concat parenthesization. No flattened lane is retained.
+for fragment in [
+    "final int height;",
+    "boolean sequenceEquals(M3String candidateLeft, M3String candidateRight)",
+]:
+    if fragment not in tuple_:
+        fail(f"M3 tuple canonical DAG invariant missing: {fragment}")
+for fragment in [
+    "private static M3String concatBalanced(M3String left, M3String right)",
+    "private static M3String balance(M3String left, M3String right)",
+    "private static int height(M3String value)",
+    "private static M3String internTuple(M3String left, M3String right)",
+    "tupleSequenceKey(javaHash, totalLength, coder)",
+    "existing.sequenceEquals(left, right)",
+]:
+    if fragment not in pool:
+        fail(f"M3 balanced sequence-canonical pool invariant missing: {fragment}")
+if "geometryEquals(left, right)" in pool or "left.identityHash64()" in pool:
+    fail("M3 tuple interning regressed to parenthesization/shape identity")
+
 # Encoding facts must be executable, not decorative metadata.
 for fragment in [
     "if (prepared.ascii) {",
