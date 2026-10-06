@@ -379,6 +379,23 @@ public class M3StringPrecomputeSearchTest {
         check(valueOfUtf16.equals("\u0100"), "valueOf UTF16 char content");
         check(valueOfUtf16 != valueOfUtf162, "valueOf UTF16 fresh wrapper");
 
+        String bmpOffsets = String.join("", "abc", "\ud83d", "x", "\ude42", "XYZ");
+        char[] bmpOffsetOracle = bmpOffsets.toCharArray();
+        for (int index = 0; index <= bmpOffsets.length(); index++) {
+            for (int delta = -bmpOffsets.length() - 1; delta <= bmpOffsets.length() + 1; delta++) {
+                compareOffsetByCodePoints(bmpOffsets, bmpOffsetOracle, index, delta,
+                        "BMP/unpaired offset index=" + index + " delta=" + delta);
+            }
+        }
+        String pairedOffsets = String.join("", "a", "\ud83d", "\ude42", "b");
+        char[] pairedOffsetOracle = pairedOffsets.toCharArray();
+        for (int index = 0; index <= pairedOffsets.length(); index++) {
+            for (int delta = -4; delta <= 4; delta++) {
+                compareOffsetByCodePoints(pairedOffsets, pairedOffsetOracle, index, delta,
+                        "paired offset index=" + index + " delta=" + delta);
+            }
+        }
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
@@ -559,6 +576,28 @@ public class M3StringPrecomputeSearchTest {
                 check(Arrays.equals(source.getBytes(charset), encodeOracle(oracle, charset)),
                         "random getBytes " + charset.name() + " trial " + trial);
             }
+        }
+    }
+
+    private static void compareOffsetByCodePoints(
+            String source, char[] oracle, int index, int delta, String label) {
+        Integer expected = null;
+        RuntimeException expectedFailure = null;
+        try {
+            expected = Character.offsetByCodePoints(CharBuffer.wrap(oracle), index, delta);
+        } catch (RuntimeException failure) {
+            expectedFailure = failure;
+        }
+
+        try {
+            int actual = source.offsetByCodePoints(index, delta);
+            check(expectedFailure == null, label + " expected failure " + expectedFailure);
+            check(actual == expected, label + " actual=" + actual + " expected=" + expected);
+        } catch (RuntimeException failure) {
+            check(expectedFailure != null, label + " unexpected " + failure);
+            check(failure.getClass() == expectedFailure.getClass(),
+                    label + " exception=" + failure.getClass()
+                            + " expected=" + expectedFailure.getClass());
         }
     }
 
