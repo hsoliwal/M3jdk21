@@ -89,6 +89,15 @@ public class StringPlatformChars {
             throw new AssertionError("GetStringChars mismatch: " + Arrays.toString(s.toCharArray()));
         }
 
+        int nativeUtfLength = getUtf8Length(s);
+        int oracleUtfLength = modifiedUtf8Length(s);
+        if (nativeUtfLength != oracleUtfLength) {
+            throw new AssertionError(
+                    "GetStringUTFLength mismatch native=" + nativeUtfLength
+                            + " oracle=" + oracleUtfLength
+                            + " units=" + Arrays.toString(s.chars().toArray()));
+        }
+
         byte[] nativeUtf = getUtf8(s);
         byte[] oracleUtf = modifiedUtf8(s);
         if (!Arrays.equals(nativeUtf, oracleUtf)) {
@@ -98,6 +107,17 @@ public class StringPlatformChars {
             System.out.println("Oracle modified UTF8: " + Arrays.toString(oracleUtf));
             throw new AssertionError(s);
         }
+    }
+
+    private static int modifiedUtf8Length(String value) {
+        int length = 0;
+        for (int index = 0; index < value.length(); index++) {
+            char unit = value.charAt(index);
+            length += unit >= 0x0001 && unit <= 0x007f
+                    ? 1
+                    : unit <= 0x07ff ? 2 : 3;
+        }
+        return length;
     }
 
     private static byte[] modifiedUtf8(String value) throws Exception {
@@ -133,6 +153,8 @@ public class StringPlatformChars {
     static native char[] getUtf16(String string);
 
     static native byte[] getUtf8(String string);
+
+    static native int getUtf8Length(String string);
 
     static native String newString(byte[] bytes);
 }
