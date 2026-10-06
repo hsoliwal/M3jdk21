@@ -28,6 +28,8 @@ public final class M3NebulaTransferAdmission {
     public static final String SCHEMA = "NEBULA_M3_RECIPE_TRANSFER_V1";
     public static final int JAVA_RELEASE = 21;
     public static final String OPENREWRITE_VERSION = "8.90.4";
+    public static final String REFACTOR_SCOPE_ORDER =
+            "FILE,VISIBILITY,PACKAGE,MODULE,MULTI_MODULE,LIBRARY_API";
     public static final String ENTRYPOINT =
             "org.eclipse.nebula.m3.rewrite.NebulaM3Java21ConvergenceRecipe";
     public static final String TARGET_REPOSITORY = "hsoliwal/M3jdk21";
@@ -54,6 +56,10 @@ public final class M3NebulaTransferAdmission {
         requireEquals(Integer.toString(JAVA_RELEASE), fields.get("javaRelease"), "javaRelease");
         requireEquals(OPENREWRITE_VERSION, fields.get("openRewriteVersion"), "openRewriteVersion");
         requireEquals(ENTRYPOINT, fields.get("entrypoint"), "entrypoint");
+        requireEquals(
+                REFACTOR_SCOPE_ORDER,
+                fields.get("refactorScopeOrder"),
+                "refactor scope order");
         String dagRoot = hash(fields.get("dagRoot"), "dagRoot");
         String orchestratorPlansRoot =
                 hash(fields.get("orchestratorPlansRoot"), "orchestratorPlansRoot");
