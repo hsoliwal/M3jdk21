@@ -1053,7 +1053,7 @@ for fragment in [
     "history_recipe_name\tcom.synexia.rewrite.m3jdk.M3StringHistoryConvergence",
     "history_authority_repo\thsoliwal/com.synexia",
     "history_authority_pr\thsoliwal/com.synexia#9530",
-    "history_authority_revision\tad5df8458ffeba643a6c343e82dd61a338facf29",
+    "history_authority_revision\t9572256310e141a60da28951896e06fbe1c1e199",
     "history_java_targets\t18",
     "history_text_targets\t6",
 ]:
