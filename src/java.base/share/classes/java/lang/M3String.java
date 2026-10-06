@@ -107,6 +107,16 @@ final class M3String implements CharSequence {
         return ready && ADMITTING.get() != Boolean.TRUE;
     }
 
+    static M3String admitLatin1Bytes(byte[] source, int offset, int length) {
+        Objects.requireNonNull(source, "source");
+        ADMITTING.set(Boolean.TRUE);
+        try {
+            return M3StringPool.internLatin1Bytes(source, offset, length);
+        } finally {
+            ADMITTING.remove();
+        }
+    }
+
     static M3String admit(char[] source, int offset, int length) {
         Objects.requireNonNull(source, "source");
         ADMITTING.set(Boolean.TRUE);
