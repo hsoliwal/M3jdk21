@@ -4,7 +4,7 @@ release	jep	title	domain	disposition	reason	superseded_by
 22	454	Foreign Function & Memory API	library-runtime-native	candidate-high-risk	Final API; requires java.base/native/runtime dependency audit.	
 22	456	Unnamed Variables & Patterns	language	reject-language	Requires Java grammar/javac semantic changes.	
 22	457	Class-File API (Preview)	library	superseded	Use final JEP 484 instead of preview.	484
-22	458	Launch Multi-File Source-Code Programs	tool-launcher	candidate	Tool/source-launcher behavior over existing Java grammar; verify javac/launcher dependency closure.	
+22	458	Launch Multi-File Source-Code Programs	tool-launcher	candidate-adapted	Current tree already matches the 26 reviewed Java21-adapted/source-sealed postimages; exact-hosted build, launcher/jdeps jtreg, runtime smoke and promotion proof remain pending.	
 22	459	String Templates (Second Preview)	language	reject-language	Requires Java grammar/javac changes and was later withdrawn.	
 22	460	Vector API (Seventh Incubator)	library-hotspot-compiler	hold-jit	Incubator lineage depends on HotSpot/JIT vector support; do not backport as a simple library.	537
 22	461	Stream Gatherers (Preview)	library	superseded	Use final JEP 485 instead of preview.	485
@@ -13,7 +13,7 @@ release	jep	title	domain	disposition	reason	superseded_by
 22	464	Scoped Values (Second Preview)	library-runtime	superseded	Use final JEP 506.	506
 23	455	Primitive Types in Patterns, instanceof, and switch (Preview)	language	reject-language	Requires Java grammar/javac semantic changes.	
 23	466	Class-File API (Second Preview)	library	superseded	Use final JEP 484.	484
-23	467	Markdown Documentation Comments	tool-javadoc-javac-doc	candidate-high-risk	Current-master 250-path inventory packet exists; FILE atom generation, public doc-tree API review, CommonMark provenance, javac+javadoc build/langtools proof remain required.	
+23	467	Markdown Documentation Comments	tool-javadoc-javac-doc	candidate-high-risk	Opt-in source-tooling lane; current-master packet has 251 implementation paths. FILE crate generation, public doc-tree API review, CommonMark provenance, javac+javadoc build/langtools proof and fixed point remain required.	
 23	469	Vector API (Eighth Incubator)	library-hotspot-compiler	hold-jit	Incubator/JIT-dependent lineage; evaluate separately.	537
 23	471	Deprecate the Memory-Access Methods in sun.misc.Unsafe for Removal	compatibility	hold-compat	Intentional deprecation/removal pressure changes compatibility posture.	
 23	473	Stream Gatherers (Second Preview)	library	superseded	Use final JEP 485.	485
@@ -31,7 +31,7 @@ release	jep	title	domain	disposition	reason	superseded_by
 24	479	Remove the Windows 32-bit x86 Port	removal	reject-compat	Removal conflicts with JDK 21 compatibility preservation.	
 24	483	Ahead-of-Time Class Loading & Linking	runtime-aot-cds	candidate-high-risk	Leyden/CDS runtime enhancement; foundational dependency for later AOT ergonomics/profiling/object caching and requires full Java-21 CDS/runtime closure.	
 24	484	Class-File API	library	candidate	Final library API; no Java grammar change, but requires classfile/version compatibility audit.	
-24	485	Stream Gatherers	library	candidate	Final library API; no Java grammar change.	
+24	485	Stream Gatherers	library	hold-compat	Final java.util.stream SE API extension is not part of default Java21 identity; retain only as an explicit LIBRARY_API opt-in extension after exact build/jtreg/runtime proof.	
 24	486	Permanently Disable the Security Manager	compatibility-security	reject-compat	Intentional behavioral incompatibility with JDK 21.	
 24	487	Scoped Values (Fourth Preview)	library-runtime	superseded	Use final JEP 506.	506
 24	488	Primitive Types in Patterns, instanceof, and switch (Second Preview)	language	reject-language	Requires Java grammar/javac semantic changes.	
@@ -39,7 +39,7 @@ release	jep	title	domain	disposition	reason	superseded_by
 24	490	ZGC: Remove the Non-Generational Mode	removal-gc	reject-compat	Removal narrows JDK 21 runtime behavior.	
 24	491	Synchronize Virtual Threads without Pinning	runtime-threads	candidate-high-risk	Runtime/continuation/monitor change; no Java grammar change.	
 24	492	Flexible Constructor Bodies (Third Preview)	language	reject-language	Requires Java grammar/javac semantic changes.	
-24	493	Linking Run-Time Images without JMODs	tool-jlink-runtime-image	candidate	Tool/build/runtime-image enhancement; no Java grammar change.	
+24	493	Linking Run-Time Images without JMODs	tool-jlink-runtime-image	candidate	Opt-in jlink/build tooling lane; 47-path packet is ready and the generated-crate materialization executor is under draft proof. Real linkable-runtime build, jtreg, no-JMOD smoke and fixed point remain required.	
 24	494	Module Import Declarations (Second Preview)	language	reject-language	Requires Java grammar/javac semantic changes.	
 24	495	Simple Source Files and Instance Main Methods (Fourth Preview)	language	reject-language	Requires Java grammar/javac/source-launcher language semantics.	
 24	496	Quantum-Resistant Module-Lattice-Based Key Encapsulation Mechanism	security-library	candidate	Security provider/library enhancement; verify provider and test vectors.	
