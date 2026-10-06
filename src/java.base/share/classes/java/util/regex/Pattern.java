@@ -1919,9 +1919,16 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
         // M3TQ is only an absence gate. Case-insensitive literal matching has different
         // equivalence semantics and therefore deliberately does not install an exact query.
-        m3Tq = has(LITERAL) && !has(CASE_INSENSITIVE)
-                ? M3TQ.fromExact(List.of(pattern))
-                : null;
+        if (has(LITERAL) && !has(CASE_INSENSITIVE)) {
+            try {
+                m3Tq = M3TQ.fromExact(List.of(pattern));
+            } catch (OutOfMemoryError unavailable) {
+                // Candidate precompute must never add a new Pattern.compile failure mode.
+                m3Tq = null;
+            }
+        } else {
+            m3Tq = null;
+        }
 
         // Copy pattern to int array for convenience
         // Use double zero to terminate pattern
