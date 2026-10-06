@@ -626,7 +626,7 @@ unsigned int java_lang_String::hash_code_noupdate(oop java_string) {
 
 
 char* java_lang_String::as_quoted_ascii(oop java_string) {
-  if (is_m3_joined(java_string)) {
+  if (is_m3_backed(java_string)) {
     int len = length(java_string);
     if (len == 0) return nullptr;
     jchar* chars = m3_unicode_range(java_string, 0, len);
@@ -661,7 +661,7 @@ char* java_lang_String::as_quoted_ascii(oop java_string) {
 }
 
 Symbol* java_lang_String::as_symbol(oop java_string) {
-  if (is_m3_joined(java_string)) {
+  if (is_m3_backed(java_string)) {
     ResourceMark rm;
     int len = length(java_string);
     return SymbolTable::new_symbol(m3_unicode_range(java_string, 0, len), len);
@@ -684,7 +684,7 @@ Symbol* java_lang_String::as_symbol(oop java_string) {
 }
 
 Symbol* java_lang_String::as_symbol_or_null(oop java_string) {
-  if (is_m3_joined(java_string)) {
+  if (is_m3_backed(java_string)) {
     ResourceMark rm;
     int len = length(java_string);
     return SymbolTable::probe_unicode(m3_unicode_range(java_string, 0, len), len);
@@ -705,7 +705,7 @@ Symbol* java_lang_String::as_symbol_or_null(oop java_string) {
 }
 
 int java_lang_String::utf8_length(oop java_string, typeArrayOop value) {
-  if (is_m3_joined(java_string)) {
+  if (is_m3_backed(java_string)) {
     oop storage = m3_storage(java_string);
     int prepared = java_lang_M3String::modified_utf8_length_if_precomputed(storage);
     if (prepared >= 0) {
@@ -749,7 +749,7 @@ char* java_lang_String::as_utf8_string(oop java_string) {
 }
 
 char* java_lang_String::as_utf8_string(oop java_string, int& length) {
-  if (is_m3_joined(java_string)) {
+  if (is_m3_backed(java_string)) {
     int units = java_lang_String::length(java_string);
     length = utf8_length(java_string);
     char* result = NEW_RESOURCE_ARRAY(char, length + 1);
@@ -771,7 +771,7 @@ char* java_lang_String::as_utf8_string(oop java_string, int& length) {
 // Uses a provided buffer if it's sufficiently large, otherwise allocates
 // a resource array to fit
 char* java_lang_String::as_utf8_string_full(oop java_string, char* buf, int buflen, int& utf8_len) {
-  if (is_m3_joined(java_string)) {
+  if (is_m3_backed(java_string)) {
     int len = length(java_string);
     utf8_len = utf8_length(java_string);
     if (utf8_len >= buflen) buf = NEW_RESOURCE_ARRAY(char, utf8_len + 1);
@@ -799,7 +799,7 @@ char* java_lang_String::as_utf8_string_full(oop java_string, char* buf, int bufl
 }
 
 char* java_lang_String::as_utf8_string(oop java_string, typeArrayOop value, char* buf, int buflen) {
-  if (is_m3_joined(java_string)) {
+  if (is_m3_backed(java_string)) {
     int len = length(java_string);
     return m3_utf8_range(java_string, 0, len, buf, buflen);
   }
@@ -823,7 +823,7 @@ char* java_lang_String::as_utf8_string(oop java_string, char* buf, int buflen) {
 }
 
 char* java_lang_String::as_utf8_string(oop java_string, int start, int len) {
-  if (is_m3_joined(java_string)) {
+  if (is_m3_backed(java_string)) {
     assert(start >= 0 && len >= 0 && start <= length(java_string) - len, "String range");
     int bytes = 0;
     for (int i = 0; i < len; i++) bytes += UNICODE::utf8_size(char_at(java_string, start + i));
@@ -844,7 +844,7 @@ char* java_lang_String::as_utf8_string(oop java_string, int start, int len) {
 }
 
 char* java_lang_String::as_utf8_string(oop java_string, typeArrayOop value, int start, int len, char* buf, int buflen) {
-  if (is_m3_joined(java_string)) {
+  if (is_m3_backed(java_string)) {
     assert(start >= 0 && len >= 0 && start <= length(java_string) - len, "String range");
     return m3_utf8_range(java_string, start, len, buf, buflen);
   }
@@ -863,7 +863,7 @@ char* java_lang_String::as_utf8_string(oop java_string, typeArrayOop value, int 
 }
 
 bool java_lang_String::equals(oop java_string, const jchar* chars, int len) {
-  if (is_m3_joined(java_string)) {
+  if (is_m3_backed(java_string)) {
     if (length(java_string) != len) return false;
     for (int i = 0; i < len; i++) if (char_at(java_string, i) != chars[i]) return false;
     return true;
@@ -894,7 +894,7 @@ bool java_lang_String::equals(oop java_string, const jchar* chars, int len) {
 }
 
 bool java_lang_String::equals(oop str1, oop str2) {
-  if (is_m3_joined(str1) || is_m3_joined(str2)) {
+  if (is_m3_backed(str1) || is_m3_backed(str2)) {
     int len = length(str1);
     if (length(str2) != len) return false;
     for (int i = 0; i < len; i++) if (char_at(str1, i) != char_at(str2, i)) return false;
@@ -921,7 +921,7 @@ void java_lang_String::print(oop java_string, outputStream* st) {
   assert(java_string->klass() == vmClasses::String_klass(), "must be java_string");
   typeArrayOop value  = java_lang_String::value_no_keepalive(java_string);
 
-  if (value == nullptr && !is_m3_joined(java_string)) {
+  if (value == nullptr && !is_m3_backed(java_string)) {
     // This can happen if, e.g., printing a String
     // object before its initializer has been called
     st->print("nullptr");
@@ -5574,7 +5574,7 @@ void JavaClasses::serialize_offsets(SerializeClosure* soc) {
 bool JavaClasses::is_supported_for_archiving(oop obj) {
   Klass* klass = obj->klass();
 
-  if ((klass == vmClasses::String_klass() && java_lang_String::is_m3_joined(obj)) ||
+  if ((klass == vmClasses::String_klass() && java_lang_String::is_m3_backed(obj)) ||
       klass == vmClasses::M3String_klass()) {
     // Canonical M3String owner/coordinate graphs are rebuilt at runtime.
     // CDS relocation of native/mapped owner coordinates is intentionally deferred.
