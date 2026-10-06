@@ -507,6 +507,52 @@ public class M3StringPrecomputeSearchTest {
         check(flatReplacementOnlySource.replace("foo", m3ReplacementOnly).equals("RR-RR"),
                 "flat source replace M3 replacement");
 
+        String greekM3 = String.join("", "A", "\u03a3", " ");
+        check(greekM3.toLowerCase(Locale.ROOT).equals("a\u03c2 "),
+                "M3 Greek final sigma lowercase");
+
+        String turkishM3 = String.join("", "I", "\u0130", "i", "\u0131");
+        check(turkishM3.toLowerCase(Locale.forLanguageTag("tr"))
+                        .equals("\u0131ii\u0131"),
+                "M3 Turkish lowercase");
+        check(turkishM3.toUpperCase(Locale.forLanguageTag("tr"))
+                        .equals("I\u0130\u0130I"),
+                "M3 Turkish uppercase");
+
+        String azeriM3 = String.join("", "I", "i");
+        check(azeriM3.toLowerCase(Locale.forLanguageTag("az"))
+                        .equals("\u0131i"),
+                "M3 Azeri lowercase");
+        check(azeriM3.toUpperCase(Locale.forLanguageTag("az"))
+                        .equals("I\u0130"),
+                "M3 Azeri uppercase");
+
+        String sharpSM3 = String.join("", "stra", "\u00dfe");
+        check(sharpSM3.toUpperCase(Locale.ROOT).equals("STRASSE"),
+                "M3 sharp-s uppercase expansion");
+
+        String lithuanianM3 = String.join("", "I", "\u0301");
+        String lithuanianFlat = "I\u0301";
+        Locale lithuanian = Locale.forLanguageTag("lt");
+        check(lithuanianM3.toLowerCase(lithuanian)
+                        .equals(lithuanianFlat.toLowerCase(lithuanian)),
+                "M3 Lithuanian conditional lowercase parity");
+
+        String deseretM3 = String.join("", "\ud801", "\udc00", "x");
+        String deseretFlat = "\ud801\udc00x";
+        check(deseretM3.toLowerCase(Locale.ROOT)
+                        .equals(deseretFlat.toLowerCase(Locale.ROOT)),
+                "M3 supplementary lowercase parity");
+        check(deseretM3.toUpperCase(Locale.ROOT)
+                        .equals(deseretFlat.toUpperCase(Locale.ROOT)),
+                "M3 supplementary uppercase parity");
+
+        String noCaseChange = String.join("", "123", "-_");
+        check(noCaseChange.toLowerCase(Locale.ROOT) == noCaseChange,
+                "M3 Unicode lower unchanged identity");
+        check(noCaseChange.toUpperCase(Locale.ROOT) == noCaseChange,
+                "M3 Unicode upper unchanged identity");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
