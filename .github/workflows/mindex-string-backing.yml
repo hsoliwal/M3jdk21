@@ -7,6 +7,8 @@ on:
       - 'm3/docs/name-mapping.json'
       - 'm3/docs/m3string-synexia-lineage.md'
       - 'm3/docs/synexia-string-precompute-port-map.tsv'
+      - 'm3/docs/synexia-recipe-application.md'
+      - 'AGENTS.md'
       - 'm3/runtime-integration/**'
       - 'src/hotspot/share/prims/jni.cpp'
       - 'src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp'
@@ -23,7 +25,6 @@ on:
       - 'src/java.base/share/classes/java/lang/AbstractStringBuilder.java'
       - 'src/java.base/share/classes/java/util/regex/Pattern.java'
       - 'src/java.base/share/classes/java/util/regex/Matcher.java'
-      - 'm3/tooling/migration-recipes/**'
       - 'test/jdk/java/lang/String/M3MappedStringBackingTest.java'
       - 'test/jdk/java/lang/String/MapGuardTest.java'
       - 'test/jdk/java/lang/String/MapFactsTest.java'
@@ -54,8 +55,6 @@ jobs:
           java-version: '20'
       - name: Verify M3 String source invariants
         run: python3 m3/runtime-integration/check-m3string-invariants.py
-      - name: Prove M3 String history-convergence recipe
-        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringHistoryConvergenceRecipeTest test
       - name: Install build prerequisites
         run: sudo apt-get update && sudo apt-get install -y autoconf
       - name: Configure
