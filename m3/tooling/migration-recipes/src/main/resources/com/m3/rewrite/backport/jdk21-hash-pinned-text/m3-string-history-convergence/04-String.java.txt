@@ -2386,7 +2386,9 @@ public final class String
                 M3StringFacts leftFacts = leftM3.slice(toffset, toffset + len).facts();
                 M3StringFacts rightFacts = rightM3.slice(ooffset, ooffset + len).facts();
                 if (leftFacts.ascii && rightFacts.ascii
-                        && leftFacts.asciiLowerHash != rightFacts.asciiLowerHash) {
+                        && (leftFacts.asciiLowerHash != rightFacts.asciiLowerHash
+                                || leftFacts.asciiUpperHash != rightFacts.asciiUpperHash
+                                || leftFacts.asciiTitleHash != rightFacts.asciiTitleHash)) {
                     return false;
                 }
             }
@@ -2649,24 +2651,9 @@ public final class String
             int from = Math.max(fromIndex, 0);
             if (from >= storage.length()) return -1;
             if (Character.isBmpCodePoint(ch)) {
-                if (!storage.facts().mayContainCodeUnit((char) ch)) return -1;
-                for (int index = from; index < storage.length(); index++) {
-                    if (storage.charAt(index) == (char) ch) return index;
-                }
-                return -1;
+                return storage.indexOf((char) ch, from, storage.length());
             }
-            if (!Character.isValidCodePoint(ch)) return -1;
-            char highRequired = Character.highSurrogate(ch);
-            char lowRequired = Character.lowSurrogate(ch);
-            M3StringFacts facts = storage.facts();
-            if (!facts.mayContainCodeUnit(highRequired)
-                    || !facts.mayContainCodeUnit(lowRequired)) return -1;
-            for (int index = from; index < storage.length() - 1; index++) {
-                char high = storage.charAt(index);
-                char low = storage.charAt(index + 1);
-                if (high == highRequired && low == lowRequired) return index;
-            }
-            return -1;
+            return storage.indexOfCodePoint(ch, from, storage.length());
         }
         return isLatin1() ? StringLatin1.indexOf(value(), ch, fromIndex, length())
                 : StringUTF16.indexOf(value(), ch, fromIndex, length());
@@ -2717,24 +2704,9 @@ public final class String
         M3String storage = m3();
         if (storage != null) {
             if (Character.isBmpCodePoint(ch)) {
-                if (!storage.facts().mayContainCodeUnit((char) ch)) return -1;
-                for (int index = beginIndex; index < endIndex; index++) {
-                    if (storage.charAt(index) == (char) ch) return index;
-                }
-                return -1;
+                return storage.indexOf((char) ch, beginIndex, endIndex);
             }
-            if (!Character.isValidCodePoint(ch)) return -1;
-            char highRequired = Character.highSurrogate(ch);
-            char lowRequired = Character.lowSurrogate(ch);
-            M3StringFacts facts = storage.facts();
-            if (!facts.mayContainCodeUnit(highRequired)
-                    || !facts.mayContainCodeUnit(lowRequired)) return -1;
-            for (int index = beginIndex; index + 1 < endIndex; index++) {
-                char high = storage.charAt(index);
-                char low = storage.charAt(index + 1);
-                if (high == highRequired && low == lowRequired) return index;
-            }
-            return -1;
+            return storage.indexOfCodePoint(ch, beginIndex, endIndex);
         }
         return isLatin1() ? StringLatin1.indexOf(value(), ch, beginIndex, endIndex)
                 : StringUTF16.indexOf(value(), ch, beginIndex, endIndex);
@@ -2807,24 +2779,9 @@ public final class String
             int from = Math.min(fromIndex, storage.length() - 1);
             if (from < 0) return -1;
             if (Character.isBmpCodePoint(ch)) {
-                if (!storage.facts().mayContainCodeUnit((char) ch)) return -1;
-                for (int index = from; index >= 0; index--) {
-                    if (storage.charAt(index) == (char) ch) return index;
-                }
-                return -1;
+                return storage.lastIndexOf((char) ch, from);
             }
-            if (!Character.isValidCodePoint(ch)) return -1;
-            char highRequired = Character.highSurrogate(ch);
-            char lowRequired = Character.lowSurrogate(ch);
-            M3StringFacts facts = storage.facts();
-            if (!facts.mayContainCodeUnit(highRequired)
-                    || !facts.mayContainCodeUnit(lowRequired)) return -1;
-            for (int index = Math.min(from, storage.length() - 2); index >= 0; index--) {
-                char high = storage.charAt(index);
-                char low = storage.charAt(index + 1);
-                if (high == highRequired && low == lowRequired) return index;
-            }
-            return -1;
+            return storage.lastIndexOfCodePoint(ch, from);
         }
         return isLatin1() ? StringLatin1.lastIndexOf(value(), ch, fromIndex)
                           : StringUTF16.lastIndexOf(value(), ch, fromIndex);
@@ -3995,6 +3952,12 @@ public final class String
      * @since   1.1
      */
     public String toLowerCase(Locale locale) {
+        Objects.requireNonNull(locale);
+        M3String storage = m3();
+        if (storage != null && locale.equals(Locale.ROOT) && storage.facts().ascii) {
+            M3String mapped = storage.asciiCase(false);
+            return mapped == storage ? this : new String(mapped);
+        }
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.toLowerCase(this, currentValue, locale)
                           : StringUTF16.toLowerCase(this, currentValue, locale);
@@ -4076,6 +4039,12 @@ public final class String
      * @since   1.1
      */
     public String toUpperCase(Locale locale) {
+        Objects.requireNonNull(locale);
+        M3String storage = m3();
+        if (storage != null && locale.equals(Locale.ROOT) && storage.facts().ascii) {
+            M3String mapped = storage.asciiCase(true);
+            return mapped == storage ? this : new String(mapped);
+        }
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.toUpperCase(this, currentValue, locale)
                           : StringUTF16.toUpperCase(this, currentValue, locale);
