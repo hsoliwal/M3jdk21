@@ -1,0 +1,2 @@
+path	reason	next_action
+test/hotspot/jtreg/gc/g1/TestEvacuationFailure.java	CURRENT_MASTER_ABSENT_BUT_JDK21_GA_PRESENT	INVENTORY_REMOVAL_HISTORY_AND_ADAPT_JEP423_TEST_PROOF
