@@ -76,6 +76,52 @@ jobs:
           grep -F $'sourceMutationAuthority\tfalse' "$OUT/nebula-transfer-admission.tsv"
           grep -F $'promotionAuthority\tfalse' "$OUT/nebula-transfer-admission.tsv"
 
+      - name: Generate JEP 467 and 493 exact FILE atom candidates
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          generate_atoms() {
+            local jep="$1"
+            local commit="$2"
+            local paths="$3"
+            local expected="$4"
+            local upstream="$RUNNER_TEMP/openjdk-jep-$jep"
+            local out="$GITHUB_WORKSPACE/target/m3-jep-file-atoms/jep-$jep"
+
+            rm -rf "$upstream" "$out"
+            git init -q "$upstream"
+            git -C "$upstream" remote add origin https://github.com/openjdk/jdk.git
+            git -C "$upstream" sparse-checkout init --no-cone
+            git -C "$upstream" sparse-checkout set --stdin < "$GITHUB_WORKSPACE/$paths"
+            git -C "$upstream" fetch -q --depth=1 --filter=blob:none origin "$commit"
+            git -C "$upstream" checkout -q --detach FETCH_HEAD
+            test "$(git -C "$upstream" rev-parse HEAD)" = "$commit"
+
+            mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+              -Dexec.mainClass=com.m3.tooling.dag.M3JepFileAtomCandidateMain \
+              -Dexec.args="$GITHUB_WORKSPACE $upstream $GITHUB_WORKSPACE/$paths $out" \
+              exec:java
+
+            test -s "$out/FILE_ATOMS.tsv"
+            test -s "$out/FILE_ATOMS.sha256"
+            test "$(wc -l < "$out/FILE_ATOMS.tsv")" -eq "$((expected + 1))"
+            test "$(find "$out/postimages" -type f | wc -l)" -eq "$expected"
+            awk -F'\t' 'NR > 1 && ($10 != "false" || $11 != "false") { exit 1 }' \
+              "$out/FILE_ATOMS.tsv"
+          }
+
+          JEP467_COMMIT="$(awk -F'\t' 'NR==2 {print $3}' m3/backports/recipes/jep-467-markdown/UPSTREAM_COMMIT.tsv)"
+          JEP493_COMMIT="$(awk -F'\t' 'NR==2 {print $2}' m3/backports/recipes/jep-493-runtime-image/UPSTREAM_COMMIT.tsv)"
+
+          generate_atoms \
+            467 "$JEP467_COMMIT" \
+            m3/backports/recipes/jep-467-markdown/PATHS.txt 250
+
+          generate_atoms \
+            493 "$JEP493_COMMIT" \
+            m3/backports/recipes/jep-493-runtime-image/PATHS.txt 47
+
       - name: Project sample packet to Camel Airflow and Drools
         shell: bash
         run: |
@@ -114,5 +160,6 @@ jobs:
             m3/backports/target/program-status.tsv
             target/m3-projection-smoke/out/**
             target/m3-jep-residue-plan/**
+            target/m3-jep-file-atoms/**
           if-no-files-found: error
           retention-days: 14
