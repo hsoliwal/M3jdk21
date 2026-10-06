@@ -222,6 +222,12 @@ class java_lang_M3String : AllStatic {
   static int _owner_coder_offset;
   static int _owner_javaHash_offset;
   static int _owner_facts_offset;
+  static int _owner_range0_offset;
+  static int _owner_range1_offset;
+  static int _owner_range2_offset;
+  static int _owner_range3_offset;
+  static int _range_coordinate_offset;
+  static int _range_facts_offset;
   static int _facts_utf8Length_offset;
   static int _facts_modifiedUtf8Length_offset;
 
