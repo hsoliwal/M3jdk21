@@ -87,7 +87,7 @@ public final class SunJCE extends Provider {
 
     private static final String info = "SunJCE Provider " +
     "(implements RSA, DES, Triple DES, AES, Blowfish, ARCFOUR, RC2, PBE, "
-    + "Diffie-Hellman, HMAC, ChaCha20)";
+    + "Diffie-Hellman, HMAC, ChaCha20, and HKDF)";
 
     /* Are we debugging? -- for developers */
     static final boolean debug = false;
@@ -456,6 +456,16 @@ public final class SunJCE extends Provider {
         psA("KeyAgreement", "DiffieHellman",
                 "com.sun.crypto.provider.DHKeyAgreement",
                 attrs);
+
+        /*
+         * Key Derivation engines
+         */
+        ps("KDF", "HKDF-SHA256",
+                "com.sun.crypto.provider.HKDFKeyDerivation$HKDFSHA256");
+        ps("KDF", "HKDF-SHA384",
+                "com.sun.crypto.provider.HKDFKeyDerivation$HKDFSHA384");
+        ps("KDF", "HKDF-SHA512",
+                "com.sun.crypto.provider.HKDFKeyDerivation$HKDFSHA512");
 
         /*
          * Algorithm Parameter engines
