@@ -311,6 +311,10 @@ final class M3String implements CharSequence {
     private byte[] encodeUtf8() {
         M3StringFacts prepared = facts();
         byte[] output = new byte[prepared.utf8Length];
+        if (prepared.ascii) {
+            getBytes(output, 0, 0, String.LATIN1, length());
+            return output;
+        }
         int target = 0;
         for (int index = 0; index < length(); index++) {
             char unit = charAt(index);
@@ -344,6 +348,11 @@ final class M3String implements CharSequence {
 
     private byte[] encodeSingleByte(boolean asciiOnly) {
         M3StringFacts prepared = facts();
+        if ((asciiOnly && prepared.ascii) || (!asciiOnly && prepared.latin1)) {
+            byte[] output = new byte[length()];
+            getBytes(output, 0, 0, String.LATIN1, length());
+            return output;
+        }
         byte[] output = new byte[prepared.codePointCount];
         int target = 0;
         for (int index = 0; index < length(); index++) {
@@ -372,19 +381,20 @@ final class M3String implements CharSequence {
             return encodeUtf8NoRepl();
         }
         if (checked.equals(StandardCharsets.ISO_8859_1)) {
-            byte[] output = new byte[length()];
-            for (int index = 0; index < length(); index++) {
-                char unit = charAt(index);
-                if (unit > 0xff) throw unmappable(index, 1);
-                output[index] = (byte) unit;
+            M3StringFacts prepared = facts();
+            if (prepared.latin1) {
+                byte[] output = new byte[length()];
+                getBytes(output, 0, 0, String.LATIN1, length());
+                return output;
             }
-            return output;
+            for (int index = 0; index < length(); index++) {
+                if (charAt(index) > 0xff) throw unmappable(index, 1);
+            }
+            throw new InternalError("M3String Latin-1 fact mismatch");
         }
         if (checked.equals(StandardCharsets.US_ASCII) && facts().ascii) {
             byte[] output = new byte[length()];
-            for (int index = 0; index < length(); index++) {
-                output[index] = (byte) charAt(index);
-            }
+            getBytes(output, 0, 0, String.LATIN1, length());
             return output;
         }
         return encodeWithEncoderNoRepl(checked);
@@ -393,6 +403,10 @@ final class M3String implements CharSequence {
     byte[] encodeUtf8NoRepl() {
         M3StringFacts prepared = facts();
         byte[] output = new byte[prepared.utf8Length];
+        if (prepared.ascii) {
+            getBytes(output, 0, 0, String.LATIN1, length());
+            return output;
+        }
         int target = 0;
         for (int index = 0; index < length(); index++) {
             char unit = charAt(index);
