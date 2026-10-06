@@ -987,6 +987,8 @@ for fragment in [
     '"source_path": "synexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006"',
     '"target_packet_role": "generated executable/hash-pinned application copy"',
     '"portable_semantics_owner": "Synexia"',
+    '"executable_verifier_recipe": "com.synexia.rewrite.M3StringCanonicalDagInvariant"',
+    '"executable_verifier_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3StringCanonicalDagInvariantRecipe.java"',
 ]:
     if fragment not in mapping:
         fail(f"Synexia String recipe authority binding missing from name map: {fragment}")
@@ -998,6 +1000,10 @@ for fragment in [
     "target_packet_role\tgenerated executable/hash-pinned application copy",
     "target_runtime_owner\tM3JDK",
     "precompute_rule\timplementation-internal in both worlds; never canonical spelling",
+    "authority_origin_commit\t1b954f886f0a40684c84bac443851d9fe4af1764",
+    "executable_verifier_recipe\tcom.synexia.rewrite.M3StringCanonicalDagInvariant",
+    "executable_verifier_path\tsynexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3StringCanonicalDagInvariantRecipe.java",
+    "executable_verifier_pr\thsoliwal/com.synexia#9524",
 ]:
     if fragment not in recipe_authority:
         fail(f"Synexia String recipe authority receipt missing: {fragment}")
@@ -1059,5 +1065,9 @@ for required_gate in [
 ]:
     if required_gate not in workflow:
         fail(f"M3 String workflow lost verification gate: {required_gate}")
+
+
+if "STRING_RECIPE_EXECUTABLE_VERIFIER_IS_SYNEXIA_OPENREWRITE" not in read("m3/docs/m3-runtime-invariants.tsv"):
+    fail("M3 String runtime invariant lost Synexia executable verifier binding")
 
 print("M3_STRING_SOURCE_INVARIANTS_PASS")
