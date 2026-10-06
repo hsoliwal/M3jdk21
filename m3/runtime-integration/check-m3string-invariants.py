@@ -753,6 +753,24 @@ for fragment in [
 if "M3String asciiCase(boolean upper)" not in m3:
     fail("M3String ROOT ASCII canonical case mapper missing")
 
+# Long M3 line traversal reuses the bounded exact position-mask cache for the next CR/LF.
+for fragment in [
+    "static int indexOfEither(",
+    "exact.mask(first) | exact.mask(second)",
+    "linearIndexOfEither(",
+]:
+    if fragment not in position_precompute:
+        fail(f"M3 line position precompute missing: {fragment}")
+if "int indexOfLineTerminator(int fromIndex)" not in m3:
+    fail("M3String line-terminator search owner missing")
+for fragment in [
+    "private final M3String storage;",
+    "storage.indexOfLineTerminator(start)",
+    "storage.charAt(end) == '\\r'",
+]:
+    if fragment not in string:
+        fail(f"String.lines lost M3 position-mask traversal: {fragment}")
+
 # Fixed scan-avoidance facts must remain constant-size and have live consumers.
 for fragment in [
     "final boolean hasAsciiUpper;",
