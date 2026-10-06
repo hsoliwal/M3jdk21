@@ -6770,5 +6770,22 @@
       "target_owners": [],
       "rule": "Do not attach whole-corpus images to java.lang.String or java.util collections without a concrete bounded JDK consumer."
     }
-  ]
+  ],
+  "recipe_authority": {
+    "recipe_id": "synexia.m3jdk.string.canonical-dag.20261006",
+    "source_repo": "hsoliwal/com.synexia",
+    "source_path": "synexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006",
+    "source_tracking_ref": "refs/heads/develop",
+    "source_pr": "hsoliwal/com.synexia#9489",
+    "target_packet_role": "generated executable/hash-pinned application copy",
+    "target_repo": "hsoliwal/M3jdk21",
+    "target_owns": [
+      "M3JDK names",
+      "ABI/layout/bootstrap",
+      "JDK compatibility",
+      "build/runtime/JNI tests",
+      "final promotion"
+    ],
+    "portable_semantics_owner": "Synexia"
+  }
 }
