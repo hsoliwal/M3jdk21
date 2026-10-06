@@ -1,0 +1,10 @@
+gate	state	requirement
+map_counts	PENDING_HOSTED	241/245/238/3/0/7 exact
+synthetic_tests	PENDING_HOSTED	map + custody planner
+custody_count	PENDING_HOSTED	248 rows
+ambiguity	LOCKED_ZERO	fail if nonzero
+target_mutation	FORBIDDEN	git diff must remain empty
+version_signals	REVIEW_ONLY	no automatic post-21 semantic adaptation
+openrewrite_inventory	PENDING_HOSTED	non-mutating inventory recipe remains green
+product_compile	NOT_EXECUTED	future opt-in source-sealed crate
+api_diff	NOT_EXECUTED	future LIBRARY_API admission
