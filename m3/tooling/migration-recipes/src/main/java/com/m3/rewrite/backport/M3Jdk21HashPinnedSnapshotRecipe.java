@@ -261,6 +261,7 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
             String[] cells = line.split("\t", -1);
             if (cells.length != 4
                     || !jdkJavaPath(cells[0])
+                    || (crateName.startsWith("synexia-") && !synexiaReceiverJavaPath(cells[0]))
                     || !paths.add(cells[0])
                     || previous.compareTo(cells[0]) >= 0
                     || !("ABSENT".equals(cells[1]) || sha(cells[1]))
@@ -291,7 +292,8 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
                         || value.startsWith(".m3/openrewrite-recipes/src/main/java/")
                         || value.startsWith(".m3/openrewrite-recipes/src/test/java/")
                         || value.startsWith("m3/tooling/migration-recipes/src/main/java/")
-                        || value.startsWith("m3/tooling/migration-recipes/src/test/java/"))
+                        || value.startsWith("m3/tooling/migration-recipes/src/test/java/")
+                        || value.startsWith("m3/tooling/a3/src/test/java/"))
                 || !value.endsWith(".java")
                 || value.indexOf('\\') >= 0
                 || value.length() > 4096) {
@@ -305,6 +307,21 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
             }
         }
         return value.chars().noneMatch(Character::isISOControl);
+    }
+
+    static boolean synexiaReceiverJavaPath(String value) {
+        if (!jdkJavaPath(value) || value.startsWith("src/") || value.startsWith("test/")) {
+            return false;
+        }
+        return value.startsWith(
+                        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/")
+                || value.startsWith(
+                        "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/")
+                || value.startsWith("m3/tooling/a3/src/test/java/")
+                || value.startsWith(
+                        ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/")
+                || value.startsWith(
+                        ".m3/openrewrite-recipes/src/test/java/com/synexia/m3/bootstrap/");
     }
 
     private static String normalized(Path path) {
