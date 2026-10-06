@@ -77,7 +77,9 @@ final class M3StringCharacterFlagsRecipeTest {
                 text("m3/docs/synexia-string-precompute-port-map.tsv",
                         "01-port-map.tsv.txt"),
                 text("m3/runtime-integration/check-m3string-invariants.py",
-                        "02-invariants.py.txt"));
+                        "02-invariants.py.txt"),
+                text(".github/workflows/mindex-string-backing.yml",
+                        "03-workflow.yml.txt"));
     }
 
     private static SourceFile java(String path, String resource) {
