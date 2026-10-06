@@ -1,4 +1,4 @@
 # path	before	after	template
-.github/workflows/mindex-string-backing.yml	7690ed1014dd0960a7e3735a638ba1b3fb583dc90f80b7a3ecec1f7403c238e1	9ead928d2f56125ba7dc4e98755cfb998f481e014243aa3beb9b7e3a27cd14ab	00-workflow.yml.txt
+.github/workflows/mindex-string-backing.yml	7690ed1014dd0960a7e3735a638ba1b3fb583dc90f80b7a3ecec1f7403c238e1	d8e03cd351fd234a78f42a43fdaf61a741d7de1cc24cf2bb62a43947ca84ac13	00-workflow.yml.txt
 m3/docs/synexia-live-precompute-catalog.tsv	ABSENT	1dad9f85a8e60cb376fcb5c1b066a3fa0d57dcf07d7835325f7a7be677c58eb0	01-catalog.tsv.txt
 m3/runtime-integration/check-synexia-precompute-catalog.py	ABSENT	8e14888760446b973d59a457676733f0285d9a708ba81b86a7052d42bc87ccf6	02-check.py.txt
