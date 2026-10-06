@@ -1,0 +1,68 @@
+{
+  "schema": "m3.jdk-image-feedback/1",
+  "source_repo": "hsoliwal/com.synexia",
+  "donor_commits": {
+    "lane28": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
+    "tq": "cf3796cfca75284e9626b1e31703e41314c9f852"
+  },
+  "target_repo": "hsoliwal/M3jdk21",
+  "tested_head": "02ab933680f98ca28b10c151cf61e9fe24cb9200",
+  "tested_merge": "a823bf74247b7cf909a81960ebe4ec78ee5e43d6",
+  "runtime": "Linux x64 fastdebug rebuilt M3JDK21",
+  "build": "complete images succeeded for both runs",
+  "overall_workflow_result": "failure at M3-requested compiler evidence; not an all-gates pass",
+  "ports": {
+    "lane28": {
+      "artifact_id": 11346980803,
+      "run_id": 37309828969,
+      "compiled_kernel_counts": {
+        "c1": 17,
+        "c2": 18
+      },
+      "behavior_passed": [
+        "interpreter",
+        "mixed",
+        "c1",
+        "c2",
+        "M3-enabled C1 request (actual interpreter)"
+      ],
+      "jni": "built libjava production symbol",
+      "kernel": "M3BitLane28"
+    },
+    "tq": {
+      "artifact_id": 11347310285,
+      "run_id": 37309828987,
+      "compiled_kernel_counts": {
+        "c1": 10,
+        "c2": 20
+      },
+      "behavior_passed": [
+        "interpreter",
+        "mixed",
+        "c1",
+        "c2",
+        "M3-enabled C1 request (actual interpreter)"
+      ],
+      "jni": "test-only independent JNI oracle; product java.base kernel",
+      "kernel": "M3TQ"
+    }
+  },
+  "priorities": [
+    {
+      "id": "m3-string-compiler-boundary",
+      "status": "observed-runtime-limit",
+      "finding": "UseM3StringStorage forces interpreted mode in arguments.cpp; neither C1 nor C2 is currently supported with the alternate String representation.",
+      "acceptance": "Keep the guard. A separate JVM compiler integration must prove layout, intrinsics, GC and deoptimization correctness before enabling compiled execution. Normal-path kernel evidence cannot substitute for this."
+    },
+    {
+      "id": "native-routing",
+      "status": "prior-cost-evidence-unchanged",
+      "finding": "The rebuilt-image runs establish bounded JNI correctness, not a native speed advantage. Preserve Java cached counts as the default pending representative measurements."
+    },
+    {
+      "id": "bridge-precompute",
+      "status": "observed-correctness",
+      "finding": "TQ reused precomputed facts with zero warm payload reads in each completed image mode. Broader automatic regex consumer dispatch remains open."
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<hotspot_log version="160 1" process="59106" time_ms="1791205312699"><vm_version>
+<name>
+OpenJDK 64-Bit Server VM
+</name>
+<release>
+21-internal-adhoc.runner.M3jdk21
+</release>
+<info>
+OpenJDK 64-Bit Server VM (fastdebug 21-internal-adhoc.runner.M3jdk21) for linux-amd64 JRE (21-internal-adhoc.runner.M3jdk21), built on 2026-10-05T12:35:39Z by "runner" with gcc 13.3.0
+</info>
+</vm_version>
+<vm_arguments>
+<args>
+-Xmx256m -ea -esa -Xcheck:jni -XX:-CreateCoredumpOnCrash -XX:TieredStopAtLevel=1 -Xbatch -XX:CompileThreshold=100 -XX:+UnlockDiagnosticVMOptions -XX:+LogCompilation -XX:LogFile=/home/runner/work/M3jdk21/M3jdk21/m3/tooling/tq/target/image/c1-compilation.xml --add-exports=java.base/jdk.internal.mindex=ALL-UNNAMED -Djava.library.path=/home/runner/work/M3jdk21/M3jdk21/m3/tooling/tq/target/image </args>
+<command>
+M3TQTest
+</command>
+<launcher>
+SUN_STANDARD
+</launcher>
+<properties>
+java.vm.specification.name=Java Virtual Machine Specification
+java.vm.version=21-internal-adhoc.runner.M3jdk21
+java.vm.name=OpenJDK 64-Bit Server VM
+jdk.debug=fastdebug
+sun.boot.library.path=/home/runner/work/M3jdk21/M3jdk21/build/linux-x86_64-server-fastdebug/images/jdk/lib
+java.library.path=/home/runner/work/M3jdk21/M3jdk21/m3/tooling/tq/target/image
+java.home=/home/runner/work/M3jdk21/M3jdk21/build/linux-x86_64-server-fastdebug/images/jdk
+java.class.path=/home/runner/work/M3jdk21/M3jdk21/m3/tooling/tq/target/image/classes
+java.vm.info=mixed mode, sharing
+java.vm.specification.vendor=Oracle Corporation
+java.vm.specification.version=21
+java.vm.vendor=Oracle Corporation
+sun.java.command=M3TQTest
+sun.java.launcher=SUN_STANDARD
+</properties>
+</vm_arguments>
+<tty><nmethod compile_id="381" compiler="c1" level="1" entry="0x00007efeb8a8c840" size="1088" address="0x00007efeb8a8c690" relocation_offset="368" insts_offset="432" stub_offset="712" scopes_data_offset="824" scopes_pcs_offset="888" dependencies_offset="1080" metadata_offset="816" method="jdk.internal.mindex.M3TQ requireFactBudget (II)V" bytes="24" count="128" iicount="128" stamp="0.415" />
+</tty><hotspot_log_done stamp="1.434" />
+</hotspot_log>

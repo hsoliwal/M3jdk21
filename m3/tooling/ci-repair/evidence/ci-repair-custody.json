@@ -1,0 +1,56 @@
+{
+  "schema": "m3.ci-repair-custody/1",
+  "plan_sha256": "2e42cfbe701e05d4cc73d3ac6d3731826af7e955ab6956d5ca3fccbec4eda1df",
+  "generated_outputs": 4,
+  "events": [
+    {
+      "mode": "check",
+      "recipe": "ci-repair-1",
+      "plan_sha256": "2e42cfbe701e05d4cc73d3ac6d3731826af7e955ab6956d5ca3fccbec4eda1df",
+      "state": "before",
+      "files": 4,
+      "writes": 0
+    },
+    {
+      "mode": "apply",
+      "recipe": "ci-repair-1",
+      "plan_sha256": "2e42cfbe701e05d4cc73d3ac6d3731826af7e955ab6956d5ca3fccbec4eda1df",
+      "state": "after",
+      "files": 4,
+      "writes": 4
+    },
+    {
+      "mode": "apply",
+      "recipe": "ci-repair-1",
+      "plan_sha256": "2e42cfbe701e05d4cc73d3ac6d3731826af7e955ab6956d5ca3fccbec4eda1df",
+      "state": "after",
+      "files": 4,
+      "writes": 0
+    },
+    {
+      "mode": "rollback",
+      "recipe": "ci-repair-1",
+      "plan_sha256": "2e42cfbe701e05d4cc73d3ac6d3731826af7e955ab6956d5ca3fccbec4eda1df",
+      "state": "before",
+      "files": 4,
+      "writes": 4
+    },
+    {
+      "mode": "rollback",
+      "recipe": "ci-repair-1",
+      "plan_sha256": "2e42cfbe701e05d4cc73d3ac6d3731826af7e955ab6956d5ca3fccbec4eda1df",
+      "state": "before",
+      "files": 4,
+      "writes": 0
+    },
+    {
+      "refusal": "destination drift"
+    },
+    {
+      "refusal": "mixed states"
+    },
+    {
+      "refusal": "dependency drift"
+    }
+  ]
+}
