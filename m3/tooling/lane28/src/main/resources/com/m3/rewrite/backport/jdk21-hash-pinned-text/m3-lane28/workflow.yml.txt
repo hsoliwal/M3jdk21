@@ -7,6 +7,7 @@ on:
       - '.m3/openrewrite-recipes/**'
       - 'm3/tooling/lane28/**'
       - 'm3/tooling/tq-sync/**'
+      - 'm3/tooling/bsr/**'
       - 'm3/tooling/migration-recipes/**'
       - 'm3/tooling/image-gates/**'
       - 'm3/migration/**'
@@ -46,6 +47,14 @@ jobs:
           python3 -m venv "$RUNNER_TEMP/lane28-python"
           "$RUNNER_TEMP/lane28-python/bin/python" -m pip install -r m3/migration/requirements.txt
           echo "$RUNNER_TEMP/lane28-python/bin" >> "$GITHUB_PATH"
+      - name: Bitmap summary reuse recipe and custody
+        run: |
+          mvn -B -ntp -f m3/tooling/bsr/pom.xml verify
+          mkdir -p m3/tooling/bsr/target/release
+          cp m3/tooling/bsr/target/*.log m3/tooling/bsr/target/release/
+          cp m3/tooling/bsr/target/surefire-reports/TEST-*.xml m3/tooling/bsr/target/release/
+          mvn -B -ntp -f m3/tooling/bsr/pom.xml -Dbsr.sanitize=true verify
+          python3 m3/tooling/bsr/verify-plan.py
       - name: TQ successor recipe and custody
         run: |
           mvn -B -ntp -f m3/tooling/tq-sync/pom.xml verify
@@ -72,6 +81,11 @@ jobs:
         with:
           name: lane28-recipe-${{ github.sha }}
           path: |
+            m3/tooling/bsr/target/*.log
+            m3/tooling/bsr/target/*compilation.xml
+            m3/tooling/bsr/target/custody.json
+            m3/tooling/bsr/target/release/
+            m3/tooling/bsr/target/surefire-reports/
             m3/tooling/tq-sync/target/surefire-reports/
             m3/tooling/tq-sync/target/custody.json
             m3/tooling/lane28/target/*.log

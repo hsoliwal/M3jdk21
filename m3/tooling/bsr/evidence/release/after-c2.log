@@ -1,0 +1,3 @@
+CompileCommand: dontinline jdk/internal/mindex/M3BitLane28.nextSetBit bool dontinline = true
+CompileCommand: dontinline jdk/internal/mindex/M3BitLane28.previousSetBit bool dontinline = true
+BSR checks=20636 operations=4000 nativeCalls=126 checksum=98283809 API=unchanged lazyCounts=true stablePages=true

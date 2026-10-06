@@ -1,0 +1,66 @@
+{
+  "schema": "m3.lane28-custody/1",
+  "plan_sha256": "cd909f789a5c33124ae231b224749a4551201eb6804ca8960f90dafee3282eac",
+  "generated_outputs": 19,
+  "retained_records": 47,
+  "retained_gates": 20,
+  "events": [
+    {
+      "mode": "check",
+      "recipe": "lane28-restoration-szf-20261006",
+      "plan_sha256": "cd909f789a5c33124ae231b224749a4551201eb6804ca8960f90dafee3282eac",
+      "state": "before",
+      "files": 19,
+      "writes": 0
+    },
+    {
+      "mode": "apply",
+      "recipe": "lane28-restoration-szf-20261006",
+      "plan_sha256": "cd909f789a5c33124ae231b224749a4551201eb6804ca8960f90dafee3282eac",
+      "state": "after",
+      "files": 19,
+      "writes": 19
+    },
+    {
+      "mode": "apply",
+      "recipe": "lane28-restoration-szf-20261006",
+      "plan_sha256": "cd909f789a5c33124ae231b224749a4551201eb6804ca8960f90dafee3282eac",
+      "state": "after",
+      "files": 19,
+      "writes": 0
+    },
+    {
+      "mode": "check",
+      "recipe": "lane28-restoration-szf-20261006",
+      "plan_sha256": "cd909f789a5c33124ae231b224749a4551201eb6804ca8960f90dafee3282eac",
+      "state": "after",
+      "files": 19,
+      "writes": 0
+    },
+    {
+      "mode": "rollback",
+      "recipe": "lane28-restoration-szf-20261006",
+      "plan_sha256": "cd909f789a5c33124ae231b224749a4551201eb6804ca8960f90dafee3282eac",
+      "state": "before",
+      "files": 19,
+      "writes": 19
+    },
+    {
+      "mode": "rollback",
+      "recipe": "lane28-restoration-szf-20261006",
+      "plan_sha256": "cd909f789a5c33124ae231b224749a4551201eb6804ca8960f90dafee3282eac",
+      "state": "before",
+      "files": 19,
+      "writes": 0
+    },
+    {
+      "refusal": "occupied target, no writes"
+    },
+    {
+      "refusal": "mixed pre/postimages, no writes"
+    },
+    {
+      "refusal": "dependency drift, no writes"
+    }
+  ]
+}

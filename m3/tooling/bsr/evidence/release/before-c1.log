@@ -1,0 +1,2 @@
+CompileCommand: dontinline jdk/internal/mindex/M3BitLane28.nextSetBit bool dontinline = true
+CompileCommand: dontinline jdk/internal/mindex/M3BitLane28.previousSetBit bool dontinline = true

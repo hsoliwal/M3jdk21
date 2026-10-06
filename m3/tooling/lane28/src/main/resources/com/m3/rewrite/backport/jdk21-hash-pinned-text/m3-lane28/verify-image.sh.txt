@@ -16,7 +16,7 @@ fi
 testdir="$root/test/jdk/jdk/internal/mindex"
 "$image/bin/javac" -source 21 -target 21 -proc:none -Xlint:all -Werror \
   --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
-  -d "$out/classes" "$testdir/M3Lane28Test.java" "$testdir/M3Lane28Cost.java" "$testdir/M3SparseFillTest.java" \
+  -d "$out/classes" "$testdir/M3Lane28Test.java" "$testdir/M3Lane28Cost.java" "$testdir/M3SparseFillTest.java" "$testdir/M3BitScanTest.java" \
   > "$out/javac.log" 2>&1
 # The production symbol must be exported from this image's own libjava.
 nm -D "$image/lib/libjava.so" > "$out/libjava-symbols.log"
@@ -30,14 +30,16 @@ for mode in interpreter mixed c1 c2 m3-c1 m3-c2 m3-c2-nocompact; do
     c2|m3-c2|m3-c2-nocompact) compiler=c2; flags+=(-XX:-TieredCompilation);;
   esac
   if [[ -n "$compiler" ]]; then
-    flags+=(-Xbatch -XX:CompileThreshold=100 -XX:+UnlockDiagnosticVMOptions
+    flags+=('-XX:CompileCommand=dontinline,jdk.internal.mindex.M3BitLane28::nextSetBit'
+      '-XX:CompileCommand=dontinline,jdk.internal.mindex.M3BitLane28::previousSetBit'
+      -Xbatch -XX:CompileThreshold=100 -XX:+UnlockDiagnosticVMOptions
       -XX:+LogCompilation "-XX:LogFile=$out/$mode-compilation.xml")
   fi
   if [[ "$mode" == m3-* ]]; then
     flags+=(-XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage)
   fi
   if [[ "$mode" == *-nocompact ]]; then flags+=(-XX:-CompactStrings); fi
-  for main in M3Lane28Test M3SparseFillTest; do
+  for main in M3Lane28Test M3SparseFillTest M3BitScanTest; do
     runflags=("${flags[@]}")
     if [[ -n "$compiler" ]]; then runflags+=("-XX:LogFile=$out/$mode-$main-compilation.xml"); fi
     timeout 240 "$image/bin/java" -Xmx256m -ea -esa -Xcheck:jni \
@@ -53,6 +55,10 @@ for mode in interpreter mixed c1 c2 m3-c1 m3-c2 m3-c2-nocompact; do
     if [[ "$mode" == m3-* ]]; then evidence_flags+=(--m3-interpreter); fi
     python3 "$root/m3/tooling/lane28/check-log.py" \
       "$out/$mode-M3Lane28Test-compilation.xml" "$compiler" jdk.internal.mindex.M3BitLane28 "${evidence_flags[@]}"
+    for method in nextSetBit previousSetBit; do
+      python3 "$root/m3/tooling/lane28/check-log.py" \
+        "$out/$mode-M3BitScanTest-compilation.xml" "$compiler" "jdk.internal.mindex.M3BitLane28 $method" "${evidence_flags[@]}"
+    done
   fi
 done
 echo 'PASS: bounded fork-image Lane28 and native peer tests across four normal modes and three M3 interpreter-boundary requests'

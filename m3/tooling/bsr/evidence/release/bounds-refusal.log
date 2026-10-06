@@ -1,0 +1,4 @@
+Exception in thread "main" java.lang.AssertionError: bounds must precede empty shortcut
+	at M3BitScanTest.rejects(M3BitScanTest.java:43)
+	at M3BitScanTest.emptyAndBounds(M3BitScanTest.java:47)
+	at M3BitScanTest.main(M3BitScanTest.java:25)

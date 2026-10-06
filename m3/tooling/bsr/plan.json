@@ -1,0 +1,229 @@
+{
+  "schema": "m3.sealed-install/1",
+  "recipe_id": "bsr-20261006",
+  "outputs": [
+    {
+      "path": ".github/workflows/m3-lane28.yml",
+      "before": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/00.txt.before",
+        "sha256": "1a0ef88a0edc06a87cc2d899edccb2ae931d7bec303448277b1c83f7ea782ecb"
+      },
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/00.txt",
+        "sha256": "009ca466373d6128a1ac8843bd2449025fc577df10d88d9a1785f87b6a6e06b7"
+      }
+    },
+    {
+      "path": ".github/workflows/m3-tq.yml",
+      "before": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/01.txt.before",
+        "sha256": "ed5bb9a6a3bcd32eb13dabf7cfc60ac406fe89b1eb34c0fe01286fc4327ae894"
+      },
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/01.txt",
+        "sha256": "bed75eac8f852ef1f9f156d1913035e3fda19f844deb236c1563de06292f57f2"
+      }
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "before": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/02.txt.before",
+        "sha256": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da"
+      },
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/02.txt",
+        "sha256": "83c74c0b5d8d0d82ed22d7a7a5ce1963c074b782ecf5a67cfdd33b8e73ea84d8"
+      }
+    },
+    {
+      "path": "m3/tooling/lane28/plan.json",
+      "before": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/03.txt.before",
+        "sha256": "592477414957af5b2780b5c9e4ce09391e6f3dc60d11e3ceff5cd0683338796b"
+      },
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/03.txt",
+        "sha256": "14a89597f89ebf9eb9119067d40580f3e3c18a8639e983a33984bb1d12e18527"
+      }
+    },
+    {
+      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/manifest.tsv",
+      "before": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/04.txt.before",
+        "sha256": "a90b5a4571363d6a34bacf94daa0671cd447196b2938fa62545aed5e39a1458b"
+      },
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/04.txt",
+        "sha256": "f615c7b8d2a7926a4dbc5e66b64cca3fad1fd0e9af5abf85eda0eb4fa427a7da"
+      }
+    },
+    {
+      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt",
+      "before": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/05.txt.before",
+        "sha256": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da"
+      },
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/05.txt",
+        "sha256": "83c74c0b5d8d0d82ed22d7a7a5ce1963c074b782ecf5a67cfdd33b8e73ea84d8"
+      }
+    },
+    {
+      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/verify-image.sh.txt",
+      "before": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/06.txt.before",
+        "sha256": "78ab9aa7a036687b303007fb2395b1a282da38dfb6129fab62b4ce92944d4331"
+      },
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/06.txt",
+        "sha256": "b964e28001a32aa05068905e56753c4b39ab7b6f6dc1127fc95d7483faf0a6c0"
+      }
+    },
+    {
+      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/workflow.yml.txt",
+      "before": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/07.txt.before",
+        "sha256": "1a0ef88a0edc06a87cc2d899edccb2ae931d7bec303448277b1c83f7ea782ecb"
+      },
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/07.txt",
+        "sha256": "009ca466373d6128a1ac8843bd2449025fc577df10d88d9a1785f87b6a6e06b7"
+      }
+    },
+    {
+      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/M3BitLane28.java.txt",
+      "before": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/08.txt.before",
+        "sha256": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8"
+      },
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/08.txt",
+        "sha256": "ec5b7f126dfce9650343c4769a883b61f503b462cd8a2b87c79c15efc9d9a424"
+      }
+    },
+    {
+      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "before": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/09.txt.before",
+        "sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883"
+      },
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/09.txt",
+        "sha256": "ab3db3fa0b99ea98cb4549cb171fbadf428bddea238f1b9e0673ebfe5459d604"
+      }
+    },
+    {
+      "path": "m3/tooling/lane28/verify-image.sh",
+      "before": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/10.txt.before",
+        "sha256": "78ab9aa7a036687b303007fb2395b1a282da38dfb6129fab62b4ce92944d4331"
+      },
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/10.txt",
+        "sha256": "b964e28001a32aa05068905e56753c4b39ab7b6f6dc1127fc95d7483faf0a6c0"
+      }
+    },
+    {
+      "path": "m3/tooling/tq-sync/verify-plan.py",
+      "before": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/11.txt.before",
+        "sha256": "ca29fa3e9a6660a8006f99702fc8c3db2839049af00a8eeee4a435701cf5f36e"
+      },
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/11.txt",
+        "sha256": "cc601ad96da32f9d6427de8524a109805fdd4fb1c5cfc375adbe11b705130cc0"
+      }
+    },
+    {
+      "path": "m3/tooling/tq/plan.json",
+      "before": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/12.txt.before",
+        "sha256": "8e6db1b290e9ee55bc028ce51e4aae85773cb8be167b7193ee721b031f46be4b"
+      },
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/12.txt",
+        "sha256": "d54b6d81b1c3f621936c975d2ff9da3d97e2af54154d5e1ee10bf7ffe313cb0f"
+      }
+    },
+    {
+      "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/manifest.tsv",
+      "before": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/13.txt.before",
+        "sha256": "61f9431a2426d37e910d64fdf337d604d3cc5af31bb25bb546acdc0d07a1fd38"
+      },
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/13.txt",
+        "sha256": "4b65eb5f69bd59c321be3c5940f9f94f6c9035256c04d3763366805c04b62068"
+      }
+    },
+    {
+      "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/workflow.yml.txt",
+      "before": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/14.txt.before",
+        "sha256": "ed5bb9a6a3bcd32eb13dabf7cfc60ac406fe89b1eb34c0fe01286fc4327ae894"
+      },
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/14.txt",
+        "sha256": "bed75eac8f852ef1f9f156d1913035e3fda19f844deb236c1563de06292f57f2"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java",
+      "before": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/15.txt.before",
+        "sha256": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8"
+      },
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/15.txt",
+        "sha256": "ec5b7f126dfce9650343c4769a883b61f503b462cd8a2b87c79c15efc9d9a424"
+      }
+    },
+    {
+      "path": "test/jdk/jdk/internal/mindex/M3BitScanTest.java",
+      "before": null,
+      "after": {
+        "resource": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-bsr/16.txt",
+        "sha256": "2a6cd4ee9e38ca74e2f6ee73060739e4a2bd600f1f4228c9a3f989c44705a9e1"
+      }
+    }
+  ],
+  "guards": [
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java",
+      "sha256": "0e65b26f674f68fea30151ea63a17faef2f88ca0f0679723bb3dc230fda22b72"
+    },
+    {
+      "path": "m3/migration/recipe.py",
+      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Address28.java",
+      "sha256": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Bits.java",
+      "sha256": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab"
+    },
+    {
+      "path": "src/java.base/share/native/libjava/M3BitLane28.c",
+      "sha256": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f"
+    },
+    {
+      "path": "src/hotspot/share/runtime/arguments.cpp",
+      "sha256": "cde11381b3d49642dee5988d0188e6f3ffc0dcd3a7789b3abec12a00eb832dc5"
+    },
+    {
+      "path": "m3/tooling/lane28/check-log.py",
+      "sha256": "3401754e77113c76d15c7f70844ae95e210000fb31c2be4a15b668aa7d3c64e5"
+    },
+    {
+      "path": "m3/tooling/tq-sync/plan.json",
+      "sha256": "284a25961f678010247d90f869c26e6566c367eb65b9e1b472c38279003bc032"
+    }
+  ],
+  "plan_sha256": "e02853d35700658ca662194d06324274f0b049dece01f788cc1420855ad32c0e"
+}

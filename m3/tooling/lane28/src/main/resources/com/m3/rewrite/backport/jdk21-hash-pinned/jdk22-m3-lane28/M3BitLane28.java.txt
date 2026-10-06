@@ -89,15 +89,20 @@ public final class M3BitLane28 {
                 * Long.BYTES;
     }
 
-    /** Returns the first set slot at or after from, or -1; MAX_SLOTS is a valid end. */
+    /**
+     * Returns the first set slot at or after from, or -1; MAX_SLOTS is a valid end.
+     * Reuses existing exact region/page counts to skip empty storage. Does not
+     * prepare counts, allocate metadata, or change bitmap residency.
+     */
     public int nextSetBit(int from) {
         M3Address28.checkRange(from, M3Address28.MAX_SLOTS);
+        if (cardinality == 0) return -1;
         while (from < M3Address28.MAX_SLOTS) {
             long[][] region = regions[from >>> 20];
-            if (region == null) { from = ((from >>> 20) + 1) << 20; continue; }
+            if (region == null || (regionCounts != null && regionCounts[from >>> 20] == 0)) { from = ((from >>> 20) + 1) << 20; continue; }
             long[] page = region[(from >>> 12) & 255];
             int end = ((from >>> 12) + 1) << 12;
-            if (page != null) {
+            if (page != null && (pageCounts == null || pageCounts[from >>> 20][(from >>> 12) & 255] != 0)) {
                 int wordIndex = (from & 4095) >>> 6;
                 long word = page[wordIndex] & (-1L << (from & 63));
                 for (;;) {
@@ -112,16 +117,20 @@ public final class M3BitLane28 {
         return -1;
     }
 
-    /** Returns the last set slot at or before from, or -1; -1 is a valid empty prefix. */
+    /**
+     * Returns the last set slot at or before from, or -1; -1 is a valid empty prefix.
+     * Reuses already prepared exact counts; never prepares or allocates a cache.
+     */
     public int previousSetBit(int from) {
         if (from < -1 || from >= M3Address28.MAX_SLOTS) {
             throw new IndexOutOfBoundsException(from);
         }
+        if (cardinality == 0) return -1;
         while (from >= 0) {
             long[][] region = regions[from >>> 20];
-            if (region == null) { from = (from & ~((1 << 20) - 1)) - 1; continue; }
+            if (region == null || (regionCounts != null && regionCounts[from >>> 20] == 0)) { from = (from & ~((1 << 20) - 1)) - 1; continue; }
             long[] page = region[(from >>> 12) & 255];
-            if (page != null) {
+            if (page != null && (pageCounts == null || pageCounts[from >>> 20][(from >>> 12) & 255] != 0)) {
                 int wordIndex = (from & 4095) >>> 6;
                 long word = page[wordIndex] & (-1L >>> (63 - (from & 63)));
                 for (;;) {

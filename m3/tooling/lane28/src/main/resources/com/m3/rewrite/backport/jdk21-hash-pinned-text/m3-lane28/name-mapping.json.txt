@@ -5544,9 +5544,9 @@
         },
         "recipe": {
           "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
-          "version": "2-restoration-szf",
+          "version": "3-bsr",
           "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
-          "sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+          "sha256": "ab3db3fa0b99ea98cb4549cb171fbadf428bddea238f1b9e0673ebfe5459d604",
           "preconditions": [
             "Explicit absent Java targets and exact source/template/dependency hashes.",
             "Actual OpenRewrite Java/text execution, refusal/fixed-point and sealed custody gates."
@@ -5698,9 +5698,9 @@
         },
         "recipe": {
           "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
-          "version": "2-restoration-szf",
+          "version": "3-bsr",
           "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
-          "sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+          "sha256": "ab3db3fa0b99ea98cb4549cb171fbadf428bddea238f1b9e0673ebfe5459d604",
           "preconditions": [
             "Explicit absent Java targets and exact source/template/dependency hashes.",
             "Actual OpenRewrite Java/text execution, refusal/fixed-point and sealed custody gates."
@@ -5853,9 +5853,9 @@
         },
         "recipe": {
           "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
-          "version": "2-restoration-szf",
+          "version": "3-bsr",
           "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
-          "sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+          "sha256": "ab3db3fa0b99ea98cb4549cb171fbadf428bddea238f1b9e0673ebfe5459d604",
           "preconditions": [
             "Explicit absent Java targets and exact source/template/dependency hashes.",
             "Actual OpenRewrite Java/text execution, refusal/fixed-point and sealed custody gates."
@@ -5925,15 +5925,15 @@
         "sources": [
           {
             "repo": "hsoliwal/com.synexia",
-            "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
+            "commit": "a8e8b3ade47d04229aff2a280e67bad5741ed863",
             "module": "synexia-common",
             "path": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedBitLane28.java",
             "symbol": "com.synexia.common.collections.SegmentedBitLane28",
             "signatures": [
               "com.synexia.common.collections.SegmentedBitLane28"
             ],
-            "sha256": "fe535b8a1f3b22fa1a63455c9078d7b911c72a87a3255714f66e3639d11000af",
-            "git_blob_sha1": "8932039f353507225f31dfce7c146f5165ccfc54",
+            "sha256": "1e5e926a4f039e393e63a70cc111a922ed0a81bad2460f578173859d924ade06",
+            "git_blob_sha1": "153a39259aa3735ae8a8276d05622dd230c72733",
             "fingerprint": null,
             "revision_role": "pinned"
           },
@@ -5962,8 +5962,8 @@
             "signatures": [
               "jdk.internal.mindex.M3BitLane28"
             ],
-            "sha256": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8",
-            "git_blob_sha1": "5942b1f46eedf83ad8c4ef8edee91f75e7424e7a",
+            "sha256": "ec5b7f126dfce9650343c4769a883b61f503b462cd8a2b87c79c15efc9d9a424",
+            "git_blob_sha1": "d5b74703130a4dc7d0c5123a6670ed2a9c29a79c",
             "fingerprint": null,
             "revision_role": "candidate"
           },
@@ -6017,13 +6017,13 @@
           "admission": "Root directory allocation; nonzero writes allocate stable primitive pages.",
           "joins": "Primitive lane copy uses existing arrays with overlap-safe semantics; no temporary flattened payload.",
           "outputs": "Caller-array exports are explicit copies; internal rows have no entry wrapper.",
-          "cached_facts": "Bit rank/select lazily prepares exact region/page counts maintained by successful bit changes; metadata is not a second bitmap."
+          "cached_facts": "Bit rank/select lazily prepares exact region/page counts maintained by successful bit changes; metadata is not a second bitmap. Directional scans reuse prepared exact counts to skip empty regions/pages; scans never prepare metadata."
         },
         "recipe": {
           "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
-          "version": "2-restoration-szf",
+          "version": "3-bsr",
           "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
-          "sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+          "sha256": "ab3db3fa0b99ea98cb4549cb171fbadf428bddea238f1b9e0673ebfe5459d604",
           "preconditions": [
             "Explicit absent Java targets and exact source/template/dependency hashes.",
             "Actual OpenRewrite Java/text execution, refusal/fixed-point and sealed custody gates."
@@ -6038,20 +6038,25 @@
           {
             "id": "lane28-restoration-szf",
             "receipt": "m3/tooling/lane28/evidence/20261006/receipt.json"
+          },
+          {
+            "id": "bsr",
+            "receipt": "m3/tooling/bsr/evidence/receipt.json"
           }
         ],
         "provenance": {
-          "license": "Apache-2.0; exact source, LICENSE and NOTICE retained under m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
+          "license": "Apache-2.0; exact BSR source, LICENSE and NOTICE retained under m3/tooling/bsr/donor. Earlier owners/native source and notices remain under m3/tooling/lane28/donor. Existing JDK licenses retain their scope.",
           "publication": "User requested incremental Synexia-to-JDK inlining and evidence-based upstream feedback.",
           "copied_code": true
         },
         "sync": {
-          "source_revision": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
-          "target_revision": "87590cb96fb0e2dc0f88fae8e01957f7179cd255",
+          "source_revision": "a8e8b3ade47d04229aff2a280e67bad5741ed863",
+          "target_revision": "c0a14387009aefc7d62bd3268055d526e04f9074",
           "direction": "source-to-target",
           "target_adaptations": [
             "Internal package/name",
-            "JDK libjava ownership for bit count JNI"
+            "JDK libjava ownership for bit count JNI",
+            "BSR: reuse exact page/region counts in forward and reverse scans; preserve lazy metadata, residency, descriptors and native linkage"
           ],
           "pending": [
             "Full-image validation of normal compiled kernels and the retained M3 interpreter boundary",
@@ -6062,7 +6067,36 @@
           "conflicts": []
         },
         "lineage": {
-          "previous_sources": [],
+          "previous_sources": [
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
+              "module": "synexia-common",
+              "path": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedBitLane28.java",
+              "symbol": "com.synexia.common.collections.SegmentedBitLane28",
+              "signatures": [
+                "com.synexia.common.collections.SegmentedBitLane28"
+              ],
+              "sha256": "fe535b8a1f3b22fa1a63455c9078d7b911c72a87a3255714f66e3639d11000af",
+              "git_blob_sha1": "8932039f353507225f31dfce7c146f5165ccfc54",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "123b49647bd3f1f7d5962a72a3e5bbb3cbc57038",
+              "module": "synexia-common",
+              "path": "synexia-common/src/main/native/collections/segmented_bit_lane.c",
+              "symbol": "Java_com_synexia_common_collections_SegmentedBitLane28_cardinality0",
+              "signatures": [
+                "Java_com_synexia_common_collections_SegmentedBitLane28_cardinality0"
+              ],
+              "sha256": "da2266d8ec93478f4fbeb6a5403e14ce8dcd6a6795c43a5d4230b2a97ef8eb0e",
+              "git_blob_sha1": "1ee8509cdd05a7edcfc732b3c5947dd78b30ce3a",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
           "previous_targets": [
             {
               "repo": "hsoliwal/M3jdk21",
@@ -6091,12 +6125,40 @@
               "git_blob_sha1": "e68e05555efbe2dbf1355e6820cc7795d9c33942",
               "fingerprint": null,
               "revision_role": "candidate"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": null,
+              "module": "java.base",
+              "path": "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java",
+              "symbol": "jdk.internal.mindex.M3BitLane28",
+              "signatures": [
+                "jdk.internal.mindex.M3BitLane28"
+              ],
+              "sha256": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8",
+              "git_blob_sha1": "5942b1f46eedf83ad8c4ef8edee91f75e7424e7a",
+              "fingerprint": null,
+              "revision_role": "candidate"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": null,
+              "module": "java.base",
+              "path": "src/java.base/share/native/libjava/M3BitLane28.c",
+              "symbol": "Java_jdk_internal_mindex_M3BitLane28_cardinality0",
+              "signatures": [
+                "Java_jdk_internal_mindex_M3BitLane28_cardinality0"
+              ],
+              "sha256": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f",
+              "git_blob_sha1": "e68e05555efbe2dbf1355e6820cc7795d9c33942",
+              "fingerprint": null,
+              "revision_role": "candidate"
             }
           ],
           "supersedes": []
         },
         "source_state": "implemented",
-        "observation": "The older com.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement. Source recovery: LOST at master 87590cb, restored through the version 2 recipe; historical record retained in history/9af35b3/mapping-records.json."
+        "observation": "The older com.m3.collections proof module is retained. New java.base owners are explicit internal capabilities, not a blanket java.util replacement. Source recovery: LOST at master 87590cb, restored through the version 2 recipe; historical record retained in history/9af35b3/mapping-records.json. BSR independently qualifies source and target scan atoms with exact-oracle, JNI, compiler and reduced-read evidence."
       },
       {
         "id": "synexia.collections.PackedBitAtoms",
@@ -6174,9 +6236,9 @@
         },
         "recipe": {
           "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe/jdk22-m3-lane28",
-          "version": "2-restoration-szf",
+          "version": "3-bsr",
           "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
-          "sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+          "sha256": "ab3db3fa0b99ea98cb4549cb171fbadf428bddea238f1b9e0673ebfe5459d604",
           "preconditions": [
             "Explicit absent Java targets and exact source/template/dependency hashes.",
             "Actual OpenRewrite Java/text execution, refusal/fixed-point and sealed custody gates."

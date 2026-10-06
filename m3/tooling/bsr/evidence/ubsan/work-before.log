@@ -1,0 +1,3 @@
+empty visits=16832 wordReads=65536
+cold visits=17342 wordReads=65664
+warm visits=17342 wordReads=65664

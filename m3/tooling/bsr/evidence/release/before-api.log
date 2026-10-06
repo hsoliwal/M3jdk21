@@ -1,0 +1,50 @@
+Compiled from "M3BitLane28.java"
+public final class jdk.internal.mindex.M3BitLane28 {
+  public jdk.internal.mindex.M3BitLane28();
+    descriptor: ()V
+
+  public boolean get(int);
+    descriptor: (I)Z
+
+  public void set(int);
+    descriptor: (I)V
+
+  public void clear(int);
+    descriptor: (I)V
+
+  public void set(int, boolean);
+    descriptor: (IZ)V
+
+  public void flip(int);
+    descriptor: (I)V
+
+  public int cardinality();
+    descriptor: ()I
+
+  public int allocatedRegionCount();
+    descriptor: ()I
+
+  public int allocatedBlockCount();
+    descriptor: ()I
+
+  public long payloadBytes();
+    descriptor: ()J
+
+  public int nextSetBit(int);
+    descriptor: (I)I
+
+  public int previousSetBit(int);
+    descriptor: (I)I
+
+  public int cardinality(int, int);
+    descriptor: (II)I
+
+  public int rank(int);
+    descriptor: (I)I
+
+  public int select(int);
+    descriptor: (I)I
+
+  public int cardinalityNative(int, int);
+    descriptor: (II)I
+}

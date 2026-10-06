@@ -1,0 +1,89 @@
+{
+  "schema": "m3.bsr-custody/1",
+  "plan_sha256": "e02853d35700658ca662194d06324274f0b049dece01f788cc1420855ad32c0e",
+  "generated_outputs": 17,
+  "unchanged_records": 47,
+  "retained_gates": 20,
+  "predecessor_plan_sha256": "31b03129fe81d5e0681185763ad0d2059c16bcd7b93e7dc4b8290880c5317096",
+  "events": [
+    {
+      "mode": "check",
+      "recipe": "bsr-20261006",
+      "plan_sha256": "e02853d35700658ca662194d06324274f0b049dece01f788cc1420855ad32c0e",
+      "state": "before",
+      "files": 17,
+      "writes": 0
+    },
+    {
+      "mode": "apply",
+      "recipe": "bsr-20261006",
+      "plan_sha256": "e02853d35700658ca662194d06324274f0b049dece01f788cc1420855ad32c0e",
+      "state": "after",
+      "files": 17,
+      "writes": 17
+    },
+    {
+      "mode": "apply",
+      "recipe": "bsr-20261006",
+      "plan_sha256": "e02853d35700658ca662194d06324274f0b049dece01f788cc1420855ad32c0e",
+      "state": "after",
+      "files": 17,
+      "writes": 0
+    },
+    {
+      "mode": "check",
+      "recipe": "bsr-20261006",
+      "plan_sha256": "e02853d35700658ca662194d06324274f0b049dece01f788cc1420855ad32c0e",
+      "state": "after",
+      "files": 17,
+      "writes": 0
+    },
+    {
+      "mode": "rollback",
+      "recipe": "bsr-20261006",
+      "plan_sha256": "e02853d35700658ca662194d06324274f0b049dece01f788cc1420855ad32c0e",
+      "state": "before",
+      "files": 17,
+      "writes": 17
+    },
+    {
+      "mode": "rollback",
+      "recipe": "bsr-20261006",
+      "plan_sha256": "e02853d35700658ca662194d06324274f0b049dece01f788cc1420855ad32c0e",
+      "state": "before",
+      "files": 17,
+      "writes": 0
+    },
+    {
+      "refusal": "occupied target",
+      "writes": 0
+    },
+    {
+      "refusal": "mixed states",
+      "writes": 0
+    },
+    {
+      "refusal": "dependency drift",
+      "writes": 0
+    },
+    {
+      "succession": "exact predecessor after -> successor before -> current after"
+    },
+    {
+      "refusal": "unproven successor preimage",
+      "writes": 0
+    },
+    {
+      "refusal": "missing successor link",
+      "writes": 0
+    },
+    {
+      "refusal": "foreign successor",
+      "writes": 0
+    },
+    {
+      "refusal": "successor live drift",
+      "writes": 0
+    }
+  ]
+}

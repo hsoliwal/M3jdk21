@@ -1,0 +1,5 @@
+Exception in thread "main" java.lang.AssertionError: next exact set oracle
+	at M3BitScanTest.check(M3BitScanTest.java:34)
+	at M3BitScanTest.query(M3BitScanTest.java:63)
+	at M3BitScanTest.boundaries(M3BitScanTest.java:80)
+	at M3BitScanTest.main(M3BitScanTest.java:26)

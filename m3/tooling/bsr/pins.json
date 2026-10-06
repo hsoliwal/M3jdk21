@@ -1,0 +1,43 @@
+{
+  "schema": "m3.bsr-pins/1",
+  "source_repo": "hsoliwal/com.synexia",
+  "source_commit": "a8e8b3ade47d04229aff2a280e67bad5741ed863",
+  "source_pr": "https://github.com/hsoliwal/com.synexia/pull/9448",
+  "source_owner": "synexia-common/src/main/java/com/synexia/common/collections/SegmentedBitLane28.java",
+  "target_repo": "hsoliwal/M3jdk21",
+  "target_parent": "c0a14387009aefc7d62bd3268055d526e04f9074",
+  "target_owner": "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java",
+  "target_before_sha256": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8",
+  "target_after_sha256": "ec5b7f126dfce9650343c4769a883b61f503b462cd8a2b87c79c15efc9d9a424",
+  "target_after_git_blob_sha1": "d5b74703130a4dc7d0c5123a6670ed2a9c29a79c",
+  "donor_files": [
+    {
+      "role": "source",
+      "path": "donor/SegmentedBitLane28.java.txt",
+      "sha256": "1e5e926a4f039e393e63a70cc111a922ed0a81bad2460f578173859d924ade06",
+      "git_blob_sha1": "153a39259aa3735ae8a8276d05622dd230c72733"
+    },
+    {
+      "role": "license",
+      "path": "donor/LICENSE",
+      "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+      "git_blob_sha1": "29f81d812f3e768fa89638d1f72920dbfd1413a8"
+    },
+    {
+      "role": "notice",
+      "path": "donor/NOTICE",
+      "sha256": "31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427",
+      "git_blob_sha1": "cf6694a1316785ba2aa45394314bbae2e856c7fe"
+    }
+  ],
+  "adaptations": [
+    "Existing JDK package and M3 counterpart names",
+    "Replace only nextSetBit/previousSetBit scan atom interval; retain target native linkage documentation and JNI implementation"
+  ],
+  "baseline_audit": {
+    "scoped_paths": 328,
+    "differences": 0,
+    "scope": "Selected Lane28, TQ, TQsync, target outputs and dependency guards; not a full-repository census"
+  },
+  "license": "Apache-2.0 for scoped Synexia contributions; existing OpenJDK and other licenses retain their scope"
+}
