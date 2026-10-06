@@ -84,6 +84,12 @@ final class M3StringHistoryConvergenceRecipeTest {
                         "src/java.base/share/classes/java/lang/M3StringOwner.java",
                         "05-M3StringOwner.java.txt"),
                 java(
+                        "src/java.base/share/classes/java/lang/M3StringPool.java",
+                        "13-M3StringPool.java.txt"),
+                java(
+                        "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java",
+                        "14-M3StringPositionPrecompute.java.txt"),
+                java(
                         "src/java.base/share/classes/java/lang/M3StringTuple.java",
                         "07-M3StringTuple.java.txt"),
                 java(
