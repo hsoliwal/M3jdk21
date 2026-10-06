@@ -9,7 +9,7 @@ Status: **applied product state; Synexia owns the reusable recipes**.
 Repository: `hsoliwal/com.synexia`  
 Custody PR: https://github.com/hsoliwal/com.synexia/pull/9529  
 Custody branch: `m3/m3jdk21-string-canonical-dag-synexia-home-20261006`  
-Pinned custody revision: `c7f975ad2138801fd9e388a02b06183a51063298`
+Pinned custody revision: `602ff6fbd8760ad2d13b3461d0c27ed567c16144`
 
 Named recipe:
 
@@ -40,13 +40,13 @@ M3JDK21 runtime branch:
 
 Applied/fixed-point revision:
 
-`a3e7931eb2ea117f613f0c040d6dfec7aeee2135`
+`bcb5419fd4425ef4b41c86c13e7a6f24d5233e68`
 
 Direct manifest comparison after moving recipe custody to Synexia:
 
 - Java recipe targets: **19 exact postimages**.
 - Text/native/workflow targets: **11 exact postimages**.
-- **30/30 carried targets are byte-identical** between the Synexia canonical templates and this receiver revision.
+- **30/30 carried targets are byte-identical** between the Synexia canonical templates and receiver revision `bcb5419fd4425ef4b41c86c13e7a6f24d5233e68`.
 - Synexia records the exact target receipt in `.m3/m3jdk21-string-history-convergence-handoff.tsv`.
 - Receiver PR: https://github.com/hsoliwal/M3jdk21/pull/248
 
