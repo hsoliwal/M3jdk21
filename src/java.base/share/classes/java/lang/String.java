@@ -2532,13 +2532,19 @@ public final class String
             return false;
         }
         M3String sourceM3 = m3();
+        M3String prefixM3 = prefix.m3();
         if (sourceM3 != null) {
-            M3String prefixM3 = prefix.m3();
             if (prefixM3 != null) {
                 return sourceM3.startsWith(prefixM3, toffset);
             }
             for (int index = 0; index < prefix.length(); index++) {
                 if (sourceM3.charAt(toffset + index) != prefix.charAt(index)) return false;
+            }
+            return true;
+        }
+        if (prefixM3 != null) {
+            for (int index = 0; index < prefixM3.length(); index++) {
+                if (charAt(toffset + index) != prefixM3.charAt(index)) return false;
             }
             return true;
         }
