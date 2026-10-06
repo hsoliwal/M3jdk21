@@ -18,26 +18,11 @@ public final class SynexiaImporter {
             Path synexiaRoot,
             Path m3jdkRoot,
             SynexiaImportManifest manifest) throws IOException {
-        Path sourceRoot = root(synexiaRoot, "synexiaRoot");
+        verifySources(synexiaRoot, manifest);
         Path targetRoot = root(m3jdkRoot, "m3jdkRoot");
         Objects.requireNonNull(manifest, "manifest");
 
         for (SynexiaImportManifest.Entry entry : manifest.entries()) {
-            Path source = resolve(sourceRoot, entry.sourcePath(), "source");
-            if (!Files.isRegularFile(source) || Files.isSymbolicLink(source)) {
-                throw new IllegalStateException("Synexia source missing or not regular: " + entry.sourcePath());
-            }
-            String actual = sha256(Files.readAllBytes(source));
-            if (!actual.equals(entry.sha256())) {
-                throw new IllegalStateException(
-                        "Synexia source hash drift: "
-                                + entry.sourcePath()
-                                + " expected="
-                                + entry.sha256()
-                                + " actual="
-                                + actual);
-            }
-
             Path target = resolve(targetRoot, entry.targetPath(), "target");
             if (Files.exists(target)) {
                 if (!Files.isRegularFile(target) || Files.isSymbolicLink(target)) {
@@ -53,6 +38,31 @@ public final class SynexiaImporter {
                                     + " actual="
                                     + current);
                 }
+            }
+        }
+    }
+
+    /** Verifies only the sealed Synexia source side of a delivery manifest. */
+    public static void verifySources(
+            Path synexiaRoot,
+            SynexiaImportManifest manifest) throws IOException {
+        Path sourceRoot = root(synexiaRoot, "synexiaRoot");
+        Objects.requireNonNull(manifest, "manifest");
+        for (SynexiaImportManifest.Entry entry : manifest.entries()) {
+            Path source = resolve(sourceRoot, entry.sourcePath(), "source");
+            if (!Files.isRegularFile(source) || Files.isSymbolicLink(source)) {
+                throw new IllegalStateException(
+                        "Synexia source missing or not regular: " + entry.sourcePath());
+            }
+            String actual = sha256(Files.readAllBytes(source));
+            if (!actual.equals(entry.sha256())) {
+                throw new IllegalStateException(
+                        "Synexia source hash drift: "
+                                + entry.sourcePath()
+                                + " expected="
+                                + entry.sha256()
+                                + " actual="
+                                + actual);
             }
         }
     }
