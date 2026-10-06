@@ -237,6 +237,8 @@ class JepResidueTest(unittest.TestCase):
         self.assertEqual("MATERIALIZED_PACKET", by_jep[493].evidence_state)
         self.assertEqual("PACKET_EVIDENCE", by_jep[496].evidence_state)
         self.assertIn("m3/backports/recipes/j496", by_jep[496].evidence_paths)
+        self.assertEqual("PACKET_EVIDENCE", by_jep[497].evidence_state)
+        self.assertIn("m3/backports/recipes/j497", by_jep[497].evidence_paths)
         self.assertEqual("PACKET_EVIDENCE", by_jep[510].evidence_state)
         self.assertIn("m3/backports/recipes/j510", by_jep[510].evidence_paths)
         self.assertEqual("PACKET_READY", by_jep[493].receipt_state)
