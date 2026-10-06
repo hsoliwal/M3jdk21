@@ -23,3 +23,24 @@ are migration residue. Their reusable authority is mapped by
 Any reusable improvement discovered here must first be authored/proved in Synexia and then
 returned to M3JDK21 through an exact pinned Apache-2.0 handoff. M3JDK21 retains final product,
 license, compatibility, build, jtreg, runtime and promotion authority.
+
+
+## Execute canonical Synexia recipes
+
+The target module can load the canonical recipe artifact without making it a default dependency.
+
+First build/install the exact reviewed Synexia revision:
+
+    mvn -B -f /path/to/com.synexia/pom.xml \
+      -pl synexia-openrewrite-recipes -am install
+
+Then invoke the M3JDK21 receiver with the opt-in profile and an explicit canonical recipe:
+
+    mvn -B -f m3/tooling/migration-recipes/pom.xml \
+      -Pm3-synexia-canonical-recipes \
+      -Dm3.synexia.version=1.0.0-SNAPSHOT \
+      -Drewrite.activeRecipes=com.synexia.rewrite.M3RepositoryJava21ConvergenceRecipe \
+      rewrite:dryRun
+
+The profile has no active-by-default activation and selects no recipe automatically. Canonical
+Synexia recipe execution therefore remains explicit, source-revision/proof bound and target-reviewed.
