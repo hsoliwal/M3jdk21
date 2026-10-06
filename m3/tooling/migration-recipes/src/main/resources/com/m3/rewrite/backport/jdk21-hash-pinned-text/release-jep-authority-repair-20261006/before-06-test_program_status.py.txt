@@ -33,7 +33,6 @@ class ProgramStatusTest(unittest.TestCase):
         self.assertEqual(85, data["jep_rows"])
         self.assertEqual(85, sum(data["jep_states"].values()))
         self.assertEqual(85, data["jep_unique_rows"])
-        self.assertEqual(85, data["jep_authority_rows"])
         self.assertEqual(34, data["priority_jep_rows"])
         self.assertEqual([], data["priority_missing_from_catalogue"])
         self.assertEqual(22, data["released_jdk_floor"])
