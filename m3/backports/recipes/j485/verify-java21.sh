@@ -27,7 +27,7 @@ done
 "$jdk/bin/java" -Xint -Xcheck:jni --patch-module java.base="$out/patch"   -cp "$out/smoke" m3.j485.J485Smoke | tee "$out/logs/smoke-int.log"
 
 "$jdk/bin/javap" --module java.base java.util.stream.Stream > "$out/logs/baseline-stream-api.txt"
-"$jdk/bin/javap" --patch-module java.base="$out/patch" java.util.stream.Stream > "$out/logs/j485-stream-api.txt"
+"$jdk/bin/javap" "$out/patch/java/util/stream/Stream.class" > "$out/logs/j485-stream-api.txt"
 grep -F 'gather(java.util.stream.Gatherer' "$out/logs/j485-stream-api.txt" >/dev/null
 if grep -F 'gather(java.util.stream.Gatherer' "$out/logs/baseline-stream-api.txt" >/dev/null; then
   echo "baseline Java21 unexpectedly contains Stream.gather" >&2

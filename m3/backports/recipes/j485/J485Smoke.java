@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 package m3.j485;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Gatherer;
