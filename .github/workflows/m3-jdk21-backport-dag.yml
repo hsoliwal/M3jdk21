@@ -73,87 +73,8 @@ jobs:
           test "$(wc -l < "$OUT/jep-recipe-dag-queue.tsv")" -eq 42
           awk -F'\t' 'NR > 1 && ($14 != "false" || $15 != "false") { exit 1 } END { if (NR != 42) exit 1 }' \
             "$OUT/jep-recipe-dag-queue.tsv"
-          grep -F       - name: Project sample packet to Camel Airflow and Drools
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p target/m3-projection-smoke
-          cat > target/m3-projection-smoke/packet.tsv <<'EOF'
-          packet_id	atom_id	scope	scope_promotion_approved	work_ref	depends_on
-          ci-projection	java	FILE	false	com.m3.rewrite.SampleJava	
-          ci-projection	text	FILE	false	com.m3.rewrite.SampleText	
-          ci-projection	join	PACKAGE	true	com.m3.rewrite.SampleJoin	java,text
-          EOF
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
-            -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain \
-            -Dexec.args="$PWD/target/m3-projection-smoke/packet.tsv $PWD/target/m3-projection-smoke/out" \
-            exec:java
-          test -s target/m3-projection-smoke/out/M3BackportRoutes.java
-          test -s target/m3-projection-smoke/out/m3_backport_dag.py
-          test -s target/m3-projection-smoke/out/m3_backport_rules.drl
-          test -s target/m3-projection-smoke/out/projection.tsv
-          DAG_ROOT="$(tail -n 1 target/m3-projection-smoke/out/projection.tsv | cut -f2)"
-          test "${#DAG_ROOT}" -eq 64
-          grep -F "$DAG_ROOT" target/m3-projection-smoke/out/M3BackportRoutes.java
-          grep -F "$DAG_ROOT" target/m3-projection-smoke/out/m3_backport_dag.py
-          grep -F "$DAG_ROOT" target/m3-projection-smoke/out/m3_backport_rules.drl
-
-      - name: Emit backport programme status
-        run: |
-          mvn -B -ntp -f m3/backports/pom.xml verify
-
-      - name: Upload backport status artifact
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: m3jdk21-backport-status-${{ github.run_id }}
-          path: |
-            m3/backports/target/program-status.json
-            m3/backports/target/program-status.tsv
-            target/m3-projection-smoke/out/**
-            target/m3-jep-residue-plan/**
-          if-no-files-found: error
-          retention-days: 14
-sourceMutationAuthority\tfalse' "$OUT/nebula-transfer-admission.tsv"
-          grep -F       - name: Project sample packet to Camel Airflow and Drools
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p target/m3-projection-smoke
-          cat > target/m3-projection-smoke/packet.tsv <<'EOF'
-          packet_id	atom_id	scope	scope_promotion_approved	work_ref	depends_on
-          ci-projection	java	FILE	false	com.m3.rewrite.SampleJava	
-          ci-projection	text	FILE	false	com.m3.rewrite.SampleText	
-          ci-projection	join	PACKAGE	true	com.m3.rewrite.SampleJoin	java,text
-          EOF
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
-            -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain \
-            -Dexec.args="$PWD/target/m3-projection-smoke/packet.tsv $PWD/target/m3-projection-smoke/out" \
-            exec:java
-          test -s target/m3-projection-smoke/out/M3BackportRoutes.java
-          test -s target/m3-projection-smoke/out/m3_backport_dag.py
-          test -s target/m3-projection-smoke/out/m3_backport_rules.drl
-          test -s target/m3-projection-smoke/out/projection.tsv
-          DAG_ROOT="$(tail -n 1 target/m3-projection-smoke/out/projection.tsv | cut -f2)"
-          test "${#DAG_ROOT}" -eq 64
-          grep -F "$DAG_ROOT" target/m3-projection-smoke/out/M3BackportRoutes.java
-          grep -F "$DAG_ROOT" target/m3-projection-smoke/out/m3_backport_dag.py
-          grep -F "$DAG_ROOT" target/m3-projection-smoke/out/m3_backport_rules.drl
-
-      - name: Emit backport programme status
-        run: |
-          mvn -B -ntp -f m3/backports/pom.xml verify
-
-      - name: Upload backport status artifact
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
-        with:
-          name: m3jdk21-backport-status-${{ github.run_id }}
-          path: |
-            m3/backports/target/program-status.json
-            m3/backports/target/program-status.tsv
-            target/m3-projection-smoke/out/**
-          if-no-files-found: error
-          retention-days: 14
-promotionAuthority\tfalse' "$OUT/nebula-transfer-admission.tsv"
+          grep -F $'sourceMutationAuthority\tfalse' "$OUT/nebula-transfer-admission.tsv"
+          grep -F $'promotionAuthority\tfalse' "$OUT/nebula-transfer-admission.tsv"
 
       - name: Project sample packet to Camel Airflow and Drools
         shell: bash
@@ -192,5 +113,6 @@ promotionAuthority\tfalse' "$OUT/nebula-transfer-admission.tsv"
             m3/backports/target/program-status.json
             m3/backports/target/program-status.tsv
             target/m3-projection-smoke/out/**
+            target/m3-jep-residue-plan/**
           if-no-files-found: error
           retention-days: 14
