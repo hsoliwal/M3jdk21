@@ -81,7 +81,7 @@ oop java_lang_String::m3_storage_no_keepalive(oop java_string) {
   return java_string->obj_field_access<AS_NO_KEEPALIVE | MO_ACQUIRE>(_m3_offset);
 }
 
-bool java_lang_String::is_m3_joined(oop java_string) {
+bool java_lang_String::is_m3_backed(oop java_string) {
   return m3_storage_no_keepalive(java_string) != nullptr;
 }
 
