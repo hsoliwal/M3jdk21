@@ -55,6 +55,8 @@ for fragment in [
     "M3JDK owns every runtime type in this package",
     "Reusable backing, search, regex and precompute kernels",
     "Knowledge/reasoning planes without a concrete JDK consumer",
+    "Abstract domains such as language, reasoning, search, graphs, automata",
+    "Provenance and licensing attach to specific reviewed implementation artifacts",
 ]:
     if fragment not in mindex_package:
         fail(f"jdk.internal.mindex package documentation missing: {fragment}")
@@ -71,6 +73,7 @@ for fragment in [
     '"package": "jdk.internal.mindex"',
     '"exported_from_java_base": false',
     '"package_documentation": "src/java.base/share/classes/jdk/internal/mindex/package-info.java"',
+    '"provenance_rule": "Abstract domains are taxonomy only. Provenance/license binds exact reviewed implementation artifacts; independently written M3JDK implementations use JDK-owned names and code."',
 ]:
     if fragment not in mapping:
         fail(f"JDK internal package mapping missing: {fragment}")
