@@ -261,8 +261,13 @@ final class M3String implements CharSequence {
     boolean contentEquals(String other) {
         Objects.requireNonNull(other, "other");
         M3String that = other.m3();
-        if (that != null && sameCoordinate(that)) return true;
-        if (other.length() != length()) return false;
+        if (that != null) {
+            if (sameCoordinate(that)) return true;
+            if (that.length() != length()) return false;
+            if (hashCodeValue() != that.hashCodeValue()) return false;
+        } else if (other.length() != length()) {
+            return false;
+        }
         for (int index = 0; index < length(); index++) {
             if (charAt(index) != other.charAt(index)) return false;
         }
