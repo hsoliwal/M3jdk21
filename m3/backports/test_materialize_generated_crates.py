@@ -145,5 +145,79 @@ class GeneratedCrateMaterializerTest(unittest.TestCase):
             materializer.run(root, generated, "check", False, None)
 
 
+    def test_crate_index_provenance_and_bounds_are_reproved(self) -> None:
+        mutations = (
+            ("jdk-21+35", "jdk-20+36", "unexpected crate baseline ref"),
+            ("jdk-24+36", "jdk-24+35", "unexpected crate donor ref"),
+            ("CANDIDATE_UNVERIFIED", "VERIFIED", "unexpected crate status"),
+            (
+                "src/jdk.jlink/share/classes/demo/Foo.java\tsrc/jdk.jlink/share/classes/demo/Foo.java",
+                "src/jdk.jlink/share/classes/demo/Z.java\tsrc/jdk.jlink/share/classes/demo/Foo.java",
+                "first/last path order invalid",
+            ),
+        )
+        for old, new, message in mutations:
+            with self.subTest(message=message):
+                root, generated, _ = self.fixture()
+                index = generated / "CRATES.tsv"
+                text = index.read_text(encoding="utf-8")
+                self.assertIn(old, text)
+                index.write_text(text.replace(old, new, 1), encoding="utf-8")
+                with self.assertRaisesRegex(ValueError, message):
+                    materializer.run(root, generated, "check", True, None)
+
+    def test_crate_first_last_metadata_must_match_manifest(self) -> None:
+        root, generated, _ = self.fixture()
+        index = generated / "CRATES.tsv"
+        rows = list(csv.DictReader(index.open(encoding="utf-8", newline=""), delimiter="\t"))
+        rows[0]["first_path"] = "src/jdk.jlink/share/classes/demo/Bar.java"
+        rows[0]["last_path"] = "src/jdk.jlink/share/classes/demo/Bar.java"
+        with index.open("w", encoding="utf-8", newline="") as handle:
+            writer = csv.DictWriter(
+                handle,
+                fieldnames=(
+                    "crate_name",
+                    "release",
+                    "baseline_ref",
+                    "donor_ref",
+                    "target_count",
+                    "first_path",
+                    "last_path",
+                    "status",
+                ),
+                delimiter="\t",
+                lineterminator="\n",
+            )
+            writer.writeheader()
+            writer.writerows(rows)
+
+        with self.assertRaisesRegex(ValueError, "first/last path metadata drift"):
+            materializer.run(root, generated, "check", True, None)
+
+    def test_ambiguous_manifest_ownership_and_payload_symlink_fail_closed(self) -> None:
+        root, generated, _ = self.fixture()
+        java_name = "jdk24-java-0001"
+        java_manifest = generated / materializer.JAVA_ROOT / java_name / "manifest.tsv"
+        text_owner = generated / materializer.TEXT_ROOT / java_name
+        text_owner.mkdir(parents=True)
+        (text_owner / "manifest.tsv").write_text(
+            java_manifest.read_text(encoding="utf-8"),
+            encoding="utf-8",
+        )
+        with self.assertRaisesRegex(ValueError, "ownership is ambiguous"):
+            materializer.run(root, generated, "check", True, None)
+
+        root, generated, _ = self.fixture()
+        java_dir = generated / materializer.JAVA_ROOT / java_name
+        payload = java_dir / "0001.java.txt"
+        original = payload.read_bytes()
+        payload.unlink()
+        target = generated / "payload-copy.java.txt"
+        target.write_bytes(original)
+        payload.symlink_to(target)
+        with self.assertRaisesRegex(ValueError, "missing/unsafe crate payload"):
+            materializer.run(root, generated, "check", True, None)
+
+
 if __name__ == "__main__":
     unittest.main()
