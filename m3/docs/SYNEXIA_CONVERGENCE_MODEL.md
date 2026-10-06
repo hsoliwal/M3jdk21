@@ -140,3 +140,48 @@ The initial moved family is the pure-int FILE convergence stack. Its canonical n
 A borrowed canonical recipe may execute in M3JDK21, but target promotion still requires M3JDK21's
 scope, license, compile, API/ABI, runtime/jtreg and fixed-point gates. Borrowing never transfers
 promotion authority back to Synexia.
+
+
+## Nebula proving-ground transfer
+
+The reusable FILE convergence family was independently proved and operationally exercised first in
+`hsoliwal/nebula`, then transferred into Synexia canonical ownership and finally consumed by
+M3JDK21.
+
+The custody chain is machine-readable at:
+
+`m3/compatibility/nebula-proven-recipe-transfer.tsv`
+
+The required semantic path is:
+
+```text
+Nebula proving ground
+  inventory
+  -> atomization
+  -> patternization / IOP
+  -> documentation
+  -> fixed point
+  -> 99% semantic recipe proof
+  -> Camel / Airflow / Drools projections
+        |
+        v
+Synexia canonical recipe home
+        |
+        | exact source-pinned Apache-2.0 recipe family
+        v
+M3JDK21 consumer
+        |
+        v
+JDK-specific compatibility/backport DAG
+  -> compile
+  -> jtreg/runtime
+  -> serial promotion
+```
+
+The transfer does not grant source-mutation or promotion authority to Nebula, Synexia, Camel,
+Airflow, or Drools. M3JDK21 remains the OpenJDK product/backport verification authority.
+
+Nebula PR #80 is intentionally recorded as
+`HOSTED_ACTIONS_STARTUP_BLOCKED_NO_JOBS`: its two relevant hosted M3 workflow runs created zero
+jobs. Therefore the custody/proving architecture is accepted from merged repository evidence, but
+no hosted green-build claim is inferred from that run.
