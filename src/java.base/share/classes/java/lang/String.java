@@ -1727,6 +1727,16 @@ public final class String
      * @since 1.5
      */
     public int offsetByCodePoints(int index, int codePointOffset) {
+        M3String storage = m3();
+        if (storage != null
+                && index >= 0
+                && index <= storage.length()
+                && storage.facts().codePointCount == storage.length()) {
+            long result = (long) index + codePointOffset;
+            if (result >= 0L && result <= storage.length()) {
+                return (int) result;
+            }
+        }
         return Character.offsetByCodePoints(this, index, codePointOffset);
     }
 
