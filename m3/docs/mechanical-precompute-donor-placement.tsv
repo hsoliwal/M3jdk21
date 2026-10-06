@@ -1,0 +1,4 @@
+scope	donor	synexia_owner	m3jdk_placement	disposition	runtime_dependency_rule	semantic_authority
+REASONING	TweetyProject	com.synexia.indexstring.precompute.* / reasoning.*	no java.lang.String owner	DONOR_ONLY_NO_JDK_STRING_CONSUMER	Do not add Tweety runtime dependency to java.base	Synexia reasoning tables / named M3 reasoning consumer only
+REGEX	RE2/J	com.synexia.indexstring.MIndexRe2Plan	java.util.regex/internal M3 candidate-plan lanes	ADAPT_MECHANICS_NO_RE2J_RUNTIME	Do not add com.google.re2j dependency to M3JDK	Exact JDK regex engine
+CORPUS_SEARCH	Apache Lucene	com.synexia.indexstring.MIndexLuceneMechanicalPrecompute	separate internal M3 corpus/term/postings plane	ADAPT_COLLECTION_MECHANICS_NOT_M3STRING	Do not add org.apache.lucene dependency to java.base	Exact M3 corpus owner + exact UTF-16 verification
