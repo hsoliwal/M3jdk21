@@ -18,19 +18,51 @@ import struct
 
 MAGIC = 0x4D334C4558303031
 VERSION = 2
+EXPORT_SCHEMA = "synexia-m3jdk-lexicon-export-2"
 HEADER = 64
 SHARD_COLUMNS = ("shard_id", "file", "first_lexeme", "last_lexeme", "image_records", "utf16_units", "sha256")
 MAPPING_COLUMNS = ("source_id", "source_path", "source_kind", "language_tag", "record_id", "lexeme",
                    "shard_id", "image_row", "mapping_id", "mapping_name", "translation_profile",
-                   "precompute_profile")
+                   "precompute_profile", "precompute_payload")
 FACT_COLUMNS = ("shard_id", "image_row", "utf16_units", "java_hash", "code_points",
                 "unpaired_surrogates", "non_bmp_code_points", "ascii", "latin1",
                 "contains_whitespace", "precompute_profile")
 PROFILE_COLUMNS = ("precompute_profile", "source_records", "image_records", "sha256")
+MAX_PRECOMPUTE_PAYLOAD_BYTES = 1 * 1024 * 1024
 
 
 def digest(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+def _reject_json_constant(value: str) -> None:
+    raise ValueError(f"non-finite JSON number is not allowed: {value}")
+
+
+def _object_without_duplicate_keys(pairs: list[tuple[str, object]]) -> dict[str, object]:
+    result: dict[str, object] = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate precompute payload key: {key}")
+        result[key] = value
+    return result
+
+
+def canonical_precompute_payload(value: str) -> str:
+    if len(value.encode("utf-8", "surrogatepass")) > MAX_PRECOMPUTE_PAYLOAD_BYTES:
+        raise ValueError("precompute payload exceeds 1 MiB")
+    try:
+        payload = json.loads(value, object_pairs_hook=_object_without_duplicate_keys,
+                             parse_constant=_reject_json_constant)
+    except (TypeError, ValueError, json.JSONDecodeError) as error:
+        raise ValueError("invalid precompute payload JSON") from error
+    if not isinstance(payload, dict):
+        raise ValueError("precompute payload must be a JSON object")
+    canonical = json.dumps(payload, ensure_ascii=True, sort_keys=True,
+                           separators=(",", ":"), allow_nan=False)
+    if len(canonical.encode("utf-8")) > MAX_PRECOMPUTE_PAYLOAD_BYTES:
+        raise ValueError("canonical precompute payload exceeds 1 MiB")
+    return canonical
 
 
 def unescape_sidecar_text(value: str) -> str:
@@ -139,7 +171,7 @@ def read_image(path: pathlib.Path) -> tuple[list[str], list[int], int]:
 def verify(output: pathlib.Path) -> dict[str, int]:
     manifest_path = output / "synexia.export.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
-    if manifest.get("schema") != "synexia-m3jdk-lexicon-export-1":
+    if manifest.get("schema") != EXPORT_SCHEMA:
         raise ValueError("unsupported export schema")
     target = manifest.get("target", {})
     if target.get("image_format") != "M3LEX001" or target.get("image_version") != VERSION:
@@ -195,6 +227,8 @@ def verify(output: pathlib.Path) -> dict[str, int]:
             raise ValueError("source mapping does not match image coordinate")
         if not row["mapping_name"] or not row["precompute_profile"]:
             raise ValueError("mapping metadata is incomplete")
+        if canonical_precompute_payload(row["precompute_payload"]) != row["precompute_payload"]:
+            raise ValueError("precompute payload is not canonical")
         profile = row["precompute_profile"]
         profile_sources.setdefault(profile, set()).add(identity)
         profile_coordinates.setdefault(profile, set()).add(key)

@@ -21,6 +21,7 @@ from dataclasses import dataclass
 
 MAGIC = 0x4D334C4558303031  # M3LEX001
 VERSION = 2
+EXPORT_SCHEMA = "synexia-m3jdk-lexicon-export-2"
 HEADER = 64
 MAX_RECORDS = 65_536
 MAX_IMAGE_BYTES = 64 * 1024 * 1024
@@ -30,19 +31,26 @@ RECORD_COLUMNS = (
     "lexeme", "mapping_id", "mapping_name", "translation_profile",
     "precompute_profile",
 )
+RECORD_COLUMNS_V2 = RECORD_COLUMNS + ("precompute_payload",)
+MAPPING_COLUMNS = (
+    "source_id", "source_path", "source_kind", "language_tag", "record_id", "lexeme",
+    "shard_id", "image_row", "mapping_id", "mapping_name", "translation_profile",
+    "precompute_profile", "precompute_payload",
+)
 MANIFEST_COLUMNS = (
     "source_id", "canonical_name", "synexia_path", "record_id_field",
     "mapping_fields", "precompute_target", "data_license", "data_policy",
 )
 PROFILE_COLUMNS = ("precompute_profile", "source_records", "image_records", "sha256")
+MAX_PRECOMPUTE_PAYLOAD_BYTES = 1 * 1024 * 1024
 
 
 @dataclass(frozen=True)
 class Record:
-    values: tuple[str, ...]
+    values: dict[str, str]
 
     def __getitem__(self, name: str) -> str:
-        return self.values[RECORD_COLUMNS.index(name)]
+        return self.values[name]
 
 
 def sha256_bytes(data: bytes) -> str:
@@ -133,8 +141,44 @@ def read_manifest(path: pathlib.Path) -> tuple[dict[str, dict[str, str]], bytes]
     return result, raw
 
 
+def _reject_json_constant(value: str) -> None:
+    raise ValueError(f"non-finite JSON number is not allowed: {value}")
+
+
+def _object_without_duplicate_keys(pairs: list[tuple[str, object]]) -> dict[str, object]:
+    result: dict[str, object] = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate precompute payload key: {key}")
+        result[key] = value
+    return result
+
+
+def canonical_precompute_payload(value: str) -> str:
+    """Normalize an owner payload without interpreting its domain-specific fields."""
+    if len(value.encode("utf-8", "surrogatepass")) > MAX_PRECOMPUTE_PAYLOAD_BYTES:
+        raise ValueError("precompute payload exceeds 1 MiB")
+    try:
+        payload = json.loads(value, object_pairs_hook=_object_without_duplicate_keys,
+                             parse_constant=_reject_json_constant)
+    except (TypeError, ValueError, json.JSONDecodeError) as error:
+        raise ValueError("invalid precompute payload JSON") from error
+    if not isinstance(payload, dict):
+        raise ValueError("precompute payload must be a JSON object")
+    canonical = json.dumps(payload, ensure_ascii=True, sort_keys=True,
+                           separators=(",", ":"), allow_nan=False)
+    if len(canonical.encode("utf-8")) > MAX_PRECOMPUTE_PAYLOAD_BYTES:
+        raise ValueError("canonical precompute payload exceeds 1 MiB")
+    return canonical
+
+
 def load_records(path: pathlib.Path, sources: dict[str, dict[str, str]]) -> tuple[list[Record], bytes]:
-    rows, raw = read_tsv(path, RECORD_COLUMNS)
+    raw = path.read_bytes()
+    with path.open("r", encoding="utf-8", errors="surrogatepass", newline="") as stream:
+        columns = tuple(csv.DictReader(stream, delimiter="\t").fieldnames or ())
+    if columns not in (RECORD_COLUMNS, RECORD_COLUMNS_V2):
+        raise ValueError(f"{path}: expected columns {RECORD_COLUMNS} or {RECORD_COLUMNS_V2}")
+    rows, _ = read_tsv(path, columns)
     seen: set[tuple[str, str]] = set()
     result: list[Record] = []
     for row in rows:
@@ -148,7 +192,10 @@ def load_records(path: pathlib.Path, sources: dict[str, dict[str, str]]) -> tupl
             raise ValueError(f"source path mismatch for {row['source_id']}")
         if row["precompute_profile"] != sources[row["source_id"]]["precompute_target"]:
             raise ValueError(f"precompute profile mismatch for {row['source_id']}")
-        result.append(Record(tuple(row[column] for column in RECORD_COLUMNS)))
+        normalized = {column: row[column] for column in RECORD_COLUMNS}
+        normalized["precompute_payload"] = canonical_precompute_payload(
+            row.get("precompute_payload", "{}"))
+        result.append(Record(normalized))
     if not result:
         raise ValueError("lexicon records are empty")
     return result, raw
@@ -254,9 +301,7 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
                      "utf16_units", "sha256")
     shard_bytes = write_tsv(output / "synexia.shards.tsv", shard_columns, shard_rows)
 
-    mapping_columns = ("source_id", "source_path", "source_kind", "language_tag", "record_id",
-                       "lexeme", "shard_id", "image_row", "mapping_id", "mapping_name",
-                       "translation_profile", "precompute_profile")
+    mapping_columns = MAPPING_COLUMNS
     mapping_rows = [{column: (physical_row[record["lexeme"]][0] if column == "shard_id"
                               else physical_row[record["lexeme"]][1] if column == "image_row"
                               else escape_sidecar_text(record[column]) if column == "lexeme"
@@ -291,13 +336,14 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
     fact_bytes = write_tsv(output / "synexia.precompute.tsv", fact_columns, fact_rows)
 
     manifest = {
-        "schema": "synexia-m3jdk-lexicon-export-1",
+        "schema": EXPORT_SCHEMA,
         "source": {"repository": source_repo, "commit": source_commit,
                    "manifest_sha256": sha256_bytes(source_manifest_bytes),
                    "records_sha256": sha256_bytes(records_bytes)},
         "target": {"repository": "https://github.com/hsoliwal/M3jdk21",
                    "image_format": "M3LEX001", "image_version": VERSION,
                    "mapping_sidecar": "synexia.records.tsv",
+                   "mapping_payload_field": "precompute_payload (canonical JSON object; v1 input defaults to {})",
                    "shards_sidecar": "synexia.shards.tsv",
                    "precompute_index_sidecar": "synexia.precompute-index.tsv",
                    "precompute_sidecar": "synexia.precompute.tsv"},
