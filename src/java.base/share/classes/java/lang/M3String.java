@@ -480,6 +480,9 @@ final class M3String implements CharSequence {
 
     byte[] encodeUtf8NoRepl() {
         M3StringFacts prepared = facts();
+        if (prepared.unpairedSurrogateCount == 0) {
+            return encodeUtf8();
+        }
         byte[] output = new byte[prepared.utf8Length];
         if (prepared.ascii) {
             getBytes(output, 0, 0, String.LATIN1, length());
