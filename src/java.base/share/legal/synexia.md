@@ -1,3 +1,15 @@
+## General Synexia public-target license boundary
+
+First-party and independently authored Synexia components admitted into M3JDK21 retain their
+Apache-2.0 identity; inclusion in this OpenJDK-derived repository does not silently relicense them.
+Existing OpenJDK-derived source retains its existing OpenJDK license/header. Third-party donor
+source is not made Apache-2.0 by passing through Synexia and requires its own artifact-specific
+license/NOTICE disposition before product inclusion.
+
+The machine-readable receiving policy is
+`m3/compatibility/synexia-public-target-policy.tsv`. Source-license admission is independent of
+build, API/ABI, runtime, native, jtreg and platform acceptance.
+
 ## Synexia Lane28 collection kernels
 
 Apache-2.0 applies to jdk.internal.mindex.M3Address28, M3IntLane28, M3LongLane28,
