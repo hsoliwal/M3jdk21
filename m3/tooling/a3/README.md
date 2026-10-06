@@ -41,3 +41,19 @@ Receipt:
 The receipt records FILE scope, before/after SHA-256, changed state and fixed-point proof.
 
 See ../../docs/a3.md for the whole-JDK absorption contract.
+
+## Synexia convergence borrow
+
+A3 now consumes an exact Apache-2.0 Synexia convergence snapshot pinned by
+`m3/tooling/a3/synexia/SOURCE_MANIFEST.tsv`.
+
+`A3 synexia` verifies the borrowed public-polish, donor, atomizer, patternizer, regex-mastery
+and recipe-mastery source blobs. The snapshot is tool-plane input only; it grants no OpenJDK
+product mutation or promotion authority.
+
+`A3 polish` adapts Synexia's all-project public-code polish model to the real OpenJDK
+`src/` and `test/` inventory. Every Java-bearing target is routed to
+`com.m3.a3.SynexiaPublicPolish`; targets containing native code carry an additional native/JNI
+gate. Pure native/resource/build targets remain verification-only.
+
+The OpenJDK `configure -> make -> jtreg -> runtime` chain remains the product oracle.

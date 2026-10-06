@@ -10,3 +10,15 @@ Synexia VI/Release and Class bridge ports are attributed in m3/tooling/vi,
 m3/tooling/cb and
 src/java.base/share/legal/synexia.md. This notice does not relicense OpenJDK
 or authorize incompatible donor imports.
+A3 Synexia convergence borrowing
+--------------------------------
+The A3 tooling subtree contains exact Apache-2.0 donor snapshots from
+hsoliwal/com.synexia at revision ae955ea9b7e246d780269525b15fa38b95ffba67.
+The admitted files, original Git blob identities and local paths are pinned in
+m3/tooling/a3/synexia/SOURCE_MANIFEST.tsv. They include public-polish workspace
+material, competitive-programming donor catalogues, Atomize/Patternize recipes,
+regex mastery material and the recipe-mastery laboratory.
+
+These copies are tooling/reference/adaptation inputs under Apache License 2.0.
+They do not relicense OpenJDK files, grant automatic product-source mutation,
+or bypass the JDK configure/make/jtreg/runtime verification chain.

@@ -1,0 +1,1301 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.rewrite;
+
+import com.synexia.job.IProgressMonitor;
+import com.synexia.m3.contract.JavaAtomExtractor;
+import com.synexia.m3.contract.JavaFileComposition;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.StringWriter;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.lang.reflect.RecordComponent;
+import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.function.Supplier;
+import javax.tools.DiagnosticCollector;
+import javax.tools.FileObject;
+import javax.tools.ForwardingJavaFileManager;
+import javax.tools.JavaFileManager;
+import javax.tools.JavaFileObject;
+import javax.tools.SimpleJavaFileObject;
+import javax.tools.StandardJavaFileManager;
+import javax.tools.StandardLocation;
+import javax.tools.ToolProvider;
+import org.openrewrite.InMemoryExecutionContext;
+import org.openrewrite.Recipe;
+
+/**
+ * Bounded in-memory convergence laboratory for source-changing OpenRewrite recipes.
+ *
+ * <p>The lab is deliberately mechanical. It does not infer correctness from an LLM, similarity
+ * score, compiler success alone, or one preferred recipe order. It enumerates every non-empty
+ * recipe subset and every permutation within each subset, applies fresh recipe instances in serial
+ * passes, compiles after every recipe application, executes a behavioral probe, checks the
+ * declared public/protected contract, losslessly atomizes/reconstructs every intermediate source
+ * snapshot, detects source cycles, and requires all permutations of the same subset to converge
+ * to one exact source, classfile and atom root.</p>
+ */
+public final class M3RecipeMasteryLab {
+    private M3RecipeMasteryLab() {}
+
+    /**
+     * Host-supplied context setup for one fresh recipe application.
+     *
+     * <p>This exists for proof-gated recipes such as full M3 Atomize, whose trusted verifier must
+     * be installed by the embedding test host after compiling and behavior-checking the exact
+     * candidate. The source map is immutable and the hook itself grants no promotion authority.</p>
+     */
+    @FunctionalInterface
+    public interface RecipeContextConfigurer {
+        void configure(
+                Fixture fixture,
+                Map<String, String> sources,
+                InMemoryExecutionContext context,
+                IProgressMonitor monitor);
+    }
+
+    public record RecipeAtom(
+            String id,
+            Supplier<? extends Recipe> factory,
+            RecipeContextConfigurer contextConfigurer) {
+        public RecipeAtom {
+            id = required(id, "id");
+            factory = Objects.requireNonNull(factory, "factory");
+            contextConfigurer = Objects.requireNonNull(contextConfigurer, "contextConfigurer");
+        }
+
+        public RecipeAtom(String id, Supplier<? extends Recipe> factory) {
+            this(id, factory, (fixture, sources, context, monitor) -> {});
+        }
+
+        Recipe fresh() {
+            return Objects.requireNonNull(factory.get(), "recipe");
+        }
+
+        void configure(
+                Fixture fixture,
+                Map<String, String> sources,
+                InMemoryExecutionContext context,
+                IProgressMonitor monitor) {
+            contextConfigurer.configure(
+                    Objects.requireNonNull(fixture, "fixture"),
+                    Map.copyOf(Objects.requireNonNull(sources, "sources")),
+                    Objects.requireNonNull(context, "context"),
+                    monitor == null ? IProgressMonitor.noop() : monitor);
+        }
+    }
+
+    /**
+     * Read-only static evidence callback evaluated against every intermediate source generation.
+     *
+     * <p>The callback has no mutation surface: it receives an immutable source map and the existing
+     * progress monitor, and must return one deterministic SHA-256 root. Observer output participates
+     * in same-subset permutation convergence but is not required to equal the baseline because an
+     * admitted semantics-preserving rewrite can legitimately change structural evidence.</p>
+     */
+    @FunctionalInterface
+    public interface EvidenceFunction {
+        String root(Map<String, String> sources, IProgressMonitor monitor);
+    }
+
+    public record EvidenceObserver(String id, EvidenceFunction function) {
+        public EvidenceObserver {
+            id = required(id, "id");
+            function = Objects.requireNonNull(function, "function");
+        }
+
+        String observe(Map<String, String> sources, IProgressMonitor monitor) {
+            String root = Objects.requireNonNull(function.root(sources, monitor), "evidence root");
+            if (!root.matches("[0-9a-f]{64}")) {
+                throw new IllegalStateException("evidence observer must return lowercase SHA-256: " + id);
+            }
+            return root;
+        }
+    }
+
+    public record Fixture(
+            String id,
+            Map<String, String> sources,
+            String probeClass,
+            String probeMethod,
+            List<String> contractClasses) {
+        public Fixture {
+            id = proofIdentity(id, "id");
+            Objects.requireNonNull(sources, "sources");
+            if (sources.isEmpty()) throw new IllegalArgumentException("empty fixture");
+            LinkedHashMap<String, String> copy = new LinkedHashMap<>();
+            Set<String> paths = new LinkedHashSet<>();
+            sources.entrySet().stream()
+                    .sorted(Map.Entry.comparingByKey())
+                    .forEach(
+                            entry -> {
+                                String path = portablePath(entry.getKey());
+                                String identity = sourcePathIdentity(path);
+                                if (!paths.add(identity)) {
+                                    throw new IllegalArgumentException(
+                                            "duplicate fixture source path: " + identity);
+                                }
+                                copy.put(path, Objects.requireNonNull(entry.getValue(), "source"));
+                            });
+            sources = Map.copyOf(copy);
+            probeClass = required(probeClass, "probeClass");
+            probeMethod = required(probeMethod, "probeMethod");
+            contractClasses = List.copyOf(Objects.requireNonNull(contractClasses, "contractClasses"));
+            if (contractClasses.isEmpty()) {
+                throw new IllegalArgumentException("empty contractClasses");
+            }
+        }
+    }
+
+    public record Limits(int maxPasses, int maxSchedules, int maxRecipes, int maxSources, long maxSourceBytes) {
+        public Limits {
+            if (maxPasses < 2 || maxPasses > 32) throw new IllegalArgumentException("maxPasses");
+            if (maxSchedules < 1 || maxSchedules > 10_000) {
+                throw new IllegalArgumentException("maxSchedules");
+            }
+            if (maxRecipes < 1 || maxRecipes > 8) throw new IllegalArgumentException("maxRecipes");
+            if (maxSources < 1 || maxSources > 256) throw new IllegalArgumentException("maxSources");
+            if (maxSourceBytes < 1 || maxSourceBytes > 64L * 1024L * 1024L) {
+                throw new IllegalArgumentException("maxSourceBytes");
+            }
+        }
+
+        public static Limits focused() {
+            return new Limits(6, 64, 6, 32, 1_000_000L);
+        }
+    }
+
+    public record Step(
+            int pass,
+            String recipe,
+            boolean changed,
+            String sourceRootSha256,
+            String classRootSha256,
+            String atomRootSha256,
+            Map<String, String> evidenceRoots) {
+        public Step {
+            if (pass < 1) throw new IllegalArgumentException("pass");
+            recipe = required(recipe, "recipe");
+            if (!recipe.matches("[A-Za-z0-9][A-Za-z0-9_.-]{0,95}")) {
+                throw new IllegalArgumentException("invalid recipe: " + recipe);
+            }
+            sourceRootSha256 = requireSha256(sourceRootSha256, "sourceRootSha256");
+            classRootSha256 = requireSha256(classRootSha256, "classRootSha256");
+            atomRootSha256 = requireSha256(atomRootSha256, "atomRootSha256");
+            evidenceRoots = checkedEvidenceRoots(evidenceRoots);
+        }
+
+        public Step(
+                int pass,
+                String recipe,
+                boolean changed,
+                String sourceRootSha256,
+                String classRootSha256,
+                String atomRootSha256) {
+            this(
+                    pass,
+                    recipe,
+                    changed,
+                    sourceRootSha256,
+                    classRootSha256,
+                    atomRootSha256,
+                    Map.of());
+        }
+    }
+
+    public record Run(
+            String fixture,
+            String subset,
+            List<String> schedule,
+            int passes,
+            String sourceRootSha256,
+            String classRootSha256,
+            String atomRootSha256,
+            String contractRootSha256,
+            String probeValue,
+            Map<String, String> evidenceRoots,
+            List<Step> steps) {
+        public Run {
+            fixture = proofIdentity(fixture, "fixture");
+            subset = required(subset, "subset");
+            schedule = List.copyOf(Objects.requireNonNull(schedule, "schedule"));
+            if (schedule.isEmpty()) throw new IllegalArgumentException("empty schedule");
+            LinkedHashSet<String> scheduleIds = new LinkedHashSet<>();
+            for (String recipe : schedule) {
+                String id = required(recipe, "schedule recipe");
+                if (!id.matches("[A-Za-z0-9][A-Za-z0-9_.-]{0,95}")) {
+                    throw new IllegalArgumentException("invalid schedule recipe: " + id);
+                }
+                if (!scheduleIds.add(id)) {
+                    throw new IllegalArgumentException("duplicate schedule recipe: " + id);
+                }
+            }
+            String expectedSubset =
+                    scheduleIds.stream()
+                            .sorted()
+                            .reduce((left, right) -> left + "+" + right)
+                            .orElseThrow();
+            if (!subset.equals(expectedSubset)) {
+                throw new IllegalArgumentException(
+                        "subset/schedule mismatch: subset="
+                                + subset
+                                + " expected="
+                                + expectedSubset);
+            }
+            if (passes < 1) throw new IllegalArgumentException("passes");
+            sourceRootSha256 = requireSha256(sourceRootSha256, "sourceRootSha256");
+            classRootSha256 = requireSha256(classRootSha256, "classRootSha256");
+            atomRootSha256 = requireSha256(atomRootSha256, "atomRootSha256");
+            contractRootSha256 = requireSha256(contractRootSha256, "contractRootSha256");
+            probeValue = Objects.requireNonNull(probeValue, "probeValue");
+            evidenceRoots = checkedEvidenceRoots(evidenceRoots);
+            steps = List.copyOf(Objects.requireNonNull(steps, "steps"));
+
+            int scheduleSize = schedule.size();
+            int expectedSteps = Math.multiplyExact(passes, scheduleSize);
+            if (steps.size() != expectedSteps) {
+                throw new IllegalArgumentException(
+                        "step count: expected=" + expectedSteps + " actual=" + steps.size());
+            }
+            LinkedHashSet<String> observedStepRoots = new LinkedHashSet<>();
+            for (int pass = 1; pass <= passes; pass++) {
+                boolean anyChanged = false;
+                for (int recipeIndex = 0; recipeIndex < scheduleSize; recipeIndex++) {
+                    Step step = steps.get((pass - 1) * scheduleSize + recipeIndex);
+                    if (step.pass() != pass) {
+                        throw new IllegalArgumentException("step pass ordering");
+                    }
+                    if (!schedule.get(recipeIndex).equals(step.recipe())) {
+                        throw new IllegalArgumentException("step recipe ordering");
+                    }
+                    int absoluteIndex = (pass - 1) * scheduleSize + recipeIndex;
+                    if (!step.changed() && absoluteIndex > 0) {
+                        Step previous = steps.get(absoluteIndex - 1);
+                        if (!previous.sourceRootSha256().equals(step.sourceRootSha256())
+                                || !previous.classRootSha256().equals(step.classRootSha256())
+                                || !previous.atomRootSha256().equals(step.atomRootSha256())
+                                || !previous.evidenceRoots().equals(step.evidenceRoots())) {
+                            throw new IllegalArgumentException(
+                                    "unchanged step observation drift");
+                        }
+                    }
+                    if (step.changed() && observedStepRoots.contains(step.sourceRootSha256())) {
+                        throw new IllegalArgumentException("changed step source cycle");
+                    }
+                    observedStepRoots.add(step.sourceRootSha256());
+                    anyChanged |= step.changed();
+                }
+                if (pass < passes && !anyChanged) {
+                    throw new IllegalArgumentException("premature fixed-point pass");
+                }
+                if (pass == passes && anyChanged) {
+                    throw new IllegalArgumentException("final fixed-point pass changed");
+                }
+            }
+
+            Step last = steps.getLast();
+            if (!sourceRootSha256.equals(last.sourceRootSha256())
+                    || !classRootSha256.equals(last.classRootSha256())
+                    || !atomRootSha256.equals(last.atomRootSha256())
+                    || !evidenceRoots.equals(last.evidenceRoots())) {
+                throw new IllegalArgumentException("final run/step observation mismatch");
+            }
+        }
+
+        public Run(
+                String fixture,
+                String subset,
+                List<String> schedule,
+                int passes,
+                String sourceRootSha256,
+                String classRootSha256,
+                String atomRootSha256,
+                String contractRootSha256,
+                String probeValue,
+                List<Step> steps) {
+            this(
+                    fixture,
+                    subset,
+                    schedule,
+                    passes,
+                    sourceRootSha256,
+                    classRootSha256,
+                    atomRootSha256,
+                    contractRootSha256,
+                    probeValue,
+                    Map.of(),
+                    steps);
+        }
+    }
+
+    public record Report(List<Run> runs) {
+        public Report {
+            runs = List.copyOf(Objects.requireNonNull(runs, "runs"));
+            if (runs.isEmpty()) throw new IllegalArgumentException("empty runs");
+
+            LinkedHashSet<String> identities = new LinkedHashSet<>();
+            LinkedHashMap<String, Outcome> canonicalByFixtureSubset = new LinkedHashMap<>();
+            for (Run run : runs) {
+                String identity =
+                        run.fixture() + "\u0000" + String.join("\u0000", run.schedule());
+                if (!identities.add(identity)) {
+                    throw new IllegalArgumentException("duplicate run identity: " + identity);
+                }
+
+                String key = run.fixture() + "\n" + run.subset();
+                Outcome candidate =
+                        new Outcome(
+                                run.sourceRootSha256(),
+                                run.classRootSha256(),
+                                run.atomRootSha256(),
+                                run.contractRootSha256(),
+                                run.probeValue(),
+                                run.evidenceRoots());
+                Outcome canonical = canonicalByFixtureSubset.putIfAbsent(key, candidate);
+                if (canonical != null && !canonical.equals(candidate)) {
+                    throw new IllegalArgumentException(
+                            "order-dependent report outcome for "
+                                    + run.fixture()
+                                    + " subset "
+                                    + run.subset());
+                }
+            }
+        }
+
+        public int runCount() {
+            return runs.size();
+        }
+    }
+
+    public static Report verify(
+            List<Fixture> fixtures,
+            List<RecipeAtom> atoms,
+            Limits limits) {
+        return verify(fixtures, atoms, limits, IProgressMonitor.noop(), List.of());
+    }
+
+    public static Report verify(
+            List<Fixture> fixtures,
+            List<RecipeAtom> atoms,
+            Limits limits,
+            IProgressMonitor monitor) {
+        return verify(fixtures, atoms, limits, monitor, List.of());
+    }
+
+    public static Report verify(
+            List<Fixture> fixtures,
+            List<RecipeAtom> atoms,
+            Limits limits,
+            List<EvidenceObserver> observers) {
+        return verify(fixtures, atoms, limits, IProgressMonitor.noop(), observers);
+    }
+
+    public static Report verify(
+            List<Fixture> fixtures,
+            List<RecipeAtom> atoms,
+            Limits limits,
+            IProgressMonitor monitor,
+            List<EvidenceObserver> observers) {
+        IProgressMonitor progress = monitor == null ? IProgressMonitor.noop() : monitor;
+        List<Fixture> checkedFixtures = List.copyOf(Objects.requireNonNull(fixtures, "fixtures"));
+        List<RecipeAtom> checkedAtoms = List.copyOf(Objects.requireNonNull(atoms, "atoms"));
+        List<EvidenceObserver> checkedObservers =
+                List.copyOf(Objects.requireNonNull(observers, "observers"));
+        Limits checkedLimits = Objects.requireNonNull(limits, "limits");
+        if (checkedFixtures.isEmpty()) throw new IllegalArgumentException("empty fixtures");
+        if (checkedAtoms.isEmpty() || checkedAtoms.size() > checkedLimits.maxRecipes()) {
+            throw new IllegalArgumentException("recipe count outside convergence budget");
+        }
+        Set<String> ids = new LinkedHashSet<>();
+        for (RecipeAtom atom : checkedAtoms) {
+            if (!ids.add(atom.id())) throw new IllegalArgumentException("duplicate recipe id: " + atom.id());
+        }
+        Set<String> observerIds = new LinkedHashSet<>();
+        for (EvidenceObserver observer : checkedObservers) {
+            if (!observerIds.add(observer.id())) {
+                throw new IllegalArgumentException("duplicate evidence observer id: " + observer.id());
+            }
+        }
+
+        // Admit the complete packet before a fixture compiler, probe, observer or recipe runs.
+        Set<String> fixtureIds = new LinkedHashSet<>();
+        for (Fixture fixture : checkedFixtures) {
+            if (!fixtureIds.add(fixture.id())) {
+                throw new IllegalArgumentException("duplicate fixture id: " + fixture.id());
+            }
+            checkedFixture(fixture, checkedLimits);
+        }
+
+        List<Schedule> schedules = schedules(checkedAtoms, checkedLimits.maxSchedules());
+        long totalRuns = Math.multiplyExact((long) checkedFixtures.size(), schedules.size());
+        progress.beginTask("M3 recipe convergence", totalRuns);
+        List<Run> runs = new ArrayList<>();
+        Map<FixtureSubset, Outcome> canonicalByFixtureSubset = new LinkedHashMap<>();
+        try {
+            for (Fixture fixture : checkedFixtures) {
+                progress.checkCanceled();
+                Observation baseline =
+                        compileAndObserve(
+                                fixture.sources(), fixture, progress, checkedObservers);
+                for (Schedule schedule : schedules) {
+                    progress.checkCanceled();
+                    progress.subTask(fixture.id() + " :: " + schedule.ids());
+                    Run run =
+                            converge(
+                                    fixture,
+                                    schedule,
+                                    baseline,
+                                    checkedLimits,
+                                    progress,
+                                    checkedObservers);
+                    FixtureSubset key = new FixtureSubset(fixture.id(), schedule.subset());
+                    Outcome candidate =
+                            new Outcome(
+                                    run.sourceRootSha256(),
+                                    run.classRootSha256(),
+                                    run.atomRootSha256(),
+                                    run.contractRootSha256(),
+                                    run.probeValue(),
+                                    run.evidenceRoots());
+                    Outcome canonical = canonicalByFixtureSubset.putIfAbsent(key, candidate);
+                    if (canonical != null && !canonical.equals(candidate)) {
+                        throw new AssertionError(
+                                "order-dependent convergence for "
+                                        + fixture.id()
+                                        + " subset "
+                                        + schedule.subset()
+                                        + "\nexpected="
+                                        + canonical
+                                        + "\nactual="
+                                        + candidate
+                                        + "\nschedule="
+                                        + schedule.ids());
+                    }
+                    runs.add(run);
+                    progress.worked(1);
+                }
+            }
+            return new Report(runs);
+        } finally {
+            progress.done();
+        }
+    }
+
+    private static Run converge(
+            Fixture fixture,
+            Schedule schedule,
+            Observation baseline,
+            Limits limits,
+            IProgressMonitor progress,
+            List<EvidenceObserver> observers) {
+        Map<String, String> current = fixture.sources();
+        Set<String> seenRoots = new LinkedHashSet<>();
+        seenRoots.add(sourceRoot(current));
+        List<Step> steps = new ArrayList<>();
+        Observation lastObservation = baseline;
+
+        for (int pass = 1; pass <= limits.maxPasses(); pass++) {
+            progress.checkCanceled();
+            boolean passChanged = false;
+            for (RecipeAtom atom : schedule.atoms()) {
+                progress.checkCanceled();
+                ApplyResult applied = apply(fixture, current, atom, progress);
+                // A recipe cannot expand past the same admission budget that sealed its input.
+                checkedSources(applied.sources(), limits);
+                current = applied.sources();
+                passChanged |= applied.changed();
+
+                Observation observation = compileAndObserve(current, fixture, progress, observers);
+                requireBehavior(fixture, schedule, pass, atom.id(), baseline, observation);
+                lastObservation = observation;
+                String stepRoot = sourceRoot(current);
+                steps.add(
+                        new Step(
+                                pass,
+                                atom.id(),
+                                applied.changed(),
+                                stepRoot,
+                                observation.classRootSha256(),
+                                observation.atomRootSha256(),
+                                observation.evidenceRoots()));
+                if (applied.changed() && !seenRoots.add(stepRoot)) {
+                    throw new AssertionError(
+                            "recipe cycle detected for "
+                                    + fixture.id()
+                                    + " subset "
+                                    + schedule.subset()
+                                    + " schedule "
+                                    + schedule.ids()
+                                    + " at pass "
+                                    + pass
+                                    + " recipe "
+                                    + atom.id());
+                }
+            }
+
+            String root = sourceRoot(current);
+            if (!passChanged) {
+                Observation finalObservation = compileAndObserve(current, fixture, progress, observers);
+                requireBehavior(
+                        fixture, schedule, pass, "final-observation", baseline, finalObservation);
+                if (!lastObservation.equals(finalObservation)) {
+                    throw new AssertionError(
+                            "unstable final observation fixture="
+                                    + fixture.id()
+                                    + " subset="
+                                    + schedule.subset()
+                                    + " pass="
+                                    + pass);
+                }
+                return new Run(
+                        fixture.id(),
+                        schedule.subset(),
+                        schedule.ids(),
+                        pass,
+                        root,
+                        finalObservation.classRootSha256(),
+                        finalObservation.atomRootSha256(),
+                        finalObservation.contractRootSha256(),
+                        finalObservation.probeValue(),
+                        finalObservation.evidenceRoots(),
+                        steps);
+            }
+        }
+        throw new AssertionError(
+                "no fixed point within "
+                        + limits.maxPasses()
+                        + " passes for "
+                        + fixture.id()
+                        + " subset "
+                        + schedule.subset()
+                        + " schedule "
+                        + schedule.ids());
+    }
+
+    private static ApplyResult apply(
+            Fixture fixture,
+            Map<String, String> input,
+            RecipeAtom atom,
+            IProgressMonitor monitor) {
+        M3OpenRewriteTranspiler.ProjectExecution execution =
+                M3OpenRewriteTranspiler.executeProjectCycle(
+                        input,
+                        List.of(),
+                        new M3TranspilePass(atom.id(), atom.fresh()),
+                        context ->
+                                atom.configure(
+                                        fixture,
+                                        input,
+                                        context,
+                                        monitor));
+        return new ApplyResult(execution.after(), !input.equals(execution.after()));
+    }
+
+    /**
+     * Mechanical candidate proof used by trusted test-host verifiers.
+     *
+     * <p>The exact current and overlaid project must both compile, atomize losslessly, expose the
+     * same public/protected contract and return the same behavioral probe value. Class bytes and
+     * atom roots may change because private extraction intentionally restructures implementation.
+     * This method grants no repository or canonical promotion authority.</p>
+     */
+    public static void requireCandidateBehavior(
+            Fixture fixture,
+            Map<String, String> currentSources,
+            String sourcePath,
+            String beforeSource,
+            String afterSource,
+            IProgressMonitor monitor) {
+        Fixture checkedFixture = Objects.requireNonNull(fixture, "fixture");
+        Map<String, String> current = Map.copyOf(Objects.requireNonNull(currentSources, "currentSources"));
+        String path = portablePath(sourcePath);
+        if (!Objects.equals(current.get(path), Objects.requireNonNull(beforeSource, "beforeSource"))) {
+            throw new AssertionError("candidate before-source is not bound to current project: " + path);
+        }
+        LinkedHashMap<String, String> candidate = new LinkedHashMap<>(current);
+        candidate.put(path, Objects.requireNonNull(afterSource, "afterSource"));
+        IProgressMonitor progress = monitor == null ? IProgressMonitor.noop() : monitor;
+        Observation before =
+                compileAndObserve(current, checkedFixture, progress, List.of());
+        Observation after =
+                compileAndObserve(Map.copyOf(candidate), checkedFixture, progress, List.of());
+        if (!before.contractRootSha256().equals(after.contractRootSha256())) {
+            throw new AssertionError("candidate changed public/protected contract: " + path);
+        }
+        if (!sameProbe(before, after)) {
+            throw new AssertionError("candidate changed behavioral probe: " + path);
+        }
+    }
+
+    private static Observation compileAndObserve(
+            Map<String, String> sources,
+            Fixture fixture,
+            IProgressMonitor progress,
+            List<EvidenceObserver> observers) {
+        progress.checkCanceled();
+        CompiledProject compiled = compile(sources, progress);
+        progress.checkCanceled();
+        compiled.requireEmitted(fixture.probeClass(), "probe");
+        for (String className : fixture.contractClasses()) {
+            compiled.requireEmitted(className, "contract");
+        }
+        String atoms = atomRoot(sources, progress);
+        String contract = publicContract(compiled.loader(), fixture.contractClasses(), progress);
+        Probe probe = probe(compiled.loader(), fixture.probeClass(), fixture.probeMethod());
+        Map<String, String> evidence = evidenceRoots(sources, observers, progress);
+        return new Observation(
+                compiled.classRootSha256(), atoms, contract, probe.value(), probe.isNull(), evidence);
+    }
+
+    private static Map<String, String> evidenceRoots(
+            Map<String, String> sources,
+            List<EvidenceObserver> observers,
+            IProgressMonitor progress) {
+        TreeMap<String, String> roots = new TreeMap<>();
+        Map<String, String> immutableSources = Map.copyOf(sources);
+        for (EvidenceObserver observer : observers) {
+            progress.checkCanceled();
+            String root = observer.observe(immutableSources, progress);
+            if (roots.put(observer.id(), root) != null) {
+                throw new IllegalArgumentException("duplicate evidence observer id: " + observer.id());
+            }
+        }
+        return Map.copyOf(roots);
+    }
+
+    private static String atomRoot(
+            Map<String, String> sources,
+            IProgressMonitor progress) {
+        MessageDigest digest = digest();
+        JavaAtomExtractor extractor = new JavaAtomExtractor();
+        for (Map.Entry<String, String> entry : sources.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey()).toList()) {
+            progress.checkCanceled();
+            if (M3SourceKind.classify(entry.getKey()) != M3SourceKind.JAVA) {
+                continue;
+            }
+            try {
+                JavaFileComposition composition =
+                        extractor.compose(Path.of(entry.getKey()), entry.getValue(), progress);
+                if (composition.status() != JavaFileComposition.Status.COMPLETE
+                        || !composition.reconstruct().equals(entry.getValue())) {
+                    throw new AssertionError(
+                            "atomization/reconstruction failed: "
+                                    + entry.getKey()
+                                    + " status="
+                                    + composition.status());
+                }
+                framed(digest, entry.getKey());
+                framed(digest, composition.root());
+            } catch (IOException failure) {
+                throw new IllegalStateException(
+                        "atomization failed: " + entry.getKey(), failure);
+            }
+        }
+        return hex(digest.digest());
+    }
+
+    private static CompiledProject compile(Map<String, String> sources, IProgressMonitor progress) {
+        var compiler = ToolProvider.getSystemJavaCompiler();
+        if (compiler == null) throw new IllegalStateException("JDK compiler is required");
+        DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<>();
+        StringWriter compilerOutput = new StringWriter();
+        try (StandardJavaFileManager standard =
+                        compiler.getStandardFileManager(diagnostics, Locale.ROOT, StandardCharsets.UTF_8);
+                MemoryFileManager manager = new MemoryFileManager(standard)) {
+            // Fixtures declare no external classpath. Mirror the existing compiler gate's
+            // explicit search-path isolation instead of inheriting dependencies from the host.
+            standard.setLocationFromPaths(StandardLocation.CLASS_PATH, List.of());
+            standard.setLocationFromPaths(StandardLocation.SOURCE_PATH, List.of());
+            standard.setLocationFromPaths(StandardLocation.ANNOTATION_PROCESSOR_PATH, List.of());
+            List<JavaFileObject> inputs =
+                    sources.entrySet().stream()
+                            .filter(
+                                    entry ->
+                                            M3SourceKind.classify(entry.getKey())
+                                                    == M3SourceKind.JAVA)
+                            .sorted(Map.Entry.comparingByKey())
+                            .map(entry -> new SourceObject(entry.getKey(), entry.getValue()))
+                            .map(JavaFileObject.class::cast)
+                            .toList();
+            if (inputs.isEmpty()) {
+                throw new IllegalArgumentException(
+                        "mastery fixture must contain at least one Java source");
+            }
+            List<String> options =
+                    List.of(
+                            "--release",
+                            "21",
+                            "-proc:none",
+                            "-g:none",
+                            "-Xlint:all",
+                            "-Werror",
+                            "-encoding",
+                            "UTF-8");
+            var task = compiler.getTask(compilerOutput, manager, diagnostics, options, null, inputs);
+            task.setLocale(Locale.ROOT);
+            Boolean ok = task.call();
+            if (!Boolean.TRUE.equals(ok)) {
+                StringBuilder failure = new StringBuilder("fixture compilation failed");
+                diagnostics.getDiagnostics()
+                        .forEach(
+                                diagnostic ->
+                                        failure.append('\n')
+                                                .append(diagnostic.getKind())
+                                                .append(' ')
+                                                .append(diagnostic.getSource())
+                                                .append(':')
+                                                .append(diagnostic.getLineNumber())
+                                                .append(' ')
+                                                .append(diagnostic.getMessage(Locale.ROOT)));
+                if (compilerOutput.getBuffer().length() != 0) {
+                    failure.append('\n').append(compilerOutput);
+                }
+                throw new AssertionError(failure);
+            }
+            Map<String, byte[]> classes = manager.classes();
+            return new CompiledProject(
+                    new M3MasteryClassLoader(classes, ClassLoader.getPlatformClassLoader(), progress::checkCanceled),
+                    classRoot(classes),
+                    classes.keySet());
+        } catch (IOException failure) {
+            throw new IllegalStateException(failure);
+        }
+    }
+
+    private static Probe probe(ClassLoader loader, String className, String methodName) {
+        try {
+            Class<?> type = M3MasteryClassLoader.requireOwned(loader, className, true);
+            Method method = type.getDeclaredMethod(methodName);
+            if (!Modifier.isPublic(method.getModifiers())
+                    || !Modifier.isStatic(method.getModifiers())
+                    || method.getParameterCount() != 0) {
+                throw new IllegalArgumentException("probe must be public static zero-arg");
+            }
+            Object result = method.invoke(null);
+            return new Probe(String.valueOf(result), result == null);
+        } catch (ClassNotFoundException
+                | NoSuchMethodException
+                | IllegalAccessException failure) {
+            throw new AssertionError("probe failed: " + className + "#" + methodName, failure);
+        } catch (InvocationTargetException failure) {
+            throw new AssertionError(
+                    "probe threw: " + className + "#" + methodName,
+                    failure.getTargetException());
+        }
+    }
+
+    private static String publicContract(
+            ClassLoader loader, List<String> classNames, IProgressMonitor progress) {
+        List<String> lines = new ArrayList<>();
+        for (String className : classNames.stream().sorted().toList()) {
+            try {
+                progress.checkCanceled();
+                Class<?> type = M3MasteryClassLoader.requireOwned(loader, className, false);
+                M3MasteryContractSurface.append(lines, type, progress::checkCanceled);
+                lines.add(
+                        "C\t"
+                                + type.getName()
+                                + '\t'
+                                + Modifier.toString(
+                                        type.getModifiers()
+                                                & (Modifier.PUBLIC
+                                                        | Modifier.PROTECTED
+                                                        | Modifier.STATIC
+                                                        | Modifier.ABSTRACT
+                                                        | Modifier.FINAL
+                                                        | Modifier.INTERFACE)));
+                Class<?> superclass = type.getSuperclass();
+                lines.add("S\t" + type.getName() + '\t' + (superclass == null ? "" : superclass.getTypeName()));
+                String[] interfaces =
+                        Arrays.stream(type.getInterfaces())
+                                .map(Class::getTypeName)
+                                .sorted()
+                                .toArray(String[]::new);
+                for (String value : interfaces) lines.add("I\t" + type.getName() + '\t' + value);
+
+                // Reflect metadata without constructing instances or reading static field values.
+                // Erased descriptors alone cannot detect source-level generic/API drift.
+                if (type.getTypeParameters().length != 0) {
+                    lines.add("CG\t" + type.getName() + '\t' + typeParameters(type.getTypeParameters()));
+                }
+                Type genericSuperclass = type.getGenericSuperclass();
+                if (genericSuperclass != null
+                        && !genericSuperclass.getTypeName().equals(superclass.getTypeName())) {
+                    lines.add("SG\t" + type.getName() + '\t' + genericSuperclass.getTypeName());
+                }
+                Type[] genericInterfaces = type.getGenericInterfaces();
+                Class<?>[] rawInterfaces = type.getInterfaces();
+                for (int index = 0; index < genericInterfaces.length; index++) {
+                    String generic = genericInterfaces[index].getTypeName();
+                    if (!generic.equals(rawInterfaces[index].getTypeName())) {
+                        lines.add("IG\t" + type.getName() + '\t' + generic);
+                    }
+                }
+                RecordComponent[] components = type.getRecordComponents();
+                if (components != null) {
+                    lines.add("R\t" + type.getName() + '\t' + components.length);
+                    for (int index = 0; index < components.length; index++) {
+                        RecordComponent component = components[index];
+                        lines.add("RC\t" + type.getName() + '\t' + index + '\t'
+                                + component.getName() + '\t' + component.getGenericType().getTypeName());
+                    }
+                }
+                if (type.isSealed()) {
+                    lines.add("P\t" + type.getName() + '\t'
+                            + Arrays.stream(type.getPermittedSubclasses())
+                                    .map(Class::getName).sorted()
+                                    .collect(java.util.stream.Collectors.joining(",")));
+                }
+
+                for (Constructor<?> constructor : type.getDeclaredConstructors()) {
+                    if (visible(constructor.getModifiers())) {
+                        lines.add(
+                                "K\t"
+                                        + type.getName()
+                                        + '\t'
+                                        + Modifier.toString(constructor.getModifiers())
+                                        + '\t'
+                                        + parameterTypes(constructor.getParameterTypes()));
+                        String descriptor = type.getName() + '\t'
+                                + parameterTypes(constructor.getParameterTypes());
+                        String generic = genericTypes(constructor.getGenericParameterTypes());
+                        if (constructor.getTypeParameters().length != 0
+                                || !generic.equals(parameterTypes(constructor.getParameterTypes()))) {
+                            lines.add("KG\t" + descriptor + '\t'
+                                    + typeParameters(constructor.getTypeParameters()) + '\t' + generic);
+                        }
+                        if (constructor.getGenericExceptionTypes().length != 0) {
+                            lines.add("KX\t" + descriptor + '\t'
+                                    + exceptionTypes(constructor.getGenericExceptionTypes()));
+                        }
+                    }
+                }
+                for (Field field : type.getDeclaredFields()) {
+                    if (visible(field.getModifiers())) {
+                        lines.add(
+                                "F\t"
+                                        + type.getName()
+                                        + '\t'
+                                        + field.getName()
+                                        + '\t'
+                                        + field.getType().getTypeName()
+                                        + '\t'
+                                        + Modifier.toString(field.getModifiers()));
+                        if (!field.getGenericType().getTypeName().equals(field.getType().getTypeName())) {
+                            lines.add("FG\t" + type.getName() + '\t' + field.getName() + '\t'
+                                    + field.getGenericType().getTypeName());
+                        }
+                    }
+                }
+                for (Method method : type.getDeclaredMethods()) {
+                    if (visible(method.getModifiers()) && !method.isSynthetic() && !method.isBridge()) {
+                        lines.add(
+                                "M\t"
+                                        + type.getName()
+                                        + '\t'
+                                        + method.getName()
+                                        + '\t'
+                                        + parameterTypes(method.getParameterTypes())
+                                        + '\t'
+                                        + method.getReturnType().getTypeName()
+                                        + '\t'
+                                        + Modifier.toString(method.getModifiers()));
+                        String descriptor = type.getName() + '\t' + method.getName() + '\t'
+                                + parameterTypes(method.getParameterTypes());
+                        String generic = genericTypes(method.getGenericParameterTypes());
+                        String returns = method.getGenericReturnType().getTypeName();
+                        if (method.getTypeParameters().length != 0
+                                || !generic.equals(parameterTypes(method.getParameterTypes()))
+                                || !returns.equals(method.getReturnType().getTypeName())) {
+                            lines.add("MG\t" + descriptor + '\t'
+                                    + typeParameters(method.getTypeParameters()) + '\t'
+                                    + generic + '\t' + returns);
+                        }
+                        if (method.getGenericExceptionTypes().length != 0) {
+                            lines.add("MX\t" + descriptor + '\t'
+                                    + exceptionTypes(method.getGenericExceptionTypes()));
+                        }
+                    }
+                }
+            } catch (ClassNotFoundException failure) {
+                throw new AssertionError("contract class missing: " + className, failure);
+            }
+        }
+        lines.sort(String::compareTo);
+        return sha256(String.join("\n", lines).getBytes(StandardCharsets.UTF_8));
+    }
+
+    private static boolean visible(int modifiers) {
+        return Modifier.isPublic(modifiers) || Modifier.isProtected(modifiers);
+    }
+
+    private static String parameterTypes(Class<?>[] parameters) {
+        return Arrays.stream(parameters)
+                .map(Class::getTypeName)
+                .reduce((left, right) -> left + "," + right)
+                .orElse("");
+    }
+
+    private static String genericTypes(Type[] types) {
+        return Arrays.stream(types).map(Type::getTypeName)
+                .collect(java.util.stream.Collectors.joining(","));
+    }
+
+    private static String typeParameters(TypeVariable<?>[] parameters) {
+        return Arrays.stream(parameters)
+                .map(parameter -> parameter.getName() + ":" + genericTypes(parameter.getBounds()))
+                .collect(java.util.stream.Collectors.joining(";"));
+    }
+
+    private static String exceptionTypes(Type[] exceptions) {
+        return Arrays.stream(exceptions).map(Type::getTypeName).sorted()
+                .collect(java.util.stream.Collectors.joining(","));
+    }
+
+    private static boolean sameProbe(Observation left, Observation right) {
+        return left.probeNull() == right.probeNull()
+                && left.probeValue().equals(right.probeValue());
+    }
+
+    private static void requireBehavior(
+            Fixture fixture,
+            Schedule schedule,
+            int pass,
+            String recipe,
+            Observation baseline,
+            Observation actual) {
+        if (!sameProbe(baseline, actual)) {
+            throw new AssertionError(
+                    "behavior drift fixture="
+                            + fixture.id()
+                            + " subset="
+                            + schedule.subset()
+                            + " pass="
+                            + pass
+                            + " recipe="
+                            + recipe);
+        }
+        if (!baseline.contractRootSha256().equals(actual.contractRootSha256())) {
+            throw new AssertionError(
+                    "public/protected contract drift fixture="
+                            + fixture.id()
+                            + " subset="
+                            + schedule.subset()
+                            + " pass="
+                            + pass
+                            + " recipe="
+                            + recipe);
+        }
+    }
+
+    private static List<Schedule> schedules(List<RecipeAtom> atoms, int maxSchedules) {
+        LinkedHashMap<String, RecipeAtom> byId = new LinkedHashMap<>();
+        for (RecipeAtom atom : atoms) {
+            if (byId.putIfAbsent(atom.id(), atom) != null) {
+                throw new IllegalArgumentException("duplicate recipe id: " + atom.id());
+            }
+        }
+        M3RecipeMasterySchedulePlanner.Plan plan =
+                M3RecipeMasterySchedulePlanner.plan(List.copyOf(byId.keySet()), maxSchedules);
+        return plan.schedules().stream()
+                .map(
+                        schedule ->
+                                new Schedule(
+                                        schedule.subset(),
+                                        schedule.order().stream().map(byId::get).toList()))
+                .toList();
+    }
+
+    private static void checkedFixture(Fixture fixture, Limits limits) {
+        checkedSources(fixture.sources(), limits);
+    }
+
+    /** Admission applies to baseline and generated states before the laboratory compiler runs. */
+    private static void checkedSources(Map<String, String> sources, Limits limits) {
+        Objects.requireNonNull(sources, "sources");
+        if (sources.size() > limits.maxSources()) {
+            throw new IllegalArgumentException("fixture source count exceeds budget");
+        }
+        long bytes = 0L;
+        int javaSources = 0;
+        Set<String> paths = new LinkedHashSet<>();
+        for (Map.Entry<String, String> entry : sources.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey()).toList()) {
+            String path = portablePath(entry.getKey());
+            String identity = sourcePathIdentity(path);
+            if (!paths.add(identity)) {
+                throw new IllegalArgumentException("duplicate fixture source path: " + identity);
+            }
+            M3SourceKind kind = M3SourceKind.classify(path);
+            String source = Objects.requireNonNull(entry.getValue(), "source");
+            if (source.indexOf('\0') >= 0) {
+                throw new IllegalArgumentException(
+                        "binary/NUL-bearing fixture source: " + entry.getKey());
+            }
+            if (kind == M3SourceKind.JAVA) javaSources++;
+            bytes = Math.addExact(bytes, source.getBytes(StandardCharsets.UTF_8).length);
+        }
+        if (javaSources == 0) {
+            throw new IllegalArgumentException(
+                    "mastery fixture must contain at least one Java source");
+        }
+        if (bytes > limits.maxSourceBytes()) {
+            throw new IllegalArgumentException("fixture source bytes exceed budget");
+        }
+    }
+
+    private static String sourceRoot(Map<String, String> sources) {
+        MessageDigest digest = digest();
+        sources.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .forEach(
+                        entry -> {
+                            framed(digest, entry.getKey());
+                            byte[] bytes = entry.getValue().getBytes(StandardCharsets.UTF_8);
+                            framed(digest, bytes);
+                        });
+        return hex(digest.digest());
+    }
+
+    private static String classRoot(Map<String, byte[]> classes) {
+        MessageDigest digest = digest();
+        classes.entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .forEach(
+                        entry -> {
+                            framed(digest, entry.getKey());
+                            framed(digest, entry.getValue());
+                        });
+        return hex(digest.digest());
+    }
+
+    private static void framed(MessageDigest digest, String value) {
+        framed(digest, value.getBytes(StandardCharsets.UTF_8));
+    }
+
+    private static void framed(MessageDigest digest, byte[] value) {
+        digest.update((byte) (value.length >>> 24));
+        digest.update((byte) (value.length >>> 16));
+        digest.update((byte) (value.length >>> 8));
+        digest.update((byte) value.length);
+        digest.update(value);
+    }
+
+    private static MessageDigest digest() {
+        try {
+            return MessageDigest.getInstance("SHA-256");
+        } catch (NoSuchAlgorithmException impossible) {
+            throw new ExceptionInInitializerError(impossible);
+        }
+    }
+
+    private static String sha256(byte[] value) {
+        return hex(digest().digest(value));
+    }
+
+    private static String hex(byte[] value) {
+        return java.util.HexFormat.of().formatHex(value);
+    }
+
+    private static String requireSha256(String value, String field) {
+        String checked = Objects.requireNonNull(value, field);
+        if (!checked.matches("[0-9a-f]{64}")) {
+            throw new IllegalArgumentException(field);
+        }
+        return checked;
+    }
+
+    private static Map<String, String> checkedEvidenceRoots(Map<String, String> roots) {
+        TreeMap<String, String> checked = new TreeMap<>();
+        for (Map.Entry<String, String> entry :
+                Objects.requireNonNull(roots, "evidenceRoots").entrySet()) {
+            String id = required(entry.getKey(), "evidence id");
+            String root = requireSha256(entry.getValue(), "evidence root");
+            if (checked.put(id, root) != null) {
+                throw new IllegalArgumentException("duplicate evidence id: " + id);
+            }
+        }
+        return Map.copyOf(checked);
+    }
+
+    private static String portablePath(String value) {
+        String checked = required(value, "path").replace('\\', '/');
+        boolean drive = checked.length() >= 2 && checked.charAt(1) == ':'
+                && ((checked.charAt(0) >= 'A' && checked.charAt(0) <= 'Z')
+                        || (checked.charAt(0) >= 'a' && checked.charAt(0) <= 'z'));
+        if (checked.startsWith("/") || drive || checked.chars().anyMatch(Character::isISOControl)
+                || Arrays.stream(checked.split("/", -1)).anyMatch(".."::equals)) {
+            throw new IllegalArgumentException("non-portable path: " + value);
+        }
+        if (sourcePathIdentity(checked).isEmpty()) {
+            throw new IllegalArgumentException("non-portable path: " + value);
+        }
+        return checked;
+    }
+
+    /** Preserve accepted spelling while detecting aliases before a map or URI can collapse them. */
+    private static String sourcePathIdentity(String path) {
+        return Arrays.stream(path.split("/", -1))
+                .filter(segment -> !segment.isEmpty() && !segment.equals("."))
+                .collect(java.util.stream.Collectors.joining("/"));
+    }
+
+    private static URI sourceUri(String path) {
+        try {
+            return new URI("string", null, "/" + portablePath(path), null);
+        } catch (URISyntaxException failure) {
+            throw new IllegalArgumentException("non-portable path: " + path, failure);
+        }
+    }
+
+    private static String proofIdentity(String value, String field) {
+        String checked = required(value, field);
+        if (checked.indexOf('\0') >= 0
+                || checked.indexOf('\n') >= 0
+                || checked.indexOf('\r') >= 0) {
+            throw new IllegalArgumentException("invalid " + field + " identity");
+        }
+        return checked;
+    }
+
+    private static String required(String value, String field) {
+        String checked = Objects.requireNonNull(value, field).strip();
+        if (checked.isEmpty()) throw new IllegalArgumentException(field);
+        return checked;
+    }
+
+    private record Schedule(String subset, List<RecipeAtom> atoms) {
+        Schedule {
+            atoms = List.copyOf(atoms);
+        }
+
+        List<String> ids() {
+            return atoms.stream().map(RecipeAtom::id).toList();
+        }
+    }
+
+    private record FixtureSubset(String fixture, String subset) {}
+
+    private record ApplyResult(Map<String, String> sources, boolean changed) {}
+
+    private record Probe(String value, boolean isNull) {}
+
+    private record Observation(
+            String classRootSha256,
+            String atomRootSha256,
+            String contractRootSha256,
+            String probeValue,
+            boolean probeNull,
+            Map<String, String> evidenceRoots) {
+        Observation {
+            evidenceRoots = Map.copyOf(Objects.requireNonNull(evidenceRoots, "evidenceRoots"));
+        }
+    }
+
+    private record Outcome(
+            String sourceRootSha256,
+            String classRootSha256,
+            String atomRootSha256,
+            String contractRootSha256,
+            String probeValue,
+            Map<String, String> evidenceRoots) {
+        Outcome {
+            evidenceRoots = Map.copyOf(Objects.requireNonNull(evidenceRoots, "evidenceRoots"));
+        }
+    }
+
+    private record CompiledProject(
+            ClassLoader loader, String classRootSha256, Set<String> emittedClasses) {
+        CompiledProject {
+            emittedClasses = Set.copyOf(emittedClasses);
+        }
+
+        void requireEmitted(String name, String role) {
+            if (!emittedClasses.contains(name)) {
+                throw new AssertionError(role + " class not emitted: " + name);
+            }
+        }
+    }
+
+    private static final class SourceObject extends SimpleJavaFileObject {
+        private final String source;
+
+        SourceObject(String path, String source) {
+            super(sourceUri(path), Kind.SOURCE);
+            this.source = source;
+        }
+
+        @Override
+        public CharSequence getCharContent(boolean ignoreEncodingErrors) {
+            return source;
+        }
+    }
+
+    private static final class ClassObject extends SimpleJavaFileObject {
+        private final ByteArrayOutputStream output = new ByteArrayOutputStream();
+
+        ClassObject(String binaryName) {
+            super(URI.create("mem:///" + binaryName.replace('.', '/') + Kind.CLASS.extension), Kind.CLASS);
+        }
+
+        @Override
+        public OutputStream openOutputStream() {
+            return output;
+        }
+
+        byte[] bytes() {
+            return output.toByteArray();
+        }
+    }
+
+    private static final class MemoryFileManager
+            extends ForwardingJavaFileManager<JavaFileManager> {
+        private final Map<String, ClassObject> output = new LinkedHashMap<>();
+
+        MemoryFileManager(JavaFileManager delegate) {
+            super(delegate);
+        }
+
+        @Override
+        public JavaFileObject getJavaFileForOutput(
+                Location location,
+                String className,
+                JavaFileObject.Kind kind,
+                FileObject sibling) {
+            ClassObject object = new ClassObject(className);
+            output.put(className, object);
+            return object;
+        }
+
+        Map<String, byte[]> classes() {
+            LinkedHashMap<String, byte[]> result = new LinkedHashMap<>();
+            output.entrySet().stream()
+                    .sorted(Map.Entry.comparingByKey())
+                    .forEach(entry -> result.put(entry.getKey(), entry.getValue().bytes()));
+            return Map.copyOf(result);
+        }
+    }
+
+}
