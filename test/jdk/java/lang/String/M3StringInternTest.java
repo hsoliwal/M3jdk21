@@ -145,6 +145,36 @@ public class M3StringInternTest {
                         == M3_OWNER.get(STRING_M3.get(latinBuilderPeer)),
                 "Latin1 StringBuilder constructor shares canonical owner");
 
+        int[] codePoints = new int[] {'a', 0x1f642, 0xff, 0x100, 'b'};
+        String codePointString = new String(codePoints, 0, codePoints.length);
+        String codePointPeer =
+                new String(new char[] {'a', '\ud83d', '\ude42', '\u00ff', '\u0100', 'b'});
+        check(M3_OWNER.get(STRING_M3.get(codePointString))
+                        == M3_OWNER.get(STRING_M3.get(codePointPeer)),
+                "code-point constructor shares canonical owner");
+        codePoints[0] = 'z';
+        codePoints[1] = 'q';
+        check(codePointString.equals("a\ud83d\ude42\u00ff\u0100b"),
+                "code-point constructor snapshots mutable input");
+
+        int[] rangedCodePoints = new int[] {'x', 'a', 0x1f642, 0xff, 'y'};
+        String rangedCodePointString = new String(rangedCodePoints, 1, 3);
+        String rangedCodePointPeer = new String(new char[] {'a', '\ud83d', '\ude42', '\u00ff'});
+        check(M3_OWNER.get(STRING_M3.get(rangedCodePointString))
+                        == M3_OWNER.get(STRING_M3.get(rangedCodePointPeer)),
+                "code-point range shares canonical owner");
+        rangedCodePoints[1] = 'q';
+        check(rangedCodePointString.equals("a\ud83d\ude42\u00ff"),
+                "code-point range snapshots mutable input");
+
+        try {
+            new String(new int[] {Character.MAX_CODE_POINT + 1}, 0, 1);
+            throw new AssertionError("invalid code point did not throw");
+        } catch (IllegalArgumentException expected) {
+            check(expected.getMessage().equals(Integer.toString(Character.MAX_CODE_POINT + 1)),
+                    "invalid code-point message parity");
+        }
+
         String empty = new String(new char[0]);
         check(empty.intern() == "".intern(), "empty intern identity");
 
