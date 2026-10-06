@@ -117,24 +117,101 @@ final class M3StringPool {
         if (left.length() == 0) return right;
         if (right.length() == 0) return left;
         if (left.owner() == right.owner() && left.end() == right.start()) {
-            return M3String.range(left.owner(), left.start(), Math.addExact(left.length(), right.length()));
+            return M3String.range(
+                    left.owner(), left.start(), Math.addExact(left.length(), right.length()));
         }
+        return concatBalanced(left, right);
+    }
 
+    /**
+     * Persistent AVL-style composition adapted from the Synexia MIndexTupleReferences history.
+     *
+     * <p>Whole tuple owners participate as branches. Partial tuple ranges remain leaf coordinates,
+     * so substring identity stays owner+range and no split array or spelling copy is introduced.</p>
+     */
+    private static M3String concatBalanced(M3String left, M3String right) {
+        int leftHeight = height(left);
+        int rightHeight = height(right);
+        if (leftHeight > rightHeight + 1) {
+            M3StringTuple branch = (M3StringTuple) left.owner();
+            return balance(branch.left, concatBalanced(branch.right, right));
+        }
+        if (rightHeight > leftHeight + 1) {
+            M3StringTuple branch = (M3StringTuple) right.owner();
+            return balance(concatBalanced(left, branch.left), branch.right);
+        }
+        return internTuple(left, right);
+    }
+
+    private static M3String balance(M3String left, M3String right) {
+        int leftHeight = height(left);
+        int rightHeight = height(right);
+        if (leftHeight > rightHeight + 1) {
+            M3StringTuple branch = (M3StringTuple) left.owner();
+            if (height(branch.left) >= height(branch.right)) {
+                return internTuple(branch.left, internTuple(branch.right, right));
+            }
+            M3StringTuple middle = (M3StringTuple) branch.right.owner();
+            return internTuple(
+                    internTuple(branch.left, middle.left),
+                    internTuple(middle.right, right));
+        }
+        if (rightHeight > leftHeight + 1) {
+            M3StringTuple branch = (M3StringTuple) right.owner();
+            if (height(branch.right) >= height(branch.left)) {
+                return internTuple(internTuple(left, branch.left), branch.right);
+            }
+            M3StringTuple middle = (M3StringTuple) branch.left.owner();
+            return internTuple(
+                    internTuple(left, middle.left),
+                    internTuple(middle.right, branch.right));
+        }
+        return internTuple(left, right);
+    }
+
+    private static int height(M3String value) {
+        M3StringOwner owner = value.owner();
+        return value.start() == 0
+                        && value.length() == owner.length
+                        && owner instanceof M3StringTuple tuple
+                ? tuple.height
+                : 0;
+    }
+
+    /**
+     * Canonicalize by ordered UTF-16 sequence rather than binary-tree parenthesization.
+     *
+     * <p>The route key is shape-independent and exact verification is performed by the candidate
+     * tuple without flattening. Hash collisions therefore affect cost only, never identity or
+     * String semantics.</p>
+     */
+    private static M3String internTuple(M3String left, M3String right) {
         expungeTuples();
-        long hash = tupleHash64(left, right);
+        int totalLength = Math.addExact(left.length(), right.length());
+        int javaHash =
+                left.hashCodeValue() * M3String.pow31(right.length()) + right.hashCodeValue();
+        byte coder = (byte) (left.coder() | right.coder());
+        long sequenceKey = tupleSequenceKey(javaHash, totalLength, coder);
         for (;;) {
-            TupleBucket bucket = TUPLES.computeIfAbsent(hash, ignored -> new TupleBucket());
+            TupleBucket bucket =
+                    TUPLES.computeIfAbsent(sequenceKey, ignored -> new TupleBucket());
             synchronized (bucket) {
                 if (bucket.retired) continue;
                 for (Iterator<TupleRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
                     TupleRef reference = iterator.next();
                     M3StringTuple existing = reference.get();
-                    if (existing == null) iterator.remove();
-                    else if (existing.geometryEquals(left, right)) return M3String.whole(existing);
+                    if (existing == null) {
+                        iterator.remove();
+                    } else if (existing.length == totalLength
+                            && existing.coder == coder
+                            && existing.javaHash == javaHash
+                            && existing.sequenceEquals(left, right)) {
+                        return M3String.whole(existing);
+                    }
                 }
                 long id = nextId(NEXT_TUPLE_ID, "M3 tuple ID");
-                M3StringTuple created = new M3StringTuple(left, right, id, hash);
-                bucket.values.add(new TupleRef(created, hash, bucket));
+                M3StringTuple created = new M3StringTuple(left, right, id, sequenceKey);
+                bucket.values.add(new TupleRef(created, sequenceKey, bucket));
                 return M3String.whole(created);
             }
         }
@@ -199,11 +276,10 @@ final class M3StringPool {
         return hash;
     }
 
-    private static long tupleHash64(M3String left, M3String right) {
-        long hash = mix64(0x517cc1b727220a95L ^ left.identityHash64());
-        hash = mix64(hash ^ right.identityHash64());
-        hash = mix64(hash ^ Integer.toUnsignedLong(left.length()));
-        return mix64(hash ^ Integer.toUnsignedLong(right.length()));
+    private static long tupleSequenceKey(int javaHash, int length, byte coder) {
+        long route = ((long) javaHash << 32) ^ Integer.toUnsignedLong(length);
+        route ^= ((long) coder & 0xffL) << 56;
+        return mix64(0x517cc1b727220a95L ^ route);
     }
 
     private static boolean mappedLatin1(long address, int length, boolean bigEndian) {
