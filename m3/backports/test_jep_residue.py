@@ -89,6 +89,13 @@ class JepResidueTest(unittest.TestCase):
             packet = root / "m3/backports/recipes/jep-458-current"
             packet.mkdir(parents=True)
             (packet / "README.md").write_text("packet", encoding="utf-8")
+            (packet / "CURRENT_TREE_RECEIPT.tsv").write_text(
+                "field\tvalue\n"
+                "packet_state\tPACKET_READY\n"
+                "promotion\tNOT_AUTHORIZED\n"
+                "next_action\tGENERATE_FILE_ATOMIC_CRATES\n",
+                encoding="utf-8",
+            )
 
             source = (
                 root
@@ -108,6 +115,12 @@ class JepResidueTest(unittest.TestCase):
 
         self.assertEqual("MATERIALIZED_PACKET", by_jep[458].evidence_state)
         self.assertIn("jep-458-current", by_jep[458].evidence_paths)
+        self.assertEqual("PACKET_READY", by_jep[458].receipt_state)
+        self.assertEqual("NOT_AUTHORIZED", by_jep[458].promotion)
+        self.assertEqual(
+            "GENERATE_FILE_ATOMIC_CRATES",
+            by_jep[458].receipt_next_action,
+        )
         self.assertEqual("RECIPE_CLASS", by_jep[485].evidence_state)
         self.assertIn("M3Jep485BackportRecipe.java", by_jep[485].evidence_paths)
 
@@ -152,6 +165,9 @@ class JepResidueTest(unittest.TestCase):
         self.assertIn("evidence_state", text)
         self.assertIn("evidence_paths", text)
         self.assertIn("next_action", text)
+        self.assertIn("receipt_state", text)
+        self.assertIn("promotion", text)
+        self.assertIn("receipt_next_action", text)
         self.assertIn("NO_RECIPE_EVIDENCE", text)
 
     def test_live_repository_queue_matches_released_pending_denominator(self) -> None:
@@ -165,8 +181,17 @@ class JepResidueTest(unittest.TestCase):
         self.assertEqual(41, len(items))
         by_jep = {item.jep: item for item in items}
         self.assertEqual("MATERIALIZED_PACKET", by_jep[458].evidence_state)
+        self.assertEqual(
+            "REVIEWED_POSTIMAGES_ALREADY_PRESENT",
+            by_jep[458].receipt_state,
+        )
+        self.assertEqual("NOT_AUTHORIZED", by_jep[458].promotion)
         self.assertEqual("MATERIALIZED_PACKET", by_jep[467].evidence_state)
+        self.assertEqual("PACKET_READY", by_jep[467].receipt_state)
+        self.assertEqual("NOT_AUTHORIZED", by_jep[467].promotion)
         self.assertEqual("MATERIALIZED_PACKET", by_jep[493].evidence_state)
+        self.assertEqual("PACKET_READY", by_jep[493].receipt_state)
+        self.assertEqual("NOT_AUTHORIZED", by_jep[493].promotion)
         self.assertEqual("NO_RECIPE_EVIDENCE", by_jep[483].evidence_state)
         self.assertEqual("NO_RECIPE_EVIDENCE", by_jep[521].evidence_state)
         self.assertNotIn(401, by_jep)
