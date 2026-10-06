@@ -26,7 +26,7 @@ package gc.arguments;
 /*
  * @test TestSelectDefaultGC
  * @summary Test selection of GC when no GC option is specified
- * @bug 8068582
+ * @bug 8068582 8383856
  * @library /test/lib
  * @library /
  * @requires vm.gc.Serial & vm.gc.G1
@@ -52,20 +52,28 @@ public class TestSelectDefaultGC {
         OutputAnalyzer output = new OutputAnalyzer(pb.start());
         output.shouldHaveExitValue(0);
 
-        final boolean isServer = actAsServer;
+        // G1 is the default whenever it is included, independent of server-class ergonomics.
+        assertVMOption(output, "UseG1GC",            true);
+        assertVMOption(output, "UseSerialGC",        false);
+    }
 
-        // Verify GC selection
-        // G1 is default for server class machines
-        assertVMOption(output, "UseG1GC",            isServer);
-        // Serial is default for non-server class machines
-        assertVMOption(output, "UseSerialGC",        !isServer);
+    public static void testExplicitSerialGC() throws Exception {
+        ProcessBuilder pb = GCArguments.createJavaProcessBuilder(
+            "-XX:+UseSerialGC",
+            "-XX:+PrintFlagsFinal",
+            "-version");
+        OutputAnalyzer output = new OutputAnalyzer(pb.start());
+        output.shouldHaveExitValue(0);
+        assertVMOption(output, "UseG1GC",     false);
+        assertVMOption(output, "UseSerialGC", true);
     }
 
     public static void main(String[] args) throws Exception {
-        // Test server class machine
+        // G1 stays default for both constrained/non-server and server-class ergonomics.
         testDefaultGC(false);
-
-        // Test non-server class machine
         testDefaultGC(true);
+
+        // Explicit collector choice still overrides the ergonomic default.
+        testExplicitSerialGC();
     }
 }
