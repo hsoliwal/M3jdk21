@@ -1,0 +1,18 @@
+gate	state	required
+A3 Java preparation	MANDATORY	all Java source/test targets fixed-point before source-changing recipe
+JDK-8340327 Java21 framework tests	MANDATORY	replay proven #160 NamedEdDSA + NamedKeyFactoryTest adaptation
+source-21 compile	MANDATORY	exact prerequisite + ML-DSA source closure
+JDK-8345057 coexistence	MANDATORY	ML-KEM and ML-DSA NamedParameterSpec constants coexist without public-surface drift
+JDK-8345533 final semantics	MANDATORY	ML-DSA implementation runs FIPS 204 final behavior
+FIPS 204 ACVP key generation	MANDATORY	exact vector agreement for ML-DSA-44/65/87
+FIPS 204 ACVP signature generation	MANDATORY	exact vector agreement for ML-DSA-44/65/87
+FIPS 204 ACVP signature verification	MANDATORY	exact vector agreement and malformed-signature policy
+ML-DSA round trip	MANDATORY	ML-DSA-44/65/87 keygen sign verify
+key encoding/factory	MANDATORY	PKCS8/X509 round trip and invalid-key refusal
+provider registration	MANDATORY	SUN aliases/OIDs/provider ordering
+deterministic provider test	MANDATORY	existing/new Deterministic test without unrelated drift
+invalid/null/length contracts	MANDATORY	signature/key spec refusal behavior
+security jtreg	MANDATORY	full relevant java.base security/provider tests
+whole image	MANDATORY	Java21 image startup/provider smoke
+fixed point	MANDATORY	second recipe pass unchanged plus canonical readback
+performance followups	DEFERRED	JDK-8347606/native intrinsics only after all mandatory correctness gates
