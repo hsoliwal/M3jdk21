@@ -17,9 +17,9 @@ history_recipe_id	synexia.m3jdk.string.history-convergence.20261006
 history_recipe_name	com.synexia.rewrite.m3jdk.M3StringHistoryConvergence
 history_authority_repo	hsoliwal/com.synexia
 history_authority_path	synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk-string-history-convergence.yml
-history_authority_branch	m3/m3jdk21-string-convergence-donor-20261006
+history_authority_branch	develop
 history_authority_pr	hsoliwal/com.synexia#9530
-history_authority_revision	ad5df8458ffeba643a6c343e82dd61a338facf29
+history_authority_revision	9572256310e141a60da28951896e06fbe1c1e199
 history_java_targets	18
 history_text_targets	6
 history_applied_runtime	hsoliwal/M3jdk21@m3/m3string-runtime-precompute-fix-20261005:26a13d9fd94ef762127262a67c86b9d7bb3c8cf0
