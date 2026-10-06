@@ -1,0 +1,59 @@
+name: M3 JEP496 497 PQ security dependency inventory
+
+on:
+  push:
+    branches:
+      - "m3/jep496-497-pq-security-inventory-*"
+    paths:
+      - "m3/backports/recipes/jep-496-497-pq-security/**"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3PqSecurityDependencyInventoryRecipe.java"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-pq-security-dependency-inventory.yml"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3PqSecurityDependencyInventoryRecipeTest.java"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - ".github/workflows/m3-jep496-497-pq-security-inventory.yml"
+  pull_request:
+    paths:
+      - "m3/backports/recipes/jep-496-497-pq-security/**"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3PqSecurityDependencyInventoryRecipe.java"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-pq-security-dependency-inventory.yml"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3PqSecurityDependencyInventoryRecipeTest.java"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - ".github/workflows/m3-jep496-497-pq-security-inventory.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inventory-proof:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Diff hygiene
+        run: git diff --check
+      - name: Packet drift proof
+        working-directory: m3/backports/recipes/jep-496-497-pq-security
+        run: |
+          python3 -m py_compile verify.py test_verify.py
+          python3 -m unittest -v test_verify.py
+          python3 verify.py
+      - name: OpenRewrite dependency inventory proof
+        run: >
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
+          -Dtest=M3PqSecurityDependencyInventoryRecipeTest,M3RecipeScopeDeclarationTest
+          test
