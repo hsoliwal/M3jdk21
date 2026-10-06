@@ -8,6 +8,7 @@ on:
       - 'm3/docs/m3string-synexia-lineage.md'
       - 'm3/docs/synexia-string-precompute-port-map.tsv'
       - 'm3/runtime-integration/**'
+      - 'm3/tooling/migration-recipes/**'
       - 'src/hotspot/share/prims/jni.cpp'
       - 'src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp'
       - 'src/hotspot/share/classfile/vmClassMacros.hpp'
@@ -46,8 +47,8 @@ jobs:
           java-version: '20'
       - name: Verify M3 String source invariants
         run: python3 m3/runtime-integration/check-m3string-invariants.py
-      - name: Prove M3 String history-convergence recipe
-        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringHistoryConvergenceRecipeTest test
+      - name: Prove M3 String convergence recipes
+        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringHistoryConvergenceRecipeTest,M3StringBalancedCanonicalDagRecipeTest test
       - name: Install build prerequisites
         run: sudo apt-get update && sudo apt-get install -y autoconf
       - name: Configure
