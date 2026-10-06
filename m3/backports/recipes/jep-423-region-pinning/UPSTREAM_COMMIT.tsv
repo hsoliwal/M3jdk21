@@ -1,0 +1,15 @@
+field	value
+jep	423
+title	Region Pinning for G1
+upstream_issue	JDK-8318706
+upstream_commit	38cfb220ddadbb401cc15f313aadb8234f626210
+upstream_parent	e44d4b24ed794957c47c140ab6f15544efa2b278
+target_release	22
+baseline_release	21
+baseline_commit	890adb6410dab4606a4f26a942aed02fb2f55387
+implementation_paths	59
+admitted_paths	57
+preserved_upstream_deletions	2
+product_paths	42
+test_paths	15
+promotion	NOT_AUTHORIZED
