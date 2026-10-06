@@ -3847,6 +3847,22 @@ public final class String
             // because the large split loop can usually not be inlined.
             return split(ch, limit, withDelimiters);
         }
+        M3String storage = m3();
+        if (storage != null
+                && regex.length() > 1
+                && M3String.isConservativeLiteralRegex(regex)) {
+            M3String literal = M3String.canonicalize(regex);
+            M3String[] parts = storage.splitLiteralRegex(literal, limit, withDelimiters);
+            if (parts.length == 1 && parts[0] == storage) {
+                return new String[] {this};
+            }
+            String[] result = new String[parts.length];
+            for (int index = 0; index < parts.length; index++) {
+                result[index] = new String(parts[index]);
+            }
+            return result;
+        }
+
         Pattern pattern = Pattern.compile(regex);
         return withDelimiters
                 ? pattern.splitWithDelimiters(this, limit)
