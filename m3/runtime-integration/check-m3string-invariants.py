@@ -788,6 +788,7 @@ for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringPrecomputeSearchTest.java",
     "M3StringInternTest.java",
+    "nativeEncoding/StringPlatformChars.java",
     "M3StringInternTest.java",
     "M3TQFactsTest.java",
     "M3RegexLiteralTQTest.java",
