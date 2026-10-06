@@ -21,6 +21,7 @@ jep	release	title	classification	default_java21	dependency	owner_lane	evidence_u
 480	23	Structured Concurrency (Third Preview)	OPT_IN_JDK_API_EXTENSION	NO	462	API	https://openjdk.org/jeps/480	Preview API evolution.
 481	23	Scoped Values (Third Preview)	OPT_IN_JDK_API_EXTENSION	NO	464	API	https://openjdk.org/jeps/481	Preview API evolution.
 482	23	Flexible Constructor Bodies (Second Preview)	REJECT_LANGUAGE_SPEC	NO		LANGUAGE	https://openjdk.org/jeps/482	Preview constructor-language semantics.
+404	24	Generational Shenandoah (Experimental)	COMPATIBLE_RUNTIME	CANDIDATE		GC	https://openjdk.org/jeps/404	Base generational Shenandoah runtime candidate; dependency-gated and requires GC/platform parity before any Java21 admission.
 483	24	Ahead-of-Time Class Loading & Linking	COMPATIBLE_RUNTIME	CANDIDATE		AOT	https://openjdk.org/jeps/483	Runtime/CDS candidate; dependency-gated and transparent Java21 classfile/source proof required.
 484	24	Class-File API	OPT_IN_SE_API_EXTENSION	NO	466	API	https://openjdk.org/jeps/484	Final java.lang.classfile SE API is post-21 public API.
 485	24	Stream Gatherers	OPT_IN_SE_API_EXTENSION	NO	461	API	https://openjdk.org/jeps/485	Final java.util.stream API extension; explicit LIBRARY_API/M3 extension only.
@@ -30,6 +31,5 @@ jep	release	title	classification	default_java21	dependency	owner_lane	evidence_u
 511	25	Module Import Declarations	REJECT_LANGUAGE_SPEC	NO	494	LANGUAGE	https://openjdk.org/jeps/511	Final language/JLS feature; cannot be default Java21.
 514	25	Ahead-of-Time Command-Line Ergonomics	COMPATIBLE_TOOLING	CANDIDATE	483	AOT	https://openjdk.org/jeps/514	Tool/runtime candidate dependent on AOT loading/linking substrate.
 515	25	Ahead-of-Time Method Profiling	COMPATIBLE_RUNTIME	CANDIDATE	483	AOT	https://openjdk.org/jeps/515	Runtime candidate; requires AOT dependency closure and Java21 behavior proof.
-401	26	Value Classes and Objects (Preview)	REJECT_JVMS_LANGUAGE_SPEC	NO		LANGUAGE_JVMS	https://openjdk.org/jeps/401	Changes JLS/JVMS/object semantics/class-file rules; never default Java21.
 516	26	Ahead-of-Time Object Caching with Any GC	COMPATIBLE_RUNTIME	CANDIDATE	483,514,515	AOT	https://openjdk.org/jeps/516	Runtime candidate only after prior Leyden dependency closure and GC parity proof.
 521	25	Generational Shenandoah	COMPATIBLE_RUNTIME	OPT_IN		GC	https://openjdk.org/jeps/521	Makes the existing generational Shenandoah mode non-experimental; candidate only with GC/runtime parity and explicit operational approval.
