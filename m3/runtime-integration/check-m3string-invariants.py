@@ -26,6 +26,7 @@ tuple_ = read("src/java.base/share/classes/java/lang/M3StringTuple.java")
 facts = read("src/java.base/share/classes/java/lang/M3StringFacts.java")
 search_precompute = read("src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java")
 position_precompute = read("src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java")
+source_precompute = read("src/java.base/share/classes/java/lang/M3StringSourcePrecompute.java")
 tq = read("src/java.base/share/classes/jdk/internal/mindex/M3TQ.java")
 string = read("src/java.base/share/classes/java/lang/String.java")
 symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
@@ -204,6 +205,41 @@ for fragment in [
 ]:
     if fragment not in string:
         fail(f"String supplementary M3 route missing: {fragment}")
+
+# Repeated-source search precompute adapts Synexia's MIndexStringSearchIndex without
+# becoming canonical storage. It is bounded, weak-owner keyed, delayed until repeated use,
+# candidate-only, and every hash hit is exact UTF-16 verified.
+for fragment in [
+    "private static final int SLOTS = 16;",
+    "private static final int MAX_SOURCE_UNITS = 16_384;",
+    "private static final int HOT_REQUESTS = 2;",
+    "WeakReference<M3StringOwner>",
+    "static long maximumRetainedPrimitiveBytes()",
+    "int[] prefixHashes",
+    "int[] positions",
+    "private Anchor rarestAnchor(M3String pattern)",
+    "regionHash(start, start + patternLength, power) != patternHash",
+    "if (regionEquals(source, start, pattern)) return start;",
+    "return FALLBACK;",
+]:
+    if fragment not in source_precompute:
+        fail(f"M3 repeated-source postings/hash precompute invariant missing: {fragment}")
+for forbidden in [
+    r"final\s+String\s+\w+\s*;",
+    r"final\s+M3String\s+\w+\s*;",
+    r"final\s+M3StringOwner\s+\w+\s*;",
+    "nativeCharShadow",
+    "materialize()",
+    "new char[source.length()]",
+]:
+    if re.search(forbidden, source_precompute):
+        fail(f"M3 repeated-source precompute retained canonical/source payload: {forbidden}")
+for fragment in [
+    "M3StringSourcePrecompute.indexOf(this, checked, from, end)",
+    "M3StringSourcePrecompute.lastIndexOf(this, checked, maximumStart)",
+]:
+    if fragment not in m3:
+        fail(f"M3 repeated-source search route missing: {fragment}")
 
 # Exact trigram membership is owned by M3TQ.Facts and reused by a separate bounded weak
 # source-range cache. Do not duplicate exact trigram arrays in M3StringFacts.
