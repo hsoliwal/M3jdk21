@@ -125,6 +125,15 @@ public final class M3StringInvariant {
                 owner(body(flatAbc)) != owner(leftAssociatedBody),
                 "equal spelling does not collapse a different canonical M3 coordinate structure");
 
+        String hashCollisionA = fresh("A").concat(fresh("a"));
+        String hashCollisionB = fresh("B").concat(fresh("B"));
+        check(hashCollisionA.hashCode() == hashCollisionB.hashCode(),
+                "candidate hash collision fixture");
+        check(owner(body(hashCollisionA)) != owner(body(hashCollisionB)),
+                "candidate hash collisions require exact coordinate verification");
+        eq("Aa", hashCollisionA, "hash collision left content");
+        eq("BB", hashCollisionB, "hash collision right content");
+
         String chain = fresh("x");
         for (int index = 1; index < 4096; index++) {
             chain = chain.concat(fresh("x"));
