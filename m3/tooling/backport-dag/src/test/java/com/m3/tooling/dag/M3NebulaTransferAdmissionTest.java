@@ -88,6 +88,18 @@ final class M3NebulaTransferAdmissionTest {
                 IllegalArgumentException.class,
                 () -> M3NebulaTransferAdmission.read(bundle));
 
+        Path scope = fixture(false, false, true, true);
+        Path scopeMetadata = scope.resolve("transfer-metadata.tsv");
+        Files.writeString(
+                scopeMetadata,
+                Files.readString(scopeMetadata).replace(
+                        "refactorScopeOrder\tFILE,VISIBILITY,PACKAGE,MODULE,MULTI_MODULE,LIBRARY_API",
+                        "refactorScopeOrder\tWRONG_SCOPE_ORDER"),
+                StandardCharsets.UTF_8);
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> M3NebulaTransferAdmission.read(scope));
+
         Path lane = fixture(false, false, true, true);
         Path targets = lane.resolve("transfer-targets.tsv");
         Files.writeString(
@@ -134,6 +146,7 @@ final class M3NebulaTransferAdmissionTest {
                 javaRelease	21
                 openRewriteVersion	8.90.4
                 entrypoint	org.eclipse.nebula.m3.rewrite.NebulaM3Java21ConvergenceRecipe
+                refactorScopeOrder	FILE,VISIBILITY,PACKAGE,MODULE,MULTI_MODULE,LIBRARY_API
                 dagRoot	%s
                 orchestratorPlansRoot	%s
                 directSourceMutationAuthority	false
