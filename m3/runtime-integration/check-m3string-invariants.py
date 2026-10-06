@@ -108,9 +108,11 @@ for fragment in [
     "private static final int SLOTS = 64;",
     "private static final int MAX_SOURCE_UNITS = 32_768;",
     "WeakReference<M3StringOwner>",
-    "long[] signals",
+    "AtomicLongArray signals",
     "M3StringFacts.codeUnitSignal(unit)",
     "static long maximumRetainedPrimitiveBytes()",
+    "blockSignal(source, blocks, block)",
+    "compareAndSet(block, 0L, computed)",
 ]:
     if fragment not in position_precompute:
         fail(f"M3 position precompute invariant missing: {fragment}")
