@@ -5,7 +5,7 @@ Synexia	IndexResolver / IndexStringTuple	java.lang.M3StringOwner / M3StringAtom 
 Synexia	IndexTextMetrics	java.lang.M3StringFacts	IMPLEMENTED	fixed-size owner/range facts	UTF16 length; code-point count; unpaired surrogate count; Java hash geometry
 Synexia	MIndexStringCanonicalFacts	java.lang.M3StringFacts + M3StringOwner	IMPLEMENTED	fixed-size canonical owner facts	Complete String-semantic bundle; no spelling/token payload
 Synexia	MIndexUtf16RangeFacts	M3StringOwner.rangeFacts	IMPLEMENTED	bounded 4-entry owner-local coordinate cache	Key is exact packed range coordinate
-Synexia	MIndexTextPrecomputedFacts	java.lang.M3StringFacts	IMPLEMENTED	fixed-size canonical facts	Bit signal, ASCII case hashes, packed prefix/suffix and bigram/trigram filters; exact UTF-16 verification remains authority
+Synexia	MIndexTextPrecomputedFacts	java.lang.M3StringFacts	IMPLEMENTED	fixed-size canonical facts	Ten-bit donor characterFlags, bit signal, ASCII case hashes, packed prefix/suffix and bigram/trigram filters; exact UTF-16 verification remains authority
 Synexia	MIndexStringSearchPlan	java.lang.M3StringSearchPrecompute	IMPLEMENTED	bounded weak-owner operation cache	256 slots; <=8192 UTF-16 units; forward+reverse KMP, conservative 256-entry BMH skip lane, exact TQ facts; AUTO uses BMH for >=8 units and restarts exact KMP under adversarial failed-comparison work; no text or strong M3 value/owner retention
 Synexia	MIndexWhitespaceBoundaries	java.lang.M3StringFacts	IMPLEMENTED	fixed-size composable boundaries	trimStart/trimEnd/stripStart/stripEnd
 Synexia	MIndexWhitespaceBoundaryCache	M3StringOwner.rangeFacts	IMPLEMENTED	bounded owner-local cache	Range whitespace facts reuse same exact coordinate cache
