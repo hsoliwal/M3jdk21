@@ -124,6 +124,51 @@ class JepResidueTest(unittest.TestCase):
         self.assertEqual("RECIPE_CLASS", by_jep[485].evidence_state)
         self.assertIn("M3Jep485BackportRecipe.java", by_jep[485].evidence_paths)
 
+    def test_inventory_packet_is_evidence_not_materialization(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            packet = root / "m3/backports/recipes/j510"
+            packet.mkdir(parents=True)
+            (packet / "README.md").write_text(
+                "inventory/dependency packet; product_materialization=false",
+                encoding="utf-8",
+            )
+
+            item = self.r.queue(
+                root,
+                [self.row(release=25, jep=510, disposition="candidate")],
+                [],
+            )[0]
+
+        self.assertEqual("PACKET_EVIDENCE", item.evidence_state)
+        self.assertIn("m3/backports/recipes/j510", item.evidence_paths)
+        self.assertEqual("", item.receipt_state)
+        self.assertEqual("", item.promotion)
+        self.assertEqual("", item.receipt_next_action)
+
+    def test_short_and_long_packet_names_are_discovered_without_receipt(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            short_packet = root / "m3/backports/recipes/j423"
+            long_packet = root / "m3/backports/recipes/jep-423-region-pinning"
+            short_packet.mkdir(parents=True)
+            long_packet.mkdir(parents=True)
+            (short_packet / "README.md").write_text("inventory", encoding="utf-8")
+            (long_packet / "README.md").write_text("candidate", encoding="utf-8")
+
+            item = self.r.queue(
+                root,
+                [self.row(release=22, jep=423, disposition="candidate")],
+                [],
+            )[0]
+
+        self.assertEqual("PACKET_EVIDENCE", item.evidence_state)
+        self.assertIn("m3/backports/recipes/j423", item.evidence_paths)
+        self.assertIn(
+            "m3/backports/recipes/jep-423-region-pinning",
+            item.evidence_paths,
+        )
+
     def test_priority_matrix_metadata_is_joined_without_granting_compatibility(self) -> None:
         catalogue = [self.row(release=24, jep=493, disposition="candidate")]
         priorities = [
@@ -190,6 +235,8 @@ class JepResidueTest(unittest.TestCase):
         self.assertEqual("PACKET_READY", by_jep[467].receipt_state)
         self.assertEqual("NOT_AUTHORIZED", by_jep[467].promotion)
         self.assertEqual("MATERIALIZED_PACKET", by_jep[493].evidence_state)
+        self.assertEqual("PACKET_EVIDENCE", by_jep[510].evidence_state)
+        self.assertIn("m3/backports/recipes/j510", by_jep[510].evidence_paths)
         self.assertEqual("PACKET_READY", by_jep[493].receipt_state)
         self.assertEqual("NOT_AUTHORIZED", by_jep[493].promotion)
         self.assertEqual("NO_RECIPE_EVIDENCE", by_jep[483].evidence_state)
