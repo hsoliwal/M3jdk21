@@ -4,9 +4,12 @@ on:
   push:
     branches:
       - "m3/recover-jep467-current-master-20261005"
+      - "m3/jep467-generated-crate-materialization-20261006"
     paths:
       - "m3/backports/generate_recipe_crates.py"
       - "m3/backports/test_generate_recipe_crates.py"
+      - "m3/backports/materialize_generated_crates.py"
+      - "m3/backports/test_materialize_generated_crates.py"
       - "m3/backports/recipes/jep-467-markdown/**"
       - "m3/tooling/migration-recipes/**"
       - "m3/tooling/backport-dag/**"
@@ -27,7 +30,7 @@ permissions:
 jobs:
   inventory:
     runs-on: ubuntu-22.04
-    timeout-minutes: 60
+    timeout-minutes: 150
     steps:
       - uses: actions/checkout@v4
         with:
@@ -114,12 +117,13 @@ jobs:
           print(f"JEP467_GA_FOLLOWUP_PATHS={changed}")
           PY
 
-      - name: Unit-test file-atomic mixed crate generator
+      - name: Unit-test file-atomic generator and exact materializer
         shell: bash
         run: |
           set -euo pipefail
+          python3 -m py_compile             m3/backports/generate_recipe_crates.py             m3/backports/materialize_generated_crates.py
           cd m3/backports
-          python3 -m unittest -v test_generate_recipe_crates.py
+          python3 -m unittest -v             test_generate_recipe_crates.py             test_materialize_generated_crates.py
 
       - name: Generate candidate FILE atoms from JDK23 GA
         shell: bash
@@ -192,10 +196,157 @@ jobs:
           test -s target/jep467/projections/m3_backport_rules.drl
           test -s target/jep467/projections/projection.tsv
 
-      - name: Upload JEP467 inventory evidence
+      - name: Require complete 251-path generated packet with no typed exclusions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv
+          from pathlib import Path
+
+          selected = [
+              line.strip()
+              for line in Path("m3/backports/recipes/jep-467-markdown/PATHS.txt")
+                  .read_text(encoding="utf-8").splitlines()
+              if line.strip()
+          ]
+          with Path("target/jep467/file-atoms/CRATES.tsv").open(
+              encoding="utf-8", newline=""
+          ) as handle:
+              crates = list(csv.DictReader(handle, delimiter="\t"))
+          with Path("target/jep467/file-atoms/EXCLUSIONS.tsv").open(
+              encoding="utf-8", newline=""
+          ) as handle:
+              exclusions = list(csv.DictReader(handle, delimiter="\t"))
+
+          if exclusions:
+              raise SystemExit(f"JEP467 has typed exclusions requiring review: {exclusions}")
+          if not crates or any(int(row["target_count"]) != 1 for row in crates):
+              raise SystemExit("JEP467 FILE materialization requires one target per crate")
+          generated = sum(int(row["target_count"]) for row in crates)
+          if generated != len(selected) or len(selected) != 251:
+              raise SystemExit(
+                  f"JEP467 full-packet mismatch generated={generated} selected={len(selected)}"
+              )
+          print(f"JEP467_FILE_ATOMS={generated}")
+          PY
+
+      - name: Verify every current-tree preimage before mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/materialize_generated_crates.py             --root "$PWD"             --generated "$PWD/target/jep467/file-atoms"             --mode check             --require-one-target-per-crate             --receipt "$PWD/target/jep467/preimage.tsv"
+          test -z "$(git status --porcelain=v1 -uall)"
+
+      - name: Materialize exact JEP467 candidate and prove fixed point
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/materialize_generated_crates.py             --root "$PWD"             --generated "$PWD/target/jep467/file-atoms"             --mode apply             --require-one-target-per-crate             --receipt "$PWD/target/jep467/apply.tsv"
+          python3 m3/backports/materialize_generated_crates.py             --root "$PWD"             --generated "$PWD/target/jep467/file-atoms"             --mode verify-post             --require-one-target-per-crate             --receipt "$PWD/target/jep467/postimage.tsv"
+          git diff --check
+          before="$(git diff --binary | sha256sum | awk '{print $1}')"
+          python3 m3/backports/materialize_generated_crates.py             --root "$PWD"             --generated "$PWD/target/jep467/file-atoms"             --mode apply             --require-one-target-per-crate
+          after="$(git diff --binary | sha256sum | awk '{print $1}')"
+          test "$before" = "$after"
+
+      - name: Prove only generated JEP467 targets changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+
+          generated = Path("target/jep467/file-atoms")
+          expected = set()
+          for root in (
+              generated / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned",
+              generated / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text",
+          ):
+              if not root.exists():
+                  continue
+              for manifest in root.glob("*/manifest.tsv"):
+                  for line in manifest.read_text(encoding="utf-8").splitlines():
+                      if line and not line.startswith("#"):
+                          expected.add(line.split("\t", 1)[0])
+
+          status = subprocess.check_output(
+              ["git", "status", "--porcelain=v1", "-uall"], text=True
+          )
+          actual = {line[3:] for line in status.splitlines() if line}
+          if actual != expected:
+              raise SystemExit(
+                  "JEP467 changed-path fence failed\n"
+                  f"expected={sorted(expected)}\nactual={sorted(actual)}"
+              )
+          if len(actual) != 251:
+              raise SystemExit(f"expected 251 changed paths, observed {len(actual)}")
+          print("JEP467_CHANGED_PATHS=251")
+          PY
+
+      - name: Install OpenJDK build prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends             autoconf make gcc g++ zip unzip             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev             libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+
+      - name: Configure Java 21-compatible JDK with Markdown candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash configure             --with-boot-jdk="$JAVA_HOME"             --with-debug-level=release             --with-jvm-variants=server             --disable-warnings-as-errors
+
+      - name: Build full JDK image
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 images
+
+      - name: Run focused JEP467 Markdown and javadoc jtreg
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 test TEST="          test/langtools/jdk/javadoc/doclet/testMarkdown           test/langtools/jdk/javadoc/tool/testLineCommentOption           test/langtools/jdk/javadoc/tool/testTransformer"
+
+      - name: Run touched javac doc-comment regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 test TEST="          test/langtools/tools/javac/danglingDocComments           test/langtools/tools/javac/doctree           test/langtools/tools/javac/lexer/CommentTest.java           test/langtools/tools/javac/processing/model/util/elements/TestGetDocCommentKind.java           test/langtools/tools/javac/processing/model/util/elements/TestGetDocComment_Block.java           test/langtools/tools/javac/processing/model/util/elements/TestGetDocComment_Line.java           test/langtools/tools/javac/processing/model/util/elements/TestGetDocComments.java           test/langtools/tools/javac/classfiles/attributes/deprecated/DeprecatedPackageTest.java           test/langtools/tools/javac/classfiles/attributes/deprecated/DeprecatedTest.java"
+
+      - name: Built-JDK Markdown doc-comment smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          JDK_IMAGE="$(find build -path '*/images/jdk' -type d | head -n 1)"
+          test -x "$JDK_IMAGE/bin/java"
+          test -x "$JDK_IMAGE/bin/javadoc"
+          "$JDK_IMAGE/bin/java" --list-modules | grep '^jdk.internal.md@'
+
+          tmp="$(mktemp -d)"
+          trap 'rm -rf "$tmp"' EXIT
+          cat > "$tmp/MarkdownDoc.java" <<'EOF'
+          /// # M3 Markdown Heading
+          ///
+          /// A **Markdown** documentation comment.
+          public class MarkdownDoc {
+              /// Returns the answer.
+              public int answer() { return 42; }
+          }
+          EOF
+          "$JDK_IMAGE/bin/javadoc"             -quiet             -d "$tmp/out"             "$tmp/MarkdownDoc.java"
+          test -s "$tmp/out/MarkdownDoc.html"
+          grep -F 'M3 Markdown Heading' "$tmp/out/MarkdownDoc.html"
+          grep -F '<strong>Markdown</strong>' "$tmp/out/MarkdownDoc.html"
+
+      - name: Upload JEP467 materialization and test evidence
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: jep467-inventory-${{ github.run_id }}
-          path: target/jep467
+          name: jep467-materialization-${{ github.run_id }}
+          path: |
+            target/jep467
+            build/*/test-results/**
           if-no-files-found: error
           retention-days: 30
