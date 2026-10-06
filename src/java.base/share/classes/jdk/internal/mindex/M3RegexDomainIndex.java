@@ -35,6 +35,7 @@ public final class M3RegexDomainIndex {
         }
     }
 
+    private final M3StringBacking backing;
     private final long[] ids;
     private final long[] matchesBits;
     private final long[] findBits;
@@ -45,6 +46,7 @@ public final class M3RegexDomainIndex {
     private final int patternFlags;
 
     private M3RegexDomainIndex(
+            M3StringBacking backing,
             long[] ids,
             long[] matchesBits,
             long[] findBits,
@@ -53,6 +55,7 @@ public final class M3RegexDomainIndex {
             int[] firstFindEnds,
             int patternHash,
             int patternFlags) {
+        this.backing = Objects.requireNonNull(backing, "backing");
         this.ids = ids;
         this.matchesBits = matchesBits;
         this.findBits = findBits;
@@ -127,6 +130,7 @@ public final class M3RegexDomainIndex {
         }
 
         return new M3RegexDomainIndex(
+                backing,
                 ids,
                 matches,
                 find,
@@ -135,6 +139,10 @@ public final class M3RegexDomainIndex {
                 ends,
                 expression.hashCode(),
                 flags);
+    }
+
+    public M3StringBacking backing() {
+        return backing;
     }
 
     public int size() {
