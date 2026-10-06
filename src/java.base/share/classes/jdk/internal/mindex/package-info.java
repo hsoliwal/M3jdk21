@@ -52,6 +52,19 @@
  * is an example: trigram facts are necessary-condition metadata and a positive
  * result still requires the authoritative verifier.</p>
  *
+ *
+ * <h2>Implementation evolution</h2>
+ *
+ * <p>Types and algorithms in this package are JDK implementation details, not
+ * a frozen compatibility ABI. A Java, native, vector, mapped, or other internal
+ * realization may be replaced or coexist with another realization when the
+ * replacement preserves the required Java semantics, M3 identity/key domain,
+ * lifecycle/budget rules, fallback behavior, and verification gates.</p>
+ *
+ * <p>No reviewed external implementation is treated as the first, final, or
+ * exclusive realization of an abstract algorithm or domain. Provenance remains
+ * attached to the exact implementation revision that was studied.</p>
+ *
  * <h2>External implementation references</h2>
  *
  * <p>Abstract domains such as language, reasoning, search, graphs, automata,
