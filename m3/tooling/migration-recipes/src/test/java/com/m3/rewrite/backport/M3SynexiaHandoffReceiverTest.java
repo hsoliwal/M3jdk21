@@ -40,6 +40,12 @@ final class M3SynexiaHandoffReceiverTest {
     }
 
     @Test
+    void provenanceGuardRejectsNonApacheBytesForM3OwnedTargets() {
+        var guard = new M3SynexiaHandoffGuardRecipe("synexia-guard-non-apache-v1");
+        assertThrows(IllegalStateException.class, guard::getVisitor);
+    }
+
+    @Test
     void receiverRejectsUnscopedCrateNames() {
         assertThrows(
                 IllegalArgumentException.class,
