@@ -399,6 +399,18 @@ public class M3StringPrecomputeSearchTest {
             }
         }
 
+        byte[] deprecatedBytes = new byte[joined.length() + 4];
+        Arrays.fill(deprecatedBytes, (byte) 0x55);
+        joined.getBytes(1, joined.length() - 1, deprecatedBytes, 2);
+        for (int index = 1; index < joined.length() - 1; index++) {
+            check(deprecatedBytes[index + 1] == (byte) joined.charAt(index),
+                    "deprecated getBytes low8 index=" + index);
+        }
+        check(deprecatedBytes[0] == (byte) 0x55 && deprecatedBytes[1] == (byte) 0x55,
+                "deprecated getBytes prefix untouched");
+        check(deprecatedBytes[deprecatedBytes.length - 1] == (byte) 0x55,
+                "deprecated getBytes suffix untouched");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
