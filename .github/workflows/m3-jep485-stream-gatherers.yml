@@ -17,6 +17,7 @@ on:
   pull_request:
     paths:
       - "m3/backports/recipes/jep-485-gatherers/**"
+      - "m3/backports/recipes/j485/**"
       - "m3/backports/JEP_CATALOGUE.tsv"
       - "m3/tooling/recipe-catalogue.tsv"
       - "m3/tooling/migration-recipes/**"
@@ -40,6 +41,13 @@ jobs:
           distribution: temurin
           java-version: "21"
           cache: maven
+
+      - name: Bind checked-out J485 tree to sealed FILE atoms
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m unittest -v m3/backports/recipes/j485/test_verify_current.py
+          python3 m3/backports/recipes/j485/verify_current.py "$GITHUB_WORKSPACE"
 
       - name: Prove recipe replay scope registration and fixed point
         run: |
