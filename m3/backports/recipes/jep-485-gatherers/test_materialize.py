@@ -45,14 +45,22 @@ class MaterializeTest(unittest.TestCase):
         self.assertEqual(1, materialize.materialize(root, "check", receipt))
         self.assertNotEqual(after, (root / target).read_bytes())
 
-        self.assertEqual(1, materialize.materialize(root, "apply", receipt))
+        with self.assertRaisesRegex(ValueError, "JEP485_OPT_IN_REQUIRED"):
+            materialize.materialize(root, "apply", receipt)
+        self.assertEqual(
+            1,
+            materialize.materialize(
+                root, "apply", receipt, acknowledged_opt_in=True))
         self.assertEqual(after, (root / target).read_bytes())
 
         self.assertEqual(1, materialize.materialize(root, "verify-post", receipt))
         self.assertEqual(after, (root / target).read_bytes())
 
         # Re-applying exact postimages is idempotent.
-        self.assertEqual(1, materialize.materialize(root, "apply", receipt))
+        self.assertEqual(
+            1,
+            materialize.materialize(
+                root, "apply", receipt, acknowledged_opt_in=True))
         self.assertEqual(after, (root / target).read_bytes())
 
     def test_absent_addition_is_created_but_check_remains_read_only(self) -> None:
@@ -71,7 +79,12 @@ class MaterializeTest(unittest.TestCase):
         self.assertEqual(1, materialize.materialize(root, "check", None))
         self.assertFalse((root / target).exists())
 
-        self.assertEqual(1, materialize.materialize(root, "apply", None))
+        with self.assertRaisesRegex(ValueError, "JEP485_OPT_IN_REQUIRED"):
+            materialize.materialize(root, "apply", None)
+        self.assertEqual(
+            1,
+            materialize.materialize(
+                root, "apply", None, acknowledged_opt_in=True))
         self.assertEqual(after, (root / target).read_bytes())
 
     def test_drift_and_path_escape_fail_closed(self) -> None:
