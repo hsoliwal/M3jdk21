@@ -44,3 +44,4 @@ SiUnit	decimalExponent	int	si_decimal_exponent	synexia.records.tsv:precompute_pa
 SiDimension	packed	long	si_dimension_packed	synexia.records.tsv:precompute_payload	MAPPED	packed seven-axis SI dimension coordinate remains donor-owned
 SiUnit	offset	double	si_offset	synexia.records.tsv:precompute_payload	MAPPED	finite SI offset is preserved as a Java double without unit conversion
 SiUnit	prefixable	boolean	si_prefixable	synexia.records.tsv:precompute_payload	MAPPED	SI prefixability remains an explicit donor boolean
+HuggingFaceDictionaryImporter	frequency	long	huggingface_frequency	synexia.records.tsv:precompute_payload	MAPPED	optional non-negative frequency is retained when a Hugging Face word-frequency export supplies it; generic line/TSV/CSV lexicon imports may omit it

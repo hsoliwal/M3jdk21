@@ -44,6 +44,7 @@ MANIFEST_COLUMNS = (
     "mapping_fields", "precompute_target", "data_license", "data_policy",
 )
 MANIFEST_COLUMNS_V2 = MANIFEST_COLUMNS + ("precompute_fields",)
+MANIFEST_COLUMNS_V3 = MANIFEST_COLUMNS_V2 + ("optional_precompute_fields",)
 PROFILE_COLUMNS = ("precompute_profile", "source_records", "image_records", "sha256")
 MAX_PRECOMPUTE_PAYLOAD_BYTES = 1 * 1024 * 1024
 FIELD_MAP_COLUMNS = (
@@ -136,15 +137,19 @@ def read_tsv(path: pathlib.Path, columns: tuple[str, ...]) -> tuple[list[dict[st
     return rows, raw
 
 
-def canonical_required_fields(value: str) -> str:
+def canonical_field_list(value: str, label: str) -> str:
     """Validate sorted comma-separated owner payload keys declared by a source family."""
     if value == "-":
         return ""
     fields = value.split(",")
     if (not fields or any(not re.fullmatch(r"[a-z][a-z0-9_]*", field) for field in fields)
             or fields != sorted(set(fields))):
-        raise ValueError("precompute_fields must be sorted unique snake_case names or '-'")
+        raise ValueError(f"{label} must be sorted unique snake_case names or '-'")
     return ",".join(fields)
+
+
+def canonical_required_fields(value: str) -> str:
+    return canonical_field_list(value, "precompute_fields")
 
 
 def read_field_map(path: pathlib.Path) -> dict[str, str]:
@@ -202,8 +207,9 @@ def read_manifest(path: pathlib.Path) -> tuple[dict[str, dict[str, str]], bytes]
     raw = path.read_bytes()
     with path.open("r", encoding="utf-8", errors="surrogatepass", newline="") as stream:
         columns = tuple(csv.DictReader(stream, delimiter="\t").fieldnames or ())
-    if columns not in (MANIFEST_COLUMNS, MANIFEST_COLUMNS_V2):
-        raise ValueError(f"{path}: expected columns {MANIFEST_COLUMNS} or {MANIFEST_COLUMNS_V2}")
+    if columns not in (MANIFEST_COLUMNS, MANIFEST_COLUMNS_V2, MANIFEST_COLUMNS_V3):
+        raise ValueError(
+            f"{path}: expected columns {MANIFEST_COLUMNS}, {MANIFEST_COLUMNS_V2} or {MANIFEST_COLUMNS_V3}")
     rows, _ = read_tsv(path, columns)
     result: dict[str, dict[str, str]] = {}
     for row in rows:
@@ -211,6 +217,12 @@ def read_manifest(path: pathlib.Path) -> tuple[dict[str, dict[str, str]], bytes]
         if source_id in result:
             raise ValueError(f"duplicate source_id: {source_id}")
         row["precompute_fields"] = canonical_required_fields(row.get("precompute_fields", "-"))
+        row["optional_precompute_fields"] = canonical_field_list(
+            row.get("optional_precompute_fields", "-"), "optional_precompute_fields")
+        required = set(filter(None, row["precompute_fields"].split(",")))
+        optional = set(filter(None, row["optional_precompute_fields"].split(",")))
+        if required & optional:
+            raise ValueError("required and optional precompute fields overlap")
         result[source_id] = row
     if not result:
         raise ValueError("source manifest is empty")
@@ -276,11 +288,14 @@ def load_records(path: pathlib.Path, sources: dict[str, dict[str, str]],
         payload = json.loads(normalized["precompute_payload"])
         payload_keys = set(payload)
         required_fields = [field for field in sources[row["source_id"]]["precompute_fields"].split(",") if field]
+        optional_fields = [field for field in
+                           sources[row["source_id"]]["optional_precompute_fields"].split(",") if field]
         missing = [field for field in required_fields if field not in payload_keys]
         if missing:
             raise ValueError("precompute payload missing required fields: " + ",".join(missing))
         if field_types:
-            validate_payload_shapes(payload, required_fields, field_types)
+            present_optional = [field for field in optional_fields if field in payload_keys]
+            validate_payload_shapes(payload, required_fields + present_optional, field_types)
         result.append(Record(normalized))
     if not result:
         raise ValueError("lexicon records are empty")
@@ -432,6 +447,9 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
                    "records_sha256": sha256_bytes(records_bytes),
                    "precompute_fields": {
                        source_id: [field for field in source["precompute_fields"].split(",") if field]
+                       for source_id, source in sorted(sources.items())},
+                   "optional_precompute_fields": {
+                       source_id: [field for field in source["optional_precompute_fields"].split(",") if field]
                        for source_id, source in sorted(sources.items())},
                    "precompute_field_types": field_types,
                    "precompute_field_map_sha256":

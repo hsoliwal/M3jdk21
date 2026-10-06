@@ -225,6 +225,8 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual(4, len(sources["dictlang.si-units"]["precompute_fields"].split(",")))
         self.assertEqual("", sources["translate.rows"]["precompute_fields"])
         self.assertEqual("", sources["dictlang.numbers.0-10000"]["precompute_fields"])
+        self.assertEqual(["huggingface_frequency"],
+                         sources["dictlang.huggingface"]["optional_precompute_fields"].split(","))
 
     def test_source_requirements_are_backed_by_admitted_field_map(self):
         sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
@@ -243,11 +245,14 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual("long", field_types["lexicon_fingerprint"])
         self.assertEqual("double", field_types["si_offset"])
         self.assertEqual("boolean", field_types["si_prefixable"])
+        self.assertEqual("long", field_types["huggingface_frequency"])
         self.assertTrue(all(field_types.values()))
         for source_id in ("dictlang.dictionary", "dictlang.frequency",
                           "dictlang.thesaurus", "dictlang.antonyms"):
             required = set(sources[source_id]["precompute_fields"].split(","))
             self.assertTrue(required.issubset(mapped), source_id)
+        optional = set(sources["dictlang.huggingface"]["optional_precompute_fields"].split(","))
+        self.assertTrue(optional.issubset(mapped))
 
     def test_langdex_owner_payload_round_trips_with_admitted_shapes(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -345,6 +350,55 @@ class SynexiaExportTest(unittest.TestCase):
                 encoding="utf-8",
             )
             with self.assertRaisesRegex(ValueError, "field si_prefixable is not boolean"):
+                EXPORT.export(manifest, records, root / "bad-output", "fixture",
+                              "3e85c872adf556901a341a9eb1c3b59864918da1",
+                              ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
+
+    def test_optional_huggingface_frequency_is_preserved_and_shape_checked(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            source_id = "dictlang.huggingface"
+            source_path = "synexia-dictlang/shared/bridge-hf/src/main/java/com/synexia/dictshared/hf/DatasetLexiconImport.java"
+            manifest = root / "sources.tsv"
+            manifest.write_text(
+                "\t".join(EXPORT.MANIFEST_COLUMNS_V3) + "\n"
+                + "\t".join((source_id, "Hugging Face lexicon bridge", source_path,
+                              "dataset_record_id", "language_tag,lexeme,source_revision",
+                              "M3StringFacts + LangDexCoordinate", "Apache-2.0", "fixture", "-",
+                              "huggingface_frequency")) + "\n",
+                encoding="utf-8",
+            )
+            records = root / "records.tsv"
+            records.write_text(
+                "\t".join(EXPORT.RECORD_COLUMNS_V2) + "\n"
+                + "\t".join((source_id, source_path, "huggingface", "en", "hf:one", "alpha",
+                              "hf:one", "ALPHA", "-", "M3StringFacts + LangDexCoordinate",
+                              '{"huggingface_frequency":17}')) + "\n"
+                + "\t".join((source_id, source_path, "huggingface", "en", "hf:two", "beta",
+                              "hf:two", "BETA", "-", "M3StringFacts + LangDexCoordinate", "{}")) + "\n",
+                encoding="utf-8",
+            )
+            output = root / "output"
+            EXPORT.export(manifest, records, output, "fixture", "3e85c872adf556901a341a9eb1c3b59864918da1",
+                          ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
+            rows = list(csv.DictReader((output / "synexia.records.tsv").read_text(encoding="utf-8").splitlines(),
+                                       delimiter="\t"))
+            self.assertEqual({"huggingface_frequency": 17},
+                             json.loads(next(row for row in rows if row["record_id"] == "hf:one")
+                                        ["precompute_payload"]))
+            self.assertEqual({}, json.loads(next(row for row in rows if row["record_id"] == "hf:two")
+                                             ["precompute_payload"]))
+            export_manifest = json.loads((output / "synexia.export.json").read_text(encoding="utf-8"))
+            self.assertEqual([], export_manifest["source"]["precompute_fields"][source_id])
+            self.assertEqual(["huggingface_frequency"],
+                             export_manifest["source"]["optional_precompute_fields"][source_id])
+            self.assertEqual("long", export_manifest["source"]["precompute_field_types"]["huggingface_frequency"])
+            VERIFY.verify(output)
+
+            records.write_text(records.read_text(encoding="utf-8").replace(
+                '{"huggingface_frequency":17}', '{"huggingface_frequency":"17"}', 1),
+                encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "field huggingface_frequency is not long"):
                 EXPORT.export(manifest, records, root / "bad-output", "fixture",
                               "3e85c872adf556901a341a9eb1c3b59864918da1",
                               ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")

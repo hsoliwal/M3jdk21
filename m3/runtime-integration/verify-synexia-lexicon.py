@@ -221,6 +221,19 @@ def verify(output: pathlib.Path) -> dict[str, int]:
                        or re.fullmatch(r"[a-z][a-z0-9_]*", field) is None for field in fields)
                 or fields != sorted(set(fields))):
             raise ValueError("invalid source precompute field requirements")
+    source_optional_fields = manifest.get("source", {}).get("optional_precompute_fields")
+    if source_optional_fields is None:
+        source_optional_fields = {source_id: [] for source_id in source_payload_fields}
+    if (not isinstance(source_optional_fields, dict)
+            or any(source_id not in source_payload_fields for source_id in source_optional_fields)):
+        raise ValueError("invalid source optional precompute fields")
+    for source_id, fields in source_optional_fields.items():
+        if (not isinstance(source_id, str) or not isinstance(fields, list)
+                or any(not isinstance(field, str)
+                       or re.fullmatch(r"[a-z][a-z0-9_]*", field) is None for field in fields)
+                or fields != sorted(set(fields))
+                or set(fields) & set(source_payload_fields[source_id])):
+            raise ValueError("invalid source optional precompute fields")
     source_field_types = manifest.get("source", {}).get("precompute_field_types", {})
     if not isinstance(source_field_types, dict) or any(
             not isinstance(field, str) or not isinstance(donor_type, str)
@@ -285,7 +298,10 @@ def verify(output: pathlib.Path) -> dict[str, int]:
         if missing:
             raise ValueError("precompute payload field coverage mismatch")
         if source_field_types:
-            for field in source_payload_fields[row["source_id"]]:
+            fields = source_payload_fields[row["source_id"]] + [
+                field for field in source_optional_fields.get(row["source_id"], [])
+                if field in payload_keys]
+            for field in fields:
                 donor_type = source_field_types.get(field)
                 if donor_type is None or not _fits_donor_type(payload[field], donor_type):
                     raise ValueError("precompute payload field type mismatch")
