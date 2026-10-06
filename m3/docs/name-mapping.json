@@ -1,6 +1,6 @@
 {
   "schema": 1,
-  "policy": "additive; no blind renames or unverified compatibility claims; Synexia donor names do not define M3JDK target ABI; precompute is internal-only",
+  "policy": "additive; no blind renames or unverified compatibility claims; Synexia donor names do not define M3JDK target ABI; precompute is internal-only; external donors inform algorithms/provenance only; M3JDK runtime types map from Synexia-owned implementations",
   "mappings": [
     {
       "source": "com.synexia.indexstring.IndexStringTuple",
@@ -306,6 +306,50 @@
       "status": "inventory mapping",
       "source_role": "distributed/hardware precompute execution",
       "target_rule": "M3JDK java.base must not depend on Jini/TPU/NPU/Tornado runtimes; import only validated precompute products through target-owned internal boundaries."
+    },
+    {
+      "source": "com.synexia.precompute.MIndexRegexAutomaton",
+      "target": "jdk.internal.mindex.M3RegexAutomaton",
+      "status": "internal mechanical counterpart",
+      "source_role": "Synexia-owned donor/reference implementation",
+      "source_commit": "8a235ae016e74992e7b80351c5ad8182c5ee7aa8",
+      "target_rule": "preserve bounded finite-regex semantics, deterministic UTF-16 automaton image, safe negative reachability and fail-closed unsupported constructs; no RE2/J runtime dependency",
+      "external_lineage": [
+        "RE2/J algorithmic reference only"
+      ]
+    },
+    {
+      "source": "com.synexia.precompute.MIndexTermFst",
+      "target": "jdk.internal.mindex.M3TermFst",
+      "status": "internal mechanical counterpart",
+      "source_role": "Synexia-owned donor/reference implementation",
+      "source_commit": "8a235ae016e74992e7b80351c5ad8182c5ee7aa8",
+      "target_rule": "preserve deterministic minimal acyclic UTF-16 term automaton behavior and immutable primitive image; no Lucene runtime dependency",
+      "external_lineage": [
+        "Apache Lucene algorithmic reference only"
+      ]
+    },
+    {
+      "source": "com.synexia.precompute.MIndexReasoningProgram",
+      "target": "jdk.internal.mindex.M3ReasoningProgram",
+      "status": "internal mechanical counterpart",
+      "source_role": "Synexia-owned donor/reference implementation",
+      "source_commit": "8a235ae016e74992e7b80351c5ad8182c5ee7aa8",
+      "target_rule": "preserve Synexia-owned grammar/parser/canonical compilation; do not import third-party reasoning types",
+      "external_lineage": [
+        "TweetyProject conceptual/behavioral reference only; no code copy"
+      ]
+    },
+    {
+      "source": "com.synexia.precompute.MIndexReasoningClosure",
+      "target": "jdk.internal.mindex.M3ReasoningClosure",
+      "status": "internal mechanical counterpart",
+      "source_role": "Synexia-owned donor/reference implementation",
+      "source_commit": "8a235ae016e74992e7b80351c5ad8182c5ee7aa8",
+      "target_rule": "preserve deterministic least fixed point, positive/negative facts, contradiction detection, proof-rule provenance and support/attack relations",
+      "external_lineage": [
+        "TweetyProject conceptual/behavioral reference only; no code copy"
+      ]
     }
   ],
   "imported_donor_sources": [],
