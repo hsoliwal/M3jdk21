@@ -52,6 +52,38 @@ Java_StringPlatformChars_getBytes(JNIEnv *env, jclass unused, jstring value)
     return NULL;
 }
 
+JNIEXPORT jcharArray JNICALL
+Java_StringPlatformChars_getUtf16(JNIEnv *env, jclass unused, jstring value)
+{
+    jsize len = (*env)->GetStringLength(env, value);
+    const jchar* chars = (*env)->GetStringChars(env, value, NULL);
+    if (chars == NULL) {
+        return NULL;
+    }
+    jcharArray result = (*env)->NewCharArray(env, len);
+    if (result != NULL && len != 0) {
+        (*env)->SetCharArrayRegion(env, result, 0, len, chars);
+    }
+    (*env)->ReleaseStringChars(env, value, chars);
+    return result;
+}
+
+JNIEXPORT jbyteArray JNICALL
+Java_StringPlatformChars_getUtf8(JNIEnv *env, jclass unused, jstring value)
+{
+    const char* chars = (*env)->GetStringUTFChars(env, value, NULL);
+    if (chars == NULL) {
+        return NULL;
+    }
+    jsize len = (jsize)strlen(chars);
+    jbyteArray result = (*env)->NewByteArray(env, len);
+    if (result != NULL && len != 0) {
+        (*env)->SetByteArrayRegion(env, result, 0, len, (const jbyte*)chars);
+    }
+    (*env)->ReleaseStringUTFChars(env, value, chars);
+    return result;
+}
+
 JNIEXPORT jstring JNICALL
 Java_StringPlatformChars_newString(JNIEnv *env, jclass unused, jbyteArray bytes)
 {
