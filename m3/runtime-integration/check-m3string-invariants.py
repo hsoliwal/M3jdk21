@@ -94,6 +94,25 @@ for fragment in [
     if fragment not in m3:
         fail(f"M3 generic ASCII-compatible encoder fast path missing: {fragment}")
 
+# Fixed scan-avoidance facts must have live consumers.
+for fragment in [
+    "final boolean hasAsciiUpper;",
+    "final boolean hasAsciiLower;",
+    "final boolean hasBackslash;",
+    "final boolean hasLineTerminator;",
+]:
+    if fragment not in facts:
+        fail(f"M3 fixed scan-avoidance fact missing: {fragment}")
+for fragment in [
+    "if (!prepared.hasBackslash) return this;",
+    "(upper && !prepared.hasAsciiLower)",
+    "(!upper && !prepared.hasAsciiUpper)",
+]:
+    if fragment not in m3:
+        fail(f"M3 fixed scan-avoidance consumer missing: {fragment}")
+if "prepared != null && !prepared.hasLineTerminator" not in string:
+    fail("String.lines lost prepared no-terminator fast path")
+
 # Encoding facts must be executable, not decorative metadata.
 for fragment in [
     "if (prepared.ascii) {",
