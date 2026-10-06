@@ -27,6 +27,8 @@ facts = read("src/java.base/share/classes/java/lang/M3StringFacts.java")
 search_precompute = read("src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java")
 position_precompute = read("src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java")
 tq = read("src/java.base/share/classes/jdk/internal/mindex/M3TQ.java")
+mindex_package = read("src/java.base/share/classes/jdk/internal/mindex/package-info.java")
+module_info = read("src/java.base/share/classes/module-info.java")
 string = read("src/java.base/share/classes/java/lang/String.java")
 abstract_builder = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
 symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
@@ -45,6 +47,33 @@ workflow = read(".github/workflows/mindex-string-backing.yml")
 native_string = read("src/java.base/share/native/libjava/String.c")
 pattern = read("src/java.base/share/classes/java/util/regex/Pattern.java")
 matcher = read("src/java.base/share/classes/java/util/regex/Matcher.java")
+
+# JDK_INTERNAL_MINDEX_PACKAGE: reusable M3 support follows the JDK-internal package form.
+for fragment in [
+    "<b>[JDK INTERNAL]</b>",
+    "intentionally not exported",
+    "M3JDK owns every runtime type in this package",
+    "Reusable backing, search, regex and precompute kernels",
+    "Knowledge/reasoning planes without a concrete JDK consumer",
+]:
+    if fragment not in mindex_package:
+        fail(f"jdk.internal.mindex package documentation missing: {fragment}")
+
+if re.search(r"^\s*exports\s+jdk\.internal\.mindex(?:\s|;)", module_info, flags=re.MULTILINE):
+    fail("java.base exports jdk.internal.mindex")
+
+for source in (ROOT / "src/java.base/share/classes").rglob("*.java"):
+    text = source.read_text(encoding="utf-8")
+    if re.search(r"^\s*import\s+com\.synexia\.", text, flags=re.MULTILINE):
+        fail(f"M3JDK java.base imports Synexia runtime code: {source.relative_to(ROOT)}")
+
+for fragment in [
+    '"package": "jdk.internal.mindex"',
+    '"exported_from_java_base": false',
+    '"package_documentation": "src/java.base/share/classes/jdk/internal/mindex/package-info.java"',
+]:
+    if fragment not in mapping:
+        fail(f"JDK internal package mapping missing: {fragment}")
 
 # STRING_PRECOMPUTE_COMPLETENESS: every donor String-precompute responsibility must be
 # either mapped to one internal M3 owner or explicitly classified out of java.lang.String.
