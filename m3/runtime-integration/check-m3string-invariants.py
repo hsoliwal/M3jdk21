@@ -199,6 +199,14 @@ required_inventory_provenance = (
 if required_inventory_provenance not in precompute_inventory:
     fail("MIndex precompute donor audit pin missing or changed without review")
 
+required_inventory_audit_result = (
+    "# donorAuditResult=251 production Java classes with Precompute/Precomputation "
+    "in the audited live modules classified under 29 ledger families; "
+    "no additional architectural plane identified"
+)
+if required_inventory_audit_result not in precompute_inventory:
+    fail("MIndex precompute live-class audit result missing or changed without review")
+
 for observed_owner in [
     "MIndexPrecomputeFabric",
     "MIndexPageableTreePrecomputation",
