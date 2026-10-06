@@ -57,6 +57,30 @@ public final class SynexiaImporter {
         }
     }
 
+    public static void verifyTargetSnapshot(
+            Path m3jdkRoot,
+            SynexiaImportManifest manifest) throws IOException {
+        Path targetRoot = root(m3jdkRoot, "m3jdkRoot");
+        Objects.requireNonNull(manifest, "manifest");
+        for (SynexiaImportManifest.Entry entry : manifest.entries()) {
+            Path target = resolve(targetRoot, entry.targetPath(), "target");
+            if (!Files.isRegularFile(target) || Files.isSymbolicLink(target)) {
+                throw new IllegalStateException(
+                        "M3JDK21 imported target missing or not regular: " + entry.targetPath());
+            }
+            String current = sha256(Files.readAllBytes(target));
+            if (!current.equals(entry.sha256())) {
+                throw new IllegalStateException(
+                        "M3JDK21 imported target hash drift: "
+                                + entry.targetPath()
+                                + " expected="
+                                + entry.sha256()
+                                + " actual="
+                                + current);
+            }
+        }
+    }
+
     public static void materialize(
             Path synexiaRoot,
             Path m3jdkRoot,
