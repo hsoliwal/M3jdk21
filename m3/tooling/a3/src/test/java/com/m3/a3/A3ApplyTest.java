@@ -45,9 +45,7 @@ class A3ApplyTest {
         A3Apply.Receipt receipt = receipts.getFirst();
         assertEquals(relative, receipt.path());
         assertEquals("FILE", receipt.scope());
-        assertEquals(
-                com.synexia.rewrite.atom.M3PureIntConvergenceRecipe.class.getName(),
-                receipt.recipe());
+        assertEquals(A3RecipeHome.RECIPE_CLASS, receipt.recipe());
         assertTrue(receipt.changed());
         assertTrue(receipt.fixedPoint());
         assertFalse(receipt.beforeSha().equals(receipt.afterSha()));

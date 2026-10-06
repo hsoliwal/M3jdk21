@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.a3;
 
-import com.synexia.rewrite.atom.M3PureIntConvergenceRecipe;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -89,7 +88,7 @@ public final class A3Apply {
 
         String before = Files.readString(file, StandardCharsets.UTF_8);
         SourceFile parsed = parse(relative, before);
-        Recipe recipe = new M3PureIntConvergenceRecipe();
+        Recipe recipe = A3RecipeHome.recipe();
         String after = apply(recipe, parsed);
         SourceFile converged = parse(relative, after);
 
@@ -116,7 +115,7 @@ public final class A3Apply {
 
         return new Receipt(
                 relative,
-                M3PureIntConvergenceRecipe.class.getName(),
+                recipe.getClass().getName(),
                 "FILE",
                 A3Fs.sha(before),
                 A3Fs.sha(after),
