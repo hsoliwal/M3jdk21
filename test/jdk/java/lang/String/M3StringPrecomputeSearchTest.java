@@ -276,6 +276,26 @@ public class M3StringPrecomputeSearchTest {
                                 sparseSupplementaryOracle.length - 1),
                 "block supplementary lastIndexOf");
 
+        String overlapReverse = String.join(
+                "",
+                "ababa".repeat(180),
+                "XYZ",
+                "ababa".repeat(180));
+        char[] overlapReverseOracle = (
+                "ababa".repeat(180) + "XYZ" + "ababa".repeat(180)).toCharArray();
+        for (String needle : new String[] {"aba", "ababa", "babab", "XYZ", "abaXYZ"}) {
+            for (int from : new int[] {
+                    overlapReverse.length() - 1,
+                    overlapReverse.length() / 2,
+                    overlapReverse.length() / 3,
+                    17}) {
+                check(overlapReverse.lastIndexOf(needle, from)
+                                == naiveLastIndexOf(
+                                        overlapReverseOracle, needle.toCharArray(), from),
+                        "reverse-prefix lastIndexOf needle=" + needle + " from=" + from);
+            }
+        }
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
