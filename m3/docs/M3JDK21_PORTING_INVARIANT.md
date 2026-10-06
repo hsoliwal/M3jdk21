@@ -99,7 +99,35 @@ it only while preserving the required public behavior. A family mapping is a
 scope/accounting statement, not an implementation or performance claim. Existing
 pending/blocked/unverified statuses and full-image gates remain in force.
 
-Eligible copied Synexia code retains its Apache-2.0 provenance. Existing OpenJDK
-and third-party licences retain their own scope; a port does not relicense them.
-See [m3-porting.md](m3-porting.md) for the serial execution order and
+## Default Synexia intake stance
+
+For M3JDK21 engineering, qualified Synexia material is the **preferred first donor
+workspace**, not an exceptional source. The intake surface includes implementation
+atoms, JNI/native companions, OpenRewrite/Maven recipes, generated postimages,
+tests, fixtures, catalogs, precompute plans, proof harnesses, benchmarks, design
+ideas and convergence metadata. A target maintainer should search the Synexia
+history and current convergence workspace before reimplementing equivalent logic.
+
+Borrowing is intentionally broad, but admission is exact:
+
+- reuse may be verbatim when the donor artifact is Synexia-owned, Apache-2.0
+  licensed, target-compatible and its dependency closure is admissible;
+- otherwise adapt the idea/algorithm into the existing M3JDK owner and retain
+  source revision, path, symbol and licence provenance;
+- recipes are donor code too: a qualified recipe, its fixtures and its sealed
+  before/after images are valid implementation inputs, not merely documentation;
+- generated code does not erase provenance or licence obligations;
+- no port may convert third-party, OpenJDK or differently licensed material into
+  Apache-2.0 merely because it passed through Synexia;
+- public JDK contracts, M3 target names, runtime ownership and admission gates
+  remain authoritative after borrowing.
+
+The desired end state is a polished public M3JDK codebase whose implementation can
+be traced back to qualified donor evidence without carrying Synexia as a runtime
+dependency. The convergence workspace may move faster and remain broader than the
+product; M3JDK21 takes only the qualified atoms appropriate to its runtime.
+
+Eligible copied Synexia-owned code retains its Apache-2.0 provenance. Existing
+OpenJDK and third-party licences retain their own scope; a port does not relicense
+them. See [m3-porting.md](m3-porting.md) for the serial execution order and
 [migration-mapping-lifecycle.md](migration-mapping-lifecycle.md) for record updates.
