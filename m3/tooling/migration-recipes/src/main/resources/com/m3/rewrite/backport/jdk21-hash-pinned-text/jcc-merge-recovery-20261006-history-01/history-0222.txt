@@ -1,0 +1,1 @@
+{"result": "PASS", "source_refs": 19, "source_proofs": 55, "preserved_e3_files": 89, "preserved_e2_files": 56, "destination_occurrences": 182, "frozen_inputs": 1008, "sha256": "5867bffd36e65f2fd755921d0dbf9981a006bc0e38134b2d0e4e6830030900ea"}

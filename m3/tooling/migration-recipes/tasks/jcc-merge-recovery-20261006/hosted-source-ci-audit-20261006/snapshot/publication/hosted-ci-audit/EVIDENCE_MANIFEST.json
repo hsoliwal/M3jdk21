@@ -1,0 +1,140 @@
+{
+  "schema": "synexia-hosted-ci-evidence-v1",
+  "files": [
+    {
+      "path": "publication/SOURCE_QUALIFIED_CHECK_RUNS_0610.json",
+      "bytes": 157412,
+      "sha256": "5282c1c56637e6e873c8c7e4d49f40661270e596a23ac0d95953edbb0d985b21"
+    },
+    {
+      "path": "publication/SOURCE_QUALIFIED_STATUS_0610.json",
+      "bytes": 10502,
+      "sha256": "05182be3567004d98ce3bc7950c5aa1e39ded085a11b05ab74f56c17afe86c98"
+    },
+    {
+      "path": "publication/SOURCE_QUALIFIED_WORKFLOW_RUNS_0610.json",
+      "bytes": 2714659,
+      "sha256": "5a839bfd9160f3d0d26933db2072ce248f8ca190022578d9639e7160e3529aa7"
+    },
+    {
+      "path": "publication/hosted-ci-audit/CHECK_RUNS_REFRESH.json",
+      "bytes": 135986,
+      "sha256": "39019740efaf9d7e5d4d96b1d54ba5cfb8819e9e8235e28856be150dd71c1324"
+    },
+    {
+      "path": "publication/hosted-ci-audit/CHECK_SUITES_AT_HEAD.json",
+      "bytes": 1620598,
+      "sha256": "a3d70f7a5234c37cd07aab0455b16d004936730b20a6f550527bffb0048fb482"
+    },
+    {
+      "path": "publication/hosted-ci-audit/CHECK_SUITES_AT_HEAD_PAGE2.json",
+      "bytes": 1282004,
+      "sha256": "f1b3d2108249fcca04b921cf83d47a45b0638254ae0087780a5523feeba02f1a"
+    },
+    {
+      "path": "publication/hosted-ci-audit/PUBLIC_WEB_RUN_PAGES.json",
+      "bytes": 1519,
+      "sha256": "2a0d2264c6c80302522d794bb7aaf99804f21c6ec3cbef958356f5385412e0cb"
+    },
+    {
+      "path": "publication/hosted-ci-audit/REPORT.md",
+      "bytes": 3454,
+      "sha256": "ad4e7c95e6992f39b7eb4405f7ab37b20f209537657526ef2020e3298ee65528"
+    },
+    {
+      "path": "publication/hosted-ci-audit/RUN_37422112578.json",
+      "bytes": 27927,
+      "sha256": "4f13d1c2c35f0943716a8cf2df5f2baf099d8dcfcf8ca640276d9a93c745fc48"
+    },
+    {
+      "path": "publication/hosted-ci-audit/RUN_37422112578_ATTEMPT.json",
+      "bytes": 26915,
+      "sha256": "9ec3a085b5ab77c0f238fde5bd78002edd729eab1ce82992f4a72bc80aaffae8"
+    },
+    {
+      "path": "publication/hosted-ci-audit/RUN_37422112578_CHECK_RUNS.json",
+      "bytes": 576,
+      "sha256": "bba1f6a8229e84b431089444d50e433693fbad4d079f027eb9e27c238b6f8694"
+    },
+    {
+      "path": "publication/hosted-ci-audit/RUN_37422112578_CHECK_SUITE.json",
+      "bytes": 552,
+      "sha256": "d7f0324be54277a1997b9d90529434184a1286b8805624ac308d896594c4fe81"
+    },
+    {
+      "path": "publication/hosted-ci-audit/RUN_37422112578_JOBS.json",
+      "bytes": 900,
+      "sha256": "e5386a52445a838773d56d39d039720e489d44536ea3ee2aa02fd8901c368395"
+    },
+    {
+      "path": "publication/hosted-ci-audit/RUN_37422112578_LOGS.json",
+      "bytes": 786,
+      "sha256": "266f9502ce1d93063120114e89d9a817626d14b71513694e48a767ef9d2acabb"
+    },
+    {
+      "path": "publication/hosted-ci-audit/RUN_37422112578_TIMING.json",
+      "bytes": 834,
+      "sha256": "e7582b66c95d5d87eff962c72a0a8d8251e3d17819f9eff3df333126676605b9"
+    },
+    {
+      "path": "publication/hosted-ci-audit/RUN_37422112578_WEB.json",
+      "bytes": 26817,
+      "sha256": "08451830fb7449e3f33268e6fe2bc18e861aadcf9437c35b808d9d6bfbc58548"
+    },
+    {
+      "path": "publication/hosted-ci-audit/RUN_37422112648.json",
+      "bytes": 27935,
+      "sha256": "c36e0b440cb154bf7ba5409816fc3036c62cdca446404d93c3e66459b040bf9f"
+    },
+    {
+      "path": "publication/hosted-ci-audit/RUN_37422112648_CHECK_RUNS.json",
+      "bytes": 576,
+      "sha256": "867b8451421b3061a115c1bad8de05a0a01dd72245625afd25f0237b7274a631"
+    },
+    {
+      "path": "publication/hosted-ci-audit/RUN_37422112648_CHECK_SUITE.json",
+      "bytes": 552,
+      "sha256": "5f1e8e8a703065b7ae1e3eb06dbd860750254efab8eb5653b74188602c0a82cf"
+    },
+    {
+      "path": "publication/hosted-ci-audit/RUN_37422112648_JOBS.json",
+      "bytes": 900,
+      "sha256": "3ced5cfb2f448c96cc1890639d53578f9ad50c201255c4cb83c07eb9c840f954"
+    },
+    {
+      "path": "publication/hosted-ci-audit/RUN_37422112682.json",
+      "bytes": 27903,
+      "sha256": "8a61a03c5a5fa5bd19a4f22e2a886dd841fb4a5535b2860df2d796eeac45e630"
+    },
+    {
+      "path": "publication/hosted-ci-audit/RUN_37422112682_CHECK_RUNS.json",
+      "bytes": 576,
+      "sha256": "a6656e6620b0e5f9d201a76680b3b45af75af2c888452cf9c2e2184bc73714d8"
+    },
+    {
+      "path": "publication/hosted-ci-audit/RUN_37422112682_CHECK_SUITE.json",
+      "bytes": 552,
+      "sha256": "e6b539d7049542f842cb73aa79b63f1f68e2a00167f32c8aa2912701c19909c9"
+    },
+    {
+      "path": "publication/hosted-ci-audit/RUN_37422112682_JOBS.json",
+      "bytes": 900,
+      "sha256": "af050cecde1a47d15f0cf19656250ae4bd4d6fcaaf81f5433fe0bf8c9666a1b5"
+    },
+    {
+      "path": "publication/hosted-ci-audit/SUMMARY.json",
+      "bytes": 4075,
+      "sha256": "357c0867c798296e4af4bc7dd02fc4c42139978a4dc5537f5113bdb536fec840"
+    },
+    {
+      "path": "publication/hosted-ci-audit/WORKFLOW_RUNS_PAGE2.json",
+      "bytes": 2064648,
+      "sha256": "bec462e7531796ee3e15b96c93b3f1144806f33c2f3297b1850c6467b94523a4"
+    },
+    {
+      "path": "publication/hosted-ci-audit/build_report.py",
+      "bytes": 7548,
+      "sha256": "3167ab845576ae07c582406bfe94a25b8e7b6e8777e1df09d22a55021389b9b5"
+    }
+  ]
+}

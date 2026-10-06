@@ -1,0 +1,25 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "path": "m3/core/src/com/m3/text/LocalM3Arena.java",
+    "ref": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+    "encoding": "base64"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "LyogQ29weXJpZ2h0IDIwMjYgSGl0ZXNoIFNvbGl3YWwgPGhzb2xpd2FsQGdt\nYWlsLmNvbT4KICogU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEFwYWNoZS0y\nLjAKICovCnBhY2thZ2UgY29tLm0zLnRleHQ7CgppbXBvcnQgamF2YS51dGls\nLk9iamVjdHM7CmltcG9ydCBqYXZhLnV0aWwuVVVJRDsKaW1wb3J0IGphdmEu\ndXRpbC5jb25jdXJyZW50LmF0b21pYy5BdG9taWNMb25nOwoKLyoqCiAqIEV4\ncGxpY2l0IGFwcGxpY2F0aW9uLW93bmVkIGFsbG9jYXRvci4gVGhpcyBmaXJz\ndCBzdGFnZSBpcyBOT1QgYW4gaW50ZXJuIGNhY2hlLgogKiBJdCByZXRhaW5z\nIG5vIGJhY2tpbmcgYXJyYXlzOyBlYWNoIGltbXV0YWJsZSBwaWVjZSBvd25z\nIGl0cyBiYWNraW5nIGxpZmV0aW1lLgogKiBDb25zdHJ1Y3Rpb24vYWN0aXZh\ndGlvbiBpcyBleHBsaWNpdCwgb3V0c2lkZSBqYXZhLmxhbmcuU3RyaW5nIGFu\nZCBWTSBib290c3RyYXAuCiAqLwpwdWJsaWMgZmluYWwgY2xhc3MgTG9jYWxN\nM0FyZW5hIHsKICAgIC8qKiBTdGFydHMgYSBmcmVzaCBvd25lciBuYW1lc3Bh\nY2U7IG5vIGJhY2tpbmcgYXJyYXlzIGFyZSByZXRhaW5lZCBieSB0aGlzIGFy\nZW5hLiAqLwogICAgcHVibGljIExvY2FsTTNBcmVuYSgpIHsgfQoKICAgIHBy\naXZhdGUgZmluYWwgVVVJRCBvd25lciA9IFVVSUQucmFuZG9tVVVJRCgpOwog\nICAgcHJpdmF0ZSBmaW5hbCBBdG9taWNMb25nIHNlcXVlbmNlID0gbmV3IEF0\nb21pY0xvbmcoKTsKCiAgICBwcml2YXRlIFN0b3JhZ2VJZGVudGl0eSBpZGVu\ndGl0eSgpIHsKICAgICAgICBsb25nIHJlY29yZCA9IHNlcXVlbmNlLnVwZGF0\nZUFuZEdldChwcmV2aW91cyAtPiB7CiAgICAgICAgICAgIGlmIChwcmV2aW91\ncyA9PSBMb25nLk1BWF9WQUxVRSkgdGhyb3cgbmV3IElsbGVnYWxTdGF0ZUV4\nY2VwdGlvbigiaWRlbnRpdHkgZXhoYXVzdGVkIik7CiAgICAgICAgICAgIHJl\ndHVybiBwcmV2aW91cyArIDE7CiAgICAgICAgfSk7CiAgICAgICAgcmV0dXJu\nIG5ldyBTdG9yYWdlSWRlbnRpdHkob3duZXIsIDEsIHJlY29yZCk7CiAgICB9\nCgogICAgLyoqIENvcGllcyBldmVyeSBVVEYxNiBjb2RlIHVuaXQsIGluY2x1\nZGluZyB1bnBhaXJlZCBzdXJyb2dhdGVzLCBleGFjdGx5IG9uY2UuICovCiAg\nICBwdWJsaWMgTG9jYWxNM1N0cmluZ1BpZWNlIGNvcHlVdGYxNihjaGFyW10g\naW5wdXQpIHsKICAgICAgICBPYmplY3RzLnJlcXVpcmVOb25OdWxsKGlucHV0\nKTsKICAgICAgICBieXRlW10gYnl0ZXMgPSBuZXcgYnl0ZVtNYXRoLm11bHRp\ncGx5RXhhY3QoaW5wdXQubGVuZ3RoLCAyKV07CiAgICAgICAgZm9yIChpbnQg\naSA9IDA7IGkgPCBpbnB1dC5sZW5ndGg7IGkrKykgewogICAgICAgICAgICBj\naGFyIGMgPSBpbnB1dFtpXTsKICAgICAgICAgICAgYnl0ZXNbaSAqIDJdID0g\nKGJ5dGUpYzsKICAgICAgICAgICAgYnl0ZXNbaSAqIDIgKyAxXSA9IChieXRl\nKShjID4+PiA4KTsKICAgICAgICB9CiAgICAgICAgcmV0dXJuIG93bmVkKGJ5\ndGVzLCBMb2NhbE0zU3RyaW5nUGllY2UuRW5jb2RpbmcuVVRGMTZfTEUpOwog\nICAgfQoKICAgIC8qKiBDb3BpZXMgTGF0aW4xIGJ5dGVzOyBubyBjaGFyc2V0\nIGd1ZXNzaW5nIG9yIGRlY29kaW5nIHJlcGxhY2VtZW50IHBvbGljeS4gKi8K\nICAgIHB1YmxpYyBMb2NhbE0zU3RyaW5nUGllY2UgY29weUxhdGluMShieXRl\nW10gaW5wdXQpIHsKICAgICAgICByZXR1cm4gb3duZWQoT2JqZWN0cy5yZXF1\naXJlTm9uTnVsbChpbnB1dCkuY2xvbmUoKSwgTG9jYWxNM1N0cmluZ1BpZWNl\nLkVuY29kaW5nLkxBVElOMSk7CiAgICB9CgogICAgTG9jYWxNM1N0cmluZ1Bp\nZWNlIG93bmVkKGJ5dGVbXSBieXRlcywgTG9jYWxNM1N0cmluZ1BpZWNlLkVu\nY29kaW5nIGVuY29kaW5nKSB7CiAgICAgICAgcmV0dXJuIG5ldyBMb2NhbE0z\nU3RyaW5nUGllY2UoYnl0ZXMsIGVuY29kaW5nLCBpZGVudGl0eSgpLCAwLCBi\neXRlcy5sZW5ndGggPj4gZW5jb2Rpbmcuc2hpZnQpOwogICAgfQp9Cg==\n",
+      "encoding": "base64",
+      "sha": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+      "display_url": "https://github.com/hsoliwal/M3jdk21/blob/d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2/m3/core/src/com/m3/text/LocalM3Arena.java",
+      "display_title": "LocalM3Arena.java"
+    },
+    "isError": false
+  }
+}
+

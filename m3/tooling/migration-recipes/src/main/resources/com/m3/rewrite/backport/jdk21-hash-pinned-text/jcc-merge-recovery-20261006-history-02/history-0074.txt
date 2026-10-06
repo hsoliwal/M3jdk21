@@ -1,0 +1,30 @@
+{
+  "schema": "independent-actual-raw-failure-artifact-seals/v1",
+  "files": [
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-readback-failure/INPUT_SEALS.json",
+      "bytes": 3869,
+      "sha256": "97680e799c6b21d29f86b7f2249e22dacc5e1c761d1e7f2ade704eba729a481f"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-readback-failure/READ_CAPABILITIES.json",
+      "bytes": 5925,
+      "sha256": "1356f767136ebe7d2bbc59bd61904691b82a88161d776d8039fc9ab97510ca60"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-readback-failure/REVIEW.json",
+      "bytes": 4051,
+      "sha256": "be0f51039422ac6e111a0f5d3a0ba96a74730555d5663c2483fb1ac94a1d96f0"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-readback-failure/REVIEW.md",
+      "bytes": 7352,
+      "sha256": "52621f38ee8dbd408012219a4a5bd5cef08c046da3ada5cecf923398d637e769"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-readback-failure/inspect.py",
+      "bytes": 7385,
+      "sha256": "67dba07d875c0f9a9bc9e18522bed9fc71b1aeb16787e869fbc75ee9650b8640"
+    }
+  ]
+}

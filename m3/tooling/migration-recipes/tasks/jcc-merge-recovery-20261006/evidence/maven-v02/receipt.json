@@ -1,0 +1,26 @@
+{
+  "schema": "m3-jcc-recovery-maven-diagnostic/1",
+  "started": "2026-10-06T04:28:40.014162+00:00",
+  "finished": "2026-10-06T04:28:45.311604+00:00",
+  "command": [
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/apache-maven-3.9.9/bin/mvn",
+    "-o",
+    "-B",
+    "-f",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/input-workspace/m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/verification/pom.xml",
+    "-Dmaven.repo.local=/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02",
+    "-Dm3.recovery.materialized=/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/materialized-v02",
+    "verify"
+  ],
+  "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/input-workspace",
+  "java_home": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/jdk-21+35",
+  "exit_code": 1,
+  "asm93_addon_receipt_sha256": "c49c23fd5ec3fc02ad0c3332e16fe4b0f8c9ea4bfab296ad013c726bc226823d",
+  "input_seal_sha256": "78af504973693c27aee8614de32be15fb2150ba6d7dd4af920162b7dc3264684",
+  "inputs_unchanged": true,
+  "offline_cache_receipt": "runtime-resolution/actual-acquisition/OFFLINE_DIAGNOSTIC_CACHE_V02.json",
+  "offline_cache_receipt_sha256": "034d226e546825818559e5517ce62bb00dd855f9ce59760fa607049388280da9",
+  "scope": "Focused finite offline compiler/JUnit diagnostic with exact artifact identities. Complete vendored source/native/plugin closure remains separately pending; no JDK/export admission.",
+  "stdout_sha256": "2c38fc47691473219add812de20e061bd5afa47244acfa0cff9d41361c8f39ea",
+  "stderr_sha256": "9ddf3781b5e43a87b1d67caac2bc4b251f9ce8d77c509c8369129f4b0359fd55"
+}

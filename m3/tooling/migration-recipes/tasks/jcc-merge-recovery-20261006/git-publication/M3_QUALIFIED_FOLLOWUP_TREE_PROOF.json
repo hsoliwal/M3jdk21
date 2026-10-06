@@ -1,0 +1,12 @@
+{
+  "status": "ACTUAL_GITHUB_TREE_READBACK_VERIFIED",
+  "tree": "cee56051e8a0762dc6ae3c53ddc57a82d4fb4730",
+  "verified_tree_objects": 633,
+  "modifications": 9,
+  "additions": 588,
+  "deletions": 0,
+  "history443_retained_exactly": true,
+  "all_other_entries_preserved": true,
+  "final_mapping_included": false,
+  "plan_sha256": "4fe7210e5e71063d934513924a8e5dd8a89ee7bd057178169a4f7ddaaba74aff"
+}

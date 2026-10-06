@@ -1,0 +1,18 @@
+{
+  "MAVEN_DECLARATIONS.tsv": {
+    "bytes": 6173,
+    "sha256": "b0f10b47bfa6f3ea6f27a235c0d55ab7c5fc86ac6dd41dbbc5164f44f5a94e9a"
+  },
+  "REVIEW.md": {
+    "bytes": 7562,
+    "sha256": "1c2597b94843a7177731d88de222bc3f5ec38dab60c8ebb0da825b298dee16f6"
+  },
+  "ROOT_ACCOUNTING.json": {
+    "bytes": 114933,
+    "sha256": "cfe76d41dda4220937086d951a126bf04dec0d282ba088b6de2a6bff33b6e14d"
+  },
+  "ROOT_ENTRIES.tsv": {
+    "bytes": 41070,
+    "sha256": "307c01ac0648a8296f5f8b6c7533925de6050344f7a154d524796fc84b2ab4c3"
+  }
+}

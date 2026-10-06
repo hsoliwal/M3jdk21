@@ -1,0 +1,67 @@
+{
+  "schema": "independent-read-input-seals/v1",
+  "count": 12,
+  "all_inputs_reread_unchanged": true,
+  "files": [
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-nul/parser-dependencies.tsv",
+      "bytes": 126,
+      "sha256": "88b78c08bf896f77b97603f99bad089c19330ca2816edb1c240a84799cb8bfa0"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+      "bytes": 4,
+      "sha256": "823a8864668594f33fd21b51f42c08643d90be2f0d903653175047f5d0298e6c"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/RAW_READBACK_FAILURE_OBSERVATION.json",
+      "bytes": 6519,
+      "sha256": "224b3baa99e71c846cc96319c0a829eec3521d75f68731332ac2fa59fa214112"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/transport/INDEX.json",
+      "bytes": 35655,
+      "sha256": "dce1e97079aeb3ad9edbdf9f814b3ccaeebfd0053c9d2b4b79ff841632c0736d"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-readback-failure/READ_CAPABILITIES.json",
+      "bytes": 5925,
+      "sha256": "1356f767136ebe7d2bbc59bd61904691b82a88161d776d8039fc9ab97510ca60"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-transport-adapter/FETCH_FILE_CAPABILITY.json",
+      "bytes": 1155,
+      "sha256": "0b52650547b4d4ae69a1e462c38ef2077cddb0dfd2c7915e327fcd041dca1709"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-transport-adapter/FILE_SEALS.json",
+      "bytes": 1600,
+      "sha256": "2102f85bd93143fd60431fd26a8069bdff2a5e4a2e6616deb6d6f934dc5191f8"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-transport-adapter/INPUT_SEALS.json",
+      "bytes": 5975,
+      "sha256": "4e5b2bce37562177cbfb2485a082c33df5a97aa238fac42dacfde355f41ff444"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-transport-adapter/REVIEW.json",
+      "bytes": 3822,
+      "sha256": "1e879a75f8b6d08fba9628406fffa7a7fa20d471fceb0cb8da5bbf47c0f2a5df"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-transport-adapter/REVIEW.md",
+      "bytes": 7280,
+      "sha256": "03f15a70c1ac11b52005af86f2bc193599709427f39ae250234fbf9bfbf8b626"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/readback-static-review/raw-transport-adapter/inspect.py",
+      "bytes": 10963,
+      "sha256": "c80763ab3a3796d4f7dc8a22596dc96c060bef801b9a8fa845109ce044d36d97"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/publication/FINAL_MANIFEST.json",
+      "bytes": 2651088,
+      "sha256": "9270a6b4098960e2b7c7bd87b17325b648c4de363957f36028bacc9c1955e328"
+    }
+  ]
+}

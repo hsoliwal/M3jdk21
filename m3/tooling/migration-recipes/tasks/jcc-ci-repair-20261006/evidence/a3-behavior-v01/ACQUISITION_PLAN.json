@@ -1,0 +1,151 @@
+{
+  "revision": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+  "m3_tree": "581f0c626bb8466afc71ac5171694e54be87327b",
+  "tree_capture_sha256": "726c5ef1c24267065d717dfe209aa43ae64a647c35ab2092c59b372853eb70c8",
+  "rows": [
+    {
+      "path": "tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a2e8c916208b563517e51b738744a05357e633aa",
+      "size": 12032,
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/a2e8c916208b563517e51b738744a05357e633aa"
+    },
+    {
+      "path": "tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
+      "size": 13805,
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/d58ca50dfaeb60f581b64f43545e688aca5c6530"
+    },
+    {
+      "path": "tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-lab.yml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "eb7670be681545af7c424ee81242cb114b45e316",
+      "size": 494,
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/eb7670be681545af7c424ee81242cb114b45e316"
+    },
+    {
+      "path": "tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-workflow.yml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "52e0242df67d4fd11e8a99e390e1d58ff6fb7ff9",
+      "size": 497,
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/52e0242df67d4fd11e8a99e390e1d58ff6fb7ff9"
+    },
+    {
+      "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-regex-memory-workflow/a3-lab.md.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8bd7695b58e52d5dc2aaece2aa958f5c724c1d12",
+      "size": 5171,
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/8bd7695b58e52d5dc2aaece2aa958f5c724c1d12"
+    },
+    {
+      "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-regex-memory-workflow/a3-mastery.md.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6ab1a3f17bf7db4a7304a42bc78cdc31d874222d",
+      "size": 3974,
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/6ab1a3f17bf7db4a7304a42bc78cdc31d874222d"
+    },
+    {
+      "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-regex-memory-workflow/manifest.tsv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "40c60bd055fca26ec84fa93626c008e99440b6ba",
+      "size": 507,
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/40c60bd055fca26ec84fa93626c008e99440b6ba"
+    },
+    {
+      "path": "tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-regex-memory-workflow/workflow.yml.txt",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5daa9cd739e9938cf7c940dc1cf012e4d8d978a9",
+      "size": 10881,
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/5daa9cd739e9938cf7c940dc1cf012e4d8d978a9"
+    },
+    {
+      "path": "tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3Lab.java.after",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b9781fc4085f1f97ecb730ee1874ab16d52e6d8f",
+      "size": 16196,
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/b9781fc4085f1f97ecb730ee1874ab16d52e6d8f"
+    },
+    {
+      "path": "tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3LabTest.java.after",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ccc81c0af5070a343a853666de94c1e3e06eff34",
+      "size": 6117,
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/ccc81c0af5070a343a853666de94c1e3e06eff34"
+    },
+    {
+      "path": "tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "277e13c69b882ad25ac0bf0429da26f018449e89",
+      "size": 6442,
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/277e13c69b882ad25ac0bf0429da26f018449e89"
+    },
+    {
+      "path": "tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bf91afcd627d8e2faa9790ea6592b6bc9c1b0e33",
+      "size": 7514,
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/bf91afcd627d8e2faa9790ea6592b6bc9c1b0e33"
+    },
+    {
+      "path": "tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f18bdb2c7808e88dc2692e58acafbdfbc854b7e5",
+      "size": 658,
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/f18bdb2c7808e88dc2692e58acafbdfbc854b7e5"
+    },
+    {
+      "path": "tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-regex-memory-lab/before/A3Lab.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c42a107a8cb9ff4cc6a40cc660069868b9482636",
+      "size": 17623,
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/c42a107a8cb9ff4cc6a40cc660069868b9482636"
+    },
+    {
+      "path": "tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-regex-memory-lab/before/A3LabTest.java",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8b9ce1735fdeb6f80f4c993b98b09120c43878cf",
+      "size": 3860,
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/8b9ce1735fdeb6f80f4c993b98b09120c43878cf"
+    },
+    {
+      "path": "tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-regex-memory-workflow/before/a3-lab.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bd431b5c306a59b13ba2510e482b2c8ca48424d7",
+      "size": 3591,
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/bd431b5c306a59b13ba2510e482b2c8ca48424d7"
+    },
+    {
+      "path": "tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-regex-memory-workflow/before/a3-mastery.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "33de42b35ba7238aec48a3187e63085abb1ca146",
+      "size": 3372,
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/33de42b35ba7238aec48a3187e63085abb1ca146"
+    },
+    {
+      "path": "tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-regex-memory-workflow/before/workflow.yml",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "51b635f4e0962b7c8bc26d2965b312bc80bad9b0",
+      "size": 10858,
+      "url": "https://api.github.com/repos/hsoliwal/M3jdk21/git/blobs/51b635f4e0962b7c8bc26d2965b312bc80bad9b0"
+    }
+  ]
+}

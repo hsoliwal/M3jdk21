@@ -1,0 +1,32 @@
+{
+  "request": {
+    "expected_entries": 5,
+    "path": "synexia-openrewrite-recipes/recipes/iop-mechanical-compatibility-20261006/library-object-upload-v01",
+    "recursive": true,
+    "sha": "d50128e2f5764b1ce6224b18fb84ce1440128ded",
+    "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/d50128e2f5764b1ce6224b18fb84ce1440128ded?recursive=1"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "{\"sha\":\"d50128e2f5764b1ce6224b18fb84ce1440128ded\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/trees/d50128e2f5764b1ce6224b18fb84ce1440128ded\",\"tree\":[{\"path\":\"INVENTORY.json\",\"mode\":\"100644\",\"type\":\"blob\",\"sha\":\"926a632ee0a7e867fd2aed6b122af08ef10e2f4a\",\"size\":567712,\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/926a632ee0a7e867fd2aed6b122af08ef10e2f4a\"},{\"path\":\"OBJECT_RECEIPT_LEDGER.json\",\"mode\":\"100644\",\"type\":\"blob\",\"sha\":\"45fc18830f190d34a5fb9a21f081eb402d43d379\",\"size\":4598058,\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/45fc18830f190d34a5fb9a21f081eb402d43d379\"},{\"path\":\"REPORT.md\",\"mode\":\"100644\",\"type\":\"blob\",\"sha\":\"8ae4062d7468229fe889ee756953dae066e9667e\",\"size\":2938,\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/8ae4062d7468229fe889ee756953dae066e9667e\"},{\"path\":\"SOURCE_TREE_LAYER_BOUNDARY.json\",\"mode\":\"100644\",\"type\":\"blob\",\"sha\":\"b6b47276a4120bbcfeafa568aa4a5985b89b36a9\",\"size\":2306,\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/b6b47276a4120bbcfeafa568aa4a5985b89b36a9\"},{\"path\":\"verify.py\",\"mode\":\"100644\",\"type\":\"blob\",\"sha\":\"690ae356dad0c1189655d7ab3ab98b6b09f12749\",\"size\":23086,\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/690ae356dad0c1189655d7ab3ab98b6b09f12749\"}],\"truncated\":false}",
+      "title": "d50128e2f5764b1ce6224b18fb84ce1440128ded",
+      "modified_date": null,
+      "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/d50128e2f5764b1ce6224b18fb84ce1440128ded?recursive=1",
+      "display_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/d50128e2f5764b1ce6224b18fb84ce1440128ded?recursive=1",
+      "display_title": "d50128e2f5764b1ce6224b18fb84ce1440128ded",
+      "structuredContent": {
+        "title": "d50128e2f5764b1ce6224b18fb84ce1440128ded",
+        "content": "{\"sha\":\"d50128e2f5764b1ce6224b18fb84ce1440128ded\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/trees/d50128e2f5764b1ce6224b18fb84ce1440128ded\",\"tree\":[{\"path\":\"INVENTORY.json\",\"mode\":\"100644\",\"type\":\"blob\",\"sha\":\"926a632ee0a7e867fd2aed6b122af08ef10e2f4a\",\"size\":567712,\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/926a632ee0a7e867fd2aed6b122af08ef10e2f4a\"},{\"path\":\"OBJECT_RECEIPT_LEDGER.json\",\"mode\":\"100644\",\"type\":\"blob\",\"sha\":\"45fc18830f190d34a5fb9a21f081eb402d43d379\",\"size\":4598058,\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/45fc18830f190d34a5fb9a21f081eb402d43d379\"},{\"path\":\"REPORT.md\",\"mode\":\"100644\",\"type\":\"blob\",\"sha\":\"8ae4062d7468229fe889ee756953dae066e9667e\",\"size\":2938,\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/8ae4062d7468229fe889ee756953dae066e9667e\"},{\"path\":\"SOURCE_TREE_LAYER_BOUNDARY.json\",\"mode\":\"100644\",\"type\":\"blob\",\"sha\":\"b6b47276a4120bbcfeafa568aa4a5985b89b36a9\",\"size\":2306,\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/b6b47276a4120bbcfeafa568aa4a5985b89b36a9\"},{\"path\":\"verify.py\",\"mode\":\"100644\",\"type\":\"blob\",\"sha\":\"690ae356dad0c1189655d7ab3ab98b6b09f12749\",\"size\":23086,\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/690ae356dad0c1189655d7ab3ab98b6b09f12749\"}],\"truncated\":false}",
+        "display_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/d50128e2f5764b1ce6224b18fb84ce1440128ded?recursive=1"
+      }
+    },
+    "isError": false
+  }
+}
+

@@ -1,0 +1,80 @@
+{
+  "afterimage_bytes": 68890,
+  "beforeimage_commit": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
+  "execution_receipt": "verification-v01/receipt.json",
+  "execution_receipt_sha256": "a4da326176195fccadb0c8c17e5d55bb2c88aeb02fd4a1f62eaa176bb9855551",
+  "file_count": 5,
+  "files": [
+    {
+      "after_bytes": 2832,
+      "after_git_blob": "ee6902e0df9269026182a6dea9496a5e4fdf790f",
+      "after_sha256": "f60cd12f2a0b1530f022c4aa9f98d48647a136328be7b67dd117cd08d1081300",
+      "before_bytes": 1791,
+      "before_git_blob": "a35908062f2d967b904c7491b568c37a9cd53dfa",
+      "before_sha256": "517a8bb2f5e8e7ec0652ff33606155835084bd9669e936e7ecdc80984a857940",
+      "before_source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/files/current/.github/workflows/m3-retained-capability-audit.yml",
+      "path": ".github/workflows/m3-retained-capability-audit.yml",
+      "source_capture": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/current_.github__workflows__m3-retained-capability-audit.yml.json",
+      "source_capture_sha256": "fcdb8a9570658bcaae7e50a09e25d3896e4a763af29f05be155ad51228d5f3c4",
+      "template": "workflow.yml.txt"
+    },
+    {
+      "after_bytes": 14225,
+      "after_git_blob": "caef24cd8c170b36db726dd905919d4a57ac37ed",
+      "after_sha256": "8918e530b22f7960db1a3918a5685978fd9fc14ed35338faefb224d935d7f5c0",
+      "before_bytes": 9171,
+      "before_git_blob": "1c012956c7ae68a9651144f4643a6013a3cdb9a2",
+      "before_sha256": "ef145204809b2ab1b3fa79b75ce740dfddb1d536f98f65b14ba50eea057fc4fc",
+      "before_source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/files/current/m3/history/README.md",
+      "path": "m3/history/README.md",
+      "source_capture": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/current_m3__history__README.md.json",
+      "source_capture_sha256": "bcc33dc81bf34892a61bf2fdf4f13f0324573bc4765dff6146b00461105f5e1f",
+      "template": "README.md.txt"
+    },
+    {
+      "after_bytes": 3716,
+      "after_git_blob": "e2485c372f5cac990e4920e4fb83c65b5be77e50",
+      "after_sha256": "b4f00263594158b47e76ccb34000095f46bc3f66a69151304fe7b544dad6ca15",
+      "before_bytes": 2726,
+      "before_git_blob": "8c02223c7af8ca2e415103dcdea930d6ad9c7beb",
+      "before_sha256": "14c29126da786a7456a55ce400f5a800dfe53693e6c329e7342bf2fabb087e11",
+      "before_source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/files/current/m3/history/retention-pom.xml",
+      "path": "m3/history/retention-pom.xml",
+      "source_capture": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/current_m3__history__retention-pom.xml.json",
+      "source_capture_sha256": "47e48349946a858d8fe20642659abb27b97e738659928b0d4f269d69e06897b5",
+      "template": "retention-pom.xml.txt"
+    },
+    {
+      "after_bytes": 19982,
+      "after_git_blob": "b8d57642120f1ae5fef7765dea292f1594def3f6",
+      "after_sha256": "ccd63d4e05f51e816548ad9da4e5a0ce880a9cf90b1fd0dfe80b04f30f7d8a14",
+      "before_bytes": 7189,
+      "before_git_blob": "3bb3bba9a620c253ac1ad82736a923e0660c6ae2",
+      "before_sha256": "06c713d051ce0411b9c8a4faeafeaa3245b75ff4350e8f9afd94f15dd86451e4",
+      "before_source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/files/current/m3/history/retention.py",
+      "path": "m3/history/retention.py",
+      "source_capture": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/current_m3__history__retention.py.json",
+      "source_capture_sha256": "3f5f8a37eef1e8fcddd5d52622ac461512a82838fa727959f9c1eab7f2337f20",
+      "template": "retention.py.txt"
+    },
+    {
+      "after_bytes": 28135,
+      "after_git_blob": "268c50cb323b482f9bae57a5919c61b5c8ee1bb3",
+      "after_sha256": "6d11c5ff5d429daca053775a7b8eae9cbe89c3498c3b33c4f0f576c36b2b91c3",
+      "before_bytes": 5468,
+      "before_git_blob": "87e86678a7ea7238f9f30c3974dd1962e26a71a4",
+      "before_sha256": "68ae3ae0be2f45f9746c9573bf949698221a99696715065a14a293729c022a0c",
+      "before_source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/files/current/m3/history/test_retention.py",
+      "path": "m3/history/test_retention.py",
+      "source_capture": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/current_m3__history__test_retention.py.json",
+      "source_capture_sha256": "cad6fa1b4fdc1bc248eb68115f0dc299fa3987d6d738c309b64915ef22530cf8",
+      "template": "test_retention.py.txt"
+    }
+  ],
+  "github_mutated": false,
+  "maven_executed": false,
+  "product_targets_materialized": false,
+  "repository": "hsoliwal/M3jdk21",
+  "schema": "m3-retention-afterimage-templates/1",
+  "status": "FROZEN_FOR_RECIPE_REVIEW"
+}

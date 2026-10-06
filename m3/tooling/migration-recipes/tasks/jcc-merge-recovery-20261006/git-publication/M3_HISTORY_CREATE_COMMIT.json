@@ -1,0 +1,21 @@
+{
+  "observed_utc": "2026-10-06 04:11:52 UTC",
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "parent_sha": "87590cb96fb0e2dc0f88fae8e01957f7179cd255",
+    "tree_sha": "0b686778262c36f40153dde6e569abc8d393a3c6",
+    "message": "Restore historical JCC receiving payload lost during merge\n\nRestore 443 immutable historical evidence and recipe-custody files from 0483f79a, preserving all 1,766 current M3 files and every other root entry. The complete restored M3 tree and root were verified through fresh Git readback.\n\nOperational mapping reconciliation, current retention registration and CI recipe execution follow separately. Historical receipt restoration does not qualify the current runtime or a rebuilt JDK."
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "sha": "946fd922c1d878e3f32309c83d132057a7ef8451"
+    },
+    "isError": false
+  }
+}

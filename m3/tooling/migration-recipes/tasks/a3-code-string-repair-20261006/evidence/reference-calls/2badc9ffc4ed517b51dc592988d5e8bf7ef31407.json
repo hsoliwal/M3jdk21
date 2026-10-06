@@ -1,0 +1,18 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "blob_sha": "2badc9ffc4ed517b51dc592988d5e8bf7ef31407"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java\t496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c\t233cbae58e7bf8ffb67aeb56ee5418996aceca624bde4e35fcf0f54b52afb79b\tafter.java.txt\n"
+    },
+    "isError": false
+  }
+}

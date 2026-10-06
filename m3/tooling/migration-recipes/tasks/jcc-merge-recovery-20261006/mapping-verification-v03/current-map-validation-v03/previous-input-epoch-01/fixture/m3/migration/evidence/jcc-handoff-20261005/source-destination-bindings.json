@@ -1,0 +1,516 @@
+{
+  "schema": "m3.jcc-receiving-review/1",
+  "authority": "m3/docs/name-mapping.json",
+  "purpose": "Referenced review/evidence receipt, not a second mapping authority or an export-admission receipt.",
+  "source_commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+  "source_root_tree": "3a270e543f9a547582ebda8ac8b69bfd134c41be",
+  "destination_commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+  "destination_root_tree": "548f3d7c434c49c3989fc722f34ebba2ba9f0c5a",
+  "canonical_map_preimage_sha256": "67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb",
+  "source_acquisition_receipt_sha256": "159ba8544f5d6caa724176a25ca42147befdb9a62f216ec7765f971a286453f5",
+  "source_acquisition_scope": "503 exact source/resource bindings; not a whole-repository semantic inventory or current build pass.",
+  "source_root_receipt_sha256": "7cebc720d74cc3e0564f328f285314785fed9f09ca0177a0efd7e79ab023b799",
+  "source_root_accounting": {
+    "root_entries": 343,
+    "root_trees": 255,
+    "root_blobs": 87,
+    "root_gitlinks": 1,
+    "root_pom_module_declarations": 201,
+    "distinct_module_paths": 201,
+    "direct_root_modules": 190,
+    "nested_module_paths": 11,
+    "root_trees_with_nested_modules": 8,
+    "nested_containers_also_direct_modules": 4,
+    "distinct_root_trees_referenced": 194,
+    "root_pom_sha256": "f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab",
+    "root_pom_git_blob": "98889a040aad5cc3c82f782bb4b173d118207988",
+    "whole_repository_file_count": null,
+    "semantic_dependency_closure_complete": false,
+    "coverage_receipt_path": "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+    "coverage_receipt_sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b"
+  },
+  "new_capability_records": [
+    "synexia.jcc-recipe-laboratory",
+    "synexia.jcc-java-jni-regression"
+  ],
+  "source_artifacts": [
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
+      "symbol": "com.synexia.rewrite.M3RecipeMasteryLab",
+      "signatures": [],
+      "sha256": "0054ddf028c5a83c270c1a53795373c7cd8fa77395d23be7fd70424b644b0a3e",
+      "git_blob_sha1": "ee8adf451105c34d0afa228fe05b7dabb3b1e264",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/develop"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
+      "symbol": "com.synexia.rewrite.M3RecipeMasterySchedulePlanner",
+      "signatures": [],
+      "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb",
+      "git_blob_sha1": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/develop"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
+      "symbol": "com.synexia.rewrite.M3AtomPatternSignalChainRecipe",
+      "signatures": [],
+      "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98",
+      "git_blob_sha1": "09df87a872817787fc8607bf11805cfa26c53aed",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/develop"
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+      "module": "synexia-openrewrite-recipes",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
+      "symbol": "com.synexia.rewrite.M3CodeSignalChain",
+      "signatures": [],
+      "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa",
+      "git_blob_sha1": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/develop"
+    }
+  ],
+  "existing_destination_reuse_artifacts": [
+    {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+      "module": "m3/tooling/migration-recipes",
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java",
+      "symbol": "com.m3.rewrite.M3Java21ConvergenceRecipe",
+      "signatures": [
+        "java.util.List<org.openrewrite.Recipe> getRecipeList()"
+      ],
+      "sha256": "15e44e92ba509b405ed2e12ddc4c6bf2a427f59cdca95d7e8e960357732266e9",
+      "git_blob_sha1": "2f59c7f0756e5618343a88161040201ccb1af39d",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/master"
+    },
+    {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+      "module": "m3/tooling/migration-recipes",
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
+      "symbol": "com.m3.rewrite.atom.M3PureIntConvergenceRecipe",
+      "signatures": [
+        "java.util.List<org.openrewrite.Recipe> getRecipeList()"
+      ],
+      "sha256": "ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534",
+      "git_blob_sha1": "a1a745a4ea8617937d8ecbb61eb17973dac0948f",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/master"
+    },
+    {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+      "module": "m3/tooling/migration-recipes",
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+      "symbol": "com.m3.rewrite.atom.M3PureIntAtomEligibility",
+      "signatures": [
+        "package-private static boolean eligible(J.MethodDeclaration)",
+        "package-private static boolean atomized(J.MethodDeclaration)"
+      ],
+      "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
+      "git_blob_sha1": "0041adab5913304874f5063fc2b982ff3cc1e065",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/master"
+    },
+    {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+      "module": "m3/tooling/migration-recipes",
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/MemJava.java",
+      "symbol": "com.m3.rewrite.atom.MemJava",
+      "signatures": [
+        "package-private static java.lang.ClassLoader compile(java.util.Map<String,String>)"
+      ],
+      "sha256": "c2a204144a4ff7fe2f4abfa151a744e7114961b83b7f006e019e595f4569e238",
+      "git_blob_sha1": "341b55a500964906d15c88ccef9f3e05f2a1c025",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/master"
+    },
+    {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+      "module": "m3/tooling/migration-recipes",
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3IntRecipeProjectTest.java",
+      "symbol": "com.m3.rewrite.atom.M3IntRecipeProjectTest",
+      "signatures": [
+        "package-private JUnit proof owner; no product API"
+      ],
+      "sha256": "004de5f30e2a3c54d439b36493e8733dc73fdae8a288ba18238423ded5afcbed",
+      "git_blob_sha1": "d3cd2a28b3635340c9035b6287650bdf44f975ac",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/master"
+    }
+  ],
+  "acceptance_scope": "Source-qualified JCC capability export/materialization and destination product acceptance; the independently authored tooling fixture and ledger replay have separate finite local proofs.",
+  "acceptance": {
+    "source_export_admitted": false,
+    "destination_materialized": false,
+    "destination_gates_passed": false,
+    "remote_read_back_delivered": false
+  },
+  "source_verification_gate_order": [
+    "DIFF",
+    "POLICY_LINT",
+    "COMPILE",
+    "STATIC_ANALYSIS",
+    "UNIT_TEST",
+    "INTEGRATION_TEST",
+    "API_CONTRACT",
+    "FULL_BUILD",
+    "RUNTIME",
+    "REPLAY",
+    "SOURCE_HASH_PRESERVATION"
+  ],
+  "source_gate_context": "Existing RepositorySupersetBundle/RepositorySupersetVerificationProgram source owner order; no gate execution is asserted by this receipt.",
+  "destination_gate_records_preserved": [
+    "source-inventory",
+    "ownership-naming",
+    "scoped-prefix-and-tool-tests",
+    "source-owner-differential",
+    "maven-recipe-lifecycle",
+    "route-a-canonical-storage",
+    "route-b-lowering",
+    "route-c-complete-image",
+    "runtime-flag-off",
+    "runtime-enabled",
+    "jit-intrinsics",
+    "gc-intern-jni-jvmti",
+    "cds-serialization-serviceability",
+    "string-unicode-regex",
+    "shared-generation-cross-process",
+    "windows-native",
+    "performance-memory",
+    "independent-audit",
+    "future-port-full-closure",
+    "target-baseline-drift"
+  ],
+  "descriptor_reconciliation": {
+    "id": "synexia.counterpart.MIndexJvmDescriptor",
+    "previous_record": {
+      "id": "synexia.counterpart.MIndexJvmDescriptor",
+      "kind": "adapter",
+      "status": "implemented-unverified",
+      "reason": "Inlined reflection counterpart and caller-owned runtime bridge; bounded tests pass; global JVM admission remains open.",
+      "sources": [
+        {
+          "repo": "hsoliwal/com.synexia",
+          "commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
+          "module": "synexia-mindex",
+          "path": "synexia-mindex/class-index/src/main/java/com/synexia/mindex/classindex/MIndexJvmDescriptor.java",
+          "symbol": "com.synexia.mindex.classindex.MIndexJvmDescriptor",
+          "signatures": [
+            "com.synexia.mindex.classindex.MIndexJvmDescriptor"
+          ],
+          "sha256": "0e0ddfc53acaeb28137319fd20ee5005f9d7231949ebd3106193c287f13be9b8",
+          "git_blob_sha1": "d0eb96ae49c0456c8d31f1e714882b525b4c9a97",
+          "fingerprint": null,
+          "revision_role": "pinned",
+          "tracking_ref": "refs/heads/develop"
+        }
+      ],
+      "targets": [
+        {
+          "repo": "hsoliwal/M3jdk21",
+          "commit": null,
+          "module": "java.base",
+          "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+          "symbol": "jdk.internal.mindex.M3Descriptor",
+          "signatures": [
+            "jdk.internal.mindex.M3Descriptor"
+          ],
+          "sha256": "df17c48e54de060060e4393e5c2f3e8e2f068bad38a69576a82709cc6d4cbdb9",
+          "git_blob_sha1": null,
+          "fingerprint": null,
+          "revision_role": "candidate",
+          "tracking_ref": null
+        }
+      ],
+      "owner": "jdk.internal.mindex.M3Descriptor",
+      "identity": {
+        "namespace": "Preserve defining owner, exact raw spelling and loader identity; no global class identity.",
+        "generation": "Implementation/context revision is distinct from release label, class-file version and epoch."
+      },
+      "contract": {
+        "differences": [
+          "JDK String references and M3VI.Progress boundary; no application artifact dependency.",
+          "Snapshot-local primitive symbol IDs; fingerprint includes exact UTF-16 spellings.",
+          "Declared releases are provenance, not verified byte identity or compilation admission."
+        ],
+        "compatibility_obligations": [
+          "Public JDK types and behavior remain unchanged.",
+          "No blanket prefix rename or class-loading-by-name."
+        ],
+        "public_surface": [
+          "Internal non-exported API only; no java.base exports added."
+        ]
+      },
+      "format": {
+        "schema": null,
+        "abi": null,
+        "bootstrap": "java.base internal only; no automatic Class/ClassLoader hook."
+      },
+      "dependencies": [
+        {
+          "id": "java.base",
+          "resolution": "resolved",
+          "reason": "Strict module compile and jdeps; weak Class/loader reflection boundary."
+        },
+        {
+          "id": "synexia.counterpart.MIndexVersionTable",
+          "resolution": "resolved",
+          "reason": "Retained exact M3VI Progress boundary."
+        },
+        {
+          "id": "synexia.counterpart.MIndexLibraryRelease",
+          "resolution": "resolved",
+          "reason": "Retained exact M3Release value."
+        }
+      ],
+      "materialization": {
+        "admission": "Budgeted caller-owned reflection snapshot; lifecycle owner must invalidate before definition/access changes.",
+        "joins": "References existing immutable JDK Strings; no payload copy/interner or retained collection Entry per row.",
+        "outputs": "On-demand owner/row class and member views; weak runtime resolution can become unavailable.",
+        "cached_facts": "Primitive class/member/CSR lanes; caller-scoped declarations and precompute context; no persistent or cross-VM cache."
+      },
+      "recipe": {
+        "id": "m3-cb",
+        "version": "1",
+        "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+        "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+        "preconditions": [
+          "Pinned source bodies, exact retained OpenRewrite owner, absent targets or exact fixed point."
+        ],
+        "rollback": "Retained sealed installer restores exact matching preimages; integration packet rolled back before source packet."
+      },
+      "tests": [
+        {
+          "id": "cb-module-runtime",
+          "receipt": "m3/tooling/cb/evidence/receipt.json"
+        }
+      ],
+      "provenance": {
+        "license": "Apache-2.0 for copied Synexia code; original per-file donor obligations retained.",
+        "publication": "User explicitly requested inlining relevant Synexia code under Apache-2.0 into M3jdk21.",
+        "copied_code": true
+      },
+      "sync": {
+        "source_revision": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
+        "target_revision": "3ec445df10a3e8fc74aa983181f0700ac7bfbcad",
+        "direction": "source-to-target",
+        "target_adaptations": [
+          "Concise JDK counterpart names",
+          "Weak defining-loader identity",
+          "Counterpart-row effective declared release",
+          "Exact VM-local precompute context",
+          "No application dependency"
+        ],
+        "pending": [
+          "Automatic Class/ClassLoader consumer and lifecycle hooks, module/agent/CDS/JNI/JIT admission",
+          "Full family and non-prefix dependency inventory",
+          "AST/compiler consumers and performance measurements"
+        ],
+        "conflicts": []
+      },
+      "lineage": {
+        "previous_sources": [],
+        "previous_targets": [],
+        "supersedes": []
+      },
+      "source_state": "experimental",
+      "observation": "See m3/tooling/cb/README.md; no automatic loader attachment, authenticated bytes or JIT/AOT reuse claim."
+    },
+    "observed_historical_target": {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "f74592e363466a59b391fbbe47500c7985c9a691",
+      "module": "java.base",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "symbol": "jdk.internal.mindex.M3Descriptor",
+      "signatures": [
+        "jdk.internal.mindex.M3Descriptor"
+      ],
+      "sha256": "df17c48e54de060060e4393e5c2f3e8e2f068bad38a69576a82709cc6d4cbdb9",
+      "git_blob_sha1": "f4b4144f104eb4816cb80a44c136fa90b8114dc4",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/master"
+    },
+    "observed_current_target": {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+      "module": "java.base",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "symbol": "jdk.internal.mindex.M3Descriptor",
+      "signatures": [
+        "public static java.lang.String type(java.lang.Class<?>)",
+        "public static java.lang.String field(java.lang.reflect.Field)",
+        "public static java.lang.String method(java.lang.reflect.Method)",
+        "public static java.lang.String constructor(java.lang.reflect.Constructor<?>)",
+        "public static java.lang.String recordComponent(java.lang.reflect.RecordComponent)"
+      ],
+      "sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67",
+      "git_blob_sha1": "92f4d7da32a3b8265675a413311fd304c6dc2dd2",
+      "fingerprint": null,
+      "revision_role": "pinned",
+      "tracking_ref": "refs/heads/master"
+    },
+    "change_commit": "39702564163c017f9dc0350a305b032b06274857",
+    "previous_sync_target_path_observation": {
+      "commit": "3ec445df10a3e8fc74aa983181f0700ac7bfbcad",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "http_status": 404
+    },
+    "source_before_commit": "7b5d45bea2fce0a042e4b85347c1eb4116846c55",
+    "source_current_commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+    "source_sha256": "0e0ddfc53acaeb28137319fd20ee5005f9d7231949ebd3106193c287f13be9b8",
+    "source_git_blob_sha1": "d0eb96ae49c0456c8d31f1e714882b525b4c9a97",
+    "source_bytes_unchanged": true,
+    "target_contract_change": "Class.descriptorString corrects hidden-class spelling; source retains the older getName substitution algorithm. Public method signatures are unchanged by the retained fix.",
+    "historical_cb_receipt": {
+      "path": "m3/tooling/cb/evidence/receipt.json",
+      "sha256": "bc6ef0854d4e6e191259ea35187d7f47c9d3c8b2802eb10fefbdd9371da8c044",
+      "qualification": "Historical source7b5d/target-base3ec scoped packet; not a current descriptor or whole-image rerun."
+    },
+    "historical_descriptor_receipts": [
+      "m3/tooling/migration-recipes/tasks/recipe-closure/FINAL_REPORT.md",
+      "m3/tooling/migration-recipes/tasks/recipe-closure/JUNIT.tsv",
+      "m3/tooling/migration-recipes/tasks/recipe-closure/SOURCE_SEALS.tsv"
+    ],
+    "qualification": "Target/recipe identity and lineage reconciliation only. implemented-unverified retained; no Java mutation or new behavior/image pass."
+  },
+  "independent_receiving_fixture": {
+    "classification": "Original destination candidate tooling test; no source implementation or source PASS receipt imported.",
+    "materialized_locally": true,
+    "source_export_or_jdk_acceptance": false,
+    "candidate_artifact": {
+      "repo": "hsoliwal/M3jdk21",
+      "commit": null,
+      "module": "m3/tooling/migration-recipes",
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/JccReceivingFixtureTest.java",
+      "symbol": "com.m3.rewrite.atom.JccReceivingFixtureTest",
+      "signatures": [
+        "void eachScheduleCompilesAndMatchesFrozenOraclesAtEveryIntermediate() throws java.lang.Exception",
+        "void actualCanonicalCompositeAgreesWithItsDeclaredChildrenAndFreshReplay() throws java.lang.Exception",
+        "void opaqueStringObserversAndIndependentClassStateRemainIntact() throws java.lang.Exception",
+        "void compilerAndBothObservationOraclesRejectCuratedMutants() throws java.lang.Exception"
+      ],
+      "sha256": "b034673ea218515cc12ab0b4173eabf06732f29e8a456be45b5ba0d00489ab39",
+      "git_blob_sha1": "3332012bbd7f3842279f40fdf0f1eaf123392957",
+      "fingerprint": null,
+      "revision_role": "candidate"
+    },
+    "verification_pom": {
+      "path": "m3/tooling/migration-recipes/verification/jcc-receiving/pom.xml",
+      "sha256": "fda1ac1823bf912f10d975659dc1bfe7f89573d1581af3a7bfa7e45d99a70ba2",
+      "bytes": 3152
+    },
+    "destination_owner_pin": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+    "retained_owner_inputs": [
+      {
+        "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+        "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
+        "git_blob_sha1": "0041adab5913304874f5063fc2b982ff3cc1e065",
+        "bytes": 7151
+      },
+      {
+        "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
+        "sha256": "8384244946df1f840406aaf71438b4f0dba311dfd7eba7b421a064d63c31bf3b",
+        "git_blob_sha1": "94ff41d9a298b671749a69bd8bc7b32005ebf877",
+        "bytes": 3058
+      },
+      {
+        "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+        "sha256": "2d100ed5d5810232b90b46f55f99c907f54a195b679b58f295dd065c8f03db69",
+        "git_blob_sha1": "6b3b8a126cca230526c66adba36f53f5f9f49f5b",
+        "bytes": 2700
+      },
+      {
+        "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java",
+        "sha256": "496624f1f8612f3c39ea20c6f77fa0dc0594fa13c378b2f2a3a06143c739df1c",
+        "git_blob_sha1": "4954825bdb4b5193c59f24ec66f95d2bd3fc8658",
+        "bytes": 3073
+      },
+      {
+        "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
+        "sha256": "ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534",
+        "git_blob_sha1": "a1a745a4ea8617937d8ecbb61eb17973dac0948f",
+        "bytes": 1341
+      },
+      {
+        "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/MemJava.java",
+        "sha256": "c2a204144a4ff7fe2f4abfa151a744e7114961b83b7f006e019e595f4569e238",
+        "git_blob_sha1": "341b55a500964906d15c88ccef9f3e05f2a1c025",
+        "bytes": 4517
+      }
+    ],
+    "contracts": [
+      "Four private scalar-int leaves; 113 deterministic input pairs.",
+      "A, P, AP, PA with every intermediate and fresh quiet sweep compiled by retained MemJava.",
+      "AP and PA final sources agree; A-only and P-only outcomes remain distinct.",
+      "Explicit ascending and descending project orders both execute and preserve the final result.",
+      "Frozen and independent arithmetic oracles; exact opaque/null/string-null/Unicode observations.",
+      "Source/member preservation, isolated loader state and malformed/numeric/string negative controls."
+    ],
+    "corpus_contract": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/CORPUS_CONTRACT.md",
+      "sha256": "40cec6db1b58dd19a0eaaaaf51396202db496188b755233883ec871f909d1a84",
+      "bytes": 6920
+    },
+    "input_receipt": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/STAGING_RECEIPT.json",
+      "sha256": "19ca333464debc4e70547660374b554308fae7ade7c0e7639e6397f59b801f86",
+      "bytes": 6235
+    },
+    "verification_receipt": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/VERIFICATION_RECEIPT.json",
+      "sha256": "18fcb5f370c4df28e8f70fdfaf64afb09bbc128f1ae6c8562762f862e67fcb77",
+      "bytes": 1974
+    },
+    "maven_log": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/maven-verify.log",
+      "sha256": "673e9e8687b9bccbea5ed768a9ed97954fc208edd2a781338d80d574ad517cfc",
+      "bytes": 3020
+    },
+    "surefire_xml": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/JccReceivingFixtureTest.xml",
+      "sha256": "98164bd35fccdb340016502bb6e3caa0fa9a3a6f9760d00054c1c817b7bff279",
+      "bytes": 18766
+    },
+    "result": {
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "skipped": "0",
+      "time": "5.937"
+    },
+    "whole_module_gate": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-handoff-20261005/owning-module-frontier/REVIEW.json",
+      "sha256": "0b02d235e80404a23fc2567788449fe8882d0d5ea14480b12aa2356ec21fcd07",
+      "bytes": 4807
+    },
+    "qualification": "Finite candidate tooling proof only; capability tests[] remain empty. Final source qualification and committed read-back remain pending."
+  }
+}

@@ -1,0 +1,81 @@
+--- readback-v1/verify_publication.py
++++ verify_publication.py
+@@ -1,13 +1,10 @@
+ #!/usr/bin/env python3
+ """Verify actual GitHub readbacks against the sealed additive source payload."""
+ import base64
++import hashlib
+ import json
+ import sys
+ from pathlib import Path
+-
+-from audit_base import BASE_COMMIT, BASE_TREE, OUT, TASK, digest, exact_write, git_blob, git_tree, json_bytes, resolve
+-from prepare_publication import BRANCH, PRODUCTION_UPDATES, expected_tree
+-
+ 
+ def normalized(entries):
+     answer = []
+@@ -26,6 +23,12 @@
+ def main():
+     if not __debug__:
+         raise RuntimeError('Optimized Python disables required publication verification assertions')
++    helpers = Path(__file__).resolve().parent
++    assert hashlib.sha256((helpers / 'audit_base.py').read_bytes()).hexdigest() == '839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b'
++    assert hashlib.sha256((helpers / 'prepare_publication.py').read_bytes()).hexdigest() == '3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd'
++    from audit_base import BASE_COMMIT, BASE_TREE, OUT, TASK, digest, exact_write, git_blob, git_tree, json_bytes, resolve
++    from prepare_publication import BRANCH, PRODUCTION_UPDATES, expected_tree
++
+     preflight_path = Path(sys.argv[1]).resolve(strict=True)
+     readback_path = Path(sys.argv[2]).resolve(strict=True)
+     output = Path(sys.argv[3]).resolve()
+@@ -55,6 +58,7 @@
+     rows = preflight['files']
+     assert len(rows) == len({row['path'] for row in rows}) == len(original_rows) == len(originals)
+     assert set(originals) == {row['path'] for row in rows}
++    required_payload_bytes = {}
+     for row in rows:
+         original = originals[row['path']]
+         assert all(row[key] == original[key] for key in ('local_path', 'mode', 'bytes', 'sha256'))
+@@ -64,6 +68,9 @@
+         raw = path.read_bytes()
+         assert (len(raw), digest(raw), git_blob(raw)) == (row['bytes'], row['sha256'], row['git_blob'])
+         assert ('100755' if path.stat().st_mode & 0o111 else '100644') == row['mode']
++        if row['path'] in PRODUCTION_UPDATES or row['transport_encoding'] == 'base64':
++            prior = required_payload_bytes.setdefault(row['git_blob'], raw)
++            assert prior == raw
+     updates = {row['path']: row['sha256'] for row in rows if row['preimage']['kind'] == 'existing'}
+     assert updates == PRODUCTION_UPDATES
+     assert len(rows) == preflight['file_count']
+@@ -105,12 +112,15 @@
+         encoded = ''.join(body['content'].split())
+         raw = base64.b64decode(encoded, validate=True)
+         assert len(raw) == body['size'] and git_blob(raw) == body['sha']
++        if body['sha'] in required_payload_bytes:
++            assert raw == required_payload_bytes[body['sha']], 'Remote body differs from exact local bytes'
+         blob_results[body['sha']] = {'git_blob': body['sha'], 'bytes': len(raw), 'sha256': digest(raw)}
+     required_bodies = [row for row in rows if row['path'] in PRODUCTION_UPDATES
+                        or row['transport_encoding'] == 'base64']
+     for row in required_bodies:
+         body = blob_results[row['git_blob']]
+         assert (body['bytes'], body['sha256']) == (row['bytes'], row['sha256'])
++    assert set(required_payload_bytes) <= set(blob_results)
+ 
+     commit = readback['commit']
+     assert commit['tree']['sha'] == expected_root
+@@ -137,6 +147,8 @@
+         'preflight_path': str(preflight_path), 'preflight_sha256': digest(preflight_raw),
+         'readback_path': str(readback_path), 'readback_sha256': digest(readback_raw),
+         'verification_script_sha256': digest(Path(__file__).read_bytes()),
++        'base_audit_script_sha256': digest((helpers / 'audit_base.py').read_bytes()),
++        'publisher_script_sha256': digest(publisher.read_bytes()),
+         'payload_files': len(rows), 'payload_bytes': sum(row['bytes'] for row in rows),
+         'updates': 4, 'additions': len(rows) - 4, 'exact_restorations': 1039,
+         'changed_ancestor_paths_verified': len(expected_changes),
+@@ -145,6 +157,7 @@
+             change['unchanged_sibling_entries'] for change in expected_changes),
+         'tree_entries_verified': entries_verified,
+         'blob_body_readbacks': list(blob_results.values()),
++        'required_blob_bodies_compared_byte_for_byte': len(required_payload_bytes),
+         'branch_commit_parent_tree_pr_verified': True,
+         'commit_parent_tree_and_ref_verified': True,
+         'ref_update_forced': False,

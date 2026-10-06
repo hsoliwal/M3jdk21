@@ -1,0 +1,18 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "blob_sha": "4983044bcd9d56c87486a0cd226292b213d6f088"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "src/main/java/com/m3/tools/modulepack/M3ModuleInspector.java\t6e3599202a1afc6f1971c6a88b8c8e5d31f410c9295e87e85d5e46c779c5905e\t12c1e5cebc488f9d4669d668caf004854c436812122ec63bf1173d3ae3a57d3c\t00-inspector.java.txt\nsrc/test/java/com/m3/tools/modulepack/M3ModuleClassVersionChecks.java\tABSENT\tdaeab2f471d0df3135f3797c4df5734c4005636923c7b8eae1aaf0059d790912\t01-checks.java.txt\nsrc/test/java/com/m3/tools/modulepack/M3ModuleClassVersionTest.java\tABSENT\t7e0195b4aa23d926c2cb45508768dfd4eeff4d6565acbb9a89893a6bb4fc9794\t02-test.java.txt\n"
+    },
+    "isError": false
+  }
+}

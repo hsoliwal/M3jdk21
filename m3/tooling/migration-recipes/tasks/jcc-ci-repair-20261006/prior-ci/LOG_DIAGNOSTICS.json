@@ -1,0 +1,175 @@
+{
+  "schema": "jcc-current-ci-diagnostics/1",
+  "diagnostics": [
+    {
+      "job_id": 111917090577,
+      "run_id": 37355599835,
+      "kind": "PRODUCTION_JAVA_SYNTAX_ERROR",
+      "executed_revision": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+      "checkout_scope": "exact PR head fetched explicitly",
+      "message": "M3ScopeInference.java:[66,37] unclosed character literal",
+      "source_paths": [
+        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java"
+      ],
+      "next_action": "Compare current-master file with the failing head; if still present, repair the character literal through the existing recipe workflow and run the whole module compile.",
+      "status": "FAILURE_OBSERVED",
+      "current_master_applicability": "NOT_INSPECTED_BY_THIS_READ_ONLY_CI_TASK",
+      "job_url": "https://github.com/hsoliwal/M3jdk21/actions/runs/37355599835/job/111917090577",
+      "captured_call": "receiving-head-log-111917090577.json",
+      "decoded_log": "receiving-head-job-111917090577.log",
+      "decoded_log_sha256": "8929c5874526e6788210222d3ba1349dd9e5afd6f38ee291940e8b361eb76f70",
+      "evidence": [
+        {
+          "line": 43,
+          "text": "2026-10-05T18:24:45.9338601Z   HEAD_SHA: 0483f79ae51dd578c2e4fec1b8431bd51b59b469"
+        },
+        {
+          "line": 108,
+          "text": "2026-10-05T18:25:14.1255500Z Java version: 21, vendor: Eclipse Adoptium, runtime: /home/runner/work/_temp/jdk-21+35"
+        },
+        {
+          "line": 132,
+          "text": "2026-10-05T18:25:28.0006686Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java:[66,37] unclosed character literal"
+        },
+        {
+          "line": 142,
+          "text": "2026-10-05T18:25:28.0035436Z [ERROR] /home/runner/work/_temp/repo/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java:[66,37] unclosed character literal"
+        }
+      ]
+    },
+    {
+      "job_id": 111917089800,
+      "run_id": 37355599854,
+      "kind": "MAVEN_JDK_SELECTION",
+      "executed_revision": "7bea159254b27ecf4ac5eb6bf11a9ec94ae1911d",
+      "checkout_scope": "generated PR merge: head 0483f79 into base 752191c9291f6467110fb8a7badfbdc4c2d41af2",
+      "message": "Fatal error compiling: error: release version 21 not supported",
+      "source_paths": [
+        ".github/workflows/m3-foundation.yml"
+      ],
+      "next_action": "Check current workflow JDK selection. The captured preparation exports M3_JDK; select the admitted JDK for Maven explicitly and observe Maven's actual Java version before verification.",
+      "qualification": "The failure proves the compiler rejected release 21. The exact Java version used by Maven is not printed in this log, so no specific lower JDK version is asserted.",
+      "status": "FAILURE_OBSERVED",
+      "current_master_applicability": "NOT_INSPECTED_BY_THIS_READ_ONLY_CI_TASK",
+      "job_url": "https://github.com/hsoliwal/M3jdk21/actions/runs/37355599854/job/111917089800",
+      "captured_call": "receiving-head-log-111917089800.json",
+      "decoded_log": "receiving-head-job-111917089800.log",
+      "decoded_log_sha256": "f55cfb9add694499cd620f119b093ff792e7cb99ddf0c74022f74e58762f8b3a",
+      "evidence": [
+        {
+          "line": 90,
+          "text": "2026-10-05T18:24:46.8607452Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +7bea159254b27ecf4ac5eb6bf11a9ec94ae1911d:refs/remotes/pull/147/merge"
+        },
+        {
+          "line": 92,
+          "text": "2026-10-05T18:25:15.5235030Z  * [new ref]             7bea159254b27ecf4ac5eb6bf11a9ec94ae1911d -> pull/147/merge"
+        },
+        {
+          "line": 214,
+          "text": "2026-10-05T18:25:21.4490447Z 7bea159254b27ecf4ac5eb6bf11a9ec94ae1911d"
+        },
+        {
+          "line": 229,
+          "text": "2026-10-05T18:25:21.6195928Z \u001b[36;1mecho \"M3_JDK=$RUNNER_TEMP/jdk-21+35\" >> \"$GITHUB_ENV\"\u001b[0m"
+        },
+        {
+          "line": 271,
+          "text": "2026-10-05T18:25:27.7095625Z ##[group]Run mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify"
+        },
+        {
+          "line": 272,
+          "text": "2026-10-05T18:25:27.7096211Z \u001b[36;1mmvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify\u001b[0m"
+        },
+        {
+          "line": 301,
+          "text": "2026-10-05T18:25:41.9719444Z [ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:compile (default-compile) on project migration-recipes: Fatal error compiling: error: release version 21 not supported -> [Help 1]"
+        }
+      ]
+    },
+    {
+      "job_id": 111917089229,
+      "run_id": 37355599864,
+      "kind": "TEST_JAVA_SYNTAX_ERRORS",
+      "executed_revision": "7bea159254b27ecf4ac5eb6bf11a9ec94ae1911d",
+      "checkout_scope": "generated PR merge: head 0483f79 into base 752191c9291f6467110fb8a7badfbdc4c2d41af2",
+      "message": "M3A3RegexMemoryLabDeliveryRecipeTest.java:[97,54] and M3A3RegexMemoryWorkflowRecipeTest.java:[100,54] unclosed character literal; the next lines also report semicolon errors",
+      "source_paths": [
+        "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
+        "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java"
+      ],
+      "next_action": "Compare these exact test preimages with current master; repair the recipe-generated escaping while retaining every test case and assertion.",
+      "status": "FAILURE_OBSERVED",
+      "current_master_applicability": "NOT_INSPECTED_BY_THIS_READ_ONLY_CI_TASK",
+      "job_url": "https://github.com/hsoliwal/M3jdk21/actions/runs/37355599864/job/111917089229",
+      "captured_call": "receiving-head-log-111917089229.json",
+      "decoded_log": "receiving-head-job-111917089229.log",
+      "decoded_log_sha256": "4a0a4ed4f914ee70a8ae2721fd145a75630d66dc89efd63797ba37aac9eed6b2",
+      "evidence": [
+        {
+          "line": 92,
+          "text": "2026-10-05T18:24:47.3807057Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +7bea159254b27ecf4ac5eb6bf11a9ec94ae1911d:refs/remotes/pull/147/merge"
+        },
+        {
+          "line": 94,
+          "text": "2026-10-05T18:25:21.1015112Z  * [new ref]             7bea159254b27ecf4ac5eb6bf11a9ec94ae1911d -> pull/147/merge"
+        },
+        {
+          "line": 216,
+          "text": "2026-10-05T18:25:26.9697562Z 7bea159254b27ecf4ac5eb6bf11a9ec94ae1911d"
+        },
+        {
+          "line": 289,
+          "text": "2026-10-05T18:25:52.8938697Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[97,54] unclosed character literal"
+        },
+        {
+          "line": 291,
+          "text": "2026-10-05T18:25:52.8944681Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[100,54] unclosed character literal"
+        },
+        {
+          "line": 307,
+          "text": "2026-10-05T18:25:52.9009513Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java:[97,54] unclosed character literal"
+        },
+        {
+          "line": 309,
+          "text": "2026-10-05T18:25:52.9013538Z [ERROR] /home/runner/work/M3jdk21/M3jdk21/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java:[100,54] unclosed character literal"
+        }
+      ]
+    },
+    {
+      "job_id": 111917562555,
+      "run_id": 37355594879,
+      "kind": "PINNED_COMPILER_PACKAGE_UNAVAILABLE",
+      "executed_revision": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+      "checkout_scope": "exact PR head confirmed by git log",
+      "message": "APT cannot find gcc-10 and g++-10 version 10.4.0-4ubuntu1~22.04; install step exits 100 before Configure or Build",
+      "source_paths": [
+        ".github/workflows/main.yml"
+      ],
+      "next_action": "Inspect the current toolchain owner and declared package sources. Restore the exact admitted package source where available, or perform an explicit toolchain admission review before changing the pin.",
+      "status": "FAILURE_OBSERVED",
+      "current_master_applicability": "NOT_INSPECTED_BY_THIS_READ_ONLY_CI_TASK",
+      "job_url": "https://github.com/hsoliwal/M3jdk21/actions/runs/37355594879/job/111917562555",
+      "captured_call": "receiving-head-log-111917562555.json",
+      "decoded_log": "receiving-head-job-111917562555.log",
+      "decoded_log_sha256": "9667a7b35887f64517243d624b0a8c86336a934cdda5d33c3c4fe81f40c89927",
+      "evidence": [
+        {
+          "line": 654,
+          "text": "2026-10-05T18:26:34.6550301Z '0483f79ae51dd578c2e4fec1b8431bd51b59b469'"
+        },
+        {
+          "line": 2665,
+          "text": "2026-10-05T18:28:32.7172528Z E: Version '10.4.0-4ubuntu1~22.04' for 'gcc-10' was not found"
+        },
+        {
+          "line": 2666,
+          "text": "2026-10-05T18:28:32.7173383Z E: Version '10.4.0-4ubuntu1~22.04' for 'g++-10' was not found"
+        },
+        {
+          "line": 2667,
+          "text": "2026-10-05T18:28:32.7212538Z ##[error]Process completed with exit code 100."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,99 @@
+{
+  "schema": "synexia-hosted-ci-read-only-audit-v1",
+  "audited_at_utc": "2026-10-06T06:12:48Z",
+  "repository": "hsoliwal/com.synexia",
+  "pull_request": 9479,
+  "head_sha": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+  "tree_sha": "a72565e0e67f330f12c712dcc7a3fcbe1d80d24e",
+  "workflow_census": {
+    "total": 176,
+    "completed_failure": 169,
+    "queued": 7,
+    "success": 0,
+    "event_counts": {
+      "pull_request": 155,
+      "push": 21
+    },
+    "all_failed_workflow_suites_have_zero_check_runs": true
+  },
+  "check_suites_census": {
+    "total": 179,
+    "github_actions_completed_failure_zero_check_runs": 170,
+    "github_actions_queued": 7,
+    "other_apps_queued": 2
+  },
+  "commit_check_runs": {
+    "total": 20,
+    "queued": 20,
+    "annotations": 0
+  },
+  "representative_runs": [
+    {
+      "id": 37422112578,
+      "name": "Java 21 Serial Reactor Progress",
+      "html_url": "https://github.com/hsoliwal/com.synexia/actions/runs/37422112578",
+      "path": ".github/workflows/java21-serial-reactor-progress.yml",
+      "event": "pull_request",
+      "head_sha": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-10-06T06:08:20Z",
+      "updated_at": "2026-10-06T06:08:20Z",
+      "run_started_at": "2026-10-06T06:08:20Z",
+      "check_suite_id": 101363481472,
+      "jobs_count": 0,
+      "latest_check_runs_count": 0
+    },
+    {
+      "id": 37422112682,
+      "name": "M3 recipe-first invariant",
+      "html_url": "https://github.com/hsoliwal/com.synexia/actions/runs/37422112682",
+      "path": ".github/workflows/m3-recipe-first-invariant.yml",
+      "event": "pull_request",
+      "head_sha": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-10-06T06:08:20Z",
+      "updated_at": "2026-10-06T06:08:21Z",
+      "run_started_at": "2026-10-06T06:08:20Z",
+      "check_suite_id": 101363481748,
+      "jobs_count": 0,
+      "latest_check_runs_count": 0
+    },
+    {
+      "id": 37422112648,
+      "name": "M3 native bulk count recipe and JNI proof",
+      "html_url": "https://github.com/hsoliwal/com.synexia/actions/runs/37422112648",
+      "path": ".github/workflows/m3-native-bulk-count-recipe.yml",
+      "event": "pull_request",
+      "head_sha": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-10-06T06:08:20Z",
+      "updated_at": "2026-10-06T06:08:21Z",
+      "run_started_at": "2026-10-06T06:08:20Z",
+      "check_suite_id": 101363481662,
+      "jobs_count": 0,
+      "latest_check_runs_count": 0
+    }
+  ],
+  "java21_sample_timing": {
+    "billable": {}
+  },
+  "java21_sample_log_response_utf8_length": 0,
+  "classification": "pre-job failure observed; exact rejection reason unavailable from returned API fields",
+  "exact_cause_established": false,
+  "billing_cause_established": false,
+  "workflow_validation_cause_established": false,
+  "source_compiler_test_failure_established": false,
+  "failure_annotations_observed": false,
+  "hosted_ci_pass_established": false,
+  "limitations": [
+    "Workflow enumeration and check-suite captures are successive snapshots, not an atomic transaction. The extra failing suite is not silently added to the earlier 176-run census.",
+    "GitHub run_started_at is populated even for queued runs and does not prove runner/job execution.",
+    "Direct check-suite and check-suite/check-runs URLs were rejected by the connector as unsupported endpoints (HTTP 400). Commit-level suite enumeration succeeded but provides no diagnostic text.",
+    "All 169 enumerated failed workflows have zero associated check runs; only the three named samples had their job endpoints individually inspected.",
+    "A bounded public-web open of all three already-known run URLs returned DisabledError for each; no annotation was obtained.",
+    "No browser or authenticated-browser fallback, remote mutation, cancellation, rerun, or workflow dispatch was attempted."
+  ]
+}

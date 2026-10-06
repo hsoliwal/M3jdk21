@@ -1,0 +1,3 @@
+capability_id	manifest_path
+jep458-java	m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-jep458-multifile-java/manifest.tsv
+jep458-text	m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk22-jep458-multifile-text/manifest.tsv

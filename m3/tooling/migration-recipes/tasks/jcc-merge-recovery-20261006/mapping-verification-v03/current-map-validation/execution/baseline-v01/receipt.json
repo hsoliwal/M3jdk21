@@ -1,0 +1,30 @@
+{
+  "schema": "m3-current-map-canonical-validation/1",
+  "status": "ENVIRONMENT_BLOCKED",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/current-map-validation/fixture/m3/migration/migration.py",
+    "validate",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/current-map-validation/fixture"
+  ],
+  "exit_code": 1,
+  "commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+  "root_tree": "0812573f02908d8078d13f5f49346865cdf1c0e0",
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stderr_sha256": "d09014e2b6a11f8de64c2e14754677f59f113e4199ff60de73666af3c87cfe65",
+  "diagnostics": [
+    "Traceback (most recent call last):",
+    "  File \"/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/current-map-validation/fixture/m3/migration/migration.py\", line 19, in <module>",
+    "    from jsonschema import Draft202012Validator",
+    "ModuleNotFoundError: No module named 'jsonschema'"
+  ],
+  "fixture_manifest_sha256": "0ddd37a5c11af4d8f5cd88c0c54634d17d8447e963804f56438a23e7a2255d03",
+  "fixture_unchanged": true,
+  "receipt_writer_error": {
+    "class": "importlib.metadata.PackageNotFoundError",
+    "message": "No package metadata was found for jsonschema",
+    "scope": "Original capture preserved; post-run environment metadata probe failed, not a canonical validator result."
+  },
+  "scope": "First canonical CLI attempt did not reach map validation because this interpreter lacked jsonschema. Raw stdout/stderr and original preparation script are retained."
+}

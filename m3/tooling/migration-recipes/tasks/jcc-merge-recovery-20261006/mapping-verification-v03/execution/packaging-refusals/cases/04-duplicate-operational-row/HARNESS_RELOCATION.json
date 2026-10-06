@@ -1,0 +1,6 @@
+{
+  "field": "actual_source_binding.materialized_root",
+  "from": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/materialized",
+  "scope": "Harness-only relocation to the exact isolated actual Result copies",
+  "to": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/04-duplicate-operational-row/workspace/execution/materialized"
+}

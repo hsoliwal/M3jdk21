@@ -1,0 +1,67 @@
+{
+  "commands": [
+    {
+      "command": [
+        "bash",
+        "-n",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/retention-candidate/verification-v01/workflow-run.sh"
+      ],
+      "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/retention-candidate/verification-v01/runtime",
+      "exit_code": 0,
+      "finished": "2026-10-06T03:40:34.247121+00:00",
+      "name": "01-workflow-shell",
+      "started": "2026-10-06T03:40:34.244733+00:00",
+      "stderr_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/retention-candidate/verification-v01/01-workflow-shell.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/retention-candidate/verification-v01/01-workflow-shell.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-m",
+        "py_compile",
+        "retention.py",
+        "test_retention.py",
+        "git_graph.py"
+      ],
+      "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/retention-candidate/verification-v01/runtime",
+      "exit_code": 0,
+      "finished": "2026-10-06T03:40:34.293034+00:00",
+      "name": "02-python-syntax",
+      "started": "2026-10-06T03:40:34.247146+00:00",
+      "stderr_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/retention-candidate/verification-v01/02-python-syntax.stderr.log",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/retention-candidate/verification-v01/02-python-syntax.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "-m",
+        "unittest",
+        "-v",
+        "test_retention.py"
+      ],
+      "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/retention-candidate/verification-v01/runtime",
+      "exit_code": 0,
+      "finished": "2026-10-06T03:40:37.996480+00:00",
+      "name": "03-retention-unit-tests",
+      "started": "2026-10-06T03:40:34.293078+00:00",
+      "stderr_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/retention-candidate/verification-v01/03-retention-unit-tests.stderr.log",
+      "stderr_sha256": "9c3678b9fd8a005d21987fcb3b2a91d2f48c957f33de54aa5a863edfd4d371cd",
+      "stdout_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/retention-candidate/verification-v01/03-retention-unit-tests.stdout.log",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "finished": "2026-10-06T03:40:37.996705+00:00",
+  "inputs_unchanged": true,
+  "original_tests_preserved": 5,
+  "schema": "m3-retention-candidate-execution/1",
+  "scope": "Isolated recipe-resource copies; no Maven or repository/runtime acceptance claimed.",
+  "started": "2026-10-06T03:40:34.220109+00:00",
+  "static_review_sha256": "949a15a65e8346876721f04d884ab9c5edb9dc6f61610b24246daf214cdc0fba",
+  "status": "PASS",
+  "test_methods": 36
+}

@@ -1,0 +1,1297 @@
+{
+  "acquired_artifact_paths": 44,
+  "canonical_validator_and_schema_paths": 2,
+  "commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+  "declared_hash_comparisons": [
+    {
+      "actual_git_blob_sha1": "65f259e23d818b9b35052feff37198f5ddf567b4",
+      "actual_sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
+      "declared_git_blob_sha1": "65f259e23d818b9b35052feff37198f5ddf567b4",
+      "expected_sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
+      "path": "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java",
+      "record": "m3.prefix-z",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-tested"
+    },
+    {
+      "actual_git_blob_sha1": "9b70c3bfea7109fffab44b186d407854a5fe495d",
+      "actual_sha256": "54251ed210b9ed280919968a6ea13f0b6ed6e590fbf92090d13b4495f05f4217",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "54251ed210b9ed280919968a6ea13f0b6ed6e590fbf92090d13b4495f05f4217",
+      "path": "m3/migration/recipes/prefix-z-v1.tsv",
+      "record": "m3.prefix-z",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-tested"
+    },
+    {
+      "actual_git_blob_sha1": "3e672a11367953b810c51590d764d11d5cd62c04",
+      "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "synexia.counterpart.MIndexVmSession",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "3e672a11367953b810c51590d764d11d5cd62c04",
+      "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "synexia.counterpart.MIndexVmPrecomputeKey",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "3e672a11367953b810c51590d764d11d5cd62c04",
+      "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "synexia.counterpart.MIndexClass",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "3e672a11367953b810c51590d764d11d5cd62c04",
+      "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "synexia.counterpart.MIndexClassIndex",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "3e672a11367953b810c51590d764d11d5cd62c04",
+      "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "synexia.counterpart.MIndexClassBoundary",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "3e672a11367953b810c51590d764d11d5cd62c04",
+      "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "synexia.counterpart.MIndexMember",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "3e672a11367953b810c51590d764d11d5cd62c04",
+      "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "synexia.counterpart.MIndexMemberKind",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "3e672a11367953b810c51590d764d11d5cd62c04",
+      "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "synexia.counterpart.MIndexMemberFlags",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "3e672a11367953b810c51590d764d11d5cd62c04",
+      "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "synexia.counterpart.MIndexClassFlags",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "3e672a11367953b810c51590d764d11d5cd62c04",
+      "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "synexia.counterpart.MIndexField",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "3e672a11367953b810c51590d764d11d5cd62c04",
+      "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "synexia.counterpart.MIndexMethod",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "3e672a11367953b810c51590d764d11d5cd62c04",
+      "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "synexia.counterpart.MIndexConstructor",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "3e672a11367953b810c51590d764d11d5cd62c04",
+      "actual_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3",
+      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "record": "synexia.counterpart.MIndexRecordComponent",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "671f39310580ee466315a1340ae3e2006dc897bc",
+      "actual_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "record": "synexia.collections.SegmentedAddress28",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "671f39310580ee466315a1340ae3e2006dc897bc",
+      "actual_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "record": "synexia.collections.SegmentedIntLane28",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "671f39310580ee466315a1340ae3e2006dc897bc",
+      "actual_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "record": "synexia.collections.SegmentedLongLane28",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "671f39310580ee466315a1340ae3e2006dc897bc",
+      "actual_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "record": "synexia.collections.SegmentedBitLane28",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "671f39310580ee466315a1340ae3e2006dc897bc",
+      "actual_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883",
+      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "record": "synexia.collections.PackedBitAtoms",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "2a62a7a35e9e59cf403336c197f60d7e5915b064",
+      "actual_sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "record": "synexia.counterpart.MIndexJvmDescriptor",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "b050a6ef7e2c2ab114c7d78395ff38782125818d",
+      "actual_sha256": "30b9aee3598aa556a9de57e612a1b3e3b045586b6d7382d53dc92798177338fb",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "245e252da59d310ea7e4229e5cafa5d25e322fee82d349337b37eab8a1f161a1",
+      "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+      "record": "synexia.counterpart.MIndexRegexTrigramQuery",
+      "role": "recipe",
+      "sha256_matches_declared": false,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "2e77d4929b7b8dd3609b990774b062fc6991dc18",
+      "actual_sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
+      "path": "m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+      "record": "synexia.counterpart.MIndexVersionTable",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "2e77d4929b7b8dd3609b990774b062fc6991dc18",
+      "actual_sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c",
+      "path": "m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+      "record": "synexia.counterpart.MIndexLibraryRelease",
+      "role": "recipe",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "14cdb999f5eab5be443044bff2d273fb4e4113fb",
+      "actual_sha256": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa",
+      "declared_git_blob_sha1": "14cdb999f5eab5be443044bff2d273fb4e4113fb",
+      "expected_sha256": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Address28.java",
+      "record": "synexia.collections.SegmentedAddress28",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "5942b1f46eedf83ad8c4ef8edee91f75e7424e7a",
+      "actual_sha256": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8",
+      "declared_git_blob_sha1": "5942b1f46eedf83ad8c4ef8edee91f75e7424e7a",
+      "expected_sha256": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java",
+      "record": "synexia.collections.SegmentedBitLane28",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "2ad46058a5325483647af4af16858c329ae24665",
+      "actual_sha256": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab",
+      "declared_git_blob_sha1": "2ad46058a5325483647af4af16858c329ae24665",
+      "expected_sha256": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Bits.java",
+      "record": "synexia.collections.PackedBitAtoms",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "f10f815fc1a59a0d1ea7ed45158b89178f128a1a",
+      "actual_sha256": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java",
+      "record": "synexia.counterpart.MIndexClassBoundary",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "0be655b7020f13f3df4265f68daf189bd039d86b",
+      "actual_sha256": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3CB.java",
+      "record": "synexia.counterpart.MIndexVmSession",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "2acac4ad654a8af823fa46b483a42dd2f9c894c4",
+      "actual_sha256": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3CI.java",
+      "record": "synexia.counterpart.MIndexClassIndex",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "b95eee3c820f6054b4f70507dee101c9f456302f",
+      "actual_sha256": "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Class.java",
+      "record": "synexia.counterpart.MIndexClass",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "fc2152f63f4c404bce630b043d9138eaf96cb93e",
+      "actual_sha256": "cb7dc87b4fb4849bd145520014bcd8cd55168134cf8b482dba495219b8a2344b",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "cb7dc87b4fb4849bd145520014bcd8cd55168134cf8b482dba495219b8a2344b",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java",
+      "record": "synexia.counterpart.MIndexClassFlags",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "4d708115e139a4ab938a4f9abd856f7fc98c5c00",
+      "actual_sha256": "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java",
+      "record": "synexia.counterpart.MIndexConstructor",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "92f4d7da32a3b8265675a413311fd304c6dc2dd2",
+      "actual_sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67",
+      "declared_git_blob_sha1": "92f4d7da32a3b8265675a413311fd304c6dc2dd2",
+      "expected_sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "record": "synexia.counterpart.MIndexJvmDescriptor",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "fad031da70ce813f52e5fc06479542a224bcd81a",
+      "actual_sha256": "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Field.java",
+      "record": "synexia.counterpart.MIndexField",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "513a1e8f5d55c074250d3b2747f041c19a1128e7",
+      "actual_sha256": "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda",
+      "declared_git_blob_sha1": "513a1e8f5d55c074250d3b2747f041c19a1128e7",
+      "expected_sha256": "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java",
+      "record": "synexia.collections.SegmentedIntLane28",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "325e8e90ace21e71069665b74585c522b2c627b4",
+      "actual_sha256": "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644",
+      "declared_git_blob_sha1": "325e8e90ace21e71069665b74585c522b2c627b4",
+      "expected_sha256": "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java",
+      "record": "synexia.collections.SegmentedLongLane28",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "d5f8e07afc304379d5165c9c5c1659855938b5b0",
+      "actual_sha256": "c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Member.java",
+      "record": "synexia.counterpart.MIndexMember",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "f68a952217d3eead4ed10a43de49c240d6b790f1",
+      "actual_sha256": "f436e0fdfbe44074c3855944e005707e833ce96fa34b24cb300c3957c1cc24be",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "f436e0fdfbe44074c3855944e005707e833ce96fa34b24cb300c3957c1cc24be",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3MemberFlags.java",
+      "record": "synexia.counterpart.MIndexMemberFlags",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "d211e6bc1e72ccc8e0ff821d26b3e30361750bc9",
+      "actual_sha256": "0c24a919386302c498d94e3a4d0bfffbe96084f7c93b62e23799646b4502496b",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "0c24a919386302c498d94e3a4d0bfffbe96084f7c93b62e23799646b4502496b",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3MemberKind.java",
+      "record": "synexia.counterpart.MIndexMemberKind",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "6bc2fe9176bdd9c95d732ecad105f03b62f4385e",
+      "actual_sha256": "f7651b04fa197f47904f5258ba2150242a9801bbcbef6e19fa90ed296fef8f58",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "f7651b04fa197f47904f5258ba2150242a9801bbcbef6e19fa90ed296fef8f58",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Method.java",
+      "record": "synexia.counterpart.MIndexMethod",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "b63fd9e457f7ac16bca8bf07dcb564069fdfef79",
+      "actual_sha256": "e38403e001ea950c5e789c854f4f4e8004253a4a7545aa6e044a52112b592898",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "e38403e001ea950c5e789c854f4f4e8004253a4a7545aa6e044a52112b592898",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3PC.java",
+      "record": "synexia.counterpart.MIndexVmPrecomputeKey",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "55f82a8486055d50e24d1a9b12b0636f9db876ed",
+      "actual_sha256": "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java",
+      "record": "synexia.counterpart.MIndexRecordComponent",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "1116f4cb0ffd361e764688640adb53af8cabe86d",
+      "actual_sha256": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Release.java",
+      "record": "synexia.counterpart.MIndexLibraryRelease",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "ca23741ecd8cd24593ba5c260aa0d939c53d6766",
+      "actual_sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+      "declared_git_blob_sha1": "565173748382cb3c49c35649785c41b46288a251",
+      "expected_sha256": "6ba1883a307c0c8c4b6254c1a531e98b805c00a6cb943135a6cc13b47522b187",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+      "record": "synexia.counterpart.MIndexRegexTrigramQuery",
+      "role": "target",
+      "sha256_matches_declared": false,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "087aa55bef9b57189d03f3388fb2e1f360320b02",
+      "actual_sha256": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3VI.java",
+      "record": "synexia.counterpart.MIndexVersionTable",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "e68e05555efbe2dbf1355e6820cc7795d9c33942",
+      "actual_sha256": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f",
+      "declared_git_blob_sha1": "e68e05555efbe2dbf1355e6820cc7795d9c33942",
+      "expected_sha256": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f",
+      "path": "src/java.base/share/native/libjava/M3BitLane28.c",
+      "record": "synexia.collections.SegmentedBitLane28",
+      "role": "target",
+      "sha256_matches_declared": true,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "65f259e23d818b9b35052feff37198f5ddf567b4",
+      "actual_sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
+      "expected_sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
+      "path": "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-interpreter"
+    },
+    {
+      "actual_git_blob_sha1": "65f259e23d818b9b35052feff37198f5ddf567b4",
+      "actual_sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
+      "expected_sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
+      "path": "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-normal"
+    },
+    {
+      "actual_git_blob_sha1": "5e9a2af0dba89366459f2eb25f4a06301652dd73",
+      "actual_sha256": "caf6ae362eca1a056a9024658a68d6e3eaf289ff2b952080fe519c86f4cc8448",
+      "expected_sha256": "caf6ae362eca1a056a9024658a68d6e3eaf289ff2b952080fe519c86f4cc8448",
+      "path": "m3/algorithms/test/PrefixZContractTest.java",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-interpreter"
+    },
+    {
+      "actual_git_blob_sha1": "5e9a2af0dba89366459f2eb25f4a06301652dd73",
+      "actual_sha256": "caf6ae362eca1a056a9024658a68d6e3eaf289ff2b952080fe519c86f4cc8448",
+      "expected_sha256": "caf6ae362eca1a056a9024658a68d6e3eaf289ff2b952080fe519c86f4cc8448",
+      "path": "m3/algorithms/test/PrefixZContractTest.java",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-normal"
+    },
+    {
+      "actual_git_blob_sha1": "003d437dd482e2bc7e85eb38747a41e6940b08e5",
+      "actual_sha256": "9e72a70b33cbb9c8b9123893ff98054671c5694657b36bc4d965c14a047b19f7",
+      "expected_sha256": "9e72a70b33cbb9c8b9123893ff98054671c5694657b36bc4d965c14a047b19f7",
+      "path": "m3/algorithms/test/ViewInteropContractTest.java",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-interpreter"
+    },
+    {
+      "actual_git_blob_sha1": "003d437dd482e2bc7e85eb38747a41e6940b08e5",
+      "actual_sha256": "9e72a70b33cbb9c8b9123893ff98054671c5694657b36bc4d965c14a047b19f7",
+      "expected_sha256": "9e72a70b33cbb9c8b9123893ff98054671c5694657b36bc4d965c14a047b19f7",
+      "path": "m3/algorithms/test/ViewInteropContractTest.java",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-normal"
+    },
+    {
+      "actual_git_blob_sha1": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
+      "actual_sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
+      "expected_sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
+      "path": "m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-interpreter"
+    },
+    {
+      "actual_git_blob_sha1": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
+      "actual_sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
+      "expected_sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
+      "path": "m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-normal"
+    },
+    {
+      "actual_git_blob_sha1": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+      "actual_sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
+      "expected_sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
+      "path": "m3/core/src/com/m3/text/LocalM3Arena.java",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-interpreter"
+    },
+    {
+      "actual_git_blob_sha1": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+      "actual_sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
+      "expected_sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
+      "path": "m3/core/src/com/m3/text/LocalM3Arena.java",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-normal"
+    },
+    {
+      "actual_git_blob_sha1": "6b745c9472144ad6de01de4d06a533974e558fb1",
+      "actual_sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
+      "expected_sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
+      "path": "m3/core/src/com/m3/text/LocalM3StringPiece.java",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-interpreter"
+    },
+    {
+      "actual_git_blob_sha1": "6b745c9472144ad6de01de4d06a533974e558fb1",
+      "actual_sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
+      "expected_sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
+      "path": "m3/core/src/com/m3/text/LocalM3StringPiece.java",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-normal"
+    },
+    {
+      "actual_git_blob_sha1": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+      "actual_sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
+      "expected_sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
+      "path": "m3/core/src/com/m3/text/M3StringPiece.java",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-interpreter"
+    },
+    {
+      "actual_git_blob_sha1": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+      "actual_sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
+      "expected_sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
+      "path": "m3/core/src/com/m3/text/M3StringPiece.java",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-normal"
+    },
+    {
+      "actual_git_blob_sha1": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+      "actual_sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
+      "expected_sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
+      "path": "m3/core/src/com/m3/text/StorageIdentity.java",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-interpreter"
+    },
+    {
+      "actual_git_blob_sha1": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+      "actual_sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
+      "expected_sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
+      "path": "m3/core/src/com/m3/text/StorageIdentity.java",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-normal"
+    },
+    {
+      "actual_git_blob_sha1": "bb620416f7179f62c06f9085b1bd7d560807145d",
+      "actual_sha256": "67eee524a18f5dcbb9793a54c338504293fbc8a8f01baba714029966c02ae780",
+      "expected_sha256": "67eee524a18f5dcbb9793a54c338504293fbc8a8f01baba714029966c02ae780",
+      "path": "m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log",
+      "role": "receipt-stdout",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-interpreter"
+    },
+    {
+      "actual_git_blob_sha1": "bb620416f7179f62c06f9085b1bd7d560807145d",
+      "actual_sha256": "67eee524a18f5dcbb9793a54c338504293fbc8a8f01baba714029966c02ae780",
+      "expected_sha256": "67eee524a18f5dcbb9793a54c338504293fbc8a8f01baba714029966c02ae780",
+      "path": "m3/migration/evidence/local-20261002-final/prefix-z-normal.log",
+      "role": "receipt-stdout",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-normal"
+    },
+    {
+      "actual_git_blob_sha1": "7049bf1c72e057aa82d956469d0e72cd968686ed",
+      "actual_sha256": "579e16ad7591bf27deaf35c2178dde7b050ebfc4c631302d0d07b85d6805cfba",
+      "expected_sha256": "579e16ad7591bf27deaf35c2178dde7b050ebfc4c631302d0d07b85d6805cfba",
+      "path": "m3/migration/pinned-dependencies.json",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-interpreter"
+    },
+    {
+      "actual_git_blob_sha1": "7049bf1c72e057aa82d956469d0e72cd968686ed",
+      "actual_sha256": "579e16ad7591bf27deaf35c2178dde7b050ebfc4c631302d0d07b85d6805cfba",
+      "expected_sha256": "579e16ad7591bf27deaf35c2178dde7b050ebfc4c631302d0d07b85d6805cfba",
+      "path": "m3/migration/pinned-dependencies.json",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-normal"
+    },
+    {
+      "actual_git_blob_sha1": "6c5a48faed8affdef5c3cbb39e349fa4154187a7",
+      "actual_sha256": "98dceb71a2a83e431d2417a613a23f825967718ae4a540585ab860e8ee2f33a9",
+      "expected_sha256": "98dceb71a2a83e431d2417a613a23f825967718ae4a540585ab860e8ee2f33a9",
+      "path": "m3/migration/run-tests.py",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-interpreter"
+    },
+    {
+      "actual_git_blob_sha1": "6c5a48faed8affdef5c3cbb39e349fa4154187a7",
+      "actual_sha256": "98dceb71a2a83e431d2417a613a23f825967718ae4a540585ab860e8ee2f33a9",
+      "expected_sha256": "98dceb71a2a83e431d2417a613a23f825967718ae4a540585ab860e8ee2f33a9",
+      "path": "m3/migration/run-tests.py",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-normal"
+    },
+    {
+      "actual_git_blob_sha1": "918f41259c0c623bb88287c44c817070a58fd9fe",
+      "actual_sha256": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90",
+      "expected_sha256": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90",
+      "path": "m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-interpreter"
+    },
+    {
+      "actual_git_blob_sha1": "918f41259c0c623bb88287c44c817070a58fd9fe",
+      "actual_sha256": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90",
+      "expected_sha256": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90",
+      "path": "m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-normal"
+    },
+    {
+      "actual_git_blob_sha1": "77644bc9defdf65793dc3049ed0e6658acb6463a",
+      "actual_sha256": "bc6d57072811b232b774a835615c8ede038b5cbbb19a4f8d48badae25214ceea",
+      "expected_sha256": "bc6d57072811b232b774a835615c8ede038b5cbbb19a4f8d48badae25214ceea",
+      "path": "m3/migration/test/RecipeContractTest.java",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-interpreter"
+    },
+    {
+      "actual_git_blob_sha1": "77644bc9defdf65793dc3049ed0e6658acb6463a",
+      "actual_sha256": "bc6d57072811b232b774a835615c8ede038b5cbbb19a4f8d48badae25214ceea",
+      "expected_sha256": "bc6d57072811b232b774a835615c8ede038b5cbbb19a4f8d48badae25214ceea",
+      "path": "m3/migration/test/RecipeContractTest.java",
+      "role": "receipt-input",
+      "sha256_matches_declared": true,
+      "test_id": "prefix-z-normal"
+    }
+  ],
+  "declared_hash_mismatches": [
+    {
+      "actual_git_blob_sha1": "b050a6ef7e2c2ab114c7d78395ff38782125818d",
+      "actual_sha256": "30b9aee3598aa556a9de57e612a1b3e3b045586b6d7382d53dc92798177338fb",
+      "declared_git_blob_sha1": null,
+      "expected_sha256": "245e252da59d310ea7e4229e5cafa5d25e322fee82d349337b37eab8a1f161a1",
+      "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+      "record": "synexia.counterpart.MIndexRegexTrigramQuery",
+      "role": "recipe",
+      "sha256_matches_declared": false,
+      "status": "implemented-unverified"
+    },
+    {
+      "actual_git_blob_sha1": "ca23741ecd8cd24593ba5c260aa0d939c53d6766",
+      "actual_sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+      "declared_git_blob_sha1": "565173748382cb3c49c35649785c41b46288a251",
+      "expected_sha256": "6ba1883a307c0c8c4b6254c1a531e98b805c00a6cb943135a6cc13b47522b187",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+      "record": "synexia.counterpart.MIndexRegexTrigramQuery",
+      "role": "target",
+      "sha256_matches_declared": false,
+      "status": "implemented-unverified"
+    }
+  ],
+  "fixture_files": 50,
+  "frozen_current_mapping_images": 4,
+  "frozen_inputs": [
+    {
+      "bytes": 17031,
+      "git_blob_sha1": "f7991e22d16e01c9d9626add7d6894a1404dc19c",
+      "membership": "Frozen epoch body matches fully reconstructed immutable m3 tree",
+      "path": "m3/docs/jcc-source-handoff.md",
+      "sha256": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/input-epoch/current/m3/docs/jcc-source-handoff.md"
+    },
+    {
+      "bytes": 279411,
+      "git_blob_sha1": "ca7cd9e9ffcad9c73d8eaf6a5eec81142b009b89",
+      "membership": "Frozen epoch body matches fully reconstructed immutable m3 tree",
+      "path": "m3/docs/name-mapping.json",
+      "sha256": "22ce39ac68e6f5efab18e9bbf6d3da45af585067d88848f1eb7ce8a76987df87",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/input-epoch/current/m3/docs/name-mapping.json"
+    },
+    {
+      "bytes": 107504,
+      "git_blob_sha1": "5ed0454b97e046042a6ffce38f29a06776016378",
+      "membership": "Frozen epoch body matches fully reconstructed immutable m3 tree",
+      "path": "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+      "sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/input-epoch/current/m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv"
+    },
+    {
+      "bytes": 24139,
+      "git_blob_sha1": "375a65a82dd39b5fa278e52472f3a99bdd5c9fdf",
+      "membership": "Frozen epoch body matches fully reconstructed immutable m3 tree",
+      "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+      "sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/input-epoch/current/m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json"
+    },
+    {
+      "bytes": 16827,
+      "git_blob_sha1": "40f032174baa2f1c19e3b02686723bc37f37122c",
+      "membership": "Frozen epoch body matches fully reconstructed immutable m3 tree",
+      "path": "m3/docs/name-mapping.schema.json",
+      "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/input-epoch/guards/m3/docs/name-mapping.schema.json"
+    },
+    {
+      "bytes": 23333,
+      "git_blob_sha1": "d976f4a5d7f8983ade85d5d2cf608e3f6b2885d7",
+      "membership": "Frozen epoch body matches fully reconstructed immutable m3 tree",
+      "path": "m3/migration/migration.py",
+      "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+      "source": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/input-epoch/guards/m3/migration/migration.py"
+    }
+  ],
+  "input_epoch_sha256": "fb413e58be72aaffa1e91149479ac159c6d4b961101eed4ab10f1c99df0b6711",
+  "readbacks": [
+    {
+      "bytes": 7818,
+      "capture": "calls/closure-000.json",
+      "capture_sha256": "4926f99924faec30d1dedfd0be2cb0e9ae993f25ce75b82818878c1c79f84abc",
+      "git_blob_sha1": "5e9a2af0dba89366459f2eb25f4a06301652dd73",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/algorithms/test/PrefixZContractTest.java",
+      "sha256": "caf6ae362eca1a056a9024658a68d6e3eaf289ff2b952080fe519c86f4cc8448"
+    },
+    {
+      "bytes": 3808,
+      "capture": "calls/closure-001.json",
+      "capture_sha256": "a3b789c9e86e6587fb6c715218f6b3d1c4de7670a0155e47cc5a96bf1baba56d",
+      "git_blob_sha1": "003d437dd482e2bc7e85eb38747a41e6940b08e5",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/algorithms/test/ViewInteropContractTest.java",
+      "sha256": "9e72a70b33cbb9c8b9123893ff98054671c5694657b36bc4d965c14a047b19f7"
+    },
+    {
+      "bytes": 2634,
+      "capture": "calls/closure-002.json",
+      "capture_sha256": "11df3ccc269f4bdbd75f898c258f4a203942e5db3b959535ca6eeff89f980a0c",
+      "git_blob_sha1": "cc3c84f5ea0230e2f57e3d3ae0f5d29b9241e597",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+      "sha256": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb"
+    },
+    {
+      "bytes": 1975,
+      "capture": "calls/closure-003.json",
+      "capture_sha256": "0646aedd7ca4f0d3fdd1b69fc948a23d47e492c2c24925f08584478b7ad11934",
+      "git_blob_sha1": "d82710cd1a49b54d92afcd74cdd903cd009766ba",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/core/src/com/m3/text/LocalM3Arena.java",
+      "sha256": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d"
+    },
+    {
+      "bytes": 2115,
+      "capture": "calls/closure-004.json",
+      "capture_sha256": "56a613badd0cb6a832b62b1767757041749835a8c7e46eb70a86b9dbe45b25ee",
+      "git_blob_sha1": "6b745c9472144ad6de01de4d06a533974e558fb1",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/core/src/com/m3/text/LocalM3StringPiece.java",
+      "sha256": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51"
+    },
+    {
+      "bytes": 767,
+      "capture": "calls/closure-005.json",
+      "capture_sha256": "1cd1b3c218cb66d9c15163e477d468737402072003a0678ad70ff82f8a193250",
+      "git_blob_sha1": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/core/src/com/m3/text/M3StringPiece.java",
+      "sha256": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479"
+    },
+    {
+      "bytes": 494,
+      "capture": "calls/closure-006.json",
+      "capture_sha256": "d8ac6b4e91b868a291c61235c599aa52f5f43f86307450cd7be2da1015f8fde7",
+      "git_blob_sha1": "7f0a0bb63d38a0a6efbe08f37249dd3e258eb35a",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/core/src/com/m3/text/StorageIdentity.java",
+      "sha256": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417"
+    },
+    {
+      "bytes": 57,
+      "capture": "calls/closure-007.json",
+      "capture_sha256": "f36b4dd13966f9ef498109095f4f93196c0bdc5026ad8cced92cd767bf3254ad",
+      "git_blob_sha1": "bb620416f7179f62c06f9085b1bd7d560807145d",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log",
+      "sha256": "67eee524a18f5dcbb9793a54c338504293fbc8a8f01baba714029966c02ae780"
+    },
+    {
+      "bytes": 57,
+      "capture": "calls/closure-008.json",
+      "capture_sha256": "16ca7c46377a86a517bf2bc958443f94232d5e45b8c8689984c82d2670f13cb7",
+      "git_blob_sha1": "bb620416f7179f62c06f9085b1bd7d560807145d",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/migration/evidence/local-20261002-final/prefix-z-normal.log",
+      "sha256": "67eee524a18f5dcbb9793a54c338504293fbc8a8f01baba714029966c02ae780"
+    },
+    {
+      "bytes": 1748,
+      "capture": "calls/closure-009.json",
+      "capture_sha256": "90638a410942a3f31f0474a9796180f8c57dbd6095a48264fb2ccdd4b12b85c5",
+      "git_blob_sha1": "7049bf1c72e057aa82d956469d0e72cd968686ed",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/migration/pinned-dependencies.json",
+      "sha256": "579e16ad7591bf27deaf35c2178dde7b050ebfc4c631302d0d07b85d6805cfba"
+    },
+    {
+      "bytes": 5265,
+      "capture": "calls/closure-010.json",
+      "capture_sha256": "c4e849f2a9b9bd437be3a9d9229aba254222361454541cefb94c09155e423ac1",
+      "git_blob_sha1": "6c5a48faed8affdef5c3cbb39e349fa4154187a7",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/migration/run-tests.py",
+      "sha256": "98dceb71a2a83e431d2417a613a23f825967718ae4a540585ab860e8ee2f33a9"
+    },
+    {
+      "bytes": 15906,
+      "capture": "calls/closure-011.json",
+      "capture_sha256": "dc218c5e0b773f87df39217425ecc6b8179483f75bd2f221210e6c424346762d",
+      "git_blob_sha1": "918f41259c0c623bb88287c44c817070a58fd9fe",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+      "sha256": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90"
+    },
+    {
+      "bytes": 10089,
+      "capture": "calls/closure-012.json",
+      "capture_sha256": "53ff5b87663dd58c50d563352ce7d374de0306f98edcb87290d44341d6b5712e",
+      "git_blob_sha1": "77644bc9defdf65793dc3049ed0e6658acb6463a",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/migration/test/RecipeContractTest.java",
+      "sha256": "bc6d57072811b232b774a835615c8ede038b5cbbb19a4f8d48badae25214ceea"
+    },
+    {
+      "bytes": 15056,
+      "capture": "calls/receipt-readback.json",
+      "capture_sha256": "95e2ec5f437ee1d48e100263ef101952de0896d7a81a16375efc96dff270b08a",
+      "git_blob_sha1": "45838490350429dd4c62f723ed4133a1111b81f9",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/migration/evidence/local-20261002-final/receipt.json",
+      "sha256": "2a639e4937a414f98fd6f859562f8c392e54e94a39f02427daa7df6e336f82f6"
+    },
+    {
+      "bytes": 5081,
+      "capture": "calls/required-000.json",
+      "capture_sha256": "ddbb0dcd11d903e2eb17954eebed315e6d6de9c36762e368b6490e3b39076262",
+      "git_blob_sha1": "65f259e23d818b9b35052feff37198f5ddf567b4",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java",
+      "sha256": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a"
+    },
+    {
+      "bytes": 1028,
+      "capture": "calls/required-001.json",
+      "capture_sha256": "532bd14410d1f1fba4714fdc60e44761dc6713b563c2c268880f3ac4cc08c751",
+      "git_blob_sha1": "9b70c3bfea7109fffab44b186d407854a5fe495d",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/migration/recipes/prefix-z-v1.tsv",
+      "sha256": "54251ed210b9ed280919968a6ea13f0b6ed6e590fbf92090d13b4495f05f4217"
+    },
+    {
+      "bytes": 2451,
+      "capture": "calls/required-002.json",
+      "capture_sha256": "c24aca218cec9f44ca47884eae00f83a635d2a41b265b98d3139963bfb698469",
+      "git_blob_sha1": "3e672a11367953b810c51590d764d11d5cd62c04",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/tooling/cb/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-cb/manifest.tsv",
+      "sha256": "df2d1847fc9ad2679e574c92232bf1cf7da0ad2c61bda65c0ce124822c595ab3"
+    },
+    {
+      "bytes": 1242,
+      "capture": "calls/required-003.json",
+      "capture_sha256": "0631d877ff19a8be10c8004b0350f399a6d8a7073be7c11c40825adc5cef29f8",
+      "git_blob_sha1": "671f39310580ee466315a1340ae3e2006dc897bc",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-lane28/manifest.tsv",
+      "sha256": "60316f3f68fe0b48da1cda3db3933cf4c8662514780747d6962780a09754f883"
+    },
+    {
+      "bytes": 396,
+      "capture": "calls/required-004.json",
+      "capture_sha256": "0e6caf3b4cfa2a9ff94284bf9180efe088e2e91fc9a1c43a107ee81df0484b8c",
+      "git_blob_sha1": "2a62a7a35e9e59cf403336c197f60d7e5915b064",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1"
+    },
+    {
+      "bytes": 303,
+      "capture": "calls/required-005.json",
+      "capture_sha256": "c9e9fd1c6840f1e9fd96876e00d96ce0fa91627c3cbed477b2eddac8bea0df3e",
+      "git_blob_sha1": "b050a6ef7e2c2ab114c7d78395ff38782125818d",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+      "sha256": "30b9aee3598aa556a9de57e612a1b3e3b045586b6d7382d53dc92798177338fb"
+    },
+    {
+      "bytes": 453,
+      "capture": "calls/required-006.json",
+      "capture_sha256": "a2220f897f23221f9620022facc9bdedcd61718ce7a21745d835483080889429",
+      "git_blob_sha1": "2e77d4929b7b8dd3609b990774b062fc6991dc18",
+      "membership": "GitHub contents response at the exact immutable commit/path; independently reconstructed m3 tree connected to current root",
+      "mode_from_tree": "100644",
+      "path": "m3/tooling/vi/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-vi/manifest.tsv",
+      "sha256": "c47151b5df79d6d2711e6de748bff3fb08e2c01af5e9c6ac0b4b3b91ac97425c"
+    },
+    {
+      "bytes": 2596,
+      "capture": "calls/required-007.json",
+      "capture_sha256": "cb749de545606be7278f5d809c40dd58a64d196c2985d2f1f8daab0d8584ce7b",
+      "git_blob_sha1": "14cdb999f5eab5be443044bff2d273fb4e4113fb",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Address28.java",
+      "sha256": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa"
+    },
+    {
+      "bytes": 10427,
+      "capture": "calls/required-008.json",
+      "capture_sha256": "ea49c3d5ac146b672a1acd9fdeab9629620a0a0a8ce5851970bae635751746a8",
+      "git_blob_sha1": "5942b1f46eedf83ad8c4ef8edee91f75e7424e7a",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java",
+      "sha256": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8"
+    },
+    {
+      "bytes": 551,
+      "capture": "calls/required-009.json",
+      "capture_sha256": "d20b55047f1c3b82ebf277ff99cbba0a2d4058ac05964e829dc71ede6a213df4",
+      "git_blob_sha1": "2ad46058a5325483647af4af16858c329ae24665",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Bits.java",
+      "sha256": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab"
+    },
+    {
+      "bytes": 4114,
+      "capture": "calls/required-010.json",
+      "capture_sha256": "cacb07d213939489e5f3e40d62e45e3f46336eb41d9d52578239f1a55e066724",
+      "git_blob_sha1": "f10f815fc1a59a0d1ea7ed45158b89178f128a1a",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java",
+      "sha256": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a"
+    },
+    {
+      "bytes": 7771,
+      "capture": "calls/required-011.json",
+      "capture_sha256": "3558f9be7cba80981e041c2b06b6ff7cffa952ebbcbdbe0d7ee0a6647b8ccd2d",
+      "git_blob_sha1": "0be655b7020f13f3df4265f68daf189bd039d86b",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3CB.java",
+      "sha256": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36"
+    },
+    {
+      "bytes": 61135,
+      "capture": "calls/required-012.json",
+      "capture_sha256": "8b47e2a2a0cf74a62b237790af9beedf6337413c4e9f36b2944e95bfb8381b9d",
+      "git_blob_sha1": "2acac4ad654a8af823fa46b483a42dd2f9c894c4",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3CI.java",
+      "sha256": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1"
+    },
+    {
+      "bytes": 16841,
+      "capture": "calls/required-013.json",
+      "capture_sha256": "e1164a14025ed5f354420ea5ce37e6803d762c3d6be5099f7f779e3d007981e4",
+      "git_blob_sha1": "b95eee3c820f6054b4f70507dee101c9f456302f",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Class.java",
+      "sha256": "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472"
+    },
+    {
+      "bytes": 1592,
+      "capture": "calls/required-014.json",
+      "capture_sha256": "3a33ad69483882bf04eab5a30051a9e16955ca0a6b32bb4bd3bf7337f4134cd5",
+      "git_blob_sha1": "fc2152f63f4c404bce630b043d9138eaf96cb93e",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java",
+      "sha256": "cb7dc87b4fb4849bd145520014bcd8cd55168134cf8b482dba495219b8a2344b"
+    },
+    {
+      "bytes": 2329,
+      "capture": "calls/required-015.json",
+      "capture_sha256": "e818f1f84fe590eb83ebeacdc44067418cf0653ba2fe61c487dd28eb3cc92689",
+      "git_blob_sha1": "4d708115e139a4ab938a4f9abd856f7fc98c5c00",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java",
+      "sha256": "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923"
+    },
+    {
+      "bytes": 1815,
+      "capture": "calls/required-016.json",
+      "capture_sha256": "0369a2bf4d1f2daa2e7729075028ccc8116f7a2d82830ab15e7375b626179aa5",
+      "git_blob_sha1": "92f4d7da32a3b8265675a413311fd304c6dc2dd2",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"
+    },
+    {
+      "bytes": 2041,
+      "capture": "calls/required-017.json",
+      "capture_sha256": "6b373d56e5a483aa5858eda4300976ca9a6a4a775389202d2d577eb8f272af61",
+      "git_blob_sha1": "fad031da70ce813f52e5fc06479542a224bcd81a",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Field.java",
+      "sha256": "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481"
+    },
+    {
+      "bytes": 7842,
+      "capture": "calls/required-018.json",
+      "capture_sha256": "203c75eccdf116eff7c33d6734752a4a3fd4743e17d5c0ffa931637bff0da737",
+      "git_blob_sha1": "513a1e8f5d55c074250d3b2747f041c19a1128e7",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java",
+      "sha256": "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda"
+    },
+    {
+      "bytes": 8134,
+      "capture": "calls/required-019.json",
+      "capture_sha256": "2c50170206762133d10aa462bc04cedc1109b7b96016f056c0a9c1a31ed73fde",
+      "git_blob_sha1": "325e8e90ace21e71069665b74585c522b2c627b4",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java",
+      "sha256": "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644"
+    },
+    {
+      "bytes": 2493,
+      "capture": "calls/required-020.json",
+      "capture_sha256": "f3d0472e18889b1c1fa0b1ce0830828e85978ea9f7b62771274a9f651fff107f",
+      "git_blob_sha1": "d5f8e07afc304379d5165c9c5c1659855938b5b0",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Member.java",
+      "sha256": "c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1"
+    },
+    {
+      "bytes": 1722,
+      "capture": "calls/required-021.json",
+      "capture_sha256": "3f86212ac9f1fbd3d43b817e888d6b74a3ce95fa81236875b81ce41e7863abb5",
+      "git_blob_sha1": "f68a952217d3eead4ed10a43de49c240d6b790f1",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3MemberFlags.java",
+      "sha256": "f436e0fdfbe44074c3855944e005707e833ce96fa34b24cb300c3957c1cc24be"
+    },
+    {
+      "bytes": 718,
+      "capture": "calls/required-022.json",
+      "capture_sha256": "c2b8d2908bee926ca09b6b207b8e7dcbe7f9484ee28ac4fa034c2b368a974aa8",
+      "git_blob_sha1": "d211e6bc1e72ccc8e0ff821d26b3e30361750bc9",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3MemberKind.java",
+      "sha256": "0c24a919386302c498d94e3a4d0bfffbe96084f7c93b62e23799646b4502496b"
+    },
+    {
+      "bytes": 2478,
+      "capture": "calls/required-023.json",
+      "capture_sha256": "9e0821f3b54dd578ddcc740490ebb2456db9402576b1add9bda6c25a4dcfcc22",
+      "git_blob_sha1": "6bc2fe9176bdd9c95d732ecad105f03b62f4385e",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Method.java",
+      "sha256": "f7651b04fa197f47904f5258ba2150242a9801bbcbef6e19fa90ed296fef8f58"
+    },
+    {
+      "bytes": 1686,
+      "capture": "calls/required-024.json",
+      "capture_sha256": "807dca9b9af6e49bccbea73a17d8e209822e7cf6898b691717834552d33061a0",
+      "git_blob_sha1": "b63fd9e457f7ac16bca8bf07dcb564069fdfef79",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3PC.java",
+      "sha256": "e38403e001ea950c5e789c854f4f4e8004253a4a7545aa6e044a52112b592898"
+    },
+    {
+      "bytes": 1916,
+      "capture": "calls/required-025.json",
+      "capture_sha256": "1dea20050d7b7ba27ca5465438df6d58b7d3b5c62d60892d9386369b9a0b460d",
+      "git_blob_sha1": "55f82a8486055d50e24d1a9b12b0636f9db876ed",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java",
+      "sha256": "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd"
+    },
+    {
+      "bytes": 1593,
+      "capture": "calls/required-026.json",
+      "capture_sha256": "632b62520b674a20c7b755180274a1b973dfddc42a935f33fc2d1662ef08816f",
+      "git_blob_sha1": "1116f4cb0ffd361e764688640adb53af8cabe86d",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Release.java",
+      "sha256": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb"
+    },
+    {
+      "bytes": 16998,
+      "capture": "calls/required-027.json",
+      "capture_sha256": "b44839f1f0f798c9b71b81b420355e8aa37fc179edab70999e602513135bb7e5",
+      "git_blob_sha1": "ca23741ecd8cd24593ba5c260aa0d939c53d6766",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+      "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155"
+    },
+    {
+      "bytes": 6165,
+      "capture": "calls/required-028.json",
+      "capture_sha256": "de12333912c47a9cd014ff1d604019bef206df67ccdd4c2336ae4c2c1c062e82",
+      "git_blob_sha1": "087aa55bef9b57189d03f3388fb2e1f360320b02",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3VI.java",
+      "sha256": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a"
+    },
+    {
+      "bytes": 3494,
+      "capture": "calls/required-029.json",
+      "capture_sha256": "338d039fe4801ca7318b21e2c4997a30cba0a0bdc8d6ec9896c5886a4e37f0d8",
+      "git_blob_sha1": "e68e05555efbe2dbf1355e6820cc7795d9c33942",
+      "membership": "GitHub contents response at the exact immutable commit/path",
+      "mode_from_tree": null,
+      "path": "src/java.base/share/native/libjava/M3BitLane28.c",
+      "sha256": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f"
+    }
+  ],
+  "repository": "hsoliwal/M3jdk21",
+  "root_readback_files": [
+    {
+      "path": "root-evidence/M3_FOLLOWUP_CURRENT_COMMIT.json",
+      "sha256": "1e12d4efb4a05cfe032afa0048e6f0e6696209de6372138c41795df9f9da23ce"
+    },
+    {
+      "path": "root-evidence/M3_FOLLOWUP_CURRENT_ROOT.json",
+      "sha256": "0f9600af165510d0dab1f90e20d3fb791e85b6a2f841770cb68c55cc0dae5479"
+    },
+    {
+      "path": "root-evidence/M3_FOLLOWUP_CURRENT_M3.json",
+      "sha256": "726c5ef1c24267065d717dfe209aa43ae64a647c35ab2092c59b372853eb70c8"
+    }
+  ],
+  "root_tree": "0812573f02908d8078d13f5f49346865cdf1c0e0",
+  "schema": "m3-current-map-validator-acquisition/1",
+  "scope": "Exact immutable bytes acquired for canonical validation only. Mismatched mapping/receipt claims were not repaired. No historical commands executed.",
+  "status": "EXACT_CURRENT_BODIES_VERIFIED",
+  "verified_m3_tree_objects": 589
+}
