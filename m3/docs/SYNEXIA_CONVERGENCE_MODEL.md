@@ -78,3 +78,25 @@ the Synexia recipe/mastery corpus first, then export new exact outputs to every 
 
 Missing/unknown license classification fails closed. This policy complements, and does not replace,
 the existing source hash, target preimage, scope, compiler/test and runtime gates.
+
+
+## Canonical recipe custody mirror fence
+
+Reusable Maven/OpenRewrite implementations are canonically owned in `hsoliwal/com.synexia`.
+M3JDK21 may keep a local compatibility mirror when build independence requires it, but that mirror
+is not authoritative and may not evolve independently.
+
+The first sealed family is the pure-int FILE convergence set. Its canonical Synexia ownership is
+published through Synexia PR #9503. The target package remains `com.m3.rewrite.atom` for current
+M3JDK21 compatibility; the canonical source package is `com.synexia.rewrite.atom`.
+
+`m3/compatibility/synexia-recipe-mirrors.tsv` binds the exact Synexia revision/blob and exact
+target mirror blob for every mirrored owner. `check_synexia_recipe_mirrors.py` recomputes the Git
+blob identity of the checked-out target source and fails on drift.
+
+A reusable correction discovered in this target must first update the Synexia canonical recipe and
+its mastery/regression corpus, then be exported back to M3JDK21. Target-only product/runtime
+adapters, fixtures and proof harnesses remain target-owned.
+
+This mirror fence never changes licensing: eligible Synexia-owned Apache-2.0 recipe source retains
+Apache-2.0 provenance; OpenJDK product source and third-party donors retain their own licenses.
