@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.jdk21.Jep510Kdf
+displayName: Prepare final JEP 510 KDF for M3JDK21
+description: Hash-pinned final KDF/HKDF API and Java-21 receiver integrations; product application remains security-gated.
+recipeList:
+  - com.m3.rewrite.backport.M3Jep510KdfBackportRecipe

@@ -77,6 +77,9 @@ public final class M3RecipeScopeRegistry {
                     "com.m3.rewrite.backport.M3Jep485StreamGatherersBackportRecipe",
                     explicitChange()),
             Map.entry(
+                    "com.m3.rewrite.backport.M3Jep510KdfBackportRecipe",
+                    explicitChange()),
+            Map.entry(
                     "com.m3.rewrite.backport.M3ReleaseJepAuthorityRepairRecipe",
                     fixed(M3EditScope.MULTI_MODULE)),
             Map.entry(
