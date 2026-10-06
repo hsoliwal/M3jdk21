@@ -164,6 +164,19 @@
       "donor_lineage": [
         "f2f15f1aaa147cf1af556b0c148954178f971de6"
       ]
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexStringSearchIndex",
+      "target": "java.lang.M3StringSourcePrecompute",
+      "status": "internal-only bounded repeated-source search adaptation",
+      "source_role": "Synexia donor/reference per-source character postings and rolling String-compatible region hashes",
+      "target_rule": "weakly key exact M3 owner+coordinate; admit only after repeated source use; retain primitive postings/hash metadata only; dense cases fall back; hashes are candidate filters only and every positive is exact UTF-16 verified",
+      "donor_lineage": [
+        "523309e77c6abb5ea2274093fde0cf06e25f56e7",
+        "ade5564650d24d427d43daa9ed89b713ec91a2f5",
+        "67c56edcbe6780d468fd4cc1316ac9135fdaf73e",
+        "6b21032aaee902122d3dfeb027b270acc23de67b"
+      ]
     }
   ],
   "imported_donor_sources": [],
