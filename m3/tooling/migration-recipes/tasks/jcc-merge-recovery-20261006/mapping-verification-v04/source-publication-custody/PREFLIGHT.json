@@ -1,0 +1,50 @@
+{
+  "schema": "jcc-actual-source-packet-preflight/1",
+  "status": "PASSED_ACTUAL_INPUT_AND_FOUR_AUTHORING_OUTPUTS",
+  "source_input": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/final-source-packet-v01/source-publication-input.json",
+    "bytes": 1156752,
+    "sha256": "b6753688fcacb6f1255c607072ea10823c29f8c574f049dc96cee8c5a7ad5613"
+  },
+  "publication_receipt": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/final-source-packet-v01/SOURCE_PUBLICATION_RECEIPT.json",
+    "bytes": 12850,
+    "sha256": "a6250754c30fc2b3d901eb668217b0dad4c09847bbdc559f66ab715c135c5884"
+  },
+  "binder": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/bind_mapping.py",
+    "bytes": 31555,
+    "sha256": "a0d3c129789ae96f014513d6671da7cb9b3e0c1f8b3e011d8a951b4591ebc432"
+  },
+  "validated_owner_count": 20,
+  "validated_build_component_count": 1,
+  "composed_authoring_outputs": [
+    {
+      "path": "m3/docs/name-mapping.json",
+      "bytes": 328312,
+      "sha256": "cd154a05fc8f5d40234e35cd30fc0dd7ced0e483bc7e416479758125b159e077",
+      "git_blob_sha1": "3dfd81017130ba33df9b8a73f630d148932b7a39"
+    },
+    {
+      "path": "m3/docs/jcc-source-handoff.md",
+      "bytes": 18828,
+      "sha256": "261be30cb15a192623c861087985b84c50942c4f8dc61dcc4e1154f995866150",
+      "git_blob_sha1": "f700b1f33588b59dc5479e2454ea350bc6b61498"
+    },
+    {
+      "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+      "bytes": 255461,
+      "sha256": "e2535210d308ffc06b9c54243f31b5bcc55ba8797cf59584eb9cc929b012c7d7",
+      "git_blob_sha1": "5977a3a9d3dfa25d50c286f26589a076a8ba1967"
+    },
+    {
+      "path": "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+      "bytes": 108212,
+      "sha256": "0cba435844da64936b50f039ebe12ffaa56fa39a3f86f20206c6d0874e61050c",
+      "git_blob_sha1": "10ba51ea38869ca61d23cbf99ee980d4ace8b732"
+    }
+  ],
+  "limits": [
+    "compose verifies receiver authoring; actual receiver recipe materialization and replay belong to the receiving executor and are not claimed here."
+  ]
+}

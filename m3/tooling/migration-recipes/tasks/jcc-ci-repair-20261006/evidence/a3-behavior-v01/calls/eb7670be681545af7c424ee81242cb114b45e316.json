@@ -1,0 +1,18 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "blob_sha": "eb7670be681545af7c424ee81242cb114b45e316"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "# SPDX-License-Identifier: Apache-2.0\n---\ntype: specs.openrewrite.org/v1beta/recipe\nname: com.m3.a3.RegexMemoryLabDelivery\ndisplayName: Install A3 in-memory regex mastery extension\ndescription: >-\n  Source-sealed installation of the in-memory Java 21 compiler, precompiled regex/string matrix,\n  and A3Lab receipt integration. Candidate-only; no JDK product source or promotion authority.\nrecipeList:\n  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:\n      crateName: a3-regex-memory-lab\n"
+    },
+    "isError": false
+  }
+}

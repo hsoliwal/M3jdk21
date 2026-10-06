@@ -1,0 +1,26 @@
+{
+  "state": "DERIVED_FROM_ACTUAL_PUBLICATION_PENDING_INDEPENDENT_REVIEW",
+  "source_commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+  "source_root_tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
+  "designated_sources": 19,
+  "designated_changed_bodies": 4,
+  "proofs": 55,
+  "root_entries": 343,
+  "root_pom_declarations": 201,
+  "files": [
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/source-binding-v3/SOURCE_FIELDS_AND_PROOFS.json",
+      "bytes": 419637,
+      "sha256": "7b5e197da5e2645efb87345e2abf92dcd8071993ff308c8fa0bca0511d00c52e",
+      "git_blob_sha1": "97e1e5438249e64577f9b9c17dd391678b65d712"
+    },
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/source-binding-v3/ROOT_ACCOUNTING.json",
+      "bytes": 70709,
+      "sha256": "55610f52b7b1e01ee15999969cc385616ff2e43f734e589ff61c750c5ab3c845",
+      "git_blob_sha1": "ad19c72cb925afa662e93898df2cc8a2839a7a67"
+    }
+  ],
+  "source_export_admitted": false,
+  "receiving_recipe_execution": false
+}

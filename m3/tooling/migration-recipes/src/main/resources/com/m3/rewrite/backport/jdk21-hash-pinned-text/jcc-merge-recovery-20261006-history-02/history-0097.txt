@@ -1,0 +1,37 @@
+{
+  "schema": "independent-static-delta-review-inputs/v1",
+  "count": 6,
+  "stable": true,
+  "files": [
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/draft-T01/verify_publication_v3.py",
+      "bytes": 13831,
+      "sha256": "7138709c360728c17c701391f303a02e21e6e1334b29bc3f67f6c9702f7440f4"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/draft-T01/raw_custody_v3.py",
+      "bytes": 12671,
+      "sha256": "a96f1aec811774467092a09cd750d47785fd4dd5482ce792ffac93c38deb9f5b"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/verify_publication_v3.py",
+      "bytes": 13831,
+      "sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw_custody_v3.py",
+      "bytes": 12912,
+      "sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/CUSTODY_INPUT.json",
+      "bytes": 14641,
+      "sha256": "22b58a9e97fd6bb4ebebc6a89dc13e368107c10429bff59191914a5e639c81df"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/PROTOCOL.md",
+      "bytes": 4406,
+      "sha256": "cdf3826e3725acded05b38031b70d9e7a8f8579540b38d65a2a8e38ce64209f5"
+    }
+  ]
+}

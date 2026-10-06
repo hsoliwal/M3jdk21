@@ -1,0 +1,172 @@
+{
+  "rows": [
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "bytes": 12032,
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "git_blob": "a2e8c916208b563517e51b738744a05357e633aa",
+      "repository_path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "origin": "EXACT_CURRENT_GIT_BLOB"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "bytes": 13805,
+      "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
+      "git_blob": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
+      "repository_path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "origin": "EXACT_CURRENT_GIT_BLOB"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-lab.yml",
+      "bytes": 494,
+      "sha256": "cfd636693e49d352892bec390a63075c3ff84034ef6a428af61d93e911d9520a",
+      "git_blob": "eb7670be681545af7c424ee81242cb114b45e316",
+      "repository_path": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-lab.yml",
+      "origin": "EXACT_CURRENT_GIT_BLOB"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-workflow.yml",
+      "bytes": 497,
+      "sha256": "bd064c712c1be69c0fe2572d3d64256255b49d3d5fe770f1f2f0f1bfe8d9997d",
+      "git_blob": "52e0242df67d4fd11e8a99e390e1d58ff6fb7ff9",
+      "repository_path": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-workflow.yml",
+      "origin": "EXACT_CURRENT_GIT_BLOB"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-regex-memory-workflow/a3-lab.md.txt",
+      "bytes": 5171,
+      "sha256": "d9d39747f40bb5eff6ba8639e1e5d0554f0223cc94c09443fe1b2054aac9c3d6",
+      "git_blob": "8bd7695b58e52d5dc2aaece2aa958f5c724c1d12",
+      "repository_path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-regex-memory-workflow/a3-lab.md.txt",
+      "origin": "EXACT_CURRENT_GIT_BLOB"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-regex-memory-workflow/a3-mastery.md.txt",
+      "bytes": 3974,
+      "sha256": "01a428a662ffbdbd22dcd39d1fea7b69084ce34cada0bb5582b8c3686615750d",
+      "git_blob": "6ab1a3f17bf7db4a7304a42bc78cdc31d874222d",
+      "repository_path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-regex-memory-workflow/a3-mastery.md.txt",
+      "origin": "EXACT_CURRENT_GIT_BLOB"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-regex-memory-workflow/manifest.tsv",
+      "bytes": 507,
+      "sha256": "39ff7949565412e2b8587fb428545d722c70fb360c8ee66962b08754642c6d17",
+      "git_blob": "40c60bd055fca26ec84fa93626c008e99440b6ba",
+      "repository_path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-regex-memory-workflow/manifest.tsv",
+      "origin": "EXACT_CURRENT_GIT_BLOB"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-regex-memory-workflow/workflow.yml.txt",
+      "bytes": 10881,
+      "sha256": "b408f0b8d0e4d6e197230e3cb1469d14e0d52aecd33ac55c71f11d513d6e23ec",
+      "git_blob": "5daa9cd739e9938cf7c940dc1cf012e4d8d978a9",
+      "repository_path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-regex-memory-workflow/workflow.yml.txt",
+      "origin": "EXACT_CURRENT_GIT_BLOB"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3Lab.java.after",
+      "bytes": 16196,
+      "sha256": "c212736f000836cb782a5ff81fd2de48e67d36ea4b3bd53cf7743c4aadbfdaf6",
+      "git_blob": "b9781fc4085f1f97ecb730ee1874ab16d52e6d8f",
+      "repository_path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3Lab.java.after",
+      "origin": "EXACT_CURRENT_GIT_BLOB"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3LabTest.java.after",
+      "bytes": 6117,
+      "sha256": "351eeac06154189e79f3d139336437d5911da5721c9a95a779ebd5d511997d9c",
+      "git_blob": "ccc81c0af5070a343a853666de94c1e3e06eff34",
+      "repository_path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3LabTest.java.after",
+      "origin": "EXACT_CURRENT_GIT_BLOB"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+      "bytes": 6442,
+      "sha256": "9171b0ada1d7845b63d7a586d99ef97a6fa6eccbfd84204c47a6a01c8b3e4697",
+      "git_blob": "277e13c69b882ad25ac0bf0429da26f018449e89",
+      "repository_path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3MemoryCompiler.java.after",
+      "origin": "EXACT_CURRENT_GIT_BLOB"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+      "bytes": 7516,
+      "sha256": "19f7e3fb8c5f4332ab721d1962ab9cac261c524a10d9d91272346636fbe86ada",
+      "git_blob": "85f132217c82e67a599bde5f22a4c5a348e120ce",
+      "repository_path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/A3RegexMatrix.java.after",
+      "origin": "ACTUAL_REPAIR_RESULT"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+      "bytes": 658,
+      "sha256": "e92d3c16a897a02084ca749d092a02402c2f1d0225bcb9c8755c0304f838dabd",
+      "git_blob": "6e01de6e3fee61707edb6dfca073d0a9a839ad60",
+      "repository_path": "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv",
+      "origin": "ACTUAL_REPAIR_RESULT"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-regex-memory-lab/before/A3Lab.java",
+      "bytes": 17623,
+      "sha256": "f68fb01640e7bee16e67af34ff986006a8ebebca3c13e9088296540f844b2200",
+      "git_blob": "c42a107a8cb9ff4cc6a40cc660069868b9482636",
+      "repository_path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-regex-memory-lab/before/A3Lab.java",
+      "origin": "EXACT_CURRENT_GIT_BLOB"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-regex-memory-lab/before/A3LabTest.java",
+      "bytes": 3860,
+      "sha256": "225efc2885ba8c002d036ecf70b4dd8a13b646debc74afeb031b0fce624d3f18",
+      "git_blob": "8b9ce1735fdeb6f80f4c993b98b09120c43878cf",
+      "repository_path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-regex-memory-lab/before/A3LabTest.java",
+      "origin": "EXACT_CURRENT_GIT_BLOB"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-regex-memory-workflow/before/a3-lab.md",
+      "bytes": 3591,
+      "sha256": "6ee9e1939eef716a7c24d34967f8c3b634c822c5c05b5c728080920e697869b1",
+      "git_blob": "bd431b5c306a59b13ba2510e482b2c8ca48424d7",
+      "repository_path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-regex-memory-workflow/before/a3-lab.md",
+      "origin": "EXACT_CURRENT_GIT_BLOB"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-regex-memory-workflow/before/a3-mastery.md",
+      "bytes": 3372,
+      "sha256": "d02cc3c3b459df10e9693869852ae6947b1e9a05d01d8fdc6d1036a66d436004",
+      "git_blob": "33de42b35ba7238aec48a3187e63085abb1ca146",
+      "repository_path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-regex-memory-workflow/before/a3-mastery.md",
+      "origin": "EXACT_CURRENT_GIT_BLOB"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-regex-memory-workflow/before/workflow.yml",
+      "bytes": 10858,
+      "sha256": "3e8bbec81071171ddc771d675741bb09a43bbb90db6d40241d85873b896001d0",
+      "git_blob": "51b635f4e0962b7c8bc26d2965b312bc80bad9b0",
+      "repository_path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/a3-regex-memory-workflow/before/workflow.yml",
+      "origin": "EXACT_CURRENT_GIT_BLOB"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
+      "bytes": 5380,
+      "sha256": "f34470a701cf71b4b4abbe1fa9a5091392a930426ec84d700f13e53edd244629",
+      "git_blob": "e349a7c727592731681759ba26df5fdeb775342e",
+      "repository_path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
+      "origin": "ACTUAL_CI_OPENREWRITE_RESULT"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
+      "bytes": 4975,
+      "sha256": "3f3ab065d9e87e9f6095629a56b052642ec9d0883a466430e90a4a4355edd05b",
+      "git_blob": "8e7d6c748c2d8a9b89eb2a24de929a535a310136",
+      "repository_path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
+      "origin": "ACTUAL_CI_OPENREWRITE_RESULT"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-code-string-repair-v01/behavior-workspace/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/pom.xml",
+      "bytes": 3302,
+      "sha256": "02252520c5c779dce3ae012d9e2b359b8c0ffa2aa7058c14576020b5a6b8c61c",
+      "git_blob": "d1686211ec2ece4ebc4e1e0adfec183628767206",
+      "repository_path": "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/a3-behavior-verification/pom.xml",
+      "origin": "FOCUSED_VERIFICATION_POM"
+    }
+  ]
+}

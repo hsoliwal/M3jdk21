@@ -1,0 +1,18 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "blob_sha": "a28a71e12eca18161a8462baf7ebf570173b5895"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "src/test/java/com/m3/indexdb/M3IndexDbSemanticFailClosedTest.java\t74fbd8ccc2ba3905844eb7a88b633209d53be09c758ffb700d1f99915ed6a0b6\t71104dfdc69bd0176698a1686de4c1e635c2f99826d9c9bda9270d40d4d80c63\t00-Test.java.txt\n"
+    },
+    "isError": false
+  }
+}

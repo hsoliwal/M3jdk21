@@ -1,0 +1,701 @@
+{
+  "applicable_instructions": [
+    {
+      "bytes": 1799,
+      "git_blob_sha1": "ec269d591b2d22352b7f880c196f6032b1a6bf5a",
+      "local": "publication/M3_LATEST_AGENTS.md",
+      "path": "AGENTS.md",
+      "read": true,
+      "sha256": "380ebae3d798a0413fafcb9d85ce42a21c10e8538f0e79a6b992f3ca93ff33ae"
+    },
+    {
+      "bytes": 13827,
+      "git_blob_sha1": "21fd85a0573c5b36c4f15c23f096f75fa31c61e6",
+      "local": "publication/M3_LATEST_PORTING_INVARIANT.md",
+      "path": "m3/docs/m3jdk21-porting-invariant.md",
+      "read": true,
+      "sha256": "0db242bfdb61256d24d21ec8fbf81c77dddeb98de2fc088824586972c38e652b"
+    }
+  ],
+  "commit": "09075810b55229662329a158923287e8a7118f86",
+  "current_m3_evidence": {
+    "capture": "publication/M3_LATEST_M3.json",
+    "capture_sha256": "7447eb196fd437f21c7ca6a1b6c58be217ca8214f1f092d7f4ecd706d662f368",
+    "reconstructed_direct_trees": 717,
+    "tree": "cd2d78c91054d43025939fb72ae17365af3b7cf5"
+  },
+  "direct_tree_captures": [
+    {
+      "capture": "receiving-merge-audit/current-map-validation-v04/acquisition/captures/new-classes.json",
+      "capture_sha256": "9136773487fb22246dcc0d27d1e56a6189b2c57184659d723137c43716383744",
+      "entries": 7,
+      "reconstructed": true,
+      "tree_sha1": "1fe7bc5bf35a3dbd933e03f2bc49d84468b95210"
+    },
+    {
+      "capture": "receiving-merge-audit/current-map-validation-v04/acquisition/captures/new-java.base.json",
+      "capture_sha256": "b45b5510eb7d679dd4b8f08761fcce62a02b8b59e8c779fc06f08cba674c1cee",
+      "entries": 6,
+      "reconstructed": true,
+      "tree_sha1": "165479ce44fff7f895d8a2b42c4ae175aefe16bb"
+    },
+    {
+      "capture": "receiving-merge-audit/current-map-validation-v04/acquisition/captures/new-java.json",
+      "capture_sha256": "e34a68fc2db52f31d43d4608eb27f0f41edbf2e960a9f2ac0416908e1ec82b6f",
+      "entries": 9,
+      "reconstructed": true,
+      "tree_sha1": "b56cd04a9a77e8f5603aa26674bc2d3902969abf"
+    },
+    {
+      "capture": "receiving-merge-audit/current-map-validation-v04/acquisition/captures/new-regex.json",
+      "capture_sha256": "2641a0dbd07a5c5485bc8b68552fa05fdf233c6f482c3200d45209ec93a70c6c",
+      "entries": 9,
+      "reconstructed": true,
+      "tree_sha1": "084119a9e0a94114331580c3363de7a9d307e27a"
+    },
+    {
+      "capture": "receiving-merge-audit/current-map-validation-v04/acquisition/captures/new-share.json",
+      "capture_sha256": "3b9e3eb480f905e87fbcdb01556db779df36815b7dc8c95a2e44ce3758c31fab",
+      "entries": 7,
+      "reconstructed": true,
+      "tree_sha1": "bab8d8a55d8966c919c8ec8bc3b4cbeac04af562"
+    },
+    {
+      "capture": "receiving-merge-audit/current-map-validation-v04/acquisition/captures/new-src.json",
+      "capture_sha256": "c3dbc89d2adbb09bb005d887f92fe8786309af86fec0dc301348909eb84cc049",
+      "entries": 73,
+      "reconstructed": true,
+      "tree_sha1": "56a7cf0f39e57e668e1407e055449235f4d9774c"
+    },
+    {
+      "capture": "receiving-merge-audit/current-map-validation-v04/acquisition/captures/new-util.json",
+      "capture_sha256": "66fea2c3e790f7084793d068fe9a9cf9c94c731b318066cdc24b8e65a2922b95",
+      "entries": 144,
+      "reconstructed": true,
+      "tree_sha1": "f8f744005f93cebcf2a66dc3d6cf05690e9413a7"
+    },
+    {
+      "capture": "receiving-merge-audit/current-map-validation-v04/acquisition/captures/old-classes.json",
+      "capture_sha256": "f4d25a5334dbbad122142cc4ec9972aea0b07a2c20e77d4e688d8b8b94debf95",
+      "entries": 7,
+      "reconstructed": true,
+      "tree_sha1": "b37ee303aa4833b99ea37db20c22a922d6433d62"
+    },
+    {
+      "capture": "receiving-merge-audit/current-map-validation-v04/acquisition/captures/old-java.base.json",
+      "capture_sha256": "5518b3c90fe967cb8e92cd8d93df74a84fd417f046171a9a4be454812173b5d6",
+      "entries": 6,
+      "reconstructed": true,
+      "tree_sha1": "a910aeaa772c09036a9c957bb77d2c25b9f21595"
+    },
+    {
+      "capture": "receiving-merge-audit/current-map-validation-v04/acquisition/captures/old-share.json",
+      "capture_sha256": "a559810ffe71a929206251e2fe8c594c2482af94e0d495f79ac2a7be495c2f5d",
+      "entries": 7,
+      "reconstructed": true,
+      "tree_sha1": "f4c637cfe916edc7fb0ea5b1042e10a9ead17252"
+    },
+    {
+      "capture": "receiving-merge-audit/current-map-validation-v04/acquisition/captures/old-src.json",
+      "capture_sha256": "c08dd84d4eaed3c1f04c522ff8402a2b11990be7eead02d6c204609ee4fe4393",
+      "entries": 73,
+      "reconstructed": true,
+      "tree_sha1": "43d78cd610b41303691a87f58f06d5e8dafa1c9d"
+    },
+    {
+      "capture": "receiving-merge-audit/current-map-validation-v04/acquisition/captures/shared-internal.json",
+      "capture_sha256": "cf3ae23b1ee6bef405535ea5cff331cc3c931c2f796f358d89fc2791012a8e2e",
+      "entries": 24,
+      "reconstructed": true,
+      "tree_sha1": "40405350b084ea887af5820f5863c3e9b2c356d0"
+    },
+    {
+      "capture": "receiving-merge-audit/current-map-validation-v04/acquisition/captures/shared-jdk.json",
+      "capture_sha256": "70cd344d4d4859f2f7bd2760007d9111b7993f53369142c5b5f1dea88ec18096",
+      "entries": 1,
+      "reconstructed": true,
+      "tree_sha1": "4ba7232034aa9a5ba17828e707ba5a12dcc9b34b"
+    },
+    {
+      "capture": "receiving-merge-audit/current-map-validation-v04/acquisition/captures/shared-libjava.json",
+      "capture_sha256": "a34423b5142aecd9e0752aa53e00251cd895f8158ad956709115257bd1a46a8a",
+      "entries": 58,
+      "reconstructed": true,
+      "tree_sha1": "ab14405953bf2e004a707d299e85345a457f7550"
+    },
+    {
+      "capture": "receiving-merge-audit/current-map-validation-v04/acquisition/captures/shared-mindex.json",
+      "capture_sha256": "a5f60c1219f889065f3d290745d044033b362af0501247bc2370fa5f27ca17c1",
+      "entries": 24,
+      "reconstructed": true,
+      "tree_sha1": "99baea702a2975788604820486cc64b8f83b0f49"
+    },
+    {
+      "capture": "receiving-merge-audit/current-map-validation-v04/acquisition/captures/shared-native.json",
+      "capture_sha256": "52b7b7fd9f28829de169b0ade0163fa3959fa98d0014b498461f1ca747b1b6c1",
+      "entries": 11,
+      "reconstructed": true,
+      "tree_sha1": "44c3b5c15ef78bc605adf858625ac97b47c07321"
+    }
+  ],
+  "fresh_artifacts": [
+    {
+      "body": "receiving-merge-audit/current-map-validation-v04/acquisition/bodies/src/java.base/share/classes/java/util/regex/Matcher.java",
+      "bytes": 73418,
+      "capture": "receiving-merge-audit/current-map-validation-v04/acquisition/captures/new-matcher.json",
+      "capture_sha256": "c5b8cbf83e3310e2abb902e0a5f9963fb304caebf1e38931a17250f157577720",
+      "commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "b31fde7511bbdd3a139b330d85b66cae9a739224",
+      "membership_verified": true,
+      "mode": "100644",
+      "path": "src/java.base/share/classes/java/util/regex/Matcher.java",
+      "sha256": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78"
+    },
+    {
+      "body": "receiving-merge-audit/current-map-validation-v04/acquisition/bodies/m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
+      "bytes": 392,
+      "capture": "receiving-merge-audit/current-map-validation-v04/acquisition/captures/new-mr-manifest.json",
+      "capture_sha256": "ad257f74f12d212edb22aef9de7b59addee25d3ec3c482ff5ae0915e118d4f39",
+      "commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "d23517ac24eb1ba428f53bd34f304d70eb468406",
+      "membership_verified": true,
+      "mode": "100644",
+      "path": "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv",
+      "sha256": "5b44008f02f49ce0a48fafcb4da24af69ea526a67f88041c209d6d574ed788da"
+    }
+  ],
+  "matcher_tree_chain": [
+    {
+      "component": "src",
+      "parent_tree": "bba8647ea80d1cb4101394b4c0fc5a97f0b8eb52",
+      "tree": "56a7cf0f39e57e668e1407e055449235f4d9774c"
+    },
+    {
+      "component": "java.base",
+      "parent_tree": "56a7cf0f39e57e668e1407e055449235f4d9774c",
+      "tree": "165479ce44fff7f895d8a2b42c4ae175aefe16bb"
+    },
+    {
+      "component": "share",
+      "parent_tree": "165479ce44fff7f895d8a2b42c4ae175aefe16bb",
+      "tree": "bab8d8a55d8966c919c8ec8bc3b4cbeac04af562"
+    },
+    {
+      "component": "classes",
+      "parent_tree": "bab8d8a55d8966c919c8ec8bc3b4cbeac04af562",
+      "tree": "1fe7bc5bf35a3dbd933e03f2bc49d84468b95210"
+    },
+    {
+      "component": "java",
+      "parent_tree": "1fe7bc5bf35a3dbd933e03f2bc49d84468b95210",
+      "tree": "b56cd04a9a77e8f5603aa26674bc2d3902969abf"
+    },
+    {
+      "component": "util",
+      "parent_tree": "b56cd04a9a77e8f5603aa26674bc2d3902969abf",
+      "tree": "f8f744005f93cebcf2a66dc3d6cf05690e9413a7"
+    },
+    {
+      "component": "regex",
+      "parent_tree": "f8f744005f93cebcf2a66dc3d6cf05690e9413a7",
+      "tree": "084119a9e0a94114331580c3363de7a9d307e27a"
+    }
+  ],
+  "new_body_reads": 2,
+  "new_nonrecursive_tree_reads": 16,
+  "previous_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+  "previous_root_tree": "491bbd80a51483d0710fc12c1bad3a037b385ba0",
+  "prior_acquisition": {
+    "path": "receiving-merge-audit/current-map-validation-v03/ACQUISITION.json",
+    "sha256": "b0d27ffd4038fa770fccab3158151cc06c064461bb6eafb2c47d7a642f7ca237"
+  },
+  "repository": "hsoliwal/M3jdk21",
+  "reuse_endpoints": [
+    {
+      "current_chain": [
+        {
+          "component": "src",
+          "parent_tree": "bba8647ea80d1cb4101394b4c0fc5a97f0b8eb52",
+          "tree": "56a7cf0f39e57e668e1407e055449235f4d9774c"
+        },
+        {
+          "component": "java.base",
+          "parent_tree": "56a7cf0f39e57e668e1407e055449235f4d9774c",
+          "tree": "165479ce44fff7f895d8a2b42c4ae175aefe16bb"
+        },
+        {
+          "component": "share",
+          "parent_tree": "165479ce44fff7f895d8a2b42c4ae175aefe16bb",
+          "tree": "bab8d8a55d8966c919c8ec8bc3b4cbeac04af562"
+        },
+        {
+          "component": "classes",
+          "parent_tree": "bab8d8a55d8966c919c8ec8bc3b4cbeac04af562",
+          "tree": "1fe7bc5bf35a3dbd933e03f2bc49d84468b95210"
+        },
+        {
+          "component": "jdk",
+          "parent_tree": "1fe7bc5bf35a3dbd933e03f2bc49d84468b95210",
+          "tree": "4ba7232034aa9a5ba17828e707ba5a12dcc9b34b"
+        },
+        {
+          "component": "internal",
+          "parent_tree": "4ba7232034aa9a5ba17828e707ba5a12dcc9b34b",
+          "tree": "40405350b084ea887af5820f5863c3e9b2c356d0"
+        },
+        {
+          "component": "mindex",
+          "parent_tree": "40405350b084ea887af5820f5863c3e9b2c356d0",
+          "tree": "99baea702a2975788604820486cc64b8f83b0f49"
+        }
+      ],
+      "current_tree": "99baea702a2975788604820486cc64b8f83b0f49",
+      "identical": true,
+      "old_chain": [
+        {
+          "component": "src",
+          "parent_tree": "491bbd80a51483d0710fc12c1bad3a037b385ba0",
+          "tree": "43d78cd610b41303691a87f58f06d5e8dafa1c9d"
+        },
+        {
+          "component": "java.base",
+          "parent_tree": "43d78cd610b41303691a87f58f06d5e8dafa1c9d",
+          "tree": "a910aeaa772c09036a9c957bb77d2c25b9f21595"
+        },
+        {
+          "component": "share",
+          "parent_tree": "a910aeaa772c09036a9c957bb77d2c25b9f21595",
+          "tree": "f4c637cfe916edc7fb0ea5b1042e10a9ead17252"
+        },
+        {
+          "component": "classes",
+          "parent_tree": "f4c637cfe916edc7fb0ea5b1042e10a9ead17252",
+          "tree": "b37ee303aa4833b99ea37db20c22a922d6433d62"
+        },
+        {
+          "component": "jdk",
+          "parent_tree": "b37ee303aa4833b99ea37db20c22a922d6433d62",
+          "tree": "4ba7232034aa9a5ba17828e707ba5a12dcc9b34b"
+        },
+        {
+          "component": "internal",
+          "parent_tree": "4ba7232034aa9a5ba17828e707ba5a12dcc9b34b",
+          "tree": "40405350b084ea887af5820f5863c3e9b2c356d0"
+        },
+        {
+          "component": "mindex",
+          "parent_tree": "40405350b084ea887af5820f5863c3e9b2c356d0",
+          "tree": "99baea702a2975788604820486cc64b8f83b0f49"
+        }
+      ],
+      "old_tree": "99baea702a2975788604820486cc64b8f83b0f49",
+      "path": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "current_chain": [
+        {
+          "component": "src",
+          "parent_tree": "bba8647ea80d1cb4101394b4c0fc5a97f0b8eb52",
+          "tree": "56a7cf0f39e57e668e1407e055449235f4d9774c"
+        },
+        {
+          "component": "java.base",
+          "parent_tree": "56a7cf0f39e57e668e1407e055449235f4d9774c",
+          "tree": "165479ce44fff7f895d8a2b42c4ae175aefe16bb"
+        },
+        {
+          "component": "share",
+          "parent_tree": "165479ce44fff7f895d8a2b42c4ae175aefe16bb",
+          "tree": "bab8d8a55d8966c919c8ec8bc3b4cbeac04af562"
+        },
+        {
+          "component": "native",
+          "parent_tree": "bab8d8a55d8966c919c8ec8bc3b4cbeac04af562",
+          "tree": "44c3b5c15ef78bc605adf858625ac97b47c07321"
+        },
+        {
+          "component": "libjava",
+          "parent_tree": "44c3b5c15ef78bc605adf858625ac97b47c07321",
+          "tree": "ab14405953bf2e004a707d299e85345a457f7550"
+        }
+      ],
+      "current_tree": "ab14405953bf2e004a707d299e85345a457f7550",
+      "identical": true,
+      "old_chain": [
+        {
+          "component": "src",
+          "parent_tree": "491bbd80a51483d0710fc12c1bad3a037b385ba0",
+          "tree": "43d78cd610b41303691a87f58f06d5e8dafa1c9d"
+        },
+        {
+          "component": "java.base",
+          "parent_tree": "43d78cd610b41303691a87f58f06d5e8dafa1c9d",
+          "tree": "a910aeaa772c09036a9c957bb77d2c25b9f21595"
+        },
+        {
+          "component": "share",
+          "parent_tree": "a910aeaa772c09036a9c957bb77d2c25b9f21595",
+          "tree": "f4c637cfe916edc7fb0ea5b1042e10a9ead17252"
+        },
+        {
+          "component": "native",
+          "parent_tree": "f4c637cfe916edc7fb0ea5b1042e10a9ead17252",
+          "tree": "44c3b5c15ef78bc605adf858625ac97b47c07321"
+        },
+        {
+          "component": "libjava",
+          "parent_tree": "44c3b5c15ef78bc605adf858625ac97b47c07321",
+          "tree": "ab14405953bf2e004a707d299e85345a457f7550"
+        }
+      ],
+      "old_tree": "ab14405953bf2e004a707d299e85345a457f7550",
+      "path": "src/java.base/share/native/libjava"
+    }
+  ],
+  "reused_src_artifacts": [
+    {
+      "bytes": 2596,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-007.json",
+      "capture_sha256": "cb749de545606be7278f5d809c40dd58a64d196c2985d2f1f8daab0d8584ce7b",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "14cdb999f5eab5be443044bff2d273fb4e4113fb",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Address28.java",
+      "sha256": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 10427,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-008.json",
+      "capture_sha256": "ea49c3d5ac146b672a1acd9fdeab9629620a0a0a8ce5851970bae635751746a8",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "5942b1f46eedf83ad8c4ef8edee91f75e7424e7a",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java",
+      "sha256": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 551,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-009.json",
+      "capture_sha256": "d20b55047f1c3b82ebf277ff99cbba0a2d4058ac05964e829dc71ede6a213df4",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "2ad46058a5325483647af4af16858c329ae24665",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Bits.java",
+      "sha256": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 4114,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-010.json",
+      "capture_sha256": "cacb07d213939489e5f3e40d62e45e3f46336eb41d9d52578239f1a55e066724",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "f10f815fc1a59a0d1ea7ed45158b89178f128a1a",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java",
+      "sha256": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 7771,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-011.json",
+      "capture_sha256": "3558f9be7cba80981e041c2b06b6ff7cffa952ebbcbdbe0d7ee0a6647b8ccd2d",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "0be655b7020f13f3df4265f68daf189bd039d86b",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3CB.java",
+      "sha256": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 61135,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-012.json",
+      "capture_sha256": "8b47e2a2a0cf74a62b237790af9beedf6337413c4e9f36b2944e95bfb8381b9d",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "2acac4ad654a8af823fa46b483a42dd2f9c894c4",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3CI.java",
+      "sha256": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 16841,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-013.json",
+      "capture_sha256": "e1164a14025ed5f354420ea5ce37e6803d762c3d6be5099f7f779e3d007981e4",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "b95eee3c820f6054b4f70507dee101c9f456302f",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Class.java",
+      "sha256": "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 1592,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-014.json",
+      "capture_sha256": "3a33ad69483882bf04eab5a30051a9e16955ca0a6b32bb4bd3bf7337f4134cd5",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "fc2152f63f4c404bce630b043d9138eaf96cb93e",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java",
+      "sha256": "cb7dc87b4fb4849bd145520014bcd8cd55168134cf8b482dba495219b8a2344b",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 2329,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-015.json",
+      "capture_sha256": "e818f1f84fe590eb83ebeacdc44067418cf0653ba2fe61c487dd28eb3cc92689",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "4d708115e139a4ab938a4f9abd856f7fc98c5c00",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java",
+      "sha256": "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 1815,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-016.json",
+      "capture_sha256": "0369a2bf4d1f2daa2e7729075028ccc8116f7a2d82830ab15e7375b626179aa5",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "92f4d7da32a3b8265675a413311fd304c6dc2dd2",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 2041,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-017.json",
+      "capture_sha256": "6b373d56e5a483aa5858eda4300976ca9a6a4a775389202d2d577eb8f272af61",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "fad031da70ce813f52e5fc06479542a224bcd81a",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Field.java",
+      "sha256": "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 7842,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-018.json",
+      "capture_sha256": "203c75eccdf116eff7c33d6734752a4a3fd4743e17d5c0ffa931637bff0da737",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "513a1e8f5d55c074250d3b2747f041c19a1128e7",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java",
+      "sha256": "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 8134,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-019.json",
+      "capture_sha256": "2c50170206762133d10aa462bc04cedc1109b7b96016f056c0a9c1a31ed73fde",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "325e8e90ace21e71069665b74585c522b2c627b4",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java",
+      "sha256": "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 2493,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-020.json",
+      "capture_sha256": "f3d0472e18889b1c1fa0b1ce0830828e85978ea9f7b62771274a9f651fff107f",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "d5f8e07afc304379d5165c9c5c1659855938b5b0",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Member.java",
+      "sha256": "c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 1722,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-021.json",
+      "capture_sha256": "3f86212ac9f1fbd3d43b817e888d6b74a3ce95fa81236875b81ce41e7863abb5",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "f68a952217d3eead4ed10a43de49c240d6b790f1",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3MemberFlags.java",
+      "sha256": "f436e0fdfbe44074c3855944e005707e833ce96fa34b24cb300c3957c1cc24be",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 718,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-022.json",
+      "capture_sha256": "c2b8d2908bee926ca09b6b207b8e7dcbe7f9484ee28ac4fa034c2b368a974aa8",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "d211e6bc1e72ccc8e0ff821d26b3e30361750bc9",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3MemberKind.java",
+      "sha256": "0c24a919386302c498d94e3a4d0bfffbe96084f7c93b62e23799646b4502496b",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 2478,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-023.json",
+      "capture_sha256": "9e0821f3b54dd578ddcc740490ebb2456db9402576b1add9bda6c25a4dcfcc22",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "6bc2fe9176bdd9c95d732ecad105f03b62f4385e",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Method.java",
+      "sha256": "f7651b04fa197f47904f5258ba2150242a9801bbcbef6e19fa90ed296fef8f58",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 1686,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-024.json",
+      "capture_sha256": "807dca9b9af6e49bccbea73a17d8e209822e7cf6898b691717834552d33061a0",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "b63fd9e457f7ac16bca8bf07dcb564069fdfef79",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3PC.java",
+      "sha256": "e38403e001ea950c5e789c854f4f4e8004253a4a7545aa6e044a52112b592898",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 1916,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-025.json",
+      "capture_sha256": "1dea20050d7b7ba27ca5465438df6d58b7d3b5c62d60892d9386369b9a0b460d",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "55f82a8486055d50e24d1a9b12b0636f9db876ed",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java",
+      "sha256": "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 1593,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-026.json",
+      "capture_sha256": "632b62520b674a20c7b755180274a1b973dfddc42a935f33fc2d1662ef08816f",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "1116f4cb0ffd361e764688640adb53af8cabe86d",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Release.java",
+      "sha256": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 16998,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-027.json",
+      "capture_sha256": "b44839f1f0f798c9b71b81b420355e8aa37fc179edab70999e602513135bb7e5",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "ca23741ecd8cd24593ba5c260aa0d939c53d6766",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+      "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 6165,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-028.json",
+      "capture_sha256": "de12333912c47a9cd014ff1d604019bef206df67ccdd4c2336ae4c2c1c062e82",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "087aa55bef9b57189d03f3388fb2e1f360320b02",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3VI.java",
+      "sha256": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a",
+      "unchanged_subtree": "src/java.base/share/classes/jdk/internal/mindex"
+    },
+    {
+      "bytes": 3494,
+      "capture": "receiving-merge-audit/current-map-validation-v03/calls/reused/required-029.json",
+      "capture_sha256": "338d039fe4801ca7318b21e2c4997a30cba0a0bdc8d6ec9896c5886a4e37f0d8",
+      "current_commit": "09075810b55229662329a158923287e8a7118f86",
+      "git_blob_sha1": "e68e05555efbe2dbf1355e6820cc7795d9c33942",
+      "intermediate_commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "mode": "100644",
+      "origin_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "path": "src/java.base/share/native/libjava/M3BitLane28.c",
+      "sha256": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f",
+      "unchanged_subtree": "src/java.base/share/native/libjava"
+    }
+  ],
+  "root_tree": "bba8647ea80d1cb4101394b4c0fc5a97f0b8eb52",
+  "roots": [
+    {
+      "commit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+      "commit_capture": "receiving-merge-audit/current-map-validation-v03/root-evidence/M3_FINAL_CURRENT_COMMIT.json",
+      "commit_capture_sha256": "001d93e5fdfc3658fe6240bc2db422ff64c47fd18a5e79968761620322b6ce4b",
+      "commit_request_recorded": true,
+      "role": "old",
+      "root_capture": "receiving-merge-audit/current-map-validation-v03/root-evidence/M3_FINAL_CURRENT_ROOT.json",
+      "root_capture_sha256": "1ec85386d1338076b89015cfaac2537b83caa97ed2df82d24247228e8b773854",
+      "root_reconstructed": true,
+      "root_request_recorded": true,
+      "root_tree": "491bbd80a51483d0710fc12c1bad3a037b385ba0"
+    },
+    {
+      "commit": "09075810b55229662329a158923287e8a7118f86",
+      "commit_capture": "publication/M3_LATEST_COMMIT.json",
+      "commit_capture_sha256": "8114ce1b3f2f7d237f4f6be87c993e61e8b37218fe63df0cfbd857c8d9d29452",
+      "commit_request_recorded": true,
+      "role": "current",
+      "root_capture": "publication/M3_LATEST_ROOT.json",
+      "root_capture_sha256": "b4682b7902daa2aff99b5fd74a02d1c3778f399aae227ceb0e1f8f0b1dccfa99",
+      "root_reconstructed": true,
+      "root_request_recorded": true,
+      "root_tree": "bba8647ea80d1cb4101394b4c0fc5a97f0b8eb52"
+    },
+    {
+      "commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+      "commit_capture": "receiving-merge-audit/current-map-validation/root-evidence/M3_FOLLOWUP_CURRENT_COMMIT.json",
+      "commit_capture_sha256": "1e12d4efb4a05cfe032afa0048e6f0e6696209de6372138c41795df9f9da23ce",
+      "commit_request_recorded": false,
+      "role": "original_body_epoch",
+      "root_capture": "receiving-merge-audit/current-map-validation/root-evidence/M3_FOLLOWUP_CURRENT_ROOT.json",
+      "root_capture_sha256": "0f9600af165510d0dab1f90e20d3fb791e85b6a2f841770cb68c55cc0dae5479",
+      "root_reconstructed": true,
+      "root_request_recorded": false,
+      "root_tree": "0812573f02908d8078d13f5f49346865cdf1c0e0"
+    }
+  ],
+  "schema": "m3-current-map-bounded-acquisition/4",
+  "scope": "Two exact latest validator bodies only; immutable endpoint proof reuses 22 mindex Java bodies and one native body from original d1 captures through C0 to090. No source publication, source edits, runtime acceptance, or whole-repository acquisition.",
+  "source_publication_performed": false,
+  "status": "PASS",
+  "tests_executed": false,
+  "verification_script_sha256": "9529b0c0132099b17c946de27e32d9ee364bebd9a5247294bc57337a65947366"
+}

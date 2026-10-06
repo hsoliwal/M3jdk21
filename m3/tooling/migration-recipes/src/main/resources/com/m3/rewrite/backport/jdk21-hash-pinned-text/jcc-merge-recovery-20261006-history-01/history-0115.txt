@@ -1,0 +1,20 @@
+{
+  "schema": "independent-review-artifact-seals/v1",
+  "files": [
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/checker-static-review-v3/custody-output-subreview/INPUT_SEALS.json",
+      "bytes": 1457,
+      "sha256": "ae513e9a5acbc1fb76bf6741618c7ceb9f30126441332f60c581d7dc922bcecb"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/checker-static-review-v3/custody-output-subreview/REVIEW.md",
+      "bytes": 6397,
+      "sha256": "50b226e31a609a30ee644790f84e8966234a8a4f163b5a1084f94ce7b7554711"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/checker-static-review-v3/custody-output-subreview/WRITE_SURFACE.json",
+      "bytes": 374,
+      "sha256": "72cd8ccf7e4ee74be62760c1359f94cb2e1601f56cb1aef9b2e4a3a0165e8613"
+    }
+  ]
+}
