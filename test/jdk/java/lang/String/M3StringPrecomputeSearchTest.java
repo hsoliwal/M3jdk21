@@ -447,6 +447,12 @@ public class M3StringPrecomputeSearchTest {
         check(emptyReplacementNoop != emptyTargetSource,
                 "replace empty target empty replacement fresh wrapper");
 
+        String rangeRepeatSource =
+                String.join("", "\u0100", "ab", "\u0101").substring(1, 3);
+        String rangeRepeated = rangeRepeatSource.repeat(5);
+        check(rangeRepeated.equals("ababababab"),
+                "repeat preserves existing M3 range independent of join gate");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
