@@ -1077,6 +1077,17 @@ if "if (java_lang_String::is_m3_joined(string))" not in archive_writer:
     fail("CDS String sizing is not fail-closed for M3 values")
 
 
+# Escape translation reuses the bounded position-precompute owner instead of forcing a full
+# fixed-fact scan and then rescanning cold text.
+for fragment in [
+    "int slash = indexOf('\\\\', 0, length());",
+    "slash = cursor < length() ? indexOf('\\\\', cursor, length()) : -1;",
+]:
+    if fragment not in m3:
+        fail(f"M3 translateEscapes lost position-precompute traversal: {fragment}")
+if "M3StringFacts prepared = facts();" in m3[m3.index("M3String translateEscapes()"):m3.index("M3String asciiCase(boolean upper)")]:
+    fail("M3 translateEscapes forces full facts before sparse escape traversal")
+
 # Escape translation must scan canonical M3 storage and rebuild from slices/unit atoms; the
 # stock char[] implementation remains fallback-only for non-M3 Strings.
 for fragment in [
