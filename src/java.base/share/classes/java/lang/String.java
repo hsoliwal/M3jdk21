@@ -3995,6 +3995,12 @@ public final class String
      * @since   1.1
      */
     public String toLowerCase(Locale locale) {
+        Objects.requireNonNull(locale);
+        M3String storage = m3();
+        if (storage != null && locale.equals(Locale.ROOT) && storage.facts().ascii) {
+            M3String mapped = storage.asciiCase(false);
+            return mapped == storage ? this : new String(mapped);
+        }
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.toLowerCase(this, currentValue, locale)
                           : StringUTF16.toLowerCase(this, currentValue, locale);
@@ -4076,6 +4082,12 @@ public final class String
      * @since   1.1
      */
     public String toUpperCase(Locale locale) {
+        Objects.requireNonNull(locale);
+        M3String storage = m3();
+        if (storage != null && locale.equals(Locale.ROOT) && storage.facts().ascii) {
+            M3String mapped = storage.asciiCase(true);
+            return mapped == storage ? this : new String(mapped);
+        }
         byte[] currentValue = value();
         return isLatin1() ? StringLatin1.toUpperCase(this, currentValue, locale)
                           : StringUTF16.toUpperCase(this, currentValue, locale);
