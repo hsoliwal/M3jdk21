@@ -14,7 +14,6 @@ on:
       - "m3/backports/ALGORITHM_CATALOGUE.tsv"
       - "m3/docs/a3.md"
       - "m3/docs/a3-lab.md"
-      - "m3/docs/a3-mastery.md"
       - "m3/docs/a3-alg.md"
       - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
       - "m3/pom.xml"
@@ -29,7 +28,6 @@ on:
       - "m3/backports/ALGORITHM_CATALOGUE.tsv"
       - "m3/docs/a3.md"
       - "m3/docs/a3-lab.md"
-      - "m3/docs/a3-mastery.md"
       - "m3/docs/a3-alg.md"
       - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
       - "m3/pom.xml"
@@ -84,41 +82,31 @@ jobs:
           set -euo pipefail
           mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" test
           mvn -B -ntp -f "$REPO/m3/tooling/migration-recipes/pom.xml" \
-            -Dtest=M3A3LabDeliveryRecipeTest,M3A3MasteryWorkflowRecipeTest,M3A3MasteryReceiptDeliveryRecipeTest,M3A3MasteryReceiptWorkflowRecipeTest \
+            -Dtest=M3A3LabDeliveryRecipeTest,M3A3MasteryWorkflowRecipeTest \
             -Dsurefire.failIfNoSpecifiedTests=false test
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" \
-            -Pm3-a3-mastery-receipt-delivery rewrite:dryRunNoFork
 
-      - name: Master hostile Atomize Patternize Document corpus
+      - name: Master hostile Atomize Patternize corpus
         shell: bash
         run: |
           set -euo pipefail
           mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java \
             -Dexec.mainClass=com.m3.a3.A3 \
-            -Dexec.args="mastery --root $REPO --out m3/build/a3/mastery"
-          MASTER="$REPO/m3/build/a3/mastery"
-          LAB="$MASTER/lab/results.tsv"
-          RECEIPT="$MASTER/receipt.tsv"
-          PINS="$MASTER/pins.tsv"
+            -Dexec.args="lab --root $REPO --out m3/build/a3/lab"
+          LAB="$REPO/m3/build/a3/lab/results.tsv"
           test -s "$LAB"
-          test -s "$RECEIPT"
-          test -s "$PINS"
-          grep -F 'M3-A3-MASTERY/1' "$RECEIPT"
           ROWS="$(awk -F '\t' 'NR > 1 {n++} END {print n+0}' "$LAB")"
-          SCHEDULES="$(awk -F '\t' 'NR > 1 {seen[$2]=1} END {for (x in seen) n++; print n+0}' "$LAB")"
-          D_ONLY="$(awk -F '\t' 'NR > 1 && $2 == "D" {n++} END {print n+0}' "$LAB")"
-          FULL="$(awk -F '\t' 'NR > 1 && $3 == "A+D+P" {n++} END {print n+0}' "$LAB")"
+          AP="$(awk -F '\t' 'NR > 1 && $2 == "A>P" {n++} END {print n+0}' "$LAB")"
+          PA="$(awk -F '\t' 'NR > 1 && $2 == "P>A" {n++} END {print n+0}' "$LAB")"
           APA="$(awk -F '\t' 'NR > 1 && $2 == "A>P>A" {n++} END {print n+0}' "$LAB")"
           PAP="$(awk -F '\t' 'NR > 1 && $2 == "P>A>P" {n++} END {print n+0}' "$LAB")"
           PASS="$(awk -F '\t' 'NR > 1 && $9 == "true" && $10 == "true" && $11 == "true" && $12 == "true" && $13 == "true" {n++} END {print n+0}' "$LAB")"
-          test "$ROWS" -eq 816
-          test "$SCHEDULES" -eq 17
-          test "$D_ONLY" -eq 48
-          test "$FULL" -eq 288
+          test "$ROWS" -eq 288
+          test "$AP" -eq 48
+          test "$PA" -eq 48
           test "$APA" -eq 48
           test "$PAP" -eq 48
           test "$PASS" -eq "$ROWS"
-          printf 'A3M: rows=%s schedules=%s D=%s full-A/P/D=%s A>P>A=%s P>A>P=%s all-gates+regex=%s\n' "$ROWS" "$SCHEDULES" "$D_ONLY" "$FULL" "$APA" "$PAP" "$PASS" >> "$GITHUB_STEP_SUMMARY"
+          printf 'A3Lab: rows=%s A>P=%s P>A=%s A>P>A=%s P>A>P=%s all-gates+regex=%s\n' "$ROWS" "$AP" "$PA" "$APA" "$PAP" "$PASS" >> "$GITHUB_STEP_SUMMARY"
 
       - name: Inventory whole JDK source and test corpus
         shell: bash
@@ -205,7 +193,7 @@ jobs:
           JAVA
           cp "$SRC" "$RUNNER_TEMP/Sample.before"
 
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="apply --root $FIX --out m3/build/a3/apply --mastery-root $REPO --mastery m3/build/a3/mastery/receipt.tsv --file src/java.base/share/classes/example/Sample.java"
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="apply --root $FIX --out m3/build/a3/apply --file src/java.base/share/classes/example/Sample.java"
 
           cmp "$SRC" "$RUNNER_TEMP/Sample.before"
           CANDIDATE="$FIX/m3/build/a3/apply/candidate/src/java.base/share/classes/example/Sample.java"
@@ -225,8 +213,6 @@ jobs:
             ${{ env.REPO }}/m3/build/a3/plan.tsv
             ${{ env.REPO }}/m3/build/a3/work.tsv
             ${{ env.REPO }}/m3/build/a3/apply-receipt.tsv
-            ${{ env.REPO }}/m3/build/a3/mastery/receipt.tsv
-            ${{ env.REPO }}/m3/build/a3/mastery/pins.tsv
-            ${{ env.REPO }}/m3/build/a3/mastery/lab/results.tsv
+            ${{ env.REPO }}/m3/build/a3/lab/results.tsv
           if-no-files-found: error
           retention-days: 30
