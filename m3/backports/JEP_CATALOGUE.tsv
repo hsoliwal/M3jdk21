@@ -28,6 +28,7 @@ release	jep	title	domain	disposition	reason	superseded_by
 24	475	Late Barrier Expansion for G1	gc-hotspot-compiler	candidate-high-risk	GC optimization touching C2/HotSpot compiler pipeline; separate VM/JIT lane.	
 24	478	Key Derivation Function API (Preview)	security-library	superseded	Use final JEP 510.	510
 24	479	Remove the Windows 32-bit x86 Port	removal	reject-compat	Removal conflicts with JDK 21 compatibility preservation.	
+24	483	Ahead-of-Time Class Loading & Linking	runtime-aot-cds	candidate-high-risk	Runtime/CDS enhancement with no Java grammar change; requires AOT/CDS dependency closure and Java 21 startup/class-loading parity proof.	
 24	484	Class-File API	library	candidate	Final library API; no Java grammar change, but requires classfile/version compatibility audit.	
 24	485	Stream Gatherers	library	candidate	Final library API; no Java grammar change.	
 24	486	Permanently Disable the Security Manager	compatibility-security	reject-compat	Intentional behavioral incompatibility with JDK 21.	
@@ -61,7 +62,9 @@ release	jep	title	domain	disposition	reason	superseded_by
 25	515	Ahead-of-Time Method Profiling	runtime-hotspot	candidate-high-risk	HotSpot/AOT/JIT runtime enhancement; dependency-gated.	
 25	518	JFR Cooperative Sampling	monitoring-jfr-runtime	candidate-high-risk	JFR/runtime safepoint sampling enhancement; requires VM acceptance.	
 25	519	Compact Object Headers	vm-gc-runtime	superseded-high-risk	Use cumulative JEP 534 lineage for default-ready implementation.	534
+25	521	Generational Shenandoah	gc-runtime-config	candidate	Makes the existing generational Shenandoah mode non-experimental; no Java grammar/API change, but runtime option/default-policy and GC regression proof are required.	
 25	520	JFR Method Timing & Tracing	monitoring-jfr	candidate-high-risk	JFR + bytecode instrumentation enhancement; requires agent/instrumentation compatibility tests.	
+26	401	Value Classes and Objects (Preview)	language-jvms	reject-language	Preview feature changes Java language semantics, object identity/synchronization behavior, class-file flags and JVM verification rules beyond the locked Java 21 contract.	
 26	500	Prepare to Make Final Mean Final	compatibility-reflection	hold-compat	Adds warnings/restriction preparation; changes compatibility posture.	
 26	504	Remove the Applet API	removal	reject-compat	Removal conflicts with JDK 21 API compatibility.	
 26	516	Ahead-of-Time Object Caching with Any GC	runtime-aot-gc	candidate-high-risk	AOT/GC runtime enhancement; depends on post-21 AOT infrastructure.	
