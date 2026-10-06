@@ -2132,7 +2132,12 @@ public final class String
      *          lexicographically greater than the string argument.
      */
     public int compareTo(String anotherString) {
-        if (m3() != null || anotherString.m3() != null) {
+        M3String leftM3 = m3();
+        M3String rightM3 = anotherString.m3();
+        if (leftM3 != null && leftM3.sameCoordinate(rightM3)) {
+            return 0;
+        }
+        if (leftM3 != null || rightM3 != null) {
             int length1 = length();
             int length2 = anotherString.length();
             int limit = Math.min(length1, length2);
