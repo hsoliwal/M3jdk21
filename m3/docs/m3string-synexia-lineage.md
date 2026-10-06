@@ -18,6 +18,8 @@ snapshot or reuse donor identifiers as target ABI.
 | `e649343956a2ea21609713f7a62954fefe757468` | Fail fast rope search from precomputed bit facts | M3 candidate facts may prove absence but never prove equality |
 | `bb4033de627c36e371430095a5db1122d30cc5a0` | Route String-facade search through cached facts | `java.lang.String` M3 routes apply canonical filters before exact search |
 | `0cd5b787de63fb4c579a0a5d449087ee88503ae0` | Reuse shared-reference range facts without materializing text | M3 owner-local exact-coordinate range facts remain bounded and payload-free |
+| `523309e77c6abb5ea2274093fde0cf06e25f56e7` | Add per-string character postings and rolling String-compatible prefix hashes | `M3StringSourcePrecompute` provides a separately bounded weak-owner repeated-source lane |
+| `67c56edcbe6780d468fd4cc1316ac9135fdaf73e` | Seek ordered postings and bound suffix/search lanes | M3 source-index searches binary-seek posting ranges and fall back when postings are too dense |
 | `6b21032aaee902122d3dfeb027b270acc23de67b` | Retain canonical patterns and reuse operation facts | repeated M3 pattern search may reuse weakly keyed prepared metadata |
 | `86d729240243314bce305d1c158a30ecf2024a28` | Extend prefix-Z facts with borders/periods | O(n) analyses remain separate internal budgeted lanes, never M3String fields |
 | `10b4894505a6f6306f340c5ff3ef17270706b2c6` | Add exact UTF-16 Manacher palindrome facts | length-proportional palindrome lanes remain caller/cache owned |
@@ -66,6 +68,10 @@ The M3JDK target now follows the donor history rather than a single donor snapsh
   code-point and whitespace facts on canonical owner/range identity.
 - `M3StringSearchPrecompute` is a separate bounded 256-slot weak-owner cache for at most
   8,192-unit pattern KMP metadata. It retains no String, char[], byte[] or M3String payload.
+- `M3StringSourcePrecompute` is a separate 16-slot weak-owner cache for repeatedly searched
+  source ranges of 512..16,384 UTF-16 units. It retains primitive character postings and prefix
+  hashes only; dense postings fall back to the existing exact prepared-search path, and hash hits
+  are always exact UTF-16 verified.
 - `String.indexOf`, bounded `indexOf`, `lastIndexOf`, starts/suffix filters and character
   searches consume these facts only as safe pruning/preparation; exact UTF-16 comparison remains
   final truth.
