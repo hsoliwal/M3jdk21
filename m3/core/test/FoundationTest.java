@@ -133,6 +133,8 @@ public final class FoundationTest {
         check(catalog.mappingsAt(new SharedLexiconCatalog.Coordinate(0,0)).size()==2);
         check(catalog.mappingsAt(new SharedLexiconCatalog.Coordinate(0,0)).get(1).mappingName().equals("A2"));
         check(catalog.mappingsAt(new SharedLexiconCatalog.Coordinate(0,0)).get(1).precomputePayload().equals("{\"frequency_rank\":1}"));
+        check(catalog.findMapping("source-a2","id-a2").orElseThrow().mappingName().equals("A2"));
+        check(catalog.findMappings("a").size()==2);check(catalog.findMappings("missing").isEmpty());
         check(catalog.prefix("a",10).equals(List.of(new SharedLexiconCatalog.Coordinate(0,0))));
         expect(IllegalArgumentException.class,()->catalog.prefix("",1));
         check(catalog.find("\ud801").equals(Optional.of(new SharedLexiconCatalog.Coordinate(1,0))));
@@ -152,6 +154,7 @@ public final class FoundationTest {
         SharedLexiconCatalog.Coordinate number=catalog.find("10000").orElseThrow();
         check(catalog.textAt(number).equals("10000"));
         check(catalog.mappingsAt(number).stream().anyMatch(mapping->mapping.mappingName().equals("NUMBER_10000")));
+        check(catalog.findMapping("numbers","10000").orElseThrow().mappingName().equals("NUMBER_10000"));
         check(catalog.mappingsAt(number).stream().anyMatch(mapping->mapping.precomputePayload().contains("\"frequency_rank\":10000")));
         check(catalog.precomputeAt(number).precomputeProfile().contains("NumberPrecompute"));
         SharedLexiconCatalog.Coordinate london=catalog.find("London").orElseThrow();

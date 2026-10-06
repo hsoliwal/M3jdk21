@@ -51,6 +51,7 @@ public final class SharedLexiconCatalog {
     private final List<String> firstLexemes;
     private final List<String> lastLexemes;
     private final Map<Coordinate, List<SourceMapping>> mappings;
+    private final Map<SourceIdentity, SourceMapping> mappingsByIdentity;
     private final Map<Coordinate, PrecomputeFacts> precompute;
     private final List<PrecomputeProfile> precomputeProfiles;
     private final long recordCount;
@@ -68,6 +69,10 @@ public final class SharedLexiconCatalog {
         Map<Coordinate, List<SourceMapping>> mappingCopy = new HashMap<>();
         mappings.forEach((coordinate, values) -> mappingCopy.put(coordinate, List.copyOf(values)));
         this.mappings = Map.copyOf(mappingCopy);
+        Map<SourceIdentity, SourceMapping> identityCopy = new HashMap<>();
+        this.mappings.values().forEach(values -> values.forEach(mapping ->
+                identityCopy.put(new SourceIdentity(mapping.sourceId(), mapping.recordId()), mapping)));
+        this.mappingsByIdentity = Map.copyOf(identityCopy);
         this.precompute = Map.copyOf(precompute);
         this.precomputeProfiles = List.copyOf(precomputeProfiles);
         this.recordCount = recordCount;
@@ -138,6 +143,9 @@ public final class SharedLexiconCatalog {
 
     public record Coordinate(int shardId, int imageRow) { }
 
+    /** Stable Synexia identity, independent of the physical M3LEX projection. */
+    public record SourceIdentity(String sourceId, String recordId) { }
+
     /** One preserved Synexia source identity; several may point at one lexeme. */
     public record SourceMapping(String sourceId, String sourcePath, String sourceKind,
                                 String languageTag, String recordId, String lexeme,
@@ -161,6 +169,17 @@ public final class SharedLexiconCatalog {
     public List<SourceMapping> mappingsAt(Coordinate coordinate) {
         requireCoordinate(coordinate);
         return mappings.get(coordinate);
+    }
+    /** Returns the preserved mapping for one exact Synexia source identity. */
+    public Optional<SourceMapping> findMapping(String sourceId, String recordId) {
+        Objects.requireNonNull(sourceId);
+        Objects.requireNonNull(recordId);
+        return Optional.ofNullable(mappingsByIdentity.get(new SourceIdentity(sourceId, recordId)));
+    }
+    /** Finds all source mappings attached to one exact UTF-16 lexeme. */
+    public List<SourceMapping> findMappings(String text) {
+        Optional<Coordinate> coordinate = find(text);
+        return coordinate.isEmpty() ? List.of() : mappingsAt(coordinate.orElseThrow());
     }
     public PrecomputeFacts precomputeAt(Coordinate coordinate) {
         requireCoordinate(coordinate);

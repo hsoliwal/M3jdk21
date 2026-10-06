@@ -39,7 +39,9 @@ profile coverage and profile fingerprints, and retains the canonical opaque
 `precompute_payload` for each source mapping, then returns stable
 `(shardId,imageRow)` coordinates without flattening shard payloads. A VM may map
 one selected shard per process today; catalog warmup is an explicit loader
-operation and is not implied by the presence of the sidecar manifest.
+operation and is not implied by the presence of the sidecar manifest. Exact
+`findMapping(sourceId,recordId)` and `findMappings(text)` lookups preserve the
+Synexia identity/mapping bridge without requiring callers to manage coordinates.
 
 The original owner's publication contract still applies: trusted directory,
 immutable committed bytes, no external rewrite or truncation. Read-only mapping
