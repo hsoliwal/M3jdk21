@@ -1,0 +1,11 @@
+path	upstream	java21_adaptation
+src/java.base/share/classes/sun/security/pkcs/NamedPKCS8Key.java	ADD	Remove getParams @Override; keep internal NamedParameterSpec accessor.
+src/java.base/share/classes/sun/security/provider/NamedKEM.java	ADD	Verbatim upstream framework source.
+src/java.base/share/classes/sun/security/provider/NamedKeyFactory.java	ADD	Remove AsymmetricKey dependency; RAW foreign keys derive parameter set from algorithm name/single-parameter factory.
+src/java.base/share/classes/sun/security/provider/NamedKeyPairGenerator.java	ADD	Verbatim upstream framework source.
+src/java.base/share/classes/sun/security/provider/NamedSignature.java	ADD	Verbatim upstream framework source.
+src/java.base/share/classes/sun/security/util/KeyUtil.java	MODIFY	Preserve Java21 EC/EdEC display logic; add internal NamedX509Key/NamedPKCS8Key parameter-name display.
+src/java.base/share/classes/sun/security/util/SignatureUtil.java	MODIFY	Add internal NamedPKCS8Key handling instead of generic AsymmetricKey parameter access; retain KEM-null/default same-name behavior.
+src/java.base/share/classes/sun/security/x509/NamedX509Key.java	ADD	Remove getParams @Override; keep internal NamedParameterSpec accessor.
+test/jdk/sun/security/provider/NamedEdDSA.java	ADD	Verbatim upstream prerequisite regression.
+test/jdk/sun/security/provider/NamedKeyFactoryTest.java	ADD	Replace AsymmetricKey assertion with internal Named* assertions; generic getParams-only RAW key is rejected on Java21.
