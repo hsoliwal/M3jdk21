@@ -2132,7 +2132,12 @@ public final class String
      *          lexicographically greater than the string argument.
      */
     public int compareTo(String anotherString) {
-        if (m3() != null || anotherString.m3() != null) {
+        M3String leftM3 = m3();
+        M3String rightM3 = anotherString.m3();
+        if (leftM3 != null && leftM3.sameCoordinate(rightM3)) {
+            return 0;
+        }
+        if (leftM3 != null || rightM3 != null) {
             int length1 = length();
             int length2 = anotherString.length();
             int limit = Math.min(length1, length2);
@@ -4615,6 +4620,10 @@ public final class String
         if (isEmpty()) {
             return "";
         }
+        M3String storage = m3();
+        if (storage != null) {
+            return new String(storage.translateEscapes());
+        }
         char[] chars = toCharArray();
         int length = chars.length;
         int from = 0;
@@ -4977,6 +4986,9 @@ public final class String
      *          as its single character the argument {@code c}.
      */
     public static String valueOf(char c) {
+        if (M3String.admissionEnabled()) {
+            return new String(M3StringPool.internUnit(c));
+        }
         if (COMPACT_STRINGS && StringLatin1.canEncode(c)) {
             return new String(StringLatin1.toBytes(c), LATIN1);
         }
