@@ -2386,7 +2386,9 @@ public final class String
                 M3StringFacts leftFacts = leftM3.slice(toffset, toffset + len).facts();
                 M3StringFacts rightFacts = rightM3.slice(ooffset, ooffset + len).facts();
                 if (leftFacts.ascii && rightFacts.ascii
-                        && leftFacts.asciiLowerHash != rightFacts.asciiLowerHash) {
+                        && (leftFacts.asciiLowerHash != rightFacts.asciiLowerHash
+                                || leftFacts.asciiUpperHash != rightFacts.asciiUpperHash
+                                || leftFacts.asciiTitleHash != rightFacts.asciiTitleHash)) {
                     return false;
                 }
             }
