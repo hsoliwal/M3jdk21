@@ -221,6 +221,17 @@ public class M3StringPrecomputeSearchTest {
         check(String.join("", "\u03a3", "X").toLowerCase(Locale.ROOT).equals("\u03c3x"),
                 "non-ASCII lowercase bypass");
 
+        String equalComposed = String.join("", "Aa", "BB");
+        String equalScalar = new String("AaBB".toCharArray());
+        check(equalComposed.equals(equalScalar), "equal composed/scalar content");
+        check(!String.join("", "alpha", "X").equals(String.join("", "alpha", "Y")),
+                "unequal canonical hash reject");
+        // "Aa" and "BB" are the classic Java String hash collision.
+        String collisionLeft = String.join("", "A", "a");
+        String collisionRight = String.join("", "B", "B");
+        check(collisionLeft.hashCode() == collisionRight.hashCode(), "known Java hash collision");
+        check(!collisionLeft.equals(collisionRight), "hash collision exact verification");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
