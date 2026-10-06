@@ -459,6 +459,30 @@ public class M3StringPrecomputeSearchTest {
         check(utf16BuilderFromLatin.toString().equals("\u0100latin-only"),
                 "UTF16 builder bulk inflates Latin1 M3");
 
+        String builderNeedle = String.join("", "b", "\u0100", "c");
+        StringBuilder searchableBuilder = new StringBuilder("xxab\u0100cdab\u0100czz");
+        check(searchableBuilder.indexOf(builderNeedle)
+                        == searchableBuilder.toString().indexOf(builderNeedle),
+                "StringBuilder indexOf M3 target");
+        check(searchableBuilder.indexOf(builderNeedle, 5)
+                        == searchableBuilder.toString().indexOf(builderNeedle, 5),
+                "StringBuilder indexOf M3 target from");
+        check(searchableBuilder.lastIndexOf(builderNeedle)
+                        == searchableBuilder.toString().lastIndexOf(builderNeedle),
+                "StringBuilder lastIndexOf M3 target");
+        check(searchableBuilder.lastIndexOf(builderNeedle, 8)
+                        == searchableBuilder.toString().lastIndexOf(builderNeedle, 8),
+                "StringBuilder lastIndexOf M3 target from");
+
+        String latinBuilderNeedle = String.join("", "aba", "ba");
+        StringBuilder latinSearchBuilder = new StringBuilder("xxababaxx");
+        check(latinSearchBuilder.indexOf(latinBuilderNeedle)
+                        == latinSearchBuilder.toString().indexOf(latinBuilderNeedle),
+                "Latin1 builder indexOf M3 target");
+        check(latinSearchBuilder.lastIndexOf(latinBuilderNeedle)
+                        == latinSearchBuilder.toString().lastIndexOf(latinBuilderNeedle),
+                "Latin1 builder lastIndexOf M3 target");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
