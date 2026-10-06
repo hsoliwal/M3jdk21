@@ -1,0 +1,8 @@
+gate	state
+docs_before_code	PASS
+exact_importer_preimage	PINNED
+new_java_targets	ABSENT_BEFORE
+recipe_fixed_point	AUTHORED_PENDING_EXECUTION
+synexia_import_99pct_gate	AUTHORED_PENDING_EXECUTION
+openjdk_product_source	UNCHANGED
+promotion_authority	FALSE
