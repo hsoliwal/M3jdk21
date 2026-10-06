@@ -306,6 +306,13 @@
       "status": "donor accelerator families",
       "source_role": "distributed/hardware precompute execution",
       "target_rule": "M3JDK java.base must not depend on Jini/TPU/NPU/Tornado runtimes; import only validated precompute products through target-owned internal boundaries."
+    },
+    {
+      "source": "com.synexia.indexstring.precompute Unicode / SI unit / static catalog families",
+      "target": "separate M3 immutable catalog/image plane",
+      "status": "donor image families",
+      "source_role": "Unicode code-point/property tables, SI/unit catalogs and other frozen numeric/static precompute",
+      "target_rule": "Import only versioned immutable tables required by a target-internal consumer; never retain them as per-String payload and never expose them as public java.lang.String precompute API."
     }
   ],
   "imported_donor_sources": [],
