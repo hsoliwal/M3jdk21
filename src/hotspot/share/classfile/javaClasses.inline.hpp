@@ -205,8 +205,15 @@ jint java_lang_M3String::java_hash(oop value) {
     return o->int_field(_owner_javaHash_offset);
   }
   jint hash = 0;
-  for (int index = 0; index < length(value); index++) {
-    hash = 31 * hash + (jint)char_at(value, index);
+  static const int chunk_capacity = 256;
+  jchar scratch[chunk_capacity];
+  const int value_length = length(value);
+  for (int copied = 0; copied < value_length; copied += chunk_capacity) {
+    const int chunk = MIN2(chunk_capacity, value_length - copied);
+    copy_chars(value, copied, chunk, scratch);
+    for (int index = 0; index < chunk; index++) {
+      hash = 31 * hash + (jint)scratch[index];
+    }
   }
   return hash;
 }
