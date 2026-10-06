@@ -29,9 +29,10 @@ import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
 
 /**
+ * <b>[JDK INTERNAL]</b>
  * Transport-neutral JDK contract for immutable canonical M3 String backing.
  *
- * <p>The identifier is a logical MIndex coordinate, never a process address. Implementations may
+ * <p>The identifier is a logical M3 coordinate, never a process address. Implementations may
  * use mapped files, VM-managed shared storage, FFM, or native memory while preserving the same
  * java.lang.String semantics.</p>
  */
