@@ -14,3 +14,5 @@ openjdk_image_build	PENDING_HOSTED_PROOF
 focused_jtreg	PENDING_HOSTED_PROOF
 runtime_smoke	PENDING_HOSTED_PROOF
 promotion	NOT_AUTHORIZED
+proof_refresh_base	b71ee5bf88398fb80961c13db03e8c675fb445ce
+proof_refresh_requested	2026-10-06
