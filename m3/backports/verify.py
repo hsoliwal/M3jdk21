@@ -10,7 +10,7 @@ import csv
 import hashlib
 from pathlib import Path
 
-EXPECTED_RELEASE_COUNTS = {22: 12, 23: 12, 24: 22, 25: 17, 26: 10, 27: 9}
+EXPECTED_RELEASE_COUNTS = {22: 12, 23: 12, 24: 24, 25: 18, 26: 10, 27: 9}
 EXPECTED_TOTAL = sum(EXPECTED_RELEASE_COUNTS.values())
 
 
