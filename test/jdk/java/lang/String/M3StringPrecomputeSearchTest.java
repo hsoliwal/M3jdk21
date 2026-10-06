@@ -422,6 +422,13 @@ public class M3StringPrecomputeSearchTest {
                         "L" + builderSource.substring(1, builderSource.length() - 1)),
                 "StringBuilder append M3 range");
 
+        String utf16OwnerLatinOnlyRange =
+                String.join("", "\u0100", "latin", "\u0101").substring(1, 6);
+        StringBuilder builderWholeLatinRange = new StringBuilder("P");
+        builderWholeLatinRange.append(utf16OwnerLatinOnlyRange);
+        check(builderWholeLatinRange.toString().equals("Platin"),
+                "StringBuilder avoids inflation for Latin1 M3 range");
+
         StringBuilder builderLatinRange = new StringBuilder("P");
         String utf16OwnerLatinRange = String.join("", "\u0100", "latin", "\u0101");
         builderLatinRange.append(utf16OwnerLatinRange, 1, 6);
