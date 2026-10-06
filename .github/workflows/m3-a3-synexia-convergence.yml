@@ -1,0 +1,84 @@
+name: M3 A3 Synexia convergence borrow
+
+on:
+  pull_request:
+    paths:
+      - 'm3/tooling/a3/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-synexia-convergence.yml'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-synexia-convergence/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/a3-synexia-convergence/**'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3SynexiaConvergenceDeliveryTest.java'
+      - 'm3/docs/a3-synexia-convergence.md'
+      - 'm3/NOTICE'
+      - '.github/workflows/m3-a3-synexia-convergence.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Diff hygiene and product-source boundary
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check "$BASE_SHA...HEAD"
+          if git diff --name-only "$BASE_SHA...HEAD" -- src test | grep -q .; then
+            echo "A3 Synexia borrow must not change OpenJDK src/ or test/ product trees"
+            exit 1
+          fi
+
+      - name: Compile and test A3 plus migration recipes
+        run: >
+          mvn -B -ntp -f m3/pom.xml
+          -pl tooling/a3,tooling/migration-recipes
+          -am test
+
+      - name: Verify exact Apache-2.0 Synexia snapshot
+        run: >
+          mvn -B -ntp -f m3/pom.xml
+          -pl tooling/a3
+          -Dexec.mainClass=com.m3.a3.A3
+          -Dexec.args="synexia --root ${{ github.workspace }} --out m3/build/a3/synexia"
+          exec:java
+
+      - name: Compile whole-JDK public-polish target census
+        run: >
+          mvn -B -ntp -f m3/pom.xml
+          -pl tooling/a3
+          -Dexec.mainClass=com.m3.a3.A3
+          -Dexec.args="polish --root ${{ github.workspace }} --out m3/build/a3/public-polish"
+          exec:java
+
+      - name: Prove source-sealed delivery fixed point
+        run: >
+          mvn -B -ntp -f m3/pom.xml
+          -pl tooling/migration-recipes
+          -Dtest=M3A3SynexiaConvergenceDeliveryTest
+          -Dsurefire.failIfNoSpecifiedTests=false
+          test
+
+      - name: Product tree remains untouched
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -z "$(git status --porcelain=v1 -- src test)"
+          test -s m3/build/a3/synexia/synexia.tsv
+          test -s m3/build/a3/public-polish/SOURCE.tsv
+          test -s m3/build/a3/public-polish/TARGETS.tsv

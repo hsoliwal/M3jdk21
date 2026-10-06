@@ -1,0 +1,41 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.a3.SynexiaConvergenceDelivery
+displayName: Install A3 Synexia convergence borrowing
+description: >-
+  Replays the exact Apache-2.0 Synexia convergence/public-polish donor snapshot and the
+  JDK-specific A3 adapters. Candidate-only; no OpenJDK product mutation or promotion authority.
+tags:
+  - m3
+  - a3
+  - synexia
+  - convergence
+  - public-polish
+  - atomize
+  - patternize
+  - recipe-mastery
+  - apache-2.0
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: a3-synexia-convergence
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: a3-synexia-convergence
+
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.a3.SynexiaPublicPolish
+displayName: A3 Synexia-derived public-code polish
+description: >-
+  Reuses the existing A3 Java 21 FILE-local convergence DAG as the JDK adaptation of
+  Synexia PublicPolish. Inventory, atomization, patternization/IOP and documentation are
+  candidate-only; serial A3 gates remain authoritative.
+tags:
+  - m3
+  - a3
+  - public-polish
+  - java21
+  - file-local
+  - contract-preserving
+recipeList:
+  - com.m3.rewrite.M3Java21Convergence

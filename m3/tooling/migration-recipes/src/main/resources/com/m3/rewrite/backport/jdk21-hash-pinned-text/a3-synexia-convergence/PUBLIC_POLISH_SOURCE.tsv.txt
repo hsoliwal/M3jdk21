@@ -1,0 +1,10 @@
+field	value
+develop_revision	d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c
+root_pom_blob	a799bfd15bc1170fb73a3c931980c34347bbdba3
+module_count	202
+owned_code	192
+owned_mixed_native	6
+build_metadata	3
+vendor_read_only	1
+mutation_recipe	com.synexia.PublicPolish
+promotion_authority	false

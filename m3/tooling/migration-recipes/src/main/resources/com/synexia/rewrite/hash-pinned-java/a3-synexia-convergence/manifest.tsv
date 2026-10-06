@@ -1,0 +1,6 @@
+m3/tooling/a3/src/main/java/com/m3/a3/A3.java	6d9ec887c87898167748ca5f77598f95a6784cfaf14882f4983733c006374b77	eefb39aa9cda0a882c09849e486a6d71c338effd402849d61a5c05117cf06e8e	after-A3.java.txt
+m3/tooling/a3/src/main/java/com/m3/a3/A3Polish.java	ABSENT	cc36b02f7f71dab79a620e622e61e44f6645093665c4c7ba8c48686f1666f8bc	A3Polish.java.txt
+m3/tooling/a3/src/main/java/com/m3/a3/A3Synexia.java	ABSENT	cbd6e5c537cf6e90af1915cbc7abedd473693ad8be979f2f3d5a5d5251e4cf54	A3Synexia.java.txt
+m3/tooling/a3/src/test/java/com/m3/a3/A3PolishTest.java	ABSENT	e4c384e76e214871d40c0e74703beeffa9d67576fc5b0234407db7cc8f715139	A3PolishTest.java.txt
+m3/tooling/a3/src/test/java/com/m3/a3/A3SynexiaTest.java	ABSENT	d7855bba2352b68f0ec2f2e9b5b63027058cc5e90a6bb7b189f88b10c36665e1	A3SynexiaTest.java.txt
+m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3SynexiaConvergenceDeliveryTest.java	ABSENT	65573a0e3efaa19d178ec32d32b1cdd4ab0ce52cc40fe053fa90074fff63016d	M3A3SynexiaConvergenceDeliveryTest.java.txt

@@ -1,0 +1,98 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.rewrite;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import org.openrewrite.Recipe;
+
+/**
+ * Read-only live-reactor machine-oriented atom/pattern catalogue.
+ *
+ * <p>Maven supplies source/classpath truth. The pass inventories semantic atoms, CodeSplit
+ * structure/relationships, code signals, structural patterns, repository graph, challenge/problem
+ * shapes, JDT/jSparrow/framework transformation vocabulary and public FOSS donor evidence before
+ * any source-changing atom extraction or absorption recipe is allowed.</p>
+ */
+public final class M3RepositoryAtomizePatternizeRecipe extends Recipe {
+    private final String sourceFilePattern;
+    private final String problemTerm;
+
+    public M3RepositoryAtomizePatternizeRecipe() {
+        this("**/*.java",
+                "mindex minex jni filesystem precompute search regex index persistence lifecycle "
+                        + "map filter flatmap fold reduce join group cardinality effects composition");
+    }
+
+    @JsonCreator
+    public M3RepositoryAtomizePatternizeRecipe(String sourceFilePattern, String problemTerm) {
+        this.sourceFilePattern = checked(sourceFilePattern, "sourceFilePattern");
+        this.problemTerm = checked(problemTerm, "problemTerm");
+    }
+
+    @Override public String getDisplayName() {
+        return "M3 live repository atomize and patternize catalogue";
+    }
+
+    @Override public String getDescription() {
+        return "Runs the canonical read-only machine-oriented atom/pattern/FOSS evidence lattice, "
+                + "including dual signal chains, semantic normal form, relationship recognition and "
+                + "repeated-residue recipe fan-in, before any bounded source-changing recipe is admitted.";
+    }
+
+    @Override public Set<String> getTags() {
+        return Set.of("synexia", "m3", "machine-oriented-programming", "recipe-first", "maven",
+                "atom", "pattern", "foss-first", "repository", "read-only", "candidate-only");
+    }
+
+    @Override public int maxCycles() { return 1; }
+
+    @Override public List<Recipe> getRecipeList() {
+        return List.of(
+                new M3RecipeFirstJavaAtomInventoryRecipe(),
+                new M3AtomStructureInventoryRecipe(),
+                new M3SemanticCodeInventoryRecipe(),
+                new M3CodeSplitJavaDonorReviewRecipe(sourceFilePattern),
+                new M3CodeSplitRelationshipInventoryRecipe(),
+                new M3CodeSignalTriggerRecipe(sourceFilePattern),
+                new M3AtomPatternSignalChainRecipe(sourceFilePattern, 4),
+                new M3SignalChainRecipe(sourceFilePattern, 4, 4),
+                new M3SemanticNormalFormRecipe(sourceFilePattern),
+                new M3OpenRewriteRuntimeRecipeInventoryRecipe(),
+                new M3JavaPatternInventoryRecipe(),
+                new M3RepositorySemanticGraphRecipe(),
+                new M3RelationshipPatternizerRecipe(),
+                new M3AtomPatternFanInRecipe(sourceFilePattern, 2, 4, 4),
+                new M3CartesianRecipeIdeaExpansionRecipe(
+                        sourceFilePattern,
+                        2,
+                        4,
+                        10_000,
+                        4,
+                        4),
+                new M3ProblemRecipePlannerRecipe(20),
+                new M3FrameworkRecipePatternReviewRecipe(sourceFilePattern, problemTerm),
+                new M3JdtTransformationSurfaceReviewRecipe(),
+                new M3JsparrowRuleReviewRecipe(),
+                new M3UniversalLanguageRecipeReviewRecipe(),
+                new M3DonorBestOfBestSupersetReviewRecipe("ALL"),
+                new M3MechanicalDonorShapeReviewRecipe("ALL"),
+                new M3PreparePrivatePrimitiveAtomsRecipe());
+    }
+
+    public String sourceFilePattern() { return sourceFilePattern; }
+    public String problemTerm() { return problemTerm; }
+    public boolean mutationAuthority() { return false; }
+    public boolean sourceCopyAuthority() { return false; }
+    public boolean promotionAuthority() { return false; }
+
+    private static String checked(String value, String field) {
+        String result = Objects.toString(value, "").strip();
+        if (result.isEmpty() || result.length() > 4096 || result.indexOf('\0') >= 0
+                || result.indexOf('\r') >= 0 || result.indexOf('\n') >= 0) {
+            throw new IllegalArgumentException(field);
+        }
+        return result;
+    }
+}

@@ -1,0 +1,483 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.rewrite;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.HexFormat;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
+
+/** Deterministic bounded regex/string corpus for the canonical M3 recipe-mastery laboratory. */
+public final class M3RegexStringMasteryCorpus {
+    public static final int MAX_CASES = 10_000;
+
+    public record PatternCase(String id, String pattern) {
+        public PatternCase {
+            id = token(id, "pattern id");
+            pattern = Objects.requireNonNull(pattern, "pattern");
+        }
+    }
+
+    public record SubjectCase(String id, String subject) {
+        public SubjectCase {
+            id = token(id, "subject id");
+            subject = Objects.requireNonNull(subject, "subject");
+        }
+    }
+
+    /** A bounded, witnessed expression and its ordered raw-UTF-16 input packet. */
+    public record Trial(
+            int ordinal,
+            String category,
+            PatternCase pattern,
+            int flags,
+            String witness,
+            List<SubjectCase> subjects,
+            String rootSha256) {
+        public Trial {
+            if (ordinal < 0 || ordinal >= MAX_CASES) throw new IllegalArgumentException("ordinal");
+            category = token(category, "category");
+            pattern = Objects.requireNonNull(pattern, "pattern");
+            witness = Objects.requireNonNull(witness, "witness");
+            subjects = List.copyOf(Objects.requireNonNull(subjects, "subjects"));
+            if (subjects.size() != 16) throw new IllegalArgumentException("subject packet size");
+            String exactRoot = trialRoot(ordinal, category, pattern, flags, witness, subjects);
+            if (rootSha256 != null && !rootSha256.isBlank()
+                    && !sha(rootSha256, "rootSha256").equals(exactRoot)) {
+                throw new IllegalArgumentException("trial root mismatch");
+            }
+            rootSha256 = exactRoot;
+        }
+    }
+
+    private static final List<String> GENERATED_FAMILIES = List.of(
+            "plain-literal", "literal-code", "quoted-code", "literal-alternatives",
+            "numbered-captures", "named-optional-captures", "safe-greedy-plus",
+            "reluctant-plus", "possessive-plus", "class-range-quantifier",
+            "multiline-anchors", "positive-lookahead", "fixed-lookbehind",
+            "bounded-backreference", "ascii-insensitive", "unicode-case", "dotall",
+            "unicode-property", "empty-alternative", "word-boundary");
+
+    /**
+     * Deterministic prefix of a 20-family packet, bounded before allocation or enumeration.
+     * Every full packet has 500 expressions per family; ordinal-bearing literal content makes
+     * all 10,000 regex strings distinct even when flags are ignored. Grammars have no nested
+     * variable quantifiers; the only backreference repeats one fixed, captured literal.
+     */
+    public static List<Trial> generated(int count) {
+        if (count < 1 || count > MAX_CASES) {
+            throw new IllegalArgumentException("generated count must be 1.." + MAX_CASES);
+        }
+        ArrayList<Trial> trials = new ArrayList<>(count);
+        for (int ordinal = 0; ordinal < count; ordinal++) {
+            int family = ordinal % GENERATED_FAMILIES.size();
+            String marker = String.format(Locale.ROOT, "r%05dx", ordinal);
+            String category = GENERATED_FAMILIES.get(family);
+            String regex;
+            String witness;
+            int flags = 0;
+            switch (family) {
+                case 0 -> { regex = marker; witness = marker; }
+                case 1 -> {
+                    regex = "if (" + marker + ") { call(); } [a-z]+\\d+";
+                    witness = "if (" + marker + ") { call(); } [a-z]+\\d+";
+                    flags = Pattern.LITERAL;
+                }
+                case 2 -> {
+                    regex = "\\Qif (" + marker + ") { run(); }\\E";
+                    witness = "if (" + marker + ") { run(); }";
+                }
+                case 3 -> { regex = "(?:" + marker + "|alt" + marker + ")"; witness = marker; }
+                case 4 -> { regex = "(" + marker + ")(x)"; witness = marker + "x"; }
+                case 5 -> {
+                    regex = "(?<head>" + marker + ")(?:-(?<tail>x))?";
+                    witness = marker + "-x";
+                }
+                case 6 -> { regex = "(?:" + marker + ")+"; witness = marker + marker; }
+                case 7 -> { regex = "(?:" + marker + ")+?"; witness = marker + marker; }
+                case 8 -> { regex = "(?:" + marker + ")++"; witness = marker + marker; }
+                case 9 -> { regex = marker + "[a-c]{1,3}"; witness = marker + "abc"; }
+                case 10 -> {
+                    regex = "^" + marker + "$";
+                    witness = marker;
+                    flags = Pattern.MULTILINE;
+                }
+                case 11 -> { regex = "(?=(" + marker + "))" + marker; witness = marker; }
+                case 12 -> { regex = "(?<=" + marker + ")x"; witness = marker + "x"; }
+                case 13 -> { regex = "(" + marker + ")\\1"; witness = marker + marker; }
+                case 14 -> {
+                    regex = marker + "AbC";
+                    witness = marker + "aBc";
+                    flags = Pattern.CASE_INSENSITIVE;
+                }
+                case 15 -> {
+                    regex = marker + "Σ";
+                    witness = marker + "σ";
+                    flags = Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE;
+                }
+                case 16 -> {
+                    regex = marker + ".{1,3}Z";
+                    witness = marker + "\nZ";
+                    flags = Pattern.DOTALL;
+                }
+                case 17 -> {
+                    regex = marker + "\\p{L}{1,3}";
+                    witness = marker + "Ωé";
+                    flags = Pattern.UNICODE_CHARACTER_CLASS;
+                }
+                case 18 -> { regex = "(?:" + marker + "|)"; witness = marker; }
+                case 19 -> { regex = "\\b" + marker + "\\b"; witness = marker; }
+                default -> throw new IllegalStateException("unknown generated family");
+            }
+            List<SubjectCase> inputs = List.of(
+                    s("witness", witness),
+                    s("empty", ""),
+                    s("negative", "---"),
+                    s("near-miss", witness.substring(0, witness.length() - 1) + "_"),
+                    s("prefixed", "$" + witness),
+                    s("suffixed", witness + "$"),
+                    s("repeated", witness + witness),
+                    s("lf-lines", witness + "\n" + witness),
+                    s("crlf-lines", witness + "\r\n" + witness),
+                    s("nul", "\u0000" + witness + "\u0000"),
+                    s("code-regex-data", "if (regex) { run(); } \\d+ [a-z] " + witness),
+                    s("supplementary", "😀" + witness + "😀"),
+                    s("isolated-high", "\uD800" + witness),
+                    s("isolated-low", "\uDC00" + witness),
+                    s("combining-forms", witness + "é/e\u0301"),
+                    s("case-variants", witness.toUpperCase(Locale.ROOT) + "|"
+                            + witness.toLowerCase(Locale.ROOT)));
+            trials.add(new Trial(ordinal, category, p("generated-" + ordinal, regex),
+                    flags, witness, inputs, ""));
+        }
+        return List.copyOf(trials);
+    }
+
+    private static String trialRoot(int ordinal, String category, PatternCase pattern, int flags,
+            String witness, List<SubjectCase> subjects) {
+        ArrayList<String> fields = new ArrayList<>(7 + subjects.size() * 2);
+        fields.add(Integer.toString(ordinal));
+        fields.add(category);
+        fields.add(pattern.id());
+        fields.add(pattern.pattern());
+        fields.add(Integer.toString(flags));
+        fields.add(witness);
+        fields.add(Integer.toString(subjects.size()));
+        for (SubjectCase subject : subjects) {
+            fields.add(subject.id());
+            fields.add(subject.subject());
+        }
+        return root("M3_REGEX_STRING_TRIAL_V1", fields.toArray(String[]::new));
+    }
+
+    public record Case(
+            int ordinal,
+            PatternCase pattern,
+            SubjectCase subject,
+            String rootSha256) {
+        public Case {
+            if (ordinal < 0) throw new IllegalArgumentException("ordinal");
+            pattern = Objects.requireNonNull(pattern, "pattern");
+            subject = Objects.requireNonNull(subject, "subject");
+            rootSha256 = sha(rootSha256, "rootSha256");
+        }
+
+        public String id() {
+            return pattern.id() + "__" + subject.id();
+        }
+    }
+
+    public record Oracle(
+            boolean compiles,
+            boolean findMatched,
+            int findStart,
+            int findEnd,
+            String groupZero,
+            boolean fullMatched,
+            String failureClass,
+            int failureIndex,
+            String fingerprintSha256) {
+        public Oracle {
+            groupZero = Objects.toString(groupZero, "");
+            failureClass = Objects.toString(failureClass, "");
+            fingerprintSha256 = sha(fingerprintSha256, "fingerprintSha256");
+            if (compiles && failureIndex != -1) throw new IllegalArgumentException("compiled failure index");
+            if (!compiles && failureClass.isEmpty()) throw new IllegalArgumentException("failureClass");
+            if (!findMatched && (findStart != -1 || findEnd != -1 || !groupZero.isEmpty())) {
+                throw new IllegalArgumentException("non-match details");
+            }
+        }
+
+        public String canonicalValue() {
+            return compiles
+                    ? "OK|" + findMatched + "|" + findStart + "|" + findEnd + "|"
+                            + base64(groupZero) + "|" + fullMatched
+                    : "ERROR|" + failureClass + "|" + failureIndex;
+        }
+    }
+
+    private static final List<PatternCase> PATTERNS = List.of(
+            p("empty", ""),
+            p("literal-abc", "abc"),
+            p("literal-code", "if x then y"),
+            p("dot", "."),
+            p("greedy-plus", "a+"),
+            p("reluctant-plus", "a+?"),
+            p("possessive-plus", "a++"),
+            p("class", "[a-z]+"),
+            p("alternation", "(?:ab|cd)+"),
+            p("anchors", "^(?:ab)+$"),
+            p("lookahead", "(?=(ab))"),
+            p("lookbehind", "(?<=a)b"),
+            p("backreference", "(.)\\1"),
+            p("word-boundary", "\\bword\\b"),
+            p("unicode-letter", "\\p{L}+"),
+            p("dotall", "(?s).*"),
+            p("quoted-code", "\\Qif (x) { y(); }\\E"),
+            p("range-quantifier", "a{2,4}"),
+            p("comma-token", "(?:^|,)x(?:,|$)"),
+            p("case-insensitive", "(?i)straße"),
+            p("invalid-class", "["),
+            p("invalid-quantifier", "a{4,2}"),
+            p("invalid-group", "(?<"));
+
+    private static final List<SubjectCase> SUBJECTS = List.of(
+            s("empty", ""),
+            s("abc", "abc"),
+            s("embedded-abc", "zabcx"),
+            s("aaab", "aaab"),
+            s("abab", "abab"),
+            s("code", "if (x) { y(); }"),
+            s("code-words", "if x then y"),
+            s("lf", "line1\nline2"),
+            s("crlf", "line1\r\nline2"),
+            s("latin1", "café"),
+            s("bmp", "Ωmega"),
+            s("supplementary", "😀x😀"),
+            s("unpaired-high", "\uD800"),
+            s("regex-looking", "\\d+ literal [a-z]"),
+            s("word", "word"),
+            s("words", "word words"),
+            s("a", "a"),
+            s("b", "b"),
+            s("ab", "ab"),
+            s("abb", "abb"),
+            s("digits", "12345"),
+            s("turkish-i", "İiıI"),
+            s("german-sharp-s", "Straße"),
+            s("csv-x", "a,x,b"));
+
+    private M3RegexStringMasteryCorpus() {}
+
+    public static List<PatternCase> patterns() { return PATTERNS; }
+    public static List<SubjectCase> subjects() { return SUBJECTS; }
+
+    public static List<Case> all() {
+        long count = Math.multiplyExact((long) PATTERNS.size(), SUBJECTS.size());
+        if (count > MAX_CASES) throw new IllegalStateException("regex/string corpus budget exceeded");
+        ArrayList<Case> cases = new ArrayList<>(Math.toIntExact(count));
+        int ordinal = 0;
+        for (PatternCase pattern : PATTERNS) {
+            for (SubjectCase subject : SUBJECTS) {
+                cases.add(new Case(
+                        ordinal++, pattern, subject,
+                        root("M3_REGEX_STRING_CASE_V1", pattern.id(), pattern.pattern(), subject.id(), subject.subject())));
+            }
+        }
+        return List.copyOf(cases);
+    }
+
+    public static Case require(String patternId, String subjectId) {
+        return all().stream()
+                .filter(value -> value.pattern().id().equals(patternId)
+                        && value.subject().id().equals(subjectId))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "unknown regex/string case: " + patternId + "/" + subjectId));
+    }
+
+    public static Oracle evaluate(Case value) {
+        Objects.requireNonNull(value, "value");
+        try {
+            Pattern pattern = Pattern.compile(value.pattern().pattern());
+            Matcher finder = pattern.matcher(value.subject().subject());
+            boolean found = finder.find();
+            int start = found ? finder.start() : -1;
+            int end = found ? finder.end() : -1;
+            String group = found ? finder.group() : "";
+            boolean matches = pattern.matcher(value.subject().subject()).matches();
+            String canonical = "OK|" + found + "|" + start + "|" + end + "|"
+                    + base64(group) + "|" + matches;
+            return new Oracle(
+                    true, found, start, end, group, matches, "", -1,
+                    root("M3_REGEX_STRING_JDK_ORACLE_V1", value.rootSha256(), canonical));
+        } catch (PatternSyntaxException failure) {
+            String canonical = "ERROR|" + failure.getClass().getName() + "|" + failure.getIndex();
+            return new Oracle(
+                    false, false, -1, -1, "", false,
+                    failure.getClass().getName(), failure.getIndex(),
+                    root("M3_REGEX_STRING_JDK_ORACLE_V1", value.rootSha256(), canonical));
+        }
+    }
+
+    /** Complete Java project used by the existing compiler/behavior recipe laboratory. */
+    public static Map<String, String> fixtureSources(Case value) {
+        Objects.requireNonNull(value, "value");
+        String patternExpression = javaStringExpression(value.pattern().pattern());
+        String subjectExpression = javaStringExpression(value.subject().subject());
+        String subject = """
+                package mastery.regex;
+
+                public final class Subject {
+                    private Subject() {}
+                    private static final String PATTERN = %s;
+                    private static final String INPUT = %s;
+
+                    public static String probe() {
+                        try {
+                            java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(PATTERN);
+                            java.util.regex.Matcher matcher = pattern.matcher(INPUT);
+                            boolean found = matcher.find();
+                            int start = found ? matcher.start() : -1;
+                            int end = found ? matcher.end() : -1;
+                            String group = found ? matcher.group() : "";
+                            boolean matches = pattern.matcher(INPUT).matches();
+                            return "OK|" + found + "|" + start + "|" + end + "|"
+                                    + utf16Base64(group)
+                                    + "|" + matches;
+                        } catch (java.util.regex.PatternSyntaxException failure) {
+                            return "ERROR|" + failure.getClass().getName() + "|" + failure.getIndex();
+                        }
+                    }
+
+                    private static String utf16Base64(String value) {
+                        byte[] bytes = new byte[Math.multiplyExact(value.length(), 2)];
+                        for (int index = 0; index < value.length(); index++) {
+                            char unit = value.charAt(index);
+                            bytes[index * 2] = (byte) (unit >>> 8);
+                            bytes[index * 2 + 1] = (byte) unit;
+                        }
+                        return java.util.Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
+                    }
+                }
+                """.formatted(patternExpression, subjectExpression);
+        String decoy = """
+                package mastery.regex;
+
+                final class Decoy {
+                    private Decoy() {}
+                    static final String CODE = "if (regex) { patternize(); atomize(); }";
+                    static final String REGEX = "(?:class|record)\\\\s+[A-Za-z_$][A-Za-z0-9_$]*";
+                    /* fakeCode() { while (true) { rewrite(); } } */
+                }
+                """;
+        LinkedHashMap<String, String> sources = new LinkedHashMap<>();
+        sources.put("mastery/regex/Subject.java", subject);
+        sources.put("mastery/regex/Decoy.java", decoy);
+        return Map.copyOf(sources);
+    }
+
+    public static String expectedProbeValue(Case value) {
+        return evaluate(value).canonicalValue();
+    }
+
+    /** Small hostile subset for the expensive recipe/compiler convergence chamber. */
+    public static List<Case> focusedRecipeCases() {
+        return List.of(
+                require("empty", "empty"),
+                require("literal-abc", "embedded-abc"),
+                require("literal-code", "code-words"),
+                require("greedy-plus", "aaab"),
+                require("reluctant-plus", "aaab"),
+                require("possessive-plus", "aaab"),
+                require("lookahead", "embedded-abc"),
+                require("lookbehind", "ab"),
+                require("backreference", "abb"),
+                require("unicode-letter", "supplementary"),
+                require("dotall", "lf"),
+                require("quoted-code", "code"),
+                require("case-insensitive", "german-sharp-s"),
+                require("invalid-class", "abc"),
+                require("invalid-quantifier", "aaab"),
+                require("invalid-group", "abc"));
+    }
+
+    private static PatternCase p(String id, String pattern) { return new PatternCase(id, pattern); }
+    private static SubjectCase s(String id, String subject) { return new SubjectCase(id, subject); }
+
+    private static String javaStringExpression(String value) {
+        StringBuilder out = new StringBuilder("\"");
+        for (int i = 0; i < value.length(); i++) {
+            char ch = value.charAt(i);
+            switch (ch) {
+                case '\\' -> out.append("\\\\");
+                case '"' -> out.append("\\\"");
+                case '\n' -> out.append("\\n");
+                case '\r' -> out.append("\\r");
+                case '\t' -> out.append("\\t");
+                default -> {
+                    if (Character.isSurrogate(ch) || Character.isISOControl(ch)) {
+                        out.append(String.format("\\u%04x", (int) ch));
+                    } else {
+                        out.append(ch);
+                    }
+                }
+            }
+        }
+        return out.append('"').toString();
+    }
+
+    private static String base64(String value) {
+        byte[] bytes = new byte[Math.multiplyExact(value.length(), 2)];
+        for (int index = 0; index < value.length(); index++) {
+            char unit = value.charAt(index);
+            bytes[index * 2] = (byte) (unit >>> 8);
+            bytes[index * 2 + 1] = (byte) unit;
+        }
+        return java.util.Base64.getUrlEncoder().withoutPadding().encodeToString(bytes);
+    }
+
+    private static String root(String domain, String... values) {
+        MessageDigest digest = digest();
+        frame(digest, domain);
+        for (String value : values) frame(digest, Objects.requireNonNull(value, "value"));
+        return HexFormat.of().formatHex(digest.digest());
+    }
+
+    private static MessageDigest digest() {
+        try { return MessageDigest.getInstance("SHA-256"); }
+        catch (NoSuchAlgorithmException impossible) { throw new ExceptionInInitializerError(impossible); }
+    }
+
+    private static void frame(MessageDigest digest, String value) {
+        int byteLength = Math.multiplyExact(value.length(), 2);
+        digest.update((byte) (byteLength >>> 24));
+        digest.update((byte) (byteLength >>> 16));
+        digest.update((byte) (byteLength >>> 8));
+        digest.update((byte) byteLength);
+        for (int index = 0; index < value.length(); index++) {
+            char unit = value.charAt(index);
+            digest.update((byte) (unit >>> 8));
+            digest.update((byte) unit);
+        }
+    }
+
+    private static String token(String value, String field) {
+        String checked = Objects.requireNonNull(value, field).strip();
+        if (!checked.matches("[a-z0-9][a-z0-9-]{0,63}")) throw new IllegalArgumentException(field);
+        return checked;
+    }
+
+    private static String sha(String value, String field) {
+        String checked = Objects.requireNonNull(value, field);
+        if (!checked.matches("[0-9a-f]{64}")) throw new IllegalArgumentException(field);
+        return checked;
+    }
+}

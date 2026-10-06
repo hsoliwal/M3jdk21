@@ -1,0 +1,137 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.rewrite;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+import org.openrewrite.Recipe;
+
+/**
+ * Canonical machine-oriented Patternize recipe.
+ *
+ * <p>Cheap code signals and structural inventory nominate candidates; semantic normal form,
+ * relationship patterns, PIR obligations and repeated-residue fan-in normalize them; repository graph, algorithm,
+ * framework/JDT/jSparrow/language and public donor reviews enrich them before deterministic,
+ * compiler-inert atom/pattern identities are materialized. Recognition never implies equivalence.</p>
+ */
+public final class M3PatternizeRecipe extends Recipe {
+    private static final String DEFAULT_PROBLEM_TERM =
+            "loop branch nested-loop switch exception synchronization stream lambda record instanceof "
+                    + "type-test optional builder factory regex adapter strategy pipeline map filter "
+                    + "flatmap fold reduce join group cardinality lifecycle effects composition "
+                    + "observer state template string-search binary-search sliding-window rolling-hash "
+                    + "trie bfs dynamic-programming heap-top-k union-find two-pointers prefix-sum "
+                    + "monotonic-stack dfs topological-sort dijkstra backtracking bit-manipulation "
+                    + "interval-sweep kmp suffix-array fenwick-tree segment-tree";
+
+    private final String sourceFilePattern;
+    private final String problemTerm;
+
+    public M3PatternizeRecipe() {
+        this(
+                "**/*.java",
+                DEFAULT_PROBLEM_TERM);
+    }
+
+    @JsonCreator
+    public M3PatternizeRecipe(
+            @JsonProperty("sourceFilePattern") String sourceFilePattern,
+            @JsonProperty("problemTerm") String problemTerm) {
+        this.sourceFilePattern = checked(sourceFilePattern, "sourceFilePattern");
+        this.problemTerm = checked(problemTerm, "problemTerm");
+    }
+
+    @Override
+    public String getDisplayName() {
+        return "M3 Patternize";
+    }
+
+    @Override
+    public String getDescription() {
+        return "Recognizes semantic/pattern candidates through code signals, semantic normal form, "
+                + "relationship/fan-in analysis, algorithm/problem catalogues, repository graph and "
+                + "framework/JDT/jSparrow/language/FOSS evidence, then materializes deterministic identities.";
+    }
+
+    @Override
+    public Set<String> getTags() {
+        return Set.of(
+                "synexia",
+                "m3",
+                "machine-oriented-programming",
+                "patternize",
+                "openrewrite",
+                "jdt",
+                "jsparrow",
+                "foss-first",
+                "deterministic",
+                "candidate-only");
+    }
+
+    @Override
+    public int maxCycles() {
+        return 1;
+    }
+
+    @Override
+    public boolean causesAnotherCycle() {
+        return false;
+    }
+
+    @Override
+    public List<Recipe> getRecipeList() {
+        return List.of(
+                new M3CodeSignalTriggerRecipe(sourceFilePattern),
+                new M3SignalChainRecipe(sourceFilePattern, 4, 4),
+                new M3SemanticNormalFormRecipe(sourceFilePattern),
+                new M3JavaPatternInventoryRecipe(),
+                new M3RepositorySemanticGraphRecipe(),
+                new M3RelationshipPatternizerRecipe(),
+                new PRecipe(),
+                new M3AtomPatternFanInRecipe(sourceFilePattern, 2, 4, 4),
+                new M3CartesianRecipeIdeaExpansionRecipe(
+                        sourceFilePattern,
+                        2,
+                        4,
+                        10_000,
+                        4,
+                        4),
+                new M3ProblemRecipePlannerRecipe(20),
+                new M3FrameworkRecipePatternReviewRecipe(sourceFilePattern, problemTerm),
+                new M3JdtTransformationSurfaceReviewRecipe(),
+                new M3JsparrowRuleReviewRecipe(),
+                new M3UniversalLanguageRecipeReviewRecipe(),
+                new M3DonorBestOfBestSupersetReviewRecipe("ALL"),
+                new M3JavaAtomPatternMaterializationRecipe(sourceFilePattern));
+    }
+
+    public String getSourceFilePattern() {
+        return sourceFilePattern;
+    }
+
+    public String getProblemTerm() {
+        return problemTerm;
+    }
+
+    public boolean regexMutationAuthority() {
+        return false;
+    }
+
+    public boolean canonicalPromotionAuthority() {
+        return false;
+    }
+
+    private static String checked(String value, String field) {
+        String checked = Objects.toString(value, "").strip();
+        if (checked.isEmpty()
+                || checked.length() > 4096
+                || checked.indexOf('\0') >= 0
+                || checked.indexOf('\r') >= 0
+                || checked.indexOf('\n') >= 0) {
+            throw new IllegalArgumentException(field);
+        }
+        return checked;
+    }
+}

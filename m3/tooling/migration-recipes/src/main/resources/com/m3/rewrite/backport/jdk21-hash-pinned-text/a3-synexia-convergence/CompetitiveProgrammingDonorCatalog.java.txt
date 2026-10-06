@@ -1,0 +1,539 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.convergence.donor;
+
+import java.net.URI;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.HexFormat;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.EnumSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.Set;
+
+/**
+ * Normalized competitive-programming/problem-catalog donors for original Synexia implementations.
+ *
+ * <p>Platform problem statements/editorials are reference-only. Source adaptation is permitted only
+ * from explicitly licensed repository donors and still requires revision/path attribution.</p>
+ */
+public final class CompetitiveProgrammingDonorCatalog {
+    public enum SourceKind {
+        PLATFORM_CATALOG,
+        GITHUB_REPOSITORY
+    }
+
+    public enum Admission {
+        REFERENCE_ONLY,
+        LICENSE_REVIEW_REQUIRED,
+        SOURCE_ADAPTATION_ALLOWED
+    }
+
+    public enum Category {
+        EXACT_SEARCH,
+        BINARY_SEARCH,
+        PREFIX_SUFFIX,
+        TRIE,
+        AHO_CORASICK,
+        KMP_Z,
+        ROLLING_HASH,
+        SUFFIX_ARRAY,
+        SUFFIX_AUTOMATON,
+        BITSET_BITMAP,
+        BLOOM_FILTER,
+        HASH_TABLE,
+        PERFECT_HASH,
+        LRU_LFU,
+        HEAP_PRIORITY_QUEUE,
+        UNION_FIND,
+        GRAPH_TRAVERSAL,
+        SHORTEST_PATH,
+        TOPOLOGICAL_DAG,
+        INTERVAL_RANGE,
+        SEGMENT_TREE,
+        FENWICK_TREE,
+        SPARSE_TABLE,
+        SLIDING_WINDOW,
+        TWO_POINTER,
+        STREAMING,
+        DYNAMIC_PROGRAMMING,
+        GREEDY,
+        BACKTRACKING,
+        STRING_PARSING,
+        TOKENIZATION,
+        INVERTED_INDEX,
+        NGRAM_INDEX,
+        REGEX_AUTOMATON,
+        MMAP_SCAN,
+        PALINDROME_MANACHER,
+        GEOMETRY,
+        CONCURRENCY,
+        MEMORY_LAYOUT
+    }
+
+    public enum SynexiaTarget {
+        MINDEX_STRING,
+        MINDEX_SEARCH,
+        MINDEX_COLLECTION,
+        MINDEX_AST,
+        MINDEX_DAG,
+        MINDEX_FILE,
+        FILE_INDEX,
+        SPEC_GREP,
+        CODE_CONVERGENCE,
+        CPULLM
+    }
+
+    public record Source(
+            String id,
+            URI uri,
+            SourceKind kind,
+            Admission admission,
+            String licenseExpression,
+            String revision,
+            String path,
+            String root) {
+        public Source {
+            id = token(id, "id");
+            uri = Objects.requireNonNull(uri, "uri");
+            kind = Objects.requireNonNull(kind, "kind");
+            admission = Objects.requireNonNull(admission, "admission");
+            licenseExpression = Objects.requireNonNullElse(licenseExpression, "");
+            revision = Objects.requireNonNullElse(revision, "");
+            path = Objects.requireNonNullElse(path, "");
+            if (kind == SourceKind.PLATFORM_CATALOG
+                    && admission != Admission.REFERENCE_ONLY) {
+                throw new IllegalArgumentException("PLATFORM_CATALOG_MUST_BE_REFERENCE_ONLY");
+            }
+            if (admission == Admission.SOURCE_ADAPTATION_ALLOWED
+                    && (licenseExpression.isBlank() || revision.isBlank() || path.isBlank())) {
+                throw new IllegalArgumentException(
+                        "ADAPTABLE_SOURCE_REQUIRES_LICENSE_REVISION_PATH");
+            }
+            final String expected = RepositoryHashing.sha256(String.join("\n",
+                    "COMPETITIVE-DONOR-SOURCE/1",
+                    id,
+                    uri.toString(),
+                    kind.name(),
+                    admission.name(),
+                    licenseExpression,
+                    revision,
+                    path));
+            root = root == null || root.isBlank() ? expected : sha256(root, "root");
+            if (!expected.equals(root)) {
+                throw new IllegalArgumentException("SOURCE_ROOT_MISMATCH");
+            }
+        }
+    }
+
+    public record Shape(
+            String id,
+            Category category,
+            String problemShape,
+            Set<SynexiaTarget> targets,
+            List<String> invariants,
+            List<String> benchmarkAxes,
+            String root) {
+        public Shape {
+            id = token(id, "id");
+            category = Objects.requireNonNull(category, "category");
+            problemShape = text(problemShape, "problemShape");
+            targets = Set.copyOf(Objects.requireNonNull(targets, "targets"));
+            if (targets.isEmpty()) {
+                throw new IllegalArgumentException("TARGETS_REQUIRED");
+            }
+            final ArrayList<String> sortedInvariants =
+                    new ArrayList<>(Objects.requireNonNull(invariants, "invariants"));
+            sortedInvariants.replaceAll(value -> text(value, "invariant"));
+            sortedInvariants.sort(String::compareTo);
+            invariants = List.copyOf(sortedInvariants);
+            final ArrayList<String> sortedAxes =
+                    new ArrayList<>(Objects.requireNonNull(benchmarkAxes, "benchmarkAxes"));
+            sortedAxes.replaceAll(value -> text(value, "benchmarkAxis"));
+            sortedAxes.sort(String::compareTo);
+            benchmarkAxes = List.copyOf(sortedAxes);
+            final String expected = RepositoryHashing.sha256(String.join("\n",
+                    "COMPETITIVE-DONOR-SHAPE/1",
+                    id,
+                    category.name(),
+                    problemShape,
+                    targets.stream().map(Enum::name).sorted().reduce("", (a, b) -> a + "," + b),
+                    String.join(",", invariants),
+                    String.join(",", benchmarkAxes)));
+            root = root == null || root.isBlank() ? expected : sha256(root, "root");
+            if (!expected.equals(root)) {
+                throw new IllegalArgumentException("SHAPE_ROOT_MISMATCH");
+            }
+        }
+    }
+
+    public record Catalog(
+            List<Source> sources,
+            List<Shape> shapes,
+            String root) {
+        public Catalog {
+            final ArrayList<Source> sortedSources =
+                    new ArrayList<>(Objects.requireNonNull(sources, "sources"));
+            sortedSources.sort(Comparator.comparing(Source::id));
+            sources = List.copyOf(sortedSources);
+            final ArrayList<Shape> sortedShapes =
+                    new ArrayList<>(Objects.requireNonNull(shapes, "shapes"));
+            sortedShapes.sort(Comparator.comparing(Shape::id));
+            shapes = List.copyOf(sortedShapes);
+            final StringBuilder material =
+                    new StringBuilder("COMPETITIVE-DONOR-CATALOG/1\n");
+            sources.forEach(source -> material.append(source.root()).append('\n'));
+            shapes.forEach(shape -> material.append(shape.root()).append('\n'));
+            final String expected = RepositoryHashing.sha256(material.toString());
+            root = root == null || root.isBlank() ? expected : sha256(root, "root");
+            if (!expected.equals(root)) {
+                throw new IllegalArgumentException("CATALOG_ROOT_MISMATCH");
+            }
+        }
+
+        public List<Shape> shapesFor(final SynexiaTarget target) {
+            return shapes.stream().filter(shape -> shape.targets().contains(target)).toList();
+        }
+
+        public List<Shape> shapesFor(final Category category) {
+            return shapes.stream().filter(shape -> shape.category() == category).toList();
+        }
+    }
+
+    private CompetitiveProgrammingDonorCatalog() {}
+
+    public static Catalog defaults() {
+        return new Catalog(
+                List.of(
+                        platform(
+                                "leetcode",
+                                "https://leetcode.com/problemset/"),
+                        platform(
+                                "hackerrank",
+                                "https://www.hackerrank.com/domains/algorithms"),
+                        platform(
+                                "geeksforgeeks",
+                                "https://www.geeksforgeeks.org/dsa/"),
+                        github(
+                                "fishercoder-leetcode-349",
+                                URI.create("https://github.com/fishercoder1534/Leetcode"),
+                                Admission.SOURCE_ADAPTATION_ALLOWED,
+                                "Apache-2.0",
+                                "d4b110598c4e9291e11765019ba3dc84ae53efa0",
+                                "src/main/java/com/fishercoder/solutions/firstthousand/_349.java"),
+                        github(
+                                "walkccc-merge-intervals-reference",
+                                URI.create("https://github.com/walkccc/LeetCode"),
+                                Admission.REFERENCE_ONLY,
+                                "",
+                                "",
+                                ""),
+                        github(
+                                "thealgorithms-java-searches",
+                                URI.create("https://github.com/TheAlgorithms/Java"),
+                                Admission.SOURCE_ADAPTATION_ALLOWED,
+                                "MIT",
+                                "68dc5f54dde2ffadd1f3a1ccfc6f60946c6cb101",
+                                "src/main/java/com/thealgorithms/searches"),
+                        github(
+                                "roaringbitmap-core",
+                                URI.create("https://github.com/RoaringBitmap/RoaringBitmap"),
+                                Admission.SOURCE_ADAPTATION_ALLOWED,
+                                "Apache-2.0",
+                                "f2289086f4204df51a1d9c4e494d50ffa3ee8988",
+                                "roaringbitmap/src/main/java/org/roaringbitmap"),
+                        github(
+                                "google-re2j-engine",
+                                URI.create("https://github.com/google/re2j"),
+                                Admission.SOURCE_ADAPTATION_ALLOWED,
+                                "BSD-3-Clause",
+                                "951a6159fdc0a4931593c70442926f86031edf40",
+                                "java/com/google/re2j"),
+                        github(
+                                "apache-lucene-automaton",
+                                URI.create("https://github.com/apache/lucene"),
+                                Admission.SOURCE_ADAPTATION_ALLOWED,
+                                "Apache-2.0",
+                                "6284024cc5572fffafa0a33d855c4927c4b663a4",
+                                "lucene/core/src/java/org/apache/lucene/util/automaton"),
+                        github(
+                                "google-codesearch-index",
+                                URI.create("https://github.com/google/codesearch"),
+                                Admission.SOURCE_ADAPTATION_ALLOWED,
+                                "BSD-3-Clause",
+                                "74a12a911a79b901d1158c48d011b2da1b090fc9",
+                                "index")),
+                List.of(
+                        shape(
+                                "exact-token-perfect-hash",
+                                Category.PERFECT_HASH,
+                                "immutable vocabulary lookup with a fixed candidate bound",
+                                EnumSet.of(
+                                        SynexiaTarget.MINDEX_STRING,
+                                        SynexiaTarget.MINDEX_SEARCH),
+                                List.of("exact verification", "no false positive"),
+                                List.of("lookup ns/op", "bytes/entry", "candidate bound")),
+                        shape(
+                                "sorted-equal-range",
+                                Category.BINARY_SEARCH,
+                                "first/last duplicate or insertion range in sorted primitive data",
+                                EnumSet.of(
+                                        SynexiaTarget.MINDEX_SEARCH,
+                                        SynexiaTarget.MINDEX_COLLECTION,
+                                        SynexiaTarget.FILE_INDEX,
+                                        SynexiaTarget.CODE_CONVERGENCE),
+                                List.of(
+                                        "half-open lower/upper bounds",
+                                        "stable total order",
+                                        "absent key is empty insertion range"),
+                                List.of(
+                                        "queries/sec",
+                                        "JNI crossings",
+                                        "bytes/query")),
+                        shape(
+                                "multi-pattern-token-automaton",
+                                Category.AHO_CORASICK,
+                                "many retained literals scanned in one streaming pass",
+                                EnumSet.of(
+                                        SynexiaTarget.MINDEX_SEARCH,
+                                        SynexiaTarget.SPEC_GREP,
+                                        SynexiaTarget.FILE_INDEX),
+                                List.of("overlap preserved", "streaming state primitive"),
+                                List.of("bytes/sec", "patterns", "retained states")),
+                        shape(
+                                "prefix-suffix-lexical-geometry",
+                                Category.PREFIX_SUFFIX,
+                                "precomputed lexical intervals for prefix and reversed suffix constraints",
+                                EnumSet.of(
+                                        SynexiaTarget.MINDEX_STRING,
+                                        SynexiaTarget.MINDEX_SEARCH),
+                                List.of("stable lexical rank", "immutable dictionary"),
+                                List.of("candidate reduction", "sidecar bytes")),
+                        shape(
+                                "structural-kmp-z",
+                                Category.KMP_Z,
+                                "linear exact structural sequence search over primitive token IDs",
+                                EnumSet.of(
+                                        SynexiaTarget.MINDEX_AST,
+                                        SynexiaTarget.MINDEX_DAG,
+                                        SynexiaTarget.MINDEX_SEARCH),
+                                List.of("primitive IDs", "no text materialization"),
+                                List.of("tokens/sec", "failure table bytes")),
+                        shape(
+                                "bitmap-posting-intersection",
+                                Category.BITSET_BITMAP,
+                                "conjunctive precomputed facts intersected before residual verification",
+                                EnumSet.of(
+                                        SynexiaTarget.MINDEX_SEARCH,
+                                        SynexiaTarget.FILE_INDEX,
+                                        SynexiaTarget.CPULLM),
+                                List.of("necessary conditions only", "final oracle retained"),
+                                List.of("survivor ratio", "bitmap bytes", "and ns/word")),
+                        shape(
+                                "bounded-hot-cold-cache",
+                                Category.LRU_LFU,
+                                "signal-adjusted hot/cold residency with durable spill",
+                                EnumSet.of(
+                                        SynexiaTarget.MINDEX_AST,
+                                        SynexiaTarget.MINDEX_FILE,
+                                        SynexiaTarget.CPULLM),
+                                List.of("bounded hot memory", "durable identity"),
+                                List.of("hit rate", "spill bytes", "promotion rate")),
+                        shape(
+                                "dag-topological-frontier",
+                                Category.TOPOLOGICAL_DAG,
+                                "deterministic dependency frontier and upward promotion",
+                                EnumSet.of(
+                                        SynexiaTarget.MINDEX_DAG,
+                                        SynexiaTarget.CODE_CONVERGENCE,
+                                        SynexiaTarget.CPULLM),
+                                List.of("acyclic proof", "stable ordering"),
+                                List.of("nodes/sec", "frontier width")),
+                        shape(
+                                "rolling-fingerprint-window",
+                                Category.ROLLING_HASH,
+                                "bounded rolling fingerprint for chunk/clone candidate generation",
+                                EnumSet.of(
+                                        SynexiaTarget.FILE_INDEX,
+                                        SynexiaTarget.SPEC_GREP,
+                                        SynexiaTarget.CODE_CONVERGENCE),
+                                List.of("candidate evidence only", "exact verify after hash"),
+                                List.of("bytes/sec", "collision candidates")),
+                        shape(
+                                "range-index",
+                                Category.INTERVAL_RANGE,
+                                "offset/ordinal interval queries over immutable structural spans",
+                                EnumSet.of(
+                                        SynexiaTarget.MINDEX_AST,
+                                        SynexiaTarget.MINDEX_FILE,
+                                        SynexiaTarget.FILE_INDEX),
+                                List.of("half-open intervals", "stable coordinates"),
+                                List.of("query ns/op", "index bytes")),
+                        shape(
+                                "manacher-palindrome-radii",
+                                Category.PALINDROME_MANACHER,
+                                "linear palindrome-radius precompute over immutable UTF-16 coordinates",
+                                EnumSet.of(
+                                        SynexiaTarget.MINDEX_STRING,
+                                        SynexiaTarget.MINDEX_SEARCH,
+                                        SynexiaTarget.CODE_CONVERGENCE),
+                                List.of(
+                                        "odd/even radii retained separately",
+                                        "range answers require no substring materialization",
+                                        "earliest longest range is deterministic",
+                                        "prepared owner reused instead of duplicating algorithm body"),
+                                List.of(
+                                        "utf16 units/sec",
+                                        "radius bytes/code-unit",
+                                        "range query ns/op",
+                                        "allocation bytes/query")),
+                        shape(
+                                "streaming-window",
+                                Category.SLIDING_WINDOW,
+                                "bounded streaming window over token/byte sequences",
+                                EnumSet.of(
+                                        SynexiaTarget.MINDEX_SEARCH,
+                                        SynexiaTarget.MINDEX_FILE,
+                                        SynexiaTarget.CPULLM),
+                                List.of("bounded memory", "single pass"),
+                                List.of("bytes/sec", "window bytes")),
+                        shape(
+                                "inverted-posting-index",
+                                Category.INVERTED_INDEX,
+                                "immutable term-to-document or fact-to-value postings with exact final verification",
+                                EnumSet.of(
+                                        SynexiaTarget.MINDEX_SEARCH,
+                                        SynexiaTarget.FILE_INDEX,
+                                        SynexiaTarget.CPULLM),
+                                List.of(
+                                        "postings are candidate evidence",
+                                        "stable integer identities",
+                                        "final oracle retained"),
+                                List.of("postings bytes", "intersection ns/op", "survivor ratio")),
+                        shape(
+                                "trigram-candidate-pruning",
+                                Category.NGRAM_INDEX,
+                                "precomputed n-gram postings reject impossible substring or regex candidates before residual verification",
+                                EnumSet.of(
+                                        SynexiaTarget.MINDEX_SEARCH,
+                                        SynexiaTarget.FILE_INDEX,
+                                        SynexiaTarget.SPEC_GREP),
+                                List.of(
+                                        "necessary condition only",
+                                        "no candidate means no match",
+                                        "positive candidate requires exact verification"),
+                                List.of("ngrams/value", "candidate reduction", "bytes/indexed byte")),
+                        shape(
+                                "linear-regex-automaton",
+                                Category.REGEX_AUTOMATON,
+                                "bounded linear-time automaton execution after cheaper indexed rejection",
+                                EnumSet.of(
+                                        SynexiaTarget.MINDEX_SEARCH,
+                                        SynexiaTarget.SPEC_GREP,
+                                        SynexiaTarget.CPULLM),
+                                List.of(
+                                        "unsupported backtracking features fail closed",
+                                        "workspace reuse is caller-owned",
+                                        "automaton remains final regex oracle"),
+                                List.of("chars/sec", "states", "workspace bytes")),
+                        shape(
+                                "mmap-sequential-scan",
+                                Category.MMAP_SCAN,
+                                "read-only mapped primitive arena traversal with bounded windows and no String materialization",
+                                EnumSet.of(
+                                        SynexiaTarget.MINDEX_STRING,
+                                        SynexiaTarget.MINDEX_FILE,
+                                        SynexiaTarget.FILE_INDEX),
+                                List.of(
+                                        "stable file image",
+                                        "bounded page/window residency",
+                                        "decoded coordinates retain original offsets"),
+                                List.of("bytes/sec", "page faults", "allocations/query"))),
+                "");
+    }
+
+    public static Source github(
+            final String id,
+            final URI uri,
+            final Admission admission,
+            final String licenseExpression,
+            final String revision,
+            final String path) {
+        return new Source(
+                id,
+                uri,
+                SourceKind.GITHUB_REPOSITORY,
+                admission,
+                licenseExpression,
+                revision,
+                path,
+                "");
+    }
+
+    private static Source platform(final String id, final String uri) {
+        return new Source(
+                id,
+                URI.create(uri),
+                SourceKind.PLATFORM_CATALOG,
+                Admission.REFERENCE_ONLY,
+                "",
+                "",
+                "",
+                "");
+    }
+
+    private static Shape shape(
+            final String id,
+            final Category category,
+            final String problemShape,
+            final Set<SynexiaTarget> targets,
+            final List<String> invariants,
+            final List<String> benchmarkAxes) {
+        return new Shape(
+                id,
+                category,
+                problemShape,
+                targets,
+                invariants,
+                benchmarkAxes,
+                "");
+    }
+
+    private static String token(final String value, final String field) {
+        if (value == null || !value.matches("[a-z0-9][a-z0-9._-]{0,127}")) {
+            throw new IllegalArgumentException(
+                    "INVALID_" + field.toUpperCase(Locale.ROOT));
+        }
+        return value;
+    }
+
+    private static String text(final String value, final String field) {
+        if (value == null || value.isBlank() || value.length() > 4096
+                || value.indexOf('\0') >= 0) {
+            throw new IllegalArgumentException(
+                    "INVALID_" + field.toUpperCase(Locale.ROOT));
+        }
+        return value;
+    }
+
+    private static String hash(final String value) {
+        try {
+            return HexFormat.of().formatHex(
+                    MessageDigest.getInstance("SHA-256")
+                            .digest(value.getBytes(StandardCharsets.UTF_8)));
+        } catch (NoSuchAlgorithmException impossible) {
+            throw new IllegalStateException("SHA256_UNAVAILABLE", impossible);
+        }
+    }
+
+    private static String sha256(final String value, final String field) {
+        if (value == null || !value.matches("[0-9a-f]{64}")) {
+            throw new IllegalArgumentException(
+                    "INVALID_" + field.toUpperCase(Locale.ROOT));
+        }
+        return value;
+    }
+}
