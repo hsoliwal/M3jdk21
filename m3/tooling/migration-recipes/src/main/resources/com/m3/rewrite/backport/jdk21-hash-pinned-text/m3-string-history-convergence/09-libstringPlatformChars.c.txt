@@ -68,6 +68,57 @@ Java_StringPlatformChars_getUtf16(JNIEnv *env, jclass unused, jstring value)
     return result;
 }
 
+JNIEXPORT jcharArray JNICALL
+Java_StringPlatformChars_getUtf16Region(
+        JNIEnv *env, jclass unused, jstring value, jint start, jint length)
+{
+    jcharArray result = (*env)->NewCharArray(env, length);
+    if (result == NULL || length == 0) {
+        return result;
+    }
+
+    jchar* buffer = (jchar*)malloc((size_t)length * sizeof(jchar));
+    if (buffer == NULL) {
+        jclass oom = (*env)->FindClass(env, "java/lang/OutOfMemoryError");
+        if (oom != NULL) (*env)->ThrowNew(env, oom, "UTF16 region buffer");
+        return NULL;
+    }
+
+    (*env)->GetStringRegion(env, value, start, length, buffer);
+    if (!(*env)->ExceptionCheck(env)) {
+        (*env)->SetCharArrayRegion(env, result, 0, length, buffer);
+    }
+    free(buffer);
+    return (*env)->ExceptionCheck(env) ? NULL : result;
+}
+
+JNIEXPORT jbyteArray JNICALL
+Java_StringPlatformChars_getUtf8Region(
+        JNIEnv *env, jclass unused, jstring value, jint start, jint length)
+{
+    size_t capacity = (size_t)length * 3u + 1u;
+    char* buffer = (char*)malloc(capacity);
+    if (buffer == NULL) {
+        jclass oom = (*env)->FindClass(env, "java/lang/OutOfMemoryError");
+        if (oom != NULL) (*env)->ThrowNew(env, oom, "UTF8 region buffer");
+        return NULL;
+    }
+
+    (*env)->GetStringUTFRegion(env, value, start, length, buffer);
+    if ((*env)->ExceptionCheck(env)) {
+        free(buffer);
+        return NULL;
+    }
+
+    jsize bytes = (jsize)strlen(buffer);
+    jbyteArray result = (*env)->NewByteArray(env, bytes);
+    if (result != NULL && bytes != 0) {
+        (*env)->SetByteArrayRegion(env, result, 0, bytes, (const jbyte*)buffer);
+    }
+    free(buffer);
+    return result;
+}
+
 JNIEXPORT jint JNICALL
 Java_StringPlatformChars_getUtf8Length(JNIEnv *env, jclass unused, jstring value)
 {
