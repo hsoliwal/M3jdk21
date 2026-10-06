@@ -4986,6 +4986,9 @@ public final class String
      *          as its single character the argument {@code c}.
      */
     public static String valueOf(char c) {
+        if (M3String.admissionEnabled()) {
+            return new String(M3StringPool.internUnit(c));
+        }
         if (COMPACT_STRINGS && StringLatin1.canEncode(c)) {
             return new String(StringLatin1.toBytes(c), LATIN1);
         }
