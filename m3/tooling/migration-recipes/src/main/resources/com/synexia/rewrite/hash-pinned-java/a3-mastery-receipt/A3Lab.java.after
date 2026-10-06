@@ -14,6 +14,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import org.openrewrite.InMemoryExecutionContext;
 import org.openrewrite.Parser;
 import org.openrewrite.Recipe;
@@ -164,6 +165,13 @@ public final class A3Lab {
 
     public static int scheduleCount() {
         return SCHEDULES.size();
+    }
+
+    static Set<String> scheduleNames() {
+        return Set.copyOf(
+                SCHEDULES.stream()
+                        .map(schedule -> String.join(">", schedule))
+                        .toList());
     }
 
     private static ResultAndSource converge(

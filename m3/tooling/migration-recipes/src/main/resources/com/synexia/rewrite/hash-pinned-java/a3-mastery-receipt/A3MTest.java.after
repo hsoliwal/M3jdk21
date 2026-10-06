@@ -20,15 +20,8 @@ final class A3MTest {
         materializePinFixture();
         List<A3M.Pin> pins = A3M.currentPins(root);
         String pinText = A3M.renderPins(pins);
-        String labText =
-                "fixture\tschedule\tsubset\tbeforeSha\tafterSha\tapplications\tcompiles"
-                        + "\tchanged\tfixedPoint\tbehaviorStable\tcontractStable"
-                        + "\tlexicalDataStable\tregexMatrixStable\n"
-                        + "0\tA\tA\t"
-                        + "1".repeat(64)
-                        + "\t"
-                        + "2".repeat(64)
-                        + "\t1\t1\ttrue\ttrue\ttrue\ttrue\ttrue\ttrue\n";
+        String labText = syntheticLab();
+        A3MCodec.LabSummary summary = A3MCodec.summarizeLab(labText);
 
         A3M.Receipt receipt =
                 new A3M.Receipt(
@@ -36,13 +29,13 @@ final class A3MTest {
                         "",
                         A3Fs.sha(pinText),
                         A3Fs.sha(labText),
-                        1,
-                        1,
-                        1,
-                        1,
-                        1,
-                        1,
-                        1);
+                        summary.fixtureCount(),
+                        summary.scheduleCount(),
+                        summary.resultCount(),
+                        summary.applicationCount(),
+                        summary.compileCount(),
+                        summary.changedCount(),
+                        summary.regexStableCount());
         Path evidence = root.resolve("m3/build/a3/mastery");
         Files.createDirectories(evidence.resolve("lab"));
         Files.writeString(evidence.resolve("pins.tsv"), pinText);
@@ -107,6 +100,16 @@ final class A3MTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> new A3M.Pin("./not-canonical", "a".repeat(64)));
+        String qualified = syntheticLab();
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> A3MCodec.summarizeLab(
+                        qualified.replaceFirst("\\ttrue\\ttrue\\ttrue\\ttrue\\ttrue",
+                                "\\ttrue\\tfalse\\ttrue\\ttrue\\ttrue")));
+        String firstRow = qualified.lines().skip(1).findFirst().orElseThrow();
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> A3MCodec.summarizeLab(qualified + firstRow + "\n"));
     }
 
     @Test
@@ -114,6 +117,35 @@ final class A3MTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> A3M.write(root, Path.of("test/a3-mastery")));
+    }
+
+    private static String syntheticLab() {
+        String[] schedules = {
+            "A", "P", "D", "A>P", "P>A", "A>D", "D>A", "P>D", "D>P",
+            "A>P>D", "A>D>P", "P>A>D", "P>D>A", "D>A>P", "D>P>A", "A>P>A", "P>A>P"
+        };
+        StringBuilder out =
+                new StringBuilder(
+                        "fixture\tschedule\tsubset\tbeforeSha\tafterSha\tapplications\tcompiles"
+                                + "\tchanged\tfixedPoint\tbehaviorStable\tcontractStable"
+                                + "\tlexicalDataStable\tregexMatrixStable\n");
+        for (int fixture = 0; fixture < 48; fixture++) {
+            for (String schedule : schedules) {
+                out.append(fixture)
+                        .append('\t')
+                        .append(schedule)
+                        .append('\t')
+                        .append(schedule.contains("D") ? "A+D+P" : "A+P")
+                        .append('\t')
+                        .append("1".repeat(64))
+                        .append('\t')
+                        .append("2".repeat(64))
+                        .append("\t1\t1\t")
+                        .append(schedule.contains("A"))
+                        .append("\ttrue\ttrue\ttrue\ttrue\ttrue\n");
+            }
+        }
+        return out.toString();
     }
 
     private void materializePinFixture() throws Exception {

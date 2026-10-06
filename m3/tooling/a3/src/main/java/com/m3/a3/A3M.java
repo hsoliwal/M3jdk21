@@ -34,10 +34,15 @@ final class A3M {
                     "m3/tooling/a3/src/main/java/com/m3/a3/A3MemoryCompiler.java",
                     "m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java",
                     "m3/tooling/migration-recipes/pom.xml",
+                    "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceCatalog.java",
                     "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java",
                     "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3AtomizePureIntReturnRecipe.java",
                     "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3DocumentPureIntAtomRecipe.java",
-                    "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java");
+                    "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3FileAtomCandidateTable.java",
+                    "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3InventoryPureIntAtomCandidates.java",
+                    "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PatternizePureIntAtomRecipe.java",
+                    "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+                    "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-java21-convergence.yml");
 
     record Pin(String path, String sha256) {
         Pin {
@@ -96,14 +101,27 @@ final class A3M {
     static Receipt write(Path root, Path out) throws Exception {
         Path checkedRoot = A3Fs.root(root);
         Path checkedOut = A3Fs.out(checkedRoot, out);
-        List<A3Lab.Result> results =
-                A3Lab.write(checkedRoot, checkedOut.resolve("lab"));
+        A3Lab.write(checkedRoot, checkedOut.resolve("lab"));
         String labText =
                 Files.readString(
                         checkedOut.resolve("lab/results.tsv"),
                         StandardCharsets.UTF_8);
+        A3MCodec.LabSummary summary = A3MCodec.summarizeLab(labText);
+        requireLiveDenominator(summary);
         List<Pin> pins = currentPins(checkedRoot);
-        Receipt receipt = receipt(results, pins, A3Fs.sha(labText));
+        Receipt receipt =
+                new Receipt(
+                        SCHEMA,
+                        "",
+                        A3Fs.sha(renderPins(pins)),
+                        A3Fs.sha(labText),
+                        summary.fixtureCount(),
+                        summary.scheduleCount(),
+                        summary.resultCount(),
+                        summary.applicationCount(),
+                        summary.compileCount(),
+                        summary.changedCount(),
+                        summary.regexStableCount());
 
         A3Fs.write(checkedRoot, checkedOut.resolve("pins.tsv"), renderPins(pins));
         A3Fs.write(checkedRoot, checkedOut.resolve("receipt.tsv"), A3MCodec.render(receipt));
@@ -135,8 +153,16 @@ final class A3M {
         if (!receipt.labTsvSha256().equals(A3Fs.sha(labText))) {
             throw new IllegalStateException("A3M lab results drift");
         }
-        if (dataRows(labText) != receipt.resultCount()) {
-            throw new IllegalStateException("A3M lab result count drift");
+        A3MCodec.LabSummary summary = A3MCodec.summarizeLab(labText);
+        requireLiveDenominator(summary);
+        if (receipt.fixtureCount() != summary.fixtureCount()
+                || receipt.scheduleCount() != summary.scheduleCount()
+                || receipt.resultCount() != summary.resultCount()
+                || receipt.applicationCount() != summary.applicationCount()
+                || receipt.compileCount() != summary.compileCount()
+                || receipt.changedCount() != summary.changedCount()
+                || receipt.regexStableCount() != summary.regexStableCount()) {
+            throw new IllegalStateException("A3M receipt/lab summary drift");
         }
         return receipt;
     }
@@ -167,37 +193,14 @@ final class A3M {
         return out.toString();
     }
 
-    private static Receipt receipt(
-            List<A3Lab.Result> results,
-            List<Pin> pins,
-            String labSha) {
-        List<A3Lab.Result> checked = List.copyOf(results);
-        int expected = Math.multiplyExact(A3Lab.fixtureCount(), A3Lab.scheduleCount());
-        if (checked.size() != expected) {
-            throw new IllegalStateException("A3M incomplete laboratory result set");
+    private static void requireLiveDenominator(A3MCodec.LabSummary summary) {
+        if (summary.fixtureCount() != A3Lab.fixtureCount()
+                || summary.scheduleCount() != A3Lab.scheduleCount()
+                || !summary.scheduleNames().equals(A3Lab.scheduleNames())
+                || summary.resultCount()
+                        != Math.multiplyExact(A3Lab.fixtureCount(), A3Lab.scheduleCount())) {
+            throw new IllegalStateException("A3M lab denominator does not match live mastery");
         }
-        long applications = 0L;
-        long compiles = 0L;
-        int changed = 0;
-        int regexStable = 0;
-        for (A3Lab.Result result : checked) {
-            applications = Math.addExact(applications, result.applications());
-            compiles = Math.addExact(compiles, result.compiles());
-            changed += result.changed() ? 1 : 0;
-            regexStable += result.regexMatrixStable() ? 1 : 0;
-        }
-        return new Receipt(
-                SCHEMA,
-                "",
-                A3Fs.sha(renderPins(pins)),
-                labSha,
-                A3Lab.fixtureCount(),
-                A3Lab.scheduleCount(),
-                checked.size(),
-                applications,
-                compiles,
-                changed,
-                regexStable);
     }
 
     private static void requireEvidenceFile(
@@ -219,12 +222,4 @@ final class A3M {
         }
     }
 
-    private static int dataRows(String tsv) {
-        String[] lines = Objects.requireNonNull(tsv, "tsv").split("\\R", -1);
-        int rows = 0;
-        for (int index = 1; index < lines.length; index++) {
-            rows += lines[index].isEmpty() ? 0 : 1;
-        }
-        return rows;
-    }
 }
