@@ -83,9 +83,9 @@ def _recipe_evidence(root: Path, jep: int) -> tuple[str, tuple[str, ...], dict[s
 
     recipes = root / "m3" / "backports" / "recipes"
     if recipes.is_dir():
-        prefix = f"jep-{jep}"
+        prefixes = (f"jep-{jep}", f"j{jep}")
         for candidate in sorted(recipes.iterdir()):
-            if candidate.is_dir() and candidate.name.startswith(prefix):
+            if candidate.is_dir() and candidate.name.startswith(prefixes):
                 evidence.append(candidate.relative_to(root).as_posix())
                 candidate_receipt = _receipt(candidate)
                 if candidate_receipt:
