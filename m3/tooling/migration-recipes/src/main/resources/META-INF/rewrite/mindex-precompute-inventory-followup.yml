@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.MIndexPrecomputeInventoryFollowup
+displayName: Preserve broader Synexia MIndex precompute inventory
+description: Replays the current-master mapping, inventory, and invariant-gate updates that classify the broader Synexia MIndex/precompute ecosystem without creating Synexia runtime dependencies.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: mindex-precompute-inventory-followup
