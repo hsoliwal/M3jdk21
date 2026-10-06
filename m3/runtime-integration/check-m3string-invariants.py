@@ -83,11 +83,11 @@ for fragment in [
     "private static M3String balance(M3String left, M3String right)",
     "private static int height(M3String value)",
     "private static M3String internTuple(M3String left, M3String right)",
-    "private static long sequenceHash64(M3String value)",
-    "private static long tupleRouteKey(",
-    "combineSequenceHash(sequenceHash64(left), sequenceHash64(right), right.length())",
+    "private static long tupleRouteKey(int javaHash, int totalLength, byte coder)",
+    "long routeKey = tupleRouteKey(javaHash, totalLength, coder);",
     "private static boolean sameLeafSequence(",
     "private static final class LeafCursor",
+    "rawAtom == atom && start + length == rawStart",
     "candidate.atom() != requested.atom()",
 ]:
     if fragment not in pool:
@@ -96,6 +96,8 @@ for forbidden in [
     "geometryEquals(left, right)",
     "tupleHash64(M3String left, M3String right)",
     "left.identityHash64()",
+    "sequenceHash64(",
+    "combineSequenceHash(",
 ]:
     if forbidden in pool:
         fail(f"M3 tuple interning regressed to shape identity: {forbidden}")
