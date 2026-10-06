@@ -10,11 +10,13 @@ Required correctness lineage:
 
 1. shared named-key/signature framework — JDK-8340327:
    `3f53d571343792341481f4d15970cdc0bcd76a5e`
-2. JEP 497 integration — JDK-8298387:
+2. internal SHAKE/XOF surface — JDK-8338587:
+   `c54fc08aa3c63e4b26dc5edb2436844dfd3bab7c`
+3. JEP 497 integration — JDK-8298387:
    `8b98f958dc1afedc02b9d9c98089d6cb1ca3a5b7`
-3. coexistence repair — JDK-8345057:
+4. coexistence repair — JDK-8345057:
    `8c2b4f62714f26ab3bc4808c734502af632a1eef`
-4. final FIPS 204 semantics — JDK-8345533:
+5. final FIPS 204 semantics — JDK-8345533:
    `fb95a5394413dba7352a7ad2ebd39a3da42308a6`
 
 JDK-8345057 is required when ML-DSA and ML-KEM coexist because the original ML-DSA integration
@@ -29,9 +31,12 @@ Java/security proof. Native/JIT intrinsics remain out of scope until Java is the
 `SOURCE.tsv` records 20 paths: ten shared framework paths and ten JEP-497 paths.
 
 On current M3JDK21 master the ML-DSA implementation classes and FIPS 204 ACVP vectors are absent.
-Existing owners `NamedParameterSpec`, `SunEntries`, and `KnownOIDs` require bounded exact-delta
-adaptation. The shared named-key framework has prior merged proof (#158/#160) but is not treated as
-current product materialization unless current-tree source/receipt evidence proves it.
+Java-21 also lacks the nested `SHA3.SHAKE128` / `SHA3.SHAKE256` XOF surface consumed by
+ML-DSA. The receiver retains a standalone SHAKE256 used by current PKCS7/SignerInfo, so
+JDK-8338587 requires compatibility-aware adaptation rather than blind file deletion. Existing owners
+`NamedParameterSpec`, `SunEntries`, and `KnownOIDs` require bounded exact-delta adaptation.
+The shared named-key framework has prior merged proof (#158/#160) but is not treated as current
+product materialization unless current-tree source/receipt evidence proves it.
 
 ## M3/A3 rule
 
@@ -60,6 +65,7 @@ FIPS 204 ACVP JSON data is not Java and remains in the source-sealed data lane.
 Required before materialization/promotion:
 
 - JDK-8340327 Java-21 framework compile/tests;
+- JDK-8338587 SHA3/SHAKE128/SHAKE256 XOF compile + squeeze known-answer tests + current PKCS7/SignerInfo compatibility;
 - exact source-21 compile of framework + ML-DSA closure;
 - JDK-8345057 coexistence proof with ML-KEM parameter constants retained;
 - JDK-8345533 final FIPS 204 semantics;
