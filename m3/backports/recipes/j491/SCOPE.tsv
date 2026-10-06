@@ -1,0 +1,14 @@
+field	value
+packet	J491
+jep	491
+title	Synchronize Virtual Threads without Pinning
+target	M3JDK21
+scope_floor	MULTI_MODULE
+plane	HOTSPOT_CONTINUATION_MONITOR_JNI_JVMTI
+initial_file_count	246
+architectures	aarch64;arm;ppc;riscv;s390;x86;zero
+public_java_api_delta	false
+materialized	false
+recipe_state	PENDING_ARCH_DAG
+native_build	BLOCKED_OS_DEV_HEADERS
+distribution_state	CANDIDATE_NOT_SELECTED
