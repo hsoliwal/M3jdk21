@@ -28,6 +28,14 @@ persisted tuple records are not independent String lexicon atoms. Odd addresses
 are supported. Misses never append to the owner file. The mapped extent is a
 startup snapshot; later appended entries require a new VM to become lexicon hits.
 
+The Synexia export lane in `../lexicon/SYNEXIA_EXPORT.md` produces this M3LEX
+image (or deterministic shards) together with mapping and precompute sidecars.
+Those sidecars preserve Synexia source names, opaque IDs, language/translation
+profiles, SI/acronym/number mappings and source precompute ownership; they stay
+outside `java.lang.String`. A VM may map one selected shard per process today;
+multi-shard warmup remains an explicit loader concern and is not implied by the
+presence of the sidecar manifest.
+
 The original owner's publication contract still applies: trusted directory,
 immutable committed bytes, no external rewrite or truncation. Read-only mapping
 alone does not enforce that contract against another writer. The file channel
