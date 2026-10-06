@@ -186,7 +186,7 @@ critical_port_map_rows = [
     "MIndexStringPrecomputationByteFacts.byteLength\tjava.lang.M3StringFacts + M3String.encode*\tIMPLEMENTED_SEMANTIC_SUBSET",
     "MIndexStringPrecomputationByteFacts.SHA256\tinternal artifact/hash service\tNOT_STRING_SEMANTICS",
     "MIndexTupleReferences.concat/balance + MIndexStringIntern.internReferences\tjava.lang.M3StringPool + M3StringTuple\tIMPLEMENTED_UNVERIFIED",
-    "MIndexStringSearchPlan\tjava.lang.M3StringSearchPrecompute\tIMPLEMENTED",
+    "MIndexStringSearchPlan\tjava.lang.M3StringSearchPrecompute (representation-coupled cache; reusable kernels target jdk.internal.mindex)\tIMPLEMENTED",
     "MIndexPositionMasks / MIndexComposedPositionMasks\tjava.lang.M3StringPositionPrecompute\tIMPLEMENTED",
 ]
 for row in critical_port_map_rows:
