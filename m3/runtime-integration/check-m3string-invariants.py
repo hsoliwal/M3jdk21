@@ -42,6 +42,7 @@ mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
 native_string = read("src/java.base/share/native/libjava/String.c")
+arguments = read("src/hotspot/share/runtime/arguments.cpp")
 pattern = read("src/java.base/share/classes/java/util/regex/Pattern.java")
 matcher = read("src/java.base/share/classes/java/util/regex/Matcher.java")
 
@@ -475,6 +476,24 @@ for required_no_port in [
 ]:
     if required_no_port not in port_map:
         fail(f"String donor no-port classification missing: {required_no_port}")
+
+# VM/JIT experiment boundary: subsystems that still assume String.value payload semantics must
+# remain disabled until they become explicitly M3-aware.
+for fragment in [
+    "if (UseM3StringStorage) {",
+    "FLAG_SET_ERGO(OptimizeStringConcat, false);",
+    "UseStringDeduplication = false;",
+]:
+    if fragment not in arguments:
+        fail(f"M3 VM experiment boundary missing: {fragment}")
+for unsupported in [
+    "UseM3StringStorage does not support JVMCI",
+    "UseM3StringStorage does not support UseStringDeduplication",
+    "UseM3StringStorage does not support CDS archive operations",
+    "UseM3StringStorage does not support Flight Recorder",
+]:
+    if unsupported not in arguments:
+        fail(f"M3 unsupported VM subsystem guard missing: {unsupported}")
 
 # Donor class naming must not leak back into live VM symbols/layout.
 for path, text in [
