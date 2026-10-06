@@ -94,37 +94,55 @@ For each row it records:
 
 Current JEP packet evidence recognized by the regenerated queue:
 
-- JEP 423 — `MATERIALIZED_PACKET`
+- JEP 423 — `PACKET_EVIDENCE`
+  - short/long inventory/candidate packet directories exist; no current-tree receipt;
 - JEP 458 — `MATERIALIZED_PACKET`
+  - current-tree receipt: `REVIEWED_POSTIMAGES_ALREADY_PRESENT`;
 - JEP 467 — `MATERIALIZED_PACKET`
+  - receipt-backed packet evidence, promotion still `NOT_AUTHORIZED`;
 - JEP 474 — `MATERIALIZED_PACKET`
-- JEP 484 — `MATERIALIZED_PACKET`
-- JEP 485 — `MATERIALIZED_PACKET`
+  - receipt state: `EQUIVALENCE_PROOF_PENDING`;
+- JEP 484 — `PACKET_EVIDENCE`
+  - class-file API lineage/inventory packet exists; no current-tree receipt;
+- JEP 485 — `PACKET_EVIDENCE`
+  - implementation/recovery directories and recipe class exist, but current master has no retained
+    current-tree receipt, so the queue does not infer product materialization from directory presence;
+- JEP 491 — `PACKET_EVIDENCE`
+  - high-risk monitor-unpinning inventory packet exists;
 - JEP 493 — `MATERIALIZED_PACKET`
+  - receipt state: `PACKET_READY`;
+- JEP 510 — `PACKET_EVIDENCE`
+  - KDF inventory/dependency packet exists with `product_materialization=false`.
+
+`PACKET_EVIDENCE` means repository-owned review/dependency/inventory material exists but does not
+prove that product source is present. `MATERIALIZED_PACKET` is reserved for receipt-backed evidence;
+the receipt still controls promotion and next proof.
 
 The remaining pending rows stay visible even when no recipe exists yet. A missing recipe means
 **author/improve a reusable recipe first**, not hand-edit the affected JDK files.
 
-## Materialized backport packet estate
+## Backport packet evidence estate
 
-Thirteen packet directories currently have repository-owned README/evidence contracts:
+Packet directories are evidence-bearing work units, not automatic materialization claims.
 
-- `j423`
-- `j491`
-- `jdk-8347112`
-- `jdk-8364182`
-- `jdk-8367584`
-- `jdk-8368692`
-- `jdk-8374808`
-- `jep-423-region-pinning`
-- `jep-458-current`
-- `jep-467-markdown`
-- `jep-474-generational-zgc`
-- `jep-485-gatherers`
-- `jep-493-runtime-image`
+Pending-JEP packet directories currently include:
 
-A packet directory is evidence of implementation/replay work. It is not itself proof that the
-packet is accepted into current master.
+- `j423`, `jep-423-region-pinning`;
+- `j491`;
+- `j510`;
+- `jep-458-current`;
+- `jep-467-markdown`;
+- `jep-474-generational-zgc`;
+- `jep-484-classfile-api`;
+- `j485`, `jep-485-gatherers`, `jep-485-gatherers-recovery`;
+- `jep-493-runtime-image`.
+
+Compatible non-JEP/JBS packets also remain under the same recipe estate, including
+`jdk-8347112`, `jdk-8364182`, `jdk-8367584`, `jdk-8368692`, and `jdk-8374808`.
+
+A packet directory alone means `PACKET_EVIDENCE`. Only a valid `CURRENT_TREE_RECEIPT.tsv`
+upgrades the evidence state to `MATERIALIZED_PACKET`, and even then explicit promotion authority,
+build/jtreg/runtime proof, and canonical readback remain separate gates.
 
 ## Verbatim JDK21 source oracle
 
