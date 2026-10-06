@@ -6,6 +6,7 @@ on:
       - "m3/recover-jep485-current-master-20261006"
     paths:
       - "m3/backports/recipes/jep-485-gatherers/**"
+      - "m3/backports/recipes/j485/**"
       - "m3/backports/JEP_CATALOGUE.tsv"
       - "m3/tooling/recipe-catalogue.tsv"
       - "m3/tooling/migration-recipes/**"
@@ -43,8 +44,14 @@ jobs:
       - name: Prove recipe replay scope registration and fixed point
         run: |
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
-            -Dtest=M3Jep485StreamGatherersBackportRecipeTest,M3RecipeScopeDeclarationTest \
+            -Dtest=M3Jep485StreamGatherersBackportRecipeTest,J485CurrentRecipeTest,M3RecipeScopeDeclarationTest \
             test
+
+      - name: Prove current J485 Java21 patched module
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash m3/backports/recipes/j485/verify-java21.sh "$JAVA_HOME" "$GITHUB_WORKSPACE/m3/build/j485"
 
       - name: Validate exact JEP 485 packet and atom evidence
         shell: bash
@@ -77,7 +84,9 @@ jobs:
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: jep485-recipe-dag-${{ github.run_id }}
-          path: target/jep485-projection
+          path: |
+            target/jep485-projection
+            m3/build/j485
           if-no-files-found: error
           retention-days: 30
 
