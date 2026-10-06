@@ -463,6 +463,23 @@ for forbidden_path in [
     if (ROOT / forbidden_path).exists():
         fail(f"unreviewed no-port String precompute owner appeared: {forbidden_path}")
 
+for required_live_donor_family in [
+    "IndexDictionary* / IndexLexicon*Image / MappedIndexDictionary / MappedIndexLexicon*\tSynexia/M3 mapped lexicon and index layer\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
+    "IndexNGram* / MappedIndexNGram* / MIndexMutableNGramIndex / MIndexScopedNgrams\tjdk.internal.mindex.M3TQ only for exact String/regex trigram subset; otherwise donor index layer\tPARTIAL_SAFE_CONSUMPTION",
+    "MIndexLiteralAutomaton / MIndexLiteralRangeEffects / MIndexLiteralSkipTable / MIndexLiteralEffectImage / MIndexLiteralNative\tjava.lang.M3StringSearchPrecompute + exact String search where semantically equivalent\tPARTIAL_SAFE_CONSUMPTION",
+    "MIndexRegex* / IndexRegex* / MatIndexRegex* / Mapped*Regex* / regex accelerator providers\tjava.util.regex Pattern/Matcher + jdk.internal.mindex.M3TQ + optional internal accelerators\tPARTIAL_SAFE_CONSUMPTION",
+    "IndexMask* / MIndexMask* / MIndexMasked* / MIndexCaseComposition\tjava.lang.M3StringPositionPrecompute for exact code-unit position facts; otherwise donor view/index layer\tPARTIAL_SAFE_CONSUMPTION",
+    "IndexArtifactHash* / MIndexBlake3* / MIndexTreeHash256 / Mat*Hash* / MatMerkleHash / MIndexSignatureImage\tinternal artifact/hash service\tNOT_STRING_SEMANTICS",
+    "MIndexPageableTree* / MIndexTokenSearchTree / MIndexVocabularySearchTree / MIndexCompositeSearchTrie / MIndex*SearchIndex / MIndexSearchEngine / MIndexSearchProgram / MIndexSearchQuery\tSynexia search/index/service layer\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
+    "IndexWord* / LexicalFacts / LexiconFactsImage / MappedLexiconFacts / IndexPos* / language/model vocabulary images\tSynexia language/lexicon layer\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
+    "MIndexMappedArrays / MIndexMappedByteStore / MIndexMappedBytes / MIndexMappedResolver / MIndexMappedStringResolver / MappedIndexStringStore / MappedMatIndexString*\tinternal storage/mapping adapters only where needed; otherwise donor storage layer\tPARTIAL_INTERNAL_STORAGE_COUNTERPART",
+    "MIndexGpu* / Jni*Search* / Java*SearchAccelerator / CppPrepared* / GpuByteAutomaton*\toptional jdk.internal accelerator boundary\tOPTIONAL_INTERNAL",
+    "MIndexBatchImage / MIndexSearchImage / MIndexPatternTruthImage / MIndexRegexTruthImage / MIndexBloom* / MIndexCodeTextSignalTrialImage / MIndexLongPostingImage / MIndexImageLimits\tSynexia batch/search publication layer\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
+    "MatIndex*Image / MappedMat* / MappedMIndexStructuralBundle / MatIndexStringPositionIndex / MatIndexSuffixTrie\tSynexia materialized structural/index layer\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
+]:
+    if required_live_donor_family not in port_map:
+        fail(f"live Synexia precompute family classification missing: {required_live_donor_family}")
+
 for required_live_donor_mapping in [
     "MIndexPrecomputedStrings\tM3StringPool + M3MappedStringBacking + M3StringOwner.rangeFacts\tRESPONSIBILITY_SPLIT_INTERNAL",
     "MIndexMappedPrecomputation\tM3MappedStringBacking + M3StringPool mapped lexicon + internal fact owners\tPARTIAL_INTERNAL_STORAGE_COUNTERPART",
