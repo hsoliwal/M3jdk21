@@ -454,6 +454,13 @@ if "CallVoidMethodA" not in byte_shadow.group("body") or "CallVoidMethodA" not i
 # reject proven absence, but anchored match/lookingAt and case-insensitive literal semantics stay
 # entirely with the stock node engine.
 for fragment in [
+    "matchRoot.getClass() == Slice.class",
+    "M3TQ.fromExact(List.of(new String(chars)))",
+]:
+    if fragment not in pattern:
+        fail(f"Pattern compiled mandatory-Slice TQ boundary missing: {fragment}")
+
+for fragment in [
     "transient M3TQ m3Tq;",
     "has(LITERAL) && !has(CASE_INSENSITIVE)",
     "M3TQ.fromExact(List.of(pattern))",
