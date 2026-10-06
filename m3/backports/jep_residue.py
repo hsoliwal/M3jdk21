@@ -82,10 +82,17 @@ def _recipe_evidence(root: Path, jep: int) -> tuple[str, tuple[str, ...], dict[s
     receipt: dict[str, str] = {}
 
     recipes = root / "m3" / "backports" / "recipes"
+    packet_dirs: list[Path] = []
     if recipes.is_dir():
-        prefix = f"jep-{jep}"
+        long_prefix = f"jep-{jep}"
+        short_name = f"j{jep}"
         for candidate in sorted(recipes.iterdir()):
-            if candidate.is_dir() and candidate.name.startswith(prefix):
+            if candidate.is_dir() and (
+                candidate.name.startswith(long_prefix)
+                or candidate.name == short_name
+                or candidate.name.startswith(short_name + "-")
+            ):
+                packet_dirs.append(candidate)
                 evidence.append(candidate.relative_to(root).as_posix())
                 candidate_receipt = _receipt(candidate)
                 if candidate_receipt:
@@ -112,8 +119,10 @@ def _recipe_evidence(root: Path, jep: int) -> tuple[str, tuple[str, ...], dict[s
             if needle in candidate.name.lower():
                 evidence.append(candidate.relative_to(root).as_posix())
 
-    if any(path.startswith("m3/backports/recipes/") for path in evidence):
+    if receipt:
         state = "MATERIALIZED_PACKET"
+    elif packet_dirs:
+        state = "PACKET_EVIDENCE"
     elif evidence:
         state = "RECIPE_CLASS"
     else:
