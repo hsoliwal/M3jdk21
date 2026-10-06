@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.M3StringBalancedCanonicalDagFinal2
+displayName: Converge M3 String balanced canonical DAG
+description: Replays the Synexia-history-derived balanced, parenthesization-independent M3String tuple owner and its durable M3 naming/invariant proof without changing public String API.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk22-m3-string-balanced-dag-final2
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-string-balanced-dag-final2
