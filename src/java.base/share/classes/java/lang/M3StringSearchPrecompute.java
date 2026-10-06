@@ -39,7 +39,7 @@ final class M3StringSearchPrecompute {
      */
     static long maximumRetainedPrimitiveBytes() {
         long patternBytes =
-                (long) SLOTS * MAX_PATTERN_UNITS * (Integer.BYTES + Long.BYTES);
+                (long) SLOTS * MAX_PATTERN_UNITS * (2L * Integer.BYTES + Long.BYTES);
         long sourceBytes =
                 (long) SOURCE_SLOTS * MAX_TRIGRAM_SOURCE_UNITS * Long.BYTES;
         return Math.addExact(patternBytes, sourceBytes);
@@ -81,8 +81,19 @@ final class M3StringSearchPrecompute {
             prefix[index] = matched;
         }
 
+        int[] reversePrefix = new int[length];
+        for (int index = 1; index < length; index++) {
+            int matched = reversePrefix[index - 1];
+            char unit = reverseUnit(pattern, index);
+            while (matched > 0 && unit != reverseUnit(pattern, matched)) {
+                matched = reversePrefix[matched - 1];
+            }
+            if (unit == reverseUnit(pattern, matched)) matched++;
+            reversePrefix[index] = matched;
+        }
+
         M3TQ.Facts trigrams = length >= 3 ? M3TQ.precompute(pattern, MAX_PATTERN_UNITS) : null;
-        Plan plan = new Plan(length, prefix, trigrams);
+        Plan plan = new Plan(length, prefix, reversePrefix, trigrams);
         CACHE.set(slot, new Entry(new WeakReference<>(owner), coordinate, plan));
         return plan;
     }
@@ -150,20 +161,22 @@ final class M3StringSearchPrecompute {
             Plan plan,
             int maximumStart) {
         int matched = 0;
-        int result = -1;
-        int scanEnd = maximumStart + plan.patternLength;
-        for (int index = 0; index < scanEnd; index++) {
+        int scanStart = maximumStart + plan.patternLength - 1;
+        for (int index = scanStart; index >= 0; index--) {
             char unit = source.charAt(index);
-            while (matched > 0 && unit != pattern.charAt(matched)) {
-                matched = plan.prefix[matched - 1];
+            while (matched > 0 && unit != reverseUnit(pattern, matched)) {
+                matched = plan.reversePrefix[matched - 1];
             }
-            if (unit == pattern.charAt(matched)) matched++;
+            if (unit == reverseUnit(pattern, matched)) matched++;
             if (matched == plan.patternLength) {
-                result = index - plan.patternLength + 1;
-                matched = plan.prefix[matched - 1];
+                return index;
             }
         }
-        return result;
+        return -1;
+    }
+
+    private static char reverseUnit(M3String pattern, int reverseIndex) {
+        return pattern.charAt(pattern.length() - 1 - reverseIndex);
     }
 
     private static int slot(M3StringOwner owner, long coordinate) {
@@ -179,16 +192,18 @@ final class M3StringSearchPrecompute {
     static final class Plan {
         final int patternLength;
         final int[] prefix;
+        final int[] reversePrefix;
         final M3TQ.Facts trigrams;
 
-        Plan(int patternLength, int[] prefix, M3TQ.Facts trigrams) {
+        Plan(int patternLength, int[] prefix, int[] reversePrefix, M3TQ.Facts trigrams) {
             this.patternLength = patternLength;
             this.prefix = prefix;
+            this.reversePrefix = reversePrefix;
             this.trigrams = trigrams;
         }
 
         long retainedPrimitiveBytes() {
-            return (long) prefix.length * Integer.BYTES
+            return (long) (prefix.length + reversePrefix.length) * Integer.BYTES
                     + (trigrams == null ? 0L : (long) trigrams.keyCount() * Long.BYTES);
         }
     }
