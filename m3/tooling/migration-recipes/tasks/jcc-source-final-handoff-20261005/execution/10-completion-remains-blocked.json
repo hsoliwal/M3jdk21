@@ -1,0 +1,30 @@
+{
+  "id": "10-completion-remains-blocked",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/migration/migration.py",
+    "complete",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay",
+    "--previous",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before00-name-mapping.json.txt"
+  ],
+  "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/overlay",
+  "started_utc": "2026-10-05T11:57:43.531396+00:00",
+  "expected_exit_code": 2,
+  "ended_utc": "2026-10-05T11:57:43.760878+00:00",
+  "exit_code": 2,
+  "stdout": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/10-completion-remains-blocked.stdout.log",
+    "bytes": 47,
+    "sha256": "d4578b77ded4c87f33240fad4588e418b3157992288cbf4a1a4e38be14ece15b",
+    "git_blob_sha1": "407ff20445c228580201d3d921ccfc1ec401a7f7",
+    "mode": "0o644"
+  },
+  "stderr": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e03/verification/10-completion-remains-blocked.stderr.log",
+    "bytes": 6109,
+    "sha256": "c4a5d6a265b1a39ec6254fe71bc9e58cd55a7658d9ea6d18ccff4cba24687b25",
+    "git_blob_sha1": "097e1a5588bcbff34ce3ae0153d2652b3e224808",
+    "mode": "0o644"
+  }
+}

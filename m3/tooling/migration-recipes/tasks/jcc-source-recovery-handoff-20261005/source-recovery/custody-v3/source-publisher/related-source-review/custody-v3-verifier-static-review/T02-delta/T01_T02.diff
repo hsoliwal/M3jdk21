@@ -1,0 +1,36 @@
+--- T01/raw_custody_v3.py
++++ T02/raw_custody_v3.py
+@@ -30,8 +30,10 @@
+ 
+ def bound(spec, expected_sha=None):
+     from audit_base import OUT, digest
+-    path = Path(spec['local_path']).resolve(strict=True)
+-    assert path.is_file() and not path.is_symlink() and path.is_relative_to(OUT)
++    original_path = Path(spec['local_path'])
++    assert original_path.is_file() and not original_path.is_symlink()
++    path = original_path.resolve(strict=True)
++    assert path.is_relative_to(OUT)
+     raw = path.read_bytes()
+     assert digest(raw) == spec['sha256']
+     if expected_sha is not None:
+@@ -138,6 +140,9 @@
+     commit = custody['verification_commit']
+     assert commit['request_url'] == 'https://api.github.com/repos/' + REPOSITORY + '/git/commits/' + PROBE_COMMIT
+     body = commit['body']
++    original_response = commit['original_response']
++    assert original_response['isError'] is False
++    assert json.loads(original_response['structuredContent']['content']) == body
+     assert body['sha'] == PROBE_COMMIT and body['tree']['sha'] == PROBE_TREE
+     assert [parent['sha'] for parent in body['parents']] == [BASE_COMMIT]
+     for sha, entries in base_trees.items():
+--- T01/verify_publication_v3.py
++++ T02/verify_publication_v3.py
+@@ -29,7 +29,7 @@
+     from audit_base import BASE_COMMIT, BASE_TREE, OUT, TASK, digest, exact_write, git_blob, git_tree, json_bytes, resolve
+     from prepare_publication import BRANCH, PRODUCTION_UPDATES, expected_tree
+     assert digest((helpers / 'verify_publication.py').read_bytes()) == '8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639'
+-    assert digest((helpers / 'raw_custody_v3.py').read_bytes()) == 'a96f1aec811774467092a09cd750d47785fd4dd5482ce792ffac93c38deb9f5b'
++    assert digest((helpers / 'raw_custody_v3.py').read_bytes()) == '45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be'
+     from raw_custody_v3 import IDENTITY_ONLY, PROTOCOL, audit, bound
+ 
+     preflight_path = Path(sys.argv[1]).resolve(strict=True)

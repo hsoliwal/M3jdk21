@@ -1,0 +1,27 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/com.synexia",
+    "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java",
+    "ref": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+    "encoding": "base64"
+  },
+  "result": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "content": "Ly8gU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEFwYWNoZS0yLjAKcGFja2Fn\nZSBjb20uc3luZXhpYS5yZXdyaXRlOwoKaW1wb3J0IGphdmEudXRpbC5PYmpl\nY3RzOwppbXBvcnQgb3JnLm9wZW5yZXdyaXRlLlJlY2lwZTsKCi8qKiBPbmUg\nZGV0ZXJtaW5pc3RpYyBPcGVuUmV3cml0ZSBwYXNzIGluIGFuIE0zIGZpbGUt\nbG9jYWwgdHJhbnNwaWxhdGlvbiBwbGFuLiAqLwpwdWJsaWMgcmVjb3JkIE0z\nVHJhbnNwaWxlUGFzcyhTdHJpbmcgaWQsIFJlY2lwZSByZWNpcGUpIHsKICAg\nIHB1YmxpYyBNM1RyYW5zcGlsZVBhc3MgewogICAgICAgIGlmIChpZCA9PSBu\ndWxsIHx8IGlkLmlzQmxhbmsoKSB8fCBpZC5pbmRleE9mKCdcMCcpID49IDAp\nIHsKICAgICAgICAgICAgdGhyb3cgbmV3IElsbGVnYWxBcmd1bWVudEV4Y2Vw\ndGlvbigiaWQgcmVxdWlyZWQiKTsKICAgICAgICB9CiAgICAgICAgaWQgPSBp\nZC5zdHJpcCgpOwogICAgICAgIHJlY2lwZSA9IE9iamVjdHMucmVxdWlyZU5v\nbk51bGwocmVjaXBlLCAicmVjaXBlIik7CiAgICB9Cn0K\n",
+        "encoding": "base64",
+        "sha": "ef8c0ed9e64adc66dbb663fd36fa3d8a7486123c",
+        "display_url": "https://github.com/hsoliwal/com.synexia/blob/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java",
+        "display_title": "M3TranspilePass.java"
+      },
+      "isError": false
+    }
+  }
+}

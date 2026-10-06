@@ -1,0 +1,5 @@
+{
+  "schema": "captured-tool-capability/v1",
+  "name": "mcp__codex_apps__github_fetch_file",
+  "description": "Access repositories, issues, and pull requests. Required for some features such as Codex\n\nFetch file content by repository path, using the default branch when ref is omitted. This tool is part of plugin `GitHub`.\n\nexec tool declaration:\n```ts\ndeclare const tools: { mcp__codex_apps__github_fetch_file(args: {\n  // One of utf-8 or base64. Default is utf-8.\n  encoding?: \"utf-8\" | \"base64\";\n  // Optional 1-based last line to return.\n  end_line?: number | null;\n  // Repository path for the file to fetch.\n  path: string;\n  // Optional branch, tag, or commit ref to read from. Omit this unless the ref is known; the repository default branch will be used when omitted.\n  ref?: string | null;\n  // Repository in `owner/name` form, such as `openai/openai`. This maps to GitHub REST `owner` and `repo` path parameters: https://docs.github.com/en/rest/repos/repos#get-a-repository\n  repository_full_name: string;\n  // Optional 1-based first line to return.\n  start_line?: number | null;\n}): Promise<CallToolResult>; };\n```"
+}

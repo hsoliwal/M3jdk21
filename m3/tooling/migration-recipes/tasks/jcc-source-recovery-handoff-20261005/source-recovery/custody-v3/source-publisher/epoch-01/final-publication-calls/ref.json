@@ -1,0 +1,28 @@
+{
+  "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/ref/heads/aix/jcc-source-merge-recovery-20261005",
+  "result": {
+    "status": "fulfilled",
+    "value": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "content": "{\"ref\":\"refs/heads/aix/jcc-source-merge-recovery-20261005\",\"node_id\":\"REF_kwDOQ2icstoAMXJlZnMvaGVhZHMvYWl4L2pjYy1zb3VyY2UtbWVyZ2UtcmVjb3ZlcnktMjAyNjEwMDU\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/refs/heads/aix/jcc-source-merge-recovery-20261005\",\"object\":{\"sha\":\"0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8\",\"type\":\"commit\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/commits/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8\"}}",
+        "title": "jcc-source-merge-recovery-20261005",
+        "modified_date": null,
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/ref/heads/aix/jcc-source-merge-recovery-20261005",
+        "display_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/ref/heads/aix/jcc-source-merge-recovery-20261005",
+        "display_title": "jcc-source-merge-recovery-20261005",
+        "structuredContent": {
+          "title": "jcc-source-merge-recovery-20261005",
+          "content": "{\"ref\":\"refs/heads/aix/jcc-source-merge-recovery-20261005\",\"node_id\":\"REF_kwDOQ2icstoAMXJlZnMvaGVhZHMvYWl4L2pjYy1zb3VyY2UtbWVyZ2UtcmVjb3ZlcnktMjAyNjEwMDU\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/refs/heads/aix/jcc-source-merge-recovery-20261005\",\"object\":{\"sha\":\"0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8\",\"type\":\"commit\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/commits/0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8\"}}",
+          "display_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/ref/heads/aix/jcc-source-merge-recovery-20261005"
+        }
+      },
+      "isError": false
+    }
+  }
+}

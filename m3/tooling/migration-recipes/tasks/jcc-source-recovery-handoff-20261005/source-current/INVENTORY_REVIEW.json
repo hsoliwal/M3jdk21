@@ -1,0 +1,247 @@
+{
+  "acquired_current_blob_manifest": {
+    "bytes": 26102,
+    "git_blob": "10294ceb725315a6391188902c8391d6c5f0b9bc",
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/ACQUIRED_BLOBS.json",
+    "sha256": "81c2a4330c23c871f6e51d3827ced92d7ffb36732d9d24f1cc28a330b9e0eba6"
+  },
+  "additional_current_main_owner_obligations": [
+    "M3MasteryClassLoader",
+    "M3MasteryContractSurface",
+    "PSource"
+  ],
+  "all_path_status_counts": {
+    "ABSENT_IN_COMPLETE_TREE": 192,
+    "PRESENT": 523
+  },
+  "all_selected_and_supplemental_current_bodies_available": 523,
+  "amendment": {
+    "bytes": 1177,
+    "git_blob": "5009d7d338eaaca207129c277acc8513351939cc",
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/AMENDMENT.json",
+    "sha256": "e20b0de4dfa51c79e6e16d035c6c55a5d368a9641b175239cb6f41f916bd74a6"
+  },
+  "ancestor_instructions_absent": 191,
+  "ancestor_instructions_present": 1,
+  "build_role_map": {
+    "bytes": 63816,
+    "git_blob": "eed55a4d5b77d6bfe61746576409ae68d46f8a84",
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/BUILD_ROLE_MAP.json",
+    "sha256": "cabf31b005b28c18053c107936134356986f55770368cb982800900380ee8689"
+  },
+  "canonical_upstream_fixture_bytes_equal_original": true,
+  "context_body_inputs": [
+    {
+      "bytes": 5637,
+      "git_blob": "3354b97e964b170b88df1ff8964e863d728ce9af",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-replay-0b8dc/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/target/replay/run.VCEcA3ZU/preimages/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/upstream/java/synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3DocumentationAttributionExecutionTest.java",
+      "sha256": "dbc50c7a436b4bee61fffbfec3104b981850d15f8d052f7517b3b0945476e8d2"
+    },
+    {
+      "bytes": 2538,
+      "git_blob": "b4081310a343cbd067c7deb5e907031598e82536",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryClassLoader.java",
+      "sha256": "e2fee64f28c2fd71db1d0f2fba8a9bf3bd4c3d210119d4e12823b7d01a98ec0a"
+    },
+    {
+      "bytes": 8270,
+      "git_blob": "7a31cc620465c33d978a5b70ffca0f3e221f1c01",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryContractSurface.java",
+      "sha256": "870deda207b85f081da2f7a2953082a91098ea46757c4586b4b91d490685749e"
+    },
+    {
+      "bytes": 10001,
+      "git_blob": "897714786289519ea8cb3da9cdeb2334231d4897",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexDictionaryGramIndex.java",
+      "sha256": "454856ea97080ec088e2f66b04092da0608bce4f8d41dcb76f4539786df7184a"
+    },
+    {
+      "bytes": 3277,
+      "git_blob": "e1e0418a422db24f0f477a89b6ce15cdeee1bee1",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRegexDictionaryPlan.java",
+      "sha256": "7bbf143dfa90c7c282f45fb87342ad2a2432429194f397eb2e978af9a3d6aeeb"
+    },
+    {
+      "bytes": 23848,
+      "git_blob": "c69d5f50c3e527bbb85e759a663a02987c9174d1",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRegexGrammar.java",
+      "sha256": "de54266762643748cf706c3a8bc485daf1923e18fb0d8ece66472b5bae53b6ae"
+    },
+    {
+      "bytes": 15928,
+      "git_blob": "ea154f28926a19ba411027897c806ff3873abcd8",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexRegexSearch.java",
+      "sha256": "9a4053c382e5f4bc04562410bf32fd10013295350699e95c7caa5c92077acce5"
+    },
+    {
+      "bytes": 12682,
+      "git_blob": "1f8e6d1945be6919d0070576632cb0384d5495ac",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexTextSubstringIndex.java",
+      "sha256": "995e5436922838b61c4eaf03edeef2907d58892d63fd82e7dd0daf51abb63550"
+    },
+    {
+      "bytes": 1523,
+      "git_blob": "6999647741cd7b643d20710f52da37e3ae3f669a",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-mindex/runtime/src/main/java/com/synexia/mindex/MIndexUtf16TransitionIndex.java",
+      "sha256": "b2b312f7a844f177e6c243a8408dc4bd81b0705ab012a39c8d9475edc2ef26c8"
+    },
+    {
+      "bytes": 10936,
+      "git_blob": "20c22c81316b48314c1c7c3d6e173e688f3b787d",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-mindex/runtime/src/main/java/com/synexia/mindex/regex/MIndexCompositeRegexIndex.java",
+      "sha256": "2e4da7b5b4519c4b4dc8231231dcc9b2b2e408e2524ae6ca142b1cd56622ae6c"
+    },
+    {
+      "bytes": 9804,
+      "git_blob": "f27ea055dc7bac355f8c5c145b727f0309c73b80",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-mindex/runtime/src/main/java/com/synexia/mindex/regex/MIndexRegex.java",
+      "sha256": "0442c5be444b841b03d3bfb24989a7bc0a8bc5d1c68065729848bd7fa6878165"
+    },
+    {
+      "bytes": 1483,
+      "git_blob": "c3bd20071c22a044c00660578c1038a0a3a69d6e",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-mindex/runtime/src/main/java/com/synexia/mindex/regex/MIndexRegexInputView.java",
+      "sha256": "461b6531c995f6757355e042958fd2235770c9c0ce156842de74e3aeffc70190"
+    },
+    {
+      "bytes": 5496,
+      "git_blob": "4e48418d2cc96e2b8cd39204a8d26f83f46d3739",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-mindex/runtime/src/main/java/com/synexia/mindex/regex/MIndexRegexMatcher.java",
+      "sha256": "2c199d71769d4f9232855723233914a3c201c4b851f162290afb387477ec1141"
+    },
+    {
+      "bytes": 18492,
+      "git_blob": "4b9a426858e8f67960bb1dfb331ab2ae423b77dd",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/src/test/java/com/synexia/mindex/regex/RXMTest.java",
+      "sha256": "34c1142320828df5047c004c56df157a37c193dbbb671db3835dd18cbaa9d1f2"
+    },
+    {
+      "bytes": 13221,
+      "git_blob": "af5c69e357e57f2b2fc7e1b54fbfb3f8de27cdaf",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/Lfs.java",
+      "sha256": "6fcc1c2e5149b7706eeb28f53ef9cc873d033d09aa7f1f5edab5ccbc4fac9c85"
+    },
+    {
+      "bytes": 6470,
+      "git_blob": "436538cec7e9a35356ce05f32a177ad65ef8b564",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/PJSeal.java",
+      "sha256": "72b5d45e1c544218c839a861016031d5638baabacf339d58e149972c472321e5"
+    },
+    {
+      "bytes": 54435,
+      "git_blob": "92639b89d7791f71ef9fa175259f5d5803fb773e",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeProjectLab.java",
+      "sha256": "964cec1b2ef2734d13c19cfaa5d53f9835f3dc45ba37b1caa68f091bd21b3610"
+    },
+    {
+      "bytes": 39733,
+      "git_blob": "50a3ae3345b6bcc5077ac38c9c8de7e9a128eb40",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/PSource.java",
+      "sha256": "108456808afd62664bc8c85822afbc294ac1374da6404efad8412e2225c99dbe"
+    },
+    {
+      "bytes": 37351,
+      "git_blob": "8f8341f0e212f33fe38a8f9868d8732e1ec240c8",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/bodies/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeLaboratory.java",
+      "sha256": "de3fce91fdd1c9ff6c768a7574cb937e41aabba1d34bd0fe2326b5cc90c0e76e"
+    },
+    {
+      "bytes": 16616,
+      "git_blob": "5140d803e73a336aef851887a04572d446845312",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/merged-sources/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/pom.xml",
+      "sha256": "4664beca9c5e9e377cf29621d22dda5bf0eacb92957e8ebe8a1a6124f13e1ab4"
+    }
+  ],
+  "context_manifest": {
+    "bytes": 70459,
+    "git_blob": "56f05d9af349f29cbfda8f12b158702606517fba",
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/CURRENT_CONTEXT_MANIFEST.json",
+    "sha256": "936730925c534f0744d5a3ed5831812c221c3ac919b889c1be5ebdfe294396ce"
+  },
+  "current_jcc_main_include_paths": 91,
+  "current_parent_distinct_paths": 109,
+  "current_parent_main_include_paths": 88,
+  "current_parent_outside_original503_paths": 11,
+  "current_parent_release8_vendor_paths": 19,
+  "current_parent_test_classes": 2,
+  "declared_RXM_test_methods": 3,
+  "exact_source_input_seals_stable": 1239,
+  "executed_current_test_methods": 0,
+  "fresh_current_compiler_API_JUnit_JNI_full_module_gate_claim": false,
+  "instruction_inventory": {
+    "bytes": 288669,
+    "git_blob": "46cb38d4dd6d86c02e60c6954222fce48c4ebb3c",
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/CURRENT_INSTRUCTIONS.json",
+    "sha256": "64d01a29fd43a26c7ad433fb065c8b50816abae7a0c8ecb443aa9153afacb945"
+  },
+  "inventory_only_dependency_context": [
+    "Lfs",
+    "PJSeal",
+    "M3RecipeProjectLab",
+    "M3RecipeLaboratory"
+  ],
+  "limits": [
+    "No whole merged-repository body acquisition or repository-completion claim.",
+    "Current Git tree hashes select acquired/reused exact bodies; bytes are compared without inferring semantic equivalence.",
+    "Current role mapping is source/XML inspection, not an effective Maven model or compiler-resolved universal closure.",
+    "The prior original0b/d1 compiler, API, JUnit and JNI status is historical; no proof transfers onto current be92 bytes.",
+    "The canonical module POM and module third_party mirror review belong to the separate runtime-admission task.",
+    "The optional fixture laboratory graph was not recursively expanded or silently added to the active JCC proof.",
+    "The current source owner must freeze its recovery recipe, current preimages, protected fixtures, providers and complete gate commands before execution."
+  ],
+  "main_446_arithmetic_is_compile_or_runtime_qualification": false,
+  "parent_context": {
+    "bytes": 112397,
+    "git_blob": "665dac597b1b33414e152c9224c840e7e01127d5",
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/PARENT_BUILD_CONTEXT.json",
+    "sha256": "4f8fbf09070e4d45e42c7ac29c94401d70058fea04d98e44b3526a24c77912fc"
+  },
+  "path_resolutions_verified_against_complete_git_trees": 715,
+  "path_tree_hops_verified": 5525,
+  "protected_fixture_copy_present": false,
+  "published_main_include_paths": 443,
+  "published_main_paths_with_current_differences": 17,
+  "review_reports": [
+    {
+      "bytes": 14492,
+      "git_blob": "f46d2b541908513e00926507b13f5021fc94e4d1",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/owner-delta-review/REVIEW.md",
+      "sha256": "695f59976a63af7cf789983c5b2800abd683c0f4588e4daee9dbf5be74e0b67a"
+    },
+    {
+      "bytes": 44391,
+      "git_blob": "b49824f14e63ab4f200cdb0c1155577c353db6ea",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/owner-delta-review/JCC_BUILD_ROLES_AND_PSOURCE.json",
+      "sha256": "cbc3c43e7724abb6801d889d53deccb624772678c83f38a1f1b683ae080c8eb7"
+    },
+    {
+      "bytes": 9499,
+      "git_blob": "4661d939b7cff62526bc2025e1dc7a8e4f6edbdd",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/owner-delta-review/parent-closure/REVIEW.md",
+      "sha256": "b7f5bd07be2bebcbb8d118fff887ecd4e5a88be6ed9ca63eec42c54818aa5a1b"
+    }
+  ],
+  "schema": "SYNEXIA_CURRENT_SOURCE_INVENTORY_REVIEW/1",
+  "source503_seal": {
+    "bytes": 730,
+    "git_blob": "069fc03a597c440ea84363b39d26dce7069fb898",
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/SOURCE503_SEAL.json",
+    "sha256": "aaab687be5dd384245ab605c828e382564f24d6e9e7878666c99e7c1e16d2dee"
+  },
+  "source_byte_comparison": {
+    "ALL_THREE_BYTE_IDENTICAL": 480,
+    "CURRENT_DIFFERS_FROM_BOTH_PRIOR_BODIES": 21,
+    "PUBLISHED_POSTIMAGE_RETAINED": 2
+  },
+  "source_commit": "be92c62ece9023b5c33676716a1076d00e26120a",
+  "source_current_present": 503,
+  "source_manifest": {
+    "bytes": 1891080,
+    "git_blob": "f1892501332d65721bfd6164597d93f3a298a10a",
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-source-inventory/CURRENT_SOURCE_MANIFEST.json",
+    "sha256": "20fd857cb00711e02c34cd27445bd2c057db8f57a0cafb8ed9a455b453f3b37c"
+  },
+  "source_packet_count": 503,
+  "source_tree": "3c4f32b66633a251ba2c117090830252a7e2da03",
+  "status": "COMPLETE_BOUNDED_CURRENT_SOURCE_INVENTORY"
+}
