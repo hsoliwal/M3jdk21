@@ -4541,11 +4541,13 @@ public final class String
     private static final class M3LinesSpliterator
             extends Spliterators.AbstractSpliterator<String> {
         private final String source;
+        private final M3String storage;
         private int index;
 
         M3LinesSpliterator(String source) {
             super(source.length(), Spliterator.ORDERED | Spliterator.IMMUTABLE | Spliterator.NONNULL);
             this.source = source;
+            this.storage = Objects.requireNonNull(source.m3(), "M3 storage");
         }
 
         @Override
@@ -4555,19 +4557,15 @@ public final class String
             if (index >= length) return false;
 
             int start = index;
-            int end = start;
-            while (end < length) {
-                char unit = source.charAt(end);
-                if (unit == '\n' || unit == '\r') break;
-                end++;
-            }
+            int end = storage.indexOfLineTerminator(start);
+            if (end < 0) end = length;
 
             action.accept(source.substring(start, end));
             if (end == length) {
                 index = length;
-            } else if (source.charAt(end) == '\r'
+            } else if (storage.charAt(end) == '\r'
                     && end + 1 < length
-                    && source.charAt(end + 1) == '\n') {
+                    && storage.charAt(end + 1) == '\n') {
                 index = end + 2;
             } else {
                 index = end + 1;
