@@ -26,6 +26,36 @@ external donors / problem catalogues / upstream projects
  preimage/scope -> license policy -> build/API/ABI -> runtime/jtreg -> promotion
 ```
 
+## Canonical Synexia recipe owner
+
+The Synexia convergence workspace owns the reusable cross-project atomization/patternization
+programme. Its canonical Maven first pass is
+`M3EveryModuleAtomPatternInventoryRecipe`:
+
+```text
+M3EveryModuleAtomPatternInventoryRecipe
+  -> M3HierarchicalAtomPatternRecipe
+       -> source-specific FILE/PACKAGE/MODULE/PROJECT/REPOSITORY evidence
+       -> separate Java/native/build/document/structured/script/data lanes
+  -> M3DonorMavenizedAtomPatternRecipe
+       -> donor structural atoms + algorithm/pattern/recipe evidence
+```
+
+Synexia's root reactor also owns the repository, aggregate module, per-module and task-crate entry
+points. M3JDK21 consumes the qualified outputs; it does not maintain a divergent copy of that
+generic convergence architecture.
+
+For non-Maven external source, Synexia uses its existing
+`M3MavenizedAtomPatternAbsorptionRecipe` in a disposable candidate image:
+
+```text
+MAVENIZE -> INVENTORY -> [VERIFIED ATOMIZE] -> PATTERNIZE -> REVIEW -> HANDOFF
+```
+
+The bracketed mutation remains trusted-verifier gated. Markdown/AsciiDoc is atomized as document
+structure, not Java syntax; native/build/structured/script/data inputs retain their own source
+specificity.
+
 ## Apache-2.0 fast lane
 
 First-party or independently authored Synexia source that is qualified as `Apache-2.0` is reusable
