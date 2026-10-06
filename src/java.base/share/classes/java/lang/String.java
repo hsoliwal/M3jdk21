@@ -3981,7 +3981,8 @@ public final class String
     public String toLowerCase(Locale locale) {
         Objects.requireNonNull(locale);
         M3String storage = m3();
-        if (storage != null && locale.equals(Locale.ROOT) && storage.facts().ascii) {
+        M3StringFacts prepared = storage == null ? null : storage.factsIfPrepared();
+        if (prepared != null && locale.equals(Locale.ROOT) && prepared.ascii) {
             M3String mapped = storage.asciiCase(false);
             return mapped == storage ? this : new String(mapped);
         }
@@ -4068,7 +4069,8 @@ public final class String
     public String toUpperCase(Locale locale) {
         Objects.requireNonNull(locale);
         M3String storage = m3();
-        if (storage != null && locale.equals(Locale.ROOT) && storage.facts().ascii) {
+        M3StringFacts prepared = storage == null ? null : storage.factsIfPrepared();
+        if (prepared != null && locale.equals(Locale.ROOT) && prepared.ascii) {
             M3String mapped = storage.asciiCase(true);
             return mapped == storage ? this : new String(mapped);
         }
