@@ -15,11 +15,14 @@ import java.util.Objects;
 public final class M3ProbabilityVector {
     public static final long ONE_Q32 = 1L << 32;
 
+    private final M3CoordinateSpace coordinateSpace;
     private final long[] keys;
     private final long[] massQ32;
     private final long[] cumulativeQ32;
 
-    private M3ProbabilityVector(long[] keys, long[] massQ32) {
+    private M3ProbabilityVector(
+            M3CoordinateSpace coordinateSpace, long[] keys, long[] massQ32) {
+        this.coordinateSpace = Objects.requireNonNull(coordinateSpace, "coordinateSpace");
         this.keys = keys;
         this.massQ32 = massQ32;
         this.cumulativeQ32 = new long[massQ32.length];
@@ -33,16 +36,21 @@ public final class M3ProbabilityVector {
         }
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public static Builder builder(M3CoordinateSpace coordinateSpace) {
+        return new Builder(coordinateSpace);
     }
 
-    public static M3ProbabilityVector uniform(long... keys) {
-        Builder builder = builder();
+    public static M3ProbabilityVector uniform(
+            M3CoordinateSpace coordinateSpace, long... keys) {
+        Builder builder = builder(coordinateSpace);
         for (long key : Objects.requireNonNull(keys, "keys")) {
             builder.weight(key, 1L);
         }
         return builder.build();
+    }
+
+    public M3CoordinateSpace coordinateSpace() {
+        return coordinateSpace;
     }
 
     public int size() {
@@ -130,7 +138,13 @@ public final class M3ProbabilityVector {
     private record Remainder(int row, BigInteger value, long key) {}
 
     public static final class Builder {
+        private final M3CoordinateSpace coordinateSpace;
         private final List<Draft> drafts = new ArrayList<>();
+
+        private Builder(M3CoordinateSpace coordinateSpace) {
+            this.coordinateSpace =
+                    Objects.requireNonNull(coordinateSpace, "coordinateSpace");
+        }
 
         public Builder weight(long key, long weight) {
             if (key == 0L) throw new IllegalArgumentException("probability key must be nonzero");
@@ -141,7 +155,8 @@ public final class M3ProbabilityVector {
 
         public M3ProbabilityVector build() {
             if (drafts.isEmpty()) {
-                return new M3ProbabilityVector(new long[0], new long[0]);
+                return new M3ProbabilityVector(
+                        coordinateSpace, new long[0], new long[0]);
             }
 
             ArrayList<Draft> ordered = new ArrayList<>(drafts);
@@ -191,7 +206,7 @@ public final class M3ProbabilityVector {
                 mass[row] = Math.addExact(mass[row], 1L);
             }
 
-            return new M3ProbabilityVector(keys, mass);
+            return new M3ProbabilityVector(coordinateSpace, keys, mass);
         }
     }
 }
