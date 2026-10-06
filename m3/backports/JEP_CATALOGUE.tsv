@@ -75,7 +75,7 @@ release	jep	title	domain	disposition	reason	superseded_by
 26	526	Lazy Constants (Second Preview)	library-vm	superseded	Use latest JEP 531; still preview in JDK 27.	531
 26	529	Vector API (Eleventh Incubator)	library-hotspot-compiler	superseded-jit	Use latest incubator JEP 537 for evaluation.	537
 26	530	Primitive Types in Patterns, instanceof, and switch (Fourth Preview)	language	reject-language	Requires Java grammar/javac semantic changes.	
-27	523	Make G1 the Default Garbage Collector in All Environments	gc-runtime-config	candidate	Runtime default-policy enhancement; verify platform/resource-constrained behavior.	
+27	523	Make G1 the Default Garbage Collector in All Environments	gc-runtime-config	candidate	One-file HotSpot policy candidate materialized with adapted Java21 jtreg; release/no-G1 build proof pending.	
 27	527	Post-Quantum Hybrid Key Exchange for TLS 1.3	security-library	candidate-high-risk	Security/TLS enhancement; depends on post-quantum primitives and provider support.	
 27	531	Lazy Constants (Third Preview)	library-vm	hold-preview	Latest preview API plus JVM optimization semantics; do not stabilize silently in JDK 21.	
 27	532	Primitive Types in Patterns, instanceof, and switch (Fifth Preview)	language	reject-language	Requires Java grammar/javac semantic changes.	
