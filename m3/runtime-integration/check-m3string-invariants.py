@@ -589,6 +589,17 @@ for fragment in [
     if fragment not in (string + m3 + pool + atom):
         fail(f"M3 exact byte-array ingress missing: {fragment}")
 
+# StringBuilder ingress reads its compact backing directly and snapshots once into M3.
+for fragment in [
+    "M3String direct =",
+    "maybeAdmitCompact(",
+    "M3String.admitCompactBytes(value, sourceOffset, length, sourceCoder)",
+    "M3StringPool.internCompactBytes(source, sourceOffset, length, sourceCoder)",
+    "M3StringAtom.localCompactBytes(",
+]:
+    if fragment not in (string + m3 + pool + atom):
+        fail(f"M3 direct StringBuilder ingress missing: {fragment}")
+
 # Mutable char[] ingress must snapshot directly into canonical M3 storage after activation.
 # Do not compress to a transient compact byte[] first and then copy again into native storage.
 for fragment in [
