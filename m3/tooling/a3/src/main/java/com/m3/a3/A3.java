@@ -33,7 +33,8 @@ public final class A3 {
                     A3Apply.run(
                             options.root(),
                             options.out("m3/build/a3/apply"),
-                            options.sources());
+                            options.sources(),
+                            options.mastery());
             default -> {
                 usage();
                 throw new IllegalArgumentException(
@@ -45,19 +46,24 @@ public final class A3 {
     private static void usage() {
         System.err.println(
                 "A3: inv|plan|apply [--root PATH] [--out PATH] "
-                        + "[--file PATH ...] [--list PATH]");
+                        + "[--file PATH ...] [--list PATH] "
+                        + "[--mastery PATH --mastery-root SHA256]");
     }
 
     private record Args(
             Path root,
             Path out,
             List<String> files,
-            Path list) {
+            Path list,
+            Path mastery,
+            String masteryRoot) {
 
         static Args parse(String[] args) {
             Path root = Path.of(".");
             Path out = null;
             Path list = null;
+            Path mastery = null;
+            String masteryRoot = null;
             ArrayList<String> files = new ArrayList<>();
 
             for (int index = 1; index < args.length; index++) {
@@ -70,16 +76,36 @@ public final class A3 {
                     out = Path.of(requireValue(args, ++index, key));
                 } else if ("--list".equals(key)) {
                     list = Path.of(requireValue(args, ++index, key));
+                } else if ("--mastery".equals(key)) {
+                    mastery = Path.of(requireValue(args, ++index, key));
+                } else if ("--mastery-root".equals(key)) {
+                    masteryRoot = requireValue(args, ++index, key);
                 } else {
                     throw new IllegalArgumentException(
                             "unknown A3 option: " + key);
                 }
             }
-            return new Args(root, out, List.copyOf(files), list);
+            return new Args(
+                    root,
+                    out,
+                    List.copyOf(files),
+                    list,
+                    mastery,
+                    masteryRoot);
         }
 
         Path out(String fallback) {
             return out == null ? Path.of(fallback) : out;
+        }
+
+        A3Mastery.Receipt mastery() throws Exception {
+            if (mastery == null
+                    || masteryRoot == null
+                    || masteryRoot.isBlank()) {
+                throw new IllegalArgumentException(
+                        "A3 apply requires --mastery and --mastery-root");
+            }
+            return A3Mastery.read(root, mastery, masteryRoot);
         }
 
         List<String> sources() throws Exception {

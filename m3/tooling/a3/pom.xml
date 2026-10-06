@@ -54,4 +54,34 @@
       </plugin>
     </plugins>
   </build>
+  <profiles>
+    <!-- Replay the exact A3 mastery-receipt gate from the migration-recipes crate. -->
+    <profile>
+      <id>m3-a3-mastery-gate</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.openrewrite.maven</groupId>
+            <artifactId>rewrite-maven-plugin</artifactId>
+            <version>5.23.1</version>
+            <dependencies>
+              <dependency>
+                <groupId>com.m3.tooling</groupId>
+                <artifactId>migration-recipes</artifactId>
+                <version>${project.version}</version>
+              </dependency>
+            </dependencies>
+            <configuration>
+              <activeRecipes>
+                <recipe>com.m3.a3.MasteryFanInGate</recipe>
+              </activeRecipes>
+              <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
+              <failOnDryRunResults>false</failOnDryRunResults>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 </project>

@@ -39,7 +39,8 @@ class A3ApplyTest {
                 A3Apply.run(
                         root,
                         Path.of("m3/build/a3/apply"),
-                        List.of(relative));
+                        List.of(relative),
+                        A3MasteryTest.receipt());
 
         assertEquals(1, receipts.size());
         A3Apply.Receipt receipt = receipts.getFirst();
@@ -65,6 +66,11 @@ class A3ApplyTest {
         assertTrue(receiptTsv.contains(relative));
         assertTrue(receiptTsv.contains("\tFILE\t"));
         assertTrue(receiptTsv.endsWith("\ttrue\ttrue\n"));
+        String masteryTsv =
+                Files.readString(
+                        root.resolve("m3/build/a3/apply/mastery.tsv"));
+        assertTrue(masteryTsv.contains(A3Mastery.SCHEMA));
+        assertTrue(masteryTsv.contains(A3MasteryTest.receipt().root()));
     }
 
     @Test
@@ -87,7 +93,28 @@ class A3ApplyTest {
                                 root,
                                 Path.of("m3/build/a3/apply"),
                                 List.of(
-                                        "src/java.base/share/classes/a.txt")));
+                                        "src/java.base/share/classes/a.txt"),
+                                A3MasteryTest.receipt()));
+    }
+
+    @Test
+    void legacyOverloadFailsClosedWithoutPinnedMasteryProperties() {
+        String beforeReceipt = System.getProperty("m3.a3.mastery.receipt");
+        String beforeRoot = System.getProperty("m3.a3.mastery.root");
+        try {
+            System.clearProperty("m3.a3.mastery.receipt");
+            System.clearProperty("m3.a3.mastery.root");
+            assertThrows(
+                    IllegalStateException.class,
+                    () ->
+                            A3Apply.run(
+                                    root,
+                                    Path.of("m3/build/a3/legacy"),
+                                    List.of("src/java.base/share/classes/example/Missing.java")));
+        } finally {
+            restore("m3.a3.mastery.receipt", beforeReceipt);
+            restore("m3.a3.mastery.root", beforeRoot);
+        }
     }
 
     @Test
@@ -111,7 +138,8 @@ class A3ApplyTest {
                 A3Apply.run(
                                 root,
                                 Path.of("m3/build/a3/no-change"),
-                                List.of(relative))
+                                List.of(relative),
+                                A3MasteryTest.receipt())
                         .getFirst();
 
         assertFalse(receipt.changed());
@@ -122,4 +150,12 @@ class A3ApplyTest {
                         root.resolve("m3/build/a3/no-change/candidate")
                                 .resolve(relative)));
     }
+    private static void restore(String key, String value) {
+        if (value == null) {
+            System.clearProperty(key);
+        } else {
+            System.setProperty(key, value);
+        }
+    }
+
 }

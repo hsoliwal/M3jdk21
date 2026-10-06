@@ -49,8 +49,31 @@ public final class A3Apply {
             Path root,
             Path out,
             List<String> sources) throws IOException {
+        String receiptPath =
+                System.getProperty("m3.a3.mastery.receipt", "").strip();
+        String receiptRoot =
+                System.getProperty("m3.a3.mastery.root", "").strip();
+        if (receiptPath.isEmpty() || receiptRoot.isEmpty()) {
+            throw new IllegalStateException(
+                    "A3 mastery receipt required: use explicit overload or set "
+                            + "m3.a3.mastery.receipt and m3.a3.mastery.root");
+        }
+        return run(
+                root,
+                out,
+                sources,
+                A3Mastery.read(root, Path.of(receiptPath), receiptRoot));
+    }
+
+    public static List<Receipt> run(
+            Path root,
+            Path out,
+            List<String> sources,
+            A3Mastery.Receipt mastery) throws IOException {
         Path checkedRoot = A3Fs.root(root);
         Path checkedOut = A3Fs.out(checkedRoot, out);
+        A3Mastery.Receipt checkedMastery =
+                Objects.requireNonNull(mastery, "mastery");
         List<String> ordered =
                 sources.stream()
                         .map(value -> text(value, "source"))
@@ -67,6 +90,7 @@ public final class A3Apply {
         }
         receipts.sort(Comparator.comparing(Receipt::path));
         writeReceipt(checkedRoot, checkedOut, receipts);
+        A3Mastery.writeBinding(checkedRoot, checkedOut, checkedMastery);
         return List.copyOf(receipts);
     }
 
