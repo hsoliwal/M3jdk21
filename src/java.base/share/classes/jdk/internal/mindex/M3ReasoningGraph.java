@@ -19,6 +19,7 @@ import java.util.TreeMap;
 public final class M3ReasoningGraph {
     private static final int KIND_COUNT = M3ReasoningRelationKind.values().length;
 
+    private final M3CoordinateSpace coordinateSpace;
     private final long[] nodeIds;
     private final long[] nodeFlags;
     private final long[] skepticalMasks;
@@ -37,6 +38,7 @@ public final class M3ReasoningGraph {
     private final long[] incomingFlags;
 
     private M3ReasoningGraph(
+            M3CoordinateSpace coordinateSpace,
             long[] nodeIds,
             long[] nodeFlags,
             long[] skepticalMasks,
@@ -51,6 +53,7 @@ public final class M3ReasoningGraph {
             int[] incomingSources,
             int[] incomingWeightsQ31,
             long[] incomingFlags) {
+        this.coordinateSpace = Objects.requireNonNull(coordinateSpace, "coordinateSpace");
         this.nodeIds = nodeIds;
         this.nodeFlags = nodeFlags;
         this.skepticalMasks = skepticalMasks;
@@ -67,8 +70,12 @@ public final class M3ReasoningGraph {
         this.incomingFlags = incomingFlags;
     }
 
-    public static Builder builder() {
-        return new Builder();
+    public static Builder builder(M3CoordinateSpace coordinateSpace) {
+        return new Builder(coordinateSpace);
+    }
+
+    public M3CoordinateSpace coordinateSpace() {
+        return coordinateSpace;
     }
 
     public int size() {
@@ -228,8 +235,13 @@ public final class M3ReasoningGraph {
     }
 
     public static final class Builder {
+        private final M3CoordinateSpace coordinateSpace;
         private final TreeMap<Long, NodeDraft> nodes = new TreeMap<>(Long::compareUnsigned);
         private final ArrayList<EdgeDraft> edges = new ArrayList<>();
+
+        private Builder(M3CoordinateSpace coordinateSpace) {
+            this.coordinateSpace = Objects.requireNonNull(coordinateSpace, "coordinateSpace");
+        }
 
         public Builder node(long nodeId) {
             requireId(nodeId);
@@ -366,6 +378,7 @@ public final class M3ReasoningGraph {
             incomingOffsets[cells] = cursor;
 
             return new M3ReasoningGraph(
+                    coordinateSpace,
                     ids,
                     nodeFlags,
                     skeptical,
