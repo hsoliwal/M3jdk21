@@ -141,8 +141,11 @@ for fragment in [
     if fragment not in position_precompute:
         fail(f"M3 position precompute fail-open path missing: {fragment}")
 
+if "char[] scratch" in position_precompute:
+    fail("M3 position precompute reintroduced transient text staging")
+
 for fragment in [
-    "source.getChars(start, end, scratch, 0);",
+    "source.charAt(start + offset)",
     "final AtomicReferenceArray<ExactBlock> exact;",
     "Arrays.binarySearch(units, unit)",
     "Long.numberOfTrailingZeros(positions)",
