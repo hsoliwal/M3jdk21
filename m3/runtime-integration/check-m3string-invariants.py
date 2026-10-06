@@ -154,7 +154,7 @@ for fragment in [
         fail(f"M3 exact trigram search reuse missing: {fragment}")
 for fragment in [
     "static long maximumRetainedPrimitiveBytes()",
-    "(long) SLOTS * MAX_PATTERN_UNITS * (Integer.BYTES + Long.BYTES)",
+    "(long) SLOTS * MAX_PATTERN_UNITS * (2L * Integer.BYTES + Long.BYTES)",
     "(long) SOURCE_SLOTS * MAX_TRIGRAM_SOURCE_UNITS * Long.BYTES",
 ]:
     if fragment not in search_precompute:
@@ -182,7 +182,11 @@ if "private static final int SLOTS = 256;" not in search_precompute:
 if "private static final int MAX_PATTERN_UNITS = 8_192;" not in search_precompute:
     fail("M3StringSearchPrecompute pattern budget changed without invariant review")
 if "final int[] prefix;" not in search_precompute:
-    fail("prepared search plan lost primitive KMP metadata")
+    fail("prepared search plan lost forward KMP metadata")
+if "final int[] reversePrefix;" not in search_precompute:
+    fail("prepared search plan lost reverse KMP metadata")
+if "return index;" not in search_precompute or "reverseUnit(pattern, matched)" not in search_precompute:
+    fail("prepared reverse KMP execution path missing")
 for encoding_marker in [
     "byte[] encode(Charset charset)",
     "private byte[] encodeUtf8()",
