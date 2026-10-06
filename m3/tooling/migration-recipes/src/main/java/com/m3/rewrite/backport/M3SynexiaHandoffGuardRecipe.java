@@ -156,7 +156,7 @@ public final class M3SynexiaHandoffGuardRecipe extends Recipe {
                 || value.isBlank()
                 || value.startsWith("/")
                 || value.matches("^[A-Za-z]:/.*")
-                || value.indexOf('\\\\') >= 0
+                || value.indexOf('\\') >= 0
                 || value.length() > 4096
                 || value.chars().anyMatch(Character::isISOControl)) {
             throw new IllegalStateException("invalid Synexia target path");
