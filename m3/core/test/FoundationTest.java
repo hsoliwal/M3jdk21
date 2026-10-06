@@ -126,5 +126,15 @@ public final class FoundationTest {
         Files.writeString(directory.resolve("synexia.precompute.tsv"),facts.replace("55297", "1"),java.nio.charset.StandardCharsets.UTF_8);
         expect(IOException.class,()->SharedLexiconCatalog.open(directory));
     }
-    public static void main(String[] args)throws Exception{pieces();Path dir=Files.createTempDirectory("m3-foundation-");try{images(dir);catalog(dir);}finally{try(var paths=Files.list(dir)){for(Path path:paths.toList())Files.delete(path);}Files.delete(dir);}System.out.println("FOUNDATION_PASS checks="+checks);}
+    static void exportedCatalog(Path directory) throws Exception {
+        SharedLexiconCatalog catalog=SharedLexiconCatalog.open(directory);
+        check(catalog.recordCount()==10004);check(catalog.shardCount()==1);
+        SharedLexiconCatalog.Coordinate number=catalog.find("10000").orElseThrow();
+        check(catalog.textAt(number).equals("10000"));
+        check(catalog.mappingsAt(number).stream().anyMatch(mapping->mapping.mappingName().equals("NUMBER_10000")));
+        check(catalog.precomputeAt(number).precomputeProfile().contains("NumberPrecompute"));
+        SharedLexiconCatalog.Coordinate london=catalog.find("London").orElseThrow();
+        check(catalog.mappingsAt(london).stream().anyMatch(mapping->mapping.translationProfile().equals("en->hi")));
+    }
+    public static void main(String[] args)throws Exception{pieces();Path dir=Files.createTempDirectory("m3-foundation-");try{images(dir);catalog(dir);if(args.length==1)exportedCatalog(Path.of(args[0]));}finally{try(var paths=Files.list(dir)){for(Path path:paths.toList())Files.delete(path);}Files.delete(dir);}System.out.println("FOUNDATION_PASS checks="+checks);}
 }

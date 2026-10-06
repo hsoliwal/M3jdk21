@@ -8,6 +8,7 @@ import importlib.util
 import hashlib
 import json
 import struct
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -157,6 +158,27 @@ class SynexiaExportTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "output hash mismatch"):
                 VERIFY.verify(root / "output")
             mapping.write_bytes(original)
+
+    def test_java_catalog_opens_actual_python_export(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            output = root / "output"
+            self.run_export(root / "input", output)
+            classes = root / "classes"
+            sources = [ROOT / "m3/core/src/module-info.java"]
+            sources.extend(sorted((ROOT / "m3/core/src/com/m3/text").glob("*.java")))
+            sources.append(ROOT / "m3/core/test/FoundationTest.java")
+            compile_run = subprocess.run(
+                ["javac", "-d", str(classes), *(str(source) for source in sources)],
+                cwd=ROOT, text=True, capture_output=True, check=False,
+            )
+            self.assertEqual(0, compile_run.returncode, compile_run.stderr)
+            proof_run = subprocess.run(
+                ["java", "-cp", str(classes), "FoundationTest", str(output)],
+                cwd=ROOT, text=True, capture_output=True, check=False,
+            )
+            self.assertEqual(0, proof_run.returncode, proof_run.stderr + proof_run.stdout)
+            self.assertIn("FOUNDATION_PASS", proof_run.stdout)
 
     def test_large_projection_is_sharded_without_renumbering_source_ids(self):
         with tempfile.TemporaryDirectory() as directory:
