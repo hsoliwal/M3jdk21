@@ -572,6 +572,7 @@ for fragment in [
     "mindex.string.composite.range-retention\t29bf7407028012d724f48fe5099b8993ce3ffa60",
     "mindex.string.masked-view\t5b64833c3e221b4a7b7b87ad1c5b83d3a96f94b7",
     "mindex.string.literal-regex-replacement\t0d7eb082ce561fd64f3ecd0f56c1ede3dd6661c7",
+    "mindex.string.literal-regex-matches\tf66c68f3afb8634c6c03479ed3d6ecdc44196456",
     "mindex.string.regex-split-indexed\te9b8e4313e36f0af77cb2cc7f03fa73444634bc7",
     "mindex.string.mapped-fact-attachment\t7a47a8a445ca438fb59206508a42b6054956049a",
     "mindex.string.palindrome-facts\t10b4894505a6f6306f340c5ff3ef17270706b2c6",
@@ -628,6 +629,18 @@ for fragment in [
 
 if "M3StringLiteralRegexSplitTest.java" not in workflow:
     fail("history-recovered literal split jtreg is not wired into workflow")
+
+
+for fragment in [
+    "public boolean matches(String regex)",
+    "M3String.isConservativeLiteralRegex(regex)",
+    "return storage.contentEquals(regex);",
+]:
+    if fragment not in string:
+        fail(f"history-recovered literal matches route missing: {fragment}")
+
+if "M3StringLiteralRegexMatchesTest.java" not in workflow:
+    fail("history-recovered literal matches jtreg is not wired into workflow")
 
 # Expensive donor facts with no JDK21 semantic consumer are intentional NO_PORTs. Adding one of
 # these java.lang owners requires an explicit architecture/invariant revision and a real consumer.
