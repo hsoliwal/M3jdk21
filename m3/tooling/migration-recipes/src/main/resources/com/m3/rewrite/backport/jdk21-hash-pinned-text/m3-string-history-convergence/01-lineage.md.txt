@@ -158,3 +158,23 @@ donor step. M3JDK adapts only the String-search geometry, not Synexia fuzzy-sear
 - the cache is bounded to 64 sources and 32,768 UTF-16 units per source;
 - the explicit primitive-retention ceiling includes both block signals and worst-case exact masks;
 - no position arrays are fields of `M3String`, `M3StringOwner`, or `M3StringFacts`.
+
+
+## Adaptive literal search convergence
+
+Synexia commit `28d28d2162baf8826e5a8c2d57cc21873fefe68b` is the donor reference
+for adaptive prepared literal search. M3JDK adapts that idea into the existing
+`M3StringSearchPrecompute` owner:
+
+- every prepared pattern keeps the existing forward and reverse KMP prefix lanes;
+- one fixed 256-entry BMH skip table is added, keyed by the low byte of a UTF-16 unit;
+- low-byte collisions are conservative because they can only reduce a skip;
+- AUTO forward search uses BMH for patterns of at least eight UTF-16 units;
+- accumulated failed-comparison work triggers a restart at the next unresolved start using the
+  existing KMP lane;
+- reverse search remains reverse-prefix KMP;
+- exact M3 String verification remains authoritative for every positive candidate;
+- no 65,536-entry Unicode skip table, copied pattern spelling, or second search-plan owner exists.
+
+The adaptive threshold and work bound are implementation choices guarded by the source invariant
+and differential tests, not changes to the Java String contract.
