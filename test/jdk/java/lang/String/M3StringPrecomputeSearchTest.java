@@ -232,6 +232,27 @@ public class M3StringPrecomputeSearchTest {
         check(collisionLeft.hashCode() == collisionRight.hashCode(), "known Java hash collision");
         check(!collisionLeft.equals(collisionRight), "hash collision exact verification");
 
+        String sparse = String.join(
+                "",
+                "a".repeat(320),
+                "Z",
+                "b".repeat(320),
+                "Z",
+                "c".repeat(320));
+        char[] sparseOracle = (
+                "a".repeat(320) + "Z" + "b".repeat(320) + "Z" + "c".repeat(320))
+                .toCharArray();
+        check(sparse.indexOf('Z') == naiveIndexOf(sparseOracle, 'Z', 0),
+                "block position indexOf");
+        check(sparse.indexOf('Z', 321) == naiveIndexOf(sparseOracle, 'Z', 321),
+                "block position indexOf from");
+        check(sparse.indexOf('Z', 100, 600)
+                        == naiveIndexOfBounded(sparseOracle, new char[] {'Z'}, 100, 600),
+                "block position bounded");
+        check(sparse.lastIndexOf('Z') == naiveLastIndexOf(sparseOracle, 'Z', sparseOracle.length),
+                "block position lastIndexOf");
+        check(sparse.indexOf('Q') == -1, "block position absent");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
