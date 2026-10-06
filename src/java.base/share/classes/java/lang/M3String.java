@@ -541,19 +541,25 @@ final class M3String implements CharSequence {
 
     boolean mayContain(M3String needle) {
         M3String checked = Objects.requireNonNull(needle, "needle");
-        return facts().mayContain(checked.facts());
+        M3StringFacts sourceFacts = factsIfPrepared();
+        M3StringFacts needleFacts = checked.factsIfPrepared();
+        return sourceFacts == null
+                || needleFacts == null
+                || sourceFacts.mayContain(needleFacts);
     }
 
     boolean startsWith(M3String prefix, int offset) {
         M3String checked = Objects.requireNonNull(prefix, "prefix");
         if (offset < 0 || offset > length() - checked.length()) return false;
         if (offset == 0 && sameCoordinate(checked)) return true;
-        M3StringFacts sourceFacts = facts();
-        M3StringFacts prefixFacts = checked.facts();
-        if (!sourceFacts.mayContain(prefixFacts)) return false;
-        if (offset == 0 && !sourceFacts.prefixMayMatch(prefixFacts)) return false;
-        if (offset == length() - checked.length() && !sourceFacts.suffixMayMatch(prefixFacts)) {
-            return false;
+        M3StringFacts sourceFacts = factsIfPrepared();
+        M3StringFacts prefixFacts = checked.factsIfPrepared();
+        if (sourceFacts != null && prefixFacts != null) {
+            if (!sourceFacts.mayContain(prefixFacts)) return false;
+            if (offset == 0 && !sourceFacts.prefixMayMatch(prefixFacts)) return false;
+            if (offset == length() - checked.length() && !sourceFacts.suffixMayMatch(prefixFacts)) {
+                return false;
+            }
         }
         for (int index = 0; index < checked.length(); index++) {
             if (charAt(offset + index) != checked.charAt(index)) return false;
@@ -562,12 +568,14 @@ final class M3String implements CharSequence {
     }
 
     int indexOf(char unit, int fromIndex, int endIndex) {
-        if (!facts().mayContainCodeUnit(unit)) return -1;
+        M3StringFacts prepared = factsIfPrepared();
+        if (prepared != null && !prepared.mayContainCodeUnit(unit)) return -1;
         return M3StringPositionPrecompute.indexOf(this, unit, fromIndex, endIndex);
     }
 
     int lastIndexOf(char unit, int fromIndex) {
-        if (!facts().mayContainCodeUnit(unit)) return -1;
+        M3StringFacts prepared = factsIfPrepared();
+        if (prepared != null && !prepared.mayContainCodeUnit(unit)) return -1;
         return M3StringPositionPrecompute.lastIndexOf(this, unit, fromIndex);
     }
 
@@ -579,8 +587,12 @@ final class M3String implements CharSequence {
 
         char high = Character.highSurrogate(codePoint);
         char low = Character.lowSurrogate(codePoint);
-        M3StringFacts prepared = facts();
-        if (!prepared.mayContainCodeUnit(high) || !prepared.mayContainCodeUnit(low)) return -1;
+        M3StringFacts prepared = factsIfPrepared();
+        if (prepared != null
+                && (!prepared.mayContainCodeUnit(high)
+                        || !prepared.mayContainCodeUnit(low))) {
+            return -1;
+        }
 
         int end = Math.min(length(), endIndex);
         int candidate = indexOf(high, fromIndex, Math.max(0, end - 1));
@@ -599,8 +611,12 @@ final class M3String implements CharSequence {
 
         char high = Character.highSurrogate(codePoint);
         char low = Character.lowSurrogate(codePoint);
-        M3StringFacts prepared = facts();
-        if (!prepared.mayContainCodeUnit(high) || !prepared.mayContainCodeUnit(low)) return -1;
+        M3StringFacts prepared = factsIfPrepared();
+        if (prepared != null
+                && (!prepared.mayContainCodeUnit(high)
+                        || !prepared.mayContainCodeUnit(low))) {
+            return -1;
+        }
 
         int candidate = lastIndexOf(high, Math.min(fromIndex, length() - 2));
         while (candidate >= 0) {
