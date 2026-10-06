@@ -124,6 +124,7 @@ public final class SharedLexiconCatalog {
         Map<Coordinate, PrecomputeFacts> precompute = readPrecompute(directory, images);
         if (mappings.size() != recordCount || precompute.size() != recordCount)
             throw new IOException("metadata coverage does not match image records");
+        validatePrecomputeProfiles(mappings, precompute);
         return new SharedLexiconCatalog(images, files, firstLexemes, lastLexemes,
                 mappings, precompute, recordCount);
     }
@@ -235,6 +236,19 @@ public final class SharedLexiconCatalog {
         }
         if (lines.size() == 1) throw new IOException("empty synexia.precompute.tsv");
         return result;
+    }
+
+    private static void validatePrecomputeProfiles(
+            Map<Coordinate, List<SourceMapping>> mappings,
+            Map<Coordinate, PrecomputeFacts> precompute) throws IOException {
+        for (Map.Entry<Coordinate, List<SourceMapping>> entry : mappings.entrySet()) {
+            String available = precompute.get(entry.getKey()).precomputeProfile();
+            for (SourceMapping mapping : entry.getValue()) {
+                if (!available.contains(mapping.precomputeProfile()))
+                    throw new IOException("precompute owner dropped for " + entry.getKey()
+                            + ": " + mapping.precomputeProfile());
+            }
+        }
     }
 
     private static List<String> readSidecar(Path path, String[] header) throws IOException {

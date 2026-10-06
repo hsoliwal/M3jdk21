@@ -125,6 +125,8 @@ public final class FoundationTest {
         Files.writeString(directory.resolve("synexia.shards.tsv"),header+rows,java.nio.charset.StandardCharsets.UTF_8);
         Files.writeString(directory.resolve("synexia.precompute.tsv"),facts.replace("55297", "1"),java.nio.charset.StandardCharsets.UTF_8);
         expect(IOException.class,()->SharedLexiconCatalog.open(directory));
+        Files.writeString(directory.resolve("synexia.precompute.tsv"),facts.replace("profile-high3", "dropped-owner"),java.nio.charset.StandardCharsets.UTF_8);
+        expect(IOException.class,()->SharedLexiconCatalog.open(directory));
     }
     static void exportedCatalog(Path directory) throws Exception {
         SharedLexiconCatalog catalog=SharedLexiconCatalog.open(directory);
