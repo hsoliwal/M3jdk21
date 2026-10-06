@@ -1,0 +1,37 @@
+diff --git a/src/java.base/share/classes/java/lang/String.java b/src/java.base/share/classes/java/lang/String.java
+--- a/src/java.base/share/classes/java/lang/String.java
++++ b/src/java.base/share/classes/java/lang/String.java
+@@ -4029,10 +4029,12 @@ public static String join(CharSequence delimiter,
+     public String toLowerCase(Locale locale) {
+         Objects.requireNonNull(locale);
+         M3String storage = m3();
+-        M3StringFacts prepared = storage == null ? null : storage.factsIfPrepared();
+-        if (prepared != null && locale.equals(Locale.ROOT) && prepared.ascii) {
+-            M3String mapped = storage.asciiCase(false);
+-            return mapped == storage ? this : new String(mapped);
++        if (storage != null && locale.equals(Locale.ROOT)) {
++            M3StringFacts prepared = storage.facts();
++            if (prepared.ascii) {
++                M3String mapped = storage.asciiCase(false);
++                return mapped == storage ? this : new String(mapped);
++            }
+         }
+         byte[] currentValue = value();
+         return isLatin1() ? StringLatin1.toLowerCase(this, currentValue, locale)
+@@ -4117,10 +4119,12 @@ public String toLowerCase() {
+     public String toUpperCase(Locale locale) {
+         Objects.requireNonNull(locale);
+         M3String storage = m3();
+-        M3StringFacts prepared = storage == null ? null : storage.factsIfPrepared();
+-        if (prepared != null && locale.equals(Locale.ROOT) && prepared.ascii) {
+-            M3String mapped = storage.asciiCase(true);
+-            return mapped == storage ? this : new String(mapped);
++        if (storage != null && locale.equals(Locale.ROOT)) {
++            M3StringFacts prepared = storage.facts();
++            if (prepared.ascii) {
++                M3String mapped = storage.asciiCase(true);
++                return mapped == storage ? this : new String(mapped);
++            }
+         }
+         byte[] currentValue = value();
+         return isLatin1() ? StringLatin1.toUpperCase(this, currentValue, locale)
