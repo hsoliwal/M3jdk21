@@ -88,6 +88,21 @@ public record SynexiaImportManifest(
         return new SynexiaImportManifest(revision, target, entries, declaredRoot);
     }
 
+    public String toTsv() {
+        StringBuilder out = new StringBuilder(HEADER).append('\n');
+        for (Entry entry : entries) {
+            out.append(sourceRevision).append('\t')
+                    .append(targetId).append('\t')
+                    .append(entry.category()).append('\t')
+                    .append(entry.sourcePath()).append('\t')
+                    .append(entry.targetPath()).append('\t')
+                    .append(entry.sha256()).append('\t')
+                    .append(entry.license()).append('\t')
+                    .append(entry.mode()).append('\n');
+        }
+        return out.append("# root\t").append(root).append('\n').toString();
+    }
+
     public enum Mode {
         APACHE_SOURCE,
         APACHE_RECIPE_RESOURCE
