@@ -13,6 +13,13 @@ on:
       - "m3/backports/test_program_status.py"
       - "m3/backports/verify.py"
       - "m3/backports/README.md"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3ReleaseJepDenominatorCurrentRecipe.java"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-release-jep-denominator-current.yml"
+      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/release-jep-denominator-current/**"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3ReleaseJepDenominatorCurrentRecipeTest.java"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java"
+      - "m3/tooling/recipe-catalogue.tsv"
       - ".github/workflows/m3-release-jep-denominator-current.yml"
   pull_request:
     paths:
@@ -38,6 +45,11 @@ jobs:
       - uses: actions/checkout@v5
         with:
           persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -55,6 +67,11 @@ jobs:
           python3 -m unittest -v
           test_release_jep_authority.py
           test_program_status.py
+      - name: OpenRewrite recipe replay and scope proof
+        run: >
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
+          -Dtest=M3ReleaseJepDenominatorCurrentRecipeTest,M3RecipeScopeDeclarationTest
+          test
       - name: Full backport catalogue verification
         run: python3 m3/backports/verify.py --root .
       - name: Deterministic program status
