@@ -892,6 +892,51 @@ final class M3String implements CharSequence {
         return joinValues(pieces);
     }
 
+    /**
+     * Splits on one non-empty literal pattern while retaining canonical M3 source/delimiter ranges.
+     *
+     * <p>The caller has already proved that the expression is a conservative JDK regex literal.
+     * Empty patterns and syntax-bearing expressions remain on Pattern/Matcher.</p>
+     */
+    M3String[] splitLiteralRegex(M3String literal, int limit, boolean withDelimiters) {
+        M3String checked = Objects.requireNonNull(literal, "literal");
+        if (checked.length() == 0) {
+            throw new IllegalArgumentException("empty regex remains on Pattern split path");
+        }
+        if (limit == 1) return new M3String[] {this};
+
+        ArrayList<M3String> parts = new ArrayList<>();
+        int width = checked.length();
+        int nextStart = 0;
+        int splitCount = 0;
+        while (limit <= 0 || splitCount < limit - 1) {
+            int matchStart = indexOf(checked, nextStart);
+            if (matchStart < 0) break;
+            parts.add(slice(nextStart, matchStart));
+            if (withDelimiters) {
+                parts.add(slice(matchStart, matchStart + width));
+            }
+            nextStart = matchStart + width;
+            splitCount++;
+        }
+
+        if (splitCount == 0) return new M3String[] {this};
+        parts.add(slice(nextStart, length()));
+
+        int resultSize = parts.size();
+        if (limit == 0) {
+            while (resultSize > 0 && parts.get(resultSize - 1).length() == 0) {
+                resultSize--;
+            }
+        }
+
+        M3String[] result = new M3String[resultSize];
+        for (int index = 0; index < resultSize; index++) {
+            result[index] = parts.get(index);
+        }
+        return result;
+    }
+
     M3String replace(char oldChar, char newChar) {
         if (oldChar == newChar) return this;
         M3StringFacts prepared = factsIfPrepared();

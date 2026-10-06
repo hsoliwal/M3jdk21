@@ -572,6 +572,7 @@ for fragment in [
     "mindex.string.composite.range-retention\t29bf7407028012d724f48fe5099b8993ce3ffa60",
     "mindex.string.masked-view\t5b64833c3e221b4a7b7b87ad1c5b83d3a96f94b7",
     "mindex.string.literal-regex-replacement\t0d7eb082ce561fd64f3ecd0f56c1ede3dd6661c7",
+    "mindex.string.regex-split-indexed\te9b8e4313e36f0af77cb2cc7f03fa73444634bc7",
     "mindex.string.mapped-fact-attachment\t7a47a8a445ca438fb59206508a42b6054956049a",
     "mindex.string.palindrome-facts\t10b4894505a6f6306f340c5ff3ef17270706b2c6",
     "mindex.string.suffix-decision\td6308bff7e3a55e77c4dc45c4f47187acb2e523b",
@@ -606,6 +607,27 @@ for fragment in [
 
 if (ROOT / "src/java.base/share/classes/java/lang/SubM3String.java").exists():
     fail("donor SubMIndexString taxonomy was copied instead of absorbing owner+coordinate semantics")
+
+
+for fragment in [
+    "M3String[] splitLiteralRegex(M3String literal, int limit, boolean withDelimiters)",
+    "int matchStart = indexOf(checked, nextStart);",
+    "parts.add(slice(nextStart, matchStart));",
+    "parts.add(slice(matchStart, matchStart + width));",
+]:
+    if fragment not in m3:
+        fail(f"history-recovered literal split atom missing: {fragment}")
+
+for fragment in [
+    "regex.length() > 1",
+    "M3String.isConservativeLiteralRegex(regex)",
+    "storage.splitLiteralRegex(literal, limit, withDelimiters)",
+]:
+    if fragment not in string:
+        fail(f"history-recovered String literal split route missing: {fragment}")
+
+if "M3StringLiteralRegexSplitTest.java" not in workflow:
+    fail("history-recovered literal split jtreg is not wired into workflow")
 
 # Expensive donor facts with no JDK21 semantic consumer are intentional NO_PORTs. Adding one of
 # these java.lang owners requires an explicit architecture/invariant revision and a real consumer.
