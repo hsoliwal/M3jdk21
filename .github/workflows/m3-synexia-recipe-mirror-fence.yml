@@ -1,0 +1,39 @@
+name: M3 Synexia canonical recipe mirror fence
+
+on:
+  pull_request:
+    paths:
+      - 'm3/compatibility/synexia-recipe-mirrors.tsv'
+      - 'm3/compatibility/check_synexia_recipe_mirrors.py'
+      - 'm3/compatibility/test_synexia_recipe_mirrors.py'
+      - 'm3/docs/SYNEXIA_CONVERGENCE_MODEL.md'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/**'
+      - '.github/workflows/m3-synexia-recipe-mirror-fence.yml'
+  push:
+    paths:
+      - 'm3/compatibility/synexia-recipe-mirrors.tsv'
+      - 'm3/compatibility/check_synexia_recipe_mirrors.py'
+      - 'm3/compatibility/test_synexia_recipe_mirrors.py'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/**'
+      - '.github/workflows/m3-synexia-recipe-mirror-fence.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  mirror-fence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Compile mirror policy
+        run: python3 -m compileall -q m3/compatibility/check_synexia_recipe_mirrors.py m3/compatibility/test_synexia_recipe_mirrors.py
+
+      - name: Verify checked-out target mirrors
+        run: python3 m3/compatibility/check_synexia_recipe_mirrors.py "$PWD"
+
+      - name: Prove fail-closed mirror policy
+        working-directory: m3/compatibility
+        run: python3 -m unittest -v test_synexia_recipe_mirrors.py
