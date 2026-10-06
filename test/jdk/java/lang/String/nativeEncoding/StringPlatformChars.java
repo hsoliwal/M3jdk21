@@ -24,8 +24,12 @@
  /*
  * @test
  * @run main/othervm/native -Xcheck:jni StringPlatformChars
+ * @run main/othervm/native -Xcheck:jni -XX:+UnlockExperimentalVMOptions -XX:+UseM3StringStorage StringPlatformChars
  */
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.util.Arrays;
+import java.util.List;
 
 public class StringPlatformChars {
 
@@ -64,6 +68,45 @@ public class StringPlatformChars {
             System.out.println("Mismatching values for strings including \\u0000");
             throw new AssertionError();
         }
+
+        for (String value : List.of(
+                "",
+                "\u0000",
+                "ASCII",
+                "\u00ff\u0100",
+                "\uD800",
+                "\uDC00",
+                "\uD83D\uDE42",
+                String.join("", "left-".repeat(80), "\uD83D", "\uDE42", "-right".repeat(80)),
+                String.join("", "xx", "range-", "\u0100", "-tail", "yy").substring(2, 15))) {
+            testJniViews(value);
+        }
+    }
+
+    private static void testJniViews(String s) throws Exception {
+        char[] utf16 = getUtf16(s);
+        if (!Arrays.equals(utf16, s.toCharArray())) {
+            throw new AssertionError("GetStringChars mismatch: " + Arrays.toString(s.toCharArray()));
+        }
+
+        byte[] nativeUtf = getUtf8(s);
+        byte[] oracleUtf = modifiedUtf8(s);
+        if (!Arrays.equals(nativeUtf, oracleUtf)) {
+            System.out.println("GetStringUTFChars mismatch for "
+                    + Arrays.toString(s.chars().toArray()));
+            System.out.println("Native modified UTF8: " + Arrays.toString(nativeUtf));
+            System.out.println("Oracle modified UTF8: " + Arrays.toString(oracleUtf));
+            throw new AssertionError(s);
+        }
+    }
+
+    private static byte[] modifiedUtf8(String value) throws Exception {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        try (DataOutputStream output = new DataOutputStream(bytes)) {
+            output.writeUTF(value);
+        }
+        byte[] framed = bytes.toByteArray();
+        return Arrays.copyOfRange(framed, 2, framed.length);
     }
 
     private static void testString(String s) throws Exception {
@@ -86,6 +129,10 @@ public class StringPlatformChars {
     }
 
     static native byte[] getBytes(String string);
+
+    static native char[] getUtf16(String string);
+
+    static native byte[] getUtf8(String string);
 
     static native String newString(byte[] bytes);
 }
