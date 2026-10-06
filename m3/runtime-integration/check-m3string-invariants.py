@@ -404,8 +404,11 @@ if "if (java_lang_String::is_m3_joined(string))" not in archive_writer:
 # temporary one-character String/byte[] payloads.
 for fragment in [
     "static M3String internUnit(char unit)",
+    "active.findUnit(unit)",
+    "return M3String.whole(active.atom(row))",
     "M3StringAtom.localUnit(unit, coder, id, hash64)",
     "existing.charAt(0) == unit",
+    "int findUnit(char unit)",
 ]:
     if fragment not in pool:
         fail(f"M3 direct unit interning missing: {fragment}")
