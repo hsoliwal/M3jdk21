@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.jdk21.ReleaseJepDenominatorCurrent
+displayName: Reconcile M3JDK21 released JEP denominator
+description: Exact hash-pinned current-master correction from 82 to the 85-row JDK22-27 release authority.
+recipeList:
+  - com.m3.rewrite.backport.M3ReleaseJepDenominatorCurrentRecipe
