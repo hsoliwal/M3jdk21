@@ -253,6 +253,24 @@ public class M3StringPrecomputeSearchTest {
                 "block position lastIndexOf");
         check(sparse.indexOf('Q') == -1, "block position absent");
 
+        char[] exactMaskChars = new char[512];
+        Arrays.fill(exactMaskChars, 'm');
+        for (int position : new int[] {0, 63, 64, 127, 128, 255, 256, 511}) {
+            exactMaskChars[position] = 'X';
+        }
+        String exactMask = new String(exactMaskChars);
+        for (int from : new int[] {-1, 0, 1, 62, 63, 64, 65, 126, 127, 128, 129, 254, 255, 256, 257, 510, 511, 512}) {
+            check(exactMask.indexOf('X', from) == naiveIndexOf(exactMaskChars, 'X', from),
+                    "exact block mask index from=" + from);
+            check(exactMask.lastIndexOf('X', from) == naiveLastIndexOf(exactMaskChars, 'X', from),
+                    "exact block mask reverse from=" + from);
+        }
+        for (char candidate = 0; candidate < 256; candidate++) {
+            check(exactMask.indexOf(candidate)
+                            == naiveIndexOf(exactMaskChars, candidate, 0),
+                    "exact block mask candidate=" + (int) candidate);
+        }
+
         String sparseSupplementary = String.join(
                 "",
                 "a".repeat(319) + "\ud83d",
@@ -275,6 +293,48 @@ public class M3StringPrecomputeSearchTest {
                                 sparseSupplementaryOracle, 0x1f642,
                                 sparseSupplementaryOracle.length - 1),
                 "block supplementary lastIndexOf");
+
+        String overlapReverse = String.join(
+                "",
+                "ababa".repeat(180),
+                "XYZ",
+                "ababa".repeat(180));
+        char[] overlapReverseOracle = (
+                "ababa".repeat(180) + "XYZ" + "ababa".repeat(180)).toCharArray();
+        for (String needle : new String[] {"aba", "ababa", "babab", "XYZ", "abaXYZ"}) {
+            for (int from : new int[] {
+                    overlapReverse.length() - 1,
+                    overlapReverse.length() / 2,
+                    overlapReverse.length() / 3,
+                    17}) {
+                check(overlapReverse.lastIndexOf(needle, from)
+                                == naiveLastIndexOf(
+                                        overlapReverseOracle, needle.toCharArray(), from),
+                        "reverse-prefix lastIndexOf needle=" + needle + " from=" + from);
+            }
+        }
+
+        String escaped = String.join("", "a\\n", "b\\141", "\\\n", "c\\s\\\\d");
+        check(equalChars(
+                        escaped.translateEscapes(),
+                        naiveTranslateEscapes(chars(escaped))),
+                "translateEscapes canonical");
+        String plainEscapes = String.join("", "plain", "-text");
+        String plainTranslated = plainEscapes.translateEscapes();
+        check(equalChars(plainTranslated, chars(plainEscapes)),
+                "translateEscapes no-op content");
+        check(plainTranslated != plainEscapes, "translateEscapes no-op fresh String");
+        expectIllegalArgument(() -> String.join("", "bad", "\\").translateEscapes(),
+                "translateEscapes trailing backslash");
+
+        String valueOfLatin = String.valueOf('x');
+        String valueOfLatin2 = String.valueOf('x');
+        check(valueOfLatin.equals("x"), "valueOf Latin1 char content");
+        check(valueOfLatin != valueOfLatin2, "valueOf Latin1 fresh wrapper");
+        String valueOfUtf16 = String.valueOf('\u0100');
+        String valueOfUtf162 = String.valueOf('\u0100');
+        check(valueOfUtf16.equals("\u0100"), "valueOf UTF16 char content");
+        check(valueOfUtf16 != valueOfUtf162, "valueOf UTF16 fresh wrapper");
 
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
@@ -381,6 +441,12 @@ public class M3StringPrecomputeSearchTest {
             check(equalChars(source.strip(), naiveStrip(oracle).toCharArray()),
                     "random strip " + trial);
             check(source.isBlank() == naiveIsBlank(oracle), "random blank " + trial);
+            String escapedRandom = randomEscapedString(random, atoms);
+            check(equalChars(
+                            escapedRandom.translateEscapes(),
+                            naiveTranslateEscapes(chars(escapedRandom))),
+                    "random translateEscapes " + trial);
+
             if (isAscii(oracle)) {
                 check(equalChars(
                                 source.toLowerCase(Locale.ROOT),
@@ -573,6 +639,84 @@ public class M3StringPrecomputeSearchTest {
             throw new AssertionError(impossibleWithReplacement);
         }
         return Arrays.copyOf(bytes.array(), bytes.position());
+    }
+
+    private static String randomEscapedString(Random random, String[] atoms) {
+        StringBuilder value = new StringBuilder();
+        int pieces = 1 + random.nextInt(8);
+        String[] escapes = {
+                "\\b", "\\f", "\\n", "\\r", "\\s", "\\t",
+                "\\'", "\\"", "\\\\", "\\0", "\\7", "\\12",
+                "\\141", "\\\n", "\\\r", "\\\r\n"
+        };
+        for (int index = 0; index < pieces; index++) {
+            if (random.nextBoolean()) value.append(escapes[random.nextInt(escapes.length)]);
+            else value.append(atoms[random.nextInt(atoms.length)]);
+        }
+        return String.join("", value.toString());
+    }
+
+    private static char[] naiveTranslateEscapes(char[] source) {
+        char[] output = new char[source.length];
+        int from = 0;
+        int to = 0;
+        while (from < source.length) {
+            char ch = source[from++];
+            if (ch == '\\') {
+                ch = from < source.length ? source[from++] : '\0';
+                switch (ch) {
+                    case 'b' -> ch = '\b';
+                    case 'f' -> ch = '\f';
+                    case 'n' -> ch = '\n';
+                    case 'r' -> ch = '\r';
+                    case 's' -> ch = ' ';
+                    case 't' -> ch = '\t';
+                    case '\'', '"', '\\' -> {
+                        // as is
+                    }
+                    case '0', '1', '2', '3', '4', '5', '6', '7' -> {
+                        int limit = Math.min(from + (ch <= '3' ? 2 : 1), source.length);
+                        int code = ch - '0';
+                        while (from < limit) {
+                            char next = source[from];
+                            if (next < '0' || next > '7') break;
+                            from++;
+                            code = (code << 3) | (next - '0');
+                        }
+                        ch = (char) code;
+                    }
+                    case '\n' -> {
+                        continue;
+                    }
+                    case '\r' -> {
+                        if (from < source.length && source[from] == '\n') from++;
+                        continue;
+                    }
+                    default -> throw new IllegalArgumentException(
+                            String.format(
+                                    "Invalid escape sequence: \\%c \\\\u%04X",
+                                    ch,
+                                    (int) ch));
+                }
+            }
+            output[to++] = ch;
+        }
+        return copyRange(output, 0, to);
+    }
+
+    private static char[] chars(String value) {
+        char[] result = new char[value.length()];
+        value.getChars(0, value.length(), result, 0);
+        return result;
+    }
+
+    private static void expectIllegalArgument(Runnable action, String label) {
+        try {
+            action.run();
+            throw new AssertionError(label + " did not throw");
+        } catch (IllegalArgumentException expected) {
+            checks++;
+        }
     }
 
     private static boolean isAscii(char[] value) {
