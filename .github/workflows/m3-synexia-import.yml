@@ -1,0 +1,66 @@
+name: M3 Synexia Apache import proof
+
+on:
+  push:
+    branches:
+      - "m3/synexia-apache-import-*"
+    paths:
+      - "m3/pom.xml"
+      - "m3/NOTICE"
+      - "m3/README.md"
+      - "m3/docs/synexia-delivery.md"
+      - "m3/synexia-import/**"
+      - "m3/vendor/synexia/**"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/synexia/**"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-synexia-import.yml"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/synexia/**"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - ".github/workflows/m3-synexia-import.yml"
+  pull_request:
+    paths:
+      - "m3/pom.xml"
+      - "m3/NOTICE"
+      - "m3/README.md"
+      - "m3/docs/synexia-delivery.md"
+      - "m3/synexia-import/**"
+      - "m3/vendor/synexia/**"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/synexia/**"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-synexia-import.yml"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/synexia/**"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - ".github/workflows/m3-synexia-import.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: Diff hygiene
+        run: git diff --check origin/master...HEAD
+      - name: Verify imported Synexia vendor snapshot
+        run: >
+          mvn -B -ntp
+          -f m3/synexia-import/pom.xml
+          verify
+      - name: Verify Synexia OpenRewrite import inventory and scope registration
+        run: >
+          mvn -B -ntp
+          -f m3/tooling/migration-recipes/pom.xml
+          -Dtest=M3SynexiaImportInventoryRecipeTest,M3RecipeScopeDeclarationTest
+          test
