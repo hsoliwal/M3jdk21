@@ -1,0 +1,5 @@
+order	identity	kind	release	upstream_commit	upstream_ref	physical_scope	default_java21	status	depends_on	accepted_targets	excluded_targets	next_proof
+0	JDK-8318096	PUBLIC_API_PREREQUISITE	22	9123961aaa47aa58ec436640590d2cceedb8cbb1	jdk-22+36	LIBRARY_API	NO	BLOCK_DEFAULT_PUBLIC_API		0	18	Decide opt-in AsymmetricKey API or adapt downstream internal framework away from it.
+1	JDK-8340327	INTERNAL_FRAMEWORK_PREREQUISITE	24	3f53d571343792341481f4d15970cdc0bcd76a5e	jdk-24+36	MODULE	YES_ADAPTED	CANDIDATE_UNVERIFIED	JDK-8318096	10	0	Compile an internal Java21 adaptation without importing AsymmetricKey public API.
+2	JEP-496	FEATURE_PROVIDER	24	13987b4244614d594dc8f94c288eddb6239a066f	jdk-24+36	MODULE	YES_ADAPTED	CANDIDATE_UNVERIFIED	JDK-8340327	8	2	Materialize provider-only GA postimages excluding NamedParameterSpec constants and microbenchmark; run ML-KEM ACVP and KEM regressions.
+3	JEP-497	FEATURE_PROVIDER	24	8b98f958dc1afedc02b9d9c98089d6cb1ca3a5b7	jdk-24+36	MODULE	YES_ADAPTED	CANDIDATE_UNVERIFIED	JDK-8340327	8	2	Materialize provider-only GA postimages excluding NamedParameterSpec constants and microbenchmark; run ML-DSA ACVP and Signature regressions.
