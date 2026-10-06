@@ -3006,6 +3006,47 @@ public final class String
             return fromIndex;
         }
 
+        M3String targetM3 = tgtStr.m3();
+        if (targetM3 != null) {
+            if (tgtCount == 1) {
+                char unit = targetM3.charAt(0);
+                if (srcCoder == LATIN1 && unit > 0xff) return -1;
+                for (int index = fromIndex; index < srcCount; index++) {
+                    char candidate =
+                            srcCoder == LATIN1
+                                    ? StringLatin1.charAt(src, index)
+                                    : StringUTF16.charAt(src, index);
+                    if (candidate == unit) return index;
+                }
+                return -1;
+            }
+            M3StringSearchPrecompute.Plan plan = M3StringSearchPrecompute.prepare(targetM3);
+            if (plan != null) {
+                return M3StringSearchPrecompute.indexOfFlat(
+                        src, srcCoder, srcCount, targetM3, plan, fromIndex);
+            }
+            int limit = srcCount - tgtCount;
+            char first = targetM3.charAt(0);
+            for (int start = fromIndex; start <= limit; start++) {
+                char candidate =
+                        srcCoder == LATIN1
+                                ? StringLatin1.charAt(src, start)
+                                : StringUTF16.charAt(src, start);
+                if (candidate != first) continue;
+                int index = 1;
+                while (index < tgtCount) {
+                    char sourceUnit =
+                            srcCoder == LATIN1
+                                    ? StringLatin1.charAt(src, start + index)
+                                    : StringUTF16.charAt(src, start + index);
+                    if (sourceUnit != targetM3.charAt(index)) break;
+                    index++;
+                }
+                if (index == tgtCount) return start;
+            }
+            return -1;
+        }
+
         byte[] tgt = tgtStr.value();
         byte tgtCoder = tgtStr.coder();
         if (srcCoder == tgtCoder) {
@@ -3090,9 +3131,47 @@ public final class String
      */
     static int lastIndexOf(byte[] src, byte srcCoder, int srcCount,
                            String tgtStr, int fromIndex) {
+        int tgtCount = tgtStr.length();
+        M3String targetM3 = tgtStr.m3();
+        if (targetM3 != null) {
+            int rightIndex = srcCount - tgtCount;
+            if (fromIndex > rightIndex) fromIndex = rightIndex;
+            if (fromIndex < 0) return -1;
+            if (tgtCount == 0) return fromIndex;
+            if (tgtCount == 1) {
+                char unit = targetM3.charAt(0);
+                if (srcCoder == LATIN1 && unit > 0xff) return -1;
+                for (int index = fromIndex; index >= 0; index--) {
+                    char candidate =
+                            srcCoder == LATIN1
+                                    ? StringLatin1.charAt(src, index)
+                                    : StringUTF16.charAt(src, index);
+                    if (candidate == unit) return index;
+                }
+                return -1;
+            }
+            M3StringSearchPrecompute.Plan plan = M3StringSearchPrecompute.prepare(targetM3);
+            if (plan != null) {
+                return M3StringSearchPrecompute.lastIndexOfFlat(
+                        src, srcCoder, srcCount, targetM3, plan, fromIndex);
+            }
+            for (int start = fromIndex; start >= 0; start--) {
+                int index = 0;
+                while (index < tgtCount) {
+                    char sourceUnit =
+                            srcCoder == LATIN1
+                                    ? StringLatin1.charAt(src, start + index)
+                                    : StringUTF16.charAt(src, start + index);
+                    if (sourceUnit != targetM3.charAt(index)) break;
+                    index++;
+                }
+                if (index == tgtCount) return start;
+            }
+            return -1;
+        }
+
         byte[] tgt = tgtStr.value();
         byte tgtCoder = tgtStr.coder();
-        int tgtCount = tgtStr.length();
         /*
          * Check arguments; return immediately where possible. For
          * consistency, don't check for null str.
