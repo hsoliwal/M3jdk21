@@ -7,6 +7,7 @@
 package java.lang;
 
 import java.lang.ref.WeakReference;
+import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicLongArray;
 import java.util.concurrent.atomic.AtomicReferenceArray;
 
@@ -52,9 +53,15 @@ final class M3StringPositionPrecompute {
                 index = blockEnd;
                 continue;
             }
-            for (; index < blockEnd; index++) {
-                if (source.charAt(index) == unit) return index;
+            long positions = exactBlock(source, blocks, block).mask(unit);
+            int offset = index & BLOCK_MASK;
+            positions &= -1L << offset;
+            int width = blockEnd - (block << BLOCK_SHIFT);
+            if (width < Long.SIZE) positions &= (1L << width) - 1L;
+            if (positions != 0L) {
+                return (block << BLOCK_SHIFT) + Long.numberOfTrailingZeros(positions);
             }
+            index = blockEnd;
         }
         return -1;
     }
@@ -77,9 +84,13 @@ final class M3StringPositionPrecompute {
                 index = blockStart - 1;
                 continue;
             }
-            for (; index >= blockStart; index--) {
-                if (source.charAt(index) == unit) return index;
+            long positions = exactBlock(source, blocks, block).mask(unit);
+            int offset = index & BLOCK_MASK;
+            if (offset < Long.SIZE - 1) positions &= (1L << (offset + 1)) - 1L;
+            if (positions != 0L) {
+                return blockStart + (Long.SIZE - 1 - Long.numberOfLeadingZeros(positions));
             }
+            index = blockStart - 1;
         }
         return -1;
     }
@@ -87,7 +98,10 @@ final class M3StringPositionPrecompute {
     static long maximumRetainedPrimitiveBytes() {
         long blocksPerEntry =
                 (MAX_SOURCE_UNITS + BLOCK_MASK) >>> BLOCK_SHIFT;
-        return (long) SLOTS * blocksPerEntry * Long.BYTES;
+        long signalBytes = (long) SLOTS * blocksPerEntry * Long.BYTES;
+        long exactBytes =
+                (long) SLOTS * MAX_SOURCE_UNITS * (Character.BYTES + Long.BYTES);
+        return Math.addExact(signalBytes, exactBytes);
     }
 
     private static Blocks prepare(M3String source) {
@@ -135,6 +149,40 @@ final class M3StringPositionPrecompute {
         return blocks.signals.get(block);
     }
 
+    private static ExactBlock exactBlock(M3String source, Blocks blocks, int block) {
+        ExactBlock current = blocks.exact.get(block);
+        if (current != null) return current;
+
+        int start = block << BLOCK_SHIFT;
+        int end = Math.min(source.length(), start + BLOCK_SIZE);
+        char[] units = new char[end - start];
+        long[] masks = new long[end - start];
+        int count = 0;
+
+        for (int index = start; index < end; index++) {
+            char unit = source.charAt(index);
+            int at = 0;
+            while (at < count && units[at] < unit) at++;
+            if (at < count && units[at] == unit) {
+                masks[at] |= 1L << (index - start);
+                continue;
+            }
+            if (at < count) {
+                System.arraycopy(units, at, units, at + 1, count - at);
+                System.arraycopy(masks, at, masks, at + 1, count - at);
+            }
+            units[at] = unit;
+            masks[at] = 1L << (index - start);
+            count++;
+        }
+
+        ExactBlock computed = new ExactBlock(
+                Arrays.copyOf(units, count),
+                Arrays.copyOf(masks, count));
+        if (blocks.exact.compareAndSet(block, null, computed)) return computed;
+        return blocks.exact.get(block);
+    }
+
     private static int linearIndexOf(M3String source, char unit, int from, int end) {
         for (int index = from; index < end; index++) {
             if (source.charAt(index) == unit) return index;
@@ -161,9 +209,26 @@ final class M3StringPositionPrecompute {
 
     private static final class Blocks {
         final AtomicLongArray signals;
+        final AtomicReferenceArray<ExactBlock> exact;
 
         Blocks(int blockCount) {
             this.signals = new AtomicLongArray(blockCount);
+            this.exact = new AtomicReferenceArray<>(blockCount);
+        }
+    }
+
+    private static final class ExactBlock {
+        final char[] units;
+        final long[] masks;
+
+        ExactBlock(char[] units, long[] masks) {
+            this.units = units;
+            this.masks = masks;
+        }
+
+        long mask(char unit) {
+            int index = Arrays.binarySearch(units, unit);
+            return index < 0 ? 0L : masks[index];
         }
     }
 
