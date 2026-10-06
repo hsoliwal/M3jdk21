@@ -205,14 +205,17 @@ public class M3StringPrecomputeSearchTest {
         }
 
         String asciiCase = String.join("", "AbC", "-xYz-123");
+        check(!asciiCase.isBlank(), "prepare ASCII case facts");
         check(asciiCase.toLowerCase(Locale.ROOT).equals("abc-xyz-123"),
                 "ROOT ASCII lowercase");
         check(asciiCase.toUpperCase(Locale.ROOT).equals("ABC-XYZ-123"),
                 "ROOT ASCII uppercase");
         String alreadyLower = String.join("", "abc", "-123");
+        check(!alreadyLower.isBlank(), "prepare lowercase facts");
         check(alreadyLower.toLowerCase(Locale.ROOT) == alreadyLower,
                 "ROOT ASCII lowercase unchanged identity");
         String alreadyUpper = String.join("", "ABC", "-123");
+        check(!alreadyUpper.isBlank(), "prepare uppercase facts");
         check(alreadyUpper.toUpperCase(Locale.ROOT) == alreadyUpper,
                 "ROOT ASCII uppercase unchanged identity");
         check(String.join("", "I", "X").toLowerCase(Locale.forLanguageTag("tr"))
