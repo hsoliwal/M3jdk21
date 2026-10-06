@@ -74,6 +74,56 @@ Swing belongs to `java.desktop`; JavaFX/scene-graph integration needs its own
 target/module decision. No existing mapping, exclusion or unresolved gate is
 removed by these family summaries.
 
+## Synexia mastered-recipe intake
+
+The generic atomization/patternization owner for this target lives in Synexia, not in M3JDK21.
+The canonical Synexia first pass is
+`M3EveryModuleAtomPatternInventoryRecipe`, which composes
+`M3HierarchicalAtomPatternRecipe` and `M3DonorMavenizedAtomPatternRecipe`.
+Its donor-preparation hierarchy is:
+
+```text
+FILE -> PACKAGE -> MODULE -> PROJECT -> REPOSITORY
+```
+
+That hierarchy is source-convergence evidence. It does **not** replace M3JDK21's target-side JDK
+scope/admission law. M3JDK21 still decides whether an accepted atom affects FILE, VISIBILITY,
+PACKAGE, MODULE, MULTI_MODULE or LIBRARY_API scope, and still runs the required OpenJDK/JNI/VM
+gates for that target scope.
+
+The receiving sequence is therefore:
+
+```text
+Synexia:
+  Mavenize donor candidate when needed
+    -> source-specific atomize/patternize
+    -> FILE/PACKAGE/MODULE/PROJECT/REPOSITORY evidence
+    -> exact task recipe + fixed point/refusal proof
+    -> Apache-2.0/provenance-qualified handoff
+
+M3JDK21:
+  resolve existing target mapping/owner
+    -> verify license lane and exact Synexia revision/path/hash
+    -> copy/adapt qualified recipe/source atoms
+    -> infer JDK target scope
+    -> apply target-specific adaptation recipe
+    -> OpenJDK build/jtreg/JNI/GC/JIT/platform proof
+    -> serial promotion
+```
+
+Do not create a competing generic atomizer, patternizer, donor catalogue or reusable transformation
+in M3JDK21 when the same reusable owner can be improved in Synexia. A target-local recipe is
+appropriate when the transformation is intrinsically JDK-specific: OpenJDK layout, java.base
+bootstrap constraints, HotSpot/JNI integration, JDK serialization/ABI, jtreg wiring or another
+target-only adaptation. If that target work reveals a reusable algorithm/pattern/recipe improvement,
+send the reusable part back to the Synexia owner and keep only the target adaptation here.
+
+Eligible Synexia-authored Apache-2.0 recipe bodies may be copied into M3JDK21's tool plane when
+execution inside the target checkout is required. Copy the exact reviewed source and its tests,
+templates/manifests, revision/path/hash, license/NOTICE and evidence roots. Do not replace that
+lineage with a same-named local rewrite. The copied recipe remains authoring/proof tooling and must
+not enter the JDK runtime dependency graph.
+
 ## Convergence, handoff and promotion
 
 Recipe-module code is also intake material. In the inspected Synexia root the
