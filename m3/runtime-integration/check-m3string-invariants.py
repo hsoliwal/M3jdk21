@@ -989,6 +989,8 @@ for fragment in [
     '"portable_semantics_owner": "Synexia"',
     '"executable_verifier_recipe": "com.synexia.rewrite.M3StringCanonicalDagInvariant"',
     '"executable_verifier_path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3StringCanonicalDagInvariantRecipe.java"',
+    '"source_lock_commit": "5d283e753907c3aa6b7a3ea30e6bc2f23869f3f3"',
+    '"source_lock_blob": "901afdf1bc0d9d02c226e7ab8b8117125e835944"',
 ]:
     if fragment not in mapping:
         fail(f"Synexia String recipe authority binding missing from name map: {fragment}")
@@ -1001,6 +1003,9 @@ for fragment in [
     "target_runtime_owner\tM3JDK",
     "precompute_rule\timplementation-internal in both worlds; never canonical spelling",
     "authority_origin_commit\t1b954f886f0a40684c84bac443851d9fe4af1764",
+    "authority_source_lock_path\tsynexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006/source-lock.json",
+    "authority_source_lock_commit\t5d283e753907c3aa6b7a3ea30e6bc2f23869f3f3",
+    "authority_source_lock_blob\t901afdf1bc0d9d02c226e7ab8b8117125e835944",
     "executable_verifier_recipe\tcom.synexia.rewrite.M3StringCanonicalDagInvariant",
     "executable_verifier_path\tsynexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3StringCanonicalDagInvariantRecipe.java",
     "executable_verifier_pr\thsoliwal/com.synexia#9524",
