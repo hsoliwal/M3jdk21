@@ -43,8 +43,8 @@ public class GathererShortCircuitTest {
 
         Gatherer<Integer, ?, Integer> pushOneInFinisher =
                 Gatherer.of(
-                    (_, element, downstream) -> false,
-                    (_, downstream) -> downstream.push(expected)
+                    (ignoredState, element, downstream) -> false,
+                    (ignoredState, downstream) -> downstream.push(expected)
                 );
 
         var usingCollect =
