@@ -116,6 +116,7 @@ python3 m3/runtime-integration/verify-synexia-lexicon.py /operator/m3jdk-lexicon
 ```
 
 The proof covers all number IDs `0..10000`, multilingual/proper-name and unit
-mapping rows, rich owner payloads, legacy-input compatibility, deterministic
-replay, M3LEX001 version 2 metadata, precompute sidecars, conflict refusal
-before output creation, and source-blind rejection of a post-export mutation.
+mapping rows, rich owner payloads, the reviewed source-manifest-to-field-map
+lineage, legacy-input compatibility, deterministic replay, M3LEX001 version 2
+metadata, precompute sidecars, conflict refusal before output creation, and
+source-blind rejection of a post-export mutation.

@@ -209,6 +209,20 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual("", sources["translate.rows"]["precompute_fields"])
         self.assertEqual("", sources["dictlang.numbers.0-10000"]["precompute_fields"])
 
+    def test_source_requirements_are_backed_by_admitted_field_map(self):
+        sources, _ = EXPORT.read_manifest(ROOT / "m3/lexicon/synexia-source-manifest.tsv")
+        with (ROOT / "m3/lexicon/synexia-precompute-field-map.tsv").open(
+                encoding="utf-8", newline="") as stream:
+            mapped = {
+                row["canonical_payload_field"]
+                for row in csv.DictReader(stream, delimiter="\t")
+                if row["status"] == "MAPPED"
+            }
+        for source_id in ("dictlang.dictionary", "dictlang.frequency",
+                          "dictlang.thesaurus", "dictlang.antonyms"):
+            required = set(sources[source_id]["precompute_fields"].split(","))
+            self.assertTrue(required.issubset(mapped), source_id)
+
     def test_replay_is_byte_identical_except_for_output_location(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
