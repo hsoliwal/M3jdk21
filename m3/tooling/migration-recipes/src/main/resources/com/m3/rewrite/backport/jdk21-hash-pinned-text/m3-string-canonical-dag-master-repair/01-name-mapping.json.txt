@@ -243,6 +243,69 @@
       "source_blob_sha1": "1a6c8a8cafd9297bc6cec3730b81edc5b7f9cb47",
       "source_commit": "5648dec28cb9a86a9908c190ce2af3d71515b953",
       "source_tracking_ref": "refs/heads/develop"
+    },
+    {
+      "source": "com.synexia.indexstring.precompute.MIndexPrecomputeEngine / Context / Session / Plan / Pass / Artifact / Cache / Catalog / Limits / Scope / Key",
+      "target": "M3 internal precompute framework (target-owned, non-public)",
+      "status": "architecture mapping; implementation inventory required",
+      "source_role": "Synexia generic precompute control/data plane",
+      "target_rule": "Preserve owner/key/scope/budget/pass/artifact/lifecycle semantics internally; never expose this machinery through java.lang.String public API and never add a Synexia runtime dependency."
+    },
+    {
+      "source": "com.synexia.mindex.precompute.MIndexUniversalPrecompute family",
+      "target": "separate M3 internal universal precompute service/image plane",
+      "status": "donor framework; not java.lang.String state",
+      "source_role": "Synexia universal snapshot/source/image/limits layer",
+      "target_rule": "May supply validated artifacts to JDK-internal consumers, but universal images and lifecycle never become canonical String payload."
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexStringRelationPrecompute / MIndexStringUnaryProjectionPrecompute / MIndexStringPrecomputeImage",
+      "target": "review-required internal M3 String-adjacent lanes",
+      "status": "unported inventory",
+      "source_role": "Synexia String-adjacent relation/projection precompute",
+      "target_rule": "Inventory exact facts, memory shape, invalidation and concrete JDK consumer before porting; do not infer target class name mechanically."
+    },
+    {
+      "source": "com.synexia.indexstring.ast.MIndexAST*Precompute family",
+      "target": "M3 compiler/tooling AST precompute plane",
+      "status": "donor tooling; no java.lang owner",
+      "source_role": "Synexia AST/pattern/spec/tree precompute",
+      "target_rule": "Keep outside java.lang.String; only shared primitive algorithms may be adapted behind compiler/tooling-owned M3 classes."
+    },
+    {
+      "source": "com.synexia.indexstring.file.MIndexFile*Facts family",
+      "target": "M3 file/m3fs fact plane",
+      "status": "donor storage precompute",
+      "source_role": "Synexia file-byte/source/lexicon facts",
+      "target_rule": "Key by file content/generation identity; never reuse String owner coordinates as file identity."
+    },
+    {
+      "source": "com.synexia.indexstring regex/search precompute families",
+      "target": "java.util.regex/internal M3 candidate-plan lanes where justified",
+      "status": "selective internal adaptation",
+      "source_role": "MIndexRegexPlan/SearchPlan/QueryPlan/PostingPlan/ExecutionDag/CompositionImage/TrigramQuery and native accelerators",
+      "target_rule": "Exact Java regex semantics remain authority; plans/accelerators are candidate/preparation layers and hardware/native absence must fail open."
+    },
+    {
+      "source": "com.synexia.indexstring MIndexPrefixZ / palindrome / suffix / LCP families",
+      "target": "no default java.lang target",
+      "status": "donor candidate algorithms",
+      "source_role": "length-proportional text-analysis precompute",
+      "target_rule": "Port only behind a named JDK consumer and explicit retention budget; never add as fields of M3String/M3StringOwner/M3StringFacts."
+    },
+    {
+      "source": "com.synexia.indexstring lexical / word / bigram / semantic signal images",
+      "target": "separate M3 lexicon/language/relation image planes",
+      "status": "donor image families",
+      "source_role": "IndexWordFacts, signal indexes, bigram/relation/semantic images",
+      "target_rule": "Carry namespace/generation/provenance; do not collapse into java.lang.String canonical identity."
+    },
+    {
+      "source": "com.synexia.mindex Jini / Coral TPU / LiteRT NPU / Tornado precompute families",
+      "target": "optional external/offline M3 accelerators",
+      "status": "donor accelerator families",
+      "source_role": "distributed/hardware precompute execution",
+      "target_rule": "M3JDK java.base must not depend on Jini/TPU/NPU/Tornado runtimes; import only validated precompute products through target-owned internal boundaries."
     }
   ],
   "imported_donor_sources": [],
