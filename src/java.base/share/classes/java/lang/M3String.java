@@ -541,6 +541,16 @@ final class M3String implements CharSequence {
         return true;
     }
 
+    int indexOf(char unit, int fromIndex, int endIndex) {
+        if (!facts().mayContainCodeUnit(unit)) return -1;
+        return M3StringPositionPrecompute.indexOf(this, unit, fromIndex, endIndex);
+    }
+
+    int lastIndexOf(char unit, int fromIndex) {
+        if (!facts().mayContainCodeUnit(unit)) return -1;
+        return M3StringPositionPrecompute.lastIndexOf(this, unit, fromIndex);
+    }
+
     int indexOf(M3String needle, int fromIndex) {
         return indexOf(needle, fromIndex, length());
     }
