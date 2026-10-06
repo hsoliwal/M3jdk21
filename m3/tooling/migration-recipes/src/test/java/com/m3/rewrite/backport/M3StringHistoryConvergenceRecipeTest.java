@@ -114,6 +114,9 @@ final class M3StringHistoryConvergenceRecipeTest {
                         "test/jdk/java/lang/String/M3StringInternTest.java",
                         "15-M3StringInternTest.java.txt"),
                 java(
+                        "test/jdk/java/lang/String/M3StringBuilderInteropTest.java",
+                        "18-M3StringBuilderInteropTest.java.txt"),
+                java(
                         "test/jdk/java/lang/String/nativeEncoding/StringPlatformChars.java",
                         "17-StringPlatformChars.java.txt"),
                 java(
