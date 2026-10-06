@@ -187,6 +187,25 @@ public final class SharedLexiconCatalog {
         return row < 0 ? Optional.empty() : Optional.of(new Coordinate(candidate, row));
     }
 
+    /**
+     * Returns lexically ordered physical coordinates for an exact UTF-16 prefix.
+     * Each shard uses a mapped-byte lower bound; no record text is copied while
+     * the candidate range is located or verified.
+     */
+    public List<Coordinate> prefix(String value, int limit) {
+        if (value == null || value.isEmpty()) throw new IllegalArgumentException("prefix required");
+        if (limit < 1 || limit > 100_000) throw new IllegalArgumentException("limit must be 1..100000");
+        ArrayList<Coordinate> result = new ArrayList<>(Math.min(limit, 16));
+        for (int shard = 0; shard < images.size() && result.size() < limit; shard++) {
+            SharedLexiconImage image = images.get(shard);
+            for (int row = image.lowerBound(value);
+                 row < image.size() && result.size() < limit && image.startsWith(row, value); row++) {
+                result.add(new Coordinate(shard, row));
+            }
+        }
+        return List.copyOf(result);
+    }
+
     /** Materializes exactly one requested UTF-16 record. */
     public String textAt(Coordinate coordinate) {
         Objects.requireNonNull(coordinate);

@@ -132,6 +132,8 @@ public final class FoundationTest {
         check(catalog.precomputeProfiles().get(0).profile().equals("profile-a"));
         check(catalog.mappingsAt(new SharedLexiconCatalog.Coordinate(0,0)).size()==2);
         check(catalog.mappingsAt(new SharedLexiconCatalog.Coordinate(0,0)).get(1).mappingName().equals("A2"));
+        check(catalog.prefix("a",10).equals(List.of(new SharedLexiconCatalog.Coordinate(0,0))));
+        expect(IllegalArgumentException.class,()->catalog.prefix("",1));
         check(catalog.find("\ud801").equals(Optional.of(new SharedLexiconCatalog.Coordinate(1,0))));
         check(catalog.precomputeAt(new SharedLexiconCatalog.Coordinate(1,0)).javaHash()==55297L);
         check(catalog.find("missing").isEmpty());check(catalog.textAt(new SharedLexiconCatalog.Coordinate(1,1)).equals("\ud802"));
@@ -152,6 +154,9 @@ public final class FoundationTest {
         check(catalog.precomputeAt(number).precomputeProfile().contains("NumberPrecompute"));
         SharedLexiconCatalog.Coordinate london=catalog.find("London").orElseThrow();
         check(catalog.mappingsAt(london).stream().anyMatch(mapping->mapping.translationProfile().equals("en->hi")));
+        List<SharedLexiconCatalog.Coordinate> hundreds=catalog.prefix("100",3);
+        check(hundreds.size()==3);check(catalog.textAt(hundreds.get(0)).equals("100"));
+        check(catalog.textAt(hundreds.get(1)).equals("1000"));check(catalog.textAt(hundreds.get(2)).equals("10000"));
     }
     public static void main(String[] args)throws Exception{pieces();Path dir=Files.createTempDirectory("m3-foundation-");try{images(dir);catalog(dir);if(args.length==1)exportedCatalog(Path.of(args[0]));}finally{try(var paths=Files.list(dir)){for(Path path:paths.toList())Files.delete(path);}Files.delete(dir);}System.out.println("FOUNDATION_PASS checks="+checks);}
 }

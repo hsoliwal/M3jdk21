@@ -61,6 +61,8 @@ manifest and all four sidecars together. It exposes stable
 precompute facts plus the complete profile catalog without joining image
 payloads. `textAt` is the explicit single-record materialization boundary;
 source IDs and mapping names are not converted into VM-local `String` identities.
+`prefix(value, limit)` is the first mapped query surface: it returns ordered
+coordinates through shard-local lower bounds and exact UTF-16 prefix checks.
 
 The image is suitable for the existing `-Djdk.mindex.lexicon=/absolute/file`
 boundary. The sidecars remain language-layer metadata; they are not fields of
