@@ -70,6 +70,22 @@ Every target-ready transfer binds:
 Recipes are transferable assets, not internal implementation detail. Recurring fixes should improve
 the Synexia recipe/mastery corpus first, then export new exact outputs to every public target.
 
+## Pinned canonical recipe home
+
+The exact Synexia canonical recipe-home authority consumed by this repository is recorded in
+`m3/compatibility/synexia-recipe-home-pin.tsv`. That pin binds:
+
+- the exact `hsoliwal/com.synexia` revision;
+- `synexia-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv`;
+- the machine form of `SYNEXIA-PUBLIC-TARGET-CONVERGENCE-1`;
+- their Git blob identities; and
+- the retained Apache-2.0 fast-lane classification.
+
+Borrowed reusable recipe mirrors in M3JDK21 must bind the same Synexia revision. Semantic changes to
+those reusable recipes are authored/mastered in Synexia first and then re-imported as a qualified
+handoff. M3JDK21-local backport recipes remain target-owned only when they depend on exact OpenJDK
+tree/API/ABI/native/jtreg semantics.
+
 ## Machine policy
 
 `m3/compatibility/synexia-public-target-policy.tsv` is the target-side license/disposition table.
