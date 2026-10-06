@@ -73,14 +73,7 @@ final class M3StringPool {
         if ((value.length >> coder << coder) != value.length) {
             throw new IllegalArgumentException("misaligned String payload");
         }
-        if (value.length == 0) return M3String.empty();
-
-        Lexicon active = lexicon;
-        if (active != null && active.available()) {
-            int row = active.find(value, coder);
-            if (row >= 0) return M3String.whole(active.atom(row));
-        }
-        return M3String.whole(internLocal(value, coder));
+        return internCompactBytes(value, 0, value.length >> coder, coder);
     }
 
     static M3String internCodePoints(int[] source, int offset, int count) {
