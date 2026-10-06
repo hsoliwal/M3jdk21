@@ -695,6 +695,11 @@ Symbol* java_lang_String::as_symbol_or_null(oop java_string) {
 
 int java_lang_String::utf8_length(oop java_string, typeArrayOop value) {
   if (is_m3_joined(java_string)) {
+    oop storage = m3_storage(java_string);
+    int prepared = java_lang_M3String::utf8_length_if_precomputed(storage);
+    if (prepared >= 0) {
+      return prepared;
+    }
     int result = 0;
     int len = length(java_string);
     for (int i = 0; i < len; i++) result += UNICODE::utf8_size(char_at(java_string, i));
@@ -926,6 +931,8 @@ int java_lang_M3String::_owner_kind_offset;
 int java_lang_M3String::_owner_length_offset;
 int java_lang_M3String::_owner_coder_offset;
 int java_lang_M3String::_owner_javaHash_offset;
+int java_lang_M3String::_owner_facts_offset;
+int java_lang_M3String::_facts_utf8Length_offset;
 int java_lang_M3String::_atom_address_offset;
 int java_lang_M3String::_atom_storageWidth_offset;
 int java_lang_M3String::_atom_bigEndian_offset;
@@ -940,7 +947,8 @@ int java_lang_M3String::_tuple_right_offset;
   macro(_owner_kind_offset, o, "kind", byte_signature, false); \
   macro(_owner_length_offset, o, "length", int_signature, false); \
   macro(_owner_coder_offset, o, "coder", byte_signature, false); \
-  macro(_owner_javaHash_offset, o, "javaHash", int_signature, false);
+  macro(_owner_javaHash_offset, o, "javaHash", int_signature, false); \
+  macro(_owner_facts_offset, o, "facts", m3_string_facts_signature, false);
 
 #define M3_STRING_ATOM_FIELDS_DO(macro) \
   macro(_atom_address_offset, a, "address", long_signature, false); \
@@ -951,15 +959,20 @@ int java_lang_M3String::_tuple_right_offset;
   macro(_tuple_left_offset, t, "left", m3_string_signature, false); \
   macro(_tuple_right_offset, t, "right", m3_string_signature, false);
 
+#define M3_STRING_FACTS_FIELDS_DO(macro) \
+  macro(_facts_utf8Length_offset, f, "utf8Length", int_signature, false);
+
 void java_lang_M3String::compute_offsets() {
   InstanceKlass* v = vmClasses::M3String_klass();
   InstanceKlass* o = vmClasses::M3StringOwner_klass();
   InstanceKlass* a = vmClasses::M3StringAtom_klass();
   InstanceKlass* t = vmClasses::M3StringTuple_klass();
+  InstanceKlass* f = vmClasses::M3StringFacts_klass();
   M3_STRING_VALUE_FIELDS_DO(FIELD_COMPUTE_OFFSET);
   M3_STRING_OWNER_FIELDS_DO(FIELD_COMPUTE_OFFSET);
   M3_STRING_ATOM_FIELDS_DO(FIELD_COMPUTE_OFFSET);
   M3_STRING_TUPLE_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+  M3_STRING_FACTS_FIELDS_DO(FIELD_COMPUTE_OFFSET);
 }
 
 #if INCLUDE_CDS
@@ -968,6 +981,7 @@ void java_lang_M3String::serialize_offsets(SerializeClosure* f) {
   M3_STRING_OWNER_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
   M3_STRING_ATOM_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
   M3_STRING_TUPLE_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+  M3_STRING_FACTS_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
 }
 #endif
 
