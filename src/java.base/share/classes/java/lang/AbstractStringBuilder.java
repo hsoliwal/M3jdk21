@@ -1817,7 +1817,11 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
                 }
             }
         } else if (s.isLatin1()) {
-            StringUTF16.putCharsSB(this.value, this.count, s, off, end);
+            if (storage != null) {
+                s.getBytes(this.value, off, this.count, UTF16, end - off);
+            } else {
+                StringUTF16.putCharsSB(this.value, this.count, s, off, end);
+            }
         } else if (storage != null) {
             s.getBytes(this.value, off, this.count, UTF16, end - off);
         } else { // both UTF16
