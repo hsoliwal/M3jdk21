@@ -58,6 +58,15 @@ public class M3StringCanonicalDagTest {
         check(owner(body(flat)) != owner(body(splitBoundary)),
                 "equal UTF-16 spelling from another canonical coordinate structure stays distinct");
 
+        String hashCollisionA = fresh("A").concat(fresh("a"));
+        String hashCollisionB = fresh("B").concat(fresh("B"));
+        check(hashCollisionA.hashCode() == hashCollisionB.hashCode(),
+                "candidate hash collision fixture");
+        check(owner(body(hashCollisionA)) != owner(body(hashCollisionB)),
+                "candidate hash collisions require exact coordinate verification");
+        equal("Aa", hashCollisionA, "hash collision left content");
+        equal("BB", hashCollisionB, "hash collision right content");
+
         String chain = fresh("x");
         for (int index = 1; index < 4096; index++) {
             chain = chain.concat(fresh("x"));
