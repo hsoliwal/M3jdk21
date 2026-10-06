@@ -84,6 +84,12 @@ final class M3StringPool {
     }
 
     static M3String internUnit(char unit) {
+        Lexicon active = lexicon;
+        if (active != null && active.available()) {
+            int row = active.findUnit(unit);
+            if (row >= 0) return M3String.whole(active.atom(row));
+        }
+
         byte coder = StringLatin1.canEncode(unit) ? String.LATIN1 : String.UTF16;
         int byteLength = 1 << coder;
         long hash64 = mix64(0x9e3779b97f4a7c15L ^ coder ^ Integer.toUnsignedLong(byteLength));
@@ -424,6 +430,31 @@ final class M3StringPool {
                 return new Lexicon(
                         mapped, (int) payload, offsets, lengths, javaHashes, generation64);
             }
+        }
+
+        int findUnit(char unit) {
+            int low = 0;
+            int high = offsets.length - 1;
+            while (low <= high) {
+                int middle = (low + high) >>> 1;
+                int length = lengths[middle];
+                int comparison;
+                if (length == 0) {
+                    comparison = 1;
+                } else {
+                    comparison = unit - mappedUnit(offsets[middle], 0);
+                    if (comparison == 0) comparison = 1 - length;
+                }
+                if (comparison == 0) {
+                    return middle;
+                }
+                if (comparison < 0) {
+                    high = middle - 1;
+                } else {
+                    low = middle + 1;
+                }
+            }
+            return -1;
         }
 
         int find(byte[] value, byte coder) {
