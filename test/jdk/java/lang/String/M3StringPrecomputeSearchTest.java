@@ -492,6 +492,21 @@ public class M3StringPrecomputeSearchTest {
         check(!flatStartsWithSource.startsWith(String.join("", "bootstrap", "-prefiy")),
                 "flat source startsWith M3 prefix negative");
 
+        String flatReplaceSource = "legacy-aba-aba-tail";
+        String m3ReplaceTarget = String.join("", "a", "ba");
+        String m3Replacement = String.join("", "X", "\u0100");
+        String mixedReplace = flatReplaceSource.replace(m3ReplaceTarget, m3Replacement);
+        check(mixedReplace.equals("legacy-X\u0100-X\u0100-tail"),
+                "flat source replace M3 target/replacement");
+        check(flatReplaceSource.replace(String.join("", "not", "-present"), m3Replacement)
+                        == flatReplaceSource,
+                "flat source replace absent M3 target identity");
+
+        String flatReplacementOnlySource = "foo-foo";
+        String m3ReplacementOnly = String.join("", "R", "R");
+        check(flatReplacementOnlySource.replace("foo", m3ReplacementOnly).equals("RR-RR"),
+                "flat source replace M3 replacement");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
