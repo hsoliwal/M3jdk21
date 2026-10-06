@@ -1882,10 +1882,9 @@ public final class String
         checkBoundsBeginEnd(srcBegin, srcEnd, length());
         Objects.requireNonNull(dst);
         checkBoundsOffCount(dstBegin, srcEnd - srcBegin, dst.length);
-        if (m3() != null) {
-            for (int src = srcBegin, dstIndex = dstBegin; src < srcEnd; src++, dstIndex++) {
-                dst[dstIndex] = (byte) charAt(src);
-            }
+        M3String storage = m3();
+        if (storage != null) {
+            storage.getBytes(dst, srcBegin, dstBegin, LATIN1, srcEnd - srcBegin);
         } else if (isLatin1()) {
             StringLatin1.getBytes(value, srcBegin, srcEnd, dst, dstBegin);
         } else {
