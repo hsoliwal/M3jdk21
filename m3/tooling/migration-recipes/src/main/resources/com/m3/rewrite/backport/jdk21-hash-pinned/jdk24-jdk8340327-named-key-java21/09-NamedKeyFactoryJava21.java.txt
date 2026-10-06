@@ -1,0 +1,95 @@
+/*
+ * Copyright (c) 2026, Hitesh Soliwal.
+ * SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0
+ */
+
+/*
+ * @test
+ * @summary Java21 adaptation of NamedKeyFactory RAW parameter-set discovery
+ * @modules java.base/sun.security.provider
+ *          java.base/sun.security.x509
+ * @run main NamedKeyFactoryJava21
+ */
+
+import java.security.InvalidKeyException;
+import java.security.Key;
+import java.security.PublicKey;
+import java.util.Arrays;
+
+import sun.security.provider.NamedKeyFactory;
+import sun.security.x509.NamedX509Key;
+
+public class NamedKeyFactoryJava21 {
+    public static void main(String[] args) throws Exception {
+        var multi = new TestFactory("Ed25519", "Ed448");
+
+        Key concrete = multi.translate(new RawPublicKey("Ed25519", 32));
+        check(concrete, "Ed25519");
+
+        expectInvalid(() -> multi.translate(new RawPublicKey("EdDSA", 32)));
+        expectInvalid(() -> multi.translate(new RawPublicKey("X25519", 32)));
+
+        var single = new TestFactory("Ed25519");
+        check(single.translate(new RawPublicKey("EdDSA", 32)), "Ed25519");
+    }
+
+    private static void check(Key key, String expected) {
+        if (!(key instanceof NamedX509Key named)) {
+            throw new AssertionError("expected NamedX509Key: " + key.getClass());
+        }
+        if (!expected.equals(named.getParams().getName())) {
+            throw new AssertionError(
+                    "parameter set mismatch: " + named.getParams().getName());
+        }
+    }
+
+    private static void expectInvalid(ThrowingRunnable action) throws Exception {
+        try {
+            action.run();
+            throw new AssertionError("expected InvalidKeyException");
+        } catch (InvalidKeyException expected) {
+            // expected
+        }
+    }
+
+    private interface ThrowingRunnable {
+        void run() throws Exception;
+    }
+
+    private static final class TestFactory extends NamedKeyFactory {
+        TestFactory(String... names) {
+            super("EdDSA", names);
+        }
+
+        Key translate(Key key) throws InvalidKeyException {
+            return engineTranslateKey(key);
+        }
+    }
+
+    private static final class RawPublicKey implements PublicKey {
+        private static final long serialVersionUID = 1L;
+        private final String algorithm;
+        private final byte[] encoded;
+
+        RawPublicKey(String algorithm, int size) {
+            this.algorithm = algorithm;
+            this.encoded = new byte[size];
+            Arrays.fill(this.encoded, (byte) 7);
+        }
+
+        @Override
+        public String getAlgorithm() {
+            return algorithm;
+        }
+
+        @Override
+        public String getFormat() {
+            return "RAW";
+        }
+
+        @Override
+        public byte[] getEncoded() {
+            return encoded.clone();
+        }
+    }
+}
