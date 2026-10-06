@@ -427,7 +427,9 @@ for fragment in [
 # pairs, so code-point offsets are identical to code-unit offsets. All other cases delegate to
 # Character.offsetByCodePoints for exact JDK boundary/exception behavior.
 for fragment in [
-    "storage.facts().codePointCount == storage.length()",
+    "M3StringFacts prepared = storage.factsIfPrepared();",
+    "storage.coder() == LATIN1",
+    "prepared.codePointCount == storage.length()",
     "long result = (long) index + codePointOffset;",
     "return Character.offsetByCodePoints(this, index, codePointOffset);",
 ]:
