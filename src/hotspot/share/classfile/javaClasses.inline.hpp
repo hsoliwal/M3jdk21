@@ -190,6 +190,15 @@ jbyte java_lang_M3String::coder(oop value) {
   return owner(value)->byte_field(_owner_coder_offset);
 }
 
+int java_lang_M3String::utf8_length_if_precomputed(oop value) {
+  oop o = owner(value);
+  if (start(value) != 0 || length(value) != o->int_field(_owner_length_offset)) {
+    return -1;
+  }
+  oop facts = o->obj_field_acquire(_owner_facts_offset);
+  return facts == nullptr ? -1 : facts->int_field(_facts_utf8Length_offset);
+}
+
 jint java_lang_M3String::java_hash(oop value) {
   oop o = owner(value);
   if (start(value) == 0 && length(value) == o->int_field(_owner_length_offset)) {
