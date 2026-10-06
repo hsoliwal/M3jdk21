@@ -1,4 +1,11 @@
-# MIndex-backed String — JDK integration contract
+# M3String-backed String — JDK integration contract
+
+Status: historical first-stage design, retained for provenance. The current runtime authority is
+`m3/docs/m3-runtime-invariants.tsv`, `m3/docs/name-mapping.json`, and
+`m3/docs/m3string-synexia-lineage.md`.
+
+Synexia uses the donor name `MIndexString`; M3JDK uses the target name `M3String`. Do not copy
+the donor class name into `java.lang`.
 
 ## Objective
 
@@ -6,14 +13,14 @@ Allow a modified JDK to expose ordinary `java.lang.String` semantics while the i
 and byte payload is owned by the same MIndex canonical storage used by explicit M3 values and
 compiler lowering.
 
-JNI is optional. The first supported JDK backing is the OS-mapped MIndex store.
+At this historical stage JNI was optional and the first supported backing was the OS-mapped MIndex store. The current M3JDK runtime additionally uses JNI/native compatibility-shadow boundaries; arrays produced there are not canonical text.
 
 ## Current stage
 
 This branch introduces the JDK-internal backing kernel:
 
-- `jdk.internal.mindex.MIndexStringBacking`
-- `jdk.internal.mindex.MIndexMappedStringBacking`
+- `jdk.internal.mindex.M3StringBacking`
+- `jdk.internal.mindex.M3MappedStringBacking`
 
 The mapped implementation reads the same MIndex text image version 3 and canonical byte image
 version 1 used by Synexia.
@@ -40,7 +47,7 @@ A process virtual address is never identity.
 This allows the same persisted payload to be mapped at different virtual addresses in different
 JVMs while retaining the same canonical ID.
 
-## Why java.lang.String is not changed in this first patch
+## Historical rationale for not changing java.lang.String in the first patch
 
 OpenJDK 21 String is VM-special:
 
@@ -100,7 +107,7 @@ Byte image:
 Both are append-only after publication. The JDK reader opens a committed read-only snapshot and
 ignores bytes beyond the selected valid commit.
 
-## Next String/HotSpot patch
+## Historical next-step checklist
 
 The next patch should add a JDK-private backing descriptor without changing public String APIs.
 
@@ -120,3 +127,20 @@ It must inventory and update, at minimum:
 
 The transition must be differential and pass-by-pass. Array-backed String remains the oracle until
 each MIndex-backed path has parity evidence.
+
+
+## Current M3JDK representation invariant
+
+The later runtime stages supersede the first-stage backing-only layout:
+
+- `java.lang.String` uses internal `java.lang.M3String` as the M3 semantic value;
+- `M3String` has exactly one canonical owner reference and one packed coordinate;
+- scalar spelling is owned by mapped/native M3 owners, not by `M3String`;
+- tuple composition is a balanced persistent canonical DAG;
+- tuple identity ignores concat parenthesization and is verified by exact ordered terminal
+  M3 atom owner/range coordinates;
+- Java byte/char arrays and native UTF buffers are compatibility shadows/materializations only;
+- all precompute is internal, identity/range keyed, bounded where length-proportional, and never
+  canonical payload.
+
+The Synexia name `MIndexString` remains in donor provenance and mapping records only.
