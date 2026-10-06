@@ -189,7 +189,7 @@ for line_number, line in enumerate(precompute_inventory.splitlines(), start=1):
         fail(f"invalid MIndex precompute inventory row {line_number}")
     inventory_rows.append(cells)
 
-if len(inventory_rows) < 28:
+if len(inventory_rows) < 29:
     fail(f"MIndex precompute inventory unexpectedly small: {len(inventory_rows)}")
 
 required_inventory_provenance = (
@@ -206,6 +206,7 @@ for observed_owner in [
     "MIndexCollectionPrecompute",
     "MIndexPairPrecompute",
     "MIndexLexicalPrecomputeContribution",
+    "UnicodeCodePointCatalog",
     "M3FsPrecomputeBundle",
     "MIndexStringPrecomputeCache",
 ]:
@@ -269,6 +270,7 @@ required_inventory_families = {
     "Hash precompute",
     "Code/text signals",
     "Word/lexical facts",
+    "Unicode/unit/static catalogs",
     "Bigram/relation precompute",
     "Semantic/reasoning precompute",
     "AST precompute",
@@ -1102,6 +1104,7 @@ required_broad_precompute_mapping_fragments = [
     '"source": "com.synexia.indexstring regex/search precompute families"',
     '"source": "com.synexia.indexstring MIndexPrefixZ / palindrome / suffix / LCP families"',
     '"source": "com.synexia.indexstring lexical / word / bigram / semantic signal images"',
+    '"source": "com.synexia.indexstring.precompute Unicode / SI unit / static catalog families"',
     '"source": "com.synexia.mindex Jini / Coral TPU / LiteRT NPU / Tornado precompute families"',
 ]
 for fragment in required_broad_precompute_mapping_fragments:
