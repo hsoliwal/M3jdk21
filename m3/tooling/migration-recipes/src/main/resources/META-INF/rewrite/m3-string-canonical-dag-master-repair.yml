@@ -2,7 +2,7 @@
 type: specs.openrewrite.org/v1beta/recipe
 name: com.m3.rewrite.backport.M3StringCanonicalDagMasterRepair
 displayName: Repair M3String canonical balanced DAG on current master
-description: Replays the current-master repair that restores balanced, parenthesization-independent M3String tuple identity while preserving newer scalar admission, internal precompute, and M3 target naming.
+description: Target-local exact OpenJDK adapter/proof for the canonical Synexia packet synexia.m3jdk.string.canonical-dag.20261006; executable portable verification/mastery lives in com.synexia.rewrite.M3StringCanonicalDagInvariant, while this recipe replays the M3JDK-specific hash-pinned repair.
 recipeList:
   - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
       crateName: jdk22-m3-string-canonical-dag-master-repair
