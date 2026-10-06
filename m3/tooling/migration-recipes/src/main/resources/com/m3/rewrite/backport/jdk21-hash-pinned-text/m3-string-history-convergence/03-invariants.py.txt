@@ -177,6 +177,21 @@ if "public boolean containsAll(Facts required)" not in tq:
 if "long[] trigram" in facts or "M3TQ.Facts" in facts:
     fail("M3StringFacts illegally owns length-proportional exact trigram state")
 
+# AUTO literal search owns one compact 256-entry BMH skip table and may restart the existing
+# exact KMP lane only at a start already proven unresolved by the conservative skip.
+for fragment in [
+    "final int[] skip256;",
+    "Arrays.fill(skip256, Math.max(1, length));",
+    "skip256[pattern.charAt(index) & 255] = length - 1 - index;",
+    "if (plan.patternLength >= 8)",
+    "failedComparisonWork > (long) plan.patternLength + 2L * (at - fromIndex)",
+    "return kmp(source, pattern, plan, at, endIndex);",
+]:
+    if fragment not in search_precompute:
+        fail(f"M3 adaptive BMH/KMP search invariant missing: {fragment}")
+if "65536" in search_precompute and "skip" in search_precompute:
+    fail("M3 literal search must not retain a 65536-entry UTF-16 skip table")
+
 # Length-proportional operation precompute is separate and bounded. It may retain primitive
 # algorithm lanes but never canonical spelling/payload or strong M3 owner/value references.
 for forbidden in [
