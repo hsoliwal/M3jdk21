@@ -4512,7 +4512,12 @@ public final class String
      * @since 11
      */
     public Stream<String> lines() {
-        if (m3() != null) {
+        M3String storage = m3();
+        if (storage != null) {
+            M3StringFacts prepared = storage.factsIfPrepared();
+            if (prepared != null && !prepared.hasLineTerminator) {
+                return Stream.of(this);
+            }
             return StreamSupport.stream(new M3LinesSpliterator(this), false);
         }
         byte[] currentValue = value();
