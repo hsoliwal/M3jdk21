@@ -110,15 +110,34 @@ jobs:
           JAVA
           cp "$SRC" "$RUNNER_TEMP/Sample.before"
 
-          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="apply --root $FIX --out m3/build/a3/apply --file src/java.base/share/classes/example/Sample.java"
+          MASTERY="$REPO/m3/tooling/a3/src/test/resources/mastery-v6-fixture.tsv"
+          MASTERY_ROOT='07fbaaa44b134f6a3bc69691005777ba363fb83cf71e1c061fd4c23deac6e32b'
+          test -s "$MASTERY"
+          mvn -B -ntp -f "$REPO/m3/tooling/a3/pom.xml" exec:java             -Dexec.mainClass=com.m3.a3.A3             -Dexec.args="apply --root $FIX --out m3/build/a3/apply --file src/java.base/share/classes/example/Sample.java --mastery $MASTERY --mastery-root $MASTERY_ROOT"
 
           cmp "$SRC" "$RUNNER_TEMP/Sample.before"
           CANDIDATE="$FIX/m3/build/a3/apply/candidate/src/java.base/share/classes/example/Sample.java"
           RECEIPT="$FIX/m3/build/a3/apply/receipt.tsv"
           grep -F 'm3$pureIntAtom' "$CANDIDATE"
           grep -F 'M3-IOP: PURE_INT_EXPRESSION' "$CANDIDATE"
-          grep -F $'\ttrue\ttrue' "$RECEIPT"
+          grep -F 
+      - name: Upload A3 proof
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-a3-proof-${{ github.run_id }}
+          path: |
+            ${{ env.REPO }}/m3/build/a3/inventory.tsv
+            ${{ env.REPO }}/m3/build/a3/plan.tsv
+            ${{ env.REPO }}/m3/build/a3/apply-receipt.tsv
+            ${{ env.REPO }}/m3/build/a3/mastery-binding.tsv
+          if-no-files-found: error
+          retention-days: 30
+\ttrue\ttrue' "$RECEIPT"
+          MASTERY_BINDING="$FIX/m3/build/a3/apply/mastery.tsv"
+          grep -F 'M3_RECIPE_MASTERY_FANIN_V6' "$MASTERY_BINDING"
+          grep -F "$MASTERY_ROOT" "$MASTERY_BINDING"
           cp "$RECEIPT" "$REPO/m3/build/a3/apply-receipt.tsv"
+          cp "$MASTERY_BINDING" "$REPO/m3/build/a3/mastery-binding.tsv"
 
       - name: Upload A3 proof
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
