@@ -71,6 +71,17 @@ for path, text in [
     if retained_arrays:
         fail(f"{path} retains array field(s): {retained_arrays!r}")
 
+# Replacement-enabled generic encoders reproduce JDK21's ArrayEncoder ASCII-compatible
+# fast path without materializing a source byte[]: fixed ASCII facts + canonical bulk projection.
+for fragment in [
+    "encoder instanceof ArrayEncoder arrayEncoder",
+    "arrayEncoder.isASCIICompatible()",
+    "if (prepared.ascii)",
+    "getBytes(output, 0, 0, String.LATIN1, length);",
+]:
+    if fragment not in m3:
+        fail(f"M3 generic ASCII-compatible encoder fast path missing: {fragment}")
+
 # Encoding facts must be executable, not decorative metadata.
 for fragment in [
     "if (prepared.ascii) {",
