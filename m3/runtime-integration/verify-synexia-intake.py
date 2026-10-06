@@ -73,7 +73,7 @@ def verify(root: Path) -> None:
         "direct target source copy must require explicit relicense review",
     )
 
-    additional = (root / LICENSE_INFO).read_text(encoding="utf-8")
+    additional = " ".join((root / LICENSE_INFO).read_text(encoding="utf-8").split())
     require(
         "programs licensed under the Apache License, Version 2.0" in additional,
         "OpenJDK additional-license Apache boundary text missing",
