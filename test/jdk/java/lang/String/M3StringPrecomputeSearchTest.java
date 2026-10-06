@@ -453,6 +453,12 @@ public class M3StringPrecomputeSearchTest {
         check(rangeRepeated.equals("ababababab"),
                 "repeat preserves existing M3 range independent of join gate");
 
+        String latinM3ForUtf16Builder = String.join("", "latin", "-only");
+        StringBuilder utf16BuilderFromLatin = new StringBuilder("\u0100");
+        utf16BuilderFromLatin.append(latinM3ForUtf16Builder);
+        check(utf16BuilderFromLatin.toString().equals("\u0100latin-only"),
+                "UTF16 builder bulk inflates Latin1 M3");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
