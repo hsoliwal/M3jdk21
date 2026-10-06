@@ -423,6 +423,17 @@ for fragment in [
     if fragment not in m3:
         fail(f"M3 collision-safe equality path missing: {fragment}")
 
+# codePointCount is executable geometry: when it equals UTF-16 length there are no surrogate
+# pairs, so code-point offsets are identical to code-unit offsets. All other cases delegate to
+# Character.offsetByCodePoints for exact JDK boundary/exception behavior.
+for fragment in [
+    "storage.facts().codePointCount == storage.length()",
+    "long result = (long) index + codePointOffset;",
+    "return Character.offsetByCodePoints(this, index, codePointOffset);",
+]:
+    if fragment not in string:
+        fail(f"M3 code-point offset fact route missing: {fragment}")
+
 # Range hashes and ASCII case hashes are negative filters only; exact comparison remains in
 # String.regionMatches for every surviving candidate.
 for fragment in [
