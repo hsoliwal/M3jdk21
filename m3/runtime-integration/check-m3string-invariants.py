@@ -137,6 +137,7 @@ for fragment in [
         fail(f"M3 position precompute fail-open path missing: {fragment}")
 
 for fragment in [
+    "source.getChars(start, end, scratch, 0);",
     "final AtomicReferenceArray<ExactBlock> exact;",
     "Arrays.binarySearch(units, unit)",
     "Long.numberOfTrailingZeros(positions)",
