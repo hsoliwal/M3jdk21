@@ -87,5 +87,24 @@ public final class FoundationTest {
         check(arena.copyUtf16("fallback".toCharArray()).flatten().equals("fallback"));
         Path largeCount=directory.resolve("bad-count");byte[] bytes=Files.readAllBytes(image);ByteBuffer.wrap(bytes).putInt(12,Integer.MAX_VALUE);Files.write(largeCount,bytes);expect(IOException.class,()->SharedLexiconImage.open(largeCount));
     }
-    public static void main(String[] args)throws Exception{pieces();Path dir=Files.createTempDirectory("m3-foundation-");try{images(dir);}finally{try(var paths=Files.list(dir)){for(Path path:paths.toList())Files.delete(path);}Files.delete(dir);}System.out.println("FOUNDATION_PASS checks="+checks);}
+    static String sha256(Path path) throws Exception {
+        java.security.MessageDigest digest=java.security.MessageDigest.getInstance("SHA-256");
+        try(InputStream input=Files.newInputStream(path)){byte[] buffer=new byte[4096];for(int read;(read=input.read(buffer))>=0;)if(read!=0)digest.update(buffer,0,read);}
+        return java.util.HexFormat.of().formatHex(digest.digest());
+    }
+    static void catalog(Path directory) throws Exception {
+        Path one=directory.resolve("one.m3lex"), two=directory.resolve("two.m3lex");
+        writeV2(one,List.of("a","\ud800"));writeV2(two,List.of("\ud801","\ud802"));
+        String header="shard_id\tfile\tfirst_lexeme\tlast_lexeme\timage_records\tutf16_units\tsha256\n";
+        String rows="0\tone.m3lex\ta\t\\uD800\t2\t2\t"+sha256(one)+"\n"
+                +"1\ttwo.m3lex\t\\uD801\t\\uD802\t2\t2\t"+sha256(two)+"\n";
+        Files.writeString(directory.resolve("synexia.shards.tsv"),header+rows,java.nio.charset.StandardCharsets.UTF_8);
+        SharedLexiconCatalog catalog=SharedLexiconCatalog.open(directory);catalog.warm();
+        check(catalog.shardCount()==2);check(catalog.recordCount()==4);check(catalog.shardFiles().equals(List.of("one.m3lex","two.m3lex")));
+        check(catalog.find("\ud801").equals(Optional.of(new SharedLexiconCatalog.Coordinate(1,0))));
+        check(catalog.find("missing").isEmpty());check(catalog.textAt(new SharedLexiconCatalog.Coordinate(1,1)).equals("\ud802"));
+        Files.writeString(directory.resolve("synexia.shards.tsv"),header+"0\t../one.m3lex\ta\tb\t2\t2\t"+sha256(one)+"\n",java.nio.charset.StandardCharsets.UTF_8);
+        expect(IOException.class,()->SharedLexiconCatalog.open(directory));
+    }
+    public static void main(String[] args)throws Exception{pieces();Path dir=Files.createTempDirectory("m3-foundation-");try{images(dir);catalog(dir);}finally{try(var paths=Files.list(dir)){for(Path path:paths.toList())Files.delete(path);}Files.delete(dir);}System.out.println("FOUNDATION_PASS checks="+checks);}
 }

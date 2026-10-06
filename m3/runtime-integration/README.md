@@ -32,9 +32,12 @@ The Synexia export lane in `../lexicon/SYNEXIA_EXPORT.md` produces this M3LEX
 image (or deterministic shards) together with mapping and precompute sidecars.
 Those sidecars preserve Synexia source names, opaque IDs, language/translation
 profiles, SI/acronym/number mappings and source precompute ownership; they stay
-outside `java.lang.String`. A VM may map one selected shard per process today;
-multi-shard warmup remains an explicit loader concern and is not implied by the
-presence of the sidecar manifest.
+outside `java.lang.String`. `com.m3.text.SharedLexiconCatalog` is the explicit
+read-only multi-shard loader: it validates `synexia.shards.tsv`, raw image
+SHA-256, UTF-16 bounds/order and escaped sidecar endpoints, then returns stable
+`(shardId,imageRow)` coordinates without flattening shard payloads. A VM may map
+one selected shard per process today; catalog warmup is an explicit loader
+operation and is not implied by the presence of the sidecar manifest.
 
 The original owner's publication contract still applies: trusted directory,
 immutable committed bytes, no external rewrite or truncation. Read-only mapping

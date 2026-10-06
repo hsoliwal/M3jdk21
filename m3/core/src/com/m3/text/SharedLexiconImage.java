@@ -28,6 +28,7 @@ public final class SharedLexiconImage {
     private final int[] offsets, lengths;
     private final byte[] recordDigests;
     private final int payloadOffset;
+    private final long utf16Units;
     private final String imageIdentity;
 
     private SharedLexiconImage(MappedByteBuffer data) throws IOException {
@@ -44,6 +45,7 @@ public final class SharedLexiconImage {
                 || units > MAX_IMAGE_BYTES / 2 || payload != HEADER + (long) directoryBytes * count
                 || payload + 2L * units != data.limit()) throw new IOException("invalid image dimensions");
         payloadOffset = (int)payload;
+        utf16Units = units;
         byte[] expected = new byte[32];
         data.get(32, expected);
         if (!MessageDigest.isEqual(expected, digestImage(data))) throw new IOException("image checksum mismatch");
@@ -80,6 +82,8 @@ public final class SharedLexiconImage {
     public int version() { return version; }
     public int size() { return offsets.length; }
     public int mappedBytes() { return mapping.limit(); }
+    /** Number of UTF-16 code units in the image payload, without materializing it. */
+    public long utf16Units() { return utf16Units; }
 
     private ByteBuffer recordBytes(int index) {
         Objects.checkIndex(index, offsets.length);
@@ -106,6 +110,45 @@ public final class SharedLexiconImage {
             if (leftUnit != rightUnit) return Integer.compare(leftUnit, rightUnit);
         }
         return Integer.compare(left.remaining(), right.remaining());
+    }
+
+    /** Exact UTF-16 text for a record; unpaired surrogates are preserved. */
+    String recordText(int index) {
+        ByteBuffer record = recordBytes(index);
+        char[] text = new char[record.remaining() / 2];
+        for (int at = 0; at < text.length; at++) {
+            int offset = at * 2;
+            text[at] = (char)((record.get(offset) & 0xff)
+                    | ((record.get(offset + 1) & 0xff) << 8));
+        }
+        return new String(text);
+    }
+
+    /** Binary lookup using the image's UTF-16 ordering and Java String ordering. */
+    int findRecord(String value) {
+        Objects.requireNonNull(value);
+        int low = 0, high = offsets.length - 1;
+        while (low <= high) {
+            int middle = (low + high) >>> 1;
+            int comparison = compareRecordTo(middle, value);
+            if (comparison < 0) low = middle + 1;
+            else if (comparison > 0) high = middle - 1;
+            else return middle;
+        }
+        return -1;
+    }
+
+    private int compareRecordTo(int index, String value) {
+        ByteBuffer record = recordBytes(index);
+        int units = Math.min(record.remaining() / 2, value.length());
+        for (int at = 0; at < units; at++) {
+            int offset = at * 2;
+            int recordUnit = (record.get(offset) & 0xff)
+                    | ((record.get(offset + 1) & 0xff) << 8);
+            char valueUnit = value.charAt(at);
+            if (recordUnit != valueUnit) return Integer.compare(recordUnit, valueUnit);
+        }
+        return Integer.compare(record.remaining() / 2, value.length());
     }
     /** Copies and checks a record before it can become immutable local backing. */
     public LocalM3StringPiece copyRecord(int index, LocalM3Arena arena) throws IOException {
