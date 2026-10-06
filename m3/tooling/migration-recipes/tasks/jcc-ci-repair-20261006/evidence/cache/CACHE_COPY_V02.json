@@ -1,0 +1,13 @@
+{
+  "schema": "m3-jcc-ci-cache-copy/1",
+  "status": "EXACT_FINITE_DIAGNOSTIC_COPY",
+  "created_at_utc": "2026-10-06T04:17:46.172068+00:00",
+  "source_receipt": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/runtime-resolution/actual-acquisition/OFFLINE_DIAGNOSTIC_CACHE_V02.json",
+  "source_receipt_sha256": "034d226e546825818559e5517ce62bb00dd855f9ce59760fa607049388280da9",
+  "source_cache": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/runtime-resolution/actual-acquisition/offline-diagnostic-cache-v02",
+  "cache": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/cache-v02",
+  "file_count": 3033,
+  "bytes": 200338641,
+  "native_source_custody_pending": true,
+  "source_and_plugin_closure_admitted": false
+}

@@ -94,7 +94,7 @@ final class M3A3RegexMemoryLabDeliveryRecipeTest {
                             output.put(
                                     after.getSourcePath()
                                             .toString()
-                                            .replace('\\', '/'),
+                                            .replace('\', '/'),
                                     after.printAll());
                         });
         return output;
