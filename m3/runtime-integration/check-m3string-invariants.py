@@ -491,7 +491,7 @@ for fragment in [
     "_facts_modifiedUtf8Length_offset",
     "modified_utf8_length_if_precomputed",
 ]:
-    if fragment not in (java_classes_hpp + java_classes_cpp + java_classes_inline):
+    if fragment not in (java_classes_hpp + java_classes_cpp + inline):
         fail(f"M3 VM modified UTF8 accessor missing: {fragment}")
 if "GetStringUTFLength" not in native_encoding_c or "modifiedUtf8Length(s)" not in native_encoding_java:
     fail("M3 modified UTF8 JNI length regression missing")
