@@ -15,6 +15,33 @@ A capability that graduates into M3JDK21 is **adapted into the target's existing
 name**, with Apache-2.0 provenance for eligible Synexia code, exact source lineage and target-side
 tests. M3JDK21 must not acquire a runtime dependency on Synexia.
 
+
+## Synexia intake and licensing modes
+
+M3JDK21 may consume Synexia broadly, but the intake **mode** is part of the proof.
+
+The machine-readable authority is `m3/docs/synexia-intake-policy.tsv`. The repository's own
+`ADDITIONAL_LICENSE_INFO` explicitly distinguishes independently licensed Apache-2.0 programs
+from copying incompatible-license code into GPLv2 source files. Therefore:
+
+- `EXTERNAL_RECIPE_TOOL` — Synexia Maven/OpenRewrite recipes may be executed as authoring/proof
+  tooling. They never become a JDK runtime dependency.
+- `INDEPENDENT_APACHE_MODULE` — separately built `m3/**` modules may remain Apache-2.0 when
+  their LICENSE/NOTICE and module boundary are preserved.
+- `DATA_OR_METADATA_EXPORT` — immutable images, sidecars, facts and manifests cross the boundary
+  only with source-license, revision, schema and hash proof.
+- `TARGET_OWNED_PORT` — a capability entering `src/**` is adapted into the canonical
+  GPL/OpenJDK-owned target implementation and is not admitted as direct Apache source copy.
+- `EXPLICIT_RELICENSE_PORT` — direct source reuse inside `src/**` requires recorded authority
+  from all necessary rightsholders under target-compatible terms and correct target headers.
+- `EXISTING_DIRECT_COPY_REVIEW` — historical Synexia records already marked
+  `copied_code=true` under `src/**` are not silently grandfathered. They are enumerated in
+  `m3/docs/synexia-direct-copy-review.tsv` and remain review-required until either compatible
+  relicensing is proven or the target is replaced by a target-owned implementation.
+
+`m3/runtime-integration/verify-synexia-intake.py` fails closed if the mode set, direct-copy
+review inventory, FOSS provenance, or repository licensing boundary drifts.
+
 ## M3String is the naming analogy
 
 The canonical example is:
