@@ -51,6 +51,9 @@ required owner payload. The reviewed `HuggingFaceDictionaryImporter` additionall
 owns an optional non-negative `long frequency`, exported as
 `huggingface_frequency` when the pinned word-frequency input supplies it. A
 line-list or CSV bridge record may omit that field without losing validity.
+The translation owner contributes optional `translation_grammar_supported`
+(`boolean`) from `Language.hasGrammarSupport()`, and the acronym owner contributes
+optional `acronym_domain` (`string`) from `AcronymLexicon.Entry.domain`.
 
 `precompute_payload` is a bounded JSON object supplied by the Synexia owner. It
 is canonicalized (sorted keys, compact separators, ASCII escapes) and retained
@@ -65,7 +68,7 @@ The field-level donor mapping is maintained in
 and reviewed LangDex, SI, and optional Hugging Face primitive profile families
 without making their values part of `java.lang.String`. Its
 `donor_java_type` column records the inspected scalar or relation-array shape
-(`boolean`, `double`, `int`, `long`, `int[]`, or `long[]`) so future validators can reject shape
+(`boolean`, `double`, `int`, `long`, `string`, `int[]`, or `long[]`) so future validators can reject shape
 drift without interpreting the language metadata as String semantics. When
 that field map is present beside the source manifest (or is supplied with
 `--field-map`), the exporter enforces those shapes and Java `int`/`long`

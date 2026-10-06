@@ -224,6 +224,10 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual(10, len(sources["unicodex.langdex.lexemes"]["precompute_fields"].split(",")))
         self.assertEqual(4, len(sources["dictlang.si-units"]["precompute_fields"].split(",")))
         self.assertEqual("", sources["translate.rows"]["precompute_fields"])
+        self.assertEqual(["translation_grammar_supported"],
+                         sources["translate.rows"]["optional_precompute_fields"].split(","))
+        self.assertEqual(["acronym_domain"],
+                         sources["dictlang.acronyms"]["optional_precompute_fields"].split(","))
         self.assertEqual("", sources["dictlang.numbers.0-10000"]["precompute_fields"])
         self.assertEqual(["huggingface_frequency"],
                          sources["dictlang.huggingface"]["optional_precompute_fields"].split(","))
@@ -234,7 +238,7 @@ class SynexiaExportTest(unittest.TestCase):
                 encoding="utf-8", newline="") as stream:
             rows = list(csv.DictReader(stream, delimiter="\t"))
         mapped = {row["canonical_payload_field"] for row in rows if row["status"] == "MAPPED"}
-        allowed_types = {"boolean", "double", "int", "long", "int[]", "long[]"}
+        allowed_types = {"boolean", "double", "int", "long", "string", "int[]", "long[]"}
         field_types: dict[str, str] = {}
         for row in rows:
             self.assertIn(row["donor_java_type"], allowed_types)
@@ -246,6 +250,8 @@ class SynexiaExportTest(unittest.TestCase):
         self.assertEqual("double", field_types["si_offset"])
         self.assertEqual("boolean", field_types["si_prefixable"])
         self.assertEqual("long", field_types["huggingface_frequency"])
+        self.assertEqual("boolean", field_types["translation_grammar_supported"])
+        self.assertEqual("string", field_types["acronym_domain"])
         self.assertTrue(all(field_types.values()))
         for source_id in ("dictlang.dictionary", "dictlang.frequency",
                           "dictlang.thesaurus", "dictlang.antonyms"):
@@ -400,6 +406,62 @@ class SynexiaExportTest(unittest.TestCase):
                 encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "field huggingface_frequency is not long"):
                 EXPORT.export(manifest, records, root / "bad-output", "fixture",
+                              "3e85c872adf556901a341a9eb1c3b59864918da1",
+                              ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
+
+    def test_optional_translation_and_acronym_owner_fields_keep_boolean_and_string_shapes(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            translation_id = "translate.rows"
+            translation_path = "synexia-translate/src/main/java/com/synexia/translate/core/Language.java"
+            acronym_id = "dictlang.acronyms"
+            acronym_path = "synexia-dictlang/shared/core/src/main/java/com/synexia/dictshared/core/AcronymLexicon.java"
+            manifest = root / "sources.tsv"
+            manifest.write_text(
+                "\t".join(EXPORT.MANIFEST_COLUMNS_V3) + "\n"
+                + "\t".join((translation_id, "Translation rows", translation_path, "translation_id",
+                              "language_tag,source_id,target_id", "M3StringFacts + TranslationMapping",
+                              "Apache-2.0", "fixture", "-", "translation_grammar_supported")) + "\n"
+                + "\t".join((acronym_id, "Acronyms", acronym_path, "acronym_id", "expansion,domain",
+                              "M3StringFacts + AcronymPrecompute", "Apache-2.0", "fixture", "-",
+                              "acronym_domain")) + "\n",
+                encoding="utf-8",
+            )
+            records = root / "records.tsv"
+            original = (
+                "\t".join(EXPORT.RECORD_COLUMNS_V2) + "\n"
+                + "\t".join((translation_id, translation_path, "translation", "en", "en:one", "hello",
+                              "en:one", "HELLO", "en->fr", "M3StringFacts + TranslationMapping",
+                              '{"translation_grammar_supported":true}')) + "\n"
+                + "\t".join((translation_id, translation_path, "translation", "it", "it:two", "ciao",
+                              "it:two", "CIAO", "it->en", "M3StringFacts + TranslationMapping", "{}")) + "\n"
+                + "\t".join((acronym_id, acronym_path, "acronym", "und", "AI", "AI",
+                              "acronym:AI", "AI", "-", "M3StringFacts + AcronymPrecompute",
+                              '{"acronym_domain":"computing"}')) + "\n"
+            )
+            records.write_text(original, encoding="utf-8")
+            output = root / "output"
+            EXPORT.export(manifest, records, output, "fixture", "3e85c872adf556901a341a9eb1c3b59864918da1",
+                          ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
+            export_manifest = json.loads((output / "synexia.export.json").read_text(encoding="utf-8"))
+            types = export_manifest["source"]["precompute_field_types"]
+            self.assertEqual("boolean", types["translation_grammar_supported"])
+            self.assertEqual("string", types["acronym_domain"])
+            VERIFY.verify(output)
+
+            records.write_text(original.replace(
+                '{"translation_grammar_supported":true}',
+                '{"translation_grammar_supported":1}', 1), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "field translation_grammar_supported is not boolean"):
+                EXPORT.export(manifest, records, root / "bad-translation", "fixture",
+                              "3e85c872adf556901a341a9eb1c3b59864918da1",
+                              ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
+
+            records.write_text(original.replace(
+                '{"acronym_domain":"computing"}',
+                '{"acronym_domain":17}', 1), encoding="utf-8")
+            with self.assertRaisesRegex(ValueError, "field acronym_domain is not string"):
+                EXPORT.export(manifest, records, root / "bad-acronym", "fixture",
                               "3e85c872adf556901a341a9eb1c3b59864918da1",
                               ROOT / "m3/lexicon/synexia-precompute-field-map.tsv")
 
