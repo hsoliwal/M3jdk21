@@ -22,8 +22,8 @@ final class A3LabTest {
         List<A3Lab.Result> results = A3Lab.run();
 
         assertEquals(48, A3Lab.fixtureCount());
-        assertEquals(17, A3Lab.scheduleCount());
-        assertEquals(816, results.size());
+        assertEquals(6, A3Lab.scheduleCount());
+        assertEquals(288, results.size());
         assertTrue(results.stream().allMatch(A3Lab.Result::fixedPoint));
         assertTrue(results.stream().allMatch(A3Lab.Result::behaviorStable));
         assertTrue(results.stream().allMatch(A3Lab.Result::contractStable));
@@ -33,13 +33,6 @@ final class A3LabTest {
         assertTrue(
                 results.stream()
                         .filter(result -> result.subset().equals("A+P"))
-                        .map(A3Lab.Result::afterSha)
-                        .distinct()
-                        .count()
-                        <= A3Lab.fixtureCount());
-        assertTrue(
-                results.stream()
-                        .filter(result -> result.subset().equals("A+D+P"))
                         .map(A3Lab.Result::afterSha)
                         .distinct()
                         .count()
@@ -62,8 +55,6 @@ final class A3LabTest {
         assertTrue(firstTsv.contains("\tP>A\tA+P\t"));
         assertTrue(firstTsv.contains("\tA>P>A\tA+P\t"));
         assertTrue(firstTsv.contains("\tP>A>P\tA+P\t"));
-        assertTrue(firstTsv.contains("\tA>P>D\tA+D+P\t"));
-        assertTrue(firstTsv.contains("\tD>P>A\tA+D+P\t"));
     }
 
     @Test
@@ -119,16 +110,12 @@ final class A3LabTest {
     }
 
     @Test
-    void singleLeafAndOrderSchedulesRemainHonest() throws Exception {
+    void patternizeOnlyIsHonestNoChangeWhileAtomizeChanges() throws Exception {
         List<A3Lab.Result> results = A3Lab.run();
 
         assertFalse(
                 results.stream()
                         .filter(result -> result.schedule().equals("P"))
-                        .anyMatch(A3Lab.Result::changed));
-        assertFalse(
-                results.stream()
-                        .filter(result -> result.schedule().equals("D"))
                         .anyMatch(A3Lab.Result::changed));
         assertTrue(
                 results.stream()
@@ -150,15 +137,6 @@ final class A3LabTest {
                         .toList(),
                 results.stream()
                         .filter(result -> result.schedule().equals("P>A>P"))
-                        .map(A3Lab.Result::afterSha)
-                        .toList());
-        assertEquals(
-                results.stream()
-                        .filter(result -> result.schedule().equals("A>P>D"))
-                        .map(A3Lab.Result::afterSha)
-                        .toList(),
-                results.stream()
-                        .filter(result -> result.schedule().equals("D>P>A"))
                         .map(A3Lab.Result::afterSha)
                         .toList());
     }
