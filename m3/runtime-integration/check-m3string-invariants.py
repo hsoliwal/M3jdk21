@@ -553,6 +553,15 @@ for fragment in [
 if "M3String asciiCase(boolean upper)" not in m3:
     fail("M3String ROOT ASCII canonical case mapper missing")
 
+# Builder coder selection may use exact M3 range facts locally. This does not change the
+# String/HotSpot coder; it only avoids inflating a Latin1 builder for a Latin1-only M3 range.
+for fragment in [
+    "M3String storage = input.m3();",
+    "if (!storage.facts().latin1) {",
+]:
+    if fragment not in abstract_builder:
+        fail(f"AbstractStringBuilder M3 range-coder decision missing: {fragment}")
+
 # AbstractStringBuilder must not materialize M3 String.value() while appending String ranges.
 for fragment in [
     "M3String storage = s.m3();",
