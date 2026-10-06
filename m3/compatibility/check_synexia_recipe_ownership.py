@@ -12,6 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 LEDGER = Path(__file__).with_name("synexia-recipe-ownership.tsv")
+PIN = Path(__file__).with_name("synexia-recipe-home-pin.tsv")
 HEX40 = re.compile(r"[0-9a-f]{40}")
 
 
@@ -20,6 +21,50 @@ def git_blob(path: Path) -> str:
     header = f"blob {len(data)}\0".encode("ascii")
     return hashlib.sha1(header + data).hexdigest()
 
+
+
+def load_pin(path: Path = PIN) -> dict[str, str]:
+    with path.open("r", encoding="utf-8", newline="") as stream:
+        reader = csv.DictReader(stream, delimiter="\t")
+        expected = [
+            "schema",
+            "canonical_repository",
+            "canonical_revision",
+            "canonical_manifest_path",
+            "canonical_manifest_git_blob",
+            "convergence_invariant_path",
+            "convergence_invariant_git_blob",
+            "license",
+            "state",
+        ]
+        if reader.fieldnames != expected:
+            raise ValueError("invalid Synexia recipe-home pin header")
+        rows = list(reader)
+    if len(rows) != 1:
+        raise ValueError("Synexia recipe-home pin must contain exactly one row")
+    row = rows[0]
+    if any(not row[field] for field in expected):
+        raise ValueError("blank Synexia recipe-home pin field")
+    if row["schema"] != "M3JDK21_SYNEXIA_RECIPE_HOME_PIN_V1":
+        raise ValueError("invalid Synexia recipe-home pin schema")
+    if row["canonical_repository"] != "hsoliwal/com.synexia":
+        raise ValueError("unexpected Synexia canonical repository")
+    if not HEX40.fullmatch(row["canonical_revision"]):
+        raise ValueError("invalid Synexia canonical revision")
+    if row["canonical_manifest_path"] != "synexia-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv":
+        raise ValueError("unexpected Synexia canonical manifest")
+    if row["convergence_invariant_path"] != (
+        "docs/M3-SCALE/invariants/SYNEXIA-PUBLIC-TARGET-CONVERGENCE-1.json"
+    ):
+        raise ValueError("unexpected Synexia convergence invariant")
+    for field in ("canonical_manifest_git_blob", "convergence_invariant_git_blob"):
+        if not HEX40.fullmatch(row[field]):
+            raise ValueError(f"invalid pinned Git blob: {field}")
+    if row["license"] != "Apache-2.0":
+        raise ValueError("canonical Synexia recipe fast lane must remain Apache-2.0")
+    if row["state"] != "PINNED_CANONICAL_SOURCE":
+        raise ValueError("invalid Synexia recipe-home pin state")
+    return row
 
 def load(path: Path = LEDGER) -> list[dict[str, str]]:
     with path.open("r", encoding="utf-8", newline="") as stream:
@@ -74,6 +119,9 @@ def load(path: Path = LEDGER) -> list[dict[str, str]]:
 
     if len(revisions) != 1:
         raise ValueError("one handoff must bind one exact Synexia revision")
+    pin = load_pin()
+    if revisions != {pin["canonical_revision"]}:
+        raise ValueError("borrowed recipe mirrors do not match pinned Synexia canonical revision")
     return rows
 
 
@@ -82,8 +130,13 @@ def main(argv: list[str]) -> int:
         print("usage: check_synexia_recipe_ownership.py", file=sys.stderr)
         return 2
     rows = load()
+    pin = load_pin()
     revision = rows[0]["synexia_revision"]
-    print(f"SYNEXIA_RECIPE_OWNERSHIP_PASS rows={len(rows)} revision={revision}")
+    print(
+        "SYNEXIA_RECIPE_OWNERSHIP_PASS "
+        f"rows={len(rows)} revision={revision} "
+        f"manifest_blob={pin['canonical_manifest_git_blob']}"
+    )
     return 0
 
 
