@@ -563,6 +563,31 @@ public class M3StringPrecomputeSearchTest {
         check(multiLine.lines().toList().equals(java.util.List.of("a", "b", "c")),
                 "prepared multi-line preserves line semantics");
 
+        String longLines = String.join(
+                "",
+                "a".repeat(63),
+                "\r\n",
+                "b".repeat(64),
+                "\n",
+                "c".repeat(127),
+                "\r",
+                "d".repeat(128),
+                "\r\n",
+                "e".repeat(257));
+        var expectedLongLines = java.util.List.of(
+                "a".repeat(63),
+                "b".repeat(64),
+                "c".repeat(127),
+                "d".repeat(128),
+                "e".repeat(257));
+        check(longLines.lines().toList().equals(expectedLongLines),
+                "position-precomputed long lines");
+        check(longLines.lines().toList().equals(expectedLongLines),
+                "position-precomputed long lines reused");
+        String trailingLines = String.join("", "x".repeat(300), "\r\n");
+        check(trailingLines.lines().toList().equals(java.util.List.of("x".repeat(300))),
+                "position-precomputed trailing CRLF");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
