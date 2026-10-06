@@ -36,6 +36,25 @@ Synexia's language-local word-ID planes have a different scope. If a future JDK 
 language dictionary, its precompute must share that subsystem's one canonical coordinate generation;
 it must not create separate RE2/J-, Lucene-, or reasoning-owned vocabularies.
 
+## Implementation evolution
+
+`jdk.internal.mindex` is an implementation boundary, not a permanent ABI. The current Java
+realization is neither claimed to be the first nor expected to be the last.
+
+A later Java, JNI, vector, mapped, compiler-assisted, or other JDK-owned realization may replace or
+coexist with an earlier one when it preserves:
+
+- exact Java/String/regex semantics for the consumer;
+- canonical M3 owner/coordinate identity rules;
+- absence/eviction fallback behavior;
+- memory/lifecycle bounds;
+- VM/JNI compatibility boundaries;
+- differential and runtime proof gates.
+
+Historical provenance remains attached to the exact implementation revision that was reviewed. A
+new implementation receives its own provenance and proof record rather than inheriting ownership
+claims from an older one.
+
 ## Domain versus implementation provenance
 
 M3JDK does not attribute ownership of abstract domains to external projects. Language, reasoning,
