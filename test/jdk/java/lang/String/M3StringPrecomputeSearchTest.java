@@ -411,6 +411,23 @@ public class M3StringPrecomputeSearchTest {
         check(deprecatedBytes[deprecatedBytes.length - 1] == (byte) 0x55,
                 "deprecated getBytes suffix untouched");
 
+        String builderSource = String.join("", "ab", "\u0100", "cd", "\ud83d\ude42", "ef");
+        StringBuilder builderWhole = new StringBuilder();
+        builderWhole.append(builderSource);
+        check(builderWhole.toString().equals(builderSource), "StringBuilder append M3 whole");
+
+        StringBuilder builderRange = new StringBuilder("L");
+        builderRange.append(builderSource, 1, builderSource.length() - 1);
+        check(builderRange.toString().equals(
+                        "L" + builderSource.substring(1, builderSource.length() - 1)),
+                "StringBuilder append M3 range");
+
+        StringBuilder builderLatinRange = new StringBuilder("P");
+        String utf16OwnerLatinRange = String.join("", "\u0100", "latin", "\u0101");
+        builderLatinRange.append(utf16OwnerLatinRange, 1, 6);
+        check(builderLatinRange.toString().equals("Platin"),
+                "StringBuilder late inflation M3 Latin range");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
