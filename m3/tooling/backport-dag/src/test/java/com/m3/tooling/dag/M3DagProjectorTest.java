@@ -40,8 +40,9 @@ final class M3DagProjectorTest {
                                 M3DagProjectionFormat.AIRFLOW_PYTHON)
                         .content();
 
-        assertTrue(source.contains("n_file_delta >> n_packet_java"));
-        assertTrue(source.contains("n_file_delta >> n_packet_text"));
+        assertTrue(source.contains("n_file_delta >> n_a3_preparation"));
+        assertTrue(source.contains("n_a3_preparation >> n_packet_java"));
+        assertTrue(source.contains("n_a3_preparation >> n_packet_text"));
         assertTrue(source.contains("n_packet_java >> n_packet_join"));
         assertTrue(source.contains("n_packet_text >> n_packet_join"));
         assertTrue(source.contains("n_packet_join >> n_recipe_junit"));
