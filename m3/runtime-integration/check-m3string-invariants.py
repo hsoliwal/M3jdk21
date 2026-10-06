@@ -26,6 +26,7 @@ tuple_ = read("src/java.base/share/classes/java/lang/M3StringTuple.java")
 facts = read("src/java.base/share/classes/java/lang/M3StringFacts.java")
 search_precompute = read("src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java")
 position_precompute = read("src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java")
+codepoint_precompute = read("src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java")
 tq = read("src/java.base/share/classes/jdk/internal/mindex/M3TQ.java")
 string = read("src/java.base/share/classes/java/lang/String.java")
 symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
@@ -204,6 +205,45 @@ for fragment in [
 ]:
     if fragment not in string:
         fail(f"String supplementary M3 route missing: {fragment}")
+
+# Code-point range/navigation precompute is a separate bounded weak-owner lane.
+# It retains primitive cumulative surrogate-pair counts only; it is never M3String/M3StringOwner
+# payload and must fail open to exact traversal under budget/allocation pressure.
+for fragment in [
+    "private static final int SLOTS = 64;",
+    "private static final int MAX_SOURCE_UNITS = 32_768;",
+    "WeakReference<M3StringOwner>",
+    "final int[] pairsBeforeBlock;",
+    "static int codePointCount(M3String source, int beginIndex, int endIndex)",
+    "static int offsetByCodePoints(M3String source, int index, int codePointOffset)",
+    "catch (OutOfMemoryError unavailable)",
+    "linearCodePointCount(source, beginIndex, endIndex)",
+    "linearOffsetByCodePoints(source, index, codePointOffset)",
+    "static long maximumRetainedPrimitiveBytes()",
+]:
+    if fragment not in codepoint_precompute:
+        fail(f"M3 code-point navigation precompute invariant missing: {fragment}")
+for forbidden in [
+    r"\bString\s+\w+\s*;",
+    r"\bchar\[\]\s+\w+\s*;",
+    r"\bbyte\[\]\s+\w+\s*;",
+    r"\bM3String\s+\w+\s*;",
+    r"\bM3StringOwner\s+\w+\s*;",
+]:
+    if re.search(forbidden, codepoint_precompute):
+        fail(f"M3 code-point precompute retains forbidden payload/strong owner: {forbidden}")
+for fragment in [
+    "return M3StringCodePointPrecompute.codePointCount(this, beginIndex, endIndex);",
+    "return M3StringCodePointPrecompute.offsetByCodePoints(this, index, codePointOffset);",
+]:
+    if fragment not in m3:
+        fail(f"M3String code-point precompute route missing: {fragment}")
+for fragment in [
+    "return storage.codePointCount(beginIndex, endIndex);",
+    "return storage.offsetByCodePoints(index, codePointOffset);",
+]:
+    if fragment not in string:
+        fail(f"java.lang.String code-point M3 route missing: {fragment}")
 
 # Exact trigram membership is owned by M3TQ.Facts and reused by a separate bounded weak
 # source-range cache. Do not duplicate exact trigram arrays in M3StringFacts.
