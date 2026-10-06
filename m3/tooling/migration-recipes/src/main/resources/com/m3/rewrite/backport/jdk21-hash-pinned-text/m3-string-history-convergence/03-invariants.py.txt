@@ -34,6 +34,7 @@ inline = read("src/hotspot/share/classfile/javaClasses.inline.hpp")
 stringopts = read("src/hotspot/share/opto/stringopts.cpp")
 archive_writer = read("src/hotspot/share/cds/archiveHeapWriter.cpp")
 dedup = read("src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp")
+stringtable = read("src/hotspot/share/classfile/stringTable.cpp")
 mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
@@ -104,13 +105,25 @@ for fragment in [
 # Position masks are a separate bounded weak-owner lane. They store one conservative signal per
 # 64 UTF-16 units and may skip blocks only on a negative signal.
 for fragment in [
+    "final AtomicReferenceArray<ExactBlock> exact;",
+    "Arrays.binarySearch(units, unit)",
+    "Long.numberOfTrailingZeros(positions)",
+    "Long.numberOfLeadingZeros(positions)",
+    "MAX_SOURCE_UNITS * (Character.BYTES + Long.BYTES)",
+]:
+    if fragment not in position_precompute:
+        fail(f"M3 exact position-mask layer missing: {fragment}")
+
+for fragment in [
     "private static final int BLOCK_SIZE = 1 << BLOCK_SHIFT;",
     "private static final int SLOTS = 64;",
     "private static final int MAX_SOURCE_UNITS = 32_768;",
     "WeakReference<M3StringOwner>",
-    "long[] signals",
+    "AtomicLongArray signals",
     "M3StringFacts.codeUnitSignal(unit)",
     "static long maximumRetainedPrimitiveBytes()",
+    "blockSignal(source, blocks, block)",
+    "compareAndSet(block, 0L, computed)",
 ]:
     if fragment not in position_precompute:
         fail(f"M3 position precompute invariant missing: {fragment}")
@@ -154,7 +167,7 @@ for fragment in [
         fail(f"M3 exact trigram search reuse missing: {fragment}")
 for fragment in [
     "static long maximumRetainedPrimitiveBytes()",
-    "(long) SLOTS * MAX_PATTERN_UNITS * (Integer.BYTES + Long.BYTES)",
+    "(long) SLOTS * MAX_PATTERN_UNITS * (2L * Integer.BYTES + Long.BYTES)",
     "(long) SOURCE_SLOTS * MAX_TRIGRAM_SOURCE_UNITS * Long.BYTES",
 ]:
     if fragment not in search_precompute:
@@ -182,7 +195,11 @@ if "private static final int SLOTS = 256;" not in search_precompute:
 if "private static final int MAX_PATTERN_UNITS = 8_192;" not in search_precompute:
     fail("M3StringSearchPrecompute pattern budget changed without invariant review")
 if "final int[] prefix;" not in search_precompute:
-    fail("prepared search plan lost primitive KMP metadata")
+    fail("prepared search plan lost forward KMP metadata")
+if "final int[] reversePrefix;" not in search_precompute:
+    fail("prepared search plan lost reverse KMP metadata")
+if "return index;" not in search_precompute or "reverseUnit(pattern, matched)" not in search_precompute:
+    fail("prepared reverse KMP execution path missing")
 for encoding_marker in [
     "byte[] encode(Charset charset)",
     "private byte[] encodeUtf8()",
@@ -287,6 +304,17 @@ if "m3TqFactsText" in matcher:
     fail("Matcher TQ cache must not retain a duplicate strong input reference")
 if "m3TqFacts = null;" not in matcher or "m3TqFactsFrom = -1;" not in matcher:
     fail("Matcher reset must invalidate cached TQ facts")
+
+# Ordinary StringTable hashing must consume M3's exact Java hash directly. Defensive alternate
+# halfsiphash remains UTF-16 based, and intern identity/equality stays with the existing table.
+for fragment in [
+    "if (!_alt_hash)",
+    "return java_lang_String::hash_code_noupdate(val_oop);",
+    "jchar* chars = java_lang_String::as_unicode_string_or_null(val_oop, length);",
+    "return hash_string(chars, length, true);",
+]:
+    if fragment not in stringtable:
+        fail(f"M3 StringTable hash path missing: {fragment}")
 
 # Donor class naming must not leak back into live VM symbols/layout.
 for path, text in [
@@ -396,12 +424,29 @@ if "if (java_lang_String::is_m3_joined(string))" not in archive_writer:
     fail("CDS String sizing is not fail-closed for M3 values")
 
 
+# Escape translation must scan canonical M3 storage and rebuild from slices/unit atoms; the
+# stock char[] implementation remains fallback-only for non-M3 Strings.
+for fragment in [
+    "M3String translateEscapes()",
+    "pieces.add(M3StringPool.internUnit(escaped))",
+    "return new String(storage.translateEscapes());",
+]:
+    if fragment not in (m3 + string):
+        fail(f"M3 translateEscapes canonical route missing: {fragment}")
+
+if "if (M3String.admissionEnabled())" not in string
+        or "return new String(M3StringPool.internUnit(c));" not in string:
+    fail("String.valueOf(char) does not use direct M3 unit interning after activation")
+
 # Canonical single-unit transforms must re-enter the native pool directly rather than create
 # temporary one-character String/byte[] payloads.
 for fragment in [
     "static M3String internUnit(char unit)",
+    "active.findUnit(unit)",
+    "return M3String.whole(active.atom(row))",
     "M3StringAtom.localUnit(unit, coder, id, hash64)",
     "existing.charAt(0) == unit",
+    "int findUnit(char unit)",
 ]:
     if fragment not in pool:
         fail(f"M3 direct unit interning missing: {fragment}")
@@ -453,9 +498,14 @@ for fragment in [
     if fragment not in port_map:
         fail(f"precompute port map missing: {fragment}")
 
+if "M3StringPrecomputeSearchTest.java test/jdk/" in workflow:
+    fail("M3 String workflow contains concatenated path entries")
+
 for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringPrecomputeSearchTest.java",
+    "M3StringInternTest.java",
+    "M3StringInternTest.java",
     "M3TQFactsTest.java",
     "M3RegexLiteralTQTest.java",
     "M3StringHistoryConvergenceRecipeTest",
