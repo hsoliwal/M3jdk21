@@ -16,7 +16,7 @@ final class M3JepResidueDagPlannerTest {
     @Test
     void actualJdk22To27ResidueQueueBindsEveryRowToOneAuthorityFreeWorkOrder()
             throws Exception {
-        Path queuePath = Path.of("..", "..", "backports", "JEP_RESIDUE_QUEUE.tsv");
+        Path queuePath = residueQueuePath();
         M3JepResidueQueue.Queue queue =
                 M3JepResidueQueue.parse(Files.readString(queuePath, StandardCharsets.UTF_8));
         M3NebulaTransferAdmission.Receipt transfer =
@@ -46,6 +46,18 @@ final class M3JepResidueDagPlannerTest {
                 plan.rows().stream().limit(5).map(M3JepResidueDagPlanner.WorkOrder::jep).toList());
         assertTrue(queue.requireJep(458).hasRecipeEvidence());
         assertFalse(queue.requireJep(423).hasRecipeEvidence());
+    }
+
+    private static Path residueQueuePath() {
+        for (Path candidate :
+                List.of(
+                        Path.of("m3", "backports", "JEP_RESIDUE_QUEUE.tsv"),
+                        Path.of("..", "..", "backports", "JEP_RESIDUE_QUEUE.tsv"))) {
+            if (Files.isRegularFile(candidate)) {
+                return candidate;
+            }
+        }
+        throw new IllegalStateException("cannot locate JEP_RESIDUE_QUEUE.tsv");
     }
 
     @Test
