@@ -54,7 +54,7 @@ class java_lang_Object : AllStatic {
 class java_lang_String : AllStatic {
  private:
   static int _value_offset;
-  static int _mindex_offset;
+  static int _m3_offset;
   static int _hash_offset;
   static int _hashIsZero_offset;
   static int _coder_offset;
@@ -104,7 +104,7 @@ class java_lang_String : AllStatic {
   static void set_m3_joined_strings(bool value);
 
   static int value_offset() { CHECK_INIT(_value_offset); }
-  static int m3_storage_offset() { CHECK_INIT(_mindex_offset); }
+  static int m3_storage_offset() { CHECK_INIT(_m3_offset); }
   static int coder_offset() { CHECK_INIT(_coder_offset); }
 
   static inline void set_value_raw(oop string, typeArrayOop buffer);
@@ -206,47 +206,46 @@ class java_lang_String : AllStatic {
 };
 
 /**
- * VM access to java.lang.MIndexString.  The Java object owns the GC-visible
- * segment references; HotSpot reads the immutable coordinate arrays directly
- * for JNI/StringTable/debug paths that cannot assume contiguous String.value.
+ * VM access to java.lang.M3String and its canonical owner graph.
+ *
+ * M3String itself is exactly owner + packed range coordinate. Payload arrays are
+ * not part of this layout. Atom owners address native/mapped bytes; tuple owners
+ * retain only child M3String coordinates.
  */
-class java_lang_MIndexString : AllStatic {
+class java_lang_M3String : AllStatic {
  private:
-  static int _storageKind_offset;
-  static int _localValue_offset;
-  static int _mappedAddress_offset;
-  static int _segments_offset;
-  static int _offsets_offset;
-  static int _ends_offset;
-  static int _length_offset;
-  static int _coder_offset;
-  static int _javaHash_offset;
+  static int _owner_offset;
+  static int _value_offset;
+
+  static int _owner_kind_offset;
+  static int _owner_length_offset;
+  static int _owner_coder_offset;
+  static int _owner_javaHash_offset;
+  static int _owner_facts_offset;
+  static int _facts_utf8Length_offset;
+
+  static int _atom_address_offset;
+  static int _atom_storageWidth_offset;
+  static int _atom_bigEndian_offset;
+
+  static int _tuple_left_offset;
+  static int _tuple_right_offset;
 
  public:
-  enum StorageKind {
-    EMPTY = 0,
-    LOCAL = 1,
-    LEXICON = 2,
-    JOINED = 3,
-    SHARED_LEXICON = 4
-  };
-
   static void compute_offsets();
   static void serialize_offsets(SerializeClosure* f) NOT_CDS_RETURN;
 
-  static inline jbyte storage_kind(oop storage);
-  static inline typeArrayOop local_value(oop storage);
-  static inline jlong mapped_address(oop storage);
-  static inline objArrayOop segments(oop storage);
-  static inline typeArrayOop offsets(oop storage);
-  static inline typeArrayOop ends(oop storage);
-  static inline int length(oop storage);
-  static inline jbyte coder(oop storage);
-  static inline jint java_hash(oop storage);
-  static inline jchar char_at(oop storage, int index);
-  static void copy_chars(oop storage, int start, int len, jchar* destination);
+  static inline oop owner(oop value);
+  static inline jlong coordinate(oop value);
+  static inline int start(oop value);
+  static inline int length(oop value);
+  static inline int owner_length(oop value);
+  static inline jbyte coder(oop value);
+  static inline jint java_hash(oop value);
+  static inline int utf8_length_if_precomputed(oop value);
+  static inline jchar char_at(oop value, int index);
+  static void copy_chars(oop value, int start, int len, jchar* destination);
 };
-
 
 // Interface to java.lang.Class objects
 

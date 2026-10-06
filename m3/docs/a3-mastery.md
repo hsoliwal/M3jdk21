@@ -10,8 +10,8 @@ A3 already provides the whole-JDK front door:
 inventory -> atomize -> patternize -> absorb
 ```
 
-The mastery gate continuously qualifies the atomize/patternize/document recipes against a
-deliberately difficult generated corpus rather than only clean hand-written examples.
+The next requirement is to make the atomize/patternize recipes improve against a deliberately
+difficult generated corpus rather than only clean hand-written examples.
 
 The compiler and tests are authoritative. An LLM may propose new signals or recipe changes, but
 qualification is mechanical.
@@ -66,19 +66,6 @@ The generated fixtures intentionally combine real code and code-looking data. Ea
 small deterministic `probe(int)` method so the original and transformed class can be executed in
 fresh class loaders and compared over a fixed input domain.
 
-## A3M receipt gate
-
-A3M is the short tool-plane name for the mastery receipt gate. One `mastery` run executes the
-complete live laboratory, writes the deterministic result table, and binds it to exact SHA-256 pins
-for the active A3 fixture/compiler/regex owners, the Atomize/Patternize/Document leaves, the
-convergence owner, and both Maven dependency descriptors.
-
-CLI `apply` requires this receipt. If any pinned source/dependency changes, or if the retained lab
-result table/pin manifest changes, absorption fails closed until mastery is rerun.
-
-The receipt is evidence only. It grants no JDK source-write, compatibility, JNI/native, JEP or
-promotion authority.
-
 ## Multipass rule
 
 A recipe is not mastered because one application succeeds.
@@ -90,10 +77,8 @@ For every admitted fixture:
 3. repeated campaign execution over the same corpus must emit identical receipts;
 4. any counterexample becomes a permanent fixture before the recipe is widened.
 
-The live campaign covers all non-empty ordered subsets of Atomize, Patternize and Document plus the
-retained A-P-A/P-A-P stress schedules: 17 schedules across 48 hostile fixtures, or 816 result rows.
-The campaign remains bounded for CI, and the deterministic fixture generator allows later expansion
-without weakening existing counterexamples.
+The campaign is bounded for CI, but the fixture generator is deterministic so stronger campaigns can
+raise the case/input budget without changing semantics.
 
 ## Thicker regex/string precompute
 
@@ -131,7 +116,3 @@ Java oracle is established first and the existing native/JNI differential lane r
 Changes to the mastery machinery itself are delivered by a reusable Maven/OpenRewrite installer
 recipe with exact source images and fixed-point tests. The task is to improve that recipe and its
 fixtures, not hand-edit every JDK source file.
-
-The A3 Maven module exposes profile `m3-a3-mastery-receipt-delivery`, which activates the named
-recipe `com.m3.a3.MasteryReceiptDelivery`. On an already-materialized postimage, a
-`rewrite:dryRunNoFork` invocation through that profile must be a zero-diff fixed point.

@@ -58,7 +58,7 @@ final class A3RegexMatrix {
                     "if (x) { return y; }",
                     "switch (kind) { case 0 -> 1; default -> 2; }",
                     "record Pair(int left, int right) {}",
-                    "Pattern.compile(\"a+b?\")",
+                    "Pattern.compile("a+b?")",
                     "M3-IOP: PURE_INT_EXPRESSION",
                     "m3$pureIntAtom",
                     "// return (a+b)*31;",

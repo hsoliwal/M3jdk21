@@ -5,7 +5,7 @@ import os,pathlib,subprocess,time,json,hashlib,shutil,concurrent.futures
 r=pathlib.Path(os.environ['M3_RESULTS']); java=str(pathlib.Path(os.environ['M3_TEST_JDK'])/'bin/java')
 source=r/'shared-owner/arena.bin';shared=r/'shared-two-process.bin';shutil.copy2(source,shared)
 before=hashlib.sha256(shared.read_bytes()).hexdigest();stat=shared.stat()
-flags=['-ea','-esa','-XX:+UnlockExperimentalVMOptions','-XX:+UseM3StringStorage','-XX:-CreateCoredumpOnCrash','--add-opens','java.base/java.lang=ALL-UNNAMED', '-Djdk.mindex.lexicon='+str(shared),'-Dm3.expect.lexicon=true','-Dm3.shared.owner=true','-cp',str(r/'classes'),'MIndexIntegration','hold']
+flags=['-ea','-esa','-XX:+UnlockExperimentalVMOptions','-XX:+UseM3StringStorage','-XX:-CreateCoredumpOnCrash','--add-opens','java.base/java.lang=ALL-UNNAMED', '-Djdk.mindex.lexicon='+str(shared),'-Dm3.expect.lexicon=true','-Dm3.shared.owner=true','-cp',str(r/'classes'),'M3StringIntegration','hold']
 ps=[];lines=[[],[]]
 try:
  for i in range(2):
@@ -35,7 +35,7 @@ try:
  for i,p in enumerate(ps):
   out,_=p.communicate('\n',timeout=60);lines[i].append(out)
   assert p.returncode==0 and 'MAPPING_LIFETIME_PASS' in out,lines[i]
- print('MINDEX_TWO_PROCESS_PASS same_inode='+str(stat.st_ino)+' same_atom_id='+ids[0]+' unlink_gc_retained=true')
+ print('M3_STRING_TWO_PROCESS_PASS same_inode='+str(stat.st_ino)+' same_canonical_id='+ids[0]+' unlink_gc_retained=true')
  (r/'two-process.json').write_text(json.dumps({'inode':stat.st_ino,'sha256':before,'ids':ids,'maps':mapped,'unlink_gc_retained':True},indent=2)+'\n')
 finally:
  for p in ps:

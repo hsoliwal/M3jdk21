@@ -17,7 +17,6 @@ import com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe;
 import com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe;
 import com.m3.rewrite.backport.M3VerbatimJavaPairRecipe;
 import com.m3.rewrite.backport.M3Jep458BackportRecipe;
-import com.m3.rewrite.backport.M3Jep485StreamGatherersBackportRecipe;
 import com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe;
 import com.synexia.rewrite.M3MIndexJoinedCharsViewRecipe;
 import com.synexia.rewrite.M3SegmentedLaneNativeRecipe;
@@ -27,7 +26,7 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(16, M3RecipeScopeRegistry.size());
+        assertEquals(15, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered("org.openrewrite.java.RemoveUnusedImports"));
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
@@ -43,15 +42,10 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3Jdk21HashPinnedTextSnapshotRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3VerbatimJavaPairRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jep458BackportRecipe.class.getName()));
-        assertTrue(M3RecipeScopeRegistry.registered(M3Jep485StreamGatherersBackportRecipe.class.getName()));
         var jep = M3RecipeScopeRegistry.require(M3Jep458BackportRecipe.class);
         assertEquals(M3EditScope.LIBRARY_API, jep.minimumScope());
         assertEquals(M3ContractMode.EXPLICIT_CONTRACT_CHANGE, jep.contractMode());
         assertFalse(jep.fileLocalMechanical(List.of("src/main/java/a/A.java")));
-        var gatherers = M3RecipeScopeRegistry.require(M3Jep485StreamGatherersBackportRecipe.class);
-        assertEquals(M3EditScope.LIBRARY_API, gatherers.minimumScope());
-        assertEquals(M3ContractMode.EXPLICIT_CONTRACT_CHANGE, gatherers.contractMode());
-        assertFalse(gatherers.fileLocalMechanical(List.of("src/main/java/a/A.java")));
         assertFalse(M3RecipeScopeRegistry.registered(null));
         assertFalse(M3RecipeScopeRegistry.registered("missing.Recipe"));
         assertThrows(NullPointerException.class, () -> M3RecipeScopeRegistry.require((Class<?>) null));

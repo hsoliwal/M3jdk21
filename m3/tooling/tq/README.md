@@ -113,12 +113,9 @@ the exact executed boundary, counters, tools, source hashes and remaining work.
 Local runtime evidence patches the three internal classes into a stock Java 21
 `java.base`; it is not a rebuilt M3JDK image pass. `.github/workflows/m3-tq.yml`
 separately builds the complete fastdebug image, then runs `verify-image.sh`
-without patch-module in four normal modes plus three M3 interpreter-boundary
-requests (C1, C2 and noncompact C2). The current `UseM3StringStorage` guard
-forces interpreted execution for these requests; they are not JIT evidence. That gate must run against the PR tree; a queued or absent job is not a
-pass. The image script requires JNI checks, actual compiled kernels for normal
-C1/C2, and interpreted mode with zero compiled methods for M3 requests.
-See `../image-gates/README.md` for captured full-image evidence and scope.
+without patch-module in seven modes, including M3-enabled C1/C2 and noncompact
+strings. That gate must run against the PR tree; a queued or absent job is not a
+pass. The image script also requires JNI checks and compiled kernel evidence.
 
 This bounded crate does not waive the existing full migration-recipes reactor,
 99% coverage gate, complete jtreg/TCK, GC/CDS/JVMTI/JFR, platform, memory and
@@ -135,15 +132,3 @@ internal package, and the explicit canonical-backing reader. The native oracle
 changes its JNI include and generated test symbol prefix. The distribution
 notice scopes these files; existing OpenJDK and other donor licenses remain in
 force. No challenge-site solution or newly found third-party code was copied.
-
-## Serial port follow-ups
-
-A later port may append mappings and distribution notices. On such a tree, run
-`python3 m3/tooling/tq/verify-plan.py` after this crate's Maven gate. It verifies
-all TQ-owned product/test/workflow bytes exactly, permits only additive shared
-mapping/naming/notice content, and replays the complete historical eight-output
-plan in an isolated fixture for apply/fixed-point/rollback/refusal checks.
-A raw historical `recipe.py check/apply/rollback` against the evolved live tree
-correctly refuses; roll back subsequent packets first or use a matching fixture.
-The parent receipt remains historical evidence for its pinned tree. The Lane28
-receipt records the TQ rerun against the successor verifier and shared mapping.

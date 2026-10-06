@@ -193,7 +193,7 @@ void JavaClasses::compute_offset(int& dest_offset, InstanceKlass* ik,
 // java_lang_String
 
 int java_lang_String::_value_offset;
-int java_lang_String::_mindex_offset;
+int java_lang_String::_m3_offset;
 int java_lang_String::_hash_offset;
 int java_lang_String::_hashIsZero_offset;
 int java_lang_String::_coder_offset;
@@ -216,7 +216,7 @@ bool java_lang_String::test_and_set_flag(oop java_string, uint8_t flag_mask) {
 
 #define STRING_FIELDS_DO(macro) \
   macro(_value_offset, k, vmSymbols::value_name(), byte_array_signature, false); \
-  macro(_mindex_offset, k, "mindex",          mindex_string_signature, false); \
+  macro(_m3_offset, k, "m3",              m3_string_signature,     false); \
   macro(_hash_offset,  k, "hash",                  int_signature,        false); \
   macro(_hashIsZero_offset, k, "hashIsZero",       bool_signature,       false); \
   macro(_coder_offset, k, "coder",                 byte_signature,       false);
@@ -511,94 +511,6 @@ jchar* java_lang_String::as_unicode_string_or_null(oop java_string, int& length)
   return result;
 }
 
-void java_lang_MIndexString::copy_chars(
-    oop storage, int start, int len, jchar* destination) {
-  assert(storage != nullptr, "MIndexString storage is required");
-  assert(destination != nullptr || len == 0, "destination is required for non-empty copy");
-  const int storage_length = length(storage);
-  assert(start >= 0 && len >= 0 && start <= storage_length - len,
-         "MIndexString copy range out of bounds");
-  if (len == 0) {
-    return;
-  }
-
-  const jbyte kind = storage_kind(storage);
-  if (kind == LOCAL) {
-    typeArrayOop value = local_value(storage);
-    if (coder(storage) == java_lang_String::CODER_LATIN1) {
-      for (int i = 0; i < len; i++) {
-        destination[i] = ((jchar)value->byte_at(start + i)) & 0xff;
-      }
-    } else {
-      ArrayAccess<>::arraycopy_to_native(
-          value,
-          (size_t)typeArrayOopDesc::element_offset<jchar>(start),
-          destination,
-          len);
-    }
-    return;
-  }
-
-  if (kind == LEXICON || kind == SHARED_LEXICON) {
-    const jlong address = mapped_address(storage);
-    assert(address != 0, "mapped MIndexString atom must have an address");
-    const uint8_t* bytes = reinterpret_cast<const uint8_t*>((uintptr_t)address);
-    size_t at = (size_t)start << 1;
-    for (int i = 0; i < len; i++, at += 2) {
-      const uint16_t first = bytes[at];
-      const uint16_t second = bytes[at + 1];
-      destination[i] = kind == SHARED_LEXICON
-          ? (jchar)((first << 8) | second)
-          : (jchar)(first | (second << 8));
-    }
-    return;
-  }
-
-  if (kind == JOINED) {
-    objArrayOop segment_array = segments(storage);
-    typeArrayOop offset_array = offsets(storage);
-    typeArrayOop end_array = ends(storage);
-
-    int low = 0;
-    int high = end_array->length() - 1;
-    const int key = start + 1;
-    int segment = -1;
-    while (low <= high) {
-      const int mid = (low + high) >> 1;
-      const int segment_end = end_array->int_at(mid);
-      if (segment_end < key) {
-        low = mid + 1;
-      } else if (mid > 0 && end_array->int_at(mid - 1) >= key) {
-        high = mid - 1;
-      } else {
-        segment = mid;
-        break;
-      }
-    }
-    assert(segment >= 0, "joined MIndexString segment must exist");
-
-    const int logical_end = start + len;
-    int logical = start;
-    int written = 0;
-    while (logical < logical_end) {
-      const int previous = segment == 0 ? 0 : end_array->int_at(segment - 1);
-      const int segment_end = end_array->int_at(segment);
-      const int take = MIN2(logical_end, segment_end) - logical;
-      oop atom = segment_array->obj_at(segment);
-      const int atom_begin =
-          offset_array->int_at(segment) + logical - previous;
-      java_lang_MIndexString::copy_chars(
-          atom, atom_begin, take, destination + written);
-      logical += take;
-      written += take;
-      segment++;
-    }
-    return;
-  }
-
-  ShouldNotReachHere();
-}
-
 void java_lang_String::copy_chars(
     oop java_string, int start, int len, jchar* destination) {
   assert(is_instance(java_string), "must be java.lang.String");
@@ -612,7 +524,7 @@ void java_lang_String::copy_chars(
 
   oop storage = m3_storage(java_string);
   if (storage != nullptr) {
-    java_lang_MIndexString::copy_chars(storage, start, len, destination);
+    java_lang_M3String::copy_chars(storage, start, len, destination);
     return;
   }
 
@@ -672,8 +584,9 @@ inline unsigned int java_lang_String::hash_code_impl(oop java_string, bool updat
   bool     is_latin1 = java_lang_String::is_latin1(java_string);
 
   unsigned int hash = 0;
-  if (is_m3_joined(java_string)) {
-    hash = (unsigned int) java_lang_MIndexString::java_hash(m3_storage(java_string));
+  oop storage = m3_storage(java_string);
+  if (storage != nullptr) {
+    hash = (unsigned int)java_lang_M3String::java_hash(storage);
   } else if (length > 0) {
     if (is_latin1) {
       hash = java_lang_String::hash_code(value->byte_at_addr(0), length);
@@ -782,6 +695,11 @@ Symbol* java_lang_String::as_symbol_or_null(oop java_string) {
 
 int java_lang_String::utf8_length(oop java_string, typeArrayOop value) {
   if (is_m3_joined(java_string)) {
+    oop storage = m3_storage(java_string);
+    int prepared = java_lang_M3String::utf8_length_if_precomputed(storage);
+    if (prepared >= 0) {
+      return prepared;
+    }
     int result = 0;
     int len = length(java_string);
     for (int i = 0; i < len; i++) result += UNICODE::utf8_size(char_at(java_string, i));
@@ -1005,39 +923,77 @@ void java_lang_String::print(oop java_string, outputStream* st) {
   st->print("\"");
 }
 
-// java_lang_MIndexString
+// java_lang_M3String
 
-int java_lang_MIndexString::_storageKind_offset;
-int java_lang_MIndexString::_localValue_offset;
-int java_lang_MIndexString::_mappedAddress_offset;
-int java_lang_MIndexString::_segments_offset;
-int java_lang_MIndexString::_offsets_offset;
-int java_lang_MIndexString::_ends_offset;
-int java_lang_MIndexString::_length_offset;
-int java_lang_MIndexString::_coder_offset;
-int java_lang_MIndexString::_javaHash_offset;
+int java_lang_M3String::_owner_offset;
+int java_lang_M3String::_value_offset;
+int java_lang_M3String::_owner_kind_offset;
+int java_lang_M3String::_owner_length_offset;
+int java_lang_M3String::_owner_coder_offset;
+int java_lang_M3String::_owner_javaHash_offset;
+int java_lang_M3String::_owner_facts_offset;
+int java_lang_M3String::_facts_utf8Length_offset;
+int java_lang_M3String::_atom_address_offset;
+int java_lang_M3String::_atom_storageWidth_offset;
+int java_lang_M3String::_atom_bigEndian_offset;
+int java_lang_M3String::_tuple_left_offset;
+int java_lang_M3String::_tuple_right_offset;
 
-#define MINDEX_STRING_FIELDS_DO(macro) \
-  macro(_storageKind_offset,  k, "storageKind",  byte_signature,                false); \
-  macro(_localValue_offset,   k, "localValue",   byte_array_signature,          false); \
-  macro(_mappedAddress_offset,k, "mappedAddress",long_signature,                false); \
-  macro(_segments_offset,     k, "segments",     mindex_string_array_signature, false); \
-  macro(_offsets_offset,      k, "offsets",      int_array_signature,           false); \
-  macro(_ends_offset,         k, "ends",         int_array_signature,           false); \
-  macro(_length_offset,       k, "length",       int_signature,                 false); \
-  macro(_coder_offset,        k, "coder",        byte_signature,                false); \
-  macro(_javaHash_offset,     k, "javaHash",     int_signature,                 false);
+#define M3_STRING_VALUE_FIELDS_DO(macro) \
+  macro(_owner_offset, v, "owner", m3_string_owner_signature, false); \
+  macro(_value_offset, v, "value", long_signature, false);
 
-void java_lang_MIndexString::compute_offsets() {
-  InstanceKlass* k = vmClasses::MIndexString_klass();
-  MINDEX_STRING_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+#define M3_STRING_OWNER_FIELDS_DO(macro) \
+  macro(_owner_kind_offset, o, "kind", byte_signature, false); \
+  macro(_owner_length_offset, o, "length", int_signature, false); \
+  macro(_owner_coder_offset, o, "coder", byte_signature, false); \
+  macro(_owner_javaHash_offset, o, "javaHash", int_signature, false); \
+  macro(_owner_facts_offset, o, "facts", m3_string_facts_signature, false);
+
+#define M3_STRING_ATOM_FIELDS_DO(macro) \
+  macro(_atom_address_offset, a, "address", long_signature, false); \
+  macro(_atom_storageWidth_offset, a, "storageWidth", byte_signature, false); \
+  macro(_atom_bigEndian_offset, a, "bigEndian", bool_signature, false);
+
+#define M3_STRING_TUPLE_FIELDS_DO(macro) \
+  macro(_tuple_left_offset, t, "left", m3_string_signature, false); \
+  macro(_tuple_right_offset, t, "right", m3_string_signature, false);
+
+#define M3_STRING_FACTS_FIELDS_DO(macro) \
+  macro(_facts_utf8Length_offset, f, "utf8Length", int_signature, false);
+
+void java_lang_M3String::compute_offsets() {
+  InstanceKlass* v = vmClasses::M3String_klass();
+  InstanceKlass* o = vmClasses::M3StringOwner_klass();
+  InstanceKlass* a = vmClasses::M3StringAtom_klass();
+  InstanceKlass* t = vmClasses::M3StringTuple_klass();
+  InstanceKlass* f = vmClasses::M3StringFacts_klass();
+  M3_STRING_VALUE_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+  M3_STRING_OWNER_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+  M3_STRING_ATOM_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+  M3_STRING_TUPLE_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+  M3_STRING_FACTS_FIELDS_DO(FIELD_COMPUTE_OFFSET);
 }
 
 #if INCLUDE_CDS
-void java_lang_MIndexString::serialize_offsets(SerializeClosure* f) {
-  MINDEX_STRING_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+void java_lang_M3String::serialize_offsets(SerializeClosure* f) {
+  M3_STRING_VALUE_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+  M3_STRING_OWNER_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+  M3_STRING_ATOM_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+  M3_STRING_TUPLE_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+  M3_STRING_FACTS_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
 }
 #endif
+
+void java_lang_M3String::copy_chars(
+    oop value, int start, int len, jchar* destination) {
+  assert(value != nullptr, "M3String required");
+  assert(destination != nullptr || len == 0, "destination required");
+  assert(start >= 0 && len >= 0 && start <= length(value) - len, "range");
+  for (int index = 0; index < len; index++) {
+    destination[index] = char_at(value, start + index);
+  }
+}
 
 // java_lang_Class
 
@@ -5459,7 +5415,7 @@ void java_lang_InternalError::serialize_offsets(SerializeClosure* f) {
   //end
 
 #define BASIC_JAVA_CLASSES_DO_PART2(f) \
-  f(java_lang_MIndexString) \
+  f(java_lang_M3String) \
   f(java_lang_System) \
   f(java_lang_ClassLoader) \
   f(java_lang_Throwable) \
@@ -5544,9 +5500,9 @@ bool JavaClasses::is_supported_for_archiving(oop obj) {
   Klass* klass = obj->klass();
 
   if ((klass == vmClasses::String_klass() && java_lang_String::is_m3_joined(obj)) ||
-      klass == vmClasses::MIndexString_klass()) {
-    // Stage-2 M3 strings are rebuilt at runtime. Archiving their segment graph
-    // is intentionally deferred until explicit CDS relocation support exists.
+      klass == vmClasses::M3String_klass()) {
+    // Canonical M3String owner/coordinate graphs are rebuilt at runtime.
+    // CDS relocation of native/mapped owner coordinates is intentionally deferred.
     return false;
   }
 

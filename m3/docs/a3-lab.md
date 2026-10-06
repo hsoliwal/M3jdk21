@@ -1,4 +1,4 @@
-# A3Lab — compiler-driven Atomize/Patternize/Document mastery
+# A3Lab — compiler-driven Atomize/Patternize mastery
 
 Status: M3JDK21 tool-plane qualification contract.
 
@@ -18,7 +18,7 @@ For every admitted FILE-local source-changing recipe task:
 inventory
   -> immutable fixture/static-signal precompute
   -> bounded recipe schedule enumeration
-  -> actual Atomize / Patternize / Document recipe execution
+  -> actual Atomize / Patternize recipe execution
   -> Java 21 parse/print
   -> javac -Xlint:all -Werror after every changing pass
   -> public/protected contract observation
@@ -54,43 +54,29 @@ Code-looking text must remain data.
 
 ## Schedules
 
-The live mastery gate qualifies all three source-changing leaves in the canonical FILE DAG:
+For the two retained source-changing atoms:
 
-- Atomize (A)
-- Patternize (P)
-- Document (D)
+- Atomize
+- Patternize
 
-It executes every non-empty ordered subset without repetition:
+the laboratory executes every non-empty ordered subset:
 
 ```text
 A
 P
-D
-
 A -> P
 P -> A
-A -> D
-D -> A
-P -> D
-D -> P
-
-A -> P -> D
-A -> D -> P
-P -> A -> D
-P -> D -> A
-D -> A -> P
-D -> P -> A
+A -> P -> A
+P -> A -> P
 ```
 
-The retained `A -> P -> A` and `P -> A -> P` stress schedules remain as explicit already-achieved
-operation probes. The campaign therefore has 17 schedules. Each schedule is cycled from the original
-fixture until a complete unchanged sweep is observed; pass-budget exhaustion is a failure.
+The repeated schedules deliberately revisit an already-achieved operation. Their final source must
+equal the corresponding A+P normal form; an already-completed Atomize or Patternize step is not
+allowed to create new work on replay.
 
-Equal operation sets must converge to the same rendered normal form regardless of order. With the
-48 deterministic fixtures, the canonical live campaign produces **48 x 17 = 816 result rows**.
-
-A3M writes the result table below `m3/build/a3/mastery/lab/results.tsv` and binds it to a
-content-addressed receipt before CLI absorption is allowed.
+Each schedule is cycled from the original fixture until stable or until the bounded pass budget is
+exhausted. Equal operation sets must converge to the same rendered normal form regardless of order
+or redundant replay. The bounded campaign produces 48 x 6 = 288 result rows.
 
 ## Static precompute
 
@@ -158,7 +144,7 @@ recipe improvements must replay the same corpus.
 
 A3Lab is M3 tooling, not a JDK runtime API.
 
-It must never write `src/` or `test/`. Persisted evidence is restricted to `m3/build/a3/lab/**` for direct lab runs or `m3/build/a3/mastery/**` for the canonical A3M gate.
+It must never write `src/` or `test/`. Persisted evidence is restricted to `m3/build/a3/lab/**`.
 
 OpenJDK's build stays authoritative:
 

@@ -637,6 +637,15 @@ PhaseStringOpts::PhaseStringOpts(PhaseGVN* gvn):
 
   assert(OptimizeStringConcat, "shouldn't be here");
 
+  if (UseM3StringStorage) {
+    // Legacy C2 StringConcat fusion reads constant String.value and constructs the
+    // result by storing only String.value/coder. M3-backed Strings use an empty
+    // value sentinel plus canonical M3String owner/coordinate, so that transform
+    // would silently lose canonical state. Keep the Java/M3 concat path until a
+    // dedicated M3 C2 lowering constructs M3String owners and coordinates.
+    return;
+  }
+
   // Collect the types needed to talk about the various slices of memory
   byte_adr_idx = C->get_alias_index(TypeAryPtr::BYTES);
 

@@ -73,12 +73,12 @@ typeArrayOop java_lang_String::value_no_keepalive(oop java_string) {
 
 oop java_lang_String::m3_storage(oop java_string) {
   assert(is_instance(java_string), "must be java_string");
-  return java_string->obj_field_acquire(_mindex_offset);
+  return java_string->obj_field_acquire(_m3_offset);
 }
 
 oop java_lang_String::m3_storage_no_keepalive(oop java_string) {
   assert(is_instance(java_string), "must be java_string");
-  return java_string->obj_field_access<AS_NO_KEEPALIVE | MO_ACQUIRE>(_mindex_offset);
+  return java_string->obj_field_access<AS_NO_KEEPALIVE | MO_ACQUIRE>(_m3_offset);
 }
 
 bool java_lang_String::is_m3_joined(oop java_string) {
@@ -88,7 +88,7 @@ bool java_lang_String::is_m3_joined(oop java_string) {
 jchar java_lang_String::char_at(oop java_string, int index) {
   oop storage = m3_storage(java_string);
   if (storage != nullptr) {
-    return java_lang_MIndexString::char_at(storage, index);
+    return java_lang_M3String::char_at(storage, index);
   }
   typeArrayOop string_value = value(java_string);
   if (is_latin1(java_string)) {
@@ -99,10 +99,7 @@ jchar java_lang_String::char_at(oop java_string, int index) {
 
 bool java_lang_String::is_latin1(oop java_string) {
   assert(is_instance(java_string), "must be java_string");
-  oop storage = m3_storage_no_keepalive(java_string);
-  jbyte coder = storage == nullptr
-      ? java_string->byte_field(_coder_offset)
-      : java_lang_MIndexString::coder(storage);
+  jbyte coder = java_string->byte_field(_coder_offset);
   assert(CompactStrings || coder == CODER_UTF16, "Must be UTF16 without CompactStrings");
   return coder == CODER_LATIN1;
 }
@@ -138,7 +135,7 @@ int java_lang_String::length(oop java_string, typeArrayOop value) {
   assert(is_instance(java_string), "must be java_string");
   oop storage = m3_storage_no_keepalive(java_string);
   if (storage != nullptr) {
-    return java_lang_MIndexString::length(storage);
+    return java_lang_M3String::length(storage);
   }
   assert(value_equals(value, java_lang_String::value(java_string)),
          "value must be equal to java_lang_String::value(java_string)");
@@ -164,95 +161,86 @@ bool java_lang_String::is_instance(oop obj) {
   return obj != nullptr && obj->klass() == vmClasses::String_klass();
 }
 
-// java.lang.MIndexString accessors
+// java.lang.M3String accessors
 
-jbyte java_lang_MIndexString::storage_kind(oop storage) {
-  return storage->byte_field(_storageKind_offset);
+oop java_lang_M3String::owner(oop value) {
+  assert(value != nullptr && value->klass() == vmClasses::M3String_klass(), "must be M3String");
+  return value->obj_field(_owner_offset);
 }
 
-typeArrayOop java_lang_MIndexString::local_value(oop storage) {
-  return (typeArrayOop)storage->obj_field(_localValue_offset);
+jlong java_lang_M3String::coordinate(oop value) {
+  return value->long_field(_value_offset);
 }
 
-jlong java_lang_MIndexString::mapped_address(oop storage) {
-  return storage->long_field(_mappedAddress_offset);
+int java_lang_M3String::start(oop value) {
+  const julong packed = (julong)coordinate(value);
+  return (int)(packed >> 32);
 }
 
-objArrayOop java_lang_MIndexString::segments(oop storage) {
-  return (objArrayOop)storage->obj_field(_segments_offset);
+int java_lang_M3String::length(oop value) {
+  const julong packed = (julong)coordinate(value);
+  return (int)(packed & (julong)0xffffffffu);
 }
 
-typeArrayOop java_lang_MIndexString::offsets(oop storage) {
-  return (typeArrayOop)storage->obj_field(_offsets_offset);
+int java_lang_M3String::owner_length(oop value) {
+  return owner(value)->int_field(_owner_length_offset);
 }
 
-typeArrayOop java_lang_MIndexString::ends(oop storage) {
-  return (typeArrayOop)storage->obj_field(_ends_offset);
+jbyte java_lang_M3String::coder(oop value) {
+  return owner(value)->byte_field(_owner_coder_offset);
 }
 
-int java_lang_MIndexString::length(oop storage) {
-  return storage->int_field(_length_offset);
-}
-
-jbyte java_lang_MIndexString::coder(oop storage) {
-  return storage->byte_field(_coder_offset);
-}
-
-jint java_lang_MIndexString::java_hash(oop storage) {
-  return storage->int_field(_javaHash_offset);
-}
-
-jchar java_lang_MIndexString::char_at(oop storage, int index) {
-  const int storage_length = length(storage);
-  assert(index >= 0 && index < storage_length, "String index out of bounds");
-
-  const jbyte kind = storage_kind(storage);
-  if (kind == LOCAL) {
-    typeArrayOop value = local_value(storage);
-    if (coder(storage) == java_lang_String::CODER_LATIN1) {
-      return ((jchar)value->byte_at(index)) & 0xff;
-    }
-    return value->char_at(index);
+int java_lang_M3String::utf8_length_if_precomputed(oop value) {
+  oop o = owner(value);
+  if (start(value) != 0 || length(value) != o->int_field(_owner_length_offset)) {
+    return -1;
   }
+  oop facts = o->obj_field_acquire(_owner_facts_offset);
+  return facts == nullptr ? -1 : facts->int_field(_facts_utf8Length_offset);
+}
 
-  if (kind == LEXICON || kind == 4 /* SYNARR01 UTF16BE */) {
-    const jlong address = mapped_address(storage);
-    assert(address != 0, "mapped MIndexString atom must have an address");
+jint java_lang_M3String::java_hash(oop value) {
+  oop o = owner(value);
+  if (start(value) == 0 && length(value) == o->int_field(_owner_length_offset)) {
+    return o->int_field(_owner_javaHash_offset);
+  }
+  jint hash = 0;
+  for (int index = 0; index < length(value); index++) {
+    hash = 31 * hash + (jint)char_at(value, index);
+  }
+  return hash;
+}
+
+jchar java_lang_M3String::char_at(oop value, int index) {
+  const int value_length = length(value);
+  assert(index >= 0 && index < value_length, "M3String index out of bounds");
+  oop o = owner(value);
+  const int logical = start(value) + index;
+
+  if (o->klass() == vmClasses::M3StringAtom_klass()) {
+    const jlong address = o->long_field(_atom_address_offset);
+    const jbyte width = o->byte_field(_atom_storageWidth_offset);
+    if (width == 1) {
+      const uint8_t* bytes = reinterpret_cast<const uint8_t*>((uintptr_t)address);
+      return (jchar)bytes[logical];
+    }
+    assert(width == 2, "M3 atom width");
     const uint8_t* bytes = reinterpret_cast<const uint8_t*>((uintptr_t)address);
-    const size_t at = (size_t)index << 1;
-    return kind == 4 ? (jchar)(((uint16_t)bytes[at] << 8) | bytes[at + 1])
-                     : (jchar)(((uint16_t)bytes[at]) | ((uint16_t)bytes[at + 1] << 8));
+    const size_t at = (size_t)logical << 1;
+    const uint16_t first = bytes[at];
+    const uint16_t second = bytes[at + 1];
+    return o->bool_field(_atom_bigEndian_offset)
+        ? (jchar)((first << 8) | second)
+        : (jchar)(first | (second << 8));
   }
 
-  if (kind == JOINED) {
-    objArrayOop segment_array = segments(storage);
-    typeArrayOop offset_array = offsets(storage);
-    typeArrayOop end_array = ends(storage);
-
-    int low = 0;
-    int high = end_array->length() - 1;
-    const int key = index + 1;
-    while (low <= high) {
-      const int mid = (low + high) >> 1;
-      const int segment_end = end_array->int_at(mid);
-      if (segment_end < key) {
-        low = mid + 1;
-        continue;
-      }
-      if (mid > 0 && end_array->int_at(mid - 1) >= key) {
-        high = mid - 1;
-        continue;
-      }
-      const int previous = mid == 0 ? 0 : end_array->int_at(mid - 1);
-      oop atom = segment_array->obj_at(mid);
-      const int atom_index = offset_array->int_at(mid) + index - previous;
-      return java_lang_MIndexString::char_at(atom, atom_index);
-    }
-    ShouldNotReachHere();
-  }
-
-  ShouldNotReachHere();
-  return 0;
+  assert(o->klass() == vmClasses::M3StringTuple_klass(), "M3 owner must be atom or tuple");
+  oop left = o->obj_field(_tuple_left_offset);
+  oop right = o->obj_field(_tuple_right_offset);
+  const int left_length = length(left);
+  return logical < left_length
+      ? char_at(left, logical)
+      : char_at(right, logical - left_length);
 }
 
 // Accessors

@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # SPDX-License-Identifier: Apache-2.0
 # Linux image qualification. No patch-module: use the built fork's java.base.
-# m3-c1/c2 names describe requests: M3 String storage must force interpretation.
 set -euo pipefail
 root=$(cd "$(dirname "$0")/../../.." && pwd)
 : "${M3_TEST_JDK:?Set the absolute path of the freshly built fastdebug M3JDK image}"
@@ -53,10 +52,13 @@ for mode in interpreter mixed c1 c2 m3-c1 m3-c2 m3-c2-nocompact; do
   done
   grep -q 'warmPayloadReads=0' "$out/$mode-M3TQTest.log"
   if [[ -n "$compiler" ]]; then
-    evidence_flags=()
-    if [[ "$mode" == m3-* ]]; then evidence_flags+=(--m3-interpreter); fi
-    python3 "$root/m3/tooling/image-gates/check-log.py" \
-      "$out/$mode-compilation.xml" "$compiler" jdk.internal.mindex.M3TQ "${evidence_flags[@]}"
+    python3 - "$out/$mode-compilation.xml" "$compiler" <<'PY'
+import pathlib, sys
+lines = pathlib.Path(sys.argv[1]).read_text().splitlines()
+assert any("<nmethod" in line and "compiler='" + sys.argv[2] + "'" in line
+           and "method='jdk.internal.mindex.M3TQ " in line for line in lines), \
+    "No compiled TQ kernel evidence"
+PY
   fi
 done
-echo 'PASS: bounded fork-image TQ and mapped-owner tests across four normal modes and three M3 interpreter-boundary requests'
+echo 'PASS: bounded fork-image TQ and mapped-owner tests in seven modes'

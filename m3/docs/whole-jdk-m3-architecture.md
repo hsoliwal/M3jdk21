@@ -2,17 +2,6 @@
 
 Status: **documentation-only architecture and implementation handoff**. This document does not modify production Java, HotSpot, native code, an installed JDK, generated mapping records, or acceptance evidence. It deliberately distinguishes observed repository state, candidate designs, implementation work and verified behavior.
 
-## Canonical ownership invariant
-
-**Synexia is a donor; M3JDK21 is the product/runtime owner.** M3 String and every String
-precompute/index/fact used at runtime are owned inside this repository. Synexia may supply
-source-pinned algorithms, recipes, fixtures and provenance, but `java.base`, HotSpot and JNI must
-not depend on Synexia runtime modules. See [m3-string-ownership-invariant.md](m3-string-ownership-invariant.md).
-
-The architectural name is **M3 String**. Existing `MIndexString*` source identifiers are legacy
-implementation/lineage names until a complete Java + HotSpot + JNI/native + recipe + mapping rename
-is admitted; they must not be duplicated by a parallel String owner.
-
 ## 1. Programme scope
 
 The M3 programme covers the complete JDK and runtime implementation. String is one subsystem. Collections, primitive/value storage, concurrency, I/O, compiler/runtime infrastructure, VM metadata and native boundaries are first-class parts of the same programme.
@@ -107,6 +96,10 @@ Reusable facts may include:
 - pre-sized growth/capacity plans.
 
 Precomputation is not free. Every fact has an owner, validity domain, admission cost, invalidation rule, concurrency model and memory budget.
+
+**Internal-precompute invariant:** these facts and their owners are implementation-private machinery. Public JDK values expose exact semantic operations/results, not precompute objects, preparation APIs, cache lifecycle, retention controls or fact-table identity. Internal facts are keyed by exact canonical M3 owner plus scalar/range/composition coordinates; they never become a second canonical payload. Missing/evicted facts must fall back to the exact Java semantic path.
+
+For the String route, Synexia `MIndexString` is the donor/reference type and M3JDK `M3String` is the target counterpart. JNI/native `byte[]`, `char[]`, UTF-8 and UTF-16 representations are shadows/materializations of M3String coordinates, not canonical String storage. See `m3-runtime-invariants.tsv`.
 
 ### 3.4 Public Java compatibility surfaces
 

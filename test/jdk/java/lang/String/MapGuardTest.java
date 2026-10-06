@@ -27,7 +27,7 @@
  * @test
  * @summary Bound mapped-store row allocation and preserve failed-open ownership
  * @modules java.base/jdk.internal.mindex
- * @build MIndexMappedStringBackingTest
+ * @build M3MappedStringBackingTest
  * @run main/othervm -Xmx32m --add-opens=java.base/jdk.internal.mindex=ALL-UNNAMED MapGuardTest
  */
 
@@ -46,7 +46,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.zip.CRC32;
-import jdk.internal.mindex.MIndexMappedStringBacking;
+import jdk.internal.mindex.M3MappedStringBacking;
 
 /** ContractProbe: real files, the actual parser, bounded heap, no alternate implementation. */
 public class MapGuardTest {
@@ -93,20 +93,20 @@ public class MapGuardTest {
         file = Files.readAllBytes(target);
         file[63] ^= 1;
         Files.write(target, file);
-        try (var backing = MIndexMappedStringBacking.open(path)) {
+        try (var backing = M3MappedStringBacking.open(path)) {
             check(backing.size() == 0, "older CRC-valid empty snapshot retained");
         }
     }
 
     private static void valid(Path dir) throws Exception {
-        MIndexMappedStringBackingTest.main(new String[0]);
+        M3MappedStringBackingTest.main(new String[0]);
         Path path = dir.resolve("empty.midx");
         Path bytes = Path.of(path + ".bytes");
         frame(path, true, HEADER, 0);
         frame(bytes, false, HEADER, 0);
         byte[] originalText = Files.readAllBytes(path);
         byte[] originalBytes = Files.readAllBytes(bytes);
-        MIndexMappedStringBacking backing = MIndexMappedStringBacking.open(path);
+        M3MappedStringBacking backing = M3MappedStringBacking.open(path);
         try {
             check(backing.size() == 0, "empty is valid");
             check(backing.path().equals(path.toAbsolutePath().normalize()), "path preserved");
@@ -128,18 +128,18 @@ public class MapGuardTest {
         }
         check(Arrays.equals(originalText, Files.readAllBytes(path)), "text never mutated");
         check(Arrays.equals(originalBytes, Files.readAllBytes(bytes)), "bytes never mutated");
-        try (var reopened = MIndexMappedStringBacking.open(path)) {
+        try (var reopened = M3MappedStringBacking.open(path)) {
             check(reopened.size() == 0, "reopen remains valid");
         }
 
         // Reuse the original fixture writer at the exact minimum record sizes:
         // empty text records/aliases are120 bytes; the empty byte record is32 bytes.
-        Method fixture = MIndexMappedStringBackingTest.class
+        Method fixture = M3MappedStringBackingTest.class
                 .getDeclaredMethod("writeFixture", Path.class, String.class);
         fixture.setAccessible(true);
         Path minimum = dir.resolve("minimum.midx");
         fixture.invoke(null, minimum, "");
-        try (var smallest = MIndexMappedStringBacking.open(minimum)) {
+        try (var smallest = M3MappedStringBacking.open(minimum)) {
             check(smallest.size() == 2, "minimum-sized text records and alias admitted");
             check(smallest.length(1L) == 0, "empty scalar");
             check(smallest.utf8Length(1L) == 0, "minimum-sized byte record admitted");
@@ -151,7 +151,7 @@ public class MapGuardTest {
         byte[] text = originalText.clone();
         Arrays.fill(text, 40, 64, (byte) 0);
         Files.write(path, text);
-        try (var first = MIndexMappedStringBacking.open(path)) {
+        try (var first = M3MappedStringBacking.open(path)) {
             check(first.size() == 0, "slot zero alone");
         }
         slot(text, 40, 3L, HEADER + 1L, 0);
@@ -160,7 +160,7 @@ public class MapGuardTest {
         Files.write(path, originalText);
         Files.delete(bytes);
         try {
-            MIndexMappedStringBacking.open(path);
+            M3MappedStringBacking.open(path);
             throw new AssertionError("missing byte store accepted");
         } catch (UncheckedIOException expected) {
             check(expected.getCause() instanceof java.nio.file.NoSuchFileException,
@@ -183,7 +183,7 @@ public class MapGuardTest {
 
         Path bytes = dir.resolve("short.bytes");
         Files.write(bytes, new byte[1]);
-        Class<?> type = Class.forName("jdk.internal.mindex.MIndexMappedStringBacking$ByteStore");
+        Class<?> type = Class.forName("jdk.internal.mindex.M3MappedStringBacking$ByteStore");
         Constructor<?> ctor = type.getDeclaredConstructor(Path.class);
         ctor.setAccessible(true);
         initial = descriptors(bytes);
@@ -224,7 +224,7 @@ public class MapGuardTest {
         frame(pair, true, HEADER, 0);
         Files.delete(sibling);
         try {
-            MIndexMappedStringBacking.open(pair);
+            M3MappedStringBacking.open(pair);
             throw new AssertionError("missing sibling accepted");
         } catch (UncheckedIOException expected) {
             check(expected.getCause() instanceof java.nio.file.NoSuchFileException,
@@ -235,7 +235,7 @@ public class MapGuardTest {
     }
 
     private static void cleanup() throws Exception {
-        Method close = MIndexMappedStringBacking.class.getDeclaredMethod(
+        Method close = M3MappedStringBacking.class.getDeclaredMethod(
                 "close", AutoCloseable.class, Throwable.class);
         close.setAccessible(true);
         Throwable primary = new IOException("primary");
@@ -278,7 +278,7 @@ public class MapGuardTest {
 
     private static void reject(Path path, String detail) {
         try {
-            MIndexMappedStringBacking.open(path);
+            M3MappedStringBacking.open(path);
             throw new AssertionError("corrupt snapshot accepted: " + detail);
         } catch (IllegalStateException expected) {
             check(expected.getMessage().equals("corrupt MIndex mapped backing: " + detail),

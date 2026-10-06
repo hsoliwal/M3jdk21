@@ -24,12 +24,20 @@ Do not shorten arbitrary words into unexplained initials.
 | `MIndexASTPrecompute` | `jdk.internal.mindex.M3ASTPC` | AST precompute context | Reserved mapping; dependency/format review pending |
 | `MIndexCompilerASTPrecompute` | `com.sun.tools.javac.m3.M3ASTPC` | Compiler-specific context, jdk.compiler | Reserved mapping; must not pull compiler dependencies into java.base |
 | `MIndexRegexTrigramQuery` | `jdk.internal.mindex.M3TQ` | TQ = Trigram Query; java.base | Inlined candidate kernel and canonical-backing range bridge; full-image acceptance pending |
-| `SegmentedAddress28` | `jdk.internal.mindex.M3Address28` | 28-bit primitive collection lane/address owner; java.base | Complete source adaptation; full-image admission pending |
-| `SegmentedIntLane28` | `jdk.internal.mindex.M3IntLane28` | 28-bit primitive collection lane/address owner; java.base | Complete source adaptation; full-image admission pending |
-| `SegmentedLongLane28` | `jdk.internal.mindex.M3LongLane28` | 28-bit primitive collection lane/address owner; java.base | Complete source adaptation; full-image admission pending |
-| `SegmentedBitLane28` | `jdk.internal.mindex.M3BitLane28` | 28-bit primitive collection lane/address owner; java.base | Complete source adaptation; full-image admission pending |
-| `PackedBitAtoms` | `jdk.internal.mindex.M3Bits` | Shared bit-address arithmetic; java.base | Complete source adaptation; full-image admission pending |
-| Existing JDK String counterpart | existing `java.lang.MIndexString` and backing owners | Retain current implementation lineage | No blanket prefix rename |
+| `com.synexia.indexstring.MIndexString` | `java.lang.M3String` | Internal canonical String value; Synexia is donor/reference, M3JDK owns target naming | Replace the provisional `java.lang.MIndexString` naming/representation; preserve donor owner+coordinate semantics |
+| `IndexStringTuple` | `java.lang.M3StringTuple` | Canonical persistent composition owner | Ported as M3 child-coordinate DAG; no text arrays |
+| native MIndex String scalar resolver/interner | `java.lang.M3StringAtom` / `M3StringPool` | Canonical native/mapped scalar ownership | Adapted to JDK bootstrap/runtime boundary |
+| `MIndexStringCanonicalFacts` / String precompute | `java.lang.M3StringFacts` + internal M3 kernels | Internal precompute only | Fixed-size canonical facts implemented; richer donor facts remain mapped work |
+| `MIndexStringBacking` | `jdk.internal.mindex.M3StringBacking` | Internal backing contract | Renamed target counterpart |
+| `MIndexMappedStringBacking` | `jdk.internal.mindex.M3MappedStringBacking` | Internal mapped backing | Renamed target counterpart |
+
+
+
+### String/precompute naming invariant
+
+Synexia names are provenance and donor names, not M3JDK ABI names. The String donor relation is `MIndexString -> M3String`. The target must preserve the donor's canonical owner/coordinate semantics while using the M3JDK name.
+
+All precompute remains implementation-internal in both worlds. M3JDK may use compact internal M3 names for fact stores and kernels, but must not expose donor `*Precompute*` classes as public JDK contracts merely to mirror Synexia. Precompute attaches to exact M3String scalar/range/composition identity and never becomes canonical text storage. JNI byte/char/UTF shadows are materialization products only. The machine-readable rules are in `m3-runtime-invariants.tsv`; the inspected donor history is recorded in `m3string-synexia-lineage.md`.
 
 Reserved names are candidates, not new exported APIs or claims that code exists. The mapping
 records bind concrete source paths/blobs and dispositions. Package/module collision checks and

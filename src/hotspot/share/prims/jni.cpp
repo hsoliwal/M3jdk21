@@ -2138,7 +2138,7 @@ static void m3_admit_jni_string(Handle string, TRAPS) {
   if (string.is_null() || !UseM3StringStorage || !Universe::is_module_initialized()) {
     return;
   }
-  InstanceKlass* storage_klass = vmClasses::MIndexString_klass();
+  InstanceKlass* storage_klass = vmClasses::M3String_klass();
   if (!storage_klass->is_initialized()) {
     return;
   }
@@ -2151,10 +2151,10 @@ static void m3_admit_jni_string(Handle string, TRAPS) {
                          CHECK);
   oop compatible_value = compatibility.get_oop();
   if (compatible_value != nullptr) {
-    assert(compatible_value->is_typeArray(), "MIndex compatibility value must be byte[]");
+    assert(compatible_value->is_typeArray(), "M3 compatibility shadow must be byte[]");
     typeArrayOop byte_value = (typeArrayOop) compatible_value;
     assert(TypeArrayKlass::cast(byte_value->klass())->element_type() == T_BYTE,
-           "MIndex compatibility value must be byte[]");
+           "M3 compatibility shadow must be byte[]");
     java_lang_String::set_value(string(), byte_value);
   }
 }
