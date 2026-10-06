@@ -68,3 +68,12 @@ Run:
 The default reactor verifies migration/OpenRewrite recipes, the scope-aware backport recipe DAG and
 backport inventory/admission. The DAG is framework-neutral; Camel, Airflow and Drools are projections
 over the same canonical dependency/scope graph rather than separate sources of truth.
+
+
+## Synexia convergence delivery
+
+Synexia is the donor-convergence workspace and M3JDK21 is a delivery target. Pinned Apache-2.0
+Synexia source, recipes, tests and JNI atoms may be imported below m3/vendor/synexia/ through
+the independently verified manifest/receiver contract.
+
+See docs/synexia-delivery.md.
