@@ -10,7 +10,9 @@ import csv
 import hashlib
 from pathlib import Path
 
-EXPECTED_RELEASE_COUNTS = {22: 12, 23: 12, 24: 22, 25: 17, 26: 10, 27: 9}
+import release_jep_authority
+
+EXPECTED_RELEASE_COUNTS = {22: 12, 23: 12, 24: 24, 25: 18, 26: 10, 27: 9}
 EXPECTED_TOTAL = sum(EXPECTED_RELEASE_COUNTS.values())
 
 
@@ -28,6 +30,7 @@ def read_tsv(path: Path) -> list[dict[str, str]]:
 
 
 def verify_jeps(root: Path) -> None:
+    release_jep_authority.verify_repository_authority(root)
     rows = read_tsv(root / "m3/backports/JEP_CATALOGUE.tsv")
     if len(rows) != EXPECTED_TOTAL:
         raise AssertionError(f"expected {EXPECTED_TOTAL} JEP rows, found {len(rows)}")
@@ -379,7 +382,7 @@ def main() -> int:
     verify_security_properties_8364182_backport(root)
     verify_keystore_instant_8374808_backport(root)
     print(
-        "PASS: 82 JEP rows, non-JEP seed uniqueness, community fork catalogue authority, "
+        "PASS: 85 authoritative JEP rows, non-JEP seed uniqueness, community fork catalogue authority, "
         "exact JDK-8357439 donor blobs, "
         "JDK-8347112 javadoc adaptation, JDK-8364182 serviceability adaptation, "
         "and JDK-8374808 KeyStore Instant compatibility leaf"
