@@ -1,0 +1,8 @@
+item	state	evidence	limit
+adoptium_jdk21_mirror	PINNED	bb6b279495ceff8442dbd0225756b92d466d5309 equals upstream21u pin	zero unique-source claim
+temurin_build	PINNED	cc31225e0aad72a5598d94e174cdd5c09e0d85a8	mechanism donor only
+aqavit_tests	PINNED	6772f0835e011b175b4c1ad3a708f35912b6d249	mechanism/test donor only
+licenses	VERIFIED_REMOTE	OpenJDK GPLv2; tooling/test repos Apache-2.0	path-level review still required
+capability_catalogue	IMPLEMENTED	8 evidence-only candidates	no copy/promotion authority
+static_tests	IMPLEMENTED	test_temurin_donor_catalogue.py	hosted execution pending
+integration	NOT_STARTED	ADAPT_OR_WRAP only after comparison	no bulk source import
