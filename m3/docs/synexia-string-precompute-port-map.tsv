@@ -2,6 +2,7 @@ donor_world	donor_type	m3jdk_target	status	retention_rule	notes
 Synexia	MIndexString	java.lang.M3String	IMPLEMENTED	owner+packed-coordinate only	Donor name differs intentionally in M3JDK
 Synexia	MIndexNativeResolver / MIndexNativeIntern	java.lang.M3StringAtom + M3StringPool	IMPLEMENTED	weak VM-local native owner pool	Live M3 coordinates/DAGs retain owners; reference-queue cleanup frees unreachable local native blocks; retained bytes are internally accounted
 Synexia	IndexResolver / IndexStringTuple	java.lang.M3StringOwner / M3StringAtom / M3StringTuple	IMPLEMENTED	canonical owner/DAG	No spelling arrays in M3 value/owner graph
+Synexia	MIndexTupleReferences.concat/balance + MIndexStringIntern.internReferences	java.lang.M3StringPool + M3StringTuple	IMPLEMENTED	balanced sequence-canonical persistent DAG	Concat is AVL-style balanced; tuple interning routes by shape-independent value key and exact sequence verification, so parenthesization does not define canonical identity; no flattened text/segment array is retained
 Synexia	IndexTextMetrics	java.lang.M3StringFacts	IMPLEMENTED	fixed-size owner/range facts	UTF16 length; code-point count; unpaired surrogate count; Java hash geometry
 Synexia	MIndexStringCanonicalFacts	java.lang.M3StringFacts + M3StringOwner	IMPLEMENTED	fixed-size canonical owner facts	Complete String-semantic bundle; no spelling/token payload
 Synexia	MIndexUtf16RangeFacts	M3StringOwner.rangeFacts	IMPLEMENTED	bounded 4-entry owner-local coordinate cache	Key is exact packed range coordinate
