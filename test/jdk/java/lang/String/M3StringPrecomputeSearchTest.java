@@ -553,6 +553,16 @@ public class M3StringPrecomputeSearchTest {
         check(noCaseChange.toUpperCase(Locale.ROOT) == noCaseChange,
                 "M3 Unicode upper unchanged identity");
 
+        String singleLine = String.join("", "single", "-line");
+        singleLine.strip(); // prepare fixed facts without changing content
+        var singleLines = singleLine.lines().toList();
+        check(singleLines.size() == 1 && singleLines.get(0).equals(singleLine),
+                "prepared single-line fast path");
+        String multiLine = String.join("", "a\r", "\nb\n", "c");
+        multiLine.strip(); // prepare facts including line-terminator flag
+        check(multiLine.lines().toList().equals(java.util.List.of("a", "b", "c")),
+                "prepared multi-line preserves line semantics");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
