@@ -1,0 +1,34 @@
+identity	path	upstream_action	m3_action	reason
+JDK-8318096	src/java.base/share/classes/java/security/AsymmetricKey.java	ADD	EXCLUDE_DEFAULT	Public Java API absent from Java21; separate opt-in decision required.
+JDK-8318096	src/java.base/share/classes/java/security/PrivateKey.java	MODIFY	EXCLUDE_DEFAULT	Public API hierarchy change belongs to AsymmetricKey extension.
+JDK-8318096	src/java.base/share/classes/java/security/PublicKey.java	MODIFY	EXCLUDE_DEFAULT	Public API hierarchy change belongs to AsymmetricKey extension.
+JDK-8340327	src/java.base/share/classes/sun/security/pkcs/NamedPKCS8Key.java	ADD	CANDIDATE_ADAPT	Internal prerequisite.
+JDK-8340327	src/java.base/share/classes/sun/security/provider/NamedKEM.java	ADD	CANDIDATE_ADAPT	Internal KEM framework prerequisite.
+JDK-8340327	src/java.base/share/classes/sun/security/provider/NamedKeyFactory.java	ADD	CANDIDATE_ADAPT	Must be adapted away from java.security.AsymmetricKey.
+JDK-8340327	src/java.base/share/classes/sun/security/provider/NamedKeyPairGenerator.java	ADD	CANDIDATE_ADAPT	Internal key generation prerequisite.
+JDK-8340327	src/java.base/share/classes/sun/security/provider/NamedSignature.java	ADD	CANDIDATE_ADAPT	Internal signature prerequisite.
+JDK-8340327	src/java.base/share/classes/sun/security/util/KeyUtil.java	MODIFY	CANDIDATE_ADAPT	Internal utility delta; exact Java21 compatibility review required.
+JDK-8340327	src/java.base/share/classes/sun/security/util/SignatureUtil.java	MODIFY	CANDIDATE_ADAPT	Internal utility delta; exact Java21 compatibility review required.
+JDK-8340327	src/java.base/share/classes/sun/security/x509/NamedX509Key.java	ADD	CANDIDATE_ADAPT	Internal key representation prerequisite.
+JDK-8340327	test/jdk/sun/security/provider/NamedEdDSA.java	ADD	TEST_EVIDENCE	Prerequisite regression evidence.
+JDK-8340327	test/jdk/sun/security/provider/NamedKeyFactoryTest.java	ADD	TEST_EVIDENCE	Prerequisite regression evidence.
+JEP-496	src/java.base/share/classes/com/sun/crypto/provider/ML_KEM.java	ADD	CANDIDATE	ML-KEM core provider.
+JEP-496	src/java.base/share/classes/com/sun/crypto/provider/ML_KEM_Impls.java	ADD	CANDIDATE	ML-KEM provider adapters.
+JEP-496	src/java.base/share/classes/com/sun/crypto/provider/SunJCE.java	MODIFY	CANDIDATE	Register ML-KEM services.
+JEP-496	src/java.base/share/classes/java/security/spec/NamedParameterSpec.java	MODIFY	EXCLUDE_DEFAULT	Additive public Java API constants; not required by provider implementation.
+JEP-496	src/java.base/share/classes/sun/security/provider/SHA3Parallel.java	ADD	CANDIDATE	Private SHAKE helper used by ML-KEM.
+JEP-496	src/java.base/share/classes/sun/security/util/KnownOIDs.java	MODIFY	CANDIDATE	Internal ML-KEM OID registration.
+JEP-496	test/jdk/sun/security/provider/acvp/data/ML-KEM-encapDecap-FIPS203/internalProjection.json	ADD	TEST_EVIDENCE	FIPS 203 ACVP vectors.
+JEP-496	test/jdk/sun/security/provider/acvp/data/ML-KEM-keyGen-FIPS203/internalProjection.json	ADD	TEST_EVIDENCE	FIPS 203 ACVP vectors.
+JEP-496	test/jdk/sun/security/provider/all/Deterministic.java	MODIFY	TEST_EVIDENCE	Provider determinism regression.
+JEP-496	test/micro/org/openjdk/bench/java/security/MLKEMBench.java	ADD	EXCLUDE_DEFAULT	Benchmark evidence only; not runtime compatibility materialization.
+JEP-497	src/java.base/share/classes/java/security/spec/NamedParameterSpec.java	MODIFY	EXCLUDE_DEFAULT	Additive public Java API constants; not required by provider implementation.
+JEP-497	src/java.base/share/classes/sun/security/provider/ML_DSA.java	ADD	CANDIDATE	ML-DSA core provider.
+JEP-497	src/java.base/share/classes/sun/security/provider/ML_DSA_Impls.java	ADD	CANDIDATE	ML-DSA provider adapters.
+JEP-497	src/java.base/share/classes/sun/security/provider/SunEntries.java	MODIFY	CANDIDATE	Register ML-DSA services.
+JEP-497	src/java.base/share/classes/sun/security/util/KnownOIDs.java	MODIFY	CANDIDATE	Internal ML-DSA OID registration; must compose with JEP496 GA state.
+JEP-497	test/jdk/sun/security/provider/acvp/data/ML-DSA-keyGen-FIPS204/internalProjection.json	ADD	TEST_EVIDENCE	FIPS 204 ACVP vectors.
+JEP-497	test/jdk/sun/security/provider/acvp/data/ML-DSA-sigGen-FIPS204/internalProjection.json	ADD	TEST_EVIDENCE	FIPS 204 ACVP vectors.
+JEP-497	test/jdk/sun/security/provider/acvp/data/ML-DSA-sigVer-FIPS204/internalProjection.json	ADD	TEST_EVIDENCE	FIPS 204 ACVP vectors.
+JEP-497	test/jdk/sun/security/provider/all/Deterministic.java	MODIFY	TEST_EVIDENCE	Shared provider determinism regression; use final JDK24 GA composition.
+JEP-497	test/micro/org/openjdk/bench/java/security/MLDSA.java	ADD	EXCLUDE_DEFAULT	Benchmark evidence only; not runtime compatibility materialization.
