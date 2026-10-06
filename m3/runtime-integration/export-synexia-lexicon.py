@@ -15,6 +15,7 @@ import argparse
 import csv
 import hashlib
 import json
+import math
 import pathlib
 import re
 import struct
@@ -45,6 +46,11 @@ MANIFEST_COLUMNS = (
 MANIFEST_COLUMNS_V2 = MANIFEST_COLUMNS + ("precompute_fields",)
 PROFILE_COLUMNS = ("precompute_profile", "source_records", "image_records", "sha256")
 MAX_PRECOMPUTE_PAYLOAD_BYTES = 1 * 1024 * 1024
+FIELD_MAP_COLUMNS = (
+    "donor_type", "donor_field", "donor_java_type", "canonical_payload_field",
+    "m3jdk_storage", "status", "preservation_rule",
+)
+ALLOWED_DONOR_TYPES = frozenset(("boolean", "double", "int", "long", "int[]", "long[]"))
 
 
 @dataclass(frozen=True)
@@ -141,6 +147,57 @@ def canonical_required_fields(value: str) -> str:
     return ",".join(fields)
 
 
+def read_field_map(path: pathlib.Path) -> dict[str, str]:
+    rows, _ = read_tsv(path, FIELD_MAP_COLUMNS)
+    result: dict[str, str] = {}
+    for row in rows:
+        if row["status"] != "MAPPED":
+            continue
+        field = row["canonical_payload_field"]
+        donor_type = row["donor_java_type"]
+        if donor_type not in ALLOWED_DONOR_TYPES:
+            raise ValueError(f"unsupported donor field type: {donor_type}")
+        previous = result.setdefault(field, donor_type)
+        if previous != donor_type:
+            raise ValueError(f"conflicting donor field types for {field}")
+    if not result:
+        raise ValueError("precompute field map has no mapped fields")
+    return dict(sorted(result.items()))
+
+
+def _fits_donor_type(value: object, donor_type: str) -> bool:
+    if donor_type == "boolean":
+        return isinstance(value, bool)
+    if donor_type == "double":
+        if isinstance(value, bool) or not isinstance(value, (int, float)):
+            return False
+        try:
+            return math.isfinite(float(value))
+        except (OverflowError, ValueError):
+            return False
+    if donor_type == "int":
+        return isinstance(value, int) and not isinstance(value, bool) and -2**31 <= value < 2**31
+    if donor_type == "long":
+        return isinstance(value, int) and not isinstance(value, bool) and -2**63 <= value < 2**63
+    if donor_type == "int[]":
+        return (isinstance(value, list)
+                and all(_fits_donor_type(item, "int") for item in value))
+    if donor_type == "long[]":
+        return (isinstance(value, list)
+                and all(_fits_donor_type(item, "long") for item in value))
+    return False
+
+
+def validate_payload_shapes(payload: dict[str, object], required_fields: list[str],
+                            field_types: dict[str, str]) -> None:
+    for field in required_fields:
+        donor_type = field_types.get(field)
+        if donor_type is None:
+            raise ValueError("precompute field has no admitted type: " + field)
+        if not _fits_donor_type(payload[field], donor_type):
+            raise ValueError(f"precompute payload field {field} is not {donor_type}")
+
+
 def read_manifest(path: pathlib.Path) -> tuple[dict[str, dict[str, str]], bytes]:
     raw = path.read_bytes()
     with path.open("r", encoding="utf-8", errors="surrogatepass", newline="") as stream:
@@ -191,7 +248,8 @@ def canonical_precompute_payload(value: str) -> str:
     return canonical
 
 
-def load_records(path: pathlib.Path, sources: dict[str, dict[str, str]]) -> tuple[list[Record], bytes]:
+def load_records(path: pathlib.Path, sources: dict[str, dict[str, str]],
+                 field_types: dict[str, str] | None = None) -> tuple[list[Record], bytes]:
     raw = path.read_bytes()
     with path.open("r", encoding="utf-8", errors="surrogatepass", newline="") as stream:
         columns = tuple(csv.DictReader(stream, delimiter="\t").fieldnames or ())
@@ -200,6 +258,7 @@ def load_records(path: pathlib.Path, sources: dict[str, dict[str, str]]) -> tupl
     rows, _ = read_tsv(path, columns)
     seen: set[tuple[str, str]] = set()
     result: list[Record] = []
+    field_types = field_types or {}
     for row in rows:
         key = (row["source_id"], row["record_id"])
         if row["source_id"] not in sources:
@@ -214,11 +273,14 @@ def load_records(path: pathlib.Path, sources: dict[str, dict[str, str]]) -> tupl
         normalized = {column: row[column] for column in RECORD_COLUMNS}
         normalized["precompute_payload"] = canonical_precompute_payload(
             row.get("precompute_payload", "{}"))
-        payload_keys = set(json.loads(normalized["precompute_payload"]))
+        payload = json.loads(normalized["precompute_payload"])
+        payload_keys = set(payload)
         required_fields = [field for field in sources[row["source_id"]]["precompute_fields"].split(",") if field]
         missing = [field for field in required_fields if field not in payload_keys]
         if missing:
             raise ValueError("precompute payload missing required fields: " + ",".join(missing))
+        if field_types:
+            validate_payload_shapes(payload, required_fields, field_types)
         result.append(Record(normalized))
     if not result:
         raise ValueError("lexicon records are empty")
@@ -291,9 +353,13 @@ def write_tsv(path: pathlib.Path, columns: tuple[str, ...], rows: list[dict[str,
 
 
 def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pathlib.Path,
-           source_repo: str, source_commit: str) -> dict[str, object]:
+           source_repo: str, source_commit: str,
+           field_map: pathlib.Path | None = None) -> dict[str, object]:
     sources, source_manifest_bytes = read_manifest(source_manifest)
-    records, records_bytes = load_records(records_path, sources)
+    field_map_path = field_map or source_manifest.with_name("synexia-precompute-field-map.tsv")
+    field_types = read_field_map(field_map_path) if field_map_path.is_file() else {}
+    field_map_bytes = field_map_path.read_bytes() if field_types else None
+    records, records_bytes = load_records(records_path, sources, field_types)
     if output.exists() and any(output.iterdir()):
         raise FileExistsError(f"output directory is not empty: {output}")
     output.mkdir(parents=True, exist_ok=True)
@@ -366,7 +432,10 @@ def export(source_manifest: pathlib.Path, records_path: pathlib.Path, output: pa
                    "records_sha256": sha256_bytes(records_bytes),
                    "precompute_fields": {
                        source_id: [field for field in source["precompute_fields"].split(",") if field]
-                       for source_id, source in sorted(sources.items())}},
+                       for source_id, source in sorted(sources.items())},
+                   "precompute_field_types": field_types,
+                   "precompute_field_map_sha256":
+                       sha256_bytes(field_map_bytes) if field_map_bytes is not None else None},
         "target": {"repository": "https://github.com/hsoliwal/M3jdk21",
                    "image_format": "M3LEX001", "image_version": VERSION,
                    "mapping_sidecar": "synexia.records.tsv",
@@ -395,9 +464,10 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--output", type=pathlib.Path, required=True)
     parser.add_argument("--source-repository", required=True)
     parser.add_argument("--source-commit", required=True)
+    parser.add_argument("--field-map", type=pathlib.Path)
     args = parser.parse_args(argv)
     result = export(args.source_manifest, args.records, args.output,
-                    args.source_repository, args.source_commit)
+                    args.source_repository, args.source_commit, args.field_map)
     print("SYNEXIA_M3JDK_LEXICON_EXPORT_PASS " + json.dumps(result["counts"], sort_keys=True))
     return 0
 

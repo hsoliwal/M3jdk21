@@ -295,11 +295,26 @@ public final class SharedLexiconCatalog {
         for (Map.Entry<Coordinate, List<SourceMapping>> entry : mappings.entrySet()) {
             String available = precompute.get(entry.getKey()).precomputeProfile();
             for (SourceMapping mapping : entry.getValue()) {
-                if (!available.contains(mapping.precomputeProfile()))
+                if (!containsProfile(available, mapping.precomputeProfile()))
                     throw new IOException("precompute owner dropped for " + entry.getKey()
                             + ": " + mapping.precomputeProfile());
             }
         }
+    }
+
+    private static boolean containsProfile(String available, String wanted) {
+        String[] availableParts = available.split(" \\+ ", -1);
+        for (String wantedPart : wanted.split(" \\+ ", -1)) {
+            boolean found = false;
+            for (String availablePart : availableParts) {
+                if (availablePart.equals(wantedPart)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) return false;
+        }
+        return true;
     }
 
     private static List<PrecomputeProfile> readPrecomputeProfiles(

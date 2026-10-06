@@ -45,8 +45,16 @@ keys, non-object values, non-finite numbers and payloads over 1 MiB are
 rejected. Legacy input receives the explicit canonical payload `{}`.
 The field-level donor mapping is maintained in
 `m3/lexicon/synexia-precompute-field-map.tsv`; it covers the `IndexWordFacts`,
-`IndexWordSignalEnrichment`, `IndexWordSignalProfile` and `IndexWordSignalFlags`
-families without making their values part of `java.lang.String`.
+`IndexWordSignalEnrichment`, `IndexWordSignalProfile`, `IndexWordSignalFlags`,
+and reviewed LangDex primitive profile families without making their values part
+of `java.lang.String`. Its
+`donor_java_type` column records the inspected scalar or relation-array shape
+(`boolean`, `double`, `int`, `long`, `int[]`, or `long[]`) so future validators can reject shape
+drift without interpreting the language metadata as String semantics. When
+that field map is present beside the source manifest (or is supplied with
+`--field-map`), the exporter enforces those shapes and Java `int`/`long`
+bounds; the source-blind verifier repeats the same check from the exported
+type map, while the export manifest carries the field-map hash for provenance.
 
 `source_id + record_id` is the immutable source identity. The exporter rejects
 duplicates, unknown source families, source-path drift, empty fields and
@@ -83,7 +91,8 @@ The output is:
   fingerprint;
 - `synexia.precompute.tsv`: bounded UTF-16/code-point/hash/ASCII/Latin-1/
   whitespace facts plus the Synexia precompute profile;
-- `synexia.export.json`: source pins, input/output hashes, counts and policy.
+- `synexia.export.json`: source pins, input/output hashes, counts, policy and,
+  when available, the canonical precompute field-type map and its SHA-256.
 
 `com.m3.text.SharedLexiconCatalog.open(exportDirectory)` validates the shard
 manifest and all four sidecars together. It exposes stable
@@ -116,6 +125,7 @@ python3 m3/runtime-integration/verify-synexia-lexicon.py /operator/m3jdk-lexicon
 ```
 
 The proof covers all number IDs `0..10000`, multilingual/proper-name and unit
-mapping rows, rich owner payloads, legacy-input compatibility, deterministic
-replay, M3LEX001 version 2 metadata, precompute sidecars, conflict refusal
-before output creation, and source-blind rejection of a post-export mutation.
+mapping rows, rich owner payloads, the reviewed source-manifest-to-field-map
+lineage, legacy-input compatibility, deterministic replay, M3LEX001 version 2
+metadata, precompute sidecars, conflict refusal before output creation, and
+source-blind rejection of a post-export mutation.

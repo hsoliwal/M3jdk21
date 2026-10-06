@@ -140,6 +140,17 @@ public final class FoundationTest {
         check(catalog.find("\ud801").equals(Optional.of(new SharedLexiconCatalog.Coordinate(1,0))));
         check(catalog.precomputeAt(new SharedLexiconCatalog.Coordinate(1,0)).javaHash()==55297L);
         check(catalog.find("missing").isEmpty());check(catalog.textAt(new SharedLexiconCatalog.Coordinate(1,1)).equals("\ud802"));
+        String overlapMappings=mappings.replace("profile-high2\tprofile-high2\t{}\n",
+                "profile-high\tprofile-high\t{}\n");
+        String overlapProfiles=profiles
+                .replace("profile-high\t1\t1\t"+profileHash("profile-high",1,1)+"\n",
+                        "profile-high\t2\t2\t"+profileHash("profile-high",2,2)+"\n")
+                .replace("profile-high2\t1\t1\t"+profileHash("profile-high2",1,1)+"\n", "");
+        Files.writeString(directory.resolve("synexia.records.tsv"),overlapMappings,java.nio.charset.StandardCharsets.UTF_8);
+        Files.writeString(directory.resolve("synexia.precompute-index.tsv"),overlapProfiles,java.nio.charset.StandardCharsets.UTF_8);
+        expect(IOException.class,()->SharedLexiconCatalog.open(directory));
+        Files.writeString(directory.resolve("synexia.records.tsv"),mappings,java.nio.charset.StandardCharsets.UTF_8);
+        Files.writeString(directory.resolve("synexia.precompute-index.tsv"),profiles,java.nio.charset.StandardCharsets.UTF_8);
         Files.writeString(directory.resolve("synexia.shards.tsv"),header+"0\t../one.m3lex\ta\tb\t2\t2\t"+sha256(one)+"\n",java.nio.charset.StandardCharsets.UTF_8);
         expect(IOException.class,()->SharedLexiconCatalog.open(directory));
         Files.writeString(directory.resolve("synexia.shards.tsv"),header+rows,java.nio.charset.StandardCharsets.UTF_8);
