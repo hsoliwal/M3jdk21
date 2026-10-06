@@ -1,19 +1,10 @@
 # SPDX-License-Identifier: Apache-2.0
 ---
 type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.rewrite.CanonicalRecipeOwnership
-displayName: Validate canonical Synexia recipe ownership
+name: com.m3.rewrite.synexia.PureIntConvergence
+displayName: Apply the borrowed Synexia pure-int convergence recipe
 description: >-
-  Validates the machine ownership registry declaring Synexia as canonical owner of reusable
-  Maven/OpenRewrite recipe mechanics and targets as consumers/adapters.
-recipeList:
-  - com.synexia.rewrite.M3RecipeOwnershipInventoryRecipe
----
-type: specs.openrewrite.org/v1beta/recipe
-name: com.synexia.rewrite.PureIntConvergence
-displayName: Converge the canonical pure-int FILE atom
-description: >-
-  Applies the canonical Synexia-owned atomization, patternization/IOP and documentation DAG
-  for the proven private static primitive-int FILE domain.
+  Target-side activation only. The reusable implementation is canonically owned by Synexia and
+  imported under com.synexia.rewrite.atom from an exact source-bound handoff.
 recipeList:
   - com.synexia.rewrite.atom.M3PureIntConvergenceRecipe
