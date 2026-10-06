@@ -104,6 +104,10 @@ public final class M3StringInvariant {
                 owner(body(leftAssociated)),
                 owner(body(rightAssociated)),
                 "equal ordered composition ignores concat parenthesization");
+        String flatAbc = fresh("abc");
+        check(
+                owner(body(flatAbc)) != owner(body(leftAssociated)),
+                "equal spelling does not collapse a different canonical M3 coordinate structure");
 
         String chain = fresh("x");
         for (int index = 1; index < 4096; index++) {
