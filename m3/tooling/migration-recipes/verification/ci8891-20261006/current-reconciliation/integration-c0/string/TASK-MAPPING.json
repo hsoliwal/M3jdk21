@@ -1,0 +1,245 @@
+{
+  "archiveOnlyFiles": [],
+  "files": [
+    {
+      "bytes": 1401,
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted/sc0/project/README.md",
+      "gitBlob": "a2a68ac7eb28cb13501e37d20988f48c439aa608",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/README.md",
+      "mode": "100644",
+      "projectPath": "README.md",
+      "role": "qualified-project-flat",
+      "sha256": "c54039b95dcf606870baa17ed872d71f8ffd9d5fc33d2d5a8f7bd3e96ae28363",
+      "synexiaPath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/string/README.md"
+    },
+    {
+      "bytes": 12032,
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted/sc0/project/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "gitBlob": "a2e8c916208b563517e51b738744a05357e633aa",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "mode": "100644",
+      "projectPath": "dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "role": "qualified-project-flat",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "synexiaPath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/string/dependency-source/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java"
+    },
+    {
+      "bytes": 3680,
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted/sc0/project/pom.xml",
+      "gitBlob": "7ce7df885f3e515c49ab815766d348c8d517dcd4",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/pom.xml",
+      "mode": "100644",
+      "projectPath": "pom.xml",
+      "role": "qualified-project-flat",
+      "sha256": "876b6fd3cd13ab3dc134e8ae51706b5a399a491d5a6411443ae7f1e251fe15ba",
+      "synexiaPath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/string/pom.xml"
+    },
+    {
+      "bytes": 39816,
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted/sc0/project/proof.py",
+      "gitBlob": "587b49c1d2e58f77958d1f721157cafaae876f83",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/proof.py",
+      "mode": "100644",
+      "projectPath": "proof.py",
+      "role": "qualified-project-flat",
+      "sha256": "fa46f833f0831673553404263d9691819cb06e97e8638264e5a41ec55f049cd7",
+      "synexiaPath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/string/proof.py"
+    },
+    {
+      "bytes": 544,
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted/sc0/project/src/main/resources/META-INF/rewrite/sc0-orders.yml",
+      "gitBlob": "f20b495a609d0252c8b372b072be90e0a83d78fe",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/META-INF/rewrite/sc0-orders.yml",
+      "mode": "100644",
+      "projectPath": "src/main/resources/META-INF/rewrite/sc0-orders.yml",
+      "role": "qualified-project-flat",
+      "sha256": "0e7206684835471b8e79c6a6262483be1030dafd48f235d57754da9be61e48d2",
+      "synexiaPath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/META-INF/rewrite/sc0-orders.yml"
+    },
+    {
+      "bytes": 335,
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted/sc0/project/src/main/resources/META-INF/rewrite/sc0-spc.yml",
+      "gitBlob": "30caea8150c61bffbe35f85148a5d29e6c829810",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/META-INF/rewrite/sc0-spc.yml",
+      "mode": "100644",
+      "projectPath": "src/main/resources/META-INF/rewrite/sc0-spc.yml",
+      "role": "qualified-project-flat",
+      "sha256": "11dbeb330e54fe09372b8ddf28014b67f4813ae9cdaa4509b112143d7b08e506",
+      "synexiaPath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/META-INF/rewrite/sc0-spc.yml"
+    },
+    {
+      "bytes": 1177,
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted/sc0/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/manifest.tsv",
+      "gitBlob": "0279bcd227f7c84d8541423a607cfe4a2d607a62",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/manifest.tsv",
+      "mode": "100644",
+      "projectPath": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/manifest.tsv",
+      "role": "qualified-project-flat",
+      "sha256": "6495988cb6ec9ba66659f4fd2a56fccf2735a944c2b6ed401b270eaec5db6a9e",
+      "synexiaPath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/manifest.tsv"
+    },
+    {
+      "bytes": 778,
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted/sc0/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-1.txt",
+      "gitBlob": "2ef4c1b3437ec4f73b41a56a5949fa3ed15081c0",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-1.txt",
+      "mode": "100644",
+      "projectPath": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-1.txt",
+      "role": "qualified-project-flat",
+      "sha256": "c0af7bc99ace3f9dcc5e0e9085d9bac66eeb1a497b2153a54bb11ca250916c14",
+      "synexiaPath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-1.txt"
+    },
+    {
+      "bytes": 79659,
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted/sc0/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-2.txt",
+      "gitBlob": "c55670389e1f56821e43f15e3b57abf3d7cb0e01",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-2.txt",
+      "mode": "100644",
+      "projectPath": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-2.txt",
+      "role": "qualified-project-flat",
+      "sha256": "dab4ded7bc1558a151376bc3b882403f22138981377249d85114fa9186cb7657",
+      "synexiaPath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-2.txt"
+    },
+    {
+      "bytes": 51207,
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted/sc0/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-3.txt",
+      "gitBlob": "8838f271a9d873dfa9f5de9bdc428f07e18cf712",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-3.txt",
+      "mode": "100644",
+      "projectPath": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-3.txt",
+      "role": "qualified-project-flat",
+      "sha256": "1fd4c8d856e7de971c874936ef8561167041cd3c087e6ad8796d3225cc6087dc",
+      "synexiaPath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-3.txt"
+    },
+    {
+      "bytes": 3300,
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted/sc0/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-4.txt",
+      "gitBlob": "85c69eaf0c843e539dd2d0b4ff8fae380038c92a",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-4.txt",
+      "mode": "100644",
+      "projectPath": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-4.txt",
+      "role": "qualified-project-flat",
+      "sha256": "1a713463413df2684791ef1a214db69a7e5b23da888e61983c6b4902cef9c639",
+      "synexiaPath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-4.txt"
+    },
+    {
+      "bytes": 51207,
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted/sc0/project/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-5.txt",
+      "gitBlob": "8838f271a9d873dfa9f5de9bdc428f07e18cf712",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-5.txt",
+      "mode": "100644",
+      "projectPath": "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-5.txt",
+      "role": "qualified-project-flat",
+      "sha256": "1fd4c8d856e7de971c874936ef8561167041cd3c087e6ad8796d3225cc6087dc",
+      "synexiaPath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/sc0-spc/target-5.txt"
+    },
+    {
+      "bytes": 439,
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted/sc0/project/src/main/resources/composition-orders.json",
+      "gitBlob": "43ee11fd95d405a70c4175233ca0da16e352b4da",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/composition-orders.json",
+      "mode": "100644",
+      "projectPath": "src/main/resources/composition-orders.json",
+      "role": "qualified-project-flat",
+      "sha256": "cf01bc7b3334180ee17932ab71e18d3271f9fb766128dba2fbdc0891505eccff",
+      "synexiaPath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/composition-orders.json"
+    },
+    {
+      "bytes": 3560,
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted/sc0/project/src/main/resources/qualification.json",
+      "gitBlob": "d422b14897ea526c16763179e6db5836f8156766",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/qualification.json",
+      "mode": "100644",
+      "projectPath": "src/main/resources/qualification.json",
+      "role": "qualified-project-flat",
+      "sha256": "c5474bd26c5eb60316c35b548dcf7e5111cd9d614670797cd8f4cdf53244777f",
+      "synexiaPath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/string/src/main/resources/qualification.json"
+    },
+    {
+      "bytes": 29474,
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted/sc0/project/src/test/java/com/synexia/rewrite/Sc0RecipeTest.java",
+      "gitBlob": "251b32d26ec870b02cda8fc9c6aa3eac8645cf7c",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/java/com/synexia/rewrite/Sc0RecipeTest.java",
+      "mode": "100644",
+      "projectPath": "src/test/java/com/synexia/rewrite/Sc0RecipeTest.java",
+      "role": "qualified-project-flat",
+      "sha256": "28415a31b71b949d5ca7fb86e1baff7066acbff79c9067598b6589d8962b12b2",
+      "synexiaPath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/java/com/synexia/rewrite/Sc0RecipeTest.java"
+    },
+    {
+      "bytes": 778,
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted/sc0/project/src/test/resources/before/m3/runtime-integration/fix-root-ascii-case/manifest.json",
+      "gitBlob": "4cdd3a5768c007a25153c3a5ca26199db1610832",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/runtime-integration/fix-root-ascii-case/manifest.json",
+      "mode": "100644",
+      "projectPath": "src/test/resources/before/m3/runtime-integration/fix-root-ascii-case/manifest.json",
+      "role": "qualified-project-flat",
+      "sha256": "55cf0228bc55016de89f71104895e3c9fd408ec05dc32640452914ca53f42170",
+      "synexiaPath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/runtime-integration/fix-root-ascii-case/manifest.json"
+    },
+    {
+      "bytes": 79652,
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted/sc0/project/src/test/resources/before/m3/tooling/image-gates/current-c0.json",
+      "gitBlob": "0582f5ba603cc4b8452cd77c1c2810b43de98dd3",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/tooling/image-gates/current-c0.json",
+      "mode": "100644",
+      "projectPath": "src/test/resources/before/m3/tooling/image-gates/current-c0.json",
+      "role": "qualified-project-flat",
+      "sha256": "0d8ad720976c1de51cf8accad95cc149a06abfe2187041fcc25d524c1f630e09",
+      "synexiaPath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/tooling/image-gates/current-c0.json"
+    },
+    {
+      "bytes": 49580,
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted/sc0/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/03-M3StringPrecomputeSearchTest.java.txt",
+      "gitBlob": "0bd0981554c389b2a89e04335dc66f717958d38e",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/03-M3StringPrecomputeSearchTest.java.txt",
+      "mode": "100644",
+      "projectPath": "src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/03-M3StringPrecomputeSearchTest.java.txt",
+      "role": "qualified-project-flat",
+      "sha256": "1ed409eba2ba7135f22163288cc835b3f6c532f47bb2551ae1c4786fccd6079e",
+      "synexiaPath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/03-M3StringPrecomputeSearchTest.java.txt"
+    },
+    {
+      "bytes": 3300,
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted/sc0/project/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv",
+      "gitBlob": "df6055d13b89eb19b80363bb9c4669926973cd26",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv",
+      "mode": "100644",
+      "projectPath": "src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv",
+      "role": "qualified-project-flat",
+      "sha256": "d67ddc1cc759f042871c680d9510b929da4fd6b0523b43e966139cbe8ddace3b",
+      "synexiaPath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv"
+    },
+    {
+      "bytes": 51206,
+      "file": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/extracted/sc0/project/src/test/resources/before/test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java",
+      "gitBlob": "d8ed3e70b8c2fe2be4c4581e3c00340955cde369",
+      "m3Path": "m3/tooling/migration-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java",
+      "mode": "100644",
+      "projectPath": "src/test/resources/before/test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java",
+      "role": "qualified-project-flat",
+      "sha256": "825bf78d1684665fb85c3a93241700cb1e5d9403f9cb71603db7208303abcc56",
+      "synexiaPath": "synexia-openrewrite-recipes/tasks/m3-rc-10f/integration-c0/string/src/test/resources/before/test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java"
+    }
+  ],
+  "flatProjectFiles": 20,
+  "logicalProjectFiles": 20,
+  "producer": {
+    "output": {
+      "bytes": 10215,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/evidence/producer-v1/generated-candidate/OUTPUT.json",
+      "sha256": "3e9df04fcc1e555dc3ea245cb4dd0a9a1fc6d59635412796c5cfa2e0afd704ac"
+    },
+    "result": {
+      "bytes": 7899,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/evidence/producer-v1/RESULT.json",
+      "sha256": "93a0a751404f26418165bcd9287b90287214d8c8f3213ce1baf1c975ccaa3fd6"
+    }
+  },
+  "readback": {
+    "bytes": 384272,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-string-c0/packaging-authoring-v1/READBACK.json",
+    "sha256": "3f1a568c9846f6b2b627aa6cfe287693e2be26c13cd2ba2052afea9443a0e0f1"
+  },
+  "schema": "synexia.sc0.task-mapping/1"
+}
