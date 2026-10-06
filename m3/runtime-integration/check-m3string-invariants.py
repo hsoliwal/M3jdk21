@@ -228,6 +228,15 @@ match_method = re.search(
 if not match_method or "m3TqAllowsSearch" in match_method.group("body"):
     fail("anchored Matcher.match must not use M3TQ candidate gate")
 
+if "catch (OutOfMemoryError unavailable)" not in pattern:
+    fail("Pattern literal TQ compile must fail open on precompute OOME")
+if matcher.count("catch (OutOfMemoryError unavailable)") < 1:
+    fail("Matcher literal TQ source precompute must fail open on OOME")
+if "m3TqFactsText" in matcher:
+    fail("Matcher TQ cache must not retain a duplicate strong input reference")
+if "m3TqFacts = null;" not in matcher or "m3TqFactsFrom = -1;" not in matcher:
+    fail("Matcher reset must invalidate cached TQ facts")
+
 # Donor class naming must not leak back into live VM symbols/layout.
 for path, text in [
     ("vmSymbols.hpp", symbols),
