@@ -249,6 +249,14 @@ final class M3String implements CharSequence {
         return slice(beginIndex, endIndex);
     }
 
+    int codePointCount(int beginIndex, int endIndex) {
+        return M3StringCodePointPrecompute.codePointCount(this, beginIndex, endIndex);
+    }
+
+    int offsetByCodePoints(int index, int codePointOffset) {
+        return M3StringCodePointPrecompute.offsetByCodePoints(this, index, codePointOffset);
+    }
+
     int hashCodeValue() {
         return isWholeOwner() ? owner.javaHash : facts().javaHash;
     }
