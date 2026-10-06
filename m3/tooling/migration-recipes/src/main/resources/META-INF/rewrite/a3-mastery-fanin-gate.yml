@@ -1,0 +1,11 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.a3.MasteryFanInGate
+displayName: Gate A3 application on portable M3 mastery evidence
+description: >-
+  Replays the exact A3 portable mastery-import gate in the A3 Maven tool plane.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: a3-mastery-fanin-gate
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: a3-mastery-fanin-gate-pom
