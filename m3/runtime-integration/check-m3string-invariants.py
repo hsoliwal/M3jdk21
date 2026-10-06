@@ -42,6 +42,7 @@ stringtable = read("src/hotspot/share/classfile/stringTable.cpp")
 mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
+builder = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
 native_string = read("src/java.base/share/native/libjava/String.c")
 native_string_test = read("test/jdk/java/lang/String/nativeEncoding/libstringPlatformChars.c")
 hotspot_java_classes = read("src/hotspot/share/classfile/javaClasses.cpp")
@@ -788,6 +789,18 @@ if "M3String storage = m3();" not in string
 if "M3String storage = m3();" not in string
         or "return new String(storage.slice(beginIndex, endIndex));" not in string:
     fail("M3-backed substring no longer preserves canonical owner+coordinate directly")
+
+# Builders may own their mutable byte[] as required by AbstractStringBuilder, but M3-backed
+# String ingress must bulk-copy canonical ranges and must not materialize String.value().
+for fragment in [
+    "M3String storage = s.m3();",
+    "s.getBytes(this.value, off, this.count, LATIN1, end - off);",
+    "s.getBytes(this.value, off, this.count, UTF16, end - off);",
+]:
+    if fragment not in builder:
+        fail(f"M3 builder bulk String ingress missing: {fragment}")
+if "M3StringBuilderInteropTest.java" not in workflow:
+    fail("M3 String workflow lost builder interop proof")
 
 # M3-backed constructors must store only the empty compatibility sentinel.
 if string.count("storage.compatibilityValue()") < 4:
