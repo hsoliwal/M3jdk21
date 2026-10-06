@@ -1698,7 +1698,7 @@ public final class String
         Objects.checkFromToIndex(beginIndex, endIndex, length());
         M3String storage = m3();
         if (storage != null) {
-            return storage.slice(beginIndex, endIndex).facts().codePointCount;
+            return storage.codePointCount(beginIndex, endIndex);
         }
         if (isLatin1()) {
             return endIndex - beginIndex;
@@ -1728,18 +1728,8 @@ public final class String
      */
     public int offsetByCodePoints(int index, int codePointOffset) {
         M3String storage = m3();
-        if (storage != null && index >= 0 && index <= storage.length()) {
-            M3StringFacts prepared = storage.factsIfPrepared();
-            boolean oneUnitPerCodePoint =
-                    storage.coder() == LATIN1
-                            || (prepared != null
-                                    && prepared.codePointCount == storage.length());
-            if (oneUnitPerCodePoint) {
-                long result = (long) index + codePointOffset;
-                if (result >= 0L && result <= storage.length()) {
-                    return (int) result;
-                }
-            }
+        if (storage != null) {
+            return storage.offsetByCodePoints(index, codePointOffset);
         }
         return Character.offsetByCodePoints(this, index, codePointOffset);
     }
