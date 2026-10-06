@@ -1,0 +1,19 @@
+dependency	current_m3jdk21	j497_use	action
+sun.security.provider.NamedKeyFactory	ABSENT_CURRENT_TREE	ML-DSA key factory	REPLAY_PROVEN_JAVA21_FRAMEWORK_RECIPE
+sun.security.provider.NamedKeyPairGenerator	ABSENT_CURRENT_TREE	ML-DSA key generation	REPLAY_PROVEN_JAVA21_FRAMEWORK_RECIPE
+sun.security.provider.NamedSignature	ABSENT_CURRENT_TREE	ML-DSA signature engine framework	REPLAY_PROVEN_JAVA21_FRAMEWORK_RECIPE
+sun.security.pkcs.NamedPKCS8Key	ABSENT_CURRENT_TREE	private-key encoding support	REPLAY_PROVEN_JAVA21_FRAMEWORK_RECIPE
+sun.security.x509.NamedX509Key	ABSENT_CURRENT_TREE	public-key encoding support	REPLAY_PROVEN_JAVA21_FRAMEWORK_RECIPE
+sun.security.util.KeyUtil	PRESENT	framework key validation utility	ADAPT_EXACT_UPSTREAM_DELTA
+sun.security.util.SignatureUtil	PRESENT	framework signature utility	ADAPT_EXACT_UPSTREAM_DELTA
+sun.security.provider.SHA3.SHAKE128	ABSENT_NESTED_XOF	ML-DSA SHAKE128 XOF	ADD_JDK_8338587_PREREQUISITE
+sun.security.provider.SHA3.SHAKE256	ABSENT_NESTED_XOF	ML-DSA SHAKE256 XOF	ADD_JDK_8338587_PREREQUISITE
+sun.security.provider.SHAKE256	PRESENT_STANDALONE	current PKCS7/SignerInfo SHAKE256 compatibility	PRESERVE_OR_MIGRATE_CALLERS_IN_PREREQUISITE
+sun.security.provider.SunEntries	PRESENT	ML-DSA provider registrations	EXTEND_PROVIDER
+java.security.spec.NamedParameterSpec	PRESENT	ML-DSA named parameter constants	LIBRARY_API_REVIEW_REQUIRED
+sun.security.util.KnownOIDs	PRESENT	NIST ML-DSA OIDs	EXTEND_OID_TABLE
+JDK-8345057	NOT_APPLIED	retain ML-KEM constants when both PQC features coexist	MANDATORY_COHABITATION_FIX
+JDK-8345533	NOT_APPLIED	final FIPS 204 message/signature semantics	MANDATORY_CORRECTNESS_FIX
+FIPS204 ACVP vectors	ABSENT	known-answer/security proof	ADD_TEST_DATA
+A3 Java preparation	AVAILABLE	atomize/patternize/document/fixed-point before backport recipe	MANDATORY_PRE_RECIPE
+JDK-8347606	NOT_APPLIED	Java performance follow-up	DEFER_UNTIL_FUNCTIONAL_PROOF

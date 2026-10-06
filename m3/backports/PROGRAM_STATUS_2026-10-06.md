@@ -114,6 +114,10 @@ Current JEP packet evidence recognized by the regenerated queue:
 - JEP 496 — `PACKET_EVIDENCE`
   - exact OpenJDK prerequisite/feature commits and 20-path receiving denominator are inventoried;
   - product materialization is locked until A3/source-21/FIPS203/provider/security proof;
+- JEP 497 — `PACKET_EVIDENCE`
+  - shared framework + JEP implementation + JDK-8345057 coexistence + JDK-8345533 final FIPS 204 lineage are pinned;
+  - 20-path receiving denominator is inventoried; product materialization remains unauthorized;
+  - Java/A3/source-21/FIPS204/provider/security/full-image/fixed-point proof remains required;
 - JEP 510 — `PACKET_EVIDENCE`
   - KDF inventory/dependency packet exists with `product_materialization=false`.
 
