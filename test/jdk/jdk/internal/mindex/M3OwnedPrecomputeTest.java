@@ -59,6 +59,9 @@ public class M3OwnedPrecomputeTest {
         check(fst.longestPrefixOutput("dogmatic", -1L) == 17L, "fst longest prefix output");
         check(fst.hasPrefix("ca"), "fst prefix exists");
         check(!fst.hasPrefix("zx"), "fst missing prefix");
+        M3TermFst sentinel = M3TermFst.freeze(Map.of("min", Long.MIN_VALUE));
+        check(sentinel.contains("min"), "fst minimum-long output remains present");
+        check(sentinel.lookup("min", 7L) == Long.MIN_VALUE, "fst minimum-long output");
         check(
                 fst.rootHash().equals(
                         M3TermFst.freeze(
