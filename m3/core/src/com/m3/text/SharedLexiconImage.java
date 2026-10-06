@@ -24,22 +24,28 @@ public final class SharedLexiconImage {
     public static final int MAX_IMAGE_BYTES = 64 * 1024 * 1024;
     public static final int MAX_RECORDS = 65536;
     private final MappedByteBuffer mapping;
+    private final int version;
     private final int[] offsets, lengths;
     private final byte[] recordDigests;
     private final int payloadOffset;
+    private final long utf16Units;
     private final String imageIdentity;
 
     private SharedLexiconImage(MappedByteBuffer data) throws IOException {
         mapping = data;
         data.order(ByteOrder.BIG_ENDIAN);
-        if (data.limit() < HEADER || data.getLong(0) != MAGIC || data.getInt(8) != 1)
+        if (data.limit() < HEADER || data.getLong(0) != MAGIC)
             throw new IOException("unsupported image header");
+        version = data.getInt(8);
+        if (version != 1 && version != 2) throw new IOException("unsupported image version");
         int count = data.getInt(12);
         long payload = data.getLong(16), units = data.getLong(24);
+        int directoryBytes = version == 1 ? 8 : 12;
         if (count < 0 || count > MAX_RECORDS || units < 0
-                || units > MAX_IMAGE_BYTES / 2 || payload != HEADER + 8L * count
+                || units > MAX_IMAGE_BYTES / 2 || payload != HEADER + (long) directoryBytes * count
                 || payload + 2L * units != data.limit()) throw new IOException("invalid image dimensions");
         payloadOffset = (int)payload;
+        utf16Units = units;
         byte[] expected = new byte[32];
         data.get(32, expected);
         if (!MessageDigest.isEqual(expected, digestImage(data))) throw new IOException("image checksum mismatch");
@@ -47,9 +53,15 @@ public final class SharedLexiconImage {
         offsets = new int[count]; lengths = new int[count]; recordDigests = new byte[count * 32];
         // Snapshot metadata and record checksums before publishing this image owner.
         for (int i = 0; i < count; i++) {
-            int offset = data.getInt(HEADER + i * 8), length = data.getInt(HEADER + i * 8 + 4);
+            int entry = HEADER + i * directoryBytes;
+            int offset = data.getInt(entry), length = data.getInt(entry + 4);
             if (offset < 0 || length < 0 || (long)offset + length > units) throw new IOException("invalid record range");
             offsets[i] = offset; lengths[i] = length;
+            int actualJavaHash = javaHash(i);
+            if (version == 2 && data.getInt(entry + 8) != actualJavaHash)
+                throw new IOException("record Java hash mismatch");
+            if (i > 0 && compareRecords(i - 1, i) >= 0)
+                throw new IOException("records must be UTF-16 sorted");
             System.arraycopy(digest(recordBytes(i)), 0, recordDigests, i * 32, 32);
         }
         // Detect changes during initial metadata/hash capture. Source files must be
@@ -67,13 +79,76 @@ public final class SharedLexiconImage {
     /** Explicit warming after bootstrap; opening additional shards is caller-driven. */
     public void warm() { mapping.load(); }
     public String imageIdentity() { return imageIdentity; }
+    public int version() { return version; }
     public int size() { return offsets.length; }
     public int mappedBytes() { return mapping.limit(); }
+    /** Number of UTF-16 code units in the image payload, without materializing it. */
+    public long utf16Units() { return utf16Units; }
 
     private ByteBuffer recordBytes(int index) {
         Objects.checkIndex(index, offsets.length);
         int begin = payloadOffset + offsets[index] * 2;
         return mapping.asReadOnlyBuffer().slice(begin, lengths[index] * 2);
+    }
+
+    private int javaHash(int index) {
+        ByteBuffer record = recordBytes(index);
+        int hash = 0;
+        for (int at = 0; at < record.remaining(); at += 2) {
+            int unit = (record.get(at) & 0xff) | ((record.get(at + 1) & 0xff) << 8);
+            hash = 31 * hash + unit;
+        }
+        return hash;
+    }
+
+    private int compareRecords(int leftIndex, int rightIndex) {
+        ByteBuffer left = recordBytes(leftIndex), right = recordBytes(rightIndex);
+        int units = Math.min(left.remaining(), right.remaining()) / 2;
+        for (int at = 0; at < units; at++) {
+            int leftUnit = (left.get(at * 2) & 0xff) | ((left.get(at * 2 + 1) & 0xff) << 8);
+            int rightUnit = (right.get(at * 2) & 0xff) | ((right.get(at * 2 + 1) & 0xff) << 8);
+            if (leftUnit != rightUnit) return Integer.compare(leftUnit, rightUnit);
+        }
+        return Integer.compare(left.remaining(), right.remaining());
+    }
+
+    /** Exact UTF-16 text for a record; unpaired surrogates are preserved. */
+    String recordText(int index) {
+        ByteBuffer record = recordBytes(index);
+        char[] text = new char[record.remaining() / 2];
+        for (int at = 0; at < text.length; at++) {
+            int offset = at * 2;
+            text[at] = (char)((record.get(offset) & 0xff)
+                    | ((record.get(offset + 1) & 0xff) << 8));
+        }
+        return new String(text);
+    }
+
+    /** Binary lookup using the image's UTF-16 ordering and Java String ordering. */
+    int findRecord(String value) {
+        Objects.requireNonNull(value);
+        int low = 0, high = offsets.length - 1;
+        while (low <= high) {
+            int middle = (low + high) >>> 1;
+            int comparison = compareRecordTo(middle, value);
+            if (comparison < 0) low = middle + 1;
+            else if (comparison > 0) high = middle - 1;
+            else return middle;
+        }
+        return -1;
+    }
+
+    private int compareRecordTo(int index, String value) {
+        ByteBuffer record = recordBytes(index);
+        int units = Math.min(record.remaining() / 2, value.length());
+        for (int at = 0; at < units; at++) {
+            int offset = at * 2;
+            int recordUnit = (record.get(offset) & 0xff)
+                    | ((record.get(offset + 1) & 0xff) << 8);
+            char valueUnit = value.charAt(at);
+            if (recordUnit != valueUnit) return Integer.compare(recordUnit, valueUnit);
+        }
+        return Integer.compare(record.remaining() / 2, value.length());
     }
     /** Copies and checks a record before it can become immutable local backing. */
     public LocalM3StringPiece copyRecord(int index, LocalM3Arena arena) throws IOException {
@@ -93,6 +168,9 @@ public final class SharedLexiconImage {
         if (words.size() > MAX_RECORDS) throw new IOException("too many records");
         List<String> snapshot = List.copyOf(words);
         if (snapshot.size() > MAX_RECORDS) throw new IOException("too many records");
+        for (int i = 1; i < snapshot.size(); i++)
+            if (snapshot.get(i - 1).compareTo(snapshot.get(i)) >= 0)
+                throw new IOException("records must be UTF-16 sorted");
         long units = 0;
         for (String word : snapshot) units = Math.addExact(units, word.length());
         long payload = HEADER + 8L * snapshot.size(), size = payload + 2L * units;

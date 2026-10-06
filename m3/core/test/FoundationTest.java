@@ -53,12 +53,24 @@ public final class FoundationTest {
         Set<StorageIdentity> ids=new HashSet<>();for(Future<Set<StorageIdentity>> result:results)check(ids.addAll(result.get()));executor.shutdown();check(ids.size()==8000);
     }
     static void chainIndex(){M3StringPiece.join().charAt(0);}
+    static int javaHash(String value){int hash=0;for(int i=0;i<value.length();i++)hash=31*hash+value.charAt(i);return hash;}
+    static void writeV2(Path path,List<String> words)throws Exception{
+        long units=0;for(String word:words)units=Math.addExact(units,word.length());
+        int payload=64+12*words.size();ByteBuffer bytes=ByteBuffer.allocate(Math.toIntExact(payload+2*units)).order(ByteOrder.BIG_ENDIAN);
+        bytes.putLong(0,0x4d334c4558303031L).putInt(8,2).putInt(12,words.size()).putLong(16,payload).putLong(24,units);
+        int offset=0;for(int row=0;row<words.size();row++){String word=words.get(row);int entry=64+12*row;
+            bytes.putInt(entry,offset).putInt(entry+4,word.length()).putInt(entry+8,javaHash(word));
+            for(int at=0;at<word.length();at++){char unit=word.charAt(at);int destination=payload+2*(offset+at);bytes.put(destination,(byte)unit).put(destination+1,(byte)(unit>>>8));}offset+=word.length();}
+        java.security.MessageDigest digest=java.security.MessageDigest.getInstance("SHA-256");digest.update(bytes.array(),0,32);digest.update(bytes.array(),64,bytes.capacity()-64);System.arraycopy(digest.digest(),0,bytes.array(),32,32);Files.write(path,bytes.array(),StandardOpenOption.CREATE_NEW);
+    }
     static void images(Path directory) throws Exception {
-        Path image=directory.resolve("unicode.m3lex");List<String> words=List.of("", "a", "\u0100", "\ud800", "\udc00", "\ud83d\ude00");
+        Path image=directory.resolve("unicode.m3lex");List<String> words=List.of("", "a", "\u0100", "\ud800", "\ud83d\ude00", "\udc00");
         SharedLexiconImage.create(image,words);SharedLexiconImage one=SharedLexiconImage.open(image),two=SharedLexiconImage.open(image);one.warm();
         check(one.imageIdentity().equals(two.imageIdentity()));check(one.size()==words.size());
         LocalM3Arena arena=new LocalM3Arena();
         for(int i=0;i<words.size();i++)check(one.copyRecord(i,arena).flatten().equals(words.get(i)));
+        Path versionTwo=directory.resolve("unicode-v2.m3lex");writeV2(versionTwo,words);SharedLexiconImage twoVersion=SharedLexiconImage.open(versionTwo);check(twoVersion.version()==2);
+        for(int i=0;i<words.size();i++)check(twoVersion.copyRecord(i,arena).flatten().equals(words.get(i)));
         LocalM3StringPiece saved=one.copyRecord(1,arena);
         // A dimension reinterpretation must not retain the same valid image identity.
         Path changedHeader=directory.resolve("changed-header");byte[] headerBytes=Files.readAllBytes(image);
@@ -75,5 +87,24 @@ public final class FoundationTest {
         check(arena.copyUtf16("fallback".toCharArray()).flatten().equals("fallback"));
         Path largeCount=directory.resolve("bad-count");byte[] bytes=Files.readAllBytes(image);ByteBuffer.wrap(bytes).putInt(12,Integer.MAX_VALUE);Files.write(largeCount,bytes);expect(IOException.class,()->SharedLexiconImage.open(largeCount));
     }
-    public static void main(String[] args)throws Exception{pieces();Path dir=Files.createTempDirectory("m3-foundation-");try{images(dir);}finally{try(var paths=Files.list(dir)){for(Path path:paths.toList())Files.delete(path);}Files.delete(dir);}System.out.println("FOUNDATION_PASS checks="+checks);}
+    static String sha256(Path path) throws Exception {
+        java.security.MessageDigest digest=java.security.MessageDigest.getInstance("SHA-256");
+        try(InputStream input=Files.newInputStream(path)){byte[] buffer=new byte[4096];for(int read;(read=input.read(buffer))>=0;)if(read!=0)digest.update(buffer,0,read);}
+        return java.util.HexFormat.of().formatHex(digest.digest());
+    }
+    static void catalog(Path directory) throws Exception {
+        Path one=directory.resolve("one.m3lex"), two=directory.resolve("two.m3lex");
+        writeV2(one,List.of("a","\ud800"));writeV2(two,List.of("\ud801","\ud802"));
+        String header="shard_id\tfile\tfirst_lexeme\tlast_lexeme\timage_records\tutf16_units\tsha256\n";
+        String rows="0\tone.m3lex\ta\t\\uD800\t2\t2\t"+sha256(one)+"\n"
+                +"1\ttwo.m3lex\t\\uD801\t\\uD802\t2\t2\t"+sha256(two)+"\n";
+        Files.writeString(directory.resolve("synexia.shards.tsv"),header+rows,java.nio.charset.StandardCharsets.UTF_8);
+        SharedLexiconCatalog catalog=SharedLexiconCatalog.open(directory);catalog.warm();
+        check(catalog.shardCount()==2);check(catalog.recordCount()==4);check(catalog.shardFiles().equals(List.of("one.m3lex","two.m3lex")));
+        check(catalog.find("\ud801").equals(Optional.of(new SharedLexiconCatalog.Coordinate(1,0))));
+        check(catalog.find("missing").isEmpty());check(catalog.textAt(new SharedLexiconCatalog.Coordinate(1,1)).equals("\ud802"));
+        Files.writeString(directory.resolve("synexia.shards.tsv"),header+"0\t../one.m3lex\ta\tb\t2\t2\t"+sha256(one)+"\n",java.nio.charset.StandardCharsets.UTF_8);
+        expect(IOException.class,()->SharedLexiconCatalog.open(directory));
+    }
+    public static void main(String[] args)throws Exception{pieces();Path dir=Files.createTempDirectory("m3-foundation-");try{images(dir);catalog(dir);}finally{try(var paths=Files.list(dir)){for(Path path:paths.toList())Files.delete(path);}Files.delete(dir);}System.out.println("FOUNDATION_PASS checks="+checks);}
 }
