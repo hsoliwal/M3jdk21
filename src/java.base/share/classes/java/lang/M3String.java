@@ -644,6 +644,66 @@ final class M3String implements CharSequence {
         return -1;
     }
 
+    M3String translateEscapes() {
+        ArrayList<M3String> pieces = null;
+        int cursor = 0;
+        int index = 0;
+        while (index < length()) {
+            if (charAt(index) != '\\') {
+                index++;
+                continue;
+            }
+
+            int slash = index++;
+            char escaped = index < length() ? charAt(index++) : '\0';
+            if (pieces == null) pieces = new ArrayList<>();
+            if (cursor < slash) pieces.add(slice(cursor, slash));
+
+            boolean emit = true;
+            switch (escaped) {
+                case 'b' -> escaped = '\b';
+                case 'f' -> escaped = '\f';
+                case 'n' -> escaped = '\n';
+                case 'r' -> escaped = '\r';
+                case 's' -> escaped = ' ';
+                case 't' -> escaped = '\t';
+                case '\'', '"', '\\' -> {
+                    // as is
+                }
+                case '0', '1', '2', '3', '4', '5', '6', '7' -> {
+                    int limit = Math.min(index + (escaped <= '3' ? 2 : 1), length());
+                    int code = escaped - '0';
+                    while (index < limit) {
+                        char next = charAt(index);
+                        if (next < '0' || next > '7') break;
+                        index++;
+                        code = (code << 3) | (next - '0');
+                    }
+                    escaped = (char) code;
+                }
+                case '\n' -> emit = false;
+                case '\r' -> {
+                    if (index < length() && charAt(index) == '\n') index++;
+                    emit = false;
+                }
+                default -> {
+                    String message = String.format(
+                            "Invalid escape sequence: \\%c \\\\u%04X",
+                            escaped,
+                            (int) escaped);
+                    throw new IllegalArgumentException(message);
+                }
+            }
+
+            if (emit) pieces.add(M3StringPool.internUnit(escaped));
+            cursor = index;
+        }
+
+        if (pieces == null) return this;
+        if (cursor < length()) pieces.add(slice(cursor, length()));
+        return joinValues(pieces);
+    }
+
     M3String asciiCase(boolean upper) {
         M3StringFacts prepared = facts();
         if (!prepared.ascii) {
