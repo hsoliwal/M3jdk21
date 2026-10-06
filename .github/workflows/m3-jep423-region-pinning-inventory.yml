@@ -51,8 +51,7 @@ jobs:
           git -C "$RUNNER_TEMP/upstream-jdk" init -q
           git -C "$RUNNER_TEMP/upstream-jdk" remote add origin https://github.com/openjdk/jdk.git
           git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch             --filter=blob:none --no-tags origin             "refs/tags/jdk-21+35:refs/tags/jdk-21+35"             "refs/tags/jdk-22+36:refs/tags/jdk-22+36"             "38cfb220ddadbb401cc15f313aadb8234f626210"
-          printf 'UPSTREAM=%s
-' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
+          printf 'UPSTREAM=%s\\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
 
       - name: Prove implementation touched-path denominator and compatibility split
         shell: bash
