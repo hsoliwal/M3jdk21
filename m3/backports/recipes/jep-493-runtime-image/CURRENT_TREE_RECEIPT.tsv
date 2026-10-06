@@ -15,3 +15,5 @@ runtime_image_smoke	pending
 fixed_point	pending
 promotion	NOT_AUTHORIZED
 next_action	GENERATE_FILE_ATOMIC_JAVA_TEXT_CRATES_THEN_COMPOSE_MULTI_MODULE_PACKET
+proof_refresh_base	b71ee5bf88398fb80961c13db03e8c675fb445ce
+proof_refresh_requested	2026-10-06
