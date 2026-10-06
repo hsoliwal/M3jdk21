@@ -42,7 +42,7 @@ final class M3ReleaseJepDenominatorRecipeTest {
                     "release-jep-denominator-readme.txt"));
 
     @Test
-    void elevenFileAtomsJoinAtFixedPointFromCurrentMaster() {
+    void elevenSealedLeavesProduceTenCurrentMasterChangesThenFixPoint() {
         var recipe = new M3ReleaseJepDenominatorRecipe();
         assertEquals(85, M3ReleaseJepDenominatorRecipe.JEP_DENOMINATOR);
         assertEquals(11, recipe.getRecipeList().size());
@@ -51,7 +51,7 @@ final class M3ReleaseJepDenominatorRecipeTest {
 
         var first = recipe.run(new InMemoryLargeSourceSet(baseline()), context(), 1);
         List<Result> changes = first.getChangeset().getAllResults();
-        assertEquals(11, changes.size());
+        assertEquals(10, changes.size());
         assertTrue(changes.stream().anyMatch(result ->
                 result.getAfter().printAll().contains("24\t404\tGenerational Shenandoah")));
         assertTrue(changes.stream().anyMatch(result ->
