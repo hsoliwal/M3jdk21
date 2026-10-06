@@ -282,6 +282,12 @@ if "prepared.utf8Length" not in m3 or "prepared.codePointCount" not in m3:
 if "final int utf8Length;" not in facts or "final boolean ascii;" not in facts or "final boolean latin1;" not in facts:
     fail("M3StringFacts lost byte-encoding geometry")
 
+for fragment in [
+    "int found = indexOf(oldChar, 0, length());",
+    "found = cursor < length() ? indexOf(oldChar, cursor, length()) : -1;",
+]:
+    if fragment not in m3:
+        fail(f"M3 char replacement lost position-precompute reuse: {fragment}")
 if "M3String replace(char oldChar, char newChar)" not in m3:
     fail("M3String canonical char replacement path missing")
 if "M3String replace(M3String target, M3String replacement)" not in m3:
