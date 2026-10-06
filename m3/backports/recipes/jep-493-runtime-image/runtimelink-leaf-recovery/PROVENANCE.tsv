@@ -1,0 +1,6 @@
+kind	reference	use
+current_base	87590cb96fb0e2dc0f88fae8e01957f7179cd255	current recovery baseline
+source_pr	hsoliwal/M3jdk21#109@de7d752d26b11153df020145060c36753570aa8b	exact reviewed leaf/product/recipe/test blobs
+donor_tag	openjdk/jdk@jdk-24+36	final GA source authority
+ga_commit	6705a9255d28f351950e7fbca9d05e73942a4e27	resolved final donor tree
+excluded_file	RuntimeImageLinkException.java	absent from GA; do not add
