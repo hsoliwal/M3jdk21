@@ -8,14 +8,18 @@ import java.util.Objects;
 import java.util.function.LongPredicate;
 
 /**
+ * <b>[JDK INTERNAL]</b>
  * TQ (Trigram Query): conservative boolean queries over UTF-16 trigrams.
  *
- * <p>JDK-owned adaptation of Synexia MIndexRegexTrigramQuery. No Synexia module is
- * required at build time or runtime. See m3/tooling/tq for exact provenance.</p>
+ * <p>This is a JDK-owned internal adaptation of donor trigram-query mechanics. No Synexia module
+ * is required at build time or runtime; donor names are provenance only.</p>
  *
- * <p>The query is a necessary condition only: a false result proves that a regex cannot match,
- * while a true result always requires the authoritative regex verifier. This is deliberately the
- * same candidate-only contract used by the rest of the MIndex search geometry.</p>
+ * <p>The query is a necessary condition only: a false result may reject a regex candidate, while
+ * a true result always requires the authoritative JDK regex verifier. Facts retain derived
+ * primitive membership only and never own canonical String spelling.</p>
+ *
+ * @implNote Exact provenance belongs to the M3 donor/recipe workspace; this type defines the
+ * JDK-side execution contract only.
  */
 public final class M3TQ {
   public enum Op {
