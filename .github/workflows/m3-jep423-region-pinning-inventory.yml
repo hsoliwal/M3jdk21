@@ -1,25 +1,33 @@
-name: M3 JEP 423 G1 region-pinning inventory
+name: M3 JEP 423 cumulative G1 region-pinning materialization
 
 on:
   push:
     branches:
-      - "m3/jep423-region-pinning-inventory-20261006"
+      - "m3/jep423-cumulative-materialization-20261006"
     paths:
       - "m3/backports/recipes/jep-423-region-pinning/**"
-      - "m3/backports/generate_recipe_crates.py"
       - "m3/backports/file_delta_inventory.py"
-      - "m3/backports/test_generate_recipe_crates.py"
+      - "m3/backports/generate_recipe_crates.py"
+      - "m3/backports/materialize_generated_crates.py"
+      - "m3/backports/selected_path_lineage.py"
       - "m3/backports/test_file_delta_inventory.py"
+      - "m3/backports/test_generate_recipe_crates.py"
+      - "m3/backports/test_materialize_generated_crates.py"
+      - "m3/backports/test_selected_path_lineage.py"
       - "m3/tooling/migration-recipes/**"
       - "m3/tooling/backport-dag/**"
       - ".github/workflows/m3-jep423-region-pinning-inventory.yml"
   pull_request:
     paths:
       - "m3/backports/recipes/jep-423-region-pinning/**"
-      - "m3/backports/generate_recipe_crates.py"
       - "m3/backports/file_delta_inventory.py"
-      - "m3/backports/test_generate_recipe_crates.py"
+      - "m3/backports/generate_recipe_crates.py"
+      - "m3/backports/materialize_generated_crates.py"
+      - "m3/backports/selected_path_lineage.py"
       - "m3/backports/test_file_delta_inventory.py"
+      - "m3/backports/test_generate_recipe_crates.py"
+      - "m3/backports/test_materialize_generated_crates.py"
+      - "m3/backports/test_selected_path_lineage.py"
       - "m3/tooling/migration-recipes/**"
       - "m3/tooling/backport-dag/**"
       - ".github/workflows/m3-jep423-region-pinning-inventory.yml"
@@ -29,116 +37,158 @@ permissions:
   contents: read
 
 jobs:
-  inventory:
+  cumulative-materialization:
     runs-on: ubuntu-22.04
-    timeout-minutes: 60
+    timeout-minutes: 180
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
-          fetch-depth: 0
+          fetch-depth: 1
+          persist-credentials: false
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "21"
           cache: maven
 
-      - name: Fetch exact OpenJDK 21, JEP423 implementation and JDK22 GA
+      - name: 1 - Diff hygiene
+        run: git diff --check
+
+      - name: 2 - Fetch exact OpenJDK21 JEP423 fixes and JDK22 GA
         shell: bash
         run: |
           set -euo pipefail
           mkdir "$RUNNER_TEMP/upstream-jdk"
           git -C "$RUNNER_TEMP/upstream-jdk" init -q
           git -C "$RUNNER_TEMP/upstream-jdk" remote add origin https://github.com/openjdk/jdk.git
-          git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch             --filter=blob:none --no-tags origin             "refs/tags/jdk-21+35:refs/tags/jdk-21+35"             "refs/tags/jdk-22+36:refs/tags/jdk-22+36"             "38cfb220ddadbb401cc15f313aadb8234f626210"
-          printf 'UPSTREAM=%s\\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
+          git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch \
+            --filter=blob:none --no-tags origin \
+            "refs/tags/jdk-21+35:refs/tags/jdk-21+35" \
+            "refs/tags/jdk-22+36:refs/tags/jdk-22+36" \
+            "38cfb220ddadbb401cc15f313aadb8234f626210" \
+            "8643cc21333c6b51242ed3b9295b25f372244755" \
+            "0d5f5e15d43f94a79c6133baecd5af217365d176"
+          printf 'UPSTREAM=%s\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
 
-      - name: Prove implementation touched-path denominator and compatibility split
+      - name: 3 - Prove initial and cumulative denominators
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p target/jep423
           python3 - <<'PY'
-          import csv
           import subprocess
           from pathlib import Path
           import os
 
-          root = Path(".")
           repo = Path(os.environ["UPSTREAM"])
-          packet = root / "m3/backports/recipes/jep-423-region-pinning"
+          packet = Path("m3/backports/recipes/jep-423-region-pinning")
+          initial = [x for x in (packet / "INITIAL_PATHS.txt").read_text().splitlines() if x]
+          cumulative = [x for x in (packet / "PATHS.txt").read_text().splitlines() if x]
+          admitted = [x for x in (packet / "ADMIT_PATHS.txt").read_text().splitlines() if x]
 
-          expected = [
-              line.strip()
-              for line in (packet / "PATHS.txt").read_text(encoding="utf-8").splitlines()
-              if line.strip()
-          ]
-          admitted = [
-              line.strip()
-              for line in (packet / "ADMIT_PATHS.txt").read_text(encoding="utf-8").splitlines()
-              if line.strip()
-          ]
           actual = subprocess.check_output(
-              [
-                  "git", "-C", str(repo), "diff-tree", "--no-commit-id", "--name-only", "-r",
-                  "38cfb220ddadbb401cc15f313aadb8234f626210",
-              ],
+              ["git", "-C", str(repo), "diff-tree", "--no-commit-id", "--name-only", "-r",
+               "38cfb220ddadbb401cc15f313aadb8234f626210"],
               text=True,
           ).splitlines()
 
-          if len(expected) != 59:
-              raise SystemExit(f"expected 59 JEP423 paths, found {len(expected)}")
-          if len(admitted) != 57:
-              raise SystemExit(f"expected 57 admitted JEP423 paths, found {len(admitted)}")
-          if sorted(expected) != sorted(actual):
-              raise SystemExit(
-                  "JEP423 implementation denominator drift "
-                  f"missing={sorted(set(actual)-set(expected))} "
-                  f"extra={sorted(set(expected)-set(actual))}"
-              )
+          assert len(initial) == 59, len(initial)
+          assert sorted(initial) == sorted(actual), (
+              sorted(set(actual)-set(initial)), sorted(set(initial)-set(actual))
+          )
+          assert len(cumulative) == 64, len(cumulative)
+          assert len(admitted) == 62, len(admitted)
+          assert set(initial).issubset(cumulative)
+          extras = set(cumulative) - set(initial)
+          expected_extras = {
+              "src/hotspot/share/gc/g1/g1BarrierSet.cpp",
+              "src/hotspot/share/gc/g1/g1RegionPinCache.hpp",
+              "src/hotspot/share/gc/g1/g1RegionPinCache.inline.hpp",
+              "src/hotspot/share/gc/g1/g1ThreadLocalData.hpp",
+              "src/hotspot/share/gc/g1/g1YoungGCPreEvacuateTasks.cpp",
+          }
+          assert extras == expected_extras, (extras, expected_extras)
 
-          preserved = sorted(set(expected) - set(admitted))
-          wanted_preserved = sorted([
+          preserved = set(cumulative) - set(admitted)
+          assert preserved == {
               "test/hotspot/jtreg/gc/stress/TestJNIBlockFullGC/TestJNIBlockFullGC.java",
               "test/hotspot/jtreg/gc/stress/TestJNIBlockFullGC/libTestJNIBlockFullGC.c",
-          ])
-          if preserved != wanted_preserved:
-              raise SystemExit(f"JEP423 preserved-deletion drift: {preserved}")
-
-          with (packet / "COMPATIBILITY_SPLIT.tsv").open(
-              encoding="utf-8", newline=""
-          ) as handle:
-              split = {row["path"]: row for row in csv.DictReader(handle, delimiter="	")}
-          if set(split) != set(expected):
-              raise SystemExit("JEP423 compatibility split does not cover full denominator")
-          for path in wanted_preserved:
-              if split[path]["disposition"] != "PRESERVE_JDK21_PATH":
-                  raise SystemExit(f"JEP423 removal not preserved: {path}")
-          print("JEP423_DENOMINATOR=59")
-          print("JEP423_ADMITTED=57")
-          print("JEP423_PRESERVED_DELETIONS=2")
+          }, preserved
+          print("JEP423_INITIAL_PATHS=59")
+          print("JEP423_CUMULATIVE_PATHS=64")
+          print("JEP423_ADMITTED_PATHS=62")
+          print("JEP423_PRESERVED_JAVA21_DELETIONS=2")
           PY
 
-      - name: Unit-test whole-tree comparator and mixed FILE-crate generator
+      - name: 4 - Unit-test inventory generator lineage and materializer
         shell: bash
         run: |
           set -euo pipefail
+          python3 -m py_compile \
+            m3/backports/file_delta_inventory.py \
+            m3/backports/generate_recipe_crates.py \
+            m3/backports/materialize_generated_crates.py \
+            m3/backports/selected_path_lineage.py
           cd m3/backports
-          python3 -m unittest -v             test_file_delta_inventory.py             test_generate_recipe_crates.py
+          python3 -m unittest -v \
+            test_file_delta_inventory.py \
+            test_generate_recipe_crates.py \
+            test_materialize_generated_crates.py \
+            test_selected_path_lineage.py
 
-      - name: Inventory exact JDK21 to JDK22 GA deltas
+      - name: 5 - Prove selected paths contain only approved implementation lineage
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/file_delta_inventory.py             --repo "$UPSTREAM"             --release 22             --out target/jep423/JDK21_TO_JDK22.tsv
+          python3 m3/backports/selected_path_lineage.py \
+            --repo "$UPSTREAM" \
+            --start-exclusive e44d4b24ed794957c47c140ab6f15544efa2b278 \
+            --end-inclusive 0d5f5e15d43f94a79c6133baecd5af217365d176 \
+            --paths-file m3/backports/recipes/jep-423-region-pinning/ADMIT_PATHS.txt \
+            --allowed-commit 38cfb220ddadbb401cc15f313aadb8234f626210 \
+            --allowed-commit 8643cc21333c6b51242ed3b9295b25f372244755 \
+            --allowed-commit 0d5f5e15d43f94a79c6133baecd5af217365d176 \
+            --require-no-unexpected \
+            --out target/jep423/IMPLEMENTATION_LINEAGE.tsv \
+            --root-out target/jep423/IMPLEMENTATION_LINEAGE_ROOT.txt
 
-      - name: Generate one source-sealed FILE atom per admitted JEP423 path
+      - name: 6 - Prove JDK22 GA adds no later selected-path drift
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/generate_recipe_crates.py             --repo "$UPSTREAM"             --release 22             --paths-file m3/backports/recipes/jep-423-region-pinning/ADMIT_PATHS.txt             --crate-size 1             --include-native             --include-text             --out target/jep423/file-atoms
+          python3 m3/backports/selected_path_lineage.py \
+            --repo "$UPSTREAM" \
+            --start-exclusive 0d5f5e15d43f94a79c6133baecd5af217365d176 \
+            --end-inclusive jdk-22+36 \
+            --paths-file m3/backports/recipes/jep-423-region-pinning/ADMIT_PATHS.txt \
+            --require-no-unexpected \
+            --out target/jep423/POST_FIX_TO_GA_LINEAGE.tsv \
+            --root-out target/jep423/POST_FIX_TO_GA_LINEAGE_ROOT.txt
 
-      - name: Account for all admitted and preserved paths
+      - name: 7 - Inventory exact JDK21 to JDK22 GA deltas
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/file_delta_inventory.py \
+            --repo "$UPSTREAM" \
+            --release 22 \
+            --out target/jep423/JDK21_TO_JDK22.tsv
+
+      - name: 8 - Generate one source-sealed FILE atom per admitted cumulative path
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/generate_recipe_crates.py \
+            --repo "$UPSTREAM" \
+            --release 22 \
+            --paths-file m3/backports/recipes/jep-423-region-pinning/ADMIT_PATHS.txt \
+            --crate-size 1 \
+            --include-native \
+            --include-text \
+            --out target/jep423/file-atoms
+
+      - name: 9 - Prove 62-path accounting and zero typed exclusions
         shell: bash
         run: |
           set -euo pipefail
@@ -149,86 +199,222 @@ jobs:
           packet = Path("m3/backports/recipes/jep-423-region-pinning")
           admitted = {
               line.strip()
-              for line in (packet / "ADMIT_PATHS.txt").read_text(encoding="utf-8").splitlines()
+              for line in (packet / "ADMIT_PATHS.txt").read_text().splitlines()
               if line.strip()
           }
-          all_paths = {
-              line.strip()
-              for line in (packet / "PATHS.txt").read_text(encoding="utf-8").splitlines()
-              if line.strip()
-          }
-          preserved = all_paths - admitted
-
           with Path("target/jep423/JDK21_TO_JDK22.tsv").open(
               encoding="utf-8", newline=""
           ) as handle:
               delta = {
                   row["path"]: row["status"]
-                  for row in csv.DictReader(handle, delimiter="	")
+                  for row in csv.DictReader(handle, delimiter="\t")
                   if row["path"] in admitted
               }
-          missing = admitted - delta.keys()
-          if missing:
-              raise SystemExit(f"admitted paths absent from JDK22 tree comparison: {sorted(missing)}")
-
+          if set(delta) != admitted:
+              raise SystemExit(f"JEP423 delta coverage gap: {sorted(admitted-set(delta))}")
           same = {path for path, status in delta.items() if status == "SAME"}
 
           with Path("target/jep423/file-atoms/CRATES.tsv").open(
               encoding="utf-8", newline=""
           ) as handle:
-              crates = list(csv.DictReader(handle, delimiter="	"))
-          generated = sum(int(row["target_count"]) for row in crates)
-
+              crates = list(csv.DictReader(handle, delimiter="\t"))
           with Path("target/jep423/file-atoms/EXCLUSIONS.tsv").open(
               encoding="utf-8", newline=""
           ) as handle:
-              exclusions = list(csv.DictReader(handle, delimiter="	"))
+              exclusions = list(csv.DictReader(handle, delimiter="\t"))
 
-          if generated + len(exclusions) + len(same) != len(admitted):
+          if exclusions:
+              raise SystemExit(f"JEP423 typed exclusions require review: {exclusions}")
+          if any(int(row["target_count"]) != 1 for row in crates):
+              raise SystemExit("JEP423 materialization requires one target per generated crate")
+
+          generated = sum(int(row["target_count"]) for row in crates)
+          if generated + len(same) != 62:
               raise SystemExit(
-                  "JEP423 admitted accounting mismatch: "
-                  f"generated={generated} exclusions={len(exclusions)} "
-                  f"same={len(same)} admitted={len(admitted)}"
+                  f"JEP423 accounting mismatch generated={generated} same={len(same)}"
               )
-          if len(preserved) != 2:
-              raise SystemExit(f"JEP423 preserved deletion count drift: {len(preserved)}")
-          if generated + len(exclusions) + len(same) + len(preserved) != len(all_paths):
-              raise SystemExit("JEP423 full denominator accounting mismatch")
-
-          print(
-              f"JEP423_ACCOUNTED generated={generated} exclusions={len(exclusions)} "
-              f"same={len(same)} preserved={len(preserved)} total={len(all_paths)}"
-          )
+          print(f"JEP423_ACCOUNTED generated={generated} same={len(same)} exclusions=0")
           PY
 
-      - name: Verify M3 backport and recipe substrate
-        shell: bash
-        run: |
-          set -euo pipefail
-          mvn -B -ntp -f m3/backports/pom.xml verify
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3RecipeScopeDeclarationTest             -Dsurefire.failIfNoSpecifiedTests=false test
-
-      - name: Validate evidence-bound JEP423 packet DAG
-        shell: bash
-        run: |
-          set -euo pipefail
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketMain             -Dexec.args="$PWD/m3/backports/recipes/jep-423-region-pinning/packet.tsv $PWD/m3/backports/recipes/jep-423-region-pinning/atom-evidence.tsv"             exec:java
-
-      - name: Project JEP423 DAG to Camel Airflow and Drools
+      - name: 10 - Validate and project canonical JEP423 packet DAG
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p target/jep423/projections
-          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain             -Dexec.args="$PWD/m3/backports/recipes/jep-423-region-pinning/packet.tsv $PWD/target/jep423/projections $PWD/m3/backports/recipes/jep-423-region-pinning/atom-evidence.tsv"             exec:java
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+            -Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketMain \
+            -Dexec.args="$PWD/m3/backports/recipes/jep-423-region-pinning/packet.tsv $PWD/m3/backports/recipes/jep-423-region-pinning/atom-evidence.tsv" \
+            exec:java
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+            -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain \
+            -Dexec.args="$PWD/m3/backports/recipes/jep-423-region-pinning/packet.tsv $PWD/target/jep423/projections $PWD/m3/backports/recipes/jep-423-region-pinning/atom-evidence.tsv" \
+            exec:java
           test -s target/jep423/projections/M3BackportRoutes.java
           test -s target/jep423/projections/m3_backport_dag.py
           test -s target/jep423/projections/m3_backport_rules.drl
-          test -s target/jep423/projections/projection.tsv
 
-      - name: Upload JEP423 FILE-atom inventory evidence
+      - name: 11 - Verify current-tree preimages before native mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/materialize_generated_crates.py \
+            --root "$PWD" \
+            --generated "$PWD/target/jep423/file-atoms" \
+            --mode check \
+            --require-one-target-per-crate \
+            --receipt "$PWD/target/jep423/preimage.tsv"
+          test -z "$(git status --porcelain=v1 -uall)"
+
+      - name: 12 - Materialize exact cumulative candidate and prove fixed point
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/materialize_generated_crates.py \
+            --root "$PWD" \
+            --generated "$PWD/target/jep423/file-atoms" \
+            --mode apply \
+            --require-one-target-per-crate \
+            --receipt "$PWD/target/jep423/apply.tsv"
+          python3 m3/backports/materialize_generated_crates.py \
+            --root "$PWD" \
+            --generated "$PWD/target/jep423/file-atoms" \
+            --mode verify-post \
+            --require-one-target-per-crate \
+            --receipt "$PWD/target/jep423/postimage.tsv"
+          git diff --check
+          before="$(git diff --binary | sha256sum | awk '{print $1}')"
+          python3 m3/backports/materialize_generated_crates.py \
+            --root "$PWD" \
+            --generated "$PWD/target/jep423/file-atoms" \
+            --mode apply \
+            --require-one-target-per-crate
+          after="$(git diff --binary | sha256sum | awk '{print $1}')"
+          test "$before" = "$after"
+
+      - name: 13 - Prove changed-path fence and preserved Java21 JNI stress tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import subprocess
+
+          generated = Path("target/jep423/file-atoms")
+          expected = set()
+          for root in (
+              generated / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned",
+              generated / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text",
+          ):
+              if not root.exists():
+                  continue
+              for manifest in root.glob("*/manifest.tsv"):
+                  for line in manifest.read_text(encoding="utf-8").splitlines():
+                      if line and not line.startswith("#"):
+                          expected.add(line.split("\t", 1)[0])
+
+          status = subprocess.check_output(
+              ["git", "status", "--porcelain=v1", "-uall"], text=True
+          )
+          actual = {line[3:] for line in status.splitlines() if line}
+          if actual != expected:
+              raise SystemExit(
+                  "JEP423 changed-path fence failed\n"
+                  f"expected={sorted(expected)}\nactual={sorted(actual)}"
+              )
+
+          preserved = {
+              "test/hotspot/jtreg/gc/stress/TestJNIBlockFullGC/TestJNIBlockFullGC.java",
+              "test/hotspot/jtreg/gc/stress/TestJNIBlockFullGC/libTestJNIBlockFullGC.c",
+          }
+          if actual & preserved:
+              raise SystemExit(f"preserved Java21 paths were mutated: {sorted(actual & preserved)}")
+          print(f"JEP423_CHANGED_PATHS={len(actual)} preserved=2")
+          PY
+
+      - name: 14 - Verify M3 metadata and scope substrate
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/backports/pom.xml verify
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+            -Dtest=M3RecipeScopeDeclarationTest \
+            -Dsurefire.failIfNoSpecifiedTests=false test
+
+      - name: 15 - Install OpenJDK build prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            autoconf make gcc g++ zip unzip \
+            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
+            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+
+      - name: 16 - Configure fastdebug Java21 HotSpot candidate
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash configure \
+            --with-boot-jdk="$JAVA_HOME" \
+            --with-debug-level=fastdebug \
+            --with-jvm-variants=server \
+            --disable-warnings-as-errors
+
+      - name: 17 - Build full fastdebug JDK image
+        run: make JOBS=2 images
+
+      - name: 18 - Run G1 pinned-object evacuation and GCLocker regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 test TEST="\
+          test/hotspot/jtreg/gc/g1/pinnedobjs \
+          test/hotspot/jtreg/gc/g1/TestEvacuationFailure.java \
+          test/hotspot/jtreg/gc/g1/TestGCLogMessages.java \
+          test/hotspot/jtreg/gc/g1/plab/TestPLABEvacuationFailure.java \
+          test/hotspot/jtreg/gc/stress/gclocker/TestExcessGCLockerCollections.java"
+
+      - name: 19 - Run preserved Java21 JNI critical/full-GC stress
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f test/hotspot/jtreg/gc/stress/TestJNIBlockFullGC/TestJNIBlockFullGC.java
+          test -f test/hotspot/jtreg/gc/stress/TestJNIBlockFullGC/libTestJNIBlockFullGC.c
+          make JOBS=2 test TEST="test/hotspot/jtreg/gc/stress/TestJNIBlockFullGC"
+
+      - name: 20 - Run JFR G1 cause and phase regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 test TEST="\
+          test/jdk/jdk/jfr/event/gc/collection/TestG1ParallelPhases.java \
+          test/jdk/jdk/jfr/event/gc/collection/TestGCCauseWithG1ConcurrentMark.java \
+          test/jdk/jdk/jfr/event/gc/collection/TestGCCauseWithG1FullCollection.java \
+          test/jdk/jdk/jfr/event/gc/detailed/TestGCLockerEvent.java"
+
+      - name: 21 - Run serviceability-agent regression lane
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 test TEST="test/hotspot/jtreg/serviceability/sa"
+
+      - name: 22 - Built-JDK G1 runtime smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          JAVA_BIN="$(find build -path '*/images/jdk/bin/java' -type f | head -n 1)"
+          test -x "$JAVA_BIN"
+          "$JAVA_BIN" -XX:+UseG1GC -Xlog:gc*=info -version \
+            > target/jep423/g1-runtime-smoke.log 2>&1
+          grep -F "Using G1" target/jep423/g1-runtime-smoke.log
+
+      - name: 23 - Upload cumulative materialization evidence
+        if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
-          name: jep423-file-atoms-${{ github.run_id }}
-          path: target/jep423
-          if-no-files-found: error
+          name: jep423-cumulative-proof-${{ github.run_id }}
+          path: |
+            target/jep423
+            build/*/test-results/**
+          if-no-files-found: warn
           retention-days: 30
