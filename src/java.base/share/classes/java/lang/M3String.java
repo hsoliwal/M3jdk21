@@ -41,7 +41,15 @@ final class M3String implements CharSequence {
     private static volatile byte[] emptyCompatibilityShadow;
 
     private static final M3StringAtom EMPTY_OWNER =
-            new M3StringAtom(null, 0L, (byte) 1, true, 0, String.LATIN1, 0, 0L,
+            new M3StringAtom(
+                    null,
+                    0L,
+                    (byte) 1,
+                    true,
+                    0,
+                    String.COMPACT_STRINGS ? String.LATIN1 : String.UTF16,
+                    0,
+                    0L,
                     0x9e3779b97f4a7c15L);
     private static final M3String EMPTY = new M3String(EMPTY_OWNER, span(0, 0));
 
