@@ -48,6 +48,7 @@ public class M3StringFactsCompositionTest {
 
     public static void main(String[] args) throws Exception {
         deterministic();
+        consumers();
         randomized();
         System.out.println(
                 "M3_STRING_FACT_COMPOSITION_PASS|checks=" + checks
@@ -76,6 +77,79 @@ public class M3StringFactsCompositionTest {
                 String flat = fresh(chars(range));
                 sameFacts(range, flat, "range " + begin + ":" + end);
             }
+        }
+    }
+
+    private static void consumers() throws Exception {
+        String lowerOnly = fresh("alpha_123");
+        same(lowerOnly, lowerOnly.toLowerCase(java.util.Locale.ROOT),
+                "lowercase ASCII without uppercase returns same String");
+
+        String upperOnly = fresh("ALPHA_123");
+        same(upperOnly, upperOnly.toUpperCase(java.util.Locale.ROOT),
+                "uppercase ASCII without lowercase returns same String");
+
+        String mixed = fresh("AbC_123");
+        equal("abc_123", mixed.toLowerCase(java.util.Locale.ROOT), "mixed lowercase content");
+        equal("ABC_123", mixed.toUpperCase(java.util.Locale.ROOT), "mixed uppercase content");
+
+        String noLineBreak = fresh("alpha beta\tomega");
+        List<String> oneLine = noLineBreak.lines().toList();
+        checks++;
+        if (oneLine.size() != 1 || oneLine.get(0) != noLineBreak) {
+            throw new AssertionError("line fast path must preserve singleton String identity");
+        }
+
+        String withBreaks = fresh("alpha\r\nbeta\ngamma\rdelta");
+        List<String> lines = withBreaks.lines().toList();
+        checks++;
+        if (!lines.equals(List.of("alpha", "beta", "gamma", "delta"))) {
+            throw new AssertionError("line semantics changed: " + lines);
+        }
+
+        String blank = fresh(" \t\n");
+        checks++;
+        if (!blank.isBlank()) throw new AssertionError("blank flag composition lost");
+
+        String surrogate = fresh("\ud83d\ude42");
+        Object surrogateFacts = FACTS.invoke(body(surrogate));
+        Field characterFlags = surrogateFacts.getClass().getDeclaredField("characterFlags");
+        characterFlags.setAccessible(true);
+        int flags = characterFlags.getInt(surrogateFacts);
+        Field hasSurrogate = surrogateFacts.getClass().getDeclaredField("FLAG_HAS_SURROGATE");
+        hasSurrogate.setAccessible(true);
+        checks++;
+        if ((flags & hasSurrogate.getInt(null)) == 0) {
+            throw new AssertionError("surrogate presence flag missing");
+        }
+
+        String categories = fresh("Aa_9 \t");
+        Object categoryFacts = FACTS.invoke(body(categories));
+        int categoryFlags = characterFlags.getInt(categoryFacts);
+        for (String name : List.of(
+                "FLAG_HAS_ASCII_UPPER",
+                "FLAG_HAS_ASCII_LOWER",
+                "FLAG_HAS_ASCII_DIGIT",
+                "FLAG_HAS_ASCII_WORD",
+                "FLAG_HAS_ASCII_SPACE")) {
+            Field bit = categoryFacts.getClass().getDeclaredField(name);
+            bit.setAccessible(true);
+            checks++;
+            if ((categoryFlags & bit.getInt(null)) == 0) {
+                throw new AssertionError("character flag missing: " + name);
+            }
+        }
+    }
+
+    private static void same(Object expected, Object actual, String label) {
+        checks++;
+        if (expected != actual) throw new AssertionError(label);
+    }
+
+    private static void equal(String expected, String actual, String label) {
+        checks++;
+        if (!expected.equals(actual)) {
+            throw new AssertionError(label + " expected=" + expected + " actual=" + actual);
         }
     }
 
