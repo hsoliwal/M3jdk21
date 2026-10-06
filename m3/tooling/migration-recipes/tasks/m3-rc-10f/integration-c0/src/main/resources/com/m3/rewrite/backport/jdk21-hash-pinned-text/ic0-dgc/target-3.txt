@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: Apache-2.0
+# M3-DAG-ROOT: c406fce15e3f23766d634ec7174ef609403d7ca580bb569d8cb06ffb6d8fc4f9
+# Projection only. m3-backport-dag.tsv + M3RecipeDag remain authoritative.
+- route:
+    id: m3-jdk21-backport
+    from:
+      uri: "direct:m3-backport"
+      steps:
+        - to: { uri: "direct:review-code-signal" }
+        - to: { uri: "direct:review-atom-pattern" }
+        - to: { uri: "direct:review-problem-planner" }
+        - to: { uri: "direct:review-jni-contract" }
+        - to: { uri: "direct:inventory" }
+        - to: { uri: "direct:compatibility-proof" }
+        - to: { uri: "direct:dependency-closure" }
+        - to: { uri: "direct:file-delta" }
+        - to: { uri: "direct:recipe-crate" }
+        - to: { uri: "direct:recipe-junit" }
+        - to: { uri: "direct:diff" }
+        - to: { uri: "direct:lint" }
+        - to: { uri: "direct:compile" }
+        - to: { uri: "direct:jtreg" }
+        - to: { uri: "direct:runtime" }
+        - to: { uri: "direct:promote" }

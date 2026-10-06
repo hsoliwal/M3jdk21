@@ -1,0 +1,68 @@
+{
+  "clearInheritedEnvironment": true,
+  "commands": [
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py",
+        "pack",
+        "--root",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/source",
+        "--plan",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/package-plan.json",
+        "--output",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/bundle"
+      ],
+      "id": "pack"
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py",
+        "verify",
+        "--bundle",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/bundle"
+      ],
+      "id": "verify"
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py",
+        "extract",
+        "--bundle",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/bundle",
+        "--output",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/extracted"
+      ],
+      "id": "extract"
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/finish_package.py"
+      ],
+      "id": "readback"
+    }
+  ],
+  "cwd": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1",
+  "environment": {
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "PATH": "/usr/bin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "TZ": "UTC"
+  },
+  "interpreter": {
+    "bytes": 30894944,
+    "path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "sha256": "fa67443527ed9647f760d807e2a38f26340757123e643c4639cf273ed15d5ea7"
+  },
+  "spec": {
+    "bytes": 1054690,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-integration-c0/packaging-v1/PACKAGE-SPEC.json",
+    "sha256": "a9124171aa9417d38be38ab8e634f41135126fb4650cce188c071d137c37a1e0"
+  },
+  "started": "2026-10-06T06:48:26.722212+00:00",
+  "timeoutSecondsEach": 900
+}
