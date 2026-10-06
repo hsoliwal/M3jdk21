@@ -107,11 +107,19 @@ def candidates(
     all_candidates: bool,
     include_text: bool = False,
     include_native: bool = False,
+    baseline_ref: str | None = None,
+    donor_ref: str | None = None,
 ) -> tuple[list[Candidate], list[tuple[str, str]]]:
     if selected is None and not all_candidates:
         raise ValueError("select --paths-file or explicitly request --all-candidates")
 
-    rows = DELTA.compare(repo, (release,))
+    if (baseline_ref is None) != (donor_ref is None):
+        raise ValueError("baseline_ref and donor_ref must be supplied together")
+    rows = (
+        DELTA.compare_refs(repo, release, baseline_ref, donor_ref)
+        if baseline_ref is not None and donor_ref is not None
+        else DELTA.compare(repo, (release,))
+    )
     by_path = {row.path: row for row in rows}
     if selected is not None:
         missing = sorted(selected - set(by_path))
@@ -203,6 +211,8 @@ def materialize(
     candidates_: Sequence[Candidate],
     exclusions: Sequence[tuple[str, str]],
     crate_size: int = CRATE_LIMIT,
+    baseline_ref: str | None = None,
+    donor_ref: str | None = None,
 ) -> list[str]:
     if crate_size < 1 or crate_size > CRATE_LIMIT:
         raise ValueError(f"crate_size must be between 1 and {CRATE_LIMIT}")
@@ -293,9 +303,12 @@ def materialize(
                 (
                     crate_name,
                     str(release),
-                    "jdk-21+35",
-                    f"jdk-{release}+"
-                    + {22: "36", 23: "37", 24: "36", 25: "36", 26: "35", 27: "35"}[release],
+                    baseline_ref or "jdk-21+35",
+                    donor_ref
+                    or (
+                        f"jdk-{release}+"
+                        + {22: "36", 23: "37", 24: "36", 25: "36", 26: "35", 27: "35"}[release]
+                    ),
                     str(len(chunk)),
                     chunk[0].path,
                     chunk[-1].path,
@@ -368,6 +381,8 @@ def _parse_args(argv: Sequence[str]) -> argparse.Namespace:
     parser.add_argument("--repo", type=Path, required=True)
     parser.add_argument("--release", type=int, choices=range(22, 28), required=True)
     parser.add_argument("--out", type=Path, required=True)
+    parser.add_argument("--baseline-ref")
+    parser.add_argument("--donor-ref")
     parser.add_argument("--paths-file", type=Path)
     parser.add_argument("--all-candidates", action="store_true")
     parser.add_argument(
@@ -411,6 +426,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         args.all_candidates,
         include_text=args.include_text,
         include_native=args.include_native,
+        baseline_ref=args.baseline_ref,
+        donor_ref=args.donor_ref,
     )
     if not candidate_rows:
         raise SystemExit("no donor candidates selected")
@@ -420,6 +437,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         candidate_rows,
         exclusions,
         crate_size=args.crate_size,
+        baseline_ref=args.baseline_ref,
+        donor_ref=args.donor_ref,
     )
     print(
         f"generated {len(crates)} crate(s) at max {args.crate_size} target(s)/crate, "
