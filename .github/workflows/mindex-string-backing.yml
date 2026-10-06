@@ -38,6 +38,7 @@ on:
       - 'test/jdk/java/lang/String/nativeEncoding/StringPlatformChars.java'
       - 'test/jdk/java/lang/String/nativeEncoding/libstringPlatformChars.c'
       - 'test/jdk/jdk/internal/mindex/M3TQFactsTest.java'
+      - 'test/jdk/jdk/internal/mindex/M3OwnedPrecomputeTest.java'
       - 'test/jdk/java/util/regex/M3RegexLiteralTQTest.java'
       - 'doc/mindex-string-backing.md'
       - '.github/workflows/mindex-string-backing.yml'
@@ -57,6 +58,8 @@ jobs:
           java-version: '20'
       - name: Verify M3 String source invariants
         run: python3 m3/runtime-integration/check-m3string-invariants.py
+      - name: Verify owned M3 precompute invariants
+        run: python3 m3/runtime-integration/check-owned-precompute-invariants.py
       - name: Install build prerequisites
         run: sudo apt-get update && sudo apt-get install -y autoconf
       - name: Configure
@@ -64,4 +67,4 @@ jobs:
       - name: Build java.base
         run: make java.base-java-only
       - name: Run M3 String backing jtreg
-        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/java/lang/String/nativeEncoding/StringPlatformChars.java test/jdk/java/lang/String/M3StringBuilderInteropTest.java test/jdk/java/lang/String/M3StringLiteralRegexReplacementTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java"
+        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/java/lang/String/nativeEncoding/StringPlatformChars.java test/jdk/java/lang/String/M3StringBuilderInteropTest.java test/jdk/java/lang/String/M3StringLiteralRegexReplacementTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/jdk/internal/mindex/M3OwnedPrecomputeTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java"
