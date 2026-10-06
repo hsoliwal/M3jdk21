@@ -51,18 +51,22 @@ jobs:
         run: |
           set -euo pipefail
           git diff --check "$BASE_SHA...HEAD"
-      - name: 2 compile A3 and recipe owners
+      - name: 2 Synexia ownership invariant
+        run: |
+          python3 m3/compatibility/test_synexia_recipe_home_policy.py
+          python3 m3/compatibility/check_synexia_recipe_ownership.py
+      - name: 3 compile A3 and recipe owners
         run: >
           mvn -B -ntp -f m3/pom.xml
           -pl tooling/migration-recipes,tooling/a3
           -am -DskipTests compile
-      - name: 3 source-sealed custody recipe fixed point
+      - name: 4 source-sealed custody recipe fixed point
         run: >
           mvn -B -ntp -f m3/pom.xml
           -pl tooling/migration-recipes
           -Dtest=M3A3SynexiaMasteryCustodyRecipeTest
           -Dsurefire.failIfNoSpecifiedTests=false test
-      - name: 4 hostile mastery laboratory
+      - name: 5 hostile mastery laboratory
         run: >
           mvn -B -ntp -f m3/pom.xml
           -pl tooling/a3
