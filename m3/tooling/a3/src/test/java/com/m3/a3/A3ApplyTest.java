@@ -45,6 +45,9 @@ class A3ApplyTest {
         A3Apply.Receipt receipt = receipts.getFirst();
         assertEquals(relative, receipt.path());
         assertEquals("FILE", receipt.scope());
+        assertEquals(
+                com.synexia.rewrite.atom.M3PureIntConvergenceRecipe.class.getName(),
+                receipt.recipe());
         assertEquals("com.m3.rewrite.M3Java21Convergence", receipt.recipe());
         assertTrue(receipt.changed());
         assertTrue(receipt.fixedPoint());
