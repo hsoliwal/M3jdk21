@@ -1072,6 +1072,22 @@ for fragment in required_mapping_fragments:
     if fragment not in mapping:
         fail(f"name mapping missing: {fragment}")
 
+required_broad_precompute_mapping_fragments = [
+    '"source": "com.synexia.indexstring.precompute.MIndexPrecomputeEngine / Context / Session / Plan / Pass / Artifact / Cache / Catalog / Limits / Scope / Key"',
+    '"target": "M3 internal precompute framework (target-owned, non-public)"',
+    '"source": "com.synexia.mindex.precompute.MIndexUniversalPrecompute family"',
+    '"source": "com.synexia.indexstring.MIndexStringRelationPrecompute / MIndexStringUnaryProjectionPrecompute / MIndexStringPrecomputeImage"',
+    '"source": "com.synexia.indexstring.ast.MIndexAST*Precompute family"',
+    '"source": "com.synexia.indexstring.file.MIndexFile*Facts family"',
+    '"source": "com.synexia.indexstring regex/search precompute families"',
+    '"source": "com.synexia.indexstring MIndexPrefixZ / palindrome / suffix / LCP families"',
+    '"source": "com.synexia.indexstring lexical / word / bigram / semantic signal images"',
+    '"source": "com.synexia.mindex Jini / Coral TPU / LiteRT NPU / Tornado precompute families"',
+]
+for fragment in required_broad_precompute_mapping_fragments:
+    if fragment not in mapping:
+        fail(f"broad precompute name mapping missing: {fragment}")
+
 for fragment in [
     "MIndexWhitespaceBoundaries\tjava.lang.M3StringFacts\tIMPLEMENTED",
     "MIndexUtf16RangeFacts\tM3StringOwner.rangeFacts\tIMPLEMENTED",
