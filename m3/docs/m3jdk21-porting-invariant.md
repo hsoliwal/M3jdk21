@@ -12,8 +12,46 @@ implementations, JNI prototypes, precompute images, benchmarks and convergence e
 does not make Synexia package/type names part of M3JDK21's runtime ABI.
 
 A capability that graduates into M3JDK21 is **adapted into the target's existing JDK/M3 owner and
-name**, with Apache-2.0 provenance for eligible Synexia code, exact source lineage and target-side
-tests. M3JDK21 must not acquire a runtime dependency on Synexia.
+name**, with exact source lineage, license provenance and target-side tests. M3JDK21 must not
+acquire a runtime dependency on Synexia.
+
+## Full Synexia donor universe
+
+For this target, **the whole qualified Synexia workspace is a candidate donor universe**. Do not
+artificially restrict intake to runtime algorithms. Candidate donor material includes:
+
+- Java/JNI/native source atoms and adapters;
+- Maven/OpenRewrite recipes, atomizer/patternizer rules and recipe compositions;
+- generated postimages, templates, manifests and migration crates;
+- tests, fixtures, hostile corpora, mutation cases and differential oracles;
+- documentation, schemas, naming maps, source-invariant gates and proof receipts;
+- precompute layouts, indexes, collections, search plans and immutable image formats;
+- algorithms, architecture patterns and ideas that are independently reimplemented inside the
+  JDK under target ownership.
+
+Recipes are first-class donor code. They may be copied/adapted into M3JDK21 authoring/proof
+tooling when their licensing and provenance permit it. They do **not** become a Synexia runtime
+dependency merely because they generated or verified an admitted target postimage.
+
+## License boundary for public M3JDK21 code
+
+Synexia's root project is Apache-2.0, but M3JDK21/OpenJDK has its own per-file/module licensing.
+Therefore:
+
+1. Synexia-original material actually covered by Apache-2.0 is a legitimate donor candidate.
+2. Do not assume that an Apache-2.0 repository label permits source text to be pasted into any
+   GPLv2/OpenJDK file. The destination file/module license and OpenJDK's existing exceptions remain
+   authoritative.
+3. When the copyright owner of Synexia first-party code has the right to contribute the same
+   material under target-required terms, record that target contribution explicitly rather than
+   pretending the target file was relicensed by automation.
+4. Third-party code never becomes Synexia-original or Apache-2.0 merely because Synexia wrapped,
+   atomized, tested, indexed or generated from it. Preserve original license/NOTICE obligations or
+   use the donor only as reference/evidence for an independent target implementation.
+5. A recipe's license does not automatically relicense its inputs or generated output. Every
+   generated postimage must satisfy the destination's provenance and license rules.
+
+This is an engineering admission rule, not permission to weaken OpenJDK licensing checks.
 
 ## M3String is the naming analogy
 
@@ -54,7 +92,7 @@ Apply that same pattern to the rest of the port.
    target consumer and normally stay outside `java.lang` / `java.util`.
 6. **JNI/native code follows target ownership and ABI.** Synexia JNI is donor/reference code. A
    target port generates/adapts target symbols, headers, lifetime rules and tests.
-7. **Maven/OpenRewrite recipes are authoring/proof tooling, not JDK runtime dependencies.**
+7. **Maven/OpenRewrite recipes are first-class donor artifacts and authoring/proof tooling, not JDK runtime dependencies.**
 8. **Every port is recipe-first.** Exact donor revision + target preimage -> reviewed postimage;
    compile/test/runtime proof -> fixed point; rollback/refusal remains available.
 9. **Every port updates the naming/migration map.** No implementation lands without a mapping row or
