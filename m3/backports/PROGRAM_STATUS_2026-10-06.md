@@ -79,11 +79,31 @@ For each row it records:
 - next mechanical action;
 - priority-matrix Java21 default/classification when available.
 
-Current JEP packet evidence recognized on this branch:
+Current JEP packet evidence recognized on live `master` after residue reconciliation:
 
+- JEP 423 — `PACKET_EVIDENCE`
+  - inventory/candidate packets exist; no current-tree receipt or product-completion claim;
 - JEP 458 — `MATERIALIZED_PACKET`
+  - reviewed current-tree receipt is present;
 - JEP 467 — `MATERIALIZED_PACKET`
+  - packet-ready current-tree receipt is present;
+- JEP 474 — `MATERIALIZED_PACKET`
+  - receipt state is `EQUIVALENCE_PROOF_PENDING`; the Java 21 ZGC default remains unchanged;
+- JEP 484 — `PACKET_EVIDENCE`
+  - cumulative class-file lineage/path-map evidence exists; no product-completion claim;
+- JEP 485 — `MATERIALIZED_PACKET`
+  - current tree contains the Gatherer/Gatherers/GathererOp product classes plus Stream and
+    ReferencePipeline integration; promotion remains `NOT_AUTHORIZED` until Java 21 build/jtreg
+    and fixed-point proof are complete;
+- JEP 491 — `PACKET_EVIDENCE`
+  - multi-architecture monitor-unpinning inventory exists; no product materialization claim;
 - JEP 493 — `MATERIALIZED_PACKET`
+  - packet-ready current-tree receipt is present.
+
+`PACKET_EVIDENCE` means repository-owned inventory/review material exists but does not by itself
+mean source has been materialized. `MATERIALIZED_PACKET` is reserved for receipt-backed packet
+evidence; its receipt fields still control whether product source is present and whether promotion
+is authorized.
 
 The remaining pending rows stay visible even when no recipe exists yet. A missing recipe means
 **author/improve a reusable recipe first**, not hand-edit the affected JDK files.
