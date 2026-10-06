@@ -2,7 +2,6 @@
 # SPDX-License-Identifier: Apache-2.0
 """Verify TQ reconciliation, preserved authority, and sealed replay/refusals."""
 import importlib.util
-import copy
 import json
 from pathlib import Path
 import tempfile
@@ -14,30 +13,7 @@ sealed = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(sealed)
 plan_path = CRATE / 'plan.json'
 plan, rows = sealed.sealed_plan(plan_path)
-def retained_mapping(current, expected):
-    """Allow serial record additions while retaining the complete earlier authority."""
-    records = current['migration']['records']
-    previous = expected['migration']['records']
-    assert len(records) >= len(previous), 'Mapping records removed'
-    assert records[:len(previous)] == previous, 'Prior mapping records changed or reordered'
-    ids = [record['id'] for record in records]
-    assert all(isinstance(identity, str) and identity for identity in ids)
-    assert len(set(ids)) == len(ids), 'Duplicate mapping id'
-    projected = copy.deepcopy(current)
-    projected['migration']['records'] = previous
-    assert projected == expected, 'Prior mapping gates or authority changed'
-
-
-# name-mapping.json is shared by serial port packets. Preserve this packet's exact
-# records and all other authority, as the retained TQ custody gate already does.
-# Every non-shared target and dependency guard still requires its exact postimage.
-sealed.observe_guards(ROOT, plan)
-for row in rows:
-    current = (ROOT / row['path']).read_bytes()
-    if row['path'] == 'm3/docs/name-mapping.json':
-        retained_mapping(json.loads(current), json.loads(row['after']))
-    else:
-        assert current == row['after'], row['path']
+assert sealed.execute(plan_path, ROOT, 'check')['state'] == 'after'
 for row in rows:
     assert (CRATE / 'target/generated' / row['path']).read_bytes() == row['after']
 

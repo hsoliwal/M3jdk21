@@ -1,0 +1,56 @@
+{
+  "schema": "m3.tq-sync-custody/1",
+  "plan_sha256": "31b03129fe81d5e0681185763ad0d2059c16bcd7b93e7dc4b8290880c5317096",
+  "generated_outputs": 24,
+  "events": [
+    {
+      "mode": "check",
+      "recipe": "tq-sync-20261006",
+      "plan_sha256": "31b03129fe81d5e0681185763ad0d2059c16bcd7b93e7dc4b8290880c5317096",
+      "state": "before",
+      "files": 24,
+      "writes": 0
+    },
+    {
+      "mode": "apply",
+      "recipe": "tq-sync-20261006",
+      "plan_sha256": "31b03129fe81d5e0681185763ad0d2059c16bcd7b93e7dc4b8290880c5317096",
+      "state": "after",
+      "files": 24,
+      "writes": 24
+    },
+    {
+      "mode": "apply",
+      "recipe": "tq-sync-20261006",
+      "plan_sha256": "31b03129fe81d5e0681185763ad0d2059c16bcd7b93e7dc4b8290880c5317096",
+      "state": "after",
+      "files": 24,
+      "writes": 0
+    },
+    {
+      "mode": "rollback",
+      "recipe": "tq-sync-20261006",
+      "plan_sha256": "31b03129fe81d5e0681185763ad0d2059c16bcd7b93e7dc4b8290880c5317096",
+      "state": "before",
+      "files": 24,
+      "writes": 24
+    },
+    {
+      "mode": "rollback",
+      "recipe": "tq-sync-20261006",
+      "plan_sha256": "31b03129fe81d5e0681185763ad0d2059c16bcd7b93e7dc4b8290880c5317096",
+      "state": "before",
+      "files": 24,
+      "writes": 0
+    },
+    {
+      "refusal": "destination drift"
+    },
+    {
+      "refusal": "mixed states"
+    },
+    {
+      "refusal": "dependency drift"
+    }
+  ]
+}

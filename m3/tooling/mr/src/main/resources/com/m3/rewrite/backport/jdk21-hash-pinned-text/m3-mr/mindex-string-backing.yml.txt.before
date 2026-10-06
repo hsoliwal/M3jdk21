@@ -31,9 +31,6 @@ on:
       - 'test/jdk/java/lang/String/M3StringInternTest.java'
       - 'test/jdk/jdk/internal/mindex/M3TQFactsTest.java'
       - 'test/jdk/java/util/regex/M3RegexLiteralTQTest.java'
-      - 'test/jdk/java/util/regex/M3RegexReuseTest.java'
-      - 'src/java.base/share/classes/java/util/regex/**'
-      - 'm3/tooling/mr/**'
       - 'doc/mindex-string-backing.md'
       - '.github/workflows/mindex-string-backing.yml'
   workflow_dispatch:
@@ -57,8 +54,6 @@ jobs:
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringHistoryConvergenceRecipeTest test
       - name: Prove canonical DAG master-repair recipe
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringCanonicalDagMasterRepairRecipeTest test
-      - name: Prove immutable Matcher fact reuse
-        run: mvn -B -ntp -f m3/tooling/mr/pom.xml test
       - name: Set up Java 20 boot JDK for OpenJDK 21 build
         uses: actions/setup-java@v4
         with:
@@ -70,7 +65,5 @@ jobs:
         run: bash configure --with-debug-level=fastdebug --with-jvm-variants=server
       - name: Build java.base
         run: make java.base-java-only
-      - name: Build matching runtime image
-        run: make images
       - name: Run M3 String backing jtreg
-        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringCanonicalDagTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java test/jdk/java/util/regex/M3RegexReuseTest.java"
+        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringCanonicalDagTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java"

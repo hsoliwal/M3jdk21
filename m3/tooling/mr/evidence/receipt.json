@@ -1,0 +1,438 @@
+{
+  "schema": "m3.mr-scoped-evidence/1",
+  "observed_at": "2026-10-06T05:05:40.516309+00:00",
+  "scope": "Java 21 patch-module runtime and retained recipes on an exact source projection; not a forked M3 image or whole-repository admission",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_commit": "4f9a91ab6239212acdb676757d96f5083d27c474",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base": "c0a14387009aefc7d62bd3268055d526e04f9074",
+  "tools": {
+    "java": "Temurin 21.0.8+9",
+    "maven": "3.9.9",
+    "openrewrite": "8.17.1",
+    "junit": "5.10.2",
+    "python": "3.12"
+  },
+  "runs": [
+    {
+      "id": "mr-local",
+      "status": "passed",
+      "exit_code": 0,
+      "command": [
+        "mvn",
+        "-o",
+        "-Dmaven.repo.local=<offline-cache>",
+        "-B",
+        "-ntp",
+        "-f",
+        "m3/tooling/mr/pom.xml",
+        "-Dmr.materialize=true",
+        "test"
+      ],
+      "stdout_path": "m3/tooling/mr/evidence/logs/mr-verify.log",
+      "stdout_sha256": "f773fe61536525a4efa2e959f3acd70b0a610cae197c820d1edf4eb182d91b3e",
+      "inputs": {
+        "m3/README.md": "a432b24240c217ae4e61ecabaa0c726f3c15d7a04a48dd0e383eb845db9256d1",
+        "m3/docs/collections-replacement-spec.md": "ba1ce8a7d2ddb934509b384bf6a00fdb5c3d8e2e0e3ad639a489b9606903c909",
+        "src/java.base/share/classes/java/lang/M3StringFacts.java": "36c9cb73608cf2f7ad40be00493def3c17cfd4653b5f450750f3595d1eb677cd",
+        "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java": "b6372e4280cc46f2cf5a1baa0b42c35341eea834dac9449fa5697b6aa20a0f2f",
+        "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+        "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java": "f009146ebad1cbec3570c583ef015b09dc92ed3c3a007c6722810392fc6f9fa4",
+        "m3/docs/m3-runtime-invariants.tsv": "fbd128d92cdd1dcb184e70bbcd2cd36adfb50b0c9341b43d6a4b2a33ece38487",
+        "m3/tooling/tq/README.md": "3221941a93918c528cc9951223f9bf40c56de927512f08430a50668ed6fb6f3a",
+        "m3/docs/counterpart-naming.md": "56626d53928e650c0b87e3505718bffd8e3db4c335eee087760fc4fd5d7618b9",
+        "m3/tooling/tq/pom.xml": "1b8a5e4531ce36a9a53ec724777f9ab6ea87c9b1557db24c3ef48e0d2478882a",
+        "m3/tooling/a3/README.md": "61017d8118309e051f64a9cb77092fdb7d3bb51381019811053a6d76fd8fcbdf",
+        "m3/docs/string-text-replacement-spec.md": "146b5c6b7b22ee2eaeb6201974ac01cf1d2ec58e57a6e71b4aec4c1ecc19568b",
+        "m3/tooling/migration-recipes/pom.xml": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
+        "m3/docs/synexia-string-precompute-port-map.tsv": "966640e9b0bbd856cd9e0a808281cf77e6fc734ce876b4f8253163d65aa2275e",
+        "m3/docs/name-mapping.json": "0c99d4e51f4522045a6d5e7cb8b5b1a11ee4b7ba4f962f5d1f1172ee386a5d6f",
+        "src/java.base/share/classes/java/lang/M3String.java": "6ba1a0e2b616bb5543d7616858a4d083a59c412040afcd9ab27434df9c2bd743",
+        "m3/tooling/tq/plan.json": "8e6db1b290e9ee55bc028ce51e4aae85773cb8be167b7193ee721b031f46be4b",
+        "m3/docs/migration-mapping-lifecycle.md": "773f1939ba24e80cf7d67f85ed570de695c4e4e2f9f0547ce28c7b942c268e2c",
+        "m3/tooling/tq/pins.json": "a7c4ba68ec1c51febf7a75d3539b857713b4efb2101f6cdea90ddb724e0f841f",
+        "m3/docs/atom-pattern-admission-and-tooling-boundary.md": "8742c19ea1d7fe1f5a8029c917ba79a3f02aa1adfc31456e16b63f1eb3eb9134",
+        "src/java.base/share/classes/java/util/regex/Matcher.java": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78",
+        "src/java.base/share/classes/java/util/regex/Pattern.java": "8cbd439235c592ecc98eb2a26f8494108c18a6521e715431ca1bec6db1e0b170",
+        "src/java.base/share/legal/synexia.md": "5142333a2bcde8c5555b123a685046963c860d52552b4f8f1d19532571f0ae7a",
+        "src/java.base/share/classes/jdk/internal/mindex/M3StringBacking.java": "bcd2fe86a21464f7c65fd582368362d327e54b143dc05df13b31c1a029ecb251",
+        "m3/migration/vi-census.json": "14b999b366195420e5b1bee9a4f994983e24695f3f4383b3826d12ef177968f4",
+        "m3/migration/migration.py": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+        "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3StringHistoryConvergenceRecipeTest.java": "38fbd2b10ab5f1458cdb62defac5cfbcd2aad6166c1c70212e2f0ff458e860b1",
+        "m3/migration/mapping.schema.json": "ab728f887e0bd418bd02445f72a63d6eaa675892fbe28ba1619692f00aadadeb",
+        "test/jdk/java/util/regex/M3RegexLiteralTQTest.java": "9900b7a8baffdc05c65a73b139715e9ff543e97e171d6fbb8b013b6837919766",
+        "m3/tooling/tq/src/test/java/com/m3/tq/TQTest.java": "584ea5dd53862f1519b7a8c4fc2c41454a0e61c29cff8da8a759011a8572e24d",
+        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java": "0e65b26f674f68fea30151ea63a17faef2f88ca0f0679723bb3dc230fda22b72",
+        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+        "m3/tooling/a3/src/main/java/com/m3/a3/A3Lab.java": "c212736f000836cb782a5ff81fd2de48e67d36ea4b3bd53cf7743c4aadbfdaf6",
+        "m3/docs/name-mapping.schema.json": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+        "m3/tooling/a3/src/main/java/com/m3/a3/A3RegexMatrix.java": "f000b1eea411056baaca6051b220149f25334bc70bf69b4f0536839c6c78e404",
+        ".github/workflows/mindex-string-backing.yml": "489700a2b3930ce427f937619f92e73d0103a119ead4e45846d0dae0aefce1a7",
+        "src/java.base/share/classes/java/lang/M3StringTuple.java": "0788834635dee7c22e94b92fc7d1b42bdc42c7b1d8948efabc4e94062173d4b9",
+        "src/hotspot/share/cds/archiveHeapWriter.cpp": "fa8ea0f123a27055fde22d303dab7db87dc6f93ec8c8ebc34748ac4e6df27cf1",
+        "src/hotspot/share/classfile/vmSymbols.hpp": "4f752ab79abf854d144e53118a2cc57a4b3cc2432140e9297079cca86dd2abab",
+        "src/hotspot/share/classfile/vmClassMacros.hpp": "e71ea245f54053fbdd099cc53f45dc4e2294d3d571e8412ccab2dbbc21f34a12",
+        "src/java.base/share/native/libjava/String.c": "ee9d9bfa986259600d6fe95e21e3cb904a4f6541ce24c6391bc50715c6a054ef",
+        "m3/tooling/tq-sync/pom.xml": "70ec1db39e50afe30a37bcb370271b620c69a65c6d04905a52b40cfd73b79060",
+        "m3/tooling/tq-sync/plan.json": "284a25961f678010247d90f869c26e6566c367eb65b9e1b472c38279003bc032",
+        "src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp": "558422c57828be5e0f8d3fbdead9ee4fa0ab9f8b504487baa9199ebfb2b2dcd8",
+        "src/hotspot/share/opto/stringopts.cpp": "a278409363087f891f36fba0fd4c9d7ad2aee4784cd445a655d7fd07305127cd",
+        "m3/migration/recipe.py": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628",
+        "src/hotspot/share/classfile/javaClasses.inline.hpp": "18edfbc5b4ae95130b6fcfe19fd9927abd0e4cc5504129d9a20b025b10f0b7a1",
+        "src/java.base/share/classes/java/lang/AbstractStringBuilder.java": "9a502392c96175e025bbd992fd15482ef2cf0ee4a2ca083a293d5fd41e6448ce",
+        "src/hotspot/share/classfile/stringTable.cpp": "129f6153a28d738e5dd9de8e0975b73735a3c6268046ec7b71f3f69adb460178",
+        "src/java.base/share/classes/java/lang/M3StringPool.java": "c0e3b63830c3540e39e51ecc7522e1294f92baa85ef7e3963f2c21d3762fa35b",
+        "src/java.base/share/classes/java/lang/String.java": "b35c642045ab22b185ed228c8fcef62383f8eafdaca09fe7268c807f68936d12",
+        "src/java.base/share/classes/java/lang/M3StringOwner.java": "cd01663a0b50d842ecc2031c485bd2d050f98b5226f5cdddce63dd0338ec0d74",
+        "src/java.base/share/classes/java/lang/M3StringAtom.java": "20905d45d3e96e0fb1b37b0482eff71888264b351ab001c07e9b0d56d9c3a31f",
+        "m3/docs/m3-porting.md": "ac399d376bf624d81a0fd3ed39005f0a71807afe3164fc611c346dcf0463e47a",
+        "m3/docs/string-precompute-completeness.tsv": "12c4360171180e53e77d41761f685ac64876f422b7a6bb38e31f9d8df98a93fe",
+        "m3/runtime-integration/check-m3string-invariants.py": "1ed89195c0b57312060b53668b59575168edeb92be03414d3634be3a21c1e095",
+        "m3/tooling/tq-sync/src/test/java/com/m3/tq/TQSyncTest.java": "6e7a56c85819115303df92cec677bf851abae19bbbcb5c31553d52e4c6db7084",
+        "m3/tooling/tq-sync/README.md": "b61c518ea4c49812791a16efbc5e21e595cf4a1fed245c8d61a227112a7aafc2",
+        "m3/tooling/tq-sync/verify-plan.py": "905fb42c90ef44cbc5d4449218b825eca025fd23ae169b15606b0b95de359793",
+        "m3/tooling/lane28/inputs.tsv": "bf1cd8dcfaa64220b4ca966a7065ba7e281bc06e09c61c4b8c8b84207cabb816",
+        "m3/tooling/tq/inputs.tsv": "d764241cfc52f875c7c2b1b20f27b46d5bdce17d39e05cd32b3e409061ebe17e",
+        "m3/tooling/tq/verify-plan.py": "ff2c31f57aac81a7049612557a3757781927563bd2d7a7b598aa62a116e1d978",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/00-m3-lane28.yml.txt.before": "ee99386c35f3f663fe9011cb2cc56c98e20cdc9bc6e44f3b1525747fce2e0925",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/01-m3-tq.yml.txt": "ed5bb9a6a3bcd32eb13dabf7cfc60ac406fe89b1eb34c0fe01286fc4327ae894",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/00-m3-lane28.yml.txt": "1a0ef88a0edc06a87cc2d899edccb2ae931d7bec303448277b1c83f7ea782ecb",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/01-m3-tq.yml.txt.before": "4b6dd04c600a6350c5be8c4ed54ac88ae396604eed906eea0d925d2f3e8ded12",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/manifest.tsv": "415d3a8fe282c705dc387761af853bead2740ad43403487f013fd9d9553a6e2e",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/02-m3-porting.md.txt": "ac399d376bf624d81a0fd3ed39005f0a71807afe3164fc611c346dcf0463e47a",
+        ".github/workflows/m3-lane28.yml": "1a0ef88a0edc06a87cc2d899edccb2ae931d7bec303448277b1c83f7ea782ecb",
+        ".github/workflows/m3-tq.yml": "ed5bb9a6a3bcd32eb13dabf7cfc60ac406fe89b1eb34c0fe01286fc4327ae894",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/05-manifest.tsv.txt": "a90b5a4571363d6a34bacf94daa0671cd447196b2938fa62545aed5e39a1458b",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/04-plan.json.txt": "592477414957af5b2780b5c9e4ce09391e6f3dc60d11e3ceff5cd0683338796b",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/04-plan.json.txt.before": "08ceafed668f25bef92ee06f3adfa3333c4a972292cc8316cf12d14620048de9",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/05-manifest.tsv.txt.before": "eaa0afe5ce1f3b53ca4ad651d204d3242296363a139f6a61ec9e9277b81b650f",
+        "m3/tooling/lane28/plan.json": "592477414957af5b2780b5c9e4ce09391e6f3dc60d11e3ceff5cd0683338796b",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/03-name-mapping.json.txt.before": "22ce39ac68e6f5efab18e9bbf6d3da45af585067d88848f1eb7ce8a76987df87",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/03-name-mapping.json.txt": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da",
+        "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/manifest.tsv": "a90b5a4571363d6a34bacf94daa0671cd447196b2938fa62545aed5e39a1458b",
+        "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/workflow.yml.txt": "1a0ef88a0edc06a87cc2d899edccb2ae931d7bec303448277b1c83f7ea782ecb",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/07-name-mapping.json.txt.before.txt": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/06-name-mapping.json.txt.txt": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da",
+        "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/06-name-mapping.json.txt.txt.before": "2d53e630c81c05b2c48dd45d31b0c3cdc7bf1ecbb2ea0bd9d7b52666d073075b",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/08-workflow.yml.txt.txt.before": "ee99386c35f3f663fe9011cb2cc56c98e20cdc9bc6e44f3b1525747fce2e0925",
+        "m3/tooling/lane28/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-lane28/name-mapping.json.txt.before": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/07-name-mapping.json.txt.before.txt.before": "9fce21acb83574c795ca674b263a324315be01e8c87ba149ae6ae3ac79d39c45",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/09-inputs.tsv.txt.before": "3a2c71f0a27fdc9ffd42f3caa14bcb8be6898e036ca34b371d7e3e5ccd834e05",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/08-workflow.yml.txt.txt": "1a0ef88a0edc06a87cc2d899edccb2ae931d7bec303448277b1c83f7ea782ecb",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt.before": "9f9db680db1dc3c449b98ee8c928b7865da4ff1381c7b26fc1d165fe50c41118",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/10-pins.json.txt": "a7c4ba68ec1c51febf7a75d3539b857713b4efb2101f6cdea90ddb724e0f841f",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/10-pins.json.txt.before": "6909507522d9400d7047d25ef825cb5d87ed87244673b2446de5e79c968c2941",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/09-inputs.tsv.txt": "d764241cfc52f875c7c2b1b20f27b46d5bdce17d39e05cd32b3e409061ebe17e",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/11-plan.json.txt": "8e6db1b290e9ee55bc028ce51e4aae85773cb8be167b7193ee721b031f46be4b",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/12-manifest.tsv.txt": "61f9431a2426d37e910d64fdf337d604d3cc5af31bb25bb546acdc0d07a1fd38",
+        "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/manifest.tsv": "61f9431a2426d37e910d64fdf337d604d3cc5af31bb25bb546acdc0d07a1fd38",
+        "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt.before": "bc6f8d7d7562d067d916a4987749019c5085e88665592ac533b49ef9a4856132",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/12-manifest.tsv.txt.before": "71e698a761e813d51fb688e254353cb3b405d823e984ab34c082b66fe7da1dc5",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/13-name-mapping.json.txt.txt.before": "3c9e3dea8ca5a6945a060d41772868b4850b6dc387030302fed7490aef631822",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/13-name-mapping.json.txt.txt": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60",
+        "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt": "73e2ca95f786a668dd17edbb69f6c4611bebc634ee52281c171cf2dece9d9d60",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/15-verify-image.sh.txt.txt": "fddf22592f0461fa91bd25753d8d41aa444ac1406fa74a9d04351f2b8585803d",
+        "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/verify-image.sh.txt": "fddf22592f0461fa91bd25753d8d41aa444ac1406fa74a9d04351f2b8585803d",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/15-verify-image.sh.txt.txt.before": "280267785554ab46a8fa67d1801b4abd6fb3639a993c508e46e511d16affd407",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/14-name-mapping.json.txt.before.txt.before": "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/16-workflow.yml.txt.txt": "ed5bb9a6a3bcd32eb13dabf7cfc60ac406fe89b1eb34c0fe01286fc4327ae894",
+        "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/workflow.yml.txt": "ed5bb9a6a3bcd32eb13dabf7cfc60ac406fe89b1eb34c0fe01286fc4327ae894",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/14-name-mapping.json.txt.before.txt": "bc6f8d7d7562d067d916a4987749019c5085e88665592ac533b49ef9a4856132",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/16-workflow.yml.txt.txt.before": "4b6dd04c600a6350c5be8c4ed54ac88ae396604eed906eea0d925d2f3e8ded12",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/18-M3TQTest.java.txt.txt.before": "68316b377bc4e538c7cb343060696cb8fccfaee433c220bdb73d3486d16e9f20",
+        "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/17-M3TQ.java.txt.txt.before": "9c45405969aeac089ad8786443d59450f2fd8e6f33ca1a6e35e95a7a45f4f0b1",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/17-M3TQ.java.txt.txt": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/18-M3TQTest.java.txt.txt": "f587cc74f8dcd9914827cb7d03b1e3aa5eb420851d7de231e5624885aff8782f",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/19-manifest.tsv.txt.before": "30b9aee3598aa556a9de57e612a1b3e3b045586b6d7382d53dc92798177338fb",
+        "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/M3TQTest.java.txt": "f587cc74f8dcd9914827cb7d03b1e3aa5eb420851d7de231e5624885aff8782f",
+        "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/M3TQ.java.txt": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/21-verify-image.sh.txt": "fddf22592f0461fa91bd25753d8d41aa444ac1406fa74a9d04351f2b8585803d",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/19-manifest.tsv.txt": "3b195d75e2fdc32ac31b665c5541bd07d3ffdb11698c499bccfd7bc4c1b4e338",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/22-verify-plan.py.txt.before": "9073d2710bd9497f6e76871cdc8f9e291608ed3024af6bf76ed36306fd191d9a",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/21-verify-image.sh.txt.before": "280267785554ab46a8fa67d1801b4abd6fb3639a993c508e46e511d16affd407",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/20-TQTest.java.txt.before": "6d7ddef6dad7ce2d4127417448891251cb83b8315f5325b525a7c9d727260dd4",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/20-TQTest.java.txt": "584ea5dd53862f1519b7a8c4fc2c41454a0e61c29cff8da8a759011a8572e24d",
+        "m3/tooling/tq/verify-image.sh": "fddf22592f0461fa91bd25753d8d41aa444ac1406fa74a9d04351f2b8585803d",
+        "m3/tooling/lane28/check-log.py": "3401754e77113c76d15c7f70844ae95e210000fb31c2be4a15b668aa7d3c64e5",
+        "test/jdk/java/lang/String/M3TQTest.java": "f587cc74f8dcd9914827cb7d03b1e3aa5eb420851d7de231e5624885aff8782f",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/23-M3TQTest.java.txt": "f587cc74f8dcd9914827cb7d03b1e3aa5eb420851d7de231e5624885aff8782f",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/23-M3TQTest.java.txt.before": "68316b377bc4e538c7cb343060696cb8fccfaee433c220bdb73d3486d16e9f20",
+        "m3/tooling/tq-sync/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq-sync/22-verify-plan.py.txt": "ff2c31f57aac81a7049612557a3757781927563bd2d7a7b598aa62a116e1d978",
+        "src/hotspot/share/runtime/arguments.cpp": "cde11381b3d49642dee5988d0188e6f3ffc0dcd3a7789b3abec12a00eb832dc5",
+        "test/jdk/java/util/regex/M3RegexReuseTest.java": "922d6c26a0ffe5bfa9a239a6e7f2e3380dfb0a37a568a007915246005c642364",
+        "m3/tooling/mr/verify.sh": "2d30362d6c294fd92f5c0976550fa0bd8458aa906461ff4b1853d81773c9bc94",
+        "m3/tooling/mr/pom.xml": "e1d4658c33674d9ecd6357c91b300c4bba7a7a363bb8db62f6c182c26df77965",
+        "m3/tooling/mr/inputs.tsv": "b24a05b37d31254db38365172d3a6abbe11b6d6e48c557082740ef2522169271",
+        "m3/tooling/mr/test_invariants.py": "512596cd73151d5b9c1d85b53f808cb7ad47b1f967d6e386c2317124dfc31b7e",
+        "m3/tooling/mr/test_custody.py": "a7f59f8737afbd1add5056ce0858b5c9ad0d277c240b34bea7310937e6fb319d",
+        "m3/tooling/mr/check.py": "402dc4c853d16592d5b8367d3a050b6de60c06de8890d19f47331158a0ab4200",
+        "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/Matcher.java.txt": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78",
+        "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/M3RegexReuseTest.java.txt": "922d6c26a0ffe5bfa9a239a6e7f2e3380dfb0a37a568a007915246005c642364",
+        "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/manifest.tsv": "5b44008f02f49ce0a48fafcb4da24af69ea526a67f88041c209d6d574ed788da",
+        "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-mr/Matcher.java.txt.before": "8bdc84b934c398e5538319632d304a19960771c9fb8557249e3097e5fd7001a0",
+        "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-mr/mindex-string-backing.yml.txt.before": "03f82cccf3708b925baadc43b58790548eadbb4efcb1d0ed64970081ec5b3b4a",
+        "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-mr/verify-plan.py.txt.before": "ca29fa3e9a6660a8006f99702fc8c3db2839049af00a8eeee4a435701cf5f36e",
+        "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-mr/synexia-string-precompute-port-map.tsv.txt.before": "eeac5ed215d154a79aae17e12e0b3fd0be14f8af45e2804a0719b4b3345d4d8a",
+        "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-mr/synexia-string-precompute-port-map.tsv.txt": "966640e9b0bbd856cd9e0a808281cf77e6fc734ce876b4f8253163d65aa2275e",
+        "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-mr/check-m3string-invariants.py.txt.before": "c9eb51298f2a6a7a1798051c24074cd7f23a8e0805ed6d50420ff3bcd12cacb4",
+        "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-mr/string-precompute-completeness.tsv.txt.before": "421c00e9214cd25d9f0e46337c78bce8ce72270797fdfdccf42d2a8df6f11c00",
+        "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-mr/mindex-string-backing.yml.txt": "489700a2b3930ce427f937619f92e73d0103a119ead4e45846d0dae0aefce1a7",
+        "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-mr/manifest.tsv": "e7c9047241718cc871692d9501d09348faf5da3e8ae2cb858e4891c5dde6c25f",
+        "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-mr/string-precompute-completeness.tsv.txt": "12c4360171180e53e77d41761f685ac64876f422b7a6bb38e31f9d8df98a93fe",
+        "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-mr/name-mapping.json.txt": "0c99d4e51f4522045a6d5e7cb8b5b1a11ee4b7ba4f962f5d1f1172ee386a5d6f",
+        "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-mr/check-m3string-invariants.py.txt": "1ed89195c0b57312060b53668b59575168edeb92be03414d3634be3a21c1e095",
+        "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-mr/verify-plan.py.txt": "905fb42c90ef44cbc5d4449218b825eca025fd23ae169b15606b0b95de359793",
+        "m3/tooling/mr/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-mr/name-mapping.json.txt.before": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da",
+        "m3/tooling/mr/src/test/java/com/m3/mr/MRTest.java": "34277487723f967cd664a8295d534b617f1ce62c3574f5a7cbc71e9c8d56d5f1"
+      },
+      "junit": {
+        "tests": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "nested_python": {
+        "shared_mapping_custody": 7,
+        "string_invariant_baseline_and_mutants": 5
+      }
+    }
+  ],
+  "other_executed_gates": {
+    "retained_tq_sync_junit": "3 tests, zero failures/errors/skips; exact current retained recipe",
+    "retained_tq_sync_custody": "exact nonshared outputs, retained shared authority, replay, fixed point, rollback, three no-write refusals",
+    "string_invariants": "M3_STRING_SOURCE_INVARIANTS_PASS",
+    "packet_sources": "8 delivered postimages, 6 unchanged compile/recipe inputs; 129 read files match the pinned Git blobs, using protected preimages for modified targets",
+    "shell_syntax": "bash -n m3/tooling/mr/verify.sh"
+  },
+  "semantic": {
+    "strings": 410,
+    "patterns": 30,
+    "cells_per_run": 12300,
+    "checks_per_run": 1803564,
+    "digest": "d8a57e94b28138fd06f1d2616dd5bb0274a651b9cb8783c199e8ca321f7d87ee",
+    "runs": 9,
+    "stock_modes": [
+      "mixed"
+    ],
+    "before_and_after_modes": [
+      "interpreter",
+      "mixed",
+      "c1",
+      "c2"
+    ],
+    "jni_check": "-Xcheck:jni on runtime processes; no new JNI acceleration",
+    "counterexamples": [
+      "frozen baseline fails fact-reuse control",
+      "broken input invalidation fails identity and observable semantic controls"
+    ]
+  },
+  "source_contract": {
+    "new_matcher_fields": 0,
+    "public_or_private_descriptor_changes": 0,
+    "new_runtime_dependencies": 0,
+    "maximum_precompute_utf16_units": 32768,
+    "mapping_records_retained": 52,
+    "mapping_gates_retained": 20,
+    "mapping_records_appended": 3
+  },
+  "allocation": {
+    "scope": "two fixed literal-miss reset/reuse fixtures; cold preparation separate; 200 warmup queries then four batches; no universal speedup claim",
+    "fixtures": {
+      "before": {
+        "126": {
+          "warm_queries_per_batch": 256,
+          "batches": 4,
+          "cold_ns": 156023,
+          "median_allocated_bytes_per_query": 1112.859375,
+          "raw_samples": [
+            {
+              "units": 126,
+              "pass": 0,
+              "coldNs": 156023,
+              "queries": 256,
+              "bytes": 285344,
+              "ns": 1473422
+            },
+            {
+              "units": 126,
+              "pass": 1,
+              "coldNs": 156023,
+              "queries": 256,
+              "bytes": 285056,
+              "ns": 915063
+            },
+            {
+              "units": 126,
+              "pass": 2,
+              "coldNs": 156023,
+              "queries": 256,
+              "bytes": 284672,
+              "ns": 986016
+            },
+            {
+              "units": 126,
+              "pass": 3,
+              "coldNs": 156023,
+              "queries": 256,
+              "bytes": 284728,
+              "ns": 779796
+            }
+          ]
+        },
+        "6144": {
+          "warm_queries_per_batch": 256,
+          "batches": 4,
+          "cold_ns": 110011,
+          "median_allocated_bytes_per_query": 49256.0,
+          "raw_samples": [
+            {
+              "units": 6144,
+              "pass": 0,
+              "coldNs": 110011,
+              "queries": 256,
+              "bytes": 12609536,
+              "ns": 26480369
+            },
+            {
+              "units": 6144,
+              "pass": 1,
+              "coldNs": 110011,
+              "queries": 256,
+              "bytes": 12609536,
+              "ns": 9552163
+            },
+            {
+              "units": 6144,
+              "pass": 2,
+              "coldNs": 110011,
+              "queries": 256,
+              "bytes": 12609536,
+              "ns": 12890263
+            },
+            {
+              "units": 6144,
+              "pass": 3,
+              "coldNs": 110011,
+              "queries": 256,
+              "bytes": 12609536,
+              "ns": 22648808
+            }
+          ]
+        }
+      },
+      "after": {
+        "126": {
+          "warm_queries_per_batch": 256,
+          "batches": 4,
+          "cold_ns": 134710,
+          "median_allocated_bytes_per_query": 32.109375,
+          "raw_samples": [
+            {
+              "units": 126,
+              "pass": 0,
+              "coldNs": 134710,
+              "queries": 256,
+              "bytes": 8248,
+              "ns": 300614
+            },
+            {
+              "units": 126,
+              "pass": 1,
+              "coldNs": 134710,
+              "queries": 256,
+              "bytes": 8192,
+              "ns": 309946
+            },
+            {
+              "units": 126,
+              "pass": 2,
+              "coldNs": 134710,
+              "queries": 256,
+              "bytes": 9544,
+              "ns": 184749
+            },
+            {
+              "units": 126,
+              "pass": 3,
+              "coldNs": 134710,
+              "queries": 256,
+              "bytes": 8192,
+              "ns": 140581
+            }
+          ]
+        },
+        "6144": {
+          "warm_queries_per_batch": 256,
+          "batches": 4,
+          "cold_ns": 981871,
+          "median_allocated_bytes_per_query": 32.0,
+          "raw_samples": [
+            {
+              "units": 6144,
+              "pass": 0,
+              "coldNs": 981871,
+              "queries": 256,
+              "bytes": 8192,
+              "ns": 46111
+            },
+            {
+              "units": 6144,
+              "pass": 1,
+              "coldNs": 981871,
+              "queries": 256,
+              "bytes": 8192,
+              "ns": 44426
+            },
+            {
+              "units": 6144,
+              "pass": 2,
+              "coldNs": 981871,
+              "queries": 256,
+              "bytes": 8192,
+              "ns": 45264
+            },
+            {
+              "units": 6144,
+              "pass": 3,
+              "coldNs": 981871,
+              "queries": 256,
+              "bytes": 8192,
+              "ns": 65673
+            }
+          ]
+        }
+      }
+    },
+    "tradeoff": "One existing bounded primitive fact packet can remain live across same-input reset; no extra input reference or global cache"
+  },
+  "inventory": {
+    "production_blobs": 4288,
+    "mindex_matindex_java_filenames": 2543,
+    "subtrees": 9,
+    "all_rows": "REVIEW_REQUIRED",
+    "source_tree_complete": false,
+    "semantic_dependency_closure_complete": false
+  },
+  "qualification_findings": [
+    "The expected jdeps split-package warning is asserted before its sole java.base dependency result.",
+    "C2 may inline the private trigram gate; JIT admission checks actual nmethods for both changed reset overloads and fact-consuming search.",
+    "Four fetched projection/preimage files with an extra trailing newline were corrected against Git blob identity before final recipe replay.",
+    "The existing String gate had five syntax errors, stale route markers and an overbroad workflow-path check. The retained checks now follow current runtime spellings; five negative/baseline fixture tests protect their purpose.",
+    "Two artifact-digest ledger rows now use the existing allowed NOT_JDK_STRING_SEMANTICS spelling; scope and reasons remain unchanged.",
+    "Earlier mapping authority remains exact. Only appended records are accepted by the shared-map custody check."
+  ],
+  "open_gates": [
+    "matching M3 fork images and image jtreg",
+    "JNI/native and platform execution",
+    "HotSpot/GC/CDS/JVMTI/serviceability",
+    "full Maven reactor and coverage gates",
+    "JCK",
+    "complete MIndex dependency closure and string/collection migration",
+    "RXM stateful target adaptation",
+    "RXA provider compatibility"
+  ],
+  "complete_migration": false,
+  "target_status": "implemented-unverified"
+}
