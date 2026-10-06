@@ -131,9 +131,19 @@ semantically safe boundary:
 
 Synexia's position-mask lineage is adapted as `M3StringPositionPrecompute`, not as fields on
 `M3String` or `M3StringFacts`. The implementation keeps one conservative code-unit signal per
-64 UTF-16 units, weakly keyed by canonical owner+coordinate. It is capped at 64 cache slots and
-32,768 UTF-16 units per source (about 256 KiB of primitive masks at the hard ceiling).
+64 UTF-16 units, weakly keyed by canonical owner+coordinate. Blocks are prepared lazily on first
+visit and atomically reused, so a one-shot early match does not scan the whole source. It is capped
+at 64 cache slots and 32,768 UTF-16 units per source (about 256 KiB of primitive masks at the hard
+ceiling).
 
 `String.indexOf(int)`, bounded `indexOf(int,...)`, and `lastIndexOf(int)` use this lane for
 BMP code units after the whole-value fact filter. A negative block mask may skip that block; every
 positive block is still exact-verified. Supplementary code-point search remains pair-exact.
+
+
+## Reverse-prefix prepared search
+
+The Synexia compiled-search lineage included both forward and reverse prefix facts. M3JDK now
+retains both in the bounded `M3StringSearchPrecompute.Plan`: ordinary `indexOf` uses forward
+KMP, while `lastIndexOf` scans backward with a reverse-prefix KMP lane and returns the first
+reverse match. The memory ceiling formula explicitly budgets both primitive int lanes.
