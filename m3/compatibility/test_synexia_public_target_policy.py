@@ -11,12 +11,22 @@ import check_synexia_public_target as policy
 class SynexiaPublicTargetPolicyTest(unittest.TestCase):
     def test_checked_in_policy_is_exact(self) -> None:
         rows = policy.load_policy()
-        self.assertEqual(5, len(rows))
+        self.assertEqual(6, len(rows))
         self.assertIn(
             (
                 "SYNEXIA_FIRST_PARTY",
                 "Apache-2.0",
                 "M3_TOOLING",
+                "COPY_PRESERVE_LICENSE",
+                "Apache-2.0",
+            ),
+            rows,
+        )
+        self.assertIn(
+            (
+                "SYNEXIA_FIRST_PARTY",
+                "Apache-2.0",
+                "M3_RECIPE",
                 "COPY_PRESERVE_LICENSE",
                 "Apache-2.0",
             ),
