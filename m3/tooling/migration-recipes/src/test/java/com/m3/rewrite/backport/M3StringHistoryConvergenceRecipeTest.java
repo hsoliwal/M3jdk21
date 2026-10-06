@@ -90,6 +90,12 @@ final class M3StringHistoryConvergenceRecipeTest {
                         "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
                         "08-M3TQ.java.txt"),
                 java(
+                        "src/java.base/share/classes/java/util/regex/Matcher.java",
+                        "11-Matcher.java.txt"),
+                java(
+                        "src/java.base/share/classes/java/util/regex/Pattern.java",
+                        "10-Pattern.java.txt"),
+                java(
                         "test/jdk/java/lang/String/M3StringFactsCompositionTest.java",
                         "04-M3StringFactsCompositionTest.java.txt"),
                 java(
@@ -97,7 +103,10 @@ final class M3StringHistoryConvergenceRecipeTest {
                         "03-M3StringPrecomputeSearchTest.java.txt"),
                 java(
                         "test/jdk/jdk/internal/mindex/M3TQFactsTest.java",
-                        "09-M3TQFactsTest.java.txt"));
+                        "09-M3TQFactsTest.java.txt"),
+                java(
+                        "test/jdk/java/util/regex/M3RegexLiteralTQTest.java",
+                        "12-M3RegexLiteralTQTest.java.txt"));
     }
 
     private static List<SourceFile> textAfter() {
