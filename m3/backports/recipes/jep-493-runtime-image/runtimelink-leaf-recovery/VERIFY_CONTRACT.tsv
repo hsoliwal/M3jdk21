@@ -1,0 +1,9 @@
+gate	state	requirement
+docs_before_code	PASS_BRANCH	TASK_PACKET precedes product recovery
+absent_preimages	PASS_BRANCH	five targets absent on exact base
+exact_blob_replay	PASS_BRANCH	PR109 source/recipe/test blobs reused
+scope_authority	PASS_BRANCH	MODULE behavior/contract preserving
+recipe_junit	PENDING_HOSTED	exact source generation/conflict/fixed-point proof
+openjdk_configure	PENDING_HOSTED	Java21 boot JDK
+jdk_jlink_compile	PENDING_HOSTED	make JOBS=2 jdk.jlink
+full_jep493	INCOMPLETE	existing-owner adaptations/build flags/resources/tests remain
