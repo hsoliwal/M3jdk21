@@ -154,7 +154,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/recipes/jep-485-gatherers/materialize.py             --root "$PWD"             --mode apply             --receipt $RUNNER_TEMP/jep485-proof/apply.tsv
+          python3 m3/backports/recipes/jep-485-gatherers/materialize.py             --root "$PWD"             --mode apply             --acknowledge-opt-in-se-api JEP485             --receipt $RUNNER_TEMP/jep485-proof/apply.tsv
           python3 m3/backports/recipes/jep-485-gatherers/materialize.py             --root "$PWD"             --mode verify-post             --receipt $RUNNER_TEMP/jep485-proof/postimage.tsv
           git diff --check
 
