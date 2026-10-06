@@ -249,7 +249,7 @@ final class M3String implements CharSequence {
     }
 
     int hashCodeValue() {
-        return facts().javaHash;
+        return isWholeOwner() ? owner.javaHash : facts().javaHash;
     }
 
     M3StringFacts facts() {
@@ -258,13 +258,32 @@ final class M3String implements CharSequence {
                 : owner.rangeFacts(value, this);
     }
 
+    M3StringFacts factsIfPrepared() {
+        return start() == 0 && length() == owner.length
+                ? owner.factsIfPrepared()
+                : owner.rangeFactsIfPrepared(value);
+    }
+
+    private boolean isWholeOwner() {
+        return start() == 0 && length() == owner.length;
+    }
+
     boolean contentEquals(String other) {
         Objects.requireNonNull(other, "other");
         M3String that = other.m3();
         if (that != null) {
             if (sameCoordinate(that)) return true;
             if (that.length() != length()) return false;
-            if (hashCodeValue() != that.hashCodeValue()) return false;
+            if (isWholeOwner() && that.isWholeOwner()) {
+                if (owner.javaHash != that.owner.javaHash) return false;
+            } else {
+                M3StringFacts leftFacts = factsIfPrepared();
+                M3StringFacts rightFacts = that.factsIfPrepared();
+                if (leftFacts != null && rightFacts != null
+                        && leftFacts.javaHash != rightFacts.javaHash) {
+                    return false;
+                }
+            }
         } else if (other.length() != length()) {
             return false;
         }
