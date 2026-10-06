@@ -34,7 +34,7 @@ pinned hsoliwal/nebula commit
 - entrypoint: `org.eclipse.nebula.m3.rewrite.NebulaM3Java21ConvergenceRecipe`;
 - target lane: `JAVA21_JDK_COMPATIBILITY_AND_BACKPORT_LANES`.
 
-Exact proving source: `hsoliwal/nebula@m3/final-nebula-recipe-lab-20261006` commit `818f2a6ba38399d2564c15494cd4333cca8d37eb`.
+Exact proving source: `hsoliwal/nebula@m3/final-nebula-recipe-lab-20261006` commit `29543b74491916844f2b50d5e5902e950c5a4c0f`.
 
 The admitted transfer must also carry the exact refactor authority order:
 
@@ -100,3 +100,11 @@ It does not auto-accept any JEP, copy Nebula source into OpenJDK, claim JCK/TCK 
 bypass source/classfile/VM/API compatibility review. Spec-visible features remain opt-in/isolated or
 rejected according to the existing compatibility policy. HotSpot/JNI/native changes still require
 their own dependency, build, jtreg/runtime and parity proof.
+
+## Final proving branch custody
+
+The portable transfer is pinned to Nebula PR #78 final proving branch head:
+
+`29543b74491916844f2b50d5e5902e950c5a4c0f`.
+
+This exact commit is also the custody point used by the Synexia transfer-admission lane. Any later Nebula head requires a new explicit target-side binding update; branch names alone are never trusted as transfer identity.
