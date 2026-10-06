@@ -563,6 +563,12 @@ public final class String
     }
 
     private String(M3Construction construction) {
+        if (construction.storage != null) {
+            this.value = construction.storage.compatibilityValue();
+            this.coder = construction.storage.coder();
+            this.m3 = construction.storage;
+            return;
+        }
         M3String storage = maybeAdmit(construction.value, construction.coder);
         this.value = storage == null ? construction.value : storage.compatibilityValue();
         this.coder = storage == null ? construction.coder : storage.coder();
@@ -572,11 +578,38 @@ public final class String
     private static final class M3Construction {
         final byte[] value;
         final byte coder;
+        final M3String storage;
 
         M3Construction(byte[] value, byte coder) {
             this.value = value;
             this.coder = coder;
+            this.storage = null;
         }
+
+        M3Construction(M3String storage) {
+            this.value = null;
+            this.coder = storage.coder();
+            this.storage = Objects.requireNonNull(storage, "storage");
+        }
+    }
+
+    private static M3String maybeAdmitDecodedSingleByte(
+            Charset charset, byte[] bytes, int offset, int length) {
+        if (!M3_JOINED_STRINGS
+                || !jdk.internal.misc.VM.isBooted()
+                || !M3String.admissionEnabled()
+                || length == 0) {
+            return null;
+        }
+
+        if (charset == ISO_8859_1.INSTANCE) {
+            return M3String.admitLatin1Bytes(bytes, offset, length);
+        }
+        if ((charset == UTF_8.INSTANCE || charset == US_ASCII.INSTANCE)
+                && StringCoding.countPositives(bytes, offset, length) == length) {
+            return M3String.admitLatin1Bytes(bytes, offset, length);
+        }
+        return null;
     }
 
     @SuppressWarnings("removal")
@@ -584,6 +617,11 @@ public final class String
             Charset charset, byte[] bytes, int offset, int length) {
         if (length == 0) {
             return new M3Construction("".value, "".coder);
+        }
+
+        M3String direct = maybeAdmitDecodedSingleByte(charset, bytes, offset, length);
+        if (direct != null) {
+            return new M3Construction(direct);
         }
         if (charset == UTF_8.INSTANCE) {
             if (COMPACT_STRINGS) {
