@@ -124,6 +124,21 @@ class JepResidueTest(unittest.TestCase):
         self.assertEqual("RECIPE_CLASS", by_jep[485].evidence_state)
         self.assertIn("M3Jep485BackportRecipe.java", by_jep[485].evidence_paths)
 
+    def test_detects_compact_jep_packet_directory_names(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            packet = root / "m3/backports/recipes/j510"
+            packet.mkdir(parents=True)
+            (packet / "README.md").write_text("packet", encoding="utf-8")
+
+            catalogue = [
+                self.row(release=25, jep=510, disposition="candidate"),
+            ]
+            item = self.r.queue(root, catalogue, [])[0]
+
+        self.assertEqual("MATERIALIZED_PACKET", item.evidence_state)
+        self.assertIn("m3/backports/recipes/j510", item.evidence_paths)
+
     def test_priority_matrix_metadata_is_joined_without_granting_compatibility(self) -> None:
         catalogue = [self.row(release=24, jep=493, disposition="candidate")]
         priorities = [
@@ -178,7 +193,7 @@ class JepResidueTest(unittest.TestCase):
             self.r.read_tsv(backports / "JEP_CATALOGUE.tsv"),
             self.r.read_tsv(backports / "POST21_PRIORITY_COMPATIBILITY.tsv"),
         )
-        self.assertEqual(41, len(items))
+        self.assertEqual(42, len(items))
         by_jep = {item.jep: item for item in items}
         self.assertEqual("MATERIALIZED_PACKET", by_jep[458].evidence_state)
         self.assertEqual(
@@ -192,6 +207,7 @@ class JepResidueTest(unittest.TestCase):
         self.assertEqual("MATERIALIZED_PACKET", by_jep[493].evidence_state)
         self.assertEqual("PACKET_READY", by_jep[493].receipt_state)
         self.assertEqual("NOT_AUTHORIZED", by_jep[493].promotion)
+        self.assertEqual("NO_RECIPE_EVIDENCE", by_jep[404].evidence_state)
         self.assertEqual("NO_RECIPE_EVIDENCE", by_jep[483].evidence_state)
         self.assertEqual("NO_RECIPE_EVIDENCE", by_jep[521].evidence_state)
         self.assertNotIn(401, by_jep)
