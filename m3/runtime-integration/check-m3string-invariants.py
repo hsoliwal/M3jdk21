@@ -125,6 +125,14 @@ for fragment in [
 # Position masks are a separate bounded weak-owner lane. They store one conservative signal per
 # 64 UTF-16 units and may skip blocks only on a negative signal.
 for fragment in [
+    "catch (OutOfMemoryError unavailable)",
+    "return linearIndexOf(source, unit, from, end);",
+    "return linearLastIndexOf(source, unit, from);",
+]:
+    if fragment not in position_precompute:
+        fail(f"M3 position precompute fail-open path missing: {fragment}")
+
+for fragment in [
     "final AtomicReferenceArray<ExactBlock> exact;",
     "Arrays.binarySearch(units, unit)",
     "Long.numberOfTrailingZeros(positions)",
