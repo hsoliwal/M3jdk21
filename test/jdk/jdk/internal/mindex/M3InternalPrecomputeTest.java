@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 import jdk.internal.mindex.M3AttackParityIndex;
 import jdk.internal.mindex.M3ConditionalTable;
+import jdk.internal.mindex.M3CoordinateSpace;
 import jdk.internal.mindex.M3FormulaProbabilityIndex;
 import jdk.internal.mindex.M3FormulaTable;
 import jdk.internal.mindex.M3FormulaTruthIndex;
@@ -28,6 +29,12 @@ import jdk.internal.mindex.M3StringBacking;
 import jdk.internal.mindex.M3Truth;
 
 public class M3InternalPrecomputeTest {
+    private static final M3CoordinateSpace TOKEN_SPACE =
+            M3CoordinateSpace.of(0x4d33544f4b454e31L, 0x0000000000000001L, 7L);
+    private static final M3CoordinateSpace FORMULA_SPACE =
+            M3CoordinateSpace.of(0x4d33464f524d554cL, 0x0000000000000001L, 3L);
+    private static final M3CoordinateSpace MODEL_SPACE =
+            M3CoordinateSpace.of(0x4d334d4f44454c31L, 0x0000000000000001L, 5L);
     private static long checks;
 
     public static void main(String[] args) {
@@ -39,7 +46,7 @@ public class M3InternalPrecomputeTest {
     }
 
     private static void postings() {
-        M3PostingIndex.Builder builder = M3PostingIndex.builder();
+        M3PostingIndex.Builder builder = M3PostingIndex.builder(TOKEN_SPACE);
         int doc0 = builder.addDocument(11L, 12L, 13L);
         int doc1 = builder.addDocument(11L, 14L, 13L);
         int doc2 = builder.addDocument(15L, 12L, 13L);
@@ -54,6 +61,7 @@ public class M3InternalPrecomputeTest {
         eq(new int[] {0, 2}, index.adjacentPairDocuments(12L, 13L), "adjacent pair");
         eq(new int[] {0}, index.phraseCandidates(11L, 12L, 13L), "phrase candidate");
         eq(new int[] {0, 1}, index.relationPairDocuments(11L, 13L), "relation pair");
+        check(index.coordinateSpace().equals(TOKEN_SPACE), "posting coordinate space");
         check(index.retainedPrimitiveBytes() > 0L, "posting payload accounting");
     }
 
@@ -104,7 +112,7 @@ public class M3InternalPrecomputeTest {
         long F_IMPLIES = 305L;
 
         M3FormulaTable formulas =
-                M3FormulaTable.builder()
+                M3FormulaTable.builder(FORMULA_SPACE, TOKEN_SPACE)
                         .atom(F_A, ATOM_A)
                         .atom(F_B, ATOM_B)
                         .not(F_NOT_A, F_A)
@@ -132,6 +140,7 @@ public class M3InternalPrecomputeTest {
         M3FormulaTruthIndex truth =
                 M3FormulaTruthIndex.compile(
                         formulas,
+                        MODEL_SPACE,
                         new long[] {403L, 401L, 402L},
                         (model, atom) -> modelTruth.get(model).get(atom));
 
@@ -163,7 +172,7 @@ public class M3InternalPrecomputeTest {
         check(assessments.worldRank(402L) == 8, "conditional rank");
 
         M3ProbabilityVector probabilities =
-                M3ProbabilityVector.builder()
+                M3ProbabilityVector.builder(MODEL_SPACE)
                         .weight(401L, 2)
                         .weight(402L, 1)
                         .weight(403L, 1)
@@ -177,11 +186,25 @@ public class M3InternalPrecomputeTest {
         check(aTrue + aBoth == M3ProbabilityVector.ONE_Q32,
                 "formula asserted-positive probability mass");
         check(probabilityImage.retainedPrimitiveBytes() > 0L, "formula probability payload");
+
+        M3ProbabilityVector wrongSpace =
+                M3ProbabilityVector.builder(
+                                M3CoordinateSpace.of(
+                                        0x4d334d4f44454c32L,
+                                        0x0000000000000001L,
+                                        5L))
+                        .weight(401L, 1L)
+                        .weight(402L, 1L)
+                        .weight(403L, 1L)
+                        .build();
+        expectIAE(
+                () -> M3FormulaProbabilityIndex.compile(truth, wrongSpace),
+                "cross-space probability alias");
     }
 
     private static void relations() {
         M3ReasoningGraph graph =
-                M3ReasoningGraph.builder()
+                M3ReasoningGraph.builder(TOKEN_SPACE)
                         .relation(601L, M3ReasoningRelationKind.ATTACK, 602L, 11, 1L)
                         .relation(602L, M3ReasoningRelationKind.ATTACK, 603L, 12, 2L)
                         .relation(603L, M3ReasoningRelationKind.ATTACK, 601L, 13, 4L)
@@ -191,6 +214,7 @@ public class M3InternalPrecomputeTest {
                         .probabilityQ31(601L, Integer.MAX_VALUE / 2)
                         .build();
 
+        check(graph.coordinateSpace().equals(TOKEN_SPACE), "reasoning coordinate space");
         check(
                 graph.hasRelation(601L, M3ReasoningRelationKind.ATTACK, 602L),
                 "direct attack");
