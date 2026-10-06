@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.M3StringBalancedCanonicalDag
+displayName: Converge balanced canonical M3 String DAG
+description: Replays the exact M3JDK21 balanced structural-canonical tuple DAG increment plus its invariant, regression, lineage and naming-map postimages.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk22-m3-string-balanced-canonical-dag
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-string-balanced-canonical-dag
