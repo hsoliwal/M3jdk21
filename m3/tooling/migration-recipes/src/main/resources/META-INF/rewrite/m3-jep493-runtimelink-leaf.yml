@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.jdk21.Jep493RuntimeLinkLeaf
+displayName: Add JEP 493 GA runtime-link implementation leaf
+description: Adds the five GA-final internal jdk.jlink runtime-link Java classes from ABSENT Java-21 preimages.
+recipeList:
+  - com.m3.rewrite.backport.M3Jep493RuntimeLinkLeafRecipe

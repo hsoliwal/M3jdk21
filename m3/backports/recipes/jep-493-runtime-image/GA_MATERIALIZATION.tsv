@@ -1,0 +1,7 @@
+path	implementation_commit_state	jdk24_ga_state	m3_disposition	ga_commit
+src/jdk.jlink/share/classes/jdk/tools/jlink/internal/JRTArchive.java	ADDED	PRESENT	ADD_GA_FINAL	6705a9255d28f351950e7fbca9d05e73942a4e27
+src/jdk.jlink/share/classes/jdk/tools/jlink/internal/LinkableRuntimeImage.java	ADDED	PRESENT	ADD_GA_FINAL	6705a9255d28f351950e7fbca9d05e73942a4e27
+src/jdk.jlink/share/classes/jdk/tools/jlink/internal/runtimelink/JimageDiffGenerator.java	ADDED	PRESENT	ADD_GA_FINAL	6705a9255d28f351950e7fbca9d05e73942a4e27
+src/jdk.jlink/share/classes/jdk/tools/jlink/internal/runtimelink/ResourceDiff.java	ADDED	PRESENT	ADD_GA_FINAL	6705a9255d28f351950e7fbca9d05e73942a4e27
+src/jdk.jlink/share/classes/jdk/tools/jlink/internal/runtimelink/ResourcePoolReader.java	ADDED	PRESENT	ADD_GA_FINAL	6705a9255d28f351950e7fbca9d05e73942a4e27
+src/jdk.jlink/share/classes/jdk/tools/jlink/internal/runtimelink/RuntimeImageLinkException.java	ADDED	ABSENT	GA_REMOVED_DO_NOT_ADD	6705a9255d28f351950e7fbca9d05e73942a4e27
