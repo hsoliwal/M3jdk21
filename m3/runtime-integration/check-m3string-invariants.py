@@ -574,6 +574,9 @@ if "if (M3String.admissionEnabled())" not in string
 
 # Canonical single-unit transforms must re-enter the native pool directly rather than create
 # temporary one-character String/byte[] payloads.
+if "String.COMPACT_STRINGS" not in pool
+        or "&& mappedLatin1(address, lengths[row], bigEndian)" not in pool:
+    fail("mapped M3 lexicon coder ignores CompactStrings mode")
 if "String.COMPACT_STRINGS && StringLatin1.canEncode(unit)" not in pool:
     fail("M3 direct unit interning ignores CompactStrings mode")
 
