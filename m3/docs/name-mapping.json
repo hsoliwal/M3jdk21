@@ -58,7 +58,7 @@
         "JNI/native UTF-8/UTF-16/byte/char materializations are shadows only",
         "all Java byte[]/char[] compatibility shadows, including empty sentinel, are JNI-created",
         "VM-local native scalar lookup is weak; dead native payload is reclaimable",
-        "canonical tuple identity is independent of concat parenthesization after exact ordered UTF-16 sequence verification",
+        "canonical tuple identity is independent of concat parenthesization for the same normalized terminal M3 atom owner/range sequence; equal UTF-16 spelling from a different M3 coordinate structure remains distinct",
         "tuple/reference composition remains height-balanced so concat chains cannot create unbounded rope depth"
       ]
     },
@@ -109,7 +109,7 @@
       "source": "com.synexia.indexstring.IndexResolver / IndexStringTuple",
       "target": "java.lang.M3StringOwner / java.lang.M3StringAtom / java.lang.M3StringTuple",
       "status": "M3JDK bootstrap-safe adaptation",
-      "mapping_rule": "scalar and tuple ownership are target-internal; M3String remains owner+packed coordinate; composition is persistent, balanced and canonical independently of concat parenthesization",
+      "mapping_rule": "scalar and tuple ownership are target-internal; M3String remains owner+packed coordinate; composition is persistent and height-balanced; canonical tuple identity uses the normalized ordered terminal atom owner/range sequence rather than binary-tree shape or text equality",
       "donor_lineage": [
         "8b202d3c10617d67f45247ccd81a21b9c5332a08",
         "40d66f6edd0a9cf3e6b4545058c1ad54f6cd03bc",
