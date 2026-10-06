@@ -79,6 +79,53 @@ final class M3StringPositionPrecompute {
         return -1;
     }
 
+    static int indexOfEither(
+            M3String source, char first, char second, int fromIndex, int endIndex) {
+        int from = Math.max(0, fromIndex);
+        int end = Math.min(source.length(), endIndex);
+        if (from >= end) return -1;
+
+        Blocks blocks;
+        try {
+            blocks = prepare(source);
+        } catch (OutOfMemoryError unavailable) {
+            return linearIndexOfEither(source, first, second, from, end);
+        }
+        if (blocks == null) {
+            return linearIndexOfEither(source, first, second, from, end);
+        }
+
+        long firstSignal = M3StringFacts.codeUnitSignal(first);
+        long secondSignal = M3StringFacts.codeUnitSignal(second);
+        int index = from;
+        while (index < end) {
+            int block = index >>> BLOCK_SHIFT;
+            int blockEnd = Math.min(end, (block + 1) << BLOCK_SHIFT);
+            long signal = blockSignal(source, blocks, block);
+            if ((signal & firstSignal) != firstSignal
+                    && (signal & secondSignal) != secondSignal) {
+                index = blockEnd;
+                continue;
+            }
+            long positions;
+            try {
+                ExactBlock exact = exactBlock(source, blocks, block);
+                positions = exact.mask(first) | exact.mask(second);
+            } catch (OutOfMemoryError unavailable) {
+                return linearIndexOfEither(source, first, second, index, end);
+            }
+            int offset = index & BLOCK_MASK;
+            positions &= -1L << offset;
+            int width = blockEnd - (block << BLOCK_SHIFT);
+            if (width < Long.SIZE) positions &= (1L << width) - 1L;
+            if (positions != 0L) {
+                return (block << BLOCK_SHIFT) + Long.numberOfTrailingZeros(positions);
+            }
+            index = blockEnd;
+        }
+        return -1;
+    }
+
     static int lastIndexOf(M3String source, char unit, int fromIndex) {
         int from = Math.min(fromIndex, source.length() - 1);
         if (from < 0) return -1;
