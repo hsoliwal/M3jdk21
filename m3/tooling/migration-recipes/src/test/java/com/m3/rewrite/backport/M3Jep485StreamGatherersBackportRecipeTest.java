@@ -43,7 +43,12 @@ final class M3Jep485StreamGatherersBackportRecipeTest {
 
     @Test
     void compositePinsJdk24GaCrateAndExplicitLibraryApiAuthority() {
-        var recipe = new M3Jep485StreamGatherersBackportRecipe();
+        var defaultRecipe = new M3Jep485StreamGatherersBackportRecipe();
+        assertTrue(defaultRecipe.getRecipeList().isEmpty());
+        assertTrue(!defaultRecipe.optedIn());
+
+        var recipe = new M3Jep485StreamGatherersBackportRecipe("JEP485");
+        assertTrue(recipe.optedIn());
 
         assertEquals("jdk-24+36", M3Jep485StreamGatherersBackportRecipe.DONOR_TAG);
         assertEquals(
@@ -84,7 +89,7 @@ final class M3Jep485StreamGatherersBackportRecipeTest {
     @Test
     void exactCurrentMasterStreamPreimagesReplayFifteenTargetsThenReachFixedPoint()
             throws Exception {
-        var recipe = new M3Jep485StreamGatherersBackportRecipe();
+        var recipe = new M3Jep485StreamGatherersBackportRecipe("JEP485");
         List<SourceFile> before = baseline();
 
         var first = recipe.run(new InMemoryLargeSourceSet(before), context(), 1);
@@ -119,7 +124,7 @@ final class M3Jep485StreamGatherersBackportRecipeTest {
 
         assertThrows(
                 RuntimeException.class,
-                () -> new M3Jep485StreamGatherersBackportRecipe()
+                () -> new M3Jep485StreamGatherersBackportRecipe("JEP485")
                         .run(new InMemoryLargeSourceSet(sources), context(), 1)
                         .getChangeset()
                         .getAllResults());
