@@ -141,7 +141,7 @@ class StringTableConfig : public StackObj {
     if (!_alt_hash) {
       // The canonical Java hash is already exact for M3 owner+coordinate Strings.
       // Avoid allocating a temporary UTF-16 shadow on the ordinary StringTable path.
-      return java_lang_String::hash_code(val_oop);
+      return java_lang_String::hash_code_noupdate(val_oop);
     }
 
     ResourceMark rm;
