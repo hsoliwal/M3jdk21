@@ -22,6 +22,16 @@ import sys
 JAVA_ROOT = Path("src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned")
 TEXT_ROOT = Path("src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text")
 ABSENT = "ABSENT"
+BASELINE_REF = "jdk-21+35"
+DONOR_REFS = {
+    22: "jdk-22+36",
+    23: "jdk-23+37",
+    24: "jdk-24+36",
+    25: "jdk-25+36",
+    26: "jdk-26+35",
+    27: "jdk-27+35",
+}
+CANDIDATE_STATUS = "CANDIDATE_UNVERIFIED"
 
 
 @dataclass(frozen=True)
@@ -29,6 +39,11 @@ class Crate:
     name: str
     release: int
     target_count: int
+    first_path: str
+    last_path: str
+    baseline_ref: str
+    donor_ref: str
+    status: str
     manifest: Path
 
 
@@ -85,10 +100,23 @@ def read_crates(generated: Path, require_one_target: bool) -> list[Crate]:
         try:
             release = int(row["release"])
             target_count = int(row["target_count"])
+            baseline_ref = row["baseline_ref"]
+            donor_ref = row["donor_ref"]
+            first_path = canonical_relative(row["first_path"])
+            last_path = canonical_relative(row["last_path"])
+            status = row["status"]
         except (KeyError, ValueError) as failure:
-            raise ValueError(f"invalid crate numeric metadata: {name}") from failure
+            raise ValueError(f"invalid crate metadata: {name}") from failure
         if release not in range(22, 28) or target_count < 1 or target_count > 256:
             raise ValueError(f"invalid crate bounds: {name}")
+        if baseline_ref != BASELINE_REF:
+            raise ValueError(f"unexpected crate baseline ref: {name}:{baseline_ref}")
+        if donor_ref != DONOR_REFS[release]:
+            raise ValueError(f"unexpected crate donor ref: {name}:{donor_ref}")
+        if status != CANDIDATE_STATUS:
+            raise ValueError(f"unexpected crate status: {name}:{status}")
+        if first_path > last_path:
+            raise ValueError(f"crate first/last path order invalid: {name}")
         if require_one_target and target_count != 1:
             raise ValueError(f"FILE lane requires one target per crate: {name}")
 
@@ -99,7 +127,19 @@ def read_crates(generated: Path, require_one_target: bool) -> list[Crate]:
         present = [path for path in candidates if path.is_file()]
         if len(present) != 1:
             raise ValueError(f"crate manifest ownership is ambiguous/missing: {name}")
-        result.append(Crate(name, release, target_count, present[0]))
+        result.append(
+            Crate(
+                name,
+                release,
+                target_count,
+                first_path,
+                last_path,
+                baseline_ref,
+                donor_ref,
+                status,
+                present[0],
+            )
+        )
 
     return result
 
@@ -143,6 +183,12 @@ def read_targets(generated: Path, crates: list[Crate]) -> list[Target]:
             raise ValueError(
                 f"crate target_count mismatch: {crate.name}: "
                 f"{crate.target_count} != {len(rows)}"
+            )
+        if rows[0].path != crate.first_path or rows[-1].path != crate.last_path:
+            raise ValueError(
+                f"crate first/last path metadata drift: {crate.name}: "
+                f"{crate.first_path}..{crate.last_path} != "
+                f"{rows[0].path}..{rows[-1].path}"
             )
         result.extend(rows)
 
