@@ -982,8 +982,12 @@ for required_gate in [
 # Synexia owns reusable M3JDK21 recipes; this target keeps only the applied product and receipt.
 for fragment in [
     "hsoliwal/com.synexia",
-    "pull/9491",
+    "pull/9529",
+    "602ff6fbd8760ad2d13b3461d0c27ed567c16144",
     "com.synexia.rewrite.M3Jdk21StringHistoryConvergence",
+    "30/30 carried targets are byte-identical",
+    "bcb5419fd4425ef4b41c86c13e7a6f24d5233e68",
+    "pull/9491",
     "com.synexia.rewrite.M3Jdk21TqConvergence",
     "5291e3867224be653da89cd69e3b764b2fab213f",
 ]:
