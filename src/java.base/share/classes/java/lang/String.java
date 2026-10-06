@@ -2651,11 +2651,7 @@ public final class String
             int from = Math.max(fromIndex, 0);
             if (from >= storage.length()) return -1;
             if (Character.isBmpCodePoint(ch)) {
-                if (!storage.facts().mayContainCodeUnit((char) ch)) return -1;
-                for (int index = from; index < storage.length(); index++) {
-                    if (storage.charAt(index) == (char) ch) return index;
-                }
-                return -1;
+                return storage.indexOf((char) ch, from, storage.length());
             }
             if (!Character.isValidCodePoint(ch)) return -1;
             char highRequired = Character.highSurrogate(ch);
@@ -2719,11 +2715,7 @@ public final class String
         M3String storage = m3();
         if (storage != null) {
             if (Character.isBmpCodePoint(ch)) {
-                if (!storage.facts().mayContainCodeUnit((char) ch)) return -1;
-                for (int index = beginIndex; index < endIndex; index++) {
-                    if (storage.charAt(index) == (char) ch) return index;
-                }
-                return -1;
+                return storage.indexOf((char) ch, beginIndex, endIndex);
             }
             if (!Character.isValidCodePoint(ch)) return -1;
             char highRequired = Character.highSurrogate(ch);
@@ -2809,11 +2801,7 @@ public final class String
             int from = Math.min(fromIndex, storage.length() - 1);
             if (from < 0) return -1;
             if (Character.isBmpCodePoint(ch)) {
-                if (!storage.facts().mayContainCodeUnit((char) ch)) return -1;
-                for (int index = from; index >= 0; index--) {
-                    if (storage.charAt(index) == (char) ch) return index;
-                }
-                return -1;
+                return storage.lastIndexOf((char) ch, from);
             }
             if (!Character.isValidCodePoint(ch)) return -1;
             char highRequired = Character.highSurrogate(ch);
