@@ -416,6 +416,16 @@ if "java_lang_String::copy_chars(s, 0, s_len, ret);" not in hotspot_jni:
 if "ret[i] = java_lang_String::char_at(s, i);" in hotspot_jni:
     fail("GetStringCritical reintroduced per-unit M3 VM dispatch")
 
+# HotSpot modified-UTF8 writing should bulk-convert complete M3 UTF-16 chunks when they fit,
+# retaining the per-unit path only as the bounded-buffer truncation fallback.
+for fragment in [
+    "int chunk_bytes = 0;",
+    "UNICODE::as_utf8(scratch, chunk, out, buflen);",
+    "if (chunk_bytes < buflen)",
+]:
+    if fragment not in hotspot_java_classes:
+        fail(f"HotSpot M3 UTF8 bulk chunk path missing: {fragment}")
+
 # HotSpot equality may prove identity from the exact canonical owner+coordinate pair before
 # falling back to logical UTF-16 comparison. It must not compare the String.value sentinel.
 for fragment in [
