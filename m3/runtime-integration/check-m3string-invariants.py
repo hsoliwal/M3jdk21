@@ -39,12 +39,37 @@ stringtable = read("src/hotspot/share/classfile/stringTable.cpp")
 mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
 recipe_authority = read("m3/docs/synexia-string-recipe-authority.tsv")
+string_dag_handoff = read("m3/docs/synexia-string-dag-handoff.tsv")
 precompute_inventory = read("m3/docs/synexia-mindex-precompute-inventory.tsv")
 completeness = read("m3/docs/string-precompute-completeness.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
 native_string = read("src/java.base/share/native/libjava/String.c")
 pattern = read("src/java.base/share/classes/java/util/regex/Pattern.java")
 matcher = read("src/java.base/share/classes/java/util/regex/Matcher.java")
+
+# Cross-repository recipe ownership: Synexia owns the reusable String-DAG recipe/spec;
+# M3JDK owns the exact target receiver/proof and product promotion.
+required_handoff_fragments = [
+    "M3_STRING_DAG_HANDOFF_RECEIPT_V1",
+    "synexia.m3jdk.string.canonical-dag.20261006",
+    "hsoliwal/com.synexia",
+    "hsoliwal/M3jdk21",
+    "ADAPTER_FIXTURE_PROOF",
+    "com.m3.rewrite.backport.M3StringCanonicalDagMasterRepair",
+    "com.synexia.rewrite.M3StringCanonicalDagInvariant",
+    "Apache-2.0",
+]
+for fragment in required_handoff_fragments:
+    if fragment not in string_dag_handoff:
+        fail(f"String DAG Synexia handoff drift: {fragment}")
+
+for law in [
+    "STRING_DAG_REUSABLE_RECIPE_HOME_IS_SYNEXIA",
+    "STRING_DAG_TARGET_RECIPE_IS_ADAPTER_PROOF_ONLY",
+    "STRING_DAG_PRODUCT_PROMOTION_REMAINS_M3JDK",
+]:
+    if law not in read("m3/docs/m3-runtime-invariants.tsv"):
+        fail(f"String DAG ownership invariant missing: {law}")
 
 # STRING_PRECOMPUTE_COMPLETENESS: every donor String-precompute responsibility must be
 # either mapped to one internal M3 owner or explicitly classified out of java.lang.String.
