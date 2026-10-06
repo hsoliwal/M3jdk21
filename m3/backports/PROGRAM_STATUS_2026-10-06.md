@@ -21,7 +21,7 @@ python3 m3/backports/jep_residue.py --root . --out m3/backports/JEP_RESIDUE_QUEU
 
 The corrected released catalogue contains **86 unique JEP rows** spanning JDK 22 through JDK 27.
 
-This lane repairs three omissions from the older 82-row snapshot:
+This lane repairs four omissions from the older 82-row snapshot:
 
 - **JEP 404** — Generational Shenandoah (Experimental) — JDK 24
   - disposition: `superseded`
@@ -52,7 +52,7 @@ Current disposition counts:
 - **45** decided no direct default backport
   - 19 `reject-language`
   - 5 `reject-compat`
-  - 17 `superseded`
+  - 18 `superseded`
   - 2 `superseded-high-risk`
   - 1 `superseded-jit`
 
@@ -115,21 +115,23 @@ is authorized.
 The remaining pending rows stay visible even when no recipe exists yet. A missing recipe means
 **author/improve a reusable recipe first**, not hand-edit the affected JDK files.
 
-## Materialized backport packet estate
+## Live backport packet estate
 
-Eight packet directories currently have repository-owned README/evidence contracts:
+The live recipe directory currently contains both implementation/replay packets and inventory/proof
+packets. They must not be conflated:
 
-- `jdk-8347112`
-- `jdk-8364182`
-- `jdk-8367584`
-- `jdk-8368692`
-- `jdk-8374808`
-- `jep-458-current`
-- `jep-467-markdown`
-- `jep-493-runtime-image`
+- inventory / high-risk proof lanes: `j423`, `j491`, `jep-423-region-pinning`,
+  `jep-484-classfile-api`;
+- receipt-backed proof/equivalence/recovery lanes: `jep-458-current`,
+  `jep-474-generational-zgc`, `jep-485-gatherers-recovery`,
+  `jep-493-runtime-image`;
+- implementation/recovery packet material without its own current-tree receipt:
+  `jep-485-gatherers`;
+- compatible non-JEP/JBS packets: `jdk-8347112`, `jdk-8357439`, `jdk-8364182`,
+  `jdk-8367584`, `jdk-8368692`, `jdk-8374808`.
 
-A packet directory is evidence of implementation/replay work. It is not itself proof that the
-packet is accepted into current master.
+Directory presence is evidence only. Receipt state, current product-tree inspection, build/jtreg
+proof and explicit promotion authority remain the decisive gates.
 
 ## Verbatim JDK21 source oracle
 
