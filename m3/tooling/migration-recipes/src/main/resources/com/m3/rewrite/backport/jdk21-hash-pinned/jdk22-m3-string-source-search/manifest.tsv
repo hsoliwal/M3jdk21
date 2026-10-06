@@ -1,4 +1,4 @@
 # path	before	after	template
 src/java.base/share/classes/java/lang/M3String.java	ddd0d85dcd21252ae1c068788bbcb08e4ceab35aef181ba99843efcb90ee3a28	8fd2d9af70a2754ffaf45a74a471f57b30b86a2260d43054ee4802208e71c6bf	00-M3String.java.txt
 src/java.base/share/classes/java/lang/M3StringSourcePrecompute.java	ABSENT	07ac8d3bc135ae24328ae67102e4ec4cecd8f9520cb04d55781da499b1f17564	01-M3StringSourcePrecompute.java.txt
-test/jdk/java/lang/String/M3StringSourcePrecomputeTest.java	ABSENT	f7341920934d88cc5ecdb735314e897650c2e5e6c1a92cf7a43c1e1a7382a1c1	02-M3StringSourcePrecomputeTest.java.txt
+test/jdk/java/lang/String/M3StringSourcePrecomputeTest.java	ABSENT	d185cd322b5927bf9ef292f66150bb0c6822a07e94190fd52d787b8f1f7e557e	02-M3StringSourcePrecomputeTest.java.txt
