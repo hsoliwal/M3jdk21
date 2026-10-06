@@ -90,7 +90,10 @@ final class M3StringPool {
             if (row >= 0) return M3String.whole(active.atom(row));
         }
 
-        byte coder = StringLatin1.canEncode(unit) ? String.LATIN1 : String.UTF16;
+        byte coder =
+                String.COMPACT_STRINGS && StringLatin1.canEncode(unit)
+                        ? String.LATIN1
+                        : String.UTF16;
         int byteLength = 1 << coder;
         long hash64 = mix64(0x9e3779b97f4a7c15L ^ coder ^ Integer.toUnsignedLong(byteLength));
         hash64 = mix64(hash64 ^ unit);
