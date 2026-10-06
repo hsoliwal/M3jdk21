@@ -424,6 +424,10 @@ for fragment in [
     if fragment not in (m3 + string):
         fail(f"M3 translateEscapes canonical route missing: {fragment}")
 
+if "if (M3String.admissionEnabled())" not in string
+        or "return new String(M3StringPool.internUnit(c));" not in string:
+    fail("String.valueOf(char) does not use direct M3 unit interning after activation")
+
 # Canonical single-unit transforms must re-enter the native pool directly rather than create
 # temporary one-character String/byte[] payloads.
 for fragment in [
