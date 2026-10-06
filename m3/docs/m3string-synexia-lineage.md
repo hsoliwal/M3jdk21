@@ -134,3 +134,11 @@ Synexia's position-mask lineage is adapted as `M3StringPositionPrecompute`, not 
 `String.indexOf(int)`, bounded `indexOf(int,...)`, and `lastIndexOf(int)` use this lane for
 BMP code units after the whole-value fact filter. A negative block mask may skip that block; every
 positive block is still exact-verified. Supplementary code-point search remains pair-exact.
+
+
+## Reverse-prefix prepared search
+
+The Synexia compiled-search lineage included both forward and reverse prefix facts. M3JDK now
+retains both in the bounded `M3StringSearchPrecompute.Plan`: ordinary `indexOf` uses forward
+KMP, while `lastIndexOf` scans backward with a reverse-prefix KMP lane and returns the first
+reverse match. The memory ceiling formula explicitly budgets both primitive int lanes.
