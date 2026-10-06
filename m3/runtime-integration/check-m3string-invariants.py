@@ -803,6 +803,16 @@ for fragment in [
 if "M3StringBuilderInteropTest.java" not in workflow:
     fail("M3 String workflow lost builder interop proof")
 
+# java.lang builders must not flatten M3 Strings through package-private String.value().
+for fragment in [
+    "M3String storage = s.m3();",
+    "s.getBytes(this.value, off, this.count, LATIN1, end - off);",
+    "s.getBytes(this.value, i, j, UTF16, end - i);",
+    "s.getBytes(this.value, off, this.count, UTF16, end - off);",
+]:
+    if fragment not in abstract_builder:
+        fail(f"AbstractStringBuilder M3 append path missing: {fragment}")
+
 # M3-backed constructors must store only the empty compatibility sentinel.
 if string.count("storage.compatibilityValue()") < 4:
     fail("M3-backed String constructors no longer consistently use the empty sentinel")
