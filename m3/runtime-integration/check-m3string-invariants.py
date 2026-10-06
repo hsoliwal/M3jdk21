@@ -38,10 +38,146 @@ dedup = read("src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp")
 stringtable = read("src/hotspot/share/classfile/stringTable.cpp")
 mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
+completeness = read("m3/docs/string-precompute-completeness.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
 native_string = read("src/java.base/share/native/libjava/String.c")
 pattern = read("src/java.base/share/classes/java/util/regex/Pattern.java")
 matcher = read("src/java.base/share/classes/java/util/regex/Matcher.java")
+
+# STRING_PRECOMPUTE_COMPLETENESS: every donor String-precompute responsibility must be
+# either mapped to one internal M3 owner or explicitly classified out of java.lang.String.
+completeness_rows = []
+for line_number, line in enumerate(completeness.splitlines(), start=1):
+    if not line or line.startswith("#"):
+        continue
+    cells = line.split("\t")
+    if line_number == 1:
+        if cells != [
+            "scope",
+            "donor_responsibility",
+            "m3jdk_owner",
+            "disposition",
+            "retention",
+            "semantic_authority",
+            "notes",
+        ]:
+            fail("String precompute completeness header changed")
+        continue
+    if len(cells) != 7 or any(not cell for cell in cells):
+        fail(f"invalid String precompute completeness row {line_number}")
+    completeness_rows.append(cells)
+
+if not completeness_rows:
+    fail("String precompute completeness ledger is empty")
+
+allowed_dispositions = {
+    "IMPLEMENTED_FIXED",
+    "IMPLEMENTED_IDENTITY_OWNER",
+    "IMPLEMENTED_BOUNDED",
+    "IMPLEMENTED_SAFE_SUBSET",
+    "IMPLEMENTED_SEMANTIC_SUBSET",
+    "IMPLEMENTED_INTERNAL",
+    "ADAPTED_BOUNDED",
+    "PARTIAL_SAFE_CONSUMPTION",
+    "PARTIAL_INTERNAL_STORAGE_COUNTERPART",
+    "RESPONSIBILITY_SPLIT_INTERNAL",
+    "NOT_JDK_STRING_SEMANTICS",
+    "DONOR_ONLY_NO_JDK21_CONSUMER",
+    "DO_NOT_PORT_TO_JAVA_LANG_STRING",
+    "OPTIONAL_INTERNAL",
+}
+seen_responsibilities = set()
+for row in completeness_rows:
+    scope, donor, target, disposition, retention, authority, notes = row
+    if donor in seen_responsibilities:
+        fail(f"duplicate String precompute responsibility: {donor}")
+    seen_responsibilities.add(donor)
+    if disposition not in allowed_dispositions:
+        fail(f"unclassified String precompute responsibility: {donor} -> {disposition}")
+    if disposition.startswith("IMPLEMENTED") and target.startswith("no current"):
+        fail(f"implemented String precompute has no target: {donor}")
+    if scope == "STRING_RUNTIME" and disposition in {
+        "NOT_JDK_STRING_SEMANTICS",
+        "DO_NOT_PORT_TO_JAVA_LANG_STRING",
+        "DONOR_ONLY_NO_JDK21_CONSUMER",
+    }:
+        fail(f"String-runtime responsibility incorrectly classified out: {donor}")
+    if "TODO" in row or "UNCLASSIFIED" in row:
+        fail(f"unfinished String precompute classification: {donor}")
+
+required_responsibilities = {
+    "IndexTextMetrics",
+    "MIndexTextPrecomputedFacts",
+    "MIndexWhitespaceBoundaries",
+    "MIndexWhitespaceBoundaryCache",
+    "MIndexStringCanonicalFacts.canonicalTupleId",
+    "MIndexStringCanonicalFacts.structuralHash64",
+    "MIndexStringCanonicalFacts.tokenCount",
+    "MIndexStringCanonicalFacts.tokenHash64",
+    "MIndexUtf16RangeFacts",
+    "MIndexStringSearchPlan",
+    "MIndexPositionMasks / MIndexComposedPositionMasks",
+    "MIndexPreparedTrigramQuery",
+    "MIndexRegexTrigramQuery",
+    "MIndexPatternPrecomputation / RegexComposition*",
+    "MIndexStringPrecomputationByteFacts.byteLength",
+    "MIndexStringPrecomputationByteFacts.SHA256",
+    "MIndexMappedStringFacts / MIndexMappedStringFactsSource",
+    "MIndexMappedPrecomputation",
+    "MIndexPrecomputedStrings",
+    "MIndexPrefixZ / MIndexPrefixZCache",
+    "MIndexPalindromeFacts / Manacher facts",
+    "MIndexSuffixDecision / suffix DFA facts",
+    "LCP range-minimum / suffix-index facts",
+}
+missing_responsibilities = required_responsibilities - seen_responsibilities
+if missing_responsibilities:
+    fail("String precompute completeness ledger missing: "
+         + ", ".join(sorted(missing_responsibilities)))
+
+# Field-level parity for the fixed semantic donor bundle.
+for field in [
+    "final int utf16Length;",
+    "final int utf8Length;",
+    "final int codePointCount;",
+    "final int unpairedSurrogateCount;",
+    "final int javaHash;",
+    "final int hash31Power;",
+    "final char firstUtf16Unit;",
+    "final char lastUtf16Unit;",
+    "final long bitSignal64;",
+    "final boolean ascii;",
+    "final boolean latin1;",
+    "final int asciiUpperHash;",
+    "final int asciiLowerHash;",
+    "final int asciiTitleHash;",
+    "final long prefix4;",
+    "final long suffix4;",
+    "final long bigramSignal64;",
+    "final long trigramSignal64;",
+    "final int trimStart;",
+    "final int trimEnd;",
+    "final int stripStart;",
+    "final int stripEnd;",
+]:
+    if field not in facts:
+        fail(f"M3 fixed String precompute field missing: {field}")
+
+# Identity/structure facts belong to canonical owners, not the text-fact bundle.
+for fragment in [
+    "final long structuralHash64;",
+    "final long canonicalId;",
+]:
+    if fragment not in owner and fragment not in tuple_:
+        fail(f"M3 owner identity fact missing: {fragment}")
+for forbidden in [
+    "tokenCount",
+    "tokenHash64",
+    "canonicalTupleId",
+    "structuralHash64",
+]:
+    if forbidden in facts:
+        fail(f"donor identity/tokenization fact leaked into M3StringFacts: {forbidden}")
 
 # M3String must remain owner + coordinate only.
 instance_fields = re.findall(
