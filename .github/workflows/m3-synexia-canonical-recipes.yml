@@ -5,6 +5,8 @@ on:
     paths:
       - "m3/docs/SYNEXIA_CONVERGENCE_MODEL.md"
       - "m3/compatibility/synexia-recipe-ownership.tsv"
+      - "m3/compatibility/nebula-proven-recipe-transfer.tsv"
+      - "m3/compatibility/test_nebula_proven_recipe_transfer.py"
       - "m3/compatibility/check_synexia_recipe_ownership.py"
       - "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/atom/**"
       - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java"
@@ -35,6 +37,9 @@ jobs:
 
       - name: Verify exact Synexia and frozen legacy blobs
         run: python3 m3/compatibility/check_synexia_recipe_ownership.py
+
+      - name: Verify Nebula proving-ground transfer receipt
+        run: python3 m3/compatibility/test_nebula_proven_recipe_transfer.py
 
       - name: Compile and execute canonical recipe consumer
         run: |
