@@ -54,6 +54,8 @@ jobs:
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringHistoryConvergenceRecipeTest test
       - name: Prove balanced canonical DAG recipe
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringBalancedCanonicalDagFinal2RecipeTest test
+      - name: Prove code-point precompute recipe
+        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringCodePointPrecomputeRecipeTest test
       - name: Set up Java 20 boot JDK for OpenJDK 21 build
         uses: actions/setup-java@v4
         with:
