@@ -27,6 +27,7 @@ public class M3TQTest {
     private static long nativeCalls;
     private static long coldReads;
     private static long mappedRanges;
+    private static long containmentPairs;
     private static final List<String> LITERALS = List.of("", "a", "aba", "bab", "abc",
             "\u0000\u0100\uD800", "\uD800\uDC00a", "\\Qx\\E");
     private static final List<M3TQ> QUERIES = LITERALS.stream()
@@ -55,11 +56,12 @@ public class M3TQTest {
             }
             check(Arrays.equals(original, units), "native preserves input");
         }
+        containment(corpus);
         queryAlgebra();
         refusals();
         mapped();
-        System.out.printf("TQ checks=%d strings=%d ranges=%d compositions=%d nativeCalls=%d coldReads=%d mappedRanges=%d warmPayloadReads=0%n",
-                checks, corpus.size(), ranges, compositions, nativeCalls, coldReads, mappedRanges);
+        System.out.printf("TQ checks=%d strings=%d ranges=%d compositions=%d nativeCalls=%d coldReads=%d mappedRanges=%d containmentPairs=%d warmPayloadReads=0%n",
+                checks, corpus.size(), ranges, compositions, nativeCalls, coldReads, mappedRanges, containmentPairs);
     }
 
     private static void enumerate(List<String> result, String prefix, int remaining) {
@@ -103,6 +105,57 @@ public class M3TQTest {
             check(!match || guard, "literal guard cannot reject a true region match");
         }
         ranges++;
+    }
+
+    private static void containment(List<String> corpus) {
+        var values = new ArrayList<>(corpus);
+        values.addAll(List.of("abc-bcd", "abcd", "abcabc", "abcabcabc", "bcabca",
+                "\u0000\u0100\uFFFF", "\uD800\uDC00\uD800\uDC00"));
+        var random = new java.util.Random(0x73a51L);
+        for (int i = 0; i < 32; i++) {
+            var value = new StringBuilder();
+            for (int j = 0; j < 32; j++) value.append((char) random.nextInt(65536));
+            values.add(value.toString());
+        }
+        var facts = new ArrayList<M3TQ.Facts>();
+        var keys = new ArrayList<TreeSet<Long>>();
+        var readers = new ArrayList<Fence>();
+        for (String value : values) {
+            Fence reader = new Fence(value, 0, value.length());
+            facts.add(M3TQ.precompute(reader, value.length()));
+            check(reader.reads == value.length(), "containment cold reads");
+            reader.sealed = true;
+            readers.add(reader);
+            TreeSet<Long> expected = new TreeSet<>();
+            for (long key : oracle(value, 0, value.length())) expected.add(key);
+            keys.add(expected);
+        }
+        for (int source = 0; source < facts.size(); source++) {
+            for (int required = 0; required < facts.size(); required++) {
+                boolean expected = keys.get(source).containsAll(keys.get(required));
+                check(facts.get(source).containsAll(facts.get(required)) == expected,
+                        "containment set oracle");
+                containmentPairs++;
+            }
+            expect(NullPointerException.class, () -> facts.get(0).containsAll(null));
+            check(readers.get(source).reads == values.get(source).length(),
+                    "containment performs no warm payload reads");
+        }
+        var candidate = M3TQ.precompute("abc-bcd", 7);
+        var required = M3TQ.precompute("abcd", 4);
+        check(candidate.containsAll(required), "containment necessary condition");
+        check(!"abc-bcd".contains("abcd"), "containment is not exact text matching");
+        check(M3TQ.precompute("abcabc", 6).containsAll(M3TQ.precompute("abcabcabc", 9)),
+                "set containment discards multiplicity");
+        check(M3TQ.precompute("abcabc", 6).containsAll(M3TQ.precompute("bcabca", 6)),
+                "set containment discards ordering");
+        Fence leftReader = new Fence("ab", 0, 2), rightReader = new Fence("cd", 0, 2);
+        var left = M3TQ.precompute(leftReader, 2);
+        var right = M3TQ.precompute(rightReader, 2);
+        leftReader.sealed = rightReader.sealed = true;
+        var joined = left.concat(right, 4);
+        check(joined.containsAll(required) && required.containsAll(joined),
+                "seam facts retain containment without payload reads");
     }
 
     private static void queryAlgebra() {
