@@ -110,6 +110,16 @@ public final class M3StringInvariant {
                 M3_FACTS.invoke(leftAssociatedBody),
                 M3_FACTS.invoke(rightAssociatedBody),
                 "parenthesization shares canonical internal precompute");
+
+        String rangeAtom = fresh("abcd");
+        String rangePrefix = rangeAtom.substring(0, 2);
+        String rangeSuffix = rangeAtom.substring(2, 4);
+        String splitAtTupleBoundary = pa.concat(rangePrefix).concat(rangeSuffix);
+        String collapsedBeforeTuple = pa.concat(rangePrefix.concat(rangeSuffix));
+        same(
+                owner(body(splitAtTupleBoundary)),
+                owner(body(collapsedBeforeTuple)),
+                "adjacent canonical atom ranges normalize across tuple boundaries");
         String flatAbc = fresh("abc");
         check(
                 owner(body(flatAbc)) != owner(leftAssociatedBody),
