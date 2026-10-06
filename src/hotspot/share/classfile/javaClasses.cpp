@@ -559,6 +559,21 @@ static char* m3_utf8_range(oop string, int start, int len, char* buf, int buflen
   while (copied < len) {
     const int chunk = MIN2(chunk_capacity, len - copied);
     java_lang_String::copy_chars(string, start + copied, chunk, scratch);
+
+    int chunk_bytes = 0;
+    for (int i = 0; i < chunk; i++) {
+      chunk_bytes += UNICODE::utf8_size(scratch[i]);
+    }
+    if (chunk_bytes < buflen) {
+      UNICODE::as_utf8(scratch, chunk, out, buflen);
+      out += chunk_bytes;
+      buflen -= chunk_bytes;
+      copied += chunk;
+      continue;
+    }
+
+    // Preserve the historical bounded-buffer behavior: emit complete code units only and
+    // terminate before the first unit that cannot fit with the trailing NUL.
     for (int i = 0; i < chunk; i++) {
       jchar c = scratch[i];
       int size = UNICODE::utf8_size(c);
