@@ -83,6 +83,84 @@ final class M3StringPool {
         return M3String.whole(internLocal(value, coder));
     }
 
+    static M3String internCompactBytes(
+            byte[] source, int sourceOffset, int length, byte sourceCoder) {
+        Objects.requireNonNull(source, "source");
+        if (sourceCoder != String.LATIN1 && sourceCoder != String.UTF16) {
+            throw new IllegalArgumentException("invalid source String coder");
+        }
+        Objects.checkFromIndexSize(sourceOffset, length, source.length >> sourceCoder);
+        if (length == 0) return M3String.empty();
+
+        boolean latin1 = String.COMPACT_STRINGS;
+        if (latin1 && sourceCoder == String.UTF16) {
+            for (int index = 0; index < length; index++) {
+                if (StringUTF16.charAt(source, sourceOffset + index) > 0xff) {
+                    latin1 = false;
+                    break;
+                }
+            }
+        }
+        byte targetCoder = latin1 ? String.LATIN1 : String.UTF16;
+        if (targetCoder == String.UTF16 && length > StringUTF16.MAX_LENGTH) {
+            throw new OutOfMemoryError(
+                    "UTF16 String size is " + length
+                            + ", should be less than " + StringUTF16.MAX_LENGTH);
+        }
+
+        Lexicon active = lexicon;
+        if (active != null && active.available()) {
+            int row = active.findCompactBytes(source, sourceOffset, length, sourceCoder);
+            if (row >= 0) return M3String.whole(active.atom(row));
+        }
+
+        int byteLength = length << targetCoder;
+        long hash64 =
+                mix64(0x9e3779b97f4a7c15L ^ targetCoder ^ Integer.toUnsignedLong(byteLength));
+        for (int index = 0; index < length; index++) {
+            char unit =
+                    sourceCoder == String.LATIN1
+                            ? (char) (source[sourceOffset + index] & 0xff)
+                            : StringUTF16.charAt(source, sourceOffset + index);
+            hash64 = mix64(hash64 ^ unit);
+        }
+        Fingerprint fingerprint = new Fingerprint(targetCoder, byteLength, hash64);
+
+        expungeLocals();
+        for (;;) {
+            LocalBucket bucket = LOCAL.computeIfAbsent(fingerprint, ignored -> new LocalBucket());
+            synchronized (bucket) {
+                if (bucket.retired) continue;
+                for (Iterator<LocalRef> iterator = bucket.values.iterator(); iterator.hasNext();) {
+                    LocalRef reference = iterator.next();
+                    M3StringAtom existing = reference.get();
+                    if (existing == null) {
+                        iterator.remove();
+                        reference.releaseNative();
+                    } else if (existing.contentEqualsCompactBytes(
+                            source, sourceOffset, length, sourceCoder, targetCoder)) {
+                        return M3String.whole(existing);
+                    }
+                }
+
+                long id = nextId(NEXT_LOCAL_ID, "M3 scalar ID");
+                M3StringAtom created =
+                        M3StringAtom.localCompactBytes(
+                                source,
+                                sourceOffset,
+                                length,
+                                sourceCoder,
+                                targetCoder,
+                                id,
+                                hash64);
+                long retainedBytes = created.nativePayloadBytes();
+                LOCAL_NATIVE_BYTES.addAndGet(retainedBytes);
+                bucket.values.add(new LocalRef(created, fingerprint, bucket, retainedBytes));
+                return M3String.whole(created);
+            }
+        }
+    }
+
     static M3String internLatin1Bytes(byte[] source, int offset, int length) {
         Objects.requireNonNull(source, "source");
         Objects.checkFromIndexSize(offset, length, source.length);
@@ -573,6 +651,30 @@ final class M3StringPool {
                 } else {
                     low = middle + 1;
                 }
+            }
+            return -1;
+        }
+
+        int findCompactBytes(
+                byte[] value, int sourceOffset, int logicalLength, byte sourceCoder) {
+            int low = 0;
+            int high = offsets.length - 1;
+            while (low <= high) {
+                int middle = (low + high) >>> 1;
+                int common = Math.min(logicalLength, lengths[middle]);
+                int comparison = 0;
+                for (int index = 0; index < common; index++) {
+                    char left =
+                            sourceCoder == String.LATIN1
+                                    ? (char) (value[sourceOffset + index] & 0xff)
+                                    : StringUTF16.charAt(value, sourceOffset + index);
+                    comparison = left - mappedUnit(offsets[middle], index);
+                    if (comparison != 0) break;
+                }
+                if (comparison == 0) comparison = logicalLength - lengths[middle];
+                if (comparison == 0) return middle;
+                if (comparison < 0) high = middle - 1;
+                else low = middle + 1;
             }
             return -1;
         }
