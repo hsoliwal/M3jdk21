@@ -234,9 +234,7 @@ final class M3StringPool {
         int javaHash =
                 left.hashCodeValue() * M3String.pow31(right.length()) + right.hashCodeValue();
         byte coder = (byte) (left.coder() | right.coder());
-        long sequenceHash =
-                combineSequenceHash(sequenceHash64(left), sequenceHash64(right), right.length());
-        long routeKey = tupleRouteKey(sequenceHash, javaHash, totalLength, coder);
+        long routeKey = tupleRouteKey(javaHash, totalLength, coder);
 
         for (;;) {
             TupleBucket bucket = TUPLES.computeIfAbsent(routeKey, ignored -> new TupleBucket());
@@ -250,13 +248,12 @@ final class M3StringPool {
                     } else if (existing.length == totalLength
                             && existing.coder == coder
                             && existing.javaHash == javaHash
-                            && existing.structuralHash64 == sequenceHash
                             && sameLeafSequence(M3String.whole(existing), left, right)) {
                         return M3String.whole(existing);
                     }
                 }
                 long id = nextId(NEXT_TUPLE_ID, "M3 tuple ID");
-                M3StringTuple created = new M3StringTuple(left, right, id, sequenceHash);
+                M3StringTuple created = new M3StringTuple(left, right, id, routeKey);
                 bucket.values.add(new TupleRef(created, routeKey, bucket));
                 return M3String.whole(created);
             }
@@ -322,66 +319,10 @@ final class M3StringPool {
         return hash;
     }
 
-    private static final long SEQUENCE_BASE = 0x9e3779b185ebca87L;
-
-    private static long tupleRouteKey(
-            long sequenceHash, int javaHash, int totalLength, byte coder) {
-        long route = mix64(sequenceHash ^ Integer.toUnsignedLong(javaHash));
+    private static long tupleRouteKey(int javaHash, int totalLength, byte coder) {
+        long route = mix64(Integer.toUnsignedLong(javaHash));
         route = mix64(route ^ Long.rotateLeft(Integer.toUnsignedLong(totalLength), 17));
         return mix64(route ^ coder);
-    }
-
-    /**
-     * Parenthesization-independent structural hash for the terminal M3 atom/range sequence.
-     *
-     * <p>Whole tuples reuse their precomputed hash in O(1). Scalar/range coordinates are O(1).
-     * Only a partial range over an existing tuple walks the touched terminal coordinates.</p>
-     */
-    private static long sequenceHash64(M3String value) {
-        M3StringOwner owner = value.owner();
-        if (owner instanceof M3StringAtom atom) {
-            return atomRangeHash(atom, value.start(), value.length());
-        }
-        if (value.start() == 0 && value.length() == owner.length) {
-            return owner.structuralHash64;
-        }
-
-        LeafCursor cursor = new LeafCursor(value, null);
-        long hash = 0L;
-        boolean present = false;
-        while (cursor.next()) {
-            long leafHash = atomRangeHash(cursor.atom(), cursor.start(), cursor.length());
-            if (!present) {
-                hash = leafHash;
-                present = true;
-            } else {
-                hash = combineSequenceHash(hash, leafHash, cursor.length());
-            }
-        }
-        return present ? hash : mix64(0L);
-    }
-
-    private static long atomRangeHash(M3StringAtom atom, int start, int length) {
-        if (start == 0 && length == atom.length) {
-            return atom.structuralHash64;
-        }
-        long hash = mix64(atom.structuralHash64 ^ atom.canonicalId);
-        hash = mix64(hash ^ Long.rotateLeft(Integer.toUnsignedLong(start), 21));
-        return mix64(hash ^ Integer.toUnsignedLong(length));
-    }
-
-    private static long combineSequenceHash(long left, long right, int rightLength) {
-        return left * sequencePower(rightLength) + right;
-    }
-
-    private static long sequencePower(int length) {
-        long result = 1L;
-        long base = SEQUENCE_BASE;
-        for (int remaining = length; remaining != 0; remaining >>>= 1) {
-            if ((remaining & 1) != 0) result *= base;
-            base *= base;
-        }
-        return result;
     }
 
     private static boolean sameLeafSequence(
@@ -461,19 +402,67 @@ final class M3StringPool {
         private int start;
         private int length;
 
+        private boolean buffered;
+        private M3StringAtom bufferedAtom;
+        private int bufferedStart;
+        private int bufferedLength;
+
+        private M3StringAtom rawAtom;
+        private int rawStart;
+        private int rawLength;
+
         LeafCursor(M3String first, M3String second) {
             if (second != null && second.length() != 0) pending.push(second);
             if (first != null && first.length() != 0) pending.push(first);
         }
 
         boolean next() {
+            if (buffered) {
+                atom = bufferedAtom;
+                start = bufferedStart;
+                length = bufferedLength;
+                buffered = false;
+            } else {
+                if (!pullRaw()) return false;
+                atom = rawAtom;
+                start = rawStart;
+                length = rawLength;
+            }
+
+            while (pullRaw()) {
+                if (rawAtom == atom && start + length == rawStart) {
+                    length = Math.addExact(length, rawLength);
+                } else {
+                    buffered = true;
+                    bufferedAtom = rawAtom;
+                    bufferedStart = rawStart;
+                    bufferedLength = rawLength;
+                    break;
+                }
+            }
+            return true;
+        }
+
+        M3StringAtom atom() {
+            return atom;
+        }
+
+        int start() {
+            return start;
+        }
+
+        int length() {
+            return length;
+        }
+
+        private boolean pullRaw() {
             while (!pending.isEmpty()) {
                 M3String value = pending.pop();
                 if (value.length() == 0) continue;
                 if (value.owner() instanceof M3StringAtom scalar) {
-                    atom = scalar;
-                    start = value.start();
-                    length = value.length();
+                    rawAtom = scalar;
+                    rawStart = value.start();
+                    rawLength = value.length();
                     return true;
                 }
 
@@ -502,18 +491,6 @@ final class M3StringPool {
                 }
             }
             return false;
-        }
-
-        M3StringAtom atom() {
-            return atom;
-        }
-
-        int start() {
-            return start;
-        }
-
-        int length() {
-            return length;
         }
     }
 
