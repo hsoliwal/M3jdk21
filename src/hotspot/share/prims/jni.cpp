@@ -2249,7 +2249,7 @@ JNI_ENTRY(const char*, jni_GetStringUTFChars(JNIEnv *env, jstring string, jboole
   char* result = nullptr;
   oop java_string = JNIHandles::resolve_non_null(string);
   typeArrayOop s_value = java_lang_String::value(java_string);
-  if (s_value != nullptr || java_lang_String::is_m3_joined(java_string)) {
+  if (s_value != nullptr || java_lang_String::is_m3_backed(java_string)) {
     size_t length = java_lang_String::utf8_length(java_string, s_value);
     /* JNI Specification states return null on OOM */
     result = AllocateHeap(length + 1, mtInternal, AllocFailStrategy::RETURN_NULL);
