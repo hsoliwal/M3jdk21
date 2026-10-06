@@ -1,0 +1,19 @@
+field	value
+jep	423
+title	Region Pinning for G1
+packet_state	FILE_ATOM_GENERATION_READY
+source_materialized	false
+admitted_paths	57
+preserved_deletions	2
+generator	m3/backports/generate_recipe_crates.py
+executor	m3/backports/materialize_generated_crates.py
+lineage_jdk_8318706	PINNED
+lineage_jdk_8323610	REQUIRE_DONOR_GA_MECHANIC_PROOF
+lineage_jdk_8322484	REQUIRE_DONOR_GA_MECHANIC_PROOF
+recipe_atoms_generated	pending_ci
+hotspot_build	pending
+focused_jtreg	pending
+jni_jvmti_sa_proof	pending
+fixed_point	pending
+promotion	NOT_AUTHORIZED
+next_action	GENERATE_57_ONE_FILE_JAVA_TEXT_NATIVE_CRATES_THEN_BUILD_AND_RUN_G1_PINNING_PROOF
