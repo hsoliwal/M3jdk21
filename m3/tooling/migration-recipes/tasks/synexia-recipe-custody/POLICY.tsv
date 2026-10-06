@@ -1,0 +1,7 @@
+rule	state	meaning
+SYNEXIA_REUSABLE_OWNER	LOCKED	Reusable recipe semantics are canonical in hsoliwal/com.synexia
+TARGET_EXACT_PACKET	ALLOWED	M3JDK21 owns exact preimage packets and target build/jtreg/runtime proof
+SYNEXIA_CRATE_OPENJDK_PRODUCT	FORBIDDEN	synexia-* Java crates cannot target src/**
+SYNEXIA_CRATE_OPENJDK_TEST	FORBIDDEN	synexia-* Java crates cannot target test/**
+SYNEXIA_CRATE_CANONICAL_RECIPE_COPY	FORBIDDEN	synexia-* crates cannot install canonical com.synexia recipe implementations
+SYNEXIA_CRATE_TARGET_RECEIVER_PROOF	ALLOWED	m3 tooling adapters fixtures and tests may be target packet outputs
