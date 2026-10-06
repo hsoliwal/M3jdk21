@@ -6,3 +6,5 @@ description: Replays the exact policy, verifier, CI and provenance updates that 
 recipeList:
   - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
       crateName: synexia-intake-policy
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: synexia-intake-policy-java
