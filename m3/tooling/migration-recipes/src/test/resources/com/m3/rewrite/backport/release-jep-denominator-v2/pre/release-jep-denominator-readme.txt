@@ -107,21 +107,115 @@ The upstream-inventory workflow exports:
 - `COMPATIBILITY_QUEUE.tsv`;
 - `COMPATIBILITY_QUEUE.summary.json`.
 
+## Algorithm evidence catalogue
+
+A3 algorithm evidence lives in ALGORITHM_CATALOGUE.tsv. One row is one JDK-owned/adapted algorithm
+shape, not copied challenge solution source. The catalogue records tri-platform problem evidence,
+target-owner/scope, GitHub lineage/license/reuse policy and the next proof. A3Alg validates it and
+A3Plan includes validated rows as ALG work.
+
+## A3 absorption preparation
+
+A3 (Atomize -> Patternize -> Absorb) is the front-door preparation plane for current-tree
+backport work. It does not replace this catalogue, compatibility queue, recipe crates, scope
+DAG or OpenJDK build.
+
+A3Inv inventories the actual src/ and test/ trees by module/area/path/hash. A3Plan joins every
+current JEP row, inspected JBS seed and community capability row while preserving the original
+disposition. A3Apply can run the retained FILE-local Java convergence DAG on explicit source
+files and writes candidate copies only under m3/build.
+
+The intended join is:
+
+    A3Inv/A3Plan
+      -> compatible leaf discovery
+      -> FILE atomize/patternize candidate
+      -> file_delta_inventory / source-sealed recipe crate
+      -> canonical backport DAG
+      -> configure/make/jtreg/runtime proof
+
+A3 makes source absorption mechanically smaller. It does not grant wider-scope compatibility
+or promotion authority.
+
 ## Exact JDK21 ↔ donor file deltas and recipe crates
 
 `file_delta_inventory.py` compares the entire JDK 21 GA tree verbatim against each released donor
 GA tree and records SAME / MODIFIED / ADDED / REMOVED for the full path union.
 
-For changed Java source, `generate_recipe_crates.py` can create bounded <=256-target,
-hash-pinned OpenRewrite candidate crates. The generator:
+For changed Java source, `generate_recipe_crates.py` creates bounded hash-pinned
+OpenRewrite candidate crates. The generator:
 
 - reads exact baseline/donor bytes from Git;
 - requires strict UTF-8 round-trip for Java source;
 - records SHA-256 preimages and postimages;
 - emits typed exclusions rather than silently deleting/removing;
+- accepts `--crate-size 1..256`;
 - keeps generated crates `CANDIDATE_UNVERIFIED` until Java-21 compatibility proof succeeds.
 
-This is the bridge from whole-release inventory to per-file mechanical recipe work.
+Use `--crate-size 1` when each selected file is independently behavior/contract preserving and
+therefore qualifies as a true FILE-scope recipe atom. Those one-file crates can occupy the same
+parallel DAG layer.
+
+Do **not** force one-file crates for a semantically coupled feature merely to increase apparent
+parallelism. If compatibility or contract correctness depends on coordinated files, keep the
+smallest honest composite crate and declare the resulting PACKAGE/MODULE/MULTI_MODULE promotion in
+the packet DAG.
+
+Example file-atomic generation:
+
+```bash
+python3 m3/backports/generate_recipe_crates.py \
+  --repo . \
+  --release 27 \
+  --paths-file target/selected-java-paths.txt \
+  --crate-size 1 \
+  --out target/file-atomic-crates
+```
+
+This is the bridge from whole-release inventory to genuinely per-file mechanical recipe work while
+preserving honest scope for coupled changes.
+
+For JDK tooling/build/resource changes that are not Java compilation units, opt into strict UTF-8
+text candidates:
+
+```bash
+python3 m3/backports/generate_recipe_crates.py \
+  --repo . \
+  --release 24 \
+  --paths-file target/selected-jdk24-paths.txt \
+  --crate-size 1 \
+  --include-text \
+  --out target/file-atomic-crates
+```
+
+With `--include-text`, the generator keeps Java targets under
+`M3Jdk21HashPinnedSnapshotRecipe` and emits non-Java UTF-8 targets under the existing
+`M3Jdk21HashPinnedTextSnapshotRecipe`. Mixed runs use separate deterministic Java/text crate
+names and compose them under one generated candidate recipe.
+
+The text lane fails closed into `EXCLUSIONS.tsv` for non-UTF-8 payloads, removals, executable or
+other file-mode changes. OpenRewrite byte replay cannot truthfully preserve those filesystem
+semantics, so they require a separately reviewed native/Git/build-file mechanism rather than a
+fake PlainText success.
+
+For native/HotSpot/JNI source with unchanged regular-file mode, use the explicit native lane:
+
+```bash
+python3 m3/backports/generate_recipe_crates.py \
+  --repo . \
+  --release 27 \
+  --paths-file target/selected-native-paths.txt \
+  --crate-size 1 \
+  --include-native \
+  --out target/a3-native-crates
+```
+
+The inventory marks C/C++/header/assembly rows with `native_source=true` and native-specific
+`SOURCE_SEALED_*_NATIVE` recipe lanes. The generator emits deterministic
+`jdk<release>-native-<ordinal>` one-file crates through
+`M3Jdk21HashPinnedTextSnapshotRecipe`. This is exact preimage/postimage custody only; it does not
+pretend OpenRewrite PlainText is a C/C++ AST. Native build, JNI/HotSpot semantics and scope-join proof
+remain mandatory. See `m3/docs/a3-native-jni.md`.
 
 
 ## Recipe DAG control plane
@@ -172,6 +266,37 @@ These generated artifacts do not execute OpenRewrite by themselves and do not ga
 promotion authority. A framework-specific runner must bind the emitted node metadata back to the
 existing Maven/OpenRewrite work reference, and the canonical M3 verification tail remains
 authoritative.
+
+## Second-pass review DAG pre-admission
+
+Before JDK inventory/compatibility admission, the canonical backport DAG now runs four read-only
+FILE-scoped recipe atoms from merged Synexia PR #8973:
+
+```text
+M3CodeSignalTriggerRecipe
+  -> M3AtomPatternSignalChain
+  -> M3ProblemRecipePlanner
+  -> M3JniContractInventoryRecipe
+  -> existing JDK inventory
+  -> compatibility proof
+  -> recipe crate
+  -> diff/lint/build/jtreg/runtime
+  -> serial promotion
+```
+
+The exact content commit is
+`5369fdc8c076b998b0dd39c7c67c85d11a4b2d8f`. The upstream PR is merged into
+`hsoliwal/com.synexia:develop`.
+
+This review chain grants no source mutation, semantic-equivalence, challenge-source copy,
+JNI/native execution or promotion authority. It is evidence that narrows recipe/backport work before
+the normal compatibility gate.
+
+The canonical DAG still has exactly one serial terminal promotion node. Camel and Airflow remain
+scheduler projections of the same DAG; Drools/KIE remains admission/rule evidence only.
+
+The upstream GitHub Actions DAG run was created but produced no jobs. The custody receipt therefore
+records `UPSTREAM_MERGED_ACTIONS_STARTUP_BLOCKED_NO_JOBS`; no hosted green-build claim is inferred.
 
 ## Backport packet
 
