@@ -317,8 +317,12 @@ final class M3StringFacts {
     }
 
     boolean mayContainCodeUnit(char unit) {
-        long required = addSignal(0L, unit);
+        long required = codeUnitSignal(unit);
         return (bitSignal64 & required) == required;
+    }
+
+    static long codeUnitSignal(char unit) {
+        return addSignal(0L, unit);
     }
 
     private static int utf8Bytes(char value) {
