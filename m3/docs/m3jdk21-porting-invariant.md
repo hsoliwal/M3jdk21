@@ -153,3 +153,26 @@ M3JDK21 subsystem, the thread must end with one of:
 - an explicit `DO_NOT_PORT` / higher-layer disposition.
 
 Do not leave target-ready runtime work only in Synexia and call the migration complete.
+
+
+## Apache-2.0 reuse includes recipes
+
+M3JDK21 may copy, adapt and redistribute eligible Synexia-owned Apache-2.0 contributions,
+including Java/JNI/native code, Maven/OpenRewrite recipe implementations and definitions,
+atomizer/patternizer compositions, fixtures, catalogues and proof tooling. There is no additional
+Synexia-specific permission gate for rights already granted by Apache License 2.0. Synexia's
+[convergence/delivery model](https://github.com/hsoliwal/com.synexia/blob/develop/SYNEXIA_CONVERGENCE_MODEL.md)
+extends the same reuse to SWT, Nebula and other delivery targets.
+
+For each intake, retain the exact donor commit/path/hash, Apache-2.0 license, applicable NOTICE,
+attribution and modification notices. Inventory embedded third-party sources and recipe payloads
+separately: the recipe license does not relicense upstream source or generated target postimages.
+OpenJDK source keeps its existing licensing; independent Apache-2.0 material keeps its scoped
+license. Reuse is subject to those existing terms and the target's integration requirements.
+
+Use the existing Maven/OpenRewrite control plane and naming/migration map. Import the needed
+source and qualified recipes into the target's existing owners; do not add a Synexia runtime
+service or package dependency to Java/HotSpot/JNI. Carry compiler, behavior, replay, fixed-point
+and refusal receipts with each candidate. Resource-sensitive ports also carry CPU, retained-heap
+and native/process-memory evidence with exact workloads and environments. Target tests and pending
+platform gates remain explicit; a reusable donor recipe alone does not establish target acceptance.
