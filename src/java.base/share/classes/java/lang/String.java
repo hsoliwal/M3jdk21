@@ -3441,6 +3441,17 @@ public final class String
      * @since 1.4
      */
     public String replaceFirst(String regex, String replacement) {
+        Objects.requireNonNull(regex, "regex");
+        Objects.requireNonNull(replacement, "replacement");
+        M3String storage = m3();
+        if (storage != null
+                && M3String.isConservativeLiteralRegex(regex)
+                && M3String.isLiteralRegexReplacement(replacement)) {
+            M3String target = M3String.canonicalize(regex);
+            M3String repl = M3String.canonicalize(replacement);
+            M3String replaced = storage.replaceFirstLiteralRegex(target, repl);
+            return replaced == storage ? this : new String(replaced);
+        }
         return Pattern.compile(regex).matcher(this).replaceFirst(replacement);
     }
 
@@ -3485,6 +3496,20 @@ public final class String
      * @since 1.4
      */
     public String replaceAll(String regex, String replacement) {
+        Objects.requireNonNull(regex, "regex");
+        Objects.requireNonNull(replacement, "replacement");
+        M3String storage = m3();
+        if (storage != null
+                && M3String.isConservativeLiteralRegex(regex)
+                && M3String.isLiteralRegexReplacement(replacement)) {
+            M3String target = M3String.canonicalize(regex);
+            M3String repl = M3String.canonicalize(replacement);
+            M3String replaced =
+                    target.length() == 0
+                            ? storage.replaceEmptyTarget(repl)
+                            : storage.replace(target, repl);
+            return replaced == storage ? this : new String(replaced);
+        }
         return Pattern.compile(regex).matcher(this).replaceAll(replacement);
     }
 
