@@ -69,6 +69,8 @@ public class StringPlatformChars {
             throw new AssertionError();
         }
 
+        testPreparedRangeUtfLengths();
+
         for (String value : List.of(
                 "",
                 "\u0000",
@@ -80,6 +82,48 @@ public class StringPlatformChars {
                 String.join("", "left-".repeat(80), "\uD83D", "\uDE42", "-right".repeat(80)),
                 String.join("", "xx", "range-", "\u0100", "-tail", "yy").substring(2, 15))) {
             testJniViews(value);
+        }
+    }
+
+    private static void testPreparedRangeUtfLengths() {
+        String source = String.join(
+                "",
+                "left-".repeat(96),
+                "\u0000",
+                "\u00ff",
+                "\u0100",
+                "\uD83D",
+                "\uDE42",
+                "-right".repeat(96));
+        int length = source.length();
+        String[] ranges = {
+                source.substring(1, length - 1),
+                source.substring(2, length - 2),
+                source.substring(3, length - 3),
+                source.substring(4, length - 4),
+                source.substring(5, length - 5),
+                source.substring(6, length - 6)
+        };
+
+        // hashCode() prepares exact M3 owner/range facts. The owner cache retains only four
+        // coordinates, so this sequence exercises prepared hits as well as eviction/miss fallback.
+        for (String range : ranges) {
+            range.hashCode();
+            int nativeLength = getUtf8Length(range);
+            int oracle = modifiedUtf8Length(range);
+            if (nativeLength != oracle) {
+                throw new AssertionError(
+                        "prepared range GetStringUTFLength mismatch native=" + nativeLength
+                                + " oracle=" + oracle
+                                + " length=" + range.length());
+            }
+        }
+
+        // Revisit both a likely-evicted early range and the latest prepared range.
+        for (String range : List.of(ranges[0], ranges[ranges.length - 1])) {
+            if (getUtf8Length(range) != modifiedUtf8Length(range)) {
+                throw new AssertionError("prepared range revisit mismatch");
+            }
         }
     }
 
