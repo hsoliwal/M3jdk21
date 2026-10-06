@@ -40,6 +40,14 @@ public class M3StringBuilderInteropTest {
         builder.append(wide, 0, 3);
         check(builder.toString().equals("latin:ab\u0100"), "late inflation at first wide unit");
 
+        String searchTarget = String.join("", "\u0100", "cd", "\ud83d\ude42");
+        StringBuilder searchable = new StringBuilder("xxab\u0100cd\ud83d\ude42efyyab\u0100cd\ud83d\ude42ef");
+        check(searchable.indexOf(searchTarget) == 4, "builder indexOf M3 target");
+        check(searchable.indexOf(searchTarget, 5) == 15, "builder indexOf M3 target from");
+        check(searchable.lastIndexOf(searchTarget) == 15, "builder lastIndexOf M3 target");
+        check(searchable.lastIndexOf(searchTarget, 14) == 4,
+                "builder lastIndexOf M3 target from");
+
         StringBuffer buffer = new StringBuffer();
         buffer.append(latin);
         buffer.append('|');
