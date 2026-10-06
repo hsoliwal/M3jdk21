@@ -575,6 +575,17 @@ if "if (M3String.admissionEnabled())" not in string
         or "return new String(M3StringPool.internUnit(c));" not in string:
     fail("String.valueOf(char) does not use direct M3 unit interning after activation")
 
+# Mutable char[] ingress must snapshot directly into canonical M3 storage after activation.
+# Do not compress to a transient compact byte[] first and then copy again into native storage.
+for fragment in [
+    "M3String direct = maybeAdmit(value, off, len);",
+    "M3String.admit(value, offset, length)",
+    "M3StringPool.internChars(source, offset, length)",
+    "M3StringAtom.localChars(source, offset, length, coder, id, hash64)",
+]:
+    if fragment not in (string + m3 + pool + atom):
+        fail(f"M3 direct char-array ingress missing: {fragment}")
+
 # Canonical single-unit transforms must re-enter the native pool directly rather than create
 # temporary one-character String/byte[] payloads.
 if "String.COMPACT_STRINGS" not in pool
