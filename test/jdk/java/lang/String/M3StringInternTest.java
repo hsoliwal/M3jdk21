@@ -76,6 +76,27 @@ public class M3StringInternTest {
         check(continuedToEmpty.intern() == "".intern(),
                 "canonical continuation-to-empty intern identity");
 
+        char[] mutableChars = new char[] {'a', 'b', '\u0100', 'c'};
+        String charSnapshot = new String(mutableChars);
+        String charSnapshotPeer = new String(new char[] {'a', 'b', '\u0100', 'c'});
+        charSnapshot.length();
+        charSnapshotPeer.length();
+        check(M3_OWNER.get(STRING_M3.get(charSnapshot))
+                        == M3_OWNER.get(STRING_M3.get(charSnapshotPeer)),
+                "equal char[] constructors share canonical owner");
+        mutableChars[0] = 'z';
+        mutableChars[2] = 'Q';
+        check(charSnapshot.equals("ab\u0100c"), "char[] constructor snapshots mutable input");
+
+        char[] rangedChars = new char[] {'x', 'a', 'b', '\u0100', 'c', 'y'};
+        String ranged = new String(rangedChars, 1, 4);
+        check(ranged.equals("ab\u0100c"), "char[] range constructor content");
+        check(M3_OWNER.get(STRING_M3.get(ranged))
+                        == M3_OWNER.get(STRING_M3.get(charSnapshot)),
+                "char[] range shares canonical owner");
+        rangedChars[1] = 'q';
+        check(ranged.equals("ab\u0100c"), "char[] range snapshots mutable input");
+
         String empty = new String(new char[0]);
         check(empty.intern() == "".intern(), "empty intern identity");
 
