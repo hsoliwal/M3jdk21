@@ -128,8 +128,10 @@ semantically safe boundary:
 
 Synexia's position-mask lineage is adapted as `M3StringPositionPrecompute`, not as fields on
 `M3String` or `M3StringFacts`. The implementation keeps one conservative code-unit signal per
-64 UTF-16 units, weakly keyed by canonical owner+coordinate. It is capped at 64 cache slots and
-32,768 UTF-16 units per source (about 256 KiB of primitive masks at the hard ceiling).
+64 UTF-16 units, weakly keyed by canonical owner+coordinate. Blocks are prepared lazily on first
+visit and atomically reused, so a one-shot early match does not scan the whole source. It is capped
+at 64 cache slots and 32,768 UTF-16 units per source (about 256 KiB of primitive masks at the hard
+ceiling).
 
 `String.indexOf(int)`, bounded `indexOf(int,...)`, and `lastIndexOf(int)` use this lane for
 BMP code units after the whole-value fact filter. A negative block mask may skip that block; every
