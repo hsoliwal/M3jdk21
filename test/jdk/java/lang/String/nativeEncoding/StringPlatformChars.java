@@ -107,6 +107,36 @@ public class StringPlatformChars {
             System.out.println("Oracle modified UTF8: " + Arrays.toString(oracleUtf));
             throw new AssertionError(s);
         }
+
+        int length = s.length();
+        int[][] ranges = {
+                {0, 0},
+                {0, length},
+                {Math.min(1, length), Math.max(0, length - Math.min(1, length))},
+                {length / 2, Math.min(length - length / 2, 3)},
+                {Math.max(0, length - Math.min(3, length)), Math.min(3, length)}
+        };
+        for (int[] range : ranges) {
+            int start = range[0];
+            int count = range[1];
+            String expected = s.substring(start, start + count);
+
+            char[] nativeRegion = getUtf16Region(s, start, count);
+            if (!Arrays.equals(nativeRegion, expected.toCharArray())) {
+                throw new AssertionError(
+                        "GetStringRegion mismatch start=" + start + " count=" + count
+                                + " units=" + Arrays.toString(s.chars().toArray()));
+            }
+
+            byte[] nativeUtfRegion = getUtf8Region(s, start, count);
+            byte[] expectedUtfRegion = modifiedUtf8(expected);
+            if (!Arrays.equals(nativeUtfRegion, expectedUtfRegion)) {
+                throw new AssertionError(
+                        "GetStringUTFRegion mismatch start=" + start + " count=" + count
+                                + " native=" + Arrays.toString(nativeUtfRegion)
+                                + " expected=" + Arrays.toString(expectedUtfRegion));
+            }
+        }
     }
 
     private static int modifiedUtf8Length(String value) {
@@ -153,6 +183,10 @@ public class StringPlatformChars {
     static native char[] getUtf16(String string);
 
     static native byte[] getUtf8(String string);
+
+    static native char[] getUtf16Region(String string, int start, int length);
+
+    static native byte[] getUtf8Region(String string, int start, int length);
 
     static native int getUtf8Length(String string);
 
