@@ -8,6 +8,7 @@
  */
 
 import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
 
 public class M3StringInternTest {
     private static final Field STRING_M3;
@@ -96,6 +97,35 @@ public class M3StringInternTest {
                 "char[] range shares canonical owner");
         rangedChars[1] = 'q';
         check(ranged.equals("ab\u0100c"), "char[] range snapshots mutable input");
+
+        byte[] latinBytes = new byte[] {'a', (byte) 0xff, 'b'};
+        String latinByteString = new String(latinBytes, StandardCharsets.ISO_8859_1);
+        String latinBytePeer = new String(new char[] {'a', '\u00ff', 'b'});
+        check(M3_OWNER.get(STRING_M3.get(latinByteString))
+                        == M3_OWNER.get(STRING_M3.get(latinBytePeer)),
+                "ISO-8859-1 byte constructor shares canonical owner");
+        latinBytes[0] = 'z';
+        check(latinByteString.equals("a\u00ffb"), "ISO-8859-1 byte constructor snapshots input");
+
+        byte[] utf8Ascii = new byte[] {'A', 'S', 'C', 'I', 'I'};
+        String utf8AsciiString = new String(utf8Ascii, StandardCharsets.UTF_8);
+        String utf8AsciiPeer = new String(new char[] {'A', 'S', 'C', 'I', 'I'});
+        check(M3_OWNER.get(STRING_M3.get(utf8AsciiString))
+                        == M3_OWNER.get(STRING_M3.get(utf8AsciiPeer)),
+                "ASCII UTF-8 byte constructor shares canonical owner");
+        utf8Ascii[0] = 'x';
+        check(utf8AsciiString.equals("ASCII"), "ASCII UTF-8 byte constructor snapshots input");
+
+        byte[] asciiBytes = new byte[] {'J', 'D', 'K'};
+        String asciiString = new String(asciiBytes, StandardCharsets.US_ASCII);
+        String asciiPeer = new String(new char[] {'J', 'D', 'K'});
+        check(M3_OWNER.get(STRING_M3.get(asciiString))
+                        == M3_OWNER.get(STRING_M3.get(asciiPeer)),
+                "US-ASCII byte constructor shares canonical owner");
+
+        String malformedAscii =
+                new String(new byte[] {(byte) 0x80}, StandardCharsets.US_ASCII);
+        check(malformedAscii.equals("\ufffd"), "malformed ASCII remains decoder-owned");
 
         String empty = new String(new char[0]);
         check(empty.intern() == "".intern(), "empty intern identity");
