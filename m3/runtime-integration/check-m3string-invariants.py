@@ -319,6 +319,18 @@ for fragment in [
 if "for (int index = 0; index < len; index++)" not in string:
     fail("exact region comparison loop missing after precompute filter")
 
+# Case conversion is canonical only for ASCII + Locale.ROOT. Locale-sensitive and non-ASCII
+# transformations must continue through the stock JDK case engine.
+for fragment in [
+    "locale.equals(Locale.ROOT) && storage.facts().ascii",
+    "storage.asciiCase(false)",
+    "storage.asciiCase(true)",
+]:
+    if fragment not in string:
+        fail(f"M3 ROOT ASCII case boundary missing: {fragment}")
+if "M3String asciiCase(boolean upper)" not in m3:
+    fail("M3String ROOT ASCII canonical case mapper missing")
+
 # M3-backed constructors must store only the empty compatibility sentinel.
 if string.count("storage.compatibilityValue()") < 4:
     fail("M3-backed String constructors no longer consistently use the empty sentinel")
