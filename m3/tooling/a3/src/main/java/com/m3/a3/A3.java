@@ -48,6 +48,11 @@ public final class A3 {
                     A3Lab.write(
                             options.root(),
                             options.out("m3/build/a3/lab"));
+            case "synexia" ->
+                    A3Synexia.write(
+                            options.root(),
+                            options.requireManifest(),
+                            options.out("m3/build/a3/synexia.tsv"));
             default -> {
                 usage();
                 throw new IllegalArgumentException(
@@ -58,8 +63,8 @@ public final class A3 {
 
     private static void usage() {
         System.err.println(
-                "A3: inv|alg|plan|work|apply|lab [--root PATH] [--out PATH] "
-                        + "[--inventory PATH] [--queue PATH] "
+                "A3: inv|alg|plan|work|apply|lab|synexia [--root PATH] [--out PATH] "
+                        + "[--inventory PATH] [--queue PATH] [--manifest PATH] "
                         + "[--file PATH ...] [--list PATH]");
     }
 
@@ -68,6 +73,7 @@ public final class A3 {
             Path out,
             Path inventory,
             Path queue,
+            Path manifest,
             List<String> files,
             Path list) {
 
@@ -76,6 +82,7 @@ public final class A3 {
             Path out = null;
             Path inventory = Path.of("m3/build/a3/inventory.tsv");
             Path queue = Path.of("m3/build/backports/COMPATIBILITY_QUEUE.tsv");
+            Path manifest = null;
             Path list = null;
             ArrayList<String> files = new ArrayList<>();
 
@@ -91,6 +98,8 @@ public final class A3 {
                     inventory = Path.of(requireValue(args, ++index, key));
                 } else if ("--queue".equals(key)) {
                     queue = Path.of(requireValue(args, ++index, key));
+                } else if ("--manifest".equals(key)) {
+                    manifest = Path.of(requireValue(args, ++index, key));
                 } else if ("--list".equals(key)) {
                     list = Path.of(requireValue(args, ++index, key));
                 } else {
@@ -103,12 +112,21 @@ public final class A3 {
                     out,
                     inventory,
                     queue,
+                    manifest,
                     List.copyOf(files),
                     list);
         }
 
         Path out(String fallback) {
             return out == null ? Path.of(fallback) : out;
+        }
+
+        Path requireManifest() {
+            if (manifest == null) {
+                throw new IllegalArgumentException(
+                        "A3 synexia requires --manifest");
+            }
+            return manifest;
         }
 
         List<String> sources() throws Exception {
