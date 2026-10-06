@@ -130,6 +130,17 @@ required_responsibilities = {
     "MIndexPalindromeFacts / Manacher facts",
     "MIndexSuffixDecision / suffix DFA facts",
     "LCP range-minimum / suffix-index facts",
+    "MIndexStringPrecomputeImage/Profile/Cache",
+    "MIndexStringPrecomputeImage.PREFIX_FUNCTION / LITERAL_PATTERN",
+    "MIndexStringPrecomputeImage.Z_FUNCTION",
+    "MIndexStringPrecomputeImage.PALINDROME",
+    "MIndexStringPrecomputeImage.ROLLING_HASH",
+    "MIndexStringPrecomputeImage.SKETCH",
+    "MIndexStringPrecomputeImage.SUFFIX_ARRAY / LCP / RMQ",
+    "MIndexStringRelationPrecompute / MIndexStringRelationImage",
+    "MIndexStringUnaryProjectionPrecompute",
+    "MIndexStringPrecomputeBridge / MIndexStringPrecomputeBridgePlan / MIndexStringPrecomputeConvergenceBridge",
+    "com.synexia.m3index.M3StringPrecomputeImage / M3StringPrecomputeProfile",
 }
 missing_responsibilities = required_responsibilities - seen_responsibilities
 if missing_responsibilities:
@@ -146,6 +157,17 @@ expected_dispositions = {
     "MIndexPalindromeFacts / Manacher facts": "DONOR_ONLY_NO_JDK21_CONSUMER",
     "MIndexSuffixDecision / suffix DFA facts": "DONOR_ONLY_NO_JDK21_CONSUMER",
     "LCP range-minimum / suffix-index facts": "DONOR_ONLY_NO_JDK21_CONSUMER",
+    "MIndexStringPrecomputeImage/Profile/Cache": "RESPONSIBILITY_SPLIT_INTERNAL",
+    "MIndexStringPrecomputeImage.PREFIX_FUNCTION / LITERAL_PATTERN": "IMPLEMENTED_BOUNDED",
+    "MIndexStringPrecomputeImage.Z_FUNCTION": "DONOR_ONLY_NO_JDK21_CONSUMER",
+    "MIndexStringPrecomputeImage.PALINDROME": "DONOR_ONLY_NO_JDK21_CONSUMER",
+    "MIndexStringPrecomputeImage.ROLLING_HASH": "DONOR_ONLY_NO_JDK21_CONSUMER",
+    "MIndexStringPrecomputeImage.SKETCH": "PARTIAL_SAFE_CONSUMPTION",
+    "MIndexStringPrecomputeImage.SUFFIX_ARRAY / LCP / RMQ": "DONOR_ONLY_NO_JDK21_CONSUMER",
+    "MIndexStringRelationPrecompute / MIndexStringRelationImage": "DONOR_ONLY_NO_JDK21_CONSUMER",
+    "MIndexStringUnaryProjectionPrecompute": "IMPLEMENTED_SEMANTIC_SUBSET",
+    "MIndexStringPrecomputeBridge / MIndexStringPrecomputeBridgePlan / MIndexStringPrecomputeConvergenceBridge": "RESPONSIBILITY_SPLIT_INTERNAL",
+    "com.synexia.m3index.M3StringPrecomputeImage / M3StringPrecomputeProfile": "NOT_JDK_STRING_SEMANTICS",
 }
 for donor, expected in expected_dispositions.items():
     actual = by_responsibility[donor][3]
@@ -158,6 +180,11 @@ critical_port_map_rows = [
     "MIndexTupleReferences.concat/balance + MIndexStringIntern.internReferences\tjava.lang.M3StringPool + M3StringTuple\tIMPLEMENTED_UNVERIFIED",
     "MIndexStringSearchPlan\tjava.lang.M3StringSearchPrecompute\tIMPLEMENTED",
     "MIndexPositionMasks / MIndexComposedPositionMasks\tjava.lang.M3StringPositionPrecompute\tIMPLEMENTED",
+    "MIndexStringPrecomputeImage / MIndexStringPrecomputeProfile / MIndexStringPrecomputeCache\tM3StringFacts + M3StringSearchPrecompute + M3StringPositionPrecompute + donor-only lanes\tRESPONSIBILITY_SPLIT_INTERNAL",
+    "MIndexStringRelationPrecompute / MIndexStringRelationImage\tno retained M3JDK pair cache\tDONOR_ONLY_NO_JDK21_CONSUMER",
+    "MIndexStringUnaryProjectionPrecompute\tM3String + M3StringFacts + java.lang.String projection paths\tIMPLEMENTED_SEMANTIC_SUBSET",
+    "MIndexStringPrecomputeBridge / MIndexStringPrecomputeBridgePlan / MIndexStringPrecomputeConvergenceBridge\tString + M3String + internal fact/search owners\tRESPONSIBILITY_SPLIT_INTERNAL",
+    "com.synexia.m3index.M3StringPrecomputeImage / M3StringPrecomputeProfile\tno direct java.lang counterpart\tDONOR_WRAPPER_NAME_ONLY",
 ]
 for row in critical_port_map_rows:
     if row not in port_map:
@@ -1114,6 +1141,11 @@ required_broad_precompute_mapping_fragments = [
     '"source": "com.synexia.indexstring lexical / word / bigram / semantic signal images"',
     '"source": "com.synexia.indexstring.precompute Unicode / SI unit / static catalog families"',
     '"source": "com.synexia.mindex Jini / Coral TPU / LiteRT NPU / Tornado precompute families"',
+    '"source": "com.synexia.mindex.MIndexStringPrecomputeImage / MIndexStringPrecomputeProfile / MIndexStringPrecomputeCache"',
+    '"source": "com.synexia.mindex.MIndexStringRelationPrecompute / MIndexStringRelationImage"',
+    '"source": "com.synexia.mindex.MIndexStringUnaryProjectionPrecompute"',
+    '"source": "com.synexia.mindex.MIndexStringPrecomputeBridge / MIndexStringPrecomputeBridgePlan plus com.synexia.mindex.indexstring.MIndexStringPrecomputeConvergenceBridge"',
+    '"source": "com.synexia.m3index.M3StringPrecomputeImage / M3StringPrecomputeProfile"',
 ]
 for fragment in required_broad_precompute_mapping_fragments:
     if fragment not in mapping:
