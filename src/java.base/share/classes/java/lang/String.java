@@ -1728,13 +1728,17 @@ public final class String
      */
     public int offsetByCodePoints(int index, int codePointOffset) {
         M3String storage = m3();
-        if (storage != null
-                && index >= 0
-                && index <= storage.length()
-                && storage.facts().codePointCount == storage.length()) {
-            long result = (long) index + codePointOffset;
-            if (result >= 0L && result <= storage.length()) {
-                return (int) result;
+        if (storage != null && index >= 0 && index <= storage.length()) {
+            M3StringFacts prepared = storage.factsIfPrepared();
+            boolean oneUnitPerCodePoint =
+                    storage.coder() == LATIN1
+                            || (prepared != null
+                                    && prepared.codePointCount == storage.length());
+            if (oneUnitPerCodePoint) {
+                long result = (long) index + codePointOffset;
+                if (result >= 0L && result <= storage.length()) {
+                    return (int) result;
+                }
             }
         }
         return Character.offsetByCodePoints(this, index, codePointOffset);
