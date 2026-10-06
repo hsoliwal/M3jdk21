@@ -37,14 +37,31 @@ final class M3StringCodePointPrecompute {
 
     static int codePointCount(M3String source, int beginIndex, int endIndex) {
         Objects.requireNonNull(source, "source");
-        Objects.checkFromToIndex(beginIndex, endIndex, source.length());
+        int sourceLength = source.length();
+        Objects.checkFromToIndex(beginIndex, endIndex, sourceLength);
         if (beginIndex == endIndex) return 0;
         if (source.coder() == String.LATIN1) return endIndex - beginIndex;
+        if (beginIndex == 0 && endIndex == sourceLength) {
+            return source.facts().codePointCount;
+        }
 
-        Navigation navigation = prepare(source);
-        return navigation == null
-                ? linearCodePointCount(source, beginIndex, endIndex)
-                : codePointCount(source, navigation, beginIndex, endIndex);
+        Navigation navigation = prepared(source);
+        if (navigation != null) {
+            return codePointCount(source, navigation, beginIndex, endIndex);
+        }
+
+        int rangeLength = endIndex - beginIndex;
+        if (rangeLength >= MIN_SOURCE_UNITS
+                && (long) rangeLength * 4L >= sourceLength) {
+            navigation = prepare(source);
+            if (navigation != null) {
+                return codePointCount(source, navigation, beginIndex, endIndex);
+            }
+        }
+
+        // Preserve the existing exact range-fact behavior for small/one-shot ranges rather than
+        // scanning the complete source merely to populate an optional navigation cache.
+        return source.slice(beginIndex, endIndex).facts().codePointCount;
     }
 
     static int offsetByCodePoints(M3String source, int index, int codePointOffset) {
@@ -63,6 +80,12 @@ final class M3StringCodePointPrecompute {
                 throw new IndexOutOfBoundsException("codePointOffset");
             }
             return (int) result;
+        }
+
+        long magnitude =
+                codePointOffset < 0 ? -(long) codePointOffset : (long) codePointOffset;
+        if (magnitude <= 32L) {
+            return linearOffsetByCodePoints(source, index, codePointOffset);
         }
 
         Navigation navigation = prepare(source);
@@ -111,6 +134,21 @@ final class M3StringCodePointPrecompute {
     static long maximumRetainedPrimitiveBytes() {
         long blocks = ((long) MAX_SOURCE_UNITS + BLOCK_MASK) >>> BLOCK_SHIFT;
         return (long) SLOTS * (blocks + 1L) * Integer.BYTES;
+    }
+
+    private static Navigation prepared(M3String source) {
+        int length = source.length();
+        if (length < MIN_SOURCE_UNITS || length > MAX_SOURCE_UNITS) return null;
+
+        M3StringOwner owner = source.owner();
+        long coordinate = source.coordinate();
+        Entry current = CACHE.get(slot(owner, coordinate));
+        return current != null
+                        && current.owner.get() == owner
+                        && current.coordinate == coordinate
+                        && current.length == length
+                ? current.navigation
+                : null;
     }
 
     private static Navigation prepare(M3String source) {
