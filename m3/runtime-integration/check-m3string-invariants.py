@@ -38,6 +38,7 @@ dedup = read("src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp")
 stringtable = read("src/hotspot/share/classfile/stringTable.cpp")
 mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
+recipe_authority = read("m3/docs/synexia-string-recipe-authority.tsv")
 precompute_inventory = read("m3/docs/synexia-mindex-precompute-inventory.tsv")
 completeness = read("m3/docs/string-precompute-completeness.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
@@ -979,6 +980,27 @@ required_mapping_fragments = [
 for fragment in required_mapping_fragments:
     if fragment not in mapping:
         fail(f"name mapping missing: {fragment}")
+
+for fragment in [
+    '"recipe_id": "synexia.m3jdk.string.canonical-dag.20261006"',
+    '"source_repo": "hsoliwal/com.synexia"',
+    '"source_path": "synexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006"',
+    '"target_packet_role": "generated executable/hash-pinned application copy"',
+    '"portable_semantics_owner": "Synexia"',
+]:
+    if fragment not in mapping:
+        fail(f"Synexia String recipe authority binding missing from name map: {fragment}")
+
+for fragment in [
+    "recipe_id\tsynexia.m3jdk.string.canonical-dag.20261006",
+    "authority_repo\thsoliwal/com.synexia",
+    "authority_path\tsynexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006",
+    "target_packet_role\tgenerated executable/hash-pinned application copy",
+    "target_runtime_owner\tM3JDK",
+    "precompute_rule\timplementation-internal in both worlds; never canonical spelling",
+]:
+    if fragment not in recipe_authority:
+        fail(f"Synexia String recipe authority receipt missing: {fragment}")
 
 # Synexia is the full qualified donor/convergence workspace. Recipes/postimages/tests are
 # first-class donor candidates, but licensing/provenance follows every copied artifact and
