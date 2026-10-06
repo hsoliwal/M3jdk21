@@ -1,0 +1,303 @@
+# SPDX-License-Identifier: Apache-2.0
+"""Exercise the explicit Ic0 profile using actual prior TQ-sync Maven outputs.
+
+This suite requires the retained TQ-sync Maven verify to have generated all24
+postimages. Temporary fixture mutations do not alter the receiving source tree.
+"""
+import hashlib
+import importlib.util
+import json
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import tempfile
+import unittest
+
+CRATE = Path(__file__).resolve().parents[3]
+ROOT = CRATE.parents[2]
+MAP = 'm3/docs/name-mapping.json'
+WORKFLOW = '.github/workflows/m3-lane28.yml'
+CURRENT_WORKFLOW_SHA = '1aa2a7a495a00d3a0754bcf776cf7d3ef3bd176134186bfe1ec4004bb8a74616'
+CURRENT_MAP_SHA = 'cf6a75806908fee920ecbf7bbe548182f1d9db179e9cc554e36739b1c45a6e6c'
+CURRENT_SOURCE_SHA = {
+    WORKFLOW: CURRENT_WORKFLOW_SHA,
+    '.github/workflows/m3-tq.yml': '84d3b48257a3c53b79c5aa5b2e6432951db2ff6a0d64822d85c1bca8b250d875',
+    'm3/tooling/tq/verify-plan.py': '04859b1701462a8648212f2cc638d1d761bc81afe5eb4187751d73c62061f3f3',
+}
+
+
+class Ic0ContextTest(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        spec = importlib.util.spec_from_file_location('tsc_sealed', ROOT / 'm3/migration/recipe.py')
+        sealed = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(sealed)
+        cls.plan, cls.rows = sealed.sealed_plan(CRATE / 'plan.json')
+        if len(cls.rows) != 24:
+            raise AssertionError('Exact current24-target plan required')
+        cls.generated = {}
+        for row in cls.rows:
+            body = (CRATE / 'target/generated' / row['path']).read_bytes()
+            if body != row['after']:
+                raise AssertionError('Actual Maven-generated postimage differs: ' + row['path'])
+            cls.generated[row['path']] = body
+        cls.current_map = (ROOT / MAP).read_bytes()
+        if hashlib.sha256(cls.current_map).hexdigest() != CURRENT_MAP_SHA:
+            raise AssertionError('Actual selected Ic0 mapping required')
+        cls.current_workflow = (ROOT / WORKFLOW).read_bytes()
+        if hashlib.sha256(cls.current_workflow).hexdigest() != CURRENT_WORKFLOW_SHA:
+            raise AssertionError('Actual selected Ic0 workflow required')
+        cls.current_sources = {name: (ROOT / name).read_bytes() for name in CURRENT_SOURCE_SHA}
+        for name, expected in CURRENT_SOURCE_SHA.items():
+            if hashlib.sha256(cls.current_sources[name]).hexdigest() != expected:
+                raise AssertionError('Actual selected Ic0 body required: ' + name)
+        cls.original_inputs = {
+            **{str(ROOT / name): body for name, body in cls.current_sources.items()},
+            str(ROOT / WORKFLOW): cls.current_workflow,
+            str(CRATE / 'verify-plan.py'): (CRATE / 'verify-plan.py').read_bytes(),
+            str(ROOT / 'm3/migration/recipe.py'): (ROOT / 'm3/migration/recipe.py').read_bytes(),
+            str(ROOT / MAP): cls.current_map,
+            **{str(CRATE / 'target/generated' / p): b for p, b in cls.generated.items()},
+        }
+
+    @classmethod
+    def tearDownClass(cls):
+        for path, body in cls.original_inputs.items():
+            if Path(path).read_bytes() != body:
+                raise AssertionError('Receiving input changed: ' + path)
+
+    def setUp(self):
+        self.temporary = tempfile.TemporaryDirectory(prefix='m3-tsc-context-')
+        self.addCleanup(self.temporary.cleanup)
+        self.root = Path(self.temporary.name)
+        self.crate = self.root / 'm3/tooling/tq-sync'
+        self.crate.mkdir(parents=True)
+        shutil.copyfile(CRATE / 'plan.json', self.crate / 'plan.json')
+        shutil.copyfile(CRATE / 'verify-plan.py', self.crate / 'verify-plan.py')
+        shutil.copytree(CRATE / 'src/main/resources', self.crate / 'src/main/resources')
+        for guard in self.plan['guards']:
+            path = self.root / guard['path']
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes((ROOT / guard['path']).read_bytes())
+        recipe = self.root / 'm3/migration/recipe.py'
+        recipe.parent.mkdir(parents=True, exist_ok=True)
+        recipe.write_bytes((ROOT / 'm3/migration/recipe.py').read_bytes())
+        for name, body in self.generated.items():
+            for path in (self.root / name, self.crate / 'target/generated' / name):
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(body)
+
+    def snapshot(self):
+        return {p.relative_to(self.root).as_posix(): p.read_bytes()
+                for p in self.root.rglob('*') if p.is_file()}
+
+    def invoke(self, arguments=(), successful=False):
+        before = self.snapshot()
+        result = subprocess.run(
+            [sys.executable, '-B', '-S', str(self.crate / 'verify-plan.py'), *arguments],
+            cwd=self.root, capture_output=True, timeout=30, check=False)
+        if successful:
+            self.assertEqual(result.returncode, 0, result.stderr.decode(errors='replace'))
+            self.assertEqual(result.stderr, b'')
+            after = self.snapshot()
+            custody = 'm3/tooling/tq-sync/target/custody.json'
+            self.assertEqual(set(after) - set(before), {custody})
+            self.assertEqual({k: v for k, v in after.items() if k != custody}, before)
+            record = json.loads(after[custody])
+            self.assertEqual(record['schema'], 'm3.tq-sync-custody/1')
+            self.assertEqual(record['plan_sha256'], self.plan['plan_sha256'])
+            self.assertEqual(record['generated_outputs'], 24)
+            self.assertEqual([r['mode'] for r in record['events'] if 'mode' in r],
+                             ['check', 'apply', 'apply', 'rollback', 'rollback'])
+            self.assertEqual([r['refusal'] for r in record['events'] if 'refusal' in r],
+                             ['destination drift', 'mixed states', 'dependency drift'])
+            return record
+        self.assertNotEqual(result.returncode, 0, result.stdout.decode(errors='replace'))
+        self.assertEqual(self.snapshot(), before, 'Refusal must not write fixture sources or custody')
+        return result
+
+    def composed(self):
+        (self.root / MAP).write_bytes(self.current_map)
+        for name, body in self.current_sources.items():
+            (self.root / name).write_bytes(body)
+
+    def mutate_mapping(self, mutation):
+        self.composed()
+        document = json.loads(self.current_map)
+        mutation(document)
+        (self.root / MAP).write_text(json.dumps(document, indent=2) + '\n')
+
+    def test_default_exact_historical_context_and_replay(self):
+        record = self.invoke(successful=True)
+        self.assertNotIn('source_context', record)
+
+    def test_explicit_composed_context_and_historical_replay(self):
+        self.composed()
+        record = self.invoke(['--context', 'ic0'], successful=True)
+        self.assertEqual(record['source_context'], 'ic0')
+        self.assertEqual(record['current_mapping_sha256'], CURRENT_MAP_SHA)
+        self.assertEqual(record['current_workflow_sha256'], CURRENT_WORKFLOW_SHA)
+        self.assertEqual(record['current_source_sha256'], CURRENT_SOURCE_SHA)
+        self.assertEqual((record['historical_records'], record['current_records']), (52, 87))
+
+    def test_default_does_not_silently_admit_composed_context(self):
+        self.composed()
+        self.invoke()
+
+    def test_composed_context_requires_its_exact_mapping(self):
+        self.composed()
+        (self.root / MAP).write_bytes(self.generated[MAP])
+        result = self.invoke(['--context', 'ic0'])
+        self.assertIn(b'Unadmitted ic0 mapping', result.stderr)
+
+    def test_unknown_context_is_refused(self):
+        self.composed()
+        result = self.invoke(['--context', 'future'])
+        self.assertEqual(result.returncode, 2)
+
+    def test_retained_record_mutation_is_refused(self):
+        self.mutate_mapping(lambda d: d['migration']['records'][0].update(status='active'))
+        self.invoke(['--context', 'ic0'])
+
+    def test_missing_retained_record_is_refused(self):
+        self.mutate_mapping(lambda d: d['migration']['records'].pop(0))
+        self.invoke(['--context', 'ic0'])
+
+    def test_duplicate_id_is_refused(self):
+        def duplicate(document):
+            rows = document['migration']['records']
+            rows[-1]['id'] = rows[0]['id']
+        self.mutate_mapping(duplicate)
+        self.invoke(['--context', 'ic0'])
+
+    def test_foreign_pending_payload_is_refused(self):
+        self.mutate_mapping(lambda d: d['migration']['records'][-1].update(status='active'))
+        self.invoke(['--context', 'ic0'])
+
+    def test_top_level_authority_change_is_refused(self):
+        self.mutate_mapping(lambda d: d.update(unreviewed_authority=True))
+        self.invoke(['--context', 'ic0'])
+
+    def test_all_other_canonical_targets_remain_exact(self):
+        self.composed()
+        for name, original in self.generated.items():
+            if name == MAP or name in CURRENT_SOURCE_SHA:
+                continue
+            with self.subTest(path=name):
+                path = self.root / name
+                path.write_bytes(original + b'\ndrift\n')
+                self.invoke(['--context', 'ic0'])
+                path.write_bytes(original)
+
+    def test_all_generated_outputs_remain_exact(self):
+        self.composed()
+        for name, original in self.generated.items():
+            with self.subTest(path=name):
+                path = self.crate / 'target/generated' / name
+                path.write_bytes(original + b'\ndrift\n')
+                self.invoke(['--context', 'ic0'])
+                path.write_bytes(original)
+
+    def test_every_guard_remains_required(self):
+        self.composed()
+        for guard in self.plan['guards']:
+            with self.subTest(path=guard['path']):
+                path = self.root / guard['path']
+                original = path.read_bytes()
+                path.write_bytes(original + b'\ndrift\n')
+                self.invoke(['--context', 'ic0'])
+                path.write_bytes(original)
+
+    def test_missing_generated_output_is_refused(self):
+        self.composed()
+        (self.crate / 'target/generated' / next(iter(self.generated))).unlink()
+        self.invoke(['--context', 'ic0'])
+
+    def test_missing_canonical_output_is_refused(self):
+        self.composed()
+        (self.root / next(p for p in self.generated if p != MAP)).unlink()
+        self.invoke(['--context', 'ic0'])
+
+
+    def test_composed_context_requires_its_exact_workflow(self):
+        self.composed()
+        (self.root / WORKFLOW).write_bytes(self.generated[WORKFLOW])
+        result = self.invoke(['--context', 'ic0'])
+        self.assertIn(b'Unadmitted ic0 source: .github/workflows/m3-lane28.yml', result.stderr)
+
+    def test_selected_workflow_drift_is_refused(self):
+        self.composed()
+        (self.root / WORKFLOW).write_bytes(self.current_workflow + b'\n# drift\n')
+        result = self.invoke(['--context', 'ic0'])
+        self.assertIn(b'Unadmitted ic0 source: .github/workflows/m3-lane28.yml', result.stderr)
+
+    def test_default_refuses_only_the_new_workflow(self):
+        (self.root / WORKFLOW).write_bytes(self.current_workflow)
+        self.invoke()
+
+    def test_existing_transaction_markers_are_refused_without_writes(self):
+        self.composed()
+        for name in ('.m3-migration.lock', '.m3-migration-journal.json'):
+            with self.subTest(marker=name):
+                marker = self.root / name
+                marker.write_bytes(b'untouched transaction\n')
+                result = self.invoke(['--context', 'ic0'])
+                self.assertIn(b'incomplete transaction; use explicit recovery', result.stderr)
+                marker.unlink()
+
+    def test_canonical_symlink_outputs_are_refused(self):
+        self.composed()
+        for index, name in enumerate((MAP, *CURRENT_SOURCE_SHA, next(p for p in self.generated if p != MAP and p not in CURRENT_SOURCE_SHA))):
+            with self.subTest(path=name):
+                path = self.root / name
+                original = path.read_bytes()
+                backing = self.root / ('retained-body-' + str(index))
+                backing.write_bytes(original)
+                path.unlink()
+                path.symlink_to(backing)
+                result = self.invoke(['--context', 'ic0'])
+                self.assertIn(b'symlink refused:', result.stderr)
+                self.assertTrue(path.is_symlink())
+                self.assertEqual(path.readlink(), backing)
+                path.unlink()
+                path.write_bytes(original)
+                backing.unlink()
+
+    def test_symlink_ancestor_is_refused(self):
+        self.composed()
+        path = self.root / 'm3/docs'
+        backing = self.root / 'retained-documents'
+        path.rename(backing)
+        path.symlink_to(backing, target_is_directory=True)
+        result = self.invoke(['--context', 'ic0'])
+        self.assertIn(b'symlink refused:', result.stderr)
+        self.assertTrue(path.is_symlink())
+        self.assertEqual(path.readlink(), backing)
+
+
+    def test_other_selected_sources_require_their_exact_current_images(self):
+        self.composed()
+        for name in CURRENT_SOURCE_SHA:
+            if name == WORKFLOW:
+                continue
+            with self.subTest(path=name):
+                (self.root / name).write_bytes(self.generated[name])
+                result = self.invoke(['--context', 'ic0'])
+                self.assertIn(('Unadmitted ic0 source: ' + name).encode(), result.stderr)
+                (self.root / name).write_bytes(self.current_sources[name])
+
+    def test_other_selected_source_drift_is_refused(self):
+        self.composed()
+        for name in CURRENT_SOURCE_SHA:
+            if name == WORKFLOW:
+                continue
+            with self.subTest(path=name):
+                (self.root / name).write_bytes(self.current_sources[name] + b'\n# drift\n')
+                result = self.invoke(['--context', 'ic0'])
+                self.assertIn(('Unadmitted ic0 source: ' + name).encode(), result.stderr)
+                (self.root / name).write_bytes(self.current_sources[name])
+
+
+if __name__ == '__main__':
+    unittest.main()

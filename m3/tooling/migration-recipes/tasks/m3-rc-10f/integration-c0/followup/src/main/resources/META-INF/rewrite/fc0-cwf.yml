@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Fc0Cwf
+displayName: Fc0 Cwf exact composed-candidate snapshot
+description: Exact follow-up family over the qualified Ic0 candidate; source-operation qualification only.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: fc0-cwf
