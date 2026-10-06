@@ -20,5 +20,5 @@ executable_verifier_path	synexia-openrewrite-recipes/src/main/java/com/synexia/r
 executable_verifier_tracking_ref	refs/heads/m3/string-canonical-dag-recipe-authority-20261006
 executable_verifier_pr	hsoliwal/com.synexia#9524
 authority_source_lock_path	synexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006/source-lock.json
-authority_source_lock_commit	5d283e753907c3aa6b7a3ea30e6bc2f23869f3f3
-authority_source_lock_blob	901afdf1bc0d9d02c226e7ab8b8117125e835944
+authority_source_lock_commit	5fb52a051fa0e2722c2f69f2e22ac7f330c91ce2
+authority_source_lock_blob	0230b1a0864266d9243c161f7541c01492c9626e
