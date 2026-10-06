@@ -1,9 +1,9 @@
 order	release	jep	title	domain	disposition	priority	evidence_state	evidence_paths	next_action	default_java21	priority_classification	receipt_state	promotion	receipt_next_action
-0	22	423	Region Pinning for G1	gc	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	CANDIDATE	COMPATIBLE_RUNTIME			
+0	22	423	Region Pinning for G1	gc	candidate	20	PACKET_EVIDENCE	m3/backports/recipes/j423,m3/backports/recipes/jep-423-region-pinning	PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	CANDIDATE	COMPATIBLE_RUNTIME			
 1	22	458	Launch Multi-File Source-Code Programs	tool-launcher	candidate	20	MATERIALIZED_PACKET	m3/backports/recipes/jep-458-current,m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jep458BackportRecipe.java	PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	OPT_IN	COMPATIBLE_TOOLING	REVIEWED_POSTIMAGES_ALREADY_PRESENT	NOT_AUTHORIZED	
-2	23	474	ZGC: Generational Mode by Default	gc-runtime	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	OPT_IN	COMPATIBLE_RUNTIME			
-3	24	484	Class-File API	library	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	NO	OPT_IN_SE_API_EXTENSION			
-4	24	485	Stream Gatherers	library	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	NO	OPT_IN_SE_API_EXTENSION			
+2	23	474	ZGC: Generational Mode by Default	gc-runtime	candidate	20	MATERIALIZED_PACKET	m3/backports/recipes/jep-474-generational-zgc	PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	OPT_IN	COMPATIBLE_RUNTIME	EQUIVALENCE_PROOF_PENDING	NOT_AUTHORIZED	BUILD_CURRENT_MASTER_AND_PROVE_BOTH_ZGC_MODES_WITH_JAVA21_DEFAULT_UNCHANGED
+3	24	484	Class-File API	library	candidate	20	PACKET_EVIDENCE	m3/backports/recipes/jep-484-classfile-api	PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	NO	OPT_IN_SE_API_EXTENSION			
+4	24	485	Stream Gatherers	library	candidate	20	MATERIALIZED_PACKET	m3/backports/recipes/jep-485-gatherers,m3/backports/recipes/jep-485-gatherers-recovery	PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	NO	OPT_IN_SE_API_EXTENSION	PRODUCT_INTEGRATION_PRESENT	NOT_AUTHORIZED	RUN_JAVA21_BUILD_GATHERER_JTREG_AND_FIXED_POINT_PROOF
 5	24	493	Linking Run-Time Images without JMODs	tool-jlink-runtime-image	candidate	20	MATERIALIZED_PACKET	m3/backports/recipes/jep-493-runtime-image	PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	OPT_IN	COMPATIBLE_TOOLING	PACKET_READY	NOT_AUTHORIZED	GENERATE_FILE_ATOMIC_JAVA_TEXT_CRATES_THEN_COMPOSE_MULTI_MODULE_PACKET
 6	24	496	Quantum-Resistant Module-Lattice-Based Key Encapsulation Mechanism	security-library	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT					
 7	24	497	Quantum-Resistant Module-Lattice-Based Digital Signature Algorithm	security-library	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT					
@@ -14,7 +14,7 @@ order	release	jep	title	domain	disposition	priority	evidence_state	evidence_path
 12	23	467	Markdown Documentation Comments	tool-javadoc-javac-doc	candidate-high-risk	40	MATERIALIZED_PACKET	m3/backports/recipes/jep-467-markdown	CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF	NO	OPT_IN_SOURCE_TOOLING	PACKET_READY	NOT_AUTHORIZED	GENERATE_FILE_ATOMIC_JAVA_TEXT_CRATES_AND_REVIEW_LIBRARY_API_JOIN
 13	24	475	Late Barrier Expansion for G1	gc-hotspot-compiler	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF					
 14	24	483	Ahead-of-Time Class Loading & Linking	runtime-aot-cds	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF	CANDIDATE	COMPATIBLE_RUNTIME			
-15	24	491	Synchronize Virtual Threads without Pinning	runtime-threads	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF					
+15	24	491	Synchronize Virtual Threads without Pinning	runtime-threads	candidate-high-risk	40	PACKET_EVIDENCE	m3/backports/recipes/j491	CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF					
 16	25	506	Scoped Values	library-runtime	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF					
 17	25	509	JFR CPU-Time Profiling (Experimental)	monitoring-jfr-native	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF					
 18	25	514	Ahead-of-Time Command-Line Ergonomics	tool-runtime-aot	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF	CANDIDATE	COMPATIBLE_TOOLING			
@@ -39,4 +39,4 @@ order	release	jep	title	domain	disposition	priority	evidence_state	evidence_path
 37	23	469	Vector API (Eighth Incubator)	library-hotspot-compiler	hold-jit	80	NO_RECIPE_EVIDENCE		CLOSE_HOTSPOT_JIT_DEPENDENCY_PROOF	NO	OPT_IN_JDK_API_EXTENSION			
 38	24	489	Vector API (Ninth Incubator)	library-hotspot-compiler	hold-jit	80	NO_RECIPE_EVIDENCE		CLOSE_HOTSPOT_JIT_DEPENDENCY_PROOF					
 39	25	508	Vector API (Tenth Incubator)	library-hotspot-compiler	hold-jit	80	NO_RECIPE_EVIDENCE		CLOSE_HOTSPOT_JIT_DEPENDENCY_PROOF					
-40	27	537	Vector API (Twelfth Incubator)	library-hotspot-compiler	hold-jit	80	NO_RECIPE_EVIDENCE		CLOSE_HOTSPOT_JIT_DEPENDENCY_PROOF					
+40	27	537	Vector API (Twelfth Incubator)	library-hotspot-compiler	hold-jit	80	NO_RECIPE_EVIDENCE		CLOSE_HOTSPOT_JIT_DEPENDENCY_PROOF
