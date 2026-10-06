@@ -60,6 +60,9 @@ public final class M3RecipeScopeRegistry {
                     explicitChange()),
             Map.entry(
                     "com.m3.rewrite.backport.M3PqSecurityDependencyInventoryRecipe",
+                    fixed(M3EditScope.MODULE)),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3Jdk8340327Java21InternalRecipe",
                     fixed(M3EditScope.MODULE)));
 
     private M3RecipeScopeRegistry() {}
