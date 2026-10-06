@@ -30,7 +30,7 @@ release	jep	title	domain	disposition	reason	superseded_by
 24	479	Remove the Windows 32-bit x86 Port	removal	reject-compat	Removal conflicts with JDK 21 compatibility preservation.	
 24	483	Ahead-of-Time Class Loading & Linking	runtime-aot-cds	candidate-high-risk	Runtime/CDS enhancement with no Java grammar change; requires AOT/CDS dependency closure and Java 21 startup/class-loading parity proof.	
 24	484	Class-File API	library	candidate	Final library API; no Java grammar change, but requires classfile/version compatibility audit.	
-24	485	Stream Gatherers	library	candidate	Final library API; no Java grammar change.	
+24	485	Stream Gatherers	library	candidate	Final JDK24 library API; current-master source-sealed recovery restored with Java21 dependency adaptation; build/jtreg/runtime proof pending.	
 24	486	Permanently Disable the Security Manager	compatibility-security	reject-compat	Intentional behavioral incompatibility with JDK 21.	
 24	487	Scoped Values (Fourth Preview)	library-runtime	superseded	Use final JEP 506.	506
 24	488	Primitive Types in Patterns, instanceof, and switch (Second Preview)	language	reject-language	Requires Java grammar/javac semantic changes.	
