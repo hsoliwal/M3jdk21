@@ -25,6 +25,7 @@ atom = read("src/java.base/share/classes/java/lang/M3StringAtom.java")
 tuple_ = read("src/java.base/share/classes/java/lang/M3StringTuple.java")
 facts = read("src/java.base/share/classes/java/lang/M3StringFacts.java")
 search_precompute = read("src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java")
+position_precompute = read("src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java")
 tq = read("src/java.base/share/classes/jdk/internal/mindex/M3TQ.java")
 string = read("src/java.base/share/classes/java/lang/String.java")
 symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
@@ -99,6 +100,46 @@ for fragment in [
 ]:
     if fragment not in tuple_:
         fail(f"M3StringTuple bulk range projection missing: {fragment}")
+
+# Position masks are a separate bounded weak-owner lane. They store one conservative signal per
+# 64 UTF-16 units and may skip blocks only on a negative signal.
+for fragment in [
+    "private static final int BLOCK_SIZE = 1 << BLOCK_SHIFT;",
+    "private static final int SLOTS = 64;",
+    "private static final int MAX_SOURCE_UNITS = 32_768;",
+    "WeakReference<M3StringOwner>",
+    "long[] signals",
+    "M3StringFacts.codeUnitSignal(unit)",
+    "static long maximumRetainedPrimitiveBytes()",
+]:
+    if fragment not in position_precompute:
+        fail(f"M3 position precompute invariant missing: {fragment}")
+for fragment in [
+    "M3StringPositionPrecompute.indexOf(this, unit, fromIndex, endIndex)",
+    "M3StringPositionPrecompute.lastIndexOf(this, unit, fromIndex)",
+]:
+    if fragment not in m3:
+        fail(f"M3 String position precompute route missing: {fragment}")
+if "M3StringPositionPrecompute" not in string:
+    # String delegates through M3String methods; do not require direct coupling.
+    if "return storage.indexOf((char) ch" not in string or "return storage.lastIndexOf((char) ch" not in string:
+        fail("java.lang.String BMP search lost M3 position-precompute route")
+
+for fragment in [
+    "int indexOfCodePoint(int codePoint, int fromIndex, int endIndex)",
+    "int lastIndexOfCodePoint(int codePoint, int fromIndex)",
+    "candidate = indexOf(high, fromIndex",
+    "candidate = lastIndexOf(high",
+]:
+    if fragment not in m3:
+        fail(f"M3 supplementary position-precompute route missing: {fragment}")
+for fragment in [
+    "return storage.indexOfCodePoint(ch, from, storage.length());",
+    "return storage.indexOfCodePoint(ch, beginIndex, endIndex);",
+    "return storage.lastIndexOfCodePoint(ch, from);",
+]:
+    if fragment not in string:
+        fail(f"String supplementary M3 route missing: {fragment}")
 
 # Exact trigram membership is owned by M3TQ.Facts and reused by a separate bounded weak
 # source-range cache. Do not duplicate exact trigram arrays in M3StringFacts.
@@ -308,16 +349,40 @@ for surface, marker in critical_surfaces.items():
     if marker not in string:
         fail(f"critical String surface lost M3 route: {surface}")
 
+# Canonical equality may use Java hash only as a negative filter. Equal hashes still require
+# exact UTF-16 comparison because collisions are part of the String.hashCode contract.
+for fragment in [
+    "if (sameCoordinate(that)) return true;",
+    "if (hashCodeValue() != that.hashCodeValue()) return false;",
+    "if (charAt(index) != other.charAt(index)) return false;",
+]:
+    if fragment not in m3:
+        fail(f"M3 collision-safe equality path missing: {fragment}")
+
 # Range hashes and ASCII case hashes are negative filters only; exact comparison remains in
 # String.regionMatches for every surviving candidate.
 for fragment in [
     "leftRange.hashCodeValue() != rightRange.hashCodeValue()",
     "leftFacts.asciiLowerHash != rightFacts.asciiLowerHash",
+    "leftFacts.asciiUpperHash != rightFacts.asciiUpperHash",
+    "leftFacts.asciiTitleHash != rightFacts.asciiTitleHash",
 ]:
     if fragment not in string:
         fail(f"M3 region precompute filter missing: {fragment}")
 if "for (int index = 0; index < len; index++)" not in string:
     fail("exact region comparison loop missing after precompute filter")
+
+# Case conversion is canonical only for ASCII + Locale.ROOT. Locale-sensitive and non-ASCII
+# transformations must continue through the stock JDK case engine.
+for fragment in [
+    "locale.equals(Locale.ROOT) && storage.facts().ascii",
+    "storage.asciiCase(false)",
+    "storage.asciiCase(true)",
+]:
+    if fragment not in string:
+        fail(f"M3 ROOT ASCII case boundary missing: {fragment}")
+if "M3String asciiCase(boolean upper)" not in m3:
+    fail("M3String ROOT ASCII canonical case mapper missing")
 
 # M3-backed constructors must store only the empty compatibility sentinel.
 if string.count("storage.compatibilityValue()") < 4:
@@ -330,6 +395,24 @@ if "if (UseM3StringStorage)" not in stringopts:
 if "if (java_lang_String::is_m3_joined(string))" not in archive_writer:
     fail("CDS String sizing is not fail-closed for M3 values")
 
+
+# Canonical single-unit transforms must re-enter the native pool directly rather than create
+# temporary one-character String/byte[] payloads.
+for fragment in [
+    "static M3String internUnit(char unit)",
+    "M3StringAtom.localUnit(unit, coder, id, hash64)",
+    "existing.charAt(0) == unit",
+]:
+    if fragment not in pool:
+        fail(f"M3 direct unit interning missing: {fragment}")
+for fragment in [
+    "M3StringPool.internUnit(mapped)",
+    "M3StringPool.internUnit(newChar)",
+]:
+    if fragment not in m3:
+        fail(f"M3 canonical transform still detours through String: {fragment}")
+if "canonicalize(String.valueOf(mapped))" in m3 or "canonicalize(String.valueOf(newChar))" in m3:
+    fail("M3 canonical single-unit transform reintroduced one-char String churn")
 
 # VM-local native atoms must not be retained forever by the canonical lookup table.
 # Live M3String/Tuple owners provide the strong lifetime. The pool keeps weak refs and frees
