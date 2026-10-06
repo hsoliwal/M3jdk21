@@ -1774,12 +1774,17 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
     }
 
     private final void appendChars(String s, int off, int end) {
+        M3String storage = s.m3();
         if (isLatin1()) {
             if (s.isLatin1()) {
-                System.arraycopy(s.value(), off, this.value, this.count, end - off);
+                if (storage != null) {
+                    s.getBytes(this.value, off, this.count, LATIN1, end - off);
+                } else {
+                    System.arraycopy(s.value(), off, this.value, this.count, end - off);
+                }
             } else {
                 // We might need to inflate, but do it as late as possible since
-                // the range of characters we're copying might all be latin1
+                // the range of characters we're copying might all be latin1.
                 byte[] val = this.value;
                 for (int i = off, j = count; i < end; i++) {
                     char c = s.charAt(i);
@@ -1788,7 +1793,16 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
                     } else {
                         count = j;
                         inflate();
-                        System.arraycopy(s.value(), i << UTF16, this.value, j << UTF16, (end - i) << UTF16);
+                        if (storage != null) {
+                            s.getBytes(this.value, i, j, UTF16, end - i);
+                        } else {
+                            System.arraycopy(
+                                    s.value(),
+                                    i << UTF16,
+                                    this.value,
+                                    j << UTF16,
+                                    (end - i) << UTF16);
+                        }
                         count += end - i;
                         return;
                     }
@@ -1796,8 +1810,15 @@ abstract sealed class AbstractStringBuilder implements Appendable, CharSequence
             }
         } else if (s.isLatin1()) {
             StringUTF16.putCharsSB(this.value, this.count, s, off, end);
+        } else if (storage != null) {
+            s.getBytes(this.value, off, this.count, UTF16, end - off);
         } else { // both UTF16
-            System.arraycopy(s.value(), off << UTF16, this.value, this.count << UTF16, (end - off) << UTF16);
+            System.arraycopy(
+                    s.value(),
+                    off << UTF16,
+                    this.value,
+                    this.count << UTF16,
+                    (end - off) << UTF16);
         }
         count += end - off;
     }
