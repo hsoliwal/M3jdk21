@@ -32,6 +32,8 @@ abstract_builder = read("src/java.base/share/classes/java/lang/AbstractStringBui
 symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
 classes = read("src/hotspot/share/classfile/vmClassMacros.hpp")
 inline = read("src/hotspot/share/classfile/javaClasses.inline.hpp")
+java_classes_cpp = read("src/hotspot/share/classfile/javaClasses.cpp")
+java_classes_hpp = read("src/hotspot/share/classfile/javaClasses.hpp")
 stringopts = read("src/hotspot/share/opto/stringopts.cpp")
 archive_writer = read("src/hotspot/share/cds/archiveHeapWriter.cpp")
 dedup = read("src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp")
@@ -357,6 +359,30 @@ if "nativeByteShadow(EMPTY, 0, 0, String.LATIN1)" not in m3:
     fail("M3String empty compatibility sentinel is not JNI-created")
 if "return storage == null ? checked.value : storage.compatibilityValue();" not in string:
     fail("JNI ingress no longer discards the temporary construction payload")
+
+# HotSpot native scratch copies must traverse canonical owner geometry in bulk. StringTable,
+# symbols and JVMTI may materialize scoped native UTF-16 scratch, but per-unit M3 DAG descent is
+# forbidden in java_lang_M3String::copy_chars.
+for fragment in [
+    "static void copy_owner_chars(",
+    "copy_owner_chars(owner(value), java_lang_M3String::start(value) + start, len, destination);",
+]:
+    if fragment not in java_classes_hpp + java_classes_cpp:
+        fail(f"HotSpot M3 structural copy contract missing: {fragment}")
+for fragment in [
+    "if (o->klass() == vmClasses::M3StringAtom_klass())",
+    "copy_chars(left, start, left_count, destination);",
+    "copy_chars(right, 0, len - left_count, destination + left_count);",
+]:
+    if fragment not in java_classes_cpp:
+        fail(f"HotSpot M3 owner-range copier missing: {fragment}")
+copy_chars_body = re.search(
+    r"void java_lang_M3String::copy_chars\((?P<body>.*?)\n\}",
+    java_classes_cpp,
+    flags=re.DOTALL,
+)
+if not copy_chars_body or "char_at(value, start + index)" in copy_chars_body.group("body"):
+    fail("HotSpot M3 copy_chars reintroduced per-unit char_at traversal")
 
 # JNI creates only the final compatibility arrays, then bulk-fills them from canonical M3
 # storage. Per-code-unit JNI dispatch and temporary C spelling buffers are forbidden.
