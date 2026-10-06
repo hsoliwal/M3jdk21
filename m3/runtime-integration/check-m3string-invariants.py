@@ -577,6 +577,18 @@ for fragment in [
     "mindex.string.mapped-fact-attachment\t7a47a8a445ca438fb59206508a42b6054956049a",
     "mindex.string.palindrome-facts\t10b4894505a6f6306f340c5ff3ef17270706b2c6",
     "mindex.string.suffix-decision\td6308bff7e3a55e77c4dc45c4f47187acb2e523b",
+    "mindex.string.mixed-owner-composition\tbe799903f32e4c53e4f591936001e7a14eefc1f6",
+    "mindex.string.bulk-utf16-segment-export\t4b6be190b6a987635f6abae180ba6bf4de3c6a8b",
+    "mindex.string.native-joined-handle-composition\t9001ac8f043c7d92f92c0e9f6d62dec4016b8ffa",
+    "mindex.string.codepoint-range-precompute\te4814bde61c442fe654156e1d5b12f3522cfd54b",
+    "mindex.string.codepoint-offset-precompute\t85bf56784afd40de2bd3b0facae8657cff08f106",
+    "mindex.string.boundary-correct-sha256\tf3d55c67dfe19138cd994d7bd7eee5ae9e99c756",
+    "mindex.string.sha256.boundary-aware-sink\t373c6d7949711af2c79168629c542683cd0071b7",
+    "mindex.string.sha256.file-range-reuse\t2fdaa26f1a51bc67fcc75b908ec3ff5d2e1962a5",
+    "mindex.string.os-shared-payload-facade\t4c0b2e6d1f048cf58580e92f2cf6478ce3296f9e",
+    "mindex.string.jdk-storage-prototype\t764260982a25207cace4230835630b37e4cdd78b",
+    "mindex.string.jdk-materialization-char-export\tee05b49b5cbe456542e93612f679c8ab8ec1f649",
+    "mindex.string.compiler-concat-reference-dag\tb0904cb2966b9a5c277edb92d9c4c025978fa794",
     "mindex.string.relation-precompute\ta217f8cc42912fdd19b757b815b8c0ac3aa9c132",
     "\tABSORB_RUNTIME\tALREADY_ABSORBED\t",
     "\tADAPT_INTERNAL_VIEW\tPENDING_CONCRETE_JDK_CONSUMER\t",
@@ -641,6 +653,45 @@ for fragment in [
 
 if "M3StringLiteralRegexMatchesTest.java" not in workflow:
     fail("history-recovered literal matches jtreg is not wired into workflow")
+
+
+# Historical structure that M3JDK already absorbs must remain represented by the stronger target
+# owner graph rather than being reintroduced as donor wrapper classes.
+for fragment in [
+    "static M3String concat(M3String left, M3String right)",
+    "if (left.owner() == right.owner() && left.end() == right.start())",
+    "M3StringTuple created = new M3StringTuple(left, right",
+]:
+    if fragment not in pool:
+        fail(f"mixed-owner M3 composition invariant missing: {fragment}")
+
+for fragment in [
+    "final M3String left;",
+    "final M3String right;",
+    "void getChars(int start, int end, char[] destination, int destinationStart)",
+    "left.getChars(start, leftLength, destination, destinationStart);",
+    "right.getChars(0, end - leftLength, destination, destinationStart + leftCount);",
+]:
+    if fragment not in tuple_:
+        fail(f"bulk child-coordinate export invariant missing: {fragment}")
+
+for forbidden_path in [
+    "src/java.base/share/classes/java/lang/SubM3String.java",
+    "src/java.base/share/classes/java/lang/M3NativeJoinedChars.java",
+]:
+    if (ROOT / forbidden_path).exists():
+        fail(f"obsolete donor wrapper taxonomy copied into M3JDK: {forbidden_path}")
+
+
+# The historical JDK-storage prototype is superseded by the actual M3 String layout. Do not
+# regress back to a donor wrapper or char[]-materialize-the-String architecture.
+if "private volatile M3String m3;" not in string:
+    fail("actual M3 String ownership no longer supersedes donor JDK-storage prototype")
+if "private final M3StringOwner owner;" not in m3 or "private final long value;" not in m3:
+    fail("M3String owner+coordinate layout lost while history marks prototype absorbed")
+if "nativeCharShadow(" not in m3:
+    fail("explicit char[] compatibility shadow boundary missing")
+
 
 # Expensive donor facts with no JDK21 semantic consumer are intentional NO_PORTs. Adding one of
 # these java.lang owners requires an explicit architecture/invariant revision and a real consumer.
