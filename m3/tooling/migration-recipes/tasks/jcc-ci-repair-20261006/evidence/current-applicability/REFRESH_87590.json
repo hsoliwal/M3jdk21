@@ -1,0 +1,121 @@
+{
+  "schema": "m3-jcc-ci-current-applicability/1",
+  "status": "ALL_NINE_SELECTED_INPUTS_UNCHANGED",
+  "executed_baseline_commit": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
+  "observed_current_commit": "87590cb96fb0e2dc0f88fae8e01957f7179cd255",
+  "observed_current_root": "6672d8a05a2324f29e38e0ab5ed242039cdf6d86",
+  "selected": [
+    {
+      "path": ".github/workflows/m3-foundation.yml",
+      "bytes": 2205,
+      "sha256": "2a81b9ebfa5d477977dba4632a0e7c89f2ebb89606eb46491197536335d63fee",
+      "git_blob": "6ad9af43935d1cc7b5e471c1e7d21f8eb1538bb9",
+      "verification": "ACTUAL_CURRENT_TREE_IDENTITY_MATCHES_HASHED_B71_BODY"
+    },
+    {
+      "path": ".github/workflows/m3-tooling-recipes.yml",
+      "bytes": 3051,
+      "sha256": "252165fedc2e2962143cbd71d0ca68d553800ba7cf9c85df164edeb4713566a1",
+      "git_blob": "d95c969805dff1f489472fb89b1c4564b3beeb5b",
+      "verification": "ACTUAL_CURRENT_TREE_IDENTITY_MATCHES_HASHED_B71_BODY"
+    },
+    {
+      "path": "m3/migration/recipe.py",
+      "bytes": 9860,
+      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628",
+      "git_blob": "02f88f9f8b1eb8930fff59684c81bb30819800ad",
+      "verification": "ACTUAL_CURRENT_TREE_IDENTITY_MATCHES_HASHED_B71_BODY"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/pom.xml",
+      "bytes": 3383,
+      "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
+      "git_blob": "86f223907bbb053f4792e6bf771c3c0882e1751b",
+      "verification": "ACTUAL_CURRENT_TREE_IDENTITY_MATCHES_HASHED_B71_BODY"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "bytes": 12032,
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "git_blob": "a2e8c916208b563517e51b738744a05357e633aa",
+      "verification": "ACTUAL_CURRENT_TREE_IDENTITY_MATCHES_HASHED_B71_BODY"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java",
+      "bytes": 6292,
+      "sha256": "eca941688f9449f54c16386c581ce162df608858526d4660473e250ed3d0f267",
+      "git_blob": "c1c9be4f9036f1335bf020498c850a0f30bd8fad",
+      "verification": "ACTUAL_CURRENT_TREE_IDENTITY_MATCHES_HASHED_B71_BODY"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "bytes": 13805,
+      "sha256": "3fc6e77a1394e292747d689a4a42a328b496000865aa390afe05d5571febd599",
+      "git_blob": "d58ca50dfaeb60f581b64f43545e688aca5c6530",
+      "verification": "ACTUAL_CURRENT_TREE_IDENTITY_MATCHES_HASHED_B71_BODY"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
+      "bytes": 5379,
+      "sha256": "58d01008f3dc6e79d988e855d76ba90eb0a13d39a76e7eb4027d75442389ec94",
+      "git_blob": "63344ac5b73c30def736f560bd9aa9348df3b97f",
+      "verification": "ACTUAL_CURRENT_TREE_IDENTITY_MATCHES_HASHED_B71_BODY"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
+      "bytes": 4974,
+      "sha256": "69882638771a411cf0866f789a7b3ef7e7e7040cde38a1c40ef4a743d37168e2",
+      "git_blob": "c1865602253b72c9d5109a6b096146e847fd86aa",
+      "verification": "ACTUAL_CURRENT_TREE_IDENTITY_MATCHES_HASHED_B71_BODY"
+    }
+  ],
+  "candidate_added_paths_absent": [
+    "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-ci-repair.yml",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/after-00-m3-foundation.yml.txt",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/after-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/after-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-00-m3-foundation.yml.txt",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/before-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/manifest.tsv",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-ci-repair-20261006/plan.json",
+    "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccCiRepairTest.java",
+    "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/CANDIDATE_DIFF.patch",
+    "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/INPUTS.json",
+    "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/README.md",
+    "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/INPUT_SEALS.json",
+    "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/LOG_DIAGNOSTICS.json",
+    "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/SUMMARY.json",
+    "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/job-111917089229.log",
+    "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/job-111917089800.log",
+    "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/job-111917090577.log",
+    "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/prior-ci/job-111917562555.log",
+    "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/test_installer.py",
+    "m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/verification/pom.xml"
+  ],
+  "candidate_added_count": 22,
+  "current_agental_instructions": {
+    "root_AGENTS_present": false,
+    "m3_or_github_AGENTS": [],
+    "historical_merge_AGENTS_read_in_full": true
+  },
+  "capture_files": [
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/current_refresh_commit.json",
+      "sha256": "90f44e673bedbfc00476bbbf85cc91793e9900876241cd87f624505570841d14"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/current_refresh_root_tree.json",
+      "sha256": "935ee67b3ce4bb166b6d82abe2feb1b2f97b4bdb1c33e0be70f47659c4d82da8"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/current_refresh_m3_tree.json",
+      "sha256": "0671a1885c5ebb583ae6eb5845ef6048d3b67c5f6abff6332e6c298fa6ce2dd6"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/calls/current_refresh_github_tree.json",
+      "sha256": "e245ce94a52bf1cc38e43568ef122164e519deef0efb7c759c98bcfdaf30b813"
+    }
+  ],
+  "scope": "Tree identity applicability only. Frozen b71 execution is not relabelled as an execution on the newer master."
+}

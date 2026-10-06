@@ -1,0 +1,55 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3JDK21 Synexia recipe home
+
+on:
+  push:
+    branches:
+      - "m3/synexia-consumer-only-*"
+    paths:
+      - "m3/compatibility/synexia-recipe-home-policy.tsv"
+      - "m3/compatibility/test_synexia_recipe_home_policy.py"
+      - "m3/tooling/migration-recipes/README.md"
+      - "m3/tooling/migration-recipes/pom.xml"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/synexia/M3SynexiaRecipeHomePolicyTest.java"
+      - "m3/docs/synexia-apache2-borrowing-contract.md"
+      - "m3/docs/SYNEXIA_CONVERGENCE_MODEL.md"
+      - ".github/workflows/m3-synexia-recipe-home.yml"
+  pull_request:
+    paths:
+      - "m3/compatibility/synexia-recipe-home-policy.tsv"
+      - "m3/compatibility/test_synexia_recipe_home_policy.py"
+      - "m3/tooling/migration-recipes/README.md"
+      - "m3/tooling/migration-recipes/pom.xml"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/synexia/M3SynexiaRecipeHomePolicyTest.java"
+      - "m3/docs/synexia-apache2-borrowing-contract.md"
+      - "m3/docs/SYNEXIA_CONVERGENCE_MODEL.md"
+      - ".github/workflows/m3-synexia-recipe-home.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Diff hygiene
+        run: git diff --check origin/master...HEAD
+      - name: Receiver policy unit test
+        run: python -m unittest m3/compatibility/test_synexia_recipe_home_policy.py
+      - name: Migration-recipes JUnit ownership proof
+        run: >
+          mvn -B -ntp
+          -f m3/tooling/migration-recipes/pom.xml
+          -Dtest=M3SynexiaRecipeHomePolicyTest
+          test

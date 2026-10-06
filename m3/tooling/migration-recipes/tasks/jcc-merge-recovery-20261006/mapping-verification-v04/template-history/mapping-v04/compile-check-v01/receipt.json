@@ -1,0 +1,65 @@
+{
+  "schema": "m3-jcc-mapping-template-compile-check/1",
+  "status": "PASS",
+  "command": [
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/jdk-21+35/bin/javac",
+    "--release",
+    "21",
+    "-proc:none",
+    "-Xlint:all",
+    "-Werror",
+    "-classpath",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar:/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar:/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar:/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar:/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar:/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+    "-d",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/java-template/compile-check-v01/classes",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/input-epoch/guards/m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/java-template/compile-check-v01/src/com/m3/rewrite/backport/JccMergeMappingRecoveryV04Test.java"
+  ],
+  "exit_code": 0,
+  "template_sha256": "6e0bce1d101e3cfb6bbe23958178572b60a62599ed87f27c6d0fbaf4ac87ae39",
+  "owner_sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+  "classpath": [
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02/org/openrewrite/rewrite-core/8.17.1/rewrite-core-8.17.1.jar",
+      "sha256": "d7c07f91ab085a39bf1b40d7f2a7796a52619aaeefeca1481435e685aa663efa"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02/com/fasterxml/jackson/core/jackson-annotations/2.16.1/jackson-annotations-2.16.1.jar",
+      "sha256": "a4730771e6a495dd3793a42cdb8ce6bddb96c77e15f40c98fd8d9a7ae09e7286"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02/com/fasterxml/jackson/core/jackson-core/2.16.1/jackson-core-2.16.1.jar",
+      "sha256": "f5f8ef90609e64fec82eb908e497dc7d81b2eb983fe509b870292a193cde4dfb"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02/com/fasterxml/jackson/core/jackson-databind/2.16.1/jackson-databind-2.16.1.jar",
+      "sha256": "baf8a8ebee8f45ef68cdd5e2dd3923b3e296c0937b96ec0b4806aa3a31bccd1d"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02/org/jetbrains/annotations/24.1.0/annotations-24.1.0.jar",
+      "sha256": "27a770dc7ce50500918bb8c3c0660c98290630ec796b5e3cf6b90f403b3033c6"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar",
+      "sha256": "d3ef575e3e4979678dc01bf1dcce51021493b4d11fb7f1be8ad982877c16a1c0"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar",
+      "sha256": "afff77c186cd317275803872fa5133aa801fd6ac40bd91c78a6cf8009b4b17cc"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar",
+      "sha256": "b56a5ec000a479df4973b18bba24c98fe0db8faa14c8907d3ef451d8c71fd8ae"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar",
+      "sha256": "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b"
+    },
+    {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar",
+      "sha256": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38"
+    }
+  ],
+  "scope": "Compile-only check of unresolved Java template and retained owner. No JUnit execution, source publication, test resource, or operational output was produced.",
+  "receiving_input_epoch_sha256": "4fd3b3bd4fb09759d8bb02ca9ba45d0b2934625f24bcc4ae195f3e49394dff70"
+}

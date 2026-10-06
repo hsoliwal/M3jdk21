@@ -1,0 +1,18 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "blob_sha": "52e0242df67d4fd11e8a99e390e1d58ff6fb7ff9"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "# SPDX-License-Identifier: Apache-2.0\n---\ntype: specs.openrewrite.org/v1beta/recipe\nname: com.m3.a3.RegexMemoryWorkflowDelivery\ndisplayName: Advance A3 regex-memory mastery workflow\ndescription: >-\n  Replays the exact A3 workflow and documentation updates for the in-memory compiler and\n  precompiled regex/string matrix gate. Candidate-only; no JDK product mutation authority.\nrecipeList:\n  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:\n      crateName: a3-regex-memory-workflow\n"
+    },
+    "isError": false
+  }
+}

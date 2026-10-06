@@ -1,0 +1,52 @@
+{
+  "schema": "m3-jcc-ci-maven-execution-request/1",
+  "start_utc": "2026-10-06T04:23:37.731342+00:00",
+  "execution_helper": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/run_maven.py",
+    "bytes": 9611,
+    "sha256": "bef1f2ccc07448f7581f4b6f9c82e181b1304fabc7a3b34b11c1683b5f0e64bd",
+    "git_blob": "45e3250da82aa043305d2f9e77d8c26a6489d9e3"
+  },
+  "inputs": {
+    "frozen_files_unchanged": 35,
+    "prepared_copies_unchanged": 31,
+    "frozen_inputs": {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/FROZEN_INPUTS.json",
+      "bytes": 9164,
+      "sha256": "1a567f6004a2817284ce738397cca6140ed52b331412e6d218dafaef64391f7b",
+      "git_blob": "ea005a61b2b9665db2d814f80a84345fbd6a2236"
+    },
+    "prepared_inputs": {
+      "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/02-maven-inputs.json",
+      "bytes": 12667,
+      "sha256": "5101c49d98ef8cba46f436cde4db686093ab6b05280a1aee39984fb307fade9c",
+      "git_blob": "01deef895f41b6fb701fb5d891f507437411a330"
+    }
+  },
+  "toolchain_receipt": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/TOOLCHAIN.json",
+    "bytes": 119876,
+    "sha256": "78d32a40d2dcb8c8740345a5340d9bd290e87692b103b2fa6575b5f2d95cd3c9",
+    "git_blob": "9dc36c2488507d60488d711fbfe4a172443b6657"
+  },
+  "cache": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/cache-v02",
+  "cache_custody": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/CACHE_V02_REVALIDATED.json",
+    "bytes": 665,
+    "sha256": "f32d293d492ead6af3e61c4c1844458a569a668784ae50758e9296adfc031382",
+    "git_blob": "20372bea6bc8ec614c2071699229214a05e6c3c8"
+  },
+  "argv": [
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/apache-maven-3.9.9/bin/mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-Dmaven.repo.local=/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/cache-v02",
+    "-Dm3.ci.materialized=/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/materialized-01",
+    "-f",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/maven-workspace/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/verification/pom.xml",
+    "test"
+  ],
+  "materialized_destination": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/materialized-01",
+  "scope": "Finite diagnostic using an exact frozen artifact cache; native source custody and broad admission remain separate. Focused frozen two-owner/eight-method lane; no whole-module or JDK build claim."
+}

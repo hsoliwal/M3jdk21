@@ -9,6 +9,26 @@ tests, documentation and proof metadata through content-addressed handoff crates
 This is deliberate reuse, not a fork of Synexia ownership. `hsoliwal/com.synexia` remains the
 canonical convergence workspace for shared capabilities.
 
+## Canonical recipe and module ownership
+
+The borrowing rule is consumer-only for reusable M3 code.
+
+- `hsoliwal/com.synexia` is the canonical Apache-2.0 owner for reusable Maven/OpenRewrite recipe
+  implementations, recipe DAGs, atom/pattern/IOP mastery logic and shared M3Index modules.
+- `com.synexia:synexia-m3index-db` is the canonical M3Index DB coordinate; the M3JDK21-local
+  `m3/indexdb/**` tree is migration/proof residue and must not evolve into a competing owner.
+- `com.synexia:synexia-m3index-jdk-bridge` is the canonical reusable JDK-facing M3Index bridge.
+- New generic recipe logic must be authored/proved in Synexia first. M3JDK21 may retain only
+  JDK-specific backport/receiver mechanics, thin adapters, fixtures, manifests and proof harnesses.
+- Historical reusable code under `scope/**`, `atom/**`, `semantic/**` and `a3/**` remains
+  usable during migration but has no independent canonical authority.
+- A target-side discovery that improves reusable mechanics flows back to Synexia as a recipe/module
+  improvement before the dependent M3JDK21 promotion is considered complete.
+
+The machine-readable target policy is
+`m3/compatibility/synexia-recipe-home-policy.tsv`. The canonical source-side map is
+`.m3/m3jdk21-synexia-borrowing.tsv` in `hsoliwal/com.synexia`.
+
 ## Receiver sequence
 
 A generated Synexia declarative recipe executes in this order:

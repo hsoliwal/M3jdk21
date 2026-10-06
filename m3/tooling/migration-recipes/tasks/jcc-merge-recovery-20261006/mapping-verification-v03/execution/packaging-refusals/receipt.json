@@ -1,0 +1,235 @@
+{
+  "destination_gates_passed": false,
+  "finished": "2026-10-06T06:13:05.560792+00:00",
+  "harness_sha256": "f8838a064af306deee63c4428ec27d6968fefd4e827b0725ce01a00ddce8bd74",
+  "input_epoch_sha256": "027e47d20c7fb854e028487ceef341c929877a6421dbb75f6433b5cd007fe5ee",
+  "maven_cache_copied": false,
+  "new_evidence_subtree_excluded_from_original_comparison": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals",
+  "original_inputs_unchanged": true,
+  "packager_sha256": "0024b5cd5b928a6f1813113493c13d34b32257275e26b44911ea9b6d1edaea48",
+  "packager_unchanged": true,
+  "refusals": [
+    {
+      "case": "01-stale-validator-source",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-I",
+        "-B",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/package_mapping.py",
+        "--execution",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/01-stale-validator-source/workspace/execution",
+        "--validator",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/01-stale-validator-source/workspace/validator",
+        "--output",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/01-stale-validator-source/forbidden-output"
+      ],
+      "exit_code": 1,
+      "expected_exception": "AssertionError",
+      "expected_guard": "assert binding[\"source_commit\"] == source[\"commit\"]",
+      "harness_relocation": {
+        "field": "actual_source_binding.materialized_root",
+        "from": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/materialized",
+        "scope": "Harness-only relocation to the exact isolated actual Result copies",
+        "to": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/01-stale-validator-source/workspace/execution/materialized"
+      },
+      "input_copies_unchanged": true,
+      "intended_exception_observed": true,
+      "intended_guard_observed": true,
+      "mutation": {
+        "field": "actual_source_binding.source_commit",
+        "from": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+        "identity_origin": "Exact actual historical before-02.txt",
+        "to": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc"
+      },
+      "output_created": false,
+      "status": "PASS",
+      "stderr_sha256": "0282f5b09d46ced4145ce13f516d43e6f51ef8ef29a09804260441336c0af0f3",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "02-changed-actual-output",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-I",
+        "-B",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/package_mapping.py",
+        "--execution",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/02-changed-actual-output/workspace/execution",
+        "--validator",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/02-changed-actual-output/workspace/validator",
+        "--output",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/02-changed-actual-output/forbidden-output"
+      ],
+      "exit_code": 1,
+      "expected_exception": "AssertionError",
+      "expected_guard": "assert sha(body) == row[\"after_sha256\"]",
+      "harness_relocation": {
+        "field": "actual_source_binding.materialized_root",
+        "from": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/materialized",
+        "scope": "Harness-only relocation to the exact isolated actual Result copies",
+        "to": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/02-changed-actual-output/workspace/execution/materialized"
+      },
+      "input_copies_unchanged": true,
+      "intended_exception_observed": true,
+      "intended_guard_observed": true,
+      "mutation": {
+        "kind": "append bytes to isolated actual Result copy",
+        "path": "materialized/m3/docs/name-mapping.json"
+      },
+      "output_created": false,
+      "status": "PASS",
+      "stderr_sha256": "3cc1d5b1d774c598b5d64faf4456447fc1d9af505549bad00d51a29ff03e481f",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "03-drifted-replay-resource",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-I",
+        "-B",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/package_mapping.py",
+        "--execution",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/03-drifted-replay-resource/workspace/execution",
+        "--validator",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/03-drifted-replay-resource/workspace/validator",
+        "--output",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/03-drifted-replay-resource/forbidden-output"
+      ],
+      "exit_code": 1,
+      "expected_exception": "AssertionError",
+      "expected_guard": "assert sha(body) == sealed[path][\"sha256\"]",
+      "harness_relocation": {
+        "field": "actual_source_binding.materialized_root",
+        "from": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/materialized",
+        "scope": "Harness-only relocation to the exact isolated actual Result copies",
+        "to": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/03-drifted-replay-resource/workspace/execution/materialized"
+      },
+      "input_copies_unchanged": true,
+      "intended_exception_observed": true,
+      "intended_guard_observed": true,
+      "mutation": {
+        "kind": "append bytes to isolated replay resource",
+        "path": "bound-inputs/resources/after-00.txt"
+      },
+      "output_created": false,
+      "status": "PASS",
+      "stderr_sha256": "bf07127a855b9d4990f842d1a2e02458225a2927aa11ae80c880f941e77c14f5",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "04-duplicate-operational-row",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-I",
+        "-B",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/package_mapping.py",
+        "--execution",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/04-duplicate-operational-row/workspace/execution",
+        "--validator",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/04-duplicate-operational-row/workspace/validator",
+        "--output",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/04-duplicate-operational-row/forbidden-output"
+      ],
+      "exit_code": 1,
+      "expected_exception": "AssertionError",
+      "expected_guard": "assert len(resources[\"rows\"]) == 4",
+      "harness_relocation": {
+        "field": "actual_source_binding.materialized_root",
+        "from": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/materialized",
+        "scope": "Harness-only relocation to the exact isolated actual Result copies",
+        "to": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/04-duplicate-operational-row/workspace/execution/materialized"
+      },
+      "input_copies_unchanged": true,
+      "intended_exception_observed": true,
+      "intended_guard_observed": true,
+      "mutation": {
+        "kind": "duplicate one existing actual row",
+        "path": "bound-inputs/MAPPING_RESOURCES.json"
+      },
+      "output_created": false,
+      "status": "PASS",
+      "stderr_sha256": "b4fbc805910ae1f71fcb5aa3da333c36dd617104edbfb046dff3c53671e264cb",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "05-mismatched-source-root",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-I",
+        "-B",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/package_mapping.py",
+        "--execution",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/05-mismatched-source-root/workspace/execution",
+        "--validator",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/05-mismatched-source-root/workspace/validator",
+        "--output",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/05-mismatched-source-root/forbidden-output"
+      ],
+      "exit_code": 1,
+      "expected_exception": "AssertionError",
+      "expected_guard": "assert resources[\"source_root_tree\"] == receipt[\"source_root_tree\"]",
+      "harness_relocation": {
+        "field": "actual_source_binding.materialized_root",
+        "from": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/materialized",
+        "scope": "Harness-only relocation to the exact isolated actual Result copies",
+        "to": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/05-mismatched-source-root/workspace/execution/materialized"
+      },
+      "input_copies_unchanged": true,
+      "intended_exception_observed": true,
+      "intended_guard_observed": true,
+      "mutation": {
+        "field": "source_root_tree",
+        "from": "a72565e0e67f330f12c712dcc7a3fcbe1d80d24e",
+        "identity_origin": "Exact actual historical before-02.txt",
+        "to": "3a270e543f9a547582ebda8ac8b69bfd134c41be"
+      },
+      "output_created": false,
+      "status": "PASS",
+      "stderr_sha256": "837752cc8670c4cc506817a11da38fa2fda0549cf7fb8d6cc6f6288d1dd048fa",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "06-missing-cache-provenance",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-I",
+        "-B",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/package_mapping.py",
+        "--execution",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/06-missing-cache-provenance/workspace/execution",
+        "--validator",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/06-missing-cache-provenance/workspace/validator",
+        "--output",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/06-missing-cache-provenance/forbidden-output"
+      ],
+      "exit_code": 1,
+      "expected_exception": "FileNotFoundError",
+      "expected_guard": "cache_proof / \"VERIFIED_CACHE.json\"",
+      "harness_relocation": {
+        "field": "actual_source_binding.materialized_root",
+        "from": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/materialized",
+        "scope": "Harness-only relocation to the exact isolated actual Result copies",
+        "to": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v03/execution-actual-v01/packaging-refusals/cases/06-missing-cache-provenance/workspace/execution/materialized"
+      },
+      "input_copies_unchanged": true,
+      "intended_exception_observed": true,
+      "intended_guard_observed": true,
+      "mutation": {
+        "kind": "remove isolated proof copy",
+        "path": "cache-proof/VERIFIED_CACHE.json"
+      },
+      "output_created": false,
+      "status": "PASS",
+      "stderr_sha256": "088d2e1967e93c8ff9be7be3b6d55675436b624c00321d68425436a13f98a44b",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "schema": "m3-jcc-package-refusal-verification/1",
+  "scope": "Six isolated negative packaging checks over qualified actual inputs. No successful package/publication control and no invented source publication identities.",
+  "source_commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+  "source_export_admitted": false,
+  "source_root_tree": "a72565e0e67f330f12c712dcc7a3fcbe1d80d24e",
+  "started": "2026-10-06T06:13:04.946890+00:00",
+  "status": "PASS",
+  "successful_package_control": false
+}

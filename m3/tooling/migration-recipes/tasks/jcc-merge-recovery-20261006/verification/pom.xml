@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3.verification</groupId><artifactId>jcc-merge-recovery</artifactId><version>20261006</version>
+  <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
+  <dependencies>
+    <dependency><groupId>org.slf4j</groupId><artifactId>slf4j-api</artifactId><version>1.7.36</version></dependency>
+    <dependency><groupId>org.jetbrains</groupId><artifactId>annotations</artifactId><version>24.1.0</version><scope>provided</scope></dependency>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-core</artifactId><version>8.17.1</version></dependency>
+    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
+  </dependencies>
+  <build>
+    <sourceDirectory>${project.basedir}/../../../src/main/java</sourceDirectory>
+    <testSourceDirectory>${project.basedir}/../../../src/test/java</testSourceDirectory>
+    <resources><resource><directory>${project.basedir}/../../../src/main/resources</directory><includes>
+      <include>com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-*/**</include>
+      <include>com/m3/rewrite/backport/jcc-merge-recovery-20261006/**</include>
+      <include>META-INF/rewrite/m3-jcc-merge-recovery.yml</include>
+    </includes></resource></resources>
+    <plugins>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
+        <configuration><showWarnings>true</showWarnings><failOnWarning>true</failOnWarning><compilerArgs><arg>-Xlint:all</arg></compilerArgs>
+          <includes><include>com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include></includes>
+          <testIncludes><testInclude>com/m3/rewrite/backport/JccMergeRecoveryTest.java</testInclude></testIncludes>
+        </configuration>
+      </plugin>
+      <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>
+        <configuration><useModulePath>false</useModulePath><failIfNoTests>true</failIfNoTests><includes><include>**/JccMergeRecoveryTest.java</include></includes></configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

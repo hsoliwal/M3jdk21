@@ -1,0 +1,18 @@
+{
+  "commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+  "exception": "AssertionError at verify_supplemental_inputs.py line 166: actual_entry[\"sha\"] == identity and actual_entry[\"type\"] == \"blob\"",
+  "exit_code": 1,
+  "frozen_publication_packet_changed": false,
+  "mismatches": [
+    {
+      "actual": "ca7cd9e9ffcad9c73d8eaf6a5eec81142b009b89",
+      "expected": "c31b8efff91c3b8f8829376d385944640f036c77",
+      "path": "m3/docs/name-mapping.json",
+      "result": "DRIFT",
+      "size": 279411
+    }
+  ],
+  "root": "0812573f02908d8078d13f5f49346865cdf1c0e0",
+  "schema": "m3-jcc-receiving-refresh-failure/1",
+  "status": "REFUSED_CURRENT_PREIMAGE_DRIFT"
+}

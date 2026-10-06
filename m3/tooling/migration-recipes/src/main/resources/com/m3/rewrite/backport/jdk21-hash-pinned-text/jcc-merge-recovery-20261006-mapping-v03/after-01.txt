@@ -1,0 +1,105 @@
+# Current JCC receiving recovery, 2026-10-06
+
+The canonical mapping now binds current source `bc06298218dd88f0164ed9b67e74fd8234ed70b2`, root `a72565e0e67f330f12c712dcc7a3fcbe1d80d24e`, from `refs/heads/aix/jcc-qualified-recipes-20261006`. The 14 laboratory and 6 Java/JNI source owners have explicit body, Git blob and SHA-256 identities. All 52 mapping IDs retain their order; 50 other records, all 25 current top-level mapping objects, 20 gates and M3-owned precompute policy are preserved.
+
+The 443 recovered receiving artifacts retain their historical 0b/d1/0c53 and donor 4990 evidence. They are registered as historical custody in the existing retention audit. The previous source publication and receiver history are preserved; current execution reports appear separately in [source-destination-bindings.json](../migration/evidence/jcc-handoff-20261005/source-destination-bindings.json).
+
+Both JCC capability records remain blocked. Source export, whole-module coverage, actual merge/CI and applicable M3JDK21 image/runtime/JNI/native/platform/performance gates retain their existing requirements. M3JDK21 owns the runtime; Synexia supplies donor code and evidence. Recipe replay and historical custody do not establish a rebuilt-JDK pass.
+
+The current exact destination input is `c0a14387009aefc7d62bd3268055d526e04f9074`, root `491bbd80a51483d0710fc12c1bad3a037b385ba0`. The separately qualified Synexia recipe-module POM compile edge is bound as source build provenance; it adds no M3JDK21 runtime dependency. The four current operational files are updated only by the existing hash-pinned text recipe and sealed installer. Its current source publication input is immutable, late-bound and refuses fixture or history-only identities.
+
+## Earlier notes, preserved as historical context
+
+# JCC source handoff through the existing M3JDK21 receiving lifecycle
+
+## Scope and decision
+
+This packet reconciles the existing migration ledger and records the blocked JCC receiving work. It adds two capability records to `m3/docs/name-mapping.json`: `synexia.jcc-recipe-laboratory` and `synexia.jcc-java-jni-regression`. Both remain `blocked`, with empty capability test claims. Existing destination compiler and atom owners are reused by an independently authored candidate tooling fixture. Its finite executed proof is linked separately; a source Mastery engine is not copied into the destination.
+
+The selected source is [com.synexia at 0b8dc32b9e8a616b7b7141bbdd88722839dc64bc](https://github.com/hsoliwal/com.synexia/tree/0b8dc32b9e8a616b7b7141bbdd88722839dc64bc). The destination preimage is [M3jdk21 at da958d00d24154c0db87beca0ec80a7df2b43b73](https://github.com/hsoliwal/M3jdk21/tree/da958d00d24154c0db87beca0ec80a7df2b43b73). Their exact root trees, source/target file hashes, proposed capability IDs, and separate acceptance flags are recorded in [source-destination-bindings.json](../migration/evidence/jcc-handoff-20261005/source-destination-bindings.json).
+
+The one reconciled existing record is `synexia.counterpart.MIndexJvmDescriptor`. It remains `implemented-unverified`, with current target and actual descriptor-recipe identities, its former targets in the existing lineage fields, and its earlier evidence retained as historical evidence. The other 43 existing records, all 20 gate records, legacy mappings, global historical source/target observations, and incomplete coverage flags are preserved unchanged. A valid ledger does not mean the migration is complete.
+
+## One authority and the actual execution owners
+
+The operational authority is [name-mapping.json](name-mapping.json), governed by [name-mapping.schema.json](name-mapping.schema.json) and [migration.py](../migration/migration.py). The descriptive [migration lifecycle](migration-mapping-lifecycle.md) explicitly keeps atom/pattern lineage in reviewed receipts linked from this authority. Its separate `migration-mapping.schema.json` is illustrative; its process-state vocabulary is not substituted for the operational schema.
+
+The retained `migration.py` reads the existing Synexia `InventoryWriter` TSV format and produces source-change, target-adaptation, conflict, unobserved, and unmapped-path review decisions. It does not apply a port or prove semantic equivalence. Its `extend` command is for the original one-time migration extension and refuses an already existing, differing extension. Later row reconciliation uses a reviewed exact preimage/postimage through the existing recipe owners.
+
+This packet uses `com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe` with crate `jcc-handoff-20261005`. The corresponding sealed plan is executable by the existing `m3/migration/recipe.py` `check`, `apply`, `rollback`, and `recover` modes. Both describe the same four output paths and exact bytes. The sealed installer also guards the current schema, validator, replay owner, text transformer, owning Maven POM, descriptor target and descriptor recipe. Guards and exact preimages must be reviewed again if the destination moves. Neither tool grants source export or product promotion authority.
+
+The co-retained `m3/migration/lineage.py` expects a different `migration.schema`/`entries` dialect. This packet uses the actual `migration.version=1`/`records` authority and its validator. No second mapping registry, scanner, compiler, scheduler, or automatic cross-repository service is introduced.
+
+## Complete root accounting, explicitly bounded file coverage
+
+The [root coverage obligations](../migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv) derive from the complete, rehashed current source root tree `3a270e543f9a547582ebda8ac8b69bfd134c41be` and its exact unchanged root POM blob `98889a040aad5cc3c82f782bb4b173d118207988`. Every root entry has an explicit row, including files, directories and the separately pinned gitlink.
+
+| Observed denominator | Count | Meaning |
+| --- | ---: | --- |
+| Current root entries | 343 | Every entry is accounted; descendant coverage is separate. |
+| Root trees | 255 | Directory identities; they are not automatically Maven modules. |
+| Root blobs | 87 | File identities retained in the same ledger. |
+| Root gitlinks | 1 | Its contents require a separately pinned traversal. |
+| Distinct root-POM module declarations | 201 | 200 project declarations and one profile-only declaration. |
+| Direct root module paths | 190 | Exact root paths named by the POM. |
+| Nested module paths | 11 | Located in eight root trees. |
+| Root trees containing nested declarations | 8 | Four are also direct modules; four are additional containers. |
+| Distinct root trees referenced by declarations | 194 | Union of direct module roots and additional containers. |
+
+These rows reference the existing `family.entire-source-closure` obligation. They do not claim a directory is one semantic owner, that an entire module is mapped, or that the whole-repository file denominator is known. The root report is a derived review artifact; it is not a substitute `InventoryWriter` TSV or an exhaustive symbol inventory. The 503 exact source/resource bindings inspected for the current source preflight are a separate scoped acquisition, with no whole-repository compile or behavioral claim. Non-prefix files, resources, generated producers, native consumers and platform obligations remain in the source-canon inventory work.
+
+## Capability and interface crosswalk
+
+| JCC source work | Existing destination owner | Required receiving treatment |
+| --- | --- | --- |
+| Source Mastery and bounded schedule exploration | `M3RecipeMasteryLab` remains source-owned; destination reuses its own `M3IntRecipeProjectTest` and actual recipes | Port reviewed fixtures and expectations only after source qualification; compare every intermediate target project to its immutable original. |
+| Atomization, pattern/IOP and documentation | `M3PureIntAtomEligibility`, `M3PureIntConvergenceRecipe`, and its atomize/patternize/document children | Retain the exact private static scalar-int domain. Broader source effects, calls, fields, arrays, reference values and JNI cases require explicit unchanged/refusal or wider-scope treatment. |
+| Canonical destination convergence | `M3Java21ConvergenceRecipe` and `M3Java21ConvergenceCatalog` | The Java wrapper also includes upstream `RemoveUnusedImports`; the declarative catalogue currently has four atom/inventory children. Bind the exact activation path and recipe identity, not merely a similar name. |
+| In-memory candidate compilation | Package-private `MemJava.compile(Map<String,String>)` | Reuse Java21, disabled processors, empty class/source paths, strict diagnostics, isolated output loader and duplicate-class-output refusal. A source loader repair does not imply this different loader needs replacement. |
+| Code-looking strings, comments, Unicode and line coordinates | Existing typed OpenRewrite atom owners and target project controls | Keep opaque data separate from typed code. Preserving one finite source fixture is not evidence of arbitrary Java grammar or regex equivalence. |
+| Literal/regex observations, native code and JNI receipts | Actual receiving string/regex/native owner remains unresolved for this increment | Carry source provenance and finite cases without claiming destination implementation. Preserve Java UTF-16 units, exceptions, native acquisition/release rules, lifetime and payload authority. |
+| LeetCode, HackerRank and GeeksforGeeks problem categories | Source catalogue and its reviewed provenance | Category classification and donor links identify review/fixture candidates; neither establishes an implemented algorithm, redistribution permission, nor target correctness. |
+
+The destination's existing in-memory project test has its own bounded arithmetic, effect, exception, member-surface and fixed-point obligations. Its inspected source body is distinct from the newly executed original receiving fixture below. Neither fixture transfers source execution counts into destination acceptance.
+
+## Executed original receiving fixture
+
+The candidate [`JccReceivingFixtureTest`](../tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/JccReceivingFixtureTest.java) is independently authored in the retained destination domain. Its exact test SHA256 is `b034673ea218515cc12ab0b4173eabf06732f29e8a456be45b5ba0d00489ab39`; its mapping target uses a null commit and `candidate` revision role until committed read-back is recorded separately. It imports no source Mastery engine or source proof count.
+
+The [frozen corpus contract](../tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/CORPUS_CONTRACT.md) specifies two Java files, four private scalar-int leaves and 113 deterministic input pairs. The actual A, P, AP and PA schedules retain their distinct meanings: A already creates pattern-marked new atoms, while P marks a deliberately unmarked existing atom. AP and PA converge; A-only and P-only remain different. Each intermediate and quiet replay step compiles through unchanged `MemJava` and is checked against the immutable original and an independent arithmetic oracle. Explicit ascending and descending file maps both execute; their key orders are asserted different before the results are compared.
+
+Opaque code-looking strings, marker-looking strings, Java null versus string-null, empty text and a supplementary Unicode character remain exact. The fixture also preserves its member surfaces, checks loader-local state, and rejects malformed Java plus valid numeric and string mutants. The [executed receipt](../tooling/migration-recipes/tasks/jcc-handoff-20261005/receiving-e02/VERIFICATION_RECEIPT.json) records offline Maven `clean verify`: **4 tests, zero failures, errors or skips**. The revised test, prose and input hashes were frozen before this run. The earlier enumeration-order gap and its historical first run remain explicit in the retained contract and revision diff.
+
+This is candidate tooling development. The [owning-module frontier](../tooling/migration-recipes/tasks/jcc-handoff-20261005/owning-module-frontier/REVIEW.json) binds the full observed module tree: 605 tracked non-tree inputs, 32 acquired exact bodies and 573 bodies not acquired. The default main/test Java and resource closure is incomplete, and the pinned JaCoCo 0.8.15 POM and JAR are absent from the selected offline repository. The full owning-module `clean verify` was therefore not executed against the partial overlay. Its existing scope/atom bundle still requires 99% line and branch coverage. No focused POM substitutes for that gate, and no JDK/JNI image or product gate passed as a result of this fixture.
+
+## Source export and destination acceptance are separate
+
+| Dimension | Current packet state | Evidence needed to advance |
+| --- | --- | --- |
+| Source known | Current root and selected source artifacts are exactly bound. | Complete source-canon file, semantic-owner and dependency closure. |
+| Source tested | Historical finite source receipts remain attached to their own epochs. | Current exact source recipe/template/output parity and executed compiler/JUnit/JNI obligations. |
+| Mapping reviewed | This bounded ledger crosswalk is reviewable; root units remain unreviewed. | Owning capability/interface review and explicit disposition of every affected source unit. |
+| Export admitted | False for JCC. | Actual source-canon checkpoint, history and pattern admission on the chosen source execution root. |
+| Destination capability materialized | False for source-qualified JCC capability; the separate original candidate tooling fixture is locally materialized and tested. | Admit the applicable source handoff and bind its receiving outputs and committed identities. |
+| Destination gates | The original finite candidate fixture passes; full module and product gates remain unestablished. | Exact owning-module 99% line/branch and applicable Java/JNI/image/runtime proof. |
+| Remote read-back delivered | False in the authored packet. | Read back the final destination commit, affected objects and PR state after publication. |
+
+The source verification order is owned by `RepositorySupersetBundle.VerificationGate` and `RepositorySupersetVerificationProgram`: DIFF, POLICY_LINT, COMPILE, STATIC_ANALYSIS, UNIT_TEST, INTEGRATION_TEST, API_CONTRACT, FULL_BUILD, RUNTIME, REPLAY, SOURCE_HASH_PRESERVATION. It is distinct from the source's eleven ordered scope passes, its separate crate-obligation enum, and the destination's 20 stored migration gates. The checkpoint requires the same source execution root, complete strict coverage, ordered successful gates, develop-bound restored history, and nonempty fully patternized admission. Its result is not mutation or promotion permission. This receipt does not claim that checkpoint was executed.
+
+The [tooling boundary](atom-pattern-admission-and-tooling-boundary.md) keeps Maven, OpenRewrite, JUnit and donor inventories outside the JDK product. Java21 grammar/types, public interfaces, classfile/VM behavior and JNI ABI remain locked. An admitted FILE transformation does not make API, VM, GC, JIT or JNI changes file-local. Canonical promotion remains serial and evidence-gated.
+
+## The inherited descriptor mapping drift
+
+The old recorded target hash `df17c48e54de060060e4393e5c2f3e8e2f068bad38a69576a82709cc6d4cbdb9` is verified at [f74592e363466a59b391fbbe47500c7985c9a691](https://github.com/hsoliwal/M3jdk21/blob/f74592e363466a59b391fbbe47500c7985c9a691/src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java). The original `sync.target_revision` is its parent, where that exact path is absent. The original candidate reference and the separately verified historical target are both retained in `lineage.previous_targets`; the complete original record remains in the binding receipt.
+
+[Commit 39702564163c017f9dc0350a305b032b06274857](https://github.com/hsoliwal/M3jdk21/commit/39702564163c017f9dc0350a305b032b06274857) replaced manual `Class.getName()` substitution with `Objects.requireNonNull(type, "type").descriptorString()`. Its hidden-class spelling correction is intentional. The retained target at the destination pin has SHA256 `1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67`; the source `MIndexJvmDescriptor` is byte-identical at its historical source pin and current `0b8dc32b...` and retains the older algorithm.
+
+The active recipe reference now points to the actual `jdk22-descriptor` manifest and `com.m3.rewrite.backport.Descriptor`. That historical crate label is not a Java22/JEP claim. The old cb receipt is preserved unchanged; the retained descriptor task separately reports a scoped stock-Java21 patch experiment and failed/unexecuted broader control/image obligations. No descriptor Java is changed or executed by this ledger reconciliation. The record stays `implemented-unverified`, target-only adaptation remains explicit, and ordinary validator target/recipe hash checks remain enabled.
+
+## Reproduction and proof limits
+
+Use the focused Maven/JUnit crate at `m3/tooling/migration-recipes/verification/jcc-handoff/pom.xml` to test the actual retained text transformer, exact four-target replay, fresh fixed point, drift/duplicate/missing-source refusal, scan-to-visit integrity, preservation of the 43 unrelated records and all 20 gates, historical descriptor lineage, and blocked acceptance flags. The owning migration-recipes Maven pins are unchanged. The named entrypoint `com.m3.rewrite.backport.JccSourceHandoff` and serialized owner are also exercised. This text-packet suite compiles tooling and transforms reviewed JSON/Markdown/TSV; the separate original receiving fixture supplies its own finite Java proof, and neither is a JNI or product-runtime proof.
+
+Use the existing `migration.py validate` with the candidate root and the original map as `--previous`. Validate the complete current mapping against its actual target/recipe/receipt input closure, not a document containing only the new rows. `complete` must still refuse while the existing coverage/gate obligations and new blocked records remain. The existing sealed installer must independently prove check/apply/idempotence/rollback/replay and refuse changed guards or mixed snapshots. Local executed results belong in the task verification receipt, with exact inputs, commands, environment and outputs; test source presence is not a passed result.
+
+After current source qualification, review every changed source item through the existing inventory/reconciliation owners, prepare the exact applicable destination fixture packet, rerun the destination proof, and bind the final committed output identities. Advance recorded source review only when each affected capability/atom has an explicit disposition. Deferred work remains visible, and no ongoing synchronization is promised by this packet.

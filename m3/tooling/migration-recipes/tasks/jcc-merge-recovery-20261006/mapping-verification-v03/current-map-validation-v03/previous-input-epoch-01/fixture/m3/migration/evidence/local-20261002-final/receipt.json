@@ -1,0 +1,252 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-02T02:29:37.744013+00:00",
+  "execution": "local-scoped-classpath",
+  "repository_checkout": "five hash-pinned actual target classes; not a complete checkout",
+  "source_baseline": "75fb1abaecb56969bea2914520bbe819f130632b",
+  "target_baseline": "d6390ea3bb348f0c22afdba0819ca4ec0e97970f",
+  "environment": {
+    "os": "Linux-6.18.44-x86_64-with-glibc2.41",
+    "architecture": "x86_64",
+    "java": "openjdk version \"21.0.11\" 2026-04-21\nOpenJDK Runtime Environment (build 21.0.11+10-1-deb13u2-Debian)\nOpenJDK 64-Bit Server VM (build 21.0.11+10-1-deb13u2-Debian, mixed mode, sharing)\n",
+    "python": "3.13.5 (main, Jul 15 2026, 20:25:40) [GCC 14.2.0]",
+    "jsonschema": "4.26.0"
+  },
+  "runs": [
+    {
+      "id": "javac21",
+      "command": [
+        "javac",
+        "--release",
+        "21",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "/tmp/m3-scoped-tests-hzkpqr0d",
+        "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java",
+        "m3/algorithms/test/PrefixZContractTest.java",
+        "m3/algorithms/test/ViewInteropContractTest.java",
+        "m3/core/src/com/m3/text/JoinedM3StringPiece.java",
+        "m3/core/src/com/m3/text/LocalM3Arena.java",
+        "m3/core/src/com/m3/text/LocalM3StringPiece.java",
+        "m3/core/src/com/m3/text/M3StringPiece.java",
+        "m3/core/src/com/m3/text/StorageIdentity.java",
+        "m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+        "m3/migration/test/RecipeContractTest.java"
+      ],
+      "exit_code": 0,
+      "status": "passed",
+      "inputs": {
+        "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
+        "m3/algorithms/test/PrefixZContractTest.java": "caf6ae362eca1a056a9024658a68d6e3eaf289ff2b952080fe519c86f4cc8448",
+        "m3/algorithms/test/ViewInteropContractTest.java": "9e72a70b33cbb9c8b9123893ff98054671c5694657b36bc4d965c14a047b19f7",
+        "m3/core/src/com/m3/text/JoinedM3StringPiece.java": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
+        "m3/core/src/com/m3/text/LocalM3Arena.java": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
+        "m3/core/src/com/m3/text/LocalM3StringPiece.java": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
+        "m3/core/src/com/m3/text/M3StringPiece.java": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
+        "m3/core/src/com/m3/text/StorageIdentity.java": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
+        "m3/migration/pinned-dependencies.json": "579e16ad7591bf27deaf35c2178dde7b050ebfc4c631302d0d07b85d6805cfba",
+        "m3/migration/run-tests.py": "98dceb71a2a83e431d2417a613a23f825967718ae4a540585ab860e8ee2f33a9",
+        "m3/migration/src/com/m3/migration/ExactFileRecipe.java": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90",
+        "m3/migration/test/RecipeContractTest.java": "bc6d57072811b232b774a835615c8ede038b5cbbb19a4f8d48badae25214ceea"
+      },
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_path": "m3/migration/evidence/local-20261002-final/javac21.log"
+    },
+    {
+      "id": "prefix-z-normal",
+      "command": [
+        "java",
+        "-ea",
+        "-cp",
+        "/tmp/m3-scoped-tests-hzkpqr0d",
+        "PrefixZContractTest"
+      ],
+      "exit_code": 0,
+      "status": "passed",
+      "inputs": {
+        "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
+        "m3/algorithms/test/PrefixZContractTest.java": "caf6ae362eca1a056a9024658a68d6e3eaf289ff2b952080fe519c86f4cc8448",
+        "m3/algorithms/test/ViewInteropContractTest.java": "9e72a70b33cbb9c8b9123893ff98054671c5694657b36bc4d965c14a047b19f7",
+        "m3/core/src/com/m3/text/JoinedM3StringPiece.java": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
+        "m3/core/src/com/m3/text/LocalM3Arena.java": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
+        "m3/core/src/com/m3/text/LocalM3StringPiece.java": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
+        "m3/core/src/com/m3/text/M3StringPiece.java": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
+        "m3/core/src/com/m3/text/StorageIdentity.java": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
+        "m3/migration/pinned-dependencies.json": "579e16ad7591bf27deaf35c2178dde7b050ebfc4c631302d0d07b85d6805cfba",
+        "m3/migration/run-tests.py": "98dceb71a2a83e431d2417a613a23f825967718ae4a540585ab860e8ee2f33a9",
+        "m3/migration/src/com/m3/migration/ExactFileRecipe.java": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90",
+        "m3/migration/test/RecipeContractTest.java": "bc6d57072811b232b774a835615c8ede038b5cbbb19a4f8d48badae25214ceea"
+      },
+      "stdout_sha256": "67eee524a18f5dcbb9793a54c338504293fbc8a8f01baba714029966c02ae780",
+      "stdout_path": "m3/migration/evidence/local-20261002-final/prefix-z-normal.log"
+    },
+    {
+      "id": "view-interop-normal",
+      "command": [
+        "java",
+        "-ea",
+        "-cp",
+        "/tmp/m3-scoped-tests-hzkpqr0d",
+        "ViewInteropContractTest"
+      ],
+      "exit_code": 0,
+      "status": "passed",
+      "inputs": {
+        "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
+        "m3/algorithms/test/PrefixZContractTest.java": "caf6ae362eca1a056a9024658a68d6e3eaf289ff2b952080fe519c86f4cc8448",
+        "m3/algorithms/test/ViewInteropContractTest.java": "9e72a70b33cbb9c8b9123893ff98054671c5694657b36bc4d965c14a047b19f7",
+        "m3/core/src/com/m3/text/JoinedM3StringPiece.java": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
+        "m3/core/src/com/m3/text/LocalM3Arena.java": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
+        "m3/core/src/com/m3/text/LocalM3StringPiece.java": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
+        "m3/core/src/com/m3/text/M3StringPiece.java": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
+        "m3/core/src/com/m3/text/StorageIdentity.java": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
+        "m3/migration/pinned-dependencies.json": "579e16ad7591bf27deaf35c2178dde7b050ebfc4c631302d0d07b85d6805cfba",
+        "m3/migration/run-tests.py": "98dceb71a2a83e431d2417a613a23f825967718ae4a540585ab860e8ee2f33a9",
+        "m3/migration/src/com/m3/migration/ExactFileRecipe.java": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90",
+        "m3/migration/test/RecipeContractTest.java": "bc6d57072811b232b774a835615c8ede038b5cbbb19a4f8d48badae25214ceea"
+      },
+      "stdout_sha256": "1cf2a7fc2a2b063391e8ec65dc1b36e0b2516162e53bb656607d9c4d1c70dc5e",
+      "stdout_path": "m3/migration/evidence/local-20261002-final/view-interop-normal.log"
+    },
+    {
+      "id": "prefix-z-interpreter",
+      "command": [
+        "java",
+        "-Xint",
+        "-ea",
+        "-cp",
+        "/tmp/m3-scoped-tests-hzkpqr0d",
+        "PrefixZContractTest"
+      ],
+      "exit_code": 0,
+      "status": "passed",
+      "inputs": {
+        "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
+        "m3/algorithms/test/PrefixZContractTest.java": "caf6ae362eca1a056a9024658a68d6e3eaf289ff2b952080fe519c86f4cc8448",
+        "m3/algorithms/test/ViewInteropContractTest.java": "9e72a70b33cbb9c8b9123893ff98054671c5694657b36bc4d965c14a047b19f7",
+        "m3/core/src/com/m3/text/JoinedM3StringPiece.java": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
+        "m3/core/src/com/m3/text/LocalM3Arena.java": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
+        "m3/core/src/com/m3/text/LocalM3StringPiece.java": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
+        "m3/core/src/com/m3/text/M3StringPiece.java": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
+        "m3/core/src/com/m3/text/StorageIdentity.java": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
+        "m3/migration/pinned-dependencies.json": "579e16ad7591bf27deaf35c2178dde7b050ebfc4c631302d0d07b85d6805cfba",
+        "m3/migration/run-tests.py": "98dceb71a2a83e431d2417a613a23f825967718ae4a540585ab860e8ee2f33a9",
+        "m3/migration/src/com/m3/migration/ExactFileRecipe.java": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90",
+        "m3/migration/test/RecipeContractTest.java": "bc6d57072811b232b774a835615c8ede038b5cbbb19a4f8d48badae25214ceea"
+      },
+      "stdout_sha256": "67eee524a18f5dcbb9793a54c338504293fbc8a8f01baba714029966c02ae780",
+      "stdout_path": "m3/migration/evidence/local-20261002-final/prefix-z-interpreter.log"
+    },
+    {
+      "id": "view-interop-interpreter",
+      "command": [
+        "java",
+        "-Xint",
+        "-ea",
+        "-cp",
+        "/tmp/m3-scoped-tests-hzkpqr0d",
+        "ViewInteropContractTest"
+      ],
+      "exit_code": 0,
+      "status": "passed",
+      "inputs": {
+        "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
+        "m3/algorithms/test/PrefixZContractTest.java": "caf6ae362eca1a056a9024658a68d6e3eaf289ff2b952080fe519c86f4cc8448",
+        "m3/algorithms/test/ViewInteropContractTest.java": "9e72a70b33cbb9c8b9123893ff98054671c5694657b36bc4d965c14a047b19f7",
+        "m3/core/src/com/m3/text/JoinedM3StringPiece.java": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
+        "m3/core/src/com/m3/text/LocalM3Arena.java": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
+        "m3/core/src/com/m3/text/LocalM3StringPiece.java": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
+        "m3/core/src/com/m3/text/M3StringPiece.java": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
+        "m3/core/src/com/m3/text/StorageIdentity.java": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
+        "m3/migration/pinned-dependencies.json": "579e16ad7591bf27deaf35c2178dde7b050ebfc4c631302d0d07b85d6805cfba",
+        "m3/migration/run-tests.py": "98dceb71a2a83e431d2417a613a23f825967718ae4a540585ab860e8ee2f33a9",
+        "m3/migration/src/com/m3/migration/ExactFileRecipe.java": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90",
+        "m3/migration/test/RecipeContractTest.java": "bc6d57072811b232b774a835615c8ede038b5cbbb19a4f8d48badae25214ceea"
+      },
+      "stdout_sha256": "1cf2a7fc2a2b063391e8ec65dc1b36e0b2516162e53bb656607d9c4d1c70dc5e",
+      "stdout_path": "m3/migration/evidence/local-20261002-final/view-interop-interpreter.log"
+    },
+    {
+      "id": "exact-recipe-contract",
+      "command": [
+        "java",
+        "-ea",
+        "-cp",
+        "/tmp/m3-scoped-tests-hzkpqr0d",
+        "RecipeContractTest"
+      ],
+      "exit_code": 0,
+      "status": "passed",
+      "inputs": {
+        "m3/algorithms/src/com/m3/algorithm/M3PrefixZ.java": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
+        "m3/algorithms/test/PrefixZContractTest.java": "caf6ae362eca1a056a9024658a68d6e3eaf289ff2b952080fe519c86f4cc8448",
+        "m3/algorithms/test/ViewInteropContractTest.java": "9e72a70b33cbb9c8b9123893ff98054671c5694657b36bc4d965c14a047b19f7",
+        "m3/core/src/com/m3/text/JoinedM3StringPiece.java": "694ee6a9fa06803244fd56d7a846da16f1560d242a0660ae2f4a927c43fc3dcb",
+        "m3/core/src/com/m3/text/LocalM3Arena.java": "99e6adce8be83bf6ebbe2128409e4f34cff88e0d06602c95e21f64a27898b73d",
+        "m3/core/src/com/m3/text/LocalM3StringPiece.java": "06370c193953ead287f6fd6c423e12bd7761da8bf1c825dacd7445afe1876b51",
+        "m3/core/src/com/m3/text/M3StringPiece.java": "d43e66b414d96ba4b16b8cc94f64fa5a01c2dcb350ad58050105b04996486479",
+        "m3/core/src/com/m3/text/StorageIdentity.java": "b1e4fcbd385adc7c01c56d0f6a6af63d42ef0e6fa75b46d66d8d75c64c7a6417",
+        "m3/migration/pinned-dependencies.json": "579e16ad7591bf27deaf35c2178dde7b050ebfc4c631302d0d07b85d6805cfba",
+        "m3/migration/run-tests.py": "98dceb71a2a83e431d2417a613a23f825967718ae4a540585ab860e8ee2f33a9",
+        "m3/migration/src/com/m3/migration/ExactFileRecipe.java": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90",
+        "m3/migration/test/RecipeContractTest.java": "bc6d57072811b232b774a835615c8ede038b5cbbb19a4f8d48badae25214ceea"
+      },
+      "stdout_sha256": "03768da3eb30d806aec3fbbfd7e7d02f19678cc6a9ddf408e23c104f03deea6f",
+      "stdout_path": "m3/migration/evidence/local-20261002-final/exact-recipe-contract.log"
+    },
+    {
+      "id": "migration-validator",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "m3/migration/test",
+        "-p",
+        "test_migration.py",
+        "-v"
+      ],
+      "exit_code": 0,
+      "status": "passed",
+      "inputs": {
+        "m3/docs/name-mapping.schema.json": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+        "m3/migration/migration.py": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+        "m3/migration/pinned-dependencies.json": "579e16ad7591bf27deaf35c2178dde7b050ebfc4c631302d0d07b85d6805cfba",
+        "m3/migration/requirements.txt": "bdba948e9222f540dff178ccceebf97e496e1c360257c6434b8eac8cabf154a5",
+        "m3/migration/run-tests.py": "98dceb71a2a83e431d2417a613a23f825967718ae4a540585ab860e8ee2f33a9",
+        "m3/migration/test/test_migration.py": "01fa8c629c0002974a86c0ee363817f383ae4c88c61a399cc619d61c86c24413"
+      },
+      "stdout_sha256": "b2fb0fd773357eb654847bfd77abe86eb8e13a942beade0561ef941a313f2506",
+      "stdout_path": "m3/migration/evidence/local-20261002-final/migration-validator.log"
+    },
+    {
+      "id": "stock-string-surface",
+      "command": [
+        "javap",
+        "-public",
+        "-s",
+        "java.lang.String"
+      ],
+      "exit_code": 0,
+      "status": "passed",
+      "inputs": {
+        "m3/migration/pinned-dependencies.json": "579e16ad7591bf27deaf35c2178dde7b050ebfc4c631302d0d07b85d6805cfba",
+        "m3/migration/run-tests.py": "98dceb71a2a83e431d2417a613a23f825967718ae4a540585ab860e8ee2f33a9"
+      },
+      "stdout_sha256": "f445224da51272448a0bb476fa03be6660f4bcce88c656580330cc3d1abd1f12",
+      "stdout_path": "m3/migration/evidence/local-20261002-final/stock-string-surface.log"
+    }
+  ],
+  "failure": null,
+  "not_executed": [
+    "complete source inventory",
+    "full MIndex source-owner test reactor",
+    "Maven lifecycle",
+    "complete OpenJDK image build",
+    "modified-JDK runtime and JIT acceptance",
+    "Windows native execution",
+    "performance/retained-memory benchmarks"
+  ]
+}

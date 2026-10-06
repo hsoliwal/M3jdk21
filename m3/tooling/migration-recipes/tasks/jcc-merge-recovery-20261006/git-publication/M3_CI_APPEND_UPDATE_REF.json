@@ -1,0 +1,21 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "branch_name": "aix/jcc-receiving-recovery-20261006",
+    "sha": "293961a4cbf86c1f5afd5466e97ccb15a847186f",
+    "expected_sha": "946fd922c1d878e3f32309c83d132057a7ef8451",
+    "force": false
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "success": true
+    },
+    "isError": false
+  }
+}

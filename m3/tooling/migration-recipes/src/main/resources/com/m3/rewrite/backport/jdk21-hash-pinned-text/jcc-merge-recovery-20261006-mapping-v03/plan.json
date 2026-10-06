@@ -1,0 +1,85 @@
+{
+  "schema": "m3.sealed-install/1",
+  "recipe_id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-merge-recovery-20261006-mapping-v03",
+  "version": 1,
+  "source_commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+  "destination_base": "c0a14387009aefc7d62bd3268055d526e04f9074",
+  "scope": "Exact current 20-owner mapping metadata; source and destination acceptance remain blocked",
+  "outputs": [
+    {
+      "path": "m3/docs/jcc-source-handoff.md",
+      "before": {
+        "resource": "before-01.txt",
+        "sha256": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337"
+      },
+      "after": {
+        "resource": "after-01.txt",
+        "sha256": "261be30cb15a192623c861087985b84c50942c4f8dc61dcc4e1154f995866150"
+      }
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "before": {
+        "resource": "before-00.txt",
+        "sha256": "335045274ea3ae01d576290b56704ec3409ef1bd27c8c220348815c5bbb711da"
+      },
+      "after": {
+        "resource": "after-00.txt",
+        "sha256": "cd154a05fc8f5d40234e35cd30fc0dd7ced0e483bc7e416479758125b159e077"
+      }
+    },
+    {
+      "path": "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+      "before": {
+        "resource": "before-03.txt",
+        "sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b"
+      },
+      "after": {
+        "resource": "after-03.txt",
+        "sha256": "0cba435844da64936b50f039ebe12ffaa56fa39a3f86f20206c6d0874e61050c"
+      }
+    },
+    {
+      "path": "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+      "before": {
+        "resource": "before-02.txt",
+        "sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126"
+      },
+      "after": {
+        "resource": "after-02.txt",
+        "sha256": "e2535210d308ffc06b9c54243f31b5bcc55ba8797cf59584eb9cc929b012c7d7"
+      }
+    }
+  ],
+  "guards": [
+    {
+      "path": "m3/docs/name-mapping.schema.json",
+      "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b"
+    },
+    {
+      "path": "m3/migration/migration.py",
+      "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"
+    },
+    {
+      "path": "m3/migration/recipe.py",
+      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/pom.xml",
+      "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1"
+    }
+  ],
+  "plan_sha256": "ec52694868c4a8090afd556b5c985fe06c152bccdb3ee19d1d113bd86cf31862"
+}

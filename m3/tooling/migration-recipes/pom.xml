@@ -3,7 +3,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.m3.tooling</groupId><artifactId>migration-recipes</artifactId><version>0.1.0-SNAPSHOT</version>
-  <properties><maven.compiler.release>21</maven.compiler.release><project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><rewrite.version>8.17.1</rewrite.version><jacoco.version>0.8.15</jacoco.version></properties>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <rewrite.version>8.17.1</rewrite.version>
+    <jacoco.version>0.8.15</jacoco.version>
+    <m3.synexia.version>1.0.0-SNAPSHOT</m3.synexia.version>
+  </properties>
   <dependencies>
     <!-- OpenRewrite 8.17.1 publishes PlainText from rewrite-core transitively; there is no rewrite-text artifact. -->
     <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java</artifactId><version>${rewrite.version}</version></dependency>
@@ -60,4 +66,35 @@
       </executions>
     </plugin>
   </plugins></build>
+
+  <profiles>
+    <!--
+      Canonical reusable recipes are owned by hsoliwal/com.synexia.
+      This profile is intentionally opt-in so a missing/unpublished local Synexia snapshot cannot
+      break the default M3JDK21 receiver build. Install the pinned Synexia reactor first, then
+      activate this profile and select a com.synexia.* recipe explicitly.
+    -->
+    <profile>
+      <id>m3-synexia-canonical-recipes</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.openrewrite.maven</groupId>
+            <artifactId>rewrite-maven-plugin</artifactId>
+            <version>5.23.1</version>
+            <dependencies>
+              <dependency>
+                <groupId>com.synexia</groupId>
+                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <version>${m3.synexia.version}</version>
+              </dependency>
+            </dependencies>
+            <configuration>
+              <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

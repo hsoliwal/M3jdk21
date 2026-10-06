@@ -1,0 +1,27 @@
+{
+  "request": {
+    "url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/37422112578/jobs?per_page=100"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "{\"total_count\":0,\"jobs\":[]}",
+      "title": "jobs",
+      "modified_date": null,
+      "url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/37422112578/jobs?per_page=100",
+      "display_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/37422112578/jobs?per_page=100",
+      "display_title": "jobs",
+      "structuredContent": {
+        "title": "jobs",
+        "content": "{\"total_count\":0,\"jobs\":[]}",
+        "display_url": "https://api.github.com/repos/hsoliwal/com.synexia/actions/runs/37422112578/jobs?per_page=100"
+      }
+    },
+    "isError": false
+  }
+}

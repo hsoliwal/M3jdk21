@@ -1,0 +1,67 @@
+{
+  "schema": "independent-actual-raw-readback-failure/v1",
+  "status": "ACTUAL_REQUIRED_RAW_READBACK_FAILED",
+  "failure_observation_sha256": "224b3baa99e71c846cc96319c0a829eec3521d75f68731332ac2fa59fa214112",
+  "conditional_prior_admission_preserved": true,
+  "actual_raw_gate_passed": false,
+  "verification_commit": "9dab34bd9e34e4d661004482248b5b02d94e0816",
+  "verification_tree": "bf2b8fe43cda47f0c6363c8d376f61419e647e4d",
+  "verification_parent": "be92c62ece9023b5c33676716a1076d00e26120a",
+  "retained_response_outcomes": [
+    {
+      "row_index": 0,
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-nul/parser-dependencies.tsv",
+      "reported_git_blob": "9e48fa497f59343f91fc5e2c36b9aba9cbc8b63d",
+      "expected_git_blob": "9e48fa497f59343f91fc5e2c36b9aba9cbc8b63d",
+      "returned_bytes_git_blob": "9e48fa497f59343f91fc5e2c36b9aba9cbc8b63d",
+      "expected_bytes": 126,
+      "returned_bytes": 126,
+      "expected_sha256": "88b78c08bf896f77b97603f99bad089c19330ca2816edb1c240a84799cb8bfa0",
+      "returned_sha256": "88b78c08bf896f77b97603f99bad089c19330ca2816edb1c240a84799cb8bfa0",
+      "body_bytes_equal": true,
+      "reported_sha_matches_expected": true,
+      "returned_bytes_match_reported_sha": true,
+      "expected_base64": "c3JjL21haW4vamF2YS9maXh0dXJlL0RlcGVuZGVuY3kuamF2YQljYjFhY2U5ZmNhODhkZWM5NzM2YWY5NWM5NmFkZGRjM2YwMWNjYjg0OTA0ZWQ3ZDJjZjdjZmRjZDI4OTBiYzYzCURlcGVuZGVuY3kuamF2YS50eHQKIwAK",
+      "returned_base64_normalized": "c3JjL21haW4vamF2YS9maXh0dXJlL0RlcGVuZGVuY3kuamF2YQljYjFhY2U5ZmNhODhkZWM5NzM2YWY5NWM5NmFkZGRjM2YwMWNjYjg0OTA0ZWQ3ZDJjZjdjZmRjZDI4OTBiYzYzCURlcGVuZGVuY3kuamF2YS50eHQKIwAK"
+    },
+    {
+      "row_index": 1,
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/parser/resources/com/synexia/rewrite/hash-pinned-java/parser-bad-manifest-utf8/parser-dependencies.tsv",
+      "reported_git_blob": "59b4ec83f687499a54f15695b9b246599f9579d7",
+      "expected_git_blob": "59b4ec83f687499a54f15695b9b246599f9579d7",
+      "returned_bytes_git_blob": "e7899a723174a98aabfe18ddbd3178156a00f92f",
+      "expected_bytes": 4,
+      "returned_bytes": 6,
+      "expected_sha256": "823a8864668594f33fd21b51f42c08643d90be2f0d903653175047f5d0298e6c",
+      "returned_sha256": "ab8fcdea4db1c99df632d5e63c8ab9a490708cb86e924b088e16394daf96a7dd",
+      "body_bytes_equal": false,
+      "reported_sha_matches_expected": true,
+      "returned_bytes_match_reported_sha": false,
+      "expected_base64": "I8MoCg==",
+      "returned_base64_normalized": "I++/vSgK"
+    }
+  ],
+  "awaited_response_indexes_not_retained": [
+    2,
+    3
+  ],
+  "unretained_responses_are_not_claimed_unrun_or_successful": true,
+  "publication_activity_limit_from_root_observation": "Only original file responses 0 and 1 retained after the four awaited calls; do not fabricate responses 2 and 3. No final source payload tree batches, final source commit, branch, or PR at this observation.",
+  "synthesized_successful_raw_body_entries": 0,
+  "repo_source_fixture_manifest_verifier_changes": 0,
+  "reviewer_remote_reads_or_writes": 0,
+  "alternative_custody": {
+    "status": "CONCEPT_JUDGMENT_ONLY_PENDING_FROZEN_V3_REVIEW",
+    "proposed_identity_only_git_blobs": [
+      "59b4ec83f687499a54f15695b9b246599f9579d7",
+      "24cdc62e634934527d551324c2449bcf951b5589"
+    ],
+    "mandatory_direct_readbacks": 6,
+    "basis": "Captured exact base64 create request bytes and returned Git object identities plus complete immutable verification/final tree membership; ordinary Git/GitHub object identity assumptions.",
+    "limits": "Does not recover the two remote byte arrays or establish a remotely observed SHA-256; must remain separately labeled and cannot satisfy the original V2 body gate by fabricated normalization."
+  },
+  "primary_documents_consulted": [
+    "https://git-scm.com/docs/git-hash-object",
+    "https://docs.github.com/en/rest/git/blobs"
+  ]
+}

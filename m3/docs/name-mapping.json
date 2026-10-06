@@ -5047,33 +5047,189 @@
         "id": "synexia.jcc-recipe-laboratory",
         "kind": "dependency-reuse",
         "status": "blocked",
-        "reason": "Blocked source-qualified JCC laboratory handoff with an independently authored destination candidate tooling fixture. Its finite four-test proof is linked separately; source export, owning-module coverage, JDK gates and committed capability acceptance remain unadmitted.",
+        "reason": "Current 20-owner source publication is bound after exact readback; historical source and receiving work is retained. Source export, whole owning-module coverage and applicable M3JDK21 runtime/JNI/platform gates remain unadmitted.",
         "sources": [
           {
             "repo": "hsoliwal/com.synexia",
-            "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
             "module": "synexia-openrewrite-recipes",
             "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
             "symbol": "com.synexia.rewrite.M3RecipeMasteryLab",
             "signatures": [],
-            "sha256": "0054ddf028c5a83c270c1a53795373c7cd8fa77395d23be7fd70424b644b0a3e",
-            "git_blob_sha1": "ee8adf451105c34d0afa228fe05b7dabb3b1e264",
+            "sha256": "af846d370fca10d2eb088650ae4829c6315ccffde23c0838f5d437955528d41e",
+            "git_blob_sha1": "2a79148c50889767a9ac75116a3ddb6a4b96f33f",
             "fingerprint": null,
             "revision_role": "pinned",
-            "tracking_ref": "refs/heads/develop"
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
           },
           {
             "repo": "hsoliwal/com.synexia",
-            "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
             "module": "synexia-openrewrite-recipes",
             "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
             "symbol": "com.synexia.rewrite.M3RecipeMasterySchedulePlanner",
             "signatures": [],
-            "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb",
-            "git_blob_sha1": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc",
+            "sha256": "77af0c2460ea075d1103b551f04fb046852065f5ec05745d0647bb25dda12ce8",
+            "git_blob_sha1": "2cd0b6ec34ea12a5443f5c8959360c9e7c9e5908",
             "fingerprint": null,
             "revision_role": "pinned",
-            "tracking_ref": "refs/heads/develop"
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+            "symbol": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+            "signatures": [],
+            "sha256": "824e51c244d70b802cfe1f95e37503925cf271e9cc703d433b537c528a129c66",
+            "git_blob_sha1": "d1c607f5d944e82d15856ec16cad9f163558aee3",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
+            "symbol": "com.synexia.rewrite.M3OpenRewriteRuntimeRecipeInventoryRecipe",
+            "signatures": [],
+            "sha256": "f498b969bb9e5a79f66bb87d8232d0045144145d0167751dc342ba85b0ff4d15",
+            "git_blob_sha1": "3351a83e4429c4ac172f5af09998777c6b69c645",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+            "symbol": "com.synexia.rewrite.M3OpenRewriteTranspiler",
+            "signatures": [],
+            "sha256": "ca98114b1f46cc0858d674393f7ac86d3e92cbbb66842cc511709e725239c911",
+            "git_blob_sha1": "d06c42aa8ad27118497cd057d1aef8168e4e97f5",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeCrateSerialAtomReview.java",
+            "symbol": "com.synexia.rewrite.M3RecipeCrateSerialAtomReview",
+            "signatures": [],
+            "sha256": "ead5c49ad51cf5325c5725595bf058ca73daceef092621d671aef7108f9409cc",
+            "git_blob_sha1": "7d5535a3b8deb1ad0c9f604f1f94b62194ac3e11",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SemanticCodeInventoryRecipe.java",
+            "symbol": "com.synexia.rewrite.M3SemanticCodeInventoryRecipe",
+            "signatures": [],
+            "sha256": "3a475b5a1ea098b0ce07368e4ef1080f8c888d7166ceefe85716a12d735b21cc",
+            "git_blob_sha1": "d02f33fe0be66066efb5148d0694763cfaea2392",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java",
+            "symbol": "com.synexia.rewrite.M3TranspilePass",
+            "signatures": [],
+            "sha256": "f68f4db3d6a849d172f9b168e81138429a6c16aa18745c518058436e0e8efca6",
+            "git_blob_sha1": "ef8c0ed9e64adc66dbb663fd36fa3d8a7486123c",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePassResult.java",
+            "symbol": "com.synexia.rewrite.M3TranspilePassResult",
+            "signatures": [],
+            "sha256": "596c420fbc30eb07867c03d48b56af6fab1dc6891114362dabc9e0f8ff7bbb4f",
+            "git_blob_sha1": "977b8f683dd2ab76ca2256533989f12a2814f044",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePlan.java",
+            "symbol": "com.synexia.rewrite.M3TranspilePlan",
+            "signatures": [],
+            "sha256": "3073058ea8237577b4506ce3222ee83914f68c7451db83bb3f7f8792abf8d13a",
+            "git_blob_sha1": "290b11dc5be769119cdb202262f0336ee3612313",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspileRun.java",
+            "symbol": "com.synexia.rewrite.M3TranspileRun",
+            "signatures": [],
+            "sha256": "0be8b21e6fd0ec16b21c781e6ee9d9248fa8413a4010984246fb69cf72ffd485",
+            "git_blob_sha1": "14284e82051ac5936dd82d93881228a914906c84",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryClassLoader.java",
+            "symbol": "com.synexia.rewrite.M3MasteryClassLoader",
+            "signatures": [],
+            "sha256": "e2fee64f28c2fd71db1d0f2fba8a9bf3bd4c3d210119d4e12823b7d01a98ec0a",
+            "git_blob_sha1": "b4081310a343cbd067c7deb5e907031598e82536",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryContractSurface.java",
+            "symbol": "com.synexia.rewrite.M3MasteryContractSurface",
+            "signatures": [],
+            "sha256": "d825d59df9ca7839ad06af2fd5c6ae386ce373f24eecc9184d23d1fe3261d8b1",
+            "git_blob_sha1": "0d3aed858efcc450cf24822567f4ee605e84a18d",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-openrewrite-recipes",
+            "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3IopPatternMechanicalPasses.java",
+            "symbol": "com.synexia.rewrite.M3IopPatternMechanicalPasses",
+            "signatures": [],
+            "sha256": "65ed79d4af2f48ba931d5eb5dee7710eb40e823f2c0cdbad06f45e228767b4eb",
+            "git_blob_sha1": "eaacc9846285222938eee09bb91827ed22020b1b",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
           }
         ],
         "targets": [
@@ -5211,16 +5367,16 @@
           "cached_facts": "Finite source receipts stay bound to their original source epoch and require target re-execution. The linked original receiving fixture has its own exact destination input hashes and four-test receipt; no source PASS count is transferred."
         },
         "recipe": {
-          "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-handoff-20261005",
+          "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-merge-recovery-20261006-mapping-v04",
           "version": "0.1.0-SNAPSHOT",
           "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
           "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
           "preconditions": [
-            "Exact canonical map preimage 67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb.",
-            "Use the retained text transformer and sealed-install/1 replay owner for reviewed ledger bytes.",
-            "An admitted source-canon export and destination fixture/API proof remain mandatory before any capability promotion."
+            "Four exact reviewed current mapping preimages at 09075810b55229662329a158923287e8a7118f86.",
+            "Preserve all 55 ordered IDs, 53 non-JCC records, all 34 current top-level mapping objects, precompute ownership and 20 existing gates.",
+            "Require actual verified current source publication; history-only and fixture publication identities refuse."
           ],
-          "rollback": "The paired existing recipe.py sealed plan restores exact receipt-owned preimages and refuses foreign edits; no product rollback is implied."
+          "rollback": "Existing recipe.py sealed rollback restores exact receipt-owned preimages and refuses foreign edits."
         },
         "tests": [],
         "provenance": {
@@ -5229,38 +5385,486 @@
           "copied_code": false
         },
         "sync": {
-          "source_revision": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
-          "target_revision": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+          "source_revision": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+          "target_revision": "09075810b55229662329a158923287e8a7118f86",
           "direction": "source-to-target",
           "target_adaptations": [
             "Reuse existing destination compiler/atom owners and their narrower interfaces."
           ],
           "pending": [
-            "Seal current source recipe/template/output parity and execute its real source-canon checkpoint/history/pattern audit.",
-            "Require all eleven source verification gates at the same source execution root.",
-            "Complete source-qualified fixture applicability and receiving review. The original candidate fixture passed only its bounded tooling proof; complete owning-module 99% line/branch, image and applicable JNI gates remain.",
-            "Read back the final destination objects and PR state; no automatic cross-repository synchronization exists.",
-            "Bind candidate receiving artifacts to their actual committed objects after publication; null commit and candidate revision_role remain deliberate until separate read-back evidence exists."
+            "Complete the existing source-canon checkpoint, same-root verification gates, offline dependency/source closure and whole-repository review before source export.",
+            "Carry only source-qualified applicable behavior into existing M3 owners and execute unchanged owning-module coverage plus applicable image/runtime/JNI/platform gates.",
+            "Verify the actual resulting merge tree and its required CI, retaining every historical custody obligation; commit ancestry alone does not deliver files."
           ],
           "conflicts": []
         },
         "lineage": {
-          "previous_sources": [],
-          "previous_targets": [],
+          "previous_sources": [
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
+              "symbol": "com.synexia.rewrite.M3RecipeMasteryLab",
+              "signatures": [],
+              "sha256": "0054ddf028c5a83c270c1a53795373c7cd8fa77395d23be7fd70424b644b0a3e",
+              "git_blob_sha1": "ee8adf451105c34d0afa228fe05b7dabb3b1e264",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/develop"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
+              "symbol": "com.synexia.rewrite.M3RecipeMasterySchedulePlanner",
+              "signatures": [],
+              "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb",
+              "git_blob_sha1": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/develop"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
+              "symbol": "com.synexia.rewrite.M3RecipeMasteryLab",
+              "signatures": [],
+              "sha256": "0054ddf028c5a83c270c1a53795373c7cd8fa77395d23be7fd70424b644b0a3e",
+              "git_blob_sha1": "ee8adf451105c34d0afa228fe05b7dabb3b1e264",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
+              "symbol": "com.synexia.rewrite.M3RecipeMasterySchedulePlanner",
+              "signatures": [],
+              "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb",
+              "git_blob_sha1": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+              "symbol": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+              "signatures": [],
+              "sha256": "fc13f8457af623c610651e33507aef7d74d26a3ca31f64061136f8b6540cb729",
+              "git_blob_sha1": "212086793a5dd621f4e13d096d805a74bfc04782",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
+              "symbol": "com.synexia.rewrite.M3OpenRewriteRuntimeRecipeInventoryRecipe",
+              "signatures": [],
+              "sha256": "337de272aaf58c3421b1d68870e3e83c86c629ec8d23f418e2c6129db08c99db",
+              "git_blob_sha1": "18f8dd15fb8dcb58873977ac842f662bec303908",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+              "symbol": "com.synexia.rewrite.M3OpenRewriteTranspiler",
+              "signatures": [],
+              "sha256": "cc4e0b24f50b0a6f462c8aa1ff1ddee2eea67d6043158b9e7a8f5a1e91b9e4c9",
+              "git_blob_sha1": "fd2134586b5369a0dcd62d207dbc6208168dd72f",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeCrateSerialAtomReview.java",
+              "symbol": "com.synexia.rewrite.M3RecipeCrateSerialAtomReview",
+              "signatures": [],
+              "sha256": "b11640b4d97f95e3c12299f85cf0dbba081ae70b7b6c2c4ff8b2135446be1337",
+              "git_blob_sha1": "1b4edfccece8a7e9bb5df3212e3061470f7c13d9",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SemanticCodeInventoryRecipe.java",
+              "symbol": "com.synexia.rewrite.M3SemanticCodeInventoryRecipe",
+              "signatures": [],
+              "sha256": "62be21443ad260be15f7c78ed6ceafc36cec91ba3fc0c6c7f2574b7413d095ce",
+              "git_blob_sha1": "403cf572b2eefe511d5900803098b6c782bb7b48",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java",
+              "symbol": "com.synexia.rewrite.M3TranspilePass",
+              "signatures": [],
+              "sha256": "f68f4db3d6a849d172f9b168e81138429a6c16aa18745c518058436e0e8efca6",
+              "git_blob_sha1": "ef8c0ed9e64adc66dbb663fd36fa3d8a7486123c",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePassResult.java",
+              "symbol": "com.synexia.rewrite.M3TranspilePassResult",
+              "signatures": [],
+              "sha256": "596c420fbc30eb07867c03d48b56af6fab1dc6891114362dabc9e0f8ff7bbb4f",
+              "git_blob_sha1": "977b8f683dd2ab76ca2256533989f12a2814f044",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePlan.java",
+              "symbol": "com.synexia.rewrite.M3TranspilePlan",
+              "signatures": [],
+              "sha256": "3073058ea8237577b4506ce3222ee83914f68c7451db83bb3f7f8792abf8d13a",
+              "git_blob_sha1": "290b11dc5be769119cdb202262f0336ee3612313",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspileRun.java",
+              "symbol": "com.synexia.rewrite.M3TranspileRun",
+              "signatures": [],
+              "sha256": "0be8b21e6fd0ec16b21c781e6ee9d9248fa8413a4010984246fb69cf72ffd485",
+              "git_blob_sha1": "14284e82051ac5936dd82d93881228a914906c84",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasteryLab.java",
+              "symbol": "com.synexia.rewrite.M3RecipeMasteryLab",
+              "signatures": [],
+              "sha256": "f6d5ce57ca487bb56d412c0da39bd5ac8956c64aafb056231e67e331d22caeae",
+              "git_blob_sha1": "0623297a95e17528b62129b207661b4962752393",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeMasterySchedulePlanner.java",
+              "symbol": "com.synexia.rewrite.M3RecipeMasterySchedulePlanner",
+              "signatures": [],
+              "sha256": "b0a7e5236a3e2bcfd593aee081c01650d920a49cf2e7254679cf8b23e67238cb",
+              "git_blob_sha1": "7f8cc7134df7ea5d019a9a78ce3cfce7809135fc",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+              "symbol": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+              "signatures": [],
+              "sha256": "adee46f08cd93edb1f97c30be904d0b686cc6426f56c1fae0ee6d670693526df",
+              "git_blob_sha1": "dad21d3e762dabdfeb71f2d8815c25b401079994",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteRuntimeRecipeInventoryRecipe.java",
+              "symbol": "com.synexia.rewrite.M3OpenRewriteRuntimeRecipeInventoryRecipe",
+              "signatures": [],
+              "sha256": "f498b969bb9e5a79f66bb87d8232d0045144145d0167751dc342ba85b0ff4d15",
+              "git_blob_sha1": "3351a83e4429c4ac172f5af09998777c6b69c645",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+              "symbol": "com.synexia.rewrite.M3OpenRewriteTranspiler",
+              "signatures": [],
+              "sha256": "e86f43f32599de822191a233f1e3802e4f8120cd415ee2c90bcf67a56d4e6951",
+              "git_blob_sha1": "d1c3303969a0eae68d571aa12157ae23010e36af",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RecipeCrateSerialAtomReview.java",
+              "symbol": "com.synexia.rewrite.M3RecipeCrateSerialAtomReview",
+              "signatures": [],
+              "sha256": "ead5c49ad51cf5325c5725595bf058ca73daceef092621d671aef7108f9409cc",
+              "git_blob_sha1": "7d5535a3b8deb1ad0c9f604f1f94b62194ac3e11",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3SemanticCodeInventoryRecipe.java",
+              "symbol": "com.synexia.rewrite.M3SemanticCodeInventoryRecipe",
+              "signatures": [],
+              "sha256": "3a475b5a1ea098b0ce07368e4ef1080f8c888d7166ceefe85716a12d735b21cc",
+              "git_blob_sha1": "d02f33fe0be66066efb5148d0694763cfaea2392",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePass.java",
+              "symbol": "com.synexia.rewrite.M3TranspilePass",
+              "signatures": [],
+              "sha256": "f68f4db3d6a849d172f9b168e81138429a6c16aa18745c518058436e0e8efca6",
+              "git_blob_sha1": "ef8c0ed9e64adc66dbb663fd36fa3d8a7486123c",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePassResult.java",
+              "symbol": "com.synexia.rewrite.M3TranspilePassResult",
+              "signatures": [],
+              "sha256": "596c420fbc30eb07867c03d48b56af6fab1dc6891114362dabc9e0f8ff7bbb4f",
+              "git_blob_sha1": "977b8f683dd2ab76ca2256533989f12a2814f044",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspilePlan.java",
+              "symbol": "com.synexia.rewrite.M3TranspilePlan",
+              "signatures": [],
+              "sha256": "3073058ea8237577b4506ce3222ee83914f68c7451db83bb3f7f8792abf8d13a",
+              "git_blob_sha1": "290b11dc5be769119cdb202262f0336ee3612313",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3TranspileRun.java",
+              "symbol": "com.synexia.rewrite.M3TranspileRun",
+              "signatures": [],
+              "sha256": "0be8b21e6fd0ec16b21c781e6ee9d9248fa8413a4010984246fb69cf72ffd485",
+              "git_blob_sha1": "14284e82051ac5936dd82d93881228a914906c84",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryClassLoader.java",
+              "symbol": "com.synexia.rewrite.M3MasteryClassLoader",
+              "signatures": [],
+              "sha256": "e2fee64f28c2fd71db1d0f2fba8a9bf3bd4c3d210119d4e12823b7d01a98ec0a",
+              "git_blob_sha1": "b4081310a343cbd067c7deb5e907031598e82536",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryContractSurface.java",
+              "symbol": "com.synexia.rewrite.M3MasteryContractSurface",
+              "signatures": [],
+              "sha256": "d825d59df9ca7839ad06af2fd5c6ae386ce373f24eecc9184d23d1fe3261d8b1",
+              "git_blob_sha1": "0d3aed858efcc450cf24822567f4ee605e84a18d",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            }
+          ],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+              "module": "m3/tooling/migration-recipes",
+              "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java",
+              "symbol": "com.m3.rewrite.M3Java21ConvergenceRecipe",
+              "signatures": [
+                "java.util.List<org.openrewrite.Recipe> getRecipeList()"
+              ],
+              "sha256": "15e44e92ba509b405ed2e12ddc4c6bf2a427f59cdca95d7e8e960357732266e9",
+              "git_blob_sha1": "2f59c7f0756e5618343a88161040201ccb1af39d",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/master"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+              "module": "m3/tooling/migration-recipes",
+              "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntConvergenceRecipe.java",
+              "symbol": "com.m3.rewrite.atom.M3PureIntConvergenceRecipe",
+              "signatures": [
+                "java.util.List<org.openrewrite.Recipe> getRecipeList()"
+              ],
+              "sha256": "ba078715aa83969fc6c04fcd0d9d226ff0d0ad7f46f38ebede6f5b312504e534",
+              "git_blob_sha1": "a1a745a4ea8617937d8ecbb61eb17973dac0948f",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/master"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+              "module": "m3/tooling/migration-recipes",
+              "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/M3PureIntAtomEligibility.java",
+              "symbol": "com.m3.rewrite.atom.M3PureIntAtomEligibility",
+              "signatures": [
+                "package-private static boolean eligible(J.MethodDeclaration)",
+                "package-private static boolean atomized(J.MethodDeclaration)"
+              ],
+              "sha256": "ea31026be2f699923e4dfcc6fa906cee77eb5a46bdb9a32948948bfdfe19cebb",
+              "git_blob_sha1": "0041adab5913304874f5063fc2b982ff3cc1e065",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/master"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+              "module": "m3/tooling/migration-recipes",
+              "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/MemJava.java",
+              "symbol": "com.m3.rewrite.atom.MemJava",
+              "signatures": [
+                "package-private static java.lang.ClassLoader compile(java.util.Map<String,String>)"
+              ],
+              "sha256": "c2a204144a4ff7fe2f4abfa151a744e7114961b83b7f006e019e595f4569e238",
+              "git_blob_sha1": "341b55a500964906d15c88ccef9f3e05f2a1c025",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/master"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+              "module": "m3/tooling/migration-recipes",
+              "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3IntRecipeProjectTest.java",
+              "symbol": "com.m3.rewrite.atom.M3IntRecipeProjectTest",
+              "signatures": [
+                "package-private JUnit proof owner; no product API"
+              ],
+              "sha256": "004de5f30e2a3c54d439b36493e8733dc73fdae8a288ba18238423ded5afcbed",
+              "git_blob_sha1": "d3cd2a28b3635340c9035b6287650bdf44f975ac",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/master"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": null,
+              "module": "m3/tooling/migration-recipes",
+              "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/JccReceivingFixtureTest.java",
+              "symbol": "com.m3.rewrite.atom.JccReceivingFixtureTest",
+              "signatures": [
+                "void eachScheduleCompilesAndMatchesFrozenOraclesAtEveryIntermediate() throws java.lang.Exception",
+                "void actualCanonicalCompositeAgreesWithItsDeclaredChildrenAndFreshReplay() throws java.lang.Exception",
+                "void opaqueStringObserversAndIndependentClassStateRemainIntact() throws java.lang.Exception",
+                "void compilerAndBothObservationOraclesRejectCuratedMutants() throws java.lang.Exception"
+              ],
+              "sha256": "b034673ea218515cc12ab0b4173eabf06732f29e8a456be45b5ba0d00489ab39",
+              "git_blob_sha1": "3332012bbd7f3842279f40fdf0f1eaf123392957",
+              "fingerprint": null,
+              "revision_role": "candidate"
+            },
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": "df06cdee5a8526f573b3ad89622824d0b49e2f25",
+              "module": "m3/tooling/migration-recipes",
+              "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/JccReceivingFixtureTest.java",
+              "symbol": "com.m3.rewrite.atom.JccReceivingFixtureTest",
+              "signatures": [
+                "void eachScheduleCompilesAndMatchesFrozenOraclesAtEveryIntermediate() throws java.lang.Exception",
+                "void actualCanonicalCompositeAgreesWithItsDeclaredChildrenAndFreshReplay() throws java.lang.Exception",
+                "void opaqueStringObserversAndIndependentClassStateRemainIntact() throws java.lang.Exception",
+                "void compilerAndBothObservationOraclesRejectCuratedMutants() throws java.lang.Exception"
+              ],
+              "sha256": "b034673ea218515cc12ab0b4173eabf06732f29e8a456be45b5ba0d00489ab39",
+              "git_blob_sha1": "3332012bbd7f3842279f40fdf0f1eaf123392957",
+              "fingerprint": null,
+              "revision_role": "pinned"
+            }
+          ],
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Review and explicit root coverage obligations: m3/docs/jcc-source-handoff.md and m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json. Ledger replay tests are separate from capability acceptance; tests is empty intentionally. Independently authored receiving-fixture evidence is linked under m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json#independent_receiving_fixture; it does not promote this blocked capability."
+        "observation": "Current source bc06298218dd88f0164ed9b67e74fd8234ed70b2 / root a72565e0e67f330f12c712dcc7a3fcbe1d80d24e binds 14 laboratory and 6 Java/JNI owners. Historical 0b/d1/0c53 and donor 4990 results retain their original epochs. The 443 restored receiving files and retention checks establish artifact custody only. Current source execution receipts are separately linked in m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json; no rebuilt-JDK acceptance or Synexia runtime dependency is introduced."
       },
       {
         "id": "synexia.jcc-java-jni-regression",
         "kind": "pending",
         "status": "blocked",
-        "reason": "Java/regex/opaque-source/JNI regression applicability remains unreviewed against the destination's narrower domain. No destination JNI or regex implementation is inferred from source receipts.",
+        "reason": "Current 20-owner source publication is bound after exact readback; historical source and receiving work is retained. Source export, whole owning-module coverage and applicable M3JDK21 runtime/JNI/platform gates remain unadmitted.",
         "sources": [
           {
             "repo": "hsoliwal/com.synexia",
-            "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
             "module": "synexia-openrewrite-recipes",
             "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
             "symbol": "com.synexia.rewrite.M3AtomPatternSignalChainRecipe",
@@ -5269,11 +5873,11 @@
             "git_blob_sha1": "09df87a872817787fc8607bf11805cfa26c53aed",
             "fingerprint": null,
             "revision_role": "pinned",
-            "tracking_ref": "refs/heads/develop"
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
           },
           {
             "repo": "hsoliwal/com.synexia",
-            "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
             "module": "synexia-openrewrite-recipes",
             "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
             "symbol": "com.synexia.rewrite.M3CodeSignalChain",
@@ -5282,7 +5886,59 @@
             "git_blob_sha1": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
             "fingerprint": null,
             "revision_role": "pinned",
-            "tracking_ref": "refs/heads/develop"
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "m3-fast-search",
+            "path": "m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+            "symbol": "com.synexia.m3.search.CompetitiveProblemReview",
+            "signatures": [],
+            "sha256": "83dad41fa4ce50b70f1e2e6800241b69b5136807902fd2fc6a6d024024894ac4",
+            "git_blob_sha1": "baa84c13b7fd330eab6b1832dab1b4b523bfd8ce",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-algo",
+            "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+            "symbol": "com.synexia.algorithms.corpus.ChallengeDonorPassLedger",
+            "signatures": [],
+            "sha256": "a089808e8563bac1f2d57aa1cc9f131e609c1d01ffcb1af8b302579adb00c346",
+            "git_blob_sha1": "074dd60249893e4c606e68823fdebf191f98f269",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-algo",
+            "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
+            "symbol": "com.synexia.algorithms.corpus.CompetitiveCapabilityPlanIndex",
+            "signatures": [],
+            "sha256": "59742f333ab2a04c3cd5b12061bff182e9a2114549117ce323928d391c10fafa",
+            "git_blob_sha1": "e4e55dbc3f9255ad71dfa391c43c352b31472622",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+            "module": "synexia-donor-inventory",
+            "path": "synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java",
+            "symbol": "com.synexia.donor.DonorMechanicalShapeCatalog",
+            "signatures": [],
+            "sha256": "32ad3ecb53a611de29ce8bdcf4079d77576b3b6d5a56a847b67c9cbd5c91b326",
+            "git_blob_sha1": "108514ff8960adc20c9fd88d4fd01ba55cc2f3c8",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/aix/jcc-qualified-recipes-20261006"
           }
         ],
         "targets": [],
@@ -5335,16 +5991,16 @@
           "cached_facts": "Finite source receipts stay bound to their original source epoch and require target re-execution."
         },
         "recipe": {
-          "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-handoff-20261005",
+          "id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-merge-recovery-20261006-mapping-v04",
           "version": "0.1.0-SNAPSHOT",
           "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
           "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
           "preconditions": [
-            "Exact canonical map preimage 67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb.",
-            "Use the retained text transformer and sealed-install/1 replay owner for reviewed ledger bytes.",
-            "An admitted source-canon export and destination fixture/API proof remain mandatory before any capability promotion."
+            "Four exact reviewed current mapping preimages at 09075810b55229662329a158923287e8a7118f86.",
+            "Preserve all 55 ordered IDs, 53 non-JCC records, all 34 current top-level mapping objects, precompute ownership and 20 existing gates.",
+            "Require actual verified current source publication; history-only and fixture publication identities refuse."
           ],
-          "rollback": "The paired existing recipe.py sealed plan restores exact receipt-owned preimages and refuses foreign edits; no product rollback is implied."
+          "rollback": "Existing recipe.py sealed rollback restores exact receipt-owned preimages and refuses foreign edits."
         },
         "tests": [],
         "provenance": {
@@ -5353,27 +6009,209 @@
           "copied_code": false
         },
         "sync": {
-          "source_revision": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
-          "target_revision": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+          "source_revision": "bc06298218dd88f0164ed9b67e74fd8234ed70b2",
+          "target_revision": "09075810b55229662329a158923287e8a7118f86",
           "direction": "source-to-target",
           "target_adaptations": [
             "Reuse existing destination compiler/atom owners and their narrower interfaces."
           ],
           "pending": [
-            "Seal current source recipe/template/output parity and execute its real source-canon checkpoint/history/pattern audit.",
-            "Require all eleven source verification gates at the same source execution root.",
-            "Review and materialize only applicable fixtures through existing destination owners; rerun exact target proof and required module/image/JNI gates.",
-            "Read back the final destination objects and PR state; no automatic cross-repository synchronization exists."
+            "Complete the existing source-canon checkpoint, same-root verification gates, offline dependency/source closure and whole-repository review before source export.",
+            "Carry only source-qualified applicable behavior into existing M3 owners and execute unchanged owning-module coverage plus applicable image/runtime/JNI/platform gates.",
+            "Verify the actual resulting merge tree and its required CI, retaining every historical custody obligation; commit ancestry alone does not deliver files."
           ],
           "conflicts": []
         },
         "lineage": {
-          "previous_sources": [],
+          "previous_sources": [
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
+              "symbol": "com.synexia.rewrite.M3AtomPatternSignalChainRecipe",
+              "signatures": [],
+              "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98",
+              "git_blob_sha1": "09df87a872817787fc8607bf11805cfa26c53aed",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/develop"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
+              "symbol": "com.synexia.rewrite.M3CodeSignalChain",
+              "signatures": [],
+              "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa",
+              "git_blob_sha1": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/develop"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
+              "symbol": "com.synexia.rewrite.M3AtomPatternSignalChainRecipe",
+              "signatures": [],
+              "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98",
+              "git_blob_sha1": "09df87a872817787fc8607bf11805cfa26c53aed",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
+              "symbol": "com.synexia.rewrite.M3CodeSignalChain",
+              "signatures": [],
+              "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa",
+              "git_blob_sha1": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "m3-fast-search",
+              "path": "m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+              "symbol": "com.synexia.m3.search.CompetitiveProblemReview",
+              "signatures": [],
+              "sha256": "c0f9acc4a64229fb911a5a8e0b211473b058fe67739fc38fca72a4c49c9e4046",
+              "git_blob_sha1": "f460f84bc5c0dc1a0970af3c6081c23875aa4067",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-algo",
+              "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+              "symbol": "com.synexia.algorithms.corpus.ChallengeDonorPassLedger",
+              "signatures": [],
+              "sha256": "a089808e8563bac1f2d57aa1cc9f131e609c1d01ffcb1af8b302579adb00c346",
+              "git_blob_sha1": "074dd60249893e4c606e68823fdebf191f98f269",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-algo",
+              "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
+              "symbol": "com.synexia.algorithms.corpus.CompetitiveCapabilityPlanIndex",
+              "signatures": [],
+              "sha256": "59742f333ab2a04c3cd5b12061bff182e9a2114549117ce323928d391c10fafa",
+              "git_blob_sha1": "e4e55dbc3f9255ad71dfa391c43c352b31472622",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+              "module": "synexia-donor-inventory",
+              "path": "synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java",
+              "symbol": "com.synexia.donor.DonorMechanicalShapeCatalog",
+              "signatures": [],
+              "sha256": "32ad3ecb53a611de29ce8bdcf4079d77576b3b6d5a56a847b67c9cbd5c91b326",
+              "git_blob_sha1": "108514ff8960adc20c9fd88d4fd01ba55cc2f3c8",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3AtomPatternSignalChainRecipe.java",
+              "symbol": "com.synexia.rewrite.M3AtomPatternSignalChainRecipe",
+              "signatures": [],
+              "sha256": "876929d5e8caa03ea1e3af6d8d1d4d575d15aee3014a5f2ca425f4786eda5e98",
+              "git_blob_sha1": "09df87a872817787fc8607bf11805cfa26c53aed",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-openrewrite-recipes",
+              "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3CodeSignalChain.java",
+              "symbol": "com.synexia.rewrite.M3CodeSignalChain",
+              "signatures": [],
+              "sha256": "a15825aef2a00641d74fba761c4858f449d6924a1286aa1eb71b1d81932351fa",
+              "git_blob_sha1": "2ecb4c0548f8864f4a71936531e0cd1a4cf0b2b6",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "m3-fast-search",
+              "path": "m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+              "symbol": "com.synexia.m3.search.CompetitiveProblemReview",
+              "signatures": [],
+              "sha256": "83dad41fa4ce50b70f1e2e6800241b69b5136807902fd2fc6a6d024024894ac4",
+              "git_blob_sha1": "baa84c13b7fd330eab6b1832dab1b4b523bfd8ce",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-algo",
+              "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+              "symbol": "com.synexia.algorithms.corpus.ChallengeDonorPassLedger",
+              "signatures": [],
+              "sha256": "a089808e8563bac1f2d57aa1cc9f131e609c1d01ffcb1af8b302579adb00c346",
+              "git_blob_sha1": "074dd60249893e4c606e68823fdebf191f98f269",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-algo",
+              "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
+              "symbol": "com.synexia.algorithms.corpus.CompetitiveCapabilityPlanIndex",
+              "signatures": [],
+              "sha256": "59742f333ab2a04c3cd5b12061bff182e9a2114549117ce323928d391c10fafa",
+              "git_blob_sha1": "e4e55dbc3f9255ad71dfa391c43c352b31472622",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            },
+            {
+              "repo": "hsoliwal/com.synexia",
+              "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+              "module": "synexia-donor-inventory",
+              "path": "synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java",
+              "symbol": "com.synexia.donor.DonorMechanicalShapeCatalog",
+              "signatures": [],
+              "sha256": "32ad3ecb53a611de29ce8bdcf4079d77576b3b6d5a56a847b67c9cbd5c91b326",
+              "git_blob_sha1": "108514ff8960adc20c9fd88d4fd01ba55cc2f3c8",
+              "fingerprint": null,
+              "revision_role": "pinned",
+              "tracking_ref": "refs/heads/aix/jcc-source-merge-recovery-20261005"
+            }
+          ],
           "previous_targets": [],
           "supersedes": []
         },
         "source_state": "partial",
-        "observation": "Review and explicit root coverage obligations: m3/docs/jcc-source-handoff.md and m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json. Ledger replay tests are separate from capability acceptance; tests is empty intentionally."
+        "observation": "Current source bc06298218dd88f0164ed9b67e74fd8234ed70b2 / root a72565e0e67f330f12c712dcc7a3fcbe1d80d24e binds 14 laboratory and 6 Java/JNI owners. Historical 0b/d1/0c53 and donor 4990 results retain their original epochs. The 443 restored receiving files and retention checks establish artifact custody only. Current source execution receipts are separately linked in m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json; no rebuilt-JDK acceptance or Synexia runtime dependency is introduced."
       },
       {
         "id": "synexia.counterpart.MIndexRegexTrigramQuery",

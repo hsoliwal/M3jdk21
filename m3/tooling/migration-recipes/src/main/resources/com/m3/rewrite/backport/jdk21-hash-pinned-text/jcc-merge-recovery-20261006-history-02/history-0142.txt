@@ -1,0 +1,27 @@
+{
+  "id": "03-actual-packet-contract",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay/m3/migration/test/test_jcc_source_recovery_handoff_packet.py"
+  ],
+  "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/overlay",
+  "started_utc": "2026-10-05T17:40:54.926234+00:00",
+  "expected_exit_code": 0,
+  "ended_utc": "2026-10-05T17:40:56.156666+00:00",
+  "exit_code": 0,
+  "stdout": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/verification-v3/03-actual-packet-contract.stdout.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "git_blob_sha1": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+    "mode": "0o644"
+  },
+  "stderr": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/verification-v3/03-actual-packet-contract.stderr.log",
+    "bytes": 1270,
+    "sha256": "e19416824a0f98fc36b2be2534541ab8060148f0274a68398362c6ed3a33e827",
+    "git_blob_sha1": "73ad16e8e4d89af11cdb97e09159407762387e95",
+    "mode": "0o644"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "schema": "m3-jcc-ci-process/1",
+  "argv": [
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/apache-maven-3.9.9/bin/mvn",
+    "-o",
+    "-B",
+    "-ntp",
+    "-Dmaven.repo.local=/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate/execution/cache-v02",
+    "-Dm3.ci.materialized=/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/materialized-01",
+    "-f",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/maven-workspace/m3/tooling/migration-recipes/tasks/jcc-ci-repair-20261006/verification/pom.xml",
+    "test"
+  ],
+  "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/maven-workspace",
+  "java_home": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/jdk-21+35",
+  "start_utc": "2026-10-06T04:23:37.731727+00:00",
+  "finish_utc": "2026-10-06T04:23:43.768363+00:00",
+  "exit_code": 0,
+  "output": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/repair-candidate-v02/execution/05-maven.log",
+    "bytes": 2369,
+    "sha256": "59c5b5737e4b145b105bd3bf26cec061ce12794d6c73539ddeeaa6a6e16704c3",
+    "git_blob": "cf08c7b870a1cdc3de7f0c85437aee6babad87b2"
+  }
+}
