@@ -1,0 +1,3 @@
+# path	before	after	template
+m3/docs/m3-runtime-invariants.tsv	be8e2e1fd15993bf418ccfbee4416da8f738b5446901ba6657ffae4fb19f08b7	2d19a5565da11d04dd03789d675a2d545248fef986de114a1a390c1c82c385fc	00-runtime-invariants.tsv.txt
+m3/docs/name-mapping.json	9fce21acb83574c795ca674b263a324315be01e8c87ba149ae6ae3ac79d39c45	5bd2b1cc77967c6746d1240e2a3a0a9ee19ae7edb8ae5f18ed574f9e3ac70c57	01-name-mapping.json.txt
