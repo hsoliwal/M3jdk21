@@ -1,0 +1,6 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.jdk21.PqSecurityDependencyInventory
+displayName: Inventory Java21 dependencies for JEP 496 and JEP 497
+description: Read-only dependency and public-API exclusion plan for ML-KEM/ML-DSA provider adaptation.
+recipeList:
+  - com.m3.rewrite.backport.M3PqSecurityDependencyInventoryRecipe
