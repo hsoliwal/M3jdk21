@@ -4032,6 +4032,7 @@ public final class String
         if (storage != null && locale.equals(Locale.ROOT)) {
             M3StringFacts prepared = storage.facts();
             if (prepared.ascii) {
+                if (!prepared.hasAsciiUpper()) return this;
                 M3String mapped = storage.asciiCase(false);
                 return mapped == storage ? this : new String(mapped);
             }
@@ -4122,6 +4123,7 @@ public final class String
         if (storage != null && locale.equals(Locale.ROOT)) {
             M3StringFacts prepared = storage.facts();
             if (prepared.ascii) {
+                if (!prepared.hasAsciiLower()) return this;
                 M3String mapped = storage.asciiCase(true);
                 return mapped == storage ? this : new String(mapped);
             }
@@ -4330,7 +4332,8 @@ public final class String
      * @since 11
      */
     public boolean isBlank() {
-        return indexOfNonWhitespace() == length();
+        M3String storage = m3();
+        return storage != null ? storage.facts().blank() : indexOfNonWhitespace() == length();
     }
 
     /**
@@ -4364,7 +4367,12 @@ public final class String
      * @since 11
      */
     public Stream<String> lines() {
-        if (m3() != null) {
+        M3String storage = m3();
+        if (storage != null) {
+            M3StringFacts prepared = storage.facts();
+            if (!prepared.hasAsciiSpace()) {
+                return storage.length() == 0 ? Stream.empty() : Stream.of(this);
+            }
             return StreamSupport.stream(new M3LinesSpliterator(this), false);
         }
         byte[] currentValue = value();
