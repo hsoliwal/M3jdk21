@@ -575,6 +575,20 @@ if "if (M3String.admissionEnabled())" not in string
         or "return new String(M3StringPool.internUnit(c));" not in string:
     fail("String.valueOf(char) does not use direct M3 unit interning after activation")
 
+# Exact single-byte charset ingress may bypass decoded compact byte[] staging only when the
+# mapping is exact: ISO-8859-1, or all-ASCII UTF-8/US-ASCII. Other decoding stays stock-authority.
+for fragment in [
+    "maybeAdmitDecodedSingleByte(charset, bytes, offset, length)",
+    "charset == ISO_8859_1.INSTANCE",
+    "charset == UTF_8.INSTANCE || charset == US_ASCII.INSTANCE",
+    "StringCoding.countPositives(bytes, offset, length) == length",
+    "M3String.admitLatin1Bytes(bytes, offset, length)",
+    "M3StringPool.internLatin1Bytes(source, offset, length)",
+    "M3StringAtom.localLatin1Bytes(",
+]:
+    if fragment not in (string + m3 + pool + atom):
+        fail(f"M3 exact byte-array ingress missing: {fragment}")
+
 # Mutable char[] ingress must snapshot directly into canonical M3 storage after activation.
 # Do not compress to a transient compact byte[] first and then copy again into native storage.
 for fragment in [
