@@ -25,6 +25,7 @@ on:
       - 'test/jdk/java/lang/String/MapFactsTest.java'
       - 'test/jdk/java/lang/String/MapUtfTest.java'
       - 'test/jdk/java/lang/String/M3StringFactsCompositionTest.java'
+      - 'test/jdk/java/lang/String/M3StringCanonicalDagTest.java'
       - 'test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java'
       - 'test/jdk/java/lang/String/M3StringInternTest.java'
       - 'test/jdk/jdk/internal/mindex/M3TQFactsTest.java'
@@ -41,14 +42,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - name: Set up Java 21 for recipe proofs
+        uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '20'
+          java-version: '21'
       - name: Verify M3 String source invariants
         run: python3 m3/runtime-integration/check-m3string-invariants.py
       - name: Prove M3 String history-convergence recipe
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringHistoryConvergenceRecipeTest test
+      - name: Prove canonical DAG master-repair recipe
+        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringCanonicalDagMasterRepairRecipeTest test
+      - name: Set up Java 20 boot JDK for OpenJDK 21 build
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '20'
       - name: Install build prerequisites
         run: sudo apt-get update && sudo apt-get install -y autoconf
       - name: Configure
@@ -56,4 +65,4 @@ jobs:
       - name: Build java.base
         run: make java.base-java-only
       - name: Run M3 String backing jtreg
-        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java"
+        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringCanonicalDagTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java"
