@@ -114,7 +114,7 @@ final class M3StringTuple extends M3StringOwner {
     M3StringFacts computeRangeFacts(int start, int length) {
         Objects.checkFromIndexSize(start, length, this.length);
         if (start == 0 && length == this.length) return facts();
-        if (length == 0) return M3StringFacts.scan(M3String.EMPTY);
+        if (length == 0) return M3StringFacts.scan(M3String.empty());
 
         int end = start + length;
         int leftLength = left.length();
