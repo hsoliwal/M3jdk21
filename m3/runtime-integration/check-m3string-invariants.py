@@ -980,6 +980,21 @@ for fragment in required_mapping_fragments:
     if fragment not in mapping:
         fail(f"name mapping missing: {fragment}")
 
+# Synexia is the full qualified donor/convergence workspace. Recipes/postimages/tests are
+# first-class donor candidates, but licensing/provenance follows every copied artifact and
+# M3JDK21 retains target/runtime ownership.
+for fragment in [
+    '"id": "M3-JDK-DONOR-ARTIFACTS-1"',
+    '"candidate_source": "whole qualified hsoliwal/com.synexia workspace"',
+    '"recipe"',
+    '"generated-postimage"',
+    '"third_party_rule"',
+    '"target_license_rule"',
+    '"runtime_dependency_rule"',
+]:
+    if fragment not in mapping:
+        fail(f"Synexia donor artifact policy missing: {fragment}")
+
 for required_family in [
     "Generic precompute engine",
     "Universal precompute API",
