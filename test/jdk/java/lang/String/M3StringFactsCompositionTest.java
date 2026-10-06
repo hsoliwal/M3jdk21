@@ -122,6 +122,23 @@ public class M3StringFactsCompositionTest {
         if ((flags & hasSurrogate.getInt(null)) == 0) {
             throw new AssertionError("surrogate presence flag missing");
         }
+
+        String categories = fresh("Aa_9 \t");
+        Object categoryFacts = FACTS.invoke(body(categories));
+        int categoryFlags = characterFlags.getInt(categoryFacts);
+        for (String name : List.of(
+                "FLAG_HAS_ASCII_UPPER",
+                "FLAG_HAS_ASCII_LOWER",
+                "FLAG_HAS_ASCII_DIGIT",
+                "FLAG_HAS_ASCII_WORD",
+                "FLAG_HAS_ASCII_SPACE")) {
+            Field bit = categoryFacts.getClass().getDeclaredField(name);
+            bit.setAccessible(true);
+            checks++;
+            if ((categoryFlags & bit.getInt(null)) == 0) {
+                throw new AssertionError("character flag missing: " + name);
+            }
+        }
     }
 
     private static void same(Object expected, Object actual, String label) {
