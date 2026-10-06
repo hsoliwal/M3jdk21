@@ -1,0 +1,87 @@
+name: M3 JDK-8340327 Java21 internal adaptation
+
+on:
+  push:
+    branches:
+      - "m3/jdk8340327-java21-internal-*"
+  pull_request:
+    paths:
+      - "m3/backports/recipes/jdk-8340327-java21-internal/**"
+      - "m3/tooling/migration-recipes/**"
+      - ".github/workflows/m3-jdk8340327-java21-internal.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Diff hygiene
+        run: git diff --check
+
+      - name: Materializer unit proof
+        run: python3 m3/backports/recipes/jdk-8340327-java21-internal/test_materialize.py
+
+      - name: OpenRewrite replay and scope proof
+        run: >
+          mvn -B -ntp
+          -f m3/tooling/migration-recipes/pom.xml
+          -Dtest=M3Jdk8340327Java21InternalRecipeTest,M3RecipeScopeDeclarationTest
+          -Dsurefire.failIfNoSpecifiedTests=false
+          test
+
+      - name: Materialize exact Java21 adaptation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/recipes/jdk-8340327-java21-internal/materialize.py             --root .             --manifest m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/jdk-8340327-java21-internal/manifest.tsv             --receipt m3/build/jdk8340327/receipt.tsv
+
+      - name: Enforce exact product/test path fence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --name-only -- src test | sort > /tmp/actual.txt
+          cat > /tmp/expected.txt <<'EOF'
+          src/java.base/share/classes/sun/security/pkcs/NamedPKCS8Key.java
+          src/java.base/share/classes/sun/security/provider/NamedKEM.java
+          src/java.base/share/classes/sun/security/provider/NamedKeyFactory.java
+          src/java.base/share/classes/sun/security/provider/NamedKeyPairGenerator.java
+          src/java.base/share/classes/sun/security/provider/NamedSignature.java
+          src/java.base/share/classes/sun/security/util/KeyUtil.java
+          src/java.base/share/classes/sun/security/util/SignatureUtil.java
+          src/java.base/share/classes/sun/security/x509/NamedX509Key.java
+          test/jdk/sun/security/provider/NamedEdDSA.java
+          test/jdk/sun/security/provider/NamedKeyFactoryTest.java
+          EOF
+          diff -u /tmp/expected.txt /tmp/actual.txt
+          ! grep -R "java.security.AsymmetricKey\|instanceof AsymmetricKey"             src/java.base/share/classes/sun/security/pkcs/NamedPKCS8Key.java             src/java.base/share/classes/sun/security/provider/NamedKeyFactory.java             src/java.base/share/classes/sun/security/util/KeyUtil.java             src/java.base/share/classes/sun/security/util/SignatureUtil.java             src/java.base/share/classes/sun/security/x509/NamedX509Key.java             test/jdk/sun/security/provider/NamedKeyFactoryTest.java
+
+      - name: Configure OpenJDK
+        run: >
+          bash configure
+          --with-boot-jdk="$JAVA_HOME"
+          --with-debug-level=release
+          --with-jvm-variants=server
+          --disable-warnings-as-errors
+
+      - name: Build JDK image
+        run: make images JOBS=2
+
+      - name: Run named-key prerequisite jtreg
+        run: >
+          make test
+          TEST="test/jdk/sun/security/provider/NamedKeyFactoryTest.java test/jdk/sun/security/provider/NamedEdDSA.java"
+          JOBS=2
