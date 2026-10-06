@@ -78,3 +78,27 @@ the Synexia recipe/mastery corpus first, then export new exact outputs to every 
 
 Missing/unknown license classification fails closed. This policy complements, and does not replace,
 the existing source hash, target preimage, scope, compiler/test and runtime gates.
+
+
+## Canonical-home invariant
+
+Reusable code flows one way with respect to ownership:
+
+```text
+donors / target discoveries
+        |
+        v
+hsoliwal/com.synexia
+canonical Apache-2.0 recipe + module owner
+        |
+        | exact revision + SHA-256 + license + proof roots
+        v
+hsoliwal/M3jdk21
+receiver / adapter / JDK-specific backport / product verification
+```
+
+M3JDK21 does not become a second canonical owner merely because a Synexia recipe or M3Index
+component is materialized into `m3/**` or `.m3/**`. Reusable recipe changes, semantic-hash
+mechanics, atom/pattern/IOP machinery and M3Index DB/JDK-bridge improvements belong in Synexia.
+The target repository retains only product compatibility, OpenJDK licensing, build/jtreg/runtime
+and final promotion authority.
