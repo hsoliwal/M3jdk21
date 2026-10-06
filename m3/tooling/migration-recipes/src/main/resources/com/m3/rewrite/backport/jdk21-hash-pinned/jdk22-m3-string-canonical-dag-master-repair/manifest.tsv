@@ -1,0 +1,4 @@
+# path	before	after	template
+src/java.base/share/classes/java/lang/M3StringPool.java	c731141807ea3875f8f89ad454623c1479b5a64fe1db0a6dfd13c158371a9fa2	2a81e52d834373ce8acb38d7c5999fa6719c31272708839ddadd19627dc2809f	00-M3StringPool.java.txt
+src/java.base/share/classes/java/lang/M3StringTuple.java	cc11b05ebbd1a3bf5ce39f11505d527d06876c3ac805c62c094169235846bbd6	3c41cadc738f15e43bdb486b69bc463fcb81886e11b79d09625a052f81f59cdb	01-M3StringTuple.java.txt
+test/jdk/java/lang/String/M3StringCanonicalDagTest.java	ABSENT	6ceda8ccc4aa530bcc41c945ef41fdd8e209d00f9cccc6acdb378d3503e62fc9	02-M3StringCanonicalDagTest.java.txt
