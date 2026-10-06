@@ -1,17 +1,17 @@
 order	release	jep	title	domain	disposition	priority	evidence_state	evidence_paths	next_action	default_java21	priority_classification	receipt_state	promotion	receipt_next_action
-0	22	423	Region Pinning for G1	gc	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	CANDIDATE	COMPATIBLE_RUNTIME			
+0	22	423	Region Pinning for G1	gc	candidate	20	MATERIALIZED_PACKET	m3/backports/recipes/jep-423-region-pinning	PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	CANDIDATE	COMPATIBLE_RUNTIME			
 1	22	458	Launch Multi-File Source-Code Programs	tool-launcher	candidate	20	MATERIALIZED_PACKET	m3/backports/recipes/jep-458-current,m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jep458BackportRecipe.java	PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	OPT_IN	COMPATIBLE_TOOLING	REVIEWED_POSTIMAGES_ALREADY_PRESENT	NOT_AUTHORIZED	
-2	23	474	ZGC: Generational Mode by Default	gc-runtime	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	OPT_IN	COMPATIBLE_RUNTIME			
-3	24	484	Class-File API	library	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	NO	OPT_IN_SE_API_EXTENSION			
-4	24	485	Stream Gatherers	library	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	NO	OPT_IN_SE_API_EXTENSION			
+2	23	474	ZGC: Generational Mode by Default	gc-runtime	candidate	20	MATERIALIZED_PACKET	m3/backports/recipes/jep-474-generational-zgc	PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	OPT_IN	COMPATIBLE_RUNTIME	EQUIVALENCE_PROOF_PENDING	NOT_AUTHORIZED	BUILD_CURRENT_MASTER_AND_PROVE_BOTH_ZGC_MODES_WITH_JAVA21_DEFAULT_UNCHANGED
+3	24	484	Class-File API	library	candidate	20	MATERIALIZED_PACKET	m3/backports/recipes/jep-484-classfile-api	PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	NO	OPT_IN_SE_API_EXTENSION			
+4	24	485	Stream Gatherers	library	candidate	20	MATERIALIZED_PACKET	m3/backports/recipes/jep-485-gatherers,m3/backports/recipes/jep-485-gatherers-recovery,m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jep485StreamGatherersBackportRecipe.java	PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	NO	OPT_IN_SE_API_EXTENSION			
 5	24	493	Linking Run-Time Images without JMODs	tool-jlink-runtime-image	candidate	20	MATERIALIZED_PACKET	m3/backports/recipes/jep-493-runtime-image	PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	OPT_IN	COMPATIBLE_TOOLING	PACKET_READY	NOT_AUTHORIZED	GENERATE_FILE_ATOMIC_JAVA_TEXT_CRATES_THEN_COMPOSE_MULTI_MODULE_PACKET
 6	24	496	Quantum-Resistant Module-Lattice-Based Key Encapsulation Mechanism	security-library	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT					
 7	24	497	Quantum-Resistant Module-Lattice-Based Digital Signature Algorithm	security-library	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT					
 8	25	510	Key Derivation Function API	security-library	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT					
-9	25	521	Generational Shenandoah	gc-runtime-config	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT	OPT_IN	COMPATIBLE_RUNTIME			
-10	27	523	Make G1 the Default Garbage Collector in All Environments	gc-runtime-config	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT					
-11	22	454	Foreign Function & Memory API	library-runtime-native	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF	NO	OPT_IN_SE_API_EXTENSION			
-12	23	467	Markdown Documentation Comments	tool-javadoc-javac-doc	candidate-high-risk	40	MATERIALIZED_PACKET	m3/backports/recipes/jep-467-markdown	CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF	NO	OPT_IN_SOURCE_TOOLING	PACKET_READY	NOT_AUTHORIZED	GENERATE_FILE_ATOMIC_JAVA_TEXT_CRATES_AND_REVIEW_LIBRARY_API_JOIN
+9	27	523	Make G1 the Default Garbage Collector in All Environments	gc-runtime-config	candidate	20	NO_RECIPE_EVIDENCE		PROVE_OR_IMPLEMENT_COMPATIBLE_BACKPORT					
+10	22	454	Foreign Function & Memory API	library-runtime-native	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF	NO	OPT_IN_SE_API_EXTENSION			
+11	23	467	Markdown Documentation Comments	tool-javadoc-javac-doc	candidate-high-risk	40	MATERIALIZED_PACKET	m3/backports/recipes/jep-467-markdown	CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF	NO	OPT_IN_SOURCE_TOOLING	PACKET_READY	NOT_AUTHORIZED	GENERATE_FILE_ATOMIC_JAVA_TEXT_CRATES_AND_REVIEW_LIBRARY_API_JOIN
+12	24	404	Generational Shenandoah (Experimental)	gc-runtime	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF	CANDIDATE	COMPATIBLE_RUNTIME			
 13	24	475	Late Barrier Expansion for G1	gc-hotspot-compiler	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF					
 14	24	483	Ahead-of-Time Class Loading & Linking	runtime-aot-cds	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF	CANDIDATE	COMPATIBLE_RUNTIME			
 15	24	491	Synchronize Virtual Threads without Pinning	runtime-threads	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF					
@@ -21,22 +21,23 @@ order	release	jep	title	domain	disposition	priority	evidence_state	evidence_path
 19	25	515	Ahead-of-Time Method Profiling	runtime-hotspot	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF	CANDIDATE	COMPATIBLE_RUNTIME			
 20	25	518	JFR Cooperative Sampling	monitoring-jfr-runtime	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF					
 21	25	520	JFR Method Timing & Tracing	monitoring-jfr	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF					
-22	26	516	Ahead-of-Time Object Caching with Any GC	runtime-aot-gc	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF	CANDIDATE	COMPATIBLE_RUNTIME			
-23	26	517	HTTP/3 for the HTTP Client API	library-network	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF					
-24	26	522	G1 GC: Improve Throughput by Reducing Synchronization	gc-runtime	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF					
-25	27	527	Post-Quantum Hybrid Key Exchange for TLS 1.3	security-library	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF					
-26	27	534	Compact Object Headers by Default	vm-gc-runtime	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF					
-27	27	536	JFR In-Process Data Redaction	monitoring-jfr-security	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF					
-28	23	471	Deprecate the Memory-Access Methods in sun.misc.Unsafe for Removal	compatibility	hold-compat	60	NO_RECIPE_EVIDENCE		CLOSE_JAVA21_COMPATIBILITY_POLICY	OPT_IN	COMPATIBLE_TOOLING			
-29	24	472	Prepare to Restrict the Use of JNI	compatibility-native	hold-compat	60	NO_RECIPE_EVIDENCE		CLOSE_JAVA21_COMPATIBILITY_POLICY					
-30	24	498	Warn upon Use of Memory-Access Methods in sun.misc.Unsafe	compatibility	hold-compat	60	NO_RECIPE_EVIDENCE		CLOSE_JAVA21_COMPATIBILITY_POLICY					
-31	24	501	Deprecate the 32-bit x86 Port for Removal	compatibility	hold-compat	60	NO_RECIPE_EVIDENCE		CLOSE_JAVA21_COMPATIBILITY_POLICY					
-32	26	500	Prepare to Make Final Mean Final	compatibility-reflection	hold-compat	60	NO_RECIPE_EVIDENCE		CLOSE_JAVA21_COMPATIBILITY_POLICY					
-33	27	531	Lazy Constants (Third Preview)	library-vm	hold-preview	70	NO_RECIPE_EVIDENCE		RETAIN_RESEARCH_ONLY_UNTIL_STABLE_OR_EXPLICIT_OPT_IN					
-34	27	533	Structured Concurrency (Seventh Preview)	library-runtime	hold-preview	70	NO_RECIPE_EVIDENCE		RETAIN_RESEARCH_ONLY_UNTIL_STABLE_OR_EXPLICIT_OPT_IN					
-35	27	538	PEM Encodings of Cryptographic Objects (Third Preview)	security-library	hold-preview	70	NO_RECIPE_EVIDENCE		RETAIN_RESEARCH_ONLY_UNTIL_STABLE_OR_EXPLICIT_OPT_IN					
-36	22	460	Vector API (Seventh Incubator)	library-hotspot-compiler	hold-jit	80	NO_RECIPE_EVIDENCE		CLOSE_HOTSPOT_JIT_DEPENDENCY_PROOF	NO	OPT_IN_JDK_API_EXTENSION			
-37	23	469	Vector API (Eighth Incubator)	library-hotspot-compiler	hold-jit	80	NO_RECIPE_EVIDENCE		CLOSE_HOTSPOT_JIT_DEPENDENCY_PROOF	NO	OPT_IN_JDK_API_EXTENSION			
-38	24	489	Vector API (Ninth Incubator)	library-hotspot-compiler	hold-jit	80	NO_RECIPE_EVIDENCE		CLOSE_HOTSPOT_JIT_DEPENDENCY_PROOF					
-39	25	508	Vector API (Tenth Incubator)	library-hotspot-compiler	hold-jit	80	NO_RECIPE_EVIDENCE		CLOSE_HOTSPOT_JIT_DEPENDENCY_PROOF					
-40	27	537	Vector API (Twelfth Incubator)	library-hotspot-compiler	hold-jit	80	NO_RECIPE_EVIDENCE		CLOSE_HOTSPOT_JIT_DEPENDENCY_PROOF					
+22	25	521	Generational Shenandoah	gc-runtime-config	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF	OPT_IN	COMPATIBLE_RUNTIME			
+23	26	516	Ahead-of-Time Object Caching with Any GC	runtime-aot-gc	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF	CANDIDATE	COMPATIBLE_RUNTIME			
+24	26	517	HTTP/3 for the HTTP Client API	library-network	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF					
+25	26	522	G1 GC: Improve Throughput by Reducing Synchronization	gc-runtime	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF					
+26	27	527	Post-Quantum Hybrid Key Exchange for TLS 1.3	security-library	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF					
+27	27	534	Compact Object Headers by Default	vm-gc-runtime	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF					
+28	27	536	JFR In-Process Data Redaction	monitoring-jfr-security	candidate-high-risk	40	NO_RECIPE_EVIDENCE		CLOSE_DEPENDENCY_AND_HIGH_RISK_PROOF					
+29	23	471	Deprecate the Memory-Access Methods in sun.misc.Unsafe for Removal	compatibility	hold-compat	60	NO_RECIPE_EVIDENCE		CLOSE_JAVA21_COMPATIBILITY_POLICY	OPT_IN	COMPATIBLE_TOOLING			
+30	24	472	Prepare to Restrict the Use of JNI	compatibility-native	hold-compat	60	NO_RECIPE_EVIDENCE		CLOSE_JAVA21_COMPATIBILITY_POLICY					
+31	24	498	Warn upon Use of Memory-Access Methods in sun.misc.Unsafe	compatibility	hold-compat	60	NO_RECIPE_EVIDENCE		CLOSE_JAVA21_COMPATIBILITY_POLICY					
+32	24	501	Deprecate the 32-bit x86 Port for Removal	compatibility	hold-compat	60	NO_RECIPE_EVIDENCE		CLOSE_JAVA21_COMPATIBILITY_POLICY					
+33	26	500	Prepare to Make Final Mean Final	compatibility-reflection	hold-compat	60	NO_RECIPE_EVIDENCE		CLOSE_JAVA21_COMPATIBILITY_POLICY					
+34	27	531	Lazy Constants (Third Preview)	library-vm	hold-preview	70	NO_RECIPE_EVIDENCE		RETAIN_RESEARCH_ONLY_UNTIL_STABLE_OR_EXPLICIT_OPT_IN					
+35	27	533	Structured Concurrency (Seventh Preview)	library-runtime	hold-preview	70	NO_RECIPE_EVIDENCE		RETAIN_RESEARCH_ONLY_UNTIL_STABLE_OR_EXPLICIT_OPT_IN					
+36	27	538	PEM Encodings of Cryptographic Objects (Third Preview)	security-library	hold-preview	70	NO_RECIPE_EVIDENCE		RETAIN_RESEARCH_ONLY_UNTIL_STABLE_OR_EXPLICIT_OPT_IN					
+37	22	460	Vector API (Seventh Incubator)	library-hotspot-compiler	hold-jit	80	NO_RECIPE_EVIDENCE		CLOSE_HOTSPOT_JIT_DEPENDENCY_PROOF	NO	OPT_IN_JDK_API_EXTENSION			
+38	23	469	Vector API (Eighth Incubator)	library-hotspot-compiler	hold-jit	80	NO_RECIPE_EVIDENCE		CLOSE_HOTSPOT_JIT_DEPENDENCY_PROOF	NO	OPT_IN_JDK_API_EXTENSION			
+39	24	489	Vector API (Ninth Incubator)	library-hotspot-compiler	hold-jit	80	NO_RECIPE_EVIDENCE		CLOSE_HOTSPOT_JIT_DEPENDENCY_PROOF					
+40	25	508	Vector API (Tenth Incubator)	library-hotspot-compiler	hold-jit	80	NO_RECIPE_EVIDENCE		CLOSE_HOTSPOT_JIT_DEPENDENCY_PROOF					
+41	27	537	Vector API (Twelfth Incubator)	library-hotspot-compiler	hold-jit	80	NO_RECIPE_EVIDENCE		CLOSE_HOTSPOT_JIT_DEPENDENCY_PROOF					
