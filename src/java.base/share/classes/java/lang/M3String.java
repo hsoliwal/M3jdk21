@@ -589,6 +589,31 @@ final class M3String implements CharSequence {
         return -1;
     }
 
+    M3String asciiCase(boolean upper) {
+        M3StringFacts prepared = facts();
+        if (!prepared.ascii) {
+            throw new IllegalStateException("ASCII case mapping requires ASCII M3 String");
+        }
+
+        ArrayList<M3String> pieces = null;
+        int cursor = 0;
+        for (int index = 0; index < length(); index++) {
+            char unit = charAt(index);
+            char mapped = upper
+                    ? (unit >= 'a' && unit <= 'z' ? (char) (unit - ('a' - 'A')) : unit)
+                    : (unit >= 'A' && unit <= 'Z' ? (char) (unit + ('a' - 'A')) : unit);
+            if (mapped == unit) continue;
+
+            if (pieces == null) pieces = new ArrayList<>();
+            if (cursor < index) pieces.add(slice(cursor, index));
+            pieces.add(canonicalize(String.valueOf(mapped)));
+            cursor = index + 1;
+        }
+        if (pieces == null) return this;
+        if (cursor < length()) pieces.add(slice(cursor, length()));
+        return joinValues(pieces);
+    }
+
     M3String replace(char oldChar, char newChar) {
         if (oldChar == newChar || !facts().mayContainCodeUnit(oldChar)) return this;
 
