@@ -136,9 +136,11 @@ for fragment in [
     "private static final int SLOTS = 64;",
     "private static final int MAX_SOURCE_UNITS = 32_768;",
     "WeakReference<M3StringOwner>",
-    "long[] signals",
+    "AtomicLongArray signals",
     "M3StringFacts.codeUnitSignal(unit)",
     "static long maximumRetainedPrimitiveBytes()",
+    "blockSignal(source, blocks, block)",
+    "compareAndSet(block, 0L, computed)",
 ]:
     if fragment not in position_precompute:
         fail(f"M3 position precompute invariant missing: {fragment}")
@@ -432,8 +434,11 @@ if "if (java_lang_String::is_m3_joined(string))" not in archive_writer:
 # temporary one-character String/byte[] payloads.
 for fragment in [
     "static M3String internUnit(char unit)",
+    "active.findUnit(unit)",
+    "return M3String.whole(active.atom(row))",
     "M3StringAtom.localUnit(unit, coder, id, hash64)",
     "existing.charAt(0) == unit",
+    "int findUnit(char unit)",
 ]:
     if fragment not in pool:
         fail(f"M3 direct unit interning missing: {fragment}")
