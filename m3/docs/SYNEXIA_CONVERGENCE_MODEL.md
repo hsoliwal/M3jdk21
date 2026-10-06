@@ -78,3 +78,25 @@ the Synexia recipe/mastery corpus first, then export new exact outputs to every 
 
 Missing/unknown license classification fails closed. This policy complements, and does not replace,
 the existing source hash, target preimage, scope, compiler/test and runtime gates.
+
+
+## Canonical reusable recipe ownership invariant
+
+Reusable Maven/OpenRewrite mechanics are canonically owned and mastered in `hsoliwal/com.synexia`.
+M3JDK21 is a consumer, not an independent owner, for reusable atomization, patternization/IOP,
+documentation, scope, convergence, donor-review and mastery recipes.
+
+M3JDK21 may retain historical `com.m3.rewrite.*` implementations temporarily as compatibility
+mirrors while callers migrate, but those files are frozen: semantic changes must be made first in
+Synexia and then re-imported as an exact source-pinned Apache-2.0 mirror.
+
+M3JDK21 remains canonical only for target-specific recipes whose semantics depend on the exact
+OpenJDK tree, JDK API/ABI, native/runtime boundaries, jtreg, or a source-sealed backport preimage.
+
+The initial moved family is the pure-int FILE convergence stack. Its canonical namespace is
+`com.synexia.rewrite.atom`; the exact Synexia source revision and Git blob identities are bound in
+`m3/compatibility/synexia-recipe-ownership.tsv`.
+
+A borrowed canonical recipe may execute in M3JDK21, but target promotion still requires M3JDK21's
+scope, license, compile, API/ABI, runtime/jtreg and fixed-point gates. Borrowing never transfers
+promotion authority back to Synexia.
