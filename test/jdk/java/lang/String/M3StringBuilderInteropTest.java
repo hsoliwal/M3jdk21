@@ -48,6 +48,42 @@ public class M3StringBuilderInteropTest {
         check(searchable.lastIndexOf(searchTarget, 14) == 4,
                 "builder lastIndexOf M3 target from");
 
+        String longTarget = String.join("", "needle-", "XYZ");
+        String longText = "aaaaaaaaab".repeat(120)
+                + "needle-XYZ"
+                + "aaaaaaaaab".repeat(120);
+        StringBuilder preparedSearch = new StringBuilder(longText);
+        char[] longOracle = longText.toCharArray();
+        char[] longNeedle = longTarget.toCharArray();
+        for (int from : new int[] {-5, 0, 1, 200, 800, preparedSearch.length() - 20}) {
+            check(preparedSearch.indexOf(longTarget, from)
+                            == naiveIndexOf(longOracle, longNeedle, from),
+                    "builder prepared target index from=" + from);
+            check(preparedSearch.lastIndexOf(longTarget, from)
+                            == naiveLastIndexOf(longOracle, longNeedle, from),
+                    "builder prepared target last from=" + from);
+        }
+
+        preparedSearch.replace(
+                preparedSearch.indexOf(longTarget),
+                preparedSearch.indexOf(longTarget) + longTarget.length(),
+                "xxxxxxxxxx");
+        check(preparedSearch.indexOf(longTarget) == -1,
+                "builder mutable source is never cached");
+
+        String collisionTarget = String.join(
+                "",
+                "\u0001\u0201\u0301\u0401",
+                "\u0501\u0601\u0701\u0801");
+        String collisionText = "\u0101".repeat(180)
+                + "\u0001\u0201\u0301\u0401\u0501\u0601\u0701\u0801"
+                + "\u0101".repeat(180);
+        StringBuilder collisionBuilder = new StringBuilder(collisionText);
+        check(collisionBuilder.indexOf(collisionTarget)
+                        == naiveIndexOf(
+                                collisionText.toCharArray(), collisionTarget.toCharArray(), 0),
+                "builder prepared target UTF16 low-byte collision");
+
         StringBuffer buffer = new StringBuffer();
         buffer.append(latin);
         buffer.append('|');
@@ -67,6 +103,28 @@ public class M3StringBuilderInteropTest {
         check(actual.length() == expectedLength, "mixed append length");
 
         System.out.println("M3_STRING_BUILDER_INTEROP_PASS|checks=" + checks);
+    }
+
+    private static int naiveIndexOf(char[] source, char[] target, int fromIndex) {
+        int from = Math.max(0, fromIndex);
+        if (target.length == 0) return Math.min(from, source.length);
+        for (int at = from; at <= source.length - target.length; at++) {
+            int index = 0;
+            while (index < target.length && source[at + index] == target[index]) index++;
+            if (index == target.length) return at;
+        }
+        return -1;
+    }
+
+    private static int naiveLastIndexOf(char[] source, char[] target, int fromIndex) {
+        int at = Math.min(fromIndex, source.length - target.length);
+        if (target.length == 0) return Math.max(-1, Math.min(fromIndex, source.length));
+        for (; at >= 0; at--) {
+            int index = 0;
+            while (index < target.length && source[at + index] == target[index]) index++;
+            if (index == target.length) return at;
+        }
+        return -1;
     }
 
     private static void check(boolean condition, String message) {
