@@ -5180,11 +5180,9 @@ public final class String
         if (Integer.MAX_VALUE / count < charLength) {
             throw new OutOfMemoryError("Required length exceeds implementation limit");
         }
-        if (m3JoinedStringsEnabled()) {
-            M3String storage = m3();
-            if (storage != null) {
-                return new String(storage.repeat(count));
-            }
+        M3String storage = m3();
+        if (storage != null) {
+            return new String(storage.repeat(count));
         }
         byte[] currentValue = value();
         final int len = currentValue.length;
