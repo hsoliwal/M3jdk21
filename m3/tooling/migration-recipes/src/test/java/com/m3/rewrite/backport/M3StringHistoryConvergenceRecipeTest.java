@@ -108,6 +108,9 @@ final class M3StringHistoryConvergenceRecipeTest {
                         "test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java",
                         "03-M3StringPrecomputeSearchTest.java.txt"),
                 java(
+                        "test/jdk/java/lang/String/M3StringInternTest.java",
+                        "15-M3StringInternTest.java.txt"),
+                java(
                         "test/jdk/jdk/internal/mindex/M3TQFactsTest.java",
                         "09-M3TQFactsTest.java.txt"),
                 java(
