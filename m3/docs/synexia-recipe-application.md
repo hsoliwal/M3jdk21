@@ -11,9 +11,9 @@ Canonical recipe:
 Authority:
 
 - repository: `hsoliwal/com.synexia`
-- branch: `m3/m3jdk21-string-convergence-donor-20261006`
+- branch: `develop` (merged from `m3/m3jdk21-string-convergence-donor-20261006`)
 - PR: `hsoliwal/com.synexia#9530`
-- pinned revision: `ad5df8458ffeba643a6c343e82dd61a338facf29`
+- pinned revision: `9572256310e141a60da28951896e06fbe1c1e199`
 - Java crate: `synexia-m3-string-history-convergence` — 18 targets
 - text/native/workflow crate: `m3-string-history-convergence` — 6 targets
 
