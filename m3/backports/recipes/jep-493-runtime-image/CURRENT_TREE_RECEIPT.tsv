@@ -8,10 +8,12 @@ source_materialized	false
 current_tree_equivalent	false
 implementation_paths	47
 recipe_atoms_generated	false
+materializer_ready	true
+materializer	m3/backports/materialize_generated_crates.py
 dependency_audit	initial-pass-complete
 compile_proof	pending
 jtreg_proof	pending
 runtime_image_smoke	pending
 fixed_point	pending
 promotion	NOT_AUTHORIZED
-next_action	GENERATE_FILE_ATOMIC_JAVA_TEXT_CRATES_THEN_COMPOSE_MULTI_MODULE_PACKET
+next_action	RUN_EPHEMERAL_FILE_ATOM_GENERATION_MATERIALIZATION_BUILD_JTREG
