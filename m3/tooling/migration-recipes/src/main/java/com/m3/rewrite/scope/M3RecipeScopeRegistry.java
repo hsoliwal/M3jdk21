@@ -57,7 +57,10 @@ public final class M3RecipeScopeRegistry {
                     fixed(M3EditScope.FILE)),
             Map.entry(
                     "com.m3.rewrite.backport.M3Jep458BackportRecipe",
-                    explicitChange()));
+                    explicitChange()),
+            Map.entry(
+                    "com.m3.rewrite.backport.M3Jep493RuntimeLinkLeafRecipe",
+                    fixed(M3EditScope.MODULE)));
 
     private M3RecipeScopeRegistry() {}
 
