@@ -308,6 +308,17 @@ for surface, marker in critical_surfaces.items():
     if marker not in string:
         fail(f"critical String surface lost M3 route: {surface}")
 
+# Range hashes and ASCII case hashes are negative filters only; exact comparison remains in
+# String.regionMatches for every surviving candidate.
+for fragment in [
+    "leftRange.hashCodeValue() != rightRange.hashCodeValue()",
+    "leftFacts.asciiLowerHash != rightFacts.asciiLowerHash",
+]:
+    if fragment not in string:
+        fail(f"M3 region precompute filter missing: {fragment}")
+if "for (int index = 0; index < len; index++)" not in string:
+    fail("exact region comparison loop missing after precompute filter")
+
 # M3-backed constructors must store only the empty compatibility sentinel.
 if string.count("storage.compatibilityValue()") < 4:
     fail("M3-backed String constructors no longer consistently use the empty sentinel")
