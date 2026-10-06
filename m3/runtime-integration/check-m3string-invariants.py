@@ -83,6 +83,10 @@ for fragment in [
     if fragment not in m3:
         fail(f"M3 generic ASCII-compatible encoder fast path missing: {fragment}")
 
+if "prepared.unpairedSurrogateCount == 0" not in m3
+        or "return encodeUtf8();" not in m3:
+    fail("M3 strict UTF-8 does not reuse unpaired-surrogate facts")
+
 # Encoding facts must be executable, not decorative metadata.
 for fragment in [
     "if (prepared.ascii) {",
