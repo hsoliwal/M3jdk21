@@ -73,7 +73,7 @@ the Synexia recipe/mastery corpus first, then export new exact outputs to every 
 ## Machine policy
 
 `m3/compatibility/synexia-public-target-policy.tsv` is the target-side license/disposition table.
-`m3/compatibility/check-synexia-public-target.py` validates it and can validate an exported
+`m3/compatibility/check_synexia_public_target.py` validates it and can validate an exported
 `SYNEXIA_M3_HANDOFF_V1` packet before receiver application.
 
 Missing/unknown license classification fails closed. This policy complements, and does not replace,
