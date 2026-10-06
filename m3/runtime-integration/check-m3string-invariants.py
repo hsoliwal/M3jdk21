@@ -607,6 +607,15 @@ for fragment in [
     if fragment not in abstract_builder:
         fail(f"AbstractStringBuilder M3 range-coder decision missing: {fragment}")
 
+# Shared flat-source substring search (used by AbstractStringBuilder) must not materialize
+# an M3-backed target String through value().
+for fragment in [
+    "M3String targetM3 = tgtStr.m3();",
+    "targetM3.charAt(index)",
+]:
+    if string.count(fragment) < 2:
+        fail(f"builder/static search M3 target route missing: {fragment}")
+
 # AbstractStringBuilder must not materialize M3 String.value() while appending String ranges.
 for fragment in [
     "M3String storage = s.m3();",
