@@ -13,7 +13,7 @@ release	jep	title	domain	disposition	reason	superseded_by
 22	464	Scoped Values (Second Preview)	library-runtime	superseded	Use final JEP 506.	506
 23	455	Primitive Types in Patterns, instanceof, and switch (Preview)	language	reject-language	Requires Java grammar/javac semantic changes.	
 23	466	Class-File API (Second Preview)	library	superseded	Use final JEP 484.	484
-23	467	Markdown Documentation Comments	tool-javadoc-javac-doc	candidate-high-risk	Tool/documentation parsing enhancement; no Java language grammar change, but touches compiler doc-comment internals.	
+23	467	Markdown Documentation Comments	tool-javadoc-javac-doc	candidate-high-risk	Current-master 250-path inventory packet exists; FILE atom generation, public doc-tree API review, CommonMark provenance, javac+javadoc build/langtools proof remain required.	
 23	469	Vector API (Eighth Incubator)	library-hotspot-compiler	hold-jit	Incubator/JIT-dependent lineage; evaluate separately.	537
 23	471	Deprecate the Memory-Access Methods in sun.misc.Unsafe for Removal	compatibility	hold-compat	Intentional deprecation/removal pressure changes compatibility posture.	
 23	473	Stream Gatherers (Second Preview)	library	superseded	Use final JEP 485.	485
@@ -83,4 +83,4 @@ release	jep	title	domain	disposition	reason	superseded_by
 27	534	Compact Object Headers by Default	vm-gc-runtime	candidate-high-risk	Cumulative VM/object-layout/GC/JIT change; no Java grammar change but requires full VM/JNI/JFR/CDS/JVMTI acceptance.	
 27	536	JFR In-Process Data Redaction	monitoring-jfr-security	candidate-high-risk	Monitoring/security enhancement; requires JFR/runtime tests and compatibility review.	
 27	537	Vector API (Twelfth Incubator)	library-hotspot-compiler	hold-jit	Latest incubator; requires extensive HotSpot/JIT support.	
-27	538	PEM Encodings of Cryptographic Objects (Third Preview)	security-library	hold-preview	Latest preview API; do not freeze preview contract into JDK 21.	
+27	538	PEM Encodings of Cryptographic Objects (Third Preview)	security-library	hold-preview	Latest preview API; do not freeze preview contract into JDK 21.
