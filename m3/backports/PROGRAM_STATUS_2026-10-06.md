@@ -111,6 +111,9 @@ Current JEP packet evidence recognized by the regenerated queue:
   - high-risk monitor-unpinning inventory packet exists;
 - JEP 493 — `MATERIALIZED_PACKET`
   - receipt state: `PACKET_READY`;
+- JEP 496 — `PACKET_EVIDENCE`
+  - exact OpenJDK prerequisite/feature commits and 20-path receiving denominator are inventoried;
+  - product materialization is locked until A3/source-21/FIPS203/provider/security proof;
 - JEP 510 — `PACKET_EVIDENCE`
   - KDF inventory/dependency packet exists with `product_materialization=false`.
 
@@ -129,6 +132,7 @@ Pending-JEP packet directories currently include:
 
 - `j423`, `jep-423-region-pinning`;
 - `j491`;
+- `j496`;
 - `j510`;
 - `jep-458-current`;
 - `jep-467-markdown`;
