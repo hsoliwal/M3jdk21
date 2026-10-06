@@ -87,6 +87,35 @@ if "prepared.unpairedSurrogateCount == 0" not in m3
         or "return encodeUtf8();" not in m3:
     fail("M3 strict UTF-8 does not reuse unpaired-surrogate facts")
 
+# Canonical composition follows the Synexia persistent reference-DAG history.
+# Binary-tree shape is an implementation detail. Candidate hashes route lookup only;
+# exact normalized terminal M3 owner/range coordinates decide canonical reuse.
+if "final int height;" not in tuple_:
+    fail("M3 tuple canonical DAG height missing")
+for fragment in [
+    "private static M3String concatBalanced(M3String left, M3String right)",
+    "private static M3String balance(M3String left, M3String right)",
+    "private static int height(M3String value)",
+    "private static M3String internTuple(M3String left, M3String right)",
+    "private static long tupleRouteKey(int javaHash, int totalLength, byte coder)",
+    "long routeKey = tupleRouteKey(javaHash, totalLength, coder);",
+    "private static boolean sameLeafSequence(",
+    "private static final class LeafCursor",
+    "rawAtom == atom && start + length == rawStart",
+    "candidate.atom() != requested.atom()",
+]:
+    if fragment not in pool:
+        fail(f"M3 balanced structural-canonical pool invariant missing: {fragment}")
+for forbidden in [
+    "geometryEquals(left, right)",
+    "tupleHash64(M3String left, M3String right)",
+    "left.identityHash64()",
+    "sequenceHash64(",
+    "combineSequenceHash(",
+]:
+    if forbidden in pool:
+        fail(f"M3 tuple interning regressed to shape/scanning identity: {forbidden}")
+
 # Encoding facts must be executable, not decorative metadata.
 for fragment in [
     "if (prepared.ascii) {",
@@ -747,7 +776,7 @@ for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringPrecomputeSearchTest.java",
     "M3StringInternTest.java",
-    "M3StringInternTest.java",
+    "M3StringCanonicalDagTest.java",
     "M3TQFactsTest.java",
     "M3RegexLiteralTQTest.java",
     "M3StringHistoryConvergenceRecipeTest",
