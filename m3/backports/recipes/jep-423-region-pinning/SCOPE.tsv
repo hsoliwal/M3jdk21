@@ -7,9 +7,12 @@ scope_floor	MULTI_MODULE
 plane	HOTSPOT_GC_JNI
 java21_identity	COMPATIBLE_RUNTIME_CANDIDATE
 public_java_api_change	false
-initial_commit_files	58
+initial_commit_files	59
 required_followups	2
-materialized	false
-recipe_state	PENDING_NATIVE_RECONCILIATION
-build_state	BLOCKED_OS_DEV_HEADERS
+materialized	workflow_ephemeral
+recipe_state	CUMULATIVE_62_FILE_ATOMS_CONFIGURED
+build_state	WORKFLOW_PROVISIONS_OS_DEV_HEADERS_PENDING_EXECUTION
 distribution_state	CANDIDATE_NOT_SELECTED
+cumulative_paths	64
+cumulative_admitted_paths	62
+preserved_java21_deletions	2
