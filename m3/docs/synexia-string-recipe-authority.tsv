@@ -1,0 +1,15 @@
+field	value
+schema	1
+recipe_id	synexia.m3jdk.string.canonical-dag.20261006
+authority_repo	hsoliwal/com.synexia
+authority_path	synexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006
+authority_tracking_ref	refs/heads/develop
+authority_pr	hsoliwal/com.synexia#9489
+target_repo	hsoliwal/M3jdk21
+target_packet_role	generated executable/hash-pinned application copy
+target_recipe_name	com.m3.rewrite.backport.M3StringCanonicalDagMasterRepair
+target_runtime_owner	M3JDK
+name_map	Synexia MIndexString -> M3JDK java.lang.M3String
+precompute_rule	implementation-internal in both worlds; never canonical spelling
+shadow_rule	byte[]/char[]/UTF buffers are compatibility shadows only
+promotion_rule	M3JDK owns ABI/layout/bootstrap/build/runtime/JNI tests and final promotion
