@@ -149,6 +149,7 @@ public final class M3NebulaTransferAdmission {
                     schema	%s
                     targetRepository	%s
                     targetLane	%s
+                    refactorScopeOrder	%s
                     transferRoot	%s
                     dagRoot	%s
                     orchestratorPlansRoot	%s
@@ -166,6 +167,7 @@ public final class M3NebulaTransferAdmission {
                             SCHEMA,
                             TARGET_REPOSITORY,
                             TARGET_LANE,
+                            REFACTOR_SCOPE_ORDER,
                             transferRoot,
                             dagRoot,
                             orchestratorPlansRoot,
@@ -197,6 +199,7 @@ public final class M3NebulaTransferAdmission {
                         "javaRelease",
                         "openRewriteVersion",
                         "entrypoint",
+                        "refactorScopeOrder",
                         "dagRoot",
                         "orchestratorPlansRoot",
                         "directSourceMutationAuthority",
