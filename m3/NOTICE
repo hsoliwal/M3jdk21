@@ -11,6 +11,12 @@ m3/tooling/cb and
 src/java.base/share/legal/synexia.md. This notice does not relicense OpenJDK
 or authorize incompatible donor imports.
 
+Synexia Apache-2.0 handoff
+Reviewed, content-addressed Synexia source and OpenRewrite recipe crates may be
+received into M3-owned m3/ and .m3/ surfaces with their Apache-2.0 provenance
+retained. OpenJDK-derived files outside those independently authored surfaces
+retain their existing OpenJDK licenses; this receiver does not relicense them.
+The source-side convergence authority remains hsoliwal/com.synexia.
 
 Synexia convergence seed import
 Source: https://github.com/hsoliwal/com.synexia
