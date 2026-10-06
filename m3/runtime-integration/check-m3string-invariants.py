@@ -39,6 +39,7 @@ stringtable = read("src/hotspot/share/classfile/stringTable.cpp")
 mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
 recipe_authority = read("m3/docs/synexia-string-recipe-authority.tsv")
+recipe_application = read("m3/docs/synexia-recipe-application.md")
 precompute_inventory = read("m3/docs/synexia-mindex-precompute-inventory.tsv")
 completeness = read("m3/docs/string-precompute-completeness.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
@@ -1047,6 +1048,37 @@ if any(re.match(r"^\s*-\s*['\"]test/jdk/", line)
        for line in workflow.splitlines()):
     fail("M3 String workflow contains concatenated path entries")
 
+for fragment in [
+    "history_recipe_id\tsynexia.m3jdk.string.history-convergence.20261006",
+    "history_recipe_name\tcom.synexia.rewrite.m3jdk.M3StringHistoryConvergence",
+    "history_authority_repo\thsoliwal/com.synexia",
+    "history_authority_pr\thsoliwal/com.synexia#9530",
+    "history_authority_revision\tad5df8458ffeba643a6c343e82dd61a338facf29",
+    "history_java_targets\t18",
+    "history_text_targets\t6",
+]:
+    if fragment not in recipe_authority:
+        fail(f"Synexia String history recipe authority missing: {fragment}")
+
+for fragment in [
+    "com.synexia.rewrite.m3jdk.M3StringHistoryConvergence",
+    "hsoliwal/com.synexia#9530",
+    "18/18 exact Synexia postimage hashes",
+    "6/6 exact Synexia postimage hashes",
+    "fixed point / zero transformation changes",
+]:
+    if fragment not in recipe_application:
+        fail(f"Synexia String recipe application receipt missing: {fragment}")
+
+for forbidden in [
+    "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-history-convergence.yml",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-history-convergence",
+    "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3StringHistoryConvergenceRecipeTest.java",
+]:
+    if (ROOT / forbidden).exists():
+        fail(f"duplicate M3 String history recipe owner returned to M3JDK21: {forbidden}")
+
 for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringPrecomputeSearchTest.java",
@@ -1054,7 +1086,6 @@ for required_gate in [
     "M3StringCanonicalDagTest.java",
     "M3TQFactsTest.java",
     "M3RegexLiteralTQTest.java",
-    "M3StringHistoryConvergenceRecipeTest",
     "M3StringCanonicalDagMasterRepairRecipeTest",
 ]:
     if required_gate not in workflow:
