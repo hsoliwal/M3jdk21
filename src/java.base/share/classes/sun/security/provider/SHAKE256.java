@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020, 2021, Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2020, 2026, Oracle and/or its affiliates. All rights reserved.
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
  *
  * This code is free software; you can redistribute it and/or modify it
@@ -24,26 +24,15 @@
  */
 package sun.security.provider;
 
-/*
- * The SHAKE256 extendable output function.
+/**
+ * Java-21 compatibility wrapper for the pre-existing internal SHAKE256 class.
+ *
+ * <p>JDK-8338587 moved SHAKE XOF mechanics into nested SHA3 classes. M3JDK21 retains this
+ * historical internal class so existing Java-21 callers continue to compile while new backports
+ * can use {@link SHA3.SHAKE256} directly.</p>
  */
-public final class SHAKE256 extends SHA3 {
+public final class SHAKE256 extends SHA3.SHA3XOF {
     public SHAKE256(int d) {
         super("SHAKE256", d, (byte) 0x1F, 64);
-    }
-
-    public void update(byte in) {
-        engineUpdate(in);
-    }
-    public void update(byte[] in, int off, int len) {
-        engineUpdate(in, off, len);
-    }
-
-    public byte[] digest() {
-        return engineDigest();
-    }
-
-    public void reset() {
-        engineReset();
     }
 }
