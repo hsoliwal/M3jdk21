@@ -59,7 +59,16 @@
         "all Java byte[]/char[] compatibility shadows, including empty sentinel, are JNI-created",
         "VM-local native scalar lookup is weak; dead native payload is reclaimable",
         "tuple composition is bounded-height and canonical by ordered terminal M3 owner/range sequence independent of concat parenthesization"
-      ]
+      ],
+      "recipe_handoff": {
+        "packet_id": "synexia.m3jdk.string.canonical-dag.20261006",
+        "canonical_repository": "hsoliwal/com.synexia",
+        "canonical_owner": "com.synexia.rewrite.M3StringCanonicalDagInvariant",
+        "target_repository": "hsoliwal/M3jdk21",
+        "target_recipe": "com.m3.rewrite.backport.M3StringCanonicalDagMasterRepair",
+        "target_role": "ADAPTER_FIXTURE_PROOF",
+        "product_promotion_authority": "hsoliwal/M3jdk21"
+      }
     },
     {
       "source": "com.synexia.indexstring.MIndexStringBacking",
