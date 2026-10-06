@@ -309,6 +309,15 @@ public class M3StringPrecomputeSearchTest {
         expectIllegalArgument(() -> String.join("", "bad", "\\").translateEscapes(),
                 "translateEscapes trailing backslash");
 
+        String valueOfLatin = String.valueOf('x');
+        String valueOfLatin2 = String.valueOf('x');
+        check(valueOfLatin.equals("x"), "valueOf Latin1 char content");
+        check(valueOfLatin != valueOfLatin2, "valueOf Latin1 fresh wrapper");
+        String valueOfUtf16 = String.valueOf('\u0100');
+        String valueOfUtf162 = String.valueOf('\u0100');
+        check(valueOfUtf16.equals("\u0100"), "valueOf UTF16 char content");
+        check(valueOfUtf16 != valueOfUtf162, "valueOf UTF16 fresh wrapper");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
