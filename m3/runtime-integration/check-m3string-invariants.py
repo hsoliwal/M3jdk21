@@ -29,6 +29,7 @@ position_precompute = read("src/java.base/share/classes/java/lang/M3StringPositi
 codepoint_precompute = read("src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java")
 tq = read("src/java.base/share/classes/jdk/internal/mindex/M3TQ.java")
 string = read("src/java.base/share/classes/java/lang/String.java")
+concat_helper = read("src/java.base/share/classes/java/lang/StringConcatHelper.java")
 asb = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
 abstract_builder = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
 symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
@@ -692,6 +693,32 @@ if "private final M3StringOwner owner;" not in m3 or "private final long value;"
 if "nativeCharShadow(" not in m3:
     fail("explicit char[] compatibility shadow boundary missing")
 
+
+
+# Historical compiler concat convergence removes O(N) staging without changing JLS conversion
+# order or the pairwise canonical tuple shape.
+for fragment in [
+    "static M3String joinConcat(String[] constants, Object[] args)",
+    "checkedArgs[index] = StringConcatHelper.stringOf(checkedArgs[index]);",
+    "M3String[] levels = newJoinLevels(maximumPieces);",
+    "carry = M3StringPool.concat(existing, carry);",
+    "result = result == null ? value : M3StringPool.concat(value, result);",
+]:
+    if fragment not in m3:
+        fail(f"M3 logarithmic concat staging invariant missing: {fragment}")
+
+if "String[] pieces = new String[" in concat_helper:
+    fail("StringConcatHelper reintroduced O(N) M3 interleave staging")
+if "String[] pieces = new String[" in string:
+    fail("String.join reintroduced O(N) M3 interleave staging")
+if "return new String(M3String.joinConcat(constants, args));" not in concat_helper:
+    fail("indy concat no longer delegates to M3 logarithmic join")
+if "M3String.join(prefix, suffix, delimiter, elements, size)" not in string:
+    fail("designated String.join no longer streams directly into M3 join")
+if "M3StringLiteralRegex" in concat_helper:
+    fail("concat helper unexpectedly coupled to regex recovery")
+if "M3StringConcatStagingTest.java" not in workflow:
+    fail("M3 concat staging jtreg is not wired into workflow")
 
 # Expensive donor facts with no JDK21 semantic consumer are intentional NO_PORTs. Adding one of
 # these java.lang owners requires an explicit architecture/invariant revision and a real consumer.
