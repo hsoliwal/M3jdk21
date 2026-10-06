@@ -35,7 +35,7 @@ public final class SharedLexiconCatalog {
     private static final String[] MAPPING_HEADER = {
             "source_id", "source_path", "source_kind", "language_tag", "record_id", "lexeme",
             "shard_id", "image_row", "mapping_id", "mapping_name", "translation_profile",
-            "precompute_profile"
+            "precompute_profile", "precompute_payload"
     };
     private static final String[] PRECOMPUTE_HEADER = {
             "shard_id", "image_row", "utf16_units", "java_hash", "code_points",
@@ -51,6 +51,7 @@ public final class SharedLexiconCatalog {
     private final List<String> firstLexemes;
     private final List<String> lastLexemes;
     private final Map<Coordinate, List<SourceMapping>> mappings;
+    private final Map<SourceIdentity, SourceMapping> mappingsByIdentity;
     private final Map<Coordinate, PrecomputeFacts> precompute;
     private final List<PrecomputeProfile> precomputeProfiles;
     private final long recordCount;
@@ -68,6 +69,10 @@ public final class SharedLexiconCatalog {
         Map<Coordinate, List<SourceMapping>> mappingCopy = new HashMap<>();
         mappings.forEach((coordinate, values) -> mappingCopy.put(coordinate, List.copyOf(values)));
         this.mappings = Map.copyOf(mappingCopy);
+        Map<SourceIdentity, SourceMapping> identityCopy = new HashMap<>();
+        this.mappings.values().forEach(values -> values.forEach(mapping ->
+                identityCopy.put(new SourceIdentity(mapping.sourceId(), mapping.recordId()), mapping)));
+        this.mappingsByIdentity = Map.copyOf(identityCopy);
         this.precompute = Map.copyOf(precompute);
         this.precomputeProfiles = List.copyOf(precomputeProfiles);
         this.recordCount = recordCount;
@@ -138,11 +143,15 @@ public final class SharedLexiconCatalog {
 
     public record Coordinate(int shardId, int imageRow) { }
 
+    /** Stable Synexia identity, independent of the physical M3LEX projection. */
+    public record SourceIdentity(String sourceId, String recordId) { }
+
     /** One preserved Synexia source identity; several may point at one lexeme. */
     public record SourceMapping(String sourceId, String sourcePath, String sourceKind,
                                 String languageTag, String recordId, String lexeme,
                                 Coordinate coordinate, String mappingId, String mappingName,
-                                String translationProfile, String precomputeProfile) { }
+                                String translationProfile, String precomputeProfile,
+                                String precomputePayload) { }
 
     /** Exported facts are retained as data; the Python verifier remains their cross-language authority. */
     public record PrecomputeFacts(Coordinate coordinate, long utf16Units, long javaHash,
@@ -160,6 +169,17 @@ public final class SharedLexiconCatalog {
     public List<SourceMapping> mappingsAt(Coordinate coordinate) {
         requireCoordinate(coordinate);
         return mappings.get(coordinate);
+    }
+    /** Returns the preserved mapping for one exact Synexia source identity. */
+    public Optional<SourceMapping> findMapping(String sourceId, String recordId) {
+        Objects.requireNonNull(sourceId);
+        Objects.requireNonNull(recordId);
+        return Optional.ofNullable(mappingsByIdentity.get(new SourceIdentity(sourceId, recordId)));
+    }
+    /** Finds all source mappings attached to one exact UTF-16 lexeme. */
+    public List<SourceMapping> findMappings(String text) {
+        Optional<Coordinate> coordinate = find(text);
+        return coordinate.isEmpty() ? List.of() : mappingsAt(coordinate.orElseThrow());
     }
     public PrecomputeFacts precomputeAt(Coordinate coordinate) {
         requireCoordinate(coordinate);
@@ -236,7 +256,7 @@ public final class SharedLexiconCatalog {
             if (!imageText(images, coordinate).equals(lexeme))
                 throw malformed(lineNumber, "mapping lexeme does not match image coordinate");
             SourceMapping mapping = new SourceMapping(fields[0], fields[1], fields[2], fields[3],
-                    fields[4], lexeme, coordinate, fields[8], fields[9], fields[10], fields[11]);
+                    fields[4], lexeme, coordinate, fields[8], fields[9], fields[10], fields[11], fields[12]);
             result.computeIfAbsent(coordinate, ignored -> new ArrayList<>()).add(mapping);
         }
         if (lines.size() == 1) throw new IOException("empty synexia.records.tsv");
@@ -341,9 +361,36 @@ public final class SharedLexiconCatalog {
 
     private static String[] splitSidecar(String line, int expectedFields, int lineNumber) throws IOException {
         if (line.isEmpty()) throw malformed(lineNumber, "empty sidecar row");
-        String[] fields = line.split("\\t", -1);
-        if (fields.length != expectedFields) throw malformed(lineNumber, "wrong sidecar field count");
-        return fields;
+        ArrayList<String> fields = new ArrayList<>(expectedFields);
+        StringBuilder field = new StringBuilder();
+        boolean quoted = false;
+        boolean closedQuote = false;
+        for (int at = 0; at < line.length(); at++) {
+            char current = line.charAt(at);
+            if (quoted) {
+                if (current == '"') {
+                    if (at + 1 < line.length() && line.charAt(at + 1) == '"') {
+                        field.append('"');
+                        at++;
+                    } else {
+                        quoted = false;
+                        closedQuote = true;
+                    }
+                } else field.append(current);
+            } else if (current == '\t') {
+                fields.add(field.toString());
+                field.setLength(0);
+                closedQuote = false;
+            } else if (current == '"' && field.length() == 0 && !closedQuote) {
+                quoted = true;
+            } else if (closedQuote) {
+                throw malformed(lineNumber, "characters after quoted sidecar field");
+            } else field.append(current);
+        }
+        if (quoted) throw malformed(lineNumber, "unterminated quoted sidecar field");
+        fields.add(field.toString());
+        if (fields.size() != expectedFields) throw malformed(lineNumber, "wrong sidecar field count");
+        return fields.toArray(String[]::new);
     }
 
     private static void requireFields(String[] fields, int lineNumber) throws IOException {

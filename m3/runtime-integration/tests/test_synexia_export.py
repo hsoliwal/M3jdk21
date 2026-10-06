@@ -5,6 +5,7 @@
 from __future__ import annotations
 
 import importlib.util
+import csv
 import hashlib
 import json
 import struct
@@ -31,7 +32,8 @@ VERIFY_SPEC.loader.exec_module(VERIFY)
 class SynexiaExportTest(unittest.TestCase):
     columns = EXPORT.RECORD_COLUMNS
 
-    def write_inputs(self, root: Path, conflict: bool = False) -> tuple[Path, Path]:
+    def write_inputs(self, root: Path, conflict: bool = False,
+                     with_payload: bool = False) -> tuple[Path, Path]:
         root.mkdir(parents=True, exist_ok=True)
         manifest = root / "sources.tsv"
         manifest.write_text(
@@ -53,21 +55,56 @@ class SynexiaExportTest(unittest.TestCase):
                     ))
         if conflict:
             rows.append(rows[0][:-9] + ("different",) + rows[0][-8:])
+        columns = EXPORT.RECORD_COLUMNS
+        if with_payload:
+            enriched = []
+            for row in rows:
+                if row[0] == "numbers":
+                    payload = {"corpus_count": int(row[4]) + 1,
+                               "frequency_rank": int(row[4])}
+                else:
+                    payload = {
+                        "concept_ids": [101, 102],
+                        "corpus_count": 7,
+                        "document_frequency": 3,
+                        "expansion_word_ids": [201, 202],
+                        "language": row[3],
+                        "lemma_id": 11,
+                        "lexical_rank": 5,
+                        "mapping_id": row[6],
+                        "memberships": [301],
+                        "morphology_mask": 16,
+                        "phonetic_id": 13,
+                        "pos_mask": 8,
+                        "presence64": 17,
+                        "sim_hash64": 19,
+                        "script_ordinal": 25,
+                        "stem_id": 7,
+                        "subjects": [401],
+                        "utf16_length": len(row[5].encode("utf-16-le", "surrogatepass")) // 2,
+                        "code_point_length": len(row[5]),
+                        "first_code_point": ord(row[5][0]),
+                        "last_code_point": ord(row[5][-1]),
+                    }
+                enriched.append(row + (json.dumps(payload, ensure_ascii=False),))
+            rows = enriched
+            columns = EXPORT.RECORD_COLUMNS_V2
         records = root / "records.tsv"
         with records.open("w", encoding="utf-8", newline="") as stream:
-            stream.write("\t".join(self.columns) + "\n")
+            stream.write("\t".join(columns) + "\n")
             stream.writelines("\t".join(row) + "\n" for row in rows)
         return manifest, records
 
-    def run_export(self, root: Path, output: Path, conflict: bool = False):
-        manifest, records = self.write_inputs(root, conflict)
+    def run_export(self, root: Path, output: Path, conflict: bool = False,
+                   with_payload: bool = False):
+        manifest, records = self.write_inputs(root, conflict, with_payload)
         return EXPORT.export(manifest, records, output, "https://github.com/hsoliwal/com.synexia",
                              "3e85c872adf556901a341a9eb1c3b59864918da1")
 
     def test_preserves_ids_mappings_numbers_and_precompute(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            first = self.run_export(root / "input", root / "first")
+            first = self.run_export(root / "input", root / "first", with_payload=True)
             self.assertEqual(10004, first["counts"]["source_records"])
             self.assertEqual(10004, first["counts"]["image_records"])
             self.assertEqual(2, first["counts"]["source_families"])
@@ -75,6 +112,19 @@ class SynexiaExportTest(unittest.TestCase):
             self.assertIn("common.proper_name.london", mapping)
             self.assertIn("si.metre", mapping)
             self.assertIn("NUMBER_10000", mapping)
+            mapping_rows = list(csv.DictReader(mapping.splitlines(), delimiter="\t"))
+            number_zero = next(row for row in mapping_rows if row["record_id"] == "0")
+            self.assertEqual('{"corpus_count":1,"frequency_rank":0}',
+                             number_zero["precompute_payload"])
+            london = next(row for row in mapping_rows
+                          if row["record_id"] == "en:common.proper_name.london")
+            london_payload = json.loads(london["precompute_payload"])
+            self.assertEqual("en", london_payload["language"])
+            self.assertEqual([101, 102], london_payload["concept_ids"])
+            self.assertEqual([201, 202], london_payload["expansion_word_ids"])
+            self.assertEqual(13, london_payload["phonetic_id"])
+            self.assertEqual(19, london_payload["sim_hash64"])
+            self.assertEqual(25, london_payload["script_ordinal"])
             facts = (root / "first/synexia.precompute.tsv").read_text(encoding="utf-8")
             self.assertIn("NumberPrecompute", facts)
             self.assertIn("M3StringFacts", facts)
@@ -94,6 +144,29 @@ class SynexiaExportTest(unittest.TestCase):
             self.assertEqual({"source_records": 10004, "image_records": 10004, "shards": 1,
                               "precompute_profiles": 2,
                               "utf16_units": expected_units}, VERIFY.verify(root / "first"))
+
+    def test_legacy_input_defaults_to_empty_owner_payload(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self.run_export(root / "input", root / "output")
+            mapping = (root / "output/synexia.records.tsv").read_text(encoding="utf-8")
+            self.assertIn("precompute_payload", mapping.splitlines()[0])
+            self.assertIn("\t{}\n", mapping)
+            VERIFY.verify(root / "output")
+
+    def test_owner_payload_rejects_ambiguous_or_non_object_json(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest, records = self.write_inputs(root / "input", with_payload=True)
+            original = records.read_text(encoding="utf-8")
+            for attempt, invalid in enumerate(('"[1]"', '"{""a"":1,""a"":2}"', '"NaN"')):
+                records.write_text(original.replace(
+                    '{"corpus_count": 1, "frequency_rank": 0}', invalid.strip('"'), 1),
+                    encoding="utf-8")
+                with self.assertRaisesRegex(ValueError, "precompute payload", msg=f"attempt={attempt}"):
+                    EXPORT.export(manifest, records, root / ("output-" + str(attempt)),
+                                  "fixture", "0" * 40)
+            records.write_text(original, encoding="utf-8")
 
     def test_replay_is_byte_identical_except_for_output_location(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -167,7 +240,7 @@ class SynexiaExportTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             output = root / "output"
-            self.run_export(root / "input", output)
+            self.run_export(root / "input", output, with_payload=True)
             classes = root / "classes"
             sources = [ROOT / "m3/core/src/module-info.java"]
             sources.extend(sorted((ROOT / "m3/core/src/com/m3/text").glob("*.java")))

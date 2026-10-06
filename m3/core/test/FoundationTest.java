@@ -104,13 +104,13 @@ public final class FoundationTest {
         String rows="0\tone.m3lex\ta\t\\uD800\t2\t2\t"+sha256(one)+"\n"
                 +"1\ttwo.m3lex\t\\uD801\t\\uD802\t2\t2\t"+sha256(two)+"\n";
         Files.writeString(directory.resolve("synexia.shards.tsv"),header+rows,java.nio.charset.StandardCharsets.UTF_8);
-        String mappingHeader="source_id\tsource_path\tsource_kind\tlanguage_tag\trecord_id\tlexeme\tshard_id\timage_row\tmapping_id\tmapping_name\ttranslation_profile\tprecompute_profile\n";
+        String mappingHeader="source_id\tsource_path\tsource_kind\tlanguage_tag\trecord_id\tlexeme\tshard_id\timage_row\tmapping_id\tmapping_name\ttranslation_profile\tprecompute_profile\tprecompute_payload\n";
         String mappings=mappingHeader
-                +"source-a\tpath-a\tkind-a\ten\tid-a\ta\t0\t0\tmap-a\tA\tprofile-a\tprofile-a\n"
-                +"source-a2\tpath-a2\tkind-a2\ten\tid-a2\ta\t0\t0\tmap-a2\tA2\tprofile-a2\tprofile-a2\n"
-                +"source-high\tpath-high\tkind-high\ten\tid-high\t\\uD800\t0\t1\tmap-high\tHIGH\tprofile-high\tprofile-high\n"
-                +"source-high2\tpath-high2\tkind-high2\ten\tid-high2\t\\uD801\t1\t0\tmap-high2\tHIGH2\tprofile-high2\tprofile-high2\n"
-                +"source-high3\tpath-high3\tkind-high3\ten\tid-high3\t\\uD802\t1\t1\tmap-high3\tHIGH3\tprofile-high3\tprofile-high3\n";
+                +"source-a\tpath-a\tkind-a\ten\tid-a\ta\t0\t0\tmap-a\tA\tprofile-a\tprofile-a\t{}\n"
+                +"source-a2\tpath-a2\tkind-a2\ten\tid-a2\ta\t0\t0\tmap-a2\tA2\tprofile-a2\tprofile-a2\t{\"frequency_rank\":1}\n"
+                +"source-high\tpath-high\tkind-high\ten\tid-high\t\\uD800\t0\t1\tmap-high\tHIGH\tprofile-high\tprofile-high\t{}\n"
+                +"source-high2\tpath-high2\tkind-high2\ten\tid-high2\t\\uD801\t1\t0\tmap-high2\tHIGH2\tprofile-high2\tprofile-high2\t{}\n"
+                +"source-high3\tpath-high3\tkind-high3\ten\tid-high3\t\\uD802\t1\t1\tmap-high3\tHIGH3\tprofile-high3\tprofile-high3\t{}\n";
         Files.writeString(directory.resolve("synexia.records.tsv"),mappings,java.nio.charset.StandardCharsets.UTF_8);
         String facts="shard_id\timage_row\tutf16_units\tjava_hash\tcode_points\tunpaired_surrogates\tnon_bmp_code_points\tascii\tlatin1\tcontains_whitespace\tprecompute_profile\n"
                 +"0\t0\t1\t97\t1\t0\t0\tTrue\tTrue\tFalse\tprofile-a + profile-a2\n"
@@ -132,6 +132,9 @@ public final class FoundationTest {
         check(catalog.precomputeProfiles().get(0).profile().equals("profile-a"));
         check(catalog.mappingsAt(new SharedLexiconCatalog.Coordinate(0,0)).size()==2);
         check(catalog.mappingsAt(new SharedLexiconCatalog.Coordinate(0,0)).get(1).mappingName().equals("A2"));
+        check(catalog.mappingsAt(new SharedLexiconCatalog.Coordinate(0,0)).get(1).precomputePayload().equals("{\"frequency_rank\":1}"));
+        check(catalog.findMapping("source-a2","id-a2").orElseThrow().mappingName().equals("A2"));
+        check(catalog.findMappings("a").size()==2);check(catalog.findMappings("missing").isEmpty());
         check(catalog.prefix("a",10).equals(List.of(new SharedLexiconCatalog.Coordinate(0,0))));
         expect(IllegalArgumentException.class,()->catalog.prefix("",1));
         check(catalog.find("\ud801").equals(Optional.of(new SharedLexiconCatalog.Coordinate(1,0))));
@@ -151,9 +154,13 @@ public final class FoundationTest {
         SharedLexiconCatalog.Coordinate number=catalog.find("10000").orElseThrow();
         check(catalog.textAt(number).equals("10000"));
         check(catalog.mappingsAt(number).stream().anyMatch(mapping->mapping.mappingName().equals("NUMBER_10000")));
+        check(catalog.findMapping("numbers","10000").orElseThrow().mappingName().equals("NUMBER_10000"));
+        check(catalog.mappingsAt(number).stream().anyMatch(mapping->mapping.precomputePayload().contains("\"frequency_rank\":10000")));
         check(catalog.precomputeAt(number).precomputeProfile().contains("NumberPrecompute"));
         SharedLexiconCatalog.Coordinate london=catalog.find("London").orElseThrow();
         check(catalog.mappingsAt(london).stream().anyMatch(mapping->mapping.translationProfile().equals("en->hi")));
+        check(catalog.mappingsAt(london).stream().anyMatch(mapping->mapping.precomputePayload().contains("\"phonetic_id\":13")));
+        check(catalog.mappingsAt(london).stream().anyMatch(mapping->mapping.precomputePayload().contains("\"sim_hash64\":19")));
         List<SharedLexiconCatalog.Coordinate> hundreds=catalog.prefix("100",3);
         check(hundreds.size()==3);check(catalog.textAt(hundreds.get(0)).equals("100"));
         check(catalog.textAt(hundreds.get(1)).equals("1000"));check(catalog.textAt(hundreds.get(2)).equals("10000"));

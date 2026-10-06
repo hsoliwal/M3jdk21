@@ -11,12 +11,33 @@ bulk datasets named by it.
 
 ## Export contract
 
-The operator supplies a UTF-8 TSV snapshot with the exact columns below:
+The operator supplies a UTF-8 TSV snapshot. The original ten-column form remains
+accepted for compatibility:
 
 ```text
 source_id  source_path  source_kind  language_tag  record_id  lexeme
 mapping_id mapping_name translation_profile precompute_profile
 ```
+
+For complete owner-level precompute, use the v2 form with one additional final
+column:
+
+```text
+source_id  source_path  source_kind  language_tag  record_id  lexeme
+mapping_id mapping_name translation_profile precompute_profile precompute_payload
+```
+
+`precompute_payload` is a bounded JSON object supplied by the Synexia owner. It
+is canonicalized (sorted keys, compact separators, ASCII escapes) and retained
+opaque in the mapping sidecar, so fields such as corpus/document counts,
+frequency rank, stem/lemma/phonetic IDs, POS/morphology masks and relation IDs
+survive without being falsely presented as `java.lang.String` facts. Duplicate
+keys, non-object values, non-finite numbers and payloads over 1 MiB are
+rejected. Legacy input receives the explicit canonical payload `{}`.
+The field-level donor mapping is maintained in
+`m3/lexicon/synexia-precompute-field-map.tsv`; it covers the `IndexWordFacts`,
+`IndexWordSignalEnrichment`, `IndexWordSignalProfile` and `IndexWordSignalFlags`
+families without making their values part of `java.lang.String`.
 
 `source_id + record_id` is the immutable source identity. The exporter rejects
 duplicates, unknown source families, source-path drift, empty fields and
@@ -47,7 +68,7 @@ The output is:
   image record/size boundary;
 - `synexia.shards.tsv`: shard order, file, lexical bounds, counts and hashes;
 - `synexia.records.tsv`: exact source IDs, names, mappings, language/profile
-  coordinates and their physical shard/image row;
+  coordinates, physical shard/image row and canonical owner payload;
 - `synexia.precompute-index.tsv`: every exact Synexia precompute-owner profile,
   source-row and physical-coordinate cardinality, and deterministic coverage
   fingerprint;
@@ -63,6 +84,9 @@ payloads. `textAt` is the explicit single-record materialization boundary;
 source IDs and mapping names are not converted into VM-local `String` identities.
 `prefix(value, limit)` is the first mapped query surface: it returns ordered
 coordinates through shard-local lower bounds and exact UTF-16 prefix checks.
+`findMapping(sourceId, recordId)` resolves the preserved Synexia identity without
+requiring a physical coordinate, while `findMappings(text)` returns all
+translation/dictionary/unit/number mappings attached to one exact lexeme.
 
 The image is suitable for the existing `-Djdk.mindex.lexicon=/absolute/file`
 boundary. The sidecars remain language-layer metadata; they are not fields of
@@ -83,6 +107,6 @@ python3 m3/runtime-integration/verify-synexia-lexicon.py /operator/m3jdk-lexicon
 ```
 
 The proof covers all number IDs `0..10000`, multilingual/proper-name and unit
-mapping rows, deterministic replay, M3LEX001 version 2 metadata, precompute
-sidecars, conflict refusal before output creation, and source-blind rejection
-of a post-export mutation.
+mapping rows, rich owner payloads, legacy-input compatibility, deterministic
+replay, M3LEX001 version 2 metadata, precompute sidecars, conflict refusal
+before output creation, and source-blind rejection of a post-export mutation.
