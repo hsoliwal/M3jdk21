@@ -6,7 +6,11 @@
       "after": "88f4d3b3b04e41c34f171a38f30a320af91561ba72fa89a35750e1da7b9854c1",
       "superseded": [
         "1399b110a329f39ee1c40df2d9bb9af216d0e512a343b5fcf641fb67b39a3c87"
-      ]
+      ],
+      "superseded_by": {
+        "path": "src/java.base/share/classes/java/lang/M3String.java",
+        "git_blob": "3137d574684eac57260775ce13f8fbe2bf7ef0bc"
+      }
     },
     "m3/runtime-integration/tests/MIndexStringInvariant.java": {
       "before": "c4623ce4627dffb0b70c9b7d8cc8e429c50300a4fa6ec90ea5c7d1f6bbc4aee1",
