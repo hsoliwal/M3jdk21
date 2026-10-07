@@ -1149,6 +1149,7 @@ for required_gate in [
     "M3RegexLiteralTQTest.java",
     "M3StringHistoryConvergenceRecipeTest",
     "M3StringCanonicalDagMasterRepairRecipeTest",
+    "M3StringDirectStreamTraversalRecipeTest",
 ]:
     if required_gate not in workflow:
         fail(f"M3 String workflow lost verification gate: {required_gate}")
