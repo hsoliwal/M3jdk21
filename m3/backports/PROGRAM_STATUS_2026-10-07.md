@@ -23,14 +23,14 @@ A recipe/evidence directory is not product materialization.
 - `RECIPE_CLASS` when only a recipe implementation is present;
 - `NO_RECIPE_EVIDENCE` when no repository-owned packet/recipe evidence exists.
 
-This repairs four false current-master materialization claims:
+This current-tree readback distinguishes packet-only evidence from receipt-backed materialization:
 
 | JEP | Correct state | Reason |
 | --- | --- | --- |
 | 423 | PACKET_EVIDENCE | inventory/cumulative-materialization control packet, no current-tree receipt |
 | 484 | PACKET_EVIDENCE | custody/path-map packet, no current-tree receipt |
 | 485 | PACKET_EVIDENCE | gatherer packet/recovery evidence, no current-tree receipt in current tree |
-| 523 | PACKET_EVIDENCE | G1-default packet/adaptation evidence, no current-tree receipt |
+| 523 | MATERIALIZED_PACKET | exact current-tree product/test postimages are receipt-backed; G1/no-G1 build, jtreg and runtime proof remain pending |
 
 No compatibility decision changes.
 
