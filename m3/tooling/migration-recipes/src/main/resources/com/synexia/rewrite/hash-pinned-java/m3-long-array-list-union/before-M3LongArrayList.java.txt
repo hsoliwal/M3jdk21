@@ -8,8 +8,6 @@ import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
 import java.util.Objects;
-import java.util.Spliterator;
-import java.util.function.LongPredicate;
 
 /**
  * Primitive-long array list with JDK-shaped positional semantics and no per-element wrapper.
@@ -17,17 +15,8 @@ import java.util.function.LongPredicate;
  * <p>This is an M3 proving-ground backend, not a replacement for {@link java.util.ArrayList}.
  * It preserves encounter order, permits every {@code long} value, uses fail-fast primitive
  * iterators, and keeps capacity separate from logical size.</p>
- *
- * <p>Single semantic owner of the dense {@code long[]} list contract. It unions the JDK-shaped
- * backend (Synexia handoff {@code m3jdk21-primitive-collections-v1}) with the
- * {@code PackedLongList} lineage (Synexia crate {@code m3-collection-contracts/array-list}):
- * {@link #addIf}, {@link #filterInPlace}, {@link #sort}, {@link #binarySearch},
- * {@link #deduplicateSorted}, {@link #copyOf}, the {@link M3LongStack} operations and an
- * owner-indirected {@link #longSpliterator()}. Every structural mutation bumps the modification
- * count so live iterators stay fail-fast; growth geometry, zeroing on removal and the shared empty
- * backing array are the JDK-shaped ones.</p>
  */
-public final class M3LongArrayList implements M3LongList, M3LongStack {
+public final class M3LongArrayList implements M3LongCollection {
     private static final int DEFAULT_CAPACITY = 10;
     private static final int MAX_ARRAY_SIZE = Integer.MAX_VALUE - 8;
     private static final long[] EMPTY = new long[0];
@@ -47,18 +36,6 @@ public final class M3LongArrayList implements M3LongList, M3LongStack {
         elements = initialCapacity == 0 ? EMPTY : new long[initialCapacity];
     }
 
-    /** Copies {@code source}; the imported array is never retained. */
-    public static M3LongArrayList copyOf(long[] source) {
-        Objects.requireNonNull(source, "source");
-        M3LongArrayList list = new M3LongArrayList(source.length);
-        if (source.length > 0) {
-            System.arraycopy(source, 0, list.elements, 0, source.length);
-        }
-        list.size = source.length;
-        return list;
-    }
-
-    @Override
     public boolean add(long value) {
         ensureCapacity(size + 1);
         elements[size++] = value;
@@ -66,7 +43,6 @@ public final class M3LongArrayList implements M3LongList, M3LongStack {
         return true;
     }
 
-    @Override
     public void add(int index, long value) {
         checkPositionIndex(index);
         ensureCapacity(size + 1);
@@ -76,16 +52,6 @@ public final class M3LongArrayList implements M3LongList, M3LongStack {
         modCount++;
     }
 
-    @Override
-    public boolean addIf(long value, LongPredicate predicate) {
-        Objects.requireNonNull(predicate, "predicate");
-        if (!predicate.test(value)) {
-            return false;
-        }
-        return add(value);
-    }
-
-    @Override
     public boolean addAll(long[] values) {
         Objects.requireNonNull(values, "values");
         if (values.length == 0) {
@@ -99,12 +65,10 @@ public final class M3LongArrayList implements M3LongList, M3LongStack {
         return true;
     }
 
-    @Override
     public long get(int index) {
         return elements[Objects.checkIndex(index, size)];
     }
 
-    @Override
     public long set(int index, long value) {
         int checked = Objects.checkIndex(index, size);
         long previous = elements[checked];
@@ -112,7 +76,6 @@ public final class M3LongArrayList implements M3LongList, M3LongStack {
         return previous;
     }
 
-    @Override
     public long removeAt(int index) {
         int checked = Objects.checkIndex(index, size);
         long previous = elements[checked];
@@ -125,7 +88,6 @@ public final class M3LongArrayList implements M3LongList, M3LongStack {
         return previous;
     }
 
-    @Override
     public boolean remove(long value) {
         int index = indexOf(value);
         if (index < 0) {
@@ -140,7 +102,6 @@ public final class M3LongArrayList implements M3LongList, M3LongStack {
         return indexOf(value) >= 0;
     }
 
-    @Override
     public int indexOf(long value) {
         for (int i = 0; i < size; i++) {
             if (elements[i] == value) {
@@ -150,7 +111,6 @@ public final class M3LongArrayList implements M3LongList, M3LongStack {
         return -1;
     }
 
-    @Override
     public int lastIndexOf(long value) {
         for (int i = size - 1; i >= 0; i--) {
             if (elements[i] == value) {
@@ -160,103 +120,15 @@ public final class M3LongArrayList implements M3LongList, M3LongStack {
         return -1;
     }
 
-    /** Sorts the logical range in signed natural order; a structural modification for iterators. */
-    @Override
-    public void sort() {
-        Arrays.sort(elements, 0, size);
-        modCount++;
-    }
-
-    /** Binary search over the current logical range. Caller is responsible for sorted order. */
-    @Override
-    public int binarySearch(long value) {
-        return Arrays.binarySearch(elements, 0, size, value);
-    }
-
-    /** Removes duplicates in-place from an already-sorted list; returns the number removed. */
-    @Override
-    public int deduplicateSorted() {
-        if (size < 2) {
-            return 0;
-        }
-        int write = 1;
-        for (int read = 1; read < size; read++) {
-            if (elements[read] != elements[write - 1]) {
-                elements[write++] = elements[read];
-            }
-        }
-        int removed = size - write;
-        if (removed > 0) {
-            Arrays.fill(elements, write, size, 0L);
-            size = write;
-            modCount++;
-        }
-        return removed;
-    }
-
-    /**
-     * Keeps matching values in-place. On predicate failure, prior rejections are committed, but
-     * the throwing value and untested suffix remain intact. The predicate must not mutate this
-     * collection.
-     */
-    @Override
-    public int filterInPlace(LongPredicate predicate) {
-        Objects.requireNonNull(predicate, "predicate");
-        int originalSize = size;
-        int read = 0;
-        int write = 0;
-        try {
-            for (; read < originalSize; read++) {
-                long value = elements[read];
-                if (predicate.test(value)) {
-                    elements[write++] = value;
-                }
-            }
-        } finally {
-            // If the callback throws, preserve its element and the unread suffix.
-            System.arraycopy(elements, read, elements, write, originalSize - read);
-            int retained = write + originalSize - read;
-            if (retained != originalSize) {
-                Arrays.fill(elements, retained, originalSize, 0L);
-                size = retained;
-                modCount++;
-            }
-        }
-        return originalSize - size;
-    }
-
-    @Override
-    public void push(long value) {
-        add(value);
-    }
-
-    @Override
-    public long peek() {
-        if (size == 0) {
-            throw new NoSuchElementException();
-        }
-        return elements[size - 1];
-    }
-
-    @Override
-    public long pop() {
-        if (size == 0) {
-            throw new NoSuchElementException();
-        }
-        return removeAt(size - 1);
-    }
-
     @Override
     public int size() {
         return size;
     }
 
-    @Override
     public int capacity() {
         return elements.length;
     }
 
-    @Override
     public void ensureCapacity(int minimumCapacity) {
         if (minimumCapacity < 0) {
             throw new OutOfMemoryError("required array size too large");
@@ -274,7 +146,6 @@ public final class M3LongArrayList implements M3LongList, M3LongStack {
         elements = Arrays.copyOf(elements, candidate);
     }
 
-    @Override
     public void trimToSize() {
         if (size < elements.length) {
             elements = size == 0 ? EMPTY : Arrays.copyOf(elements, size);
@@ -295,18 +166,6 @@ public final class M3LongArrayList implements M3LongList, M3LongStack {
     @Override
     public long[] toArray() {
         return Arrays.copyOf(elements, size);
-    }
-
-    /**
-     * Index splitting over the current logical range.
-     *
-     * <p>The spliterator retains this owner rather than the current backing array so a capacity
-     * relocation between view creation and traversal does not strand the view on stale storage.
-     * Structural mutation during traversal remains unsupported.</p>
-     */
-    @Override
-    public Spliterator.OfLong longSpliterator() {
-        return new M3LongListSpliterator(this, 0, size);
     }
 
     @Override
