@@ -405,6 +405,18 @@
       "status": "no direct port; reuse existing target native owner",
       "source_role": "Synexia dedicated recipe-mastery regex/String static-signal JNI ABI",
       "target_rule": "do not introduce a second M3 native ABI; reuse existing M3 code-text signal JNI provider and retain JDK Pattern regex semantics on Java side"
+    },
+    {
+      "source": "com.synexia.indexstring.shared.SharedArrayNative.compare / hash32 / metrics / copyTo; SharedSegments.preparedBuffers",
+      "source_commit": "857c4cc0ddeb73e5ea5269a1d0ef2d30057dcfa8",
+      "source_blob_sha1": "SharedArrayNative.java:62c2e6e089b6a203b22d5aae4e15a834876f08d1;SharedSegments.java:2912e2afbc13a981ed6f6ef704b8b17047481fea;shared_arrays.cpp:8b85031cfbe1d64f43c93a1453f8670cc65dbafe;shared_string_compare.cpp:c0bf741d48304dceb73fddd0352ab510d1f2265f",
+      "target": "java.lang.String.compareTo(String) -> java.lang.M3String / M3StringOwner / M3StringAtom.address; JNI projections -> M3String.getChars/getBytes and nativeCharShadow/nativeByteShadow",
+      "status": "Apache source custody pinned; target direct-address fast path not implemented",
+      "source_role": "shared-segment JNI compare, hash, metric and caller-owned range-copy kernels over direct ByteBuffer owners",
+      "target_rule": "M3String keeps canonical owner+packed coordinate; scalar M3StringAtom already owns a native address and tuples remain a reference DAG. Do not add a parallel ByteBuffer[] payload/descriptor owner or Synexia runtime dependency. Any direct-address target optimization stays target-specific and must preserve exact JDK semantics and pass matched runtime benchmarks.",
+      "historical_evidence": "Synexia PR #9579 merged at 1a5f6c9abbf00887550f7c3d5647ebb20ef7ad99 with an owned UTF-16 address directory; that cache is absent from current develop at the pinned source revision.",
+      "source_license": "Apache-2.0",
+      "target_license": "GPL-2.0-with-Classpath-exception for the existing java.base files; no target source file changed by this intake"
     }
   ],
   "imported_donor_sources": [],
