@@ -1,0 +1,22 @@
+{
+  "schema": "M3_NAME_MAPPING_FRAGMENT_V1",
+  "note": "Fragment for the serial manifest reducer; not merged into name-mapping.json by this leaf.",
+  "mappings": [
+    {
+      "source": "com.synexia.indexstring.MIndexString (JNI field cache 'mindex' in libjava/jni_util.c)",
+      "source_commit": "26320a320f (M3JDK21 consolidate first pre-release implementation)",
+      "target": "java.lang.String.m3 / java.lang.M3String via String_m3_ID in libjava/jni_util.c",
+      "status": "implemented-locally-verified; JNI compile and runtime PENDING_LINUX",
+      "recipe": "com.m3.rewrite.backport.M3JniSaM3FieldRecipe",
+      "target_rule": "InitializeEncoding caches the current String.m3 field; M3-backed Strings keep the explicit charset boundary before any critical pointer"
+    },
+    {
+      "source": "sun.jvm.hotspot.oops.OopUtilities mindex/MIndexString decoder",
+      "source_commit": "26320a320f",
+      "target": "sun.jvm.hotspot.oops.OopUtilities M3String owner+coordinate decoder (atom width/endian, tuple split)",
+      "status": "implemented-locally-verified; SA attach test PENDING_LINUX",
+      "recipe": "com.m3.rewrite.backport.M3JniSaM3FieldRecipe",
+      "target_rule": "SA never executes Java in the target VM; decoding mirrors M3StringOwner.charAt exactly"
+    }
+  ]
+}
