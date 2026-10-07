@@ -4,7 +4,7 @@ Status: transitional M3JDK21 receiver binding.
 
 Canonical source:
 - repository: `hsoliwal/com.synexia`
-- revision: `c3af4e829e58c7c6818dde43a35ed97d367f4a92`
+- revision: `b616c87abd648c8570c48ff427ef98f4cacd3411`
 - canonical manifest: `synexia-openrewrite-recipes/CANONICAL_RECIPE_HOME.tsv`
 
 The reusable scope kernel is canonical in Synexia:
