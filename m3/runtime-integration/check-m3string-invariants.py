@@ -1032,6 +1032,17 @@ for fragment in [
 if "ArrayList<M3StringAtom> values" in pool:
     fail("VM-local M3 atom pool strongly retains native atoms")
 
+for required_mechanical_name_mapping in [
+    '"source": "com.synexia.indexstring.precompute.MIndexRe2MechanicalFacts"',
+    '"source": "com.synexia.indexstring.precompute.MIndexLucenePostingPlan"',
+    '"source": "com.synexia.indexstring.precompute.MIndexTweetyGraphQueryIndex"',
+    '"source_revision": "f07aa85ba83749bbb2b6fa4a7a169b38aaac8ba2"',
+    '"status": "selective internal mapping; no RE2/J runtime dependency"',
+    '"status": "do not port to java.lang.String"',
+]:
+    if required_mechanical_name_mapping not in mapping:
+        fail(f"mechanical donor name mapping missing: {required_mechanical_name_mapping}")
+
 # Mapping authority must preserve donor->target lineage and shadow names.
 required_mapping_fragments = [
     '"source": "com.synexia.indexstring.MIndexString"',
