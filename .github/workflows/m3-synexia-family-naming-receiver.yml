@@ -1,0 +1,27 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Synexia family naming receiver
+
+on:
+  pull_request:
+    paths:
+      - 'm3/compatibility/SYNEXIA_M3_FAMILY_NAMING_RECEIVER.md'
+      - 'm3/compatibility/synexia-m3-family-naming-pin.tsv'
+      - 'm3/compatibility/m3-family-naming-target-disposition.tsv'
+      - 'm3/compatibility/check_synexia_m3_family_naming.py'
+      - 'm3/docs/M3JDK_SYNEXIA_PORTING_INVARIANT.md'
+      - '.github/workflows/m3-synexia-family-naming-receiver.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - name: Diff hygiene
+        run: git diff --check
+      - name: Verify pinned family naming receiver
+        run: python3 m3/compatibility/check_synexia_m3_family_naming.py
