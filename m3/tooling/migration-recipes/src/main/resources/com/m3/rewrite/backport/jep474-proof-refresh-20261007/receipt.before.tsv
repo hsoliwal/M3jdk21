@@ -13,11 +13,3 @@ compile_proof	pending
 runtime_smoke	pending
 promotion	NOT_AUTHORIZED
 next_action	BUILD_CURRENT_MASTER_AND_PROVE_BOTH_ZGC_MODES_WITH_JAVA21_DEFAULT_UNCHANGED
-proof_refresh_base	80b8534ad1e45002185fb3eeab233f98d3a7c0bd
-proof_refresh_requested	2026-10-07
-proof_branch	m3/jep474-proof-refresh-20261007
-previous_failed_run	37409218603
-previous_failure	GITHUB_ENV_LITERAL_BACKSLASH_N_PATH
-proof_recipe	com.m3.rewrite.backport.M3Jep474ProofRefreshRecipe
-recipe_junit	pending
-hosted_equivalence_proof	pending
