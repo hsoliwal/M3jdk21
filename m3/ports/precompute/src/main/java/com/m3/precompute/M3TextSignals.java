@@ -34,6 +34,8 @@ public final class M3TextSignals {
     private final long hash64;
     private final long power64;
     private final long presence64;
+    private final long prefix2;
+    private final long suffix2;
     private final int letters;
     private final int digits;
     private final int whitespace;
@@ -51,6 +53,8 @@ public final class M3TextSignals {
             long hash64,
             long power64,
             long presence64,
+            long prefix2,
+            long suffix2,
             int letters,
             int digits,
             int whitespace,
@@ -63,6 +67,8 @@ public final class M3TextSignals {
         this.hash64 = hash64;
         this.power64 = power64;
         this.presence64 = presence64;
+        this.prefix2 = prefix2;
+        this.suffix2 = suffix2;
         this.letters = letters;
         this.digits = digits;
         this.whitespace = whitespace;
@@ -130,6 +136,8 @@ public final class M3TextSignals {
                 hash,
                 power,
                 presence,
+                packedPrefix2(value),
+                packedSuffix2(value),
                 letters,
                 digits,
                 whitespace,
@@ -153,12 +161,10 @@ public final class M3TextSignals {
 
         ArrayList<Long> seam3 = new ArrayList<>(2);
         if (left.metrics.utf16Length() >= 2) {
-            long suffix = left.lastTwoPacked();
-            seam3.add(trigram((char) (suffix >>> 16), (char) suffix, first));
+            seam3.add(trigram((char) (left.suffix2 >>> 16), (char) left.suffix2, first));
         }
         if (right.metrics.utf16Length() >= 2) {
-            long prefix = right.firstTwoPacked();
-            seam3.add(trigram(last, (char) (prefix >>> 16), (char) prefix));
+            seam3.add(trigram(last, (char) (right.prefix2 >>> 16), (char) right.prefix2));
         }
         long[] seamArray = new long[seam3.size()];
         for (int index = 0; index < seamArray.length; index++) seamArray[index] = seam3.get(index);
@@ -189,6 +195,8 @@ public final class M3TextSignals {
                 left.hash64 * right.power64 + right.hash64,
                 left.power64 * right.power64,
                 left.presence64 | right.presence64,
+                composePrefix2(left, right),
+                composeSuffix2(left, right),
                 letters,
                 digits,
                 whitespace,
@@ -346,27 +354,32 @@ public final class M3TextSignals {
         return result;
     }
 
-    private long firstTwoPacked() {
-        if (metrics.utf16Length() == 1) {
-            return metrics.firstUtf16Unit();
-        }
-        for (long key : bigrams.keys) {
-            int first = (int) (key >>> 16);
-            if (first == metrics.firstUtf16Unit()) return key;
-        }
-        throw new IllegalStateException("missing first bigram");
+    private static long packedPrefix2(CharSequence value) {
+        if (value.length() == 0) return 0L;
+        if (value.length() == 1) return value.charAt(0);
+        return bigram(value.charAt(0), value.charAt(1));
     }
 
-    private long lastTwoPacked() {
-        if (metrics.utf16Length() == 1) {
-            return metrics.lastUtf16Unit();
+    private static long packedSuffix2(CharSequence value) {
+        if (value.length() == 0) return 0L;
+        if (value.length() == 1) return value.charAt(0);
+        return bigram(value.charAt(value.length() - 2), value.charAt(value.length() - 1));
+    }
+
+    private static long composePrefix2(M3TextSignals left, M3TextSignals right) {
+        if (left.metrics.utf16Length() >= 2) return left.prefix2;
+        if (left.metrics.utf16Length() == 1) {
+            return bigram(left.metrics.firstUtf16Unit(), right.metrics.firstUtf16Unit());
         }
-        for (int index = bigrams.keys.length - 1; index >= 0; index--) {
-            long key = bigrams.keys[index];
-            int second = (int) (key & 0xffffL);
-            if (second == metrics.lastUtf16Unit()) return key;
+        return right.prefix2;
+    }
+
+    private static long composeSuffix2(M3TextSignals left, M3TextSignals right) {
+        if (right.metrics.utf16Length() >= 2) return right.suffix2;
+        if (right.metrics.utf16Length() == 1) {
+            return bigram(left.metrics.lastUtf16Unit(), right.metrics.lastUtf16Unit());
         }
-        throw new IllegalStateException("missing last bigram");
+        return left.suffix2;
     }
 
     private static long bigram(int first, int second) {
