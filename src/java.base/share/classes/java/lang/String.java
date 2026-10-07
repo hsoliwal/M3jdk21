@@ -4461,6 +4461,10 @@ public final class String
         if (isEmpty()) {
             return "";
         }
+        M3String storage = m3();
+        if (storage != null) {
+            return new String(storage.indent(n));
+        }
         Stream<String> stream = lines();
         if (n > 0) {
             final String spaces = " ".repeat(n);
@@ -4581,6 +4585,10 @@ public final class String
         int length = length();
         if (length == 0) {
             return "";
+        }
+        M3String storage = m3();
+        if (storage != null) {
+            return new String(storage.stripIndent());
         }
         char lastChar = charAt(length - 1);
         boolean optOut = lastChar == '\n' || lastChar == '\r';
