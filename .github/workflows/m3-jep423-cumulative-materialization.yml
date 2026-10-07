@@ -62,14 +62,14 @@ jobs:
           git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch             --filter=blob:none --no-tags origin             "refs/tags/jdk-21+35:refs/tags/jdk-21+35"             "refs/tags/jdk-22+36:refs/tags/jdk-22+36"             "38cfb220ddadbb401cc15f313aadb8234f626210"             "8643cc21333c6b51242ed3b9295b25f372244755"             "0d5f5e15d43f94a79c6133baecd5af217365d176"
           printf 'UPSTREAM=%s\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
 
-      - name: 4 - Prove three-commit lineage and JDK22 repair mechanics
+      - name: 4 - Prove three-commit lineage and final JEP423 repair mechanics
         shell: bash
         run: |
           set -euo pipefail
           python3 m3/backports/recipes/jep-423-region-pinning/validate_lineage.py
-          git -C "$UPSTREAM" grep -n "G1RegionPinCache" jdk-22+36 -- src/hotspot/share/gc/g1
-          git -C "$UPSTREAM" show             jdk-22+36:src/hotspot/share/gc/g1/heapRegion.hpp             | grep -E 'size_t.*pin|pin.*size_t'
-          git -C "$UPSTREAM" show             jdk-22+36:src/hotspot/share/gc/g1/g1CollectedHeap.inline.hpp             | grep -E 'pin_count_cache|G1RegionPinCache'
+          git -C "$UPSTREAM" grep -n "G1RegionPinCache" 0d5f5e15d43f94a79c6133baecd5af217365d176 -- src/hotspot/share/gc/g1
+          git -C "$UPSTREAM" show             0d5f5e15d43f94a79c6133baecd5af217365d176:src/hotspot/share/gc/g1/heapRegion.hpp             | grep -E 'size_t.*pin|pin.*size_t'
+          git -C "$UPSTREAM" show             0d5f5e15d43f94a79c6133baecd5af217365d176:src/hotspot/share/gc/g1/g1CollectedHeap.inline.hpp             | grep -E 'pin_count_cache|G1RegionPinCache'
 
       - name: 5 - Admit the 62 cumulative candidates against Java21
         shell: bash
@@ -107,8 +107,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/file_delta_inventory.py             --repo "$UPSTREAM"             --release 22             --out "$RUNNER_TEMP/jep423/JDK21_TO_JDK22.tsv"
-          python3 m3/backports/generate_recipe_crates.py             --repo "$UPSTREAM"             --release 22             --paths-file "$RUNNER_TEMP/jep423/MECHANICAL_PATHS.txt"             --crate-size 1             --include-native             --include-text             --out "$RUNNER_TEMP/jep423/file-atoms"
+          python3 m3/backports/file_delta_inventory.py             --repo "$UPSTREAM"             --release 22             --donor-ref 0d5f5e15d43f94a79c6133baecd5af217365d176             --out "$RUNNER_TEMP/jep423/JDK21_TO_JEP423_FINAL.tsv"
+          python3 m3/backports/generate_recipe_crates.py             --repo "$UPSTREAM"             --release 22             --donor-ref 0d5f5e15d43f94a79c6133baecd5af217365d176             --paths-file "$RUNNER_TEMP/jep423/MECHANICAL_PATHS.txt"             --crate-size 1             --include-native             --include-text             --out "$RUNNER_TEMP/jep423/file-atoms"
 
       - name: 7 - Prove complete cumulative accounting
         shell: bash
@@ -144,7 +144,7 @@ jobs:
               }
           preserved = closure - candidates
 
-          with (runner / "JDK21_TO_JDK22.tsv").open(
+          with (runner / "JDK21_TO_JEP423_FINAL.tsv").open(
               encoding="utf-8", newline=""
           ) as handle:
               delta = {

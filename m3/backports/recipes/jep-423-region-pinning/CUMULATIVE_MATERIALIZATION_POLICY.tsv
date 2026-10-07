@@ -10,7 +10,8 @@ expected_current_held_paths	1
 expected_current_held_path	test/hotspot/jtreg/gc/g1/TestEvacuationFailure.java
 preserved_java21_deletions	2
 baseline_ref	jdk-21+35
-donor_ref	jdk-22+36
+donor_ref	0d5f5e15d43f94a79c6133baecd5af217365d176
+release_ga_ref	jdk-22+36
 implementation_commit	38cfb220ddadbb401cc15f313aadb8234f626210
 required_followup_commit_1	8643cc21333c6b51242ed3b9295b25f372244755
 required_followup_commit_2	0d5f5e15d43f94a79c6133baecd5af217365d176

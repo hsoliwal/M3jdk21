@@ -209,13 +209,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/file_delta_inventory.py             --repo "$UPSTREAM"             --release 22             --out target/jep423/JDK21_TO_JDK22.tsv
+          python3 m3/backports/file_delta_inventory.py             --repo "$UPSTREAM"             --release 22             --donor-ref 0d5f5e15d43f94a79c6133baecd5af217365d176             --out target/jep423/JDK21_TO_JEP423_FINAL.tsv
 
       - name: Generate one source-sealed FILE atom per admitted JEP423 path
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/generate_recipe_crates.py             --repo "$UPSTREAM"             --release 22             --paths-file target/jep423/MECHANICAL_PATHS.txt             --crate-size 1             --include-native             --include-text             --out target/jep423/file-atoms
+          python3 m3/backports/generate_recipe_crates.py             --repo "$UPSTREAM"             --release 22             --donor-ref 0d5f5e15d43f94a79c6133baecd5af217365d176             --paths-file target/jep423/MECHANICAL_PATHS.txt             --crate-size 1             --include-native             --include-text             --out target/jep423/file-atoms
 
       - name: Account for all admitted and preserved paths
         shell: bash
@@ -247,7 +247,7 @@ jobs:
               }
           preserved = all_paths - admitted
 
-          with Path("target/jep423/JDK21_TO_JDK22.tsv").open(
+          with Path("target/jep423/JDK21_TO_JEP423_FINAL.tsv").open(
               encoding="utf-8", newline=""
           ) as handle:
               delta = {
@@ -257,7 +257,7 @@ jobs:
               }
           missing = mechanical - delta.keys()
           if missing:
-              raise SystemExit(f"mechanical paths absent from JDK22 tree comparison: {sorted(missing)}")
+              raise SystemExit(f"mechanical paths absent from JEP423 final-repair tree comparison: {sorted(missing)}")
 
           same = {path for path, status in delta.items() if status == "SAME"}
 

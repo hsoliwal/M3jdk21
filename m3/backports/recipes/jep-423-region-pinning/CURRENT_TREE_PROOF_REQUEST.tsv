@@ -2,10 +2,11 @@ field	value
 schema	M3_JEP423_CURRENT_PREIMAGE_PROOF_V2
 repository	hsoliwal/M3jdk21
 base_branch	master
-base_commit	6c8881d2e3fe6055b700947c509f1db3e1c67e03
+base_commit	5cef0a5b4831db0346fccdd0079d3d28d820a24e
 baseline_repository	openjdk/jdk
 baseline_ref	jdk-21+35
-donor_ref	jdk-22+36
+donor_ref	0d5f5e15d43f94a79c6133baecd5af217365d176
+release_ga_ref	jdk-22+36
 implementation_commit	38cfb220ddadbb401cc15f313aadb8234f626210
 followup_commit_1	8643cc21333c6b51242ed3b9295b25f372244755
 followup_commit_2	0d5f5e15d43f94a79c6133baecd5af217365d176
@@ -24,4 +25,4 @@ native_lane	true
 text_lane	true
 mutation_authority	false
 promotion_authority	false
-next_action	RUN_CUMULATIVE_CURRENT_TREE_ADMISSION_GENERATE_61_MECHANICAL_FILE_ATOMS_THEN_REVIEW_EXCLUSIONS_AND_SCOPE_FANIN
+next_action	RUN_REPAIRED_CURRENT_MASTER_61_FILE_ATOM_MATERIALIZATION_BUILD_JTREG_FIXED_POINT

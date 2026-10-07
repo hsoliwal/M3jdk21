@@ -246,6 +246,10 @@ def _parse_args(argv: Sequence[str]) -> argparse.Namespace:
         choices=range(22, 28),
         help="donor release; repeatable; default is all released donors 22..27",
     )
+    parser.add_argument(
+        "--donor-ref",
+        help="exact donor commit/ref for a single --release; defaults to that release GA tag",
+    )
     parser.add_argument("--out", type=Path)
     return parser.parse_args(argv)
 
@@ -254,9 +258,16 @@ def main(argv: Sequence[str] | None = None) -> int:
     args = _parse_args(sys.argv[1:] if argv is None else argv)
     repo = args.repo.resolve()
     releases = tuple(args.release or range(22, 28))
-    selected_refs = tuple(ref for release, ref in DONORS if release in releases)
-    _verify(repo, (BASELINE[1], *selected_refs))
-    rows = compare(repo, releases)
+    if args.donor_ref:
+        if len(releases) != 1:
+            raise SystemExit("--donor-ref requires exactly one --release")
+        selected_refs = (args.donor_ref,)
+        _verify(repo, (BASELINE[1], args.donor_ref))
+        rows = compare_refs(repo, releases[0], BASELINE[1], args.donor_ref)
+    else:
+        selected_refs = tuple(ref for release, ref in DONORS if release in releases)
+        _verify(repo, (BASELINE[1], *selected_refs))
+        rows = compare(repo, releases)
     if args.out is None:
         write_tsv(rows, sys.stdout)
     else:
