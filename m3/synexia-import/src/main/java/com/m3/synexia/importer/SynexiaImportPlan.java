@@ -52,6 +52,11 @@ public final class SynexiaImportPlan {
         CONVERGENCE_NATIVE,
         M3_CLONER,
         M3INDEX,
+        INDEXSTRING,
+        M3INDEX_COMPILER,
+        M3INDEX_DATA_STRUCTURE,
+        M3INDEX_PRECOMPUTE,
+        M3INDEX_DB,
         M3_RECIPE,
         OTHER_APACHE
     }
@@ -286,7 +291,12 @@ public final class SynexiaImportPlan {
             case "convergence-tests" -> Lane.CONVERGENCE_TEST;
             case "convergence-native" -> Lane.CONVERGENCE_NATIVE;
             case "m3-cloner-java", "m3-cloner-tests" -> Lane.M3_CLONER;
-            case "m3index-source" -> Lane.M3INDEX;
+            case "m3index-source", "m3index-family" -> Lane.M3INDEX;
+            case "indexstring-java", "indexstring-tests" -> Lane.INDEXSTRING;
+            case "m3index-compiler-java", "m3index-compiler-tests" -> Lane.M3INDEX_COMPILER;
+            case "m3index-data-structure-java", "m3index-data-structure-tests" -> Lane.M3INDEX_DATA_STRUCTURE;
+            case "m3index-precompute-api-java", "m3index-precompute-api-tests" -> Lane.M3INDEX_PRECOMPUTE;
+            case "m3index-db-java", "m3index-db-tests" -> Lane.M3INDEX_DB;
             case "m3-recipe-source" -> Lane.M3_RECIPE;
             default -> laneFromTarget(targetPath);
         };
@@ -314,6 +324,11 @@ public final class SynexiaImportPlan {
         }
         if (path.contains("/synexia-m3-cloner/")) return Lane.M3_CLONER;
         if (path.contains("/synexia-m3index/")) return Lane.M3INDEX;
+        if (path.contains("/synexia-indexstring/")) return Lane.INDEXSTRING;
+        if (path.contains("/synexia-mindex/compiler/")) return Lane.M3INDEX_COMPILER;
+        if (path.contains("/synexia-mindex/data-structure/")) return Lane.M3INDEX_DATA_STRUCTURE;
+        if (path.contains("/synexia-mindex/precompute-api/")) return Lane.M3INDEX_PRECOMPUTE;
+        if (path.contains("/synexia-mindex/db/")) return Lane.M3INDEX_DB;
         if (path.contains("/synexia-m3-recipe/")) return Lane.M3_RECIPE;
         return Lane.OTHER_APACHE;
     }
