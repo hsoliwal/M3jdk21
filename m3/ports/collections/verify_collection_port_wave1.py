@@ -16,6 +16,8 @@ PROVENANCE = ROOT / "PROVENANCE.tsv"
 RECIPE = ROOT / "recipe.json"
 
 EXPECTED = {
+    "m3/ports/collections/src/main/java/com/m3/util/M3DenseHash.java":
+        "0474a80b032eb1e1fae085c886e7b7fe71200bf8",
     "m3/ports/collections/src/main/java/com/m3/util/M3PrimitiveKind.java":
         "4bc7c258073072e0310d1a50c3885ed55c50816b",
     "m3/ports/collections/src/main/java/com/m3/util/M3PrimitiveArrayList.java":
