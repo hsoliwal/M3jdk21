@@ -99,12 +99,8 @@ def verify_recipe() -> None:
     for key, value in expected.items():
         if data.get(key) != value:
             fail(f"recipe drift: {key}")
-    target_recipe = data.get("target_materialization_recipe")
-    if target_recipe not in {
-        "PENDING_SYNEXIA_M3JdkCollectionPortWave1",
-        "com.synexia.rewrite.M3JdkCollectionPortWave1",
-    }:
-        fail("unrecognized target materialization recipe")
+    if data.get("target_materialization_recipe") != "com.synexia.rewrite.M3JdkCollectionPortWave1":
+        fail("target materialization recipe drift")
 
 
 def main(argv: list[str]) -> int:
