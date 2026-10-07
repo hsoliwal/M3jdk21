@@ -1,0 +1,31 @@
+{
+  "schema": "m3.sealed-install/1",
+  "recipe_id": "com.m3.M3RegexStringPrecomputeSuperset/2",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_lineage": [
+    {
+      "commit": "7a41c084fa80dd60cb0cffdfb9dc3db50b49e71b",
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexCodeTextSignalTrialImage.java",
+      "blob": "75cbb4942e96d51d7cf43a13327c0b254a448394"
+    },
+    {
+      "commit": "6f6fafa01ce78b6f6187d50305b3e9c2829a7eca",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3RegexStringPrecomputeSignals.java",
+      "blob": "7ce69fea2328136f04e5160dfd43ef32cdcf02c5"
+    }
+  ],
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base_commit": "d769ee9c3bcfd881f514817cb86c0768e62ed970",
+  "java_crate": "m3-regex-string-precompute-v2",
+  "runtime_dependency_on_synexia": false,
+  "public_jdk_api_change": false,
+  "bootstrap_promotion": false,
+  "native_decision": "reuse_existing_M3CodeTextSignalBatchNative_no_second_regex_pair_ABI",
+  "authority": {
+    "jdk_pattern": "exact_regex_oracle",
+    "plain_literal": "exact_precompute_subset",
+    "simhash_minhash": "candidate_ranking_only",
+    "code_regex_scores": "candidate_ranking_only",
+    "recipe": "materialization_only"
+  }
+}
