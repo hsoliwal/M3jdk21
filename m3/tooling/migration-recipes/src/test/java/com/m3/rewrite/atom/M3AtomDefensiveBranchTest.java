@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package com.m3.rewrite.atom;
+package com.synexia.rewrite.atom;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;

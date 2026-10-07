@@ -89,9 +89,9 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         with RESIDUE.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
 
-        self.assertEqual(29, len(rows))
+        self.assertEqual(22, len(rows))
         frozen = {row["path"]: row for row in rows}
-        self.assertEqual(29, len(frozen))
+        self.assertEqual(22, len(frozen))
 
         actual: set[str] = set()
         for exact in (

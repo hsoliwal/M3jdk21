@@ -20,8 +20,7 @@ The borrowing rule is consumer-only for reusable M3 code.
 - `com.synexia:synexia-m3index-jdk-bridge` is the canonical reusable JDK-facing M3Index bridge.
 - New generic recipe logic must be authored/proved in Synexia first. M3JDK21 may retain only
   JDK-specific backport/receiver mechanics, thin adapters, fixtures, manifests and proof harnesses.
-- Historical reusable code under `scope/**`, `atom/**`, `semantic/**` and `a3/**` remains
-  usable during migration but has no independent canonical authority.
+- Historical reusable code under `scope/**`, `semantic/**` and `a3/**` remains usable during migration but has no independent canonical authority. The former local `com.m3.rewrite.atom` pure-int implementation residue has been retired; target tests now exercise the qualified Synexia canonical mirror.
 - A target-side discovery that improves reusable mechanics flows back to Synexia as a recipe/module
   improvement before the dependent M3JDK21 promotion is considered complete.
 
@@ -41,7 +40,6 @@ The machine-readable seal is:
 It records the exact Git blob SHA-1 for every current reusable residue implementation under:
 
 - `scope/**`;
-- `atom/**`;
 - `semantic/**`;
 - `a3/**`;
 - the target-local Java21 convergence catalogue/orchestrator copies;

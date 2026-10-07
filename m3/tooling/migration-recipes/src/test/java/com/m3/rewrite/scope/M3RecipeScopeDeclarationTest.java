@@ -8,11 +8,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.m3.rewrite.InstallIndexStringCompatibility;
 import com.m3.rewrite.M3Java21ConvergenceRecipe;
-import com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe;
-import com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates;
-import com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe;
-import com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe;
-import com.m3.rewrite.atom.M3PureIntConvergenceRecipe;
+import com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe;
+import com.synexia.rewrite.atom.M3InventoryPureIntAtomCandidates;
+import com.synexia.rewrite.atom.M3PatternizePureIntAtomRecipe;
+import com.synexia.rewrite.atom.M3DocumentPureIntAtomRecipe;
+import com.synexia.rewrite.atom.M3PureIntConvergenceRecipe;
 import com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe;
 import com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe;
 import com.m3.rewrite.backport.M3VerbatimJavaPairRecipe;
@@ -35,7 +35,7 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(29, M3RecipeScopeRegistry.size());
+        assertEquals(24, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered("org.openrewrite.java.RemoveUnusedImports"));
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
@@ -46,16 +46,6 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3PatternizePureIntAtomRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3DocumentPureIntAtomRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3PureIntConvergenceRecipe.class.getName()));
-        assertTrue(M3RecipeScopeRegistry.registered(
-                com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe.class.getName()));
-        assertTrue(M3RecipeScopeRegistry.registered(
-                com.synexia.rewrite.atom.M3InventoryPureIntAtomCandidates.class.getName()));
-        assertTrue(M3RecipeScopeRegistry.registered(
-                com.synexia.rewrite.atom.M3PatternizePureIntAtomRecipe.class.getName()));
-        assertTrue(M3RecipeScopeRegistry.registered(
-                com.synexia.rewrite.atom.M3DocumentPureIntAtomRecipe.class.getName()));
-        assertTrue(M3RecipeScopeRegistry.registered(
-                com.synexia.rewrite.atom.M3PureIntConvergenceRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Java21ConvergenceRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jdk21HashPinnedSnapshotRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jdk21HashPinnedTextSnapshotRecipe.class.getName()));
@@ -127,25 +117,9 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(inventoryPolicy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
 
         for (Class<?> recipe : List.of(
-                com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe.class,
-                com.synexia.rewrite.atom.M3InventoryPureIntAtomCandidates.class,
-                com.synexia.rewrite.atom.M3PatternizePureIntAtomRecipe.class,
-                com.synexia.rewrite.atom.M3DocumentPureIntAtomRecipe.class,
-                com.synexia.rewrite.atom.M3PureIntConvergenceRecipe.class)) {
-            var policy = M3RecipeScopeRegistry.require(recipe);
-            assertEquals(M3EditScope.FILE, policy.resolve(List.of("src/main/java/a/A.java")));
-            assertTrue(policy.fileLocalMechanical(List.of("src/main/java/a/A.java")));
-        }
-
-        for (Class<?> recipe : List.of(
                 M3PatternizePureIntAtomRecipe.class,
                 M3DocumentPureIntAtomRecipe.class,
                 M3PureIntConvergenceRecipe.class,
-                com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe.class,
-                com.synexia.rewrite.atom.M3InventoryPureIntAtomCandidates.class,
-                com.synexia.rewrite.atom.M3PatternizePureIntAtomRecipe.class,
-                com.synexia.rewrite.atom.M3DocumentPureIntAtomRecipe.class,
-                com.synexia.rewrite.atom.M3PureIntConvergenceRecipe.class,
                 M3Java21ConvergenceRecipe.class,
                 M3Jdk21HashPinnedSnapshotRecipe.class,
                 M3Jdk21HashPinnedTextSnapshotRecipe.class,
