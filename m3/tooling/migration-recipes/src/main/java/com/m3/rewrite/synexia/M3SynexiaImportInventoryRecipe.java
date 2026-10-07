@@ -65,7 +65,7 @@ public final class M3SynexiaImportInventoryRecipe
             public Tree preVisit(Tree tree, ExecutionContext context) {
                 if (tree instanceof PlainText text
                         && MANIFEST.equals(
-                                text.getSourcePath().normalize().toString().replace('\', '/'))) {
+                                text.getSourcePath().normalize().toString().replace('\\\\', '/'))) {
                     if (inventory.rows != null) {
                         throw new IllegalStateException("duplicate Synexia import manifest");
                     }
