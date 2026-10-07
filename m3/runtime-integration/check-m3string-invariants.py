@@ -1076,6 +1076,7 @@ for required_trigger in [
 
 for required_gate in [
     "M3StringFactsCompositionTest.java",
+    "M3StringCodePointPrecomputeTest.java",
     "M3StringPrecomputeSearchTest.java",
     "M3StringInternTest.java",
     "nativeEncoding/StringPlatformChars.java",
@@ -1087,15 +1088,16 @@ for required_gate in [
 
 # Synexia owns reusable M3JDK21 recipes; this target keeps only the applied product and receipt.
 for fragment in [
-    "hsoliwal/com.synexia",
-    "pull/9529",
-    "602ff6fbd8760ad2d13b3461d0c27ed567c16144",
-    "com.synexia.rewrite.M3Jdk21StringHistoryConvergence",
-    "30/30 carried targets are byte-identical",
-    "bcb5419fd4425ef4b41c86c13e7a6f24d5233e68",
-    "pull/9491",
-    "com.synexia.rewrite.M3Jdk21TqConvergence",
-    "5291e3867224be653da89cd69e3b764b2fab213f",
+    "recipe_name\tcom.synexia.rewrite.M3Jdk21StringHistoryConvergence",
+    "synexia_repository\thsoliwal/com.synexia",
+    "synexia_commit\t",
+    "synexia_java_manifest\tsynexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-string-history-convergence/manifest.tsv",
+    "synexia_text_manifest\tsynexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-history-convergence/manifest.tsv",
+    "m3jdk21_applied_result_commit\t",
+    "runtime_owner\tM3JDK21",
+    "recipe_owner\tSynexia",
+    "runtime_dependency_on_synexia\tfalse",
+    "target_recipe_disposition\tTHIN_RECEIVER_ONLY",
 ]:
     if fragment not in recipe_receipt:
         fail(f"Synexia recipe application receipt missing: {fragment}")
