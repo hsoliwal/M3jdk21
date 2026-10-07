@@ -748,6 +748,8 @@ final class M3String implements CharSequence {
     }
 
     M3String translateEscapes() {
+        M3StringFacts prepared = facts();
+        if (!prepared.hasBackslash) return this;
         ArrayList<M3String> pieces = null;
         int cursor = 0;
         int index = 0;
@@ -811,6 +813,9 @@ final class M3String implements CharSequence {
         M3StringFacts prepared = facts();
         if (!prepared.ascii) {
             throw new IllegalStateException("ASCII case mapping requires ASCII M3 String");
+        }
+        if ((upper && !prepared.hasAsciiLower) || (!upper && !prepared.hasAsciiUpper)) {
+            return this;
         }
 
         ArrayList<M3String> pieces = null;
