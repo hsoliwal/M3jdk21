@@ -1,0 +1,2 @@
+scope	source_repository	source_revision	source_tree	license	authorship	copy_disposition	dependency_frontier	promotion
+synexia-mindex/collections/**	hsoliwal/com.synexia	7d2133f1412a9e7295296c3f86baae577bb3251c	6df81293f7c514b18910b2b1b9563d08ecb733ac	Apache-2.0	Copyright 2026 Hitesh Soliwal and contributors	COPY_EXACT_SOURCE_CUSTODY	synexia-mindex-runtime	NONE
