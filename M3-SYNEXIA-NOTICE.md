@@ -1,8 +1,19 @@
+<!--
+SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # M3JDK21 / Synexia Notice
 
-Copyright © 2026 Hitesh Soliwal and Contributors / Synexia
+**Copyright © 2026 Hitesh Soliwal and Contributors to the Synexia Project**
 for independently authored M3/M3Scale/M3Index/Synexia material identified as
 first-party additions to this repository.
+
+**Original author / project lead:** Hitesh Soliwal  
+**Project stewardship:** Synexia
+
+“Synexia Project” identifies project stewardship; it does not, by itself,
+assert a copyright assignment from contributors to a separate legal entity.
 
 ## Important license boundary
 
@@ -24,34 +35,21 @@ lawful, explicit alternative applies.
 
 ## M3 / M3Index direction
 
-M3 aims to make Java and surrounding compute perform less redundant work and
-retain less redundant state while preserving required observable contracts.
-M3Index is the canonical indexed/precompute substrate for reusable semantic
-facts, identity, search structures, compact representations, and verification
-evidence. M3Scale provides the deterministic inventory, transformation,
+**M3** aims to make Java and surrounding compute perform less redundant work
+and retain less redundant state while preserving required observable
+contracts.
+
+**M3Index** is the canonical indexed/precompute substrate for reusable semantic
+facts, direct addressing, identity, search structures, compact representations,
+and verification evidence.
+
+**M3Scale** provides the deterministic inventory, transformation,
 verification, and promotion discipline around that work.
 
-The engineering goal is concrete: move repeatable runtime work into qualified
-precomputation and compact indexed structures where doing so is correct, so hot
-execution performs fewer repeated calculations, fewer allocations and
-materializations, less pointer chasing, and less memory traffic while preserving
-required JDK-visible behavior.
-
-## Rights boundary
-
-No claim is made here to ownership of human language, natural language,
-programming languages as such, reasoning processes, facts, mathematical
-relations, abstract algorithms, methods of operation, general optimization
-principles, or abstract ideas.
-
-Copyright applies to original authored expression: source code and concrete
-implementations, tests, recipes, specifications, documentation, diagrams,
-manifests, schemas, original generated configuration, and other protectable
-expression.
-
-A technically novel invention may have separate patent rights only if applicable
-patent law requirements are satisfied; this copyright notice does not itself
-create or assert patent rights over an abstract idea or method.
+Copyright protects original source code, specifications, documentation,
+diagrams, recipes, tests, and other authored expression. It does not by itself
+create exclusive ownership of abstract ideas, algorithms, methods of operation,
+mathematical principles, or general engineering concepts.
 
 Third-party material always retains its original copyright, licenses, NOTICE
 files, attribution, and modification requirements.
