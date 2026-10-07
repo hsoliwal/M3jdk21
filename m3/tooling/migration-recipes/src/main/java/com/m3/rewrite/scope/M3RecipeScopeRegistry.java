@@ -29,21 +29,6 @@ public final class M3RecipeScopeRegistry {
                     "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
                     inferred()),
             Map.entry(
-                    "com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe",
-                    fixed(M3EditScope.FILE)),
-            Map.entry(
-                    "com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates",
-                    fixed(M3EditScope.FILE)),
-            Map.entry(
-                    "com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe",
-                    fixed(M3EditScope.FILE)),
-            Map.entry(
-                    "com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe",
-                    fixed(M3EditScope.FILE)),
-            Map.entry(
-                    "com.m3.rewrite.atom.M3PureIntConvergenceRecipe",
-                    fixed(M3EditScope.FILE)),
-            Map.entry(
                     "com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe",
                     fixed(M3EditScope.FILE)),
             Map.entry(
