@@ -1,0 +1,36 @@
+{
+  "schema": "M3_COLLECTION_DONATION_QUALIFICATION_V1",
+  "scope": "SEPARATELY_BUILT_COLLECTION_MODULE",
+  "installed_source_manifest_sha256": "54e0c469a687046e4212fe6a585eb53ceca407dbb23fd3cb07be6e4fdff223fc",
+  "java_sources": 62,
+  "test_sources": 17,
+  "junit": {
+    "tests": 85,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "main_self_tests": [
+    "M3LazyTreeMapSelfTest:PASS",
+    "M3LazyValueStateSelfTest:PASS"
+  ],
+  "java_compile": "--release 21 -Xlint:all,-module -Werror",
+  "runtime_requires": [
+    "java.base"
+  ],
+  "native_standard": "c17",
+  "undefined_behavior_sanitizer": "PASS",
+  "checked_jni": "PASS",
+  "prepared_lane_allocation": "PASS",
+  "packaged_license_provenance": "PASS",
+  "cost_probe": "DIAGNOSTIC_RECORDED",
+  "full_reactor": "NOT_RUN",
+  "openjdk_jtreg_hotspot": "NOT_RUN",
+  "universal_performance_claim": false,
+  "source_revision": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
+  "receiver_baseline": "5cef0a5b4831db0346fccdd0079d3d28d820a24e",
+  "canonical_recipe": "com.synexia.rewrite.M3PackedCollectionsPortRecipe",
+  "receiver_java_manifest_sha256": "1f45bc0ccd7ad714e8789724e67ac303f4c5c26b7f1a8bedcb942189e6cc4ae2",
+  "independent_api_receipt": "collection-api-20261007.json",
+  "cost_diagnostic": "collection-cost-20261007.csv"
+}

@@ -1,4 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026-10-07: qualify the outer plan-root helper shadowed by the record accessor.
 package com.m3.synexia.importer;
 
 import java.io.IOException;
@@ -146,7 +148,7 @@ public final class SynexiaImportPlan {
                 }
                 previous = row.targetPath();
             }
-            String expected = root(sourceRevision, manifestRoot, rows);
+            String expected = SynexiaImportPlan.root(sourceRevision, manifestRoot, rows);
             root = root == null || root.isBlank() ? expected : sha(root, "root");
             if (!root.equals(expected)) {
                 throw new IllegalArgumentException("Synexia import plan root mismatch");

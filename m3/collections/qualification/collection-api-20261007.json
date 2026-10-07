@@ -1,0 +1,77 @@
+{
+  "scope": "Independent incumbent public/protected declaration and JVM descriptor preservation",
+  "classes_checked_including_nested": 24,
+  "public_protected_members_checked": 257,
+  "missing_or_changed_members": [],
+  "factory_original_members": [
+    {
+      "declaration": "public static com.m3.collections.M3LongLane28 longLane();",
+      "descriptor": "()Lcom/m3/collections/M3LongLane28;"
+    },
+    {
+      "declaration": "public static com.m3.collections.M3IntLane28 intLane();",
+      "descriptor": "()Lcom/m3/collections/M3IntLane28;"
+    },
+    {
+      "declaration": "public static com.m3.collections.M3BitLane28 bitLane();",
+      "descriptor": "()Lcom/m3/collections/M3BitLane28;"
+    },
+    {
+      "declaration": "public static com.m3.collections.M3SlotAllocator28 stableSlots();",
+      "descriptor": "()Lcom/m3/collections/M3SlotAllocator28;"
+    },
+    {
+      "declaration": "public static com.m3.collections.M3LongLaneStore28 longRows(int);",
+      "descriptor": "(I)Lcom/m3/collections/M3LongLaneStore28;"
+    },
+    {
+      "declaration": "public static com.m3.collections.M3LongArena28 longArena();",
+      "descriptor": "()Lcom/m3/collections/M3LongArena28;"
+    },
+    {
+      "declaration": "public static com.m3.collections.M3LongLinkedList28 longLinkedList();",
+      "descriptor": "()Lcom/m3/collections/M3LongLinkedList28;"
+    },
+    {
+      "declaration": "public static com.m3.collections.M3ConcurrentLongLane28 concurrentLongLane();",
+      "descriptor": "()Lcom/m3/collections/M3ConcurrentLongLane28;"
+    },
+    {
+      "declaration": "public static com.m3.collections.M3ConcurrentIntLane28 concurrentIntLane();",
+      "descriptor": "()Lcom/m3/collections/M3ConcurrentIntLane28;"
+    }
+  ],
+  "factory_original_member_count": 9,
+  "factory_current_member_count": 55,
+  "factory_original_members_preserved": true,
+  "incumbent_runtime_source_changes": [
+    {
+      "path": "com/m3/collections/M3Collections.java",
+      "before_sha256": "529fd9055caa62cc1b4d3d008fef2765572836cc297565d11b1aea1a279a7179",
+      "after_sha256": "4e94602800faa68d3ce601d6b53b2dd1ba862cea57dffffe313633bd5e21ccf3"
+    }
+  ],
+  "module_info_unchanged": true,
+  "runtime_module_dependencies": [
+    "java.base"
+  ],
+  "synexia_runtime_imports": [],
+  "unexpected_runtime_packages": [],
+  "runtime_java_source_count": 62,
+  "before_javap_sha256": "00364a655e6bb538c851a6ffd974242709ce775dddeb900dba8b9b4803c4c972",
+  "after_javap_sha256": "f52f9fa1d853e98a7a1c13e7e830caa684d1268781591db4ab4cfe54edffa63f",
+  "status": "PASS",
+  "limits": [
+    "JVM descriptor comparison proves retained declared API, not whole-program behavioral equivalence.",
+    "This independent module does not replace or modify an OpenJDK java.util owner."
+  ],
+  "source_repository": "hsoliwal/com.synexia",
+  "source_commit": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
+  "receiver_repository": "hsoliwal/M3jdk21",
+  "receiver_commit": "5cef0a5b4831db0346fccdd0079d3d28d820a24e",
+  "stage": "FINAL: explicit per-file copyright and modification notice successor",
+  "receiver_manifest_sha256": "1f45bc0ccd7ad714e8789724e67ac303f4c5c26b7f1a8bedcb942189e6cc4ae2",
+  "runtime_source_inventory_sha256": "81f2817d9a87e48d2ed76dfe15f1d15c46954e41969047c742f5d2de84e86d44",
+  "behavioral_tests": "Parent final full-module acceptance owns the85-test and native execution; this review reruns API/jdeps only.",
+  "intermediate_evidence": "intermediate-pre-attribution/"
+}

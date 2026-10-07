@@ -262,5 +262,13 @@
         "native postimage SHA updated for renamed JNI symbol"
       ]
     }
-  ]
+  ],
+  "packed_collection_donation": {
+    "modification_notice": "Modified 2026 by Synexia contributors: added the collection donation provenance binding; previous provenance retained.",
+    "manifest": "synexia-donation.json",
+    "source_revision": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
+    "applied_java_manifest_sha256": "1f45bc0ccd7ad714e8789724e67ac303f4c5c26b7f1a8bedcb942189e6cc4ae2",
+    "scope": "SEPARATELY_BUILT_COLLECTION_MODULE",
+    "canonical_owner": "hsoliwal/com.synexia"
+  }
 }

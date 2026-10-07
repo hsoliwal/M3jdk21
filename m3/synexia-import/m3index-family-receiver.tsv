@@ -8,3 +8,5 @@ M3INDEX_DB	synexia-mindex/db/	com.synexia:synexia-m3index-db	PINNED_VENDOR_CUSTO
 OPENREWRITE	synexia-openrewrite-recipes/	com.synexia:synexia-openrewrite-recipes	PINNED_VENDOR_CUSTODY	Apache-2.0
 CODE_CONVERGENCE	synexia-code-convergence/	com.synexia:synexia-code-convergence	PINNED_VENDOR_CUSTODY	Apache-2.0
 M3_RECIPE	synexia-m3-recipe/	com.synexia:synexia-m3-recipe	PINNED_VENDOR_CUSTODY	Apache-2.0
+M3INDEX_COLLECTIONS	synexia-mindex/collections/	com.synexia:synexia-m3index-collections	PINNED_VENDOR_CUSTODY	Apache-2.0
+M3INDEX_ALGORITHM	synexia-mindex/algorithm/	com.synexia:synexia-m3index-algorithm	PINNED_VENDOR_CUSTODY	Apache-2.0

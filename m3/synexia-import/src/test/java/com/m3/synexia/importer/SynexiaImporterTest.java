@@ -1,4 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026-10-07: provide a valid source before independently checking the target-root refusal.
 package com.m3.synexia.importer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -99,6 +101,7 @@ final class SynexiaImporterTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> SynexiaImporter.verify(temp.resolve("absent"), m3jdk, manifest));
+        write(synexia.resolve(sourcePath), bytes);
         assertThrows(
                 IllegalArgumentException.class,
                 () -> SynexiaImporter.verify(synexia, temp.resolve("absent-target"), manifest));
