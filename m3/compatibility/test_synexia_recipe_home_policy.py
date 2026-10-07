@@ -65,16 +65,30 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         with POLICY.open(encoding="utf-8", newline="") as handle:
             rows = {row["local_surface"]: row for row in csv.DictReader(handle, delimiter="\t")}
 
-        expected = {
-            "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceCatalog.java":
-                "com.synexia.rewrite.M3CanonicalMultiPassPlan",
-            "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java":
-                "com.synexia.rewrite.M3RepositoryJava21ConvergenceRecipe",
-        }
-        for surface, owner in expected.items():
-            self.assertEqual("MIGRATION_RESIDUE_NOT_CANONICAL", rows[surface]["disposition"])
-            self.assertEqual(owner, rows[surface]["canonical_owner"])
-            self.assertEqual("true", rows[surface]["handoff_required"])
+        compatibility_recipe = (
+            "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/"
+            "M3Java21ConvergenceRecipe.java"
+        )
+        self.assertEqual(
+            "MIGRATION_RESIDUE_NOT_CANONICAL",
+            rows[compatibility_recipe]["disposition"],
+        )
+        self.assertEqual(
+            "com.synexia.rewrite.M3Java21FileConvergenceRecipe",
+            rows[compatibility_recipe]["canonical_owner"],
+        )
+        self.assertEqual("true", rows[compatibility_recipe]["handoff_required"])
+
+        catalog = (
+            "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/"
+            "M3Java21ConvergenceCatalog.java"
+        )
+        self.assertEqual("RECEIVER_ADAPTER_ONLY", rows[catalog]["disposition"])
+        self.assertEqual(
+            "com.synexia.rewrite.M3Java21FileConvergenceRecipe",
+            rows[catalog]["canonical_owner"],
+        )
+        self.assertEqual("true", rows[catalog]["handoff_required"])
 
         compatibility = rows[
             "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/InstallIndexStringCompatibility.java"
@@ -89,13 +103,12 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         with RESIDUE.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
 
-        self.assertEqual(29, len(rows))
+        self.assertEqual(28, len(rows))
         frozen = {row["path"]: row for row in rows}
-        self.assertEqual(29, len(frozen))
+        self.assertEqual(28, len(frozen))
 
         actual: set[str] = set()
         for exact in (
-            "tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceCatalog.java",
             "tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java",
         ):
             if (ROOT / exact).is_file():

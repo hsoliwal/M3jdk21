@@ -12,11 +12,14 @@ on:
       - "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/atom/**"
       - "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/scope/**"
       - "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/semantic/**"
+      - "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3Java21FileConvergenceRecipe.java"
       - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java"
       - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-canonical-recipe-ownership.yml"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-java21-convergence.yml"
       - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/synexia/M3SynexiaCanonicalRecipeConsumerTest.java"
       - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/synexia/M3SynexiaScopeKernelConsumerTest.java"
       - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/synexia/M3SynexiaSemanticFingerprintConsumerTest.java"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/synexia/M3SynexiaJava21ConvergenceConsumerTest.java"
       - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java"
       - ".github/workflows/m3-synexia-canonical-recipes.yml"
   workflow_dispatch:
@@ -48,4 +51,4 @@ jobs:
 
       - name: Compile and execute canonical recipe consumer
         run: |
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3SynexiaCanonicalRecipeConsumerTest,M3SynexiaScopeKernelConsumerTest,M3SynexiaSemanticFingerprintConsumerTest,M3RecipeScopeDeclarationTest             test
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3SynexiaCanonicalRecipeConsumerTest,M3SynexiaScopeKernelConsumerTest,M3SynexiaSemanticFingerprintConsumerTest,M3SynexiaJava21ConvergenceConsumerTest,M3Java21ConvergenceRecipeTest,M3Java21DeclarativeConvergenceTest,M3RecipeScopeDeclarationTest             test
