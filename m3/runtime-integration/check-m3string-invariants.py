@@ -1059,6 +1059,17 @@ for fragment in [
     if fragment not in recipe_authority:
         fail(f"Synexia String recipe authority receipt missing: {fragment}")
 
+# Reusable M3 String history-convergence recipe custody is Synexia-only. M3JDK21 is a
+# thin receiver/runtime owner and must not recreate a second local recipe descriptor, crate or test.
+for forbidden_recipe_path in [
+    "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-history-convergence.yml",
+    "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3StringHistoryConvergenceRecipeTest.java",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-history-convergence",
+]:
+    if (ROOT / forbidden_recipe_path).exists():
+        fail(f"duplicate Synexia-owned M3 String history recipe reappeared: {forbidden_recipe_path}")
+
 # Synexia is the full qualified donor/convergence workspace. Recipes/postimages/tests are
 # first-class donor candidates, but licensing/provenance follows every copied artifact and
 # M3JDK21 retains target/runtime ownership.
