@@ -1,7 +1,8 @@
 group	scope	members	purpose	mutation_authority
 build-config	MULTI_MODULE	3	OpenJDK image/autoconf/spec plumbing for linkable runtime images	false
 jlink-core	MODULE	7	jdk.jlink public/tool integration and resource behavior	false
-runtimelink-package	PACKAGE	4	new runtime-image resource-diff/link mechanics	false
+runtimelink-package	PACKAGE	3	GA-final runtime-image resource-diff/link mechanics	false
+ga-removed-exclusion	FILE	1	implementation-commit-only RuntimeImageLinkException is absent from JDK24 GA and must not be added	false
 test-metadata	MULTI_MODULE	3	jtreg capability and VM property metadata	false
 runtime-image-tests	MODULE	18	focused JEP493 runtime-image behavioral proof	false
 regression-tests	MULTI_MODULE	12	existing jlink/jmod/langtools regression compatibility	false
