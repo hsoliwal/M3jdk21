@@ -214,3 +214,6 @@ sources; citing or integrating upstream work does not transfer its ownership.
 Applicable rights and licensing boundaries are described in
 [M3-SYNEXIA-NOTICE](../../M3-SYNEXIA-NOTICE.md) and
 [M3-SYNEXIA-RIGHTS](../../M3-SYNEXIA-RIGHTS.md).
+
+For citation in JEPs, standards submissions, or downstream publications, see the
+[proposal attribution policy and versioned publication record](../../M3-SYNEXIA-RIGHTS.md#jeps-standards-proposals-and-technical-publications).
