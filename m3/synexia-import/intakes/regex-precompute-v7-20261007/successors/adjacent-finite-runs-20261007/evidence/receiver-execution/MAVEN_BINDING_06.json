@@ -1,0 +1,563 @@
+{
+  "originalFrozenCommandPlan": {
+    "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\REGEX_MAVEN_ACTIVATION_01_NATIVE_COMMAND.json",
+    "bytes": 5548,
+    "sha256": "504d114478a915e48894377ea98875481a594dbc8cf4d88466d6330adcbcf670"
+  },
+  "initialActivationBinding": {
+    "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\REGEX_MAVEN_ACTIVATION_BINDING_01.json",
+    "bytes": 130409,
+    "sha256": "a17b6f71031fefa6de355f2c00ed89dcfc78daa1f62427d2b920feda9ca46a98"
+  },
+  "actualActivationTerminal": {
+    "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\ACTUAL_REGEX_MAVEN_COMPILE_PLAN_TERMINAL_01.json",
+    "bytes": 4639,
+    "sha256": "b8c4b7746d1266798850c6ba6e55764e74d4acd4185c0a801a10039e13644376"
+  },
+  "qualifiedClassReceipt": {
+    "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\REGEX_MAVEN_REPLAY_CLASS_ARTIFACTS_01.json",
+    "bytes": 20435,
+    "sha256": "2bed042d281f60c0277b0342562eedd1910476b207d291c5d06a9861c0b178ae"
+  },
+  "publishedPayloadAuthority": {
+    "path": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\REGEX_PR9797_PUBLISHED_PAYLOAD_AUTHORITY_01.json",
+    "bytes": 1181,
+    "sha256": "3b21ec1736747a3e93a673438e62207d28108912b8975d2a7b394c07427d535f"
+  },
+  "crateRoot": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007",
+  "classOutputRoot": "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\target\\classes",
+  "schema": 1,
+  "status": "EXPLICIT_NATIVE06_REMAINING_FOUR_GATES_NOT_RUN",
+  "publicationMap": {
+    "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-02/PUBLICATION_MAP_02.json",
+    "bytes": 18855,
+    "sha256": "2150e3e2fddd109c7a9eea2c73e5b13b622abfef690f18682401519a94b7f3ac",
+    "gitBlob": "5c1505112561d8ef942d492ccdb82a94432487d6"
+  },
+  "receivingRoot": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21",
+  "templatesRoot": "K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\preparation-01\\payload\\M3jdk21\\m3\\synexia-import\\intakes\\regex-precompute-v7-20261007\\successors\\adjacent-finite-runs-20261007\\recipe\\templates",
+  "postimages": [
+    {
+      "targetPath": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+      "beforeSHA256": "9999e8afe1ec44de58edd644c0ca278415fb7a379f6cdacfe9dbf7011ed77131",
+      "afterSHA256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
+      "template": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java.txt"
+    },
+    {
+      "targetPath": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+      "beforeSHA256": "ABSENT",
+      "afterSHA256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
+      "template": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java.txt"
+    }
+  ],
+  "commands": {
+    "applyTwoTargets": [
+      "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+      "--enable-native-access=ALL-UNNAMED",
+      "-Xms32m",
+      "-Xmx256m",
+      "-XX:MaxMetaspaceSize=128m",
+      "-XX:ReservedCodeCacheSize=32m",
+      "-XX:ActiveProcessorCount=2",
+      "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\temp",
+      "-Djansi.tmpdir=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\temp",
+      "-Duser.home=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\home",
+      "-Dfile.encoding=UTF-8",
+      "-classpath",
+      "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\boot\\plexus-classworlds-2.9.0.jar",
+      "-Dclassworlds.conf=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\m2.conf",
+      "-Dmaven.home=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14",
+      "-Dlibrary.jansi.path=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\jansi-native",
+      "-Dmaven.multiModuleProjectDirectory=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007",
+      "org.codehaus.plexus.classworlds.launcher.Launcher",
+      "-o",
+      "-B",
+      "-ntp",
+      "-e",
+      "-N",
+      "-s",
+      "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+      "-gs",
+      "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+      "-Dmaven.repo.local=K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache",
+      "-Dstyle.color=never",
+      "-f",
+      "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\pom.xml",
+      "-Dm3.mode=--apply",
+      "-Dm3.target.repo=K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21",
+      "-Dm3.templates=K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\preparation-01\\payload\\M3jdk21\\m3\\synexia-import\\intakes\\regex-precompute-v7-20261007\\successors\\adjacent-finite-runs-20261007\\recipe\\templates",
+      "org.codehaus.mojo:exec-maven-plugin:3.5.0:java@replay-exact-regex-adjacent-finite-runs"
+    ],
+    "defaultCheckFixedpoint": [
+      "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+      "--enable-native-access=ALL-UNNAMED",
+      "-Xms32m",
+      "-Xmx256m",
+      "-XX:MaxMetaspaceSize=128m",
+      "-XX:ReservedCodeCacheSize=32m",
+      "-XX:ActiveProcessorCount=2",
+      "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\temp",
+      "-Djansi.tmpdir=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\temp",
+      "-Duser.home=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\home",
+      "-Dfile.encoding=UTF-8",
+      "-classpath",
+      "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\boot\\plexus-classworlds-2.9.0.jar",
+      "-Dclassworlds.conf=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\m2.conf",
+      "-Dmaven.home=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14",
+      "-Dlibrary.jansi.path=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\jansi-native",
+      "-Dmaven.multiModuleProjectDirectory=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007",
+      "org.codehaus.plexus.classworlds.launcher.Launcher",
+      "-o",
+      "-B",
+      "-ntp",
+      "-e",
+      "-N",
+      "-s",
+      "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+      "-gs",
+      "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+      "-Dmaven.repo.local=K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache",
+      "-Dstyle.color=never",
+      "-f",
+      "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\pom.xml",
+      "-Dm3.mode=--check",
+      "-Dm3.target.repo=K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21",
+      "-Dm3.templates=K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\preparation-01\\payload\\M3jdk21\\m3\\synexia-import\\intakes\\regex-precompute-v7-20261007\\successors\\adjacent-finite-runs-20261007\\recipe\\templates",
+      "org.codehaus.mojo:exec-maven-plugin:3.5.0:java@replay-exact-regex-adjacent-finite-runs"
+    ],
+    "secondApplyFixedpoint": [
+      "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+      "--enable-native-access=ALL-UNNAMED",
+      "-Xms32m",
+      "-Xmx256m",
+      "-XX:MaxMetaspaceSize=128m",
+      "-XX:ReservedCodeCacheSize=32m",
+      "-XX:ActiveProcessorCount=2",
+      "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\temp",
+      "-Djansi.tmpdir=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\temp",
+      "-Duser.home=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\home",
+      "-Dfile.encoding=UTF-8",
+      "-classpath",
+      "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\boot\\plexus-classworlds-2.9.0.jar",
+      "-Dclassworlds.conf=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\m2.conf",
+      "-Dmaven.home=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14",
+      "-Dlibrary.jansi.path=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\jansi-native",
+      "-Dmaven.multiModuleProjectDirectory=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007",
+      "org.codehaus.plexus.classworlds.launcher.Launcher",
+      "-o",
+      "-B",
+      "-ntp",
+      "-e",
+      "-N",
+      "-s",
+      "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+      "-gs",
+      "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+      "-Dmaven.repo.local=K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache",
+      "-Dstyle.color=never",
+      "-f",
+      "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\pom.xml",
+      "-Dm3.mode=--apply",
+      "-Dm3.target.repo=K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21",
+      "-Dm3.templates=K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\preparation-01\\payload\\M3jdk21\\m3\\synexia-import\\intakes\\regex-precompute-v7-20261007\\successors\\adjacent-finite-runs-20261007\\recipe\\templates",
+      "org.codehaus.mojo:exec-maven-plugin:3.5.0:java@replay-exact-regex-adjacent-finite-runs"
+    ],
+    "driftProgram": [
+      "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+      "--enable-native-access=ALL-UNNAMED",
+      "-Xms32m",
+      "-Xmx256m",
+      "-XX:MaxMetaspaceSize=128m",
+      "-XX:ReservedCodeCacheSize=32m",
+      "-XX:ActiveProcessorCount=2",
+      "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\temp",
+      "-Djansi.tmpdir=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\temp",
+      "-Duser.home=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\home",
+      "-Dfile.encoding=UTF-8",
+      "-classpath",
+      "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\boot\\plexus-classworlds-2.9.0.jar",
+      "-Dclassworlds.conf=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\m2.conf",
+      "-Dmaven.home=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14",
+      "-Dlibrary.jansi.path=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\jansi-native",
+      "-Dmaven.multiModuleProjectDirectory=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007",
+      "org.codehaus.plexus.classworlds.launcher.Launcher",
+      "-o",
+      "-B",
+      "-ntp",
+      "-e",
+      "-N",
+      "-s",
+      "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+      "-gs",
+      "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+      "-Dmaven.repo.local=K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache",
+      "-Dstyle.color=never",
+      "-f",
+      "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\pom.xml",
+      "-Dm3.mode=--apply",
+      "-Dm3.target.repo=K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21",
+      "-Dm3.templates=K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\preparation-01\\payload\\M3jdk21\\m3\\synexia-import\\intakes\\regex-precompute-v7-20261007\\successors\\adjacent-finite-runs-20261007\\recipe\\templates",
+      "org.codehaus.mojo:exec-maven-plugin:3.5.0:java@replay-exact-regex-adjacent-finite-runs"
+    ],
+    "driftQuery": [
+      "C:\\Program Files\\Java\\jdk-21\\bin\\java.exe",
+      "--enable-native-access=ALL-UNNAMED",
+      "-Xms32m",
+      "-Xmx256m",
+      "-XX:MaxMetaspaceSize=128m",
+      "-XX:ReservedCodeCacheSize=32m",
+      "-XX:ActiveProcessorCount=2",
+      "-Djava.io.tmpdir=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\temp",
+      "-Djansi.tmpdir=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\temp",
+      "-Duser.home=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\home",
+      "-Dfile.encoding=UTF-8",
+      "-classpath",
+      "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\boot\\plexus-classworlds-2.9.0.jar",
+      "-Dclassworlds.conf=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\bin\\m2.conf",
+      "-Dmaven.home=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14",
+      "-Dlibrary.jansi.path=C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\lib\\jansi-native",
+      "-Dmaven.multiModuleProjectDirectory=K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007",
+      "org.codehaus.plexus.classworlds.launcher.Launcher",
+      "-o",
+      "-B",
+      "-ntp",
+      "-e",
+      "-N",
+      "-s",
+      "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+      "-gs",
+      "C:\\ProgramData\\chocolatey\\lib\\maven\\apache-maven-3.9.14\\conf\\settings.xml",
+      "-Dmaven.repo.local=K:\\codex-work\\m3-format78-standalone-maven-activation-p0-20261007\\offline-cache",
+      "-Dstyle.color=never",
+      "-f",
+      "K:\\codex-work\\m3-regex-finite-runs-standalone-maven-activation-p0-20261007\\layout\\synexia-openrewrite-recipes\\tasks\\synexia-m3jdk-regex-adjacent-finite-runs-20261007\\pom.xml",
+      "-Dm3.mode=--apply",
+      "-Dm3.target.repo=K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\target\\receiving-M3jdk21",
+      "-Dm3.templates=K:\\codex-work\\m3-regex-qualified-receiver-carryback-inventory-p0-20261007\\preparation-01\\payload\\M3jdk21\\m3\\synexia-import\\intakes\\regex-precompute-v7-20261007\\successors\\adjacent-finite-runs-20261007\\recipe\\templates",
+      "org.codehaus.mojo:exec-maven-plugin:3.5.0:java@replay-exact-regex-adjacent-finite-runs"
+    ]
+  },
+  "order": [
+    "applyTwoTargets",
+    "defaultCheckFixedpoint",
+    "secondApplyFixedpoint",
+    "driftProgram",
+    "driftQuery"
+  ],
+  "expectedExits": {
+    "applyTwoTargets": 0,
+    "defaultCheckFixedpoint": 0,
+    "secondApplyFixedpoint": 0,
+    "driftProgram": 1,
+    "driftQuery": 1
+  },
+  "expectedChanges": {
+    "applyTwoTargets": 2,
+    "defaultCheckFixedpoint": 0,
+    "secondApplyFixedpoint": 0,
+    "driftProgram": null,
+    "driftQuery": null
+  },
+  "driftPlan": {
+    "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/DRIFT_NEGATIVE_COMMAND_PLANS_CPU_V3.json",
+    "bytes": 8277,
+    "sha256": "9b4df2a21e8ac38c099d011f44706ee9c18164a6d02d495e46810d440f570653",
+    "gitBlob": "0debb38ff158f0db7055fa7c39f641790e1051f7"
+  },
+  "receiverImmutableInputs": [
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+      "bytes": 141730,
+      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+      "bytes": 15093,
+      "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/base-revision.txt",
+      "bytes": 41,
+      "sha256": "bf9b81c16c005766cc6d80e74be4b0396cfd75e72dad3877f7868e9485e6919f"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/manifest.tsv",
+      "bytes": 620,
+      "sha256": "c460929619e876fb0c96a90fbe62383157ccc872d9ef5d9947e5cd74e5937b9c"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java.txt",
+      "bytes": 141730,
+      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java.txt",
+      "bytes": 15093,
+      "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DIRECT_ORIGINAL40_ACTUAL_TERMINAL.json",
+      "bytes": 90172,
+      "sha256": "eb947757b621f964cf7195df482030bb73a40800615bf21670949c67dc64f6c8"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DIRECT_REPLAY_ACTUAL_TERMINAL.json",
+      "bytes": 11210,
+      "sha256": "91113eb3bff24a1868ae6603daf778c82e62f7240d632d2c6dbd1aa577ce7669"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/STRICT_TEST_CLASS_ARTIFACTS.json",
+      "bytes": 16134,
+      "sha256": "e266184e472f4d301bec397e3b5c412d688e4c2fbb5f400ee019fb677a65c7c5"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/ROOT_CPU_TEST_REVIEW_DISPOSITION.json",
+      "bytes": 2688,
+      "sha256": "b9b72da1cb5f4c1110161cd1787d89ca0e3e4a5e80d06440212a1a55aa1844ae"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/ORIGINAL_TRIGRAM_BASELINE_FAILURE.json",
+      "bytes": 15279,
+      "sha256": "5ee95a773f6cc28f1c25bd836f6b8283a923eacbb3aa6508406287f504b9be81"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/ORIGINAL_PROGRAM3_BASELINE_FAILURE.json",
+      "bytes": 17989,
+      "sha256": "7f49c0f21ef7b8b7e94a5d32c597aaee964b74606e2a1efae8d4f882d7b9f186"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/donor-oracles/MIndexRegexProgramTest.java.txt",
+      "bytes": 39322,
+      "sha256": "5c185acb76ef6de2a79eebec30a6b156fa982c7283cb0f4d0ef96840ce1a9dd6"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/donor-oracles/MIndexRegexTrigramQueryTest.java.txt",
+      "bytes": 11007,
+      "sha256": "bae0950fd49e10eaada3d8e9e61a9b99dd251357f3952bbd867e134f77ef2225"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/SYNEXIA_ACTUAL_PUBLICATION_TERMINAL.json",
+      "bytes": 705,
+      "sha256": "7040ab4eed6b35d34a90948d1e0366fff012a202503320b433b7fcb06b5eb430"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/SYNEXIA_STRICT_PRODUCTION_CLASS_ARTIFACTS.json",
+      "bytes": 15971,
+      "sha256": "e67e7e3c0d70fa9643730df1d9efe26d3f6cf3563569ceedcd2a1d4a6d5e0073"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DONOR_EVIDENCE_INDEX.json",
+      "bytes": 17039,
+      "sha256": "1a2a6e8f96c1bbdd818f35c6ba4cf73b3eddabb955d221260e9e1fc525703917"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-02/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/FOSS_REUSE_DECISION.tsv",
+      "bytes": 1474,
+      "sha256": "0fb83cb152c0eaa0bdf43ad8ce4102165c9a79a0c1ce5d16da9a68d1e5abc9da"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/NOTICE",
+      "bytes": 488,
+      "sha256": "b0a0d3073dda47203bba6607e8fe582f46d5aca53f3f43e59a995d5e3ea72ab4"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-01/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/PROVENANCE.json",
+      "bytes": 5974,
+      "sha256": "8826e3c512258194e8cb82391caf2067b488977677b2a913acbd278a7c397576"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-02/payload/M3jdk21/m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/README.md",
+      "bytes": 4040,
+      "sha256": "9e244de27da96784ae35b0e0b88f71afb4f48bbb3bcc6883348552089dcbe498"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-02/PUBLICATION_MAP_02.json",
+      "bytes": 18855,
+      "sha256": "2150e3e2fddd109c7a9eea2c73e5b13b622abfef690f18682401519a94b7f3ac",
+      "gitBlob": "5c1505112561d8ef942d492ccdb82a94432487d6"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-02/PREPARATION_SEAL_02.json",
+      "bytes": 6987,
+      "sha256": "7fc51308062a0c1f918c4cc431150fdaded0cb044dd2eb9044bb3221cd51dbd9",
+      "gitBlob": "63509f16f53c695e70a8c34ce9a3e1ca83ae9750"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/DONOR_INVENTORY_BEFORE_RECEIVER_ADAPTATION_01.json",
+      "bytes": 28175,
+      "sha256": "a440bed198932d4542923ebe51accdf214ae49bf91e1211ec537547fe0803b54",
+      "gitBlob": "3a41a39c63da131a10712be749ef822412bb823a"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/QUERY_DIRECT_IMPORT_DONOR_FIT_01.json",
+      "bytes": 4162,
+      "sha256": "bef7e802f68bcdd45d3889a52b47ae3c501cc369f9ea24346745663562ac2c78",
+      "gitBlob": "36de601e855b9d300589d3e0335e7a4cf2901245"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/EXECUTION_AND_REVIEW_FOSS_REUSE_DECISION_01.tsv",
+      "bytes": 1450,
+      "sha256": "8b1501cab0242fab1b8b14f806ed7a36567dfc0dc3bab07512f1240c52990ccd",
+      "gitBlob": "8632a6700116371184afc4adeb1aefef684144f9"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-02/NATIVE01_ACTUAL_RESOURCE_REFUSAL_01.json",
+      "bytes": 2260,
+      "sha256": "90dd3cc78d412db4e9cf40c3f606a3c9dba3a43adc8e20264c60bf581a1acc2a",
+      "gitBlob": "c00ebdb4a5bb62309c8fc5738e81d31c3fef0459"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-01/NATIVE_READINESS_SEAL_01.json",
+      "bytes": 5946,
+      "sha256": "7f2638745c28f1739c3f2d30d6f19f8976bcfa8c86851c07bdb0b4b6afe61264",
+      "gitBlob": "3634f7c3b36f2b1355db4545229ea2e65d8335d5"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-02/FOSS_REUSE_DECISION.tsv",
+      "bytes": 515,
+      "sha256": "d3b409619bc7d9624328d0b3c76915f4b49734f527ca89c9a157b72b2bd49da5",
+      "gitBlob": "af897fb73d4f925b6bf28fc544d5840b8d6e9f14"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/NATIVE02_ACTUAL_RESOURCE_REFUSAL_01.json",
+      "bytes": 2260,
+      "sha256": "777b51491cc457a9338ed78c4f31c7893c00655dbd021f62a9938ad34eeb0d9f",
+      "gitBlob": "db8c7a738cdd5b287385349719a75d78be74db38"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-02/NATIVE_READINESS_SEAL_02.json",
+      "bytes": 6153,
+      "sha256": "d8ad6820691d0a153872de885e1a76567e469a42252a7372d8df2190970523f9",
+      "gitBlob": "223aaed0545efe33328a52b85e157d5d4f1340da"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/FOSS_REUSE_DECISION.tsv",
+      "bytes": 515,
+      "sha256": "44fbdbaae492a641867edb62c148588b864de0fc6a3ba7c1cd9f402ca8e31db3",
+      "gitBlob": "36ceb97d08418ae9f93d6c506974c5a9c8b526d6"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-04/NATIVE03_ACTUAL_PARTIAL_RESOURCE_REFUSAL_01.json",
+      "bytes": 4225,
+      "sha256": "719078e68259b337e97ec7abb08a514e7626e1b155dc15dd2f8145f75b585292",
+      "gitBlob": "b720b0da84ca529e3e6f19f5d18db91824868848"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-04/FOSS_REUSE_DECISION.tsv",
+      "bytes": 441,
+      "sha256": "89c22415f91259b7c543fcb6f8f934dde66d81208ce7bb96b6d44f724485f9a8",
+      "gitBlob": "f96e87730b682868eacb037720960b143b1680e6"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-05/NATIVE04_ACTUAL_RESOURCE_REFUSAL_01.json",
+      "bytes": 3665,
+      "sha256": "a6bba3a6daa8bdab7c53c781736b969022c795eb0d3d77e16484a70e229c823f",
+      "gitBlob": "56eaafd5e3b04c9c6af52d101f731bc87df27aa7"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-05/FOSS_REUSE_DECISION.tsv",
+      "bytes": 433,
+      "sha256": "4f5e796fcb147bf561a433b1ff82a62268bb1a4b3cb4b43f52fbf8bfd28c7339",
+      "gitBlob": "2cf8786f4ad3b1990e9fb6d77183fc29e5adc806"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/NATIVE05_ACTUAL_RESOURCE_REFUSAL_01.json",
+      "bytes": 3665,
+      "sha256": "63468c635c8d82834cfd1ed32031e79bb4892acf0b07a1c85efb4c165bff089d",
+      "gitBlob": "05b7acfd9400ec7bdd8c9c5cbab91776ce497de4"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/FOSS_REUSE_DECISION.tsv",
+      "bytes": 433,
+      "sha256": "0ea5de4d6b7894a1e0e3f12ccef6ba886dba8dba8e2a45c0b8643543f435cece",
+      "gitBlob": "6911307a3130c32693f7c4876eef7bb8b8bec4a2"
+    }
+  ],
+  "unrelatedOriginalRegexTargets": [
+    {
+      "path": "K:/codex-work/m3-regex-finite-runs-standalone-maven-activation-p0-20261007/layout/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/target/com.synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+      "bytes": 141730,
+      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
+      "gitBlob": "f39709b64c82ddd1acf349446eeac8efe8f3ef27"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-finite-runs-standalone-maven-activation-p0-20261007/layout/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/target/com.synexia/synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexRegexTrigramQueryTest.java",
+      "bytes": 11007,
+      "sha256": "bae0950fd49e10eaada3d8e9e61a9b99dd251357f3952bbd867e134f77ef2225",
+      "gitBlob": "601a424ef6f477e675c64cdaa0643b0247c5476a"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-finite-runs-standalone-maven-activation-p0-20261007/layout/synexia-openrewrite-recipes/tasks/synexia-m3jdk-regex-adjacent-finite-runs-20261007/target/com.synexia/synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexRegexProgramTest.java",
+      "bytes": 39322,
+      "sha256": "5c185acb76ef6de2a79eebec30a6b156fa982c7283cb0f4d0ef96840ce1a9dd6",
+      "gitBlob": "13ec38e57bd6d4f8317566821f8d6e2dad153961"
+    }
+  ],
+  "publishedSourceRevision": "1e4743f6661a9149f327bf7171b4de2df68add54",
+  "budget": {
+    "taskCapBytes": 8388608,
+    "knownReceivingGrowthBytes": 15730,
+    "reviewOutputReserveBytes": 1048576,
+    "futureProofReserveBytes": 1048576,
+    "eachLogReserveBytes": 65536
+  },
+  "owningPomChanges": 0,
+  "compilerInvocations": 0,
+  "reuseQualifiedEngineClasses": 8,
+  "MavenGoal": "org.codehaus.mojo:exec-maven-plugin:3.5.0:java@replay-exact-regex-adjacent-finite-runs",
+  "rootOwnsSoleNativeLane": true,
+  "JVMInvocations": 0,
+  "MavenInvocations": 0,
+  "reviewerInvocations": 0,
+  "implicitRetry": false,
+  "priorActualResourceRefusal": {
+    "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/NATIVE02_ACTUAL_RESOURCE_REFUSAL_01.json",
+    "bytes": 2260,
+    "sha256": "777b51491cc457a9338ed78c4f31c7893c00655dbd021f62a9938ad34eeb0d9f",
+    "gitBlob": "db8c7a738cdd5b287385349719a75d78be74db38"
+  },
+  "priorActualResourceRefusals": [
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-02/NATIVE01_ACTUAL_RESOURCE_REFUSAL_01.json",
+      "bytes": 2260,
+      "sha256": "90dd3cc78d412db4e9cf40c3f606a3c9dba3a43adc8e20264c60bf581a1acc2a",
+      "gitBlob": "c00ebdb4a5bb62309c8fc5738e81d31c3fef0459"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-03/NATIVE02_ACTUAL_RESOURCE_REFUSAL_01.json",
+      "bytes": 2260,
+      "sha256": "777b51491cc457a9338ed78c4f31c7893c00655dbd021f62a9938ad34eeb0d9f",
+      "gitBlob": "db8c7a738cdd5b287385349719a75d78be74db38"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-04/NATIVE03_ACTUAL_PARTIAL_RESOURCE_REFUSAL_01.json",
+      "bytes": 4225,
+      "sha256": "719078e68259b337e97ec7abb08a514e7626e1b155dc15dd2f8145f75b585292",
+      "gitBlob": "b720b0da84ca529e3e6f19f5d18db91824868848"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-05/NATIVE04_ACTUAL_RESOURCE_REFUSAL_01.json",
+      "bytes": 3665,
+      "sha256": "a6bba3a6daa8bdab7c53c781736b969022c795eb0d3d77e16484a70e229c823f",
+      "gitBlob": "56eaafd5e3b04c9c6af52d101f731bc87df27aa7"
+    },
+    {
+      "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-06/NATIVE05_ACTUAL_RESOURCE_REFUSAL_01.json",
+      "bytes": 3665,
+      "sha256": "63468c635c8d82834cfd1ed32031e79bb4892acf0b07a1c85efb4c165bff089d",
+      "gitBlob": "05b7acfd9400ec7bdd8c9c5cbab91776ce497de4"
+    }
+  ],
+  "activeOrder": [
+    "defaultCheckFixedpoint",
+    "secondApplyFixedpoint",
+    "driftProgram",
+    "driftQuery"
+  ],
+  "completedApply": {
+    "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/native-preparation-04/NATIVE03_ACTUAL_PARTIAL_RESOURCE_REFUSAL_01.json",
+    "bytes": 4225,
+    "sha256": "719078e68259b337e97ec7abb08a514e7626e1b155dc15dd2f8145f75b585292",
+    "gitBlob": "b720b0da84ca529e3e6f19f5d18db91824868848"
+  }
+}

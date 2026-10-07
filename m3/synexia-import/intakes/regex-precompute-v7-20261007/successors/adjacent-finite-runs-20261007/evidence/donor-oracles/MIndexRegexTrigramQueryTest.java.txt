@@ -1,0 +1,279 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.indexstring;
+
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.Arrays;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+
+final class MIndexRegexTrigramQueryTest {
+  @Test
+  void extractsConservativeBooleanTrigramStructureFromNativeRegexAst() {
+    MIndexRegexTrigramQuery query =
+        MIndexRegexProgram.compile("abc.*(def|ghi)").trigramQuery();
+
+    assertTrue(query.hasConstraints());
+    assertEquals(3, query.termCount());
+    assertTrue(test(query, "abc---def"));
+    assertTrue(test(query, "ghi---abc"));
+    assertFalse(test(query, "abc---xyz"));
+    assertFalse(test(query, "def---xyz"));
+  }
+
+  @Test
+  void exactAlternativesAndSmallClassesProduceUsefulQueries() {
+    MIndexRegexTrigramQuery alternatives =
+        MIndexRegexProgram.compile("abc(def|ghi)").trigramQuery();
+    assertTrue(alternatives.hasConstraints());
+    assertTrue(test(alternatives, "xxabcdefyy"));
+    assertTrue(test(alternatives, "xxabcghiyy"));
+    assertFalse(test(alternatives, "xxabczzzyy"));
+
+    MIndexRegexTrigramQuery smallClass =
+        MIndexRegexProgram.compile("ab[cde]f").trigramQuery();
+    assertTrue(test(smallClass, "abcf"));
+    assertTrue(test(smallClass, "abdf"));
+    assertTrue(test(smallClass, "abef"));
+    assertFalse(test(smallClass, "abzf"));
+
+    MIndexRegexTrigramQuery impossible =
+        MIndexRegexProgram.compile("[^\\s\\S]").trigramQuery();
+    assertEquals(MIndexRegexTrigramQuery.Op.NONE, impossible.op());
+  }
+
+  @Test
+  void queryNeverRejectsARealFindForSupportedCorpus() {
+    List<String> patterns =
+        List.of(
+            "Abcdef",
+            "(abc)(def)",
+            "abc.*(def|ghi)",
+            "abc(def|ghi)",
+            "a+hello",
+            "a*bbb",
+            "a?bbb",
+            "(abc|bac)de",
+            "ab[cde]f",
+            "[ab][cd][ef]",
+            "\\babc",
+            "abc\\B");
+
+    List<String> corpus =
+        List.of(
+            "",
+            "Abcdef",
+            "xxAbcdefyy",
+            "abcdef",
+            "abc---def",
+            "abc---ghi",
+            "xxabcghi",
+            "ahello",
+            "aaaahello",
+            "bbb",
+            "abbb",
+            "abcde",
+            "bacde",
+            "abcf",
+            "abdf",
+            "abef",
+            "ace",
+            "bdf",
+            " abc ",
+            "zabcx",
+            "zzzz");
+
+    for (String pattern : patterns) {
+      MIndexRegexProgram program = MIndexRegexProgram.compile(pattern);
+      MIndexRegexTrigramQuery query = program.trigramQuery();
+      for (String text : corpus) {
+        boolean actual = program.find(text);
+        if (actual) {
+          assertTrue(
+              test(query, text),
+              () -> "candidate false negative for " + pattern + " against " + text);
+        }
+      }
+    }
+  }
+
+  @Test
+  void finiteDomainPlanPrunesDistinctSpellingsBeforeAuthoritativeVerification() {
+    List<MIndexString> values =
+        List.of(
+            MIndexString.of("abc---def"),
+            MIndexString.of("abc---ghi"),
+            MIndexString.of("abc---xyz"),
+            MIndexString.of("def---xyz"),
+            MIndexString.of("unrelated"),
+            MIndexString.of("abc---def"),
+            MIndexString.of("prefix abc---ghi suffix"));
+
+    MIndexQueryModel model = MIndexQueryModel.compile(values);
+    MIndexSearchEngine search = model.search();
+    MIndexHybridRegex regex = MIndexHybridRegex.compile("abc.*(def|ghi)");
+    MIndexHybridRegexPlan plan = search.hybridRegex(regex);
+
+    assertTrue(plan.candidateTextCount() < model.distinctTextCount());
+    assertEquals(4, plan.find().count());
+
+    for (int row = 0; row < model.size(); row++) {
+      MIndexString value = model.valueAt(row);
+      assertEquals(regex.matches(value), plan.matches().contains(row));
+      assertEquals(regex.lookingAt(value), plan.lookingAt().contains(row));
+      assertEquals(regex.find(value) != null, plan.find().contains(row));
+    }
+  }
+
+  @Test
+  void forcedNativeSparseAndPreservesHybridRegexResults() {
+    boolean required = Boolean.getBoolean("synexia.indexstring.search.native.required");
+    var jni = new JniIndexSearchAccelerator();
+    if (!jni.available()) {
+      if (required) throw new AssertionError("required JNI search accelerator unavailable");
+      return;
+    }
+
+    java.util.ArrayList<MIndexString> values = new java.util.ArrayList<>();
+    for (int row = 0; row < 4096; row++) {
+      String value;
+      if (row % 97 == 0) value = "abc--rare--def-" + row;
+      else if (row % 131 == 0) value = "abc--rare--ghi-" + row;
+      else if ((row & 1) == 0) value = "abc--common--xyz-" + row;
+      else value = "unrelated-" + row;
+      values.add(MIndexString.of(value));
+    }
+    MIndexQueryModel model = MIndexQueryModel.compile(values);
+    MIndexHybridRegex regex = MIndexHybridRegex.compile("abc.*(def|ghi)");
+
+    String previous = System.getProperty("synexia.indexstring.search.accelerator");
+    System.setProperty("synexia.indexstring.search.accelerator", "jni");
+    try {
+      MIndexHybridRegexPlan plan = model.search().hybridRegex(regex);
+      assertTrue(plan.candidateTextCount() < model.distinctTextCount() / 4);
+      for (int row = 0; row < model.size(); row++) {
+        MIndexString value = model.valueAt(row);
+        assertEquals(regex.matches(value), plan.matches().contains(row));
+        assertEquals(regex.lookingAt(value), plan.lookingAt().contains(row));
+        assertEquals(regex.find(value) != null, plan.find().contains(row));
+      }
+    } finally {
+      if (previous == null) System.clearProperty("synexia.indexstring.search.accelerator");
+      else System.setProperty("synexia.indexstring.search.accelerator", previous);
+    }
+  }
+
+  @Test
+  void adjacentFiniteRunsRetainTheQuotedCandidateStructure() {
+    List<String[]> pairs =
+        List.of(
+            new String[] {"abc.*def", "\\Qabc\\E.*\\Qdef\\E"},
+            new String[] {"abc.*(def|ghi)", "\\Qabc\\E.*(\\Qdef\\E|\\Qghi\\E)"},
+            new String[] {
+              "ab[cde]f.*ghi", "(?:\\Qabcf\\E|\\Qabdf\\E|\\Qabef\\E).*\\Qghi\\E"
+            },
+            new String[] {
+              "a".repeat(257) + ".*def", "\\Q" + "a".repeat(257) + "\\E.*\\Qdef\\E"
+            });
+    for (String[] pair : pairs) {
+      MIndexRegexTrigramQuery plain = MIndexRegexProgram.compile(pair[0]).trigramQuery();
+      MIndexRegexTrigramQuery quoted = MIndexRegexProgram.compile(pair[1]).trigramQuery();
+      assertTrue(plain.hasConstraints(), pair[0]);
+      assertQueryShape(quoted, plain);
+    }
+    MIndexRegexTrigramQuery query = MIndexRegexProgram.compile("abc.*def").trigramQuery();
+    assertEquals(2, query.termCount());
+    assertTrue(test(query, "abc---def"));
+    assertFalse(test(query, "abc---xyz"));
+    assertFalse(test(query, "def---xyz"));
+    assertTrue(test(query, "def---abc"), "membership does not prove regex order");
+    assertFalse(java.util.regex.Pattern.compile("abc.*def").matcher("def---abc").find());
+  }
+
+  @Test
+  void finiteRunBudgetAndEmptyBranchesNeverRejectAnAuthoritativeFind() {
+    List<String> patterns =
+        List.of(
+            "abc.*def",
+            "abc.*(def|ghi)",
+            "ab[cde]f.*ghi",
+            "a{0,2}bc.*def",
+            "(?:|abc.*def)",
+            "abc(?:def)?ghi.*xyz",
+            "[^\\s\\S].*def",
+            "a".repeat(257) + ".*def",
+            "(?:a|b)".repeat(7) + ".*def");
+    List<String> texts =
+        List.of(
+            "", "abc", "def", "abcdef", "abc---def", "abc---ghi", "def---abc",
+            "abcf---ghi", "abdf---ghi", "abef---ghi", "bc---def", "aabc---def",
+            "abcghi---xyz", "abcdefghi---xyz", "abc\u0000def", "abc\n---def",
+            "abc\ud83d\ude42def", "abc\ud800def", "abc\udc00def",
+            "a".repeat(257) + "---def", "aaaaaaa---def", "bbbbbbb---def");
+    for (String pattern : patterns) {
+      MIndexRegexProgram program =
+          MIndexRegexProgram.tryCompile(pattern, MIndexRegexProgram.Semantics.JDK, 10_000);
+      assertNotNull(program, pattern);
+      MIndexRegexTrigramQuery query = program.trigramQuery();
+      java.util.regex.Pattern oracle = java.util.regex.Pattern.compile(pattern);
+      for (String text : texts) {
+        boolean actual = oracle.matcher(text).find();
+        if (actual) assertTrue(test(query, text), pattern + " candidate false negative");
+        if (program.supportsInput(text)) {
+          assertEquals(actual, program.find(text), pattern + " supported-input oracle");
+        }
+      }
+    }
+    assertEquals(
+        MIndexRegexTrigramQuery.Op.ALL,
+        MIndexRegexProgram.compile("(?:|abc.*def)").trigramQuery().op());
+    String alternatives = "(?:a|b)".repeat(7) + ".*def";
+    MIndexRegexTrigramQuery query = MIndexRegexProgram.compile(alternatives).trigramQuery();
+    java.util.regex.Pattern oracle = java.util.regex.Pattern.compile(alternatives);
+    for (int bits = 0; bits < 128; bits++) {
+      StringBuilder text = new StringBuilder();
+      for (int bit = 0; bit < 7; bit++) text.append((bits & (1 << bit)) == 0 ? 'a' : 'b');
+      text.append("---def");
+      assertTrue(oracle.matcher(text).find());
+      assertTrue(test(query, text), "finite-language overflow must stay conservative");
+    }
+  }
+
+  @Test
+  void finiteRunRecoveryKeepsExistingModeAndSurrogateRefusals() {
+    for (String pattern :
+        List.of(
+            "(?i)abc.*def", "(?s:abc.*def)", "(?<=abc)def", "(?=abc)abc.*def",
+            "(abc)\\1", "abc$", "abc.*\\p{L}", "\ud83d\ude42.*def", "\\uD800.*def")) {
+      java.util.regex.Pattern.compile(pattern);
+      assertNull(
+          MIndexRegexProgram.tryCompile(pattern, MIndexRegexProgram.Semantics.JDK, 10_000),
+          pattern);
+    }
+    MIndexRegexProgram program =
+        MIndexRegexProgram.tryCompile("abc.*def", MIndexRegexProgram.Semantics.JDK, 10_000);
+    assertNotNull(program);
+    assertFalse(program.supportsInput("abc\ud83d\ude42def"));
+    assertTrue(test(program.trigramQuery(), "abc\ud83d\ude42def"));
+  }
+
+  private static void assertQueryShape(
+      MIndexRegexTrigramQuery expected, MIndexRegexTrigramQuery actual) {
+    assertEquals(expected.op(), actual.op());
+    assertArrayEquals(expected.trigrams(), actual.trigrams());
+    assertEquals(expected.subqueries().size(), actual.subqueries().size());
+    for (int i = 0; i < expected.subqueries().size(); i++) {
+      assertQueryShape(expected.subqueries().get(i), actual.subqueries().get(i));
+    }
+  }
+
+  private static boolean test(MIndexRegexTrigramQuery query, CharSequence text) {
+    long[] grams = MIndexRegexTrigramQuery.uniqueTrigrams(text);
+    return query.test(gram -> Arrays.binarySearch(grams, gram) >= 0);
+  }
+}

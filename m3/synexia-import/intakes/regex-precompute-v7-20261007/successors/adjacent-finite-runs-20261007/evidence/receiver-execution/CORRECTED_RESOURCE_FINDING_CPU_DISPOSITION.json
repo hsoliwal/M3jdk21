@@ -1,0 +1,59 @@
+{
+  "schema": 1,
+  "status": "ROOT_CPU_RESOURCE_ABSENCE_REJECTED_FORMAL_ADMISSION_STILL_OPEN",
+  "originalFinding": {
+    "title": "[P1] Include the source payloads referenced by the manifest",
+    "body": "Both manifest rows name `.java.txt` resources beneath the recipe template root, but neither resource is included in the exact seven-file bundle. `M3GpuToolJoinManifest.load` opens every non-`KEEP` fourth-column resource and verifies its postimage before Replay can plan, check, or apply, so this package will fail with `cannot read recipe resource` for the first target. Add both exact pinned payload files to the published bundle (or point the rows to resources actually shipped with it).",
+    "priority": "P1",
+    "confidence": 0.99,
+    "category": "bug",
+    "code_location": {
+      "file_path": "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/manifest.tsv",
+      "line": 1
+    }
+  },
+  "originalResult": {
+    "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-02/review-preparation-01/FORMAL_REVIEW.json",
+    "bytes": 1278,
+    "sha256": "434db4d33c5a9c1fed5dcbb752b9ac4098a2a707603e04bb170182681146adf8",
+    "gitBlob": "5bb348b8264fef82ecb09b210adee784cc5bacbd"
+  },
+  "fullPublicationInventory": {
+    "path": "K:/codex-work/m3-regex-qualified-receiver-carryback-inventory-p0-20261007/preparation-03/PUBLICATION_MAP_03.json",
+    "bytes": 18854,
+    "sha256": "5945fcaac9caed258b862ef5234538e8247dafb84d3747050fdafb7b3aa38c91",
+    "gitBlob": "1737e1a507d7d36d90a03b36eefc3a19753f5b4b"
+  },
+  "publicationFiles": 21,
+  "metadataReviewFiles": 7,
+  "exactTemplatePayloads": [
+    {
+      "targetPath": "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java.txt",
+      "bytes": 141730,
+      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c",
+      "gitBlob": "f39709b64c82ddd1acf349446eeac8efe8f3ef27"
+    },
+    {
+      "targetPath": "m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java.txt",
+      "bytes": 15093,
+      "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
+      "gitBlob": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea"
+    }
+  ],
+  "correctedRootMetadataObservation": {
+    "chunk_id": "0a70b7",
+    "wall_time_seconds": 9.4e-06,
+    "exit_code": 0,
+    "original_token_count": 1685,
+    "output": "[{\"targetPath\":\"m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java\",\"gitBlob\":\"f39709b64c82ddd1acf349446eeac8efe8f3ef27\",\"preimage\":\"6d814e232c0b7af0281422d146a587467db4fe32\",\"sha256\":\"4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c\",\"bytes\":141730},{\"targetPath\":\"m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java\",\"gitBlob\":\"e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea\",\"preimage\":\"ABSENT\",\"sha256\":\"428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f\",\"bytes\":15093},{\"targetPath\":\"m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/base-revision.txt\",\"gitBlob\":\"94c8db3c419fccea063f5492604303ad919aed15\",\"preimage\":\"ABSENT\",\"sha256\":\"bf9b81c16c005766cc6d80e74be4b0396cfd75e72dad3877f7868e9485e6919f\",\"bytes\":41},{\"targetPath\":\"m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/manifest.tsv\",\"gitBlob\":\"3ab0de89d0388b0da8c1895a481e4ec6edb38239\",\"preimage\":\"ABSENT\",\"sha256\":\"c460929619e876fb0c96a90fbe62383157ccc872d9ef5d9947e5cd74e5937b9c\",\"bytes\":620},{\"targetPath\":\"m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java.txt\",\"gitBlob\":\"f39709b64c82ddd1acf349446eeac8efe8f3ef27\",\"preimage\":\"ABSENT\",\"sha256\":\"4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c\",\"bytes\":141730},{\"targetPath\":\"m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/recipe/templates/m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java.txt\",\"gitBlob\":\"e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea\",\"preimage\":\"ABSENT\",\"sha256\":\"428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f\",\"bytes\":15093},{\"targetPath\":\"m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DIRECT_ORIGINAL40_ACTUAL_TERMINAL.json\",\"gitBlob\":\"bff0e7e8e0927d2b2ad23b30be7f7b5d4394490c\",\"preimage\":\"ABSENT\",\"sha256\":\"eb947757b621f964cf7195df482030bb73a40800615bf21670949c67dc64f6c8\",\"bytes\":90172},{\"targetPath\":\"m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DIRECT_REPLAY_ACTUAL_TERMINAL.json\",\"gitBlob\":\"1d079abb26e0438890fe80535566bb239c33eaf8\",\"preimage\":\"ABSENT\",\"sha256\":\"91113eb3bff24a1868ae6603daf778c82e62f7240d632d2c6dbd1aa577ce7669\",\"bytes\":11210},{\"targetPath\":\"m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/STRICT_TEST_CLASS_ARTIFACTS.json\",\"gitBlob\":\"5cebc4fa06123fa26368db940f8c4e4a233aa4dd\",\"preimage\":\"ABSENT\",\"sha256\":\"e266184e472f4d301bec397e3b5c412d688e4c2fbb5f400ee019fb677a65c7c5\",\"bytes\":16134},{\"targetPath\":\"m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/ROOT_CPU_TEST_REVIEW_DISPOSITION.json\",\"gitBlob\":\"9c212baead87fe9c1255527b9fd6a5c65dd8f0de\",\"preimage\":\"ABSENT\",\"sha256\":\"b9b72da1cb5f4c1110161cd1787d89ca0e3e4a5e80d06440212a1a55aa1844ae\",\"bytes\":2688},{\"targetPath\":\"m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/ORIGINAL_TRIGRAM_BASELINE_FAILURE.json\",\"gitBlob\":\"7cab6a4e7faf568ec2de396222e9e6b3e2055888\",\"preimage\":\"ABSENT\",\"sha256\":\"5ee95a773f6cc28f1c25bd836f6b8283a923eacbb3aa6508406287f504b9be81\",\"bytes\":15279},{\"targetPath\":\"m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/ORIGINAL_PROGRAM3_BASELINE_FAILURE.json\",\"gitBlob\":\"6125cf737add641f38623d381c814cdd6217f1f0\",\"preimage\":\"ABSENT\",\"sha256\":\"7f49c0f21ef7b8b7e94a5d32c597aaee964b74606e2a1efae8d4f882d7b9f186\",\"bytes\":17989},{\"targetPath\":\"m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/donor-oracles/MIndexRegexProgramTest.java.txt\",\"gitBlob\":\"13ec38e57bd6d4f8317566821f8d6e2dad153961\",\"preimage\":\"ABSENT\",\"sha256\":\"5c185acb76ef6de2a79eebec30a6b156fa982c7283cb0f4d0ef96840ce1a9dd6\",\"bytes\":39322},{\"targetPath\":\"m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/donor-oracles/MIndexRegexTrigramQueryTest.java.txt\",\"gitBlob\":\"601a424ef6f477e675c64cdaa0643b0247c5476a\",\"preimage\":\"ABSENT\",\"sha256\":\"bae0950fd49e10eaada3d8e9e61a9b99dd251357f3952bbd867e134f77ef2225\",\"bytes\":11007},{\"targetPath\":\"m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/SYNEXIA_ACTUAL_PUBLICATION_TERMINAL.json\",\"gitBlob\":\"1e821dce0839e8ab3c702e73a4c64af0cdba779f\",\"preimage\":\"ABSENT\",\"sha256\":\"7040ab4eed6b35d34a90948d1e0366fff012a202503320b433b7fcb06b5eb430\",\"bytes\":705},{\"targetPath\":\"m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/SYNEXIA_STRICT_PRODUCTION_CLASS_ARTIFACTS.json\",\"gitBlob\":\"813a5c7eb03dd2b6462d54acba11de5003c03ae8\",\"preimage\":\"ABSENT\",\"sha256\":\"e67e7e3c0d70fa9643730df1d9efe26d3f6cf3563569ceedcd2a1d4a6d5e0073\",\"bytes\":15971},{\"targetPath\":\"m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/evidence/DONOR_EVIDENCE_INDEX.json\",\"gitBlob\":\"1a00f44e588dbbd4b9f541b2d6fa5f069d9e52e1\",\"preimage\":\"ABSENT\",\"sha256\":\"1a2a6e8f96c1bbdd818f35c6ba4cf73b3eddabb955d221260e9e1fc525703917\",\"bytes\":17039},{\"targetPath\":\"m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/FOSS_REUSE_DECISION.tsv\",\"gitBlob\":\"059225e70157e75ad4918d5fc4bd60eab219deaa\",\"preimage\":\"ABSENT\",\"sha256\":\"0fb83cb152c0eaa0bdf43ad8ce4102165c9a79a0c1ce5d16da9a68d1e5abc9da\",\"bytes\":1474},{\"targetPath\":\"m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/NOTICE\",\"gitBlob\":\"e77ec6e7c6123a0135b252d45d91c650309e163a\",\"preimage\":\"ABSENT\",\"sha256\":\"b0a0d3073dda47203bba6607e8fe582f46d5aca53f3f43e59a995d5e3ea72ab4\",\"bytes\":488},{\"targetPath\":\"m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/PROVENANCE.json\",\"gitBlob\":\"1ab073ac911490142c699982256fce7dd694796d\",\"preimage\":\"ABSENT\",\"sha256\":\"8826e3c512258194e8cb82391caf2067b488977677b2a913acbd278a7c397576\",\"bytes\":5974},{\"targetPath\":\"m3/synexia-import/intakes/regex-precompute-v7-20261007/successors/adjacent-finite-runs-20261007/README.md\",\"gitBlob\":\"242ceee1f578703f9b4e9c4146107f79e42f74dd\",\"preimage\":\"ABSENT\",\"sha256\":\"9e244de27da96784ae35b0e0b88f71afb4f48bbb3bcc6883348552089dcbe498\",\"bytes\":4040}]\r\n"
+  },
+  "rootDispositionCorrectionAuthority": {
+    "path": "K:/codex-work/m3-v7-ast-publication-20261007/M3_REGEX_REVIEW01_ROOT_DISPOSITION_CUSTODY_CORRECTION_01.json",
+    "bytes": 1732,
+    "sha256": "05fb19c34f361c1ab3809f6f4fac4deea8515f6eb0696204b67d15166518546a",
+    "gitBlob": "5b6fe8b58c6bd3ab6b177fdd6a10b5a94e95c2d5"
+  },
+  "reason": "Both required manifest resources are present byte-exact in the full package and were loaded by actual03apply2. Seven staged metadata files did not represent the complete publication.",
+  "newFormalReview": "NOT_RUN",
+  "originalFailurePreserved": true
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "m3-regex-correction02-root-cpu-review-disposition/v1",
+  "status": "ROOT_NARROW_CPU_SOURCE_REVIEW_DISPOSITION_RECORDED",
+  "authority": "Root read the actual2071B diff1533f093 and explicitly accepted three narrow contract-fixture seams; recorded from root instruction, no new model reviewer launched.",
+  "reviewedDiff": {
+    "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/PROGRAM_TEST_CONTRACT_CORRECTIONS.diff",
+    "bytes": 2071,
+    "sha256": "1533f0938546e7438c17d3928941b7d2a07258fb65c598c6170b9369eb3acd13"
+  },
+  "correctedProgramTest": {
+    "path": "K:/codex-work/m3-regex-trigram-failure-diagnosis-p0-20261007/owning-recipe-correction-02/source/MIndexRegexProgramTest.java",
+    "bytes": 39322,
+    "sha256": "5c185acb76ef6de2a79eebec30a6b156fa982c7283cb0f4d0ef96840ce1a9dd6"
+  },
+  "disposition": [
+    "Truthful dictionary.hasPrecomputedRegexFacts delegation only; existing fail-before-charAt assertions retained.",
+    "Original12000-state refusal explicitly asserted; independently justified15002 successful count asserted; original sparse-kernel and dynamic-closure assertions retained.",
+    "Only exact quoted-to-end witness expectsLITERAL_INDEX; other corpus staysMINDEX_AUTOMATON; all Boolean oracle comparisons retained."
+  ],
+  "unchangedProduction": {
+    "currentAndPriorReviewedProgram": {
+      "path": "K:/codex-work/m3-regex-adjacent-finite-runs-autoreview-preparation-p0-20261007/review-repo/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexProgram.java",
+      "bytes": 141730,
+      "sha256": "4e217b9aad286aa2c3f1bc77d2900fe2e3ff1889550bfa399792fb999807732c"
+    },
+    "formalReviewTerminal": {
+      "path": "K:/codex-work/m3-v7-ast-publication-20261007/REGEX_ADJACENT_FORMAL_REVIEW_TERMINAL_01.json",
+      "bytes": 1273,
+      "sha256": "eeae7829a09602b8765911c2d7bc20fb271f880ab94cc99034788f0e8c6d2cf1"
+    },
+    "priorFormalReviewResult": {
+      "path": "K:\\codex-work\\m3-regex-adjacent-finite-runs-autoreview-preparation-p0-20261007\\FORMAL_REVIEW.json",
+      "bytes": 569,
+      "sha256": "2dc90ec11577f189b4641366cfa3ac222e4563cb34c178dfb478cdbb87acaa52"
+    },
+    "reviewReuseScope": "Exact unchanged Program4e217 production bytes only; previous reviewed Trigram test31beb does not qualify correctedTrigrambae095 or newProgramTest5c185."
+  },
+  "newFixtureModelReview": "NOT_PERFORMED_NOT_CLAIMED",
+  "newFixtureScope": "Root CPU source review plus actual qualification still pending; no blanket model-reviewed claim.",
+  "actualReplayStrictCompileAnd40": "PARTIAL_REPLAY_ONLY_COMPILE_AND40_PENDING",
+  "reviewerInvocations": 0,
+  "JVMInvocations": 0
+}
