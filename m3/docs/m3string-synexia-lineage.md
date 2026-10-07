@@ -265,3 +265,14 @@ UTF operations. A cache miss returns `-1` and preserves the previous exact UTF-1
 
 No range fact is stored on `M3String`, HotSpot never calls back into Java to create one, and VM/JNI
 semantics do not depend on cache residency.
+
+## Regex mandatory-literal convergence
+
+Synexia's operation-precompute lineage is consumed only where the compiled JDK Pattern graph proves
+a literal is mandatory. The target now recognizes exact BMP Slice chains through transparent
+anchors/groups, top-level all-nonempty Branch alternatives, required Curly/GroupCurly wrappers
+(`cmin > 0`), and atomic `Ques(INDEPENDENT)` groups. Extraction is bounded to eight wrapper
+levels and fails open to the stock regex engine for optional/zero-min quantifiers, empty
+alternatives, lookaround, backreferences, case-folded/supplementary slices, predicates and unknown
+node shapes. M3TQ remains an absence filter; Matcher nodes remain semantic authority.
+
