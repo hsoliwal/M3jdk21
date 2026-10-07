@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.M3StringDirectStreamTraversal
+displayName: Route M3 String streams through canonical owner coordinates
+description: Replays the direct array-free M3 chars/codePoints traversal, exact surrogate-aware splitting, hosted jtreg, source gates and runtime invariants.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk22-m3-string-stream-traversal
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-string-stream-traversal
