@@ -83,6 +83,9 @@ public final class M3RecipeScopeRegistry {
                     "com.m3.rewrite.backport.M3Jep496MlKemBackportRecipe",
                     explicitChange()),
             Map.entry(
+                    "com.m3.rewrite.backport.M3Jep497MlDsaBackportRecipe",
+                    explicitChange()),
+            Map.entry(
                     "com.m3.rewrite.backport.M3Jep510KdfBackportRecipe",
                     explicitChange()),
             Map.entry(

@@ -1,6 +1,6 @@
 # JEP 497 — ML-DSA intake packet
 
-Status: inventory/dependency/security-proof packet. Product materialization is **not authorized**.
+Status: Java-21 receiver candidate materialized from a hash-pinned recipe. Verification/promotion is **not authorized**.
 
 ## Upstream authority
 
@@ -85,3 +85,46 @@ No JDK 24+ public `AsymmetricKey` surface is admitted by this packet. Any public
 
 This packet grants no source-copy, product-mutation or promotion authority. It advances JEP 497 from
 `NO_RECIPE_EVIDENCE` to `PACKET_EVIDENCE` only.
+
+
+## Current materialized candidate — 2026-10-07
+
+The Java-21 receiver now carries a seven-target, recipe-owned ML-DSA candidate stacked on the
+materialized JEP 496/SHAKE/named-key state:
+
+- released JDK24-GA `ML_DSA.java` and `ML_DSA_Impls.java`;
+- bounded ML-DSA additions to `NamedParameterSpec`, `SunEntries`, and `KnownOIDs`;
+- focused Java-21 provider/encoding/signature smoke and deterministic-random regression tests.
+
+The exact postimages are owned by
+`com.m3.rewrite.backport.M3Jep497MlDsaBackportRecipe` /
+`jdk24-jep497-mldsa`. `CURRENT_TREE_READBACK.tsv` records byte-for-byte canonical readback.
+
+The released JDK24-GA ACVP `internalProjection.json` files are absent and therefore are not
+invented. The broad later deterministic harness and performance microbenchmark are also not copied;
+focused Java-21 tests prove this candidate first, and optimization remains a later lane.
+
+Promotion remains `NOT_AUTHORIZED` until recipe JUnit, JEP 496/SHAKE prerequisite proof,
+Java-21 image build, ML-DSA security jtreg, fixed point, and canonical readback execute.
+
+
+### Reduced ACVP evidence
+
+The candidate now includes a pinned, offline FIPS-204 subset derived from the exact JEP-497
+implementation ACVP projection blobs:
+
+- one keyGen case for ML-DSA-44/65/87;
+- one deterministic sigGen case for ML-DSA-44/65/87;
+- one sigVer case for ML-DSA-44/65/87, retaining positive/negative projection outcomes.
+
+`MLDSAKnownAnswer.java` adapts OpenJDK's ACVP semantics to the Java-21 testlib without importing the
+later generic ACVP launcher. This subset is correctness evidence, not a claim that the full upstream
+projection has run. Full pinned projection execution remains a promotion gate.
+
+### Canonical FILE convergence blocker
+
+Reusable atomization/patternization/documentation authority is owned by Synexia. M3JDK21 PR #285
+consumes `com.synexia.rewrite.M3Java21FileConvergenceRecipe`, but it is not yet in this JEP-497
+stack. Promotion therefore requires additive fan-in of #285 followed by FILE convergence/fixed
+point across all eight Java targets. If that canonical recipe changes any target, this ML-DSA crate
+must be resealed to the converged postimage before build/jtreg evidence can promote it.
