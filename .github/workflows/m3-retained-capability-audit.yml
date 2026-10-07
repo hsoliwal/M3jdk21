@@ -49,7 +49,8 @@ jobs:
           EVENT_NAME: ${{ github.event_name }}
         run: |
           set -euo pipefail
-          OUT="$RUNNER_TEMP/m3-retention-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          OUT_CAP="$RUNNER_TEMP/m3-retention-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          OUT_EVID="$RUNNER_TEMP/m3-retained-evidence-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
           BASELINE_ARGS=()
           if [[ -n "$BASELINE_SHA" ]]; then
             if [[ ! "$BASELINE_SHA" =~ ^([0-9a-f]{40}|[0-9a-f]{64})$ ]]; then
@@ -68,18 +69,28 @@ jobs:
           else
             echo "Retention scope: all direct parents; no explicit historical baseline"
           fi
-          mvn -B -ntp -f m3/history/retention-pom.xml verify \
-            -Dm3.repo="$GITHUB_WORKSPACE" \
-            -Dm3.retentionCommit="$HEAD_SHA" \
-            -Dm3.output="$OUT" \
-            "${BASELINE_ARGS[@]}"
-          cat "$OUT/SUMMARY.json"
+          run_audit() {
+            local catalogue="$1"
+            local output="$2"
+            mvn -B -ntp -f m3/history/retention-pom.xml verify \
+              -Dm3.repo="$GITHUB_WORKSPACE" \
+              -Dm3.retentionCommit="$HEAD_SHA" \
+              -Dm3.retentionCatalogue="$catalogue" \
+              -Dm3.output="$output" \
+              "${BASELINE_ARGS[@]}"
+            cat "$output/SUMMARY.json"
+          }
+
+          run_audit "m3/history/RETAINED_CAPABILITIES.tsv" "$OUT_CAP"
+          run_audit "m3/history/RETAINED_EVIDENCE.tsv" "$OUT_EVID"
 
       - name: Upload retention evidence
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: retained-capability-${{ github.run_id }}
-          path: ${{ runner.temp }}/m3-retention-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/m3-retention-${{ github.run_id }}-${{ github.run_attempt }}
+            ${{ runner.temp }}/m3-retained-evidence-${{ github.run_id }}-${{ github.run_attempt }}
           if-no-files-found: warn
           retention-days: 30
