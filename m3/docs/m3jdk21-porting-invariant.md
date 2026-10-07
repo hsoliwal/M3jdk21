@@ -80,6 +80,37 @@ from copying incompatible-license code into GPLv2 source files. Therefore:
 `m3/runtime-integration/verify-synexia-intake.py` fails closed if the mode set, direct-copy
 review inventory, FOSS provenance, or repository licensing boundary drifts.
 
+## Canonical Synexia M3Index implementation ownership
+
+The reusable implementation authority for the M3Index family remains in
+`hsoliwal/com.synexia`. This is stronger than ordinary donor provenance: M3JDK21 may import an
+exact Apache-2.0 custody snapshot, but the snapshot is not a second canonical implementation.
+
+| M3JDK21 surface | Canonical Synexia owner | Target disposition |
+| --- | --- | --- |
+| `m3/core` | `com.synexia:synexia-m3index-core` | receiver/proof residue |
+| `m3/ports/indexstring` | `com.synexia:synexia-m3index-jdk-bridge` | receiver/proof residue |
+| `m3/collections` | `com.synexia:synexia-m3index-collections` | proving ground; reusable mechanics return to Synexia |
+| `m3/algorithms` | `com.synexia:synexia-m3index-algorithm` | target specialization only |
+| `m3/indexdb` | `com.synexia:synexia-m3index-db` | migration/proof residue |
+| vendored AST/compiler | `com.synexia:synexia-m3index-compiler` | pinned custody |
+| vendored data structures | `com.synexia:synexia-m3index-data-structure` | pinned custody |
+| vendored precompute API | `com.synexia:synexia-m3index-precompute-api` | pinned custody |
+| reusable Maven/OpenRewrite recipes | `synexia-openrewrite-recipes` | apply/verify; do not fork |
+| `m3/runtime-integration`, OpenJDK/HotSpot/JNI receivers | M3JDK21 | target-specific |
+
+The receiver map is `m3/synexia-import/m3index-family-receiver.tsv`. Automatic vendor intake
+must mirror the exact Synexia relative path below `m3/vendor/synexia/`; renaming or relocating
+inside the vendor snapshot is refused so provenance stays trivial.
+
+MIndex -> M3Index remains alias-first and additive. Existing MIndex contracts are not deleted or
+blindly renamed merely because an M3Index coordinate exists.
+
+Synexia-original copyrightable expression may remain Apache-2.0 with its copyright/NOTICE
+obligations. This statement concerns authored expression, not ownership of abstract ideas or
+algorithms. OpenJDK-derived files and third-party material retain their actual licenses; importing,
+indexing, wrapping or recipe-processing them does not relicense them.
+
 ## M3String is the naming analogy
 
 The canonical example is:
