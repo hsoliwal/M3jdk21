@@ -10,7 +10,8 @@ upstream attribution are described in the linked project rights notices.
 
 M3 investigates a runtime architecture in which immutable values preserve shared
 payload identity, ranges, and composition, while indexed metadata allows related
-operations to reuse prior computation. M3JDK21 is the Java 21 product target.
+operations to reuse prior computation. Within the M3 programme, M3JDK21 is the
+Java 21 runtime subset of the wider planned M3SDK.
 The initial focus is M3 String inside `java.lang.String`, followed by regular
 expressions and shared precompute, collections, and SWT/Eclipse integration.
 The broader design direction also examines multilingual text resources,
@@ -100,9 +101,13 @@ portfolio: language and lexicon resources, exact translation, text precompute,
 AST/compiler mechanisms, arrays and collections, indexed data structures,
 storage, native kernels, transformation recipes and bounded integration adapters.
 
+**Within the M3 programme, M3JDK21 is a runtime-focused subset of M3SDK.**
+The wider SDK scope includes qualified language, translation, AST, tooling,
+storage and integration capabilities beyond what belongs inside a JDK.
+
 Synexia remains the canonical source and convergence workspace. M3SDK would
 package qualified capabilities with explicit contracts, examples, provenance
-and reproducible evidence. M3JDK21 remains the Java runtime product and owns its
+and reproducible evidence. M3JDK21 owns the Java runtime subset and its
 internal String/precompute integration. An SDK packaging goal does not add a
 Synexia runtime dependency to the JDK or transfer runtime ownership.
 
