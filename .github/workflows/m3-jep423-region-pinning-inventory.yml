@@ -8,6 +8,8 @@ on:
       - "m3/backports/recipes/jep-423-region-pinning/**"
       - "m3/backports/generate_recipe_crates.py"
       - "m3/backports/file_delta_inventory.py"
+      - "m3/backports/current_tree_preimage_inventory.py"
+      - "m3/backports/test_current_tree_preimage_inventory.py"
       - "m3/backports/test_generate_recipe_crates.py"
       - "m3/backports/test_file_delta_inventory.py"
       - "m3/tooling/migration-recipes/**"
@@ -18,6 +20,8 @@ on:
       - "m3/backports/recipes/jep-423-region-pinning/**"
       - "m3/backports/generate_recipe_crates.py"
       - "m3/backports/file_delta_inventory.py"
+      - "m3/backports/current_tree_preimage_inventory.py"
+      - "m3/backports/test_current_tree_preimage_inventory.py"
       - "m3/backports/test_generate_recipe_crates.py"
       - "m3/backports/test_file_delta_inventory.py"
       - "m3/tooling/migration-recipes/**"
@@ -157,12 +161,48 @@ jobs:
               print(f"JEP423_LINEAGE_OK {row['order']} {row['jbs']} {commit}")
           PY
 
+      - name: Admit current-tree preimages against exact Java21 baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/current_tree_preimage_inventory.py \
+            --root . \
+            --paths-file m3/backports/recipes/jep-423-region-pinning/ADMIT_PATHS.txt \
+            --out target/jep423/CURRENT_PREIMAGES.tsv \
+            --baseline-git "$UPSTREAM" \
+            --baseline-ref jdk-21+35 \
+            --admission-out target/jep423/CURRENT_TREE_FILE_ADMISSION.tsv \
+            --mechanical-paths-out target/jep423/MECHANICAL_PATHS.txt
+          python3 - <<'PY'
+          import csv
+          from pathlib import Path
+
+          rows = list(csv.DictReader(
+              Path("target/jep423/CURRENT_TREE_FILE_ADMISSION.tsv")
+                  .open(encoding="utf-8", newline=""),
+              delimiter="\t",
+          ))
+          mechanical = [row for row in rows if row["admission"] == "MECHANICAL_FILE_REPLAY"]
+          held = [row for row in rows if row["admission"] == "HOLD_CURRENT_TREE_DRIFT"]
+          if len(rows) != 57 or len(mechanical) != 56 or len(held) != 1:
+              raise SystemExit(
+                  f"JEP423 current-tree admission drift rows={len(rows)} "
+                  f"mechanical={len(mechanical)} held={len(held)}"
+              )
+          expected_hold = "test/hotspot/jtreg/gc/g1/TestEvacuationFailure.java"
+          if held[0]["path"] != expected_hold:
+              raise SystemExit(f"unexpected JEP423 held path: {held[0]['path']}")
+          if held[0]["current_status"] != "ABSENT" or held[0]["baseline_status"] != "PRESENT":
+              raise SystemExit(f"unexpected JEP423 held relation: {held[0]}")
+          print("JEP423_CURRENT_ADMISSION mechanical=56 held=1")
+          PY
+
       - name: Unit-test whole-tree comparator and mixed FILE-crate generator
         shell: bash
         run: |
           set -euo pipefail
           cd m3/backports
-          python3 -m unittest -v             test_file_delta_inventory.py             test_generate_recipe_crates.py
+          python3 -m unittest -v             test_current_tree_preimage_inventory.py             test_file_delta_inventory.py             test_generate_recipe_crates.py
 
       - name: Inventory exact JDK21 to JDK22 GA deltas
         shell: bash
@@ -174,7 +214,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 m3/backports/generate_recipe_crates.py             --repo "$UPSTREAM"             --release 22             --paths-file m3/backports/recipes/jep-423-region-pinning/ADMIT_PATHS.txt             --crate-size 1             --include-native             --include-text             --out target/jep423/file-atoms
+          python3 m3/backports/generate_recipe_crates.py             --repo "$UPSTREAM"             --release 22             --paths-file target/jep423/MECHANICAL_PATHS.txt             --crate-size 1             --include-native             --include-text             --out target/jep423/file-atoms
 
       - name: Account for all admitted and preserved paths
         shell: bash
@@ -190,6 +230,13 @@ jobs:
               for line in (packet / "ADMIT_PATHS.txt").read_text(encoding="utf-8").splitlines()
               if line.strip()
           }
+          mechanical = {
+              line.strip()
+              for line in Path("target/jep423/MECHANICAL_PATHS.txt")
+                  .read_text(encoding="utf-8").splitlines()
+              if line.strip()
+          }
+          held = admitted - mechanical
           all_paths = {
               line.strip()
               for line in (packet / "PATHS.txt").read_text(encoding="utf-8").splitlines()
@@ -203,11 +250,11 @@ jobs:
               delta = {
                   row["path"]: row["status"]
                   for row in csv.DictReader(handle, delimiter="	")
-                  if row["path"] in admitted
+                  if row["path"] in mechanical
               }
-          missing = admitted - delta.keys()
+          missing = mechanical - delta.keys()
           if missing:
-              raise SystemExit(f"admitted paths absent from JDK22 tree comparison: {sorted(missing)}")
+              raise SystemExit(f"mechanical paths absent from JDK22 tree comparison: {sorted(missing)}")
 
           same = {path for path, status in delta.items() if status == "SAME"}
 
@@ -222,20 +269,25 @@ jobs:
           ) as handle:
               exclusions = list(csv.DictReader(handle, delimiter="	"))
 
-          if generated + len(exclusions) + len(same) != len(admitted):
+          if generated + len(exclusions) + len(same) != len(mechanical):
               raise SystemExit(
-                  "JEP423 admitted accounting mismatch: "
+                  "JEP423 mechanical accounting mismatch: "
                   f"generated={generated} exclusions={len(exclusions)} "
-                  f"same={len(same)} admitted={len(admitted)}"
+                  f"same={len(same)} mechanical={len(mechanical)}"
               )
+          if len(held) != 1:
+              raise SystemExit(f"JEP423 held-path count drift: {len(held)}")
+          if held != {"test/hotspot/jtreg/gc/g1/TestEvacuationFailure.java"}:
+              raise SystemExit(f"JEP423 unexpected held path: {sorted(held)}")
           if len(preserved) != 2:
               raise SystemExit(f"JEP423 preserved deletion count drift: {len(preserved)}")
-          if generated + len(exclusions) + len(same) + len(preserved) != len(all_paths):
+          if generated + len(exclusions) + len(same) + len(held) + len(preserved) != len(all_paths):
               raise SystemExit("JEP423 full denominator accounting mismatch")
 
           print(
               f"JEP423_ACCOUNTED generated={generated} exclusions={len(exclusions)} "
-              f"same={len(same)} preserved={len(preserved)} total={len(all_paths)}"
+              f"same={len(same)} held={len(held)} preserved={len(preserved)} "
+              f"total={len(all_paths)}"
           )
           PY
 
