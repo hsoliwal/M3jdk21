@@ -200,3 +200,57 @@ consumer:
 
 This is part of the M3 String invariant: precompute must have a real owner, bounded retention, and
 a JDK-visible execution consumer. Unused metadata is not an implementation success.
+
+
+## Fixed scan-avoidance facts
+
+The fixed canonical fact bundle also retains four boolean summaries that compose exactly across
+canonical tuple seams and ranges:
+
+- whether an ASCII uppercase unit occurs;
+- whether an ASCII lowercase unit occurs;
+- whether a backslash occurs;
+- whether CR or LF occurs.
+
+They have immediate JDK consumers: no-backslash `translateEscapes`, already-normalized ROOT ASCII
+case conversion, and prepared single-line `String.lines()`. These remain scalar metadata on the
+existing fact owner; they do not introduce another payload lane.
+
+## Prepared M3 targets on mutable builders
+
+`AbstractStringBuilder` remains mutable and owns its compact `byte[]`; that source is never
+cached as M3 text. The immutable M3 search target may nevertheless reuse its existing bounded
+`M3StringSearchPrecompute.Plan`:
+
+- forward builder search uses the same AUTO BMH->KMP plan;
+- reverse builder search uses the same reverse-prefix KMP lane;
+- each invocation reads the builder's current bytes/coder directly;
+- builder mutation between calls is therefore observed immediately;
+- target M3 text is never materialized through `String.value()`.
+
+
+## Position-precomputed line traversal
+
+`String.lines()` is now a second real consumer of the bounded position-mask owner. Long M3-backed
+strings locate the next CR or LF with one `indexOfEither` block walk:
+
+- tier-1 block signals reject blocks containing neither terminator;
+- touched candidate blocks reuse the exact sorted unit->64-bit position masks;
+- CRLF is still exact-verified as a pair;
+- short/out-of-budget strings fall back to one linear pass;
+- allocation failure in the optional cache is fail-open;
+- emitted lines remain M3 substring coordinates and never flatten the source.
+
+
+## UTF-16 code-point boundary precompute
+
+Repeated code-point geometry queries now have a dedicated bounded owner rather than forcing
+range-fact rescans:
+
+- `M3StringCodePointPrecompute` weakly keys exact owner+coordinate values;
+- 64 entries, at most 32,768 UTF-16 units each;
+- metadata is only paired-low-surrogate continuation masks plus per-block prefix counts;
+- `String.codePointCount` consumes exact range counts;
+- `String.offsetByCodePoints` uses boundary rank/select with correct mid-surrogate start behavior;
+- out-of-budget/OOME cases fall back to the existing exact JDK path;
+- no code-point arrays or continuation masks are fields of `M3String` or `M3StringFacts`.
