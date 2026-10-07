@@ -13567,14 +13567,14 @@ index cc7f740618f6e27cbdc5a2fee665b501d6c377ff..69a57659e74c6433491932e64f15bc03
 +    return (*env)->ExceptionCheck(env) ? NULL : result;
 +}
 diff --git a/src/java.base/share/native/libjava/jni_util.c b/src/java.base/share/native/libjava/jni_util.c
-index 3d9004d969cb8e25b26cb24c69d41877b299669e..3552e9ade564428dabb07dc17768909d0bcd838b 100644
+index 3d9004d969cb8e25b26cb24c69d41877b299669e..6845cf77682acc11d64836341c2f9ba052158990 100644
 --- a/src/java.base/share/native/libjava/jni_util.c
 +++ b/src/java.base/share/native/libjava/jni_util.c
 @@ -669,6 +669,7 @@ static jmethodID String_getBytes_ID;    /* String.getBytes(Charset) */
  /* Cached field IDs */
  static jfieldID String_coder_ID;        /* String.coder */
  static jfieldID String_value_ID;        /* String.value */
-+static jfieldID String_mindex_ID;      /* immutable experimental segment directory */
++static jfieldID String_m3_ID;          /* String.m3: canonical M3 owner+coordinate value, null for stock layout */
  
  /* Create a new string by converting str to a heap-allocated byte array and
   * calling the appropriate String constructor.
@@ -13582,8 +13582,8 @@ index 3d9004d969cb8e25b26cb24c69d41877b299669e..3552e9ade564428dabb07dc17768909d
      CHECK_NULL(String_coder_ID);
      String_value_ID = (*env)->GetFieldID(env, strClazz, "value", "[B");
      CHECK_NULL(String_value_ID);
-+    String_mindex_ID = (*env)->GetFieldID(env, strClazz, "mindex", "Ljava/lang/MIndexString;");
-+    CHECK_NULL(String_mindex_ID);
++    String_m3_ID = (*env)->GetFieldID(env, strClazz, "m3", "Ljava/lang/M3String;");
++    CHECK_NULL(String_m3_ID);
  }
  
  JNIEXPORT jstring JNICALL
@@ -13593,7 +13593,7 @@ index 3d9004d969cb8e25b26cb24c69d41877b299669e..3552e9ade564428dabb07dc17768909d
      value = (*env)->GetObjectField(env, jstr, String_value_ID);
 -    if (value == NULL)
 -        return NULL;
-+    jobject storage = (*env)->GetObjectField(env, jstr, String_mindex_ID);
++    jobject storage = (*env)->GetObjectField(env, jstr, String_m3_ID);
 +    if (storage != NULL) {
 +        (*env)->DeleteLocalRef(env, storage);
 +        if (value != NULL) (*env)->DeleteLocalRef(env, value);
@@ -13605,54 +13605,79 @@ index 3d9004d969cb8e25b26cb24c69d41877b299669e..3552e9ade564428dabb07dc17768909d
      str = (*env)->GetPrimitiveArrayCritical(env, value, NULL);
      if (str == NULL) {
 diff --git a/src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/OopUtilities.java b/src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/OopUtilities.java
-index ca4b63bc72ef3578dfbd33f27a464211620875f8..996cd6f7133d4d0f7e301e51b75f511d321146b9 100644
+index ca4b63bc72ef3578dfbd33f27a464211620875f8..a45449e7386dc6bc80390e71a775af3fda554ba3 100644
 --- a/src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/OopUtilities.java
 +++ b/src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/OopUtilities.java
-@@ -145,6 +145,15 @@ public class OopUtilities {
+@@ -145,15 +145,72 @@ public class OopUtilities {
  
    public static String stringOopToString(Oop stringOop) {
      InstanceKlass k = (InstanceKlass) stringOop.getKlass();
-+    OopField mindexField = (OopField) k.findField("mindex", "Ljava/lang/MIndexString;");
-+    if (mindexField != null && mindexField.getValue(stringOop) != null) {
-+      Oop storage = mindexField.getValue(stringOop);
-+      InstanceKlass sk = (InstanceKlass) storage.getKlass();
-+      int length = ((IntField) sk.findField("length", "I")).getValue(storage);
-+      StringBuilder result = new StringBuilder(length);
-+      for (int i = 0; i < length; i++) result.append(mindexCharAt(storage, i));
-+      return result.toString();
++    OopField m3Field = (OopField) k.findField("m3", "Ljava/lang/M3String;");
++    if (m3Field != null) {
++      Oop storage = m3Field.getValue(stringOop);
++      if (storage != null) {
++        return m3StringToString(storage);
++      }
 +    }
      coderField  = (ByteField) k.findField("coder", "B");
      valueField  = (OopField) k.findField("value",  "[B");
      if (Assert.ASSERTS_ENABLED) {
-@@ -154,6 +163,33 @@ public class OopUtilities {
+-       Assert.that(coderField != null, "Field \'coder\' of java.lang.String not found");
+-       Assert.that(valueField != null, "Field \'value\' of java.lang.String not found");
++       Assert.that(coderField != null, "Field 'coder' of java.lang.String not found");
++       Assert.that(valueField != null, "Field 'value' of java.lang.String not found");
+     }
      return byteArrayToString((TypeArray) valueField.getValue(stringOop), coderField.getValue(stringOop));
    }
  
-+  private static char mindexCharAt(Oop storage, int index) {
-+    InstanceKlass k = (InstanceKlass) storage.getKlass();
-+    int kind = ((ByteField) k.findField("storageKind", "B")).getValue(storage);
++  /**
++   * Decodes a java.lang.M3String value: an owner node plus a packed coordinate whose high 32 bits
++   * are the start offset and whose low 32 bits are the UTF-16 length. Text is read from the owner
++   * exactly as java.lang.M3StringOwner.charAt does; no Java code is executed in the target VM.
++   */
++  private static String m3StringToString(Oop m3String) {
++    InstanceKlass k = (InstanceKlass) m3String.getKlass();
++    Oop owner = ((OopField) k.findField("owner", "Ljava/lang/M3StringOwner;")).getValue(m3String);
++    long coordinate = ((LongField) k.findField("value", "J")).getValue(m3String);
++    int start = (int) (coordinate >>> 32);
++    int length = (int) (coordinate & 0xffffffffL);
++    StringBuilder result = new StringBuilder(length);
++    for (int i = 0; i < length; i++) result.append(m3OwnerCharAt(owner, start + i));
++    return result.toString();
++  }
++
++  private static char m3StringCharAt(Oop m3String, int index) {
++    InstanceKlass k = (InstanceKlass) m3String.getKlass();
++    Oop owner = ((OopField) k.findField("owner", "Ljava/lang/M3StringOwner;")).getValue(m3String);
++    long coordinate = ((LongField) k.findField("value", "J")).getValue(m3String);
++    return m3OwnerCharAt(owner, (int) (coordinate >>> 32) + index);
++  }
++
++  private static char m3OwnerCharAt(Oop owner, int index) {
++    InstanceKlass k = (InstanceKlass) owner.getKlass();
++    byte kind = ((ByteField) k.findField("kind", "B")).getValue(owner);
 +    if (kind == 1) {
-+      TypeArray bytes = (TypeArray) ((OopField) k.findField("localValue", "[B")).getValue(storage);
-+      byte coder = ((ByteField) k.findField("coder", "B")).getValue(storage);
-+      return coder == 0 ? (char)(bytes.getByteAt(index) & 255) : bytes.getCharAt(index);
-+    }
-+    if (kind == 2 || kind == 4) {
-+      long raw = ((LongField) k.findField("mappedAddress", "J")).getValue(storage);
++      // java.lang.M3StringAtom: canonical native/mapped payload addressed by 'address'.
++      long raw = ((LongField) k.findField("address", "J")).getValue(owner);
++      byte width = ((ByteField) k.findField("storageWidth", "B")).getValue(owner);
++      boolean bigEndian = ((BooleanField) k.findField("bigEndian", "Z")).getValue(owner);
 +      Address address = VM.getVM().getDebugger().newAddress(raw);
-+      int a = address.getJByteAt((long)index * 2) & 255;
-+      int b = address.getJByteAt((long)index * 2 + 1) & 255;
-+      return kind == 4 ? (char)((a << 8) | b) : (char)(a | (b << 8));
++      if (width == 1) return (char)(address.getJByteAt(index) & 255);
++      int first = address.getJByteAt((long)index * 2) & 255;
++      int second = address.getJByteAt((long)index * 2 + 1) & 255;
++      return bigEndian ? (char)((first << 8) | second) : (char)(first | (second << 8));
 +    }
-+    ObjArray parts = (ObjArray) ((OopField) k.findField("segments", "[Ljava/lang/MIndexString;")).getValue(storage);
-+    TypeArray starts = (TypeArray) ((OopField) k.findField("offsets", "[I")).getValue(storage);
-+    TypeArray ends = (TypeArray) ((OopField) k.findField("ends", "[I")).getValue(storage);
-+    int previous = 0;
-+    for (int i = 0; i < parts.getLength(); i++) {
-+      int end = ends.getIntAt(i);
-+      if (index < end) return mindexCharAt(parts.getObjAt(i), starts.getIntAt(i) + index - previous);
-+      previous = end;
++    if (kind == 2) {
++      // java.lang.M3StringTuple: persistent composition of two M3String children.
++      Oop left = ((OopField) k.findField("left", "Ljava/lang/M3String;")).getValue(owner);
++      InstanceKlass leftKlass = (InstanceKlass) left.getKlass();
++      long leftCoordinate = ((LongField) leftKlass.findField("value", "J")).getValue(left);
++      int leftLength = (int) (leftCoordinate & 0xffffffffL);
++      if (index < leftLength) return m3StringCharAt(left, index);
++      Oop right = ((OopField) k.findField("right", "Ljava/lang/M3String;")).getValue(owner);
++      return m3StringCharAt(right, index - leftLength);
 +    }
-+    throw new IllegalStateException("invalid MIndexString geometry");
++    throw new IllegalStateException("invalid M3String owner kind " + kind);
 +  }
 +
    public static String stringOopToEscapedString(Oop stringOop) {
