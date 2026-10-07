@@ -139,7 +139,30 @@ exclusive invention of every component:
 
 Suggested citation: Hitesh Soliwal and Contributors to the Synexia Project,
 *M3: Shared Structure and Reusable Computation in a Java Runtime*, v0.1,
-7 October 2026, publication commit `ace350f716614b50cf77d7462b1762b7eb8664ca).
+7 October 2026, publication commit `ace350f716614b50cf77d7462b1762b7eb8664ca`.
+
+
+### Version 0.2 extension
+
+- **Version/date:** technical design paper v0.2, 7 October 2026.
+- **Publication source commit:** `b4a6b240cd996e35649d58de1780514108b3fd34`.
+- **Permanent reference:** [v0.2 paper at its source commit](https://github.com/hsoliwal/M3jdk21/blob/b4a6b240cd996e35649d58de1780514108b3fd34/m3/papers/M3_SHARED_STRUCTURE_AND_REUSABLE_COMPUTATION.md).
+- **Added scope:** source-grounded hierarchical lexicons, separate spelling/
+  lexeme/concept identity, exact lexical translation and family bundles,
+  multilingual qualification, AST/binding boundaries, reuse across structured
+  data, and M3SDK as the wider qualified delivery direction for Synexia, with
+  M3JDK21 as its Java runtime subset.
+- **Donor inspection revision:** `d9098bb5341a1b95750814044b8bb52616cc2c61`
+  in `hsoliwal/com.synexia`; the paper links inspected owners and distinguishes
+  historical focused receipts from fresh target qualification.
+- **Filing intent:** patent filing is planned. This record establishes no filed
+  application, patent-pending status, patent grant or exclusive invention claim.
+  Existing licenses and applicable copyright/patent grants remain controlling.
+
+The v0.1 record and earlier provenance remain intact. This extension records
+additional expressive design documentation; it does not claim ownership of
+abstract methods or third-party work.
+
 
 Earlier project history and independently preserved records remain relevant to
 authorship and chronology. This record does not assert that every general

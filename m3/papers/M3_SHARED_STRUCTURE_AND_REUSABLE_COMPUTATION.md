@@ -1,15 +1,22 @@
 # M3: Shared Structure and Reusable Computation in a Java Runtime
 
 **Hitesh Soliwal and Contributors to the Synexia Project**  
-Technical design paper • Version 0.1 • 7 October 2026
+Technical design paper • Version 0.2 • 7 October 2026
+
+Copyright 2026 Hitesh Soliwal and contributors. Applicable licensing and
+upstream attribution are described in the linked project rights notices.
 
 ## Abstract
 
 M3 investigates a runtime architecture in which immutable values preserve shared
 payload identity, ranges, and composition, while indexed metadata allows related
-operations to reuse prior computation. M3JDK21 is the Java 21 product target.
+operations to reuse prior computation. Within the M3 programme, M3JDK21 is the
+Java 21 runtime subset of the wider planned M3SDK.
 The initial focus is M3 String inside `java.lang.String`, followed by regular
 expressions and shared precompute, collections, and SWT/Eclipse integration.
+The broader design direction also examines multilingual text resources,
+language-specific ASTs, and reuse across structured data. M3SDK is the proposed
+SDK delivery direction for the wider Synexia capability portfolio.
 This paper describes the design premise, intended architecture, compatibility
 constraints, and a reproducible evaluation programme. It presents design
 hypotheses rather than measured performance results.
@@ -85,6 +92,44 @@ Cross-process or OS-level sharing is an extension requiring its own encoding,
 synchronization, security, and lifecycle design. Metadata sidecars need bounded
 retention, safe publication, and unambiguous versioning.
 
+
+## 3.1 M3SDK: the wider delivery direction
+
+The intended programme extends across Synexia rather than stopping at a String
+library. **M3SDK** is the proposed SDK delivery surface for the reusable Synexia
+portfolio: language and lexicon resources, exact translation, text precompute,
+AST/compiler mechanisms, arrays and collections, indexed data structures,
+storage, native kernels, transformation recipes and bounded integration adapters.
+
+**Within the M3 programme, M3JDK21 is a runtime-focused subset of M3SDK.**
+The wider SDK scope includes qualified language, translation, AST, tooling,
+storage and integration capabilities beyond what belongs inside a JDK.
+
+Synexia remains the canonical source and convergence workspace. M3SDK would
+package qualified capabilities with explicit contracts, examples, provenance
+and reproducible evidence. M3JDK21 owns the Java runtime subset and its
+internal String/precompute integration. An SDK packaging goal does not add a
+Synexia runtime dependency to the JDK or transfer runtime ownership.
+
+The scope goal is to inventory every Synexia module and capability and assign
+an explicit delivery disposition: qualified SDK component, product-specific
+adapter, independently deployed application/service, pending qualification, or
+documented exclusion. A repository-wide SDK cannot be established by renaming
+packages or collecting every source directory into one artifact.
+
+SDK components should retain API/SPI contracts, headless core implementations,
+bounded bridges, optional UI and explicit Java/JNI ownership. Versioned manifests
+must identify source revisions, artifact bindings, dependencies, platform support,
+licenses, ABI/format boundaries and acceptance evidence. Third-party code and
+datasets retain their own licensing and provenance.
+
+This is an intended distribution and integration direction, not a declaration
+that all of Synexia is already delivered as M3SDK. Component qualification follows
+the existing receiving priorities and preserves prior contracts and source
+history. The SDK can make reusable mechanisms available without treating one
+component's tests as acceptance of the entire portfolio.
+
+
 ## 4. String compatibility
 
 Representation changes must preserve externally observable String behavior [2]:
@@ -121,6 +166,170 @@ quadratically in input length; arbitrary regex/input combinations cannot be
 precomputed without bound. Admission policies therefore need limits, reuse
 signals, eviction, and version checks. Cold misses, low-reuse inputs, adversarial
 patterns, and concurrent access belong in the test corpus.
+
+
+## 5.1 Natural languages and exact text identity
+
+The language direction is to preserve exact text once and associate reusable,
+language-aware knowledge with it. Shared storage does not require every language
+to use the same tokenizer, dictionary, collation, or interpretation. A value can
+span languages and scripts while retaining its original units and range identity.
+
+The proposed multilingual model separates three responsibilities:
+
+| Responsibility | Proposed representation | Qualification boundary |
+| --- | --- | --- |
+| Exact spelling | Immutable canonical payloads and ordered ranges/compositions | Preserve the target API's indexing, equality and source text. |
+| Language resources | Versioned lexicons and language/script annotations referencing payload identities | Record resource provenance, coverage, ambiguity and updates. |
+| Derived operations | Bounded segmentation, search, normalization and linguistic sidecars | Bind results to the exact input and the selected operation/provider/version. |
+
+A shared dictionary can describe known words; VM-local interning supplies a path
+for names, new words, identifiers, mixed-script text and other unknown spellings.
+Whitespace and punctuation remain explicit content. Dictionary membership is not
+a prerequisite for storing or operating on an arbitrary String. Numeric logical
+IDs need an explicit namespace and generation; a compact ID width is an
+engineering choice whose capacity and overflow behavior must be qualified.
+
+Exact storage interning must remain distinct from Unicode normalization.
+For example, a precomposed accented letter and a combining sequence can be
+canonically equivalent while having different units. Normalization is a selected
+transformation with its own semantics [5]; sharing a payload does not authorize
+silently changing its spelling, offsets or Java String equality.
+
+UTF-16 units, code points and user-perceived characters also require different
+coordinate systems. Grapheme and word boundaries can use specified segmentation
+rules and tailoring [6]. Each sidecar must declare its coordinate system and
+retain source-offset mappings when a transformation changes length. The runtime's
+qualified Unicode data version must be recorded; citing a newer Unicode document
+does not establish that an older JDK implements that version.
+
+The donor's fixed 100-language registry is already implemented, as detailed
+below. Broad corpus coverage and complete resources for those slots remain
+research and qualification goals.
+Initial qualification should name each corpus and cover Indic combining sequences,
+Arabic and bidirectional text, CJK text without space-delimited words, Latin
+variants, emoji sequences and code-switching. Language-specific stemming,
+synonyms, transliteration, sentiment and contextual translation are proposed
+optional providers; the existing exact lexical translation mechanisms are
+identified below. Exact search remains separately available, and linguistic similarity
+never substitutes for String equality. Resource licensing, preparation cost,
+retained size and disagreement between providers belong in the evidence.
+
+
+### Existing hierarchical lexicons and translation mechanisms
+
+This direction already has concrete donor implementations. The following source
+inspection is pinned to Synexia commit `d9098bb5341a1b95750814044b8bb52616cc2c61`.
+It identifies mechanisms to reproduce faithfully; it does not establish that
+M3JDK21 has received or qualified them.
+
+| Existing owner | Mechanism observed in source | Identity boundary |
+| --- | --- | --- |
+| [DictLang LexiconUniverse](https://github.com/hsoliwal/com.synexia/blob/d9098bb5341a1b95750814044b8bb52616cc2c61/synexia-dictlang/shared/core/src/main/java/com/synexia/dictshared/core/LexiconUniverse.java) | Parent-path lookup, exact literal admission, shared spelling IDs, concept-to-language surfaces, phrases and indexed relations | Lexicon coordinates, spelling identity, canonical aliases and concept identity are distinct. |
+| [DictLang HierarchicalIndexStore](https://github.com/hsoliwal/com.synexia/blob/d9098bb5341a1b95750814044b8bb52616cc2c61/synexia-dictlang/shared/core/src/main/java/com/synexia/dictshared/core/HierarchicalIndexStore.java) | Mapped standard dictionaries, specialized namespaces, dynamic intern pools and canonical composite strings | Live handles belong to the store scope; persisted handles bind to their exact snapshot. |
+| [IndexString IndexSymbolId](https://github.com/hsoliwal/com.synexia/blob/d9098bb5341a1b95750814044b8bb52616cc2c61/synexia-indexstring/src/main/java/com/synexia/indexstring/IndexSymbolId.java) | Packed language/namespace/entry coordinate | Resolver ownership and encoding must accompany a numeric ID. |
+| [Common LanguageCatalog](https://github.com/hsoliwal/com.synexia/blob/d9098bb5341a1b95750814044b8bb52616cc2c61/synexia-common/src/main/java/com/synexia/common/language/LanguageCatalog.java) | Exactly 100 fixed language codes, with English permanently ID 0 and the other 99 sorted | Registry membership establishes an addressable slot, not dictionary completeness or translation quality. |
+| [Common FrozenIntTranslationTable](https://github.com/hsoliwal/com.synexia/blob/d9098bb5341a1b95750814044b8bb52616cc2c61/synexia-common/src/main/java/com/synexia/common/language/FrozenIntTranslationTable.java) | Dense direct arrays or sparse primitive open-addressed lexical mapping tables | Token IDs remain scoped to the admitted vocabulary and language-pair mapping. |
+| [IndexString exact translation bridge](https://github.com/hsoliwal/com.synexia/blob/d9098bb5341a1b95750814044b8bb52616cc2c61/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStringTranslationBridge.java) | Admitted source IDs project to target IDs without joined source spelling in the translation loop | One target resolver owns each result; unmapped rows require explicit REJECT or DROP. |
+| [IndexString translation bundle](https://github.com/hsoliwal/com.synexia/blob/d9098bb5341a1b95750814044b8bb52616cc2c61/synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexLanguageTranslationBundle.java) | Composes already-admitted family dictionaries through the same bridge | Profiles and row conflicts are checked; composition does not infer grammar. |
+
+The hierarchy extends beyond ordinary word dictionaries: names, places, titles,
+acronyms, equations, units, identifiers, URLs, code, whitespace, punctuation,
+phrases and exact unknown literals all have explicit classifications.
+Shared spelling does not erase lexical distinctions. For example, entries for
+`May` can share spelling storage while retaining different coordinates;
+curated concept IDs can connect different language surfaces without declaring
+their spellings equal.
+
+There are multiple existing coordinate contracts, not one interchangeable
+integer ABI. [LexiconCoordinate](https://github.com/hsoliwal/com.synexia/blob/d9098bb5341a1b95750814044b8bb52616cc2c61/synexia-dictlang/shared/api/src/main/java/com/synexia/dictshared/api/LexiconCoordinate.java)
+uses a 32-bit lexicon lane and 32-bit entry lane, with positive validated IDs.
+The [hierarchical IndexString store design](https://github.com/hsoliwal/com.synexia/blob/d9098bb5341a1b95750814044b8bb52616cc2c61/synexia-dictlang/shared/docs/HIERARCHICAL-INDEXSTRING.md)
+describes a store-scoped 16-bit namespace/48-bit entry handle.
+IndexString's `IndexSymbolId` uses a 16-bit language lane, a reserved clear bit,
+a 15-bit namespace lane and a 32-bit entry lane. A migration must preserve or
+explicitly adapt each contract, including its scope and validity rules.
+
+Translation has two complementary substrates. Concept-to-surface relations
+retain language-specific alternatives; admitted lexical projections use exact
+source-to-target rows. The exact bridge checks source resolver ownership and
+writes a target-owned composition. DROP deliberately omits unmapped tokens and
+can change content; REJECT is the loss-averse boundary. Callers must choose the
+policy, and a retained source ID must not silently enter another resolver space.
+
+The [2 October bundle record](https://github.com/hsoliwal/com.synexia/blob/d9098bb5341a1b95750814044b8bb52616cc2c61/synexia-indexstring/docs/MINDEX_LANGUAGE_TRANSLATION_BUNDLE_PROOF_20261002.md)
+documents deterministic composition of four selected lexical families.
+The [full-language composition record](https://github.com/hsoliwal/com.synexia/blob/d9098bb5341a1b95750814044b8bb52616cc2c61/synexia-indexstring/docs/MINDEX_FULL_LANGUAGE_TRANSLATION_COMPOSITION_PROOF_20261002.md)
+describes explicit bundle admission and first-touch loading.
+The [bridge tests](https://github.com/hsoliwal/com.synexia/blob/d9098bb5341a1b95750814044b8bb52616cc2c61/synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexStringTranslationBridgeTest.java)
+cover composed values, unmapped rejection, foreign resolvers, missing rows and
+typed units. These are existing source/tests and historical focused receipts;
+this paper revision did not rerun them or resolve their documented reactor and
+filesystem gaps.
+
+The research contribution to evaluate is the combination: exact shared text,
+hierarchical lexical classification, preserved compositions and bounded
+precomputed relations can let eligible operations work on qualified identities
+until output materialization. General sentence translation still needs
+context, grammar, ambiguity resolution and quality evaluation; a lexical table
+alone establishes none of those. Arbitrary N-token projection and rendering
+remain proportional to the data they process.
+
+
+## 5.2 Programming languages, ASTs and derived structures
+
+The same design premise can be investigated for source code: canonical text
+ranges provide spelling custody, while language-specific parsers establish syntax
+and semantics. Tokens, syntax trees, symbol tables, dependency graphs and
+transformation plans are derived structures with explicit owners and assumptions.
+
+Repeated spelling is not repeated meaning. Two occurrences of `value` can share
+text storage while referring to different declarations; two identical source
+fragments can have different meanings in different scopes or build environments.
+AST nodes therefore retain their language, grammar/compiler version, source
+snapshot, location and binding context. A structural hash can select candidates
+for reuse; collision checks and the required structural/semantic comparison
+govern acceptance.
+
+For example, editing a comment might leave many language-level bindings intact,
+yet source positions can move. An incremental plan must distinguish reusable
+structure from coordinates and diagnostics that need recomputation. Changes to
+imports, classpaths, compiler options or dependencies can invalidate results
+without changing the spelling of a subtree. Cross-language adapters may share
+storage and selected representations, but do not grant grammar equivalence or
+permission to apply one language's refactoring rules to another.
+
+Synexia remains the convergence workspace for these recipes and qualified
+algorithms. Product integrations receive explicit adapters and evidence.
+The existing receiving order remains String, arrays, collections, AST/compiler,
+then remaining families; describing AST opportunities does not advance that
+qualification stage. Multi-language compiler integration is a proposed extension,
+not a claim of a universal parser or completed compiler replacement.
+
+## 5.3 Reuse across collections and other data structures
+
+Arrays, collections, trees and DAGs offer related reuse questions, with different
+mutability and identity contracts. Immutable components may share payloads and
+metadata. Mutable structures require snapshots, generations or invalidation
+before an earlier result can be reused.
+
+A proposed reuse key binds the owner and snapshot/generation, exact range or
+composition, operation, parameters, provider and relevant dependency versions.
+An admission decision also records the requested budget. These fields describe
+validity requirements, not a mandate to allocate a wrapper for every result;
+indexed sidecars can store them in bounded primitive lanes.
+
+The working principle is: establish reusable facts when their expected reuse
+justifies preparation, then answer eligible operations through qualified lookups.
+A miss or an invalid generation follows the normal computation path.
+Persistent caches, process-shared storage and cross-language plans need separate
+lifecycle and concurrency qualification. No global table of every possible
+substring, pattern, language or structural relation is assumed.
+
+The broader research question is whether exact shared representation and bounded
+derived knowledge can reduce repeated work across text and structured data.
+Its value must be measured separately for each operation and workload, including
+the cost of preparation, lookup, invalidation and retained storage.
 
 ## 6. Collections and desktop integration
 
@@ -205,6 +414,8 @@ contracts applications rely on.
 2. Oracle. [Java SE 21 String API](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html).
 3. Oracle. [Java SE 21 Pattern API](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/regex/Pattern.html).
 4. OpenJDK. [Java Microbenchmark Harness](https://github.com/openjdk/jmh).
+5. Unicode Consortium. [Unicode Standard Annex #15: Unicode Normalization Forms](https://www.unicode.org/reports/tr15/), consulted 7 October 2026.
+6. Unicode Consortium. [Unicode Standard Annex #29: Unicode Text Segmentation](https://www.unicode.org/reports/tr29/), consulted 7 October 2026.
 
 ## Authorship and provenance
 
@@ -217,3 +428,18 @@ Applicable rights and licensing boundaries are described in
 
 For citation in JEPs, standards submissions, or downstream publications, see the
 [proposal attribution policy and versioned publication record](../../M3-SYNEXIA-RIGHTS.md#jeps-standards-proposals-and-technical-publications).
+
+### Revision and filing intent
+
+Version 0.2 extends the design account with natural-language resources,
+programming-language AST/binding boundaries, bounded reuse across other data
+structures, and the wider M3SDK delivery direction for Synexia. The [v0.1 publication remains available at its original commit](https://github.com/hsoliwal/M3jdk21/blob/ace350f716614b50cf77d7462b1762b7eb8664ca/m3/papers/M3_SHARED_STRUCTURE_AND_REUSABLE_COMPUTATION.md).
+Earlier source and design records remain relevant to chronology and attribution.
+
+As of 7 October 2026, the author has expressed an intention to pursue patent
+filing. This paper records that intention; it establishes no filed application,
+pending status, patent grant, patentability or exclusive invention claim.
+The applicable copyright and patent permissions in existing licenses remain
+controlling. The original expressive account and implementation provenance are
+covered by the project rights notice; abstract methods are not reclassified as
+copyrighted expression.
