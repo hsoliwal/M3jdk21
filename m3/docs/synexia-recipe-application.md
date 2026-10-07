@@ -44,7 +44,7 @@ M3JDK21 runtime branch:
 
 Applied/fixed-point revision:
 
-`502fa1698f9ddd798234ffc5b391b91615c20229`
+`04fb0dec18f188fe4e6c193c64fe92c8b2f43b6c`
 
 Direct manifest comparison after moving recipe custody to Synexia:
 
@@ -86,3 +86,38 @@ Target-side source invariants enforce the absence of local duplicate String/TQ r
 - **Synexia owns** `com.synexia.rewrite.M3Jdk21StringHistoryConvergence`, its hash-pinned crates, donor/history evidence, fixed-point/refusal semantics, and reusable recipe evolution.
 - **M3JDK21 owns** every applied Java/HotSpot/JNI/native implementation, all running M3 String precompute, JDK semantics, build/jtreg/runtime verification, and product promotion.
 - This move creates **no Synexia runtime dependency** in `java.base`, HotSpot, JNI, or native String code.
+
+
+## Pending canonical receiver refresh
+
+Follow-up Synexia PR: https://github.com/hsoliwal/com.synexia/pull/9672  
+Branch: `m3/m3jdk21-string-recipe-receiver-refresh-20261007`  
+Pinned refresh revision: `242910b01ed05d5d98e9b1e42f4f8ad334adb8a8`
+
+This follow-up promotes the receiver's latest workflow and fail-closed invariant gate back into the
+already-canonical Synexia recipe established by merged PR #9597.
+
+Readback at M3JDK21 receiver head
+`04fb0dec18f188fe4e6c193c64fe92c8b2f43b6c`:
+
+- Java/runtime/test targets: **19/19 exact**;
+- text/native/HotSpot/governance targets: **11/11 exact**;
+- total: **30/30 exact postimage SHA-256**.
+
+### Machine-readable receipt
+
+```text
+recipe_name	com.synexia.rewrite.M3Jdk21StringHistoryConvergence
+synexia_repository	hsoliwal/com.synexia
+synexia_commit	242910b01ed05d5d98e9b1e42f4f8ad334adb8a8
+synexia_java_manifest	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3jdk/jdk21-hash-pinned/synexia-m3-string-history-convergence/manifest.tsv
+synexia_text_manifest	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3jdk/jdk21-hash-pinned-text/m3-string-history-convergence/manifest.tsv
+synexia_java_manifest_sha256	b5ae63e4af47ed5c9ff10645d479d5081e8370990602094ab26da718f100dc6a
+synexia_text_manifest_sha256	0342df789a9952aa0e5cba567154bf9d7bbaa01661184aa40285fb3c7ac759ec
+m3jdk21_applied_result_commit	04fb0dec18f188fe4e6c193c64fe92c8b2f43b6c
+runtime_owner	M3JDK21
+recipe_owner	Synexia
+runtime_dependency_on_synexia	false
+target_recipe_disposition	THIN_RECEIVER_ONLY
+verification_status	SYNEXIA_CANONICAL_PACKET_30_OF_30_TARGETS_HASH_MATCHED
+```
