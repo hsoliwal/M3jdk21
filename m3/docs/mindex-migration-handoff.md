@@ -229,3 +229,20 @@ Keep changes additive until compatibility and migration policy explicitly permit
 This handoff contains architectural summaries and source-path/blob metadata, not copied source implementations, private datasets, credentials or conversation transcripts. Source access may require the reader's existing repository authorization. Do not make private repositories public to satisfy CI.
 
 Preserve OpenJDK notices and license obligations separately from independently authored M3 material. Existing Apache-2.0 headers do not authorize relicensing unrelated donor code or lexicon data. Each import requires file-level provenance, attribution, dependency and redistribution review. Mapping metadata and documentation do not themselves grant a license to move an implementation.
+
+
+## 10. Canonical ownership supersession note (2026-10-07)
+
+The 2026-10-02 census and ownership observations above remain historical evidence at their recorded
+pins. They are not the current generic implementation authority.
+
+The candidate current authority is Synexia PR #9644 at
+`22a3d825203e98adaaeaf74b7b2910bfa137f370`, which formalizes the already-active
+`synexia-indexstring`, `synexia-mindex`, `m3index-*` and
+`synexia-openrewrite-recipes` owners.
+
+M3JDK21 therefore does not turn this historical migration map into a second M3Index implementation.
+It consumes proven Synexia owners through the existing JDK bridge/handoff infrastructure and keeps
+only JDK-specific String/HotSpot/JIT/GC/CDS/JVMTI/JNI integration locally authoritative.
+
+The candidate pin is non-promoting until the Synexia source PR is merged and read back.
