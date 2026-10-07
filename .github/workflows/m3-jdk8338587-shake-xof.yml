@@ -1,6 +1,19 @@
 name: M3 JDK-8338587 SHAKE XOF recipe proof
 
 on:
+  push:
+    branches:
+      - "m3/restore-pq-kdf-residue-20261007"
+    paths:
+      - "m3/backports/recipes/jdk-8338587-shake-xof/**"
+      - "m3/backports/recipes/j496/**"
+      - "m3/backports/recipes/j497/**"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipe.java"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipeTest.java"
+      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/**"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - ".github/workflows/m3-jdk8338587-shake-xof.yml"
   pull_request:
     paths:
       - "m3/backports/recipes/jdk-8338587-shake-xof/**"
