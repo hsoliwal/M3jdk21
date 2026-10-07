@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.a3;
 
+import com.synexia.rewrite.M3RecipeMasteryPortableReceipt;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -24,6 +25,7 @@ public final class A3Apply {
             String path,
             String recipe,
             String scope,
+            String masteryRoot,
             String beforeSha,
             String afterSha,
             boolean changed,
@@ -33,6 +35,7 @@ public final class A3Apply {
             path = text(path, "path");
             recipe = text(recipe, "recipe");
             scope = text(scope, "scope");
+            masteryRoot = sha(masteryRoot, "masteryRoot");
             beforeSha = sha(beforeSha, "beforeSha");
             afterSha = sha(afterSha, "afterSha");
             if (!fixedPoint) {
@@ -47,8 +50,10 @@ public final class A3Apply {
     public static List<Receipt> run(
             Path root,
             Path out,
-            List<String> sources) throws IOException {
+            List<String> sources,
+            M3RecipeMasteryPortableReceipt.Verified mastery) throws IOException {
         Path checkedRoot = A3Fs.root(root);
+        String masteryRoot = Objects.requireNonNull(mastery, "mastery").root();
         Path checkedOut = A3Fs.out(checkedRoot, out);
         List<String> ordered =
                 sources.stream()
@@ -62,7 +67,7 @@ public final class A3Apply {
 
         ArrayList<Receipt> receipts = new ArrayList<>();
         for (String source : ordered) {
-            receipts.add(applyOne(checkedRoot, checkedOut, source));
+            receipts.add(applyOne(checkedRoot, checkedOut, source, masteryRoot));
         }
         receipts.sort(Comparator.comparing(Receipt::path));
         writeReceipt(checkedRoot, checkedOut, receipts);
@@ -72,7 +77,8 @@ public final class A3Apply {
     private static Receipt applyOne(
             Path root,
             Path out,
-            String source) throws IOException {
+            String source,
+            String masteryRoot) throws IOException {
         Path file = A3Fs.source(root, Path.of(source));
         String relative = A3Fs.rel(root, file);
         if ((!relative.startsWith("src/")
@@ -117,6 +123,7 @@ public final class A3Apply {
                 relative,
                 recipe.getClass().getName(),
                 "FILE",
+                masteryRoot,
                 A3Fs.sha(before),
                 A3Fs.sha(after),
                 !before.equals(after),
@@ -189,13 +196,15 @@ public final class A3Apply {
             List<Receipt> receipts) throws IOException {
         StringBuilder tsv =
                 new StringBuilder(
-                        "path\trecipe\tscope\tbeforeSha\tafterSha\tchanged\tfixedPoint\n");
+                        "path\trecipe\tscope\tmasteryRoot\tbeforeSha\tafterSha\tchanged\tfixedPoint\n");
         for (Receipt receipt : receipts) {
             tsv.append(A3Fs.cell(receipt.path()))
                     .append('\t')
                     .append(A3Fs.cell(receipt.recipe()))
                     .append('\t')
                     .append(receipt.scope())
+                    .append('\t')
+                    .append(receipt.masteryRoot())
                     .append('\t')
                     .append(receipt.beforeSha())
                     .append('\t')
