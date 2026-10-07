@@ -207,10 +207,41 @@ class JepResidueTest(unittest.TestCase):
         self.assertEqual("MATERIALIZED_PACKET", by_jep[493].evidence_state)
         self.assertEqual("PACKET_READY", by_jep[493].receipt_state)
         self.assertEqual("NOT_AUTHORIZED", by_jep[493].promotion)
+        self.assertEqual("MATERIALIZED_PACKET", by_jep[496].evidence_state)
+        self.assertIn("m3/backports/recipes/j496", by_jep[496].evidence_paths)
+        self.assertEqual("MATERIALIZED_PACKET", by_jep[497].evidence_state)
+        self.assertIn("m3/backports/recipes/j497", by_jep[497].evidence_paths)
+        self.assertEqual("MATERIALIZED_PACKET", by_jep[510].evidence_state)
+        self.assertIn("m3/backports/recipes/j510", by_jep[510].evidence_paths)
+        self.assertEqual(
+            "CANDIDATE_MATERIALIZED_UNVERIFIED",
+            by_jep[510].receipt_state,
+        )
+        self.assertEqual("NOT_AUTHORIZED", by_jep[510].promotion)
+        self.assertEqual(
+            "BUILD_JDK_IMAGE_RUN_KDF_JTREG_A3_FIXED_POINT_CANONICAL_READBACK",
+            by_jep[510].receipt_next_action,
+        )
         self.assertEqual("NO_RECIPE_EVIDENCE", by_jep[404].evidence_state)
         self.assertEqual("NO_RECIPE_EVIDENCE", by_jep[483].evidence_state)
         self.assertEqual("NO_RECIPE_EVIDENCE", by_jep[521].evidence_state)
         self.assertNotIn(401, by_jep)
+
+    def test_live_repository_queue_file_matches_current_tree_evidence(self) -> None:
+        root = Path(__file__).resolve().parents[2]
+        backports = root / "m3" / "backports"
+        items = self.r.queue(
+            root,
+            self.r.read_tsv(backports / "JEP_CATALOGUE.tsv"),
+            self.r.read_tsv(backports / "POST21_PRIORITY_COMPATIBILITY.tsv"),
+        )
+        out = io.StringIO()
+        self.r.write_tsv(items, out)
+        self.assertEqual(
+            out.getvalue(),
+            (backports / "JEP_RESIDUE_QUEUE.tsv").read_text(encoding="utf-8"),
+            "checked-in JEP residue queue is stale relative to current packet/recipe evidence",
+        )
 
 
 if __name__ == "__main__":
