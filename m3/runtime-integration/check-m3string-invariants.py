@@ -646,6 +646,17 @@ for fragment in [
 if "if (UseM3StringStorage)" not in string_opts or "return;" not in string_opts:
     fail("C2 String concat optimizer is not fail-closed for M3 storage")
 
+# All HotSpot consumers use the canonical M3-backed String predicate. The obsolete
+# tuple-era is_m3_joined name must never return.
+for label, text in [
+    ("StringDedup", dedup),
+    ("ArchiveHeapWriter", archive_writer),
+]:
+    if "is_m3_joined" in text:
+        fail(f"{label} reintroduced obsolete is_m3_joined String predicate")
+    if "java_lang_String::is_m3_backed" not in text:
+        fail(f"{label} lost canonical is_m3_backed String predicate")
+
 # Donor class naming must not leak back into live VM symbols/layout.
 for path, text in [
     ("vmSymbols.hpp", symbols),
@@ -934,11 +945,11 @@ if (ROOT / "src/java.base/share/classes/java/lang/SubM3String.java").exists():
 if string.count("storage.compatibilityValue()") < 4:
     fail("M3-backed String constructors no longer consistently use the empty sentinel")
 
-if "if (java_lang_String::is_m3_joined(java_string))" not in dedup:
+if "if (java_lang_String::is_m3_backed(java_string))" not in dedup:
     fail("String deduplication is not fail-closed for M3-backed values")
 if "if (UseM3StringStorage)" not in stringopts:
     fail("legacy C2 StringConcat optimization is not disabled for M3 storage")
-if "if (java_lang_String::is_m3_joined(string))" not in archive_writer:
+if "if (java_lang_String::is_m3_backed(string))" not in archive_writer:
     fail("CDS String sizing is not fail-closed for M3 values")
 
 
