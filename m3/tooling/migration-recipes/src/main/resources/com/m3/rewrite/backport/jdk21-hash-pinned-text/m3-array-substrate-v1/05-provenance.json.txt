@@ -1,0 +1,125 @@
+{
+  "schema": 1,
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_module": "m3/arrays",
+  "target_base": "6c8881d2e3fe6055b700947c509f1db3e1c67e03",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_revision": "8e1f56d448fd31ee5b666c922947e39c2036d4fd",
+  "license_boundary": "Synexia first-party donor/reference material Apache-2.0; m3/arrays independently Apache-2.0; OpenJDK-derived sources are not relicensed or modified in this slice.",
+  "attribution": "Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "mode": "INDEPENDENT_APACHE_MODULE",
+  "donors": [
+    [
+      "MIndexByteArrayView",
+      "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexByteArrayView.java",
+      "e75b9cbacb2ee99d2dd4772fa3b806bed04d29c4",
+      "com.m3.arrays.M3ByteArrayView",
+      "adapted immutable byte-view/materialization contract"
+    ],
+    [
+      "MIndexUtf16ArrayView",
+      "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexUtf16ArrayView.java",
+      "1953a2f3d4f80034420e31a6ac0e20bbf4dfcad1",
+      "com.m3.arrays.M3Utf16ArrayView",
+      "adapted UTF-16 view/search/copy semantics; simplified first slice"
+    ],
+    [
+      "MIndexMaskedUtf16ArrayView",
+      "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexMaskedUtf16ArrayView.java",
+      "da3f2413cd27c52a77c79060ee0a1514af64b4ca",
+      "PENDING",
+      "mask/run-directory phase deferred"
+    ],
+    [
+      "MIndexDirectArrayView",
+      "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexDirectArrayView.java",
+      "6cbef8b42871f5e9f21343e5876bcafe31b8bc3b",
+      "PENDING",
+      "direct/mapped ownership phase deferred"
+    ],
+    [
+      "MIndexNativeArrayBoundaries",
+      "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexNativeArrayBoundaries.java",
+      "2526b1885784fa6a6307bbafd73f6281579ccb9d",
+      "com.m3.arrays.M3ArrayNative",
+      "adapted explicit JNI materialization boundary"
+    ],
+    [
+      "MatSegmentedIntArray",
+      "synexia-indexstring/src/main/java/com/synexia/indexstring/MatSegmentedIntArray.java",
+      "daaa66839cf9eaab65ec4702040f1141b074022d",
+      "com.m3.arrays.M3IntArrayView",
+      "value-plane adaptation; mutable segmented storage remains separate"
+    ],
+    [
+      "MatSegmentedLongArray",
+      "synexia-indexstring/src/main/java/com/synexia/indexstring/MatSegmentedLongArray.java",
+      "c205af50352cf061feffe62b4f1adb8f0a8d5852",
+      "com.m3.arrays.M3LongArrayView",
+      "value-plane adaptation; mutable segmented storage remains separate"
+    ],
+    [
+      "MatSegmentedObjectArray",
+      "synexia-indexstring/src/main/java/com/synexia/indexstring/MatSegmentedObjectArray.java",
+      "3552cc339d64be1056f48ae1237518e3e2246aca",
+      "PENDING",
+      "reference/covariance/JMM proof required before any target owner"
+    ],
+    [
+      "SharedArray",
+      "synexia-indexstring/src/main/java/com/synexia/indexstring/shared/SharedArray.java",
+      "d87cebc7101b5b272ff80c2b56a49b7e42fb18cf",
+      "PENDING",
+      "shared namespace/generation phase deferred"
+    ],
+    [
+      "ArrayHandle",
+      "synexia-indexstring/src/main/java/com/synexia/indexstring/shared/ArrayHandle.java",
+      "610b139f44f05bf7a6bfedeb10846d29dc16b4b2",
+      "PENDING",
+      "shared handle phase deferred"
+    ],
+    [
+      "SharedArrayPool",
+      "synexia-indexstring/src/main/java/com/synexia/indexstring/shared/SharedArrayPool.java",
+      "e0207b70c51f9369fdc0b617698e31ba5014db88",
+      "PENDING",
+      "cross-process immutable arena phase deferred"
+    ],
+    [
+      "SharedArrayConversions",
+      "synexia-indexstring/src/main/java/com/synexia/indexstring/shared/SharedArrayConversions.java",
+      "8e6d0acd184a8bc356a49efc363c4e39530b5bf3",
+      "PENDING",
+      "conversion-cache phase deferred"
+    ],
+    [
+      "MIndexNativeArrayFlatten",
+      "synexia-indexstring/src/main/java/com/synexia/indexstring/nativebridge/MIndexNativeArrayFlatten.java",
+      "597e5ddb308e1229f6f5dc57c7823245cb8fc540",
+      "com.m3.arrays.M3ArrayNative",
+      "JNI boundary reference"
+    ],
+    [
+      "mindex_array_flatten_jni.c",
+      "synexia-indexstring/native/src/mindex_array_flatten_jni.c",
+      "b35c9143e27d27c913f9e3bcd407601f8a3e50bb",
+      "m3/arrays/src/main/native/m3_arrays_jni.c",
+      "target-symbol clean adaptation; no retained Java heap pointers"
+    ]
+  ],
+  "nonclaims": [
+    "not a public Java array replacement",
+    "not a java.base integration",
+    "not shared/mapped cross-process acceptance",
+    "not collection replacement acceptance",
+    "not full JNI/platform acceptance until native profile executes"
+  ],
+  "recipe": {
+    "declarative": "com.m3.M3ArraySubstrate",
+    "java_owner": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "text_owner": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
+    "crate": "m3-array-substrate-v1",
+    "policy": "target-specific adapter only; reusable recipe engine remains canonical in Synexia"
+  }
+}
