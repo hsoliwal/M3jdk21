@@ -305,7 +305,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 "--baseline-git, --baseline-ref and --admission-out must be supplied together"
             )
         admissions = admit_against_baseline(
-            root,
+            args.root,
             paths,
             args.baseline_git,
             args.baseline_ref,
