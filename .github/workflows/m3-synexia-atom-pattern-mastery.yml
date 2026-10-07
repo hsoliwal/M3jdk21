@@ -1,0 +1,109 @@
+name: M3 Synexia atom-pattern mastery receiver
+
+on:
+  push:
+    branches:
+      - "aix/m3-atom-pattern-mastery-rollout-20261007"
+    paths:
+      - ".m3/atomize-patternize/**"
+      - ".github/workflows/m3-synexia-atom-pattern-mastery.yml"
+  pull_request:
+    paths:
+      - ".m3/atomize-patternize/**"
+      - ".github/workflows/m3-synexia-atom-pattern-mastery.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  plan:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Shell syntax
+        run: |
+          set -euo pipefail
+          bash -n .m3/atomize-patternize/layout.sh
+          bash -n .m3/atomize-patternize/bootstrap.sh
+          bash -n .m3/atomize-patternize/install-synexia-recipes.sh
+          bash -n .m3/atomize-patternize/run.sh
+      - name: Bind exact repository inventory
+        run: |
+          set -euo pipefail
+          SYNEXIA_REBIND_INVENTORY=1 bash .m3/atomize-patternize/bootstrap.sh
+          grep -F $'schema\tBOOTSTRAP_V2' .m3/atomize-patternize/inventory.tsv
+          grep -F $'mode\tHYBRID_REACTOR_EXTERNAL' .m3/atomize-patternize/inventory.tsv
+          awk -F $'\t' '$1=="externalJavaRoots" { if (($2+0) < 1) exit 1 }' \
+            .m3/atomize-patternize/inventory.tsv
+          test -s .m3/target/atomize-patternize/source-files.tsv
+      - name: Diff hygiene
+        run: git diff --check
+
+  mastery:
+    needs: plan
+    runs-on: ubuntu-22.04
+    timeout-minutes: 240
+    steps:
+      - name: Checkout M3JDK21
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Checkout pinned Synexia source
+        uses: actions/checkout@v4
+        with:
+          repository: hsoliwal/com.synexia
+          ref: 2ddd629bcc5f037e26afe75a7655773abc79a138
+          path: .m3/target/atomize-patternize/synexia-source
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: Bind exact repository inventory
+        run: |
+          set -euo pipefail
+          SYNEXIA_REBIND_INVENTORY=1 bash .m3/atomize-patternize/bootstrap.sh
+      - name: Build pinned Apache Synexia recipe artifact
+        env:
+          SYNEXIA_SOURCE_CHECKOUT: ${{ github.workspace }}/.m3/target/atomize-patternize/synexia-source
+          SYNEXIA_MAVEN_REPO_LOCAL: ${{ github.workspace }}/.m3/target/atomize-patternize/m2
+        run: |
+          set -euo pipefail
+          bash .m3/atomize-patternize/install-synexia-recipes.sh
+          grep -F $'sourceRevision\t2ddd629bcc5f037e26afe75a7655773abc79a138' \
+            .m3/target/atomize-patternize/synexia-recipe-install-receipt.tsv
+          grep -F $'sourceLicense\tApache-2.0' \
+            .m3/target/atomize-patternize/synexia-recipe-install-receipt.tsv
+          grep -F $'buildStatus\tPASS' \
+            .m3/target/atomize-patternize/synexia-recipe-install-receipt.tsv
+      - name: Execute read-only atom-pattern mastery
+        env:
+          SYNEXIA_SOURCE_CHECKOUT: ${{ github.workspace }}/.m3/target/atomize-patternize/synexia-source
+          SYNEXIA_MAVEN_REPO_LOCAL: ${{ github.workspace }}/.m3/target/atomize-patternize/m2
+        run: |
+          set -euo pipefail
+          bash .m3/atomize-patternize/run.sh
+          grep -F $'recipe\tcom.synexia.m3.EveryModuleAtomPatternMastery' \
+            .m3/target/atomize-patternize/execution-receipt.tsv
+          grep -F $'recipeSource\tPINNED_SYNEXIA_SOURCE' \
+            .m3/target/atomize-patternize/execution-receipt.tsv
+          grep -F $'analysisStatus\tPASS' \
+            .m3/target/atomize-patternize/execution-receipt.tsv
+      - name: Upload receiver evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-synexia-atom-pattern-mastery
+          path: |
+            .m3/atomize-patternize/inventory.tsv
+            .m3/target/atomize-patternize/*.tsv
+          if-no-files-found: warn
