@@ -176,6 +176,41 @@ SimHash, MinHash, fuzzy-distance, n-gram, regex-shape and code-text signals may 
 candidate facts where a concrete JDK consumer exists. Candidate signals never replace exact String,
 regex or compiler semantics.
 
+## Array family
+
+Java arrays remain Java arrays. Public/runtime contracts for `byte[]`, `char[]`, primitive
+arrays and reference arrays are never renamed to M3 types and are not globally interned. M3 array
+owners are **internal immutable/snapshot/range/composition values** used only behind a concrete
+owner whose contract permits them.
+
+The first target-owned proving surface is `m3/arrays`:
+
+| Donor responsibility | M3JDK21 owner |
+| --- | --- |
+| immutable byte array/range view | `com.m3.arrays.M3ByteArrayView` |
+| immutable UTF-16 array/range view | `com.m3.arrays.M3Utf16ArrayView` |
+| exact composable UTF-16 facts | `com.m3.arrays.M3Utf16Facts` |
+| immutable int/long value planes | `M3IntArrayView` / `M3LongArrayView` |
+| snapshot/slice/join factory | `com.m3.arrays.M3Arrays` |
+| optional JNI compare/materialization | `com.m3.arrays.M3ArrayNative` |
+
+Array laws:
+
+1. admission from a mutable Java array snapshots unless a separately proven immutable owner exists;
+2. slices/joins may share immutable owners/descriptors but never alias caller-mutable payload;
+3. `copy`, `copyTo`, JNI contiguous access and ordinary array return types are explicit
+   materialization boundaries;
+4. no native pointer to Java heap storage survives a JNI call;
+5. UTF-16 facts/search/traversal must remain seam-correct, including unpaired surrogates and pairs
+   split across segments;
+6. mapped/shared-array ports require namespace, generation, corruption, replacement, lifetime and
+   cross-process proof before admission;
+7. reference/object-array ports additionally require covariance, ArrayStoreException, reflection,
+   clone, serialization, VarHandle/Unsafe, GC and JMM proof;
+8. collections may consume a qualified M3 array owner internally only after preserving the concrete
+   collection contract; existence of this substrate never authorizes a blanket `java.util`
+   replacement.
+
 ## Collection family
 
 Collections follow the same naming/ownership rule, but **per concrete contract**, never by replacing
