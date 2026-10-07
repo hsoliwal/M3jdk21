@@ -40,7 +40,7 @@ jobs:
         uses: actions/checkout@v5
         with:
           repository: hsoliwal/com.synexia
-          ref: 3357736011d1d3e3173433d1a8bdb2795f71599e
+          ref: a062661e91e769a00c2d027e1f04a7a0c8f9dc28
           path: _synexia
           fetch-depth: 1
 
