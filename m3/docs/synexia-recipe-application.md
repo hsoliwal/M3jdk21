@@ -142,3 +142,51 @@ The hash-pinned recipe target state is
 
 Receipt-only commits after that state are deliberately outside the recipe target inventory, so
 updating this document does not recursively change the sealed applied-result identity.
+
+
+## Layered literal split recovery
+
+The Synexia-owned layered recipe
+
+`com.synexia.rewrite.m3jdk.M3StringLiteralSplitRecovery`
+
+was refreshed on Synexia PR #9686 and applied on top of the exact 30/30 base String-convergence
+receiver. This is recipe application provenance only; M3JDK21 still owns the resulting runtime.
+
+Applied target branch:
+
+`m3/synexia-literal-split-receiver-20261007`
+
+Pre-receipt applied target head:
+
+`a27a2936030f940bc1e20b37a22d3593f8d637d0`
+
+Exact readback against the refreshed Synexia packet:
+
+- Java/runtime/test targets: **3/3 exact**;
+- workflow/invariant/port-map targets: **3/3 exact**;
+- total: **6/6 exact postimage blobs**.
+
+The recovered runtime lane is deliberately narrow: M3-backed source, non-empty multi-unit
+conservative literal regex, canonical M3 indexOf and substring ranges. One-character split keeps
+the existing JDK fast path; empty, escaped, metacharacter and general regex semantics remain
+Pattern-owned.
+
+### Machine-readable layered receipt
+
+```text
+recipe_name	com.synexia.rewrite.m3jdk.M3StringLiteralSplitRecovery
+synexia_repository	hsoliwal/com.synexia
+synexia_commit	725b5c688a9000ab908f550237b7642d23b7302f
+synexia_pull_request	9686
+synexia_java_manifest	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3jdk/jdk21-hash-pinned/synexia-m3-string-literal-split-recovery/manifest.tsv
+synexia_text_manifest	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3jdk/jdk21-hash-pinned-text/m3-string-literal-split-recovery/manifest.tsv
+synexia_java_manifest_sha256	f2ed439a4b10ea79a239aec8a0381507cc97f5a809b9aeb12cbc3e906105ce45
+synexia_text_manifest_sha256	d3263430efa32f0944f7ed733422cd9b39bacefb44a78912c5514a3f7a8b1028
+m3jdk21_applied_result_commit	a27a2936030f940bc1e20b37a22d3593f8d637d0
+runtime_owner	M3JDK21
+recipe_owner	Synexia
+runtime_dependency_on_synexia	false
+target_recipe_disposition	THIN_RECEIVER_ONLY
+verification_status	SYNEXIA_LITERAL_SPLIT_PACKET_6_OF_6_TARGETS_BLOB_MATCHED
+```

@@ -751,6 +751,21 @@ final class M3String implements CharSequence {
         return -1;
     }
 
+    /**
+     * Recognizes only regex expressions whose JDK meaning is exactly their UTF-16 literal value.
+     *
+     * <p>Backslashes and all regex metacharacters stay on Pattern/Matcher. This is a conservative
+     * history-recovered fast path, not a second regex engine.</p>
+     */
+    static boolean isConservativeLiteralRegex(String expression) {
+        String checked = Objects.requireNonNull(expression, "expression");
+        for (int index = 0; index < checked.length(); index++) {
+            char unit = checked.charAt(index);
+            if (unit == '\\' || ".^$|?*+()[]{}".indexOf(unit) >= 0) return false;
+        }
+        return true;
+    }
+
     M3String translateEscapes() {
         M3StringFacts prepared = facts();
         if (!prepared.hasBackslash) return this;
