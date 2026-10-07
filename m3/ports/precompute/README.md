@@ -69,3 +69,45 @@ Individual atoms may later graduate into `java.base` or another JDK module only 
 a concrete consumer exists and differential/API/memory/performance gates justify the
 retention cost. This module is not permission to add all precompute state to every
 String.
+
+
+## Regex/String trial V2
+
+The V2 port closes the later Synexia recipe-mastery delta without importing another native ABI.
+
+Target-owned additions:
+
+- `M3RegexStringSignals`: immutable static regex/String feature packet. Plain literals retain exact
+  `indexOf`/full-equality facts and are checked against JDK `Pattern`; all other regex features are
+  syntax observations only.
+- `M3RegexStringTrialImage`: bounded regex × String matrix using JDK `Pattern` for exact
+  `matches`, `lookingAt` and `find`; M3 code-text, SimHash and MinHash/Jaccard signals rank
+  difficult cases for later compiler/JUnit/recipe work.
+- stable global/per-regex top-N ranking and content-addressed image identity.
+- optional JNI acceleration reuses the existing `M3CodeTextSignalBatchNative`. Synexia's separate
+  recipe-mastery regex-pair native ABI is deliberately not ported.
+
+This preserves the M3JDK rule that native acceleration must minimize ABI surface and remain
+differentially equivalent to the Java signal owner. JNI does not execute regex semantics here.
+
+Recipe crate:
+
+```text
+m3-regex-string-precompute-v2
+com.m3.M3RegexStringPrecomputeSuperset
+```
+
+Focused proof:
+
+```bash
+python3 m3/ports/precompute/verify_regex_string_v2.py
+mvn -B -ntp -f m3/ports/precompute/pom.xml \
+  -Dtest=M3RegexStringSignalsTest,M3RegexStringTrialImageTest test
+mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative \
+  -Dtest=M3RegexStringTrialImageTest,M3NativeParityTest test
+mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+  -Dtest=M3RegexStringPrecomputeSupersetRecipeTest test
+```
+
+This is still an isolated port. It does not alter `java.lang.String`, `java.util.regex.Pattern`,
+collections, bootstrap behavior or public JDK APIs.
