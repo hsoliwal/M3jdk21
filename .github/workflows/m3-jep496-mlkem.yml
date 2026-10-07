@@ -1,0 +1,147 @@
+# SPDX-License-Identifier: GPL-2.0-with-classpath-exception
+name: M3 JEP 496 ML-KEM candidate
+
+on:
+  push:
+    branches:
+      - 'm3/materialize-jep496-mlkem-20261007'
+    paths:
+      - 'src/java.base/share/classes/com/sun/crypto/provider/ML_KEM.java'
+      - 'src/java.base/share/classes/com/sun/crypto/provider/ML_KEM_Impls.java'
+      - 'src/java.base/share/classes/com/sun/crypto/provider/SunJCE.java'
+      - 'src/java.base/share/classes/java/security/spec/NamedParameterSpec.java'
+      - 'src/java.base/share/classes/sun/security/provider/SHA3Parallel.java'
+      - 'src/java.base/share/classes/sun/security/util/KnownOIDs.java'
+      - 'test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java'
+      - 'test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java'
+      - 'test/jdk/sun/security/provider/acvp/data/ML-KEM-*/internalProjection.json'
+      - 'm3/backports/recipes/j496/**'
+      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
+      - 'm3/backports/test_jep_residue.py'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jep496MlKemBackportRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jep496MlKemBackportRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jep496-mlkem.yml'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep496-mlkem/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep496-mlkem-vectors/**'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java'
+      - 'm3/tooling/recipe-catalogue.tsv'
+      - '.github/workflows/m3-jep496-mlkem.yml'
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/com/sun/crypto/provider/ML_KEM.java'
+      - 'src/java.base/share/classes/com/sun/crypto/provider/ML_KEM_Impls.java'
+      - 'src/java.base/share/classes/com/sun/crypto/provider/SunJCE.java'
+      - 'src/java.base/share/classes/java/security/spec/NamedParameterSpec.java'
+      - 'src/java.base/share/classes/sun/security/provider/SHA3Parallel.java'
+      - 'src/java.base/share/classes/sun/security/util/KnownOIDs.java'
+      - 'test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java'
+      - 'test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java'
+      - 'test/jdk/sun/security/provider/acvp/data/ML-KEM-*/internalProjection.json'
+      - 'm3/backports/recipes/j496/**'
+      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
+      - 'm3/backports/test_jep_residue.py'
+      - 'm3/tooling/migration-recipes/**'
+      - '.github/workflows/m3-jep496-mlkem.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recipe-proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: 1 - Diff hygiene
+        run: git diff --check
+
+      - name: 2 - SHAKE and JEP 496 recipe proofs
+        run: >-
+          mvn -B -ntp
+          -f m3/tooling/migration-recipes/pom.xml
+          -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest,M3Jep496MlKemBackportRecipeTest,M3RecipeScopeDeclarationTest
+          -Dsurefire.failIfNoSpecifiedTests=false
+          test
+
+      - name: 3 - Released JEP residue stays derived
+        run: python3 -m unittest m3/backports/test_jep_residue.py
+
+  jdk-proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Install focused OpenJDK build prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            autoconf make gcc g++ zip unzip \
+            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
+            libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
+
+      - name: Configure Java 21 receiver
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash configure \
+            --with-boot-jdk="$JAVA_HOME" \
+            --with-debug-level=release \
+            --with-jvm-variants=server \
+            --disable-warnings-as-errors
+
+      - name: Build JDK image
+        run: make JOBS=2 images
+
+      - name: Prove SHAKE prerequisite
+        run: >-
+          make JOBS=2 test
+          TEST="test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java"
+
+      - name: Prove FIPS 203 ML-KEM vectors
+        run: >-
+          make JOBS=2 test
+          TEST="test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java"
+
+      - name: Prove ML-KEM provider names OIDs and opt-in API constants
+        run: >-
+          make JOBS=2 test
+          TEST="test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java"
+
+      - name: Existing KEM API regression
+        run: >-
+          make JOBS=2 test
+          TEST="test/jdk/javax/crypto/KEM/KemTest.java"
+
+      - name: Named-key prerequisite regressions
+        run: >-
+          make JOBS=2 test
+          TEST="test/jdk/sun/security/provider/NamedEdDSA.java test/jdk/sun/security/provider/NamedKeyFactoryTest.java"
+
+      - name: Built image provider smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          JDK="$(find build -type f -path '*/images/jdk/bin/java' -print -quit)"
+          test -n "$JDK"
+          "$JDK" -version
+          "$JDK" --list-modules >/dev/null
+
+      - name: Candidate tree remains clean after proof
+        run: |
+          git diff --check
+          git diff --exit-code
