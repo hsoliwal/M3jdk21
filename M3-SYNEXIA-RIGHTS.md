@@ -99,6 +99,58 @@ Nothing in any M3/Synexia license grant authorizes false attribution, false
 claims of original authorship, or false claims that independently authored
 first-party M3/Synexia work originated from another person or project.
 
+## JEPs, standards proposals, and technical publications
+
+A JDK Enhancement Proposal (JEP), JSR, standards submission, paper, presentation,
+or downstream design that discusses or builds on M3/Synexia work does not, by
+its submission, numbering, acceptance, or publication, transfer ownership of
+that work or establish that its proposer originated the underlying M3 contribution.
+Authorship of a new proposal must be distinguished from authorship of material
+and designs on which it relies.
+
+**Project attribution policy:** proposals and publications materially drawing
+on M3/Synexia designs should identify the source contributions, cite the relevant
+versioned design/source records, distinguish prior M3 work from the proposer's
+new contributions, and avoid presenting M3-originated material as independently
+originated work. This citation policy expresses the project's expectation for
+accurate provenance; enforceable obligations remain those imposed by the
+applicable license and law. It adds no restriction to existing license grants.
+
+When copying or adapting protected source, documentation, diagrams, or other
+expression, preserve the applicable copyright, attribution, NOTICE, and
+modification records as required by the governing license. A citation alone
+does not substitute for compliance with those requirements.
+
+### Published design record
+
+The following record provides a concrete reference for the design described
+in the paper, without claiming that this is its earliest conception or proving
+exclusive invention of every component:
+
+- **Work:** M3: Shared Structure and Reusable Computation in a Java Runtime.
+- **Attributed authors:** Hitesh Soliwal and Contributors to the Synexia Project.
+- **Version/date:** technical design paper v0.1, 7 October 2026.
+- **Publication commit:** `ace350f716614b50cf77d7462b1762b7eb8664ca`.
+- **Permanent reference:** [paper at its publication commit](https://github.com/hsoliwal/M3jdk21/blob/ace350f716614b50cf77d7462b1762b7eb8664ca/m3/papers/M3_SHARED_STRUCTURE_AND_REUSABLE_COMPUTATION.md).
+- **Design scope:** canonical shared immutable payloads; range/composition
+  identity; indexed metadata and reusable String/regex precompute; M3JDK21
+  runtime ownership; Synexia recipe convergence; proposed collection and
+  SWT/Eclipse integration; compatibility constraints and evaluation programme.
+
+Suggested citation: Hitesh Soliwal and Contributors to the Synexia Project,
+*M3: Shared Structure and Reusable Computation in a Java Runtime*, v0.1,
+7 October 2026, publication commit `ace350f716614b50cf77d7462b1762b7eb8664ca).
+
+Earlier project history and independently preserved records remain relevant to
+authorship and chronology. This record does not assert that every general
+technique described in the paper is original to M3.
+
+This notice does not prohibit independent proposals, lawful discussion,
+independently created implementations, or uses permitted by existing licenses.
+It does not establish patent rights or a veto over the OpenJDK process.
+The [JEP process](https://openjdk.org/jeps/1) governs proposal handling; the
+applicable material's license governs reuse.
+
 ## Reservation
 
 **All ownership and all rights not expressly granted by the applicable license
