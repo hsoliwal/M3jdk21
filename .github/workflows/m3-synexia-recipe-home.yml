@@ -35,6 +35,8 @@ jobs:
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -44,7 +46,11 @@ jobs:
         with:
           python-version: "3.12"
       - name: Diff hygiene
-        run: git diff --check origin/master...HEAD
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="$(git merge-base origin/master HEAD)"
+          git diff --check "$base"...HEAD
       - name: Receiver policy unit test
         run: python -m unittest m3/compatibility/test_synexia_recipe_home_policy.py
       - name: Migration-recipes JUnit ownership proof
