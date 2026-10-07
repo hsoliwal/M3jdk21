@@ -1,0 +1,2 @@
+capability	donor	classification	license	fit	gap	status
+m3-original-ast-oracle-maven-execution	org.codehaus.mojo:exec-maven-plugin:3.5.0;existing-original-witness-pom-sha256:dec3a8c71d9217c3872de31a65e2923ea8aecf77c3a683f0b2e6c32c2ee6bda8	WRAP	Apache-2.0 Maven plugin/POM; JUnit EPL-2.0 bundled notices retained for local use	Existing exec goal runs exact argv external javac/java with timeout; root grants one serial JVM lane	Only bind already prepared exact13source javac and original JUnit oracle commands into two verify executions	PRE_GENERATION_NOT_RUN

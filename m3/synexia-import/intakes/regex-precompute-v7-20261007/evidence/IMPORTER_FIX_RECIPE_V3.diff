@@ -1,0 +1,41 @@
+--- m3/synexia-import/src/main/java/com/m3/synexia/importer/SynexiaImportPlan.java original80b
++++ m3/synexia-import/src/main/java/com/m3/synexia/importer/SynexiaImportPlan.java recipe-v3
+@@ -146,7 +146,7 @@
+                 }
+                 previous = row.targetPath();
+             }
+-            String expected = root(sourceRevision, manifestRoot, rows);
++            String expected = SynexiaImportPlan.root(sourceRevision, manifestRoot, rows);
+             root = root == null || root.isBlank() ? expected : sha(root, "root");
+             if (!root.equals(expected)) {
+                 throw new IllegalArgumentException("Synexia import plan root mismatch");
+--- m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImportPlanTest.java original80b
++++ m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImportPlanTest.java recipe-v3
+@@ -403,7 +403,7 @@
+                         "m3jdk21",
+                         List.of(entry(
+                                 "m3-recipe-source",
+-                                "src/A.java",
++                                "synexia-m3-recipe/src/A.java",
+                                 "m3/vendor/synexia/synexia-m3-recipe/src/A.java",
+                                 bytes,
+                                 SynexiaImportManifest.Mode.APACHE_SOURCE)),
+@@ -438,7 +438,7 @@
+         byte[] keep = apache("package com.synexia.rewrite; final class Keep {}\n");
+         byte[] replace = apache("package com.synexia.convergence; final class Replace { int v = 2; }\n");
+         byte[] add = apache("int m3_add(int a, int b) { return a + b; }\n");
+-        byte[] resource = "---\ntype: specs.openrewrite.org/v1beta/recipe\nname: com.synexia.M3\n";
++        byte[] resource = "---\ntype: specs.openrewrite.org/v1beta/recipe\nname: com.synexia.M3\n".getBytes(StandardCharsets.UTF_8);
+         byte[] stale = apache("package obsolete; final class Old {}\n");
+ 
+         write(synexia.resolve(keepSource), keep);
+--- m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImporterTest.java original80b
++++ m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImporterTest.java recipe-v3
+@@ -99,6 +99,7 @@
+         assertThrows(
+                 IllegalArgumentException.class,
+                 () -> SynexiaImporter.verify(temp.resolve("absent"), m3jdk, manifest));
++        write(synexia.resolve(sourcePath), bytes);
+         assertThrows(
+                 IllegalArgumentException.class,
+                 () -> SynexiaImporter.verify(synexia, temp.resolve("absent-target"), manifest));

@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "createdAtUtc": "2026-10-07T07:00:18.452661+00:00",
+  "qualification": "BOUNDED_HOST_AST_ORACLES_AND_EXACT_ISOLATED_BYTE_INTAKE_ONLY",
+  "proofs": {
+    "AST_FULL_ORIGINAL_ORACLE_PROOF.json": "915ad7f0dbd01aeef01fae3448baa3911fb0ac1e757e197a9306e1dae658489c",
+    "AST_IMPORTER_QUALIFICATION_PROOF.json": "9c5c2c846afce4fbb00e6f1325c13557d0965614fe5dcb50a022273529edb0ca",
+    "AST_P0_CLOSEOUT_INDEX.json": "af83dcf2a94ac02564e19d45b3dcbb213d42ff36f212639231c5e78fbed58df0",
+    "FINAL_JUNIT_PROOF.json": "315b3b737d2e22d84983b6e8440de58f7cc62d7272704b1910507594588f9eee",
+    "PROOF.json": "60d21ed0f15f4b91a00f5e13f9075ce4d9277e1f09dbdee0b991b2367e706bd0",
+    "expandedV3Replay": "a14670b53b161d6fa2b19194d52876ab670ab7a1768e7a9c6996f1f29f6e1a22"
+  },
+  "astTests": {
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "importerUnitTests": {
+    "tests": 21,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "astByteIntake": {
+    "cases": 8,
+    "payloads": 44,
+    "productionSources": 37,
+    "originalTests": 5,
+    "licenseNotice": 2,
+    "hashSizeMtimeFixedPoint": true,
+    "fourRefusalCasesPassed": true
+  },
+  "expandedThreeTargetReplay": {
+    "status": "PASS",
+    "proofSha256": "a14670b53b161d6fa2b19194d52876ab670ab7a1768e7a9c6996f1f29f6e1a22",
+    "fixedPointAndSecondApplyUnchanged": true,
+    "inputDriftRefusal": true,
+    "unrelatedSiblingPreserved": true
+  },
+  "originalAssertionsChanged": false,
+  "publicFailureOrderChanged": false,
+  "notQualified": [
+    "portable source-complete receiver build",
+    "actual target consumer wiring",
+    "cold-image valid-checksum wrong-geometry refusal",
+    "AST cache/edit/resident lifecycle classes",
+    "full repository seed snapshot test",
+    "Maven verify/JaCoCo99% line and branch gate",
+    "JNI/native providers",
+    "matched M3JDK/jtreg/platforms",
+    "performance",
+    "full-family completion"
+  ],
+  "originalReceiptsRemainHistoricalAndUnmodified": true
+}

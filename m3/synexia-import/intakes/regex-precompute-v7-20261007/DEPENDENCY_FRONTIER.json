@@ -1,0 +1,286 @@
+{
+  "status": "EXACT_PACKET_NOT_SOURCE_CLOSURE",
+  "parentAdmittedProof": {
+    "path": "K:\\codex-work\\m3-precompute-controls-20261006\\synexia-openrewrite-recipes\\tasks\\regex-persisted-precompute-20261006\\target\\proof-20261006T042930Z\\PROOF.json",
+    "bytes": 86975,
+    "sha256": "f005a6648371d84b4b317152ade12cb61c9c0814ee8524d2cd87abd61f821dc6",
+    "gitBlobSha1": "f813061a7a348b6da540534da0b04cbfc83fc686"
+  },
+  "newProductionSources": 22,
+  "originalTestSources": 3,
+  "originalNewCompiledClasses": 86,
+  "originalInheritedClasses": 2440,
+  "originalClasspathJars": 64,
+  "logicalClosure": [
+    {
+      "owner": "MIndexRegexProgram",
+      "dependsOn": [
+        "MIndexRegexTrigramQuery",
+        "IProgressMonitor -> ProgressMonitor/ProgressState/ProgressSnapshot/ChildProgressMonitor",
+        "PackedLongLongOrderedMap -> LongLongOrderedMap/PackedLongRowIndex/PackedSlotLinkAtoms",
+        "java.lang.management.ThreadMXBean/ManagementFactory",
+        "MIndexString/IndexLexiconWordView/IndexUtf16SearchImage.RowView fact specializations",
+        "IndexTextMetrics/IndexCharacterFlags/IndexCharacterFlagsResolver",
+        "MIndexStringBitOps.addSignal/mayContain"
+      ],
+      "boundary": "Generic CharSequence boolean runtime and image records exist, but parser/compiler/session/progress/optimized donor-facts hooks are in the same source owner. No existing standalone external compiler receiving split has been proved."
+    },
+    {
+      "owner": "MIndexRegexProgramImageCodec",
+      "dependsOn": [
+        "MIndexRegexProgram",
+        "MIndexRegexAcceleratedImage",
+        "MIndexCompactAsciiDfaImage",
+        "java.base IO/NIO/security primitives"
+      ],
+      "boundary": "Versions1..7, raw UTF-16 metadata, checksummed framing, bounded primitive image validation. Mapping/decode copies primitive arrays; no zero-copy claim."
+    },
+    {
+      "owner": "MIndexRegexPrecompute",
+      "dependsOn": [
+        "MIndexRegexProgram",
+        "MIndexRegexProgramImageCodec",
+        "MIndexRegexPrecomputeKey",
+        "fs.M3DirectoryContentStore/M3PrecomputeCache/M3PrecomputeKey/M3PrecomputeResult/M3ObjectRef/M3ObjectKind and their recorded source packet"
+      ],
+      "boundary": "Positive hit integrity/exact-request checks precede direct image restore; callbacks are not invoked for corrupt/mismatching hits. Store/cache association is consistency, not arbitrary semantic approval."
+    },
+    {
+      "owner": "MIndexRegexPrecomputeKey",
+      "dependsOn": [
+        "fs.M3ContentId",
+        "fs.M3PrecomputeKey",
+        "precompute.MIndexPrecomputePasses.sha256Utf16"
+      ],
+      "boundary": "Exact raw UTF-16 expression hash; owner source hashes; semantics; maxStates; compiler/codec revisions; runtime vendor/version. Revision syntax does not prove revision truth."
+    }
+  ],
+  "unmaterializedAdditionalDirectDependencyPins": [
+    {
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+      "revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "bytes": 15093,
+      "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
+      "gitBlobSha1": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea",
+      "license": "Apache-2.0",
+      "imports": [
+        "java.util.ArrayList",
+        "java.util.Arrays",
+        "java.util.List",
+        "java.util.Objects",
+        "java.util.function.LongPredicate"
+      ]
+    },
+    {
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexTextMetrics.java",
+      "revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "bytes": 6649,
+      "sha256": "c10b054236a779550fa339d763117fbac4b3051aef1b54aaeeada62db079689d",
+      "gitBlobSha1": "58beddc813b3ed4716233d23f0e1909bda4e21b9",
+      "license": "Apache-2.0",
+      "imports": [
+        "java.nio.charset.StandardCharsets",
+        "java.nio.CharBuffer",
+        "java.util.Objects"
+      ]
+    },
+    {
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexCharacterFlags.java",
+      "revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "bytes": 3005,
+      "sha256": "710636738b28164448c72444c1b8362692101811ecf930d9245c67a190371ea6",
+      "gitBlobSha1": "3219d69fef5747c12f496b0fd5e5dbf652a101e8",
+      "license": "Apache-2.0",
+      "imports": [
+        "java.util.Objects",
+        "java.util.StringJoiner"
+      ]
+    },
+    {
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexCharacterFlagsResolver.java",
+      "revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "bytes": 566,
+      "sha256": "a92f044d62e5313a9382640fa636154145485174f9a9b874a5eacc434c17e8cd",
+      "gitBlobSha1": "04141cd643496211bdcd416805c271ab4f65e411",
+      "license": "Apache-2.0",
+      "imports": []
+    },
+    {
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexLexiconWordView.java",
+      "revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "bytes": 3025,
+      "sha256": "47d2f1d402360c378477439dc58c38f341773aacf9f744283ffd5e193fd2bbcd",
+      "gitBlobSha1": "e981885ba2268552b7d3aa3d21e2334ea9f26e68",
+      "license": "Apache-2.0",
+      "imports": [
+        "java.util.Objects"
+      ]
+    },
+    {
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/IndexUtf16SearchImage.java",
+      "revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "bytes": 38366,
+      "sha256": "16eaa92f8b105b276f96ca4b0450dbd1e758ed9bb5a03001194e54132d5d4d39",
+      "gitBlobSha1": "1a6c8a8cafd9297bc6cec3730b81edc5b7f9cb47",
+      "license": "Apache-2.0",
+      "imports": [
+        "com.synexia.job.IProgressMonitor",
+        "com.synexia.indexstring.fs.M3DirectoryContentStore",
+        "com.synexia.indexstring.fs.M3ObjectRef",
+        "com.synexia.indexstring.fs.M3ContentId",
+        "com.synexia.indexstring.fs.M3FsPrecomputeBundle",
+        "com.synexia.indexstring.fs.M3FsPrecomputeWriter",
+        "com.synexia.indexstring.fs.M3PrecomputeCache",
+        "com.synexia.indexstring.fs.M3PrecomputeKey",
+        "java.io.IOException",
+        "java.nio.ByteBuffer",
+        "java.nio.ByteOrder",
+        "java.nio.charset.StandardCharsets",
+        "java.security.MessageDigest",
+        "java.security.NoSuchAlgorithmException",
+        "java.util.Arrays",
+        "java.util.HexFormat",
+        "java.util.List",
+        "java.util.Map",
+        "java.util.Objects"
+      ]
+    },
+    {
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexStringBitOps.java",
+      "revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "bytes": 11947,
+      "sha256": "c63349817965e8aab0dd3360c8c13c778f7578310b2ce7d307829e426736d03c",
+      "gitBlobSha1": "aa904f5d10370ab4213b8ab39a1d359f9142d440",
+      "license": "Apache-2.0",
+      "imports": [
+        "java.nio.CharBuffer",
+        "java.util.Arrays",
+        "java.util.Objects",
+        "java.util.function.IntUnaryOperator"
+      ]
+    },
+    {
+      "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexString.java",
+      "revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "bytes": 154108,
+      "sha256": "a273782ae56ca7735dee5f44d430c5c3dbde6a64d1c87e8fc8e72b3ab89f69f2",
+      "gitBlobSha1": "bf64463be2ceedcb1f13bd295975dbe795cc0e6d",
+      "license": "Apache-2.0",
+      "imports": [
+        "com.synexia.common.language.MindexAvailabilityMask",
+        "com.synexia.indexstring.grammar.MIndexFormalLanguageSpec",
+        "com.synexia.indexstring.grammar.MIndexGrammarValidation",
+        "com.synexia.indexstring.nativebridge.IndexStringNative",
+        "com.synexia.indexstring.nativebridge.MIndexNativeIntern",
+        "com.synexia.job.IProgressMonitor",
+        "java.io.UnsupportedEncodingException",
+        "java.lang.invoke.MethodHandles",
+        "java.nio.ByteBuffer",
+        "java.nio.ByteOrder",
+        "java.nio.CharBuffer",
+        "java.nio.charset.CharacterCodingException",
+        "java.nio.charset.Charset",
+        "java.nio.charset.CharsetDecoder",
+        "java.nio.charset.CodingErrorAction",
+        "java.nio.charset.IllegalCharsetNameException",
+        "java.nio.charset.StandardCharsets",
+        "java.nio.charset.UnsupportedCharsetException",
+        "java.security.MessageDigest",
+        "java.security.NoSuchAlgorithmException",
+        "java.util.Comparator",
+        "java.util.Locale",
+        "java.util.Objects",
+        "java.util.Optional",
+        "java.util.OptionalLong",
+        "java.util.PrimitiveIterator",
+        "java.util.Spliterator",
+        "java.util.Spliterators",
+        "java.util.function.Consumer",
+        "java.util.function.Function",
+        "java.util.function.IntConsumer",
+        "java.util.stream.IntStream",
+        "java.util.stream.LongStream",
+        "java.util.stream.Stream",
+        "java.util.stream.StreamSupport"
+      ]
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongLongOrderedMap.java",
+      "revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "bytes": 8172,
+      "sha256": "acd160d8fadf7208c2ad191b15f6e894e6d8cfa24c19a05205f35105e99512d6",
+      "gitBlobSha1": "8e9af86abc2cb28e2944c23018af5ecf19abe0b3",
+      "license": "Apache-2.0",
+      "imports": [
+        "java.util.Arrays",
+        "java.util.NoSuchElementException",
+        "java.util.Objects"
+      ]
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/LongLongOrderedMap.java",
+      "revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "bytes": 577,
+      "sha256": "1a7b2c62cb39e1b35beb3c0d9ee09c3ddfc74a064151073bede49358376fbae5",
+      "gitBlobSha1": "76dced6ac1945a12cc3c7aad1f2091a8c97c23b0",
+      "license": "Apache-2.0",
+      "imports": []
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongRowIndex.java",
+      "revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "bytes": 4893,
+      "sha256": "aaf5582c43eb90419188933f41459375d11776cdb148f5289a1e68f3eb117b6b",
+      "gitBlobSha1": "411ffc1df3c89282f22608e1380930f43d478a67",
+      "license": "Apache-2.0",
+      "imports": [
+        "java.util.Arrays"
+      ]
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedSlotLinkAtoms.java",
+      "revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "bytes": 2005,
+      "sha256": "8059a01787f076650c600214f78ec806b40f49bfa0ace94e6148f97a0f250047",
+      "gitBlobSha1": "3158ab9f9c9621052dabea302515424468494f07",
+      "license": "Apache-2.0",
+      "imports": []
+    },
+    {
+      "path": "synexia-job/src/main/java/com/synexia/job/IProgressMonitor.java",
+      "revision": "80d288951148548ef6aa4c95df9cb31a438aac16",
+      "bytes": 5764,
+      "sha256": "1dea7f0324c0106d993e6688e221d1f9755c35e6c70d292c2b75eb4fd28cc00e",
+      "gitBlobSha1": "40c70d5551a01485a29b36ef7e09822f6b79b267",
+      "license": "Apache-2.0",
+      "imports": [
+        "com.synexia.common.progress.ProgressMonitor",
+        "com.synexia.common.progress.ProgressState",
+        "java.time.Instant",
+        "java.util.concurrent.CancellationException"
+      ]
+    }
+  ],
+  "genericCompilerModuleBoundary": {
+    "proof": {
+      "path": "K:\\codex-work\\m3-regex-java-base-module-fit-20261007\\PROOF.json",
+      "bytes": 1014,
+      "sha256": "3dd110ea7bf987ea42266365bf029c3dda7990f071e4656aa9c34312ce3d73f8",
+      "gitBlobSha1": "9dec492850d45c5553084ae9464d0f87cc3764ed"
+    },
+    "finding": "Admitted v7 Program line841 declares ThreadMXBean and861 invokes ManagementFactory. Root tiny-token java.base patched compile refused module visibility.",
+    "proofSourceHashCaveat": "Proof donorSourceSha256=9c9e4c6... is not v7 Program SHA9999e8...; this audit independently verified the identical token in v7. This is a module-token discriminator, not a whole-v7 compile.",
+    "classification": "NO_FIT for wholesale unchanged compiler/session copy into java.base; does not disprove separated pure execution admission."
+  },
+  "V8Disposition": "NOT_ADMITTED_DO_NOT_SUBSTITUTE_LATER_MUTABLE_CONTROLS",
+  "sourceCompleteClosure": false,
+  "newJvmExecution": false,
+  "pendingTargetGates": [
+    "Existing importer parse/verify/materialize/verify-target/fixed-point/refusals in isolated target",
+    "Resolve inherited source dependencies without stubs or second canonical owners",
+    "Source compile and donor behavioral oracles on actual receiving source set",
+    "Separate generic tooling custody from java.base bootstrap/runtime extraction",
+    "Cold preparation and warm reuse correctness/work/memory evidence",
+    "Applicable M3 image jtreg/native/JNI/ABI/runtime gates"
+  ]
+}

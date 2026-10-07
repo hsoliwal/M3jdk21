@@ -1,0 +1,326 @@
+{
+  "schema": 1,
+  "completedUtc": "2026-10-07T06:35:33.530611+00:00",
+  "status": "PASS_ORIGINAL_AST_NAVIGATION_ORACLE_OVER_SEALED_HOST",
+  "commandsSha256": "17dcd0170d4c0fe8126336573e0c6cb9101ae443c2d2545c4cc626b526ee457f",
+  "pomPath": "pom-ast-oracle-v2.xml",
+  "pomSha256": "f4637d5678c4c63332ab477aac72f1b1345dd2965c8e9f3c58d90ae5facc8266",
+  "mavenExit": {
+    "path": "target/ast-original-oracle-v2/maven/EXIT.json",
+    "sha256": "8ac874525be23d9719686faca069faf6a2e11bc7dfe24d14bb9d1e970aac788b"
+  },
+  "originalFailureRetained": "target/ast-original-oracle/maven-initial/EXIT.json",
+  "sourceRevision": "7d2133f1412a9e7295296c3f86baae577bb3251c",
+  "productionSourcesCompiled": 15,
+  "originalOracleModified": false,
+  "junit": {
+    "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-console-standalone\\1.10.1\\junit-platform-console-standalone-1.10.1.jar",
+    "sha256": "b42eaa53d13576d17db5fb8b280722a6ae9e36daf95f4262bc6e96d4cb20725f",
+    "platformVersion": "1.10.1",
+    "jupiterVersion": "5.10.1",
+    "sourceBuildRevision": "e5f50d8720741623915979ac154b65bcbcd6a577",
+    "license": "JUnit EPL-2.0 with bundled Apache-2.0 components; local use only, no jar publication",
+    "removedMixedVersionClasspathEntries": [
+      {
+        "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter\\5.10.2\\junit-jupiter-5.10.2.jar",
+        "label": "junit-jupiter-5.10.2.jar",
+        "sha256": "263e43447f4b40f126ad6b1dcbd7df379448413bdedb8e0d240c5bcbba7c7a4f",
+        "exists": true
+      },
+      {
+        "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-api\\5.10.2\\junit-jupiter-api-5.10.2.jar",
+        "label": "junit-jupiter-api-5.10.2.jar",
+        "sha256": "afff77c186cd317275803872fa5133aa801fd6ac40bd91c78a6cf8009b4b17cc",
+        "exists": true
+      },
+      {
+        "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\opentest4j\\opentest4j\\1.3.0\\opentest4j-1.3.0.jar",
+        "label": "opentest4j-1.3.0.jar",
+        "sha256": "48e2df636cab6563ced64dcdff8abb2355627cb236ef0bf37598682ddf742f1b",
+        "exists": true
+      },
+      {
+        "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-commons\\1.10.2\\junit-platform-commons-1.10.2.jar",
+        "label": "junit-platform-commons-1.10.2.jar",
+        "sha256": "b56a5ec000a479df4973b18bba24c98fe0db8faa14c8907d3ef451d8c71fd8ae",
+        "exists": true
+      },
+      {
+        "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\apiguardian\\apiguardian-api\\1.1.2\\apiguardian-api-1.1.2.jar",
+        "label": "apiguardian-api-1.1.2.jar",
+        "sha256": "b509448ac506d607319f182537f0b35d71007582ec741832a1f111e5b5b70b38",
+        "exists": true
+      },
+      {
+        "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-params\\5.10.2\\junit-jupiter-params-5.10.2.jar",
+        "label": "junit-jupiter-params-5.10.2.jar",
+        "sha256": "edb1e43ff0b8067626ffb55e5e9eeca1d9ab2478141a7c7f253d115b29cc7cf2",
+        "exists": true
+      },
+      {
+        "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\jupiter\\junit-jupiter-engine\\5.10.2\\junit-jupiter-engine-5.10.2.jar",
+        "label": "junit-jupiter-engine-5.10.2.jar",
+        "sha256": "b6df35da750a546ae932376f11b3c0df841f0c90c7cb2944cd39adb432886e4b",
+        "exists": true
+      },
+      {
+        "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-engine\\1.10.2\\junit-platform-engine-1.10.2.jar",
+        "label": "junit-platform-engine-1.10.2.jar",
+        "sha256": "905cba9b4998ccc29d1239085a7fb1fe0e28024d7526152356d810edec0a49a3",
+        "exists": true
+      }
+    ]
+  },
+  "tests": {
+    "tests": 1,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "cases": [
+    {
+      "class": "com.synexia.indexstring.ast.MIndexASTPrecomputeTest",
+      "name": "occurrencePrecomputeBuildsIntervalsBinaryLiftingPathHashesAndPostings()"
+    }
+  ],
+  "reports": [
+    {
+      "path": "target/ast-original-oracle-v2/reports/TEST-junit-jupiter.xml",
+      "sha256": "a837d267043f17f245346dabe3a0ce960f87d70f207d8aa3757a85f4bf2b9ac0"
+    },
+    {
+      "path": "target/ast-original-oracle-v2/reports/TEST-junit-platform-suite.xml",
+      "sha256": "629a96f9b7436489580dbbaa073475b1497f85d7c152b1215565ba9edf674e0b"
+    },
+    {
+      "path": "target/ast-original-oracle-v2/reports/TEST-junit-vintage.xml",
+      "sha256": "dff888d0d3b1a8742121f59acd4591e981c2275051662d62f3e57ea390c9d099"
+    }
+  ],
+  "newClasses": [
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexAST.class",
+      "sha256": "d4b0d368154b41726f96ece69bcb2254956cc1d5087148035eab8790b0e2ffe0",
+      "bytes": 9329
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTDiagnostic.class",
+      "sha256": "eb20b1a517e3b8d75155fb0f9231d9ef4fb687adc61b160a2a433382fd306802",
+      "bytes": 2360
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTDiff$Classification.class",
+      "sha256": "8694ebc70ba0a1e08169bc55edfe3bd4115f047c624c09d5877a50334919ca86",
+      "bytes": 1427
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTDiff$Result.class",
+      "sha256": "72f829c82167c63e8f6e2b28809bc79f9725e33645ff4febfdb67c2dfb3b3ff8",
+      "bytes": 2692
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTDiff.class",
+      "sha256": "f712904296e87f538c08d5a7e3044c90a99edb382516cf0cdd89f83e5c9a8a09",
+      "bytes": 1626
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTDocument.class",
+      "sha256": "ba0f75d82586cc052929e98108f69708d84623931c660071b67ee05e47c04487",
+      "bytes": 8220
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTKindAutomaton$Match.class",
+      "sha256": "73d2330530438f5ceb141a74d86c6df8354495a3702939c5bca6a9a1f23712b2",
+      "bytes": 1744
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTKindAutomaton.class",
+      "sha256": "24a0555b2c28522d6e9d8d027a59cb9c27bc7485cb0a19906ac67b71d480ee7a",
+      "bytes": 5518
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTKindPattern.class",
+      "sha256": "07b72d314a642872c8053594bb3609a457a8380fc6d2b33fd865dbe15889f4e6",
+      "bytes": 2952
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTLcaSparseTable$Snapshot.class",
+      "sha256": "63bc5990178ebf39d5000f805baa670e49f98a9010dadf3ef6d44256fb31a84c",
+      "bytes": 920
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTLcaSparseTable.class",
+      "sha256": "a71d4bd35b8f2e0a6955b05012970051770dca955b64dd4b1fcabb8345b9b920",
+      "bytes": 6569
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTOccurrenceSource.class",
+      "sha256": "5756f033005db3f60b46c644e063e864c87b0ca9b39dc49319a93f3f345cf5f5",
+      "bytes": 644
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTParser$Builder.class",
+      "sha256": "a19757ddb17fb748b222825fb1593e19418a540cf012cd83f97997ef383ac04c",
+      "bytes": 6082
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTParser$BuildResult.class",
+      "sha256": "d2a714ea5a567351e44855e46bef210b736cabeee7da5f5c954efc40d8beefde",
+      "bytes": 1477
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTParser$Frame.class",
+      "sha256": "1cbe43a3b7989d293556ee906c5ce1f6402dd00759ba92d4e91df46813a44d19",
+      "bytes": 1007
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTParser$OccurrenceBuilder.class",
+      "sha256": "8d91cf15ff374c482ab1f2e4dbfb64b74f34f0678ad16d08a58e83d27b279faa",
+      "bytes": 2336
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTParser$SourceFile.class",
+      "sha256": "3c680e12e14a201bf41c2a2669abd6d812e3942fe866df4a6ec771f700408e1a",
+      "bytes": 1789
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTParser.class",
+      "sha256": "71c245c78856287ec5e71d6b9d18a2d3b03a016bd15021bec5401754a767508a",
+      "bytes": 6786
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTPool$1.class",
+      "sha256": "ea5039d0a3b14b47ccb60c6245b501be6d570b8355eb8ecef93000472aeb6a42",
+      "bytes": 894
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTPool$Comparison$1.class",
+      "sha256": "7e205401005de54e72e99ed87a2785991743a80e79bda4397e34d4f5000e673d",
+      "bytes": 781
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTPool$Comparison$2.class",
+      "sha256": "6b9510fb5b35f0a9da865ed8366f5df686120ed9838f242c7983c88955eb8b85",
+      "bytes": 786
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTPool$Comparison$3.class",
+      "sha256": "b362df120bd40e7279bc8a5773c4698b1568ddfed2bf15d4088f046a2fb8bf6d",
+      "bytes": 815
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTPool$Comparison.class",
+      "sha256": "dd0afac3ed21b4849fbbac5c7b0336112d0d1918ef5ed9eb0e6a151971f61585",
+      "bytes": 1767
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTPool.class",
+      "sha256": "c5d7ac6f2209f7652103d70fedffae0a2c66196d5ae00d489cf451c130382c01",
+      "bytes": 18681
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTPoolPrecompute$HashKind.class",
+      "sha256": "a09c14f439a3f4c591811a7aaa2bfe6c632ec45f7993253907ab6ecd3340ef98",
+      "bytes": 1378
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTPoolPrecompute$IdentityKey.class",
+      "sha256": "045796248dda8bab4e5debbc5f6b324c94dc45d2f36ad8c7b4db03c0d42d90e7",
+      "bytes": 1341
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTPoolPrecompute$Snapshot.class",
+      "sha256": "7096fb21b0f392fa89970e3434e6d5bd41203c17a222ddeeb67cc2eaa643b8d1",
+      "bytes": 3192
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTPoolPrecompute$Source.class",
+      "sha256": "559555d5e281a3c88bba0e71e8b27efe123a3f6910ba1ad2c94715763049fd6a",
+      "bytes": 1624
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTPoolPrecompute.class",
+      "sha256": "3703647b5e996645efaf096f65d4c875dc2c514491355178a4e3a7c9cc770898",
+      "bytes": 16540
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTPrecompute$IntKey.class",
+      "sha256": "2a121140367e9ac03c6b45eae2571c417e173be6afc92b0d39b5954f0e16bc36",
+      "bytes": 361
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTPrecompute$Snapshot.class",
+      "sha256": "51882013ef8811ba7eefabc61e41d65d836b2288de7a7539a441d8dc830911d3",
+      "bytes": 1924
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTPrecompute.class",
+      "sha256": "254f984371f57e15bed071b29b513c5902159412052770fb601a24300f6f3793",
+      "bytes": 14192
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTPrecomputeTest$Fixture.class",
+      "sha256": "e8cfc374b9e7c0a55ce9ee29fcafc7b7fbb48219b5ce6fc6820b09a1e8ad93fb",
+      "bytes": 1759
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTPrecomputeTest.class",
+      "sha256": "8c09f0dd92b9dee310aca108d6339ee465796b1e9e865f26c258ec71e5d8978d",
+      "bytes": 11112
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTQuery$Builder.class",
+      "sha256": "70e62861c8392b81cde98cf5aa7e2c15f74bf09ea21ac7359741f252b7fb576f",
+      "bytes": 4292
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTQuery.class",
+      "sha256": "a8ffbc04e7698e73b4cbecb3f79e2e4eecb7fe15f93c97d2d07d356b2d9ed00a",
+      "bytes": 4525
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTReuseKey$Candidate.class",
+      "sha256": "a5dbb9b28af1c39c51c9b4f6eb3fdc3b64ad7e5b826c9ef7e679f4ad2529309b",
+      "bytes": 1456
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTReuseKey$Side.class",
+      "sha256": "c8d39e405d16d403f6efe688da8629b50fcc7a553d53ab0b3b143f3ef178be2e",
+      "bytes": 1244
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTReuseKey.class",
+      "sha256": "0538ffc423a9acccaf26f25b1076df94c34dc5fa5c0afb7c638771ff93a3763f",
+      "bytes": 5313
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTSourceIndex$Payload.class",
+      "sha256": "37917ffe720fe54686ffc5f9b2f43c82cf6d7445f8393c49a670643a91dfdcdb",
+      "bytes": 1816
+    },
+    {
+      "path": "target/ast-original-oracle-v2/classes/com/synexia/indexstring/ast/MIndexASTSourceIndex.class",
+      "sha256": "5a48a5d1aaee65eb3bff72c90a4b784fd620d862160b2be3a0afd4e9e362c624",
+      "bytes": 5346
+    }
+  ],
+  "inheritedClassesBeforeAfterMatched": 2440,
+  "originalLibrariesBeforeAfterMatched": 64,
+  "sourceBodiesBeforeAfterMatched": 16,
+  "javaFeature": 21,
+  "actualMavenJdkVersion": "21.0.9",
+  "strictCompilerArguments": [
+    "--release21",
+    "-proc:none",
+    "-Xlint:all",
+    "-Werror",
+    "empty-sourcepath"
+  ],
+  "limits": {
+    "processors": 2,
+    "heapMiB": 256,
+    "newOutputCapMiB": 16,
+    "reserveGiB": 8
+  },
+  "runtimeCoverage": "Existing occurrence intervals, binary lifting/LCA, path hash and postings donor test only; original AST sources compiled over sealed inherited host; target wiring, source-complete portability, cold-image restore, JNI/native provider and performance remain unproved."
+}

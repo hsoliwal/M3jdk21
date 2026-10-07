@@ -146,7 +146,7 @@ public final class SynexiaImportPlan {
                 }
                 previous = row.targetPath();
             }
-            String expected = SynexiaImportPlan.root(sourceRevision, manifestRoot, rows);
+            String expected = root(sourceRevision, manifestRoot, rows);
             root = root == null || root.isBlank() ? expected : sha(root, "root");
             if (!root.equals(expected)) {
                 throw new IllegalArgumentException("Synexia import plan root mismatch");
