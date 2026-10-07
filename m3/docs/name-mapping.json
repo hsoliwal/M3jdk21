@@ -7659,6 +7659,14 @@
     "source_lock_commit": "5fb52a051fa0e2722c2f69f2e22ac7f330c91ce2",
     "source_lock_blob": "0230b1a0864266d9243c161f7541c01492c9626e",
     "executable_verifier_implementation_blob": "5129fe4f7367486496f028a4d0339b84998cf7a0",
-    "executable_verifier_declarative_blob": "a4e7a9f358f19be12109a39281882cb0b937db94"
+    "executable_verifier_declarative_blob": "a4e7a9f358f19be12109a39281882cb0b937db94",
+    "history_convergence_recipe": "com.synexia.rewrite.M3Jdk21StringHistoryConvergence",
+    "history_convergence_descriptor": "synexia-openrewrite-recipes/src/main/resources/META-INF/rewrite/m3jdk21-string-history-convergence.yml",
+    "history_convergence_task_crate": "synexia-m3-recipe/task-crates/m3jdk21-string-history-convergence-20261007.yaml",
+    "history_convergence_ledger": "synexia-indexstring/recipes/m3jdk-string-canonical-dag-20261006/HISTORY-CONVERGENCE.tsv",
+    "history_convergence_review_pr": "hsoliwal/com.synexia#9668",
+    "history_convergence_review_head": "5b2cbde34976ff5fe8bf6275bfbd9c58de6c34b0",
+    "absorbed_product_evidence": "hsoliwal/M3jdk21#153@b11611609d378abba3a8a9e10edf9839a5c5676a",
+    "runtime_dependency_rule": "M3JDK21 must not depend on Synexia at runtime; Synexia owns portable recipe/provenance only."
   }
 }
