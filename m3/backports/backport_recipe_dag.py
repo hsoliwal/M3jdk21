@@ -398,6 +398,9 @@ def _work_ref(atom: Atom) -> str:
 
 def write_packets(atoms: Sequence[Atom], directory: Path) -> list[tuple[str, str, Path]]:
     directory.mkdir(parents=True, exist_ok=True)
+    for stale in directory.glob("*.tsv"):
+        if stale.is_file():
+            stale.unlink()
     grouped: dict[str, list[Atom]] = {}
     for atom in atoms:
         if atom.executable:
