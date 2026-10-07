@@ -226,7 +226,7 @@ class JepResidueTest(unittest.TestCase):
         )
         self.assertEqual("NOT_AUTHORIZED", by_jep[497].promotion)
         self.assertEqual(
-            "PROVE_JEP496_SHAKE_RECIPE_BUILD_FIPS204_SECURITY_JTREG_FIXED_POINT_READBACK",
+            "FAN_IN_PR285_PROVE_JEP496_SHAKE_A3_BUILD_FIPS204_SECURITY_JTREG_FIXED_POINT_READBACK",
             by_jep[497].receipt_next_action,
         )
         self.assertEqual("MATERIALIZED_PACKET", by_jep[510].evidence_state)
