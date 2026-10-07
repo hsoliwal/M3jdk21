@@ -187,20 +187,65 @@ def _candidate_atoms(
 
 
 def compile_jep_rows(
-    rows: Iterable[Mapping[str, str]], recipes: Path
+    rows: Iterable[Mapping[str, str]],
+    recipes: Path,
+    residue_rows: Iterable[Mapping[str, str]] | None = None,
 ) -> list[Atom]:
+    source_rows = list(rows)
+    residue = {
+        f"JEP-{row['jep']}": row
+        for row in (residue_rows or ())
+    }
+    source_order = {
+        f"JEP-{row['jep']}": index
+        for index, row in enumerate(source_rows)
+    }
+    residue_order = {
+        work_id: int(row["order"])
+        for work_id, row in residue.items()
+    }
+    source_rows.sort(
+        key=lambda row: (
+            0 if f"JEP-{row['jep']}" in residue_order else 1,
+            residue_order.get(
+                f"JEP-{row['jep']}",
+                source_order[f"JEP-{row['jep']}"],
+            ),
+            int(row["release"]),
+            int(row["jep"]),
+        )
+    )
+
     atoms: list[Atom] = []
     order = 0
-    for row in rows:
+    for row in source_rows:
         work_id = f"JEP-{row['jep']}"
         refs = _recipe_refs(recipes, work_id)
+        residue_row = residue.get(work_id)
+        reason = row["reason"]
+        if residue_row is not None:
+            next_action = (
+                residue_row.get("receipt_next_action", "").strip()
+                or residue_row.get("next_action", "").strip()
+            )
+            evidence = residue_row.get("evidence_state", "").strip()
+            receipt = residue_row.get("receipt_state", "").strip()
+            promotion = residue_row.get("promotion", "").strip()
+            parts = [next_action or reason]
+            if evidence:
+                parts.append(f"evidence={evidence}")
+            if receipt:
+                parts.append(f"receipt={receipt}")
+            if promotion:
+                parts.append(f"promotion={promotion}")
+            reason = "; ".join(parts)
         for phase, scope, state, executable, depends_on, atom_reason in _candidate_atoms(
             work_id=work_id,
             source_kind="JEP",
             title=row["title"],
             disposition=row["disposition"],
             domain=row["domain"],
-            reason=row["reason"],
+            reason=reason,
             recipe_refs=refs,
         ):
             atom_id = f"{work_id.lower().replace('-', '_')}.{phase.lower()}"
@@ -296,7 +341,13 @@ def compile_community_rows(
 def compile_root(root: Path) -> list[Atom]:
     backports = root / "m3" / "backports"
     recipes = backports / "recipes"
-    atoms = compile_jep_rows(_rows(backports / "JEP_CATALOGUE.tsv"), recipes)
+    residue_path = backports / "JEP_RESIDUE_QUEUE.tsv"
+    residue_rows = _rows(residue_path) if residue_path.is_file() else []
+    atoms = compile_jep_rows(
+        _rows(backports / "JEP_CATALOGUE.tsv"),
+        recipes,
+        residue_rows,
+    )
     seeds = compile_seed_rows(
         _rows(backports / "UPSTREAM_CHANGE_SEEDS.tsv"), recipes, len(atoms)
     )
