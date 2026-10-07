@@ -38,3 +38,20 @@ third-party code are never relicensed by this handoff. Abstract algorithms/ideas
 not an ownership claim over non-copyrightable subject matter.
 
 No source materialization or JDK product admission follows from this ownership pin alone; target build/runtime proof remains independent.
+
+## Full-family authority readback
+
+The original full-family inventory/provenance authority was merged in Synexia PR #9648 at
+`b24262a92b741c78c44ca61afc8dac7ee1376d8a`.
+
+Because the reviewed manifest/catalogue files later disappeared from visible `develop`, current
+authority recovery is tracked separately rather than rewriting provenance:
+
+- recovery PR: Synexia #9677;
+- recovery commit: `73c5e9335b821270d04f2b6912c62fc279a0ba9f`;
+- recovery rule: exact #9648 Git blobs only; no production MIndex/M3Index source changes.
+
+The receiver keeps both identities: #9648 proves original review/provenance; #9677 restores those
+same authority bytes to the current source line. Neither grants automatic application of the
+4,770-path inventory.
+
