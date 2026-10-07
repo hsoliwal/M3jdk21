@@ -15,8 +15,7 @@ Allowed target-local content:
 - target-specific Maven/OpenRewrite activation glue;
 - JUnit/jtreg/proof harnesses.
 
-Historical reusable implementations under `scope/`, `atom/`, `semantic/` and `a3/`
-are migration residue. Their reusable authority is mapped by
+Historical reusable implementations under `scope/`, `atom/` and `a3/` remain migration residue. The former local `com.m3.rewrite.semantic` implementation layer has been retired; target semantic-hash proofs now execute the qualified `com.synexia.rewrite.semantic` mirror. Their reusable authority is mapped by
 `m3/compatibility/synexia-recipe-home-policy.tsv` and
 `.m3/m3jdk21-synexia-borrowing.tsv` in the canonical Synexia repository.
 
