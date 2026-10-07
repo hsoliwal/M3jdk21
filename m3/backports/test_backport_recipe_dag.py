@@ -191,6 +191,56 @@ class BackportRecipeDagTest(unittest.TestCase):
             self.assertFalse(community[0].executable)
             self.assertEqual("COMMUNITY_REVIEW", community[0].proof_lane)
 
+    def test_executable_work_items_emit_small_canonical_packet_tsvs(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            self.fixture(root)
+            atoms = self.mod.compile_root(root)
+            self.mod.validate(atoms)
+            packet_dir = root / "target" / "packets"
+            packets = self.mod.write_packets(atoms, packet_dir)
+            index = root / "target" / "index.tsv"
+            self.mod.write_packet_index(packets, index)
+
+            packet_names = {path.name for _, _, path in packets}
+            self.assertIn("jep-423.tsv", packet_names)
+            self.assertIn("jep-484.tsv", packet_names)
+            self.assertIn("jdk-9000001.tsv", packet_names)
+            self.assertIn("jdk-9000002.tsv", packet_names)
+            self.assertNotIn("jep-511.tsv", packet_names)
+            self.assertNotIn("jep-461.tsv", packet_names)
+            self.assertFalse(any(name.startswith("m3-bpt-community") for name in packet_names))
+
+            j423 = (packet_dir / "jep-423.tsv").read_text(encoding="utf-8").splitlines()
+            self.assertEqual(
+                "packet_id\tatom_id\tscope\tscope_promotion_approved\twork_ref\tdepends_on",
+                j423[0],
+            )
+            parsed = [line.split("\t") for line in j423[1:]]
+            self.assertEqual(
+                ["inventory", "recipe", "compile", "test", "runtime-parity", "fixed-point"],
+                [row[1] for row in parsed],
+            )
+            self.assertTrue(all(row[2] == "MULTI_MODULE" for row in parsed))
+            self.assertTrue(all(row[3] == "true" for row in parsed))
+            self.assertEqual("", parsed[0][5])
+            self.assertEqual("inventory", parsed[1][5])
+            self.assertEqual("recipe", parsed[2][5])
+            self.assertEqual(
+                "m3/backports/recipes/jep-423-region-pinning",
+                parsed[1][4],
+            )
+
+            j484 = (packet_dir / "jep-484.tsv").read_text(encoding="utf-8").splitlines()
+            recipe_row = [line.split("\t") for line in j484[1:] if "\trecipe\t" in line][0]
+            self.assertEqual("AUTHOR_RECIPE:JEP-484", recipe_row[4])
+            self.assertEqual("MODULE", recipe_row[2])
+            self.assertEqual("true", recipe_row[3])
+
+            index_text = index.read_text(encoding="utf-8")
+            self.assertIn("JEP-423\tMATERIALIZED_RECIPE\tjep-423.tsv", index_text)
+            self.assertIn("JEP-484\tAUTHOR_RECIPE\tjep-484.tsv", index_text)
+
     def test_current_repository_packets_are_recognized_without_duplicate_authoring(self) -> None:
         root = Path(__file__).resolve().parents[2]
         atoms = self.mod.compile_root(root)
