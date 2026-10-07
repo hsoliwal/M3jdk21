@@ -49,9 +49,6 @@ class Jep493GaPolicyTest(unittest.TestCase):
         )
         self.assertEqual(47, len(selected) + len(exclusions))
 
-        upstream = tsv_dict(PACKET / "UPSTREAM_COMMIT.tsv")
-        # UPSTREAM_COMMIT.tsv is a row table, not field/value; validate explicitly below.
-        self.assertTrue(upstream)
 
     def test_upstream_and_composition_counts_stay_at_47(self) -> None:
         with (PACKET / "UPSTREAM_COMMIT.tsv").open(
