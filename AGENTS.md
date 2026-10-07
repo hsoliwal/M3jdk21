@@ -38,3 +38,13 @@ target delivery; retain pending gates and partial coverage explicitly.
 Read `m3/compatibility/synexia-full-family-pin.tsv`, `m3/docs/synexia-full-family-catalogue.json`, and the M3-SYNEXIA-RECEIVER-1 section of the canonical porting invariant before MIndex*/String/AST/precompute work. The pinned Synexia source catalogue covers4,770namedpaths within13checkedroots and keeps every row unevaluated until exact target evidence exists. Carry the whole canonical String/data-structure/AST/static-regex lineage forward; representative tables or the literal replacement atom do not prove full receiving parity. Preserve Apache-2.0 Synexia first-party attribution, `Copyright 2026 Hitesh Soliwal and contributors`, and per-file third-party/OpenJDK licensing.
 
 Repository policy distinguishes the copyrighted first-party work from abstract ideas: Synexia-original implementation/source, recipes, tests, fixtures, original expressive design documentation, manifests/schemas and original generated configuration retain `Copyright 2026 Hitesh Soliwal and contributors` and Apache-2.0; abstract ideas/algorithms/concepts/methods are not relabeled as copyrighted source expression. Third-party/OpenJDK rights remain unchanged.
+
+## Remember the ordered M3JDK21 receiving invariant
+
+**String -> arrays -> collections -> AST/compiler -> remaining families.** Read `m3/docs/m3jdk21-porting-invariant.md`
+and its existing machine plan before each continuation. String qualification is the active stage;
+no phase advances from a donor test, catalogue count, copied snapshot or merge alone. Preserve
+public JDK contracts, one canonical payload owner, original copyright/Apache-2.0 expression and
+per-file OpenJDK/third-party rights. Implement each change through the Synexia-owned recipe and
+record target evidence or an explicit pending/excluded disposition. Repository policy, not chat
+memory, carries this invariant into every later task.
