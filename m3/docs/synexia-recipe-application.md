@@ -190,3 +190,55 @@ runtime_dependency_on_synexia	false
 target_recipe_disposition	THIN_RECEIVER_ONLY
 verification_status	SYNEXIA_LITERAL_SPLIT_PACKET_6_OF_6_TARGETS_BLOB_MATCHED
 ```
+
+
+## Current canonical M3 String recipe packet — PR #9693
+
+This section supersedes the earlier String-history custody/receiver-refresh receipts above. Those
+sections remain as append-only provenance.
+
+Canonical Synexia owner:
+
+- repository: `hsoliwal/com.synexia`
+- PR: https://github.com/hsoliwal/com.synexia/pull/9693
+- branch: `m3/m3jdk21-string-recipe-canonical-20261007`
+- pinned recipe revision: `3a5465731b20ab42c5ad70f364604fa2e8176ef8`
+- named recipe: `com.synexia.rewrite.M3Jdk21StringHistoryConvergence`
+
+Applied M3JDK21 recipe-target state:
+
+`a21cf6c4a833d659fd985319479197c10f9da443`
+
+The canonical packet now seals:
+
+- **20/20 Java/runtime/test targets**;
+- **11/11 text/native/HotSpot/workflow targets**;
+- **31/31 total postimage targets**, byte-identical by cross-repository Git blob readback.
+
+The Java packet now explicitly includes the separately bounded
+`M3StringCodePointPrecompute.java` owner as an `ABSENT`-before target, alongside the existing
+String facts, search/position precompute, regex TQ, builder interop, intern and native encoding
+proofs.
+
+Manifest identities:
+
+```text
+synexia_java_manifest	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-string-history-convergence/manifest.tsv
+synexia_java_manifest_sha256	b9cd598246c79ea684a9a60f680eea88034b2623ca8964f0eca05487b39cdcd5
+synexia_text_manifest	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-history-convergence/manifest.tsv
+synexia_text_manifest_sha256	67be97d656394be001c70875c21d4348fc5361c89f7d14cc24999888df807720
+```
+
+Application mode is `FIXED_POINT_NO_SOURCE_DELTA`: by the time custody was refreshed, the
+M3JDK21 product tree already matched every reviewed Synexia postimage. The application therefore
+proved exact fixed point rather than rewriting the runtime a second time.
+
+M3JDK21 retains only:
+
+- the applied Java/HotSpot/JNI/native product implementation;
+- target-native source/runtime/jtreg verification;
+- `m3/runtime-integration/m3-string-synexia-recipe-application.tsv` as the machine receipt.
+
+The former target-local String-history recipe descriptor, sealed Java/text crates and local
+fixed-point recipe test are absent. Reusable recipe evolution remains in Synexia. Runtime M3 String
+precompute remains entirely inside M3JDK21; this creates no Synexia runtime dependency.
