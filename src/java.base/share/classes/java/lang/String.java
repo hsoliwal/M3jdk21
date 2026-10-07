@@ -4818,8 +4818,9 @@ public final class String
      */
     @Override
     public IntStream chars() {
-        if (m3() != null) {
-            return CharSequence.super.chars();
+        M3String storage = m3();
+        if (storage != null) {
+            return storage.charsStream();
         }
         return StreamSupport.intStream(
             isLatin1() ? new StringLatin1.CharsSpliterator(value(), Spliterator.IMMUTABLE)
@@ -4841,8 +4842,9 @@ public final class String
      */
     @Override
     public IntStream codePoints() {
-        if (m3() != null) {
-            return CharSequence.super.codePoints();
+        M3String storage = m3();
+        if (storage != null) {
+            return storage.codePointsStream();
         }
         return StreamSupport.intStream(
             isLatin1() ? new StringLatin1.CharsSpliterator(value(), Spliterator.IMMUTABLE)
