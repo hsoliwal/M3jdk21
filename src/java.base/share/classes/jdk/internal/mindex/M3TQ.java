@@ -319,10 +319,27 @@ public final class M3TQ {
      * Returns true when every exact trigram in {@code required} is present in this fact set.
      *
      * <p>This is still only a substring/regex necessary condition: membership discards ordering
-     * and multiplicity, so true always requires exact verification.</p>
+     * and multiplicity, so true always requires exact verification. Sparse requirements use
+     * O(m log n) membership lookups; dense requirements retain the O(n + m) merge. Neither
+     * path allocates metadata or reads the original payload.</p>
      */
     public boolean containsAll(Facts required) {
       Objects.requireNonNull(required, "required");
+      if (this == required || required.keys.length == 0) return true;
+      if (keys.length < required.keys.length) return false;
+
+      // Sparse requirements should not walk an entire prepared source set. The
+      // conservative cost estimate leaves dense requirements on the merge path.
+      int searchDepth = Integer.SIZE - Integer.numberOfLeadingZeros(keys.length);
+      if (2L * required.keys.length * searchDepth < keys.length) {
+        // Preserve constant work for the common first-key singleton hit.
+        if (required.keys.length == 1 && keys[0] == required.keys[0]) return true;
+        for (long key : required.keys) {
+          if (Arrays.binarySearch(keys, key) < 0) return false;
+        }
+        return true;
+      }
+
       int source = 0;
       int needle = 0;
       while (source < keys.length && needle < required.keys.length) {
