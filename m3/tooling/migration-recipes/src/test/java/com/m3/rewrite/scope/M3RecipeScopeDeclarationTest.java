@@ -21,6 +21,7 @@ import com.m3.rewrite.backport.M3Jep485StreamGatherersBackportRecipe;
 import com.m3.rewrite.backport.M3Jep496MlKemBackportRecipe;
 import com.m3.rewrite.backport.M3Jep497MlDsaBackportRecipe;
 import com.m3.rewrite.backport.M3Jdk8338587ShakeXofBackportRecipe;
+import com.m3.rewrite.backport.M3Jdk8357439JcmdCompletionBackportRecipe;
 import com.m3.rewrite.backport.M3Jep510KdfBackportRecipe;
 import com.m3.rewrite.backport.M3Jep510KdfSecurityTestsRecipe;
 import com.m3.rewrite.backport.M3Jep510KdfCandidateRecipe;
@@ -35,7 +36,7 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(24, M3RecipeScopeRegistry.size());
+        assertEquals(25, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered("org.openrewrite.java.RemoveUnusedImports"));
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
@@ -53,6 +54,7 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3Jep458BackportRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jep485StreamGatherersBackportRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jdk8338587ShakeXofBackportRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3Jdk8357439JcmdCompletionBackportRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jep496MlKemBackportRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jep497MlDsaBackportRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jep510KdfBackportRecipe.class.getName()));
@@ -83,6 +85,13 @@ final class M3RecipeScopeDeclarationTest {
         var shake = M3RecipeScopeRegistry.require(M3Jdk8338587ShakeXofBackportRecipe.class);
         assertEquals(M3EditScope.MODULE, shake.minimumScope());
         assertEquals(M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING, shake.contractMode());
+
+        var jcmd = M3RecipeScopeRegistry.require(M3Jdk8357439JcmdCompletionBackportRecipe.class);
+        assertEquals(M3EditScope.MODULE, jcmd.minimumScope());
+        assertEquals(M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING, jcmd.contractMode());
+        assertFalse(jcmd.fileLocalMechanical(List.of(
+                "make/modules/jdk.jcmd/Copy.gmk",
+                "src/jdk.jcmd/share/conf/bash-completion/jcmd")));
 
         var kdfTests = M3RecipeScopeRegistry.require(M3Jep510KdfSecurityTestsRecipe.class);
         assertEquals(M3EditScope.MODULE, kdfTests.minimumScope());
@@ -182,6 +191,7 @@ final class M3RecipeScopeDeclarationTest {
                 M3PureIntConvergenceRecipe.class,
                 M3Java21ConvergenceRecipe.class,
                 M3ReleaseJepAuthorityRepairRecipe.class,
+                M3Jdk8357439JcmdCompletionBackportRecipe.class,
                 M3SynexiaImportInventoryRecipe.class)) {
             assertEquals(
                     M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING,
