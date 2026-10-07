@@ -1,0 +1,47 @@
+name: M3 JEP 454 FFM inventory
+
+on:
+  push:
+    branches:
+      - "m3/jep454-ffm-*"
+    paths:
+      - "m3/backports/recipes/jep-454-ffm/**"
+      - "m3/backports/JEP_RESIDUE_QUEUE.tsv"
+      - "m3/backports/PROGRAM_STATUS_2026-10-07.md"
+      - ".github/workflows/m3-jep454-ffm-inventory.yml"
+  pull_request:
+    paths:
+      - "m3/backports/recipes/jep-454-ffm/**"
+      - "m3/backports/JEP_RESIDUE_QUEUE.tsv"
+      - "m3/backports/PROGRAM_STATUS_2026-10-07.md"
+      - ".github/workflows/m3-jep454-ffm-inventory.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate JEP 454 packet
+        run: python3 m3/backports/recipes/jep-454-ffm/validate_inventory.py
+
+      - name: Run refusal tests
+        run: python3 -m unittest -v m3/backports/recipes/jep-454-ffm/test_validate_inventory.py
+
+      - name: Diff hygiene
+        run: git diff --check
+
+      - name: Confirm no JDK product source is changed by this inventory PR
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="$(git merge-base origin/master HEAD)"
+          test -z "$(git diff --name-only "$base"...HEAD -- src make test | grep -v '^m3/' || true)"
