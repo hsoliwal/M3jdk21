@@ -29,7 +29,7 @@ This repairs four false current-master materialization claims:
 | --- | --- | --- |
 | 423 | PACKET_EVIDENCE | inventory/cumulative-materialization control packet, no current-tree receipt |
 | 484 | PACKET_EVIDENCE | custody/path-map packet, no current-tree receipt |
-| 485 | PACKET_EVIDENCE | gatherer packet/recovery evidence, no current-tree receipt in current tree |
+| 485 | MATERIALIZED_PACKET | seven current Stream/Gatherer product blobs match the reviewed CURRENT_PRODUCT.tsv manifest; executable proof remains pending |
 | 523 | MATERIALIZED_PACKET | current-tree receipt proves reviewed product/test postimages are already present; runtime/build proof remains pending |
 
 No compatibility decision changes.
@@ -95,3 +95,22 @@ receiver. Nebula/Synexia proof does not waive JDK-specific configure/build/jtreg
 7. rerun the residue generator after every receipt/materialization change.
 
 The queue, not conversation order, remains the scheduling authority.
+
+
+### JEP 485 current product receipt
+
+Current master Git-object readback proves all seven product owners in
+`m3/backports/recipes/j485/CURRENT_PRODUCT.tsv` match exactly:
+
+- `Gatherer.java`
+- `GathererOp.java`
+- `Gatherers.java`
+- `AbstractPipeline.java`
+- `ReferencePipeline.java`
+- `Stream.java`
+- `package-info.java`
+
+The new `CURRENT_TREE_RECEIPT.tsv` therefore classifies JEP 485 as
+`CANDIDATE_MATERIALIZED_UNVERIFIED`. This is an opt-in SE API extension, not stock Java 21
+identity. Recipe replay, JDK image build, Gatherer jtreg, existing Stream regressions, API smoke,
+and fixed-point/readback remain pending. Promotion remains `NOT_AUTHORIZED`.
