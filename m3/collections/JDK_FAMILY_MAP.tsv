@@ -3,7 +3,7 @@ ArrayList	M3LongArrayList	RECEIVER_UNION_V2	contiguous long[]	single owner uniti
 LinkedList	M3LongLinkedList28	EXISTING_PROVING_BACKEND	stable segmented handles + primitive link lanes	not a java.util.LinkedList replacement
 HashSet	M3LongHashSet	RECEIVER_CANDIDATE_V1	open addressing + byte occupancy	all long keys including zero/extrema
 HashMap	M3LongLongHashMap	RECEIVER_CANDIDATE_V1	parallel primitive key/value lanes + open addressing	all long keys/values; no per-entry node
-ArrayDeque	M3LongArrayDeque	RECEIVER_CANDIDATE_V1	power-of-two primitive ring	ordered double-ended semantics
+ArrayDeque	M3LongArrayDeque	RECEIVER_UNION_V2	power-of-two circular long[]	single owner uniting JDK-shaped v1 and Synexia LongDeque lineage (M3LongDeque/M3LongQueue); java.util.ArrayDeque remains authority
 PriorityQueue	M3LongPriorityQueue	RECEIVER_CANDIDATE_V1	primitive binary min-heap	natural long order
 BitSet	M3BitLane28 / M3ConcurrentBitSet	EXISTING_PROVING_BACKEND	segmented bit lane / atomic bitset	consumer-specific
 ConcurrentHashMap	M3ConcurrentLongMap	EXISTING_LIMITED_BACKEND	immutable snapshot publication	read-heavy small/medium envelope; not CHM semantic replacement
