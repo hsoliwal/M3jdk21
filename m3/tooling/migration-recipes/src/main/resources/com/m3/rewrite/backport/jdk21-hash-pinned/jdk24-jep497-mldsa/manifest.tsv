@@ -1,0 +1,9 @@
+# JEP 497 ML-DSA exact Java21 receiver crate
+# path\tbeforeSha256|ABSENT\tafterSha256\tresource
+src/java.base/share/classes/java/security/spec/NamedParameterSpec.java\t94f7dfa39c66e5ab47d1994aa73b01f02c5101738513bad054aa77b8846b449b\te64cd1b03f52c374d1e4b18ebc28cb285b7bc34f6ae4096bef59702279ff3ba9\t00-NamedParameterSpec.java.after.txt
+src/java.base/share/classes/sun/security/provider/ML_DSA.java\tABSENT\t577afee3679beeedfa40b51557ced5902bc514effebe98b9d711d4d82278cb1e\t01-ML_DSA.java.after.txt
+src/java.base/share/classes/sun/security/provider/ML_DSA_Impls.java\tABSENT\t2b6c5a8d6dda44b6ee31562b14e0831ad5d45140196728eb801b554ba95df6d3\t02-ML_DSA_Impls.java.after.txt
+src/java.base/share/classes/sun/security/provider/SunEntries.java\tc8845b790158a7a429133334bb1a1593500b3646d08b83d092fcbce5688bf1fe\t6f0f2d3d639c556c26b1a76f29297a3a70bf8d01446c07b695df6c3f28e9d8b8\t03-SunEntries.java.after.txt
+src/java.base/share/classes/sun/security/util/KnownOIDs.java\te4b61ecd0e6a82758e46592258b97625a61f891476adc4fd3640fd428dcdc583\t1bcc8459563b5955bebecf8f888fe69fabcd0079da7287d2aed9aab48177d764\t04-KnownOIDs.java.after.txt
+test/jdk/sun/security/provider/ML_DSA/MLDSADeterministic.java\tABSENT\t65e5ffe2139db4c7744f4cabaaa0efe64a9d3b2661614c374e081188bb74439e\t05-MLDSADeterministic.java.after.txt
+test/jdk/sun/security/provider/ML_DSA/MLDSAProviderSmoke.java\tABSENT\t532bac9c5e74a1be847f2ba9e40ee3243d78307c5784a2b291a18164718381c3\t06-MLDSAProviderSmoke.java.after.txt
