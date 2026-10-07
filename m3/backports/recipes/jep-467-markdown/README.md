@@ -11,8 +11,12 @@ Status: inventory / dependency-closure. No product-backport completion claim.
 - JDK 23 GA tag: `jdk-23+37`
 - JDK 23 GA commit: `9ad2e63f176364b96a827af80055e7db4b61fc9a`
 
-The implementation commit defines the path denominator. GA is a follow-up review source, not automatic
-replacement authority: each path must distinguish feature follow-ups from unrelated later changes.
+The implementation commit defines the immutable **251-path** denominator. One touched path,
+`TestGetDocComments.java`, is a deletion that is already absent in both the Java 21 baseline and
+JDK 23 GA. It is therefore evidence-only, not a file to recreate. The GA materialization set is the
+remaining **250 paths**, recorded separately in `MATERIALIZATION_PATHS.txt`.
+GA is a follow-up review source, not automatic replacement authority: each path must distinguish
+feature follow-ups from unrelated later changes.
 
 ## Compatibility boundary
 
@@ -43,14 +47,15 @@ upstream license before any materialization.
 
 ## Required next pass
 
-1. compare each of the 251 implementation paths against JDK21 and JDK23 GA;
-2. classify GA changes after the implementation commit as feature-related or unrelated;
-3. generate one exact Java/text FILE recipe atom per admitted target;
-4. explicitly review additive public compiler/doc-tree API;
-5. verify the vendored Markdown module legal/provenance boundary;
-6. compose the smallest honest LIBRARY_API packet;
-7. build `jdk.compiler`, `jdk.javadoc`, `jdk.internal.md`;
-8. run JEP467 Markdown/javac/javadoc langtools plus existing doc-comment regressions;
-9. prove second-pass fixed point;
+1. prove the exact 251-path implementation denominator;
+2. classify it as 250 GA-materializable paths plus one already-absent deletion evidence atom;
+3. compare each materializable path against JDK21 and JDK23 GA and classify feature follow-ups;
+4. generate one exact Java/text FILE recipe atom per admitted GA target;
+5. explicitly review additive public compiler/doc-tree API;
+6. verify the vendored Markdown module legal/provenance boundary;
+7. compose the smallest honest LIBRARY_API packet;
+8. build `jdk.compiler`, `jdk.javadoc`, `jdk.internal.md`;
+9. run JEP467 Markdown/javac/javadoc langtools plus existing doc-comment regressions;
+10. prove second-pass fixed point;
 10. promote only after exact-head receipts.
 
