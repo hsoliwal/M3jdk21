@@ -216,6 +216,32 @@ JNI/runtime correctness or acceptance of any retained capability. Those independ
 remain with their existing owners. Retiring or replacing inherited obligations needs a separately
 reviewed contract transition; this extension does not implement a waiver or retirement mode.
 
+## Reviewed control/evidence retention
+
+`RETAINED_CAPABILITIES.tsv` remains reserved for promoted product capabilities. Candidate packets
+are not added there and no evidence row is allowed to imply product acceptance.
+
+`RETAINED_EVIDENCE.tsv` is a separate catalogue for reviewed backport control/evidence that must
+remain present while a candidate is unresolved. It reuses the same read-only `retention.py` engine
+and the same immutable baseline/all-parent semantics, but its meaning is narrower:
+
+- `RETAINED_EXACT` means the reviewed evidence file still matches the pinned witness;
+- `PRESENT_DRIFTED_REVIEW` means the evidence evolved and must be reviewed;
+- `MISSING` is a failing regression because merged review/provenance vanished from the current tree.
+
+Evidence retention grants **no** compatibility, semantic-equivalence, source-mutation, build/test,
+runtime, JNI/native-execution, or promotion authority. A candidate can remain unverified forever and
+still have a retention obligation for its reviewed packet.
+
+The first evidence obligations cover the current JEP 467 and JEP 493 control packets. Their
+retention manifests use the existing four-column manifest reader only as an immutable
+`path -> expected SHA-256` declaration; the `EVIDENCE` / `retention-only` cells are descriptive
+and are not OpenRewrite recipe input.
+
+The repository workflow runs the exact same Maven/Python audit twice with different catalogues and
+separate output directories. This prevents the failure mode where a merged candidate packet remains
+reachable in Git ancestry while its current-tree evidence silently disappears.
+
 ## Recovery/patternization order
 
 Read `ATOM_PLAN.tsv`. First establish the exact candidate/target contract and
