@@ -8,6 +8,11 @@ on:
       - "m3/compatibility/synexia-apache-handoff-pin.tsv"
       - "m3/compatibility/check_synexia_public_target.py"
       - "m3/compatibility/test_synexia_public_target_policy.py"
+      - "m3/docs/synexia-mindex-precompute-inventory.tsv"
+      - "m3/docs/synexia-full-family-catalogue.json"
+      - "m3/compatibility/test_synexia_full_family.py"
+      - "m3/compatibility/check_synexia_full_family.py"
+      - "m3/compatibility/synexia-full-family-pin.tsv"
       - "src/java.base/share/legal/synexia.md"
       - ".github/workflows/m3-synexia-public-target-policy.yml"
   workflow_dispatch:
@@ -22,15 +27,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Compile validator
-        run: python3 -m compileall -q m3/compatibility/check_synexia_public_target.py m3/compatibility/test_synexia_public_target_policy.py
+      - name: Compile validators
+        run: |
+          python3 -m compileall -q \
+            m3/compatibility/check_synexia_public_target.py \
+            m3/compatibility/test_synexia_public_target_policy.py \
+            m3/compatibility/check_synexia_full_family.py \
+            m3/compatibility/test_synexia_full_family.py
 
       - name: Validate checked-in policy
         run: python3 m3/compatibility/check_synexia_public_target.py
 
+      - name: Validate full-family Synexia ownership pin
+        run: python3 m3/compatibility/check_synexia_full_family.py
+
       - name: Run policy tests
         working-directory: m3/compatibility
-        run: python3 -m unittest -v test_synexia_public_target_policy.py
+        run: |
+          python3 -m unittest -v \
+            test_synexia_public_target_policy.py \
+            test_synexia_full_family.py
 
       - name: Verify java.base legal anchor
         run: |
