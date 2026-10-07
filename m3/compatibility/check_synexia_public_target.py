@@ -11,6 +11,7 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 POLICY = HERE / "synexia-public-target-policy.tsv"
+APACHE_HANDOFF_PIN = HERE / "synexia-apache-handoff-pin.tsv"
 PACKET_VERSION = "# SYNEXIA_M3_HANDOFF_V1"
 LICENSE_POLICY = "SYNEXIA_FIRST_PARTY_APACHE2_V1"
 FAST_LANE_LICENSE = "Apache-2.0"
@@ -63,6 +64,51 @@ def load_policy(path: Path = POLICY) -> list[tuple[str, ...]]:
         missing = REQUIRED_ROWS.difference(rows)
         extra = set(rows).difference(REQUIRED_ROWS)
         raise ValueError(f"policy drift missing={sorted(missing)!r} extra={sorted(extra)!r}")
+    return rows
+
+
+def load_apache_handoff_pin(path: Path = APACHE_HANDOFF_PIN) -> dict[str, str]:
+    with path.open("r", encoding="utf-8", newline="") as stream:
+        reader = csv.reader(stream, delimiter="\t")
+        try:
+            header = next(reader)
+        except StopIteration as failure:
+            raise ValueError("empty Synexia Apache handoff pin") from failure
+        if header != ["field", "value"]:
+            raise ValueError("invalid Synexia Apache handoff pin header")
+        rows: dict[str, str] = {}
+        for physical, cells in enumerate(reader, start=2):
+            if len(cells) != 2 or not cells[0] or not cells[1]:
+                raise ValueError(f"invalid Apache handoff pin row {physical}")
+            if cells[0] in rows:
+                raise ValueError(f"duplicate Apache handoff pin field {cells[0]}")
+            rows[cells[0]] = cells[1]
+
+    expected = {
+        "source_repository": "hsoliwal/com.synexia",
+        "source_pr": "9642",
+        "source_commit": "25489c202af43863bda2ae23b67542c363e92450",
+        "source_manifest_path": ".m3/apache-handoff.tsv",
+        "source_manifest_sha256": "98274241cc6a0655e600d5fb5c58d70170aca0111770f95c14609041a1f1289a",
+        "source_license": "Apache-2.0",
+        "copyright_notice": "Copyright 2026 Hitesh Soliwal and contributors",
+        "canonical_owner": "synexia-m3-recipe",
+        "delivery_state": "PENDING_SYNEXIA_MERGE",
+        "target_role": "QUALIFICATION_INPUT_ONLY",
+        "automatic_application": "false",
+        "target_relicense_authority": "false",
+        "openjdk_retained_license": "GPL-2.0-only WITH Classpath-exception-2.0",
+    }
+    if rows != expected:
+        raise ValueError("Synexia Apache handoff pin drift")
+    if not re.fullmatch(r"[0-9a-f]{40}", rows["source_commit"]):
+        raise ValueError("invalid Synexia Apache handoff commit")
+    if not SHA256.fullmatch(rows["source_manifest_sha256"]):
+        raise ValueError("invalid Synexia Apache handoff manifest seal")
+    if rows["automatic_application"] != "false" or rows["delivery_state"] != "PENDING_SYNEXIA_MERGE":
+        raise ValueError("unmerged Synexia custody PR cannot authorize automatic application")
+    if rows["target_relicense_authority"] != "false":
+        raise ValueError("Synexia handoff cannot relicense target code")
     return rows
 
 
@@ -124,6 +170,7 @@ def validate_packet(path: Path) -> int:
 
 def main(argv: list[str]) -> int:
     load_policy()
+    load_apache_handoff_pin()
     if len(argv) > 2:
         print("usage: check_synexia_public_target.py [packet.tsv]", file=sys.stderr)
         return 2
@@ -131,7 +178,7 @@ def main(argv: list[str]) -> int:
         rows = validate_packet(Path(argv[1]))
         print(f"SYNEXIA_PUBLIC_TARGET_POLICY_PASS rows={rows} license={FAST_LANE_LICENSE}")
     else:
-        print("SYNEXIA_PUBLIC_TARGET_POLICY_PASS policy=checked")
+        print("SYNEXIA_PUBLIC_TARGET_POLICY_PASS policy=checked apache_handoff=qualification-only")
     return 0
 
 
