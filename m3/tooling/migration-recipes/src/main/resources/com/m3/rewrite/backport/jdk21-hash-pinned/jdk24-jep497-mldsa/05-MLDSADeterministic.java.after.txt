@@ -82,7 +82,7 @@ public class MLDSADeterministic {
             NamedParameterSpec parameters,
             int seed) throws Exception {
         KeyPairGenerator generator = KeyPairGenerator.getInstance(algorithm, provider);
-        generator.initialize(parameters, new MLDSAProviderSmoke.FixedSecureRandom(seed));
+        generator.initialize(parameters, new FixedSecureRandom(seed));
         return generator.generateKeyPair();
     }
 
@@ -93,8 +93,25 @@ public class MLDSADeterministic {
             int seed,
             byte[] message) throws Exception {
         Signature signature = Signature.getInstance(algorithm, provider);
-        signature.initSign(pair.getPrivate(), new MLDSAProviderSmoke.FixedSecureRandom(seed));
+        signature.initSign(pair.getPrivate(), new FixedSecureRandom(seed));
         signature.update(message);
         return signature.sign();
+    }
+
+    static final class FixedSecureRandom extends SecureRandom {
+        private final int seed;
+        private int round;
+
+        FixedSecureRandom(int seed) {
+            this.seed = seed;
+        }
+
+        @Override
+        public void nextBytes(byte[] bytes) {
+            int salt = round++ * 17;
+            for (int index = 0; index < bytes.length; index++) {
+                bytes[index] = (byte) (seed + salt + index * 29);
+            }
+        }
     }
 }
