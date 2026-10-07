@@ -32,6 +32,10 @@ final class M3StringFacts {
     final long bitSignal64;
     final boolean ascii;
     final boolean latin1;
+    final boolean hasAsciiUpper;
+    final boolean hasAsciiLower;
+    final boolean hasBackslash;
+    final boolean hasLineTerminator;
 
     final int asciiUpperHash;
     final int asciiLowerHash;
@@ -64,6 +68,10 @@ final class M3StringFacts {
             long bitSignal64,
             boolean ascii,
             boolean latin1,
+            boolean hasAsciiUpper,
+            boolean hasAsciiLower,
+            boolean hasBackslash,
+            boolean hasLineTerminator,
             int asciiUpperHash,
             int asciiLowerHash,
             int asciiTitleHash,
@@ -86,6 +94,10 @@ final class M3StringFacts {
         this.bitSignal64 = bitSignal64;
         this.ascii = ascii;
         this.latin1 = latin1;
+        this.hasAsciiUpper = hasAsciiUpper;
+        this.hasAsciiLower = hasAsciiLower;
+        this.hasBackslash = hasBackslash;
+        this.hasLineTerminator = hasLineTerminator;
         this.asciiUpperHash = asciiUpperHash;
         this.asciiLowerHash = asciiLowerHash;
         this.asciiTitleHash = asciiTitleHash;
@@ -108,6 +120,10 @@ final class M3StringFacts {
         long signal = 0L;
         boolean ascii = true;
         boolean latin1 = true;
+        boolean hasAsciiUpper = false;
+        boolean hasAsciiLower = false;
+        boolean hasBackslash = false;
+        boolean hasLineTerminator = false;
         long prefix = 0L;
         long suffix = 0L;
         long bigrams = 0L;
@@ -128,6 +144,10 @@ final class M3StringFacts {
             signal = addSignal(signal, unit);
             ascii &= unit <= 0x7f;
             latin1 &= unit <= 0xff;
+            hasAsciiUpper |= unit >= 'A' && unit <= 'Z';
+            hasAsciiLower |= unit >= 'a' && unit <= 'z';
+            hasBackslash |= unit == '\\';
+            hasLineTerminator |= unit == '\n' || unit == '\r';
             upperHash = 31 * upperHash + asciiUpper(unit);
             lowerHash = 31 * lowerHash + asciiLower(unit);
             titleHash = 31 * titleHash + (index == 0 ? asciiUpper(unit) : asciiLower(unit));
@@ -195,6 +215,10 @@ final class M3StringFacts {
                 signal,
                 ascii,
                 latin1,
+                hasAsciiUpper,
+                hasAsciiLower,
+                hasBackslash,
+                hasLineTerminator,
                 upperHash,
                 lowerHash,
                 titleHash,
@@ -278,6 +302,10 @@ final class M3StringFacts {
                 left.bitSignal64 | right.bitSignal64,
                 left.ascii && right.ascii,
                 left.latin1 && right.latin1,
+                left.hasAsciiUpper || right.hasAsciiUpper,
+                left.hasAsciiLower || right.hasAsciiLower,
+                left.hasBackslash || right.hasBackslash,
+                left.hasLineTerminator || right.hasLineTerminator,
                 left.asciiUpperHash * right.hash31Power + right.asciiUpperHash,
                 left.asciiLowerHash * right.hash31Power + right.asciiLowerHash,
                 left.asciiTitleHash * right.hash31Power + right.asciiLowerHash,
