@@ -10,7 +10,6 @@ src/jdk.jlink/share/classes/jdk/tools/jlink/internal/TaskHelper.java
 src/jdk.jlink/share/classes/jdk/tools/jlink/internal/runtimelink/JimageDiffGenerator.java
 src/jdk.jlink/share/classes/jdk/tools/jlink/internal/runtimelink/ResourceDiff.java
 src/jdk.jlink/share/classes/jdk/tools/jlink/internal/runtimelink/ResourcePoolReader.java
-src/jdk.jlink/share/classes/jdk/tools/jlink/internal/runtimelink/RuntimeImageLinkException.java
 src/jdk.jlink/share/classes/jdk/tools/jlink/resources/jlink.properties
 test/hotspot/jtreg/TEST.ROOT
 test/jdk/TEST.ROOT

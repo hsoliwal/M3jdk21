@@ -11,9 +11,11 @@ completion claim.
 - final donor state for materialization: `jdk-24+36`
 - implementation commit touched 47 paths.
 
-The selected path set is recorded in `PATHS.txt`. Candidate postimages are generated from the
-JDK24 GA tree, not hand-copied from the implementation commit, so cumulative GA follow-up fixes are
-retained.
+The implementation-commit denominator remains 47 paths. The GA-materializable set is the 46 paths
+recorded in `PATHS.txt`; `RuntimeImageLinkException.java` is recorded separately in
+`TYPED_EXCLUSIONS.tsv` as `GA_REMOVED_DO_NOT_ADD` because it was removed before JDK24 GA.
+Candidate postimages are generated from the JDK24 GA tree, not hand-copied from the implementation
+commit, so cumulative GA follow-up fixes are retained.
 
 ## Why this packet is stacked on the file-atomic generator
 
@@ -50,8 +52,9 @@ This is only an admission result. Compile and behavior proof remain authoritativ
 
 ## Required next proof
 
-1. generate all selected Java/text file atoms from JDK21 -> JDK24 GA;
-2. account for every touched path or typed exclusion;
+1. generate all 46 GA-selected Java/text file atoms from JDK21 -> JDK24 GA;
+2. account for the complete 47-path implementation denominator as 46 materializable paths plus
+   the explicit GA-removed typed exclusion;
 3. review per-file diffs against Java21 preimages;
 4. compose the smallest honest feature packet DAG;
 5. build `jdk.jlink` / JDK image on Java21 baseline;
@@ -70,7 +73,9 @@ exact candidate without hand-editing any jlink file:
 
 - generator: `m3/backports/generate_recipe_crates.py`;
 - executor: `m3/backports/materialize_generated_crates.py`;
-- selected set: this packet's 47-path `PATHS.txt`;
+- implementation denominator: 47 upstream implementation paths;
+- selected materialization set: 46 GA-final paths in `PATHS.txt`;
+- typed exclusion: one `GA_REMOVED_DO_NOT_ADD` row in `TYPED_EXCLUSIONS.tsv`;
 - granularity: `--crate-size 1`;
 - lanes: structured Java plus strict UTF-8 text;
 - FILE atom authority remains FILE; feature composition remains MULTI_MODULE.
@@ -81,7 +86,8 @@ postimage hash drift. Exact postimages replay to a fixed point.
 
 The checked-in recovery branch contains no JEP 493 product mutation. The dedicated workflow
 generates the crates from pinned `jdk-21+35` and `jdk-24+36` trees, verifies the 47-path
-denominator, materializes only in the ephemeral checkout, proves the changed-path fence and fixed
+denominator as 46 GA materialization paths plus one reviewed exclusion, materializes only in the
+ephemeral checkout, proves the changed-path fence and fixed
 point, then configures with `--enable-linkable-runtime`, builds the image, runs the
 runtime-image/legacy jlink jtreg gates, and performs a real no-JMOD runtime-link smoke.
 

@@ -9,5 +9,6 @@ ExcludeJmodSectionPlugin	PRESENT	TaskHelper plugin/default option handling	REUSE
 JRTArchive	ABSENT	new runtime-image archive adapter	ADD_FROM_FINAL_GA
 LinkableRuntimeImage	ABSENT	new linkable runtime image abstraction	ADD_FROM_FINAL_GA
 runtimelink package	ABSENT	resource-diff/runtime-image link mechanics	ADD_FROM_FINAL_GA
+RuntimeImageLinkException	ABSENT	implementation-commit-only class removed before JDK24 GA	GA_REMOVED_DO_NOT_ADD
 JDK build/autoconf image flags	JDK21_BASELINE	build-time linkable-runtime support	GENERATE_TEXT_ATOMS_AND_VERIFY
 Java grammar/classfile requirement	NONE_OBSERVED	no source-language feature in implementation	NO_LANGUAGE_BACKPORT

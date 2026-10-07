@@ -4,7 +4,9 @@ classification	COMPATIBLE_TOOLING
 default_java21	OPT_IN
 upstream_commit	2ec358082f0896480bdbfcb289b4ba2bff0dd828
 donor_tag	jdk-24+36
-selected_paths	47
+implementation_denominator_paths	47
+materialization_paths	46
+typed_exclusions	1
 generator	m3/backports/generate_recipe_crates.py
 executor	m3/backports/materialize_generated_crates.py
 crate_size	1
