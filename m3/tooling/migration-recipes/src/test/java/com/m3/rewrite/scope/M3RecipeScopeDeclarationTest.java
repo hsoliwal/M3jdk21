@@ -29,7 +29,7 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(23, M3RecipeScopeRegistry.size());
+        assertEquals(24, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered("org.openrewrite.java.RemoveUnusedImports"));
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
@@ -51,6 +51,8 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(
                 com.synexia.rewrite.atom.M3PureIntConvergenceRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Java21ConvergenceRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(
+                com.synexia.rewrite.M3Java21FileConvergenceRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jdk21HashPinnedSnapshotRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jdk21HashPinnedTextSnapshotRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3VerbatimJavaPairRecipe.class.getName()));
@@ -124,6 +126,7 @@ final class M3RecipeScopeDeclarationTest {
                 com.synexia.rewrite.atom.M3DocumentPureIntAtomRecipe.class,
                 com.synexia.rewrite.atom.M3PureIntConvergenceRecipe.class,
                 M3Java21ConvergenceRecipe.class,
+                com.synexia.rewrite.M3Java21FileConvergenceRecipe.class,
                 M3Jdk21HashPinnedSnapshotRecipe.class,
                 M3Jdk21HashPinnedTextSnapshotRecipe.class,
                 M3VerbatimJavaPairRecipe.class)) {
