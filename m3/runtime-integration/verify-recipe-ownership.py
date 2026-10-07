@@ -52,16 +52,16 @@ def read_rows() -> dict[str, dict[str, str]]:
             reason = row["target_reason"].strip()
             if not reason:
                 raise SystemExit(f"empty target_reason for {path}")
-            if classification in {"SYNEXIA_CANONICAL_RESIDUE", "TARGET_ADAPTER_ONLY"}:
-                if not owner or owner == "NONE":
-                    raise SystemExit(
-                        f"{classification} requires canonical Synexia owner: {path}"
-                    )
-                if not owner.startswith("com.synexia."):
-                    raise SystemExit(f"non-Synexia canonical owner for {path}: {owner}")
-            elif owner != "NONE":
+            if not owner or owner == "NONE":
+                raise SystemExit(f"classification requires Synexia provenance owner: {path}")
+            if not (owner.startswith("com.synexia.") or owner.startswith("com.synexia:")):
+                raise SystemExit(f"non-Synexia provenance/canonical owner for {path}: {owner}")
+            if classification == "JDK_TARGET_SPECIFIC" and not (
+                owner.startswith("com.synexia.rewrite.")
+                or owner.startswith("com.synexia:")
+            ):
                 raise SystemExit(
-                    f"JDK_TARGET_SPECIFIC must use canonical owner NONE: {path}"
+                    f"JDK_TARGET_SPECIFIC must name a Synexia planner/proof owner: {path}"
                 )
             rows[path] = row
     return rows
