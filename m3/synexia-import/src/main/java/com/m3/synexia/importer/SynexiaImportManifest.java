@@ -129,6 +129,8 @@ public record SynexiaImportManifest(
                 throw new IllegalArgumentException("automatic Synexia import requires Apache-2.0");
             }
             mode = Objects.requireNonNull(mode, "mode");
+            SynexiaCanonicalFamilyPolicy.requireMirrorTarget(sourcePath, targetPath);
+            SynexiaCanonicalFamilyPolicy.requireCategoryFamily(category, sourcePath);
         }
     }
 
