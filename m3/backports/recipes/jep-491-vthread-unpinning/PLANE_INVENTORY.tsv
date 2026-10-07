@@ -1,0 +1,9 @@
+plane	paths	mutation_authority	purpose
+HOTSPOT_CPU_PRODUCT	91	false	architecture-specific monitor/continuation/JIT/interpreter mechanics
+HOTSPOT_SHARED_PRODUCT	82	false	shared monitor ownership, continuation, JVMTI/JFR/serviceability mechanics
+JAVA_BASE_LIBRARY_PRODUCT	20	false	virtual-thread/library behavior and internal coordination
+JAVA_BASE_NATIVE_PRODUCT	2	false	JNI/native Thread and VirtualThread boundary
+SERVICEABILITY_AGENT_PRODUCT	3	false	SA monitor/thread structure compatibility
+JFR_LIBRARY_PRODUCT	2	false	JFR virtual-thread event integration
+TEST_NATIVE_EVIDENCE	9	false	native/JVMTI parity and regression evidence
+TEST_JAVA_EVIDENCE	37	false	virtual-thread, continuation, selector and serviceability regression evidence
