@@ -59,6 +59,8 @@ jobs:
         run: python3 m3/runtime-integration/check-m3string-invariants.py
       - name: Prove canonical DAG master-repair recipe
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringCanonicalDagMasterRepairRecipeTest test
+      - name: Prove direct M3 String stream traversal recipe
+        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringDirectStreamTraversalRecipeTest test
       - name: Prove immutable Matcher fact reuse
         run: mvn -B -ntp -f m3/tooling/mr/pom.xml test
       - name: Set up Java 20 boot JDK for OpenJDK 21 build
