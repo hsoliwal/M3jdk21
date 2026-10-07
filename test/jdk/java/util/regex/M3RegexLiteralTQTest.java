@@ -50,6 +50,12 @@ public class M3RegexLiteralTQTest {
         compareFind(Pattern.compile("abc?"), "zzabzz", 0, 6);
         compareFind(Pattern.compile("(?:abc)?def"), "zzdefzz", 0, 7);
 
+        compareFind(Pattern.compile("^abcabc"), source, 0, source.length());
+        compareFind(Pattern.compile("(abcabc)"), source, 0, source.length());
+        compareFind(Pattern.compile("(?:abcabc|needle-XYZ)"), source, 0, source.length());
+        compareFind(Pattern.compile("^(?:abcabc|needle-XYZ)"), source, 0, source.length());
+        compareFind(Pattern.compile("(?:acbacb|not-present)"), source, 0, source.length());
+
         // Case-insensitive literal matching has different equivalence semantics and must bypass
         // exact TQ gating.
         compareFind(
