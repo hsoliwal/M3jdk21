@@ -75,6 +75,33 @@
       activate this profile and select a com.synexia.* recipe explicitly.
     -->
     <profile>
+      <id>m3-synexia-recipe-ownership-audit</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.openrewrite.maven</groupId>
+            <artifactId>rewrite-maven-plugin</artifactId>
+            <version>5.23.1</version>
+            <dependencies>
+              <dependency>
+                <groupId>com.synexia</groupId>
+                <artifactId>synexia-openrewrite-recipes</artifactId>
+                <version>${m3.synexia.version}</version>
+              </dependency>
+            </dependencies>
+            <configuration>
+              <failOnInvalidActiveRecipes>true</failOnInvalidActiveRecipes>
+              <exportDatatables>true</exportDatatables>
+              <activeRecipes combine.self="override">
+                <recipe>com.synexia.rewrite.M3Jdk21RecipeOwnershipAudit</recipe>
+              </activeRecipes>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
       <id>m3-synexia-canonical-recipes</id>
       <build>
         <plugins>
