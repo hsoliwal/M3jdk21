@@ -1,6 +1,9 @@
 /* SPDX-License-Identifier: Apache-2.0 */
 #include "m3_precompute_signals.h"
 
+/* The checks ARE the test: keep assert() live in Release builds (-DNDEBUG), otherwise every
+   assertion compiles out and -Werror rejects the then-unused helper and results. */
+#undef NDEBUG
 #include <assert.h>
 #include <stdint.h>
 
