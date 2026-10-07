@@ -43,14 +43,14 @@ jobs:
           java-version: "21"
           cache: maven
 
-      - name: Fetch exact OpenJDK 21, JEP423 implementation and JDK22 GA
+      - name: Fetch exact OpenJDK 21, complete JEP423 lineage and JDK22 GA
         shell: bash
         run: |
           set -euo pipefail
           mkdir "$RUNNER_TEMP/upstream-jdk"
           git -C "$RUNNER_TEMP/upstream-jdk" init -q
           git -C "$RUNNER_TEMP/upstream-jdk" remote add origin https://github.com/openjdk/jdk.git
-          git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch             --filter=blob:none --no-tags origin             "refs/tags/jdk-21+35:refs/tags/jdk-21+35"             "refs/tags/jdk-22+36:refs/tags/jdk-22+36"             "38cfb220ddadbb401cc15f313aadb8234f626210"
+          git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch             --filter=blob:none --no-tags origin             "refs/tags/jdk-21+35:refs/tags/jdk-21+35"             "refs/tags/jdk-22+36:refs/tags/jdk-22+36"             "38cfb220ddadbb401cc15f313aadb8234f626210"             "8643cc21333c6b51242ed3b9295b25f372244755"             "0d5f5e15d43f94a79c6133baecd5af217365d176"
           printf 'UPSTREAM=%s\\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
 
       - name: Prove implementation touched-path denominator and compatibility split
@@ -117,6 +117,44 @@ jobs:
           print("JEP423_DENOMINATOR=59")
           print("JEP423_ADMITTED=57")
           print("JEP423_PRESERVED_DELETIONS=2")
+          PY
+
+      - name: Validate complete JEP423 dependency closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/recipes/jep-423-region-pinning/validate_lineage.py
+          cd m3/backports
+          python3 -m unittest -v test_jep423_lineage.py
+
+      - name: Prove pinned upstream commit identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv
+          import os
+          import subprocess
+          from pathlib import Path
+
+          repo = Path(os.environ["UPSTREAM"])
+          packet = Path("m3/backports/recipes/jep-423-region-pinning")
+          with (packet / "LINEAGE.tsv").open(encoding="utf-8", newline="") as stream:
+              rows = list(csv.DictReader(stream, delimiter="\t"))
+
+          for row in rows:
+              commit = row["commit"]
+              actual = subprocess.check_output(
+                  ["git", "-C", str(repo), "show", "-s", "--format=%H%n%P%n%s", commit],
+                  text=True,
+              ).splitlines()
+              if actual[0] != commit:
+                  raise SystemExit(f"commit identity drift: {commit}")
+              if row["parent"] not in actual[1].split():
+                  raise SystemExit(f"parent identity drift: {commit}")
+              if row["jbs"] not in actual[2]:
+                  raise SystemExit(f"JBS identity drift: {commit}: {actual[2]}")
+              print(f"JEP423_LINEAGE_OK {row['order']} {row['jbs']} {commit}")
           PY
 
       - name: Unit-test whole-tree comparator and mixed FILE-crate generator
