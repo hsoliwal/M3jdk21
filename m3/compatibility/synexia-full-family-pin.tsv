@@ -3,6 +3,9 @@ schema	M3JDK21_SYNEXIA_FULL_FAMILY_PIN_V1
 source_repository	hsoliwal/com.synexia
 source_pr	9648
 source_commit	b24262a92b741c78c44ca61afc8dac7ee1376d8a
+authority_recovery_pr	9677
+authority_recovery_commit	73c5e9335b821270d04f2b6912c62fc279a0ba9f
+authority_recovery_state	CURRENT_TREE_EXACT_BLOB_RECOVERY_PR_OPEN
 machine_manifest_path	docs/M3-SCALE/invariants/M3-SYNEXIA-FULL-FAMILY-OWNERSHIP-1.json
 machine_manifest_git_blob	c30a30476c12f7511caa124c4f7e0d72cd4e8e55
 receiver_invariant_path	docs/M3-SCALE/invariants/M3-SYNEXIA-RECEIVER-1.md
