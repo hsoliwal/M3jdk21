@@ -242,3 +242,43 @@ M3JDK21 retains only:
 The former target-local String-history recipe descriptor, sealed Java/text crates and local
 fixed-point recipe test are absent. Reusable recipe evolution remains in Synexia. Runtime M3 String
 precompute remains entirely inside M3JDK21; this creates no Synexia runtime dependency.
+
+
+## Layered HotSpot M3-backed guard — PR #9693
+
+A follow-up compile-level HotSpot repair is owned by the Synexia layered recipe:
+
+`com.synexia.rewrite.M3Jdk21StringHotspotM3BackedGuard`
+
+Canonical Synexia source:
+
+- PR: https://github.com/hsoliwal/com.synexia/pull/9693
+- branch: `m3/m3jdk21-string-recipe-canonical-20261007`
+- pinned revision: `e46a1580469f82ed6cf29879172fb339928a88b6`
+- manifest:
+  `synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-hotspot-m3-backed-guard/manifest.tsv`
+- manifest SHA-256:
+  `53fee966e6d6140589d65a5adcb8346e1b40117a79523725a3ccdbca5682af41`
+
+The exact target preimage was M3JDK21 commit
+`5f50f4ee84c528717cb2910f37db8b10445edb02`.
+
+Applied source result:
+
+`d073c6fd9be8a5f067f8557abbbe2bc87604790c`
+
+The recipe repairs the tuple-era HotSpot predicate name `is_m3_joined` to the canonical
+`is_m3_backed` predicate in:
+
+- CDS archive String sizing;
+- StringDedup M3 guard;
+- the fail-closed M3 String source invariant.
+
+Direct cross-repository readback is **3/3 exact target blobs**. A repository-wide search after
+application finds no live `is_m3_joined` references.
+
+M3JDK21 retains only the applied HotSpot/runtime result plus the layered machine receipt:
+
+`m3/runtime-integration/m3-string-hotspot-m3-backed-guard-application.tsv`
+
+No Synexia code or recipe is loaded by HotSpot at runtime.
