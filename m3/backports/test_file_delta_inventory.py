@@ -164,6 +164,79 @@ class FileDeltaInventoryTest(unittest.TestCase):
             self.assertNotIn("jdk-22+36", text)
             self.assertNotIn("jdk-23+37", text)
 
+    def test_main_accepts_exact_donor_ref_for_one_release(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            repo = Path(temp)
+            subprocess.run(("git", "init", "-q", str(repo)), check=True)
+            self.git(repo, "config", "user.email", "fixture@example.invalid")
+            self.git(repo, "config", "user.name", "Fixture")
+
+            path = "src/A.java"
+            self.write(repo, path, "final class A { int x() { return 21; } }\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk21")
+            self.git(repo, "tag", "jdk-21+35")
+
+            self.write(repo, path, "final class A { int x() { return 22; } }\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "feature")
+            donor = subprocess.check_output(
+                ("git", "-C", str(repo), "rev-parse", "HEAD"), text=True
+            ).strip()
+
+            self.write(repo, path, "final class A { int x() { return 2200; } }\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "later-ga")
+            self.git(repo, "tag", "jdk-22+36")
+
+            output = repo / "exact.tsv"
+            self.assertEqual(
+                0,
+                self.mod.main(
+                    (
+                        "--repo",
+                        str(repo),
+                        "--release",
+                        "22",
+                        "--donor-ref",
+                        donor,
+                        "--out",
+                        str(output),
+                    )
+                ),
+            )
+            text = output.read_text(encoding="utf-8")
+            self.assertIn(donor, text)
+            self.assertNotIn("jdk-22+36", text)
+            self.assertIn("MODIFIED", text)
+
+    def test_exact_donor_ref_requires_one_release(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            repo = Path(temp)
+            subprocess.run(("git", "init", "-q", str(repo)), check=True)
+            self.git(repo, "config", "user.email", "fixture@example.invalid")
+            self.git(repo, "config", "user.name", "Fixture")
+            self.write(repo, "A.java", "final class A {}\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "base")
+            self.git(repo, "tag", "jdk-21+35")
+            head = subprocess.check_output(
+                ("git", "-C", str(repo), "rev-parse", "HEAD"), text=True
+            ).strip()
+            with self.assertRaises(SystemExit):
+                self.mod.main(
+                    (
+                        "--repo",
+                        str(repo),
+                        "--release",
+                        "22",
+                        "--release",
+                        "23",
+                        "--donor-ref",
+                        head,
+                    )
+                )
+
     def test_fixed_jdk21_baseline_is_used_for_every_donor(self) -> None:
         self.assertEqual((21, "jdk-21+35"), self.mod.BASELINE)
         self.assertEqual(
