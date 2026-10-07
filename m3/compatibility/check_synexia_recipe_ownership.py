@@ -148,7 +148,6 @@ def load(path: Path = LEDGER) -> list[dict[str, str]]:
 def reusable_residue_paths() -> set[str]:
     result: set[str] = set()
     for exact in (
-        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceCatalog.java",
         "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java",
     ):
         if (ROOT / exact).is_file():
