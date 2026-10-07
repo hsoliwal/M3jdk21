@@ -28,6 +28,8 @@ import org.openrewrite.java.JavaParser;
 final class M3Jep497MlDsaBackportRecipeTest {
     private static final String ROOT =
             "/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep497-mldsa/";
+    private static final String VECTOR_ROOT =
+            "/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk24-jep497-mldsa-vectors/";
 
     private static final Map<String, String> PREIMAGES = Map.of(
             "src/java.base/share/classes/java/security/spec/NamedParameterSpec.java",
@@ -60,12 +62,18 @@ final class M3Jep497MlDsaBackportRecipeTest {
                 "6705a9255d28f351950e7fbca9d05e73942a4e27",
                 M3Jep497MlDsaBackportRecipe.RELEASED_STATE);
 
-        assertEquals(1, recipe.getRecipeList().size());
+        assertEquals(2, recipe.getRecipeList().size());
         assertEquals(
                 "jdk24-jep497-mldsa",
                 assertInstanceOf(
                                 M3Jdk21HashPinnedSnapshotRecipe.class,
                                 recipe.getRecipeList().getFirst())
+                        .getCrateName());
+        assertEquals(
+                "jdk24-jep497-mldsa-vectors",
+                assertInstanceOf(
+                                M3Jdk21HashPinnedTextSnapshotRecipe.class,
+                                recipe.getRecipeList().get(1))
                         .getCrateName());
 
         var policy = M3RecipeScopeRegistry.require(M3Jep497MlDsaBackportRecipe.class);
@@ -95,7 +103,7 @@ final class M3Jep497MlDsaBackportRecipeTest {
 
         var first = recipe.run(new InMemoryLargeSourceSet(before), context(), 1);
         List<Result> changes = first.getChangeset().getAllResults();
-        assertEquals(7, changes.size());
+        assertEquals(11, changes.size());
 
         Map<String, SourceFile> after = new TreeMap<>();
         before.forEach(source -> after.put(path(source), source));
@@ -106,8 +114,11 @@ final class M3Jep497MlDsaBackportRecipeTest {
             }
         }
 
-        for (ManifestRow row : manifest()) {
+        for (ManifestRow row : javaManifest()) {
             assertEquals(resource(ROOT + row.resource()), after.get(row.path()).printAll());
+        }
+        for (ManifestRow row : textManifest()) {
+            assertEquals(resource(VECTOR_ROOT + row.resource()), after.get(row.path()).printAll());
         }
 
         assertTrue(
@@ -172,7 +183,11 @@ final class M3Jep497MlDsaBackportRecipeTest {
         assertTrue(smoke.contains("NamedParameterSpec.ML_DSA_44"));
         assertTrue(smoke.contains("2.16.840.1.101.3.4.3.17"));
 
-        assertEquals(7, manifest().size());
+        String kat = resource(ROOT + "07-MLDSAKnownAnswer.java.after.txt");
+        assertTrue(kat.contains("Reduced pinned FIPS 204 ACVP"));
+        assertTrue(kat.contains("JSONValue.parse"));
+        assertEquals(8, javaManifest().size());
+        assertEquals(3, textManifest().size());
     }
 
     private static List<SourceFile> baseline() throws Exception {
@@ -205,15 +220,23 @@ final class M3Jep497MlDsaBackportRecipeTest {
         throw new IllegalArgumentException(target);
     }
 
-    private static List<ManifestRow> manifest() throws IOException {
+    private static List<ManifestRow> javaManifest() throws IOException {
+        return manifest(ROOT, 8);
+    }
+
+    private static List<ManifestRow> textManifest() throws IOException {
+        return manifest(VECTOR_ROOT, 3);
+    }
+
+    private static List<ManifestRow> manifest(String root, int expected) throws IOException {
         List<ManifestRow> rows = new ArrayList<>();
-        for (String line : resource(ROOT + "manifest.tsv").lines().toList()) {
+        for (String line : resource(root + "manifest.tsv").lines().toList()) {
             if (line.isBlank() || line.startsWith("#")) continue;
             String[] cells = line.split("\t", -1);
             assertEquals(4, cells.length);
             rows.add(new ManifestRow(cells[0], cells[1], cells[2], cells[3]));
         }
-        assertEquals(7, rows.size());
+        assertEquals(expected, rows.size());
         return List.copyOf(rows);
     }
 
