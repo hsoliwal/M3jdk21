@@ -1744,6 +1744,9 @@ public final class String
         Objects.checkFromToIndex(beginIndex, endIndex, length());
         M3String storage = m3();
         if (storage != null) {
+            int prepared =
+                    M3StringCodePointPrecompute.codePointCount(storage, beginIndex, endIndex);
+            if (prepared != Integer.MIN_VALUE) return prepared;
             return storage.slice(beginIndex, endIndex).facts().codePointCount;
         }
         if (isLatin1()) {
@@ -1775,11 +1778,15 @@ public final class String
     public int offsetByCodePoints(int index, int codePointOffset) {
         M3String storage = m3();
         if (storage != null && index >= 0 && index <= storage.length()) {
-            M3StringFacts prepared = storage.factsIfPrepared();
+            int prepared =
+                    M3StringCodePointPrecompute.offsetByCodePoints(
+                            storage, index, codePointOffset);
+            if (prepared != Integer.MIN_VALUE) return prepared;
+
+            M3StringFacts facts = storage.factsIfPrepared();
             boolean oneUnitPerCodePoint =
                     storage.coder() == LATIN1
-                            || (prepared != null
-                                    && prepared.codePointCount == storage.length());
+                            || (facts != null && facts.codePointCount == storage.length());
             if (oneUnitPerCodePoint) {
                 long result = (long) index + codePointOffset;
                 if (result >= 0L && result <= storage.length()) {
@@ -4541,11 +4548,13 @@ public final class String
     private static final class M3LinesSpliterator
             extends Spliterators.AbstractSpliterator<String> {
         private final String source;
+        private final M3String storage;
         private int index;
 
         M3LinesSpliterator(String source) {
             super(source.length(), Spliterator.ORDERED | Spliterator.IMMUTABLE | Spliterator.NONNULL);
             this.source = source;
+            this.storage = Objects.requireNonNull(source.m3(), "M3 storage");
         }
 
         @Override
@@ -4555,19 +4564,15 @@ public final class String
             if (index >= length) return false;
 
             int start = index;
-            int end = start;
-            while (end < length) {
-                char unit = source.charAt(end);
-                if (unit == '\n' || unit == '\r') break;
-                end++;
-            }
+            int end = storage.indexOfLineTerminator(start);
+            if (end < 0) end = length;
 
             action.accept(source.substring(start, end));
             if (end == length) {
                 index = length;
-            } else if (source.charAt(end) == '\r'
+            } else if (storage.charAt(end) == '\r'
                     && end + 1 < length
-                    && source.charAt(end + 1) == '\n') {
+                    && storage.charAt(end + 1) == '\n') {
                 index = end + 2;
             } else {
                 index = end + 1;
