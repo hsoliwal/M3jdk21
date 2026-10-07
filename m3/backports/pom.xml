@@ -37,6 +37,28 @@
             </configuration>
           </execution>
           <execution>
+            <id>compile-backport-recipe-dag</id>
+            <phase>validate</phase>
+            <goals><goal>exec</goal></goals>
+            <configuration>
+              <executable>${python.executable}</executable>
+              <workingDirectory>${project.basedir}</workingDirectory>
+              <arguments>
+                <argument>backport_recipe_dag.py</argument>
+                <argument>--root</argument>
+                <argument>${project.basedir}/../..</argument>
+                <argument>--out</argument>
+                <argument>${project.build.directory}/backport-recipe-dag.tsv</argument>
+                <argument>--summary</argument>
+                <argument>${project.build.directory}/backport-recipe-dag.json</argument>
+                <argument>--packet-dir</argument>
+                <argument>${project.build.directory}/backport-packets</argument>
+                <argument>--packet-index</argument>
+                <argument>${project.build.directory}/backport-packets.tsv</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
             <id>emit-backport-program-status</id>
             <phase>verify</phase>
             <goals><goal>exec</goal></goals>
