@@ -3,7 +3,7 @@ m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDB.java	61e913815a3dc8d94280a765c
 m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbArtifact.java	7b152b2ed51a559c40b466cc7183e94c3b06a342	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia:synexia-m3index-db	Apache-2.0
 m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticCodec.java	da78ddcd3dbce6777a7434b7917434c4a2074cf6	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia:synexia-m3index-db	Apache-2.0
 m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticEdge.java	81b2c71d69b99a081629b1c39db38664af1476e	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia:synexia-m3index-db	Apache-2.0
-m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticFingerprint.java	df44495f5e5b48ea1bf4a863df9ca188bd787948	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia:synexia-m3index-db	Apache-2.0
+m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticFingerprint.java	df44495f5e5b48ea1bf4a863df9ca188bd787948	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia.mindex.db.M3IndexDbFingerprintV1	Apache-2.0
 m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticIndex.java	a7245a61c9ccf353be202790f8058f84a0016205	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia:synexia-m3index-db	Apache-2.0
 m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticKind.java	d024ecc2a6c39ae8e23202493995f505c9a82e3	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia:synexia-m3index-db	Apache-2.0
 m3/indexdb/src/main/java/com/m3/indexdb/M3IndexDbSemanticNode.java	1c995542cd6d1a9c09126e9cadb4b2d6b2f11a7b	MIGRATION_RESIDUE_NOT_CANONICAL	com.synexia:synexia-m3index-db	Apache-2.0
