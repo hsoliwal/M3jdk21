@@ -17,6 +17,7 @@ MLKEM	src/java.base/share/classes/sun/security/provider/SHA3Parallel.java	CANDID
 MLKEM	src/java.base/share/classes/sun/security/util/KnownOIDs.java	CANDIDATE_POSTIMAGE_PRESENT	SEAL_EXACT_DELTA_IN_JEP496_RECIPE	MODULE
 TEST	test/jdk/sun/security/provider/acvp/data/ML-KEM-encapDecap-FIPS203/internalProjection.json	CANDIDATE_POSTIMAGE_PRESENT	SEAL_EXACT_FIPS203_DATA	MODULE
 TEST	test/jdk/sun/security/provider/acvp/data/ML-KEM-keyGen-FIPS203/internalProjection.json	CANDIDATE_POSTIMAGE_PRESENT	SEAL_EXACT_FIPS203_DATA	MODULE
+TEST	test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java	CANDIDATE_POSTIMAGE_PRESENT	SEAL_PROVIDER_API_OID_SMOKE	MODULE
 TEST	test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java	CANDIDATE_POSTIMAGE_PRESENT	SEAL_JAVA21_FOCUSED_ACVP_ADAPTER	MODULE
 REFERENCE	test/jdk/sun/security/provider/acvp/Launcher.java	ABSENT_CURRENT_TREE	DO_NOT_IMPORT_GENERIC_LATER_HARNESS	MODULE
 REFERENCE	test/jdk/sun/security/provider/all/Deterministic.java	ABSENT_CURRENT_TREE	DO_NOT_IMPORT_BROAD_POST21_DETERMINISM_HARNESS	MODULE
