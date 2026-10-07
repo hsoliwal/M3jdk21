@@ -43,7 +43,8 @@ public final class A3 {
                     A3Apply.run(
                             options.root(),
                             options.out("m3/build/a3/apply"),
-                            options.sources());
+                            options.sources(),
+                            options.mastery());
             case "lab" ->
                     A3Lab.write(
                             options.root(),
@@ -60,7 +61,8 @@ public final class A3 {
         System.err.println(
                 "A3: inv|alg|plan|work|apply|lab [--root PATH] [--out PATH] "
                         + "[--inventory PATH] [--queue PATH] "
-                        + "[--file PATH ...] [--list PATH]");
+                        + "[--file PATH ...] [--list PATH] "
+                        + "[--mastery-receipt PATH --mastery-root SHA256]");
     }
 
     private record Args(
@@ -69,7 +71,9 @@ public final class A3 {
             Path inventory,
             Path queue,
             List<String> files,
-            Path list) {
+            Path list,
+            Path masteryReceipt,
+            String masteryRoot) {
 
         static Args parse(String[] args) {
             Path root = Path.of(".");
@@ -77,6 +81,8 @@ public final class A3 {
             Path inventory = Path.of("m3/build/a3/inventory.tsv");
             Path queue = Path.of("m3/build/backports/COMPATIBILITY_QUEUE.tsv");
             Path list = null;
+            Path masteryReceipt = null;
+            String masteryRoot = null;
             ArrayList<String> files = new ArrayList<>();
 
             for (int index = 1; index < args.length; index++) {
@@ -93,6 +99,10 @@ public final class A3 {
                     queue = Path.of(requireValue(args, ++index, key));
                 } else if ("--list".equals(key)) {
                     list = Path.of(requireValue(args, ++index, key));
+                } else if ("--mastery-receipt".equals(key)) {
+                    masteryReceipt = Path.of(requireValue(args, ++index, key));
+                } else if ("--mastery-root".equals(key)) {
+                    masteryRoot = requireValue(args, ++index, key);
                 } else {
                     throw new IllegalArgumentException(
                             "unknown A3 option: " + key);
@@ -104,11 +114,22 @@ public final class A3 {
                     inventory,
                     queue,
                     List.copyOf(files),
-                    list);
+                    list,
+                    masteryReceipt,
+                    masteryRoot);
         }
 
         Path out(String fallback) {
             return out == null ? Path.of(fallback) : out;
+        }
+
+        com.synexia.rewrite.M3RecipeMasteryPortableReceipt.Verified mastery()
+                throws Exception {
+            if (masteryReceipt == null || masteryRoot == null) {
+                throw new IllegalArgumentException(
+                        "A3 apply requires --mastery-receipt and --mastery-root");
+            }
+            return A3Mastery.verify(root, masteryReceipt, masteryRoot);
         }
 
         List<String> sources() throws Exception {

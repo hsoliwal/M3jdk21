@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.a3;
 
+import com.synexia.rewrite.M3RecipeMasteryPortableReceipt;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -39,12 +40,14 @@ class A3ApplyTest {
                 A3Apply.run(
                         root,
                         Path.of("m3/build/a3/apply"),
-                        List.of(relative));
+                        List.of(relative),
+                        mastery());
 
         assertEquals(1, receipts.size());
         A3Apply.Receipt receipt = receipts.getFirst();
         assertEquals(relative, receipt.path());
         assertEquals("FILE", receipt.scope());
+        assertEquals("1".repeat(64), receipt.masteryRoot());
         assertEquals(A3RecipeHome.RECIPE_CLASS, receipt.recipe());
         assertTrue(receipt.changed());
         assertTrue(receipt.fixedPoint());
@@ -88,7 +91,8 @@ class A3ApplyTest {
                                 root,
                                 Path.of("m3/build/a3/apply"),
                                 List.of(
-                                        "src/java.base/share/classes/a.txt")));
+                                        "src/java.base/share/classes/a.txt"),
+                                mastery()));
     }
 
     @Test
@@ -112,7 +116,8 @@ class A3ApplyTest {
                 A3Apply.run(
                                 root,
                                 Path.of("m3/build/a3/no-change"),
-                                List.of(relative))
+                                List.of(relative),
+                                mastery())
                         .getFirst();
 
         assertFalse(receipt.changed());
@@ -123,4 +128,18 @@ class A3ApplyTest {
                         root.resolve("m3/build/a3/no-change/candidate")
                                 .resolve(relative)));
     }
+    private static M3RecipeMasteryPortableReceipt.Verified mastery() {
+        return new M3RecipeMasteryPortableReceipt.Verified(
+                "1".repeat(64),
+                "2".repeat(64),
+                "3".repeat(64),
+                "EXHAUSTIVE",
+                3,
+                1,
+                1,
+                10_000,
+                false,
+                0);
+    }
+
 }
