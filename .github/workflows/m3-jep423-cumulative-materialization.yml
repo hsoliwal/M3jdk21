@@ -1,0 +1,300 @@
+name: M3 JEP 423 cumulative materialization proof
+
+on:
+  push:
+    branches:
+      - "m3/jep423-cumulative-materialization-proof-20261007"
+  pull_request:
+    paths:
+      - "m3/backports/current_tree_preimage_inventory.py"
+      - "m3/backports/file_delta_inventory.py"
+      - "m3/backports/generate_recipe_crates.py"
+      - "m3/backports/materialize_generated_crates.py"
+      - "m3/backports/test_current_tree_preimage_inventory.py"
+      - "m3/backports/test_file_delta_inventory.py"
+      - "m3/backports/test_generate_recipe_crates.py"
+      - "m3/backports/test_materialize_generated_crates.py"
+      - "m3/backports/test_jep423_lineage.py"
+      - "m3/backports/recipes/jep-423-region-pinning/**"
+      - "m3/tooling/backport-dag/**"
+      - ".github/workflows/m3-jep423-cumulative-materialization.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cumulative-candidate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: 1 - Diff hygiene
+        run: git diff --check
+
+      - name: 2 - Unit-test admission generator executor and lineage
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile             m3/backports/current_tree_preimage_inventory.py             m3/backports/file_delta_inventory.py             m3/backports/generate_recipe_crates.py             m3/backports/materialize_generated_crates.py             m3/backports/recipes/jep-423-region-pinning/validate_lineage.py
+          (
+            cd m3/backports
+            python3 -m unittest -v               test_current_tree_preimage_inventory.py               test_file_delta_inventory.py               test_generate_recipe_crates.py               test_materialize_generated_crates.py               test_jep423_lineage.py
+          )
+
+      - name: 3 - Fetch exact OpenJDK baseline donor and required lineage
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir "$RUNNER_TEMP/upstream-jdk"
+          git -C "$RUNNER_TEMP/upstream-jdk" init -q
+          git -C "$RUNNER_TEMP/upstream-jdk" remote add origin https://github.com/openjdk/jdk.git
+          git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch             --filter=blob:none --no-tags origin             "refs/tags/jdk-21+35:refs/tags/jdk-21+35"             "refs/tags/jdk-22+36:refs/tags/jdk-22+36"             "38cfb220ddadbb401cc15f313aadb8234f626210"             "8643cc21333c6b51242ed3b9295b25f372244755"             "0d5f5e15d43f94a79c6133baecd5af217365d176"
+          printf 'UPSTREAM=%s\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
+
+      - name: 4 - Prove three-commit lineage and JDK22 repair mechanics
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/recipes/jep-423-region-pinning/validate_lineage.py
+          git -C "$UPSTREAM" grep -n "G1RegionPinCache" jdk-22+36 -- src/hotspot/share/gc/g1
+          git -C "$UPSTREAM" show             jdk-22+36:src/hotspot/share/gc/g1/heapRegion.hpp             | grep -E 'size_t.*pin|pin.*size_t'
+          git -C "$UPSTREAM" show             jdk-22+36:src/hotspot/share/gc/g1/g1CollectedHeap.inline.hpp             | grep -E 'pin_count_cache|G1RegionPinCache'
+
+      - name: 5 - Admit the 62 cumulative candidates against Java21
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/jep423"
+          python3 m3/backports/current_tree_preimage_inventory.py             --root .             --paths-file m3/backports/recipes/jep-423-region-pinning/CUMULATIVE_ADMIT_PATHS.txt             --out "$RUNNER_TEMP/jep423/CURRENT_PREIMAGES.tsv"             --baseline-git "$UPSTREAM"             --baseline-ref jdk-21+35             --admission-out "$RUNNER_TEMP/jep423/CURRENT_TREE_FILE_ADMISSION.tsv"             --mechanical-paths-out "$RUNNER_TEMP/jep423/MECHANICAL_PATHS.txt"
+          python3 - <<'PY'
+          import csv
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ["RUNNER_TEMP"]) / "jep423"
+          with (root / "CURRENT_TREE_FILE_ADMISSION.tsv").open(
+              encoding="utf-8", newline=""
+          ) as handle:
+              rows = list(csv.DictReader(handle, delimiter="\t"))
+
+          mechanical = [row for row in rows if row["admission"] == "MECHANICAL_FILE_REPLAY"]
+          held = [row for row in rows if row["admission"] == "HOLD_CURRENT_TREE_DRIFT"]
+          if len(rows) != 62 or len(mechanical) != 61 or len(held) != 1:
+              raise SystemExit(
+                  f"JEP423 cumulative admission drift rows={len(rows)} "
+                  f"mechanical={len(mechanical)} held={len(held)}"
+              )
+          expected = "test/hotspot/jtreg/gc/g1/TestEvacuationFailure.java"
+          if held[0]["path"] != expected:
+              raise SystemExit(f"unexpected JEP423 held path: {held}")
+          if held[0]["current_status"] != "ABSENT" or held[0]["baseline_status"] != "PRESENT":
+              raise SystemExit(f"unexpected JEP423 held relation: {held[0]}")
+          print("JEP423_CUMULATIVE_ADMISSION candidates=62 mechanical=61 held=1")
+          PY
+
+      - name: 6 - Generate one source-sealed FILE atom per mechanical path
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/file_delta_inventory.py             --repo "$UPSTREAM"             --release 22             --out "$RUNNER_TEMP/jep423/JDK21_TO_JDK22.tsv"
+          python3 m3/backports/generate_recipe_crates.py             --repo "$UPSTREAM"             --release 22             --paths-file "$RUNNER_TEMP/jep423/MECHANICAL_PATHS.txt"             --crate-size 1             --include-native             --include-text             --out "$RUNNER_TEMP/jep423/file-atoms"
+
+      - name: 7 - Prove complete cumulative accounting
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv
+          import os
+          from pathlib import Path
+
+          packet = Path("m3/backports/recipes/jep-423-region-pinning")
+          runner = Path(os.environ["RUNNER_TEMP"]) / "jep423"
+          candidates = {
+              line.strip()
+              for line in (packet / "CUMULATIVE_ADMIT_PATHS.txt")
+                  .read_text(encoding="utf-8").splitlines()
+              if line.strip()
+          }
+          mechanical = {
+              line.strip()
+              for line in (runner / "MECHANICAL_PATHS.txt")
+                  .read_text(encoding="utf-8").splitlines()
+              if line.strip()
+          }
+          held = candidates - mechanical
+
+          with (packet / "PATH_CLOSURE.tsv").open(
+              encoding="utf-8", newline=""
+          ) as handle:
+              closure = {
+                  row["path"]
+                  for row in csv.DictReader(handle, delimiter="\t")
+              }
+          preserved = closure - candidates
+
+          with (runner / "JDK21_TO_JDK22.tsv").open(
+              encoding="utf-8", newline=""
+          ) as handle:
+              delta = {
+                  row["path"]: row["status"]
+                  for row in csv.DictReader(handle, delimiter="\t")
+                  if row["path"] in mechanical
+              }
+          missing = mechanical - delta.keys()
+          if missing:
+              raise SystemExit(f"mechanical paths absent from donor comparison: {sorted(missing)}")
+          same = {path for path, status in delta.items() if status == "SAME"}
+
+          with (runner / "file-atoms" / "CRATES.tsv").open(
+              encoding="utf-8", newline=""
+          ) as handle:
+              crates = list(csv.DictReader(handle, delimiter="\t"))
+          generated = sum(int(row["target_count"]) for row in crates)
+          if any(int(row["target_count"]) != 1 for row in crates):
+              raise SystemExit("JEP423 FILE lane emitted a multi-target crate")
+
+          with (runner / "file-atoms" / "EXCLUSIONS.tsv").open(
+              encoding="utf-8", newline=""
+          ) as handle:
+              exclusions = list(csv.DictReader(handle, delimiter="\t"))
+          if exclusions:
+              raise SystemExit(f"JEP423 typed exclusions require review: {exclusions}")
+
+          expected_held = {"test/hotspot/jtreg/gc/g1/TestEvacuationFailure.java"}
+          expected_preserved = {
+              "test/hotspot/jtreg/gc/stress/TestJNIBlockFullGC/TestJNIBlockFullGC.java",
+              "test/hotspot/jtreg/gc/stress/TestJNIBlockFullGC/libTestJNIBlockFullGC.c",
+          }
+          if held != expected_held or preserved != expected_preserved:
+              raise SystemExit(
+                  f"JEP423 hold/preserve drift held={sorted(held)} "
+                  f"preserved={sorted(preserved)}"
+              )
+          if generated + len(same) != 61:
+              raise SystemExit(
+                  f"JEP423 mechanical accounting mismatch generated={generated} "
+                  f"same={len(same)}"
+              )
+          if generated + len(same) + len(held) + len(preserved) != 64:
+              raise SystemExit("JEP423 cumulative denominator accounting mismatch")
+          print(
+              f"JEP423_ACCOUNTED generated={generated} same={len(same)} "
+              "held=1 preserved=2 total=64"
+          )
+          PY
+
+      - name: 8 - Validate and project the scoped recipe DAG
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketMain             -Dexec.args="$PWD/m3/backports/recipes/jep-423-region-pinning/packet.tsv $PWD/m3/backports/recipes/jep-423-region-pinning/atom-evidence.tsv"             exec:java
+          mkdir -p "$RUNNER_TEMP/jep423/projections"
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain             -Dexec.args="$PWD/m3/backports/recipes/jep-423-region-pinning/packet.tsv $RUNNER_TEMP/jep423/projections $PWD/m3/backports/recipes/jep-423-region-pinning/atom-evidence.tsv"             exec:java
+          test -s "$RUNNER_TEMP/jep423/projections/M3BackportRoutes.java"
+          test -s "$RUNNER_TEMP/jep423/projections/m3_backport_dag.py"
+          test -s "$RUNNER_TEMP/jep423/projections/m3_backport_rules.drl"
+          test -s "$RUNNER_TEMP/jep423/projections/projection.tsv"
+
+      - name: 9 - Check current-tree preimages before mutation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/materialize_generated_crates.py             --root "$PWD"             --generated "$RUNNER_TEMP/jep423/file-atoms"             --mode check             --require-one-target-per-crate             --receipt "$RUNNER_TEMP/jep423/preimage.tsv"
+          test -z "$(git status --porcelain=v1 -uall)"
+
+      - name: 10 - Materialize ephemeral candidate and prove fixed point
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/materialize_generated_crates.py             --root "$PWD"             --generated "$RUNNER_TEMP/jep423/file-atoms"             --mode apply             --require-one-target-per-crate             --receipt "$RUNNER_TEMP/jep423/apply.tsv"
+          python3 m3/backports/materialize_generated_crates.py             --root "$PWD"             --generated "$RUNNER_TEMP/jep423/file-atoms"             --mode verify-post             --require-one-target-per-crate             --receipt "$RUNNER_TEMP/jep423/postimage.tsv"
+          git diff --check
+          before="$(git diff --binary | sha256sum | awk '{print $1}')"
+          python3 m3/backports/materialize_generated_crates.py             --root "$PWD"             --generated "$RUNNER_TEMP/jep423/file-atoms"             --mode apply             --require-one-target-per-crate
+          after="$(git diff --binary | sha256sum | awk '{print $1}')"
+          test "$before" = "$after"
+
+      - name: 11 - Prove only generated FILE targets changed
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          import subprocess
+
+          generated = Path(os.environ["RUNNER_TEMP"]) / "jep423" / "file-atoms"
+          expected = set()
+          for root in (
+              generated / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned",
+              generated / "src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text",
+          ):
+              if not root.exists():
+                  continue
+              for manifest in root.glob("*/manifest.tsv"):
+                  for line in manifest.read_text(encoding="utf-8").splitlines():
+                      if line and not line.startswith("#"):
+                          expected.add(line.split("\t", 1)[0])
+
+          status = subprocess.check_output(
+              ["git", "status", "--porcelain=v1", "-uall"], text=True
+          )
+          actual = {line[3:] for line in status.splitlines() if line}
+          if actual != expected:
+              raise SystemExit(
+                  "JEP423 changed-path fence failed\n"
+                  f"expected={sorted(expected)}\nactual={sorted(actual)}"
+              )
+          print(f"JEP423_CHANGED_PATHS={len(actual)}")
+          PY
+
+      - name: 12 - Install focused OpenJDK build prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends             autoconf make gcc g++ zip unzip             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev             libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+
+      - name: 13 - Configure fastdebug JDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash configure             --with-boot-jdk="$JAVA_HOME"             --with-debug-level=fastdebug             --with-jvm-variants=server             --disable-warnings-as-errors
+
+      - name: 14 - Build JDK images including HotSpot Agent
+        run: make JOBS=2 images
+
+      - name: 15 - Run pinned-object G1 and preserved JNI regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 test TEST="          test/hotspot/jtreg/gc/g1/pinnedobjs           test/hotspot/jtreg/gc/g1/plab/TestPLABEvacuationFailure.java           test/hotspot/jtreg/gc/g1/TestGCLogMessages.java           test/hotspot/jtreg/gc/stress/gclocker/TestExcessGCLockerCollections.java           test/hotspot/jtreg/gc/stress/TestJNIBlockFullGC/TestJNIBlockFullGC.java"
+
+      - name: 16 - Run JFR G1 cause and locker regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 test TEST="          test/jdk/jdk/jfr/event/gc/collection/TestG1ParallelPhases.java           test/jdk/jdk/jfr/event/gc/collection/TestGCCauseWithG1ConcurrentMark.java           test/jdk/jdk/jfr/event/gc/collection/TestGCCauseWithG1FullCollection.java           test/jdk/jdk/jfr/event/gc/detailed/TestGCLockerEvent.java"
+
+      - name: 17 - Upload generated FILE crates and proof receipts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jep423-cumulative-file-atom-proof-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/jep423
+            build/*/test-results/**
+          if-no-files-found: warn
+          retention-days: 30
