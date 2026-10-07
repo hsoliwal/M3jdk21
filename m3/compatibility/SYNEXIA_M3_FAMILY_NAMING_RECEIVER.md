@@ -6,7 +6,7 @@ not promote any collection, AST, precompute, graph or native family into the JDK
 ## Exact source authority
 
 M3JDK21 pins Synexia PR #9773 head
-`0928e61bff989c7df16761301491bac4e7ba41bc` through
+`a2f1e9e6f84969c04f87cbc5c921d0add8ff71a3` through
 `synexia-m3-family-naming-pin.tsv`. The pin records the exact policy, machine policy, seed
 semantic map, canonical invariant table, AGENTS continuation rule, reusable OpenRewrite recipe and
 recipe-test Git blobs.
