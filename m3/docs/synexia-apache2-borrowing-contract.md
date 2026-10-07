@@ -29,6 +29,37 @@ The machine-readable target policy is
 `m3/compatibility/synexia-recipe-home-policy.tsv`. The canonical source-side map is
 `.m3/m3jdk21-synexia-borrowing.tsv` in `hsoliwal/com.synexia`.
 
+## Frozen migration residue
+
+Reusable implementations that are already canonical in Synexia are not merely marked non-authoritative;
+their current M3JDK21 source bytes are frozen as migration residue.
+
+The machine-readable seal is:
+
+`m3/compatibility/synexia-canonical-residue-gitblobs.tsv`
+
+It records the exact Git blob SHA-1 for every current reusable residue implementation under:
+
+- `scope/**`;
+- `atom/**`;
+- `semantic/**`;
+- `a3/**`;
+- the target-local Java21 convergence catalogue/orchestrator copies;
+- `m3/indexdb/src/main/java/**`.
+
+The M3 tooling JUnit proof recomputes Git blob identity directly from checkout bytes and requires the
+sealed set to equal the current residue set. Therefore:
+
+1. editing a frozen residue implementation fails;
+2. adding a new implementation under a frozen residue namespace fails;
+3. deleting residue requires an explicit migration update;
+4. tests, proof harnesses, JDK-specific receivers and thin target adapters may continue to evolve;
+5. reusable behavior improvements must be authored/proved in `hsoliwal/com.synexia` and returned by
+   the Apache-2.0 handoff or canonical Synexia Maven/OpenRewrite dependency.
+
+The SHA-1 here is Git object identity, not a cryptographic security claim; source admission continues
+to use the existing SHA-256 handoff/preimage gates.
+
 ## Receiver sequence
 
 A generated Synexia declarative recipe executes in this order:

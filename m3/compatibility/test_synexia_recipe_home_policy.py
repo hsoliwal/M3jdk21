@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import csv
+import hashlib
 import unittest
 import xml.etree.ElementTree as ET
 from pathlib import Path
@@ -9,6 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 POLICY = ROOT / "compatibility" / "synexia-recipe-home-policy.tsv"
 PIN = ROOT / "compatibility" / "synexia-recipe-home-pin.tsv"
+RESIDUE = ROOT / "compatibility" / "synexia-canonical-residue-gitblobs.tsv"
 
 
 class SynexiaRecipeHomePolicyTest(unittest.TestCase):
@@ -16,7 +18,7 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         with POLICY.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
 
-        self.assertEqual(9, len(rows))
+        self.assertEqual(12, len(rows))
         for row in rows:
             self.assertEqual("M3JDK21_SYNEXIA_RECIPE_HOME_V1", row["schema"])
             self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
@@ -51,6 +53,77 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
             ]["handoff_required"],
         )
 
+
+    def test_top_level_shared_surfaces_are_explicitly_noncanonical(self) -> None:
+        with POLICY.open(encoding="utf-8", newline="") as handle:
+            rows = {row["local_surface"]: row for row in csv.DictReader(handle, delimiter="\t")}
+
+        expected = {
+            "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceCatalog.java":
+                "com.synexia.rewrite.M3CanonicalMultiPassPlan",
+            "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java":
+                "com.synexia.rewrite.M3RepositoryJava21ConvergenceRecipe",
+        }
+        for surface, owner in expected.items():
+            self.assertEqual("MIGRATION_RESIDUE_NOT_CANONICAL", rows[surface]["disposition"])
+            self.assertEqual(owner, rows[surface]["canonical_owner"])
+            self.assertEqual("true", rows[surface]["handoff_required"])
+
+        compatibility = rows[
+            "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/InstallIndexStringCompatibility.java"
+        ]
+        self.assertEqual("RECEIVER_ADAPTER_ONLY", compatibility["disposition"])
+        self.assertEqual(
+            "com.synexia:synexia-m3index-jdk-bridge",
+            compatibility["canonical_owner"],
+        )
+
+    def test_full_reusable_residue_set_is_git_blob_frozen(self) -> None:
+        with RESIDUE.open(encoding="utf-8", newline="") as handle:
+            rows = list(csv.DictReader(handle, delimiter="\t"))
+
+        self.assertEqual(29, len(rows))
+        frozen = {row["path"]: row for row in rows}
+        self.assertEqual(29, len(frozen))
+
+        actual: set[str] = set()
+        for exact in (
+            "tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceCatalog.java",
+            "tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java",
+        ):
+            if (ROOT / exact).is_file():
+                actual.add("m3/" + exact)
+
+        for directory in (
+            "tooling/migration-recipes/src/main/java/com/m3/rewrite/scope",
+            "tooling/migration-recipes/src/main/java/com/m3/rewrite/atom",
+            "tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic",
+            "tooling/migration-recipes/src/main/java/com/m3/rewrite/a3",
+            "indexdb/src/main/java",
+        ):
+            start = ROOT / directory
+            if start.is_dir():
+                actual.update(
+                    "m3/" + path.relative_to(ROOT).as_posix()
+                    for path in start.rglob("*.java")
+                    if path.is_file()
+                )
+
+        self.assertEqual(set(frozen), actual)
+
+        for relative, row in frozen.items():
+            self.assertEqual("MIGRATION_RESIDUE_NOT_CANONICAL", row["disposition"])
+            self.assertEqual("Apache-2.0", row["license"])
+            self.assertTrue(
+                row["canonical_synexia_owner"].startswith("com.synexia")
+                or row["canonical_synexia_owner"].startswith("synexia-")
+            )
+            path = ROOT.parent / relative
+            data = path.read_bytes()
+            actual_blob = hashlib.sha1(
+                f"blob {len(data)}\0".encode("ascii") + data
+            ).hexdigest()
+            self.assertEqual(row["git_blob_sha1"], actual_blob, relative)
 
     def test_a3_mastery_and_catalogue_resolve_to_synexia_recipe_owners(self) -> None:
         with POLICY.open(encoding="utf-8", newline="") as handle:
