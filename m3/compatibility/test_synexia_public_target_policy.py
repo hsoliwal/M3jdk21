@@ -38,7 +38,7 @@ class SynexiaPublicTargetPolicyTest(unittest.TestCase):
         self.assertEqual("hsoliwal/com.synexia", pin["source_repository"])
         self.assertEqual("9642", pin["source_pr"])
         self.assertEqual("Apache-2.0", pin["source_license"])
-        self.assertEqual("PENDING_SYNEXIA_MERGE", pin["delivery_state"])
+        self.assertEqual("SOURCE_MERGED_PROOF_PENDING", pin["delivery_state"])
         self.assertEqual("QUALIFICATION_INPUT_ONLY", pin["target_role"])
         self.assertEqual("false", pin["automatic_application"])
         self.assertEqual("false", pin["target_relicense_authority"])
@@ -47,7 +47,7 @@ class SynexiaPublicTargetPolicyTest(unittest.TestCase):
             pin["openjdk_retained_license"],
         )
 
-    def test_unmerged_apache_handoff_pin_cannot_enable_application_or_relicense(self) -> None:
+    def test_merged_proof_pending_apache_handoff_pin_cannot_enable_application_or_relicense(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             checked = policy.APACHE_HANDOFF_PIN.read_text(encoding="utf-8")
