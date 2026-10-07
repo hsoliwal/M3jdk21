@@ -133,6 +133,105 @@ jobs:
           if __name__ == "__main__":
               main()
           PY_SOURCE
+      - name: Verify and reconstruct canonical source correction
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY_DELTA'
+          import hashlib, json, os, re, urllib.request
+          from pathlib import Path
+          
+          COMMENT = 6034649686
+          DELTA_SHA = '1a46ee791bb0a61128e8f98cd3434f8026512e6d240bf3e2d123c00f5208511f'
+          BASE = '01554337e0051018e6d932f3775378a01faf88f8'
+          SOURCE = '01561606c6adec4c5c3a3d81247924c60f9a9fd0'
+          TARGET = 'c1acefe582ac84414f1082f095e96bbee167bc33'
+          PATH = 'synexia-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/hosted_apply.py'
+          BEFORE = '5cb0930da45a862207360b684579219c6a208bac5f5c27e2f409caf1d26f96c7'
+          AFTER = '3718546fc3fe883a56fdb00ae30c4343efa91d3954fca465dac8928c5994ec4d'
+          
+          def require(value, message):
+              if not value:
+                  raise RuntimeError(message)
+          
+          def unique(pairs):
+              out = {}
+              for key, value in pairs:
+                  require(key not in out, 'duplicate JSON key')
+                  out[key] = value
+              return out
+          
+          def reconstruct(before, meta, raw):
+              require(len(raw) == 2982 and hashlib.sha256(raw).hexdigest() == DELTA_SHA, 'delta seal')
+              delta = json.loads(raw.decode('utf-8'), object_pairs_hook=unique)
+              require(set(delta) == {'schema', 'path', 'baseSourceCommit', 'sourceCommit', 'beforeSha256', 'afterSha256', 'edits'}, 'delta fields')
+              require(delta['schema'] == 'M3_CALLBACK_SOURCE_DELTA_V1' and delta['path'] == PATH, 'delta scope')
+              require(delta['baseSourceCommit'] == BASE and delta['sourceCommit'] == SOURCE, 'delta lineage')
+              require(delta['beforeSha256'] == BEFORE and delta['afterSha256'] == AFTER, 'delta hashes')
+              require(meta['sourceCommit'] == BASE and meta['targetCommit'] == TARGET, 'base packet lineage')
+              require(len(meta['files']) == 18 and meta['files'][PATH] == BEFORE, 'base packet file seal')
+              require(hashlib.sha256(before).hexdigest() == BEFORE, 'source preimage')
+              text = before.decode('utf-8')
+              require(len(delta['edits']) == 2, 'exact edit count')
+              for edit in delta['edits']:
+                  require(set(edit) == {'before', 'after'} and isinstance(edit['before'], str) and isinstance(edit['after'], str), 'edit shape')
+                  require(edit['before'] and text.count(edit['before']) == 1, 'unique exact source atom')
+                  text = text.replace(edit['before'], edit['after'], 1)
+              after = text.encode('utf-8')
+              require(hashlib.sha256(after).hexdigest() == AFTER, 'source postimage')
+              updated = json.loads(json.dumps(meta))
+              updated['baseSourceCommit'] = BASE
+              updated['sourceCommit'] = SOURCE
+              updated['sourceDeltaSha256'] = DELTA_SHA
+              updated['sourceFileRevisions'] = {name: BASE for name in meta['files']}
+              updated['sourceFileRevisions'][PATH] = SOURCE
+              updated['files'][PATH] = AFTER
+              return after, updated
+          
+          def main():
+              request = urllib.request.Request(
+                  f'https://api.github.com/repos/hsoliwal/M3jdk21/issues/comments/{COMMENT}',
+                  headers={'Accept': 'application/vnd.github+json', 'Authorization': 'Bearer ' + os.environ['GH_TOKEN'],
+                           'User-Agent': 'Synexia-Callback-Delta/1', 'X-GitHub-Api-Version': '2022-11-28'})
+              with urllib.request.urlopen(request, timeout=60) as response:
+                  response_bytes = response.read(65537)
+              require(len(response_bytes) <= 65536, 'comment response budget')
+              comment = json.loads(response_bytes.decode('utf-8'), object_pairs_hook=unique)
+              require(comment['id'] == COMMENT and comment['issue_url'] == 'https://api.github.com/repos/hsoliwal/M3jdk21/issues/258', 'comment identity')
+              blocks = re.findall(r'```json\n(.*?\n)```', comment['body'], flags=re.S)
+              require(len(blocks) == 1, 'one delta JSON block required')
+              raw = blocks[0].encode('utf-8')
+              root = Path(os.environ['RUNNER_TEMP']) / 'callback-source'
+              record = Path(os.environ['RUNNER_TEMP']) / 'callback-input'
+              host = root / PATH
+              for path in (host, root / 'SOURCE_PACKET.json', record):
+                  for part in (path, *path.parents):
+                      require(not part.is_symlink(), 'symbolic source/record path')
+              meta_bytes = (root / 'SOURCE_PACKET.json').read_bytes()
+              meta = json.loads(meta_bytes.decode('utf-8'), object_pairs_hook=unique)
+              after, updated = reconstruct(host.read_bytes(), meta, raw)
+              for name, expected in meta['files'].items():
+                  require(hashlib.sha256((root / name).read_bytes()).hexdigest() == expected, 'base source inventory drift')
+              with (record / 'BASE_SOURCE_PACKET.json').open('xb') as out:
+                  out.write(meta_bytes)
+              with (record / 'SOURCE_DELTA.json').open('xb') as out:
+                  out.write(raw)
+              host.write_bytes(after)
+              (root / 'SOURCE_PACKET.json').write_text(json.dumps(updated, sort_keys=True, indent=2) + '\n', encoding='utf-8')
+              require(all(hashlib.sha256((root / name).read_bytes()).hexdigest() == value for name, value in updated['files'].items()), 'derived source inventory drift')
+              receipt = {'status': 'SOURCE_INPUT_RECONSTRUCTED_NOT_EXECUTED', 'baseSourceCommit': BASE,
+                         'correctionCommit': SOURCE, 'deltaSha256': DELTA_SHA, 'path': PATH,
+                         'beforeSha256': BEFORE, 'afterSha256': AFTER, 'targetCommit': TARGET,
+                         'sourceFileRevisions': updated['sourceFileRevisions']}
+              with (record / 'DELTA_RECEIPT.json').open('x', encoding='utf-8') as out:
+                  out.write(json.dumps(receipt, sort_keys=True, indent=2) + '\n')
+              print(json.dumps({'status': receipt['status'], 'correctionCommit': SOURCE, 'afterSha256': AFTER}))
+          
+          if __name__ == '__main__':
+              main()
+          PY_DELTA
       - name: Provision isolated pinned toolchain inputs
         shell: bash
         run: |
