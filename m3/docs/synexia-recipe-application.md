@@ -7,9 +7,13 @@ Status: **applied product state; Synexia owns the reusable recipes**.
 ### M3 String history convergence
 
 Repository: `hsoliwal/com.synexia`  
-Custody PR: https://github.com/hsoliwal/com.synexia/pull/9529  
-Custody branch: `m3/m3jdk21-string-canonical-dag-synexia-home-20261006`  
-Pinned custody revision: `aeeda5a77e2c2a1743be0961e8052f7654a8e697`
+Custody PR: https://github.com/hsoliwal/com.synexia/pull/9597  
+Custody branch: `m3/m3jdk21-string-recipe-canonicalize-v2-20261007`  
+Pinned custody revision: `fd73581d6d4205e92c151509cc6663f69eeaf22f`
+
+This supersedes the earlier custody receipt for PR #9529. PR #9597 is based directly on the
+then-current Synexia `develop` head and forward-seals the live M3JDK21 product postimages without
+moving runtime ownership out of M3JDK21.
 
 Named recipe:
 
@@ -40,7 +44,7 @@ M3JDK21 runtime branch:
 
 Applied/fixed-point revision:
 
-`82ee9917ef56e3e297402aea563e08d8763fe03d`
+`87a711c56b1fd5fbe843b864474f3cc87c15362b`
 
 Direct manifest comparison after moving recipe custody to Synexia:
 
