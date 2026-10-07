@@ -41,6 +41,13 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
             self.assertEqual("true", by_surface[surface]["handoff_required"])
 
         self.assertEqual(
+            "com.synexia.rewrite.semantic.M3SemanticHashRecipe",
+            by_surface[
+                "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/**"
+            ]["canonical_owner"],
+        )
+
+        self.assertEqual(
             "JDK_TARGET_SPECIFIC",
             by_surface[
                 "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/**"
