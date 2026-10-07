@@ -1,0 +1,8 @@
+src/java.base/share/classes/com/sun/crypto/provider/ML_KEM.java
+src/java.base/share/classes/com/sun/crypto/provider/ML_KEM_Impls.java
+src/java.base/share/classes/com/sun/crypto/provider/SunJCE.java
+src/java.base/share/classes/java/security/spec/NamedParameterSpec.java
+src/java.base/share/classes/sun/security/provider/SHA3Parallel.java
+src/java.base/share/classes/sun/security/util/KnownOIDs.java
+test/jdk/sun/security/provider/all/Deterministic.java
+test/micro/org/openjdk/bench/java/security/MLKEMBench.java
