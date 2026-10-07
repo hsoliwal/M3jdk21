@@ -3,8 +3,8 @@ name: M3 JEP 467 Markdown doc-comment inventory
 on:
   push:
     branches:
+      - "m3/jep467-*"
       - "m3/recover-jep467-current-master-20261005"
-      - "m3/jep467-generated-crate-materialization-20261006"
       - "m3/recover-jep467-materialization-current-20261007"
     paths:
       - "m3/backports/generate_recipe_crates.py"
@@ -35,11 +35,11 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 150
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "21"
@@ -126,7 +126,7 @@ jobs:
           set -euo pipefail
           python3 -m py_compile             m3/backports/generate_recipe_crates.py             m3/backports/materialize_generated_crates.py
           cd m3/backports
-          python3 -m unittest -v             test_generate_recipe_crates.py             test_materialize_generated_crates.py
+          python3 -m unittest -v             test_generate_recipe_crates.py             test_materialize_generated_crates.py             test_jep467_ga_policy.py
 
       - name: Generate candidate FILE atoms from JDK23 GA
         shell: bash
@@ -135,7 +135,7 @@ jobs:
           python3 m3/backports/generate_recipe_crates.py \
             --repo "$UPSTREAM" \
             --release 23 \
-            --paths-file m3/backports/recipes/jep-467-markdown/PATHS.txt \
+            --paths-file m3/backports/recipes/jep-467-markdown/MATERIALIZATION_PATHS.txt \
             --crate-size 1 \
             --include-text \
             --out target/jep467/file-atoms
@@ -150,10 +150,37 @@ jobs:
 
           selected = {
               line.strip()
+              for line in Path("m3/backports/recipes/jep-467-markdown/MATERIALIZATION_PATHS.txt")
+                  .read_text(encoding="utf-8").splitlines()
+              if line.strip()
+          }
+          denominator = {
+              line.strip()
               for line in Path("m3/backports/recipes/jep-467-markdown/PATHS.txt")
                   .read_text(encoding="utf-8").splitlines()
               if line.strip()
           }
+          if len(denominator) != 251:
+              raise SystemExit(f"expected 251 implementation paths, found {len(denominator)}")
+          if len(selected) != 250:
+              raise SystemExit(f"expected 250 GA materialization paths, found {len(selected)}")
+
+          with Path("m3/backports/recipes/jep-467-markdown/TYPED_EXCLUSIONS.tsv").open(
+              encoding="utf-8", newline=""
+          ) as handle:
+              policy_exclusions = list(csv.DictReader(handle, delimiter="\t"))
+          expected_exclusion = {
+              "path": "test/langtools/tools/javac/processing/model/util/elements/TestGetDocComments.java",
+              "reason": "IMPLEMENTATION_DELETION_ALREADY_ABSENT",
+              "implementation_state": "DELETED_BY_JEP467",
+              "jdk21_state": "ABSENT",
+              "jdk23_ga_state": "ABSENT",
+              "authority": "EVIDENCE_ONLY",
+          }
+          if policy_exclusions != [expected_exclusion]:
+              raise SystemExit(f"unexpected JEP467 typed exclusions: {policy_exclusions}")
+          if selected | {expected_exclusion["path"]} != denominator:
+              raise SystemExit("JEP467 250+1 denominator partition drift")
           with Path("target/jep467/file-atoms/CRATES.tsv").open(
               encoding="utf-8", newline=""
           ) as handle:
@@ -163,12 +190,18 @@ jobs:
               encoding="utf-8", newline=""
           ) as handle:
               exclusions = list(csv.DictReader(handle, delimiter="\t"))
-          if generated + len(exclusions) != len(selected):
+          if exclusions:
+              raise SystemExit(f"JEP467 GA-selected paths produced unexpected generator exclusions: {exclusions}")
+          if generated != len(selected):
               raise SystemExit(
-                  f"JEP467 accounting mismatch generated={generated} "
-                  f"exclusions={len(exclusions)} selected={len(selected)}"
+                  f"JEP467 materialization accounting mismatch generated={generated} "
+                  f"selected={len(selected)}"
               )
-          print(f"JEP467_ACCOUNTED generated={generated} exclusions={len(exclusions)}")
+          print(
+              f"JEP467_ACCOUNTED denominator={len(denominator)} "
+              f"materializable={len(selected)} generated={generated} "
+              f"already_absent={len(policy_exclusions)}"
+          )
           PY
 
       - name: Verify M3 generator and recipe substrate
@@ -209,7 +242,7 @@ jobs:
 
           selected = [
               line.strip()
-              for line in Path("m3/backports/recipes/jep-467-markdown/PATHS.txt")
+              for line in Path("m3/backports/recipes/jep-467-markdown/MATERIALIZATION_PATHS.txt")
                   .read_text(encoding="utf-8").splitlines()
               if line.strip()
           ]
@@ -223,15 +256,15 @@ jobs:
               exclusions = list(csv.DictReader(handle, delimiter="\t"))
 
           if exclusions:
-              raise SystemExit(f"JEP467 has typed exclusions requiring review: {exclusions}")
+              raise SystemExit(f"JEP467 GA-selected paths produced unexpected generator exclusions: {exclusions}")
           if not crates or any(int(row["target_count"]) != 1 for row in crates):
               raise SystemExit("JEP467 FILE materialization requires one target per crate")
           generated = sum(int(row["target_count"]) for row in crates)
-          if generated != len(selected) or len(selected) != 251:
+          if generated != len(selected) or len(selected) != 250:
               raise SystemExit(
-                  f"JEP467 full-packet mismatch generated={generated} selected={len(selected)}"
+                  f"JEP467 GA packet mismatch generated={generated} selected={len(selected)}"
               )
-          print(f"JEP467_FILE_ATOMS={generated}")
+          print(f"JEP467_FILE_ATOMS={generated} ALREADY_ABSENT=1 DENOMINATOR=251")
           PY
 
       - name: Verify every current-tree preimage before mutation
@@ -283,9 +316,9 @@ jobs:
                   "JEP467 changed-path fence failed\n"
                   f"expected={sorted(expected)}\nactual={sorted(actual)}"
               )
-          if len(actual) != 251:
-              raise SystemExit(f"expected 251 changed paths, observed {len(actual)}")
-          print("JEP467_CHANGED_PATHS=251")
+          if len(actual) != 250:
+              raise SystemExit(f"expected 250 materialized changed paths, observed {len(actual)}")
+          print("JEP467_CHANGED_PATHS=250 ALREADY_ABSENT=1 DENOMINATOR=251")
           PY
 
       - name: Install OpenJDK build prerequisites
@@ -317,7 +350,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          make JOBS=2 test TEST="          test/langtools/tools/javac/danglingDocComments           test/langtools/tools/javac/doctree           test/langtools/tools/javac/lexer/CommentTest.java           test/langtools/tools/javac/processing/model/util/elements/TestGetDocCommentKind.java           test/langtools/tools/javac/processing/model/util/elements/TestGetDocComment_Block.java           test/langtools/tools/javac/processing/model/util/elements/TestGetDocComment_Line.java           test/langtools/tools/javac/processing/model/util/elements/TestGetDocComments.java           test/langtools/tools/javac/classfiles/attributes/deprecated/DeprecatedPackageTest.java           test/langtools/tools/javac/classfiles/attributes/deprecated/DeprecatedTest.java"
+          make JOBS=2 test TEST="          test/langtools/tools/javac/danglingDocComments           test/langtools/tools/javac/doctree           test/langtools/tools/javac/lexer/CommentTest.java           test/langtools/tools/javac/processing/model/util/elements/TestGetDocCommentKind.java           test/langtools/tools/javac/processing/model/util/elements/TestGetDocComment_Block.java           test/langtools/tools/javac/processing/model/util/elements/TestGetDocComment_Line.java           test/langtools/tools/javac/classfiles/attributes/deprecated/DeprecatedPackageTest.java           test/langtools/tools/javac/classfiles/attributes/deprecated/DeprecatedTest.java"
 
       - name: Built-JDK Markdown doc-comment smoke
         shell: bash
