@@ -110,3 +110,22 @@ A valid handoff packet proves source identity and permitted candidate materializ
 grant merge authority, remove target-local verification, or let M3JDK21 silently redefine Synexia's
 canonical shared architecture. Useful target discoveries flow back to Synexia as explicit evidence
 or recipe improvements.
+
+
+## M3Index ownership canonical pin (2026-10-07)
+
+The reusable M3Index ownership boundary is machine-enforced by merged Synexia PR #9644 at canonical `develop` revision `9389db87e3545ad8a352ff47969691799b5f1f38`.
+
+M3JDK21 records this as `PINNED_CANONICAL_SOURCE`. The family pin still grants no product mutation or promotion authority; JDK-specific build/jtreg/runtime gates remain mandatory.
+
+The candidate explicitly binds:
+
+- MIndexString -> M3String;
+- MIndexAST -> M3AST;
+- MIndexASTAtom -> M3ASTAtom;
+- MIndexDag -> M3Dag;
+- generic data structures/precompute/JNI mechanics -> Synexia canonical owners;
+- java.lang.String/HotSpot/JIT/GC/CDS/JVMTI/JNI product integration -> M3JDK21 target owners.
+
+See `m3/compatibility/SYNEXIA_M3INDEX_RECEIVER.md` and
+`m3/compatibility/synexia-m3index-ownership-pin.tsv`.
