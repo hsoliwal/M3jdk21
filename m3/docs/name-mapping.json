@@ -378,7 +378,7 @@
       "status": "PENDING",
       "source_role": "Synexia segmented object-array donor/reference",
       "target_rule": "no port until covariance, ArrayStoreException, runtime component type, clone/reflection/serialization, GC and JMM obligations are explicit"
-    }    ,
+    },
     {
       "source": "com.synexia.indexstring.MIndexCodeTextSignalTrialImage",
       "source_commit": "7a41c084fa80dd60cb0cffdfb9dc3db50b49e71b",
