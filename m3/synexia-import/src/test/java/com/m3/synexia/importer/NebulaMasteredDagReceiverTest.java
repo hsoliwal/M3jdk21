@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.synexia.importer;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -21,8 +22,19 @@ final class NebulaMasteredDagReceiverTest {
         assertThrows(
                 IllegalStateException.class,
                 receipt::requireAdmissibleForMechanicalApplication);
-        assertTrue(receipt.proofCommit().matches("[0-9a-f]{40}"));
-        assertTrue(receipt.proofPr() > 0);
+        assertEquals(104, receipt.proofPr());
+        assertEquals(
+                "m3/final-proof-grid-v2-custody-repair-20261007",
+                receipt.proofBranch());
+        assertEquals(
+                "fd8589d378ad9c68ab9a7254e5e73957e0744d86",
+                receipt.proofCommit());
+        assertEquals("ACTIONS_STARTUP_BLOCKED_NO_JOBS", receipt.proofState());
+        assertEquals(NebulaMasteredDagReceiver.Gate.PENDING, receipt.recipeFirst());
+        assertEquals(NebulaMasteredDagReceiver.Gate.PENDING, receipt.finalTransfer());
+        assertEquals("PENDING_99_REPROOF", receipt.semanticCoverage());
+        assertEquals(NebulaMasteredDagReceiver.Gate.PENDING, receipt.fixedPoint());
+        assertEquals(NebulaMasteredDagReceiver.Gate.PENDING, receipt.originalBuild());
     }
 
     @Test
