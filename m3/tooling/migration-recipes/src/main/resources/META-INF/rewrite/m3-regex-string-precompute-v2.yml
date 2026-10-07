@@ -1,0 +1,10 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.M3RegexStringPrecomputeSuperset
+displayName: M3 regex String precompute superset
+description: >-
+  Installs the M3-owned regex/String static fact packet and bounded trial-image hard-case ranking
+  through the exact m3-regex-string-precompute-v2 Java snapshot crate. JDK Pattern and tests remain
+  semantic authority; no java.base promotion occurs here.
+recipeList:
+  - com.m3.rewrite.backport.M3RegexStringPrecomputeSupersetRecipe

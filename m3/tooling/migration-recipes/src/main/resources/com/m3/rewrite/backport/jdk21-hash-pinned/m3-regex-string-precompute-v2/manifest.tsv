@@ -1,0 +1,5 @@
+# path	before_sha256	after_sha256	resource
+m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexStringSignals.java	ABSENT	475729a1d7e48f65882febfaf9186e269d243975a87ef2aa772dd854bbbbe81c	00-M3RegexStringSignals.java.txt
+m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexStringTrialImage.java	ABSENT	7780a685d96ecd449ac3330c057a6d7e2a3c3a04fe9637d96b7e9b0064bdef91	01-M3RegexStringTrialImage.java.txt
+m3/ports/precompute/src/test/java/com/m3/precompute/M3RegexStringSignalsTest.java	ABSENT	1e1baaaa7c9e3905ce3f172e78f5e624d73d7611d450befaf85af9b6812ef002	02-M3RegexStringSignalsTest.java.txt
+m3/ports/precompute/src/test/java/com/m3/precompute/M3RegexStringTrialImageTest.java	ABSENT	3c030382d5910251ab76c3171c9cd13ac31a3b526d1c76fab64e12cf3f1076f2	03-M3RegexStringTrialImageTest.java.txt
