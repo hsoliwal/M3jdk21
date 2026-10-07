@@ -148,6 +148,14 @@ expected_dispositions = {
     "MIndexSuffixDecision / suffix DFA facts": "DONOR_ONLY_NO_JDK21_CONSUMER",
     "LCP range-minimum / suffix-index facts": "DONOR_ONLY_NO_JDK21_CONSUMER",
 }
+for required_mechanical_boundary in [
+    "REGEX_INTERNAL\tMIndexRe2MechanicalFacts.re2ProgramSize/groupCount/namedGroups\tjava.util.regex.Pattern internal compiled-state/cost evidence only\tADVISORY_NO_DUPLICATE_STRING_STATE",
+    "HIGHER_LAYER\tMIndexLucenePostingPlan conjunctionOrder/disjunctionHeapOrder/disjunctionLinearOrder\tno java.lang.String owner\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
+    "HIGHER_LAYER\tMIndexTweetyGraphQueryIndex / Tweety reasoning precompute\tno java.lang.String owner\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
+]:
+    if required_mechanical_boundary not in completeness:
+        fail(f"mechanical String precompute boundary missing: {required_mechanical_boundary}")
+
 for donor, expected in expected_dispositions.items():
     actual = by_responsibility[donor][3]
     if actual != expected:
@@ -615,6 +623,9 @@ for fragment in [
 # Expensive donor facts with no JDK21 semantic consumer are intentional NO_PORTs. Adding one of
 # these java.lang owners requires an explicit architecture/invariant revision and a real consumer.
 for forbidden_path in [
+    "src/java.base/share/classes/java/lang/M3StringLucenePostingPrecompute.java",
+    "src/java.base/share/classes/java/lang/M3StringTweetyPrecompute.java",
+    "src/java.base/share/classes/java/lang/M3StringReasoningPrecompute.java",
     "src/java.base/share/classes/java/lang/M3StringPrefixZ.java",
     "src/java.base/share/classes/java/lang/M3StringPalindromePrecompute.java",
     "src/java.base/share/classes/java/lang/M3StringSuffixDecision.java",
@@ -661,6 +672,14 @@ for required_live_donor_mapping in [
 ]:
     if required_live_donor_mapping not in port_map:
         fail(f"live Synexia precompute classification missing: {required_live_donor_mapping}")
+
+for required_mechanical_mapping in [
+    "MIndexRe2MechanicalFacts.re2ProgramSize / re2GroupCount / re2NamedGroups\tjava.util.regex internal planning evidence only\tADVISORY_NO_EXTERNAL_DEPENDENCY",
+    "MIndexLucenePostingPlan cost-led conjunction/disjunction schedule\tno java.lang.String owner\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
+    "MIndexTweetyGraphQueryIndex / Tweety precompute families\tno java.lang.String owner\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
+]:
+    if required_mechanical_mapping not in port_map:
+        fail(f"mechanical donor mapping missing: {required_mechanical_mapping}")
 
 for required_no_port in [
     "MIndexPrefixZ / MIndexPrefixZCache\tno current M3JDK21 owner\tDONOR_ONLY_NO_JDK21_CONSUMER",
@@ -1084,6 +1103,14 @@ for fragment in [
 ]:
     if fragment not in mapping:
         fail(f"Synexia donor artifact policy missing: {fragment}")
+
+for required_mechanical_family in [
+    "RE2/J mechanical program facts",
+    "Lucene cost-led posting schedules",
+    "Tweety query/reasoning precompute",
+]:
+    if required_mechanical_family not in precompute_inventory:
+        fail(f"mechanical donor inventory missing: {required_mechanical_family}")
 
 for required_family in [
     "Generic precompute engine",
