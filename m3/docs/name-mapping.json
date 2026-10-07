@@ -7626,6 +7626,21 @@
       "rule": "Adapt symbols, headers, lifetime and ABI; donor JNI proof is not target proof."
     },
     {
+      "source_family": "MIndexTextSignals / MIndexCodeTextSignals / MIndexStringEditDistancePlan / scalar fuzzy precompute",
+      "target_family": "M3 second-pass precompute",
+      "public_api": "none; never a java.lang.String surface",
+      "target_owners": [
+        "com.m3.precompute.M3TextMetrics",
+        "com.m3.precompute.M3TextSignals",
+        "com.m3.precompute.M3RegexShape",
+        "com.m3.precompute.M3EditDistancePlan",
+        "com.m3.precompute.M3CodeTextSignals",
+        "com.m3.precompute.M3SimilarityPrecompute",
+        "com.m3.precompute M3 Java/JNI batch providers"
+      ],
+      "rule": "First land broad reusable donor facts in m3/ports/precompute under M3 names. Approximate signals rank or nominate only; exact negative bounds may prune only under their mathematical contract. Promote into JDK modules only for a concrete consumer with independent compatibility, retention and performance proof."
+    },
+    {
       "source_family": "MIndex batch/search/posting/fuzzy/GPU/truth images",
       "target_family": "optional internal module or deferred donor capability",
       "public_api": "none by default",
