@@ -43,7 +43,7 @@ stringtable = read("src/hotspot/share/classfile/stringTable.cpp")
 mapping = read("m3/docs/name-mapping.json")
 port_map = read("m3/docs/synexia-string-precompute-port-map.tsv")
 workflow = read(".github/workflows/mindex-string-backing.yml")
-recipe_receipt = read("m3/docs/synexia-recipe-application.md")
+recipe_receipt = read("m3/runtime-integration/m3-string-synexia-recipe-application.tsv")
 builder = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
 native_string = read("src/java.base/share/native/libjava/String.c")
 vm_intrinsics = read("src/hotspot/share/classfile/vmIntrinsics.cpp")
@@ -1115,8 +1115,8 @@ for fragment in [
     "recipe_name\tcom.synexia.rewrite.M3Jdk21StringHistoryConvergence",
     "synexia_repository\thsoliwal/com.synexia",
     "synexia_commit\t",
-    "synexia_java_manifest\tsynexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3jdk/jdk21-hash-pinned/synexia-m3-string-history-convergence/manifest.tsv",
-    "synexia_text_manifest\tsynexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3jdk/jdk21-hash-pinned-text/m3-string-history-convergence/manifest.tsv",
+    "synexia_java_manifest\tsynexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-string-history-convergence/manifest.tsv",
+    "synexia_text_manifest\tsynexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-text/m3jdk21-string-history-convergence/manifest.tsv",
     "synexia_java_manifest_sha256\t",
     "synexia_text_manifest_sha256\t",
     "m3jdk21_applied_result_commit\t",
@@ -1124,7 +1124,8 @@ for fragment in [
     "recipe_owner\tSynexia",
     "runtime_dependency_on_synexia\tfalse",
     "target_recipe_disposition\tTHIN_RECEIVER_ONLY",
-    "verification_status\tSYNEXIA_CANONICAL_PACKET_30_OF_30_TARGETS_HASH_MATCHED",
+    "application_mode\tFIXED_POINT_NO_SOURCE_DELTA",
+    "verification_status\tSYNEXIA_CANONICAL_PACKET_31_OF_31_TARGETS_HASH_MATCHED",
 ]:
     if fragment not in recipe_receipt:
         fail(f"Synexia recipe application receipt missing: {fragment}")
