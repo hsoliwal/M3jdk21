@@ -2023,29 +2023,56 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
     }
 
     private static M3TQ compiledM3Tq(Node node) {
-        if (node.getClass() == Slice.class) {
-            String literal = compiledSliceLiteral((Slice) node);
+        Node leading = skipM3TqTransparentLeading(node);
+        String literal = compiledRequiredLiteral(leading);
+        if (literal != null) {
             return literal.length() >= 3 ? M3TQ.fromExact(List.of(literal)) : null;
         }
-        if (node instanceof Branch branch) {
+        if (leading instanceof Branch branch) {
             ArrayList<String> alternatives = new ArrayList<>(branch.size);
             for (int index = 0; index < branch.size; index++) {
                 Node atom = branch.atoms[index];
-                if (atom == null || atom.getClass() != Slice.class) return null;
-                alternatives.add(compiledSliceLiteral((Slice) atom));
+                if (atom == null) return null;
+                String alternative =
+                        compiledRequiredLiteral(skipM3TqTransparentLeading(atom));
+                if (alternative == null || alternative.length() < 3) return null;
+                alternatives.add(alternative);
             }
             return alternatives.isEmpty() ? null : M3TQ.fromExact(alternatives);
         }
         return null;
     }
 
-    private static String compiledSliceLiteral(Slice slice) {
-        int[] literal = slice.buffer;
-        char[] chars = new char[literal.length];
-        for (int index = 0; index < literal.length; index++) {
-            chars[index] = (char) literal[index];
+    /**
+     * Skip only leading nodes that cannot consume or make input optional. This deliberately does
+     * not cross lookaround, quantifiers, conditionals, backreferences, case-folded slices or
+     * supplementary-aware slices.
+     */
+    private static Node skipM3TqTransparentLeading(Node node) {
+        Node current = node;
+        while (current instanceof Begin
+                || current instanceof Caret
+                || current instanceof UnixCaret
+                || current instanceof GroupHead) {
+            current = current.next;
         }
-        return new String(chars);
+        return current;
+    }
+
+    /**
+     * Returns one mandatory case-sensitive BMP literal prefix assembled from consecutive exact
+     * Slice nodes. Null means the compiled graph shape is unsupported for candidate pruning.
+     */
+    private static String compiledRequiredLiteral(Node node) {
+        if (node == null || node.getClass() != Slice.class) return null;
+        StringBuilder literal = new StringBuilder();
+        Node current = node;
+        while (current != null && current.getClass() == Slice.class) {
+            int[] buffer = ((Slice) current).buffer;
+            for (int unit : buffer) literal.append((char) unit);
+            current = current.next;
+        }
+        return literal.toString();
     }
 
     private Map<String, Integer> namedGroupsMap() {
