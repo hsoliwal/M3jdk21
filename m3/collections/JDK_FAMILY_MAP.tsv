@@ -18,3 +18,6 @@ ConcurrentSkipListSet	M3LongConcurrentSkipListSet	PENDING	ordered concurrent str
 IdentityHashMap	M3ObjectIdentityMap	PENDING_OBJECT_SPACE	identity/object-space owner	primitive long equality is not object identity
 WeakHashMap	M3WeakObjectMap	PENDING_OBJECT_SPACE	weak-reference object owner	GC/reference-processing contract required
 EnumMap / EnumSet	M3 enum-specialized owner	PENDING_SPECIALIZATION	dense ordinal lanes	must preserve enum type/serialization contracts
+HashSet (int)	M3IntHashSet	RECEIVER_CANDIDATE_V1	zero-sentinel linear probing + backward-shift deletion	int lane adapted from synexia-primitives IntHashSet; every int legal; java.util.HashSet remains authority
+HashMap (int,int)	M3IntIntHashMap	RECEIVER_CANDIDATE_V1	parallel int key/value lanes + zero-key side slot	int lane adapted from synexia-primitives IntIntHashMap; java.util.HashMap remains authority
+PriorityQueue (int)	M3IntPriorityQueue	RECEIVER_CANDIDATE_V1	primitive binary min-heap	int lane adapted from synexia-primitives IntMinHeap; natural int order; java.util.PriorityQueue remains authority
