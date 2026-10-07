@@ -1,0 +1,15 @@
+{
+  "label": "input-drift-refusal-three-targets",
+  "pid": 11576,
+  "argv": [
+    "C:/ProgramData/chocolatey/lib/maven/apache-maven-3.9.14/bin/mvn.CMD",
+    "-o",
+    "-B",
+    "-f",
+    "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\pom.xml",
+    "-Dexec.executable=C:/Program Files/Java/jdk-21/bin/java.exe",
+    "-Dexec.args=-Xms16m -Xmx256m -XX:MaxMetaspaceSize=192m -XX:ActiveProcessorCount=2 -Djava.io.tmpdir=K:\\codex-work\\m3-regex-v7-vendor-importer-replay-v3-20261007\\tmp -cp K:\\codex-work\\m3-synexia-full-family-invariant-20261007\\target\\replay-classes com.synexia.rewrite.Replay --apply K:\\codex-work\\m3-regex-v7-vendor-importer-replay-v3-20261007\\drift-receiver K:\\codex-work\\m3-regex-v7-vendor-importer-replay-v3-20261007\\templates",
+    "org.codehaus.mojo:exec-maven-plugin:3.5.0:exec"
+  ],
+  "startedUnix": 1791356239.1708133
+}

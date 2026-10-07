@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "checkedUtc": "2026-10-07T06:48:21.400011+00:00",
+  "status": "PASS_CPU_CUSTODY_PREFLIGHT_NO_JVM_LAUNCHED",
+  "parentProofSha256": "60f392a969382ea4ac94cc033dcaa6adbc06489e48bc473ba96ceac15f363302",
+  "fullOraclePlanSha256": "6e8d82ea796d9bc4db9a6762b7f4614247ee1a4bfc51ce96734ff8ed6a73485e",
+  "pomSha256": "67c568c3df99e51ee55d3785e872d704c999af9f3d7989ea736d434945267c05",
+  "sourceCustodySha256": "e1f47293f073df14b524102ccc53cb1ac8a765f3c0d6430cfc7574ca914dbdfe",
+  "originalImporterPlanSha256": "72bd9132a220f2605e15ef220e7062abb676048d9d769443affa7276b4eb036e",
+  "compiledClassesMatched": 41,
+  "sourceTemplateBodiesMatched": 48,
+  "inheritedClassSealsMatched": 2440,
+  "usedLibraryJarsMatched": 56,
+  "excludedMixedFrameworkJarsMatched": 8,
+  "junit": {
+    "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-console-standalone\\1.10.1\\junit-platform-console-standalone-1.10.1.jar",
+    "sha256": "b42eaa53d13576d17db5fb8b280722a6ae9e36daf95f4262bc6e96d4cb20725f",
+    "bytes": 2680711
+  },
+  "sourceAndOracleUnmodified": true,
+  "pomArgumentsExactlyMatchPlan": true,
+  "recompilePlanned": false,
+  "jvmLane": "AWAIT_EXPLICIT_ROOT_HANDOFF",
+  "importerClasses": "Original plan points to /classes; fixed /classes-fixed binding requires terminal donor proof",
+  "limits": {
+    "processors": 2,
+    "newOutputCapMiB": 16,
+    "reserveGiB": 8,
+    "taskRootBytesObserved": 5097449,
+    "freeBytesObserved": 41192783872
+  },
+  "scope": "CPU custody and prepared command consistency only; no test/importer execution inferred"
+}

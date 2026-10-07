@@ -99,7 +99,6 @@ final class SynexiaImporterTest {
         assertThrows(
                 IllegalArgumentException.class,
                 () -> SynexiaImporter.verify(temp.resolve("absent"), m3jdk, manifest));
-        write(synexia.resolve(sourcePath), bytes);
         assertThrows(
                 IllegalArgumentException.class,
                 () -> SynexiaImporter.verify(synexia, temp.resolve("absent-target"), manifest));
@@ -257,3 +256,4 @@ final class SynexiaImporterTest {
         }
     }
 }
+// deliberate input drift
