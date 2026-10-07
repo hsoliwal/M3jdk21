@@ -6,6 +6,10 @@ on:
   pull_request:
     paths:
       - 'm3/indexdb/**'
+      - 'm3/compatibility/synexia-m3indexdb-v1-pin.tsv'
+      - 'm3/compatibility/check_synexia_m3indexdb_v1.py'
+      - 'm3/compatibility/synexia-canonical-residue-gitblobs.tsv'
+      - 'm3/compatibility/SYNEXIA_M3INDEXDB_V1_FINGERPRINT.md'
       - '.github/workflows/m3-db-parse.yml'
 permissions:
   contents: read
@@ -55,6 +59,8 @@ jobs:
           mvn -version | tee "$RUNNER_TEMP/proof/maven-version.txt"
           case "$SUITE" in
             db)
+              python3 "$REPO/m3/compatibility/check_synexia_m3indexdb_v1.py" \
+                2>&1 | tee "$RUNNER_TEMP/proof/synexia-v1-pin.log"
               mvn -B -ntp -f "$REPO/m3/indexdb/pom.xml" clean verify \
                 2>&1 | tee "$RUNNER_TEMP/proof/db-verify.log"
               ;;
