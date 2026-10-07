@@ -21,6 +21,7 @@ class M3RegexShapeTest {
     void refusesRegexSyntaxControlEscapesAndBrokenSurrogates() {
         for (String expression :
                 new String[] {
+                    "", "\\A\\z", "\\Q\\E",
                     ".", "a+", "(abc)", "[abc]", "^abc$", "\\d+", "\\s",
                     "\\u0061", "\\x61", "\\Qabc", "\ud83d", "\ude42"
                 }) {
