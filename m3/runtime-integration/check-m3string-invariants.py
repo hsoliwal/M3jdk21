@@ -1078,6 +1078,7 @@ for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringCodePointPrecomputeTest.java",
     "M3StringPrecomputeSearchTest.java",
+    "M3StringPositionPrecomputeTest.java",
     "M3StringInternTest.java",
     "nativeEncoding/StringPlatformChars.java",
     "M3TQFactsTest.java",
