@@ -79,7 +79,7 @@ class ReleaseJepAuthorityTest(unittest.TestCase):
                 "\n".join(catalogue_lines) + "\n", encoding="utf-8"
             )
             with self.assertRaisesRegex(
-                AssertionError, "missing=\[483\]"
+                AssertionError, r"missing=\[483\]"
             ):
                 release_jep_authority.verify_repository_authority(root)
 
