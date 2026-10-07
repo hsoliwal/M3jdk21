@@ -1,6 +1,6 @@
 # JEP 497 — ML-DSA intake packet
 
-Status: inventory/dependency/security-proof packet. Product materialization is **not authorized**.
+Status: Java-21 receiver candidate materialized from a hash-pinned recipe. Verification/promotion is **not authorized**.
 
 ## Upstream authority
 
@@ -85,3 +85,24 @@ No JDK 24+ public `AsymmetricKey` surface is admitted by this packet. Any public
 
 This packet grants no source-copy, product-mutation or promotion authority. It advances JEP 497 from
 `NO_RECIPE_EVIDENCE` to `PACKET_EVIDENCE` only.
+
+
+## Current materialized candidate — 2026-10-07
+
+The Java-21 receiver now carries a seven-target, recipe-owned ML-DSA candidate stacked on the
+materialized JEP 496/SHAKE/named-key state:
+
+- released JDK24-GA `ML_DSA.java` and `ML_DSA_Impls.java`;
+- bounded ML-DSA additions to `NamedParameterSpec`, `SunEntries`, and `KnownOIDs`;
+- focused Java-21 provider/encoding/signature smoke and deterministic-random regression tests.
+
+The exact postimages are owned by
+`com.m3.rewrite.backport.M3Jep497MlDsaBackportRecipe` /
+`jdk24-jep497-mldsa`. `CURRENT_TREE_READBACK.tsv` records byte-for-byte canonical readback.
+
+The released JDK24-GA ACVP `internalProjection.json` files are absent and therefore are not
+invented. The broad later deterministic harness and performance microbenchmark are also not copied;
+focused Java-21 tests prove this candidate first, and optimization remains a later lane.
+
+Promotion remains `NOT_AUTHORIZED` until recipe JUnit, JEP 496/SHAKE prerequisite proof,
+Java-21 image build, ML-DSA security jtreg, fixed point, and canonical readback execute.
