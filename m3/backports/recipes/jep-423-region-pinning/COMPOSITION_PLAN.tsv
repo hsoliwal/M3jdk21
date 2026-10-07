@@ -1,7 +1,7 @@
 component	scope	path_count	description
-g1-core	MODULE	38	G1 collector/region/collection-set implementation leaves.
+g1-core	MODULE	43	G1 collector/region/collection-set implementation leaves across the complete three-commit lineage.
 hotspot-integration	MODULE	2	WhiteBox/VMStructs integration leaves outside gc/g1.
 hotspot-agent	MODULE	2	HotSpot Agent mirror leaves.
 regression-tests	MULTI_MODULE	15	G1/JFR/WhiteBox/pinned-object regression evidence leaves.
 preserved-jdk21-deletions	FILE	2	Upstream-deleted TestJNIBlockFullGC paths are preserved and excluded from mutation atoms.
-feature-join	MULTI_MODULE	57	JEP423 candidate composition; promotion requires runtime/GC/JNI/JVMTI/SA proof.
+feature-join	MULTI_MODULE	62	JEP423 cumulative candidate composition; promotion requires runtime/GC/JNI/JVMTI/SA proof.
