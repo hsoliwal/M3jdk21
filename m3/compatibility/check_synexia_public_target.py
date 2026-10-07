@@ -93,7 +93,7 @@ def load_apache_handoff_pin(path: Path = APACHE_HANDOFF_PIN) -> dict[str, str]:
         "source_license": "Apache-2.0",
         "copyright_notice": "Copyright 2026 Hitesh Soliwal and contributors",
         "canonical_owner": "synexia-m3-recipe",
-        "delivery_state": "PENDING_SYNEXIA_MERGE",
+        "delivery_state": "SOURCE_MERGED_PROOF_PENDING",
         "target_role": "QUALIFICATION_INPUT_ONLY",
         "automatic_application": "false",
         "target_relicense_authority": "false",
@@ -105,8 +105,8 @@ def load_apache_handoff_pin(path: Path = APACHE_HANDOFF_PIN) -> dict[str, str]:
         raise ValueError("invalid Synexia Apache handoff commit")
     if not SHA256.fullmatch(rows["source_manifest_sha256"]):
         raise ValueError("invalid Synexia Apache handoff manifest seal")
-    if rows["automatic_application"] != "false" or rows["delivery_state"] != "PENDING_SYNEXIA_MERGE":
-        raise ValueError("unmerged Synexia custody PR cannot authorize automatic application")
+    if rows["automatic_application"] != "false" or rows["delivery_state"] != "SOURCE_MERGED_PROOF_PENDING":
+        raise ValueError("Synexia custody DAG proof is pending; automatic application remains forbidden")
     if rows["target_relicense_authority"] != "false":
         raise ValueError("Synexia handoff cannot relicense target code")
     return rows
