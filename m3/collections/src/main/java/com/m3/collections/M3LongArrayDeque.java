@@ -7,14 +7,23 @@ package com.m3.collections;
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.function.LongPredicate;
 
 /**
  * Primitive-long circular deque with JDK-shaped double-ended queue semantics.
  *
  * <p>The ring capacity is a power of two and grows without per-element objects. Every long is a
  * valid payload; emptiness is represented by size, not a sentinel value.</p>
+ *
+ * <p>Single semantic owner of the dense ring deque contract. It unions the JDK-shaped backend
+ * (Synexia handoff {@code m3jdk21-primitive-collections-v1}) with the Synexia {@code LongDeque}
+ * lineage: queue {@link #offer}/{@link #peek}/{@link #poll}, {@link #addLastIf}, indexed
+ * {@link #get} and {@link #filterInPlace}. Every structural mutation bumps the modification count
+ * so live iterators stay fail-fast; growth geometry and zeroing on removal are the JDK-shaped
+ * ones.</p>
  */
-public final class M3LongArrayDeque implements M3LongCollection {
+public final class M3LongArrayDeque implements M3LongDeque {
     private static final int MIN_CAPACITY = 8;
 
     private long[] elements;
@@ -36,6 +45,7 @@ public final class M3LongArrayDeque implements M3LongCollection {
         elements = new long[tableSizeFor(Math.max(MIN_CAPACITY, expectedSize + 1))];
     }
 
+    @Override
     public void addFirst(long value) {
         ensureCapacityForOneMore();
         head = (head - 1) & mask();
@@ -44,6 +54,7 @@ public final class M3LongArrayDeque implements M3LongCollection {
         modCount++;
     }
 
+    @Override
     public void addLast(long value) {
         ensureCapacityForOneMore();
         elements[physicalIndex(size)] = value;
@@ -51,26 +62,56 @@ public final class M3LongArrayDeque implements M3LongCollection {
         modCount++;
     }
 
+    @Override
     public boolean offerFirst(long value) {
         addFirst(value);
         return true;
     }
 
+    @Override
     public boolean offerLast(long value) {
         addLast(value);
         return true;
     }
 
+    @Override
+    public boolean offer(long value) {
+        return offerLast(value);
+    }
+
+    @Override
+    public boolean addLastIf(long value, LongPredicate predicate) {
+        Objects.requireNonNull(predicate, "predicate");
+        if (!predicate.test(value)) {
+            return false;
+        }
+        addLast(value);
+        return true;
+    }
+
+    @Override
     public long getFirst() {
         requireNonEmpty();
         return elements[head];
     }
 
+    @Override
     public long getLast() {
         requireNonEmpty();
         return elements[physicalIndex(size - 1)];
     }
 
+    @Override
+    public long peek() {
+        return getFirst();
+    }
+
+    @Override
+    public long get(int index) {
+        return elements[physicalIndex(Objects.checkIndex(index, size))];
+    }
+
+    @Override
     public long removeFirstLong() {
         requireNonEmpty();
         int index = head;
@@ -82,6 +123,7 @@ public final class M3LongArrayDeque implements M3LongCollection {
         return value;
     }
 
+    @Override
     public long removeLastLong() {
         requireNonEmpty();
         int index = physicalIndex(size - 1);
@@ -90,6 +132,11 @@ public final class M3LongArrayDeque implements M3LongCollection {
         size--;
         modCount++;
         return value;
+    }
+
+    @Override
+    public long poll() {
+        return removeFirstLong();
     }
 
     @Override
@@ -102,6 +149,7 @@ public final class M3LongArrayDeque implements M3LongCollection {
         return false;
     }
 
+    @Override
     public boolean removeFirstOccurrence(long value) {
         for (int i = 0; i < size; i++) {
             if (elements[physicalIndex(i)] == value) {
@@ -112,6 +160,7 @@ public final class M3LongArrayDeque implements M3LongCollection {
         return false;
     }
 
+    @Override
     public boolean removeLastOccurrence(long value) {
         for (int i = size - 1; i >= 0; i--) {
             if (elements[physicalIndex(i)] == value) {
@@ -122,11 +171,46 @@ public final class M3LongArrayDeque implements M3LongCollection {
         return false;
     }
 
+    /**
+     * Keeps matching values in-place in encounter order. On predicate failure, prior rejections
+     * are committed, but the throwing value and untested suffix remain intact. The predicate must
+     * not mutate this collection.
+     */
+    @Override
+    public int filterInPlace(LongPredicate predicate) {
+        Objects.requireNonNull(predicate, "predicate");
+        int originalSize = size;
+        int read = 0;
+        int write = 0;
+        try {
+            for (; read < originalSize; read++) {
+                long value = elements[physicalIndex(read)];
+                if (predicate.test(value)) {
+                    elements[physicalIndex(write++)] = value;
+                }
+            }
+        } finally {
+            // If the callback throws, preserve its element and the unread suffix.
+            for (int i = read; i < originalSize; i++) {
+                elements[physicalIndex(write++)] = elements[physicalIndex(i)];
+            }
+            if (write != originalSize) {
+                for (int i = write; i < originalSize; i++) {
+                    elements[physicalIndex(i)] = 0L;
+                }
+                size = write;
+                modCount++;
+            }
+        }
+        return originalSize - size;
+    }
+
     @Override
     public int size() {
         return size;
     }
 
+    @Override
     public int capacity() {
         return elements.length;
     }
@@ -176,6 +260,7 @@ public final class M3LongArrayDeque implements M3LongCollection {
         };
     }
 
+    @Override
     public M3LongIterator descendingIterator() {
         int expectedModCount = modCount;
         return new M3LongIterator() {
