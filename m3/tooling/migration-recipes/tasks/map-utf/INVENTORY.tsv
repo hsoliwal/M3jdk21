@@ -1,0 +1,12 @@
+path	sha256	role
+m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-map-facts/manifest.tsv	c6ce451547846f20700521f68c6a831eb1067e91e78c1f3095d942cc190f6e74	inspected-runtime-or-recipe
+m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-map-guard/manifest.tsv	7760344935e955ac4ca536b53a4de40d2724ca9067319098fce85a035570e5cb	inspected-runtime-or-recipe
+m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/map-facts/manifest.tsv	a689b52d6f1fffc74f91e5277a0873afe0ab77a5399043e437e1beeb79370f93	inspected-runtime-or-recipe
+m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/map-guard/manifest.tsv	d0616ecafcc596fb6f2144e10ff97d6babab7b1b1f8a1a676360a135569c04b4	inspected-runtime-or-recipe
+m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/MapFactsRecipeTest.java	6c83dcf46c27e7801ccfdb55105835ee029c2abd5866945ed94bcc9363ddcd94	inspected-runtime-or-recipe
+m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/MapGuardRecipeTest.java	d953233da83f47819f56b2683c0a8e0035503409510523a0b8214620d4e3deff	inspected-runtime-or-recipe
+src/java.base/share/classes/jdk/internal/mindex/MIndexMappedStringBacking.java	55454785a817874b30c96c4b9695bfae846ed05e9262e3b8df9eaca942c43a22	inspected-runtime-or-recipe
+src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java	880731315e4c50076a1c240dfecb8bc9aa5551b40cc4a83f0f68e837accad79f	inspected-runtime-or-recipe
+test/jdk/java/lang/String/MIndexMappedStringBackingTest.java	95916a7687bf3dcf2bb39a7d0859a023d0796b58a3ac25318e6a813595f531b0	inspected-runtime-or-recipe
+test/jdk/java/lang/String/MapFactsTest.java	c5d856acc3fa5b7b636894d1dd18b087c1d8e1a450fcbef0821e87b969d185c2	inspected-runtime-or-recipe
+test/jdk/java/lang/String/MapGuardTest.java	620e1ccd61d9f8675a18ce74eb307b5a02f75fad6c535e17e42661ef3409185a	inspected-runtime-or-recipe

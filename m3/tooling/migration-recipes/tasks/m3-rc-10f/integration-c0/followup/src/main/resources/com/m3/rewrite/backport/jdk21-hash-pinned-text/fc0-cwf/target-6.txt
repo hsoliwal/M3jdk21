@@ -1,0 +1,121 @@
+#!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+"""Verify TQ reconciliation, preserved authority, and sealed replay/refusals."""
+import argparse
+import copy
+import hashlib
+import importlib.util
+import json
+from pathlib import Path
+import tempfile
+
+CRATE = Path(__file__).resolve().parent
+ROOT = CRATE.parents[2]
+spec = importlib.util.spec_from_file_location('sealed', ROOT / 'm3/migration/recipe.py')
+sealed = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(sealed)
+plan_path = CRATE / 'plan.json'
+plan, rows = sealed.sealed_plan(plan_path)
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument('--context', choices=('historical', 'ic0'), default='historical')
+args = parser.parse_args()
+current_mapping_sha256 = 'cf6a75806908fee920ecbf7bbe548182f1d9db179e9cc554e36739b1c45a6e6c'
+current_workflow_sha256 = '1aa2a7a495a00d3a0754bcf776cf7d3ef3bd176134186bfe1ec4004bb8a74616'
+current_source_sha256 = {
+    '.github/workflows/m3-lane28.yml': current_workflow_sha256,
+    '.github/workflows/m3-tq.yml': '84d3b48257a3c53b79c5aa5b2e6432951db2ff6a0d64822d85c1bca8b250d875',
+    'm3/tooling/tq/verify-plan.py': '04859b1701462a8648212f2cc638d1d761bc81afe5eb4187751d73c62061f3f3',
+}
+if args.context == 'historical':
+    assert sealed.execute(plan_path, ROOT, 'check')['state'] == 'after'
+else:
+    # Explicit composed-source identity check. Historical recipe images and replay below stay exact.
+    lock = sealed.checked_path(ROOT, sealed.LOCK)
+    journal = sealed.checked_path(ROOT, sealed.JOURNAL)
+    sealed.observe_guards(ROOT, plan)
+    if lock.exists() or journal.exists():
+        raise sealed.Refusal('incomplete transaction; use explicit recovery')
+    for row in rows:
+        current = sealed.read_optional(sealed.checked_path(ROOT, row['path']))
+        if row['path'] in current_source_sha256:
+            assert current is not None and hashlib.sha256(current).hexdigest() == current_source_sha256[row['path']], 'Unadmitted ic0 source: ' + row['path']
+            continue
+        if row['path'] != 'm3/docs/name-mapping.json':
+            assert current == row['after'], row['path']
+            continue
+        assert current is not None and hashlib.sha256(current).hexdigest() == current_mapping_sha256, 'Unadmitted ic0 mapping'
+        current_map = json.loads(current)
+        expected_map = json.loads(row['after'])
+        expected_ids = {record['id'] for record in expected_map['migration']['records']}
+        current_ids = [record['id'] for record in current_map['migration']['records']]
+        assert len(expected_ids) == 52
+        assert len(current_ids) == len(set(current_ids)) == 87, 'Duplicate or missing current records'
+        projected = copy.deepcopy(current_map)
+        projected['migration']['records'] = [record for record in projected['migration']['records']
+                                               if record['id'] in expected_ids]
+        assert projected == expected_map, 'Existing mapping records/gates/authority changed'
+for row in rows:
+    assert (CRATE / 'target/generated' / row['path']).read_bytes() == row['after']
+
+# Only the existing TQ record may advance; preserve the other 51 records and
+# every top-level authority field, including all 20 gates. No status promotion.
+mapping = next(row for row in rows if row['path'] == 'm3/docs/name-mapping.json')
+before_map = json.loads(mapping['before'])
+after_map = json.loads(mapping['after'])
+identity = 'synexia.counterpart.MIndexRegexTrigramQuery'
+for document in (before_map, after_map):
+    record = next(r for r in document['migration']['records'] if r['id'] == identity)
+    assert record['status'] == 'implemented-unverified'
+    document['migration']['records'].remove(record)
+assert before_map == after_map, 'Unrelated mapping authority changed'
+assert len(after_map['migration']['records']) == 51
+assert len(after_map['migration']['gates']) == 20
+kernel = 'src/java.base/share/classes/jdk/internal/mindex/M3TQ.java'
+assert kernel in {guard['path'] for guard in plan['guards']}
+assert kernel not in {row['path'] for row in rows}, 'Existing runtime owner must survive'
+
+events = []
+with tempfile.TemporaryDirectory(prefix='m3-tq-sync-') as temporary:
+    root = Path(temporary)
+    for guard in plan['guards']:
+        path = root / guard['path']
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes((ROOT / guard['path']).read_bytes())
+    for row in rows:
+        path = root / row['path']
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if row['before'] is not None: path.write_bytes(row['before'])
+    for mode, state, writes in [('check', 'before', 0), ('apply', 'after', len(rows)),
+                                ('apply', 'after', 0), ('rollback', 'before', len(rows)),
+                                ('rollback', 'before', 0)]:
+        result = sealed.execute(plan_path, root, mode)
+        assert (result['state'], result['writes']) == (state, writes)
+        events.append({'mode': mode, **result})
+
+    def refusal(label):
+        snapshot = {str(p.relative_to(root)): p.read_bytes() for p in root.rglob('*') if p.is_file()}
+        try:
+            sealed.execute(plan_path, root, 'apply')
+        except sealed.Refusal:
+            events.append({'refusal': label})
+        else:
+            raise AssertionError('Unexpected admission: ' + label)
+        assert snapshot == {str(p.relative_to(root)): p.read_bytes() for p in root.rglob('*') if p.is_file()}
+
+    path = root / rows[0]['path']
+    path.write_bytes(rows[0]['before'] + b'\ndrift\n')
+    refusal('destination drift')
+    path.write_bytes(rows[0]['after'])
+    refusal('mixed states')
+    path.write_bytes(rows[0]['before'])
+    guard = root / plan['guards'][0]['path']
+    guard.write_bytes(guard.read_bytes() + b'\ndrift\n')
+    refusal('dependency drift')
+
+result = {'schema': 'm3.tq-sync-custody/1', 'plan_sha256': plan['plan_sha256'],
+          'generated_outputs': len(rows), 'events': events}
+if args.context == 'ic0':
+    result.update(source_context='ic0', current_mapping_sha256=current_mapping_sha256,
+                  current_records=87, historical_records=52, current_workflow_sha256=current_workflow_sha256, current_source_sha256=current_source_sha256)
+(CRATE / 'target/custody.json').write_text(json.dumps(result, indent=2) + '\n')
+print('PASS: exact recipe outputs, fixed point, rollback and three no-write refusals')

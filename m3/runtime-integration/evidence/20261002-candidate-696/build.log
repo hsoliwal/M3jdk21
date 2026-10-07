@@ -1,0 +1,5 @@
+Building target 'images' in configuration 'linux-x86_64-server-fastdebug'
+Creating jdk image
+Creating CDS archive for jdk image for server
+Creating CDS-NOCOOPS archive for jdk image for server
+Finished building target 'images' in configuration 'linux-x86_64-server-fastdebug'

@@ -1,0 +1,72 @@
+{
+  "schema": "m3.sealed-install/1",
+  "recipe_id": "jcc-ci-repair-20261006/1",
+  "source_commit": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
+  "target_commit": "b71ee5bf88398fb80961c13db03e8c675fb445ce",
+  "source_repository": "hsoliwal/M3jdk21",
+  "recipe": "com.m3.rewrite.backport.JccCiRepair",
+  "outputs": [
+    {
+      "path": ".github/workflows/m3-foundation.yml",
+      "before": {
+        "resource": "before-00-m3-foundation.yml.txt",
+        "sha256": "2a81b9ebfa5d477977dba4632a0e7c89f2ebb89606eb46491197536335d63fee"
+      },
+      "after": {
+        "resource": "after-00-m3-foundation.yml.txt",
+        "sha256": "76f3b96be528f33556fde14d811e3df9462f828353967237eed1a46ccc6ce91f"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryLabDeliveryRecipeTest.java",
+      "before": {
+        "resource": "before-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
+        "sha256": "58d01008f3dc6e79d988e855d76ba90eb0a13d39a76e7eb4027d75442389ec94"
+      },
+      "after": {
+        "resource": "after-01-M3A3RegexMemoryLabDeliveryRecipeTest.java.txt",
+        "sha256": "f34470a701cf71b4b4abbe1fa9a5091392a930426ec84d700f13e53edd244629"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3RegexMemoryWorkflowRecipeTest.java",
+      "before": {
+        "resource": "before-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
+        "sha256": "69882638771a411cf0866f789a7b3ef7e7e7040cde38a1c40ef4a743d37168e2"
+      },
+      "after": {
+        "resource": "after-02-M3A3RegexMemoryWorkflowRecipeTest.java.txt",
+        "sha256": "3f3ab065d9e87e9f6095629a56b052642ec9d0883a466430e90a4a4355edd05b"
+      }
+    }
+  ],
+  "guards": [
+    {
+      "path": ".github/workflows/m3-tooling-recipes.yml",
+      "sha256": "252165fedc2e2962143cbd71d0ca68d553800ba7cf9c85df164edeb4713566a1"
+    },
+    {
+      "path": "m3/migration/recipe.py",
+      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/pom.xml",
+      "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3ScopeInference.java",
+      "sha256": "eca941688f9449f54c16386c581ce162df608858526d4660473e250ed3d0f267"
+    }
+  ],
+  "scope": "Two lexical test repairs and Maven selection of the unchanged pinned JDK21 in foundation CI.",
+  "qualification": {
+    "source_runtime_accepted": false,
+    "whole_module_coverage_accepted": false,
+    "jdk_image_accepted": false
+  },
+  "plan_sha256": "c096db7ea053cbfc2885714dd3abfdc521d703fa688cf2abe3b100aabb75700c"
+}

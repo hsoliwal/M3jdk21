@@ -1,0 +1,69 @@
+{
+  "status": "FROZEN_BEFORE_EXECUTION",
+  "inputs": [
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "bytes": 12032
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccHandoffTest.java",
+      "sha256": "fe73b48307c045b219cec3a3d123cfb008b92f98fc11ad1907df6c64fd22af61",
+      "bytes": 19825
+    },
+    {
+      "path": "m3/tooling/migration-recipes/verification/jcc-handoff/pom.xml",
+      "sha256": "a2e5c6983b92479359b889915c888826038322452e5b36901eb3544fc331cc16",
+      "bytes": 2626
+    },
+    {
+      "path": "m3/tooling/migration-recipes/pom.xml",
+      "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
+      "bytes": 3383
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-source-handoff.yml",
+      "sha256": "b2485fff5df053cb8b337e47117643325b0660e59cf91bd93ae393a71965fdac",
+      "bytes": 612
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/01-jcc-source-handoff.md.txt",
+      "sha256": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
+      "bytes": 17031
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/02-source-destination-bindings.json.txt",
+      "sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
+      "bytes": 24139
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/03-root-coverage-obligations.tsv.txt",
+      "sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
+      "bytes": 107504
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/after00-name-mapping.json.txt",
+      "sha256": "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace",
+      "bytes": 220539
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/before00-name-mapping.json.txt",
+      "sha256": "67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb",
+      "bytes": 196161
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/manifest.tsv",
+      "sha256": "258b5ab6f6cb7099685ee4548d5430fcb952561fefdf565a6dff149cf50c5f06",
+      "bytes": 687
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-handoff-20261005/plan.json",
+      "sha256": "648f80ae4073400f1ea1210f8cdc26942019d53eb4452d839961c466f395d05a",
+      "bytes": 2861
+    }
+  ],
+  "scope": "Eight tests for retained text recipe, named activation/serialization, four-output ledger contract and refusals.",
+  "source_export_admission": false,
+  "jdk_acceptance": false,
+  "owning_module_coverage_gate": "Separate 99% line/branch gate; not replaced by this focused POM."
+}

@@ -1,0 +1,14 @@
+fork_id	repository	ref	pinned_head	plane	priority	license_policy	source_copy_authority	selected_for_distribution	notes
+upstream21u	openjdk/jdk21u	master	bb6b279495ceff8442dbd0225756b92d466d5309	BASELINE	BASELINE	OPENJDK_SOURCE_TERMS	false	false	Canonical JDK21u comparison reference
+adoptium-jdk21u	adoptium/jdk21u	master	bb6b279495ceff8442dbd0225756b92d466d5309	MIRROR	HIGH	REVIEW_REPOSITORY_AND_PATH_LICENSES	false	false	Temurin source mirror pin equals upstream21u baseline; zero unique-source claim
+corretto	corretto/corretto-21	develop	6769fa77bab4faae3ddb9940a90aafb5ad818b2a	PRODUCT	HIGH	REVIEW_REPOSITORY_AND_PATH_LICENSES	false	false	Amazon Corretto 21 product development branch
+corretto-shenandoah	corretto/corretto-21	generational-shenandoah	94a25764d0784df6663b96bf7910d113c98609d4	EXPERIMENTAL	MEDIUM	REVIEW_REPOSITORY_AND_PATH_LICENSES	false	false	Generational Shenandoah capability evidence only
+corretto-lilliput	corretto/corretto-21	lilliput-2	5892a9d66acda9b654507fa59d497387d6073e74	EXPERIMENTAL	MEDIUM	REVIEW_REPOSITORY_AND_PATH_LICENSES	false	false	Compact-header/Lilliput capability evidence only
+sapmachine	SAP/SapMachine	sapmachine21	1ea16351626e8196305345ccb867e056a520b725	PRODUCT	HIGH	REVIEW_REPOSITORY_AND_PATH_LICENSES	false	false	SapMachine JDK21 product branch
+microsoft	microsoft/openjdk-jdk21u	main	bb6b279495ceff8442dbd0225756b92d466d5309	PRODUCT	HIGH	REVIEW_REPOSITORY_AND_PATH_LICENSES	false	false	Microsoft JDK21u main line; expected to closely track upstream
+microsoft-gpu	microsoft/openjdk-jdk21u	ms-patches/enable-high-performance-gpu-selection-for-windows-in-jvm	15cc00b875905784a4427f7b3931e831760bc87a	PATCH_LANE	MEDIUM	REVIEW_REPOSITORY_AND_PATH_LICENSES	false	false	Windows high-performance GPU selection candidate lane
+microsoft-jmx	microsoft/openjdk-jdk21u	ms-patches/jmx-remote-bootstrap	a058d29e0639e86c4f93f5e5e8768cd3f67cb9cd	PATCH_LANE	MEDIUM	REVIEW_REPOSITORY_AND_PATH_LICENSES	false	false	JMX remote bootstrap candidate lane
+tencent-kona	Tencent/TencentKona-21	universal	4f7628d60a9cddbfc88dd4c38ebd3fcf9ff44249	PRODUCT	HIGH	REVIEW_REPOSITORY_AND_PATH_LICENSES	false	false	Tencent Kona JDK21 universal branch
+dragonwell-standard	dragonwell-project/dragonwell21	dragonwell_standard-21.0.12.0.12+8	5345f64bdcb1b9fc102eb89c77f16e94855ab753	PRODUCT	HIGH	REVIEW_REPOSITORY_AND_PATH_LICENSES	false	false	Dragonwell Standard 21 release branch
+dragonwell-extended	dragonwell-project/dragonwell21	dragonwell_extended-21.0.12.0.12+8	91ce57674b6c469aa2d21d9f244d7fc9fb94518f	PRODUCT_EXTENDED	HIGH	REVIEW_REPOSITORY_AND_PATH_LICENSES	false	false	Dragonwell Extended 21 release branch
+jetbrains-runtime	JetBrains/JetBrainsRuntime	jbr21	5c7982e014ef0e05646c642555a51e306d4058c8	PRODUCT	HIGH	REVIEW_REPOSITORY_AND_PATH_LICENSES	false	false	JetBrains Runtime 21 branch; desktop/runtime enhancements

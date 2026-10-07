@@ -1,0 +1,10 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.a3.NativeJniLane
+displayName: M3JDK21 A3 native/JNI file-atom lane
+description: >
+  Source-sealed exact-preimage upgrade that makes native/JNI donor deltas first-class
+  NATIVE FILE atoms while preserving Java and legacy text candidate behavior.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: a3-native-jni-lane

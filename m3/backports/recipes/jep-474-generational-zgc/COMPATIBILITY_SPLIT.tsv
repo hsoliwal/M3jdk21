@@ -1,0 +1,8 @@
+path	plane	disposition	reason
+src/hotspot/share/gc/shared/gc_globals.hpp	PRODUCT	REJECT_DEFAULT_JAVA21	Changes ZGenerational default false->true; intentional Java21 runtime-default behavior drift.
+src/hotspot/share/gc/x/xArguments.cpp	PRODUCT	OPT_IN_DIAGNOSTIC_REVIEW	Adds deprecation warning/metadata/log policy; not required to obtain generational ZGC capability already present in Java21.
+src/hotspot/share/gc/x/xInitialize.cpp	PRODUCT	OPT_IN_DIAGNOSTIC_REVIEW	Adds deprecation warning/metadata/log policy; not required to obtain generational ZGC capability already present in Java21.
+src/hotspot/share/runtime/arguments.cpp	PRODUCT	OPT_IN_DIAGNOSTIC_REVIEW	Adds deprecation warning/metadata/log policy; not required to obtain generational ZGC capability already present in Java21.
+test/hotspot/jtreg/gc/x/TestDeprecated.java	TEST	EVIDENCE_ONLY	Upstream regression evidence for the default/deprecation policy; adapt only if an explicit opt-in diagnostic lane is approved.
+test/hotspot/jtreg/gc/z/TestDefault.java	TEST	EVIDENCE_ONLY	Upstream regression evidence for the default/deprecation policy; adapt only if an explicit opt-in diagnostic lane is approved.
+test/hotspot/jtreg/runtime/CommandLine/VMDeprecatedOptions.java	TEST	EVIDENCE_ONLY	Upstream regression evidence for the default/deprecation policy; adapt only if an explicit opt-in diagnostic lane is approved.

@@ -1,0 +1,133 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.m3.vi;
+
+import java.lang.module.ModuleDescriptor.Version;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.CancellationException;
+import jdk.internal.mindex.M3Release;
+import jdk.internal.mindex.M3VI;
+
+/** Independent Java 21 oracle for the internal VI port. */
+public final class VIProbe {
+    private static int checks;
+
+    private VIProbe() { }
+
+    public static void main(String[] args) {
+        var labels = new ArrayList<String>(List.of("1", "1.0", "1.00", "2-ea", "2", "2+7", "3"));
+        var original = List.copyOf(labels);
+        var index = M3VI.prepare(labels, M3VI.jpms21(), 100, null);
+        labels.clear();
+        check(index.size() == original.size(), "caller mutation");
+        for (int i = 0; i < original.size(); i++) check(index.label(i) == original.get(i), "spelling owner");
+        check(index.schemeRevision().equals("jpms-version-java21"), "scheme revision");
+        compare(index, original, "1", true, "1.0", true);
+        compare(index, original, "1", false, "1.0", false);
+        check(M3VI.prepare(List.<String>of(), M3VI.jpms21(), 1, null).size() == 0, "empty");
+
+        var random = new Random(0x4d335649);
+        for (int corpus = 0; corpus < 100; corpus++) {
+            var raw = new ArrayList<String>();
+            for (int i = 0; i < 80; i++) raw.add(random.nextInt(30) + "." + random.nextInt(10));
+            var prepared = M3VI.prepare(raw, M3VI.jpms21(), 100, null);
+            for (int i = 0; i < 30; i++) {
+                int a = random.nextInt(30), b = a + random.nextInt(31 - a);
+                compare(prepared, raw, Integer.toString(a), random.nextBoolean(),
+                        Integer.toString(b), random.nextBoolean());
+            }
+        }
+
+        var count = new int[1];
+        var revision = new String[] { "numbers/1" };
+        M3VI.Scheme<Integer> scheme = new M3VI.Scheme<>() {
+            public String revision() { return revision[0]; }
+            public Integer parse(String value) { count[0]++; return Integer.valueOf(value); }
+            public int compare(Integer a, Integer b) { return Integer.compare(a, b); }
+        };
+        var prepared = M3VI.prepare(List.of("3", "01", "1", "2"), scheme, 4, null);
+        check(count[0] == 4, "parse stored labels once");
+        for (int i = 0; i < 20; i++) check(Arrays.equals(prepared.between("1", true, "2", true), new int[] {1, 2, 3}), "stable rows");
+        check(count[0] == 44, "queries parse bounds only");
+        var output = prepared.between("1", true, "2", true); output[0] = -1;
+        check(prepared.between("1", true, "2", true)[0] == 1, "output ownership");
+        revision[0] = "numbers/2";
+        expect(IllegalStateException.class, () -> prepared.between("1", true, "2", true));
+        revision[0] = "numbers/1";
+        expect(IllegalArgumentException.class, () -> prepared.between("3", true, "1", true));
+        expect(NullPointerException.class, () -> prepared.between(null, true, "1", true));
+        expect(IllegalArgumentException.class, () -> prepared.between("1".repeat(16_385), true, "1", true));
+        expect(IndexOutOfBoundsException.class, () -> prepared.label(4));
+        expect(IndexOutOfBoundsException.class, () -> prepared.originalRow(-1));
+        expect(NullPointerException.class, () -> M3VI.prepare(null, scheme, 4, null));
+        expect(NullPointerException.class, () -> M3VI.prepare(List.of("1"), null, 4, null));
+        expect(NullPointerException.class, () -> M3VI.prepare(Arrays.asList("1", null), scheme, 4, null));
+        expect(IllegalArgumentException.class, () -> M3VI.prepare(List.of("1"), scheme, 0, null));
+        expect(IllegalArgumentException.class, () -> M3VI.prepare(List.of("1"), scheme, 1_000_001, null));
+        expect(IllegalArgumentException.class, () -> M3VI.prepare(List.of("1", "2"), scheme, 1, null));
+        expect(IllegalArgumentException.class, () -> M3VI.prepare(List.of("1".repeat(16_385)), scheme, 1, null));
+        expect(IllegalArgumentException.class, () -> M3VI.prepare(List.of("bad"), M3VI.jpms21(), 1, null));
+        revision[0] = "";
+        expect(IllegalArgumentException.class, () -> M3VI.prepare(List.of("1"), scheme, 4, null));
+        revision[0] = "numbers/1";
+
+        var lifecycle = new int[4];
+        var progress = new M3VI.Progress() {
+            public void begin(String task, long total) { lifecycle[0]++; }
+            public void checkCancelled() { if (++lifecycle[1] == 2) throw new CancellationException(); }
+            public void worked(long work) { lifecycle[2] += (int) work; }
+            public void done() { lifecycle[3]++; }
+        };
+        expect(CancellationException.class, () -> M3VI.prepare(List.of("1", "2", "3"), scheme, 4, progress));
+        check(Arrays.equals(lifecycle, new int[] {1, 2, 1, 1}), "cancel cleanup");
+        var drift = new M3VI.Progress() {
+            public void worked(long work) { revision[0] = "numbers/2"; }
+        };
+        expect(IllegalStateException.class, () -> M3VI.prepare(List.of("1"), scheme, 4, drift));
+
+        String sha = "a".repeat(64);
+        var release = new M3Release("repo", "g", "a", "1.00", "jar", "", sha);
+        check(release.rawVersion().equals("1.00"), "raw release");
+        check(!release.equals(new M3Release("repo", "g", "a", "1.0", "jar", "", sha)), "distinct raw versions");
+        check(!release.equals(new M3Release("repo", "g", "a", "1.00", "jar", "tests", sha)), "classifier identity");
+        check(!release.equals(new M3Release("repo2", "g", "a", "1.00", "jar", "", sha)), "origin identity");
+        expect(IllegalArgumentException.class, () -> new M3Release("", "g", "a", "1", "jar", "", sha));
+        expect(NullPointerException.class, () -> new M3Release("repo", "g", "a", "1", "jar", null, sha));
+        expect(IllegalArgumentException.class, () -> new M3Release("repo", "g", "a", "1", "jar", "", "A".repeat(64)));
+        expect(IllegalArgumentException.class, () -> new M3Release("repo", "g", "a", "1", "jar", "", "abc"));
+        System.out.println("VI_PASS checks=" + checks);
+    }
+
+    private static void compare(M3VI<Version> index, List<String> raw,
+            String lo, boolean includeLo, String hi, boolean includeHi) {
+        var expected = new ArrayList<Integer>();
+        var lower = Version.parse(lo); var upper = Version.parse(hi);
+        for (int i = 0; i < raw.size(); i++) {
+            var value = Version.parse(raw.get(i));
+            int a = value.compareTo(lower), b = value.compareTo(upper);
+            if ((a > 0 || a == 0 && includeLo) && (b < 0 || b == 0 && includeHi)) expected.add(i);
+        }
+        expected.sort((a, b) -> {
+            int order = Version.parse(raw.get(a)).compareTo(Version.parse(raw.get(b)));
+            return order == 0 ? Integer.compare(a, b) : order;
+        });
+        check(Arrays.equals(index.between(lo, includeLo, hi, includeHi),
+                expected.stream().mapToInt(Integer::intValue).toArray()), "independent JPMS range oracle");
+    }
+
+    private static void check(boolean value, String message) {
+        checks++;
+        if (!value) throw new AssertionError(message);
+    }
+
+    private static void expect(Class<? extends Throwable> type, Runnable action) {
+        checks++;
+        try { action.run(); } catch (Throwable failure) {
+            if (type.isInstance(failure)) return;
+            throw new AssertionError("expected " + type, failure);
+        }
+        throw new AssertionError("missing " + type);
+    }
+}

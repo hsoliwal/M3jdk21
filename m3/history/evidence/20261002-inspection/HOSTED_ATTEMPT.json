@@ -1,0 +1,13 @@
+{
+  "run_id": 36959929426,
+  "head_sha": "ffe4e25aaf361c77687758c91e16c9d3905356c1",
+  "workflow_name": "M3 frozen history audit",
+  "status": "completed",
+  "conclusion": "failure",
+  "jobs_response": {
+    "total_count": 0,
+    "jobs": []
+  },
+  "failure_cause": "NOT_ESTABLISHED_BY_RETRIEVED_API_DATA",
+  "runtime_or_graph_execution": "NOT_RUN"
+}

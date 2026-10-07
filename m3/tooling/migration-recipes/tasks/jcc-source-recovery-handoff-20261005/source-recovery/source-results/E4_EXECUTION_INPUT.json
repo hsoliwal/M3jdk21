@@ -1,0 +1,252 @@
+{
+  "schema": "jcc-be92-reviewed-execution-input-for-e4/v1",
+  "source_input_commit": "be92c62ece9023b5c33676716a1076d00e26120a",
+  "source_input_root": "3c4f32b66633a251ba2c117090830252a7e2da03",
+  "qualification_review_complete": true,
+  "source_export_admitted": false,
+  "source_execution": {
+    "input_remote_revision": "be92c62ece9023b5c33676716a1076d00e26120a",
+    "input_remote_root_tree": "3c4f32b66633a251ba2c117090830252a7e2da03",
+    "published_output_revision": null,
+    "source_export_admitted": false,
+    "destination_gates_passed": false,
+    "proofs": [],
+    "qualification_status": "BLOCKED",
+    "selected_input_files": 527,
+    "unchanged_selected_inputs": 523,
+    "changed_production_files": 4,
+    "compiled_main_sources": 446,
+    "emitted_main_class_files": 1446,
+    "current_parent_context_paths": 109,
+    "designated_receiving_sources": 19,
+    "current_phases": [
+      {
+        "id": "parser-t02-candidate-epoch01",
+        "status": "PASS",
+        "execution_classification": "EXECUTED_PASSED",
+        "counts": {
+          "tests": 43,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "T03_execution": "NOT_RERUN",
+        "result": {
+          "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/parser-t02-candidate-epoch01/RESULT.json",
+          "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/parser-t02-candidate-epoch01/RESULT.json",
+          "bytes": 14247,
+          "sha256": "039b7d54e6de11a865874ef8f2820f3071e61700bf06224d94afdd0315ed63a6",
+          "git_blob": "a5d44068a5e01ec4c09612b2b145476d7c0268cc"
+        }
+      },
+      {
+        "id": "current-units-epoch02",
+        "status": "PASS",
+        "execution_classification": "EXECUTED_PASSED",
+        "counts": {
+          "tests": 119,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "T03_execution": "NOT_RERUN",
+        "result": {
+          "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/current-units-epoch02/RESULT.json",
+          "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/current-units-epoch02/RESULT.json",
+          "bytes": 20809,
+          "sha256": "a7a92fc26c62ce0938464a75dff13ea1785822f787bf17e03ebf6dd0cc45296f",
+          "git_blob": "864b64878c8f06c45b9b6dad6d89c3284aaed612"
+        }
+      },
+      {
+        "id": "observation-regression-epoch02",
+        "status": "PASS",
+        "execution_classification": "EXECUTED_PASSED",
+        "counts": {
+          "tests": 8,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "T03_execution": "NOT_RERUN",
+        "result": {
+          "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/observation-regression-epoch02/RESULT.json",
+          "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/RESULT.json",
+          "bytes": 17990,
+          "sha256": "041ba5fa63b335839675d773c36588d6207c11d0933ad303fa3378a5922000d4",
+          "git_blob": "d6f19056296663d3da760957937a8f3edec64535"
+        }
+      },
+      {
+        "id": "upstream-regression-epoch02",
+        "status": "FAIL",
+        "execution_classification": "EXECUTED_FAILED",
+        "counts": {
+          "tests": 67,
+          "failures": 0,
+          "errors": 1,
+          "skipped": 0
+        },
+        "T03_execution": "NOT_RERUN",
+        "result": {
+          "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/upstream-regression-epoch02/RESULT.json",
+          "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/upstream-regression-epoch02/RESULT.json",
+          "bytes": 14193,
+          "sha256": "c6a3b0125bae6af2b9f704784b4b114eb988da44cfb56696287134d309629609",
+          "git_blob": "2527bcf3a09ba0051880b06fd1e402a1fcfb5e36"
+        }
+      },
+      {
+        "id": "native-lane-epoch02",
+        "status": "PASS",
+        "execution_classification": "EXECUTED_PASSED",
+        "counts": {
+          "tests": 19,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "T03_execution": "NOT_RERUN",
+        "result": {
+          "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/native-lane-epoch02/RESULT.json",
+          "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/RESULT.json",
+          "bytes": 11617,
+          "sha256": "206f4380105bfe863704b92bba17f8ce2df7bbb82d0fbe986751c1dc4d721796",
+          "git_blob": "0b22050eb54dab0e05cdb1f7b34e411abd092f53"
+        }
+      }
+    ],
+    "unit_phase_counts": {
+      "04-contract-growth": {
+        "tests": 1,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "05-current-mastery": {
+        "tests": 15,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "06-core-java": {
+        "tests": 91,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "08-parent-java": {
+        "tests": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "observation_campaign": {
+      "status": "PASS",
+      "cases": 19,
+      "current_root": "ef73c54a20835369ae541b95bdb7b56ba42c3a4366607b00157a09f7572cc2e7",
+      "reported_pair_compilations": 76,
+      "compiler_count_limit": "The campaign reports76 paired-case compilations; two additional loader-control compilations are not included in that printed count.",
+      "result": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/observation-regression-epoch02/CAMPAIGN_RESULT.json",
+        "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/observation-regression-epoch02/CAMPAIGN_RESULT.json",
+        "bytes": 599,
+        "sha256": "622c75ca29de15c17344089df368255fa13dd35f340c708cd80d8476a1966a28",
+        "git_blob": "c0882c9cb45ebead41fc3889aebb02b40622de9d"
+      }
+    },
+    "upstream": {
+      "classification": "EXECUTED_FAILED",
+      "tests": 67,
+      "passed": 66,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "error": "Required static-analysis anchor AtomicPrimitiveEqualsUsesGet is unavailable (ClassNotFoundException).",
+      "test": "M3OpenRewriteTranspilerTest.runsConcernSeparatedMechanicalPassesAndChainsReceipts",
+      "classification_correction": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/UPSTREAM_CLASSIFICATION_EPOCH_02.json",
+        "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/UPSTREAM_CLASSIFICATION_EPOCH_02.json",
+        "bytes": 883,
+        "sha256": "b7262f5ce0c1868e8b4741b2bd46c09fd26c16bc5a044179988c42ce80642c3e",
+        "git_blob": "e9a31d082ced46a6f57b0874a25b10df61634753"
+      },
+      "original_oracle_unchanged": true
+    },
+    "independent_native": {
+      "status": "PASS",
+      "tests": 19,
+      "donor_tests": 7,
+      "current_parent_tests": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "RXL_parity_cases": 72,
+      "RXM_compiler_parity_rows": 6,
+      "parity": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/native-lane-epoch02/PARITY.json",
+        "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/native-lane-epoch02/PARITY.json",
+        "bytes": 1394,
+        "sha256": "b1d375e04deb8078e47e261238308de2d4312d6b0ed55a400725031884cfb0a6",
+        "git_blob": "74a05b892b158f2473e102c541be20274d636e44"
+      },
+      "aggregate_promoted": false
+    },
+    "mechanical_replay": {
+      "status": "PASS",
+      "completed_stages": 70,
+      "failed_stages": 0,
+      "unrun_stages": 0,
+      "recipe_crates": 5,
+      "actual_production_writes": 4,
+      "actual_copied_fixture_writes": 2,
+      "separate_disk_replay_results": 0,
+      "separate_disk_replay_writes": 0,
+      "fresh_main_sources": 446,
+      "equal_class_files": 1446,
+      "equal_resources": 34,
+      "behavioral_suites_rerun": false,
+      "result": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/target/replay/run.Jb2fAJEW/RESULT.json",
+        "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/final-t03/RESULT.json",
+        "bytes": 2586,
+        "sha256": "066c4fa046adf063f2bffb02ac8d6be949e5f85d55de489dd081d56bddcd93dd",
+        "git_blob": "1a55550a8fe316b98743f3fa3f63bb8719a3b360"
+      }
+    },
+    "public_api": {
+      "status": "PASS",
+      "three_changed_public_owner_families": 3,
+      "family_owned_class_files": 31,
+      "outward_public_protected_types": 24,
+      "public_protected_members": 277,
+      "fourth_package_private_helper_outward_types": 0,
+      "scope": "Baseline and candidate compiled signatures are equal; helper package signatures remain equal and a private valueFrame method is added. This does not assert equal composite contract fingerprints.",
+      "report": {
+        "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/contract-api-epoch02/REVIEW.md",
+        "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/contract-api-epoch02/REVIEW.md",
+        "bytes": 2865,
+        "sha256": "eb6ddcfbba9e9f6d0fc675c4c58f9b279cd7c96cbd8acb9749e41591497f6c30",
+        "git_blob": "00284ac27872ad911924d3491b4277fb30247a22"
+      }
+    },
+    "scope_limits": [
+      "The 527 selected current inputs and 446 explicit main compiler sources are a bounded projection, not whole-repository or whole-reactor qualification.",
+      "Current parent evidence covers both declared classes (9 convergence and 3 RXM tests), with 88 first-party plus 19 vendor sources; retained vendor warnings are separate from first-party -Xlint:all -Werror.",
+      "Composition uses four frozen two-source fixtures and explicit options: 16 unique schedules/32 including replay. Structured receipts retain source hashes, not every complete intermediate source map.",
+      "Nested contract framing is linear in the observed value tree at the retained depth bound. This does not add a global allocation budget for compressed branching annotation defaults; composite annotation/array fingerprints deliberately change to v3.",
+      "Parser43 is the previously executed T02 candidate profile, not rerun in T03. Earlier cache/runtime applicability uses observational bracketing in the trusted offline/no-install workflow and archive custody, not JVM-loaded-byte attestation.",
+      "All34 main resources are checked directly in T03. Of the earlier source-resource identities,26 were directly execution-frozen and8 rely on later source/output/prior-copy equality; that historical distinction remains.",
+      "The independent Linux/GCC13/JDK21 native lane passes19 invocations and exact Java/native receipt parity. Java regex transitions remain Java; required library presence does not prove a JNI regex implementation, and API checks are not native-entry counts.",
+      "The whole selected upstream67 packet actually failed with one unavailable static-analysis recipe. Independent native and mechanical replay do not promote that gate or the blocked aggregate, source export or destination acceptance."
+    ]
+  },
+  "reviewed_result": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/source-merge-review/RECOVERY_RESULT.json",
+    "repository_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/evidence/current-be92/RECOVERY_RESULT.json",
+    "bytes": 456423,
+    "sha256": "086f4ef835a0939b212bcb7595e75513ecbd46ce6bbf764a8d1f5aca1e418954",
+    "git_blob": "9c14f0c7eef7ed15b9148947ee729836dc2aefe1"
+  }
+}

@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.a3.MasteryWorkflowDelivery
+displayName: Advance A3 mastery workflow gate
+description: >-
+  Replays the exact A3 workflow update for the expanded compiler-driven Atomize/Patternize
+  mastery campaign. Candidate-only; no JDK product source or promotion authority.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: a3-mastery-workflow

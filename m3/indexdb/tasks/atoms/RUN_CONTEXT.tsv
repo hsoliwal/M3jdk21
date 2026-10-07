@@ -1,0 +1,11 @@
+key	value
+repo	hsoliwal/M3jdk21
+pr	88
+base_head	89373b64356a8b7d045ce721fc59907e522e6f9e
+base_tree	acae68f8712bf51bae20b537ab9c072d74a2fd67
+DB_source_tree	8a1be2b7ba3aed18fda9aab93c31d22dc79e393f
+workers	1
+mode	draft-branch candidate only
+local_Java	OpenJDK21.0.11 Debian
+recipe_execution_root	m3/indexdb
+recipe_test_root	m3/tooling/migration-recipes

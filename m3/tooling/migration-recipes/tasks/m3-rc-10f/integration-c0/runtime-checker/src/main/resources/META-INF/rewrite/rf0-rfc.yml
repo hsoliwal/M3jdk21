@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Rf0Rfc
+displayName: Rf0 exact runtime checker snapshot repair
+description: One bounded three-replacement family over the actual Sc0 candidate; source-operation qualification only.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: rf0-rfc

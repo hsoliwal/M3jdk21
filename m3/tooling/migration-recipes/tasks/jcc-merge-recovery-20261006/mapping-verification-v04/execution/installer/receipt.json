@@ -1,0 +1,297 @@
+{
+  "checks": [
+    {
+      "case": "actual recipe result equals all four sealed afterimages",
+      "destination_input": "09075810b55229662329a158923287e8a7118f86",
+      "fixture_start": "exact sealed beforeimages",
+      "outputs": 4,
+      "repository_state": "before",
+      "source_commit": "bc06298218dd88f0164ed9b67e74fd8234ed70b2"
+    },
+    {
+      "case": "CLI apply/check/fixed-point/rollback restores exact input",
+      "outputs": 4
+    },
+    {
+      "case": "all target/guard/mixed-state refusals preserve caller bytes",
+      "refusals": 28
+    },
+    {
+      "case": "staged inputs and actual recipe results unchanged",
+      "input_files": 23,
+      "outputs": 4
+    }
+  ],
+  "commands": [
+    {
+      "case": "01-check-before",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/repository/m3/migration/recipe.py",
+        "check",
+        "--root",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/installer/fixture",
+        "--plan",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/plan.json"
+      ],
+      "exit_code": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "a128e963309054f756e531331f5443c9f61a7aa4426ac88036568cd4eaf94b16"
+    },
+    {
+      "case": "02-apply",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/repository/m3/migration/recipe.py",
+        "apply",
+        "--root",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/installer/fixture",
+        "--plan",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/plan.json"
+      ],
+      "exit_code": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "d66256753174331f80380fc37050b61e4082ebb950116caae138618477c82698"
+    },
+    {
+      "case": "03-apply-fixed-point",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/repository/m3/migration/recipe.py",
+        "apply",
+        "--root",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/installer/fixture",
+        "--plan",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/plan.json"
+      ],
+      "exit_code": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "a6e65bc4756e36cb2bd6a3b723d979ec8a653c241420bc49565c3cd9cab35d5b"
+    },
+    {
+      "case": "04-check-after",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/repository/m3/migration/recipe.py",
+        "check",
+        "--root",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/installer/fixture",
+        "--plan",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/plan.json"
+      ],
+      "exit_code": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "a6e65bc4756e36cb2bd6a3b723d979ec8a653c241420bc49565c3cd9cab35d5b"
+    },
+    {
+      "case": "05-rollback",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/repository/m3/migration/recipe.py",
+        "rollback",
+        "--root",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/installer/fixture",
+        "--plan",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/plan.json"
+      ],
+      "exit_code": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "5475ec8c5b150abc9ce6f3cf39106e147f85681b633cbdb25dd5047250f9e0d2"
+    },
+    {
+      "case": "06-rollback-fixed-point",
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/repository/m3/migration/recipe.py",
+        "rollback",
+        "--root",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/installer/fixture",
+        "--plan",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/repository/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/plan.json"
+      ],
+      "exit_code": 0,
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_sha256": "a128e963309054f756e531331f5443c9f61a7aa4426ac88036568cd4eaf94b16"
+    }
+  ],
+  "finished": "2026-10-06T06:32:10.120429+00:00",
+  "input_hashes": {
+    "m3/docs/jcc-source-handoff.md": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
+    "m3/docs/name-mapping.json": "9c96a0f6f7cc0f9b9d3e91fc3a42ef8e4eab212726fccd5e63e483f1acd7dfb1",
+    "m3/docs/name-mapping.schema.json": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+    "m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
+    "m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
+    "m3/migration/migration.py": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+    "m3/migration/recipe.py": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628",
+    "m3/tooling/migration-recipes/pom.xml": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888",
+    "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/after-00.txt": "cf84929db27261fceb704e2b9b3ebfca212dcea6a8f61acff099104118342645",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/after-01.txt": "975d986ae5883e2851e39373705d7691d0aa74e6e7be3af47a75093c1ffe46dc",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/after-02.txt": "73b3b5bd60eff1c1a904bd96517309067a9a93832060b63fa19c0c826e10630d",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/after-03.txt": "0cba435844da64936b50f039ebe12ffaa56fa39a3f86f20206c6d0874e61050c",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/before-00.txt": "9c96a0f6f7cc0f9b9d3e91fc3a42ef8e4eab212726fccd5e63e483f1acd7dfb1",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/before-01.txt": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/before-02.txt": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/before-03.txt": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/manifest.tsv": "6a2ca1c34f3f848369d3adb41e6f4c10ab8a774e5d3b953e0a2c93ee268c7a00",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-mapping-v04/plan.json": "9189d4ff6f84914a6ac1612eb12ad04749d3feb49640cd920263e0c1cdeea56d",
+    "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1",
+    "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/mapping-input-epoch-v04.json": "4fd3b3bd4fb09759d8bb02ca9ba45d0b2934625f24bcc4ae195f3e49394dff70",
+    "m3/tooling/migration-recipes/tasks/jcc-merge-recovery-20261006/source-publication-input-v04.json": "b6753688fcacb6f1255c607072ea10823c29f8c574f049dc96cee8c5a7ad5613",
+    "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"
+  },
+  "materialized": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/materialized",
+  "refusals": [
+    {
+      "case": "foreign afterimage m3/docs/jcc-source-handoff.md",
+      "message": "destination drift: m3/docs/jcc-source-handoff.md",
+      "mode": "rollback"
+    },
+    {
+      "case": "foreign afterimage m3/docs/name-mapping.json",
+      "message": "destination drift: m3/docs/name-mapping.json",
+      "mode": "rollback"
+    },
+    {
+      "case": "foreign afterimage m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+      "message": "destination drift: m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+      "mode": "rollback"
+    },
+    {
+      "case": "foreign afterimage m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+      "message": "destination drift: m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+      "mode": "rollback"
+    },
+    {
+      "case": "foreign beforeimage m3/docs/jcc-source-handoff.md",
+      "message": "destination drift: m3/docs/jcc-source-handoff.md",
+      "mode": "apply"
+    },
+    {
+      "case": "missing beforeimage m3/docs/jcc-source-handoff.md",
+      "message": "destination drift: m3/docs/jcc-source-handoff.md",
+      "mode": "apply"
+    },
+    {
+      "case": "foreign beforeimage m3/docs/name-mapping.json",
+      "message": "destination drift: m3/docs/name-mapping.json",
+      "mode": "apply"
+    },
+    {
+      "case": "missing beforeimage m3/docs/name-mapping.json",
+      "message": "destination drift: m3/docs/name-mapping.json",
+      "mode": "apply"
+    },
+    {
+      "case": "foreign beforeimage m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+      "message": "destination drift: m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+      "mode": "apply"
+    },
+    {
+      "case": "missing beforeimage m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+      "message": "destination drift: m3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv",
+      "mode": "apply"
+    },
+    {
+      "case": "foreign beforeimage m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+      "message": "destination drift: m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+      "mode": "apply"
+    },
+    {
+      "case": "missing beforeimage m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+      "message": "destination drift: m3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json",
+      "mode": "apply"
+    },
+    {
+      "case": "foreign guard m3/docs/name-mapping.schema.json",
+      "message": "dependency guard drift: m3/docs/name-mapping.schema.json",
+      "mode": "apply"
+    },
+    {
+      "case": "missing guard m3/docs/name-mapping.schema.json",
+      "message": "dependency guard drift: m3/docs/name-mapping.schema.json",
+      "mode": "apply"
+    },
+    {
+      "case": "foreign guard m3/migration/migration.py",
+      "message": "dependency guard drift: m3/migration/migration.py",
+      "mode": "apply"
+    },
+    {
+      "case": "missing guard m3/migration/migration.py",
+      "message": "dependency guard drift: m3/migration/migration.py",
+      "mode": "apply"
+    },
+    {
+      "case": "foreign guard m3/migration/recipe.py",
+      "message": "dependency guard drift: m3/migration/recipe.py",
+      "mode": "apply"
+    },
+    {
+      "case": "missing guard m3/migration/recipe.py",
+      "message": "dependency guard drift: m3/migration/recipe.py",
+      "mode": "apply"
+    },
+    {
+      "case": "foreign guard m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "message": "dependency guard drift: m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "mode": "apply"
+    },
+    {
+      "case": "missing guard m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "message": "dependency guard drift: m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "mode": "apply"
+    },
+    {
+      "case": "foreign guard m3/tooling/migration-recipes/pom.xml",
+      "message": "dependency guard drift: m3/tooling/migration-recipes/pom.xml",
+      "mode": "apply"
+    },
+    {
+      "case": "missing guard m3/tooling/migration-recipes/pom.xml",
+      "message": "dependency guard drift: m3/tooling/migration-recipes/pom.xml",
+      "mode": "apply"
+    },
+    {
+      "case": "foreign guard src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "message": "dependency guard drift: src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "mode": "apply"
+    },
+    {
+      "case": "missing guard src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "message": "dependency guard drift: src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "mode": "apply"
+    },
+    {
+      "case": "foreign guard m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "message": "dependency guard drift: m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "mode": "apply"
+    },
+    {
+      "case": "missing guard m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "message": "dependency guard drift: m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "mode": "apply"
+    },
+    {
+      "case": "mixed before/after state",
+      "message": "mixed before/after state",
+      "mode": "apply"
+    },
+    {
+      "case": "mixed before/after state",
+      "message": "mixed before/after state",
+      "mode": "rollback"
+    }
+  ],
+  "repository": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/repository",
+  "schema": "m3-jcc-mapping-installer-verification/2",
+  "scope": "Four metadata outputs only; actual recipe bytes agree with unchanged sealed installer. Source/export/JDK/JNI/native/platform gates retain their own status.",
+  "started": "2026-10-06T06:32:09.663827+00:00",
+  "status": "PASS"
+}

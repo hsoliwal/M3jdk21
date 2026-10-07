@@ -1,0 +1,39 @@
+{
+  "archiveOperationsExecuted": false,
+  "argv": [
+    "/usr/bin/python3",
+    "-I",
+    "-S",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed-preparation/receiving-selection-authoring-v1/emit_receiving_selection_v1.py",
+    "--output",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed-preparation/receiving-selection-v1",
+    "--root-readback",
+    "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed/primary-observation-v1/ROOT-READBACK-v1.json",
+    "--root-readback-sha256",
+    "c90c38328817d8f3bdccd784afb3f2e2f3b9754748203a2c166e968cca028295"
+  ],
+  "behavioralGatesExecuted": false,
+  "cwd": "/workspace/scratch/5809f5dce3dd/continuation-20261006",
+  "environment": {
+    "LANG": "C.UTF-8",
+    "LC_ALL": "C.UTF-8",
+    "PATH": "/usr/bin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "output": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed-preparation/receiving-selection-v1",
+  "rootExecutionRequired": true,
+  "rootReadbackMayBeRetainedInSeparateExternalEnvelope": true,
+  "schema": "synexia.ph0.receiving-selection-command/1",
+  "script": {
+    "bytes": 8299,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed-preparation/receiving-selection-authoring-v1/emit_receiving_selection_v1.py",
+    "sha256": "f4964923865715d545877f9704a96c757687c51825ba1db9ce7d32a80aeec645"
+  },
+  "status": "REVIEWED_METADATA_ONLY_NOT_EXECUTED",
+  "terminal": {
+    "bytes": 83386,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-composed/primary-observation-v1/RESULT.json",
+    "sha256": "38b49d749921719b3773eeb8b10da1d0fc0461c3e483bdd7970c95797ab84ede"
+  },
+  "timeoutSeconds": 300
+}

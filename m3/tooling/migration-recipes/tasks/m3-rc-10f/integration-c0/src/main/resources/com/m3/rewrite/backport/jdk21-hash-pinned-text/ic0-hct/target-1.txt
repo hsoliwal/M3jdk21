@@ -1,0 +1,946 @@
+#!/usr/bin/env python3
+# Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+"""Validate the existing naming authority and reconcile pinned inventory evidence.
+
+Consumes Synexia InventoryWriter's TSV; it is not a replacement inventory scanner,
+compiler, equivalence prover, signature verifier, or automatic conflict resolver.
+No private source is fetched or published. Python remains tooling-only.
+"""
+import argparse
+import csv
+import hashlib
+import io
+import json
+from pathlib import Path, PurePosixPath
+import re
+import sys
+import xml.etree.ElementTree as ET
+
+from jsonschema import Draft202012Validator
+
+SCHEMA_PATH = Path(__file__).resolve().parents[1] / "docs/name-mapping.schema.json"
+
+SHA = re.compile(r'^[0-9a-f]{64}$')
+COMMIT = re.compile(r'^[0-9a-f]{40}$')
+KINDS = {'direct-port', 'rename', 'adapter', 'consolidation', 'specialization',
+         'dependency-reuse', 'pending', 'excluded', 'tombstone'}
+STATUSES = {'implemented-tested', 'implemented-unverified', 'pending', 'blocked', 'excluded', 'tombstone'}
+REQUIRED_RECORD = {'id', 'kind', 'status', 'reason', 'sources', 'targets', 'owner', 'identity',
+    'contract', 'format', 'dependencies', 'materialization', 'recipe', 'tests', 'provenance', 'sync', 'lineage'}
+MAX_JSON = 16 * 1024 * 1024
+
+
+def digest(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def unique_object(pairs):
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError('duplicate JSON key: ' + key)
+        result[key] = value
+    return result
+
+
+def parse_json(data):
+    if len(data) > MAX_JSON:
+        raise ValueError('JSON byte budget exceeded')
+    def invalid_constant(value):
+        raise ValueError('nonfinite JSON number: ' + value)
+    return json.loads(data, object_pairs_hook=unique_object, parse_constant=invalid_constant)
+
+
+def load_json(path):
+    path = Path(path)
+    if path.is_symlink() or not path.is_file() or path.stat().st_size > MAX_JSON:
+        raise ValueError('unsafe, missing or oversized JSON: ' + str(path))
+    return parse_json(path.read_bytes())
+
+
+def relative_path(value):
+    if not isinstance(value, str) or not value or '\\' in value or any(ord(c) < 32 for c in value):
+        raise ValueError('invalid relative path')
+    path = PurePosixPath(value)
+    if path.is_absolute() or any(p in ('.', '..', '') for p in value.split('/')) or ':' in value:
+        raise ValueError('unsafe relative path: ' + value)
+    return path
+
+
+def safe_path(root, relative):
+    relative_path(relative)
+    current = Path(root).absolute()
+    if current.is_symlink():
+        raise ValueError('symlink root')
+    for part in PurePosixPath(relative).parts:
+        current = current / part
+        if current.is_symlink():
+            raise ValueError('symlink path: ' + relative)
+    return current
+
+
+def file_hash(root, relative):
+    path = safe_path(root, relative)
+    if not path.is_file():
+        raise ValueError('missing file: ' + relative)
+    hasher = hashlib.sha256()
+    with path.open('rb') as source:
+        for block in iter(lambda: source.read(65536), b''):
+            hasher.update(block)
+    return hasher.hexdigest()
+
+
+def _text(value):
+    return isinstance(value, str) and bool(value.strip())
+
+
+def _hex(pattern, value):
+    return isinstance(value, str) and bool(pattern.fullmatch(value))
+
+
+def _location(ref):
+    return (ref.get('repo'), ref.get('path'), ref.get('symbol'))
+
+
+def validate(document, root, previous=None):
+    """Structural and exact-artifact evidence validation; never implies completion."""
+    schema = load_json(SCHEMA_PATH)
+    Draft202012Validator.check_schema(schema)
+    schema_errors = list(Draft202012Validator(schema).iter_errors(document))
+    if schema_errors:
+        return ['schema ' + '/'.join(str(p) for p in error.absolute_path) + ': ' + error.message
+                for error in schema_errors]
+    errors = []
+    def fail(message):
+        errors.append(message)
+    if not isinstance(document, dict) or document.get('schema') != 1 or not isinstance(document.get('mappings'), list):
+        return ['legacy name-mapping schema must be retained']
+    migration = document.get('migration')
+    if not isinstance(migration, dict) or migration.get('version') != 1:
+        return ['unsupported migration extension version']
+    for role in ('source', 'target'):
+        repository = migration.get(role, {})
+        if not isinstance(repository, dict) or not _hex(COMMIT, repository.get('baseline_commit')):
+            fail(role + ' baseline commit must be pinned')
+        if not _text(repository.get('repo')):
+            fail(role + ' repository required')
+    coverage = migration.get('coverage', {})
+    for flag in ('source_tree_complete', 'dependency_closure_complete'):
+        if type(coverage.get(flag)) is not bool:
+            fail('coverage boolean required: ' + flag)
+    if not isinstance(migration.get('gates'), list):
+        fail('acceptance gates required')
+    records = migration.get('records')
+    if not isinstance(records, list):
+        return errors + ['records must be an array']
+    ids = set()
+    target_owners = {}
+    receipt_cache = {}
+    for record in records:
+        if not isinstance(record, dict):
+            fail('invalid record'); continue
+        rid = record.get('id', '<missing>')
+        if not _text(rid) or rid in ids:
+            fail('duplicate or invalid mapping id: ' + str(rid))
+        ids.add(str(rid))
+        prefix = str(rid) + ': '
+        missing = REQUIRED_RECORD - record.keys()
+        if missing:
+            fail(prefix + 'missing fields ' + ','.join(sorted(missing))); continue
+        if record['kind'] not in KINDS or record['status'] not in STATUSES:
+            fail(prefix + 'unsupported kind/status')
+        if not _text(record['reason']) or not _text(record['owner']):
+            fail(prefix + 'reason and owner required')
+        for key in ('identity', 'contract', 'format', 'materialization', 'recipe', 'provenance', 'sync', 'lineage'):
+            if not isinstance(record[key], dict):
+                fail(prefix + key + ' must be an object')
+        if not all(isinstance(record[key], dict) for key in ('recipe', 'sync', 'lineage')):
+            continue
+        if record['sync'].get('direction') not in {'source-to-target', 'target-to-source-proposal', 'traceability-only'}:
+            fail(prefix + 'unsafe port direction')
+        tested = record['status'] == 'implemented-tested'
+        implemented = record['status'] in {'implemented-tested', 'implemented-unverified'}
+        for role in ('sources', 'targets'):
+            refs = record[role]
+            if not isinstance(refs, list):
+                fail(prefix + role + ' must be an array'); continue
+            if implemented and not refs:
+                fail(prefix + role + ' required for implementation claim')
+            for ref in refs:
+                if not isinstance(ref, dict):
+                    fail(prefix + 'invalid artifact reference'); continue
+                if ref.get('commit') is not None and not _hex(COMMIT, ref['commit']):
+                    fail(prefix + 'invalid artifact commit')
+                if ref.get('revision_role') == 'pinned' and not _hex(COMMIT, ref.get('commit')):
+                    fail(prefix + 'pinned artifact needs commit')
+                if role == 'sources' and implemented and not _hex(COMMIT, ref.get('commit')):
+                    fail(prefix + 'implemented source commit required')
+                path = ref.get('path')
+                if path is not None:
+                    try: relative_path(path)
+                    except ValueError as failure: fail(prefix + str(failure))
+                if ref.get('sha256') is not None and not _hex(SHA, ref['sha256']):
+                    fail(prefix + 'invalid content hash')
+                if implemented and (not path or not _hex(SHA, ref.get('sha256'))
+                        or not _text(ref.get('symbol')) or not ref.get('signatures')):
+                    fail(prefix + 'implementation requires path/hash/symbol/signatures')
+                if role == 'targets' and path:
+                    previous_owner = target_owners.setdefault((ref.get('repo'), path), record['owner'])
+                    if previous_owner != record['owner']:
+                        fail(prefix + 'conflicting owner for target ' + path)
+                    if implemented and _hex(SHA, ref.get('sha256')):
+                        try:
+                            if file_hash(root, path) != ref['sha256']:
+                                fail(prefix + 'target hash drift: ' + path)
+                        except (OSError, ValueError) as failure: fail(prefix + str(failure))
+        recipe = record['recipe']
+        if recipe.get('path') is not None and implemented:
+            try:
+                if not _hex(SHA, recipe.get('sha256')) or file_hash(root, recipe['path']) != recipe['sha256']:
+                    fail(prefix + 'recipe hash drift')
+            except (OSError, ValueError) as failure: fail(prefix + str(failure))
+        if tested:
+            runs = []
+            if not isinstance(record['tests'], list) or not record['tests']:
+                fail(prefix + 'test evidence required')
+            else:
+                for test in record['tests']:
+                    try:
+                        receipt_path = test['receipt']
+                        if receipt_path not in receipt_cache:
+                            receipt_cache[receipt_path] = load_json(safe_path(root, receipt_path))
+                        receipt = receipt_cache[receipt_path]
+                        shape_errors = list(Draft202012Validator(schema['$defs']['receipt']).iter_errors(receipt))
+                        if shape_errors:
+                            raise ValueError('invalid evidence receipt shape: ' + shape_errors[0].message)
+                        matches = [run for run in receipt.get('runs', []) if run.get('id') == test['id']]
+                        if len(matches) != 1:
+                            raise ValueError('missing/duplicate evidence test id')
+                        run = matches[0]
+                        if run.get('status') != 'passed' or type(run.get('exit_code')) is not int or run['exit_code'] != 0:
+                            raise ValueError('failed or unexecuted evidence')
+                        if not run.get('command') or not _hex(SHA, run.get('stdout_sha256')):
+                            raise ValueError('incomplete evidence command/output')
+                        inputs = run.get('inputs', {})
+                        if not inputs:
+                            raise ValueError('evidence input closure missing')
+                        for path, expected in inputs.items():
+                            if not _hex(SHA, expected) or file_hash(root, path) != expected:
+                                raise ValueError('evidence input hash drift: ' + path)
+                        if run.get('stdout_path') and file_hash(root, run['stdout_path']) != run['stdout_sha256']:
+                            raise ValueError('evidence output hash drift')
+                        runs.append(run)
+                    except (OSError, ValueError, KeyError, TypeError) as failure:
+                        fail(prefix + 'evidence: ' + str(failure))
+                for target in record['targets']:
+                    if not any(run.get('inputs', {}).get(target.get('path')) == target.get('sha256') for run in runs):
+                        fail(prefix + 'no exact-candidate evidence for target ' + str(target.get('path')))
+    if previous:
+        old_records = previous.get('migration', {}).get('records', [])
+        current = {record.get('id'): record for record in records if isinstance(record, dict)}
+        for old in old_records:
+            rid = old['id']
+            if rid not in current:
+                fail('lineage lost: retain mapping/tombstone ' + rid); continue
+            new = current[rid]
+            for role in ('sources', 'targets'):
+                old_locations = {_location(ref) for ref in old.get(role, [])}
+                new_locations = {_location(ref) for ref in new.get(role, [])}
+                preserved = {_location(ref) for ref in new.get('lineage', {}).get('previous_' + role, [])}
+                if old_locations - new_locations - preserved:
+                    fail('lineage missing for moved/split/merged ' + rid + ' ' + role)
+    return errors
+
+
+def completion_errors(document):
+    migration = document['migration']
+    coverage = migration['coverage']
+    errors = []
+    if not coverage.get('source_tree_complete'):
+        errors.append('full source tree inventory is incomplete')
+    if not coverage.get('dependency_closure_complete'):
+        errors.append('semantic dependency/ownership closure is incomplete')
+    if not coverage.get('inventory_receipt'):
+        errors.append('pinned exhaustive inventory receipt is absent')
+    if coverage.get('uninspected_domains'):
+        errors.append('uninspected domains remain')
+    for record in migration['records']:
+        if record['status'] not in {'implemented-tested', 'excluded', 'tombstone'}:
+            errors.append(record['id'] + ': ' + record['status'])
+        if record.get('sync', {}).get('pending') or record.get('sync', {}).get('conflicts'):
+            errors.append(record['id'] + ': synchronization gaps remain')
+        for dependency in record.get('dependencies', []):
+            if dependency.get('resolution') != 'resolved':
+                errors.append(record['id'] + ': unresolved dependency')
+    for gate in migration['gates']:
+        if gate.get('status') not in {'passed', 'not-applicable'}:
+            errors.append(gate['id'] + ': ' + gate.get('status', 'missing'))
+    source = migration['source']
+    if source.get('observed_tip') and source['observed_tip'] != source['baseline_commit']:
+        errors.append('source default-branch tip changed since baseline; reconcile rather than silently repin')
+    return errors
+
+
+def read_inventory(path, receipt_path):
+    """Read the existing InventoryWriter TSV, preserving every row regardless of name."""
+    path = Path(path)
+    receipt = load_json(receipt_path)
+    if path.is_symlink() or not path.is_file() or path.stat().st_size > 256 * 1024 * 1024:
+        raise ValueError('unsafe, missing or oversized inventory')
+    content = path.read_bytes()
+    if not _hex(COMMIT, receipt.get('commit')) or digest(content) != receipt.get('inventory_sha256'):
+        raise ValueError('inventory pin mismatch')
+    if type(receipt.get('scope_complete')) is not bool or not _text(receipt.get('repo')):
+        raise ValueError('inventory scope/repository receipt required')
+    reader = csv.DictReader(io.StringIO(content.decode('utf-8')), delimiter='\t')
+    if not reader.fieldnames or len(reader.fieldnames) != len(set(reader.fieldnames)) or not {'path', 'sha256'} <= set(reader.fieldnames):
+        raise ValueError('unsupported or ambiguous InventoryWriter TSV header')
+    rows = {}
+    for row in reader:
+        relative_path(row['path'])
+        if row['path'] in rows or not _hex(SHA, row.get('sha256')) or None in row:
+            raise ValueError('duplicate/invalid inventory row')
+        rows[row['path']] = row
+    return {'receipt': receipt, 'rows': rows}
+
+
+def reconcile(document, inventory, target_root):
+    """Three-way REVIEW decisions only. Never writes source, targets or mappings."""
+    rows, receipt = inventory['rows'], inventory['receipt']
+    mapped = set()
+    output = []
+    for record in document['migration']['records']:
+        sources = [ref for ref in record['sources'] if ref.get('repo') == receipt['repo'] and ref.get('path')]
+        comparable = [ref for ref in sources if ref.get('tracking_ref') == receipt.get('tracking_ref')]
+        mapped.update(ref['path'] for ref in comparable)
+        missing = [ref['path'] for ref in comparable if ref['path'] not in rows]
+        source_changed = any(ref['path'] in rows and rows[ref['path']]['sha256'] != ref.get('sha256') for ref in comparable)
+        target_changed = False
+        for ref in record['targets']:
+            if ref.get('path') and ref.get('sha256'):
+                try: current = file_hash(target_root, ref['path'])
+                except (OSError, ValueError): current = None
+                target_changed |= current != ref['sha256']
+        if not comparable or (missing and not receipt['scope_complete']):
+            decision = 'source-unobserved'
+        elif missing:
+            decision = 'three-way-conflict' if target_changed else 'source-deletion-review'
+        elif source_changed and target_changed:
+            decision = 'three-way-conflict'
+        elif source_changed:
+            decision = 'source-change-review'
+        elif target_changed:
+            decision = 'target-only-adaptation'
+        else:
+            decision = 'unchanged'
+        output.append({'id': record['id'], 'decision': decision, 'unobserved_paths': missing,
+                       'automatic_replay_allowed': False})
+    return {'source_commit': receipt['commit'], 'source_scope_complete': receipt['scope_complete'],
+            'semantic_equivalence_proved': False, 'records': output,
+            'unmapped_paths': sorted(set(rows) - mapped)}
+
+
+def extend_document(original, extension, expected_sha256):
+    """One-time additive extension recipe; never overwrites an existing differing migration."""
+    if not _hex(SHA, expected_sha256) or digest(original) != expected_sha256:
+        raise ValueError('original naming manifest drift')
+    document = parse_json(original)
+    if document.get('schema') != 1 or not isinstance(document.get('mappings'), list):
+        raise ValueError('unsupported legacy naming manifest')
+    if not isinstance(extension, dict) or extension.get('version') != 1:
+        raise ValueError('unsupported extension')
+    if 'migration' in document:
+        if document['migration'] != extension:
+            raise ValueError('existing migration differs; use reviewed three-way reconciliation')
+        return original
+    document['migration'] = extension
+    errors = list(Draft202012Validator(load_json(SCHEMA_PATH)).iter_errors(document))
+    if errors:
+        raise ValueError('extension schema: ' + errors[0].message)
+    return (json.dumps(document, ensure_ascii=True, indent=2) + '\n').encode('utf-8')
+
+
+def write_output(path, content):
+    """Create a review artifact; an identical existing artifact is an idempotent no-op."""
+    path = Path(path).absolute()
+    for component in [path, *path.parents]:
+        if component.is_symlink():
+            raise ValueError('symlink output component')
+    if path.exists():
+        if not path.is_file() or path.read_bytes() != content:
+            raise ValueError('refusing modified output: ' + str(path))
+        return False
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open('xb') as output:
+        output.write(content)
+    return True
+
+
+def render_report(document):
+    migration = document['migration']
+    incomplete = completion_errors(document)
+    lines = ['# MIndex-to-M3 migration coverage', '', '**' + ('INCOMPLETE' if incomplete else 'COMPLETE') + '**', '',
+        'This is the current observed mapping coverage, not an exhaustive source inventory.', '',
+        'Source baseline: `' + migration['source']['baseline_commit'] + '`.',
+        'Target baseline: `' + migration['target']['baseline_commit'] + '`.', '',
+        '| Stable ID | Mapping | State | Canonical responsibility | Reason / limit |',
+        '|---|---|---|---|---|']
+    clean = lambda text: str(text).replace('|', '\\|').replace('\n', ' ')
+    for record in sorted(migration['records'], key=lambda r: r['id']):
+        lines.append('| ' + ' | '.join(clean(record[key]) for key in ('id', 'kind', 'status', 'owner', 'reason')) + ' |')
+    lines += ['', '## Mandatory gates', '', '| Gate | State | Evidence or blocker |', '|---|---|---|']
+    for gate in migration['gates']:
+        lines.append('| ' + ' | '.join(clean(gate.get(key, '')) for key in ('id', 'status', 'reason')) + ' |')
+    lines += ['', '## Completion blockers', ''] + ['- ' + clean(error) for error in incomplete]
+    lines += ['', 'Source-only changes require recipe review. Target-only adaptations are retained. Both-side changes are conflicts.',
+        'A missing row in an incomplete or different-branch inventory is unobserved, not a deletion.',
+        'No automatic reverse-port, merge, or runtime acceptance is authorized by this report.', '']
+    return '\n'.join(lines)
+
+
+def _intake_require(condition, reason):
+    if not condition:
+        raise ValueError('intake: ' + reason)
+
+
+def _intake_artifact(root, ref):
+    _intake_require(isinstance(ref, dict) and set(ref) == {'path', 'sha256'}
+                    and _hex(SHA, ref['sha256']), 'exact artifact reference required')
+    _intake_require(file_hash(root, ref['path']) == ref['sha256'], 'artifact drift: ' + ref['path'])
+    return safe_path(root, ref['path'])
+
+
+def _intake_historical_path(value):
+    """Validate a historical POSIX identity label; never open its old location."""
+    _intake_require(isinstance(value, str) and value and '\\' not in value
+                    and not any(ord(c) < 32 for c in value),
+                    'canonical historical input path required')
+    path = PurePosixPath(value)
+    _intake_require(path.is_absolute() and str(path) == value
+                    and value.startswith('/') and not value.startswith('//')
+                    and '..' not in path.parts,
+                    'canonical historical input path required')
+    return path
+
+
+def _intake_bound_staging(root, base, config, patch, source_commit):
+    """Cross-check portable staging against the manifest named by actual gate receipts.
+
+    Original absolute paths remain historical identity labels. Only imported files
+    below root are opened. This establishes receipt consistency, not tool execution
+    authenticity, current toolchain custody, or unrestricted Maven semantics.
+    """
+    historical_inputs = _intake_historical_path(config.get('inputs'))
+    _intake_require(historical_inputs.name == 'inputs.json', 'historical inputs filename')
+    historical = historical_inputs.parent
+    source_root = historical / 'sources'
+    input_path = _intake_artifact(root, {
+        'path': str(base / 'inputs.json'), 'sha256': patch['inputManifestSHA256']})
+    inputs = load_json(input_path)
+    _intake_require(isinstance(inputs, list) and inputs, 'nonempty source input manifest')
+    indexed = {}
+    ordered_paths = []
+    for row in inputs:
+        _intake_require(isinstance(row, dict) and set(row) == {'path', 'sha256', 'bytes'}
+                        and _hex(SHA, row.get('sha256'))
+                        and type(row.get('bytes')) is int and row['bytes'] >= 0,
+                        'source input row shape')
+        path = str(_intake_historical_path(row['path']))
+        _intake_require(path not in indexed, 'duplicate source input path')
+        indexed[path] = row
+        ordered_paths.append(path)
+    _intake_require(ordered_paths == [str(path) for path in sorted(PurePosixPath(value) for value in ordered_paths)], 'source input path order')
+
+    metadata = {}
+    for name, key in (('commands.json', 'commandsSHA256'),
+                      ('staging.json', 'stagingSHA256')):
+        source = _intake_artifact(root, {'path': str(base / name), 'sha256': patch[key]})
+        content = source.read_bytes()
+        bound = indexed.get(str(historical / name))
+        _intake_require(bound is not None and bound['sha256'] == patch[key]
+                        and digest(content) == bound['sha256']
+                        and len(content) == bound['bytes'],
+                        'source input metadata binding: ' + name)
+        metadata[name] = parse_json(content)
+    _intake_require(metadata['commands.json'] == config, 'source input commands object binding')
+
+    stages = config.get('commands')
+    compile_commands = stages.get('compile') if isinstance(stages, dict) else None
+    _intake_require(isinstance(compile_commands, list) and compile_commands,
+                    'source input compile command required')
+    for command in compile_commands:
+        _intake_require(isinstance(command, list) and command
+                        and all(isinstance(argument, str) for argument in command),
+                        'source input compile argv')
+        selected = [argument for argument in command
+                    if argument == '-Dproof.sources' or argument.startswith('-Dproof.sources=')]
+        _intake_require(selected == ['-Dproof.sources=' + str(source_root)]
+                        and not any(argument in ('-D', '--define')
+                                    or argument.startswith('--define=') for argument in command),
+                        'source input compile root must be selected exactly once')
+
+    staging = metadata['staging.json']
+    _intake_require(isinstance(staging, dict) and staging.get('baseline') == source_commit
+                    and isinstance(staging.get('files'), list),
+                    'upstream staged source inventory')
+    staged = staging['files']
+    paths = []
+    for row in staged:
+        _intake_require(isinstance(row, dict)
+                        and {'path', 'sha256', 'gitBlob', 'bytes'}.issubset(row)
+                        and _hex(SHA, row.get('sha256'))
+                        and _hex(COMMIT, row.get('gitBlob'))
+                        and type(row.get('bytes')) is int and row['bytes'] >= 0,
+                        'staged source row shape')
+        relative = relative_path(row['path'])
+        paths.append(str(relative))
+        bound = indexed.get(str(source_root / relative))
+        _intake_require(bound is not None and bound['sha256'] == row['sha256']
+                        and bound['bytes'] == row['bytes'],
+                        'staged source input binding: ' + str(relative))
+    _intake_require(paths == sorted(set(paths)), 'upstream staged source uniqueness')
+    return staged
+
+
+def _intake_proof(root, ref, source_commit):
+    """Bind portable original proof artifacts, not an unshipped toolchain or runtime."""
+    result_path = _intake_artifact(root, ref)
+    result = load_json(result_path)
+    base = PurePosixPath(ref['path']).parent
+    _intake_require(result_path.name == 'RESULT.json'
+                    and result.get('status') == 'PASS_FOCUSED_TEST_PROJECT'
+                    and result.get('baseline') == source_commit
+                    and result.get('strictCanonicalAdmission') is False
+                    and result.get('canonicalProductionApplied') is False
+                    and result.get('sourceSlice') is True, 'upstream focused proof identity')
+    def artifact(name, expected):
+        return _intake_artifact(root, {'path': str(base / relative_path(name)), 'sha256': expected})
+    def metadata(name, expected):
+        return load_json(artifact(name, expected))
+    _intake_require(not safe_path(root, str(base / 'STOPPED.json')).exists(), 'stopped upstream proof')
+    patch = metadata('PATCH.json', result['patchSHA256'])
+    _intake_require(patch.get('baseline') == source_commit
+                    and patch.get('status') == 'SEALED_BEFORE_LINT'
+                    and patch.get('effectiveOutputAbsent') is True, 'upstream patch identity')
+    for name, key in (('inputs.json', 'inputManifestSHA256'), ('commands.json', 'commandsSHA256'),
+                      ('staging.json', 'stagingSHA256'), ('tooling.json', 'toolingSHA256')):
+        artifact(name, patch[key])
+    _intake_require(patch['inputManifestSHA256'] == result['inputManifestSHA256'], 'input manifest binding')
+    config = load_json(safe_path(root, str(base / 'commands.json')))
+    artifacts = metadata('build-artifacts.json', result['compiledArtifactManifestSHA256'])
+    _intake_require(isinstance(artifacts, list) and artifacts
+                    and all(isinstance(a, dict) and _hex(SHA, a.get('sha256'))
+                            and type(a.get('bytes')) is int and a['bytes'] > 0 for a in artifacts),
+                    'nonempty compiled-artifact inventory')
+    artifact_names = [str(relative_path(a['path'])) for a in artifacts]
+    _intake_require(len(artifact_names) == len(set(artifact_names))
+                    and config.get('requiredClassFiles')
+                    and set(config['requiredClassFiles']).issubset(artifact_names), 'required compiled classes')
+    junit = metadata('junit-report.json', result['junitReportSHA256'])
+    counts = junit.get('totals', {})
+    _intake_require(junit.get('status') == 'ACTUAL_SUREFIRE_REPORTS'
+                    and counts == result.get('junit') and type(counts.get('tests')) is int
+                    and counts['tests'] > 0 and all(type(counts.get(k)) is int and counts[k] == 0
+                    for k in ('failures', 'errors', 'skipped')), 'successful upstream JUnit required')
+    suites, expected = junit.get('suites', {}), config.get('expectedJUnit', {})
+    _intake_require(isinstance(suites, dict) and isinstance(expected, dict) and suites
+                    and set(suites) == set(expected), 'exact upstream JUnit suite set')
+    totals = dict.fromkeys(('tests', 'failures', 'errors', 'skipped'), 0)
+    for name, suite in suites.items():
+        _intake_require(type(expected[name]) is int and expected[name] > 0
+                        and all(type(suite.get('counts', {}).get(k)) is int for k in totals)
+                        and suite.get('counts') == {'tests': expected[name], 'failures': 0, 'errors': 0, 'skipped': 0},
+                        'exact upstream JUnit suite counts')
+        report = suite['report']
+        _intake_require('/' not in str(relative_path(report)) and report.startswith('TEST-') and report.endswith('.xml'),
+                        'upstream JUnit XML path')
+        xml = ET.parse(artifact('target/surefire-reports/' + report, suite['sha256'])).getroot()
+        _intake_require(xml.tag == 'testsuite' and xml.get('name') == name
+                        and {key: int(xml.get(key, '0')) for key in totals} == suite['counts'], 'JUnit XML/report binding')
+        for key in totals:
+            totals[key] += suite['counts'][key]
+    _intake_require(totals == counts, 'JUnit suite totals differ')
+    stages = ['lint', 'compile', 'test', 'runtime']
+    gates = result.get('orderedGates', [])
+    _intake_require(isinstance(gates, list) and len(gates) == 4
+                    and [g.get('stage') for g in gates] == stages, 'complete ordered upstream gates')
+    prior = []
+    _intake_require(isinstance(config.get('commands'), dict) and set(config['commands']) == set(stages)
+                    and all(isinstance(config['commands'][s], list) and config['commands'][s] for s in stages),
+                    'nonempty upstream command stages')
+    upstream_proof = str(PurePosixPath(config['inputs']).parent)
+    for index, gate in enumerate(gates, 1):
+        name = f'{index:02d}-{gate["stage"]}.json'
+        _intake_require(gate.get('receipt') == 'chain/' + name
+                        and type(gate.get('exitCode')) is int and gate['exitCode'] == 0,
+                        'upstream gate exit or receipt identity')
+        receipt = metadata(gate['receipt'], gate['receiptSHA256'])
+        _intake_require(receipt.get('stage') == gate['stage']
+                        and type(receipt.get('exit_code')) is int and receipt['exit_code'] == 0
+                        and receipt.get('prior_receipts') == prior
+                        and receipt.get('source_manifest_sha256') == result['inputManifestSHA256']
+                        and receipt.get('command') == [config['python'], upstream_proof + '/harness/execute.py',
+                            '--config', upstream_proof + '/commands.json', '--stage', gate['stage']],
+                        'upstream gate lineage')
+        for stream in ('stdout', 'stderr'):
+            _intake_require(receipt[stream + '_sha256'] == gate[stream + 'SHA256'], 'upstream log binding')
+            artifact('chain/' + name[:-5] + '.' + stream + '.log', gate[stream + 'SHA256'])
+        prior.append(name)
+    runtime = metadata('runtime-report.json', result['runtimeReportSHA256'])
+    commands = runtime.get('commands', [])
+    _intake_require(runtime.get('status') == 'ACTUAL_STANDALONE_EXECUTIONS'
+                    and isinstance(commands, list) and commands
+                    and type(result.get('runtimeCommands')) is int
+                    and len(commands) == result['runtimeCommands'] == len(config['commands']['runtime']), 'upstream runtime commands')
+    stdout = []
+    for index, command in enumerate(commands, 1):
+        _intake_require(type(command.get('commandIndex')) is int and command['commandIndex'] == index
+                        and type(command.get('exitCode')) is int and command['exitCode'] == 0
+                        and command.get('command') == config['commands']['runtime'][index - 1], 'upstream command identity')
+        _intake_require(metadata(f'runtime-{index}.json', digest((json.dumps(command, indent=2) + '\n').encode()))
+                        == command, 'upstream runtime command receipt')
+        for stream in ('stdout', 'stderr'):
+            _intake_require(command[stream] == f'runtime-{index}.{stream}.log', 'upstream runtime log path')
+            path = artifact(command[stream], command[stream + 'SHA256'])
+            if stream == 'stdout':
+                text = path.read_text(encoding='utf-8')
+                patterns = config.get('runtimePatterns', {}).get(str(index), [])
+                _intake_require(isinstance(patterns, list) and patterns
+                                and all(isinstance(pattern, str) and re.search(pattern, text, re.MULTILINE)
+                                        for pattern in patterns), 'runtime completion controls missing')
+                stdout.append(text)
+    staged = _intake_bound_staging(root, base, config, patch, source_commit)
+    return {'result': result, 'commands': config,
+            'staging': staged, 'artifacts': artifacts, 'stdout': stdout, 'resultSHA256': ref['sha256']}
+
+
+def _intake_materialization(root, lane, manifest, recipe):
+    """Check original materializer metadata without claiming a downstream execution."""
+    # Recipe identity is independent of its envelope family. Versioned aliases
+    # are admitted explicitly; suffixes never imply a crate or runtime class.
+    protocols = {
+        'com.synexia.rewrite.Mre': ('mre', {'mre-v1': 'MreTest'}),
+        'com.synexia.rewrite.Mre2': ('mre', {'mre-v2': 'Mre2Test'}),
+        'com.synexia.rewrite.Pcr': ('pcr', {'pcs-reconciled-v1': 'PcrTest'}),
+        'com.synexia.rewrite.Mrc': ('mrc', {'mrc-v1': 'MrcTest'}),
+        'com.synexia.rewrite.Mrc2': ('mrc', {'mrc-v2': 'Mrc2Test'}),
+        'com.synexia.rewrite.Mrc3': ('mrc', {'mrc-v3': 'Mrc3Test'}),
+        'com.synexia.rewrite.Mrc4': ('mrc', {'mrc-v4': 'Mrc4Test'}),
+        'com.synexia.rewrite.Mrp': ('mrp', {'mrp-v1': 'MrpTest', 'mrp-v2': 'Mrp2Test'}),
+        'com.synexia.rewrite.Mrd': ('mrd', {'mrd-v1': 'MrdTest'})}
+    protocol = protocols.get(lane['recipe'])
+    _intake_require(protocol is not None, 'unsupported materializer protocol')
+    kind, materializers = protocol
+    materialization = manifest['materialization']
+    _intake_require(isinstance(materialization, dict)
+                    and set(materialization) == {'manifest', 'output', 'patch'}, 'materialization artifact set')
+    if kind == 'pcr':
+        crate = 'pcs-reconciled-v1'
+    else:
+        output_metadata = load_json(_intake_artifact(root, materialization['output']))
+        _intake_require(isinstance(output_metadata, dict), 'materializer output object')
+        crate = output_metadata.get('crate')
+        _intake_require(crate in materializers, 'bounded materializer crate identity')
+    main_class = materializers[crate]
+    resource = 'com/synexia/rewrite/hash-pinned-java/' + crate + '/manifest.tsv'
+    manifest_path = _intake_artifact(root, materialization['manifest'])
+    manifest_bytes = manifest_path.read_bytes()
+    manifest_sha = digest(manifest_bytes)
+    staged = {row['path']: row for row in recipe['staging']}
+    compiled = {row['path']: row for row in recipe['artifacts']}
+    source_prefix = 'synexia-openrewrite-recipes/src/main/resources/'
+
+    def loaded_resource(name, expected_sha, size):
+        source = staged.get(source_prefix + name, {})
+        artifact = compiled.get('classes/' + name, {})
+        _intake_require(source.get('sha256') == expected_sha and source.get('bytes') == size
+                        and artifact.get('sha256') == expected_sha and artifact.get('bytes') == size,
+                        'materializer resource/source/compiled inventory binding: ' + name)
+
+    loaded_resource(resource, manifest_sha, len(manifest_bytes))
+    expected = {}
+    for line in manifest_bytes.decode('utf-8').splitlines():
+        if not line or line.startswith('#'):
+            continue
+        cells = line.split('\t')
+        _intake_require(len(cells) == 4, 'materializer manifest row')
+        path, before, after, template = cells
+        relative_path(path)
+        _intake_require(path not in expected and (before == 'ABSENT' or _hex(SHA, before))
+                        and _hex(SHA, after) and re.fullmatch(r'[A-Za-z0-9_.-]+', template),
+                        'materializer manifest identity')
+        expected[path] = {'before': before, 'after': after, 'template': template}
+    files = manifest['files']
+    _intake_require(list(expected) == sorted(expected)
+                    and list(expected) == [row['path'] for row in files], 'materializer manifest target set')
+    rows = []
+    for output in files:
+        content = _intake_artifact(root, {'path': output['artifact'], 'sha256': output['sha256']}).read_bytes()
+        target = expected[output['path']]
+        _intake_require(target['after'] == output['sha256'], 'manifest output identity')
+        loaded_resource(resource.rsplit('/', 1)[0] + '/' + target['template'], output['sha256'], len(content))
+        rows.append({'path': output['path'], 'beforeSHA256': target['before'],
+                     'afterSHA256': output['sha256'], 'sha256': digest(content),
+                     'gitBlob': hashlib.sha1(b'blob ' + str(len(content)).encode() + b'\0' + content).hexdigest(),
+                     'bytes': len(content), 'change': 'ADD' if target['before'] == 'ABSENT' else 'REPLACE'})
+    config = recipe['commands']
+    historical = str(PurePosixPath(config['inputs']).parent)
+    property_prefix = '-D' + kind + '.output='
+    selected = []
+    for command, stdout in zip(config['commands']['runtime'], recipe['stdout']):
+        _intake_require(isinstance(command, list) and all(isinstance(x, str) for x in command),
+                        'materializer command arguments')
+        properties = [arg for arg in command if arg.startswith(property_prefix)]
+        if property_prefix + historical + '/generated-candidate' in properties:
+            _intake_require(properties == [property_prefix + historical + '/generated-candidate']
+                            and command[0] == str(PurePosixPath(config['javaHome']) / 'bin/java')
+                            and command[-1] == 'com.synexia.rewrite.' + main_class
+                            and '-ea' in command, 'materializer command class/output identity')
+            selected.append(stdout)
+    _intake_require(len(selected) == 1, 'exactly one command owns materialization')
+    prefix = kind.upper() + '_VERIFIED'
+    lines = [line for line in selected[0].splitlines() if line.split(' ', 1)[0] == prefix]
+    _intake_require(len(lines) == 1, 'unique recipe-specific materialization marker')
+    fields = {}
+    for token in lines[0].split()[1:]:
+        key, separator, value = token.partition('=')
+        _intake_require(separator and value and key not in fields, 'ambiguous runtime marker')
+        fields[key] = value
+    count = len(rows)
+    if kind == 'pcr':
+        _intake_require(materialization['output'] is None and materialization['patch'] is None,
+                        'Pcr uses the source-only output protocol')
+        seal = digest(''.join(row['path'] + '\t' + row['sha256'] + '\n' for row in rows).encode())
+        keys = {'targets', 'changes', 'refusals', 'postScanRefusals', 'candidateFiles', 'outputSeal'}
+        _intake_require(set(fields) == keys and fields['targets'] == fields['candidateFiles'] == str(count)
+                        and re.fullmatch(r'0|[1-9][0-9]*', fields['changes'])
+                        and int(fields['changes']) == sum(target['before'] != target['after'] for target in expected.values())
+                        and all(re.fullmatch(r'[1-9][0-9]*', fields[k]) for k in ('refusals', 'postScanRefusals')),
+                        'Pcr completion fields')
+    else:
+        output_path = _intake_artifact(root, materialization['output'])
+        patch_path = _intake_artifact(root, materialization['patch'])
+        _intake_require(output_path.name == 'OUTPUT.json' and patch_path.name == 'candidate.patch',
+                        'original materialization metadata names')
+        output = load_json(output_path)
+        patch_bytes = patch_path.read_bytes()
+        _intake_require(patch_bytes.startswith(b'diff --git '), 'original nonempty recipe patch')
+        patch_targets = re.findall(r'^diff --git a/([^\n]+) b/([^\n]+)$', patch_bytes.decode('utf-8'), re.MULTILINE)
+        _intake_require(patch_targets == [(row['path'], row['path']) for row in rows],
+                        'recipe patch target set')
+        patch_sha = digest(patch_bytes)
+        seal_text = (kind.upper() + '-OUTPUT/1\nmanifest\t' + manifest_sha + '\npatch\t' + patch_sha
+                     + '\t' + str(len(patch_bytes)) + '\n')
+        seal_text += ''.join(row['path'] + '\t' + row['sha256'] + '\t' + str(row['bytes']) + '\n' for row in rows)
+        seal = digest(seal_text.encode())
+        additions = sum(row['change'] == 'ADD' for row in rows)
+        replacements = count - additions
+        counters = ('inventoryRefusals', 'postScanRefusals', 'postScanSchedulerRefusals') if kind == 'mre' else ('mixedStates', 'inventoryRefusals')
+        _intake_require(all(type(output.get(k)) is int for k in ('targetCount', 'changes', 'replacements', 'additions'))
+                        and all(type(output.get(k)) is int and output[k] > 0 for k in counters),
+                        'materializer control counts')
+        if kind != 'mre':
+            _intake_require(additions == 0 and output['mixedStates'] == 1 << count,
+                            'replacement materializer inventory')
+        expected_output = {'schema': 'synexia.' + kind + '.output/1', 'crate': crate,
+                           'baseline': manifest['sourceCommit'], 'recipe': lane['recipe'],
+                           'manifest': {'resource': resource, 'sha256': manifest_sha},
+                           'targetCount': count, 'changes': count, 'replacements': replacements, 'additions': additions,
+                           'envelope': 'generic-rendered-java-snapshot',
+                           'patch': {'path': 'candidate.patch', 'sha256': patch_sha, 'bytes': len(patch_bytes)},
+                           'files': rows, 'outputSealSHA256': seal}
+        expected_output.update({key: output[key] for key in counters})
+        _intake_require(output == expected_output, 'OUTPUT.json differs from original manifest/patch/files')
+        expected_fields = {'crate': crate, 'targets': str(count), 'changes': str(count),
+                           'replacements': str(replacements), 'additions': str(additions),
+                           'manifestSHA256': manifest_sha, 'outputSeal': seal}
+        expected_fields.update({key: str(output[key]) for key in counters})
+        _intake_require(fields == expected_fields, 'recipe-specific completion fields')
+    _intake_require(fields.get('outputSeal') == seal == lane['outputSeal'], 'actual materialization output seal')
+    return seal
+
+
+def _admit_intake(document, packet, root, authority_sha256):
+    """Read-only current-records intake; successful receipt never promotes a port."""
+    _intake_require(not validate(document, root), 'canonical mapping validation failed')
+    _intake_require(set(packet) == {'schema', 'source', 'target', 'authority', 'sourceRoot', 'owners', 'lanes'}
+                    and packet['schema'] == 'm3.synexia-intake/1', 'unsupported packet')
+    for role, repo in (('source', 'hsoliwal/com.synexia'), ('target', 'hsoliwal/M3jdk21')):
+        ref = packet[role]
+        _intake_require(set(ref) == {'repo', 'commit', 'tree'} and ref['repo'] == repo
+                        and _hex(COMMIT, ref['commit']) and _hex(COMMIT, ref['tree']), 'repository identity')
+    authority = packet['authority']
+    _intake_require(authority.get('path') == 'm3/docs/name-mapping.json'
+                    and authority.get('sha256') == authority_sha256, 'canonical mapping binding')
+    authority_path = _intake_artifact(root, authority)
+    _intake_require(load_json(authority_path) == document, 'canonical mapping document differs')
+    _intake_require(document.get('migration', {}).get('version') == 1
+                    and isinstance(document['migration'].get('records'), list), 'current records authority required')
+    root_tree = load_json(_intake_artifact(root, packet['sourceRoot']))
+    _intake_require(root_tree.get('sha') == packet['source']['tree']
+                    and root_tree.get('truncated') is False, 'complete source root inventory')
+    tree = root_tree.get('tree', [])
+    names, entries = set(), []
+    for row in tree:
+        name = str(relative_path(row['path']))
+        _intake_require('/' not in name and name not in names and _hex(COMMIT, row.get('sha')),
+                        'duplicate or invalid root entry')
+        _intake_require((row.get('mode'), row.get('type')) in {('040000', 'tree'), ('100644', 'blob'),
+                        ('100755', 'blob'), ('120000', 'blob'), ('160000', 'commit')}, 'root entry mode/type')
+        names.add(name)
+        entries.append((name.encode() + (b'/' if row['type'] == 'tree' else b''),
+                        row['mode'].lstrip('0').encode() + b' ' + name.encode() + b'\0' + bytes.fromhex(row['sha'])))
+    raw = b''.join(value for _, value in sorted(entries))
+    tree_id = hashlib.sha1(b'tree ' + str(len(raw)).encode() + b'\0' + raw).hexdigest()
+    _intake_require(names and tree_id == packet['source']['tree'], 'source root Git object identity')
+    dispositions = {'tooling', 'module-port-candidate', 'test-oracle', 'native-review',
+                    'consumer-only', 'custody-only', 'blocked', 'not-applicable'}
+    owners = packet['owners']
+    _intake_require(isinstance(owners, list) and [r.get('path') for r in owners] == sorted(names),
+                    'every root owner requires exactly one sorted disposition')
+    for row in owners:
+        _intake_require(set(row) == {'path', 'disposition', 'reason'} and row['disposition'] in dispositions
+                        and _text(row['reason']), 'explicit root disposition and reason required')
+    records = {r['id']: r for r in document['migration']['records']}
+    _intake_require(len(records) == len(document['migration']['records']), 'duplicate canonical mapping ID')
+    lanes, lane_ids, mapped, output_paths = packet['lanes'], set(), set(), set()
+    _intake_require(isinstance(lanes, list) and lanes, 'nonempty bounded lane set required')
+    accepted = []
+    for lane in lanes:
+        _intake_require(set(lane) == {'id', 'recipe', 'manifest', 'outputSeal', 'proofs', 'mappings'}
+                        and _text(lane['id']) and lane['id'] not in lane_ids and _text(lane['recipe']), 'lane identity')
+        lane_ids.add(lane['id'])
+        manifest = load_json(_intake_artifact(root, lane['manifest']))
+        _intake_require(set(manifest) == {'sourceCommit', 'recipe', 'files', 'materialization'}
+                        and manifest['sourceCommit'] == packet['source']['commit']
+                        and manifest['recipe'] == lane['recipe'], 'output manifest identity')
+        files = manifest['files']
+        paths = [row.get('path') for row in files]
+        _intake_require(files and paths == sorted(set(paths)) and not output_paths.intersection(paths),
+                        'duplicate or unordered recipe output')
+        output_paths.update(paths)
+        seal = []
+        for row in files:
+            _intake_require(set(row) == {'path', 'sha256', 'gitBlob', 'artifact'}, 'output row shape')
+            relative_path(row['path'])
+            _intake_require(row['path'].split('/')[0] in names, 'output outside classified source root')
+            path = _intake_artifact(root, {'path': row['artifact'], 'sha256': row['sha256']})
+            content = path.read_bytes()
+            git_blob = hashlib.sha1(b'blob ' + str(len(content)).encode() + b'\0' + content).hexdigest()
+            _intake_require(git_blob == row['gitBlob'], 'output Git blob identity')
+            seal.append(row['path'] + '\t' + row['sha256'] + '\n')
+        _intake_require(_hex(SHA, lane['outputSeal']), 'recipe output seal digest')
+        mappings = lane['mappings']
+        _intake_require([row.get('path') for row in mappings] == paths, 'exact output mapping coverage')
+        for output, mapping in zip(files, mappings):
+            _intake_require(set(mapping) == {'path', 'id', 'disposition', 'requiredGates'}
+                            and mapping['id'] in records and mapping['id'] not in mapped
+                            and mapping['disposition'] in dispositions - {'custody-only'}, 'canonical output mapping required')
+            mapped.add(mapping['id'])
+            record = records[mapping['id']]
+            _intake_require(record['status'] in {'pending', 'blocked'}
+                            and record['sync']['source_revision'] == packet['source']['commit']
+                            and record['sync']['target_revision'] == packet['target']['commit'], 'pending mapping pins')
+            matches = [s for s in record['sources'] if s.get('repo') == packet['source']['repo']
+                       and s.get('commit') == packet['source']['commit'] and s.get('path') == output['path']
+                       and s.get('sha256') == output['sha256'] and s.get('git_blob_sha1') == output['gitBlob']
+                       and s.get('revision_role') == 'candidate']
+            _intake_require(len(matches) == 1, 'canonical source/output identity')
+            gates = mapping['requiredGates']
+            _intake_require(isinstance(gates, list) and gates and all(_text(g) for g in gates)
+                            and gates == sorted(set(gates)), 'explicit downstream gates required')
+            _intake_require('Disposition: ' + mapping['disposition'] in record['contract']['differences']
+                            and record['recipe']['id'] == lane['recipe']
+                            and 'Required downstream gates: ' + ','.join(gates) in record['recipe']['preconditions'],
+                            'canonical disposition, recipe and gate binding')
+        proofs = lane['proofs']
+        _intake_require(isinstance(proofs, list) and len(proofs) >= 2
+                        and all(set(p) == {'role', 'result'} for p in proofs)
+                        and [p['role'] for p in proofs].count('recipe') == 1
+                        and all(p['role'] in {'recipe', 'consumer'} for p in proofs), 'recipe and consumer proof required')
+        _intake_require(len({p['result']['path'] for p in proofs}) == len(proofs), 'duplicate upstream proof')
+        qualified = [(p['role'], _intake_proof(root, p['result'], packet['source']['commit'])) for p in proofs]
+        recipe = next(proof for role, proof in qualified if role == 'recipe')
+        _intake_materialization(root, lane, manifest, recipe)
+        consumed = set()
+        for role, proof in qualified:
+            if role == 'consumer':
+                parents = proof['commands'].get('parents', [])
+                _intake_require(any(p.get('resultSHA256') == recipe['resultSHA256'] for p in parents),
+                                'consumer must bind the exact recipe result')
+                consumed.update((r.get('path'), r.get('sha256'), r.get('gitBlob')) for r in proof['staging'])
+        _intake_require(all((r['path'], r['sha256'], r['gitBlob']) in consumed for r in files),
+                        'consumer proof union must cover every exact output')
+        accepted.append({'id': lane['id'], 'recipe': lane['recipe'], 'outputSeal': lane['outputSeal'],
+                         'outputs': len(files), 'mappingIds': [m['id'] for m in mappings],
+                         'proofResults': [p['result'] for p in proofs]})
+    return {'schema': 'm3.synexia-intake-receipt/1', 'state': 'RECEIVED_FOR_REVIEW',
+            'source': packet['source'], 'target': packet['target'], 'authority': authority,
+            'rootOwners': len(owners), 'outputs': len(output_paths), 'lanes': accepted,
+            'wholeSourceTreeCovered': False, 'dependencyClosureComplete': False,
+            'originalToolchainCustodyRevalidated': False, 'runtimeAccepted': False, 'productWrites': 0}
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('command', choices=('validate', 'complete', 'report', 'reconcile', 'extend', 'intake'))
+    parser.add_argument('root', type=Path, nargs='?', default=Path('.'))
+    for name in ('manifest', 'previous', 'inventory', 'inventory-receipt', 'output', 'base', 'extension', 'intake-packet'):
+        parser.add_argument('--' + name, type=Path)
+    parser.add_argument('--expected-sha256')
+    args = parser.parse_args(argv)
+    try:
+        if args.command == 'extend':
+            if not all((args.base, args.extension, args.output, args.expected_sha256)):
+                parser.error('extend needs --base --extension --output --expected-sha256')
+            extension = load_json(args.extension)
+            # The canonical naming authority itself is a replayable postimage; no second registry.
+            if extension.get('schema') == 1 and 'migration' in extension:
+                extension = extension['migration']
+            content = extend_document(args.base.read_bytes(), extension, args.expected_sha256)
+            write_output(args.output, content)
+            print('MANIFEST_EXTENSION_RECIPE_PASS source_unchanged=true output_sha256=' + digest(content))
+            return 0
+        manifest = args.manifest or args.root / 'm3/docs/name-mapping.json'
+        document = load_json(manifest)
+        previous = load_json(args.previous) if args.previous else None
+        errors = validate(document, args.root, previous)
+        if errors:
+            print('\n'.join(errors), file=sys.stderr)
+            return 1
+        if args.command in ('validate', 'complete'):
+            blockers = completion_errors(document)
+            print('MIGRATION_MANIFEST_VALID completion=' + ('INCOMPLETE' if blockers else 'COMPLETE'))
+            if args.command == 'complete' and blockers:
+                print('\n'.join(blockers), file=sys.stderr)
+                return 2
+            return 0
+        if args.command == 'intake':
+            if not args.intake_packet or not args.expected_sha256:
+                parser.error('intake needs --intake-packet and --expected-sha256')
+            packet = load_json(args.intake_packet)
+            if not _hex(SHA, args.expected_sha256) or digest(args.intake_packet.read_bytes()) != args.expected_sha256:
+                raise ValueError('intake packet seal drift')
+            result = _admit_intake(document, packet, args.root, digest(manifest.read_bytes()))
+            result['packetSHA256'] = args.expected_sha256
+            content = (json.dumps(result, indent=2, sort_keys=True) + '\n').encode()
+        elif args.command == 'reconcile':
+            if not args.inventory or not args.inventory_receipt:
+                parser.error('reconcile needs --inventory and --inventory-receipt')
+            result = reconcile(document, read_inventory(args.inventory, args.inventory_receipt), args.root)
+            content = (json.dumps(result, indent=2, sort_keys=True) + '\n').encode()
+        else:
+            content = render_report(document).encode()
+        if args.output:
+            write_output(args.output, content)
+        else:
+            sys.stdout.write(content.decode())
+        return 0
+    except (OSError, ValueError, TypeError, KeyError, ET.ParseError, re.error) as failure:
+        print('MIGRATION_REFUSED: ' + str(failure), file=sys.stderr)
+        return 2
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

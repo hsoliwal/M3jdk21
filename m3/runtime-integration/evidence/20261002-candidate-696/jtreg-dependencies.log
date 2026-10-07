@@ -1,0 +1,89 @@
+Get:1 http://archive.ubuntu.com/ubuntu noble/universe amd64 junit4 all 4.13.2-4 [347 kB]
+Get:2 http://archive.ubuntu.com/ubuntu noble/universe amd64 junit5 all 5.10.1-1 [2446 kB]
+Get:3 http://archive.ubuntu.com/ubuntu noble/universe amd64 libaopalliance-java all 20070526-7 [8166 B]
+Get:4 http://archive.ubuntu.com/ubuntu noble/universe amd64 libapiguardian-java all 1.1.2-1 [4598 B]
+Get:5 http://archive.ubuntu.com/ubuntu noble/universe amd64 libasmtools-java all 7.0-b09-2 [622 kB]
+Get:6 http://archive.ubuntu.com/ubuntu noble/universe amd64 libatinject-jsr330-api-java all 1.0+ds1-5 [5348 B]
+Get:7 http://archive.ubuntu.com/ubuntu noble/universe amd64 libguava-java all 32.0.1-1 [2692 kB]
+Get:8 http://archive.ubuntu.com/ubuntu noble/universe amd64 libguice-java all 4.2.3-2 [1434 kB]
+Get:9 http://archive.ubuntu.com/ubuntu noble/universe amd64 libhamcrest-java all 2.2-2 [117 kB]
+Get:10 http://archive.ubuntu.com/ubuntu noble/universe amd64 libjcommander-java all 1.71-4 [68.5 kB]
+Get:11 http://archive.ubuntu.com/ubuntu noble/universe amd64 libjtharness-java all 6.0-b24-1 [4186 kB]
+Get:12 http://archive.ubuntu.com/ubuntu noble/universe amd64 libopentest4j-java all 1.2.0-4 [9396 B]
+Get:13 http://archive.ubuntu.com/ubuntu noble/universe amd64 libslf4j-java all 1.7.32-1 [141 kB]
+Get:14 http://archive.ubuntu.com/ubuntu noble/universe amd64 libtestng7-java all 7.5-2 [856 kB]
+Get:15 http://archive.ubuntu.com/ubuntu noble-updates/universe amd64 jtreg7 all 7.5.2+1+ds1-2~24.04.2 [9560 kB]
+Fetched 22.5 MB in 5s (4968 kB/s)
+W: Download is performed unsandboxed as root as file '/var/tmp/m3-runtime-migration-20261002/jtreg-deps/debs/junit4_4.13.2-4_all.deb' couldn't be accessed by user '_apt'. - pkgAcquire::Run (13: Permission denied)
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/junit-platform-suite-api-1.9.1.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/javatest-6.0-b24.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/guice-throwingproviders.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/guice-jmx.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/asmtools-7.0-b09.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/hamcrest-2.2.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/atinject-jsr330-api-1.0.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/apiguardian-api-1.1.2.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/junit-platform-engine-1.9.1.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/junit-jupiter-params-5.10.1.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/slf4j-api.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/slf4j-simple.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/guava-32.0.1-jre.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/junit-platform-console-standalone-1.9.1.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/jt-junit-6.0-b24.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/slf4j-migrator.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/junit-platform-console-1.9.1.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/guice-jndi.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/junit-jupiter-migrationsupport-5.10.1.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/junit-platform-suite-commons-1.9.1.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/jcommander-1.71.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/junit-platform-reporting-1.9.1.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/guice-assistedinject.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/jcl-over-slf4j.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/junit-vintage-engine-5.10.1.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/junit-platform-suite-engine-1.9.1.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/testng-7.5.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/junit-jupiter-api-5.10.1.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/junit-jupiter-5.10.1.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/guice-multibindings.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/guice-spring.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/guice-servlet.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/junit-jupiter-engine-5.10.1.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/guice.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/aopalliance-1.0.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/slf4j-jcl.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/guice-grapher.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/slf4j-log4j12.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/junit-platform-launcher-1.9.1.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/junit4-4.13.2.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/junit-platform-runner-1.9.1.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/slf4j-nop.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/log4j-over-slf4j.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/junit-platform-suite-1.9.1.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/guice-no-aop-4.2.3.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/junit-platform-commons-1.9.1.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/opentest4j-1.2.0.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/hamcrest-integration-1.3.1-SNAPSHOT.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/jul-to-slf4j.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/java/slf4j-jdk14.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/jtreg/lib/slf4j-api.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/jtreg/lib/slf4j-simple.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/jtreg/lib/junit-platform-console-standalone.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/jtreg/lib/javatest.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/jtreg/lib/testng.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/jtreg/lib/guice.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/jtreg/lib/jcommander.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/jtreg/lib/asmtools.jar
+/var/tmp/m3-runtime-migration-20261002/jtreg-deps/root/usr/share/jtreg/lib/jtreg.jar
+Note: Command line contains non-control variables:
+* BUILD_JDK_JTREG_NATIVE_SRC=/var/tmp/m3-runtime-migration-20261002/source-native/test/jdk/java/lang/String/nativeEncoding
+Make sure it is not mistyped, and that you intend to override this variable.
+'make help' will list known control variables.
+
+Note: Command line contains non-control variables:
+* BUILD_JDK_JTREG_NATIVE_SRC=/var/tmp/m3-runtime-migration-20261002/source-native/test/jdk/java/lang/String/nativeEncoding
+Make sure it is not mistyped, and that you intend to override this variable.
+'make help' will list known control variables.
+
+Building target 'build-test-jdk-jtreg-native' in configuration 'linux-x86_64-server-fastdebug'
+Creating 1 test library file(s) for BUILD_JDK_JTREG_LIBRARIES
+Finished building target 'build-test-jdk-jtreg-native' in configuration 'linux-x86_64-server-fastdebug'

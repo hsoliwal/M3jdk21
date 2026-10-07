@@ -1,0 +1,44 @@
+{
+  "schema": 1,
+  "source_repository": "hsoliwal/com.synexia",
+  "source_commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
+  "target_base": "81f1aeb9b88408a763601982806f9c46f917ba82",
+  "recipe_path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+  "recipe_sha256": "b96894a77e5c310addbda72b248ab56fedf8ceb24e5de81fe6e5d090982a4abc",
+  "recipe_blob": "1c960db1d2f2f3cbf9acdfb9162e265597dfa03c",
+  "source_templates": {
+    "MIndexVersionTable": {
+      "git_blob": "1675e6d7e35e3371bce2ba9b53716a00b6fd67da",
+      "sha256": "a6cf406b99ce4064e23de1d9eddeb583b6b0f31f6ae74a06c8f98f8f8b330542",
+      "license": "Apache-2.0"
+    },
+    "MIndexLibraryRelease": {
+      "git_blob": "9df260247ec226392832a01fcb99f6bc56b151c6",
+      "sha256": "fb34b0ca5dd91bcc45df89521e934af07139a3630c09b012b19876a0e54be422",
+      "license": "Apache-2.0"
+    },
+    "MIndexVmSession": {
+      "git_blob": "d2fb810dccd53b5ecccde9063a348199f78e0672",
+      "sha256": "bdeb857abaa302a40c4f542c23c4629eb0091f04d56d60545d6ca51325ff92a4",
+      "license": "Apache-2.0"
+    },
+    "MIndexVmPrecomputeKey": {
+      "git_blob": "fc9aef1cce8e43ca81fd922ca6ea406417b1334b",
+      "sha256": "406f451222b1f6e950c28439316fdbcd6e9cfb9463658e1deec85cfe41197f1a",
+      "license": "Apache-2.0"
+    }
+  },
+  "scope": "MODULE; internal java.base additions; no exported API or consumer routing",
+  "crate": "m3-vi",
+  "promotion": "candidate; complete JDK build and subsystem integration remain open",
+  "legal": {
+    "LICENSE": {
+      "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+      "git_blob": "29f81d812f3e768fa89638d1f72920dbfd1413a8"
+    },
+    "NOTICE": {
+      "sha256": "31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427",
+      "git_blob": "cf6694a1316785ba2aa45394314bbae2e856c7fe"
+    }
+  }
+}

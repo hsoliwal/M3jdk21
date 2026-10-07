@@ -1,0 +1,188 @@
+# SPDX-License-Identifier: GPL-2.0-with-classpath-exception
+name: M3 JEP 497 ML-DSA candidate
+
+on:
+  push:
+    branches:
+      - 'm3/materialize-jep497-mldsa-20261007'
+    paths:
+      - 'src/java.base/share/classes/java/security/spec/NamedParameterSpec.java'
+      - 'src/java.base/share/classes/sun/security/provider/ML_DSA.java'
+      - 'src/java.base/share/classes/sun/security/provider/ML_DSA_Impls.java'
+      - 'src/java.base/share/classes/sun/security/provider/SunEntries.java'
+      - 'src/java.base/share/classes/sun/security/util/KnownOIDs.java'
+      - 'test/jdk/sun/security/provider/ML_DSA/**'
+      - 'm3/backports/recipes/j497/**'
+      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
+      - 'm3/backports/test_jep_residue.py'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jep497MlDsaBackportRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jep497MlDsaBackportRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jep497-mldsa.yml'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jep497-mldsa/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk24-jep497-mldsa-vectors/**'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/scope/M3RecipeScopeDeclarationTest.java'
+      - 'm3/tooling/recipe-catalogue.tsv'
+      - '.github/workflows/m3-jep497-mldsa.yml'
+  pull_request:
+    paths:
+      - 'src/java.base/share/classes/java/security/spec/NamedParameterSpec.java'
+      - 'src/java.base/share/classes/sun/security/provider/ML_DSA.java'
+      - 'src/java.base/share/classes/sun/security/provider/ML_DSA_Impls.java'
+      - 'src/java.base/share/classes/sun/security/provider/SunEntries.java'
+      - 'src/java.base/share/classes/sun/security/util/KnownOIDs.java'
+      - 'test/jdk/sun/security/provider/ML_DSA/**'
+      - 'm3/backports/recipes/j497/**'
+      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
+      - 'm3/backports/test_jep_residue.py'
+      - 'm3/tooling/migration-recipes/**'
+      - '.github/workflows/m3-jep497-mldsa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recipe-proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: 1 - Diff hygiene
+        run: git diff --check
+
+      - name: 2 - SHAKE, ML-KEM and ML-DSA recipe DAG proofs
+        run: >-
+          mvn -B -ntp
+          -f m3/tooling/migration-recipes/pom.xml
+          -Dtest=M3Jdk8338587ShakeXofBackportRecipeTest,M3Jep496MlKemBackportRecipeTest,M3Jep497MlDsaBackportRecipeTest,M3RecipeScopeDeclarationTest
+          -Dsurefire.failIfNoSpecifiedTests=false
+          test
+
+      - name: 3 - Released JEP residue stays derived
+        run: python3 -m unittest m3/backports/test_jep_residue.py
+
+  synexia-file-convergence:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Require canonical Synexia Java21 convergence consumer from PR 285
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3Java21FileConvergenceRecipe.java
+          test -f m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/synexia/M3SynexiaJava21ConvergenceConsumerTest.java
+
+      - name: Prove canonical Synexia consumer and scope
+        run: >-
+          mvn -B -ntp
+          -f m3/tooling/migration-recipes/pom.xml
+          -Dtest=M3SynexiaJava21ConvergenceConsumerTest,M3RecipeScopeDeclarationTest
+          -Dsurefire.failIfNoSpecifiedTests=false
+          test
+
+      - name: Promotion fence
+        run: echo 'JEP 497 remains held until the eight Java targets are run through canonical FILE convergence and resealed if changed.'
+
+  jdk-proof:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Install focused OpenJDK build prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends             autoconf make gcc g++ zip unzip curl             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev             libx11-dev libxext-dev libxrender-dev libxtst-dev libxt-dev
+
+      - name: Configure Java 21 receiver
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash configure             --with-boot-jdk="$JAVA_HOME"             --with-debug-level=release             --with-jvm-variants=server             --disable-warnings-as-errors
+
+      - name: Build JDK image
+        run: make JOBS=2 images
+
+      - name: Prove SHAKE prerequisite
+        run: >-
+          make JOBS=2 test
+          TEST="test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java"
+
+      - name: Prove JEP 496 ML-KEM coexistence
+        run: >-
+          make JOBS=2 test
+          TEST="test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java"
+
+      - name: Prove reduced pinned FIPS 204 ACVP subset
+        run: >-
+          make JOBS=2 test
+          TEST="test/jdk/sun/security/provider/ML_DSA/MLDSAKnownAnswer.java"
+
+      - name: Prove ML-DSA provider encodings aliases and round trips
+        run: >-
+          make JOBS=2 test
+          TEST="test/jdk/sun/security/provider/ML_DSA/MLDSAProviderSmoke.java test/jdk/sun/security/provider/ML_DSA/MLDSADeterministic.java"
+
+      - name: Prove full pinned upstream FIPS 204 projections
+        shell: bash
+        run: |
+          set -euo pipefail
+          COMMIT=8b98f958dc1afedc02b9d9c98089d6cb1ca3a5b7
+          BASE="https://raw.githubusercontent.com/openjdk/jdk/$COMMIT/test/jdk/sun/security/provider/acvp/data"
+          DATA=test/jdk/sun/security/provider/ML_DSA/data
+          TMP="$(mktemp -d)"
+          curl -fL "$BASE/ML-DSA-keyGen-FIPS204/internalProjection.json" -o "$TMP/keyGen.json"
+          curl -fL "$BASE/ML-DSA-sigGen-FIPS204/internalProjection.json" -o "$TMP/sigGen.json"
+          curl -fL "$BASE/ML-DSA-sigVer-FIPS204/internalProjection.json" -o "$TMP/sigVer.json"
+          test "$(git hash-object "$TMP/keyGen.json")" = "1fcb409227f9288d3873fc56c96a69449dc4559f"
+          test "$(git hash-object "$TMP/sigGen.json")" = "4088355c10ecea81456b91400bc1fa2380d57ea6"
+          test "$(git hash-object "$TMP/sigVer.json")" = "f8af6142f52568dcb69f99039a771780a7f48e1d"
+          cp "$TMP/keyGen.json" "$DATA/keyGen.json"
+          cp "$TMP/sigGen.json" "$DATA/sigGen.json"
+          cp "$TMP/sigVer.json" "$DATA/sigVer.json"
+          make JOBS=2 test TEST="test/jdk/sun/security/provider/ML_DSA/MLDSAKnownAnswer.java"
+          git restore "$DATA/keyGen.json" "$DATA/sigGen.json" "$DATA/sigVer.json"
+
+      - name: Named-key prerequisite regressions
+        run: >-
+          make JOBS=2 test
+          TEST="test/jdk/sun/security/provider/NamedEdDSA.java test/jdk/sun/security/provider/NamedKeyFactoryTest.java"
+
+      - name: Existing KEM API regression
+        run: >-
+          make JOBS=2 test
+          TEST="test/jdk/javax/crypto/KEM/KemTest.java"
+
+      - name: Built image provider smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          JDK="$(find build -type f -path '*/images/jdk/bin/java' -print -quit)"
+          test -n "$JDK"
+          "$JDK" -version
+          "$JDK" --list-modules >/dev/null
+
+      - name: Candidate tree remains clean after proof
+        run: |
+          git diff --check
+          git diff --exit-code

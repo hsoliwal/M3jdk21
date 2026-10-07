@@ -1,0 +1,2 @@
+CompileCommand: dontinline jdk/internal/mindex/M3TQ$Facts.containsAll bool dontinline = true
+TQ checks=308649 strings=410 ranges=4040 compositions=8331 nativeCalls=4458 coldReads=4291 mappedRanges=174 containmentPairs=201601 warmPayloadReads=0

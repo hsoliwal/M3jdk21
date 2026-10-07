@@ -1,0 +1,25 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "path": "src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java",
+    "ref": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+    "encoding": "base64"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "Ly8gU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEFwYWNoZS0yLjAKcGFja2Fn\nZSBqZGsuaW50ZXJuYWwubWluZGV4OwoKaW1wb3J0IGphdmEubGFuZy5yZWZs\nZWN0LlJlY29yZENvbXBvbmVudDsKaW1wb3J0IGphdmEudXRpbC5PYmplY3Rz\nOwppbXBvcnQgamF2YS51dGlsLk9wdGlvbmFsOwoKLyoqIFR3by1maWVsZCBp\nbmRleGVkIHJlY29yZC1jb21wb25lbnQgdmlldyB3aXRoIGFuIGV4cGxpY2l0\nIFJlY29yZENvbXBvbmVudCBib3VuZGFyeS4gKi8KcHVibGljIGZpbmFsIGNs\nYXNzIE0zUmVjb3JkQ29tcG9uZW50IHsKICAgIHByaXZhdGUgZmluYWwgTTND\nSSBvd25lcjsKICAgIHByaXZhdGUgZmluYWwgaW50IHJvdzsKCiAgICBNM1Jl\nY29yZENvbXBvbmVudChNM0NJIG93bmVyLCBpbnQgcm93KSB7CiAgICAgICAg\ndGhpcy5vd25lciA9IE9iamVjdHMucmVxdWlyZU5vbk51bGwob3duZXIsICJv\nd25lciIpOwogICAgICAgIHRoaXMucm93ID0gT2JqZWN0cy5jaGVja0luZGV4\nKHJvdywgb3duZXIubWVtYmVyU2l6ZSgpKTsKICAgICAgICBpZiAob3duZXIu\nbWVtYmVyS2luZChyb3cpICE9IE0zTWVtYmVyS2luZC5SRUNPUkRfQ09NUE9O\nRU5UKSB7CiAgICAgICAgICAgIHRocm93IG5ldyBJbGxlZ2FsQXJndW1lbnRF\neGNlcHRpb24oIm1lbWJlciByb3cgaXMgbm90IGEgcmVjb3JkIGNvbXBvbmVu\ndCIpOwogICAgICAgIH0KICAgIH0KCiAgICBwdWJsaWMgTTNDSSBvd25lcigp\nIHsgcmV0dXJuIG93bmVyOyB9CiAgICBwdWJsaWMgaW50IHJvdygpIHsgcmV0\ndXJuIHJvdzsgfQogICAgcHVibGljIE0zQ2xhc3MgZ2V0RGVjbGFyaW5nUmVj\nb3JkKCkgeyByZXR1cm4gb3duZXIuY2xhc3NBdChvd25lci5tZW1iZXJEZWNs\nYXJpbmdDbGFzc1Jvdyhyb3cpKTsgfQogICAgcHVibGljIFN0cmluZyBuYW1l\nKCkgeyByZXR1cm4gb3duZXIubWVtYmVyTmFtZShyb3cpOyB9CiAgICBwdWJs\naWMgU3RyaW5nIGdldE5hbWUoKSB7IHJldHVybiBuYW1lKCkudG9TdHJpbmco\nKTsgfQogICAgcHVibGljIFN0cmluZyBkZXNjcmlwdG9yKCkgeyByZXR1cm4g\nb3duZXIubWVtYmVyRGVzY3JpcHRvcihyb3cpOyB9CiAgICBwdWJsaWMgaW50\nIGFubm90YXRpb25Db3VudCgpIHsgcmV0dXJuIG93bmVyLm1lbWJlckFubm90\nYXRpb25Db3VudChyb3cpOyB9CiAgICBwdWJsaWMgU3RyaW5nIGFubm90YXRp\nb25UeXBlTmFtZUF0KGludCBvcmRpbmFsKSB7CiAgICAgICAgcmV0dXJuIG93\nbmVyLm1lbWJlckFubm90YXRpb25UeXBlTmFtZShyb3csIG9yZGluYWwpOwog\nICAgfQogICAgcHVibGljIGxvbmcgc3RydWN0dXJhbEhhc2g2NCgpIHsgcmV0\ndXJuIG93bmVyLm1lbWJlclN0cnVjdHVyYWxIYXNoNjQocm93KTsgfQoKICAg\nIHB1YmxpYyBPcHRpb25hbDxSZWNvcmRDb21wb25lbnQ+IHRyeVJlY29yZENv\nbXBvbmVudCgpIHsKICAgICAgICByZXR1cm4gb3duZXIucmVzb2x2ZVJlZmxl\nY3RpdmVFbGVtZW50KHJvdykKICAgICAgICAgICAgICAgIC5maWx0ZXIoUmVj\nb3JkQ29tcG9uZW50LmNsYXNzOjppc0luc3RhbmNlKQogICAgICAgICAgICAg\nICAgLm1hcChSZWNvcmRDb21wb25lbnQuY2xhc3M6OmNhc3QpOwogICAgfQoK\nICAgIHB1YmxpYyBSZWNvcmRDb21wb25lbnQgdG9SZWNvcmRDb21wb25lbnQo\nKSB7CiAgICAgICAgcmV0dXJuIHRyeVJlY29yZENvbXBvbmVudCgpLm9yRWxz\nZVRocm93KAogICAgICAgICAgICAgICAgKCkgLT4gbmV3IElsbGVnYWxTdGF0\nZUV4Y2VwdGlvbigKICAgICAgICAgICAgICAgICAgICAgICAgIkpWTSBSZWNv\ncmRDb21wb25lbnQgYm91bmRhcnkgaXMgbm90IGxpdmUgZm9yIHJvdyAiICsg\ncm93KSk7CiAgICB9CgogICAgQE92ZXJyaWRlIHB1YmxpYyBTdHJpbmcgdG9T\ndHJpbmcoKSB7IHJldHVybiBnZXREZWNsYXJpbmdSZWNvcmQoKS5nZXROYW1l\nKCkgKyAiIyIgKyBnZXROYW1lKCk7IH0KfQo=\n",
+      "encoding": "base64",
+      "sha": "55f82a8486055d50e24d1a9b12b0636f9db876ed",
+      "display_url": "https://github.com/hsoliwal/M3jdk21/blob/d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2/src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java",
+      "display_title": "M3RecordComponent.java"
+    },
+    "isError": false
+  }
+}
+

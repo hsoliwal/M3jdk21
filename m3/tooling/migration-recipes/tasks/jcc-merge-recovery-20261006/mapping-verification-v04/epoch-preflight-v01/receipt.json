@@ -1,0 +1,8 @@
+{
+  "status": "INPUT_ENVELOPE_ADAPTER_FAILURE",
+  "exit_code": 1,
+  "error": "KeyError: request",
+  "source_sha256": "fb2f66618d85ee8a3bbd911267b2a58a26c044ed881ccdfe5d54952ad494e37e",
+  "outputs_created": false,
+  "correction_scope": "Latest actual descriptor capture has response URL rather than request wrapper; verify exact returned URL and immutable body instead."
+}

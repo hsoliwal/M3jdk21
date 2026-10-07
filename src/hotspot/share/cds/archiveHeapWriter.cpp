@@ -99,6 +99,11 @@ bool ArchiveHeapWriter::is_too_large_to_archive(oop o) {
 }
 
 bool ArchiveHeapWriter::is_string_too_large_to_archive(oop string) {
+  if (java_lang_String::is_m3_joined(string)) {
+    // M3 owner graphs contain native/mapped coordinates and are intentionally
+    // rebuilt at runtime; never size or archive the empty String.value sentinel.
+    return true;
+  }
   typeArrayOop value = java_lang_String::value_no_keepalive(string);
   return is_too_large_to_archive(value);
 }

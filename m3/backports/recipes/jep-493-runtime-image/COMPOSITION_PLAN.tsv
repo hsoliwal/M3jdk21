@@ -1,0 +1,8 @@
+group	scope	members	purpose	mutation_authority
+build-config	MULTI_MODULE	3	OpenJDK image/autoconf/spec plumbing for linkable runtime images	false
+jlink-core	MODULE	7	jdk.jlink public/tool integration and resource behavior	false
+runtimelink-package	PACKAGE	4	new runtime-image resource-diff/link mechanics	false
+test-metadata	MULTI_MODULE	3	jtreg capability and VM property metadata	false
+runtime-image-tests	MODULE	18	focused JEP493 runtime-image behavioral proof	false
+regression-tests	MULTI_MODULE	12	existing jlink/jmod/langtools regression compatibility	false
+feature-join	MULTI_MODULE	47	Join reviewed groups only after generated FILE diffs and dependencies are admitted	false

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.build</groupId><artifactId>apache-public-reuse-proof</artifactId><version>1.0-SNAPSHOT</version>
+  <properties><maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding></properties>
+  <dependencies>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java</artifactId><version>8.17.1</version></dependency>
+    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
+  </dependencies>
+  <build><sourceDirectory>${project.basedir}/../src/main/java</sourceDirectory><plugins>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
+      <configuration><compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs>
+        <includes><include>com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</include></includes></configuration></plugin>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>
+      <configuration><failIfNoTests>true</failIfNoTests><useModulePath>false</useModulePath>
+        <systemPropertyVariables>
+          <m3.reuse.crate>${project.basedir}</m3.reuse.crate><m3.reuse.root>${project.basedir}/../../../..</m3.reuse.root>
+          <m3.reuse.resourceRoot>com/m3/rewrite/backport/jdk21-hash-pinned-text/apache-public-reuse-v1</m3.reuse.resourceRoot>
+          <m3.reuse.engine>com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe</m3.reuse.engine>
+          <m3.reuse.enginePath>m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java</m3.reuse.enginePath><m3.reuse.engineBlob>a2e8c916208b563517e51b738744a05357e633aa</m3.reuse.engineBlob>
+          <m3.reuse.paths>m3/docs/synexia-apache-reuse-policy.properties,m3/docs/synexia-apache-reuse-scope.tsv,m3/docs/synexia-apache-reuse.md</m3.reuse.paths>
+        </systemPropertyVariables></configuration></plugin>
+    <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-jar-plugin</artifactId><version>3.4.1</version></plugin>
+  </plugins></build>
+</project>

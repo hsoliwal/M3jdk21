@@ -1,0 +1,61 @@
+{
+  "task_packet": "active",
+  "source_doc": "M3-SCALE v3 Locked Canon",
+  "invariant_id": "J497-MLDSA-INTAKE-V2",
+  "run": {
+    "mode": "inventory",
+    "profile": "security-high-risk",
+    "workers": 1,
+    "shard_count": 1,
+    "shard_index": 0
+  },
+  "targets": {
+    "jep": 497,
+    "framework_commit": "3f53d571343792341481f4d15970cdc0bcd76a5e",
+    "feature_commit": "8b98f958dc1afedc02b9d9c98089d6cb1ca3a5b7",
+    "cohabitation_fix_commit": "8c2b4f62714f26ab3bc4808c734502af632a1eef",
+    "final_fips204_commit": "fb95a5394413dba7352a7ad2ebd39a3da42308a6",
+    "deferred_java_optimization_commit": "10dcdf1b4738efc6b4deaf96f4d123aff4dab832",
+    "product_materialization": false
+  },
+  "invariant_locks": {
+    "JAVA21_IDENTITY": "LOCKED",
+    "PUBLIC_API": "REVIEW_REQUIRED",
+    "POST21_ASYMMETRIC_KEY_API": "FORBIDDEN_DEFAULT",
+    "SECURITY_REVIEW": "MANDATORY",
+    "A3_PREPARATION": "MANDATORY",
+    "MLKEM_COHABITATION": "MANDATORY",
+    "NATIVE_ACCELERATION": "OUT_OF_SCOPE_UNTIL_JAVA_ORACLE"
+  },
+  "allowed_delta": "Inventory, dependency closure, exact upstream path denominator, correctness-followup binding, security proof planning",
+  "forbidden": [
+    "security product mutation",
+    "unreviewed public API exposure",
+    "dropping JDK-8340327 prerequisite",
+    "dropping JDK-8345057 coexistence repair",
+    "using draft ML-DSA semantics instead of JDK-8345533 final FIPS 204 behavior",
+    "native or JIT optimization before Java oracle",
+    "promotion without ACVP/provider/security proof"
+  ],
+  "verify_order": [
+    "inventory",
+    "dependency audit",
+    "A3 Java preparation",
+    "source21 compile",
+    "ML-KEM coexistence",
+    "FIPS 204 final semantics",
+    "FIPS 204 ACVP vectors",
+    "provider semantics",
+    "security jtreg",
+    "whole image",
+    "fixed point"
+  ],
+  "stop_conditions": [
+    "missing prerequisite",
+    "source-level incompatibility",
+    "public API incompatibility",
+    "ML-KEM constant regression",
+    "vector mismatch",
+    "provider-order drift"
+  ]
+}

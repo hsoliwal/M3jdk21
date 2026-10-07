@@ -1,0 +1,110 @@
+{
+  "capture_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf",
+  "files": [
+    {
+      "bytes": 48120,
+      "capture_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/V04_CHANGED_BODY_READBACKS.json",
+      "capture_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf",
+      "content_role": "materialized_production",
+      "expected_current_tree": "b7d53f9edea5e85ae3f070eac3464dd134ac81e4",
+      "git_blob": "baa84c13b7fd330eab6b1832dab1b4b523bfd8ce",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/actual-v04-changed-bodies/m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+      "mode": "100644",
+      "path": "m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+      "readback_verified": true,
+      "response_representation": "Actual connector UTF8 body returned for exact immutable Git blob URL",
+      "sha256": "83dad41fa4ce50b70f1e2e6800241b69b5136807902fd2fc6a6d024024894ac4"
+    },
+    {
+      "bytes": 203000,
+      "capture_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/V04_CHANGED_BODY_READBACKS.json",
+      "capture_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf",
+      "content_role": "materialized_maven_pom",
+      "expected_current_tree": "b7d53f9edea5e85ae3f070eac3464dd134ac81e4",
+      "git_blob": "1a1c0cc8017b9ce9eadd6eba7e2ead3400a2266f",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/actual-v04-changed-bodies/synexia-openrewrite-recipes/pom.xml",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/pom.xml",
+      "readback_verified": true,
+      "response_representation": "Actual connector UTF8 body returned for exact immutable Git blob URL",
+      "sha256": "7846d9447016ab714a4d1c82d7f3814efa7a94049cb99bb59ba09f6f6d8c7a80"
+    },
+    {
+      "bytes": 30078,
+      "capture_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/V04_CHANGED_BODY_READBACKS.json",
+      "capture_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf",
+      "content_role": "materialized_production",
+      "expected_current_tree": "b7d53f9edea5e85ae3f070eac3464dd134ac81e4",
+      "git_blob": "d1c607f5d944e82d15856ec16cad9f163558aee3",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/actual-v04-changed-bodies/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "readback_verified": true,
+      "response_representation": "Actual connector UTF8 body returned for exact immutable Git blob URL",
+      "sha256": "824e51c244d70b802cfe1f95e37503925cf271e9cc703d433b537c528a129c66"
+    },
+    {
+      "bytes": 3303,
+      "capture_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/V04_CHANGED_BODY_READBACKS.json",
+      "capture_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf",
+      "content_role": "materialized_production",
+      "expected_current_tree": "b7d53f9edea5e85ae3f070eac3464dd134ac81e4",
+      "git_blob": "eaacc9846285222938eee09bb91827ed22020b1b",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/actual-v04-changed-bodies/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3IopPatternMechanicalPasses.java",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3IopPatternMechanicalPasses.java",
+      "readback_verified": true,
+      "response_representation": "Actual connector UTF8 body returned for exact immutable Git blob URL",
+      "sha256": "65ed79d4af2f48ba931d5eb5dee7710eb40e823f2c0cdbad06f45e228767b4eb"
+    },
+    {
+      "bytes": 8493,
+      "capture_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/V04_CHANGED_BODY_READBACKS.json",
+      "capture_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf",
+      "content_role": "materialized_production",
+      "expected_current_tree": "b7d53f9edea5e85ae3f070eac3464dd134ac81e4",
+      "git_blob": "0d3aed858efcc450cf24822567f4ee605e84a18d",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/actual-v04-changed-bodies/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryContractSurface.java",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3MasteryContractSurface.java",
+      "readback_verified": true,
+      "response_representation": "Actual connector UTF8 body returned for exact immutable Git blob URL",
+      "sha256": "d825d59df9ca7839ad06af2fd5c6ae386ce373f24eecc9184d23d1fe3261d8b1"
+    },
+    {
+      "bytes": 27717,
+      "capture_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/V04_CHANGED_BODY_READBACKS.json",
+      "capture_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf",
+      "content_role": "materialized_production",
+      "expected_current_tree": "b7d53f9edea5e85ae3f070eac3464dd134ac81e4",
+      "git_blob": "d06c42aa8ad27118497cd057d1aef8168e4e97f5",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/actual-v04-changed-bodies/synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/src/main/java/com/synexia/rewrite/M3OpenRewriteTranspiler.java",
+      "readback_verified": true,
+      "response_representation": "Actual connector UTF8 body returned for exact immutable Git blob URL",
+      "sha256": "ca98114b1f46cc0858d674393f7ac86d3e92cbbb66842cc511709e725239c911"
+    },
+    {
+      "bytes": 18320,
+      "capture_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/V04_CHANGED_BODY_READBACKS.json",
+      "capture_sha256": "796f477da10e1d54060058303dac86349ead4d09d7bae19158f0b347da1855bf",
+      "content_role": "materialized_existing_test",
+      "expected_current_tree": "b7d53f9edea5e85ae3f070eac3464dd134ac81e4",
+      "git_blob": "a4b472c6f369f139676fc502909ae41bc4ad015f",
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/actual-v04-changed-bodies/synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipeTest.java",
+      "mode": "100644",
+      "path": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipeTest.java",
+      "readback_verified": true,
+      "response_representation": "Actual connector UTF8 body returned for exact immutable Git blob URL",
+      "sha256": "ef2fb734a499cf3c809394380438459f9ebc96c685e76c2a993a3aecd61fd8c4"
+    }
+  ],
+  "limits": [
+    "These are actual Git blob bodies and verified current-tree membership; final commit/ref binding waits root publication."
+  ],
+  "merkle_verification_sha256": "598e24541f82bbf54b7df8854b58827d5697ca49e5f94737225d07b347f8a939",
+  "schema": "jcc-actual-seven-changed-source-body-verification/1",
+  "status": "ALL_SEVEN_ACTUAL_GIT_BODIES_MATCH_MATERIALIZED_OUTPUTS",
+  "tree": "b7d53f9edea5e85ae3f070eac3464dd134ac81e4"
+}

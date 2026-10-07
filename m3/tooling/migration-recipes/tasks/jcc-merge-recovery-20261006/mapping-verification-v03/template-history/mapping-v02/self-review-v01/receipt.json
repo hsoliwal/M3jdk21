@@ -1,0 +1,51 @@
+{
+  "schema": "m3-jcc-mapping-template-self-review/2",
+  "status": "PASS_PREPARATION_ONLY",
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/java-template/render_template.py",
+    "--audit-root",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit",
+    "--source-input",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/verification-v01/fixture-source-input.json",
+    "--mapping-resources",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/verification-v01/fixture-output",
+    "--output",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v02/java-template/self-review-v01/forbidden-fixture-staging"
+  ],
+  "renderer_fixture_refusal_exit_code": 1,
+  "forbidden_staging_absent": true,
+  "unresolved_source_and_output_tokens": [
+    "__UNRESOLVED_ACTUAL_SOURCE_COMMIT__",
+    "__UNRESOLVED_ACTUAL_SOURCE_ROOT_TREE__",
+    "__UNRESOLVED_ACTUAL_SOURCE_INPUT_SHA256__",
+    "__UNRESOLVED_ACTUAL_PUBLICATION_SUMMARY_SHA256__",
+    "__UNRESOLVED_ACTUAL_MAPPING_MANIFEST_SHA256__",
+    "__UNRESOLVED_ACTUAL_MAPPING_PLAN_SHA256__",
+    "__UNRESOLVED_ACTUAL_MAPPING_PLAN_FILE_SHA256__",
+    "__UNRESOLVED_ACTUAL_AFTER_00_SHA256__",
+    "__UNRESOLVED_ACTUAL_AFTER_01_SHA256__",
+    "__UNRESOLVED_ACTUAL_AFTER_02_SHA256__",
+    "__UNRESOLVED_ACTUAL_AFTER_03_SHA256__"
+  ],
+  "junit_methods_authored": 13,
+  "junit_methods_executed": 0,
+  "java_compile_receipt": "compile-check-v01/receipt.json",
+  "java_compile_status": "PASS",
+  "prior_template_packet": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping/java-template/TEMPLATE_PACKET.json",
+  "prior_template_packet_sha256": "5fe25ca79a45bd4e499fd6171dfe5375390f91f2331330797b93aec3c5eec142",
+  "prior_template_all15_files_unchanged": true,
+  "checks": [
+    "Python AST parse",
+    "Maven XML parse and exact compiler/Surefire test selectors",
+    "11 explicit unique unresolved actual-publication pins",
+    "13 selected JUnit methods",
+    "fixture renderer refusal before writes",
+    "Java21 exact-core API compilation with all warnings fatal",
+    "Current52/50/25/20 assertions and full-node comparisons retained",
+    "Named recipe/classpath resource names agree",
+    "All frozen v01 packet files remain unchanged"
+  ],
+  "scope": "Preparation and compile-only review. No actual publication, JUnit outcome, runtime gate, or four-file materialization is claimed."
+}

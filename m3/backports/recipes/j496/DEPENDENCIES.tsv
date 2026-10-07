@@ -1,0 +1,21 @@
+dependency	current_m3jdk21	j496_use	action
+javax.crypto.KEM	PRESENT	public KEM engine	REUSE_JAVA21
+sun.security.provider.NamedKEM	PRESENT_CURRENT_TREE	standard named-parameter KEM framework	REUSE_PROVEN_PREREQUISITE
+sun.security.provider.NamedKeyFactory	PRESENT_CURRENT_TREE	ML-KEM key decoding/factory support	REUSE_PROVEN_PREREQUISITE
+sun.security.provider.NamedKeyPairGenerator	PRESENT_CURRENT_TREE	ML-KEM key generation support	REUSE_PROVEN_PREREQUISITE
+sun.security.pkcs.NamedPKCS8Key	PRESENT_CURRENT_TREE	private-key encoding support	REUSE_PROVEN_PREREQUISITE
+sun.security.x509.NamedX509Key	PRESENT_CURRENT_TREE	public-key encoding support	REUSE_PROVEN_PREREQUISITE
+sun.security.util.KeyUtil	PRESENT_CURRENT_TREE	framework key validation utility	REUSE_PROVEN_PREREQUISITE_DELTA
+sun.security.util.SignatureUtil	PRESENT_CURRENT_TREE	framework signature utility	REUSE_PROVEN_PREREQUISITE_DELTA
+com.sun.crypto.provider.SunJCE	PRESENT	ML-KEM provider registrations	EXTEND_PROVIDER_EXACT_DELTA
+java.security.spec.NamedParameterSpec	PRESENT	ML-KEM named parameter constants	EXPLICIT_LIBRARY_API_EXTENSION
+sun.security.util.KnownOIDs	PRESENT	NIST ML-KEM OIDs	EXTEND_OID_TABLE
+sun.security.provider.SHA3.SHAKE256	MATERIALIZED_UNVERIFIED	ML-KEM SHAKE256 XOF	PROVE_JDK_8338587_PREREQUISITE
+sun.security.provider.SHA3.keccak(long[])	MATERIALIZED_UNVERIFIED	SHA3Parallel permutation primitive	PROVE_JDK_8338587_PREREQUISITE
+sun.security.provider.SHAKE256	PRESENT_STANDALONE	current PKCS7/SignerInfo compatibility	PRESERVE
+sun.security.provider.SHA3Parallel	CANDIDATE_POSTIMAGE_PRESENT	parallel SHA3 primitive for ML-KEM	SEAL_IN_FEATURE_RECIPE
+JDK-8342442 ACVP mechanics	REFERENCE_ONLY	FIPS203 test mechanics	ADAPT_FOCUSED_JAVA21_HARNESS
+jdk.test.lib.json.JSONValue	PRESENT_JAVA21	parse pinned ACVP JSON	REUSE_JAVA21
+FixedSecureRandom	ABSENT_JAVA21	deterministic vector randomness	LOCAL_FOCUSED_TEST_ADAPTER
+FIPS203 ACVP vectors	CANDIDATE_POSTIMAGE_PRESENT	known-answer/security proof	SEAL_EXACT_DATA
+A3 Java preparation	AVAILABLE	atomize/patternize/document/fixed-point before backport recipe	MANDATORY_PRE_RECIPE

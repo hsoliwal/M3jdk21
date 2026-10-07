@@ -1,0 +1,1127 @@
+{
+  "schema_version": 2,
+  "purpose": "Static donor catalogue, provenance and observed finite regression mapping for existing Synexia owners.",
+  "state": "CATALOGUE_WITH_COMPLETED_OFF_AND_REQUIRED_DONOR_RUNS",
+  "scope": {
+    "repository": "hsoliwal/com.synexia",
+    "review_role": "second stacked PR: catalogue documentation and metadata only",
+    "primary_pr_scope": "implementation, donor tests and existing replay",
+    "code_imported": false,
+    "dependencies_added": false,
+    "new_runtime_service_or_recipe_engine": false,
+    "tests_executed_by_this_catalogue_authoring_step": false
+  },
+  "retrieved_date": "2026-10-05",
+  "record_count": 18,
+  "source_precedence": [
+    "existing_synexia_owner",
+    "javac_jls_openjdk_primary_for_java",
+    "openrewrite_primary_for_recipes",
+    "specific_github_foss_donor"
+  ],
+  "problem_lookup_order": [
+    "LeetCode",
+    "HackerRank",
+    "GeeksforGeeks"
+  ],
+  "lookup_workflow": [
+    {
+      "ordinal": 1,
+      "action": "Inventory existing Synexia source, recipe, compiler, native and fixture owners; bind the baseline and contract before looking for external replacement candidates."
+    },
+    {
+      "ordinal": 2,
+      "action": "For Java syntax, types, compiler integration and lexical rules, consult the primary JDK API/JLS/OpenJDK source first. For source transformations and recipe cycles, consult OpenRewrite primary docs/source and the already pinned artifact first."
+    },
+    {
+      "ordinal": 3,
+      "action": "Evaluate other GitHub FOSS donors only for a specific uncovered capability; record exact file/revision, file license, input domain, behavior and why an existing owner cannot already supply it."
+    },
+    {
+      "ordinal": 4,
+      "action": "Lookup problem/category metadata in LeetCode first. Record exact problem identity, operation, domain, indexing and output/exception contract; do not collect solutions as implementation authority."
+    },
+    {
+      "ordinal": 5,
+      "action": "Lookup the corresponding category in HackerRank second. Keep its regex dialect, whole-match/search semantics and published constraints as a separate record."
+    },
+    {
+      "ordinal": 6,
+      "action": "Lookup the corresponding category in GeeksforGeeks third. Treat unavailable statement bodies as unresolved metadata; never fill gaps from a similar problem name."
+    },
+    {
+      "ordinal": 7,
+      "action": "Compare candidates serially for one file/private atom with its contract sealed. Category similarity only nominates candidates; resolved interfaces, behavior, license and measured evidence decide eligibility."
+    },
+    {
+      "ordinal": 8,
+      "action": "Make the reusable Maven/OpenRewrite recipe and its regression fixtures the work product. Produce the target candidate deterministically and retain diff, ordered verification logs, hashes, corpus coverage and replay evidence."
+    }
+  ],
+  "category_boundaries": [
+    {
+      "left": "literal substring search",
+      "right": "regex search",
+      "rule": "A literal metacharacter is data. Regex metacharacters change the language; quoting policy must be explicit."
+    },
+    {
+      "left": "regex full match",
+      "right": "regex find",
+      "rule": "Whole-input acceptance and finding a substring are distinct observable operations."
+    },
+    {
+      "left": "wildcard star",
+      "right": "regex star",
+      "rule": "Wildcard star consumes an arbitrary sequence; restricted-regex star repeats its predecessor."
+    },
+    {
+      "left": "restricted challenge grammar",
+      "right": "java.util.regex",
+      "rule": "A small dot/star language does not define Java flags, groups, backreferences, boundaries or all Unicode behavior."
+    },
+    {
+      "left": "RE2/J",
+      "right": "java.util.regex",
+      "rule": "Engine substitution requires a proven eligible shared subset and locked API/exception semantics."
+    },
+    {
+      "left": "text occurrence",
+      "right": "attributed Java occurrence",
+      "rule": "Regex/string matches cannot authorize edits inside comments/literals or unrelated owner/overload bindings."
+    },
+    {
+      "left": "bracket balance",
+      "right": "Java parsing",
+      "rule": "Balanced delimiters do not establish lexical or syntactic validity; Unicode escapes are processed before tokenization."
+    },
+    {
+      "left": "UTF-16 index",
+      "right": "UTF-8 byte offset",
+      "rule": "Java String indices use char code units. JNI strings and byte-oriented native inputs require explicit encoding and coordinate contracts."
+    },
+    {
+      "left": "finite exhaustive profile",
+      "right": "universal correctness",
+      "rule": "Passing every declared finite case proves that corpus observation only; it does not prove every possible Java input."
+    },
+    {
+      "left": "API/file hash identity",
+      "right": "behavioral equivalence",
+      "rule": "Hashes bind evidence and detect exact identity; similarity or equal signatures do not establish behavior."
+    }
+  ],
+  "versions": {
+    "java_release": "21",
+    "junit": "5.10.2",
+    "openrewrite": "8.17.1",
+    "surefire": "3.2.5",
+    "source": {
+      "path": "repo/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/pom.xml",
+      "bytes": 16270,
+      "sha256": "feb6d0d9b6058016caaed29c00ca9f6dac23d60ec13216c31822bf294ba1cc28"
+    }
+  },
+  "records": [
+    {
+      "id": "JAVAC-MEMORY-01",
+      "category": "compiler/in_memory_java",
+      "problem_or_capability": "JDK JavaCompiler source-string compilation and file-manager integration",
+      "primary_url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.compiler/javax/tools/JavaCompiler.html",
+      "supporting_urls": [
+        "https://docs.oracle.com/en/java/javase/21/docs/api/jdk.compiler/com/sun/source/util/JavacTask.html"
+      ],
+      "semantic_contract": "Compile source units with an explicitly bound JDK release, compiler options and classpath; retain diagnostics and generated class bytes. Parsing, attribution and class generation are separate observations.",
+      "eligible_reuse": "Use public compiler APIs through the existing Synexia compiler owner. Reuse the documented in-memory input/output design; no compiler implementation is imported.",
+      "license_or_no_copy_status": "API_METADATA_ONLY; no implementation or documentation passage copied; JDK implementation license is not asserted by this row.",
+      "provenance": {
+        "method": "official_api_document_read",
+        "retrieved_date": "2026-10-05",
+        "revision": "Java SE 21 API"
+      },
+      "boundary": "Compiler acceptance establishes Java compilation properties, not runtime equivalence or M3Lang-specific semantics.",
+      "fixture_application": {
+        "status": "EXISTING_COMPILER_REFERENCE",
+        "description": "Public compiler integration remains with existing Synexia owners. The seven donor methods do not certify a new compiler implementation.",
+        "executed_fixture_ids": []
+      }
+    },
+    {
+      "id": "JAVAC-COMBO-01",
+      "category": "compiler/finite_cartesian_fixtures",
+      "problem_or_capability": "OpenJDK ComboTestHelper named-dimension enumeration",
+      "primary_url": "https://github.com/openjdk/jdk/blob/master/test/langtools/tools/javac/lib/combo/ComboTestHelper.java",
+      "supporting_urls": [],
+      "semantic_contract": "Enumerate the product of declared dimensions, create a case per combination, count filtered cases and support explicit failure policies.",
+      "eligible_reuse": "Architecture reference for independently authored finite enumeration in the existing Synexia fixture owner. Do not import the helper or its internal JavacTaskPool dependency.",
+      "license_or_no_copy_status": "REFERENCE_ONLY_NO_COPY; inspected file header is GPL-2.0-only and shows no Classpath exception.",
+      "provenance": {
+        "method": "github_connector_file_read",
+        "retrieved_date": "2026-10-05",
+        "revision": "master (floating)",
+        "git_blob_sha": "3d0bcfb69ebe36381c7239198f58b782e73e5102"
+      },
+      "boundary": "The inspected helper uses javac implementation internals. API reuse must remain on the existing public compiler integration.",
+      "fixture_application": {
+        "status": "ENUMERATION_DESIGN_REFERENCE",
+        "description": "Literal products reuse the existing Synexia combinator. No OpenJDK helper or javac internal dependency is imported.",
+        "executed_fixture_ids": [
+          "LIT-ASCII",
+          "LIT-UNICODE"
+        ]
+      }
+    },
+    {
+      "id": "REWRITE-CYCLES-01",
+      "category": "recipe/exact_output_and_fixed_point",
+      "problem_or_capability": "OpenRewrite RewriteTest and RecipeSpec cycle assertions",
+      "primary_url": "https://github.com/openrewrite/rewrite/blob/main/rewrite-test/src/main/java/org/openrewrite/test/RecipeSpec.java",
+      "supporting_urls": [
+        "https://docs.openrewrite.org/authoring-recipes/recipe-testing"
+      ],
+      "semantic_contract": "Assert before/after source and unchanged fixtures; configure cycle limits and expected changing cycles. The inspected default cycle limit is two.",
+      "eligible_reuse": "Use the repository-pinned RewriteTest/RecipeSpec dependency and existing recipe owner. Add fixtures and explicit fixed-point assertions instead of a new scheduler.",
+      "license_or_no_copy_status": "UPSTREAM_APACHE_2_0_FILE_HEADER; reference/API use only in this intake; no upstream source copied.",
+      "provenance": {
+        "method": "official_source_and_document_read",
+        "retrieved_date": "2026-10-05",
+        "revision": "main (floating)"
+      },
+      "boundary": "A bounded unchanged successor is evidence for this input and environment. The cycle budget is not a universal termination proof.",
+      "fixture_application": {
+        "status": "EXISTING_RECIPE_REFERENCE",
+        "description": "Existing recipe/replay owners retain cycle and fixed-point responsibilities; the donor packet adds search and regex regressions.",
+        "executed_fixture_ids": []
+      }
+    },
+    {
+      "id": "REWRITE-INVARIANTS-01",
+      "category": "recipe/attributed_tree_integrity",
+      "problem_or_capability": "OpenRewrite TypeValidation invariant checks",
+      "primary_url": "https://github.com/openrewrite/rewrite/blob/main/rewrite-test/src/main/java/org/openrewrite/test/TypeValidation.java",
+      "supporting_urls": [],
+      "semantic_contract": "Validate attributed declarations/invocations, cursor acyclicity, parse/print equality, immutable scanning, and absence of erroneous or unknown nodes before and after a recipe.",
+      "eligible_reuse": "Keep available invariant checks enabled in existing RewriteTest fixtures; extend targeted fixtures if the pinned version exposes fewer checks.",
+      "license_or_no_copy_status": "UPSTREAM_APACHE_2_0_FILE_HEADER; reference/API use only; no upstream source copied.",
+      "provenance": {
+        "method": "github_connector_file_read",
+        "retrieved_date": "2026-10-05",
+        "revision": "main (floating)",
+        "git_blob_sha": "7e3be99f81f2aaf092f6a6b996d3e3158871fc24"
+      },
+      "boundary": "Rendered source equality does not prove that its LST metadata remains valid; LST validity does not prove runtime equivalence.",
+      "fixture_application": {
+        "status": "EXISTING_RECIPE_REFERENCE",
+        "description": "Reference for existing attributed-tree checks; availability must be checked against pinned OpenRewrite 8.17.1.",
+        "executed_fixture_ids": []
+      }
+    },
+    {
+      "id": "REFASTER-01",
+      "category": "recipe/typed_before_after_atoms",
+      "problem_or_capability": "Error Prone Refaster expression and block templates",
+      "primary_url": "https://errorprone.info/docs/refaster",
+      "supporting_urls": [
+        "https://github.com/google/error-prone/blob/master/COPYING"
+      ],
+      "semantic_contract": "Before/after templates describe typed expression or block replacements; applicability depends on matching those forms and type bindings.",
+      "eligible_reuse": "Reference for recipes whose applicability can be expressed as bounded typed patterns. Preserve evaluation count, ordering, exceptions and ownership through separate fixtures.",
+      "license_or_no_copy_status": "UPSTREAM_APACHE_2_0_REPOSITORY_LICENSE; no template or implementation copied in this intake.",
+      "provenance": {
+        "method": "official_document_and_license_read",
+        "retrieved_date": "2026-10-05",
+        "revision": "documentation and master COPYING (floating)"
+      },
+      "boundary": "A compilable replacement template does not establish behavioral equivalence.",
+      "fixture_application": {
+        "status": "REFERENCE_ONLY",
+        "description": "No Refaster template, dependency or execution in this packet.",
+        "executed_fixture_ids": []
+      }
+    },
+    {
+      "id": "RE2J-SUBSET-01",
+      "category": "regex/non_backtracking_shared_subset",
+      "problem_or_capability": "RE2/J finite-automaton regex matching design",
+      "primary_url": "https://github.com/google/re2j",
+      "supporting_urls": [
+        "https://github.com/google/re2j/blob/master/LICENSE"
+      ],
+      "semantic_contract": "Compare engines only for a declared common syntax/flag subset. RE2/J does not provide full java.util.regex behavior or interface parity.",
+      "eligible_reuse": "Reference design for explicitly eligible regular-language cases; no new dependency, RE2/J execution or blanket engine substitution.",
+      "license_or_no_copy_status": "UPSTREAM_BSD_3_CLAUSE_FORM_IN_LICENSE; reference only; no implementation copied.",
+      "provenance": {
+        "method": "official_repository_readme_and_license_read",
+        "retrieved_date": "2026-10-05",
+        "revision": "master (floating)"
+      },
+      "boundary": "Backreferences, unsupported flags, region behavior and other API differences require refusal or existing Java fallback; they must not be silently reinterpreted.",
+      "fixture_application": {
+        "status": "DOMAIN_BOUNDARY_REFERENCE",
+        "description": "The executed comparison is MIndexRegexAutomaton versus JDK Pattern. RE2/J itself is not executed or added.",
+        "executed_fixture_ids": [
+          "RX-RESTRICTED",
+          "RX-STRUCTURED",
+          "RX-REFUSAL"
+        ]
+      }
+    },
+    {
+      "id": "JUNIT-FANIN-01",
+      "category": "testing/discovery_and_execution_evidence",
+      "problem_or_capability": "JUnit Platform Launcher and execution listeners",
+      "primary_url": "https://docs.junit.org/5.10.2/user-guide/index.html#launcher-api",
+      "supporting_urls": [
+        "https://github.com/junit-team/junit-framework/blob/main/LICENSE.md"
+      ],
+      "semantic_contract": "Discover selected tests and execute a request or test plan; collect outcomes with listeners because execute does not return an aggregate success value.",
+      "eligible_reuse": "Use the repository-pinned JUnit Platform API in the existing verifier. Bind the selected test set and aggregate failures, aborts, skips and completed executions.",
+      "license_or_no_copy_status": "UPSTREAM_EPL_2_0_REPOSITORY_LICENSE; API/documentation reference only; no implementation copied.",
+      "provenance": {
+        "method": "official_versioned_guide_rechecked_and_prior_repository_license_read",
+        "retrieved_date": "2026-10-05",
+        "revision": "JUnit guide 5.10.2; license main (floating)",
+        "prior_guide_version": "5.13.4 research only; superseded as primary reference by checked 5.10.2 guide",
+        "historical_license_check": {
+          "path": "junit-team/junit5/LICENSE.md",
+          "ref": "r5.10.2",
+          "result": "NOT_RETRIEVED_AS_READABLE_FILE",
+          "consequence": "Current repository EPL-2.0 license reference is not an immutable historical file receipt."
+        }
+      },
+      "boundary": "Zero discovered tests, skipped tests and aborted tests cannot count as passed semantic cases.",
+      "fixture_application": {
+        "status": "EXISTING_EXECUTION_FRAMEWORK",
+        "description": "JUnit 5.10.2 executes the donor methods through Surefire 3.2.5. No JUnit dependency upgrade.",
+        "executed_fixture_ids": [
+          "LIT-ASCII",
+          "LIT-UNICODE",
+          "LIT-BOUNDS",
+          "RX-RESTRICTED",
+          "RX-STRUCTURED",
+          "RX-REFUSAL",
+          "RX-MALFORMED"
+        ]
+      }
+    },
+    {
+      "id": "JQWIK-FINITE-01",
+      "category": "testing/exhaustive_or_data_driven_generation",
+      "problem_or_capability": "jqwik explicit generation modes",
+      "primary_url": "https://jqwik.net/docs/current/user-guide.html#generation-mode",
+      "supporting_urls": [],
+      "semantic_contract": "Exhaustive mode depends on supported finite arbitraries and a representable finite domain; data-driven mode accepts an explicit provider. Randomized mode is a separate contract.",
+      "eligible_reuse": "Documentation reference for exact finite-domain coverage and replay. No jqwik dependency is added or required by this proposal.",
+      "license_or_no_copy_status": "DOCUMENTATION_METADATA_ONLY_NO_COPY; package license not assessed for adoption.",
+      "provenance": {
+        "method": "official_document_read",
+        "retrieved_date": "2026-10-05",
+        "revision": "current guide reported 1.10.1 (floating URL)"
+      },
+      "boundary": "A sample count or a fixed random seed does not establish exhaustive enumeration. Rejected/generated counts remain separate.",
+      "fixture_application": {
+        "status": "ENUMERATION_DESIGN_REFERENCE",
+        "description": "Existing combinator and explicit finite loops supply exhaustive declared products; jqwik is not executed or added.",
+        "executed_fixture_ids": [
+          "LIT-ASCII",
+          "RX-RESTRICTED",
+          "RX-STRUCTURED"
+        ]
+      }
+    },
+    {
+      "id": "LC-0010",
+      "category": "problem/regex/restricted_full_match",
+      "problem_or_capability": "LeetCode 10 Regular Expression Matching",
+      "primary_url": "https://leetcode.com/problems/regular-expression-matching/",
+      "supporting_urls": [],
+      "semantic_contract": "Whole-input matching over lowercase text and a restricted pattern with dot and repetition of its predecessor. The statement requires valid predecessor placement for stars.",
+      "eligible_reuse": "Problem/category metadata and independently authored bounded fixtures only.",
+      "license_or_no_copy_status": "CHALLENGE_METADATA_ONLY_NO_COPY; no solution, editorial, sample corpus or statement passage adopted.",
+      "provenance": {
+        "method": "official_statement_read",
+        "retrieved_date": "2026-10-05",
+        "revision": "public statement (floating)"
+      },
+      "boundary": "The published challenge excludes empty text and patterns. Empty cases and find are explicit Synexia profile extensions. This grammar is not the full Java regex dialect.",
+      "fixture_application": {
+        "status": "CATEGORY_APPLIED_WITH_EXPLICIT_EXTENSIONS",
+        "description": "Restricted token product. Empty cases and find operation are Synexia extensions.",
+        "executed_fixture_ids": [
+          "RX-RESTRICTED"
+        ]
+      }
+    },
+    {
+      "id": "LC-0044",
+      "category": "problem/wildcard/full_match",
+      "problem_or_capability": "LeetCode 44 Wildcard Matching",
+      "primary_url": "https://leetcode.com/problems/wildcard-matching/",
+      "supporting_urls": [],
+      "semantic_contract": "Whole-input wildcard matching: question mark consumes one character; star consumes a sequence, including an empty sequence. Empty input and pattern are within the published domain.",
+      "eligible_reuse": "Problem/category metadata and independently authored finite wildcard fixtures only.",
+      "license_or_no_copy_status": "CHALLENGE_METADATA_ONLY_NO_COPY; no challenge implementation or statement passage adopted.",
+      "provenance": {
+        "method": "official_statement_read",
+        "retrieved_date": "2026-10-05",
+        "revision": "public statement (floating)"
+      },
+      "boundary": "Wildcard star has different semantics from regex predecessor repetition; do not pass wildcard source unchanged to Pattern.compile.",
+      "fixture_application": {
+        "status": "CATEGORY_ONLY_UNIMPLEMENTED",
+        "description": "No wildcard implementation or executed wildcard corpus.",
+        "executed_fixture_ids": []
+      }
+    },
+    {
+      "id": "LC-0028",
+      "category": "problem/literal_search/first_occurrence",
+      "problem_or_capability": "LeetCode 28 Find the Index of the First Occurrence in a String",
+      "primary_url": "https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/",
+      "supporting_urls": [],
+      "semantic_contract": "Return the first substring position or an absence sentinel for nonempty lowercase inputs.",
+      "eligible_reuse": "Problem/category metadata and independent repeated-prefix, overlap and boundary fixtures only.",
+      "license_or_no_copy_status": "CHALLENGE_METADATA_ONLY_NO_COPY; no challenge implementation or statement passage adopted.",
+      "provenance": {
+        "method": "official_statement_read",
+        "retrieved_date": "2026-10-05",
+        "revision": "public statement (floating)"
+      },
+      "boundary": "Empty inputs, Unicode, composite seams, byte slices and additional literal operations are explicit Synexia extensions. No all-occurrence challenge contract is asserted.",
+      "fixture_application": {
+        "status": "CATEGORY_APPLIED_WITH_EXPLICIT_EXTENSIONS",
+        "description": "First occurrence plus additional Synexia literal APIs, empty, Unicode, composite and byte-slice checks.",
+        "executed_fixture_ids": [
+          "LIT-ASCII",
+          "LIT-UNICODE"
+        ]
+      }
+    },
+    {
+      "id": "LC-0020",
+      "category": "problem/delimiters/nesting",
+      "problem_or_capability": "LeetCode 20 Valid Parentheses",
+      "primary_url": "https://leetcode.com/problems/valid-parentheses/",
+      "supporting_urls": [],
+      "semantic_contract": "For a bracket-only input, each closer must correspond to an opener of the same kind and nesting order.",
+      "eligible_reuse": "Problem/category metadata and independently generated nesting fixtures only.",
+      "license_or_no_copy_status": "CHALLENGE_METADATA_ONLY_NO_COPY; no challenge implementation or statement passage adopted.",
+      "provenance": {
+        "method": "official_statement_read",
+        "retrieved_date": "2026-10-05",
+        "revision": "public statement (floating)"
+      },
+      "boundary": "A bracket-language recognizer cannot determine Java lexical or syntactic validity. No delimiter corpus was executed in this packet.",
+      "fixture_application": {
+        "status": "CATEGORY_ONLY_UNIMPLEMENTED",
+        "description": "No delimiter parser or executed delimiter-language corpus.",
+        "executed_fixture_ids": []
+      }
+    },
+    {
+      "id": "HR-PATTERN-SYNTAX",
+      "category": "problem/regex/java_syntax_acceptance",
+      "problem_or_capability": "HackerRank Pattern Syntax Checker",
+      "primary_url": "https://www.hackerrank.com/challenges/pattern-syntax-checker/problem",
+      "supporting_urls": [],
+      "semantic_contract": "A regex is syntactically accepted when Java Pattern.compile accepts it; invalid syntax is a separate outcome from a valid pattern that finds no match.",
+      "eligible_reuse": "Problem/category metadata for independently authored valid and invalid regex fixtures.",
+      "license_or_no_copy_status": "CHALLENGE_METADATA_ONLY_NO_COPY; no editorial, solution or statement passage adopted.",
+      "provenance": {
+        "method": "official_statement_read",
+        "retrieved_date": "2026-10-05",
+        "revision": "public statement (floating)"
+      },
+      "boundary": "Use the configured JDK regex compiler as the acceptance oracle; a custom lexer must not redefine the accepted Java regex grammar.",
+      "fixture_application": {
+        "status": "CATEGORY_APPLIED",
+        "description": "Malformed expressions and JDK-valid expressions outside automaton eligibility have separate assertions.",
+        "executed_fixture_ids": [
+          "RX-REFUSAL",
+          "RX-MALFORMED"
+        ]
+      }
+    },
+    {
+      "id": "HR-JAVA-REGEX",
+      "category": "problem/regex/structured_string_validation",
+      "problem_or_capability": "HackerRank Java Regex",
+      "primary_url": "https://www.hackerrank.com/challenges/java-regex/problem",
+      "supporting_urls": [],
+      "semantic_contract": "Validate four decimal components in the specified numeric range and length with period separators; the challenge explicitly permits leading zeros.",
+      "eligible_reuse": "Metadata for future independently authored numeric-boundary and separator fixtures; no validator implementation or coverage is claimed.",
+      "license_or_no_copy_status": "CHALLENGE_METADATA_ONLY_NO_COPY; no validator implementation or statement passage adopted.",
+      "provenance": {
+        "method": "official_statement_read",
+        "retrieved_date": "2026-10-05",
+        "revision": "public statement (floating)"
+      },
+      "boundary": "This challenge-specific validator is not an assertion of network address canonicalization. Full structured-validator coverage remains a proposed extension.",
+      "fixture_application": {
+        "status": "CATEGORY_ONLY_UNIMPLEMENTED",
+        "description": "The executed structured regex packet does not implement the challenge address validator.",
+        "executed_fixture_ids": []
+      }
+    },
+    {
+      "id": "HR-SPECIFIC-STRING",
+      "category": "problem/regex/case_sensitive_literal_search",
+      "problem_or_capability": "HackerRank Matching Specific String",
+      "primary_url": "https://www.hackerrank.com/challenges/matching-specific-string/problem",
+      "supporting_urls": [],
+      "semantic_contract": "Find a specified literal in text with case sensitivity; this is discovery in text, not attribution of a Java program element.",
+      "eligible_reuse": "Problem/category metadata for literal discovery and code-looking payload fixtures.",
+      "license_or_no_copy_status": "CHALLENGE_METADATA_ONLY_NO_COPY; no challenge pattern, sample corpus or statement passage adopted.",
+      "provenance": {
+        "method": "official_statement_read",
+        "retrieved_date": "2026-10-05",
+        "revision": "public statement (floating)"
+      },
+      "boundary": "A text occurrence inside a comment or literal is not an executable occurrence that a source recipe may change.",
+      "fixture_application": {
+        "status": "CATEGORY_APPLIED",
+        "description": "Independent literal and quoted code-looking data checks; no source-edit authority implied.",
+        "executed_fixture_ids": [
+          "LIT-ASCII",
+          "LIT-UNICODE",
+          "RX-STRUCTURED"
+        ]
+      }
+    },
+    {
+      "id": "GFG-WILDCARD",
+      "category": "problem/wildcard/full_match",
+      "problem_or_capability": "GeeksforGeeks Wildcard Pattern Matching",
+      "primary_url": "https://www.geeksforgeeks.org/problems/wildcard-pattern-matching/1",
+      "supporting_urls": [
+        "https://www.geeksforgeeks.org/videos/problem-of-the-day-26082024-maximum-difference/",
+        "https://www.geeksforgeeks.org/dsa/wildcard-pattern-matching/"
+      ],
+      "semantic_contract": "Official supporting material describes whole-input wildcard matching with question mark and sequence-consuming star. The direct practice body was not retrievable.",
+      "eligible_reuse": "Category pointer only until the exact practice contract is independently retrieved; supporting material can nominate independently authored fixture categories.",
+      "license_or_no_copy_status": "CHALLENGE_METADATA_ONLY_NO_COPY; direct statement body not ingested; no code or quoted statement adopted.",
+      "provenance": {
+        "method": "practice_page_shell_and_official_supporting_material_read",
+        "retrieved_date": "2026-10-05",
+        "revision": "public pages (floating)",
+        "requires_statement_retrieval_before_contract_adoption": true
+      },
+      "boundary": "Do not assume practice return representation, index conventions or domain constraints from another platform or from the category title.",
+      "fixture_application": {
+        "status": "CATEGORY_POINTER_CONTRACT_UNRESOLVED",
+        "description": "Direct practice body missing; no implementation or execution claimed.",
+        "executed_fixture_ids": []
+      }
+    },
+    {
+      "id": "GFG-SEARCH-PATTERN",
+      "category": "problem/literal_search/kmp",
+      "problem_or_capability": "GeeksforGeeks Search Pattern / KMP practice category",
+      "primary_url": "https://www.geeksforgeeks.org/problems/search-pattern0205/1",
+      "supporting_urls": [
+        "https://www.geeksforgeeks.org/videos/search-pattern-kmp-algorithm-dsa-practice-problem//"
+      ],
+      "semantic_contract": "The official practice topic and supporting material identify pattern search/KMP. The direct statement body was not retrieved, so output index base, overlap and empty-input rules remain unbound.",
+      "eligible_reuse": "Category pointer and candidate nomination only; retrieve and seal exact statement semantics before any contract-specific comparison.",
+      "license_or_no_copy_status": "CHALLENGE_METADATA_ONLY_NO_COPY; statement semantics incomplete; no implementation adopted.",
+      "provenance": {
+        "method": "practice_page_shell_and_official_category_read",
+        "retrieved_date": "2026-10-05",
+        "revision": "public pages (floating)",
+        "requires_statement_retrieval_before_contract_adoption": true
+      },
+      "boundary": "The executed Synexia first-occurrence contract is independent of the unresolved GFG practice output contract.",
+      "fixture_application": {
+        "status": "CATEGORY_POINTER_CONTRACT_UNRESOLVED",
+        "description": "Exact index base, overlap, empty input and output remain unbound; no GFG-specific contract adopted.",
+        "executed_fixture_ids": []
+      }
+    },
+    {
+      "id": "GFG-PARENTHESIS",
+      "category": "problem/delimiters/nesting",
+      "problem_or_capability": "GeeksforGeeks Parenthesis Checker",
+      "primary_url": "https://www.geeksforgeeks.org/problems/parenthesis-checker2744/1",
+      "supporting_urls": [
+        "https://www.geeksforgeeks.org/videos/sde-sheet-parenthesis-checker//"
+      ],
+      "semantic_contract": "The official indexed statement describes bracket-only balanced nesting with matching kinds and closing order; the current direct practice view rendered only its shell.",
+      "eligible_reuse": "Problem/category metadata for independently generated delimiter fixtures; preserve the indexed-versus-direct retrieval distinction.",
+      "license_or_no_copy_status": "CHALLENGE_METADATA_ONLY_NO_COPY; no challenge implementation, sample corpus or statement passage adopted.",
+      "provenance": {
+        "method": "official_indexed_statement_and_supporting_page_read",
+        "retrieved_date": "2026-10-05",
+        "revision": "public pages (floating)",
+        "direct_statement_body_retrieved": false
+      },
+      "boundary": "Java comments, escapes, literals and text blocks require compiler/lexical fixtures in addition to a bracket-language test.",
+      "fixture_application": {
+        "status": "CATEGORY_METADATA_NO_EXECUTED_CORPUS",
+        "description": "Official indexed statement only; current direct practice body not retrieved.",
+        "executed_fixture_ids": []
+      }
+    }
+  ],
+  "execution": {
+    "evidence_kind": "completed existing Maven/Surefire logs plus inspected test source",
+    "runs": [
+      {
+        "evidence": {
+          "path": "logs/35-final-main-tests.log",
+          "bytes": 3800,
+          "sha256": "53fa678fd69a16d2350d63bddb0a2a83fe2163b551e61dd50ddb70d3d3fb58d3"
+        },
+        "mode": "off",
+        "finished_at": "2026-10-05T07:34:03+02:00",
+        "build_success": true,
+        "junit": {
+          "tests": 68,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "donor_junit_tests": 7,
+        "counter_records": [
+          {
+            "record": "M3_DONOR_LITERAL_BOUNDS_PASS",
+            "mode": "off",
+            "expected_refusals": 6,
+            "observed_refusals": 6
+          },
+          {
+            "record": "M3_DONOR_LITERAL_PASS",
+            "family": "unicode",
+            "mode": "off",
+            "pairs": 30,
+            "character_inputs": 180,
+            "byte_slices": 120,
+            "character_checks": 900,
+            "utf8_checks": 600,
+            "native_search_api_checks": 120
+          },
+          {
+            "record": "M3_DONOR_LITERAL_PASS",
+            "family": "ascii",
+            "mode": "off",
+            "pairs": 217,
+            "character_inputs": 1337,
+            "byte_slices": 868,
+            "character_checks": 6685,
+            "utf8_checks": 4340,
+            "native_search_api_checks": 868
+          },
+          {
+            "record": "M3_DONOR_REGEX_PASS",
+            "family": "restricted",
+            "mode": "off",
+            "accepted_compilations": 43,
+            "pairs": 1333,
+            "automaton_checks": 13330,
+            "parser_refusals": 0
+          },
+          {
+            "record": "M3_DONOR_REGEX_PASS",
+            "family": "structured",
+            "mode": "off",
+            "accepted_compilations": 12,
+            "pairs": 144,
+            "automaton_checks": 1440,
+            "parser_refusals": 0
+          },
+          {
+            "record": "M3_DONOR_REGEX_MALFORMED_PASS",
+            "mode": "off",
+            "jdk_rejected": 6,
+            "automaton_refused": 6,
+            "matching_cases": 0
+          },
+          {
+            "record": "M3_DONOR_REGEX_REFUSAL_PASS",
+            "mode": "off",
+            "jdk_accepted": 11,
+            "automaton_refused": 11,
+            "matching_cases": 0
+          }
+        ]
+      },
+      {
+        "evidence": {
+          "path": "logs/37-required-jni-donors.log",
+          "bytes": 3305,
+          "sha256": "6b2360fb3c16138ce34bad981e558ecda477c1c342b639c76c3783741a13f186"
+        },
+        "mode": "required",
+        "finished_at": "2026-10-05T07:39:29+02:00",
+        "build_success": true,
+        "junit": {
+          "tests": 7,
+          "failures": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "donor_junit_tests": 7,
+        "counter_records": [
+          {
+            "record": "M3_DONOR_LITERAL_BOUNDS_PASS",
+            "mode": "required",
+            "expected_refusals": 6,
+            "observed_refusals": 6
+          },
+          {
+            "record": "M3_DONOR_LITERAL_PASS",
+            "family": "unicode",
+            "mode": "required",
+            "pairs": 30,
+            "character_inputs": 180,
+            "byte_slices": 120,
+            "character_checks": 900,
+            "utf8_checks": 600,
+            "native_search_api_checks": 120
+          },
+          {
+            "record": "M3_DONOR_LITERAL_PASS",
+            "family": "ascii",
+            "mode": "required",
+            "pairs": 217,
+            "character_inputs": 1337,
+            "byte_slices": 868,
+            "character_checks": 6685,
+            "utf8_checks": 4340,
+            "native_search_api_checks": 868
+          },
+          {
+            "record": "M3_DONOR_REGEX_PASS",
+            "family": "restricted",
+            "mode": "required",
+            "accepted_compilations": 43,
+            "pairs": 1333,
+            "automaton_checks": 13330,
+            "parser_refusals": 0
+          },
+          {
+            "record": "M3_DONOR_REGEX_PASS",
+            "family": "structured",
+            "mode": "required",
+            "accepted_compilations": 12,
+            "pairs": 144,
+            "automaton_checks": 1440,
+            "parser_refusals": 0
+          },
+          {
+            "record": "M3_DONOR_REGEX_MALFORMED_PASS",
+            "mode": "required",
+            "jdk_rejected": 6,
+            "automaton_refused": 6,
+            "matching_cases": 0
+          },
+          {
+            "record": "M3_DONOR_REGEX_REFUSAL_PASS",
+            "mode": "required",
+            "jdk_accepted": 11,
+            "automaton_refused": 11,
+            "matching_cases": 0
+          }
+        ]
+      }
+    ],
+    "counts_per_mode": {
+      "literal_pairs": 247,
+      "ascii_literal_pairs": 217,
+      "scalar_unicode_literal_pairs": 30,
+      "literal_character_representations": 1517,
+      "literal_character_operation_checks": 7585,
+      "literal_utf8_slice_layouts": 988,
+      "literal_utf8_text_search_checks": 4940,
+      "native_search_api_checks": 988,
+      "actual_jni_entry_count": null,
+      "regex_pairs": 1477,
+      "restricted_regex_pairs": 1333,
+      "structured_regex_pairs": 144,
+      "regex_representation_operation_checks": 14770,
+      "accepted_regex_compilations": 55,
+      "positive_regex_parser_refusals": 0,
+      "valid_unsupported_or_budget_regex_refusals": 11,
+      "malformed_regex_refusals": 6,
+      "literal_null_or_bounds_refusals": 6
+    },
+    "counting_rules": [
+      "Every number in counts_per_mode describes the same declared corpus executed separately in off and required modes.",
+      "247 literal pairs and 1477 regex pairs are different families. 1724 is not a literal-pair count.",
+      "JUnit discovered tests, logical pairs, representations and operation checks are different units.",
+      "Literal API checks are five operations per character representation or UTF-8 slice; native-search API checks are one additional byte-array owner call per slice.",
+      "Regex checks are matches and find across three character representations and two UTF-8 layouts: ten checks per pair.",
+      "Positive automaton compilation refusal is a failure, never a skipped or passed matching case.",
+      "Eleven valid unsupported/budget expressions, six malformed expressions and six literal boundary refusals remain separate from positive pairs.",
+      "Native-search API calls include Java pre-dispatch early returns. Actual JNI entries are uninstrumented and are not inferred from the 988 API checks.",
+      "The required run asserts native availability. MIndexRegexAutomaton remains Java code in either run."
+    ],
+    "fixture_mapping": [
+      {
+        "id": "LIT-ASCII",
+        "source": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorLiteralRegressionTest.java",
+        "method": "everyAsciiPairEverySeamAndEveryPaddedSliceMatchesTheLiteralOracle",
+        "catalogue_ids": [
+          "LC-0028",
+          "HR-SPECIFIC-STRING",
+          "JAVAC-COMBO-01",
+          "JQWIK-FINITE-01",
+          "JUNIT-FANIN-01"
+        ],
+        "domain": {
+          "alphabet": [
+            "x",
+            "y"
+          ],
+          "text_lengths": [
+            0,
+            4
+          ],
+          "text_count": 31,
+          "needle_lengths": [
+            0,
+            2
+          ],
+          "needle_count": 7,
+          "product": "31 * 7",
+          "enumeration": "Existing M3RecipeMasteryCombinator, strength 2 across both dimensions; cardinality, ordinal and unique-pair assertions."
+        },
+        "oracle": "Independent direct UTF-16 candidate alignment; separate byte-range equality alignment for UTF-8.",
+        "observed_per_mode": {
+          "pairs": 217,
+          "character_inputs": 1337,
+          "character_checks": 6685,
+          "byte_slices": 868,
+          "utf8_checks": 4340,
+          "native_search_api_checks": 868
+        },
+        "executed_modes": {
+          "off": "PASS",
+          "required": "PASS"
+        }
+      },
+      {
+        "id": "LIT-UNICODE",
+        "source": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorLiteralRegressionTest.java",
+        "method": "scalarUnicodeKeepsUtf16AndUtf8PositionsDistinctAcrossEverySeam",
+        "catalogue_ids": [
+          "LC-0028",
+          "HR-SPECIFIC-STRING",
+          "JAVAC-COMBO-01",
+          "JUNIT-FANIN-01"
+        ],
+        "domain": {
+          "texts": [
+            "",
+            "éx",
+            "😀xy",
+            "x😀éx",
+            "漢xy漢"
+          ],
+          "needles": [
+            "",
+            "x",
+            "é",
+            "😀",
+            "漢",
+            "absent"
+          ],
+          "product": "5 * 6",
+          "extension": "Synexia-authored scalar-Unicode profile; not a cited challenge requirement."
+        },
+        "oracle": "Independent UTF-16 and UTF-8 alignment; supplementary-prefix coordinate check is two code units versus four bytes.",
+        "observed_per_mode": {
+          "pairs": 30,
+          "character_inputs": 180,
+          "character_checks": 900,
+          "byte_slices": 120,
+          "utf8_checks": 600,
+          "native_search_api_checks": 120
+        },
+        "executed_modes": {
+          "off": "PASS",
+          "required": "PASS"
+        }
+      },
+      {
+        "id": "LIT-BOUNDS",
+        "source": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorLiteralRegressionTest.java",
+        "method": "invalidSlicesAreRejectedBeforeAnOptionalNativeDispatch",
+        "catalogue_ids": [
+          "JUNIT-FANIN-01"
+        ],
+        "domain": {
+          "null_input_checks": 2,
+          "invalid_slice_checks": 4
+        },
+        "oracle": "Existing MIndex null and slice exception contracts.",
+        "observed_per_mode": {
+          "expected_refusals": 6,
+          "observed_refusals": 6,
+          "positive_pairs": 0
+        },
+        "executed_modes": {
+          "off": "PASS",
+          "required": "PASS"
+        }
+      },
+      {
+        "id": "RX-RESTRICTED",
+        "source": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorRegexRegressionTest.java",
+        "method": "everyRestrictedTokenCombinationMatchesJdkAcrossRepresentations",
+        "catalogue_ids": [
+          "LC-0010",
+          "RE2J-SUBSET-01",
+          "JQWIK-FINITE-01",
+          "JUNIT-FANIN-01"
+        ],
+        "domain": {
+          "tokens": [
+            "x",
+            "y",
+            ".",
+            "x*",
+            "y*",
+            ".*"
+          ],
+          "token_lengths": [
+            0,
+            2
+          ],
+          "unique_patterns": 43,
+          "input_alphabet": [
+            "x",
+            "y"
+          ],
+          "input_lengths": [
+            0,
+            4
+          ],
+          "input_count": 31,
+          "product": "43 * 31",
+          "extension": "Empty cases and find are explicit Synexia extensions beyond the challenge full-match domain."
+        },
+        "oracle": "JDK Pattern.compile and separate matcher.matches / matcher.find calls.",
+        "observed_per_mode": {
+          "accepted_compilations": 43,
+          "pairs": 1333,
+          "automaton_checks": 13330,
+          "parser_refusals": 0
+        },
+        "executed_modes": {
+          "off": "PASS",
+          "required": "PASS"
+        }
+      },
+      {
+        "id": "RX-STRUCTURED",
+        "source": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorRegexRegressionTest.java",
+        "method": "declaredStructuredPatternsTreatCodeLookingInputAsData",
+        "catalogue_ids": [
+          "HR-SPECIFIC-STRING",
+          "RE2J-SUBSET-01",
+          "JQWIK-FINITE-01",
+          "JUNIT-FANIN-01"
+        ],
+        "domain": {
+          "patterns": [
+            "(?:x|y){0,2}",
+            "[xy]+",
+            "[^x]*",
+            "[x-y]?",
+            "(xy|yx)+",
+            "x{1,2}y?",
+            "\\Qroute(fake);\\E",
+            "\\Ax*\\z",
+            "x+?",
+            "\\x78y",
+            "[\\dx]",
+            "\\s+"
+          ],
+          "inputs": [
+            "",
+            "x",
+            "y",
+            "xy",
+            "yx",
+            "xxx",
+            "xyxy",
+            "route(fake);",
+            "// route(fake);",
+            "route(fake);\n",
+            "1x",
+            " \n"
+          ],
+          "product": "12 * 12",
+          "boundary": "Code-looking strings are data. This is not the HackerRank address validator or an attributed source-edit test."
+        },
+        "oracle": "JDK Pattern.compile and separate matcher.matches / matcher.find calls.",
+        "observed_per_mode": {
+          "accepted_compilations": 12,
+          "pairs": 144,
+          "automaton_checks": 1440,
+          "parser_refusals": 0
+        },
+        "executed_modes": {
+          "off": "PASS",
+          "required": "PASS"
+        }
+      },
+      {
+        "id": "RX-REFUSAL",
+        "source": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorRegexRegressionTest.java",
+        "method": "validUnsupportedAndOverBudgetPatternsAreExplicitlyRefused",
+        "catalogue_ids": [
+          "HR-PATTERN-SYNTAX",
+          "RE2J-SUBSET-01",
+          "JUNIT-FANIN-01"
+        ],
+        "domain": {
+          "unsupported_expressions": [
+            "(?=x)x",
+            "(?<=x)y",
+            "(x)\\1",
+            "(?i)x",
+            "x++",
+            "\\bxy\\b",
+            "\\p{L}+",
+            "(?>x|xy)"
+          ],
+          "over_budget_cases": [
+            {
+              "expression": "x{129}"
+            },
+            {
+              "nested_groups": 65,
+              "body": "x"
+            },
+            {
+              "literal": "x",
+              "source_length": 4097
+            }
+          ]
+        },
+        "oracle": "Each expression must compile in JDK Pattern and must return an empty automaton compilation result.",
+        "observed_per_mode": {
+          "jdk_accepted": 11,
+          "automaton_refused": 11,
+          "matching_cases": 0
+        },
+        "executed_modes": {
+          "off": "PASS",
+          "required": "PASS"
+        }
+      },
+      {
+        "id": "RX-MALFORMED",
+        "source": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorRegexRegressionTest.java",
+        "method": "malformedPatternsFailSyntaxChecksInsteadOfCountingAsNoMatch",
+        "catalogue_ids": [
+          "HR-PATTERN-SYNTAX",
+          "JUNIT-FANIN-01"
+        ],
+        "domain": {
+          "expressions": [
+            "(",
+            "[",
+            "\\",
+            "*x",
+            "x{2,1}",
+            "x{"
+          ]
+        },
+        "oracle": "JDK PatternSyntaxException and empty automaton compilation result are both required.",
+        "observed_per_mode": {
+          "jdk_rejected": 6,
+          "automaton_refused": 6,
+          "matching_cases": 0
+        },
+        "executed_modes": {
+          "off": "PASS",
+          "required": "PASS"
+        }
+      }
+    ],
+    "test_source_snapshots": [
+      {
+        "path": "repo/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorLiteralRegressionTest.java",
+        "bytes": 13294,
+        "sha256": "ddce76a22c1c4e08725c36595d5f5c232c59c7babb54b96a3d7113e442b59ddc"
+      },
+      {
+        "path": "repo/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorRegexRegressionTest.java",
+        "bytes": 9854,
+        "sha256": "3c89f1cf945db9a05626cdf96016517f7903687cdfa2348a2d0bad6013727925"
+      }
+    ],
+    "replay_status": "Not asserted by these two logs; refer to the implementation PR replay receipt.",
+    "performance_status": "Not measured."
+  },
+  "unexecuted_prior_proposal": {
+    "suite_count": 8,
+    "proposed_logical_cases": 1871,
+    "status": "DESIGN_ONLY_NOT_EXECUTED",
+    "included_in_executed_counts": false,
+    "carried_forward_as_fixture_matrix": false
+  },
+  "remaining_coverage_gaps": [
+    "No wildcard, delimiter-language or HackerRank structured-address-validator implementation/executed corpus in this packet.",
+    "Regex captures, match positions, arbitrary flags, alternative line terminators, dollar-anchor final-terminator behavior, vertical-tab whitespace, quantified quoted runs and class intersections are outside the positive corpus.",
+    "Malformed UTF-8, isolated surrogates, modified UTF-8 and universal Unicode parity are not established by the scalar-Unicode literal profile.",
+    "JNI entry instrumentation, non-byte-array native dispatch forms, broader native platforms and performance are not measured.",
+    "Code-looking payload comparison is not attribution, API preservation or semantic Java-recipe evidence; existing compiler/recipe owners retain those obligations.",
+    "Finite exhaustive enumeration does not establish correctness over all possible strings, patterns, Java programs or recipe orders."
+  ],
+  "retrieval_limitations": [
+    "GFG-WILDCARD and GFG-SEARCH-PATTERN direct practice bodies were not retrieved. They remain category pointers pending exact contract retrieval.",
+    "GFG-PARENTHESIS relies on an official indexed statement and supporting primary page; current direct retrieval rendered a shell.",
+    "Most source URLs are floating review references. Bind an immutable file revision and its license before copying any donor source.",
+    "JUnit 5.10.2 guide was checked. The historical r5.10.2 LICENSE.md attempt failed; the EPL-2.0 repository license reference is floating, not a historical immutable receipt.",
+    "OpenRewrite current documentation and current main-branch TypeValidation APIs may differ from pinned 8.17.1. No dependency upgrade or assumption of every current invariant API follows."
+  ],
+  "authoring_inputs": [
+    {
+      "path": "work/donors/DONOR_CATALOGUE.md",
+      "bytes": 22332,
+      "sha256": "f00e9f525dac775bc0de39c76c241457461e4c0e463b0b954abb2349dc3136a6"
+    },
+    {
+      "path": "work/donors/donor_catalogue.json",
+      "bytes": 27700,
+      "sha256": "0aa8b7550722cfac871542efb2706fde23a9675b200d81296177646c9af0b836"
+    },
+    {
+      "path": "work/donors/FINITE_FIXTURE_MATRIX.md",
+      "bytes": 16163,
+      "sha256": "06b95b5a5f5e826fca88bf921902ced013a14aee80c1e84df1e43678378e137a"
+    },
+    {
+      "path": "work/donors/finite_fixture_matrix.json",
+      "bytes": 16352,
+      "sha256": "2f44217ef051e60241bac35e536f52c8c48f5399464e4d737134b8fc1c8a5e90"
+    },
+    {
+      "path": "logs/35-final-main-tests.log",
+      "bytes": 3800,
+      "sha256": "53fa678fd69a16d2350d63bddb0a2a83fe2163b551e61dd50ddb70d3d3fb58d3"
+    },
+    {
+      "path": "logs/37-required-jni-donors.log",
+      "bytes": 3305,
+      "sha256": "6b2360fb3c16138ce34bad981e558ecda477c1c342b639c76c3783741a13f186"
+    },
+    {
+      "path": "repo/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/pom.xml",
+      "bytes": 16270,
+      "sha256": "feb6d0d9b6058016caaed29c00ca9f6dac23d60ec13216c31822bf294ba1cc28"
+    },
+    {
+      "path": "repo/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorLiteralRegressionTest.java",
+      "bytes": 13294,
+      "sha256": "ddce76a22c1c4e08725c36595d5f5c232c59c7babb54b96a3d7113e442b59ddc"
+    },
+    {
+      "path": "repo/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorRegexRegressionTest.java",
+      "bytes": 9854,
+      "sha256": "3c89f1cf945db9a05626cdf96016517f7903687cdfa2348a2d0bad6013727925"
+    }
+  ]
+}

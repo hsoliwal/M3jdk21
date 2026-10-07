@@ -1,0 +1,13 @@
+key	value
+repository	hsoliwal/M3jdk21
+base_commit	b71ee5bf88398fb80961c13db03e8c675fb445ce
+branch	m3/recover-jep485-current-master-20261006
+historical_recovery_head	ec5ca82ecffcdc5b146587e55e5ade04d74f6c0f
+historical_recovery_pr	105
+donor_tag	jdk-24+36
+feature	JEP485 Stream Gatherers
+authority	LIBRARY_API
+contract_mode	EXPLICIT_CONTRACT_CHANGE
+default_java21	NO
+compatibility_policy	OPT_IN_SE_API_EXTENSION
+product_source_regeneration	false

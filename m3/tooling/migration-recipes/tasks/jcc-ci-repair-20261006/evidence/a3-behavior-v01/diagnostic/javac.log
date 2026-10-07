@@ -1,0 +1,10 @@
+/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/diagnostic/A3RegexMatrix.java:61: error: ')' or ',' expected
+                    "Pattern.compile("a+b?")",
+                                      ^
+/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/diagnostic/A3RegexMatrix.java:61: error: <identifier> expected
+                    "Pattern.compile("a+b?")",
+                                       ^
+/workspace/scratch/1c68df1bae79/javac-convergence-20261006/current-ci/a3-behavior-v01/diagnostic/A3RegexMatrix.java:61: error: <identifier> expected
+                    "Pattern.compile("a+b?")",
+                                         ^
+3 errors

@@ -669,6 +669,7 @@ static jmethodID String_getBytes_ID;    /* String.getBytes(Charset) */
 /* Cached field IDs */
 static jfieldID String_coder_ID;        /* String.coder */
 static jfieldID String_value_ID;        /* String.value */
+static jfieldID String_mindex_ID;      /* immutable experimental segment directory */
 
 /* Create a new string by converting str to a heap-allocated byte array and
  * calling the appropriate String constructor.
@@ -814,6 +815,8 @@ InitializeEncoding(JNIEnv *env, const char *encname)
     CHECK_NULL(String_coder_ID);
     String_value_ID = (*env)->GetFieldID(env, strClazz, "value", "[B");
     CHECK_NULL(String_value_ID);
+    String_mindex_ID = (*env)->GetFieldID(env, strClazz, "mindex", "Ljava/lang/MIndexString;");
+    CHECK_NULL(String_mindex_ID);
 }
 
 JNIEXPORT jstring JNICALL
@@ -903,8 +906,14 @@ getStringUTF8(JNIEnv *env, jstring jstr, jboolean strict)
         return NULL;
     }
     value = (*env)->GetObjectField(env, jstr, String_value_ID);
-    if (value == NULL)
-        return NULL;
+    jobject storage = (*env)->GetObjectField(env, jstr, String_mindex_ID);
+    if (storage != NULL) {
+        (*env)->DeleteLocalRef(env, storage);
+        if (value != NULL) (*env)->DeleteLocalRef(env, value);
+        // Explicit charset boundary, before acquiring any critical pointer.
+        return getStringBytes(env, jstr, strict);
+    }
+    if (value == NULL) return NULL;
     len = (*env)->GetArrayLength(env, value);
     str = (*env)->GetPrimitiveArrayCritical(env, value, NULL);
     if (str == NULL) {

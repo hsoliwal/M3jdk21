@@ -1,0 +1,17 @@
+ordinal	atom_id	scope	mutation	depends_on	stop_condition
+0	pin-upstream-denominator	FILE	false		exact PR21565 246-path set and JDK24 GA donor state are pinned
+1	java21-runtime-inventory	FILE	false	pin-upstream-denominator	JDK21 monitor/continuation/JVMTI/JFR/port owners are hashed and classified
+2	owner-layout-reconciliation	PACKAGE	false	java21-runtime-inventory	JDK24 lightweightSynchronizer owner split is mapped to JDK21 synchronizer owners
+3	compatibility-split	MODULE	false	owner-layout-reconciliation	default/removal/library-revert differences are admitted, held, or rejected explicitly
+4	dependency-closure	MULTI_MODULE	false	compatibility-split	all required lock-id/monitor/continuation/GC/JVMTI/JFR/SA/CPU prerequisites are present or separately packeted
+5	generate-file-atoms	FILE	false	dependency-closure	exact Java/native/text candidates are generated from pinned Java21 to released JDK24 state with typed exclusions
+6	review-hotspot-shared	MODULE	false	generate-file-atoms	shared monitor and continuation atoms pass serial review
+7	review-cpu-ports	MULTI_MODULE	false	review-hotspot-shared	x86_64/aarch64/riscv64/ppc64 plus noncontinuation consistency paths are accounted for
+8	review-java-serviceability	MULTI_MODULE	false	review-cpu-ports	java.base JNI SA JVMTI JFR and selector supporting atoms are accounted for
+9	compose-opt-in-candidate	MULTI_MODULE	true	review-java-serviceability	candidate preserves Java21 default and enables unpinning only under explicit compatible locking mode
+10	build-tiered-hotspot	MULTI_MODULE	false	compose-opt-in-candidate	server VM and affected ports compile with no contract drift
+11	virtual-thread-jtreg	MULTI_MODULE	false	build-tiered-hotspot	monitor enter wait notify JNI JVMTI JFR continuation and selector regressions pass
+12	default-compat-smoke	MULTI_MODULE	false	virtual-thread-jtreg	no-flag Java21 default remains LM_LEGACY and existing behavior/diagnostics remain available
+13	opt-in-unpin-smoke	MULTI_MODULE	false	default-compat-smoke	-XX:LockingMode=2 demonstrates synchronized virtual-thread unmount without carrier pinning
+14	fixed-point	MULTI_MODULE	false	opt-in-unpin-smoke	recipe DAG second pass is unchanged
+15	promotion	LIBRARY_API	false	fixed-point	serial review accepts exact verified runtime packet or leaves it unpromoted

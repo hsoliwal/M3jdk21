@@ -1,0 +1,208 @@
+{
+  "compositionOrdersSHA256": "b13eb304cf413b9730f503e01f6ae4fb3df8ba8a5c03aa4758c368cdd1c777c6",
+  "compositionYamlSHA256": "8dda0dfb202d2e2502b07e1cfaee03b180a2f132c303dbb8fd3d7fbe37f47b6f",
+  "counts": {
+    "additions": 3,
+    "families": 4,
+    "initialRefusals": 77,
+    "mixedStates": 92,
+    "orderedCompositions": 2,
+    "postScanRefusals": 30,
+    "pureAdditionInputs": 0,
+    "replacements": 12,
+    "targets": 15
+  },
+  "families": [
+    {
+      "crate": "fc0-cwf",
+      "id": "Cwf",
+      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/fc0-cwf/manifest.tsv",
+      "manifestSHA256": "cea64f87482a492daeea04f17edf41093c94a427506dab39049a360eec411979",
+      "namedRecipe": "com.synexia.m3.Fc0Cwf",
+      "targets": [
+        {
+          "afterBytes": 5526,
+          "afterSHA256": "1aa2a7a495a00d3a0754bcf776cf7d3ef3bd176134186bfe1ec4004bb8a74616",
+          "beforeBytes": 5105,
+          "beforeSHA256": "1a0ef88a0edc06a87cc2d899edccb2ae931d7bec303448277b1c83f7ea782ecb",
+          "operation": "REPLACE",
+          "path": ".github/workflows/m3-lane28.yml"
+        },
+        {
+          "afterBytes": 79652,
+          "afterSHA256": "0d8ad720976c1de51cf8accad95cc149a06abfe2187041fcc25d524c1f630e09",
+          "beforeBytes": 79534,
+          "beforeSHA256": "7d1c50f1340f811f48e17a64b0674fcf631219f69c7878531602b09310beb198",
+          "operation": "REPLACE",
+          "path": "m3/tooling/image-gates/current-c0.json"
+        },
+        {
+          "afterBytes": 12302,
+          "afterSHA256": "8e528a40493920c86822157760c205c04a2ea11aed4da9c283ad580039d81fb5",
+          "beforeBytes": null,
+          "beforeSHA256": "ABSENT",
+          "operation": "ADD",
+          "path": "m3/tooling/lane28/src/test/python/test_ic0_context.py"
+        },
+        {
+          "afterBytes": 6709,
+          "afterSHA256": "4688351e17868d0d0fae16d107e018f015b7d48343e89ee3c97ad7de6b2ef2e1",
+          "beforeBytes": 5146,
+          "beforeSHA256": "5ca191f85c48be0ffec139b94d0ed91e0ac58be73686773241255f651799ec4b",
+          "operation": "REPLACE",
+          "path": "m3/tooling/lane28/verify-plan.py"
+        },
+        {
+          "afterBytes": 14147,
+          "afterSHA256": "551d3c38068c7a1f91bddd428cef8b1831b4bb623711cb7ec969db1f0e1db0fe",
+          "beforeBytes": null,
+          "beforeSHA256": "ABSENT",
+          "operation": "ADD",
+          "path": "m3/tooling/tq-sync/src/test/python/test_ic0_context.py"
+        },
+        {
+          "afterBytes": 6404,
+          "afterSHA256": "901cadc8f11d33934182e53a7d3d7829856eebd1cf3d370dc8dfccabc1a686b8",
+          "beforeBytes": 3719,
+          "beforeSHA256": "ca29fa3e9a6660a8006f99702fc8c3db2839049af00a8eeee4a435701cf5f36e",
+          "operation": "REPLACE",
+          "path": "m3/tooling/tq-sync/verify-plan.py"
+        }
+      ],
+      "yamlPath": "META-INF/rewrite/fc0-cwf.yml",
+      "yamlSHA256": "e481f4cd6c06556736228496ab63ecf5b5a694a764c5142476ba0fc2f9d5fd3d"
+    },
+    {
+      "crate": "fc0-tqc",
+      "id": "Tqc",
+      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/fc0-tqc/manifest.tsv",
+      "manifestSHA256": "78dcf91b92f44e0851fc4d11217b99ad30d697ec9ab4cc688b7a5a1e899afe1b",
+      "namedRecipe": "com.synexia.m3.Fc0Tqc",
+      "targets": [
+        {
+          "afterBytes": 5101,
+          "afterSHA256": "84d3b48257a3c53b79c5aa5b2e6432951db2ff6a0d64822d85c1bca8b250d875",
+          "beforeBytes": 4804,
+          "beforeSHA256": "ed5bb9a6a3bcd32eb13dabf7cfc60ac406fe89b1eb34c0fe01286fc4327ae894",
+          "operation": "REPLACE",
+          "path": ".github/workflows/m3-tq.yml"
+        },
+        {
+          "afterBytes": 12272,
+          "afterSHA256": "907657e2bdc3a26c4cd24494e60734148c641ef87d0e7c6343ca31aa6da3d6d1",
+          "beforeBytes": null,
+          "beforeSHA256": "ABSENT",
+          "operation": "ADD",
+          "path": "m3/tooling/tq/src/test/python/test_ic0_context.py"
+        },
+        {
+          "afterBytes": 6648,
+          "afterSHA256": "04859b1701462a8648212f2cc638d1d761bc81afe5eb4187751d73c62061f3f3",
+          "beforeBytes": 5089,
+          "beforeSHA256": "ff2c31f57aac81a7049612557a3757781927563bd2d7a7b598aa62a116e1d978",
+          "operation": "REPLACE",
+          "path": "m3/tooling/tq/verify-plan.py"
+        }
+      ],
+      "yamlPath": "META-INF/rewrite/fc0-tqc.yml",
+      "yamlSHA256": "83304d7091f0fd54b93492745ee80e7884bbaf2e8e0312482c18b05d678f79ea"
+    },
+    {
+      "crate": "fc0-pdc",
+      "id": "Pdc",
+      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/fc0-pdc/manifest.tsv",
+      "manifestSHA256": "fa7fd3b28b9a5cd05aab4052c84f85e29370909a6f3ece9a66f4ad8de2fa3a0f",
+      "namedRecipe": "com.synexia.m3.Fc0Pdc",
+      "targets": [
+        {
+          "afterBytes": 235261,
+          "afterSHA256": "68882a345277e74065e1f31fc85f07444eb7e3164a44a4226b629c80bfcb9843",
+          "beforeBytes": 235235,
+          "beforeSHA256": "8cbd439235c592ecc98eb2a26f8494108c18a6521e715431ca1bec6db1e0b170",
+          "operation": "REPLACE",
+          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/10-Pattern.java.txt"
+        },
+        {
+          "afterBytes": 3300,
+          "afterSHA256": "d67ddc1cc759f042871c680d9510b929da4fd6b0523b43e966139cbe8ddace3b",
+          "beforeBytes": 3300,
+          "beforeSHA256": "0285ce4946d66bea00e0b5d4bd52e863e5d60f84bb71171a26bdbd4c61da0bd9",
+          "operation": "REPLACE",
+          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence/manifest.tsv"
+        },
+        {
+          "afterBytes": 18329,
+          "afterSHA256": "ad8f41c47e2635f8863361cb790b1c2f53f394da58e449b60a229ba6722aba3d",
+          "beforeBytes": 18329,
+          "beforeSHA256": "dde797e49266f4d89ec271cb705f238a72d26e95e5e5865c6b608d924fde9d0d",
+          "operation": "REPLACE",
+          "path": "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/atom/spectrum/CORPUS.tsv"
+        },
+        {
+          "afterBytes": 235261,
+          "afterSHA256": "68882a345277e74065e1f31fc85f07444eb7e3164a44a4226b629c80bfcb9843",
+          "beforeBytes": 235235,
+          "beforeSHA256": "8cbd439235c592ecc98eb2a26f8494108c18a6521e715431ca1bec6db1e0b170",
+          "operation": "REPLACE",
+          "path": "src/java.base/share/classes/java/util/regex/Pattern.java"
+        }
+      ],
+      "yamlPath": "META-INF/rewrite/fc0-pdc.yml",
+      "yamlSHA256": "96b0941b1a3b535c704c84ce36e311b8bbc0ff87aca115aa84de26b9795743ba"
+    },
+    {
+      "crate": "fc0-clr",
+      "id": "Clr",
+      "manifestPath": "com/m3/rewrite/backport/jdk21-hash-pinned-text/fc0-clr/manifest.tsv",
+      "manifestSHA256": "4c6996b6d5f06fb13742cd1ab6d44113bb936d9a7f624b18edd6aad6377d2809",
+      "namedRecipe": "com.synexia.m3.Fc0Clr",
+      "targets": [
+        {
+          "afterBytes": 8717,
+          "afterSHA256": "3a3b0ca7bc3c77f815760bf154e5df5ef7dda11cc6f4582c658a8a73b9062ce6",
+          "beforeBytes": 8906,
+          "beforeSHA256": "5ee44459bd8725b89e92ad8cd0c7572954f7655331d8b7f7dc92a8b59b09cb6e",
+          "operation": "REPLACE",
+          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/03-M3RecipeScopeDeclarationTest.java.txt"
+        },
+        {
+          "afterBytes": 934,
+          "afterSHA256": "da69ef6a5f2c138b524a4a469a90bb84c1d96e66fecbe68338aa8f69cf32ad8a",
+          "beforeBytes": 934,
+          "beforeSHA256": "0f79229a093fc3a53158401bb29a627e71f2774292b4d727e6c0911b9f2a47c9",
+          "operation": "REPLACE",
+          "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-recipe-closure/manifest.tsv"
+        }
+      ],
+      "yamlPath": "META-INF/rewrite/fc0-clr.yml",
+      "yamlSHA256": "f5e65cc8c1304e453a5d8a488ef6a68a76f6d17636b1636093eedf9956ca5554"
+    }
+  ],
+  "orders": [
+    {
+      "families": [
+        "Cwf",
+        "Tqc",
+        "Pdc",
+        "Clr"
+      ],
+      "id": "Forward",
+      "recipe": "com.synexia.m3.Fc0Forward"
+    },
+    {
+      "families": [
+        "Clr",
+        "Pdc",
+        "Tqc",
+        "Cwf"
+      ],
+      "id": "Reverse",
+      "recipe": "com.synexia.m3.Fc0Reverse"
+    }
+  ],
+  "ownerSHA256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+  "schema": "synexia.fc0.qualification/1",
+  "sourceCommit": "d1ecbd43dbadaf218deec0d98a2ddc23f3a3f45c",
+  "targetCommit": "c0a14387009aefc7d62bd3268055d526e04f9074",
+  "targetTree": "491bbd80a51483d0710fc12c1bad3a037b385ba0"
+}

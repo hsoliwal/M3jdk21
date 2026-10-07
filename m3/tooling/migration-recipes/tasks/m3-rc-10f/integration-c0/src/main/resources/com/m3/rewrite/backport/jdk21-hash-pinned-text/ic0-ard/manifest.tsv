@@ -1,0 +1,4 @@
+m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-mastery-receipt-workflow.yml	ABSENT	3a17ae820b3962b8b3481e1c96217f593c348643d5cbd5f3a3c6dae218aa9683	target-1.txt
+m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-mastery-receipt.yml	ABSENT	c29d8a05ff2ff6b7e684c276b070a439c6a3ef145671f26ad6a77a8cf09d4c0a	target-2.txt
+m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3MasteryReceiptDeliveryRecipeTest.java	ABSENT	f8e225a3cc43fdb8e56534a78997760774601deafc95a05c87d5975ed5cb5aad	target-3.txt
+m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3MasteryReceiptWorkflowRecipeTest.java	ABSENT	a8e7c77c57e9b9517cc14b8659e8b46e2cce11b29ea7ac0a35c80ab8ac7e8c48	target-4.txt

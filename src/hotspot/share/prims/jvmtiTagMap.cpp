@@ -662,7 +662,8 @@ static jint invoke_string_value_callback(jvmtiStringPrimitiveValueCallback cb,
 
   // JDK-6584008: the value field may be null if a String instance is
   // partially constructed.
-  if (s_value == nullptr) {
+  bool segmented = java_lang_String::is_m3_joined(str);
+  if (s_value == nullptr && !segmented) {
     return 0;
   }
   // get the string value and length
@@ -670,14 +671,14 @@ static jint invoke_string_value_callback(jvmtiStringPrimitiveValueCallback cb,
   int s_len = java_lang_String::length(str);
   bool is_latin1 = java_lang_String::is_latin1(str);
   jchar* value;
-  if (s_len > 0) {
-    if (!is_latin1) {
+  if (s_len > 0 || segmented) {
+    if (!is_latin1 && !segmented) {
       value = s_value->char_at_addr(0);
     } else {
-      // Inflate latin1 encoded string to UTF16
-      jchar* buf = NEW_C_HEAP_ARRAY(jchar, s_len, mtInternal);
+      // Native scratch for segmented content or inflated latin1.
+      jchar* buf = NEW_C_HEAP_ARRAY(jchar, MAX2(s_len, 1), mtInternal);
       for (int i = 0; i < s_len; i++) {
-        buf[i] = ((jchar) s_value->byte_at(i)) & 0xff;
+        buf[i] = java_lang_String::char_at(str, i);
       }
       value = &buf[0];
     }
@@ -694,7 +695,7 @@ static jint invoke_string_value_callback(jvmtiStringPrimitiveValueCallback cb,
                    (jint)s_len,
                    user_data);
 
-  if (is_latin1 && s_len > 0) {
+  if ((is_latin1 && s_len > 0) || segmented) {
     FREE_C_HEAP_ARRAY(jchar, value);
   }
   return res;

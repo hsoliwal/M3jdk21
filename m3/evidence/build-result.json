@@ -1,0 +1,27 @@
+{
+  "base_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
+  "native_build_exit": 0,
+  "configuration": "linux-x86_64-server-fastdebug",
+  "compiler": "GCC/G++ 14.2.0",
+  "image_sha256": {
+    "release": "546219d789283a4b3425a4da0368a3b5b77d2f90418d5a8fe541b5b4d8f02a91",
+    "bin/java": "0baa136483ac435ff4fd4fc925bf6b7308c2b5f39e8f5204f5dc81aaffdcc0be",
+    "lib/server/libjvm.so": "01566d2964e4259395419757c0d5f4df312b1686ce5aee6e0f1610e85e31d0d1",
+    "lib/modules": "fb9a8cae7807ff84074940927b8efb961ad1b863269852f4b7024988238368e8"
+  },
+  "foundation_checks_per_mode": 70462,
+  "foundation_modes": [
+    "jit",
+    "int",
+    "nocompact",
+    "c2"
+  ],
+  "synexia_reference_commit": "9c36c18a7778e6096148a3bbee8f2af7575138b4",
+  "synexia_content_range_checks": 786432,
+  "jdk_semantic_checks_per_mode": 808685,
+  "jdk_semantic_digest": "30e36ec204f5aec8e0d672ff5be675d3f8ac1677164481ec82a335b2540da499",
+  "upstream_direct_main_invocations": 18,
+  "full_jtreg_run": false,
+  "transparent_joined_string": false,
+  "library_evidence_id": "libfile_975f86c121a4819188d48a748c012820"
+}

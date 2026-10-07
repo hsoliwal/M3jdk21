@@ -1,0 +1,176 @@
+===== recovery.txt =====
+PR99 snapshot resource Git blob checks PASS; original interface/owner/test match live connector reads. MapFacts patch applies to exact partial export. NOT a full checkout.
+44 PR99 added files recovered.
+
+===== baseline-utf-results.tsv =====
+mode	exit	mismatch_admitted
+valid	0	False
+bad-0	1	True
+bad-1	1	True
+bad-2	1	True
+bad-3	1	True
+bad-4	1	True
+bad-5	1	True
+bad-6	1	True
+bad-7	1	True
+bad-8	1	True
+bad-9	1	True
+bad-10	1	True
+bad-11	1	True
+bad-12	1	True
+bad-13	1	True
+bad-14	1	True
+bad-15	1	True
+
+===== baseline-utf-valid.log =====
+MAP_UTF_PASS checks=984834 specimens=171 fdChecks=0 mode=valid
+
+===== baseline-utf-bad-0.log =====
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_UTF8_MISMATCH case=0 scalarLength=3 bytes=3
+	at MapUtfTest.invalid(MapUtfTest.java:126)
+	at MapUtfTest.main(MapUtfTest.java:68)
+
+===== baseline-utf-bad-1.log =====
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_UTF8_MISMATCH case=1 scalarLength=3 bytes=2
+	at MapUtfTest.invalid(MapUtfTest.java:126)
+	at MapUtfTest.main(MapUtfTest.java:68)
+
+===== baseline-utf-bad-2.log =====
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_UTF8_MISMATCH case=2 scalarLength=3 bytes=4
+	at MapUtfTest.invalid(MapUtfTest.java:126)
+	at MapUtfTest.main(MapUtfTest.java:68)
+
+===== baseline-utf-bad-3.log =====
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_UTF8_MISMATCH case=3 scalarLength=0 bytes=1
+	at MapUtfTest.invalid(MapUtfTest.java:126)
+	at MapUtfTest.main(MapUtfTest.java:68)
+
+===== baseline-utf-bad-4.log =====
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_UTF8_MISMATCH case=4 scalarLength=1 bytes=2
+	at MapUtfTest.invalid(MapUtfTest.java:126)
+	at MapUtfTest.main(MapUtfTest.java:68)
+
+===== baseline-utf-bad-5.log =====
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_UTF8_MISMATCH case=5 scalarLength=1 bytes=3
+	at MapUtfTest.invalid(MapUtfTest.java:126)
+	at MapUtfTest.main(MapUtfTest.java:68)
+
+===== baseline-utf-bad-6.log =====
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_UTF8_MISMATCH case=6 scalarLength=1 bytes=3
+	at MapUtfTest.invalid(MapUtfTest.java:126)
+	at MapUtfTest.main(MapUtfTest.java:68)
+
+===== baseline-utf-bad-7.log =====
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_UTF8_MISMATCH case=7 scalarLength=2 bytes=6
+	at MapUtfTest.invalid(MapUtfTest.java:126)
+	at MapUtfTest.main(MapUtfTest.java:68)
+
+===== baseline-utf-bad-8.log =====
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_UTF8_MISMATCH case=8 scalarLength=1 bytes=3
+	at MapUtfTest.invalid(MapUtfTest.java:126)
+	at MapUtfTest.main(MapUtfTest.java:68)
+
+===== baseline-utf-bad-9.log =====
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_UTF8_MISMATCH case=9 scalarLength=1 bytes=1
+	at MapUtfTest.invalid(MapUtfTest.java:126)
+	at MapUtfTest.main(MapUtfTest.java:68)
+
+===== baseline-utf-bad-10.log =====
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_UTF8_MISMATCH case=10 scalarLength=2 bytes=4
+	at MapUtfTest.invalid(MapUtfTest.java:126)
+	at MapUtfTest.main(MapUtfTest.java:68)
+
+===== baseline-utf-bad-11.log =====
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_UTF8_MISMATCH case=11 scalarLength=2 bytes=3
+	at MapUtfTest.invalid(MapUtfTest.java:126)
+	at MapUtfTest.main(MapUtfTest.java:68)
+
+===== baseline-utf-bad-12.log =====
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_UTF8_MISMATCH case=12 scalarLength=1 bytes=3
+	at MapUtfTest.invalid(MapUtfTest.java:126)
+	at MapUtfTest.main(MapUtfTest.java:68)
+
+===== baseline-utf-bad-13.log =====
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_UTF8_MISMATCH case=13 scalarLength=2 bytes=1
+	at MapUtfTest.invalid(MapUtfTest.java:126)
+	at MapUtfTest.main(MapUtfTest.java:68)
+
+===== baseline-utf-bad-14.log =====
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_UTF8_MISMATCH case=14 scalarLength=2 bytes=2
+	at MapUtfTest.invalid(MapUtfTest.java:126)
+	at MapUtfTest.main(MapUtfTest.java:68)
+
+===== baseline-utf-bad-15.log =====
+Exception in thread "main" java.lang.AssertionError: ACCEPTED_UTF8_MISMATCH case=15 scalarLength=1 bytes=2
+	at MapUtfTest.invalid(MapUtfTest.java:126)
+	at MapUtfTest.main(MapUtfTest.java:68)
+
+===== utf-old-gates.log =====
+/mnt/data/jdk-finish/source/src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java: OK
+/mnt/data/jdk-finish/source/src/java.base/share/classes/jdk/internal/mindex/MIndexMappedStringBacking.java: OK
+/mnt/data/jdk-finish/source/test/jdk/java/lang/String/MIndexMappedStringBackingTest.java: OK
+/mnt/data/jdk-finish/source/test/jdk/java/lang/String/MapGuardTest.java: OK
+MINDEX_JDK_MAPPED_BACKING_PASS|utf16=1|utf8=1|alias=1|substring=1|jni=0
+MAP_GUARD_FD_PASS outer=16 inner=16 nested=4
+MAP_GUARD_PASS group=all checks=78
+MINDEX_JDK_MAPPED_BACKING_PASS|utf16=1|utf8=1|alias=1|substring=1|jni=0
+MAP_GUARD_FD_PASS outer=16 inner=16 nested=4
+MAP_GUARD_PASS group=all checks=78
+SCOPED_BACKING_PROOF_PASS; full-JDK/Maven/jtreg/coverage not implied
+
+===== MapFactsTest-default.log =====
+MAP_FACTS_PASS checks=370960 specimens=158 fdChecks=24 mode=all
+
+===== MapFactsTest-interpreter.log =====
+MAP_FACTS_PASS checks=370960 specimens=158 fdChecks=24 mode=all
+
+===== MapFactsTest-noncompact.log =====
+MAP_FACTS_PASS checks=370960 specimens=158 fdChecks=24 mode=all
+
+===== MapFactsTest-c2.log =====
+MAP_FACTS_PASS checks=370960 specimens=158 fdChecks=24 mode=all
+
+===== MapUtfTest-default.log =====
+MAP_UTF_PASS checks=985026 specimens=187 fdChecks=16 mode=all
+
+===== MapUtfTest-interpreter.log =====
+MAP_UTF_PASS checks=985026 specimens=187 fdChecks=16 mode=all
+
+===== MapUtfTest-noncompact.log =====
+MAP_UTF_PASS checks=985026 specimens=187 fdChecks=16 mode=all
+
+===== MapUtfTest-c2.log =====
+MAP_UTF_PASS checks=985026 specimens=187 fdChecks=16 mode=all
+
+===== mutation.json =====
+[
+  {
+    "mutant": "no-binding",
+    "exit": 1,
+    "diagnostic": "Exception in thread \"main\" java.lang.AssertionError: ACCEPTED_UTF8_MISMATCH case=0 scalarLength=3 bytes=3"
+  },
+  {
+    "mutant": "no-tail",
+    "exit": 1,
+    "diagnostic": "Exception in thread \"main\" java.lang.AssertionError: ACCEPTED_UTF8_MISMATCH case=2 scalarLength=3 bytes=4"
+  },
+  {
+    "mutant": "no-byte-equality",
+    "exit": 1,
+    "diagnostic": "Exception in thread \"main\" java.lang.AssertionError: ACCEPTED_UTF8_MISMATCH case=0 scalarLength=3 bytes=3"
+  },
+  {
+    "mutant": "wrong-replacement",
+    "exit": 1,
+    "diagnostic": "Exception in thread \"main\" java.lang.IllegalStateException: corrupt MIndex mapped backing: text UTF-8 encoding at 64"
+  }
+]
+
+===== recipe-syntax.log =====
+PARSE_ONLY_PASS units=3; NO attribution/framework execution
+
+===== maven.log =====
+bash: line 30: mvn: command not found
+
+===== maven.exit =====
+127

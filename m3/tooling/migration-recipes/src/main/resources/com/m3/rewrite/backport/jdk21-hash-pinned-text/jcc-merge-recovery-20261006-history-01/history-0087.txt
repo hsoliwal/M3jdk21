@@ -1,0 +1,199 @@
+{
+  "purpose": "Read-only review source table, not a new migration registry or an installer input",
+  "review_scope": "Four complete final Java owners, their full baseline diffs, exact local byte/hash comparisons and retained publication/replay evidence. No remote read, compilation, build or tests executed.",
+  "manifest": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/current-integration-0b8dc/publication/FINAL_MANIFEST.json",
+    "sha256": "762bdfefcc4340b7288d646e97390f7bb8358a8efac22985c6e6f0fbf57d547d",
+    "publication_recorded_sha256": "762bdfefcc4340b7288d646e97390f7bb8358a8efac22985c6e6f0fbf57d547d"
+  },
+  "publication_receipt": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/SOURCE_IMPLEMENTATION_PUBLICATION_VERIFIED.json",
+    "sha256": "03ba5aa231929079fda7772dc6a798a687ba7486fa81ceacc0723407330f956a",
+    "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+    "tree": "6f9b6a48f8cefa7a643f222c7aa1f621497725e7",
+    "branch": "aix/jcc-canonical-integration-20261005",
+    "qualification": "BLOCKED_AT_REQUIRED_UPSTREAM_RUNTIME_GATE_46",
+    "tests": {
+      "core": {
+        "passed": 91,
+        "errors": 0
+      },
+      "parent": {
+        "passed": 8,
+        "errors": 0
+      },
+      "upstream": {
+        "passed": 66,
+        "errors": 1,
+        "tests": 67
+      }
+    },
+    "later_jni_gates": "UNEXECUTED"
+  },
+  "sources": [
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+      "root_tree": "6f9b6a48f8cefa7a643f222c7aa1f621497725e7",
+      "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005",
+      "module": "m3-fast-search",
+      "path": "m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+      "symbol": "com.synexia.m3.search.CompetitiveProblemReview",
+      "public_declaration": "public final class CompetitiveProblemReview",
+      "sha256": "c0f9acc4a64229fb911a5a8e0b211473b058fe67739fc38fca72a4c49c9e4046",
+      "git_blob_sha1": "f460f84bc5c0dc1a0970af3c6081c23875aa4067",
+      "bytes": 48432,
+      "mode": "100644",
+      "revision_role": "pinned",
+      "baseline": {
+        "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+        "root_tree": "3a270e543f9a547582ebda8ac8b69bfd134c41be",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+        "sha256": "c0ea0f3d0c50a81a2fa353adb0542d60e648aed93028775de5fabd55d8bd8024",
+        "git_blob_sha1": "7971a486846bc0329b986d6567b1ef8ad4a1be7b",
+        "bytes": 48085
+      },
+      "final_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+      "manifest_hashes_lengths_match": true,
+      "recorded_publication_blob_length_mode_match": true,
+      "recipe_result_provenance": {
+        "phase": "apply-main",
+        "result_row": [
+          "result",
+          "m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+          "m3-fast-search/src/main/java/com/synexia/m3/search/CompetitiveProblemReview.java",
+          "c0ea0f3d0c50a81a2fa353adb0542d60e648aed93028775de5fabd55d8bd8024",
+          "c0f9acc4a64229fb911a5a8e0b211473b058fe67739fc38fca72a4c49c9e4046"
+        ],
+        "receipt": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/apply-main/receipts/materialization.tsv",
+        "receipt_sha256": "eb18eba66a36827de02c9bfab3ebf034d0f94d4620e285d261ace76f02d8574e",
+        "second_application_changes": 0
+      },
+      "recommended_existing_record": "synexia.jcc-java-jni-regression",
+      "recommended_binding_scope": "Source obligation: donor/category/planning metadata only; no destination execution or acceptance transfer."
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+      "root_tree": "6f9b6a48f8cefa7a643f222c7aa1f621497725e7",
+      "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005",
+      "module": "synexia-algo",
+      "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+      "symbol": "com.synexia.algorithms.corpus.ChallengeDonorPassLedger",
+      "public_declaration": "public final class ChallengeDonorPassLedger",
+      "sha256": "a089808e8563bac1f2d57aa1cc9f131e609c1d01ffcb1af8b302579adb00c346",
+      "git_blob_sha1": "074dd60249893e4c606e68823fdebf191f98f269",
+      "bytes": 33076,
+      "mode": "100644",
+      "revision_role": "pinned",
+      "baseline": {
+        "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+        "root_tree": "3a270e543f9a547582ebda8ac8b69bfd134c41be",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+        "sha256": "3c9b1c00836f9eb97c741482d252aa581dabb0643cf181cd4eb880409b37455f",
+        "git_blob_sha1": "945d7476e169c5af6e70321b5639b51009b26c51",
+        "bytes": 33077
+      },
+      "final_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+      "manifest_hashes_lengths_match": true,
+      "recorded_publication_blob_length_mode_match": true,
+      "recipe_result_provenance": {
+        "phase": "apply-main",
+        "result_row": [
+          "result",
+          "synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+          "synexia-algo/src/main/java/com/synexia/algorithms/corpus/ChallengeDonorPassLedger.java",
+          "3c9b1c00836f9eb97c741482d252aa581dabb0643cf181cd4eb880409b37455f",
+          "a089808e8563bac1f2d57aa1cc9f131e609c1d01ffcb1af8b302579adb00c346"
+        ],
+        "receipt": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/apply-main/receipts/materialization.tsv",
+        "receipt_sha256": "eb18eba66a36827de02c9bfab3ebf034d0f94d4620e285d261ace76f02d8574e",
+        "second_application_changes": 0
+      },
+      "recommended_existing_record": "synexia.jcc-java-jni-regression",
+      "recommended_binding_scope": "Source obligation: donor/category/planning metadata only; no destination execution or acceptance transfer."
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+      "root_tree": "6f9b6a48f8cefa7a643f222c7aa1f621497725e7",
+      "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005",
+      "module": "synexia-algo",
+      "path": "synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
+      "symbol": "com.synexia.algorithms.corpus.CompetitiveCapabilityPlanIndex",
+      "public_declaration": "public final class CompetitiveCapabilityPlanIndex",
+      "sha256": "59742f333ab2a04c3cd5b12061bff182e9a2114549117ce323928d391c10fafa",
+      "git_blob_sha1": "e4e55dbc3f9255ad71dfa391c43c352b31472622",
+      "bytes": 17440,
+      "mode": "100644",
+      "revision_role": "pinned",
+      "baseline": {
+        "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+        "root_tree": "3a270e543f9a547582ebda8ac8b69bfd134c41be",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
+        "sha256": "718d541f102f6c4286f23d077462d2bd28b922e3da48437d3bcbd1e12aa23696",
+        "git_blob_sha1": "8e93b636be03eda4b3608a754de4442c500b32d1",
+        "bytes": 17409
+      },
+      "final_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
+      "manifest_hashes_lengths_match": true,
+      "recorded_publication_blob_length_mode_match": true,
+      "recipe_result_provenance": {
+        "phase": "apply-main",
+        "result_row": [
+          "result",
+          "synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
+          "synexia-algo/src/main/java/com/synexia/algorithms/corpus/CompetitiveCapabilityPlanIndex.java",
+          "718d541f102f6c4286f23d077462d2bd28b922e3da48437d3bcbd1e12aa23696",
+          "59742f333ab2a04c3cd5b12061bff182e9a2114549117ce323928d391c10fafa"
+        ],
+        "receipt": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/apply-main/receipts/materialization.tsv",
+        "receipt_sha256": "eb18eba66a36827de02c9bfab3ebf034d0f94d4620e285d261ace76f02d8574e",
+        "second_application_changes": 0
+      },
+      "recommended_existing_record": "synexia.jcc-java-jni-regression",
+      "recommended_binding_scope": "Source obligation: donor/category/planning metadata only; no destination execution or acceptance transfer."
+    },
+    {
+      "repo": "hsoliwal/com.synexia",
+      "commit": "d1cf2d81ee74a4a837f78e0cd2e4ccae2b3d4906",
+      "root_tree": "6f9b6a48f8cefa7a643f222c7aa1f621497725e7",
+      "tracking_ref": "refs/heads/aix/jcc-canonical-integration-20261005",
+      "module": "synexia-donor-inventory",
+      "path": "synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java",
+      "symbol": "com.synexia.donor.DonorMechanicalShapeCatalog",
+      "public_declaration": "public final class DonorMechanicalShapeCatalog",
+      "sha256": "32ad3ecb53a611de29ce8bdcf4079d77576b3b6d5a56a847b67c9cbd5c91b326",
+      "git_blob_sha1": "108514ff8960adc20c9fd88d4fd01ba55cc2f3c8",
+      "bytes": 20208,
+      "mode": "100644",
+      "revision_role": "pinned",
+      "baseline": {
+        "commit": "0b8dc32b9e8a616b7b7141bbdd88722839dc64bc",
+        "root_tree": "3a270e543f9a547582ebda8ac8b69bfd134c41be",
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-baseline-0b8dc/synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java",
+        "sha256": "0cb91a21a5c22f2fcb6f6e04e76a86466eaa5136bd2552686975a31a64e8e58c",
+        "git_blob_sha1": "de2aef65929789474124003579d15169835fd5eb",
+        "bytes": 20254
+      },
+      "final_local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/final-repo-0b8dc/synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java",
+      "manifest_hashes_lengths_match": true,
+      "recorded_publication_blob_length_mode_match": true,
+      "recipe_result_provenance": {
+        "phase": "apply-main",
+        "result_row": [
+          "result",
+          "synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java",
+          "synexia-donor-inventory/src/main/java/com/synexia/donor/DonorMechanicalShapeCatalog.java",
+          "0cb91a21a5c22f2fcb6f6e04e76a86466eaa5136bd2552686975a31a64e8e58c",
+          "32ad3ecb53a611de29ce8bdcf4079d77576b3b6d5a56a847b67c9cbd5c91b326"
+        ],
+        "receipt": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/evidence/current0b/final-replay/run.VCEcA3ZU/apply-main/receipts/materialization.tsv",
+        "receipt_sha256": "eb18eba66a36827de02c9bfab3ebf034d0f94d4620e285d261ace76f02d8574e",
+        "second_application_changes": 0
+      },
+      "recommended_existing_record": "synexia.jcc-java-jni-regression",
+      "recommended_binding_scope": "Source obligation: donor/category/planning metadata only; no destination execution or acceptance transfer."
+    }
+  ]
+}

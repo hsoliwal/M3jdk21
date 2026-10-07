@@ -1,0 +1,4 @@
+m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3/M3A3MasteryV6Recipe.java	ABSENT	eb28c15b30a454a2e7a10c6a99791e101f811248762ce7f5104d322b9c2773d6	target-1.txt
+m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-mastery-v6.yml	ABSENT	f0f9ce2d1252cc5ab0de210f1f06623227db7b702961c5aecf966ad12b3041e5	target-2.txt
+m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3A3MasteryV6DeliveryTest.java	ABSENT	2d5e39a2d1dcdc37f5008929f72de335ae96d6408a3516f8246f956f7c43b2d5	target-3.txt
+m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/a3/M3A3MasteryV6RecipeTest.java	ABSENT	990ac79aad3fcc1d7df181a57504a29d39025f7c3effe15e7794644c889832a7	target-4.txt

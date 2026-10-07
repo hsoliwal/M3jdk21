@@ -1,0 +1,107 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 JNI product repair
+on:
+  push:
+    branches: ['m3/jdk-proof-20261004']
+    paths:
+      - 'm3/runtime-integration/fix/**'
+      - '.github/workflows/m3-jni-fix.yml'
+      - 'm3/tooling/migration-recipes/verification/jni/**'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JniTest.java'
+permissions:
+  contents: read
+jobs:
+  product:
+    if: github.repository == 'hsoliwal/M3jdk21' && github.ref == 'refs/heads/m3/jdk-proof-20261004'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 75
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Apply the exact packet using its retained engine
+        run: |
+          set -euo pipefail
+          mkdir -p m3/build/jni-fix
+          git rev-parse HEAD > m3/build/jni-fix/base.txt
+          mvn -B -ntp -f m3/tooling/migration-recipes/verification/jni/pom.xml clean test 2>&1 | tee m3/build/jni-fix/installer-test.log
+          mvn -B -ntp -f m3/runtime-integration/fix/pom.xml -Papply verify 2>&1 | tee m3/build/jni-fix/recipe.log
+          python3 -S m3/runtime-integration/fix/Fix.py --check | tee m3/build/jni-fix/fixed-point.log
+          git diff --check
+          git diff --binary > m3/build/jni-fix/applied.patch
+      - name: Prepare native build dependencies
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends autoconf make gcc g++ zip unzip libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+          dpkg-query -W > m3/build/jni-fix/native-packages.txt
+      - name: Build the actual JDK with warnings as errors
+        run: |
+          set -euo pipefail
+          bash configure --with-boot-jdk="$JAVA_HOME" --with-debug-level=release --with-jvm-variants=server --enable-warnings-as-errors 2>&1 | tee m3/build/jni-fix/configure.log
+          make JOBS=2 images 2>&1 | tee m3/build/jni-fix/build.log
+      - name: Run existing real String JNI semantics on the built VM
+        run: |
+          set -euo pipefail
+          export M3_BOOT_JDK="$JAVA_HOME"
+          export M3_TEST_JDK="$PWD/build/linux-x86_64-server-release/images/jdk"
+          export M3_RESULTS="$PWD/m3/build/jni-fix/api"
+          "$M3_TEST_JDK/bin/java" -version 2>&1 | tee m3/build/jni-fix/built-version.log
+          bash m3/runtime-integration/run-api.sh
+          mkdir -p m3/build/jni-fix/mapped
+          "$M3_TEST_JDK/bin/javac" -Xlint:all -Werror --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED -d m3/build/jni-fix/mapped test/jdk/java/lang/String/MIndexMappedStringBackingTest.java
+          "$M3_TEST_JDK/bin/java" -Xcheck:jni --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED -cp m3/build/jni-fix/mapped MIndexMappedStringBackingTest | tee m3/build/jni-fix/mapped.log
+      - name: Save only the tested product delta on a new candidate branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          BASE: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import base64, hashlib, json, os, subprocess
+          from pathlib import Path
+          repo = os.environ['GITHUB_REPOSITORY']
+          base = os.environ['BASE']
+          branch = 'm3/jni-checked-' + base[:12]
+          def api(endpoint, payload=None):
+              args = ['gh', 'api', 'repos/' + repo + '/' + endpoint]
+              if payload is not None:
+                  args += ['--method', 'POST', '--input', '-']
+              result = subprocess.run(args, input=None if payload is None else json.dumps(payload), text=True, capture_output=True, check=True)
+              return json.loads(result.stdout)
+          manifest = json.loads(Path('m3/runtime-integration/fix/manifest.json').read_text())
+          changed = subprocess.check_output(['git', 'diff', '--name-only', base], text=True).splitlines()
+          if sorted(changed) != sorted(manifest['files']):
+              raise SystemExit('unexpected product changes')
+          entries = []
+          for path, hashes in sorted(manifest['files'].items()):
+              original = subprocess.check_output(['git', 'show', base + ':' + path])
+              content = Path(path).read_bytes()
+              if hashlib.sha256(original).hexdigest() != hashes['before'] or hashlib.sha256(content).hexdigest() != hashes['after']:
+                  raise SystemExit('product source drift: ' + path)
+              blob = api('git/blobs', {'content': base64.b64encode(content).decode(), 'encoding': 'base64'})
+              entries.append({'path': path, 'mode': '100644', 'type': 'blob', 'sha': blob['sha']})
+          parent = api('git/commits/' + base)
+          tree = api('git/trees', {'base_tree': parent['tree']['sha'], 'tree': entries})
+          commit = api('git/commits', {'message': 'fix(m3): materialize tested JNI Handle and internal close repair\n\nCandidate only; native image/String JNI proof passed. Complete backport and jtreg admission remain separate.', 'tree': tree['sha'], 'parents': [base]})
+          # POST create-only: an occupied ref is rejected, never updated or force-pushed.
+          api('git/refs', {'ref': 'refs/heads/' + branch, 'sha': commit['sha']})
+          Path('m3/build/jni-fix/candidate.json').write_text(json.dumps({'branch': branch, 'base': base, 'commit': commit['sha'], 'tree': tree['sha'], 'promotion_authority': False, 'jtreg': 'NOT_RUN'}, indent=2) + '\n')
+          PY
+      - name: Preserve exact candidate proof and failure logs
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-jni-fix-${{ github.sha }}
+          path: |
+            m3/build/jni-fix
+            build/*/make-support/failure-logs/**
+          if-no-files-found: error
+          retention-days: 7

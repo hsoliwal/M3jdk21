@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping/java-template/render_template.py", line 183, in <module>
+    main()
+  File "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping/java-template/render_template.py", line 79, in main
+    artifacts, pom = binder.validate_source(packet, json.loads(prior[binder.PATHS[0]]))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping/bind_mapping.py", line 115, in validate_source
+    require(not fixture or allow_fixture, "fixture inputs are unpublishable")
+  File "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping/bind_mapping.py", line 51, in require
+    raise Refusal(message)
+mapping_template_binder.Refusal: fixture inputs are unpublishable

@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.MapUtf
+displayName: Bind mapped UTF8 bytes to the canonical UTF16 scalar
+description: Reuse the existing Java21 codec and source-sealed recipe; retain valid format, prior tests and acquisition guards.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: jdk22-map-utf
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.MapUtfWorkflow
+displayName: Retain mapped text gates and add byte-projection parity
+description: Exact existing workflow update without permission changes or removed tests.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: map-utf

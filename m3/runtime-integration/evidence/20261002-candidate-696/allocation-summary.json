@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "source_commit": "69667e3f1ce673aaded2ad93e4ae2ecf6c59668b",
+  "scope": "existing SegmentedAllocation diagnostic;3interpreter forks per flag; counters exclude object headers/native/mapped metadata",
+  "records": [
+    {
+      "source_output": "tests\\allocation-false-1.json",
+      "source_sha256": "5aadd955f24a40edea9b64538b3987551b5ef87b9b8891549cf1300f74eb9495",
+      "measurement": {
+        "segmented": false,
+        "joins": 2000,
+        "allocated_bytes": 65632176,
+        "operation_ns": 680057860,
+        "retained_leaf_arrays": 2000,
+        "leaf_payload_bytes": 65536000
+      }
+    },
+    {
+      "source_output": "tests\\allocation-false-2.json",
+      "source_sha256": "d404dd7daadb656ef91378349f39aae8a6c0ebc3354dee0c2b0145e57a9f7360",
+      "measurement": {
+        "segmented": false,
+        "joins": 2000,
+        "allocated_bytes": 65632176,
+        "operation_ns": 618622905,
+        "retained_leaf_arrays": 2000,
+        "leaf_payload_bytes": 65536000
+      }
+    },
+    {
+      "source_output": "tests\\allocation-false-3.json",
+      "source_sha256": "52e2d0349239dc9dca857a2af7314996608f8fc3a213463381b01a57dc4ad0de",
+      "measurement": {
+        "segmented": false,
+        "joins": 2000,
+        "allocated_bytes": 65632176,
+        "operation_ns": 638620492,
+        "retained_leaf_arrays": 2000,
+        "leaf_payload_bytes": 65536000
+      }
+    },
+    {
+      "source_output": "tests\\allocation-true-1.json",
+      "source_sha256": "35f58a0426878e32ac393f3f7b2ef31b3918a9a84209721fb85f774d7ab3b5e7",
+      "measurement": {
+        "segmented": true,
+        "joins": 2000,
+        "allocated_bytes": 433056,
+        "operation_ns": 9960806,
+        "retained_leaf_arrays": 2,
+        "leaf_payload_bytes": 24576
+      }
+    },
+    {
+      "source_output": "tests\\allocation-true-2.json",
+      "source_sha256": "6864d7771dad1909abdc4d278fe89b1a4e04f30bb1f190ef7b69d7d06f11bfd6",
+      "measurement": {
+        "segmented": true,
+        "joins": 2000,
+        "allocated_bytes": 433056,
+        "operation_ns": 10289333,
+        "retained_leaf_arrays": 2,
+        "leaf_payload_bytes": 24576
+      }
+    },
+    {
+      "source_output": "tests\\allocation-true-3.json",
+      "source_sha256": "6159852aa2bfbb36ac8f429221d3e669390791909caf870a137954ae52aea318",
+      "measurement": {
+        "segmented": true,
+        "joins": 2000,
+        "allocated_bytes": 433056,
+        "operation_ns": 10067714,
+        "retained_leaf_arrays": 2,
+        "leaf_payload_bytes": 24576
+      }
+    }
+  ],
+  "general_performance_claim": false
+}

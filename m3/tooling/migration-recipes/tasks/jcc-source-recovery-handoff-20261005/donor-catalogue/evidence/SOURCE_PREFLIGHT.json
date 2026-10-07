@@ -1,0 +1,3330 @@
+{
+  "base_branch": "aix/jcc-source-merge-recovery-20261005",
+  "base_commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+  "base_tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
+  "branch": "aix/jcc-donor-catalogue-recovery-20261005",
+  "bytes": 78467,
+  "deletions": 0,
+  "existing_updates": 0,
+  "expected_tree": "1bd86f643f0e08ecb1b5a43d020bf0110e797d68",
+  "file_count": 5,
+  "files": [
+    {
+      "bytes": 3358,
+      "git_blob": "0f024cef89a998670da06f390f14234e0948250c",
+      "historical_commit": "36609e4a8719859b46e540f85013c1126a5e3bc2",
+      "historical_url": "https://github.com/hsoliwal/com.synexia/blob/36609e4a8719859b46e540f85013c1126a5e3bc2/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/AUTHORING_RECEIPT.json",
+      "local_original": {
+        "bytes": 3358,
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/secondary-overlay/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/AUTHORING_RECEIPT.json",
+        "sha256": "b96baa62d0814767fa847d8f6a72dda1972ad673b137fec7c180916b2de098ac"
+      },
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/donor-catalogue-recovery-20261005/payload/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/AUTHORING_RECEIPT.json",
+      "mode": "100644",
+      "operation": "add",
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/AUTHORING_RECEIPT.json",
+      "receiver_binding_status": "PROPOSED_NOT_WRITTEN",
+      "receiver_copy_bytes": "exact source document bytes",
+      "receiver_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/AUTHORING_RECEIPT.json",
+      "receiver_repository": "hsoliwal/M3jdk21",
+      "role": "exact historical donor documentation; no current execution or acceptance promotion",
+      "sha256": "b96baa62d0814767fa847d8f6a72dda1972ad673b137fec7c180916b2de098ac",
+      "source_status": "ABSENT_AT_0c53"
+    },
+    {
+      "bytes": 12750,
+      "git_blob": "d5ff11d9ba0135dbb30d87cb0c0d0e4eab2d5dcc",
+      "historical_commit": "36609e4a8719859b46e540f85013c1126a5e3bc2",
+      "historical_url": "https://github.com/hsoliwal/com.synexia/blob/36609e4a8719859b46e540f85013c1126a5e3bc2/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/DONOR_CATALOGUE.md",
+      "local_original": {
+        "bytes": 12750,
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/secondary-overlay/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/DONOR_CATALOGUE.md",
+        "sha256": "f12b6c4986ab5d283205ecbdddce46a461bb579db2d3c83513cddaed23b722a7"
+      },
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/donor-catalogue-recovery-20261005/payload/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/DONOR_CATALOGUE.md",
+      "mode": "100644",
+      "operation": "add",
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/DONOR_CATALOGUE.md",
+      "receiver_binding_status": "PROPOSED_NOT_WRITTEN",
+      "receiver_copy_bytes": "exact source document bytes",
+      "receiver_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/DONOR_CATALOGUE.md",
+      "receiver_repository": "hsoliwal/M3jdk21",
+      "role": "exact historical donor documentation; no current execution or acceptance promotion",
+      "sha256": "f12b6c4986ab5d283205ecbdddce46a461bb579db2d3c83513cddaed23b722a7",
+      "source_status": "ABSENT_AT_0c53"
+    },
+    {
+      "bytes": 8533,
+      "git_blob": "64e307ac4e3847696d0609bd53031881f0787c76",
+      "historical_commit": "36609e4a8719859b46e540f85013c1126a5e3bc2",
+      "historical_url": "https://github.com/hsoliwal/com.synexia/blob/36609e4a8719859b46e540f85013c1126a5e3bc2/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/EXECUTED_TEST_MAPPING.md",
+      "local_original": {
+        "bytes": 8533,
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/secondary-overlay/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/EXECUTED_TEST_MAPPING.md",
+        "sha256": "6e39cc123a018f72d3cdb02c178326f757b44159c75bd7332435ae5916ca19f9"
+      },
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/donor-catalogue-recovery-20261005/payload/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/EXECUTED_TEST_MAPPING.md",
+      "mode": "100644",
+      "operation": "add",
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/EXECUTED_TEST_MAPPING.md",
+      "receiver_binding_status": "PROPOSED_NOT_WRITTEN",
+      "receiver_copy_bytes": "exact source document bytes",
+      "receiver_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/EXECUTED_TEST_MAPPING.md",
+      "receiver_repository": "hsoliwal/M3jdk21",
+      "role": "exact historical donor documentation; no current execution or acceptance promotion",
+      "sha256": "6e39cc123a018f72d3cdb02c178326f757b44159c75bd7332435ae5916ca19f9",
+      "source_status": "ABSENT_AT_0c53"
+    },
+    {
+      "bytes": 2069,
+      "git_blob": "4e8b4b266ad2356d4e063ac0015df97c7b5467d3",
+      "historical_commit": "36609e4a8719859b46e540f85013c1126a5e3bc2",
+      "historical_url": "https://github.com/hsoliwal/com.synexia/blob/36609e4a8719859b46e540f85013c1126a5e3bc2/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/INTEGRATION.md",
+      "local_original": {
+        "bytes": 2069,
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/secondary-overlay/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/INTEGRATION.md",
+        "sha256": "e4c26810f4cc52ce476666795c7f54ed9288ab3e3dbe5629a2aa5f17df0dd57b"
+      },
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/donor-catalogue-recovery-20261005/payload/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/INTEGRATION.md",
+      "mode": "100644",
+      "operation": "add",
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/INTEGRATION.md",
+      "receiver_binding_status": "PROPOSED_NOT_WRITTEN",
+      "receiver_copy_bytes": "exact source document bytes",
+      "receiver_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/INTEGRATION.md",
+      "receiver_repository": "hsoliwal/M3jdk21",
+      "role": "exact historical donor documentation; no current execution or acceptance promotion",
+      "sha256": "e4c26810f4cc52ce476666795c7f54ed9288ab3e3dbe5629a2aa5f17df0dd57b",
+      "source_status": "ABSENT_AT_0c53"
+    },
+    {
+      "bytes": 51757,
+      "git_blob": "d663dc4c8c13968edfffe0258a1b6ccc927434fb",
+      "historical_commit": "36609e4a8719859b46e540f85013c1126a5e3bc2",
+      "historical_url": "https://github.com/hsoliwal/com.synexia/blob/36609e4a8719859b46e540f85013c1126a5e3bc2/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/donor_catalogue.json",
+      "local_original": {
+        "bytes": 51757,
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/secondary-overlay/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/donor_catalogue.json",
+        "sha256": "b9c144d5eb9be716fd749b6d7cda456e0d40aae6ae423c794ad2ace1a4fe1322"
+      },
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/donor-catalogue-recovery-20261005/payload/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/donor_catalogue.json",
+      "mode": "100644",
+      "operation": "add",
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors/donor_catalogue.json",
+      "receiver_binding_status": "PROPOSED_NOT_WRITTEN",
+      "receiver_copy_bytes": "exact source document bytes",
+      "receiver_path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/donor_catalogue.json",
+      "receiver_repository": "hsoliwal/M3jdk21",
+      "role": "exact historical donor documentation; no current execution or acceptance promotion",
+      "sha256": "b9c144d5eb9be716fd749b6d7cda456e0d40aae6ae423c794ad2ace1a4fe1322",
+      "source_status": "ABSENT_AT_0c53"
+    }
+  ],
+  "input_manifest_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/donor-catalogue-recovery-20261005/INPUT_MANIFEST.json",
+  "input_manifest_sha256": "f7949116d828c55aa5cc77c19764cf0484958d408b86d0c91999c45a3fedd8f3",
+  "operation": {
+    "mode": "040000",
+    "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors",
+    "sha": "54c7989b23bb4fea69b74352aa144c6ba3c3adf0",
+    "type": "tree"
+  },
+  "qualification_promoted": false,
+  "repository": "hsoliwal/com.synexia",
+  "schema": "jcc-donor-document-restoration-preflight/1",
+  "source_code_epoch_unchanged": true,
+  "status": "PASS",
+  "tests_rerun": false,
+  "trees": [
+    {
+      "entries": [
+        {
+          "mode": "100644",
+          "path": "AUTHORING_RECEIPT.json",
+          "sha": "0f024cef89a998670da06f390f14234e0948250c",
+          "size": 3358,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "DONOR_CATALOGUE.md",
+          "sha": "d5ff11d9ba0135dbb30d87cb0c0d0e4eab2d5dcc",
+          "size": 12750,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "EXECUTED_TEST_MAPPING.md",
+          "sha": "64e307ac4e3847696d0609bd53031881f0787c76",
+          "size": 8533,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "INTEGRATION.md",
+          "sha": "4e8b4b266ad2356d4e063ac0015df97c7b5467d3",
+          "size": 2069,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "donor_catalogue.json",
+          "sha": "d663dc4c8c13968edfffe0258a1b6ccc927434fb",
+          "size": 51757,
+          "type": "blob"
+        }
+      ],
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/donors",
+      "postimage_tree": "54c7989b23bb4fea69b74352aa144c6ba3c3adf0",
+      "preimage_tree": null
+    },
+    {
+      "entries": [
+        {
+          "mode": "100644",
+          "path": "CATALOGUE_ORDER_EPOCH_05.md",
+          "sha": "7e0e03d78c4988d96fccebd8dff43c0d327d9eec",
+          "size": 6251,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "COMPILER_EPOCH_02.md",
+          "sha": "42379a74a234c3cc08404fd5ef3a794f226da263",
+          "size": 1800,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "COMPILER_EPOCH_03.md",
+          "sha": "b08627e9932c25261030a130c74252cc45ca0e55",
+          "size": 1986,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "COMPILE_STATUS.md",
+          "sha": "ea63c130ebb21fc98658a35f25d8914fe306df37",
+          "size": 2902,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "COMPOSITION_CORPUS.md",
+          "sha": "c529da0daca65c33e6d0c6b1884f4b84df4289cc",
+          "size": 22437,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "COMPOSITION_PROVIDER_EPOCH_03.json",
+          "sha": "3d2a5a0ef8db8c94598ec9177917cedde88c5aca",
+          "size": 5631,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "COMPOSITION_PROVIDER_EPOCH_03.md",
+          "sha": "8d277c12f7601e0731afedc03a65c8510b80645a",
+          "size": 2027,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "CURRENT_EPOCH.md",
+          "sha": "fc921a7897f4967f4fbdefef879704338505bb87",
+          "size": 3701,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "DEPENDENCY_REPAIR_SCOPE.md",
+          "sha": "3df5f18910246d373d942f755c9b571fed334200",
+          "size": 4739,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "EVIDENCE.md",
+          "sha": "a4af1b438f632557545400f439b68d5d73219be0",
+          "size": 9696,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "HISTORICAL_EVIDENCE_72.md",
+          "sha": "a4af1b438f632557545400f439b68d5d73219be0",
+          "size": 9696,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "HISTORICAL_README_72.md",
+          "sha": "34f11129209c75cadf23368289bd48d8572f4bd5",
+          "size": 9846,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "INTEGRATION_CONTRACT.md",
+          "sha": "ec64a00d2772c5be96cd9f856a433e3844d53768",
+          "size": 6144,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "LEDGER_CORPUS.md",
+          "sha": "a3c8d58113440cdbe9771826544e1401e52ae56d",
+          "size": 2633,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "PARSER_CONTEXT.md",
+          "sha": "54f7ae9ff985ef57b4989691fe1f79ad0936901f",
+          "size": 3786,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "README.md",
+          "sha": "34f11129209c75cadf23368289bd48d8572f4bd5",
+          "size": 9846,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "RESUME_EPOCH.md",
+          "sha": "c7b10f847f056a9617ebd261910940d91089d1fa",
+          "size": 4791,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "RUNTIME_ENVIRONMENT.md",
+          "sha": "f27cd4cb637ccacdd961a64d9b68de468759698d",
+          "size": 2232,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "SOURCE_FIXED_POINT_EPOCH_04.md",
+          "sha": "aa1d2406d496161a06fc42d59bbc9bce6c9bbd66",
+          "size": 5227,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "UPSTREAM_IMPORTS.md",
+          "sha": "70cc2a144c62d06ee4f1db1bfc3b0c7ad3ac0379",
+          "size": 2034,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "UPSTREAM_INTEGRATION.md",
+          "sha": "abbaaceb6c164a98b08249abab0735875ef5af3a",
+          "size": 3916,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "UPSTREAM_REGRESSIONS.md",
+          "sha": "0d23758830f75ebebd5c74c8492988f9b8bca6c9",
+          "size": 2888,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "apply-pom.xml",
+          "sha": "fbfb0b13d26db2757dcf941c9f82a4bad6ec63b1",
+          "size": 4633,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "checkstyle.xml",
+          "sha": "2cde8feeb5dcff9b4f1a4c52224683d3c1b90ea8",
+          "size": 510,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": "corpus",
+          "sha": "7d1fa88c3603adc3d2cedbc196263401546ff226",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "donors",
+          "sha": "54c7989b23bb4fea69b74352aa144c6ba3c3adf0",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "evidence",
+          "sha": "4077655757c94b83a6778aa4ff0b6536782c01cc",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "m3jdk21-delivery",
+          "sha": "c02e3e190985b1999d1372d09139a290944a0c9c",
+          "type": "tree"
+        },
+        {
+          "mode": "100644",
+          "path": "pom.xml",
+          "sha": "5140d803e73a336aef851887a04572d446845312",
+          "size": 16616,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "provider.py",
+          "sha": "479eb412743c794ee257cf27842cb56ebfbda8cf",
+          "size": 11210,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": "recovery-be92",
+          "sha": "c9abb6eda6c86c74362f75351619516780d353b4",
+          "type": "tree"
+        },
+        {
+          "mode": "100644",
+          "path": "source-includes.txt",
+          "sha": "2e46e7c2e1737b4982cd31494968b7cde9076374",
+          "size": 38877,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": "src",
+          "sha": "4aaf9ec36a5598ae47bf08bb73573b716da3257d",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "upstream-review-68ac",
+          "sha": "d1232f538878bdf8274745f87dfa9f0ad5c6fe9a",
+          "type": "tree"
+        },
+        {
+          "mode": "100644",
+          "path": "verify.sh",
+          "sha": "cdc0fe64864dafbfb47276a7423c1d797fdd5b6e",
+          "size": 9740,
+          "type": "blob"
+        }
+      ],
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc",
+      "postimage_tree": "03d06327c0f90ec7d3964591184d2fa9157933bf",
+      "preimage_tree": "d78031c94082f1afaa206b976d87d4517427efda"
+    },
+    {
+      "entries": [
+        {
+          "mode": "100644",
+          "path": "JAVAC_CONVERGENCE.md",
+          "sha": "01f6c7b7f848cf78f7d3f16d5e3d7dffa45e7091",
+          "size": 9758,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "README.md",
+          "sha": "39bb5e0fcdbee0f79e300f1bd90176012bdc95ea",
+          "size": 5902,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "RXL.md",
+          "sha": "14fa2aa51dc32e2c78650bf8c6670d9dd59ea015",
+          "size": 1966,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "SPECTRUM.md",
+          "sha": "8928c262ca72b71e45229bcf42882b2ec2637f72",
+          "size": 8211,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": "jcc",
+          "sha": "03d06327c0f90ec7d3964591184d2fa9157933bf",
+          "type": "tree"
+        },
+        {
+          "mode": "100644",
+          "path": "pom.xml",
+          "sha": "003b0c646fcc697e0d951411d32248689c1a89c2",
+          "size": 16380,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": "src",
+          "sha": "f9cfe83c146ee813873410deafb5cc2ee53f4810",
+          "type": "tree"
+        }
+      ],
+      "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005",
+      "postimage_tree": "15e1bfaee4b8add4cd9a786c9478f5395ce3fff2",
+      "preimage_tree": "69f6e69dc85d81c4b3bd3cd04991e6d4122b86cb"
+    },
+    {
+      "entries": [
+        {
+          "mode": "040000",
+          "path": "algorithm-task-mastery-admission-v1",
+          "sha": "252162e7caee57e4146203169add71ce62cc0705",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "asr-20261005",
+          "sha": "3ab86a63ba736cf21eedc2360ebf7c12f51c96ae",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "atom-pattern-mastery-20261005",
+          "sha": "15e1bfaee4b8add4cd9a786c9478f5395ce3fff2",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "catalogue-execution-20261004",
+          "sha": "e9a1b61a050d5c0a2fe5293f53e9e911a34beabc",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cir",
+          "sha": "1ce0de6d962fbde01c6ab80b9a63c8fd61144513",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "functional-java-contracts-20261004",
+          "sha": "d44e83ce510a3bc5f3f7157bc905e5febbe28b0b",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "javac-join",
+          "sha": "d88bdd2a0926e9eab43c88615b8a862314041293",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "javac-proof",
+          "sha": "b955fbd3d096ca6bd36d607fd5a5aac9c59f6bb9",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "l2m-20261004",
+          "sha": "b898d98159d98cd5f26d7f86b670d8e6696c6fb5",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "llm-task-mastery-plan-v1",
+          "sha": "e6236f270a7d134a41d80b4d6aeb286eee1cd792",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "nebula-bean-atoms",
+          "sha": "f87f7107fb6b3e392fae090ea9f8f6f410bef1a5",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "project-lab",
+          "sha": "c6bbfd42de7e5f2d49caef99e39fce767b36dc74",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "project-lab-stage-gates",
+          "sha": "558c2dbaad5733c50746b9a8d7188707b17c89c8",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "r10",
+          "sha": "d16026a87cc63dfd4e672e052f3b57bd106ac96c",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "recipe-mastery-convergence-v4",
+          "sha": "cf646365b0ce8342e263962d85933bb14c2738c0",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "recipe-mastery-develop-recovery-20261005",
+          "sha": "356543e1fc49d462b201bef0d11f686c4417fdca",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "recipe-mastery-source-precompute-20261005",
+          "sha": "75be7efe3897b9da469786bbcc48f4eecdafc490",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "recipe-project-lab",
+          "sha": "5dfea337685fb1849787cd2ad91c330c56528ff7",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "regex-string-mastery-v1",
+          "sha": "6f6232897aec356edb84f4cb7601409dd634ceb3",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "repository-baseline-capture-20261003",
+          "sha": "d6566469089036e655906a02c8801043938d6ada",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "rlab-20261005",
+          "sha": "a16cc803b3aa7c4e4977059e2bf32c5259a91d9e",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "rlc",
+          "sha": "442ab430e66178bf9428adbd9b535159ae98cf27",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "rxl",
+          "sha": "71fcdc21ffe5286b4750c3cac6aef06c986807f4",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "rxm",
+          "sha": "a32efa743d3e683780b85fb962c75a8ff8d8035c",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "rxp-20261005",
+          "sha": "4f033ca4b95c96bb41a54c38358324b2d4d4bc1c",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "scope-jni-20261004",
+          "sha": "d48b54bfee56d4b7342991c490a93c017e23b3ad",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "scoped-atom-pattern-spectrum",
+          "sha": "39da0c884c99300767a5f291359af02495d49c02",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "sdk-goal-mastery-v1",
+          "sha": "148134784e8f5affd8c63d25abeff16fee59ace9",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "signal-chain",
+          "sha": "488d5635234ad376b493f2875b067235920faea8",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "signal-lane-masks",
+          "sha": "b68f81c97b81f0de414f2063e2d113fa572b611b",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "spl",
+          "sha": "4f3869c2c04f6019a70f1152cc413d7e5719021f",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "statement-atoms",
+          "sha": "4004675603fa4bb435c8b01ee648d19a4a4f7db9",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "strict-receipt-binding-20261003",
+          "sha": "fb56278ca68076bbfe16804227a4e6bb28924a8b",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "typed-signals-20261004",
+          "sha": "256cc3e790ceb14c59a7e319c72621507d0c4e45",
+          "type": "tree"
+        }
+      ],
+      "path": "synexia-openrewrite-recipes/recipes",
+      "postimage_tree": "dbde8bc7b06ae16692fa6d068feb5dc8c1b11fb2",
+      "preimage_tree": "e6a65052c73c6243334a84c276b8a6b41ac18972"
+    },
+    {
+      "entries": [
+        {
+          "mode": "100644",
+          "path": "ATOM_HASH_DATABASE.md",
+          "sha": "87dcc31a5ed43e88fcf05aae81459fff06f33416",
+          "size": 10946,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "LLM_RECEIPT_FIXTURE_REPAIR.md",
+          "sha": "4aeda0fa26e899eac005d1a3d3d6bb9d9a994d59",
+          "size": 3845,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "M3_HASH_PINNED_JAVA_RECIPE.md",
+          "sha": "4b050274e58c209042d9f8f472aebe684b9e9b11",
+          "size": 2898,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "README.md",
+          "sha": "2595bdfda8d07fda35c8779773be013b366a92b6",
+          "size": 20261,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "RECIPE_LABORATORY.md",
+          "sha": "2b24d0922d89ce56dee04a669bdffc846c3416bb",
+          "size": 7865,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "RECIPE_LITERAL_SYNTAX_REPAIR.md",
+          "sha": "5043d264cee4f8a29fd8b0f15e4357aa6280a62a",
+          "size": 6222,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "SAP_OBSERVABLE_SURFACE_SYNTAX_REPAIR.md",
+          "sha": "30beea213fba67a46ed9848440199f6c82dee245",
+          "size": 4423,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "THIRD_PARTY_NOTICES.md",
+          "sha": "e158f1593e63dbe53b5e28235fd4c18fa7df9ce1",
+          "size": 10826,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": "crates",
+          "sha": "7e09d6d33e9ee209b04eba4d26af5368abfd3b2d",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "docs",
+          "sha": "ca59991f3eccef7c699256ea5bc8bf1f515e0acb",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "integration",
+          "sha": "c3892f5dce84faf8b3bc07e8b9c063a0d52b00c6",
+          "type": "tree"
+        },
+        {
+          "mode": "100644",
+          "path": "interface-abstract-base-checkstyle.xml",
+          "sha": "755873d903057b3b84688be32e06f97507002a1c",
+          "size": 496,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": "native",
+          "sha": "0293bd822c3654ae1c1387306abe3c90184df15d",
+          "type": "tree"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-api-capability-gap-delivery.xml",
+          "sha": "d797f249d1ab1f964b6afef9a133d71fa9acbcbf",
+          "size": 3268,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-api-capability-implementation-crate.xml",
+          "sha": "cf08273d0735fba9fddaab9d4128da920213c7fb",
+          "size": 3078,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-api-capability-implementation-review-receipt.xml",
+          "sha": "9688dd122c63f0d4bc14f453f4a42ad97723b14f",
+          "size": 3059,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-api-capability-map.xml",
+          "sha": "5d8acff22da5d36a264fd60f1625915b8fb41aba",
+          "size": 2889,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-api-capability-reviewed-bootstrap-plan.xml",
+          "sha": "0568de2ac60e121461f7b8a3e19b160514f8465c",
+          "size": 3037,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-code-understanding-cross-view.xml",
+          "sha": "bb69f6d8d21a67b470623376c1cc8cde1eec2f4d",
+          "size": 2086,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-collections-jdk-names.xml",
+          "sha": "68b8c86f8f52e4176c7776eb7831348070d0c62e",
+          "size": 4054,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-collections-superset-counts.xml",
+          "sha": "7d852c305cbd8429a9451b488ad2057ec8a32449",
+          "size": 3672,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-derivative-regex-precompute.xml",
+          "sha": "18a2f22574da0c9c2827decaef77bd6b13a29082",
+          "size": 2967,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-hybrid-fuzzy-precompute.xml",
+          "sha": "5af7dbe66b901ed05462961084816bcb2ba71e80",
+          "size": 2997,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-interface-abstract-base.xml",
+          "sha": "5325e308aa9ece089efa517e6eacf787f6d8914f",
+          "size": 4233,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-inventory-literal-syntax-repair.xml",
+          "sha": "75cc15b1640b30e7481eee24541706ee4c85ee25",
+          "size": 2658,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-literal-output-proof.xml",
+          "sha": "91d428749a404b82246a30a15bc1e1b9ec92e931",
+          "size": 3056,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-literal-syntax-repair.xml",
+          "sha": "280a08c55c921fa2d0640037fc895ffdc9127e17",
+          "size": 2633,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-llm-receipt-fixture-proof.xml",
+          "sha": "fdea783229bfbf6fcb7e82d5c29b377e8338f5de",
+          "size": 2670,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-llm-receipt-fixture-repair.xml",
+          "sha": "7cb612921f330f4e2f3633d710f508cea6fdfec6",
+          "size": 2731,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-mechanical-donor-shape-review.xml",
+          "sha": "63b6240e06309911f6d473c718b85ba10e8979fc",
+          "size": 3699,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-mindex-array.xml",
+          "sha": "4a934744846626ff32fe646832f3b83c04067764",
+          "size": 3528,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-mindex-bridge-map.xml",
+          "sha": "10fc87ccc94c234f4bdb021f95b73095c81ef917",
+          "size": 3017,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-mindex-canonical-fact-bundle.xml",
+          "sha": "57d38960383e01234f8c990e79b67a10627e0883",
+          "size": 3039,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-mindex-canonical-search-facts.xml",
+          "sha": "a3e2dfc13fdd42d03b5cc5c7070243829276eb90",
+          "size": 3033,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-mindex-canonical-whitespace-facts.xml",
+          "sha": "d9978609128112a8ba8f214fce2ec46a2a096035",
+          "size": 3078,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-mindex-trial.xml",
+          "sha": "206d3bf18689968606a5977686a59920ec0ab1c3",
+          "size": 2742,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-mindex-xviewer-runtime-closure.xml",
+          "sha": "2f9052becd1aea511ec22f97d86e2958c19e7cfc",
+          "size": 3080,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-myers-fuzzy-precompute.xml",
+          "sha": "1b6ee532f0773bd665ad27bb66cf80640277c3bd",
+          "size": 2873,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-nebula-packed-occurrence.xml",
+          "sha": "dddfea3fc54ca799fd8047ab7d28c0dbff6f5335",
+          "size": 6162,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-partial-ast-native-pressure-v14.xml",
+          "sha": "ce08a3638424d0514fc957b2877c98c5dfa80c1a",
+          "size": 3248,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-pcre2-symbol32-current.xml",
+          "sha": "38e271fc7664f72afcc5dd9c0d32fa03dc0f2573",
+          "size": 3128,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-portable-decision.xml",
+          "sha": "4694ed73591c0c5f967dec5769b2d631dbe12c9a",
+          "size": 2887,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-recipe-bootstrap-source-kind.xml",
+          "sha": "997d761bed02097c4441bf47b511f4c69a11c988",
+          "size": 3026,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-regex-effect-mmap-view.xml",
+          "sha": "947f5a66bb6d74da17cac8d1acf1e3631f70dc36",
+          "size": 2929,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-regex-posting-plan-fingerprint.xml",
+          "sha": "983d7ac1963b094598ac6b6317159b0647cc9767",
+          "size": 3061,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-regex-string-oracle-image.xml",
+          "sha": "9eb443256293887f1327b008bcb40c4845004445",
+          "size": 3205,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-repository-superset-execution-bundle.xml",
+          "sha": "0d9d87bf025aea665cc9f38b01e590bdee487240",
+          "size": 2965,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-schema-bindings.xml",
+          "sha": "b981ded3eb7219e013763ad9509af3fea9bf750e",
+          "size": 2103,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-sealed-installer.xml",
+          "sha": "38034bc03b4c06ee8f0198e1e6e5785c12ac65d1",
+          "size": 2720,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-segmented-immutable-storage.xml",
+          "sha": "efcb34b500e23e36d41149e98bfdc7b0d40e860f",
+          "size": 2957,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-segmented-native-bridge.xml",
+          "sha": "8d4e112a86587652c2535de8900e1bf0a79311cc",
+          "size": 2954,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-sha256-native.xml",
+          "sha": "780c6e1598d10239eca789e77f15903fd46c93fa",
+          "size": 3235,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-suffix-position.xml",
+          "sha": "2b222e3c053c9b8ad3a29930856a6cc993195603",
+          "size": 2953,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-swt-style-distillation.xml",
+          "sha": "0934d9c66e1d46b71306de6ebe7adddc125f2fe1",
+          "size": 2486,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom-swt-viewport-build-gates-proof.xml",
+          "sha": "41f24c4832dbc70f805b1237cca64a1f5edbbbf4",
+          "size": 2853,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "pom.xml",
+          "sha": "8eae21a29aee1edf59bdf070081fa3f00420f789",
+          "size": 199901,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": "recipe-crates",
+          "sha": "71a55eed64491c8f588a46359383c5603d8d70b2",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "recipes",
+          "sha": "dbde8bc7b06ae16692fa6d068feb5dc8c1b11fb2",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "src",
+          "sha": "66c263c8d65ea91aa270041d230c8e62c2a9746f",
+          "type": "tree"
+        },
+        {
+          "mode": "100644",
+          "path": "standard-application-contract-pom.xml",
+          "sha": "89db577add13e6e3657d4db5961f38a86242fd0b",
+          "size": 8738,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": "tasks",
+          "sha": "eb2e8d308d21ad312c934463750cf5d68ebf7676",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "third_party",
+          "sha": "1e9d08549bd4f598f801c4bb3f1a43eb839058eb",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "tools",
+          "sha": "021d83730df353b384961c7d9e31572582b0a079",
+          "type": "tree"
+        },
+        {
+          "mode": "100644",
+          "path": "tutorial-github-contract-pom.xml",
+          "sha": "c5c4ee6f2bfee870cfe982cf10f177ed182ae6da",
+          "size": 6999,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "upwork-application-pack.md",
+          "sha": "e8a3c997f88d3560625546c312f4d5bdee00297d",
+          "size": 7214,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "upwork-application-shortlist.tsv",
+          "sha": "473f34ccc763be0566c29deef55a0e1d44754e67",
+          "size": 2593,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "upwork-marketplace-details.tsv",
+          "sha": "923777d1be3ee95a2eae78f4d4638ad8c53c4b51",
+          "size": 50114,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "upwork-marketplace-revalidation.tsv",
+          "sha": "df9392e0d6c8ed1b5d2bbac3b2101633afd2f1d2",
+          "size": 431,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "upwork-profile-context.tsv",
+          "sha": "b7d3f759b5dc79a61f3846c884fcd73751d66dad",
+          "size": 137,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": "verification",
+          "sha": "b4cf2961b9806a4b78506d7f16b01d097c0654ac",
+          "type": "tree"
+        }
+      ],
+      "path": "synexia-openrewrite-recipes",
+      "postimage_tree": "a4ef3ba609f26d0f146237303c332f6a67ab3cc1",
+      "preimage_tree": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
+    },
+    {
+      "entries": [
+        {
+          "mode": "040000",
+          "path": ".claude",
+          "sha": "29058f8dab9eb4f843ead16a685541721bb85185",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": ".desktop-reads",
+          "sha": "795ee566963febf1b7ffa47cfebaff974ff55da4",
+          "type": "tree"
+        },
+        {
+          "mode": "100644",
+          "path": ".dockerignore",
+          "sha": "77e255c13d8ce47c5fc7a633aa0bff0a4942a6e2",
+          "size": 601,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": ".editorconfig",
+          "sha": "ded03dfc4bc9c0119a12561dd6c9f59137caf1cf",
+          "size": 882,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": ".gitattributes",
+          "sha": "fbedb05a4a3596a409b28261540974e4b2d04f4f",
+          "size": 3272,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": ".github",
+          "sha": "6ce0afc6aa8008a8316fadd30dde38033fb47059",
+          "type": "tree"
+        },
+        {
+          "mode": "100644",
+          "path": ".gitignore",
+          "sha": "cd70378522c7e194b319500ede4043c4b0b431ca",
+          "size": 3768,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": ".gitmodules",
+          "sha": "4135dd7c4002ee428dc364e51d3c104091304584",
+          "size": 4840,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": ".java-version",
+          "sha": "aabe6ec3909c9d4871f8f89ef88ca3b6795ebd29",
+          "size": 3,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": ".jqassistant.yml",
+          "sha": "46738095614c236007cf2b0d3208c0a9acb95229",
+          "size": 395,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": ".m3",
+          "sha": "070748d45b74dcf35255c6956ecba265151df000",
+          "type": "tree"
+        },
+        {
+          "mode": "100644",
+          "path": ".mcp.json",
+          "sha": "96a7b94f597be37f8ec98caeba77bc8aafb58990",
+          "size": 1087,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": ".merge-preserved",
+          "sha": "c70ca371f37dd3cc0d534188a7f35958e6956562",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": ".mvn",
+          "sha": "4b0ba8ecadcc9aef2cd554dacb5e84b3dd62fd50",
+          "type": "tree"
+        },
+        {
+          "mode": "100644",
+          "path": ".rgignore",
+          "sha": "4d7c871d6da76860e6b1deafb5e7d479404e432b",
+          "size": 156,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": ".superset",
+          "sha": "229ab0d3b2675c7733c618e527ee111f73d85087",
+          "type": "tree"
+        },
+        {
+          "mode": "100644",
+          "path": "AGENTS.md",
+          "sha": "7038981e6d86a5e3bae25803fa0b6d77b557d538",
+          "size": 15464,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "CITATION.cff",
+          "sha": "a02339abb3d5babbcdb87af29fe5c83f5f5f9a38",
+          "size": 1379,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "CLAUDE.md",
+          "sha": "67311dc1eadbb50c8b29e596ed12ce29f3288582",
+          "size": 2660,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "CONTRIBUTING.md",
+          "sha": "054c9e5be63e239c6d5f7688041a46a109d50d93",
+          "size": 9007,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "CPULLM_APACHE_DATAFLOW_DAGS.md",
+          "sha": "f9a93a29104c8361e1f3f334d64e4f61643fafdc",
+          "size": 7359,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "CPULLM_COMPACT_SYNTHESIS_ADMISSION_RECEIPT.json",
+          "sha": "dd57e320000211bc7243d20099af080ea60da2c3",
+          "size": 3218,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "CPULLM_COMPACT_SYNTHESIS_CAS_REPLAY_ADMISSION_RECEIPT.json",
+          "sha": "cfa9d3d97883ebf42872dd384139c3bbf20d9442",
+          "size": 2064,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "FLINK_INTEGRATION.md",
+          "sha": "e3d506737c28873cce533f213b3bf345e8eebd26",
+          "size": 8094,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "FOSS_REUSE_DECISION.tsv",
+          "sha": "d70d8bdf1c8285820a6869150ccc0b85bebf9344",
+          "size": 577461,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "LESM_LSEM_EXTRACTION.tsv",
+          "sha": "b9910cafecf2ddc307166ad02e235e323574903e",
+          "size": 172680,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "LICENSE",
+          "sha": "29f81d812f3e768fa89638d1f72920dbfd1413a8",
+          "size": 11558,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "LICENSE.spdx",
+          "sha": "522885e193f157cd403379a4e07b7d52e56325a7",
+          "size": 135,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": "LICENSES",
+          "sha": "53bccd1962e6959417e0677207209efb00d0229e",
+          "type": "tree"
+        },
+        {
+          "mode": "100644",
+          "path": "MANIFEST.sha256",
+          "sha": "92399860df81280159e4feeb13ebd773e18d96b1",
+          "size": 14236,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "Makefile",
+          "sha": "9a1dc6d826b4986ebc5940f25dac250703131c24",
+          "size": 8698,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "NOTICE",
+          "sha": "cf6694a1316785ba2aa45394314bbae2e856c7fe",
+          "size": 14991,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "README.md",
+          "sha": "1e1ead6c91ebdea0d59cc7eb202dab42835860dc",
+          "size": 5164,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_clusters_info.txt",
+          "sha": "a156292cd1d1b5ad799008f63cba1b02bbafaa1d",
+          "size": 643,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_compile_aop.txt",
+          "sha": "9f569295f1e07899a32c54e43838d2cb49f2d0e8",
+          "size": 6201,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_compile_check.txt",
+          "sha": "1139caafbe85fb673baa97866ab6381c87030369",
+          "size": 458,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_compile_count.txt",
+          "sha": "48dd41a02de81359a1194a5dd8c655881e3dd3ba",
+          "size": 9,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_compile_final.txt",
+          "sha": "6131ca6ac0eb615486da615e0e0dc8c090ce342b",
+          "size": 18260,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_compile_final_tail.txt",
+          "sha": "b0ff29842caa385dc5842d09caaed7858c793698",
+          "size": 854,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_compile_full.txt",
+          "sha": "fc18ae3e6a1984a18bc6b681ef477970b655d45c",
+          "size": 12839,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_compile_full_run.txt",
+          "sha": "65637302d3034211592ce7e006d75a7ce9326e4b",
+          "size": 67900,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_compile_reactor.txt",
+          "sha": "8965eba8035b06635155b7f994917785a0b9e67f",
+          "size": 8854,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_compile_run_20260306_102237.txt",
+          "sha": "ab405631df1811ca24bab8076f23c0d4a53b425b",
+          "size": 4008,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_compile_status.txt",
+          "sha": "e418839793f614764608267b1ef3f9621800a169",
+          "size": 239,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_compile_tail.txt",
+          "sha": "1f1fbbcf56fd04d510a89c7c826e5a586d3ba437",
+          "size": 668,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_compile_verify.txt",
+          "sha": "c7ac9a3cdc65b226b40c8524f61c60107fb801fc",
+          "size": 7537,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_cstat.txt",
+          "sha": "af17e3cec02f2b17e3f0b1b695e3d73eb413ed83",
+          "size": 17,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_desk_ai_action.md",
+          "sha": "1187bd84b5bf13949c832c9684575c566831436f",
+          "size": 1085672,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_desk_anchor.md",
+          "sha": "f31dc6c83ac73f302e0faa1f09826f71cd62e1e3",
+          "size": 33581,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_desk_conv_latest.md",
+          "sha": "ae0008e20fda456d5933e491ff5f43572060dc04",
+          "size": 1846,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_desk_convergence.md",
+          "sha": "e9a0ce3c57af7ff3113925ef2d1b85eb891411f6",
+          "size": 629,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_desk_decomp.md",
+          "sha": "163b982f37868cce6cc5cadde7e8e09aedc61f54",
+          "size": 58804,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_desk_everything.md",
+          "sha": "446a66e07cf1fde564a01fcfe169694b37f0d1c6",
+          "size": 119114,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_desk_m3scale.txt",
+          "sha": "d71ba4aae257c0a707b91dd04a6c7d1d4526214b",
+          "size": 12103,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_desk_mech_refactor.md",
+          "sha": "06103de8dd6f3c9682799bcc6f48c8862257a635",
+          "size": 572319,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_dup_stats.txt",
+          "sha": "d2a256da8964bc72e406df959c01b03237304449",
+          "size": 60,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_empty_by_dir.txt",
+          "sha": "174d2031850ce151b59c17c12297c7c9dba93687",
+          "size": 201,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_empty_detail.txt",
+          "sha": "0c0cf67cd3e56c6805754f2786432d5cb6231d88",
+          "size": 15552,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_fail_mods2.txt",
+          "sha": "961a914c4ce2faa06e3c28fc4dc828f0d692d184",
+          "size": 77,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_git_status.txt",
+          "sha": "7f39753fb43894a5eb25fde6a5575c74a2af3919",
+          "size": 628,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_import_stats.txt",
+          "sha": "a5655b25bbe8ef73f326f4914b124e23be41aa03",
+          "size": 50,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_imports_stat.txt",
+          "sha": "16dd1b3d3017b7920212f989f890d6ba405f8b51",
+          "size": 10,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_inv_scripts.txt",
+          "sha": "5f05804becec48a1c910c97da02a469ff47efe81",
+          "size": 2884,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_p1_status.txt",
+          "sha": "be3bd48236ee17196b03997dcc9449d0a8934995",
+          "size": 489,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_python_check.txt",
+          "sha": "871f03dccab8c9ac14631baeddf99c90cf428e5d",
+          "size": 372,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_reactor_errs.txt",
+          "sha": "da235d6c2bae8d4e15bd59ad50e61fd5b3567f5e",
+          "size": 493,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_reactor_stat.txt",
+          "sha": "f39b01805f0571f8a9f034dc05f743a6832e76a7",
+          "size": 363,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_run_imports.txt",
+          "sha": "b034187e80fd12835be6fecce021505eeb23b156",
+          "size": 296,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_run_p1_dry.txt",
+          "sha": "95e935b0b4a04a3301955a6b9aa7d1a422b81e26",
+          "size": 837,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_run_p1_dry2.txt",
+          "sha": "58c2ac40cf59056b4a48da8f1c8c8a871f445488",
+          "size": 233,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_run_whitespace.txt",
+          "sha": "cad9585ee11caeaaf9cca2d1532cb585cd744b26",
+          "size": 283,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_spotless_all.txt",
+          "sha": "310354d7f807694dce684b66d0f337f9361596ce",
+          "size": 1157,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_spotless_all2.txt",
+          "sha": "1139caafbe85fb673baa97866ab6381c87030369",
+          "size": 458,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_spotless_detail.txt",
+          "sha": "3a37dc5e785c016d98fe5dfc4d11e7233442b65a",
+          "size": 963,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_spotless_fix.txt",
+          "sha": "1139caafbe85fb673baa97866ab6381c87030369",
+          "size": 458,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_spotless_flldcim.txt",
+          "sha": "1139caafbe85fb673baa97866ab6381c87030369",
+          "size": 458,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_spotless_modules.txt",
+          "sha": "19310ca75e0fbf7e7ba514f60ac3e7352ea5fa35",
+          "size": 45,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_spotless_targeted.txt",
+          "sha": "1139caafbe85fb673baa97866ab6381c87030369",
+          "size": 458,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_sync_done.txt",
+          "sha": "c16790ec78b3e154ba1e3d0c820f59ed6e7bed59",
+          "size": 6,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_templates_listing.txt",
+          "sha": "5f48c89474845b0bdd3f8bfd3933ddf81c7f2198",
+          "size": 487024,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_test123.txt",
+          "sha": "b6fc4c620b67d95f953a5c1c1230aaab5db5a1b0",
+          "size": 5,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "_ws_count.txt",
+          "sha": "4f3ad3117edbe475469ad20e15d7f5efc9a42e37",
+          "size": 8,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": "agents",
+          "sha": "48588d1c54f58823e41f506b121bc0b80608a747",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "aix-chrome-ai-studio",
+          "sha": "da970877bcaaa01ed169cae260661a3a971a0245",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "aix-superset-v016",
+          "sha": "1f929aea85770bfb3c21cf4a0be93012396eaf19",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "aix-superset-v017",
+          "sha": "5d7adddf9f35dc984b90b7a805d8fcf59f8ad786",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "archive-maven-projects",
+          "sha": "ad7342a8eb675476008c951aed4c6fc66ed10e5d",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "artifacts",
+          "sha": "2dc2d9d8bdd5b4cd3bc743f09230d129862dda29",
+          "type": "tree"
+        },
+        {
+          "mode": "100644",
+          "path": "big-files.tsv",
+          "sha": "3d36ce43fa7e04b549c4710ad5f0eb603c3ad5be",
+          "size": 738,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "big-java.txt",
+          "sha": "8b137891791fe96927ad78e64b0aad7bded08bdc",
+          "size": 1,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "build-check.bat",
+          "sha": "f69b4c47739218564e237a6f4d97ef6931365781",
+          "size": 121,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "build-check2.bat",
+          "sha": "e7c0f39ced25363009c8ef486f0a14e1b5951cf6",
+          "size": 248,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "build-full.bat",
+          "sha": "d13180955612e2b940c396f28112219d5d571a50",
+          "size": 1263,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "build-full2.bat",
+          "sha": "ca8038872557215939b86fb451015e9022462267",
+          "size": 423,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "build-out.txt",
+          "sha": "46939bb1f671159c25d378442592aac5687eb52d",
+          "size": 58210,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "build-output.txt",
+          "sha": "a16fa84e12f6b865129945e776f41091bd311512",
+          "size": 19,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": "chat-artifacts",
+          "sha": "5a53c41f3c82511835edfe8d7f9ae623f733f49e",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "clients",
+          "sha": "79f50c57281ab6f02ae4fc0f69dfbe199771511d",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "codemaya-paroksha",
+          "sha": "8a21fa9007c2baedbd5449861b0948f2f092ec85",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-agents",
+          "sha": "29e3aa513705e5332e63da5f40fd5a4d09d1a1ab",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-ai",
+          "sha": "550a13b624e605aeb4e8426edfc9a278ad669888",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-camel-kie",
+          "sha": "c2684cc498d17f217db780309cfa41b6d0ccd734",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-demos",
+          "sha": "365ccd869a829f17d4e04a111788a2624b36f536",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-donor-inventory",
+          "sha": "b033c06e7fe7df6d0caae86bda193fde874c646d",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse",
+          "sha": "f71e8cfa7b8d0e67256066bfbde46e037941d20c",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-mechanics-adapters",
+          "sha": "39568ae94232368ad896ecae8c2b8d402c891a16",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-mechanics-core",
+          "sha": "e321492dbf9b78a4fda9996218ac97710d3cc989",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-mechanics-cpullm",
+          "sha": "e24076d44773f75107e27ffe81db53cc391e3b86",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-mechanics-headless-app",
+          "sha": "f2e03c85bf0be2de24b29381a6ffd40b49a144ae",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-mechanics-native-bridge",
+          "sha": "0e21ae0a17db168fcf8b8c77e39ed91390a93472",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-mechanics-rop-plugin",
+          "sha": "0fe9a8afddd83719f2b52e5b53632f6af274ada0",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-mechanics-spi",
+          "sha": "8159470c51f6105cfd74e264eba01bbe7be762e0",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-mechanics-ui",
+          "sha": "f3ea5c1ef646a1d8f53cff7a824f722074ea5a56",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-mechanics-ui-api",
+          "sha": "fd0d78a1485b08ca451285cff169beebc456cf77",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-mechanics-visual-bridge",
+          "sha": "bb131530001c1fac2f670209d6d47cedca60f245",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-visual-api",
+          "sha": "e6746e8a2fd47d5f0e7f39eb002fd72c9bd267a0",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-visual-architecture-tests",
+          "sha": "ecb5ef234007359503dc462c84462e9850726236",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-visual-bridge-browser",
+          "sha": "2c29f55a5d0b2d563e544eac82c06dbe09792922",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-visual-bridge-diffusion",
+          "sha": "d3c66f14342d3e07ddbae353c81dfed3bc42de86",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-visual-bridge-neural",
+          "sha": "b555332cbf095d14f791e3a28e28af75fd19230f",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-visual-bridge-platform",
+          "sha": "4d3cb2141988ea3abc982a663c0cebac5efc6a11",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-visual-bridge-renderer",
+          "sha": "9a59dc8858e3fe34ef101909fac0b343702b6c1b",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-visual-bridge-rop",
+          "sha": "bb16f9af57f6828f38ea1ded41a54f8b19fb41ab",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-visual-core",
+          "sha": "ea6ce678f8ecd502462e267f5be387874b6e7293",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-visual-headless",
+          "sha": "abdedd1df18d61710444555ef66dfd8ece7c46bc",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-visual-headless-pde",
+          "sha": "6d88fcf56157b7362c8b836a852af525fba5b340",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-visual-orchestrator",
+          "sha": "de1c0a617a2328689e1f099476f1cb0c5355477a",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-visual-product",
+          "sha": "0adb376fe28f21da4811e854955a91b9fedd9a4b",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-visual-runtime",
+          "sha": "ec89d0086a7daac15ff4c544bac1b15eba020270",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-visual-ui",
+          "sha": "c2dc42c494da5ee2dfe44867761c53a542e5ca3f",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-eclipse-visual-web",
+          "sha": "dae02816e74ab6f26ba1e80b8a3b4c78328c8a96",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-flow",
+          "sha": "ca425c4c6ac5f5a4106dcf0ff254f2acafb5444c",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-java-web-modules",
+          "sha": "c38e02083e70a4eaa8ca3881bb8579fa3cb4ac3e",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-java-web-runtime",
+          "sha": "a2c1cf14e073384d6f85d9bfbef920674504d2c4",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-java-web-transport",
+          "sha": "a7cbdb43f596ea65acfe92f7f5c433b8c90ddb89",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-java-web-workers",
+          "sha": "01d43fea3d35d7bc41001827460ff1cd7fa14815",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-language-mechanics-adapters",
+          "sha": "e638678142beb56306d4773b6ae126ec5a62e752",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-mcp",
+          "sha": "a85f24feadf7b4413ae9252568ed9d893d90096d",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-nlp",
+          "sha": "6a2c8b5254c2ef1e5657e9d362664ac8903df5f9",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-parent",
+          "sha": "08c82b21f1efe5cb66932fa58e5561481c02fe59",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-process",
+          "sha": "ff48b15acf2e81397c75c0744cc11c93e8bd6ba9",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-rag",
+          "sha": "bf318c82fa3b829ff13e891a9c9c07215eebbd7c",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-skills",
+          "sha": "54973fd210cfd131bf18610a42b1b7bcbe4294c5",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-tools",
+          "sha": "650aee576b039f2852bc88c31f71a87f96f760bb",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-transpiler",
+          "sha": "b7c8c22e92c127dfef1f23b48cae0cb66325f0a0",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-transpiler-aitrans-bridge",
+          "sha": "9a008e64a77beb20610bc235ea2362c239ea13af",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-transpiler-skillmd-bridge",
+          "sha": "3d219d73ab760ef63e30375b5cedc8153fd1c37e",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-transpiler-teavm",
+          "sha": "081a6140cc6bfc05b77477ba63b2f0e05380eb9b",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cognix-vscode",
+          "sha": "532b23d7c87d35da6081d7f28cd37808e6207568",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "com",
+          "sha": "33e8b7f93363e7d78f564dad9f0cd8980de57d9a",
+          "type": "tree"
+        },
+        {
+          "mode": "100644",
+          "path": "compose.yaml",
+          "sha": "5d7609c2c557c6d4e0ad53d3ecdbc5a42fd77f08",
+          "size": 3623,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": "config",
+          "sha": "564415140de315eddf0c5f9514a62225cac432bc",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cpullm-java",
+          "sha": "851a35b9267fd68e9421453c1a56cef80557e6d0",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cpullm-opdag",
+          "sha": "ce762106b40d4a656b9ad426504fadd2921e3ff9",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cpullm-opdag-paroksha",
+          "sha": "0102ca9f0ba9197c0bb94b5833e285fe59d69b04",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cpullm-paroksha-superset",
+          "sha": "6dbd999150ac8b4353a2695ba16bffe90755fa34",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "cpullm-text-evidence-v1",
+          "sha": "9b0bbde46cd51e58f90c72a305442439cccb5cc7",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "docker",
+          "sha": "8dd8485bad4754912174a8d6ce070118e8e148c5",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "docs",
+          "sha": "a065f9b6d73354c2d74437a9e72355b6f321d4a1",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "donors",
+          "sha": "03e5847c3e409732b101b381fe4401d456a649f1",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "eclipse-plugins",
+          "sha": "6f6b6cbe6f7fd60ad3687610c9f5a1bb102f1270",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "experiments",
+          "sha": "1a191d775041a6eb04d199ea254b1a78fa9cea56",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "integrations",
+          "sha": "2678d50e76fdf82fc2f283d56a7f9fcf9fe1af36",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "jdk-overlays",
+          "sha": "f6bab162d058a8bb3a84127976ecb2fc56991df4",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "jqassistant",
+          "sha": "fc0b0e77189f64e2892eca15416c9209f9f1a16b",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "local-but-cloud",
+          "sha": "769f8f60258df154315ac9de14c1799f93e930ee",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "m3",
+          "sha": "5e8b29f98d5583c4f23b9cb459eb7910753ab3a3",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "m3-fast-search",
+          "sha": "dc0e4c500ed20dc164a066a96010958a9aa13c89",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "m3-java-contracts",
+          "sha": "470cd04a692ba1092fccffd248364fa4c28bc975",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "m3-java-inventory",
+          "sha": "88c2e4b22c869c9722bd41754ed7ad542468803b",
+          "type": "tree"
+        },
+        {
+          "mode": "100755",
+          "path": "mvnw",
+          "sha": "bd8896bf2217b46faa0291585e01ac1a3441a958",
+          "size": 11790,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "mvnw.cmd",
+          "sha": "5761d948924c19571d27b465c519b2e2f9e30351",
+          "size": 8481,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": "operations-dashboard-design-system",
+          "sha": "9c0016524cbfeef7fd6947c52c57946fe3d7d6c3",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "operations-dashboard-ui",
+          "sha": "3ff34ff89abb7172ca04feceadfe72ca21db8994",
+          "type": "tree"
+        },
+        {
+          "mode": "100644",
+          "path": "pom.xml",
+          "sha": "98889a040aad5cc3c82f782bb4b173d118207988",
+          "size": 119981,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": "python",
+          "sha": "27c793367a50e8f147b84f0b3873478795e2e1fa",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "research",
+          "sha": "90916a70a3d5cbd0faa87f50f37e782253e1795a",
+          "type": "tree"
+        },
+        {
+          "mode": "100644",
+          "path": "rewrite.yml",
+          "sha": "242b3b322ab4cdb55b61ec0815872f3abb1f3e66",
+          "size": 23482,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": "scripts",
+          "sha": "170c9086f5d2d040da5e49212f77dcd30d94a9d1",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "src",
+          "sha": "512bf754ef80e71da36665603112f08d8e504012",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "superset",
+          "sha": "a154f3555951d17b4d3dbe663fb1362a7a864d16",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synex-bop",
+          "sha": "b82112bad2774e5a43b1106555880ecb16b8e473",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexi-protocol",
+          "sha": "498423475a5a89e6af65947e60f95dbbe2e18802",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-agent",
+          "sha": "e53598bfeb9bfef195cf8335e44e7123f3551ce4",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-aicore",
+          "sha": "ecd1ac28403d47067f250f8cbc8d380c9e51ecba",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-aiop",
+          "sha": "db35a88f2f24dad80096c6cd2db57c5b22c78e9e",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-algo",
+          "sha": "9f550e2b7618e0f15e65a16d68799b8d97b83b7a",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-algorithm-runtime",
+          "sha": "d5495d319957c19037b156bb96ea12d2d2cf206c",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-anop",
+          "sha": "8c2c98620e4fba051df2b563ffa2352687c650e9",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-aop",
+          "sha": "590ddca493f80e806b6251da88b762fcedc2fbc2",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-api-corpus",
+          "sha": "a4323f8c0830f2746fb1bff40e52945d5f8e86f3",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-appliance-watchdog",
+          "sha": "b836c8af196983a3acfdf78d3ab5a9dd986354c1",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-archive-mavenizer",
+          "sha": "ff7400016e764157040ccfda0110f7eb911bbd58",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-artifact-intelligence",
+          "sha": "a38402f66edcd5116d707f76a07c1364ec99564b",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-beam-cpullm",
+          "sha": "e9cf765d9bf7c54dec0be0b9a55f1d3495a31fdf",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-beam-etl",
+          "sha": "2a06177acb4829f41812045f5ae80a39a1e3d17e",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-bitop",
+          "sha": "7d7a274af6ca55f0f2d9d47f29a0f8d2f39ee1d5",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-bom",
+          "sha": "a18845b6b185de74056e7475f2719a2ef85b1c2e",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-bop",
+          "sha": "08bbecb9d6e73cd8dc073032beff1426b0368a7c",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-build-inventory",
+          "sha": "8f60508b9857671b1ed8cb0a8289da3c702d2420",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-camel-dag-bridge",
+          "sha": "7d70a1fea4c56c8bc52481fac143b558d8e7f5b1",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-camel-dag-kie",
+          "sha": "d40f66993f14d5e1d94d84282696de8d529e3108",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-chat-artifacts",
+          "sha": "451b0554b19b9448425ba333f85d68b38953ecc8",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-chrome-ai",
+          "sha": "326bec4f0ce32cb005c4298c67d763656a6da7ab",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-chrome-diffusion",
+          "sha": "1bc7b2b1bbf26a538e914ac278adece14a0db7c6",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-chromeml-api",
+          "sha": "4d319dc870c9975731b2f67e6fd3b9e53ef33ada",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-classic-intelligence",
+          "sha": "8169898b534a591234d7b17e21880eb277e07466",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-classic-tools",
+          "sha": "20220d3ec69fd2249bf4b9b36faccdf46cdde241",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-classic-tools-jni",
+          "sha": "98da56c41cdabda65085787222cf0594ae6cb16b",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-cmop",
+          "sha": "0b9eccde61ebe1008d6beb70ecff3730301100b3",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-code-convergence",
+          "sha": "10481b75998a6cc0f6f1ca8a405943fbe9577ff6",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-code-convergence-jini",
+          "sha": "a1dbada9cf320cca376f77e72a07b2dd2459bdfd",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-common",
+          "sha": "70d0b0f8dfec5ff8ae277eb2a605128adbcaaa23",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-common-cache",
+          "sha": "1309dae05f0ec1a18f75ddf3eb9c5e2624ce1413",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-common-core",
+          "sha": "0ee2a5813767f9bb68c1a552c6a066cd00b89efb",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-consolidation-runtime",
+          "sha": "5a2fcf5cb9dfed6c7d83aab86e2ddbfa66e2dd31",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-cop",
+          "sha": "b4500eb5b96c756429a584d9828bccbfc51610b9",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-cop-bop",
+          "sha": "05676ad5249f35d8643500357cd438c57e792f10",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-cpu-camel-fabric",
+          "sha": "b4ca713130b58be9781e51c83c968a156a8196c0",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-cpullm",
+          "sha": "4176db681cf0317a3817b8385baa0f9d1f929e2a",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-dashboard-api",
+          "sha": "86af41120a1c7c38acf9d711b231d8cde36ae8f1",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-dawn-jni",
+          "sha": "d5f98f9e918f4afd473a83e0a137fd3ccf5370ca",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-dfs",
+          "sha": "d8a44fe7dc7124e42dc1cbd6bc303bc98e222160",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-dictlang",
+          "sha": "ab1a651e0d0bb205152bd58a29e73175f5113a94",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-diffusion",
+          "sha": "13582f4781a12995d809971196d32c3b16f39bda",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-docker",
+          "sha": "29e559614ce163caf00f8169851ff73809a5565f",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-donor-inventory",
+          "sha": "c5b779af825e71cb677ecba0b757c053ecffc89b",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-donor-superset",
+          "sha": "e9f9f2f8157a79e24e5d07fa0d3908ffc57c8cec",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-donor-superset-api",
+          "sha": "aa91e8c2f4d30d1fe884016cf5e3e8fc0f015dab",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-donor-superset-bridge-archive",
+          "sha": "a5579bca3033c63e6de0f725d668ba98eb7283f2",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-donor-superset-bridge-build",
+          "sha": "235732e5cd8aaddb91e7445a290419081e494333",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-donor-superset-bridge-git",
+          "sha": "05636e7d04d869ec49b4d1d912c074db7893d090",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-donor-superset-core",
+          "sha": "751f334fc62a9420263cadb5de3acddb0fe446c4",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-donor-superset-headless",
+          "sha": "d09f58ab75f94810a1eaba4c974bc9df4f168bdf",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-edge-ingress",
+          "sha": "1e48e5e6d3b1e8476e4879e6f5e9b51578acd8bb",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-enterprise-data-plane",
+          "sha": "552c3e1b921497228c6e4e0a900ff05e0ec65c54",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-etl",
+          "sha": "dcd586a26e287671b449fa7bc072ff5558ccd666",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-etl-dfs",
+          "sha": "b1ef1f16be726439d3e61d55bd1b3d56f1d6ca09",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-fastsearch",
+          "sha": "86dec56588f970051c515bcfcbb39b9a6501f4fa",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-fileindex",
+          "sha": "10e016e92182ae5c4f896138a3eb057de33eceb3",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-flink-cpullm",
+          "sha": "459d85b607d4b739211b1bfe03c0b90a93a414f4",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-flink-datastream",
+          "sha": "a659d02270014f6dabfe693af5d7957d79ca9ec1",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-flink-spi",
+          "sha": "e4dbaac7b9451e1c218e10bca02aa2e440ca99c1",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-flldcim",
+          "sha": "e443758088aa4b7bfaac80b1d812f17c8d2adff4",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-fop",
+          "sha": "7501ae3a10b82a46bc772f37550d3374d7946821",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-forge",
+          "sha": "90c3ece29e4cea15c3814ceed0e9558bb8f04754",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-format-fabric",
+          "sha": "3739cb4fe30a8b525f2be53044f770760bb7ed5f",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-game-kernel",
+          "sha": "89bab0180eafd8ab684f854e9cd7423f54aefb88",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-hash-pack-parent",
+          "sha": "6447a3a2fdb848605757b8558f70be5def1c7016",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-hpcpop",
+          "sha": "68a122dff051c4be42a19e06c888c95a92c32179",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-index-precompute",
+          "sha": "527faec803802de6ee9ae737dd46b734293e6727",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-index-precompute-adapters",
+          "sha": "731d84521b5027b3c03b5b21b5329b943234a661",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-indexstring",
+          "sha": "6202bc85b16a43f6f02a21b3f3afb9a573ba3755",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-indexstring-compiler",
+          "sha": "85d2fa3f71e6e1123ffea6d47bcee05a0817f1d5",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-indexstring-jini",
+          "sha": "8010015d18a583757a277819fe1006da477273e0",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-indexstring-maven-plugin",
+          "sha": "4138ef8507bf46aa61de484306be2f970da74cc7",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-indexstring-tornadovm",
+          "sha": "25f03d1f848dd7ed20b4f21d1227bb5bce512912",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-interned-language",
+          "sha": "dfb18ebcc07352acc9a18e96497abb7a19b62bd9",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-ioc",
+          "sha": "f09605b582bfae22e00184b601a7ba53ed420558",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-iop",
+          "sha": "a82744ec82bf8e673582f31f2228a30e2a72d79a",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-java-web-workbench",
+          "sha": "f2f20d4bb648fb375a3fc3c681a1a0d37be0e4c9",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-jev",
+          "sha": "4d8601936fff2f0efb446950dbe89234efeb8b91",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-job",
+          "sha": "9d81ffe2134a6c37f592cf2567d1203faf920c89",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-kie-policy",
+          "sha": "836f7c4d775c6cdf8a37ce2fcf0d8db1b39c4f24",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-kubernetes",
+          "sha": "d3a54486010d20fa44752ed724168eb45d5c3926",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-l2c",
+          "sha": "6c806f7744381583b6c2ee63f309f235f73b50b5",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-l2g",
+          "sha": "e7e212efa8eab8766dfe7183e79d6dc1a4ce52d2",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-l2v",
+          "sha": "721091e79aa6007ccdd138a059145178f80d91b5",
+          "type": "tree"
+        },
+        {
+          "mode": "160000",
+          "path": "synexia-llmcpp",
+          "sha": "480d0c8c9aa9f844ad961392c79a5867559d5e9f",
+          "type": "commit"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-local-appliance",
+          "sha": "e04eb7442f985d707cdd688e24cd79644eca4954",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-local-appliance-shell",
+          "sha": "77ffd8f2471db67ef22f7f58990000644fc311fa",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-local-k3s",
+          "sha": "9a365e76cc562d7238c63ca8deb050e142a5a5c9",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-m3-api-factory",
+          "sha": "4290badf2b3b5a30f8ac0285553bc4404b8f4281",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-m3-cloner",
+          "sha": "98d956d5eeabf2a1661c6006b09716eee77cb776",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-m3-recipe",
+          "sha": "5ff39ab4e2f316c8b442e1d3debf8ecb314d8202",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-m3-tooling",
+          "sha": "5c9f16e7fc36130d822481cc0d44de9840fbb6b1",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-m3index",
+          "sha": "4bee45fa7f9f510ba19a3abe489ed0b12ebd5bce",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-machine",
+          "sha": "2caf4b64b6b03e654c9838c471cf656e81c87594",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-mat-collections",
+          "sha": "29ef2cbfae23e07b5634067ea64dc2e12fea200e",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-mat-index-string",
+          "sha": "993fa6caae8aa436ce800ee4571c79ae3bc240b6",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-mat-value",
+          "sha": "f40f817770495f97142c57d5a09334a8fbcca588",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-mat-value-maven-plugin",
+          "sha": "accab6a540caba2b229f9b938c8f3f6ec21712b0",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-mat-value-processor",
+          "sha": "a55308557545b27d077221f1e4c322f37522db11",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-maven-plugin",
+          "sha": "e9f4ac467a7d3ff98fc169247b09eb9d03d1579a",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-mindex",
+          "sha": "041a317f87daf727c661acc7c7206398b50f5b4a",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-mindex-indexstring-bridge",
+          "sha": "997bf5af5b4a26879b51e047f9123122b33dfd78",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-mindex-vm",
+          "sha": "273189d58174201d133a4616fe5b8c68854d6e39",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-mllm",
+          "sha": "a1cc488e9fcfb3f461523baf96da3e928cdadb54",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-native-interop",
+          "sha": "3865d42cacd6b7dc9c6ca8cc289603af805153be",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-netnet",
+          "sha": "79764ff6c67e1a9ae28ddb0f16b9d7e16504a119",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-neural-renderer-jni",
+          "sha": "e0bc9d365f82a0ae66a848a7b788ddb6b7d87004",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-neural-rendering",
+          "sha": "df6d582b7266fb41da174a58e906d34db4825ad9",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-ngrok",
+          "sha": "4cac29404b2947c47421156a2888aa3c7fb25deb",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-openrewrite-recipes",
+          "sha": "a4ef3ba609f26d0f146237303c332f6a67ab3cc1",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-opsdash",
+          "sha": "fdd571624220332d3bea7d502dc3cb981f3661e2",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-picocli-shell-m3",
+          "sha": "244afd28c2dcf0c3ccc7aa6e1bf1cb79737ceb68",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-pluginify-api",
+          "sha": "ebd67230394e9d036ab5b33e4dd9c54a1c2fc45b",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-pluginify-bridge-eclipse",
+          "sha": "27b3633f173d596d41a506dd0aa9ee23e384d71c",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-pluginify-bridge-native",
+          "sha": "f4ef33f4b24f443a74acfd134577b65b475814c8",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-pluginify-bridge-teavm",
+          "sha": "888d4eafddb4f14d3e2de30b9065184e6d3b39e5",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-pluginify-core",
+          "sha": "2d1fa80816bfeed03c950a3c05e275f17de1d515",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-pluginify-headless",
+          "sha": "953153ebf7b8763fd1afed5f0009e9f6e25da819",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-pluginify-maven-plugin",
+          "sha": "c9ff91c0fe804ccf201c0ee475c88baed241e83e",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-primitives",
+          "sha": "e4b4a34dd67d513d7e8a5f9dfc2299faef27c7a1",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-process",
+          "sha": "2a08a5ea477355cedc66a7299f61ced237f634a8",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-repository-java-candidate",
+          "sha": "0d9542033898268f01b3ca5a2850503e83cffb4c",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-retrieval-fabric",
+          "sha": "01328ad796ff1811774cd240efb6331ab6d2fba5",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-retrieval-runtime",
+          "sha": "04500e9c7c585e92a669f2157ee0ccbabf036af4",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-rop",
+          "sha": "110c06663481a566b547f520c94dacd4e2ae5952",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-rop-h2",
+          "sha": "85903554b67ac9a96c3979fe5f85faed50964a25",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-route-policy",
+          "sha": "45a569f90642ce9a9a7e30176f23893b83a9aab0",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-runtime",
+          "sha": "74d65667b795e014c1ab7902d237917bf566cdbe",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-sap-compat",
+          "sha": "bdcce5f3a200843f3c31cd3d31439cb757d172f8",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-sap-migration",
+          "sha": "1a64145df9cb56c69dd5356562b804e91dc96231",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-shape-bridge",
+          "sha": "d5af59c0396be68c5dbfcbca8aa3b72efc25b88d",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-shape-compiler",
+          "sha": "0dd547e958f43c4d2d93a483a551a0b2cce15488",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-specgrep",
+          "sha": "261637c00009b5d102f71da93d5f3eaf6e8f2867",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-specialist-ai",
+          "sha": "ec3da64be363e4572dee730e5b1115c20a064776",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-ssh",
+          "sha": "c4bfdce1f73ca75bf84726a24ad12fb6e89b7a18",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-sshd-server",
+          "sha": "22de36680f9661587b75b9c85b9b7657adbae83c",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-synthesis",
+          "sha": "9a733af767588984030c4f07f08b6d7534789a01",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-tabletree",
+          "sha": "fb54f9ba1fb77a6756d12fe8470a961c1cc2c72d",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-tabletree-spring-data",
+          "sha": "b14344a34a0d7f92d865d26adff0fe281f25d874",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-tmop",
+          "sha": "d91e9b6d8b462d292da57ee34cc089e962b9dc59",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-top",
+          "sha": "928f7ad8fe14d892aa88630f7efa042446636f26",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-tornadovm-m3",
+          "sha": "b2fd3e1453a383a219d8871cc5b7d41bed275db7",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-translate",
+          "sha": "001bbf3628a0a0a1dbd75d357683d61d83046b68",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-truckmate",
+          "sha": "ac195fa6912910f4826c73414070da82f196d8c3",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-tunnel",
+          "sha": "6e13f8fd7cfcb64569da2d2ee7331682858ba408",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-unicodex",
+          "sha": "06c3c178c53478f763cfcb5214528a23dff025a4",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-unix4j-m3",
+          "sha": "8bd1b458309096286ee20b57b55e13d8c2af1cda",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-upwork-pipeline",
+          "sha": "7ced7b79dbcd15c4d68ed250b010e13f69b4c3c3",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-vdp",
+          "sha": "4559cc62be6624ef552b3f6fee2516bb8e6ce883",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-visual-pixel-runtime",
+          "sha": "5106adf6c01e3fedce807c4f5e187edf52225629",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "synexia-watchdog-policy",
+          "sha": "16fb77867e89d926b48e355193602b76cd99e11e",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "tests",
+          "sha": "008ba9e0cb863451585c5f35092fba8f94aa65b6",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "third_party",
+          "sha": "e51ad65cfcb545dc46f03fb38a4fd32a9592a3ca",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "tools",
+          "sha": "8a8615adf208eadf2f9eb57920ddfe250e6fd7ae",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "truckmate-automation",
+          "sha": "ec4e4728e734adbcc86eb938c851f983771c4acf",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "truckmate-integration",
+          "sha": "9020863b105cdd40f70ac437c7cc0096842f70e5",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "vendor",
+          "sha": "43180da976da1879e33431c52cd495b5b3f6077e",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "verification",
+          "sha": "d58a25e4feccd434e665674e0df96d1acc82a17f",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "visual-compiler-inline",
+          "sha": "2b40a68ac24127adf2497028c4083c5e5571b9ef",
+          "type": "tree"
+        }
+      ],
+      "path": "",
+      "postimage_tree": "1bd86f643f0e08ecb1b5a43d020bf0110e797d68",
+      "preimage_tree": "0361e4a07b77a01df170523033fef01c4052ddc5"
+    }
+  ],
+  "unchanged_sibling_entries": 484
+}

@@ -1,0 +1,85 @@
+{
+  "schema": "m3-jcc-retention-maven-wiring-diagnostic/1",
+  "status": "PASS",
+  "commands": [
+    {
+      "name": "01-default-verify",
+      "command": [
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/apache-maven-3.9.9/bin/mvn",
+        "-o",
+        "-B",
+        "-f",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/installer-v01/retention-fixture/m3/history/retention-pom.xml",
+        "-Dmaven.repo.local=/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02",
+        "-Dm3.repo=/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/installer-v01/retention-fixture",
+        "-Dm3.retentionCommit=283f01020841104df1d11e005ab995c766a76020",
+        "-Dm3.output=/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/retention-maven-v01/default-report",
+        "verify"
+      ],
+      "started": "2026-10-06T04:27:58.724495+00:00",
+      "finished": "2026-10-06T04:28:04.513399+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "9ce8297f8b42f30c3ec32422542017ba6aa3c4a7ea8896a1f002eb87a7126fc5",
+      "stderr_sha256": "a2a20a7b4e79352a43ba180e07bba87c3862c4382f20192ec6b3f01bb96232dd"
+    },
+    {
+      "name": "02-explicit-baseline-execution",
+      "command": [
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/toolchain/apache-maven-3.9.9/bin/mvn",
+        "-o",
+        "-B",
+        "-f",
+        "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/installer-v01/retention-fixture/m3/history/retention-pom.xml",
+        "-Dmaven.repo.local=/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/m2-diagnostic-v02",
+        "-Dm3.repo=/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/installer-v01/retention-fixture",
+        "-Dm3.retentionCommit=283f01020841104df1d11e005ab995c766a76020",
+        "-Dm3.retentionBaseline=03eb7d30063ece5d5da95cbf17a5364de0ce43bf",
+        "-Dm3.output=/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/execution/retention-maven-v01/explicit-report",
+        "org.codehaus.mojo:exec-maven-plugin:3.6.4:exec@retained-capability-audit"
+      ],
+      "started": "2026-10-06T04:28:04.514041+00:00",
+      "finished": "2026-10-06T04:28:08.408185+00:00",
+      "exit_code": 0,
+      "stdout_sha256": "1df8b6013eb9f4a8c6eec5c1a3a0c79310ba1fc2d6210551c91a00324f932a6c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "fixture_pins": {
+    "case": "actual catalogue integration in immutable synthetic Git baseline",
+    "existing_jep_targets": 26,
+    "fixture_baseline_commit": "03eb7d30063ece5d5da95cbf17a5364de0ce43bf",
+    "fixture_candidate_commit": "283f01020841104df1d11e005ab995c766a76020",
+    "historical_jcc_targets": 443,
+    "retention_root": "045a15fece6ef5d5eb1d7c51d0705f02e8576d4db9f3a7b9984d310d8bf160d2",
+    "targets": 469
+  },
+  "summaries": {
+    "default": {
+      "commit": "283f01020841104df1d11e005ab995c766a76020",
+      "root": "87e30c71dff6a939e0f61a8d1add0affda6895573effd765c7c60d5e6fc6ed90",
+      "targets": 469,
+      "retained_exact": 469,
+      "missing": 0,
+      "declaration_conflict_count": 0,
+      "direct_parent_commits": [
+        "03eb7d30063ece5d5da95cbf17a5364de0ce43bf"
+      ],
+      "explicit_baseline_commits": []
+    },
+    "explicit": {
+      "commit": "283f01020841104df1d11e005ab995c766a76020",
+      "root": "045a15fece6ef5d5eb1d7c51d0705f02e8576d4db9f3a7b9984d310d8bf160d2",
+      "targets": 469,
+      "retained_exact": 469,
+      "missing": 0,
+      "declaration_conflict_count": 0,
+      "direct_parent_commits": [
+        "03eb7d30063ece5d5da95cbf17a5364de0ce43bf"
+      ],
+      "explicit_baseline_commits": [
+        "03eb7d30063ece5d5da95cbf17a5364de0ce43bf"
+      ]
+    }
+  },
+  "scope": "Existing Maven retention lifecycle and explicit profile in a synthetic immutable Git fixture. Exact JAR/POM diagnostic cache; complete source/native/plugin admission and real JDK acceptance remain separate."
+}

@@ -1,0 +1,401 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.mindex.foundation;
+
+import com.synexia.mindex.MIndexProgressMonitor;
+import com.synexia.mindex.MIndexString;
+import java.util.Arrays;
+import java.util.Objects;
+import java.util.function.IntConsumer;
+
+/**
+ * Allocation-conscious algorithms over primitive MIndex lanes.
+ */
+public final class MIndexAlgorithm {
+  public enum Phase {
+    SIGNAL,
+    INDEX,
+    STRUCTURAL,
+    SEMANTIC,
+    EXACT;
+
+    int bit() {
+      return 1 << ordinal();
+    }
+  }
+
+  @FunctionalInterface
+  public interface Operation<I, O> {
+    O apply(I input, MIndexExecutionContext context);
+  }
+
+  public record Descriptor(
+      int nameId,
+      int phaseMask,
+      boolean exact) {
+    public Descriptor {
+      if (nameId < 0) {
+        throw new IllegalArgumentException("negative algorithm name id");
+      }
+      int validMask = (1 << Phase.values().length) - 1;
+      if (phaseMask == 0 || (phaseMask & ~validMask) != 0) {
+        throw new IllegalArgumentException("invalid algorithm phase mask");
+      }
+      if (exact && (phaseMask & Phase.EXACT.bit()) == 0) {
+        throw new IllegalArgumentException(
+            "exact algorithms must declare the EXACT phase");
+      }
+    }
+
+    public static Descriptor of(
+        CharSequence name,
+        boolean exact,
+        Phase first,
+        Phase... rest) {
+      Objects.requireNonNull(name, "name");
+      Objects.requireNonNull(first, "first");
+      Objects.requireNonNull(rest, "rest");
+      int mask = first.bit();
+      for (Phase phase : rest) {
+        mask |= Objects.requireNonNull(phase, "phase").bit();
+      }
+      return new Descriptor(
+          MIndexString.from(name).contentIndex(),
+          mask,
+          exact);
+    }
+
+    public boolean includes(Phase phase) {
+      return (phaseMask & Objects.requireNonNull(phase, "phase").bit()) != 0;
+    }
+
+    public String name() {
+      return MIndexString.fromContentIndex(nameId).toString();
+    }
+  }
+
+  public record TraversalRequest(
+      MIndexDataStructure.IntGraph graph,
+      int startNode) {
+    public TraversalRequest {
+      Objects.requireNonNull(graph, "graph");
+      requireGraphNode(graph, startNode);
+    }
+  }
+
+  public record RouteRequest(
+      MIndexDataStructure.IntGraph graph,
+      int sourceNode,
+      int targetNode) {
+    public RouteRequest {
+      Objects.requireNonNull(graph, "graph");
+      requireGraphNode(graph, sourceNode);
+      requireGraphNode(graph, targetNode);
+    }
+  }
+
+  public static final Descriptor BREADTH_FIRST =
+      Descriptor.of(
+          "graph.breadth-first",
+          true,
+          Phase.INDEX,
+          Phase.STRUCTURAL,
+          Phase.EXACT);
+
+  public static final Descriptor SHORTEST_PATH =
+      Descriptor.of(
+          "graph.shortest-path",
+          true,
+          Phase.INDEX,
+          Phase.STRUCTURAL,
+          Phase.EXACT);
+
+  public static final Descriptor TOPOLOGICAL =
+      Descriptor.of(
+          "graph.topological",
+          true,
+          Phase.INDEX,
+          Phase.STRUCTURAL,
+          Phase.EXACT);
+
+  private MIndexAlgorithm() {
+  }
+
+  public static int lowerBound(int[] sorted, int value) {
+    Objects.requireNonNull(sorted, "sorted");
+    return lowerBound(sorted, 0, sorted.length, value);
+  }
+
+  public static int lowerBound(int[] sorted, int fromInclusive, int toExclusive, int value) {
+    Objects.requireNonNull(sorted, "sorted");
+    Objects.checkFromToIndex(fromInclusive, toExclusive, sorted.length);
+    int low = fromInclusive;
+    int high = toExclusive;
+    while (low < high) {
+      int middle = (low + high) >>> 1;
+      if (sorted[middle] < value) {
+        low = middle + 1;
+      } else {
+        high = middle;
+      }
+    }
+    return low;
+  }
+
+  public static int upperBound(int[] sorted, int value) {
+    Objects.requireNonNull(sorted, "sorted");
+    return upperBound(sorted, 0, sorted.length, value);
+  }
+
+  public static int upperBound(int[] sorted, int fromInclusive, int toExclusive, int value) {
+    Objects.requireNonNull(sorted, "sorted");
+    Objects.checkFromToIndex(fromInclusive, toExclusive, sorted.length);
+    int low = fromInclusive;
+    int high = toExclusive;
+    while (low < high) {
+      int middle = (low + high) >>> 1;
+      if (sorted[middle] <= value) {
+        low = middle + 1;
+      } else {
+        high = middle;
+      }
+    }
+    return low;
+  }
+
+  public static int binarySearch(int[] sorted, int value) {
+    int index = lowerBound(sorted, value);
+    return index < sorted.length && sorted[index] == value ? index : -1;
+  }
+
+  public static int[] prefixFunction(int[] values) {
+    Objects.requireNonNull(values, "values");
+    int[] prefix = new int[values.length];
+    for (int index = 1; index < values.length; index++) {
+      int candidate = prefix[index - 1];
+      while (candidate > 0 && values[index] != values[candidate]) {
+        candidate = prefix[candidate - 1];
+      }
+      if (values[index] == values[candidate]) {
+        candidate++;
+      }
+      prefix[index] = candidate;
+    }
+    return prefix;
+  }
+
+  public static int windowMatches(
+      int[] haystack,
+      int[] needle,
+      IntConsumer matchOffsetConsumer) {
+    Objects.requireNonNull(haystack, "haystack");
+    Objects.requireNonNull(needle, "needle");
+    Objects.requireNonNull(matchOffsetConsumer, "matchOffsetConsumer");
+    return MIndexIntPattern.compile(needle).scan(haystack, matchOffsetConsumer);
+  }
+
+  /** Fixed-width maximum values from an index-only monotone deque. */
+  public static int[] slidingWindowMaxima(int[] values, int width) {
+    return MIndexIntWindows.maxima(values, width);
+  }
+
+  /** Shortest nonempty signed-sum window, as [start, end), or empty if absent. */
+  public static int[] shortestSubarrayAtLeast(int[] values, long target) {
+    return MIndexIntWindows.shortestAtLeast(values, target);
+  }
+
+  public static int longestCommonPrefix(int[] left, int[] right) {
+    Objects.requireNonNull(left, "left");
+    Objects.requireNonNull(right, "right");
+    int length = Math.min(left.length, right.length);
+    int index = 0;
+    while (index < length && left[index] == right[index]) {
+      index++;
+    }
+    return index;
+  }
+
+  public static int[] distinctSorted(int[] values) {
+    Objects.requireNonNull(values, "values");
+    if (values.length == 0) {
+      return new int[0];
+    }
+    int[] copy = values.clone();
+    Arrays.sort(copy);
+    int unique = 1;
+    for (int index = 1; index < copy.length; index++) {
+      if (copy[index] != copy[unique - 1]) {
+        copy[unique++] = copy[index];
+      }
+    }
+    return Arrays.copyOf(copy, unique);
+  }
+
+  public static long hash64(int[] values) {
+    Objects.requireNonNull(values, "values");
+    long hash = 0xcbf29ce484222325L;
+    for (int value : values) {
+      hash ^= Integer.toUnsignedLong(value);
+      hash *= 0x100000001b3L;
+      hash = mix64(hash);
+    }
+    return mix64(hash ^ values.length);
+  }
+
+  public static long mix64(long value) {
+    value ^= value >>> 30;
+    value *= 0xbf58476d1ce4e5b9L;
+    value ^= value >>> 27;
+    value *= 0x94d049bb133111ebL;
+    return value ^ (value >>> 31);
+  }
+
+  public static int[] breadthFirst(TraversalRequest request) {
+    return breadthFirst(request, MIndexExecutionContext.defaults());
+  }
+
+  public static int[] breadthFirst(
+      TraversalRequest request,
+      MIndexExecutionContext context) {
+    Objects.requireNonNull(request, "request");
+    MIndexExecutionContext checked = Objects.requireNonNull(context, "context");
+    MIndexDataStructure.IntGraph graph = request.graph();
+    int[] queue = new int[graph.nodeCount()];
+    boolean[] seen = new boolean[graph.nodeCount()];
+    int head = 0;
+    int tail = 0;
+    queue[tail++] = request.startNode();
+    seen[request.startNode()] = true;
+    MIndexProgressMonitor monitor = checked.progressMonitor();
+
+    while (head < tail) {
+      monitor.checkCancelled();
+      int node = queue[head++];
+      int end = graph.endEdge(node);
+      for (int edge = graph.firstEdge(node); edge < end; edge++) {
+        int target = graph.targetId(edge);
+        if (!seen[target]) {
+          seen[target] = true;
+          queue[tail++] = target;
+        }
+      }
+      monitor.worked(1L);
+    }
+    return Arrays.copyOf(queue, tail);
+  }
+
+  public static int[] shortestPath(RouteRequest request) {
+    return shortestPath(request, MIndexExecutionContext.defaults());
+  }
+
+  public static int[] shortestPath(
+      RouteRequest request,
+      MIndexExecutionContext context) {
+    Objects.requireNonNull(request, "request");
+    MIndexExecutionContext checked = Objects.requireNonNull(context, "context");
+    if (request.sourceNode() == request.targetNode()) {
+      return new int[] {request.sourceNode()};
+    }
+
+    MIndexDataStructure.IntGraph graph = request.graph();
+    int count = graph.nodeCount();
+    int[] queue = new int[count];
+    int[] previous = new int[count];
+    Arrays.fill(previous, -1);
+    previous[request.sourceNode()] = request.sourceNode();
+    int head = 0;
+    int tail = 0;
+    queue[tail++] = request.sourceNode();
+    MIndexProgressMonitor monitor = checked.progressMonitor();
+
+    while (head < tail && previous[request.targetNode()] < 0) {
+      monitor.checkCancelled();
+      int node = queue[head++];
+      int end = graph.endEdge(node);
+      for (int edge = graph.firstEdge(node); edge < end; edge++) {
+        int target = graph.targetId(edge);
+        if (previous[target] < 0) {
+          previous[target] = node;
+          queue[tail++] = target;
+          if (target == request.targetNode()) {
+            break;
+          }
+        }
+      }
+      monitor.worked(1L);
+    }
+
+    if (previous[request.targetNode()] < 0) {
+      return new int[0];
+    }
+    int length = 1;
+    for (int node = request.targetNode();
+        node != request.sourceNode();
+        node = previous[node]) {
+      length++;
+    }
+    int[] path = new int[length];
+    int node = request.targetNode();
+    for (int index = length - 1; index >= 0; index--) {
+      path[index] = node;
+      if (node == request.sourceNode()) {
+        break;
+      }
+      node = previous[node];
+    }
+    return path;
+  }
+
+  public static int[] topological(MIndexDataStructure.IntGraph graph) {
+    return topological(graph, MIndexExecutionContext.defaults());
+  }
+
+  public static int[] topological(
+      MIndexDataStructure.IntGraph graph,
+      MIndexExecutionContext context) {
+    Objects.requireNonNull(graph, "graph");
+    MIndexExecutionContext checked = Objects.requireNonNull(context, "context");
+    int count = graph.nodeCount();
+    int[] indegree = new int[count];
+    for (int edge = 0; edge < graph.edgeCount(); edge++) {
+      indegree[graph.targetId(edge)]++;
+    }
+
+    int[] queue = new int[count];
+    int head = 0;
+    int tail = 0;
+    for (int node = 0; node < count; node++) {
+      if (indegree[node] == 0) {
+        queue[tail++] = node;
+      }
+    }
+
+    int[] order = new int[count];
+    int output = 0;
+    MIndexProgressMonitor monitor = checked.progressMonitor();
+    while (head < tail) {
+      monitor.checkCancelled();
+      int node = queue[head++];
+      order[output++] = node;
+      int end = graph.endEdge(node);
+      for (int edge = graph.firstEdge(node); edge < end; edge++) {
+        int target = graph.targetId(edge);
+        if (--indegree[target] == 0) {
+          queue[tail++] = target;
+        }
+      }
+      monitor.worked(1L);
+    }
+    if (output != count) {
+      throw new IllegalArgumentException("MIndex graph contains a directed cycle");
+    }
+    return order;
+  }
+
+  private static void requireGraphNode(
+      MIndexDataStructure.IntGraph graph,
+      int node) {
+    if (node < 0 || node >= graph.nodeCount()) {
+      throw new IndexOutOfBoundsException("graph node: " + node);
+    }
+  }
+}

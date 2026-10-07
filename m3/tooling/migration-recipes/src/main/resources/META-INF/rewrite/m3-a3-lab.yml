@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.a3.LabDelivery
+displayName: Install A3 compiler-driven mastery lab
+description: >-
+  Source-sealed installation of A3Lab and its hostile Atomize/Patternize compiler-convergence
+  corpus. Candidate-only; JDK product source and canonical promotion remain outside this recipe.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: a3-mastery-lab

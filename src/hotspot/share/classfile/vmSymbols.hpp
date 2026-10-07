@@ -59,6 +59,11 @@
   template(java_lang_Package,                         "java/lang/Package")                        \
   template(java_lang_Module,                          "java/lang/Module")                         \
   template(java_lang_String,                          "java/lang/String")                         \
+  template(java_lang_M3String,                 "java/lang/M3String")                \
+  template(java_lang_M3StringOwner,            "java/lang/M3StringOwner")           \
+  template(java_lang_M3StringAtom,             "java/lang/M3StringAtom")            \
+  template(java_lang_M3StringTuple,            "java/lang/M3StringTuple")           \
+  template(java_lang_M3StringFacts,            "java/lang/M3StringFacts")           \
   template(java_lang_StringLatin1,                    "java/lang/StringLatin1")                   \
   template(java_lang_StringUTF16,                     "java/lang/StringUTF16")                    \
   template(java_lang_Thread,                          "java/lang/Thread")                         \
@@ -473,6 +478,7 @@
   template(cache_field_name,                          "cache")                                    \
   template(value_name,                                "value")                                    \
   template(compact_strings_name,                      "COMPACT_STRINGS")                          \
+  template(m3_joined_strings_name,                    "M3_JOINED_STRINGS")                       \
   template(numberOfLeadingZeros_name,                 "numberOfLeadingZeros")                     \
   template(numberOfTrailingZeros_name,                "numberOfTrailingZeros")                    \
   template(bitCount_name,                             "bitCount")                                 \
@@ -486,6 +492,7 @@
   template(vmtarget_name,                             "vmtarget")                                 \
   template(vmholder_name,                             "vmholder")                                 \
   template(method_name,                               "method")                                   \
+  template(m3AdmitNative_name,                        "m3AdmitNative")                            \
   template(vmindex_name,                              "vmindex")                                  \
   template(vmcount_name,                              "vmcount")                                  \
   template(flags_name,                                "flags")                                    \
@@ -652,6 +659,12 @@
   template(object_array_signature,                    "[Ljava/lang/Object;")                                      \
   template(class_signature,                           "Ljava/lang/Class;")                                        \
   template(string_signature,                          "Ljava/lang/String;")                                       \
+  template(m3_string_signature,                   "Ljava/lang/M3String;")                                      \
+  template(m3_string_owner_signature,             "Ljava/lang/M3StringOwner;")                                 \
+  template(m3_string_atom_signature,              "Ljava/lang/M3StringAtom;")                                  \
+  template(m3_string_tuple_signature,             "Ljava/lang/M3StringTuple;")                              \
+  template(m3_string_facts_signature,             "Ljava/lang/M3StringFacts;")                              \
+  template(m3_string_array_signature,             "[Ljava/lang/M3String;")                             \
   template(string_array_signature,                    "[Ljava/lang/String;")                                      \
   template(reference_signature,                       "Ljava/lang/ref/Reference;")                                \
   template(referencequeue_signature,                  "Ljava/lang/ref/ReferenceQueue;")                           \
@@ -753,6 +766,7 @@
   template(appendToClassPathForInstrumentation_name,   "appendToClassPathForInstrumentation")                     \
   do_alias(appendToClassPathForInstrumentation_signature, string_void_signature)                                  \
   template(serializePropertiesToByteArray_name,        "serializePropertiesToByteArray")                          \
+  template(serializeSecurityPropertiesToByteArray_name, "serializeSecurityPropertiesToByteArray")                 \
   template(serializeAgentPropertiesToByteArray_name,   "serializeAgentPropertiesToByteArray")                     \
   template(serializeSavedPropertiesToByteArray_name,   "serializeSavedPropertiesToByteArray")                     \
   template(encodeThrowable_name,                       "encodeThrowable")                                         \

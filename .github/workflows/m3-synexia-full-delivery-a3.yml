@@ -1,0 +1,53 @@
+name: M3 Synexia full delivery A3
+
+on:
+  pull_request:
+    paths:
+      - 'm3/synexia-import/**'
+      - 'm3/docs/synexia-full-delivery-a3.md'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/synexia-full-delivery-a3/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/synexia-full-delivery-a3-doc/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-synexia-full-delivery-a3.yml'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/M3SynexiaFullDeliveryA3RecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/synexia-full-delivery-a3/**'
+      - 'm3/tooling/migration-recipes/tasks/synexia-full-delivery-a3/**'
+      - '.github/workflows/m3-synexia-full-delivery-a3.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Diff hygiene
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: git diff --check "$BASE_SHA...HEAD"
+      - name: Recipe replay and fixed point
+        run: >
+          mvn -B -ntp -f m3/pom.xml
+          -pl tooling/migration-recipes -am
+          -Dtest=M3SynexiaFullDeliveryA3RecipeTest
+          -Dsurefire.failIfNoSpecifiedTests=false test
+      - name: Import planner focused tests
+        run: >
+          mvn -B -ntp -f m3/pom.xml
+          -pl synexia-import -am
+          -Dtest=SynexiaImportPlanTest,SynexiaImporterTest,SynexiaSeedSnapshotTest
+          -Dsurefire.failIfNoSpecifiedTests=false test
+      - name: Import module full verify and 99 percent coverage gate
+        run: >
+          mvn -B -ntp -f m3/pom.xml
+          -pl synexia-import -am verify

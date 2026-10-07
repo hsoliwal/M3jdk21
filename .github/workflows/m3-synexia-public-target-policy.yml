@@ -1,0 +1,55 @@
+name: M3 Synexia public-target policy
+
+on:
+  pull_request:
+    paths:
+      - "m3/docs/SYNEXIA_CONVERGENCE_MODEL.md"
+      - "m3/compatibility/synexia-public-target-policy.tsv"
+      - "m3/compatibility/synexia-apache-handoff-pin.tsv"
+      - "m3/compatibility/check_synexia_public_target.py"
+      - "m3/compatibility/test_synexia_public_target_policy.py"
+      - "m3/docs/synexia-mindex-precompute-inventory.tsv"
+      - "m3/docs/synexia-full-family-catalogue.json"
+      - "m3/compatibility/test_synexia_full_family.py"
+      - "m3/compatibility/check_synexia_full_family.py"
+      - "m3/compatibility/synexia-full-family-pin.tsv"
+      - "src/java.base/share/legal/synexia.md"
+      - ".github/workflows/m3-synexia-public-target-policy.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  policy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Compile validators
+        run: |
+          python3 -m compileall -q \
+            m3/compatibility/check_synexia_public_target.py \
+            m3/compatibility/test_synexia_public_target_policy.py \
+            m3/compatibility/check_synexia_full_family.py \
+            m3/compatibility/test_synexia_full_family.py
+
+      - name: Validate checked-in policy
+        run: python3 m3/compatibility/check_synexia_public_target.py
+
+      - name: Validate full-family Synexia ownership pin
+        run: python3 m3/compatibility/check_synexia_full_family.py
+
+      - name: Run policy tests
+        working-directory: m3/compatibility
+        run: |
+          python3 -m unittest -v \
+            test_synexia_public_target_policy.py \
+            test_synexia_full_family.py
+
+      - name: Verify java.base legal anchor
+        run: |
+          set -euo pipefail
+          grep -F "First-party and independently authored Synexia components admitted into M3JDK21 retain their" src/java.base/share/legal/synexia.md
+          grep -F "Apache-2.0 identity" src/java.base/share/legal/synexia.md

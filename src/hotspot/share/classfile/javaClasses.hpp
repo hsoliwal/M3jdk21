@@ -54,6 +54,7 @@ class java_lang_Object : AllStatic {
 class java_lang_String : AllStatic {
  private:
   static int _value_offset;
+  static int _m3_offset;
   static int _hash_offset;
   static int _hashIsZero_offset;
   static int _coder_offset;
@@ -100,8 +101,10 @@ class java_lang_String : AllStatic {
   static Handle create_from_platform_dependent_str(const char* str, TRAPS);
 
   static void set_compact_strings(bool value);
+  static void set_m3_joined_strings(bool value);
 
   static int value_offset() { CHECK_INIT(_value_offset); }
+  static int m3_storage_offset() { CHECK_INIT(_m3_offset); }
   static int coder_offset() { CHECK_INIT(_coder_offset); }
 
   static inline void set_value_raw(oop string, typeArrayOop buffer);
@@ -123,6 +126,11 @@ class java_lang_String : AllStatic {
   // Accessors
   static inline typeArrayOop value(oop java_string);
   static inline typeArrayOop value_no_keepalive(oop java_string);
+  static inline oop m3_storage(oop java_string);
+  static inline oop m3_storage_no_keepalive(oop java_string);
+  static inline bool is_m3_joined(oop java_string);
+  static inline jchar char_at(oop java_string, int index);
+  static void copy_chars(oop java_string, int start, int len, jchar* destination);
   static inline bool hash_is_set(oop string);
   static inline bool is_latin1(oop java_string);
   static inline bool deduplication_forbidden(oop java_string);
@@ -197,6 +205,50 @@ class java_lang_String : AllStatic {
   friend class StringTable;
 };
 
+/**
+ * VM access to java.lang.M3String and its canonical owner graph.
+ *
+ * M3String itself is exactly owner + packed range coordinate. Payload arrays are
+ * not part of this layout. Atom owners address native/mapped bytes; tuple owners
+ * retain only child M3String coordinates.
+ */
+class java_lang_M3String : AllStatic {
+ private:
+  static int _owner_offset;
+  static int _value_offset;
+
+  static int _owner_kind_offset;
+  static int _owner_length_offset;
+  static int _owner_coder_offset;
+  static int _owner_javaHash_offset;
+  static int _owner_facts_offset;
+  static int _facts_utf8Length_offset;
+
+  static int _atom_address_offset;
+  static int _atom_storageWidth_offset;
+  static int _atom_bigEndian_offset;
+
+  static int _tuple_left_offset;
+  static int _tuple_right_offset;
+
+  static void copy_owner_chars(
+      oop owner, int start, int len, jchar* destination);
+
+ public:
+  static void compute_offsets();
+  static void serialize_offsets(SerializeClosure* f) NOT_CDS_RETURN;
+
+  static inline oop owner(oop value);
+  static inline jlong coordinate(oop value);
+  static inline int start(oop value);
+  static inline int length(oop value);
+  static inline int owner_length(oop value);
+  static inline jbyte coder(oop value);
+  static inline jint java_hash(oop value);
+  static inline int utf8_length_if_precomputed(oop value);
+  static inline jchar char_at(oop value, int index);
+  static void copy_chars(oop value, int start, int len, jchar* destination);
+};
 
 // Interface to java.lang.Class objects
 

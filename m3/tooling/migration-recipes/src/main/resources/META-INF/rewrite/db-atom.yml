@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.DbAtom
+displayName: Expose DB private fault atoms
+description: Extract cohesive private store and codec operations and add behavioral fault proofs without changing public APIs or removing guards.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: db-atom

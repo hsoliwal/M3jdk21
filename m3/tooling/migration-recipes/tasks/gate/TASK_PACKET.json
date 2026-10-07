@@ -1,0 +1,66 @@
+{
+  "task_packet": "active",
+  "source_doc": "m3/tooling/migration-recipes/tasks/gate/DESIGN.md",
+  "invariant_id": "M3_RECIPE_GATE_CLOSURE",
+  "base_commit": "2aa6c8dcc7bc23e482c2a12e3b49e4de43fb2695",
+  "run": {
+    "mode": "apply",
+    "profile": "bounded",
+    "workers": 1,
+    "shard_count": 1,
+    "shard_index": 0
+  },
+  "targets": {
+    "modules": [
+      "m3/tooling/migration-recipes"
+    ],
+    "files": [
+      "m3/tooling/migration-recipes/src/test/**",
+      "m3/tooling/migration-recipes/src/main/resources/**",
+      "m3/tooling/migration-recipes/tasks/gate/**"
+    ]
+  },
+  "invariant_locks": {
+    "PRODUCT_JDK": "LOCKED",
+    "DB": "LOCKED",
+    "PUBLIC_API": "LOCKED",
+    "POM_COVERAGE": "LOCKED",
+    "WORKFLOWS": "LOCKED",
+    "CANONICAL_BRANCHES": "READ_ONLY"
+  },
+  "allowed_delta": [
+    "test configuration/oracle corrections and added contract probes",
+    "exact String manifest delimiter repair",
+    "exact JEP458 module-info lane reassignment with immutable target hashes",
+    "existing recipe configurations, fixtures, documentation, actual receipts"
+  ],
+  "forbidden": [
+    "skip tests or validation gates",
+    "make invalid crates executable",
+    "rewrite source bodies by regex",
+    "forge type or product proof",
+    "force-push/merge/rebase"
+  ],
+  "verify_order": [
+    "diff",
+    "static/lint",
+    "compile",
+    "JUnit/OpenRewrite",
+    "coverage",
+    "product tests"
+  ],
+  "output_contract": [
+    "STATUS.tsv",
+    "FINAL_REPORT.md",
+    "RUN_CONTEXT.tsv",
+    "PROVENANCE.tsv",
+    "VERIFY_CONTRACT.tsv",
+    "OUTPUT_CONTRACT.tsv"
+  ],
+  "stop_conditions": [
+    "unapproved source delta",
+    "unresolved test failure",
+    "coverage gate failure",
+    "permission denial"
+  ]
+}

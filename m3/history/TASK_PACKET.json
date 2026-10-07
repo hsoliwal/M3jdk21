@@ -1,0 +1,74 @@
+{
+  "task_packet": "active",
+  "source_doc": "M3Scale(20261002-025837).txt",
+  "source_sha256": "5ec31d51207bda02d2f1f9a7fcd940f2ae5e1bfc9f0ef9358139fe62b47f393b",
+  "invariant_id": "M3-PSE-CCPS-NO-ANCESTRY-AS-SUPERSET",
+  "run": {
+    "mode": "dry-run",
+    "profile": "history-inventory",
+    "workers": 1,
+    "shard_count": 1,
+    "shard_index": 0
+  },
+  "targets": {
+    "files": [
+      "m3/history/**",
+      ".github/workflows/m3-history-audit.yml"
+    ]
+  },
+  "invariant_locks": {
+    "PUBLIC_API": "LOCKED",
+    "EXTERNAL_BEHAVIOR": "LOCKED",
+    "EXISTING_BUILD_SCRIPTS": "LOCKED",
+    "EXISTING_RECIPE_PINS": "LOCKED",
+    "INSTALLED_JDK": "LOCKED",
+    "PRIVATE_SOURCE": "NO_IMPORT"
+  },
+  "allowed_delta": [
+    "new read-only history recipe",
+    "new draft-PR documentation and ledgers",
+    "scoped read-only CI workflow"
+  ],
+  "forbidden": [
+    "merge",
+    "reset source repo",
+    "force push",
+    "runtime source rewrite",
+    "delete existing content",
+    "deploy JDK",
+    "treat historical receipts as current passes"
+  ],
+  "verify_order": [
+    "diff",
+    "lexical lint",
+    "Python byte compilation",
+    "isolated Git fixture tests",
+    "actual repository history read"
+  ],
+  "output_contract": [
+    "STATUS.tsv",
+    "FINAL_REPORT.md",
+    "RUN_CONTEXT.tsv",
+    "PROVENANCE.tsv",
+    "VERIFY_CONTRACT.tsv",
+    "OUTPUT_CONTRACT.tsv",
+    "INVENTORY.tsv",
+    "CLUSTERS_EXACT.tsv",
+    "CLUSTERS_NORMALIZED.tsv",
+    "ACTION_QUEUE.tsv",
+    "SUMMARY.tsv"
+  ],
+  "stop_conditions": [
+    "missing or shallow history",
+    "source/output namespace overlap",
+    "source/ref drift",
+    "resource budget exceeded",
+    "unverified runtime contract"
+  ],
+  "baseline_classification": "PR6 historical built candidate with known failures; not user-confirmed last-good",
+  "authority_planes": {
+    "locked_canon": "M3Scale(20261002-025837).txt",
+    "expanded_witness": "M3ScaleCopy(20261002-025836).txt",
+    "discussion_extension": "M3ScaleCodingAgent(20261002-025836).txt"
+  }
+}

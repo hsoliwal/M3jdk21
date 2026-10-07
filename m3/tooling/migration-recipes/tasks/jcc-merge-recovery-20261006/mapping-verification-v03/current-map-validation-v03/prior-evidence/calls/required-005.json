@@ -1,0 +1,25 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "path": "m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+    "ref": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+    "encoding": "base64"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "IyBwYXRoCWJlZm9yZQlhZnRlcgl0ZW1wbGF0ZQpzcmMvamF2YS5iYXNlL3No\nYXJlL2NsYXNzZXMvamRrL2ludGVybmFsL21pbmRleC9NM1RRLmphdmEJQUJT\nRU5UCTljNDU0MDU5NjlhZWFjMDg5YWQ4Nzg2NDQzZDU5NDUwZjJmZDhlNmYz\nM2NhMWE2ZTM1ZTk1YTdhNDVmNGYwYjEJTTNUUS5qYXZhLnR4dAp0ZXN0L2pk\nay9qYXZhL2xhbmcvU3RyaW5nL00zVFFUZXN0LmphdmEJQUJTRU5UCTY4MzE2\nYjM3N2JjNGU1MzhjN2NiMzQzMDYwNjk2Y2I4ZmNjZmFlZTQzM2MyMjBiZGI3\nM2QzNDg2ZDE2ZTlmMjAJTTNUUVRlc3QuamF2YS50eHQK\n",
+      "encoding": "base64",
+      "sha": "b050a6ef7e2c2ab114c7d78395ff38782125818d",
+      "display_url": "https://github.com/hsoliwal/M3jdk21/blob/d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2/m3/tooling/tq/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-tq/manifest.tsv",
+      "display_title": "manifest.tsv"
+    },
+    "isError": false
+  }
+}
+

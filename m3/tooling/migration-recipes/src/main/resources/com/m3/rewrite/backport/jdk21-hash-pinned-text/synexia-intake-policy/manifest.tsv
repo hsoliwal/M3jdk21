@@ -1,0 +1,7 @@
+# path	preimage-sha256-or-ABSENT	postimage-sha256	template
+.github/workflows/m3-synexia-intake-policy.yml	ABSENT	5565231fc7715ae02e197183820f00e95509a32b97075396a28b94db7e885e82	00-workflow.yml.txt
+m3/docs/m3jdk21-porting-invariant.md	87df6a644b1ff514670f59a99d4df02ae8af00c8db6d5bbc2c8107fb9c3bc8af	27dacb90b7077aa66435e57a529e1c51586970a6932ef35a4571ed09434dffe0	01-porting.md.txt
+m3/docs/synexia-direct-copy-review.tsv	ABSENT	40a234c7e4de2cb1ec2b18028d5e4f7fb966ce4532a146ca2795fa68bb150ab7	02-direct-copy.tsv.txt
+m3/docs/synexia-intake-policy.tsv	ABSENT	519c6e3152fac4d5d06b77c859f8f5a6a6b7e54a1e3dbb5fdd999c4e100a69c7	03-policy.tsv.txt
+m3/runtime-integration/FOSS_REUSE_DECISION.tsv	fa7fa78528709b5a255f5b752c0116dc2f9aa953bb8b14771e2a263f3a71e073	850d79b0cad45f9ca5e3131f58af584ce44fb872a86a44ff5e92dcf23321a268	04-foss.tsv.txt
+m3/runtime-integration/verify-synexia-intake.py	ABSENT	227562b4bc1cf11c38b5806298115f028dbc1534039c80b7fc31d7e3003d2688	05-verifier.py.txt

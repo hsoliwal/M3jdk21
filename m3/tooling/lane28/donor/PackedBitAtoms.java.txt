@@ -1,0 +1,23 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.common.collections;
+
+/** Shared zero-object bit-address arithmetic for packed primitive bit lanes. */
+final class PackedBitAtoms {
+    private PackedBitAtoms() { }
+
+    static int wordIndex(int bitIndex) {
+        return bitIndex >>> 6;
+    }
+
+    static long bitMask(int bitIndex) {
+        return 1L << (bitIndex & 63);
+    }
+
+    static int wordsForBits(int bitCount) {
+        return (int) ((((long) bitCount) + 63L) >>> 6);
+    }
+
+    static int bitCapacity(int wordCount) {
+        return wordCount << 6;
+    }
+}

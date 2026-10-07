@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.jdk21.Jep497MlDsa
+displayName: Receive JEP 497 ML-DSA candidate
+description: >-
+  Replays exact Java-21 ML-DSA product/provider/security-test postimages from the reviewed
+  JEP 496/SHAKE/named-key receiver state. Candidate only; promotion remains separately gated.
+recipeList:
+  - com.m3.rewrite.backport.M3Jep497MlDsaBackportRecipe

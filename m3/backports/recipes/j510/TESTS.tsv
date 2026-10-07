@@ -1,0 +1,11 @@
+family	state	required
+RFC5869 known-answer vectors	MANDATORY	SHA-256/384/512 exact bytes
+HKDF basic functions	MANDATORY	extract/expand/extractThenExpand
+HKDF exhaustive boundaries	MANDATORY	length/null/empty/refusal contracts
+HKDF non-extractable PRK	MANDATORY	JDK-8347289 delayed-provider behavior
+KDF delayed provider sync	MANDATORY	provider selection
+KDF delayed provider async/threading	MANDATORY	concurrency/provider selection
+KDF delayed provider exception	MANDATORY	final JEP510 exception behavior
+unsigned provider verification	MANDATORY	provider loading path
+secret cleanup	MANDATORY	JDK-8370082 review/runtime evidence
+full security jtreg	MANDATORY	before promotion

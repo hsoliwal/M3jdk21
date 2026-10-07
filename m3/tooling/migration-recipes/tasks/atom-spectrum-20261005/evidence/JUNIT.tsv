@@ -1,0 +1,11 @@
+suite	tests	failures	errors	skipped	seconds
+com.m3.rewrite.atom.M3AtomCommentRecipeTest	2	0	0	0	1.811
+com.m3.rewrite.atom.M3AtomCoverageClosureTest	7	0	0	0	10.205
+com.m3.rewrite.atom.M3AtomDefensiveBranchTest	4	0	0	0	2.66
+com.m3.rewrite.atom.M3AtomizePureIntReturnRecipeTest	4	0	0	0	1.318
+com.m3.rewrite.atom.M3IntRecipeProjectTest	6	0	0	0	7.128
+com.m3.rewrite.atom.M3IntSpectrumTest	4	0	0	0	18.013
+com.m3.rewrite.atom.M3InventoryPureIntAtomCandidatesTest	3	0	0	0	0.61
+com.m3.rewrite.atom.M3PatternMarkerTest	2	0	0	0	2.184
+com.m3.rewrite.atom.M3PureIntConvergenceRecipeTest	4	0	0	0	1.873
+com.m3.rewrite.atom.M3RepositoryCorpusTest	3	0	0	0	21.618

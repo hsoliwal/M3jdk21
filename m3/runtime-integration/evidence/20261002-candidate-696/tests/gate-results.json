@@ -1,0 +1,67 @@
+[
+  {
+    "case": "dedup",
+    "exit": 1,
+    "rejected": true
+  },
+  {
+    "case": "share-on",
+    "exit": 1,
+    "rejected": true
+  },
+  {
+    "case": "share-dump",
+    "exit": 1,
+    "rejected": true
+  },
+  {
+    "case": "archive-exit",
+    "exit": 1,
+    "rejected": true
+  },
+  {
+    "case": "record-dump",
+    "exit": 1,
+    "rejected": true
+  },
+  {
+    "case": "auto-archive",
+    "exit": 1,
+    "rejected": true
+  },
+  {
+    "case": "jvmci",
+    "exit": 1,
+    "rejected": true
+  },
+  {
+    "case": "jfr",
+    "exit": 1,
+    "rejected": true
+  },
+  {
+    "case": "jfr-options",
+    "exit": 1,
+    "rejected": true
+  },
+  {
+    "case": "trailing-xcomp",
+    "exit": 0,
+    "gates_held": true
+  },
+  {
+    "case": "leading-xcomp",
+    "exit": 0,
+    "gates_held": true
+  },
+  {
+    "case": "trailing-compiler",
+    "exit": 0,
+    "gates_held": true
+  },
+  {
+    "case": "dynamic-cds",
+    "exit": 0,
+    "rejected": true
+  }
+]

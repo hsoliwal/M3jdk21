@@ -1,0 +1,13 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Sc0Forward
+displayName: Sc0 Forward declared replay
+description: Explicit named replay of the sole Spc family; no distinct-permutation or receiving qualification claim.
+recipeList:
+  - com.synexia.m3.Sc0Spc
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Sc0Reverse
+displayName: Sc0 Reverse declared replay
+description: Explicit named replay of the sole Spc family; no distinct-permutation or receiving qualification claim.
+recipeList:
+  - com.synexia.m3.Sc0Spc

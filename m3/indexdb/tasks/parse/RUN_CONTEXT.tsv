@@ -1,0 +1,12 @@
+key	value
+repository	hsoliwal/M3jdk21
+base	ef39c669ee9ac77bee073f5b95479ec1613cdf3a
+retained_owner	46112be5b68d8d3816b9d3100fc31d8b2e9de736
+first_tested_head	fbfd2141a0f1a9530b1fca35d52a4e5d0ceb9c3b
+first_ci_run	37183150332
+first_ci_artifact	11296460013
+local_jdk	OpenJDK 21.0.11 Debian
+hosted_jdk	Temurin 21+35
+scope	MODULE corruption refusal; MULTI_MODULE source restoration
+parallelism	One local worker; CI max-parallel=1
+canonical_promotion	NOT_PERFORMED

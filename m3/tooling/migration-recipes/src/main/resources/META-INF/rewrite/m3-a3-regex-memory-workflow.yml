@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.a3.RegexMemoryWorkflowDelivery
+displayName: Advance A3 regex-memory mastery workflow
+description: >-
+  Replays the exact A3 workflow and documentation updates for the in-memory compiler and
+  precompiled regex/string matrix gate. Candidate-only; no JDK product mutation authority.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: a3-regex-memory-workflow

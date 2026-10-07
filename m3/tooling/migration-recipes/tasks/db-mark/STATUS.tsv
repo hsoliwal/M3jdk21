@@ -1,0 +1,9 @@
+item	state	evidence
+DB_565bc02	PASS	61 tests; 685/687 lines; 240/241 branches; both0.99 gates pass
+recipe_compile_565bc02	PASS	Real migration-recipes main and test sources compiled
+focused_recipe_565bc02	FAILURE_OBSERVED	10 tests;9 pass;1 marker expectation failure
+all_recipe_565bc02	FAILURE_OBSERVED	77 tests;12 failures;0 errors/skipped
+DbMark	CANDIDATE	Test-only oracle repair; production unchanged
+static_hashes	PASS	Exact source matches downloaded artifact;6 Java crate template hashes checked
+new_head_compile_JUnit	PENDING	11 focused cases authored, not executed
+whole_JDK	NOT_VERIFIED	No native/JNI/jtreg or exhaustive backport claim

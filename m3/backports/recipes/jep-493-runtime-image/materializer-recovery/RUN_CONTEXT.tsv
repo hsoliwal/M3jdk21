@@ -1,0 +1,16 @@
+key	value
+repository	hsoliwal/M3jdk21
+base_commit	b71ee5bf88398fb80961c13db03e8c675fb445ce
+branch	m3/recover-jep493-materializer-20261006
+source_pr	144
+source_head	63502fa69cda832c98d10fc752beef32da30a5b7
+jep	493
+selected_paths	47
+generator	m3/backports/generate_recipe_crates.py
+executor	m3/backports/materialize_generated_crates.py
+crate_size	1
+include_text	true
+file_scope	FILE
+feature_scope	MULTI_MODULE
+source_materialized_in_git	false
+promotion	false

@@ -1,0 +1,11 @@
+item	state	evidence	limit
+upstream_denominator	PINNED	JDK-8338383 commit 78b80150e009745b8f28d36c3836f18ad0ca921f;246 paths	implementation commit only
+path_classifier	IMPLEMENTED	j491_materialize.py	must classify all246 without OTHER residue
+patch_atomizer	IMPLEMENTED	commit_patch_atoms.py	target tree never mutated
+unit_tests	AUTHORED	test_j491_materialize.py;test_commit_patch_atoms.py	hosted execution pending
+file_atom_workflow	IMPLEMENTED	m3-jep491-materialization.yml	exact-head execution pending
+followup_reconciliation	IMPLEMENTED_AS_EVIDENCE	5 pinned follow-up intersections	ABSORB/IRRELEVANT/SEPARATE decisions still pending
+product_source	NOT_APPLIED	-	no product mutation before atom evidence
+native_build	NOT_EXECUTED	-	per-architecture fastdebug/release required
+jtreg_stress	NOT_EXECUTED	-	virtual-thread/JVMTI/JFR/SA/JNI proof required
+whole_jdk	INCOMPLETE	programme denominator remains open	no completion claim

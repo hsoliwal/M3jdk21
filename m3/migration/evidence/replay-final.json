@@ -1,0 +1,124 @@
+{
+  "schema": 1,
+  "scope": "local exact prefix postimage replay and semantic naming replay; not JDK/runtime acceptance",
+  "prefix_code_commit": "3a8e21dcea32b97e869f3bdbb5817e1f9927ca4f",
+  "tool_code_commit": "35c2787e2222e9ce894f6255ca9a9c1c44c5a6c0",
+  "source_input_sha256": "d2ccefe7aceb9797913fd1ec9daf5aba976bf4e86aefdbd9decc86d348d2cb56",
+  "inputs": {
+    "m3/migration/src/com/m3/migration/ExactFileRecipe.java": "5baee59ad560a2ee2134ac0f0ad8b64914a31099f0b57f0b06d901dc96347d90",
+    "m3/migration/recipes/prefix-z-v1.tsv": "54251ed210b9ed280919968a6ea13f0b6ed6e590fbf92090d13b4495f05f4217",
+    "m3/migration/recipes/postimages/M3PrefixZ.java.txt": "93dbde74109df4498be0351978f0b861db9fd0f3f9d4d833140308850366399a",
+    "m3/migration/migration.py": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e",
+    "m3/docs/name-mapping.json": "4520738b949198601dc7c2ecf2bef7612bf11b024473bda06ffd75dbfa6253a7",
+    "m3/docs/name-mapping.schema.json": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b",
+    "m3/recipes/manifest.json": "a676ba7f32e406c12cbe120665a914130ed79e11fe8e43d005cb40b90d6f29f2"
+  },
+  "runs": [
+    {
+      "command": [
+        "java",
+        "/mnt/data/m3-work/candidate/m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+        "check",
+        "/mnt/data/m3-work/source-input",
+        "/mnt/data/m3-work/final-replay-target",
+        "/mnt/data/m3-work/candidate/m3/migration/recipes/prefix-z-v1.tsv"
+      ],
+      "exit_code": 0,
+      "stdout": "EXACT_RECIPE_PASS mode=check result=Result[changed=1, unchanged=0, dryRun=true]\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "java",
+        "/mnt/data/m3-work/candidate/m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+        "apply",
+        "/mnt/data/m3-work/source-input",
+        "/mnt/data/m3-work/final-replay-target",
+        "/mnt/data/m3-work/candidate/m3/migration/recipes/prefix-z-v1.tsv"
+      ],
+      "exit_code": 0,
+      "stdout": "EXACT_RECIPE_PASS mode=apply result=Result[changed=1, unchanged=0, dryRun=false]\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "java",
+        "/mnt/data/m3-work/candidate/m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+        "apply",
+        "/mnt/data/m3-work/source-input",
+        "/mnt/data/m3-work/final-replay-target",
+        "/mnt/data/m3-work/candidate/m3/migration/recipes/prefix-z-v1.tsv"
+      ],
+      "exit_code": 0,
+      "stdout": "EXACT_RECIPE_PASS mode=apply result=Result[changed=0, unchanged=1, dryRun=false]\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "java",
+        "/mnt/data/m3-work/candidate/m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+        "rollback",
+        "/mnt/data/m3-work/final-replay-target",
+        "/mnt/data/m3-work/candidate/m3/migration/recipes/prefix-z-v1.tsv"
+      ],
+      "exit_code": 0,
+      "stdout": "EXACT_RECIPE_PASS mode=rollback result=Result[changed=1, unchanged=0, dryRun=false]\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "java",
+        "/mnt/data/m3-work/candidate/m3/migration/src/com/m3/migration/ExactFileRecipe.java",
+        "apply",
+        "/mnt/data/m3-work/source-input",
+        "/mnt/data/m3-work/final-replay-target",
+        "/mnt/data/m3-work/candidate/m3/migration/recipes/prefix-z-v1.tsv"
+      ],
+      "exit_code": 0,
+      "stdout": "EXACT_RECIPE_PASS mode=apply result=Result[changed=1, unchanged=0, dryRun=false]\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "python",
+        "m3/migration/migration.py",
+        "extend",
+        "--base",
+        "m3/migration/recipes/baselines/name-mapping.v1.json",
+        "--extension",
+        "m3/docs/name-mapping.json",
+        "--expected-sha256",
+        "a28301f443314e6ece0e918d7d3af655fe127578380f15c9860a0db2702a5601",
+        "--output",
+        "/mnt/data/m3-work/naming-replay-final.json"
+      ],
+      "exit_code": 0,
+      "stdout": "MANIFEST_EXTENSION_RECIPE_PASS source_unchanged=true output_sha256=185eb24b6eb1ffa4f11bd9deab048345fbe50bf34a5e274fc576ef2b701ca874\n",
+      "comparison": "equal parsed JSON; replay uses deterministic two-space serialization, canonical file uses dense leaf formatting"
+    },
+    {
+      "command": [
+        "python",
+        "m3/migration/migration.py",
+        "validate",
+        "."
+      ],
+      "exit_code": 0,
+      "stdout": "MIGRATION_MANIFEST_VALID completion=INCOMPLETE\n",
+      "stderr": "",
+      "expected_exit_code": 0
+    },
+    {
+      "command": [
+        "python",
+        "m3/migration/migration.py",
+        "complete",
+        "."
+      ],
+      "exit_code": 2,
+      "stdout": "MIGRATION_MANIFEST_VALID completion=INCOMPLETE\n",
+      "stderr": "full source tree inventory is incomplete\nsemantic dependency/ownership closure is incomplete\npinned exhaustive inventory receipt is absent\nuninspected domains remain\nm3.p0-view-dependencies: pending\nm3.p0-view-dependencies: synchronization gaps remain\nsynexia.frozen-chars: pending\nsynexia.frozen-chars: synchronization gaps remain\nsynexia.inventory-producer: pending\nsynexia.inventory-producer: synchronization gaps remain\nsynexia.inventory-cli: pending\nsynexia.inventory-cli: synchronization gaps remain\nbridge.MIndexCanonicalBridge: pending\nbridge.MIndexCanonicalBridge: synchronization gaps remain\nbridge.MIndexDagDeferredSwap: pending\nbridge.MIndexDagDeferredSwap: synchronization gaps remain\nbridge.MIndexDagPage: pending\nbridge.MIndexDagPage: synchronization gaps remain\nbridge.MIndexDagPageCodec: pending\nbridge.MIndexDagPageCodec: synchronization gaps remain\nbridge.MIndexKnowledgeArgumentCompiler: pending\nbridge.MIndexKnowledgeArgumentCompiler: synchronization gaps remain\nbridge.MIndexKnowledgeArguments: pending\nbridge.MIndexKnowledgeArguments: synchronization gaps remain\nbridge.MIndexLexiconCoordinateCompilerCli: pending\nbridge.MIndexLexiconCoordinateCompilerCli: synchronization gaps remain\nbridge.MIndexLexiconCoordinateManifest: pending\nbridge.MIndexLexiconCoordinateManifest: synchronization gaps remain\nbridge.MIndexLexiconCoordinatePublisher: pending\nbridge.MIndexLexiconCoordinatePublisher: synchronization gaps remain\nbridge.MIndexLexiconCoordinateSpace: pending\nbridge.MIndexLexiconCoordinateSpace: synchronization gaps remain\nbridge.MIndexRuntimeStructuralAdapterProvider: pending\nbridge.MIndexRuntimeStructuralAdapterProvider: synchronization gaps remain\nbridge.MIndexStringConversionBridge: pending\nbridge.MIndexStringConversionBridge: synchronization gaps remain\nfamily.entire-source-closure: pending\nfamily.entire-source-closure: synchronization gaps remain\nfamily.structural-owners: pending\nfamily.structural-owners: synchronization gaps remain\nfamily.substring-conflict: pending\nfamily.substring-conflict: synchronization gaps remain\nfamily.word-facts: pending\nfamily.word-facts: synchronization gaps remain\nfamily.application-structures: pending\nfamily.application-structures: synchronization gaps remain\nroute-a.canonical-storage: pending\nroute-a.canonical-storage: synchronization gaps remain\nroute-b.compiler-lowering: pending\nroute-b.compiler-lowering: synchronization gaps remain\nroute-c.complete-jdk: pending\nroute-c.complete-jdk: synchronization gaps remain\nsource-inventory: blocked\nownership-naming: open\nsource-owner-differential: open\nmaven-recipe-lifecycle: blocked\nroute-a-canonical-storage: open\nroute-b-lowering: open\nroute-c-complete-image: open\nruntime-flag-off: open\nruntime-enabled: failed\njit-intrinsics: open\ngc-intern-jni-jvmti: open\ncds-serialization-serviceability: open\nstring-unicode-regex: open\nshared-generation-cross-process: open\nwindows-native: open\nperformance-memory: open\nindependent-audit: open\nfuture-port-full-closure: open\ntarget-baseline-drift: blocked\nsource default-branch tip changed since baseline; reconcile rather than silently repin\n",
+      "expected_exit_code": 2
+    }
+  ]
+}

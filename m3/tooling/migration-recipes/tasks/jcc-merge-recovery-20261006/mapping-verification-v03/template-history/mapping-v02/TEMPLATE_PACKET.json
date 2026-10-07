@@ -1,0 +1,90 @@
+{
+  "schema": "m3-jcc-mapping-java-template-packet/2",
+  "version": 2,
+  "status": "FROZEN_CURRENT_INPUT_TEMPLATE_NOT_BOUND_OR_EXECUTED",
+  "destination_commit": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+  "destination_root_tree": "0812573f02908d8078d13f5f49346865cdf1c0e0",
+  "input_epoch_sha256": "fb413e58be72aaffa1e91149479ac159c6d4b961101eed4ab10f1c99df0b6711",
+  "input_epoch": {
+    "ordered_records": 52,
+    "non_jcc_records": 50,
+    "top_level_mappings": 25,
+    "gates": 20
+  },
+  "crate": "jcc-merge-recovery-20261006-mapping-v02",
+  "named_recipe": "com.m3.rewrite.backport.JccMergeMappingRecoveryV02",
+  "test_class": "com.m3.rewrite.backport.JccMergeMappingRecoveryV02Test",
+  "materialized_result_property": "m3.mapping.materialized",
+  "source_commit": "__UNRESOLVED_ACTUAL_SOURCE_COMMIT__",
+  "source_root_tree": "__UNRESOLVED_ACTUAL_SOURCE_ROOT_TREE__",
+  "junit_methods_authored": 13,
+  "junit_methods_executed": 0,
+  "compile_only_status": "PASS",
+  "previous_input_template_packet": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping/java-template/TEMPLATE_PACKET.json",
+    "sha256": "5fe25ca79a45bd4e499fd6171dfe5375390f91f2331330797b93aec3c5eec142",
+    "all15_packet_files_unchanged": true
+  },
+  "files": [
+    {
+      "path": "JccMergeMappingRecoveryV02Test.java.in",
+      "bytes": 50280,
+      "sha256": "24b1055d8233b1d38101b5b1c5310128608b5eb601298a54a610c86b8cff9ef5"
+    },
+    {
+      "path": "pom.xml",
+      "bytes": 3441,
+      "sha256": "5fd7d103f230e9213db44dc66f0d008d830f7b4e72392bd2568a2353ed1ddff6"
+    },
+    {
+      "path": "m3-jcc-merge-mapping-recovery-v02.yml",
+      "bytes": 626,
+      "sha256": "75f43535ecc7677a2914dec4db76adf01c2e0643017e9f71c7a154eb52dc3e48"
+    },
+    {
+      "path": "render_template.py",
+      "bytes": 14634,
+      "sha256": "d842dcb81d0a52b28088560f41d3d4289fb02a7754c2f1792b8bcd0720053bb2"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7274,
+      "sha256": "fe79eb36d023bf1f5e3705cdfdf551883159c2eaf31ea8790d448cc83973d575"
+    },
+    {
+      "path": "compile-check-v01/receipt.json",
+      "bytes": 6239,
+      "sha256": "b2c0c5cac23d97da877c28cf279101262996d9255bb1dfb61492509a793193af"
+    },
+    {
+      "path": "compile-check-v01/javac.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "compile-check-v01/javac.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "self-review-v01/receipt.json",
+      "bytes": 2738,
+      "sha256": "7625a7bcefeffeb21024ab2bfff2dbaf7585cfb5c62b35fdda67ec801fbf3f7f"
+    },
+    {
+      "path": "self-review-v01/renderer-refusal.stdout.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "self-review-v01/renderer-refusal.stderr.log",
+      "bytes": 1031,
+      "sha256": "9ae72d2bf284ca6147f93339767378cb86916443fcc1f53d3133cd32c46fd829"
+    }
+  ],
+  "excluded_from_delivery": [
+    "compile-check-v01/classes",
+    "compile-check-v01 duplicate source copy"
+  ],
+  "scope": "Prepared unresolved V02 test/configuration packet. No GitHub write, source publication, operational mapping output, or acceptance promotion."
+}

@@ -1,0 +1,164 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.m3.rewrite.backport;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import org.junit.jupiter.api.Test;
+import org.openrewrite.InMemoryExecutionContext;
+import org.openrewrite.Parser;
+import org.openrewrite.SourceFile;
+import org.openrewrite.internal.InMemoryLargeSourceSet;
+import org.openrewrite.java.JavaParser;
+
+final class M3VerbatimJavaPairRecipeTest {
+    private static final String TARGET = "src/main/java/example/Sample.java";
+    private static final String OTHER = "src/main/java/example/Other.java";
+    private static final String BEFORE = """
+            package example;
+            final class Sample {
+                private static int value() {
+                    return 21;
+                }
+            }
+            """;
+    private static final String AFTER = """
+            package example;
+            final class Sample {
+                private static int value() {
+                    return 27;
+                }
+            }
+            """;
+    private static final String OTHER_SOURCE = """
+            package example;
+            final class Other {}
+            """;
+
+    private static M3VerbatimJavaPairRecipe recipe() {
+        return new M3VerbatimJavaPairRecipe(
+                TARGET,
+                "jdk-21+35",
+                "jdk-27+35",
+                "JDK-8000000",
+                BEFORE,
+                AFTER);
+    }
+
+    @Test
+    void exactPairTransformsOnlyTargetAndThenStops() {
+        Map<String, String> sources = new LinkedHashMap<>();
+        sources.put(TARGET, BEFORE);
+        sources.put(OTHER, OTHER_SOURCE);
+
+        Map<String, String> changed = apply(recipe(), sources);
+        assertEquals(1, changed.size());
+        assertEquals(AFTER, changed.get(TARGET));
+        assertFalse(changed.containsKey(OTHER));
+        assertTrue(apply(recipe(), Map.of(TARGET, AFTER)).isEmpty());
+    }
+
+    @Test
+    void metadataPinsBothSidesAndProvenance() {
+        var recipe = recipe();
+        assertEquals(TARGET, recipe.targetPath());
+        assertEquals("jdk-21+35", recipe.baselineRef());
+        assertEquals("jdk-27+35", recipe.donorRef());
+        assertEquals("JDK-8000000", recipe.upstreamId());
+        assertEquals(64, recipe.beforeSha256().length());
+        assertEquals(64, recipe.afterSha256().length());
+        assertNotEquals(recipe.beforeSha256(), recipe.afterSha256());
+        assertTrue(recipe.getTags().contains("verbatim-preimage"));
+        assertTrue(recipe.getTags().contains("fail-closed"));
+    }
+
+    @Test
+    void driftAndMalformedDescriptorsFailClosed() {
+        String drifted = BEFORE.replace("return 21;", "return 20;");
+        AssertionError failure = assertThrows(
+                AssertionError.class,
+                () -> apply(recipe(), Map.of(TARGET, drifted)));
+        Throwable cause = failure;
+        while (cause.getCause() != null) cause = cause.getCause();
+        var drift = assertInstanceOf(IllegalStateException.class, cause);
+        assertEquals("M3_VERBATIM_PREIMAGE_DRIFT:" + TARGET, drift.getMessage());
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new M3VerbatimJavaPairRecipe(
+                        "../escape.java", "jdk-21+35", "jdk-27+35", "JDK-8000000", BEFORE, AFTER));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new M3VerbatimJavaPairRecipe(
+                        TARGET, "jdk 21", "jdk-27+35", "JDK-8000000", BEFORE, AFTER));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new M3VerbatimJavaPairRecipe(
+                        TARGET, "jdk-21+35", "jdk-27+35", "bad id!", BEFORE, AFTER));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new M3VerbatimJavaPairRecipe(
+                        TARGET, "jdk-21+35", "jdk-27+35", "JDK-8000000", BEFORE, BEFORE));
+    }
+
+    @Test
+    void parentTraversalAndMalformedPathVariantsAreRefused() {
+        for (String path : List.of(
+                "../escape.java", "..\\escape.java", "../../escape.java",
+                "./../escape.java", "./..\\escape.java", "../src/Sample.java",
+                "src/../escape.java", "src\\..\\escape.java", "/escape.java",
+                "C:/escape.java", "C:\\escape.java", "//host/share.java",
+                "src//Sample.java", "src/./Sample.java", "src/..", "readme.md", "", " ")) {
+            var failure = assertThrows(IllegalArgumentException.class,
+                    () -> new M3VerbatimJavaPairRecipe(
+                            path, "jdk-21+35", "jdk-27+35", "JDK-8000000", BEFORE, AFTER), path);
+            assertEquals("M3_VERBATIM_TARGET_PATH:" + path, failure.getMessage());
+        }
+    }
+
+    @Test
+    void validRelativeSpellingsKeepTheExistingCanonicalTargetAndFixedPoint() {
+        for (String path : List.of(TARGET, "./" + TARGET,
+                TARGET.replace('/', '\\'), ".\\" + TARGET.replace('/', '\\'))) {
+            var recipe = new M3VerbatimJavaPairRecipe(
+                    path, "jdk-21+35", "jdk-27+35", "JDK-8000000", BEFORE, AFTER);
+            assertEquals(TARGET, recipe.targetPath());
+            assertEquals(Map.of(TARGET, AFTER), apply(recipe, Map.of(TARGET, BEFORE)));
+            assertTrue(apply(recipe, Map.of(TARGET, AFTER)).isEmpty());
+        }
+    }
+
+    private static Map<String, String> apply(
+            M3VerbatimJavaPairRecipe recipe,
+            Map<String, String> sources) {
+        var context = new InMemoryExecutionContext(error -> {
+            throw new AssertionError(error);
+        });
+        List<Parser.Input> inputs = new ArrayList<>(sources.size());
+        sources.forEach((path, source) ->
+                inputs.add(Parser.Input.fromString(Path.of(path), source)));
+        List<SourceFile> parsed = JavaParser.fromJavaVersion()
+                .build()
+                .parseInputs(inputs, null, context)
+                .toList();
+
+        var result = recipe.run(new InMemoryLargeSourceSet(parsed), context, 3);
+        Map<String, String> after = new LinkedHashMap<>();
+        result.getChangeset().getAllResults().forEach(change -> {
+            SourceFile file = change.getAfter();
+            after.put(
+                    file.getSourcePath().toString().replace('\\', '/'),
+                    file.printAll());
+        });
+        return after;
+    }
+}

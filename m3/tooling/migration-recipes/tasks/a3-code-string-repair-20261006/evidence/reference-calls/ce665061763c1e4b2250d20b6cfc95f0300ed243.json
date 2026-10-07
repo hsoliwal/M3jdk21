@@ -1,0 +1,18 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "blob_sha": "ce665061763c1e4b2250d20b6cfc95f0300ed243"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": ".github/workflows/m3-db-parse.yml\tABSENT\tc3975aa00fc1196d9d9e1c2e08e02a3accf2175302f1bdd352419e8e0b9a3ce1\t00-m3-db-parse.yml.txt\nm3/indexdb/pom.xml\tABSENT\tbdda9c5bac33e3bbaca8a888571e4489d72fa238195f26e0b0debef960da3d76\t01-pom.xml.txt\nm3/indexdb/tasks/boundary-contracts/DESIGN.md\tABSENT\t4482cb3bce9d13de6384773964ef63b4712106c3199a843b09b8b07f12cdcca3\t02-DESIGN.md.txt\nm3/indexdb/tasks/boundary-contracts/TASK_PACKET.json\tABSENT\tc4536c1ebb91922be915a5713f7c2fe5931b542798d023b43d9db6e952dc6b08\t03-TASK_PACKET.json.txt\nm3/pom.xml\tecad880e103962bcd9a5f136ab18fd8c6e11a43b82dd91b1e4ce1454c21dc029\td58a931e2b61ab8ef0e78aa29f91179d85f35dc41e16bc8f69cffa98389832be\t04-pom.xml.txt\n"
+    },
+    "isError": false
+  }
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "case": "bad-sha",
+    "fallback_verified": true
+  },
+  {
+    "case": "sealed-wrong-java-hash",
+    "fallback_verified": true
+  },
+  {
+    "case": "sealed-duplicate",
+    "fallback_verified": true
+  },
+  {
+    "case": "owner-bad-crc",
+    "fallback_verified": true
+  },
+  {
+    "case": "owner-incomplete",
+    "fallback_verified": true
+  }
+]

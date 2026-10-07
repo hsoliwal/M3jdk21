@@ -1,0 +1,1128 @@
+{
+  "schema": "jcc-donor-recovery-path-and-test-admission/1",
+  "base_readback": {
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/FINAL_READBACK.json",
+    "bytes": 3447648,
+    "sha256": "8391f552328dedb2777a9ca9e793dc2dea867554abe646dbbb338388ce961c2a"
+  },
+  "base_tree_model": {
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/BASE_TREE_MODEL.json",
+    "bytes": 1372743,
+    "sha256": "877a61dc6d9b4f4fa280faeadbd67db9ee3d56a68768fa06c917d85ab8fbaa80"
+  },
+  "path_absence": [
+    {
+      "epoch": "be92",
+      "commit": "be92c62ece9023b5c33676716a1076d00e26120a",
+      "root_tree": "3c4f32b66633a251ba2c117090830252a7e2da03",
+      "ancestors": [
+        {
+          "parent_tree": "3c4f32b66633a251ba2c117090830252a7e2da03",
+          "component": "synexia-openrewrite-recipes",
+          "entry": {
+            "mode": "040000",
+            "path": "synexia-openrewrite-recipes",
+            "sha": "4e96428a487b132f24d3155eb724e18fdd05c529",
+            "type": "tree"
+          }
+        },
+        {
+          "parent_tree": "4e96428a487b132f24d3155eb724e18fdd05c529",
+          "component": "recipes",
+          "entry": {
+            "mode": "040000",
+            "path": "recipes",
+            "sha": "d96135b03c9c71d6da41058817efdd1bdaa1b4a3",
+            "type": "tree"
+          }
+        },
+        {
+          "parent_tree": "d96135b03c9c71d6da41058817efdd1bdaa1b4a3",
+          "component": "atom-pattern-mastery-20261005",
+          "entry": {
+            "mode": "040000",
+            "path": "atom-pattern-mastery-20261005",
+            "sha": "cb7da7b163c68a4c20902ff289c890b1a9fca3fa",
+            "type": "tree"
+          }
+        },
+        {
+          "parent_tree": "cb7da7b163c68a4c20902ff289c890b1a9fca3fa",
+          "component": "jcc",
+          "entry": {
+            "mode": "040000",
+            "path": "jcc",
+            "sha": "c6034df151c4989777b1351d765e77bdab2dde26",
+            "type": "tree"
+          }
+        }
+      ],
+      "jcc_tree": "c6034df151c4989777b1351d765e77bdab2dde26",
+      "jcc_entry_count": 10,
+      "jcc_entries": [
+        {
+          "mode": "100644",
+          "path": "EVIDENCE.md",
+          "sha": "a4af1b438f632557545400f439b68d5d73219be0",
+          "size": 9696,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "README.md",
+          "sha": "34f11129209c75cadf23368289bd48d8572f4bd5",
+          "size": 9846,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "UPSTREAM_INTEGRATION.md",
+          "sha": "abbaaceb6c164a98b08249abab0735875ef5af3a",
+          "size": 3916,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "apply-pom.xml",
+          "sha": "fbfb0b13d26db2757dcf941c9f82a4bad6ec63b1",
+          "size": 4633,
+          "type": "blob"
+        },
+        {
+          "mode": "100644",
+          "path": "checkstyle.xml",
+          "sha": "2cde8feeb5dcff9b4f1a4c52224683d3c1b90ea8",
+          "size": 510,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": "evidence",
+          "sha": "43e199c745338999979546c14bfaa859f536cc0e",
+          "type": "tree"
+        },
+        {
+          "mode": "100644",
+          "path": "pom.xml",
+          "sha": "5140d803e73a336aef851887a04572d446845312",
+          "size": 16616,
+          "type": "blob"
+        },
+        {
+          "mode": "040000",
+          "path": "src",
+          "sha": "624a72567d3f615d54134a95206f2253a9eb4892",
+          "type": "tree"
+        },
+        {
+          "mode": "040000",
+          "path": "upstream-review-68ac",
+          "sha": "d1232f538878bdf8274745f87dfa9f0ad5c6fe9a",
+          "type": "tree"
+        },
+        {
+          "mode": "100644",
+          "path": "verify.sh",
+          "sha": "cdc0fe64864dafbfb47276a7423c1d797fdd5b6e",
+          "size": 9740,
+          "type": "blob"
+        }
+      ],
+      "donors_directory_absent": true,
+      "proof_scope": "Complete traversed ancestor trees and complete direct JCC tree; no unexpanded subtree used to infer this path absence."
+    },
+    {
+      "epoch": "current",
+      "commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+      "root_tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
+      "ancestors": [
+        {
+          "parent_tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
+          "component": "synexia-openrewrite-recipes",
+          "entry": {
+            "mode": "040000",
+            "path": "synexia-openrewrite-recipes",
+            "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
+          }
+        },
+        {
+          "parent_tree": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
+          "component": "recipes",
+          "entry": {
+            "mode": "040000",
+            "path": "recipes",
+            "sha": "e6a65052c73c6243334a84c276b8a6b41ac18972",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/e6a65052c73c6243334a84c276b8a6b41ac18972"
+          }
+        },
+        {
+          "parent_tree": "e6a65052c73c6243334a84c276b8a6b41ac18972",
+          "component": "atom-pattern-mastery-20261005",
+          "entry": {
+            "mode": "040000",
+            "path": "atom-pattern-mastery-20261005",
+            "sha": "69f6e69dc85d81c4b3bd3cd04991e6d4122b86cb",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/69f6e69dc85d81c4b3bd3cd04991e6d4122b86cb"
+          }
+        },
+        {
+          "parent_tree": "69f6e69dc85d81c4b3bd3cd04991e6d4122b86cb",
+          "component": "jcc",
+          "entry": {
+            "mode": "040000",
+            "path": "jcc",
+            "sha": "d78031c94082f1afaa206b976d87d4517427efda",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/d78031c94082f1afaa206b976d87d4517427efda"
+          }
+        }
+      ],
+      "jcc_tree": "d78031c94082f1afaa206b976d87d4517427efda",
+      "jcc_entry_count": 34,
+      "jcc_entries": [
+        {
+          "mode": "100644",
+          "path": "CATALOGUE_ORDER_EPOCH_05.md",
+          "sha": "7e0e03d78c4988d96fccebd8dff43c0d327d9eec",
+          "size": 6251,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/7e0e03d78c4988d96fccebd8dff43c0d327d9eec"
+        },
+        {
+          "mode": "100644",
+          "path": "COMPILER_EPOCH_02.md",
+          "sha": "42379a74a234c3cc08404fd5ef3a794f226da263",
+          "size": 1800,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/42379a74a234c3cc08404fd5ef3a794f226da263"
+        },
+        {
+          "mode": "100644",
+          "path": "COMPILER_EPOCH_03.md",
+          "sha": "b08627e9932c25261030a130c74252cc45ca0e55",
+          "size": 1986,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/b08627e9932c25261030a130c74252cc45ca0e55"
+        },
+        {
+          "mode": "100644",
+          "path": "COMPILE_STATUS.md",
+          "sha": "ea63c130ebb21fc98658a35f25d8914fe306df37",
+          "size": 2902,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/ea63c130ebb21fc98658a35f25d8914fe306df37"
+        },
+        {
+          "mode": "100644",
+          "path": "COMPOSITION_CORPUS.md",
+          "sha": "c529da0daca65c33e6d0c6b1884f4b84df4289cc",
+          "size": 22437,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/c529da0daca65c33e6d0c6b1884f4b84df4289cc"
+        },
+        {
+          "mode": "100644",
+          "path": "COMPOSITION_PROVIDER_EPOCH_03.json",
+          "sha": "3d2a5a0ef8db8c94598ec9177917cedde88c5aca",
+          "size": 5631,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/3d2a5a0ef8db8c94598ec9177917cedde88c5aca"
+        },
+        {
+          "mode": "100644",
+          "path": "COMPOSITION_PROVIDER_EPOCH_03.md",
+          "sha": "8d277c12f7601e0731afedc03a65c8510b80645a",
+          "size": 2027,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/8d277c12f7601e0731afedc03a65c8510b80645a"
+        },
+        {
+          "mode": "100644",
+          "path": "CURRENT_EPOCH.md",
+          "sha": "fc921a7897f4967f4fbdefef879704338505bb87",
+          "size": 3701,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/fc921a7897f4967f4fbdefef879704338505bb87"
+        },
+        {
+          "mode": "100644",
+          "path": "DEPENDENCY_REPAIR_SCOPE.md",
+          "sha": "3df5f18910246d373d942f755c9b571fed334200",
+          "size": 4739,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/3df5f18910246d373d942f755c9b571fed334200"
+        },
+        {
+          "mode": "100644",
+          "path": "EVIDENCE.md",
+          "sha": "a4af1b438f632557545400f439b68d5d73219be0",
+          "size": 9696,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/a4af1b438f632557545400f439b68d5d73219be0"
+        },
+        {
+          "mode": "100644",
+          "path": "HISTORICAL_EVIDENCE_72.md",
+          "sha": "a4af1b438f632557545400f439b68d5d73219be0",
+          "size": 9696,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/a4af1b438f632557545400f439b68d5d73219be0"
+        },
+        {
+          "mode": "100644",
+          "path": "HISTORICAL_README_72.md",
+          "sha": "34f11129209c75cadf23368289bd48d8572f4bd5",
+          "size": 9846,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/34f11129209c75cadf23368289bd48d8572f4bd5"
+        },
+        {
+          "mode": "100644",
+          "path": "INTEGRATION_CONTRACT.md",
+          "sha": "ec64a00d2772c5be96cd9f856a433e3844d53768",
+          "size": 6144,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/ec64a00d2772c5be96cd9f856a433e3844d53768"
+        },
+        {
+          "mode": "100644",
+          "path": "LEDGER_CORPUS.md",
+          "sha": "a3c8d58113440cdbe9771826544e1401e52ae56d",
+          "size": 2633,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/a3c8d58113440cdbe9771826544e1401e52ae56d"
+        },
+        {
+          "mode": "100644",
+          "path": "PARSER_CONTEXT.md",
+          "sha": "54f7ae9ff985ef57b4989691fe1f79ad0936901f",
+          "size": 3786,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/54f7ae9ff985ef57b4989691fe1f79ad0936901f"
+        },
+        {
+          "mode": "100644",
+          "path": "README.md",
+          "sha": "34f11129209c75cadf23368289bd48d8572f4bd5",
+          "size": 9846,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/34f11129209c75cadf23368289bd48d8572f4bd5"
+        },
+        {
+          "mode": "100644",
+          "path": "RESUME_EPOCH.md",
+          "sha": "c7b10f847f056a9617ebd261910940d91089d1fa",
+          "size": 4791,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/c7b10f847f056a9617ebd261910940d91089d1fa"
+        },
+        {
+          "mode": "100644",
+          "path": "RUNTIME_ENVIRONMENT.md",
+          "sha": "f27cd4cb637ccacdd961a64d9b68de468759698d",
+          "size": 2232,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/f27cd4cb637ccacdd961a64d9b68de468759698d"
+        },
+        {
+          "mode": "100644",
+          "path": "SOURCE_FIXED_POINT_EPOCH_04.md",
+          "sha": "aa1d2406d496161a06fc42d59bbc9bce6c9bbd66",
+          "size": 5227,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/aa1d2406d496161a06fc42d59bbc9bce6c9bbd66"
+        },
+        {
+          "mode": "100644",
+          "path": "UPSTREAM_IMPORTS.md",
+          "sha": "70cc2a144c62d06ee4f1db1bfc3b0c7ad3ac0379",
+          "size": 2034,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/70cc2a144c62d06ee4f1db1bfc3b0c7ad3ac0379"
+        },
+        {
+          "mode": "100644",
+          "path": "UPSTREAM_INTEGRATION.md",
+          "sha": "abbaaceb6c164a98b08249abab0735875ef5af3a",
+          "size": 3916,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/abbaaceb6c164a98b08249abab0735875ef5af3a"
+        },
+        {
+          "mode": "100644",
+          "path": "UPSTREAM_REGRESSIONS.md",
+          "sha": "0d23758830f75ebebd5c74c8492988f9b8bca6c9",
+          "size": 2888,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/0d23758830f75ebebd5c74c8492988f9b8bca6c9"
+        },
+        {
+          "mode": "100644",
+          "path": "apply-pom.xml",
+          "sha": "fbfb0b13d26db2757dcf941c9f82a4bad6ec63b1",
+          "size": 4633,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/fbfb0b13d26db2757dcf941c9f82a4bad6ec63b1"
+        },
+        {
+          "mode": "100644",
+          "path": "checkstyle.xml",
+          "sha": "2cde8feeb5dcff9b4f1a4c52224683d3c1b90ea8",
+          "size": 510,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/2cde8feeb5dcff9b4f1a4c52224683d3c1b90ea8"
+        },
+        {
+          "mode": "040000",
+          "path": "corpus",
+          "sha": "7d1fa88c3603adc3d2cedbc196263401546ff226",
+          "type": "tree",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/7d1fa88c3603adc3d2cedbc196263401546ff226"
+        },
+        {
+          "mode": "040000",
+          "path": "evidence",
+          "sha": "4077655757c94b83a6778aa4ff0b6536782c01cc",
+          "type": "tree",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/4077655757c94b83a6778aa4ff0b6536782c01cc"
+        },
+        {
+          "mode": "040000",
+          "path": "m3jdk21-delivery",
+          "sha": "c02e3e190985b1999d1372d09139a290944a0c9c",
+          "type": "tree",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/c02e3e190985b1999d1372d09139a290944a0c9c"
+        },
+        {
+          "mode": "100644",
+          "path": "pom.xml",
+          "sha": "5140d803e73a336aef851887a04572d446845312",
+          "size": 16616,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/5140d803e73a336aef851887a04572d446845312"
+        },
+        {
+          "mode": "100644",
+          "path": "provider.py",
+          "sha": "479eb412743c794ee257cf27842cb56ebfbda8cf",
+          "size": 11210,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/479eb412743c794ee257cf27842cb56ebfbda8cf"
+        },
+        {
+          "mode": "040000",
+          "path": "recovery-be92",
+          "sha": "c9abb6eda6c86c74362f75351619516780d353b4",
+          "type": "tree",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/c9abb6eda6c86c74362f75351619516780d353b4"
+        },
+        {
+          "mode": "100644",
+          "path": "source-includes.txt",
+          "sha": "2e46e7c2e1737b4982cd31494968b7cde9076374",
+          "size": 38877,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/2e46e7c2e1737b4982cd31494968b7cde9076374"
+        },
+        {
+          "mode": "040000",
+          "path": "src",
+          "sha": "4aaf9ec36a5598ae47bf08bb73573b716da3257d",
+          "type": "tree",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/4aaf9ec36a5598ae47bf08bb73573b716da3257d"
+        },
+        {
+          "mode": "040000",
+          "path": "upstream-review-68ac",
+          "sha": "d1232f538878bdf8274745f87dfa9f0ad5c6fe9a",
+          "type": "tree",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/d1232f538878bdf8274745f87dfa9f0ad5c6fe9a"
+        },
+        {
+          "mode": "100644",
+          "path": "verify.sh",
+          "sha": "cdc0fe64864dafbfb47276a7423c1d797fdd5b6e",
+          "size": 9740,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/cdc0fe64864dafbfb47276a7423c1d797fdd5b6e"
+        }
+      ],
+      "donors_directory_absent": true,
+      "proof_scope": "Complete traversed ancestor trees and complete direct JCC tree; no unexpanded subtree used to infer this path absence."
+    }
+  ],
+  "donor_tests": [
+    {
+      "name": "MIndexDonorLiteralRegressionTest.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorLiteralRegressionTest.java",
+      "recovery_copy_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/test/java/com/synexia/mindex/MIndexDonorLiteralRegressionTest.java",
+      "sha256": "ddce76a22c1c4e08725c36595d5f5c232c59c7babb54b96a3d7113e442b59ddc",
+      "git_blob": "2ad0073f606e5b000b0ef54febc537a7de4e4923",
+      "bytes": 13294,
+      "unchanged_between_be92_and_0c53": true,
+      "recovery_copy_byte_identical": true,
+      "canonical_ancestors": [
+        {
+          "parent_tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
+          "component": "synexia-openrewrite-recipes",
+          "entry": {
+            "mode": "040000",
+            "path": "synexia-openrewrite-recipes",
+            "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
+          }
+        },
+        {
+          "parent_tree": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
+          "component": "recipes",
+          "entry": {
+            "mode": "040000",
+            "path": "recipes",
+            "sha": "e6a65052c73c6243334a84c276b8a6b41ac18972",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/e6a65052c73c6243334a84c276b8a6b41ac18972"
+          }
+        },
+        {
+          "parent_tree": "e6a65052c73c6243334a84c276b8a6b41ac18972",
+          "component": "atom-pattern-mastery-20261005",
+          "entry": {
+            "mode": "040000",
+            "path": "atom-pattern-mastery-20261005",
+            "sha": "69f6e69dc85d81c4b3bd3cd04991e6d4122b86cb",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/69f6e69dc85d81c4b3bd3cd04991e6d4122b86cb"
+          }
+        },
+        {
+          "parent_tree": "69f6e69dc85d81c4b3bd3cd04991e6d4122b86cb",
+          "component": "jcc",
+          "entry": {
+            "mode": "040000",
+            "path": "jcc",
+            "sha": "d78031c94082f1afaa206b976d87d4517427efda",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/d78031c94082f1afaa206b976d87d4517427efda"
+          }
+        },
+        {
+          "parent_tree": "d78031c94082f1afaa206b976d87d4517427efda",
+          "component": "src",
+          "entry": {
+            "mode": "040000",
+            "path": "src",
+            "sha": "4aaf9ec36a5598ae47bf08bb73573b716da3257d",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/4aaf9ec36a5598ae47bf08bb73573b716da3257d"
+          }
+        },
+        {
+          "parent_tree": "4aaf9ec36a5598ae47bf08bb73573b716da3257d",
+          "component": "test",
+          "entry": {
+            "mode": "040000",
+            "path": "test",
+            "sha": "b9e706a99055aaa87b87fd042cfb92b807cd0f1d",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/b9e706a99055aaa87b87fd042cfb92b807cd0f1d"
+          }
+        },
+        {
+          "parent_tree": "b9e706a99055aaa87b87fd042cfb92b807cd0f1d",
+          "component": "java",
+          "entry": {
+            "mode": "040000",
+            "path": "java",
+            "sha": "5a0c3ab9943fa210b25aa4e8b20f8f8be238998a",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/5a0c3ab9943fa210b25aa4e8b20f8f8be238998a"
+          }
+        },
+        {
+          "parent_tree": "5a0c3ab9943fa210b25aa4e8b20f8f8be238998a",
+          "component": "com",
+          "entry": {
+            "mode": "040000",
+            "path": "com",
+            "sha": "e6dfd7d462344f634fc1a99b577481c88c79e6e9",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/e6dfd7d462344f634fc1a99b577481c88c79e6e9"
+          }
+        },
+        {
+          "parent_tree": "e6dfd7d462344f634fc1a99b577481c88c79e6e9",
+          "component": "synexia",
+          "entry": {
+            "mode": "040000",
+            "path": "synexia",
+            "sha": "f6ac61add20a05f36e3066c521ba00703f66696c",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/f6ac61add20a05f36e3066c521ba00703f66696c"
+          }
+        },
+        {
+          "parent_tree": "f6ac61add20a05f36e3066c521ba00703f66696c",
+          "component": "mindex",
+          "entry": {
+            "mode": "040000",
+            "path": "mindex",
+            "sha": "84d6cf3d934df05e86bfa2e62d7497a972aab87e",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/84d6cf3d934df05e86bfa2e62d7497a972aab87e"
+          }
+        },
+        {
+          "parent_tree": "84d6cf3d934df05e86bfa2e62d7497a972aab87e",
+          "component": "MIndexDonorLiteralRegressionTest.java",
+          "entry": {
+            "mode": "100644",
+            "path": "MIndexDonorLiteralRegressionTest.java",
+            "sha": "2ad0073f606e5b000b0ef54febc537a7de4e4923",
+            "size": 13294,
+            "type": "blob",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/2ad0073f606e5b000b0ef54febc537a7de4e4923"
+          }
+        }
+      ],
+      "recovery_copy_ancestors": [
+        {
+          "parent_tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
+          "component": "synexia-openrewrite-recipes",
+          "entry": {
+            "mode": "040000",
+            "path": "synexia-openrewrite-recipes",
+            "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
+          }
+        },
+        {
+          "parent_tree": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
+          "component": "recipes",
+          "entry": {
+            "mode": "040000",
+            "path": "recipes",
+            "sha": "e6a65052c73c6243334a84c276b8a6b41ac18972",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/e6a65052c73c6243334a84c276b8a6b41ac18972"
+          }
+        },
+        {
+          "parent_tree": "e6a65052c73c6243334a84c276b8a6b41ac18972",
+          "component": "atom-pattern-mastery-20261005",
+          "entry": {
+            "mode": "040000",
+            "path": "atom-pattern-mastery-20261005",
+            "sha": "69f6e69dc85d81c4b3bd3cd04991e6d4122b86cb",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/69f6e69dc85d81c4b3bd3cd04991e6d4122b86cb"
+          }
+        },
+        {
+          "parent_tree": "69f6e69dc85d81c4b3bd3cd04991e6d4122b86cb",
+          "component": "jcc",
+          "entry": {
+            "mode": "040000",
+            "path": "jcc",
+            "sha": "d78031c94082f1afaa206b976d87d4517427efda",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/d78031c94082f1afaa206b976d87d4517427efda"
+          }
+        },
+        {
+          "parent_tree": "d78031c94082f1afaa206b976d87d4517427efda",
+          "component": "recovery-be92",
+          "entry": {
+            "mode": "040000",
+            "path": "recovery-be92",
+            "sha": "c9abb6eda6c86c74362f75351619516780d353b4",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/c9abb6eda6c86c74362f75351619516780d353b4"
+          }
+        },
+        {
+          "parent_tree": "c9abb6eda6c86c74362f75351619516780d353b4",
+          "component": "src",
+          "entry": {
+            "mode": "040000",
+            "path": "src",
+            "sha": "7d2ff27866ea61bf9180af19bde96389edfa70f5",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/7d2ff27866ea61bf9180af19bde96389edfa70f5"
+          }
+        },
+        {
+          "parent_tree": "7d2ff27866ea61bf9180af19bde96389edfa70f5",
+          "component": "test",
+          "entry": {
+            "mode": "040000",
+            "path": "test",
+            "sha": "e2b5487ccf32940850f48f677d6d78f681d67186",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/e2b5487ccf32940850f48f677d6d78f681d67186"
+          }
+        },
+        {
+          "parent_tree": "e2b5487ccf32940850f48f677d6d78f681d67186",
+          "component": "java",
+          "entry": {
+            "mode": "040000",
+            "path": "java",
+            "sha": "69f87624383945827f79cce400940c4bf9f87619",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/69f87624383945827f79cce400940c4bf9f87619"
+          }
+        },
+        {
+          "parent_tree": "69f87624383945827f79cce400940c4bf9f87619",
+          "component": "com",
+          "entry": {
+            "mode": "040000",
+            "path": "com",
+            "sha": "f70c66d37dbb56b1e5bcc653f39d46ff194f4352",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/f70c66d37dbb56b1e5bcc653f39d46ff194f4352"
+          }
+        },
+        {
+          "parent_tree": "f70c66d37dbb56b1e5bcc653f39d46ff194f4352",
+          "component": "synexia",
+          "entry": {
+            "mode": "040000",
+            "path": "synexia",
+            "sha": "e0351a558701b193e57cf709b0e284c3d13e3e3b",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/e0351a558701b193e57cf709b0e284c3d13e3e3b"
+          }
+        },
+        {
+          "parent_tree": "e0351a558701b193e57cf709b0e284c3d13e3e3b",
+          "component": "mindex",
+          "entry": {
+            "mode": "040000",
+            "path": "mindex",
+            "sha": "84d6cf3d934df05e86bfa2e62d7497a972aab87e",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/84d6cf3d934df05e86bfa2e62d7497a972aab87e"
+          }
+        },
+        {
+          "parent_tree": "84d6cf3d934df05e86bfa2e62d7497a972aab87e",
+          "component": "MIndexDonorLiteralRegressionTest.java",
+          "entry": {
+            "mode": "100644",
+            "path": "MIndexDonorLiteralRegressionTest.java",
+            "sha": "2ad0073f606e5b000b0ef54febc537a7de4e4923",
+            "size": 13294,
+            "type": "blob",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/2ad0073f606e5b000b0ef54febc537a7de4e4923"
+          }
+        }
+      ],
+      "local_original": {
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/repo/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorLiteralRegressionTest.java",
+        "bytes": 13294,
+        "sha256": "ddce76a22c1c4e08725c36595d5f5c232c59c7babb54b96a3d7113e442b59ddc"
+      },
+      "local_recovery_copy": {
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/test/java/com/synexia/mindex/MIndexDonorLiteralRegressionTest.java",
+        "bytes": 13294,
+        "sha256": "ddce76a22c1c4e08725c36595d5f5c232c59c7babb54b96a3d7113e442b59ddc"
+      }
+    },
+    {
+      "name": "MIndexDonorRegexRegressionTest.java",
+      "canonical_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorRegexRegressionTest.java",
+      "recovery_copy_path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/test/java/com/synexia/mindex/MIndexDonorRegexRegressionTest.java",
+      "sha256": "3c89f1cf945db9a05626cdf96016517f7903687cdfa2348a2d0bad6013727925",
+      "git_blob": "9060c72dc274826793d011301a24f7360ec26beb",
+      "bytes": 9854,
+      "unchanged_between_be92_and_0c53": true,
+      "recovery_copy_byte_identical": true,
+      "canonical_ancestors": [
+        {
+          "parent_tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
+          "component": "synexia-openrewrite-recipes",
+          "entry": {
+            "mode": "040000",
+            "path": "synexia-openrewrite-recipes",
+            "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
+          }
+        },
+        {
+          "parent_tree": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
+          "component": "recipes",
+          "entry": {
+            "mode": "040000",
+            "path": "recipes",
+            "sha": "e6a65052c73c6243334a84c276b8a6b41ac18972",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/e6a65052c73c6243334a84c276b8a6b41ac18972"
+          }
+        },
+        {
+          "parent_tree": "e6a65052c73c6243334a84c276b8a6b41ac18972",
+          "component": "atom-pattern-mastery-20261005",
+          "entry": {
+            "mode": "040000",
+            "path": "atom-pattern-mastery-20261005",
+            "sha": "69f6e69dc85d81c4b3bd3cd04991e6d4122b86cb",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/69f6e69dc85d81c4b3bd3cd04991e6d4122b86cb"
+          }
+        },
+        {
+          "parent_tree": "69f6e69dc85d81c4b3bd3cd04991e6d4122b86cb",
+          "component": "jcc",
+          "entry": {
+            "mode": "040000",
+            "path": "jcc",
+            "sha": "d78031c94082f1afaa206b976d87d4517427efda",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/d78031c94082f1afaa206b976d87d4517427efda"
+          }
+        },
+        {
+          "parent_tree": "d78031c94082f1afaa206b976d87d4517427efda",
+          "component": "src",
+          "entry": {
+            "mode": "040000",
+            "path": "src",
+            "sha": "4aaf9ec36a5598ae47bf08bb73573b716da3257d",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/4aaf9ec36a5598ae47bf08bb73573b716da3257d"
+          }
+        },
+        {
+          "parent_tree": "4aaf9ec36a5598ae47bf08bb73573b716da3257d",
+          "component": "test",
+          "entry": {
+            "mode": "040000",
+            "path": "test",
+            "sha": "b9e706a99055aaa87b87fd042cfb92b807cd0f1d",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/b9e706a99055aaa87b87fd042cfb92b807cd0f1d"
+          }
+        },
+        {
+          "parent_tree": "b9e706a99055aaa87b87fd042cfb92b807cd0f1d",
+          "component": "java",
+          "entry": {
+            "mode": "040000",
+            "path": "java",
+            "sha": "5a0c3ab9943fa210b25aa4e8b20f8f8be238998a",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/5a0c3ab9943fa210b25aa4e8b20f8f8be238998a"
+          }
+        },
+        {
+          "parent_tree": "5a0c3ab9943fa210b25aa4e8b20f8f8be238998a",
+          "component": "com",
+          "entry": {
+            "mode": "040000",
+            "path": "com",
+            "sha": "e6dfd7d462344f634fc1a99b577481c88c79e6e9",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/e6dfd7d462344f634fc1a99b577481c88c79e6e9"
+          }
+        },
+        {
+          "parent_tree": "e6dfd7d462344f634fc1a99b577481c88c79e6e9",
+          "component": "synexia",
+          "entry": {
+            "mode": "040000",
+            "path": "synexia",
+            "sha": "f6ac61add20a05f36e3066c521ba00703f66696c",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/f6ac61add20a05f36e3066c521ba00703f66696c"
+          }
+        },
+        {
+          "parent_tree": "f6ac61add20a05f36e3066c521ba00703f66696c",
+          "component": "mindex",
+          "entry": {
+            "mode": "040000",
+            "path": "mindex",
+            "sha": "84d6cf3d934df05e86bfa2e62d7497a972aab87e",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/84d6cf3d934df05e86bfa2e62d7497a972aab87e"
+          }
+        },
+        {
+          "parent_tree": "84d6cf3d934df05e86bfa2e62d7497a972aab87e",
+          "component": "MIndexDonorRegexRegressionTest.java",
+          "entry": {
+            "mode": "100644",
+            "path": "MIndexDonorRegexRegressionTest.java",
+            "sha": "9060c72dc274826793d011301a24f7360ec26beb",
+            "size": 9854,
+            "type": "blob",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/9060c72dc274826793d011301a24f7360ec26beb"
+          }
+        }
+      ],
+      "recovery_copy_ancestors": [
+        {
+          "parent_tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
+          "component": "synexia-openrewrite-recipes",
+          "entry": {
+            "mode": "040000",
+            "path": "synexia-openrewrite-recipes",
+            "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
+          }
+        },
+        {
+          "parent_tree": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
+          "component": "recipes",
+          "entry": {
+            "mode": "040000",
+            "path": "recipes",
+            "sha": "e6a65052c73c6243334a84c276b8a6b41ac18972",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/e6a65052c73c6243334a84c276b8a6b41ac18972"
+          }
+        },
+        {
+          "parent_tree": "e6a65052c73c6243334a84c276b8a6b41ac18972",
+          "component": "atom-pattern-mastery-20261005",
+          "entry": {
+            "mode": "040000",
+            "path": "atom-pattern-mastery-20261005",
+            "sha": "69f6e69dc85d81c4b3bd3cd04991e6d4122b86cb",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/69f6e69dc85d81c4b3bd3cd04991e6d4122b86cb"
+          }
+        },
+        {
+          "parent_tree": "69f6e69dc85d81c4b3bd3cd04991e6d4122b86cb",
+          "component": "jcc",
+          "entry": {
+            "mode": "040000",
+            "path": "jcc",
+            "sha": "d78031c94082f1afaa206b976d87d4517427efda",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/d78031c94082f1afaa206b976d87d4517427efda"
+          }
+        },
+        {
+          "parent_tree": "d78031c94082f1afaa206b976d87d4517427efda",
+          "component": "recovery-be92",
+          "entry": {
+            "mode": "040000",
+            "path": "recovery-be92",
+            "sha": "c9abb6eda6c86c74362f75351619516780d353b4",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/c9abb6eda6c86c74362f75351619516780d353b4"
+          }
+        },
+        {
+          "parent_tree": "c9abb6eda6c86c74362f75351619516780d353b4",
+          "component": "src",
+          "entry": {
+            "mode": "040000",
+            "path": "src",
+            "sha": "7d2ff27866ea61bf9180af19bde96389edfa70f5",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/7d2ff27866ea61bf9180af19bde96389edfa70f5"
+          }
+        },
+        {
+          "parent_tree": "7d2ff27866ea61bf9180af19bde96389edfa70f5",
+          "component": "test",
+          "entry": {
+            "mode": "040000",
+            "path": "test",
+            "sha": "e2b5487ccf32940850f48f677d6d78f681d67186",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/e2b5487ccf32940850f48f677d6d78f681d67186"
+          }
+        },
+        {
+          "parent_tree": "e2b5487ccf32940850f48f677d6d78f681d67186",
+          "component": "java",
+          "entry": {
+            "mode": "040000",
+            "path": "java",
+            "sha": "69f87624383945827f79cce400940c4bf9f87619",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/69f87624383945827f79cce400940c4bf9f87619"
+          }
+        },
+        {
+          "parent_tree": "69f87624383945827f79cce400940c4bf9f87619",
+          "component": "com",
+          "entry": {
+            "mode": "040000",
+            "path": "com",
+            "sha": "f70c66d37dbb56b1e5bcc653f39d46ff194f4352",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/f70c66d37dbb56b1e5bcc653f39d46ff194f4352"
+          }
+        },
+        {
+          "parent_tree": "f70c66d37dbb56b1e5bcc653f39d46ff194f4352",
+          "component": "synexia",
+          "entry": {
+            "mode": "040000",
+            "path": "synexia",
+            "sha": "e0351a558701b193e57cf709b0e284c3d13e3e3b",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/e0351a558701b193e57cf709b0e284c3d13e3e3b"
+          }
+        },
+        {
+          "parent_tree": "e0351a558701b193e57cf709b0e284c3d13e3e3b",
+          "component": "mindex",
+          "entry": {
+            "mode": "040000",
+            "path": "mindex",
+            "sha": "84d6cf3d934df05e86bfa2e62d7497a972aab87e",
+            "type": "tree",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/84d6cf3d934df05e86bfa2e62d7497a972aab87e"
+          }
+        },
+        {
+          "parent_tree": "84d6cf3d934df05e86bfa2e62d7497a972aab87e",
+          "component": "MIndexDonorRegexRegressionTest.java",
+          "entry": {
+            "mode": "100644",
+            "path": "MIndexDonorRegexRegressionTest.java",
+            "sha": "9060c72dc274826793d011301a24f7360ec26beb",
+            "size": 9854,
+            "type": "blob",
+            "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/9060c72dc274826793d011301a24f7360ec26beb"
+          }
+        }
+      ],
+      "local_original": {
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/repo/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/src/test/java/com/synexia/mindex/MIndexDonorRegexRegressionTest.java",
+        "bytes": 9854,
+        "sha256": "3c89f1cf945db9a05626cdf96016517f7903687cdfa2348a2d0bad6013727925"
+      },
+      "local_recovery_copy": {
+        "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/recovery-final-replay-be92/synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/recovery-be92/src/test/java/com/synexia/mindex/MIndexDonorRegexRegressionTest.java",
+        "bytes": 9854,
+        "sha256": "3c89f1cf945db9a05626cdf96016517f7903687cdfa2348a2d0bad6013727925"
+      }
+    }
+  ],
+  "current_readme": {
+    "path": "synexia-openrewrite-recipes/recipes/atom-pattern-mastery-20261005/jcc/README.md",
+    "git_blob": "34f11129209c75cadf23368289bd48d8572f4bd5",
+    "ancestors": [
+      {
+        "parent_tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
+        "component": "synexia-openrewrite-recipes",
+        "entry": {
+          "mode": "040000",
+          "path": "synexia-openrewrite-recipes",
+          "sha": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
+          "type": "tree",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a"
+        }
+      },
+      {
+        "parent_tree": "3c8f88be3aae6e1c5fb3425cbe8c16249b40cf8a",
+        "component": "recipes",
+        "entry": {
+          "mode": "040000",
+          "path": "recipes",
+          "sha": "e6a65052c73c6243334a84c276b8a6b41ac18972",
+          "type": "tree",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/e6a65052c73c6243334a84c276b8a6b41ac18972"
+        }
+      },
+      {
+        "parent_tree": "e6a65052c73c6243334a84c276b8a6b41ac18972",
+        "component": "atom-pattern-mastery-20261005",
+        "entry": {
+          "mode": "040000",
+          "path": "atom-pattern-mastery-20261005",
+          "sha": "69f6e69dc85d81c4b3bd3cd04991e6d4122b86cb",
+          "type": "tree",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/69f6e69dc85d81c4b3bd3cd04991e6d4122b86cb"
+        }
+      },
+      {
+        "parent_tree": "69f6e69dc85d81c4b3bd3cd04991e6d4122b86cb",
+        "component": "jcc",
+        "entry": {
+          "mode": "040000",
+          "path": "jcc",
+          "sha": "d78031c94082f1afaa206b976d87d4517427efda",
+          "type": "tree",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/d78031c94082f1afaa206b976d87d4517427efda"
+        }
+      },
+      {
+        "parent_tree": "d78031c94082f1afaa206b976d87d4517427efda",
+        "component": "README.md",
+        "entry": {
+          "mode": "100644",
+          "path": "README.md",
+          "sha": "34f11129209c75cadf23368289bd48d8572f4bd5",
+          "size": 9846,
+          "type": "blob",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/34f11129209c75cadf23368289bd48d8572f4bd5"
+        }
+      }
+    ],
+    "preservation": "Not copied or modified; historical README diff is excluded."
+  },
+  "historical_donor_tree": {
+    "sha": "54c7989b23bb4fea69b74352aa144c6ba3c3adf0",
+    "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/54c7989b23bb4fea69b74352aa144c6ba3c3adf0",
+    "tree": [
+      {
+        "path": "AUTHORING_RECEIPT.json",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "0f024cef89a998670da06f390f14234e0948250c",
+        "size": 3358,
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/0f024cef89a998670da06f390f14234e0948250c"
+      },
+      {
+        "path": "DONOR_CATALOGUE.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "d5ff11d9ba0135dbb30d87cb0c0d0e4eab2d5dcc",
+        "size": 12750,
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/d5ff11d9ba0135dbb30d87cb0c0d0e4eab2d5dcc"
+      },
+      {
+        "path": "EXECUTED_TEST_MAPPING.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "64e307ac4e3847696d0609bd53031881f0787c76",
+        "size": 8533,
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/64e307ac4e3847696d0609bd53031881f0787c76"
+      },
+      {
+        "path": "INTEGRATION.md",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "4e8b4b266ad2356d4e063ac0015df97c7b5467d3",
+        "size": 2069,
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/4e8b4b266ad2356d4e063ac0015df97c7b5467d3"
+      },
+      {
+        "path": "donor_catalogue.json",
+        "mode": "100644",
+        "type": "blob",
+        "sha": "d663dc4c8c13968edfffe0258a1b6ccc927434fb",
+        "size": 51757,
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/blobs/d663dc4c8c13968edfffe0258a1b6ccc927434fb"
+      }
+    ],
+    "truncated": false
+  }
+}

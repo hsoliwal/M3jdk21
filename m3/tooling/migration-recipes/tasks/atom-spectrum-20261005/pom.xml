@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.m3.tooling</groupId>
+  <artifactId>atom-spectrum-proof</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>Focused A3 atom and pattern spectrum proof</name>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <m3.spectrum.corpusRoot>${project.basedir}/../../../../..</m3.spectrum.corpusRoot>
+  </properties>
+  <dependencies>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java</artifactId><version>8.17.1</version></dependency>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-java-21</artifactId><version>8.17.1</version><scope>runtime</scope></dependency>
+    <dependency><groupId>org.openrewrite</groupId><artifactId>rewrite-test</artifactId><version>8.17.1</version><scope>test</scope></dependency>
+    <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter</artifactId><version>5.10.2</version><scope>test</scope></dependency>
+  </dependencies>
+  <build>
+    <sourceDirectory>${project.basedir}/../../src/main/java</sourceDirectory>
+    <testSourceDirectory>${project.basedir}/../../src/test/java</testSourceDirectory>
+    <resources><resource><directory>${project.basedir}/../../src/main/resources</directory><includes><include>com/synexia/rewrite/hash-pinned-java/atom-comment-custody/**</include><include>com/synexia/rewrite/hash-pinned-java/atom-pattern-spectrum/**</include></includes></resource></resources>
+    <testResources><testResource><directory>${project.basedir}/../../src/test/resources</directory><includes><include>com/m3/rewrite/atom/spectrum/**</include></includes></testResource></testResources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><version>3.13.0</version>
+        <configuration>
+          <includes><include>com/m3/rewrite/atom/*.java</include><include>com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java</include></includes>
+          <testIncludes><testInclude>com/m3/rewrite/atom/*.java</testInclude></testIncludes>
+          <compilerArgs><arg>-Xlint:all</arg><arg>-Werror</arg></compilerArgs>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId><artifactId>maven-surefire-plugin</artifactId><version>3.2.5</version>
+        <configuration>
+          <failIfNoTests>true</failIfNoTests><useModulePath>false</useModulePath>
+          <argLine>-Xmx768m -XX:ActiveProcessorCount=1</argLine>
+          <systemPropertyVariables><m3.spectrum.corpusRoot>${m3.spectrum.corpusRoot}</m3.spectrum.corpusRoot></systemPropertyVariables>
+        </configuration>
+      </plugin>
+      <plugin><groupId>org.openrewrite.maven</groupId><artifactId>rewrite-maven-plugin</artifactId><version>5.23.1</version></plugin>
+    </plugins>
+  </build>
+</project>

@@ -1,0 +1,12 @@
+field	value
+packet	JDK-8338587-SHAKE-XOF
+branch	m3/materialize-jdk8338587-shake-xof-20261007
+stack_base	m3/recover-pq-kdf-residue-current-20261007
+materialization_commit	8e15fe3002378481134978ff0f0cb09b47f62ae5
+src/java.base/share/classes/sun/security/provider/SHA3.java	4025bdd21526aca1bbfd0d0d18e04072564f34bef339f04d830df74dda453087
+test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java	df0f17d1602805a0683250d80c6d6201772c12224fcf360061c1665baf84b257
+source_seal_match	true
+recipe_fixed_point	RECIPE_JUNIT_DEFINED_NOT_EXECUTED_ON_HOST
+java21_build	PENDING
+focused_jtreg	PENDING
+promotion	NOT_AUTHORIZED

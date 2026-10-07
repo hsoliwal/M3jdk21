@@ -1,0 +1,825 @@
+{
+  "state": "BOUND_RESOURCES_PENDING_EXECUTION",
+  "source_commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8",
+  "source_root_tree": "0361e4a07b77a01df170523033fef01c4052ddc5",
+  "destination_preimage_commit": "0994ecd65e86600f417f4d8702838d8c2663af61",
+  "plan_sha256": "0aa1f4a3e080c36d233066f0a6e1dc8e1047e6f0592dba60829b8cca3177df64",
+  "map_after_sha256": "eb42442866c73c38027b481a84c0473bea422e4628d0794fa31fc61d9f1a818e",
+  "source_artifacts": 19,
+  "current_context_count": 527,
+  "operational_outputs_unchanged": true,
+  "source_inventory": {
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/source-binding-v3/SOURCE_FIELDS_AND_PROOFS.json",
+    "bytes": 419637,
+    "sha256": "7b5e197da5e2645efb87345e2abf92dcd8071993ff308c8fa0bca0511d00c52e",
+    "git_blob_sha1": "97e1e5438249e64577f9b9c17dd391678b65d712"
+  },
+  "evidence": {
+    "PUBLICATION_CUSTODY.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/PUBLICATION_CUSTODY.json",
+      "bytes": 1099619,
+      "sha256": "95f325ce57dadab60031f41514d9a9c5fa3ef6eb29a41e3c9a8c81e2dee996b8",
+      "git_blob_sha1": "0f084555dbbea3ba4c9302386ced30e1e1503dda"
+    },
+    "SOURCE_FIELDS_AND_PROOFS.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/SOURCE_FIELDS_AND_PROOFS.json",
+      "bytes": 419637,
+      "sha256": "7b5e197da5e2645efb87345e2abf92dcd8071993ff308c8fa0bca0511d00c52e",
+      "git_blob_sha1": "97e1e5438249e64577f9b9c17dd391678b65d712"
+    },
+    "ROOT_ACCOUNTING.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/ROOT_ACCOUNTING.json",
+      "bytes": 70709,
+      "sha256": "55610f52b7b1e01ee15999969cc385616ff2e43f734e589ff61c750c5ab3c845",
+      "git_blob_sha1": "ad19c72cb925afa662e93898df2cc8a2839a7a67"
+    },
+    "custody-v3/source-publisher/BASE_TREE_MODEL.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/BASE_TREE_MODEL.json",
+      "bytes": 1372743,
+      "sha256": "877a61dc6d9b4f4fa280faeadbd67db9ee3d56a68768fa06c917d85ab8fbaa80",
+      "git_blob_sha1": "6ee3c1bfd76dc5c0abdba031f163a3d38294f5e9"
+    },
+    "custody-v3/source-publisher/RAW_READBACK_FAILURE_OBSERVATION.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/RAW_READBACK_FAILURE_OBSERVATION.json",
+      "bytes": 6519,
+      "sha256": "224b3baa99e71c846cc96319c0a829eec3521d75f68731332ac2fa59fa214112",
+      "git_blob_sha1": "3f6b147b1ec5e1576b20f5a57c694dd305e31823"
+    },
+    "custody-v3/source-publisher/RAW_VERIFICATION_TREE_PLAN.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/RAW_VERIFICATION_TREE_PLAN.json",
+      "bytes": 95189,
+      "sha256": "00fa5b9e4e99621ed6b5aac3c0da4c6506f82e921a3da42fdd4645285653e319",
+      "git_blob_sha1": "27c92ae8d02f1fc6fc3f19a74a5982601d142179"
+    },
+    "custody-v3/source-publisher/audit_base.py": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/audit_base.py",
+      "bytes": 8839,
+      "sha256": "839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b",
+      "git_blob_sha1": "f5ef1f4e6d01276e151fd81b98851e3c4759f25b"
+    },
+    "custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_CUSTODY.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_CUSTODY.json",
+      "bytes": 6403,
+      "sha256": "266c17d435d47c58129349e721eec1eee849ceaa28dd5c302eb6030cc02e978e",
+      "git_blob_sha1": "bf253346d4bbba4776f03d5f40f1907eb9365158"
+    },
+    "custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_EXECUTION.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_EXECUTION.json",
+      "bytes": 563,
+      "sha256": "caf3292d305a0f4e8dcae60d9b2bc9e6690bc25f32830f3be505db07ff04a281",
+      "git_blob_sha1": "b9ad7eaa3e580f8e52bdbda740778870d25a59b4"
+    },
+    "custody-v3/source-publisher/epoch-01/BRANCH_ABSENCE_BEFORE_CREATE.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BRANCH_ABSENCE_BEFORE_CREATE.json",
+      "bytes": 970,
+      "sha256": "c9c175ba2a06b500d0345f720e94ac52279bb15dd7311a09b27c6c1bf1750e35",
+      "git_blob_sha1": "110050593a4a875dc8f09f2efd03705e7eb84125"
+    },
+    "custody-v3/source-publisher/epoch-01/BRANCH_CREATION.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BRANCH_CREATION.json",
+      "bytes": 453,
+      "sha256": "ec92b5c20f52f6572332c6b3af3b8d1c7c3395a0493d5aaf0021382d0d47039f",
+      "git_blob_sha1": "b9d004bd130554ee593ab6f8e8fdb79ef6000350"
+    },
+    "custody-v3/source-publisher/epoch-01/BRANCH_GET.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BRANCH_GET.json",
+      "bytes": 1907,
+      "sha256": "a65c5524109c673f1046d9f1729d7905f1539919f8f0a2fd91631a5feb28b6c8",
+      "git_blob_sha1": "9ee96365cf3dbb3df50aceb241d97d56e5c9b279"
+    },
+    "custody-v3/source-publisher/epoch-01/COMPLETED_TRANSPORT.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/COMPLETED_TRANSPORT.json",
+      "bytes": 23957,
+      "sha256": "396f77ed23bbe356626bfcc90f6e6ac4232202f63e38f61a33251096dd8586e8",
+      "git_blob_sha1": "924551c7ee1d3e4218888180c2e9a9e5b8e6bd1a"
+    },
+    "custody-v3/source-publisher/epoch-01/FILE_READBACKS.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FILE_READBACKS.json",
+      "bytes": 1164286,
+      "sha256": "c670df37826a24b0dda62a73ec3795e85c14a99fc44d68cdc470212dbbae4e98",
+      "git_blob_sha1": "ea5f1bce7b2fb42a30e813a9126baa7f0c920407"
+    },
+    "custody-v3/source-publisher/epoch-01/FINAL_COMMIT_CREATION.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_COMMIT_CREATION.json",
+      "bytes": 881,
+      "sha256": "cf5ff5e9b52fd172c334d48c3d961c8d2a14015fc38bb780fda56fcfd55abea1",
+      "git_blob_sha1": "ee6d5b79150192fbddf1c940948ed26e2ac15db1"
+    },
+    "custody-v3/source-publisher/epoch-01/FINAL_COMMIT_GET.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_COMMIT_GET.json",
+      "bytes": 4099,
+      "sha256": "a10dc4a210e14dbf9028b3f3fb4f36ad72eb1e1db50851e7a8b47db9685791c6",
+      "git_blob_sha1": "d8b34e27578902ef40a9d2b945029f446360eea7"
+    },
+    "custody-v3/source-publisher/epoch-01/FINAL_PUBLICATION_EXECUTION.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_PUBLICATION_EXECUTION.json",
+      "bytes": 541,
+      "sha256": "cdeabfd468399b28d8dbba993f1b56bbfb6d63150eff52029dfd7eeae504a307",
+      "git_blob_sha1": "d4b55c38cf8b9f92785e885ba84a8680a284b876"
+    },
+    "custody-v3/source-publisher/epoch-01/FINAL_READBACK.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_READBACK.json",
+      "bytes": 3447648,
+      "sha256": "8391f552328dedb2777a9ca9e793dc2dea867554abe646dbbb338388ce961c2a",
+      "git_blob_sha1": "13fcb514b91562724004ba752cc019b6498efa07"
+    },
+    "custody-v3/source-publisher/epoch-01/PREFLIGHT.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PREFLIGHT.json",
+      "bytes": 4201003,
+      "sha256": "13e56b17314e89370fb8ce3f8417b405b89b34db8a1868d968589550975db84f",
+      "git_blob_sha1": "0365b81ad1f8b3cef95993f23a84488c87f1c2ab"
+    },
+    "custody-v3/source-publisher/epoch-01/PR_CREATION.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PR_CREATION.json",
+      "bytes": 20086,
+      "sha256": "148643747e3c13b10377eb35740a3832611485a04432fcd4e6970f4962f27cc0",
+      "git_blob_sha1": "ef76e8d61f019a9f1c0264e1606e189b882dedbe"
+    },
+    "custody-v3/source-publisher/epoch-01/PUBLICATION_CUSTODY.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PUBLICATION_CUSTODY.json",
+      "bytes": 1099619,
+      "sha256": "95f325ce57dadab60031f41514d9a9c5fa3ef6eb29a41e3c9a8c81e2dee996b8",
+      "git_blob_sha1": "0f084555dbbea3ba4c9302386ced30e1e1503dda"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-00.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-00.json",
+      "bytes": 59299,
+      "sha256": "5f9e682afec61bf2c2cd8883ba2533927c5317dc2409fc43fd85e3b112b00f08",
+      "git_blob_sha1": "d55b6ebb698182d37e384dfafc7e788fe7462059"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-01.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-01.json",
+      "bytes": 14703,
+      "sha256": "e2f25989522f89098bc62bf552938de6f9e97385fee166907e5b053cc311d474",
+      "git_blob_sha1": "c90b283fcdc8b8ad47a9967fc3a713e13673c230"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-02.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-02.json",
+      "bytes": 32873,
+      "sha256": "651dd383a98b0b6587f214aa8041257e41b1b01c4bf93018a0de4cae6054979f",
+      "git_blob_sha1": "fb79558e088476b9cfc64bea47249e30c8c65dda"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-03.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-03.json",
+      "bytes": 9454,
+      "sha256": "6b4d2e9f1e02b5ab466a898724df1f4bde2e8b2495f8198c8d3aac36dd2836ba",
+      "git_blob_sha1": "ee9333be3798433dcfbcee14c7cadfec3e050e60"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-04.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-04.json",
+      "bytes": 38458,
+      "sha256": "b0fe9bc72bc8c63f5394d068395612478301c1c34ab3440e0a516782676847e2",
+      "git_blob_sha1": "b28ba9938f4333d3ca6ccf07623a1e336509ac68"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-05.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-05.json",
+      "bytes": 33870,
+      "sha256": "9c8ca761372671f98263d9dc341cf6eb83c870c2894849ad096522af955412cb",
+      "git_blob_sha1": "ac243452ac65c890dd212c55e2caa13b5de70841"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-06.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-06.json",
+      "bytes": 51434,
+      "sha256": "b5fb7d882960f20a2bfa0517d9b9d908761cf3fcf241b6dde31c8485c92e9440",
+      "git_blob_sha1": "8dfca328ca7a73b5fe3e379b1da909f8aedf52ec"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-07.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-07.json",
+      "bytes": 1576,
+      "sha256": "d59b1e109ce61bd49881ffa232de3689dbedb2329f62b63675445bb31f822511",
+      "git_blob_sha1": "2f3c00a66f5533ea8230cf5e895be775a5503b4b"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-08.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-08.json",
+      "bytes": 2856,
+      "sha256": "431ed2a5df0f5101a590fba5279cb1a06661cebac99150884d714d01c0534e60",
+      "git_blob_sha1": "9c79c7cc4784b63410a6f68a9670bbab8fa3ab67"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-09.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-09.json",
+      "bytes": 6028,
+      "sha256": "f42c51a6383836cffb05e723743dd06545d0917696742670e70c393975f144cb",
+      "git_blob_sha1": "21d84335fd0b256eeddc27938581b3be738c8ca9"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-10.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-10.json",
+      "bytes": 5335,
+      "sha256": "ba773cfa1b16a5079c70c5e79f9663b529f568e7c3599a97b66addf8a8414130",
+      "git_blob_sha1": "66f77c3efc8e51b78e7ae4cf8a9b8d721d44ad37"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-11.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-11.json",
+      "bytes": 4361,
+      "sha256": "8053df3ad2ec58b19a0ac2c86585ab922e93a873db3fc800972b4d497d5c1941",
+      "git_blob_sha1": "46b4d799d6d02822c87cf6c2b3345fa8296d41ab"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-12.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-12.json",
+      "bytes": 12577,
+      "sha256": "38dcbd14e3307d0e4fe6e99e72fb01ca13606eb4b2667cb9639bafa05d1a4292",
+      "git_blob_sha1": "a0bc5d23fb5468406ee5cca9068b2f32fabb4bd4"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-13.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-13.json",
+      "bytes": 100413,
+      "sha256": "a05bda83bcf3a7d8f59a5e3dc794a9ba03483af9a2475a630c819a2fc1d4be6d",
+      "git_blob_sha1": "16cf3b4209fce925710537b24a714ab8fce6bfe2"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-14.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-14.json",
+      "bytes": 42506,
+      "sha256": "06aca18820078bedfed28d2ff8aafa034fb6ff75c11a3397bf86fb8f0338e154",
+      "git_blob_sha1": "996dc73fb4671f3f63a93cafb7c8d86286fb2c0d"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-15.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-15.json",
+      "bytes": 67153,
+      "sha256": "9351543516c7a3a190420731b804380ecee3c12e547e45747c3551dd2536a0d8",
+      "git_blob_sha1": "1580b38f72083ae5df15620f3550b73ba6aa4df0"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-16.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-16.json",
+      "bytes": 46441,
+      "sha256": "ec6ff31e12a7c478f8cbf47bb21c4e33add7340bbbec7a55d235e903fe88defc",
+      "git_blob_sha1": "53fa40290492500a76f6eb9adbdb71d6c6f0a133"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-17.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-17.json",
+      "bytes": 24915,
+      "sha256": "d7fe5f167d72b2b4ae340f142410e114db79b58cd10e10190775a838f4864cb5",
+      "git_blob_sha1": "9690c9bd2ce37feadce62d5402cab4e9a26e4b30"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-18.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-18.json",
+      "bytes": 28716,
+      "sha256": "8b4c874062ffb16b7c1aed6a9083805442cb78bb88eaccba2def92e5708c1580",
+      "git_blob_sha1": "dabfcc7a35f90a00d620c531097dff229138690f"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-19.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-19.json",
+      "bytes": 1239,
+      "sha256": "7da6c3d541b2cb97717996d12b13a4ddbfa355ce8dc87c545e3aa480c57f6e17",
+      "git_blob_sha1": "a46217db3494b7fb4560bb8c849c3ff436777bb9"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-20.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-20.json",
+      "bytes": 1077,
+      "sha256": "91ada336fd5462edc80519398132f663450a1da3820472bd4f49ecc13d838749",
+      "git_blob_sha1": "955243589d6a94d96c31359a582410621472d49b"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-21.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-21.json",
+      "bytes": 1189,
+      "sha256": "9c7a7a546385f054b1039b535f19b14ab1701e0cc1d3d736baaa2a938ab32801",
+      "git_blob_sha1": "2d7fcc5f4c958280d82ef07492fa0aff7f121bc4"
+    },
+    "custody-v3/source-publisher/epoch-01/final-file-calls/call-22.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-file-calls/call-22.json",
+      "bytes": 1071,
+      "sha256": "97183d3d4517cdbb7472afe1291a8c503d864159ef6cf1aabd70cd15a66eca18",
+      "git_blob_sha1": "9b0d97579e80e55a370d20fea4d3112dc612ab38"
+    },
+    "custody-v3/source-publisher/epoch-01/final-publication-calls/commit.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/commit.json",
+      "bytes": 4185,
+      "sha256": "1ed2dbd664e8a3cf508c87dc7e2ca871e2d347d431d17b9c243a52400241ca35",
+      "git_blob_sha1": "0060b655880f823930904b1a7a6dcf5dd64d5856"
+    },
+    "custody-v3/source-publisher/epoch-01/final-publication-calls/pull_request.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/pull_request.json",
+      "bytes": 53111,
+      "sha256": "e891628db522796a21a5930c75455dcbd057cf2d6d55ea14f13c375adec23466",
+      "git_blob_sha1": "08231555d3e7837ec538d40a3597faa2297b3219"
+    },
+    "custody-v3/source-publisher/epoch-01/final-publication-calls/ref.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/final-publication-calls/ref.json",
+      "bytes": 1993,
+      "sha256": "4b7ac816b0b9f78f3e48ff85cb60eba8ba9714b1295f1ef0df247c5300197542",
+      "git_blob_sha1": "2d7cf6a36ab5004f26c5afb9fca22bd7d2c0bded"
+    },
+    "custody-v3/source-publisher/epoch-01/transport/INDEX.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/transport/INDEX.json",
+      "bytes": 35655,
+      "sha256": "dce1e97079aeb3ad9edbdf9f814b3ccaeebfd0053c9d2b4b79ff841632c0736d",
+      "git_blob_sha1": "99c698756eedc88f650d4495f56827639cfb01f0"
+    },
+    "custody-v3/source-publisher/prepare_publication.py": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/prepare_publication.py",
+      "bytes": 15683,
+      "sha256": "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd",
+      "git_blob_sha1": "6b32bbff9f9221ddf8c5c4f3eb10ee27bed7d70a"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/CUSTODY_INPUT.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/CUSTODY_INPUT.json",
+      "bytes": 14641,
+      "sha256": "22b58a9e97fd6bb4ebebc6a89dc13e368107c10429bff59191914a5e639c81df",
+      "git_blob_sha1": "aab1f868d992a08d865918b3cef7a99fdf299173"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/PROBE_CUSTODY_RESULT.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_CUSTODY_RESULT.json",
+      "bytes": 1542,
+      "sha256": "074e9dcec6275f05bc8ac93d6d92e36b5adaeaa4c6503ace2dbf047b49916705",
+      "git_blob_sha1": "98e64dd614928ae710eb03e66d0dacce1be8b132"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/PROBE_EXECUTION.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROBE_EXECUTION.json",
+      "bytes": 670,
+      "sha256": "90c9f648768fde6d74bc416d5a52076c7b29581a5df42e21f80da62e983a9be6",
+      "git_blob_sha1": "7fa37f2114d172ad33e0f43e5c0b46af6c7ec099"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/PROTOCOL.md": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/PROTOCOL.md",
+      "bytes": 4406,
+      "sha256": "cdf3826e3725acded05b38031b70d9e7a8f8579540b38d65a2a8e38ce64209f5",
+      "git_blob_sha1": "0cf763bcef6fc836cb345360893c1874f5781eb9"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/create-call-0.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-0.json",
+      "bytes": 748,
+      "sha256": "b8a32d3afbab09a54e0783bcd9c30784f52c2f354df1963ce0fdabeb1977b366",
+      "git_blob_sha1": "2d14689c274dc122940b3f890da15d2c842453e8"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/create-call-1.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-1.json",
+      "bytes": 586,
+      "sha256": "5b7ac8ba077d2b3ee8c3cf6853ade48ea8e568f97d8f98d4f18d46ff7835423b",
+      "git_blob_sha1": "601f586d75d0980d283de686bc2f8a48b39dc02f"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/create-call-2.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-2.json",
+      "bytes": 728,
+      "sha256": "cfe40a28577457759a7bd1ba588d069c4a7a8c7e2f8edff631e48598f8f6c64d",
+      "git_blob_sha1": "885d1e60d4cc571839679cabcf43fbc68629f641"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/create-call-3.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/create-call-3.json",
+      "bytes": 611,
+      "sha256": "354b7b50af7d013a23870acbd24603e32c9f248bd4ca2ba86c4ea7e489064b79",
+      "git_blob_sha1": "de4a4eeff25c14055515986c6627961603271e6e"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/draft-T01/raw_custody_v3.py": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/draft-T01/raw_custody_v3.py",
+      "bytes": 12671,
+      "sha256": "a96f1aec811774467092a09cd750d47785fd4dd5482ce792ffac93c38deb9f5b",
+      "git_blob_sha1": "ccdbb23cf2bddffc543517e4662bd7b069a2876a"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/draft-T01/verify_publication_v3.py": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/draft-T01/verify_publication_v3.py",
+      "bytes": 13831,
+      "sha256": "7138709c360728c17c701391f303a02e21e6e1334b29bc3f67f6c9702f7440f4",
+      "git_blob_sha1": "4ad5c54d4d6109067c40ca82c2d5031df31e99d6"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/trees/0b445a9f02146e1ef34f499ae801d0f9001b6313.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/0b445a9f02146e1ef34f499ae801d0f9001b6313.json",
+      "bytes": 1893,
+      "sha256": "d6a876dffdb48da7271d85966ac7d9cd684e4b89ecc3548e79a5dc8ef55be637",
+      "git_blob_sha1": "c4da2406762041b4822bd147b0788e2697a16b42"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/trees/1f7ac77c503cb40df683a7831d94b0c6a381b811.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/1f7ac77c503cb40df683a7831d94b0c6a381b811.json",
+      "bytes": 6735,
+      "sha256": "e60253446c2741c41d127b379f3b9f56506442a0476ea377ab9de43f4ef98701",
+      "git_blob_sha1": "7ada47a165dfbc77a522ae63aed44997e15cfcde"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/trees/1f8b33bc67afb0a0537c93dddd7ed5d94476dd8a.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/1f8b33bc67afb0a0537c93dddd7ed5d94476dd8a.json",
+      "bytes": 1941,
+      "sha256": "bf6ecda1e1cd2d3a0fe726b39e1b1fb924fb9dd9e6bff7fb311cec53a69da76b",
+      "git_blob_sha1": "e9ba220b40280b21d05ca7af17dbe66d41ff095a"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/trees/2e1ea5ea0076af3e2947a20dcddf8b306249d46c.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/2e1ea5ea0076af3e2947a20dcddf8b306249d46c.json",
+      "bytes": 37747,
+      "sha256": "87897d5da6389eb5421cf083436ea9dba28921fc7c46fcec185c336677476023",
+      "git_blob_sha1": "6cff29e51e8136b30913643aceabcc558b115704"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/trees/7de7c1ae7d22f70481a6dc0c5e81e3de73423e70.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/7de7c1ae7d22f70481a6dc0c5e81e3de73423e70.json",
+      "bytes": 1947,
+      "sha256": "bc4a2014f1bde8d775d57d3a3f3e31f441e933a1dec4116df3a1fd92a64ed1bb",
+      "git_blob_sha1": "73ab6ba3e52f55ea66d321aa5c5144003aec3681"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/trees/8582ac8a6a16142f1ee2b8151085238304fb7aa3.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/8582ac8a6a16142f1ee2b8151085238304fb7aa3.json",
+      "bytes": 3351,
+      "sha256": "bbbbe2668c25e80d6e53d7c59a4a020fac5ee12f41daed2c665d52c7de1211ac",
+      "git_blob_sha1": "8009e93f4947f9cf30153efc916fdb8f84d224cb"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/trees/894e5ba1d9e4e747a308d05f7acb254614f3fe0c.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/894e5ba1d9e4e747a308d05f7acb254614f3fe0c.json",
+      "bytes": 1893,
+      "sha256": "400fa13aa4dce4c38c9af8c98d252c1fab164119e26d623e18d01f9e36d6a127",
+      "git_blob_sha1": "2de74dd7e10ad63136226488b4943d7620a85a46"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/trees/89e0c45dbf11305c45c0574ab73486c66a8fe7b2.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/89e0c45dbf11305c45c0574ab73486c66a8fe7b2.json",
+      "bytes": 1943,
+      "sha256": "878c3f9a33326df4d91935336962565b2d644e694e51b2aca9f7a47010044324",
+      "git_blob_sha1": "890aee4ab25bf18cedf01c20e4d4876ecfefa0f7"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/trees/8de0927ad179c1a668e215fde234824f0b302797.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/8de0927ad179c1a668e215fde234824f0b302797.json",
+      "bytes": 4779,
+      "sha256": "cc07ab6028915303903199aa027d19e27aa96d1d60d16231bf04ea24eb74ec6f",
+      "git_blob_sha1": "9f18b295f501b724ef22555e9ddced2f215217b5"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/trees/9988b4d8f0482cb1e10e41b38e36fd79f5c7bc10.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/9988b4d8f0482cb1e10e41b38e36fd79f5c7bc10.json",
+      "bytes": 1951,
+      "sha256": "7f438bf36e2a306ffd396d10d6c1e23164f4456ce85b0d06a23b020183682bd1",
+      "git_blob_sha1": "c7ce23a1c241b337cbf935d55ae51b5fa7af2a67"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/trees/aee49a1388a9853f238d6360549181611d8168c4.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/aee49a1388a9853f238d6360549181611d8168c4.json",
+      "bytes": 1897,
+      "sha256": "05a12fcdcba2cbb33d7f26c823c1ec77e712b206b0513ad69971affda5dc24f6",
+      "git_blob_sha1": "e42dcd7434d48dc88cb2181847e43623b3b2f647"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d.json",
+      "bytes": 167271,
+      "sha256": "f6852b552a509cd63b6f3622a21124215fb4c584d9b0b35fb4fd66dc6631f5d3",
+      "git_blob_sha1": "4a6439ecc558aa0fb82f410f7f1aeffe30d5a4ae"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2.json",
+      "bytes": 1911,
+      "sha256": "0e3ba46f0ff549937802d41bcd60f36e7a1d2221744d7fed2bac7c3b14a290ba",
+      "git_blob_sha1": "2575e4b9cc0ccbea2975e0b968cc021802ab2d26"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/trees/d7bce8c8d93693af06d95f1121257d65ca7d9f19.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/d7bce8c8d93693af06d95f1121257d65ca7d9f19.json",
+      "bytes": 1885,
+      "sha256": "4371692b6dc8fafe9355b12f4dd9a7ef3dbda4f38d4a4b262fc7d7e536ebedd2",
+      "git_blob_sha1": "acfe765a53a420a5b8384677622f354f4d4a4060"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/trees/de28521cc91ed2316af7806f04d933543a3e3637.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/de28521cc91ed2316af7806f04d933543a3e3637.json",
+      "bytes": 17675,
+      "sha256": "31f6229cce694b49b0e30cb34791f0b4df696b933965637241dd5b053f751b04",
+      "git_blob_sha1": "c3ab72cb6bba321b6dd99f2fd741a04cf087a211"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/trees/e6cb4eaa71784811361312b305d2723cf886ac1e.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/e6cb4eaa71784811361312b305d2723cf886ac1e.json",
+      "bytes": 1885,
+      "sha256": "4df921e09958f15fd17261bfbb5f9b948b4382afed7890b4568be4444594c7d3",
+      "git_blob_sha1": "b135e69a8207ea1523591995a68ed4f03f4d849e"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/trees/fa58808396946d716c50398bc880a9bc570148db.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/trees/fa58808396946d716c50398bc880a9bc570148db.json",
+      "bytes": 1891,
+      "sha256": "6f3742c4822492686a14cf87ba0697e05fa3082cecbe958772e2b97200c60225",
+      "git_blob_sha1": "aaf510fa17d33ae025302b34ecc5975c20a302f9"
+    },
+    "custody-v3/source-publisher/raw-custody-v3/verification-file-reads.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw-custody-v3/verification-file-reads.json",
+      "bytes": 5076,
+      "sha256": "5f992ea5fa2a618093909b3ba7b063a8972de84f2af4b00ed44b323597538a87",
+      "git_blob_sha1": "805234c233d3bb741a35ced6c80d15f13da35a6c"
+    },
+    "custody-v3/source-publisher/raw_custody_v3.py": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/raw_custody_v3.py",
+      "bytes": 12912,
+      "sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be",
+      "git_blob_sha1": "25a836990c02625c79f44492eb43b7ffca13b07f"
+    },
+    "custody-v3/source-publisher/readback-static-review/custody-v3/COMPANION_BINDING.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/COMPANION_BINDING.json",
+      "bytes": 2857,
+      "sha256": "e5d6703bbeaebb2f6718c7b7f9cefd7dfd723f1b3cead9c50e397ce96e26b791",
+      "git_blob_sha1": "6ff36dbc6f5a3b2b2682ca89917411a65755ff14"
+    },
+    "custody-v3/source-publisher/readback-static-review/custody-v3/FILE_SEALS.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/FILE_SEALS.json",
+      "bytes": 4661,
+      "sha256": "da5f48a847613be5599132af53755f677cc579da75d302bfea66d36da643232d",
+      "git_blob_sha1": "f7ac549808395cdfc6d4bec1705f38ada86e1077"
+    },
+    "custody-v3/source-publisher/readback-static-review/custody-v3/INPUT_SEALS.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/INPUT_SEALS.json",
+      "bytes": 11329,
+      "sha256": "52d1f09a46c14b1aed8d181e11bc7b0df9f0346eaa453676b8f6ba64e5ce6ace",
+      "git_blob_sha1": "430e04850aee8d3c1ac1cabe70b55e0992628c8e"
+    },
+    "custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.json",
+      "bytes": 15643,
+      "sha256": "e8ff8e7928611d4cdbe34c9dfd58340e3aa282205bfd405a2bf56d57393d78b0",
+      "git_blob_sha1": "18cd2c7e0d2d224d4a1f30355000bc70e0b68a05"
+    },
+    "custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.md": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/REVIEW.md",
+      "bytes": 10550,
+      "sha256": "6578850848d5e69f454b06c55c898da3811c9607f395c485aafe586178cfa8ee",
+      "git_blob_sha1": "d68306dd759322baab6f4154a8856e4d5ec87406"
+    },
+    "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/audit_base.py": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/audit_base.py",
+      "bytes": 8839,
+      "sha256": "839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b",
+      "git_blob_sha1": "f5ef1f4e6d01276e151fd81b98851e3c4759f25b"
+    },
+    "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/prepare_publication.py": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/prepare_publication.py",
+      "bytes": 15683,
+      "sha256": "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd",
+      "git_blob_sha1": "6b32bbff9f9221ddf8c5c4f3eb10ee27bed7d70a"
+    },
+    "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/PROTOCOL.md": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/PROTOCOL.md",
+      "bytes": 4406,
+      "sha256": "cdf3826e3725acded05b38031b70d9e7a8f8579540b38d65a2a8e38ce64209f5",
+      "git_blob_sha1": "0cf763bcef6fc836cb345360893c1874f5781eb9"
+    },
+    "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/raw_custody_v3.py": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/raw_custody_v3.py",
+      "bytes": 12671,
+      "sha256": "a96f1aec811774467092a09cd750d47785fd4dd5482ce792ffac93c38deb9f5b",
+      "git_blob_sha1": "ccdbb23cf2bddffc543517e4662bd7b069a2876a"
+    },
+    "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/verify_publication_v3.py": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw-custody-v3/draft-T01/verify_publication_v3.py",
+      "bytes": 13831,
+      "sha256": "7138709c360728c17c701391f303a02e21e6e1334b29bc3f67f6c9702f7440f4",
+      "git_blob_sha1": "4ad5c54d4d6109067c40ca82c2d5031df31e99d6"
+    },
+    "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw_custody_v3.py": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/raw_custody_v3.py",
+      "bytes": 12912,
+      "sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be",
+      "git_blob_sha1": "25a836990c02625c79f44492eb43b7ffca13b07f"
+    },
+    "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication.py": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication.py",
+      "bytes": 9623,
+      "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639",
+      "git_blob_sha1": "a4e9bdad2fc2394f84a4593460c7eeab5e94f4e3"
+    },
+    "custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication_v3.py": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inputs/verify_publication_v3.py",
+      "bytes": 13831,
+      "sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa",
+      "git_blob_sha1": "c5efacc8212e97a74770db0c70bcbd80d24ec232"
+    },
+    "custody-v3/source-publisher/readback-static-review/custody-v3/inspect_inputs.py": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/inspect_inputs.py",
+      "bytes": 14398,
+      "sha256": "ef55ea26a4df72e09416ffcec9eff75798a4c126378149cf2c667071446f27d2",
+      "git_blob_sha1": "0e0635f7a7fb4c1c0f2443d7040cc811056e699e"
+    },
+    "custody-v3/source-publisher/readback-static-review/custody-v3/raw_custody_v3.py.T01-T02.diff": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/raw_custody_v3.py.T01-T02.diff",
+      "bytes": 1186,
+      "sha256": "e234102abc927fda207e5766aa06bd949c56478566ab2fa990666f882e8ceca7",
+      "git_blob_sha1": "9e62da11151b4d61956ad3d47e8686f0dfed6189"
+    },
+    "custody-v3/source-publisher/readback-static-review/custody-v3/verify_publication_v3.py.T01-T02.diff": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/custody-v3/verify_publication_v3.py.T01-T02.diff",
+      "bytes": 829,
+      "sha256": "2905e58d2d063a419abc99cb52bcb46db1dae3c3655a135497630cb2218154d6",
+      "git_blob_sha1": "694c31083f1029eaf98e895213c1e0d6be7914a9"
+    },
+    "custody-v3/source-publisher/readback-static-review/raw-readback-failure/FILE_SEALS.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/FILE_SEALS.json",
+      "bytes": 1587,
+      "sha256": "30556460d63d575f1b18b098fcbd2019239e4634c6067ab319b348c40d39f581",
+      "git_blob_sha1": "7906eaaf1e5cecc3d034c67018956b535418720b"
+    },
+    "custody-v3/source-publisher/readback-static-review/raw-readback-failure/INPUT_SEALS.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/INPUT_SEALS.json",
+      "bytes": 3869,
+      "sha256": "97680e799c6b21d29f86b7f2249e22dacc5e1c761d1e7f2ade704eba729a481f",
+      "git_blob_sha1": "9579b24598fd074879255d939a1a4aebe317eb40"
+    },
+    "custody-v3/source-publisher/readback-static-review/raw-readback-failure/READ_CAPABILITIES.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/READ_CAPABILITIES.json",
+      "bytes": 5925,
+      "sha256": "1356f767136ebe7d2bbc59bd61904691b82a88161d776d8039fc9ab97510ca60",
+      "git_blob_sha1": "e3b9c0419a9afab6b8438b4a15a3932ff5dabb72"
+    },
+    "custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.json",
+      "bytes": 4051,
+      "sha256": "be0f51039422ac6e111a0f5d3a0ba96a74730555d5663c2483fb1ac94a1d96f0",
+      "git_blob_sha1": "01721c3ae6b5fdd238668b12c0676a43dd047f38"
+    },
+    "custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.md": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/REVIEW.md",
+      "bytes": 7352,
+      "sha256": "52621f38ee8dbd408012219a4a5bd5cef08c046da3ada5cecf923398d637e769",
+      "git_blob_sha1": "89d5f7adbbb529c8ffd1f27c23e2353e80800c68"
+    },
+    "custody-v3/source-publisher/readback-static-review/raw-readback-failure/inspect.py": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-readback-failure/inspect.py",
+      "bytes": 7385,
+      "sha256": "67dba07d875c0f9a9bc9e18522bed9fc71b1aeb16787e869fbc75ee9650b8640",
+      "git_blob_sha1": "c5c060782a26968a79608c2124c47cdd6c606b2a"
+    },
+    "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FETCH_FILE_CAPABILITY.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FETCH_FILE_CAPABILITY.json",
+      "bytes": 1155,
+      "sha256": "0b52650547b4d4ae69a1e462c38ef2077cddb0dfd2c7915e327fcd041dca1709",
+      "git_blob_sha1": "31b92d1d550fb1edf5470c59628dc0e6c6020924"
+    },
+    "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FILE_SEALS.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/FILE_SEALS.json",
+      "bytes": 1600,
+      "sha256": "2102f85bd93143fd60431fd26a8069bdff2a5e4a2e6616deb6d6f934dc5191f8",
+      "git_blob_sha1": "c740b48213371899e883453a4484cfb69ed84f16"
+    },
+    "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/INPUT_SEALS.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/INPUT_SEALS.json",
+      "bytes": 5975,
+      "sha256": "4e5b2bce37562177cbfb2485a082c33df5a97aa238fac42dacfde355f41ff444",
+      "git_blob_sha1": "b487d1b98b4008965c074b5b7297e9d22330cf64"
+    },
+    "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.json",
+      "bytes": 3822,
+      "sha256": "1e879a75f8b6d08fba9628406fffa7a7fa20d471fceb0cb8da5bbf47c0f2a5df",
+      "git_blob_sha1": "7b32297dc0d362b1e0a1a02548f1985228cdb159"
+    },
+    "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.md": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/REVIEW.md",
+      "bytes": 7280,
+      "sha256": "03f15a70c1ac11b52005af86f2bc193599709427f39ae250234fbf9bfbf8b626",
+      "git_blob_sha1": "80241c4f951f7f19cda306219c066088e9c53e8e"
+    },
+    "custody-v3/source-publisher/readback-static-review/raw-transport-adapter/inspect.py": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/raw-transport-adapter/inspect.py",
+      "bytes": 10963,
+      "sha256": "c80763ab3a3796d4f7dc8a22596dc96c060bef801b9a8fa845109ce044d36d97",
+      "git_blob_sha1": "a97614be485737c0c7abb0c754e838e4dfc2b312"
+    },
+    "custody-v3/source-publisher/readback-static-review/v2/FILE_SEALS.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/FILE_SEALS.json",
+      "bytes": 986,
+      "sha256": "efbdfa191409f225d814662a744003070f3bf4ce2bd7a4e331cb022abd607696",
+      "git_blob_sha1": "ffcfc63bdc314201c7bb982c6b6cffea1d45924a"
+    },
+    "custody-v3/source-publisher/readback-static-review/v2/INPUT_SEALS.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/INPUT_SEALS.json",
+      "bytes": 1321,
+      "sha256": "5a26d9913a9b18f97b68aa8bf3eac6855d954f5d4e1c7c7805a16f1589f0a881",
+      "git_blob_sha1": "8d796747695178148b77cabcd485be1ee3d825c5"
+    },
+    "custody-v3/source-publisher/readback-static-review/v2/REVIEW.md": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/REVIEW.md",
+      "bytes": 4985,
+      "sha256": "f84ae9ee896eaadd79ae00c3c1747decd0f928872baecbec56166f363f675b59",
+      "git_blob_sha1": "160fd1d62c645aeb201cf5eee2dfe555079474a6"
+    },
+    "custody-v3/source-publisher/readback-static-review/v2/audit_base.py.txt": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/audit_base.py.txt",
+      "bytes": 8839,
+      "sha256": "839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b",
+      "git_blob_sha1": "f5ef1f4e6d01276e151fd81b98851e3c4759f25b"
+    },
+    "custody-v3/source-publisher/readback-static-review/v2/prepare_publication.py.txt": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/prepare_publication.py.txt",
+      "bytes": 15683,
+      "sha256": "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd",
+      "git_blob_sha1": "6b32bbff9f9221ddf8c5c4f3eb10ee27bed7d70a"
+    },
+    "custody-v3/source-publisher/readback-static-review/v2/v1-v2.diff": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/v1-v2.diff",
+      "bytes": 4471,
+      "sha256": "dcb1f09d1b221eb10837874bf62e82093813eb102229567ac19ed4a9c56831d9",
+      "git_blob_sha1": "7453be80777b2306476a407d7406f146c6d5a7d7"
+    },
+    "custody-v3/source-publisher/readback-static-review/v2/verify_publication.py.txt": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/readback-static-review/v2/verify_publication.py.txt",
+      "bytes": 9623,
+      "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639",
+      "git_blob_sha1": "a4e9bdad2fc2394f84a4593460c7eeab5e94f4e3"
+    },
+    "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/FILE_SEALS.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/FILE_SEALS.json",
+      "bytes": 1028,
+      "sha256": "2322e736246e2fd11d94bc4c9c5d1a5717e0bd5be6179f7e4509a9242606d43c",
+      "git_blob_sha1": "0b8a0cd492e07e48cb396d54827ffcc7f1f75fcd"
+    },
+    "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/INPUT_SEALS.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/INPUT_SEALS.json",
+      "bytes": 1442,
+      "sha256": "793b5cfb897b0e0b7471f5f0c85adf3d6520b11c2077d669bbb8a1b48f647120",
+      "git_blob_sha1": "b5f13db8c6c74e053f57ea470c5802dd1cfc438c"
+    },
+    "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/REVIEW.md": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/REVIEW.md",
+      "bytes": 6622,
+      "sha256": "9fba35c03ee7d13a7ace7ef8f760f48186c0a8caf73e5dd5cd5d227815f1d693",
+      "git_blob_sha1": "f7bbb6cda696cb686270c7d7f3d7f17f77cae2a8"
+    },
+    "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/FILE_SEALS.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/FILE_SEALS.json",
+      "bytes": 1060,
+      "sha256": "05242c715b5d63567d13c26c801e9a2c96ca4e27f14434e3a96020cdcd374a97",
+      "git_blob_sha1": "100e5d3cdd839136fd94346074337a0ab7866d9f"
+    },
+    "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/INPUT_SEALS.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/INPUT_SEALS.json",
+      "bytes": 1763,
+      "sha256": "beb5b6f452c2f1f6356136b5ae236bfd23fb2c7313228765357a3f46e50f3f4b",
+      "git_blob_sha1": "0c4a7a328cc621884baf4b61a12d68e773c0a6e2"
+    },
+    "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/REVIEW.md": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/REVIEW.md",
+      "bytes": 2881,
+      "sha256": "c7c575b882732681c3b5f1435f70063a765435f9e6137e10151fb2f8fa2ef2df",
+      "git_blob_sha1": "9b470e7720fce97aad75e811e34291df25617902"
+    },
+    "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/T01_T02.diff": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/T02-delta/T01_T02.diff",
+      "bytes": 2015,
+      "sha256": "5f5c5f9c2b9d82607b8e3e30e9027ee8032f4d9fde812c2617343cb934049745",
+      "git_blob_sha1": "577a92ee28f87b5ec157750521b768e91ea021f6"
+    },
+    "custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/V2_V3.diff": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/related-source-review/custody-v3-verifier-static-review/V2_V3.diff",
+      "bytes": 7930,
+      "sha256": "e487f83f318b61c01515549e588b66a384d0d281a0bc5d3a4ace5f1ca6cd8803",
+      "git_blob_sha1": "36995c07b0a120a99e603b62fac2e4055e29597d"
+    },
+    "custody-v3/source-publisher/verify_publication.py": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/verify_publication.py",
+      "bytes": 9623,
+      "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639",
+      "git_blob_sha1": "a4e9bdad2fc2394f84a4593460c7eeab5e94f4e3"
+    },
+    "custody-v3/source-publisher/verify_publication_v3.py": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/verify_publication_v3.py",
+      "bytes": 13831,
+      "sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa",
+      "git_blob_sha1": "c5efacc8212e97a74770db0c70bcbd80d24ec232"
+    },
+    "source-manifest/FINAL_MANIFEST.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-manifest/FINAL_MANIFEST.json",
+      "bytes": 2651088,
+      "sha256": "9270a6b4098960e2b7c7bd87b17325b648c4de363957f36028bacc9c1955e328",
+      "git_blob_sha1": "8b87e4320079b69393a01387f11ccda15a273509"
+    },
+    "custody-v3/CUSTODY_EVIDENCE_INDEX.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/CUSTODY_EVIDENCE_INDEX.json",
+      "bytes": 260154,
+      "sha256": "8e478debeac87c46d01d57cf1038b2195005f9f6af249b25d97f1074ef26b38b",
+      "git_blob_sha1": "8d97bf818a71fd3d8bd63441d45e2de8b6666a6a"
+    },
+    "custody-v3/CUSTODY_CARRY_PROSE.md": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/CUSTODY_CARRY_PROSE.md",
+      "bytes": 2233,
+      "sha256": "0aeba88cf1e5545ff4e973f96e9c7231c5442544393d2ef5c5304f9ebab5570b",
+      "git_blob_sha1": "fc139915c9dbe1809b941074945c53cc3855504a"
+    },
+    "source-results/RECOVERY_RESULT.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/RECOVERY_RESULT.json",
+      "bytes": 456423,
+      "sha256": "086f4ef835a0939b212bcb7595e75513ecbd46ce6bbf764a8d1f5aca1e418954",
+      "git_blob_sha1": "9c14f0c7eef7ed15b9148947ee729836dc2aefe1"
+    },
+    "source-results/E4_EXECUTION_INPUT.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/E4_EXECUTION_INPUT.json",
+      "bytes": 12601,
+      "sha256": "a42a7069695c38edfe2a25c1f8c9e16fd0db89401976679fc6409b78eca6d852",
+      "git_blob_sha1": "428422fc77c5335a43b9c978515445f056d0d2c6"
+    },
+    "source-results/RECOVERY_REPORT.md": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/RECOVERY_REPORT.md",
+      "bytes": 16279,
+      "sha256": "b21708f3c4537237db3608f8c12ba54ee1940817eb7d5594c1fea5bdeab29259",
+      "git_blob_sha1": "c019f5e4cf5014915d0686aeeeeb4cc306264907"
+    },
+    "source-results/DESIGNATED_SOURCE_OUTPUTS.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/DESIGNATED_SOURCE_OUTPUTS.json",
+      "bytes": 15261,
+      "sha256": "296d5b9eb4f41b51a85d44bb4f05c76e8c5b6453fb55881691b9823055062510",
+      "git_blob_sha1": "59e4ba6f35c37c1a00da2678ed88b9f034d885e1"
+    },
+    "source-results/FINAL_T03_REVIEW.md": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/FINAL_T03_REVIEW.md",
+      "bytes": 12253,
+      "sha256": "d6109ae253343f5c157d867732f3eea954cc4e57438968154b476407a21e86b2",
+      "git_blob_sha1": "966b2ec295da85f5d4399ea7c717eeaf0d4d06d3"
+    },
+    "source-results/ROOT_POM.xml": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/ROOT_POM.xml",
+      "bytes": 119981,
+      "sha256": "f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab",
+      "git_blob_sha1": "98889a040aad5cc3c82f782bb4b173d118207988"
+    },
+    "source-results/ROOT_POM_RESTORATION.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/ROOT_POM_RESTORATION.json",
+      "bytes": 922,
+      "sha256": "34a6cf995296ed929c2209d34480245473150601f8a556945aa1d8c2947fda6d",
+      "git_blob_sha1": "56764ea7b60d04d7050310f7355280fe2ee9eed6"
+    },
+    "source-results/ROOT_POM_RECOVERY_CALL.json": {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/source-results/ROOT_POM_RECOVERY_CALL.json",
+      "bytes": 165921,
+      "sha256": "f647efbec6809523678b640b0dfbdf495f494bfc5c3e84a8a5e6e8a473e89d41",
+      "git_blob_sha1": "ed2dd05bc146884c7fbe88357966ba8b5a5e9236"
+    }
+  },
+  "source_export_admitted": false,
+  "recipe_execution": "NOT_EXECUTED"
+}

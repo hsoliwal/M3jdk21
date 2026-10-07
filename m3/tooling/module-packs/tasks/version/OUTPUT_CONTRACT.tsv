@@ -1,0 +1,9 @@
+artifact	role
+STATUS.tsv	measured gates
+RUN_CONTEXT.tsv	actual environment
+PROVENANCE.tsv	read source identity
+VERIFY_CONTRACT.tsv	remaining admission
+OUTPUT_CONTRACT.tsv	this ledger
+FINAL_REPORT.md	scope and truth
+ACTION_QUEUE.tsv	outstanding programme
+RAW_RESULTS.log	executed outputs

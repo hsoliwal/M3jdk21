@@ -1,0 +1,16 @@
+gate	state	requirement
+docs_before_code	PASS_BRANCH	TASK_PACKET precedes executor recovery
+exact_executor_blob	PASS_BRANCH	PR144 executor/test/policy restored verbatim
+receipt_readme	PASS_BRANCH	PR144 reviewed materialization state restored
+workflow_delta	PASS_BRANCH	only branch trigger and libxrandr-dev differ from PR144 workflow
+python_compile_tests	PENDING_HOSTED	comparator/generator/executor tests
+47_path_accounting	PENDING_HOSTED	generated + SAME =47; exclusions must be empty
+packet_dag	PENDING_HOSTED	canonical JEP493 DAG/projections
+preimage_check	PENDING_HOSTED	all generated crate preimages exact
+materialize_fixed_point	PENDING_HOSTED	ephemeral candidate and unchanged second apply
+changed_path_fence	PENDING_HOSTED	only crate targets change
+openjdk_configure	PENDING_HOSTED	--enable-linkable-runtime
+jdk_images	PENDING_HOSTED	full image build
+runtimeImage_jtreg	PENDING_HOSTED	full runtimeImage family
+legacy_jlink_jmod	PENDING_HOSTED	existing regressions
+no_jmod_smoke	PENDING_HOSTED	built jlink links from current runtime image

@@ -1,0 +1,75 @@
+name: M3 parser custody diagnostics
+
+on:
+  push:
+    branches:
+      - "m3/parser-custody-continuation-20261005"
+    paths:
+      - "m3/tooling/migration-recipes/**"
+      - "m3/runtime-integration/**"
+      - "src/hotspot/share/prims/jni.cpp"
+      - ".github/workflows/m3-parser-custody-diagnostics.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Run exact recipe proof and retain coverage diagnostics
+        id: recipe-proof
+        shell: bash
+        run: |
+          set +e
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml clean verify
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          echo "=== JaCoCo CSV ==="
+          if test -f m3/tooling/migration-recipes/target/site/jacoco/jacoco.csv; then
+            cat m3/tooling/migration-recipes/target/site/jacoco/jacoco.csv
+          else
+            echo "NO_JACOCO_CSV"
+          fi
+          exit 0
+
+      - name: Print JNI source-seal evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "=== current jni.cpp SHA-256 ==="
+          sha256sum src/hotspot/share/prims/jni.cpp
+          echo "=== runtime-integration recipe references ==="
+          grep -R -n --fixed-strings 'src/hotspot/share/prims/jni.cpp' m3/runtime-integration/recipe || true
+          echo "=== runtime-integration expected hashes / state ==="
+          grep -R -n -E '(^|[^0-9a-f])[0-9a-f]{64}([^0-9a-f]|$)|superseded|state='             m3/runtime-integration/recipe || true
+          echo "=== current check ==="
+          set +e
+          python3 m3/runtime-integration/recipe/apply.py --check
+          echo "runtime_check_exit=$?"
+          set -e
+
+      - name: Upload JaCoCo report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: m3-parser-custody-jacoco
+          path: m3/tooling/migration-recipes/target/site/jacoco
+          if-no-files-found: ignore
+          retention-days: 3
+
+      - name: Enforce recipe proof result
+        if: steps.recipe-proof.outputs.status != '0'
+        shell: bash
+        run: |
+          echo "Maven recipe proof failed; diagnostics above are authoritative."
+          exit 1
