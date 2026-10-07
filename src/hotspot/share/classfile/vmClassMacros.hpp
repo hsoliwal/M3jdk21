@@ -57,6 +57,7 @@
   do_klass(M3StringAtom_klass,                   java_lang_M3StringAtom                         ) \
   do_klass(M3StringTuple_klass,                  java_lang_M3StringTuple                        ) \
   do_klass(M3StringFacts_klass,                  java_lang_M3StringFacts                        ) \
+  do_klass(M3StringRangeFact_klass,              java_lang_M3StringRangeFact                    ) \
   do_klass(Cloneable_klass,                             java_lang_Cloneable                                   ) \
   do_klass(ClassLoader_klass,                           java_lang_ClassLoader                                 ) \
   do_klass(Serializable_klass,                          java_io_Serializable                                  ) \

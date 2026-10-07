@@ -192,10 +192,26 @@ jbyte java_lang_M3String::coder(oop value) {
 
 int java_lang_M3String::modified_utf8_length_if_precomputed(oop value) {
   oop o = owner(value);
-  if (start(value) != 0 || length(value) != o->int_field(_owner_length_offset)) {
-    return -1;
+  oop facts = nullptr;
+  if (start(value) == 0 && length(value) == o->int_field(_owner_length_offset)) {
+    facts = o->obj_field_acquire(_owner_facts_offset);
+  } else {
+    const jlong wanted = coordinate(value);
+    const int range_offsets[] = {
+      _owner_range0_offset,
+      _owner_range1_offset,
+      _owner_range2_offset,
+      _owner_range3_offset
+    };
+    for (uint index = 0; index < ARRAY_SIZE(range_offsets); index++) {
+      oop range = o->obj_field_acquire(range_offsets[index]);
+      if (range != nullptr && range->long_field(_range_coordinate_offset) == wanted) {
+        assert(range->klass() == vmClasses::M3StringRangeFact_klass(), "M3 range fact");
+        facts = range->obj_field_acquire(_range_facts_offset);
+        break;
+      }
+    }
   }
-  oop facts = o->obj_field_acquire(_owner_facts_offset);
   return facts == nullptr ? -1 : facts->int_field(_facts_modifiedUtf8Length_offset);
 }
 

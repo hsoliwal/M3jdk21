@@ -1976,9 +1976,10 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
         }
 
         // Reuse compiled semantic facts rather than reparsing regex source text. A
-        // case-sensitive BMP Slice at the match root is a mandatory leading literal. A top-level
-        // Branch is also safe when every alternative begins with such a Slice and no alternative
-        // is empty: M3TQ OR preserves "one of these prefixes must occur". Anything else bypasses.
+        // A case-sensitive BMP Slice at the match root is a mandatory leading literal.
+        // Provably-required Curly/GroupCurly/atomic-group wrappers may expose the same fact.
+        // A top-level Branch is safe only when every alternative proves such a non-empty literal:
+        // M3TQ OR preserves "one of these required literals must occur". Anything else bypasses.
         if (m3Tq == null && matchRoot != null) {
             try {
                 m3Tq = compiledM3Tq(matchRoot);
@@ -2061,18 +2062,40 @@ loop:   for(int x=0, offset=0; x<nCodePoints; x++, offset+=len) {
 
     /**
      * Returns one mandatory case-sensitive BMP literal prefix assembled from consecutive exact
-     * Slice nodes. Null means the compiled graph shape is unsupported for candidate pruning.
+     * Slice nodes or from a provably-required wrapper around such a prefix.
+     *
+     * <p>Only wrappers whose minimum consumption is one are crossed. Optional/zero-min
+     * quantifiers stay unknown, as do lookaround, backreferences, case-folded/supplementary
+     * slices, predicates and unfamiliar graph shapes.</p>
      */
     private static String compiledRequiredLiteral(Node node) {
-        if (node == null || node.getClass() != Slice.class) return null;
-        StringBuilder literal = new StringBuilder();
-        Node current = node;
-        while (current != null && current.getClass() == Slice.class) {
-            int[] buffer = ((Slice) current).buffer;
-            for (int unit : buffer) literal.append((char) unit);
-            current = current.next;
+        return compiledRequiredLiteral(node, 0);
+    }
+
+    private static String compiledRequiredLiteral(Node node, int depth) {
+        if (node == null || depth > 8) return null;
+        Node current = skipM3TqTransparentLeading(node);
+
+        if (current.getClass() == Slice.class) {
+            StringBuilder literal = new StringBuilder();
+            while (current != null && current.getClass() == Slice.class) {
+                int[] buffer = ((Slice) current).buffer;
+                for (int unit : buffer) literal.append((char) unit);
+                current = current.next;
+            }
+            return literal.toString();
         }
-        return literal.toString();
+
+        if (current instanceof Curly curly && curly.cmin > 0) {
+            return compiledRequiredLiteral(curly.atom, depth + 1);
+        }
+        if (current instanceof GroupCurly curly && curly.cmin > 0) {
+            return compiledRequiredLiteral(curly.atom, depth + 1);
+        }
+        if (current instanceof Ques ques && ques.type == Qtype.INDEPENDENT) {
+            return compiledRequiredLiteral(ques.atom, depth + 1);
+        }
+        return null;
     }
 
     private Map<String, Integer> namedGroupsMap() {

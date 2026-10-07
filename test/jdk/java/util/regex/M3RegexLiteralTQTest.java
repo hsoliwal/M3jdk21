@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class M3RegexLiteralTQTest {
+    private static final Field M3_TQ = m3TqField();
     private static long checks;
 
     public static void main(String[] args) {
@@ -46,9 +47,31 @@ public class M3RegexLiteralTQTest {
         // A short legal alternative makes trigram filtering vacuous, never false.
         compareFind(Pattern.compile("abc|d"), "zzdzz", 0, 5);
 
+        // Required quantifier wrappers may expose one mandatory exact Slice occurrence.
+        Pattern requiredFixed = Pattern.compile("(?:abc){2}z");
+        Pattern requiredRange = Pattern.compile("(?:abc){1,3}z");
+        Pattern requiredAtomic = Pattern.compile("(?>abc)z");
+        Pattern requiredAlternation = Pattern.compile("(?:abc){2}|(?:def){1,2}");
+        check(hasTq(requiredFixed), "required fixed quantifier installs TQ");
+        check(hasTq(requiredRange), "required range quantifier installs TQ");
+        check(hasTq(requiredAtomic), "atomic group installs TQ");
+        check(hasTq(requiredAlternation), "required quantified alternatives install TQ");
+        compareFind(requiredFixed, "xxabcabczxx", 0, 11);
+        compareFind(requiredFixed, "xxabczxx", 0, 8);
+        compareFind(requiredRange, "xxabcabczxx", 0, 11);
+        compareFind(requiredRange, "xxno-required-literalzxx", 0, 22);
+        compareFind(requiredAtomic, "xxabczxx", 0, 8);
+        compareFind(requiredAlternation, "xxdefdefxx", 0, 10);
+        compareFind(requiredAlternation, "xxghighixx", 0, 10);
+
         // Optional/empty-root graphs must NOT be treated as requiring their first textual branch.
         compareFind(Pattern.compile("abc?"), "zzabzz", 0, 6);
-        compareFind(Pattern.compile("(?:abc)?def"), "zzdefzz", 0, 7);
+        Pattern optionalGroup = Pattern.compile("(?:abc)?def");
+        Pattern zeroMin = Pattern.compile("(?:abc){0,2}def");
+        check(!hasTq(optionalGroup), "optional group bypasses TQ");
+        check(!hasTq(zeroMin), "zero-min quantifier bypasses TQ");
+        compareFind(optionalGroup, "zzdefzz", 0, 7);
+        compareFind(zeroMin, "zzdefzz", 0, 7);
 
         compareFind(Pattern.compile("^abcabc"), source, 0, source.length());
         compareFind(Pattern.compile("(abcabc)"), source, 0, source.length());
@@ -79,6 +102,24 @@ public class M3RegexLiteralTQTest {
         check(!mutableMatcher.find(), "mutable input observes post-construction mutation");
 
         System.out.println("M3_REGEX_LITERAL_TQ_PASS|checks=" + checks);
+    }
+
+    private static Field m3TqField() {
+        try {
+            Field field = Pattern.class.getDeclaredField("m3Tq");
+            field.setAccessible(true);
+            return field;
+        } catch (ReflectiveOperationException failure) {
+            throw new ExceptionInInitializerError(failure);
+        }
+    }
+
+    private static boolean hasTq(Pattern pattern) {
+        try {
+            return M3_TQ.get(pattern) != null;
+        } catch (IllegalAccessException failure) {
+            throw new AssertionError(failure);
+        }
     }
 
     private static void compareFind(Pattern pattern, String source, int from, int to) {

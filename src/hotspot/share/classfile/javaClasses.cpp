@@ -975,6 +975,12 @@ int java_lang_M3String::_owner_length_offset;
 int java_lang_M3String::_owner_coder_offset;
 int java_lang_M3String::_owner_javaHash_offset;
 int java_lang_M3String::_owner_facts_offset;
+int java_lang_M3String::_owner_range0_offset;
+int java_lang_M3String::_owner_range1_offset;
+int java_lang_M3String::_owner_range2_offset;
+int java_lang_M3String::_owner_range3_offset;
+int java_lang_M3String::_range_coordinate_offset;
+int java_lang_M3String::_range_facts_offset;
 int java_lang_M3String::_facts_utf8Length_offset;
 int java_lang_M3String::_facts_modifiedUtf8Length_offset;
 int java_lang_M3String::_atom_address_offset;
@@ -992,7 +998,11 @@ int java_lang_M3String::_tuple_right_offset;
   macro(_owner_length_offset, o, "length", int_signature, false); \
   macro(_owner_coder_offset, o, "coder", byte_signature, false); \
   macro(_owner_javaHash_offset, o, "javaHash", int_signature, false); \
-  macro(_owner_facts_offset, o, "facts", m3_string_facts_signature, false);
+  macro(_owner_facts_offset, o, "facts", m3_string_facts_signature, false); \
+  macro(_owner_range0_offset, o, "range0", m3_string_range_fact_signature, false); \
+  macro(_owner_range1_offset, o, "range1", m3_string_range_fact_signature, false); \
+  macro(_owner_range2_offset, o, "range2", m3_string_range_fact_signature, false); \
+  macro(_owner_range3_offset, o, "range3", m3_string_range_fact_signature, false);
 
 #define M3_STRING_ATOM_FIELDS_DO(macro) \
   macro(_atom_address_offset, a, "address", long_signature, false); \
@@ -1002,6 +1012,10 @@ int java_lang_M3String::_tuple_right_offset;
 #define M3_STRING_TUPLE_FIELDS_DO(macro) \
   macro(_tuple_left_offset, t, "left", m3_string_signature, false); \
   macro(_tuple_right_offset, t, "right", m3_string_signature, false);
+
+#define M3_STRING_RANGE_FACT_FIELDS_DO(macro) \
+  macro(_range_coordinate_offset, r, "coordinate", long_signature, false); \
+  macro(_range_facts_offset, r, "facts", m3_string_facts_signature, false);
 
 #define M3_STRING_FACTS_FIELDS_DO(macro) \
   macro(_facts_utf8Length_offset, f, "utf8Length", int_signature, false); \
@@ -1013,10 +1027,12 @@ void java_lang_M3String::compute_offsets() {
   InstanceKlass* a = vmClasses::M3StringAtom_klass();
   InstanceKlass* t = vmClasses::M3StringTuple_klass();
   InstanceKlass* f = vmClasses::M3StringFacts_klass();
+  InstanceKlass* r = vmClasses::M3StringRangeFact_klass();
   M3_STRING_VALUE_FIELDS_DO(FIELD_COMPUTE_OFFSET);
   M3_STRING_OWNER_FIELDS_DO(FIELD_COMPUTE_OFFSET);
   M3_STRING_ATOM_FIELDS_DO(FIELD_COMPUTE_OFFSET);
   M3_STRING_TUPLE_FIELDS_DO(FIELD_COMPUTE_OFFSET);
+  M3_STRING_RANGE_FACT_FIELDS_DO(FIELD_COMPUTE_OFFSET);
   M3_STRING_FACTS_FIELDS_DO(FIELD_COMPUTE_OFFSET);
 }
 
@@ -1026,6 +1042,7 @@ void java_lang_M3String::serialize_offsets(SerializeClosure* f) {
   M3_STRING_OWNER_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
   M3_STRING_ATOM_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
   M3_STRING_TUPLE_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
+  M3_STRING_RANGE_FACT_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
   M3_STRING_FACTS_FIELDS_DO(FIELD_SERIALIZE_OFFSET);
 }
 #endif

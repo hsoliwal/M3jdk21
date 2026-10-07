@@ -159,33 +159,130 @@ final class M3String implements CharSequence {
     }
 
     static M3String join(String first, String second) {
-        return join(new String[] {first, second});
+        M3String left = joinStorage(Objects.requireNonNull(first, "first"));
+        M3String right = joinStorage(Objects.requireNonNull(second, "second"));
+        return M3StringPool.concat(left, right);
     }
 
+    /**
+     * Joins one already-ordered String sequence with O(log N) temporary references.
+     *
+     * <p>The carry lanes reproduce the previous pairwise level reduction exactly: equal-size
+     * adjacent groups are combined left-to-right, and the remaining high groups are folded over
+     * the low remainder. Empty String pieces are omitted before pairing, matching the historical
+     * M3 join contract.</p>
+     */
     static M3String join(String[] parts) {
-        Objects.requireNonNull(parts, "parts");
-        ArrayList<M3String> level = new ArrayList<>(parts.length);
-        for (String part : parts) {
-            String checked = Objects.requireNonNull(part, "part");
-            M3String storage = checked.m3();
-            if (storage == null && checked.length() != 0) {
-                // Legacy/bootstrap wrapper stays flat. Admit its immutable spelling into the
-                // canonical M3 owner only for this composition; do not attach duplicate storage
-                // back to the old String object.
-                storage = M3String.admit(checked.value(), checked.coder());
-            }
-            if (storage != null && storage.length() != 0) level.add(storage);
+        String[] checked = Objects.requireNonNull(parts, "parts");
+        M3String[] levels = newJoinLevels(checked.length);
+        for (String part : checked) {
+            joinAddNonEmpty(levels, Objects.requireNonNull(part, "part"));
         }
-        if (level.isEmpty()) return EMPTY;
-        while (level.size() > 1) {
-            ArrayList<M3String> next = new ArrayList<>((level.size() + 1) >>> 1);
-            for (int index = 0; index < level.size(); index += 2) {
-                if (index + 1 == level.size()) next.add(level.get(index));
-                else next.add(M3StringPool.concat(level.get(index), level.get(index + 1)));
+        return joinFinish(levels);
+    }
+
+    /**
+     * Designated String.join M3 path without constructing the historical interleaved pieces array.
+     */
+    static M3String join(
+            String prefix, String suffix, String delimiter, String[] elements, int size) {
+        Objects.requireNonNull(prefix, "prefix");
+        Objects.requireNonNull(suffix, "suffix");
+        Objects.requireNonNull(delimiter, "delimiter");
+        String[] checked = Objects.requireNonNull(elements, "elements");
+        Objects.checkFromIndexSize(0, size, checked.length);
+
+        long maximumPieces = size == 0 ? 2L : 2L * size + 1L;
+        M3String[] levels = newJoinLevels(maximumPieces);
+        joinAddNonEmpty(levels, prefix);
+        if (size > 0) {
+            joinAddNonEmpty(levels, Objects.requireNonNull(checked[0], "element"));
+            for (int index = 1; index < size; index++) {
+                joinAddNonEmpty(levels, delimiter);
+                joinAddNonEmpty(levels, Objects.requireNonNull(checked[index], "element"));
             }
-            level = next;
         }
-        return level.getFirst();
+        joinAddNonEmpty(levels, suffix);
+        return joinFinish(levels);
+    }
+
+    /**
+     * Invokedynamic concat M3 path.
+     *
+     * <p>The collector-created Object[] is reused to retain every stringified argument before any
+     * M3 admission. This preserves the historical ordering of user-visible toString calls while
+     * removing the additional O(N) String[] interleave buffer.</p>
+     */
+    static M3String joinConcat(String[] constants, Object[] args) {
+        String[] checkedConstants = Objects.requireNonNull(constants, "constants");
+        Object[] checkedArgs = Objects.requireNonNull(args, "args");
+        if (checkedConstants.length != checkedArgs.length + 1) {
+            throw new InternalError("M3 concat constant geometry mismatch");
+        }
+
+        // Preserve the old two-phase contract: all user stringification precedes M3 admission.
+        for (int index = 0; index < checkedArgs.length; index++) {
+            checkedArgs[index] = StringConcatHelper.stringOf(checkedArgs[index]);
+        }
+
+        long maximumPieces = 2L * checkedArgs.length + 1L;
+        M3String[] levels = newJoinLevels(maximumPieces);
+        for (int index = 0; index < checkedArgs.length; index++) {
+            String constant = checkedConstants[index];
+            if (constant != null) joinAddNonEmpty(levels, constant);
+            joinAddNonEmpty(levels, (String) checkedArgs[index]);
+        }
+        String suffix = checkedConstants[checkedArgs.length];
+        if (suffix != null) joinAddNonEmpty(levels, suffix);
+        return joinFinish(levels);
+    }
+
+    private static M3String joinStorage(String source) {
+        M3String storage = source.m3();
+        if (storage == null && source.length() != 0) {
+            // Legacy/bootstrap wrapper stays flat. Admit its immutable spelling into the canonical
+            // M3 owner only for this composition; do not attach duplicate storage to that wrapper.
+            storage = M3String.admit(source.value(), source.coder());
+        }
+        return storage == null ? EMPTY : storage;
+    }
+
+    private static M3String[] newJoinLevels(long maximumPieces) {
+        if (maximumPieces < 0) throw new IllegalArgumentException("negative join piece bound");
+        int levelCount =
+                maximumPieces <= 1
+                        ? 1
+                        : Long.SIZE - Long.numberOfLeadingZeros(maximumPieces);
+        return new M3String[levelCount];
+    }
+
+    private static void joinAddNonEmpty(M3String[] levels, String source) {
+        M3String storage = joinStorage(source);
+        if (storage.length() != 0) joinAdd(levels, storage);
+    }
+
+    private static void joinAdd(M3String[] levels, M3String value) {
+        M3String carry = Objects.requireNonNull(value, "value");
+        for (int level = 0; level < levels.length; level++) {
+            M3String existing = levels[level];
+            if (existing == null) {
+                levels[level] = carry;
+                return;
+            }
+            levels[level] = null;
+            carry = M3StringPool.concat(existing, carry);
+        }
+        throw new InternalError("M3 join level bound exhausted");
+    }
+
+    private static M3String joinFinish(M3String[] levels) {
+        M3String result = null;
+        for (int level = 0; level < levels.length; level++) {
+            M3String value = levels[level];
+            if (value == null) continue;
+            result = result == null ? value : M3StringPool.concat(value, result);
+        }
+        return result == null ? EMPTY : result;
     }
 
     static M3String canonicalize(String source) {
@@ -198,16 +295,13 @@ final class M3String implements CharSequence {
 
     private static M3String joinValues(ArrayList<M3String> values) {
         if (values.isEmpty()) return EMPTY;
-        ArrayList<M3String> level = values;
-        while (level.size() > 1) {
-            ArrayList<M3String> next = new ArrayList<>((level.size() + 1) >>> 1);
-            for (int index = 0; index < level.size(); index += 2) {
-                if (index + 1 == level.size()) next.add(level.get(index));
-                else next.add(M3StringPool.concat(level.get(index), level.get(index + 1)));
-            }
-            level = next;
+        M3String[] levels = newJoinLevels(values.size());
+        // Unlike join(String[]), historical joinValues paired explicit EMPTY values in place.
+        // Count them as leaves so the tuple parenthesization remains byte-for-byte equivalent.
+        for (M3String value : values) {
+            joinAdd(levels, Objects.requireNonNull(value, "value"));
         }
-        return level.getFirst();
+        return joinFinish(levels);
     }
 
     static M3String sliceOf(String source, int beginIndex, int endIndex) {
@@ -752,18 +846,13 @@ final class M3String implements CharSequence {
     }
 
     M3String translateEscapes() {
-        M3StringFacts prepared = facts();
-        if (!prepared.hasBackslash) return this;
-        ArrayList<M3String> pieces = null;
         int cursor = 0;
-        int index = 0;
-        while (index < length()) {
-            if (charAt(index) != '\\') {
-                index++;
-                continue;
-            }
+        int slash = indexOf('\\', 0, length());
+        if (slash < 0) return this;
 
-            int slash = index++;
+        ArrayList<M3String> pieces = new ArrayList<>();
+        while (slash >= 0) {
+            int index = slash + 1;
             char escaped = index < length() ? charAt(index++) : '\0';
             if (pieces == null) pieces = new ArrayList<>();
             if (cursor < slash) pieces.add(slice(cursor, slash));
@@ -806,9 +895,9 @@ final class M3String implements CharSequence {
 
             if (emit) pieces.add(M3StringPool.internUnit(escaped));
             cursor = index;
+            slash = cursor < length() ? indexOf('\\', cursor, length()) : -1;
         }
 
-        if (pieces == null) return this;
         if (cursor < length()) pieces.add(slice(cursor, length()));
         return joinValues(pieces);
     }

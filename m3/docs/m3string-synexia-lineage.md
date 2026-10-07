@@ -254,3 +254,25 @@ range-fact rescans:
 - `String.offsetByCodePoints` uses boundary rank/select with correct mid-surrogate start behavior;
 - out-of-budget/OOME cases fall back to the existing exact JDK path;
 - no code-point arrays or continuation masks are fields of `M3String` or `M3StringFacts`.
+
+
+## HotSpot prepared range-fact reuse
+
+The existing four-entry owner-local `M3StringOwner.rangeFacts` cache is now visible to the VM only
+as already-prepared evidence. `java_lang_M3String::modified_utf8_length_if_precomputed` checks the
+exact packed range coordinate in those four slots and reuses `modifiedUtf8Length` for JNI modified
+UTF operations. A cache miss returns `-1` and preserves the previous exact UTF-16 scan.
+
+No range fact is stored on `M3String`, HotSpot never calls back into Java to create one, and VM/JNI
+semantics do not depend on cache residency.
+
+## Regex mandatory-literal convergence
+
+Synexia's operation-precompute lineage is consumed only where the compiled JDK Pattern graph proves
+a literal is mandatory. The target now recognizes exact BMP Slice chains through transparent
+anchors/groups, top-level all-nonempty Branch alternatives, required Curly/GroupCurly wrappers
+(`cmin > 0`), and atomic `Ques(INDEPENDENT)` groups. Extraction is bounded to eight wrapper
+levels and fails open to the stock regex engine for optional/zero-min quantifiers, empty
+alternatives, lookaround, backreferences, case-folded/supplementary slices, predicates and unknown
+node shapes. M3TQ remains an absence filter; Matcher nodes remain semantic authority.
+

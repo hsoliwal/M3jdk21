@@ -29,6 +29,7 @@ position_precompute = read("src/java.base/share/classes/java/lang/M3StringPositi
 codepoint_precompute = read("src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java")
 tq = read("src/java.base/share/classes/jdk/internal/mindex/M3TQ.java")
 string = read("src/java.base/share/classes/java/lang/String.java")
+concat_helper = read("src/java.base/share/classes/java/lang/StringConcatHelper.java")
 asb = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
 abstract_builder = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
 symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
@@ -47,6 +48,11 @@ workflow = read(".github/workflows/mindex-string-backing.yml")
 recipe_receipt = read("m3/docs/synexia-recipe-application.md")
 builder = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
 native_string = read("src/java.base/share/native/libjava/String.c")
+hotspot_inline = read("src/hotspot/share/classfile/javaClasses.inline.hpp")
+hotspot_classes = read("src/hotspot/share/classfile/javaClasses.cpp")
+hotspot_symbols = read("src/hotspot/share/classfile/vmSymbols.hpp")
+hotspot_class_macros = read("src/hotspot/share/classfile/vmClassMacros.hpp")
+native_encoding_test = read("test/jdk/java/lang/String/nativeEncoding/StringPlatformChars.java")
 vm_intrinsics = read("src/hotspot/share/classfile/vmIntrinsics.cpp")
 string_opts = read("src/hotspot/share/opto/stringopts.cpp")
 native_string_test = read("test/jdk/java/lang/String/nativeEncoding/libstringPlatformChars.c")
@@ -501,9 +507,8 @@ if "CallVoidMethodA" not in byte_shadow.group("body") or "CallVoidMethodA" not i
 # entirely with the stock node engine.
 for fragment in [
     "compiledM3Tq(matchRoot)",
-    "node.getClass() == Slice.class",
     "node instanceof Branch branch",
-    "atom == null || atom.getClass() != Slice.class",
+    "compiledRequiredLiteral(skipM3TqTransparentLeading(atom))",
     "M3TQ.fromExact(alternatives)",
 ]:
     if fragment not in pattern:
@@ -515,8 +520,12 @@ for fragment in [
     "current instanceof Caret",
     "current instanceof UnixCaret",
     "current instanceof GroupHead",
-    "compiledRequiredLiteral",
+    "return compiledRequiredLiteral(node, 0);",
+    "depth > 8",
     "current.getClass() == Slice.class",
+    "current instanceof Curly curly && curly.cmin > 0",
+    "current instanceof GroupCurly curly && curly.cmin > 0",
+    "current instanceof Ques ques && ques.type == Qtype.INDEPENDENT",
 ]:
     if fragment not in pattern:
         fail(f"Pattern mandatory literal graph precompute missing: {fragment}")
@@ -693,6 +702,32 @@ if "nativeCharShadow(" not in m3:
     fail("explicit char[] compatibility shadow boundary missing")
 
 
+
+# Historical compiler concat convergence removes O(N) staging without changing JLS conversion
+# order or the pairwise canonical tuple shape.
+for fragment in [
+    "static M3String joinConcat(String[] constants, Object[] args)",
+    "checkedArgs[index] = StringConcatHelper.stringOf(checkedArgs[index]);",
+    "M3String[] levels = newJoinLevels(maximumPieces);",
+    "carry = M3StringPool.concat(existing, carry);",
+    "result = result == null ? value : M3StringPool.concat(value, result);",
+]:
+    if fragment not in m3:
+        fail(f"M3 logarithmic concat staging invariant missing: {fragment}")
+
+if "String[] pieces = new String[" in concat_helper:
+    fail("StringConcatHelper reintroduced O(N) M3 interleave staging")
+if "String[] pieces = new String[" in string:
+    fail("String.join reintroduced O(N) M3 interleave staging")
+if "return new String(M3String.joinConcat(constants, args));" not in concat_helper:
+    fail("indy concat no longer delegates to M3 logarithmic join")
+if "M3String.join(prefix, suffix, delimiter, elements, size)" not in string:
+    fail("designated String.join no longer streams directly into M3 join")
+if "M3StringLiteralRegex" in concat_helper:
+    fail("concat helper unexpectedly coupled to regex recovery")
+if "M3StringConcatStagingTest.java" not in workflow:
+    fail("M3 concat staging jtreg is not wired into workflow")
+
 # Expensive donor facts with no JDK21 semantic consumer are intentional NO_PORTs. Adding one of
 # these java.lang owners requires an explicit architecture/invariant revision and a real consumer.
 for forbidden_path in [
@@ -774,6 +809,41 @@ for fragment in [
         fail(f"M3 HotSpot intrinsic guard missing: {fragment}")
 if "if (UseM3StringStorage)" not in string_opts or "return;" not in string_opts:
     fail("C2 String concat optimizer is not fail-closed for M3 storage")
+
+# HotSpot may reuse already-prepared exact owner-range facts for modified UTF-8 length.
+# Cache absence must remain a fail-open scan fallback.
+for fragment in [
+    "java/lang/M3StringOwner$RangeFact",
+    "m3_string_range_fact_signature",
+]:
+    if fragment not in hotspot_symbols:
+        fail(f"M3 VM range-fact symbol missing: {fragment}")
+if "M3StringRangeFact_klass" not in hotspot_class_macros:
+    fail("M3 VM range-fact klass registration missing")
+for fragment in [
+    "_owner_range0_offset",
+    "_owner_range3_offset",
+    "_range_coordinate_offset",
+    "_range_facts_offset",
+    "M3_STRING_RANGE_FACT_FIELDS_DO",
+]:
+    if fragment not in hotspot_classes:
+        fail(f"M3 VM range-fact offset plumbing missing: {fragment}")
+for fragment in [
+    "range->long_field(_range_coordinate_offset) == wanted",
+    "range->obj_field_acquire(_range_facts_offset)",
+    "return facts == nullptr ? -1",
+]:
+    if fragment not in hotspot_inline:
+        fail(f"M3 VM range modified-UTF fact reuse missing: {fragment}")
+
+for fragment in [
+    "testPreparedRangeUtfLengths();",
+    "range.hashCode();",
+    "getUtf8Length(range)",
+]:
+    if fragment not in native_encoding_test:
+        fail(f"M3 prepared range JNI UTF proof missing: {fragment}")
 
 # Donor class naming must not leak back into live VM symbols/layout.
 for path, text in [
@@ -1049,6 +1119,17 @@ if "if (UseM3StringStorage)" not in stringopts:
 if "if (java_lang_String::is_m3_joined(string))" not in archive_writer:
     fail("CDS String sizing is not fail-closed for M3 values")
 
+
+# Escape translation reuses the bounded position-precompute owner instead of forcing a full
+# fixed-fact scan and then rescanning cold text.
+for fragment in [
+    "int slash = indexOf('\\\\', 0, length());",
+    "slash = cursor < length() ? indexOf('\\\\', cursor, length()) : -1;",
+]:
+    if fragment not in m3:
+        fail(f"M3 translateEscapes lost position-precompute traversal: {fragment}")
+if "M3StringFacts prepared = facts();" in m3[m3.index("M3String translateEscapes()"):m3.index("M3String asciiCase(boolean upper)")]:
+    fail("M3 translateEscapes forces full facts before sparse escape traversal")
 
 # Escape translation must scan canonical M3 storage and rebuild from slices/unit atoms; the
 # stock char[] implementation remains fallback-only for non-M3 Strings.

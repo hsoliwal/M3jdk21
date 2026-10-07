@@ -64,6 +64,7 @@
   template(java_lang_M3StringAtom,             "java/lang/M3StringAtom")            \
   template(java_lang_M3StringTuple,            "java/lang/M3StringTuple")           \
   template(java_lang_M3StringFacts,            "java/lang/M3StringFacts")           \
+  template(java_lang_M3StringRangeFact,        "java/lang/M3StringOwner$RangeFact") \
   template(java_lang_StringLatin1,                    "java/lang/StringLatin1")                   \
   template(java_lang_StringUTF16,                     "java/lang/StringUTF16")                    \
   template(java_lang_Thread,                          "java/lang/Thread")                         \
@@ -664,6 +665,7 @@
   template(m3_string_atom_signature,              "Ljava/lang/M3StringAtom;")                                  \
   template(m3_string_tuple_signature,             "Ljava/lang/M3StringTuple;")                              \
   template(m3_string_facts_signature,             "Ljava/lang/M3StringFacts;")                              \
+  template(m3_string_range_fact_signature,        "Ljava/lang/M3StringOwner$RangeFact;")                    \
   template(m3_string_array_signature,             "[Ljava/lang/M3String;")                             \
   template(string_array_signature,                    "[Ljava/lang/String;")                                      \
   template(reference_signature,                       "Ljava/lang/ref/Reference;")                                \
