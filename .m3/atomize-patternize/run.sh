@@ -99,10 +99,8606 @@ if ((java_files == 0)); then
   exit 0
 fi
 
+local_repo="${SYNEXIA_MAVEN_REPO_LOCAL:-$target/m2}"
+mkdir -p "$local_repo"
+version="${SYNEXIA_RECIPE_VERSION:-}"
+recipe_source=PINNED_SYNEXIA_SOURCE
+recipe_jar_sha=""
+source_revision=""
+
+if [[ -z "$version" ]]; then
+  SYNEXIA_MAVEN_REPO_LOCAL="$local_repo" bash "$here/install-synexia-recipes.sh"
+  install_receipt="$target/synexia-recipe-install-receipt.tsv"
+  version="$(awk -F 
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp \
+    -Dmaven.repo.local="$local_repo" \
+    "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' read -r kind rel _ _; do
+  [[ "$kind" == "kind" ]] && continue
+  if [[ "$kind" == "POM" ]]; then
+    printf '%s\n' "$rel" >> "$poms_file"
+  else
+    printf '%s\n' "$(m3_java_root "$rel")" >> "$roots_file"
+  fi
+done < "$manifest"
+LC_ALL=C sort -u "$poms_file" -o "$poms_file"
+LC_ALL=C sort -u "$roots_file" -o "$roots_file"
+m3_collect_external_roots "$repo" "$roots_file" "$external_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
 version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
 plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
 artifact="com.synexia:synexia-openrewrite-recipes:${version}"
 printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="javaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_external_roots_file"
+cmp -s "$roots_file" "$expected_roots_file" || fail "M3_JAVA_ROOT_SET_DRIFT"
+cmp -s "$external_roots_file" "$expected_external_roots_file" || fail "M3_EXTERNAL_JAVA_ROOT_SET_DRIFT"
+
+content_root="$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+expected_external_roots="$(awk -F 
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' read -r kind rel _ _; do
+  [[ "$kind" == "kind" ]] && continue
+  if [[ "$kind" == "POM" ]]; then
+    printf '%s\n' "$rel" >> "$poms_file"
+  else
+    printf '%s\n' "$(m3_java_root "$rel")" >> "$roots_file"
+  fi
+done < "$manifest"
+LC_ALL=C sort -u "$poms_file" -o "$poms_file"
+LC_ALL=C sort -u "$roots_file" -o "$roots_file"
+m3_collect_external_roots "$repo" "$roots_file" "$external_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="javaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_external_roots_file"
+cmp -s "$roots_file" "$expected_roots_file" || fail "M3_JAVA_ROOT_SET_DRIFT"
+cmp -s "$external_roots_file" "$expected_external_roots_file" || fail "M3_EXTERNAL_JAVA_ROOT_SET_DRIFT"
+
+content_root="$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoots" {print $2}' "$inventory")"
+[[ "$expected_external_roots" =~ ^[0-9]+$ ]] || fail "M3_EXTERNAL_ROOT_COUNT_REQUIRED"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]} > 0 && ${#external_roots[@]} > 0)); then
+  mode=HYBRID_REACTOR_EXTERNAL
+elif ((${#pom_rel[@]} > 0)); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+[[ "${#external_roots[@]}" == "$expected_external_roots" ]] || fail "M3_EXTERNAL_ROOT_COUNT_DRIFT"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' read -r kind rel _ _; do
+  [[ "$kind" == "kind" ]] && continue
+  if [[ "$kind" == "POM" ]]; then
+    printf '%s\n' "$rel" >> "$poms_file"
+  else
+    printf '%s\n' "$(m3_java_root "$rel")" >> "$roots_file"
+  fi
+done < "$manifest"
+LC_ALL=C sort -u "$poms_file" -o "$poms_file"
+LC_ALL=C sort -u "$roots_file" -o "$roots_file"
+m3_collect_external_roots "$repo" "$roots_file" "$external_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="javaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_external_roots_file"
+cmp -s "$roots_file" "$expected_roots_file" || fail "M3_JAVA_ROOT_SET_DRIFT"
+cmp -s "$external_roots_file" "$expected_external_roots_file" || fail "M3_EXTERNAL_JAVA_ROOT_SET_DRIFT"
+
+content_root="$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' read -r kind rel _ _; do
+  [[ "$kind" == "kind" ]] && continue
+  if [[ "$kind" == "POM" ]]; then
+    printf '%s\n' "$rel" >> "$poms_file"
+  else
+    printf '%s\n' "$(m3_java_root "$rel")" >> "$roots_file"
+  fi
+done < "$manifest"
+LC_ALL=C sort -u "$poms_file" -o "$poms_file"
+LC_ALL=C sort -u "$roots_file" -o "$roots_file"
+m3_collect_external_roots "$repo" "$roots_file" "$external_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="javaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_external_roots_file"
+cmp -s "$roots_file" "$expected_roots_file" || fail "M3_JAVA_ROOT_SET_DRIFT"
+cmp -s "$external_roots_file" "$expected_external_roots_file" || fail "M3_EXTERNAL_JAVA_ROOT_SET_DRIFT"
+
+content_root="$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+expected_external_roots="$(awk -F 
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' read -r kind rel _ _; do
+  [[ "$kind" == "kind" ]] && continue
+  if [[ "$kind" == "POM" ]]; then
+    printf '%s\n' "$rel" >> "$poms_file"
+  else
+    printf '%s\n' "$(m3_java_root "$rel")" >> "$roots_file"
+  fi
+done < "$manifest"
+LC_ALL=C sort -u "$poms_file" -o "$poms_file"
+LC_ALL=C sort -u "$roots_file" -o "$roots_file"
+m3_collect_external_roots "$repo" "$roots_file" "$external_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="javaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_external_roots_file"
+cmp -s "$roots_file" "$expected_roots_file" || fail "M3_JAVA_ROOT_SET_DRIFT"
+cmp -s "$external_roots_file" "$expected_external_roots_file" || fail "M3_EXTERNAL_JAVA_ROOT_SET_DRIFT"
+
+content_root="$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoots" {print $2}' "$inventory")"
+[[ "$expected_external_roots" =~ ^[0-9]+$ ]] || fail "M3_EXTERNAL_ROOT_COUNT_REQUIRED"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]} > 0 && ${#external_roots[@]} > 0)); then
+  mode=HYBRID_REACTOR_EXTERNAL
+elif ((${#pom_rel[@]} > 0)); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+[[ "${#external_roots[@]}" == "$expected_external_roots" ]] || fail "M3_EXTERNAL_ROOT_COUNT_DRIFT"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' read -r kind rel _ _; do
+  [[ "$kind" == "kind" ]] && continue
+  if [[ "$kind" == "POM" ]]; then
+    printf '%s\n' "$rel" >> "$poms_file"
+  else
+    printf '%s\n' "$(m3_java_root "$rel")" >> "$roots_file"
+  fi
+done < "$manifest"
+LC_ALL=C sort -u "$poms_file" -o "$poms_file"
+LC_ALL=C sort -u "$roots_file" -o "$roots_file"
+m3_collect_external_roots "$repo" "$roots_file" "$external_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="javaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_external_roots_file"
+cmp -s "$roots_file" "$expected_roots_file" || fail "M3_JAVA_ROOT_SET_DRIFT"
+cmp -s "$external_roots_file" "$expected_external_roots_file" || fail "M3_EXTERNAL_JAVA_ROOT_SET_DRIFT"
+
+content_root="$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="recipeVersion" {print $2}' "$install_receipt")"
+  recipe_jar_sha="$(awk -F 
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' read -r kind rel _ _; do
+  [[ "$kind" == "kind" ]] && continue
+  if [[ "$kind" == "POM" ]]; then
+    printf '%s\n' "$rel" >> "$poms_file"
+  else
+    printf '%s\n' "$(m3_java_root "$rel")" >> "$roots_file"
+  fi
+done < "$manifest"
+LC_ALL=C sort -u "$poms_file" -o "$poms_file"
+LC_ALL=C sort -u "$roots_file" -o "$roots_file"
+m3_collect_external_roots "$repo" "$roots_file" "$external_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="javaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_external_roots_file"
+cmp -s "$roots_file" "$expected_roots_file" || fail "M3_JAVA_ROOT_SET_DRIFT"
+cmp -s "$external_roots_file" "$expected_external_roots_file" || fail "M3_EXTERNAL_JAVA_ROOT_SET_DRIFT"
+
+content_root="$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+expected_external_roots="$(awk -F 
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' read -r kind rel _ _; do
+  [[ "$kind" == "kind" ]] && continue
+  if [[ "$kind" == "POM" ]]; then
+    printf '%s\n' "$rel" >> "$poms_file"
+  else
+    printf '%s\n' "$(m3_java_root "$rel")" >> "$roots_file"
+  fi
+done < "$manifest"
+LC_ALL=C sort -u "$poms_file" -o "$poms_file"
+LC_ALL=C sort -u "$roots_file" -o "$roots_file"
+m3_collect_external_roots "$repo" "$roots_file" "$external_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="javaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_external_roots_file"
+cmp -s "$roots_file" "$expected_roots_file" || fail "M3_JAVA_ROOT_SET_DRIFT"
+cmp -s "$external_roots_file" "$expected_external_roots_file" || fail "M3_EXTERNAL_JAVA_ROOT_SET_DRIFT"
+
+content_root="$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoots" {print $2}' "$inventory")"
+[[ "$expected_external_roots" =~ ^[0-9]+$ ]] || fail "M3_EXTERNAL_ROOT_COUNT_REQUIRED"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]} > 0 && ${#external_roots[@]} > 0)); then
+  mode=HYBRID_REACTOR_EXTERNAL
+elif ((${#pom_rel[@]} > 0)); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+[[ "${#external_roots[@]}" == "$expected_external_roots" ]] || fail "M3_EXTERNAL_ROOT_COUNT_DRIFT"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' read -r kind rel _ _; do
+  [[ "$kind" == "kind" ]] && continue
+  if [[ "$kind" == "POM" ]]; then
+    printf '%s\n' "$rel" >> "$poms_file"
+  else
+    printf '%s\n' "$(m3_java_root "$rel")" >> "$roots_file"
+  fi
+done < "$manifest"
+LC_ALL=C sort -u "$poms_file" -o "$poms_file"
+LC_ALL=C sort -u "$roots_file" -o "$roots_file"
+m3_collect_external_roots "$repo" "$roots_file" "$external_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="javaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_external_roots_file"
+cmp -s "$roots_file" "$expected_roots_file" || fail "M3_JAVA_ROOT_SET_DRIFT"
+cmp -s "$external_roots_file" "$expected_external_roots_file" || fail "M3_EXTERNAL_JAVA_ROOT_SET_DRIFT"
+
+content_root="$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' read -r kind rel _ _; do
+  [[ "$kind" == "kind" ]] && continue
+  if [[ "$kind" == "POM" ]]; then
+    printf '%s\n' "$rel" >> "$poms_file"
+  else
+    printf '%s\n' "$(m3_java_root "$rel")" >> "$roots_file"
+  fi
+done < "$manifest"
+LC_ALL=C sort -u "$poms_file" -o "$poms_file"
+LC_ALL=C sort -u "$roots_file" -o "$roots_file"
+m3_collect_external_roots "$repo" "$roots_file" "$external_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="javaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_external_roots_file"
+cmp -s "$roots_file" "$expected_roots_file" || fail "M3_JAVA_ROOT_SET_DRIFT"
+cmp -s "$external_roots_file" "$expected_external_roots_file" || fail "M3_EXTERNAL_JAVA_ROOT_SET_DRIFT"
+
+content_root="$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+expected_external_roots="$(awk -F 
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' read -r kind rel _ _; do
+  [[ "$kind" == "kind" ]] && continue
+  if [[ "$kind" == "POM" ]]; then
+    printf '%s\n' "$rel" >> "$poms_file"
+  else
+    printf '%s\n' "$(m3_java_root "$rel")" >> "$roots_file"
+  fi
+done < "$manifest"
+LC_ALL=C sort -u "$poms_file" -o "$poms_file"
+LC_ALL=C sort -u "$roots_file" -o "$roots_file"
+m3_collect_external_roots "$repo" "$roots_file" "$external_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="javaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_external_roots_file"
+cmp -s "$roots_file" "$expected_roots_file" || fail "M3_JAVA_ROOT_SET_DRIFT"
+cmp -s "$external_roots_file" "$expected_external_roots_file" || fail "M3_EXTERNAL_JAVA_ROOT_SET_DRIFT"
+
+content_root="$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoots" {print $2}' "$inventory")"
+[[ "$expected_external_roots" =~ ^[0-9]+$ ]] || fail "M3_EXTERNAL_ROOT_COUNT_REQUIRED"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]} > 0 && ${#external_roots[@]} > 0)); then
+  mode=HYBRID_REACTOR_EXTERNAL
+elif ((${#pom_rel[@]} > 0)); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+[[ "${#external_roots[@]}" == "$expected_external_roots" ]] || fail "M3_EXTERNAL_ROOT_COUNT_DRIFT"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' read -r kind rel _ _; do
+  [[ "$kind" == "kind" ]] && continue
+  if [[ "$kind" == "POM" ]]; then
+    printf '%s\n' "$rel" >> "$poms_file"
+  else
+    printf '%s\n' "$(m3_java_root "$rel")" >> "$roots_file"
+  fi
+done < "$manifest"
+LC_ALL=C sort -u "$poms_file" -o "$poms_file"
+LC_ALL=C sort -u "$roots_file" -o "$roots_file"
+m3_collect_external_roots "$repo" "$roots_file" "$external_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="javaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_external_roots_file"
+cmp -s "$roots_file" "$expected_roots_file" || fail "M3_JAVA_ROOT_SET_DRIFT"
+cmp -s "$external_roots_file" "$expected_external_roots_file" || fail "M3_EXTERNAL_JAVA_ROOT_SET_DRIFT"
+
+content_root="$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="recipeJarSha256" {print $2}' "$install_receipt")"
+  source_revision="$(awk -F 
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' read -r kind rel _ _; do
+  [[ "$kind" == "kind" ]] && continue
+  if [[ "$kind" == "POM" ]]; then
+    printf '%s\n' "$rel" >> "$poms_file"
+  else
+    printf '%s\n' "$(m3_java_root "$rel")" >> "$roots_file"
+  fi
+done < "$manifest"
+LC_ALL=C sort -u "$poms_file" -o "$poms_file"
+LC_ALL=C sort -u "$roots_file" -o "$roots_file"
+m3_collect_external_roots "$repo" "$roots_file" "$external_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="javaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_external_roots_file"
+cmp -s "$roots_file" "$expected_roots_file" || fail "M3_JAVA_ROOT_SET_DRIFT"
+cmp -s "$external_roots_file" "$expected_external_roots_file" || fail "M3_EXTERNAL_JAVA_ROOT_SET_DRIFT"
+
+content_root="$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+expected_external_roots="$(awk -F 
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' read -r kind rel _ _; do
+  [[ "$kind" == "kind" ]] && continue
+  if [[ "$kind" == "POM" ]]; then
+    printf '%s\n' "$rel" >> "$poms_file"
+  else
+    printf '%s\n' "$(m3_java_root "$rel")" >> "$roots_file"
+  fi
+done < "$manifest"
+LC_ALL=C sort -u "$poms_file" -o "$poms_file"
+LC_ALL=C sort -u "$roots_file" -o "$roots_file"
+m3_collect_external_roots "$repo" "$roots_file" "$external_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="javaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_external_roots_file"
+cmp -s "$roots_file" "$expected_roots_file" || fail "M3_JAVA_ROOT_SET_DRIFT"
+cmp -s "$external_roots_file" "$expected_external_roots_file" || fail "M3_EXTERNAL_JAVA_ROOT_SET_DRIFT"
+
+content_root="$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoots" {print $2}' "$inventory")"
+[[ "$expected_external_roots" =~ ^[0-9]+$ ]] || fail "M3_EXTERNAL_ROOT_COUNT_REQUIRED"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]} > 0 && ${#external_roots[@]} > 0)); then
+  mode=HYBRID_REACTOR_EXTERNAL
+elif ((${#pom_rel[@]} > 0)); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+[[ "${#external_roots[@]}" == "$expected_external_roots" ]] || fail "M3_EXTERNAL_ROOT_COUNT_DRIFT"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' read -r kind rel _ _; do
+  [[ "$kind" == "kind" ]] && continue
+  if [[ "$kind" == "POM" ]]; then
+    printf '%s\n' "$rel" >> "$poms_file"
+  else
+    printf '%s\n' "$(m3_java_root "$rel")" >> "$roots_file"
+  fi
+done < "$manifest"
+LC_ALL=C sort -u "$poms_file" -o "$poms_file"
+LC_ALL=C sort -u "$roots_file" -o "$roots_file"
+m3_collect_external_roots "$repo" "$roots_file" "$external_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="javaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_external_roots_file"
+cmp -s "$roots_file" "$expected_roots_file" || fail "M3_JAVA_ROOT_SET_DRIFT"
+cmp -s "$external_roots_file" "$expected_external_roots_file" || fail "M3_EXTERNAL_JAVA_ROOT_SET_DRIFT"
+
+content_root="$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' read -r kind rel _ _; do
+  [[ "$kind" == "kind" ]] && continue
+  if [[ "$kind" == "POM" ]]; then
+    printf '%s\n' "$rel" >> "$poms_file"
+  else
+    printf '%s\n' "$(m3_java_root "$rel")" >> "$roots_file"
+  fi
+done < "$manifest"
+LC_ALL=C sort -u "$poms_file" -o "$poms_file"
+LC_ALL=C sort -u "$roots_file" -o "$roots_file"
+m3_collect_external_roots "$repo" "$roots_file" "$external_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="javaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_external_roots_file"
+cmp -s "$roots_file" "$expected_roots_file" || fail "M3_JAVA_ROOT_SET_DRIFT"
+cmp -s "$external_roots_file" "$expected_external_roots_file" || fail "M3_EXTERNAL_JAVA_ROOT_SET_DRIFT"
+
+content_root="$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+expected_external_roots="$(awk -F 
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' read -r kind rel _ _; do
+  [[ "$kind" == "kind" ]] && continue
+  if [[ "$kind" == "POM" ]]; then
+    printf '%s\n' "$rel" >> "$poms_file"
+  else
+    printf '%s\n' "$(m3_java_root "$rel")" >> "$roots_file"
+  fi
+done < "$manifest"
+LC_ALL=C sort -u "$poms_file" -o "$poms_file"
+LC_ALL=C sort -u "$roots_file" -o "$roots_file"
+m3_collect_external_roots "$repo" "$roots_file" "$external_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="javaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_external_roots_file"
+cmp -s "$roots_file" "$expected_roots_file" || fail "M3_JAVA_ROOT_SET_DRIFT"
+cmp -s "$external_roots_file" "$expected_external_roots_file" || fail "M3_EXTERNAL_JAVA_ROOT_SET_DRIFT"
+
+content_root="$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoots" {print $2}' "$inventory")"
+[[ "$expected_external_roots" =~ ^[0-9]+$ ]] || fail "M3_EXTERNAL_ROOT_COUNT_REQUIRED"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]} > 0 && ${#external_roots[@]} > 0)); then
+  mode=HYBRID_REACTOR_EXTERNAL
+elif ((${#pom_rel[@]} > 0)); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+[[ "${#external_roots[@]}" == "$expected_external_roots" ]] || fail "M3_EXTERNAL_ROOT_COUNT_DRIFT"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' read -r kind rel _ _; do
+  [[ "$kind" == "kind" ]] && continue
+  if [[ "$kind" == "POM" ]]; then
+    printf '%s\n' "$rel" >> "$poms_file"
+  else
+    printf '%s\n' "$(m3_java_root "$rel")" >> "$roots_file"
+  fi
+done < "$manifest"
+LC_ALL=C sort -u "$poms_file" -o "$poms_file"
+LC_ALL=C sort -u "$roots_file" -o "$roots_file"
+m3_collect_external_roots "$repo" "$roots_file" "$external_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="javaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_roots_file"
+awk -F "$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="externalJavaRoot" {print $2}' "$inventory" | LC_ALL=C sort -u > "$expected_external_roots_file"
+cmp -s "$roots_file" "$expected_roots_file" || fail "M3_JAVA_ROOT_SET_DRIFT"
+cmp -s "$external_roots_file" "$expected_external_roots_file" || fail "M3_EXTERNAL_JAVA_ROOT_SET_DRIFT"
+
+content_root="$(sha256sum -- "$manifest" | awk '{print $1}')"
+content_files="$(( $(wc -l < "$manifest") - 1 ))"
+expected_content_root="$(awk -F $'\t' '$1=="contentRoot" {print $2}' "$inventory")"
+expected_content_files="$(awk -F $'\t' '$1=="contentFiles" {print $2}' "$inventory")"
+expected_mode="$(awk -F $'\t' '$1=="mode" {print $2}' "$inventory")"
+[[ "$expected_content_root" =~ ^[0-9a-f]{64}$ ]] || fail "M3_CONTENT_ROOT_REQUIRED"
+[[ "$expected_content_files" =~ ^[0-9]+$ ]] || fail "M3_CONTENT_FILE_COUNT_REQUIRED"
+[[ "$content_root" == "$expected_content_root" ]] || fail "M3_SOURCE_CONTENT_DRIFT expected=$expected_content_root actual=$content_root"
+[[ "$content_files" == "$expected_content_files" ]] || fail "M3_SOURCE_FILE_SET_DRIFT expected=$expected_content_files actual=$content_files"
+
+mapfile -t pom_rel < <(awk -F $'\t' 'NR>1 && $1=="POM" {print $2}' "$manifest")
+java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
+if ((java_files == 0)); then
+  mode=NO_JAVA_SOURCE_ROOTS
+elif ((${#pom_rel[@]})); then
+  mode=MAVEN_REACTOR
+else
+  mode=EXTERNAL_ENVELOPE
+fi
+[[ "$mode" == "$expected_mode" ]] || fail "M3_PLAN_MODE_DRIFT expected=$expected_mode actual=$mode"
+
+{
+  printf 'kind\tvalue\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'inventoryRoot\t%s\n' "$(awk -F $'\t' '$1=="root" {print $2}' "$inventory")"
+  printf 'boundRoot\t%s\n' "$(awk -F $'\t' '$1=="boundRoot" {print $2}' "$inventory")"
+  printf 'recipe\t%s\n' "$recipe"
+} > "$receipt"
+
+if ((java_files == 0)); then
+  printf 'analysisStatus\tNO_JAVA_SOURCE_ROOTS\n' >> "$receipt"
+  echo "NO_JAVA_SOURCE_ROOTS"
+  exit 0
+fi
+
+version="${SYNEXIA_RECIPE_VERSION:?set SYNEXIA_RECIPE_VERSION to an installed synexia-openrewrite-recipes version}"
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\n' "$artifact" "$plugin" >> "$receipt"
+
+if [[ -x "$repo/mvnw" ]]; then
+  maven=("$repo/mvnw")
+elif command -v mvn >/dev/null 2>&1; then
+  maven=("$(command -v mvn)")
+else
+  fail "MAVEN_REQUIRED" 2
+fi
+
+rewrite() {
+  "${maven[@]}" -B -ntp "$@" \
+    "org.openrewrite.maven:rewrite-maven-plugin:${plugin}:dryRunNoFork" \
+    "-Drewrite.recipeArtifactCoordinates=${artifact}" \
+    "-Drewrite.activeRecipes=${recipe}" \
+    -Drewrite.exportDatatables=true \
+    -Drewrite.failOnInvalidActiveRecipes=true \
+    -Drewrite.failOnDryRunResults=false
+}
+
+if ((${#pom_rel[@]} > 4096)); then
+  fail "MAVEN_POM_LIMIT" 3
+fi
+
+if ((${#pom_rel[@]})); then
+  for rel in "${pom_rel[@]}"; do
+    rewrite -N -f "$repo/$rel"
+  done
+  printf 'analysisStatus\tPASS\n' >> "$receipt"
+  exit 0
+fi
+
+roots_file="$target/java-roots.txt"
+: > "$roots_file"
+while IFS= read -r rel; do
+  case "$rel" in
+    src/main/java/*) root='src/main/java' ;;
+    */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
+    src/test/java/*) root='src/test/java' ;;
+    */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
+    src/it/java/*) root='src/it/java' ;;
+    */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
+    src/integrationTest/java/*) root='src/integrationTest/java' ;;
+    */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
+    *) root="$(dirname "$rel")" ;;
+  esac
+  printf '%s\n' "$root" >> "$roots_file"
+done < <(awk -F $'\t' 'NR>1 && $1=="JAVA" {print $2}' "$manifest")
+mapfile -t roots < <(LC_ALL=C sort -u "$roots_file")
+rm -f -- "$roots_file"
+
+if ((${#roots[@]} == 0)); then
+  fail "NO_JAVA_SOURCE_ROOTS"
+fi
+if ((${#roots[@]} > 4096)); then
+  fail "REPOSITORY_SOURCE_ROOT_LIMIT" 3
+fi
+
+pom="$target/pom.xml"
+cat > "$pom" <<'POM'
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.synexia.analysis</groupId>
+  <artifactId>external-donor-analysis-envelope</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  <build>
+    <sourceDirectory>${m3.source.root}</sourceDirectory>
+  </build>
+</project>
+POM
+
+for root in "${roots[@]}"; do
+  rewrite -f "$pom" "-Dm3.source.root=$repo/$root"
+done
+printf 'analysisStatus\tPASS\n' >> "$receipt"
+\t' '$1=="sourceRevision" {print $2}' "$install_receipt")"
+else
+  [[ "${SYNEXIA_ALLOW_PREINSTALLED_RECIPE:-0}" == 1 ]] || \
+    fail "M3_PREINSTALLED_RECIPE_OVERRIDE_REQUIRES_SYNEXIA_ALLOW_PREINSTALLED_RECIPE=1"
+  [[ "$version" =~ ^[A-Za-z0-9_.-]+$ ]] || fail "M3_RECIPE_VERSION_INVALID"
+  recipe_source=PREINSTALLED_REVIEWED_OVERRIDE
+  source_revision="${SYNEXIA_SOURCE_REVISION:-UNBOUND}"
+  recipe_jar_sha="${SYNEXIA_RECIPE_JAR_SHA256:-}"
+  [[ "$recipe_jar_sha" =~ ^[0-9a-f]{64}$ ]] || fail "M3_PREINSTALLED_RECIPE_SHA_REQUIRED"
+fi
+
+plugin="${SYNEXIA_REWRITE_PLUGIN_VERSION:-5.23.1}"
+artifact="com.synexia:synexia-openrewrite-recipes:${version}"
+printf 'recipeArtifact\t%s\npluginVersion\t%s\nrecipeSource\t%s\nrecipeSourceRevision\t%s\nrecipeJarSha256\t%s\n' \
+  "$artifact" "$plugin" "$recipe_source" "$source_revision" "$recipe_jar_sha" >> "$receipt"
 
 if [[ -x "$repo/mvnw" ]]; then
   maven=("$repo/mvnw")
