@@ -1,0 +1,22 @@
+field	value
+jep	484
+title	Class-File API
+current_tree_state	INVENTORY_CUSTODY_PROOF_PENDING
+product_materialized	false
+jdk21_ref	jdk-21+35
+jdk24_ref	jdk-24+36
+jdk21_internal_files_expected	241
+jdk24_combined_files_expected	245
+direct_descendants_expected	238
+unmapped_jdk21_expected	3
+ambiguous_expected	0
+added_jdk24_expected	7
+custody_rows_expected	248
+scope	LIBRARY_API_IF_MATERIALIZED
+default_java21	NO
+classification	OPT_IN_SE_API_EXTENSION
+mutation_authority	false
+promotion	NOT_AUTHORIZED
+proof_branch	m3/jep484-custody-refresh-20261007
+synexia_workflow_validator_commit	0f0f9965092955c15f5c32f5eb102137fd0dbf8e
+next_action	RUN_PATH_MAP_AND_CURRENT_TREE_CUSTODY_THEN_AUTHOR_BOUNDED_RECIPES_ONLY_FOR_ADMITTED_ROWS
