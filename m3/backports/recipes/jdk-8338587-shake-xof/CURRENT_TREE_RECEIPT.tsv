@@ -1,7 +1,7 @@
 field	value
 issue	JDK-8338587
 upstream_commit	c54fc08aa3c63e4b26dc5edb2436844dfd3bab7c
-current_tree_state	CANDIDATE_MATERIALIZED_UNVERIFIED
+current_tree_state	CANDIDATE_MATERIALIZED_EXACT_POSTIMAGE_PROOF_PENDING
 recipe	com.m3.rewrite.backport.M3Jdk8338587ShakeXofBackportRecipe
 product_targets	1
 test_targets	1
@@ -10,3 +10,6 @@ standalone_shake256	PRESERVED
 pkcs_callers	PRESERVED
 promotion	NOT_AUTHORIZED
 next_action	RUN_RECIPE_JUNIT_BUILD_SHAKE_JTREG_FIXED_POINT_CANONICAL_READBACK
+source_seal_readback	EXACT_MATCH_SHA3_AND_FOCUSED_JTREG
+proof_branch	m3/jdk8338587-shake-proof-admission-20261007
+synexia_workflow_validator_commit	0f0f9965092955c15f5c32f5eb102137fd0dbf8e
