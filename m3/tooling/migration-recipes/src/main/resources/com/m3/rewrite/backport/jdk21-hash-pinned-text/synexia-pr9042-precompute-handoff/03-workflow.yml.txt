@@ -1,0 +1,38 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Synexia PR9042 Precompute Handoff
+
+on:
+  pull_request:
+    paths:
+      - 'm3/compatibility/synexia-pr9042-code-text-precompute.tsv'
+      - 'm3/compatibility/check_synexia_pr9042_code_text_precompute.py'
+      - 'm3/docs/synexia-pr9042-code-text-precompute-handoff.md'
+      - 'm3/ports/precompute/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/**/synexia-pr9042-precompute-handoff/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-synexia-pr9042-precompute-handoff.yml'
+      - '.github/workflows/m3-synexia-pr9042-code-text-precompute.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  handoff:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Exact handoff receipt and M3 naming boundary
+        run: python3 m3/compatibility/check_synexia_pr9042_code_text_precompute.py
+      - name: Java precompute proof
+        run: mvn -B -ntp -f m3/ports/precompute/pom.xml test
+      - name: Java JNI native parity
+        run: mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative test
+      - name: Target recipe fixed-point proof
+        run: |
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3Synexia9042PrecomputeHandoffRecipeTest test
