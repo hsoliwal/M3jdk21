@@ -3,6 +3,7 @@ name: M3 JEP 423 G1 region-pinning inventory
 on:
   push:
     branches:
+      - "m3/jep423-*"
       - "m3/jep423-region-pinning-inventory-20261006"
     paths:
       - "m3/backports/recipes/jep-423-region-pinning/**"
@@ -42,6 +43,18 @@ jobs:
           distribution: temurin
           java-version: "21"
           cache: maven
+
+      - name: Consume canonical Synexia workflow-structure validator
+        shell: bash
+        run: |
+          set -euo pipefail
+          SYNEXIA="$RUNNER_TEMP/synexia-recipe-owner"
+          git init -q "$SYNEXIA"
+          git -C "$SYNEXIA" remote add origin https://github.com/hsoliwal/com.synexia.git
+          git -C "$SYNEXIA" -c protocol.version=2 fetch -q --depth=1 origin 0f0f9965092955c15f5c32f5eb102137fd0dbf8e
+          test "$(git -C "$SYNEXIA" rev-parse FETCH_HEAD)" = "0f0f9965092955c15f5c32f5eb102137fd0dbf8e"
+          java "$SYNEXIA/synexia-code-convergence/tools/WorkflowStructureCheck.java" \
+            .github/workflows/m3-jep423-region-pinning-inventory.yml
 
       - name: Fetch exact OpenJDK 21, JEP423 implementation and JDK22 GA
         shell: bash
