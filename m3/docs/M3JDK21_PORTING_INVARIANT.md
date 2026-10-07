@@ -74,6 +74,32 @@ Swing belongs to `java.desktop`; JavaFX/scene-graph integration needs its own
 target/module decision. No existing mapping, exclusion or unresolved gate is
 removed by these family summaries.
 
+## Full precompute second-pass invariant
+
+Synexia may experiment with wide precompute surfaces; M3JDK21 does not copy that width into
+`java.lang.String` or public JDK objects by default. Broad reusable text/search/fuzzy/code-text
+precompute first lands in the isolated target-owned `m3/ports/precompute` adaptation layer using
+M3 target names and no Synexia runtime dependency.
+
+Promotion from that layer into `java.base`, `java.util.regex`, collections, compiler or another
+JDK module requires a named concrete consumer and its own contract, retention, lifecycle,
+differential, memory, CPU and native/JNI gates. Fixed-size String-semantic geometry stays with the
+existing `M3StringFacts` family; operation-specific bounded plans stay with existing
+`M3StringSearchPrecompute`, `M3StringPositionPrecompute` and `M3TQ` owners.
+
+Approximate signals such as SimHash, MinHash/Jaccard, fuzzy scores, code-likeness, regex-likeness,
+Bloom-like signals and candidate rankings are **never semantic authority**. They may reject only
+when their mathematical contract proves a safe negative condition; otherwise they may order or
+nominate candidates only. Equality, edit thresholds, regex matches, compiler behavior and public
+JDK results remain exact-authority operations.
+
+Every LLM-assisted source-changing M3JDK task remains recipe-first: author or improve a
+Maven/OpenRewrite hash-pinned recipe crate, exercise it against exact preimages/postimages, require
+compiler/test/runtime and applicable native parity gates, and prove fixed-point replay. Manual
+file-by-file edits are not the canonical delivery mechanism. Synexia recipe bodies themselves are
+eligible Apache-2.0 donor assets, but the M3JDK receiving recipe, names, postimages and promotion
+receipts are target-owned.
+
 ## Convergence, handoff and promotion
 
 Recipe-module code is also intake material. In the inspected Synexia root the
