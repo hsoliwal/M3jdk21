@@ -723,6 +723,8 @@ critical_surfaces = {
     "stripTrailing": "storage.facts().stripEnd",
     "indexOfNonWhitespace": "storage.facts().stripStart",
     "lastIndexOfNonWhitespace": "storage.facts().stripEnd",
+    "chars": "return storage.charsStream();",
+    "codePoints": "return storage.codePointsStream();",
     "toCharArray": "return storage.charShadow();",
     "getBytes(Charset)": "return storage != null ? storage.encode(charset) : encode(charset, coder(), value());",
     "getBytes(String)": "return storage != null ? storage.encode(charset) : encode(charset, coder(), value());",
@@ -786,6 +788,28 @@ for fragment in [
 ]:
     if fragment not in string:
         fail(f"M3 exact comparison route missing: {fragment}")
+
+# M3 direct stream traversal must remain array-free and exact.
+for fragment in [
+    "IntStream charsStream()",
+    "IntStream codePointsStream()",
+    "private static final class CharsSpliterator implements Spliterator.OfInt",
+    "private static final class CodePointsSpliterator implements Spliterator.OfInt",
+    "Character.isLowSurrogate(source.charAt(mid))",
+    "Character.isHighSurrogate(source.charAt(mid - 1))",
+    "Character.toCodePoint(first, second)",
+]:
+    if fragment not in m3:
+        fail(f"M3 direct stream traversal missing: {fragment}")
+if "Spliterator.SIZED\n                    | Spliterator.SUBSIZED" not in m3:
+    fail("M3 chars spliterator lost exact sizing")
+codepoint_start = m3.find("private static final class CodePointsSpliterator")
+codepoint_end = m3.find("private boolean isWholeOwner()", codepoint_start)
+if codepoint_start < 0 or codepoint_end < 0:
+    fail("M3 code-point spliterator block missing")
+codepoint_block = m3[codepoint_start:codepoint_end]
+if "Spliterator.SIZED" in codepoint_block or "Spliterator.SUBSIZED" in codepoint_block:
+    fail("M3 code-point spliterator must not claim code-unit size as code-point size")
 
 # Canonical equality may use Java hash only as a negative filter. Equal hashes still require
 # exact UTF-16 comparison because collisions are part of the String.hashCode contract.
@@ -1120,6 +1144,7 @@ for required_gate in [
     "M3StringPrecomputeSearchTest.java",
     "M3StringInternTest.java",
     "M3StringCanonicalDagTest.java",
+    "M3StringStreamsTest.java",
     "M3TQFactsTest.java",
     "M3RegexLiteralTQTest.java",
     "M3StringHistoryConvergenceRecipeTest",
