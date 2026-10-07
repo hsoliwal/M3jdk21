@@ -6,4 +6,5 @@ src/java.base/share/classes/com/sun/crypto/provider/SunJCE.java	395a63d5f6a1ef12
 src/java.base/share/classes/java/security/spec/NamedParameterSpec.java	50a8a2977b997b8fb9af33a48d37127c11ba33eae58be682d3e27d8b94ae647c	21bbaae150f6b503b8d04c217a0eb5498eff3845c39707f65b768dc42ebd0f4e	03-NamedParameterSpec.java.after.txt
 src/java.base/share/classes/sun/security/provider/SHA3Parallel.java	ABSENT	1b057311201a35d254dfe22eb53fa16487f9ad1043f20ce4e544d2e27bdcb6af	04-SHA3Parallel.java.after.txt
 src/java.base/share/classes/sun/security/util/KnownOIDs.java	362d4204baa21a975f5e045ef42eac777b2f1db8167bb59b8d1419fd3fb868eb	c9fa4d8ae96dbd962e4500bd9292670cae50a06ed4c444a1de79e9a789bd0210	05-KnownOIDs.java.after.txt
+test/jdk/com/sun/crypto/provider/MLKEMProviderSmoke.java	ABSENT	fadc0ead97651f30d4d5ce2a6e163e8860369e5e7e62b4884ad908882473fd88	07-MLKEMProviderSmoke.java.after.txt
 test/jdk/sun/security/provider/acvp/MLKEMKnownAnswer.java	ABSENT	c47761417da04770f0a4c82eabb6ed219e5bbdb0a6716d7219d96b1d5be6c5a1	06-MLKEMKnownAnswer.java.after.txt
