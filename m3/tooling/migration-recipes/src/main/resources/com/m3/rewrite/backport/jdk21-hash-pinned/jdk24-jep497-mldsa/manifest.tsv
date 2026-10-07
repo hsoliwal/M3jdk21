@@ -6,4 +6,5 @@ src/java.base/share/classes/sun/security/provider/ML_DSA_Impls.java	ABSENT	2b6c5
 src/java.base/share/classes/sun/security/provider/SunEntries.java	c8845b790158a7a429133334bb1a1593500b3646d08b83d092fcbce5688bf1fe	6f0f2d3d639c556c26b1a76f29297a3a70bf8d01446c07b695df6c3f28e9d8b8	03-SunEntries.java.after.txt
 src/java.base/share/classes/sun/security/util/KnownOIDs.java	e4b61ecd0e6a82758e46592258b97625a61f891476adc4fd3640fd428dcdc583	1bcc8459563b5955bebecf8f888fe69fabcd0079da7287d2aed9aab48177d764	04-KnownOIDs.java.after.txt
 test/jdk/sun/security/provider/ML_DSA/MLDSADeterministic.java	ABSENT	7203283a34cb23a4386707251be46ec7bd8e76cd626e70d6e22b8d94091dd397	05-MLDSADeterministic.java.after.txt
+test/jdk/sun/security/provider/ML_DSA/MLDSAKnownAnswer.java	ABSENT	71cb25bef6e3bba13df3c57ada0d2d788d76a63cc9b9e0f7d706a1c020432d26	07-MLDSAKnownAnswer.java.after.txt
 test/jdk/sun/security/provider/ML_DSA/MLDSAProviderSmoke.java	ABSENT	532bac9c5e74a1be847f2ba9e40ee3243d78307c5784a2b291a18164718381c3	06-MLDSAProviderSmoke.java.after.txt
