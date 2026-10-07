@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: Apache-2.0
-package com.m3.rewrite.atom;
+package com.synexia.rewrite.atom;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
