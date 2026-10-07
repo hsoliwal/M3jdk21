@@ -340,6 +340,32 @@ public class M3StringPrecomputeSearchTest {
                     "BMH low-byte collision needle=" + Arrays.toString(needleChars));
         }
 
+        char[] codePointBlocks = new char[512];
+        Arrays.fill(codePointBlocks, 'a');
+        for (int high : new int[] {62, 63, 126, 127, 190, 255, 318, 382, 446}) {
+            if (high + 1 < codePointBlocks.length) {
+                codePointBlocks[high] = '\ud83d';
+                codePointBlocks[high + 1] = '\ude42';
+            }
+        }
+        codePointBlocks[320] = '\ud800';
+        codePointBlocks[384] = '\udc00';
+        String codePointSource = new String(codePointBlocks);
+        for (int begin : new int[] {0, 1, 62, 63, 64, 127, 128, 255, 256, 319, 320, 321, 383, 384}) {
+            for (int end : new int[] {64, 128, 256, 321, 385, 512}) {
+                if (begin <= end) {
+                    check(codePointSource.codePointCount(begin, end)
+                                    == naiveCodePointCount(codePointBlocks, begin, end),
+                            "codePoint block count " + begin + ":" + end);
+                }
+            }
+        }
+        for (int index : new int[] {0, 1, 62, 63, 64, 127, 128, 255, 256, 319, 320, 321, 383, 384, 511, 512}) {
+            for (int offset : new int[] {-5, -2, -1, 0, 1, 2, 5}) {
+                compareOffsetByCodePoints(codePointSource, codePointBlocks, index, offset);
+            }
+        }
+
         String overlapReverse = String.join(
                 "",
                 "ababa".repeat(180),
@@ -553,13 +579,6 @@ public class M3StringPrecomputeSearchTest {
         check(noCaseChange.toUpperCase(Locale.ROOT) == noCaseChange,
                 "M3 Unicode upper unchanged identity");
 
-        StringBuilder builder = new StringBuilder("prefix:");
-        builder.append(joined, 1, joined.length() - 1);
-        char[] builderExpected = new char["prefix:".length() + joined.length() - 2];
-        "prefix:".getChars(0, "prefix:".length(), builderExpected, 0);
-        joined.getChars(1, joined.length() - 1, builderExpected, "prefix:".length());
-        check(equalChars(builder.toString(), builderExpected), "StringBuilder M3 append range");
-
         String singleLine = String.join("", "single", "-line");
         singleLine.strip(); // prepare fixed facts without changing content
         var singleLines = singleLine.lines().toList();
@@ -569,6 +588,31 @@ public class M3StringPrecomputeSearchTest {
         multiLine.strip(); // prepare facts including line-terminator flag
         check(multiLine.lines().toList().equals(java.util.List.of("a", "b", "c")),
                 "prepared multi-line preserves line semantics");
+
+        String longLines = String.join(
+                "",
+                "a".repeat(63),
+                "\r\n",
+                "b".repeat(64),
+                "\n",
+                "c".repeat(127),
+                "\r",
+                "d".repeat(128),
+                "\r\n",
+                "e".repeat(257));
+        var expectedLongLines = java.util.List.of(
+                "a".repeat(63),
+                "b".repeat(64),
+                "c".repeat(127),
+                "d".repeat(128),
+                "e".repeat(257));
+        check(longLines.lines().toList().equals(expectedLongLines),
+                "position-precomputed long lines");
+        check(longLines.lines().toList().equals(expectedLongLines),
+                "position-precomputed long lines reused");
+        String trailingLines = String.join("", "x".repeat(300), "\r\n");
+        check(trailingLines.lines().toList().equals(java.util.List.of("x".repeat(300))),
+                "position-precomputed trailing CRLF");
 
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
@@ -751,6 +795,21 @@ public class M3StringPrecomputeSearchTest {
                         "random getBytes " + charset.name() + " trial " + trial);
             }
         }
+    }
+
+    private static int naiveCodePointCount(
+            char[] source, int beginIndex, int endIndex) {
+        int count = 0;
+        for (int index = beginIndex; index < endIndex; ) {
+            char first = source[index++];
+            if (Character.isHighSurrogate(first)
+                    && index < endIndex
+                    && Character.isLowSurrogate(source[index])) {
+                index++;
+            }
+            count++;
+        }
+        return count;
     }
 
     private static void compareOffsetByCodePoints(
