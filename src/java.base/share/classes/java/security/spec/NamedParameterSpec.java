@@ -69,6 +69,30 @@ public class NamedParameterSpec implements AlgorithmParameterSpec {
         = new NamedParameterSpec("Ed448");
 
     /**
+     * The ML-DSA-44 parameters.
+     *
+     * @since 24
+     */
+    public static final NamedParameterSpec ML_DSA_44
+        = new NamedParameterSpec("ML-DSA-44");
+
+    /**
+     * The ML-DSA-65 parameters.
+     *
+     * @since 24
+     */
+    public static final NamedParameterSpec ML_DSA_65
+        = new NamedParameterSpec("ML-DSA-65");
+
+    /**
+     * The ML-DSA-87 parameters.
+     *
+     * @since 24
+     */
+    public static final NamedParameterSpec ML_DSA_87
+        = new NamedParameterSpec("ML-DSA-87");
+
+    /**
      * The ML-KEM-512 parameters.
      *
      * @since 24
