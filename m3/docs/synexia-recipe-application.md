@@ -9,7 +9,7 @@ Status: **applied product state; Synexia owns the reusable recipes**.
 Repository: `hsoliwal/com.synexia`  
 Custody PR: https://github.com/hsoliwal/com.synexia/pull/9597  
 Custody branch: `m3/m3jdk21-string-recipe-canonicalize-v2-20261007`  
-Pinned custody revision: `fd73581d6d4205e92c151509cc6663f69eeaf22f`
+Pinned custody revision: `e0845c4fd0fe56ecf1fa0e88981620062d9dafee`
 
 This supersedes the earlier custody receipt for PR #9529. PR #9597 is based directly on the
 then-current Synexia `develop` head and forward-seals the live M3JDK21 product postimages without
@@ -44,7 +44,7 @@ M3JDK21 runtime branch:
 
 Applied/fixed-point revision:
 
-`87a711c56b1fd5fbe843b864474f3cc87c15362b`
+`502fa1698f9ddd798234ffc5b391b91615c20229`
 
 Direct manifest comparison after moving recipe custody to Synexia:
 
