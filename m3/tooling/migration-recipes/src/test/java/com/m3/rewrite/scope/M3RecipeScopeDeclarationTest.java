@@ -18,6 +18,11 @@ import com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe;
 import com.m3.rewrite.backport.M3VerbatimJavaPairRecipe;
 import com.m3.rewrite.backport.M3Jep458BackportRecipe;
 import com.m3.rewrite.backport.M3Jep485StreamGatherersBackportRecipe;
+import com.m3.rewrite.backport.M3Jep496MlKemBackportRecipe;
+import com.m3.rewrite.backport.M3Jdk8338587ShakeXofBackportRecipe;
+import com.m3.rewrite.backport.M3Jep510KdfBackportRecipe;
+import com.m3.rewrite.backport.M3Jep510KdfSecurityTestsRecipe;
+import com.m3.rewrite.backport.M3Jep510KdfCandidateRecipe;
 import com.m3.rewrite.backport.M3ReleaseJepAuthorityRepairRecipe;
 import com.m3.rewrite.synexia.M3SynexiaImportInventoryRecipe;
 import com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe;
@@ -29,7 +34,7 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(23, M3RecipeScopeRegistry.size());
+        assertEquals(28, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered("org.openrewrite.java.RemoveUnusedImports"));
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
@@ -56,6 +61,11 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3VerbatimJavaPairRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jep458BackportRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jep485StreamGatherersBackportRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3Jdk8338587ShakeXofBackportRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3Jep496MlKemBackportRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3Jep510KdfBackportRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3Jep510KdfSecurityTestsRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3Jep510KdfCandidateRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3ReleaseJepAuthorityRepairRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SynexiaImportInventoryRecipe.class.getName()));
         var synexiaImport = M3RecipeScopeRegistry.require(M3SynexiaImportInventoryRecipe.class);
@@ -69,12 +79,23 @@ final class M3RecipeScopeDeclarationTest {
         assertFalse(denominatorRepair.fileLocalMechanical(List.of("m3/backports/JEP_CATALOGUE.tsv")));
         for (Class<?> jepRecipe : List.of(
                 M3Jep458BackportRecipe.class,
-                M3Jep485StreamGatherersBackportRecipe.class)) {
+                M3Jep485StreamGatherersBackportRecipe.class,
+                M3Jep496MlKemBackportRecipe.class,
+                M3Jep510KdfBackportRecipe.class,
+                M3Jep510KdfCandidateRecipe.class)) {
             var jep = M3RecipeScopeRegistry.require(jepRecipe);
             assertEquals(M3EditScope.LIBRARY_API, jep.minimumScope());
             assertEquals(M3ContractMode.EXPLICIT_CONTRACT_CHANGE, jep.contractMode());
             assertFalse(jep.fileLocalMechanical(List.of("src/main/java/a/A.java")));
         }
+        var shake = M3RecipeScopeRegistry.require(M3Jdk8338587ShakeXofBackportRecipe.class);
+        assertEquals(M3EditScope.MODULE, shake.minimumScope());
+        assertEquals(M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING, shake.contractMode());
+
+        var kdfTests = M3RecipeScopeRegistry.require(M3Jep510KdfSecurityTestsRecipe.class);
+        assertEquals(M3EditScope.MODULE, kdfTests.minimumScope());
+        assertEquals(M3ContractMode.BEHAVIOR_AND_CONTRACT_PRESERVING, kdfTests.contractMode());
+
         assertFalse(M3RecipeScopeRegistry.registered(null));
         assertFalse(M3RecipeScopeRegistry.registered("missing.Recipe"));
         assertThrows(NullPointerException.class, () -> M3RecipeScopeRegistry.require((Class<?>) null));
