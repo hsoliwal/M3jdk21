@@ -1181,6 +1181,7 @@ for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringPrecomputeSearchTest.java",
     "M3StringInternTest.java",
+    "M3StringBuilderInteropTest.java",
     "M3StringCanonicalDagTest.java",
     "M3StringStreamsTest.java",
     "M3TQFactsTest.java",
