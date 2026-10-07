@@ -1,8 +1,19 @@
+<!--
+SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
+SPDX-License-Identifier: Apache-2.0
+-->
+
 # M3JDK21 / Synexia Notice
 
-Copyright © 2026 Hitesh Soliwal and Contributors / Synexia
+**Copyright © 2026 Hitesh Soliwal and Contributors to the Synexia Project**
 for independently authored M3/M3Scale/M3Index/Synexia material identified as
 first-party additions to this repository.
+
+**Original author / project lead:** Hitesh Soliwal  
+**Project stewardship:** Synexia
+
+“Synexia Project” identifies project stewardship; it does not, by itself,
+assert a copyright assignment from contributors to a separate legal entity.
 
 ## Important license boundary
 
