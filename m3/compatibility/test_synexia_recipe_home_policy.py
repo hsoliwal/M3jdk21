@@ -18,7 +18,7 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         with POLICY.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
 
-        self.assertEqual(12, len(rows))
+        self.assertEqual(13, len(rows))
         for row in rows:
             self.assertEqual("M3JDK21_SYNEXIA_RECIPE_HOME_V1", row["schema"])
             self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
@@ -59,6 +59,16 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
                 "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/**"
             ]["handoff_required"],
         )
+
+        receiver = by_surface[
+            "m3/tooling/migration-recipes/receiver/synexia-recipe-mirror-v2/**"
+        ]
+        self.assertEqual("PROOF_BOUND_RECEIVER_EVIDENCE", receiver["disposition"])
+        self.assertEqual(
+            "com.synexia.rewrite.M3Jdk21RecipeMirrorSnapshotCli",
+            receiver["canonical_owner"],
+        )
+        self.assertEqual("true", receiver["handoff_required"])
 
 
     def test_top_level_shared_surfaces_are_explicitly_noncanonical(self) -> None:
