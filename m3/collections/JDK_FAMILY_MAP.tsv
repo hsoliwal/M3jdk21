@@ -1,5 +1,5 @@
 jdk_family	m3_backend	state	primary_shape	contract_note
-ArrayList	M3LongArrayList	RECEIVER_CANDIDATE_V1	contiguous long[]	primitive proving backend; java.util.ArrayList remains authority
+ArrayList	M3LongArrayList	RECEIVER_UNION_V2	contiguous long[]	single owner uniting JDK-shaped v1 and PackedLongList lineage (M3LongList/M3LongStack); java.util.ArrayList remains authority
 LinkedList	M3LongLinkedList28	EXISTING_PROVING_BACKEND	stable segmented handles + primitive link lanes	not a java.util.LinkedList replacement
 HashSet	M3LongHashSet	RECEIVER_CANDIDATE_V1	open addressing + byte occupancy	all long keys including zero/extrema
 HashMap	M3LongLongHashMap	RECEIVER_CANDIDATE_V1	parallel primitive key/value lanes + open addressing	all long keys/values; no per-entry node
