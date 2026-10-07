@@ -142,7 +142,7 @@ jobs:
           python3 - <<'PY_DELTA'
           import hashlib, json, os, re, urllib.request
           from pathlib import Path
-          
+
           COMMENT = 6034649686
           DELTA_SHA = '1a46ee791bb0a61128e8f98cd3434f8026512e6d240bf3e2d123c00f5208511f'
           BASE = '01554337e0051018e6d932f3775378a01faf88f8'
@@ -151,18 +151,18 @@ jobs:
           PATH = 'synexia-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/hosted_apply.py'
           BEFORE = '5cb0930da45a862207360b684579219c6a208bac5f5c27e2f409caf1d26f96c7'
           AFTER = '3718546fc3fe883a56fdb00ae30c4343efa91d3954fca465dac8928c5994ec4d'
-          
+
           def require(value, message):
               if not value:
                   raise RuntimeError(message)
-          
+
           def unique(pairs):
               out = {}
               for key, value in pairs:
                   require(key not in out, 'duplicate JSON key')
                   out[key] = value
               return out
-          
+
           def reconstruct(before, meta, raw):
               require(len(raw) == 2982 and hashlib.sha256(raw).hexdigest() == DELTA_SHA, 'delta seal')
               delta = json.loads(raw.decode('utf-8'), object_pairs_hook=unique)
@@ -189,7 +189,7 @@ jobs:
               updated['sourceFileRevisions'][PATH] = SOURCE
               updated['files'][PATH] = AFTER
               return after, updated
-          
+
           def main():
               request = urllib.request.Request(
                   f'https://api.github.com/repos/hsoliwal/M3jdk21/issues/comments/{COMMENT}',
@@ -228,7 +228,7 @@ jobs:
               with (record / 'DELTA_RECEIPT.json').open('x', encoding='utf-8') as out:
                   out.write(json.dumps(receipt, sort_keys=True, indent=2) + '\n')
               print(json.dumps({'status': receipt['status'], 'correctionCommit': SOURCE, 'afterSha256': AFTER}))
-          
+
           if __name__ == '__main__':
               main()
           PY_DELTA
