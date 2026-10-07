@@ -23,3 +23,8 @@ source/target preimages and postimages with compiler/behavior, recipe fixed-poin
 applicable jtreg/native/runtime gates. Resource-sensitive changes require CPU, retained-heap and
 native/process-memory evidence. Do not equate a finite donor pass or merge ancestry with complete
 target delivery; retain pending gates and partial coverage explicitly.
+
+
+## Full Synexia lineage is mandatory
+
+Read `m3/docs/synexia-full-family-catalogue.json` and the M3-SYNEXIA-RECEIVER-1 section of the canonical porting invariant before MIndex*/String/AST/precompute work. The pinned Synexia source catalogue covers4,770namedpaths within13checkedroots and keeps every row unevaluated until exact target evidence exists. Carry the whole canonical String/data-structure/AST/static-regex lineage forward; representative tables or the literal replacement atom do not prove full receiving parity. Preserve Apache-2.0 Synexia first-party attribution, `Copyright 2026 Hitesh Soliwal and contributors`, and per-file third-party/OpenJDK licensing.

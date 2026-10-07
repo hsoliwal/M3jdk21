@@ -241,3 +241,121 @@ service or package dependency to Java/HotSpot/JNI. Carry compiler, behavior, rep
 and refusal receipts with each candidate. Resource-sensitive ports also carry CPU, retained-heap
 and native/process-memory evidence with exact workloads and environments. Target tests and pending
 platform gates remain explicit; a reusable donor recipe alone does not establish target acceptance.
+
+
+# M3-SYNEXIA-RECEIVER-1: full Synexia to M3JDK lineage
+
+Synexia is the canonical convergence and reusable-recipe owner. M3JDK21 receives the
+qualified capabilities into its existing product owners. Every continuation inherits
+the source ledger and executed evidence before changing an atom. This invariant covers
+the previous MIndexString work, the MIndex* data structures, AST/compiler plane and
+static precompute; the literal replacement atom does not delimit migration scope.
+
+The centre is canonical MIndexString/M3String ownership -> static regex precompute ->
+String operations -> JNI/native projections. In Synexia, MIndexString resolves canonical
+atoms, owner/range coordinates and compositions. In M3JDK, use the existing M3String,
+M3StringOwner/Atom/Tuple/Pool and mapped backing owners. Public java.lang.String and its
+observable contracts stay authoritative. char[] and byte[] are ingress/export or ABI
+projections through those owners. A cache, precompute image, JNI shadow or legacy field
+must not quietly become a second canonical spelling store.
+
+## Scope and accounting
+
+Read the catalogue index and all relevant shards under
+`synexia-openrewrite-recipes/verification/synexia-m3jdk-full-family-20261007`.
+Its pinned source is Synexia 7d2133f1412a9e7295296c3f86baae577bb3251c.
+It records 4,770 MIndex*-named paths in 13 explicitly checked module roots: 3,108
+production source/resource paths (2,556 Java and 552 resources/payloads), 1,463 test/resource paths, 195 retained evidence/recipe payloads
+and four support paths. They are file identities, not 4,770 independently admitted runtime
+classes. All begin NOT_EVALUATED_IN_THIS_LEDGER. Historical declarations remain attached
+without converting their IMPLEMENTED labels into current target acceptance.
+
+The checked-root catalogue is not whole-repository completion. Non-prefix dependencies,
+Index*/MatIndex*/M3* owners, nested types, other modules and later revisions require further
+inventory. Missing promised Git bodies are unresolved inputs, not evidence of absence.
+The existing representative 28-family table and String responsibility checks remain useful
+indexes; neither establishes complete migration. Expand the source closure before promotion.
+
+Every evaluated source atom records exact donor revision/path/blob/raw hash, original
+licence/copyright, dependencies and effects, existing receiver owner/module/path, recipe
+identity, target preimage/postimage, evidence and outstanding gates. Each atom ends with
+verified target acceptance, an explicit PENDING reason, or a justified DO_NOT_PORT / higher
+layer disposition. Unknown or omitted rows cannot silently count as complete. Every wider
+FILE -> PACKAGE -> MODULE -> PROJECT -> REPOSITORY claim requires its narrower proofs.
+
+## Ordered receiving work
+
+1. Preserve the admitted canonical String/storage/JNI lineage and stronger receiving helpers.
+   Qualify the current M3JDK runtime rather than substituting a historical MIndexString image.
+2. Prioritize full static regex precompute. The exact admitted v7 MIndexRegexProgram
+   execution image, boolean runtime, codec and dependency closure remain the next receiver.
+   M3TQ already retains the admitted v7 query/Facts operations; do not re-port it or substitute
+   the different M3RegexAutomaton engine. Split cold compiler facilities from bootstrap-safe
+   runtime only through attributed dependency/effect evidence and target compilation.
+   java.lang.management.ThreadMXBean is not readable from java.base; a wholesale class rename
+   is not a qualifying port. Exact UTF-16 keys, version/options/owner identity, cold preparation,
+   zero-work warm reuse, invalidation and malformed/unauthorized artifact refusal need proof.
+3. Receive AST/class/compiler facts and atomizer/patternizer recipes through existing M3AST,
+   M3ASTPC, M3Class/M3CI/M3CB/M3PC and javac owners after consumer/format proof. javac-only
+   parsing, binding and compiler effects stay in jdk.compiler or authoring tooling. Code-looking
+   strings, regex, comments and text blocks stay payload. Compile every bounded multipass
+   candidate and compare contracts and an independent behavioral oracle before a fixed point.
+4. Receive MIndex* collection, bit/address/lane, tree/DAG, relation, file/source and generic/
+   universal precompute capabilities by concrete consumer. Preserve null/equality/identity,
+   order/views/iteration, serialization, JMM/concurrency and lifetime contracts as applicable.
+   Domain, distributed, corpus and hardware state uses the existing separate target plane when
+   justified; every deferred or excluded family remains visible in the ledger.
+5. Review Tweety, RE2/J, native/GPU and other historical donors at their exact source/license
+   boundaries. Catalogue LeetCode, HackerRank and GeeksforGeeks problem categories before
+   selecting licensed GitHub source; platform statements, editorials and submissions are
+   reference material, not copying permission. Hardware/native absence must preserve the
+   admitted Java contract; GPU caps cannot silently truncate supported inputs.
+
+The held V8 full-query owners remain NOT_ADMITTED: a correctly keyed/checksummed program can
+disagree with its restored query, and physical DAG bounds do not bound unfolded recursive work.
+The bounded 16,433-check witness recipe preserves both failures, six effectful-predicate cases,
+the 16,384-callback shared DAG and stack overflow in three APIs. Do not publish/admit those
+owners or invent approval authority from cache association. Define the canonical artifact
+admission contract before repairing it; preserve callback order, duplication, short-circuiting
+and exceptions when replacing recursive evaluation.
+
+## Recipe and proof custody
+
+Use the existing Maven/OpenRewrite control plane and M3SerialFileAtomConvergenceRecipe.
+SEARCH -> INVENTORY -> CLASSIFY -> PROVE FIT -> ATTRIBUTE -> GENERATE ONLY THE GAP remains
+mandatory. Record the FOSS_REUSE_DECISION row before substantial generation. Improve the
+Synexia recipe, export pinned postimages, then apply to exact target preimages. Do not fork a
+compiler, parser, convergence laboratory, precompute framework or reusable recipe authority.
+
+Keep executed source compilation, semantic oracle, code-containing in-memory multipass corpora,
+ordered subset/permutation/combination coverage, fixed point, second application, refusal and
+source-drift evidence distinct. Target build/jtreg, interpreter/C1/C2/GC/CDS, native/JNI lifetime,
+provider/platform, full reactor and dependency-mirror gates are applicable acceptance evidence;
+record each missing gate explicitly. Hashes or candidate filters never establish exact semantic
+equivalence. Measure cold and warm cost separately; finite correctness, merges and operation
+counts do not establish exhaustive convergence or performance gains.
+
+## Copyright, design lineage and licence
+
+Synexia first-party implementation, reusable recipes and design documentation covered by its
+licence retain this recorded attribution:
+
+    Copyright 2026 Hitesh Soliwal and contributors
+    Licensed under the Apache License, Version 2.0.
+
+Preserve the exact applicable LICENSE, NOTICE, per-file copyright and modification notices,
+source history and design/algorithm lineage in every handoff. Apache-2.0 reuse needs no extra
+Synexia permission beyond that licence's terms. The attribution documents the contributed work
+and its provenance; it does not create an exclusive right over abstract ideas.
+
+Third-party material retains its own rights. Tweety's recorded GPL/LGPL ambiguity remains
+reference-only; RE2/J BSD notices and Tornado's API/runtime split remain separate. Unknown
+per-file licences require review even where a repository root is Apache-2.0. A recipe's licence
+does not relicense its inputs or generated output. M3JDK/OpenJDK files keep their existing
+licences and rightsholder notices. Use the existing synexia-intake-policy.tsv modes and
+verify-synexia-intake.py boundary; direct source reuse into GPL/OpenJDK owners requires the
+recorded compatible rights or target-owned implementation mode. Independent Apache tooling
+remains scoped. No Synexia runtime service/package dependency enters Java/HotSpot/JNI.
+
+Licence text: https://www.apache.org/licenses/LICENSE-2.0
+Canonical target policy: m3/docs/m3jdk21-porting-invariant.md in hsoliwal/M3jdk21.
