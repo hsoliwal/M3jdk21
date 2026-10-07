@@ -15,9 +15,10 @@ class J423LineageTest(unittest.TestCase):
         summary = MODULE.validate()
         self.assertEqual(3, summary["lineage_commits"])
         self.assertEqual(2, summary["preserved_java21_deletions"])
-        self.assertGreater(summary["unique_paths"], 59)
-        self.assertGreater(summary["product_paths"], 40)
-        self.assertGreater(summary["test_paths"], 15)
+        self.assertEqual(64, summary["unique_paths"])
+        self.assertEqual(47, summary["product_paths"])
+        self.assertEqual(17, summary["test_paths"])
+        self.assertEqual(62, len(MODULE.path_list(MODULE.CANDIDATES)))
 
     def test_followup_repairs_are_required(self):
         rows = MODULE.rows(MODULE.LINEAGE)
