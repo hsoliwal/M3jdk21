@@ -1,0 +1,24 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Synexia collection port recipe pin
+
+on:
+  pull_request:
+    paths:
+      - 'm3/compatibility/synexia-m3-collection-port-recipe-pin.tsv'
+      - 'm3/compatibility/check_synexia_m3_collection_port_recipe.py'
+      - '.github/workflows/m3-synexia-collection-port-recipe-pin.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - name: Diff hygiene
+        run: git diff --check
+      - name: Verify exact Synexia recipe pin
+        run: python3 m3/compatibility/check_synexia_m3_collection_port_recipe.py
