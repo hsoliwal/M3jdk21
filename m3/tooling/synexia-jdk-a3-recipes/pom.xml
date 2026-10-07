@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.synexia</groupId>
+  <artifactId>synexia-jdk-a3-recipes</artifactId>
+  <version>1.0.0-SNAPSHOT</version>
+  <packaging>jar</packaging>
+  <name>M3JDK21 :: Public Synexia A3 recipe mirror</name>
+  <description>Target-side build wrapper around the exact Apache-2.0 Synexia A3 export snapshot.</description>
+
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <rewrite.version>8.17.1</rewrite.version>
+    <junit.version>5.10.2</junit.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.openrewrite</groupId>
+      <artifactId>rewrite-java</artifactId>
+      <version>${rewrite.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openrewrite</groupId>
+      <artifactId>rewrite-java-21</artifactId>
+      <version>${rewrite.version}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <sourceDirectory>${project.basedir}/../../vendor/synexia/synexia-openrewrite-recipes/src/main/java</sourceDirectory>
+    <resources>
+      <resource>
+        <directory>${project.basedir}/../../vendor/synexia/synexia-openrewrite-recipes/src/main/resources</directory>
+        <includes>
+          <include>META-INF/m3/jdk-a3-recipe-export.tsv</include>
+        </includes>
+      </resource>
+    </resources>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.13.0</version>
+        <configuration>
+          <release>21</release>
+          <proc>none</proc>
+          <compilerArgs>
+            <arg>-Xlint:all</arg>
+            <arg>-Werror</arg>
+            <arg>-implicit:none</arg>
+          </compilerArgs>
+          <includes>
+            <include>com/synexia/rewrite/atom/M3AtomizePureIntReturnRecipe.java</include>
+            <include>com/synexia/rewrite/atom/M3DocumentPureIntAtomRecipe.java</include>
+            <include>com/synexia/rewrite/atom/M3FileAtomCandidateTable.java</include>
+            <include>com/synexia/rewrite/atom/M3InventoryPureIntAtomCandidates.java</include>
+            <include>com/synexia/rewrite/atom/M3PatternizePureIntAtomRecipe.java</include>
+            <include>com/synexia/rewrite/atom/M3PureIntAtomEligibility.java</include>
+            <include>com/synexia/rewrite/atom/M3PureIntConvergenceRecipe.java</include>
+            <include>com/synexia/rewrite/M3RecipeMasteryPortableReceipt.java</include>
+          </includes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.2.5</version>
+        <configuration>
+          <useModulePath>false</useModulePath>
+          <failIfNoTests>true</failIfNoTests>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

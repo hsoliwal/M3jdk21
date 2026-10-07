@@ -14,6 +14,7 @@
     <module>indexdb</module>
     <module>synexia-import</module>
     <module>tooling/migration-recipes</module>
+    <module>tooling/synexia-jdk-a3-recipes</module>
     <module>tooling/a3</module>
     <module>tooling/backport-dag</module>
     <module>backports</module>
