@@ -98,15 +98,41 @@ DataTables.
 
 The intended next step for any imported capability is:
 
-    vendor snapshot
+    vendor snapshot / pinned Synexia handoff
       -> inventory
-      -> select exact atom/recipe
-      -> create or improve M3JDK21 OpenRewrite port recipe
-      -> JUnit / compiler / runtime proof
+      -> select exact canonical Synexia atom/recipe
+      -> improve the reusable recipe in Synexia first
+      -> receive only a thin M3JDK21 adapter or JDK-specific backport/receiver
+      -> JUnit / compiler / jtreg / runtime proof
       -> target-specific materialization
       -> fixed point
 
 The vendor tree itself is not a shortcut around M3 scope, contract or verification gates.
+
+### Canonical recipe ownership guard
+
+M3JDK21 is not a second reusable recipe home.
+
+The append-only receiver intake at
+`m3/synexia-import/intakes/recipe-ownership-20261007/` pins the Synexia ownership/borrowing
+ledgers to an exact Synexia revision. The Java receiver policy
+`SynexiaRecipeOwnershipPolicy` audits the current
+`m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/**` tree.
+
+Every local recipe source must resolve to one of:
+
+- `SYNEXIA_CANONICAL` — compatibility/proof residue only; reusable evolution is forbidden locally;
+- `TARGET_ADAPTER_ONLY` — thin target intake/compatibility surface; reusable evolution is forbidden locally;
+- `JDK_TARGET_SPECIFIC` — OpenJDK/JEP/backport/receiver logic whose product contract is target-local.
+
+An unclassified local reusable recipe fails closed. A Synexia-owned residue cannot become
+independently evolvable merely because it is still present in M3JDK21. New generic
+atomization/patternization/IOP, semantic hash, M3Index, algorithm/search, donor-convergence,
+recipe-mastery, or Java/JNI mechanics must be implemented and proved in Synexia first.
+
+M3JDK21 remains authoritative for exact OpenJDK preimages/postimages, JEP/backport application,
+HotSpot/JIT/GC/CDS/JVMTI/JNI integration, jtreg/runtime qualification and final product promotion.
+
 
 ## License boundary
 
