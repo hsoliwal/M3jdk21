@@ -30,9 +30,19 @@ This repairs four false current-master materialization claims:
 | 423 | PACKET_EVIDENCE | inventory/cumulative-materialization control packet, no current-tree receipt |
 | 484 | PACKET_EVIDENCE | custody/path-map packet, no current-tree receipt |
 | 485 | PACKET_EVIDENCE | gatherer packet/recovery evidence, no current-tree receipt in current tree |
-| 523 | PACKET_EVIDENCE | G1-default packet/adaptation evidence, no current-tree receipt |
+| 523 | MATERIALIZED_PACKET | current-tree receipt proves reviewed product/test postimages are already present; runtime/build proof remains pending |
 
 No compatibility decision changes.
+
+### JEP 523 receipt correction
+
+Current master contains `m3/backports/recipes/jep-523-g1-default/CURRENT_TREE_RECEIPT.tsv`.
+It proves the reviewed recipe postimages are already present for
+`gcConfig.cpp` and `TestSelectDefaultGC.java`, with zero recipe replay source delta.
+
+The residue queue therefore reports `MATERIALIZED_PACKET` and
+`REVIEWED_POSTIMAGES_ALREADY_PRESENT`. Promotion remains `NOT_AUTHORIZED`; the G1-enabled
+build, no-G1 build, focused jtreg, runtime fallback, and fixed-point/readback gates remain pending.
 
 ## Hosted proof state
 

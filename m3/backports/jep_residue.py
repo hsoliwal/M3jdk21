@@ -176,6 +176,7 @@ def queue(
                 receipt_state=(
                     receipt.get("current_tree_state")
                     or receipt.get("packet_state")
+                    or receipt.get("recipe_state")
                     or ""
                 ),
                 promotion=receipt.get("promotion", ""),
