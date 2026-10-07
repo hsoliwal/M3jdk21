@@ -641,3 +641,18 @@ Every collection work packet includes:
 11. unresolved risks.
 
 Until all applicable items are complete, status is proposed/implemented/verified-scoped, never “collection replacement complete”.
+
+
+## Canonical collection naming and implementation selection
+
+Reusable collection implementations are mastered in Synexia under the M3* family and received here
+only for JDK-specific integration. Legacy MAT/MIndex collection types remain compatibility/evidence
+inputs until recipe-proved migration.
+
+For each semantic contract, select a single primary M3 implementation only after differential
+correctness and measured efficiency gates. Alternative encodings/providers remain behind a small
+focused compatibility/provider package; they do not create parallel public collection families.
+Short JDK-like names are preferred for new non-JDK public types when they remain unambiguous.
+
+No representation is promoted merely because it is compact. The JDK contract, iterator/view,
+serialization, concurrency, callback and exception semantics remain authoritative.
