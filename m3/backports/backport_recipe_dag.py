@@ -387,7 +387,11 @@ def _local_atom_id(phase: str) -> str:
 def _work_ref(atom: Atom) -> str:
     if atom.phase == "RECIPE":
         if atom.state.startswith("MATERIALIZED_RECIPE"):
-            return "m3/backports/recipes/" + atom.recipe_ref
+            return ";".join(
+                "m3/backports/recipes/" + value
+                for value in atom.recipe_ref.split(";")
+                if value
+            )
         return "AUTHOR_RECIPE:" + atom.work_id
     return "PROOF:" + atom.work_id + ":" + atom.phase
 
