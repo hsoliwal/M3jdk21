@@ -104,7 +104,7 @@ public interface M3Utf16ArrayView extends CharSequence {
 
     default int lastIndexOf(CharSequence needle, int fromIndex) {
         CharSequence checked = Objects.requireNonNull(needle, "needle");
-        if (checked.length() == 0) return Math.min(Math.max(fromIndex, 0), length());
+        if (checked.length() == 0) return fromIndex < 0 ? -1 : Math.min(fromIndex, length());
         int start = Math.min(fromIndex, length() - checked.length());
         for (int at = start; at >= 0; at--) {
             int index = 0;
