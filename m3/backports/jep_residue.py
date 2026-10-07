@@ -112,8 +112,10 @@ def _recipe_evidence(root: Path, jep: int) -> tuple[str, tuple[str, ...], dict[s
             if needle in candidate.name.lower():
                 evidence.append(candidate.relative_to(root).as_posix())
 
-    if any(path.startswith("m3/backports/recipes/") for path in evidence):
+    if receipt:
         state = "MATERIALIZED_PACKET"
+    elif any(path.startswith("m3/backports/recipes/") for path in evidence):
+        state = "PACKET_EVIDENCE"
     elif evidence:
         state = "RECIPE_CLASS"
     else:
