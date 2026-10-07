@@ -44,7 +44,7 @@ M3JDK21 runtime branch:
 
 Applied/fixed-point revision:
 
-`b11611609d378abba3a8a9e10edf9839a5c5676a`
+`7dc72fdf9733951bcc802f499a13871188d2c34a`
 
 Direct manifest comparison after moving recipe custody to Synexia:
 
@@ -92,13 +92,13 @@ Target-side source invariants enforce the absence of local duplicate String/TQ r
 
 Follow-up Synexia PR: https://github.com/hsoliwal/com.synexia/pull/9672  
 Branch: `m3/m3jdk21-string-recipe-receiver-refresh-20261007`  
-Pinned refresh revision: `6c95fd464f7981e5cf7e988ddba3822d14d3f5dd`
+Pinned refresh revision: `0584a6713e70860dca42410088085d980f1044c2`
 
 This follow-up promotes the receiver's latest workflow and fail-closed invariant gate back into the
 already-canonical Synexia recipe established by merged PR #9597.
 
 Readback at M3JDK21 receiver head
-`b11611609d378abba3a8a9e10edf9839a5c5676a`:
+`7dc72fdf9733951bcc802f499a13871188d2c34a`:
 
 - Java/runtime/test targets: **19/19 exact**;
 - text/native/HotSpot/governance targets: **11/11 exact**;
@@ -109,12 +109,12 @@ Readback at M3JDK21 receiver head
 ```text
 recipe_name	com.synexia.rewrite.M3Jdk21StringHistoryConvergence
 synexia_repository	hsoliwal/com.synexia
-synexia_commit	6c95fd464f7981e5cf7e988ddba3822d14d3f5dd
+synexia_commit	0584a6713e70860dca42410088085d980f1044c2
 synexia_java_manifest	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3jdk/jdk21-hash-pinned/synexia-m3-string-history-convergence/manifest.tsv
 synexia_text_manifest	synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/m3jdk/jdk21-hash-pinned-text/m3-string-history-convergence/manifest.tsv
 synexia_java_manifest_sha256	b5ae63e4af47ed5c9ff10645d479d5081e8370990602094ab26da718f100dc6a
-synexia_text_manifest_sha256	4e767b9bc273b18793704cc2577ecc3cbca879c1a0bb9c1779747b65e7a9d125
-m3jdk21_applied_result_commit	b11611609d378abba3a8a9e10edf9839a5c5676a
+synexia_text_manifest_sha256	795ff4342c9e5ed61cdc38123b9df6de0c335d4fb14bfbc9e6c3078d7cae6361
+m3jdk21_applied_result_commit	7dc72fdf9733951bcc802f499a13871188d2c34a
 runtime_owner	M3JDK21
 recipe_owner	Synexia
 runtime_dependency_on_synexia	false
@@ -133,3 +133,12 @@ The old target-local descriptors
 were removed because their behavior is already subsumed by the canonical Synexia
 `M3Jdk21StringHistoryConvergence` packet. M3JDK21 source invariants now forbid those duplicate
 recipe-owner entry points from returning.
+
+
+### Sealed target-state boundary
+
+The hash-pinned recipe target state is
+`7dc72fdf9733951bcc802f499a13871188d2c34a`.
+
+Receipt-only commits after that state are deliberately outside the recipe target inventory, so
+updating this document does not recursively change the sealed applied-result identity.
