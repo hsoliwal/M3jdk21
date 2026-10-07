@@ -123,5 +123,42 @@
         </plugins>
       </build>
     </profile>
+
+    <profile>
+      <id>m3-synexia-recipe-mirror-v2</id>
+      <dependencies>
+        <dependency>
+          <groupId>com.synexia</groupId>
+          <artifactId>synexia-openrewrite-recipes</artifactId>
+          <version>${m3.synexia.version}</version>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>3.5.0</version>
+            <executions>
+              <execution>
+                <id>verify-proof-bound-synexia-recipe-mirror</id>
+                <phase>verify</phase>
+                <goals><goal>java</goal></goals>
+                <configuration>
+                  <mainClass>com.synexia.rewrite.M3Jdk21RecipeMirrorSnapshotCli</mainClass>
+                  <arguments>
+                    <argument>${project.basedir}/receiver/synexia-recipe-mirror-v2/m3jdk21-recipe-tree-audit-v2.tsv</argument>
+                    <argument>${project.basedir}/receiver/synexia-recipe-mirror-v2/m3jdk21-recipe-tree-audit-v2.root</argument>
+                    <argument>80b8534ad1e45002185fb3eeab233f98d3a7c0bd</argument>
+                  </arguments>
+                  <classpathScope>runtime</classpathScope>
+                  <cleanupDaemonThreads>false</cleanupDaemonThreads>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
   </profiles>
 </project>
