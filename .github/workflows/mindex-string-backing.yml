@@ -31,6 +31,7 @@ on:
       - 'test/jdk/java/lang/String/M3StringCanonicalDagTest.java'
       - 'test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java'
       - 'test/jdk/java/lang/String/M3StringInternTest.java'
+      - 'test/jdk/java/lang/StringBuilder/M3StringBuilderSearchTest.java'
       - 'test/jdk/jdk/internal/mindex/M3TQFactsTest.java'
       - 'test/jdk/java/util/regex/M3RegexLiteralTQTest.java'
       - 'test/jdk/java/util/regex/M3RegexReuseTest.java'
