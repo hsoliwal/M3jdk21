@@ -57,7 +57,7 @@ jobs:
         run: |
           set -euo pipefail
           cd m3/backports
-          python3 -m unittest -v test_file_delta_inventory.py test_generate_recipe_crates.py
+          python3 -m unittest -v test_file_delta_inventory.py test_generate_recipe_crates.py test_jep493_ga_policy.py
 
       - name: Inventory exact JDK21 to JDK24 deltas
         shell: bash
