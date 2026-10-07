@@ -10,7 +10,7 @@ receiver_recipe	com.m3.rewrite.backport.M3Jep496MlKemBackportRecipe
 java_crate	jdk24-jep496-mlkem
 vector_crate	jdk24-jep496-mlkem-vectors
 feature_product_targets	6
-focused_java_test_targets	1
+focused_java_test_targets	2
 vector_targets	2
 generic_post21_acvp_harness	NOT_IMPORTED
 broad_post21_determinism_harness	NOT_IMPORTED
