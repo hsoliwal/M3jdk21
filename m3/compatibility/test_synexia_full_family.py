@@ -24,6 +24,15 @@ class SynexiaFullFamilyPolicyTest(unittest.TestCase):
         self.assertEqual("false", pin["automatic_application"])
         self.assertEqual("false", pin["target_relicense_authority"])
         self.assertEqual("false", pin["family_completion"])
+        self.assertEqual("9677", pin["authority_recovery_pr"])
+        self.assertEqual(
+            "73c5e9335b821270d04f2b6912c62fc279a0ba9f",
+            pin["authority_recovery_commit"],
+        )
+        self.assertEqual(
+            "CURRENT_TREE_EXACT_BLOB_RECOVERY_PR_OPEN",
+            pin["authority_recovery_state"],
+        )
         self.assertEqual(4770, catalogue["metadata"]["counts"]["total"])
         self.assertEqual(
             {"NOT_EVALUATED_IN_THIS_LEDGER": 4770},
