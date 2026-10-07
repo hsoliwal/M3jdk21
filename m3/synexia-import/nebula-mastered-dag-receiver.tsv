@@ -1,2 +1,2 @@
 schema	proof_repository	proof_branch	proof_pr	proof_commit	proof_state	recipe_first	final_transfer	semantic_coverage	fixed_point	original_build	target_repository	authority
-M3_NEBULA_MASTERED_DAG_RECEIVER_V1	hsoliwal/nebula	m3/final-mastered-convergence-proof-20261007	96	75277c72c16c86ac66b11661661f2b5a22c9a9b4	FAILED_CURRENT_HEAD	FAILURE	FAILURE	PENDING_99_REPROOF	PENDING	PENDING	hsoliwal/M3jdk21	EVIDENCE_ONLY
+M3_NEBULA_MASTERED_DAG_RECEIVER_V1	hsoliwal/nebula	m3/final-mastered-reproof-20261007-v2	97	d731968186ce640ee196699046dc8e5bfae65e3d	PENDING_HOSTED_RUN	PENDING	PENDING	PENDING_99_REPROOF	PENDING	PENDING	hsoliwal/M3jdk21	EVIDENCE_ONLY
