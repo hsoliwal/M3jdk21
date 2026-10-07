@@ -1,0 +1,92 @@
+{
+  "schema": "M3_RELEASE_CONTRACT_V1",
+  "release": {
+    "product": "M3JDK21",
+    "tier": "P0_TECHNICAL_PREVIEW",
+    "upstream_repository": "openjdk/jdk21",
+    "upstream_baseline": "890adb6410dab4606a4f26a942aed02fb2f55387",
+    "release_branch": "release/first-clean-boundary-20261007",
+    "single_fork_commit_required": true,
+    "released_history_immutable_after_tag": true
+  },
+  "priority_order": [
+    "M3_STRING",
+    "REGEX_PRECOMPUTE",
+    "GENERAL_PRECOMPUTE",
+    "ARRAYS",
+    "COLLECTIONS",
+    "SWT_ECLIPSE_IDE"
+  ],
+  "claim_policy": {
+    "evidence_before_claim": true,
+    "marketing_must_reference_proof": true,
+    "self_reported_completion_forbidden": true,
+    "catalogue_or_recipe_execution_is_not_runtime_acceptance": true
+  },
+  "current_claims": {
+    "immutable_text_foundation": "IMPLEMENTED_WITH_REPOSITORY_TEST_SURFACE",
+    "java_lang_string_backed_by_m3_string": "NOT_CLAIMED",
+    "full_regex_precompute": "NOT_CLAIMED",
+    "full_jtreg_compatibility": "NOT_CLAIMED",
+    "performance_superiority_over_openjdk21": "NOT_CLAIMED",
+    "arrays_qualified": "NOT_CLAIMED",
+    "collections_qualified": "NOT_CLAIMED",
+    "swt_eclipse_ide_qualified": "NOT_CLAIMED"
+  },
+  "mandatory_release_gates": [
+    "RIGHTS_AND_LICENSE_BOUNDARY",
+    "SOURCE_TREE_AND_UPSTREAM_BASELINE",
+    "OPENJDK_SANITY_MATRIX",
+    "M3_FOUNDATION_TESTS",
+    "PRECOMPUTE_JAVA_DIFFERENTIAL",
+    "PRECOMPUTE_JNI_NATIVE_PARITY",
+    "M3_MAVEN_CONTROL_REACTOR",
+    "STRING_UTF16_CONTRACT",
+    "RELEASE_CLAIMS_VALIDATION",
+    "PROOF_PACK_SHA256"
+  ],
+  "claim_upgrade_gates": {
+    "java_lang_string_backed_by_m3_string": [
+      "jdk_product_build",
+      "relevant_jtreg",
+      "interpreter",
+      "c1",
+      "c2",
+      "gc_matrix",
+      "cds",
+      "utf16_and_unpaired_surrogate_contract",
+      "substring_equals_hash_compare_intern_contract"
+    ],
+    "full_regex_precompute": [
+      "at_least_10000_regex_cases",
+      "java_util_regex_semantic_oracle",
+      "cold_compile_vs_warm_reuse",
+      "cache_key_owner_snapshot_options_version",
+      "invalidation_and_corruption_refusal",
+      "java_jni_native_parity_where_native_is_used"
+    ],
+    "performance_superiority_over_openjdk21": [
+      "same_host_same_toolchain_ab",
+      "exact_openjdk_baseline",
+      "raw_results_preserved",
+      "cold_and_warm_results",
+      "cpu_time",
+      "allocation",
+      "heap",
+      "native_memory_or_rss",
+      "gc",
+      "startup",
+      "statistical_summary_and_variance"
+    ]
+  },
+  "forbidden_unqualified_release_phrases": [
+    "drop-in String replacement",
+    "fully compatible",
+    "full jtreg pass",
+    "faster than OpenJDK",
+    "zero allocation String",
+    "all regex is precomputed",
+    "production ready",
+    "all collections optimized"
+  ]
+}
