@@ -33,6 +33,41 @@ class SynexiaPublicTargetPolicyTest(unittest.TestCase):
             rows,
         )
 
+    def test_checked_in_apache_handoff_pin_is_qualification_only(self) -> None:
+        pin = policy.load_apache_handoff_pin()
+        self.assertEqual("hsoliwal/com.synexia", pin["source_repository"])
+        self.assertEqual("9642", pin["source_pr"])
+        self.assertEqual("Apache-2.0", pin["source_license"])
+        self.assertEqual("SOURCE_MERGED_PROOF_PENDING", pin["delivery_state"])
+        self.assertEqual("QUALIFICATION_INPUT_ONLY", pin["target_role"])
+        self.assertEqual("false", pin["automatic_application"])
+        self.assertEqual("false", pin["target_relicense_authority"])
+        self.assertEqual(
+            "GPL-2.0-only WITH Classpath-exception-2.0",
+            pin["openjdk_retained_license"],
+        )
+
+    def test_merged_proof_pending_apache_handoff_pin_cannot_enable_application_or_relicense(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            checked = policy.APACHE_HANDOFF_PIN.read_text(encoding="utf-8")
+
+            automatic = root / "automatic.tsv"
+            automatic.write_text(
+                checked.replace("automatic_application\tfalse", "automatic_application\ttrue"),
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "pin drift|automatic"):
+                policy.load_apache_handoff_pin(automatic)
+
+            relicense = root / "relicense.tsv"
+            relicense.write_text(
+                checked.replace("target_relicense_authority\tfalse", "target_relicense_authority\ttrue"),
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "pin drift|relicense"):
+                policy.load_apache_handoff_pin(relicense)
+
     def test_valid_first_party_packet_is_admitted(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             packet = Path(directory) / "packet.tsv"
