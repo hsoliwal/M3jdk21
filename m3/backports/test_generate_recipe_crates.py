@@ -416,6 +416,70 @@ class GenerateRecipeCratesTest(unittest.TestCase):
             self.assertTrue(reasons[executable].startswith("TYPED_EXCLUSION_FILE_MODE:"))
             self.assertTrue(reasons[binary].startswith("TYPED_EXCLUSION_ENCODING:"))
 
+    def test_exact_donor_ref_controls_candidate_bytes_and_crate_provenance(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            repo = root / "repo"
+            out = root / "out"
+            subprocess.run(("git", "init", "-q", str(repo)), check=True)
+            self.git(repo, "config", "user.email", "fixture@example.invalid")
+            self.git(repo, "config", "user.name", "Fixture")
+
+            path = "src/java.base/share/classes/p/A.java"
+            self.write(repo, path, "package p; final class A { int x() { return 21; } }\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk21")
+            self.git(repo, "tag", "jdk-21+35")
+
+            feature_text = "package p; final class A { int x() { return 22; } }\n"
+            self.write(repo, path, feature_text)
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "feature")
+            donor = subprocess.check_output(
+                ("git", "-C", str(repo), "rev-parse", "HEAD"), text=True
+            ).strip()
+
+            self.write(repo, path, "package p; final class A { int x() { return 2200; } }\n")
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "later-ga")
+            self.git(repo, "tag", "jdk-22+36")
+
+            candidates, exclusions = self.mod.candidates(
+                repo,
+                22,
+                selected={path},
+                all_candidates=False,
+                donor_ref=donor,
+            )
+            self.assertEqual([], exclusions)
+            self.assertEqual([path], [row.path for row in candidates])
+            self.assertEqual(feature_text, candidates[0].after_text)
+
+            crates = self.mod.materialize(
+                out,
+                22,
+                candidates,
+                exclusions,
+                crate_size=1,
+                donor_ref=donor,
+            )
+            self.assertEqual(["jdk22-0001"], crates)
+            with (out / "CRATES.tsv").open(
+                encoding="utf-8", newline=""
+            ) as handle:
+                rows = list(csv.DictReader(handle, delimiter="\t"))
+            self.assertEqual(1, len(rows))
+            self.assertEqual("jdk-21+35", rows[0]["baseline_ref"])
+            self.assertEqual(donor, rows[0]["donor_ref"])
+
+            crate = out / self.mod.RESOURCE_ROOT / "jdk22-0001"
+            with (crate / "manifest.tsv").open(
+                encoding="utf-8", newline=""
+            ) as handle:
+                manifest = list(csv.reader(handle, delimiter="\t"))
+            self.assertEqual(self.mod._sha256_text(feature_text), manifest[0][2])
+            self.assertEqual(feature_text, (crate / manifest[0][3]).read_text(encoding="utf-8"))
+
     def test_crate_size_rejects_zero_and_above_budget(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             out = Path(temp) / "out"
