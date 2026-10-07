@@ -1,0 +1,15 @@
+M3 immutable array substrate
+Copyright 2026 Hitesh Soliwal and Contributors to the Synexia Project
+
+Adapted from hsoliwal/com.synexia Apache-2.0 MIndex/MatIndex array-view,
+shared-array, segmented-array and JNI-boundary work. The target uses M3JDK21
+naming and intentionally does not change Java array language/JVM semantics.
+
+OpenJDK retains its existing licensing. This separately built Apache-2.0
+module is a proving ground for internal immutable/snapshot/range owners and
+explicit materialization boundaries; it is not a replacement for public
+byte[], char[], int[], long[] or T[] contracts.
+
+See provenance.json and m3/docs/synexia-array-port-map.tsv for exact donor
+revision/path/blob identities, adaptations, deferred shared/mapped owners and
+remaining JDK integration gates.
