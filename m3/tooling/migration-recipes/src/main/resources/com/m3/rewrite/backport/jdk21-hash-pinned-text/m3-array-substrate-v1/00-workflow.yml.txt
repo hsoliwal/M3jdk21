@@ -1,0 +1,66 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Array Substrate
+
+on:
+  pull_request:
+    paths:
+      - 'm3/arrays/**'
+      - 'm3/docs/m3jdk21-porting-invariant.md'
+      - 'm3/docs/name-mapping.json'
+      - 'm3/docs/synexia-array-port-map.tsv'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-array-substrate.yml'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3-array-substrate-v1/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-array-substrate-v1/**'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3ArraySubstrateRecipeTest.java'
+      - '.github/workflows/m3-array-substrate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recipe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Recipe fixed point and refusal
+        run: >
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
+          -Dtest=M3ArraySubstrateRecipeTest
+          test
+
+  java:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Immutable array contracts
+        run: mvn -B -ntp -f m3/arrays/pom.xml test
+      - name: Mapping JSON syntax
+        run: python3 -m json.tool m3/docs/name-mapping.json >/dev/null
+      - name: Provenance JSON syntax
+        run: python3 -m json.tool m3/arrays/provenance.json >/dev/null
+
+  native:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: JNI and C11 parity
+        run: mvn -B -ntp -f m3/arrays/pom.xml -Pnative-linux test
