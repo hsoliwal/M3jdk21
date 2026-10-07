@@ -113,7 +113,7 @@ final class M3IndexDbFingerprintV1ParityTest {
                 "ascii",
                 "Ω",
                 "😀",
-                "a\u0000b",
+                "a" + (char) 0 + "b",
                 "line1\nline2",
                 "𝄞music")) {
             assertEquals(
