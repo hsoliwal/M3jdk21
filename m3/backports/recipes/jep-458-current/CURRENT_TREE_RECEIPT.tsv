@@ -6,7 +6,7 @@ java_targets	21
 text_native_targets	5
 total_targets	26
 base_branch	master
-base_commit	80b8534ad1e45002185fb3eeab233f98d3a7c0bd
+base_commit	5cef0a5b4831db0346fccdd0079d3d28d820a24e
 recipe_replay_source_delta	0
 current_tree_state	REVIEWED_POSTIMAGES_ALREADY_PRESENT
 recipe_junit	PENDING_HOSTED_PROOF
@@ -14,6 +14,6 @@ openjdk_image_build	PENDING_HOSTED_PROOF
 focused_jtreg	PENDING_HOSTED_PROOF
 runtime_smoke	PENDING_HOSTED_PROOF
 promotion	NOT_AUTHORIZED
-proof_refresh_base	80b8534ad1e45002185fb3eeab233f98d3a7c0bd
+proof_refresh_base	5cef0a5b4831db0346fccdd0079d3d28d820a24e
 proof_refresh_requested	2026-10-07
-proof_branch	m3/jep458-proof-refresh-v2-20261007
+proof_branch	m3/jep458-proof-refresh-current-20261007
