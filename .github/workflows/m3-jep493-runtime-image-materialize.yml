@@ -90,7 +90,7 @@ jobs:
           set -euo pipefail
           python3 -m py_compile m3/backports/file_delta_inventory.py m3/backports/generate_recipe_crates.py m3/backports/materialize_generated_crates.py
           cd m3/backports
-          python3 -m unittest -v test_file_delta_inventory.py test_generate_recipe_crates.py test_materialize_generated_crates.py
+          python3 -m unittest -v test_file_delta_inventory.py test_generate_recipe_crates.py test_materialize_generated_crates.py test_jep493_ga_policy.py
 
       - name: 3 - Fetch pinned OpenJDK 21 and 24 GA trees
         shell: bash
