@@ -231,6 +231,162 @@ final class M3String implements CharSequence {
         return M3StringPool.concat(this, Objects.requireNonNull(other, "other"));
     }
 
+    M3String indent(int amount) {
+        if (length() == 0) return EMPTY;
+
+        int lineCount = 0;
+        long contentUnits = 0L;
+        for (int index = 0; index < length();) {
+            int end = index;
+            while (end < length()) {
+                char unit = charAt(end);
+                if (unit == '\n' || unit == '\r') break;
+                end++;
+            }
+            lineCount++;
+            contentUnits += end - index;
+            if (end == length()) {
+                index = end;
+            } else if (charAt(end) == '\r'
+                    && end + 1 < length()
+                    && charAt(end + 1) == '\n') {
+                index = end + 2;
+            } else {
+                index = end + 1;
+            }
+        }
+
+        if (amount > 0) {
+            long output = contentUnits + lineCount;
+            output = Math.addExact(output, Math.multiplyExact((long) lineCount, amount));
+            if (output > Integer.MAX_VALUE) {
+                throw new OutOfMemoryError("Required length exceeds implementation limit");
+            }
+        }
+
+        M3String newline = M3StringPool.internUnit('\n');
+        M3String spaces =
+                amount > 0 ? M3StringPool.internUnit(' ').repeat(amount) : EMPTY;
+        ArrayList<M3String> pieces = new ArrayList<>(Math.max(2, lineCount * 3));
+        for (int index = 0; index < length();) {
+            int end = index;
+            while (end < length()) {
+                char unit = charAt(end);
+                if (unit == '\n' || unit == '\r') break;
+                end++;
+            }
+
+            M3String line = slice(index, end);
+            if (amount > 0) {
+                pieces.add(spaces);
+                if (line.length() != 0) pieces.add(line);
+            } else if (amount == Integer.MIN_VALUE) {
+                int start = line.facts().stripStart;
+                if (start < line.length()) pieces.add(line.slice(start, line.length()));
+            } else if (amount < 0) {
+                int start = Math.min(-amount, line.facts().stripStart);
+                if (start < line.length()) pieces.add(line.slice(start, line.length()));
+            } else if (line.length() != 0) {
+                pieces.add(line);
+            }
+            pieces.add(newline);
+
+            if (end == length()) {
+                index = end;
+            } else if (charAt(end) == '\r'
+                    && end + 1 < length()
+                    && charAt(end + 1) == '\n') {
+                index = end + 2;
+            } else {
+                index = end + 1;
+            }
+        }
+        return joinValues(pieces);
+    }
+
+    M3String stripIndent() {
+        int sourceLength = length();
+        if (sourceLength == 0) return EMPTY;
+
+        char last = charAt(sourceLength - 1);
+        boolean optOut = last == '\n' || last == '\r';
+        int outdent = optOut ? 0 : Integer.MAX_VALUE;
+        int lastLineStart = 0;
+        int lastLineEnd = 0;
+
+        for (int index = 0; index < sourceLength;) {
+            int end = index;
+            while (end < sourceLength) {
+                char unit = charAt(end);
+                if (unit == '\n' || unit == '\r') break;
+                end++;
+            }
+            M3String line = slice(index, end);
+            if (!optOut) {
+                int leading = line.facts().stripStart;
+                if (leading != line.length()) outdent = Math.min(outdent, leading);
+            }
+            lastLineStart = index;
+            lastLineEnd = end;
+
+            if (end == sourceLength) {
+                index = end;
+            } else if (charAt(end) == '\r'
+                    && end + 1 < sourceLength
+                    && charAt(end + 1) == '\n') {
+                index = end + 2;
+            } else {
+                index = end + 1;
+            }
+        }
+
+        if (!optOut) {
+            M3String lastLine = slice(lastLineStart, lastLineEnd);
+            M3StringFacts lastFacts = lastLine.facts();
+            if (lastFacts.stripStart == lastLine.length()) {
+                outdent = Math.min(outdent, lastLine.length());
+            }
+            if (outdent == Integer.MAX_VALUE) outdent = 0;
+        }
+
+        M3String newline = M3StringPool.internUnit('\n');
+        ArrayList<M3String> pieces = new ArrayList<>();
+        boolean firstLine = true;
+        for (int index = 0; index < sourceLength;) {
+            int end = index;
+            while (end < sourceLength) {
+                char unit = charAt(end);
+                if (unit == '\n' || unit == '\r') break;
+                end++;
+            }
+
+            if (!firstLine) pieces.add(newline);
+            firstLine = false;
+
+            M3String line = slice(index, end);
+            M3StringFacts facts = line.facts();
+            int firstNonWhitespace = facts.stripStart;
+            int lastNonWhitespace = facts.stripEnd;
+            int incidentalWhitespace = Math.min(outdent, firstNonWhitespace);
+            if (firstNonWhitespace <= lastNonWhitespace
+                    && incidentalWhitespace < lastNonWhitespace) {
+                pieces.add(line.slice(incidentalWhitespace, lastNonWhitespace));
+            }
+
+            if (end == sourceLength) {
+                index = end;
+            } else if (charAt(end) == '\r'
+                    && end + 1 < sourceLength
+                    && charAt(end + 1) == '\n') {
+                index = end + 2;
+            } else {
+                index = end + 1;
+            }
+        }
+        if (optOut) pieces.add(newline);
+        return joinValues(pieces);
+    }
+
     M3String repeat(int repetitions) {
         if (repetitions < 0) throw new IllegalArgumentException("count is negative: " + repetitions);
         if (repetitions == 0 || length() == 0) return EMPTY;
