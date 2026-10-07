@@ -909,6 +909,27 @@ if "M3StringBuilderInteropTest.java" not in workflow:
 if "M3StringBuilderInteropTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java" not in workflow:
     fail("M3 String workflow does not execute builder interop proof")
 
+# History-qualified M3 literal split is a conservative multi-unit regex subset only.
+for fragment in [
+    "static boolean isConservativeLiteralRegex(String expression)",
+]:
+    if fragment not in m3:
+        fail(f"M3 literal split classifier missing: {fragment}")
+for fragment in [
+    "regex.length() > 1",
+    "M3String.isConservativeLiteralRegex(regex)",
+    "return split(storage, M3String.canonicalize(regex), limit, withDelimiters);",
+    "M3String storage, M3String delimiter, int limit, boolean withDelimiters",
+    "storage.indexOf(delimiter, off)",
+    "substring(next, next + delimiterLength)",
+]:
+    if fragment not in string:
+        fail(f"M3 literal split route missing: {fragment}")
+if "Pattern pattern = Pattern.compile(regex);" not in string:
+    fail("general regex split fallback missing")
+if (ROOT / "src/java.base/share/classes/java/lang/SubM3String.java").exists():
+    fail("donor SubMIndexString taxonomy was copied instead of owner+coordinate reuse")
+
 # M3-backed constructors must store only the empty compatibility sentinel.
 if string.count("storage.compatibilityValue()") < 4:
     fail("M3-backed String constructors no longer consistently use the empty sentinel")
@@ -1056,6 +1077,7 @@ for fragment in [
     "MIndexUtf16RangeFacts\tM3StringOwner.rangeFacts\tIMPLEMENTED",
     "MIndexRegexTrigramQuery\tjdk.internal.mindex.M3TQ\tIMPLEMENTED",
     "MIndexStringSearchPlan\tjava.lang.M3StringSearchPrecompute\tIMPLEMENTED",
+    "MIndexString split/splitWithDelimiters indexed-result repair\tjava.lang.String + java.lang.M3String\tIMPLEMENTED_HISTORY_RECOVERY",
     "DO_NOT_PORT_TO_JAVA_LANG_STRING",
 ]:
     if fragment not in port_map:
@@ -1080,6 +1102,7 @@ for required_gate in [
     "M3StringPrecomputeSearchTest.java",
     "M3StringPositionPrecomputeTest.java",
     "M3StringInternTest.java",
+    "M3StringLiteralSplitTest.java",
     "nativeEncoding/StringPlatformChars.java",
     "M3TQFactsTest.java",
     "M3RegexLiteralTQTest.java",
