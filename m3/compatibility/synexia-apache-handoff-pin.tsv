@@ -7,7 +7,7 @@ source_manifest_sha256	98274241cc6a0655e600d5fb5c58d70170aca0111770f95c14609041a
 source_license	Apache-2.0
 copyright_notice	Copyright 2026 Hitesh Soliwal and contributors
 canonical_owner	synexia-m3-recipe
-delivery_state	PENDING_SYNEXIA_MERGE
+delivery_state	SOURCE_MERGED_PROOF_PENDING
 target_role	QUALIFICATION_INPUT_ONLY
 automatic_application	false
 target_relicense_authority	false
