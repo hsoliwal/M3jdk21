@@ -3,6 +3,9 @@ name: M3 Synexia public-target policy
 on:
   pull_request:
     paths:
+      - "AGENTS.md"
+      - "m3/docs/name-mapping.json"
+      - "m3/docs/m3jdk21-porting-invariant.md"
       - "m3/docs/SYNEXIA_CONVERGENCE_MODEL.md"
       - "m3/compatibility/synexia-public-target-policy.tsv"
       - "m3/compatibility/synexia-apache-handoff-pin.tsv"

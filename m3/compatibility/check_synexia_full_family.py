@@ -140,6 +140,114 @@ def validate_family_index() -> int:
     return len(rows)
 
 
+
+# Current continuation contract; a successor must reconcile target proof before changing this baseline.
+RECEIVING_ORDER = ("STRING", "ARRAYS", "COLLECTIONS", "AST_COMPILER", "REMAINING_FAMILIES")
+RECEIVING_GATES = {'STRING': ('canonical_owner_and_utf16_contract',
+            'regex_v7_codec_and_bootstrap_closure',
+            'java_jni_parity_and_lifetimes',
+            'jdk_build_jtreg_interpreter_c1_c2_gc_cds',
+            'cold_warm_cpu_heap_native_memory'),
+ 'ARRAYS': ('fixed_length_reified_type_and_array_store',
+            'bounds_overlap_clone_and_arraycopy',
+            'gc_barriers_and_jni_acquire_release',
+            'jdk_build_jtreg_interpreter_c1_c2',
+            'cold_warm_cpu_heap_native_memory'),
+ 'COLLECTIONS': ('per_concrete_type_contract',
+                 'null_equality_identity_order_views_iterators',
+                 'serialization_subclass_jmm_concurrency',
+                 'no_retained_per_element_structural_objects',
+                 'jdk_build_jtreg_and_resource_measurements'),
+ 'AST_COMPILER': ('consumer_format_version_and_invalidation',
+                  'jdk_compiler_module_boundary',
+                  'attributed_multipass_behavior_and_opaque_payloads',
+                  'java21_source_classfile_and_bootstrap',
+                  'bounded_precompute_and_resource_measurements'),
+ 'REMAINING_FAMILIES': ('complete_path_and_non_prefix_dependency_accounting',
+                        'consumer_module_and_lifetime_contract',
+                        'file_generation_dag_effects_and_image_invalidation',
+                        'domain_distributed_hardware_explicit_disposition',
+                        'target_platform_runtime_and_resource_measurements')}
+
+
+def unique_json_object(pairs: list[tuple[str, object]]) -> dict:
+    result = {}
+    for key, value in pairs:
+        if key in result:
+            raise ValueError(f"duplicate receiving-map JSON key: {key}")
+        result[key] = value
+    return result
+
+
+def validate_receiving_sequence(path: Path = ROOT / "m3/docs/name-mapping.json") -> dict:
+    data = json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=unique_json_object)
+    policy = data.get("porting_invariant")
+    if not isinstance(policy, dict) or policy.get("id") != "M3-JDK-PORT-1":
+        raise ValueError("missing canonical porting invariant")
+    plan = policy.get("receiving_sequence")
+    if not isinstance(plan, dict):
+        raise ValueError("missing receiving sequence")
+    exact = {
+        "schema": "M3_RECEIVING_SEQUENCE_V1",
+        "order": list(RECEIVING_ORDER),
+        "active_phase": "STRING",
+        "scope": "ORDERED_QUALIFICATION_PLAN_NOT_RUNTIME_ACCEPTANCE",
+        "public_jdk_names_unchanged": True,
+        "canonical_payload_owner_unchanged": True,
+        "recipe_first": True,
+        "serial_file_atom_replacement": True,
+        "first_party_license": "Apache-2.0",
+        "copyright_notice": "Copyright 2026 Hitesh Soliwal and contributors",
+        "abstract_ideas": "PROVENANCE_NOT_COPYRIGHTED_EXPRESSION",
+        "third_party_and_openjdk": "PRESERVE_PER_FILE_LICENSE_COPYRIGHT_NOTICE",
+        "automatic_application": False,
+        "family_completion": False,
+        "repository_completion": False,
+        "source_inventory_revision": "7d2133f1412a9e7295296c3f86baae577bb3251c",
+        "source_inventory_named_paths": 4770,
+        "source_inventory_checked_roots": 13,
+        "source_inventory_disposition": "NOT_EVALUATED_IN_THIS_LEDGER",
+        "donor_review_order": ["EXISTING_CATALOGUE_AND_FIRST_PARTY", "LEETCODE", "HACKERRANK", "GEEKSFORGEEKS", "LICENSED_PINNED_GITHUB"],
+        "donor_dispositions": ["COPY", "ADAPT", "CLEAN_ROOM", "EVIDENCE_ONLY", "REJECT"],
+    }
+    for key, expected in exact.items():
+        value = plan.get(key)
+        if type(value) is not type(expected) or value != expected:
+            raise ValueError(f"receiving sequence contract drift: {key}")
+    phases = plan.get("phases")
+    if not isinstance(phases, list) or len(phases) != len(RECEIVING_ORDER):
+        raise ValueError("missing or extra receiving phase")
+    for index, (phase, phase_id) in enumerate(zip(phases, RECEIVING_ORDER)):
+        if not isinstance(phase, dict) or phase.get("id") != phase_id:
+            raise ValueError("reordered, duplicate or unknown receiving phase")
+        if "predecessor" not in phase or phase["predecessor"] != (RECEIVING_ORDER[index - 1] if index else None):
+            raise ValueError(f"receiving predecessor drift: {phase_id}")
+        expected_state = "QUALIFICATION_REQUIRED" if index == 0 else "WAITING_FOR_PREDECESSOR"
+        if phase.get("state") != expected_state or phase.get("acceptance_receipts") != []:
+            raise ValueError(f"reviewed successor with target evidence required: {phase_id}")
+        if phase.get("required_gates") != list(RECEIVING_GATES[phase_id]):
+            raise ValueError(f"missing or changed target gates: {phase_id}")
+        if not isinstance(phase.get("scope"), str) or not phase["scope"].strip():
+            raise ValueError(f"missing scope: {phase_id}")
+    if not HEX40.fullmatch(str(plan.get("target_baseline", ""))):
+        raise ValueError("missing exact target baseline")
+    for field in ("advance_rule", "dependency_rule", "enforcement_boundary"):
+        if not isinstance(plan.get(field), str) or not plan[field].strip():
+            raise ValueError(f"missing receiving boundary: {field}")
+    if plan.get("atom_evidence") != ['source_revision_path_blob_sha256',
+ 'license_copyright_notice_and_intake_mode',
+ 'dependency_effect_and_history_inventory',
+ 'target_owner_preimage_postimage',
+ 'synexia_recipe_revision_and_manifest',
+ 'locked_api_behavior_and_failure_oracle',
+ 'executed_build_contract_and_applicable_target_gates',
+ 'fixed_point_replay_and_drift_refusal',
+ 'cpu_heap_native_memory_and_cold_warm_results',
+ 'pending_or_excluded_reason']:
+        raise ValueError("missing or changed per-atom evidence contract")
+    return plan
+
+
 def main(argv: list[str]) -> int:
     if len(argv) != 1:
         print("usage: check_synexia_full_family.py", file=sys.stderr)
@@ -147,10 +255,12 @@ def main(argv: list[str]) -> int:
     pin = load_pin()
     catalogue = validate_catalogue(pin)
     families = validate_family_index()
+    plan = validate_receiving_sequence()
     print(
         "SYNEXIA_FULL_FAMILY_PIN_PASS "
         f"source={pin['source_commit']} paths={catalogue['metadata']['counts']['total']} "
-        f"families={families} license={pin['first_party_license']} completion=false"
+        f"families={families} license={pin['first_party_license']} "
+        f"active={plan['active_phase']} ordered_phases={len(plan['phases'])} completion=false"
     )
     return 0
 
