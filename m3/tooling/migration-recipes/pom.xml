@@ -85,7 +85,7 @@
             <dependencies>
               <dependency>
                 <groupId>com.synexia</groupId>
-                <artifactId>synexia-m3jdk21-recipe-mirror-verifier</artifactId>
+                <artifactId>synexia-openrewrite-recipes</artifactId>
                 <version>${m3.synexia.version}</version>
               </dependency>
             </dependencies>
@@ -129,7 +129,7 @@
       <dependencies>
         <dependency>
           <groupId>com.synexia</groupId>
-          <artifactId>synexia-openrewrite-recipes</artifactId>
+          <artifactId>synexia-m3jdk21-recipe-mirror-verifier</artifactId>
           <version>${m3.synexia.version}</version>
         </dependency>
       </dependencies>
