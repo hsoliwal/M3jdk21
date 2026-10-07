@@ -145,12 +145,13 @@ Suggested citation: Hitesh Soliwal and Contributors to the Synexia Project,
 ### Version 0.2 extension
 
 - **Version/date:** technical design paper v0.2, 7 October 2026.
-- **Publication source commit:** `ff5ff3612ecff63f4db76030ed86cf3e6bfed4f6`.
-- **Permanent reference:** [v0.2 paper at its source commit](https://github.com/hsoliwal/M3jdk21/blob/ff5ff3612ecff63f4db76030ed86cf3e6bfed4f6/m3/papers/M3_SHARED_STRUCTURE_AND_REUSABLE_COMPUTATION.md).
+- **Publication source commit:** `b4a6b240cd996e35649d58de1780514108b3fd34`.
+- **Permanent reference:** [v0.2 paper at its source commit](https://github.com/hsoliwal/M3jdk21/blob/b4a6b240cd996e35649d58de1780514108b3fd34/m3/papers/M3_SHARED_STRUCTURE_AND_REUSABLE_COMPUTATION.md).
 - **Added scope:** source-grounded hierarchical lexicons, separate spelling/
   lexeme/concept identity, exact lexical translation and family bundles,
   multilingual qualification, AST/binding boundaries, reuse across structured
-  data, and M3SDK as the wider qualified delivery direction for Synexia.
+  data, and M3SDK as the wider qualified delivery direction for Synexia, with
+  M3JDK21 as its Java runtime subset.
 - **Donor inspection revision:** `d9098bb5341a1b95750814044b8bb52616cc2c61`
   in `hsoliwal/com.synexia`; the paper links inspected owners and distinguishes
   historical focused receipts from fresh target qualification.
