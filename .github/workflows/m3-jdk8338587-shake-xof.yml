@@ -5,37 +5,6 @@ on:
   push:
     branches:
       - 'm3/jdk8338587-shake-*'
-    paths:
-      - 'src/java.base/share/classes/sun/security/provider/SHA3.java'
-      - 'test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java'
-      - 'm3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv'
-      - 'm3/backports/recipes/jdk-8338587-shake-xof/MATERIALIZED_BRANCH_READBACK.tsv'
-      - 'm3/backports/recipes/jdk-8338587-shake-xof/README.md'
-      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
-      - 'm3/backports/test_jep_residue.py'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipeTest.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/manifest.tsv'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/00-SHA3.java.after.txt'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/01-SHAKEXofCompatibility.java.after.txt'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/pre-SHA3.java.before.txt'
-      - '.github/workflows/m3-jdk8338587-shake-xof.yml'
-  pull_request:
-    paths:
-      - 'src/java.base/share/classes/sun/security/provider/SHA3.java'
-      - 'test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java'
-      - 'm3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv'
-      - 'm3/backports/recipes/jdk-8338587-shake-xof/MATERIALIZED_BRANCH_READBACK.tsv'
-      - 'm3/backports/recipes/jdk-8338587-shake-xof/README.md'
-      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
-      - 'm3/backports/test_jep_residue.py'
-      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipe.java'
-      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jdk8338587ShakeXofBackportRecipeTest.java'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/manifest.tsv'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/00-SHA3.java.after.txt'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/01-SHAKEXofCompatibility.java.after.txt'
-      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk24-jdk8338587-shake-xof/pre-SHA3.java.before.txt'
-      - '.github/workflows/m3-jdk8338587-shake-xof.yml'
   workflow_dispatch:
 
 permissions:
