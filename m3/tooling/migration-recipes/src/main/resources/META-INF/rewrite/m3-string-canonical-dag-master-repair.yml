@@ -2,7 +2,7 @@
 type: specs.openrewrite.org/v1beta/recipe
 name: com.m3.rewrite.backport.M3StringCanonicalDagMasterRepair
 displayName: Repair M3String canonical balanced DAG on current master
-description: Target-local exact OpenJDK adapter/proof for the canonical Synexia packet synexia.m3jdk.string.canonical-dag.20261006; executable portable verification/mastery lives in com.synexia.rewrite.M3StringCanonicalDagInvariant, while this recipe replays the M3JDK-specific hash-pinned repair.
+description: Target-local exact OpenJDK adapter/proof for the canonical Synexia packet synexia.m3jdk.string.canonical-dag.20261006 and portable history-convergence recipe com.synexia.rewrite.M3Jdk21StringHistoryConvergence; Synexia owns reusable recipe/provenance semantics, while this M3JDK-local recipe replays target-specific GPL/OpenJDK postimages and retains runtime/promotion authority without a Synexia runtime dependency.
 recipeList:
   - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
       crateName: jdk22-m3-string-canonical-dag-master-repair
