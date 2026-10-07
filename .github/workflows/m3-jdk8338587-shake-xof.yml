@@ -5,27 +5,7 @@ on:
   push:
     branches:
       - 'm3/jdk8338587-shake-*'
-    paths:
-      - 'src/java.base/share/classes/sun/security/provider/SHA3.java'
-      - 'test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java'
-      - 'm3/backports/recipes/jdk-8338587-shake-xof/**'
-      - 'm3/backports/recipes/j496/**'
-      - 'm3/backports/recipes/j497/**'
-      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
-      - 'm3/backports/test_jep_residue.py'
-      - 'm3/tooling/migration-recipes/**'
-      - '.github/workflows/m3-jdk8338587-shake-xof.yml'
   pull_request:
-    paths:
-      - 'src/java.base/share/classes/sun/security/provider/SHA3.java'
-      - 'test/jdk/sun/security/provider/MessageDigest/SHAKEXofCompatibility.java'
-      - 'm3/backports/recipes/jdk-8338587-shake-xof/**'
-      - 'm3/backports/recipes/j496/**'
-      - 'm3/backports/recipes/j497/**'
-      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
-      - 'm3/backports/test_jep_residue.py'
-      - 'm3/tooling/migration-recipes/**'
-      - '.github/workflows/m3-jdk8338587-shake-xof.yml'
   workflow_dispatch:
 
 permissions:
