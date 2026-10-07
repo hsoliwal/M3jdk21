@@ -108,3 +108,67 @@ failure:
     free(values);
     return (*env)->ExceptionCheck(env) ? NULL : result;
 }
+
+JNIEXPORT jintArray JNICALL
+Java_com_m3_precompute_M3SimilarityBatchNative_nativeScores(
+        JNIEnv *env,
+        jclass type,
+        jint query_length,
+        jlong query_hash,
+        jintArray lengths_array,
+        jlongArray hashes_array) {
+    (void)type;
+    if (query_length < 0 || lengths_array == NULL || hashes_array == NULL) {
+        throw_bad(env, "invalid M3 similarity input");
+        return NULL;
+    }
+    jsize count = (*env)->GetArrayLength(env, lengths_array);
+    if ((*env)->GetArrayLength(env, hashes_array) != count) {
+        throw_bad(env, "invalid M3 similarity geometry");
+        return NULL;
+    }
+
+    jintArray result = (*env)->NewIntArray(env, count);
+    if (result == NULL || count == 0) return result;
+
+    jint *lengths = (jint *)malloc((size_t)count * sizeof(jint));
+    jlong *hashes = (jlong *)malloc((size_t)count * sizeof(jlong));
+    jint *scores = (jint *)malloc((size_t)count * sizeof(jint));
+    if (lengths == NULL || hashes == NULL || scores == NULL) {
+        free(lengths);
+        free(hashes);
+        free(scores);
+        jclass oom = (*env)->FindClass(env, "java/lang/OutOfMemoryError");
+        if (oom != NULL) {
+            (void)(*env)->ThrowNew(env, oom, "M3 similarity JNI scratch");
+            (*env)->DeleteLocalRef(env, oom);
+        }
+        return NULL;
+    }
+
+    (*env)->GetIntArrayRegion(env, lengths_array, 0, count, lengths);
+    if ((*env)->ExceptionCheck(env)) goto score_failure;
+    (*env)->GetLongArrayRegion(env, hashes_array, 0, count, hashes);
+    if ((*env)->ExceptionCheck(env)) goto score_failure;
+
+    for (jsize row = 0; row < count; row++) {
+        if (lengths[row] < 0) {
+            throw_bad(env, "negative M3 similarity candidate length");
+            goto score_failure;
+        }
+        scores[row] =
+                (jint)m3_precompute_similarity_score(
+                        (int)query_length,
+                        (uint64_t)query_hash,
+                        (int)lengths[row],
+                        (uint64_t)hashes[row]);
+    }
+
+    (*env)->SetIntArrayRegion(env, result, 0, count, scores);
+
+score_failure:
+    free(lengths);
+    free(hashes);
+    free(scores);
+    return (*env)->ExceptionCheck(env) ? NULL : result;
+}
