@@ -12,6 +12,38 @@ marked. See [M3-SYNEXIA-NOTICE.md](M3-SYNEXIA-NOTICE.md),
 [LICENSE-M3-APACHE-2.0.txt](LICENSE-M3-APACHE-2.0.txt).
 
 
+## Project goals and plan
+
+M3, M³, MCube — the name leaves room for interpretation. The goal is to reduce
+repeated CPU work and unnecessary allocation through shared immutable payloads,
+composition/range identity, indexed metadata, and reusable precompute while
+preserving required behavior and contracts.
+
+The plan is ordered by acceptance gates, not promised dates. The milestones
+below describe intended outcomes; completion requires linked evidence.
+
+| Milestone | Deliverable | Acceptance gate |
+| --- | --- | --- |
+| **Foundation — inventory and faithful reproduction** | Map existing M3 String, regex, precompute, and recipe implementations to their Synexia sources; record contracts, provenance, gaps, and baseline costs. | Traceable source mapping, reproducible build/baseline, and regression cases for known semantic differences. |
+| **P0.1 — M3 String in `java.lang.String`** | Integrate canonical shared payloads, atoms/ranges/compositions, views, and indexed sidecars within M3JDK21; define compatibility materialization and JNI boundaries. | Required String semantics, Unicode, equality/hash/ordering, substring/view behavior, and relevant JDK/HotSpot/JNI compatibility tests pass. |
+| **P0.2 — String and regex precompute** | Develop reusable hashes, prefix/suffix and substring indexes, regex plans/caches, and bounded metadata lifecycle. | Differential regression coverage, including at least 10,000 regex cases across text and code; retained-memory and precompute costs measured; concurrency and lifecycle checks pass. |
+| **P0.3 — Qualify runtime benefits** | Produce reproducible compatibility and benchmark evidence for String, regex, and precompute. | Compare with stated JDK baselines on repeated and one-off workloads; publish CPU time, allocation, retained memory, startup/construction costs, benefits, regressions, and limitations. |
+| **P1 — Lean, fast collections** | Reuse qualified runtime capabilities and indexed signals for collection/search operations through converged recipes. | Collection contracts and differential tests pass; representative benchmarks substantiate reduced work or allocation and disclose tradeoffs. |
+| **P2 — SWT and Eclipse IDE** | Integrate qualified runtime/collection improvements into SWT, Platform/UI, and relevant Nebula/GEF targets through bounded adapters and recipes. | Target builds, integration tests, and representative UI responsiveness/resource measurements pass; upstream boundaries remain explicit. |
+| **First-release freeze** | Select qualified scope, generate the final evidence pack, and consolidate each unreleased public fork delta for release. | Final tree preserved; exactly one fork-specific release commit above the documented upstream base; notices/provenance retained; branch/tag protection checked; release claims match the machine-readable contract. |
+
+**Ownership:** Synexia owns the canonical recipe/convergence/provenance workspace.
+M3JDK21 owns the product/runtime integration and all String precompute inside
+`java.base`, HotSpot, or JNI as appropriate, without a Synexia runtime dependency.
+SWT/Eclipse targets consume qualified work through their own integration boundaries.
+
+**Execution discipline:** inventory before change; reproduce faithfully; preserve
+behavior and contracts; develop and converge reusable recipes in Synexia; apply
+changes additively; qualify each milestone with compiler, tests, and measurements.
+Parallel preparation may proceed, but dependent capabilities require the earlier
+acceptance gates. Each milestone needs an owner and linked PR/test/benchmark
+evidence before it can be reported as verified.
+
 ## Evidence-first first release
 
 M3JDK21 uses a machine-readable release contract: public claims must be backed by reproducible
