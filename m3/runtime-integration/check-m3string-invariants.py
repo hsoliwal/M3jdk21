@@ -507,9 +507,8 @@ if "CallVoidMethodA" not in byte_shadow.group("body") or "CallVoidMethodA" not i
 # entirely with the stock node engine.
 for fragment in [
     "compiledM3Tq(matchRoot)",
-    "node.getClass() == Slice.class",
     "node instanceof Branch branch",
-    "atom == null || atom.getClass() != Slice.class",
+    "compiledRequiredLiteral(skipM3TqTransparentLeading(atom))",
     "M3TQ.fromExact(alternatives)",
 ]:
     if fragment not in pattern:
@@ -521,8 +520,12 @@ for fragment in [
     "current instanceof Caret",
     "current instanceof UnixCaret",
     "current instanceof GroupHead",
-    "compiledRequiredLiteral",
+    "return compiledRequiredLiteral(node, 0);",
+    "depth > 8",
     "current.getClass() == Slice.class",
+    "current instanceof Curly curly && curly.cmin > 0",
+    "current instanceof GroupCurly curly && curly.cmin > 0",
+    "current instanceof Ques ques && ques.type == Qtype.INDEPENDENT",
 ]:
     if fragment not in pattern:
         fail(f"Pattern mandatory literal graph precompute missing: {fragment}")
