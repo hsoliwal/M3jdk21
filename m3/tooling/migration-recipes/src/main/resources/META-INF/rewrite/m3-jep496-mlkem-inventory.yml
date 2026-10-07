@@ -1,0 +1,9 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.Jep496MlKemInventory
+displayName: Inventory JEP 496 ML-KEM released-state packet
+description: >
+  Materializes only donor/released-state/dependency evidence and a FILE-atom generation workflow.
+  Product source mutation remains a later separately reviewed stage.
+recipeList:
+  - com.m3.rewrite.backport.M3Jep496MlKemInventoryRecipe
