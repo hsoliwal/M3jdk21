@@ -88,6 +88,47 @@ final class NebulaMasteredDagReceiverTest {
                         green.replace("0123456789abcdef0123456789abcdef01234567", "bad")));
     }
 
+    @Test
+    void malformedRowsAndUnsupportedGateValuesFailClosed() {
+        String header =
+                "schema\tproof_repository\tproof_branch\tproof_pr\tproof_commit\tproof_state\t"
+                        + "recipe_first\tfinal_transfer\tsemantic_coverage\tfixed_point\t"
+                        + "original_build\ttarget_repository\tauthority\n";
+        String row =
+                "M3_NEBULA_MASTERED_DAG_RECEIVER_V1\thsoliwal/nebula\tproof\t96\t"
+                        + "0123456789abcdef0123456789abcdef01234567\tVERIFIED_GREEN\t"
+                        + "SUCCESS\tSUCCESS\tLINE>=0.99\tSUCCESS\tSUCCESS\t"
+                        + "hsoliwal/M3jdk21\tEVIDENCE_ONLY\n";
+
+        assertThrows(IllegalArgumentException.class, () -> NebulaMasteredDagReceiver.parse(""));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> NebulaMasteredDagReceiver.parse("bad-header\n" + row));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> NebulaMasteredDagReceiver.parse(header + "too\tfew\tcells\n"));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> NebulaMasteredDagReceiver.parse(
+                        header + row.replace("\tSUCCESS\tSUCCESS\tLINE>=0.99", "\tBOGUS\tSUCCESS\tLINE>=0.99")));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> NebulaMasteredDagReceiver.parse(
+                        header + row.replace("\t96\t", "\t0\t")));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> NebulaMasteredDagReceiver.parse(
+                        header + row.replace("\t96\t", "\tnot-an-int\t")));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> NebulaMasteredDagReceiver.parse(
+                        header + row.replace("hsoliwal/nebula", "other/proof")));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> NebulaMasteredDagReceiver.parse(
+                        header + row.replace("\tproof\t", "\t \t")));
+    }
+
     private static Path repositoryRoot() {
         Path module = Path.of("").toAbsolutePath().normalize();
         if ("synexia-import".equals(module.getFileName().toString())) {
