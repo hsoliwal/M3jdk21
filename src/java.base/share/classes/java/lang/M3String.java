@@ -869,6 +869,29 @@ final class M3String implements CharSequence {
         return joinValues(pieces);
     }
 
+    /** Conservative BMP literal subset; all regex/replacement syntax stays in Matcher. */
+    static boolean isLiteralRegexReplacement(String regex, String replacement) {
+        if (regex == null || regex.isEmpty() || replacement == null) return false;
+        for (int index = 0; index < regex.length(); index++) {
+            char unit = regex.charAt(index);
+            // Regex observes code points: UTF-16 substring search can match half a pair.
+            if (Character.isSurrogate(unit) || "\\.^$|?*+()[]{}".indexOf(unit) >= 0) return false;
+        }
+        for (int index = 0; index < replacement.length(); index++) {
+            char unit = replacement.charAt(index);
+            if (unit == '$' || unit == '\\') return false;
+        }
+        return true;
+    }
+
+    String replaceLiteralRegex(String original, String regex, String replacement, boolean firstOnly) {
+        M3String target = canonicalize(regex);
+        int found = indexOf(target, 0);
+        if (found < 0) return original;
+        // A match must produce a String even when composition aliases an input descriptor.
+        return new String(replaceMatches(target, canonicalize(replacement), found, firstOnly));
+    }
+
     M3String replace(M3String target, M3String replacement) {
         M3String checkedTarget = Objects.requireNonNull(target, "target");
         M3String checkedReplacement = Objects.requireNonNull(replacement, "replacement");
@@ -878,7 +901,11 @@ final class M3String implements CharSequence {
 
         int found = indexOf(checkedTarget, 0);
         if (found < 0) return this;
+        return replaceMatches(checkedTarget, checkedReplacement, found, false);
+    }
 
+    private M3String replaceMatches(M3String checkedTarget, M3String checkedReplacement,
+                                    int found, boolean firstOnly) {
         ArrayList<M3String> pieces = new ArrayList<>();
         long outputLength = 0L;
         int cursor = 0;
@@ -896,7 +923,7 @@ final class M3String implements CharSequence {
                 throw new OutOfMemoryError("Required length exceeds implementation limit");
             }
             cursor = found + checkedTarget.length();
-            found = cursor <= length() - checkedTarget.length()
+            found = !firstOnly && cursor <= length() - checkedTarget.length()
                     ? indexOf(checkedTarget, cursor)
                     : -1;
         }

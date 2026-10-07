@@ -3376,6 +3376,10 @@ public final class String
      * @since 1.4
      */
     public String replaceFirst(String regex, String replacement) {
+        M3String storage = m3();
+        if (storage != null && M3String.isLiteralRegexReplacement(regex, replacement)) {
+            return storage.replaceLiteralRegex(this, regex, replacement, true);
+        }
         return Pattern.compile(regex).matcher(this).replaceFirst(replacement);
     }
 
@@ -3420,6 +3424,10 @@ public final class String
      * @since 1.4
      */
     public String replaceAll(String regex, String replacement) {
+        M3String storage = m3();
+        if (storage != null && M3String.isLiteralRegexReplacement(regex, replacement)) {
+            return storage.replaceLiteralRegex(this, regex, replacement, false);
+        }
         return Pattern.compile(regex).matcher(this).replaceAll(replacement);
     }
 
