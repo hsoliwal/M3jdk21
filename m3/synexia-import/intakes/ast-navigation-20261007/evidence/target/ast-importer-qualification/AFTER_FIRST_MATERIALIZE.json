@@ -1,0 +1,272 @@
+[
+  {
+    "path": "m3/unrelated-ast-proof-sibling.keep",
+    "sha256": "e547cff6efb9450264c048194ec641eb814aa13f944b929749f8659734a23fd3",
+    "bytes": 64,
+    "mtimeNs": 1791355277145467800
+  },
+  {
+    "path": "m3/vendor/synexia/LICENSE",
+    "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+    "bytes": 11558,
+    "mtimeNs": 1791355277144456300
+  },
+  {
+    "path": "m3/vendor/synexia/NOTICE",
+    "sha256": "31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427",
+    "bytes": 14991,
+    "mtimeNs": 1791355277144456300
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexAssociativity.java",
+    "sha256": "2198ef1962011cc4552579d1793a300040f62ab4d258a782077f384d2be3797a",
+    "bytes": 209,
+    "mtimeNs": 1791354323724367000
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexAST.java",
+    "sha256": "4867c08790906ad0acdaaf878ede37d9d33a5bf7e24e4faff737d584b960b003",
+    "bytes": 8133,
+    "mtimeNs": 1791354323698447700
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTChildRole.java",
+    "sha256": "73f1e33242917c1c1e6f7b2aa9112f643bcebb9e203bd437ad89343644477cd8",
+    "bytes": 253,
+    "mtimeNs": 1791354323699444400
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTDiagnostic.java",
+    "sha256": "4b09e78fc3e1f5aba4fc27f8b39a100902e9a761e9c4f0b78e10245daaaf4fc4",
+    "bytes": 648,
+    "mtimeNs": 1791354323703446300
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTDiff.java",
+    "sha256": "53cebb46529470640eb6b4fd1bd812306cc87fda8079a7f99323b1fd4e14fc8e",
+    "bytes": 1649,
+    "mtimeNs": 1791354323704353000
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTDispatchNative.java",
+    "sha256": "fdcb748b1d5882c499a386be7e1e0e4aa4bd7e28e14876eeff0aa170bf7e0be1",
+    "bytes": 15349,
+    "mtimeNs": 1791354323705440000
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTDocument.java",
+    "sha256": "32859a872cc1cb600177c140926aff63df7d8698efd928d9eab635c001fcf4a8",
+    "bytes": 9220,
+    "mtimeNs": 1791354323705440000
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTEditSession.java",
+    "sha256": "4ff384f7b5653cd101baa33d21f4fb458cf5efe4630201a53ecbde18fe5340a6",
+    "bytes": 12767,
+    "mtimeNs": 1791354323706363200
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTKindAutomaton.java",
+    "sha256": "d30301a6309651dfa18ab0a67690932d247ef38cc4b43a23849c4e6685e0c984",
+    "bytes": 7459,
+    "mtimeNs": 1791354877943196000
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTKindPattern.java",
+    "sha256": "2d7bb59f1fc7a7aa58b6ecc156cd577a8950b47a1d4577e6921708c2fd9f2d26",
+    "bytes": 3247,
+    "mtimeNs": 1791354877944245500
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTLcaSparseTable.java",
+    "sha256": "feb546609e2fa96f530e19ec9975fc5b17d51db07dd5719e1b573546c8caae6c",
+    "bytes": 12376,
+    "mtimeNs": 1791354323707432900
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTOccurrenceSource.java",
+    "sha256": "d5e60f701af64869acb4369bcee173f37c82eb9a253eca00c28b99033c85b2e5",
+    "bytes": 1306,
+    "mtimeNs": 1791354323708405500
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTParser.java",
+    "sha256": "d250b33d84b597284a84255c3d52b1ecfb8f2338eea27377643bb651acba7b90",
+    "bytes": 13575,
+    "mtimeNs": 1791354323709367000
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTPartialCache.java",
+    "sha256": "68a21dea8a4b30a7fcc37f0277e1841f1dc4fba229a88192342542eff8f23f43",
+    "bytes": 36255,
+    "mtimeNs": 1791354323709367000
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTPool.java",
+    "sha256": "1ca4f5a6428257e6346cdb4bd4da78f76755889d236fd6d5196895efdea79eff",
+    "bytes": 24458,
+    "mtimeNs": 1791354323710387100
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTPoolPrecompute.java",
+    "sha256": "7ea7bd71c9e180571656144ff0904530a07d17c3293b8110bf734c0b36fcea7b",
+    "bytes": 27965,
+    "mtimeNs": 1791354323711362300
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTPrecompute.java",
+    "sha256": "7baae702ff9c58180329df4b2c9947d3f2d6247fca37757d9656b8ec776460b7",
+    "bytes": 27124,
+    "mtimeNs": 1791354323712368800
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTPrecomputeCodec.java",
+    "sha256": "686f9d6e4fbf27af15cc0a5ab64cea8055a19aa8c4e92a7a66f88bd80bddb958",
+    "bytes": 10065,
+    "mtimeNs": 1791354323713423700
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTProductionDispatch.java",
+    "sha256": "1f9308fe51809e91f8ee1426dc5ff309a7b8960933a1bcbc7e73a1688e540bfe",
+    "bytes": 19376,
+    "mtimeNs": 1791354323714457700
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTProductionPlans.java",
+    "sha256": "ced8f9f5d4bdfabb226f82dad65cc386566f4b347f27f1ea59921a2e7a743c91",
+    "bytes": 27613,
+    "mtimeNs": 1791354323715390100
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTQuery.java",
+    "sha256": "94a96d7accee6d889b7cb48e9b4b1768bba6fe5459437478897e0c5b054e7172",
+    "bytes": 9016,
+    "mtimeNs": 1791354323716553100
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTResidentCache.java",
+    "sha256": "469a5955cf5315d5d9362c53694070ca7d24aedcc4d61882b45263f269e69ee3",
+    "bytes": 13527,
+    "mtimeNs": 1791354323717407100
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTReuseKey.java",
+    "sha256": "b4fbcd9c7734152f4e564337fe4ec5ff15a68e6dacde8d3eb12e5af88e527a7b",
+    "bytes": 5691,
+    "mtimeNs": 1791354323718399200
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSourceIndex.java",
+    "sha256": "d182de784b0c307ea1c81ed802d7bef0f351928d0a6ecdcb676aa582ca8f414a",
+    "bytes": 9345,
+    "mtimeNs": 1791354323718399200
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecImage.java",
+    "sha256": "6fafd946cc5e724aa16accaa4edc7d7b97134a58e75754da103c2b26f50757e1",
+    "bytes": 31206,
+    "mtimeNs": 1791354323719471300
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecImageView.java",
+    "sha256": "f8d0b00fa63a3de45568e5194d577d1ee58887c1ba50e072a5cc55baf1f4c978",
+    "bytes": 7612,
+    "mtimeNs": 1791354323720362800
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecPrecompute.java",
+    "sha256": "9a0d72ea590fa65bd221232bbe075e89e069ffa4469813cbea4dc9eb8c1a5589",
+    "bytes": 21477,
+    "mtimeNs": 1791354323721469200
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecs.java",
+    "sha256": "0b2c9fac3e7a9743efa5dd0deb5e90d54c2e3a2d8ebcb29b14384013bd21a0d0",
+    "bytes": 3772,
+    "mtimeNs": 1791354323723388700
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexASTSpecTreePrecompute.java",
+    "sha256": "20de972d1b22f1fb71a06d49a8fafd012008d5fdaa7b4aa93762f68806316562",
+    "bytes": 37941,
+    "mtimeNs": 1791354323722482800
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexFlagPolicy.java",
+    "sha256": "4ec5fc80f340cefb3e53201d725c9d9e2414bf76a56aa42408f8116746e5de28",
+    "bytes": 243,
+    "mtimeNs": 1791354323728437200
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexJava21LanguageSpec.java",
+    "sha256": "0ca21831b3c312a2ceb0342442bd696d0b968c5fac6d72ac405006c3cc9df6d9",
+    "bytes": 16949,
+    "mtimeNs": 1791354323732473900
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexLabelPolicy.java",
+    "sha256": "581d346c63d37fb86a9e523c6a92846d46b9cd32cd0685dab9a81aa93c68ef50",
+    "bytes": 483,
+    "mtimeNs": 1791354323732473900
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexLanguageRule.java",
+    "sha256": "e3cf4890992375d2d1cfa3405deff06ccbe57cf64d63c9bed64d286b1c7f6cb0",
+    "bytes": 1343,
+    "mtimeNs": 1791354323737361300
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexLanguageSpec.java",
+    "sha256": "14ab6a310cbc1671bdf523bdd8119fab6ea5854526b48aa67021ea5ce5839e35",
+    "bytes": 2833,
+    "mtimeNs": 1791354323737361300
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexLanguageSpecs.java",
+    "sha256": "fa721d76f0862277edac7f371a849fd253075ab6fbd19c3833d62cfd9cdb38fa",
+    "bytes": 589,
+    "mtimeNs": 1791354323739366000
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexOperatorRule.java",
+    "sha256": "26b57626bc5e1d18228aaa004d7d652208c2a82b2165d5654a615510373c5a64",
+    "bytes": 1154,
+    "mtimeNs": 1791354323739366000
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/main/java/com/synexia/indexstring/ast/MIndexSyntaxCategory.java",
+    "sha256": "9cd7885997097ff10d97d092178eee62ffda4f3eea99e52e896957fb06f1d87c",
+    "bytes": 418,
+    "mtimeNs": 1791354323740350500
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/test/java/com/synexia/indexstring/ast/MIndexASTCodecBoundedReadProof.java",
+    "sha256": "feb671ea19431f4c8b146e521a5029c1382815cd562be1813470a902f135d7ea",
+    "bytes": 7010,
+    "mtimeNs": 1791354323746442400
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/test/java/com/synexia/indexstring/ast/MIndexASTLcaCodecTest.java",
+    "sha256": "60c7a9617c5291abf727940da0a6896724520a7a3ae11ebc600310fdfb6b7822",
+    "bytes": 2559,
+    "mtimeNs": 1791354323748489400
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/test/java/com/synexia/indexstring/ast/MIndexASTPartialCacheErrorTest.java",
+    "sha256": "b189e0b5849630a0ff923acdf240159ed848f77be75e4eb58df7118d288d51e3",
+    "bytes": 10727,
+    "mtimeNs": 1791354323748489400
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/test/java/com/synexia/indexstring/ast/MIndexASTPartialCacheTest.java",
+    "sha256": "4a2457452fe1c651ce550b93f4a24c2dc5e8faa4c25a7604d1716dedf0507a66",
+    "bytes": 15402,
+    "mtimeNs": 1791354323749460600
+  },
+  {
+    "path": "m3/vendor/synexia/synexia-indexstring/src/test/java/com/synexia/indexstring/ast/MIndexASTPrecomputeTest.java",
+    "sha256": "d399496e53b0a758ed5a06abca4aaac4ca0a9b8d239cc5571b65d4d8b983e4fa",
+    "bytes": 10081,
+    "mtimeNs": 1791354323750570500
+  }
+]

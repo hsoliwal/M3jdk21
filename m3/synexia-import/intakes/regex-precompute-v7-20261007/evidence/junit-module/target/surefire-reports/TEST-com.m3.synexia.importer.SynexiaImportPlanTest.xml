@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.m3.synexia.importer.SynexiaImportPlanTest" time="0.377" tests="7" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="21"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.class.path" value="K:\codex-work\m3-regex-v7-vendor-importer-proof-20261007\junit-module\target\test-classes;K:\codex-work\m3-regex-v7-vendor-importer-proof-20261007\junit-module\target\classes;C:\Users\hsoliwal\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\hsoliwal\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\hsoliwal\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\hsoliwal\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\hsoliwal\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\hsoliwal\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\hsoliwal\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\hsoliwal\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="user.variant" value=""/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="user.timezone" value="Asia/Calcutta"/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="java.vm.specification.version" value="21"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="IN"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-21\bin"/>
+    <property name="sun.java.command" value="K:\codex-work\m3-regex-v7-vendor-importer-proof-20261007\junit-temp\surefire18049075746459803612\surefirebooter-20261007122215230_3.jar K:\codex-work\m3-regex-v7-vendor-importer-proof-20261007\junit-temp\surefire18049075746459803612 2026-10-07T12-22-15_152-jvmRun1 surefire-20261007122215230_1tmp surefire_0-20261007122215230_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="test" value="SynexiaCanonicalFamilyPolicyTest,SynexiaImportPlanTest,SynexiaImporterTest"/>
+    <property name="surefire.test.class.path" value="K:\codex-work\m3-regex-v7-vendor-importer-proof-20261007\junit-module\target\test-classes;K:\codex-work\m3-regex-v7-vendor-importer-proof-20261007\junit-module\target\classes;C:\Users\hsoliwal\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\hsoliwal\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\hsoliwal\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\hsoliwal\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\hsoliwal\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\hsoliwal\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\hsoliwal\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\hsoliwal\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="C:\Users\hsoliwal"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-10-21"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-21"/>
+    <property name="file.separator" value="\"/>
+    <property name="basedir" value="K:\codex-work\m3-regex-v7-vendor-importer-proof-20261007\junit-module"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="surefire.real.class.path" value="K:\codex-work\m3-regex-v7-vendor-importer-proof-20261007\junit-temp\surefire18049075746459803612\surefirebooter-20261007122215230_3.jar"/>
+    <property name="user.script" value=""/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="21.0.9+7-LTS-338"/>
+    <property name="user.name" value="hsoliwal"/>
+    <property name="stdout.encoding" value="Cp1252"/>
+    <property name="path.separator" value=";"/>
+    <property name="os.version" value="10.0"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="localRepository" value="C:\Users\hsoliwal\.m2\repository"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="java.io.tmpdir" value="K:\codex-work\m3-regex-v7-vendor-importer-proof-20261007\junit-temp"/>
+    <property name="java.version" value="21.0.9"/>
+    <property name="user.dir" value="K:\codex-work\m3-regex-v7-vendor-importer-proof-20261007\junit-module"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-21\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Users\hsoliwal\.codex\tmp\arg0\codex-arg0i3gPOF;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v13.4\bin\x64;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v13.4\bin;;C:\Program Files\Microsoft\jdk-17.0.19.10-hotspot\bin;C:\Program Files\ImageMagick-7.1.2-Q16-HDRI;C:\Program Files\Microsoft SDKs\Azure\CLI2\wbin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\OpenSSH-Win64;C:\Program Files\Python312\Scripts\;C:\Program Files\Python312\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\rsync\bin;C:\Program Files\GitHub CLI\;C:\Program Files\kubectl;C:\Program Files\kubelet;C:\Cognix\kubernetes\bin;C:\Program Files\Docker\Docker\resources\bi;C:\spark\spark-3.5.7-bin-hadoop3\bin\;C:\scala\scala3-3.7.0-x86_64-pc-win32\bin\;C:\hadoop\bin\;C:\Program Files\Java\jdk-21\bin;C:\Program Files\TortoiseSVN\bin;C:\Program Files\PuTTY\;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\Amazon\AWSCLIV2\;C:\Program Files (x86)\cloudflared\;C:\Program Files\dotnet\;C:\ProgramData\mingw64\mingw64\bin;C:\Program Files\nodejs\;C:\Program Files\CMake\bin;C:\Program Files\LLVM\bin;C:\Program Files (x86)\LLVM\bin;C:\Program Files\Go\bin;C:\ProgramData\chocolatey\lib\maven\apache-maven-3.9.14\bin;C:\Program Files\Memurai\;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\Java\jdk1.8.0_211\bin;C:\Android\android-sdk\tools;C:\Android\android-sdk\platform-tools;C:\Android\android-sdk\tools\bin;C:\Program Files\Docker\Docker\resources\bin;C:\toolchain\home\.local\bin;C:\Users\hsoliwal\AppData\Local\Microsoft\WindowsApps;C:\Users\hsoliwal\AppData\Roaming\npm;C:\Users\hsoliwal\AppData\Local\Programs\Ollama;C:\Users\hsoliwal\go\bin;C:\Users\hsoliwal\AppData\Local\Yarn\bin;C:\ProgramData\chocolatey\lib\deno;C:\Users\hsoliwal\.bun\bin;C:\vcpkg;C:\tools\flutter\bin;C:\ProgramData\chocolatey\lib\gcloudsdk\tools\google-cloud-sdk\bin;C:\PostgreSQL\pgsql\bin;C:\tools\miniconda3;C:\tools\miniconda3\Scripts;C:\tools\miniconda3\Library\bin;C:\toolchain\home\.dotnet\tools;C:\Users\hsoliwal\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\hsoliwal\AppData\Local\Microsoft\WinGet\Links;C:\Users\hsoliwal\AppData\Local\Pandoc\;c:\Users\hsoliwal\.vscode\extensions\openai.chatgpt-26.930.61225-win32-x64\bin\windows-x86_64;."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.version" value="21.0.9+7-LTS-338"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="65.0"/>
+    <property name="argLine" value="-Xms16m -Xmx256m -XX:MaxMetaspaceSize=192m -XX:ActiveProcessorCount=2 -Djava.io.tmpdir=K:\codex-work\m3-regex-v7-vendor-importer-proof-20261007\junit-temp"/>
+  </properties>
+  <testcase name="sourceOnlyVerifierAllowsReplacementButRefusesSourceDrift" classname="com.m3.synexia.importer.SynexiaImportPlanTest" time="0.073"/>
+  <testcase name="absentVendorTreeProducesOnlyManifestRows" classname="com.m3.synexia.importer.SynexiaImportPlanTest" time="0.003"/>
+  <testcase name="writePlanIsCreateOrVerifyAndRefusesOutsideBuildAndDrift" classname="com.m3.synexia.importer.SynexiaImportPlanTest" time="0.073"/>
+  <testcase name="laneClassificationCoversEveryRegisteredDeliveryCategory" classname="com.m3.synexia.importer.SynexiaImportPlanTest" time="0.001"/>
+  <testcase name="plansFullDeltaAndStagesOnlyChangedCandidates" classname="com.m3.synexia.importer.SynexiaImportPlanTest" time="0.116"/>
+  <testcase name="cliPlansStagesAndRejectsBadInvocation" classname="com.m3.synexia.importer.SynexiaImportPlanTest" time="0.102">
+    <system-out><![CDATA[4334850e42e3f934f2cb5648ff5ff773fb306814badb910f50d9a1d8af246b86
+4334850e42e3f934f2cb5648ff5ff773fb306814badb910f50d9a1d8af246b86
+]]></system-out>
+  </testcase>
+  <testcase name="rowAndPlanValidationFailClosed" classname="com.m3.synexia.importer.SynexiaImportPlanTest" time="0.005"/>
+</testsuite>

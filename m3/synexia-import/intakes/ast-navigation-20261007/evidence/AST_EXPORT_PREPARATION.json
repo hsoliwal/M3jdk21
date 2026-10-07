@@ -1,0 +1,17 @@
+{
+  "createdUtc": "2026-10-07T06:36:57.904618+00:00",
+  "status": "EXISTING_IMPORT_SCHEMA_DATA_PREPARED_NOT_JAVA_RECEIVER_ADMITTED",
+  "sourceRevision": "7d2133f1412a9e7295296c3f86baae577bb3251c",
+  "rows": 44,
+  "mainSources": 37,
+  "originalTestSources": 5,
+  "root": "0529e8ed872db69b37d46dbee0194b0f3c866a43d2123154984c6f9586832019",
+  "manifestSha256": "860eade0c05a175373e3f96a19150de03f4865efdfcf077af5d5a52d15a471b7",
+  "existingManifestImplementationSha256": "d497f52ebe91e6b97efb3708ff579356f05b65f1641a975c2b18215707ce3d98",
+  "existingFamilyPolicySha256": "c1762968dfe62a18706f2b6092f0a02341fafcc904fa6bec96643ef8cc480e5d",
+  "referenceProtocolRootRecomputed": "d1889319f72f5e3ab9fb4804e27e8ec58d2bfc75e112539f5322f5f95e3d658b",
+  "sourceCustodySha256": "e1f47293f073df14b524102ccc53cb1ac8a765f3c0d6430cfc7574ca914dbdfe",
+  "boundedOracleProofSha256": "60f392a969382ea4ac94cc033dcaa6adbc06489e48bc473ba96ceac15f363302",
+  "pending": "Run original receiver importer; coalesce identical root LICENSE/NOTICE with regex packet; dependencies and target consumer closure remain unproved",
+  "excludedCollections": "4 candidate files under synexia-mindex/collections are not classified by receiver policy at6cb; no category substitution used to bypass canonical family policy."
+}

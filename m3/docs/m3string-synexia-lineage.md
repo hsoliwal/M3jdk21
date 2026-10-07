@@ -203,3 +203,29 @@ consumer:
 
 This is part of the M3 String invariant: precompute must have a real owner, bounded retention, and
 a JDK-visible execution consumer. Unused metadata is not an implementation success.
+
+
+## Shared-array JNI address mapping — 2026-10-07
+
+The current Synexia donor snapshot is pinned at `857c4cc0ddeb73e5ea5269a1d0ef2d30057dcfa8`; its exact Java/native source
+paths and Git blobs are in
+`m3/synexia-import/intakes/jni-array-address-receiver-20261007/SOURCE_PROVENANCE.tsv`.
+The selected files are mirrored byte-for-byte under `m3/vendor/synexia/synexia-indexstring/`
+as Apache-2.0 custody only.
+
+| Synexia donor responsibility | M3JDK target owner | Status |
+| --- | --- | --- |
+| `SharedArrayNative.compare` / segmented UTF-16 compare | `String.compareTo` -> `M3String` / `M3StringOwner` / `M3StringAtom.address` | name/owner mapped; fast path not implemented |
+| `SharedSegments.preparedBuffers` and range coordinates | `M3String` packed coordinate + scalar `M3StringAtom.address`; tuple DAG fallback | no parallel descriptor-array owner |
+| `SharedArrayNative.copyTo` | caller-owned `M3String.getChars/getBytes` and JNI shadow boundary in `String.c` | mapped; no new materialization |
+| native hash/metrics | `M3StringOwner` / `M3StringFacts` | semantic mapping only; metric equivalence not asserted |
+
+The public JDK API remains `java.lang.String`; internal target names remain `M3String*`. The
+current target compare path still reads code units through Java `charAt`. Synexia PR #9579
+historically carried an owned address directory, but current `develop` no longer has that cache;
+the earlier benchmark therefore remains historical evidence only.
+
+Apache-2.0 source custody stays below `m3/vendor/synexia`. Existing OpenJDK `java.base` sources
+retain GPLv2 with the Classpath Exception; the vendor copy does not relicense or enter those files.
+No M3 JDK optimization is admitted until a target-specific implementation passes exact
+String/JNI semantics and matched small, large and fragmented-input benchmarks.

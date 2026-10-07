@@ -1,0 +1,44 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< com.m3:m3-synexia-import >----------------------
+[INFO] Building M3JDK21 Synexia Apache import verifier 0.1.0-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- jacoco:0.8.15:prepare-agent (default) @ m3-synexia-import ---
+[INFO] argLine set to -javaagent:C:\\Users\\hsoliwal\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.15\\org.jacoco.agent-0.8.15-runtime.jar=destfile=K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\target\\jacoco.exec
+[INFO] 
+[INFO] --- resources:3.4.0:resources (default-resources) @ m3-synexia-import ---
+[INFO] skip non existing resourceDirectory K:\codex-work\m3-regex-v7-vendor-importer-proof-20261007\junit-module\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ m3-synexia-import ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 6 source files with javac [debug release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.4.0:testResources (default-testResources) @ m3-synexia-import ---
+[INFO] skip non existing resourceDirectory K:\codex-work\m3-regex-v7-vendor-importer-proof-20261007\junit-module\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ m3-synexia-import ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 4 source files with javac [debug release 21] to target\test-classes
+[INFO] -------------------------------------------------------------
+[ERROR] COMPILATION ERROR : 
+[INFO] -------------------------------------------------------------
+[ERROR] /K:/codex-work/m3-regex-v7-vendor-importer-proof-20261007/junit-module/src/test/java/com/m3/synexia/importer/SynexiaImportPlanTest.java:[441,27] incompatible types: java.lang.String cannot be converted to byte[]
+[INFO] 1 error
+[INFO] -------------------------------------------------------------
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  1.604 s
+[INFO] Finished at: 2026-10-07T12:15:18+05:30
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.13.0:testCompile (default-testCompile) on project m3-synexia-import: Compilation failure
+[ERROR] /K:/codex-work/m3-regex-v7-vendor-importer-proof-20261007/junit-module/src/test/java/com/m3/synexia/importer/SynexiaImportPlanTest.java:[441,27] incompatible types: java.lang.String cannot be converted to byte[]
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

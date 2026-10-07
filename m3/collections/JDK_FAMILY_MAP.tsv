@@ -1,9 +1,9 @@
 jdk_family	m3_backend	state	primary_shape	contract_note
-ArrayList	M3LongArrayList	RECEIVER_CANDIDATE_V1	contiguous long[]	primitive proving backend; java.util.ArrayList remains authority
+ArrayList	M3LongArrayList	RECEIVER_UNION_V2	contiguous long[]	single owner uniting JDK-shaped v1 and PackedLongList lineage (M3LongList/M3LongStack); java.util.ArrayList remains authority
 LinkedList	M3LongLinkedList28	EXISTING_PROVING_BACKEND	stable segmented handles + primitive link lanes	not a java.util.LinkedList replacement
 HashSet	M3LongHashSet	RECEIVER_CANDIDATE_V1	open addressing + byte occupancy	all long keys including zero/extrema
 HashMap	M3LongLongHashMap	RECEIVER_CANDIDATE_V1	parallel primitive key/value lanes + open addressing	all long keys/values; no per-entry node
-ArrayDeque	M3LongArrayDeque	RECEIVER_CANDIDATE_V1	power-of-two primitive ring	ordered double-ended semantics
+ArrayDeque	M3LongArrayDeque	RECEIVER_UNION_V2	power-of-two circular long[]	single owner uniting JDK-shaped v1 and Synexia LongDeque lineage (M3LongDeque/M3LongQueue); java.util.ArrayDeque remains authority
 PriorityQueue	M3LongPriorityQueue	RECEIVER_CANDIDATE_V1	primitive binary min-heap	natural long order
 BitSet	M3BitLane28 / M3ConcurrentBitSet	EXISTING_PROVING_BACKEND	segmented bit lane / atomic bitset	consumer-specific
 ConcurrentHashMap	M3ConcurrentLongMap	EXISTING_LIMITED_BACKEND	immutable snapshot publication	read-heavy small/medium envelope; not CHM semantic replacement
@@ -17,7 +17,7 @@ ConcurrentSkipListMap	M3LongLongConcurrentSkipListMap	PENDING	ordered concurrent
 ConcurrentSkipListSet	M3LongConcurrentSkipListSet	PENDING	ordered concurrent structure	JMM/linearizability proof required
 IdentityHashMap	M3ObjectIdentityMap	PENDING_OBJECT_SPACE	identity/object-space owner	primitive long equality is not object identity
 WeakHashMap	M3WeakObjectMap	PENDING_OBJECT_SPACE	weak-reference object owner	GC/reference-processing contract required
-EnumMap / EnumSet	M3 enum-specialized owner	PENDING_SPECIALIZATION	dense ordinal lanes	must preserve enum type/serialization contracts
+EnumMap / EnumSet	M3EnumLongMap (EnumMap<E,Long> shape); EnumSet shape pending	RECEIVER_CANDIDATE_V1	ordinal-indexed long[] + presence bits	primitive proving backend adapted from synexia-primitives EnumPrimitiveMap; java.util.EnumMap remains authority; must preserve enum type/serial
 HashSet (int)	M3IntHashSet	RECEIVER_CANDIDATE_V1	zero-sentinel linear probing + backward-shift deletion	int lane adapted from synexia-primitives IntHashSet; every int legal; java.util.HashSet remains authority
 HashMap (int,int)	M3IntIntHashMap	RECEIVER_CANDIDATE_V1	parallel int key/value lanes + zero-key side slot	int lane adapted from synexia-primitives IntIntHashMap; java.util.HashMap remains authority
 PriorityQueue (int)	M3IntPriorityQueue	RECEIVER_CANDIDATE_V1	primitive binary min-heap	int lane adapted from synexia-primitives IntMinHeap; natural int order; java.util.PriorityQueue remains authority

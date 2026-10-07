@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
 # SPDX-License-Identifier: Apache-2.0
-"""Prove current runtime custody, supersession, drift refusal, and patch identity."""
+"""Prove current runtime custody: exact after-image fixed point, reversibility, drift refusal, patch identity."""
 import importlib.util
 import json
 import tempfile
@@ -30,35 +30,43 @@ class RecipeTest(unittest.TestCase):
    for name in manifest['files']
   }
 
- def test_current_tree_is_sealed_superseding_fixed_point(self):
+ def test_manifest_is_upstream_to_master_v2(self):
+  self.assertEqual('M3_RUNTIME_INTEGRATION_RECIPE_V2',manifest['schema'])
+  self.assertEqual(manifest['base_commit'],manifest['upstream_commit'])
+  self.assertEqual(64,len(manifest['files']))
+  for name,hashes in manifest['files'].items():
+   self.assertIsNotNone(hashes['after'],name)
+   self.assertNotIn('superseded',hashes,name)
+
+ def test_current_tree_is_exact_after_image_fixed_point(self):
   with tempfile.TemporaryDirectory() as folder:
    target=Path(folder);self.seed_current(target);before=self.snapshot(target)
-   self.assertEqual('superseded',recipe.apply(target,check=True))
-   self.assertEqual('superseded',recipe.apply(target))
-   self.assertEqual('superseded',recipe.apply(target,reverse=True))
+   self.assertEqual('after',recipe.apply(target,check=True))
+   self.assertEqual('after',recipe.apply(target))
    self.assertEqual(before,self.snapshot(target))
 
- def test_every_current_target_is_exact_after_or_explicit_superseded(self):
-  seen_superseded=0
+ def test_every_current_target_is_exact_after(self):
   for name,hashes in manifest['files'].items():
    source=ROOT/name
    actual=recipe.digest(source.read_bytes()) if source.exists() else None
-   admitted={hashes['after'],*hashes.get('superseded',[])}
-   self.assertIn(actual,admitted,name)
-   if actual in hashes.get('superseded',[]):seen_superseded+=1
-  self.assertEqual(7,seen_superseded)
+   self.assertEqual(hashes['after'],actual,name)
 
- def test_current_jni_owner_is_verified_supersession(self):
-  name='src/hotspot/share/prims/jni.cpp'
-  expected='95adc8ea2a9035e65b613a7fb4131f8629bc90f81b70008895a77c1e396b05f9'
-  source=ROOT/name
-  actual=recipe.digest(source.read_bytes())
-  self.assertEqual(expected,actual)
-  self.assertIn(actual,manifest['files'][name]['superseded'])
+ def test_reverse_restores_upstream_preimages_and_reapply_is_fixed_point(self):
+  with tempfile.TemporaryDirectory() as folder:
+   target=Path(folder);self.seed_current(target);current=self.snapshot(target)
+   self.assertEqual('before',recipe.apply(target,reverse=True))
+   for name,hashes in manifest['files'].items():
+    path=target/name
+    actual=recipe.digest(path.read_bytes()) if path.exists() else None
+    self.assertEqual(hashes['before'],actual,name)
+   self.assertEqual('before',recipe.apply(target,check=True))
+   self.assertEqual('after',recipe.apply(target))
+   self.assertEqual(current,self.snapshot(target))
 
  def test_patch_bytes_remain_content_addressed(self):
   patch=HERE/'runtime.patch'
   self.assertEqual(manifest['patch_sha256'],recipe.digest(patch.read_bytes()))
+  self.assertNotIn(b'\r',patch.read_bytes())
 
  def test_each_unknown_drift_is_refused_without_partial_write(self):
   with tempfile.TemporaryDirectory() as folder:
@@ -75,6 +83,18 @@ class RecipeTest(unittest.TestCase):
     self.assertEqual(before,self.snapshot(target))
     if original is None:path.unlink()
     else:path.write_bytes(original)
+
+ def test_mixed_before_and_after_state_is_refused(self):
+  with tempfile.TemporaryDirectory() as folder:
+   target=Path(folder)/'target';target.mkdir();self.seed_current(target)
+   upstream=Path(folder)/'upstream';upstream.mkdir();self.seed_current(upstream)
+   self.assertEqual('before',recipe.apply(upstream,reverse=True))
+   name=next(n for n,h in manifest['files'].items() if h['before'] is not None)
+   (target/name).write_bytes((upstream/name).read_bytes())
+   before=self.snapshot(target)
+   with self.assertRaisesRegex(ValueError,'mixed runtime patch state'):
+    recipe.apply(target)
+   self.assertEqual(before,self.snapshot(target))
 
  def test_symlink_target_is_refused(self):
   with tempfile.TemporaryDirectory() as folder:

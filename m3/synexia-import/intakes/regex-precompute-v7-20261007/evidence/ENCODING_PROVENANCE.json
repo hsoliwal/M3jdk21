@@ -1,0 +1,37 @@
+{
+  "schema": 1,
+  "originalsUnchanged": true,
+  "proofHashesReferToOriginalBytes": true,
+  "projections": [
+    {
+      "originalLocalPath": "K:/codex-work/m3-regex-v7-vendor-importer-proof-20261007/logs/compile.log",
+      "originalBytes": 9650,
+      "originalSha256": "c7e8fb9eb91463dcfcb569f880681bcd79ea51fb3e1bd0a7edbfd7d19b91908b",
+      "originalGitBlob": "9feade2450bed2634e3f1e58c72271f13864d6af",
+      "originalEncoding": "UTF-16LE_WITH_BOM",
+      "transformation": "Strict UTF16 decode then UTF8 encode; decoded characters unchanged",
+      "reconstructedOriginalByteEquality": true,
+      "publishedLocalPath": "K:/codex-work/m3-v7-ast-target-publication-plan-20261007/final-utf8-log-projections/m3/synexia-import/intakes/regex-precompute-v7-20261007/evidence/logs/compile.log",
+      "publishedTargetPath": "m3/synexia-import/intakes/regex-precompute-v7-20261007/evidence/logs/compile.log",
+      "publishedBytes": 4824,
+      "publishedSha256": "e0542237b9e6b86a9c6de841a8bef46f67c87b00e4ed832799e4215cec6c9496",
+      "publishedGitBlob": "ff7d5d5c716164f9e7bc291414c957cfa1d9ed57",
+      "originalUnchanged": true
+    },
+    {
+      "originalLocalPath": "K:/codex-work/m3-regex-v7-vendor-importer-proof-20261007/logs/corrected-fixture-junit.log",
+      "originalBytes": 7829,
+      "originalSha256": "69c51a84c3ffea6296a457e61663ca5817a8e03ebf371f9c325d327668da5921",
+      "originalGitBlob": "d3d0c78edd824d03b91bd9aeb0dfc526c0186805",
+      "originalEncoding": "UNKNOWN_CHARSET_BYTE_PRESERVING_LATIN1_CODEPOINT_MAPPING",
+      "transformation": "Map each original byte0..255 to same Latin1 Unicode codepoint, then UTF8 encode; original character encoding not inferred",
+      "reconstructedOriginalByteEquality": true,
+      "publishedLocalPath": "K:/codex-work/m3-v7-ast-target-publication-plan-20261007/final-utf8-log-projections/m3/synexia-import/intakes/regex-precompute-v7-20261007/evidence/logs/corrected-fixture-junit.log",
+      "publishedTargetPath": "m3/synexia-import/intakes/regex-precompute-v7-20261007/evidence/logs/corrected-fixture-junit.log",
+      "publishedBytes": 7830,
+      "publishedSha256": "c20e2d942d2918b831ce722e773a6c103f31dd8396a025ba2c282fce0d6ba910",
+      "publishedGitBlob": "5b6e3e3a52004e76e08a296ea46a4e45380e9be2",
+      "originalUnchanged": true
+    }
+  ]
+}
