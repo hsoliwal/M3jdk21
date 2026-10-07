@@ -1,16 +1,27 @@
 # M3JDK21
 
-**Compute once. Reuse broadly. Make Java do less repeated work.**
+**A Java runtime built around shared structure and reusable computation.**
 
-M3JDK21 is building toward a Java runtime that shares more, allocates less, and
-reuses work already done. The roadmap starts with M3 String, regex, and
-precompute, extends into lean collections, and then brings those gains to SWT
-and the Eclipse IDE. Compatibility and reproducible measurements are the gates
-for turning that ambition into release claims.
+M3 is based on a simple premise: immutable data can carry more than its contents.
+Shared identity, composition, and indexed metadata can provide a basis for
+reusing work across operations. M3JDK21 explores how far that approach can go
+inside a Java runtime, starting with strings and regular expressions.
 
-**M3JDK21** is the Java 21 product/runtime target for M3 work led by Hitesh Soliwal and Contributors to the Synexia Project. M3 focuses on reducing redundant CPU work and retained
-memory through M3Index/precomputation, mechanical transformation, reusable
-recipes, and verification while preserving required JDK behavior and contracts.
+The design brings together canonical shared payloads, range and composition
+views, and precomputed hashes, indexes, and matching plans. Its promise lies in
+reducing repeated scanning, copying, allocation, and computation while retaining
+the behavior Java applications depend on. The useful balance between reuse,
+construction cost, and retained memory is a central engineering question.
+
+The roadmap begins with **M3 String in `java.lang.String`, regex, and precompute**,
+then extends to **lean collections** and **SWT/Eclipse IDE integration**.
+M3JDK21 is the Java 21 product/runtime target for this work, led by
+Hitesh Soliwal and Contributors to the Synexia Project.
+
+**Take a closer look:** explore the roadmap below, follow the linked repositories,
+and examine the [compatibility and benchmark approach](m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md).
+The source, design, and measurements offer a way to assess where this idea is
+useful and help shape what comes next.
 
 **Licensing boundary:** this is an OpenJDK-derived tree. Upstream JDK/OpenJDK
 licenses remain authoritative for upstream and derived JDK code. Independently
@@ -19,7 +30,6 @@ marked. See [M3-SYNEXIA-NOTICE.md](M3-SYNEXIA-NOTICE.md),
 [M3-SYNEXIA-AUTHORS.md](M3-SYNEXIA-AUTHORS.md), and
 [LICENSE-M3-APACHE-2.0.txt](LICENSE-M3-APACHE-2.0.txt).
 
-
 ## Project goals and plan
 
 M3, M³, MCube — the name leaves room for interpretation. The goal is to reduce
@@ -27,8 +37,8 @@ repeated CPU work and unnecessary allocation through shared immutable payloads,
 composition/range identity, indexed metadata, and reusable precompute while
 preserving required behavior and contracts.
 
-The plan is ordered by acceptance gates, not promised dates. The milestones
-below describe intended outcomes; completion requires linked evidence.
+The roadmap follows the dependencies of the design. Each milestone pairs an
+intended capability with the tests and measurements needed to evaluate it.
 
 | Milestone | Deliverable | Acceptance gate |
 | --- | --- | --- |
@@ -52,14 +62,13 @@ Parallel preparation may proceed, but dependent capabilities require the earlier
 acceptance gates. Each milestone needs an owner and linked PR/test/benchmark
 evidence before it can be reported as verified.
 
-## Evidence-first first release
+## Explore the work
 
-M3JDK21 uses a machine-readable release contract: public claims must be backed by reproducible
-build/test/benchmark evidence and SHA-256-sealed proof artifacts. The current release deliberately
-distinguishes implemented P0 foundation work from M3 String, regex, compatibility, performance and
-later-family claims that still require qualification.
+The release materials describe scope, compatibility expectations, benchmark
+methods, and the evidence associated with individual capabilities. They provide
+context for reading the implementation and comparing its tradeoffs across workloads.
 
-Start here:
+Explore:
 
 - [First-release evidence pack](m3/release/README.md)
 - [Machine-readable release contract](m3/release/release-contract.json)
