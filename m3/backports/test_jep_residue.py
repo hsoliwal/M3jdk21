@@ -113,6 +113,10 @@ class JepResidueTest(unittest.TestCase):
             ]
             by_jep = {item.jep: item for item in self.r.queue(root, catalogue, [])}
 
+        self.assertEqual("PACKET_EVIDENCE", by_jep[423].evidence_state)
+        self.assertEqual("PACKET_EVIDENCE", by_jep[484].evidence_state)
+        self.assertEqual("PACKET_EVIDENCE", by_jep[485].evidence_state)
+        self.assertEqual("PACKET_EVIDENCE", by_jep[523].evidence_state)
         self.assertEqual("MATERIALIZED_PACKET", by_jep[458].evidence_state)
         self.assertIn("jep-458-current", by_jep[458].evidence_paths)
         self.assertEqual("PACKET_READY", by_jep[458].receipt_state)
@@ -136,7 +140,7 @@ class JepResidueTest(unittest.TestCase):
             ]
             item = self.r.queue(root, catalogue, [])[0]
 
-        self.assertEqual("MATERIALIZED_PACKET", item.evidence_state)
+        self.assertEqual("PACKET_EVIDENCE", item.evidence_state)
         self.assertIn("m3/backports/recipes/j510", item.evidence_paths)
 
     def test_priority_matrix_metadata_is_joined_without_granting_compatibility(self) -> None:
