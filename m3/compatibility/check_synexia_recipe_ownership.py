@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SPDX-License-Identifier: Apache-2.0
-"""Fail-closed ownership check for Synexia-canonical reusable recipe mirrors."""
+"""Fail-closed ownership check for Synexia-canonical reusable recipe mirrors/residue."""
 
 from __future__ import annotations
 
@@ -13,6 +13,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 LEDGER = Path(__file__).with_name("synexia-recipe-ownership.tsv")
 PIN = Path(__file__).with_name("synexia-recipe-home-pin.tsv")
+RESIDUE = Path(__file__).with_name("synexia-canonical-residue-gitblobs.tsv")
 HEX40 = re.compile(r"[0-9a-f]{40}")
 
 
@@ -20,7 +21,6 @@ def git_blob(path: Path) -> str:
     data = path.read_bytes()
     header = f"blob {len(data)}\0".encode("ascii")
     return hashlib.sha1(header + data).hexdigest()
-
 
 
 def load_pin(path: Path = PIN) -> dict[str, str]:
@@ -66,7 +66,9 @@ def load_pin(path: Path = PIN) -> dict[str, str]:
         raise ValueError("invalid Synexia recipe-home pin state")
     return row
 
+
 def load(path: Path = LEDGER) -> list[dict[str, str]]:
+    """Validate the already-borrowed pure-int mirror ledger."""
     with path.open("r", encoding="utf-8", newline="") as stream:
         reader = csv.DictReader(stream, delimiter="\t")
         expected = [
@@ -125,16 +127,99 @@ def load(path: Path = LEDGER) -> list[dict[str, str]]:
     return rows
 
 
+def reusable_residue_paths() -> set[str]:
+    result: set[str] = set()
+    for exact in (
+        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceCatalog.java",
+        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java",
+    ):
+        if (ROOT / exact).is_file():
+            result.add(exact)
+
+    for directory in (
+        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope",
+        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom",
+        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic",
+        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3",
+        "m3/indexdb/src/main/java",
+    ):
+        start = ROOT / directory
+        if not start.is_dir():
+            continue
+        result.update(
+            path.relative_to(ROOT).as_posix()
+            for path in start.rglob("*.java")
+            if path.is_file()
+        )
+    return result
+
+
+def load_residue(path: Path = RESIDUE) -> list[dict[str, str]]:
+    """Validate the full reusable target-local migration residue freeze."""
+    with path.open("r", encoding="utf-8", newline="") as stream:
+        reader = csv.DictReader(stream, delimiter="\t")
+        expected = [
+            "path",
+            "git_blob_sha1",
+            "disposition",
+            "canonical_synexia_owner",
+            "license",
+        ]
+        if reader.fieldnames != expected:
+            raise ValueError("invalid Synexia canonical residue header")
+        rows = list(reader)
+
+    if not rows:
+        raise ValueError("empty Synexia canonical residue ledger")
+
+    seen: set[str] = set()
+    for physical, row in enumerate(rows, start=2):
+        if any(not row[field] for field in expected):
+            raise ValueError(f"blank residue field at row {physical}")
+        target = row["path"]
+        if target in seen:
+            raise ValueError(f"duplicate residue path: {target}")
+        seen.add(target)
+        if not HEX40.fullmatch(row["git_blob_sha1"]):
+            raise ValueError(f"invalid residue Git blob: {target}")
+        if row["disposition"] != "MIGRATION_RESIDUE_NOT_CANONICAL":
+            raise ValueError(f"invalid residue disposition: {target}")
+        owner = row["canonical_synexia_owner"]
+        if not (owner.startswith("com.synexia") or owner.startswith("synexia-")):
+            raise ValueError(f"invalid canonical Synexia owner: {target}")
+        if row["license"] != "Apache-2.0":
+            raise ValueError(f"non-Apache reusable residue: {target}")
+
+        source = ROOT / target
+        if not source.is_file():
+            raise ValueError(f"frozen reusable residue missing: {target}")
+        if git_blob(source) != row["git_blob_sha1"]:
+            raise ValueError(
+                "frozen reusable residue drift: "
+                f"{target}; improve {owner} in hsoliwal/com.synexia and consume a pinned handoff"
+            )
+
+    actual = reusable_residue_paths()
+    if seen != actual:
+        missing = sorted(actual - seen)
+        stale = sorted(seen - actual)
+        raise ValueError(
+            f"reusable residue set drift: unsealed={missing} retired_without_manifest_update={stale}"
+        )
+    return rows
+
+
 def main(argv: list[str]) -> int:
     if len(argv) > 1:
         print("usage: check_synexia_recipe_ownership.py", file=sys.stderr)
         return 2
     rows = load()
+    residue = load_residue()
     pin = load_pin()
     revision = rows[0]["synexia_revision"]
     print(
         "SYNEXIA_RECIPE_OWNERSHIP_PASS "
-        f"rows={len(rows)} revision={revision} "
+        f"borrowed_rows={len(rows)} frozen_residue={len(residue)} revision={revision} "
         f"manifest_blob={pin['canonical_manifest_git_blob']}"
     )
     return 0
