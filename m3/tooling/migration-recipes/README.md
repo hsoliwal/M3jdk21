@@ -44,3 +44,22 @@ Then invoke the M3JDK21 receiver with the opt-in profile and an explicit canonic
 
 The profile has no active-by-default activation and selects no recipe automatically. Canonical
 Synexia recipe execution therefore remains explicit, source-revision/proof bound and target-reviewed.
+
+
+## Audit recipe ownership
+
+After installing the exact reviewed Synexia recipe artifact, run the target-local receiver profile:
+
+    mvn -B -f m3/tooling/migration-recipes/pom.xml \
+      -Pm3-synexia-recipe-ownership-audit \
+      -Dm3.synexia.version=1.0.0-SNAPSHOT \
+      rewrite:dryRun
+
+The active recipe is canonical in Synexia:
+
+    com.synexia.rewrite.M3Jdk21RecipeOwnershipAudit
+
+The audit is read-only. It classifies every `com.m3.rewrite.*` source under this receiver tree as
+Synexia-canonical compatibility residue, target adapter/proof, or JDK-target-specific backport code.
+A new unclassified reusable recipe fails closed. The target profile contains only Maven activation
+glue and does not duplicate the canonical audit implementation.
