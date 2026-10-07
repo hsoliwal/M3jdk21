@@ -155,3 +155,25 @@ uint64_t m3_precompute_code_text_signal(const uint16_t *units, size_t length) {
             | lane(regex_meta, 48U)
             | lane(punctuation, 56U);
 }
+
+static unsigned popcount64(uint64_t value) {
+    unsigned count = 0U;
+    while (value != 0U) {
+        value &= value - UINT64_C(1);
+        count++;
+    }
+    return count;
+}
+
+int m3_precompute_similarity_score(
+        int query_length,
+        uint64_t query_hash,
+        int candidate_length,
+        uint64_t candidate_hash) {
+    uint64_t delta =
+            query_length >= candidate_length
+                    ? (uint64_t)(query_length - candidate_length)
+                    : (uint64_t)(candidate_length - query_length);
+    if (delta > UINT64_C(1023)) delta = UINT64_C(1023);
+    return (int)(popcount64(query_hash ^ candidate_hash) * 1024U + (unsigned)delta);
+}
