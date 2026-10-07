@@ -17,4 +17,4 @@ ConcurrentSkipListMap	M3LongLongConcurrentSkipListMap	PENDING	ordered concurrent
 ConcurrentSkipListSet	M3LongConcurrentSkipListSet	PENDING	ordered concurrent structure	JMM/linearizability proof required
 IdentityHashMap	M3ObjectIdentityMap	PENDING_OBJECT_SPACE	identity/object-space owner	primitive long equality is not object identity
 WeakHashMap	M3WeakObjectMap	PENDING_OBJECT_SPACE	weak-reference object owner	GC/reference-processing contract required
-EnumMap / EnumSet	M3 enum-specialized owner	PENDING_SPECIALIZATION	dense ordinal lanes	must preserve enum type/serialization contracts
+EnumMap / EnumSet	M3EnumLongMap (EnumMap<E,Long> shape); EnumSet shape pending	RECEIVER_CANDIDATE_V1	ordinal-indexed long[] + presence bits	primitive proving backend adapted from synexia-primitives EnumPrimitiveMap; java.util.EnumMap remains authority; must preserve enum type/serial

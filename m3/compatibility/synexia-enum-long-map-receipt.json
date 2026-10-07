@@ -1,0 +1,57 @@
+{
+  "schema": "M3JDK21_SYNEXIA_ENUM_LONG_MAP_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-enum-long-map-20261007",
+    "pullRequest": 9803,
+    "commit": "19b84196eea",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.EnumLongMap",
+    "crate": "m3-enum-long-map",
+    "donor": {
+      "path": "synexia-primitives/src/main/java/com/synexia/primitives/EnumPrimitiveMap.java",
+      "blob": "4ce35d21",
+      "license": "Apache-2.0 first-party (headers: com.synexia#9796)",
+      "disposition": "ADAPT: exact-width PrimitiveKind lane specialized to long[]"
+    }
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "ed5f4ed1771dbc0cf5cfc6d0944de2092326bd6d",
+    "owner": "com.m3.collections.M3EnumLongMap",
+    "jdkShape": "java.util.EnumMap<E,Long>",
+    "publicJdkReplacement": false
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3EnumLongMap.java",
+      "before": "ABSENT",
+      "after": "8be53dd0b4ccd1e0f226d4ad7a667bd986b21e51d150bea6f8ddae072bdf4966",
+      "resource": "00-M3EnumLongMap.java.txt"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3EnumLongMapTest.java",
+      "before": "ABSENT",
+      "after": "cd93ecad156634537dbb42acf199558689ff91c113db26803cfc2cf235377531",
+      "resource": "01-M3EnumLongMapTest.java.txt"
+    }
+  ],
+  "gates": {
+    "m3CollectionsModuleCompile": "PASS_WINDOWS -Xlint:all,-module -Werror (24 sources)",
+    "m3CollectionsModuleTests": "PASS_WINDOWS 29/29 (differential vs EnumMap<E,Long>, 70-constant enum)",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3EnumLongMapRecipeTest 2/2",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "jdkBuildJtregRuntime": "PENDING_LINUX",
+    "ci": "PENDING"
+  },
+  "semanticDecisions": [
+    "ordinal-indexed long[] + presence bits; no per-entry object, no boxed value, no retained key reference per mapping",
+    "JDK-shaped: foreign enum -> ClassCastException; null never present; put(null) -> NullPointerException; ordinal iteration order; no fail-fast iteration",
+    "adaptive sparse/direct variant deferred (needs hashed int->long owner); EnumSet shape deferred (LongBitSet donor)",
+    "B4 'into the JDK' remains BLOCKED_ON STRING + ARRAYS acceptance receipts"
+  ]
+}
