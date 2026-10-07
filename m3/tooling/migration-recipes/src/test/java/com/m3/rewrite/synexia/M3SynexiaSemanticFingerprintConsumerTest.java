@@ -71,14 +71,13 @@ final class M3SynexiaSemanticFingerprintConsumerTest {
 
     @Test
     void canonicalFingerprintRejectsTextBlockPayloadAsArchitectureAuthority() {
-        String ordinary = """
-                private static int compute(int a, int b) {
-                    String payload = """
-                            ordinary
-                            """;
-                    return (a + b) * 31;
-                }
-                """;
+        String ordinary =
+                "private static int compute(int a, int b) {\n"
+                        + "    String payload = \"\"\"\n"
+                        + "            ordinary\n"
+                        + "            \"\"\";\n"
+                        + "    return (a + b) * 31;\n"
+                        + "}\n";
         String fake = ordinary.replace(
                 "ordinary",
                 "M3-IOP: PURE_INT_EXPRESSION M3-ATOM: fake");
