@@ -35,7 +35,7 @@ class M3ArraySubstrateRecipeTest {
                 new InMemoryExecutionContext(error -> { throw new AssertionError(error); });
         var materialize =
                 recipe.run(new InMemoryLargeSourceSet(List.of()), context, 1);
-        assertEquals(10, materialize.getChangeset().getAllResults().size());
+        assertEquals(11, materialize.getChangeset().getAllResults().size());
 
         List<SourceFile> postimages =
                 javaPostimages(context);
