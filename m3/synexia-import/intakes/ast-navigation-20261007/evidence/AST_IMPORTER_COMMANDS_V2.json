@@ -1,0 +1,190 @@
+{
+  "schema": 1,
+  "preparedUtc": "2026-10-07T06:51:06.605875+00:00",
+  "status": "READY_FIXED_IMPORTER_CLASS_SEALS_VERIFIED_NO_RECOMPILE",
+  "manifest": {
+    "path": "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\export-ast.tsv",
+    "sha256": "860eade0c05a175373e3f96a19150de03f4865efdfcf077af5d5a52d15a471b7",
+    "root": "0529e8ed872db69b37d46dbee0194b0f3c866a43d2123154984c6f9586832019",
+    "rows": 44
+  },
+  "originalImporterClasses": {
+    "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed",
+    "sealPath": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\FIXED_IMPORTER_CLASS_SEALS.json",
+    "sealSha256": "703cb46be6f18f20ea2939624f3d03121ca7d9e70317c0ffc714a9caf8d1ad0e",
+    "compiledClasses": 14,
+    "strictCompiledOwners": 6,
+    "status": "PASS_STRICT_SIX_OWNER_COMPILER_COMMAND"
+  },
+  "sourceRoot": "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\templates\\m3\\vendor\\synexia",
+  "targetRoot": "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\target-snapshot",
+  "cases": [
+    {
+      "label": "verify-exact-ast-source-before-import",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xmx128m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\tmp",
+        "-cp",
+        "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed",
+        "com.m3.synexia.importer.SynexiaImportCli",
+        "verify",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\export-ast.tsv",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\templates\\m3\\vendor\\synexia",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\target-snapshot"
+      ],
+      "expectedExit": 0,
+      "expectedOutputContains": "0529e8ed872db69b37d46dbee0194b0f3c866a43d2123154984c6f9586832019",
+      "timeoutSeconds": 30
+    },
+    {
+      "label": "materialize-all-44-exact-ast-payloads",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xmx128m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\tmp",
+        "-cp",
+        "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed",
+        "com.m3.synexia.importer.SynexiaImportCli",
+        "materialize",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\export-ast.tsv",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\templates\\m3\\vendor\\synexia",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\target-snapshot"
+      ],
+      "expectedExit": 0,
+      "expectedOutputContains": "0529e8ed872db69b37d46dbee0194b0f3c866a43d2123154984c6f9586832019",
+      "timeoutSeconds": 30
+    },
+    {
+      "label": "verify-all-44-imported-targets",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xmx128m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\tmp",
+        "-cp",
+        "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed",
+        "com.m3.synexia.importer.SynexiaImportCli",
+        "verify-target",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\export-ast.tsv",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\templates\\m3\\vendor\\synexia",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\target-snapshot"
+      ],
+      "expectedExit": 0,
+      "expectedOutputContains": "0529e8ed872db69b37d46dbee0194b0f3c866a43d2123154984c6f9586832019",
+      "timeoutSeconds": 30
+    },
+    {
+      "label": "second-materialize-fixed-point",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xmx128m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\tmp",
+        "-cp",
+        "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed",
+        "com.m3.synexia.importer.SynexiaImportCli",
+        "materialize",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\export-ast.tsv",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\templates\\m3\\vendor\\synexia",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\target-snapshot"
+      ],
+      "expectedExit": 0,
+      "expectedOutputContains": "0529e8ed872db69b37d46dbee0194b0f3c866a43d2123154984c6f9586832019",
+      "timeoutSeconds": 30
+    },
+    {
+      "label": "source-drift-refused",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xmx128m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\tmp",
+        "-cp",
+        "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed",
+        "com.m3.synexia.importer.SynexiaImportCli",
+        "verify",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\export-ast.tsv",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\source-drift",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\target-snapshot"
+      ],
+      "expectedExit": 1,
+      "expectedOutputContains": "Synexia source hash drift",
+      "timeoutSeconds": 30
+    },
+    {
+      "label": "target-drift-refused",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xmx128m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\tmp",
+        "-cp",
+        "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed",
+        "com.m3.synexia.importer.SynexiaImportCli",
+        "verify",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\export-ast.tsv",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\templates\\m3\\vendor\\synexia",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\target-drift"
+      ],
+      "expectedExit": 1,
+      "expectedOutputContains": "M3JDK21 target drift",
+      "timeoutSeconds": 30
+    },
+    {
+      "label": "framed-root-drift-refused",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xmx128m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\tmp",
+        "-cp",
+        "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed",
+        "com.m3.synexia.importer.SynexiaImportCli",
+        "verify",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\root-drift.tsv",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\templates\\m3\\vendor\\synexia",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\target-snapshot"
+      ],
+      "expectedExit": 1,
+      "expectedOutputContains": "Synexia import manifest root mismatch",
+      "timeoutSeconds": 30
+    },
+    {
+      "label": "canonical-family-mismatch-refused",
+      "argv": [
+        "C:/Program Files/Java/jdk-21/bin/java.exe",
+        "-Xmx128m",
+        "-XX:ActiveProcessorCount=2",
+        "-Djava.io.tmpdir=K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\tmp",
+        "-cp",
+        "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\classes-fixed",
+        "com.m3.synexia.importer.SynexiaImportCli",
+        "verify",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\category-drift.tsv",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\templates\\m3\\vendor\\synexia",
+        "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\target-snapshot"
+      ],
+      "expectedExit": 1,
+      "expectedOutputContains": "M3Index category cannot claim IndexString family",
+      "timeoutSeconds": 30
+    }
+  ],
+  "fixedPointRequirement": "Capture all44target hash,size,mtime after first materialize and verify-target, compare exactly after second materialize; do not assume identity from source code.",
+  "siblingPreservation": {
+    "path": "K:\\codex-work\\m3-ast-structures-receiving-p0-20261007\\target\\ast-importer-qualification\\target-snapshot\\m3\\unrelated-ast-proof-sibling.keep",
+    "sha256": "e547cff6efb9450264c048194ec641eb814aa13f944b929749f8659734a23fd3"
+  },
+  "existingLicenseNotice": {
+    "LICENSE": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+    "NOTICE": "31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427"
+  },
+  "negativeFixtures": "Isolated K-only copies; never mutate original templates/canonical source or actual M3 worktree.",
+  "scope": "Byte custody/intake/fixed point/refusals only; cold-image geometry and full runtime portability not covered",
+  "newImporterOrFramework": false,
+  "priorPlanSha256": "72bd9132a220f2605e15ef220e7062abb676048d9d769443affa7276b4eb036e",
+  "receiverSourceDelta": "Existing root-qualifier one-line compiler fix; no new importer algorithm or public signature",
+  "separateImporterUnitGate": "NOT_ADMITTED_HERE: previous21-test run had18passes/3fixture failures; repair owned by donor closeout lane"
+}

@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "status": "SEALED_POSTIMAGES_NOT_YET_REPLAYED",
+  "sourceRevision": "80b8534ad1e45002185fb3eeab233f98d3a7c0bd",
+  "recipeTemplates": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\importer-fix-recipe-v3\\templates",
+  "manifestSha256": "681b23ce93303e8e78dadecd9c9c528fb46c004f328e36c776bf83d08a34ef0a",
+  "targets": 3,
+  "publicApiChanged": false,
+  "testAssertionChanges": false,
+  "previousRecipesRetained": true
+}

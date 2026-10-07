@@ -403,7 +403,7 @@ final class SynexiaImportPlanTest {
                         "m3jdk21",
                         List.of(entry(
                                 "m3-recipe-source",
-                                "synexia-m3-recipe/src/A.java",
+                                "src/A.java",
                                 "m3/vendor/synexia/synexia-m3-recipe/src/A.java",
                                 bytes,
                                 SynexiaImportManifest.Mode.APACHE_SOURCE)),
@@ -438,7 +438,7 @@ final class SynexiaImportPlanTest {
         byte[] keep = apache("package com.synexia.rewrite; final class Keep {}\n");
         byte[] replace = apache("package com.synexia.convergence; final class Replace { int v = 2; }\n");
         byte[] add = apache("int m3_add(int a, int b) { return a + b; }\n");
-        byte[] resource = "---\ntype: specs.openrewrite.org/v1beta/recipe\nname: com.synexia.M3\n".getBytes(StandardCharsets.UTF_8);
+        byte[] resource = "---\ntype: specs.openrewrite.org/v1beta/recipe\nname: com.synexia.M3\n";
         byte[] stale = apache("package obsolete; final class Old {}\n");
 
         write(synexia.resolve(keepSource), keep);
