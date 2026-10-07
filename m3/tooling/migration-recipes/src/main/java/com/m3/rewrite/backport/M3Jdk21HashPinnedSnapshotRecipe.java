@@ -293,6 +293,7 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
                         || value.startsWith(".m3/openrewrite-recipes/src/test/java/")
                         || value.startsWith("m3/tooling/migration-recipes/src/main/java/")
                         || value.startsWith("m3/tooling/migration-recipes/src/test/java/")
+                        || value.startsWith("m3/tooling/a3/src/main/java/")
                         || value.startsWith("m3/tooling/a3/src/test/java/"))
                 || !value.endsWith(".java")
                 || value.indexOf('\\') >= 0
@@ -317,6 +318,7 @@ public final class M3Jdk21HashPinnedSnapshotRecipe
                         "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/")
                 || value.startsWith(
                         "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/")
+                || value.startsWith("m3/tooling/a3/src/main/java/")
                 || value.startsWith("m3/tooling/a3/src/test/java/")
                 || value.startsWith(
                         ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/")
