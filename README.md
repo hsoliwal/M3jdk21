@@ -18,6 +18,8 @@ then extends to **lean collections** and **SWT/Eclipse IDE integration**.
 M3JDK21 is the Java 21 product/runtime target for this work, led by
 Hitesh Soliwal and Contributors to the Synexia Project.
 
+**Read the design paper:** [M3: Shared Structure and Reusable Computation in a Java Runtime](m3/papers/M3_SHARED_STRUCTURE_AND_REUSABLE_COMPUTATION.md).
+
 **Take a closer look:** explore the roadmap below, follow the linked repositories,
 and examine the [compatibility and benchmark approach](m3/release/BENCHMARK_AND_COMPATIBILITY_SPEC.md).
 The source, design, and measurements offer a way to assess where this idea is
