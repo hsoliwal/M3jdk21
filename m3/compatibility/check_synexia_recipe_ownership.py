@@ -99,6 +99,12 @@ def load(path: Path = LEDGER) -> list[dict[str, str]]:
         "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/scope/",
         "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/semantic/",
     )
+    legacy_exact = {
+        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/M3Java21ConvergenceRecipe.java",
+    }
+    canonical_exact = {
+        "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3Java21FileConvergenceRecipe.java",
+    }
     for physical, row in enumerate(rows, start=2):
         if any(not row[field] for field in expected):
             raise ValueError(f"blank ownership field at row {physical}")
@@ -113,9 +119,15 @@ def load(path: Path = LEDGER) -> list[dict[str, str]]:
         for field in ("legacy_git_blob", "synexia_git_blob"):
             if not HEX40.fullmatch(row[field]):
                 raise ValueError(f"invalid Git blob {field} at row {physical}")
-        if not row["legacy_path"].startswith(legacy_roots):
+        if not (
+            row["legacy_path"].startswith(legacy_roots)
+            or row["legacy_path"] in legacy_exact
+        ):
             raise ValueError(f"legacy recipe escaped frozen namespace at row {physical}")
-        if not row["canonical_path"].startswith(canonical_roots):
+        if not (
+            row["canonical_path"].startswith(canonical_roots)
+            or row["canonical_path"] in canonical_exact
+        ):
             raise ValueError(f"canonical recipe escaped borrowed namespace at row {physical}")
 
         legacy = ROOT / row["legacy_path"]
