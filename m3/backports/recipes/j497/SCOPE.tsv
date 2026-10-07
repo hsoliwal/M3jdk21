@@ -1,0 +1,20 @@
+field	value
+packet	J497
+jep	497
+title	Quantum-Resistant Module-Lattice-Based Digital Signature Algorithm
+domain	security-library-provider
+disposition	candidate
+scope_floor	LIBRARY_API
+contract_mode	ADDITIVE_SECURITY_PROVIDER_WITH_PUBLIC_API_REVIEW
+security_review	MANDATORY
+dependency_closure	JDK-8340327_THEN_JDK-8298387_THEN_JDK-8345057_THEN_JDK-8345533
+a3_java_preparation	MANDATORY
+product_materialization	NOT_AUTHORIZED
+public_asymmetric_key_api	FORBIDDEN_DEFAULT_JAVA21
+source21_compile	PENDING
+acvp_fips204	PENDING
+provider_semantics	PENDING
+mlkem_cohabitation	PENDING
+security_jtreg	PENDING
+whole_image	PENDING
+promotion	NOT_AUTHORIZED

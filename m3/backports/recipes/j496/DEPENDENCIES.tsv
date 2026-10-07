@@ -1,0 +1,18 @@
+dependency	current_m3jdk21	j496_use	action
+javax.crypto.KEM	PRESENT	public KEM engine	REUSE_JAVA21
+sun.security.provider.NamedKEM	ABSENT	standard named-parameter KEM framework	ADD_PREREQUISITE
+sun.security.provider.NamedKeyFactory	ABSENT	ML-KEM key decoding/factory support	ADD_PREREQUISITE
+sun.security.provider.NamedKeyPairGenerator	ABSENT	ML-KEM key generation support	ADD_PREREQUISITE
+sun.security.pkcs.NamedPKCS8Key	ABSENT	private-key encoding support	ADD_PREREQUISITE
+sun.security.x509.NamedX509Key	ABSENT	public-key encoding support	ADD_PREREQUISITE
+sun.security.util.KeyUtil	PRESENT	framework key validation utility	ADAPT_EXACT_UPSTREAM_DELTA
+sun.security.util.SignatureUtil	PRESENT	framework signature utility	ADAPT_EXACT_UPSTREAM_DELTA
+com.sun.crypto.provider.SunJCE	PRESENT	ML-KEM provider registrations	EXTEND_PROVIDER
+java.security.spec.NamedParameterSpec	PRESENT	ML-KEM named parameter constants	PUBLIC_API_REVIEW_REQUIRED
+sun.security.util.KnownOIDs	PRESENT	NIST ML-KEM OIDs	EXTEND_OID_TABLE
+sun.security.provider.SHA3.SHAKE256	ABSENT_NESTED_XOF	ML-KEM SHAKE256 XOF	ADD_JDK_8338587_PREREQUISITE
+sun.security.provider.SHA3.keccak(long[])	ABSENT	SHA3Parallel permutation primitive	ADD_JDK_8338587_PREREQUISITE
+sun.security.provider.SHAKE256	PRESENT_STANDALONE	current PKCS7/SignerInfo SHAKE256 compatibility	PRESERVE_OR_MIGRATE_CALLERS_IN_PREREQUISITE
+sun.security.provider.SHA3Parallel	ABSENT	parallel SHA3 primitive for ML-KEM	ADD_TARGET
+FIPS203 ACVP vectors	ABSENT	known-answer/security proof	ADD_TEST_DATA
+A3 Java preparation	AVAILABLE	atomize/patternize/document/fixed-point before backport recipe	MANDATORY_PRE_RECIPE

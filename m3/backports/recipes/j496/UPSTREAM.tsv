@@ -1,0 +1,4 @@
+order	jbs	commit	role	disposition
+1	JDK-8340327	3f53d571343792341481f4d15970cdc0bcd76a5e	Named standard-parameter public-key framework	REQUIRED_PREREQUISITE
+2	JDK-8338587	c54fc08aa3c63e4b26dc5edb2436844dfd3bab7c	Internal SHA3 SHAKE/XOF surface used by ML-KEM	REQUIRED_PREREQUISITE
+3	JDK-8298390	13987b4244614d594dc8f94c288eddb6239a066f	JEP 496 ML-KEM implementation	TARGET_FEATURE

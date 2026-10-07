@@ -1,0 +1,12 @@
+field	value
+jep	510
+current_tree_state	CANDIDATE_MATERIALIZED_UNVERIFIED
+product_recipe	com.m3.jdk21.Jep510Kdf
+candidate_recipe	com.m3.jdk21.Jep510KdfCandidate
+product_targets	8
+security_test_targets	5
+upstream_final_jep	079fccfa9a03b890e698c52c689dea0f19f8fbee
+upstream_test_pin	79456110fb6dd11ef19e9637c6f40ee7ce329481
+java21_contract	EXPLICIT_OPT_IN_LIBRARY_API_EXTENSION
+promotion	NOT_AUTHORIZED
+next_action	BUILD_JDK_IMAGE_RUN_KDF_JTREG_A3_FIXED_POINT_CANONICAL_READBACK
