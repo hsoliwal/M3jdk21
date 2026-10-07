@@ -13,6 +13,8 @@ import java.util.Objects;
  */
 public final class M3EditDistancePlan implements CharSequence {
     private static final int MAX_PATTERN_UNITS = 1_048_576;
+    private static final int MAX_SOURCE_UNITS = 1_048_576;
+    private static final long MAX_DP_CELLS = 64_000_000L;
     private static final int MYERS_MAX_UNITS = 63;
 
     private final char[] pattern;
@@ -95,6 +97,7 @@ public final class M3EditDistancePlan implements CharSequence {
         ensureWorkload(value.length());
         if (pattern.length == 0) return value.length();
         if (usesMyers()) return myersDistance(value, progress);
+        requireFullDpBudget(value.length());
         return dynamicDistance(value, workspace, progress);
     }
 
@@ -122,6 +125,7 @@ public final class M3EditDistancePlan implements CharSequence {
         if (usesMyers() && maxDistance >= Math.min(pattern.length, value.length())) {
             return myersDistance(value, progress) <= maxDistance;
         }
+        requireBandedBudget(value.length(), maxDistance);
         return bandedWithin(value, workspace, maxDistance, progress);
     }
 
@@ -241,8 +245,25 @@ public final class M3EditDistancePlan implements CharSequence {
     }
 
     private void ensureWorkload(int sourceLength) {
-        if (Math.abs((long) sourceLength - pattern.length) > MAX_PATTERN_UNITS) {
-            throw new IllegalArgumentException("distance workload budget exceeded");
+        if (sourceLength < 0 || sourceLength > MAX_SOURCE_UNITS) {
+            throw new IllegalArgumentException("distance source budget exceeded");
+        }
+    }
+
+    private void requireFullDpBudget(int sourceLength) {
+        long cells = Math.multiplyExact((long) sourceLength, Math.max(1, pattern.length));
+        if (cells > MAX_DP_CELLS) {
+            throw new IllegalArgumentException("distance DP work budget exceeded");
+        }
+    }
+
+    private void requireBandedBudget(int sourceLength, int maxDistance) {
+        long width = Math.min(
+                pattern.length,
+                Math.addExact(Math.multiplyExact((long) maxDistance, 2L), 1L));
+        long cells = Math.multiplyExact((long) sourceLength, Math.max(1L, width));
+        if (cells > MAX_DP_CELLS) {
+            throw new IllegalArgumentException("distance banded work budget exceeded");
         }
     }
 
