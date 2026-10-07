@@ -460,6 +460,23 @@ public class M3StringPrecomputeSearchTest {
         check(rangeRepeated.equals("ababababab"),
                 "repeat preserves existing M3 range independent of join gate");
 
+        StringBuilder builder = new StringBuilder("prefix:");
+        builder.append(joined, 1, joined.length() - 1);
+        char[] builderExpected = new char["prefix:".length() + joined.length() - 2];
+        "prefix:".getChars(0, "prefix:".length(), builderExpected, 0);
+        joined.getChars(1, joined.length() - 1, builderExpected, "prefix:".length());
+        check(equalChars(builder.toString(), builderExpected), "StringBuilder M3 append range");
+
+        String singleLine = String.join("", "single", "-line");
+        singleLine.strip(); // prepare fixed facts without changing content
+        var singleLines = singleLine.lines().toList();
+        check(singleLines.size() == 1 && singleLines.get(0).equals(singleLine),
+                "prepared single-line fast path");
+        String multiLine = String.join("", "a\r", "\nb\n", "c");
+        multiLine.strip(); // prepare facts including line-terminator flag
+        check(multiLine.lines().toList().equals(java.util.List.of("a", "b", "c")),
+                "prepared multi-line preserves line semantics");
+
         String repeated = joined.repeat(3);
         char[] repeatedOracle =
                 "alpha|\u03b2eta|\ud83d\ude42|omega".repeat(3).toCharArray();
