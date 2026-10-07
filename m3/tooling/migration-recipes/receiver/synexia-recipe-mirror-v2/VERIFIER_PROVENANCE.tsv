@@ -1,0 +1,2 @@
+schema	source_repository	source_revision	source_path	source_git_blob	maven_coordinate	license	disposition
+M3_SYNEXIA_RECIPE_MIRROR_VERIFIER_V1	hsoliwal/com.synexia	9264e2aa35ca58c28fc40e361811949a50163fd6	synexia-openrewrite-recipes/pom-m3jdk21-recipe-mirror-verifier.xml	f037f78d5c0e84e81b6d4fff8fbb41ee6ee3a067	com.synexia:synexia-m3jdk21-recipe-mirror-verifier:1.0.0-SNAPSHOT	Apache-2.0	DEPENDENCY_ONLY_CANONICAL_SYNEXIA
