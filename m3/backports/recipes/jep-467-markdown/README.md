@@ -7,7 +7,7 @@ Status: inventory / dependency-closure. No product-backport completion claim.
 - JEP 467 — Markdown Documentation Comments
 - JBS: JDK-8298405
 - implementation commit: `0a58cffe88ba823e71fcdcca64b784ed04ca5398`
-- implementation touched-path denominator: **250 files**
+- implementation touched-path denominator: **251 files**
 - JDK 23 GA tag: `jdk-23+37`
 - JDK 23 GA commit: `9ad2e63f176364b96a827af80055e7db4b61fc9a`
 
@@ -43,7 +43,7 @@ upstream license before any materialization.
 
 ## Required next pass
 
-1. compare each of the 250 implementation paths against JDK21 and JDK23 GA;
+1. compare each of the 251 implementation paths against JDK21 and JDK23 GA;
 2. classify GA changes after the implementation commit as feature-related or unrelated;
 3. generate one exact Java/text FILE recipe atom per admitted target;
 4. explicitly review additive public compiler/doc-tree API;
