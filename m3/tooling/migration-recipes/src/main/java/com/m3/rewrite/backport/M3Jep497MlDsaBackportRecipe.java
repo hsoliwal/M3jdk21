@@ -34,9 +34,9 @@ public final class M3Jep497MlDsaBackportRecipe extends Recipe {
 
     @Override
     public String getDescription() {
-        return "Replays seven exact Java product/security-test postimages from the JEP 496 "
-                + "Java-21 receiver state, using released FIPS-204-final ML-DSA implementation "
-                + "classes and bounded shared-owner adaptations.";
+        return "Replays eight exact Java product/security-test postimages plus three reduced pinned "
+                + "FIPS-204 ACVP resources from the JEP 496 Java-21 receiver state, using "
+                + "released ML-DSA implementation classes and bounded shared-owner adaptations.";
     }
 
     @Override
@@ -61,6 +61,8 @@ public final class M3Jep497MlDsaBackportRecipe extends Recipe {
 
     @Override
     public List<Recipe> getRecipeList() {
-        return List.of(new M3Jdk21HashPinnedSnapshotRecipe("jdk24-jep497-mldsa"));
+        return List.of(
+                new M3Jdk21HashPinnedSnapshotRecipe("jdk24-jep497-mldsa"),
+                new M3Jdk21HashPinnedTextSnapshotRecipe("jdk24-jep497-mldsa-vectors"));
     }
 }
