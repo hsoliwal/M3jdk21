@@ -1107,6 +1107,8 @@ for fragment in [
         fail(f"Synexia recipe application receipt missing: {fragment}")
 
 for forbidden_recipe_path in [
+    "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jni-newstring-admission.yml",
+    "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-char-boundary.yml",
     "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-history-convergence.yml",
     "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-m3-string-history-convergence",
     "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-string-history-convergence",
