@@ -8,12 +8,18 @@ on:
       - "m3/pom.xml"
       - "m3/tooling/backport-dag/**"
       - "m3/tooling/migration-recipes/**"
+      - "m3/backports/backport_recipe_dag.py"
+      - "m3/backports/test_backport_recipe_dag.py"
+      - "m3/backports/pom.xml"
       - ".github/workflows/m3-jdk21-backport-dag.yml"
   pull_request:
     paths:
       - "m3/pom.xml"
       - "m3/tooling/backport-dag/**"
       - "m3/tooling/migration-recipes/**"
+      - "m3/backports/backport_recipe_dag.py"
+      - "m3/backports/test_backport_recipe_dag.py"
+      - "m3/backports/pom.xml"
       - ".github/workflows/m3-jdk21-backport-dag.yml"
   workflow_dispatch:
 
@@ -69,6 +75,19 @@ jobs:
         run: |
           mvn -B -ntp -f m3/backports/pom.xml verify
 
+      - name: Validate every generated executable packet through canonical Java DAG
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s m3/backports/target/backport-recipe-dag.tsv
+          test -s m3/backports/target/backport-recipe-dag.json
+          test -s m3/backports/target/backport-packets.tsv
+          test -d m3/backports/target/backport-packets
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+            -Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketBatchMain \
+            -Dexec.args="$PWD/m3/backports/target/backport-packets" \
+            exec:java
+
       - name: Upload backport status artifact
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
@@ -76,6 +95,10 @@ jobs:
           path: |
             m3/backports/target/program-status.json
             m3/backports/target/program-status.tsv
+            m3/backports/target/backport-recipe-dag.json
+            m3/backports/target/backport-recipe-dag.tsv
+            m3/backports/target/backport-packets.tsv
+            m3/backports/target/backport-packets/**
             target/m3-projection-smoke/out/**
           if-no-files-found: error
           retention-days: 14
