@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "completedUtc": "2026-10-07T06:50:02.725518+00:00",
+  "status": "PASS_ALL_FOUR_ORIGINAL_AST_PRECOMPUTE_TESTS_OVER_SEALED_HOST",
+  "parentOneTestProofSha256": "60f392a969382ea4ac94cc033dcaa6adbc06489e48bc473ba96ceac15f363302",
+  "cpuPreflightSha256": "96b1ab0ef9fdfe883e9956fef8830d63ff475a364cd8ca6e1338eeaf1db357be",
+  "commandsSha256": "6e8d82ea796d9bc4db9a6762b7f4614247ee1a4bfc51ce96734ff8ed6a73485e",
+  "pomSha256": "67c568c3df99e51ee55d3785e872d704c999af9f3d7989ea736d434945267c05",
+  "mavenExitReceipt": "target\\ast-full-original-oracle\\maven\\EXIT.json",
+  "mavenExitReceiptSha256": "f21278a7844f8b27d455616cf4ab6db870a70827e41ed18bef129e29996df89b",
+  "sourceRevision": "7d2133f1412a9e7295296c3f86baae577bb3251c",
+  "originalOracleModified": false,
+  "newCompilation": false,
+  "compiledClassesReusedBeforeAfterMatched": 41,
+  "sourceBodiesBeforeAfterMatched": 48,
+  "inheritedClassesBeforeAfterMatched": 2440,
+  "originalLibrariesBeforeAfterMatched": 64,
+  "junit": {
+    "path": "C:\\Users\\hsoliwal\\.m2\\repository\\org\\junit\\platform\\junit-platform-console-standalone\\1.10.1\\junit-platform-console-standalone-1.10.1.jar",
+    "sha256": "b42eaa53d13576d17db5fb8b280722a6ae9e36daf95f4262bc6e96d4cb20725f",
+    "platformVersion": "1.10.1",
+    "jupiterVersion": "5.10.1"
+  },
+  "tests": {
+    "tests": 4,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "methods": [
+    "poolPrecomputeIndexesKindsLabelsHashesParentsAndQueryCandidates()",
+    "kmpAndAhoCorasickScanThePrecomputedKindStream()",
+    "occurrencePrecomputeBuildsIntervalsBinaryLiftingPathHashesAndPostings()",
+    "sourceIndexFindsDeepestOccurrenceAtCursorOffset()"
+  ],
+  "reports": [
+    {
+      "path": "target\\ast-full-original-oracle\\reports\\TEST-junit-jupiter.xml",
+      "sha256": "de7f50ca631ca7d8e31cefa7c2eaf15325f8759f7d706c16eaa4394ee2607703",
+      "bytes": 14116
+    },
+    {
+      "path": "target\\ast-full-original-oracle\\reports\\TEST-junit-platform-suite.xml",
+      "sha256": "287e9ef1817c3d06280e8db0e22fa9949c83b756fed20fa5a157d66b27d6f6f7",
+      "bytes": 12373
+    },
+    {
+      "path": "target\\ast-full-original-oracle\\reports\\TEST-junit-vintage.xml",
+      "sha256": "2106edd3d0e7b4580ee80b98e66d4b067b27cc68e879dd590222d9ab3a1d90c6",
+      "bytes": 12352
+    }
+  ],
+  "coverage": [
+    "occurrence navigation/binary lifting/LCA/path hashes/postings",
+    "source offset deepest occurrence lookup",
+    "canonical AST pool postings/parents/query candidates",
+    "prepared kind-stream KMP and Aho-Corasick results"
+  ],
+  "pending": [
+    "Cache/lifecycle methods not in this class",
+    "Cold-image navigation restore/wrong-geometry refusal",
+    "JNI/native dispatch/provider",
+    "Full portable receiver source closure/performance"
+  ],
+  "limits": {
+    "processors": 2,
+    "heapMiB": 256,
+    "newOutputCapMiB": 16,
+    "reserveGiB": 8
+  },
+  "scope": "Original four-method AST navigation/source offsets/pool postings/kind-stream oracle only; inherited sealed host required, no source-complete target runtime/JNI/cold-image/performance admission."
+}

@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "status": "SOURCE_FIXTURES_PREPARED_NOT_YET_EXECUTED",
+  "sourceRevision": "80b8534ad1e45002185fb3eeab233f98d3a7c0bd",
+  "corrections": [
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaImportPlanTest.java",
+      "preimagePath": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\fixture-correction-preimages\\SynexiaImportPlanTest.java",
+      "preimageSha256": "854e51796080b44b198dc52686780ed364fce9d9ad8ca3d31abb5e0bc8b72a32",
+      "postimageSha256": "a85d673f3a98b22a3a1514f905503037391c4b7686533869c792dcf8faa73e1a",
+      "before": "                                \"src/A.java\",\n                                \"m3/vendor/synexia/synexia-m3-recipe/src/A.java\",",
+      "after": "                                \"synexia-m3-recipe/src/A.java\",\n                                \"m3/vendor/synexia/synexia-m3-recipe/src/A.java\",",
+      "assertionsChanged": false,
+      "productionChanged": false
+    },
+    {
+      "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\src\\test\\java\\com\\m3\\synexia\\importer\\SynexiaImporterTest.java",
+      "preimagePath": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\fixture-correction-preimages\\SynexiaImporterTest.java",
+      "preimageSha256": "6acd2f31448739fd21d54b7df7503a796bc96801a5e5ff9a5720286a959fdf1a",
+      "postimageSha256": "22442dc8d8fce2b032c6da1261a53bbdbc945afdbcfdf97d940c1da5f4c18ae0",
+      "before": "        assertThrows(\n                IllegalArgumentException.class,\n                () -> SynexiaImporter.verify(synexia, temp.resolve(\"absent-target\"), manifest));",
+      "after": "        write(synexia.resolve(sourcePath), bytes);\n        assertThrows(\n                IllegalArgumentException.class,\n                () -> SynexiaImporter.verify(synexia, temp.resolve(\"absent-target\"), manifest));",
+      "assertionsChanged": false,
+      "productionChanged": false
+    }
+  ],
+  "receiverTableFixture": {
+    "path": "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\junit-module\\m3\\synexia-import\\m3index-family-receiver.tsv",
+    "sha256": "299dd8992436bbef78f58f5c068ea29b75901749f74b457282e54542990aa7af",
+    "sourceCapture": "current-test-custody/CAPTURE.json"
+  },
+  "originalTestSemanticsPreserved": true,
+  "publicFailureOrderChanged": false,
+  "fossRowsWrittenBeforeEdits": true
+}

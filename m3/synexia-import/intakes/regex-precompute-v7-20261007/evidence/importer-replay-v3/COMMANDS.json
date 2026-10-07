@@ -1,0 +1,90 @@
+[
+  {
+    "label": "apply-three-targets",
+    "argv": [
+      "C:/ProgramData/chocolatey/lib/maven/apache-maven-3.9.14/bin/mvn.CMD",
+      "-o",
+      "-B",
+      "-f",
+      "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\pom.xml",
+      "-Dexec.executable=C:/Program Files/Java/jdk-21/bin/java.exe",
+      "-Dexec.args=-Xms16m -Xmx256m -XX:MaxMetaspaceSize=192m -XX:ActiveProcessorCount=2 -Djava.io.tmpdir=K:\\codex-work\\m3-regex-v7-vendor-importer-replay-v3-20261007\\tmp -cp K:\\codex-work\\m3-synexia-full-family-invariant-20261007\\target\\replay-classes com.synexia.rewrite.Replay --apply K:\\codex-work\\m3-regex-v7-vendor-importer-replay-v3-20261007\\receiver K:\\codex-work\\m3-regex-v7-vendor-importer-replay-v3-20261007\\templates",
+      "org.codehaus.mojo:exec-maven-plugin:3.5.0:exec"
+    ],
+    "pid": 18520,
+    "exitCode": 0,
+    "startedUnix": 1791356234.846322,
+    "finishedUnix": 1791356236.2468557,
+    "logSha256": "8f3158e04afeb6f7e65f94a33034704fcd166a0e350681c57c9db514285ef9a2",
+    "expectedExitCode": 0,
+    "expectedMarker": "changes=3 applied=true promotionAuthority=false",
+    "markerMatched": true,
+    "terminal": true
+  },
+  {
+    "label": "fixed-point-three-targets",
+    "argv": [
+      "C:/ProgramData/chocolatey/lib/maven/apache-maven-3.9.14/bin/mvn.CMD",
+      "-o",
+      "-B",
+      "-f",
+      "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\pom.xml",
+      "-Dexec.executable=C:/Program Files/Java/jdk-21/bin/java.exe",
+      "-Dexec.args=-Xms16m -Xmx256m -XX:MaxMetaspaceSize=192m -XX:ActiveProcessorCount=2 -Djava.io.tmpdir=K:\\codex-work\\m3-regex-v7-vendor-importer-replay-v3-20261007\\tmp -cp K:\\codex-work\\m3-synexia-full-family-invariant-20261007\\target\\replay-classes com.synexia.rewrite.Replay --check K:\\codex-work\\m3-regex-v7-vendor-importer-replay-v3-20261007\\receiver K:\\codex-work\\m3-regex-v7-vendor-importer-replay-v3-20261007\\templates",
+      "org.codehaus.mojo:exec-maven-plugin:3.5.0:exec"
+    ],
+    "pid": 17768,
+    "exitCode": 0,
+    "startedUnix": 1791356236.3031676,
+    "finishedUnix": 1791356237.7262897,
+    "logSha256": "205c176a949e79f500b626e423d7a4fd1b9d1519885702851e458b984b90f139",
+    "expectedExitCode": 0,
+    "expectedMarker": "changes=0 applied=false promotionAuthority=false",
+    "markerMatched": true,
+    "terminal": true
+  },
+  {
+    "label": "second-apply-three-targets",
+    "argv": [
+      "C:/ProgramData/chocolatey/lib/maven/apache-maven-3.9.14/bin/mvn.CMD",
+      "-o",
+      "-B",
+      "-f",
+      "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\pom.xml",
+      "-Dexec.executable=C:/Program Files/Java/jdk-21/bin/java.exe",
+      "-Dexec.args=-Xms16m -Xmx256m -XX:MaxMetaspaceSize=192m -XX:ActiveProcessorCount=2 -Djava.io.tmpdir=K:\\codex-work\\m3-regex-v7-vendor-importer-replay-v3-20261007\\tmp -cp K:\\codex-work\\m3-synexia-full-family-invariant-20261007\\target\\replay-classes com.synexia.rewrite.Replay --apply K:\\codex-work\\m3-regex-v7-vendor-importer-replay-v3-20261007\\receiver K:\\codex-work\\m3-regex-v7-vendor-importer-replay-v3-20261007\\templates",
+      "org.codehaus.mojo:exec-maven-plugin:3.5.0:exec"
+    ],
+    "pid": 55152,
+    "exitCode": 0,
+    "startedUnix": 1791356237.7302923,
+    "finishedUnix": 1791356239.165893,
+    "logSha256": "ab21d23105211f1e74a45567062875c12af0ecee24ceeb24480cfa6250fb894f",
+    "expectedExitCode": 0,
+    "expectedMarker": "changes=0 applied=true promotionAuthority=false",
+    "markerMatched": true,
+    "terminal": true
+  },
+  {
+    "label": "input-drift-refusal-three-targets",
+    "argv": [
+      "C:/ProgramData/chocolatey/lib/maven/apache-maven-3.9.14/bin/mvn.CMD",
+      "-o",
+      "-B",
+      "-f",
+      "K:\\codex-work\\m3-regex-v7-vendor-importer-proof-20261007\\pom.xml",
+      "-Dexec.executable=C:/Program Files/Java/jdk-21/bin/java.exe",
+      "-Dexec.args=-Xms16m -Xmx256m -XX:MaxMetaspaceSize=192m -XX:ActiveProcessorCount=2 -Djava.io.tmpdir=K:\\codex-work\\m3-regex-v7-vendor-importer-replay-v3-20261007\\tmp -cp K:\\codex-work\\m3-synexia-full-family-invariant-20261007\\target\\replay-classes com.synexia.rewrite.Replay --apply K:\\codex-work\\m3-regex-v7-vendor-importer-replay-v3-20261007\\drift-receiver K:\\codex-work\\m3-regex-v7-vendor-importer-replay-v3-20261007\\templates",
+      "org.codehaus.mojo:exec-maven-plugin:3.5.0:exec"
+    ],
+    "pid": 11576,
+    "exitCode": 1,
+    "startedUnix": 1791356239.1708133,
+    "finishedUnix": 1791356240.5907812,
+    "logSha256": "4c82e30a59668414dc938e3f1234f3432a9df0f1cffcb9e33c33895670ffd0d0",
+    "expectedExitCode": 1,
+    "expectedMarker": "source drift: m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImporterTest.java",
+    "markerMatched": true,
+    "terminal": true
+  }
+]
