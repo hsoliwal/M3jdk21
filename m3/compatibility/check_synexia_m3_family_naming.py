@@ -20,7 +20,7 @@ EXPECTED = {
     "schema": "M3JDK21_SYNEXIA_FAMILY_NAMING_PIN_V1",
     "source_repository": "hsoliwal/com.synexia",
     "source_pr": "9773",
-    "source_commit": "0928e61bff989c7df16761301491bac4e7ba41bc",
+    "source_commit": "a2f1e9e6f84969c04f87cbc5c921d0add8ff71a3",
     "source_policy_md_path": "docs/M3-SCALE/invariants/M3-FAMILY-NAMING-COLLECTIONS-1.md",
     "source_policy_md_blob": "6ce4ad0811717080abdb128613900f5dfc719db4",
     "source_policy_json_path": "docs/M3-SCALE/invariants/M3-FAMILY-NAMING-COLLECTIONS-1.json",
