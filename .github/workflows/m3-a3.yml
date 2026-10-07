@@ -67,7 +67,7 @@ jobs:
       - name: Install pinned Synexia canonical A3 recipe export
         shell: bash
         env:
-          SYNEXIA_A3_COMMIT: 4172b7ea5bb35f74ee19c578bddfb582eb210b5d
+          SYNEXIA_A3_COMMIT: a062661e91e769a00c2d027e1f04a7a0c8f9dc28
         run: |
           set -euo pipefail
           curl --fail --location --retry 3 \
