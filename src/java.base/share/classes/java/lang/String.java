@@ -3822,10 +3822,59 @@ public final class String
             // because the large split loop can usually not be inlined.
             return split(ch, limit, withDelimiters);
         }
+        M3String storage = m3();
+        if (storage != null
+                && regex.length() > 1
+                && M3String.isConservativeLiteralRegex(regex)) {
+            return split(storage, M3String.canonicalize(regex), limit, withDelimiters);
+        }
+
         Pattern pattern = Pattern.compile(regex);
         return withDelimiters
                 ? pattern.splitWithDelimiters(this, limit)
                 : pattern.split(this, limit);
+    }
+
+    private String[] split(
+            M3String storage, M3String delimiter, int limit, boolean withDelimiters) {
+        int delimiterLength = delimiter.length();
+        int matchCount = 0;
+        int off = 0;
+        int next;
+        boolean limited = limit > 0;
+        ArrayList<String> list = new ArrayList<>();
+        while ((next = storage.indexOf(delimiter, off)) != -1) {
+            if (!limited || matchCount < limit - 1) {
+                list.add(substring(off, next));
+                if (withDelimiters) {
+                    list.add(substring(next, next + delimiterLength));
+                }
+                off = next + delimiterLength;
+                ++matchCount;
+            } else {
+                int last = length();
+                list.add(substring(off, last));
+                off = last;
+                ++matchCount;
+                break;
+            }
+        }
+        if (off == 0) {
+            return new String[] {this};
+        }
+
+        if (!limited || matchCount < limit) {
+            list.add(substring(off, length()));
+        }
+
+        int resultSize = list.size();
+        if (limit == 0) {
+            while (resultSize > 0 && list.get(resultSize - 1).isEmpty()) {
+                resultSize--;
+            }
+        }
+        String[] result = new String[resultSize];
+        return list.subList(0, resultSize).toArray(result);
     }
 
     private String[] split(char ch, int limit, boolean withDelimiters) {
