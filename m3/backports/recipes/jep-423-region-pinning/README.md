@@ -19,6 +19,26 @@ The upstream implementation commit touches **59 paths**:
 - **15** admitted regression/proof paths;
 - **2** upstream-deleted JDK21 test paths that M3JDK21 preserves by default.
 
+## Required three-commit lineage
+
+The packet is now fail-closed around the complete required Region Pinning lineage rather than the
+headline JEP commit alone:
+
+| Order | JBS | Commit | Role |
+| ---: | --- | --- | --- |
+| 0 | JDK-8318706 | `38cfb220ddadbb401cc15f313aadb8234f626210` | JEP implementation |
+| 1 | JDK-8323610 | `8643cc21333c6b51242ed3b9295b25f372244755` | pin-count overflow repair |
+| 2 | JDK-8322484 | `0d5f5e15d43f94a79c6133baecd5af217365d176` | pin-cache regression repair |
+
+`LINEAGE.tsv` is the ordered commit authority. `PATH_CLOSURE.tsv` is the lexicographically
+sorted cumulative touched-path closure and records which paths are touched by multiple lineage
+commits. `validate_lineage.py` rejects a missing/reordered follow-up, path closure drift, summary
+drift, or any attempt to silently admit the two upstream-deleted Java 21 JNI/full-GC stress paths.
+
+The original 59-path JEP implementation denominator remains useful for initial FILE-atom provenance,
+but it is **not** the complete feature dependency denominator. Source materialization/promotion must
+consume the full three-commit closure.
+
 ## Compatibility split
 
 JEP 423 is a G1 runtime/GC implementation feature; it does not require Java source grammar or a
