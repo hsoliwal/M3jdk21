@@ -42,7 +42,7 @@ jobs:
       - name: Prove source-sealed inventory recipe and fixed point
         run: >
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3Jep497MlDsaInventoryRecipeTest
+          -Dtest=M3Jep497MlDsaInventoryRecipeTest,M3Jep497SharedOwnerSplitRecipeTest
           -Dsurefire.failIfNoSpecifiedTests=false test
       - name: Fetch exact implementation and JDK24 GA donor states
         shell: bash
@@ -105,8 +105,15 @@ jobs:
               (packet/"MATERIALIZE_PATHS.txt").read_text(encoding="utf-8").splitlines()
               if line.strip()]
           present = {row["path"] for row in rows if row["jdk24_ga_status"] == "PRESENT"}
-          if len(materialize) != 7 or set(materialize) != present:
-              raise SystemExit("JEP497 materialization set drift")
+          shared = [line.strip() for line in
+              (packet/"SHARED_OWNER_PATHS.txt").read_text(encoding="utf-8").splitlines()
+              if line.strip()]
+          if len(materialize) != 3 or len(shared) != 4:
+              raise SystemExit("JEP497 private/shared lane cardinality drift")
+          if set(materialize) & set(shared):
+              raise SystemExit("JEP497 materialize/shared-owner overlap")
+          if set(materialize) | set(shared) != present:
+              raise SystemExit("JEP497 private/shared union does not equal GA-surviving set")
           print("JEP497_IMPLEMENTATION_PATHS=10")
           print("JEP497_GA_PRESENT=7")
           print("JEP497_GA_ABSENT=3")
@@ -139,8 +146,8 @@ jobs:
           with (root/"EXCLUSIONS.tsv").open(encoding="utf-8", newline="") as h:
               exclusions = list(csv.DictReader(h, delimiter="\t"))
           generated = sum(int(row["target_count"]) for row in crates)
-          if generated + len(exclusions) != 7:
-              raise SystemExit("JEP497 FILE atom accounting mismatch")
+          if generated + len(exclusions) != 3:
+              raise SystemExit("JEP497 private FILE atom accounting mismatch")
           print(f"JEP497_FILE_ATOMS={generated}")
           print(f"JEP497_EXCLUSIONS={len(exclusions)}")
           PY
