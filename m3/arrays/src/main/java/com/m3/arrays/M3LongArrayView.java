@@ -9,7 +9,6 @@ public interface M3LongArrayView {
 
     M3LongArrayView slice(int start, int end);
 
-    int segmentCount();
 
     default void copyTo(int sourceStart, long[] target, int targetStart, int count) {
         java.util.Objects.requireNonNull(target, "target");
