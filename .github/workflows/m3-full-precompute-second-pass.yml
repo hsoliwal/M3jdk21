@@ -1,0 +1,50 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 Full Precompute Second Pass
+
+on:
+  pull_request:
+    paths:
+      - 'm3/ports/precompute/**'
+      - 'm3/docs/M3JDK21_PORTING_INVARIANT.md'
+      - 'm3/docs/name-mapping.json'
+      - 'm3/docs/*precompute*.tsv'
+      - 'm3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipeNameTest.java'
+      - 'm3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3FullPrecomputeSecondPassRecipeTest.java'
+      - 'm3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-full-precompute-second-pass.yml'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/**'
+      - 'm3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/**'
+      - '.github/workflows/m3-full-precompute-second-pass.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Diff and mapping syntax
+        run: |
+          set -euo pipefail
+          git diff --check
+          python3 -m json.tool m3/docs/name-mapping.json >/dev/null
+
+      - name: Java precompute differential proof
+        run: mvn -B -ntp -f m3/ports/precompute/pom.xml test
+
+      - name: Java JNI and native C parity proof
+        run: mvn -B -ntp -f m3/ports/precompute/pom.xml -Pnative test
+
+      - name: Recipe engine and crate fixed point
+        run: |
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3Jdk21HashPinnedSnapshotRecipeNameTest,M3FullPrecomputeSecondPassRecipeTest             test
