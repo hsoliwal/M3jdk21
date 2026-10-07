@@ -17,7 +17,4 @@ tags:
   - behavior-contract-preserving
 causesAnotherCycle: true
 recipeList:
-  - com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates
-  - com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe
-  - com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe
-  - com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe
+  - com.synexia.rewrite.M3Java21FileConvergenceRecipe
