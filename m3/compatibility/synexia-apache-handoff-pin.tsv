@@ -1,0 +1,14 @@
+field	value
+source_repository	hsoliwal/com.synexia
+source_pr	9642
+source_commit	25489c202af43863bda2ae23b67542c363e92450
+source_manifest_path	.m3/apache-handoff.tsv
+source_manifest_sha256	98274241cc6a0655e600d5fb5c58d70170aca0111770f95c14609041a1f1289a
+source_license	Apache-2.0
+copyright_notice	Copyright 2026 Hitesh Soliwal and contributors
+canonical_owner	synexia-m3-recipe
+delivery_state	PENDING_SYNEXIA_MERGE
+target_role	QUALIFICATION_INPUT_ONLY
+automatic_application	false
+target_relicense_authority	false
+openjdk_retained_license	GPL-2.0-only WITH Classpath-exception-2.0
