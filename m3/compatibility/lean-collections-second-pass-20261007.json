@@ -1,0 +1,128 @@
+{
+  "schema": "M3_LEAN_COLLECTION_SECOND_PASS_RECEIPT_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "license": "Apache-2.0",
+  "intakeMode": "DATA_OR_METADATA_EXPORT",
+  "runtimeCodeImported": false,
+  "source": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "251ae0d8a435a5a91f18187ed30c15aa16a83b83",
+    "pullRequest": "https://github.com/hsoliwal/com.synexia/pull/9720",
+    "packet": "synexia-openrewrite-recipes/crates/m3-collection-contracts/second-pass",
+    "packetTree": "d8ef74b5c9bdcd14cdd3d6b584b2d5a2bbe37b20",
+    "recipeResourceTree": "3895ac86babc9079648f585018db7bb6e8a75e69",
+    "publishedFilesVerified": 197,
+    "allSourceBlobsMatch": true,
+    "canonicalRecipesRemainInSynexia": true
+  },
+  "receiver": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "d769ee9c3bcfd881f514817cb86c0768e62ed970",
+    "qualifiedPreimageRevision": "237874c3ab3625a90187bd73b5faa15a258b0474",
+    "recipe": "com.synexia.rewrite.M3LeanSecondPassReceiverRecipe",
+    "recipeSourceGitBlob": "1030882c41acab3f6e189ae2f240db313e4bb7d8",
+    "sdkApplication": "EXECUTED",
+    "changedPolicyFiles": 1,
+    "secondRunChanges": 0,
+    "combinedSourceReceiverSdkTests": 12,
+    "receiverSdkTests": 6,
+    "sourcePolicyOnly": true
+  },
+  "gates": {
+    "targetPolicyVerifier": "PASS",
+    "java21": "NOT_RUN",
+    "maven": "NOT_RUN",
+    "jdkBuild": "NOT_RUN",
+    "jtreg": "NOT_RUN",
+    "candidateJdkRuntime": "NOT_RUN",
+    "targetJniNative": "NOT_RUN",
+    "targetResourceEvidence": "NOT_RUN",
+    "independentSourceReview": "NOT_RUN",
+    "strictRepositoryAdmission": "NOT_RUN"
+  },
+  "sourceDiagnostics": {
+    "release": 17,
+    "productionRelease": 21,
+    "selectedPrimitiveJUnitTests": 108,
+    "freshDomainTests": 8,
+    "matMainJavaFiles": 47,
+    "matContracts": 6,
+    "matContractChecks": 1807094,
+    "sourceJniChecks": 267,
+    "sourceJniChecked": true,
+    "sourceNativeUbsan": true,
+    "publicProtectedApi": "UNCHANGED",
+    "generalSpeedupClaim": false,
+    "sourceCostResults": "MIXED_WORKLOAD_TIMINGS_NO_GENERAL_SPEEDUP_CLAIM",
+    "sourceEvidencePaths": [
+      "synexia-openrewrite-recipes/crates/m3-collection-contracts/second-pass/proof/final",
+      "synexia-openrewrite-recipes/crates/m3-collection-contracts/second-pass/proof/mat-5",
+      "synexia-openrewrite-recipes/crates/m3-collection-contracts/second-pass/proof/cost-final"
+    ]
+  },
+  "catalogue": {
+    "primaryJavaOwners": 616,
+    "additionalNamedFrontierOwners": 47,
+    "totalKnownJavaOwners": 663,
+    "allCollectionsQualified": false,
+    "repositoryWideComplete": false,
+    "sourceIndex": "synexia-openrewrite-recipes/crates/m3-collection-contracts/second-pass/inventory/index.json",
+    "earlierNamedFamilyPaths": 4770,
+    "earlierFamilyRoots": 13,
+    "priorLedgerRetained": true
+  },
+  "acceptance": {
+    "activePhase": "STRING",
+    "receivingOrder": [
+      "STRING",
+      "ARRAYS",
+      "COLLECTIONS",
+      "AST_COMPILER",
+      "REMAINING_FAMILIES"
+    ],
+    "collectionPhase": "WAITING_FOR_PREDECESSOR",
+    "sourceRefinementDoesNotPromoteTarget": true,
+    "publicJdkApiUnchanged": true,
+    "canonicalPayloadOwnerUnchanged": true,
+    "exactTargetRuntimeMapping": "PENDING_CONCRETE_CONSUMER_AND_PREDECESSOR_QUALIFICATION"
+  },
+  "candidates": [
+    {
+      "sourceOwner": "synexia-primitives/src/main/java/com/synexia/primitives/PrimitiveIndexView.java",
+      "sourceGitBlob": "b348ffe2dfda3d51151c771d685f918dc928aad7",
+      "targetScope": "m3/collections",
+      "targetOwner": null,
+      "disposition": "PENDING",
+      "reason": "Qualified source permutation view is not proof of a compatible target/JDK collection consumer."
+    },
+    {
+      "sourceOwner": "synexia-primitives/src/main/java/com/synexia/primitives/BoundedProviderBackedPrimitiveTree.java",
+      "sourceGitBlob": "392de503d2560667fcc4ea3fff5ddca81a078a36",
+      "targetScope": "m3/collections",
+      "targetOwner": null,
+      "disposition": "PENDING",
+      "reason": "Provider residency, callbacks, topology and failure/lifetime require target-specific contract mapping."
+    }
+  ],
+  "rights": {
+    "firstPartyExpression": "Apache-2.0",
+    "abstractIdeas": "PROVENANCE_NOT_COPYRIGHTED_EXPRESSION",
+    "challengeMaterial": "REFERENCE_ONLY_NO_SOURCE_COPY",
+    "unchangedRadixDependency": "MIT notice retained in Synexia; no body imported here",
+    "openjdk": "PRESERVE_ORIGINAL_LICENSE_AND_NOTICE",
+    "relicenseAuthority": false
+  },
+  "application": {
+    "path": "m3/docs/m3jdk21-porting-invariant.md",
+    "before": "5df3e79d6a79af0be3a9e3beffb29c0215786b489763f003ad40cd53f828216f",
+    "after": "fa84270f09a42fe4dbeb245812e7b710297825e2bfd461bce99bb64056e1399d",
+    "template": "0.txt",
+    "outputGitBlob": "f65cc98e9088377755c51a447ce974356b28f15c"
+  },
+  "policyVerifier": {
+    "path": "m3/compatibility/check_synexia_full_family.py",
+    "sha256": "be1b983596b6df7043cbd187617c144d52ecb07b2c555364895bdff198fdb170",
+    "exitCode": 0,
+    "stdout": "SYNEXIA_FULL_FAMILY_PIN_PASS source=b24262a92b741c78c44ca61afc8dac7ee1376d8a paths=4770 families=33 license=Apache-2.0 active=STRING ordered_phases=5 completion=false\n"
+  }
+}
