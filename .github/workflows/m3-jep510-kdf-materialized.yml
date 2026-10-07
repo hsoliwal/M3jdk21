@@ -2,6 +2,23 @@
 name: M3 JEP 510 KDF materialized candidate
 
 on:
+  push:
+    branches:
+      - 'm3/jep510-*'
+    paths:
+      - 'm3/backports/recipes/j510/**'
+      - 'm3/tooling/migration-recipes/**'
+      - 'src/java.base/share/classes/com/sun/crypto/provider/HKDFKeyDerivation.java'
+      - 'src/java.base/share/classes/com/sun/crypto/provider/SunJCE.java'
+      - 'src/java.base/share/classes/java/security/Provider.java'
+      - 'src/java.base/share/classes/javax/crypto/KDF.java'
+      - 'src/java.base/share/classes/javax/crypto/KDFParameters.java'
+      - 'src/java.base/share/classes/javax/crypto/KDFSpi.java'
+      - 'src/java.base/share/classes/javax/crypto/spec/HKDFParameterSpec.java'
+      - 'src/java.base/share/classes/sun/security/util/Debug.java'
+      - 'test/jdk/com/sun/crypto/provider/KDF/**'
+      - 'test/jdk/javax/crypto/KDF/**'
+      - '.github/workflows/m3-jep510-kdf-materialized.yml'
   pull_request:
     paths:
       - 'src/java.base/share/classes/com/sun/crypto/provider/HKDFKeyDerivation.java'
@@ -38,6 +55,18 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
+
+      - name: 0 - Consume canonical Synexia workflow-structure validator
+        shell: bash
+        run: |
+          set -euo pipefail
+          SYNEXIA="$RUNNER_TEMP/synexia-recipe-owner"
+          git init -q "$SYNEXIA"
+          git -C "$SYNEXIA" remote add origin https://github.com/hsoliwal/com.synexia.git
+          git -C "$SYNEXIA" -c protocol.version=2 fetch -q --depth=1 origin 0f0f9965092955c15f5c32f5eb102137fd0dbf8e
+          test "$(git -C "$SYNEXIA" rev-parse FETCH_HEAD)" = "0f0f9965092955c15f5c32f5eb102137fd0dbf8e"
+          java "$SYNEXIA/synexia-code-convergence/tools/WorkflowStructureCheck.java" \
+            .github/workflows/m3-jep510-kdf-materialized.yml
 
       - name: 1 - Diff hygiene
         run: git diff --check
