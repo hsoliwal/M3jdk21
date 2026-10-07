@@ -4,6 +4,7 @@ name: M3 JDK-8338587 SHAKE XOF candidate
 on:
   push:
     branches:
+      - 'm3/jdk8338587-shake-*'
       - 'm3/materialize-jdk8338587-shake-xof-20261007'
     paths:
       - 'src/java.base/share/classes/sun/security/provider/SHA3.java'
@@ -46,6 +47,18 @@ jobs:
           distribution: temurin
           java-version: '21'
           cache: maven
+
+      - name: 0 - Consume canonical Synexia workflow-structure validator
+        shell: bash
+        run: |
+          set -euo pipefail
+          SYNEXIA="$RUNNER_TEMP/synexia-recipe-owner"
+          git init -q "$SYNEXIA"
+          git -C "$SYNEXIA" remote add origin https://github.com/hsoliwal/com.synexia.git
+          git -C "$SYNEXIA" -c protocol.version=2 fetch -q --depth=1 origin 0f0f9965092955c15f5c32f5eb102137fd0dbf8e
+          test "$(git -C "$SYNEXIA" rev-parse FETCH_HEAD)" = "0f0f9965092955c15f5c32f5eb102137fd0dbf8e"
+          java "$SYNEXIA/synexia-code-convergence/tools/WorkflowStructureCheck.java" \
+            .github/workflows/m3-jdk8338587-shake-xof.yml
 
       - name: 1 - Diff hygiene
         run: git diff --check
