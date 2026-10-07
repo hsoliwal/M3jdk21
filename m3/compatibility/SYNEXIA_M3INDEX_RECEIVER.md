@@ -1,14 +1,14 @@
 # M3Index Synexia receiver pin
 
-Status: candidate source-authority pin pending merge of Synexia PR #9644.
+Status: pinned canonical source authority after merge of Synexia PR #9644.
 
 M3JDK21 is a receiver/product-integration target, not the canonical owner of generic M3Index
 implementation.
 
-Candidate Synexia authority:
+Canonical Synexia authority:
 
 - repository: `hsoliwal/com.synexia`
-- reconciled revision: `22a3d825203e98adaaeaf74b7b2910bfa137f370`
+- merged revision: `9389db87e3545ad8a352ff47969691799b5f1f38`
 - source PR: `#9644`
 - policy: `docs/M3-SCALE/invariants/SYNEXIA-M3INDEX-OWNERSHIP-1.json`
 - ownership ledger: `.m3/donor-convergence/M3INDEX_OWNERSHIP.tsv`
@@ -37,4 +37,4 @@ Synexia-authored copyrightable implementation is Apache-2.0 under its source not
 third-party code are never relicensed by this handoff. Abstract algorithms/ideas are provenance,
 not an ownership claim over non-copyrightable subject matter.
 
-No source materialization or JDK product admission follows from this candidate pin alone.
+No source materialization or JDK product admission follows from this ownership pin alone; target build/runtime proof remains independent.

@@ -236,8 +236,8 @@ Preserve OpenJDK notices and license obligations separately from independently a
 The 2026-10-02 census and ownership observations above remain historical evidence at their recorded
 pins. They are not the current generic implementation authority.
 
-The candidate current authority is Synexia PR #9644 at
-`22a3d825203e98adaaeaf74b7b2910bfa137f370`, which formalizes the already-active
+The current canonical authority is merged Synexia PR #9644 at
+`9389db87e3545ad8a352ff47969691799b5f1f38`, which formalizes the already-active
 `synexia-indexstring`, `synexia-mindex`, `m3index-*` and
 `synexia-openrewrite-recipes` owners.
 
@@ -245,4 +245,4 @@ M3JDK21 therefore does not turn this historical migration map into a second M3In
 It consumes proven Synexia owners through the existing JDK bridge/handoff infrastructure and keeps
 only JDK-specific String/HotSpot/JIT/GC/CDS/JVMTI/JNI integration locally authoritative.
 
-The candidate pin is non-promoting until the Synexia source PR is merged and read back.
+The canonical source pin remains non-promoting for JDK product code: M3JDK21 must independently apply and qualify every receiver/target integration.

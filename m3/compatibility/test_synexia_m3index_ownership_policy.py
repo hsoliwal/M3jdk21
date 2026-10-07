@@ -24,8 +24,9 @@ class SynexiaM3IndexOwnershipPolicyTest(unittest.TestCase):
             [
                 "schema",
                 "canonical_repository",
-                "candidate_revision",
+                "canonical_revision",
                 "source_pr",
+                "source_merge_commit",
                 "policy_path",
                 "policy_git_blob",
                 "ownership_path",
@@ -39,16 +40,17 @@ class SynexiaM3IndexOwnershipPolicyTest(unittest.TestCase):
             ],
             list(row),
         )
-        self.assertEqual("M3JDK21_SYNEXIA_M3INDEX_OWNERSHIP_PIN_V1", row["schema"])
+        self.assertEqual("M3JDK21_SYNEXIA_M3INDEX_OWNERSHIP_PIN_V2", row["schema"])
         self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
-        self.assertRegex(row["candidate_revision"], HEX40)
+        self.assertRegex(row["canonical_revision"], HEX40)
+        self.assertEqual(row["canonical_revision"], row["source_merge_commit"])
         self.assertEqual("9644", row["source_pr"])
         for field in ("policy_git_blob", "ownership_git_blob", "donor_plan_git_blob"):
             self.assertRegex(row[field], HEX40)
         self.assertEqual("Apache-2.0", row["license"])
         self.assertEqual("false", row["generic_implementation_authority"])
         self.assertEqual("true", row["target_runtime_authority"])
-        self.assertEqual("CANDIDATE_PENDING_SYNEXIA_MERGE", row["state"])
+        self.assertEqual("PINNED_CANONICAL_SOURCE", row["state"])
 
     def test_every_generic_family_remains_synexia_owned(self) -> None:
         with FAMILIES.open(encoding="utf-8", newline="") as handle:
@@ -95,8 +97,8 @@ class SynexiaM3IndexOwnershipPolicyTest(unittest.TestCase):
 
     def test_borrowing_contract_never_relicenses_jdk_or_third_party(self) -> None:
         text = BORROWING.read_text(encoding="utf-8")
-        self.assertIn("CANDIDATE_PENDING_SYNEXIA_MERGE", text)
-        self.assertIn("does not authorize product mutation", text)
+        self.assertIn("PINNED_CANONICAL_SOURCE", text)
+        self.assertIn("grants no product mutation", text)
         self.assertIn("OpenJDK", text)
         self.assertIn("relicenses OpenJDK", text)
 

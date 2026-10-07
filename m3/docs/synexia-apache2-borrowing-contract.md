@@ -98,14 +98,11 @@ canonical shared architecture. Useful target discoveries flow back to Synexia as
 or recipe improvements.
 
 
-## M3Index ownership candidate pin (2026-10-07)
+## M3Index ownership canonical pin (2026-10-07)
 
-The reusable M3Index ownership boundary is now being made machine-enforced in Synexia PR #9644,
-reconciled revision `22a3d825203e98adaaeaf74b7b2910bfa137f370`.
+The reusable M3Index ownership boundary is machine-enforced by merged Synexia PR #9644 at canonical `develop` revision `9389db87e3545ad8a352ff47969691799b5f1f38`.
 
-Until that source PR merges and its canonical tree is read back, M3JDK21 records the revision only as
-`CANDIDATE_PENDING_SYNEXIA_MERGE`. It does not replace the existing stable recipe-home pin and does
-not authorize product mutation.
+M3JDK21 records this as `PINNED_CANONICAL_SOURCE`. The family pin still grants no product mutation or promotion authority; JDK-specific build/jtreg/runtime gates remain mandatory.
 
 The candidate explicitly binds:
 

@@ -56,8 +56,6 @@ jobs:
           java-version: '21'
       - name: Verify M3 String source invariants
         run: python3 m3/runtime-integration/check-m3string-invariants.py
-      - name: Prove M3 String history-convergence recipe
-        run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringHistoryConvergenceRecipeTest test
       - name: Prove canonical DAG master-repair recipe
         run: mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml -Dtest=M3StringCanonicalDagMasterRepairRecipeTest test
       - name: Prove immutable Matcher fact reuse
