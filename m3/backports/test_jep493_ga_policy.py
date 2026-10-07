@@ -77,6 +77,51 @@ class Jep493GaPolicyTest(unittest.TestCase):
         self.assertEqual("1", excluded[0]["members"])
         self.assertEqual("false", excluded[0]["mutation_authority"])
 
+    def test_packet_dag_carries_ga_removed_path_as_evidence_only(self) -> None:
+        with (PACKET / "packet.tsv").open(encoding="utf-8", newline="") as handle:
+            packet_rows = list(csv.DictReader(handle, delimiter="\t"))
+
+        removed_rows = [
+            row for row in packet_rows if row["atom_id"] == "ga-removed-exclusion"
+        ]
+        self.assertEqual(1, len(removed_rows))
+        removed = removed_rows[0]
+        self.assertEqual("FILE", removed["scope"])
+        self.assertEqual("false", removed["scope_promotion_approved"])
+        self.assertEqual(
+            "typed-exclusion:" + REMOVED,
+            removed["work_ref"],
+        )
+        self.assertFalse(
+            any(
+                row["work_ref"] == "generated-file-atom:" + REMOVED
+                for row in packet_rows
+            )
+        )
+
+        runtime = next(
+            row for row in packet_rows if row["atom_id"] == "runtimelink-package"
+        )
+        self.assertNotIn("runtimeimagelinkexception", runtime["depends_on"].lower())
+        feature = next(
+            row for row in packet_rows if row["atom_id"] == "feature-join"
+        )
+        self.assertIn("ga-removed-exclusion", feature["depends_on"].split(","))
+
+        with (PACKET / "atom-evidence.tsv").open(
+            encoding="utf-8", newline=""
+        ) as handle:
+            evidence = list(csv.DictReader(handle, delimiter="\t"))
+        removed_evidence = next(
+            row for row in evidence if row["atom_id"] == "ga-removed-exclusion"
+        )
+        self.assertEqual("EvidenceAtom", removed_evidence["pattern"])
+        self.assertEqual(
+            "Jlink.GaRemovedExclusion",
+            removed_evidence["iop_role"],
+        )
+        self.assertEqual("false", removed_evidence["fixed_point_required"])
+
     def test_materialization_policy_and_receiver_are_fail_closed(self) -> None:
         policy = tsv_dict(PACKET / "MATERIALIZATION_POLICY.tsv")
         self.assertEqual("47", policy["implementation_denominator_paths"])
