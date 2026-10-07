@@ -44,7 +44,7 @@ jobs:
       - name: Prove source-sealed inventory recipe and fixed point
         run: >
           mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
-          -Dtest=M3Jep496MlKemInventoryRecipeTest
+          -Dtest=M3Jep496MlKemInventoryRecipeTest,M3Jep496SharedOwnerSplitRecipeTest
           -Dsurefire.failIfNoSpecifiedTests=false test
 
       - name: Fetch exact implementation and JDK24 GA donor states
@@ -128,11 +128,20 @@ jobs:
               for line in (packet / "MATERIALIZE_PATHS.txt").read_text(encoding="utf-8").splitlines()
               if line.strip()
           ]
-          if len(materialize) != 8:
-              raise SystemExit(f"expected eight released-state materialization paths, got {len(materialize)}")
+          if len(materialize) != 4:
+              raise SystemExit(f"expected four feature-private materialization paths, got {len(materialize)}")
           present = {row["path"] for row in rows if row["jdk24_ga_status"] == "PRESENT"}
-          if set(materialize) != present:
-              raise SystemExit("materialization path set does not equal released surviving path set")
+          shared = [
+              line.strip()
+              for line in (packet / "SHARED_OWNER_PATHS.txt").read_text(encoding="utf-8").splitlines()
+              if line.strip()
+          ]
+          if len(shared) != 4:
+              raise SystemExit(f"expected four shared-owner paths, got {len(shared)}")
+          if set(materialize) & set(shared):
+              raise SystemExit("JEP496 materialize/shared-owner overlap")
+          if set(materialize) | set(shared) != present:
+              raise SystemExit("JEP496 materialize/shared-owner union does not equal GA-surviving set")
 
           print("JEP496_IMPLEMENTATION_PATHS=10")
           print("JEP496_GA_PRESENT=8")
@@ -173,9 +182,9 @@ jobs:
               exclusions = list(csv.DictReader(handle, delimiter="\t"))
 
           generated = sum(int(row["target_count"]) for row in crates)
-          if generated + len(exclusions) != 8:
+          if generated + len(exclusions) != 4:
               raise SystemExit(
-                  f"JEP496 FILE atom accounting mismatch generated={generated} exclusions={len(exclusions)}"
+                  f"JEP496 private FILE atom accounting mismatch generated={generated} exclusions={len(exclusions)}"
               )
           print(f"JEP496_FILE_ATOMS={generated}")
           print(f"JEP496_EXCLUSIONS={len(exclusions)}")

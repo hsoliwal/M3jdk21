@@ -77,3 +77,17 @@ Before product materialization the next pass must prove:
 - whole-JDK build/jtreg compatibility gates.
 
 Promotion remains `NOT_AUTHORIZED`.
+
+## Shared-owner split
+
+Whole-file JDK24-GA snapshots are permitted only for feature-private/new files. The following
+existing shared owners are excluded from whole-file materialization and require targeted semantic
+OpenRewrite recipes against the exact JDK21 preimage:
+
+- `com.sun.crypto.provider.SunJCE`;
+- `java.security.spec.NamedParameterSpec`;
+- `sun.security.util.KnownOIDs`;
+- the shared deterministic provider regression test.
+
+This prevents unrelated post-21 changes in broad GA files from being absorbed accidentally.
+`SHARED_OWNER_PATHS.txt` is authoritative for that semantic-recipe lane.
