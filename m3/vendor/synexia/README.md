@@ -59,3 +59,16 @@ The preserved `LICENSE` and `NOTICE` in this directory apply to imported Synexia
 Third-party donor material with other obligations is not admitted automatically.
 
 OpenJDK source outside `m3/` remains under its existing license regime.
+
+
+## Shared-array/JNI source custody
+
+- repository: `hsoliwal/com.synexia`
+- revision: `857c4cc0ddeb73e5ea5269a1d0ef2d30057dcfa8`
+- provenance: `m3/synexia-import/intakes/jni-array-address-receiver-20261007/SOURCE_PROVENANCE.tsv`
+- M3 owner map: `m3/synexia-import/intakes/jni-array-address-receiver-20261007/TARGET_MAP.tsv`
+
+The selected `synexia-indexstring` files are exact Apache-2.0 custody below the mirrored source
+paths. This is not a complete compilable module or JDK runtime dependency. The original module
+third-party notices are preserved beside the source. Target names and license boundaries are
+recorded in the intake map; OpenJDK `java.base` files are not relicensed.
