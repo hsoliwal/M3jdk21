@@ -1,6 +1,6 @@
 ordinal	atom_id	scope	mutation	depends_on	stop_condition
-0	inventory-upstream	FILE	false		all 47 JEP493 implementation paths pinned to commit and JDK24 GA
-1	generate-file-atoms	FILE	false	inventory-upstream	every selected path is candidate, typed exclusion, or already equivalent
+0	inventory-upstream	FILE	false		all 47 implementation-commit paths classified against JDK24 GA: 46 materializable plus one GA-removed exclusion
+1	generate-file-atoms	FILE	false	inventory-upstream	every one of the 46 GA paths is candidate/already-equivalent and the one removed path is typed evidence
 2	dependency-review	MODULE	false	generate-file-atoms	all post-21 dependencies are reused, locally adapted, or explicitly blocked
 3	compose-jlink-packet	MULTI_MODULE	true	dependency-review	smallest honest Java/text packet is materialized from exact preimages
 4	build-jlink	MULTI_MODULE	false	compose-jlink-packet	jdk.jlink and full JDK image compile on Java21 baseline
