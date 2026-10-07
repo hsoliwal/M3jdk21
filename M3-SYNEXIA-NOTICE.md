@@ -37,21 +37,68 @@ execution performs fewer repeated calculations, fewer allocations and
 materializations, less pointer chasing, and less memory traffic while preserving
 required JDK-visible behavior.
 
-## Rights boundary
+## Synexia origin and provenance
 
-No claim is made here to ownership of human language, natural language,
-programming languages as such, reasoning processes, facts, mathematical
-relations, abstract algorithms, methods of operation, general optimization
-principles, or abstract ideas.
+Synexia is the originating and convergence workspace for independently developed
+M3 concepts, architectures, designs, algorithms, optimization techniques,
+transformation recipes, specifications, implementations, tests, documentation,
+and related engineering work that is identified by repository history,
+authorship, provenance records, or accompanying notices as first-party
+M3/Synexia material.
 
-Copyright applies to original authored expression: source code and concrete
-implementations, tests, recipes, specifications, documentation, diagrams,
-manifests, schemas, original generated configuration, and other protectable
-expression.
+M3JDK21 may faithfully incorporate, adapt, or productize qualifying Synexia
+work. Such incorporation does not erase or transfer the provenance, authorship,
+inventorship, or origin of the underlying first-party contribution. Any license
+granted for a particular contribution is governed by the license applicable to
+that contribution.
 
-A technically novel invention may have separate patent rights only if applicable
-patent law requirements are satisfied; this copyright notice does not itself
-create or assert patent rights over an abstract idea or method.
+## Rights boundary and reservation
 
-Third-party material always retains its original copyright, licenses, NOTICE
-files, attribution, and modification requirements.
+The original M3/Synexia concepts, architectures, designs, inventions,
+techniques, algorithms, optimization strategies, workflows, transformation
+recipes, specifications, source code, tests, documentation, diagrams, schemas,
+manifests, configurations, implementations, and original combinations thereof
+are asserted as first-party intellectual work of their respective authors,
+inventors, and rights holders to the fullest extent recognized by applicable
+law.
+
+**Nothing in this notice is intended to disclaim, abandon, dedicate to the
+public domain, or otherwise waive any copyright, patent, inventorship,
+trade-secret, confidential-information, contractual, database, design,
+know-how, or other legally recognized right that may exist in first-party
+M3/Synexia work, except to the extent an applicable license expressly grants
+such rights to recipients.**
+
+Copyright is asserted over protectable original expression, including source
+code and concrete implementations, tests, transformation recipes,
+specifications, documentation, diagrams, manifests, schemas, generated
+configuration, and protectable selection, coordination, arrangement, and other
+original authored expression.
+
+Some underlying concepts, algorithms, architectures, techniques, methods,
+optimizations, data structures, processes, or combinations may also constitute
+inventions, protectable know-how, or other subject matter for which separate
+legal rights may exist. This notice does not itself create a patent or other
+statutory right, but neither does it waive, surrender, or disclaim any such
+right that exists or may lawfully be obtained. Any express patent license or
+other grant contained in an applicable open-source license remains controlling.
+
+Where applicable law excludes an abstract idea, mathematical fact, language,
+method of operation, or other subject matter from copyright protection as such,
+that limitation must not be interpreted as a voluntary surrender of the
+project's rights in its original implementation, expression, architecture,
+selection or arrangement, concrete combination, provenance, inventions, or
+other legally protectable contributions.
+
+Publication or disclosure of M3/Synexia material must not be construed as an
+intentional waiver of authorship, inventorship, provenance, attribution,
+license conditions, or any other right except where an applicable license or an
+express written grant provides otherwise.
+
+Third-party material remains the property of its respective rights holders and
+retains its original copyright, licenses, NOTICE files, attribution, patent
+terms, and modification requirements. Incorporating or adapting third-party
+material does not transfer ownership of that material to Synexia/M3JDK21, and
+does not diminish ownership of independently created first-party contributions.
+
+**All rights not expressly granted by the applicable license are reserved.**
