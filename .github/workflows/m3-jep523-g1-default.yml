@@ -3,6 +3,7 @@ name: M3 JEP 523 G1 default policy
 on:
   push:
     branches:
+      - "m3/jep523-*"
       - "m3/jep523-g1-default-all-envs-20261006"
     paths:
       - "src/hotspot/share/gc/shared/gcConfig.cpp"
@@ -41,6 +42,18 @@ jobs:
           distribution: temurin
           java-version: "21"
           cache: maven
+
+      - name: 0 - Consume canonical Synexia workflow-structure validator
+        shell: bash
+        run: |
+          set -euo pipefail
+          SYNEXIA="$RUNNER_TEMP/synexia-recipe-owner"
+          git init -q "$SYNEXIA"
+          git -C "$SYNEXIA" remote add origin https://github.com/hsoliwal/com.synexia.git
+          git -C "$SYNEXIA" -c protocol.version=2 fetch -q --depth=1 origin 0f0f9965092955c15f5c32f5eb102137fd0dbf8e
+          test "$(git -C "$SYNEXIA" rev-parse FETCH_HEAD)" = "0f0f9965092955c15f5c32f5eb102137fd0dbf8e"
+          java "$SYNEXIA/synexia-code-convergence/tools/WorkflowStructureCheck.java" \
+            .github/workflows/m3-jep523-g1-default.yml
 
       - name: Diff hygiene
         run: git diff --check
