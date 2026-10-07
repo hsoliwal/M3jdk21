@@ -212,12 +212,12 @@ class JepResidueTest(unittest.TestCase):
         self.assertEqual("MATERIALIZED_PACKET", by_jep[497].evidence_state)
         self.assertIn("m3/backports/recipes/j497", by_jep[497].evidence_paths)
         self.assertEqual(
-            "DEPENDENCY_MATERIALIZED_UNVERIFIED",
+            "CANDIDATE_MATERIALIZED_UNVERIFIED",
             by_jep[496].receipt_state,
         )
         self.assertEqual("NOT_AUTHORIZED", by_jep[496].promotion)
         self.assertEqual(
-            "PROVE_SHAKE_XOF_THEN_MATERIALIZE_ML_KEM_FEATURE_CRATE",
+            "PROVE_SHAKE_RECIPE_BUILD_FIPS203_JTREG_PROVIDER_FIXED_POINT_READBACK",
             by_jep[496].receipt_next_action,
         )
         self.assertEqual(
