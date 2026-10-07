@@ -8,6 +8,11 @@ on:
     paths:
       - "m3/compatibility/synexia-recipe-home-policy.tsv"
       - "m3/compatibility/test_synexia_recipe_home_policy.py"
+      - "m3/docs/mindex-migration-handoff.md"
+      - "m3/compatibility/test_synexia_m3index_ownership_policy.py"
+      - "m3/compatibility/SYNEXIA_M3INDEX_RECEIVER.md"
+      - "m3/compatibility/synexia-m3index-family-handoff.tsv"
+      - "m3/compatibility/synexia-m3index-ownership-pin.tsv"
       - "m3/tooling/migration-recipes/README.md"
       - "m3/tooling/migration-recipes/pom.xml"
       - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/synexia/M3SynexiaRecipeHomePolicyTest.java"
@@ -18,6 +23,11 @@ on:
     paths:
       - "m3/compatibility/synexia-recipe-home-policy.tsv"
       - "m3/compatibility/test_synexia_recipe_home_policy.py"
+      - "m3/docs/mindex-migration-handoff.md"
+      - "m3/compatibility/test_synexia_m3index_ownership_policy.py"
+      - "m3/compatibility/SYNEXIA_M3INDEX_RECEIVER.md"
+      - "m3/compatibility/synexia-m3index-family-handoff.tsv"
+      - "m3/compatibility/synexia-m3index-ownership-pin.tsv"
       - "m3/tooling/migration-recipes/README.md"
       - "m3/tooling/migration-recipes/pom.xml"
       - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/synexia/M3SynexiaRecipeHomePolicyTest.java"
@@ -52,7 +62,10 @@ jobs:
           base="$(git merge-base origin/master HEAD)"
           git diff --check "$base"...HEAD
       - name: Receiver policy unit test
-        run: python -m unittest m3/compatibility/test_synexia_recipe_home_policy.py
+        run: >
+          python -m unittest
+          m3/compatibility/test_synexia_recipe_home_policy.py
+          m3/compatibility/test_synexia_m3index_ownership_policy.py
       - name: Migration-recipes JUnit ownership proof
         run: >
           mvn -B -ntp
