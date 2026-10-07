@@ -45,7 +45,7 @@ import static sun.security.provider.ByteArrayAccess.l2bLittle;
  * @since       9
  * @author      Valerie Peng
  */
-abstract class SHA3 extends DigestBase {
+public abstract class SHA3 extends DigestBase {
 
     private static final int WIDTH = 200; // in bytes, e.g. 1600 bits
     private static final int DM = 5; // dimension of lanes
@@ -67,6 +67,10 @@ abstract class SHA3 extends DigestBase {
     private final byte suffix;
     private byte[] state = new byte[WIDTH];
     private long[] lanes = new long[DM*DM];
+
+    // Byte offset in the current rate block for the next XOF squeeze.
+    // -1 means the instance is still absorbing input or is a fixed-length hash.
+    protected int squeezeOffset = -1;
 
     /**
      * Creates a new SHA-3 object.
@@ -97,26 +101,78 @@ abstract class SHA3 extends DigestBase {
        keccak();
     }
 
+    void finishAbsorb() {
+        int numOfPadding =
+                setPaddingBytes(suffix, buffer, (int) (bytesProcessed % buffer.length));
+        if (numOfPadding < 1) {
+            throw new ProviderException("Incorrect pad size: " + numOfPadding);
+        }
+        implCompress(buffer, 0);
+    }
+
     /**
      * Return the digest. Subclasses do not need to reset() themselves,
      * DigestBase calls implReset() when necessary.
      */
     void implDigest(byte[] out, int ofs) {
-        int numOfPadding =
-            setPaddingBytes(suffix, buffer, (int)(bytesProcessed % buffer.length));
-        if (numOfPadding < 1) {
-            throw new ProviderException("Incorrect pad size: " + numOfPadding);
+        if (engineGetDigestLength() == 0) {
+            throw new ProviderException("Calling digest() is not allowed in an XOF");
         }
-        implCompress(buffer, 0);
-        System.arraycopy(state, 0, out, ofs, engineGetDigestLength());
+        finishAbsorb();
+        int remaining = engineGetDigestLength();
+        int offset = ofs;
+        while (remaining > 0) {
+            int chunk = Math.min(remaining, buffer.length);
+            System.arraycopy(state, 0, out, offset, chunk);
+            remaining -= chunk;
+            offset += chunk;
+            if (remaining > 0) {
+                keccak();
+            }
+        }
+    }
+
+    void implSqueeze(byte[] output, int offset, int numBytes) {
+        Objects.requireNonNull(output, "output");
+        Objects.checkFromIndexSize(offset, numBytes, output.length);
+        if (engineGetDigestLength() != 0) {
+            throw new ProviderException("Squeezing is only allowed in XOF mode.");
+        }
+        if (squeezeOffset == -1) {
+            finishAbsorb();
+            squeezeOffset = 0;
+        }
+        int remaining = numBytes;
+        int target = offset;
+        while (remaining > 0) {
+            if (squeezeOffset == buffer.length) {
+                keccak();
+                squeezeOffset = 0;
+            }
+            int chunk = Math.min(remaining, buffer.length - squeezeOffset);
+            System.arraycopy(state, squeezeOffset, output, target, chunk);
+            squeezeOffset += chunk;
+            target += chunk;
+            remaining -= chunk;
+        }
+    }
+
+    byte[] implSqueeze(int numBytes) {
+        if (numBytes < 0) {
+            throw new IllegalArgumentException("numBytes must be non-negative");
+        }
+        byte[] result = new byte[numBytes];
+        implSqueeze(result, 0, numBytes);
+        return result;
     }
 
     /**
      * Resets the internal state to start a new hash.
      */
     void implReset() {
-        Arrays.fill(state, (byte)0);
+        Arrays.fill(state, (byte) 0);
         Arrays.fill(lanes, 0L);
+        squeezeOffset = -1;
     }
 
     /**
@@ -165,17 +221,25 @@ abstract class SHA3 extends DigestBase {
      * rate r = 1600 and capacity c = (digest length x 2).
      */
     private void keccak() {
-        // convert the 200-byte state into 25 lanes
         bytes2Lanes(state, lanes);
+        keccak(lanes);
+        lanes2Bytes(lanes, state);
+    }
 
+    /** Keccak-f[1600] permutation over exactly 25 lanes. */
+    public static void keccak(long[] stateArr) {
+        Objects.requireNonNull(stateArr, "stateArr");
+        if (stateArr.length != DM * DM) {
+            throw new IllegalArgumentException("Keccak state must contain 25 lanes");
+        }
         long a0, a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12;
         long a13, a14, a15, a16, a17, a18, a19, a20, a21, a22, a23, a24;
         // move data into local variables
-        a0 = lanes[0]; a1 = lanes[1]; a2 = lanes[2]; a3 = lanes[3]; a4 = lanes[4];
-        a5 = lanes[5]; a6 = lanes[6]; a7 = lanes[7]; a8 = lanes[8]; a9 = lanes[9];
-        a10 = lanes[10]; a11 = lanes[11]; a12 = lanes[12]; a13 = lanes[13]; a14 = lanes[14];
-        a15 = lanes[15]; a16 = lanes[16]; a17 = lanes[17]; a18 = lanes[18]; a19 = lanes[19];
-        a20 = lanes[20]; a21 = lanes[21]; a22 = lanes[22]; a23 = lanes[23]; a24 = lanes[24];
+        a0 = stateArr[0]; a1 = stateArr[1]; a2 = stateArr[2]; a3 = stateArr[3]; a4 = stateArr[4];
+        a5 = stateArr[5]; a6 = stateArr[6]; a7 = stateArr[7]; a8 = stateArr[8]; a9 = stateArr[9];
+        a10 = stateArr[10]; a11 = stateArr[11]; a12 = stateArr[12]; a13 = stateArr[13]; a14 = stateArr[14];
+        a15 = stateArr[15]; a16 = stateArr[16]; a17 = stateArr[17]; a18 = stateArr[18]; a19 = stateArr[19];
+        a20 = stateArr[20]; a21 = stateArr[21]; a22 = stateArr[22]; a23 = stateArr[23]; a24 = stateArr[24];
 
         // process the lanes through step mappings
         for (int ir = 0; ir < NR; ir++) {
@@ -279,14 +343,13 @@ abstract class SHA3 extends DigestBase {
             a0 ^= RC_CONSTANTS[ir];
         }
 
-        lanes[0] = a0; lanes[1] = a1; lanes[2] = a2; lanes[3] = a3; lanes[4] = a4;
-        lanes[5] = a5; lanes[6] = a6; lanes[7] = a7; lanes[8] = a8; lanes[9] = a9;
-        lanes[10] = a10; lanes[11] = a11; lanes[12] = a12; lanes[13] = a13; lanes[14] = a14;
-        lanes[15] = a15; lanes[16] = a16; lanes[17] = a17; lanes[18] = a18; lanes[19] = a19;
-        lanes[20] = a20; lanes[21] = a21; lanes[22] = a22; lanes[23] = a23; lanes[24] = a24;
+        stateArr[0] = a0; stateArr[1] = a1; stateArr[2] = a2; stateArr[3] = a3; stateArr[4] = a4;
+        stateArr[5] = a5; stateArr[6] = a6; stateArr[7] = a7; stateArr[8] = a8; stateArr[9] = a9;
+        stateArr[10] = a10; stateArr[11] = a11; stateArr[12] = a12; stateArr[13] = a13; stateArr[14] = a14;
+        stateArr[15] = a15; stateArr[16] = a16; stateArr[17] = a17; stateArr[18] = a18; stateArr[19] = a19;
+        stateArr[20] = a20; stateArr[21] = a21; stateArr[22] = a22; stateArr[23] = a23; stateArr[24] = a24;
 
         // convert the resulting 25 lanes back into 200-byte state
-        lanes2Bytes(lanes, state);
     }
 
     public Object clone() throws CloneNotSupportedException {
@@ -331,4 +394,72 @@ abstract class SHA3 extends DigestBase {
             super("SHA3-512", 64, (byte)0x06, 128);
         }
     }
+    /** Streaming SHAKE base preserving the Java 21 SHA3 byte-state engine. */
+    public abstract static class SHA3XOF extends SHA3 {
+        SHA3XOF(String name, int digestLength, int capacity) {
+            super(name, digestLength, (byte) 0x1F, capacity);
+        }
+
+        public void update(byte input) {
+            requireAbsorbing();
+            engineUpdate(input);
+        }
+
+        public void update(byte[] input) {
+            Objects.requireNonNull(input, "input");
+            update(input, 0, input.length);
+        }
+
+        public void update(byte[] input, int offset, int length) {
+            Objects.requireNonNull(input, "input");
+            Objects.checkFromIndexSize(offset, length, input.length);
+            requireAbsorbing();
+            engineUpdate(input, offset, length);
+        }
+
+        public byte[] digest() {
+            return engineDigest();
+        }
+
+        public void squeeze(byte[] output, int offset, int length) {
+            implSqueeze(output, offset, length);
+        }
+
+        public byte[] squeeze(int length) {
+            return implSqueeze(length);
+        }
+
+        public void reset() {
+            engineReset();
+        }
+
+        private void requireAbsorbing() {
+            if (squeezeOffset != -1) {
+                throw new ProviderException("update() after squeeze() is not allowed.");
+            }
+        }
+    }
+
+    /** SHAKE128 extendable-output function. */
+    public static final class SHAKE128 extends SHA3XOF {
+        public SHAKE128(int digestLength) {
+            super("SHAKE128", digestLength, 32);
+        }
+
+        public SHAKE128() {
+            this(0);
+        }
+    }
+
+    /** SHAKE256 extendable-output function. */
+    public static final class SHAKE256 extends SHA3XOF {
+        public SHAKE256(int digestLength) {
+            super("SHAKE256", digestLength, 64);
+        }
+
+        public SHAKE256() {
+            this(0);
+        }
+    }
+
 }
