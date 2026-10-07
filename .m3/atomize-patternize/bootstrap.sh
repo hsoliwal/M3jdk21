@@ -7,6 +7,7 @@ repo="$(cd "$here/../.." && pwd)"
 target="$repo/.m3/target/atomize-patternize"
 inventory="$here/inventory.tsv"
 manifest="$target/source-files.tsv"
+source "$here/layout.sh"
 
 fail() {
   printf '%s\n' "$1" >&2
@@ -24,10 +25,12 @@ sorted="$target/source-files.sorted"
 all_files="$target/all-files.txt"
 poms_file="$target/poms.txt"
 roots_file="$target/java-roots.txt"
+external_roots_file="$target/external-java-roots.txt"
 : > "$body"
 : > "$all_files"
 : > "$poms_file"
 : > "$roots_file"
+: > "$external_roots_file"
 
 while IFS= read -r -d '' file; do
   case "$file" in
@@ -45,17 +48,7 @@ while IFS= read -r -d '' file; do
     printf '%s\n' "$rel" >> "$poms_file"
   elif [[ "$file" == *.java ]]; then
     kind=JAVA
-    case "$rel" in
-      src/main/java/*) root='src/main/java' ;;
-      */src/main/java/*) root="${rel%%/src/main/java/*}/src/main/java" ;;
-      src/test/java/*) root='src/test/java' ;;
-      */src/test/java/*) root="${rel%%/src/test/java/*}/src/test/java" ;;
-      src/it/java/*) root='src/it/java' ;;
-      */src/it/java/*) root="${rel%%/src/it/java/*}/src/it/java" ;;
-      src/integrationTest/java/*) root='src/integrationTest/java' ;;
-      */src/integrationTest/java/*) root="${rel%%/src/integrationTest/java/*}/src/integrationTest/java" ;;
-      *) root="$(dirname "$rel")" ;;
-    esac
+    root="$(m3_java_root "$rel")"
     printf '%s\n' "$root" >> "$roots_file"
   else
     continue
@@ -79,16 +72,71 @@ LC_ALL=C sort -t $'\t' -k2,2 -k1,1 "$body" > "$sorted"
 
 LC_ALL=C sort -u "$poms_file" -o "$poms_file"
 LC_ALL=C sort -u "$roots_file" -o "$roots_file"
+m3_collect_external_roots "$repo" "$roots_file" "$external_roots_file"
 LC_ALL=C sort -u "$all_files" -o "$all_files"
 
 content_root="$(sha256sum -- "$manifest" | awk '{print $1}')"
 content_files="$(( $(wc -l < "$manifest") - 1 ))"
 java_files="$(awk -F $'\t' 'NR>1 && $1=="JAVA" {n++} END {print n+0}' "$manifest")"
-pom_files="$(awk -F $'\t' 'NR>1 && $1=="POM" {n++} END {print n+0}' "$manifest")"
+pom_files="$(awk -F 
+
+join_us() {
+  local file="$1" first=1 value
+  while IFS= read -r value; do
+    [[ -n "$value" ]] || continue
+    if ((first)); then
+      printf '%s' "$value"
+      first=0
+    else
+      printf '\037%s' "$value"
+    fi
+  done < "$file"
+}
+
+pom_join="$(join_us "$poms_file")"
+root_join="$(join_us "$roots_file")"
+external_root_join="$(join_us "$external_roots_file")"
+plan_root="$(
+  printf '%s\n%s\n%s\n%s\n%s\n%s' \
+    'M3-REPOSITORY-ATOM-PATTERN-BOOTSTRAP/2' \
+    "$mode" "$pom_join" "$root_join" "$external_root_join" "$inspected_files" |
+  sha256sum | awk '{print $1}'
+)"
+bound_root="$(
+  printf '%s\n%s\n%s'     'M3-REPOSITORY-ATOM-PATTERN-BOOTSTRAP-BOUND/1'     "$plan_root" "$content_root" |
+  sha256sum | awk '{print $1}'
+)"
+
+tmp="$target/inventory.tsv.new"
+{
+  printf 'kind\tvalue\n'
+  printf 'schema\tBOOTSTRAP_V2\n'
+  printf 'mode\t%s\n' "$mode"
+  printf 'root\t%s\n' "$plan_root"
+  printf 'inspectedFiles\t%s\n' "$inspected_files"
+  while IFS= read -r value; do [[ -n "$value" ]] && printf 'pom\t%s\n' "$value"; done < "$poms_file"
+  while IFS= read -r value; do [[ -n "$value" ]] && printf 'javaRoot\t%s\n' "$value"; done < "$roots_file"
+  while IFS= read -r value; do [[ -n "$value" ]] && printf 'externalJavaRoot\t%s\n' "$value"; done < "$external_roots_file"
+  printf 'externalJavaRoots\t%s\n' "$external_roots"
+  printf 'contentRoot\t%s\n' "$content_root"
+  printf 'boundRoot\t%s\n' "$bound_root"
+  printf 'contentFiles\t%s\n' "$content_files"
+  printf 'javaFiles\t%s\n' "$java_files"
+  printf 'pomFiles\t%s\n' "$pom_files"
+} > "$tmp"
+
+mv -f -- "$tmp" "$inventory"
+rm -f -- "$body" "$sorted" "$all_files" "$poms_file" "$roots_file" "$external_roots_file"
+
+printf 'M3_ATOM_PATTERN_BOOTSTRAP_PASS mode=%s contentFiles=%s contentRoot=%s boundRoot=%s\n'   "$mode" "$content_files" "$content_root" "$bound_root"
+\t' 'NR>1 && $1=="POM" {n++} END {print n+0}' "$manifest")"
+external_roots="$(wc -l < "$external_roots_file" | tr -d '[:space:]')"
 inspected_files="$(wc -l < "$all_files" | tr -d '[:space:]')"
 
 if ((java_files == 0)); then
   mode=NO_JAVA_SOURCE_ROOTS
+elif ((pom_files > 0 && external_roots > 0)); then
+  mode=HYBRID_REACTOR_EXTERNAL
 elif ((pom_files > 0)); then
   mode=MAVEN_REACTOR
 else
