@@ -1,0 +1,21 @@
+Synexia packed collection donation to M3JDK21
+Copyright © 2026 Hitesh Soliwal and Contributors to the Synexia Project.
+SPDX-License-Identifier: Apache-2.0
+
+Adapted from the Apache-2.0 Synexia common collection, progress, and lazy-event
+owners through the canonical Synexia Maven/OpenRewrite recipe. Original notices
+in source files and the existing collection LICENSE/NOTICE remain in force.
+See synexia-donation.json for exact source paths, revisions, hashes, corrections,
+target names and recipe identity; qualification receipts record execution.
+
+Source modifications repair late-binding spliterators and lazy callback state /
+reentrancy handling, then adapt names and packages to com.m3.collections.
+Reusable source, recipes, tests and corrections remain canonically in Synexia.
+The separate M3 collection module owns target integration and qualification.
+OpenJDK and third-party files retain their original licenses and notices.
+
+The 2026-10-07 reconciliation retains the current primitive collection owners,
+combines donor operations with their established receiver contracts, and records
+exact active content in qualification/installed-source-converged-20261007.tsv.
+The canonical Synexia donor APIs and the prior immutable qualification remain
+separately identified in synexia-donation.json.

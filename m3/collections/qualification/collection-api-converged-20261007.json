@@ -1,0 +1,74 @@
+{
+  "schema": "M3_COLLECTION_CONVERGED_API_QUALIFICATION_V1",
+  "license": "Apache-2.0",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "installed_source_manifest_sha256": "81d3ed294dcadf774a43b797ac8d6db51821ee1c026580d5e95b727a258e7af2",
+  "targetOriginalCommit": "5cef0a5b4831db0346fccdd0079d3d28d820a24e",
+  "targetCurrentCommit": "7fad958f073602247b1c34a8fd756b1a0ecd3edb",
+  "targetIntermediateCommit": "e567cd9a3c4f7f371aecf19c8dd46f31a1cf9b05",
+  "scope": "Every declared public/protected JVM member, including nested classes; existing class hierarchy changes are recorded separately.",
+  "comparisons": {
+    "original": {
+      "baselineClassCount": 24,
+      "baselinePublicProtectedMemberCount": 257,
+      "retainedMemberCount": 257,
+      "missingMembers": [],
+      "missingClasses": [],
+      "changedRetainedDeclarations": {},
+      "classDeclarationChanges": {},
+      "baselineJavapSha256": "df925f70b4a6733ed1fe55d3ca5c065b23f2420a128e03afecf457f33ca36542"
+    },
+    "current": {
+      "baselineClassCount": 35,
+      "baselinePublicProtectedMemberCount": 347,
+      "retainedMemberCount": 347,
+      "missingMembers": [],
+      "missingClasses": [],
+      "changedRetainedDeclarations": {},
+      "classDeclarationChanges": {
+        "com.m3.collections.M3LongArrayDeque": {
+          "before": "public final class com.m3.collections.M3LongArrayDeque implements com.m3.collections.M3LongCollection {",
+          "after": "public final class com.m3.collections.M3LongArrayDeque implements com.m3.collections.M3LongDeque {"
+        },
+        "com.m3.collections.M3LongArrayList": {
+          "before": "public final class com.m3.collections.M3LongArrayList implements com.m3.collections.M3LongCollection {",
+          "after": "public final class com.m3.collections.M3LongArrayList implements com.m3.collections.M3LongSequence,com.m3.collections.M3LongStack {"
+        }
+      },
+      "baselineJavapSha256": "d41589b6d9745045209b989986aef3ddc26e7ec2c751fd36cbf98c6d0ffef9d2"
+    },
+    "intermediate": {
+      "baselineClassCount": 95,
+      "baselinePublicProtectedMemberCount": 1122,
+      "retainedMemberCount": 1118,
+      "missingMembers": [
+        "com.m3.collections.M3LongArrayList::add:(J)V",
+        "com.m3.collections.M3LongArrayList::addAll:([J)V",
+        "com.m3.collections.M3LongSequence::add:(J)V",
+        "com.m3.collections.M3LongSequence::addAll:([J)V"
+      ],
+      "missingClasses": [],
+      "changedRetainedDeclarations": {},
+      "classDeclarationChanges": {},
+      "baselineJavapSha256": "95f59fb087f0eb5be0a3e34075809ec14fdb99b1a88784f591c6da68e648ffeb"
+    }
+  },
+  "status": "PASS",
+  "candidateClassCount": 103,
+  "candidatePublicProtectedMemberCount": 1193,
+  "candidateJavapSha256": "c175cd03fc7b52959c397216e9255ca61a157e950d6c76e540a1f0ee22036b30",
+  "factoryPublicMethodCount": 58,
+  "currentCollectionInterfaceRetainedTransitively": true,
+  "intermediateBinaryCompatibilityLimit": "Four descriptors change from void to boolean: add(long) and addAll(long[]) on M3LongArrayList and M3LongSequence. Previously compiled e567 clients using those descriptors require recompilation. This is not an exact binary API union with the intermediate donation.",
+  "actual_sdk_candidate_hashes_match": true,
+  "current_source_snapshot_preserved": {
+    "unchanged_files": 24,
+    "reconciled_files": 3,
+    "absent_or_deleted_current_files": 0
+  },
+  "intermediate_source_snapshot_preserved": {
+    "unchanged_files": 75,
+    "reconciled_files": 4,
+    "absent_or_deleted_intermediate_files": 0
+  }
+}

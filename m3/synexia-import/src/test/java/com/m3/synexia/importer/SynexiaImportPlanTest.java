@@ -1,4 +1,6 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 // SPDX-License-Identifier: Apache-2.0
+// Modified 2026-10-07: encode recipe-resource fixture bytes and mirror the canonical source path.
 package com.m3.synexia.importer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -403,7 +405,7 @@ final class SynexiaImportPlanTest {
                         "m3jdk21",
                         List.of(entry(
                                 "m3-recipe-source",
-                                "src/A.java",
+                                "synexia-m3-recipe/src/A.java",
                                 "m3/vendor/synexia/synexia-m3-recipe/src/A.java",
                                 bytes,
                                 SynexiaImportManifest.Mode.APACHE_SOURCE)),
@@ -438,7 +440,8 @@ final class SynexiaImportPlanTest {
         byte[] keep = apache("package com.synexia.rewrite; final class Keep {}\n");
         byte[] replace = apache("package com.synexia.convergence; final class Replace { int v = 2; }\n");
         byte[] add = apache("int m3_add(int a, int b) { return a + b; }\n");
-        byte[] resource = "---\ntype: specs.openrewrite.org/v1beta/recipe\nname: com.synexia.M3\n";
+        byte[] resource = "---\ntype: specs.openrewrite.org/v1beta/recipe\nname: com.synexia.M3\n"
+                .getBytes(StandardCharsets.UTF_8);
         byte[] stale = apache("package obsolete; final class Old {}\n");
 
         write(synexia.resolve(keepSource), keep);

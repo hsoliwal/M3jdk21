@@ -1,0 +1,81 @@
+{
+  "status": "PASS_BOUNDED_JAVA_RECONCILIATION",
+  "targetRepository": "hsoliwal/M3jdk21",
+  "targetRevision": "ed5f4ed1771dbc0cf5cfc6d0944de2092326bd6d",
+  "namedRecipe": "com.synexia.rewrite.M3FamilyReceiverCollectionsReconcile20261007",
+  "activation": "YamlResourceLoader -> Environment.activateRecipes -> validated canonical snapshot recipe",
+  "engine": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+  "engineSourceChanged": false,
+  "manifestSha256": "37f978f93e94127b6cec48b2b707e5332d3321d0dcbd5445bbd8591242e1fe12",
+  "sourceInputCount": 92,
+  "targetInputReadback": "92/92 exact SHA-256 and Git blob SHA-1; 90 unchanged from the exact 7fad-to-ed5 comparison and two latest direct fetches",
+  "sdkResults": 6,
+  "fixedPointResults": 0,
+  "readbackFixedPointResults": 0,
+  "refusals": 16,
+  "stale7fadPublicPreimageRefused": true,
+  "compiledModuleMainSources": 8,
+  "compiledModuleTestSources": 7,
+  "compilerOptions": [
+    "--release",
+    "21",
+    "-Xlint:all",
+    "-Werror",
+    "-proc:none",
+    "-implicit:none"
+  ],
+  "qualifiedImporterTests": 38,
+  "failures": 0,
+  "skipped": 0,
+  "aborted": 0,
+  "retainedConcurrentA3Assertions": 4,
+  "candidateTableSha256": "91f216d0c3a4943ef707e1c5e80bc5d7e80b7e153598791aedd589cb3561217e",
+  "outputs": [
+    {
+      "path": "m3/synexia-import/src/main/java/com/m3/synexia/importer/SynexiaCanonicalFamilyPolicy.java",
+      "beforeSha256": "c1762968dfe62a18706f2b6092f0a02341fafcc904fa6bec96643ef8cc480e5d",
+      "afterSha256": "4ac9a1678efcee8a272ca51ce3ccd501bbc50d7b1e5da478094f785b728d0320",
+      "afterGitBlobSha1": "2141b9816744aebbe087fce7177a2e032535e615",
+      "origin": "ACTUAL_YAML_ACTIVATED_OPENREWRITE_SDK_RESULT"
+    },
+    {
+      "path": "m3/synexia-import/src/main/java/com/m3/synexia/importer/SynexiaImportPlan.java",
+      "beforeSha256": "27996c430d055bdf5b5ba32c2664b3cc683731a0dd1edf51aca067d876859b82",
+      "afterSha256": "0703314300dc2fb41fc80c33816cb9d66dad7a135951539db8e5118d1d9b43f6",
+      "afterGitBlobSha1": "b94bf407b5ac16d84f1bfcf9274e3667e0c8424c",
+      "origin": "ACTUAL_YAML_ACTIVATED_OPENREWRITE_SDK_RESULT"
+    },
+    {
+      "path": "m3/synexia-import/src/test/java/com/m3/synexia/importer/PublicAtomPatternReceiverTest.java",
+      "beforeSha256": "a01bfc2a692d7786fd7dcbf8bace8ccd0653780430697aa0388ceed3fcb38e5e",
+      "afterSha256": "f3c4ef667c39ad8a03a139e8ebf44fd5361dfea9ebb364313121c837eb5a82d8",
+      "afterGitBlobSha1": "a803fa9d08a672f8efa37fd4a34bb4cdec4f9598",
+      "origin": "ACTUAL_YAML_ACTIVATED_OPENREWRITE_SDK_RESULT"
+    },
+    {
+      "path": "m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaCanonicalFamilyPolicyTest.java",
+      "beforeSha256": "b7e396f4bd546c54a69886c9688cf1de828ffaccc174075bf4db2ac5635b8817",
+      "afterSha256": "a41500618b2dc30140055a26313f2a2cdc462922593f50fc72aae8aab580eaf7",
+      "afterGitBlobSha1": "414d9741dc7a9c8561c8358899b9a2be6d98d408",
+      "origin": "ACTUAL_YAML_ACTIVATED_OPENREWRITE_SDK_RESULT"
+    },
+    {
+      "path": "m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImportPlanTest.java",
+      "beforeSha256": "8f0925601dd8308282727acd3a9fbcf1a654fbc0a3af48b9640a11d84755c2e0",
+      "afterSha256": "8a1bbaf5bd15961dbbe702ca8eb602f6b605f05098f258fcac3357f2ef9ba414",
+      "afterGitBlobSha1": "49ff2e73e2b0ca060bc5eaa1859a188c106b1c35",
+      "origin": "ACTUAL_YAML_ACTIVATED_OPENREWRITE_SDK_RESULT"
+    },
+    {
+      "path": "m3/synexia-import/src/test/java/com/m3/synexia/importer/SynexiaImporterTest.java",
+      "beforeSha256": "6acd2f31448739fd21d54b7df7503a796bc96801a5e5ff9a5720286a959fdf1a",
+      "afterSha256": "dae26cae066481b945014fc4ea3c8f0fcbadf9030c580ef5cbe907aeeb2cba14",
+      "afterGitBlobSha1": "b4fd47ac81a0aa409f542da558e02cb782d44a33",
+      "origin": "ACTUAL_YAML_ACTIVATED_OPENREWRITE_SDK_RESULT"
+    }
+  ],
+  "limits": [
+    "The malformed latest .m3/atomize-patternize/public-verify.sh remains byte-identical; bash -n fails before execution. This proof validates Java test assertions against its exact text, not successful shell execution.",
+    "No full reactor, JaCoCo, hosted CI, JDK image, JNI or jtreg result is claimed by this importer-only packet."
+  ]
+}

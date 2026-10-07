@@ -1,0 +1,130 @@
+{
+  "schema": "M3_COLLECTION_CONVERGENCE_QUALIFICATION_V1",
+  "scope": "SEPARATELY_BUILT_COLLECTION_MODULE",
+  "installed_source_manifest_sha256": "81d3ed294dcadf774a43b797ac8d6db51821ee1c026580d5e95b727a258e7af2",
+  "java_sources": 65,
+  "test_sources": 19,
+  "junit": {
+    "tests": 99,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "main_self_tests": [
+    "M3LazyTreeMapSelfTest:PASS",
+    "M3LazyValueStateSelfTest:PASS"
+  ],
+  "java_compile": "--release 21 -Xlint:all,-module -Werror",
+  "runtime_requires": [
+    "java.base"
+  ],
+  "native_standard": "c17",
+  "undefined_behavior_sanitizer": "PASS",
+  "checked_jni": "PASS",
+  "prepared_lane_allocation": "PASS",
+  "packaged_license_provenance": "PASS",
+  "cost_probe": "DIAGNOSTIC_RECORDED",
+  "full_reactor": "NOT_RUN",
+  "openjdk_jtreg_hotspot": "NOT_RUN",
+  "universal_performance_claim": false,
+  "license": "Apache-2.0",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "qualification_kind": "LOCAL_CURRENT_RECEIVER_EVIDENCE",
+  "collection_source_preimage_revision": "7fad958f073602247b1c34a8fd756b1a0ecd3edb",
+  "latest_target_review_revision": "ed5f4ed1771dbc0cf5cfc6d0944de2092326bd6d",
+  "collection_java_unchanged_between_target_reviews": true,
+  "installed_source_manifest": "m3/collections/qualification/installed-source-converged-20261007.tsv",
+  "canonical_java_manifest_sha256": "9ee7aec783d7078a40fd89042dda3ec4a0fd9670d970f937c4da5934a9c409f0",
+  "actual_sdk_readback_84_candidates_match": true,
+  "recipe_proofs": {
+    "collection_java": {
+      "activation": "YAML_ACTIVATED_OPENREWRITE_SDK_8.90.4",
+      "first_results": 60,
+      "fixed_point_results": 0,
+      "readback_results": 0,
+      "manifest_rows": 83,
+      "refusals": 115
+    },
+    "receiver_metadata": {
+      "activation": "YAML via YamlResourceLoader and Environment.activateRecipes",
+      "files": 10,
+      "junit_tests": 6,
+      "refusal_scenarios": 4,
+      "second_pass_byte_changes": 0
+    },
+    "importer": {
+      "latest_preimage": "ed5f4ed1771dbc0cf5cfc6d0944de2092326bd6d",
+      "first_results": 6,
+      "fixed_point_results": 0,
+      "readback_results": 0,
+      "refusals": 16,
+      "junit_tests": 38
+    },
+    "ci_and_source_authority": {
+      "proof_tests": 14,
+      "workflow_outputs": 1,
+      "canonical_metadata_outputs": 2,
+      "refusals": 14,
+      "fixed_point_results_each": 0,
+      "hosted_ci_run": "NOT_RUN"
+    }
+  },
+  "name_mapping": {
+    "module_path": "m3/collections/name-mapping.json",
+    "module_sha256": "c94769f0a807618657b357d94833c9082194af27fa582780edf98858a4fb9a47",
+    "global_path": "m3/docs/name-mapping.json",
+    "global_action": "UNCHANGED_BY_THIS_PACKET",
+    "global_git_blob": "e776c20335ff4269080b1119ed9caaea19917fa7",
+    "frozen_tq_verifier_action": "UNCHANGED"
+  },
+  "api": {
+    "original_members_retained": 257,
+    "current_members_retained": 347,
+    "factory_methods": 58,
+    "intermediate_void_to_boolean_descriptor_changes": 4,
+    "intermediate_compiled_clients_with_changed_descriptors_require_recompilation": true
+  },
+  "native_ranges": {
+    "boundary": 66,
+    "changing_random": 1200
+  },
+  "prepared_allocation_trials_bytes": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "cost_diagnostic": {
+    "rows": 16,
+    "families": 4,
+    "sizes": [
+      1024,
+      16384
+    ],
+    "samples": 7,
+    "warmups": 3,
+    "retained_heap_or_native_rss_measured": false,
+    "universal_performance_claim": false
+  },
+  "hosted_ci": {
+    "this_successor": "NOT_RUN",
+    "prior_repository_runs": "KNOWN_FAILED",
+    "failure_owner_scope": "arrays, precompute native tests and frozen recipe seals/imports; separate from the qualified collection module",
+    "prior_failure_head": "e567cd9a3c4f7f371aecf19c8dd46f31a1cf9b05",
+    "actual_failed_checkout": "43fcee1c46b491352f1d420eaeac14a3ee580772"
+  },
+  "unrelated_current_public_receiver_script": {
+    "syntax_check": "EXISTING_FAILURE",
+    "git_blob": "651422ab43b67ae9a8d15167c7781049cb89751a",
+    "changed_by_packet": false
+  },
+  "phase_advance": false,
+  "evidence_receipts": {
+    "api": "collection-api-converged-20261007.json",
+    "cost_csv": "collection-cost-converged-20261007.csv",
+    "cost_definitions": "collection-cost-converged-20261007.json",
+    "native": "collection-native-converged-20261007.json",
+    "primitive_lineage": "primitive-lineage-converged-20261007.json"
+  }
+}

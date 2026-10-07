@@ -1,0 +1,22 @@
+# diagnostic_only=true; time_is_not_a_correctness_gate=true
+# java=21.0.12.1+1-LTS; vm=OpenJDK 64-Bit Server VM; os=Linux; arch=amd64; processors=8
+# allocation=thread_allocated_bytes; excludes_generic_key_value_payloads=true; retained_heap_and_native_rss_not_measured=true
+# samples=7; warmups=3; reported_statistic=median; cold_owner_insertion_included=true; gc_not_forced=true
+family,implementation,size,cold_ns,cold_allocated_bytes,warm_ns,warm_allocated_bytes,warm_operations,checksum
+ordered-map,JDK_LinkedHashMap,1024,166422,57496,191397,0,5120,2094080
+ordered-map,M3LinkedHashMap,1024,217590,105952,24782,0,5120,2094080
+sorted-map,JDK_TreeMap,1024,109853,41032,246235,0,5120,2094080
+sorted-map,M3TreeMap,1024,201401,78528,294803,0,5120,2094080
+linked-list-traversal,JDK_LinkedList,1024,55184,24632,158716,128,4096,2095104
+linked-list-traversal,M3LinkedList,1024,63867,44792,8310,160,4096,2095104
+long-list-admission,JDK_ArrayList_boxed_long,1024,62933,39624,142895,0,4096,6191104
+long-list-admission,M3LongArrayList,1024,40777,29776,93885,0,4096,6191104
+ordered-map,JDK_LinkedHashMap,16384,623622,917720,408785,0,81920,536821760
+ordered-map,M3LinkedHashMap,16384,1003689,1781120,1242356,0,81920,536821760
+sorted-map,JDK_TreeMap,16384,2311384,655432,8098473,0,81920,536821760
+sorted-map,M3TreeMap,16384,2958695,1329312,6465998,0,81920,536821760
+linked-list-traversal,JDK_LinkedList,16384,229924,393272,222292,128,65536,536838144
+linked-list-traversal,M3LinkedList,16384,491905,759464,133856,160,65536,536838144
+long-list-admission,JDK_ArrayList_boxed_long,16384,309716,646544,58156,0,65536,602374144
+long-list-admission,M3LongArrayList,16384,415838,506192,34430,0,65536,602374144
+# blackhole=602374144

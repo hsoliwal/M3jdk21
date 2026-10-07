@@ -1,0 +1,65 @@
+{
+  "schema": "M3_PRIMITIVE_COLLECTION_CONVERGED_LINEAGE_V1",
+  "license": "Apache-2.0",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "installed_source_manifest_sha256": "81d3ed294dcadf774a43b797ac8d6db51821ee1c026580d5e95b727a258e7af2",
+  "canonical_owner": "hsoliwal/com.synexia",
+  "canonical_recipe": "com.synexia.rewrite.M3Jdk21PrimitiveCollectionsV1",
+  "canonical_crate": "m3jdk21-primitive-collections-v1",
+  "source_authored_commit": "38ea4f44572b4711489d1291c898f2aac52bb054",
+  "source_readback_commit": "857c4cc0ddeb73e5ea5269a1d0ef2d30057dcfa8",
+  "source_pr": 9775,
+  "target_origin_commit": "05beed25e42d703ebca97a2373b49ebff062dac6",
+  "target_readback_commit": "7fad958f073602247b1c34a8fd756b1a0ecd3edb",
+  "source_restoration_needed": false,
+  "original_receipt_sha256": "366a6a4fb5f4bb11281e12fd324e39be705ace5800170c477d0f49ff2e512b58",
+  "origin_readback_sha256": "5c97d16a583cc82cd7c9c54ac9ca53b758f39c0743edf8e3340c364ad21ea0c4",
+  "original_prototype_receipt_retained_without_status_rewrite": true,
+  "qualified_current_outcome": "Current actual SDK candidate passed collection99JUnit,2selftests,JNI,UBSan and module packaging; this is separate evidence from the original prototype receipt.",
+  "rows": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayDeque.java",
+      "primitive_v1_sha256": "b2429000908aed794d3cac63172b81e757824e8b3bc4c56c33c39431e2d0cf0a",
+      "qualified_sha256": "a3df5b0e77a505a71e97d85f745647b409084c55600f89f39209cf0d429aa3b6",
+      "qualified_git_blob": "9ca6a0a3c761ff30b32477e78e965535788d0ea4",
+      "disposition": "RECONCILED_WITH_CURRENT_API_RETAINED"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java",
+      "primitive_v1_sha256": "60bbe5141f9343ca6fdaba5e838c6af090aa95559907bce1881eb4cf8ecc3a45",
+      "qualified_sha256": "66f7b7584b0985e0d168c0b913dcd767a7f7e19c61ed4b7cb8a6d4ce7250ab49",
+      "qualified_git_blob": "da50f9aef6818fb57173d3d5f9c00556047413f8",
+      "disposition": "RECONCILED_WITH_CURRENT_API_RETAINED"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java",
+      "primitive_v1_sha256": "8d1226aac98d797e164c1844886435df3602933c287db597eb2fe275936330eb",
+      "qualified_sha256": "8d1226aac98d797e164c1844886435df3602933c287db597eb2fe275936330eb",
+      "qualified_git_blob": "1fe9ac1bfa11cf6a626a749c37d64ccec0ed09df",
+      "disposition": "RETAINED_EXACT"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+      "primitive_v1_sha256": "a1b007cd7676fe6fced9fe8330b39f402c6355d29138e0e84185becaa47d7c36",
+      "qualified_sha256": "a1b007cd7676fe6fced9fe8330b39f402c6355d29138e0e84185becaa47d7c36",
+      "qualified_git_blob": "b1d85622c2e19db069d0b2a64fb8011b5c01be34",
+      "disposition": "RETAINED_EXACT"
+    },
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3LongPriorityQueue.java",
+      "primitive_v1_sha256": "d42f4566595b7e95bcc573348ebf7968ebe8b53f7a68a1c8de3a2aeaa7eca04c",
+      "qualified_sha256": "d42f4566595b7e95bcc573348ebf7968ebe8b53f7a68a1c8de3a2aeaa7eca04c",
+      "qualified_git_blob": "2fb403549f2baf0afe5b04743647c26ebd4cce80",
+      "disposition": "RETAINED_EXACT"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3JdkShapedPrimitiveCollectionsTest.java",
+      "primitive_v1_sha256": "d5ea4fdcde6280a43041b6fd105a65dbbac0e138ab353475a8801282a910f1f7",
+      "qualified_sha256": "d5ea4fdcde6280a43041b6fd105a65dbbac0e138ab353475a8801282a910f1f7",
+      "qualified_git_blob": "9a6710e2985676613778895dd42c8bb9d08e8534",
+      "disposition": "RETAINED_EXACT"
+    }
+  ],
+  "public_jdk_replacement": false,
+  "runtime_dependency_on_synexia": false
+}

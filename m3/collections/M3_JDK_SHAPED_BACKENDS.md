@@ -35,3 +35,24 @@ map value replacement do not invalidate iterators merely because the table has c
 See `JDK_FAMILY_MAP.tsv` for existing/pending names and
 `m3/compatibility/synexia-to-m3-family-status-20261007.tsv` for the wider MIndex/M3Index
 receiving ledger. No PENDING row is implied complete by this PR.
+
+
+<!-- Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: document the combined collection donation and preserved primitive contracts. -->
+
+## Combined collection donation
+
+The subsequent Synexia packed-collection reconciliation retains the three primitive
+hash/set/heap owners above byte-for-byte. It extends the same primitive list/deque
+owners with donor operations and retains their fail-fast iterators. The receiving
+list keeps its `boolean add(long)` and `boolean addAll(long[])` contracts. Synexia's
+own `PackedLongList` and `LongSequence` APIs remain unchanged.
+
+The combined module has one `M3Collections` factory and uses the existing
+`com.m3.collections` package. See `name-mapping.json` for the donor-to-receiver names
+and `synexia-donation.json` for exact provenance, interface adaptations, and the
+active installed-source manifest. Generic object collection coverage does not
+complete the primitive-specialization PENDING rows in `JDK_FAMILY_MAP.tsv`.
+
+Run `python3 m3/collections/verify_donation.py --cost-probe` with Java 21 and a JUnit
+console JAR in `JUNIT_CONSOLE_JAR`. The dedicated collection workflow runs this
+acceptance host and the frozen historical lane SDK test as independent jobs.

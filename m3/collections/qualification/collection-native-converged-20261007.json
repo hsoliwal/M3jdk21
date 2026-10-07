@@ -1,0 +1,53 @@
+{
+  "schema": "M3_COLLECTION_CONVERGED_NATIVE_QUALIFICATION_V1",
+  "license": "Apache-2.0",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "installed_source_manifest_sha256": "81d3ed294dcadf774a43b797ac8d6db51821ee1c026580d5e95b727a258e7af2",
+  "native_standard": "c17",
+  "compiler_options": [
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-fsanitize=undefined",
+    "-fno-sanitize-recover=all"
+  ],
+  "static_compile": "PASS",
+  "shared_library_compile": "PASS",
+  "checked_jni": "PASS",
+  "checked_jni_option": "-Xcheck:jni",
+  "boundary_ranges": 66,
+  "changing_random_ranges": 1200,
+  "undefined_behavior_sanitizer": "PASS",
+  "prepared_allocation": {
+    "jvm_option": "-Xbatch",
+    "trials": 5,
+    "thread_allocated_bytes_each": [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "scope": "This prepared loop and JVM only; excludes streams and page growth."
+  },
+  "runtime_module": "com.m3.collections",
+  "runtime_requires": [
+    "java.base"
+  ],
+  "packaged_license_notice_provenance_and_module_mapping": "PASS",
+  "evidence_sha256": {
+    "06-module-descriptor.log": "baa95693124c7bd58f64660c4338ddb0c4b01960c36711b96346ec29da23df37",
+    "07-native-static.log": "02a6815489243e3c7ffae4e6ab70faf47be0720bc98c4cedbb094da85295fa6c",
+    "10-prepared-allocation.log": "467bbe6b3d11b5fbb3cd80d1ea66d1a81f39f82bb181a1db316f45eacab11db3",
+    "09-checked-jni-parity.log": "712c1e9042d9429355eb088eaa9c7462e08e1a7d3429a5ac4eb133c71e19dfb5",
+    "08-native-compile.log": "ff3c188bab030fc5f6197d1af45e15feba3b963a030c44b82b36a42e8b2d4317",
+    "05-module-package.log": "591d65142766439931e8be3bcf3e91493f228b1709fbdb81c3e292cdfa181de1"
+  },
+  "inputs": {
+    "m3/collections/src/main/native/collections/segmented_bit_lane.c": "4ff7fb4557c58cc59de7fbb24498f3df2a197083a5cd467670dc24b9441f1210",
+    "m3/collections/verification/SegmentedLaneNativeProbe.java": "1bfff970dfcad8bb19c9e9ab6885aafef657e0f52a2ab7fbea970963694ed065",
+    "m3/collections/verification/PreparedLaneAllocationProbe.java": "11bb2728a65f58d91ca9dc1e5da9ebb015297b5c6cacd88f25dd3db2938ec290",
+    "m3/collections/verify_donation.py": "95483ce44a5f6acf6111f2ecb1b3f1edd7a35bcd01d9af3059128671a4ded8e0"
+  }
+}

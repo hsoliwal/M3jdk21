@@ -262,5 +262,60 @@
         "native postimage SHA updated for renamed JNI symbol"
       ]
     }
-  ]
+  ],
+  "packed_collection_donation": {
+    "modification_notice": "Modified 2026 by Synexia contributors: added the collection donation provenance binding; previous provenance retained.",
+    "manifest": "synexia-donation.json",
+    "source_revision": "67d4b8f377b3fffba2d008bde1bd28ec8855f2ef",
+    "applied_java_manifest_sha256": "1f45bc0ccd7ad714e8789724e67ac303f4c5c26b7f1a8bedcb942189e6cc4ae2",
+    "scope": "SEPARATELY_BUILT_COLLECTION_MODULE",
+    "canonical_owner": "hsoliwal/com.synexia"
+  },
+  "collection_convergence": {
+    "modification_notice": "Modified 2026 by Hitesh Soliwal and Contributors to the Synexia Project: bind the combined collection module and preserve all prior provenance.",
+    "manifest": "synexia-donation.json",
+    "name_mapping": "name-mapping.json",
+    "source_baseline": "ede32ff2f69a9a0f00ee3cf628439a10728ff55b",
+    "target_baseline": "7fad958f073602247b1c34a8fd756b1a0ecd3edb",
+    "applied_java_manifest_sha256": "9ee7aec783d7078a40fd89042dda3ec4a0fd9670d970f937c4da5934a9c409f0",
+    "installed_source_manifest_sha256": "81d3ed294dcadf774a43b797ac8d6db51821ee1c026580d5e95b727a258e7af2",
+    "canonical_owner": "hsoliwal/com.synexia",
+    "preserved_primitive_owners": [
+      {
+        "target": "com.m3.collections.M3LongHashSet",
+        "target_path": "m3/collections/src/main/java/com/m3/collections/M3LongHashSet.java",
+        "target_sha256": "8d1226aac98d797e164c1844886435df3602933c287db597eb2fe275936330eb",
+        "retained_from_target_commit": "7fad958f073602247b1c34a8fd756b1a0ecd3edb",
+        "canonical_recipe": "com.synexia.rewrite.M3Jdk21PrimitiveCollectionsV1",
+        "canonical_recipe_commit": "38ea4f44572b4711489d1291c898f2aac52bb054",
+        "canonical_origin_notice": "M3_JDK_SHAPED_BACKENDS.md",
+        "license": "Apache-2.0",
+        "disposition": "UNCHANGED_CURRENT_TARGET_OWNER"
+      },
+      {
+        "target": "com.m3.collections.M3LongLongHashMap",
+        "target_path": "m3/collections/src/main/java/com/m3/collections/M3LongLongHashMap.java",
+        "target_sha256": "a1b007cd7676fe6fced9fe8330b39f402c6355d29138e0e84185becaa47d7c36",
+        "retained_from_target_commit": "7fad958f073602247b1c34a8fd756b1a0ecd3edb",
+        "canonical_recipe": "com.synexia.rewrite.M3Jdk21PrimitiveCollectionsV1",
+        "canonical_recipe_commit": "38ea4f44572b4711489d1291c898f2aac52bb054",
+        "canonical_origin_notice": "M3_JDK_SHAPED_BACKENDS.md",
+        "license": "Apache-2.0",
+        "disposition": "UNCHANGED_CURRENT_TARGET_OWNER"
+      },
+      {
+        "target": "com.m3.collections.M3LongPriorityQueue",
+        "target_path": "m3/collections/src/main/java/com/m3/collections/M3LongPriorityQueue.java",
+        "target_sha256": "d42f4566595b7e95bcc573348ebf7968ebe8b53f7a68a1c8de3a2aeaa7eca04c",
+        "retained_from_target_commit": "7fad958f073602247b1c34a8fd756b1a0ecd3edb",
+        "canonical_recipe": "com.synexia.rewrite.M3Jdk21PrimitiveCollectionsV1",
+        "canonical_recipe_commit": "38ea4f44572b4711489d1291c898f2aac52bb054",
+        "canonical_origin_notice": "M3_JDK_SHAPED_BACKENDS.md",
+        "license": "Apache-2.0",
+        "disposition": "UNCHANGED_CURRENT_TARGET_OWNER"
+      }
+    ],
+    "qualification_receipt": "qualification/collection-convergence-20261007.json",
+    "scope": "SEPARATELY_BUILT_COLLECTION_MODULE"
+  }
 }

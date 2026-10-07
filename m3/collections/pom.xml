@@ -14,7 +14,7 @@
   </dependencies>
   <build>
     <resources><resource><directory>${project.basedir}</directory><targetPath>META-INF</targetPath>
-      <includes><include>LICENSE</include><include>NOTICE</include><include>provenance.json</include></includes>
+      <includes><include>LICENSE</include><include>NOTICE</include><include>provenance.json</include><!-- Modified 2026 by Synexia contributors: package collection donation attribution and provenance. --><include>synexia-donation.json</include><include>name-mapping.json</include><include>SYNEXIA-DONATION-NOTICE.txt</include></includes>
     </resource></resources>
     <plugins>
     <plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-resources-plugin</artifactId><version>3.3.1</version></plugin>

@@ -1,0 +1,465 @@
+{
+  "schema": "M3_COLLECTION_CONVERGED_COST_DIAGNOSTIC_V1",
+  "license": "Apache-2.0",
+  "copyright": "2026 Hitesh Soliwal and Contributors to the Synexia Project",
+  "installed_source_manifest_sha256": "81d3ed294dcadf774a43b797ac8d6db51821ee1c026580d5e95b727a258e7af2",
+  "raw_csv_sha256": "f0618d59626ca8abe0a5c836592192eba6961523ffc007bc79991e734c98b112",
+  "probe_source_sha256": "c3b7fe8f9b10dd1607af7b5da7b657138934a1b5cf0d449960c50c2a219d35a8",
+  "environment": {
+    "java": "21.0.12.1+1-LTS",
+    "vm": "OpenJDK 64-Bit Server VM",
+    "os": "Linux",
+    "arch": "amd64",
+    "available_processors": 8,
+    "jvm_flags": [
+      "-Xbatch"
+    ]
+  },
+  "definitions": {
+    "samples": 7,
+    "warmups": 3,
+    "reported_statistic": "median computed separately for each metric",
+    "time": "elapsed wall-clock nanoseconds from System.nanoTime; not a CPU time counter",
+    "allocation": "current-thread heap bytes allocated from ThreadMXBean; not retained or live heap",
+    "cold": "new owner construction, insertion and the measurement fixture wrapper; generic shared key/value payloads prepared outside measurement; boxed-long admission intentionally includes boxing",
+    "warm": "one prepared read pass after an unmeasured read; each pass has four rounds",
+    "map_operations": "4*(size+size/4) lookups; 20% misses; same prebuilt key payloads for both implementations",
+    "linked_list_operations": "four complete iterator traversals",
+    "long_list_operations": "four deterministic indexed-read rounds using (i*8191)&(size-1)",
+    "garbage_collection": "not forced",
+    "retained_heap_measured": false,
+    "native_or_process_rss_measured": false,
+    "cpu_time_counter_measured": false,
+    "timing_is_correctness_gate": false,
+    "universal_performance_claim": false
+  },
+  "raw_rows": [
+    {
+      "family": "ordered-map",
+      "implementation": "JDK_LinkedHashMap",
+      "size": 1024,
+      "cold_ns": 166422,
+      "cold_allocated_bytes": 57496,
+      "warm_ns": 191397,
+      "warm_allocated_bytes": 0,
+      "warm_operations": 5120,
+      "checksum": 2094080
+    },
+    {
+      "family": "ordered-map",
+      "implementation": "M3LinkedHashMap",
+      "size": 1024,
+      "cold_ns": 217590,
+      "cold_allocated_bytes": 105952,
+      "warm_ns": 24782,
+      "warm_allocated_bytes": 0,
+      "warm_operations": 5120,
+      "checksum": 2094080
+    },
+    {
+      "family": "sorted-map",
+      "implementation": "JDK_TreeMap",
+      "size": 1024,
+      "cold_ns": 109853,
+      "cold_allocated_bytes": 41032,
+      "warm_ns": 246235,
+      "warm_allocated_bytes": 0,
+      "warm_operations": 5120,
+      "checksum": 2094080
+    },
+    {
+      "family": "sorted-map",
+      "implementation": "M3TreeMap",
+      "size": 1024,
+      "cold_ns": 201401,
+      "cold_allocated_bytes": 78528,
+      "warm_ns": 294803,
+      "warm_allocated_bytes": 0,
+      "warm_operations": 5120,
+      "checksum": 2094080
+    },
+    {
+      "family": "linked-list-traversal",
+      "implementation": "JDK_LinkedList",
+      "size": 1024,
+      "cold_ns": 55184,
+      "cold_allocated_bytes": 24632,
+      "warm_ns": 158716,
+      "warm_allocated_bytes": 128,
+      "warm_operations": 4096,
+      "checksum": 2095104
+    },
+    {
+      "family": "linked-list-traversal",
+      "implementation": "M3LinkedList",
+      "size": 1024,
+      "cold_ns": 63867,
+      "cold_allocated_bytes": 44792,
+      "warm_ns": 8310,
+      "warm_allocated_bytes": 160,
+      "warm_operations": 4096,
+      "checksum": 2095104
+    },
+    {
+      "family": "long-list-admission",
+      "implementation": "JDK_ArrayList_boxed_long",
+      "size": 1024,
+      "cold_ns": 62933,
+      "cold_allocated_bytes": 39624,
+      "warm_ns": 142895,
+      "warm_allocated_bytes": 0,
+      "warm_operations": 4096,
+      "checksum": 6191104
+    },
+    {
+      "family": "long-list-admission",
+      "implementation": "M3LongArrayList",
+      "size": 1024,
+      "cold_ns": 40777,
+      "cold_allocated_bytes": 29776,
+      "warm_ns": 93885,
+      "warm_allocated_bytes": 0,
+      "warm_operations": 4096,
+      "checksum": 6191104
+    },
+    {
+      "family": "ordered-map",
+      "implementation": "JDK_LinkedHashMap",
+      "size": 16384,
+      "cold_ns": 623622,
+      "cold_allocated_bytes": 917720,
+      "warm_ns": 408785,
+      "warm_allocated_bytes": 0,
+      "warm_operations": 81920,
+      "checksum": 536821760
+    },
+    {
+      "family": "ordered-map",
+      "implementation": "M3LinkedHashMap",
+      "size": 16384,
+      "cold_ns": 1003689,
+      "cold_allocated_bytes": 1781120,
+      "warm_ns": 1242356,
+      "warm_allocated_bytes": 0,
+      "warm_operations": 81920,
+      "checksum": 536821760
+    },
+    {
+      "family": "sorted-map",
+      "implementation": "JDK_TreeMap",
+      "size": 16384,
+      "cold_ns": 2311384,
+      "cold_allocated_bytes": 655432,
+      "warm_ns": 8098473,
+      "warm_allocated_bytes": 0,
+      "warm_operations": 81920,
+      "checksum": 536821760
+    },
+    {
+      "family": "sorted-map",
+      "implementation": "M3TreeMap",
+      "size": 16384,
+      "cold_ns": 2958695,
+      "cold_allocated_bytes": 1329312,
+      "warm_ns": 6465998,
+      "warm_allocated_bytes": 0,
+      "warm_operations": 81920,
+      "checksum": 536821760
+    },
+    {
+      "family": "linked-list-traversal",
+      "implementation": "JDK_LinkedList",
+      "size": 16384,
+      "cold_ns": 229924,
+      "cold_allocated_bytes": 393272,
+      "warm_ns": 222292,
+      "warm_allocated_bytes": 128,
+      "warm_operations": 65536,
+      "checksum": 536838144
+    },
+    {
+      "family": "linked-list-traversal",
+      "implementation": "M3LinkedList",
+      "size": 16384,
+      "cold_ns": 491905,
+      "cold_allocated_bytes": 759464,
+      "warm_ns": 133856,
+      "warm_allocated_bytes": 160,
+      "warm_operations": 65536,
+      "checksum": 536838144
+    },
+    {
+      "family": "long-list-admission",
+      "implementation": "JDK_ArrayList_boxed_long",
+      "size": 16384,
+      "cold_ns": 309716,
+      "cold_allocated_bytes": 646544,
+      "warm_ns": 58156,
+      "warm_allocated_bytes": 0,
+      "warm_operations": 65536,
+      "checksum": 602374144
+    },
+    {
+      "family": "long-list-admission",
+      "implementation": "M3LongArrayList",
+      "size": 16384,
+      "cold_ns": 415838,
+      "cold_allocated_bytes": 506192,
+      "warm_ns": 34430,
+      "warm_allocated_bytes": 0,
+      "warm_operations": 65536,
+      "checksum": 602374144
+    }
+  ],
+  "paired_comparisons": [
+    {
+      "family": "ordered-map",
+      "size": 1024,
+      "jdk": {
+        "family": "ordered-map",
+        "implementation": "JDK_LinkedHashMap",
+        "size": 1024,
+        "cold_ns": 166422,
+        "cold_allocated_bytes": 57496,
+        "warm_ns": 191397,
+        "warm_allocated_bytes": 0,
+        "warm_operations": 5120,
+        "checksum": 2094080
+      },
+      "m3": {
+        "family": "ordered-map",
+        "implementation": "M3LinkedHashMap",
+        "size": 1024,
+        "cold_ns": 217590,
+        "cold_allocated_bytes": 105952,
+        "warm_ns": 24782,
+        "warm_allocated_bytes": 0,
+        "warm_operations": 5120,
+        "checksum": 2094080
+      },
+      "jdk_warm_ns_per_operation": 37.3822265625,
+      "m3_warm_ns_per_operation": 4.840234375,
+      "m3_over_jdk_warm_time_ratio": 0.1294795634205343,
+      "m3_over_jdk_cold_allocation_ratio": 1.8427716710727702,
+      "m3_over_jdk_cold_time_ratio": 1.307459350326279
+    },
+    {
+      "family": "sorted-map",
+      "size": 1024,
+      "jdk": {
+        "family": "sorted-map",
+        "implementation": "JDK_TreeMap",
+        "size": 1024,
+        "cold_ns": 109853,
+        "cold_allocated_bytes": 41032,
+        "warm_ns": 246235,
+        "warm_allocated_bytes": 0,
+        "warm_operations": 5120,
+        "checksum": 2094080
+      },
+      "m3": {
+        "family": "sorted-map",
+        "implementation": "M3TreeMap",
+        "size": 1024,
+        "cold_ns": 201401,
+        "cold_allocated_bytes": 78528,
+        "warm_ns": 294803,
+        "warm_allocated_bytes": 0,
+        "warm_operations": 5120,
+        "checksum": 2094080
+      },
+      "jdk_warm_ns_per_operation": 48.0927734375,
+      "m3_warm_ns_per_operation": 57.5787109375,
+      "m3_over_jdk_warm_time_ratio": 1.1972424716226369,
+      "m3_over_jdk_cold_allocation_ratio": 1.9138233573796062,
+      "m3_over_jdk_cold_time_ratio": 1.8333682284507478
+    },
+    {
+      "family": "linked-list-traversal",
+      "size": 1024,
+      "jdk": {
+        "family": "linked-list-traversal",
+        "implementation": "JDK_LinkedList",
+        "size": 1024,
+        "cold_ns": 55184,
+        "cold_allocated_bytes": 24632,
+        "warm_ns": 158716,
+        "warm_allocated_bytes": 128,
+        "warm_operations": 4096,
+        "checksum": 2095104
+      },
+      "m3": {
+        "family": "linked-list-traversal",
+        "implementation": "M3LinkedList",
+        "size": 1024,
+        "cold_ns": 63867,
+        "cold_allocated_bytes": 44792,
+        "warm_ns": 8310,
+        "warm_allocated_bytes": 160,
+        "warm_operations": 4096,
+        "checksum": 2095104
+      },
+      "jdk_warm_ns_per_operation": 38.7490234375,
+      "m3_warm_ns_per_operation": 2.02880859375,
+      "m3_over_jdk_warm_time_ratio": 0.05235767030419113,
+      "m3_over_jdk_cold_allocation_ratio": 1.818447547905164,
+      "m3_over_jdk_cold_time_ratio": 1.1573463322702233
+    },
+    {
+      "family": "long-list-admission",
+      "size": 1024,
+      "jdk": {
+        "family": "long-list-admission",
+        "implementation": "JDK_ArrayList_boxed_long",
+        "size": 1024,
+        "cold_ns": 62933,
+        "cold_allocated_bytes": 39624,
+        "warm_ns": 142895,
+        "warm_allocated_bytes": 0,
+        "warm_operations": 4096,
+        "checksum": 6191104
+      },
+      "m3": {
+        "family": "long-list-admission",
+        "implementation": "M3LongArrayList",
+        "size": 1024,
+        "cold_ns": 40777,
+        "cold_allocated_bytes": 29776,
+        "warm_ns": 93885,
+        "warm_allocated_bytes": 0,
+        "warm_operations": 4096,
+        "checksum": 6191104
+      },
+      "jdk_warm_ns_per_operation": 34.886474609375,
+      "m3_warm_ns_per_operation": 22.921142578125,
+      "m3_over_jdk_warm_time_ratio": 0.6570208894642919,
+      "m3_over_jdk_cold_allocation_ratio": 0.7514637593377751,
+      "m3_over_jdk_cold_time_ratio": 0.6479430505458186
+    },
+    {
+      "family": "ordered-map",
+      "size": 16384,
+      "jdk": {
+        "family": "ordered-map",
+        "implementation": "JDK_LinkedHashMap",
+        "size": 16384,
+        "cold_ns": 623622,
+        "cold_allocated_bytes": 917720,
+        "warm_ns": 408785,
+        "warm_allocated_bytes": 0,
+        "warm_operations": 81920,
+        "checksum": 536821760
+      },
+      "m3": {
+        "family": "ordered-map",
+        "implementation": "M3LinkedHashMap",
+        "size": 16384,
+        "cold_ns": 1003689,
+        "cold_allocated_bytes": 1781120,
+        "warm_ns": 1242356,
+        "warm_allocated_bytes": 0,
+        "warm_operations": 81920,
+        "checksum": 536821760
+      },
+      "jdk_warm_ns_per_operation": 4.99005126953125,
+      "m3_warm_ns_per_operation": 15.165478515625,
+      "m3_over_jdk_warm_time_ratio": 3.0391428256907664,
+      "m3_over_jdk_cold_allocation_ratio": 1.9408098330645513,
+      "m3_over_jdk_cold_time_ratio": 1.6094509173826452
+    },
+    {
+      "family": "sorted-map",
+      "size": 16384,
+      "jdk": {
+        "family": "sorted-map",
+        "implementation": "JDK_TreeMap",
+        "size": 16384,
+        "cold_ns": 2311384,
+        "cold_allocated_bytes": 655432,
+        "warm_ns": 8098473,
+        "warm_allocated_bytes": 0,
+        "warm_operations": 81920,
+        "checksum": 536821760
+      },
+      "m3": {
+        "family": "sorted-map",
+        "implementation": "M3TreeMap",
+        "size": 16384,
+        "cold_ns": 2958695,
+        "cold_allocated_bytes": 1329312,
+        "warm_ns": 6465998,
+        "warm_allocated_bytes": 0,
+        "warm_operations": 81920,
+        "checksum": 536821760
+      },
+      "jdk_warm_ns_per_operation": 98.85831298828126,
+      "m3_warm_ns_per_operation": 78.9306396484375,
+      "m3_over_jdk_warm_time_ratio": 0.7984218753337821,
+      "m3_over_jdk_cold_allocation_ratio": 2.0281463218152305,
+      "m3_over_jdk_cold_time_ratio": 1.280053422538185
+    },
+    {
+      "family": "linked-list-traversal",
+      "size": 16384,
+      "jdk": {
+        "family": "linked-list-traversal",
+        "implementation": "JDK_LinkedList",
+        "size": 16384,
+        "cold_ns": 229924,
+        "cold_allocated_bytes": 393272,
+        "warm_ns": 222292,
+        "warm_allocated_bytes": 128,
+        "warm_operations": 65536,
+        "checksum": 536838144
+      },
+      "m3": {
+        "family": "linked-list-traversal",
+        "implementation": "M3LinkedList",
+        "size": 16384,
+        "cold_ns": 491905,
+        "cold_allocated_bytes": 759464,
+        "warm_ns": 133856,
+        "warm_allocated_bytes": 160,
+        "warm_operations": 65536,
+        "checksum": 536838144
+      },
+      "jdk_warm_ns_per_operation": 3.39190673828125,
+      "m3_warm_ns_per_operation": 2.04248046875,
+      "m3_over_jdk_warm_time_ratio": 0.6021629208428554,
+      "m3_over_jdk_cold_allocation_ratio": 1.9311418051628388,
+      "m3_over_jdk_cold_time_ratio": 2.139424331518241
+    },
+    {
+      "family": "long-list-admission",
+      "size": 16384,
+      "jdk": {
+        "family": "long-list-admission",
+        "implementation": "JDK_ArrayList_boxed_long",
+        "size": 16384,
+        "cold_ns": 309716,
+        "cold_allocated_bytes": 646544,
+        "warm_ns": 58156,
+        "warm_allocated_bytes": 0,
+        "warm_operations": 65536,
+        "checksum": 602374144
+      },
+      "m3": {
+        "family": "long-list-admission",
+        "implementation": "M3LongArrayList",
+        "size": 16384,
+        "cold_ns": 415838,
+        "cold_allocated_bytes": 506192,
+        "warm_ns": 34430,
+        "warm_allocated_bytes": 0,
+        "warm_operations": 65536,
+        "checksum": 602374144
+      },
+      "jdk_warm_ns_per_operation": 0.88739013671875,
+      "m3_warm_ns_per_operation": 0.525360107421875,
+      "m3_over_jdk_warm_time_ratio": 0.5920283375747988,
+      "m3_over_jdk_cold_allocation_ratio": 0.7829196466133782,
+      "m3_over_jdk_cold_time_ratio": 1.3426429374007154
+    }
+  ],
+  "interpretation": "Results vary by size and family. Generic M3 containers allocate more during measured cold admission here; the primitive M3 long list allocates fewer bytes than the boxed JDK list. Warm elapsed-time wins and regressions are both retained. These bounded diagnostics do not select a universal fastest representation."
+}

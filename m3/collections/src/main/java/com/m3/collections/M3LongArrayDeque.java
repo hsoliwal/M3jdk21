@@ -1,12 +1,21 @@
+// SPDX-FileCopyrightText: 2026 Hitesh Soliwal and Contributors to the Synexia Project
 /*
  * Copyright 2026 Hitesh Soliwal and contributors
  * SPDX-License-Identifier: Apache-2.0
+ */
+// Modified 2026 by Hitesh Soliwal and contributors: retain the merged M3 ring backend and
+// add the Synexia primitive deque/queue API and existing bulk ring copy helper.
+/*
+ * Copyright 2026 Synexia <hsoliwal@gmail.com>
+ * Licensed under the Apache License, Version 2.0
  */
 package com.m3.collections;
 
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.NoSuchElementException;
+import java.util.Objects;
+import java.util.function.LongPredicate;
 
 /**
  * Primitive-long circular deque with JDK-shaped double-ended queue semantics.
@@ -14,7 +23,7 @@ import java.util.NoSuchElementException;
  * <p>The ring capacity is a power of two and grows without per-element objects. Every long is a
  * valid payload; emptiness is represented by size, not a sentinel value.</p>
  */
-public final class M3LongArrayDeque implements M3LongCollection {
+public final class M3LongArrayDeque implements M3LongDeque {
     private static final int MIN_CAPACITY = 8;
 
     private long[] elements;
@@ -147,9 +156,7 @@ public final class M3LongArrayDeque implements M3LongCollection {
     @Override
     public long[] toArray() {
         long[] result = new long[size];
-        for (int i = 0; i < size; i++) {
-            result[i] = elements[physicalIndex(i)];
-        }
+        M3PackedFlatArrays.copyLogicalRing(elements, head, size, elements.length, result);
         return result;
     }
 
@@ -198,6 +205,75 @@ public final class M3LongArrayDeque implements M3LongCollection {
         };
     }
 
+    @Override
+    public boolean offer(long value) {
+        return offerLast(value);
+    }
+
+    /** Primitive queue peek has no null sentinel and throws when empty. */
+    @Override
+    public long peek() {
+        return getFirst();
+    }
+
+    /** Primitive queue poll has no null sentinel and throws when empty. */
+    @Override
+    public long poll() {
+        return removeFirstLong();
+    }
+
+    @Override
+    public boolean addLastIf(long value, LongPredicate predicate) {
+        Objects.requireNonNull(predicate, "predicate");
+        if (!predicate.test(value)) {
+            return false;
+        }
+        return offerLast(value);
+    }
+
+    @Override
+    public long first() {
+        return getFirst();
+    }
+
+    @Override
+    public long last() {
+        return getLast();
+    }
+
+    @Override
+    public long removeFirst() {
+        return removeFirstLong();
+    }
+
+    @Override
+    public long removeLast() {
+        return removeLastLong();
+    }
+
+    @Override
+    public long get(int index) {
+        return elements[physicalIndex(Objects.checkIndex(index, size))];
+    }
+
+    /**
+     * Rebuilds from a primitive snapshot using the donor's filtering contract. On predicate
+     * failure, only the accepted prefix has been published. The predicate must not mutate this
+     * collection. Rebuilding a nonempty deque invalidates existing iterators.
+     */
+    @Override
+    public int filterInPlace(LongPredicate predicate) {
+        Objects.requireNonNull(predicate, "predicate");
+        long[] source = toArray();
+        clear();
+        for (long value : source) {
+            if (predicate.test(value)) {
+                addLast(value);
+            }
+        }
+        return source.length - size;
+    }
+
     private void removeLogicalIndex(int logicalIndex) {
         if (logicalIndex < (size >> 1)) {
             for (int i = logicalIndex; i > 0; i--) {
@@ -223,9 +299,7 @@ public final class M3LongArrayDeque implements M3LongCollection {
             throw new OutOfMemoryError("deque too large");
         }
         long[] grown = new long[elements.length << 1];
-        for (int i = 0; i < size; i++) {
-            grown[i] = elements[physicalIndex(i)];
-        }
+        M3PackedFlatArrays.copyLogicalRing(elements, head, size, elements.length, grown);
         elements = grown;
         head = 0;
     }
