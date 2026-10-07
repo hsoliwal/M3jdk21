@@ -65,6 +65,8 @@ class M3A3CanonicalSynexiaMergePinRecipeTest {
                 Map.of(
                         ".github/workflows/m3-a3-portable-mastery-gate-java21.yml",
                         resource(TEXT_ROOT + "pre-workflow.yml.txt"),
+                        ".github/workflows/m3-a3.yml",
+                        resource(TEXT_ROOT + "pre-m3-a3.yml.txt"),
                         "m3/tooling/a3/SYNEXIA_RECIPE_RECEIVER.md",
                         resource(TEXT_ROOT + "pre-SYNEXIA_RECIPE_RECEIVER.md.txt"));
         var textRun =
@@ -80,6 +82,8 @@ class M3A3CanonicalSynexiaMergePinRecipeTest {
                 Map.of(
                         ".github/workflows/m3-a3-portable-mastery-gate-java21.yml",
                         resource(TEXT_ROOT + "00-workflow.yml.txt"),
+                        ".github/workflows/m3-a3.yml",
+                        resource(TEXT_ROOT + "02-m3-a3.yml.txt"),
                         "m3/tooling/a3/SYNEXIA_RECIPE_RECEIVER.md",
                         resource(TEXT_ROOT + "01-SYNEXIA_RECIPE_RECEIVER.md.txt"));
         assertEquals(expectedText, textAfter);
