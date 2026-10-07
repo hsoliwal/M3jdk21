@@ -121,3 +121,15 @@ runtime_dependency_on_synexia	false
 target_recipe_disposition	THIN_RECEIVER_ONLY
 verification_status	SYNEXIA_CANONICAL_PACKET_30_OF_30_TARGETS_HASH_MATCHED
 ```
+
+
+### Superseded local descriptor cleanup
+
+The old target-local descriptors
+
+- `m3-jni-newstring-admission.yml`
+- `m3-string-char-boundary.yml`
+
+were removed because their behavior is already subsumed by the canonical Synexia
+`M3Jdk21StringHistoryConvergence` packet. M3JDK21 source invariants now forbid those duplicate
+recipe-owner entry points from returning.
