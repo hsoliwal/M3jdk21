@@ -5,7 +5,7 @@ M3JDK21 is not the canonical owner of reusable atomize/patternize recipes.
 Canonical owner:
 
 - repository: `hsoliwal/com.synexia`
-- canonical merged commit: `a062661e91e769a00c2d027e1f04a7a0c8f9dc28` (Synexia PR #9599)
+- candidate commit: `3357736011d1d3e3173433d1a8bdb2795f71599e` (Synexia PR #9599; keep target draft until canonical acceptance)
 - artifact: `com.synexia:synexia-jdk-a3-recipes:1.0.0-SNAPSHOT`
 - canonical export manifest Git blob: `8a3e3d6e802e95dbcc7b0bf83a347887b02d6717`
 - canonical convergence source Git blob: `b11aff3ace8e77684cfa8cc13fbbb445a05c8a09`

@@ -1,0 +1,10 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.a3.SynexiaReceiverMainAuthority
+displayName: Admit Synexia receiver recipes to A3 tool-plane main sources
+description: >
+  Extends the existing M3JDK21 synexia-* receiver custody fence to the A3 Maven tool-plane
+  main sources while keeping OpenJDK product src/test trees forbidden.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: synexia-a3-receiver-main-authority

@@ -41,21 +41,3 @@ Receipt:
 The receipt records FILE scope, before/after SHA-256, changed state and fixed-point proof.
 
 See ../../docs/a3.md for the whole-JDK absorption contract.
-
-## Mastery gate
-
-A3 candidate application is not permitted from a recipe artifact alone.
-
-Every `apply` run must provide both:
-
-```text
---mastery-receipt <M3_RECIPE_MASTERY_FANIN_V6.tsv>
---mastery-root <expected SHA-256 root>
-```
-
-The receipt is validated by the portable verifier exported from canonical Synexia. The verified
-root is copied into every A3 candidate receipt. This binds candidate generation to the compiler/JUnit,
-counterexample, regex/oracle, challenge-donor, and optional JNI fan-in already completed by Synexia.
-
-A3 does not recreate those mastery systems and the receipt grants no product-source mutation or
-promotion authority.

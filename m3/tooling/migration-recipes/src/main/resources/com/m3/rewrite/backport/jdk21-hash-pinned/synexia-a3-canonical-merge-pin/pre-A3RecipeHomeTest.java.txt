@@ -12,7 +12,7 @@ class A3RecipeHomeTest {
     void receiverPinsCanonicalSynexiaRecipeAndManifest() {
         assertEquals("hsoliwal/com.synexia", A3RecipeHome.SYNEXIA_REPOSITORY);
         assertEquals(
-                "a062661e91e769a00c2d027e1f04a7a0c8f9dc28",
+                "3357736011d1d3e3173433d1a8bdb2795f71599e",
                 A3RecipeHome.SYNEXIA_COMMIT);
         assertEquals(
                 "com.synexia:synexia-jdk-a3-recipes:1.0.0-SNAPSHOT",

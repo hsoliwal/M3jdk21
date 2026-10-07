@@ -1,0 +1,12 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.a3.PortableMasteryGate
+displayName: Gate A3 FILE candidates on portable Synexia mastery evidence
+description: >
+  Binds A3 candidate generation to a pinned authority-free M3_RECIPE_MASTERY_FANIN_V6
+  receipt while retaining Synexia as the reusable recipe/evidence owner.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: synexia-a3-portable-mastery-gate
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: synexia-a3-portable-mastery-gate-text

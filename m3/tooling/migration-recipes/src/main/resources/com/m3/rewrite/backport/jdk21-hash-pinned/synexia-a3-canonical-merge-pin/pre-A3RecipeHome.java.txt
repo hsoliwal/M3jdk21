@@ -20,7 +20,7 @@ import org.openrewrite.Recipe;
  */
 final class A3RecipeHome {
     static final String SYNEXIA_REPOSITORY = "hsoliwal/com.synexia";
-    static final String SYNEXIA_COMMIT = "a062661e91e769a00c2d027e1f04a7a0c8f9dc28";
+    static final String SYNEXIA_COMMIT = "3357736011d1d3e3173433d1a8bdb2795f71599e";
     static final String SYNEXIA_PR = "9599";
     static final String ARTIFACT = "com.synexia:synexia-jdk-a3-recipes:1.0.0-SNAPSHOT";
     static final String RECIPE_CLASS =
