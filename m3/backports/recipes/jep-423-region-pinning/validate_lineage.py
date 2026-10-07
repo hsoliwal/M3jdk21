@@ -12,6 +12,7 @@ ROOT = Path(__file__).resolve().parent
 LINEAGE = ROOT / "LINEAGE.tsv"
 PATHS = ROOT / "PATH_CLOSURE.tsv"
 SUMMARY = ROOT / "LINEAGE_SUMMARY.json"
+CANDIDATES = ROOT / "CUMULATIVE_ADMIT_PATHS.txt"
 
 REQUIRED = (
     ("8318706", "38cfb220ddadbb401cc15f313aadb8234f626210", "JEP_IMPLEMENTATION"),
@@ -28,6 +29,17 @@ PRESERVED = {
 def rows(path: Path) -> list[dict[str, str]]:
     with path.open(encoding="utf-8", newline="") as stream:
         return list(csv.DictReader(stream, delimiter="\t"))
+
+
+def path_list(path: Path) -> list[str]:
+    values = [
+        line.strip()
+        for line in path.read_text(encoding="utf-8").splitlines()
+        if line.strip() and not line.lstrip().startswith("#")
+    ]
+    if values != sorted(values) or len(values) != len(set(values)):
+        raise ValueError(f"path list must be unique and sorted: {path.name}")
+    return values
 
 
 def validate() -> dict[str, int]:
@@ -59,6 +71,15 @@ def validate() -> dict[str, int]:
             raise ValueError(f"legacy Java21 deletion was silently admitted: {path}")
         if "removed" not in row["statuses"].split(","):
             raise ValueError(f"preserved path is not an upstream removal: {path}")
+
+    candidates = path_list(CANDIDATES)
+    expected_candidates = sorted(set(paths) - PRESERVED)
+    if candidates != expected_candidates:
+        raise ValueError(
+            "cumulative candidate path set does not equal closure minus preserved deletions"
+        )
+    if len(candidates) != 62:
+        raise ValueError(f"expected 62 cumulative candidate paths, got {len(candidates)}")
 
     required_commits = {commit for _, commit, _ in REQUIRED}
     observed_commits: set[str] = set()
