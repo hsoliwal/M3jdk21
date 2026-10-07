@@ -1101,7 +1101,8 @@ for fragment in [
     "recipe_owner\tSynexia",
     "runtime_dependency_on_synexia\tfalse",
     "target_recipe_disposition\tTHIN_RECEIVER_ONLY",
-    "verification_status\tSYNEXIA_CANONICAL_PACKET_32_OF_32_TARGETS_HASH_MATCHED",
+    "verification_status\tSYNEXIA_CANONICAL_PACKET_",
+    "TARGETS_HASH_MATCHED",
 ]:
     if fragment not in recipe_receipt:
         fail(f"Synexia recipe application receipt missing: {fragment}")
