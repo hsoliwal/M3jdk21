@@ -374,65 +374,31 @@ FILE -> PACKAGE -> MODULE -> PROJECT -> REPOSITORY claim requires its narrower p
 
 ## Ordered receiving work
 
-1. **String** — canonical MIndexString/M3String atoms, ranges, storage, facts, static regex
-   precompute and Java/JNI projections. Preserve the admitted v7 lineage; V8 full-query remains
-   NOT_ADMITTED until its existing counterexamples and resource/effect failures are resolved.
-2. **Arrays** — existing primitive/address/bit lanes and array operations, with fixed length,
-   reified types, covariance/ArrayStoreException, bounds, identity, clone/overlapping arraycopy,
-   GC barriers and JNI acquire/release contracts intact. M3 lanes do not rename Java array types
-   or replace the VM array model by a larger logical container.
-3. **Collections** — adapt one concrete backend/contract at a time through existing M3 owners;
-   preserve null/equality/identity, order, views, iterator/spliterator, serialization, subclass,
-   JMM/linearization/progress and concurrency behavior. Reuse packed/segmented lanes. Do not
-   retain one structural Entry/Node/Cell per element; Map.Entry is a caller-owned projection
-   only where the public API requires it, with no pooling or retained entry cache.
-4. **AST/compiler** — existing M3AST/M3ASTPC and class/javac owners after consumer/format proof;
-   compiler-only effects stay in jdk.compiler or authoring tools. Use attributed syntax and
-   protect code-looking strings, regex, comments and text blocks in every recipe pass.
-5. **Remaining families** — file/source/storage/DB, tree/DAG/relations, generic/universal
-   precompute, schema/image, domain/distributed/hardware work and non-prefix dependencies,
-   each with an explicit consumer, ownership, lifecycle and target disposition.
-
-The current stage is **String qualification**, not a declaration that String or the full catalogue
-has passed. Arrays, collections and later families wait for their predecessor's sealed target
-scope and evidence. Inventory and donor research may proceed ahead; runtime promotion may not.
-A minimal later-family dependency needed by the current atom can enter its explicit dependency
-closure, but cannot count as acceptance of that later family. Preserve every stronger previously
-admitted target atom and the MIndex oracle while qualifying a successor; do not roll back existing
-capabilities merely to impose the new order.
-
-This order supersedes the earlier AST-before-collections plan. Immutable historical receipts stay
-unchanged as evidence. The current receiving plan does not erase pending rows or turn a catalogue,
-licence, copied vendor snapshot, recipe execution or merge into runtime acceptance. No new global
-parser, recipe engine, scheduler, payload store or public M3 replacement API is authorized.
-
-For every file/semantic atom: inspect existing catalogue and history, seal its public/protected
-interfaces, behavior, exceptions and effects, select a licensed donor or first-party owner, improve
-the Synexia Maven/OpenRewrite recipe, materialize the exact target preimage, then prove every
-intermediate pass. Precompute binds owner/snapshot, range, options, version and consumer; test
-invalidation, corruption/refusal, budgets and cold preparation versus warm reuse separately.
-Native/JNI work additionally proves symbol/header ABI, encoding, exceptions, allocation failure,
-thread/lifetime/GC behavior and the specified Java fallback or explicit-unavailable contract.
-
-Per stage, review LeetCode -> HackerRank -> GeeksforGeeks categories after the existing first-party
-catalogue, then evaluate compatible revision-pinned GitHub donors. Record COPY, ADAPT, CLEAN_ROOM,
-EVIDENCE_ONLY or REJECT and the semantic/cost reason. A platform category nominates work; its
-statement/editorial/submission grants no copying permission. No unreviewed donor is admitted by
-this plan. Missing source, rights, contract or target evidence means PENDING/REJECT, never success.
-
-Within String, the next unqualified receiver remains the exact v7 MIndexRegexProgram execution
-image, boolean runtime, codec and dependency closure. M3TQ already retains admitted v7 query/Facts
-operations; do not substitute M3RegexAutomaton or re-port proven atoms. Split cold compiler
-facilities from bootstrap-safe runtime with attributed dependency/effect and target compile proof.
-java.lang.management.ThreadMXBean is not readable from java.base. Require exact UTF-16 keys,
-version/options/owner identity, preparation/reuse, invalidation and malformed-artifact refusal.
-
-The machine plan is `name-mapping.json` / `porting_invariant.receiving_sequence`. The existing
-`check_synexia_full_family.py` rejects order, current-stage, gate, rights and premature-completion
-drift. It checks the declared qualification-only baseline, not runtime evidence authenticity or
-semantic equivalence. Advance through a reviewed successor recipe with actual target receipts;
-status editing alone cannot promote a phase. Run the existing policy workflow for every change to
-this document, the map, AGENTS pointers or the verifier.
+1. Preserve the admitted canonical String/storage/JNI lineage and stronger receiving helpers.
+   Qualify the current M3JDK runtime rather than substituting a historical MIndexString image.
+2. Prioritize full static regex precompute. The exact admitted v7 MIndexRegexProgram
+   execution image, boolean runtime, codec and dependency closure remain the next receiver.
+   M3TQ already retains the admitted v7 query/Facts operations; do not re-port it or substitute
+   the different M3RegexAutomaton engine. Split cold compiler facilities from bootstrap-safe
+   runtime only through attributed dependency/effect evidence and target compilation.
+   java.lang.management.ThreadMXBean is not readable from java.base; a wholesale class rename
+   is not a qualifying port. Exact UTF-16 keys, version/options/owner identity, cold preparation,
+   zero-work warm reuse, invalidation and malformed/unauthorized artifact refusal need proof.
+3. Receive AST/class/compiler facts and atomizer/patternizer recipes through existing M3AST,
+   M3ASTPC, M3Class/M3CI/M3CB/M3PC and javac owners after consumer/format proof. javac-only
+   parsing, binding and compiler effects stay in jdk.compiler or authoring tooling. Code-looking
+   strings, regex, comments and text blocks stay payload. Compile every bounded multipass
+   candidate and compare contracts and an independent behavioral oracle before a fixed point.
+4. Receive MIndex* collection, bit/address/lane, tree/DAG, relation, file/source and generic/
+   universal precompute capabilities by concrete consumer. Preserve null/equality/identity,
+   order/views/iteration, serialization, JMM/concurrency and lifetime contracts as applicable.
+   Domain, distributed, corpus and hardware state uses the existing separate target plane when
+   justified; every deferred or excluded family remains visible in the ledger.
+5. Review Tweety, RE2/J, native/GPU and other historical donors at their exact source/license
+   boundaries. Catalogue LeetCode, HackerRank and GeeksforGeeks problem categories before
+   selecting licensed GitHub source; platform statements, editorials and submissions are
+   reference material, not copying permission. Hardware/native absence must preserve the
+   admitted Java contract; GPU caps cannot silently truncate supported inputs.
 
 The held V8 full-query owners remain NOT_ADMITTED: a correctly keyed/checksummed program can
 disagree with its restored query, and physical DAG bounds do not bound unfolded recursive work.
