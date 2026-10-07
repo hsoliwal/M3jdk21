@@ -64,6 +64,19 @@ The native profile requires CMake, a C11 compiler and JNI headers. Absence of
 native acceleration is not a correctness failure for ordinary module use; the
 native proof itself must execute before claiming JNI parity.
 
+## Recipe custody
+
+Canonical materialization is the target-specific declarative recipe
+`com.m3.M3ArraySubstrate` in `m3/tooling/migration-recipes`. It composes the
+canonical Synexia `M3HashPinnedJavaSnapshotRecipe` with M3JDK21's existing
+text/native snapshot owner using crate `m3-array-substrate-v1`.
+
+The crate pins every implementation/test postimage and the current-master
+preimages of modified canonical mapping/invariant documents. Replay must be a
+fixed point and source drift is refused. Future array changes must evolve a new
+reviewed recipe crate rather than treating these files as manually mutable
+authority.
+
 ## Port order
 
 1. qualify immutable byte/UTF-16/int/long snapshots, slices and joins;
