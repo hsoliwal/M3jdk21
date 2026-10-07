@@ -330,6 +330,54 @@
       "source_role": "Synexia clean-room Tweety-inspired reasoning precompute",
       "source_revision": "f07aa85ba83749bbb2b6fa4a7a169b38aaac8ba2",
       "target_rule": "closure/SCC/parity/argumentation/reasoning facts remain reasoning-layer metadata and never become M3String fields or public String API"
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexByteArrayView",
+      "source_commit": "8e1f56d448fd31ee5b666c922947e39c2036d4fd",
+      "target": "com.m3.arrays.M3ByteArrayView",
+      "status": "candidate first array substrate slice",
+      "source_role": "Synexia immutable byte view donor/reference",
+      "target_rule": "internal immutable snapshot/range/join view; ordinary byte[] remains mutable caller-owned Java array"
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexUtf16ArrayView",
+      "source_commit": "8e1f56d448fd31ee5b666c922947e39c2036d4fd",
+      "target": "com.m3.arrays.M3Utf16ArrayView + com.m3.arrays.M3Utf16Facts",
+      "status": "candidate first array substrate slice",
+      "source_role": "Synexia immutable UTF-16 view/fact donor/reference",
+      "target_rule": "exact UTF-16 internal value view with seam-correct facts; ordinary char[] remains explicit materialization"
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexNativeArrayBoundaries / nativebridge.MIndexNativeArrayFlatten",
+      "source_commit": "8e1f56d448fd31ee5b666c922947e39c2036d4fd",
+      "target": "com.m3.arrays.M3ArrayNative",
+      "status": "candidate optional JNI boundary",
+      "source_role": "Synexia native array materialization donor/reference",
+      "target_rule": "target-owned JNI symbols; no retained Java heap pointer; Java exact fallback; native absence never changes semantics"
+    },
+    {
+      "source": "com.synexia.indexstring.MatSegmentedIntArray / MatSegmentedLongArray",
+      "source_commit": "8e1f56d448fd31ee5b666c922947e39c2036d4fd",
+      "target": "com.m3.arrays.M3IntArrayView / M3LongArrayView",
+      "status": "candidate immutable value-plane adaptation",
+      "source_role": "Synexia segmented primitive array donor/reference",
+      "target_rule": "first slice exposes immutable snapshot/range/join values only; mutable lane/storage responsibility remains with qualified collection owners"
+    },
+    {
+      "source": "com.synexia.indexstring.MIndexDirectArrayView / MIndexMaskedUtf16ArrayView / shared.SharedArray*",
+      "source_commit": "8e1f56d448fd31ee5b666c922947e39c2036d4fd",
+      "target": "future com.m3.arrays direct/mask/shared owners",
+      "status": "PENDING",
+      "source_role": "Synexia direct/masked/shared immutable array owners",
+      "target_rule": "requires first-slice qualification plus retention, namespace/generation, native lifetime, mapping replacement/corruption and cross-process proof"
+    },
+    {
+      "source": "com.synexia.indexstring.MatSegmentedObjectArray",
+      "source_commit": "8e1f56d448fd31ee5b666c922947e39c2036d4fd",
+      "target": "future M3 internal reference-array value plane",
+      "status": "PENDING",
+      "source_role": "Synexia segmented object-array donor/reference",
+      "target_rule": "no port until covariance, ArrayStoreException, runtime component type, clone/reflection/serialization, GC and JMM obligations are explicit"
     }
   ],
   "imported_donor_sources": [],
