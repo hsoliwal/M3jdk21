@@ -1,0 +1,11 @@
+path	implementation_status	implementation_blob	jdk24_ga_status	jdk24_ga_blob	note
+src/java.base/share/classes/java/security/spec/NamedParameterSpec.java	modified	48a177f8c1c831ca92b6f8246e06a216652075a8	PRESENT	d50426b6ccf6d0ae6554cd8118aaa6c837272feb	shared ML-KEM/ML-DSA released state
+src/java.base/share/classes/sun/security/provider/ML_DSA.java	added	33ce8d5f52d219d3d1e4b5a013e266db50eba7c1	PRESENT	f3b72f53a32263a8429a5d83ba7fe440c13a2e04	FIPS 204 final follow-up changes implementation
+src/java.base/share/classes/sun/security/provider/ML_DSA_Impls.java	added	3213b1e5a5e6bfddbd9c6a03ac28ca3ae41fef03	PRESENT	dffe7c5cdb1842734fab360a3b2b34cfc00b29b7	GA cumulative implementation differs from initial JEP commit
+src/java.base/share/classes/sun/security/provider/SunEntries.java	modified	36278ae445f16cd4d5db351e40a073e34f035851	PRESENT	9f5e3447aeb5604e7f224a2187bec163907cf33d	provider registration evolved before GA
+src/java.base/share/classes/sun/security/util/KnownOIDs.java	modified	223dddb7f61a0316e31eacf3a358d617f0a46250	PRESENT	223dddb7f61a0316e31eacf3a358d617f0a46250	implementation blob survives to GA
+test/jdk/sun/security/provider/acvp/data/ML-DSA-keyGen-FIPS204/internalProjection.json	added	1fcb409227f9288d3873fc56c96a69449dc4559f	ABSENT_AT_GA	-	do not copy stale implementation-commit test data
+test/jdk/sun/security/provider/acvp/data/ML-DSA-sigGen-FIPS204/internalProjection.json	added	4088355c10ecea81456b91400bc1fa2380d57ea6	ABSENT_AT_GA	-	do not copy stale implementation-commit test data
+test/jdk/sun/security/provider/acvp/data/ML-DSA-sigVer-FIPS204/internalProjection.json	added	f8af6142f52568dcb69f99039a771780a7f48e1d	ABSENT_AT_GA	-	do not copy stale implementation-commit test data
+test/jdk/sun/security/provider/all/Deterministic.java	modified	8fb0e943768d2296529d55a6341cc9d551d32112	PRESENT	8fb0e943768d2296529d55a6341cc9d551d32112	implementation blob survives to GA
+test/micro/org/openjdk/bench/java/security/MLDSA.java	added	2dc33e2b2985e724e5a75770d0775509e111c89d	PRESENT	7f3d77a0b823617f8720258d46f95607c9e76378	benchmark evolved before GA; benchmark is not correctness authority

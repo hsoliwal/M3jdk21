@@ -1,0 +1,6 @@
+.github/workflows/m3-jep497-mldsa-inventory.yml	ABSENT	d2be6fef2905d51769d70d2ba32046ab88c7f5078f46cfd98129a9e0483e22d4	00-workflow.yml.txt
+m3/backports/recipes/jep-497-mldsa/DEPENDENCY_CLOSURE.tsv	ABSENT	7a5fbe0ae0c67b94ae4d4e3dd471bbd7ebe97fb5b9708dd00c72a44a1d4f7fcb	01-DEPENDENCY_CLOSURE.tsv.txt
+m3/backports/recipes/jep-497-mldsa/GA_PATH_STATE.tsv	ABSENT	34d526061c0dc5496b35503d63c4d1b0b0837f64980b8a9a626d4f3c6f8f06d5	02-GA_PATH_STATE.tsv.txt
+m3/backports/recipes/jep-497-mldsa/MATERIALIZE_PATHS.txt	ABSENT	ad557621b05a6ee9b5b2588ed5d856446350f818a864f36889b55dc62387fe3c	03-MATERIALIZE_PATHS.txt
+m3/backports/recipes/jep-497-mldsa/README.md	ABSENT	8a111c8aed4912ee529f3b6a36299878a446b695fb0d73225b50dc33fb51bda1	04-README.md.txt
+m3/backports/recipes/jep-497-mldsa/UPSTREAM_AUTHORITY.tsv	ABSENT	764527e8271006b6d95033ef50b7920cd15c4a28d9c9283d57ee31e5416326fd	05-UPSTREAM_AUTHORITY.tsv.txt
