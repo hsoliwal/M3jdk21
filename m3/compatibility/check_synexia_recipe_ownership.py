@@ -147,7 +147,7 @@ def reusable_residue_paths() -> set[str]:
         "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom",
         "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic",
         "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/a3",
-        "m3/indexdb/src/main/java",
+        "m3/indexdb/src/main/java/com/m3",
     ):
         start = ROOT / directory
         if not start.is_dir():
