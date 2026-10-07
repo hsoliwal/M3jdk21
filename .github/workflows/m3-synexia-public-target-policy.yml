@@ -5,6 +5,7 @@ on:
     paths:
       - "m3/docs/SYNEXIA_CONVERGENCE_MODEL.md"
       - "m3/compatibility/synexia-public-target-policy.tsv"
+      - "m3/compatibility/synexia-apache-handoff-pin.tsv"
       - "m3/compatibility/check_synexia_public_target.py"
       - "m3/compatibility/test_synexia_public_target_policy.py"
       - "src/java.base/share/legal/synexia.md"
