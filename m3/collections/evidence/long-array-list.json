@@ -1,0 +1,183 @@
+{
+  "schema": "M3_COLLECTION_RECEIVER_RECEIPT_V1",
+  "scope": "INDEPENDENT_APACHE_MODULE_ONLY",
+  "status": "LOCAL_LIBRARY_QUALIFIED_RUNTIME_GATES_PENDING",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_pr": "https://github.com/hsoliwal/com.synexia/pull/9779",
+  "recipe_commit": "ca595f7b74342708f98a372a17ba8b0989d5e069",
+  "source_policy_commit": "c08b50a46b398193009dc5ec0b191ee8b2c2b529",
+  "donor_mechanics_commit": "dd25d83c10187961dbd8bff114ac0198e060f6ba",
+  "target_base": "5cef0a5b4831db0346fccdd0079d3d28d820a24e",
+  "canonical_recipe": "com.synexia.rewrite.M3LongArrayListTarget",
+  "canonical_crate": "synexia-openrewrite-recipes/crates/m3-collection-contracts/array-list",
+  "source_artifact_manifest_sha256": "a99347fefb9d702e2f8108f748e5b6acb932e6514249f01b68f921e6172c93e4",
+  "source_evidence_receipt_sha256": "3d06ba4434e2f68da20a504baf1620deba08f491720468f8b1ce24490c35fbff",
+  "source_files": [
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongList.java",
+      "sha256": "cca0c92a6541d2570b981ac6e4782e7800c87c8dda5e4e566afe023c454ebd9c",
+      "target_name": "M3LongArrayList",
+      "disposition": "TYPED_RENAME_ADAPTATION",
+      "git_blob_sha1": "27e68c73376df0d0d9374a7d756d640b9a9c3fe2"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/LongSequence.java",
+      "sha256": "38f6f97979a4c9d7c7e2963aed6df50644511f03c5e89c2893312862de036c9a",
+      "target_name": "M3LongList",
+      "disposition": "TYPED_RENAME_ADAPTATION",
+      "git_blob_sha1": "1aad67c4c9a5a5da1752be8f272dc3aa7be68293"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/LongStack.java",
+      "sha256": "1ef422c22b03fcaafa4e9ec32ee231cc95cd8a46614ea6663f66cc8f832879f7",
+      "target_name": "M3LongStack",
+      "disposition": "TYPED_RENAME_ADAPTATION",
+      "git_blob_sha1": "a921486ff0c2ceccb95fc40b7a27fa558507d672"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/LongSequenceSpliterator.java",
+      "sha256": "83c55cb10c8cfb9212fa9dfdc52b17910401d423939b0cf7d4f5b384e1970686",
+      "target_name": "M3LongListSpliterator",
+      "disposition": "TYPED_RENAME_ADAPTATION",
+      "git_blob_sha1": "435383c58c7f4085101a84b0156cdeffb056bbbb"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedArrayCapacity.java",
+      "sha256": "604869a454f8c75cb42438bf86e3c82974afb1bfc8d0cfa7264a4f6fd6947171",
+      "target_name": "M3ArrayCapacity",
+      "disposition": "TYPED_RENAME_ADAPTATION",
+      "git_blob_sha1": "0606653c5bad347ab80d10e6a55daa02e43c46c8"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedFlatArrays.java",
+      "sha256": "f8a3a16bcb9a9d9e367ef9ee7732ed1143d283395942f4dcde4e332027c18c23",
+      "target_name": "M3FlatArrays",
+      "disposition": "TYPED_RENAME_ADAPTATION",
+      "git_blob_sha1": "2a3044cf9659ad3102ed4f99c7efbe7676ddc5a8"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedSupport.java",
+      "sha256": "ba18323df281922ccad50b7e5adc93e69e609d46ef06e2f226b4cd0f6492fe9d",
+      "target_name": "M3CollectionSupport",
+      "disposition": "TYPED_RENAME_ADAPTATION",
+      "git_blob_sha1": "a7135d8123a41a949b15e5f969e78a1053c3e4c8"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/LongCollection.java",
+      "sha256": "ff0b8dbd31660f768c1e382e05bb41e60bbae70929bf68ec9d427af6db6ebb7b",
+      "target_name": "M3LongCollection",
+      "disposition": "REUSE_EXISTING_TARGET",
+      "git_blob_sha1": "9b072d9c2ad8c559d339f9cced4afbb926faa1d3"
+    },
+    {
+      "path": "synexia-common/src/main/java/com/synexia/common/collections/LongIterator.java",
+      "sha256": "8e912f0302b4082583f731e274a245cf9f98fda1e5e53adfccaef03f5da08cb0",
+      "target_name": "M3LongIterator",
+      "disposition": "REUSE_EXISTING_TARGET",
+      "git_blob_sha1": "de7f337c6ae0fa3ce740dc18362367d66992da1b"
+    }
+  ],
+  "output_files": {
+    "m3/collections/src/main/java/com/m3/collections/M3ArrayCapacity.java": {
+      "before_sha256": "ABSENT",
+      "after_sha256": "7d022e29adfb816394d40dd57dc390ccae15d5c4b76a9260aa7539e3816dfba0",
+      "git_blob_sha1": "2a5f9f4410d823f27ef5cfe5ba024e8aadb52aa7"
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3CollectionSupport.java": {
+      "before_sha256": "ABSENT",
+      "after_sha256": "dcb3af16eda1ecb178166317d32405c04d6460e95f32bb997eef9cb7d7221ff2",
+      "git_blob_sha1": "fbc69308fd4847cc62e7134f6c7d3bb8879e659c"
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3Collections.java": {
+      "before_sha256": "529fd9055caa62cc1b4d3d008fef2765572836cc297565d11b1aea1a279a7179",
+      "after_sha256": "65ea27904bbd1f88d2d393343db7c3befc6f7dae564d9f8349d0a573044820dd",
+      "git_blob_sha1": "c419b43ff1acc9d1333b17ba201b7d80e25c283d"
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3FlatArrays.java": {
+      "before_sha256": "ABSENT",
+      "after_sha256": "5309236d25d4cbb123393649b46fd600f32516becb627743bd995062dcf72b8f",
+      "git_blob_sha1": "bd6aef396cce22eb4e91eefe0e9b5684de518b0b"
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java": {
+      "before_sha256": "ABSENT",
+      "after_sha256": "8b61fa65efb137662dfa8ddaf1debe7f881481223d9e4c23858b42a7e0de7f18",
+      "git_blob_sha1": "03376ad1394a73fe6c3cd471fd3a6f9aca23722a"
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongList.java": {
+      "before_sha256": "ABSENT",
+      "after_sha256": "a783448d102388fe3445602165c30c4819f829465f8f6bd41b2dec1deb063e30",
+      "git_blob_sha1": "71b128828a2aa9860477318a31ce235b79405b6c"
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongListSpliterator.java": {
+      "before_sha256": "ABSENT",
+      "after_sha256": "38a77a029a997f5fc09e4d41cdc77aad3dafeac46e7383158108fe39f7cd3cfc",
+      "git_blob_sha1": "c35d81a3c93b944e3ae8b0604e448a5be53f594d"
+    },
+    "m3/collections/src/main/java/com/m3/collections/M3LongStack.java": {
+      "before_sha256": "ABSENT",
+      "after_sha256": "914c2dd5b83140c677388a420d52de426bbc47dff72f3a709589b03a01207705",
+      "git_blob_sha1": "5e0c820e37b03bb77995b2567c8bd05eb9636eba"
+    },
+    "m3/collections/src/test/java/com/m3/collections/M3LongArrayListTest.java": {
+      "before_sha256": "ABSENT",
+      "after_sha256": "e5c7cfd4947e5f6e5dc51bd610f452bc109407736491704f96a384f65b99fda8",
+      "git_blob_sha1": "efb9f695e02f2e9d544baf053fc240b570e36eff"
+    },
+    "m3/collections/NOTICE": {
+      "before_sha256": "81138f9994f4afa899c22904debf7cf8277803cf21b53536108ac7e254b0a5bb",
+      "after_sha256": "b567269c5f55d8a7f1bafb696ee393ff0a4f472d10517053229d4232516a87d6",
+      "git_blob_sha1": "a6121f84b844fcd591d6f9f777b11530d6efb0dc"
+    },
+    "m3/collections/README.md": {
+      "before_sha256": "2ccc1183f498d89005922b7e9ec233f3fe878390e6c66c33e66df04c824528a9",
+      "after_sha256": "993ad977c837b83b4d3b0b9c4db3d70e1b10bea9ce8626d33da11b927cff8d03",
+      "git_blob_sha1": "00956fc9a7451071e558743ec374e0e1f7bb140d"
+    },
+    "m3/collections/provenance.json": {
+      "before_sha256": "98b270cbd821874e35df371fe239877619f83910005651239148e98f3711ecba",
+      "after_sha256": "8f9ef0e9c806e2ed993fede76e364af793d459e79cf2299fb5eb1eb5a12b9612",
+      "git_blob_sha1": "d8f985361fc9fdf6dca8a6003d56a756f72c31f7"
+    },
+    "m3/docs/m3jdk21-porting-invariant.md": {
+      "before_sha256": "fa84270f09a42fe4dbeb245812e7b710297825e2bfd461bce99bb64056e1399d",
+      "after_sha256": "24187687f76e0cefd3a4db01e137cc5abc68380df859cfba739f65be2d4c6736",
+      "git_blob_sha1": "4ce92d1343d87c642b897c4e93c06f1f6cb95100"
+    },
+    "m3/docs/name-mapping.json": {
+      "before_sha256": "15a0e941ff6b68c9cdadb599d5bb661b3adadc40bd1c2d308c8ab48a8c503ee2",
+      "after_sha256": "ff499eef7fe6be6ebd929462b174347d16dba14bff9efe24e74428c8c7e11dba",
+      "git_blob_sha1": "b68e23e5720845cd38a4b80c11d01cef2d0b0f9f"
+    }
+  },
+  "execution_mode": "SDK_EXECUTION",
+  "sdk_tests": {
+    "tests": 17,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "receiver_tests": {
+    "tests": 24,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "compiler_phases": 11,
+  "oracle_operations_per_phase": 4096,
+  "target_mixed_operations": 32768,
+  "behavior_sha256": "3542a6376b336a2e03ae1195e950329f48b8d447aeda6676140095d63bd9a975",
+  "existing_target_types_api_checked": 17,
+  "existing_interfaces_reused": 2,
+  "new_runtime_types": 7,
+  "naming_map_schema": "PASS",
+  "receiving_order": "PRESERVED",
+  "active_receiving_phase": "STRING",
+  "runtime_promotion": false,
+  "family_completion": false,
+  "resource_probe_tsv": "owner\tsize\tpayload_bytes\towned_heap_bytes\tfirst_build_alloc_bytes\tfirst_build_ns\tfirst_build_cpu_ns\twarm_build_alloc_bytes\twarm_build_ns\twarm_build_cpu_ns\tscan_128_alloc_bytes\twarm_scan_ns\twarm_scan_cpu_ns\tchecksum\ndonor\t8192\t65536\t65576\t112576\t8672033\t2492895\t65576\t50401\t50590\t0\t178975\t179147\t41742336\ntarget\t8192\t65536\t65576\t84744\t4541430\t1019846\t65576\t56990\t57226\t0\t27585\t27604\t41742336\n",
+  "resource_scope": "One process; first linked build, warmed build/traversal; exact shallow sizes of sole owner plus sole long array; per-thread allocation and CPU. Timing is observational, not a speed gate.",
+  "native_process_memory": "No native allocation introduced; full process/RSS and JDK runtime qualification not measured.",
+  "full_jdk_and_jtreg": "NOT_RUN",
+  "reproduce": "In the pinned Synexia recipe checkout, run python synexia-openrewrite-recipes/crates/m3-collection-contracts/array-list/verify.py --target-root /absolute/path/to/M3jdk21 with Java 21, Maven and Python jsonschema. Add --apply only to materialize qualified SDK output.",
+  "licensing": "Apache-2.0 first-party implementation/recipes; original donor notices retained. Copyright 2026 Hitesh Soliwal and contributors. OpenJDK and third-party rights unchanged."
+}

@@ -262,5 +262,88 @@
         "native postimage SHA updated for renamed JNI symbol"
       ]
     }
+  ],
+  "extensions": [
+    {
+      "id": "long-array-list-v1",
+      "source_repository": "hsoliwal/com.synexia",
+      "source_commit": "dd25d83c10187961dbd8bff114ac0198e060f6ba",
+      "source_files": [
+        {
+          "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongList.java",
+          "sha256": "cca0c92a6541d2570b981ac6e4782e7800c87c8dda5e4e566afe023c454ebd9c",
+          "target_name": "M3LongArrayList",
+          "disposition": "TYPED_RENAME_ADAPTATION"
+        },
+        {
+          "path": "synexia-common/src/main/java/com/synexia/common/collections/LongSequence.java",
+          "sha256": "38f6f97979a4c9d7c7e2963aed6df50644511f03c5e89c2893312862de036c9a",
+          "target_name": "M3LongList",
+          "disposition": "TYPED_RENAME_ADAPTATION"
+        },
+        {
+          "path": "synexia-common/src/main/java/com/synexia/common/collections/LongStack.java",
+          "sha256": "1ef422c22b03fcaafa4e9ec32ee231cc95cd8a46614ea6663f66cc8f832879f7",
+          "target_name": "M3LongStack",
+          "disposition": "TYPED_RENAME_ADAPTATION"
+        },
+        {
+          "path": "synexia-common/src/main/java/com/synexia/common/collections/LongSequenceSpliterator.java",
+          "sha256": "83c55cb10c8cfb9212fa9dfdc52b17910401d423939b0cf7d4f5b384e1970686",
+          "target_name": "M3LongListSpliterator",
+          "disposition": "TYPED_RENAME_ADAPTATION"
+        },
+        {
+          "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedArrayCapacity.java",
+          "sha256": "604869a454f8c75cb42438bf86e3c82974afb1bfc8d0cfa7264a4f6fd6947171",
+          "target_name": "M3ArrayCapacity",
+          "disposition": "TYPED_RENAME_ADAPTATION"
+        },
+        {
+          "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedFlatArrays.java",
+          "sha256": "f8a3a16bcb9a9d9e367ef9ee7732ed1143d283395942f4dcde4e332027c18c23",
+          "target_name": "M3FlatArrays",
+          "disposition": "TYPED_RENAME_ADAPTATION"
+        },
+        {
+          "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedSupport.java",
+          "sha256": "ba18323df281922ccad50b7e5adc93e69e609d46ef06e2f226b4cd0f6492fe9d",
+          "target_name": "M3CollectionSupport",
+          "disposition": "TYPED_RENAME_ADAPTATION"
+        },
+        {
+          "path": "synexia-common/src/main/java/com/synexia/common/collections/LongCollection.java",
+          "sha256": "ff0b8dbd31660f768c1e382e05bb41e60bbae70929bf68ec9d427af6db6ebb7b",
+          "target_name": "M3LongCollection",
+          "disposition": "REUSE_EXISTING_TARGET"
+        },
+        {
+          "path": "synexia-common/src/main/java/com/synexia/common/collections/LongIterator.java",
+          "sha256": "8e912f0302b4082583f731e274a245cf9f98fda1e5e53adfccaef03f5da08cb0",
+          "target_name": "M3LongIterator",
+          "disposition": "REUSE_EXISTING_TARGET"
+        }
+      ],
+      "license": "Apache-2.0",
+      "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+      "recipe": "com.synexia.rewrite.M3LongArrayListTarget",
+      "recipe_home": "synexia-openrewrite-recipes/crates/m3-collection-contracts/array-list",
+      "target_base": "5cef0a5b4831db0346fccdd0079d3d28d820a24e",
+      "target_java": {
+        "m3/collections/src/main/java/com/m3/collections/M3ArrayCapacity.java": "7d022e29adfb816394d40dd57dc390ccae15d5c4b76a9260aa7539e3816dfba0",
+        "m3/collections/src/main/java/com/m3/collections/M3CollectionSupport.java": "dcb3af16eda1ecb178166317d32405c04d6460e95f32bb997eef9cb7d7221ff2",
+        "m3/collections/src/main/java/com/m3/collections/M3FlatArrays.java": "5309236d25d4cbb123393649b46fd600f32516becb627743bd995062dcf72b8f",
+        "m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java": "8b61fa65efb137662dfa8ddaf1debe7f881481223d9e4c23858b42a7e0de7f18",
+        "m3/collections/src/main/java/com/m3/collections/M3LongList.java": "a783448d102388fe3445602165c30c4819f829465f8f6bd41b2dec1deb063e30",
+        "m3/collections/src/main/java/com/m3/collections/M3LongListSpliterator.java": "38a77a029a997f5fc09e4d41cdc77aad3dafeac46e7383158108fe39f7cd3cfc",
+        "m3/collections/src/main/java/com/m3/collections/M3LongStack.java": "914c2dd5b83140c677388a420d52de426bbc47dff72f3a709589b03a01207705",
+        "m3/collections/src/main/java/com/m3/collections/M3Collections.java": "65ea27904bbd1f88d2d393343db7c3befc6f7dae564d9f8349d0a573044820dd",
+        "m3/collections/src/test/java/com/m3/collections/M3LongArrayListTest.java": "e5c7cfd4947e5f6e5dc51bd610f452bc109407736491704f96a384f65b99fda8"
+      },
+      "intake_mode": "INDEPENDENT_APACHE_MODULE",
+      "runtime_promotion": false,
+      "collection_phase": "WAITING_FOR_PREDECESSOR",
+      "receipt": "m3/collections/evidence/long-array-list.json"
+    }
   ]
 }

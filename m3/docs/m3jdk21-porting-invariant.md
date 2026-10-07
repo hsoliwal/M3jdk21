@@ -497,3 +497,26 @@ JDK backend. Record concrete consumer/name mapping, exact donor and target hashe
 rights, target recipe application, JDK 21/JUnit/jtreg/native/JNI/runtime and resource evidence first.
 Keep every untested owner and gate PENDING. Public JDK APIs, backing identity and this repository's
 intake/licensing modes remain unchanged; reusable recipes and algorithms stay canonical in Synexia.
+
+## M3 collection names and one existing package
+
+Apply the M3String naming analogy to every collection family. Qualified independent Apache-2.0
+collection adaptations use the existing `com.m3.collections` package and concise JDK-like M3 names.
+Reuse existing owners first. Useful alternatives stay in that package with meaningful semantic or
+storage qualifiers; do not create a package/hierarchy for every donor. Public `java.util` names and
+contracts stay unchanged. A primitive `M3LongArrayList` does not claim the `List<Long>` contract.
+
+Choose an implementation by its concrete workload and API/ownership/lifetime contract. Dense
+arrays, segmented lanes, rings, sorted/direct indexes, heaps, tries and hashing each have a domain.
+There is no unmeasured universal winner. Record cold preparation, warm use, CPU, retained heap,
+scratch and native/process residency where applicable. Retain compatible alternatives and exact
+source history; do not replace stronger capabilities to make a name fit. No retained structural
+Entry/Node per element is introduced, and mandatory Map.Entry results remain caller-owned.
+
+Synexia's canonical ownership JSON `collectionNaming` records the reusable naming rule;
+this existing document and name-mapping.json remain target naming authority. The current list handoff uses
+the existing PackedLongList algorithm and owner-indirected spliterator, preserving callback failure
+behavior and primitive payload. Synexia owns its reusable recipe and donor mechanics; M3JDK21 owns
+the independently verified receiver. First-party expression retains Apache-2.0 and Copyright 2026
+Hitesh Soliwal and contributors; upstream/OpenJDK rights remain per file. The ordered receiving
+plan is unchanged. A proving-ground library port does not promote the collection runtime phase.

@@ -11,6 +11,12 @@ package com.m3.collections;
 public final class M3Collections {
     private M3Collections() {}
 
+    /** Dense primitive values with indexed access; no retained Long wrappers or entry nodes. */
+    public static M3LongArrayList longArrayList() { return new M3LongArrayList(); }
+
+    /** Dense primitive list with an explicit initial capacity. */
+    public static M3LongArrayList longArrayList(int expectedSize) { return new M3LongArrayList(expectedSize); }
+
     public static M3LongLane28 longLane() {
         return new M3LongLane28();
     }

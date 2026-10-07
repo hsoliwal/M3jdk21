@@ -7704,6 +7704,316 @@
         },
         "source_state": "implemented",
         "observation": "Canonical candidate recipe PR hsoliwal/com.synexia#9726. Existing mapping records retain their historical authority. New finite proof does not qualify the full family or change matching semantics."
+      },
+      {
+        "id": "synexia.collections.long-array-list",
+        "kind": "adapter",
+        "status": "implemented-unverified",
+        "reason": "Independent Apache collection proving ground: typed, source-pinned PackedLongList adaptation using existing primitive interfaces. JDK runtime collection promotion remains pending.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "dd25d83c10187961dbd8bff114ac0198e060f6ba",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedLongList.java",
+            "symbol": "com.synexia.common.collections.PackedLongList",
+            "signatures": [
+              "PackedLongList"
+            ],
+            "sha256": "cca0c92a6541d2570b981ac6e4782e7800c87c8dda5e4e566afe023c454ebd9c",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "dd25d83c10187961dbd8bff114ac0198e060f6ba",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/LongSequence.java",
+            "symbol": "com.synexia.common.collections.LongSequence",
+            "signatures": [
+              "LongSequence"
+            ],
+            "sha256": "38f6f97979a4c9d7c7e2963aed6df50644511f03c5e89c2893312862de036c9a",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "dd25d83c10187961dbd8bff114ac0198e060f6ba",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/LongStack.java",
+            "symbol": "com.synexia.common.collections.LongStack",
+            "signatures": [
+              "LongStack"
+            ],
+            "sha256": "1ef422c22b03fcaafa4e9ec32ee231cc95cd8a46614ea6663f66cc8f832879f7",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "dd25d83c10187961dbd8bff114ac0198e060f6ba",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/LongSequenceSpliterator.java",
+            "symbol": "com.synexia.common.collections.LongSequenceSpliterator",
+            "signatures": [
+              "LongSequenceSpliterator"
+            ],
+            "sha256": "83c55cb10c8cfb9212fa9dfdc52b17910401d423939b0cf7d4f5b384e1970686",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "dd25d83c10187961dbd8bff114ac0198e060f6ba",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedArrayCapacity.java",
+            "symbol": "com.synexia.common.collections.PackedArrayCapacity",
+            "signatures": [
+              "PackedArrayCapacity"
+            ],
+            "sha256": "604869a454f8c75cb42438bf86e3c82974afb1bfc8d0cfa7264a4f6fd6947171",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "dd25d83c10187961dbd8bff114ac0198e060f6ba",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedFlatArrays.java",
+            "symbol": "com.synexia.common.collections.PackedFlatArrays",
+            "signatures": [
+              "PackedFlatArrays"
+            ],
+            "sha256": "f8a3a16bcb9a9d9e367ef9ee7732ed1143d283395942f4dcde4e332027c18c23",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "dd25d83c10187961dbd8bff114ac0198e060f6ba",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/PackedSupport.java",
+            "symbol": "com.synexia.common.collections.PackedSupport",
+            "signatures": [
+              "PackedSupport"
+            ],
+            "sha256": "ba18323df281922ccad50b7e5adc93e69e609d46ef06e2f226b4cd0f6492fe9d",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "dd25d83c10187961dbd8bff114ac0198e060f6ba",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/LongCollection.java",
+            "symbol": "com.synexia.common.collections.LongCollection",
+            "signatures": [
+              "LongCollection"
+            ],
+            "sha256": "ff0b8dbd31660f768c1e382e05bb41e60bbae70929bf68ec9d427af6db6ebb7b",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "pinned"
+          },
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "dd25d83c10187961dbd8bff114ac0198e060f6ba",
+            "module": "synexia-common",
+            "path": "synexia-common/src/main/java/com/synexia/common/collections/LongIterator.java",
+            "symbol": "com.synexia.common.collections.LongIterator",
+            "signatures": [
+              "LongIterator"
+            ],
+            "sha256": "8e912f0302b4082583f731e274a245cf9f98fda1e5e53adfccaef03f5da08cb0",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "pinned"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "m3/collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3ArrayCapacity.java",
+            "symbol": "com.m3.collections.M3ArrayCapacity",
+            "signatures": [
+              "M3ArrayCapacity"
+            ],
+            "sha256": "7d022e29adfb816394d40dd57dc390ccae15d5c4b76a9260aa7539e3816dfba0",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "m3/collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3CollectionSupport.java",
+            "symbol": "com.m3.collections.M3CollectionSupport",
+            "signatures": [
+              "M3CollectionSupport"
+            ],
+            "sha256": "dcb3af16eda1ecb178166317d32405c04d6460e95f32bb997eef9cb7d7221ff2",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "m3/collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3FlatArrays.java",
+            "symbol": "com.m3.collections.M3FlatArrays",
+            "signatures": [
+              "M3FlatArrays"
+            ],
+            "sha256": "5309236d25d4cbb123393649b46fd600f32516becb627743bd995062dcf72b8f",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "m3/collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3LongArrayList.java",
+            "symbol": "com.m3.collections.M3LongArrayList",
+            "signatures": [
+              "M3LongArrayList"
+            ],
+            "sha256": "8b61fa65efb137662dfa8ddaf1debe7f881481223d9e4c23858b42a7e0de7f18",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "m3/collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3LongList.java",
+            "symbol": "com.m3.collections.M3LongList",
+            "signatures": [
+              "M3LongList"
+            ],
+            "sha256": "a783448d102388fe3445602165c30c4819f829465f8f6bd41b2dec1deb063e30",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "m3/collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3LongListSpliterator.java",
+            "symbol": "com.m3.collections.M3LongListSpliterator",
+            "signatures": [
+              "M3LongListSpliterator"
+            ],
+            "sha256": "38a77a029a997f5fc09e4d41cdc77aad3dafeac46e7383158108fe39f7cd3cfc",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate"
+          },
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "m3/collections",
+            "path": "m3/collections/src/main/java/com/m3/collections/M3LongStack.java",
+            "symbol": "com.m3.collections.M3LongStack",
+            "signatures": [
+              "M3LongStack"
+            ],
+            "sha256": "914c2dd5b83140c677388a420d52de426bbc47dff72f3a709589b03a01207705",
+            "git_blob_sha1": null,
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "com.m3.collections primitive list proving ground",
+        "identity": {
+          "namespace": "Existing primitive list payload/owner; no new global interning or identity store.",
+          "generation": "Mutable owner and original traversal fence; capacity relocation follows owner."
+        },
+        "contract": {
+          "differences": [
+            "Typed package/type adaptation and reused target primitive interfaces.",
+            "Primitive list contract; not a java.util.List replacement."
+          ],
+          "compatibility_obligations": [
+            "Preserve primitive values/order, bounds, callback exception effects, exports, capacity and iterator/spliterator owner behavior.",
+            "All collection alternatives use existing com.m3.collections with concise M3 names; choose storage by contract and measured workload.",
+            "No retained per-element structural objects."
+          ],
+          "public_surface": [
+            "M3LongArrayList",
+            "M3LongList",
+            "M3LongStack",
+            "M3Collections.longArrayList overloads"
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Independent Apache module, java.base only; no new JNI surface."
+        },
+        "dependencies": [],
+        "materialization": {
+          "admission": "Copies mutable input arrays into the existing primitive payload; no per-entry objects.",
+          "joins": "Arraycopy for growth/insertion/removal; no persistent concatenated-array view.",
+          "outputs": "Caller-owned primitive copies or primitive iterators/streams.",
+          "cached_facts": "Sorted state is an explicit caller precondition; no inferred cache or global precompute."
+        },
+        "recipe": {
+          "id": "long-array-list-v1",
+          "version": "1",
+          "path": null,
+          "sha256": null,
+          "preconditions": [
+            "Exact pinned Synexia recipe and donor nine-owner closure; occupied target/drift refusal."
+          ],
+          "rollback": "Additive revert of this bounded extension; preserve canonical history."
+        },
+        "tests": [
+          {
+            "id": "long-array-list-local",
+            "receipt": "m3/collections/evidence/long-array-list.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0; independent m3/collections module; original notices retained.",
+          "publication": "User-authorized Synexia adaptation and M3 naming; OpenJDK source unchanged.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "dd25d83c10187961dbd8bff114ac0198e060f6ba",
+          "target_revision": "5cef0a5b4831db0346fccdd0079d3d28d820a24e",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Typed namespace/name change; reuse existing M3LongCollection/M3LongIterator; additive factories."
+          ],
+          "pending": [
+            "Ordered JDK runtime collection qualification",
+            "Whole-family dependency closure",
+            "Full reactor and platform/resource gates"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "Finite independent-library port; String active phase and every existing mapping/gate retained."
       }
     ]
   },

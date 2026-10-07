@@ -90,3 +90,23 @@ warnings are errors. `evidence/STATUS.md` records exact proof scope and remainin
 
 Source implementation: [Synexia PR #7705](https://github.com/hsoliwal/com.synexia/pull/7705),
 commit `1d0deb92f379cc05a001ac48e0e427b0db6c263f`.
+
+## Dense primitive list
+
+`M3Collections.longArrayList()` and `longArrayList(expectedSize)` construct `M3LongArrayList` in
+this same package. `M3LongList` and `M3LongStack` express its existing primitive donor contracts;
+it reuses `M3LongCollection` and `M3LongIterator`. It is not a `java.util.List<Long>` implementation.
+There are no retained per-element nodes or Long wrappers. Indexed reads/writes are O(1); appends
+are amortized O(1); middle insertion/removal copy a range. Binary search requires sorted input.
+Structural mutation during traversal and mutation from a filter callback remain unsupported.
+
+Capacity growth/trim may replace the primitive array. Existing spliterators retain the logical
+owner and their original fence, so capacity relocation does not strand them on old storage. A
+throwing filter commits earlier rejections while preserving the throwing value and unread suffix.
+Exported arrays are copies. This mutable collection is not thread-safe.
+
+The source-qualified algorithm and reusable typed-rename/install recipes remain in Synexia's
+`synexia-openrewrite-recipes/crates/m3-collection-contracts/array-list`. The target keeps the applied
+runtime, contract tests, lineage and proof receipt. New primitive/dense/ring/sorted/hash alternatives
+use this same package and compact M3 names after contract and resource qualification. Public JDK
+APIs and the String -> arrays -> collections receiving stage are unchanged.
