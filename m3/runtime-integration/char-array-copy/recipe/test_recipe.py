@@ -14,15 +14,30 @@ MANIFEST = json.loads((HERE / "manifest.json").read_text())
 
 
 class CharArrayCopyRecipeTest(unittest.TestCase):
+    @staticmethod
+    def current_name(name):
+        hashes = MANIFEST["files"][name]
+        source = RECIPE.ROOT / name
+        if source.is_file():
+            return name
+        replacement = hashes.get("superseded_by")
+        if replacement is None:
+            return name
+        return replacement["path"]
+
     def seed_current(self, target):
         for name in MANIFEST["files"]:
-            source = RECIPE.ROOT / name
-            target_file = target / name
+            current_name = self.current_name(name)
+            source = RECIPE.ROOT / current_name
+            target_file = target / current_name
             target_file.parent.mkdir(parents=True, exist_ok=True)
             target_file.write_bytes(source.read_bytes())
 
     def snapshot(self, target):
-        return {name: (target / name).read_bytes() for name in MANIFEST["files"]}
+        return {
+            self.current_name(name): (target / self.current_name(name)).read_bytes()
+            for name in MANIFEST["files"]
+        }
 
     def test_current_canonical_tree_is_sealed_superseding_fixed_point(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -61,11 +76,13 @@ class CharArrayCopyRecipeTest(unittest.TestCase):
             target = Path(folder)
             self.seed_current(target)
             for name in MANIFEST["files"]:
-                path = target / name
+                current_name = self.current_name(name)
+                path = target / current_name
                 original = path.read_bytes()
                 path.write_bytes(original + b"\n")
                 snapshot = self.snapshot(target)
-                with self.assertRaisesRegex(ValueError, "source drift"):
+                with self.assertRaisesRegex(
+                        ValueError, "source drift|superseded owner drift"):
                     RECIPE.apply(target)
                 self.assertEqual(snapshot, self.snapshot(target))
                 path.write_bytes(original)
@@ -74,18 +91,51 @@ class CharArrayCopyRecipeTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             target = Path(folder)
             self.seed_current(target)
-            first = target / RECIPE.ENGINE
+            first_name = self.current_name(RECIPE.ENGINE)
+            first = target / first_name
             first.unlink()
-            first.symlink_to(RECIPE.ROOT / RECIPE.ENGINE)
+            first.symlink_to(RECIPE.ROOT / first_name)
             with self.assertRaisesRegex(ValueError, "symlink path"):
                 RECIPE.apply(target)
 
     def test_manifest_superseded_hashes_are_current_exact_sources(self):
         for name, hashes in MANIFEST["files"].items():
-            actual = RECIPE.digest((RECIPE.ROOT / name).read_bytes())
+            source = RECIPE.ROOT / name
+            replacement = hashes.get("superseded_by")
+            if replacement is not None and not source.exists():
+                replacement_source = RECIPE.ROOT / replacement["path"]
+                self.assertTrue(replacement_source.is_file(), replacement["path"])
+                self.assertEqual(
+                    replacement["git_blob"],
+                    RECIPE.git_blob(replacement_source.read_bytes()),
+                    replacement["path"],
+                )
+                continue
+            actual = RECIPE.digest(source.read_bytes())
             self.assertIn(actual, hashes.get("superseded", []), name)
             self.assertNotEqual(hashes["before"], actual)
             self.assertNotEqual(hashes["after"], actual)
+
+    def test_missing_or_drifted_replacement_owner_refuses_without_recreating_history(self):
+        with tempfile.TemporaryDirectory() as folder:
+            target = Path(folder)
+            self.seed_current(target)
+            replacement = MANIFEST["files"][RECIPE.ENGINE]["superseded_by"]["path"]
+            replacement_path = target / replacement
+            replacement_path.unlink()
+            with self.assertRaisesRegex(ValueError, "superseded owner missing"):
+                RECIPE.apply(target)
+            self.assertFalse((target / RECIPE.ENGINE).exists())
+
+        with tempfile.TemporaryDirectory() as folder:
+            target = Path(folder)
+            self.seed_current(target)
+            replacement = MANIFEST["files"][RECIPE.ENGINE]["superseded_by"]["path"]
+            replacement_path = target / replacement
+            replacement_path.write_bytes(replacement_path.read_bytes() + b"\n")
+            with self.assertRaisesRegex(ValueError, "superseded owner drift"):
+                RECIPE.apply(target)
+            self.assertFalse((target / RECIPE.ENGINE).exists())
 
 
 if __name__ == "__main__":

@@ -150,6 +150,11 @@ def digest(data):
     return hashlib.sha256(data).hexdigest()
 
 
+def git_blob(data):
+    header = f"blob {len(data)}\\0".encode("ascii")
+    return hashlib.sha1(header + data).hexdigest()
+
+
 def transform(name, data, reverse=False):
     text = data.decode("utf-8")
     for old, new in REPLACEMENTS[name]:
@@ -172,6 +177,28 @@ def apply(target=ROOT, reverse=False, check=False):
         path = target / name
         if path.is_symlink() or target not in path.resolve().parents:
             raise ValueError("symlink path: " + name)
+        if not path.exists():
+            replacement = hashes.get("superseded_by")
+            if replacement is None:
+                raise ValueError("source drift: " + name)
+            replacement_name = replacement.get("path", "")
+            replacement_safe = PurePosixPath(replacement_name)
+            if (replacement_safe.is_absolute()
+                    or ".." in replacement_safe.parts
+                    or not replacement_name.startswith("src/")):
+                raise ValueError("unsafe superseded path: " + replacement_name)
+            replacement_path = target / replacement_name
+            if (replacement_path.is_symlink()
+                    or target not in replacement_path.resolve().parents):
+                raise ValueError("symlink path: " + replacement_name)
+            if not replacement_path.is_file():
+                raise ValueError("superseded owner missing: " + replacement_name)
+            replacement_data = replacement_path.read_bytes()
+            if git_blob(replacement_data) != replacement.get("git_blob"):
+                raise ValueError("superseded owner drift: " + replacement_name)
+            states.add("superseded")
+            files[name] = (path, b"")
+            continue
         data = path.read_bytes()
         actual = digest(data)
         if actual == hashes["before"]:
