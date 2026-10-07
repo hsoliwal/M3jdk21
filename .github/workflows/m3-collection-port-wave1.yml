@@ -1,0 +1,30 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 collection port wave one
+
+on:
+  pull_request:
+    paths:
+      - 'm3/ports/collections/**'
+      - '.github/workflows/m3-collection-port-wave1.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Diff hygiene
+        run: git diff --check
+      - name: Provenance and isolation gate
+        run: python3 m3/ports/collections/verify_collection_port_wave1.py
+      - name: Java 21 compile and contract tests
+        run: mvn -B -ntp -f m3/ports/collections/pom.xml clean test
