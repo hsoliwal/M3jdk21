@@ -19,6 +19,7 @@ import com.m3.rewrite.backport.M3VerbatimJavaPairRecipe;
 import com.m3.rewrite.backport.M3Jep458BackportRecipe;
 import com.m3.rewrite.backport.M3Jep485StreamGatherersBackportRecipe;
 import com.m3.rewrite.backport.M3Jep496MlKemBackportRecipe;
+import com.m3.rewrite.backport.M3Jep497MlDsaBackportRecipe;
 import com.m3.rewrite.backport.M3Jdk8338587ShakeXofBackportRecipe;
 import com.m3.rewrite.backport.M3Jep510KdfBackportRecipe;
 import com.m3.rewrite.backport.M3Jep510KdfSecurityTestsRecipe;
@@ -34,7 +35,7 @@ import org.junit.jupiter.api.Test;
 final class M3RecipeScopeDeclarationTest {
     @Test
     void everyCurrentRecipeHasExternalScopeAuthority() {
-        assertEquals(28, M3RecipeScopeRegistry.size());
+        assertEquals(29, M3RecipeScopeRegistry.size());
         assertTrue(M3RecipeScopeRegistry.registered("org.openrewrite.java.RemoveUnusedImports"));
         assertTrue(M3RecipeScopeRegistry.registered(M3MIndexJoinedCharsViewRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3SegmentedLaneNativeRecipe.class.getName()));
@@ -63,6 +64,7 @@ final class M3RecipeScopeDeclarationTest {
         assertTrue(M3RecipeScopeRegistry.registered(M3Jep485StreamGatherersBackportRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jdk8338587ShakeXofBackportRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jep496MlKemBackportRecipe.class.getName()));
+        assertTrue(M3RecipeScopeRegistry.registered(M3Jep497MlDsaBackportRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jep510KdfBackportRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jep510KdfSecurityTestsRecipe.class.getName()));
         assertTrue(M3RecipeScopeRegistry.registered(M3Jep510KdfCandidateRecipe.class.getName()));
