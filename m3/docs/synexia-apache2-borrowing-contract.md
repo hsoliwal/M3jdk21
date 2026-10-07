@@ -90,6 +90,20 @@ Existing OpenJDK-derived files retain their existing OpenJDK license and notice 
 algorithm or design may be adapted into such a file only under the applicable target licensing and
 provenance rules; the receiver never claims that an Apache-2.0 label relicenses OpenJDK.
 
+## Canonical Apache handoff manifest pin
+
+The current source-side custody contract is pinned by
+`m3/compatibility/synexia-apache-handoff-pin.tsv`. It binds the exact Synexia repository, PR,
+commit, `.m3/apache-handoff.tsv` SHA-256, Apache-2.0 identity and copyright notice.
+
+While the pinned Synexia custody PR remains unmerged, the target pin is deliberately
+`PENDING_SYNEXIA_MERGE` / `QUALIFICATION_INPUT_ONLY`, with
+`automatic_application=false`. A later additive update may enable the existing receiver only
+after the source PR is merged and its canonical DAG proof succeeds.
+
+The pin also records `target_relicense_authority=false` and the retained OpenJDK license identity.
+This is an admission fence, not a second copy of Synexia's custody implementation.
+
 ## Authority
 
 A valid handoff packet proves source identity and permitted candidate materialization. It does not
