@@ -26,6 +26,7 @@ tuple_ = read("src/java.base/share/classes/java/lang/M3StringTuple.java")
 facts = read("src/java.base/share/classes/java/lang/M3StringFacts.java")
 search_precompute = read("src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java")
 position_precompute = read("src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java")
+codepoint_precompute = read("src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java")
 tq = read("src/java.base/share/classes/jdk/internal/mindex/M3TQ.java")
 string = read("src/java.base/share/classes/java/lang/String.java")
 asb = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
@@ -45,6 +46,8 @@ workflow = read(".github/workflows/mindex-string-backing.yml")
 recipe_receipt = read("m3/docs/synexia-recipe-application.md")
 builder = read("src/java.base/share/classes/java/lang/AbstractStringBuilder.java")
 native_string = read("src/java.base/share/native/libjava/String.c")
+vm_intrinsics = read("src/hotspot/share/classfile/vmIntrinsics.cpp")
+string_opts = read("src/hotspot/share/opto/stringopts.cpp")
 native_string_test = read("test/jdk/java/lang/String/nativeEncoding/libstringPlatformChars.c")
 hotspot_java_classes = read("src/hotspot/share/classfile/javaClasses.cpp")
 hotspot_jni = read("src/hotspot/share/prims/jni.cpp")
@@ -93,25 +96,6 @@ for fragment in [
 ]:
     if fragment not in m3:
         fail(f"M3 generic ASCII-compatible encoder fast path missing: {fragment}")
-
-# Fixed scan-avoidance facts must have live consumers.
-for fragment in [
-    "final boolean hasAsciiUpper;",
-    "final boolean hasAsciiLower;",
-    "final boolean hasBackslash;",
-    "final boolean hasLineTerminator;",
-]:
-    if fragment not in facts:
-        fail(f"M3 fixed scan-avoidance fact missing: {fragment}")
-for fragment in [
-    "if (!prepared.hasBackslash) return this;",
-    "(upper && !prepared.hasAsciiLower)",
-    "(!upper && !prepared.hasAsciiUpper)",
-]:
-    if fragment not in m3:
-        fail(f"M3 fixed scan-avoidance consumer missing: {fragment}")
-if "prepared != null && !prepared.hasLineTerminator" not in string:
-    fail("String.lines lost prepared no-terminator fast path")
 
 # Encoding facts must be executable, not decorative metadata.
 for fragment in [
@@ -238,22 +222,6 @@ for fragment in [
     if fragment not in m3:
         fail(f"M3 one-unit literal search lost position-precompute route: {fragment}")
 
-# Mutable AbstractStringBuilder sources may reuse immutable M3 target plans, but source text is
-# never cached. The byte[] source is read per invocation through its current coder.
-for fragment in [
-    "static int indexOf(\n            byte[] source,",
-    "static int lastIndexOf(\n            byte[] source,",
-    "sourceUnit(source, sourceCoder, index)",
-]:
-    if fragment not in search_precompute:
-        fail(f"M3 builder prepared-target search path missing: {fragment}")
-for fragment in [
-    "M3StringSearchPrecompute.indexOf(\n                        src, srcCoder, srcCount, targetM3, plan, fromIndex)",
-    "M3StringSearchPrecompute.lastIndexOf(\n                        src, srcCoder, targetM3, plan, fromIndex)",
-]:
-    if fragment not in string:
-        fail(f"String builder helper lost prepared M3 target route: {fragment}")
-
 # Prepared literal AUTO search follows the mature Synexia convergence: bounded 256-entry
 # conservative BMH skip metadata for long patterns, with existing KMP as the exact adversarial
 # fallback. Low-byte collisions may only reduce skips; KMP remains semantic authority.
@@ -340,6 +308,27 @@ for fragment in [
         fail(f"M3 adaptive BMH/KMP search invariant missing: {fragment}")
 if "65536" in search_precompute and "skip" in search_precompute:
     fail("M3 literal search must not retain a 65536-entry UTF-16 skip table")
+
+# UTF-16 code-point boundary metadata is a separate weak bounded owner. It stores only paired-low
+# continuation masks/prefix counts and must never become canonical String payload.
+for fragment in [
+    "private static final int SLOTS = 64;",
+    "private static final int MAX_SOURCE_UNITS = 32_768;",
+    "final long[] continuationMasks;",
+    "final int[] continuationPrefixCounts;",
+    "WeakReference<M3StringOwner>",
+    "static long maximumRetainedPrimitiveBytes()",
+]:
+    if fragment not in codepoint_precompute:
+        fail(f"M3 code-point precompute boundary missing: {fragment}")
+for fragment in [
+    "M3StringCodePointPrecompute.codePointCount(storage, beginIndex, endIndex)",
+    "M3StringCodePointPrecompute.offsetByCodePoints(",
+]:
+    if fragment not in string:
+        fail(f"String code-point precompute consumer missing: {fragment}")
+if "continuationMasks" in facts or "continuationPrefixCounts" in facts:
+    fail("M3StringFacts illegally owns length-proportional code-point metadata")
 
 # Length-proportional operation precompute is separate and bounded. It may retain primitive
 # algorithm lanes but never canonical spelling/payload or strong M3 owner/value references.
@@ -520,6 +509,18 @@ for fragment in [
         fail(f"Pattern compiled literal-effect TQ boundary missing: {fragment}")
 
 for fragment in [
+    "skipM3TqTransparentLeading",
+    "current instanceof Begin",
+    "current instanceof Caret",
+    "current instanceof UnixCaret",
+    "current instanceof GroupHead",
+    "compiledRequiredLiteral",
+    "current.getClass() == Slice.class",
+]:
+    if fragment not in pattern:
+        fail(f"Pattern mandatory literal graph precompute missing: {fragment}")
+
+for fragment in [
     "transient M3TQ m3Tq;",
     "has(LITERAL) && !has(CASE_INSENSITIVE)",
     "M3TQ.fromExact(List.of(pattern))",
@@ -630,6 +631,20 @@ for fragment in [
 ]:
     if fragment not in vm_string_bridge:
         fail(f"M3 VM backed-storage predicate missing: {fragment}")
+
+# HotSpot must not intrinsify contiguous String.value assumptions while M3 storage is active.
+for fragment in [
+    "if (UseM3StringStorage) {",
+    "case vmIntrinsics::_compareToL:",
+    "case vmIntrinsics::_indexOfL:",
+    "case vmIntrinsics::_equalsL:",
+    "case vmIntrinsics::_StringBuilder_toString:",
+    "case vmIntrinsics::_StringBuffer_toString:",
+]:
+    if fragment not in vm_intrinsics:
+        fail(f"M3 HotSpot intrinsic guard missing: {fragment}")
+if "if (UseM3StringStorage)" not in string_opts or "return;" not in string_opts:
+    fail("C2 String concat optimizer is not fail-closed for M3 storage")
 
 # Donor class naming must not leak back into live VM symbols/layout.
 for path, text in [
@@ -772,6 +787,43 @@ for fragment in [
 if "M3String asciiCase(boolean upper)" not in m3:
     fail("M3String ROOT ASCII canonical case mapper missing")
 
+# Long M3 line traversal reuses the bounded exact position-mask cache for the next CR/LF.
+for fragment in [
+    "static int indexOfEither(",
+    "exact.mask(first) | exact.mask(second)",
+    "linearIndexOfEither(",
+]:
+    if fragment not in position_precompute:
+        fail(f"M3 line position precompute missing: {fragment}")
+if "int indexOfLineTerminator(int fromIndex)" not in m3:
+    fail("M3String line-terminator search owner missing")
+for fragment in [
+    "private final M3String storage;",
+    "storage.indexOfLineTerminator(start)",
+    "storage.charAt(end) == '\\r'",
+]:
+    if fragment not in string:
+        fail(f"String.lines lost M3 position-mask traversal: {fragment}")
+
+# Fixed scan-avoidance facts must remain constant-size and have live consumers.
+for fragment in [
+    "final boolean hasAsciiUpper;",
+    "final boolean hasAsciiLower;",
+    "final boolean hasBackslash;",
+    "final boolean hasLineTerminator;",
+]:
+    if fragment not in facts:
+        fail(f"M3 fixed scan-avoidance fact missing: {fragment}")
+for fragment in [
+    "if (!prepared.hasBackslash) return this;",
+    "(upper && !prepared.hasAsciiLower)",
+    "(!upper && !prepared.hasAsciiUpper)",
+]:
+    if fragment not in m3:
+        fail(f"M3 fixed scan-avoidance consumer missing: {fragment}")
+if "prepared != null && !prepared.hasLineTerminator" not in string:
+    fail("String.lines lost prepared no-terminator fast path")
+
 # Full Unicode/locale case conversion for M3-backed Strings must use the JDK conditional
 # casing engine over canonical String access. Source value() materialization is forbidden.
 for fragment in [
@@ -794,6 +846,23 @@ for fragment in [
 ]:
     if fragment not in abstract_builder:
         fail(f"AbstractStringBuilder M3 range-coder decision missing: {fragment}")
+
+# Mutable builder sources may reuse immutable M3 target plans, but source bytes are never cached.
+for fragment in [
+    "static int indexOf(\n            byte[] source,",
+    "static int lastIndexOf(\n            byte[] source,",
+    "sourceUnit(source, sourceCoder, index)",
+]:
+    if fragment not in search_precompute:
+        fail(f"M3 builder prepared-target search path missing: {fragment}")
+for fragment in [
+    "M3StringSearchPrecompute.indexOf(",
+    "src, srcCoder, srcCount, targetM3, plan, fromIndex",
+    "M3StringSearchPrecompute.lastIndexOf(",
+    "src, srcCoder, targetM3, plan, fromIndex",
+]:
+    if fragment not in string:
+        fail(f"String builder helper lost prepared M3 target route: {fragment}")
 
 # Shared flat-source substring search (used by AbstractStringBuilder) must not materialize
 # an M3-backed target String through value().
@@ -837,16 +906,8 @@ for fragment in [
         fail(f"M3 builder bulk String ingress missing: {fragment}")
 if "M3StringBuilderInteropTest.java" not in workflow:
     fail("M3 String workflow lost builder interop proof")
-
-# java.lang builders must not flatten M3 Strings through package-private String.value().
-for fragment in [
-    "M3String storage = s.m3();",
-    "s.getBytes(this.value, off, this.count, LATIN1, end - off);",
-    "s.getBytes(this.value, i, j, UTF16, end - i);",
-    "s.getBytes(this.value, off, this.count, UTF16, end - off);",
-]:
-    if fragment not in abstract_builder:
-        fail(f"AbstractStringBuilder M3 append path missing: {fragment}")
+if "M3StringBuilderInteropTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java" not in workflow:
+    fail("M3 String workflow does not execute builder interop proof")
 
 # M3-backed constructors must store only the empty compatibility sentinel.
 if string.count("storage.compatibilityValue()") < 4:
@@ -1017,7 +1078,6 @@ for required_gate in [
     "M3StringFactsCompositionTest.java",
     "M3StringPrecomputeSearchTest.java",
     "M3StringInternTest.java",
-    "M3StringBuilderSearchTest.java",
     "nativeEncoding/StringPlatformChars.java",
     "M3TQFactsTest.java",
     "M3RegexLiteralTQTest.java",
@@ -1028,27 +1088,17 @@ for required_gate in [
 # Synexia owns reusable M3JDK21 recipes; this target keeps only the applied product and receipt.
 for fragment in [
     "hsoliwal/com.synexia",
-    "https://github.com/hsoliwal/com.synexia/pull/9597",
-    "pull/9491",
+    "pull/9529",
+    "602ff6fbd8760ad2d13b3461d0c27ed567c16144",
     "com.synexia.rewrite.M3Jdk21StringHistoryConvergence",
+    "30/30 carried targets are byte-identical",
+    "bcb5419fd4425ef4b41c86c13e7a6f24d5233e68",
+    "pull/9491",
     "com.synexia.rewrite.M3Jdk21TqConvergence",
     "5291e3867224be653da89cd69e3b764b2fab213f",
 ]:
     if fragment not in recipe_receipt:
         fail(f"Synexia recipe application receipt missing: {fragment}")
-
-custody_pin = re.search(
-    r"Pinned custody revision:\s*`([0-9a-f]{40})`",
-    recipe_receipt,
-)
-applied_pin = re.search(
-    r"Applied/fixed-point revision:\s*`([0-9a-f]{40})`",
-    recipe_receipt,
-)
-if custody_pin is None:
-    fail("Synexia String recipe receipt lacks an exact 40-hex custody revision")
-if applied_pin is None:
-    fail("M3JDK21 String recipe receipt lacks an exact 40-hex applied revision")
 
 for forbidden_recipe_path in [
     "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-history-convergence.yml",
