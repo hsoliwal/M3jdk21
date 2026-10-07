@@ -216,7 +216,23 @@ never substitutes for String equality. Resource licensing, preparation cost,
 retained size and disagreement between providers belong in the evidence.
 
 
-### Existing hierarchical lexicons and translation mechanisms
+### M3Lexicons: hierarchical lexicons and translation
+
+**M3Lexicons** is the M3SDK capability-family name for the hierarchical lexicon
+and language-resource mechanisms described in this section. Its scope includes
+ordinary and domain vocabularies, proper names, places, titles, acronyms, units,
+equations, phrases, exact unknown literals, spelling/lexeme/concept identity,
+indexed relations and admitted lexical translation.
+
+The existing Synexia owners below provide the implementation lineage.
+The name groups those capabilities for SDK documentation and delivery planning;
+it does not rename their existing Java APIs, unify their distinct coordinate
+formats, or assert that every component has passed SDK/runtime acceptance.
+M3 String can consume qualified resources while retaining its internal runtime
+ownership and exact String contracts. M3JDK21 remains the Java runtime subset
+of the broader M3SDK.
+
+
 
 This direction already has concrete donor implementations. The following source
 inspection is pinned to Synexia commit `d9098bb5341a1b95750814044b8bb52616cc2c61`.
@@ -433,7 +449,9 @@ For citation in JEPs, standards submissions, or downstream publications, see the
 
 Version 0.2 extends the design account with natural-language resources,
 programming-language AST/binding boundaries, bounded reuse across other data
-structures, and the wider M3SDK delivery direction for Synexia. The [v0.1 publication remains available at its original commit](https://github.com/hsoliwal/M3jdk21/blob/ace350f716614b50cf77d7462b1762b7eb8664ca/m3/papers/M3_SHARED_STRUCTURE_AND_REUSABLE_COMPUTATION.md).
+structures, and the wider M3SDK delivery direction for Synexia. A naming
+addendum on the same date identifies the hierarchical lexicon and lexical
+translation capability family as **M3Lexicons**. The [v0.1 publication remains available at its original commit](https://github.com/hsoliwal/M3jdk21/blob/ace350f716614b50cf77d7462b1762b7eb8664ca/m3/papers/M3_SHARED_STRUCTURE_AND_REUSABLE_COMPUTATION.md).
 Earlier source and design records remain relevant to chronology and attribution.
 
 As of 7 October 2026, the author has expressed an intention to pursue patent
