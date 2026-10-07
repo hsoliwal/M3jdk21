@@ -1,0 +1,2 @@
+path	reason	donor_state	authority
+src/jdk.jlink/share/classes/jdk/tools/jlink/internal/runtimelink/RuntimeImageLinkException.java	GA_REMOVED_DO_NOT_ADD	ABSENT_IN_JDK24_GA	EVIDENCE_ONLY
