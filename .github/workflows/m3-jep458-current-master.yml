@@ -50,7 +50,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          BASE_SHA="f96b9a88e040cded3a5ffb96190e2acedee6c97d"
+          BASE_SHA="80b8534ad1e45002185fb3eeab233f98d3a7c0bd"
           git diff --exit-code "$BASE_SHA...HEAD" -- \
             make/CompileInterimLangtools.gmk \
             src/java.base/share/classes/module-info.java \
