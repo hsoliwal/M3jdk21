@@ -365,6 +365,87 @@ def validate(atoms: Sequence[Atom]) -> None:
             raise ValueError("phase order regression")
 
 
+def _packet_id(work_id: str) -> str:
+    value = work_id.lower().replace("_", "-")
+    if value.startswith("jep-") or value.startswith("jdk-"):
+        checked = value
+    else:
+        checked = "m3-" + value
+    if not checked or len(checked) > 80 or not all(
+        ch.islower() or ch.isdigit() or ch == "-" for ch in checked
+    ):
+        raise ValueError(f"invalid packet id derived from {work_id!r}: {checked!r}")
+    if not checked[0].isalnum():
+        raise ValueError(f"invalid packet id: {checked!r}")
+    return checked
+
+
+def _local_atom_id(phase: str) -> str:
+    return phase.lower().replace("_", "-")
+
+
+def _work_ref(atom: Atom) -> str:
+    if atom.phase == "RECIPE":
+        if atom.state.startswith("MATERIALIZED_RECIPE"):
+            return "m3/backports/recipes/" + atom.recipe_ref
+        return "AUTHOR_RECIPE:" + atom.work_id
+    return "PROOF:" + atom.work_id + ":" + atom.phase
+
+
+def write_packets(atoms: Sequence[Atom], directory: Path) -> list[tuple[str, str, Path]]:
+    directory.mkdir(parents=True, exist_ok=True)
+    grouped: dict[str, list[Atom]] = {}
+    for atom in atoms:
+        if atom.executable:
+            grouped.setdefault(atom.work_id, []).append(atom)
+
+    index: list[tuple[str, str, Path]] = []
+    header = (
+        "packet_id\tatom_id\tscope\tscope_promotion_approved\t"
+        "work_ref\tdepends_on\n"
+    )
+    for work_id in sorted(grouped):
+        rows = sorted(grouped[work_id], key=lambda atom: atom.order)
+        packet_id = _packet_id(work_id)
+        local_ids = {atom.atom_id: _local_atom_id(atom.phase) for atom in rows}
+        lines = [header]
+        for atom in rows:
+            dependency = (
+                ""
+                if not atom.depends_on
+                else local_ids[atom.depends_on]
+            )
+            approved = atom.scope != "FILE"
+            lines.append(
+                "\t".join(
+                    (
+                        packet_id,
+                        local_ids[atom.atom_id],
+                        atom.scope,
+                        str(approved).lower(),
+                        _work_ref(atom),
+                        dependency,
+                    )
+                )
+                + "\n"
+            )
+        path = directory / f"{packet_id}.tsv"
+        path.write_text("".join(lines), encoding="utf-8")
+        index.append((work_id, rows[0].state, path))
+    return index
+
+
+def write_packet_index(
+    packets: Sequence[tuple[str, str, Path]], path: Path
+) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as handle:
+        writer = csv.writer(handle, delimiter="\t", lineterminator="\n")
+        writer.writerow(("work_id", "state", "packet"))
+        for work_id, state, packet in packets:
+            writer.writerow((work_id, state, packet.name))
+
+
 def write_tsv(atoms: Sequence[Atom], path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", encoding="utf-8", newline="") as handle:
@@ -406,6 +487,8 @@ def _args(argv: Sequence[str] | None = None) -> argparse.Namespace:
     )
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--summary", type=Path, required=True)
+    parser.add_argument("--packet-dir", type=Path)
+    parser.add_argument("--packet-index", type=Path)
     return parser.parse_args(argv)
 
 
@@ -419,6 +502,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     args.summary.write_text(
         json.dumps(payload, sort_keys=True, indent=2) + "\n", encoding="utf-8"
     )
+    if args.packet_dir is not None:
+        packets = write_packets(atoms, args.packet_dir)
+        if args.packet_index is not None:
+            write_packet_index(packets, args.packet_index)
+        payload["packets"] = len(packets)
+        args.summary.write_text(
+            json.dumps(payload, sort_keys=True, indent=2) + "\n", encoding="utf-8"
+        )
     print(
         f"PASS: {payload['work_items']} work items, {payload['atoms']} atoms, "
         f"{payload['executable_atoms']} executable atoms, root={payload['root']}"
