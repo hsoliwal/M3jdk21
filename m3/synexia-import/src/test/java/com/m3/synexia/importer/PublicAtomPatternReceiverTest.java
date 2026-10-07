@@ -37,6 +37,10 @@ final class PublicAtomPatternReceiverTest {
         assertTrue(verify.contains("--release 21"));
         assertTrue(verify.contains("-Xlint:all"));
         assertTrue(verify.contains("-Werror"));
+        assertTrue(verify.contains("jdk-a3-recipe-export.tsv"));
+        assertTrue(verify.contains("8a3e3d6e802e95dbcc7b0bf83a347887b02d6717"));
+        assertTrue(verify.contains("PUBLIC_A3_EXPORT_SOURCE_DRIFT"));
+        assertTrue(verify.contains("a3ExportFiles"));
         assertFalse(verify.contains("rewrite-maven-plugin"));
         assertFalse(verify.contains("SYNEXIA_RECIPE_VERSION"));
         assertFalse(verify.contains("com.synexia:synexia-openrewrite-recipes"));
