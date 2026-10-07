@@ -35,6 +35,9 @@ jobs:
           bash -n .m3/atomize-patternize/bootstrap.sh
           bash -n .m3/atomize-patternize/install-synexia-recipes.sh
           bash -n .m3/atomize-patternize/run.sh
+          bash -n .m3/atomize-patternize/self-test.sh
+      - name: Source-layout self-test
+        run: bash .m3/atomize-patternize/self-test.sh
       - name: Bind exact repository inventory
         run: |
           set -euo pipefail
