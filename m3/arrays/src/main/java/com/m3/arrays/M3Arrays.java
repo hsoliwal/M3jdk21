@@ -89,7 +89,6 @@ public final class M3Arrays {
 
         public int length() { return data.length; }
         public byte byteAt(int index) { return data[Objects.checkIndex(index, data.length)]; }
-        public int segmentCount() { return data.length == 0 ? 0 : 1; }
         public M3ByteArrayView slice(int start, int end) {
             Objects.checkFromToIndex(start, end, data.length);
             return start == 0 && end == data.length ? this : new ByteSlice(this, start, end);
@@ -171,7 +170,6 @@ public final class M3Arrays {
 
         public int length() { return data.length; }
         public char charAt(int index) { return data[Objects.checkIndex(index, data.length)]; }
-        public int segmentCount() { return data.length == 0 ? 0 : 1; }
         public M3Utf16Facts facts() { return facts; }
         public M3Utf16ArrayView subSequence(int start, int end) {
             Objects.checkFromToIndex(start, end, data.length);
@@ -260,7 +258,6 @@ public final class M3Arrays {
         IntSnapshot(int[] data) { this.data = data; }
         public int length() { return data.length; }
         public int intAt(int index) { return data[Objects.checkIndex(index, data.length)]; }
-        public int segmentCount() { return data.length == 0 ? 0 : 1; }
         public M3IntArrayView slice(int start, int end) {
             Objects.checkFromToIndex(start, end, data.length);
             return start == 0 && end == data.length ? this : new IntSlice(this, start, end);
@@ -272,7 +269,6 @@ public final class M3Arrays {
         IntSlice(M3IntArrayView source, int start, int end) { super(source.length(), start, end); this.source = source; }
         public int length() { return length; }
         public int intAt(int index) { return source.intAt(start + Objects.checkIndex(index, length)); }
-        public int segmentCount() { return length == 0 ? 0 : source.segmentCount(); }
         public M3IntArrayView slice(int from, int to) {
             Objects.checkFromToIndex(from, to, length);
             return from == 0 && to == length ? this : new IntSlice(source, start + from, start + to);
@@ -294,7 +290,6 @@ public final class M3Arrays {
             length = total;
         }
         public int length() { return length; }
-        public int segmentCount() { int n=0; for (M3IntArrayView s:segments) n=Math.addExact(n,s.segmentCount()); return n; }
         public int intAt(int index) { int c=Objects.checkIndex(index,length), s=locate(ends,c), p=s==0?0:ends[s-1]; return segments[s].intAt(c-p); }
         public M3IntArrayView slice(int start,int end) { Objects.checkFromToIndex(start,end,length); return start==0&&end==length?this:new IntSlice(this,start,end); }
     }
@@ -304,7 +299,6 @@ public final class M3Arrays {
         LongSnapshot(long[] data) { this.data = data; }
         public int length() { return data.length; }
         public long longAt(int index) { return data[Objects.checkIndex(index, data.length)]; }
-        public int segmentCount() { return data.length == 0 ? 0 : 1; }
         public M3LongArrayView slice(int start, int end) {
             Objects.checkFromToIndex(start, end, data.length);
             return start == 0 && end == data.length ? this : new LongSlice(this, start, end);
@@ -316,7 +310,6 @@ public final class M3Arrays {
         LongSlice(M3LongArrayView source,int start,int end){super(source.length(),start,end);this.source=source;}
         public int length(){return length;}
         public long longAt(int index){return source.longAt(start+Objects.checkIndex(index,length));}
-        public int segmentCount(){return length==0?0:source.segmentCount();}
         public M3LongArrayView slice(int from,int to){Objects.checkFromToIndex(from,to,length);return from==0&&to==length?this:new LongSlice(source,start+from,start+to);}
     }
 
@@ -329,7 +322,6 @@ public final class M3Arrays {
             for(int i=0;i<segments.length;i++){total=Math.addExact(total,segments[i].length());ends[i]=total;}length=total;
         }
         public int length(){return length;}
-        public int segmentCount(){int n=0;for(M3LongArrayView s:segments)n=Math.addExact(n,s.segmentCount());return n;}
         public long longAt(int index){int c=Objects.checkIndex(index,length),s=locate(ends,c),p=s==0?0:ends[s-1];return segments[s].longAt(c-p);}
         public M3LongArrayView slice(int start,int end){Objects.checkFromToIndex(start,end,length);return start==0&&end==length?this:new LongSlice(this,start,end);}
     }
