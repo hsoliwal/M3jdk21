@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import io
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -77,6 +78,99 @@ class CurrentTreePreimageInventoryTest(unittest.TestCase):
             directory_path.mkdir()
             with self.assertRaisesRegex(ValueError, "non-file"):
                 inventory.inventory(root, ["folder"])
+
+
+    def test_baseline_admission_emits_only_exact_java21_preimages(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            baseline = root / "baseline"
+            current = root / "current"
+            baseline.mkdir()
+            current.mkdir()
+
+            subprocess.run(["git", "-C", str(baseline), "init", "-q"], check=True)
+            subprocess.run(
+                ["git", "-C", str(baseline), "config", "user.email", "m3@example.invalid"],
+                check=True,
+            )
+            subprocess.run(
+                ["git", "-C", str(baseline), "config", "user.name", "M3 Test"],
+                check=True,
+            )
+
+            def write(base: Path, relative: str, text: str) -> None:
+                target = base / relative
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_text(text, encoding="utf-8")
+
+            write(baseline, "a/A.java", "class A {}\n")
+            write(baseline, "c/C.java", "class C {}\n")
+            write(baseline, "e/E.java", "class E {}\n")
+            subprocess.run(["git", "-C", str(baseline), "add", "."], check=True)
+            subprocess.run(
+                ["git", "-C", str(baseline), "commit", "-q", "-m", "baseline"],
+                check=True,
+            )
+
+            write(current, "a/A.java", "class A {}\n")
+            write(current, "c/C.java", "class C { int drift; }\n")
+            write(current, "d/D.java", "class D {}\n")
+
+            paths = [
+                "a/A.java",
+                "b/B.hpp",
+                "c/C.java",
+                "d/D.java",
+                "e/E.java",
+            ]
+            rows = inventory.admit_against_baseline(
+                current,
+                paths,
+                baseline,
+                "HEAD",
+            )
+
+            self.assertEqual(paths, [row.path for row in rows])
+            self.assertEqual(
+                [
+                    "MECHANICAL_FILE_REPLAY",
+                    "MECHANICAL_FILE_REPLAY",
+                    "HOLD_CURRENT_TREE_DRIFT",
+                    "HOLD_CURRENT_TREE_DRIFT",
+                    "HOLD_CURRENT_TREE_DRIFT",
+                ],
+                [row.admission for row in rows],
+            )
+            self.assertEqual("PRESENT", rows[0].current_status)
+            self.assertEqual("PRESENT", rows[0].baseline_status)
+            self.assertEqual(rows[0].current_sha256, rows[0].baseline_sha256)
+            self.assertEqual("ABSENT", rows[1].current_status)
+            self.assertEqual("ABSENT", rows[1].baseline_status)
+            self.assertEqual("PRESENT", rows[3].current_status)
+            self.assertEqual("ABSENT", rows[3].baseline_status)
+            self.assertEqual("ABSENT", rows[4].current_status)
+            self.assertEqual("PRESENT", rows[4].baseline_status)
+
+            tsv = io.StringIO()
+            inventory.write_admission_tsv(rows, tsv)
+            self.assertEqual(
+                "path\tcurrent_status\tcurrent_sha256\tbaseline_status\t"
+                "baseline_sha256\tkind\tadmission\n",
+                tsv.getvalue().splitlines(keepends=True)[0],
+            )
+
+            mechanical = io.StringIO()
+            inventory.write_mechanical_paths(rows, mechanical)
+            self.assertEqual("a/A.java\nb/B.hpp\n", mechanical.getvalue())
+
+    def test_baseline_admission_rejects_invalid_or_missing_ref(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            repo = Path(directory)
+            subprocess.run(["git", "-C", str(repo), "init", "-q"], check=True)
+            with self.assertRaisesRegex(ValueError, "noncanonical Git ref"):
+                inventory.baseline_inventory(repo, "../bad", ["a/A.java"])
+            with self.assertRaisesRegex(ValueError, "baseline Git ref missing"):
+                inventory.baseline_inventory(repo, "missing", ["a/A.java"])
 
     def test_tsv_is_deterministic(self) -> None:
         rows = [
