@@ -7554,6 +7554,156 @@
         },
         "source_state": "implemented",
         "observation": "Donor capability survives in current source. Target port is pending; target field/naming compatibility is not inferred from a matching prefix."
+      },
+      {
+        "id": "synexia.counterpart.MIndexRegexTrigramQuery.sparseLookup",
+        "kind": "adapter",
+        "status": "implemented-unverified",
+        "reason": "Forward refinement of the surviving prepared TQ owner: adaptive sparse set containment. Finite host-kernel/SDK proof; complete custom JVM receiving admission remains pending.",
+        "sources": [
+          {
+            "repo": "hsoliwal/com.synexia",
+            "commit": "cf3796cfca75284e9626b1e31703e41314c9f852",
+            "module": "synexia-indexstring",
+            "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexRegexTrigramQuery.java",
+            "symbol": "com.synexia.indexstring.MIndexRegexTrigramQuery",
+            "signatures": [
+              "Facts precompute(CharSequence,int)",
+              "Facts precompute(CharSequence,int,int,int)",
+              "boolean testPrecomputed(Facts)",
+              "Facts Facts.concat(Facts,int)"
+            ],
+            "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
+            "git_blob_sha1": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea",
+            "fingerprint": null,
+            "revision_role": "pinned",
+            "tracking_ref": "refs/heads/develop"
+          }
+        ],
+        "targets": [
+          {
+            "repo": "hsoliwal/M3jdk21",
+            "commit": null,
+            "module": "java.base",
+            "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+            "symbol": "jdk.internal.mindex.M3TQ",
+            "signatures": [
+              "Facts precompute(CharSequence,int)",
+              "Facts precompute(CharSequence,int,int,int)",
+              "Facts precompute(M3StringBacking,long,int,int,int)",
+              "boolean testPrecomputed(Facts)",
+              "Facts Facts.concat(Facts,int)",
+              "boolean Facts.containsAll(Facts)"
+            ],
+            "sha256": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4",
+            "git_blob_sha1": "533a07b77061e757d476627557413f6df1067d34",
+            "fingerprint": null,
+            "revision_role": "candidate"
+          }
+        ],
+        "owner": "jdk.internal.mindex.M3TQ derived facts; existing M3StringBacking retains payload authority",
+        "identity": {
+          "namespace": "No identity minted. Caller binds facts to the exact immutable owner, id, generation and UTF-16 range.",
+          "generation": "Backing remains open and stable while scanned; returned facts retain no backing or payload reference."
+        },
+        "contract": {
+          "differences": [
+            "JDK package and short TQ name; factories become public only within the unexported internal package.",
+            "Adds direct M3StringBacking range overload using a temporary nonmaterializing reader.",
+            "This packet preserves existing String/Pattern.LITERAL consumers; broader regex dispatch is not qualified."
+          ],
+          "compatibility_obligations": [
+            "Preserve exact UTF-16 keys, short alternatives, AND/OR semantics, budgets, defensive exports and seam composition.",
+            "A guard positive is never a regex match; region/lookaround context remains caller authority.",
+            "No changes to public JDK String, Pattern, Matcher, Class or JNI contracts.",
+            "Facts.containsAll is exact set inclusion only; ordering/multiplicity and exact text matching remain separate."
+          ],
+          "public_surface": [
+            "Internal java.base kernel only; no new exported Java SE API."
+          ]
+        },
+        "format": {
+          "schema": null,
+          "abi": null,
+          "bootstrap": "Only java.base dependencies; Maven/OpenRewrite and JNI verification oracle are tool/test-only."
+        },
+        "dependencies": [
+          {
+            "id": "synexia.counterpart.MIndexRegexTrigramQuery",
+            "resolution": "resolved",
+            "reason": "Existing runtime owner/facts layout and contracts reused."
+          }
+        ],
+        "materialization": {
+          "admission": "One bounded scan of requested UTF-16 units; no materialization or normalization.",
+          "joins": "Merge primitive fact lanes and at most two seam keys, without payload reads.",
+          "outputs": "Caller-owned immutable Facts with sorted unique long[] and scalar boundaries; no retained per-key wrapper.",
+          "cached_facts": "Caller-owned metadata, no global cache. Length budget precedes allocation; no global all-pairs precompute."
+        },
+        "recipe": {
+          "id": "com.synexia.rewrite.M3Jdk21TqSparseLookup",
+          "version": "20261007",
+          "path": "synexia-openrewrite-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/m3jdk21-tq-sparse-lookup/manifest.tsv",
+          "sha256": "725a5dbccbfa4ff834586c21f9c495fffec985dd9d9033f86fc6e808ea421fa2",
+          "preconditions": [
+            "Exact current M3TQ preimage, absent additive semantic test; canonical engine and target contracts retained.",
+            "Actual OpenRewrite SDK execution, byte-exact postimages, fixed point, missing/drift refusal."
+          ],
+          "rollback": "Restore exact parent commit sources; refuse rollback across unrelated edits."
+        },
+        "tests": [
+          {
+            "id": "tq-sparse-host-kernel",
+            "receipt": "m3/tooling/tq/evidence/sparse-lookup-20261007/receipt.json"
+          }
+        ],
+        "provenance": {
+          "license": "Apache-2.0 for copied Synexia kernel and independent JNI oracle. Existing JDK owners and notices are unchanged.",
+          "publication": "User explicitly requested inlining all relevant Synexia optimizations into M3JDK21 with appropriate names.",
+          "copied_code": true
+        },
+        "sync": {
+          "source_revision": "f1e9ff1f2426b20d55f82e50033c0aa8ed66bf72",
+          "target_revision": "d769ee9c3bcfd881f514817cb86c0768e62ed970",
+          "direction": "source-to-target",
+          "target_adaptations": [
+            "Sparse binary lookup with first-key singleton fast path; dense merge unchanged."
+          ],
+          "pending": [
+            "Full custom M3 JDK image and UseM3StringStorage jtreg",
+            "End-to-end String/JMH, retained-memory and cross-platform qualification",
+            "Receiving snapshot reconciliation",
+            "Pre-existing HOLD_MATCHER_STATE_GAP invariant failure"
+          ],
+          "conflicts": []
+        },
+        "lineage": {
+          "previous_sources": [],
+          "previous_targets": [
+            {
+              "repo": "hsoliwal/M3jdk21",
+              "commit": null,
+              "module": "java.base",
+              "path": "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java",
+              "symbol": "jdk.internal.mindex.M3TQ",
+              "signatures": [
+                "Facts precompute(CharSequence,int)",
+                "Facts precompute(CharSequence,int,int,int)",
+                "Facts precompute(M3StringBacking,long,int,int,int)",
+                "boolean testPrecomputed(Facts)",
+                "Facts Facts.concat(Facts,int)",
+                "boolean Facts.containsAll(Facts)"
+              ],
+              "sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+              "git_blob_sha1": "ca23741ecd8cd24593ba5c260aa0d939c53d6766",
+              "fingerprint": null,
+              "revision_role": "candidate"
+            }
+          ],
+          "supersedes": []
+        },
+        "source_state": "implemented",
+        "observation": "Canonical candidate recipe PR hsoliwal/com.synexia#9726. Existing mapping records retain their historical authority. New finite proof does not qualify the full family or change matching semantics."
       }
     ]
   },
