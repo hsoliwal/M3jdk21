@@ -165,7 +165,8 @@ final class M3Jep497MlDsaBackportRecipeTest {
 
         String deterministic = resource(ROOT + "05-MLDSADeterministic.java.after.txt");
         assertTrue(deterministic.contains("changed message verified"));
-        assertTrue(deterministic.contains("MLDSAProviderSmoke.FixedSecureRandom"));
+        assertTrue(deterministic.contains("static final class FixedSecureRandom"));
+        assertTrue(!deterministic.contains("MLDSAProviderSmoke.FixedSecureRandom"));
 
         String smoke = resource(ROOT + "06-MLDSAProviderSmoke.java.after.txt");
         assertTrue(smoke.contains("NamedParameterSpec.ML_DSA_44"));
