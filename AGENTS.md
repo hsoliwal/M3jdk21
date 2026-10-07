@@ -18,6 +18,14 @@ notices. Preserve OpenJDK and other upstream licenses per file/payload; the reci
 not relicense generated target code or embedded donors. Do not introduce a Synexia runtime service
 or Maven/package dependency into Java/HotSpot/JNI to borrow its source.
 
+M3Index-family ownership is additionally pinned by the Synexia invariant
+`docs/M3-SCALE/invariants/SYNEXIA-M3JDK21-CANONICAL-OWNERSHIP-1.md` in the donor repository.
+Within this target, `m3/synexia-import/m3index-family-receiver.tsv` is receiver evidence only:
+`M3Index/MIndex`, IndexString, AST/compiler, data structures, precompute API, DB and reusable
+recipes continue to evolve canonically in Synexia. A copy under `m3/vendor/synexia/` is exact
+custody/proof, not a second implementation authority. OpenJDK runtime integration remains
+M3JDK21-owned.
+
 Preserve public JDK contracts and use the existing target owners and naming map. Qualify exact
 source/target preimages and postimages with compiler/behavior, recipe fixed-point/refusal and
 applicable jtreg/native/runtime gates. Resource-sensitive changes require CPU, retained-heap and
