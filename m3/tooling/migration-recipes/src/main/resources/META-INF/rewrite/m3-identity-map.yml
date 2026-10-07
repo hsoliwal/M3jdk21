@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.IdentityMap
+displayName: M3JDK21 identity map and set proving-ground owners
+description: >-
+  Adds com.m3.collections.M3ObjectIdentityMap and M3ObjectIdentitySet, flat reference-identity
+  owners (== membership, System.identityHashCode hashing, null key/member sidecar, backward-shift
+  deletion, fail-fast forEach) adapted from the first-party Synexia donors DenseIdentityHashMap and
+  DenseIdentityHashSet, plus the differential test against java.util.IdentityHashMap and
+  Collections.newSetFromMap(new IdentityHashMap<>()). Proving ground only (wave 2 of the
+  COLLECTIONS family); no java.util type is replaced.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-identity-map
