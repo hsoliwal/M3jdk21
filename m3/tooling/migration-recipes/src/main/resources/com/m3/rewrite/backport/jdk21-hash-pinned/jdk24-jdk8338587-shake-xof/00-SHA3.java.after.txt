@@ -396,8 +396,8 @@ public abstract class SHA3 extends DigestBase {
     }
     /** Streaming SHAKE base preserving the Java 21 SHA3 byte-state engine. */
     public abstract static class SHA3XOF extends SHA3 {
-        SHA3XOF(String name, int capacity) {
-            super(name, 0, (byte) 0x1F, capacity);
+        SHA3XOF(String name, int digestLength, int capacity) {
+            super(name, digestLength, (byte) 0x1F, capacity);
         }
 
         public void update(byte input) {
@@ -415,6 +415,10 @@ public abstract class SHA3 extends DigestBase {
             Objects.checkFromIndexSize(offset, length, input.length);
             requireAbsorbing();
             engineUpdate(input, offset, length);
+        }
+
+        public byte[] digest() {
+            return engineDigest();
         }
 
         public void squeeze(byte[] output, int offset, int length) {
@@ -438,15 +442,23 @@ public abstract class SHA3 extends DigestBase {
 
     /** SHAKE128 extendable-output function. */
     public static final class SHAKE128 extends SHA3XOF {
+        public SHAKE128(int digestLength) {
+            super("SHAKE128", digestLength, 32);
+        }
+
         public SHAKE128() {
-            super("SHAKE128", 32);
+            this(0);
         }
     }
 
     /** SHAKE256 extendable-output function. */
     public static final class SHAKE256 extends SHA3XOF {
+        public SHAKE256(int digestLength) {
+            super("SHAKE256", digestLength, 64);
+        }
+
         public SHAKE256() {
-            super("SHAKE256", 64);
+            this(0);
         }
     }
 
