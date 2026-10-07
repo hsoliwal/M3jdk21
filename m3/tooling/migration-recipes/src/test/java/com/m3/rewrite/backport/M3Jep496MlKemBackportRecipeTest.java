@@ -97,7 +97,7 @@ final class M3Jep496MlKemBackportRecipeTest {
 
         var first = recipe.run(new InMemoryLargeSourceSet(before), context(), 1);
         List<Result> changes = first.getChangeset().getAllResults();
-        assertEquals(9, changes.size());
+        assertEquals(10, changes.size());
 
         Map<String, SourceFile> after = new TreeMap<>();
         before.forEach(source -> after.put(path(source), source));
@@ -154,6 +154,10 @@ final class M3Jep496MlKemBackportRecipeTest {
         assertTrue(provider.contains("\"KeyPairGenerator\", \"ML-KEM\""));
         assertTrue(provider.contains("\"KeyFactory\", \"ML-KEM\""));
 
+        String smoke = resource(JAVA_ROOT + "07-MLKEMProviderSmoke.java.after.txt");
+        assertTrue(smoke.contains("NamedParameterSpec.ML_KEM_512"));
+        assertTrue(smoke.contains("2.16.840.1.101.3.4.4.1"));
+
         String test = resource(JAVA_ROOT + "06-MLKEMKnownAnswer.java.after.txt");
         assertTrue(test.contains("class MLKEMKnownAnswer"));
         assertTrue(test.contains("private static final class FixedSecureRandom"));
@@ -196,7 +200,7 @@ final class M3Jep496MlKemBackportRecipeTest {
     }
 
     private static List<ManifestRow> javaManifest() throws IOException {
-        return manifest(JAVA_ROOT, 7);
+        return manifest(JAVA_ROOT, 8);
     }
 
     private static List<ManifestRow> textManifest() throws IOException {
