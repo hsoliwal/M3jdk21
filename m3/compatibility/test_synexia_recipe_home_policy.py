@@ -99,7 +99,7 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
             "tooling/migration-recipes/src/main/java/com/m3/rewrite/atom",
             "tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic",
             "tooling/migration-recipes/src/main/java/com/m3/rewrite/a3",
-            "indexdb/src/main/java",
+            "indexdb/src/main/java/com/m3",
         ):
             start = ROOT / directory
             if start.is_dir():
