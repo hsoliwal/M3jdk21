@@ -45,6 +45,15 @@ jobs:
       - name: Diff hygiene
         run: git diff --check
 
+      - name: Refuse JEP 523 product-source drift in proof-only refresh
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE_SHA="80b8534ad1e45002185fb3eeab233f98d3a7c0bd"
+          git diff --exit-code "$BASE_SHA...HEAD" -- \
+            src/hotspot/share/gc/shared/gcConfig.cpp \
+            test/hotspot/jtreg/gc/arguments/TestSelectDefaultGC.java
+
       - name: Prove exact upstream product denominator
         shell: bash
         run: |
