@@ -713,6 +713,8 @@ critical_surfaces = {
     "prepared reverse search": "return storage.lastIndexOf(target, fromIndex);",
     "replace(char,char)": "M3String replaced = storage.replace(oldChar, newChar);",
     "replace(CharSequence,CharSequence)": "M3String replaced = storage.replace(targetM3, replacementM3);",
+    "replaceFirst(String,String)": "return storage.replaceLiteralRegex(this, regex, replacement, true);",
+    "replaceAll(String,String)": "return storage.replaceLiteralRegex(this, regex, replacement, false);",
     "substring": "return new String(storage.slice(beginIndex, endIndex));",
     "concat": "m3Concat(this, str)",
     "trim": "M3StringFacts facts = storage.facts();",
@@ -731,6 +733,48 @@ critical_surfaces = {
 for surface, marker in critical_surfaces.items():
     if marker not in string:
         fail(f"critical String surface lost M3 route: {surface}")
+
+# Recovered indexed regex replacement is a conservative literal atom, not a regex engine.
+literal_history = read("m3/history/string-literal-replacement-lineage.tsv")
+literal_test = read("test/jdk/java/lang/String/M3StringRegexReplacementTest.java")
+if "Apache-2.0" not in read("m3/history/string-literal-replacement-notice.md"):
+    fail("indexed literal replacement lost donor attribution")
+if "Apache License" not in read("m3/history/licenses/Synexia-Apache-2.0.txt"):
+    fail("indexed literal replacement lost retained donor license")
+for pin in [
+    "55af6236dc304042094fe05b26dceb4264ba0707",
+    "866e3a99fd4101f7e21dd67f7db502f70cb38073",
+    "3f49d5427c6060a0f76a9811f917900babe31c61",
+    "a81137c8d8ea78031af9c1382de9170e9d051f518c023afa58fd4df2c148a76f",
+    "Apache-2.0",
+]:
+    if pin not in literal_history:
+        fail(f"indexed literal replacement history lost donor pin: {pin}")
+literal_start = m3.find("    static boolean isLiteralRegexReplacement(")
+literal_end = m3.find("    static int pow31(", literal_start)
+if literal_start < 0 or literal_end < 0:
+    fail("indexed literal replacement owner atom is absent")
+literal_atom = m3[literal_start:literal_end]
+for marker in [
+    "static boolean isLiteralRegexReplacement(String regex, String replacement)",
+    "Character.isSurrogate(unit)",
+    "if (found < 0) return original;",
+    "return new String(replaceMatches(target, canonicalize(replacement), found, firstOnly));",
+    "found = !firstOnly && cursor <= length() - checkedTarget.length()",
+]:
+    if marker not in literal_atom:
+        fail(f"indexed literal replacement owner lost guard/composition: {marker}")
+for marker in [
+    "Pattern.compile(regex).matcher(this).replaceFirst(replacement)",
+    "Pattern.compile(regex).matcher(this).replaceAll(replacement)",
+]:
+    if marker not in string:
+        fail(f"regex replacement lost JDK semantic fallback: {marker}")
+for marker in ["InMemoryJavaCompiler", "ByteCodeLoader", "Pattern.compile", "surrogate", "replaceFirst", "replaceAll"]:
+    if marker not in literal_test:
+        fail(f"indexed literal replacement test lost discriminator: {marker}")
+if workflow.count("test/jdk/java/lang/String/M3StringRegexReplacementTest.java") != 2:
+    fail("indexed literal replacement jtreg test must trigger and run in the existing workflow")
 
 # Current compare/region owners bind both M3 values before testing the route.
 # Require the exact comparison after coordinate/hash candidate shortcuts.
