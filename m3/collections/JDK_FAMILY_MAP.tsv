@@ -1,0 +1,20 @@
+jdk_family	m3_backend	state	primary_shape	contract_note
+ArrayList	M3LongArrayList	RECEIVER_CANDIDATE_V1	contiguous long[]	primitive proving backend; java.util.ArrayList remains authority
+LinkedList	M3LongLinkedList28	EXISTING_PROVING_BACKEND	stable segmented handles + primitive link lanes	not a java.util.LinkedList replacement
+HashSet	M3LongHashSet	RECEIVER_CANDIDATE_V1	open addressing + byte occupancy	all long keys including zero/extrema
+HashMap	M3LongLongHashMap	RECEIVER_CANDIDATE_V1	parallel primitive key/value lanes + open addressing	all long keys/values; no per-entry node
+ArrayDeque	M3LongArrayDeque	RECEIVER_CANDIDATE_V1	power-of-two primitive ring	ordered double-ended semantics
+PriorityQueue	M3LongPriorityQueue	RECEIVER_CANDIDATE_V1	primitive binary min-heap	natural long order
+BitSet	M3BitLane28 / M3ConcurrentBitSet	EXISTING_PROVING_BACKEND	segmented bit lane / atomic bitset	consumer-specific
+ConcurrentHashMap	M3ConcurrentLongMap	EXISTING_LIMITED_BACKEND	immutable snapshot publication	read-heavy small/medium envelope; not CHM semantic replacement
+ConcurrentHashMap.keySet	M3ConcurrentLongSet	EXISTING_LIMITED_BACKEND	immutable snapshot publication	read-heavy small/medium envelope
+LinkedHashMap	M3LongLongLinkedHashMap	PENDING	open-address table + order lanes	name reserved only after contract/algorithm proof
+LinkedHashSet	M3LongLinkedHashSet	PENDING	open-address table + order lanes	name reserved only after contract/algorithm proof
+TreeMap	M3LongLongTreeMap	PENDING	ordered tree selected by benchmark + contract gate	red-black/B-tree alternatives stay additive until proven
+TreeSet	M3LongTreeSet	PENDING	ordered tree selected by benchmark + contract gate	red-black/B-tree alternatives stay additive until proven
+CopyOnWriteArrayList	M3LongCopyOnWriteArrayList	PENDING	copy-on-write primitive snapshot	JMM and iterator-snapshot proof required
+ConcurrentSkipListMap	M3LongLongConcurrentSkipListMap	PENDING	ordered concurrent structure	JMM/linearizability proof required
+ConcurrentSkipListSet	M3LongConcurrentSkipListSet	PENDING	ordered concurrent structure	JMM/linearizability proof required
+IdentityHashMap	M3ObjectIdentityMap	PENDING_OBJECT_SPACE	identity/object-space owner	primitive long equality is not object identity
+WeakHashMap	M3WeakObjectMap	PENDING_OBJECT_SPACE	weak-reference object owner	GC/reference-processing contract required
+EnumMap / EnumSet	M3 enum-specialized owner	PENDING_SPECIALIZATION	dense ordinal lanes	must preserve enum type/serialization contracts
