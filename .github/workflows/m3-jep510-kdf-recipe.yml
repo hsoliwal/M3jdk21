@@ -1,0 +1,48 @@
+name: M3 JEP 510 KDF recipe proof
+
+on:
+  push:
+    branches:
+      - "m3/jep510-kdf-recipe-20261006"
+    paths:
+      - "m3/backports/recipes/j510/**"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jep510KdfBackportRecipe.java"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jep510KdfBackportRecipeTest.java"
+      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk25-jep510-kdf/**"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jep510-kdf.yml"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - ".github/workflows/m3-jep510-kdf-recipe.yml"
+  pull_request:
+    paths:
+      - "m3/backports/recipes/j510/**"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jep510KdfBackportRecipe.java"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jep510KdfBackportRecipeTest.java"
+      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk25-jep510-kdf/**"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jep510-kdf.yml"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/M3RecipeScopeRegistry.java"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - ".github/workflows/m3-jep510-kdf-recipe.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recipe-proof:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: Strict recipe compile and focused JUnit
+        run: >
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml
+          -Dtest=M3Jep510KdfBackportRecipeTest
+          -Dsurefire.failIfNoSpecifiedTests=false test
+      - name: Diff hygiene
+        run: git diff --check
