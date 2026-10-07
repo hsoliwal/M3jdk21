@@ -9,6 +9,8 @@ on:
       - "m3/tooling/migration-recipes/**"
       - "m3/docs/synexia-apache2-borrowing-contract.md"
       - "m3/compatibility/synexia-canonical-residue-gitblobs.tsv"
+      - "m3/compatibility/test_synexia_recipe_home_policy.py"
+      - "m3/compatibility/check_synexia_recipe_ownership.py"
       - "m3/compatibility/synexia-recipe-home-policy.tsv"
       - "m3/indexdb/src/main/**"
       - "m3/tooling/recipe-catalogue.tsv"
@@ -63,6 +65,16 @@ jobs:
           tar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"
           printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
           printf '%s\n' "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
+
+      - name: Synexia canonical ownership compatibility proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 "$REPO/m3/compatibility/check_synexia_recipe_ownership.py"
+          python3 -m unittest discover \
+            -s "$REPO/m3/compatibility" \
+            -p 'test_synexia_recipe_home_policy.py' \
+            -v
 
       - name: Maven JUnit OpenRewrite proof
         shell: bash
