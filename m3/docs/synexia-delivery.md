@@ -145,3 +145,16 @@ OpenJDK source outside the independent Apache-owned m3/ subtree retains its exis
 notice regime. Moving or adapting imported Apache code into OpenJDK-owned files requires a
 separate compatibility/provenance review; this automatic import contract does not perform that
 step.
+
+
+## Canonical M3* family receiver
+
+The forward reusable implementation authority is the Synexia M3* family. MIndex, MatIndex and MAT
+surfaces are compatibility/history inputs, not a second forward owner. The target-side family map is
+checked in at `m3/synexia-import/m3-canonical-family-receiver.tsv`; policy rationale is in
+`m3/synexia-import/M3_CANONICAL_FAMILY_RECEIVER.md`.
+
+M3JDK21 must not independently evolve generic M3 collection, text, AST, DAG, data-structure,
+precompute, search/regex, JNI/native or reusable recipe implementations. Reusable defects and
+optimizations flow back to Synexia, are proved there, and return as a pinned Apache-2.0 handoff.
+Target-local JDK integration remains owned here.
