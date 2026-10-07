@@ -52,6 +52,29 @@ algorithm-kernel source and parity tests, plus the Synexia LICENSE and NOTICE.
 These snapshots are intentionally outside the normal Maven source roots. They are verified donor
 inputs, not automatically compiled product code.
 
+## M3Index family receiver
+
+The full M3Index family uses the same automatic Apache custody lane; it does not use a second
+database, recipe repository, or migration framework.
+
+Receiver classification is checked in at:
+
+    m3/synexia-import/m3index-family-receiver.tsv
+
+Admitted family prefixes include the M3Index alias reactor, IndexString, MIndex compiler/AST,
+data-structure, precompute-api, DB, OpenRewrite recipes, convergence kernels and M3 recipe owners.
+Each automatic target path must be exactly:
+
+    m3/vendor/synexia/<original Synexia source path>
+
+This mirror rule makes the vendored snapshot evidence/custody only. Java classes under the vendor
+tree are not automatically compiled into the JDK and do not supersede the canonical Synexia
+implementation.
+
+The existing 15-row seed snapshot remains a historical bounded seed. Expanding the full family
+requires a new exact Synexia revision and generated manifest; do not mutate the old seed/root to
+pretend a later import already happened.
+
 ## Receiver
 
 The Java-21 receiver lives at m3/synexia-import.

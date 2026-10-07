@@ -166,6 +166,27 @@ final class SynexiaImporterTest {
     }
 
     @Test
+    void producerAndReceiverShareKnownDeliveryRootVector() {
+        SynexiaImportManifest.Entry entry =
+                new SynexiaImportManifest.Entry(
+                        "java",
+                        "A.java",
+                        "m3/vendor/synexia/A.java",
+                        "1".repeat(64),
+                        "Apache-2.0",
+                        SynexiaImportManifest.Mode.APACHE_SOURCE);
+        SynexiaImportManifest manifest =
+                new SynexiaImportManifest(
+                        "a".repeat(40),
+                        "m3jdk21",
+                        List.of(entry),
+                        "");
+        assertEquals(
+                "01b4e1f8804e2699c9133c3ca7dbf3f2841f2ff3991096778a6131cbc9c3fc55",
+                manifest.root());
+    }
+
+    @Test
     void duplicateTargetAndRootMismatchFailClosed() {
         SynexiaImportManifest.Entry entry = new SynexiaImportManifest.Entry(
                 "java",

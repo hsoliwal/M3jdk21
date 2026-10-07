@@ -1,0 +1,10 @@
+family	source_prefix	canonical_synexia_owner	receiver_disposition	license
+M3INDEX_ALIAS	synexia-m3index/	com.synexia:synexia-m3index-core	PINNED_VENDOR_CUSTODY	Apache-2.0
+INDEXSTRING	synexia-indexstring/	com.synexia:synexia-m3index-jdk-bridge	PINNED_VENDOR_CUSTODY	Apache-2.0
+M3INDEX_COMPILER	synexia-mindex/compiler/	com.synexia:synexia-m3index-compiler	PINNED_VENDOR_CUSTODY	Apache-2.0
+M3INDEX_DATA_STRUCTURE	synexia-mindex/data-structure/	com.synexia:synexia-m3index-data-structure	PINNED_VENDOR_CUSTODY	Apache-2.0
+M3INDEX_PRECOMPUTE_API	synexia-mindex/precompute-api/	com.synexia:synexia-m3index-precompute-api	PINNED_VENDOR_CUSTODY	Apache-2.0
+M3INDEX_DB	synexia-mindex/db/	com.synexia:synexia-m3index-db	PINNED_VENDOR_CUSTODY	Apache-2.0
+OPENREWRITE	synexia-openrewrite-recipes/	com.synexia:synexia-openrewrite-recipes	PINNED_VENDOR_CUSTODY	Apache-2.0
+CODE_CONVERGENCE	synexia-code-convergence/	com.synexia:synexia-code-convergence	PINNED_VENDOR_CUSTODY	Apache-2.0
+M3_RECIPE	synexia-m3-recipe/	com.synexia:synexia-m3-recipe	PINNED_VENDOR_CUSTODY	Apache-2.0
