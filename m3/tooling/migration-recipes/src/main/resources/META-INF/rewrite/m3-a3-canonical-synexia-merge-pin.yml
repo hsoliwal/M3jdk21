@@ -1,0 +1,12 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.a3.CanonicalSynexiaMergePin
+displayName: Pin A3 receiver to merged canonical Synexia owner
+description: >
+  Replaces the temporary Synexia PR-head provenance pin with the accepted canonical merge commit
+  for the portable A3 mastery export without changing A3 runtime semantics.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: synexia-a3-canonical-merge-pin
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: synexia-a3-canonical-merge-pin-text
