@@ -69,7 +69,7 @@ The first pass is strictly file-atomic:
 4. compare every cumulative candidate against the exact JDK21 baseline before generation;
 5. on the current tree, require 61 mechanically replayable FILE preimages and keep
    `test/hotspot/jtreg/gc/g1/TestEvacuationFailure.java` on explicit HOLD;
-6. generate one exact Java/text/native FILE atom per mechanically admitted path from JDK22 GA;
+6. generate one exact Java/text/native FILE atom per mechanically admitted path from the final required repair commit;
 7. retain per-file atom/pattern/IOP evidence plus JUnit/jtreg/native proof references;
 8. only after all admitted FILE atoms reach fixed point may G1 package/module composition be
    proposed.
@@ -87,7 +87,7 @@ No LIBRARY_API promotion is implied by this inventory.
 
 ## Required proof before promotion
 
-- exact path denominator and JDK22 GA cumulative state;
+- exact path denominator and final required repair-tree state;
 - no unaccounted upstream path;
 - source-bound replay/fixed point for every admitted path;
 - HotSpot release build on the Java21 baseline;
