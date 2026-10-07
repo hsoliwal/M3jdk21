@@ -18,6 +18,10 @@ import java.nio.charset.UnmappableCharacterException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Spliterator;
+import java.util.function.IntConsumer;
+import java.util.stream.IntStream;
+import java.util.stream.StreamSupport;
 import sun.nio.cs.ArrayEncoder;
 
 /**
@@ -298,6 +302,14 @@ final class M3String implements CharSequence {
         return slice(beginIndex, endIndex);
     }
 
+    IntStream charsStream() {
+        return StreamSupport.intStream(new CharsSpliterator(this, 0, length()), false);
+    }
+
+    IntStream codePointsStream() {
+        return StreamSupport.intStream(new CodePointsSpliterator(this, 0, length()), false);
+    }
+
     int hashCodeValue() {
         return isWholeOwner() ? owner.javaHash : facts().javaHash;
     }
@@ -312,6 +324,118 @@ final class M3String implements CharSequence {
         return start() == 0 && length() == owner.length
                 ? owner.factsIfPrepared()
                 : owner.rangeFactsIfPrepared(value);
+    }
+
+    private static final class CharsSpliterator implements Spliterator.OfInt {
+        private final M3String source;
+        private int index;
+        private final int fence;
+
+        CharsSpliterator(M3String source, int index, int fence) {
+            this.source = Objects.requireNonNull(source, "source");
+            this.index = index;
+            this.fence = fence;
+        }
+
+        @Override
+        public OfInt trySplit() {
+            int lo = index;
+            int mid = (lo + fence) >>> 1;
+            if (mid <= lo) return null;
+            index = mid;
+            return new CharsSpliterator(source, lo, mid);
+        }
+
+        @Override
+        public boolean tryAdvance(IntConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (index >= fence) return false;
+            action.accept(source.charAt(index++));
+            return true;
+        }
+
+        @Override
+        public void forEachRemaining(IntConsumer action) {
+            Objects.requireNonNull(action, "action");
+            for (int at = index; at < fence; at++) action.accept(source.charAt(at));
+            index = fence;
+        }
+
+        @Override
+        public long estimateSize() {
+            return fence - index;
+        }
+
+        @Override
+        public int characteristics() {
+            return Spliterator.ORDERED
+                    | Spliterator.IMMUTABLE
+                    | Spliterator.SIZED
+                    | Spliterator.SUBSIZED;
+        }
+    }
+
+    private static final class CodePointsSpliterator implements Spliterator.OfInt {
+        private final M3String source;
+        private int index;
+        private final int fence;
+
+        CodePointsSpliterator(M3String source, int index, int fence) {
+            this.source = Objects.requireNonNull(source, "source");
+            this.index = index;
+            this.fence = fence;
+        }
+
+        @Override
+        public OfInt trySplit() {
+            int lo = index;
+            int mid = (lo + fence) >>> 1;
+            if (mid <= lo) return null;
+            if (mid < fence
+                    && mid > lo
+                    && Character.isLowSurrogate(source.charAt(mid))
+                    && Character.isHighSurrogate(source.charAt(mid - 1))) {
+                mid--;
+            }
+            if (mid <= lo) return null;
+            index = mid;
+            return new CodePointsSpliterator(source, lo, mid);
+        }
+
+        @Override
+        public boolean tryAdvance(IntConsumer action) {
+            Objects.requireNonNull(action, "action");
+            if (index >= fence) return false;
+            char first = source.charAt(index++);
+            if (Character.isHighSurrogate(first) && index < fence) {
+                char second = source.charAt(index);
+                if (Character.isLowSurrogate(second)) {
+                    index++;
+                    action.accept(Character.toCodePoint(first, second));
+                    return true;
+                }
+            }
+            action.accept(first);
+            return true;
+        }
+
+        @Override
+        public void forEachRemaining(IntConsumer action) {
+            Objects.requireNonNull(action, "action");
+            while (tryAdvance(action)) {
+                // exact UTF-16 traversal; tryAdvance owns surrogate-pair boundaries.
+            }
+        }
+
+        @Override
+        public long estimateSize() {
+            return fence - index;
+        }
+
+        @Override
+        public int characteristics() {
+            return Spliterator.ORDERED | Spliterator.IMMUTABLE;
+        }
     }
 
     private boolean isWholeOwner() {
