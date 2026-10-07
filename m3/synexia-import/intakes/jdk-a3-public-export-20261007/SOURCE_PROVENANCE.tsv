@@ -1,0 +1,11 @@
+key	value
+source_repository	hsoliwal/com.synexia
+source_revision	a062661e91e769a00c2d027e1f04a7a0c8f9dc28
+source_pr	9599
+source_export_pom	synexia-openrewrite-recipes/pom-jdk-a3-export.xml
+source_export_pom_git_blob	7beaa39f614d9327dabf916b25ef85c663653bc5
+export_manifest	synexia-openrewrite-recipes/src/main/resources/META-INF/m3/jdk-a3-recipe-export.tsv
+export_manifest_git_blob	8a3e3d6e802e95dbcc7b0bf83a347887b02d6717
+license	Apache-2.0
+target_artifact	com.synexia:synexia-jdk-a3-recipes:1.0.0-SNAPSHOT
+target_source_root	m3/vendor/synexia/synexia-openrewrite-recipes
