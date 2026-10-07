@@ -1,5 +1,13 @@
 # M3JDK21
 
+**Compute once. Reuse broadly. Make Java do less repeated work.**
+
+M3JDK21 is building toward a Java runtime that shares more, allocates less, and
+reuses work already done. The roadmap starts with M3 String, regex, and
+precompute, extends into lean collections, and then brings those gains to SWT
+and the Eclipse IDE. Compatibility and reproducible measurements are the gates
+for turning that ambition into release claims.
+
 **M3JDK21** is the Java 21 product/runtime target for M3 work led by Hitesh Soliwal and Contributors to the Synexia Project. M3 focuses on reducing redundant CPU work and retained
 memory through M3Index/precomputation, mechanical transformation, reusable
 recipes, and verification while preserving required JDK behavior and contracts.
