@@ -9,6 +9,7 @@ on:
     paths:
       - "m3/compatibility/synexia-recipe-home-policy.tsv"
       - "m3/compatibility/test_synexia_recipe_home_policy.py"
+      - "m3/compatibility/test_synexia_recipe_mirror_receiver_v2.py"
       - "m3/docs/mindex-migration-handoff.md"
       - "m3/compatibility/test_synexia_m3index_ownership_policy.py"
       - "m3/compatibility/SYNEXIA_M3INDEX_RECEIVER.md"
@@ -25,6 +26,7 @@ on:
     paths:
       - "m3/compatibility/synexia-recipe-home-policy.tsv"
       - "m3/compatibility/test_synexia_recipe_home_policy.py"
+      - "m3/compatibility/test_synexia_recipe_mirror_receiver_v2.py"
       - "m3/docs/mindex-migration-handoff.md"
       - "m3/compatibility/test_synexia_m3index_ownership_policy.py"
       - "m3/compatibility/SYNEXIA_M3INDEX_RECEIVER.md"
@@ -82,6 +84,7 @@ jobs:
           python -m unittest
           m3/compatibility/test_synexia_recipe_home_policy.py
           m3/compatibility/test_synexia_m3index_ownership_policy.py
+          m3/compatibility/test_synexia_recipe_mirror_receiver_v2.py
       - name: Migration-recipes JUnit ownership proof
         run: >
           mvn -B -ntp
