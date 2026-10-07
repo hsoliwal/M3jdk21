@@ -17,8 +17,14 @@ binds all of these gates to the same Nebula proof commit:
 - second application fixed point `SUCCESS`;
 - original Nebula Maven/Tycho build on the transformed candidate `SUCCESS`.
 
-The current receipt binds Nebula PR #96 head
-`75277c72c16c86ac66b11661661f2b5a22c9a9b4` and records the actual failed/pending state.
+The current receipt binds Nebula PR #104 head
+`fd8589d378ad9c68ab9a7254e5e73957e0744d86`.
+
+PR #104 repairs the stale Grid Counters V1 custody assumption by proving the reviewed
+V0 -> V1 -> V2 chain, but the current hosted proof runs failed before GitHub created any jobs.
+The receiver therefore records `ACTIONS_STARTUP_BLOCKED_NO_JOBS` and keeps every executable gate
+at `PENDING`.
+
 It therefore **cannot** authorize OpenJDK source mutation.
 
 Once the exact Nebula receipt is green, the transferred DAG still enters M3JDK21 through the
