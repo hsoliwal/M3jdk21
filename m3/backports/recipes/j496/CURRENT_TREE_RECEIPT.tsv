@@ -1,0 +1,10 @@
+field	value
+jep	496
+current_tree_state	DEPENDENCY_MATERIALIZED_UNVERIFIED
+blocking_dependency	JDK-8338587_SHAKE_XOF
+dependency_receipt	m3/backports/recipes/jdk-8338587-shake-xof/CURRENT_TREE_RECEIPT.tsv
+named_key_framework	PRESENT_CURRENT_TREE
+feature_materialization	HELD_UNTIL_DEPENDENCY_PROOF
+java21_contract	SECURITY_LIBRARY_EXTENSION_CANDIDATE
+promotion	NOT_AUTHORIZED
+next_action	PROVE_SHAKE_XOF_THEN_MATERIALIZE_ML_KEM_FEATURE_CRATE
