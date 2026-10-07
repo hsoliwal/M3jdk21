@@ -23,6 +23,8 @@ REQUIRED_POLICY = {
     "approximate_signals_have_semantic_authority": "false",
     "blind_mindex_to_m3_rename": "false",
     "collections_migrate_per_concrete_owner": "true",
+    "challenge_review_order": "LEETCODE_HACKERRANK_GEEKSFORGEEKS",
+    "challenge_evidence_authority": "CATEGORY_AND_BOUNDARY_FIXTURES_ONLY",
 }
 
 def sha256(path: Path) -> str:
