@@ -38,7 +38,9 @@ public final class M3RegexShape {
         int begin = start ? 2 : 0;
         int finish = end ? expression.length() - 2 : expression.length();
         String literal = decodeLiteral(expression, begin, finish);
-        if (literal == null) return new M3RegexShape(expression, Kind.GENERAL, "");
+        if (literal == null || literal.isEmpty()) {
+            return new M3RegexShape(expression, Kind.GENERAL, "");
+        }
 
         Kind kind =
                 start && end
