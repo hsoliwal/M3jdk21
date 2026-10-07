@@ -10,6 +10,7 @@ integration evidence.
 ## Included M3 owners
 
 - `com.m3.util.M3PrimitiveKind`
+- package-private `com.m3.util.M3DenseHash` implementation atom
 - `com.m3.util.M3PrimitiveArrayList`
 - `com.m3.util.M3PrimitiveArrayDeque`
 - `com.m3.util.M3IntArrayDeque`
