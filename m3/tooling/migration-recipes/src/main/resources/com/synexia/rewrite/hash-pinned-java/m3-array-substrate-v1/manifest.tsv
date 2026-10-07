@@ -1,0 +1,12 @@
+# path	before_sha256	after_sha256	resource
+m3/arrays/src/main/java/com/m3/arrays/M3ArrayNative.java	ABSENT	54e15c58f4467d2e27155b521e49e1bfe81d0bce1459e2c804c38ade5fcd4eec	00-M3ArrayNative.java.txt
+m3/arrays/src/main/java/com/m3/arrays/M3Arrays.java	ABSENT	4ff415ed6cc0ece4e30bd17aa3e675c9115f4ac509d8ea93001ccd27c77c3dd7	01-M3Arrays.java.txt
+m3/arrays/src/main/java/com/m3/arrays/M3ByteArrayView.java	ABSENT	4e5d750bf138e744a2d7ff31e7b79edd1044d66372a13c4fbededfb28adcbb2b	02-M3ByteArrayView.java.txt
+m3/arrays/src/main/java/com/m3/arrays/M3IntArrayView.java	ABSENT	60b056f30ff6e6b19a4197401b8b0faa2fce57208eb4b6744f9340ae0082e6eb	03-M3IntArrayView.java.txt
+m3/arrays/src/main/java/com/m3/arrays/M3LongArrayView.java	ABSENT	065da79db609116600f90e7fa650ca589abfa5fd8b988c9b865898f1633efd84	04-M3LongArrayView.java.txt
+m3/arrays/src/main/java/com/m3/arrays/M3Utf16ArrayView.java	ABSENT	69076f0cbd6744bc2a0d0dedb55ae6ad94bdef8faccb42a241efc579fddfbe62	05-M3Utf16ArrayView.java.txt
+m3/arrays/src/main/java/com/m3/arrays/M3Utf16Facts.java	ABSENT	d1716b27289912f6d75ab2538aa9431f19324d6bb510f5c196c9cd5dab3176a8	06-M3Utf16Facts.java.txt
+m3/arrays/src/main/java/module-info.java	ABSENT	fcdc79c97c36428da6e359f6b0310140550b0eb5d8c8b2b3c04b8d55d94e0ca5	07-module-info.java.txt
+m3/arrays/src/test/java/com/m3/arrays/M3ArrayNativeTest.java	ABSENT	e0b08d8dae4311127827dc606723180aa3a7f0a1141a147d30b8cdbe1a65a63e	08-M3ArrayNativeTest.java.txt
+m3/arrays/src/test/java/com/m3/arrays/M3ArraysTest.java	ABSENT	5d7743392eb2a492c7af9a0a89347ab92bc14a03c8ac360ec6e119d0251e927c	09-M3ArraysTest.java.txt
+m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3ArraySubstrateRecipeTest.java	ABSENT	25e22accc773243a04b9aa0c494f11d914344c4fac0c636d67851530aea2051c	10-M3ArraySubstrateRecipeTest.java.txt
