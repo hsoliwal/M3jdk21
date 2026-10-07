@@ -2,7 +2,7 @@
   "schema": 1,
   "target_repository": "hsoliwal/M3jdk21",
   "target_module": "m3/arrays",
-  "target_base": "a694bbd2b3c382a40d401a813ae547293c9d1074",
+  "target_base": "6c8881d2e3fe6055b700947c509f1db3e1c67e03",
   "source_repository": "hsoliwal/com.synexia",
   "source_revision": "8e1f56d448fd31ee5b666c922947e39c2036d4fd",
   "license_boundary": "Synexia first-party donor/reference material Apache-2.0; m3/arrays independently Apache-2.0; OpenJDK-derived sources are not relicensed or modified in this slice.",
@@ -114,5 +114,12 @@
     "not shared/mapped cross-process acceptance",
     "not collection replacement acceptance",
     "not full JNI/platform acceptance until native profile executes"
-  ]
+  ],
+  "recipe": {
+    "declarative": "com.m3.M3ArraySubstrate",
+    "java_owner": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "text_owner": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
+    "crate": "m3-array-substrate-v1",
+    "policy": "target-specific adapter only; reusable recipe engine remains canonical in Synexia"
+  }
 }
