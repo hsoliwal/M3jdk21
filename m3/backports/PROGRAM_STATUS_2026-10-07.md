@@ -114,3 +114,24 @@ The new `CURRENT_TREE_RECEIPT.tsv` therefore classifies JEP 485 as
 `CANDIDATE_MATERIALIZED_UNVERIFIED`. This is an opt-in SE API extension, not stock Java 21
 identity. Recipe replay, JDK image build, Gatherer jtreg, existing Stream regressions, API smoke,
 and fixed-point/readback remain pending. Promotion remains `NOT_AUTHORIZED`.
+
+
+### JEP 454 FFM finalization inventory
+
+JEP 454 is now represented by a dependency-only packet at
+`m3/backports/recipes/jep-454-ffm/`.
+
+Pinned lineage:
+
+- JDK21 third preview: `cbccc4c8172797ea2f1b7c301d00add3f517546d`
+- JDK22 finalization: `32ac72c3d35138f5253e4defc948304ac3ea1b53`
+- finalization denominator: 261 paths
+
+The packet records 15 explicit preview-to-final API/behavior deltas and classifies the 261 paths
+into public API, internal runtime, ABI linkers, native fallback linker, method/var-handle
+integration, native-access policy, consumers, jtreg and benchmark planes.
+
+This is `PACKET_EVIDENCE` only. Default Java21 remains `NO`;
+classification remains `OPT_IN_SE_API_EXTENSION`; promotion remains `NOT_AUTHORIZED`.
+No product source is changed and no backport recipe may be authored until the API/dependency split
+is closed.
