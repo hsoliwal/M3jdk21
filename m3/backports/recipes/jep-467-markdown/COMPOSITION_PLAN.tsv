@@ -7,4 +7,4 @@ markdown-module	MODULE	147	new private CommonMark-derived parser module plus leg
 javadoc	MODULE	28	standard doclet, doclint, tool and rendering integration	false
 markdown-tests	MODULE	12	focused JEP467 Markdown documentation-comment tests	false
 regression-tests	MULTI_MODULE	25	existing javac/javadoc/classfile regressions touched by implementation	false
-feature-join	LIBRARY_API	250	join only reviewed groups after GA-followup and public/legal review	false
+feature-join	LIBRARY_API	251	join only reviewed groups after GA-followup and public/legal review	false
