@@ -306,6 +306,30 @@
       "status": "inventory mapping",
       "source_role": "distributed/hardware precompute execution",
       "target_rule": "M3JDK java.base must not depend on Jini/TPU/NPU/Tornado runtimes; import only validated precompute products through target-owned internal boundaries."
+    },
+    {
+      "source": "com.synexia.indexstring.precompute.MIndexRe2MechanicalFacts",
+      "target": "java.util.regex internal candidate/cost evidence + jdk.internal.mindex.M3TQ where semantically safe",
+      "status": "selective internal mapping; no RE2/J runtime dependency",
+      "source_role": "Synexia donor/reference mechanical regex precompute",
+      "source_revision": "f07aa85ba83749bbb2b6fa4a7a169b38aaac8ba2",
+      "target_rule": "program size, capture count and named-group geometry are advisory planning evidence only; stock Pattern/Matcher remains semantic authority; never retain on M3String"
+    },
+    {
+      "source": "com.synexia.indexstring.precompute.MIndexLucenePostingPlan",
+      "target": "no java.lang.String owner; target search/index service only after separate consumer admission",
+      "status": "do not port to java.lang.String",
+      "source_role": "Synexia donor/reference posting planner",
+      "source_revision": "f07aa85ba83749bbb2b6fa4a7a169b38aaac8ba2",
+      "target_rule": "cost-led conjunction/disjunction schedules remain higher-layer routing metadata; no Lucene runtime dependency or String field"
+    },
+    {
+      "source": "com.synexia.indexstring.precompute.MIndexTweetyGraphQueryIndex",
+      "target": "no java.base String owner; target reasoning/query service only after separate product admission",
+      "status": "do not port to java.lang.String",
+      "source_role": "Synexia clean-room Tweety-inspired reasoning precompute",
+      "source_revision": "f07aa85ba83749bbb2b6fa4a7a169b38aaac8ba2",
+      "target_rule": "closure/SCC/parity/argumentation/reasoning facts remain reasoning-layer metadata and never become M3String fields or public String API"
     }
   ],
   "imported_donor_sources": [],
