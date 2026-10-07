@@ -30,3 +30,24 @@ Verification obligations remain separate:
 - every other runtime-integration target must still be exact `after` or explicit `superseded`;
 - the original runtime patch bytes remain content-addressed;
 - arbitrary drift and symlink targets remain refused.
+
+## libjava `jni_util.c` and SA `OopUtilities.java` (2026-10-07)
+
+The consolidate commit `26320a320f` replaced `java.lang.MIndexString` with `java.lang.M3String`
+(`String.m3`, owner + packed coordinate) but left two readers on the old layout:
+
+- `src/java.base/share/native/libjava/jni_util.c` (master blob `3552e9ade564428dabb07dc17768909d0bcd838b`,
+  SHA-256 `f19521f723ecf9a4cdf639a04b93c0dece27e37f5877d756f007adbdc16d6a16`): `InitializeEncoding`
+  cached `GetFieldID(String, "mindex", "Ljava/lang/MIndexString;")` with `CHECK_NULL`, leaving a pending
+  `NoSuchFieldError` on every VM start.
+- `src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/OopUtilities.java` (master blob
+  `996cd6f7133d4d0f7e301e51b75f511d321146b9`, SHA-256
+  `5c76caf1c717e4f05c0f2f8adf87265422c0a0e3571dc5e852f8ceaa476c90ba`): decoded `mindex` segment arrays.
+
+Both are superseded by the hash-pinned crate `m3-jni-sa-m3-field`
+(`com.m3.rewrite.backport.M3JniSaM3FieldRecipe`, Java lane `jdk21-hash-pinned/m3-jni-sa-m3-field`,
+text lane `jdk21-hash-pinned-text/m3-jni-sa-m3-field`). Postimage SHA-256:
+`jni_util.c` `4669c033c1b820ee90eb7fbe9f0c3ead9681312853e5675d360bb8db81e697f7`,
+`OopUtilities.java` `f964925e59e6b1ef233d3508a6ba901afc9c4bf1430b60fc6ea0f71d6999cc86`.
+The older `runtime.patch` image (MIndexString era) remains stale for these two paths and for the
+`M3String` runtime files; regenerating it against current master is a separate leaf (R1).
