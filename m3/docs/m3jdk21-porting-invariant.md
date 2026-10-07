@@ -243,6 +243,29 @@ and native/process-memory evidence with exact workloads and environments. Target
 platform gates remain explicit; a reusable donor recipe alone does not establish target acceptance.
 
 
+## Full-family machine pin
+
+The receiving authority for the complete Synexia MIndex/M3Index lineage is
+`m3/compatibility/synexia-full-family-pin.tsv`, enforced by
+`m3/compatibility/check_synexia_full_family.py`.
+
+The pin deliberately remains qualification-only while the source PR is open and while all 4,770
+catalogue rows remain unevaluated. It cannot enable automatic application, target relicensing or a
+family-completion claim.
+
+For first-party material, preserve the recorded work attribution:
+
+```text
+Copyright 2026 Hitesh Soliwal and contributors
+Licensed under the Apache License, Version 2.0.
+```
+
+That attribution applies to the concrete Synexia work/expression covered by Apache-2.0—source
+implementation, recipes, tests, fixtures, original expressive design documentation, manifests,
+schemas and original generated configuration. Abstract ideas, algorithms, concepts, methods and
+systems are not relabeled as copyrighted source expression merely because Synexia implements them.
+Third-party and OpenJDK bodies retain their original copyright/license/NOTICE.
+
 # M3-SYNEXIA-RECEIVER-1: full Synexia to M3JDK lineage
 
 Synexia is the canonical convergence and reusable-recipe owner. M3JDK21 receives the
