@@ -1,0 +1,3 @@
+schema	source_repository	source_revision	source_path	source_git_blob	purpose
+M3_SYNEXIA_RECIPE_OWNERSHIP_INTAKE_V1	hsoliwal/com.synexia	d479e02178d908fd59df941c7d91275970d412d3	.m3/m3jdk21-synexia-borrowing.tsv	ca2962ae1ae6ad6f59bf7b371dff9cdc835af20c	M3JDK21 exact borrowing/classification authority
+M3_SYNEXIA_RECIPE_OWNERSHIP_INTAKE_V1	hsoliwal/com.synexia	d479e02178d908fd59df941c7d91275970d412d3	.m3/recipe-ownership.tsv	f39177dd6fb596d25163c8802f5738778ef29c61	canonical repository/module/namespace ownership authority

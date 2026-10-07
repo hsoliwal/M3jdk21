@@ -53,7 +53,9 @@ jobs:
           cache: maven
       - name: Diff hygiene
         run: git diff --check origin/master...HEAD
-      - name: Verify imported Synexia vendor snapshot
+      - name: Verify target-local recipe ownership classification
+        run: python3 m3/runtime-integration/verify-recipe-ownership.py
+      - name: Verify imported Synexia vendor snapshot and canonical recipe ownership intake
         run: >
           mvn -B -ntp
           -f m3/synexia-import/pom.xml
