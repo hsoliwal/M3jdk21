@@ -49,18 +49,34 @@ jobs:
           java-version: "21"
           cache: maven
 
-      - name: 0 - Consume canonical Synexia workflow-structure validator
+      - name: 0 - Verify canonical Synexia validator provenance receiver
         shell: bash
         run: |
           set -euo pipefail
-          SYNEXIA="$RUNNER_TEMP/synexia-recipe-owner"
-          git init -q "$SYNEXIA"
-          git -C "$SYNEXIA" remote add origin https://github.com/hsoliwal/com.synexia.git
-          git -C "$SYNEXIA" -c protocol.version=2 fetch -q --depth=1 origin 0f0f9965092955c15f5c32f5eb102137fd0dbf8e
-          test "$(git -C "$SYNEXIA" rev-parse FETCH_HEAD)" = "0f0f9965092955c15f5c32f5eb102137fd0dbf8e"
-          java "$SYNEXIA/synexia-code-convergence/tools/WorkflowStructureCheck.java" \
-            .github/workflows/m3-jep493-runtime-image-materialize.yml \
-            .github/workflows/m3-jep493-runtime-image-inventory.yml
+          # Reaching this step is itself proof that GitHub Actions parsed/admitted this workflow.
+          test -n "${GITHUB_JOB:-}"
+          python3 - <<'PY'
+          import csv
+          from pathlib import Path
+
+          path = Path("m3/backports/recipes/jep-493-runtime-image/WORKFLOW_VALIDATOR_RECEIVER.tsv")
+          rows = dict(csv.reader(path.open(encoding="utf-8", newline=""), delimiter="\t"))
+          expected = {
+              "canonical_repository": "hsoliwal/com.synexia",
+              "canonical_commit": "0f0f9965092955c15f5c32f5eb102137fd0dbf8e",
+              "canonical_path": "synexia-code-convergence/tools/WorkflowStructureCheck.java",
+              "canonical_git_blob": "f61be81f5a15bea78f1c5ae7d5555844c9cd2ea7",
+              "canonical_owner": "SYNEXIA",
+              "target_role": "M3JDK21_THIN_RECEIVER",
+              "startup_oracle": "GITHUB_ACTIONS_JOB_ADMISSION",
+              "required_failure_modes": "DUPLICATE_MAPPING_KEY,EMPTY_JOB,STEP_OUTSIDE_STEPS,STEP_WITHOUT_EXECUTOR,TAB_INDENT",
+              "source_copy_authority": "false",
+              "promotion_authority": "false",
+          }
+          if rows != expected:
+              raise SystemExit(f"JEP493 workflow-validator receiver drift: {rows}")
+          print("JEP493_WORKFLOW_RECEIVER_OK canonical_commit=" + rows["canonical_commit"])
+          PY
 
       - name: 1 - Diff hygiene
         shell: bash
@@ -86,7 +102,7 @@ jobs:
           git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch --filter=blob:none --no-tags origin "refs/tags/jdk-21+35:refs/tags/jdk-21+35" "refs/tags/jdk-24+36:refs/tags/jdk-24+36"
           printf 'UPSTREAM=%s\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
 
-      - name: 4 - Generate exact 47-path FILE recipe atoms
+      - name: 4 - Generate exact 46-path GA FILE recipe atoms
         shell: bash
         run: |
           set -euo pipefail
@@ -94,7 +110,7 @@ jobs:
           python3 m3/backports/file_delta_inventory.py --repo "$UPSTREAM" --release 24 --out "$RUNNER_TEMP/jep493/JDK21_TO_JDK24.tsv"
           python3 m3/backports/generate_recipe_crates.py --repo "$UPSTREAM" --release 24 --paths-file m3/backports/recipes/jep-493-runtime-image/PATHS.txt --crate-size 1 --include-text --out "$RUNNER_TEMP/jep493/file-atoms"
 
-      - name: 5 - Prove 47-path accounting and one-file crate granularity
+      - name: 5 - Prove 47-path denominator accounting and one-file crate granularity
         shell: bash
         run: |
           set -euo pipefail
@@ -110,8 +126,20 @@ jobs:
                   .read_text(encoding="utf-8").splitlines()
               if line.strip()
           ]
-          assert len(selected) == 47, len(selected)
-          assert len(set(selected)) == 47
+          assert len(selected) == 46, len(selected)
+          assert len(set(selected)) == 46
+
+          with Path("m3/backports/recipes/jep-493-runtime-image/TYPED_EXCLUSIONS.tsv").open(
+              encoding="utf-8", newline=""
+          ) as handle:
+              policy_exclusions = list(csv.DictReader(handle, delimiter="\t"))
+          assert policy_exclusions == [{
+              "path": "src/jdk.jlink/share/classes/jdk/tools/jlink/internal/runtimelink/RuntimeImageLinkException.java",
+              "reason": "GA_REMOVED_DO_NOT_ADD",
+              "donor_state": "ABSENT_IN_JDK24_GA",
+              "authority": "EVIDENCE_ONLY",
+          }], policy_exclusions
+          assert len(selected) + len(policy_exclusions) == 47
 
           with (root / "JDK21_TO_JDK24.tsv").open(encoding="utf-8", newline="") as handle:
               delta = {
@@ -129,16 +157,19 @@ jobs:
           generated = sum(int(row["target_count"]) for row in crates)
 
           with (root / "file-atoms" / "EXCLUSIONS.tsv").open(encoding="utf-8", newline="") as handle:
-              exclusions = list(csv.DictReader(handle, delimiter="\t"))
-          if exclusions:
-              raise SystemExit(f"JEP493 has typed exclusions requiring review: {exclusions}")
+              generator_exclusions = list(csv.DictReader(handle, delimiter="\t"))
+          if generator_exclusions:
+              raise SystemExit(f"JEP493 GA-selected paths produced unexpected generator exclusions: {generator_exclusions}")
 
           if generated + len(same) != len(selected):
               raise SystemExit(
-                  f"JEP493 accounting mismatch generated={generated} "
+                  f"JEP493 materialization accounting mismatch generated={generated} "
                   f"same={len(same)} selected={len(selected)}"
               )
-          print(f"JEP493_ACCOUNTED generated={generated} same={len(same)} exclusions=0")
+          print(
+              f"JEP493_ACCOUNTED denominator=47 materializable={len(selected)} "
+              f"generated={generated} same={len(same)} ga_removed={len(policy_exclusions)}"
+          )
           PY
 
       - name: 6 - Validate and project the canonical JEP493 recipe DAG
