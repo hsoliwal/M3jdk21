@@ -7,6 +7,10 @@ on:
       - "m3/**"
     paths:
       - "m3/tooling/migration-recipes/**"
+      - "m3/docs/synexia-apache2-borrowing-contract.md"
+      - "m3/compatibility/synexia-canonical-residue-gitblobs.tsv"
+      - "m3/compatibility/synexia-recipe-home-policy.tsv"
+      - "m3/indexdb/src/main/**"
       - "m3/tooling/recipe-catalogue.tsv"
       - "m3/tooling/emit-java21-convergence-proof.py"
       - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
@@ -14,6 +18,10 @@ on:
   pull_request:
     paths:
       - "m3/tooling/migration-recipes/**"
+      - "m3/docs/synexia-apache2-borrowing-contract.md"
+      - "m3/compatibility/synexia-canonical-residue-gitblobs.tsv"
+      - "m3/compatibility/synexia-recipe-home-policy.tsv"
+      - "m3/indexdb/src/main/**"
       - "m3/tooling/recipe-catalogue.tsv"
       - "m3/tooling/emit-java21-convergence-proof.py"
       - "m3/docs/atom-pattern-admission-and-tooling-boundary.md"
