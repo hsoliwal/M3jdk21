@@ -48,6 +48,8 @@ values, then pass matched JDK build/runtime tests and end-to-end small/large/fra
 
 ## License boundary
 
-The mirrored Synexia files keep Apache-2.0 and their original notices in
-`m3/vendor/synexia/`. Existing `java.base` files keep their GPLv2-with-Classpath-Exception
+The 12 mirrored Synexia source files keep Apache-2.0 and their original notices in
+`m3/vendor/synexia/`. The native source references Mapbox `jni/ownership.hpp`; the exact upstream
+ISC license is retained at `m3/vendor/synexia/third-party/mapbox-jni-ownership/LICENSE.txt` and pinned in `SOURCE_PROVENANCE.tsv`. The wrapper header
+itself is not copied. Existing `java.base` files keep their GPLv2-with-Classpath-Exception
 headers. This intake neither changes those headers nor copies the Apache implementation into them.

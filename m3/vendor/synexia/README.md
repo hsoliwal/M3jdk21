@@ -72,3 +72,8 @@ The selected `synexia-indexstring` files are exact Apache-2.0 custody below the 
 paths. This is not a complete compilable module or JDK runtime dependency. The original module
 third-party notices are preserved beside the source. Target names and license boundaries are
 recorded in the intake map; OpenJDK `java.base` files are not relicensed.
+
+
+### Third-party JNI ownership license
+
+The mirrored `shared_arrays.cpp` references the external `jni/ownership.hpp` wrapper. This intake does not copy that header. It preserves the exact upstream ISC license from `mapbox/jni.hpp@57ca9ed4bbeb22ed8d20a55063dcaa217ba47f42` at `m3/vendor/synexia/third-party/mapbox-jni-ownership/LICENSE.txt`; the pinned provenance is in the JNI intake manifest. This native source slice remains custody-only and is not standalone-buildable.
