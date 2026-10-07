@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - "m3/jep423-region-pinning-inventory-20261006"
+      - "m3/jep423-current-tree-admission-repair-20261007"
     paths:
       - "m3/backports/recipes/jep-423-region-pinning/**"
       - "m3/backports/generate_recipe_crates.py"
@@ -55,7 +56,7 @@ jobs:
           git -C "$RUNNER_TEMP/upstream-jdk" init -q
           git -C "$RUNNER_TEMP/upstream-jdk" remote add origin https://github.com/openjdk/jdk.git
           git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch             --filter=blob:none --no-tags origin             "refs/tags/jdk-21+35:refs/tags/jdk-21+35"             "refs/tags/jdk-22+36:refs/tags/jdk-22+36"             "38cfb220ddadbb401cc15f313aadb8234f626210"             "8643cc21333c6b51242ed3b9295b25f372244755"             "0d5f5e15d43f94a79c6133baecd5af217365d176"
-          printf 'UPSTREAM=%s\\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
+          printf 'UPSTREAM=%s\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
 
       - name: Prove implementation touched-path denominator and compatibility split
         shell: bash
@@ -167,7 +168,7 @@ jobs:
           set -euo pipefail
           python3 m3/backports/current_tree_preimage_inventory.py \
             --root . \
-            --paths-file m3/backports/recipes/jep-423-region-pinning/ADMIT_PATHS.txt \
+            --paths-file m3/backports/recipes/jep-423-region-pinning/CUMULATIVE_ADMIT_PATHS.txt \
             --out target/jep423/CURRENT_PREIMAGES.tsv \
             --baseline-git "$UPSTREAM" \
             --baseline-ref jdk-21+35 \
@@ -184,7 +185,7 @@ jobs:
           ))
           mechanical = [row for row in rows if row["admission"] == "MECHANICAL_FILE_REPLAY"]
           held = [row for row in rows if row["admission"] == "HOLD_CURRENT_TREE_DRIFT"]
-          if len(rows) != 57 or len(mechanical) != 56 or len(held) != 1:
+          if len(rows) != 62 or len(mechanical) != 61 or len(held) != 1:
               raise SystemExit(
                   f"JEP423 current-tree admission drift rows={len(rows)} "
                   f"mechanical={len(mechanical)} held={len(held)}"
@@ -194,7 +195,7 @@ jobs:
               raise SystemExit(f"unexpected JEP423 held path: {held[0]['path']}")
           if held[0]["current_status"] != "ABSENT" or held[0]["baseline_status"] != "PRESENT":
               raise SystemExit(f"unexpected JEP423 held relation: {held[0]}")
-          print("JEP423_CURRENT_ADMISSION mechanical=56 held=1")
+          print("JEP423_CURRENT_ADMISSION cumulative=62 mechanical=61 held=1")
           PY
 
       - name: Unit-test whole-tree comparator and mixed FILE-crate generator
@@ -227,7 +228,7 @@ jobs:
           packet = Path("m3/backports/recipes/jep-423-region-pinning")
           admitted = {
               line.strip()
-              for line in (packet / "ADMIT_PATHS.txt").read_text(encoding="utf-8").splitlines()
+              for line in (packet / "CUMULATIVE_ADMIT_PATHS.txt").read_text(encoding="utf-8").splitlines()
               if line.strip()
           }
           mechanical = {
@@ -237,11 +238,13 @@ jobs:
               if line.strip()
           }
           held = admitted - mechanical
-          all_paths = {
-              line.strip()
-              for line in (packet / "PATHS.txt").read_text(encoding="utf-8").splitlines()
-              if line.strip()
-          }
+          with (packet / "PATH_CLOSURE.tsv").open(
+              encoding="utf-8", newline=""
+          ) as handle:
+              all_paths = {
+                  row["path"]
+                  for row in csv.DictReader(handle, delimiter="\t")
+              }
           preserved = all_paths - admitted
 
           with Path("target/jep423/JDK21_TO_JDK22.tsv").open(
@@ -281,8 +284,13 @@ jobs:
               raise SystemExit(f"JEP423 unexpected held path: {sorted(held)}")
           if len(preserved) != 2:
               raise SystemExit(f"JEP423 preserved deletion count drift: {len(preserved)}")
+          if len(admitted) != 62 or len(all_paths) != 64:
+              raise SystemExit(
+                  f"JEP423 cumulative denominator drift admitted={len(admitted)} "
+                  f"lineage={len(all_paths)}"
+              )
           if generated + len(exclusions) + len(same) + len(held) + len(preserved) != len(all_paths):
-              raise SystemExit("JEP423 full denominator accounting mismatch")
+              raise SystemExit("JEP423 full cumulative denominator accounting mismatch")
 
           print(
               f"JEP423_ACCOUNTED generated={generated} exclusions={len(exclusions)} "

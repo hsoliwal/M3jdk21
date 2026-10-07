@@ -15,9 +15,40 @@ class J423LineageTest(unittest.TestCase):
         summary = MODULE.validate()
         self.assertEqual(3, summary["lineage_commits"])
         self.assertEqual(2, summary["preserved_java21_deletions"])
-        self.assertGreater(summary["unique_paths"], 59)
-        self.assertGreater(summary["product_paths"], 40)
-        self.assertGreater(summary["test_paths"], 15)
+        self.assertEqual(64, summary["unique_paths"])
+        self.assertEqual(47, summary["product_paths"])
+        self.assertEqual(17, summary["test_paths"])
+        self.assertEqual(62, len(MODULE.path_list(MODULE.CANDIDATES)))
+
+    def test_cumulative_packet_and_evidence_cover_every_mutation_candidate(self):
+        packet = MODULE.rows(PACKET / "packet.tsv")
+        evidence = MODULE.rows(PACKET / "atom-evidence.tsv")
+
+        file_rows = [row for row in packet if row["scope"] == "FILE"]
+        self.assertEqual(62, len(file_rows))
+        file_ids = {row["atom_id"] for row in file_rows}
+
+        evidence_file_ids = {
+            row["atom_id"]
+            for row in evidence
+            if row["atom_id"].startswith("file-")
+        }
+        self.assertEqual(file_ids, evidence_file_ids)
+
+        g1_core = next(row for row in packet if row["atom_id"] == "g1-core")
+        g1_dependencies = {
+            value for value in g1_core["depends_on"].split(",") if value
+        }
+        self.assertEqual(43, len(g1_dependencies))
+        self.assertTrue(
+            {
+                "file-src-hotspot-share-gc-g1-g1barrierset-cpp",
+                "file-src-hotspot-share-gc-g1-g1regionpincache-hpp",
+                "file-src-hotspot-share-gc-g1-g1regionpincache-inline-hpp",
+                "file-src-hotspot-share-gc-g1-g1threadlocaldata-hpp",
+                "file-src-hotspot-share-gc-g1-g1younggcpreevacuatetasks-cpp",
+            }.issubset(g1_dependencies)
+        )
 
     def test_followup_repairs_are_required(self):
         rows = MODULE.rows(MODULE.LINEAGE)

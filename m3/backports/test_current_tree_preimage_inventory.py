@@ -163,6 +163,80 @@ class CurrentTreePreimageInventoryTest(unittest.TestCase):
             inventory.write_mechanical_paths(rows, mechanical)
             self.assertEqual("a/A.java\nb/B.hpp\n", mechanical.getvalue())
 
+    def test_cli_baseline_admission_uses_requested_root_and_emits_receipts(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            baseline = root / "baseline"
+            current = root / "current"
+            baseline.mkdir()
+            current.mkdir()
+
+            subprocess.run(["git", "-C", str(baseline), "init", "-q"], check=True)
+            subprocess.run(
+                ["git", "-C", str(baseline), "config", "user.email", "m3@example.invalid"],
+                check=True,
+            )
+            subprocess.run(
+                ["git", "-C", str(baseline), "config", "user.name", "M3 Test"],
+                check=True,
+            )
+
+            baseline_java = baseline / "src/demo/A.java"
+            baseline_java.parent.mkdir(parents=True)
+            baseline_java.write_text("class A {}\n", encoding="utf-8")
+            subprocess.run(["git", "-C", str(baseline), "add", "."], check=True)
+            subprocess.run(
+                ["git", "-C", str(baseline), "commit", "-q", "-m", "baseline"],
+                check=True,
+            )
+
+            current_java = current / "src/demo/A.java"
+            current_java.parent.mkdir(parents=True)
+            current_java.write_text("class A {}\n", encoding="utf-8")
+
+            paths = root / "paths.txt"
+            paths.write_text("missing/B.hpp\nsrc/demo/A.java\n", encoding="utf-8")
+            inventory_out = root / "current.tsv"
+            admission_out = root / "admission.tsv"
+            mechanical_out = root / "mechanical.txt"
+
+            result = inventory.main(
+                [
+                    "--root",
+                    str(current),
+                    "--paths-file",
+                    str(paths),
+                    "--out",
+                    str(inventory_out),
+                    "--baseline-git",
+                    str(baseline),
+                    "--baseline-ref",
+                    "HEAD",
+                    "--admission-out",
+                    str(admission_out),
+                    "--mechanical-paths-out",
+                    str(mechanical_out),
+                ]
+            )
+
+            self.assertEqual(0, result)
+            self.assertTrue(inventory_out.is_file())
+            self.assertTrue(admission_out.is_file())
+            self.assertTrue(mechanical_out.is_file())
+            self.assertEqual(
+                "missing/B.hpp\nsrc/demo/A.java\n",
+                mechanical_out.read_text(encoding="utf-8"),
+            )
+            self.assertIn(
+                "src/demo/A.java\tPRESENT\t",
+                admission_out.read_text(encoding="utf-8"),
+            )
+            self.assertIn(
+                "missing/B.hpp\tABSENT\tABSENT\tABSENT\tABSENT\tNATIVE\t"
+                "MECHANICAL_FILE_REPLAY\n",
+                admission_out.read_text(encoding="utf-8"),
+            )
+
     def test_baseline_admission_rejects_invalid_or_missing_ref(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             repo = Path(directory)

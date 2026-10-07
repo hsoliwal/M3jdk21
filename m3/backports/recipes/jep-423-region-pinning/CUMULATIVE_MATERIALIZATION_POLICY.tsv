@@ -1,0 +1,27 @@
+field	value
+jep	423
+title	Region Pinning for G1
+classification	COMPATIBLE_RUNTIME
+headline_implementation_paths	59
+cumulative_lineage_paths	64
+cumulative_candidate_paths	62
+expected_current_mechanical_paths	61
+expected_current_held_paths	1
+expected_current_held_path	test/hotspot/jtreg/gc/g1/TestEvacuationFailure.java
+preserved_java21_deletions	2
+baseline_ref	jdk-21+35
+donor_ref	jdk-22+36
+implementation_commit	38cfb220ddadbb401cc15f313aadb8234f626210
+required_followup_commit_1	8643cc21333c6b51242ed3b9295b25f372244755
+required_followup_commit_2	0d5f5e15d43f94a79c6133baecd5af217365d176
+candidate_path_file	m3/backports/recipes/jep-423-region-pinning/CUMULATIVE_ADMIT_PATHS.txt
+generator	m3/backports/generate_recipe_crates.py
+executor	m3/backports/materialize_generated_crates.py
+crate_size	1
+include_text	true
+include_native	true
+file_atom_scope	FILE
+g1_core_scope	MODULE
+feature_scope	MULTI_MODULE
+mutation_authority	false
+promotion_authority	false
