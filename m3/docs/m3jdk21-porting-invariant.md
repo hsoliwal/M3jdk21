@@ -482,3 +482,18 @@ remains scoped. No Synexia runtime service/package dependency enters Java/HotSpo
 
 Licence text: https://www.apache.org/licenses/LICENSE-2.0
 Canonical target policy: m3/docs/m3jdk21-porting-invariant.md in hsoliwal/M3jdk21.
+
+## Lean collection second-pass receiving gate
+
+The Synexia lean-collection second pass includes primitive and MAT non-prefix owners as well as
+the existing MIndex/M3 collection/data-structure families. Retain the full String/file/AST/static
+precompute lineage above. Follow the second-pass clause in SYNEXIA-M3INDEX-OWNERSHIP-1 and the
+canonical Synexia m3-collection-contracts/second-pass recipe packet. Neat, fast, light and richer
+require contract, workload and memory evidence, not naming changes or a copied directory.
+
+The separately licensed m3/collections owners remain the collection proving ground. A source
+diagnostic pass, compiler result, source sort refinement or repaired donor test cannot promote a
+JDK backend. Record concrete consumer/name mapping, exact donor and target hashes, applicable
+rights, target recipe application, JDK 21/JUnit/jtreg/native/JNI/runtime and resource evidence first.
+Keep every untested owner and gate PENDING. Public JDK APIs, backing identity and this repository's
+intake/licensing modes remain unchanged; reusable recipes and algorithms stay canonical in Synexia.
