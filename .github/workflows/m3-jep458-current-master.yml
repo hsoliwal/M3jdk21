@@ -3,7 +3,7 @@ name: M3 JEP 458 current-master admission
 on:
   push:
     branches:
-      - "m3/recover-jep458-current-master-v2-20261003"
+      - "m3/jep458-proof-refresh-20261007"
     paths:
       - "m3/backports/recipes/jep-458-current/**"
       - "m3/tooling/migration-recipes/**"
@@ -39,16 +39,30 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 25
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "21"
           cache: maven
 
+      - name: Refuse JEP 458 product-source drift in proof refresh
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE_SHA="f96b9a88e040cded3a5ffb96190e2acedee6c97d"
+          git diff --exit-code "$BASE_SHA...HEAD" -- \
+            make/CompileInterimLangtools.gmk \
+            src/java.base/share/classes/module-info.java \
+            src/java.base/share/classes/sun/launcher/resources/launcher.properties \
+            src/java.base/share/native/libjli/java.c \
+            src/jdk.compiler/share/classes/com/sun/tools/javac \
+            test/langtools/tools/javac/launcher \
+            test/langtools/tools/jdeps/listdeps/ListModuleDeps.java
+
       - name: Prove exact current-master recipe replay and fixed point
         run: |
-          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3Jep458BackportRecipeTest test
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3Jep458BackportRecipeTest,M3Jep458ProofRefreshRecipeTest test
 
       - name: Validate exact JEP 458 packet and atom evidence
         shell: bash
@@ -79,8 +93,8 @@ jobs:
     runs-on: ubuntu-22.04
     timeout-minutes: 90
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: "21"
