@@ -3,6 +3,7 @@ name: M3 JEP 493 generated-crate materialization
 on:
   push:
     branches:
+      - "m3/jep493-*"
       - "m3/recover-jep493-materializer-20261006"
     paths:
       - "m3/backports/file_delta_inventory.py"
@@ -47,6 +48,19 @@ jobs:
           distribution: temurin
           java-version: "21"
           cache: maven
+
+      - name: 0 - Consume canonical Synexia workflow-structure validator
+        shell: bash
+        run: |
+          set -euo pipefail
+          SYNEXIA="$RUNNER_TEMP/synexia-recipe-owner"
+          git init -q "$SYNEXIA"
+          git -C "$SYNEXIA" remote add origin https://github.com/hsoliwal/com.synexia.git
+          git -C "$SYNEXIA" -c protocol.version=2 fetch -q --depth=1 origin 0f0f9965092955c15f5c32f5eb102137fd0dbf8e
+          test "$(git -C "$SYNEXIA" rev-parse FETCH_HEAD)" = "0f0f9965092955c15f5c32f5eb102137fd0dbf8e"
+          java "$SYNEXIA/synexia-code-convergence/tools/WorkflowStructureCheck.java" \
+            .github/workflows/m3-jep493-runtime-image-materialize.yml \
+            .github/workflows/m3-jep493-runtime-image-inventory.yml
 
       - name: 1 - Diff hygiene
         shell: bash

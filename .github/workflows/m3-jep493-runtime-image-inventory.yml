@@ -3,6 +3,7 @@ name: M3 JEP 493 runtime-image file-atom inventory
 on:
   push:
     branches:
+      - "m3/jep493-*"
       - "m3/recover-jep493-current-master-20261005"
     paths:
       - "m3/backports/generate_recipe_crates.py"
