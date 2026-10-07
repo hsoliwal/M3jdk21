@@ -1,0 +1,46 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.mindex.vm;
+
+import com.synexia.mindex.MIndexNativeOps;
+import com.synexia.mindex.MIndexString;
+import java.util.List;
+import java.util.Objects;
+
+/**
+ * Immutable, VM-local candidate key over canonical text identities.
+ * Equality discovers reusable work; it is not verifier, linker or native-code admission.
+ * Ordered dependency inputs must include the caller's complete effective context.
+ * Neither these intern IDs nor this object are a portable cache format.
+ */
+public final class MIndexVmPrecomputeKey {
+    private final int[] lanes;
+
+    private MIndexVmPrecomputeKey(int[] lanes) {
+        this.lanes = lanes;
+    }
+
+    public static MIndexVmPrecomputeKey of(
+            MIndexString contentSeal,
+            MIndexString analysisRevision,
+            MIndexString environmentSeal,
+            List<MIndexString> orderedDependencies) {
+        Objects.requireNonNull(orderedDependencies, "orderedDependencies");
+        if (orderedDependencies.size() > 65_536) {
+            throw new IllegalArgumentException("dependency budget exceeded");
+        }
+        int[] lanes = new int[orderedDependencies.size() + 3];
+        lanes[0] = Objects.requireNonNull(contentSeal, "contentSeal").contentIndex();
+        lanes[1] = Objects.requireNonNull(analysisRevision, "analysisRevision").contentIndex();
+        lanes[2] = Objects.requireNonNull(environmentSeal, "environmentSeal").contentIndex();
+        for (int i = 0; i < orderedDependencies.size(); i++) {
+            lanes[i + 3] = Objects.requireNonNull(orderedDependencies.get(i), "dependency").contentIndex();
+        }
+        return new MIndexVmPrecomputeKey(lanes);
+    }
+
+    public int dependencyCount() { return lanes.length - 3; }
+
+    public boolean sameInputs(MIndexVmPrecomputeKey other) {
+        return other != null && MIndexNativeOps.contentEquals(lanes, other.lanes);
+    }
+}

@@ -1,0 +1,118 @@
+name: M3 JEP 484 Class-File API custody plan
+
+on:
+  push:
+    branches:
+      - "m3/jep484-*"
+      - "m3/j484-custody-plan-20261006"
+    paths:
+      - "m3/backports/recipes/jep-484-classfile-api/**"
+      - ".github/workflows/m3-jep484-custody-plan.yml"
+  pull_request:
+    paths:
+      - "m3/backports/recipes/jep-484-classfile-api/**"
+      - ".github/workflows/m3-jep484-custody-plan.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  custody:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: 0 - Consume canonical Synexia workflow-structure validator
+        shell: bash
+        run: |
+          set -euo pipefail
+          SYNEXIA="$RUNNER_TEMP/synexia-recipe-owner"
+          git init -q "$SYNEXIA"
+          git -C "$SYNEXIA" remote add origin https://github.com/hsoliwal/com.synexia.git
+          git -C "$SYNEXIA" -c protocol.version=2 fetch -q --depth=1 origin 0f0f9965092955c15f5c32f5eb102137fd0dbf8e
+          test "$(git -C "$SYNEXIA" rev-parse FETCH_HEAD)" = "0f0f9965092955c15f5c32f5eb102137fd0dbf8e"
+          java "$SYNEXIA/synexia-code-convergence/tools/WorkflowStructureCheck.java" \
+            .github/workflows/m3-jep484-custody-plan.yml
+
+      - name: Diff hygiene
+        run: git diff --check
+
+      - name: Unit-test map and custody planners
+        run: |
+          python3 m3/backports/recipes/jep-484-classfile-api/test_path_map.py
+          python3 m3/backports/recipes/jep-484-classfile-api/test_custody_plan.py
+
+      - name: Fetch exact OpenJDK JDK21 and JDK24 donor refs
+        run: |
+          set -euo pipefail
+          git remote add m3-upstream https://github.com/openjdk/jdk.git
+          git fetch --no-tags --filter=blob:none m3-upstream             refs/tags/jdk-21+35:refs/tags/m3-jdk21             refs/tags/jdk-24+36:refs/tags/m3-jdk24
+
+      - name: Reproduce sealed JEP484 path/content map
+        run: |
+          set -euo pipefail
+          mkdir -p target/j484
+          python3 m3/backports/recipes/jep-484-classfile-api/path_map.py             --repo .             --jdk21-ref refs/tags/m3-jdk21             --jdk24-ref refs/tags/m3-jdk24             --out target/j484/map
+          python3 - <<'PY'
+          import json
+          d=json.load(open("target/j484/map/summary.json",encoding="utf-8"))
+          expected={
+            "jdk21_internal_files":241,
+            "jdk24_combined_files":245,
+            "direct_descendants":238,
+            "unmapped_jdk21":3,
+            "ambiguous":0,
+            "added_jdk24":7,
+          }
+          for key,value in expected.items():
+              if d.get(key) != value:
+                  raise SystemExit(f"{key}: expected {value}, got {d.get(key)}")
+          PY
+
+      - name: Classify current M3JDK21 source custody without mutation
+        run: |
+          set -euo pipefail
+          python3 m3/backports/recipes/jep-484-classfile-api/custody_plan.py             --target-root "$PWD"             --map-dir target/j484/map             --out target/j484/custody
+          python3 - <<'PY'
+          import csv
+          from collections import Counter
+          rows=list(csv.DictReader(open("target/j484/custody/CUSTODY_PLAN.tsv",encoding="utf-8"),delimiter="\t"))
+          if len(rows) != 248:
+              raise SystemExit(f"custody denominator: expected 248, got {len(rows)}")
+          counts=Counter(row["state"] for row in rows)
+          allowed={
+            "SAME_PATH_REPLACE","MOVED_PUBLIC_ADD","MOVED_INTERNAL_ADD","ALREADY_PRESENT",
+            "SOURCE_DRIFT","TARGET_OCCUPIED","RETAIN_UNMAPPED_SOURCE","ADD_DONOR_ONLY"
+          }
+          unknown=sorted(set(counts)-allowed)
+          if unknown:
+              raise SystemExit(f"unknown custody states: {unknown}")
+          print("JEP484_CUSTODY",dict(sorted(counts.items())))
+          PY
+          git diff --exit-code
+          test -z "$(git status --porcelain | grep -v '^?? target/' || true)"
+
+      - name: Re-run existing JEP484 inventory verifier and OpenRewrite inventory proof
+        run: |
+          set -euo pipefail
+          python3 m3/backports/recipes/jep-484-classfile-api/verify.py
+          python3 m3/backports/recipes/jep-484-classfile-api/test_verify.py
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3Jep484ClassfileApiInventoryRecipeTest,M3RecipeScopeDeclarationTest             -Dsurefire.failIfNoSpecifiedTests=false test
+
+      - name: Upload JEP484 custody evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: jep484-custody-${{ github.sha }}
+          path: target/j484
+          if-no-files-found: error
+          retention-days: 14

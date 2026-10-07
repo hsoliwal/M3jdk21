@@ -1,0 +1,162 @@
+name: M3 JEP 493 runtime-image file-atom inventory
+
+on:
+  push:
+    branches:
+      - "m3/recover-jep493-current-master-20261005"
+    paths:
+      - "m3/backports/generate_recipe_crates.py"
+      - "m3/backports/file_delta_inventory.py"
+      - "m3/backports/test_generate_recipe_crates.py"
+      - "m3/backports/test_file_delta_inventory.py"
+      - "m3/backports/recipes/jep-493-runtime-image/**"
+      - "m3/tooling/migration-recipes/**"
+      - ".github/workflows/m3-jep493-runtime-image-inventory.yml"
+  pull_request:
+    paths:
+      - "m3/backports/generate_recipe_crates.py"
+      - "m3/backports/file_delta_inventory.py"
+      - "m3/backports/test_generate_recipe_crates.py"
+      - "m3/backports/test_file_delta_inventory.py"
+      - "m3/backports/recipes/jep-493-runtime-image/**"
+      - "m3/tooling/migration-recipes/**"
+      - ".github/workflows/m3-jep493-runtime-image-inventory.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Fetch exact OpenJDK 21 and 24 GA tags
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir "$RUNNER_TEMP/upstream-jdk"
+          git -C "$RUNNER_TEMP/upstream-jdk" init -q
+          git -C "$RUNNER_TEMP/upstream-jdk" remote add origin https://github.com/openjdk/jdk.git
+          git -C "$RUNNER_TEMP/upstream-jdk" -c protocol.version=2 fetch             --filter=blob:none --no-tags origin             "refs/tags/jdk-21+35:refs/tags/jdk-21+35"             "refs/tags/jdk-24+36:refs/tags/jdk-24+36"
+          printf 'UPSTREAM=%s\n' "$RUNNER_TEMP/upstream-jdk" >> "$GITHUB_ENV"
+
+      - name: Unit-test whole-tree comparator and mixed crate generator
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd m3/backports
+          python3 -m unittest -v test_file_delta_inventory.py test_generate_recipe_crates.py
+
+      - name: Inventory exact JDK21 to JDK24 deltas
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/jep493
+          python3 m3/backports/file_delta_inventory.py             --repo "$UPSTREAM"             --release 24             --out target/jep493/JDK21_TO_JDK24.tsv
+
+      - name: Generate one Java/text recipe atom per selected JEP493 path
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 m3/backports/generate_recipe_crates.py             --repo "$UPSTREAM"             --release 24             --paths-file m3/backports/recipes/jep-493-runtime-image/PATHS.txt             --crate-size 1             --include-text             --out target/jep493/file-atoms
+
+      - name: Prove all 47 selected paths are accounted for
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import csv
+          from pathlib import Path
+
+          selected = {
+              line.strip()
+              for line in Path("m3/backports/recipes/jep-493-runtime-image/PATHS.txt")
+                  .read_text(encoding="utf-8").splitlines()
+              if line.strip()
+          }
+          if len(selected) != 47:
+              raise SystemExit(f"expected 47 selected paths, found {len(selected)}")
+
+          with Path("target/jep493/JDK21_TO_JDK24.tsv").open(
+              encoding="utf-8", newline=""
+          ) as handle:
+              deltas = {
+                  row["path"]: row["status"]
+                  for row in csv.DictReader(handle, delimiter="\t")
+                  if row["path"] in selected
+              }
+
+          missing = selected - deltas.keys()
+          if missing:
+              raise SystemExit(f"selected paths missing from full delta inventory: {sorted(missing)}")
+
+          same = {path for path, status in deltas.items() if status == "SAME"}
+          with Path("target/jep493/file-atoms/CRATES.tsv").open(
+              encoding="utf-8", newline=""
+          ) as handle:
+              crates = list(csv.DictReader(handle, delimiter="\t"))
+          generated = sum(int(row["target_count"]) for row in crates)
+
+          with Path("target/jep493/file-atoms/EXCLUSIONS.tsv").open(
+              encoding="utf-8", newline=""
+          ) as handle:
+              exclusions = list(csv.DictReader(handle, delimiter="\t"))
+
+          if generated + len(exclusions) + len(same) != len(selected):
+              raise SystemExit(
+                  "JEP493 accounting mismatch: "
+                  f"generated={generated} exclusions={len(exclusions)} "
+                  f"same={len(same)} selected={len(selected)}"
+              )
+          print(
+              f"JEP493_ACCOUNTED generated={generated} "
+              f"exclusions={len(exclusions)} same={len(same)}"
+          )
+          PY
+
+      - name: Verify M3 backport and recipe substrate
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/backports/pom.xml verify
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3RecipeScopeDeclarationTest test
+
+      - name: Validate JEP493 composition DAG
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+            -Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketMain \
+            -Dexec.args="$PWD/m3/backports/recipes/jep-493-runtime-image/packet.tsv $PWD/m3/backports/recipes/jep-493-runtime-image/atom-evidence.tsv" \
+            exec:java
+
+      - name: Project JEP493 DAG to Camel Airflow and Drools
+        run: |
+          set -euo pipefail
+          mkdir -p target/jep493/projections
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+            -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain \
+            -Dexec.args="$PWD/m3/backports/recipes/jep-493-runtime-image/packet.tsv $PWD/target/jep493/projections $PWD/m3/backports/recipes/jep-493-runtime-image/atom-evidence.tsv" \
+            exec:java
+          test -s target/jep493/projections/M3BackportRoutes.java
+          test -s target/jep493/projections/m3_backport_dag.py
+          test -s target/jep493/projections/m3_backport_rules.drl
+          test -s target/jep493/projections/projection.tsv
+
+      - name: Upload file-atom inventory
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: jep493-file-atoms-${{ github.run_id }}
+          path: target/jep493
+          if-no-files-found: error
+          retention-days: 30

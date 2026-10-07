@@ -1,0 +1,8 @@
+field	value
+base	fb0b69967733a00b160af63bba1096f9e63b6471
+source_archive	b0c2e495b8465dc802ef309c06810844b04e08e9
+java	Debian OpenJDK21.0.11
+maven	3.9.16
+rewrite	8.17.1
+workers	1
+canonical_writes	false

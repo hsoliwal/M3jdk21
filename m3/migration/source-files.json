@@ -1,0 +1,13 @@
+{
+  "repository": "hsoliwal/com.synexia",
+  "commit": "75fb1abaecb56969bea2914520bbe819f130632b",
+  "scope": "six-file frozen/joined dependency closure; not complete source inventory",
+  "files": [
+    {"path":"synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java","git_blob":"b624dc8dbb23eac6b3147ea888ac69df60f971e1","sha256":"cb50139594817d5cb2477c4d67148d4aed2174299f05cff9a3b24416139bc6b4","bytes":4037},
+    {"path":"synexia-indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java","git_blob":"a8f016a1764aea6e970bc60e38f345804e82a84e","sha256":"0c03ca0ed8b42212fa92e4d5f9325ba864f8d11928cd6a0b030b861f668f0657","bytes":3868},
+    {"path":"synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedBytes.java","git_blob":"9db0c6363480ccb0f38bba7b2218e151dd75ee68","sha256":"206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b","bytes":3259},
+    {"path":"synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedChars.java","git_blob":"d9ec1832d1b9381cf0243dfd132e089797f0a2d8","sha256":"712c1c795ff1e0d6dea099eaec8fa6e64803adfc12bad6f31970b722c659d396","bytes":5188},
+    {"path":"synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStorageIntern.java","git_blob":"95a576da9e60fb830a443034d6403e84740233e8","sha256":"f42c548a4fd47d3dac43283082125232e04d5f13f28b63521832493394176337","bytes":10303},
+    {"path":"synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStreams.java","git_blob":"6f350a84b954b2f80929252254a007652fc1d0d0","sha256":"a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80","bytes":5955}
+  ]
+}

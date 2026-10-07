@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.M3StringMechanicalDonorMap
+displayName: Map Synexia mechanical String precompute donors into M3JDK
+description: Replays the internal-only RE2/Lucene/Tweety donor classification, completeness ledger, broader precompute inventory, and fail-closed source gate without adding external java.base dependencies.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: m3-string-mechanical-donor-map

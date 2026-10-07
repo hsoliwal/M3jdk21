@@ -1,0 +1,11 @@
+gate	status	detail
+source_and_recipe_seals	PASS	7 exact targets and sorted manifests
+python_tests	PASS	24 tests; includes synthetic refusal fixtures
+module_kernel	PASS	41 standalone checks; not JUnit
+password_patch_runtime	PASS	28 fresh VMs per run; repeated three times
+developer_image	PASS	11 real JDK tools and native app-image launcher; Linux only
+diagnostics_regression	PASS	Existing JFR/native jcmd probe retained
+original_jmods_jar_repeatability	PASS	Four original artifacts byte-identical across two clean runs
+maven_openrewrite_junit_jacoco	BLOCKED	mvn missing; dependency DNS unavailable
+modified_jdk_build_jtreg	NOT_RUN	No full modified M3JDK21 build or certification
+nebula	HOLD	Existing Synexia donor pipeline must pass before remote application

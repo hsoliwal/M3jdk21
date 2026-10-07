@@ -1,0 +1,78 @@
+#!/usr/bin/env python3
+# SPDX-License-Identifier: Apache-2.0
+"""Exercise existing sealed-install custody; require actual recipe postimages."""
+import copy
+import importlib.util
+import json
+from pathlib import Path
+import tempfile
+
+CRATE = Path(__file__).resolve().parent
+ROOT = CRATE.parents[2]
+spec = importlib.util.spec_from_file_location('sealed', ROOT / 'm3/migration/recipe.py')
+sealed = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(sealed)
+plan_path = CRATE / 'plan.json'
+plan, rows = sealed.sealed_plan(plan_path)
+assert sealed.execute(plan_path, ROOT)['state'] == 'after'
+for row in rows:
+    assert (CRATE / 'target/generated' / row['path']).read_bytes() == row['after'], row['path']
+
+before_path = CRATE / 'src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/m3-tq/name-mapping.json.txt.before'
+before = json.loads(before_path.read_text())
+after = json.loads((ROOT / 'm3/docs/name-mapping.json').read_text())
+retained = copy.deepcopy(after)
+record = retained['migration']['records'].pop()
+assert record['id'] == 'synexia.counterpart.MIndexRegexTrigramQuery'
+assert retained == before, 'Existing mapping authority must be retained in full'
+
+events = []
+with tempfile.TemporaryDirectory(prefix='m3-tq-custody-') as temporary:
+    root = Path(temporary)
+    for guard in plan['guards']:
+        path = root / guard['path']
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes((ROOT / guard['path']).read_bytes())
+    for row in rows:
+        path = root / row['path']
+        if row['before'] is not None:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_bytes(row['before'])
+
+    for mode, state, writes in [('check', 'before', 0), ('apply', 'after', len(rows)),
+                                ('apply', 'after', 0), ('check', 'after', 0),
+                                ('rollback', 'before', len(rows)), ('rollback', 'before', 0)]:
+        result = sealed.execute(plan_path, root, mode)
+        assert (result['state'], result['writes']) == (state, writes), result
+        events.append({'mode': mode, **result})
+
+    def refused(label):
+        snapshot = {str(p.relative_to(root)): p.read_bytes() for p in root.rglob('*') if p.is_file()}
+        try:
+            sealed.execute(plan_path, root, 'apply')
+        except sealed.Refusal:
+            events.append({'refusal': label})
+        else:
+            raise AssertionError('Unexpected admission: ' + label)
+        assert snapshot == {str(p.relative_to(root)): p.read_bytes() for p in root.rglob('*') if p.is_file()}
+
+    added = next(row for row in rows if row['before'] is None)
+    occupied = root / added['path']
+    occupied.parent.mkdir(parents=True, exist_ok=True)
+    occupied.write_text('foreign bytes\n')
+    refused('occupied target, no writes')
+    occupied.write_bytes(added['after'])
+    refused('mixed pre/postimages, no writes')
+    occupied.unlink()
+    guard = root / plan['guards'][0]['path']
+    original = guard.read_bytes()
+    guard.write_bytes(original + b'\ndrift\n')
+    refused('dependency drift, no writes')
+    guard.write_bytes(original)
+    assert sealed.execute(plan_path, root)['state'] == 'before'
+
+result = {'schema': 'm3.tq-custody/1', 'plan_sha256': plan['plan_sha256'],
+          'generated_outputs': len(rows), 'retained_records': len(before['migration']['records']),
+          'retained_gates': len(before['migration']['gates']), 'events': events}
+(CRATE / 'target/custody.json').write_text(json.dumps(result, indent=2) + '\n')
+print('PASS: exact recipe postimages, retained mapping, replay/rollback and three no-write refusals')

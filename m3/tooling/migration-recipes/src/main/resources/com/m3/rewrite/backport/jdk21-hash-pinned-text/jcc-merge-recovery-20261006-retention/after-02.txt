@@ -1,0 +1,5 @@
+capability_id	manifest_path
+jep458-java	m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-jep458-multifile-java/manifest.tsv
+jep458-text	m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk22-jep458-multifile-text/manifest.tsv
+jcc-merge-recovery-20261006-history-01	m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-01/manifest.tsv
+jcc-merge-recovery-20261006-history-02	m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-merge-recovery-20261006-history-02/manifest.tsv

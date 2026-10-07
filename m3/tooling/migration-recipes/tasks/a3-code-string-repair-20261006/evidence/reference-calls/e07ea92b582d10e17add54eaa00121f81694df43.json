@@ -1,0 +1,18 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "blob_sha": "e07ea92b582d10e17add54eaa00121f81694df43"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "src/jdk.javadoc/share/classes/jdk/javadoc/internal/doclets/formats/html/resources/standard.properties\tbb1c116219dfaecb82839797cbad206d2a04e951a7399275d247963dcb2b52ca\tb25548a5a7564b6e6d5948dfa6d746a34e0d23ef30712d5868929cf7fef592ab\t01-standard.properties.txt\nsrc/jdk.javadoc/share/man/javadoc.1\tf0abef4ca1aa23163b6b96f5c6eb7610ac9ac69a2b3815674049c091936c7143\t78a6b569484fc2e026e5b4e3c98d2822cc3d54f80bf8477ee19dc4f40dcff9d6\t02-javadoc.1.txt\n"
+    },
+    "isError": false
+  }
+}

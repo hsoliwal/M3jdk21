@@ -1,0 +1,62 @@
+{
+  "schema": "m3.sealed-install/1",
+  "recipe_id": "m3-vi",
+  "source_commit": "e0319c9fce2aabacb07302e806d997ea7e77c50c",
+  "target_base": "81f1aeb9b88408a763601982806f9c46f917ba82",
+  "scope": "MODULE",
+  "outputs": [
+    {
+      "path": "m3/NOTICE",
+      "before": {
+        "resource": "NOTICE.before.txt",
+        "sha256": "162b80bb88273e07e715cf66d7d80174548515a9ee4c1a1af4d446383d6a551a"
+      },
+      "after": {
+        "resource": "NOTICE.after.txt",
+        "sha256": "1f55398216ed23efc858988f68bb9fecafa10efba4dd19c5ec5a0e64bacee5fc"
+      }
+    },
+    {
+      "path": "m3/docs/name-mapping.json",
+      "before": {
+        "resource": "name-mapping.before.json",
+        "sha256": "4520738b949198601dc7c2ecf2bef7612bf11b024473bda06ffd75dbfa6253a7"
+      },
+      "after": {
+        "resource": "name-mapping.after.json",
+        "sha256": "186cd1559e221919ce558fda7192c13a2472ff512a4ac6dc0707338767532662"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Release.java",
+      "before": null,
+      "after": {
+        "resource": "M3Release.java.txt",
+        "sha256": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb"
+      }
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3VI.java",
+      "before": null,
+      "after": {
+        "resource": "M3VI.java.txt",
+        "sha256": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a"
+      }
+    },
+    {
+      "path": "src/java.base/share/legal/synexia.md",
+      "before": null,
+      "after": {
+        "resource": "synexia.md",
+        "sha256": "83555e6e0a9ac65409ea500bdb70c3ce6799a8a9498b767742335a48e5a6efa8"
+      }
+    }
+  ],
+  "guards": [
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+      "sha256": "b96894a77e5c310addbda72b248ab56fedf8ceb24e5de81fe6e5d090982a4abc"
+    }
+  ],
+  "plan_sha256": "d495744990429dbee3b9bced1f560cc3b90b548db307c8f72f312506d2d3f877"
+}

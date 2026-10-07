@@ -1,0 +1,11 @@
+metric	value
+modified_production_files	1
+modified_existing_workflows	1
+unchanged_existing_test_files	1
+added_jtreg_main	1
+added_recipe_JUnit_cases	5
+local_assertions_per_VM_mode	78
+baseline_fault_groups	3
+Maven_JUnit_runs	0
+full_JDK_builds	0
+whole_programme_complete	false

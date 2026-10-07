@@ -1,0 +1,223 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.m3.tooling.dag;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.m3.rewrite.scope.M3EditScope;
+import java.util.List;
+import org.junit.jupiter.api.Test;
+
+final class M3RecipeDagTest {
+
+    @Test
+    void canonicalDagIsDeterministicAndPromotionIsLast() {
+        M3RecipeDag dag = M3RecipeDag.canonical();
+        assertEquals(16, dag.size());
+        assertEquals("review-code-signal", dag.topologicalOrder().getFirst().id());
+        assertEquals(
+                List.of(
+                        "review-code-signal",
+                        "review-atom-pattern",
+                        "review-problem-planner",
+                        "review-jni-contract"),
+                dag.topologicalOrder().subList(0, 4).stream()
+                        .map(M3DagNode::id)
+                        .toList());
+        assertTrue(dag.topologicalOrder().subList(0, 4).stream()
+                .allMatch(node -> node.kind() == M3DagKind.RECIPE
+                        && node.scope() == M3EditScope.FILE
+                        && !node.mutating()));
+        assertEquals(List.of("review-jni-contract"), dag.require("inventory").dependsOn());
+        assertEquals("promote", dag.topologicalOrder().getLast().id());
+        assertTrue(dag.require("promote").serialPromotion());
+        assertThrows(IllegalArgumentException.class, () -> dag.require("missing"));
+    }
+
+    @Test
+    void independentFileRecipesShareOneParallelLayer() {
+        M3RecipeDag dag = new M3RecipeDag(List.of(
+                node("plan", M3DagKind.COMPATIBILITY, M3EditScope.FILE, false, false, false, "", List.of()),
+                node("file-a", M3DagKind.RECIPE, M3EditScope.FILE, true, false, false, "recipe.A", List.of("plan")),
+                node("file-b", M3DagKind.RECIPE, M3EditScope.FILE, true, false, false, "recipe.B", List.of("plan")),
+                node("verify", M3DagKind.VERIFICATION, M3EditScope.FILE, false, false, false, "", List.of("file-a", "file-b")),
+                node("promote", M3DagKind.PROMOTION, M3EditScope.FILE, false, true, false, "serial", List.of("verify"))));
+
+        assertEquals(
+                List.of("file-a", "file-b"),
+                dag.layers().get(1).stream().map(M3DagNode::id).toList());
+    }
+
+    @Test
+    void explicitScopePromotionIsRequired() {
+        List<M3DagNode> rejected = List.of(
+                node("file", M3DagKind.RECIPE, M3EditScope.FILE, true, false, false, "recipe.A", List.of()),
+                node("package", M3DagKind.RECIPE, M3EditScope.PACKAGE, true, false, false, "recipe.B", List.of("file")),
+                node("promote", M3DagKind.PROMOTION, M3EditScope.PACKAGE, false, true, false, "serial", List.of("package")));
+        assertThrows(IllegalArgumentException.class, () -> new M3RecipeDag(rejected));
+
+        M3RecipeDag accepted = new M3RecipeDag(List.of(
+                node("file", M3DagKind.RECIPE, M3EditScope.FILE, true, false, false, "recipe.A", List.of()),
+                node("package", M3DagKind.RECIPE, M3EditScope.PACKAGE, true, false, true, "recipe.B", List.of("file")),
+                node("promote", M3DagKind.PROMOTION, M3EditScope.PACKAGE, false, true, false, "serial", List.of("package"))));
+        assertEquals(M3EditScope.PACKAGE, accepted.require("package").scope());
+    }
+
+    @Test
+    void structuralErrorsFailClosed() {
+        assertThrows(NullPointerException.class, () -> new M3RecipeDag(null));
+        assertThrows(IllegalArgumentException.class, () -> new M3RecipeDag(List.of()));
+
+        M3DagNode a = node("a", M3DagKind.RECIPE, M3EditScope.FILE, true, false, false, "recipe.A", List.of());
+        assertThrows(IllegalArgumentException.class, () -> new M3RecipeDag(List.of(a, a)));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new M3RecipeDag(List.of(
+                        a,
+                        node("promote", M3DagKind.PROMOTION, M3EditScope.FILE, false, true, false, "serial", List.of("missing")))));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new M3RecipeDag(List.of(
+                        node("a", M3DagKind.RECIPE, M3EditScope.FILE, true, false, false, "recipe.A", List.of("b")),
+                        node("b", M3DagKind.RECIPE, M3EditScope.FILE, true, false, false, "recipe.B", List.of("a")),
+                        node("promote", M3DagKind.PROMOTION, M3EditScope.FILE, false, true, false, "serial", List.of("a")))));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new M3RecipeDag(List.of(
+                        a,
+                        node("verify", M3DagKind.VERIFICATION, M3EditScope.FILE, false, false, false, "", List.of("a")))));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new M3RecipeDag(List.of(
+                        node("promote", M3DagKind.PROMOTION, M3EditScope.FILE, false, true, false, "serial", List.of()),
+                        node("z", M3DagKind.VERIFICATION, M3EditScope.FILE, false, false, false, "", List.of()))));
+    }
+
+    @Test
+    void dagNodeAndAdmissionFactsValidateTheirOwnContracts() {
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> node("", M3DagKind.RECIPE, M3EditScope.FILE, true, false, false, "x", List.of()));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> node("x", M3DagKind.RECIPE, M3EditScope.FILE, true, false, false, "", List.of()));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> node("x", M3DagKind.RECIPE, M3EditScope.FILE, true, false, false, "x", List.of("x")));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> node("x", M3DagKind.RECIPE, M3EditScope.FILE, true, false, false, "x", List.of(" ")));
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> node("x", M3DagKind.PROMOTION, M3EditScope.FILE, false, false, false, "serial", List.of()));
+        assertThrows(
+                NullPointerException.class,
+                () -> new M3DagNode("x", null, M3EditScope.FILE, false, false, false, "", List.of()));
+        assertThrows(
+                NullPointerException.class,
+                () -> new M3DagNode("x", M3DagKind.VERIFICATION, null, false, false, false, "", List.of()));
+        assertThrows(
+                NullPointerException.class,
+                () -> new M3DagNode("x", M3DagKind.VERIFICATION, M3EditScope.FILE, false, false, false, "", null));
+        NullPointerException missingPacketId = assertThrows(
+                NullPointerException.class,
+                () -> new M3AdmissionFact(null, true, true, true, true, false, false, true, true));
+        assertEquals("packetId", missingPacketId.getMessage());
+
+        assertThrows(
+                IllegalArgumentException.class,
+                () -> new M3AdmissionFact(" ", true, true, true, true, false, false, true, true));
+        assertTrue(new M3AdmissionFact("p", true, true, true, true, false, false, true, true).promotable());
+        assertTrue(new M3AdmissionFact("p", true, true, true, true, true, true, true, true).promotable());
+        assertFalse(new M3AdmissionFact("p", true, true, true, true, true, false, true, true).promotable());
+        assertFalse(new M3AdmissionFact("p", false, true, true, true, false, false, true, true).promotable());
+        assertFalse(new M3AdmissionFact("p", true, false, true, true, false, false, true, true).promotable());
+        assertFalse(new M3AdmissionFact("p", true, true, false, true, false, false, true, true).promotable());
+        assertFalse(new M3AdmissionFact("p", true, true, true, false, false, false, true, true).promotable());
+        assertFalse(new M3AdmissionFact("p", true, true, true, true, false, false, false, true).promotable());
+    }
+
+    @Test
+    void firstMutationStartsAtFileScopeAndNeedsApprovalToBroaden() {
+        for (M3EditScope scope : M3EditScope.values()) {
+            List<M3DagNode> unapproved = List.of(
+                    node("first", M3DagKind.RECIPE, scope, true, false, false, "recipe.First", List.of()),
+                    node("promote", M3DagKind.PROMOTION, scope, false, true, false, "serial", List.of("first")));
+            if (scope == M3EditScope.FILE) {
+                assertEquals(scope, new M3RecipeDag(unapproved).require("first").scope());
+            } else {
+                IllegalArgumentException failure = assertThrows(
+                        IllegalArgumentException.class, () -> new M3RecipeDag(unapproved));
+                assertEquals("silent scope escalation at first: FILE -> " + scope, failure.getMessage());
+            }
+            M3RecipeDag approved = new M3RecipeDag(List.of(
+                    node("first", M3DagKind.RECIPE, scope, true, false, true, "recipe.First", List.of()),
+                    node("promote", M3DagKind.PROMOTION, scope, false, true, false, "serial", List.of("first"))));
+            assertEquals(scope, approved.require("first").scope());
+        }
+    }
+
+    @Test
+    void nonMutatingReviewDeclarationsNeverGrantScopeAuthority() {
+        for (M3EditScope scope : M3EditScope.values()) {
+            M3DagNode review = node("review", M3DagKind.RECIPE, M3EditScope.LIBRARY_API,
+                    false, false, true, "recipe.Review", List.of());
+            M3DagNode inventory = node("inventory", M3DagKind.INVENTORY, M3EditScope.MODULE,
+                    false, false, true, "inventory", List.of("review"));
+            M3DagNode promotion = node("promote", M3DagKind.PROMOTION, scope,
+                    false, true, false, "serial", List.of("first"));
+            List<M3DagNode> unapproved = List.of(review, inventory,
+                    node("first", M3DagKind.RECIPE, scope, true, false, false, "recipe.First", List.of("inventory")),
+                    promotion);
+            if (scope == M3EditScope.FILE) {
+                assertEquals(scope, new M3RecipeDag(unapproved).require("first").scope());
+            } else {
+                assertThrows(IllegalArgumentException.class, () -> new M3RecipeDag(unapproved));
+            }
+            assertEquals(scope, new M3RecipeDag(List.of(review, inventory,
+                    node("first", M3DagKind.RECIPE, scope, true, false, true, "recipe.First", List.of("inventory")),
+                    promotion)).require("first").scope());
+        }
+    }
+
+    @Test
+    void transparentReviewPreservesGrantedScopeWithoutBroadeningIt() {
+        M3DagNode first = node("first", M3DagKind.RECIPE, M3EditScope.MODULE,
+                true, false, true, "recipe.First", List.of());
+        M3DagNode review = node("review", M3DagKind.RECIPE, M3EditScope.LIBRARY_API,
+                false, false, true, "recipe.Review", List.of("first"));
+        M3DagNode promotion = node("promote", M3DagKind.PROMOTION, M3EditScope.LIBRARY_API,
+                false, true, false, "serial", List.of("next"));
+        assertEquals(M3EditScope.MODULE, new M3RecipeDag(List.of(first, review,
+                node("next", M3DagKind.RECIPE, M3EditScope.MODULE, true, false, false, "recipe.Next", List.of("review")),
+                promotion)).require("next").scope());
+        assertThrows(IllegalArgumentException.class, () -> new M3RecipeDag(List.of(first, review,
+                node("next", M3DagKind.RECIPE, M3EditScope.LIBRARY_API, true, false, false, "recipe.Next", List.of("review")),
+                promotion)));
+        assertEquals(M3EditScope.LIBRARY_API, new M3RecipeDag(List.of(first, review,
+                node("next", M3DagKind.RECIPE, M3EditScope.LIBRARY_API, true, false, true, "recipe.Next", List.of("review")),
+                promotion)).require("next").scope());
+    }
+
+    private static M3DagNode node(
+            String id,
+            M3DagKind kind,
+            M3EditScope scope,
+            boolean mutating,
+            boolean serialPromotion,
+            boolean scopePromotionApproved,
+            String workRef,
+            List<String> dependencies) {
+        return new M3DagNode(
+                id,
+                kind,
+                scope,
+                mutating,
+                serialPromotion,
+                scopePromotionApproved,
+                workRef,
+                dependencies);
+    }
+}

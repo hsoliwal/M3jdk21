@@ -1,0 +1,8 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.SynexiaHandoffV2Receiver
+displayName: Upgrade Synexia handoff receiver to V2 recipe-role enforcement
+description: Accepts legacy V1 packets, validates current V2 targetClass metadata, and restricts target-side recipe artifacts to explicit adapter, fixture, or proof roles bound to canonical Synexia recipes.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
+      crateName: synexia-handoff-v2-receiver

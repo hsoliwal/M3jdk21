@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.Jni
+displayName: Install the JNI build repair packet
+description: Installs exact instructions and proof for the retained native patch backend. This installer is not C++ AST processing and grants no default-branch promotion authority.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: jni-packet

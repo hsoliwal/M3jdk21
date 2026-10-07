@@ -1,0 +1,96 @@
+name: M3 retained capability audit
+
+on:
+  push:
+    branches:
+      - "m3/retained-capability-audit-*"
+      - master
+    paths:
+      - "m3/**"
+      - "src/**"
+      - "test/**"
+      - ".github/workflows/m3-retained-capability-audit.yml"
+  pull_request:
+    paths:
+      - "m3/**"
+      - "src/**"
+      - "test/**"
+      - ".github/workflows/m3-retained-capability-audit.yml"
+  workflow_dispatch:
+    inputs:
+      retention_baseline:
+        description: "Optional full immutable commit ID whose retained obligations must survive"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  retained-capabilities:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Run exact Git-tree retention proof
+        shell: bash
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+          BASELINE_SHA: ${{ github.event.pull_request.base.sha || github.event.before || inputs.retention_baseline || '' }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          OUT_CAP="$RUNNER_TEMP/m3-retention-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          OUT_EVID="$RUNNER_TEMP/m3-retained-evidence-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          BASELINE_ARGS=()
+          if [[ -n "$BASELINE_SHA" ]]; then
+            if [[ ! "$BASELINE_SHA" =~ ^([0-9a-f]{40}|[0-9a-f]{64})$ ]]; then
+              echo "RETENTION_REFUSED: baseline must be a full lowercase Git commit ID" >&2
+              exit 2
+            fi
+            if [[ "$BASELINE_SHA" =~ ^0+$ ]]; then
+              if [[ "$EVENT_NAME" != "push" ]]; then
+                echo "RETENTION_REFUSED: zero baseline is only a branch-creation push sentinel" >&2
+                exit 2
+              fi
+              echo "Retention scope: branch-creation push; all direct parents, no pre-push baseline"
+            else
+              BASELINE_ARGS+=("-Dm3.retentionBaseline=$BASELINE_SHA")
+            fi
+          else
+            echo "Retention scope: all direct parents; no explicit historical baseline"
+          fi
+          run_audit() {
+            local catalogue="$1"
+            local output="$2"
+            mvn -B -ntp -f m3/history/retention-pom.xml verify \
+              -Dm3.repo="$GITHUB_WORKSPACE" \
+              -Dm3.retentionCommit="$HEAD_SHA" \
+              -Dm3.retentionCatalogue="$catalogue" \
+              -Dm3.output="$output" \
+              "${BASELINE_ARGS[@]}"
+            cat "$output/SUMMARY.json"
+          }
+
+          run_audit "m3/history/RETAINED_CAPABILITIES.tsv" "$OUT_CAP"
+          run_audit "m3/history/RETAINED_EVIDENCE.tsv" "$OUT_EVID"
+
+      - name: Upload retention evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: retained-capability-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/m3-retention-${{ github.run_id }}-${{ github.run_attempt }}
+            ${{ runner.temp }}/m3-retained-evidence-${{ github.run_id }}-${{ github.run_attempt }}
+          if-no-files-found: warn
+          retention-days: 30

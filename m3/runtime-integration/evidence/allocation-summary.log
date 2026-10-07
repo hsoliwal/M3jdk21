@@ -1,0 +1,6 @@
+{"segmented":false,"joins":2000,"allocated_bytes":65632176,"operation_ns":2138014147,"retained_leaf_arrays":2000,"leaf_payload_bytes":65536000}
+{"segmented":true,"joins":2000,"allocated_bytes":433056,"operation_ns":45444259,"retained_leaf_arrays":2,"leaf_payload_bytes":24576}
+{"segmented":false,"joins":2000,"allocated_bytes":65632176,"operation_ns":1834236812,"retained_leaf_arrays":2000,"leaf_payload_bytes":65536000}
+{"segmented":true,"joins":2000,"allocated_bytes":433056,"operation_ns":41228020,"retained_leaf_arrays":2,"leaf_payload_bytes":24576}
+{"segmented":false,"joins":2000,"allocated_bytes":65632176,"operation_ns":1570839705,"retained_leaf_arrays":2000,"leaf_payload_bytes":65536000}
+{"segmented":true,"joins":2000,"allocated_bytes":433056,"operation_ns":23271672,"retained_leaf_arrays":2,"leaf_payload_bytes":24576}

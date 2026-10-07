@@ -25,6 +25,9 @@
 
 #include "jvm.h"
 #include "java_lang_String.h"
+#include <limits.h>
+#include <stdint.h>
+#include <stdlib.h>
 
 JNIEXPORT jobject JNICALL
 Java_java_lang_String_intern(JNIEnv *env, jobject this)
@@ -41,4 +44,88 @@ Java_java_lang_StringUTF16_isBigEndian(JNIEnv *env, jclass cls)
   } else {
     return JNI_FALSE;
   }
+}
+
+
+/*
+ * M3String compatibility shadows.
+ *
+ * Canonical M3 text remains behind the owner/coordinate representation.
+ * These entry points allocate final Java arrays only at an explicit compatibility boundary.
+ */
+static void m3_throw(JNIEnv *env, const char *name, const char *message) {
+    jclass type = (*env)->FindClass(env, name);
+    if (type != NULL) {
+        (*env)->ThrowNew(env, type, message);
+    }
+}
+
+static jmethodID m3_method(
+        JNIEnv *env, jobject value, const char *name, const char *signature)
+{
+    jclass type = (*env)->GetObjectClass(env, value);
+    if (type == NULL) return NULL;
+    return (*env)->GetMethodID(env, type, name, signature);
+}
+
+JNIEXPORT jbyteArray JNICALL
+Java_java_lang_M3String_nativeByteShadow(
+        JNIEnv *env, jclass ignored, jobject value, jint start, jint length, jbyte coder)
+{
+    if (value == NULL) {
+        m3_throw(env, "java/lang/NullPointerException", "M3String");
+        return NULL;
+    }
+    if (start < 0 || length < 0 || (coder != 0 && coder != 1)) {
+        m3_throw(env, "java/lang/IllegalArgumentException", "invalid M3 shadow range/coder");
+        return NULL;
+    }
+    jlong byte_length = ((jlong)length) << coder;
+    if (byte_length > INT_MAX) {
+        m3_throw(env, "java/lang/OutOfMemoryError", "M3 byte shadow too large");
+        return NULL;
+    }
+
+    jbyteArray result = (*env)->NewByteArray(env, (jsize)byte_length);
+    if (result == NULL || byte_length == 0) return result;
+
+    jmethodID get_bytes = m3_method(env, value, "getBytes", "([BIIBI)V");
+    if (get_bytes == NULL) return NULL;
+
+    jvalue args[5];
+    args[0].l = result;
+    args[1].i = start;
+    args[2].i = 0;
+    args[3].b = coder;
+    args[4].i = length;
+    (*env)->CallVoidMethodA(env, value, get_bytes, args);
+    return (*env)->ExceptionCheck(env) ? NULL : result;
+}
+
+JNIEXPORT jcharArray JNICALL
+Java_java_lang_M3String_nativeCharShadow(
+        JNIEnv *env, jclass ignored, jobject value, jint start, jint length)
+{
+    if (value == NULL) {
+        m3_throw(env, "java/lang/NullPointerException", "M3String");
+        return NULL;
+    }
+    if (start < 0 || length < 0) {
+        m3_throw(env, "java/lang/IllegalArgumentException", "invalid M3 char shadow range");
+        return NULL;
+    }
+
+    jcharArray result = (*env)->NewCharArray(env, length);
+    if (result == NULL || length == 0) return result;
+
+    jmethodID get_chars = m3_method(env, value, "getChars", "(II[CI)V");
+    if (get_chars == NULL) return NULL;
+
+    jvalue args[4];
+    args[0].i = start;
+    args[1].i = start + length;
+    args[2].l = result;
+    args[3].i = 0;
+    (*env)->CallVoidMethodA(env, value, get_chars, args);
+    return (*env)->ExceptionCheck(env) ? NULL : result;
 }

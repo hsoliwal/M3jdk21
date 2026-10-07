@@ -1,0 +1,18 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "blob_sha": "9f24b0965b9c78257ab0ebfb9f3f83561766e0ea"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "m3/docs/jcc-source-handoff.md\tABSENT\tfff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337\t01-jcc-source-handoff.md.txt\nm3/docs/name-mapping.json\t67d40925b97a38c3c1a85f337806524ac590a540bd39647b3e4b0988f2ae3fbb\t536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace\tafter00-name-mapping.json.txt\nm3/migration/evidence/jcc-handoff-20261005/root-coverage-obligations.tsv\tABSENT\tcba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b\t03-root-coverage-obligations.tsv.txt\nm3/migration/evidence/jcc-handoff-20261005/source-destination-bindings.json\tABSENT\tcdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126\t02-source-destination-bindings.json.txt\n"
+    },
+    "isError": false
+  }
+}

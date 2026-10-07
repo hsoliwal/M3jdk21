@@ -1,0 +1,9 @@
+key	value
+base	7fffe6f14ea0073126e57a27ab7c2e333b5b8883
+branch	m3/a3-source-type-20261004
+baseline_run	37212552006
+baseline_job	111466504051
+hosted_jdk	Temurin21+35
+hosted_maven	3.9.16
+local_maven	ABSENT
+scope	recipe compiler repair only

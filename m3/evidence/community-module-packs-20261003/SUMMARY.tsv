@@ -1,0 +1,12 @@
+metric	value
+source_files_in_this_packet	30
+whole_repository_inventory	NOT_CLAIMED
+exact_duplicate_groups	1
+normalized_similarity_groups	1
+standalone_java_cases	41
+python_tests	11
+linked_modules	13
+actual_junit_runs	0
+jacoco_reports	0
+real_javafx_runs	0
+modified_jdk_builds	0

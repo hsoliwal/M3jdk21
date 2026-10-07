@@ -428,6 +428,12 @@ final class StringConcatHelper {
             // newly created string required, see JLS 15.18.1
             return new String(s1);
         }
+        if (String.m3JoinedStringsEnabled()) {
+            String joined = String.m3Concat(s1, s2);
+            if (joined != null) {
+                return joined;
+            }
+        }
         // start "mixing" in length and coder or arguments, order is not
         // important
         long indexCoder = mix(initialCoder(), s1);
@@ -438,6 +444,28 @@ final class StringConcatHelper {
         indexCoder = prepend(indexCoder, buf, s2);
         indexCoder = prepend(indexCoder, buf, s1);
         return newString(buf, indexCoder);
+    }
+
+    /**
+     * Correctness-first fallback for invokedynamic concat shapes that would
+     * otherwise allocate one flat byte array. Primitive arguments arrive boxed
+     * by MethodHandle adaptation; stringOf preserves the JLS null/toString rules.
+     */
+    static String m3Concat(String[] constants, Object[] args) {
+        String[] pieces = new String[args.length * 2 + 1];
+        int piece = 0;
+        for (int index = 0; index < args.length; index++) {
+            String constant = constants[index];
+            if (constant != null) {
+                pieces[piece++] = constant;
+            }
+            pieces[piece++] = stringOf(args[index]);
+        }
+        String suffix = constants[args.length];
+        if (suffix != null) {
+            pieces[piece++] = suffix;
+        }
+        return String.join("", "", "", pieces, piece);
     }
 
     /**

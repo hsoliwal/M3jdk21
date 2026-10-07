@@ -1,0 +1,18 @@
+{
+  "schema": "m3.sealed-install/1",
+  "recipe_id": "com.m3.rewrite.InstallIndexStringCompatibility/1",
+  "source_repository": "hsoliwal/com.synexia",
+  "source_base_commit": "75fb1abaecb56969bea2914520bbe819f130632b",
+  "source_change_plan_sha256": "f7ecc5f3a6496c2c7c1e08bea2c242f35e3d9a50e5d2ddc76f218805250aacbe",
+  "target_base_commit": "8bb6215372e07712f1fdf5a0cb912af495007b19",
+  "outputs": [
+    {"path":"m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenBytes.java","before":null,"after":{"resource":"templates/FrozenBytes.java.txt","sha256":"cb50139594817d5cb2477c4d67148d4aed2174299f05cff9a3b24416139bc6b4"}},
+    {"path":"m3/ports/indexstring/src/main/java/com/synexia/indexstring/FrozenChars.java","before":null,"after":{"resource":"templates/FrozenChars.java.txt","sha256":"0c03ca0ed8b42212fa92e4d5f9325ba864f8d11928cd6a0b030b861f668f0657"}},
+    {"path":"m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedBytes.java","before":null,"after":{"resource":"templates/MIndexJoinedBytes.java.txt","sha256":"206cd1ecb96bec037c59b531c13dd7029e4ce79f1b50bfdfccc64dfd6279e74b"}},
+    {"path":"m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedChars.java","before":null,"after":{"resource":"templates/MIndexJoinedChars.java.txt","sha256":"964f0fc3611f259562adca7f7a9ec581d149f16b4dfcc9a3c775a2a8ca53f864"}},
+    {"path":"m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStorageIntern.java","before":null,"after":{"resource":"templates/MIndexJoinedStorageIntern.java.txt","sha256":"f42c548a4fd47d3dac43283082125232e04d5f13f28b63521832493394176337"}},
+    {"path":"m3/ports/indexstring/src/main/java/com/synexia/indexstring/MIndexJoinedStreams.java","before":null,"after":{"resource":"templates/MIndexJoinedStreams.java.txt","sha256":"a4f0e0cd7b3e8701aba21b8b14b068cc2d3822e17dc066daa442cbc580404a80"}},
+    {"path":"m3/ports/indexstring/src/main/java/com/m3/text/compat/M3Text.java","before":null,"after":{"resource":"templates/M3Text.java.txt","sha256":"2f1c52feaa5c81462a469c84d847448840cfa75db5a0f1d40c72241718417653"}}
+  ],
+  "plan_sha256": "d9c74d38d6bb3c473f76a2bf3b3537a17d4a1e11f283df9283ac9284e3714b21"
+}

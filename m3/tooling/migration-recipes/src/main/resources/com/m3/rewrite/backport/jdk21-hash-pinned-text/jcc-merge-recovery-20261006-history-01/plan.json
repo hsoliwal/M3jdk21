@@ -1,0 +1,2089 @@
+{
+  "schema": "m3.sealed-install/1",
+  "recipe_id": "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe/jcc-merge-recovery-20261006-history-01",
+  "version": 1,
+  "source_commit": "0483f79ae51dd578c2e4fec1b8431bd51b59b469",
+  "destination_base": "87590cb96fb0e2dc0f88fae8e01957f7179cd255",
+  "scope": "Exact restoration of previously published JCC recipe/test/evidence files. Historical execution claims retain their original epochs. No runtime acceptance.",
+  "outputs": [
+    {
+      "path": "m3/migration/test/test_jcc_source_final_handoff_packet.py",
+      "before": null,
+      "after": {
+        "resource": "history-0000.txt",
+        "sha256": "9703fd06fdb5f3616a721730270b15d02fb7593976ff4b210109e5ee57375c4f"
+      }
+    },
+    {
+      "path": "m3/migration/test/test_jcc_source_recovery_handoff_packet.py",
+      "before": null,
+      "after": {
+        "resource": "history-0001.txt",
+        "sha256": "90dc23b1a8db4ec3347048c7f85e688a76893633955e877eab723bdd87d58d19"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-source-final-handoff.yml",
+      "before": null,
+      "after": {
+        "resource": "history-0002.txt",
+        "sha256": "4aedf7fb2a3bfab3f831f0c5bdba8764752616e2d92182e66f3962efa8446cd2"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jcc-source-recovery-handoff.yml",
+      "before": null,
+      "after": {
+        "resource": "history-0003.txt",
+        "sha256": "74248526b328662a9a3ee3cff75b16ff0f3c5d346b035fb5f54d707d738c36bf"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after00-name-mapping.json.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0004.txt",
+        "sha256": "e4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after01-jcc-source-handoff.md.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0005.txt",
+        "sha256": "59ed76969f86486e7adb377409e284f69577fe02754006fdfe5b3938a16760a0"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after02-source-destination-bindings.json.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0006.txt",
+        "sha256": "049c7c1987c05a15f4152fcb8f261a65245d72a25688d5a530a4afa5405cd3ef"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/after03-root-coverage-obligations.tsv.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0007.txt",
+        "sha256": "59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before00-name-mapping.json.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0008.txt",
+        "sha256": "536af76dd7b7b7217707662c2f1437af4adaa53af898627b0884e0b4f4603ace"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before01-jcc-source-handoff.md.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0009.txt",
+        "sha256": "fff2e02f72c07f89c6f8bcabab3839878ff8628f0b31b04bb3632eb62be10337"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before02-source-destination-bindings.json.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0010.txt",
+        "sha256": "cdb5d7f4a0746fe561f51fa9a13cbd9fa319f8196bfd3075ca2288be7f3d1126"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/before03-root-coverage-obligations.tsv.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0011.txt",
+        "sha256": "cba3b3315df643f328c4acb2fd08b5194262dc7ad7b40557107a8c614355f55b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/manifest.tsv",
+      "before": null,
+      "after": {
+        "resource": "history-0012.txt",
+        "sha256": "4e8bd94f8dd29256ca41dee2fb0b5164ba24c387038143d88d5fa958e6ecdad5"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-final-handoff-20261005/plan.json",
+      "before": null,
+      "after": {
+        "resource": "history-0013.txt",
+        "sha256": "ae42e3db29017106b47f493fc663ca679ead1802558699915d1a3a1fb3454c48"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after00-name-mapping.json.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0014.txt",
+        "sha256": "eb42442866c73c38027b481a84c0473bea422e4628d0794fa31fc61d9f1a818e"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after01-jcc-source-handoff.md.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0015.txt",
+        "sha256": "d5e18258027f457a1fcdc45ff30b4e2e7a0723825ea95b651933af23f27fd28d"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after02-source-destination-bindings.json.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0016.txt",
+        "sha256": "f8b27e3582eb494af2c8dd47225976f974be6edc2f6c26313975064d48739497"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/after03-root-coverage-obligations.tsv.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0017.txt",
+        "sha256": "1c4eedbf3f155bac469693da312c577d26999e7776ca1f85870f6cce125f1e35"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before00-name-mapping.json.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0018.txt",
+        "sha256": "e4ae516fea9822a4bfe26669e9749e167f52bb30049d520339ee42f3779bc0b3"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before01-jcc-source-handoff.md.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0019.txt",
+        "sha256": "59ed76969f86486e7adb377409e284f69577fe02754006fdfe5b3938a16760a0"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before02-source-destination-bindings.json.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0020.txt",
+        "sha256": "049c7c1987c05a15f4152fcb8f261a65245d72a25688d5a530a4afa5405cd3ef"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/before03-root-coverage-obligations.tsv.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0021.txt",
+        "sha256": "59c4c970ac75a56aa5d5a3e2f3e88f5caa831eb06be788266c725202b8c64b12"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/manifest.tsv",
+      "before": null,
+      "after": {
+        "resource": "history-0022.txt",
+        "sha256": "944d1531de586740a9e098f4c36f98f8e4c668f35090b8bc68a116b5c8eb0efb"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005/plan.json",
+      "before": null,
+      "after": {
+        "resource": "history-0023.txt",
+        "sha256": "272a4b6a2f6d39a0d7baf2d4a104d671125fe471a2a3351cd321315e6be5d499"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccSourceFinalHandoffTest.java",
+      "before": null,
+      "after": {
+        "resource": "history-0024.txt",
+        "sha256": "c08ec9e4ecd9c803c310bdbce32ae3b23cad9c0953db408f36a399d980736309"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/JccSourceRecoveryHandoffTest.java",
+      "before": null,
+      "after": {
+        "resource": "history-0025.txt",
+        "sha256": "803c34429b567af7a1802f04c2cbb52701cc580f8e0c58cc58ffde70bab70e2b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0026.txt",
+        "sha256": "75a3f91291331447ef7c2093dab8844d2a8d1636a8ac928ec884d8e039632250"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/01-check-E2-preimages.json",
+      "before": null,
+      "after": {
+        "resource": "history-0027.txt",
+        "sha256": "bdc11d9d7e07444e87b05548ae334d46f975c0ba40821f5bd78a57faa33cb73d"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/01-check-E2-preimages.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0028.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/01-check-E2-preimages.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0029.txt",
+        "sha256": "aa93e0784744196e9b44871f3e2b99491d354ac0cc5c7100a1b03529539db74d"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/02-actual-text-recipe-maven.json",
+      "before": null,
+      "after": {
+        "resource": "history-0030.txt",
+        "sha256": "641a0029d9ae43b052f176d2b78445b21014acde6f0aeff2cd26c81c04aa982d"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/02-actual-text-recipe-maven.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0031.txt",
+        "sha256": "9ddf3781b5e43a87b1d67caac2bc4b251f9ce8d77c509c8369129f4b0359fd55"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/02-actual-text-recipe-maven.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0032.txt",
+        "sha256": "5b2544383f9ed80a58a994df641093034aaee8f61b2826322739fcc7bb2d1097"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/03-actual-packet-contract.json",
+      "before": null,
+      "after": {
+        "resource": "history-0033.txt",
+        "sha256": "094ce20878d1f32d534558deeccb9d0d74854d23324d3e77d5e4e56fdf3adbe5"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/03-actual-packet-contract.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0034.txt",
+        "sha256": "c1a8b249dcfa0c56577194cc2a9f85502fb3c817c13301d27a56c72672bed7ef"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/03-actual-packet-contract.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0035.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/04-apply.json",
+      "before": null,
+      "after": {
+        "resource": "history-0036.txt",
+        "sha256": "a61de4e8b41058e8caff26fb329cf7e8e5a8c5a99cf77b93939fd9a0a02ebfa2"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/04-apply.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0037.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/04-apply.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0038.txt",
+        "sha256": "56d4fe6c67f912938f3ad0dbcec218e9138e7f9ed0140827d9f6e5b9b5ff40b2"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/05-apply-fixed-point.json",
+      "before": null,
+      "after": {
+        "resource": "history-0039.txt",
+        "sha256": "ff2344acf152a26c7beb403d4850a86fea79b0ad20979a7e7e4d85d72603de96"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/05-apply-fixed-point.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0040.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/05-apply-fixed-point.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0041.txt",
+        "sha256": "427546e0d791d91055d48136e425e7a2e8713deb058c1e51b7d99769e827ab3c"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/06-rollback.json",
+      "before": null,
+      "after": {
+        "resource": "history-0042.txt",
+        "sha256": "6b0cf854da053589c409255c4f515405f58a80cafa8f8de29a238c316e65a838"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/06-rollback.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0043.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/06-rollback.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0044.txt",
+        "sha256": "8055b81e0631c5495af9c11ec3f345b0a5a67cc11ba47462c55a37e42f823eec"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/07-replay.json",
+      "before": null,
+      "after": {
+        "resource": "history-0045.txt",
+        "sha256": "11ac35097f2bfe8e32cf6ca038a4a6c052d1e63a75f924ec5882193f4c612d52"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/07-replay.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0046.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/07-replay.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0047.txt",
+        "sha256": "56d4fe6c67f912938f3ad0dbcec218e9138e7f9ed0140827d9f6e5b9b5ff40b2"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/08-check-final.json",
+      "before": null,
+      "after": {
+        "resource": "history-0048.txt",
+        "sha256": "b7968aef706956f3f7831c773d51a96404f60fe137f328898a1d446f00a5e0f5"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/08-check-final.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0049.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/08-check-final.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0050.txt",
+        "sha256": "427546e0d791d91055d48136e425e7a2e8713deb058c1e51b7d99769e827ab3c"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/09-whole-map-validate.json",
+      "before": null,
+      "after": {
+        "resource": "history-0051.txt",
+        "sha256": "df65843d4ea27575ac3064a415510dfecf9b4d4f8b4bf6529b9b0049ad5612b7"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/09-whole-map-validate.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0052.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/09-whole-map-validate.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0053.txt",
+        "sha256": "d4578b77ded4c87f33240fad4588e418b3157992288cbf4a1a4e38be14ece15b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/10-completion-remains-blocked.json",
+      "before": null,
+      "after": {
+        "resource": "history-0054.txt",
+        "sha256": "dc466635b8f90f742fe090bc60d5aa23f839fab05f2e77e352f247229b83ae69"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/10-completion-remains-blocked.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0055.txt",
+        "sha256": "c4a5d6a265b1a39ec6254fe71bc9e58cd55a7658d9ea6d18ccff4cba24687b25"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/10-completion-remains-blocked.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0056.txt",
+        "sha256": "d4578b77ded4c87f33240fad4588e418b3157992288cbf4a1a4e38be14ece15b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/JccSourceFinalHandoffTest.xml",
+      "before": null,
+      "after": {
+        "resource": "history-0057.txt",
+        "sha256": "e33dd229900b9614a77e9187b9ac04e024f2250c73c74a625dfe53fba093be85"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/empty-maven-settings.xml",
+      "before": null,
+      "after": {
+        "resource": "history-0058.txt",
+        "sha256": "b546e42cf905023b479e33abc908fed827584e753d6402a372fb11fc1d343bca"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/inputs.json",
+      "before": null,
+      "after": {
+        "resource": "history-0059.txt",
+        "sha256": "da48340c83e26dd478078dc5195e000b99666f54663361c1773827acdbd46416"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/execution/receipt.json",
+      "before": null,
+      "after": {
+        "resource": "history-0060.txt",
+        "sha256": "7d075ad45d5113694ded187de27595bcdf0a5fb0909bfadf715c786d06fcd854"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0061.txt",
+        "sha256": "41451abbdc2676b9f76d894f82bf08f3406cb76df9015308fb54cdae3e9999e1"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/INPUT_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0062.txt",
+        "sha256": "d369f629eac19101b1fc80e5cdfeec195ddd26b1555790952b604dbd0e8c045f"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/INSPECTION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0063.txt",
+        "sha256": "e47292537c9e43a1712ad56895a462b13ede3d92efae36752ea2591045918625"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/INSPECTION_METHOD_NOTES.json",
+      "before": null,
+      "after": {
+        "resource": "history-0064.txt",
+        "sha256": "23529ef9088bb5cfba0190b030748998203d8e90be634628ddb9097befb15891"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0065.txt",
+        "sha256": "8b54e4e6bd75a7a5d12a7acf8ed86861f3d39eab734d284dd5901bd60790f5a8"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/final-gate-review/inspect_receiving.py",
+      "before": null,
+      "after": {
+        "resource": "history-0066.txt",
+        "sha256": "3bc757f8edd4d7965964392c670d30f5499e05c64b8b1b9ce6f37b73dc83324d"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0067.txt",
+        "sha256": "d91d254762c0c628e46019c2cd53d1b05de1855512eeb5b6efd2e628ae1c3b52"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0068.txt",
+        "sha256": "d7bc139f4e4af0d7c680c8202adacc3b8d3267761c3865ffcf33f4131fe5e089"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/STRUCTURAL_INSPECTION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0069.txt",
+        "sha256": "b450bd8051b630dded029063176e6d4cb5ae59f718419d8052aef6ba2ba5723a"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/root-coverage/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0070.txt",
+        "sha256": "ece80d9a65fee0cb0468e25b3598933646e02f2a7b18772f993e01bf396463f6"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/root-coverage/FINDINGS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0071.txt",
+        "sha256": "3287044289e953d694ca8655e89e7fed3c29017477393a4d16534dbafca0e5d9"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/root-coverage/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0072.txt",
+        "sha256": "7c02e8a1c50d729f7ad10e30b57245c6d7c6a7729248a7c8281a060a55729206"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/source-proof/OBSERVATIONS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0073.txt",
+        "sha256": "88602ece9ae5d8577e732c89173ac258951f8955b6f1a7fc592f0214214228f8"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/independent-review/source-proof/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0074.txt",
+        "sha256": "61d7ebff50601cf93c653eff27ce175ccd3ddbab6c5917c586b505774d5f8747"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/AUTHORING_RESULT.json",
+      "before": null,
+      "after": {
+        "resource": "history-0075.txt",
+        "sha256": "12d6973deec9aa7735bd794f1659b68b214ee083dd1b573d826f46ab7efe59f4"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/author_successor.py",
+      "before": null,
+      "after": {
+        "resource": "history-0076.txt",
+        "sha256": "1e56387b23f35b8bf6f1707aac6a11215b8e2999ed65e370820933c95daea161"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/check_references.py",
+      "before": null,
+      "after": {
+        "resource": "history-0077.txt",
+        "sha256": "0f21d0f5fdf5c0b00c775c6af2f829e301a40de3475bbf08f521a527e82cdd7c"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/provenance/run_verification.py",
+      "before": null,
+      "after": {
+        "resource": "history-0078.txt",
+        "sha256": "ac7b489278e25f5674fe4804531d0ba6eb732c8376c39b74dcf47a72b4cd9f4a"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/reference-audit/REFERENCE_AUDIT.json",
+      "before": null,
+      "after": {
+        "resource": "history-0079.txt",
+        "sha256": "a4af3c44bc1afa6f83881c17ced55f418940dbd792bfd687cbb3a717c44887cd"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/reference-audit/attempt01-checker.py",
+      "before": null,
+      "after": {
+        "resource": "history-0080.txt",
+        "sha256": "8870ec7a99c1d3486740dd80fbcc173a046310c12a512e558fdf5b4860fdc32e"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/reference-audit/attempt01.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0081.txt",
+        "sha256": "0f6ecbb8c5380bb9f454c16b33dbe574a1847e810e9382cd75cf30a838040e3d"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0082.txt",
+        "sha256": "2a64db3e877371d61908cafdd9a86a2681a8d522672c49f7b1749d5e4541d57e"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/INPUT_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0083.txt",
+        "sha256": "3e566919f1c576b36312744c2030db087f94befad10871dfd1e600fb8e120c7e"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0084.txt",
+        "sha256": "7f5f0c54cbac2b8d8201bb386678a03284f99cacdf9295eb4cac3ae9689b85d0"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/SOURCE_FIELDS_AND_PROOFS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0085.txt",
+        "sha256": "b0a1ff2a675017bc4eda2620a031bb963d038c21e10ddacb8f57b1fc51f6188a"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/donor-owners/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0086.txt",
+        "sha256": "276087c23b14a886cb13f45055e1cd105a8bc56c52d7e36d7ede94bae65cd6db"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/donor-owners/SOURCE_TABLE.json",
+      "before": null,
+      "after": {
+        "resource": "history-0087.txt",
+        "sha256": "e9a1af5f9d9bc36507cee743ebfaa560b2ed5a026645791736d22f1f94528bb4"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/root-accounting/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0088.txt",
+        "sha256": "e912f6cad50f06e0679734efef700c07ff4249d796551bc7cb369b04dd1ad219"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/root-accounting/MAVEN_DECLARATIONS.tsv",
+      "before": null,
+      "after": {
+        "resource": "history-0089.txt",
+        "sha256": "b0f10b47bfa6f3ea6f27a235c0d55ab7c5fc86ac6dd41dbbc5164f44f5a94e9a"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/root-accounting/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0090.txt",
+        "sha256": "1c2597b94843a7177731d88de222bc3f5ec38dab60c8ebb0da825b298dee16f6"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/root-accounting/ROOT_ACCOUNTING.json",
+      "before": null,
+      "after": {
+        "resource": "history-0091.txt",
+        "sha256": "cfe76d41dda4220937086d951a126bf04dec0d282ba088b6de2a6bff33b6e14d"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-binding-review/root-accounting/ROOT_ENTRIES.tsv",
+      "before": null,
+      "after": {
+        "resource": "history-0092.txt",
+        "sha256": "307c01ac0648a8296f5f8b6c7533925de6050344f7a154d524796fc84b2ab4c3"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/M3_CURRENT_MASTER_PREIMAGES.json",
+      "before": null,
+      "after": {
+        "resource": "history-0093.txt",
+        "sha256": "6e3d2c9760ee93a10b0da660e84a77d002ea2312954b42d3459803c867b57475"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/PR_STATE_AFTER_SOURCE_PUBLICATION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0094.txt",
+        "sha256": "c23d1948cb21f8b3a5e294d3fb0c6c14527a9bed646e082a4dc94ae98832ceb5"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/ROOT_ACCOUNTING.json",
+      "before": null,
+      "after": {
+        "resource": "history-0095.txt",
+        "sha256": "cfe76d41dda4220937086d951a126bf04dec0d282ba088b6de2a6bff33b6e14d"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_FIELDS_AND_PROOFS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0096.txt",
+        "sha256": "b0a1ff2a675017bc4eda2620a031bb963d038c21e10ddacb8f57b1fc51f6188a"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_IMPLEMENTATION_PUBLICATION_VERIFIED.json",
+      "before": null,
+      "after": {
+        "resource": "history-0097.txt",
+        "sha256": "03ba5aa231929079fda7772dc6a798a687ba7486fa81ceacc0723407330f956a"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_INITIAL_CI_OBSERVATION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0098.txt",
+        "sha256": "6268a6944bf4f5a17f7783daaee5e462f68f2e1cb0853121dba9dc9049a077e9"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_PRODUCTION_BODY_READBACK.json",
+      "before": null,
+      "after": {
+        "resource": "history-0099.txt",
+        "sha256": "0abd6ddcbe96eac76da9a708a2ffc9350c546c1c63382686c600dad3f7fc20df"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-final-handoff-20261005/source-final/SOURCE_REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0100.txt",
+        "sha256": "7f5f0c54cbac2b8d8201bb386678a03284f99cacdf9295eb4cac3ae9689b85d0"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0101.txt",
+        "sha256": "27de06b75c3b7ef8cb774473073176c5e5d6e1486741206c6336f155718fa71a"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring-invocation/EXECUTION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0102.txt",
+        "sha256": "1fcd84420aa008a6635694994606d13e266d04a45bf33e84fc5f5102985158d5"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring-invocation/stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0103.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring-invocation/stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0104.txt",
+        "sha256": "2f48b47224cb85d1452b437ce21397bc814a78cb71154017ba4bea1561bc1b16"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring/AUTHORING_RESULT_V3.json",
+      "before": null,
+      "after": {
+        "resource": "history-0105.txt",
+        "sha256": "2880acc74ccba95ce8efe10e8762ebe36275cd44b7de602f07d08f272690ef4b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring/BOUND_INPUTS_REVIEW_PACKET.json",
+      "before": null,
+      "after": {
+        "resource": "history-0106.txt",
+        "sha256": "e0ae5375e313a8547f5cdb8f607d2fe1c04efe91d3d43c86d1a5878329beaf59"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring/BOUND_RESOURCES_REVIEW_PACKET.json",
+      "before": null,
+      "after": {
+        "resource": "history-0107.txt",
+        "sha256": "9024a1180d4f5856130d9e3a7dd1e8f18786ca8825c9569397d37003019aac9a"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring/DERIVATION_INVOCATION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0108.txt",
+        "sha256": "590e52f2a39fe42e568bb3ae1a78cde05794995333adafc42fcbb570e1371b27"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/authoring/DERIVATION_RESULT.json",
+      "before": null,
+      "after": {
+        "resource": "history-0109.txt",
+        "sha256": "767002f4216ff25d89ed3a9b44592c831bbdb42b4a7240206d9d987a26c3d585"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/COMPANION_BINDING.json",
+      "before": null,
+      "after": {
+        "resource": "history-0110.txt",
+        "sha256": "f2a02221bf5b1f4b36793429a8743eda01eac19a073f17c4e498d854a2066176"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0111.txt",
+        "sha256": "21ce8061417242403fb835f6222f522277f8c87f0a3d5a3ed9ce2f83b549e3e9"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/INPUT_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0112.txt",
+        "sha256": "d386f5fc0130caf03318a301bd61ed74a667afdb9977a344459208532ef09651"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0113.txt",
+        "sha256": "06d74f24e11624b6f3201f9b51230dc7ab41eda36f62cc5e093da6a2fbc4cb98"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/STATIC_AUDIT.json",
+      "before": null,
+      "after": {
+        "resource": "history-0114.txt",
+        "sha256": "6b77c8737ca9858f2cd82127ec6367a846bbda8e96a41b20fa17a99ff50d0744"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/custody-output-subreview/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0115.txt",
+        "sha256": "9f0a00ac64a73aeed9ff8b480190c4ec06174a3f8107c47070a492f449f22843"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/custody-output-subreview/INPUT_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0116.txt",
+        "sha256": "ae513e9a5acbc1fb76bf6741618c7ceb9f30126441332f60c581d7dc922bcecb"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/custody-output-subreview/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0117.txt",
+        "sha256": "50b226e31a609a30ee644790f84e8966234a8a4f163b5a1084f94ce7b7554711"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/checker-static-review/custody-output-subreview/WRITE_SURFACE.json",
+      "before": null,
+      "after": {
+        "resource": "history-0118.txt",
+        "sha256": "72cd8ccf7e4ee74be62760c1359f94cb2e1601f56cb1aef9b2e4a3a0165e8613"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/custody-packaging/ADDITIONAL_RECEIPTS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0119.txt",
+        "sha256": "30cc1c07b3aac8f1a6662c494c0cbbc76c22bc6a4fdbcbb04770236fd2384907"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/custody-packaging/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0120.txt",
+        "sha256": "caa248d052d7def21ef1552b41fe893f877e3989edbd661336aedf6eb7b9b405"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/AUTHORING_RECEIPT.json",
+      "before": null,
+      "after": {
+        "resource": "history-0121.txt",
+        "sha256": "b96baa62d0814767fa847d8f6a72dda1972ad673b137fec7c180916b2de098ac"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/COMPONENT_BINDING.json",
+      "before": null,
+      "after": {
+        "resource": "history-0122.txt",
+        "sha256": "f02ed2799bd8b7c200a9b4777f549bb7c733751f873a441531f3eec35d73b617"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/DONOR_CATALOGUE.md",
+      "before": null,
+      "after": {
+        "resource": "history-0123.txt",
+        "sha256": "f12b6c4986ab5d283205ecbdddce46a461bb579db2d3c83513cddaed23b722a7"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/EXECUTED_TEST_MAPPING.md",
+      "before": null,
+      "after": {
+        "resource": "history-0124.txt",
+        "sha256": "6e39cc123a018f72d3cdb02c178326f757b44159c75bd7332435ae5916ca19f9"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/INTEGRATION.md",
+      "before": null,
+      "after": {
+        "resource": "history-0125.txt",
+        "sha256": "e4c26810f4cc52ce476666795c7f54ed9288ab3e3dbe5629a2aa5f17df0dd57b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/donor_catalogue.json",
+      "before": null,
+      "after": {
+        "resource": "history-0126.txt",
+        "sha256": "b9c144d5eb9be716fd749b6d7cda456e0d40aae6ae423c794ad2ace1a4fe1322"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/EXPECTED_SOURCE_TREES.json",
+      "before": null,
+      "after": {
+        "resource": "history-0127.txt",
+        "sha256": "b8c31ba4c3c6c3cfafc426852655c15994193dc1a9c62edaefce05c7840131e0"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/HISTORICAL_CAPTURED_INPUTS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0128.txt",
+        "sha256": "7e13c28978bf59518850ecd10637729c87c25e0604c7b5505c44d1d5d5fa1fab"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/HISTORICAL_PR_9142.json",
+      "before": null,
+      "after": {
+        "resource": "history-0129.txt",
+        "sha256": "eaf45a8f519958536b7695da1fe3c0173253851aad9d3c4eca816f05b81fd4da"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/INPUT_MANIFEST.json",
+      "before": null,
+      "after": {
+        "resource": "history-0130.txt",
+        "sha256": "f7949116d828c55aa5cc77c19764cf0484958d408b86d0c91999c45a3fedd8f3"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/PATH_AND_TEST_ADMISSION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0131.txt",
+        "sha256": "29e476534bd7e7743194d1ae9b7a81f30d2f2dd4ca8b4ee8f115e2d7970f1fe1"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_BASE_CHAIN.json",
+      "before": null,
+      "after": {
+        "resource": "history-0132.txt",
+        "sha256": "bea94459b67cc6b7c0d98a2cfe3f946c6f558c803725ee76f89e0821dae3ff4a"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_BEFORE_BRANCH.json",
+      "before": null,
+      "after": {
+        "resource": "history-0133.txt",
+        "sha256": "e569931153bf732dd94ad6db0c362361c6cc1c25edf01c52cc17d578a07d3936"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_BRANCH_CREATION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0134.txt",
+        "sha256": "c34da01ca97b444752fef431a09f9a67eef4fba1505e46eaef5965027d3636d7"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_COMMIT_CREATION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0135.txt",
+        "sha256": "da87a53dd252a318f05a187751be9972e331dc910a5f54ed0128a8c42067c7d9"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_FINAL_PUBLICATION_CALLS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0136.txt",
+        "sha256": "557f5751a5dc4d21c0dafc40b3c493345f86d23fce1ac6ac9214eb285e194111"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_FINAL_READBACK.json",
+      "before": null,
+      "after": {
+        "resource": "history-0137.txt",
+        "sha256": "c98fdec1b73b2949415fde70f24c9c0d671ec9dc86535ef39b69f331e2f29fc6"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_PREFLIGHT.json",
+      "before": null,
+      "after": {
+        "resource": "history-0138.txt",
+        "sha256": "448f91365fa5cf8d4c832c2c404397ecc87706afb128a6a41079d5f695dfca08"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_PR_CREATION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0139.txt",
+        "sha256": "6fafbf96fcaae74f720995bfa67d2e2146f0844e046d1db19095005ab99e1efd"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_PUBLICATION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0140.txt",
+        "sha256": "8dadc9f70a6a2fa1f069bcc0883cef2c3d2218e701fdd166203c7304a3c50e25"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_STATE_BEFORE_BRANCH.json",
+      "before": null,
+      "after": {
+        "resource": "history-0141.txt",
+        "sha256": "c6cc73879c924be30d70ea248b92a2b281e28d7064de9bce1d2299eb9750e78b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_TREE_AND_BODY_CALLS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0142.txt",
+        "sha256": "193f9fe97c86b3a7dfda78458f6566e34189f8922dd31d6dec1d0a76c082cf56"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/SOURCE_TREE_CREATION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0143.txt",
+        "sha256": "016fa414afbd5e42ec56093d952276140d695f41d5c199b15615eeda9359dc91"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/donor-catalogue/evidence/verify_restoration.py",
+      "before": null,
+      "after": {
+        "resource": "history-0144.txt",
+        "sha256": "e5fb893d0f420e73a6ff3552f1c86f7129b8fc2b29b388939e7b12c10fc16a01"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/environment/HISTORICAL_TOOLCHAIN_PINS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0145.txt",
+        "sha256": "c42b313b2e6c70467b0cbe4f13b60c2e7cefa6ee13f7e1287ea1049a7f35ccbe"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/environment/toolchain-restoration/ATTEMPT01.json",
+      "before": null,
+      "after": {
+        "resource": "history-0146.txt",
+        "sha256": "9d8f8a50a30bd1c0e2011106d412090ffddbf69d48335e7e2f97790f53f9920c"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/environment/toolchain-restoration/ATTEMPT02.json",
+      "before": null,
+      "after": {
+        "resource": "history-0147.txt",
+        "sha256": "6aaf86eddc3307bf3099ae6054378067d0e7908ffe11881388bf8409d0106b64"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/environment/toolchain-restoration/RESTORATION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0148.txt",
+        "sha256": "fe2ce8fbda32244628bb4b6b132bf6538a33e323c35aea75fb3cdb470981f470"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/execution-invocation/EXECUTION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0149.txt",
+        "sha256": "460131d195eb89da3ab98b3781d580d32f3bf17af2cc13818e999885910c56ae"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/execution-invocation/STARTED.json",
+      "before": null,
+      "after": {
+        "resource": "history-0150.txt",
+        "sha256": "258212f079c0ad840e10a1f4a0c51d60da3eb0ad05d3a96beeb07e8ff27b035c"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/execution-invocation/stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0151.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/execution-invocation/stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0152.txt",
+        "sha256": "20d71c19eddbfedde09e1c8237740f3fbe7fd9a1859bb2dd2ba8db0157ef1888"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/COMPANION_BINDING.json",
+      "before": null,
+      "after": {
+        "resource": "history-0153.txt",
+        "sha256": "7cb3b39584bfc2f059b597353a54f45b27e8b7c13e937ca35d0ee61f93b8f345"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0154.txt",
+        "sha256": "3abb92f0aa81cf2e86446b0c74798d60aa99865b97db2b394f4c6e0d2a39d4ad"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/INPUT_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0155.txt",
+        "sha256": "bdbd87fa6ffe36d998e0420710b4bf1283fe19ae96acecb64f0a02986f109a4d"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/RECEIPT_RELATIONSHIPS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0156.txt",
+        "sha256": "785433ead65a22dc4dbe42915757d09c94245bad00357001f6027aaa7deac3c2"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0157.txt",
+        "sha256": "b10fe9dcd7c0b303e1e4d4b624051941326854e2fda02fa3a358898929b5afce"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/invocation-subreview/AUDIT.json",
+      "before": null,
+      "after": {
+        "resource": "history-0158.txt",
+        "sha256": "6016853506668d9796c6bdf0c9754ed9a853905a88e98fca73f87dc52ba2da28"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/invocation-subreview/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0159.txt",
+        "sha256": "8d0ea46d0ae4b21c01e23b4856b0f05fff0e6a8f16e6e9df141f511ba0d07428"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/invocation-subreview/INPUT_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0160.txt",
+        "sha256": "6640c7145d293b1970ac16d4b56bfd279d777d75aab81f6436234e7731cfa0df"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/final-gate-review/invocation-subreview/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0161.txt",
+        "sha256": "cf7deb5b28cf239bb8d4ebe5975cefc2df7c8bf3612e371ea3ec1ec65f840b15"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/DERIVED_INPUT_CHECKS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0162.txt",
+        "sha256": "0874be2a1253b6f91d210a88508c62768a9085bf8efb230ae7d747653ded0461"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0163.txt",
+        "sha256": "2552e37717af6ade717b605148c3e05321e5dd0613fcc3c16be08a6d04703d3d"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/PACKAGE_CHECKS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0164.txt",
+        "sha256": "6b469859fab2a1168bfbb5d22f7f37f6b8e6349d80fed4d12cb18e7b3ca18652"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/REVIEW.json",
+      "before": null,
+      "after": {
+        "resource": "history-0165.txt",
+        "sha256": "f258de18d7b32dded1f7bf34ac8fba229a4f52199ef634bd5a1dffce4b25d033"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0166.txt",
+        "sha256": "dbdaa3d629aa954d7f42bf3cbc02600110c3a883ebb08d023f466d4ebcbf64eb"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/inspect_bound.py",
+      "before": null,
+      "after": {
+        "resource": "history-0167.txt",
+        "sha256": "8a7220f37616d250ab645787e48b6f26cb189aa52b425b9d70098b18f5a9c98f"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-bound-review/inspect_package.py",
+      "before": null,
+      "after": {
+        "resource": "history-0168.txt",
+        "sha256": "e9f771fc5203b322b518f4bdaf917833d859c7e92ff829ee371b5ba7dfd459aa"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/EXECUTION_CHECKS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0169.txt",
+        "sha256": "d809e826859a441050650e6c4dbb879e6029f68088fc225e9329dd1c39384fd7"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0170.txt",
+        "sha256": "ba38a0fc867672d1fb4b0b6b757c0aef613594768ffcc94b5b71c2a4dd1c0479"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/POSTRUN_ADDITIONAL_PATHS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0171.txt",
+        "sha256": "610ee4a7da9fd437ee66f97fa367138595361b2ce786f1de539b554d8d9c5bfd"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/REVIEW.json",
+      "before": null,
+      "after": {
+        "resource": "history-0172.txt",
+        "sha256": "7d3b8fca8c46276b495818147c35050972a59ff079f55afa979d3b1c119db27a"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0173.txt",
+        "sha256": "1fa3be68d87d495a6458b778061d9bd670db574cc702e3f0ad9f00f64f392361"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/01-check-E3-preimages.json",
+      "before": null,
+      "after": {
+        "resource": "history-0174.txt",
+        "sha256": "b23850ef1f1c67c35d91ae8c336be9e679423badbacee8d1b7c600ab5d999d1d"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/01-check-E3-preimages.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0175.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/01-check-E3-preimages.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0176.txt",
+        "sha256": "10f0c98cdab62eae01ae2826f952a9f5f7667d0350c537e47fb0d2c6ed65ad94"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/02-actual-text-recipe-maven.json",
+      "before": null,
+      "after": {
+        "resource": "history-0177.txt",
+        "sha256": "6493aa9abdf40f16768a9ef47f1e3f60f9313f3bb60fba97f903a3f53c729bf2"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/02-actual-text-recipe-maven.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0178.txt",
+        "sha256": "9ddf3781b5e43a87b1d67caac2bc4b251f9ce8d77c509c8369129f4b0359fd55"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/02-actual-text-recipe-maven.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0179.txt",
+        "sha256": "0138e46f20874e7da1ba8c669b91a258fea7cc4e53ae27c83271881ce8eaf6b0"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/03-actual-packet-contract.json",
+      "before": null,
+      "after": {
+        "resource": "history-0180.txt",
+        "sha256": "feb59597ea3bbcfeed76abfb1b265c51098b75fd820c467496bfb5de3a6c9874"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/03-actual-packet-contract.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0181.txt",
+        "sha256": "e19416824a0f98fc36b2be2534541ab8060148f0274a68398362c6ed3a33e827"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/03-actual-packet-contract.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0182.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/04-apply.json",
+      "before": null,
+      "after": {
+        "resource": "history-0183.txt",
+        "sha256": "e0e7bc2be0cbb90d04ea82e3d00986861e2f2cc12e30cafeaeb38ce859072830"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/04-apply.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0184.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/04-apply.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0185.txt",
+        "sha256": "db1a0d7fed17da0f1f64299a6f38db109cc291e7da45800bf4603d3add73fd11"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/05-apply-fixed-point.json",
+      "before": null,
+      "after": {
+        "resource": "history-0186.txt",
+        "sha256": "610e555d607485e7a96fe9725a87b96c1cae5190e0222bcab2cda0dc7e34aa42"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/05-apply-fixed-point.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0187.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/05-apply-fixed-point.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0188.txt",
+        "sha256": "c1888956bcb8c9fa2f5a52d7cdcf4ec3d997bdbda439b431051ac839c33f36a1"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/06-rollback.json",
+      "before": null,
+      "after": {
+        "resource": "history-0189.txt",
+        "sha256": "16bd4e3768ed4f1cb5264b5473be6d06e4331bb4175b9752a31bc657793e9d53"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/06-rollback.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0190.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/06-rollback.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0191.txt",
+        "sha256": "5fc9f3ec131e0a0566699f38cc38809048fb229d27dbd59655f3b39795ef1d06"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/07-replay.json",
+      "before": null,
+      "after": {
+        "resource": "history-0192.txt",
+        "sha256": "80e1d37222b678b47c7522fc4cebfbe311fe095afdd534b74e0b25cf0aab74e9"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/07-replay.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0193.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/07-replay.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0194.txt",
+        "sha256": "db1a0d7fed17da0f1f64299a6f38db109cc291e7da45800bf4603d3add73fd11"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/08-check-final.json",
+      "before": null,
+      "after": {
+        "resource": "history-0195.txt",
+        "sha256": "1340fbfdf8feaa6d4e330669c2a9eeeb28edbd9abd76ddb5d999bb29134b2171"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/08-check-final.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0196.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/08-check-final.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0197.txt",
+        "sha256": "c1888956bcb8c9fa2f5a52d7cdcf4ec3d997bdbda439b431051ac839c33f36a1"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/09-whole-map-validate.json",
+      "before": null,
+      "after": {
+        "resource": "history-0198.txt",
+        "sha256": "8e0a1f21b7b419a230e3bdc2631c58e6abcc4e5d0f133f4e981af4975af0d98c"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/09-whole-map-validate.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0199.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/09-whole-map-validate.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0200.txt",
+        "sha256": "d4578b77ded4c87f33240fad4588e418b3157992288cbf4a1a4e38be14ece15b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/10-completion-remains-blocked.json",
+      "before": null,
+      "after": {
+        "resource": "history-0201.txt",
+        "sha256": "347e716e7e9e871d30f76f832a4de2f2c404407bae4ebb6d5c37b5722894f679"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/10-completion-remains-blocked.stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0202.txt",
+        "sha256": "c4a5d6a265b1a39ec6254fe71bc9e58cd55a7658d9ea6d18ccff4cba24687b25"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/10-completion-remains-blocked.stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0203.txt",
+        "sha256": "d4578b77ded4c87f33240fad4588e418b3157992288cbf4a1a4e38be14ece15b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/INVOCATION_EXECUTION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0204.txt",
+        "sha256": "460131d195eb89da3ab98b3781d580d32f3bf17af2cc13818e999885910c56ae"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/INVOCATION_STARTED.json",
+      "before": null,
+      "after": {
+        "resource": "history-0205.txt",
+        "sha256": "258212f079c0ad840e10a1f4a0c51d60da3eb0ad05d3a96beeb07e8ff27b035c"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/JccSourceRecoveryHandoffTest.xml",
+      "before": null,
+      "after": {
+        "resource": "history-0206.txt",
+        "sha256": "09d606a9675a7aa17a64945e499c8f8062bd75a42cce2ed53851309aa3efd001"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/empty-maven-settings.xml",
+      "before": null,
+      "after": {
+        "resource": "history-0207.txt",
+        "sha256": "b546e42cf905023b479e33abc908fed827584e753d6402a372fb11fc1d343bca"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/inputs.json",
+      "before": null,
+      "after": {
+        "resource": "history-0208.txt",
+        "sha256": "6367c7d343ece1f1547e4db7873180f4dfae6dda83212edadf0564e0a93bc341"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/invocation-stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0209.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/invocation-stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0210.txt",
+        "sha256": "20d71c19eddbfedde09e1c8237740f3fbe7fd9a1859bb2dd2ba8db0157ef1888"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inputs/receipt.json",
+      "before": null,
+      "after": {
+        "resource": "history-0211.txt",
+        "sha256": "1f4ac9825d975520a04b7dc5ac1b282d96be32601c7abe2b0cfb676b0ff2df09"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inspect_execution.py",
+      "before": null,
+      "after": {
+        "resource": "history-0212.txt",
+        "sha256": "b05b87209b152c873e3be79f701024b0ee7cfb3cea32863a428be8bfc73687be"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inspector-revisions/V1_DIAGNOSTIC.json",
+      "before": null,
+      "after": {
+        "resource": "history-0213.txt",
+        "sha256": "eda98e9fe2c406041ab13b10f8013da6b45b49830e820a678dbf05261b93caae"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-execution-review/inspector-revisions/inspect_execution_v1.py",
+      "before": null,
+      "after": {
+        "resource": "history-0214.txt",
+        "sha256": "33844e9364ba3c7f2ec60e69d0d9afcab21a9eb485e5ec5edec30856265d02cd"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-resource-review/FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0215.txt",
+        "sha256": "6f3019ab143e061f2c501ab7e25e105acbf51ecee87c31dab570099df1302d7f"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-resource-review/RESOURCE_CHECKS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0216.txt",
+        "sha256": "e4f5700c11dccd1dc13fc43b4078c2ed3cd5ac49d35f30e05b9aabe5b3a8bfe4"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-resource-review/REVIEW.json",
+      "before": null,
+      "after": {
+        "resource": "history-0217.txt",
+        "sha256": "9fa990d988eff95ba6410d15d1b76975b29389694d6fcacaf6bb89b24a79369a"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-resource-review/REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0218.txt",
+        "sha256": "df198e3ccda995d5d40fe9e17aca02507b3cb6b5077314c05b3c06b3eeb2cd28"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/independent-resource-review/inspect_resources.py",
+      "before": null,
+      "after": {
+        "resource": "history-0219.txt",
+        "sha256": "2f245d943610184af096a583bb9d0ff469cde04297f96caab8b80b6f48125c23"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/reference-audit-invocation/EXECUTION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0220.txt",
+        "sha256": "a31ca3a37ff8adf991e6845f6329997acf06f216ac0d0e1bc366c42329ab7000"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/reference-audit-invocation/stderr.log",
+      "before": null,
+      "after": {
+        "resource": "history-0221.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/reference-audit-invocation/stdout.log",
+      "before": null,
+      "after": {
+        "resource": "history-0222.txt",
+        "sha256": "a86e91566b9c9d94e71679162bba29564651f8f0b565e489777c21cd495481b2"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/reference-audit/REFERENCE_AUDIT.json",
+      "before": null,
+      "after": {
+        "resource": "history-0223.txt",
+        "sha256": "5867bffd36e65f2fd755921d0dbf9981a006bc0e38134b2d0e4e6830030900ea"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/AMENDMENT.json",
+      "before": null,
+      "after": {
+        "resource": "history-0224.txt",
+        "sha256": "e20b0de4dfa51c79e6e16d035c6c55a5d368a9641b175239cb6f41f916bd74a6"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/BUILD_ROLE_MAP.json",
+      "before": null,
+      "after": {
+        "resource": "history-0225.txt",
+        "sha256": "cabf31b005b28c18053c107936134356986f55770368cb982800900380ee8689"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/CURRENT_CONTEXT_MANIFEST.json",
+      "before": null,
+      "after": {
+        "resource": "history-0226.txt",
+        "sha256": "936730925c534f0744d5a3ed5831812c221c3ac919b889c1be5ebdfe294396ce"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/CURRENT_PROJECTION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0227.txt",
+        "sha256": "18c5fea0f72fe21aa78df1aa6c319eb4276fc15aa481952539c221ce651e6f49"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/CURRENT_SOURCE_MANIFEST.json",
+      "before": null,
+      "after": {
+        "resource": "history-0228.txt",
+        "sha256": "20fd857cb00711e02c34cd27445bd2c057db8f57a0cafb8ed9a455b453f3b37c"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/INVENTORY_FILE_SEALS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0229.txt",
+        "sha256": "02b0e8700b6d46a1c84730f8810ca510824af1da46655c5d59660b5902bb4b0c"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/INVENTORY_REVIEW.json",
+      "before": null,
+      "after": {
+        "resource": "history-0230.txt",
+        "sha256": "41178470be98b342b83f58c43afa4a603d72c115584956c4fdbc96ce6a45d039"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/INVENTORY_REVIEW.md",
+      "before": null,
+      "after": {
+        "resource": "history-0231.txt",
+        "sha256": "17af04df1ca7db7329bbff3f2cfa840b39ab69d93ef3a61caa988b71bb221400"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/PARENT_BUILD_CONTEXT.json",
+      "before": null,
+      "after": {
+        "resource": "history-0232.txt",
+        "sha256": "4f8fbf09070e4d45e42c7ac29c94401d70058fea04d98e44b3526a24c77912fc"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-current/RECOVERY_SOURCE_INCLUDES.txt",
+      "before": null,
+      "after": {
+        "resource": "history-0233.txt",
+        "sha256": "739ef583031ef3b940cbd141386ca91501fb7d505ce3ed78e2c55d2a98c70407"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/PUBLICATION_CUSTODY.json",
+      "before": null,
+      "after": {
+        "resource": "history-0234.txt",
+        "sha256": "95f325ce57dadab60031f41514d9a9c5fa3ef6eb29a41e3c9a8c81e2dee996b8"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/ROOT_ACCOUNTING.json",
+      "before": null,
+      "after": {
+        "resource": "history-0235.txt",
+        "sha256": "55610f52b7b1e01ee15999969cc385616ff2e43f734e589ff61c750c5ab3c845"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/SOURCE_FIELDS_AND_PROOFS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0236.txt",
+        "sha256": "7b5e197da5e2645efb87345e2abf92dcd8071993ff308c8fa0bca0511d00c52e"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/CUSTODY_CARRY_PROSE.md",
+      "before": null,
+      "after": {
+        "resource": "history-0237.txt",
+        "sha256": "0aeba88cf1e5545ff4e973f96e9c7231c5442544393d2ef5c5304f9ebab5570b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/CUSTODY_EVIDENCE_INDEX.json",
+      "before": null,
+      "after": {
+        "resource": "history-0238.txt",
+        "sha256": "8e478debeac87c46d01d57cf1038b2195005f9f6af249b25d97f1074ef26b38b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/BASE_TREE_MODEL.json",
+      "before": null,
+      "after": {
+        "resource": "history-0239.txt",
+        "sha256": "877a61dc6d9b4f4fa280faeadbd67db9ee3d56a68768fa06c917d85ab8fbaa80"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/RAW_READBACK_FAILURE_OBSERVATION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0240.txt",
+        "sha256": "224b3baa99e71c846cc96319c0a829eec3521d75f68731332ac2fa59fa214112"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/RAW_VERIFICATION_TREE_PLAN.json",
+      "before": null,
+      "after": {
+        "resource": "history-0241.txt",
+        "sha256": "00fa5b9e4e99621ed6b5aac3c0da4c6506f82e921a3da42fdd4645285653e319"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/audit_base.py",
+      "before": null,
+      "after": {
+        "resource": "history-0242.txt",
+        "sha256": "839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_CUSTODY.json",
+      "before": null,
+      "after": {
+        "resource": "history-0243.txt",
+        "sha256": "266c17d435d47c58129349e721eec1eee849ceaa28dd5c302eb6030cc02e978e"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BEFORE_BRANCH_EXECUTION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0244.txt",
+        "sha256": "caf3292d305a0f4e8dcae60d9b2bc9e6690bc25f32830f3be505db07ff04a281"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BRANCH_ABSENCE_BEFORE_CREATE.json",
+      "before": null,
+      "after": {
+        "resource": "history-0245.txt",
+        "sha256": "c9c175ba2a06b500d0345f720e94ac52279bb15dd7311a09b27c6c1bf1750e35"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BRANCH_CREATION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0246.txt",
+        "sha256": "ec92b5c20f52f6572332c6b3af3b8d1c7c3395a0493d5aaf0021382d0d47039f"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/BRANCH_GET.json",
+      "before": null,
+      "after": {
+        "resource": "history-0247.txt",
+        "sha256": "a65c5524109c673f1046d9f1729d7905f1539919f8f0a2fd91631a5feb28b6c8"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/COMPLETED_TRANSPORT.json",
+      "before": null,
+      "after": {
+        "resource": "history-0248.txt",
+        "sha256": "396f77ed23bbe356626bfcc90f6e6ac4232202f63e38f61a33251096dd8586e8"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FILE_READBACKS.json",
+      "before": null,
+      "after": {
+        "resource": "history-0249.txt",
+        "sha256": "c670df37826a24b0dda62a73ec3795e85c14a99fc44d68cdc470212dbbae4e98"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_COMMIT_CREATION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0250.txt",
+        "sha256": "cf5ff5e9b52fd172c334d48c3d961c8d2a14015fc38bb780fda56fcfd55abea1"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_COMMIT_GET.json",
+      "before": null,
+      "after": {
+        "resource": "history-0251.txt",
+        "sha256": "a10dc4a210e14dbf9028b3f3fb4f36ad72eb1e1db50851e7a8b47db9685791c6"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_PUBLICATION_EXECUTION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0252.txt",
+        "sha256": "cdeabfd468399b28d8dbba993f1b56bbfb6d63150eff52029dfd7eeae504a307"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/FINAL_READBACK.json",
+      "before": null,
+      "after": {
+        "resource": "history-0253.txt",
+        "sha256": "8391f552328dedb2777a9ca9e793dc2dea867554abe646dbbb338388ce961c2a"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PREFLIGHT.json",
+      "before": null,
+      "after": {
+        "resource": "history-0254.txt",
+        "sha256": "13e56b17314e89370fb8ce3f8417b405b89b34db8a1868d968589550975db84f"
+      }
+    },
+    {
+      "path": "m3/tooling/migration-recipes/tasks/jcc-source-recovery-handoff-20261005/source-recovery/custody-v3/source-publisher/epoch-01/PR_CREATION.json",
+      "before": null,
+      "after": {
+        "resource": "history-0255.txt",
+        "sha256": "148643747e3c13b10377eb35740a3832611485a04432fcd4e6970f4962f27cc0"
+      }
+    }
+  ],
+  "guards": [
+    {
+      "path": "m3/docs/name-mapping.schema.json",
+      "sha256": "c29f34e5b5d858b60cddd43b2e7f273d9c01ad553cb0e3a5dcc568698646f70b"
+    },
+    {
+      "path": "m3/migration/migration.py",
+      "sha256": "fd54e5fade1fc3050816265f2317967dd4176e7bb5e0bc55e6f620878026e88e"
+    },
+    {
+      "path": "m3/migration/recipe.py",
+      "sha256": "453d976a5f29526432be138b357d3f52f868fcc40a4ee697d969cc0836359628"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java",
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/pom.xml",
+      "sha256": "8544be570c2656c5fa641ae34fc01eaea420bbb420f6d80ce5f95253504e9888"
+    },
+    {
+      "path": "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java",
+      "sha256": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "sha256": "6c42ad2af4f9c5d24501a94eebd145c5cf77ed505ce1a1bb62d5b06b6c341cd1"
+    }
+  ],
+  "plan_sha256": "63eaadb7c946fba25764f67075c895fd1c4ebb9d6cb2235d282d2f72cd9dd83e"
+}

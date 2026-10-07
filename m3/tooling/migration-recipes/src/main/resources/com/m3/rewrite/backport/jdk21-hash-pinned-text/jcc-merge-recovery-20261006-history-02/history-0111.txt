@@ -1,0 +1,14 @@
+{
+  "actual_call_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/ROOT_POM_RECOVERY_CALL.json",
+  "actual_call_sha256": "f647efbec6809523678b640b0dfbdf495f494bfc5c3e84a8a5e6e8a473e89d41",
+  "bytes": 119981,
+  "git_blob": "98889a040aad5cc3c82f782bb4b173d118207988",
+  "paths": [
+    "/workspace/scratch/c0bcaa06df78/m3-mastery/inventory/final-integration/build-declarations/root-pom.xml",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/root-pom.xml"
+  ],
+  "schema": "jcc-exact-root-pom-restoration/1",
+  "scope": "Exact published body restored at the original derivation path; no Maven declaration or source revision change.",
+  "sha256": "f01cca4d90bd8fa1b1125474b5178cc80762d934bcb7bf5817f08f3f0dcf6aab",
+  "source_commit": "0c53b4f1dfe66c7eff05c8047b8fc681d26fecb8"
+}

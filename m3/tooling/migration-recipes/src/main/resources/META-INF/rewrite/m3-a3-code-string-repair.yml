@@ -1,0 +1,8 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.A3CodeStringRepair
+displayName: Repair the exact A3 code-containing regex subject
+description: Escapes the two nested quotes in the production subject and its template while synchronizing the hash-pinned Java manifest.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: a3-code-string-repair-20261006

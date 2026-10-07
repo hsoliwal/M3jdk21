@@ -1,0 +1,72 @@
+{
+  "source_repo": "hsoliwal/com.synexia",
+  "source_commit": "cf3796cfca75284e9626b1e31703e41314c9f852",
+  "target_repo": "hsoliwal/M3jdk21",
+  "target_base": "7652e327eccb9df658cbfaf2f6373a01c562b260",
+  "target_tree": "4f06dbf789b4447e3c694100be3690dc7afafd95",
+  "donor": {
+    "LICENSE": {
+      "sha256": "1eb85fc97224598dad1852b5d6483bbcf0aa8608790dcc657a5a2a761ae9c8c6",
+      "git_blob": "29f81d812f3e768fa89638d1f72920dbfd1413a8"
+    },
+    "MIndexRegexTrigramQuery.java.txt": {
+      "sha256": "428cb5cdd1afc83449ad35cbc228883dc36d3f1c36ceba8c208a6aa3aa0f400f",
+      "git_blob": "e7f1d4a181c76c0a2c4bc1464d3bc9e500cbbbea"
+    },
+    "NOTICE": {
+      "sha256": "31cec4f2c4936b0e7a71a77847a3c20b0959e119a02ef5cf537f4f707fff9427",
+      "git_blob": "cf6694a1316785ba2aa45394314bbae2e856c7fe"
+    },
+    "trigram-oracle.cpp.txt": {
+      "sha256": "5cc3a6d227b44b234b0883dc7c3790ee522b153013f3f302233ef42ae01f3d89",
+      "git_blob": "c55de5857bb14269dcc66e4bd107d4f5346645a3"
+    }
+  },
+  "dependencies": {
+    "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java": {
+      "sha256": "0e65b26f674f68fea30151ea63a17faef2f88ca0f0679723bb3dc230fda22b72",
+      "git_blob": "33783749e46474f2bdc68103e189fe2907a61fa9"
+    },
+    "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": {
+      "sha256": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+      "git_blob": "a2e8c916208b563517e51b738744a05357e633aa"
+    },
+    ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapTaskRecipe.java": {
+      "sha256": "58bac6968ebd2cce6f43f338c289db14435b3ef05ed2abc13402275285b89462",
+      "git_blob": "cfb9fb8befe2c5ccde5035e96ae7c99b89b5f490"
+    },
+    ".m3/openrewrite-recipes/src/main/java/com/synexia/m3/bootstrap/M3BootstrapInventoryRecipe.java": {
+      "sha256": "05ac05e7f3cb7549d26866a61dec0edf19515317c95f73db82d1c517cad88ef5",
+      "git_blob": "8f1018a1bcfa203420253d59a8473ef5a18e19b6"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3StringBacking.java": {
+      "sha256": "bcd2fe86a21464f7c65fd582368362d327e54b143dc05df13b31c1a029ecb251",
+      "git_blob": "5daedbe16dfc9377783b52d932e548cc44f0b335"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3MappedStringBacking.java": {
+      "sha256": "f84d4d7763156d615d32b7a1024931e18073a1122227d8228d8638332407bd01",
+      "git_blob": "c2dc2371c730aa758ccc45e06ba4ab95661e5593"
+    },
+    "test/jdk/java/lang/String/M3MappedStringBackingTest.java": {
+      "sha256": "9f42d1bdd6e174f5eac44e72afae2154ac140c9773c540b3073a06a8c2da827d",
+      "git_blob": "b1f69174a1c8c521f94759a9e046a0b63028e022"
+    },
+    "test/jdk/java/lang/String/MapFactsTest.java": {
+      "sha256": "07f1de47de88624740a0b4e0e7fb30a05627f37054cbd11dad0e3c3298401059",
+      "git_blob": "b427cca8342bea336686db1f5904364ac4ee17b5"
+    }
+  },
+  "successor": {
+    "parent": "1c389e31805fb4faf5d9fe256c8dc6797a2eadff",
+    "recipe": "m3/tooling/tq-sync",
+    "retained_owner_sha256": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+    "history": [
+      "b68391863561ce80169663cd2b49c2845e084b74",
+      "bb0461ea8adc5b93771596a0fc8e8981a1e9e328",
+      "1ba43c787d44cf46324634efee7bceacd9fcec4e"
+    ],
+    "disposition": "SURVIVES: original TQ, M3 backing names and exact set containment; stale custody is reconciled",
+    "runtime_owner": "M3JDK21",
+    "synexia_role": "convergence workspace and donor only"
+  }
+}

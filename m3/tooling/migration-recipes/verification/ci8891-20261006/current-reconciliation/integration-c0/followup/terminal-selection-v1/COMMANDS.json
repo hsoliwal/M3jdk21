@@ -1,0 +1,158 @@
+{
+  "archiveOwner": {
+    "bytes": 33814,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py",
+    "sha256": "89d43693f508c723e431296cc06f611c8de4f94df8eaddea95a2c7742feb0574"
+  },
+  "automaticProofRerun": false,
+  "commands": [
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/prepare_package.py",
+        "--proof",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/evidence/producer-v1",
+        "--receiving-result",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/RESULT.json",
+        "--receiving-inputs",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/receiving-selection-v3/RECEIVING-SELECTION.json"
+      ],
+      "cwd": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1",
+      "executed": false,
+      "executionOwner": "/root",
+      "id": "select",
+      "purpose": "Copy the exact finished producer and actual STOP receiver selection into a fresh source closure."
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py",
+        "pack",
+        "--root",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/source",
+        "--plan",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/package-plan.json",
+        "--output",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/bundle"
+      ],
+      "cwd": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1",
+      "executed": false,
+      "executionOwner": "/root",
+      "id": "pack",
+      "purpose": "Run the unchanged archive owner against the actual selected closure."
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py",
+        "verify",
+        "--bundle",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/bundle"
+      ],
+      "cwd": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1",
+      "executed": false,
+      "executionOwner": "/root",
+      "id": "verify",
+      "purpose": "Verify the resulting archive with the unchanged owner."
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/m3-checkout/m3/migration/intake-20261005/current-752-ci/cih-producer-portable/package_evidence.py",
+        "extract",
+        "--bundle",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/bundle",
+        "--output",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/extracted"
+      ],
+      "cwd": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1",
+      "executed": false,
+      "executionOwner": "/root",
+      "id": "extract",
+      "purpose": "Extract into a fresh directory using the unchanged owner."
+    },
+    {
+      "argv": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+        "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/finish_package.py"
+      ],
+      "cwd": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1",
+      "executed": false,
+      "executionOwner": "/root",
+      "id": "finish",
+      "purpose": "Read back extracted bytes and emit the paired publication mapping and reconstruction metadata."
+    }
+  ],
+  "consumerQualified": false,
+  "executionOrder": [
+    "select",
+    "pack",
+    "verify",
+    "extract",
+    "finish"
+  ],
+  "freshOutputsRequired": [
+    "source",
+    "package-plan.json",
+    "SOURCE-CLOSURE.json",
+    "bundle",
+    "extracted",
+    "READBACK.json",
+    "PROJECT-READY.json",
+    "PAIRED-FILES.json"
+  ],
+  "helperInputs": [
+    {
+      "bytes": 13165,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/prepare_package.py",
+      "sha256": "8ccbea077946cb7cb8a01cf7473799433235b34467c9bfa4eabbf135af3ea95f"
+    },
+    {
+      "bytes": 9154,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/finish_package.py",
+      "sha256": "88acbc1aa271f0d40b73ae35469fbbcf1f56846d912a756e4477babae724b629"
+    },
+    {
+      "bytes": 1860,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/reconstruct.py",
+      "sha256": "c6a6a9af02b79506084e1b477b3b46f60614f5370424135452ed397cca2e40f7"
+    },
+    {
+      "bytes": 13982,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/AUTHORING-PLAN.json",
+      "sha256": "d6122560a9f8b8b7a033f8cde3b27427299cbd08fac8237def6ee311028eaf40"
+    }
+  ],
+  "historicalOrFrozenEvidenceEdited": false,
+  "producerResult": {
+    "bytes": 15115,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/evidence/producer-v1/RESULT.json",
+    "sha256": "7f381ac0f810aab4dcc7d46d8ced7eb327452852f83468b31a2763af56db6213"
+  },
+  "python": {
+    "bytes": 30894944,
+    "path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
+    "sha256": "fa67443527ed9647f760d807e2a38f26340757123e643c4639cf273ed15d5ea7"
+  },
+  "receivingResult": {
+    "bytes": 32991,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup/primary-observation-v1/RESULT.json",
+    "sha256": "fcbf7e041a1465babc525f4a7c9743a5d4f57cb43a1c4bd065d3e90fbdcd1a51"
+  },
+  "receivingSelection": {
+    "bytes": 45711,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-followup-preparation/receiving-selection-v3/RECEIVING-SELECTION.json",
+    "sha256": "6483d4a75236aaa6f4231bd3c509c14de950a75f03537e565170138a1f0e70cb"
+  },
+  "receivingStatus": "PRIMARY_ONLY_STOP",
+  "receivingStopPreserved": true,
+  "rootMustCaptureActualCommandsAndStreams": true,
+  "runNextOnlyAfterActualPriorSuccess": true,
+  "schema": "synexia.fc0.terminal-bound-packaging-plan/1",
+  "selectionReadback": {
+    "bytes": 3106,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/recipe-recovery/current-followup-c0/packaging-authoring-v1/terminal-selection-v1/SELECTION-READBACK.json",
+    "sha256": "3d82ba0ac547e19a6370f266a536277691cbb74470131a15c56d250ae1a7ccf9"
+  },
+  "status": "AUTHORED_NOT_EXECUTED"
+}

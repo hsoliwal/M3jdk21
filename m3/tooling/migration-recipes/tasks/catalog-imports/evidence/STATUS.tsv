@@ -1,0 +1,10 @@
+gate	state	detail
+source_inventory	PASS	Two complete original files match pinned Git blobs
+catalogue_review	PASS	Pinned RemoveUnusedImports selected; OrderImports not activated
+implementation	CANDIDATE	Existing composite extended; first four children retained
+whitespace_diff	PASS	No whitespace errors in selected delta
+java_syntax	PASS	Two candidate units parsed without framework type-linking
+expected_fixture_compile	PASS	Four independently prepared before/expected pairs; eight compilations; byte-identical class pairs
+openrewrite_junit	BLOCKED	Maven absent; actual scheduler and eight JUnit cases not executed
+coverage	NOT_MEASURED	Existing POM and 99 percent gates unchanged
+full_jdk_programme	OPEN	No modified-JDK build or all-backport acceptance in this packet

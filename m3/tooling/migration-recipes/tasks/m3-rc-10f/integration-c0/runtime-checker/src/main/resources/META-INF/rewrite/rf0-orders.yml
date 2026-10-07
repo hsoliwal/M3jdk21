@@ -1,0 +1,13 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Rf0Forward
+displayName: Rf0 Forward declared replay
+description: Explicit named replay of the sole Rfc family; no distinct-permutation or receiving qualification claim.
+recipeList:
+  - com.synexia.m3.Rf0Rfc
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Rf0Reverse
+displayName: Rf0 Reverse declared replay
+description: Explicit named replay of the sole Rfc family; no distinct-permutation or receiving qualification claim.
+recipeList:
+  - com.synexia.m3.Rf0Rfc

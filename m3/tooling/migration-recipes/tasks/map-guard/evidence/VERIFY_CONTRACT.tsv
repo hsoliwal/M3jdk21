@@ -1,0 +1,15 @@
+gate	state	detail
+source and diff	PASS	Pinned source bytes; reviewed private-constructor/commit changes
+static	PASS	JSON/YAML; ordered manifests and exact resource hashes; bash -n
+Java compiler	PASS	Actual two owners: --release21 -Xlint:all -Werror; actual tests: source/target21
+original format regression	PASS	Original jtreg main unchanged on baseline and repaired owners
+text row-count attack	REPRODUCED_THEN_REJECTED	64-byte CRC-valid metadata; baseline OOME; repaired IllegalStateException
+byte row-count attack	REPRODUCED_THEN_REJECTED	Same test in sibling byte parser
+FD and cleanup	PASS_LINUX	16 outer,16 inner failures,4 nested acquisition failures; no surviving channel descriptors
+minimum valid records	PASS	Original fixture with empty scalar/alias; text120 and byte32 byte headers
+exception preservation	PASS	Original cause; cleanup suppression, null acquisition, identity/self-suppression and Error
+API	PASS	Backing/interface/View javap public-protected signatures match
+repeatable execution	PASS	verify.sh executed on fresh input subset; both VM modes; input hashes unchanged
+OpenRewrite/JUnit	NOT_RUN	Maven missing; dependency network unavailable; do not substitute syntax proof
+99percent coverage	NOT_MEASURED	No POM or threshold change
+full jtreg and product build	NOT_RUN	Direct invocation of actual jtreg main is separate from harness/full-VM acceptance

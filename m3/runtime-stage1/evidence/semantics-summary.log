@@ -1,0 +1,22 @@
+SEMANTICS checks=808685 digest=30e36ec204f5aec8e0d672ff5be675d3f8ac1677164481ec82a335b2540da499
+SEMANTICS checks=808685 digest=30e36ec204f5aec8e0d672ff5be675d3f8ac1677164481ec82a335b2540da499
+SEMANTICS checks=808685 digest=30e36ec204f5aec8e0d672ff5be675d3f8ac1677164481ec82a335b2540da499
+SEMANTICS checks=808685 digest=30e36ec204f5aec8e0d672ff5be675d3f8ac1677164481ec82a335b2540da499
+PASS built-image CompactStrings=+ HashCode
+PASS built-image CompactStrings=+ ContentEquals
+PASS built-image CompactStrings=+ Exceptions
+PASS built-image CompactStrings=+ StringContentEqualsBug
+PASS built-image CompactStrings=+ SBConstructor
+PASS built-image CompactStrings=+ Supplementary
+PASS built-image CompactStrings=+ Encodings
+PASS built-image CompactStrings=+ RegionMatches
+PASS built-image CompactStrings=+ Regex
+PASS built-image CompactStrings=- HashCode
+PASS built-image CompactStrings=- ContentEquals
+PASS built-image CompactStrings=- Exceptions
+PASS built-image CompactStrings=- StringContentEqualsBug
+PASS built-image CompactStrings=- SBConstructor
+PASS built-image CompactStrings=- Supplementary
+PASS built-image CompactStrings=- Encodings
+PASS built-image CompactStrings=- RegionMatches
+PASS built-image CompactStrings=- Regex

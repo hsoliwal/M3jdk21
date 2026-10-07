@@ -1,0 +1,58 @@
+{
+  "observed_utc": "2026-10-06 04:12:38 UTC",
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "base": "master",
+    "head": "aix/jcc-receiving-recovery-20261006",
+    "draft": true,
+    "title": "Recover JCC receiving history and reconcile current source handoff",
+    "body": "## Why this is needed\n\nThe merge of #147 retained the delivering commit in ancestry while omitting its historical receiving payload. Current mapping records also regressed to older source pins. This draft restores the exact history first and will append tested current mapping, retention and CI recipes.\n\n## Published historical restoration\n\nCommit `946fd922c1d878e3f32309c83d132057a7ef8451` has sole parent `87590cb96fb0e2dc0f88fae8e01957f7179cd255` and root `0b686778262c36f40153dde6e569abc8d393a3c6`.\n\n- Restores all 443 missing historical evidence and recipe-custody files from `0483f79ae51dd578c2e4fec1b8431bd51b59b469` as their exact Git objects: 29,889,572 bytes.\n- Preserves all 1,766 current M3 files, the current operational mapping and every other root entry.\n- Verifies the complete resulting M3 subtree `19aae07ba508323d71a57034e37642a237283a0d` and root through fresh readback: 544 reconstructed Git tree identities, 2,209 M3 files, no deletions.\n\n## Current recipe work in progress\n\nThe companion source recovery is [com.synexia #9427](https://github.com/hsoliwal/com.synexia/pull/9427). The final receiving map will bind its verified current source implementation and execution evidence while preserving all 47 ordered capability records, the 45 unrelated records, current global mappings and all 20 gates.\n\nThe existing retention owner is being extended to inherit obligations from immutable baseline commits and all parents. The current CI recipe repairs two invalid Java character literals and selects the already-pinned JDK 21 for Maven. Exact current-owner execution, replay and refusal evidence will be appended after verification.\n\nHistorical receipts remain historical. This restoration does not establish current runtime promotion, complete donor coverage, native qualification or a rebuilt/tested M3 JDK. The exact GCC acquisition failure remains an explicit gate."
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "url": "https://github.com/hsoliwal/M3jdk21/pull/189",
+      "number": 189,
+      "state": "open",
+      "merged": false,
+      "mergeable": false,
+      "draft": true,
+      "body": "## Why this is needed\n\nThe merge of #147 retained the delivering commit in ancestry while omitting its historical receiving payload. Current mapping records also regressed to older source pins. This draft restores the exact history first and will append tested current mapping, retention and CI recipes.\n\n## Published historical restoration\n\nCommit `946fd922c1d878e3f32309c83d132057a7ef8451` has sole parent `87590cb96fb0e2dc0f88fae8e01957f7179cd255` and root `0b686778262c36f40153dde6e569abc8d393a3c6`.\n\n- Restores all 443 missing historical evidence and recipe-custody files from `0483f79ae51dd578c2e4fec1b8431bd51b59b469` as their exact Git objects: 29,889,572 bytes.\n- Preserves all 1,766 current M3 files, the current operational mapping and every other root entry.\n- Verifies the complete resulting M3 subtree `19aae07ba508323d71a57034e37642a237283a0d` and root through fresh readback: 544 reconstructed Git tree identities, 2,209 M3 files, no deletions.\n\n## Current recipe work in progress\n\nThe companion source recovery is [com.synexia #9427](https://github.com/hsoliwal/com.synexia/pull/9427). The final receiving map will bind its verified current source implementation and execution evidence while preserving all 47 ordered capability records, the 45 unrelated records, current global mappings and all 20 gates.\n\nThe existing retention owner is being extended to inherit obligations from immutable baseline commits and all parents. The current CI recipe repairs two invalid Java character literals and selects the already-pinned JDK 21 for Maven. Exact current-owner execution, replay and refusal evidence will be appended after verification.\n\nHistorical receipts remain historical. This restoration does not establish current runtime promotion, complete donor coverage, native qualification or a rebuilt/tested M3 JDK. The exact GCC acquisition failure remains an explicit gate.",
+      "title": "Recover JCC receiving history and reconcile current source handoff",
+      "base": "master",
+      "base_sha": "87590cb96fb0e2dc0f88fae8e01957f7179cd255",
+      "head": "aix/jcc-receiving-recovery-20261006",
+      "head_sha": "946fd922c1d878e3f32309c83d132057a7ef8451",
+      "head_repo_id": 1399650462,
+      "head_repo_full_name": "hsoliwal/M3jdk21",
+      "merge_commit_sha": null,
+      "user": {
+        "login": "hsoliwal",
+        "name": "hsoliwal",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/5656792?v=4",
+        "id": 5656792
+      },
+      "requested_reviewers": null,
+      "requested_team_reviewers": null,
+      "diff": null,
+      "comments": null,
+      "created_at": "2026-10-06T04:12:37Z",
+      "updated_at": "2026-10-06T04:12:37Z",
+      "closed_at": null,
+      "merged_at": null,
+      "commits": 1,
+      "changed_files": 443,
+      "additions": 527957,
+      "deletions": 0,
+      "display_url": "https://github.com/hsoliwal/M3jdk21/pull/189",
+      "display_title": "Recover JCC receiving history and reconcile current source handoff"
+    },
+    "isError": false
+  }
+}

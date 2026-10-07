@@ -1,0 +1,18 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "blob_sha": "34870e19df381ca71478406eaacf54251dcbe789"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "test/jdk/sun/security/util/Password/M3PasswordPolicyCases.java\tABSENT\tf56ba88b1e8986b849fead075c654b4b9961dcb49b168c733cb6e59d6113f2a8\t00-M3PasswordPolicyCases.java.txt\n"
+    },
+    "isError": false
+  }
+}

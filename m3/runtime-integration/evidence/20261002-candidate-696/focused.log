@@ -1,0 +1,12 @@
+M3_M_INDEX_LEXICON_BUILT path=/mnt/c/worktrees/M3jdk21-runtime-migration-20261002/m3/runtime-integration/evidence/20261002-candidate-696/tests/test.m3lex records=11 bytes=264
+M_INDEX_STRING_INVARIANT_PASS lexicon=true alphaKind=2 missKind=1 joinKind=3 jni=not-required
+M_INDEX_STRING_INVARIANT_PASS lexicon=false alphaKind=1 missKind=1 joinKind=3 jni=not-required
+MINDEX_INTEGRATION_PASS checks=524335 mapped=true
+MINDEX_INTEGRATION_PASS checks=524336 mapped=true
+MINDEX_INTEGRATION_PASS checks=524332 mapped=false
+SEGMENTED_JNI_PASS calls=327680
+MINDEX_INTEGRATION_PASS checks=524335 mapped=true
+MINDEX_INTEGRATION_PASS checks=524336 mapped=true
+MINDEX_INTEGRATION_PASS checks=524332 mapped=false
+SEGMENTED_JNI_PASS calls=327680
+SEGMENTED_JVMTI_PASS callbacks=4

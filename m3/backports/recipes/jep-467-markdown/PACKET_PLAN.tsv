@@ -1,0 +1,11 @@
+ordinal	atom_id	scope	mutation	depends_on	stop_condition
+0	inventory-upstream	FILE	false		all 250 implementation paths pinned to JDK-8298405
+1	ga-followup-diff	FILE	false	inventory-upstream	each implementation path classified against jdk-23+37 for feature-related vs unrelated follow-up
+2	generate-file-atoms	FILE	false	ga-followup-diff	each admitted path has exact Java/text preimage and reviewed postimage or typed exclusion
+3	public-api-review	LIBRARY_API	false	generate-file-atoms	all java.compiler/jdk.compiler public/API deltas explicitly approved or adapted
+4	private-markdown-module-review	MODULE	false	generate-file-atoms	vendored CommonMark provenance/license/transformation and module wiring accepted
+5	compiler-doclet-review	MULTI_MODULE	false	public-api-review,private-markdown-module-review	javac+javadoc dependency closure complete
+6	compose-feature-packet	LIBRARY_API	true	compiler-doclet-review	smallest honest source-sealed packet composed from reviewed FILE atoms
+7	build-and-langtools	LIBRARY_API	false	compose-feature-packet	jdk.compiler jdk.javadoc jdk.internal.md build and focused langtools tests pass
+8	fixed-point	LIBRARY_API	false	build-and-langtools	recipe replay produces zero delta
+9	promotion	LIBRARY_API	false	fixed-point	exact receipt admitted or candidate remains unpromoted

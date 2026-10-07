@@ -1,0 +1,35 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.m3.tooling.dag;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.List;
+import org.junit.jupiter.api.Test;
+
+final class M3BackportDagLoaderTest {
+
+    @Test
+    void canonicalResourceLoads() {
+        M3RecipeDag dag = M3BackportDagLoader.load("m3-backport-dag.tsv");
+        List<String> path = List.of("review-code-signal", "review-atom-pattern",
+                "review-problem-planner", "review-jni-contract", "inventory",
+                "compatibility-proof", "dependency-closure", "file-delta", "recipe-crate",
+                "recipe-junit", "diff", "lint", "compile", "jtreg", "runtime", "promote");
+        assertEquals(16, dag.size());
+        assertEquals(path, dag.topologicalOrder().stream().map(M3DagNode::id).toList());
+        assertEquals(List.of(), dag.require(path.getFirst()).dependsOn());
+        for (int index = 1; index < path.size(); index++) {
+            assertEquals(List.of(path.get(index - 1)), dag.require(path.get(index)).dependsOn());
+        }
+    }
+
+    @Test
+    void invalidAndMissingResourcesFailClosed() {
+        assertThrows(IllegalArgumentException.class, () -> M3BackportDagLoader.load(""));
+        assertThrows(IllegalArgumentException.class, () -> M3BackportDagLoader.load("../escape.tsv"));
+        assertThrows(IllegalArgumentException.class, () -> M3BackportDagLoader.load("missing.tsv"));
+        assertThrows(IllegalArgumentException.class, () -> M3BackportDagLoader.load("bad-header.tsv"));
+        assertThrows(IllegalArgumentException.class, () -> M3BackportDagLoader.load("bad-row.tsv"));
+    }
+}

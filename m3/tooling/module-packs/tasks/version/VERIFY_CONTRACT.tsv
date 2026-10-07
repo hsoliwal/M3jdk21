@@ -1,0 +1,7 @@
+order	gate	status
+1	diff/byte identity	PASS
+2	whitespace/syntax	PASS; full style gates unexecuted
+3	Java21 compilation	PASS
+4	JUnit/OpenRewrite/99% coverage	BLOCKED
+5	standalone runtime experiments	PASS; not promotion
+6	full modified-JDK/jtreg/platform	PENDING

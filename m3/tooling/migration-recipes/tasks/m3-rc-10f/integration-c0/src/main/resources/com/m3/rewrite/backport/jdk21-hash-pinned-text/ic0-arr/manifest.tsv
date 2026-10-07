@@ -1,0 +1,7 @@
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3.java.after	ABSENT	a320a7da28264c23120e6296e376822f9795d4735084299701613d41c4e0ca2b	target-1.txt
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3Lab.java.after	ABSENT	d45a759b1f51e117af486d9c8b66ca7e9ab8bfeb1764b619680cf4441d759e87	target-2.txt
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3LabTest.java.after	ABSENT	48dfc6ab7c68ad7d3342dda8d0086e1f7ec74dce4a7b1943d4ff7e0b32d8c52b	target-3.txt
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3M.java.after	ABSENT	78eb9fd9168850dd0908621385ad6246acc4690ea375ecace754205708f81edc	target-4.txt
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3MCodec.java.after	ABSENT	87c9ab22a66c6289325e4f612967e5921fc922240cd7cd1b7c5986b506fda390	target-5.txt
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/A3MTest.java.after	ABSENT	a7887d62f0caf5f6ae9750622ed09129536b9b9a3da31c057cac35117a7621de	target-6.txt
+m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-mastery-receipt/manifest.tsv	ABSENT	948e5e29a8912cd2def07610d281e35d5ebeac4a95ba7f2c77ac1fb8ba9c9bb4	target-7.txt

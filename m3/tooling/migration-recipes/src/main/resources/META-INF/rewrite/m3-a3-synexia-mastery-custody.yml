@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.a3.SynexiaMasteryCustodyDelivery
+displayName: Converge A3 mastery onto Synexia recipe custody
+description: >-
+  Moves A3 mastery-lab and recipe-catalogue consumer pointers from legacy com.m3 compatibility
+  mirrors to the Synexia-owned atom/pattern package. Compatibility mirrors remain present.
+  Candidate-only; no OpenJDK product source or promotion authority.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: a3-synexia-mastery-custody
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: a3-synexia-mastery-custody-text

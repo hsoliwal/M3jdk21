@@ -1,0 +1,174 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.synexia.mindex.vm;
+
+import com.synexia.mindex.MIndexProgressMonitor;
+import com.synexia.mindex.MIndexString;
+import com.synexia.mindex.classindex.MIndexClass;
+import com.synexia.mindex.classindex.MIndexClassIndex;
+import com.synexia.mindex.foundation.MIndexExecutionContext;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Objects;
+import java.util.Optional;
+
+/**
+ * Caller-owned runtime bridge over an existing class snapshot, with no global live-class map.
+ * The existing boundary weakly owns mirrors/loaders. Only immutable identity/hierarchy queries
+ * are accelerated. Any unsupported lifecycle event must invalidate the session before reuse.
+ * Declaration of an artifact association never certifies actual transformed definition bytes.
+ */
+public final class MIndexVmSession implements AutoCloseable {
+    public enum Mode { OFF, OBSERVE, ENABLED }
+
+    /** Caller-visible projection; never retained as one structural object per row. */
+    public record DeclaredAttachment(
+            MIndexVmSession session, MIndexClass type, MIndexLibraryRelease release,
+            MIndexVmPrecomputeKey candidateKey, long epoch) {
+        public DeclaredAttachment {
+            Objects.requireNonNull(session, "session"); Objects.requireNonNull(type, "type");
+            Objects.requireNonNull(release, "release"); Objects.requireNonNull(candidateKey, "candidateKey");
+        }
+    }
+
+    public record Statistics(long reused, long observed, long fallback, long mismatches) {}
+
+    private final MIndexClassIndex index;
+    private final Mode mode;
+    private final MIndexLibraryRelease[] releases;
+    private final MIndexVmPrecomputeKey[] keys;
+    private long epoch;
+    private long reused;
+    private long observed;
+    private long fallback;
+    private long mismatches;
+    private boolean valid = true;
+    private boolean closed;
+
+    private MIndexVmSession(MIndexClassIndex index, Mode mode) {
+        this.index = Objects.requireNonNull(index, "index");
+        this.mode = Objects.requireNonNull(mode, "mode");
+        releases = new MIndexLibraryRelease[index.size()];
+        keys = new MIndexVmPrecomputeKey[index.size()];
+    }
+
+    /** Reuses prepared metadata without reflection or rebuilding it. Compact snapshots fall back. */
+    public static MIndexVmSession over(MIndexClassIndex index, Mode mode) {
+        return new MIndexVmSession(index, mode);
+    }
+
+    public static MIndexVmSession prepare(
+            Collection<Class<?>> roots, MIndexClassIndex.Options options,
+            Mode mode, MIndexProgressMonitor monitor) {
+        Objects.requireNonNull(mode, "mode");
+        MIndexExecutionContext context = MIndexExecutionContext.builder()
+                .progressMonitor(monitor == null ? MIndexProgressMonitor.none() : monitor).build();
+        return over(MIndexClassIndex.compile(roots, options, context), mode);
+    }
+
+    public synchronized long epoch() { return epoch; }
+
+    public synchronized Optional<MIndexClass> fromClass(Class<?> type) {
+        requireOpen();
+        Objects.requireNonNull(type, "type");
+        return valid ? index.fromClass(type) : Optional.empty();
+    }
+
+    public synchronized MIndexString name(Class<?> type) {
+        requireOpen();
+        Objects.requireNonNull(type, "type");
+        Optional<MIndexClass> prepared = mode == Mode.OFF || !valid
+                ? Optional.empty() : index.fromClass(type);
+        if (prepared.isEmpty()) {
+            fallback++;
+            return MIndexString.from(type.getName());
+        }
+        MIndexString candidate = prepared.orElseThrow().name();
+        if (mode == Mode.OBSERVE) {
+            observed++;
+            MIndexString authoritative = MIndexString.from(type.getName());
+            if (!candidate.equals(authoritative)) { mismatches++; invalidate(); }
+            return authoritative;
+        }
+        reused++;
+        return candidate;
+    }
+
+    public synchronized boolean isAssignableFrom(Class<?> target, Class<?> candidate) {
+        requireOpen();
+        Objects.requireNonNull(target, "target");
+        Objects.requireNonNull(candidate, "candidate");
+        Optional<MIndexClass> left = mode == Mode.OFF || !valid
+                ? Optional.empty() : index.fromClass(target);
+        Optional<MIndexClass> right = left.isEmpty() ? Optional.empty() : index.fromClass(candidate);
+        if (left.isEmpty() || right.isEmpty()) {
+            fallback++;
+            return target.isAssignableFrom(candidate);
+        }
+        boolean result = index.isAssignableFrom(left.orElseThrow().row(), right.orElseThrow().row());
+        if (mode == Mode.OBSERVE) {
+            observed++;
+            boolean authoritative = target.isAssignableFrom(candidate);
+            if (result != authoritative) { mismatches++; invalidate(); }
+            return authoritative;
+        }
+        reused++;
+        return result;
+    }
+
+    /**
+     * Atomically publishes a declaration for this actual Class, not for the requesting loader.
+     * Repeating the same declaration is idempotent. Conflicts and old epochs are rejected.
+     * This API is deliberately named declare: it cannot authenticate a supplied byte digest.
+     */
+    public synchronized DeclaredAttachment declare(
+            Class<?> type, MIndexLibraryRelease release, MIndexVmPrecomputeKey key,
+            long expectedEpoch) {
+        requireOpen();
+        Objects.requireNonNull(release, "release");
+        Objects.requireNonNull(key, "key");
+        if (!valid || expectedEpoch != epoch) throw new IllegalStateException("stale session");
+        MIndexClass view = index.fromClass(Objects.requireNonNull(type, "type"))
+                .orElseThrow(() -> new IllegalArgumentException("class outside live snapshot"));
+        int row = view.row();
+        if (releases[row] != null
+                && (!releases[row].equals(release) || !keys[row].sameInputs(key))) {
+            throw new IllegalStateException("conflicting class declaration");
+        }
+        if (releases[row] == null) { releases[row] = release; keys[row] = key; }
+        return new DeclaredAttachment(this, view, releases[row], keys[row], epoch);
+    }
+
+    public synchronized boolean isCurrent(DeclaredAttachment attachment) {
+        Objects.requireNonNull(attachment, "attachment");
+        if (closed || !valid || attachment.session() != this
+                || attachment.epoch() != epoch || attachment.type().owner() != index) {
+            return false;
+        }
+        int row = attachment.type().row();
+        return releases[row] == attachment.release() && keys[row] == attachment.candidateKey()
+                && index.boundary().classAt(row).isPresent();
+    }
+
+    /** Conservative whole-snapshot retirement; preparation of a replacement is explicit. */
+    public synchronized void invalidate() {
+        requireOpen();
+        if (valid) {
+            valid = false;
+            epoch++;
+            Arrays.fill(releases, null);
+            Arrays.fill(keys, null);
+        }
+    }
+
+    public synchronized Statistics statistics() {
+        return new Statistics(reused, observed, fallback, mismatches);
+    }
+
+    @Override public synchronized void close() {
+        if (!closed) { invalidate(); closed = true; }
+    }
+
+    private void requireOpen() {
+        if (closed) throw new IllegalStateException("session closed");
+    }
+}

@@ -1,0 +1,8 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.SynexiaIntakePolicy
+displayName: Enforce Synexia donor intake modes in M3JDK21
+description: Replays the exact policy, verifier, CI and provenance updates that separate Apache-2.0 tooling/modules/data exports from target-owned GPL/OpenJDK source ports.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: synexia-intake-policy

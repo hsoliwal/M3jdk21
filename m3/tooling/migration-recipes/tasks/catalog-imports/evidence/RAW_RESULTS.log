@@ -1,0 +1,13 @@
+SELECTED_LOCAL_RECEIPTS — these are not OpenRewrite scheduler/JUnit results.
+
+EXACT_SOURCE_PREIMAGES_PASS 8587427f84aca1a25869a0de3238754730160b5c fa37700ff2b292723d3a26d2a19d5e5dc629876f
+SOURCE_CUSTODY_PASS existing_files=2
+SYNTAX_ONLY_PASS units=2 framework_type_linking=NOT_RUN
+EXPECTED_FIXTURE_COMPILE_PASS pairs=4 classes=8
+BYTE_IDENTICAL_CLASSES pairs=4
+Fixtures were NOT produced by an executed recipe.
+Unknown-type and non-Java scheduler assertions NOT executed.
+
+$ mvn -version
+mvn: command not found
+EXIT=127

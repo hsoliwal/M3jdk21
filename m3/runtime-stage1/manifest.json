@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "base_commit": "500201945636cae6319ae3513a251fabdd119f62",
+  "upstream_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
+  "path": "src/java.base/share/classes/java/lang/String.java",
+  "before": "4689d77ee91265cfeff65dbba856f690a4a741ac98b9664a9055868d9698743b",
+  "after": "53cf6d06ca4b829665a7501215ede14da5da0c7dead896a0ea3abf6687d87923",
+  "anchor": "    static String join(String prefix, String suffix, String delimiter, String[] elements, int size) {\n",
+  "insertion_sha256": "635054262cae8270cf7df45fe53b8a2d3050aef5c168175c521f3b19bbd9af11",
+  "runtime_fences": {
+    "src/hotspot/share/classfile/javaClasses.hpp": "88659079f7621ab864b7dde6c19c549e49be862cb1d9639108ac85ac473e93e5",
+    "src/hotspot/share/classfile/javaClasses.inline.hpp": "02f638693052e072687f003cb7da9b2d7f34b40b87e89616b93b9d3581bf94a2",
+    "src/hotspot/share/classfile/javaClasses.cpp": "a358a29d0d5687625eba69a6be0932c67d8a6d0ac0b05f1d225288cf6d6af91a",
+    "src/hotspot/share/classfile/vmSymbols.hpp": "2f669bd835fc7c1696926f9e34e88e872a56c200b2511a537f1ec7344f3f1279",
+    "src/hotspot/share/classfile/vmIntrinsics.hpp": "d0d34fd30c36b3e94f7c26c2802c799dbd4024265459c308debb32113b971c64",
+    "src/hotspot/share/opto/library_call.cpp": "d7d4bf4418a687cd0b4a0ba166c0a556fdc6bcd4fda29dcdd3fe4d271361cbcb",
+    "src/hotspot/share/prims/jni.cpp": "4d9d6b5e89f6c67e20f7d3d3b3a42ca6532dd51b108a1c6e02d9bfaf4c446c32",
+    "src/hotspot/share/classfile/stringTable.cpp": "ffa3118dfef5512305b4fb50e94c053e307c5e6fca1134b2cdb22193457da6b8",
+    "src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp": "aea6dd85f2cdb2af3210386078138ed7fac45c6b8fe0c214516272281f5cb11a",
+    "src/java.base/share/classes/java/lang/StringLatin1.java": "e66b45dcadf2cfdd96f56f0c08c6108cc0fe6072666082e698dfbcc9ceeddf1b",
+    "src/java.base/share/classes/java/lang/StringUTF16.java": "c57676d7a93cc450446c27dfaeeb9b3da775fab16af5a4b599dcca67e598f9d5",
+    "src/java.base/share/classes/java/lang/StringCoding.java": "07f273e890f197cb260e094d522aa7dc53e838526e0746f3264eb5de49507366",
+    "src/java.base/share/classes/java/lang/StringConcatHelper.java": "4c27b33ec75a8dee6ffad3c7bbb7bf5922fd0e07dd6f0720caa25bdbbb13a0f1",
+    "src/hotspot/share/opto/graphKit.cpp": "9d1817136fcfd0425ab8c1e78997a97d8f91811f890efcf19e1c828bcd12a74e",
+    "src/hotspot/share/c1/c1_GraphBuilder.cpp": "72cf42f82fb9a33197015caf7e5002e702cea6eba0c2b3a0cf19550a1c1773bb",
+    "src/hotspot/share/cds/heapShared.cpp": "9c8e33c51cb6cc9f6ed7012c3f279b07b2217928fa3c9e08e4d6563ff56c47df",
+    "src/hotspot/cpu/x86/macroAssembler_x86.cpp": "08be8ddb46ac03ef0051040821589584be0d273609bd5381aa0750051f1110ba",
+    "src/hotspot/cpu/x86/stubGenerator_x86_64.cpp": "6db870c7efbeeaa21db1b2565e1a6f0403556e749068bf62035b1ed8b5839417"
+  }
+}

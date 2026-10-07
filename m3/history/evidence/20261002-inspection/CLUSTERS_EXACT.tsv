@@ -1,0 +1,2 @@
+status	reason
+NOT_RUN_ON_FULL_TARGET	Full target blobs are not locally available; future audit uses native Git blobs

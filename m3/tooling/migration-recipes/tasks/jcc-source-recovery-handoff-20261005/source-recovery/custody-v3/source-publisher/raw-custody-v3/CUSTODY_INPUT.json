@@ -1,0 +1,255 @@
+{
+  "schema": "jcc-two-utf8-fixture-custody-input/1",
+  "repository": "hsoliwal/com.synexia",
+  "protocol": "EXACT_CREATE_AND_TREE_IDENTITY_FOR_TWO_INVALID_UTF8_FIXTURES",
+  "manifest_sha256": "9270a6b4098960e2b7c7bd87b17325b648c4de363957f36028bacc9c1955e328",
+  "preflight_sha256": "13e56b17314e89370fb8ce3f8417b405b89b34db8a1868d968589550975db84f",
+  "transport_index": {
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/epoch-01/transport/INDEX.json",
+    "sha256": "dce1e97079aeb3ad9edbdf9f814b3ccaeebfd0053c9d2b4b79ff841632c0736d"
+  },
+  "failed_readback_observation": {
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/RAW_READBACK_FAILURE_OBSERVATION.json",
+    "sha256": "224b3baa99e71c846cc96319c0a829eec3521d75f68731332ac2fa59fa214112"
+  },
+  "verification_plan": {
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/RAW_VERIFICATION_TREE_PLAN.json",
+    "sha256": "00fa5b9e4e99621ed6b5aac3c0da4c6506f82e921a3da42fdd4645285653e319"
+  },
+  "verification_file_reads": {
+    "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/verification-file-reads.json",
+    "sha256": "5f992ea5fa2a618093909b3ba7b063a8972de84f2af4b00ed44b323597538a87"
+  },
+  "verification_tree_calls": [
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/0b445a9f02146e1ef34f499ae801d0f9001b6313.json",
+      "sha256": "d6a876dffdb48da7271d85966ac7d9cd684e4b89ecc3548e79a5dc8ef55be637"
+    },
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/1f7ac77c503cb40df683a7831d94b0c6a381b811.json",
+      "sha256": "e60253446c2741c41d127b379f3b9f56506442a0476ea377ab9de43f4ef98701"
+    },
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/1f8b33bc67afb0a0537c93dddd7ed5d94476dd8a.json",
+      "sha256": "bf6ecda1e1cd2d3a0fe726b39e1b1fb924fb9dd9e6bff7fb311cec53a69da76b"
+    },
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/2e1ea5ea0076af3e2947a20dcddf8b306249d46c.json",
+      "sha256": "87897d5da6389eb5421cf083436ea9dba28921fc7c46fcec185c336677476023"
+    },
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/7de7c1ae7d22f70481a6dc0c5e81e3de73423e70.json",
+      "sha256": "bc4a2014f1bde8d775d57d3a3f3e31f441e933a1dec4116df3a1fd92a64ed1bb"
+    },
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/8582ac8a6a16142f1ee2b8151085238304fb7aa3.json",
+      "sha256": "bbbbe2668c25e80d6e53d7c59a4a020fac5ee12f41daed2c665d52c7de1211ac"
+    },
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/894e5ba1d9e4e747a308d05f7acb254614f3fe0c.json",
+      "sha256": "400fa13aa4dce4c38c9af8c98d252c1fab164119e26d623e18d01f9e36d6a127"
+    },
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/89e0c45dbf11305c45c0574ab73486c66a8fe7b2.json",
+      "sha256": "878c3f9a33326df4d91935336962565b2d644e694e51b2aca9f7a47010044324"
+    },
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/8de0927ad179c1a668e215fde234824f0b302797.json",
+      "sha256": "cc07ab6028915303903199aa027d19e27aa96d1d60d16231bf04ea24eb74ec6f"
+    },
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/9988b4d8f0482cb1e10e41b38e36fd79f5c7bc10.json",
+      "sha256": "7f438bf36e2a306ffd396d10d6c1e23164f4456ce85b0d06a23b020183682bd1"
+    },
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/aee49a1388a9853f238d6360549181611d8168c4.json",
+      "sha256": "05a12fcdcba2cbb33d7f26c823c1ec77e712b206b0513ad69971affda5dc24f6"
+    },
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d.json",
+      "sha256": "f6852b552a509cd63b6f3622a21124215fb4c584d9b0b35fb4fd66dc6631f5d3"
+    },
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/cac95ee10acb1ef18280347dcee30e626ff0e2b2.json",
+      "sha256": "0e3ba46f0ff549937802d41bcd60f36e7a1d2221744d7fed2bac7c3b14a290ba"
+    },
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/d7bce8c8d93693af06d95f1121257d65ca7d9f19.json",
+      "sha256": "4371692b6dc8fafe9355b12f4dd9a7ef3dbda4f38d4a4b262fc7d7e536ebedd2"
+    },
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/de28521cc91ed2316af7806f04d933543a3e3637.json",
+      "sha256": "31f6229cce694b49b0e30cb34791f0b4df696b933965637241dd5b053f751b04"
+    },
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/e6cb4eaa71784811361312b305d2723cf886ac1e.json",
+      "sha256": "4df921e09958f15fd17261bfbb5f9b948b4382afed7890b4568be4444594c7d3"
+    },
+    {
+      "local_path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/publication-current/source-recovery-publish/raw-custody-v3/trees/fa58808396946d716c50398bc880a9bc570148db.json",
+      "sha256": "6f3742c4822492686a14cf87ba0697e05fa3082cecbe958772e2b97200c60225"
+    }
+  ],
+  "creation_calls": [
+    {
+      "tool": "mcp__codex_apps__github_create_blob",
+      "request": {
+        "repository_full_name": "hsoliwal/com.synexia",
+        "content": "c3JjL21haW4vamF2YS9maXh0dXJlL0RlcGVuZGVuY3kuamF2YQljYjFhY2U5ZmNhODhkZWM5NzM2YWY5NWM5NmFkZGRjM2YwMWNjYjg0OTA0ZWQ3ZDJjZjdjZmRjZDI4OTBiYzYzCURlcGVuZGVuY3kuamF2YS50eHQKIwAK",
+        "encoding": "base64"
+      },
+      "expected": {
+        "git_blob": "9e48fa497f59343f91fc5e2c36b9aba9cbc8b63d",
+        "bytes": 126,
+        "sha256": "88b78c08bf896f77b97603f99bad089c19330ca2816edb1c240a84799cb8bfa0"
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "sha": "9e48fa497f59343f91fc5e2c36b9aba9cbc8b63d"
+        },
+        "isError": false
+      }
+    },
+    {
+      "tool": "mcp__codex_apps__github_create_blob",
+      "request": {
+        "repository_full_name": "hsoliwal/com.synexia",
+        "content": "I8MoCg==",
+        "encoding": "base64"
+      },
+      "expected": {
+        "git_blob": "59b4ec83f687499a54f15695b9b246599f9579d7",
+        "bytes": 4,
+        "sha256": "823a8864668594f33fd21b51f42c08643d90be2f0d903653175047f5d0298e6c"
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "sha": "59b4ec83f687499a54f15695b9b246599f9579d7"
+        },
+        "isError": false
+      }
+    },
+    {
+      "tool": "mcp__codex_apps__github_create_blob",
+      "request": {
+        "repository_full_name": "hsoliwal/com.synexia",
+        "content": "cGFja2FnZSBmaXh0dXJlOwpwdWJsaWMgY2xhc3MgRGVwZW5kZW5jeSB7CiAgICBwdWJsaWMgc3RhdGljIE9iamVjdCBkZXBWYWx1ZSgpIHsgcmV0dXJuICJkZXBlbmRlbmN5IjsgfQp9Ci8vAAo=",
+        "encoding": "base64"
+      },
+      "expected": {
+        "git_blob": "fb1c29bba17633d2de5d53d924ec210965374c37",
+        "bytes": 110,
+        "sha256": "ba285f4d77b3be32b02839f15a09246410cba23120d8f36a244992fcf03510a6"
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "sha": "fb1c29bba17633d2de5d53d924ec210965374c37"
+        },
+        "isError": false
+      }
+    },
+    {
+      "tool": "mcp__codex_apps__github_create_blob",
+      "request": {
+        "repository_full_name": "hsoliwal/com.synexia",
+        "content": "cGFja2FnZSBmaXh0dXJlOwovL8MoCg==",
+        "encoding": "base64"
+      },
+      "expected": {
+        "git_blob": "24cdc62e634934527d551324c2449bcf951b5589",
+        "bytes": 22,
+        "sha256": "7eb80c376a9681170665f5c0d8b86214e9b44aa6f1d08690a83b26aeba536f3c"
+      },
+      "response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Action completed."
+          }
+        ],
+        "structuredContent": {
+          "sha": "24cdc62e634934527d551324c2449bcf951b5589"
+        },
+        "isError": false
+      }
+    }
+  ],
+  "verification_commit": {
+    "request_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/commits/9dab34bd9e34e4d661004482248b5b02d94e0816",
+    "body": {
+      "sha": "9dab34bd9e34e4d661004482248b5b02d94e0816",
+      "node_id": "C_kwDOQ2icstoAKDlkYWIzNGJkOWUzNGU0ZDY2MTAwNDQ4MjI0OGI1YjAyZDk0ZTA4MTY",
+      "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/commits/9dab34bd9e34e4d661004482248b5b02d94e0816",
+      "html_url": "https://github.com/hsoliwal/com.synexia/commit/9dab34bd9e34e4d661004482248b5b02d94e0816",
+      "author": {
+        "name": "Hitesh Soliwal",
+        "email": "hsoliwal@gmail.com",
+        "date": "2026-10-05T16:19:10Z"
+      },
+      "committer": {
+        "name": "Hitesh Soliwal",
+        "email": "hsoliwal@gmail.com",
+        "date": "2026-10-05T16:19:10Z"
+      },
+      "tree": {
+        "sha": "bf2b8fe43cda47f0c6363c8d376f61419e647e4d",
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d"
+      },
+      "message": "Verify exact raw JCC fixture transport (unreferenced custody object)",
+      "parents": [
+        {
+          "sha": "be92c62ece9023b5c33676716a1076d00e26120a",
+          "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/commits/be92c62ece9023b5c33676716a1076d00e26120a",
+          "html_url": "https://github.com/hsoliwal/com.synexia/commit/be92c62ece9023b5c33676716a1076d00e26120a"
+        }
+      ],
+      "verification": {
+        "verified": false,
+        "reason": "unsigned",
+        "signature": null,
+        "payload": null,
+        "verified_at": null
+      }
+    },
+    "original_response": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Action completed."
+        }
+      ],
+      "structuredContent": {
+        "content": "{\"sha\":\"9dab34bd9e34e4d661004482248b5b02d94e0816\",\"node_id\":\"C_kwDOQ2icstoAKDlkYWIzNGJkOWUzNGU0ZDY2MTAwNDQ4MjI0OGI1YjAyZDk0ZTA4MTY\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/commits/9dab34bd9e34e4d661004482248b5b02d94e0816\",\"html_url\":\"https://github.com/hsoliwal/com.synexia/commit/9dab34bd9e34e4d661004482248b5b02d94e0816\",\"author\":{\"name\":\"Hitesh Soliwal\",\"email\":\"hsoliwal@gmail.com\",\"date\":\"2026-10-05T16:19:10Z\"},\"committer\":{\"name\":\"Hitesh Soliwal\",\"email\":\"hsoliwal@gmail.com\",\"date\":\"2026-10-05T16:19:10Z\"},\"tree\":{\"sha\":\"bf2b8fe43cda47f0c6363c8d376f61419e647e4d\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d\"},\"message\":\"Verify exact raw JCC fixture transport (unreferenced custody object)\",\"parents\":[{\"sha\":\"be92c62ece9023b5c33676716a1076d00e26120a\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/commits/be92c62ece9023b5c33676716a1076d00e26120a\",\"html_url\":\"https://github.com/hsoliwal/com.synexia/commit/be92c62ece9023b5c33676716a1076d00e26120a\"}],\"verification\":{\"verified\":false,\"reason\":\"unsigned\",\"signature\":null,\"payload\":null,\"verified_at\":null}}",
+        "title": "9dab34bd9e34e4d661004482248b5b02d94e0816",
+        "modified_date": null,
+        "url": "https://api.github.com/repos/hsoliwal/com.synexia/git/commits/9dab34bd9e34e4d661004482248b5b02d94e0816",
+        "display_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/commits/9dab34bd9e34e4d661004482248b5b02d94e0816",
+        "display_title": "9dab34bd9e34e4d661004482248b5b02d94e0816",
+        "structuredContent": {
+          "title": "9dab34bd9e34e4d661004482248b5b02d94e0816",
+          "content": "{\"sha\":\"9dab34bd9e34e4d661004482248b5b02d94e0816\",\"node_id\":\"C_kwDOQ2icstoAKDlkYWIzNGJkOWUzNGU0ZDY2MTAwNDQ4MjI0OGI1YjAyZDk0ZTA4MTY\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/commits/9dab34bd9e34e4d661004482248b5b02d94e0816\",\"html_url\":\"https://github.com/hsoliwal/com.synexia/commit/9dab34bd9e34e4d661004482248b5b02d94e0816\",\"author\":{\"name\":\"Hitesh Soliwal\",\"email\":\"hsoliwal@gmail.com\",\"date\":\"2026-10-05T16:19:10Z\"},\"committer\":{\"name\":\"Hitesh Soliwal\",\"email\":\"hsoliwal@gmail.com\",\"date\":\"2026-10-05T16:19:10Z\"},\"tree\":{\"sha\":\"bf2b8fe43cda47f0c6363c8d376f61419e647e4d\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/trees/bf2b8fe43cda47f0c6363c8d376f61419e647e4d\"},\"message\":\"Verify exact raw JCC fixture transport (unreferenced custody object)\",\"parents\":[{\"sha\":\"be92c62ece9023b5c33676716a1076d00e26120a\",\"url\":\"https://api.github.com/repos/hsoliwal/com.synexia/git/commits/be92c62ece9023b5c33676716a1076d00e26120a\",\"html_url\":\"https://github.com/hsoliwal/com.synexia/commit/be92c62ece9023b5c33676716a1076d00e26120a\"}],\"verification\":{\"verified\":false,\"reason\":\"unsigned\",\"signature\":null,\"payload\":null,\"verified_at\":null}}",
+          "display_url": "https://api.github.com/repos/hsoliwal/com.synexia/git/commits/9dab34bd9e34e4d661004482248b5b02d94e0816"
+        }
+      },
+      "isError": false
+    }
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "activeCanonicalChanges": 0,
+  "historicalAvailability": {
+    "bytes": 119267,
+    "path": "../HISTORY-AVAILABILITY.json",
+    "sha256": "02a922e8b1cbddd611f5d2b494085062c6e7f2e65ef1b51fbe811e434c2296e5"
+  },
+  "historyMeaning": "The original workspace census recorded 224 of 591 historical selections unavailable there. This checkpoint does not recreate missing historical execution receipts or claim their global absence.",
+  "latestHeadIntegrationClaimed": false,
+  "m3Parent": {
+    "commit": "18287e16c3d5dee6243752ccd653264c66bd2020",
+    "pr": "https://github.com/hsoliwal/M3jdk21/pull/237",
+    "tree": "378af3b70959bfaac66913ab4067ea0ff0733ddd"
+  },
+  "originalPairedMaps": [
+    {
+      "bytes": 297967,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/integration-c0-final-v2/FINAL-PAIRED-FILES.json",
+      "sha256": "bb815cfcf64ac5298fa857355b8caccb5ebda6c76e2803906d8c92ac9578a2a8"
+    },
+    {
+      "bytes": 79199,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/FINAL-PAIRED-FILES.json",
+      "sha256": "5cde38612911bdaf74b1ec4dfb857f7f1f747eccf42f72aa55e5458c48df71f2"
+    }
+  ],
+  "preservedPairedFiles": 435,
+  "publicationReceipt": {
+    "bytes": 1997,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/PUBLISHED.json",
+    "sha256": "1da6eed2dada9ee85cea964e3097d869929b03975863c27a0412d55c44ba0d58"
+  },
+  "schema": "m3.sc0.parent-checkpoint/1",
+  "sourceParent": {
+    "commit": "2b05a83fe790ae5b1926eed6bba88a6d5b3c0619",
+    "pr": "https://github.com/hsoliwal/com.synexia/pull/9520",
+    "tree": "d1e34c8025f5797d1e3ba696b6ee710cb2a2fb7e"
+  }
+}

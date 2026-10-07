@@ -1,0 +1,77 @@
+# SPDX-License-Identifier: GPL-2.0-only WITH Classpath-exception-2.0
+name: M3 JEP 491 virtual-thread unpinning inventory
+
+on:
+  pull_request:
+    paths:
+      - 'm3/backports/JEP_RESIDUE_QUEUE.tsv'
+      - 'm3/backports/recipes/jep-491-vthread-unpinning/**'
+      - 'm3/backports/test_jep491_packet.py'
+      - '.github/workflows/m3-jep491-inventory.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 2
+          persist-credentials: false
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: 1 - Diff hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          git diff --check
+
+      - name: 2 - Prove JEP491 packet invariants
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd m3/backports
+          python3 -m unittest -v test_jep491_packet.py
+
+      - name: 3 - Refuse product mutation in inventory packet
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="${{ github.event.pull_request.base.sha }}"
+          if [[ -z "$base" ]]; then
+            base="$(git rev-parse HEAD^)"
+          fi
+          git diff --name-only "$base...HEAD" | sort > "$RUNNER_TEMP/jep491-changed.txt"
+          unexpected="$(grep -Ev '^(m3/backports/JEP_RESIDUE_QUEUE.tsv|m3/backports/recipes/jep-491-vthread-unpinning/|m3/backports/test_jep491_packet.py|.github/workflows/m3-jep491-inventory.yml$)' "$RUNNER_TEMP/jep491-changed.txt" || true)"
+          if [[ -n "$unexpected" ]]; then
+            printf 'JEP491 inventory escaped metadata/test scope:\n%s\n' "$unexpected"
+            exit 1
+          fi
+          if grep -E '^(src/|make/|test/)' "$RUNNER_TEMP/jep491-changed.txt"; then
+            echo 'JEP491 inventory may not mutate OpenJDK product/test source'
+            exit 1
+          fi
+
+      - name: 4 - Verify common backport substrate
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/backports/pom.xml verify
+
+      - name: 5 - Assert compatibility locks
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -F $'LOCKING_DEFAULT\tJDK24 environment uses lightweight locking as normal path\tKEEP_JAVA21_LM_LEGACY_DEFAULT' m3/backports/recipes/jep-491-vthread-unpinning/COMPATIBILITY_SPLIT.tsv
+          grep -F $'PINNED_TRACE_PROPERTY\tremove jdk.tracePinnedThreads\tREJECT_REMOVAL' m3/backports/recipes/jep-491-vthread-unpinning/COMPATIBILITY_SPLIT.tsv
+          grep -F $'packet_state\tDEPENDENCY_CLOSURE_IN_PROGRESS' m3/backports/recipes/jep-491-vthread-unpinning/CURRENT_TREE_RECEIPT.tsv
+          grep -F $'promotion\tNOT_AUTHORIZED' m3/backports/recipes/jep-491-vthread-unpinning/CURRENT_TREE_RECEIPT.tsv

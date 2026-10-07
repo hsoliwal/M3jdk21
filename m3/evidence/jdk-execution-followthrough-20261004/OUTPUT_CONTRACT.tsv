@@ -1,0 +1,11 @@
+artifact	role
+STATUS.tsv	Measured gate states
+FINAL_REPORT.md	Exact scope and limits
+RUN_CONTEXT.tsv	Pinned execution context
+PROVENANCE.tsv	Source and ownership
+VERIFY_CONTRACT.tsv	Promotion gates
+OUTPUT_CONTRACT.tsv	Artifact custody
+SOURCE_SHA256.tsv	Exact candidate identities
+RECEIPTS.json	Recorded runtime receipts
+RAW_RESULTS.log	Selected raw command logs; complete receipts in conversation export
+ACTION_QUEUE.tsv	Unfinished programme exits

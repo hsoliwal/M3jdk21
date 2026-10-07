@@ -1,0 +1,9 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.a3.AlgorithmCatalogue
+displayName: Install A3 algorithm catalogue bridge
+description: >
+  Source-sealed A3Alg challenge/GitHub evidence bridge. Challenge sources are
+  reference-only; no OpenJDK product source, donor-copy or promotion authority.
+recipeList:
+  - com.m3.rewrite.a3.M3A3AlgorithmCatalogueRecipe

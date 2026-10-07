@@ -1,0 +1,152 @@
+START_UTC=2026-10-02T01:48:49Z
+Cloning into '/var/tmp/m3-runtime-migration-20261002/source-native'...
+Updating files:  12% (8778/68023)Updating files:  13% (8843/68023)Updating files:  14% (9524/68023)Updating files:  15% (10204/68023)Updating files:  16% (10884/68023)Updating files:  17% (11564/68023)Updating files:  18% (12245/68023)Updating files:  19% (12925/68023)Updating files:  20% (13605/68023)Updating files:  21% (14285/68023)Updating files:  22% (14966/68023)Updating files:  23% (15646/68023)Updating files:  24% (16326/68023)Updating files:  25% (17006/68023)Updating files:  26% (17686/68023)Updating files:  27% (18367/68023)Updating files:  28% (19047/68023)Updating files:  29% (19727/68023)Updating files:  29% (19888/68023)Updating files:  30% (20407/68023)Updating files:  31% (21088/68023)Updating files:  32% (21768/68023)Updating files:  33% (22448/68023)Updating files:  34% (23128/68023)Updating files:  35% (23809/68023)Updating files:  36% (24489/68023)Updating files:  37% (25169/68023)Updating files:  38% (25849/68023)Updating files:  39% (26529/68023)Updating files:  40% (27210/68023)Updating files:  41% (27890/68023)Updating files:  42% (28570/68023)Updating files:  43% (29250/68023)Updating files:  44% (29931/68023)Updating files:  45% (30611/68023)Updating files:  45% (31234/68023)Updating files:  46% (31291/68023)Updating files:  47% (31971/68023)Updating files:  48% (32652/68023)Updating files:  49% (33332/68023)Updating files:  50% (34012/68023)Updating files:  51% (34692/68023)Updating files:  52% (35372/68023)Updating files:  53% (36053/68023)Updating files:  54% (36733/68023)Updating files:  55% (37413/68023)Updating files:  56% (38093/68023)Updating files:  57% (38774/68023)Updating files:  58% (39454/68023)Updating files:  59% (40134/68023)Updating files:  60% (40814/68023)Updating files:  61% (41495/68023)Updating files:  61% (41831/68023)Updating files:  62% (42175/68023)Updating files:  63% (42855/68023)Updating files:  64% (43535/68023)Updating files:  65% (44215/68023)Updating files:  66% (44896/68023)Updating files:  67% (45576/68023)Updating files:  68% (46256/68023)Updating files:  69% (46936/68023)Updating files:  70% (47617/68023)Updating files:  71% (48297/68023)Updating files:  72% (48977/68023)Updating files:  73% (49657/68023)Updating files:  74% (50338/68023)Updating files:  75% (51018/68023)Updating files:  75% (51637/68023)Updating files:  76% (51698/68023)Updating files:  77% (52378/68023)Updating files:  78% (53058/68023)Updating files:  79% (53739/68023)Updating files:  80% (54419/68023)Updating files:  81% (55099/68023)Updating files:  82% (55779/68023)Updating files:  83% (56460/68023)Updating files:  84% (57140/68023)Updating files:  85% (57820/68023)Updating files:  86% (58500/68023)Updating files:  87% (59181/68023)Updating files:  88% (59861/68023)Updating files:  89% (60541/68023)Updating files:  90% (61221/68023)Updating files:  90% (61434/68023)Updating files:  91% (61901/68023)Updating files:  92% (62582/68023)Updating files:  93% (63262/68023)Updating files:  94% (63942/68023)Updating files:  95% (64622/68023)Updating files:  96% (65303/68023)Updating files:  97% (65983/68023)Updating files:  98% (66663/68023)Updating files:  99% (67343/68023)Updating files: 100% (68023/68023)Updating files: 100% (68023/68023), done.
+3776d6e674d6c9b04539ca24aca2504aa88d4a57
+1a1d13646d4255231ae2e18aafb73684e3c88b23
+MINDEX_INTEGRATION_RECIPE_PASS state=after
+SEGMENTED_RECIPE_PASS state=after
+...SOURCE_BOUND_RECIPE_PASS files=29 check_only=True
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.036s
+
+OK
+...
+----------------------------------------------------------------------
+Ran 4 tests in 0.228s
+
+OK
+..
+----------------------------------------------------------------------
+Ran 4 tests in 0.515s
+
+OK
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.969s
+
+OK
+Configure with privately extracted Ubuntu development packages
+CONFIGURE_EXIT=0
+checking if the jtreg test thread factory should be built... disabled, from default 'auto'
+checking if the CDS classlist generation should be enabled... enabled, from default 'auto'
+checking if any translations should be excluded... no
+checking if static man pages should be copied... enabled, default
+checking if CDS archive is available... yes
+checking if a default CDS archive should be generated... enabled, from default 'auto'
+checking if CDS archive is available... yes
+checking if compatible cds region alignment enabled... disabled, default
+checking for number of cores... 32
+checking for memory size... 15842 MB
+checking for appropriate number of jobs to run in parallel... 15
+checking whether to use javac server... enabled, default
+checking flags for boot jdk java command ...  -Duser.language=en -Duser.country=US  -XX:+UnlockDiagnosticVMOptions -XX:-VerifySharedSpaces -XX:SharedArchiveFile=/var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/configure-support/classes.jsa -Xshare:auto 
+checking flags for boot jdk java command for big workloads...  -Xms64M -Xmx1600M
+checking flags for bootcycle boot jdk java command for big workloads... -Xms64M -Xmx1600M
+checking flags for boot jdk java command for small workloads...  -XX:+UseSerialGC -Xms32M -Xmx512M -XX:TieredStopAtLevel=1
+checking for --enable-icecc... disabled, default
+checking if precompiled headers are available... yes
+checking for --enable-precompiled-headers... enabled, from default 'auto'
+checking for ccache... [not found]
+checking if ccache is available... no, ccache binary missing or not executable
+checking if ccache is enabled... disabled, default
+checking if build directory is on local disk... yes
+configure: creating /var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/configure-support/config.status
+config.status: creating /var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/spec.gmk
+config.status: creating /var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/bootcycle-spec.gmk
+config.status: creating /var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/buildjdk-spec.gmk
+config.status: creating /var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/compare.sh
+config.status: creating /var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/Makefile
+
+====================================================
+A new configuration has been successfully created in
+/var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug
+using configure arguments '--build=x86_64-unknown-linux-gnu --openjdk-target=x86_64-unknown-linux-gnu --with-boot-jdk=/usr/lib/jvm/java-21-openjdk-amd64 --with-debug-level=fastdebug --with-jvm-variants=server --enable-headless-only --disable-warnings-as-errors --with-freetype=bundled --with-cups=/var/tmp/m3-runtime-migration-20261002/deps/usr --with-fontconfig=/var/tmp/m3-runtime-migration-20261002/deps/usr --with-alsa-include=/var/tmp/m3-runtime-migration-20261002/deps/usr/include --with-alsa-lib=/var/tmp/m3-runtime-migration-20261002/deps/usr/lib/x86_64-linux-gnu --x-includes=/var/tmp/m3-runtime-migration-20261002/deps/usr/include --x-libraries=/var/tmp/m3-runtime-migration-20261002/deps/usr/lib/x86_64-linux-gnu --with-extra-cflags=-I/var/tmp/m3-runtime-migration-20261002/deps/usr/include --with-extra-cxxflags=-I/var/tmp/m3-runtime-migration-20261002/deps/usr/include'.
+
+Configuration summary:
+* Name:           linux-x86_64-server-fastdebug
+* Debug level:    fastdebug
+* HS debug level: fastdebug
+* JVM variants:   server
+* JVM features:   server: 'cds compiler1 compiler2 epsilongc g1gc jfr jni-check jvmci jvmti management parallelgc serialgc services shenandoahgc vm-structs zgc' 
+* OpenJDK target: OS: linux, CPU architecture: x86, address length: 64
+* Version string: 21-internal-adhoc.root.source-native (21-internal)
+* Source date:    1790905795 (2026-10-02T01:49:55Z)
+
+Tools summary:
+* Boot JDK:       openjdk version "21.0.12.1" 2026-08-18 OpenJDK Runtime Environment (build 21.0.12.1+1-1-24.04.4-Ubuntu) OpenJDK 64-Bit Server VM (build 21.0.12.1+1-1-24.04.4-Ubuntu, mixed mode, sharing) (at /usr/lib/jvm/java-21-openjdk-amd64)
+* Toolchain:      gcc (GNU Compiler Collection)
+* C Compiler:     Version 13.3.0 (at /usr/bin/gcc)
+* C++ Compiler:   Version 13.3.0 (at /usr/bin/g++)
+
+Build performance summary:
+* Build jobs:     15
+* Memory limit:   15842 MB
+
+Build complete matched fastdebug JDK image, JOBS=4
+BUILD_EXIT=0
+Creating jdk.jstatd.jmod
+Creating jdk.localedata.jmod
+Creating jdk.management.jmod
+Creating jdk.management.agent.jmod
+Creating jdk.management.jfr.jmod
+Creating jdk.naming.dns.jmod
+Creating jdk.naming.rmi.jmod
+Creating jdk.net.jmod
+Creating jdk.nio.mapmode.jmod
+Creating jdk.random.jmod
+Creating jdk.sctp.jmod
+Creating jdk.security.auth.jmod
+Creating jdk.security.jgss.jmod
+Creating jdk.unsupported.jmod
+Creating jdk.unsupported.desktop.jmod
+Creating jdk.xml.dom.jmod
+Creating jdk.zipfs.jmod
+Creating interim jimage
+Compiling up to 3 files for BUILD_DEMO_CodePointIM
+Updating support/demos/image/jfc/CodePointIM/src.zip
+Compiling up to 3 files for BUILD_DEMO_FileChooserDemo
+Updating support/demos/image/jfc/FileChooserDemo/src.zip
+Compiling up to 29 files for BUILD_DEMO_SwingSet2
+Updating support/demos/image/jfc/SwingSet2/src.zip
+Compiling up to 3 files for BUILD_DEMO_Font2DTest
+Updating support/demos/image/jfc/Font2DTest/src.zip
+Compiling up to 64 files for BUILD_DEMO_J2Ddemo
+Updating support/demos/image/jfc/J2Ddemo/src.zip
+Compiling up to 15 files for BUILD_DEMO_Metalworks
+Updating support/demos/image/jfc/Metalworks/src.zip
+Compiling up to 2 files for BUILD_DEMO_Notepad
+Updating support/demos/image/jfc/Notepad/src.zip
+Compiling up to 5 files for BUILD_DEMO_Stylepad
+Updating support/demos/image/jfc/Stylepad/src.zip
+Compiling up to 5 files for BUILD_DEMO_SampleTree
+Updating support/demos/image/jfc/SampleTree/src.zip
+Compiling up to 8 files for BUILD_DEMO_TableExample
+Updating support/demos/image/jfc/TableExample/src.zip
+Compiling up to 1 files for BUILD_DEMO_TransparentRuler
+Updating support/demos/image/jfc/TransparentRuler/src.zip
+Creating support/demos/image/jfc/CodePointIM/CodePointIM.jar
+Creating support/demos/image/jfc/FileChooserDemo/FileChooserDemo.jar
+Creating support/demos/image/jfc/SwingSet2/SwingSet2.jar
+Creating support/demos/image/jfc/Font2DTest/Font2DTest.jar
+Creating support/demos/image/jfc/J2Ddemo/J2Ddemo.jar
+Creating support/demos/image/jfc/Metalworks/Metalworks.jar
+Creating support/demos/image/jfc/Notepad/Notepad.jar
+Creating support/demos/image/jfc/Stylepad/Stylepad.jar
+Creating support/demos/image/jfc/SampleTree/SampleTree.jar
+Creating support/demos/image/jfc/TableExample/TableExample.jar
+Creating support/demos/image/jfc/TransparentRuler/TransparentRuler.jar
+Compiling up to 2 files for CLASSLIST_JAR
+Creating support/classlist.jar
+Creating jdk.jlink.jmod
+Creating java.base.jmod
+Creating jdk image
+Creating CDS archive for jdk image for server
+Creating CDS-NOCOOPS archive for jdk image for server
+Stopping javac server
+Finished building target 'images' in configuration 'linux-x86_64-server-fastdebug'
+openjdk version "21-internal" 2023-09-19
+OpenJDK Runtime Environment (fastdebug build 21-internal-adhoc.root.source-native)
+OpenJDK 64-Bit Server VM (fastdebug build 21-internal-adhoc.root.source-native, mixed mode, sharing)
+IMAGE=/var/tmp/m3-runtime-migration-20261002/source-native/build/linux-x86_64-server-fastdebug/images/jdk
+FINISH_UTC=2026-10-02T02:02:35Z

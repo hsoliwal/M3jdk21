@@ -1,0 +1,12 @@
+key	value
+repository	hsoliwal/M3jdk21
+base_commit	7ead93addf4a7b9614d4ad34c8dd02f4b93b9c36
+base_tree	9ec03e4a7e8b77a495aa69c786e3874dd7943515
+mode	bounded local, one worker; no distributed execution
+source_scope	existing mapped backing owner; new jtreg and recipe tests; additive workflow test selection
+host_jdk	OpenJDK21.0.11+10-1-deb13u2-Debian
+execution	layout-independent java.base package patch; no String.class or VM replacement
+heap	32MiB
+VM_modes	default JIT and -Xint
+Maven	absent
+canonical_promotion	not performed

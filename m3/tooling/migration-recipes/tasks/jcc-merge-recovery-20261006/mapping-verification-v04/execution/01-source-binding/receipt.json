@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/bind_mapping.py",
+    "--audit-root",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit",
+    "--source-input",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/source-publication-preparation/final-source-packet-v01/source-publication-input.json",
+    "--output",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04/execution-actual-v01/bound-inputs"
+  ],
+  "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261006/receiving-merge-audit/candidate/mapping-v04",
+  "exit_code": 0,
+  "name": "01-source-binding",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_sha256": "faee98c27f8ba723054470abc9d3547f1bf4f42b7476a0556102d2fd668f1640"
+}

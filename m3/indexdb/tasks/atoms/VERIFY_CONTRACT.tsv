@@ -1,0 +1,10 @@
+gate	state	qualification
+diff/static	PASS	Four extraction blocks plus private contracts; no guard removed
+Java21_compile	PASS_AT_565bc02	Actual DB and recipe Maven compilation
+API	PASS	Exact public/protected descriptors before/after
+DB_JUnit	PASS_AT_565bc02	61 tests, zero failures/errors/skips
+DbAtom_OpenRewrite	PASS_AT_565bc02	Actual exact replay and composed fixed-point case
+coverage	PASS_AT_565bc02	685/687 lines;240/241 branches;0.99 gates unchanged
+focused_recipe_module	FAILED_AT_565bc02	One metadata oracle failure;repair requires its own executed receipt
+full_recipe_module	FAILED_AT_565bc02	77 tests;12 failures;see DbMark ACTION_QUEUE
+full_reactor_and_JDK	NOT_RUN	Must be verified separately

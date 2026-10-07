@@ -1,0 +1,56 @@
+{
+  "repository": "hsoliwal/M3jdk21",
+  "default_branch": "master",
+  "baseline_commit": "da958d00d24154c0db87beca0ec80a7df2b43b73",
+  "root_tree_sha": "548f3d7c434c49c3989fc722f34ebba2ba9f0c5a",
+  "initial_source_inventory": {
+    "commit": "e8fdab9a7abc4b0273438ce9e5d0ffd6255b1247",
+    "root_tree_sha": "7d03f7bd4aab860c74cb436c082eca50d87c8391",
+    "m3_tree_sha": "bd2aa3e54daad6ddab7f0fe13724da44b779ac8a",
+    "m3_tree_entries": 1914,
+    "m3_tree_truncated": false,
+    "java_base_tree_sha": "4a5663c12241965fb3c4189fbccbb4d0c1a4aa17",
+    "java_base_tree_entries": 4295,
+    "jdk_compiler_tree_sha": "f27897ab038c35f363c6292d96f240644235c54b",
+    "jdk_compiler_tree_entries": 902
+  },
+  "current_src_tree": {
+    "sha": "7104a7b822d2f825396eeeca4acfde898ce62ec9",
+    "entries": 570,
+    "truncated": false
+  },
+  "publication_preflight": {
+    "raw_path": "final-current/00-publication-preflight.json",
+    "sha256": "078229832f13d3c23846e3e334ff69eeac1df4bdc602f3b5e6c01a0d8e6b216e",
+    "intervening_commits": 21,
+    "changed_files": 23,
+    "original_write_preimages_verified": 41,
+    "corpus_unchanged_paths": 100,
+    "additional_existing_test_preimages": [
+      {
+        "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomCoverageClosureTest.java",
+        "git_blob": "0b8bdd4b7df8dc60c987a88b1e8197032b80ed49",
+        "sha256": "e1d4d4d33502dbcf046ec7c52c2e1c357b37f0b0fbeea58a00a2114073a02dc1",
+        "bytes": 13464
+      },
+      {
+        "path": "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/atom/M3AtomDefensiveBranchTest.java",
+        "git_blob": "a12cda8d18e82f0f0078916a9396cd10a7ef0242",
+        "sha256": "91552baecc3f8c791326ffbfa47375624ae694dffdc5dcedceedc01be7865ab5",
+        "bytes": 5370
+      }
+    ]
+  },
+  "preserved_snapshot_helper": {
+    "path": "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/M3HashPinnedJavaSnapshotRecipe.java",
+    "git_blob": "717c3e01f8f0407ce96439e3ecc96190b10c1eed",
+    "sha256": "9cf77c6e68a534e84b88230ca517fa6c5a76fb3e101ea3a1f68aa5222c3ec4d9"
+  },
+  "corpus_pin_commit": "e8fdab9a7abc4b0273438ce9e5d0ffd6255b1247",
+  "write_scope": "m3/tooling/migration-recipes",
+  "remote_publication": "parent-owned; not performed by this task lane",
+  "source_pins": "../SOURCE_PINS.tsv",
+  "corpus_pins": "../../../src/test/resources/com/m3/rewrite/atom/spectrum/CORPUS.tsv",
+  "final_proof_phase": "current-3",
+  "junit_cases": 39
+}

@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.MIndexStringBulkCharBoundary
+displayName: Bulk materialize MIndexString UTF-16 at compatibility boundaries
+description: >-
+  Applies the reviewed hash-pinned java.lang.MIndexString bulk UTF-16 range copy
+  so String.toCharArray/getChars allocate only their required destination and
+  traverse canonical joined atoms sequentially instead of resolving every code unit.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: mindex-string-bulk-char-boundary

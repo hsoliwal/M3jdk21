@@ -1,0 +1,15 @@
+{
+  "initial_base": "1c389e31805fb4faf5d9fe256c8dc6797a2eadff",
+  "publication_base": "c0a14387009aefc7d62bd3268055d526e04f9074",
+  "retained_existing_records": 52,
+  "retained_gates": 20,
+  "retained_additions": [
+    "TQ current-owner custody",
+    "M3 porting plan",
+    "String precompute completeness ledger",
+    "lexicon source field mappings"
+  ],
+  "runtime_compile_closure_changed": false,
+  "new_mr_records": 3,
+  "source_rule": "Extend the current content; do not infer source integration from ancestry."
+}

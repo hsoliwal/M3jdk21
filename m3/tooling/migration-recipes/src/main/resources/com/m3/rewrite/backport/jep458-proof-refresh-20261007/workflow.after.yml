@@ -1,0 +1,172 @@
+name: M3 JEP 458 current-master admission
+
+on:
+  push:
+    branches:
+      - "m3/jep458-proof-refresh-20261007"
+    paths:
+      - "m3/backports/recipes/jep-458-current/**"
+      - "m3/tooling/migration-recipes/**"
+      - "m3/tooling/backport-dag/**"
+      - "make/CompileInterimLangtools.gmk"
+      - "src/java.base/share/classes/module-info.java"
+      - "src/java.base/share/classes/sun/launcher/resources/launcher.properties"
+      - "src/java.base/share/native/libjli/java.c"
+      - "src/jdk.compiler/share/classes/com/sun/tools/javac/**"
+      - "test/langtools/tools/javac/launcher/**"
+      - "test/langtools/tools/jdeps/listdeps/ListModuleDeps.java"
+      - ".github/workflows/m3-jep458-current-master.yml"
+  pull_request:
+    paths:
+      - "m3/backports/recipes/jep-458-current/**"
+      - "m3/tooling/migration-recipes/**"
+      - "m3/tooling/backport-dag/**"
+      - "make/CompileInterimLangtools.gmk"
+      - "src/java.base/share/classes/module-info.java"
+      - "src/java.base/share/classes/sun/launcher/resources/launcher.properties"
+      - "src/java.base/share/native/libjli/java.c"
+      - "src/jdk.compiler/share/classes/com/sun/tools/javac/**"
+      - "test/langtools/tools/javac/launcher/**"
+      - "test/langtools/tools/jdeps/listdeps/ListModuleDeps.java"
+      - ".github/workflows/m3-jep458-current-master.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recipe-and-dag-proof:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Refuse JEP 458 product-source drift in proof refresh
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE_SHA="f96b9a88e040cded3a5ffb96190e2acedee6c97d"
+          git diff --exit-code "$BASE_SHA...HEAD" -- \
+            make/CompileInterimLangtools.gmk \
+            src/java.base/share/classes/module-info.java \
+            src/java.base/share/classes/sun/launcher/resources/launcher.properties \
+            src/java.base/share/native/libjli/java.c \
+            src/jdk.compiler/share/classes/com/sun/tools/javac \
+            test/langtools/tools/javac/launcher \
+            test/langtools/tools/jdeps/listdeps/ListModuleDeps.java
+
+      - name: Prove exact current-master recipe replay and fixed point
+        run: |
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml             -Dtest=M3Jep458BackportRecipeTest,M3Jep458ProofRefreshRecipeTest test
+
+      - name: Validate exact JEP 458 packet and atom evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketMain             -Dexec.args="$PWD/m3/backports/recipes/jep-458-current/packet.tsv $PWD/m3/backports/recipes/jep-458-current/atom-evidence.tsv"             exec:java
+
+      - name: Project exact packet to Camel Airflow and Drools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/jep458-projection
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain             -Dexec.args="$PWD/m3/backports/recipes/jep-458-current/packet.tsv $PWD/target/jep458-projection $PWD/m3/backports/recipes/jep-458-current/atom-evidence.tsv"             exec:java
+          test -s target/jep458-projection/M3BackportRoutes.java
+          test -s target/jep458-projection/m3_backport_dag.py
+          test -s target/jep458-projection/m3_backport_rules.drl
+          test -s target/jep458-projection/atom-evidence.tsv
+
+      - name: Upload recipe-DAG projection evidence
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: jep458-recipe-dag-${{ github.run_id }}
+          path: target/jep458-projection
+          if-no-files-found: error
+          retention-days: 30
+
+  openjdk-proof:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Install OpenJDK build prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends             autoconf make gcc g++ zip unzip             libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev             libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+
+      - name: Configure Java 21-compatible JDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash configure             --with-boot-jdk="$JAVA_HOME"             --with-debug-level=release             --with-jvm-variants=server             --disable-warnings-as-errors
+
+      - name: Build JDK image with JEP 458 adaptation
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 images
+
+      - name: Run focused launcher and jdeps jtreg proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          make JOBS=2 test TEST="test/langtools/tools/javac/launcher test/langtools/tools/jdeps/listdeps/ListModuleDeps.java"
+
+      - name: Runtime single-file and multi-file launcher smoke
+        shell: bash
+        run: |
+          set -euo pipefail
+          JAVA_BIN="$(find build -path '*/images/jdk/bin/java' -type f | head -n 1)"
+          test -x "$JAVA_BIN"
+
+          tmp="$(mktemp -d)"
+          trap 'rm -rf "$tmp"' EXIT
+
+          mkdir -p "$tmp/single" "$tmp/multi"
+
+          cat > "$tmp/single/Hello.java" <<'EOF'
+          class Hello {
+              public static void main(String[] args) {
+                  System.out.println("single-ok");
+              }
+          }
+          EOF
+          test "$("$JAVA_BIN" "$tmp/single/Hello.java")" = "single-ok"
+
+          cat > "$tmp/multi/Main.java" <<'EOF'
+          class Main {
+              public static void main(String[] args) {
+                  System.out.println(Helper.message());
+              }
+          }
+          EOF
+          cat > "$tmp/multi/Helper.java" <<'EOF'
+          class Helper {
+              static String message() {
+                  return "multi-ok";
+              }
+          }
+          EOF
+          test "$("$JAVA_BIN" "$tmp/multi/Main.java")" = "multi-ok"
+
+      - name: Upload focused test report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: jep458-openjdk-proof-${{ github.run_id }}
+          path: |
+            build/*/test-results/**
+          if-no-files-found: warn
+          retention-days: 14

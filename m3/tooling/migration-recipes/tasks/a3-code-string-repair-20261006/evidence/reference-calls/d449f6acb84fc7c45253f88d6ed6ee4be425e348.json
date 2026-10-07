@@ -1,0 +1,18 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "blob_sha": "d449f6acb84fc7c45253f88d6ed6ee4be425e348"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "src/test/java/com/m3/rewrite/backport/DbRecipeTest.java\t48d1159aa0900c54e9e8e5910a0ca5dda759e2e3d1868ed6ded93647f598b384\t847e23f5ea4f8f4bc889c61bda6dfc638442ae105e6b3ef70081ddb102d3c001\t00-Test.java.txt\n"
+    },
+    "isError": false
+  }
+}

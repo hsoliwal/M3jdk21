@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: Apache-2.0
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.backport.JccSourceFinalHandoff
+displayName: M3 reviewed JCC source successor ledger
+description: >-
+  Replays the reviewed four-output JCC ledger and documentation packet through the
+  retained hash-pinned text owner. Capability export and destination acceptance
+  remain blocked until their separate owning proofs are admitted.
+tags:
+  - m3
+  - jdk21
+  - tooling
+  - candidate-only
+  - hash-pinned
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: jcc-source-final-handoff-20261005

@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "illustrativeOnly": true,
+  "id": "example.structure.atom-store",
+  "family": "structural-atoms",
+  "status": "proposed",
+  "source": {
+    "repository": "hsoliwal/com.synexia",
+    "commit": "bc49cd7610bf5974f6baa31ba64e6885f4117528",
+    "files": [
+      {
+        "path": "synexia-indexstring/src/main/java/com/synexia/indexstring/MIndexAtomStore.java",
+        "blobSha": "6e6ad697f4ce55e7c1a9069b1ccd4c0148778e74",
+        "symbols": [
+          "com.synexia.indexstring.MIndexAtomStore"
+        ]
+      }
+    ]
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "proposed": true,
+    "commit": null,
+    "module": "PROPOSED com.m3.structure; module location undecided",
+    "paths": [],
+    "symbols": [
+      "PROPOSED com.m3.structure.M3AtomStore"
+    ]
+  },
+  "relationship": "adapter",
+  "contracts": {
+    "owner": "Source immutable primitive-lane atom store; target authority undecided",
+    "identityDomain": "Source store/resolver/language coordinates; no cross-owner ID equivalence",
+    "coordinateSystem": "Source atom row and ordered child coordinates",
+    "compatibility": "No target API or binary compatibility established; example only"
+  },
+  "dependencies": [],
+  "materializationBoundaries": [
+    "Payload conversion and target owner lifetime must be reviewed before implementation"
+  ],
+  "recipe": null,
+  "evidence": [],
+  "enhancements": [],
+  "lastReviewedSourceCommit": null,
+  "blockers": [
+    "Illustrative record, not a completed mapping",
+    "Target placement, provenance review, dependent surfaces and exact-head tests remain open"
+  ],
+  "review": {
+    "decision": "not reviewed for implementation",
+    "reviewer": null,
+    "provenance": "Source architecture only; no implementation copied. Preserve source and target licensing."
+  }
+}

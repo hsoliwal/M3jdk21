@@ -1,0 +1,104 @@
+name: M3JDK21 Backport Recipe DAG
+
+on:
+  push:
+    branches:
+      - "m3/jdk21-backport-dag-control-20261003"
+    paths:
+      - "m3/pom.xml"
+      - "m3/tooling/backport-dag/**"
+      - "m3/tooling/migration-recipes/**"
+      - "m3/backports/backport_recipe_dag.py"
+      - "m3/backports/test_backport_recipe_dag.py"
+      - "m3/backports/pom.xml"
+      - ".github/workflows/m3-jdk21-backport-dag.yml"
+  pull_request:
+    paths:
+      - "m3/pom.xml"
+      - "m3/tooling/backport-dag/**"
+      - "m3/tooling/migration-recipes/**"
+      - "m3/backports/backport_recipe_dag.py"
+      - "m3/backports/test_backport_recipe_dag.py"
+      - "m3/backports/pom.xml"
+      - ".github/workflows/m3-jdk21-backport-dag.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dag-proof:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Verify recipe substrate and DAG semantic kernel
+        run: |
+          mvn -B -ntp -f m3/pom.xml -pl tooling/backport-dag -am clean verify
+
+      - name: Execute canonical DAG parser
+        run: |
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml             -Dexec.mainClass=com.m3.tooling.dag.M3BackportDagMain             exec:java
+
+      - name: Project sample packet to Camel Airflow and Drools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p target/m3-projection-smoke
+          cat > target/m3-projection-smoke/packet.tsv <<'EOF'
+          packet_id	atom_id	scope	scope_promotion_approved	work_ref	depends_on
+          ci-projection	java	FILE	false	com.m3.rewrite.SampleJava	
+          ci-projection	text	FILE	false	com.m3.rewrite.SampleText	
+          ci-projection	join	PACKAGE	true	com.m3.rewrite.SampleJoin	java,text
+          EOF
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+            -Dexec.mainClass=com.m3.tooling.dag.M3OrchestrationProjectionMain \
+            -Dexec.args="$PWD/target/m3-projection-smoke/packet.tsv $PWD/target/m3-projection-smoke/out" \
+            exec:java
+          test -s target/m3-projection-smoke/out/M3BackportRoutes.java
+          test -s target/m3-projection-smoke/out/m3_backport_dag.py
+          test -s target/m3-projection-smoke/out/m3_backport_rules.drl
+          test -s target/m3-projection-smoke/out/projection.tsv
+          DAG_ROOT="$(tail -n 1 target/m3-projection-smoke/out/projection.tsv | cut -f2)"
+          test "${#DAG_ROOT}" -eq 64
+          grep -F "$DAG_ROOT" target/m3-projection-smoke/out/M3BackportRoutes.java
+          grep -F "$DAG_ROOT" target/m3-projection-smoke/out/m3_backport_dag.py
+          grep -F "$DAG_ROOT" target/m3-projection-smoke/out/m3_backport_rules.drl
+
+      - name: Emit backport programme status
+        run: |
+          mvn -B -ntp -f m3/backports/pom.xml verify
+
+      - name: Validate every generated executable packet through canonical Java DAG
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -s m3/backports/target/backport-recipe-dag.tsv
+          test -s m3/backports/target/backport-recipe-dag.json
+          test -s m3/backports/target/backport-packets.tsv
+          test -d m3/backports/target/backport-packets
+          mvn -B -ntp -f m3/tooling/backport-dag/pom.xml \
+            -Dexec.mainClass=com.m3.tooling.dag.M3BackportPacketBatchMain \
+            -Dexec.args="$PWD/m3/backports/target/backport-packets" \
+            exec:java
+
+      - name: Upload backport status artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3jdk21-backport-status-${{ github.run_id }}
+          path: |
+            m3/backports/target/program-status.json
+            m3/backports/target/program-status.tsv
+            m3/backports/target/backport-recipe-dag.json
+            m3/backports/target/backport-recipe-dag.tsv
+            m3/backports/target/backport-packets.tsv
+            m3/backports/target/backport-packets/**
+            target/m3-projection-smoke/out/**
+          if-no-files-found: error
+          retention-days: 14

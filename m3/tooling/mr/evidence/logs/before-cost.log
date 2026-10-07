@@ -1,0 +1,8 @@
+MR_COST	units=126	pass=0	coldNs=156023	queries=256	bytes=285344	ns=1473422
+MR_COST	units=126	pass=1	coldNs=156023	queries=256	bytes=285056	ns=915063
+MR_COST	units=126	pass=2	coldNs=156023	queries=256	bytes=284672	ns=986016
+MR_COST	units=126	pass=3	coldNs=156023	queries=256	bytes=284728	ns=779796
+MR_COST	units=6144	pass=0	coldNs=110011	queries=256	bytes=12609536	ns=26480369
+MR_COST	units=6144	pass=1	coldNs=110011	queries=256	bytes=12609536	ns=9552163
+MR_COST	units=6144	pass=2	coldNs=110011	queries=256	bytes=12609536	ns=12890263
+MR_COST	units=6144	pass=3	coldNs=110011	queries=256	bytes=12609536	ns=22648808

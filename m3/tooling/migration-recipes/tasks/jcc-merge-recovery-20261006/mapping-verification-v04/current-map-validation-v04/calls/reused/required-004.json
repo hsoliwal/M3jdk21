@@ -1,0 +1,25 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "path": "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+    "ref": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+    "encoding": "base64"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "c3JjL2phdmEuYmFzZS9zaGFyZS9jbGFzc2VzL2pkay9pbnRlcm5hbC9taW5k\nZXgvTTNEZXNjcmlwdG9yLmphdmEJZGYxN2M0OGU1NGRlMDYwMDYwZTQzOTNl\nNWMyZjNlOGUyZjA2OGJhZDM4YTY5NTc2YTgyNzA5Y2M2ZDRjYmRiOQkxMzMz\nYTljZjhiOTZiOGM5MTlkMWMwOTg4OTk2NDhkMGE4MmNkY2U3ZTc3NTE2N2Zl\nM2ZmMmU1NzFjNTRlYzY3CTAwLURlc2NyaXB0b3IuamF2YS50eHQKdGVzdC9q\nZGsvamRrL2ludGVybmFsL21pbmRleC9kZXNjcmlwdG9yL2NvbS9tMy9kZXNj\ncmlwdG9yL0Rlc2NyaXB0b3JUZXN0LmphdmEJQUJTRU5UCTRjN2ZjM2IzNmFj\nMzI4NzNlNmY0ZjZlN2FlY2M3MWIwZTFiZmU4MmE4NWI2MWEzMTE0Y2Y3ZTg4\nYTA1N2I1NzgJMDEtRGVzY3JpcHRvclRlc3QuamF2YS50eHQK\n",
+      "encoding": "base64",
+      "sha": "2a62a7a35e9e59cf403336c197f60d7e5915b064",
+      "display_url": "https://github.com/hsoliwal/M3jdk21/blob/d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2/m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-descriptor/manifest.tsv",
+      "display_title": "manifest.tsv"
+    },
+    "isError": false
+  }
+}
+

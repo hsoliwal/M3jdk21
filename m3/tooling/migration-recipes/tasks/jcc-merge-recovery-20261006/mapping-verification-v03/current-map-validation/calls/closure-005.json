@@ -1,0 +1,25 @@
+{
+  "request": {
+    "repository_full_name": "hsoliwal/M3jdk21",
+    "path": "m3/core/src/com/m3/text/M3StringPiece.java",
+    "ref": "d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2",
+    "encoding": "base64"
+  },
+  "response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Action completed."
+      }
+    ],
+    "structuredContent": {
+      "content": "LyogQ29weXJpZ2h0IDIwMjYgSGl0ZXNoIFNvbGl3YWwgPGhzb2xpd2FsQGdt\nYWlsLmNvbT4KICogU1BEWC1MaWNlbnNlLUlkZW50aWZpZXI6IEFwYWNoZS0y\nLjAKICovCnBhY2thZ2UgY29tLm0zLnRleHQ7CgovKiogSW1tdXRhYmxlIGNv\nZGUtdW5pdCB2aWV3LiBDb252ZXJzaW9uIHRvIFN0cmluZyBpcyBhbiBleHBs\naWNpdCBhbGxvY2F0aW5nIGJvdW5kYXJ5LiAqLwpwdWJsaWMgc2VhbGVkIGlu\ndGVyZmFjZSBNM1N0cmluZ1BpZWNlIGV4dGVuZHMgQ2hhclNlcXVlbmNlCiAg\nICAgICAgcGVybWl0cyBMb2NhbE0zU3RyaW5nUGllY2UsIEpvaW5lZE0zU3Ry\naW5nUGllY2UgewogICAgQE92ZXJyaWRlIE0zU3RyaW5nUGllY2Ugc3ViU2Vx\ndWVuY2UoaW50IHN0YXJ0LCBpbnQgZW5kKTsKCiAgICBkZWZhdWx0IFN0cmlu\nZyBmbGF0dGVuKCkgewogICAgICAgIGNoYXJbXSByZXN1bHQgPSBuZXcgY2hh\ncltsZW5ndGgoKV07CiAgICAgICAgZm9yIChpbnQgaSA9IDA7IGkgPCByZXN1\nbHQubGVuZ3RoOyBpKyspIHJlc3VsdFtpXSA9IGNoYXJBdChpKTsKICAgICAg\nICByZXR1cm4gbmV3IFN0cmluZyhyZXN1bHQpOwogICAgfQoKICAgIC8qKiBK\nb2lucyBpbW11dGFibGUgbGVhZiByYW5nZXMgd2l0aG91dCBjb3B5aW5nIHRo\nZWlyIGNoYXJhY3RlciBieXRlcy4gKi8KICAgIHN0YXRpYyBNM1N0cmluZ1Bp\nZWNlIGpvaW4oTTNTdHJpbmdQaWVjZS4uLiBwaWVjZXMpIHsKICAgICAgICBy\nZXR1cm4gbmV3IEpvaW5lZE0zU3RyaW5nUGllY2UocGllY2VzKTsKICAgIH0K\nfQo=\n",
+      "encoding": "base64",
+      "sha": "99cb72623fa6bc2d5426553e04aaf0e5bfa993cc",
+      "display_url": "https://github.com/hsoliwal/M3jdk21/blob/d1b9162cd568108f4c8d82f6b6a03cccfdb91bd2/m3/core/src/com/m3/text/M3StringPiece.java",
+      "display_title": "M3StringPiece.java"
+    },
+    "isError": false
+  }
+}
+

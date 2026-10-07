@@ -1,0 +1,38 @@
+{
+  "callbackCases": 66798,
+  "canonicalCommit": "7c4a949507f55718245188e60d7940dbe772e80c",
+  "canonicalReceiverTree": "cd66894c1616149d8539d39106a10c523f1d7aeb",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "exportRoot": "24d257e3004846b26ca811fad7e5ae84f872619e5726aa62639d7b391c9014b2",
+  "gates": {
+    "bootstrapSdk": "NOT_RUN_MAVEN_UNAVAILABLE",
+    "jdkImage": "NOT_RUN",
+    "productionImport": "NOT_RUN",
+    "targetParentReactor": "NOT_RUN"
+  },
+  "importer": {
+    "assertions": 65,
+    "files": 5,
+    "manifestRoot": "24d257e3004846b26ca811fad7e5ae84f872619e5726aa62639d7b391c9014b2",
+    "openRewriteExecution": false,
+    "productionApplication": false,
+    "refusals": 24,
+    "replayChanges": 0,
+    "status": "PASS"
+  },
+  "intendedPrefix": "m3/vendor/synexia/callback-parity/",
+  "javaJniReplay": "PASS_IN_ISOLATED_FIXTURE",
+  "jdkRuntimeDisposition": "DO_NOT_PORT_TO_JDK_RUNTIME",
+  "lifecycleCases": 1320,
+  "qualificationScope": "EXACT_TARGET_IMPORTER_FIXTURE_ON_SYSTEM_JAVA21",
+  "receiver": "com.m3.synexia.importer.SynexiaImporter",
+  "recipe": "com.synexia.m3.M3Jdk21CallbackBootstrap",
+  "recipeOwnerMovedToTarget": false,
+  "runtimeSourceChanged": false,
+  "schema": "M3_CALLBACK_INTAKE_BINDING_V1",
+  "sourceReportPath": "synexia-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/evidence/REPORT.json",
+  "sourceReportSha256": "40b3b567df12f7f0380d58e1d43fc5af1af380488a2c04031f4d4919ef462224",
+  "sourceRevision": "839c67201d66fb015de3111c2a8f9a12e72efd04",
+  "status": "DOCUMENTED_NOT_INSTALLED",
+  "targetBase": "7fd4c0bdec006691ce0e8f2408c8963f191cd2e5"
+}

@@ -1,0 +1,12 @@
+field	value
+issue	JDK-8338587
+upstream_commit	c54fc08aa3c63e4b26dc5edb2436844dfd3bab7c
+current_tree_state	CANDIDATE_MATERIALIZED_UNVERIFIED
+recipe	com.m3.rewrite.backport.M3Jdk8338587ShakeXofBackportRecipe
+product_targets	1
+test_targets	1
+java21_sha3_representation	BYTE_STATE_PLUS_LONG_LANES_PRESERVED
+standalone_shake256	PRESERVED
+pkcs_callers	PRESERVED
+promotion	NOT_AUTHORIZED
+next_action	RUN_RECIPE_JUNIT_BUILD_SHAKE_JTREG_FIXED_POINT_CANONICAL_READBACK

@@ -1,0 +1,12 @@
+M3 immutable text foundation
+Copyright 2026 Hitesh Soliwal <hsoliwal@gmail.com>
+
+The original sources under m3/ are independently authored and licensed under
+Apache License 2.0. The original P0 foundation did not import MatIndex/MIndex donor source.
+Later imports are individually pinned and attributed in their scoped notices.
+OpenJDK files outside m3/ retain their existing notices and licenses.
+The original separately built foundation has its own integration scope.
+Synexia VI/Release and Class bridge ports are attributed in m3/tooling/vi,
+m3/tooling/cb and
+src/java.base/share/legal/synexia.md. This notice does not relicense OpenJDK
+or authorize incompatible donor imports.

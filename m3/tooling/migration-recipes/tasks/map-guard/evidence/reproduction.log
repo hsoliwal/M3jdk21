@@ -1,0 +1,11 @@
+/mnt/data/m3-map-guard/replay-input/src/java.base/share/classes/jdk/internal/mindex/MIndexStringBacking.java: OK
+/mnt/data/m3-map-guard/replay-input/src/java.base/share/classes/jdk/internal/mindex/MIndexMappedStringBacking.java: OK
+/mnt/data/m3-map-guard/replay-input/test/jdk/java/lang/String/MIndexMappedStringBackingTest.java: OK
+/mnt/data/m3-map-guard/replay-input/test/jdk/java/lang/String/MapGuardTest.java: OK
+MINDEX_JDK_MAPPED_BACKING_PASS|utf16=1|utf8=1|alias=1|substring=1|jni=0
+MAP_GUARD_FD_PASS outer=16 inner=16 nested=4
+MAP_GUARD_PASS group=all checks=78
+MINDEX_JDK_MAPPED_BACKING_PASS|utf16=1|utf8=1|alias=1|substring=1|jni=0
+MAP_GUARD_FD_PASS outer=16 inner=16 nested=4
+MAP_GUARD_PASS group=all checks=78
+SCOPED_BACKING_PROOF_PASS; full-JDK/Maven/jtreg/coverage not implied

@@ -1,0 +1,92 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 DB parse proof
+on:
+  push:
+    branches: ['m3/db-parse-20261004']
+  pull_request:
+    paths:
+      - 'm3/indexdb/**'
+      - 'm3/compatibility/synexia-m3indexdb-v1-pin.tsv'
+      - 'm3/compatibility/check_synexia_m3indexdb_v1.py'
+      - 'm3/compatibility/synexia-canonical-residue-gitblobs.tsv'
+      - 'm3/compatibility/SYNEXIA_M3INDEXDB_V1_FINGERPRINT.md'
+      - '.github/workflows/m3-db-parse.yml'
+permissions:
+  contents: read
+jobs:
+  proof:
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        suite: [db, recipe]
+    name: ${{ matrix.suite }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - name: Fetch exact source
+        env:
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 \
+            "https://codeload.github.com/${GITHUB_REPOSITORY}/tar.gz/${HEAD_SHA}" \
+            -o "$RUNNER_TEMP/repo.tar.gz"
+          mkdir -p "$RUNNER_TEMP/repo"
+          tar -xzf "$RUNNER_TEMP/repo.tar.gz" -C "$RUNNER_TEMP/repo" --strip-components=1
+          printf 'REPO=%s\n' "$RUNNER_TEMP/repo" >> "$GITHUB_ENV"
+          printf 'TESTED_SHA=%s\n' "$HEAD_SHA" >> "$GITHUB_ENV"
+      - name: Prepare pinned Java 21 test JDK
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 \
+            'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21%2B35/OpenJDK21U-jdk_x64_linux_hotspot_21_35.tar.gz' \
+            -o "$RUNNER_TEMP/jdk21.tar.gz"
+          printf '%s  %s\n' \
+            '82f64c53acaa045370d6762ebd7441b74e6fda14b464d54d1ff8ca941ec069e6' \
+            "$RUNNER_TEMP/jdk21.tar.gz" | sha256sum --check -
+          tar -xzf "$RUNNER_TEMP/jdk21.tar.gz" -C "$RUNNER_TEMP"
+          printf 'JAVA_HOME=%s\n' "$RUNNER_TEMP/jdk-21+35" >> "$GITHUB_ENV"
+          printf '%s\n' "$RUNNER_TEMP/jdk-21+35/bin" >> "$GITHUB_PATH"
+      - name: Execute owning module proof
+        env:
+          SUITE: ${{ matrix.suite }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/proof"
+          printf '%s\n' "$TESTED_SHA" > "$RUNNER_TEMP/proof/tested-sha.txt"
+          java -version 2>&1 | tee "$RUNNER_TEMP/proof/java-version.txt"
+          mvn -version | tee "$RUNNER_TEMP/proof/maven-version.txt"
+          case "$SUITE" in
+            db)
+              python3 "$REPO/m3/compatibility/check_synexia_m3indexdb_v1.py" \
+                2>&1 | tee "$RUNNER_TEMP/proof/synexia-v1-pin.log"
+              mvn -B -ntp -f "$REPO/m3/indexdb/pom.xml" clean verify \
+                2>&1 | tee "$RUNNER_TEMP/proof/db-verify.log"
+              ;;
+            recipe)
+              mvn -B -ntp -f "$REPO/m3/tooling/migration-recipes/pom.xml" \
+                -Dtest=DbRecipeTest test 2>&1 | tee "$RUNNER_TEMP/proof/recipe-test.log"
+              ;;
+            *) exit 2 ;;
+          esac
+      - name: Retain observed source and failures
+        if: always()
+        env:
+          SUITE: ${{ matrix.suite }}
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/proof"
+          if test -n "${REPO:-}" && test -d "$REPO/m3/indexdb"; then
+            cp -R "$REPO/m3/indexdb" "$RUNNER_TEMP/proof/indexdb"
+          fi
+          if test "$SUITE" = recipe && test -n "${REPO:-}"; then
+            cp -R "$REPO/m3/tooling/migration-recipes" "$RUNNER_TEMP/proof/recipes"
+          fi
+      - name: Upload exact-head evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: db-parse-${{ matrix.suite }}-${{ github.event.pull_request.head.sha || github.sha }}
+          path: ${{ runner.temp }}/proof
+          if-no-files-found: error

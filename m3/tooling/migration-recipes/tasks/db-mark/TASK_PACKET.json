@@ -1,0 +1,21 @@
+{
+  "task_packet": "active",
+  "source_doc": "m3/tooling/migration-recipes/tasks/db-mark/DESIGN.md",
+  "invariant_id": "INHERITED_METADATA_WITH_PROVENANCE",
+  "base_commit": "565bc02094731fbe0dcf3a2fff75706be8d0a60b",
+  "run": {"mode": "apply", "profile": "bounded", "workers": 1, "shard_count": 1, "shard_index": 0},
+  "targets": {"files": [
+    "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/DbRecipeTest.java",
+    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/db-mark/**",
+    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/db-build/01-Test.java.txt",
+    "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/db-build/manifest.tsv",
+    "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/db-mark.yml",
+    "m3/tooling/migration-recipes/tasks/db-mark/**"
+  ]},
+  "invariant_locks": {"PRODUCTION_SOURCE": "LOCKED", "DB_SOURCE_AND_TESTS": "LOCKED", "PUBLIC_API": "LOCKED", "POMS_WORKFLOWS_THRESHOLDS": "LOCKED", "MASTER_DEVELOP": "READ_ONLY"},
+  "allowed_delta": ["correct metadata-test oracle", "add exact-preimage recipe and replay proof", "document observed DB success and recipe failures"],
+  "forbidden": ["remove scheduler provenance", "delete test methods", "weaken coverage", "merge/rebase/force-push"],
+  "verify_order": ["diff", "static/hash/config checks", "compile", "JUnit", "runtime"],
+  "output_contract": ["STATUS.tsv", "FINAL_REPORT.md", "RUN_CONTEXT.tsv", "PROVENANCE.tsv", "VERIFY_CONTRACT.tsv", "OUTPUT_CONTRACT.tsv"],
+  "stop_conditions": ["unexpected path/preimage", "compiler/test failure"]
+}

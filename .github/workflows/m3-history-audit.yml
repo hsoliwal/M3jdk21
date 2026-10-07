@@ -1,0 +1,61 @@
+# Copyright 2026 Hitesh Soliwal. SPDX-License-Identifier: Apache-2.0
+name: M3 frozen history audit
+on:
+  pull_request:
+    paths: ['m3/history/**', '.github/workflows/m3-history-audit.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+  pull-requests: read
+jobs:
+  history:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Diff, lexical hygiene and byte compilation
+        shell: bash
+        run: |
+          git diff --check f18b9d6b2d43dcec36adc46dc915e623333e613c HEAD -- m3/history .github/workflows/m3-history-audit.yml
+          python3 -m tabnanny m3/history
+          PYTHONPYCACHEPREFIX="$RUNNER_TEMP/history-pycache" python3 -m py_compile m3/history/*.py
+      - name: Test history contracts on isolated Git fixtures
+        run: python3 -B -m unittest discover -s m3/history -p 'test_*.py' -v
+      - name: Ensure frozen public commit objects are present
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, subprocess
+          data = json.load(open('m3/history/snapshot.json'))
+          pins = set(data['refs'].values()) | {data[k] for k in ('upstream', 'candidate', 'target')}
+          for sha in sorted(pins):
+              result = subprocess.run(['git', 'cat-file', '-e', sha + '^{commit}'], capture_output=True)
+              if result.returncode:
+                  subprocess.run(['git', 'fetch', '--no-tags', 'origin', sha], check=True)
+          PY
+      - name: Capture PR metadata witness without changing the frozen graph
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 -B m3/history/collect_prs.py --snapshot m3/history/snapshot.json --output "$RUNNER_TEMP/m3-pr-witness.json"
+      - name: Traverse every frozen commit forward and backward with all parent patches
+        run: python3 -B m3/history/audit.py --repo . --snapshot m3/history/snapshot.json --prs "$RUNNER_TEMP/m3-pr-witness.json" --output "$RUNNER_TEMP/m3-history-audit"
+      - name: Publish audit summary, not runtime acceptance
+        if: always()
+        shell: bash
+        run: |
+          if [ -f "$RUNNER_TEMP/m3-history-audit/FINAL_REPORT.md" ]; then
+            cat "$RUNNER_TEMP/m3-history-audit/FINAL_REPORT.md" >> "$GITHUB_STEP_SUMMARY"
+            cat "$RUNNER_TEMP/m3-history-audit/SUMMARY.tsv"
+            cat "$RUNNER_TEMP/m3-history-audit/MERGES.tsv"
+            cat "$RUNNER_TEMP/m3-history-audit/PULL_REQUESTS.tsv"
+          fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: m3-frozen-history-${{ github.run_id }}
+          path: ${{ runner.temp }}/m3-history-audit
+          if-no-files-found: warn
+          retention-days: 30

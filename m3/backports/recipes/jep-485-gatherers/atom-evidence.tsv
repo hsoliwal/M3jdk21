@@ -1,0 +1,2 @@
+packet_id	atom_id	contract_ref	documentation_ref	pattern	iop_role	junit_proof_ref	fixed_point_required
+jep-485-stream-gatherers	gatherers-feature	jep485/final-stream-gatherers-api	m3/backports/recipes/jep-485-gatherers/README.md	ExtensionPoint	Stream.IntermediateOperation.LibraryExtension	M3Jep485StreamGatherersBackportRecipeTest	true

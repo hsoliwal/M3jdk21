@@ -1,0 +1,6 @@
+{
+  "result": "REFUSED_BEFORE_COPY",
+  "reason": "Original toolchain directory skeletons exist although all regular file bodies are absent. Initial guard required entire roots absent.",
+  "files_copied": 0,
+  "toolchain_execution": false
+}

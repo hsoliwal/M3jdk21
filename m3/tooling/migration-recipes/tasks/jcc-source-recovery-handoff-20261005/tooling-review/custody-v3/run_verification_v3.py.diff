@@ -1,0 +1,42 @@
+--- run_verification.py
++++ run_verification_v3.py
+@@ -13,7 +13,7 @@
+ 
+ BASE = Path(__file__).resolve().parent
+ ROOT = BASE / "overlay"
+-OUT = BASE / "verification"
++OUT = BASE / "verification-v3"
+ CRATE = ROOT / "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jcc-source-recovery-handoff-20261005"
+ PLAN = CRATE / "plan.json"
+ PYTHON = Path(os.environ.get("CODEX_PRIMARY_RUNTIME_PYTHON", "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3"))
+@@ -105,8 +105,8 @@
+     if not __debug__:
+         raise RuntimeError('Optimized Python disables required receiving proof assertions')
+     assert not OUT.exists(), "Use a distinct execution epoch; do not overwrite prior receipts"
+-    from author_e04 import validate_inputs
+-    final_inputs = json.loads((BASE / "FINAL_SOURCE_INPUTS.json").read_text())
++    from author_e04_v3 import validate_inputs
++    final_inputs = json.loads((BASE / "FINAL_SOURCE_INPUTS_V3.json").read_text())
+     source, source_root, source_ref, inventory, source_accounting, context = validate_inputs(final_inputs)
+     plan = json.loads(PLAN.read_text())
+     assert plan["source_commit"] == source
+@@ -119,6 +119,11 @@
+     external = {Path(row["local_path"]) for group in ("sources", "proof_references") for row in inventory[group]}
+     external.update(admitted_context)
+     external.update(Path(final_inputs[key]["local_path"]) for key in ("publication_receipt", "source_inventory", "root_accounting", "handoff_document"))
++    publication = json.loads(Path(final_inputs["publication_receipt"]["local_path"]).read_text())
++    external.update(BASE / name for name in ("derive_source_handoff_v3.py", "author_e04_v3.py", "run_verification_v3.py", "publication_custody_v3.py", "custody-v3-proposal/LOCAL_EXPECTATIONS.json", "source-prepublication/DESIGNATED_COMPARISON.json"))
++    external.update(Path(publication[key]) for key in ("manifest_path", "readback_path"))
++    external.add(Path(publication["raw_fixture_custody_input"]["local_path"]))
++    external.add(Path(publication["raw_fixture_custody"]["failed_readback_observation"]["local_path"]))
+     inputs = {"frozen_at_utc": now(), "plan_sha256": plan["plan_sha256"],
+               "fixed_inputs": [admitted_receipts[path] if path in admitted_receipts else identity(path) for path in fixed_paths],
+               "external_source_and_proof_inputs": [admitted_context[path] if path in admitted_context else identity(path) for path in sorted(external)],
+@@ -184,6 +189,7 @@
+     receipt = {
+         "scope": "Actual additive E4 metadata recipe/installer validation; no source-export, receiver-behavior rerun, full-module coverage or JDK/JNI acceptance.",
+         "source_publication_commit": source, "source_publication_root": source_root, "source_publication_ref": source_ref,
++        "source_publication_custody": inventory["source_publication"]["custody"],
+         "destination_preimage_commit": "0994ecd65e86600f417f4d8702838d8c2663af61",
+         "plan_sha256": plan["plan_sha256"], "runs": runs,
+         "inputs": identity(OUT / "inputs.json"), "all_fixed_inputs_unchanged": True,

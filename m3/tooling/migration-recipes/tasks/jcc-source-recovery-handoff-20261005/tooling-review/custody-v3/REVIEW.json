@@ -1,0 +1,31 @@
+{
+  "schema": "jcc-e04-v3-custody-static-review/1",
+  "epoch": "T01",
+  "status": "NARROW_RUNNER_FREEZE_CORRECTION_REQUIRED",
+  "findings": [
+    {
+      "id": "E4-V3-01",
+      "severity": "low",
+      "status": "REPORTED_FIX_PENDING",
+      "reader_file": "publication_custody_v3.py",
+      "reader_lines": [
+        106,
+        108
+      ],
+      "runner_file": "run_verification_v3.py",
+      "summary": "The two directly consumed invalidUTF8 local fixture bodies are not explicitly included in the runner external freeze; initial hashes are checked but during-run preservation is not assured."
+    }
+  ],
+  "no_other_source_level_blocker_found": true,
+  "schema_and_exception_scope_match_reviewed_producer": true,
+  "producer_verifier_sha256": "45d1e83ba81dfaed9434fddb7df9f4962b7fbbb8cb1c9b29f90754c8fcf38baa",
+  "producer_helper_sha256": "45fe2a39cc936f94e20cf0051f3844e6d6b5ba59b87b2d3ca175bb60917603be",
+  "prior_T02_entrypoints_preserved": true,
+  "bound_inputs_state": "UNBOUND",
+  "actual_publication_or_afterimages_reviewed": false,
+  "candidate_import_or_execution": false,
+  "builds_tests_remote_calls": false,
+  "final_bound_input_review_pending": true,
+  "report": "REVIEW.md",
+  "static_checks": "STATIC_CHECKS.json"
+}

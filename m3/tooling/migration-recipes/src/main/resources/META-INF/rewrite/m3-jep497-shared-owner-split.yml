@@ -1,0 +1,8 @@
+---
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.Jep497SharedOwnerSplit
+displayName: Split JEP 497 shared owners
+description: >
+  Moves broad shared security owners out of whole-file GA materialization and into a semantic-recipe lane.
+recipeList:
+  - com.m3.rewrite.backport.M3Jep497SharedOwnerSplitRecipe

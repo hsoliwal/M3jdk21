@@ -1,0 +1,7 @@
+owner	identity	use
+M3Java21ConvergenceRecipe	8587427f84aca1a25869a0de3238754730160b5c	Original production preimage
+M3Java21ConvergenceRecipeTest	fa37700ff2b292723d3a26d2a19d5e5dc629876f	Original test preimage
+A3Apply	9a0f66609a1450c30493b3316eb36cd0950ce414	Unchanged existing caller
+migration-recipes/pom.xml	86f223907bbb053f4792e6bf771c3c0882e1751b	Unchanged dependency and verification owner
+RemoveUnusedImports	openrewrite/rewrite@v8.17.1	Existing Apache-2.0 dependency; no implementation body copied
+OrderImports	107f843fc26c19ecaa4e203c34fbc9d9126f7f19	Reviewed; not enabled without original style decision

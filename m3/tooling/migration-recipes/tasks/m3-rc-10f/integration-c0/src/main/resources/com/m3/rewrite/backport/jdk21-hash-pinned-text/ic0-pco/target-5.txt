@@ -1,0 +1,877 @@
+// SPDX-License-Identifier: Apache-2.0
+package com.m3.tooling.dag;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import com.m3.rewrite.scope.M3EditScope;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HexFormat;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.io.TempDir;
+
+final class M3BackportPacketCollectionTest {
+    private static final String DESCRIPTOR_SHA = "0".repeat(64);
+    @TempDir Path temp;
+
+    @Test
+    void aliasesAreCompleteStableFullSha256Identities() throws Exception {
+        String original = "file-" + "long-".repeat(100) + "java";
+        String expected = "a-" + HexFormat.of().formatHex(
+                MessageDigest.getInstance("SHA-256").digest(original.getBytes(StandardCharsets.UTF_8)));
+        assertEquals(expected, M3BackportPacketCollection.aliasOf(original));
+        assertEquals(66, expected.length());
+        assertNotEquals(expected, M3BackportPacketCollection.aliasOf(original + "-other"));
+        assertEquals(66, M3BackportPacketCollection.aliasOf("a".repeat(1024)).length());
+        for (String invalid : List.of("", "A", " a", "a ", "a/b", "a\n", "a".repeat(1025))) {
+            assertThrows(IllegalArgumentException.class, () -> M3BackportPacketCollection.aliasOf(invalid));
+        }
+        assertThrows(NullPointerException.class, () -> M3BackportPacketCollection.aliasOf(null));
+    }
+
+    @Test
+    void collectionRetainsAtomsEdgesEvidenceAndEveryGlobalTerminal() {
+        M3BackportPacket left = packet("left", atom("a"), atom("b", "a"));
+        M3BackportPacket right = packet("right", atom("c"), atom("unused"));
+        M3BackportPacketCollection collection = collection(
+                List.of(left, right), List.of(join("first", "b", "c"), join("last", "first")),
+                "a", "b", "c", "unused", "first", "last");
+        assertEquals(List.of(alias("a"), alias("b"), alias("c"), alias("unused"),
+                        alias("first"), alias("last")),
+                collection.atoms().stream().map(M3RecipeAtom::id).toList());
+        assertEquals(List.of(alias("unused"), alias("last")),
+                collection.terminalAtoms().stream().map(M3RecipeAtom::id).toList());
+        assertEquals(4, collection.edgeCount());
+        assertEquals(M3EditScope.LIBRARY_API, collection.maximumScope());
+        M3RecipeDag dag = M3PacketDagComposer.composeCollection(collection);
+        assertEquals(21, dag.size());
+        assertCurrentLifecycle(dag);
+        assertEquals(List.of("packet-" + alias("unused"), "packet-" + alias("last")),
+                dag.require("recipe-junit").dependsOn());
+        assertEquals(List.of("packet-" + alias("b"), "packet-" + alias("c")),
+                dag.require("packet-" + alias("first")).dependsOn());
+        assertEquals(1, dag.topologicalOrder().stream()
+                .filter(node -> node.kind() == M3DagKind.PROMOTION).count());
+        assertEquals("promote", dag.topologicalOrder().getLast().id());
+        assertTrue(dag.require("promote").serialPromotion());
+        assertEquals(M3EditScope.LIBRARY_API, dag.require("promote").scope());
+    }
+
+    @Test
+    void zeroJoinsRetainIndependentTerminalsAndFileScope() {
+        M3BackportPacketCollection collection = collection(
+                List.of(packet("one", atom("a")), packet("two", atom("b"))), List.of(), "a", "b");
+        assertEquals(0, collection.edgeCount());
+        assertEquals(M3EditScope.FILE, collection.maximumScope());
+        assertEquals(2, collection.terminalAtoms().size());
+        assertEquals(List.of("packet-" + alias("a"), "packet-" + alias("b")),
+                M3PacketDagComposer.composeCollection(collection).require("recipe-junit").dependsOn());
+    }
+
+    @Test
+    void existingPacketBudgetsAndDependencyClosureRemainEnforced() {
+        ArrayList<M3RecipeAtom> atoms = new ArrayList<>();
+        for (int i = 0; i < 256; i++) {
+            atoms.add(atom("atom-" + i));
+        }
+        M3BackportPacket accepted = new M3BackportPacket("boundary", atoms);
+        assertEquals(256, accepted.atoms().size());
+        assertEquals(256, evidence(accepted).atoms().size());
+        atoms.add(atom("extra"));
+        assertThrows(IllegalArgumentException.class, () -> new M3BackportPacket("too-large", atoms));
+        assertThrows(IllegalArgumentException.class, () -> new M3BackportPacketEvidence("too-large",
+                atoms.stream().map(atom -> evidence(atom.id())).toList()));
+        assertThrows(IllegalArgumentException.class, () -> packet("external", atom("a", "outside")));
+        assertThrows(IllegalArgumentException.class, () -> new M3RecipeAtom(
+                "a".repeat(81), M3EditScope.FILE, false, "work", List.of()));
+        assertThrows(IllegalArgumentException.class, () -> evidence("a".repeat(81)));
+    }
+
+    @Test
+    void collectionBudgetsAreExplicitWithoutChangingPacketBudget() {
+        M3BackportPacket packet = packet("p", atom("a"));
+        assertThrows(IllegalArgumentException.class,
+                () -> collection(List.of(), List.of()));
+        assertThrows(IllegalArgumentException.class,
+                () -> collection(Collections.nCopies(17, packet), List.of(), "a"));
+        assertThrows(IllegalArgumentException.class,
+                () -> collection(List.of(packet), Collections.nCopies(17, join("j", "a")), "a", "j"));
+        ArrayList<M3BackportPacket> partitions = new ArrayList<>();
+        ArrayList<String> originals = new ArrayList<>();
+        for (int i = 0; i < 16; i++) {
+            String name = "atom-" + i;
+            partitions.add(packet("part-" + i, atom(name)));
+            originals.add(name);
+        }
+        assertEquals(16, collection(partitions, List.of(), originals.toArray(String[]::new)).packets().size());
+        ArrayList<M3RecipeAtom> joins = new ArrayList<>();
+        originals = new ArrayList<>(List.of("a"));
+        for (int i = 0; i < 16; i++) {
+            String name = "join-" + i;
+            joins.add(join(name, i == 0 ? "a" : "join-" + (i - 1)));
+            originals.add(name);
+        }
+        assertEquals(17, collection(List.of(packet), joins, originals.toArray(String[]::new)).atoms().size());
+    }
+
+    @Test
+    void collectionJoinFanInRetainsItsOwnBoundedBudget() {
+        ArrayList<M3RecipeAtom> left = new ArrayList<>();
+        ArrayList<String> originals = new ArrayList<>();
+        for (int i = 0; i < 256; i++) {
+            String id = "leaf-" + i;
+            left.add(atom(id));
+            originals.add(id);
+        }
+        M3BackportPacket p = new M3BackportPacket("p", left);
+        M3RecipeAtom allowed = join("join", originals.toArray(String[]::new));
+        ArrayList<String> withJoin = new ArrayList<>(originals);
+        withJoin.add("join");
+        assertEquals(256, collection(List.of(p), List.of(allowed), withJoin.toArray(String[]::new)).edgeCount());
+        originals.add("extra");
+        M3RecipeAtom oversized = join("join", originals.toArray(String[]::new));
+        originals.add("join");
+        assertThrows(IllegalArgumentException.class, () -> collection(
+                List.of(p, packet("q", atom("extra"))), List.of(oversized), originals.toArray(String[]::new)));
+    }
+
+    @Test
+    void duplicatePacketsAtomsAndJoinsAreRejected() {
+        M3BackportPacket p = packet("p", atom("a"));
+        assertThrows(IllegalArgumentException.class, () -> collection(List.of(p, p), List.of(), "a"));
+        assertThrows(IllegalArgumentException.class,
+                () -> collection(List.of(p, packet("q", atom("a"))), List.of(), "a"));
+        assertThrows(IllegalArgumentException.class,
+                () -> collection(List.of(p), List.of(join("a")), "a"));
+        assertThrows(IllegalArgumentException.class,
+                () -> collection(List.of(p), List.of(join("j", "a"), join("j", "a")), "a", "j"));
+    }
+
+    @Test
+    void packetEvidenceMatchesExactlyOnceRegardlessOfEvidenceListOrder() {
+        M3BackportPacket p = packet("p", atom("a"));
+        M3BackportPacket q = packet("q", atom("b"));
+        List<M3BackportPacket> packets = List.of(p, q);
+        Map<String, String> aliases = aliases("a", "b");
+        assertEquals(2, new M3BackportPacketCollection("c", packets, List.of(evidence(q), evidence(p)),
+                List.of(), List.of(), aliases, DESCRIPTOR_SHA).atoms().size());
+        for (List<M3BackportPacketEvidence> rows : List.of(
+                List.of(evidence(p)), List.of(evidence(p), evidence(p)),
+                List.of(evidence(p), evidence(q), new M3BackportPacketEvidence("extra", List.of(evidence(alias("a"))))),
+                List.of(evidence(p), new M3BackportPacketEvidence("q", List.of(evidence(alias("wrong"))))))) {
+            assertThrows(IllegalArgumentException.class, () -> new M3BackportPacketCollection(
+                    "c", packets, rows, List.of(), List.of(), aliases, DESCRIPTOR_SHA));
+        }
+    }
+
+    @Test
+    void joinsRequireExactEvidenceAndOnlyTerminalsOrEarlierJoins() {
+        M3BackportPacket p = packet("p", atom("a"), atom("b", "a"));
+        assertThrows(IllegalArgumentException.class,
+                () -> collection(List.of(p), List.of(join("j", "a")), "a", "b", "j"));
+        assertThrows(IllegalArgumentException.class,
+                () -> collection(List.of(p), List.of(join("j", "missing")), "a", "b", "j"));
+        assertThrows(IllegalArgumentException.class,
+                () -> collection(List.of(p), List.of(join("j", "later"), join("later", "b")),
+                        "a", "b", "j", "later"));
+        M3RecipeAtom join = join("j", "b");
+        for (List<M3RecipeAtomEvidence> rows : List.of(
+                List.<M3RecipeAtomEvidence>of(), List.of(evidence(alias("other"))),
+                List.of(evidence(join.id()), evidence(join.id())),
+                List.of(evidence(join.id()), evidence(alias("extra"))))) {
+            assertThrows(IllegalArgumentException.class, () -> new M3BackportPacketCollection("c",
+                    List.of(p), List.of(evidence(p)), List.of(join), rows,
+                    aliases("a", "b", "j"), DESCRIPTOR_SHA));
+        }
+    }
+
+    @Test
+    void incompleteSubstitutedAndUnboundedIdentityMapsAreRejected() {
+        M3BackportPacket p = packet("p", atom("a"));
+        for (Map<String, String> map : List.of(
+                Map.<String, String>of(), aliases("a", "extra"), aliases("wrong"),
+                Map.of("a", alias("wrong")), Map.of("A", alias("a")),
+                Map.of("a", alias("a"), "other", alias("a")))) {
+            assertThrows(IllegalArgumentException.class, () -> new M3BackportPacketCollection("c",
+                    List.of(p), List.of(evidence(p)), List.of(), List.of(), map, DESCRIPTOR_SHA));
+        }
+        assertThrows(IllegalArgumentException.class, () -> new M3BackportPacketCollection("BAD",
+                List.of(p), List.of(evidence(p)), List.of(), List.of(), aliases("a"), DESCRIPTOR_SHA));
+        assertThrows(IllegalArgumentException.class, () -> new M3BackportPacketCollection("c",
+                List.of(p), List.of(evidence(p)), List.of(), List.of(), aliases("a"), "invalid"));
+    }
+
+    @Test
+    void collectionDefensivelyCopiesAllInputsAndReturnedAtoms() {
+        M3BackportPacket p = packet("p", atom("a"));
+        ArrayList<M3BackportPacket> packets = new ArrayList<>(List.of(p));
+        ArrayList<M3BackportPacketEvidence> rows = new ArrayList<>(List.of(evidence(p)));
+        ArrayList<M3RecipeAtom> joins = new ArrayList<>();
+        ArrayList<M3RecipeAtomEvidence> joinRows = new ArrayList<>();
+        Map<String, String> aliases = new LinkedHashMap<>(aliases("a"));
+        M3BackportPacketCollection collection = new M3BackportPacketCollection(
+                "c", packets, rows, joins, joinRows, aliases, DESCRIPTOR_SHA);
+        packets.clear(); rows.clear(); joins.add(join("extra", "a"));
+        joinRows.add(evidence(alias("extra"))); aliases.clear();
+        assertEquals(1, collection.atoms().size());
+        assertEquals(1, collection.evidence().size());
+        assertTrue(collection.joins().isEmpty());
+        assertTrue(collection.joinEvidence().isEmpty());
+        assertEquals(Map.of("a", alias("a")), collection.aliases());
+        assertThrows(UnsupportedOperationException.class, () -> collection.atoms().clear());
+        assertThrows(UnsupportedOperationException.class, () -> collection.terminalAtoms().clear());
+        assertThrows(UnsupportedOperationException.class, () -> collection.aliases().clear());
+    }
+
+    @Test
+    void existingKernelStillRejectsCyclesAndUnapprovedScope() {
+        M3BackportPacket cyclic = packet("p", atom("a", "b"), atom("b", "a"));
+        M3BackportPacketCollection cycle = collection(List.of(cyclic), List.of(), "a", "b");
+        assertThrows(IllegalArgumentException.class, () -> M3PacketDagComposer.composeCollection(cycle));
+        M3BackportPacket p = packet("p", atom("a"));
+        M3RecipeAtom unapproved = new M3RecipeAtom(
+                alias("j"), M3EditScope.MODULE, false, "work/j", List.of(alias("a")));
+        M3BackportPacketCollection escalation = collection(List.of(p), List.of(unapproved), "a", "j");
+        assertThrows(IllegalArgumentException.class,
+                () -> M3PacketDagComposer.composeCollection(escalation));
+    }
+
+    @Test
+    void firstMutatingCollectionRootRequiresExplicitPromotionFromFileScope() {
+        M3RecipeAtom unapproved = new M3RecipeAtom(
+                alias("root"), M3EditScope.PACKAGE, false, "work/root", List.of());
+        M3BackportPacketCollection rejected = collection(
+                List.of(packet("p", unapproved)), List.of(), "root");
+        assertThrows(IllegalArgumentException.class,
+                () -> M3PacketDagComposer.composeCollection(rejected));
+        for (M3RecipeAtom permitted : List.of(atom("root"), new M3RecipeAtom(
+                alias("root"), M3EditScope.PACKAGE, true, "work/root", List.of()))) {
+            M3RecipeDag dag = M3PacketDagComposer.composeCollection(collection(
+                    List.of(packet("p", permitted)), List.of(), "root"));
+            assertEquals(List.of("file-delta"), dag.require("packet-" + alias("root")).dependsOn());
+            assertEquals(permitted.scope(), dag.require("promote").scope());
+            assertCurrentLifecycle(dag);
+        }
+    }
+
+    @Test
+    void legacyComposerApiAndCanonicalTailRemainExact() throws Exception {
+        M3BackportPacket p = packet("p", atom("a"));
+        M3RecipeDag legacy = M3PacketDagComposer.compose(p);
+        M3RecipeDag checked = M3PacketDagComposer.compose(p, evidence(p));
+        M3RecipeDag collection = M3PacketDagComposer.composeCollection(collection(List.of(p), List.of(), "a"));
+        assertEquals(M3DagSemanticRoot.of(legacy), M3DagSemanticRoot.of(checked));
+        assertEquals(M3DagSemanticRoot.of(legacy), M3DagSemanticRoot.of(collection));
+        assertEquals("packet-" + alias("a"), M3PacketDagComposer.nodeId(p.atoms().getFirst()));
+        assertEquals(M3RecipeDag.class, M3PacketDagComposer.class
+                .getMethod("compose", M3BackportPacket.class).getReturnType());
+        assertEquals(M3RecipeDag.class, M3PacketDagComposer.class
+                .getMethod("compose", M3BackportPacket.class, M3BackportPacketEvidence.class).getReturnType());
+        assertEquals(String.class, M3PacketDagComposer.class
+                .getMethod("nodeId", M3RecipeAtom.class).getReturnType());
+        assertThrows(NullPointerException.class, () -> M3PacketDagComposer.compose(null));
+        assertThrows(NullPointerException.class, () -> M3PacketDagComposer.composeCollection(null));
+        List<String> tail = List.of("recipe-junit", "diff", "lint", "compile", "jtreg", "runtime", "promote");
+        assertEquals(tail, collection.topologicalOrder().stream().map(M3DagNode::id)
+                .filter(tail::contains).toList());
+        assertCurrentLifecycle(legacy);
+        assertCurrentLifecycle(checked);
+        assertCurrentLifecycle(collection);
+    }
+
+    @Test
+    void realCataloguesRetainEveryAtomDependencyAndEvidenceCell() throws Exception {
+        for (String name : List.of("jep-467-markdown", "jep-493-runtime-image")) {
+            Path descriptor = copyCatalogue(name, name);
+            M3BackportPacketCollection collection = M3PacketCollectionLoader.load(descriptor);
+            int count = name.equals("jep-467-markdown") ? 259 : 54;
+            assertEquals(count, collection.atoms().size());
+            assertEquals(count - 1, collection.edgeCount());
+            assertEquals(name.equals("jep-467-markdown") ? 8 : 1, collection.packets().size());
+            assertEquals(name.equals("jep-467-markdown") ? 1 : 0, collection.joins().size());
+            assertTrue(collection.packets().stream().allMatch(packet -> packet.atoms().size() <= 256));
+            assertEquals(sha256(Files.readAllBytes(descriptor)), collection.descriptorSHA256());
+            Map<String, M3RecipeAtom> atoms = collection.atoms().stream()
+                    .collect(Collectors.toMap(M3RecipeAtom::id, atom -> atom));
+            Map<String, M3RecipeAtomEvidence> proofs = new LinkedHashMap<>();
+            collection.evidence().forEach(rows -> proofs.putAll(rows.byAtomId()));
+            collection.joinEvidence().forEach(row -> proofs.put(row.atomId(), row));
+            List<String> packetRows = Files.readAllLines(descriptor.resolveSibling("packet.tsv"));
+            List<String> evidenceRows = Files.readAllLines(descriptor.resolveSibling("atom-evidence.tsv"));
+            assertThrows(IllegalArgumentException.class, () -> M3BackportPacketLoader.parse(
+                    Files.readString(descriptor.resolveSibling("packet.tsv"))));
+            assertThrows(IllegalArgumentException.class, () -> M3BackportPacketEvidenceLoader.parse(
+                    Files.readString(descriptor.resolveSibling("atom-evidence.tsv"))));
+            for (int i = 1; i < packetRows.size(); i++) {
+                String[] original = packetRows.get(i).split("\t", -1);
+                String[] proof = evidenceRows.get(i).split("\t", -1);
+                String id = collection.aliases().get(original[1]);
+                M3RecipeAtom atom = atoms.get(id);
+                assertEquals(alias(original[1]), id);
+                assertEquals(original[2], atom.scope().name());
+                assertEquals(original[3], Boolean.toString(atom.scopePromotionApproved()));
+                assertEquals(original[4], atom.workRef());
+                assertEquals(original[5].isEmpty() ? List.of()
+                                : List.of(original[5].split(",")).stream().map(collection.aliases()::get).toList(),
+                        atom.dependsOn());
+                assertEquals(new M3RecipeAtomEvidence(id, proof[2], proof[3], proof[4], proof[5], proof[6],
+                        Boolean.parseBoolean(proof[7])), proofs.get(id));
+            }
+            assertEquals(count, atoms.size());
+            assertEquals(count, proofs.size());
+            M3RecipeDag dag = M3PacketDagComposer.composeCollection(collection);
+            assertEquals(count + 15, dag.size());
+            assertEquals(name.equals("jep-467-markdown") ? 274 : 69, dag.size());
+            assertCurrentLifecycle(dag);
+            assertEquals(1, dag.topologicalOrder().stream()
+                    .filter(node -> node.kind() == M3DagKind.PROMOTION).count());
+            assertEquals("promote", dag.topologicalOrder().getLast().id());
+        }
+    }
+
+    @Test
+    void actualCliValidationAndProjectionUseTheSameAggregateDag() throws Exception {
+        for (String name : List.of("jep-467-markdown", "jep-493-runtime-image")) {
+            Path descriptor = copyCatalogue(name, "cli-" + name);
+            List<String> before;
+            try (var files = Files.list(descriptor.getParent())) {
+                before = files.map(path -> path.getFileName().toString()).sorted().toList();
+            }
+            M3PacketCollectionMain.main(new String[] {"validate", descriptor.toString()});
+            try (var files = Files.list(descriptor.getParent())) {
+                assertEquals(before, files.map(path -> path.getFileName().toString()).sorted().toList());
+            }
+            Path output = descriptor.resolveSibling("projection");
+            M3PacketCollectionMain.main(new String[] {"project", descriptor.toString(), output.toString()});
+            M3BackportPacketCollection collection = M3PacketCollectionLoader.load(descriptor);
+            M3RecipeDag dag = M3PacketDagComposer.composeCollection(collection);
+            Map<M3DagProjectionFormat, M3DagProjection> projections = M3DagProjector.all(dag, collection.collectionId());
+            Set<String> names = new java.util.HashSet<>(Set.of("projection.tsv", "atom-evidence.tsv"));
+            for (M3DagProjection projection : projections.values()) {
+                names.add(projection.fileName());
+                assertEquals(projection.content(), Files.readString(output.resolve(projection.fileName())));
+            }
+            try (var files = Files.list(output)) {
+                assertEquals(names, files.map(path -> path.getFileName().toString()).collect(Collectors.toSet()));
+            }
+            assertEquals("packet_id\tdag_root\tnodes\n" + collection.collectionId() + "\t"
+                            + M3DagSemanticRoot.of(dag) + "\t" + dag.size() + "\n",
+                    Files.readString(output.resolve("projection.tsv")));
+            assertEquals("collection_id\tdescriptor_sha256\tatoms\tedges\n" + collection.collectionId() + "\t"
+                            + collection.descriptorSHA256() + "\t" + collection.atoms().size() + "\t"
+                            + collection.edgeCount() + "\n",
+                    Files.readString(output.resolve("atom-evidence.tsv")));
+            assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionMain.main(
+                    new String[] {"project", descriptor.toString(), output.toString()}));
+        }
+    }
+
+    @Test
+    void cliRejectsInvalidModesAndInvalidInputBeforeCreatingOutput() throws Exception {
+        Path descriptor = copyCatalogue("jep-467-markdown", "cli-refusal");
+        for (String[] arguments : List.of(new String[] {}, new String[] {"unknown", descriptor.toString()},
+                new String[] {"validate"}, new String[] {"project", descriptor.toString()},
+                new String[] {"validate", descriptor.toString(), "extra"},
+                new String[] {"project", descriptor.toString(), "extra", "extra"})) {
+            assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionMain.main(arguments));
+        }
+        Files.writeString(descriptor.resolveSibling("collection-map.tsv"), "drift\n");
+        Path output = descriptor.resolveSibling("must-not-exist");
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionMain.main(
+                new String[] {"project", descriptor.toString(), output.toString()}));
+        assertFalse(Files.exists(output));
+    }
+
+    @Test
+    void cliAcceptsExistingEmptyDirectoryButRejectsFilesAndSymlinks() throws Exception {
+        Path descriptor = copyCatalogue("jep-493-runtime-image", "cli-output-shapes");
+        Path empty = Files.createDirectory(descriptor.resolveSibling("empty"));
+        M3PacketCollectionMain.main(new String[] {"project", descriptor.toString(), empty.toString()});
+        assertTrue(Files.isRegularFile(empty.resolve("projection.tsv")));
+        Path file = descriptor.resolveSibling("not-directory");
+        Files.writeString(file, "retain\n");
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionMain.main(
+                new String[] {"project", descriptor.toString(), file.toString()}));
+        assertEquals("retain\n", Files.readString(file));
+        Path target = Files.createDirectory(descriptor.resolveSibling("real-directory"));
+        Path link = descriptor.resolveSibling("directory-link");
+        Files.createSymbolicLink(link, target.getFileName());
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionMain.main(
+                new String[] {"project", descriptor.toString(), link.toString()}));
+        try (var members = Files.list(target)) {
+            assertEquals(0, members.count());
+        }
+    }
+
+    @Test
+    void descriptorSchemaPathsCountsAndOrderingAreClosed() throws Exception {
+        String[][] mutations = {
+            {"0", "wrong-schema"}, {"1", "wrong-collection"}, {"2", "../packet.tsv"},
+            {"2", "atom-evidence.tsv"}, {"3", "bad-hash"}, {"8", "build-wiring,build-wiring"},
+            {"8", "unknown-partition"}, {"9", "0"}, {"9", "260"}, {"9", "04112"},
+            {"10", "259"}, {"11", "2"}
+        };
+        for (int i = 0; i < mutations.length; i++) {
+            Path descriptor = copyCatalogue("jep-467-markdown", "descriptor-" + i);
+            changeDescriptorCell(descriptor, Integer.parseInt(mutations[i][0]), mutations[i][1]);
+            assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(descriptor));
+        }
+        Path descriptor = copyCatalogue("jep-467-markdown", "descriptor-header");
+        Files.writeString(descriptor, Files.readString(descriptor).replace("schema\t", "unknown\t"));
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(descriptor));
+    }
+
+    @Test
+    void sealedInputDriftAndRepinnedRowSubstitutionsRefuse() throws Exception {
+        for (String file : List.of("packet.tsv", "atom-evidence.tsv", "collection-map.tsv")) {
+            Path descriptor = copyCatalogue("jep-467-markdown", "hash-" + file);
+            Path input = descriptor.resolveSibling(file);
+            Files.writeString(input, Files.readString(input) + "drift\n");
+            assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(descriptor));
+        }
+        for (String file : List.of("atom-evidence.tsv", "collection-map.tsv")) {
+            Path descriptor = copyCatalogue("jep-467-markdown", "order-" + file);
+            Path input = descriptor.resolveSibling(file);
+            List<String> rows = new ArrayList<>(Files.readAllLines(input));
+            Collections.swap(rows, 1, 2);
+            Files.writeString(input, String.join("\n", rows) + "\n");
+            reseal(descriptor, file);
+            assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(descriptor));
+        }
+        Path descriptor = copyCatalogue("jep-467-markdown", "balanced-substitution");
+        Path input = descriptor.resolveSibling("collection-map.tsv");
+        List<String> rows = new ArrayList<>(Files.readAllLines(input));
+        rows.set(2, rows.get(1));
+        Files.writeString(input, String.join("\n", rows) + "\n");
+        reseal(descriptor, "collection-map.tsv");
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(descriptor));
+    }
+
+    @Test
+    void repinnedAliasDependencyAndProofTamperingRefuse() throws Exception {
+        Path wrongAlias = copyCatalogue("jep-467-markdown", "wrong-alias");
+        changeInputCell(wrongAlias, "collection-map.tsv", 1, 1, alias("wrong"));
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(wrongAlias));
+        Path crossPartition = copyCatalogue("jep-467-markdown", "cross-partition");
+        changeInputCell(crossPartition, "collection-map.tsv", 1, 2, "java-base-support");
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(crossPartition));
+        Path missingDependency = copyCatalogue("jep-467-markdown", "missing-dependency");
+        changeInputCell(missingDependency, "packet.tsv", 1, 5, "missing-original");
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(missingDependency));
+        Path wrongBoolean = copyCatalogue("jep-467-markdown", "wrong-boolean");
+        changeInputCell(wrongBoolean, "packet.tsv", 1, 3, "TRUE");
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(wrongBoolean));
+        Path missingProof = copyCatalogue("jep-467-markdown", "missing-proof");
+        changeInputCell(missingProof, "atom-evidence.tsv", 1, 7, "false");
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(missingProof));
+    }
+
+    @Test
+    void inputLimitsCanonicalTextAndRegularFilesAreRequired() throws Exception {
+        Path hugeDescriptor = copyCatalogue("jep-467-markdown", "huge-descriptor");
+        Files.writeString(hugeDescriptor, "a".repeat(16 * 1024 + 1));
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(hugeDescriptor));
+        Path hugeInput = copyCatalogue("jep-467-markdown", "huge-input");
+        Files.write(hugeInput.resolveSibling("packet.tsv"), new byte[8 * 1024 * 1024 + 1]);
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(hugeInput));
+        for (String suffix : List.of("\r\n", "\0\n")) {
+            Path descriptor = copyCatalogue("jep-467-markdown", suffix.startsWith("\r") ? "crlf" : "nul");
+            Files.writeString(descriptor, Files.readString(descriptor).replace("\n", suffix));
+            assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(descriptor));
+        }
+        Path link = copyCatalogue("jep-467-markdown", "symlink");
+        Path input = link.resolveSibling("packet.tsv");
+        Path actual = input.resolveSibling("real-packet.tsv");
+        Files.move(input, actual);
+        Files.createSymbolicLink(input, actual.getFileName());
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(link));
+        Path malformed = copyCatalogue("jep-467-markdown", "malformed-utf8");
+        Files.write(malformed, new byte[] {(byte) 0xc3, (byte) 0x28, (byte) '\n'});
+        assertThrows(java.io.IOException.class, () -> M3PacketCollectionLoader.load(malformed));
+    }
+
+    @Test
+    void modelRejectsIndependentOversizedEvidenceAndAliasInputsBeforeCopying() {
+        M3BackportPacket p = packet("p", atom("a"));
+        assertThrows(IllegalArgumentException.class, () -> new M3BackportPacketCollection("c",
+                List.of(p), Collections.nCopies(17, evidence(p)), List.of(), List.of(), aliases("a"), DESCRIPTOR_SHA));
+        assertThrows(IllegalArgumentException.class, () -> new M3BackportPacketCollection("c",
+                List.of(p), List.of(evidence(p)), List.of(), Collections.nCopies(17, evidence(alias("a"))),
+                aliases("a"), DESCRIPTOR_SHA));
+        LinkedHashMap<String, String> oversized = new LinkedHashMap<>();
+        for (int i = 0; i < 4113; i++) {
+            oversized.put("original-" + i, "untrusted-value");
+        }
+        assertThrows(IllegalArgumentException.class, () -> new M3BackportPacketCollection("c",
+                List.of(p), List.of(evidence(p)), List.of(), List.of(), oversized, DESCRIPTOR_SHA));
+        // One evidence record prevents the evidence-duplicate check from masking duplicate packets.
+        assertThrows(IllegalArgumentException.class, () -> new M3BackportPacketCollection("c",
+                List.of(p, p), List.of(evidence(p)), List.of(), List.of(), aliases("a"), DESCRIPTOR_SHA));
+    }
+
+    @Test
+    void modelRequiresEveryRecordComponentAndRejectsNullMembers() {
+        M3BackportPacket p = packet("p", atom("a"));
+        assertThrows(NullPointerException.class, () -> new M3BackportPacketCollection(null,
+                List.of(p), List.of(evidence(p)), List.of(), List.of(), aliases("a"), DESCRIPTOR_SHA));
+        assertThrows(NullPointerException.class, () -> new M3BackportPacketCollection("c",
+                null, List.of(evidence(p)), List.of(), List.of(), aliases("a"), DESCRIPTOR_SHA));
+        assertThrows(NullPointerException.class, () -> new M3BackportPacketCollection("c",
+                List.of(p), null, List.of(), List.of(), aliases("a"), DESCRIPTOR_SHA));
+        assertThrows(NullPointerException.class, () -> new M3BackportPacketCollection("c",
+                List.of(p), List.of(evidence(p)), null, List.of(), aliases("a"), DESCRIPTOR_SHA));
+        assertThrows(NullPointerException.class, () -> new M3BackportPacketCollection("c",
+                List.of(p), List.of(evidence(p)), List.of(), null, aliases("a"), DESCRIPTOR_SHA));
+        assertThrows(NullPointerException.class, () -> new M3BackportPacketCollection("c",
+                List.of(p), List.of(evidence(p)), List.of(), List.of(), null, DESCRIPTOR_SHA));
+        assertThrows(NullPointerException.class, () -> new M3BackportPacketCollection("c",
+                List.of(p), List.of(evidence(p)), List.of(), List.of(), aliases("a"), null));
+        ArrayList<M3BackportPacket> nullMember = new ArrayList<>();
+        nullMember.add(null);
+        assertThrows(NullPointerException.class, () -> new M3BackportPacketCollection("c",
+                nullMember, List.of(evidence(p)), List.of(), List.of(), aliases("a"), DESCRIPTOR_SHA));
+    }
+
+    @Test
+    void descriptorRejectsInvalidIdentifiersListItemsAndBothCountBounds() throws Exception {
+        String[][] mutations = {
+            {"1", "Uppercase"}, {"1", "a".repeat(33)}, {"2", "packet..tsv"}, {"2", "collection.tsv"},
+            {"8", ""}, {"8", "build-wiring,"}, {"8", " build-wiring"},
+            {"8", "UPPER"}, {"8", "p".repeat(41)},
+            {"8", String.join(",", Collections.nCopies(17, "p"))},
+            {"9", "4113"}, {"9", "-1"}, {"10", "1052673"}, {"11", "17"}
+        };
+        for (int i = 0; i < mutations.length; i++) {
+            Path descriptor = copyCatalogue("jep-467-markdown", "closed-declaration-" + i);
+            changeDescriptorCell(descriptor, Integer.parseInt(mutations[i][0]), mutations[i][1]);
+            assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(descriptor));
+        }
+        Path reversed = copyCatalogue("jep-467-markdown", "declared-partition-order");
+        String[] declaration = Files.readAllLines(reversed).get(1).split("\t", -1);
+        List<String> partitions = new ArrayList<>(List.of(declaration[8].split(",")));
+        Collections.reverse(partitions);
+        changeDescriptorCell(reversed, 8, String.join(",", partitions));
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(reversed));
+    }
+
+    @Test
+    void eachInputRequiresExactCoverageEvenAfterItsHashIsRepinned() throws Exception {
+        for (String file : List.of("packet.tsv", "atom-evidence.tsv", "collection-map.tsv")) {
+            Path descriptor = copyCatalogue("jep-467-markdown", "missing-row-" + file);
+            Path input = descriptor.resolveSibling(file);
+            List<String> rows = new ArrayList<>(Files.readAllLines(input));
+            rows.remove(rows.size() - 1);
+            Files.writeString(input, String.join("\n", rows) + "\n");
+            reseal(descriptor, file);
+            assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(descriptor));
+        }
+        for (String file : List.of("packet.tsv", "atom-evidence.tsv")) {
+            Path descriptor = copyCatalogue("jep-467-markdown", "wrong-packet-id-" + file);
+            changeInputCell(descriptor, file, 1, 0, "other-packet");
+            assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(descriptor));
+        }
+        Path duplicate = copyCatalogue("jep-467-markdown", "duplicate-original-triplet");
+        for (String file : List.of("packet.tsv", "atom-evidence.tsv", "collection-map.tsv")) {
+            Path input = duplicate.resolveSibling(file);
+            List<String> rows = new ArrayList<>(Files.readAllLines(input));
+            rows.set(2, rows.get(1));
+            Files.writeString(input, String.join("\n", rows) + "\n");
+            reseal(duplicate, file);
+        }
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(duplicate));
+    }
+
+    @Test
+    void loaderRejectsUnknownAssignmentsAndBoundaryRowsBeforePartitionRows() throws Exception {
+        Path unknown = copyCatalogue("jep-467-markdown", "unknown-assignment");
+        changeInputCell(unknown, "collection-map.tsv", 1, 2, "missing-partition");
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(unknown));
+        Path premature = copyCatalogue("jep-467-markdown", "premature-boundary");
+        changeInputCell(premature, "collection-map.tsv", 1, 2, "@join");
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(premature));
+    }
+
+    @Test
+    void loaderRejectsDuplicateEmptyPaddedAndOversizedDependencies() throws Exception {
+        String first = "file-make-compiledemos-gmk";
+        List<String> dependencies = List.of(first + "," + first, first + ",", " " + first,
+                String.join(",", Collections.nCopies(257, first)));
+        for (int i = 0; i < dependencies.size(); i++) {
+            Path descriptor = copyCatalogue("jep-467-markdown", "invalid-dependencies-" + i);
+            changeInputCell(descriptor, "packet.tsv", 2, 5, dependencies.get(i));
+            assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(descriptor));
+        }
+    }
+
+    @Test
+    void loaderRequiresBoundedExactTextAndLiteralEvidenceBooleans() throws Exception {
+        int index = 0;
+        for (String value : List.of("", " padded", "padded ", "a".repeat(4097))) {
+            Path descriptor = copyCatalogue("jep-467-markdown", "text-cell-" + index++);
+            changeInputCell(descriptor, "packet.tsv", 1, 4, value);
+            assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(descriptor));
+        }
+        Path malformedBoolean = copyCatalogue("jep-467-markdown", "evidence-boolean");
+        changeInputCell(malformedBoolean, "atom-evidence.tsv", 1, 7, "TRUE");
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(malformedBoolean));
+    }
+
+    @Test
+    void tsvFramingRejectsMissingFinalLfExtraColumnsRowsAndOversizedLines() throws Exception {
+        Path noLf = copyCatalogue("jep-467-markdown", "missing-final-lf");
+        String text = Files.readString(noLf);
+        Files.writeString(noLf, text.substring(0, text.length() - 1));
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(noLf));
+        Path headerOnly = copyCatalogue("jep-467-markdown", "header-only");
+        Files.writeString(headerOnly, Files.readAllLines(headerOnly).getFirst() + "\n");
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(headerOnly));
+        Path extraRow = copyCatalogue("jep-467-markdown", "extra-declaration-row");
+        List<String> declaration = Files.readAllLines(extraRow);
+        Files.writeString(extraRow, String.join("\n", declaration) + "\n" + declaration.get(1) + "\n");
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(extraRow));
+        Path extraColumn = copyCatalogue("jep-467-markdown", "extra-column");
+        List<String> rows = new ArrayList<>(Files.readAllLines(extraColumn));
+        rows.set(1, rows.get(1) + "\textra");
+        Files.writeString(extraColumn, String.join("\n", rows) + "\n");
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(extraColumn));
+        Path longLine = copyCatalogue("jep-467-markdown", "oversized-line");
+        changeInputCell(longLine, "packet.tsv", 1, 4, "a".repeat(128 * 1024 + 1));
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(longLine));
+    }
+
+    @Test
+    void loaderRetainsPartitionAndBoundaryBudgetsAfterCompleteRepinning() throws Exception {
+        Path single = copyCatalogue("jep-467-markdown", "oversized-partition");
+        Path mapping = single.resolveSibling("collection-map.tsv");
+        List<String> rows = new ArrayList<>(Files.readAllLines(mapping));
+        for (int i = 1; i < rows.size(); i++) {
+            String[] cells = rows.get(i).split("\t", -1);
+            cells[2] = "one";
+            rows.set(i, String.join("\t", cells));
+        }
+        Files.writeString(mapping, String.join("\n", rows) + "\n");
+        reseal(single, "collection-map.tsv");
+        changeDescriptorCell(single, 8, "one");
+        changeDescriptorCell(single, 11, "0");
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(single));
+
+        Path boundary = copyCatalogue("jep-467-markdown", "oversized-boundary");
+        mapping = boundary.resolveSibling("collection-map.tsv");
+        rows = new ArrayList<>(Files.readAllLines(mapping));
+        for (int i = rows.size() - 17; i < rows.size(); i++) {
+            String[] cells = rows.get(i).split("\t", -1);
+            cells[2] = "@join";
+            rows.set(i, String.join("\t", cells));
+        }
+        Files.writeString(mapping, String.join("\n", rows) + "\n");
+        reseal(boundary, "collection-map.tsv");
+        changeDescriptorCell(boundary, 11, "16");
+        assertThrows(IllegalArgumentException.class, () -> M3PacketCollectionLoader.load(boundary));
+    }
+
+    @Test
+    void legacyAtomRejectsBlankDependencyWithItsExactDiagnostic() {
+        IllegalArgumentException failure = assertThrows(IllegalArgumentException.class,
+                () -> new M3RecipeAtom("a", M3EditScope.FILE, false, "work/a", List.of(" ")));
+        assertEquals("blank atom dependency: a", failure.getMessage());
+    }
+
+    @Test
+    void legacyAtomRejectsEmbeddedNulInWorkReference() {
+        IllegalArgumentException failure = assertThrows(IllegalArgumentException.class,
+                () -> new M3RecipeAtom("a", M3EditScope.FILE, false, "work\0ref", List.of()));
+        assertEquals("workRef", failure.getMessage());
+    }
+
+    @Test
+    void legacyPacketLoaderRejectsHeaderWithoutAtoms() {
+        IllegalArgumentException failure = assertThrows(IllegalArgumentException.class,
+                () -> M3BackportPacketLoader.parse(M3BackportPacketLoader.HEADER + "\n"));
+        assertEquals("empty packet", failure.getMessage());
+    }
+
+    @Test
+    void legacyPacketLoaderDiscardsBlankCommaSeparatedDependencyItems() {
+        String input = M3BackportPacketLoader.HEADER + "\n"
+                + "p\ta\tFILE\tfalse\twork/a\t\n"
+                + "p\tb\tFILE\tfalse\twork/b\t\n"
+                + "p\tc\tFILE\tfalse\twork/c\ta, ,b\n";
+        M3BackportPacket packet = M3BackportPacketLoader.parse(input);
+        assertEquals("p", packet.packetId());
+        assertEquals(3, packet.atoms().size());
+        assertEquals(List.of(), packet.require("a").dependsOn());
+        assertEquals(List.of(), packet.require("b").dependsOn());
+        assertEquals(List.of("a", "b"), packet.require("c").dependsOn());
+    }
+
+    @Test
+    void legacyEvidenceLoaderRefusesFalseFixedPointProof() {
+        String input = M3BackportPacketEvidenceLoader.HEADER + "\n"
+                + "p\ta\tcontract/a\tdocs/a\tPattern\tRole\tProof\tfalse\n";
+        IllegalArgumentException failure = assertThrows(IllegalArgumentException.class,
+                () -> M3BackportPacketEvidenceLoader.parse(input));
+        assertEquals("M3 recipe atoms require fixed-point proof: a", failure.getMessage());
+    }
+
+    @Test
+    void collectionRechecksBudgetAfterGenuineGrowthDuringDefensiveCopy() {
+        ArrayList<M3BackportPacketEvidence> proofs = new ArrayList<>();
+        M3BackportPacket extra = packet("part-16", atom("atom-16"));
+        M3BackportPacketEvidence extraEvidence = evidence(extra);
+        boolean[] grewDuringCopy = {false};
+        ArrayList<M3BackportPacket> growing = new ArrayList<>() {
+            @java.io.Serial
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public Object[] toArray() {
+                if (!grewDuringCopy[0]) {
+                    add(extra);
+                    proofs.add(extraEvidence);
+                    grewDuringCopy[0] = true;
+                }
+                return super.toArray();
+            }
+        };
+        LinkedHashMap<String, String> allAliases = new LinkedHashMap<>();
+        for (int i = 0; i < 17; i++) {
+            String original = "atom-" + i;
+            allAliases.put(original, alias(original));
+            if (i < 16) {
+                M3BackportPacket packet = packet("part-" + i, atom(original));
+                growing.add(packet);
+                proofs.add(evidence(packet));
+            }
+        }
+        assertEquals(16, growing.size());
+        assertEquals(16, proofs.size());
+        assertFalse(grewDuringCopy[0]);
+        IllegalArgumentException failure = assertThrows(IllegalArgumentException.class,
+                () -> new M3BackportPacketCollection("collection", growing, proofs,
+                        List.of(), List.of(), allAliases, DESCRIPTOR_SHA));
+        assertEquals("collection input budget", failure.getMessage());
+        assertTrue(grewDuringCopy[0]);
+        assertEquals(17, growing.size());
+        assertEquals(17, proofs.size());
+        assertEquals(extra, growing.get(16));
+        assertEquals(extraEvidence, proofs.get(16));
+    }
+
+    private Path copyCatalogue(String catalogue, String fixtureName) throws Exception {
+        // Maven runs this test from m3/tooling/backport-dag; no fallback or filesystem discovery.
+        Path source = Path.of("../../backports/recipes").resolve(catalogue).normalize();
+        Path destination = Files.createDirectory(temp.resolve(fixtureName));
+        for (String name : List.of("packet.tsv", "atom-evidence.tsv", "collection-map.tsv", "collection.tsv")) {
+            Files.copy(source.resolve(name), destination.resolve(name));
+        }
+        return destination.resolve("collection.tsv");
+    }
+
+    private static String sha256(byte[] data) throws Exception {
+        return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(data));
+    }
+
+    private static void changeDescriptorCell(Path descriptor, int column, String value) throws Exception {
+        List<String> lines = Files.readAllLines(descriptor);
+        String[] row = lines.get(1).split("\t", -1);
+        row[column] = value;
+        Files.writeString(descriptor, lines.getFirst() + "\n" + String.join("\t", row) + "\n");
+    }
+
+    private static void reseal(Path descriptor, String file) throws Exception {
+        int column = switch (file) {
+            case "packet.tsv" -> 3;
+            case "atom-evidence.tsv" -> 5;
+            case "collection-map.tsv" -> 7;
+            default -> throw new IllegalArgumentException(file);
+        };
+        changeDescriptorCell(descriptor, column, sha256(Files.readAllBytes(descriptor.resolveSibling(file))));
+    }
+
+    private static void changeInputCell(Path descriptor, String file, int row, int column, String value)
+            throws Exception {
+        Path input = descriptor.resolveSibling(file);
+        List<String> lines = new ArrayList<>(Files.readAllLines(input));
+        String[] cells = lines.get(row).split("\t", -1);
+        cells[column] = value;
+        lines.set(row, String.join("\t", cells));
+        Files.writeString(input, String.join("\n", lines) + "\n");
+        reseal(descriptor, file);
+    }
+
+    private static String alias(String original) {
+        return M3BackportPacketCollection.aliasOf(original);
+    }
+
+    private static void assertCurrentLifecycle(M3RecipeDag dag) {
+        M3RecipeDag canonical = M3RecipeDag.canonical();
+        assertEquals(16, canonical.size());
+        List<String> reviewPrefix = List.of("review-code-signal", "review-atom-pattern",
+                "review-problem-planner", "review-jni-contract");
+        assertEquals(reviewPrefix, dag.topologicalOrder().subList(0, 4).stream().map(M3DagNode::id).toList());
+        for (String id : reviewPrefix) {
+            assertEquals(canonical.require(id), dag.require(id));
+            assertFalse(dag.require(id).mutating());
+        }
+        assertEquals(canonical.require("inventory"), dag.require("inventory"));
+        List<String> tail = List.of("recipe-junit", "diff", "lint", "compile", "jtreg", "runtime", "promote");
+        assertEquals(tail, dag.topologicalOrder().stream().map(M3DagNode::id).filter(tail::contains).toList());
+        for (int i = 1; i < tail.size(); i++) {
+            assertEquals(List.of(tail.get(i - 1)), dag.require(tail.get(i)).dependsOn());
+        }
+        assertEquals(1, dag.topologicalOrder().stream().filter(node -> node.kind() == M3DagKind.PROMOTION).count());
+        assertTrue(dag.require("promote").serialPromotion());
+        assertEquals("promote", dag.topologicalOrder().getLast().id());
+    }
+
+    private static Map<String, String> aliases(String... originals) {
+        LinkedHashMap<String, String> result = new LinkedHashMap<>();
+        for (String original : originals) {
+            result.put(original, alias(original));
+        }
+        return result;
+    }
+
+    private static M3RecipeAtom atom(String original, String... dependencies) {
+        return new M3RecipeAtom(alias(original), M3EditScope.FILE, false, "work/" + original,
+                List.of(dependencies).stream().map(M3BackportPacketCollectionTest::alias).toList());
+    }
+
+    private static M3RecipeAtom join(String original, String... dependencies) {
+        return new M3RecipeAtom(alias(original), M3EditScope.LIBRARY_API, true, "work/" + original,
+                List.of(dependencies).stream().map(M3BackportPacketCollectionTest::alias).toList());
+    }
+
+    private static M3BackportPacket packet(String id, M3RecipeAtom... atoms) {
+        return new M3BackportPacket(id, List.of(atoms));
+    }
+
+    private static M3RecipeAtomEvidence evidence(String atomId) {
+        return new M3RecipeAtomEvidence(atomId, "contract", "docs", "Pattern", "IOP", "ProofTest", true);
+    }
+
+    private static M3BackportPacketEvidence evidence(M3BackportPacket packet) {
+        return new M3BackportPacketEvidence(packet.packetId(),
+                packet.atoms().stream().map(atom -> evidence(atom.id())).toList());
+    }
+
+    private static M3BackportPacketCollection collection(
+            List<M3BackportPacket> packets, List<M3RecipeAtom> joins, String... originals) {
+        return new M3BackportPacketCollection("collection", packets,
+                packets.stream().map(M3BackportPacketCollectionTest::evidence).toList(), joins,
+                joins.stream().map(atom -> evidence(atom.id())).toList(), aliases(originals), DESCRIPTOR_SHA);
+    }
+}

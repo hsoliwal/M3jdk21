@@ -1,0 +1,73 @@
+{
+  "actual_bound_structure": {
+    "copy_count": 134,
+    "current_context": 527,
+    "current_receipt_copies": 10,
+    "custody_index_subset_count": 123,
+    "custody_original_bodies_bytes": 15440298,
+    "custody_original_bodies_count": 121,
+    "distinct_current_context_plus_invalid_fixture_paths": 529,
+    "e2_preservation_requirement": 56,
+    "e3_preservation_requirement": 89,
+    "extra_source_result_count": 8,
+    "extra_source_result_names": [
+      "source-results/DESIGNATED_SOURCE_OUTPUTS.json",
+      "source-results/E4_EXECUTION_INPUT.json",
+      "source-results/FINAL_T03_REVIEW.md",
+      "source-results/RECOVERY_REPORT.md",
+      "source-results/RECOVERY_RESULT.json",
+      "source-results/ROOT_POM.xml",
+      "source-results/ROOT_POM_RECOVERY_CALL.json",
+      "source-results/ROOT_POM_RESTORATION.json"
+    ],
+    "freshly_parsed_pom_declarations": 201,
+    "gates_whole_unchanged": 20,
+    "guards": 7,
+    "historical_sources": 21,
+    "identity_only_source_bodies": 2,
+    "invalid_utf8_fixtures": 2,
+    "mandatory_direct_source_bodies": 6,
+    "observed_direct_source_bodies": 21,
+    "omitted_counts": {
+      "original_tree_call_envelopes": 42,
+      "redundant_readback": 1,
+      "transport_batches": 89
+    },
+    "omitted_originals": 132,
+    "ordered_records": 46,
+    "other_records_whole_unchanged": 44,
+    "outputs": 4,
+    "proof_count": 55,
+    "reserved_count": 3,
+    "retained_targets": 6,
+    "root_entries": 343,
+    "source_count": 19,
+    "source_split": [
+      13,
+      6
+    ]
+  },
+  "checker_bytes": 40725,
+  "checker_executed": false,
+  "checker_sha256": "521c18944616fe46a3e347860c25a7283e1b74674c594e40996c787e01e96b81",
+  "input_authority_hashes": {
+    "CONTEXT_REFERENCES.json": "fbc460874aeb04a688ad0ed9b47ad8e3f3b37f88af09d0f32ecfeedc2827fbed",
+    "FINAL_SOURCE_INPUTS_V3.json": "df6713ad19ce80daad0383fbd5c3716412e2dca133e1db7e0150b88e141313b5",
+    "ROOT_ACCOUNTING.json": "55610f52b7b1e01ee15999969cc385616ff2e43f734e589ff61c750c5ab3c845",
+    "SOURCE_FIELDS_AND_PROOFS.json": "7b5e197da5e2645efb87345e2abf92dcd8071993ff308c8fa0bca0511d00c52e"
+  },
+  "inputs_stable": true,
+  "owner_code_imported": false,
+  "prior_source_publication_reverified": false,
+  "project_gates_executed": false,
+  "prospective_frozen_input_checks": "Requires actual verification-v3 receipt and its hash-bound inputs; rechecks every listed fixed/external file and requires all527 context,2 invalid-UTF8 fixtures,19 sources and55proof bodies in external set. Static scope only; actual execution evidence reviewed separately.",
+  "readiness_sha256": "7d238a9c1a4b42ae12811fe85b8d2e66e0aeacdd8e982a3aa16ccd1e82c30561",
+  "receipt_trust_limit": "Recorded execution/custody receipts and authentic prior captures are trusted inputs here. Exit codes/log/XML identities are checked without rerunning tests or independently replaying source publication.",
+  "remote_calls": false,
+  "resource_inspection_scope": "Checked actual planned before/after resources and their mapping/reference/root/count structure; not a claim of installed four postimages or a complete copied-body audit by the reviewer.",
+  "schema": "jcc-e4-reference-checker-static-audit/1",
+  "source_status": "BLOCKED retained, with upstream66/67 and one error; independent native19 does not promote aggregate",
+  "stable_input_count": 32,
+  "status": "ADMITTED_FOR_BOUNDED_READ_ONLY_AUDIT",
+  "write_surface": "New reference-audit-v3 directory and REFERENCE_AUDIT.json only, after substantive checks; preexisting output refused. No candidate, POM, recipe, resource or owner mutation."
+}

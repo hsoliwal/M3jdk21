@@ -1,0 +1,16 @@
+gate	state	required
+A3 Java preparation	MANDATORY	all Java source/test targets fixed-point before source-changing recipe
+JDK-8340327 framework tests	MANDATORY	NamedEdDSA + NamedKeyFactoryTest prerequisite proof
+JDK-8338587 SHAKE/XOF prerequisite	MANDATORY	nested SHAKE256 squeeze vectors + static keccak + standalone SHAKE compatibility
+recipe JUnit	MANDATORY	exact SHAKE-branch preimages produce reviewed ML-KEM postimages and second pass is unchanged
+source-21 compile	MANDATORY	exact prerequisite + ML-KEM source closure
+FIPS 203 focused known-answer jtreg	MANDATORY	MLKEMKnownAnswer.java runs exact keyGen and encapDecap vectors for all parameter sets
+KEM round trip	MANDATORY	ML-KEM-512/768/1024 keygen encaps decaps
+key encoding/factory	MANDATORY	PKCS8/X509 or RAW key-factory round trip and invalid-key refusal
+provider registration	MANDATORY	SunJCE aliases/OIDs/provider ordering
+public API review	MANDATORY	NamedParameterSpec ML_KEM_512/768/1024 remains explicit opt-in Java21 extension
+security jtreg	MANDATORY	relevant existing javax.crypto.KEM and java.base security/provider tests
+whole image	MANDATORY	Java21 image startup/provider smoke
+canonical readback	MANDATORY	exact receiving-tree postimage hashes after proof
+fixed point	MANDATORY	second recipe pass unchanged
+benchmark	DEFERRED	MLKEMBench/performance only after correctness gates

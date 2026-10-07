@@ -1,0 +1,7 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.Sc0Spc
+displayName: Sc0 exact String snapshot repair
+description: One bounded five-replacement family over the actual Fc0 candidate; source-operation qualification only.
+recipeList:
+  - com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe:
+      crateName: sc0-spc

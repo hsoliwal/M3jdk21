@@ -1,0 +1,8 @@
+type: specs.openrewrite.org/v1beta/recipe
+name: com.m3.rewrite.M3FileLocalAtomPatternization
+displayName: M3 file-local atomization and patternization
+description: >-
+  Applies only mechanically proven file-local M3 transformations whose externally observable
+  behavior and contract remain sealed.
+recipeList:
+  - com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe

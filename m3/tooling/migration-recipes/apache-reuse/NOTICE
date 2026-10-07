@@ -1,0 +1,14 @@
+Synexia Apache reuse policy/proof packet
+Copyright 2026 Hitesh Soliwal
+
+Original policy templates and proof fixtures in this task are licensed under
+Apache License 2.0. Existing repository-owned OpenRewrite engines are referenced,
+not copied. Third-party dependencies retain their own licenses and notices.
+This packet does not relicense OpenJDK, donor templates, data or generated code.
+
+The five unchanged shared assets in SOURCE_PROVENANCE.tsv originate from
+hsoliwal/com.synexia commit f8e19a5ab7b9641c063152b4f2cbf7560c25db25,
+under synexia-openrewrite-recipes/crates/m3-jdk-handoff/apache-reuse/.
+Their source repository LICENSE is Apache-2.0. This receiving packet retains
+that license under m3/LICENSE. Target Maven wiring and manifest paths adapt
+these fixtures to the existing M3JDK21 recipe owner; no donor engine is copied.

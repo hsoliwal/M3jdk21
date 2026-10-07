@@ -44,7 +44,7 @@
 static const char* allocate(oop string) {
   char* str = nullptr;
   const typeArrayOop value = java_lang_String::value(string);
-  if (value != nullptr) {
+  if (value != nullptr || java_lang_String::is_m3_joined(string)) {
     const int length = java_lang_String::utf8_length(string, value);
     str = NEW_C_HEAP_ARRAY(char, length + 1, mtServiceability);
     java_lang_String::as_utf8_string(string, value, str, length + 1);

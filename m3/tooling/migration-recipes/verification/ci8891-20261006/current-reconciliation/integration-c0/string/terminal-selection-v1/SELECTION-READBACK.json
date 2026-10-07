@@ -1,0 +1,162 @@
+{
+  "actualJUnitCounts": {
+    "errors": 1,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 260
+  },
+  "allSelectedPinsRehashed": true,
+  "archiveExecuted": false,
+  "canonicalPromotionInferred": false,
+  "compiledObservations": {
+    "bodiesToBeExcludedByUnchangedArchiveOwner": true,
+    "noBinaryQualificationInferred": true,
+    "selectedClassFileIdentities": 6
+  },
+  "consumerQualificationInferred": false,
+  "historicalM3FirstAttempt": "Nonzero root command receipt before Git load; no M3 RESULT exists for that attempt. Original streams and STOP aggregate retained.",
+  "primarySemanticPrerequisiteLiteralEquality": true,
+  "publicationCheckHistory": [
+    {
+      "bytes": 3726,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/source-check-v1/RESULT.json",
+      "sha256": "0412191c668da818ec38883442d7fecbd5fa536de8749d099c787dd07753c31f"
+    },
+    {
+      "bytes": 27962,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/m3-check-v2/RESULT.json",
+      "sha256": "b40b1cb1851ddfacc407cbb5050f4017ff858a4a18bd50de655fe0cf10c732d6"
+    },
+    {
+      "bytes": 3039,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/root-check-execution-v1/RESULT.json",
+      "sha256": "ae3a68043410d7291ec66e431b7f0eb8a93ff7b72ad134f0bfd2d6b347387f9f"
+    },
+    {
+      "bytes": 1363,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/root-check-execution-v1/m3.json",
+      "sha256": "0a35965a8eadfeaea6351b40d9452ec4d90bb65937bff64cdb6d9fbbf37e5b7f"
+    },
+    {
+      "bytes": 1319,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/root-check-execution-v1/m3.stderr.log",
+      "sha256": "8ba3d31226d999cd44b72cdecf3d9314e9865de99d2aa4505ded8d12be3eb541"
+    },
+    {
+      "bytes": 0,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/root-check-execution-v1/m3.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1407,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/root-check-execution-v1/source.json",
+      "sha256": "c1fdbd6d0225bfd4ab3253798e0cd20a11118c84c916a913718543d61742d57c"
+    },
+    {
+      "bytes": 0,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/root-check-execution-v1/source.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 282,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/root-check-execution-v1/source.stdout.log",
+      "sha256": "7695060b430eb95b80b53501f858b367c0d7512025c9669a641bd0ade4be9f3f"
+    },
+    {
+      "bytes": 1347,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/root-check-execution-v2/m3.json",
+      "sha256": "b0675d11054ae60cbeadf0f1fcc27a2ad5d3b2d7830b36b5bc18d7dd3fbdee57"
+    },
+    {
+      "bytes": 0,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/root-check-execution-v2/m3.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 400,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/publication-design/followup-c0-final-v1/root-check-execution-v2/m3.stdout.log",
+      "sha256": "90b3b7d9716cc5319ad0968d388dea5050dcec817fc9c00f61ad1abafd1783c4"
+    }
+  ],
+  "receivingBodyBytes": 29379741,
+  "receivingFiles": 234,
+  "receivingObservedBooleans": {
+    "allAdmittedGroupsQualified": false,
+    "bridgeGroupQualified": false,
+    "canonicalProductionApplied": false,
+    "canonicalPromotionAuthorized": false,
+    "consumerQualified": false,
+    "fullOpenJdkBuildQualified": false,
+    "fullReceiverQualified": false,
+    "hostedWorkflowExecuted": false,
+    "jep458BlockedSpecificationObserved": false,
+    "jep458HostedWorkflowQualified": false,
+    "jep458ProjectionQualified": false,
+    "materializedInputsQualified": false,
+    "positiveCliGroupsQualified": false,
+    "preparedInputFixedPointObserved": true,
+    "primaryGroupQualified": false,
+    "spcSemanticQualified": true,
+    "strictCanonicalAdmission": false,
+    "testsCountedOnlyFromActualReports": true
+  },
+  "receivingReportedStatus": "PRIMARY_ONLY_STOP",
+  "receivingResult": {
+    "bytes": 33725,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/primary-observation-v1/RESULT.json",
+    "sha256": "6f8d824c7b58f801a3563869d1a34605b36f160a1a04ea4dc6d9dc5455e5e6e8"
+  },
+  "receivingRootReadback": {
+    "bytes": 35319,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/primary-observation-v1/ROOT-READBACK-v1.json",
+    "sha256": "f0cc18a39a4961b1b54f668c277eef67c54047d710ba13605601261b8a9daf94"
+  },
+  "receivingSelection": {
+    "bytes": 74585,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/receiving-selection-v1/RECEIVING-SELECTION.json",
+    "sha256": "de8f5754b18391d8e3768d2a7a2ee0073884427eb09e45093cc1a44bf709aa8d"
+  },
+  "rf0Selected": false,
+  "schema": "synexia.sc0.terminal-selection-readback/1",
+  "selectedPinsCanonicalSHA256": "a4ef225867717358a6b53fbf34d1a547870c27cf5113549404dc5afac23996d9",
+  "selectorExecuted": false,
+  "semanticBinding": {
+    "controller": {
+      "bytes": 27576,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/semantic-authoring/spc_semantic_capture_v2.py",
+      "sha256": "e5af8e5b84691328d05a4177881b18dae2c7596d19f6c743ebea0a7c804bc823"
+    },
+    "plan": {
+      "bytes": 23197,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/semantic-authoring/SEMANTIC-PLAN-v2.json",
+      "sha256": "946d2ce1d5d6b948c6ed8794c776904a07a886b980027092f2104f47dd18f85e"
+    },
+    "result": {
+      "bytes": 11281,
+      "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string/spc-semantic-v1/RESULT.json",
+      "sha256": "072c8c827e49f7822f780a17e9c1a2fcc80b1ce5744fbbd90f197901b61a41de"
+    }
+  },
+  "semanticFiles": 108,
+  "semanticObservedBooleans": {
+    "consumerQualified": false,
+    "fullM3RuntimeQualified": false,
+    "fullReceiverQualified": false,
+    "primaryGroupQualified": false,
+    "priorReceivingGateQualificationInherited": false,
+    "productMainExecuted": false,
+    "productionPromotion": false,
+    "runtimeFixQualified": false,
+    "spcSemanticQualified": true,
+    "systemLoaderAndSharedLibraryClosureComplete": false
+  },
+  "semanticReportedStatus": "PASS_SPC_SEMANTICS_PRIMARY_PENDING",
+  "semanticRowsRetainedExactly": true,
+  "semanticSelection": {
+    "bytes": 32783,
+    "path": "/workspace/scratch/5809f5dce3dd/continuation-20261006/receiver-current-c0-string-preparation/semantic-selection-v1/SEMANTIC-SELECTION.json",
+    "sha256": "59e2b5a9598f343a04a528879b3928e420292ab678b2786c597158624c020821"
+  },
+  "status": "READ_ONLY_HASH_VERIFIED_NO_SELECTION_EXECUTED",
+  "verifyOrExtractExecuted": false
+}

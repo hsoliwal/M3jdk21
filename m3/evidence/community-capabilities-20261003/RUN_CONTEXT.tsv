@@ -1,0 +1,12 @@
+key	value
+run_id	community-capabilities-20261003
+mode	APPLY_DOCUMENTATION_ONLY
+repository	hsoliwal/M3jdk21
+base_commit	bc175dd7b5a250477479354ce9fd9d4304416fd6
+scope	m3/docs;m3/backports;m3/evidence/community-capabilities-20261003
+public_api	LOCKED
+external_behavior	LOCKED
+build_scripts	LOCKED
+root_writes	FORBIDDEN
+source_donor_copy	NONE
+canonical_promotion	PR_REVIEW_ONLY

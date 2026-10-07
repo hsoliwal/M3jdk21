@@ -1,0 +1,182 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 callback exact SDK proof
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/m3-callback-sdk-proof.yml'
+      - 'm3/synexia-import/intakes/callback-parity/**'
+permissions:
+  contents: read
+  issues: read
+jobs:
+  sdk:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Require a fresh target directory
+        shell: bash
+        run: test ! -e target
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: c1acefe582ac84414f1082f095e96bbee167bc33
+          path: target
+          fetch-depth: 1
+          persist-credentials: false
+          clean: false
+          set-safe-directory: false
+          sparse-checkout: m3
+      - name: Verify immutable first-party source input
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY_SOURCE'
+          import base64, hashlib, io, json, os, re, stat, urllib.request, zipfile
+          from pathlib import Path
+
+          SOURCE = "01554337e0051018e6d932f3775378a01faf88f8"
+          TARGET = "c1acefe582ac84414f1082f095e96bbee167bc33"
+          ARCHIVE_SHA = "7c8b1bdeb9515d7ff0b474c182a97e4c93a3a9dc012a335cf3110f85abb2f8a6"
+          PARTS = (
+              (6021170423, 8000, "ec6d2191db9ce34aa31a7af7f94b1d44a6d472bcdd1a53f1bfeeddbf955b49b9"),
+              (6021196557, 8000, "4cd773e4073a3c945c7c597b97bbc81ee2d37be58ca3d81ed8c6d08316e71238"),
+              (6021224546, 8000, "e38ab5459c39ff1db85cc562830ef5ce71519ce6e9c7c1b92ff976a19d29713b"),
+              (6021251481, 8000, "eb6e9a04db123c2086c96a3ec5bc9b44a9a3a0f767d5d8ae20b0f5e0c012ef30"),
+              (6021329398, 7444, "f2e47ee9f0be4a32ffb617b8693bb28090ae4123d02036d2137edfcf7b377779"),
+          )
+
+          def require(value, message):
+              if not value:
+                  raise RuntimeError(message)
+
+          def unique(pairs):
+              out = {}
+              for key, value in pairs:
+                  require(key not in out, "duplicate JSON key")
+                  out[key] = value
+              return out
+
+          def decode(parts):
+              require(len(parts) == len(PARTS), "part count")
+              for text, (_, size, expected) in zip(parts, PARTS):
+                  require(len(text) == size, "part length")
+                  require(hashlib.sha256(text.encode("ascii")).hexdigest() == expected, "part SHA")
+              data = base64.b64decode("".join(parts), validate=True)
+              require(len(data) == 29581 and hashlib.sha256(data).hexdigest() == ARCHIVE_SHA, "archive seal")
+              with zipfile.ZipFile(io.BytesIO(data)) as archive:
+                  entries = archive.infolist()
+                  require(len(entries) == 1 and entries[0].filename == "packet.json", "ZIP inventory")
+                  entry = entries[0]
+                  require(not entry.is_dir() and not stat.S_ISLNK(entry.external_attr >> 16), "ZIP type")
+                  require(entry.file_size == 125328 and entry.compress_type == zipfile.ZIP_LZMA, "ZIP size/type")
+                  with archive.open(entry) as stream:
+                      content = stream.read(262145)
+                  require(len(content) <= 262144, "decompressed budget")
+              packet = json.loads(content.decode("utf-8"), object_pairs_hook=unique)
+              require(set(packet) == {"metadata", "contents"}, "packet fields")
+              meta, files = packet["metadata"], packet["contents"]
+              require(meta["schema"] == "M3_CALLBACK_SDK_PACKET_V1", "packet schema")
+              require(meta["sourceCommit"] == SOURCE and meta["targetCommit"] == TARGET, "source/target pin")
+              require(meta["license"] == "Apache-2.0" and meta["scope"] == "FIRST_PARTY_AUTHORING_PROOF_ONLY", "scope")
+              require(set(files) == set(meta["files"]) and len(files) == 18, "file inventory")
+              total = 0
+              for name, text in files.items():
+                  require(isinstance(name, str) and 0 < len(name) <= 4096, "path type/length")
+                  require(not name.startswith("/") and "\\" not in name and ":" not in name, "absolute path")
+                  require(all(p not in ("", ".", "..") and p.lower() != ".git" for p in name.split("/")), "path escape")
+                  require(not any(ord(c) < 32 or ord(c) == 127 for c in name), "path control")
+                  require(isinstance(text, str), "UTF-8 text source required")
+                  raw = text.encode("utf-8")
+                  total += len(raw)
+                  require(len(raw) <= 262144 and total <= 2097152, "source byte budget")
+                  require(hashlib.sha256(raw).hexdigest() == meta["files"][name], "source SHA: " + name)
+              return data, meta, files
+
+          def main():
+              parts = []
+              for identifier, _, _ in PARTS:
+                  request = urllib.request.Request(
+                      f"https://api.github.com/repos/hsoliwal/M3jdk21/issues/comments/{identifier}",
+                      headers={"Accept": "application/vnd.github+json", "Authorization": "Bearer " + os.environ["GH_TOKEN"],
+                               "User-Agent": "Synexia-Callback-Input/1", "X-GitHub-Api-Version": "2022-11-28"})
+                  with urllib.request.urlopen(request, timeout=60) as response:
+                      raw = response.read(65537)
+                  require(len(raw) <= 65536, "comment response budget")
+                  comment = json.loads(raw.decode("utf-8"), object_pairs_hook=unique)
+                  require(comment["id"] == identifier, "comment identity")
+                  require(comment["issue_url"] == "https://api.github.com/repos/hsoliwal/M3jdk21/issues/258", "comment owner")
+                  blocks = re.findall(r"```base64\n([A-Za-z0-9+/=]+)\n```", comment["body"])
+                  require(len(blocks) == 1, "one base64 part required")
+                  parts.append(blocks[0])
+              data, meta, files = decode(parts)
+              parent = Path(os.environ["RUNNER_TEMP"])
+              root = parent / "callback-source"
+              record = parent / "callback-input"
+              require(parent.is_dir() and not root.exists() and not record.exists(), "fresh input directories required")
+              for part in (parent, *parent.parents):
+                  require(not part.is_symlink(), "symbolic output parent")
+              root.mkdir()
+              record.mkdir()
+              for name, text in sorted(files.items()):
+                  output = root / name
+                  output.parent.mkdir(parents=True, exist_ok=True)
+                  with output.open("xb") as stream:
+                      stream.write(text.encode("utf-8"))
+              (root / "SOURCE_PACKET.json").write_text(json.dumps(meta, sort_keys=True, indent=2) + "\n")
+              (record / "packet.zip").write_bytes(data)
+              receipt = {"status": "INPUT_VERIFIED_NOT_EXECUTED", "sourceCommit": SOURCE, "targetCommit": TARGET,
+                         "archiveSha256": ARCHIVE_SHA, "comments": [row[0] for row in PARTS], "files": meta["files"]}
+              (record / "ACQUISITION.json").write_text(json.dumps(receipt, sort_keys=True, indent=2) + "\n")
+              print(json.dumps({"status": receipt["status"], "files": len(files), "archiveSha256": ARCHIVE_SHA}))
+
+          if __name__ == "__main__":
+              main()
+          PY_SOURCE
+      - name: Provision isolated pinned toolchain inputs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -B "$RUNNER_TEMP/callback-source/synexia-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/hosted_apply.py" provision \
+            --source "$RUNNER_TEMP/callback-source" --target "$GITHUB_WORKSPACE/target" \
+            --work "$RUNNER_TEMP/callback-run"
+      - name: Execute offline SDK and exact receiving checkout proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -B "$RUNNER_TEMP/callback-source/synexia-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/hosted_apply.py" execute \
+            --source "$RUNNER_TEMP/callback-source" --target "$GITHUB_WORKSPACE/target" \
+            --work "$RUNNER_TEMP/callback-run"
+      - name: Retain actual command and Result evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-callback-sdk-evidence
+          if-no-files-found: warn
+          retention-days: 14
+          path: |
+            ${{ runner.temp }}/callback-input/
+            ${{ runner.temp }}/callback-run/evidence/
+            ${{ runner.temp }}/callback-run/PROVISION.json
+            ${{ runner.temp }}/callback-run/DEPENDENCIES.json
+            ${{ runner.temp }}/callback-run/RESULT.json
+            ${{ runner.temp }}/callback-run/FAILED.json
+            ${{ runner.temp }}/callback-run/candidate.patch
+            ${{ runner.temp }}/callback-run/postimages/
+            ${{ runner.temp }}/callback-source/synexia-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/target/surefire-reports/
+            ${{ runner.temp }}/callback-source/synexia-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/target/sdk-results/
+            ${{ runner.temp }}/callback-source/synexia-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/target/hosted-fixture/*.json
+            ${{ runner.temp }}/callback-source/synexia-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/target/hosted-fixture/*.jsonl
+            ${{ runner.temp }}/callback-source/synexia-openrewrite-recipes/tools/patternizer/callback-parity/receivers/m3jdk21/target/hosted-fixture/*.log
+      - name: Retain provisioned offline toolchain for independent replay
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: m3-callback-offline-toolchain
+          if-no-files-found: warn
+          retention-days: 7
+          path: |
+            ${{ runner.temp }}/callback-run/tools/apache-maven-3.9.9-bin.tar.gz
+            ${{ runner.temp }}/callback-run/repository/
+            ${{ runner.temp }}/callback-run/DEPENDENCIES.json
+            ${{ runner.temp }}/callback-run/PROVISION.json

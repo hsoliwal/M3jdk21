@@ -1,0 +1,22 @@
+{
+  "scope": "eight delivered targets, six unchanged compile/recipe owners, protected preimages, mapping lineage and bounded inventory; not whole-repository admission",
+  "sources": {
+    "src/java.base/share/classes/java/util/regex/Matcher.java": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78",
+    "test/jdk/java/util/regex/M3RegexReuseTest.java": "922d6c26a0ffe5bfa9a239a6e7f2e3380dfb0a37a568a007915246005c642364",
+    ".github/workflows/mindex-string-backing.yml": "489700a2b3930ce427f937619f92e73d0103a119ead4e45846d0dae0aefce1a7",
+    "m3/docs/name-mapping.json": "0c99d4e51f4522045a6d5e7cb8b5b1a11ee4b7ba4f962f5d1f1172ee386a5d6f",
+    "m3/docs/string-precompute-completeness.tsv": "12c4360171180e53e77d41761f685ac64876f422b7a6bb38e31f9d8df98a93fe",
+    "m3/docs/synexia-string-precompute-port-map.tsv": "966640e9b0bbd856cd9e0a808281cf77e6fc734ce876b4f8253163d65aa2275e",
+    "m3/runtime-integration/check-m3string-invariants.py": "1ed89195c0b57312060b53668b59575168edeb92be03414d3634be3a21c1e095",
+    "m3/tooling/tq-sync/verify-plan.py": "905fb42c90ef44cbc5d4449218b825eca025fd23ae169b15606b0b95de359793",
+    "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedSnapshotRecipe.java": "0e65b26f674f68fea30151ea63a17faef2f88ca0f0679723bb3dc230fda22b72",
+    "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk21HashPinnedTextSnapshotRecipe.java": "8015207ce502d22955f7f77697177e5939fa1e25be7cd74be89c639335ae48e6",
+    "src/java.base/share/classes/java/util/regex/Pattern.java": "8cbd439235c592ecc98eb2a26f8494108c18a6521e715431ca1bec6db1e0b170",
+    "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java": "d7c3f9fdff0b5f1dcc5272ac4b57962d3f405ec53003b79344361e5515992155",
+    "src/java.base/share/classes/jdk/internal/mindex/M3StringBacking.java": "bcd2fe86a21464f7c65fd582368362d327e54b143dc05df13b31c1a029ecb251",
+    "test/jdk/java/util/regex/M3RegexLiteralTQTest.java": "9900b7a8baffdc05c65a73b139715e9ff543e97e171d6fbb8b013b6837919766"
+  },
+  "semantic": "MR_SEMANTIC\tcells=12300\tchecks=1803564\tsha256=d8a57e94b28138fd06f1d2616dd5bb0274a651b9cb8783c199e8ca321f7d87ee",
+  "production_blobs": 4288,
+  "complete_migration": false
+}

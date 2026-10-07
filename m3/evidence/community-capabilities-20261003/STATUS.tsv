@@ -1,0 +1,8 @@
+item	status	detail
+existing_authority_inventory	READ	M3 README; backport law; atom/pattern boundary; source tree metadata
+community_policy	PROPOSED	Documentation only
+candidate_overlay	DRAFT	Ten typed candidates; all unselected and unadmitted
+data_validation	PASS	Python csv parser: 10 unique rows; 10 columns; known planes/evidence refs; all unselected and pending
+maven_junit_jtreg	NOT_RUN	No executable source changes in this packet
+jmod_jlink_native	NOT_RUN	No module packaging or image execution claimed
+full_backport_programme	NOT_COMPLETE	Existing admission authority unchanged

@@ -1,0 +1,60 @@
+name: M3 JDK-8368692 recovery proof
+
+on:
+  pull_request:
+    paths:
+      - "m3/backports/recipes/jdk-8368692/**"
+      - "m3/backports/UPSTREAM_CHANGE_SEEDS.tsv"
+      - "m3/tooling/recipe-catalogue.tsv"
+      - "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/M3Jdk8368692PasswordSystemInBackportRecipe.java"
+      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk27-password-systemin-8368692-java/**"
+      - "m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/jdk27-password-systemin-8368692-text/**"
+      - "m3/tooling/migration-recipes/src/test/java/com/m3/rewrite/backport/M3Jdk8368692PasswordSystemInBackportRecipeTest.java"
+      - "m3/tooling/migration-recipes/src/test/resources/com/m3/rewrite/backport/jdk27-password-systemin-8368692/**"
+      - "src/java.base/share/classes/sun/security/util/Password.java"
+      - "src/java.base/share/conf/security/java.security"
+      - "test/jdk/sun/security/tools/keytool/AllowSystemIn.java"
+      - ".github/workflows/m3-jdk8368692-recovery.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  recipe-and-static-proof:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: Verify packet hashes and compatibility
+        run: python3 m3/backports/recipes/jdk-8368692/verify_recovery.py
+      - name: Prove OpenRewrite recipe replay
+        run: |
+          mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
+            -Dtest=M3Jdk8368692PasswordSystemInBackportRecipeTest test
+
+  java-base-image-and-jtreg:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Install OpenJDK build prerequisites
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends autoconf make gcc g++ zip unzip \
+            libasound2-dev libcups2-dev libfontconfig1-dev libfreetype6-dev \
+            libx11-dev libxext-dev libxrender-dev libxrandr-dev libxtst-dev libxt-dev
+      - name: Configure
+        run: bash configure --with-boot-jdk="$JAVA_HOME" --with-debug-level=release --with-jvm-variants=server --disable-warnings-as-errors
+      - name: Build image
+        run: make JOBS=2 images
+      - name: Run focused password policy jtreg
+        run: make JOBS=2 test TEST="test/jdk/sun/security/tools/keytool/AllowSystemIn.java"

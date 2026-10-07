@@ -1,0 +1,15 @@
+field	value
+packet	J423
+jep	423
+title	Region Pinning for G1
+target	M3JDK21
+scope_floor	MULTI_MODULE
+plane	HOTSPOT_GC_JNI
+java21_identity	COMPATIBLE_RUNTIME_CANDIDATE
+public_java_api_change	false
+initial_commit_files	58
+required_followups	2
+materialized	false
+recipe_state	PENDING_NATIVE_RECONCILIATION
+build_state	BLOCKED_OS_DEV_HEADERS
+distribution_state	CANDIDATE_NOT_SELECTED

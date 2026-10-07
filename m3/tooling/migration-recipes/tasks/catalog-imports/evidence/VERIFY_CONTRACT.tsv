@@ -1,0 +1,7 @@
+order	gate	state
+1	Full selected source/diff	PASS
+2	Whitespace and syntax checks	PASS; full linter not run
+3	Independent expected-fixture compilation	PASS; not production framework type-linking
+4	Actual OpenRewrite/JUnit and full unchanged Maven verify	BLOCKED
+5	A3 candidate and modified-JDK build/jtreg/runtime	NOT_RUN
+6	Serial canonical promotion	NOT_AUTHORIZED_BY_THIS_PACKET

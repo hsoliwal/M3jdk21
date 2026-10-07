@@ -1,0 +1,7 @@
+kind	reference	use
+inventory_pr	hsoliwal/M3jdk21#164	denominator and policy authority
+jdk21	openjdk/jdk@jdk-21+35	internal classfile baseline
+jep457	2b00ac0d02a110326846c75ea7ea535dccbb1924	first public preview transition
+jep466	19a99d023e32fa9f4d26b76bd36993719e1dfe21	second preview transition
+jep484	84ffb64cd73f8af11cf3670c6f19d282c2ac6961	final API transition
+jdk24	openjdk/jdk@jdk-24+36	final composition donor

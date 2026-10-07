@@ -1,0 +1,10 @@
+artifact	role
+DESIGN.md	Pre-code scope and requirements
+TASK_PACKET.json	Scope and locks
+STATUS.tsv	Gate states
+FINAL_REPORT.md	Exact delta and evidence limits
+RUN_CONTEXT.tsv	Tool/input identities
+PROVENANCE.tsv	Source hashes
+VERIFY_CONTRACT.tsv	Proof order
+OUTPUT_CONTRACT.tsv	Deliverable inventory
+ACTION_QUEUE.tsv	Unfinished obligations

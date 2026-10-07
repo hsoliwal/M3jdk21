@@ -1,0 +1,7 @@
+sha256	path	state
+474a16d0daad280133bc51418ab6fe3c40fa5fb0d52e929adc0903b86c4bd129	.github/workflows/mindex-string-backing.yml	BYTE_EQUAL_RECIPE_FIXTURE_RETAIN
+474a16d0daad280133bc51418ab6fe3c40fa5fb0d52e929adc0903b86c4bd129	m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned-text/map-guard/workflow.yml.txt	BYTE_EQUAL_RECIPE_FIXTURE_RETAIN
+b038fff642ab35aa2cf749d3ac81c3559ff8f6fc59a723fd2a5212654f4ba651	m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-map-guard/00-Backing.java.txt	BYTE_EQUAL_RECIPE_FIXTURE_RETAIN
+b038fff642ab35aa2cf749d3ac81c3559ff8f6fc59a723fd2a5212654f4ba651	src/java.base/share/classes/jdk/internal/mindex/MIndexMappedStringBacking.java	BYTE_EQUAL_RECIPE_FIXTURE_RETAIN
+620e1ccd61d9f8675a18ce74eb307b5a02f75fad6c535e17e42661ef3409185a	m3/tooling/migration-recipes/src/main/resources/com/m3/rewrite/backport/jdk21-hash-pinned/jdk22-map-guard/01-MapGuardTest.java.txt	BYTE_EQUAL_RECIPE_FIXTURE_RETAIN
+620e1ccd61d9f8675a18ce74eb307b5a02f75fad6c535e17e42661ef3409185a	test/jdk/java/lang/String/MapGuardTest.java	BYTE_EQUAL_RECIPE_FIXTURE_RETAIN

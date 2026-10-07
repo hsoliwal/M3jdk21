@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "base_commit": "69f18626583dee553ba1ed6623d13af492c1b709",
+  "upstream_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
+  "patch_sha256": "c2ed53fbcb0ecf5b21774e9ed58954b1c3216c652325c9549c623ce087871203",
+  "files": {
+    "src/hotspot/share/classfile/javaClasses.cpp": {
+      "before": "a358a29d0d5687625eba69a6be0932c67d8a6d0ac0b05f1d225288cf6d6af91a",
+      "after": "ff253deee4139f38f05c8630d46f58a48fe8dcc41bccf7ded917f425224a96b4"
+    },
+    "src/hotspot/share/classfile/javaClasses.hpp": {
+      "before": "88659079f7621ab864b7dde6c19c549e49be862cb1d9639108ac85ac473e93e5",
+      "after": "447d78f56780f1130b9d4c80691cb1f25456a2d9562b7817fab7d023fe5f380c"
+    },
+    "src/hotspot/share/classfile/javaClasses.inline.hpp": {
+      "before": "02f638693052e072687f003cb7da9b2d7f34b40b87e89616b93b9d3581bf94a2",
+      "after": "cd3cd7eda9b081c174cd26ca26198e53ef79e7528d1634b29049fe246f5d13f9"
+    },
+    "src/hotspot/share/classfile/stringTable.cpp": {
+      "before": "ffa3118dfef5512305b4fb50e94c053e307c5e6fca1134b2cdb22193457da6b8",
+      "after": "c483984d1e7622b51985f72fc2b8b650b42ba4488cc04c2f48a5b4f7421c72fc"
+    },
+    "src/hotspot/share/jfr/recorder/jfrRecorder.cpp": {
+      "before": "7649630972fa47fbd4cc5f76c8efa1c320a0f93f725c64d6016ca331305b7906",
+      "after": "09057d94bcd0b2a310ff5c7442124e2b7abc4e1cd65d8d0d1bf7246bc854b4f2"
+    },
+    "src/hotspot/share/oops/instanceKlass.cpp": {
+      "before": "39810481d6e0352e163f0714ef41109ed1464fd0bb814eda317ef9fbd3aae870",
+      "after": "f60aa4f5285205586ab42d1deecbc6117619cbbea426039db90ce769a339c09e"
+    },
+    "src/hotspot/share/prims/jni.cpp": {
+      "before": "4d9d6b5e89f6c67e20f7d3d3b3a42ca6532dd51b108a1c6e02d9bfaf4c446c32",
+      "after": "e809d78f4eec22f6140fa057a13f1b7787c137bceda9db242fa1cd083ed5f9a9"
+    },
+    "src/hotspot/share/prims/jvmtiTagMap.cpp": {
+      "before": "40464d1c54959521b073f751f06c68a0afdeed222d00aa21b7504a0f806d54d3",
+      "after": "90c0d0142bed7c19c936979be1121cf85e80bb220a73afc5b6215427849621a2"
+    },
+    "src/hotspot/share/runtime/arguments.cpp": {
+      "before": "2693c76fa494e180c15f78915557c6c8773a773ed9ec9cfc9f27f853fb7580e4",
+      "after": "d6d28df8bb0ada2877a99fb5dae51957ae5077f0db5b119ab0d211de704ad2b4"
+    },
+    "src/hotspot/share/runtime/globals.hpp": {
+      "before": "784ba7989d4008145ce02cdd66cb74a7bbb899d2cdac91119ce2b80b57c88bc4",
+      "after": "2da4945529eb14ea5140486994b9113f385c172a050706fb2de4d3758de1d28d"
+    },
+    "src/hotspot/share/runtime/threads.cpp": {
+      "before": "20d612428570fef24842a08e0628dbf4b660c9a4b86236124d900060cb7f3ed9",
+      "after": "d0eefd246e5d755f96fcd0d817976182f567821d05e93d678d6614809a465a99"
+    },
+    "src/hotspot/share/services/diagnosticCommand.cpp": {
+      "before": "5861a3cb8fbf551681654e04deeb8c61b8b5a7913d9a4fb10ade48ee7b9a2611",
+      "after": "d1f20b59d79da2633ff7e7318e3df9cd5553f0a069dfd16d144a88477e3aef6b"
+    },
+    "src/hotspot/share/services/finalizerService.cpp": {
+      "before": "0ce3ca248b38336fb1039808afa9f2d3721cdaa4b03c85340888cc0a8f125438",
+      "after": "8f3a66cdde9a8456ea6d2c6a03e87fc277a347a2c0b3890db91aac7a4521f4ac"
+    },
+    "src/java.base/share/classes/java/lang/String.java": {
+      "before": "53cf6d06ca4b829665a7501215ede14da5da0c7dead896a0ea3abf6687d87923",
+      "after": "d1c20848c0c15235e9eb9dd7d30ddc80f8c042e6b53255a4552ac19ec40e6625"
+    },
+    "src/java.base/share/classes/java/lang/StringConcatHelper.java": {
+      "before": "4c27b33ec75a8dee6ffad3c7bbb7bf5922fd0e07dd6f0720caa25bdbbb13a0f1",
+      "after": "98e7d9baa0f0c2b25213b45a291564aefab82b8944e458b54ec08c2419c98695"
+    },
+    "src/java.base/share/native/libjava/jni_util.c": {
+      "before": "31596047469d6107b1e515eb04f3e9a9d98719ba50d2d9d753309eef51b2ce94",
+      "after": "cadc373b6611e5fb64ca28f3ea9bd69c417b76c5258e1b4ed21339c64f2b59f2"
+    },
+    "src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/OopUtilities.java": {
+      "before": "d1f10780acf7d13ec54cf37eb2a49c1b845cc884ec30b583a6cd72521c213560",
+      "after": "b8d7ee670153c3b7d110ecb74437aa71556e73828f2e28320b3e0becf3e45ad2"
+    }
+  }
+}

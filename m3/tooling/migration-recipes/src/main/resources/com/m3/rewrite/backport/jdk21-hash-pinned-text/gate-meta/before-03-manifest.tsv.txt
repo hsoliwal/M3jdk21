@@ -1,0 +1,2 @@
+# path\tbefore-sha256\tafter-sha256\ttemplate
+src/java.base/share/classes/java/lang/String.java\t068cc68a4968c1f8aed45d7ff73a9bfca8dc19723015cd739728cbd56d90150d\t5f1c19dd6d46c12f5b3baf72422ae7e68975e41df4303451a1db2299c8581601\tString.java.txt

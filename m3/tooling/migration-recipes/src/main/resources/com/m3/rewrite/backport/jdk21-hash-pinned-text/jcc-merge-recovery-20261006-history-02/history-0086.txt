@@ -1,0 +1,35 @@
+{
+  "schema": "independent-review-artifact-seals/v1",
+  "files": [
+    {
+      "path": "INPUT_SEALS.json",
+      "bytes": 1321,
+      "sha256": "5a26d9913a9b18f97b68aa8bf3eac6855d954f5d4e1c7c7805a16f1589f0a881"
+    },
+    {
+      "path": "REVIEW.md",
+      "bytes": 4985,
+      "sha256": "f84ae9ee896eaadd79ae00c3c1747decd0f928872baecbec56166f363f675b59"
+    },
+    {
+      "path": "audit_base.py.txt",
+      "bytes": 8839,
+      "sha256": "839c35c611de2dc02f2a3f1233131b24c79d77e109aaf010df9689dc8e04893b"
+    },
+    {
+      "path": "prepare_publication.py.txt",
+      "bytes": 15683,
+      "sha256": "3cd42b4b5c4ba1e0eb01cace40bff7cb2fe967d65ac4e9a646b70d7daf4404fd"
+    },
+    {
+      "path": "v1-v2.diff",
+      "bytes": 4471,
+      "sha256": "dcb1f09d1b221eb10837874bf62e82093813eb102229567ac19ed4a9c56831d9"
+    },
+    {
+      "path": "verify_publication.py.txt",
+      "bytes": 9623,
+      "sha256": "8cc5fd5c5df99ae8f48d0fbbf4618ada99be429af9cb39839511940192bd8639"
+    }
+  ]
+}

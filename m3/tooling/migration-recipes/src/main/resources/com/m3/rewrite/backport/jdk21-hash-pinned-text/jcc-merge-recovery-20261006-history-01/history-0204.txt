@@ -1,0 +1,36 @@
+{
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "-B",
+    "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/run_verification_v3.py"
+  ],
+  "cwd": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04",
+  "started_utc": "2026-10-05T17:40:48.605879+00:00",
+  "runner": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/run_verification_v3.py",
+    "bytes": 13664,
+    "sha256": "496e1877914e15f4342111c37020a2d58790038516b62872680427e585b21f50"
+  },
+  "bound_input": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/FINAL_SOURCE_INPUTS_V3.json",
+    "bytes": 83448,
+    "sha256": "df6713ad19ce80daad0383fbd5c3716412e2dca133e1db7e0150b88e141313b5"
+  },
+  "resource_admission": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/derivation-static-review/resources-v3/REVIEW.md",
+    "bytes": 9241,
+    "sha256": "df198e3ccda995d5d40fe9e17aca02507b3cb6b5077314c05b3c06b3eeb2cd28"
+  },
+  "exit_code": 0,
+  "finished_utc": "2026-10-05T17:40:56.906333+00:00",
+  "stdout": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/verification-invocation-v3/stdout.log",
+    "bytes": 794,
+    "sha256": "20d71c19eddbfedde09e1c8237740f3fbe7fd9a1859bb2dd2ba8db0157ef1888"
+  },
+  "stderr": {
+    "path": "/workspace/scratch/1c68df1bae79/javac-convergence-20261005/work/m3jdk21-current/successor-e04/verification-invocation-v3/stderr.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

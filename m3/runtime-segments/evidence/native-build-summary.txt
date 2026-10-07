@@ -1,0 +1,31 @@
+Full original log preserved in Library evidence archive under raw-build/segments-native-build.log
+SHA256: 54e2d5e39d3267e6ad87d8de031128ffefadf492e8daee0575e9381c8168dddc
+Verified initial make images exit status: 0
+Final incremental build: segments-jfr-fix-build.log
+
+Last 25 lines of initial build:
+Creating jdk.jsobject.jmod
+Creating jdk.jstatd.jmod
+Creating jdk.localedata.jmod
+Creating jdk.management.jmod
+Creating jdk.management.agent.jmod
+Creating jdk.management.jfr.jmod
+Creating jdk.naming.dns.jmod
+Creating jdk.naming.rmi.jmod
+Creating jdk.net.jmod
+Creating jdk.nio.mapmode.jmod
+Creating jdk.random.jmod
+Creating jdk.sctp.jmod
+Creating jdk.security.auth.jmod
+Creating jdk.security.jgss.jmod
+Creating jdk.unsupported.jmod
+Creating jdk.unsupported.desktop.jmod
+Creating jdk.xml.dom.jmod
+Creating jdk.zipfs.jmod
+Creating interim jimage
+Creating jdk.jlink.jmod
+Creating java.base.jmod
+Creating jdk image
+Creating CDS archive for jdk image for server
+Creating CDS-NOCOOPS archive for jdk image for server
+Finished building target 'images' in configuration 'linux-x86_64-server-fastdebug'
