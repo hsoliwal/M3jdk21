@@ -14,7 +14,8 @@ operations to reuse prior computation. M3JDK21 is the Java 21 product target.
 The initial focus is M3 String inside `java.lang.String`, followed by regular
 expressions and shared precompute, collections, and SWT/Eclipse integration.
 The broader design direction also examines multilingual text resources,
-language-specific ASTs, and reuse across structured data.
+language-specific ASTs, and reuse across structured data. M3SDK is the proposed
+SDK delivery direction for the wider Synexia capability portfolio.
 This paper describes the design premise, intended architecture, compatibility
 constraints, and a reproducible evaluation programme. It presents design
 hypotheses rather than measured performance results.
@@ -89,6 +90,40 @@ VM-local canonical storage is the initial ownership boundary to qualify.
 Cross-process or OS-level sharing is an extension requiring its own encoding,
 synchronization, security, and lifecycle design. Metadata sidecars need bounded
 retention, safe publication, and unambiguous versioning.
+
+
+## 3.1 M3SDK: the wider delivery direction
+
+The intended programme extends across Synexia rather than stopping at a String
+library. **M3SDK** is the proposed SDK delivery surface for the reusable Synexia
+portfolio: language and lexicon resources, exact translation, text precompute,
+AST/compiler mechanisms, arrays and collections, indexed data structures,
+storage, native kernels, transformation recipes and bounded integration adapters.
+
+Synexia remains the canonical source and convergence workspace. M3SDK would
+package qualified capabilities with explicit contracts, examples, provenance
+and reproducible evidence. M3JDK21 remains the Java runtime product and owns its
+internal String/precompute integration. An SDK packaging goal does not add a
+Synexia runtime dependency to the JDK or transfer runtime ownership.
+
+The scope goal is to inventory every Synexia module and capability and assign
+an explicit delivery disposition: qualified SDK component, product-specific
+adapter, independently deployed application/service, pending qualification, or
+documented exclusion. A repository-wide SDK cannot be established by renaming
+packages or collecting every source directory into one artifact.
+
+SDK components should retain API/SPI contracts, headless core implementations,
+bounded bridges, optional UI and explicit Java/JNI ownership. Versioned manifests
+must identify source revisions, artifact bindings, dependencies, platform support,
+licenses, ABI/format boundaries and acceptance evidence. Third-party code and
+datasets retain their own licensing and provenance.
+
+This is an intended distribution and integration direction, not a declaration
+that all of Synexia is already delivered as M3SDK. Component qualification follows
+the existing receiving priorities and preserves prior contracts and source
+history. The SDK can make reusable mechanisms available without treating one
+component's tests as acceptance of the entire portfolio.
+
 
 ## 4. String compatibility
 
@@ -392,8 +427,8 @@ For citation in JEPs, standards submissions, or downstream publications, see the
 ### Revision and filing intent
 
 Version 0.2 extends the design account with natural-language resources,
-programming-language AST/binding boundaries, and bounded reuse across other data
-structures. The [v0.1 publication remains available at its original commit](https://github.com/hsoliwal/M3jdk21/blob/ace350f716614b50cf77d7462b1762b7eb8664ca/m3/papers/M3_SHARED_STRUCTURE_AND_REUSABLE_COMPUTATION.md).
+programming-language AST/binding boundaries, bounded reuse across other data
+structures, and the wider M3SDK delivery direction for Synexia. The [v0.1 publication remains available at its original commit](https://github.com/hsoliwal/M3jdk21/blob/ace350f716614b50cf77d7462b1762b7eb8664ca/m3/papers/M3_SHARED_STRUCTURE_AND_REUSABLE_COMPUTATION.md).
 Earlier source and design records remain relevant to chronology and attribution.
 
 As of 7 October 2026, the author has expressed an intention to pursue patent
