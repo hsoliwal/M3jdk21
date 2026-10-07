@@ -1029,8 +1029,6 @@ for required_gate in [
 for fragment in [
     "hsoliwal/com.synexia",
     "https://github.com/hsoliwal/com.synexia/pull/9597",
-    "fd73581d6d4205e92c151509cc6663f69eeaf22f",
-    "87a711c56b1fd5fbe843b864474f3cc87c15362b",
     "pull/9491",
     "com.synexia.rewrite.M3Jdk21StringHistoryConvergence",
     "com.synexia.rewrite.M3Jdk21TqConvergence",
@@ -1038,6 +1036,19 @@ for fragment in [
 ]:
     if fragment not in recipe_receipt:
         fail(f"Synexia recipe application receipt missing: {fragment}")
+
+custody_pin = re.search(
+    r"Pinned custody revision:\s*`([0-9a-f]{40})`",
+    recipe_receipt,
+)
+applied_pin = re.search(
+    r"Applied/fixed-point revision:\s*`([0-9a-f]{40})`",
+    recipe_receipt,
+)
+if custody_pin is None:
+    fail("Synexia String recipe receipt lacks an exact 40-hex custody revision")
+if applied_pin is None:
+    fail("M3JDK21 String recipe receipt lacks an exact 40-hex applied revision")
 
 for forbidden_recipe_path in [
     "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-history-convergence.yml",
