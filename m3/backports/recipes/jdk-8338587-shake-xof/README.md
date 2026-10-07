@@ -1,6 +1,6 @@
 # JDK-8338587 — Java 21 SHAKE/XOF compatibility packet
 
-Status: **recipe candidate, unverified**. Product materialization is not authorized.
+Status: **candidate materialized, unverified**. The adapted product/test files are present on the candidate branch, but promotion remains unauthorized until executable proof passes.
 
 ## Upstream authority
 
