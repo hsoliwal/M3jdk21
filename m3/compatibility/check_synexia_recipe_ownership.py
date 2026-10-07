@@ -92,10 +92,12 @@ def load(path: Path = LEDGER) -> list[dict[str, str]]:
     legacy_roots = (
         "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/atom/",
         "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/scope/",
+        "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/semantic/",
     )
     canonical_roots = (
         "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/atom/",
         "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/scope/",
+        "m3/tooling/migration-recipes/src/main/java/com/synexia/rewrite/semantic/",
     )
     for physical, row in enumerate(rows, start=2):
         if any(not row[field] for field in expected):
