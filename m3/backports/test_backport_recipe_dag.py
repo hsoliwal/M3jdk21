@@ -246,6 +246,26 @@ class BackportRecipeDagTest(unittest.TestCase):
         atoms = self.mod.compile_root(root)
         self.mod.validate(atoms)
 
+        ordered_jep_work = []
+        for atom in atoms:
+            if atom.source_kind == "JEP" and atom.work_id not in ordered_jep_work:
+                ordered_jep_work.append(atom.work_id)
+        self.assertEqual(
+            [
+                "JEP-423",
+                "JEP-458",
+                "JEP-474",
+                "JEP-484",
+                "JEP-485",
+                "JEP-493",
+                "JEP-496",
+                "JEP-497",
+                "JEP-510",
+                "JEP-523",
+            ],
+            ordered_jep_work[:10],
+        )
+
         j423 = [atom for atom in atoms if atom.work_id == "JEP-423"]
         self.assertTrue(j423)
         self.assertTrue(
