@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.SplitLiteral
+displayName: M3JDK21 String.split literal lane
+description: >-
+  java.lang.String.split and splitWithDelimiters take an M3 literal lane for a regex that is a
+  plain literal (no metacharacter, escape or surrogate), with exactly the semantics of
+  Pattern.compile(literal).split; java.lang.M3String.isLiteralRegex becomes the shared predicate
+  that isLiteralRegexReplacement already used. Ships the jtreg differential test. TARGET_OWNED_PORT
+  postimages; String.java is carried as text because the pinned Java parser cannot convert its
+  Javadoc.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-split-literal
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-split-literal

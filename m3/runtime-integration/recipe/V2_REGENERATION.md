@@ -37,3 +37,7 @@ that had drifted on master since the previous re-seal (`AbstractStringBuilder.ja
 of 2026-10-08), so `apply.py --check` and `test_recipe.py` are green again on this tree. Same
 upstream preimage `890adb6410` (jdk-21+35); `target_commit` is the owner commit of the gate.
 
+## 2026-10-08 re-seal (A2 String.split literal lane)
+
+Regenerated after `String.java` and `M3String.java` changed (65 targets unchanged in scope; `target_commit` c2eca9406b). `test_recipe.py` needs `TMP`/`TEMP` on a drive with free space.
+
