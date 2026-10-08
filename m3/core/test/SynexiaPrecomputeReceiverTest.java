@@ -77,6 +77,16 @@ public final class SynexiaPrecomputeReceiverTest {
             check(catalog.findPrecomputePayload("numbers", "missing").isEmpty());
             check(catalog.findPrecomputePayload("numbers", "7").orElseThrow() == payload);
             catalog.close();
+            String nonCanonical = Files.readString(directory.resolve("synexia.records.tsv"), StandardCharsets.UTF_8)
+                    .replace("{\"concept_ids\":[11,0,19],\"flags\":7}",
+                            "{\"flags\":7,\"concept_ids\":[11,0,19]}");
+            Files.writeString(directory.resolve("synexia.records.tsv"), nonCanonical);
+            try {
+                SharedLexiconCatalog.openLazy(directory);
+                throw new AssertionError("non-canonical payload was accepted");
+            } catch (java.io.IOException expected) {
+                check(true);
+            }
             System.out.println("M3JDK_SYNXIA_RECEIVER_PASS checks=" + checks);
         } finally {
             try (var paths = Files.list(directory)) { for (Path path : paths.toList()) Files.delete(path); }
@@ -84,3 +94,4 @@ public final class SynexiaPrecomputeReceiverTest {
         }
     }
 }
+
