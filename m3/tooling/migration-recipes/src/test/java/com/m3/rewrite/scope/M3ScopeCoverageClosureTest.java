@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.m3.rewrite.atom.M3PureIntConvergenceRecipe;
+import com.synexia.rewrite.atom.M3PureIntConvergenceRecipe;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 
@@ -99,16 +99,26 @@ final class M3ScopeCoverageClosureTest {
                 "com.synexia.rewrite.M3SegmentedLaneNativeRecipe",
                 "com.m3.rewrite.InstallIndexStringCompatibility",
                 "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
-                "com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe",
-                "com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates",
-                "com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe",
-                "com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe",
-                "com.m3.rewrite.atom.M3PureIntConvergenceRecipe",
+                "com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe",
+                "com.synexia.rewrite.atom.M3InventoryPureIntAtomCandidates",
+                "com.synexia.rewrite.atom.M3PatternizePureIntAtomRecipe",
+                "com.synexia.rewrite.atom.M3DocumentPureIntAtomRecipe",
+                "com.synexia.rewrite.atom.M3PureIntConvergenceRecipe",
                 "com.m3.rewrite.M3Java21ConvergenceRecipe",
                 "com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe",
                 "com.m3.rewrite.backport.M3Jdk21HashPinnedTextSnapshotRecipe",
                 "com.m3.rewrite.backport.M3VerbatimJavaPairRecipe",
-                "com.m3.rewrite.backport.M3Jep458BackportRecipe");
+                "com.m3.rewrite.backport.M3Jep458BackportRecipe",
+                "com.m3.rewrite.backport.M3Jep485StreamGatherersBackportRecipe",
+                "com.m3.rewrite.backport.M3Jdk8338587ShakeXofBackportRecipe",
+                "com.m3.rewrite.backport.M3Jdk8357439JcmdCompletionBackportRecipe",
+                "com.m3.rewrite.backport.M3Jep496MlKemBackportRecipe",
+                "com.m3.rewrite.backport.M3Jep497MlDsaBackportRecipe",
+                "com.m3.rewrite.backport.M3Jep510KdfBackportRecipe",
+                "com.m3.rewrite.backport.M3Jep510KdfSecurityTestsRecipe",
+                "com.m3.rewrite.backport.M3Jep510KdfCandidateRecipe",
+                "com.m3.rewrite.backport.M3ReleaseJepAuthorityRepairRecipe",
+                "com.m3.rewrite.synexia.M3SynexiaImportInventoryRecipe");
 
         assertEquals(names.size(), M3RecipeScopeRegistry.size());
         for (String name : names) {
