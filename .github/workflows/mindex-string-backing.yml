@@ -12,6 +12,7 @@ on:
       - 'm3/synexia-import/current-full-borrow/STRING_PHASE.md'
       - 'm3/synexia-import/current-full-borrow/string-source-target-map.tsv'
       - 'm3/synexia-import/current-full-borrow/string-phase-gates.tsv'
+      - 'm3/synexia-import/current-full-borrow/string-phase-work-orders.tsv'
       - 'm3/synexia-import/current-full-borrow/check_string_phase.py'
       - 'm3/synexia-import/current-full-borrow/receiver-status.tsv'
       - 'm3/docs/synexia-string-precompute-port-map.tsv'
