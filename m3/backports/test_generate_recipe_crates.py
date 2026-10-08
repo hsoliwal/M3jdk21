@@ -480,6 +480,107 @@ class GenerateRecipeCratesTest(unittest.TestCase):
             self.assertEqual(self.mod._sha256_text(feature_text), manifest[0][2])
             self.assertEqual(feature_text, (crate / manifest[0][3]).read_text(encoding="utf-8"))
 
+
+    def test_path_donor_override_uses_last_approved_feature_postimage(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            repo = root / "repo"
+            out = root / "out"
+            subprocess.run(("git", "init", "-q", str(repo)), check=True)
+            self.git(repo, "config", "user.email", "fixture@example.invalid")
+            self.git(repo, "config", "user.name", "Fixture")
+
+            path = "test/hotspot/jtreg/gc/g1/TestFeature.java"
+            base_text = "final class TestFeature { int value() { return 21; } }\n"
+            feature_text = "final class TestFeature { int value() { return 423; } }\n"
+            self.write(repo, path, base_text)
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "jdk21")
+            self.git(repo, "tag", "jdk-21+35")
+
+            self.write(repo, path, feature_text)
+            self.git(repo, "add", ".")
+            self.git(repo, "commit", "-q", "-m", "approved-feature")
+            feature_ref = subprocess.check_output(
+                ("git", "-C", str(repo), "rev-parse", "HEAD"), text=True
+            ).strip()
+
+            (repo / path).unlink()
+            self.write(repo, "unrelated.txt", "later branch state\n")
+            self.git(repo, "add", "-A")
+            self.git(repo, "commit", "-q", "-m", "unrelated-later-removal")
+            tip_ref = subprocess.check_output(
+                ("git", "-C", str(repo), "rev-parse", "HEAD"), text=True
+            ).strip()
+            self.git(repo, "tag", "jdk-22+36")
+
+            candidates, exclusions = self.mod.candidates(
+                repo,
+                22,
+                selected={path},
+                all_candidates=False,
+                donor_ref=tip_ref,
+            )
+            self.assertEqual([], candidates)
+            self.assertEqual(
+                [(path, "TYPED_EXCLUSION_AUTOMATIC_REMOVAL")],
+                exclusions,
+            )
+
+            candidates, exclusions = self.mod.candidates(
+                repo,
+                22,
+                selected={path},
+                all_candidates=False,
+                donor_ref=tip_ref,
+                donor_overrides={path: feature_ref},
+            )
+            self.assertEqual([], exclusions)
+            self.assertEqual(1, len(candidates))
+            self.assertEqual(path, candidates[0].path)
+            self.assertEqual("MODIFIED", candidates[0].status)
+            self.assertEqual(feature_ref, candidates[0].donor_ref)
+            self.assertEqual(feature_text, candidates[0].after_text)
+
+            crates = self.mod.materialize(
+                out,
+                22,
+                candidates,
+                exclusions,
+                crate_size=1,
+                donor_ref=tip_ref,
+            )
+            self.assertEqual(["jdk22-0001"], crates)
+            with (out / "CRATES.tsv").open(
+                encoding="utf-8", newline=""
+            ) as handle:
+                rows = list(csv.DictReader(handle, delimiter="\t"))
+            self.assertEqual(feature_ref, rows[0]["donor_ref"])
+
+    def test_donor_override_map_is_sorted_unique_and_custody_only(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            donor_map = root / "donors.tsv"
+            donor_map.write_text(
+                "path\tdonor_ref\n"
+                "a/A.java\tdeadbeef\n"
+                "b/B.java\tcafebabe\n",
+                encoding="utf-8",
+            )
+            self.assertEqual(
+                {"a/A.java": "deadbeef", "b/B.java": "cafebabe"},
+                self.mod._donor_overrides(donor_map),
+            )
+
+            donor_map.write_text(
+                "path\tdonor_ref\n"
+                "b/B.java\tcafebabe\n"
+                "a/A.java\tdeadbeef\n",
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "noncanonical donor-map row"):
+                self.mod._donor_overrides(donor_map)
+
     def test_crate_size_rejects_zero_and_above_budget(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             out = Path(temp) / "out"
