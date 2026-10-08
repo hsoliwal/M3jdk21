@@ -11,6 +11,8 @@ on:
       - "m3/compatibility/synexia-string-focused-recipe-receipt-20261008.tsv"
       - "m3/compatibility/synexia-string-focused-estate-binding-20261008.tsv"
       - "m3/compatibility/test_synexia_string_focused_recipe_receipt.py"
+      - "m3/compatibility/test_synexia_string_runtime_responsibility.py"
+      - "m3/compatibility/synexia-string-runtime-responsibility-20261008.tsv"
       - "m3/docs/mindex-migration-handoff.md"
       - "m3/compatibility/test_synexia_m3index_ownership_policy.py"
       - "m3/compatibility/SYNEXIA_M3INDEX_RECEIVER.md"
@@ -73,6 +75,7 @@ jobs:
           m3/compatibility/test_synexia_recipe_home_policy.py
           m3/compatibility/test_synexia_m3index_ownership_policy.py
           m3/compatibility/test_synexia_string_focused_recipe_receipt.py
+          m3/compatibility/test_synexia_string_runtime_responsibility.py
       - name: Migration-recipes JUnit ownership proof
         run: >
           mvn -B -ntp
