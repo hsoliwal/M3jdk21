@@ -217,7 +217,6 @@ jobs:
     uses: ./.github/workflows/build-cross-compile.yml
     with:
       gcc-major-version: '10'
-      apt-gcc-cross-version: '10.4.0-4ubuntu1~22.04cross1'
       configure-arguments: ${{ github.event.inputs.configure-arguments }}
       make-arguments: ${{ github.event.inputs.make-arguments }}
     if: needs.select.outputs.linux-cross-compile == 'true'
