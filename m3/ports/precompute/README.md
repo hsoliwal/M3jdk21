@@ -111,3 +111,27 @@ mvn -B -ntp -f m3/tooling/migration-recipes/pom.xml \
 
 This is still an isolated port. It does not alter `java.lang.String`, `java.util.regex.Pattern`,
 collections, bootstrap behavior or public JDK APIs.
+
+## Regex oracle harness (A5)
+
+`M3RegexOracleCorpus` freezes the 10,000 x 64 regex/String corpus of the Synexia
+`Regex10kMatrixMasteryCorpus` (generator and the three roots `REGEX_ROOT`, `STRING_ROOT`,
+`MATRIX_ROOT`; any drift throws). `M3RegexOracleHarness` holds stock `Pattern` outcomes for every
+pair in ten `M3RegexStringTrialImage` shards, binds them to `oracleRoot()`, and checks any
+match-pruning `Candidate` (a rule that claims `find` cannot succeed) for soundness with a bounded,
+ordered ledger of contradictions; `literalShape()` is the first candidate, built on `M3RegexShape`.
+M3 signals rank hard cases only; `java.util.regex.Pattern` remains the oracle.
+
+Recipe crate:
+
+```text
+m3-regex-oracle-harness
+com.synexia.m3.RegexOracleHarness
+```
+
+Focused proof:
+
+```bash
+python3 m3/ports/precompute/verify_regex_oracle_harness.py
+mvn -B -ntp -f m3/ports/precompute/pom.xml -Dtest=M3RegexOracleHarnessTest test
+```
