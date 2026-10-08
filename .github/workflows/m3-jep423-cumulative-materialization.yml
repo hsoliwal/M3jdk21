@@ -15,6 +15,7 @@ on:
       - "m3/backports/test_generate_recipe_crates.py"
       - "m3/backports/test_materialize_generated_crates.py"
       - "m3/backports/test_jep423_lineage.py"
+      - "m3/backports/test_jep423_current_admission.py"
       - "m3/backports/recipes/jep-423-region-pinning/**"
       - "m3/tooling/backport-dag/**"
       - ".github/workflows/m3-jep423-cumulative-materialization.yml"
