@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.RegexRequiredLiteral
+displayName: M3JDK21 M3TQ absence gate for general regex patterns
+description: >-
+  Extends the java.util.regex M3TQ absence gate from LITERAL patterns to every compiled pattern:
+  java.util.regex.M3PatternQuery derives the conservative trigram requirement from the JDK node
+  tree with the Synexia MIndexRegexProgram trigram-planner rules (literal runs required,
+  alternation OR, sequences AND, min-0 repetition / classes / anchors / lookarounds / back
+  references unconstrained) and refuses patterns whose pruned search could differ observably
+  from a failed one; Pattern.compile installs it. Ships the jtreg test and the precompute-port
+  differential driver proven against the A5 oracle corpus. TARGET_OWNED_PORT postimages; the
+  JDK parser and engine stay the authority.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-regex-required-literal
+  - com.synexia.rewrite.M3HashPinnedTextSnapshotRecipe:
+      crateName: m3-regex-required-literal

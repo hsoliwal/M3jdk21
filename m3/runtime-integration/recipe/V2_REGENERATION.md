@@ -27,3 +27,13 @@ targets are refused. The former `superseded` entries (jni.cpp, javaClasses.*, St
 are folded into the exact after-images; `JNI_SUPERSESSION.md` remains the custody history.
 `.gitattributes` marks `*.patch` under this directory `-whitespace` because unified-diff blank
 context lines are a single space by format.
+
+## 2026-10-08 re-seal (A1 M3TQ general-pattern gate)
+
+Regenerated after `java/util/regex/M3PatternQuery.java` (new, M3 token) joined the scope and
+`Pattern.java` changed: 65 targets. The same regeneration absorbs four `java/lang` after-images
+that had drifted on master since the previous re-seal (`AbstractStringBuilder.java`,
+`M3StringSearchPrecompute.java`, `String.java`, `StringConcatHelper.java`: String receiver merges
+of 2026-10-08), so `apply.py --check` and `test_recipe.py` are green again on this tree. Same
+upstream preimage `890adb6410` (jdk-21+35); `target_commit` is the owner commit of the gate.
+
