@@ -7,6 +7,12 @@ on:
       - "m3/synexia-consumer-only-*"
     paths:
       - "m3/compatibility/synexia-recipe-home-policy.tsv"
+      - "m3/compatibility/synexia-a3-regex-memory-recipe-receipt-20261008.tsv"
+      - "m3/compatibility/test_synexia_a3_regex_memory_receipt.py"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-lab.yml"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-workflow.yml"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jni-newstring-admission.yml"
+      - "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv"
       - "m3/compatibility/test_synexia_recipe_home_policy.py"
       - "m3/docs/mindex-migration-handoff.md"
       - "m3/compatibility/test_synexia_m3index_ownership_policy.py"
@@ -22,6 +28,12 @@ on:
   pull_request:
     paths:
       - "m3/compatibility/synexia-recipe-home-policy.tsv"
+      - "m3/compatibility/synexia-a3-regex-memory-recipe-receipt-20261008.tsv"
+      - "m3/compatibility/test_synexia_a3_regex_memory_receipt.py"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-lab.yml"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-workflow.yml"
+      - "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jni-newstring-admission.yml"
+      - "m3/tooling/migration-recipes/src/main/resources/com/synexia/rewrite/hash-pinned-java/a3-regex-memory-lab/manifest.tsv"
       - "m3/compatibility/test_synexia_recipe_home_policy.py"
       - "m3/docs/mindex-migration-handoff.md"
       - "m3/compatibility/test_synexia_m3index_ownership_policy.py"
@@ -65,6 +77,7 @@ jobs:
         run: >
           python -m unittest
           m3/compatibility/test_synexia_recipe_home_policy.py
+          m3/compatibility/test_synexia_a3_regex_memory_receipt.py
           m3/compatibility/test_synexia_m3index_ownership_policy.py
       - name: Migration-recipes JUnit ownership proof
         run: >
