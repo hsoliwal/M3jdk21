@@ -46,10 +46,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m py_compile             m3/backports/current_tree_preimage_inventory.py             m3/backports/file_delta_inventory.py             m3/backports/generate_recipe_crates.py             m3/backports/materialize_generated_crates.py             m3/backports/recipes/jep-423-region-pinning/validate_lineage.py
+          python3 -m py_compile             m3/backports/current_tree_preimage_inventory.py             m3/backports/file_delta_inventory.py             m3/backports/generate_recipe_crates.py             m3/backports/materialize_generated_crates.py             m3/backports/recipes/jep-423-region-pinning/validate_lineage.py             m3/backports/recipes/jep-423-region-pinning/validate_current_admission.py
           (
             cd m3/backports
-            python3 -m unittest -v               test_current_tree_preimage_inventory.py               test_file_delta_inventory.py               test_generate_recipe_crates.py               test_materialize_generated_crates.py               test_jep423_lineage.py
+            python3 -m unittest -v               test_current_tree_preimage_inventory.py               test_file_delta_inventory.py               test_generate_recipe_crates.py               test_materialize_generated_crates.py               test_jep423_lineage.py               test_jep423_current_admission.py
           )
 
       - name: 3 - Fetch exact OpenJDK baseline donor and required lineage
@@ -77,31 +77,9 @@ jobs:
           set -euo pipefail
           mkdir -p "$RUNNER_TEMP/jep423"
           python3 m3/backports/current_tree_preimage_inventory.py             --root .             --paths-file m3/backports/recipes/jep-423-region-pinning/CUMULATIVE_ADMIT_PATHS.txt             --out "$RUNNER_TEMP/jep423/CURRENT_PREIMAGES.tsv"             --baseline-git "$UPSTREAM"             --baseline-ref jdk-21+35             --admission-out "$RUNNER_TEMP/jep423/CURRENT_TREE_FILE_ADMISSION.tsv"             --mechanical-paths-out "$RUNNER_TEMP/jep423/MECHANICAL_PATHS.txt"
-          python3 - <<'PY'
-          import csv
-          import os
-          from pathlib import Path
-
-          root = Path(os.environ["RUNNER_TEMP"]) / "jep423"
-          with (root / "CURRENT_TREE_FILE_ADMISSION.tsv").open(
-              encoding="utf-8", newline=""
-          ) as handle:
-              rows = list(csv.DictReader(handle, delimiter="\t"))
-
-          mechanical = [row for row in rows if row["admission"] == "MECHANICAL_FILE_REPLAY"]
-          held = [row for row in rows if row["admission"] == "HOLD_CURRENT_TREE_DRIFT"]
-          if len(rows) != 62 or len(mechanical) != 61 or len(held) != 1:
-              raise SystemExit(
-                  f"JEP423 cumulative admission drift rows={len(rows)} "
-                  f"mechanical={len(mechanical)} held={len(held)}"
-              )
-          expected = "test/hotspot/jtreg/gc/g1/TestEvacuationFailure.java"
-          if held[0]["path"] != expected:
-              raise SystemExit(f"unexpected JEP423 held path: {held}")
-          if held[0]["current_status"] != "ABSENT" or held[0]["baseline_status"] != "PRESENT":
-              raise SystemExit(f"unexpected JEP423 held relation: {held[0]}")
-          print("JEP423_CUMULATIVE_ADMISSION candidates=62 mechanical=61 held=1")
-          PY
+          python3 m3/backports/recipes/jep-423-region-pinning/validate_current_admission.py \
+            --packet m3/backports/recipes/jep-423-region-pinning \
+            --admission "$RUNNER_TEMP/jep423/CURRENT_TREE_FILE_ADMISSION.tsv"
 
       - name: 6 - Generate one source-sealed FILE atom per mechanical path
         shell: bash
@@ -114,86 +92,9 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 - <<'PY'
-          import csv
-          import os
-          from pathlib import Path
-
-          packet = Path("m3/backports/recipes/jep-423-region-pinning")
-          runner = Path(os.environ["RUNNER_TEMP"]) / "jep423"
-          candidates = {
-              line.strip()
-              for line in (packet / "CUMULATIVE_ADMIT_PATHS.txt")
-                  .read_text(encoding="utf-8").splitlines()
-              if line.strip()
-          }
-          mechanical = {
-              line.strip()
-              for line in (runner / "MECHANICAL_PATHS.txt")
-                  .read_text(encoding="utf-8").splitlines()
-              if line.strip()
-          }
-          held = candidates - mechanical
-
-          with (packet / "PATH_CLOSURE.tsv").open(
-              encoding="utf-8", newline=""
-          ) as handle:
-              closure = {
-                  row["path"]
-                  for row in csv.DictReader(handle, delimiter="\t")
-              }
-          preserved = closure - candidates
-
-          with (runner / "JDK21_TO_JEP423_FINAL.tsv").open(
-              encoding="utf-8", newline=""
-          ) as handle:
-              delta = {
-                  row["path"]: row["status"]
-                  for row in csv.DictReader(handle, delimiter="\t")
-                  if row["path"] in mechanical
-              }
-          missing = mechanical - delta.keys()
-          if missing:
-              raise SystemExit(f"mechanical paths absent from donor comparison: {sorted(missing)}")
-          same = {path for path, status in delta.items() if status == "SAME"}
-
-          with (runner / "file-atoms" / "CRATES.tsv").open(
-              encoding="utf-8", newline=""
-          ) as handle:
-              crates = list(csv.DictReader(handle, delimiter="\t"))
-          generated = sum(int(row["target_count"]) for row in crates)
-          if any(int(row["target_count"]) != 1 for row in crates):
-              raise SystemExit("JEP423 FILE lane emitted a multi-target crate")
-
-          with (runner / "file-atoms" / "EXCLUSIONS.tsv").open(
-              encoding="utf-8", newline=""
-          ) as handle:
-              exclusions = list(csv.DictReader(handle, delimiter="\t"))
-          if exclusions:
-              raise SystemExit(f"JEP423 typed exclusions require review: {exclusions}")
-
-          expected_held = {"test/hotspot/jtreg/gc/g1/TestEvacuationFailure.java"}
-          expected_preserved = {
-              "test/hotspot/jtreg/gc/stress/TestJNIBlockFullGC/TestJNIBlockFullGC.java",
-              "test/hotspot/jtreg/gc/stress/TestJNIBlockFullGC/libTestJNIBlockFullGC.c",
-          }
-          if held != expected_held or preserved != expected_preserved:
-              raise SystemExit(
-                  f"JEP423 hold/preserve drift held={sorted(held)} "
-                  f"preserved={sorted(preserved)}"
-              )
-          if generated + len(same) != 61:
-              raise SystemExit(
-                  f"JEP423 mechanical accounting mismatch generated={generated} "
-                  f"same={len(same)}"
-              )
-          if generated + len(same) + len(held) + len(preserved) != 64:
-              raise SystemExit("JEP423 cumulative denominator accounting mismatch")
-          print(
-              f"JEP423_ACCOUNTED generated={generated} same={len(same)} "
-              "held=1 preserved=2 total=64"
-          )
-          PY
+          python3 m3/backports/recipes/jep-423-region-pinning/validate_current_admission.py \
+            --packet m3/backports/recipes/jep-423-region-pinning \
+            --runner "$RUNNER_TEMP/jep423"
 
       - name: 8 - Validate and project the scoped recipe DAG
         shell: bash
