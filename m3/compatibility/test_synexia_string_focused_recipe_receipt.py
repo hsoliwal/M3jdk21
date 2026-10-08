@@ -30,10 +30,14 @@ class SynexiaFocusedStringRecipeReceiptTest(unittest.TestCase):
         with RECEIPT.open(encoding="utf-8", newline="") as handle:
             rows = list(csv.DictReader(handle, delimiter="\t"))
 
-        self.assertEqual(2, len(rows))
+        self.assertEqual(3, len(rows))
         by_lane = {row["lane"]: row for row in rows}
         self.assertEqual(
-            {"adaptive-prepared-literal-search", "exact-utf16-position-masks"},
+            {
+                "adaptive-prepared-literal-search",
+                "exact-utf16-position-masks",
+                "focused-search-superset-acceptance",
+            },
             set(by_lane),
         )
 
@@ -45,7 +49,7 @@ class SynexiaFocusedStringRecipeReceiptTest(unittest.TestCase):
             self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
             self.assertEqual("9859", row["canonical_pr"])
             self.assertEqual(
-                "8473dabb08419af60458fdb1b4458ccb5a4e3854",
+                "6da359cc9fb15eaa1fbf4bb86ff0d634681e1c47",
                 row["canonical_revision"],
             )
             self.assertEqual("NO_TARGET_CANONICAL_DUPLICATE", row["target_recipe_policy"])
@@ -64,6 +68,10 @@ class SynexiaFocusedStringRecipeReceiptTest(unittest.TestCase):
         self.assertEqual(
             "com.synexia.rewrite.M3Jdk21StringExactPositionMasks",
             by_lane["exact-utf16-position-masks"]["canonical_recipe"],
+        )
+        self.assertEqual(
+            "com.synexia.rewrite.M3Jdk21StringFocusedSearchInvariant",
+            by_lane["focused-search-superset-acceptance"]["canonical_recipe"],
         )
 
     def test_runtime_contains_absorbed_focused_lanes(self) -> None:
@@ -93,6 +101,7 @@ class SynexiaFocusedStringRecipeReceiptTest(unittest.TestCase):
         forbidden_files = (
             "m3jdk21-string-adaptive-search.yml",
             "m3jdk21-string-position-masks.yml",
+            "m3jdk21-string-focused-search-invariant.yml",
         )
         for name in forbidden_files:
             self.assertFalse((RECIPE_ROOT / name).exists(), name)
@@ -106,6 +115,11 @@ class SynexiaFocusedStringRecipeReceiptTest(unittest.TestCase):
             )
             self.assertNotIn(
                 "com.synexia.rewrite.M3Jdk21StringExactPositionMasks",
+                text,
+                path.name,
+            )
+            self.assertNotIn(
+                "com.synexia.rewrite.M3Jdk21StringFocusedSearchInvariant",
                 text,
                 path.name,
             )
