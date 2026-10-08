@@ -192,6 +192,65 @@ final class M3String implements CharSequence {
         return level.getFirst();
     }
 
+    /**
+     * Designated String.join adapter with O(log N) temporary M3 references.
+     *
+     * <p>The caller has already converted its CharSequence elements to String, so no
+     * user toString() action is moved across canonical admission. Empty pieces are
+     * excluded exactly as in join(String[]). Adjacent equal-size groups are folded
+     * pairwise, then remaining high groups fold over low suffix groups. The resulting
+     * canonical text always belongs to an M3 owner/range, not a temporary array.</p>
+     */
+    static M3String joinDesignated(
+            String prefix, String suffix, String delimiter, String[] elements, int size) {
+        Objects.requireNonNull(prefix, "prefix");
+        Objects.requireNonNull(suffix, "suffix");
+        Objects.requireNonNull(delimiter, "delimiter");
+        String[] checked = Objects.requireNonNull(elements, "elements");
+        Objects.checkFromIndexSize(0, size, checked.length);
+
+        long maximumPieces = size == 0 ? 2L : 2L * size + 1L;
+        M3String[] levels =
+                new M3String[Long.SIZE - Long.numberOfLeadingZeros(maximumPieces)];
+        joinAddDesignated(levels, prefix);
+        if (size != 0) {
+            joinAddDesignated(levels, checked[0]);
+            for (int index = 1; index < size; index++) {
+                joinAddDesignated(levels, delimiter);
+                joinAddDesignated(levels, checked[index]);
+            }
+        }
+        joinAddDesignated(levels, suffix);
+
+        M3String result = EMPTY;
+        for (int level = 0; level < levels.length; level++) {
+            M3String value = levels[level];
+            if (value != null) {
+                result = result.length() == 0 ? value : M3StringPool.concat(value, result);
+            }
+        }
+        return result;
+    }
+
+    private static void joinAddDesignated(M3String[] levels, String source) {
+        String checked = Objects.requireNonNull(source, "join piece");
+        M3String carry = checked.m3();
+        if (carry == null && checked.length() != 0) {
+            carry = M3String.admit(checked.value(), checked.coder());
+        }
+        if (carry == null || carry.length() == 0) return;
+        for (int level = 0; level < levels.length; level++) {
+            M3String previous = levels[level];
+            if (previous == null) {
+                levels[level] = carry;
+                return;
+            }
+            levels[level] = null;
+            carry = M3StringPool.concat(previous, carry);
+        }
+        throw new InternalError("M3 String.join carry level exhausted");
+    }
+
     static M3String canonicalize(String source) {
         String checked = Objects.requireNonNull(source, "source");
         M3String storage = checked.m3();
