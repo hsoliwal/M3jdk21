@@ -75,6 +75,24 @@ This packet initially records **SOURCE_PIN_ONLY** for every family.
 Changing a row to `VENDOR_CUSTODY`, `TARGET_ADAPTER`, or `ACCEPTED` requires an additive
 successor receipt. Editing the status alone is invalid.
 
+## Promotion-phase authority
+
+The mirrored serial phase plan is:
+
+`STRING -> ARRAYS -> COLLECTIONS -> AST_COMPILER -> REMAINING_FAMILIES`.
+
+It is stored at:
+
+`m3/synexia-import/current-full-borrow/promotion-phases.tsv`.
+
+`ARRAYS` is deliberately a **target promotion phase**, not a new Synexia source family. It consumes
+qualified foundation/data-structure/native mechanics, while M3JDK21 retains Java array and VM
+authority for fixed length, reified component type, covariance/`ArrayStoreException`, bounds,
+identity/clone/overlapping `arraycopy`, GC barriers and JNI acquire/release behavior.
+
+Every phase remains `PLANNED` in this receiver. The phase file cannot advance a family or runtime
+state by itself.
+
 ## Ordered product work
 
 The existing target order remains authoritative:
