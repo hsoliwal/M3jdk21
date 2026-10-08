@@ -7,6 +7,8 @@ or public precompute surfaces.
 """
 from pathlib import Path
 import re
+import os
+import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -282,14 +284,21 @@ for forbidden in [
     if forbidden in facts:
         fail(f"donor identity/tokenization fact leaked into M3StringFacts: {forbidden}")
 
-# M3String must remain owner + coordinate only.
-instance_fields = re.findall(
-    r"^\s*private\s+final\s+([\w.<>\[\]]+)\s+(\w+)\s*;",
-    m3,
-    flags=re.MULTILINE,
-)
-if instance_fields != [("M3StringOwner", "owner"), ("long", "value")]:
-    fail(f"M3String instance fields changed: {instance_fields!r}")
+# M3String must remain owner + coordinate only. Inspect compiler-parsed direct members.
+def check_m3string_layout() -> None:
+    java = str(Path(os.environ["JAVA_HOME"]) / "bin/java") if os.environ.get("JAVA_HOME") else "java"
+    command = [java, "--source", "21",
+               str(ROOT / "m3/runtime-integration/src/main/java/M3StringLayout.java"),
+               str(ROOT / "src/java.base/share/classes/java/lang/M3String.java")]
+    try:
+        result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, timeout=45)
+    except (OSError, subprocess.TimeoutExpired) as error:
+        fail(f"M3String layout compiler unavailable or timed out: {error}")
+    if result.returncode != 0 or result.stdout.strip() != "M3_STRING_LAYOUT_OK":
+        fail(f"M3String layout check failed: {result.stderr.strip()} {result.stdout.strip()}")
+
+
+check_m3string_layout()
 
 # Canonical value/owners/facts may not retain array payload.
 for path, text in [
