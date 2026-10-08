@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 public class M3StringLiteralSplitTest {
     private static final String[] LITERALS = {
@@ -98,7 +99,19 @@ public class M3StringLiteralSplitTest {
     }
 
     private static void compare(String input, String regex, int limit) {
-        Pattern pattern = Pattern.compile(regex);
+        Pattern pattern;
+        try {
+            pattern = Pattern.compile(regex);
+        } catch (PatternSyntaxException invalid) {
+            // An invalid regex must fail identically through String.split.
+            try {
+                input.split(regex, limit);
+                throw new AssertionError("String.split accepted an invalid regex " + show(regex));
+            } catch (PatternSyntaxException expected) {
+                checks++;
+                return;
+            }
+        }
         check(Arrays.equals(pattern.split(input, limit), input.split(regex, limit)),
                 "split", input, regex, limit);
         check(Arrays.equals(pattern.splitWithDelimiters(input, limit), input.splitWithDelimiters(regex, limit)),
