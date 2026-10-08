@@ -68,6 +68,35 @@ final class M3SynexiaRecipeHomePolicyTest {
     }
 
     @Test
+    void stringRecipeDescriptorsDeclareCanonicalSynexiaOwners() throws Exception {
+        Path root = repositoryRoot();
+        Map<String, String[]> rows = rows();
+
+        Map<String, String[]> expected = Map.of(
+                "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-stream-traversal.yml",
+                new String[] {"RECEIVER_ADAPTER_ONLY", "com.synexia.rewrite.M3Jdk21StringDirectStreamTraversal"},
+                "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-canonical-dag-master-repair.yml",
+                new String[] {"TARGET_PRODUCT_ADAPTER", "synexia.m3jdk.string.canonical-dag.20261006"},
+                "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-regex-string-precompute-v2.yml",
+                new String[] {"MIGRATION_RESIDUE_NOT_CANONICAL", "com.synexia.indexstring.M3InstallCodeTextRegexPrecompute"},
+                "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-mechanical-donor-map.yml",
+                new String[] {"MIGRATION_RESIDUE_NOT_CANONICAL", "com.synexia.M3MechanicalDonorShapeReview;com.synexia.rewrite.M3MechanicalPrecomputeInvariant"});
+
+        for (Map.Entry<String, String[]> entry : expected.entrySet()) {
+            String[] row = rows.get(entry.getKey());
+            assertNotNull(row, entry.getKey());
+            assertEquals(entry.getValue()[0], row[4], entry.getKey());
+            assertEquals(entry.getValue()[1], row[5], entry.getKey());
+            assertEquals("true", row[7], entry.getKey());
+
+            String descriptor = Files.readString(root.resolve(entry.getKey()));
+            for (String owner : entry.getValue()[1].split(";")) {
+                assertTrue(descriptor.contains(owner), entry.getKey() + " -> " + owner);
+            }
+        }
+    }
+
+    @Test
     void jdkBackportNamespaceRemainsTargetSpecific() throws Exception {
         Map<String, String[]> rows = rows();
         String[] backport = rows.get(
