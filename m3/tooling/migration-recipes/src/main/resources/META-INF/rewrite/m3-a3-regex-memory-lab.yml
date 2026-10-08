@@ -2,10 +2,12 @@
 ---
 type: specs.openrewrite.org/v1beta/recipe
 name: com.m3.a3.RegexMemoryLabDelivery
-displayName: Install A3 in-memory regex mastery extension
+displayName: Receive the Synexia-owned A3 regex-memory lab
 description: >-
-  Source-sealed installation of the in-memory Java 21 compiler, precompiled regex/string matrix,
-  and A3Lab receipt integration. Candidate-only; no JDK product source or promotion authority.
+  Frozen M3JDK receiver for canonical Synexia recipe
+  com.synexia.rewrite.M3A3RegexMemoryLab at recipe revision
+  69704fe7b6f455042c6c90f959d9af4fa48ce9e9. The exact local hash-pinned packet remains
+  target replay/proof residue; reusable A3 compiler/regex-matrix evolution belongs in Synexia.
 recipeList:
   - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
       crateName: a3-regex-memory-lab

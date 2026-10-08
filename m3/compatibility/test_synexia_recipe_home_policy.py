@@ -72,6 +72,37 @@ class SynexiaRecipeHomePolicyTest(unittest.TestCase):
         )
 
         self.assertEqual(
+            "RECEIVER_ADAPTER_ONLY",
+            by_surface[
+                "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-lab.yml"
+            ]["disposition"],
+        )
+        self.assertEqual(
+            "com.synexia.rewrite.M3A3RegexMemoryLab",
+            by_surface[
+                "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-lab.yml"
+            ]["canonical_owner"],
+        )
+        self.assertEqual(
+            "TARGET_PRODUCT_ADAPTER",
+            by_surface[
+                "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-a3-regex-memory-workflow.yml"
+            ]["disposition"],
+        )
+        self.assertEqual(
+            "TARGET_PRODUCT_ADAPTER",
+            by_surface[
+                "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jni-newstring-admission.yml"
+            ]["disposition"],
+        )
+        self.assertEqual(
+            "com.synexia.rewrite.M3JdkHandoff",
+            by_surface[
+                "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-jni-newstring-admission.yml"
+            ]["canonical_owner"],
+        )
+
+        self.assertEqual(
             "JDK_TARGET_SPECIFIC",
             by_surface[
                 "m3/tooling/migration-recipes/src/main/java/com/m3/rewrite/backport/**"
