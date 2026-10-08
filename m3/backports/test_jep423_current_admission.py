@@ -80,6 +80,62 @@ class JEP423CurrentAdmissionTest(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "admission drift"):
                 MODULE.admission(packet, admission)
 
+
+    def test_accounting_requires_exact_path_donor_receipt(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            packet = self.packet(root, 2, 0)
+            request = packet / "CURRENT_TREE_PROOF_REQUEST.tsv"
+            request.write_text(
+                request.read_text(encoding="utf-8")
+                + "path_donor_overrides\t1\n"
+                + "donor_override_file\tpacket/PATH_DONOR_OVERRIDES.tsv\n",
+                encoding="utf-8",
+            )
+            donor = "a" * 40
+            (packet / "PATH_DONOR_OVERRIDES.tsv").write_text(
+                "path\tdonor_ref\n"
+                f"a.java\t{donor}\n",
+                encoding="utf-8",
+            )
+
+            runner = root / "runner"
+            (runner / "file-atoms").mkdir(parents=True)
+            (runner / "MECHANICAL_PATHS.txt").write_text(
+                "a.java\nb.java\n", encoding="utf-8"
+            )
+            (runner / "JDK21_TO_JEP423_FINAL.tsv").write_text(
+                "release\tpath\tstatus\n"
+                "22\ta.java\tMODIFIED\n"
+                "22\tb.java\tSAME\n",
+                encoding="utf-8",
+            )
+            (runner / "file-atoms" / "CRATES.tsv").write_text(
+                "crate_name\trelease\tbaseline_ref\tdonor_ref\ttarget_count\t"
+                "first_path\tlast_path\tstatus\n"
+                f"crate-a\t22\tjdk-21+35\t{donor}\t1\ta.java\ta.java\t"
+                "CANDIDATE_UNVERIFIED\n",
+                encoding="utf-8",
+            )
+            (runner / "file-atoms" / "EXCLUSIONS.tsv").write_text(
+                "path\treason\n", encoding="utf-8"
+            )
+
+            self.assertEqual(
+                "JEP423_ACCOUNTED generated=1 same=1 held=0 preserved=1 total=3",
+                MODULE.accounting(packet, runner),
+            )
+
+            (runner / "file-atoms" / "CRATES.tsv").write_text(
+                "crate_name\trelease\tbaseline_ref\tdonor_ref\ttarget_count\t"
+                "first_path\tlast_path\tstatus\n"
+                "crate-a\t22\tjdk-21+35\t" + ("b" * 40)
+                + "\t1\ta.java\ta.java\tCANDIDATE_UNVERIFIED\n",
+                encoding="utf-8",
+            )
+            with self.assertRaisesRegex(ValueError, "donor override receipt drift"):
+                MODULE.accounting(packet, runner)
+
     def test_accounting_uses_packet_and_compatibility_split(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
