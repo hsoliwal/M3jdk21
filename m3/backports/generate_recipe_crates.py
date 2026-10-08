@@ -120,7 +120,8 @@ def _donor_overrides(path_file: Path | None) -> dict[str, str]:
         ref = row["donor_ref"].strip()
         if (
             not path
-            or not ref
+            or len(ref) != 40
+            or any(ch not in "0123456789abcdef" for ch in ref)
             or path.startswith("/")
             or "\\" in path
             or ".." in path.split("/")
