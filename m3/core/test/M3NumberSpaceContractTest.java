@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Arrays;
 import com.m3.text.M3NumberSpace;
+import com.m3.text.LocalM3StringPiece;
 
 /** Contract proof for the source-manifest to M3NumberSpace owner mapping. */
 public final class M3NumberSpaceContractTest {
@@ -26,6 +27,7 @@ public final class M3NumberSpaceContractTest {
         check(M3NumberSpace.MAX_VALUE == 10_000);
         check(space.precomputedValueCount() == 10_001);
         check(space.number(0).storageIdentity().equals(space.number(10_000).storageIdentity()));
+        check(space.number(0).encoding() == LocalM3StringPiece.Encoding.UTF16_LE);
         check(space.spelling(10_000).equals("10000"));
         check(space.parse(new View("10000")) == space.number(10_000));
 
