@@ -1,266 +1,270 @@
 {
- "schema": "M3_RUNTIME_INTEGRATION_RECIPE_V2",
- "base_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
- "upstream_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
- "target_commit": "5b4e2eebccbb072dbd405e61e5fbb28a9de2648b",
- "patch_sha256": "61fab01dc588f026809fddc1482881d96425b5c6ffad8c54f06cd32d49747ee8",
- "scope": "M3 String runtime integration: every src/** file whose upstream->master delta carries M3/mindex tokens plus the four token-free String-runtime hooks; JEP/backport files owned by other hash-pinned crates are excluded",
- "files": {
-  "src/hotspot/share/cds/archiveHeapWriter.cpp": {
-   "before": "e66950aa7450409cd03ffda597f35e5330875b1c055eaf15dfe16f0403566d2b",
-   "after": "fa8ea0f123a27055fde22d303dab7db87dc6f93ec8c8ebc34748ac4e6df27cf1"
-  },
-  "src/hotspot/share/classfile/javaClasses.cpp": {
-   "before": "a358a29d0d5687625eba69a6be0932c67d8a6d0ac0b05f1d225288cf6d6af91a",
-   "after": "10816a3adb62ae3dd5b7fdefb79a43947637fb90924298ace56c8320ea4d60cb"
-  },
-  "src/hotspot/share/classfile/javaClasses.hpp": {
-   "before": "88659079f7621ab864b7dde6c19c549e49be862cb1d9639108ac85ac473e93e5",
-   "after": "36a6ae73f908a42bd565ea8caca830f7de63e423092c92141f0fd4110dc75df3"
-  },
-  "src/hotspot/share/classfile/javaClasses.inline.hpp": {
-   "before": "02f638693052e072687f003cb7da9b2d7f34b40b87e89616b93b9d3581bf94a2",
-   "after": "18edfbc5b4ae95130b6fcfe19fd9927abd0e4cc5504129d9a20b025b10f0b7a1"
-  },
-  "src/hotspot/share/classfile/stringTable.cpp": {
-   "before": "ffa3118dfef5512305b4fb50e94c053e307c5e6fca1134b2cdb22193457da6b8",
-   "after": "129f6153a28d738e5dd9de8e0975b73735a3c6268046ec7b71f3f69adb460178"
-  },
-  "src/hotspot/share/classfile/vmClassMacros.hpp": {
-   "before": "26a9809aec481374f463c0c36857b939b17c360d0c828d7cd3f731a5e450933b",
-   "after": "e71ea245f54053fbdd099cc53f45dc4e2294d3d571e8412ccab2dbbc21f34a12"
-  },
-  "src/hotspot/share/classfile/vmIntrinsics.cpp": {
-   "before": "44609d2bfe3053e1c6e330de440cbb9473bdb499fc4d03a31ab1e3da0f9c6aa3",
-   "after": "eaa4cf151155de4a31cf47a5147ce842872ea453ef0a798954e05ea32200c5b9"
-  },
-  "src/hotspot/share/classfile/vmSymbols.hpp": {
-   "before": "2f669bd835fc7c1696926f9e34e88e872a56c200b2511a537f1ec7344f3f1279",
-   "after": "4f752ab79abf854d144e53118a2cc57a4b3cc2432140e9297079cca86dd2abab"
-  },
-  "src/hotspot/share/gc/shared/stringdedup/stringDedup.cpp": {
-   "before": "23b3aa46e740e746f05b483e371c627a6ec629026638b53085af8f4cb82cb333",
-   "after": "15cb52369aa1a879ccb2902adb94d5055647d4b82cf54e7409939fc6ba804377"
-  },
-  "src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp": {
-   "before": "aea6dd85f2cdb2af3210386078138ed7fac45c6b8fe0c214516272281f5cb11a",
-   "after": "558422c57828be5e0f8d3fbdead9ee4fa0ab9f8b504487baa9199ebfb2b2dcd8"
-  },
-  "src/hotspot/share/jfr/recorder/jfrRecorder.cpp": {
-   "before": "7649630972fa47fbd4cc5f76c8efa1c320a0f93f725c64d6016ca331305b7906",
-   "after": "98555ee5b3f195a468461f43428c1f2db535d2a85b38d239d220f3494c3ed6ec"
-  },
-  "src/hotspot/share/opto/stringopts.cpp": {
-   "before": "2e03311c16a66564776d9b89671e49424df31b85f3ecb3b4407a8872ab12da64",
-   "after": "a278409363087f891f36fba0fd4c9d7ad2aee4784cd445a655d7fd07305127cd"
-  },
-  "src/hotspot/share/prims/jni.cpp": {
-   "before": "4d9d6b5e89f6c67e20f7d3d3b3a42ca6532dd51b108a1c6e02d9bfaf4c446c32",
-   "after": "ae1fdb7967a8c67bf1a29078387110d9f733b5055de7b61156c7562c098e2a04"
-  },
-  "src/hotspot/share/prims/jvmtiTagMap.cpp": {
-   "before": "40464d1c54959521b073f751f06c68a0afdeed222d00aa21b7504a0f806d54d3",
-   "after": "477ba6e96bc62f5f315c3290e9c7f544bac6395731dda6bc4615103b714ddb13"
-  },
-  "src/hotspot/share/runtime/arguments.cpp": {
-   "before": "2693c76fa494e180c15f78915557c6c8773a773ed9ec9cfc9f27f853fb7580e4",
-   "after": "cde11381b3d49642dee5988d0188e6f3ffc0dcd3a7789b3abec12a00eb832dc5"
-  },
-  "src/hotspot/share/runtime/globals.hpp": {
-   "before": "784ba7989d4008145ce02cdd66cb74a7bbb899d2cdac91119ce2b80b57c88bc4",
-   "after": "cb97b8978fa8f94ad5c1088b1616f4aef14fef9b6f454f21bd96449a2a3e0fc3"
-  },
-  "src/hotspot/share/runtime/threads.cpp": {
-   "before": "20d612428570fef24842a08e0628dbf4b660c9a4b86236124d900060cb7f3ed9",
-   "after": "d715f6bc169184ebb6e06b0ace2e8dd21f50077e1cdbfebc04b0fae73d7a0531"
-  },
-  "src/hotspot/share/services/diagnosticCommand.cpp": {
-   "before": "5861a3cb8fbf551681654e04deeb8c61b8b5a7913d9a4fb10ade48ee7b9a2611",
-   "after": "4673fdbcfde7930471ba9bc50dc69334570db017479a9531bf58776a705d400f"
-  },
-  "src/hotspot/share/services/finalizerService.cpp": {
-   "before": "0ce3ca248b38336fb1039808afa9f2d3721cdaa4b03c85340888cc0a8f125438",
-   "after": "2438cc3588b1f937175e62e229feb1090a59c5aa18657fe03d64cd2a937029dc"
-  },
-  "src/java.base/share/classes/java/lang/AbstractStringBuilder.java": {
-   "before": "13f92a675d002851095aca8464e30c52c2a27a2d585b4da6c7263a787c11242d",
-   "after": "9a502392c96175e025bbd992fd15482ef2cf0ee4a2ca083a293d5fd41e6448ce"
-  },
-  "src/java.base/share/classes/java/lang/M3String.java": {
-   "before": null,
-   "after": "a8bee8dc1c99e798b53e29f70368bdc756a53b5d1759f596da35213987ed2fb6"
-  },
-  "src/java.base/share/classes/java/lang/M3StringAtom.java": {
-   "before": null,
-   "after": "20905d45d3e96e0fb1b37b0482eff71888264b351ab001c07e9b0d56d9c3a31f"
-  },
-  "src/java.base/share/classes/java/lang/M3StringFacts.java": {
-   "before": null,
-   "after": "36c9cb73608cf2f7ad40be00493def3c17cfd4653b5f450750f3595d1eb677cd"
-  },
-  "src/java.base/share/classes/java/lang/M3StringOwner.java": {
-   "before": null,
-   "after": "cd01663a0b50d842ecc2031c485bd2d050f98b5226f5cdddce63dd0338ec0d74"
-  },
-  "src/java.base/share/classes/java/lang/M3StringPool.java": {
-   "before": null,
-   "after": "c0e3b63830c3540e39e51ecc7522e1294f92baa85ef7e3963f2c21d3762fa35b"
-  },
-  "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java": {
-   "before": null,
-   "after": "b6372e4280cc46f2cf5a1baa0b42c35341eea834dac9449fa5697b6aa20a0f2f"
-  },
-  "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java": {
-   "before": null,
-   "after": "f009146ebad1cbec3570c583ef015b09dc92ed3c3a007c6722810392fc6f9fa4"
-  },
-  "src/java.base/share/classes/java/lang/M3StringTuple.java": {
-   "before": null,
-   "after": "0788834635dee7c22e94b92fc7d1b42bdc42c7b1d8948efabc4e94062173d4b9"
-  },
-  "src/java.base/share/classes/java/lang/String.java": {
-   "before": "4689d77ee91265cfeff65dbba856f690a4a741ac98b9664a9055868d9698743b",
-   "after": "5d718e182db3a29306635857d3a3f5a7c7cd7f18c638988ec5a46d5a518e5866"
-  },
-  "src/java.base/share/classes/java/lang/StringConcatHelper.java": {
-   "before": "4c27b33ec75a8dee6ffad3c7bbb7bf5922fd0e07dd6f0720caa25bdbbb13a0f1",
-   "after": "9e247659c7af6834e5aab378e98a61a843fc5c21497decd2e85bab445cc4da34"
-  },
-  "src/java.base/share/classes/java/lang/System.java": {
-   "before": "c51b88b6dc193b6447441769e24e89ebdbc3482796889a7506064bf07a7a8020",
-   "after": "4dcf8f1efbfe1b6ee1e9c5417fa3df50647bb55dc636411d783c844aa5e0847c"
-  },
-  "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java": {
-   "before": "847d49e8b3b8de4183c4551c0965d9919ab942c0bef996d787f1f36174579010",
-   "after": "efe0c96211a13aa34f0fbc55f4bd4190287846c329b2f25c3cbcf97185a709de"
-  },
-  "src/java.base/share/classes/java/util/regex/Matcher.java": {
-   "before": "7ae5ae6dc7f763c152c8f872af98551f74abf67cc2a53e331056287226e949ca",
-   "after": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78"
-  },
-  "src/java.base/share/classes/java/util/regex/Pattern.java": {
-   "before": "feccfd9bbb4208790fc4b3f2b21e9f12fce7040b22d0fff39086b5f73bd1813f",
-   "after": "8cbd439235c592ecc98eb2a26f8494108c18a6521e715431ca1bec6db1e0b170"
-  },
-  "src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java": {
-   "before": "ccb649b92546459692c48b40ca75e960643e7ad234c8e1f43e1188504d3af29c",
-   "after": "b096377681dbc135d90f26abc972769557ae7c271d48ad59d241e149658438e3"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3Address28.java": {
-   "before": null,
-   "after": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java": {
-   "before": null,
-   "after": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3Bits.java": {
-   "before": null,
-   "after": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java": {
-   "before": null,
-   "after": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3CB.java": {
-   "before": null,
-   "after": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3CI.java": {
-   "before": null,
-   "after": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3Class.java": {
-   "before": null,
-   "after": "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java": {
-   "before": null,
-   "after": "cb7dc87b4fb4849bd145520014bcd8cd55168134cf8b482dba495219b8a2344b"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java": {
-   "before": null,
-   "after": "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java": {
-   "before": null,
-   "after": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3Field.java": {
-   "before": null,
-   "after": "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java": {
-   "before": null,
-   "after": "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java": {
-   "before": null,
-   "after": "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3MappedStringBacking.java": {
-   "before": null,
-   "after": "f84d4d7763156d615d32b7a1024931e18073a1122227d8228d8638332407bd01"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3Member.java": {
-   "before": null,
-   "after": "c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3MemberFlags.java": {
-   "before": null,
-   "after": "f436e0fdfbe44074c3855944e005707e833ce96fa34b24cb300c3957c1cc24be"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3MemberKind.java": {
-   "before": null,
-   "after": "0c24a919386302c498d94e3a4d0bfffbe96084f7c93b62e23799646b4502496b"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3Method.java": {
-   "before": null,
-   "after": "f7651b04fa197f47904f5258ba2150242a9801bbcbef6e19fa90ed296fef8f58"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3PC.java": {
-   "before": null,
-   "after": "e38403e001ea950c5e789c854f4f4e8004253a4a7545aa6e044a52112b592898"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java": {
-   "before": null,
-   "after": "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": {
-   "before": null,
-   "after": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3StringBacking.java": {
-   "before": null,
-   "after": "bcd2fe86a21464f7c65fd582368362d327e54b143dc05df13b31c1a029ecb251"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java": {
-   "before": null,
-   "after": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4"
-  },
-  "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": {
-   "before": null,
-   "after": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a"
-  },
-  "src/java.base/share/legal/synexia.md": {
-   "before": null,
-   "after": "2d1d742093ddfd2424442ff27db87af57c9c2b7eb73e68670a05fc5f7d91860a"
-  },
-  "src/java.base/share/native/libjava/M3BitLane28.c": {
-   "before": null,
-   "after": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f"
-  },
-  "src/java.base/share/native/libjava/String.c": {
-   "before": "4ca26f746733a6b954700fb14cad8a8a0a20100b834e5ad407a360c2b83cd311",
-   "after": "ee9d9bfa986259600d6fe95e21e3cb904a4f6541ce24c6391bc50715c6a054ef"
-  },
-  "src/java.base/share/native/libjava/jni_util.c": {
-   "before": "31596047469d6107b1e515eb04f3e9a9d98719ba50d2d9d753309eef51b2ce94",
-   "after": "4669c033c1b820ee90eb7fbe9f0c3ead9681312853e5675d360bb8db81e697f7"
-  },
-  "src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/OopUtilities.java": {
-   "before": "d1f10780acf7d13ec54cf37eb2a49c1b845cc884ec30b583a6cd72521c213560",
-   "after": "f964925e59e6b1ef233d3508a6ba901afc9c4bf1430b60fc6ea0f71d6999cc86"
+  "schema": "M3_RUNTIME_INTEGRATION_RECIPE_V2",
+  "base_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
+  "upstream_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
+  "target_commit": "ce17ebce9bca5db973947a6d42cc70b79abd99ef",
+  "patch_sha256": "8b7c50d1009bacef0bc6a1a70e1fb83a6f3d18f47f0686e7b34caa91a90c5227",
+  "scope": "M3 String runtime integration: every src/** file whose upstream->master delta carries M3/mindex tokens plus the four token-free String-runtime hooks; JEP/backport files owned by other hash-pinned crates are excluded",
+  "files": {
+    "src/hotspot/share/cds/archiveHeapWriter.cpp": {
+      "before": "e66950aa7450409cd03ffda597f35e5330875b1c055eaf15dfe16f0403566d2b",
+      "after": "fa8ea0f123a27055fde22d303dab7db87dc6f93ec8c8ebc34748ac4e6df27cf1"
+    },
+    "src/hotspot/share/classfile/javaClasses.cpp": {
+      "before": "a358a29d0d5687625eba69a6be0932c67d8a6d0ac0b05f1d225288cf6d6af91a",
+      "after": "10816a3adb62ae3dd5b7fdefb79a43947637fb90924298ace56c8320ea4d60cb"
+    },
+    "src/hotspot/share/classfile/javaClasses.hpp": {
+      "before": "88659079f7621ab864b7dde6c19c549e49be862cb1d9639108ac85ac473e93e5",
+      "after": "36a6ae73f908a42bd565ea8caca830f7de63e423092c92141f0fd4110dc75df3"
+    },
+    "src/hotspot/share/classfile/javaClasses.inline.hpp": {
+      "before": "02f638693052e072687f003cb7da9b2d7f34b40b87e89616b93b9d3581bf94a2",
+      "after": "18edfbc5b4ae95130b6fcfe19fd9927abd0e4cc5504129d9a20b025b10f0b7a1"
+    },
+    "src/hotspot/share/classfile/stringTable.cpp": {
+      "before": "ffa3118dfef5512305b4fb50e94c053e307c5e6fca1134b2cdb22193457da6b8",
+      "after": "129f6153a28d738e5dd9de8e0975b73735a3c6268046ec7b71f3f69adb460178"
+    },
+    "src/hotspot/share/classfile/vmClassMacros.hpp": {
+      "before": "26a9809aec481374f463c0c36857b939b17c360d0c828d7cd3f731a5e450933b",
+      "after": "e71ea245f54053fbdd099cc53f45dc4e2294d3d571e8412ccab2dbbc21f34a12"
+    },
+    "src/hotspot/share/classfile/vmIntrinsics.cpp": {
+      "before": "44609d2bfe3053e1c6e330de440cbb9473bdb499fc4d03a31ab1e3da0f9c6aa3",
+      "after": "eaa4cf151155de4a31cf47a5147ce842872ea453ef0a798954e05ea32200c5b9"
+    },
+    "src/hotspot/share/classfile/vmSymbols.hpp": {
+      "before": "2f669bd835fc7c1696926f9e34e88e872a56c200b2511a537f1ec7344f3f1279",
+      "after": "4f752ab79abf854d144e53118a2cc57a4b3cc2432140e9297079cca86dd2abab"
+    },
+    "src/hotspot/share/gc/shared/stringdedup/stringDedup.cpp": {
+      "before": "23b3aa46e740e746f05b483e371c627a6ec629026638b53085af8f4cb82cb333",
+      "after": "15cb52369aa1a879ccb2902adb94d5055647d4b82cf54e7409939fc6ba804377"
+    },
+    "src/hotspot/share/gc/shared/stringdedup/stringDedupTable.cpp": {
+      "before": "aea6dd85f2cdb2af3210386078138ed7fac45c6b8fe0c214516272281f5cb11a",
+      "after": "558422c57828be5e0f8d3fbdead9ee4fa0ab9f8b504487baa9199ebfb2b2dcd8"
+    },
+    "src/hotspot/share/jfr/recorder/jfrRecorder.cpp": {
+      "before": "7649630972fa47fbd4cc5f76c8efa1c320a0f93f725c64d6016ca331305b7906",
+      "after": "98555ee5b3f195a468461f43428c1f2db535d2a85b38d239d220f3494c3ed6ec"
+    },
+    "src/hotspot/share/opto/stringopts.cpp": {
+      "before": "2e03311c16a66564776d9b89671e49424df31b85f3ecb3b4407a8872ab12da64",
+      "after": "a278409363087f891f36fba0fd4c9d7ad2aee4784cd445a655d7fd07305127cd"
+    },
+    "src/hotspot/share/prims/jni.cpp": {
+      "before": "4d9d6b5e89f6c67e20f7d3d3b3a42ca6532dd51b108a1c6e02d9bfaf4c446c32",
+      "after": "ae1fdb7967a8c67bf1a29078387110d9f733b5055de7b61156c7562c098e2a04"
+    },
+    "src/hotspot/share/prims/jvmtiTagMap.cpp": {
+      "before": "40464d1c54959521b073f751f06c68a0afdeed222d00aa21b7504a0f806d54d3",
+      "after": "477ba6e96bc62f5f315c3290e9c7f544bac6395731dda6bc4615103b714ddb13"
+    },
+    "src/hotspot/share/runtime/arguments.cpp": {
+      "before": "2693c76fa494e180c15f78915557c6c8773a773ed9ec9cfc9f27f853fb7580e4",
+      "after": "cde11381b3d49642dee5988d0188e6f3ffc0dcd3a7789b3abec12a00eb832dc5"
+    },
+    "src/hotspot/share/runtime/globals.hpp": {
+      "before": "784ba7989d4008145ce02cdd66cb74a7bbb899d2cdac91119ce2b80b57c88bc4",
+      "after": "cb97b8978fa8f94ad5c1088b1616f4aef14fef9b6f454f21bd96449a2a3e0fc3"
+    },
+    "src/hotspot/share/runtime/threads.cpp": {
+      "before": "20d612428570fef24842a08e0628dbf4b660c9a4b86236124d900060cb7f3ed9",
+      "after": "d715f6bc169184ebb6e06b0ace2e8dd21f50077e1cdbfebc04b0fae73d7a0531"
+    },
+    "src/hotspot/share/services/diagnosticCommand.cpp": {
+      "before": "5861a3cb8fbf551681654e04deeb8c61b8b5a7913d9a4fb10ade48ee7b9a2611",
+      "after": "4673fdbcfde7930471ba9bc50dc69334570db017479a9531bf58776a705d400f"
+    },
+    "src/hotspot/share/services/finalizerService.cpp": {
+      "before": "0ce3ca248b38336fb1039808afa9f2d3721cdaa4b03c85340888cc0a8f125438",
+      "after": "2438cc3588b1f937175e62e229feb1090a59c5aa18657fe03d64cd2a937029dc"
+    },
+    "src/java.base/share/classes/java/lang/AbstractStringBuilder.java": {
+      "before": "13f92a675d002851095aca8464e30c52c2a27a2d585b4da6c7263a787c11242d",
+      "after": "a5e7213ca951fab21d6db842804a8abd79e90f924ec672de6c4c455cdebb47d5"
+    },
+    "src/java.base/share/classes/java/lang/M3String.java": {
+      "before": null,
+      "after": "a8bee8dc1c99e798b53e29f70368bdc756a53b5d1759f596da35213987ed2fb6"
+    },
+    "src/java.base/share/classes/java/lang/M3StringAtom.java": {
+      "before": null,
+      "after": "20905d45d3e96e0fb1b37b0482eff71888264b351ab001c07e9b0d56d9c3a31f"
+    },
+    "src/java.base/share/classes/java/lang/M3StringFacts.java": {
+      "before": null,
+      "after": "36c9cb73608cf2f7ad40be00493def3c17cfd4653b5f450750f3595d1eb677cd"
+    },
+    "src/java.base/share/classes/java/lang/M3StringOwner.java": {
+      "before": null,
+      "after": "cd01663a0b50d842ecc2031c485bd2d050f98b5226f5cdddce63dd0338ec0d74"
+    },
+    "src/java.base/share/classes/java/lang/M3StringPool.java": {
+      "before": null,
+      "after": "c0e3b63830c3540e39e51ecc7522e1294f92baa85ef7e3963f2c21d3762fa35b"
+    },
+    "src/java.base/share/classes/java/lang/M3StringPositionPrecompute.java": {
+      "before": null,
+      "after": "b6372e4280cc46f2cf5a1baa0b42c35341eea834dac9449fa5697b6aa20a0f2f"
+    },
+    "src/java.base/share/classes/java/lang/M3StringSearchPrecompute.java": {
+      "before": null,
+      "after": "ce6ae17859adb67fefe5fe127db102f0327a99ed89796a1194d4caaf075c46b4"
+    },
+    "src/java.base/share/classes/java/lang/M3StringTuple.java": {
+      "before": null,
+      "after": "0788834635dee7c22e94b92fc7d1b42bdc42c7b1d8948efabc4e94062173d4b9"
+    },
+    "src/java.base/share/classes/java/lang/String.java": {
+      "before": "4689d77ee91265cfeff65dbba856f690a4a741ac98b9664a9055868d9698743b",
+      "after": "9a0be5dbeb399eecefec9f0e890d7af7fbef7fdd6b92f624e632381e5cfb67bd"
+    },
+    "src/java.base/share/classes/java/lang/StringConcatHelper.java": {
+      "before": "4c27b33ec75a8dee6ffad3c7bbb7bf5922fd0e07dd6f0720caa25bdbbb13a0f1",
+      "after": "c16dcf6693d8f94cb52f9f902b71d7d91160c287affa15e16d245f7e19121510"
+    },
+    "src/java.base/share/classes/java/lang/System.java": {
+      "before": "c51b88b6dc193b6447441769e24e89ebdbc3482796889a7506064bf07a7a8020",
+      "after": "4dcf8f1efbfe1b6ee1e9c5417fa3df50647bb55dc636411d783c844aa5e0847c"
+    },
+    "src/java.base/share/classes/java/lang/invoke/StringConcatFactory.java": {
+      "before": "847d49e8b3b8de4183c4551c0965d9919ab942c0bef996d787f1f36174579010",
+      "after": "efe0c96211a13aa34f0fbc55f4bd4190287846c329b2f25c3cbcf97185a709de"
+    },
+    "src/java.base/share/classes/java/util/regex/M3PatternQuery.java": {
+      "before": null,
+      "after": "5712e094926b90f3be5356dea999e9d5dc2d13e0f1fb5082e943f8c0a2d5575f"
+    },
+    "src/java.base/share/classes/java/util/regex/Matcher.java": {
+      "before": "7ae5ae6dc7f763c152c8f872af98551f74abf67cc2a53e331056287226e949ca",
+      "after": "a8a095429d3acc9327fa75d73d4aaa87150e702976a04801af5df14baf965f78"
+    },
+    "src/java.base/share/classes/java/util/regex/Pattern.java": {
+      "before": "feccfd9bbb4208790fc4b3f2b21e9f12fce7040b22d0fff39086b5f73bd1813f",
+      "after": "d2828f7a76ae172204abe56cdf4e9df4b5fc0133bb65936b4e82aa9f7b9d105f"
+    },
+    "src/java.base/share/classes/jdk/internal/access/JavaLangAccess.java": {
+      "before": "ccb649b92546459692c48b40ca75e960643e7ad234c8e1f43e1188504d3af29c",
+      "after": "b096377681dbc135d90f26abc972769557ae7c271d48ad59d241e149658438e3"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3Address28.java": {
+      "before": null,
+      "after": "dd14fe5384ff92db5c0232ef1fbc68da731ee305dda5b7c22777a3fa4c5e90fa"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3BitLane28.java": {
+      "before": null,
+      "after": "025556c17d0ce7879f63b75d04c30a3b16b6338ff73fa33f4ee49fdb1e196bb8"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3Bits.java": {
+      "before": null,
+      "after": "c5d9d2797966a56b9c2ec97908f6b76a0ad370a72cb05edc2a55b62775ba22ab"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3Boundary.java": {
+      "before": null,
+      "after": "c89a34d2e793f5a797ded51c32bf2f7ddad19ad1b932f003dfbde46b37f58d8a"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3CB.java": {
+      "before": null,
+      "after": "af93f3bebd9a54f592742b0b6d9e1215770446fd13b8679fa259f7c0d5effa36"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3CI.java": {
+      "before": null,
+      "after": "9a8fa33a3edf5edaaf6b22eeeb203cd08ff386bdd4b7307cdd47e849bc3b98b1"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3Class.java": {
+      "before": null,
+      "after": "542fab6ba509299d937c26fe68c9eab96cda3b8dd2b30c41df6992038b0d4472"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3ClassFlags.java": {
+      "before": null,
+      "after": "cb7dc87b4fb4849bd145520014bcd8cd55168134cf8b482dba495219b8a2344b"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3Constructor.java": {
+      "before": null,
+      "after": "f6a8cd76d1bd8bd5f2641d6d81dcb4e74b8aa613442c23fed32f3e99945be923"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3Descriptor.java": {
+      "before": null,
+      "after": "1333a9cf8b96b8c919d1c098899648d0a82cdce7e775167fe3ff2e571c54ec67"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3Field.java": {
+      "before": null,
+      "after": "a197eb18922617e1b0992d474f2acdb3c8753eb1c0b16a014a93a5460fe66481"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3IntLane28.java": {
+      "before": null,
+      "after": "ccb582914275bb00ea885d17b94173f60f65d7cbb2a2543af910de15428f6cda"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3LongLane28.java": {
+      "before": null,
+      "after": "89b6fee4b0572a975b48f9cdbf95a732d4601dd8748411732bc79d9e14afb644"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3MappedStringBacking.java": {
+      "before": null,
+      "after": "f84d4d7763156d615d32b7a1024931e18073a1122227d8228d8638332407bd01"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3Member.java": {
+      "before": null,
+      "after": "c0cc0b38eb167ea313a67db584184ee94269b2f2b808a6a16cfafbb80fa541f1"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3MemberFlags.java": {
+      "before": null,
+      "after": "f436e0fdfbe44074c3855944e005707e833ce96fa34b24cb300c3957c1cc24be"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3MemberKind.java": {
+      "before": null,
+      "after": "0c24a919386302c498d94e3a4d0bfffbe96084f7c93b62e23799646b4502496b"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3Method.java": {
+      "before": null,
+      "after": "f7651b04fa197f47904f5258ba2150242a9801bbcbef6e19fa90ed296fef8f58"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3PC.java": {
+      "before": null,
+      "after": "e38403e001ea950c5e789c854f4f4e8004253a4a7545aa6e044a52112b592898"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3RecordComponent.java": {
+      "before": null,
+      "after": "0be405cfa1d7fac2fbf1bdf5ae42e9798033eda53c6545b47154a16fa57134bd"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3Release.java": {
+      "before": null,
+      "after": "901341910171b464c110d43ef4dd4da11a3606da5504d53691f24c5561132aeb"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3StringBacking.java": {
+      "before": null,
+      "after": "bcd2fe86a21464f7c65fd582368362d327e54b143dc05df13b31c1a029ecb251"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3TQ.java": {
+      "before": null,
+      "after": "78aa154b8aa25134edd9a16c746e4fdc7bcd3984b8f76cc96ef81437247e08d4"
+    },
+    "src/java.base/share/classes/jdk/internal/mindex/M3VI.java": {
+      "before": null,
+      "after": "0c42cccb41251828efec2db858a9ed09aef3a2c489a75d11fd10e14c468cd67a"
+    },
+    "src/java.base/share/legal/synexia.md": {
+      "before": null,
+      "after": "2d1d742093ddfd2424442ff27db87af57c9c2b7eb73e68670a05fc5f7d91860a"
+    },
+    "src/java.base/share/native/libjava/M3BitLane28.c": {
+      "before": null,
+      "after": "7cce5d9e56e5308f130e4dfaa191c663c27afb3e35ed206347447cc925dec89f"
+    },
+    "src/java.base/share/native/libjava/String.c": {
+      "before": "4ca26f746733a6b954700fb14cad8a8a0a20100b834e5ad407a360c2b83cd311",
+      "after": "ee9d9bfa986259600d6fe95e21e3cb904a4f6541ce24c6391bc50715c6a054ef"
+    },
+    "src/java.base/share/native/libjava/jni_util.c": {
+      "before": "31596047469d6107b1e515eb04f3e9a9d98719ba50d2d9d753309eef51b2ce94",
+      "after": "4669c033c1b820ee90eb7fbe9f0c3ead9681312853e5675d360bb8db81e697f7"
+    },
+    "src/jdk.hotspot.agent/share/classes/sun/jvm/hotspot/oops/OopUtilities.java": {
+      "before": "d1f10780acf7d13ec54cf37eb2a49c1b845cc884ec30b583a6cd72521c213560",
+      "after": "f964925e59e6b1ef233d3508a6ba901afc9c4bf1430b60fc6ea0f71d6999cc86"
+    }
   }
- }
 }
