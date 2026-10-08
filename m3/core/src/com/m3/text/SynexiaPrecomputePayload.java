@@ -4,6 +4,7 @@
 package com.m3.text;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -46,6 +47,22 @@ public final class SynexiaPrecomputePayload {
 
         public long[] integerArrayValue() {
             return integerArrayValue == null ? null : integerArrayValue.clone();
+        }
+
+        @Override
+        public boolean equals(Object other) {
+            if (this == other) return true;
+            if (!(other instanceof Field value)) return false;
+            return kind == value.kind && booleanValue == value.booleanValue
+                    && integerValue == value.integerValue
+                    && Double.doubleToLongBits(decimalValue) == Double.doubleToLongBits(value.decimalValue)
+                    && Arrays.equals(integerArrayValue, value.integerArrayValue);
+        }
+
+        @Override
+        public int hashCode() {
+            int result = Objects.hash(kind, booleanValue, integerValue, decimalValue);
+            return 31 * result + Arrays.hashCode(integerArrayValue);
         }
     }
 
