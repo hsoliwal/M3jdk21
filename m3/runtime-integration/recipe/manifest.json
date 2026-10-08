@@ -2,8 +2,8 @@
   "schema": "M3_RUNTIME_INTEGRATION_RECIPE_V2",
   "base_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
   "upstream_commit": "890adb6410dab4606a4f26a942aed02fb2f55387",
-  "target_commit": "cab2f8c0efc82c215956e243f3edda679f069934",
-  "patch_sha256": "6a5d30445396b89f0964ee0dc427754d68d9fbadce06c2d354c85a6a304afd1f",
+  "target_commit": "0d0cc24b518151673570426fe57f6c0516e3f2ab",
+  "patch_sha256": "ac6eb0503dd4b3fe994f1d356f50fd8f65be5b2e2fb82344fd70befd715732a8",
   "scope": "M3 String runtime integration: every src/** file whose upstream->master delta carries M3/mindex tokens plus the four token-free String-runtime hooks; JEP/backport files owned by other hash-pinned crates are excluded",
   "files": {
     "src/hotspot/share/cds/archiveHeapWriter.cpp": {
@@ -88,15 +88,19 @@
     },
     "src/java.base/share/classes/java/lang/M3String.java": {
       "before": null,
-      "after": "64dfd24bb7c55416fef3d61d77b189a7d528e3f82c43b29567890f43706a62aa"
+      "after": "06e8c6ba9ebe01493022d20a442a5902209b553938068cd312140fddbb9d356b"
     },
     "src/java.base/share/classes/java/lang/M3StringAtom.java": {
       "before": null,
       "after": "20905d45d3e96e0fb1b37b0482eff71888264b351ab001c07e9b0d56d9c3a31f"
     },
+    "src/java.base/share/classes/java/lang/M3StringCodePointPrecompute.java": {
+      "before": null,
+      "after": "50e1fe55cd5e8a53b72aa8a4772f826f712c7e3edb3239514f9504819a0b0257"
+    },
     "src/java.base/share/classes/java/lang/M3StringFacts.java": {
       "before": null,
-      "after": "36c9cb73608cf2f7ad40be00493def3c17cfd4653b5f450750f3595d1eb677cd"
+      "after": "c834e63534db855f06e99bbfdf45caf0ecf36b88f5760bfe7fdaa8bcc355509f"
     },
     "src/java.base/share/classes/java/lang/M3StringOwner.java": {
       "before": null,
@@ -120,7 +124,7 @@
     },
     "src/java.base/share/classes/java/lang/String.java": {
       "before": "4689d77ee91265cfeff65dbba856f690a4a741ac98b9664a9055868d9698743b",
-      "after": "cd40c8e663722734b6507b9f8b8ec4b4ce4f10084e5c073afd9b1623e3b81d51"
+      "after": "c16fd68b3a0402352569908ba9c99a17dc2853ba7dbb6cbbcb5c3ea6ea4efc8f"
     },
     "src/java.base/share/classes/java/lang/StringConcatHelper.java": {
       "before": "4c27b33ec75a8dee6ffad3c7bbb7bf5922fd0e07dd6f0720caa25bdbbb13a0f1",
