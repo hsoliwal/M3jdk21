@@ -9,7 +9,7 @@ BitSet	M3BitLane28 / M3ConcurrentBitSet	EXISTING_PROVING_BACKEND	segmented bit l
 ConcurrentHashMap	M3ConcurrentLongMap	EXISTING_LIMITED_BACKEND	immutable snapshot publication	read-heavy small/medium envelope; not CHM semantic replacement
 ConcurrentHashMap.keySet	M3ConcurrentLongSet	EXISTING_LIMITED_BACKEND	immutable snapshot publication	read-heavy small/medium envelope
 LinkedHashMap	M3LongLongLinkedHashMap	PENDING	open-address table + order lanes	name reserved only after contract/algorithm proof
-LinkedHashSet	M3LongLinkedHashSet	PENDING	open-address table + order lanes	name reserved only after contract/algorithm proof
+LinkedHashSet	M3LongLinkedHashSet	RECEIVER_CANDIDATE_V1	open-address table + order lanes	long lane: M3LongHashSet table + previous/next slot link lanes adapted from synexia-common DenseOrderedSet (20e9aec1) with the PackedLongOrderedSet contract (6156e5d4); SequencedSet surface (addFirst/addLast/first/last/removeFirst/removeLast/reversed array); java.util.LinkedHashSet remains authority
 TreeMap	M3LongLongTreeMap	PENDING	ordered tree selected by benchmark + contract gate	red-black/B-tree alternatives stay additive until proven
 TreeSet	M3LongTreeSet	PENDING	ordered tree selected by benchmark + contract gate	red-black/B-tree alternatives stay additive until proven
 CopyOnWriteArrayList	M3LongCopyOnWriteArrayList	PENDING	copy-on-write primitive snapshot	JMM and iterator-snapshot proof required

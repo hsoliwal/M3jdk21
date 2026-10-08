@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: Apache-2.0
+type: specs.openrewrite.org/v1beta/recipe
+name: com.synexia.m3.LongLinkedHashSet
+displayName: M3JDK21 M3LongLinkedHashSet proving-ground owner
+description: >-
+  Adds com.m3.collections.M3LongLinkedHashSet, an insertion-ordered primitive-long set: the
+  M3LongHashSet open-addressed table plus previous/next slot link lanes (no per-element node),
+  adapted from the first-party Synexia donor DenseOrderedSet under the PackedLongOrderedSet
+  contract, with the java.util.LinkedHashSet SequencedSet surface and its differential test.
+  Proving ground only (wave 2 of the COLLECTIONS family); no java.util type is replaced.
+recipeList:
+  - com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe:
+      crateName: m3-long-linked-hash-set
