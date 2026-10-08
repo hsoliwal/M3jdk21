@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[2]
 MAP = Path(__file__).with_name("string-source-target-map.tsv")
 ESTATE = Path(__file__).with_name("synexia-estate.tsv")
 NAME_MAP = ROOT / "m3/docs/name-mapping.json"
+WORK = Path(__file__).with_name("string-phase-work-orders.tsv")
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 
 EXPECTED_RELATIONS = {
@@ -122,6 +123,53 @@ def validate_name_mapping() -> None:
         raise ValueError("canonical M3String target owner set drift")
 
 
+
+WORK_HEADER = [
+    "schema",
+    "lane",
+    "synexia_pr",
+    "synexia_head",
+    "m3jdk_pr",
+    "m3jdk_head",
+    "depends_on",
+    "target_gate",
+    "state",
+]
+
+EXPECTED_WORK_LANES = {
+    "STRING_SEARCH",
+    "REGEX_ORACLE_10K_X64",
+    "REGEX_REQUIRED_LITERAL_GATE",
+}
+
+
+def validate_work_orders() -> None:
+    rows = load_tsv(WORK, WORK_HEADER)
+    lanes: set[str] = set()
+    for physical, row in enumerate(rows, start=2):
+        if any(not row[field] for field in WORK_HEADER):
+            raise ValueError(f"blank STRING work-order field at row {physical}")
+        if row["schema"] != "M3JDK21_STRING_WORK_V1":
+            raise ValueError(f"invalid STRING work-order schema at row {physical}")
+        if row["lane"] in lanes:
+            raise ValueError(f"duplicate STRING work lane: {row['lane']}")
+        lanes.add(row["lane"])
+        if not row["synexia_pr"].isdigit() or not row["m3jdk_pr"].isdigit():
+            raise ValueError(f"invalid PR number at row {physical}")
+        if not HEX40.fullmatch(row["synexia_head"]):
+            raise ValueError(f"invalid Synexia head at row {physical}")
+        if not HEX40.fullmatch(row["m3jdk_head"]):
+            raise ValueError(f"invalid M3JDK head at row {physical}")
+        if row["state"] != "DRAFT_CANDIDATE":
+            raise ValueError(
+                f"STRING work order claims acceptance without successor receipt at row {physical}"
+            )
+    if lanes != EXPECTED_WORK_LANES:
+        raise ValueError(
+            f"STRING work lane drift missing={sorted(EXPECTED_WORK_LANES-lanes)} "
+            f"extra={sorted(lanes-EXPECTED_WORK_LANES)}"
+        )
+
 def main(argv: list[str]) -> int:
     if len(argv) != 1:
         print("usage: check_string_phase.py", file=sys.stderr)
@@ -179,6 +227,7 @@ def main(argv: list[str]) -> int:
         )
 
     validate_name_mapping()
+    validate_work_orders()
     print(
         "M3JDK21_STRING_PHASE_PIN_PASS "
         f"rows={len(rows)} source_revision={revision} "
