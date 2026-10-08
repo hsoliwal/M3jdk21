@@ -2,7 +2,7 @@
 type: specs.openrewrite.org/v1beta/recipe
 name: com.m3.rewrite.backport.M3StringDirectStreamTraversal
 displayName: Route M3 String streams through canonical owner coordinates
-description: Replays the direct array-free M3 chars/codePoints traversal, exact surrogate-aware splitting, hosted jtreg, source gates and runtime invariants.
+description: Target-local hash-pinned receiver for canonical Synexia recipe com.synexia.rewrite.M3Jdk21StringDirectStreamTraversal. Replays direct array-free M3 chars/codePoints traversal, exact surrogate-aware splitting, hosted jtreg, source gates and runtime invariants; portable semantics must evolve in Synexia, not in this target adapter.
 recipeList:
   - com.m3.rewrite.backport.M3Jdk21HashPinnedSnapshotRecipe:
       crateName: jdk22-m3-string-stream-traversal
