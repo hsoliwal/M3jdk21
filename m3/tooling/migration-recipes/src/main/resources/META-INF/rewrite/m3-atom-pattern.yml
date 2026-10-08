@@ -5,4 +5,4 @@ description: >-
   Applies only mechanically proven file-local M3 transformations whose externally observable
   behavior and contract remain sealed.
 recipeList:
-  - com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe
+  - com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe
