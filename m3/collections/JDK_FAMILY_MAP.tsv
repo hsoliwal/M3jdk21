@@ -15,6 +15,6 @@ TreeSet	M3LongTreeSet	PENDING	ordered tree selected by benchmark + contract gate
 CopyOnWriteArrayList	M3LongCopyOnWriteArrayList	PENDING	copy-on-write primitive snapshot	JMM and iterator-snapshot proof required
 ConcurrentSkipListMap	M3LongLongConcurrentSkipListMap	PENDING	ordered concurrent structure	JMM/linearizability proof required
 ConcurrentSkipListSet	M3LongConcurrentSkipListSet	PENDING	ordered concurrent structure	JMM/linearizability proof required
-IdentityHashMap	M3ObjectIdentityMap	PENDING_OBJECT_SPACE	identity/object-space owner	primitive long equality is not object identity
+IdentityHashMap	M3ObjectIdentityMap / M3ObjectIdentitySet	RECEIVER_CANDIDATE_V1	flat reference lanes, identity hash, null sidecar	object-space proving backend adapted from synexia-primitives DenseIdentityHashMap/Set; java.util.IdentityHashMap remains authority
 WeakHashMap	M3WeakObjectMap	PENDING_OBJECT_SPACE	weak-reference object owner	GC/reference-processing contract required
 EnumMap / EnumSet	M3EnumLongMap (EnumMap<E,Long> shape); EnumSet shape pending	RECEIVER_CANDIDATE_V1	ordinal-indexed long[] + presence bits	primitive proving backend adapted from synexia-primitives EnumPrimitiveMap; java.util.EnumMap remains authority; must preserve enum type/serial
