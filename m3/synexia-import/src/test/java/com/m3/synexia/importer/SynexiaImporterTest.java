@@ -207,6 +207,22 @@ final class SynexiaImporterTest {
                                     m3jdk.toString()
                                 }));
 
+        SynexiaImportManifest wrongSha256Revision =
+                new SynexiaImportManifest(
+                        "0".repeat(64), "m3jdk21", manifest.entries(), "");
+        Path wrongSha256File = temp.resolve("wrong-sha256-revision.tsv");
+        Files.writeString(wrongSha256File, wrongSha256Revision.toTsv());
+        assertThrows(
+                IllegalStateException.class,
+                () ->
+                        SynexiaImportCli.main(
+                                new String[] {
+                                    "verify-strict",
+                                    wrongSha256File.toString(),
+                                    synexia.toString(),
+                                    m3jdk.toString()
+                                }));
+
         Files.writeString(synexia.resolve("README.md"), "tracked drift\n");
         assertThrows(
                 IllegalStateException.class,
