@@ -2,6 +2,7 @@
 package com.m3.synexia.importer;
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
 import java.nio.file.Path;
@@ -130,8 +131,7 @@ public final class SynexiaImporter {
                 if (Files.exists(target, LinkOption.NOFOLLOW_LINKS)) continue;
                 Path parent = target.getParent();
                 if (parent != null) {
-                    recordMissingDirectories(targetRoot, parent, createdDirectories);
-                    Files.createDirectories(parent);
+                    createDirectoriesTracked(targetRoot, parent, createdDirectories);
                 }
                 Path temporary = Files.createTempFile(
                         parent == null ? targetRoot : parent,
@@ -200,14 +200,28 @@ public final class SynexiaImporter {
         }
     }
 
-    private static void recordMissingDirectories(
-            Path root, Path parent, List<Path> createdDirectories) {
+    private static void createDirectoriesTracked(
+            Path root, Path parent, List<Path> createdDirectories) throws IOException {
         Path current = root;
         for (Path part : root.relativize(parent)) {
             current = current.resolve(part);
-            if (!Files.exists(current, LinkOption.NOFOLLOW_LINKS)) {
-                createdDirectories.add(current);
+            if (Files.exists(current, LinkOption.NOFOLLOW_LINKS)) {
+                requireRealDirectory(current);
+                continue;
             }
+            try {
+                Files.createDirectory(current);
+                createdDirectories.add(current);
+            } catch (FileAlreadyExistsException raced) {
+                requireRealDirectory(current);
+            }
+        }
+    }
+
+    private static void requireRealDirectory(Path path) {
+        if (!Files.isDirectory(path, LinkOption.NOFOLLOW_LINKS) || Files.isSymbolicLink(path)) {
+            throw new IllegalStateException(
+                    "import path component is not a real directory: " + path);
         }
     }
 
