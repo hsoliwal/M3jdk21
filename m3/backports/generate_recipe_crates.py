@@ -56,6 +56,7 @@ class Candidate:
     after_sha256: str
     after_text: str
     kind: str = "JAVA"
+    donor_ref: str = ""
 
 
 def _git_bytes(repo: Path, ref: str, path: str) -> bytes:
@@ -100,6 +101,38 @@ def _selected_paths(path_file: Path | None) -> set[str] | None:
     return paths
 
 
+def _donor_overrides(path_file: Path | None) -> dict[str, str]:
+    """Read exact path -> approved donor-ref overrides.
+
+    The map is custody only: it cannot add target paths and it does not decide compatibility.
+    """
+    if path_file is None:
+        return {}
+    with path_file.open(encoding="utf-8", newline="") as handle:
+        rows = list(csv.DictReader(handle, delimiter="\t"))
+    if not rows or set(rows[0]) != {"path", "donor_ref"}:
+        raise ValueError("donor map must have path and donor_ref columns")
+
+    result: dict[str, str] = {}
+    previous = ""
+    for row in rows:
+        path = row["path"].strip()
+        ref = row["donor_ref"].strip()
+        if (
+            not path
+            or not ref
+            or path.startswith("/")
+            or "\\" in path
+            or ".." in path.split("/")
+            or path <= previous
+            or path in result
+        ):
+            raise ValueError(f"noncanonical donor-map row: {row}")
+        previous = path
+        result[path] = ref
+    return result
+
+
 def candidates(
     repo: Path,
     release: int,
@@ -108,6 +141,7 @@ def candidates(
     include_text: bool = False,
     include_native: bool = False,
     donor_ref: str | None = None,
+    donor_overrides: dict[str, str] | None = None,
 ) -> tuple[list[Candidate], list[tuple[str, str]]]:
     if selected is None and not all_candidates:
         raise ValueError("select --paths-file or explicitly request --all-candidates")
@@ -123,11 +157,35 @@ def candidates(
         if missing:
             raise ValueError(f"selected paths absent from comparison: {missing[:5]}")
 
+    overrides = dict(donor_overrides or {})
+    if selected is not None:
+        outside = sorted(set(overrides) - selected)
+        if outside:
+            raise ValueError(f"donor-map paths outside selected set: {outside[:5]}")
+    missing_overrides = sorted(set(overrides) - set(by_path))
+    if missing_overrides:
+        raise ValueError(
+            f"donor-map paths absent from baseline/default comparison: {missing_overrides[:5]}"
+        )
+
+    by_ref: dict[str, list[str]] = {}
+    for override_path, override_ref in overrides.items():
+        by_ref.setdefault(override_ref, []).append(override_path)
+    for override_ref, override_paths in sorted(by_ref.items()):
+        override_rows = {
+            row.path: row
+            for row in DELTA.compare_refs(
+                repo, release, DELTA.BASELINE[1], override_ref
+            )
+        }
+        for override_path in override_paths:
+            by_path[override_path] = override_rows[override_path]
+
+    paths = sorted(selected if selected is not None else by_path)
     result: list[Candidate] = []
     exclusions: list[tuple[str, str]] = []
-    for row in rows:
-        if selected is not None and row.path not in selected:
-            continue
+    for path in paths:
+        row = by_path[path]
         if row.status == "SAME":
             continue
         if not row.java_source:
@@ -189,6 +247,7 @@ def candidates(
                     if row.native_source and include_native
                     else "TEXT"
                 ),
+                donor_ref=row.donor_ref,
             )
         )
 
@@ -301,7 +360,16 @@ def materialize(
                     crate_name,
                     str(release),
                     baseline_ref,
-                    donor_ref
+                    ";".join(
+                        sorted(
+                            {
+                                candidate.donor_ref
+                                for candidate in chunk
+                                if candidate.donor_ref
+                            }
+                        )
+                    )
+                    or donor_ref
                     or (
                         f"jdk-{release}+"
                         + {22: "36", 23: "37", 24: "36", 25: "36", 26: "35", 27: "35"}[release]
@@ -383,6 +451,14 @@ def _parse_args(argv: Sequence[str]) -> argparse.Namespace:
         help="exact donor commit/ref; defaults to the selected release GA tag",
     )
     parser.add_argument("--paths-file", type=Path)
+    parser.add_argument(
+        "--donor-map",
+        type=Path,
+        help=(
+            "optional sorted TSV path->donor_ref overrides; paths must already be selected "
+            "by the packet and every ref is verified by Git"
+        ),
+    )
     parser.add_argument("--all-candidates", action="store_true")
     parser.add_argument(
         "--include-text",
@@ -418,6 +494,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     repo = args.repo.resolve()
     out = args.out.resolve()
     selected = _selected_paths(args.paths_file)
+    donor_overrides = _donor_overrides(args.donor_map)
     candidate_rows, exclusions = candidates(
         repo,
         args.release,
@@ -426,6 +503,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         include_text=args.include_text,
         include_native=args.include_native,
         donor_ref=args.donor_ref,
+        donor_overrides=donor_overrides,
     )
     if not candidate_rows:
         raise SystemExit("no donor candidates selected")
