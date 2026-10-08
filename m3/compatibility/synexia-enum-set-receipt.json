@@ -1,0 +1,71 @@
+{
+  "schema": "M3JDK21_SYNEXIA_ENUM_SET_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-enum-set-20261008",
+    "pullRequest": 9817,
+    "commit": "234b50350dc",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.EnumSet",
+    "crate": "m3-enum-set",
+    "fossReuseDecisionRow": "collections.donor.primitives",
+    "donors": [
+      {
+        "path": "synexia-primitives/src/main/java/com/synexia/primitives/LongBitSet.java",
+        "blob": "bf58f2ff",
+        "blobCommit": "f0c95fbf20e",
+        "developState": "superseded on origin/develop by blob c7b70ba7 at b1b66529904 (2026-10-07); comment/header-only delta (patch in run dir b2s/donor-blob-delta.patch)",
+        "target": "com.m3.collections.M3EnumSet",
+        "mechanics": "word set/clear/flip/cardinality/nextSetBit/or/and/xor"
+      },
+      {
+        "path": "m3/collections/src/main/java/com/m3/collections/M3EnumLongMap.java",
+        "receipt": "m3/compatibility/synexia-enum-long-map-receipt.json",
+        "target": "com.m3.collections.M3EnumSet",
+        "mechanics": "ordinal universe handling"
+      }
+    ],
+    "license": "Apache-2.0 first-party",
+    "disposition": "ADAPT: LongBitSet word mechanics kept, the growable long[] becomes a universe-sized presence lane, JDK EnumSet factories and key handling added, universe handling as M3EnumLongMap"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "bac0108267c93ecdd702f06609828f9953278eef",
+    "owners": [
+      "com.m3.collections.M3EnumSet"
+    ],
+    "publicJdkReplacement": false
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "m3/collections/src/main/java/com/m3/collections/M3EnumSet.java",
+      "before": "ABSENT",
+      "after": "a4c359c8035efdf31edbe6f5c36808984bf3de628e9f7c293429a1c7578ce77c",
+      "resource": "00-M3EnumSet.java.txt"
+    },
+    {
+      "path": "m3/collections/src/test/java/com/m3/collections/M3EnumSetTest.java",
+      "before": "ABSENT",
+      "after": "334ec881ecaf3fa7807bf912ff3d758cf8ac9eeb162ff7e261738e73890e81c9",
+      "resource": "01-M3EnumSetTest.java.txt"
+    }
+  ],
+  "gates": {
+    "m3CollectionsModuleCompile": "PASS_WINDOWS -Xlint:all,-module -Werror (30 sources)",
+    "m3CollectionsModuleTests": "PASS_WINDOWS 43/43 (8 classes; differential vs java.util.EnumSet over a 70-constant and a 3-constant enum)",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3EnumSetRecipeTest 2/2 (mvn log sha256 7c5f75c56b878ba8d6d227f47a680d4ffb113cfaa52a108d681ff0caaeaa5df3)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "jdkBuildJtregRuntime": "PENDING_LINUX",
+    "ci": "PENDING"
+  },
+  "semanticDecisions": [
+    "one presence bit per constant in a universe-sized long[]; no element reference retained; iteration in ordinal order (JDK EnumSet)",
+    "add(null) throws NullPointerException; a constant of another enum type throws ClassCastException on add and is absent for contains/remove (JDK EnumSet key handling)",
+    "noneOf/allOf/of/copyOf/complementOf/range factories; addAll/removeAll/retainAll/containsAll require the same universe (ClassCastException otherwise); complement is in place",
+    "not a java.util.Set: equals/hashCode between M3EnumSet instances only"
+  ]
+}
