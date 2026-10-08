@@ -1,0 +1,29 @@
+{
+  "schema": "M3JDK21_STRING_JNI_SHADOW_LIFETIME_RECEIPT_V1",
+  "canonicalRepository": "hsoliwal/com.synexia",
+  "canonicalPullRequest": 9909,
+  "canonicalRecipe": "com.synexia.rewrite.M3Jdk21StringJniShadowLifetime",
+  "canonicalRecipeHead": "a4683cf07778eb7a42206a434fa787d599bbe8b6",
+  "targets": [
+    {
+      "path": "test/jdk/java/lang/String/M3StringJniShadowLifetimeTest.java",
+      "sha256": "0e335df88a6871a29244fb0c0f4f24c09dbc0da2a2c5731689bad52b47b4ac23"
+    }
+  ],
+  "gates": {
+    "sourceRecipeJUnit": "PENDING_CI",
+    "jtregCompactStrings": "PENDING_CI",
+    "jtregNoCompactStrings": "PENDING_CI",
+    "promotion": "BLOCKED"
+  },
+  "claims": {
+    "freshNativeCharShadows": "PENDING_JTREG",
+    "freshNativeByteShadows": "PENDING_JTREG",
+    "shadowMutationIsolation": "PENDING_JTREG",
+    "canonicalCoordinateStable": "PENDING_JTREG",
+    "javaBaseSourceChanged": false,
+    "hotspotSourceChanged": false,
+    "jniSourceChanged": false,
+    "runtimePromotionAuthorized": false
+  }
+}
