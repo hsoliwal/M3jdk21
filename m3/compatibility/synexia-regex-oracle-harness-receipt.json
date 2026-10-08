@@ -1,0 +1,97 @@
+{
+  "schema": "M3JDK21_SYNEXIA_REGEX_ORACLE_HARNESS_RECEIVER_V1",
+  "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+  "receivedLicense": "Apache-2.0",
+  "canonicalSource": {
+    "repository": "hsoliwal/com.synexia",
+    "branch": "codex/m3-regex-oracle-harness-20261008",
+    "pullRequest": 9857,
+    "commit": "fa3f8489754",
+    "recipe": "com.synexia.rewrite.M3HashPinnedJavaSnapshotRecipe",
+    "declarativeRecipe": "com.synexia.m3.RegexOracleHarness",
+    "crate": "m3-regex-oracle-harness",
+    "fossReuseDecisionRow": "string.regex-oracle.corpus",
+    "donors": [
+      {
+        "path": "synexia-openrewrite-recipes/src/test/java/com/synexia/rewrite/Regex10kMatrixMasteryCorpus.java",
+        "blob": "98b74755",
+        "developCommit": "296323958b1",
+        "target": "com.m3.precompute.M3RegexOracleCorpus",
+        "mechanics": "10x10x10x10 expression generator, 4x4x4 input generator, REGEX_ROOT/STRING_ROOT/MATRIX_ROOT digests (ported verbatim; roots reproduce)"
+      },
+      {
+        "path": "synexia-indexstring/src/test/java/com/synexia/indexstring/MIndexRegexPrecomputeMatrix10kTest.java",
+        "blob": "c40b3bb9",
+        "developCommit": "296323958b1",
+        "target": "com.m3.precompute.M3RegexOracleHarness",
+        "mechanics": "bounded, ordered mismatch ledger and root-validated receipt"
+      },
+      {
+        "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexStringTrialImage.java",
+        "blob": "ffce8a21",
+        "target": "com.m3.precompute.M3RegexOracleHarness",
+        "mechanics": "sharded oracle store (ten images of 1,000 regexes x 64 inputs); stock Pattern outcomes"
+      },
+      {
+        "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexShape.java",
+        "blob": "ff989cfa",
+        "target": "com.m3.precompute.M3RegexOracleHarness.literalShape",
+        "mechanics": "first pruning candidate: provable literal / strict prefix / strict suffix / strict exact shapes"
+      }
+    ],
+    "license": "Apache-2.0 first-party",
+    "disposition": "ADAPT: generator and roots verbatim so the corpus is byte-identical across repositories; the oracle store is the existing target owner M3RegexStringTrialImage; the ledger becomes M3RegexOracleHarness.Report; JDK Pattern remains the regex authority, M3 signals rank only"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "base": "c9b07049c57ecdf43175f5885e11998918416a00",
+    "owners": [
+      "com.m3.precompute.M3RegexOracleCorpus",
+      "com.m3.precompute.M3RegexOracleHarness"
+    ],
+    "publicJdkReplacement": false
+  },
+  "runtimeDependencyOnSynexia": false,
+  "publicJdkReplacement": false,
+  "targets": [
+    {
+      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexOracleCorpus.java",
+      "before": "ABSENT",
+      "after": "1fc9ab6e71de93f3b737c7f6297c49e787190b369f776b4247f50cb21d98e5ab",
+      "resource": "00-M3RegexOracleCorpus.java.txt"
+    },
+    {
+      "path": "m3/ports/precompute/src/main/java/com/m3/precompute/M3RegexOracleHarness.java",
+      "before": "ABSENT",
+      "after": "d73788794ea4f0ef8d92e6c15077b2c907000c121c553115c2faf07ea804213f",
+      "resource": "01-M3RegexOracleHarness.java.txt"
+    },
+    {
+      "path": "m3/ports/precompute/src/test/java/com/m3/precompute/M3RegexOracleHarnessTest.java",
+      "before": "ABSENT",
+      "after": "8d79f5663691a00dd6f8b1946cfa79150fdd5db812df17e7737cbb5d41088929",
+      "resource": "02-M3RegexOracleHarnessTest.java.txt"
+    }
+  ],
+  "oracle": {
+    "matrixRoot": "e7614598149534e42ea1ff5af8c00dfea1c440ff3d6d94864123974f8c11f998",
+    "oracleRoot": "71d2f235a33ee3a91980d49ed06ad069f89728697e056318af0522ecc0820adf",
+    "oracleRootJdk": "21.0.9 (Windows, Java signal provider)",
+    "pairs": 640000,
+    "literalShape": {"pruned": 136, "findTrue": 384914, "unsound": 0, "reportRoot": "4eeb3407b7789aa22ee7d5fcdd4a5fd53eb919e624d672f03030b5659ca6e5d3"}
+  },
+  "gates": {
+    "precomputePortMavenTest": "PASS_WINDOWS mvn -o -B -f m3/ports/precompute/pom.xml test: 26 run, 0 failures, 1 skipped by assumption (M3NativeParityTest without -Pnative); 18 main + 9 test sources -Xlint:all -Werror (log sha256 69700a2b3c685467b9ab04874fece26107b172d831c8922990ad0bc6a5bc70bd)",
+    "verifyScript": "PASS_WINDOWS python verify_regex_oracle_harness.py (policy, hash-pinned receiver copy byte-identical, corpus roots pinned)",
+    "recipeFixedPointAndRefusal": "Synexia crate test M3RegexOracleHarnessRecipeTest 2/2 (mvn log sha256 92c0b0a46e7d2283c1acd45f929a1a83ab4fcdad85dbb288a84aea2e948154b8; a first attempt died in the surefire fork, log kept)",
+    "gitDiffCheck": "PASS_WINDOWS",
+    "nativeParity": "PENDING_LINUX (-Pnative: M3RegexStringTrialImageTest, M3NativeParityTest)",
+    "ci": "PENDING_CI"
+  },
+  "semanticDecisions": [
+    "Candidate verdict CANNOT_MATCH is the only claim checked: it must imply find == false; MAY_MATCH is never wrong",
+    "Report retains the first maxRetained contradictions in (regex, input) order and derives its root from every count and row; a mismatching root is refused",
+    "oracleRoot binds MATRIX_ROOT to the ten shard image roots (outcomes and signals); it is pinned in the test and any drift on a later JDK is reported, not silently accepted",
+    "the corpus is not a Pattern replacement proof and the harness makes no timing or runtime claim"
+  ]
+}
