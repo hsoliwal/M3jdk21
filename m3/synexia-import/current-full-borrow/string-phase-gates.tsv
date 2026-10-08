@@ -1,0 +1,21 @@
+gate	state	evidence_or_requirement
+SOURCE_ESTATE	PINNED	Synexia full-borrow estate revision 296323958b1019edd59b60b9c05cb148d024cfe5
+SOURCE_STRING_ATOMS	PINNED	string-source-target-map.tsv source Git blobs
+TARGET_OWNER_CUSTODY	PINNED	string-source-target-map.tsv target Git blobs
+CANONICAL_NAME_MAPPING	PINNED	m3/docs/name-mapping.json MIndexString -> java.lang.M3String
+LICENSE_PROVENANCE	PINNED	Apache-2.0 first-party authored expression; preserve NOTICE/provenance
+COPYRIGHT_NOTICE	PINNED	Copyright 2026 Hitesh Soliwal and contributors
+ABSTRACT_IDEA_BOUNDARY	PINNED	PROVENANCE_NOT_COPYRIGHTED_EXPRESSION
+UTF16_DIFFERENTIAL	NOT_EXECUTED	unpaired surrogates, substring/slices, chars/codePoints, hash/equality
+OWNER_COORDINATE_LIFETIME	NOT_EXECUTED	no-second-payload, scalar/mapped/tuple/range lifetime
+SEARCH_DIFFERENTIAL	NOT_EXECUTED	indexOf/contains/prefix/suffix/position precompute
+REGEX_ORACLE	NOT_EXECUTED	java.util.regex remains semantic authority
+JNI_SHADOW_LIFETIME	NOT_EXECUTED	char/byte shadow materialize/acquire/release
+JDK_BUILD	NOT_EXECUTED	matched configure/make image
+JTREG_NORMAL	NOT_EXECUTED	focused M3String tests + stock String regressions
+JTREG_XINT	NOT_EXECUTED	interpreter
+JTREG_C1_C2	NOT_EXECUTED	compiled tiers/deopt
+GC_CDS_JFR_JVMCI	NOT_EXECUTED	representation consumers
+COLD_WARM_RESOURCES	NOT_EXECUTED	CPU/heap/native-retained bytes
+FIXED_POINT_REPLAY	NOT_EXECUTED	source-changing recipe not yet admitted by this packet
+PROMOTION	BLOCKED	all required target gates must close

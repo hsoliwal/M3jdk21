@@ -1,0 +1,61 @@
+# SPDX-License-Identifier: Apache-2.0
+name: M3 full-borrow String phase custody
+
+on:
+  pull_request:
+    paths:
+      - "m3/synexia-import/current-full-borrow/STRING_PHASE.md"
+      - "m3/synexia-import/current-full-borrow/string-source-target-map.tsv"
+      - "m3/synexia-import/current-full-borrow/string-phase-gates.tsv"
+      - "m3/synexia-import/current-full-borrow/string-phase-work-orders.tsv"
+      - "m3/synexia-import/current-full-borrow/check_string_phase.py"
+      - "m3/synexia-import/current-full-borrow/receiver-status.tsv"
+      - "m3/docs/name-mapping.json"
+      - ".github/workflows/m3-full-borrow-string-phase.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  custody:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Diff hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="$(git merge-base origin/master HEAD || true)"
+          if test -n "$base"; then
+            git diff --check "$base"...HEAD
+          else
+            git diff --check
+          fi
+
+      - name: Verify pinned MIndexString to M3String mapping
+        run: |
+          set -euo pipefail
+          python3 m3/synexia-import/current-full-borrow/check_string_phase.py
+
+      - name: Refuse premature String promotion
+        shell: bash
+        run: |
+          set -euo pipefail
+          gates=m3/synexia-import/current-full-borrow/string-phase-gates.tsv
+          grep -q $'^PROMOTION\tBLOCKED\t' "$gates"
+          ! grep -q $'^JDK_BUILD\tPASS\t' "$gates"
+          ! grep -q $'^JTREG_NORMAL\tPASS\t' "$gates"
+
+      - name: Require focused target test sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          for file in             test/jdk/java/lang/String/M3StringCanonicalDagTest.java             test/jdk/java/lang/String/M3StringCodePointGeometryTest.java             test/jdk/java/lang/String/M3StringFactsCompositionTest.java             test/jdk/java/lang/String/M3StringInternTest.java             test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java             test/jdk/java/lang/String/M3TQTest.java
+          do
+            test -f "$file"
+          done
