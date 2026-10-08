@@ -27,7 +27,7 @@ Exact current importer Git blob:
 The locally executed `SynexiaImporter.java` was checked with `git hash-object` and matched that blob exactly before compilation.
 
 Exact current Git-checkout helper blob:
-`45bac8b7200136d88cd07c988065add652a10801`
+`cb03a2c5a13321405c8d8dae080a2d9c13474cd8`
 
 Java 21 compile used:
 
@@ -38,12 +38,13 @@ javac --release 21 -Xlint:all -Werror ...
 Focused importer output:
 
 ```text
-M3_IMPORT_EXACT_PASS checks=7
+M3_IMPORT_EXACT_PASS checks=8
 ```
 
 That proof exercised:
 - deterministic failure before the second move;
 - rollback of the first created file;
+- rollback of the invocation-created empty directory chain;
 - successful two-file materialization;
 - exact target snapshot verification;
 - rejection of a source path traversing an intermediate symlink where symlinks are supported.
@@ -51,13 +52,14 @@ That proof exercised:
 Strict checkout output:
 
 ```text
-M3JDK21_TARGET_GIT_SEAL_PASS checks=3
+M3JDK21_TARGET_GIT_SEAL_V2_PASS checks=4
 ```
 
 That proof exercised:
-1. exact committed HEAD admitted;
-2. a different 64-hex manifest revision refused as a revision mismatch (not a grammar error);
-3. tracked worktree drift refused.
+1. exact committed HEAD plus a tracked manifest source admitted;
+2. a SHA-correct but untracked manifest source refused;
+3. a different 64-hex manifest revision refused as a revision mismatch (not a grammar error);
+4. tracked worktree drift refused.
 
 ## Authored repository tests
 
