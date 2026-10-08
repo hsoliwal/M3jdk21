@@ -448,10 +448,11 @@ final class StringConcatHelper {
 
     /**
      * Correctness-first fallback for invokedynamic concat shapes that would
-     * otherwise allocate one flat byte array. Primitive arguments arrive boxed
-     * by MethodHandle adaptation; stringOf preserves the JLS null/toString rules.
+     * otherwise allocate one flat byte array. Every argument already went through
+     * a typed stringify gateway in StringConcatFactory (no boxing; references use
+     * stringOf, so the JLS null/toString rules hold and no piece is null).
      */
-    static String m3Concat(String[] constants, Object[] args) {
+    static String m3Concat(String[] constants, String[] args) {
         M3String result = M3String.empty();
         for (int index = 0; index < args.length; index++) {
             String constant = constants[index];
@@ -460,7 +461,7 @@ final class StringConcatHelper {
                 result = result.length() == 0 ? piece : result.concat(piece);
             }
 
-            String argument = stringOf(args[index]);
+            String argument = args[index];
             if (!argument.isEmpty()) {
                 M3String piece = M3String.canonicalize(argument);
                 result = result.length() == 0 ? piece : result.concat(piece);
