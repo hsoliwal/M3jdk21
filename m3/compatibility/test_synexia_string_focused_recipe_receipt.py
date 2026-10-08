@@ -43,7 +43,7 @@ class SynexiaFocusedStringRecipeReceiptTest(unittest.TestCase):
 
         for row in rows:
             self.assertEqual(
-                "M3JDK21_SYNEXIA_STRING_FOCUSED_RECIPE_RECEIPT_V1",
+                "M3JDK21_SYNEXIA_STRING_FOCUSED_RECIPE_RECEIPT_V2",
                 row["schema"],
             )
             self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
@@ -53,6 +53,10 @@ class SynexiaFocusedStringRecipeReceiptTest(unittest.TestCase):
                 row["canonical_revision"],
             )
             self.assertEqual("NO_TARGET_CANONICAL_DUPLICATE", row["target_recipe_policy"])
+            self.assertRegex(row["canonical_recipe_git_blob"], r"^[0-9a-f]{40}$")
+            self.assertRegex(row["canonical_evidence_git_blob"], r"^[0-9a-f]{40}$")
+            self.assertTrue(row["canonical_recipe_path"].startswith("synexia-openrewrite-recipes/"))
+            self.assertTrue(row["canonical_evidence_path"].startswith("synexia-openrewrite-recipes/"))
             self.assertIn(
                 "ALREADY_ABSORBED_MASTER@c9b07049c57ecdf43175f5885e11998918416a00",
                 row["runtime_state"],
