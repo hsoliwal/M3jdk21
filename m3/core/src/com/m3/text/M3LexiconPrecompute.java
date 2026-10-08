@@ -27,10 +27,18 @@ public final class M3LexiconPrecompute {
         private final String targetLanguage;
         private final String sourceFingerprint;
         private final int[] translatedTokenIds;
+        private final int mappedTokenCount;
 
         public TranslationProjection(String lexiconFingerprint, String sourceLanguage,
                                      String targetLanguage, String sourceFingerprint,
                                      int[] translatedTokenIds) {
+            this(lexiconFingerprint, sourceLanguage, targetLanguage, sourceFingerprint,
+                    translatedTokenIds, translatedTokenIds == null ? 0 : translatedTokenIds.length);
+        }
+
+        public TranslationProjection(String lexiconFingerprint, String sourceLanguage,
+                                     String targetLanguage, String sourceFingerprint,
+                                     int[] translatedTokenIds, int mappedTokenCount) {
             this.lexiconFingerprint = text(lexiconFingerprint, "lexiconFingerprint");
             this.sourceLanguage = text(sourceLanguage, "sourceLanguage");
             this.targetLanguage = text(targetLanguage, "targetLanguage");
@@ -38,13 +46,16 @@ public final class M3LexiconPrecompute {
             Objects.requireNonNull(translatedTokenIds, "translatedTokenIds");
             this.translatedTokenIds = translatedTokenIds.clone();
             for (int tokenId : this.translatedTokenIds) nonNegative(tokenId, "translated token id");
+            if (mappedTokenCount < 0 || mappedTokenCount > this.translatedTokenIds.length)
+                throw new IllegalArgumentException("mappedTokenCount outside projection");
+            this.mappedTokenCount = mappedTokenCount;
         }
 
         public String lexiconFingerprint() { return lexiconFingerprint; }
         public String sourceLanguage() { return sourceLanguage; }
         public String targetLanguage() { return targetLanguage; }
         public String sourceFingerprint() { return sourceFingerprint; }
-        public int mappedTokenCount() { return translatedTokenIds.length; }
+        public int mappedTokenCount() { return mappedTokenCount; }
         public int translatedTokenIdAt(int index) {
             return translatedTokenIds[Objects.checkIndex(index, translatedTokenIds.length)];
         }
