@@ -7,6 +7,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -95,6 +96,21 @@ REQUIRED_FAMILIES = {
 MIXED_COPYRIGHT = "MIXED_FIRST_PARTY_AND_DONOR_REVIEW_REQUIRED"
 
 
+
+def git(*args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
+    result = subprocess.run(
+        ["git", "-C", str(ROOT), *args],
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+        check=False,
+    )
+    if check and result.returncode != 0:
+        raise ValueError(f"git {' '.join(args)} failed: {result.stdout.strip()}")
+    return result
+
+
+
 def git_blob(path: Path) -> str:
     data = path.read_bytes()
     header = f"blob {len(data)}\0".encode("ascii")
@@ -120,6 +136,8 @@ def load_pin() -> dict[str, str]:
     for field in ("source_revision", "source_estate_git_blob", "target_baseline"):
         if not HEX40.fullmatch(values[field]):
             raise ValueError(f"invalid Git identity: {field}")
+    if git("merge-base", "--is-ancestor", values["target_baseline"], "HEAD", check=False).returncode != 0:
+        raise ValueError("recorded M3JDK target baseline is not an ancestor of tested HEAD")
     return values
 
 
