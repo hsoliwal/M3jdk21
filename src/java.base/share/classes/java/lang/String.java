@@ -3492,11 +3492,14 @@ public final class String
             }
 
             M3String storage = m3();
-            if (storage != null) {
-                M3String targetM3 = M3String.canonicalize(trgtStr);
-                M3String replacementM3 = M3String.canonicalize(replStr);
-                M3String replaced = storage.replace(targetM3, replacementM3);
-                return replaced == storage ? this : new String(replaced);
+            M3String targetM3 = trgtStr.m3();
+            M3String replacementM3 = replStr.m3();
+            if (storage != null || targetM3 != null || replacementM3 != null) {
+                M3String sourceM3 = storage != null ? storage : M3String.canonicalize(this);
+                if (targetM3 == null) targetM3 = M3String.canonicalize(trgtStr);
+                if (replacementM3 == null) replacementM3 = M3String.canonicalize(replStr);
+                M3String replaced = sourceM3.replace(targetM3, replacementM3);
+                return replaced == sourceM3 ? this : new String(replaced);
             }
 
             boolean thisIsLatin1 = this.isLatin1();
@@ -3524,9 +3527,11 @@ public final class String
             }
 
             M3String storage = m3();
-            if (storage != null) {
-                M3String replacementM3 = M3String.canonicalize(replStr);
-                return new String(storage.replaceEmptyTarget(replacementM3));
+            M3String replacementM3 = replStr.m3();
+            if (storage != null || replacementM3 != null) {
+                M3String sourceM3 = storage != null ? storage : M3String.canonicalize(this);
+                if (replacementM3 == null) replacementM3 = M3String.canonicalize(replStr);
+                return new String(sourceM3.replaceEmptyTarget(replacementM3));
             }
 
             StringBuilder sb = new StringBuilder(resultLen);
