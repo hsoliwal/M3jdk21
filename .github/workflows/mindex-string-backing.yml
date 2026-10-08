@@ -35,6 +35,7 @@ on:
       - 'test/jdk/java/lang/String/M3StringRegexReplacementTest.java'
       - 'test/jdk/java/lang/String/M3StringInternTest.java'
       - 'test/jdk/java/lang/String/M3StringCharArrayHistoryTest.java'
+      - 'test/jdk/java/lang/String/M3StringLiteralMatchesCurrentTest.java'
       - 'test/jdk/jdk/internal/mindex/M3TQFactsTest.java'
       - 'test/jdk/java/util/regex/M3RegexLiteralTQTest.java'
       - 'test/jdk/java/util/regex/M3RegexReuseTest.java'
@@ -85,4 +86,4 @@ jobs:
       - name: Build matching runtime image
         run: make images
       - name: Run M3 String backing jtreg
-        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringCanonicalDagTest.java test/jdk/java/lang/String/M3StringStreamsTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringRegexReplacementTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/java/lang/String/M3StringCharArrayHistoryTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java test/jdk/java/util/regex/M3RegexReuseTest.java"
+        run: make test TEST="test/jdk/java/lang/String/M3MappedStringBackingTest.java test/jdk/java/lang/String/MapGuardTest.java test/jdk/java/lang/String/MapFactsTest.java test/jdk/java/lang/String/MapUtfTest.java test/jdk/java/lang/String/M3StringFactsCompositionTest.java test/jdk/java/lang/String/M3StringCanonicalDagTest.java test/jdk/java/lang/String/M3StringStreamsTest.java test/jdk/java/lang/String/M3StringPrecomputeSearchTest.java test/jdk/java/lang/String/M3StringRegexReplacementTest.java test/jdk/java/lang/String/M3StringInternTest.java test/jdk/java/lang/String/M3StringCharArrayHistoryTest.java test/jdk/java/lang/String/M3StringLiteralMatchesCurrentTest.java test/jdk/jdk/internal/mindex/M3TQFactsTest.java test/jdk/java/util/regex/M3RegexLiteralTQTest.java test/jdk/java/util/regex/M3RegexReuseTest.java"
