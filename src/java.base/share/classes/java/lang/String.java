@@ -3983,22 +3983,8 @@ public final class String
         }
         byte coder = (byte) icoder;
         if (m3JoinedStringsEnabled()) {
-            int pieceCount = size == 0 ? 2 : size * 2 + 1;
-            String[] pieces = new String[pieceCount];
-            int piece = 0;
-            pieces[piece++] = prefix;
-            if (size > 0) {
-                pieces[piece++] = elements[0];
-                for (int i = 1; i < size; i++) {
-                    pieces[piece++] = delimiter;
-                    pieces[piece++] = elements[i];
-                }
-            }
-            pieces[piece] = suffix;
-            M3String storage = M3String.join(pieces);
-            if (storage != null) {
-                return new String(storage);
-            }
+            M3String storage = M3String.joinDesignated(prefix, suffix, delimiter, elements, size);
+            return new String(storage);
         }
         // long len overflow check, char -> byte length, int len overflow check
         if (len < 0L || (len <<= coder) != (int) len) {
