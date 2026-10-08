@@ -1,0 +1,39 @@
+{
+  "schema": "M3JDK21_STRING_RECIPE_OWNER_THINNING_V1",
+  "date": "2026-10-08",
+  "target_repository": "hsoliwal/M3jdk21",
+  "target_base": "master",
+  "synexia_repository": "hsoliwal/com.synexia",
+  "synexia_composition_pr": 9833,
+  "synexia_composition_merge": "1074559415050bcda1110ca5c485870b3e7513a7",
+  "runtime_dependency_on_synexia": false,
+  "surfaces": [
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-stream-traversal.yml",
+      "disposition": "RECEIVER_ADAPTER_ONLY",
+      "canonical_owner": "com.synexia.rewrite.M3Jdk21StringDirectStreamTraversal"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-canonical-dag-master-repair.yml",
+      "disposition": "TARGET_PRODUCT_ADAPTER",
+      "canonical_owner": "synexia.m3jdk.string.canonical-dag.20261006"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-regex-string-precompute-v2.yml",
+      "disposition": "MIGRATION_RESIDUE_NOT_CANONICAL",
+      "canonical_owner": "com.synexia.indexstring.M3InstallCodeTextRegexPrecompute"
+    },
+    {
+      "path": "m3/tooling/migration-recipes/src/main/resources/META-INF/rewrite/m3-string-mechanical-donor-map.yml",
+      "disposition": "MIGRATION_RESIDUE_NOT_CANONICAL",
+      "canonical_owner": "com.synexia.M3MechanicalDonorShapeReview;com.synexia.rewrite.M3MechanicalPrecomputeInvariant"
+    }
+  ],
+  "invariants": [
+    "SYNEXIA_OWNS_REUSABLE_RECIPE_SEMANTICS",
+    "M3JDK21_OWNS_OPENJDK_RUNTIME_AND_PROMOTION",
+    "TARGET_RECEIVERS_MAY_REPLAY_HASH_PINNED_OPENJDK_POSTIMAGES",
+    "MIGRATION_RESIDUE_MUST_NOT_EVOLVE_PORTABLE_SEMANTICS",
+    "NO_SYNEXIA_RUNTIME_DEPENDENCY"
+  ]
+}
