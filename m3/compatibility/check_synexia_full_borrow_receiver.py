@@ -188,6 +188,8 @@ def load_estate(pin: dict[str, str]) -> dict[str, dict[str, str]]:
             f"full-borrow family set drift missing={sorted(REQUIRED_FAMILIES-set(by_family))} "
             f"extra={sorted(set(by_family)-REQUIRED_FAMILIES)}"
         )
+    if len(by_family) != int(pin["source_family_count"]):
+        raise ValueError("receiver family count does not match pinned source family count")
     return by_family
 
 
