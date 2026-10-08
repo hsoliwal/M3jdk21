@@ -1,0 +1,73 @@
+{
+  "id": "M3JDK21_STRING_LAYOUT_RECEIPT_V1",
+  "execution_kind": "SDK_EXECUTION",
+  "source": {
+    "repository": "hsoliwal/com.synexia",
+    "revision": "45efae6e63ea4ce54f28d1f80ec51e377d482631",
+    "crate": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-layout",
+    "proof_path": "synexia-openrewrite-recipes/crates/m3-jdk-handoff/string-layout/evidence/proof.json",
+    "proof_git_blob": "a7aa87793eaf3ce399efae2909388c6b74b52d6b",
+    "recipe_order": [
+      "M3HashPinnedJavaSnapshotRecipe",
+      "M3HashPinnedTextSnapshotRecipe"
+    ],
+    "crate_name": "m3jdk21-string-layout-20261008"
+  },
+  "target": {
+    "repository": "hsoliwal/M3jdk21",
+    "preimage_revision": "acf211f05a9c6766ed4c2664aca2778e3c7f76d3",
+    "outputs": [
+      {
+        "path": "m3/runtime-integration/src/main/java/M3StringLayout.java",
+        "before": "ABSENT",
+        "after": "939cb8b803f19a0ae96d435dfa8b52df64e6ef629269c95d7e663f25342af4df",
+        "lane": "java"
+      },
+      {
+        "path": "m3/runtime-integration/src/test/java/M3StringLayoutTest.java",
+        "before": "ABSENT",
+        "after": "218028137efc353e2a6b5ef488e8bfaf33a9e898dc220c8c2e7adf1e70c17226",
+        "lane": "java"
+      },
+      {
+        "path": ".github/workflows/mindex-string-backing.yml",
+        "before": "8f49f646b0b8b56b6dc70212f22366bb16112df91f8a6e7f0e86f41d545f655e",
+        "after": "69c27c48536bff5672be60c02c364e485c23dc9089ce504827c643fa63a01244",
+        "lane": "text"
+      },
+      {
+        "path": "m3/runtime-integration/check-m3string-invariants.py",
+        "before": "0c15318fe636a884f7e4ea5bde34e2cae320c816d8603dfb4dcaf53738ead98d",
+        "after": "dbf25f26bbf37bb510f9ed791a337011ce651ae6b351d677c0425cad4d3ccde6",
+        "lane": "text"
+      },
+      {
+        "path": "m3/runtime-integration/test_string_layout.py",
+        "before": "ABSENT",
+        "after": "1eb253a2d5350af9f8d6ace012ac2628f1908615e2eb32edf837d9f41aba14fb",
+        "lane": "text"
+      }
+    ]
+  },
+  "license": {
+    "new_tooling": "Apache-2.0",
+    "copyright": "Copyright 2026 Hitesh Soliwal and contributors",
+    "notice": "m3/NOTICE",
+    "runtime_fixture": "Not a target output; OpenJDK GPL-2.0-only WITH Classpath-exception-2.0 retained in source proof"
+  },
+  "qualification": {
+    "junit": "6 passed",
+    "python_layout": "4 passed; 55 accepted parser cases and 38 refused",
+    "python_ledger": "9 passed",
+    "javac": "Java 21 -Xlint:all -Werror passed",
+    "fixed_point": "zero changes in both stages",
+    "full_source_audit": "FAILED: M3 String workflow lost verification gate: M3StringHistoryConvergenceRecipeTest",
+    "runtime_image_jtreg": "NOT_RUN",
+    "hosted_ci": "NOT_ESTABLISHED_FOR_THIS_HEAD"
+  },
+  "custody": "Canonical recipes/templates/manifests stay in Synexia; target receives native verification outputs and this receipt.",
+  "runtime_source_changed": false,
+  "naming_map_changed": false,
+  "promotion_authority": false,
+  "next_required_work": "Reconcile canonical Synexia history-convergence proof with target workflow requirements; do not recreate forbidden local recipe custody or weaken the checker."
+}

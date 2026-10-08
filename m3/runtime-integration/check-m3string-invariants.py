@@ -7,6 +7,8 @@ or public precompute surfaces.
 """
 from pathlib import Path
 import re
+import os
+import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -46,120 +48,183 @@ native_string = read("src/java.base/share/native/libjava/String.c")
 pattern = read("src/java.base/share/classes/java/util/regex/Pattern.java")
 matcher = read("src/java.base/share/classes/java/util/regex/Matcher.java")
 
-# STRING_PRECOMPUTE_COMPLETENESS: every donor String-precompute responsibility must be
-# either mapped to one internal M3 owner or explicitly classified out of java.lang.String.
-completeness_rows = []
-for line_number, line in enumerate(completeness.splitlines(), start=1):
-    if not line or line.startswith("#"):
-        continue
-    cells = line.split("\t")
-    if line_number == 1:
-        if cells != [
-            "scope",
-            "donor_responsibility",
-            "m3jdk_owner",
-            "disposition",
-            "retention",
-            "semantic_authority",
-            "notes",
-        ]:
-            fail("String precompute completeness header changed")
-        continue
-    if len(cells) != 7 or any(not cell for cell in cells):
-        fail(f"invalid String precompute completeness row {line_number}")
-    completeness_rows.append(cells)
+def check_precompute_completeness(completeness: str) -> None:
+    # STRING_PRECOMPUTE_COMPLETENESS: every donor String-precompute responsibility must be
+    # either mapped to one internal M3 owner or explicitly classified out of java.lang.String.
+    completeness_rows = []
+    for line_number, line in enumerate(completeness.splitlines(), start=1):
+        if not line or line.startswith("#"):
+            continue
+        cells = line.split("\t")
+        if line_number == 1:
+            if cells != [
+                "scope",
+                "donor_responsibility",
+                "m3jdk_owner",
+                "disposition",
+                "retention",
+                "semantic_authority",
+                "notes",
+            ]:
+                fail("String precompute completeness header changed")
+            continue
+        if len(cells) != 7 or any(not cell for cell in cells):
+            fail(f"invalid String precompute completeness row {line_number}")
+        completeness_rows.append(cells)
 
-if not completeness_rows:
-    fail("String precompute completeness ledger is empty")
+    if not completeness_rows:
+        fail("String precompute completeness ledger is empty")
 
-allowed_dispositions = {
-    "IMPLEMENTED_FIXED",
-    "IMPLEMENTED_IDENTITY_OWNER",
-    "IMPLEMENTED_BOUNDED",
-    "IMPLEMENTED_SAFE_SUBSET",
-    "IMPLEMENTED_SEMANTIC_SUBSET",
-    "IMPLEMENTED_INTERNAL",
-    "ADAPTED_BOUNDED",
-    "PARTIAL_SAFE_CONSUMPTION",
-    "PARTIAL_INTERNAL_STORAGE_COUNTERPART",
-    "RESPONSIBILITY_SPLIT_INTERNAL",
-    "NOT_JDK_STRING_SEMANTICS",
-    "DONOR_ONLY_NO_JDK21_CONSUMER",
-    "DO_NOT_PORT_TO_JAVA_LANG_STRING",
-    "OPTIONAL_INTERNAL",
-}
-seen_responsibilities = set()
-for row in completeness_rows:
-    scope, donor, target, disposition, retention, authority, notes = row
-    if donor in seen_responsibilities:
-        fail(f"duplicate String precompute responsibility: {donor}")
-    seen_responsibilities.add(donor)
-    if disposition not in allowed_dispositions:
-        fail(f"unclassified String precompute responsibility: {donor} -> {disposition}")
-    if disposition.startswith("IMPLEMENTED") and target.startswith("no current"):
-        fail(f"implemented String precompute has no target: {donor}")
-    if scope == "STRING_RUNTIME" and disposition in {
+    allowed_dispositions = {
+        "IMPLEMENTED_FIXED",
+        "IMPLEMENTED_IDENTITY_OWNER",
+        "IMPLEMENTED_BOUNDED",
+        "IMPLEMENTED_SAFE_SUBSET",
+        "IMPLEMENTED_SEMANTIC_SUBSET",
+        "IMPLEMENTED_INTERNAL",
+        "ADAPTED_BOUNDED",
+        "PARTIAL_SAFE_CONSUMPTION",
+        "PARTIAL_INTERNAL_STORAGE_COUNTERPART",
+        "RESPONSIBILITY_SPLIT_INTERNAL",
         "NOT_JDK_STRING_SEMANTICS",
-        "DO_NOT_PORT_TO_JAVA_LANG_STRING",
         "DONOR_ONLY_NO_JDK21_CONSUMER",
-    }:
-        fail(f"String-runtime responsibility incorrectly classified out: {donor}")
-    if any("TODO" in cell or "UNCLASSIFIED" in cell for cell in row):
-        fail(f"unfinished String precompute classification: {donor}")
+        "DO_NOT_PORT_TO_JAVA_LANG_STRING",
+        "OPTIONAL_INTERNAL",
+    }
+    # These rows record holds, advisory facts or isolated higher-layer adaptations.
+    # None admits a String runtime replacement. Bind each to its reviewed owner,
+    # scope, retention and oracle; a status cannot exempt another responsibility.
+    constrained_boundaries = {'MIndexRegexQueryPlan.Result / MIndexRegexMatch (historical RXM responsibility)': ('STRING_RUNTIME',
+                                                                                        'no '
+                                                                                        'java.util.regex.Matcher '
+                                                                                        'substitution',
+                                                                                        'HOLD_MATCHER_STATE_GAP',
+                                                                                        'immutable '
+                                                                                        'source+group '
+                                                                                        'span packet '
+                                                                                        'only',
+                                                                                        'stock Matcher '
+                                                                                        'state '
+                                                                                        'machine'),
+     'MIndexRegexProgram + MIndexHybridRegex (historical RXA responsibility)': ('STRING_RUNTIME',
+                                                                                'no general '
+                                                                                'Pattern/Matcher '
+                                                                                'substitution',
+                                                                                'HOLD_MATCHER_STATE_AND_SUBSET_SCOPE',
+                                                                                'bounded primitive '
+                                                                                'NFA/DFA program only',
+                                                                                'stock Pattern/Matcher '
+                                                                                'state/capture '
+                                                                                'semantics'),
+     'MIndexRe2MechanicalFacts.re2ProgramSize/groupCount/namedGroups': ('REGEX_INTERNAL',
+                                                                        'java.util.regex.Pattern '
+                                                                        'internal compiled-state/cost '
+                                                                        'evidence only',
+                                                                        'ADVISORY_NO_DUPLICATE_STRING_STATE',
+                                                                        'no M3String field; no '
+                                                                        'retained RE2/J object',
+                                                                        'stock Pattern/Matcher '
+                                                                        'semantics'),
+     'MIndexTextSignals / MIndexHistogram / IndexTextMetrics': ('HIGHER_LAYER',
+                                                                'm3/ports/precompute M3TextSignals',
+                                                                'PORT_ADAPTED_SECOND_PASS',
+                                                                'isolated composable '
+                                                                'histograms/sketches',
+                                                                'exact verifier or consumer'),
+     'MIndexStringEditDistancePlan': ('HIGHER_LAYER',
+                                      'm3/ports/precompute M3EditDistancePlan',
+                                      'PORT_ADAPTED_SECOND_PASS',
+                                      'bounded exact plan + workspace',
+                                      'independent DP differential oracle'),
+     'MIndexCodeTextSignals / batch': ('HIGHER_LAYER',
+                                       'm3/ports/precompute M3CodeTextSignals + Java/JNI batches',
+                                       'PORT_ADAPTED_SECOND_PASS',
+                                       'candidate/routing evidence',
+                                       'compiler/regex/test authority')}
+    restricted_dispositions = {boundary[2] for boundary in constrained_boundaries.values()}
+    allowed_dispositions.update(restricted_dispositions)
+    seen_responsibilities = set()
+    for row in completeness_rows:
+        scope, donor, target, disposition, retention, authority, notes = row
+        if donor in seen_responsibilities:
+            fail(f"duplicate String precompute responsibility: {donor}")
+        seen_responsibilities.add(donor)
+        actual_boundary = (scope, target, disposition, retention, authority)
+        if donor in constrained_boundaries:
+            if actual_boundary != constrained_boundaries[donor]:
+                fail(f"restricted String precompute boundary changed: {donor}")
+        elif disposition in restricted_dispositions:
+            fail(f"restricted disposition used for another responsibility: {donor}")
+        if disposition not in allowed_dispositions:
+            fail(f"unclassified String precompute responsibility: {donor} -> {disposition}")
+        if disposition.startswith("IMPLEMENTED") and target.startswith("no current"):
+            fail(f"implemented String precompute has no target: {donor}")
+        if scope == "STRING_RUNTIME" and disposition in {
+            "NOT_JDK_STRING_SEMANTICS",
+            "DO_NOT_PORT_TO_JAVA_LANG_STRING",
+            "DONOR_ONLY_NO_JDK21_CONSUMER",
+        }:
+            fail(f"String-runtime responsibility incorrectly classified out: {donor}")
+        if any("TODO" in cell or "UNCLASSIFIED" in cell for cell in row):
+            fail(f"unfinished String precompute classification: {donor}")
 
-required_responsibilities = {
-    "IndexTextMetrics",
-    "MIndexTextPrecomputedFacts",
-    "MIndexWhitespaceBoundaries",
-    "MIndexWhitespaceBoundaryCache",
-    "MIndexStringCanonicalFacts.canonicalTupleId",
-    "MIndexStringCanonicalFacts.structuralHash64",
-    "MIndexStringCanonicalFacts.tokenCount",
-    "MIndexStringCanonicalFacts.tokenHash64",
-    "MIndexUtf16RangeFacts",
-    "MIndexStringSearchPlan",
-    "MIndexPositionMasks / MIndexComposedPositionMasks",
-    "MIndexPreparedTrigramQuery",
-    "MIndexRegexTrigramQuery",
-    "MIndexPatternPrecomputation / RegexComposition*",
-    "MIndexStringPrecomputationByteFacts.byteLength",
-    "MIndexStringPrecomputationByteFacts.SHA256",
-    "MIndexMappedStringFacts / MIndexMappedStringFactsSource",
-    "MIndexMappedPrecomputation",
-    "MIndexPrecomputedStrings",
-    "MIndexPrefixZ / MIndexPrefixZCache",
-    "MIndexPalindromeFacts / Manacher facts",
-    "MIndexSuffixDecision / suffix DFA facts",
-    "LCP range-minimum / suffix-index facts",
-}
-missing_responsibilities = required_responsibilities - seen_responsibilities
-if missing_responsibilities:
-    fail("String precompute completeness ledger missing: "
-         + ", ".join(sorted(missing_responsibilities)))
+    required_responsibilities = {
+        "IndexTextMetrics",
+        "MIndexTextPrecomputedFacts",
+        "MIndexWhitespaceBoundaries",
+        "MIndexWhitespaceBoundaryCache",
+        "MIndexStringCanonicalFacts.canonicalTupleId",
+        "MIndexStringCanonicalFacts.structuralHash64",
+        "MIndexStringCanonicalFacts.tokenCount",
+        "MIndexStringCanonicalFacts.tokenHash64",
+        "MIndexUtf16RangeFacts",
+        "MIndexStringSearchPlan",
+        "MIndexPositionMasks / MIndexComposedPositionMasks",
+        "MIndexPreparedTrigramQuery",
+        "MIndexRegexTrigramQuery",
+        "MIndexPatternPrecomputation / RegexComposition*",
+        "MIndexStringPrecomputationByteFacts.byteLength",
+        "MIndexStringPrecomputationByteFacts.SHA256",
+        "MIndexMappedStringFacts / MIndexMappedStringFactsSource",
+        "MIndexMappedPrecomputation",
+        "MIndexPrecomputedStrings",
+        "MIndexPrefixZ / MIndexPrefixZCache",
+        "MIndexPalindromeFacts / Manacher facts",
+        "MIndexSuffixDecision / suffix DFA facts",
+        "LCP range-minimum / suffix-index facts",
+    }
+    required_responsibilities.update(constrained_boundaries)
+    missing_responsibilities = required_responsibilities - seen_responsibilities
+    if missing_responsibilities:
+        fail("String precompute completeness ledger missing: "
+             + ", ".join(sorted(missing_responsibilities)))
 
-by_responsibility = {row[1]: row for row in completeness_rows}
-expected_dispositions = {
-    "MIndexStringCanonicalFacts.canonicalTupleId": "IMPLEMENTED_IDENTITY_OWNER",
-    "MIndexStringCanonicalFacts.structuralHash64": "IMPLEMENTED_IDENTITY_OWNER",
-    "MIndexStringCanonicalFacts.tokenCount": "NOT_JDK_STRING_SEMANTICS",
-    "MIndexStringCanonicalFacts.tokenHash64": "NOT_JDK_STRING_SEMANTICS",
-    "MIndexPrefixZ / MIndexPrefixZCache": "DONOR_ONLY_NO_JDK21_CONSUMER",
-    "MIndexPalindromeFacts / Manacher facts": "DONOR_ONLY_NO_JDK21_CONSUMER",
-    "MIndexSuffixDecision / suffix DFA facts": "DONOR_ONLY_NO_JDK21_CONSUMER",
-    "LCP range-minimum / suffix-index facts": "DONOR_ONLY_NO_JDK21_CONSUMER",
-}
-for required_mechanical_boundary in [
-    "REGEX_INTERNAL\tMIndexRe2MechanicalFacts.re2ProgramSize/groupCount/namedGroups\tjava.util.regex.Pattern internal compiled-state/cost evidence only\tADVISORY_NO_DUPLICATE_STRING_STATE",
-    "HIGHER_LAYER\tMIndexLucenePostingPlan conjunctionOrder/disjunctionHeapOrder/disjunctionLinearOrder\tno java.lang.String owner\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
-    "HIGHER_LAYER\tMIndexTweetyGraphQueryIndex / Tweety reasoning precompute\tno java.lang.String owner\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
-]:
-    if required_mechanical_boundary not in completeness:
-        fail(f"mechanical String precompute boundary missing: {required_mechanical_boundary}")
+    by_responsibility = {row[1]: row for row in completeness_rows}
+    expected_dispositions = {
+        "MIndexStringCanonicalFacts.canonicalTupleId": "IMPLEMENTED_IDENTITY_OWNER",
+        "MIndexStringCanonicalFacts.structuralHash64": "IMPLEMENTED_IDENTITY_OWNER",
+        "MIndexStringCanonicalFacts.tokenCount": "NOT_JDK_STRING_SEMANTICS",
+        "MIndexStringCanonicalFacts.tokenHash64": "NOT_JDK_STRING_SEMANTICS",
+        "MIndexPrefixZ / MIndexPrefixZCache": "DONOR_ONLY_NO_JDK21_CONSUMER",
+        "MIndexPalindromeFacts / Manacher facts": "DONOR_ONLY_NO_JDK21_CONSUMER",
+        "MIndexSuffixDecision / suffix DFA facts": "DONOR_ONLY_NO_JDK21_CONSUMER",
+        "LCP range-minimum / suffix-index facts": "DONOR_ONLY_NO_JDK21_CONSUMER",
+    }
+    for required_mechanical_boundary in [
+        "REGEX_INTERNAL\tMIndexRe2MechanicalFacts.re2ProgramSize/groupCount/namedGroups\tjava.util.regex.Pattern internal compiled-state/cost evidence only\tADVISORY_NO_DUPLICATE_STRING_STATE",
+        "HIGHER_LAYER\tMIndexLucenePostingPlan conjunctionOrder/disjunctionHeapOrder/disjunctionLinearOrder\tno java.lang.String owner\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
+        "HIGHER_LAYER\tMIndexTweetyGraphQueryIndex / Tweety reasoning precompute\tno java.lang.String owner\tDO_NOT_PORT_TO_JAVA_LANG_STRING",
+    ]:
+        if required_mechanical_boundary not in completeness:
+            fail(f"mechanical String precompute boundary missing: {required_mechanical_boundary}")
 
-for donor, expected in expected_dispositions.items():
-    actual = by_responsibility[donor][3]
-    if actual != expected:
-        fail(f"String precompute disposition drift: {donor}: {actual} != {expected}")
+    for donor, expected in expected_dispositions.items():
+        actual = by_responsibility[donor][3]
+        if actual != expected:
+            fail(f"String precompute disposition drift: {donor}: {actual} != {expected}")
+
+
+check_precompute_completeness(completeness)
 
 critical_port_map_rows = [
     "MIndexStringPrecomputationByteFacts.byteLength\tjava.lang.M3StringFacts + M3String.encode*\tIMPLEMENTED_SEMANTIC_SUBSET",
@@ -219,14 +284,21 @@ for forbidden in [
     if forbidden in facts:
         fail(f"donor identity/tokenization fact leaked into M3StringFacts: {forbidden}")
 
-# M3String must remain owner + coordinate only.
-instance_fields = re.findall(
-    r"^\s*private\s+final\s+([\w.<>\[\]]+)\s+(\w+)\s*;",
-    m3,
-    flags=re.MULTILINE,
-)
-if instance_fields != [("M3StringOwner", "owner"), ("long", "value")]:
-    fail(f"M3String instance fields changed: {instance_fields!r}")
+# M3String must remain owner + coordinate only. Inspect compiler-parsed direct members.
+def check_m3string_layout() -> None:
+    java = str(Path(os.environ["JAVA_HOME"]) / "bin/java") if os.environ.get("JAVA_HOME") else "java"
+    command = [java, "--source", "21",
+               str(ROOT / "m3/runtime-integration/src/main/java/M3StringLayout.java"),
+               str(ROOT / "src/java.base/share/classes/java/lang/M3String.java")]
+    try:
+        result = subprocess.run(command, cwd=ROOT, capture_output=True, text=True, timeout=45)
+    except (OSError, subprocess.TimeoutExpired) as error:
+        fail(f"M3String layout compiler unavailable or timed out: {error}")
+    if result.returncode != 0 or result.stdout.strip() != "M3_STRING_LAYOUT_OK":
+        fail(f"M3String layout check failed: {result.stderr.strip()} {result.stdout.strip()}")
+
+
+check_m3string_layout()
 
 # Canonical value/owners/facts may not retain array payload.
 for path, text in [
