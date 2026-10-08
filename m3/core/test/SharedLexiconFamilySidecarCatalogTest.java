@@ -6,12 +6,11 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 /** Executable proof for the lossless five-family M3JDK sidecar receiver. */
 public final class SharedLexiconFamilySidecarCatalogTest {
+    private static int checks;
     private static final String DIGEST_A = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
     private static final String DIGEST_B = "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
     private static final String DIGEST_C = "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc";
@@ -74,7 +73,12 @@ public final class SharedLexiconFamilySidecarCatalogTest {
             } finally {
                 deleteTree(partial);
             }
-            System.out.println("M3JDK_FAMILY_SIDECAR_PASS checks=15 families=5 spell_rows=2");
+            Files.writeString(root.resolve("synexia.spell.tsv"),
+                    Files.readString(root.resolve("synexia.spell.tsv"), StandardCharsets.UTF_8)
+                            + "tampered");
+            expectIOException(() -> SharedLexiconFamilySidecarCatalog.open(root),
+                    "checksum drift rejected");
+            System.out.println("M3JDK_FAMILY_SIDECAR_PASS checks=" + checks + " families=5 spell_rows=2");
         } finally {
             deleteTree(root);
         }
@@ -142,11 +146,12 @@ public final class SharedLexiconFamilySidecarCatalogTest {
             action.run();
             throw new AssertionError(message);
         } catch (java.io.IOException expected) {
-            // expected
+            checks++;
         }
     }
 
     private static void check(boolean condition, String message) {
+        checks++;
         if (!condition) throw new AssertionError(message);
     }
 
