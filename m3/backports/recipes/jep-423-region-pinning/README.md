@@ -70,9 +70,13 @@ The first pass is strictly file-atomic:
 5. on the current tree, require all 62 cumulative candidates to be mechanically replayable FILE
    preimages against the exact JDK21 baseline; `TestEvacuationFailure.java` is byte-identical to
    the JDK21 baseline and is therefore no longer a current-tree hold;
-6. generate one exact Java/text/native FILE atom per mechanically admitted path from the final required repair commit;
-7. retain per-file atom/pattern/IOP evidence plus JUnit/jtreg/native proof references;
-8. only after all admitted FILE atoms reach fixed point may G1 package/module composition be
+6. use the final required repair commit as the default donor tree, but bind any path whose later
+   donor-tree state diverges for reasons outside the approved JEP lineage to its exact last approved
+   lineage postimage via `PATH_DONOR_OVERRIDES.tsv`;
+7. generate one exact Java/text/native FILE atom per mechanically admitted path and record that
+   path's actual donor ref in the crate receipt;
+8. retain per-file atom/pattern/IOP evidence plus JUnit/jtreg/native proof references;
+9. only after all admitted FILE atoms reach fixed point may G1 package/module composition be
    proposed.
 
 Likely later scope:
@@ -88,7 +92,7 @@ No LIBRARY_API promotion is implied by this inventory.
 
 ## Required proof before promotion
 
-- exact path denominator and final required repair-tree state;
+- exact path denominator plus per-path approved donor custody;
 - no unaccounted upstream path;
 - source-bound replay/fixed point for every admitted path;
 - HotSpot release build on the Java21 baseline;
