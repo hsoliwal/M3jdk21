@@ -1149,14 +1149,23 @@ final class M3String implements CharSequence {
         return joinValues(pieces);
     }
 
-    /** Conservative BMP literal subset; all regex/replacement syntax stays in Matcher. */
-    static boolean isLiteralRegexReplacement(String regex, String replacement) {
-        if (regex == null || regex.isEmpty() || replacement == null) return false;
+    /**
+     * Conservative BMP literal subset of regex syntax: non-empty, no metacharacter, no escape
+     * and no surrogate, so {@code Pattern.compile(regex)} can only ever match the literal itself.
+     */
+    static boolean isLiteralRegex(String regex) {
+        if (regex == null || regex.isEmpty()) return false;
         for (int index = 0; index < regex.length(); index++) {
             char unit = regex.charAt(index);
             // Regex observes code points: UTF-16 substring search can match half a pair.
             if (Character.isSurrogate(unit) || "\\.^$|?*+()[]{}".indexOf(unit) >= 0) return false;
         }
+        return true;
+    }
+
+    /** Conservative BMP literal subset; all regex/replacement syntax stays in Matcher. */
+    static boolean isLiteralRegexReplacement(String regex, String replacement) {
+        if (!isLiteralRegex(regex) || replacement == null) return false;
         for (int index = 0; index < replacement.length(); index++) {
             char unit = replacement.charAt(index);
             if (unit == '$' || unit == '\\') return false;

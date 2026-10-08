@@ -3770,10 +3770,62 @@ public final class String
             // because the large split loop can usually not be inlined.
             return split(ch, limit, withDelimiters);
         }
+        // M3 literal lane: a regex with no metacharacter, escape or surrogate is the literal
+        // itself, so the exact engine would only ever report its substring occurrences.
+        if (M3String.isLiteralRegex(regex)) {
+            return splitLiteral(regex, limit, withDelimiters);
+        }
         Pattern pattern = Pattern.compile(regex);
         return withDelimiters
                 ? pattern.splitWithDelimiters(this, limit)
                 : pattern.split(this, limit);
+    }
+
+    /**
+     * Splits around occurrences of a non-empty literal, with exactly the semantics of
+     * {@code Pattern.compile(literal).split(this, limit)}: occurrences are found left to right
+     * without overlap, {@code limit} bounds the number of pieces, and a limit of zero drops
+     * trailing empty strings. Only reached for literals admitted by
+     * {@link M3String#isLiteralRegex(String)}.
+     */
+    private String[] splitLiteral(String literal, int limit, boolean withDelimiters) {
+        int matchCount = 0;
+        int off = 0;
+        int next;
+        int step = literal.length();
+        boolean limited = limit > 0;
+        ArrayList<String> list = new ArrayList<>();
+        while ((next = indexOf(literal, off)) != -1) {
+            if (!limited || matchCount < limit - 1) {
+                list.add(substring(off, next));
+                if (withDelimiters) {
+                    list.add(literal);
+                }
+                off = next + step;
+                ++matchCount;
+            } else {    // last one
+                int last = length();
+                list.add(substring(off, last));
+                off = last;
+                ++matchCount;
+                break;
+            }
+        }
+        // If no match was found, return this
+        if (off == 0)
+            return new String[] {this};
+        // Add remaining segment
+        if (!limited || matchCount < limit)
+            list.add(substring(off, length()));
+        // Construct result
+        int resultSize = list.size();
+        if (limit == 0) {
+            while (resultSize > 0 && list.get(resultSize - 1).isEmpty()) {
+                resultSize--;
+            }
+        }
+        String[] result = new String[resultSize];
+        return list.subList(0, resultSize).toArray(result);
     }
 
     private String[] split(char ch, int limit, boolean withDelimiters) {
