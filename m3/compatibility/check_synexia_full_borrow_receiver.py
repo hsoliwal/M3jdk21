@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[2]
 BASE = ROOT / "m3" / "synexia-import" / "current-full-borrow"
 PIN = BASE / "pin.tsv"
 ESTATE = BASE / "synexia-estate.tsv"
+DAG = BASE / "synexia-dag.tsv"
 STATUS = BASE / "receiver-status.tsv"
 HEX40 = re.compile(r"^[0-9a-f]{40}$")
 
@@ -24,11 +25,15 @@ PIN_EXPECTED = {
     "source_pr": "9860",
     "source_revision": "296323958b1019edd59b60b9c05cb148d024cfe5",
     "source_estate_path": ".m3/m3jdk21-full-borrow-estate.tsv",
-    "source_estate_git_blob": "1e795e0d781159ff4f96dc3e650deb0cc36c5533",
+    "source_estate_git_blob": "292bc31a96cd3d20c36d617045c6b01a7a7c8faf",
+    "source_dag_path": ".m3/m3jdk21-full-borrow-dag.tsv",
+    "source_dag_git_blob": "3e6c56b8555231fb36d0ac620ab112aa5970d45a",
+    "source_family_count": "32",
     "source_canonical_invariant": "docs/M3-SCALE/invariants/SYNEXIA-M3JDK21-CANONICAL-OWNERSHIP-1.md",
     "target_repository": "hsoliwal/M3jdk21",
     "target_baseline": "c9b07049c57ecdf43175f5885e11998918416a00",
     "target_estate_copy": "m3/synexia-import/current-full-borrow/synexia-estate.tsv",
+    "target_dag_copy": "m3/synexia-import/current-full-borrow/synexia-dag.tsv",
     "copyright_notice": "Copyright 2026 Hitesh Soliwal and contributors",
     "first_party_license": "Apache-2.0",
     "abstract_idea_policy": "ABSTRACT_IDEA_NOT_RELABELED_AS_COPYRIGHTED_SOURCE",
@@ -64,8 +69,12 @@ STATUS_HEADER = [
 
 REQUIRED_FAMILIES = {
     "TEXT_INDEXSTRING",
+    "MINDEX_STRING_RUNTIME",
     "AST",
+    "MINDEX_AST_RUNTIME",
     "GRAMMAR",
+    "DAG",
+    "OBJECT",
     "INDEX_PRECOMPUTE",
     "INDEX_PRECOMPUTE_ADAPTERS",
     "INDEXSTRING_COMPILER",
@@ -133,7 +142,12 @@ def load_pin() -> dict[str, str]:
         changed = {k: v for k, v in PIN_EXPECTED.items() if values.get(k) != v}
         extra = {k: v for k, v in values.items() if k not in PIN_EXPECTED}
         raise ValueError(f"full-borrow pin drift changed={changed!r} extra={extra!r}")
-    for field in ("source_revision", "source_estate_git_blob", "target_baseline"):
+    for field in (
+        "source_revision",
+        "source_estate_git_blob",
+        "source_dag_git_blob",
+        "target_baseline",
+    ):
         if not HEX40.fullmatch(values[field]):
             raise ValueError(f"invalid Git identity: {field}")
     if git("merge-base", "--is-ancestor", values["target_baseline"], "HEAD", check=False).returncode != 0:
@@ -177,6 +191,76 @@ def load_estate(pin: dict[str, str]) -> dict[str, dict[str, str]]:
     return by_family
 
 
+
+DAG_HEADER = [
+    "schema",
+    "family",
+    "depends_on",
+    "promotion_stage",
+    "inventory_parallel",
+    "target_gate",
+    "state",
+]
+
+
+def load_dag(pin: dict[str, str], estate: dict[str, dict[str, str]]) -> None:
+    with DAG.open(encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle, delimiter="\t")
+        if reader.fieldnames != DAG_HEADER:
+            raise ValueError("invalid mirrored full-borrow DAG header")
+        rows = list(reader)
+
+    if git_blob(DAG) != pin["source_dag_git_blob"]:
+        raise ValueError("mirrored Synexia DAG bytes do not match pinned source Git blob")
+
+    by_family: dict[str, set[str]] = {}
+    estate_families = set(estate)
+    for physical, row in enumerate(rows, start=2):
+        if any(not row[field] for field in DAG_HEADER):
+            raise ValueError(f"blank receiver DAG field at row {physical}")
+        if row["schema"] != "SYNEXIA_M3JDK21_FULL_BORROW_DAG_V1":
+            raise ValueError(f"invalid receiver DAG schema at row {physical}")
+        family = row["family"]
+        if family in by_family or family not in estate_families:
+            raise ValueError(f"duplicate/unknown receiver DAG family: {family}")
+        if row["inventory_parallel"] != "true":
+            raise ValueError(f"receiver DAG inventory must remain parallelizable: {family}")
+        if row["state"] != "PLANNED":
+            raise ValueError(f"receiver DAG cannot claim execution/completion: {family}")
+        deps = set() if row["depends_on"] == "-" else set(row["depends_on"].split(";"))
+        if family in deps:
+            raise ValueError(f"receiver DAG self dependency: {family}")
+        unknown = deps - estate_families
+        if unknown:
+            raise ValueError(f"receiver DAG unknown dependency {family}: {sorted(unknown)}")
+        by_family[family] = deps
+
+    if set(by_family) != estate_families:
+        raise ValueError(
+            "receiver DAG family set drift "
+            f"missing={sorted(estate_families-set(by_family))} "
+            f"extra={sorted(set(by_family)-estate_families)}"
+        )
+
+    visiting: set[str] = set()
+    visited: set[str] = set()
+
+    def visit(family: str) -> None:
+        if family in visited:
+            return
+        if family in visiting:
+            raise ValueError(f"cycle in receiver DAG at {family}")
+        visiting.add(family)
+        for dependency in sorted(by_family[family]):
+            visit(dependency)
+        visiting.remove(family)
+        visited.add(family)
+
+    for family in sorted(by_family):
+        visit(family)
+
+
+
 def load_status(estate: dict[str, dict[str, str]]) -> None:
     with STATUS.open(encoding="utf-8", newline="") as handle:
         reader = csv.DictReader(handle, delimiter="\t")
@@ -216,6 +300,7 @@ def main(argv: list[str]) -> int:
         return 2
     pin = load_pin()
     estate = load_estate(pin)
+    load_dag(pin, estate)
     load_status(estate)
     mixed = sum(
         row["copyright_class"] == MIXED_COPYRIGHT for row in estate.values()
@@ -223,7 +308,7 @@ def main(argv: list[str]) -> int:
     print(
         "SYNEXIA_FULL_BORROW_RECEIVER_PASS "
         f"families={len(estate)} source={pin['source_revision']} "
-        f"state=SOURCE_PIN_ONLY mixed_review_rows={mixed} completion=false"
+        f"state=SOURCE_PIN_ONLY mixed_review_rows={mixed} dag=acyclic completion=false"
     )
     return 0
 
