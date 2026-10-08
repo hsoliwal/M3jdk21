@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: Apache-2.0
 package com.m3.rewrite;
 
-import com.m3.rewrite.atom.M3AtomizePureIntReturnRecipe;
-import com.m3.rewrite.atom.M3DocumentPureIntAtomRecipe;
-import com.m3.rewrite.atom.M3InventoryPureIntAtomCandidates;
-import com.m3.rewrite.atom.M3PatternizePureIntAtomRecipe;
+import com.synexia.rewrite.atom.M3AtomizePureIntReturnRecipe;
+import com.synexia.rewrite.atom.M3DocumentPureIntAtomRecipe;
+import com.synexia.rewrite.atom.M3InventoryPureIntAtomCandidates;
+import com.synexia.rewrite.atom.M3PatternizePureIntAtomRecipe;
 import java.util.List;
 import java.util.Set;
 import org.openrewrite.Recipe;
