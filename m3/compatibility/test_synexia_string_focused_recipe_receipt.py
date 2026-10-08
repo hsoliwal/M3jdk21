@@ -45,7 +45,7 @@ class SynexiaFocusedStringRecipeReceiptTest(unittest.TestCase):
             self.assertEqual("hsoliwal/com.synexia", row["canonical_repository"])
             self.assertEqual("9859", row["canonical_pr"])
             self.assertEqual(
-                "d51947d9d9413ce0bc563e2cddd8187a7130d9e1",
+                "8473dabb08419af60458fdb1b4458ccb5a4e3854",
                 row["canonical_revision"],
             )
             self.assertEqual("NO_TARGET_CANONICAL_DUPLICATE", row["target_recipe_policy"])
