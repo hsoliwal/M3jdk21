@@ -61,6 +61,7 @@ final class SynexiaGitCheckout {
         for (int start = 0; start < paths.size(); start += TRACKED_PATH_BATCH) {
             int end = Math.min(paths.size(), start + TRACKED_PATH_BATCH);
             List<String> command = new ArrayList<>();
+            command.add("--literal-pathspecs");
             command.add("ls-files");
             command.add("--error-unmatch");
             command.add("--");
