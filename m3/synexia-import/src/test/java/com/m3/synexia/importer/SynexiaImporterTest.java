@@ -270,6 +270,37 @@ final class SynexiaImporterTest {
                                     m3jdk.toString()
                                 }));
         assertFalse(Files.exists(m3jdk.resolve(untrackedTarget)));
+
+        String wildcardSource = "module/src/main/java/p/[AB].java";
+        String wildcardTarget = "m3/vendor/synexia/" + wildcardSource;
+        write(
+                synexia.resolve(wildcardSource),
+                apache("package p; final class Bracket {}\n"));
+        SynexiaImportManifest wildcardManifest =
+                new SynexiaImportManifest(
+                        head,
+                        "m3jdk21",
+                        List.of(new SynexiaImportManifest.Entry(
+                                "seed",
+                                wildcardSource,
+                                wildcardTarget,
+                                "9c2c5f1bfda66d7c0c69c3cbb3bddbfc029e0c838ca26e662799903e5976db78",
+                                "Apache-2.0",
+                                SynexiaImportManifest.Mode.APACHE_SOURCE)),
+                        "");
+        Path wildcardFile = temp.resolve("wildcard-source.tsv");
+        Files.writeString(wildcardFile, wildcardManifest.toTsv());
+        assertThrows(
+                IllegalStateException.class,
+                () ->
+                        SynexiaImportCli.main(
+                                new String[] {
+                                    "verify-strict",
+                                    wildcardFile.toString(),
+                                    synexia.toString(),
+                                    m3jdk.toString()
+                                }));
+        assertFalse(Files.exists(m3jdk.resolve(wildcardTarget)));
     }
 
     @Test
