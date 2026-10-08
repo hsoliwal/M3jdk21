@@ -22,7 +22,11 @@ public final class SynexiaImportCli {
             case "verify" -> SynexiaImporter.verify(synexiaRoot, m3jdkRoot, manifest);
             case "verify-strict" -> {
                 SynexiaGitCheckout.requireExactCleanHead(
-                        synexiaRoot, manifest.sourceRevision());
+                        synexiaRoot,
+                        manifest.sourceRevision(),
+                        manifest.entries().stream()
+                                .map(SynexiaImportManifest.Entry::sourcePath)
+                                .toList());
                 SynexiaImporter.verify(synexiaRoot, m3jdkRoot, manifest);
             }
             case "verify-target" -> SynexiaImporter.verifyTargetSnapshot(m3jdkRoot, manifest);
