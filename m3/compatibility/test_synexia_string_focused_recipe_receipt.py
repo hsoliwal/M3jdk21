@@ -8,6 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 RECEIPT = ROOT / "compatibility" / "synexia-string-focused-recipe-receipt-20261008.tsv"
+ESTATE_BINDING = ROOT / "compatibility" / "synexia-string-focused-estate-binding-20261008.tsv"
 RECIPE_ROOT = (
     ROOT
     / "tooling"
@@ -108,6 +109,50 @@ class SynexiaFocusedStringRecipeReceiptTest(unittest.TestCase):
             "com.synexia.rewrite.M3Jdk21StringFocusedSearchInvariant",
             by_lane["focused-search-superset-acceptance"]["canonical_recipe"],
         )
+
+    def test_focused_receipt_is_bound_to_full_text_estate_without_family_completion(self) -> None:
+        with ESTATE_BINDING.open(encoding="utf-8", newline="") as handle:
+            rows = list(csv.DictReader(handle, delimiter="\t"))
+
+        self.assertEqual(1, len(rows))
+        row = rows[0]
+        self.assertEqual("M3JDK21_STRING_ESTATE_RECEIPT_V1", row["schema"])
+        self.assertEqual("TEXT_INDEXSTRING", row["family"])
+        self.assertEqual(
+            "296323958b1019edd59b60b9c05cb148d024cfe5",
+            row["full_estate_revision"],
+        )
+        self.assertEqual("9860", row["full_estate_source_pr"])
+        self.assertEqual(
+            ".m3/m3jdk21-full-borrow-estate.tsv",
+            row["full_estate_path"],
+        )
+        self.assertEqual(
+            "1e795e0d781159ff4f96dc3e650deb0cc36c5533",
+            row["full_estate_git_blob"],
+        )
+        self.assertEqual(
+            "3d1bbf3bc944e827b8b82aa6841bc0720d618e93",
+            row["family_source_tree"],
+        )
+        self.assertEqual(
+            "e89630d3fb2b5f77526f408fc0d2389d67964b31",
+            row["focused_recipe_revision"],
+        )
+        self.assertEqual("9859", row["focused_recipe_pr"])
+        self.assertEqual(
+            "m3/compatibility/synexia-string-focused-recipe-receipt-20261008.tsv",
+            row["focused_receipt_path"],
+        )
+        self.assertEqual(
+            "c9b07049c57ecdf43175f5885e11998918416a00",
+            row["target_master"],
+        )
+        self.assertEqual(
+            "THREE_FOCUSED_RUNTIME_LANES_ALREADY_ABSORBED",
+            row["target_lane_state"],
+        )
+        self.assertEqual("NOT_COMPLETE", row["family_acceptance"])
 
     def test_runtime_contains_absorbed_focused_lanes(self) -> None:
         search = (
