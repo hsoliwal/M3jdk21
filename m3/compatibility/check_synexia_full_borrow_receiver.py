@@ -23,10 +23,10 @@ HEX40 = re.compile(r"^[0-9a-f]{40}$")
 PIN_EXPECTED = {
     "schema": "M3JDK21_SYNEXIA_FULL_BORROW_PIN_V1",
     "source_repository": "hsoliwal/com.synexia",
-    "source_pr": "9860",
-    "source_revision": "296323958b1019edd59b60b9c05cb148d024cfe5",
+    "source_pr": "9886",
+    "source_revision": "ecfc155eea38b9d4c85e644761a3b2fd2d2f9d1f",
     "source_estate_path": ".m3/m3jdk21-full-borrow-estate.tsv",
-    "source_estate_git_blob": "292bc31a96cd3d20c36d617045c6b01a7a7c8faf",
+    "source_estate_git_blob": "2ae93e0bd4fd03760df5aa5d99b90aafb36f1ba0",
     "source_dag_path": ".m3/m3jdk21-full-borrow-dag.tsv",
     "source_dag_git_blob": "3e6c56b8555231fb36d0ac620ab112aa5970d45a",
     "source_family_count": "32",
@@ -34,7 +34,7 @@ PIN_EXPECTED = {
     "source_phase_git_blob": "c4e8582f99caba32d718b2c1e86dae0854cdce3d",
     "source_canonical_invariant": "docs/M3-SCALE/invariants/SYNEXIA-M3JDK21-CANONICAL-OWNERSHIP-1.md",
     "target_repository": "hsoliwal/M3jdk21",
-    "target_baseline": "c9b07049c57ecdf43175f5885e11998918416a00",
+    "target_baseline": "da6084c4efd4a0128fe36e92ea46d16f67304530",
     "target_estate_copy": "m3/synexia-import/current-full-borrow/synexia-estate.tsv",
     "target_dag_copy": "m3/synexia-import/current-full-borrow/synexia-dag.tsv",
     "target_phase_copy": "m3/synexia-import/current-full-borrow/promotion-phases.tsv",
@@ -351,12 +351,23 @@ def load_status(estate: dict[str, dict[str, str]]) -> None:
             raise ValueError(f"receiver source identity drift: {family}")
         if row["target_surface"] != source["target_surface"]:
             raise ValueError(f"receiver target-surface drift: {family}")
-        if row["target_state"] != "SOURCE_PIN_ONLY":
-            raise ValueError(
-                f"initial full-borrow receiver cannot self-promote {family}: {row['target_state']}"
+        expected_state = "SOURCE_PIN_ONLY"
+        expected_receipt = "NONE"
+        if family == "MINDEX_STRING_RUNTIME":
+            expected_state = "TARGET_MAPPING_PINNED"
+            expected_receipt = (
+                "m3/synexia-import/current-full-borrow/string-source-target-map.tsv"
             )
-        if row["proof_receipt"] != "NONE":
-            raise ValueError(f"source-only receiver cannot invent proof receipt: {family}")
+        if row["target_state"] != expected_state:
+            raise ValueError(
+                f"receiver state drift {family}: "
+                f"expected={expected_state} actual={row['target_state']}"
+            )
+        if row["proof_receipt"] != expected_receipt:
+            raise ValueError(
+                f"receiver proof receipt drift {family}: "
+                f"expected={expected_receipt} actual={row['proof_receipt']}"
+            )
         if source["copyright_class"] == MIXED_COPYRIGHT and row["target_state"] != "SOURCE_PIN_ONLY":
             raise ValueError(f"mixed-license row requires separate artifact review: {family}")
 
@@ -379,7 +390,7 @@ def main(argv: list[str]) -> int:
     print(
         "SYNEXIA_FULL_BORROW_RECEIVER_PASS "
         f"families={len(estate)} source={pin['source_revision']} "
-        f"state=SOURCE_PIN_ONLY mixed_review_rows={mixed} dag=acyclic "
+        f"state=SOURCE_PIN_OR_EXACT_MAPPING mixed_review_rows={mixed} dag=acyclic "
         "phases=STRING>ARRAYS>COLLECTIONS>AST_COMPILER>REMAINING_FAMILIES "
         "completion=false"
     )
