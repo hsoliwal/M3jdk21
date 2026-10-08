@@ -1,0 +1,53 @@
+name: M3 Synexia full-borrow receiver
+
+on:
+  pull_request:
+    paths:
+      - "AGENTS.md"
+      - "m3/compatibility/check_synexia_full_family.py"
+      - "m3/compatibility/check_synexia_full_borrow_receiver.py"
+      - "m3/synexia-import/M3_CANONICAL_FAMILY_RECEIVER.md"
+      - "m3/synexia-import/current-full-borrow/**"
+      - ".github/workflows/m3-synexia-full-borrow-receiver.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  prove:
+    runs-on: ubuntu-22.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Diff hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="$(git merge-base origin/master HEAD)"
+          git diff --check "$base"...HEAD
+
+      - name: Preserve historical full-family pin
+        run: |
+          set -euo pipefail
+          python3 m3/compatibility/check_synexia_full_family.py
+
+      - name: Validate current Synexia full-borrow receiver
+        run: |
+          set -euo pipefail
+          python3 -m py_compile m3/compatibility/check_synexia_full_borrow_receiver.py
+          python3 m3/compatibility/check_synexia_full_borrow_receiver.py
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Verify receiver module
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -f m3/synexia-import/pom.xml test
