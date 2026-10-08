@@ -1,0 +1,20 @@
+field	value
+schema	M3JDK21_SYNEXIA_FULL_BORROW_PIN_V1
+source_repository	hsoliwal/com.synexia
+source_pr	9860
+source_revision	296323958b1019edd59b60b9c05cb148d024cfe5
+source_estate_path	.m3/m3jdk21-full-borrow-estate.tsv
+source_estate_git_blob	1e795e0d781159ff4f96dc3e650deb0cc36c5533
+source_canonical_invariant	docs/M3-SCALE/invariants/SYNEXIA-M3JDK21-CANONICAL-OWNERSHIP-1.md
+target_repository	hsoliwal/M3jdk21
+target_baseline	c9b07049c57ecdf43175f5885e11998918416a00
+target_estate_copy	m3/synexia-import/current-full-borrow/synexia-estate.tsv
+copyright_notice	Copyright 2026 Hitesh Soliwal and contributors
+first_party_license	Apache-2.0
+abstract_idea_policy	ABSTRACT_IDEA_NOT_RELABELED_AS_COPYRIGHTED_SOURCE
+openjdk_policy	PRESERVE_EXISTING_OPENJDK_LICENSE_NOTICE
+third_party_policy	SEPARATE_ARTIFACT_LICENSE_REVIEW
+initial_target_state	SOURCE_PIN_ONLY
+automatic_application	false
+family_completion	false
+repository_completion	false
