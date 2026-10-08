@@ -96,6 +96,18 @@ final class M3SynexiaHandoffReceiverTest {
                         new M3SynexiaHandoffGuardRecipe(
                                         "synexia-guard-v2-manifest-drift-v1")
                                 .getVisitor());
+        assertThrows(
+                IllegalStateException.class,
+                () ->
+                        new M3SynexiaHandoffGuardRecipe(
+                                        "synexia-guard-v2-alias-drift-v1")
+                                .getVisitor());
+        assertThrows(
+                IllegalStateException.class,
+                () ->
+                        new M3SynexiaHandoffGuardRecipe(
+                                        "synexia-guard-v2-properties-duplicate-v1")
+                                .getVisitor());
     }
 
     @Test
