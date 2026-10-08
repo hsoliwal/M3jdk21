@@ -135,3 +135,23 @@ Focused proof:
 python3 m3/ports/precompute/verify_regex_oracle_harness.py
 mvn -B -ntp -f m3/ports/precompute/pom.xml -Dtest=M3RegexOracleHarnessTest test
 ```
+
+## Regex required-literal gate differential (A1)
+
+`M3PatternQueryDifferential` (test sources, a `main`) is the G7r driver for the
+`java.util.regex` M3TQ absence gate on general patterns: over the frozen `M3RegexOracleCorpus`
+it compares every `String` search (gated) with the same search on a non-`String`
+`CharSequence` (the engine without the gate) in result, spans, `hitEnd` and `requireEnd`, and
+prints a digest of the ungated outcomes so a stock JDK 21 run and a `--patch-module` run can be
+compared byte for byte.
+
+```bash
+mvn -B -ntp -f m3/ports/precompute/pom.xml test-compile
+java -cp m3/ports/precompute/target/classes:m3/ports/precompute/target/test-classes \
+  com.m3.precompute.M3PatternQueryDifferential
+java --patch-module java.base=<regex+mindex postimage classes> \
+  --add-opens java.base/java.util.regex=ALL-UNNAMED \
+  --add-exports java.base/jdk.internal.mindex=ALL-UNNAMED \
+  -cp m3/ports/precompute/target/classes:m3/ports/precompute/target/test-classes \
+  com.m3.precompute.M3PatternQueryDifferential
+```
